@@ -1,15 +1,13 @@
-import { Currency, CurrencyAmount, Token } from 'sdk'
+import { ChainId, Currency, CurrencyAmount, Token } from 'sdk'
 import React, { useEffect, useState } from 'react'
 import { useClaimCallback, useUserClaimData, useUserUnclaimedAmount } from 'state/claim/hooks'
 import { useModalOpen, useToggleSelfClaimModal } from 'state/application/hooks'
 import { ApplicationModal } from 'state/application/actions'
-import { BigNumber } from '@ethersproject/bignumber'
 import { Button } from 'components/Button'
 import { ChevronRight } from 'react-feather'
 import Container from 'components/Container'
 import Dots from 'components/Dots'
 import ExternalLink from 'components/ExternalLink'
-import { Fraction } from 'entities/bignumber/Fraction'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -22,6 +20,7 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { useUserHasSubmittedClaim } from 'state/transactions/hooks'
 import { useActiveWeb3React } from 'services/web3'
+import { classNames } from 'functions'
 
 export default function Claims() {
   const { i18n } = useLingui()
@@ -30,7 +29,7 @@ export default function Claims() {
   const isOpen = useModalOpen(ApplicationModal.SELF_CLAIM)
   const toggleClaimModal = useToggleSelfClaimModal()
 
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
 
   // used for UI loading states
   const [attempting, setAttempting] = useState<boolean>(false)
@@ -189,7 +188,7 @@ export default function Claims() {
           </div>
           <div className="relative w-full overflow-hidden rounded bg-dark-900">
             <div className="flex flex-col gap-3 p-4">
-              <div className="font-bold text-white">{i18n._(t`Things you may do with your SOUL`)}</div>
+              <div className={classNames([ChainId.FANTOM].includes(chainId) ? "font-bold text-white" : 'hidden')}>{i18n._(t`Things you may do with your SOUL`)}</div>
               <div className="p-4 rounded bg-dark-800">
                 <Link href="/seance">
                   <a className="flex items-center justify-between gap-3">

@@ -9,7 +9,7 @@ import {
   usePairContract,
 } from 'features/bond/hooks/useContract'
 
-import { BOND_HELPER_ADDRESS as BondHelperAddress, SOUL_BOND_ADDRESS } from 'features/bond/constants'
+import { SOUL_BOND_ADDRESS } from 'sdk'
 
 import { useActiveWeb3React } from 'services/web3'
 import { useFantomPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from 'hooks/getPrices'

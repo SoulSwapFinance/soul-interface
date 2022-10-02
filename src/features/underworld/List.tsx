@@ -7,10 +7,14 @@ import { Row } from './Row'
 import { UnderworldMarkets } from './Markets'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
+import { useActiveWeb3React } from 'services/web3'
+import { ChainId } from 'sdk'
 // import { ArrowLeftIcon, ArrowRightIcon, XIcon } from '@heroicons/react/outline'
 // import Header from 'components/Header'
 
 export const List = () => {
+
+  const { chainId } = useActiveWeb3React()
   
   const lendList = UnderworldMarkets.map((market) => (
     <Row
@@ -34,7 +38,7 @@ export const List = () => {
   return (
     <>
       <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
-        <Button variant="bordered" color="blue" size="lg">
+        <Button variant="bordered" color="blue" size="lg" className={chainId == ChainId.FANTOM ? '' : 'hidden'}>
           <NavLink href={'/seance'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Stake </span>
@@ -48,7 +52,7 @@ export const List = () => {
             </a>
           </NavLink>
         </Button>
-        <Button variant="bordered" color="blue" size="lg">
+        <Button variant="bordered" color="blue" size="lg" className={chainId == ChainId.FANTOM ? '' : 'hidden'}>
           <NavLink href={'/soul/dashboard'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Data </span>
@@ -62,7 +66,7 @@ export const List = () => {
             </a>
           </NavLink>
         </Button>
-        <Button variant="bordered" color="blue" size="lg">
+        <Button variant="bordered" color="blue" size="lg" className={[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? '' : 'hidden'}>
           <NavLink href={'/autostake'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Vault </span>

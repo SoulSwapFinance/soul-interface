@@ -1,6 +1,8 @@
 export enum Feature {
   AMM = 'AMM',
   SWAP = 'Exchange',
+  SEANCE = 'Seance',
+  VAULT = 'AutoStake Vault',
   AMM_V2 = 'AMM V2',
   EXPLORE = 'Explore',
   LIQUIDITY = 'Liquidity',

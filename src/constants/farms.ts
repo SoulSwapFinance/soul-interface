@@ -1,4 +1,4 @@
-import { ChainId } from '../sdk'
+import { ChainId, SOUL_ADDRESS, SOUL_NATIVE, SOUL_USDC, USDC_ADDRESS, WNATIVE_ADDRESS } from '../sdk'
 
 export type TokenInfo = {
   id: string
@@ -24,6 +24,50 @@ type AddressMap = {
 }
 
 export const POOLS: AddressMap = {
+  [ChainId.AVALANCHE]: {
+    '0x11d6DD25c1695764e64F439E32cc7746f3945543': {
+      id: 0,
+      address: SOUL_ADDRESS[ChainId.AVALANCHE],
+      token0: {
+        id: SOUL_ADDRESS[ChainId.AVALANCHE], // SOUL
+        name: 'Soul Power',
+        symbol: 'SOUL',
+        decimals: 18,
+      },
+    },
+    '0x6Da1AD717C7577AAB46C19aB6d3d9C31aff32A00': {
+      id: 1,
+      address: SOUL_NATIVE[ChainId.AVALANCHE],
+      token0: {
+        id: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+        name: 'Wrapped Avalanche',
+        symbol: 'WAVAX',
+        decimals: 18,
+      },
+      token1: {
+        id: SOUL_ADDRESS[ChainId.AVALANCHE], // SOUL
+        name: 'Soul Power',
+        symbol: 'SOUL',
+        decimals: 18,
+      },
+    },
+    '0x922fcADa825Dc669798206A35D2D2B455f9A64E7': {
+      id: 2,
+      address: SOUL_USDC[ChainId.AVALANCHE],
+      token0: {
+        id: SOUL_ADDRESS[ChainId.AVALANCHE],
+        name: 'Soul Power',
+        symbol: 'SOUL',
+        decimals: 18
+      },
+      token1: {
+        id: USDC_ADDRESS[ChainId.AVALANCHE],
+        name: 'USD Coin',
+        symbol: 'USDC',
+        decimals: 6,
+      },
+    },
+  },
   [ChainId.FANTOM]: {
     '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07': {
       id: 0,
@@ -510,7 +554,7 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
       token1: {
-        id: '0x5cc61a78f164885776aa610fb0fe1257df78e59b', // SPIRIT
+        id: '0x5Cc61A78F164885776AA610fb0FE1257df78E59B', // SPIRIT
         name: 'SpiritSwap Token',
         symbol: 'SPIRIT',
         decimals: 18,
@@ -889,5 +933,5 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
     },
-  }
+  },
 }

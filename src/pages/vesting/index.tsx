@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Token } from '../../sdk'
+import { ChainId, Currency, CurrencyAmount, Token } from '../../sdk'
 import React, { useEffect, useState } from 'react'
 import { useClaimCallback, useUserUnclaimedAmount } from '../../state/claim/hooks'
 import { useModalOpen, useToggleSelfClaimModal } from '../../state/application/hooks'
@@ -22,6 +22,7 @@ import { t } from '@lingui/macro'
 import { useActiveWeb3React } from 'services/web3'
 import { useLingui } from '@lingui/react'
 import { useUserHasSubmittedClaim } from '../../state/transactions/hooks'
+import { classNames } from 'functions'
 
 export default function Vesting() {
   const { i18n } = useLingui()
@@ -29,7 +30,7 @@ export default function Vesting() {
   const isOpen = useModalOpen(ApplicationModal.SELF_CLAIM)
   const toggleClaimModal = useToggleSelfClaimModal()
 
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
 
   // used for UI loading states
   const [attempting, setAttempting] = useState<boolean>(false)
@@ -195,7 +196,7 @@ export default function Vesting() {
           </div>
           <div className="relative w-full overflow-hidden rounded bg-dark-900">
             <div className="flex flex-col gap-3 p-4">
-              <div className="font-bold text-white">{i18n._(t`Things you can do with your SOUL`)}</div>
+              <div className={classNames([ChainId.FANTOM].includes(chainId) ? "font-bold text-white" : 'hidden')}>{i18n._(t`Things you can do with your SOUL`)}</div>
               <div className="p-4 rounded bg-dark-800">
                 <Link href="/seance">
                   <a className="flex items-center justify-between gap-3">

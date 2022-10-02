@@ -41,7 +41,7 @@ const Swap = () => {
   const { formattedAmounts, trade, priceImpact, isWrap, parsedAmounts, error } = _useSwapPage()
   const tradeVersion = getTradeVersion(trade)
   const { i18n } = useLingui()
-  const { chainId } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const { currencies, setURLCurrency, switchCurrencies } = useCurrenciesFromURL()
   const [expertMode] = useExpertModeManager()
   const dispatch = useAppDispatch()
@@ -51,11 +51,12 @@ const Swap = () => {
     spendFromWallet,
     receiveToWallet,
     recipient,
+    toChain,
     attemptingTxn,
     showReview,
     error: swapStateError,
   } = tridentSwapState
-  const { address } = useENS(recipient)
+  const { address } = useENS(recipient ? recipient : account)
   const [txHash, setTxHash] = useState<string>()
   const [confirmTrade, setConfirmTrade] = useState<TradeUnion>()
 
@@ -130,7 +131,7 @@ const Swap = () => {
               walletToggle={(props) => (
                 <SwapAssetPanel.Switch
                   {...props}
-                  disabled={tradeVersion === TradeVersion.V2TRADE}
+                  disabled={tradeVersion === TradeVersion.INSTANT}
                   label={i18n._(t`Pay from`)}
                   onChange={(spendFromWallet) => dispatch(setSpendFromWallet(spendFromWallet))}
                   id="chk-pay-from-wallet"
@@ -161,7 +162,7 @@ const Swap = () => {
               walletToggle={(props) => (
                 <SwapAssetPanel.Switch
                   {...props}
-                  disabled={tradeVersion === TradeVersion.V2TRADE}
+                  disabled={tradeVersion === TradeVersion.INSTANT}
                   label={i18n._(t`Receive to`)}
                   onChange={(receiveToWallet) => dispatch(setReceiveToWallet(receiveToWallet))}
                   id="chk-receive-to-wallet"
@@ -204,8 +205,8 @@ const Swap = () => {
                     <Typography variant="sm">{i18n._(t`Version`)}</Typography>
                     <Chip
                       id="trade-type"
-                      label={tradeVersion === TradeVersion.V2TRADE ? 'Legacy' : 'Trident'}
-                      color={tradeVersion === TradeVersion.V2TRADE ? 'blue' : 'green'}
+                      label={tradeVersion === TradeVersion.INSTANT ? 'Legacy' : 'Trident'}
+                      color={tradeVersion === TradeVersion.INSTANT ? 'blue' : 'green'}
                     />
                   </div>
                   <div className="py-2">
@@ -223,6 +224,7 @@ const Swap = () => {
               attemptingTxn={attemptingTxn}
               txHash={txHash}
               recipient={recipient}
+              toChain={toChain}
               allowedSlippage={allowedSlippage}
               onConfirm={execute}
               swapErrorMessage={swapStateError}

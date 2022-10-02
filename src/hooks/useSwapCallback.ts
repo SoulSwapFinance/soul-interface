@@ -17,7 +17,7 @@ import {
   Percent,
   PercentagePath,
   RouteType,
-  Router as LegacyRouter,
+  SoulSwapRouter,
   SwapParameters,
   toHex,
   TridentTrade,
@@ -363,7 +363,7 @@ export function useSwapCallArguments(
 
       const swapMethods: SwapParameters[] = []
       swapMethods.push(
-        LegacyRouter.swapCallParameters(trade, {
+        SoulSwapRouter.swapCallParameters(trade, {
           feeOnTransfer: false,
           allowedSlippage,
           recipient,
@@ -373,7 +373,7 @@ export function useSwapCallArguments(
 
       if (trade.tradeType === TradeType.EXACT_INPUT) {
         swapMethods.push(
-          LegacyRouter.swapCallParameters(trade, {
+          SoulSwapRouter.swapCallParameters(trade, {
             feeOnTransfer: true,
             allowedSlippage,
             recipient,

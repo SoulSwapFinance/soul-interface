@@ -44,14 +44,6 @@ export const AVERAGE_BLOCK_TIME = {
   [ChainId.AVALANCHE]: 2,
 }
 
-export const ARCHER_RELAY_URI: { [chainId in ChainId]?: string } = {
-  [ChainId.ETHEREUM]: 'https://api.archerdao.io/v1/transaction',
-}
-
-export const ARCHER_GAS_URI: { [chainId in ChainId]?: string } = {
-  [ChainId.ETHEREUM]: 'https://api.archerdao.io/v1/gas',
-}
-
 export const SOULSWAP_URI: { [chainId in ChainId]?: string } = {
   [ChainId.FANTOM]: 'https://api.soulswap.finance',
 }

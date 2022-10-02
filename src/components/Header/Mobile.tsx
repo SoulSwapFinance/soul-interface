@@ -50,11 +50,11 @@ const Mobile: FC = () => {
                 return <NavigationItem node={node} key={node.key} /> 
               })}
             </div>
-          <div className="flex items-center w-12 mr-1">
+         {/* <div className="flex items-center w-12 mr-1">
             <Link href="/landing" passHref={true}>
               <Image src="/logo.png" alt="logo" width="32px" height="32px" />
             </Link>
-          </div>
+          </div> */}
         </div>
         <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 z-20 overflow-hidden" onClose={setOpen} unmount={false}>
@@ -110,7 +110,7 @@ const Mobile: FC = () => {
                         </div>
                         <div className="cols flex-cols-2 inline-block">
                   <Web3Network />
-                </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -119,18 +119,18 @@ const Mobile: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
-        <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 xl:w-auto bg-dark-1000 hover-bg-dark-900 xl:relative xl:p-0 xl:bg-transparent">
+         <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 xl:w-auto bg-dark-1000 hover-bg-dark-900 xl:relative xl:p-0 xl:bg-transparent">
           <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
-            {/* {library && library.provider.isMetaMask && ( */}
-              <div className="sm:inline-block">
-                <LuxorStats />
-              </div>
-            {/* )} */}
-            {/* {library && library.provider.isMetaMask && ( */}
-              <div className="sm:inline-block">
-                <TokenStats />
-              </div>
-            {/* )} */}
+      {/*   
+          <div className="sm:inline-block">
+              <LuxorStats />
+            </div>
+            */}
+            
+            <div className="sm:inline-block">
+              <TokenStats />
+            </div> 
+           
             <div className="w-auto flex items-center rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto">
               {account && chainId && userEthBalance && (
                 <>
@@ -142,16 +142,9 @@ const Mobile: FC = () => {
                   </div>
                 </>
               )}
-              {/* {library && library.provider.isMetaMask && ( */}
                 <div className="inline-block">
                 <Web3Status />
                 </div>
-              {/* )} */}
-              {/* {library && library.provider.isMetaMask && ( */}
-                {/* <div className="inline-block">
-                  <Web3Network />
-                </div> */}
-              {/* )} */}
                 <div className="inline-block">
                   <More />
                 </div>

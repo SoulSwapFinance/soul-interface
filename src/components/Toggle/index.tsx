@@ -18,6 +18,7 @@ export interface ToggleProps {
 }
 
 export function Toggle({ id, isActive, toggle, optionA, optionB }: ToggleProps) {
+  const { chainId } = useActiveWeb3React()
   return (
     <div className="flex flex-cols-2 gap-3">
       {!isActive && optionB}
@@ -26,11 +27,11 @@ export function Toggle({ id, isActive, toggle, optionA, optionB }: ToggleProps) 
         checked={isActive}
         onChange={toggle}
         className={classNames(
-          isActive ? 'bg-dark-600' : 'bg-blue',
+          isActive ? `bg-${getChainColorCode(chainId)}` : 'bg-white',
           'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none'
         )}
       >
-        <span className="sr-only">Use setting</span>
+        <span className="sr-only">Use Setting</span>
         <span
           className={classNames(
             isActive ? 'translate-x-5' : 'translate-x-0',

@@ -6,7 +6,7 @@ import { useFantomPrice, useLuxorPrice, useTokenPrice } from 'hooks/getPrices'
 import { usePairPrice } from 'hooks/usePairData'
 import { useActiveWeb3React } from 'services/web3'
 // import QuestionHelper from '../../components/QuestionHelper'
-import { Token } from 'sdk'
+import { ChainId, LUX_DAI, LUX_NATIVE, LUX_SOR, SOR_NATIVE, Token } from 'sdk'
 import AssetInput from 'components/AssetInput'
 import { useLuxorBondContract } from 'hooks/useContract'
 // import { useBondContract, useStakeSharePrice, useStakeRecentProfit, sharesFromSoul } from './useBonds'
@@ -46,46 +46,39 @@ const TokenLogo = styled(Image)`
 `
 
 const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAddress, bond }) => {
-    const { account, chainId } = useActiveWeb3React()
+    const { account } = useActiveWeb3React()
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(stakeToken)
     const [showing, setShowing] = useState(false)
     const BondContract = useLuxorBondContract()
-    const BondContractAddress = BondContract.address
+    const BondContractAddress = bondAddress
     const [approved, setApproved] = useState(false)
     const [depositValue, setDepositValue] = useState('')
-    const token = new Token(chainId, assetAddress, 18)
-    const parsedDepositValue = tryParseAmount(depositValue, token)
+    const assetToken = new Token(ChainId.FANTOM, assetAddress, 18, assetName)
+    const parsedDepositValue = tryParseAmount(depositValue, assetToken)
 
     const [payout, setStakedBal] = useState(0)
     const [earnedAmount, setEarnedAmount] = useState(0)
     const [unstakedBal, setUnstakedBal] = useState(0)
-    
-    const LUX_DAI_ADDRESS = '0x46729c2AeeabE7774a0E710867df80a6E19Ef851'
-    const LUX_FTM_ADDRESS = '0x951BBB838e49F7081072895947735b0892cCcbCD'
-    const LUX_SOR_ADDRESS = '0x622E69B6785311800B0d55D72fF27D91F5518212'
-    const SOR_FTM_ADDRESS = '0xdfB2218b48627794711E6cFd72e26c541E456F6F'
-
     // const [discount, setDiscount] = useState(0)
     // const [bondPrice, setBondPrice] = useState(0)
     // const [available, setAvailabile] = useState(false)
     // const { deposit, withdraw } = useBondContract()
     const luxPrice = useLuxorPrice()
-    const assetToken = new Token(250, assetAddress, 18, assetName)
     const wftmPrice = useFantomPrice()
-    const luxDaiPrice = usePairPrice(LUX_DAI_ADDRESS) // √
+    const luxDaiPrice = usePairPrice(LUX_DAI[ChainId.FANTOM]) // √
     // console.log('luxDaiPrice:%s', Number(luxDaiPrice))
-    const luxFtmPrice = usePairPrice(LUX_FTM_ADDRESS) // √
-    const luxSorPrice = usePairPrice(LUX_SOR_ADDRESS) // √
-    const sorFtmPrice = usePairPrice(SOR_FTM_ADDRESS) // √
+    const luxFtmPrice = usePairPrice(LUX_NATIVE[ChainId.FANTOM]) // √
+    const luxSorPrice = usePairPrice(LUX_SOR[ChainId.FANTOM]) // √
+    const sorFtmPrice = usePairPrice(SOR_NATIVE[ChainId.FANTOM]) // √
     // console.log('luxSorPrice:%s', Number(luxSorPrice))
     
     let assetPrice = 0
     assetPrice 
-        = assetToken.address == WFTM_ADDRESS[250] ? wftmPrice
-            : assetToken.address == LUX_DAI_ADDRESS ? luxDaiPrice
-            : assetToken.address == LUX_FTM_ADDRESS ? luxFtmPrice
-            : assetToken.address == LUX_SOR_ADDRESS ? luxSorPrice
-            : assetToken.address == SOR_FTM_ADDRESS ? sorFtmPrice
+        = assetToken.address == WFTM_ADDRESS[ChainId.FANTOM] ? wftmPrice
+            : assetToken.address == LUX_DAI ? luxDaiPrice
+            : assetToken.address == LUX_NATIVE[ChainId.FANTOM] ? luxFtmPrice
+            : assetToken.address == LUX_SOR[ChainId.FANTOM] ? luxSorPrice
+            : assetToken.address == SOR_NATIVE[ChainId.FANTOM] ? sorFtmPrice
             : 1
     // const assetPrice = useTokenPrice(assetToken.address)
     // console.log('assetPrice:%s', assetPrice)
@@ -100,22 +93,22 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     const discountNormal = Number(luxorBondInfo.discount)
     const luxPriceAdj = luxPrice * 1.25//(delta23 * 100 / assetPrice )
     const bondPrice 
-        = bond.assetAddress == SOR_FTM_ADDRESS 
+        = bond.assetAddress == SOR_NATIVE[ChainId.FANTOM] 
             ?  bondPriceNormal / luxPriceAdj 
-            : bond.assetAddress == LUX_FTM_ADDRESS
+            : bond.assetAddress == LUX_NATIVE[ChainId.FANTOM]
             ?  bondPriceNormal / 3.5
             : bondPriceNormal
     const deltaSpecial = luxPrice - bondPrice //.78
-    // const bondSpecial = bond.assetAddress == SOR_FTM_ADDRESS || bond.assetAddress == LUX_FTM_ADDRESS
+    // const bondSpecial = bond.assetAddress == SOR_NATIVE[ChainId.FANTOM] || bond.assetAddress == LUX_FTM[ChainId.FANTOM]
     const discount 
-        = (bond.assetAddress == SOR_FTM_ADDRESS
+        = (bond.assetAddress == SOR_NATIVE[ChainId.FANTOM]
           && deltaSpecial > 0)
         ? deltaSpecial / luxPrice * 100
-        : (bond.assetAddress == LUX_FTM_ADDRESS
+        : (bond.assetAddress == LUX_NATIVE[ChainId.FANTOM]
           && deltaSpecial > 0)
         ? deltaSpecial / luxPrice * 100
         : discountNormal
-    const status = luxorBondInfo.status
+    // const status = luxorBondInfo.status
     const maxDebt = Number(luxorBondInfo.maximumDebt)
     const available 
         = maxDebt > 0 && bond.status != 'closed'
@@ -165,9 +158,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
         }
     }
 
-    /**
-     * Checks the Discount Amount
-     */
+    // returns: discount & sets
     // const fetchDiscount = async () => {
     //     try {
     //         const result = await BondContract?.bondPriceUsd(bondAddress)
@@ -589,19 +580,6 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                         </SubmitButton>
                                     </Wrap>
                                     }
-                                {/* <Wrap padding="0" margin="0" display="flex">
-                                    <SubmitButton
-                                        height="2rem"
-                                        primaryColor="#F4A703"
-                                        color="black"
-                                        margin=".5rem 0 .5rem 0"
-                                        onClick={() =>
-                                            handleHarvestAll()
-                                        }
-                                    >
-                                        HARVEST ALL
-                                    </SubmitButton>
-                                </Wrap> */}
                                 </FunctionBox>
                             )}
                         </DetailsWrapper>

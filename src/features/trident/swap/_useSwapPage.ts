@@ -61,9 +61,9 @@ export const _useSwapPage = () => {
   // trade.output but in normal amounts instead of shares
   const tradeOutputAmount = useMemo(() => {
     if (!trade) return undefined
-    if (getTradeVersion(trade) === TradeVersion.V2TRADE) return trade.outputAmount
+    if (getTradeVersion(trade) === TradeVersion.INSTANT) return trade.outputAmount
     if (
-      getTradeVersion(trade) === TradeVersion.V3TRADE &&
+      getTradeVersion(trade) === TradeVersion.TRIDENT &&
       !rebasesLoading &&
       trade.outputAmount?.currency.wrapped.address &&
       rebases[trade?.outputAmount?.currency.wrapped.address]

@@ -126,7 +126,7 @@ const useMobileMenu: UseMobileMenu = () => {
     //     items: poolMenu,
     //   })
 
-    if (featureEnabled(Feature.SOULSWAP, chainId)) {
+    if (featureEnabled(Feature.SEANCE, chainId)) {
       const farmItems = {
         key: 'Rewards',
         title: i18n._(t`Rewards`),
@@ -155,6 +155,31 @@ const useMobileMenu: UseMobileMenu = () => {
             key: 'luxor',
             title: i18n._(t`Luxor`),
             link: '/luxor/bonds',
+          },
+          {
+            key: 'bonds',
+            title: i18n._(t`Bond`),
+            link: '/bonds',
+          },
+        ],
+      }
+      mainItems.push(farmItems)
+    }
+
+    if ([43114].includes(chainId)) {
+      const farmItems = {
+        key: 'Rewards',
+        title: i18n._(t`Rewards`),
+        items: [
+          {
+            key: 'farm',
+            title: i18n._(t`Farm`),
+            link: '/summoner',
+          },
+          {
+            key: 'vault',
+            title: i18n._(t`Vault`),
+            link: '/autostake',
           },
           {
             key: 'bonds',
@@ -222,12 +247,12 @@ const useMobileMenu: UseMobileMenu = () => {
     //       {
     //         key: 'marketplace',
     //         title: i18n._(t`Marketplace`),
-    //         link: '/miso',
+    //         link: '/market',
     //       },
     //       {
     //         key: 'factory',
     //         title: i18n._(t`Factory`),
-    //         link: '/miso/auction',
+    //         link: '/market/auction',
     //       },
     //     ],
     //   })
@@ -271,26 +296,11 @@ const useMobileMenu: UseMobileMenu = () => {
       ],
     }
 
-    // if (featureEnabled(Feature.COFFINBOX, chainId)) {
-    //   analyticsMenu.items.push({
-    //     key: 'coffinbox',
-    //     title: 'CoffinBox',
-    //     link: '/analytics/coffinbox',
-    //   })
-    // }
-
     if (featureEnabled(Feature.ANALYTICS, chainId)) {
       mainItems.push(analyticsMenu)
     }
 
-    // mainItems.push({
-    //   key: 'balances',
-    //   title: i18n._(t`Portfolio`),
-    //   link: '/balances',
-    //   // icon: <WalletIcon width={16} />,
-    // })
-
-    if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
+    if ([250].includes(chainId)) {
       const learnItems = {
         key: 'Learn',
         title: i18n._(t`Learn`),

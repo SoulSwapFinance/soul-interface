@@ -1,27 +1,36 @@
 import React, { useEffect, useState } from 'react'
-
+import { ChainId } from 'sdk'
 import StakeKey from './Key'
 import AutostakeRowRender from './Row'
-import { AllPids } from './Pids'
+import { AvalanchePools, FantomPools } from './Pids'
 import { useActiveWeb3React } from 'services/web3'
 
 const AutostakeList = () => {
   const { chainId } = useActiveWeb3React() // account
 
-  const stakeList = AllPids.map((pool) => (
+  const ftmList = FantomPools.map((pool) => (
     <AutostakeRowRender
       key={pool.pid}
       pid={pool.pid}
-      stakeToken={pool.lpAddresses[chainId]}
+      stakeToken={pool.lpAddress}
       pool={pool}
     />
   ))
-
+  
+  const avaxList = AvalanchePools.map((pool) => (
+    <AutostakeRowRender
+      key={pool.pid}
+      pid={pool.pid}
+      stakeToken={pool.lpAddress}
+      pool={pool}
+    />
+  ))
+  
   return (
     <>
       {/* <BondHeader/> */}
       <StakeKey />
-      <>{stakeList}</>
+      <>{chainId == ChainId.AVALANCHE ? avaxList : ftmList}</>
     </>
   )
 }

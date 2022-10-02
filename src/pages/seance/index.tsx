@@ -30,6 +30,8 @@ import useSoulMine from 'features/mines/hooks/useSoulMine'
 import { useUserTokenInfo, useStakeInfo } from 'hooks/useAPI'
 import { useSoulPrice } from 'hooks/getPrices'
 import { formatNumber } from 'functions/format'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums/Feature'
 // import { ArrowLeftIcon } from '@heroicons/react/solid'
 
 const INPUT_CHAR_LIMIT = 18
@@ -71,10 +73,8 @@ export default function SoulStake() {
   const { withdraw } = useSoulVault()
   const { enter, leave, harvest } = useSoulStakeManual()
 
-  const { userInfo, fetchStakeStats } = useSoulMine(0, '', '', '')
-
-  const soulBalance = useTokenBalance(account ?? undefined, SOUL[250])
-  const seanceBalance = useTokenBalance(account ?? undefined, SEANCE[250])
+  const soulBalance = useTokenBalance(account ?? undefined, SOUL[chainId])
+  const seanceBalance = useTokenBalance(account ?? undefined, SEANCE[chainId])
 
   // show confirmation view before withdrawing SOUL
   const [showConfirmation, setShowConfirmation] = useState(false)
@@ -93,7 +93,7 @@ export default function SoulStake() {
   const parsedAmount = usingBalance ? balance : tryParseAmount(input, balance?.currency)
 
   // Approve summoner to move funds with `transferFrom`
-  const [approvalStateChef, approveMasterchef] = useApproveCallback(parsedAmount, SOUL_SUMMONER_ADDRESS[ChainId.FANTOM])
+  const [approvalStateChef, approveMasterchef] = useApproveCallback(parsedAmount, SOUL_SUMMONER_ADDRESS[chainId])
   const [approvalStateVault, approveVault] = useApproveCallback(parsedAmount, SOUL_VAULT_ADDRESS[chainId])
 
   // const [apr, setApr] = useState('30')
@@ -178,29 +178,6 @@ export default function SoulStake() {
     }
   }
 
-  const handleHarvest = async () => {
-    if (buttonDisabled) return
-
-    if (!walletConnected) {
-      toggleWalletModal()
-    } else {
-      setPendingTx(true)
-      const success = await sendTx(() => harvest())
-      if (!success) {
-        setPendingTx(false)
-        // setModalOpen(true)
-        return
-      }
-    }
-
-    handleInput('')
-    setPendingTx(false)
-  }
-
-  const { pendingSoul } = useSoulSummonerContract()
-
-  // const [pending, setPending] = useState('')
-
   return (
     <div>
       <Head>
@@ -215,13 +192,6 @@ export default function SoulStake() {
         {/* <Header /> */}
         <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
         <Button variant="bordered" color="purple" size="lg">
-          <NavLink href={'/seance'}>
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Stake </span>
-            </a>
-          </NavLink>
-        </Button>
-        <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/soul/dashboard'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Data </span>
@@ -235,7 +205,7 @@ export default function SoulStake() {
             </a>
           </NavLink>
         </Button>
-        <Button variant="bordered" color="purple" size="lg">
+        <Button variant="bordered" color="purple" size="lg" className={chainId == ChainId.FANTOM ? '' : 'hidden'}>
           <NavLink href={'/underworld'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Lend </span>
@@ -485,7 +455,7 @@ export default function SoulStake() {
                       onClick={() => harvest()}
                     >
                       Harvest{' '}
-                      {Number(pending)
+                      {pending
                         .toFixed(2)
                         .toString()
                         .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
@@ -537,3 +507,5 @@ export default function SoulStake() {
     </div>
   )
 }
+
+SoulStake.Guard = NetworkGuard(Feature.SEANCE)

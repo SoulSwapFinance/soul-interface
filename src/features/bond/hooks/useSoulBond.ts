@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { ethers, BigNumber } from 'ethers'
 // import { formatNumber } from '../../functions'
- import   { SOUL_ADDRESS, USDC_ADDRESS } from 'sdk'
+ import   { ChainId, SOUL_ADDRESS, USDC_ADDRESS } from 'sdk'
 import {
   useHelperContract,
   usePriceHelperContract,
@@ -11,23 +11,21 @@ import {
   useTokenContract,
 } from './useContract'
 
-import { SOUL_BOND_ADDRESS, BOND_HELPER_ADDRESS as BondHelperAddress } from '../constants'
+import { SOUL_BOND_ADDRESS } from 'sdk'
 
-import { AvalanchePids, FantomPids } from '../Pids'
+import { AvalanchePools, FantomPools } from '../Pids'
 import { useActiveWeb3React } from 'services/web3'
 import { useFantomPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from 'hooks/getPrices'
 
-// const helperContract = useHelperContract()
-
-function useSoulBond(pid, lpToken, token1Address, token2Address) {
+function useSoulBond(pid, lpToken, token0Address, token1Address) {
   const { account, chainId } = useActiveWeb3React()
   
   const helperContract = useBondHelperContract()
   const priceHelperContract = usePriceHelperContract()
   const bondContract = useSoulBondContract()
   const lpTokenContract = usePairContract(lpToken)
-  const token1Contract = useTokenContract(token1Address[chainId])
-  const token2Contract = useTokenContract(token2Address[chainId])
+  const token1Contract = useTokenContract(token0Address)
+  const token2Contract = useTokenContract(token1Address)
   const soulContract = useTokenContract(SOUL_ADDRESS[chainId])
   const fusdContract = useTokenContract(USDC_ADDRESS[chainId])
 
@@ -375,7 +373,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
   const fetchUserLpTokenAlloc = async (account) => {
     try {
       const contractBal =   
-        chainId == 250 ? await lpTokenContract?.balanceOf(SOUL_BOND_ADDRESS)
+        chainId == ChainId.FANTOM ? await lpTokenContract?.balanceOf(SOUL_BOND_ADDRESS[chainId])
         : await bondContract.poolInfo(pid).lpSupply
       
         const userBal = await lpTokenContract?.balanceOf(account)
@@ -487,14 +485,14 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
     try {
       const totalSoul = 
       await soulContract.balanceOf( 
-      chainId == 250
-         ? FantomPids[1].lpAddress 
-         : AvalanchePids[1].lpAddress
+      chainId == ChainId.FANTOM
+         ? FantomPools[1].lpAddress 
+         : AvalanchePools[1].lpAddress
       )
       const totalFusd = await fusdContract.balanceOf(
-      chainId == 250
-         ? FantomPids[1].lpAddress 
-         : AvalanchePids[1].lpAddress
+      chainId == ChainId.FANTOM
+         ? FantomPools[1].lpAddress 
+         : AvalanchePools[1].lpAddress
       )
 
       const fusdPerSoul = totalFusd / totalSoul
@@ -540,14 +538,6 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
 
       // value of lp tokens held by summoner
       const summonerTotalLpValue = supplyHeldBySummoner * (totalLpValue * 2)
-
-      // console.log('totalLpTokens', totalLpTokens.toString())
-      // console.log('summonerLpTokens', summonerLpTokens.toString())
-      // console.log('supplyHeldBySummoner', supplyHeldBySummoner.toString())
-
-      // console.log('totalLpValue', totalLpValue.toString())
-      // console.log('summonerTotalLpValue', summonerTotalLpValue.toString())
-
       return [totalLpValue, summonerTotalLpValue]
     } catch (e) {
       // console.log(e)
@@ -591,9 +581,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
 
   // ------- STAKING -------
 
-  /**
-   * Value of liqudity of lpToken
-   */
+  // gets: lpToken liquidity value
   const fetchPid0LiquidityValue = async (lpToken) => {
     try {
       // SOUL held by summoner
@@ -615,9 +603,7 @@ function useSoulBond(pid, lpToken, token1Address, token2Address) {
     }
   }
 
-  /**
-   * Fetches the APR percentage for the `pid`
-   */
+  // gets % APR for given `pid`
   const fetchPid0AprAndLiquidity = async (lpToken) => {
     try {
       // pool weight

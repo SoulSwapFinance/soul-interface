@@ -11,9 +11,9 @@ export const CONTRACT_SCAN = {
   [ChainId.ETHEREUM]: 'https://etherscan.io/address/',
   [ChainId.FANTOM]: 'https://ftmscan.com/address/',
   [ChainId.FANTOM_TESTNET]: 'https://testnet.ftmscan.com/address/',
+  [ChainId.AVALANCHE]: 'https://snowtrace.io/address/',
 }
 export const ETH_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
-
 export const TIMELOCK_ADDRESS = '0x1a9C8182C09F50C8318d769245beA52c32BE35BC'
 
 export const ARCHER_ROUTER_ADDRESS: AddressMap = {
@@ -268,7 +268,7 @@ export const ZAPPER_ADDRESS: AddressMap = {
   // [ChainId.ROPSTEN]: '0xcff6eF0B9916682B37D80c19cFF8949bc1886bC2',
   [ChainId.TELOS]: '',
   [ChainId.FANTOM]: '0x936bdb9218d7f6d7ef95fafe3f0ded0220229d74',
-  [ChainId.AVALANCHE]: undefined,
+  [ChainId.AVALANCHE]: '0x594C7137Ac541C9F3954169bB018548761986E8B',
   [ChainId.MATIC]: undefined,
   [ChainId.ARBITRUM]: undefined,
   [ChainId.MOONRIVER]: undefined,
@@ -301,8 +301,31 @@ export const MULTICALL2_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '',
 }
 
-// TOKENS
+export const ONCHAIN_AGGREGATOR_ORACLE: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '', //
+  [ChainId.FANTOM_TESTNET]: '', //
+  [ChainId.AVALANCHE]: '0x9632e2b35F901E372939d59C3509747C641F7693', // SEP22
+  [ChainId.MATIC]: '',
+  [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
+}
 
+export const OFFCHAIN_AGGREGATOR_ORACLE: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '', //
+  [ChainId.FANTOM_TESTNET]: '', //
+  [ChainId.AVALANCHE]: '0xBd0c7AaF0bF082712EbE919a9dD94b2d978f79A9', // SEP22
+  [ChainId.MATIC]: '',
+  [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
+}
+
+// TOKENS //
 export const SOUL_SEANCE_PAIR: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
@@ -417,7 +440,7 @@ export const SEANCE_ADDRESS: AddressMap = {
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
+  [ChainId.AVALANCHE]: '0x97Ee3C9Cf4E5DE384f95e595a8F327e65265cC4E', // SEP22
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
   [ChainId.MOONRIVER]: '',
@@ -477,7 +500,7 @@ export const AVAX_ADDRESS: AddressMap = {
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x511D35c52a3C244E7b8bd92c0C297755FbD89212', // AVAX
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
+  [ChainId.AVALANCHE]: '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
   [ChainId.MOONRIVER]: '',
@@ -601,55 +624,6 @@ export const UNIDX_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
   [ChainId.MOONRIVER]: '',
-}
-
-export const GRIM_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: undefined,
-  [ChainId.TELOS]: undefined,
-  [ChainId.BSC]: undefined,
-  [ChainId.FANTOM]: '0x7eC94C4327dC757601B4273cD67014d7760Be97E', // GRIM
-  [ChainId.FANTOM_TESTNET]: undefined,
-  [ChainId.AVALANCHE]: undefined,
-  [ChainId.MATIC]: undefined,
-  [ChainId.ARBITRUM]: undefined,
-  [ChainId.MOONRIVER]: undefined,
-}
-
-export const REAPER_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: undefined,
-  [ChainId.TELOS]: undefined,
-  [ChainId.BSC]: undefined,
-  [ChainId.FANTOM]: '0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb', // REAPER
-  [ChainId.FANTOM_TESTNET]: undefined,
-  [ChainId.AVALANCHE]: undefined,
-  [ChainId.MATIC]: undefined,
-  [ChainId.ARBITRUM]: undefined,
-  [ChainId.MOONRIVER]: undefined,
-} 
-
-// LP POOL ADDRESSES //
-export const SOUL_NATIVE_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: undefined,
-  [ChainId.TELOS]: undefined,
-  [ChainId.BSC]: undefined,
-  [ChainId.FANTOM]: '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57', // SOUL-FTM
-  [ChainId.FANTOM_TESTNET]: undefined,
-  [ChainId.AVALANCHE]: '0x6Da1AD717C7577AAB46C19aB6d3d9C31aff32A00', // SOUL-AVAX
-  [ChainId.MATIC]: undefined,
-  [ChainId.ARBITRUM]: undefined,
-  [ChainId.MOONRIVER]: undefined,
-}
-
-export const USDC_NATIVE_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: undefined,
-  [ChainId.TELOS]: undefined,
-  [ChainId.BSC]: undefined,
-  [ChainId.FANTOM]: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556',
-  [ChainId.FANTOM_TESTNET]: undefined,
-  [ChainId.AVALANCHE]: '0x864384a54ea644852603778c0C200eF2D6F2Ac2f',
-  [ChainId.MATIC]: undefined,
-  [ChainId.ARBITRUM]: undefined,
-  [ChainId.MOONRIVER]: undefined,
 }
 
 // UNDERWORLD ADDRESSES //

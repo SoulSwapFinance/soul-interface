@@ -2,11 +2,11 @@ import { Disclosure, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency, Route, TradeVersion } from 'sdk'
+import { ChainId, Currency, Route, TradeVersion } from 'sdk'
 import Typography from 'components/Typography'
 import TradePrice from 'features/swap/TradePrice'
 import { classNames, computeRealizedLPFeePercent, shortenAddress } from 'functions'
-// import { getTradeVersion } from 'functions/getTradeVersion'
+import { getTradeVersion } from 'functions/getTradeVersion'
 import useSwapSlippageTolerance from 'hooks/useSwapSlippageTollerence'
 import { TradeUnion } from 'types'
 import React, { FC, Fragment, useState } from 'react'
@@ -15,17 +15,19 @@ import { isAddress } from 'web3-utils'
 interface SwapDetailsContent {
   trade?: TradeUnion
   recipient?: string
+  toChain?: ChainId
 }
 
 interface SwapDetails {
   inputCurrency?: Currency
   outputCurrency?: Currency
   recipient?: string
+  toChain?: ChainId
   trade?: TradeUnion
   className?: string
 }
 
-const SwapDetails: FC<SwapDetails> = ({ inputCurrency, outputCurrency, recipient, trade, className }) => {
+const SwapDetails: FC<SwapDetails> = ({ inputCurrency, outputCurrency, recipient, toChain, trade, className }) => {
   const [inverted, setInverted] = useState(false)
 
   return (
@@ -82,7 +84,7 @@ const SwapDetailsContent: FC<SwapDetails> = ({ trade, recipient }) => {
 
   let path
   if (trade) {
-  // if (trade && getTradeVersion(trade) === TradeVersion.V2TRADE) {
+  // if (trade && getTradeVersion(trade) === TradeVersion.INSTANT) {
     path = (trade.route as Route<Currency, Currency>).path
   }
 

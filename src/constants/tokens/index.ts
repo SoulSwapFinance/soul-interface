@@ -1,4 +1,4 @@
-import { WETH_ADDRESS } from 'constants/addresses'
+import { WBTC_ADDRESS, WETH_ADDRESS } from 'constants/addresses'
 import { ChainId, Ether, SOUL_ADDRESS, Token, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
 
 import { SupportedChainId } from '../chains'
@@ -69,32 +69,7 @@ export const MEOW = new Token(ChainId.ETHEREUM, '0x650F44eD6F1FE0E1417cb4b3115d5
 export const MIR = new Token(ChainId.ETHEREUM, '0x09a3EcAFa817268f77BE1283176B946C4ff2E608', 18, 'MIR', 'Wrapped MIR')
 
 // export const USDC = new Token(ChainId.ETHEREUM, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD Coin')
-export const USDC = new Token(ChainId.FANTOM, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'USDC', 'USD Coin')
-export const USDP = new Token(
-  ChainId.ETHEREUM,
-  '0x1456688345527bE1f37E9e627DA0837D6f08C925',
-  18,
-  'USDP',
-  'USDP Stablecoin'
-)
 export const UST = new Token(ChainId.ETHEREUM, '0xa47c8bf37f92aBed4A126BDA807A7b7498661acD', 18, 'UST', 'Wrapped UST')
-export const XSUSHI_CALL = new Token(
-  ChainId.ETHEREUM,
-  '0xada279f9301C01A4eF914127a6C2a493Ad733924',
-  18,
-  'XSUc25-0531',
-  'XSUSHI 25 Call [31 May 2021]'
-)
-
-export const LIFT = new Token(ChainId.ETHEREUM, '0xf9209d900f7ad1DC45376a2caA61c78f6dEA53B6', 18, 'LIFT', 'LiftKitchen')
-export const LFBTC = new Token(
-  ChainId.ETHEREUM,
-  '0xafcE9B78D409bF74980CACF610AFB851BF02F257',
-  18,
-  'LFBTC',
-  'LiftKitchen BTC'
-)
-export const CVXCRV = new Token(ChainId.ETHEREUM, '0x62B9c7356A2Dc64a1969e19C23e4f579F9810Aa7', 18, 'cvxCRV', 'cvxCRV')
 
 type ChainTokenMap = {
   readonly [chainId in ChainId]?: Token
@@ -106,6 +81,13 @@ export const SOUL: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, SOUL_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'Soul Power'), // AUG21
   [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5', 18, 'SOUL', 'Soul Power'), // JUL21
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, SOUL_ADDRESS[ChainId.AVALANCHE], 18, 'SOUL', 'Soul Power'), // SEP22
+}
+
+export const USDC = {
+  [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD Coin'),
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'USDC', 'USD Coin'),
+  [ChainId.BSC]: new Token(ChainId.BSC, '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d', 6, 'USDC', 'USD Coin'),
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E', 6, 'USDC', 'USD Coin'),
 }
 
 // LUXOR
@@ -148,11 +130,13 @@ export const WETH: ChainTokenMap = {
 // WBTC
 export const WBTC: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x321162Cd933E2Be498Cd2267a90534A804051b11', 8, 'WBTC', 'Wrapped BTC'),
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, WBTC_ADDRESS[ChainId.AVALANCHE], 8, 'WBTC', 'Wrapped BTC'),
 }
 
 // BNB
 export const BNB: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454', 18, 'BNB', 'Binance'),
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0x264c1383EA520f73dd837F915ef3a732e204a493', 18, 'BNB', 'Binance'),
 }
 // CRV
 export const CRV: ChainTokenMap = {
@@ -169,19 +153,9 @@ export const UNIDX: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x2130d2a1e51112D349cCF78D2a1EE65843ba36e0', 18, 'UNIDX', 'UniDex'),
 }
 
-// GRIM
-export const GRIM: ChainTokenMap = {
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x7eC94C4327dC757601B4273cD67014d7760Be97E', 18, 'GRIM', 'GrimToken'),
-}
-
 // GRIM EVO
 export const GRIMEVO: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x0a77866C01429941BFC7854c0c0675dB1015218b', 18, 'GRIM EVO', 'Grim EVO'),
-}
-
-// REAPER
-export const REAPER: ChainTokenMap = {
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x117dB78176C8eDe4F12fCd29d85Cd96b91A4cbBb', 18, 'REAPER', 'ReaperToken'),
 }
 
 // WFTM
@@ -196,23 +170,27 @@ export const USDT: ChainTokenMap = {
 
 // DAI
 export const DAI: ChainTokenMap = {
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', 18, 'DAI', 'Dai Stablecoin')
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', 18, 'DAI', 'Dai Stablecoin'),
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0xd586E7F844cEa2F87f50152665BCbc2C279D8d70', 18, 'DAI', 'Dai Stablecoin')
 }
 
 // AVAX
 export const AVAX: ChainTokenMap = {
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x511D35c52a3C244E7b8bd92c0C297755FbD89212', 18, 'AVAX', 'Avalanche')
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x511D35c52a3C244E7b8bd92c0C297755FbD89212', 18, 'AVAX', 'Avalanche'),
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7', 18, 'WAVAX', 'Wrapped Avalanche')
 }
 
 // SEANCE
 export const SEANCE: ChainTokenMap = {
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', 18, 'SEANCE', 'Seance Circle'),  // 31 JUL
-  [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xD54Cf31D5653F4a062f5DA4C83170A5867d04442', 18, 'SEANCE', 'Seance Circle'),  // 31 JUL
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', 18, 'SEANCE', 'Seance Circle'),  // JUL21
+  [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xD54Cf31D5653F4a062f5DA4C83170A5867d04442', 18, 'SEANCE', 'Seance Circle'),  // JUL21
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0x97Ee3C9Cf4E5DE384f95e595a8F327e65265cC4E', 18, 'SEANCE', 'Seance Circle'),  // SEP22
 }
 
 // AURA
 export const AURA: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0xf4253A709733CdD8568542bD9eb4029516a0147A', 18, 'AURA', 'SoulAura'),  // JUL22
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0x385cC4Ce661a32891919153676efd4E208AAc3Bc', 18, 'AURA', 'SoulAura'),  // SEP22
 }
 
 // ENCHANT

@@ -1,21 +1,19 @@
 import {
-  // ChainId,
   Currency,
-  // CurrencyAmount,
-  // Ether,
   Percent,
   TradeType,
   Trade,
-} from '../../sdk'
+  ChainId,
+} from 'sdk'
 import React, { useCallback, useMemo } from 'react'
 import TransactionConfirmationModal, {
   ConfirmationModalContent,
   TransactionErrorContent,
-} from '../../modals/TransactionConfirmationModal'
+} from 'modals/TransactionConfirmationModal'
 import SwapModalFooter from './SwapModalFooter'
 import SwapModalHeader from './SwapModalHeader'
 
-import { formatNumberScale } from '../../functions'
+import { formatNumberScale } from 'functions/format'
 
 /**
  * Returns true if the trade requires a confirmation of details before we can submit it
@@ -42,6 +40,7 @@ export default function ConfirmSwapModal({
   onConfirm,
   onDismiss,
   recipient,
+  toChain,
   swapErrorMessage,
   isOpen,
   attemptingTxn,
@@ -54,8 +53,9 @@ export default function ConfirmSwapModal({
   attemptingTxn: boolean
   txHash: string | undefined
   recipient: string | null
+  toChain: ChainId
   allowedSlippage: Percent
-  minerBribe?: string
+  // minerBribe?: string
   onAcceptChanges: () => void
   onConfirm: () => void
   swapErrorMessage: string | undefined
@@ -72,12 +72,13 @@ export default function ConfirmSwapModal({
         trade={trade}
         allowedSlippage={allowedSlippage}
         recipient={recipient}
+        toChain={toChain}
         showAcceptChanges={showAcceptChanges}
         onAcceptChanges={onAcceptChanges}
       // minerBribe={minerBribe}
       />
     ) : null
-  }, [allowedSlippage, onAcceptChanges, recipient, showAcceptChanges, trade])
+  }, [allowedSlippage, onAcceptChanges, recipient, toChain, showAcceptChanges, trade])
 
   const modalBottom = useCallback(() => {
     return trade ? (

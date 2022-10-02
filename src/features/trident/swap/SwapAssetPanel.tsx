@@ -129,6 +129,8 @@ const WalletSwitch: FC<
 const InputPanel: FC<
   Pick<SwapAssetPanel, 'currency' | 'value' | 'onChange' | 'disabled' | 'priceImpact'> & { priceImpactCss?: string }
 > = ({ currency, value, onChange, disabled, priceImpact, priceImpactCss }) => {
+  const { chainId } = useActiveWeb3React()
+  // todo: fix below
   const usdcValue = useUSDCValue(tryParseAmount(value || '1', currency))
   const span = useRef<HTMLSpanElement | null>(null)
   const [width, setWidth] = useState(0)
@@ -186,7 +188,7 @@ const BalancePanel: FC<Pick<SwapAssetPanel, 'disabled' | 'currency' | 'onChange'
   onChange,
   spendFromWallet,
 }) => {
-  const { i18n } = useLingui()
+  // const { i18n } = useLingui()
   const { account } = useActiveWeb3React()
   const balance = useCoffinOrWalletBalance(account ? account : undefined, currency, spendFromWallet)
 

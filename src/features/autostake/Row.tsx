@@ -35,6 +35,7 @@ import Modal from 'components/Modal/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
 import Typography from 'components/Typography'
 import { useAutoStakeInfo } from 'hooks/useAPI'
+import { getChainColor, getChainColorCode, getChainLogoURL } from 'constants/chains'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -69,14 +70,13 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     const [depositValue, setDepositValue] = useState('')
     //   const [confirmed, setConfirmed] = useState(false)
     //   const [receiving, setReceiving] = useState(0)
-    const parsedDepositValue = tryParseAmount(depositValue, SOUL[250])
-    const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[250])
+    const parsedDepositValue = tryParseAmount(depositValue, SOUL[chainId])
+    const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[chainId])
 
     const [stakedBal, setStakedBal] = useState(0)
     const [earnedAmount, setEarnedAmount] = useState(0)
     const [unstakedBal, setUnstakedBal] = useState(0)
     // const [pending, setPending] = useState(0)
-
     const { autoStakeInfo } = useAutoStakeInfo()
     // const performanceFee = autoStakeInfo.performanceFee
     // const available = autoStakeInfo.available
@@ -91,21 +91,17 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     // show confirmation view before minting SOUL
     const [apy, setApy] = useState(0)
     // const { deposit, withdraw } = useStakeContract()
-    // const balance = useCurrencyBalance(account, SOUL[250])
+    // const balance = useCurrencyBalance(account, SOUL[chainId])
     // const stakedBalance = AutoStakeContract?.balanceOf(account)
 
-    /**
-     * Runs only on initial render/mount
-     */
+    // runs: on initial render/mount
     useEffect(() => {
         getApyAndLiquidity()
         fetchBals()
         fetchApproval()
     }, [account])
 
-    /**
-     * Runs on initial render/mount and reruns every 2 seconds
-     */
+    // runs: on initial render/mount & reruns every 2 seconds
     useEffect(() => {
         if (account) {
             const timer = setTimeout(() => {
@@ -121,9 +117,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
         }
     })
 
-    /**
-     * Opens the function panel dropdown
-     */
+    // opens: function panel dropdown
     const handleShow = () => {
         setShowing(!showing)
         if (!showing) {
@@ -254,20 +248,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
         }
     }
 
-    // /**
-    //  * Withdraw Shares
-    //  */
-    // const handleWithdraw = async (amount) => {
-    //     try {
-    //         const tx = await AutoStakeContract?.withdraw(account, parsedWithdrawValue?.quotient.toString())
-    //         // await tx?.wait().then(await setPending(pid))
-    //         await tx?.wait()
-    //     } catch (e) {
-    //         // alert(e.message)
-    //         console.log(e)
-    //     }
-    // }
-
     const handleWithdrawAll = async () => {
         try {
             let tx
@@ -280,9 +260,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
         }
     }
 
-    // /**
-    //  * Harvest Shares
-    //  */
+    // handles: reward harvest
     const handleHarvest = async () => {
         try {
             let tx
@@ -318,9 +296,9 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                             <Wrap>
                             <TokenLogo
                                 src={
-                                    'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/' +
-                                    pool.token1Address[chainId] +
-                                    '/logo.png'
+                                    `${getChainLogoURL(chainId)} +
+                                    ${pool.token1Address} +
+                                    '/logo.png`
                                 }
                                 alt="LOGO"
                                 width="44px"
@@ -408,8 +386,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                             </Wrap>
                             <AssetInput
                             currencyLogo={true}
-                                currency={SOUL[250]}
-                                currencyAddress={SOUL[250].address}
+                                currency={SOUL[chainId]}
+                                currencyAddress={SOUL[chainId].address}
                                 value={depositValue}
                                 onChange={setDepositValue}
                                 showMax={false}
@@ -453,45 +431,14 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                 <FunctionBox>
                                     <AssetInput
                                         currencyLogo={false}
-                                        currency={SOUL[250]}
-                                        currencyAddress={SOUL[250].address}
+                                        currency={SOUL[chainId]}
+                                        currencyAddress={SOUL[chainId].address}
                                         value={depositValue}
                                         onChange={setDepositValue}
                                         showMax={false}
                                         showBalance={true}
                                     />
-                                    {/* <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
-                                        <Text fontSize=".9rem" padding="0" textAlign="left" color="#FFFFFF">
-                                                &nbsp;
-                                                {Number(stakedBal) === 0
-                                                    ? '0'
-                                                    : Number(stakedBal) < 0
-                                                        ? '<0'
-                                                        : Number(stakedBal)
-                                                            .toFixed(0)
-                                                            .toString()
-                                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
-                                                ({(Number(stakedBal * soulPrice) !== 0
-                                                    ? `$${Number(stakedBal * soulPrice)
-                                                        .toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}` : '0')})
-                                            </Text>
 
-                                            <Text fontSize=".9rem" padding="0" textAlign="left" color="#FFFFFF">
-                                                MAX:&nbsp;
-                                                {Number(unstakedBal) === 0
-                                                    ? '0'
-                                                    : Number(unstakedBal) < 0
-                                                        ? '<0'
-                                                        : Number(unstakedBal)
-                                                            .toFixed(0)
-                                                            .toString()
-                                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
-                                                ({(Number(unstakedBal * soulPrice) !== 0
-                                                    ? `$${Number(unstakedBal * soulPrice)
-                                                        .toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}` : '0')})
-                                                <br />
-                                            </Text>
-                                        </Wrap> */}
                                     <Wrap padding="0" margin="0" display="flex flex-cols">
                                         <SubmitButton
                                             height="2rem"
@@ -504,12 +451,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                         >
                                             DEPOSIT SOUL
                                         </SubmitButton>
-                                        {/* <SubmitButton height="2rem" 
-                                        primaryColor="#3Eff3E"
-                                        color="black"
-                                        onClick={() => handleApprove()}>
-                                        APPROVE MORE
-                                        </SubmitButton> */}
                                     </Wrap>
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
@@ -517,37 +458,12 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                             primaryColor="#A654DC"
                                             color="white"
                                             margin=".5rem 0 .5rem 0"
-                                            // onClick={() => handleHarvest()
                                             onClick={() => setShowHarvestConfirmation(true)
                                             }
                                         >
                                             COMPOUND REWARDS
-                                            {/* {earnedAmount !== 0 ? `($${(earnedAmount * soulPrice).toFixed(2)})` : ''} */}
                                         </SubmitButton>
                                     </Wrap>
-                                    {/* <AssetInput
-                                        currencyLogo={true}
-                                        currency={SOUL[250]}
-                                        currencyAddress={SOUL[250].address}
-                                        value={withdrawValue}
-                                        onChange={setWithdrawValue}
-                                        showMax={false}
-                                        showBalance={false}
-                                    /> */}
-                                    
-                                    {/* <Wrap padding="0" margin="0" display="flex">
-                                        <SubmitButton
-                                            height="2rem"
-                                            primaryColor="#B485FF"
-                                            color="black"
-                                            margin=".5rem 0 .5rem 0"
-                                            onClick={() =>
-                                                handleWithdraw(withdrawValue)
-                                            }
-                                        >
-                                            WITHDRAW
-                                        </SubmitButton>
-                                    </Wrap> */}
                                 <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
                                         height="2rem"
@@ -555,7 +471,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                         color="black"
                                         margin=".5rem 0 .5rem 0"
                                         onClick={() =>
-                                            setShowWithdrawConfirmation(true)
+                            setShowWithdrawConfirmation(true)
                                         }
                                     >
                                         WITHDRAW ALL
@@ -604,21 +520,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
           >
             CLOSE MESSAGE
           </SubmitButton>
-          {/* <Button
-            color="red"
-            size="lg"
-            onClick={() => {
-              if (window.prompt(`Please type the word "confirm" to enable expert mode.`) === 'confirm') {
-                setShowConfirmation(false)
-              }
-              setShowConfirmation(false)
-            }}
-          >
-            <Typography variant="lg" id="confirm-expert-mode">
-              { `I UNDERSTAND THESE TERMS` }
-            </Typography> */}
-
-          {/* </Button> */}
         </div>
       </Modal>
             <Modal isOpen={showWithdrawConfirmation} onDismiss={
@@ -636,7 +537,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
           </Typography>
           <SubmitButton
             height="2.5rem"
-            primaryColor="#EE82EE"
+            primaryColor={getChainColor(chainId)}
             color="black"
             onClick={() =>
               // setShowConfirmation(true)
@@ -655,21 +556,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
           >
             CLOSE MESSAGE
           </SubmitButton>
-          {/* <Button
-            color="red"
-            size="lg"
-            onClick={() => {
-              if (window.prompt(`Please type the word "confirm" to enable expert mode.`) === 'confirm') {
-                setShowConfirmation(false)
-              }
-              setShowConfirmation(false)
-            }}
-          >
-            <Typography variant="lg" id="confirm-expert-mode">
-              { `I UNDERSTAND THESE TERMS` }
-            </Typography> */}
-
-          {/* </Button> */}
         </div>
       </Modal>
         </>

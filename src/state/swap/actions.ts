@@ -1,4 +1,5 @@
 import { createAction } from '@reduxjs/toolkit'
+import { ChainId } from 'sdk'
 
 export enum Field {
   INPUT = 'INPUT',
@@ -17,6 +18,8 @@ export const replaceSwapState = createAction<{
   inputCurrencyId?: string
   outputCurrencyId?: string
   recipient?: string | null
+  toChain?: ChainId
 }>('swap/replaceSwapState')
 export const setRecipient = createAction<{ recipient: string | null}>('swap/setRecipient')
+export const setToChain = createAction<{ toChain: ChainId | null}>('swap/setToChain')
 export const setFromCoffinBalance = createAction<boolean>('swap/setFromCoffinBalance')

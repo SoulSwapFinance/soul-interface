@@ -10,6 +10,8 @@ import React, { FC, useState } from 'react'
 import { Button } from '../Button'
 import QuestionHelper from '../QuestionHelper'
 import Typography from '../Typography'
+import { getChainColorCode } from 'constants/chains'
+import { useActiveWeb3React } from 'services/web3'
 
 enum SlippageError {
   InvalidInput = 'InvalidInput',
@@ -28,7 +30,7 @@ export interface TransactionSettingsProps {
 
 const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage, trident = false }) => {
   const { i18n } = useLingui()
-
+  const { chainId } = useActiveWeb3React()
   const userSlippageTolerance = useUserSlippageTolerance()
   const setUserSlippageTolerance = useSetUserSlippageTolerance()
 
@@ -91,12 +93,12 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
       <div className="grid gap-2">
         <div className="flex items-center">
           <Typography variant="xs" weight={700} className="text-high-emphesis">
-            {i18n._(t`Slippage tolerance`)}
+            {i18n._(t`Slippage`)}
           </Typography>
 
           <QuestionHelper
             text={i18n._(
-              t`Your transaction will revert if the price changes unfavorably by more than this percentage.`
+              t`Transactions revert if price changes unfavorably by more than this percentage.`
             )}
           />
         </div>
@@ -108,7 +110,7 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
                 : tooLow || tooHigh
                 ? 'border-yellow/60'
                 : userSlippageTolerance !== 'auto'
-                ? 'border-purple'
+                ? `border-${getChainColorCode(chainId)}`
                 : 'border-dark-800',
               'border-2 h-[36px] flex items-center px-2 rounded bg-dark-1000/40'
             )}
@@ -143,7 +145,7 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
           <div>
             <Button
               size="sm"
-              color={userSlippageTolerance === 'auto' ? 'purple' : 'gray'}
+              color={userSlippageTolerance === 'auto' ? `${getChainColorCode(chainId)}` : 'gray'}
               variant="outlined"
               onClick={() => parseSlippageInput('')}
             >
@@ -162,10 +164,10 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
           >
             <div>
               {slippageError === SlippageError.InvalidInput
-                ? i18n._(t`Enter a valid slippage percentage`)
+                ? i18n._(t`Invalid Slippage`)
                 : slippageError === SlippageError.RiskyLow
-                ? i18n._(t`Your transaction may fail`)
-                : i18n._(t`Your transaction may be frontrun`)}
+                ? i18n._(t`Failure Risk`)
+                : i18n._(t`Frontrun Risk`)}
             </div>
           </Typography>
         ) : null}
@@ -175,10 +177,10 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
         <div className="grid gap-2">
           <div className="flex items-center">
             <Typography variant="xs" weight={700} className="text-high-emphesis">
-              {i18n._(t`Transaction deadline`)}
+              {i18n._(t`Deadline`)}
             </Typography>
 
-            <QuestionHelper text={i18n._(t`Your transaction will revert if it is pending for more than this long.`)} />
+            <QuestionHelper text={i18n._(t`Transaction reverts if pending past deadline.`)} />
           </div>
           <div className="flex items-center gap-2">
             <input

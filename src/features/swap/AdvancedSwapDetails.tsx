@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Percent } from 'sdk'
+import { ChainId, Percent } from 'sdk'
 import FormattedPriceImpact from 'components/FormattedPriceImpact'
 import { HeadlessUiModal } from 'components/Modal'
 import QuestionHelper from 'components/QuestionHelper'
@@ -14,9 +14,10 @@ export interface AdvancedSwapDetailsProps {
   trade?: TradeUnion
   allowedSlippage: Percent
   recipient?: string
+  toChain?: ChainId
 }
 
-const AdvancedSwapDetails: FC<AdvancedSwapDetailsProps> = ({ trade, recipient, allowedSlippage }) => {
+const AdvancedSwapDetails: FC<AdvancedSwapDetailsProps> = ({ trade, recipient, toChain, allowedSlippage }) => {
   const { i18n } = useLingui()
 
   const { priceImpact } = useMemo(() => {
@@ -53,6 +54,17 @@ const AdvancedSwapDetails: FC<AdvancedSwapDetailsProps> = ({ trade, recipient, a
           </div>
           <Typography variant="sm">
             {recipient && isAddress(recipient) ? shortenAddress(recipient) : recipient}
+          </Typography>
+        </div>
+      )}
+      
+      {toChain && (
+        <div className="flex justify-between items-center">
+          <div className="flex gap-1 items-center">
+            <Typography variant="sm">{i18n._(t`Destination Chain`)}</Typography>
+          </div>
+          <Typography variant="sm">
+            {toChain && toChain}
           </Typography>
         </div>
       )}

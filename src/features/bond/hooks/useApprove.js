@@ -10,7 +10,7 @@ function useApproveContract(tokenAddress) {
       const result = await contract.balanceOf(address)
       return result
     } catch (e) {
-      console.log(e)
+      // console.log(e)
       // alert(e.message)
     }
   }
@@ -24,7 +24,7 @@ function useApproveContract(tokenAddress) {
       return result
     } 
     catch (e) {
-      console.log(e)
+      // console.log(e)
       // alert(e.message)
     }
   }
@@ -35,7 +35,7 @@ function useApproveContract(tokenAddress) {
       // console.log('allowance for user', result)
       return result
     } catch (e) {
-      console.log(e)
+      // console.log(e)
       // alert(e.message)
     }
   }

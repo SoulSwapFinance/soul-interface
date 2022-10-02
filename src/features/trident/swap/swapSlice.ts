@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { ChainId } from 'sdk'
 import { AppState } from 'state'
 
 export enum TypedField {
@@ -12,6 +13,7 @@ export interface SwapState {
   spendFromWallet: boolean
   receiveToWallet: boolean
   recipient?: string
+  toChain?: ChainId
   attemptingTxn: boolean
   showReview: boolean
   error?: string
@@ -23,6 +25,7 @@ const initialState: SwapState = {
   spendFromWallet: true,
   receiveToWallet: true,
   recipient: undefined,
+  toChain: undefined,
   attemptingTxn: false,
   showReview: false,
   error: undefined,
@@ -48,6 +51,9 @@ export const swapSlice = createSlice({
     setRecipient: (state, action: PayloadAction<string | undefined>) => {
       state.recipient = action.payload
     },
+    setToChain: (state, action: PayloadAction<ChainId | undefined>) => {
+      state.toChain = action.payload
+    },
     setAttemptingTxn: (state, action: PayloadAction<boolean>) => {
       state.attemptingTxn = action.payload
     },
@@ -64,6 +70,7 @@ export const {
   setShowReview,
   setAttemptingTxn,
   setRecipient,
+  setToChain,
   setSpendFromWallet,
   setReceiveToWallet,
   setTridentSwapState,

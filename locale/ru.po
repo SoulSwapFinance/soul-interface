@@ -64,6 +64,9 @@ msgstr ""
 msgid "ALL"
 msgstr ""
 
+msgid "APPROVE"
+msgstr ""
+
 msgid "APR"
 msgstr ""
 
@@ -172,13 +175,13 @@ msgstr ""
 msgid "Auto"
 msgstr ""
 
+msgid "Autocompound your Soul Rewards."
+msgstr ""
+
 msgid "Available"
 msgstr ""
 
 msgid "Available Actions"
-msgstr ""
-
-msgid "Available Networks"
 msgstr ""
 
 msgid "Avg. APY"
@@ -477,6 +480,9 @@ msgstr ""
 msgid "Deposits"
 msgstr ""
 
+msgid "Destination Chain"
+msgstr ""
+
 msgid "Disable Multihops"
 msgstr ""
 
@@ -499,9 +505,6 @@ msgid "Earn"
 msgstr ""
 
 msgid "Earned"
-msgstr ""
-
-msgid "Either return to the {link}, or change to an available network."
 msgstr ""
 
 msgid "Enable Expert Mode"
@@ -788,9 +791,6 @@ msgid "Links"
 msgstr ""
 
 msgid "Liquidity"
-msgstr ""
-
-msgid "Liquidity Composition"
 msgstr ""
 
 msgid "Liquidity Positions"
@@ -1157,6 +1157,9 @@ msgstr ""
 msgid "Restricts swaps to direct pairs only."
 msgstr ""
 
+msgid "Return"
+msgstr ""
+
 msgid "Rewards"
 msgstr ""
 
@@ -1164,9 +1167,6 @@ msgid "Rewards:"
 msgstr ""
 
 msgid "Ritual (Fee) Duration"
-msgstr ""
-
-msgid "Roll it back - this feature is not yet supported on {0}."
 msgstr ""
 
 msgid "Romanian"
@@ -1210,9 +1210,6 @@ msgid "SOUL ECONOMY"
 msgstr ""
 
 msgid "SOUL TREASURY"
-msgstr ""
-
-msgid "STAKE"
 msgstr ""
 
 msgid "Sacrifice"
@@ -1308,9 +1305,6 @@ msgstr ""
 msgid "Stake SOUL to borrow SEANCE"
 msgstr ""
 
-msgid "Stake Soul for Soul."
-msgstr ""
-
 msgid "Stake for Seance"
 msgstr ""
 
@@ -1374,6 +1368,9 @@ msgid "Supply Distribution"
 msgstr ""
 
 msgid "Supplying {0} {1} and {2} {3}"
+msgstr ""
+
+msgid "Supported On"
 msgstr ""
 
 msgid "Swap"
@@ -1529,6 +1526,9 @@ msgid "Tutorials"
 msgstr ""
 
 msgid "UNWRAP"
+msgstr ""
+
+msgid "Unavailable on {0}."
 msgstr ""
 
 msgid "Underworld Assets"
@@ -1786,9 +1786,6 @@ msgstr ""
 msgid "forum discussion"
 msgstr ""
 
-msgid "home page"
-msgstr ""
-
 msgid "into your wallet or CoffinBox."
 msgstr ""
 
@@ -1823,6 +1820,9 @@ msgid "{0} tokens"
 msgstr ""
 
 msgid "{0}/{1} Burned"
+msgstr ""
+
+msgid "{link} or change network."
 msgstr ""
 
 msgid "{text}"

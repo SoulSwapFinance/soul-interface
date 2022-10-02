@@ -1,7 +1,7 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { Zero } from '@ethersproject/constants'
 import { ChainId } from 'sdk'
-import { useSushiRollContract } from 'hooks/useContract'
+import { useSoulSwapContract } from 'hooks/useContract'
 import { useActiveWeb3React } from 'services/web3'
 import { signERC2612Permit } from 'eth-permit'
 import { useCallback } from 'react'
@@ -9,9 +9,9 @@ import ReactGA from 'react-ga'
 
 import LPToken from './LPToken'
 
-const useSushiRoll = (version: 'v1' | 'v2' = 'v2') => {
+const useSoulSwap = (version: 'v1' | 'v2' = 'v2') => {
   const { chainId, library, account } = useActiveWeb3React()
-  const sushiRoll = useSushiRollContract(version)
+  const soulSwap = useSoulSwapContract(version)
   const ttl = 60 * 20
 
   let from = ''
@@ -24,12 +24,12 @@ const useSushiRoll = (version: 'v1' | 'v2' = 'v2') => {
 
   const migrate = useCallback(
     async (lpToken: LPToken, amount: BigNumber) => {
-      if (sushiRoll) {
+      if (soulSwap) {
         const deadline = Math.floor(new Date().getTime() / 1000) + ttl
         const args = [lpToken.tokenA.address, lpToken.tokenB.address, amount, Zero, Zero, deadline]
 
-        const gasLimit = await sushiRoll.estimateGas.migrate(...args)
-        const tx = sushiRoll.migrate(...args, {
+        const gasLimit = await soulSwap.estimateGas.migrate(...args)
+        const tx = soulSwap.migrate(...args, {
           gasLimit: gasLimit.mul(120).div(100),
         })
 
@@ -42,18 +42,18 @@ const useSushiRoll = (version: 'v1' | 'v2' = 'v2') => {
         return tx
       }
     },
-    [sushiRoll, ttl, from]
+    [soulSwap, ttl, from]
   )
 
   const migrateWithPermit = useCallback(
     async (lpToken: LPToken, amount: BigNumber) => {
-      if (account && sushiRoll) {
+      if (account && soulSwap) {
         const deadline = Math.floor(new Date().getTime() / 1000) + ttl
         const permit = await signERC2612Permit(
           library,
           lpToken.address,
           account,
-          sushiRoll.address,
+          soulSwap.address,
           amount.toString(),
           deadline
         )
@@ -69,8 +69,8 @@ const useSushiRoll = (version: 'v1' | 'v2' = 'v2') => {
           permit.s,
         ]
 
-        const gasLimit = await sushiRoll.estimateGas.migrateWithPermit(...args)
-        const tx = await sushiRoll.migrateWithPermit(...args, {
+        const gasLimit = await soulSwap.estimateGas.migrateWithPermit(...args)
+        const tx = await soulSwap.migrateWithPermit(...args, {
           gasLimit: gasLimit.mul(120).div(100),
         })
 
@@ -83,7 +83,7 @@ const useSushiRoll = (version: 'v1' | 'v2' = 'v2') => {
         return tx
       }
     },
-    [account, library, sushiRoll, ttl, from]
+    [account, library, soulSwap, ttl, from]
   )
 
   return {
@@ -92,4 +92,4 @@ const useSushiRoll = (version: 'v1' | 'v2' = 'v2') => {
   }
 }
 
-export default useSushiRoll
+export default useSoulSwap

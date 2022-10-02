@@ -5,47 +5,51 @@ import Typography from 'components/Typography'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import styled from 'styled-components'
-import { formatNumber } from 'functions'
+import { classNames, formatNumber } from 'functions'
 import DashboardDonutChart from 'components/Dashboard/DonutChart'
 import DashboardChartLegend from 'components/Dashboard/ChartLegend'
-import { useSeancePrice, useSoulPrice } from 'hooks/getPrices'
+import { useSoulPrice } from 'hooks/getPrices'
 import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
-import { useSoulInfo, useBondInfo } from 'hooks/useAPI'
+import { useSoulInfo, useBondInfo, usePriceUSD, useTokenInfo } from 'hooks/useAPI'
+import { ChainId, NATIVE, SOUL_ADDRESS } from 'sdk'
+import { useActiveWeb3React } from 'services/web3'
+import { getChainInfo, getChainColorCode } from 'constants/chains'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
+  // const seancePrice = useSeancePrice()
+  const { chainId } = useActiveWeb3React()
+  const { tokenInfo } = useTokenInfo(SOUL_ADDRESS[chainId])
   // const bondInfo = useBondTVL()
 
   // let bondsTvl = bondInfo?.reduce((previousValue, currentValue) => {
   //   return previousValue + currentValue?.tvl
   // }, 0)
   // Prices //
-  const soulPrice = useSoulPrice()
-  const seancePrice = useSeancePrice()
+  const soulPrice = Number(tokenInfo.price) // usePriceUSD(SOUL_ADDRESS[chainId])
 
   // GET SOUL ECONOMY BALANCES //
   const { soulInfo } = useSoulInfo()
   const stakedSoul = Number(soulInfo.stakedSoul)
   const soulBalance = Number(soulInfo.SoulBalance)
   const totalSupply = Number(soulInfo.supply)
-  const totalSupplyString = Number(soulInfo.supply).toFixed(0).toString().substring(0,2) + 'M'
-  // console.log('totalSupplyString:%s', totalSupplyString)
-  const circulatingSupply = totalSupply - soulBalance - stakedSoul
+  const circulatingSupply = Number(totalSupply - soulBalance - stakedSoul)
+  
   // console.log('totalSupply:%s', totalSupply)
   const daoLiquidityValue = Number(soulInfo.totalLiquidityValue)
 
   // GET RESERVES BALANCES //
   const treasurySoulValue = soulBalance * soulPrice
-  const treasuryFantomValue = Number(soulInfo.NativeValue)
-  // const treasuryReserveValue = treasurySoulValue + treasuryFantomValue
+  const treasuryNativeValue = Number(soulInfo.NativeValue)
+  // const treasuryReserveValue = treasurySoulValue + treasuryNativeValue
   
   // GET LIQUIDITY BALANCES //
   const { bondInfo } = useBondInfo()
   const treasuryLiquidityValue = Number(soulInfo.totalLiquidityValue)
   // const bondedValue = Number(bondsTvl)
-  const bondedValue = Number(bondInfo.totalValue)
+  const bondedValue = [ChainId.FANTOM].includes(chainId) ? Number(bondInfo.totalValue) : 0
 
   const NativeSoulValue = Number(soulInfo.NativeSoulValue) + Number(bondInfo.NativeSoulValue)
   const SoulUsdcValue = Number(soulInfo.SoulUsdcValue) + Number(bondInfo.SoulUsdcValue)
@@ -58,7 +62,7 @@ export default function Dashboard() {
   const NativeSeanceValue = Number(soulInfo.NativeSeanceValue) + Number(bondInfo.NativeSeanceValue)
 
   // const OtherValue = NativeSeanceValue + NativeBinanceValue + SoulUsdcValue + NativeDaiValue
-  const FantomPairsValue = NativeSoulValue + NativeBitcoinValueValue + NativeDaiValue + NativeBinanceValue + NativeSeanceValue + NativeEthereumValue
+  const NativePairsValue = NativeSoulValue + NativeBitcoinValueValue + NativeDaiValue + NativeBinanceValue + NativeSeanceValue + NativeEthereumValue
   const SoulPairsValue = NativeSoulValue + SoulUsdcValue
   const SeancePairsValue = NativeSeanceValue
   const UsdcPairsValue = UsdcDaiValue + NativeUsdcValue + SoulUsdcValue
@@ -68,7 +72,7 @@ export default function Dashboard() {
   const EthereumPairsValue = NativeEthereumValue
 
   const SoulComposition = SoulPairsValue / 2
-  const FantomComposition = FantomPairsValue / 2
+  const NativeComposition = NativePairsValue / 2
   const UsdcComposition = UsdcPairsValue / 2
   const DaiComposition = DaiPairsValue / 2
   const BitcoinComposition = BitcoinPairsValue / 2
@@ -92,9 +96,9 @@ export default function Dashboard() {
     },
     {
       "label": "FANTOM",
-      "angle": FantomComposition,
+      "angle": NativeComposition,
       "color": "#B485FF",
-      "percent": ((FantomComposition / liquidityValue) * 100).toFixed()
+      "percent": ((NativeComposition / liquidityValue) * 100).toFixed()
     },
     {
         "label": "BTC, ETH, & BNB",
@@ -127,8 +131,9 @@ export default function Dashboard() {
     //     "percent": ((BinanceComposition / liquidityValue) * 100).toFixed()
     // },
   ]
-
-  const treasuryValueData = [
+  let treasuryValueData
+chainId == ChainId.FANTOM ?
+   treasuryValueData = [
     {
         "label": "BONDED (USD)",
         "angle": bondedValue,
@@ -148,10 +153,30 @@ export default function Dashboard() {
         "percent": ((treasurySoulValue / treasuryValue) * 100).toFixed()
     },
     {
-        "label": "FTM (USD)",
-        "angle": treasuryFantomValue,
+        "label": `${NATIVE[chainId].symbol.toUpperCase()} (USD)`,
+        "angle": treasuryNativeValue,
         "color": "#B425FF",
-        "percent": ((treasuryFantomValue / treasuryValue) * 100).toFixed()
+        "percent": ((treasuryNativeValue / treasuryValue) * 100).toFixed()
+    },
+  ]
+  : treasuryValueData = [
+    {
+        "label": "LIQUIDITY (USD)",
+        "angle": treasuryLiquidityValue,
+        "color": "#B465FF",
+        "percent": ((treasuryLiquidityValue / treasuryValue) * 100).toFixed()
+    },
+    {
+        "label": "SOUL (USD)",
+        "angle": treasurySoulValue,
+        "color": "#B445FF",
+        "percent": ((treasurySoulValue / treasuryValue) * 100).toFixed()
+    },
+    {
+        "label": `${NATIVE[chainId].symbol.toUpperCase()} (USD)`,
+        "angle": treasuryNativeValue,
+        "color": "#B425FF",
+        "percent": ((treasuryNativeValue / treasuryValue) * 100).toFixed()
     },
   ]
 
@@ -205,35 +230,35 @@ const HideOnMobile = styled.div`
         </HideOnMobile>
 
       <div className="flex ml-4 mr-4 mb-4 gap-1 items-center justify-center">
-        <Button variant="bordered" color="purple" size="lg">
+        <Button variant="bordered" color={getChainColorCode(chainId)} size="lg" className={classNames([ChainId.FANTOM].includes(chainId) ? '' : 'hidden')}>
           <NavLink href={'/seance'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Stake </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="bordered" color="purple" size="lg">
+        <Button variant="bordered" color={getChainColorCode(chainId)} size="lg">
           <NavLink href={'/summoner'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Farm </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="bordered" color="purple" size="lg">
+        <Button variant="bordered" color={getChainColorCode(chainId)} size="lg">
           <NavLink href={'/bonds'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Bond </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="bordered" color="purple" size="lg">
+        <Button variant="bordered" color={getChainColorCode(chainId)} size="lg" className={chainId == ChainId.FANTOM ? '' : 'hidden'}>
           <NavLink href={'/underworld'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Lend </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="bordered" color="purple" size="lg">
+        <Button variant="bordered" color={getChainColorCode(chainId)} size="lg">
           <NavLink href={'/autostake'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Vault </span>
@@ -243,92 +268,11 @@ const HideOnMobile = styled.div`
 
         </div>
       <div className="flex text-center items-center">
-      {/* <Applications /> */}
       </div>
-      {/* <div className="block">
-      </div>
-      <div className="inline-block column-count-1 xl:column-count-2">
-        <div className="p-6 shadow-4 bg-dark-1000 rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 mb-6 xl:mr-1.5">
-          <Typography 
-            // variant="md" 
-            weight={600} lineHeight={28} textColor="text-accent" 
-            fontFamily={'semi-bold'}
-            >
-            {i18n._(t`SoulSwap Details`)}
-          </Typography>
-          <div>
-            <Typography
-              className="flex gap-1 items-center"
-              fontFamily={'medium'}
-              textColor={'text-white'}
-            >
-              {i18n._(t`Total Value Locked`)}
-              <QuestionHelper
-                width={'small'}
-                text={<div className="flex flex-col space-y-2">The sum of all assets staked in Soul protocol.</div>}
-              />
-            </Typography>
-            <Typography variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {formatNumber(tvl, true)}
-            </Typography>
-          </div>
-          <div>
-            <AutoSizer disableHeight>
-              {({ width }) => <DashboardLineGraph width={width} height={110} data={tvlData} theme={'dark'} />}
-            </AutoSizer>
-          </div>
-          <div className="h-px my-1 bg-dark-1000" />
-          <div>
-            <Typography
-              className="flex gap-1 items-center"
-              fontFamily={'medium'}
-              textColor={'text-white'}
-            >
-              {i18n._(t`24h Trading Volume`)}
-              <QuestionHelper
-                width={'small'}
-                text={
-                  <div className="flex flex-col space-y-2">
-                    The sum of all trades that have occurred on SoulSwap in the last 24 hours.
-                  </div>
-                }
-              />
-            </Typography>
-            <Typography variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {formatNumber(volume, true)}
-            </Typography>
-          </div>
-          <div>
-            <AutoSizer disableHeight>
-              {({ width }) => <DashboardLineGraph width={width} height={110} data={tradingVolumeData} theme={'dark'} />}
-            </AutoSizer>
-          </div>
-          <div className="h-px my-1 bg-dark-1000" />
-          <div>
-            <Typography
-              className="flex gap-1 items-center"
-              fontFamily={'medium'}
-              textColor={'text-white'}
-            >
-              {i18n._(t`Market Cap`)}
-            </Typography>
-            <Typography variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {formatNumber(soulMarketCap, true)}
-            </Typography>
-          </div>
-          <div>
-            <AutoSizer disableHeight>
-              {({ width }) => <DashboardLineGraph width={width} height={110} data={marketCapData} theme={'dark'} />}
-            </AutoSizer>
-              </div>
-            </div>  */}
-
-
         <div className="p-1 shadow-4 bg-[#A654DD] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
         <div className="bg-dark-1000 p-4">
           <Typography
             className="text-2xl flex gap-1 justify-center items-center"
-            // variant="md"
             weight={600}
             lineHeight={48}
             textColor="text-accent text-[#FFFFFF]"
@@ -341,7 +285,7 @@ const HideOnMobile = styled.div`
             <Typography 
               className={'flex text-xl justify-center items-baseline'}
               fontFamily={'medium'} textColor={'text-white'}>
-              Market Capitalization
+              {getChainInfo(chainId, 'NAME')} Market
             </Typography>
             <div className="h-px my-1 mb-3 bg-dark-1000" />
             <Typography
@@ -350,22 +294,21 @@ const HideOnMobile = styled.div`
                { formatNumber(soulPrice * totalSupply, true, false, 0) }
             </Typography>
           </div>
-            <div className="md:hidden h-px my-4 mb-3 bg-dark-1000" />
+          <div className="lg:hidden h-px my-4 mb-3 bg-dark-1000" />
             <div>
-              <div className="md:hidden grid grid-cols-2 space-between-3">
+              <div className="lg:hidden grid grid-cols-2 space-between-3">
                 <Typography
-                  className="flex gap-1 text-xl justify-center items-center mb-3"
+                  className="flex gap-1 text-lg justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
-                  Soul Price
+                  Market Price
                 </Typography>
                 <Typography
-                  className="flex gap-1 text-xl justify-center items-center mb-3"
+                  className="flex gap-1 text-lg justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
-                  Seance Price
+                  {getChainInfo(chainId, 'NAME')} Supply
                 </Typography>
               </div>
-
-              <div className="md:hidden grid grid-cols-2 space-between-3">
+              <div className="lg:hidden grid grid-cols-2 space-between-3">
                 <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
@@ -374,84 +317,38 @@ const HideOnMobile = styled.div`
                 <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  { formatNumber(seancePrice, true, false, 0) }
+               { formatNumber(totalSupply, false, true) }
                 </Typography>
               </div>
             </div>
           <div>
-          <div className="md:hidden h-px my-4 bg-dark-1000" />
-            <div className="md:hidden grid grid-cols-2 space-between-3">
-            <Typography 
-              className="flex gap-1 text-lg justify-center items-center mb-3"
-              lineHeight={48} fontFamily={'medium'}>
-              Current Supply
-            </Typography>
-            <Typography 
-              className="flex gap-1 text-lg justify-center items-center mb-3"
-              lineHeight={48} fontFamily={'medium'}>
-               Maximum Supply
-            </Typography>
-            </div>
-            <div className="md:hidden grid grid-cols-2 space-between-3">
-            <Typography 
-            className={'flex justify-center items-baseline'}
-            variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               { totalSupplyString }
-            </Typography>
-            <Typography 
-            className={'flex justify-center items-baseline'}
-            variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {'250M'}
-            </Typography>
-            </div>
-            </div>
-
+        </div>
             <div className="h-px my-4 bg-dark-1000" />
             <div>
-              <div className="hidden md:grid md:grid-cols-4 space-between-3">
+              <div className="hidden lg:grid lg:grid-cols-2 space-between-3">
                 <Typography
                   className="flex gap-1 text-xl justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
-                  Soul Price
-                </Typography>
-                <Typography
-                  className="flex gap-1 text-xl justify-center items-center mb-3"
-                  lineHeight={48} fontFamily={'medium'}>
-                  Seance Price
+                  Market Price
                 </Typography>
                 <Typography
                   className="flex gap-1 text-lg justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
                   Total Supply
                 </Typography>
-                <Typography
-                  className="flex gap-1 text-lg justify-center items-center mb-3"
-                  lineHeight={48} fontFamily={'medium'}>
-                  Max Supply
-                </Typography>
               </div>
             </div>
             <div>
-              <div className="hidden md:grid md:grid-cols-4 space-between-3">
+            <div className="hidden lg:grid lg:grid-cols-2 space-between-3">
               <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
                   { formatNumber(soulPrice, true, false, 0) }
                 </Typography>
-              <Typography
-                  className={'flex justify-center items-baseline'}
-                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  { formatNumber(seancePrice, true, false, 0) }
-                </Typography>
                 <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  { totalSupplyString }
-                </Typography>
-                <Typography
-                  className={'flex justify-center items-baseline'}
-                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  { '250M' }
+                  { formatNumber(totalSupply, false, true) }
                 </Typography>
               </div>
               <div className="h-px my-4 bg-dark-1000" />
@@ -464,7 +361,7 @@ const HideOnMobile = styled.div`
                   {i18n._(t`Supply Distribution`)}
                 </Typography>
                 <div className="h-px my-4 bg-dark-1000" />
-              </div>
+            </div>
 
           {/* SOUL DISTRIBUTION CHART */}
 
@@ -541,7 +438,7 @@ const HideOnMobile = styled.div`
             />
               </div>
             </div>
-          <div>
+          {/* <div>
             <Typography
               className="flex mt-8 text-2xl justify-center gap-1 items-center"
               fontFamily={'medium'}
@@ -550,8 +447,8 @@ const HideOnMobile = styled.div`
               {i18n._(t`Liquidity Composition`)}
             </Typography>
             <div className="h-px my-4 bg-dark-1000" />
-          </div>
-          <div className="flex justify-center flex-col gap-3 sm:flex-row">
+          </div> */}
+          {/* <div className="flex justify-center flex-col gap-3 sm:flex-row">
             <DashboardDonutChart width={200} data={liquidityValueData} />
             <div className="flex justify-center flex-col gap-3 sm:flex-row">
             <DashboardChartLegend
@@ -562,7 +459,7 @@ const HideOnMobile = styled.div`
               theme={'dark'}
             />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

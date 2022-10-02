@@ -1,4 +1,4 @@
-import { SOUL_ADDRESS, WNATIVE } from 'sdk'
+import { ChainId, SOUL_ADDRESS, WNATIVE } from 'sdk'
 import Search from 'components/Search'
 import MineList from 'features/mines/MineList'
 import Menu from 'features/mines/components/MineMenu'
@@ -9,7 +9,7 @@ import React, { useContext, useState } from 'react'
 import { POOLS } from 'constants/farms'
 import { getAddress } from '@ethersproject/address'
 import { useTVL } from 'hooks/useV2Pairs'
-import { useSummonerInfo } from 'hooks'
+import { useSummonerContract, useSummonerInfo } from 'hooks'
 import { TridentBody, TridentHeader } from 'layouts/Trident'
 import { usePositions } from 'features/mines/hooks'
 import { Button } from 'components/Button'
@@ -20,26 +20,27 @@ import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
 import { useSoulPrice } from 'hooks/getPrices'
 import { useFarms } from 'services/graph/hooks'
+import { usePriceUSD } from 'hooks/useAPI'
+import { getChainColor } from 'constants/chains'
 
 export default function Mines(): JSX.Element {
-  const { chainId } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const router = useRouter()
   const [pendingTx, setPendingTx] = useState(false)
 
-  const soulPrice = useSoulPrice()
-  // const ftmPrice = useFantomPrice()
+  const soulPrice = Number(usePriceUSD(SOUL_ADDRESS[chainId]))
 
   const type = router.query?.filter === null ? 'active' : (router.query?.filter as string)
-  // const rewards = useFarmRewards()
 
   const farms = useFarms()
 
   const { harvest } = useSummoner()
 
+  const SummonerContract = useSummonerContract()
+
   const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
     return { ...POOLS[chainId][key], lpToken: key }
   })
-
   
   const summonerInfo = useSummonerInfo()
   const positions = usePositions()
@@ -135,6 +136,8 @@ export default function Mines(): JSX.Element {
     stables: (farm) => farm.allocPoint == 200 // since all [active] stables have 200 AP <3
   }
 
+  let pids:any[] = [0]
+
   // const rewards = useFarmRewards()
 
   // const farmRewards = rewards.filter((farm) => {
@@ -173,22 +176,28 @@ export default function Mines(): JSX.Element {
     const poolTvl = tvl.find((r) => getAddress(r.lpToken) == getAddress(pool?.lpToken))
     return previousValue + (currentValue.amount / 1e18) * poolTvl?.lpPrice
   }, 0)
+
+  // harvests: all staked pools (for user)
+  const handleHarvestAll = async () => {
+    try {
+      let tx
+      tx = SummonerContract?.harvestAll()
+      await tx?.wait()
+  } catch (e) {
+      console.log(e)
+      return
+  }
+}
   
   return (
     <>
       <TridentHeader className="sm:!flex-row justify-center items-center" pattern="bg-bubble">
         <div>
-          {/* <Typography variant="h2" className="text-high-emphesis" weight={700}>
-            {i18n._(t`SoulSwap Farms`)}
-          </Typography> */}
-          {/* <Typography variant="sm" weight={400}>
-            {i18n._(t`Earn fees and rewards by depositing and staking your liquidity tokens (LP) to the platform.`)}
-          </Typography> */}
         </div>
        <div className={`flex items-center justify-between px-2 py-2`}>
         <div className="flex gap-0">
           <Button
-            color="purple"
+            color={getChainColor(chainId)}
             className="text-emphasis"
             variant="outlined"
             size={"sm"}
@@ -196,7 +205,7 @@ export default function Mines(): JSX.Element {
             {/* {'YOURS '} */}
             {formatNumberScale(valueStaked, true)} {' STAKED'}             
             </Button>
-          {positions.length > 0 && (
+          {positions.length > 0 && chainId == ChainId.FANTOM && (
             <Button
               color="greydient"
               className="text-emphasis"
@@ -219,13 +228,24 @@ export default function Mines(): JSX.Element {
               CLAIM ALL {formatNumberScale(allStaked, true)}
             </Button>
           )}
+          { chainId != ChainId.FANTOM && (
+              <Button
+              color="greydient"
+              className="text-emphasis"
+              variant="flexed"
+              size={"sm"}
+              disabled={pendingTx}
+              onClick={() => handleHarvestAll()}
+            >
+              CLAIM ALL {formatNumberScale(allStaked, true)}
+            </Button>
+          )}
          <Button
-            color="purple"
+            color={getChainColor(chainId)}
             className="text-emphasis"
             variant={'outlined'}
             size={"sm"}
           >
-            {/* {'TOTAL: '} */}
             {formatNumberScale(summTvl, true)} {' '} TOTAL
           </Button>
         </div> 

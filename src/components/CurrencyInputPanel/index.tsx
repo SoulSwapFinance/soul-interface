@@ -145,11 +145,6 @@ export default function CurrencyInputPanel({
             )}
           >
             <>
-              {/* {showMaxButton && selectedCurrencyBalance && (
-                <Button variant="flexed" color="purple" onClick={onHalf} size="xs">
-                  {i18n._(t`50%`)}
-                </Button>
-              )} */}
               <Input.Numeric
                 id="token-amount-input"
                 value={value}
@@ -165,9 +160,7 @@ export default function CurrencyInputPanel({
                     ) : (           
 
                       <>
-                        {/* {i18n._(t`Balance:`)}  */}
                         {i18n._(t`50%`)} 
-                        {/* {selectedCurrencyBalance?.toSignificant(6, { groupSeparator: ',' }) || '0'} {currency?.symbol} */}
                       </>
                     )}
                   </div>
@@ -178,7 +171,6 @@ export default function CurrencyInputPanel({
                     ) : (           
 
                       <>
-                        {/* {i18n._(t`Balance:`)}  */}
                         {selectedCurrencyBalance?.toSignificant(6, { groupSeparator: ',' }) || '0'} {currency?.symbol}
                       </>
                     )}

@@ -2,11 +2,13 @@ import { Wrap } from '../../../components/ReusableStyles'
 import Container from '../../../components/Container'
 import Head from 'next/head'
 import React from 'react'
-import { LuxList } from 'features/luxor/List'
+import { FtmList } from 'features/luxor/List'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { useLuxorPrice } from 'hooks/getPrices'
 import { LuxorBanner } from 'components/Banner'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums/Feature'
 
 const Luxor = () => {
   const luxorPrice = useLuxorPrice()
@@ -16,7 +18,7 @@ const Luxor = () => {
       <LuxorBanner />
       <Container id="luxor-page">
         <Head>
-          <title>Luxor Money | Soul</title>
+          <title>Luxor | Soul</title>
           <meta key="description" name="description" content="Mint SOUL" />
         </Head>
         <div className="mt-1 mb-1">
@@ -58,12 +60,13 @@ const Luxor = () => {
           </NavLink>
         </Button>
       </div>
-        <LuxList />
+        <FtmList />
       </Container>
     </Wrap>
   )
 }
 
+Luxor.Guard = NetworkGuard(Feature.LUXOR)
+
 export default Luxor
 
-// Lux.Guard = NetworkGuard(Feature.BONDS)

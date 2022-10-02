@@ -8,16 +8,15 @@ import SDK, {
   InsufficientFundsError,
   InsufficientLiquidityError
 } from "rubic-sdk";
-import { CrossChainMinAmountError } from "rubic-sdk/lib/common/errors/cross-chain/cross-chain-min-amount.error";
 import { sleep } from "utils/sleep";
 import { ArrowDownIcon, ArrowRightIcon } from '@heroicons/react/solid'
 import { BigNumber as EthersBigNumber, ethers } from "ethers";
 import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, POLYGON, MOONRIVER, Token } from "features/cross/chains";
 import { ERC20_ABI } from "constants/abis/erc20";
 import { useActiveWeb3React } from "services/web3";
-import { useUserInfo, useUserTokenInfo } from "hooks/useAPI";
+import { useUserInfo } from "hooks/useAPI";
 import { Button } from "components/Button";
-import { useNetworkModalToggle, useWalletModalToggle } from "state/application/hooks";
+import { useNetworkModalToggle } from "state/application/hooks";
 import { OverlayButton } from "components/index";
 import Typography from "components/Typography";
 import { formatNumber, formatPercent } from "functions/format";
@@ -28,85 +27,24 @@ import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
 import SwapHeader from "features/swap/SwapHeader";
 import { SwapLayoutCard } from "layouts/SwapLayout";
 import Modal from "components/DefaultModal";
-import { ChainId } from "sdk";
 import { useETHBalances } from "state/wallet/hooks";
 import NetworkModal from "modals/NetworkModal";
 import { AutoColumn } from "components/Column";
-import useFantomERC20 from "hooks/useFantomERC20"
 import Row from "components/Row";
 import ModalHeader from "components/Modal/Header";
 import { WrappedCrossChainTrade } from "rubic-sdk/lib/features/cross-chain/providers/common/models/wrapped-cross-chain-trade";
-
-interface Exchange {
-  from: { chain: Chain; token: Token };
-  to: { chain: Chain; token: Token };
-}
-
-export function getLastExchange(): Exchange {
-  const lastExchange = JSON.parse(localStorage.getItem("exchange"));
-  if (!lastExchange) {
-    return undefined;
-  }
-
-  const fromChain = CHAINS.find(c => c.chainId === lastExchange.from.chain);
-  const fromToken = fromChain?.tokens.find(t => t.id === lastExchange.from.token);
-  const toChain = CHAINS.find(c => c.chainId === lastExchange.to?.chain);
-  const toToken = toChain?.tokens.find(t => t.id === lastExchange.to?.token);
-  return { from: { chain: fromChain, token: fromToken }, to: { chain: toChain, token: toToken } };
-}
-
-function setLastExchange(from: { chain: Chain; token: Token }, to: { chain: Chain; token: Token }) {
-  localStorage.setItem(
-    "exchange",
-    JSON.stringify({
-      from: { chain: from.chain.chainId, token: from.token.id },
-      to: { chain: to?.chain.chainId, token: to?.token?.id },
-    }),
-  );
-}
-
-const NATIVE_ADDRESS = "0x0000000000000000000000000000000000000000";
-
-export const CHAIN_BY_ID = new Map([
-  [FANTOM.chainId, BLOCKCHAIN_NAME.FANTOM],
-  [MOONRIVER.chainId, BLOCKCHAIN_NAME.MOONRIVER],
-  [POLYGON.chainId, BLOCKCHAIN_NAME.POLYGON],
-  [AVALANCHE.chainId, BLOCKCHAIN_NAME.AVALANCHE],
-  [ETHEREUM.chainId, BLOCKCHAIN_NAME.ETHEREUM],
-  [BINANCE.chainId, BLOCKCHAIN_NAME.BINANCE_SMART_CHAIN],
-]);
-
-const rubicConfiguration: Configuration = {
-  providerAddress: '0xFd63Bf84471Bc55DD9A83fdFA293CCBD27e1F4C8',
-  rpcProviders: {
-    [BLOCKCHAIN_NAME.BINANCE_SMART_CHAIN]: {
-      mainRpc: BINANCE.rpc[0],
-    },
-    [BLOCKCHAIN_NAME.MOONRIVER]: {
-      mainRpc: MOONRIVER.rpc[0],
-    },
-    [BLOCKCHAIN_NAME.POLYGON]: {
-      mainRpc: POLYGON.rpc[0],
-    },
-    [BLOCKCHAIN_NAME.AVALANCHE]: {
-      mainRpc: AVALANCHE.rpc[0],
-    },
-    [BLOCKCHAIN_NAME.ETHEREUM]: {
-      mainRpc: ETHEREUM.rpc[0],
-    },
-    [BLOCKCHAIN_NAME.FANTOM]: {
-      mainRpc: FANTOM.rpc[0],
-    },
-  },
-};
-
-const FTM = FANTOM.tokens.find(t => t.id === "fantom");
-const AVAX = AVALANCHE.tokens.find(t => t.id === "avalanche-2");
+import { useMulticallContract } from "hooks/useContract";
+import { getLastExchange, setLastExchange } from "utils/rubic/hooks";
+import { AVAX, CHAIN_BY_ID, FTM, NATIVE_ADDRESS, rubicConfiguration } from "utils/rubic/configuration";
 
 export default function Exchange() {
   const lastExchange = useMemo(() => {
     return getLastExchange() ?? { from: { chain: FANTOM, token: FTM }, to: { chain: AVALANCHE, token: AVAX } };
   }, []);
+  const { account, chainId } = useActiveWeb3React()
+  const [providerAddress, setProvider] = useState('')
+  const [wallet, setWallet] = useState<WalletProvider>(null)
+
   const [from, setFrom] = useState<Token>(lastExchange.from.token);
   const [to, setTo] = useState<Token>(lastExchange.to?.token);
   const [fromChain, setFromChain] = useState<Chain>(lastExchange.from.chain);
@@ -125,20 +63,6 @@ export default function Exchange() {
   useEffect(() => {
     SDK.createSDK(configuration).then(setRubic);
   }, []);
-
-  const { account, chainId } = useActiveWeb3React()
-  const { userInfo } = useUserInfo()
-  // const { userTokenInfo } = useUserTokenInfo(account, from.address)
-  // const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
-
-  let nativeBalance = //userEthBalance ?
-    fromChain?.chainId == ChainId.FANTOM ? (Number(userInfo.nativeBalance) * 1E18).toFixed(0)
-      : 0
-  // Number(userEthBalance) 
-
-  const [wallet, setWallet] = useState<WalletProvider>(null)
-  
-  const [providerAddress, setProvider] = useState('')
 
   useEffect(() => {
     if (!account) {
@@ -162,9 +86,6 @@ export default function Exchange() {
 
       const userBalance = await getBalance()
       const balance = Number(userBalance) / 10 ** (from?.decimals ? from?.decimals : 18)
-      // const nativeBalance = fromChain?.chainId == ChainId.FANTOM
-      //   ? (Number(userInfo.nativeBalance) * 1E18).toFixed(0)
-      //   : balance
 
       setConfiguration(newConfiguration);
       if (rubic) {
@@ -177,30 +98,22 @@ export default function Exchange() {
     update();
   }, [rubic, wallet, providerAddress]);
 
-  // useEffect(() => {
-  // if (web3.connection === Web3Connection.ConnectedWrongChain) {
-  // web3.switchChain();
-  // }
-  //   if (chainId !== fromChain?.chainId)
-  //   <div
-  //   className="flex items-center justify-center px-4 py-2 font-semibold text-white border rounded bg-opacity-80 border-red bg-red hover:bg-opacity-100"
-  //   onClick={toggleWalletModal}
-  // ></div>
-  // }, [])
-
   const [decimals, setDecimals] = useState<number>(18);
   const provider = useMemo(() => new ethers.providers.JsonRpcProvider(fromChain?.rpc[0]), [fromChain]);
+  
+  const MulticallContract = useMulticallContract()
+  const nativeBalance = MulticallContract.getEthBalance(account)
 
   async function getBalance(): Promise<EthersBigNumber> {
     if (!account) {
       return EthersBigNumber.from(0);
     }
     if (from.isNative) {
-      return EthersBigNumber.from((Number(nativeBalance)).toFixed(0))
+      return nativeBalance
     }
-    const IER20 = new ethers.Contract(from.address, ERC20_ABI, provider);
+    const IERC20 = new ethers.Contract(from.address, ERC20_ABI, provider);
     try {
-      return await IER20.balanceOf(account);
+      return await IERC20.balanceOf(account);
     } catch (e) {
       return EthersBigNumber.from(0);
     }
@@ -359,10 +272,6 @@ export default function Exchange() {
   const deltaPercent = 100 * deltaUsd / Number(fromUsd)
   const toggleNetworkModal = useNetworkModalToggle()
   const wrongNetwork = fromChain?.chainId != chainId ? true : false
-
-  // console.log('toAmount:%s', toAmount)
-  // console.log('deltaUsd:%s', deltaUsd)
-  // console.log('deltaPercent:%s', deltaPercent)
 
   return (
     <>
@@ -669,7 +578,8 @@ export default function Exchange() {
                     <Typography className={classNames('sm:text-lg text-md font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
                       {trade
                         ? `${formatNumber(Number(toAmount), false, true)} ${to?.symbol} (${formatNumber(Number(toUsd), true, true)})`
-                        : "0 ($0.00)"}
+                        :  "0 ($0.00)"
+                      }
                     </Typography>
                   </div>
                 </div>
@@ -736,7 +646,9 @@ export default function Exchange() {
                   </div>
                 </div>
               }
-              <TradeDetail trade={trade} />
+              <TradeDetail 
+                trade={trade}
+              />
               <div
                 className="rounded border border-2"
                 style={{ borderColor: toChain?.color, backgroundColor: toChain?.color }}
@@ -786,9 +698,11 @@ export default function Exchange() {
 interface TradeDetailProps {
   trade?: InstantTrade | WrappedCrossChainTrade;
 }
+
 function isCrossChainTrade(trade: InstantTrade | WrappedCrossChainTrade): trade is WrappedCrossChainTrade {
-  return // return "transitFeeToken" in trade;
+  return;
 }
+
 const TradeDetail: FC<TradeDetailProps> = ({ trade }) => {
   let min: string;
   if (trade) {

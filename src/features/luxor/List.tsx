@@ -1,10 +1,13 @@
 import React from 'react'
 import LuxorKey from './Key'
 import LuxorRowRender from './Row'
-import { AllBonds } from './Bonds'
+import { FantomBonds } from './Bonds'
+import { ChainId } from 'sdk'
+import { useActiveWeb3React } from 'services/web3'
 
-export const LuxList = () => {
-  const luxorList = AllBonds.map((bond) => (
+export const FtmList = () => {
+  const { chainId } = useActiveWeb3React()
+  const ftmList = FantomBonds.map((bond) => (
     <LuxorRowRender
       key={bond.pid}
       pid={bond.pid}
@@ -20,7 +23,7 @@ export const LuxList = () => {
   return (
     <>
       <LuxorKey />
-      <>{luxorList}</>
+      <>{chainId == ChainId.FANTOM ? ftmList : null}</>
     </>
   )
 }

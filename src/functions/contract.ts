@@ -3,8 +3,9 @@
 import { AddressZero } from '@ethersproject/constants'
 import { Contract } from '@ethersproject/contracts'
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
-import { ChainId, ROUTER_ADDRESS } from 'sdk'
+import { ChainId, JOE_ROUTER_ADDRESS, ROUTER_ADDRESS } from 'sdk'
 import SoulSwapRouterABI from 'constants/abis/soulswap/soulswaprouter.json'
+import TraderJoeRouterABI from 'constants/abis/joe-router.json'
 // import IUniswapV2Router02NoETHABI from 'constants/abis/uniswap-v2-router-02-no-eth.json'
 import { isAddress } from 'functions/validate'
 
@@ -33,12 +34,25 @@ export function getRouterAddress(chainId?: ChainId) {
   return ROUTER_ADDRESS[chainId]
 }
 
+export function getJoeRouterAddress() {
+  return JOE_ROUTER_ADDRESS[ChainId.AVALANCHE]
+}
+
 // account is optional
 export function getRouterContract(chainId: number, library: Web3Provider, account?: string): Contract {
   return getContract(
     getRouterAddress(chainId),
-    // chainId !== ChainId.CELO ? SoulSwapRouterABI : IUniswapV2Router02NoETHABI,
     SoulSwapRouterABI,
+    library,
+    account
+  )
+}
+
+// account is optional
+export function getJoeRouterContract(library: Web3Provider, account?: string): Contract {
+  return getContract(
+    getJoeRouterAddress(),
+    TraderJoeRouterABI,
     library,
     account
   )

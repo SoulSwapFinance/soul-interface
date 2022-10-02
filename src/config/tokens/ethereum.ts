@@ -64,13 +64,7 @@ export const USDP = new Token(
   'USDP Stablecoin'
 )
 export const USDT = new Token(ChainId.ETHEREUM, '0xdAC17F958D2ee523a2206206994597C13D831ec7', 6, 'USDT', 'Tether USD')
-export const XSUSHI_CALL = new Token(
-  ChainId.ETHEREUM,
-  '0xada279f9301C01A4eF914127a6C2a493Ad733924',
-  18,
-  'XSUc25-0531',
-  'XSUSHI 25 Call [31 May 2021]'
-)
+
 export const WBTC = new Token(ChainId.ETHEREUM, '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', 8, 'WBTC', 'Wrapped BTC')
 export const XSUSHI = new Token(
   ChainId.ETHEREUM,

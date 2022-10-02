@@ -9,6 +9,9 @@ import { useLingui } from '@lingui/react'
 import React, { useMemo } from 'react'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
+import { classNames } from 'functions'
+import { ChainId } from 'sdk'
+import { useActiveWeb3React } from 'services/web3'
 
 const SOUL = (i18n: I18n) => [
   {
@@ -31,24 +34,18 @@ const SOUL = (i18n: I18n) => [
   },
   {
     id: 3,
-    name: 'STAKER',
-    description: 'Stake SOUL. Receive SEANCE. Everlasting SOUL.',
-    href: './seance'
-  },
-  {
-    id: 4,
     name: 'ENCHANTER',
     description: 'Deposit SOUL. Auto-compound SOUL.',
     href: './soul/autostake'
   },
   {
-    id: 5,
+    id: 4,
     name: 'LENDER',
     description: 'Lend and Farm. Enter our Underworld Market.',
     href: './lend'
   },
   {
-    id: 6,
+    id: 5,
     name: 'BORROWER',
     description: 'Collateralize and Borrow. Leverage your Position.',
     href: './borrow'
@@ -78,6 +75,7 @@ const LUXOR = (i18n: I18n) => [
 
 export default function Explore() {
   const { i18n } = useLingui()
+  const { chainId } = useActiveWeb3React()
   const soulFeature = useMemo(() => SOUL(i18n), [i18n])
   const luxorFeature = useMemo(() => LUXOR(i18n), [i18n])
 
@@ -134,7 +132,7 @@ export default function Explore() {
         ))}
         <div className="py-1 bg-yellow" />
         <div className="py-1 bg-gold" />
-      <Typography variant="h1" className="text-center text-yellow" component="h1">
+      <Typography variant="h1" className={classNames([ChainId.FANTOM].includes(chainId) ? "text-center text-yellow" : 'hidden')} component="h1">
         LUXOR MONEY
       </Typography>
         <div className="py-1 bg-yellow" />

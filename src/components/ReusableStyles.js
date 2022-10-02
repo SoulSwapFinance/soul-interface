@@ -33,7 +33,7 @@ export const Wrap = styled.div`
   margin: ${({ margin }) => (margin ? `${margin}` : "0 0")};
   padding: ${({ padding }) => (padding ? `${padding}` : "0.25rem 0.5rem")};
   display: ${({ display }) => (display ? `${display}` : "block")};
-  justify-content: ${({ justifyContent }) => (justifyContent ? `${justifyContent}` : "left")};
+  justify-content: ${({ justifyContent }) => (justifyContent ? `${justifyContent}` : "center")};
   align-items: ${({ alignItems }) => (alignItems ? `${alignItems}` : "center")};;
   overflow: ${({ overflow }) => (overflow ? `${overflow}` : "")}; /* Auto = scrollbar is only inside of text section */
   background-color: ${({ bgColor }) => (bgColor ? `${bgColor}` : ``)};

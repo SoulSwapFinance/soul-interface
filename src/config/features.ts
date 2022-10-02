@@ -8,7 +8,7 @@ const features: FeatureMap = {
     Feature.AMM,
     Feature.SWAP,
     Feature.LIQUIDITY,
-    Feature.ANALYTICS,
+    // Feature.ANALYTICS,
     // Feature.LIQUIDITY_MINING,
     // Feature.COFFINBOX,
     // Feature.UNDERWORLD,
@@ -51,17 +51,21 @@ const features: FeatureMap = {
   [ChainId.AVALANCHE]: [
     Feature.AMM,
     Feature.SWAP,
-    Feature.ANALYTICS,
+    // Feature.ANALYTICS,
     Feature.LIQUIDITY,
-    // Feature.LIQUIDITY_MINING,
+    Feature.LIQUIDITY_MINING,
     Feature.BONDS,
-    // Feature.COFFINBOX,
+    Feature.VAULT,
+    Feature.COFFINBOX,
+    Feature.EXPLORE,
     // Feature.UNDERWORLD,
   ],
 
   [ChainId.FANTOM]: [
     Feature.AMM,
     Feature.SWAP,
+    Feature.SEANCE,
+    Feature.VAULT,
     Feature.STAKING,
     Feature.LIQUIDITY,
     Feature.ANALYTICS,
@@ -73,7 +77,6 @@ const features: FeatureMap = {
     Feature.LUXOR,
     Feature.SOULSWAP,
     Feature.UNDERWORLD
-    // Feature.LIMIT_ORDERS,
   ],
 
   [ChainId.FANTOM_TESTNET]: [
