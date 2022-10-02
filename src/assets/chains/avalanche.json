@@ -40,12 +40,12 @@
             "address": "0x63a72806098bd3d9520cc43356dd78afe5d386d9"
         },
         {
-            "id": "true-usd",
-            "name": "TrueUSD",
-            "rank": 111,
-            "logo": "https://cryptologos.cc/logos/trueusd-tusd-logo.svg",
-            "symbol": "TUSD",
-            "address": "0x1c20e891bab6b1727d14da358fae2984ed9b59eb"
+            "id": "soulswap",
+            "name": "SoulPower",
+            "rank": 1,
+            "logo": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png",
+            "symbol": "SOUL",
+            "address": "0x11d6DD25c1695764e64F439E32cc7746f3945543"
         },
         {
             "id": "tether",

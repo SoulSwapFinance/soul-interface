@@ -26,6 +26,7 @@ export const FTM_ETH = [
 ];
 export const FTM_BNB = ["BNB", "BUSD", "START", "BIFI", "BISON"];
 export const FTM_MATIC = ["MATIC", "SAVG"];
+export const FTM_AVAX = ["SOUL"];
 
 // API Anyswap Stables
 export const GLOBAL_STABLE = ["anyUSDC", "anyDAI", "anyUSDT", "MIM"]; // For Fantom, Binance and Ethereum
@@ -76,11 +77,13 @@ const useBridgeApi = () => {
   const isIncluded = (srcChain: string, destChain: string, symbol: string) => {
     const isFTM = srcChain === "250" || destChain === "250";
     const isEth = srcChain === "1" || destChain === "1";
+    const isAVAX = srcChain === "43114" || destChain === "43114";
     const isBNB = srcChain === "56" || destChain === "56";
     const isPolygon = srcChain === "137" || destChain === "137";
 
     if (isFTM && isEth && FTM_ETH.includes(symbol)) return true;
     if (isFTM && isBNB && FTM_BNB.includes(symbol)) return true;
+    if (isFTM && isAVAX && FTM_AVAX.includes(symbol)) return true;
     if (isFTM && isPolygon && FTM_MATIC.includes(symbol)) return true;
 
     return false;
