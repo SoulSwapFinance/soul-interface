@@ -32,12 +32,12 @@
             "address": "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75"
         },
         {
-            "id": "aave",
-            "name": "Aave",
-            "rank": 79,
-            "logo": "https://cryptologos.cc/logos/aave-aave-logo.svg",
-            "symbol": "AAVE",
-            "address": "0x6a07a792ab2965c72a5b8088d3a069a7ac3a993b"
+            "id": "soulswap",
+            "name": "SoulPower",
+            "rank": 1,
+            "logo": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png",
+            "symbol": "SOUL",
+            "address": "0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07"
         },
         {
             "id": "curve-dao-token",
