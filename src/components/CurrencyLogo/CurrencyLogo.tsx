@@ -4,6 +4,7 @@ import { WrappedTokenInfo } from 'state/lists/wrappedTokenInfo'
 import React, { FunctionComponent, useMemo } from 'react'
 
 import Logo from '../Logo'
+import { useActiveWeb3React } from 'services/web3'
 // import Logo, { UNKNOWN_ICON } from '../Logo'
 
 const BLOCKCHAIN = {
@@ -75,13 +76,14 @@ export interface CurrencyLogoProps {
 }
 
 const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({ currency, size = '24px', className }) => {
+  const { chainId } = useActiveWeb3React()
   const uriLocations = useHttpLocations(
     currency instanceof WrappedTokenInfo ? currency.logoURI || currency.tokenInfo.logoURI : undefined
   )
 
   const srcs: string[] = useMemo(() => {
     if (currency?.isNative || currency?.equals(WNATIVE[currency.chainId])) {
-      return [LOGO[currency.chainId], UNKNOWN_ICON]
+      return [LOGO[currency.chainId || chainId], UNKNOWN_ICON]
     }
 
     if (currency?.isToken) {

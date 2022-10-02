@@ -1,5 +1,5 @@
 import { WBTC_ADDRESS, WETH_ADDRESS } from 'constants/addresses'
-import { ChainId, Ether, SOUL_ADDRESS, Token, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
+import { ChainId, DAI_ADDRESS, Ether, SOUL_ADDRESS, Token, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
 
 import { SupportedChainId } from '../chains'
 
@@ -155,11 +155,12 @@ export const UNIDX: ChainTokenMap = {
 
 // GRIM EVO
 export const GRIMEVO: ChainTokenMap = {
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x0a77866C01429941BFC7854c0c0675dB1015218b', 18, 'GRIM EVO', 'Grim EVO'),
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x0a77866C01429941BFC7854c0c0675dB1015218b', 18, 'GRIMEVO', 'Grim EVO'),
 }
 
 // WFTM
 export const WFTM: ChainTokenMap = {
+  [ChainId.ETHEREUM]: new Token(ChainId.FANTOM, '0x4E15361FD6b4BB609Fa63C81A2be19d873717870', 18, 'FTM', 'Fantom'),
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', 18, 'WFTM', 'Wrapped Fantom')
 }
 
@@ -170,6 +171,7 @@ export const USDT: ChainTokenMap = {
 
 // DAI
 export const DAI: ChainTokenMap = {
+  [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, DAI_ADDRESS[ChainId.ETHEREUM], 18, 'DAI', 'Dai Stablecoin'),
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', 18, 'DAI', 'Dai Stablecoin'),
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0xd586E7F844cEa2F87f50152665BCbc2C279D8d70', 18, 'DAI', 'Dai Stablecoin')
 }

@@ -1,7 +1,7 @@
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency, Percent, ZERO } from 'sdk'
+import { ChainId, Currency, Percent, ZERO } from 'sdk'
 import { Button } from 'components/Button'
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import NumericalInput from 'components/Input/Numeric'
@@ -130,8 +130,7 @@ const InputPanel: FC<
   Pick<SwapAssetPanel, 'currency' | 'value' | 'onChange' | 'disabled' | 'priceImpact'> & { priceImpactCss?: string }
 > = ({ currency, value, onChange, disabled, priceImpact, priceImpactCss }) => {
   const { chainId } = useActiveWeb3React()
-  // todo: fix below
-  const usdcValue = useUSDCValue(tryParseAmount(value || '1', currency))
+  const usdcValue = [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? useUSDCValue(tryParseAmount(value, currency)) : tryParseAmount(value, currency)
   const span = useRef<HTMLSpanElement | null>(null)
   const [width, setWidth] = useState(0)
 
@@ -188,7 +187,6 @@ const BalancePanel: FC<Pick<SwapAssetPanel, 'disabled' | 'currency' | 'onChange'
   onChange,
   spendFromWallet,
 }) => {
-  // const { i18n } = useLingui()
   const { account } = useActiveWeb3React()
   const balance = useCoffinOrWalletBalance(account ? account : undefined, currency, spendFromWallet)
 
@@ -208,8 +206,7 @@ const BalancePanel: FC<Pick<SwapAssetPanel, 'disabled' | 'currency' | 'onChange'
         { balance ? '50%' : '0' }
       </Typography>
     <Typography role="button" onClick={handleMaxClick} variant="sm" className="flex text-primary whitespace-nowrap">
-      {balance ? balance.toSignificant(6) : '0.00'
-       }
+      { balance ? balance.toSignificant(6) : '0.00' }
      </Typography>
       </>
   )

@@ -41,7 +41,7 @@ const Desktop: FC = () => {
 
   const [open, setOpen] = useState(false)
   const router = useRouter()
-  const isLuxor = router.asPath.startsWith('/luxor')
+  // const isLuxor = router.asPath.startsWith('/luxor')
 
   // const isCbWallet =
   //   connector instanceof WalletLinkConnector ||
