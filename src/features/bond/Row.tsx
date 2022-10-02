@@ -269,7 +269,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                             rel="noopener"
                             color={'white'}
                             href=
-                            {`https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token1Address[chainId]}`}
+                            {`https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token1Address}`}
                           >
                             CREATE {bond.lpSymbol} PAIR
                           </TokenPairLink>
@@ -283,7 +283,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                             rel="noopener"
                             color={"white"}
                             href=
-                            {`https://exchange.soulswap.finance/add/${bond.token0Address[chainId]}/${bond.token1Address[chainId]}`}
+                            {`https://exchange.soulswap.finance/add/${bond.token0Address}/${bond.token1Address}`}
                           >
                             CREATE {bond.lpSymbol} PAIR
                           </TokenPairLink>
