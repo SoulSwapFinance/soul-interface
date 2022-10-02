@@ -121,7 +121,7 @@ const SwapModalHeader: FC<SwapModalHeader> = ({
       <div className="justify-start text-sm text-center text-secondary py-2">
         {trade?.tradeType === TradeType.EXACT_INPUT ? (
           <Typography variant="xs" className="text-secondary">
-            {i18n._(t`Output is estimated. You will receive at least`)}{' '}
+            {i18n._(t`You will receive at least`)}{' '}
             <Typography variant="xs" className="text-high-emphesis" weight={700} component="span">
               {trade.minimumAmountOut(allowedSlippage).toSignificant(6)} {trade.outputAmount.currency.symbol}
             </Typography>{' '}
