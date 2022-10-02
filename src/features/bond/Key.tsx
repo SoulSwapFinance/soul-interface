@@ -65,7 +65,7 @@ export function BondKey() {
  
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                YIELD
+                REACHED
                 </Text>
               </FarmItemBox>
 

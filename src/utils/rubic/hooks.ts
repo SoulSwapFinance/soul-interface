@@ -29,6 +29,6 @@ export function setLastExchange(from: { chain: Chain; token: Token }, to: { chai
     );
   }
   
-  const FTM = FANTOM.tokens.find(t => t.id === "fantom");
-  const AVAX = AVALANCHE.tokens.find(t => t.id === "avalanche-2");
+// const FTM = FANTOM.tokens.find(t => t.id === "fantom");
+// const AVAX = AVALANCHE.tokens.find(t => t.id === "avalanche-2");
   

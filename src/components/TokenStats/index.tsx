@@ -1,8 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import TokensStatsModal from 'modals/TokensStatsModal'
-import { useModalOpen, useToggleTokenStatsModal } from 'state/application/hooks'
-import { ApplicationModal } from 'state/application/actions'
+import { useToggleTokenStatsModal } from 'state/application/hooks'
 import styled from 'styled-components'
 import { useActiveWeb3React } from 'services/web3'
 import { useSoulPrice } from 'hooks/getPrices'
@@ -17,7 +16,7 @@ const HideOnMobile = styled.div`
 function TokenStats(): JSX.Element | null {
   const { chainId } = useActiveWeb3React()
   const toggleTokenStatsModal = useToggleTokenStatsModal()
-  const open = useModalOpen(ApplicationModal.SOUL_STATS)
+  // const open = useModalOpen(ApplicationModal.SOUL_STATS)
   const soulPrice = useSoulPrice()
   // const seancePrice = useSeancePrice()
 
