@@ -40,7 +40,7 @@ const TokenLogo = styled(Image)`
   }
 `
 
-const BondRowRender = ({ pid, lpToken, token0Symbol, token1Symbol, token0Address, token1Address, bond }) => {
+const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol, token1Address, lpSymbol, bond }) => {
   const { account, chainId } = useActiveWeb3React()
 
   const { deposit, mint } = useSoulBond(pid, lpToken, bond.token0Address, bond.token1Address)
@@ -271,7 +271,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token1Symbol, token0Address
                             href=
                             {`https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token1Address[chainId]}`}
                           >
-                            CREATE {bond.token0Symbol}-{bond.token1Symbol} PAIR
+                            CREATE {bond.lpSymbol} PAIR
                           </TokenPairLink>
                           </SubmitButton>
                         ) :
