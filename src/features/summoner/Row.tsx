@@ -541,6 +541,18 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
 
                                     <div className="h-px my-1 bg-dark-1000" />
 
+                                    {/* WITHDRAWAL FREE */}
+                                    {Number(withdrawFee) > 0 && (
+                                        <div className="flex flex-col bg-dark-1000 mb-2 p-3 border-1 hover:border-dark-600 w-full space-y-1">
+                                            <div className="text-white">
+                                                <div className="block text-sm md:text-md text-white text-center font-bold p-1 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                                                    <span>
+                                                        {`Fee Duration: ${Number(withdrawFee).toFixed(0)} days`}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
                                     <div className="h-px my-6 bg-dark-1000" />
                                     <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
                                         <div className="text-white">
@@ -550,18 +562,6 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                         </div>
                                     </div>
 
-                                    {/* WITHDRAWAL FREE */}
-                                    {Number(withdrawFee) > 0 && (
-                                        <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
-                                            <div className="text-white">
-                                                <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                                                    <span>
-                                                        {`FREE EXIT AFTER ${Number(withdrawFee).toFixed(0)} DAYS`}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
                                 </div>
 
                                 <div className="h-px my-1 bg-dark-1000" />

@@ -146,7 +146,8 @@ export const SUMMONER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // Summoner
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '0x090D4911Db910efaA498f9b97b8999FbE7A41Dd7', // SEP22
+  [ChainId.AVALANCHE]: '0xB1e330401c920077Ddf157AbA5594238d36b54B1', // V2
+  // [ChainId.AVALANCHE]: '0x090D4911Db910efaA498f9b97b8999FbE7A41Dd7', // SEP22
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
@@ -194,7 +195,8 @@ export const AUTO_STAKE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x083423C61B9373050e62E2A6Ec170e663F9c7BFa',
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '0xD191F9C5Bd60c9b2239E321C37a2397269170D61',
+  [ChainId.AVALANCHE]: '0x5647Ed56e3781D490182fcEaf090f9b43c7322c3', // V2
+  // [ChainId.AVALANCHE]: '0xD191F9C5Bd60c9b2239E321C37a2397269170D61',
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
@@ -326,7 +328,8 @@ export const SOUL_BOND_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xEdaECfc744F3BDeAF6556AEEbfcDedd79437a01F',
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '0x4161A44D71F68852d6b013a9C6BF968d3b08D9b7',
+  [ChainId.AVALANCHE]: '0x6385BFD7A981021fF07845b2e7fDdD02901E25ea', // V2
+  // [ChainId.AVALANCHE]: '0x4161A44D71F68852d6b013a9C6BF968d3b08D9b7',
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
@@ -398,7 +401,8 @@ export const AURA_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xf4253A709733CdD8568542bD9eb4029516a0147A',
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '0x385cC4Ce661a32891919153676efd4E208AAc3Bc', // SEP22
+  [ChainId.AVALANCHE]: '0xe7E8C78DAb7Cf3112b6E8EE6FbF3b429D96D2222', // V2
+  // [ChainId.AVALANCHE]: '0x385cC4Ce661a32891919153676efd4E208AAc3Bc', // SEP22
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',

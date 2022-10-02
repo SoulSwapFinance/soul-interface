@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Wrap } from 'components/ReusableStyles'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
-import { TwitterBanner } from 'components/Banner'
+// import { TwitterBanner } from 'components/Banner'
+// import { useRouter } from 'next/router'
 import Container from 'components/Container'
 import Head from 'next/head'
 import FarmList from 'features/summoner/List'
@@ -9,9 +10,7 @@ import { POOLS } from 'constants/farms'
 import useSummoner from 'features/mines/hooks/useMasterChef'
 import { useTVL } from 'hooks/useV2Pairs'
 import { usePositions } from 'features/mines/hooks'
-
 import { useSummonerContract } from 'hooks'
-import { useRouter } from 'next/router'
 import { getAddress } from '@ethersproject/address'
 import { TridentHeader } from 'layouts/Trident'
 import {  formatNumberScale } from 'functions'
@@ -151,7 +150,7 @@ const Summoner = () => {
         }
       <DoubleGlowShadowV2 opacity="0.6">
         <Container id="farm-page">
-            <TwitterBanner chainId={chainId} />
+            {/* <TwitterBanner chainId={chainId} /> */}
             {/* {<HarvestAll/>} */}
           <br />
           <Head>

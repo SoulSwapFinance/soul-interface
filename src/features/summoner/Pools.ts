@@ -99,7 +99,7 @@ export const AvalanchePools = [
     token1Address: WETH_ADDRESS[ChainId.AVALANCHE],
   },
   {
-    pid: 7,
+    pid: 6,
     token0Symbol: 'WAVAX',
     token1Symbol: 'BNB',
     lpSymbol: 'AVAX-BNB',
@@ -108,7 +108,7 @@ export const AvalanchePools = [
     token1Address: BNB_ADDRESS[ChainId.AVALANCHE],
   },
   {
-    pid: 6,
+    pid: 7,
     token0Symbol: 'DAI',
     token1Symbol: 'USDC',
     lpSymbol: 'DAI-USDC',
