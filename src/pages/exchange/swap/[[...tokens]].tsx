@@ -431,7 +431,7 @@ const Swap = () => {
           setFromUsd((Number(newFromUsd) * Number(test.trade.from?.tokenAmount)).toString())
           setToUsd((Number(newToUsd) * Number((test.trade.to?.tokenAmount))).toString())
           setOutputAmount(Number(test.trade.to?.tokenAmount).toString())
-          console.log('outputAmount:%s', outputAmount)
+          // console.log('outputAmount:%s', outputAmount)
         }
 
         setLoading(false)
@@ -487,11 +487,21 @@ const Swap = () => {
         tokens={importTokensNotInDefault}
         onConfirm={handleConfirmTokenWarning}
       />
-  
-      <SwapLayoutCard>
-        <div className="flex flex-col gap-3 justify-center">
+        {![ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+        <div className="flex flex-col gap-3 mt-12 justify-center">
+          {/* <div className="flex mb-4 items-center justify-center"> */}
           <SwapHeader inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
-        </div>
+          <Button variant="filled" color={getChainColorCode(chainId)} size="lg">
+          <NavLink href={'/cross'}>
+                <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                Go to Crosschain Swaps <span> ↗</span>
+                </a>
+          </NavLink>
+          </Button>
+    </div> }
+
+        { [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+          <SwapLayoutCard>
           <SwapAssetPanel
             spendFromWallet={true}
             chainId={chainId}
@@ -508,6 +518,7 @@ const Swap = () => {
             onChange={handleTypeInput}
             onSelect={handleInputSelect}
           />
+          
         <div className={ classNames("flex justify-center -mt-6 -mb-6 z-0") }>
           <div
             role="button"
@@ -693,9 +704,7 @@ const Swap = () => {
             <div className="flex mt-3" /><SocialWidget />
           </>
         }
-        {
-        showChart &&
-            chainId==250 &&
+        { showChart && [ChainId.FANTOM].includes(chainId) &&
           <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
             <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
               <Chart inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
@@ -703,6 +712,7 @@ const Swap = () => {
           </div>
         }
       </SwapLayoutCard>
+        }
     </>
   )
 }

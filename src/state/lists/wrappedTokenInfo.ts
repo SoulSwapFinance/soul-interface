@@ -1,4 +1,4 @@
-import { Currency, Token } from '../../sdk'
+import { ChainId, Currency, Token } from '../../sdk'
 import { Tags, TokenInfo } from '@uniswap/token-lists'
 
 import { TokenList } from '@uniswap/token-lists/dist/types'
@@ -15,6 +15,7 @@ export class WrappedTokenInfo implements Token {
   public readonly isNative: false = false
   public readonly isToken: true = true
   public readonly list: TokenList
+  // public readonly chainId: TokenInfo
 
   public readonly tokenInfo: TokenInfo
 

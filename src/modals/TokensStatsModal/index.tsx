@@ -29,25 +29,22 @@ export default function TokenStatsModal(): JSX.Element | null {
     }).format(c);
   }
 
-  const { library } = useActiveWeb3React()
+  const { chainId, library } = useActiveWeb3React()
   const soulStatsModalOpen = useModalOpen(ApplicationModal.SOUL_STATS)
   const toggleSoulStatsModal = useToggleTokenStatsModal()
   
   const { userInfo } = useUserInfo()
   const votingPower = userInfo.votingPower
   const protocolOwnership = Number(userInfo.protocolOwnership).toFixed(2)
-  const totalSeance = Number(useTokenInfo(SEANCE_ADDRESS[250]).tokenInfo.supply) / 1e18
-  const totalSoul = Number(useTokenInfo(SOUL_ADDRESS[250]).tokenInfo.supply) / 1e18
-
-  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[250]).tokenInfo.price)
+  const totalSeance = Number(useTokenInfo(SEANCE_ADDRESS[chainId]).tokenInfo.supply) / 1e18
+  const totalSoul = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.supply) / 1e18
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
   // const seancePrice = Number(useTokenInfo(SEANCE_ADDRESS[250]).tokenInfo.price)
 
   const tvlInfo = useTVL()
   const bondInfo = useBondTVL()
   const stakedTvl  = Number(soulPrice) * totalSeance
-    
   const soulInfo = useSoulTVL()
-  const { chainId } = useActiveWeb3React() 
 
   let bondsTvl = bondInfo?.reduce((previousValue, currentValue) => {
     return previousValue + currentValue?.tvl

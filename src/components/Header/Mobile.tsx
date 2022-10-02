@@ -70,7 +70,6 @@ const Mobile: FC = () => {
               >
                 <Dialog.Overlay className="absolute inset-0 transition-opacity bg-dark-1000 bg-opacity-80" />
               </Transition.Child>
-
               <div className="fixed inset-y-0 left-0 pr-10 max-w-[260px] flex">
                 <Transition.Child
                   as={Fragment}
@@ -90,12 +89,6 @@ const Mobile: FC = () => {
                         })}
                       </nav>
                       <div className="flex flex-col mt-2 gap-4 px-6">
-                        {/* {library && (library.provider.isMetaMask || isCoinbaseWallet) && (
-                          <div className="hidden sm:flex">
-                          <Web3Network />
-                          </div>
-                        )} */}
-
                         <div className="flex items-center justify-start gap-2">
                           {/* <div className="flex items-center w-auto text-sm font-bold border-2 rounded shadow cursor-pointer pointer-events-auto select-none border-dark-800 hover:border-dark-700 bg-dark-900 whitespace-nowrap">
                             {account && chainId && userEthBalance && (
@@ -121,16 +114,11 @@ const Mobile: FC = () => {
         </Transition.Root>
          <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 xl:w-auto bg-dark-1000 hover-bg-dark-900 xl:relative xl:p-0 xl:bg-transparent">
           <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
-      {/*   
-          <div className="sm:inline-block">
-              <LuxorStats />
-            </div>
-            */}
-            
+            { chainId == 250 &&
             <div className="sm:inline-block">
               <TokenStats />
             </div> 
-           
+            }
             <div className="w-auto flex items-center rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto">
               {account && chainId && userEthBalance && (
                 <>
