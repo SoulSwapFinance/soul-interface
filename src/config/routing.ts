@@ -39,7 +39,6 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM],
     FANTOM.DAI,
-    FANTOM.USDT,
     FANTOM.USDC,
     FANTOM.WBTC,
     FANTOM.WETH,
@@ -68,6 +67,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     ...WRAPPED_NATIVE_ONLY[ChainId.AVALANCHE],
     AVALANCHE.DAI,
     AVALANCHE.SOUL,
+    AVALANCHE.BNB,
     AVALANCHE.USDC,
     AVALANCHE.WETH,
     AVALANCHE.WBTC,
@@ -109,7 +109,7 @@ export const COMMON_BASES: ChainTokenList = {
     ...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM],
     ETHEREUM.WBTC,
     ETHEREUM.MIM,
-    ETHEREUM.ICE,
+    ETHEREUM.FTM,
     ETHEREUM.USDC,
     ETHEREUM.USDT,
     ETHEREUM.DAI,
@@ -125,8 +125,7 @@ export const COMMON_BASES: ChainTokenList = {
     FANTOM.USDC,
     FANTOM.LUX,
     FANTOM.WLUM,
-    FANTOM.DAI,
-    FANTOM.USDT,
+    FANTOM.DAI
   ],
   [ChainId.BSC]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.BSC],
@@ -154,6 +153,7 @@ export const COMMON_BASES: ChainTokenList = {
     AVALANCHE.WETH,
     AVALANCHE.DAI,
     AVALANCHE.SOUL,
+    AVALANCHE.BNB,
     AVALANCHE.USDC,
 
   ],
