@@ -1,7 +1,5 @@
 import { useActiveWeb3React } from 'services/web3'
 import { ethers } from 'ethers'
-
-// import { ChainId } from '../../sdk'
 import { useState, useEffect } from 'react'
 
 import useApproveContract from './useApprove'

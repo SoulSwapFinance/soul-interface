@@ -75,7 +75,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     // const { userInfo } = useUserInfo()
     const { pairInfo } = usePairInfo(lpAddress)
     // assumes 18, since only SOUL-LP farms are eligible for Zap   
-    const assetDecimals = 18 // Number(pairInfo.pairDecimals)
+    const assetDecimals = Number(pairInfo.pairDecimals)
     const token0Decimals = Number(pairInfo.token0Decimals)
     const token1Decimals = Number(pairInfo.token1Decimals)
 
@@ -110,7 +110,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const feeValue = feeAmount * lpPrice
     const walletBalance = Number(summonerUserInfo.walletBalance)
     const walletValue = Number(walletBalance) * lpPrice
-    const parsedBalance = tryParseAmount(walletBalance.toString(), farm.lpToken)
+    // const parsedBalance = tryParseAmount(walletBalance.toString(), farm.lpToken)
     // const userBalance = useCurrencyBalance(account, lpToken)
     const hasBalance = Number(walletBalance) > 0
     const isUnderworldPair = pairType == "underworld"
@@ -138,18 +138,15 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const zapTokenDecimals = Number(useTokenInfo(zapTokenAddress).tokenInfo.decimals)
     const zapTokenSymbol = useTokenInfo(zapTokenAddress).tokenInfo.symbol
     const zapTokenName = useTokenInfo(zapTokenAddress).tokenInfo.name
-
-    const token = new Token(chainId, zapTokenAddress, zapTokenDecimals, zapTokenSymbol, zapTokenName)
+    const zapToken = new Token(chainId, zapTokenAddress, zapTokenDecimals, zapTokenSymbol, zapTokenName)
 
     const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
 
     // USER INFO //
     const { userTokenInfo } = useUserTokenInfo(account, zapTokenAddress)
-    // const nativeBalance = userInfo.nativeBalance
     const selectedTokenDecimals = zapTokenDecimals ? zapTokenDecimals : 18
     const selectedTokenBalance = Number(userTokenInfo.balance) / selectedTokenDecimals // TODO: try erc20BalanceOf(zapTokenAddress)
-    const parsedTokenBalance = tryParseAmount(selectedTokenBalance.toString(), token)
-    // const parsedZapValue = tryParseAmount(zapValue, token)
+    const zapTokenBalance = tryParseAmount(selectedTokenBalance.toString(), zapToken)
     const [modalOpen, setModalOpen] = useState(true)
 
     const handleDismissSearch = useCallback(() => {
@@ -270,7 +267,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const handleZap = async (zapTokenAddress, lpAddress) => {
         try {
             let tx
-            tx = await ZapContract?.zapInToken(zapTokenAddress, Number(zapValue).toFixed(token.decimals).toBigNumber(token.decimals), lpAddress, ROUTER_ADDRESS[chainId], account)
+            tx = await ZapContract?.zapInToken(zapTokenAddress, Number(zapValue).toFixed(zapTokenDecimals).toBigNumber(zapTokenDecimals), lpAddress, ROUTER_ADDRESS[chainId], account)
             await tx?.wait()
         } catch (e) {
             console.log(e)
@@ -574,8 +571,8 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                         value={depositValue}
                                         balance={walletBalance.toString()}
                                         id={pid}
-                                        token0={token0}
-                                        token1={token1}
+                                        // token0={token0}
+                                        // token1={token1}
                                     />
                                 }
 
@@ -831,8 +828,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                     value={withdrawValue}
                                     balance={stakedBalance.toString()}
                                     id={pid}
-                                    token0={token0}
-                                    token1={token1} />
+                                />
                                 <Wrap padding="0" margin="0" display="flex">
 
                                     <SubmitButton
@@ -840,10 +836,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                         primaryColor={buttonColor}
                                         color={buttonTextColor}
                                         margin=".5rem 0 0rem 0"
-                                        onClick={() =>
-                                            // handleWithdraw(pid)
-                                            setShowConfirmation(true)
-                                        }
+                                        onClick={ () => setShowConfirmation(true) }
                                     >
                                         WITHDRAW {farm.lpSymbol}
                                     </SubmitButton>
@@ -893,16 +886,16 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                         open={modalOpen}
                         onDismiss={handleDismissSearch}
                         onCurrencySelect={(value) => setZapTokenAddress(value.wrapped.address)}
-                        selectedCurrency={token ?? undefined}
+                        selectedCurrency={zapToken ?? undefined}
                         allowManageTokenList={false}
                         showSearch={true}
                     />
                     <AssetInput
                         currencyLogo={true}
-                        currency={token}
+                        currency={zapToken}
                         value={zapValue}
                         onChange={(value) => setZapValue(value)}
-                        balance={parsedTokenBalance}
+                        balance={zapTokenBalance}
                         showBalance={true}
                         showMax={false}
                     />
