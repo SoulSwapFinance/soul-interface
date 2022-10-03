@@ -118,7 +118,9 @@ const Swap = () => {
                 </div>
               )}
               <div id="btn-transaction-settings" className="border border-transparent rounded">
-                <SettingsTab trident={true} />
+                <SettingsTab 
+                // trident={true}
+                />
               </div>
             </div>
           </div>
