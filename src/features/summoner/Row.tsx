@@ -896,7 +896,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                         value={zapValue}
                         onChange={(value) => setZapValue(value)}
                         balance={zapTokenBalance}
-                        showBalance={true}
+                        showBalance={false}
                         showMax={false}
                     />
                     <Wrap padding="0" margin="0" display="flex">
