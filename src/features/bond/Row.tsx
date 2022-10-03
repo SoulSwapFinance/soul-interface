@@ -9,9 +9,7 @@ import useApprove from './hooks/useApprove'
 import { ChainId, SOUL_BOND_ADDRESS, WNATIVE } from 'sdk'
 import {
   BondContainer,
-  Row,
   BondContentWrapper,
-  TokenPairBox,
   BondItemBox,
   DetailsContainer,
   DetailsWrapper,
@@ -23,21 +21,34 @@ import Modal from '../../components/DefaultModal'
 import Typography from '../../components/Typography'
 import ModalHeader from 'components/Modal/Header'
 import { useBondUserInfo, usePairInfo, useUserPairInfo, useSoulBondInfo } from 'hooks/useAPI'
-import { formatDate, formatNumber, formatPercent, tryParseAmount } from 'functions'
+import { classNames, formatNumber, formatPercent, tryParseAmount } from 'functions'
 import { useSoulPrice } from 'hooks/getPrices'
 import { Token, NATIVE } from 'sdk'
 import { getChainColor, getChainColorCode } from 'constants/chains'
+import DoubleCurrencyLogo from 'components/DoubleLogo'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
   padding-left: 10;
 `
 
-const TokenLogo = styled(Image)`
-  @media screen and (max-width: 400px) {
-    font-size: 1rem;
-    padding-right: 10px;
-  }
+// const TokenLogo = styled(Image)`
+//   @media screen and (max-width: 400px) {
+//     font-size: 1rem;
+//     padding-right: 10px;
+//   }
+// `
+
+const HideOnSmall = styled.div`
+@media screen and (max-width: 900px) {
+  display: none;
+}
+`
+
+const HideOnMobile = styled.div`
+@media screen and (max-width: 600px) {
+  display: none;
+}
 `
 
 const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol, token1Address, lpSymbol, bond }) => {
@@ -92,7 +103,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
   const stakedLpValue = stakedBal * lpPrice
   // const availableValue = unstakedBal * lpPrice
   const pendingValue = pending * soulPrice
-  // const percOfBond = 100 * stakedBal / liquidity
+  const percOfBond = 100 * stakedLpValue / liquidity
 
   // initial render/mount & reruns every 2 seconds
   useEffect(() => {
@@ -183,11 +194,12 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
     <>
       <Wrap padding="0" display="flex" justifyContent="center">
 
-        <BondContainer>
-          <Row onClick={() => handleShow()}>
-            <BondContentWrapper>
-              <TokenPairBox>
-                {bond.token1Address && <Wrap className="flex-cols-2">
+        <BondContainer onClick={() => handleShow()}>
+        <div className={classNames("bg-dark-900 p-3 border border-blue", walletBalance > 0 && "border-dark-1000")}>
+          <BondContentWrapper>
+              <TokenPairLink>
+              <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
+                {/* {bond.token1Address && <Wrap className="flex-cols-2">
                   <TokenLogo
                     src={
                       'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/' + chain + '/assets/' + bond.token0Address + '/logo.png'
@@ -208,14 +220,27 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                     objectFit="contain"
                     className="rounded-full items-center justify-center text-center"
                   />
-                </Wrap>}
-              </TokenPairBox>
+                </Wrap>} */}
+              </TokenPairLink>
 
+              <HideOnMobile>
               <BondItemBox>
                 <Text fontSize="1rem" color="#FFFFFF">
                   {formatNumber(stakedLpValue, true, true)}
                 </Text>
               </BondItemBox>
+              </HideOnMobile>
+
+              <HideOnSmall>
+              <BondItemBox>
+                <Text fontSize="1rem" color="#FFFFFF">
+                  {`${ 
+                      // stakedBal && 
+                      percOfBond.toFixed(0) 
+                    }%`}
+                </Text>
+              </BondItemBox>
+              </HideOnSmall>
 
               <BondItemBox>
                 <Text fontSize="1rem" color="#FFFFFF">
@@ -234,10 +259,9 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                   {formatNumber(liquidity, true, true)}
                 </Text>
               </BondItemBox>
-
             </BondContentWrapper>
-          </Row>
-        </BondContainer>
+              </div>
+      </BondContainer>
       </Wrap>
 
       {showing ? (

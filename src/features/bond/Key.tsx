@@ -2,6 +2,18 @@ import { classNames } from "functions";
 import React from "react";
 import styled from "styled-components";
 
+const HideOnSmall = styled.div`
+@media screen and (max-width: 900px) {
+  display: none;
+}
+`
+
+const HideOnMobile = styled.div`
+@media screen and (max-width: 600px) {
+  display: none;
+}
+`
+
 const FarmItemBox = styled.div`
   width: 100px;
   display: grid;
@@ -38,46 +50,104 @@ const Text = styled.p`
   text-align: ${({ textAlign }) => (textAlign ? `${textAlign}` : `center`)};
 `;
 
-export function BondKey() {
+export function Active() {
   return (
     <div className = "justify-center">
         <FarmContainer>
           <div className = "grid grid-cols-1 bg-purple font-bold border border-dark-1000 hover:border-dark-600" >
             <FarmContentWrapper>
-              
+
               <FarmItemBox>
-                  <Text fontSize=".8" color="#FFFFFF">
-                  PAIR
-                  </Text>
+                <Text fontSize=".8" color="#FFFFFF">
+                  ASSET
+                </Text>
+              </FarmItemBox>
+
+            <HideOnMobile>
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                  STAKED
+                </Text>
+              </FarmItemBox>
+            </HideOnMobile>
+ 
+            <HideOnSmall>
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                  SHARE
+                </Text>
+              </FarmItemBox>
+            </HideOnSmall>
+
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                  % APR
+                </Text>
               </FarmItemBox>
 
               <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                  YIELD
+                </Text>
+              </FarmItemBox>
+
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                  LIQUIDITY
+                </Text>
+              </FarmItemBox>
+
+            </FarmContentWrapper>
+            </div>
+        </FarmContainer>
+      </div>
+  )
+}
+
+export function Inactive() {
+  return (
+    <div className = "justify-center">
+        <FarmContainer>
+          <div className = "grid grid-cols-1 bg-pink font-bold border border-dark-1000 hover:border-dark-600" >
+            <FarmContentWrapper>
+              
+              <FarmItemBox>
                   <Text fontSize=".8" color="#FFFFFF">
-                  STAKED
+                  ASSET
                   </Text>
               </FarmItemBox>
+
+            <HideOnMobile>
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                STAKED
+                </Text>
+              </FarmItemBox>
+            </HideOnMobile>
+ 
+            <HideOnSmall>
+              <FarmItemBox>
+                <Text padding="0" fontSize=".8" color="#FFFFFF">
+                SHARE
+                </Text>
+              </FarmItemBox>
+            </HideOnSmall>
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
                 % APR
                 </Text>
               </FarmItemBox>
- 
+
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                REACHED
+                YIELD
                 </Text>
               </FarmItemBox>
 
-              {/* <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#FFFFFF">
-                OWNED
-                </Text>
-              </FarmItemBox> */}
-
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                TVL
+                LIQUIDITY
                 </Text>
               </FarmItemBox>
 
