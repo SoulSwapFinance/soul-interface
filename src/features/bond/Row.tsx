@@ -193,7 +193,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
     <>
       <Wrap padding="0" display="flex" justifyContent="center">
         <BondContainer onClick={ () => handleShow()}>
-        <div className={classNames("bg-dark-900 p-2 border border-blue", walletBalance > 0 && "border-dark-1000")}>
+        <div className={classNames("bg-dark-900 p-2 border border-dark-1000", walletBalance > 0 && `border-dark-${getChainColorCode(chainId)}`)}>
           <BondContentWrapper>
               <TokenPairLink>
               <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
