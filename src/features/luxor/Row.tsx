@@ -275,21 +275,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
         }
     }
 
-    // const handleHarvestAll = async () => {
-    //     try {
-    //         let tx
-    //         tx = await BondContract.harvestAll(false)
-    //         // await tx?.wait().then(await setPending(pid))
-    //         await tx?.wait()
-    //     } catch (e) {
-    //         // alert(e.message)
-    //         console.log(e)
-    //     }
-    // }
-
-    // /**
-    //  * Harvest Shares
-    //  */
+    // harvest shares
     const handleClaim = async () => {
         try {
             let tx
@@ -301,9 +287,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
         }
     }
 
-    /**
-     * Handles Deposit
-     */
+    // handles deposit
     const handleDeposit = async (amount) => {
         try {
             const tx = await BondContract?.deposit(parsedDepositValue?.quotient.toString(), 2, bondAddress)
