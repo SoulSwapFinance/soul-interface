@@ -15,8 +15,6 @@ interface FarmInputPanelProps {
   label?: string
   onCurrencySelect?: (currency: Currency) => void
   disableCurrencySelect?: boolean
-  token0: Token
-  token1: Token
   priceImpact?: Percent
   id: string
   showCommonBases?: boolean
@@ -30,8 +28,6 @@ export default function FarmInputPanel({
   pid,
   balance,
   isNative,
-  // token0, 
-  // token1,
   value,
   onUserInput,
   onMax,
