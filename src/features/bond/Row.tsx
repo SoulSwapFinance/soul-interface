@@ -1,7 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import Image from 'next/image'
 import BondInputPanel from './Input'
 import { useActiveWeb3React } from 'services/web3'
 import useSoulBond from './hooks/useSoulBond'
@@ -17,7 +15,7 @@ import {
   SubmitButton,
 } from './Styles'
 import { Wrap, Text, ExternalLink } from 'components/ReusableStyles'
-import Modal from '../../components/DefaultModal'
+import Modal from 'components/DefaultModal'
 import Typography from '../../components/Typography'
 import ModalHeader from 'components/Modal/Header'
 import { useBondUserInfo, usePairInfo, useUserPairInfo, useSoulBondInfo } from 'hooks/useAPI'
@@ -62,6 +60,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
 
   // show confirmation view before minting SOUL
   const [showConfirmation, setShowConfirmation] = useState(false)
+  const [showOptions, setShowOptions] = useState(false)
 
   const assetAddress = lpToken
   const soulPrice = useSoulPrice()
@@ -193,34 +192,11 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
   return (
     <>
       <Wrap padding="0" display="flex" justifyContent="center">
-
-        <BondContainer onClick={() => handleShow()}>
-        <div className={classNames("bg-dark-900 p-3 border border-blue", walletBalance > 0 && "border-dark-1000")}>
+        <BondContainer onClick={ () => handleShow()}>
+        <div className={classNames("bg-dark-900 p-2 border border-blue", walletBalance > 0 && "border-dark-1000")}>
           <BondContentWrapper>
               <TokenPairLink>
               <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
-                {/* {bond.token1Address && <Wrap className="flex-cols-2">
-                  <TokenLogo
-                    src={
-                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/' + chain + '/assets/' + bond.token0Address + '/logo.png'
-                    }
-                    alt="LOGO"
-                    width="38px"
-                    height="38px"
-                    objectFit="contain"
-                    className="rounded-full items-center justify-center text-center"
-                  />
-                  <TokenLogo
-                    src={
-                      'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/' + chain + '/assets/' + bond.token1Address + '/logo.png'
-                    }
-                    alt="LOGO"
-                    width="38px"
-                    height="38px"
-                    objectFit="contain"
-                    className="rounded-full items-center justify-center text-center"
-                  />
-                </Wrap>} */}
               </TokenPairLink>
 
               <HideOnMobile>
@@ -231,7 +207,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
               </BondItemBox>
               </HideOnMobile>
 
-              <HideOnSmall>
+              {/* <HideOnSmall>
               <BondItemBox>
                 <Text fontSize="1rem" color="#FFFFFF">
                   {`${ 
@@ -240,7 +216,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                     }%`}
                 </Text>
               </BondItemBox>
-              </HideOnSmall>
+              </HideOnSmall> */}
 
               <BondItemBox>
                 <Text fontSize="1rem" color="#FFFFFF">
@@ -264,13 +240,21 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
       </BondContainer>
       </Wrap>
 
-      {showing ? (
+      {showing && (
         <Wrap padding="0" display="flex" justifyContent="center">
           <DetailsContainer>
             <DetailsWrapper>
-              {isStakeable && (
+                <Modal
+                isCustom={true}
+                isOpen={showing}
+                onDismiss={() => handleShow()}
+                >
                 <FunctionBox>
+                {/* <Text className="flex justify-center text-2xl font-bold"> 
+                  {bond.lpSymbol} 
+                </Text> */}
                 {/* DEPOSIT: ASSET PANEL */}
+                { isStakeable && (
                     <BondInputPanel
                       pid={bond.pid}
                       onUserInput={(value) => setDepositValue(value)}
@@ -281,9 +265,9 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                       token0={token0}
                       token1={token1}
                       />
-   
+                )}
                   <Wrap padding="0" margin="0" display="flex">
-                    {(approved && Number(unstakedBal) == 0) ?
+                    {(approved && isStakeable && Number(unstakedBal) == 0) ?
                       (bond.token0Symbol == WNATIVE[chainId].symbol ? (
                           <SubmitButton
                           primaryColor={getChainColor(chainId)}
@@ -313,7 +297,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                           </TokenPairLink>
                       </SubmitButton>
                       ) :
-                      approved ?
+                      (approved && isStakeable ?
                         (
                           <SubmitButton
                             height="2.5rem"
@@ -325,7 +309,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                             DEPOSIT {bond.lpSymbol} LP
                           </SubmitButton>
                         ) :
-                        (
+                        ( !approved && isStakeable &&
                           <SubmitButton
                             primaryColor={getChainColor(chainId)}
                             height="2.5rem" onClick={() => handleApprove()}>
@@ -333,13 +317,11 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                           </SubmitButton>
                         )
 
-                    }
+                      )}
                   </Wrap>
                 </FunctionBox>
-              )}
-
-              <FunctionBox>
-                <Wrap padding="0" margin="0" display="flex" justifyContent="space-between">
+               
+                <Wrap padding="0.5rem" margin="0.25rem" display="flex" justifyContent="space-between">
                   <Text fontSize=".9rem" padding="0" textAlign="left">
                     BONDED:&nbsp;
                     {stakedBal === 0
@@ -361,7 +343,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                     {dailyRoi > 0 ? 'DAILY: ' + dailyRoi.toFixed(2) : 0}%
                   </Text>
                 </Wrap>
-                {stakedBal > 0 &&
+                {stakedBal > 0 && showing &&
                   <Wrap padding="0" margin="0" display="flex">
                     <SubmitButton
                       height="2.5rem"
@@ -376,16 +358,13 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                     </SubmitButton>
                   </Wrap>
                 }
-              </FunctionBox>
+              </Modal>
             </DetailsWrapper>
           </DetailsContainer>
         </Wrap>
-      ) : null}
+      )}
 
-
-
-
-      {/* CONFIRMATION MODAL */}
+      { /* CONFIRMATION MODAL */ }
 
       <Modal isOpen={showConfirmation} onDismiss={
         () => setShowConfirmation(false)}>

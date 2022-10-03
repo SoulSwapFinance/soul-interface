@@ -13,7 +13,7 @@ export const Text = styled.p`
 export const Wrap = styled.div`
   width: ${({ width }) => (width ? `${width}` : "")};
   height: ${({ height }) => (height ? `${height}` : "")};
-  margin: ${({ margin }) => (margin ? `${margin}` : "0 0")};
+  margin: ${({ margin }) => (margin ? `${margin}` : "0.25rem .5rem")};
   padding: ${({ padding }) => (padding ? `${padding}` : "0.25rem 0.25rem")};
   display: ${({ display }) => (display ? `${display}` : "block")};
   justify-content: ${({ justifyContent }) => (justifyContent ? `${justifyContent}` : "center")};
@@ -32,7 +32,7 @@ export const SubmitButton = styled(Button)`
   width: 100%;
   height: ${({ height }) => (height ? height : '')};
   padding: ${({ padding }) => (padding ? padding : '0')};
-  margin: ${({ margin }) => (margin ? margin : '0.5rem 0 0rem 0')};
+  margin: ${({ margin }) => (margin ? margin : '0.5rem 0 0.5rem 0')};
   outline: 0;
   border: none;
   border-radius: 0.25em;
@@ -66,39 +66,14 @@ export const DetailsContainer = styled.div`
   margin: 2px;
   width: 55rem;
 
-  @media screen and (max-width: 900px) {
-    width: auto;
-  }
-`
-
-/// --------------------- ///
-
-export const FunctionBox = styled.div`
-  padding: 0px;
-  width: ${({ width }) => (width ? `${width}` : `100%`)};
-`
-
-export const DetailsWrapper = styled.div`
-  display: flex;
-  background-color: #18191A;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  width: 55rem;
-  padding: 5px 10px;
-
   @media screen and (max-width: 3200px) {
     display: block;
-    width: 42rem
-  }
-
-  @media screen and (max-width: 1900px) {
-    display: block;
-    width: 36rem
+    width: 48rem
   }
  
   @media screen and (max-width: 1200px) {
     display: block;
-    width: 40rem
+    width: 36rem
   }
 
   @media screen and (max-width: 900px) {
@@ -112,7 +87,51 @@ export const DetailsWrapper = styled.div`
   }
 
   @media screen and (max-width: 600px) {
-    width: 26rem;
+    width: 28rem;
+  }
+
+  @media screen and (max-width: 400px) {
+    width: 24rem;
+  }
+`
+
+/// --------------------- ///
+
+export const FunctionBox = styled.div`
+  padding: 0px;
+  width: ${({ width }) => (width ? `${width}` : `100%`)};
+`
+
+export const DetailsWrapper = styled.div`
+  display: flex
+  background-color: #18191A;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  width: 55rem;
+  padding: 5px 10px;
+
+  @media screen and (max-width: 3200px) {
+    display: block;
+    width: 48rem
+  }
+ 
+  @media screen and (max-width: 1200px) {
+    display: block;
+    width: 36rem
+  }
+
+  @media screen and (max-width: 900px) {
+    display: block;
+    width: 34rem
+  }
+  
+  @media screen and (max-width: 720px) {
+    display: block;
+    width: 32rem
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 28rem;
   }
 
   @media screen and (max-width: 400px) {
