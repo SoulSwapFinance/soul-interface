@@ -503,13 +503,6 @@ const Swap = () => {
         { [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
           <SwapLayoutCard>
             <SwapHeader inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
-          <Button variant="filled" color={getChainColorCode(chainId)} size="lg">
-          <NavLink href={'/cross'}>
-                <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                Go to Crosschain Swaps <span> ↗</span>
-                </a>
-          </NavLink>
-          </Button>
           <SwapAssetPanel
             spendFromWallet={true}
             chainId={chainId}

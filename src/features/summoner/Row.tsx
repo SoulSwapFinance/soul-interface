@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
-import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, Token, WNATIVE } from 'sdk'
+import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, SUMMONER_ADDRESS, Token, WNATIVE } from 'sdk'
 import { useTokenContract, useSummonerContract, useZapperContract } from 'hooks/useContract'
 import useApprove from 'features/bond/hooks/useApprove'
 import { Tab } from '@headlessui/react'
@@ -135,20 +135,18 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
 
     // Zap Add-Ons //
     const tokenContract = useTokenContract(zapTokenAddress)
-    const { tokenInfo } = useTokenInfo(zapTokenAddress)
-    const tokenDecimals = Number(tokenInfo.decimals)
-    const tokenAddress = zapTokenAddress
-    const selectedTokenSymbol = tokenInfo.symbol
-    const tokenName = tokenInfo.name
+    const zapTokenDecimals = Number(useTokenInfo(zapTokenAddress).tokenInfo.decimals)
+    const zapTokenSymbol = useTokenInfo(zapTokenAddress).tokenInfo.symbol
+    const zapTokenName = useTokenInfo(zapTokenAddress).tokenInfo.name
 
-    const token = new Token(chainId, tokenAddress, tokenDecimals, selectedTokenSymbol, tokenName)
+    const token = new Token(chainId, zapTokenAddress, zapTokenDecimals, zapTokenSymbol, zapTokenName)
 
     const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
 
     // USER INFO //
     const { userTokenInfo } = useUserTokenInfo(account, zapTokenAddress)
     // const nativeBalance = userInfo.nativeBalance
-    const selectedTokenDecimals = tokenDecimals ? tokenDecimals : 18
+    const selectedTokenDecimals = zapTokenDecimals ? zapTokenDecimals : 18
     const selectedTokenBalance = Number(userTokenInfo.balance) / selectedTokenDecimals // TODO: try erc20BalanceOf(zapTokenAddress)
     const parsedTokenBalance = tryParseAmount(selectedTokenBalance.toString(), token)
     // const parsedZapValue = tryParseAmount(zapValue, token)
@@ -184,7 +182,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
             // alert('Connect Wallet')
         } else {
             // Checks if SoulSummonerContract can move tokens
-            const amount = await erc20Allowance(account, SOUL_SUMMONER_ADDRESS[chainId])
+            const amount = await erc20Allowance(account, SUMMONER_ADDRESS[chainId])
             if (amount > 0) setApproved(true)
             return amount
         }
@@ -209,7 +207,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
             // alert('Connect Wallet')
         } else {
             try {
-                const tx = await erc20Approve(SOUL_SUMMONER_ADDRESS[chainId])
+                const tx = await erc20Approve(SUMMONER_ADDRESS[chainId])
                 await tx?.wait().then(await fetchApproval())
             } catch (e) {
                 // alert(e.message)
@@ -658,7 +656,6 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                 {!approved && hasBalance && (
                                     <SubmitButton
                                         height="2rem"
-                                        // className="font-bold"
                                         primaryColor={buttonColor}
                                         color={buttonTextColor}
                                         margin=".5rem 0 0rem 0"
@@ -674,7 +671,6 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                         height="2rem"
                                         primaryColor={buttonColor}
                                         color={buttonTextColor}
-                                        // className={'font-bold'}
                                         margin=".5rem 0 0rem 0"
                                         onClick={() =>
                                             handleDeposit(pid)

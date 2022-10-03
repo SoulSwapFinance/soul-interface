@@ -1,12 +1,12 @@
 import { Currency, CurrencyAmount, Token } from '../sdk'
 
 import { useCallback } from 'react'
-import { useSoulSummonerContract } from '../hooks/useContract' // Not using `useEnchantmentContract` to enter staking
+import { useSummonerContract } from '../hooks/useContract' // Not using `useEnchantmentContract` to enter staking
 import { useTransactionAdder } from '../state/transactions/hooks'
 
 const useSoulStakeManual = () => {
   const addTransaction = useTransactionAdder()
-  const summonerContract = useSoulSummonerContract()
+  const summonerContract = useSummonerContract()
 
   // Enter staking in SoulSummoner
   const enter = useCallback(

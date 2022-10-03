@@ -8,10 +8,10 @@ import { useActiveWeb3React } from 'services/web3'
 // import { Button } from 'components/Button'
 // import QuestionHelper from '../../components/QuestionHelper'
 import { SOUL, CHANT, Token } from 'sdk'
-import { AUTO_STAKE_ADDRESS, SOUL_SUMMONER_ADDRESS } from 'sdk'
+import { AUTO_STAKE_ADDRESS, SUMMONER_ADDRESS } from 'sdk'
 import { aprToApy } from 'functions/convert'
 import AssetInput from 'components/AssetInput'
-import { useAutoStakeContract, useSoulSummonerContract } from 'hooks/useContract'
+import { useAutoStakeContract, useSummonerContract } from 'hooks/useContract'
 // import { useStakeContract, useStakeSharePrice, useStakeRecentProfit, sharesFromSoul } from './hooks'
 import useApprove from 'features/bond/hooks/useApprove'
 import {
@@ -60,8 +60,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     const soulPrice = useSoulPrice()
     const [showing, setShowing] = useState(false)
     const AutoStakeContract = useAutoStakeContract()
-    const SoulSummonerContract = useSoulSummonerContract()
-    const SoulSummonerAddress = SOUL_SUMMONER_ADDRESS[chainId]
+    const SoulSummonerContract = useSummonerContract()
+    const SoulSummonerAddress = SUMMONER_ADDRESS[chainId]
     const AutoStakeAddress = AUTO_STAKE_ADDRESS[chainId]
     const [approved, setApproved] = useState(false)
     const [withdrawValue, setWithdrawValue] = useState('')

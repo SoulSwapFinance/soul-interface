@@ -40,9 +40,8 @@ import {
   ROUTER_ADDRESS,
   SOUL_ADDRESS,
   SEANCE_ADDRESS,
-  SOUL_SUMMONER_ADDRESS,
+  SUMMONER_ADDRESS,
   AUTO_STAKE_ADDRESS,
-  SOUL_VAULT_ADDRESS,
   SOUL_GUIDE_ADDRESS,
   BALANCES_FETCHER_ADDRESS,
   PRICE_HELPER_ADDRESS,
@@ -97,7 +96,6 @@ import SOUL_GUIDE_ABI from 'constants/abis/soul-guide.json' // TODO: update abi
 import SOUL_SUMMONER_ABI from 'constants/abis/soulswap/soulsummoner.json' // 28 JUL
 import SOUL_MANIFESTER_ABI from 'constants/abis/soulswap/soulmanifester.json' // 28 JUL
 import LOTTERY_ABI from 'constants/abis/soulswap/lottery.json' // 28 JUL
-import SOULVAULT_ABI from 'constants/abis/soulswap/soulvault.json' // 31 JUL
 import LUXOR_ABI from 'constants/abis/soulswap/luxor.json'
 import LUXOR_TREASURY_ABI from 'constants/abis/soulswap/luxor-treasury.json'
 import TEAM_WALLET_ABI from 'constants/abis/soulswap/team-wallet.json'
@@ -333,11 +331,6 @@ export function useFtmUsdcContract(withSignerIfPossible?: boolean): Contract | n
   return useContract(chainId && FTM_USDC_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
 }
 
-export function useSoulVaultContract(withSignerIfPossible = true): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_VAULT_ADDRESS[chainId], SOULVAULT_ABI, withSignerIfPossible)
-}
-
 export function useEnchantContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && ENCHANT_ADDRESS[chainId], ENCHANT_ABI, withSignerIfPossible)
@@ -393,7 +386,7 @@ export function useTridentRouterContract(withSignerIfPossible?: boolean): Contra
 
 export function useMasterChefContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], 
+  return useContract(chainId && SUMMONER_ADDRESS[chainId], 
     chainId == ChainId.FANTOM ? SOUL_SUMMONER_ABI : SOUL_MANIFESTER_ABI,
     withSignerIfPossible)
 }
@@ -417,14 +410,6 @@ export function useStablePoolFactory(withSignerIfPossible?: boolean): Contract |
   // return useContract(factory?.address, factory?.abi, withSignerIfPossible)
 }
 
-export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], 
-    chainId == ChainId.FANTOM ? SOUL_SUMMONER_ABI : SOUL_MANIFESTER_ABI,
-    withSignerIfPossible)
-}
-
-
 export function useLotteryContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && LOTTERY_ADDRESS[chainId], LOTTERY_ABI, withSignerIfPossible)
@@ -432,7 +417,7 @@ export function useLotteryContract(withSignerIfPossible?: boolean): Contract | n
 
 export function useSummonerContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], 
+  return useContract(chainId && SUMMONER_ADDRESS[chainId], 
     chainId == ChainId.FANTOM ? SOUL_SUMMONER_ABI : SOUL_MANIFESTER_ABI,
     withSignerIfPossible)
 }

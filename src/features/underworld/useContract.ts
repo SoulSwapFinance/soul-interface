@@ -1,7 +1,6 @@
 import {
   FACTORY_ADDRESS,
   SOUL_ADDRESS,
-  SOUL_SUMMONER_ADDRESS,
   WNATIVE,
 } from 'sdk'
 
@@ -13,7 +12,6 @@ import MULTICALL_ABI from 'constants/abis/multicall.json'
 import FACTORY_ABI from 'constants/abis/factory.json'
 
 // soul
-import SOUL_SUMMONER_ABI from 'constants/abis/soulswap/soulsummoner.json' 
 import SOUL_BOND_ABI from 'features/bond/constants/abis/soulbond.json' 
 import PRICE_HELPER_ABI from 'features/bond/constants/abis/pricehelper.json' 
 import SOUL_ABI from 'constants/abis/soulswap/soulpower.json' 
@@ -73,11 +71,6 @@ export function useSoulContract(withSignerIfPossible = true): Contract | null {
 export function useSoulBondContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_BOND_ADDRESS[chainId], SOUL_BOND_ABI, withSignerIfPossible)
-}
-
-export function useSoulSummonerContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_SUMMONER_ADDRESS[chainId], SOUL_SUMMONER_ABI, withSignerIfPossible)
 }
 
 export function usePriceHelperContract(withSignerIfPossible?: boolean): Contract | null {

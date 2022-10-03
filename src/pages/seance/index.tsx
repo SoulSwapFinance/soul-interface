@@ -1,8 +1,7 @@
-import { CurrencyAmount, JSBI, SOUL_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS, ZERO } from '../../sdk'
+import { SUMMONER_ADDRESS, ZERO } from '../../sdk'
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { SOUL, SEANCE } from '../../constants'
-
 import { Button } from '../../components/Button'
 import { ChainId } from '../../sdk'
 import Head from 'next/head'
@@ -17,22 +16,15 @@ import { useLingui } from '@lingui/react'
 import useSoulStakeManual from '../../hooks/useSoulStakeManual'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { useWalletModalToggle } from '../../state/application/hooks'
-import useSoulVault from '../../hooks/useSoulVault'
-
-import { ethers } from 'ethers'
-import { useSoulSummonerContract } from '../../hooks'
 import Typography from '../../components/Typography'
 import { SubmitButton } from '../../features/seance/SeanceStyles'
 import ModalHeader from 'components/Modal/Header'
 import NavLink from 'components/NavLink'
 import Modal from 'components/DefaultModal'
-import useSoulMine from 'features/mines/hooks/useSoulMine'
-import { useUserTokenInfo, useStakeInfo } from 'hooks/useAPI'
-import { useSoulPrice } from 'hooks/getPrices'
+import { useStakeInfo } from 'hooks/useAPI'
 import { formatNumber } from 'functions/format'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
-// import { ArrowLeftIcon } from '@heroicons/react/solid'
 
 const INPUT_CHAR_LIMIT = 18
 
@@ -70,7 +62,6 @@ export default function SoulStake() {
   const { account, chainId } = useActiveWeb3React()
 
   // functions from SoulVault contract we're using
-  const { withdraw } = useSoulVault()
   const { enter, leave, harvest } = useSoulStakeManual()
 
   const soulBalance = useTokenBalance(account ?? undefined, SOUL[chainId])
@@ -93,8 +84,8 @@ export default function SoulStake() {
   const parsedAmount = usingBalance ? balance : tryParseAmount(input, balance?.currency)
 
   // Approve summoner to move funds with `transferFrom`
-  const [approvalStateChef, approveMasterchef] = useApproveCallback(parsedAmount, SOUL_SUMMONER_ADDRESS[chainId])
-  const [approvalStateVault, approveVault] = useApproveCallback(parsedAmount, SOUL_VAULT_ADDRESS[chainId])
+  const [approvalStateChef, approveMasterchef] = useApproveCallback(parsedAmount, SUMMONER_ADDRESS[chainId])
+  const [approvalStateVault, approveVault] = useApproveCallback(parsedAmount, SUMMONER_ADDRESS[chainId])
 
   // const [apr, setApr] = useState('30')
   // const [liquidity, setLiquidity] = useState('0')

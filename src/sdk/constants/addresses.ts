@@ -165,18 +165,6 @@ export const MASTERCHEF_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const SOUL_SUMMONER_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: SUMMONER_ADDRESS[ChainId.FANTOM],
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: SUMMONER_ADDRESS[ChainId.AVALANCHE],
-  [ChainId.MATIC]: '',
-  [ChainId.MOONRIVER]: '',
-  [ChainId.ARBITRUM]: '',
-}
-
 export const SOUL_CIRCLE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
@@ -305,18 +293,6 @@ export const CHANT_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.FANTOM]: '0x083423C61B9373050e62E2A6Ec170e663F9c7BFa',
   [ChainId.FANTOM_TESTNET]: '',
   [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.MOONRIVER]: '',
-  [ChainId.ARBITRUM]: '',
-}
-
-export const SOUL_VAULT_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: SOUL_SUMMONER_ADDRESS[ChainId.FANTOM],
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: SOUL_SUMMONER_ADDRESS[ChainId.AVALANCHE],
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',

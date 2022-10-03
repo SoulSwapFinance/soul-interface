@@ -4,10 +4,9 @@ import { SOUL } from '../../constants'
 import { NEVER_RELOAD, useSingleCallResult, useSingleContractMultipleData } from '../../state/multicall/hooks'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
-  useSoulSummonerContract,
   useETHPairContract,
   useSoulFtmContract,
-  useSoulVaultContract,
+  useSummonerContract,
 } from '../../hooks'
 
 import { Contract } from '@ethersproject/contracts'
@@ -20,7 +19,7 @@ const { default: axios } = require('axios')
 export function useUserInfo(farm, token) {
   const { account } = useActiveWeb3React()
 
-  const contract = useSoulVaultContract()
+  const contract = useSummonerContract()
 
   const args = useMemo(() => {
     if (!account) {
@@ -50,7 +49,7 @@ export function useUserInfo(farm, token) {
 export function usePendingSoul(farm) {
   const { account, chainId } = useActiveWeb3React()
 
-  const contract = useSoulVaultContract()
+  const contract = useSummonerContract()
 
   const args = useMemo(() => {
     if (!account) {
@@ -121,7 +120,7 @@ export function useSoulPositions(contract?: Contract | null) {
 }
 
 export function usePositions() {
-  return useSoulPositions(useSoulVaultContract())
+  return useSoulPositions(useSummonerContract())
 }
 
 export function useSoulVaults(contract?: Contract | null) {
@@ -241,7 +240,7 @@ export function useTokenInfo(tokenContract?: Contract | null) {
 }
 
 export function useVaults() {
-  return useSoulVaults(useSoulVaultContract())
+  return useSoulVaults(useSummonerContract())
 }
 
 export function usePricesApi() {
@@ -273,5 +272,5 @@ export function useVaultInfo(contract) {
 }
 
 export function useSoulVaultInfo() {
-  return useVaultInfo(useSoulVaultContract())
+  return useVaultInfo(useSummonerContract())
 }
