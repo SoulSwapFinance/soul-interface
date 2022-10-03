@@ -1,6 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { MenuAlt1Icon } from '@heroicons/react/outline'
-import { NATIVE } from 'sdk'
+import { ChainId, NATIVE } from 'sdk'
 // import { InjectedConnector } from '@web3-react/injected-connector'
 // import { WalletLinkConnector } from '@web3-react/walletlink-connector'
 // import Web3Network from 'components/Web3Network'
@@ -160,7 +160,7 @@ const Desktop: FC = () => {
             }
             {/* )} */}
             {/* {library && library.provider.isMetaMask && ( */}
-         { chainId == 250 &&
+         { [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
             <div className="sm:inline-block">
               <TokenStats />
             </div>

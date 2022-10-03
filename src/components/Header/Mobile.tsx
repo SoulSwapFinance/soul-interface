@@ -1,6 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { MenuAlt1Icon } from '@heroicons/react/outline'
-import { NATIVE } from 'sdk'
+import { ChainId, NATIVE } from 'sdk'
 import useMenu from 'components/Header/useMenu'
 import Web3Network from 'components/Web3Network'
 import Web3Status from 'components/Web3Status'
@@ -114,7 +114,7 @@ const Mobile: FC = () => {
         </Transition.Root>
          <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 xl:w-auto bg-dark-1000 hover-bg-dark-900 xl:relative xl:p-0 xl:bg-transparent">
           <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
-            { chainId == 250 &&
+          { [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
             <div className="sm:inline-block">
               <TokenStats />
             </div> 
