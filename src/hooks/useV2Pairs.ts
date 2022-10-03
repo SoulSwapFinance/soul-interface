@@ -1,10 +1,9 @@
-import { AVAX_ADDRESS, ChainId, computePairAddress, Currency, CurrencyAmount, Pair, SOUL, Token } from '../sdk'
-
+import { AVAX_ADDRESS, ChainId, computePairAddress, Currency, CurrencyAmount, Pair, SOUL, SOUL_ADDRESS, SUMMONER_ADDRESS, Token, WETH_ADDRESS, WNATIVE_ADDRESS } from '../sdk'
 import ISoulSwapPair from '../constants/abis/soulswap/ISoulSwapPair.json'
 import { Interface } from '@ethersproject/abi'
 import { useMemo } from 'react'
-import { useMultipleContractSingleData, useSingleCallResult } from '../state/multicall/hooks'
-import { FACTORY_ADDRESS, SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS, SOUL_DAO_ADDRESS, LUX_TREASURY_ADDRESS } from '../constants'
+import { useMultipleContractSingleData } from '../state/multicall/hooks'
+import { FACTORY_ADDRESS, SOUL_DAO_ADDRESS, LUX_TREASURY_ADDRESS } from '../constants'
 import { POOLS, TokenInfo } from '../constants/farms'
 import { concat } from 'lodash'
 import { VAULTS } from '../constants/vaults'
@@ -12,9 +11,10 @@ import { useActiveWeb3React } from 'services/web3'
 import { SOUL_BOND_ADDRESS } from 'sdk'
 import { BONDS } from 'constants/bonds'
 import { useFantomPrice, useLuxorPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice, useWrappedLumPrice } from './getPrices'
-import { usePriceUSD } from './useAPI'
+import { useTokenInfo } from './useAPI'
 
 const PAIR_INTERFACE = new Interface(ISoulSwapPair)
+
 
 export enum PairState {
   LOADING,
@@ -24,6 +24,7 @@ export enum PairState {
 }
 
 export function useV2Pairs(currencies: [Currency | undefined, Currency | undefined][]): [PairState, Pair | null][] {
+  // const { chainId } = 
   const tokens = useMemo(
     () => currencies.map(([currencyA, currencyB]) => [currencyA?.wrapped, currencyB?.wrapped]),
     [currencies]
@@ -80,12 +81,15 @@ export interface TVLInfo {
 
 export function useVaultTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
-  const ftmPrice = useFantomPrice()
-  const soulPrice = useSoulPrice()
+  const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[ChainId.FANTOM]).tokenInfo.price) // only on FTM and ETH
+  const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId]).tokenInfo.price)
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
+
+  console.log('soulP:%s', soulPrice)
   const seancePrice = useSeancePrice()
 
-  const farmingPools = Object.keys(VAULTS[ChainId.FANTOM]).map((key) => {
-    return { ...VAULTS[ChainId.FANTOM][key] }
+  const farmingPools = Object.keys(VAULTS[chainId]).map((key) => {
+    return { ...VAULTS[chainId][key] }
   })
 
   const singlePools = farmingPools.filter((r) => !r.token1)
@@ -96,10 +100,10 @@ export function useVaultTVL(): TVLInfo[] {
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
   const totalSupply = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'totalSupply')
   const summonerBalance = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_VAULT_ADDRESS[ChainId.FANTOM],
+    SUMMONER_ADDRESS[chainId],
   ])
   const summonerBalanceSingle = useMultipleContractSingleData(singleAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_VAULT_ADDRESS[ChainId.FANTOM],
+    SUMMONER_ADDRESS[chainId],
   ])
 
   return useMemo(() => {
@@ -108,6 +112,7 @@ export function useVaultTVL(): TVLInfo[] {
         token.id.toLowerCase() == SOUL[chainId].address.toLowerCase() ||
         token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' || token.symbol == 'FTM' ||
+        token.symbol == 'WAVAX' || token.symbol == 'AVAX' ||
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' || token.symbol == 'USDT'
       )
@@ -119,6 +124,9 @@ export function useVaultTVL(): TVLInfo[] {
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
         return ftmPrice
+      }
+      if (token.symbol == 'WAVAX' || token.symbol == 'AVAX') {
+        return avaxPrice
       }
       if (token.symbol == 'SEANCE') {
         return seancePrice
@@ -211,14 +219,14 @@ export function useVaultTVL(): TVLInfo[] {
 
 export function useTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
-  const ftmPrice = useFantomPrice()
-  const soulPrice = useSoulPrice()
+  const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[ChainId.FANTOM]).tokenInfo.price) // only on FTM and ETH
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
   const seancePrice = useSeancePrice()
   const luxPrice = useLuxorPrice()
   const wethPrice = useWrappedEthPrice()
 
-  const farmingPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
-    return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
+  const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
+    return { ...POOLS[chainId][key], lpToken: key }
   })
 
   const singlePools = farmingPools.filter((r) => !r.token1)
@@ -229,10 +237,10 @@ export function useTVL(): TVLInfo[] {
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
   const totalSupply = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'totalSupply')
   const summonerBalance = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_SUMMONER_ADDRESS[ChainId.FANTOM],
+    SUMMONER_ADDRESS[chainId],
   ])
   const summonerBalanceSingle = useMultipleContractSingleData(singleAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_SUMMONER_ADDRESS[ChainId.FANTOM],
+    SUMMONER_ADDRESS[chainId],
   ])
 
   return useMemo(() => {
@@ -240,6 +248,7 @@ export function useTVL(): TVLInfo[] {
       return (
         token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' ||
+        token.symbol == 'WAVAX' ||
         token.symbol == 'LUX' ||
         token.symbol == 'FTM' ||
         token.symbol == 'SEANCE' ||
@@ -356,15 +365,15 @@ export function useTVL(): TVLInfo[] {
 }
 export function useBondTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
-  const ftmPrice = useFantomPrice()
-  const soulPrice = useSoulPrice()
+  const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[ChainId.FANTOM]).tokenInfo.price) // only on FTM and ETH
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
   const seancePrice = useSeancePrice()
   const luxPrice = useLuxorPrice()
   const wethPrice = useWrappedEthPrice()
-  const avaxPrice = usePriceUSD(AVAX_ADDRESS[chainId])
+  const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId]).tokenInfo.price)
 
-  const bondingPools = Object.keys(BONDS[ChainId.FANTOM]).map((key) => {
-    return { ...BONDS[ChainId.FANTOM][key], lpToken: key }
+  const bondingPools = Object.keys(BONDS[chainId]).map((key) => {
+    return { ...BONDS[chainId][key], lpToken: key }
   })
 
   const singlePools = bondingPools.filter((r) => !r.token1)
@@ -483,15 +492,15 @@ export function useBondTVL(): TVLInfo[] {
 export function useSoulTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const ftmPrice = useFantomPrice()
-  const soulPrice = useSoulPrice()
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
   const seancePrice = useSeancePrice()
   const luxPrice = useLuxorPrice()
   const wethPrice = useWrappedEthPrice()
   const wlumPrice = useWrappedLumPrice()
-  const avaxPrice = usePriceUSD(AVAX_ADDRESS[chainId])
+  const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId]).tokenInfo.price)
 
-  const liquidityPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
-    return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
+  const liquidityPools = Object.keys(POOLS[chainId]).map((key) => {
+    return { ...POOLS[chainId][key], lpToken: key }
   })
 
   const singlePools = liquidityPools.filter((r) => !r.token1)
@@ -621,13 +630,13 @@ export function useSoulTVL(): TVLInfo[] {
 export function useLuxTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const ftmPrice = useFantomPrice()
-  const soulPrice = useSoulPrice()
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
   const seancePrice = useSeancePrice()
   const luxPrice = useLuxorPrice()
-  const wethPrice = useWrappedEthPrice()
+  const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId]).tokenInfo.price)
 
-  const liquidityPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
-    return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
+  const liquidityPools = Object.keys(POOLS[chainId]).map((key) => {
+    return { ...POOLS[chainId][key], lpToken: key }
   })
 
   const singlePools = liquidityPools.filter((r) => !r.token1)

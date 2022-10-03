@@ -93,7 +93,7 @@ import BALANCES_FETCHER_ABI from 'constants/abis/balancesfetcher.json'
 import SOUL_SCARAB_ABI from 'constants/abis/soulswap/scarab.json'
 import SOUL_SAFE_ABI from 'constants/abis/soulswap/safe.json'
 import SOUL_GUIDE_ABI from 'constants/abis/soul-guide.json' // TODO: update abi
-import SOUL_SUMMONER_ABI from 'constants/abis/soulswap/soulsummoner.json' // 28 JUL
+import SUMMONER_ABI from 'constants/abis/soulswap/soulsummoner.json' // 28 JUL
 import SOUL_MANIFESTER_ABI from 'constants/abis/soulswap/soulmanifester.json' // 28 JUL
 import LOTTERY_ABI from 'constants/abis/soulswap/lottery.json' // 28 JUL
 import LUXOR_ABI from 'constants/abis/soulswap/luxor.json'
@@ -387,7 +387,7 @@ export function useTridentRouterContract(withSignerIfPossible?: boolean): Contra
 export function useMasterChefContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SUMMONER_ADDRESS[chainId], 
-    chainId == ChainId.FANTOM ? SOUL_SUMMONER_ABI : SOUL_MANIFESTER_ABI,
+    chainId == ChainId.FANTOM ? SUMMONER_ABI : SOUL_MANIFESTER_ABI,
     withSignerIfPossible)
 }
 
@@ -418,7 +418,7 @@ export function useLotteryContract(withSignerIfPossible?: boolean): Contract | n
 export function useSummonerContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SUMMONER_ADDRESS[chainId], 
-    chainId == ChainId.FANTOM ? SOUL_SUMMONER_ABI : SOUL_MANIFESTER_ABI,
+    chainId == ChainId.FANTOM ? SUMMONER_ABI : SOUL_MANIFESTER_ABI,
     withSignerIfPossible)
 }
 
