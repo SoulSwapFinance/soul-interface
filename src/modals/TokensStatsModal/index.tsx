@@ -258,7 +258,7 @@ export default function TokenStatsModal(): JSX.Element | null {
           formatCurrency(
             Number(totalSoul) * Number(soulPrice)
         ))}
-        {getSummaryLine(
+        { [ChainId.FANTOM].includes(chainId) && getSummaryLine(
           <div className="flex items-center">
             <Typography variant="sm" className="flex items-center py-0.5">
               {`Total Value Locked`}
@@ -311,7 +311,7 @@ export default function TokenStatsModal(): JSX.Element | null {
           formatCurrency(
             Number(farmsTvl + bondsTvl), 0)
         )}
-        {getSummaryLine(
+        { [ChainId.FANTOM].includes(chainId) && getSummaryLine(
           <div className="flex items-center">
             <Typography variant="sm" className="flex items-center py-0.5">
               {`Protocol Liquidity`}
@@ -356,7 +356,8 @@ export default function TokenStatsModal(): JSX.Element | null {
             Number(bondsTvl + soulTvl), true)
             , 
             ` (${((podl / tvl * 100).toFixed(0))}%)`
-        ))}
+            ))
+          }
         {/* {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Percent PODL`}
