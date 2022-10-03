@@ -80,18 +80,6 @@ export const ROUTER_ADDRESS = {
   [ChainId.AVALANCHE]: '0xa4594460A9d3D41e8B85542D34E23AdAbc3c86Ef',
 }
 
-export const SOUL_VAULT_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // TODO: UPDATE?
-  [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
-}
-
 export const SCARAB_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
@@ -190,7 +178,7 @@ export const FAUCET_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '',
 }
 
-export const SOUL_SUMMONER_ADDRESS: AddressMap = {
+export const SUMMONER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',

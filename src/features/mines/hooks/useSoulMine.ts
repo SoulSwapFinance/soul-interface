@@ -9,10 +9,10 @@ import {
   usePriceHelperContract,
   usePairContract,
   useTokenContract,
-  useSoulSummonerContract,
+  useSummonerContract,
 } from 'hooks/useContract'
 
-import { SOUL_SUMMONER_ADDRESS } from 'sdk'
+import { SUMMONER_ADDRESS } from 'sdk'
 
 import { useFantomPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice } from 'hooks/getPrices'
 
@@ -24,7 +24,7 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
   // const farmHelperContract = useHelperContract()
   const helperContract = useHelperContract()
   const priceHelperContract = usePriceHelperContract()
-  const summonerContract = useSoulSummonerContract()
+  const summonerContract = useSummonerContract()
   const lpTokenContract = usePairContract(lpToken)
   const token1Contract = useTokenContract(token1Address[chainId])
   const token2Contract = useTokenContract(token2Address[chainId])
@@ -345,7 +345,7 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
    */
   const fetchUserLpTokenAlloc = async (account) => {
     try {
-      const contractBal = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[chainId])
+      const contractBal = await lpTokenContract?.balanceOf(SUMMONER_ADDRESS[chainId])
       const userBal = await lpTokenContract?.balanceOf(account)
 
       const alloc = userBal / contractBal
@@ -369,7 +369,7 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
       const totalSupply = await lpTokenContract?.totalSupply()
 
       // get how many lpTokens held by Summoner
-      const heldBySummoner = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[chainId])
+      const heldBySummoner = await lpTokenContract?.balanceOf(SUMMONER_ADDRESS[chainId])
 
       // get how many lpTokens held by user
       const heldByUser = await lpTokenContract?.balanceOf(account)
@@ -451,7 +451,7 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
   // const fetchFusdValue = useCallback(async (lpToken) => {
   //   try {
   //     // return total amount of lp tokens locked in summoner contract
-  //     const netLpTokens = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[chainId][chainId])
+  //     const netLpTokens = await lpTokenContract?.balanceOf(SUMMONER_ADDRESS[chainId][chainId])
 
   //     // how many ftm tokens held in the lpTokenContract account
   //     const fusdOrFtmAmount = isFusd ? await wftmContract.balanceOf(lpToken) : await fusdContract.balanceOf(lpToken)
@@ -491,7 +491,7 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
 
       // lp tokens held by summoner
       const totalLpTokens = await lpTokenContract?.totalSupply()
-      const summonerLpTokens = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[chainId])
+      const summonerLpTokens = await lpTokenContract?.balanceOf(SUMMONER_ADDRESS[chainId])
       const supplyHeldBySummoner = summonerLpTokens / totalLpTokens
 
       // value of lp tokens held by summoner
@@ -553,7 +553,7 @@ function useSoulMine(pid, lpToken, token1Address, token2Address) {
   const fetchPid0LiquidityValue = async (lpToken) => {
     try {
       // SOUL held by summoner
-      const rawSummonerBal = await lpTokenContract?.balanceOf(SOUL_SUMMONER_ADDRESS[chainId])
+      const rawSummonerBal = await lpTokenContract?.balanceOf(SUMMONER_ADDRESS[chainId])
       const summonerBalance = BigNumber.from(ethers.utils.formatUnits(rawSummonerBal))
       // console.log('summonerBalance', ethers.utils.formatUnits(summonerBalance))
 

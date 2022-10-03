@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useActiveWeb3React } from 'services/web3'
 import { Token } from 'sdk'
-import { useSoulSummonerContract } from 'hooks/useContract'
 import { Tab } from '@headlessui/react'
 import { LendContentWrapper,
     LendContainer, LendItem, LendItemBox, SubmitButton
@@ -12,14 +11,7 @@ import { useUnderworldPairInfo, useUnderworldUserInfo } from 'hooks/useAPI'
 import Modal from 'components/DefaultModal'
 import Typography from 'components/Typography'
 import NavLink from 'components/NavLink'
-import DoubleCurrencyLogo from 'components/DoubleLogo'
 import { CurrencyLogo } from 'components/CurrencyLogo'
-
-// const HideOnSmall = styled.div`
-// @media screen and (max-width: 900px) {
-//   display: none;
-// }
-// `
 
 const HideOnMobile = styled.div`
 @media screen and (max-width: 600px) {
@@ -29,9 +21,6 @@ const HideOnMobile = styled.div`
 
 export const Row = ({ pair, lpToken }) => {
     const { account, chainId, library } = useActiveWeb3React()
-
-    // const SoulSummonerContract = useSoulSummonerContract()
-
     const [showOptions, setShowOptions] = useState(false)
     const [openLend, setOpenLend] = useState(false)
     const [openBorrow, setOpenBorrow] = useState(false)

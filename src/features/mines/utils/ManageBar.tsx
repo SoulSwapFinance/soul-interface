@@ -1,11 +1,11 @@
+import React, { useState } from 'react'
 import { getAddress } from '@ethersproject/address'
 import { BigNumber } from '@ethersproject/bignumber'
 import { MinusIcon, PlusIcon } from '@heroicons/react/solid'
 import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
-import { CurrencyAmount, JSBI, SOUL_SUMMONER_ADDRESS, Token, USD } from 'sdk'
+import { SUMMONER_ADDRESS, Token } from 'sdk'
 import AssetInput from 'components/AssetInput'
-import CurrencyInputPanel from '../components/CurrencyInputPanel'
 import { Button } from 'components/Button'
 import { HeadlessUiModal } from 'components/Modal'
 import Switch from 'components/Switch'
@@ -19,15 +19,10 @@ import { useActiveWeb3React } from 'services/web3'
 import { useAppDispatch } from 'state/hooks'
 import { useTransactionAdder } from 'state/transactions/hooks'
 import { useCurrencyBalance } from 'state/wallet/hooks'
-import React, { useState } from 'react'
-
-// import { PairType } from '../enum'
 import { useUserInfo } from '../hooks'
 import useMasterChef from '../hooks/useMasterChef'
 import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import { useCurrency } from 'hooks/Tokens'
-import { SOUL_ADDRESS } from 'constants/addresses'
-import { usePrice } from 'hooks/usePrice'
 
 const ManageBar = ({ farm }) => {
   const dispatch = useAppDispatch()
@@ -60,7 +55,7 @@ const ManageBar = ({ farm }) => {
   // const parsedValue = tryParseAmount(value, liquidityToken)
   const parsedDepositValue = tryParseAmount(depositValue, liquidityToken)
   const parsedWithdrawValue = tryParseAmount(withdrawValue, liquidityToken)
-  const [approvalState, approve] = useApproveCallback(parsedDepositValue, SOUL_SUMMONER_ADDRESS[chainId])
+  const [approvalState, approve] = useApproveCallback(parsedDepositValue, SUMMONER_ADDRESS[chainId])
   
   let token0 = useCurrency(farm.pair.token0?.id)
   let token1 = useCurrency(farm.pair.token1?.id)

@@ -9,7 +9,7 @@ import useSoulSummoner from "features/mines/hooks/useSoulSummoner";
 import useApprove from "features/bond/hooks/useApprove";
 
 import {
-  SOUL_SUMMONER_ADDRESS,
+  SUMMONER_ADDRESS,
   // SeanceTokenAddress,
   // SoulTokenAddress,
 } from "../../constants";
@@ -248,7 +248,7 @@ const StakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       const amount = await erc20Allowance(
         lpToken,
         account,
-        SOUL_SUMMONER_ADDRESS[chainId]
+        SUMMONER_ADDRESS[chainId]
       );
       if (amount > 0) setApproved(true);
       return amount;
@@ -263,7 +263,7 @@ const StakeRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       console.log("connect wallet");
     } else {
       try {
-        const tx = await erc20Approve(lpToken, SOUL_SUMMONER_ADDRESS[chainId]);
+        const tx = await erc20Approve(lpToken, SUMMONER_ADDRESS[chainId]);
       } catch (e) {
         alert(e.message);
         console.log(e);

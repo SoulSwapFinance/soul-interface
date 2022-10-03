@@ -1,6 +1,5 @@
 import React from 'react'
 import Typography from 'components/Typography'
-
 import { Active, Inactive, Underworld } from './Key'
 import { ActiveRow } from './Row'
 import { AvalanchePools, FantomPools, AvalancheLendingPools, FantomLendingPools, InactiveFantomPools, InactiveAvalanchePools } from './Pools'
@@ -8,7 +7,6 @@ import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
-import { classNames } from 'functions'
 import { getChainColorCode } from 'constants/chains'
 import { useSummonerContract } from 'hooks/useContract'
 

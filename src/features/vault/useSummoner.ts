@@ -1,12 +1,11 @@
-import { useSoulSummonerContract, useSoulVaultContract } from '../../hooks'
-
+import React, { useCallback } from 'react'
+import { useSummonerContract } from 'hooks/useContract'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Zero } from '@ethersproject/constants'
-import { useCallback } from 'react'
 
 export default function useSummoner() {
 
-  const contract = useSoulVaultContract()
+  const contract = useSummonerContract()
 
   // Deposit
   const deposit = useCallback(

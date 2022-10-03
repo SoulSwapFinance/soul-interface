@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-
 import { ethers } from 'ethers'
-
 import { useActiveWeb3React } from 'services/web3'
-
-import { useSoulSummonerContract } from 'hooks/useContract'
 import useApprove from 'features/bond/hooks/useApprove'
-
-import { SOUL_SUMMONER_ADDRESS } from 'constants/addresses'
+import { SUMMONER_ADDRESS } from 'sdk'
 
 import {
   FlexText,
@@ -17,9 +12,7 @@ import {
   StakeContentWrapper,
   TokenPairBox,
   StakeItemBox,
-  // StakeItemHeading,
   StakeItem,
-  // ShowBtn,
   DetailsContainer,
   DetailsWrapper,
   FunctionBox,
@@ -27,7 +20,7 @@ import {
   SubmitButton,
 } from './StakeStyles'
 
-import { Wrap, ClickableText, Heading, Text, ExternalLink } from './ReusableStyles'
+import { Wrap, ClickableText, Text, ExternalLink } from './ReusableStyles'
 
 // params to render farm with:
 // 1. LpToken + the 2 token addresses (fetch icon from folder in)
@@ -228,7 +221,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       alert('Connect Wallet')
     } else {
       // Checks if SoulSummoner can move tokens
-      const amount = await erc20Allowance(account, SOUL_SUMMONER_ADDRESS[chainId | 250])
+      const amount = await erc20Allowance(account, SUMMONER_ADDRESS[chainId | 250])
       if (amount > 0) setApproved(true)
       return amount
     }
@@ -242,7 +235,7 @@ const StakePairRow = ({ pid, lpSymbol, lpToken, token1, token2, farm }) => {
       alert('Connect Wallet')
     } else {
       try {
-        const tx = await erc20Approve(SOUL_SUMMONER_ADDRESS[chainId | 250])
+        const tx = await erc20Approve(SUMMONER_ADDRESS[chainId | 250])
         await tx?.wait().then(await fetchApproval())
       } catch (e) {
         // alert(e.message)
