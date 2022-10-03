@@ -1,11 +1,10 @@
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
-import { Token, ZERO } from '../../sdk'
+import { SUMMONER_ADDRESS, Token, ZERO } from '../../sdk'
 import { Disclosure, Transition } from '@headlessui/react'
 import React, { useState } from 'react'
 import { usePendingSoul, useUserInfo } from './hooks'
 import { Button } from '../../components/Button'
 import Dots from '../../components/Dots'
-import { SOUL_SUMMONER_ADDRESS, SOUL_VAULT_ADDRESS } from '../../constants/addresses'
 import { Input as NumericalInput } from '../../components/NumericalInput'
 import { formatNumber, formatNumberScale, formatPercent } from '../../functions'
 import { getAddress } from '@ethersproject/address'
@@ -13,13 +12,10 @@ import { t } from '@lingui/macro'
 import { tryParseAmount } from '../../functions/parse'
 import { useLingui } from '@lingui/react'
 import useMasterChef from './useSummoner'
-import usePendingReward from './usePendingReward'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { useTransactionAdder } from '../../state/transactions/hooks'
-import { isMobile } from 'react-device-detect'
 import Modal from 'components/DefaultModal'
 import Typography from '../../components/Typography'
-import moment from 'moment'
 import { BigNumber } from '@ethersproject/bignumber'
 import { useActiveWeb3React } from 'services/web3'
 import ModalHeader from 'components/Modal/Header'
@@ -54,9 +50,7 @@ const VaultListItem = ({ farm }) => {
 
   const typedDepositValue = tryParseAmount(depositValue, liquidityToken)
   const typedWithdrawValue = tryParseAmount(withdrawValue, liquidityToken)
-
-  const [approvalState, approve] = useApproveCallback(typedDepositValue, SOUL_VAULT_ADDRESS[chainId])
-
+  const [approvalState, approve] = useApproveCallback(typedDepositValue, SUMMONER_ADDRESS[chainId])
   const { deposit, withdraw, harvest } = useMasterChef()
 
   return (

@@ -1,14 +1,14 @@
-import { CurrencyAmount, Token, SOUL_VAULT_ADDRESS } from '../../../sdk'
+import { CurrencyAmount, Token } from '../../../sdk'
 // import { Fraction } from '../entities'
 import { useActiveWeb3React } from 'services/web3'
 import { useCallback } from 'react'
-import { useSoulVaultContract } from './useContract'
+import { useSummonerContract } from 'hooks/useContract'
 import { useTransactionAdder } from '../../../state/transactions/hooks'
 
 const useSoulVault = () => {
   const { account } = useActiveWeb3React()
   const addTransaction = useTransactionAdder()
-  const soulVaultContract = useSoulVaultContract()
+  const soulVaultContract = useSummonerContract()
 
   // -----------------------
   //  Read Functions
@@ -109,7 +109,7 @@ const useSoulVault = () => {
   const withdrawAll = useCallback(async () => {
     try {
       const tx = await soulVaultContract?.withdrawAll()
-      return addTransaction(tx, { summary: 'Unstake all SOUL' })
+      return addTransaction(tx, { summary: 'Unstake All SOUL' })
     } catch (e) {
       return e
     }

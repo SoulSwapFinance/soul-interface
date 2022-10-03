@@ -4,7 +4,7 @@ import { useActiveWeb3React } from "services/web3"
 import { useSingleCallResult, useSingleContractMultipleData } from "state/multicall/hooks"
 import zip from 'lodash/zip'
 import { Zero } from '@ethersproject/constants'
-import { useSoulSummonerContract } from 'hooks'
+import { useSummonerContract } from 'hooks'
 
 export function useSoulPositions(contract?: Contract | null) {
     const { account } = useActiveWeb3React()
@@ -39,5 +39,5 @@ export function useSoulPositions(contract?: Contract | null) {
   }
   
 export function usePositions() {
-    return useSoulPositions(useSoulSummonerContract())
+    return useSoulPositions(useSummonerContract())
   }

@@ -4,12 +4,9 @@ import {
   CurrencyAmount,
   JSBI
 } from 'sdk'
-import {
-  useMasterChefContract, useSoulSummonerContract, useSummonerContract,
-} from 'hooks/useContract'
+import { useSummonerContract } from 'hooks/useContract'
 import { useActiveWeb3React } from 'services/web3'
 import { NEVER_RELOAD, useSingleCallResult, useSingleContractMultipleData } from 'state/multicall/hooks'
-import concat from 'lodash/concat'
 import zip from 'lodash/zip'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
@@ -170,7 +167,7 @@ export function useSoulPositions(contract?: Contract | null) {
 }
 
 export function usePositions() {
-  return useSoulPositions(useSoulSummonerContract())
+  return useSoulPositions(useSummonerContract())
 }
 
 export function useSoulFarms(contract?: Contract | null) {

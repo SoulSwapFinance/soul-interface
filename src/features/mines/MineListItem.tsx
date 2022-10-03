@@ -62,7 +62,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   // const pairs = useSoulPairs({ chainId, variables: { where: { lpToken } }, shouldFetch: !!chainId })?.[0]
 
   // function usePositions() {
-  //   return useSoulPositions(useSoulSummonerContract())
+  //   return useSoulPositions(useSummonerContract())
   // }
 
   // const positions = usePositions()
@@ -73,7 +73,7 @@ const MineListItem: FC<MineListItem> = ({ farm, onClick }) => {
   // BALANCES AND TVL //
 
   const lpBalance = useSingleCallResult(harvestHelperContract, 'fetchBals', [farm?.id])?.result
-  // const lpBalance = usePairBalance(SOUL_SUMMONER_ADDRESS[chainId], farm?.id)?.[0]
+  // const lpBalance = usePairBalance(SUMMONER_ADDRESS[chainId], farm?.id)?.[0]
   // console.log('lpBal:%s', Number(lpBalance) | 0)
   
   const tvl 
