@@ -75,7 +75,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     // const { userInfo } = useUserInfo()
     const { pairInfo } = usePairInfo(lpAddress)
     // assumes 18, since only SOUL-LP farms are eligible for Zap   
-    const assetDecimals = Number(pairInfo.pairDecimals)
+    const assetDecimals = 18 // Number(pairInfo.pairDecimals)
     const token0Decimals = Number(pairInfo.token0Decimals)
     const token1Decimals = Number(pairInfo.token1Decimals)
 

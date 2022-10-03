@@ -336,7 +336,8 @@ export const SOUL_BOND_ADDRESS: { [chainId in ChainId]: string } = {
 }
 
 export const MULTICALL_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696',
+  // [ChainId.ETHEREUM]: '0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696',
+  [ChainId.ETHEREUM]: '0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xf682Cc4468608fC4eFbaD6a06D9BC72e7790075a',

@@ -67,6 +67,22 @@ export const POOLS: AddressMap = {
         decimals: 6,
       },
     },
+    // '': {
+    //   id: 3,
+    //   address: SOUL_USDC[ChainId.AVALANCHE],
+    //   token0: {
+    //     id: SOUL_ADDRESS[ChainId.AVALANCHE],
+    //     name: 'Soul Power',
+    //     symbol: 'SOUL',
+    //     decimals: 18
+    //   },
+    //   token1: {
+    //     id: USDC_ADDRESS[ChainId.AVALANCHE],
+    //     name: 'USD Coin',
+    //     symbol: 'USDC',
+    //     decimals: 6,
+    //   },
+    // },
   },
   [ChainId.FANTOM]: {
     '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07': {

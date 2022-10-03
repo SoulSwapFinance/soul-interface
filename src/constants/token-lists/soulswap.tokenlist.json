@@ -31,6 +31,14 @@
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/ethereum/assets/0x34862060EFF6DA2AF04D382C209a433279377d16/logo.png"
       },
       {
+        "name": "Binance",
+        "address": "0x264c1383EA520f73dd837F915ef3a732e204a493",
+        "symbol": "BNB",
+        "decimals": 18,
+        "chainId": 43114,
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/avalanche/assets/0x264c1383EA520f73dd837F915ef3a732e204a493/logo.png"
+      },
+      {
         "name": "USD Coin",
         "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
         "symbol": "USDC",
