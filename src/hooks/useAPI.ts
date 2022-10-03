@@ -78,7 +78,6 @@ export function useSoulInfo(): { status: string; soulInfo: T } {
         BitcoinEthereumValue: '0',
 
         api: "https://api.soulswap.finance/soulswap",
-        ftmscan: `https://ftmscan.com/address/${SOUL_ADDRESS[chainId]}#code`,
         image: 'https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png'
       })  
     useEffect(() => {
@@ -564,7 +563,6 @@ export function useSummonerInfo(): { status: string; summonerInfo: T } {
       weight: '0',
       weightTotal: '0',
       weightShare: '0',
-      ftmscan: 'https://ftmscan.com',
   })  
   useEffect(() => {
     const fetchData = async () => {
@@ -598,7 +596,6 @@ export function useStakeInfo(userAddress): { status: string; stakeInfo: T } {
       stakedValue: '0',
       walletBalance: '0',
       apr: '30',
-      ftmscan: 'https://ftmscan.com',
   })  
   useEffect(() => {
     const fetchData = async () => {
@@ -693,9 +690,7 @@ export function useSummonerUserInfo(pid): { status: string; summonerUserInfo: T 
       secondsRemaining: '0',
       rewardDebtAtTimes: '0',
       currentRate: '0',
-     
       api: 'https://api.soulswap.finance',
-      ftmscan: 'https://ftmscan.com',
   })  
   useEffect(() => {
     const fetchData = async () => {
