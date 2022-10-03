@@ -490,7 +490,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                         "w-full space-y-1")
 
                                     }>
-                                    {Number(walletBalance) > 0 && (
+                                    {/* Number(walletBalance) > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white font-bold" fontFamily={'medium'}>
                                                 Wallet Balance
@@ -499,15 +499,39 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                                 {formatNumber(walletBalance, false, true)} {tokenSymbol}
                                             </Typography>
                                         </div>
-                                    )}
+                                    )
+                                    */} 
 
-                                    {Number(walletValue) > 0 && (
+                                    {/* Number(walletValue) > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
                                                 Balance (USD)
                                             </Typography>
                                             <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
                                                 {formatNumber(walletValue, true, true)}
+                                            </Typography>
+                                        </div>
+                                    )
+                                    */}
+  
+                                      {Number(stakedBalance) > 0 && (
+                                        <div className="flex justify-between">
+                                            <Typography className="text-white" fontFamily={'medium'}>
+                                                Staked Balance
+                                            </Typography>
+                                            <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                                                {formatNumber(stakedBalance, false, true)} {farm.lpSymbol}
+                                            </Typography>
+                                        </div>
+                                    )}
+
+                                    {stakedValue > 0 && (
+                                        <div className="flex justify-between">
+                                            <Typography className="text-white" fontFamily={'medium'}>
+                                                Balance (USD)
+                                            </Typography>
+                                            <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
+                                                {formatNumber(stakedValue, true, true)}
                                             </Typography>
                                         </div>
                                     )}
