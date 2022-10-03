@@ -25,20 +25,17 @@ enum DeadlineError {
 
 export interface TransactionSettingsProps {
   placeholderSlippage?: Percent // varies according to the context in which the settings dialog is placed
-  trident?: boolean
 }
 
-const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage, trident = false }) => {
+const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage }) => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const userSlippageTolerance = useUserSlippageTolerance()
   const setUserSlippageTolerance = useSetUserSlippageTolerance()
-
   const [deadline, setDeadline] = useUserTransactionTTL()
 
   const [slippageInput, setSlippageInput] = useState('')
   const [slippageError, setSlippageError] = useState<SlippageError | false>(false)
-
   const [deadlineInput, setDeadlineInput] = useState('')
   const [deadlineError, setDeadlineError] = useState<DeadlineError | false>(false)
 
@@ -89,7 +86,7 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-cols gap-2">
       <div className="grid gap-2">
         <div className="flex items-center">
           <Typography variant="xs" weight={700} className="text-high-emphesis">
@@ -108,15 +105,15 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
               !!slippageError
                 ? 'border-red/60'
                 : tooLow || tooHigh
-                ? 'border-yellow/60'
-                : userSlippageTolerance !== 'auto'
-                ? `border-${getChainColorCode(chainId)}`
-                : 'border-dark-800',
+                  ? 'border-yellow/60'
+                  : userSlippageTolerance !== 'auto'
+                    ? `border-${getChainColorCode(chainId)}`
+                    : 'border-dark-800',
               'border-2 h-[36px] flex items-center px-2 rounded bg-dark-1000/40'
             )}
             tabIndex={-1}
           >
-            <div className="flex items-center justify-between gap-1">
+            <div className="flex items-center justify-between">
               {tooLow || tooHigh ? <ExclamationIcon className="text-yellow" width={24} /> : null}
               <input
                 id="text-slippage"
@@ -129,8 +126,8 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
                   slippageInput.length > 0
                     ? slippageInput
                     : userSlippageTolerance === 'auto'
-                    ? ''
-                    : userSlippageTolerance.toFixed(2)
+                      ? ''
+                      : userSlippageTolerance.toFixed(2)
                 }
                 onChange={(e) => parseSlippageInput(e.target.value)}
                 onBlur={() => {
@@ -141,18 +138,21 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
               />
               %
             </div>
+            <div>
+            </div>
           </div>
-          <div>
-            <Button
-              size="sm"
-              color={userSlippageTolerance === 'auto' ? `${getChainColorCode(chainId)}` : 'gray'}
-              variant="outlined"
-              onClick={() => parseSlippageInput('')}
-            >
-              {i18n._(t`Auto`)}
-            </Button>
-          </div>
+          <Button
+            height="2rem"
+            size="sm"
+            color={userSlippageTolerance === 'auto' ? `${getChainColorCode(chainId)}` : 'gray'}
+            variant="filled"
+            onClick={() => parseSlippageInput('')}
+          >
+            {i18n._(t`Auto`)}
+          </Button>
         </div>
+        {/* <div> */}
+        {/* </div> */}
         {slippageError || tooLow || tooHigh ? (
           <Typography
             className={classNames(
@@ -166,49 +166,46 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
               {slippageError === SlippageError.InvalidInput
                 ? i18n._(t`Invalid Slippage`)
                 : slippageError === SlippageError.RiskyLow
-                ? i18n._(t`Failure Risk`)
-                : i18n._(t`Frontrun Risk`)}
+                  ? i18n._(t`Failure Risk`)
+                  : i18n._(t`Frontrun Risk`)}
             </div>
           </Typography>
         ) : null}
       </div>
+      <div className="grid gap-2">
+        <div className="flex items-center">
+          <Typography variant="xs" weight={700} className="text-high-emphesis">
+            {i18n._(t`Deadline`)}
+          </Typography>
 
-      {!trident && (
-        <div className="grid gap-2">
-          <div className="flex items-center">
-            <Typography variant="xs" weight={700} className="text-high-emphesis">
-              {i18n._(t`Deadline`)}
-            </Typography>
-
-            <QuestionHelper text={i18n._(t`Transaction reverts if pending past deadline.`)} />
-          </div>
-          <div className="flex items-center gap-2">
-            <input
-              className={classNames(
-                deadlineError ? 'text-red' : '',
-                'font-bold bg-transparent placeholder-low-emphesis bg-dark-1000/40 border-2 border-dark-800 rounded px-3 py-2 max-w-[100px] focus:border-blue'
-              )}
-              placeholder={(DEFAULT_DEADLINE_FROM_NOW / 60).toString()}
-              value={
-                deadlineInput.length > 0
-                  ? deadlineInput
-                  : deadline === DEFAULT_DEADLINE_FROM_NOW
+          <QuestionHelper text={i18n._(t`Transaction reverts if pending past deadline.`)} />
+        </div>
+        <div className="flex items-center gap-2">
+          <input
+            className={classNames(
+              deadlineError ? 'text-red' : '',
+              'font-bold bg-transparent placeholder-low-emphesis bg-dark-1000/40 border-2 border-dark-800 rounded px-3 py-2 max-w-[100px] focus:border-blue'
+            )}
+            placeholder={(DEFAULT_DEADLINE_FROM_NOW / 60).toString()}
+            value={
+              deadlineInput.length > 0
+                ? deadlineInput
+                : deadline === DEFAULT_DEADLINE_FROM_NOW
                   ? ''
                   : (deadline / 60).toString()
-              }
-              onChange={(e) => parseCustomDeadline(e.target.value)}
-              onBlur={() => {
-                setDeadlineInput('')
-                setDeadlineError(false)
-              }}
-              color={deadlineError ? 'red' : ''}
-            />
-            <Typography variant="sm" weight={700} className="text-secondary">
-              {i18n._(t`minutes`)}
-            </Typography>
-          </div>
+            }
+            onChange={(e) => parseCustomDeadline(e.target.value)}
+            onBlur={() => {
+              setDeadlineInput('')
+              setDeadlineError(false)
+            }}
+            color={deadlineError ? 'red' : ''}
+          />
+          <Typography variant="sm" weight={700} className="text-secondary">
+            {i18n._(t`minutes`)}
+          </Typography>
         </div>
-      )}
+      </div>
     </div>
   )
 }

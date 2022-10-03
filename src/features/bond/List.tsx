@@ -1,4 +1,4 @@
-import { BondKey } from './Key'
+import { Active } from './Key'
 import BondRowRender from './Row'
 import { AvalanchePools, FantomPools } from './Pids'
 import { useActiveWeb3React } from 'services/web3'
@@ -37,7 +37,7 @@ const BondList = () => {
   return (
     <>
       {/* <BondHeader/> */}
-      <BondKey />
+      <Active />
       <>{ chainId == 43114 ? avaxList : ftmList }</>
     </>
   )
