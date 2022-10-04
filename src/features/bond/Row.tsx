@@ -115,7 +115,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
     : stakedBal * lpPrice
   // const availableValue = unstakedBal * lpPrice
   const pendingValue = pending * soulPrice
-  // const percOfBond = 100 * stakedLpValue / liquidity
+  const percOfBond = 100 * stakedLpValue / liquidity
 
   // initial render/mount & reruns every 2 seconds
   useEffect(() => {
@@ -257,7 +257,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
               </BondItemBox>
               </HideOnMobile>
 
-              {/* <HideOnSmall>
+              <HideOnSmall>
               <BondItemBox>
                 <Text fontSize="1rem" color="#FFFFFF">
                   {`${ 
@@ -266,7 +266,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                     }%`}
                 </Text>
               </BondItemBox>
-              </HideOnSmall> */}
+              </HideOnSmall>
 
               <BondItemBox>
                 <Text fontSize="1rem" color="#FFFFFF">

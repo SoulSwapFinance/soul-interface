@@ -1,4 +1,4 @@
-import BondKey from './Key'
+import { BondKey } from './Key'
 import BondRowRender from './Row'
 import { AvalanchePools, FantomPools } from './Pids'
 import { useActiveWeb3React } from 'services/web3'
