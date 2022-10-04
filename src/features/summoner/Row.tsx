@@ -115,7 +115,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const isUnderworldPair = pairType == "underworld"
     const isSwapPair = pairType == "farm"
     const isActive = pairStatus == "active"
-    const assetToken = new Token(chainId, farm.lpAddress, 18)
+    const assetToken = new Token(chainId, farm.lpAddress, assetDecimals)
 
     const parsedDepositValue = tryParseAmount(depositValue, assetToken)
 
