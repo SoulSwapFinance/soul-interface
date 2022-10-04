@@ -36,7 +36,6 @@ export default function Inactive() {
             </Head>
             <DoubleGlowShadowV2 opacity="0.6">
                 <div className="w-full max-w-2xl p-4 rounded z-1">
-                    <QuickLinks route="/circles" text="Withdraw from Inactive Circles" />
                     <QuickLinks route="/enchant" text="Exit Seance from Enchantment" />
                     <QuickLinks route="/exchange/remove/FTM/0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a" text="Remove FTM-Enchant LP" />
                 </div>

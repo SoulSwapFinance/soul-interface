@@ -186,7 +186,8 @@ const useMenu: UseMenu = () => {
         key: 'analytics',
         title: i18n._(t`Data`),
         icon: <TrendingUpIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
-        link: '/info'
+        link: '/analytics'
+        // link: '/info'
         // items: [
         //   {
         //     key: 'dashboard',

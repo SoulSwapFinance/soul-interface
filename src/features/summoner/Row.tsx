@@ -4,7 +4,7 @@ import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, SUMMONER_ADDRESS, Token, WNATIVE } from 'sdk'
 import { useTokenContract, useSummonerContract, useZapperContract } from 'hooks/useContract'
-import useApprove from 'features/bond/hooks/useApprove'
+import useApprove from 'hooks/useApprove'
 import { Tab } from '@headlessui/react'
 import {
     FarmContentWrapper, FarmContainer, FarmItem, FarmItemBox, Text, FunctionBox, SubmitButton, Wrap

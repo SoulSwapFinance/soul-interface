@@ -15,9 +15,9 @@ import { useRouter } from 'hooks/useRouter'
 import { ButtonExternalLink } from 'components/Pool/Button'
 // import { DimBlurBgBox } from '../../DimBlurBgBox/styleds'
 import { InfoGrid } from './InfoGrid/InfoGrid.styles'
-import { ValueWithLabel } from './ValueWithLabel'
+// import { ValueWithLabel } from './ValueWithLabel'
 import { useActiveWeb3React } from 'services/web3'
-import { formatCurrencyAmount } from 'functions/format'
+// import { formatCurrencyAmount } from 'functions/format'
 import { gradients } from 'utils/theme'
 
 interface PairViewProps {

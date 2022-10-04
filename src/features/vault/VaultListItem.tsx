@@ -1,27 +1,24 @@
 
-import { classNames, formatNumber, formatNumberScale, formatPercent } from '../../functions'
-
+import { classNames, formatNumber, formatNumberScale, formatPercent } from 'functions'
 import { Disclosure } from '@headlessui/react'
-import DoubleLogo from '../../components/DoubleLogo'
+import DoubleLogo from 'components/DoubleLogo'
 import VaultListItemDetails from './VaultListItemDetails'
-import Image from '../../components/Image'
+import Image from 'components/Image'
 import React, { useContext, useState } from 'react'
-import { useCurrency } from '../../hooks/Tokens'
-import { useV2PairsWithPrice } from '../../hooks/useV2Pairs'
-import { SOUL } from '../../constants/tokens'
+import { useCurrency } from 'hooks/Tokens'
+import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
+import { SOUL } from 'constants/tokens'
 import { useActiveWeb3React } from 'services/web3'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { CurrencyLogo } from '../../components/CurrencyLogo'
+import { CurrencyLogo } from 'components/CurrencyLogo'
 import { isMobile } from 'react-device-detect'
-import YieldDetails from '../../components/YieldDetails'
-import IconWrapper from '../../components/IconWrapper'
-import { WNATIVE } from '../../constants'
-import { PriceContext } from '../../contexts/priceContext'
+import YieldDetails from 'components/YieldDetails'
+import IconWrapper from 'components/IconWrapper'
+import { WNATIVE_ADDRESS } from 'sdk'
 import { Info } from 'react-feather'
-import moment from 'moment'
-import { usePriceHelperContract } from '../bond/hooks/useContract'
-import { useSingleCallResult } from '../../state/multicall/hooks'
+import { usePriceHelperContract } from 'hooks/useContract'
+import { useSingleCallResult } from 'state/multicall/hooks'
 
 const VaultListItem = ({ farm, ...rest }) => {
   const { chainId } = useActiveWeb3React()
@@ -58,7 +55,7 @@ const VaultListItem = ({ farm, ...rest }) => {
     if (farm.lpToken.toLowerCase() == SOUL[chainId].address.toLowerCase()) {
       lpPrice = Number(soulPrice)
       decimals = farm.pair.token0?.decimals
-    } else if (farm.lpToken.toLowerCase() == WNATIVE[chainId].toLowerCase()) {
+    } else if (farm.lpToken.toLowerCase() == WNATIVE_ADDRESS[chainId].toLowerCase()) {
       lpPrice = Number(ftmPrice)
     } else {
       lpPrice = pairPrice

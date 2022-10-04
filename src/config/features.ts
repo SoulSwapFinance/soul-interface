@@ -51,7 +51,7 @@ const features: FeatureMap = {
   [ChainId.AVALANCHE]: [
     Feature.AMM,
     Feature.SWAP,
-    // Feature.ANALYTICS,
+    Feature.ANALYTICS,
     Feature.LIQUIDITY,
     Feature.LIQUIDITY_MINING,
     Feature.BONDS,

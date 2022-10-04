@@ -15,14 +15,13 @@ import {
   tokenSubsetQuery,
   transactionsQuery,
 } from 'services/graph/queries'
-
 import { pager } from './pager'
 
 export const EXCHANGE = {
   // [ChainId.ETHEREUM]: 'sushiswap/exchange',
   [ChainId.ETHEREUM]: 'soulswapfinance/fantom-exchange',
   [ChainId.FANTOM]: 'soulswapfinance/fantom-exchange',
-  // [ChainId.FANTOM]: 'sushiswap/fantom-exchange',
+  [ChainId.AVALANCHE]: 'soulswapfinance/avalanche-exchange',
   // [ChainId.BSC]: 'sushiswap/bsc-exchange',
   [ChainId.BSC]: 'soulswapfinance/fantom-exchange',
 }

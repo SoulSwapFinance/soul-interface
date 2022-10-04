@@ -1,4 +1,4 @@
-import { useAlcxRewarderContract, useComplexRewarderContract } from '../../hooks/useContract'
+import { useAlcxRewarderContract, useComplexRewarderContract } from 'hooks/useContract'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { BigNumber } from '@ethersproject/bignumber'

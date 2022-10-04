@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { ethers } from 'ethers'
-import { useTokenContract } from '../../hooks/useContract'
+import { useTokenContract } from 'hooks/useContract'
 
 function useApproveContract(tokenAddress) {
   const contract = useTokenContract(tokenAddress)

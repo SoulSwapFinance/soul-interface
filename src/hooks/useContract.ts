@@ -53,6 +53,7 @@ import {
   LUXOR_STAKING_ADDRESS,
   LUXOR_STAKING_HELPER_ADDRESS,
   LUM_ADDRESS,
+  SOUL_BOND_ADDRESS,
 } from 'sdk'
 import {
   COFFIN_BOX_ADDRESS,
@@ -64,6 +65,8 @@ import {
   SOULSWAP_SWAPPER_ADDRESS,
 } from 'constants/addresses'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from 'constants/multicall'
+import SOUL_BOND_ABI from 'constants/abis/soulbond.json' 
+import SOUL_BOND_V2_ABI from 'constants/abis/soulswap/soulbondv2.json'
 import ALCX_REWARDER_ABI from 'constants/abis/alcx-rewarder.json'
 import CLONE_REWARDER_ABI from 'constants/abis/clone-rewarder.json'
 import ARCHER_ROUTER_ABI from 'constants/abis/archer-router.json'
@@ -593,6 +596,12 @@ export function useLimitOrderContract(withSignerIfPossibe?: boolean): Contract |
 
 export function useLimitOrderHelperContract(withSignerIfPossible?: boolean): Contract | null {
   return useContract('0xd63E7D4eB9aB59bf85975c7100a5D92919C4E7E5', LIMIT_ORDER_HELPER_ABI, withSignerIfPossible)
+}
+
+export function useSoulBondContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOUL_BOND_ADDRESS[chainId], 
+    chainId == 250 ? SOUL_BOND_ABI : SOUL_BOND_V2_ABI, withSignerIfPossible)
 }
 
 

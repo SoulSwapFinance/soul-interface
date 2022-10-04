@@ -2,8 +2,8 @@ import { Currency, CurrencyAmount } from '../sdk'
 
 import { useActiveWeb3React } from 'services/web3'
 import { useCallback } from 'react'
-import { useTransactionAdder } from '../state/transactions/hooks'
-import { useZapperContract } from '../hooks/useContract'
+import { useTransactionAdder } from 'state/transactions/hooks'
+import { useZapperContract } from 'hooks/useContract'
 
 const useZapper = (currency?: Currency) => {
   const { chainId, account } = useActiveWeb3React()

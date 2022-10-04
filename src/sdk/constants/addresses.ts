@@ -331,8 +331,8 @@ export const COFFIN_BOX_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.FANTOM]: '0xF539C37275e947F24480fAb9f7e302aE827570b2',
   [ChainId.FANTOM_TESTNET]: '',
   [ChainId.AVALANCHE]: '0x51d7d0d03A9E38Ba550f24cea28B992AD2350fee',
-[ChainId.MATIC]: '',
-[ChainId.MOONRIVER]: '',
+  [ChainId.MATIC]: '',
+  [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
 }
 
