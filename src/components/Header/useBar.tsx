@@ -391,7 +391,8 @@ const useMenu: UseBar = () => {
         {
           key: 'data',
           title: i18n._(t`Data`),
-          link: '/info',
+          link: '/analytics',
+          // link: '/info',
         },
         {
           key: 'bridge',

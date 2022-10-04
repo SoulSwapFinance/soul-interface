@@ -1,4 +1,3 @@
-// eslint-disable
 import { localPoint } from '@visx/event'
 import { LinearGradient } from '@visx/gradient'
 import { scaleLinear } from '@visx/scale'
@@ -13,7 +12,7 @@ import AutoSizer from 'react-virtualized-auto-sizer'
 interface LineGraphProps {
   data: {
     x: number
-    y: number
+    y: string
   }[]
   stroke?:
     | {
@@ -43,7 +42,8 @@ const Graph: FC<GraphProps> = ({ data, stroke, strokeWidth, width, height, setSe
   const xScale = useMemo(
     () =>
       scaleLinear<number>({
-        domain: [Math.min(data[0].x, data[data.length - 1].x), Math.max(data[0].x, data[data.length - 1].x)],
+        // @ts-ignore
+        domain: [Math.min(data[0]?.x, data[data.length - 1]?.x), Math.max(data[0]?.x, data[data.length - 1]?.x)],
         range: [10, width - 10],
       }),
     [data, width]
@@ -52,32 +52,34 @@ const Graph: FC<GraphProps> = ({ data, stroke, strokeWidth, width, height, setSe
   const yScale = useMemo(() => {
     const y = data.map((el) => el.y)
     return scaleLinear<number>({
+      // @ts-ignore
       domain: [Math.max.apply(Math, y), Math.min.apply(Math, y)],
       range: [10, height - 10],
     })
   }, [data, height])
 
-  // const handleTooltip = useCallback(
-  //   (event: TouchEvent<SVGRectElement> | MouseEvent<SVGRectElement>) => {
-  //     const { x } = localPoint(event) || { x: 0 }
-  //     const x0 = xScale.invert(x)
-  //     // @ts-ignore TYPE NEEDS FIXING
-  //     const index = bisect(data, x0, 0)
-  //     const d = data[index]
+  const handleTooltip = useCallback(
+    (event: TouchEvent<SVGRectElement> | MouseEvent<SVGRectElement>) => {
+      const { x } = localPoint(event) || { x: 0 }
+      const x0 = xScale.invert(x)
+      // @ts-ignore TYPE NEEDS FIXING
+      const index = bisector(data, x0, 0)
+      // const index = bisect(data, x0, 0)
+      const d = data[index]
 
-  //     // Add check to avoid unnecessary changes and setState to DOM
-  //     if (d && dRef.current !== index) {
-  //       dRef.current = index
-  //       // @ts-ignore TYPE NEEDS FIXING
-  //       circleRef.current.setAttribute('cx', xScale(d.x).toString())
-  //       // @ts-ignore TYPE NEEDS FIXING
-  //       circleRef.current.setAttribute('cy', yScale(d.y).toString())
-  //       // @ts-ignore TYPE NEEDS FIXING
-  //       setSelectedIndex(index)
-  //     }
-  //   },
-  //   [data, setSelectedIndex, xScale, yScale]
-  // )
+      // Add check to avoid unnecessary changes and setState to DOM
+      if (d && dRef.current !== index) {
+        dRef.current = index
+        // @ts-ignore TYPE NEEDS FIXING
+        circleRef.current.setAttribute('cx', xScale(d.x).toString())
+        // @ts-ignore TYPE NEEDS FIXING
+        circleRef.current.setAttribute('cy', yScale(d.y).toString())
+        // @ts-ignore TYPE NEEDS FIXING
+        setSelectedIndex(index)
+      }
+    },
+    [data, setSelectedIndex, xScale, yScale]
+  )
 
   const showTooltip = useCallback(() => {
     // @ts-ignore TYPE NEEDS FIXING
@@ -106,7 +108,9 @@ const Graph: FC<GraphProps> = ({ data, stroke, strokeWidth, width, height, setSe
         )}
         <LinePath
           data={data}
+          // @ts-ignore
           x={(d) => xScale(d.x) ?? 0}
+          // @ts-ignore
           y={(d) => yScale(d.y) ?? 0}
           // @ts-ignore TYPE NEEDS FIXING
           stroke={'solid' in stroke ? stroke.solid : "url('#gradient')"}
@@ -117,10 +121,10 @@ const Graph: FC<GraphProps> = ({ data, stroke, strokeWidth, width, height, setSe
           height={height}
           fill={'transparent'}
           {...(setSelectedIndex && {
-            // onTouchStart: handleTooltip,
-            // onTouchMove: handleTooltip,
+            onTouchStart: handleTooltip,
+            onTouchMove: handleTooltip,
             onMouseEnter: showTooltip,
-            // onMouseMove: handleTooltip,
+            onMouseMove: handleTooltip,
             onMouseLeave: hideTooltip,
           })}
         />
@@ -131,7 +135,7 @@ const Graph: FC<GraphProps> = ({ data, stroke, strokeWidth, width, height, setSe
 
 const LineGraph: FC<LineGraphProps> = ({
   data,
-  stroke = { solid: '#B026FF' },
+  stroke = { solid: '#0993EC' },
   strokeWidth = 1.5,
   setSelectedIndex,
 }) => {
