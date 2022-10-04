@@ -93,62 +93,12 @@ export const getEthPrice = async (variables = undefined) => {
   return getNativePrice(ChainId.ETHEREUM, variables)
 }
 
-export const getYggPrice = async (variables = {}) => {
-  return getTokenPrice(ChainId.ETHEREUM, tokenPriceQuery, {
-    id: '0x25f8087ead173b73d6e8b84329989a8eea16cf73',
-    ...variables,
-  })
-}
-
-export const getRulerPrice = async (variables = {}) => {
-  return getTokenPrice(ChainId.ETHEREUM, tokenPriceQuery, {
-    id: '0x2aeccb42482cc64e087b6d2e5da39f5a7a7001f8',
-    ...variables,
-  })
-}
-
-export const getTruPrice = async (variables = {}) => {
-  return getTokenPrice(ChainId.ETHEREUM, tokenPriceQuery, {
-    id: '0x4c19596f5aaff459fa38b0f7ed92f11ae6543784',
-    ...variables,
-  })
-}
-
-export const getCvxPrice = async (variables = {}) => {
-  return getTokenPrice(ChainId.ETHEREUM, tokenPriceQuery, {
-    id: '0x4e3fbd56cd56c3e72c1403e103b45db9da5b9d2b',
-    ...variables,
-  })
-}
-
-export const getAlcxPrice = async (variables = {}) => {
-  // console.log('getAlcxPrice')
-  return getTokenPrice(ChainId.ETHEREUM, tokenPriceQuery, {
-    id: '0xdbdb4d16eda451d0503b854cf79d55697f90c8df',
-    ...variables,
-  })
-}
-
-export const getPicklePrice = async (variables = {}) => {
-  return getTokenPrice(ChainId.ETHEREUM, tokenPriceQuery, {
-    id: '0x429881672b9ae42b8eba0e26cd9c73711b891ca5',
-    ...variables,
-  })
-}
-
 // export const getPrice = (tokenAddress: string) => async (variables = {}) => {
 //   return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
 //     id: tokenAddress,
 //     ...variables,
 //   })
 // }
-
-export const getMphPrice = async (variables = {}) => {
-  return getTokenPrice(ChainId.ETHEREUM, tokenPriceQuery, {
-    id: '0x8888801af4d980682e47f1a9036e589479e835c5',
-    ...variables,
-  })
-}
 
 // export const getSushiPrice = async (variables = {}) => {
 //   // console.log('getSushiPrice')
@@ -172,12 +122,6 @@ export const getFantomPrice = async () => {
   })
 }
 
-export const getSpellPrice = async () => {
-  return getTokenPrice(ChainId.ETHEREUM, tokenPriceQuery, {
-    id: '0x090185f2135308bad17527004364ebcc2d37e5f6',
-  })
-}
-
 export const getBundle = async (
   chainId = ChainId.FANTOM,
   query = ethPriceQuery,
@@ -189,7 +133,7 @@ export const getBundle = async (
 }
 
 // @ts-ignore TYPE NEEDS FIXING
-export const getLiquidityPositions = async (chainId = ChainId.ETHEREUM, variables) => {
+export const getLiquidityPositions = async (chainId = ChainId.FANTOM, variables) => {
   const { liquidityPositions } = await exchange(chainId, liquidityPositionsQuery, variables)
   return liquidityPositions
 }

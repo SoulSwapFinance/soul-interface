@@ -134,7 +134,7 @@ const useMenu: UseMenu = () => {
         key: 'bridge',
         title: i18n._(t`Bridge`),
         icon: <GlobeIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
-        link: '/cross'
+        link: '/bridge'
       }
       mainItems.push(bridgeItem)
     }

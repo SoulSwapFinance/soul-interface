@@ -203,6 +203,7 @@ export function useBondUserInfo(pid, userAddress): { status: string; soulBondUse
       mcap: '0',
       pairPrice: '0',
       pendingSoul: '0',
+      userBalance: '0',
       stakedBalance: '0',
       userTvl: '0',
       tvl: '0',

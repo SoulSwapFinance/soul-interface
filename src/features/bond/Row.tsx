@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import BondInputPanel from './Input'
 import { useActiveWeb3React } from 'services/web3'
 import useApprove from 'hooks/useApprove'
-import { ChainId, SOUL_BOND_ADDRESS, WNATIVE } from 'sdk'
+import { ChainId, SOUL_ADDRESS, SOUL_BOND_ADDRESS, WNATIVE } from 'sdk'
 import {
   BondContainer,
   BondContentWrapper,
@@ -17,13 +17,14 @@ import { Wrap, Text, ExternalLink } from 'components/ReusableStyles'
 import Modal from 'components/DefaultModal'
 import Typography from '../../components/Typography'
 import ModalHeader from 'components/Modal/Header'
-import { useBondUserInfo, usePairInfo, useUserPairInfo, useSoulBondInfo } from 'hooks/useAPI'
+import { useBondUserInfo, usePairInfo, useUserPairInfo, useSoulBondInfo, useTokenInfo } from 'hooks/useAPI'
 import { classNames, formatNumber, formatPercent, tryParseAmount } from 'functions'
 import { useSoulPrice } from 'hooks/getPrices'
 import { Token, NATIVE } from 'sdk'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 import { useSoulBondContract } from 'hooks/useContract'
+import FarmInputPanel from 'features/summoner/Input'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -61,29 +62,38 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
 
   // show confirmation view before minting SOUL
   const [showConfirmation, setShowConfirmation] = useState(false)
-  const [showOptions, setShowOptions] = useState(false)
+  // const [showOptions, setShowOptions] = useState(false)
 
-  const assetAddress = lpToken
-  const soulPrice = useSoulPrice()
-  const chain = chainId == ChainId.AVALANCHE ? 'avalanche' : 'fantom'
+  const assetAddress = bond.lpAddress
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
+  // const chain = chainId == ChainId.AVALANCHE ? 'avalanche' : 'fantom'
 
   // API DATA //
   const { soulBondInfo } = useSoulBondInfo(pid)
   const apr = Number(soulBondInfo.apr)
   const { soulBondUserInfo } = useBondUserInfo(pid, account)
   const { pairUserInfo } = useUserPairInfo(account, assetAddress)
+  const { pairInfo } = usePairInfo(assetAddress)
+  // todo: temp-fix
+  const temporaryBoost = pid == '4'
+  const temporaryBoostMultiplier = 3.5
   const assetName = soulBondUserInfo.symbol
-  const liquidity = Number(soulBondUserInfo.tvl)
+  const liquidity 
+    = temporaryBoost 
+      ? Number(soulBondUserInfo.tvl) * temporaryBoostMultiplier
+      : Number(soulBondUserInfo.tvl) 
   const lpPrice = Number(soulBondUserInfo.pairPrice)
   const stakedBal = Number(soulBondUserInfo.stakedBalance)
   const unstakedBal = Number(soulBondUserInfo.userBalance)
+  const assetDecimals = Number(pairInfo.pairDecimals)
+  const assetDivisor = 10**assetDecimals
   const pending = Number(soulBondUserInfo.pendingSoul) / 1e18
-  const assetToken = new Token(chainId, assetAddress, 18, assetName)
+  const assetToken = new Token(chainId, assetAddress, assetDecimals, assetName)
   const parsedDepositValue = tryParseAmount(depositValue, assetToken)
-  const walletBalance = Number(pairUserInfo.userBalance) / 1e18
-  const walletValue = walletBalance * lpPrice
+  const walletBalance = Number(pairUserInfo.userBalance) / assetDivisor
+  // const parsedWalletBalance = tryParseAmount(walletBalance, assetToken)
+  // const walletValue = walletBalance * lpPrice
 
-  const { pairInfo } = usePairInfo(assetAddress)
   // const assetDecimals = Number(pairInfo.pairDecimals)
 
   // const token0Symbol = pairInfo.token0Symbol
@@ -100,10 +110,12 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
   const isStakeable = chainId == ChainId.FANTOM && stakedBal == 0 || chainId != ChainId.FANTOM
 
   // CALCULATIONS
-  const stakedLpValue = stakedBal * lpPrice
+  const stakedLpValue = temporaryBoost 
+    ? stakedBal * lpPrice * temporaryBoostMultiplier 
+    : stakedBal * lpPrice
   // const availableValue = unstakedBal * lpPrice
   const pendingValue = pending * soulPrice
-  const percOfBond = 100 * stakedLpValue / liquidity
+  // const percOfBond = 100 * stakedLpValue / liquidity
 
   // initial render/mount & reruns every 2 seconds
   useEffect(() => {
@@ -166,30 +178,43 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
     }
   }
 
-    // Deposit
-    const deposit = async (pid, amount) => {
+    // // Deposit
+    const handleDeposit = async (pid, amount) => {
       try {
-        const result = await bondContract?.deposit(pid, amount)
+        const result = await bondContract?.deposit(pid, 
+            Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals)
+          // parsedDepositValue.quotient.toString()
+          )
         return result
       } catch (e) {
         console.log(e)
-        // alert(e.message)
+        alert(e.message)
         return e
       }
     }
   
-    // Withdraw
-    const mint = async (pid) => {
-      try {
-        let result = await bondContract?.bond(pid)
-        return result
-      } catch (e) {
-        alert(e.message)
-        console.log(e)
-        return e
-      }
-    }
+    // // Withdraw
+    // const mint = async (pid) => {
+    //   try {
+    //     let result = await bondContract?.bond(pid)
+    //     return result
+    //   } catch (e) {
+    //     alert(e.message)
+    //     console.log(e)
+    //     return e
+    //   }
+    // }
 
+    // handles deposit
+    // const handleDeposit = async (pid, amount) => {
+    //   try {
+    //       const tx = await bondContract?.deposit(pid, depositValue)
+    //       await tx.wait()
+    //   } catch (e) {
+    //       // alert(e.message)
+    //       console.log(e)
+    //   }
+  // }
   // mints SOUL from bond.
   const handleMint = async () => {
     try {
@@ -203,22 +228,22 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
   }
 
   // deposits to bond
-  const handleDeposit = async (amount) => {
-    try {
-      // console.log('depositing', amount.toString())
-      const tx = await deposit(pid, parsedDepositValue.quotient.toString())
-      // await tx.wait()
-    } catch (e) {
-      // alert(e.message)
-      console.log(e)
-    }
-  }
+  // const handleDeposit = async (amount) => {
+  //   try {
+  //     // console.log('depositing', amount.toString())
+  //     const tx = await deposit(pid, parsedDepositValue.quotient.toString())
+  //     // await tx.wait()
+  //   } catch (e) {
+  //     // alert(e.message)
+  //     console.log(e)
+  //   }
+  // }
 
   return (
     <>
       <Wrap padding="0" display="flex" justifyContent="center">
         <BondContainer onClick={ () => handleShow()}>
-        <div className={classNames("bg-dark-900 p-2 border border-dark-1000", walletBalance > 0 && `border-dark-${getChainColorCode(chainId)}`)}>
+        <div className={classNames("bg-dark-900 p-2 border border-dark-1000", walletBalance > 0 ? `border-dark-${getChainColorCode(chainId)}` : '')}>
           <BondContentWrapper>
               <TokenPairLink>
               <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
@@ -279,18 +304,16 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                   {bond.lpSymbol} 
                 </Text> */}
                 {/* DEPOSIT: ASSET PANEL */}
-                { isStakeable && (
-                    <BondInputPanel
-                      pid={bond.pid}
-                      onUserInput={(value) => setDepositValue(value)}
-                      onMax={() => setDepositValue(walletBalance.toString())}
-                      value={depositValue}
-                      balance={walletBalance.toString()}
-                      id={pid}
-                      token0={token0}
-                      token1={token1}
+                {isStakeable && Number(walletBalance) != 0 &&
+                      <BondInputPanel
+                          pid={bond.pid}
+                          onUserInput={(value) => setDepositValue(value)}
+                          onMax={() => setDepositValue(walletBalance?.toString())}
+                          value={depositValue}
+                          balance={walletBalance.toString()}
+                          id={pid}
                       />
-                )}
+                  }
                   <Wrap padding="0" margin="0" display="flex">
                     {(approved && isStakeable && Number(unstakedBal) == 0) ?
                       (bond.token0Symbol == WNATIVE[chainId].symbol ? (
@@ -328,7 +351,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                             height="2.5rem"
                             primaryColor={getChainColor(chainId)}
                             onClick={() =>
-                              handleDeposit(depositValue)
+                              handleDeposit(pid, depositValue)
                             }
                           >
                             DEPOSIT {bond.lpSymbol} LP
@@ -348,7 +371,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                
                 <Wrap padding="0.5rem" margin="0.25rem" display="flex" justifyContent="space-between">
                   <Text fontSize=".9rem" padding="0" textAlign="left">
-                    BONDED:&nbsp;
+                    DEPOSIT:&nbsp;
                     {stakedBal === 0
                       ? '0.000'
                       : stakedBal < 0.001

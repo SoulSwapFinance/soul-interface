@@ -115,6 +115,9 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const isUnderworldPair = pairType == "underworld"
     const isSwapPair = pairType == "farm"
     const isActive = pairStatus == "active"
+    const assetToken = new Token(chainId, farm.lpAddress, 18)
+
+    const parsedDepositValue = tryParseAmount(depositValue, assetToken)
 
     // COLOR //
     const buttonColor = getChainColor(chainId)
@@ -138,7 +141,6 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const zapTokenSymbol = useTokenInfo(zapTokenAddress).tokenInfo.symbol
     const zapTokenName = useTokenInfo(zapTokenAddress).tokenInfo.name
     const zapToken = new Token(chainId, zapTokenAddress, zapTokenDecimals, zapTokenSymbol, zapTokenName)
-
     const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
 
     // USER INFO //
@@ -248,16 +250,30 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
         }
     }
 
-    // deposits: selected amount into the summoner
-    const handleDeposit = async (pid) => {
-        let tx
+    // // deposits: selected amount into the summoner
+    // const handleDeposit = async (pid) => {
+    //     let tx
+    //     try {
+    //         tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
+    //         await tx.wait()
+    //     } catch (e) {
+    //         const smallerValue = Number(depositValue) - 0.000001
+    //         tx = await SoulSummonerContract?.deposit(pid, Number(smallerValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
+    //         await tx.wait()
+    //         console.log(e)
+    //     }
+    // }
+
+    // handles deposit
+    const handleDeposit = async (pid, amount) => {
         try {
-            tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
+            const tx = await SoulSummonerContract?.deposit(pid, 
+                Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals)
+                // parsedDepositValue?.quotient.toString()
+                )
             await tx.wait()
         } catch (e) {
-            const smallerValue = Number(depositValue) - 0.000001
-            tx = await SoulSummonerContract?.deposit(pid, Number(smallerValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
-            await tx.wait()
+            // alert(e.message)
             console.log(e)
         }
     }
@@ -693,7 +709,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                         color={buttonTextColor}
                                         margin=".5rem 0 0rem 0"
                                         onClick={() =>
-                                            handleDeposit(pid)
+                                            handleDeposit(pid, depositValue)
                                         }
                                     >
                                         <div className="flex text-lg gap-2">
