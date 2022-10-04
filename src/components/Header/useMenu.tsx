@@ -1,5 +1,5 @@
 import React, { ReactNode, useMemo } from 'react'
-import { GlobeIcon, SwitchVerticalIcon, TrendingUpIcon, SunIcon, CurrencyDollarIcon, UserGroupIcon, PlusIcon, MoonIcon } from '@heroicons/react/outline'
+import { GlobeIcon, SwitchVerticalIcon, TrendingUpIcon, SunIcon, CurrencyDollarIcon, UserGroupIcon, PlusIcon, MoonIcon, StarIcon } from '@heroicons/react/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { SOUL_ADDRESS } from 'sdk'
@@ -117,6 +117,16 @@ const useMenu: UseMenu = () => {
         link: '/bonds'
       }
       mainItems.push(mintItems)
+    }
+
+    if ([250, 43114].includes(chainId)) {
+      const stakeItems = {
+        key: 'stake',
+        title: i18n._(t`Stake`),
+        icon: <StarIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+        link: '/autostake'
+      }
+      mainItems.push(stakeItems)
     }
 
     if ([250].includes(chainId)) {

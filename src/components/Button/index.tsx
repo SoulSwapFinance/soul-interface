@@ -1,8 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { RowBetween } from '../Row'
-import { darken, lighten } from 'polished'
-
 import { classNames } from '../../functions'
 import { Button as RebassButton, ButtonProps } from 'rebass/styled-components'
 import { getChainColorCode } from 'constants/chains'
@@ -57,11 +54,10 @@ const FILLED = {
   green: 'bg-green bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   gradient:
     'w-full text-high-emphesis bg-gradient-to-r from-blue to-purple opacity-80 hover:opacity-100 disabled:bg-opacity-80',
-  gradientBluePurple:
-    'w-full text-high-emphesis bg-gradient-to-r from-blue to-purple opacity-80 hover:opacity-100 disabled:bg-opacity-80',
-    gradientPurpleBlue:
-    'w-full text-high-emphesis bg-gradient-to-r from-purple to-blue opacity-80 hover:opacity-100 disabled:bg-opacity-80',
-    black: 'bg-transparent opacity-95 hover:opacity-100',
+  avaxGradient: 'w-full text-high-emphesis bg-gradient-to-r from-avaxRed to-purple opacity-80 hover:opacity-100 disabled:bg-opacity-80',
+  gradientBluePurple: 'w-full text-high-emphesis bg-gradient-to-r from-blue to-purple opacity-80 hover:opacity-100 disabled:bg-opacity-80',
+  gradientPurpleBlue: 'w-full text-high-emphesis bg-gradient-to-r from-purple to-blue opacity-80 hover:opacity-100 disabled:bg-opacity-80',
+  black: 'bg-transparent opacity-95 hover:opacity-100',
 }
 
 const OUTLINED = {
@@ -136,7 +132,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   ref?: React.Ref<HTMLButtonElement>
 }
 
-const Base = styled(RebassButton)<{
+const Base = styled(RebassButton) <{
   padding?: string
   width?: string
   height?: string
@@ -249,7 +245,7 @@ export function ButtonConfirmed({
   disabled,
   ...rest
 }: { confirmed?: boolean; disabled?: boolean } & ButtonProps) {
-  const {chainId} = useActiveWeb3React()
+  const { chainId } = useActiveWeb3React()
 
   if (confirmed) {
     return (
@@ -276,7 +272,7 @@ export function ButtonError({
   error?: boolean
   disabled?: boolean
 } & ButtonProps) {
-  const {chainId} = useActiveWeb3React()
+  const { chainId } = useActiveWeb3React()
   if (error) {
     return <Button disabled={disabled} color="red" {...rest} />
   } else {
