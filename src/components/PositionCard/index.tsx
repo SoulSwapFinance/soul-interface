@@ -1,5 +1,5 @@
 import { ChevronDownIcon, ChevronUpIcon, MinusIcon, PlusIcon } from '@heroicons/react/outline'
-import { CurrencyAmount, JSBI, Pair, Percent, Token, USD } from '../../sdk'
+import { CurrencyAmount, JSBI, Pair, Percent, SOUL_ADDRESS, Token, USD } from '../../sdk'
 import React, { useState } from 'react'
 import { RowBetween, RowFixed } from '../Row'
 import { currencyId, unwrappedToken } from '../../functions/currency'
@@ -21,7 +21,7 @@ import { useTotalSupply } from '../../hooks/useTotalSupply'
 import { classNames, formatNumber, formatNumberScale } from '../../functions'
 import { Transition } from '@headlessui/react'
 import { useActiveWeb3React } from 'services/web3'
-import { useSoulPrice } from 'hooks/getPrices'
+import { useTokenInfo } from 'hooks/useAPI'
 
 interface PositionCardProps {
   pair: Pair
@@ -118,7 +118,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
 export default function FullPositionCard({ pair, border, stakedBalance }: PositionCardProps) {
   // const { i18n } = useLingui()
   const router = useRouter()
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
 
   const currency0 = unwrappedToken(pair.token0)
   const currency1 = unwrappedToken(pair.token1)
@@ -155,7 +155,7 @@ export default function FullPositionCard({ pair, border, stakedBalance }: Positi
 
   const [depositValue, setDepositValue] = useState('')
   const [withdrawValue, setWithdrawValue] = useState('')  
-  const soulPrice = useSoulPrice()
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
 
   const balance = userPoolBalance
   // const stakedAmount = useUserInfo(farm, liquidityToken)

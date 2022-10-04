@@ -666,14 +666,22 @@ const Swap = () => {
         {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} show={false} /> : null}
         {/* </div> */}
         <div className="flex border-dark-900 mt-3 mb-0 gap-1 items-center justify-center">
-                <Button variant="filled" color="gradientPurpleBlue" size="lg">
+                <Button 
+                  variant="filled" 
+                  color={ chainId == ChainId.AVALANCHE ? "avaxGradient" : "gradientPurpleBlue"}
+                  size="lg"
+                >
                   <NavLink href={"/portfolio"}>
                         <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                         <span>View Portfolio</span>
                         </a>
                   </NavLink>
                 </Button>
-                <Button variant="filled" color="gradientBluePurple" size="lg">
+                <Button 
+                  variant="filled" 
+                  color={ chainId == ChainId.AVALANCHE ? "avaxGradient" : "gradientBluePurple"}
+                  size="lg"
+                >
                 <NavLink href={"/cross"}>
                         <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                         <span>Swap Crosschain</span>
