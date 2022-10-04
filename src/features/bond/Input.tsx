@@ -17,8 +17,6 @@ interface BondInputPanelProps {
   label?: string
   onCurrencySelect?: (currency: Currency) => void
   disableCurrencySelect?: boolean
-  token0: Token
-  token1: Token
   priceImpact?: Percent
   id: string
   showCommonBases?: boolean
@@ -32,8 +30,6 @@ export default function BondInputPanel({
   pid,
   balance,
   isNative,
-  token0, 
-  token1,
   value,
   onUserInput,
   onMax,
@@ -43,7 +39,13 @@ export default function BondInputPanel({
   const [modalOpen, setModalOpen] = useState(false)
   const { account } = useActiveWeb3React()
   const { soulBondUserInfo } = useBondUserInfo(pid, account)
-  const assetPrice = Number(soulBondUserInfo.pairPrice)
+  const assetAddress = soulBondUserInfo.address
+  const temporaryBoost = pid == '4'
+  const assetPrice 
+  = temporaryBoost 
+    ? Number(soulBondUserInfo.pairPrice) * 4 
+    : Number(soulBondUserInfo.pairPrice) 
+  // const assetPrice = Number(usePairInfo(assetAddress).pairInfo.lpPrice)
 
   const handleDismissSearch = useCallback(() => {
     setModalOpen(false)
