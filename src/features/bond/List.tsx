@@ -2,6 +2,9 @@ import { BondKey } from './Key'
 import BondRowRender from './Row'
 import { AvalanchePools, FantomPools } from './Pids'
 import { useActiveWeb3React } from 'services/web3'
+import React from 'react'
+import { Button } from 'components'
+import { ChainId } from 'sdk'
 
 const BondList = () => {
   const { chainId } = useActiveWeb3React() // account
