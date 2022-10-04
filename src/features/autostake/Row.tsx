@@ -2,18 +2,14 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 import { ethers } from 'ethers'
-// import { getAddress } from '@ethersproject/address'
 import { useSoulPrice } from 'hooks/getPrices'
 import { useActiveWeb3React } from 'services/web3'
-// import { Button } from 'components/Button'
-// import QuestionHelper from '../../components/QuestionHelper'
-import { SOUL, CHANT, Token } from 'sdk'
+import { SOUL } from 'sdk'
 import { AUTO_STAKE_ADDRESS, SUMMONER_ADDRESS } from 'sdk'
 import { aprToApy } from 'functions/convert'
 import AssetInput from 'components/AssetInput'
 import { useAutoStakeContract, useSummonerContract } from 'hooks/useContract'
-// import { useStakeContract, useStakeSharePrice, useStakeRecentProfit, sharesFromSoul } from './hooks'
-import useApprove from 'features/bond/hooks/useApprove'
+import useApprove from 'hooks/useApprove'
 import {
     StakeContainer,
     Row,
@@ -24,18 +20,15 @@ import {
     DetailsContainer,
     DetailsWrapper,
     FunctionBox,
-    Input,
-    FlexText,
     SubmitButton,
 } from './Styles'
-import { Wrap, ClickableText, Text, ExternalLink } from '../../components/ReusableStyles'
-import { useCurrencyBalance } from 'state/wallet/hooks'
+import { Wrap, Text, ExternalLink } from '../../components/ReusableStyles'
 import { formatNumber, tryParseAmount } from 'functions'
 import Modal from 'components/Modal/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
 import Typography from 'components/Typography'
 import { useAutoStakeInfo } from 'hooks/useAPI'
-import { getChainColor, getChainColorCode, getChainLogoURL } from 'constants/chains'
+import { getChainColor, getChainLogoURL } from 'constants/chains'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;

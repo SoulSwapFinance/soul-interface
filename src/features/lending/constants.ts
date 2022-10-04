@@ -1,7 +1,7 @@
 import { ChainId, Fraction, Percent } from 'sdk'
 
 export const UNDERWORLD_NETWORKS = [
-  // ChainId.ETHEREUM,
+  ChainId.AVALANCHE,
   ChainId.FANTOM,
   // ChainId.BSC,
 ]

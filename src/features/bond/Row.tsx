@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import BondInputPanel from './Input'
 import { useActiveWeb3React } from 'services/web3'
-import useSoulBond from './hooks/useSoulBond'
-import useApprove from './hooks/useApprove'
+import useApprove from 'hooks/useApprove'
 import { ChainId, SOUL_BOND_ADDRESS, WNATIVE } from 'sdk'
 import {
   BondContainer,
@@ -24,6 +23,7 @@ import { useSoulPrice } from 'hooks/getPrices'
 import { Token, NATIVE } from 'sdk'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
+import { useSoulBondContract } from 'hooks/useContract'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -51,8 +51,9 @@ const HideOnMobile = styled.div`
 
 const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol, token1Address, lpSymbol, bond }) => {
   const { account, chainId } = useActiveWeb3React()
+  const bondContract = useSoulBondContract()
 
-  const { deposit, mint } = useSoulBond(pid, lpToken, bond.token0Address, bond.token1Address)
+  // const { deposit, mint } = useSoulBond(pid, lpToken, bond.token0Address, bond.token1Address)
   const { erc20Allowance, erc20Approve } = useApprove(lpToken)
   const [showing, setShowing] = useState(false)
   const [approved, setApproved] = useState(false)
@@ -165,10 +166,34 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
     }
   }
 
+    // Deposit
+    const deposit = async (pid, amount) => {
+      try {
+        const result = await bondContract?.deposit(pid, amount)
+        return result
+      } catch (e) {
+        console.log(e)
+        // alert(e.message)
+        return e
+      }
+    }
+  
+    // Withdraw
+    const mint = async (pid) => {
+      try {
+        let result = await bondContract?.bond(pid)
+        return result
+      } catch (e) {
+        alert(e.message)
+        console.log(e)
+        return e
+      }
+    }
+
   // mints SOUL from bond.
   const handleMint = async () => {
     try {
-      const tx = await mint(pid)
+      const tx = await bondContract.bond(pid)
       // await tx.wait()
       // await fetchBals(pid)
     } catch (e) {

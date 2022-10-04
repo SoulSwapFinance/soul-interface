@@ -1,4 +1,4 @@
-import { useLuxorStakeHelperContract, useLuxorStakingContract, useSorMasterContract } from '../../../hooks/useContract'
+import { useLuxorStakeHelperContract, useLuxorStakingContract, useSorMasterContract } from 'hooks/useContract'
 import { useMemo, useCallback } from 'react'
 import { useSingleCallResult } from '../../../state/multicall/hooks'
 import { CurrencyAmount, JSBI } from 'sdk'

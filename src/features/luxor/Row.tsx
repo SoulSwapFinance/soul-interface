@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 // import { ethers } from 'ethers'
-import { useFantomPrice, useLuxorPrice, useTokenPrice } from 'hooks/getPrices'
+import { useFantomPrice, useLuxorPrice } from 'hooks/getPrices'
 import { usePairPrice } from 'hooks/usePairData'
 import { useActiveWeb3React } from 'services/web3'
 // import QuestionHelper from '../../components/QuestionHelper'
@@ -10,7 +10,7 @@ import { ChainId, LUX_DAI, LUX_NATIVE, LUX_SOR, SOR_NATIVE, Token } from 'sdk'
 import AssetInput from 'components/AssetInput'
 import { useLuxorBondContract } from 'hooks/useContract'
 // import { useBondContract, useStakeSharePrice, useStakeRecentProfit, sharesFromSoul } from './useBonds'
-import useApprove from 'features/bond/hooks/useApprove'
+import useApprove from 'hooks/useApprove'
 import {
     StakeContainer,
     Row,

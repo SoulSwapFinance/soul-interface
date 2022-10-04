@@ -5,7 +5,7 @@ import { ethers } from 'ethers'
 import { signERC2612Permit } from 'eth-permit'
 import { useActiveWeb3React } from 'services/web3'
 import { useCallback } from 'react'
-import { useSoulSwapContract } from '../hooks/useContract'
+import { useSoulSwapContract } from 'hooks/useContract'
 
 const useSoulSwap = (version: 'v1' | 'v2' = 'v2') => {
   const { chainId, library, account } = useActiveWeb3React()
