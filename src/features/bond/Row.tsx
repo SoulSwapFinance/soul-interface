@@ -107,7 +107,9 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
   const token1 = new Token(chainId, bond.token1Address, token1Decimals, token1Symbol, token1Name)
 
   // stakeble if either not yet staked and on Fantom Opera or not on Fantom Opera.
-  const isStakeable = chainId == ChainId.FANTOM && stakedBal == 0 || chainId != ChainId.FANTOM
+  const isStakeable = stakedBal == 0
+  // chainId == ChainId.FANTOM && stakedBal == 0
+   // || chainId != ChainId.FANTOM
 
   // CALCULATIONS
   const stakedLpValue = temporaryBoost
