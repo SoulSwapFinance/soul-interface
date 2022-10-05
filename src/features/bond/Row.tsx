@@ -259,7 +259,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                       : stakedLpValue < 1 && stakedLpValue.toString(4) ? stakedLpValue.toFixed(4)
                       : stakedLpValue > 0 ? stakedLpValue.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                       : '-'
-                      }
+                    }
                   </Text>
                 </BondItemBox>
               </HideOnMobile>
@@ -267,18 +267,19 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
               <HideOnSmall>
                 <BondItemBox>
                   <Text fontSize="1rem" color="#FFFFFF">
-                    {`${
-                      // stakedBal && 
-                      percOfBond.toFixed(0)
-                      }%`}
+                    {percOfBond.toFixed(0)}%
                   </Text>
                 </BondItemBox>
               </HideOnSmall>
 
               <BondItemBox>
                 <Text fontSize="1rem" color="#FFFFFF">
-                {`${apr.toFixed(0)}%`}
-                </Text>
+                {apr == 0 ? 0
+                      : apr.toString(2) == '0.00' ? '<0.00'
+                      : apr < 1 && apr.toString(4) ? apr.toFixed(4)
+                      : apr > 0 ? apr.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                      : '-'
+                    }%                </Text>
               </BondItemBox>
 
               <BondItemBox>
