@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 
 import { Underworld } from './Key'
 import { Row } from './Row'
-import { UnderworldMarkets } from './Markets'
+import { FantomMarkets } from './Markets'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
@@ -16,11 +16,11 @@ export const List = () => {
 
   const { chainId } = useActiveWeb3React()
   
-  const lendList = UnderworldMarkets.map((market) => (
+  const lendList = FantomMarkets.map((market) => (
     <Row
     key={market.id}
     lpToken={market.lpAddress}
-    // assetAddress={market.assetAddress}
+    assetAddress={market.assetAddress}
     pair={market}
     />
     ))
