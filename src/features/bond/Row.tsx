@@ -75,7 +75,8 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
   const { pairUserInfo } = useUserPairInfo(account, assetAddress)
   const { pairInfo } = usePairInfo(assetAddress)
   // todo: temp-fix
-  const temporaryBoost = [ChainId.AVALANCHE].includes(chainId) && pid == '4'
+  const temporaryBoost 
+    = [ChainId.AVALANCHE].includes(chainId) && pid == '4'
   const temporaryBoostMultiplier = 3.25
   const assetName = soulBondUserInfo.symbol
   const liquidity
@@ -252,7 +253,13 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
               <HideOnMobile>
                 <BondItemBox>
                   <Text fontSize="1rem" color="#FFFFFF">
-                    {formatNumber(stakedLpValue, true, true)}
+                    {/* {`${formatNumber(stakedLpValue, true, true)}`} */}
+                    ${stakedLpValue == 0 ? 0
+                      : stakedLpValue.toString(2) == '0.00' ? '<0.00'
+                      : stakedLpValue < 1 && stakedLpValue.toString(4) ? stakedLpValue.toFixed(4)
+                      : stakedLpValue > 0 ? stakedLpValue.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                      : '-'
+                      }
                   </Text>
                 </BondItemBox>
               </HideOnMobile>
