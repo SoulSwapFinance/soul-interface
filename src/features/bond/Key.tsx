@@ -65,7 +65,7 @@ export function BondKey() {
             <HideOnMobile>
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                  STAKED
+                  YOURS
                 </Text>
               </FarmItemBox>
             </HideOnMobile>

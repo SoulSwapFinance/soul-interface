@@ -19,13 +19,13 @@ const HideOnMobile = styled.div`
 }
 `
 
-export const Row = ({ pair, lpToken }) => {
+export const Row = ({ pair, assetAddress, lpToken }) => {
     const { account, chainId, library } = useActiveWeb3React()
     const [showOptions, setShowOptions] = useState(false)
     const [openLend, setOpenLend] = useState(false)
     const [openBorrow, setOpenBorrow] = useState(false)
     
-    const { underworldPairInfo } = useUnderworldPairInfo(pair.lpAddress)
+    const { underworldPairInfo } = useUnderworldPairInfo(assetAddress)
     // const lpDecimals = Number(underworldPairInfo.decimals)
     // const assetAddress = underworldPairInfo.assetAddress
     const assetSymbol = underworldPairInfo.assetTicker
@@ -54,8 +54,8 @@ export const Row = ({ pair, lpToken }) => {
     // const parsedBalance = tryParseAmount(assetBalance, pair.lpToken)
     // const userBalance = useCurrencyBalance(account, lpToken)
     // ONLY USED FOR LOGO //
-    const asset = new Token(chainId, pair.assetAddress[chainId] ? pair.assetAddress[chainId] : pair.assetAddress[250], 18)
-    const collateral = new Token(chainId, pair.collateralAddress[chainId] ? pair.collateralAddress[chainId] : pair.collateralAddress[250], 18)
+    const asset = new Token(chainId, pair.assetAddress ? pair.assetAddress : pair.assetAddress, 18)
+    const collateral = new Token(chainId, pair.collateralAddress ? pair.collateralAddress : pair.collateralAddress, 18)
     // const pair = new Token(chainId, pair.lpToken.address, 18)
     // console.log('lpAddress:%s', lpAddress)
 

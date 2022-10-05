@@ -75,8 +75,8 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
   const { pairUserInfo } = useUserPairInfo(account, assetAddress)
   const { pairInfo } = usePairInfo(assetAddress)
   // todo: temp-fix
-  const temporaryBoost = pid == '4'
-  const temporaryBoostMultiplier = 3.5
+  const temporaryBoost = [ChainId.AVALANCHE].includes(chainId) && pid == '4'
+  const temporaryBoostMultiplier = 3.25
   const assetName = soulBondUserInfo.symbol
   const liquidity
     = temporaryBoost
@@ -89,15 +89,14 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
   const assetDivisor = 10 ** assetDecimals
   const pending = Number(soulBondUserInfo.pendingSoul) / 1e18
   const assetToken = new Token(chainId, assetAddress, assetDecimals, assetName)
-  const parsedDepositValue = tryParseAmount(depositValue, assetToken)
+  // const parsedDepositValue = tryParseAmount(depositValue, assetToken)
   const walletBalance = Number(pairUserInfo.userBalance) / assetDivisor
+  const token0Name = pairInfo.token0Name
+  
   // const parsedWalletBalance = tryParseAmount(walletBalance, assetToken)
   // const walletValue = walletBalance * lpPrice
-
   // const assetDecimals = Number(pairInfo.pairDecimals)
-
   // const token0Symbol = pairInfo.token0Symbol
-  const token0Name = pairInfo.token0Name
 
   // const token1Symbol = pairInfo.token1Symbol
   const token1Name = pairInfo.token1Name
@@ -118,17 +117,17 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
   const percOfBond = 100 * stakedLpValue / liquidity
 
   // initial render/mount & reruns every 2 seconds
-  useEffect(() => {
-    if (account) {
-      const timer = setTimeout(() => {
-        if (showing) {
-          fetchApproval()
-        }
-      }, 10_000)
-      // clear timeout if the component is unmounted
-      return () => clearTimeout(timer)
-    }
-  })
+  // useEffect(() => {
+  //   if (account) {
+  //     const timer = setTimeout(() => {
+  //       if (showing) {
+  //         fetchApproval()
+  //       }
+  //     }, 30_000)
+  //     // clear timeout if the component is unmounted
+  //     return () => clearTimeout(timer)
+  //   }
+  // })
 
   const dailyRoi = (apr / 365)
   // const nowTime = new Date().toTimeString()
@@ -215,7 +214,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
   //       console.log(e)
   //   }
   // }
-  
+
   // mints SOUL from bond.
   const handleMint = async () => {
     try {
@@ -271,7 +270,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
 
               <BondItemBox>
                 <Text fontSize="1rem" color="#FFFFFF">
-                  {`${formatNumber(apr, false, false)}%`}
+                {`${apr.toFixed(0)}%`}
                 </Text>
               </BondItemBox>
 
