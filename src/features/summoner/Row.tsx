@@ -268,8 +268,8 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const handleDeposit = async (pid, amount) => {
         try {
             const tx = await SoulSummonerContract?.deposit(pid, 
-                Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals)
-                // parsedDepositValue?.quotient.toString()
+                // Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals)
+                parsedDepositValue?.quotient.toString()
                 )
             await tx.wait()
         } catch (e) {
