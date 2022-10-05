@@ -397,7 +397,7 @@ const useMenu: UseBar = () => {
         {
           key: 'bridge',
           title: i18n._(t`Bridge`),
-          link: '/cross',
+          link: '/bridge',
         },
         {
           key: 'stream',
