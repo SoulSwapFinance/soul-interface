@@ -108,7 +108,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const withdrawable = stakedBalance - feeAmount
     const feeValue = feeAmount * lpPrice
     const walletBalance = Number(summonerUserInfo.walletBalance)
-    const walletValue = Number(walletBalance) * lpPrice
+    // const walletValue = Number(walletBalance) * lpPrice
     // const parsedBalance = tryParseAmount(walletBalance.toString(), farm.lpToken)
     // const userBalance = useCurrencyBalance(account, lpToken)
     const hasBalance = Number(walletBalance) > 0
@@ -116,14 +116,13 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const isSwapPair = pairType == "farm"
     const isActive = pairStatus == "active"
     const assetToken = new Token(chainId, farm.lpAddress, assetDecimals)
-
     const parsedDepositValue = tryParseAmount(depositValue, assetToken)
 
     // COLOR //
     const buttonColor = getChainColor(chainId)
     const buttonTextColor = isSwapPair && isActive ? "white" : "white"
     const textColor = isUnderworldPair ? "text-blue" : !isActive ? "text-pink" : "text-dark-600"
-    const tokenSymbol = isUnderworldPair ? token0Symbol : "LP"
+    // const tokenSymbol = isUnderworldPair ? token0Symbol : "LP"
 
     // (de)Constructs Tokens //
     const token0 = new Token(chainId, token0Address, token0Decimals)
@@ -268,8 +267,8 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const handleDeposit = async (pid, amount) => {
         try {
             const tx = await SoulSummonerContract?.deposit(pid, 
-                Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals)
-                // parsedDepositValue?.quotient.toString()
+                // Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals)
+                parsedDepositValue?.quotient.toString()
                 )
             await tx.wait()
         } catch (e) {

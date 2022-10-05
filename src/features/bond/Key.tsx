@@ -65,7 +65,7 @@ export function BondKey() {
             <HideOnMobile>
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                  STAKED
+                  YOURS
                 </Text>
               </FarmItemBox>
             </HideOnMobile>
@@ -80,7 +80,7 @@ export function BondKey() {
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                  % APR
+                  APR (%)
                 </Text>
               </FarmItemBox>
 
@@ -92,7 +92,7 @@ export function BondKey() {
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                  TVL
+                  LIQUIDITY
                 </Text>
               </FarmItemBox>
 

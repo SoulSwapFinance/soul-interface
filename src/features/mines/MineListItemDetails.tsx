@@ -8,7 +8,7 @@ import { classNames } from 'functions'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 import React, { createContext, ReactNode, useContext, useMemo, useState } from 'react'
 
-import { MineModalView, PairType } from './enum'
+import { MineModalView } from './enum'
 import InformationDisclosure from './components/InformationDisclosure'
 import InvestmentDetails from './components/InvestmentDetails'
 import ManageBar from './utils/ManageBar'

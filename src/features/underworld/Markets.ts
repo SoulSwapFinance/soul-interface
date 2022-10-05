@@ -1,6 +1,6 @@
 import { BNB_ADDRESS, ChainId, DAI_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
 
-export const UnderworldMarkets = [
+export const FantomMarkets = [
   {
     // LENDING
     id: 0,

@@ -16,7 +16,7 @@ export function sharesFromSoul(amount: BigNumber, sharePrice: BigNumber) {
 }
 
 export function useStakeUserInfo() {
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const contract = useAutoStakeContract()
 
   const args = useMemo(() => {
@@ -33,7 +33,7 @@ export function useStakeUserInfo() {
 
   const amount = shares && sharePrice ? JSBI.BigInt(soulFromShares(shares, sharePrice).toString()) : undefined
 
-  return amount ? CurrencyAmount.fromRawAmount(SOUL[250], amount) : CurrencyAmount.fromRawAmount(SOUL[250], JSBI.BigInt('0'))
+  return amount ? CurrencyAmount.fromRawAmount(SOUL[chainId], amount) : CurrencyAmount.fromRawAmount(SOUL[chainId], JSBI.BigInt('0'))
 }
 
 export function useStakeSharePrice() {
@@ -45,7 +45,7 @@ export function useStakeSharePrice() {
 }
 
 export function useStakeRecentProfit() {
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
 
   const contract = useAutoStakeContract()
 
@@ -66,8 +66,8 @@ export function useStakeRecentProfit() {
   const oldAmount = info3?.[1]
 
   return amount && oldAmount
-    ? CurrencyAmount.fromRawAmount(SOUL[250], JSBI.BigInt(amount.sub(oldAmount).toString()))
-    : CurrencyAmount.fromRawAmount(SOUL[250], JSBI.BigInt('0'))
+    ? CurrencyAmount.fromRawAmount(SOUL[chainId], JSBI.BigInt(amount.sub(oldAmount).toString()))
+    : CurrencyAmount.fromRawAmount(SOUL[chainId], JSBI.BigInt('0'))
 }
 
 export function useStakeContract() {

@@ -1,23 +1,12 @@
-import { ChevronDownIcon } from '@heroicons/react/outline'
-import { t } from '@lingui/macro'
+import React, { useCallback, useState } from 'react'
 import { useLingui } from '@lingui/react'
-import { Currency, CurrencyAmount, Pair, Percent, Token } from 'sdk'
-import selectCoinAnimation from 'animation/select-coin.json'
+import { Currency, Percent, Token } from 'sdk'
 import { classNames, formatNumber } from 'functions'
-import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import { useActiveWeb3React } from 'services/web3'
-import { useCurrencyBalance } from 'state/wallet/hooks'
-import Lottie from 'lottie-react'
-import React, { FC, ReactNode, useCallback, useState } from 'react'
-
 import { Button } from 'components/Button'
-import { CurrencyLogo } from 'components/CurrencyLogo'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 import Input from 'components/Input'
-import Typography from 'components/Typography'
-import { WalletIcon } from 'components/Icon'
-import { FiatValue } from 'components/CurrencyInputPanel/FiatValue'
-import { usePairInfo, useSummonerPoolInfo } from 'hooks/useAPI'
+import { useSummonerPoolInfo } from 'hooks/useAPI'
 // import { FiatValue } from './FiatValue'
 
 interface FarmInputPanelProps {
@@ -62,9 +51,9 @@ export default function FarmInputPanel({
   const assetPrice = summonerPoolInfo.lpPrice
 //   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined)
 
-  const handleDismissSearch = useCallback(() => {
-    setModalOpen(false)
-  }, [setModalOpen])
+  // const handleDismissSearch = useCallback(() => {
+  //   setModalOpen(false)
+  // }, [setModalOpen])
 
   return (
     <div id={id} className={classNames('p-1 rounded bg-dark-1000')}>
