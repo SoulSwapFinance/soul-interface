@@ -609,8 +609,6 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                         value={depositValue}
                                         balance={walletBalance.toString()}
                                         id={pid}
-                                        // token0={token0}
-                                        // token1={token1}
                                     />
                                 }
 

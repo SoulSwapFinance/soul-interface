@@ -61,7 +61,8 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
   const [depositValue, setDepositValue] = useState('0')
 
   // show confirmation view before minting SOUL
-  const [showConfirmation, setShowConfirmation] = useState(false)
+  const [showMintConfirmation, setShowMintConfirmation] = useState(false)
+  const [showDepositConfirmation, setShowDepositConfirmation] = useState(false)
   // const [showOptions, setShowOptions] = useState(false)
 
   const assetAddress = bond.lpAddress
@@ -107,9 +108,9 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
   const token1 = new Token(chainId, bond.token1Address, token1Decimals, token1Symbol, token1Name)
 
   // stakeble if either not yet staked and on Fantom Opera or not on Fantom Opera.
-  const isStakeable = stakedBal == 0
-  // chainId == ChainId.FANTOM && stakedBal == 0
-   // || chainId != ChainId.FANTOM
+  const isStakeable = chainId 
+    == ChainId.FANTOM && stakedBal == 0 
+        || chainId == ChainId.AVALANCHE
 
   // CALCULATIONS
   const stakedLpValue = temporaryBoost
@@ -361,7 +362,9 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                             height="2.5rem"
                             primaryColor={getChainColor(chainId)}
                             onClick={() =>
-                              handleDeposit(pid, depositValue)
+                              stakedBal == 0 
+                                ? handleDeposit(pid, depositValue)
+                                : setShowDepositConfirmation(true)
                             }
                           >
                             DEPOSIT {bond.lpSymbol} LP
@@ -409,7 +412,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                       color="black"
                       margin=".5rem 0 .5rem 0"
                       onClick={() =>
-                        setShowConfirmation(true)
+                        setShowMintConfirmation(true)
                       }
                     >
                       MINT SOUL {pendingValue !== 0 ? `(${formatNumber(pendingValue, true, false)})` : ''}
@@ -424,10 +427,10 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
 
       { /* CONFIRMATION MODAL */}
 
-      <Modal isOpen={showConfirmation} onDismiss={
-        () => setShowConfirmation(false)}>
+      <Modal isOpen={showMintConfirmation} onDismiss={
+        () => setShowMintConfirmation(false)}>
         <div className="space-y-4">
-          <ModalHeader header={`Are you sure?`} onClose={() => setShowConfirmation(false)} />
+          <ModalHeader header={`Are you sure?`} onClose={() => setShowMintConfirmation(false)} />
           <Typography variant="lg">
             {`Minting exits your position and claims your rewards. You are responsible for your decision to mint and agree that you understand these terms. ${chainId == ChainId.FANTOM ? 'You must mint prior to depositing more.' : ''}`
             }
@@ -443,6 +446,32 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
             height="2.5rem"
             onClick={() => handleMint()}
           >
+            {`UNDERSTOOD & AGREED`}
+          </SubmitButton>
+        </div>
+      </Modal>
+
+      { /* CONFIRMATION MODAL */}
+      <Modal isOpen={showDepositConfirmation} onDismiss={
+        () => setShowDepositConfirmation(false)}>
+        <div className="space-y-4">
+          <ModalHeader header={`Are you sure?`} onClose={() => setShowDepositConfirmation(false)} />
+          <Typography variant="lg">
+            {`Depositing adds to your position, but forfeits your pending rewards. You are responsible for your decision to deposit more and agree that you understand these terms. ${chainId == ChainId.FANTOM ? 'You must mint prior to depositing more.' : ''}`
+            }
+          </Typography>
+          <Typography variant="sm" className="font-medium">
+            QUESTIONS OR CONCERNS?
+            <a href="mailto:soulswapfinance@gmail.com">
+              {' '} SEND EMAIL.
+            </a>
+          </Typography>
+          <SubmitButton
+            primaryColor={getChainColor(chainId)}
+            height="2.5rem"
+            onClick={() => 
+               handleDeposit(pid, depositValue)}
+            >
             {`UNDERSTOOD & AGREED`}
           </SubmitButton>
         </div>
