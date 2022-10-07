@@ -71,12 +71,13 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const pairType = summonerPoolInfo.pairType
     const pairStatus = summonerPoolInfo.status
 
+    const isUnderworldPair = pairType == "underworld"
     // const { userInfo } = useUserInfo()
     const { pairInfo } = usePairInfo(lpAddress)
     // assumes 18, since only SOUL-LP farms are eligible for Zap   
-    const assetDecimals = Number(pairInfo.pairDecimals)
     const token0Decimals = Number(pairInfo.token0Decimals)
     const token1Decimals = Number(pairInfo.token1Decimals)
+    const assetDecimals = isUnderworldPair ? Number(token0Decimals) : Number(pairInfo.pairDecimals)
 
     const [showOptions, setShowOptions] = useState(false)
     const [openDeposit, setOpenDeposit] = useState(false)
@@ -112,7 +113,6 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     // const parsedBalance = tryParseAmount(walletBalance.toString(), farm.lpToken)
     // const userBalance = useCurrencyBalance(account, lpToken)
     const hasBalance = Number(walletBalance) > 0
-    const isUnderworldPair = pairType == "underworld"
     const isSwapPair = pairType == "farm"
     const isActive = pairStatus == "active"
     const assetToken = new Token(chainId, farm.lpAddress, assetDecimals)
@@ -227,16 +227,16 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     }
 
     // withdraws: lp from summoner
-    const handleWithdraw = async (pid) => {
-        try {
-            const tx = await SoulSummonerContract?.withdraw(pid, Number(withdrawValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
-            await tx?.wait()
-        } catch (e) {
-            // alert(e.message)
-            const tx = await SoulSummonerContract?.withdraw(pid, Number(withdrawValue).toFixed(6).toBigNumber(assetDecimals))
-            console.log(e)
-        }
-    }
+    // const handleWithdraw = async (pid) => {
+    //     try {
+    //         const tx = await SoulSummonerContract?.withdraw(pid, Number(withdrawValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
+    //         await tx?.wait()
+    //     } catch (e) {
+    //         // alert(e.message)
+    //         const tx = await SoulSummonerContract?.withdraw(pid, Number(withdrawValue).toFixed(6).toBigNumber(assetDecimals))
+    //         console.log(e)
+    //     }
+    // }
 
     // handles: harvest for given pid
     const handleHarvest = async (pid) => {
@@ -267,8 +267,22 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const handleDeposit = async (pid, amount) => {
         try {
             const tx = await SoulSummonerContract?.deposit(pid, 
-                // Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals)
-                parsedDepositValue?.quotient.toString()
+                Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals)
+                // parsedDepositValue?.quotient.toString()
+                )
+            await tx.wait()
+        } catch (e) {
+            // alert(e.message)
+            console.log(e)
+        }
+    }
+
+    // handles withdrawal
+    const handleWithdraw = async (pid, amount) => {
+        try {
+            const tx = await SoulSummonerContract?.withdraw(pid, 
+                Number(withdrawValue).toFixed(assetDecimals).toBigNumber(assetDecimals)
+                // parsedWithdrawValue?.quotient.toString()
                 )
             await tx.wait()
         } catch (e) {
@@ -611,80 +625,6 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                         id={pid}
                                     />
                                 }
-
-                                {/* CREATE ASSET PAIR */}
-                                {(nativeToken0 && !isUnderworldPair && isActive && !hasBalance) ? (
-                                    <NavLink
-                                        href={`/exchange/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
-                                    >
-                                        <a>
-                                            <SubmitButton
-                                                height="2rem"
-                                                primaryColor={buttonColor}
-                                                color={buttonTextColor}
-                                                margin=".5rem 0 0rem 0"
-                                            >
-                                                <TokenPairLink
-                                                    target="_blank"
-                                                    rel="noopener"
-                                                    primaryColor={buttonColor}
-                                                    color={buttonTextColor}
-                                                    href=
-                                                    // [if] token0 is the native token, then only use the address of token1 [else] token0 address
-                                                    {`/exchange/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
-                                                >
-                                                    <div className="flex text-lg gap-2">
-                                                        <CollectionIcon width={26} className={classNames(`text-white`)} />
-                                                        {/* {farm.lpSymbol} */}
-                                                        ADD LIQUIDITY
-                                                    </div>
-                                                </TokenPairLink>
-                                            </SubmitButton>
-                                        </a>
-                                    </NavLink>
-                                ) : (!hasBalance && !isUnderworldPair &&
-                                    <NavLink
-                                        href={`/exchange/add/${farm.token1Address}/${farm.token0Address}`}
-                                    >
-                                        <a>
-                                            <SubmitButton
-                                                height="2rem"
-                                                primaryColor={getChainColor(chainId)}
-                                                margin=".5rem 0 0rem 0"
-                                            >
-                                                <TokenPairLink
-                                                    target="_blank"
-                                                    rel="noopener"
-                                                    href=
-                                                    {`/exchange/add/${farm.token0Address}/${farm.token1Address}`}
-                                                >
-                                                    <div className="flex text-lg gap-2">
-                                                        <PlusIcon width={26} className={classNames(`text-white`)} />
-                                                        LIQUIDITY {/* {farm.lpSymbol} */}
-                                                    </div>                                            </TokenPairLink>
-                                            </SubmitButton>
-                                        </a>
-                                    </NavLink>
-                                )}
-                                {/* LEND ASSET */}
-                                {isUnderworldPair && (
-                                    <NavLink
-                                        href=
-                                        {`/lend/${lpAddress}`}
-                                    >
-                                        <SubmitButton
-                                            margin=".5rem 0 0rem 0"
-                                            height="2rem"
-                                            primaryColor={buttonColor}
-                                            color={buttonTextColor}
-                                        >
-                                            <div className="flex text-lg gap-2">
-                                                <BriefcaseIcon width={26} className={classNames(`text-white`)} />
-                                                {`LEND ${token0Symbol}`}
-                                            </div>
-                                        </SubmitButton>
-                                    </NavLink>
-                                )}
                                 {/* UN-APPROVED */}
                                 {!approved && hasBalance && (
                                     <SubmitButton
@@ -715,6 +655,80 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                         </div>
                                     </SubmitButton>
                                 )}
+                                {/* CREATE ASSET PAIR */}
+                                {(nativeToken0 && !isUnderworldPair && isActive) ? (
+                                    <NavLink
+                                        href={`/exchange/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
+                                    >
+                                        <a>
+                                            <SubmitButton
+                                                height="2rem"
+                                                primaryColor={buttonColor}
+                                                color={buttonTextColor}
+                                                margin=".5rem 0 0rem 0"
+                                            >
+                                                <TokenPairLink
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    primaryColor={buttonColor}
+                                                    color={buttonTextColor}
+                                                    href=
+                                                    // [if] token0 is the native token, then only use the address of token1 [else] token0 address
+                                                    {`/exchange/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
+                                                >
+                                                    <div className="flex text-lg gap-2">
+                                                        <CollectionIcon width={26} className={classNames(`text-white`)} />
+                                                        {/* {farm.lpSymbol} */}
+                                                        CREATE {farm.lpSymbol} LP
+                                                    </div>
+                                                </TokenPairLink>
+                                            </SubmitButton>
+                                        </a>
+                                    </NavLink>
+                                ) : (!isUnderworldPair &&
+                                    <NavLink
+                                        href={`/exchange/add/${farm.token1Address}/${farm.token0Address}`}
+                                    >
+                                        <a>
+                                            <SubmitButton
+                                                height="2rem"
+                                                primaryColor={getChainColor(chainId)}
+                                                margin=".5rem 0 0rem 0"
+                                            >
+                                                <TokenPairLink
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    href=
+                                                    {`/exchange/add/${farm.token0Address}/${farm.token1Address}`}
+                                                >
+                                                    <div className="flex text-lg gap-2">
+                                                    <CollectionIcon width={26} className={classNames(`text-white`)} />
+                                                        CREATE {farm.lpSymbol} LP
+                                                    </div>                                            </TokenPairLink>
+                                            </SubmitButton>
+                                        </a>
+                                    </NavLink>
+                                )}
+                                {/* LEND ASSET */}
+                                {isUnderworldPair && (
+                                    <NavLink
+                                        href=
+                                        {`/lend/${lpAddress}`}
+                                    >
+                                        <SubmitButton
+                                            margin=".5rem 0 0rem 0"
+                                            height="2rem"
+                                            primaryColor={buttonColor}
+                                            color={buttonTextColor}
+                                        >
+                                            <div className="flex text-lg gap-2">
+                                                <BriefcaseIcon width={26} className={classNames(`text-white`)} />
+                                                {`LEND ${token0Symbol}`}
+                                            </div>
+                                        </SubmitButton>
+                                    </NavLink>
+                                )}
+
 
                                 {/* EARNED */}
                                 {Number(earnedAmount) > 0 && (
@@ -1021,7 +1035,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                             height="2.5rem"
                             color="purple"
                             onClick={() =>
-                                handleWithdraw(pid)
+                                handleWithdraw(pid, withdrawValue)
                             }
                         >
                             I UNDERSTAND THESE TERMS
