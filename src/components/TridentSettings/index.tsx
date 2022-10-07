@@ -20,7 +20,6 @@ import React, { FC, useState } from 'react'
 
 interface SettingsTabProps {
   placeholderSlippage?: Percent
-  // trident?: boolean
   className?: string
 }
 
