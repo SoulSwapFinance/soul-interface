@@ -11,7 +11,7 @@ import {
   supportedChainsForBridge,
   transactionStatusMapping,
 } from "../../utils/bridge";
-import DropDownButton from "../../components/DropDownButton";
+// import DropDownButton from "../../components/DropDownButton";
 import useBridgeApi from "../../hooks/useBridgeApi";
 import useMultiChain from "../../hooks/useMultiChain";
 import Modal from "./components/Modal";
@@ -43,9 +43,9 @@ import Typography from "components/Typography";
 import SwapHeader from "features/swap/SwapHeader";
 import Container from "components/Container";
 import NavLink from "components/NavLink";
-import { NETWORK_ICON, NETWORK_LABEL } from "config/networks";
-import NetworkModal from "modals/NetworkModal";
-import { useNetworkModalToggle } from "state/application/hooks";
+// import { NETWORK_ICON, NETWORK_LABEL } from "config/networks";
+// import NetworkModal from "modals/NetworkModal";
+// import { useNetworkModalToggle } from "state/application/hooks";
 import Web3Network from "components/Web3Network";
 import { getChainColor, getChainColorCode } from "constants/chains";
 
@@ -135,8 +135,8 @@ const ChainSelection: React.FC<any> = ({
 }) => {
   const { chainId, account, connector, deactivate, library } = useActiveWeb3React()
 
-  const [fromChain, setFromChain] = useState(250);
-  const [toChain, setToChain] = useState(1);
+  const [fromChain, setFromChain] = useState(chainId);
+  const [toChain, setToChain] = useState(250);
   const { getBridgeTokens } = useBridgeApi();
   const { forceSwap, DEFAULT_PROVIDERS } = useMultiChain();
 
@@ -413,25 +413,25 @@ const NetworkSelector: React.FC<any> = ({ chains, selected, selectChain }) => {
   );
 };
 
-function SelectNetworkModal(): JSX.Element | null {
-  const { chainId } = useActiveWeb3React()
-  const toggleNetworkModal = useNetworkModalToggle()
+// function SelectNetworkModal(): JSX.Element | null {
+//   const { chainId } = useActiveWeb3React()
+//   const toggleNetworkModal = useNetworkModalToggle()
 
-  if (!chainId) return null
+//   if (!chainId) return null
 
-  return (
-    <div
-    className="flex items-center rounded border-2 border-dark-800 hover:border-dark-700 bg-dark-1000 hover:bg-dark-900 whitespace-nowrap text-md justify-center font-bold cursor-pointer select-none pointer-events-auto"
-    onClick={() => toggleNetworkModal()}
-    >
-      <div className="flex items-center grid-flow-col items-center justify-center bg-dark-1000 h-[36px] w-[36px] text-sm rounded pointer-events-auto auto-cols-max text-secondary">
-        <Image src={NETWORK_ICON[chainId]} alt="Switch Network" className="rounded-md" width="22px" height="22px" />
-      </div>
-      <NetworkModal />
-      { NETWORK_LABEL[chainId] }
-    </div>
-  )
-}
+//   return (
+//     <div
+//     className="flex items-center rounded border-2 border-dark-800 hover:border-dark-700 bg-dark-1000 hover:bg-dark-900 whitespace-nowrap text-md justify-center font-bold cursor-pointer select-none pointer-events-auto"
+//     onClick={() => toggleNetworkModal()}
+//     >
+//       <div className="flex items-center grid-flow-col items-center justify-center bg-dark-1000 h-[36px] w-[36px] text-sm rounded pointer-events-auto auto-cols-max text-secondary">
+//         <Image src={NETWORK_ICON[chainId]} alt="Switch Network" className="rounded-md" width="22px" height="22px" />
+//       </div>
+//       <NetworkModal />
+//       { NETWORK_LABEL[chainId] }
+//     </div>
+//   )
+// }
 
 const BridgeTokenSelectModal: React.FC<any> = ({
   tokens,
@@ -551,7 +551,7 @@ const BridgeNetworkSelectModal: React.FC<any> = ({
   );
 };
 
-const BalancePromiseToUnit: React.FC<any> = ({ promise, decimals }) => {
+export const BalancePromiseToUnit: React.FC<any> = ({ promise, decimals }) => {
   const [value, setValue] = useState(null);
   useEffect(() => {
     promise.then((resolvedValue: any) => {
@@ -711,8 +711,8 @@ const Bridge: React.FC<any> = () => {
   // const { transaction } = useTransaction();
   const { approve, getAllowance } = useFantomERC20();
   const [tokenList, setTokenList] = useState(null);
-  const [fromChain, setFromChain] = useState(250);
-  const [toChain, setToChain] = useState(1);
+  const [fromChain, setFromChain] = useState(chainId);
+  const [toChain, setToChain] = useState(250);
   const [selectedToken, setSelectedToken] = useState(null);
   const [isApproved, setIsApproved] = useState(true);
   const [amount, setAmount] = useState("");
@@ -765,8 +765,7 @@ const Bridge: React.FC<any> = () => {
   const isBridgeTxPending = false
   //  transaction[bridgeTxHash] && transaction[bridgeTxHash].status === "pending";
   const isBridgeTxCompleted = false
-    // transaction[bridgeTxHash] &&
-    // transaction[bridgeTxHash].status === "completed";
+    // transaction[bridgeTxHash] && transaction[bridgeTxHash].status === "completed";
 
   const {
     sendTx: handleApproveToken,

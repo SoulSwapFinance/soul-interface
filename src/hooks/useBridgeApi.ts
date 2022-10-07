@@ -18,7 +18,6 @@ export const FTM_ETH = [
   "ICE",
   "BAND",
   "WOOFY",
-  "SOUL",
   "YFI",
   "YEL",
   "SNX",
@@ -26,7 +25,7 @@ export const FTM_ETH = [
 ];
 export const FTM_BNB = ["BNB", "BUSD", "START", "BIFI", "BISON"];
 export const FTM_MATIC = ["MATIC", "SAVG"];
-export const FTM_AVAX = ["SOUL"];
+export const FTM_AVAX = [""];
 
 // API Anyswap Stables
 export const GLOBAL_STABLE = ["anyUSDC", "anyDAI", "anyUSDT", "MIM"]; // For Fantom, Binance and Ethereum
@@ -54,7 +53,8 @@ export const FTM_BSC_STABLE = [
 
 export const MULTICHAIN_URL = "https://bridgeapi.anyswap.exchange";
 export enum MULTICHAIN_METHODS {
-  GET_CHAIN_TOKENS = "/v2/serverInfo",
+  // GET_CHAIN_TOKENS = "/v2/serverInfo",
+  GET_CHAIN_TOKENS = "/v4/tokenlistv4",
   GET_STABLE_TOKENS = "/v3/serverinfoV3",
   GET_TX_STATUS = "/v2/history/details",
   // ANNOUNCE_TX = "/v2/reswaptxns?hash=0xa63e6e3a86718d710658ef1445c6bd604752086ae68908ffac39a686db6b815g&srcChainID=250&destChainID=137",
@@ -76,15 +76,15 @@ const useBridgeApi = () => {
 
   const isIncluded = (srcChain: string, destChain: string, symbol: string) => {
     const isFTM = srcChain === "250" || destChain === "250";
-    const isEth = srcChain === "1" || destChain === "1";
+    const isETH = srcChain === "1" || destChain === "1";
     const isAVAX = srcChain === "43114" || destChain === "43114";
     const isBNB = srcChain === "56" || destChain === "56";
-    const isPolygon = srcChain === "137" || destChain === "137";
+    const isMATIC = srcChain === "137" || destChain === "137";
 
-    if (isFTM && isEth && FTM_ETH.includes(symbol)) return true;
+    if (isFTM && isETH && FTM_ETH.includes(symbol)) return true;
     if (isFTM && isBNB && FTM_BNB.includes(symbol)) return true;
     if (isFTM && isAVAX && FTM_AVAX.includes(symbol)) return true;
-    if (isFTM && isPolygon && FTM_MATIC.includes(symbol)) return true;
+    if (isFTM && isMATIC && FTM_MATIC.includes(symbol)) return true;
 
     return false;
   };

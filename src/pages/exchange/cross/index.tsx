@@ -17,7 +17,7 @@ import { useActiveWeb3React } from "services/web3";
 import { useUserInfo } from "hooks/useAPI";
 import { Button } from "components/Button";
 import { useNetworkModalToggle } from "state/application/hooks";
-import { OverlayButton } from "components/index";
+import { Input, OverlayButton } from "components/index";
 import Typography from "components/Typography";
 import { formatNumber, formatPercent } from "functions/format";
 import { classNames } from "functions/styling";
@@ -36,6 +36,7 @@ import { WrappedCrossChainTrade } from "rubic-sdk/lib/features/cross-chain/provi
 import { useMulticallContract } from "hooks/useContract";
 import { getLastExchange, setLastExchange } from "utils/rubic/hooks";
 import { AVAX, CHAIN_BY_ID, FTM, NATIVE_ADDRESS, rubicConfiguration } from "utils/rubic/configuration";
+import { BalancePromiseToUnit } from "pages/bridge";
 
 export default function Exchange() {
   const lastExchange = useMemo(() => {
@@ -91,7 +92,7 @@ export default function Exchange() {
       if (rubic) {
         await rubic.updateConfiguration(newConfiguration);
       }
-      
+
       setProvider('0xFd63Bf84471Bc55DD9A83fdFA293CCBD27e1F4C8')
       setBalance(balance.toString());
     }
@@ -100,7 +101,7 @@ export default function Exchange() {
 
   const [decimals, setDecimals] = useState<number>(18);
   const provider = useMemo(() => new ethers.providers.JsonRpcProvider(fromChain?.rpc[0]), [fromChain]);
-  
+
   const MulticallContract = useMulticallContract()
   const nativeBalance = MulticallContract.getEthBalance(account)
 
@@ -217,11 +218,10 @@ export default function Exchange() {
           setFromUsd((Number(newFromUsd) * Number(newTrade.from.tokenAmount)).toString())
           setToUsd((Number(newToUsd) * Number((newTrade.to?.tokenAmount))).toString())
         } else {
-          const test = newTrade
-          setTrade(test);
-          setFromUsd((Number(newFromUsd) * Number(test.trade.from?.tokenAmount)).toString())
-          setToUsd((Number(newToUsd) * Number((test.trade.to?.tokenAmount))).toString())
-          setOutputAmount(Number(test.trade.to?.tokenAmount).toString())
+          setTrade(newTrade);
+          setFromUsd((Number(newFromUsd) * Number(newTrade.trade.from?.tokenAmount)).toString())
+          setToUsd((Number(newToUsd) * Number((newTrade.trade.to?.tokenAmount))).toString())
+          setOutputAmount(Number(newTrade.trade.to?.tokenAmount).toString())
           console.log('outputAmount:%s', outputAmount)
         }
 
@@ -385,9 +385,9 @@ export default function Exchange() {
 
       <Container id="cross-page" maxWidth="2xl" className="space-y-4">
         <DoubleGlowShadowV2>
-        <div className="p-4 px-2 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-              <SwapHeader />
-              <SwapLayoutCard>
+          <div className="p-4 px-2 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+            <SwapHeader />
+            <SwapLayoutCard>
               {/*  [F] TOKEN SELECTOR */}
               {/*    [F] CHAIN LOGO   */}
               <div
@@ -578,7 +578,7 @@ export default function Exchange() {
                     <Typography className={classNames('sm:text-lg text-md font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
                       {trade
                         ? `${formatNumber(Number(toAmount), false, true)} ${to?.symbol} (${formatNumber(Number(toUsd), true, true)})`
-                        :  "0 ($0.00)"
+                        : "0 ($0.00)"
                       }
                     </Typography>
                   </div>
@@ -646,7 +646,7 @@ export default function Exchange() {
                   </div>
                 </div>
               }
-              <TradeDetail 
+              <TradeDetail
                 trade={trade}
               />
               <div
@@ -687,9 +687,9 @@ export default function Exchange() {
                   {fromChain?.chainId === toChain?.chainId ? "Confirm Swap" : "Confirm Crosschain"}
                 </Button>
               </div>
-        </SwapLayoutCard>
-            </div>
-          </DoubleGlowShadowV2>
+            </SwapLayoutCard>
+          </div>
+        </DoubleGlowShadowV2>
       </Container>
     </>
   );
@@ -844,32 +844,43 @@ const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
               </Button>
 
               {/* SEARCH BAR */}
-              {/* <form
+              <form
                 onSubmit={e => {
                   e.preventDefault();
                   onClose({ token: filteredTokens[0], chain: selectedChain });
                 }}
               >
+                <div className="w-[100%] my-6" />
                 <Input
                   ref={input}
-                  className="w-[100%] border border-unset border-radius-[4px] text-black mb-2"
-                  placeholder={`Search ${selectedChain.name} tokens`}
+                  className="w-[100%] border border-unset border-radius-[4px] text-black mb-1"
+                  placeholder={`Search ${selectedChain.name} Tokens`}
                   value={filter}
                   onChange={e => setFilter(e.currentTarget.value)}
                 />
-              </form> */}
+              </form>
               <div className="w-[100%] my-6" />
 
               {/* SELECT TOKEN LIST */}
               {/* {filter && */}
-              <div className="grid grid-cols-4 bg-dark-1100 w-full" ref={tokensList}>
+              <div
+                className="grid grid-cols-1 bg-dark-1100 justify-center w-[95%]"
+                ref={tokensList}>
                 {filteredTokens.map(token => (
                   <div className="flex border border-2 m-0.5 
-                    border-dark-1000 p-1
-                    rounded rounded-3xl bg-black font-bold 
-                    text-center justify-center"
+                    border-dark-1000 rounded rounded-3xl bg-black font-bold justify-between"
                     key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
-                    <Image src={token.logo} width="56" height="56" alt={token.name + ' logo'} />
+                    <Row style={{ gap: "1rem", alignItems: "center" }}>
+                      <Image src={token.logo} width="36" height="36" alt={token.name + ' logo'} />
+                      <Row
+                        style={{
+                          width: "98%",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        {`${token.name} (${token.symbol})`}
+                      </Row>
+                    </Row>
                   </div>
                 ))}
               </div>
