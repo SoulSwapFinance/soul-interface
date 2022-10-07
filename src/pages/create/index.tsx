@@ -2,7 +2,7 @@ import { defaultAbiCoder } from '@ethersproject/abi'
 import { AddressZero } from '@ethersproject/constants'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency } from 'sdk'
+import { CHAINLINK_ORACLE_ADDRESS, Currency, UNDERWORLD_ADDRESS } from 'sdk'
 import { Button } from 'components/Button'
 import Card from 'components/Card'
 import Container from 'components/Container'
@@ -20,7 +20,6 @@ import { useTransactionAdder } from 'state/transactions/hooks'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { useCallback } from 'react'
-import { CHAINLINK_ORACLE_ADDRESS, UNDERWORLD_ADDRESS } from '../../constants'
 
 export type ChainlinkToken = {
   symbol: string
@@ -135,7 +134,7 @@ export default function Create() {
       //   return
       // }
 
-      const oracleAddress = CHAINLINK_ORACLE_ADDRESS[chainId | 250]
+      const oracleAddress = CHAINLINK_ORACLE_ADDRESS[chainId]
 
       const underworldData = defaultAbiCoder.encode(
         ['address', 'address', 'address', 'bytes'],

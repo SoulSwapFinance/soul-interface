@@ -672,7 +672,7 @@ export function useSummonerPoolInfo(pid): { status: string; summonerPoolInfo: T 
 export function useSummonerUserInfo(pid): { status: string; summonerUserInfo: T } {
   const { account, chainId } = useActiveWeb3React()
   const [status, setStatus] = useState<string>('idle')
-  const URL = chainId == 250 ? BASE_URL : `https://avax-api.soulswap.finance`
+  const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
 
   const [summonerUserInfo, setInfo] = useState<T>({
       userAddress: account,
@@ -719,6 +719,8 @@ export function useSummonerUserInfo(pid): { status: string; summonerUserInfo: T 
 export function useUnderworldPairInfo(pairAddress): { status: string; underworldPairInfo: T } {
   const { chainId } = useActiveWeb3React()
   const [status, setStatus] = useState<string>('idle')
+  const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
+
   const [underworldPairInfo, setInfo] = useState<T>({
       address: '',
       name: '',
@@ -752,7 +754,7 @@ export function useUnderworldPairInfo(pairAddress): { status: string; underworld
   useEffect(() => {
     const fetchData = async () => {
       setStatus('fetching')
-      const response = await fetch(`${BASE_URL}/underworld/${pairAddress}`, {
+      const response = await fetch(`${URL}/underworld/${pairAddress}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -763,7 +765,7 @@ export function useUnderworldPairInfo(pairAddress): { status: string; underworld
       setInfo(json as T)
       setStatus('fetched')
     }
-    if (chainId == ChainId.FANTOM) 
+    if ([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId)) 
     fetchData()
   }, [])
 
@@ -773,6 +775,8 @@ export function useUnderworldPairInfo(pairAddress): { status: string; underworld
 export function useUnderworldUserInfo(pairAddress): { status: string; underworldUserInfo: T } {
   const { account, chainId } = useActiveWeb3React()
   const [status, setStatus] = useState<string>('idle')
+  const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
+
   const [underworldUserInfo, setInfo] = useState<T>({
       name: '',
       assetAddress: '',
@@ -797,7 +801,7 @@ export function useUnderworldUserInfo(pairAddress): { status: string; underworld
   useEffect(() => {
     const fetchData = async () => {
       setStatus('fetching')
-      const response = await fetch(`${BASE_URL}/underworld/users/${account}/${pairAddress}`, {
+      const response = await fetch(`${URL}/underworld/users/${account}/${pairAddress}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -808,7 +812,7 @@ export function useUnderworldUserInfo(pairAddress): { status: string; underworld
       setInfo(json as T)
       setStatus('fetched')
     }
-    if (chainId == ChainId.FANTOM) 
+    if ([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId)) 
     fetchData()
   }, [])
 

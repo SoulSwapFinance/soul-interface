@@ -276,7 +276,7 @@ export default function Repay({ pair }: RepayProps) {
       )
 
       cooker.action(
-        SOULSWAP_MULTI_EXACT_SWAPPER_ADDRESS[chainId || 250],
+        SOULSWAP_MULTI_EXACT_SWAPPER_ADDRESS[chainId],
         ZERO,
         hexConcat([hexlify('0x3087d742'), data]),
         true,

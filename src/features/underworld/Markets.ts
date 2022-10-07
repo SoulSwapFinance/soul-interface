@@ -92,3 +92,27 @@ export const FantomMarkets = [
     collateralAddress: DAI_ADDRESS[ChainId.FANTOM],
   },
 ]
+
+export const AvalancheMarkets = [
+  {
+    // LENDING
+    id: 0,
+    asset: 'DAI',
+    collateral: 'AVAX',
+    lpSymbol: 'AVAX-DAI',
+    lpAddress: '0x52782a587C6EDd2ba5C3001813C8c4F2211B2b06',
+    assetAddress: DAI_ADDRESS[ChainId.AVALANCHE],
+    collateralAddress: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+  },
+  {
+    // LENDING
+    id: 1,
+    asset: 'AVAX',
+    collateral: 'DAI',
+    lpSymbol: 'DAI-AVAX',
+    lpAddress: '0x8ebB2f94685a2396c6b87ab50Cc1114B6ff7e284',
+    assetAddress: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+    collateralAddress: DAI_ADDRESS[ChainId.AVALANCHE],
+  },
+
+]

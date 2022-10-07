@@ -77,7 +77,8 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     // assumes 18, since only SOUL-LP farms are eligible for Zap   
     const token0Decimals = Number(pairInfo.token0Decimals)
     const token1Decimals = Number(pairInfo.token1Decimals)
-    const assetDecimals = isUnderworldPair ? Number(token0Decimals) : Number(pairInfo.pairDecimals)
+    // BTC has 8 decimals
+    const assetDecimals = isUnderworldPair &&  token0Symbol == 'BTC' ? 8 : Number(pairInfo.pairDecimals)
 
     const [showOptions, setShowOptions] = useState(false)
     const [openDeposit, setOpenDeposit] = useState(false)
@@ -117,6 +118,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const isActive = pairStatus == "active"
     const assetToken = new Token(chainId, farm.lpAddress, assetDecimals)
     const parsedDepositValue = tryParseAmount(depositValue, assetToken)
+    const parsedWithdrawValue = tryParseAmount(withdrawValue, assetToken)
 
     // COLOR //
     const buttonColor = getChainColor(chainId)
@@ -267,11 +269,15 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const handleDeposit = async (pid, amount) => {
         try {
             const tx = await SoulSummonerContract?.deposit(pid, 
-                Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals)
-                // parsedDepositValue?.quotient.toString()
+                parsedDepositValue?.quotient.toString()
                 )
-            await tx.wait()
-        } catch (e) {
+                await tx.wait()
+                console.log('depositing: %s:', parsedDepositValue)
+            } catch (e) {
+            const tx = await SoulSummonerContract?.deposit(pid, 
+                Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
+                console.log('depositing: %s:', depositValue)
+                await tx.wait()
             // alert(e.message)
             console.log(e)
         }
@@ -281,11 +287,12 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const handleWithdraw = async (pid, amount) => {
         try {
             const tx = await SoulSummonerContract?.withdraw(pid, 
-                Number(withdrawValue).toFixed(assetDecimals).toBigNumber(assetDecimals)
-                // parsedWithdrawValue?.quotient.toString()
-                )
+            parsedWithdrawValue?.quotient.toString())
             await tx.wait()
         } catch (e) {
+            const tx = await SoulSummonerContract?.withdraw(pid, 
+                Number(withdrawValue).toFixed(assetDecimals).toBigNumber(assetDecimals)
+                )
             // alert(e.message)
             console.log(e)
         }
