@@ -115,7 +115,7 @@ export async function getUSDPriceCurrencyQuote(
 }
 
 export function toPriceInformation(priceRaw: CoinGeckoUsdQuote | null): PriceInformation | null {
-  // we only receive/want the first key/value pair in the return object
+  // returns: first key/value pair in the return object.
   const token = priceRaw ? Object.keys(priceRaw)[0] : null
 
   if (!token || !priceRaw?.[token].usd) {

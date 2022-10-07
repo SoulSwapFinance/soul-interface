@@ -30,7 +30,7 @@
             "rank": 56,
             "logo": "https://cryptologos.cc/logos/usd-coin-usdc-logo.svg",
             "symbol": "USDC",
-            "address": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"
+            "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
         },
         {
             "id": "aave",
@@ -38,7 +38,7 @@
             "rank": 79,
             "logo": "https://cryptologos.cc/logos/aave-aave-logo.svg",
             "symbol": "AAVE",
-            "address": "0xd6df932a45c0f255f85145f286ea0b292b21c90b"
+            "address": "0xD6DF932A45C0f255f85145f286eA0b292B21C90B"
         },
         {
             "id": "curve-dao-token",
@@ -46,15 +46,15 @@
             "rank": 99,
             "logo": "https://cryptologos.cc/logos/curve-dao-token-crv-logo.svg",
             "symbol": "CRV",
-            "address": "0x172370d5cd63279efa6d502dab29171933a610af"
+            "address": "0x172370d5Cd63279eFa6d502DAB29171933a610AF"
         },
         {
             "id": "tether",
-            "name": "Tether",
+            "name": "Tether USD",
             "rank": 146,
             "logo": "https://cryptologos.cc/logos/tether-usdt-logo.svg",
             "symbol": "USDT",
-            "address": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f"
+            "address": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F"
         },
         {
             "id": "dai",
@@ -62,7 +62,7 @@
             "rank": 169,
             "logo": "https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.svg",
             "symbol": "DAI",
-            "address": "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063"
+            "address": "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063"
         },
         {
             "id": "binance-usd",
@@ -70,7 +70,7 @@
             "rank": 222,
             "logo": "https://cryptologos.cc/logos/binance-usd-busd-logo.svg",
             "symbol": "BUSD",
-            "address": "0x9fb83c0635de2e815fd1c21b3a292277540c2e8d"
+            "address": "0x9fB83c0635De2E815fd1c21b3a292277540C2e8d"
         },
         {
             "id": "wrapped-bitcoin",
@@ -78,7 +78,103 @@
             "rank": 393,
             "logo": "https://cryptologos.cc/logos/wrapped-bitcoin-wbtc-logo.svg",
             "symbol": "WBTC",
-            "address": "0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6"
+            "address": "0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6"
+        },
+        {
+            "id": "basic-attention-token",
+            "name": "Basic Attention Token",
+            "rank": 27,
+            "logo": "https://cryptologos.cc/logos/basic-attention-token-bat-logo.svg",
+            "symbol": "BAT",
+            "address": "0x3Cef98bb43d732E2F285eE605a8158cDE967D219"
+        },
+        {
+            "id": "decentraland",
+            "name": "Decentraland",
+            "rank": 28,
+            "logo": "https://cryptologos.cc/logos/decentraland-mana-logo.svg",
+            "symbol": "MANA",
+            "address": "0xA1c57f48F0Deb89f569dFbE6E2B7f46D33606fD4"
+        },
+        {
+            "id": "kyber-network-crystal",
+            "name": "Kyber Network Crystal",
+            "rank": 84,
+            "logo": "https://cryptologos.cc/logos/kyber-network-crystal-v2-knc-logo.svg",
+            "symbol": "KNC",
+            "address": "0x1C954E8fe737F99f68Fa1CCda3e51ebDB291948C"
+        },
+        {
+            "id": "yearn-finance",
+            "name": "Yearn Finance",
+            "rank": 95,
+            "logo": "https://cryptologos.cc/logos/yearn-finance-yfi-logo.svg",
+            "symbol": "YFI",
+            "address": "0xDA537104D6A5edd53c6fBba9A898708E465260b6"
+        },
+        {
+            "id": "true-usd",
+            "name": "True USD",
+            "rank": 111,
+            "logo": "https://cryptologos.cc/logos/trueusd-tusd-logo.svg",
+            "symbol": "TUSD",
+            "address": "0x2e1AD108fF1D8C782fcBbB89AAd783aC49586756"
+        },
+        {
+            "id": "compound-governance-token",
+            "name": "Compound",
+            "rank": 116,
+            "logo": "https://cryptologos.cc/logos/compound-comp-logo.svg",
+            "symbol": "COMP",
+            "address": "0x8505b9d2254A7Ae468c0E9dd10Ccea3A837aef5c"
+        },
+        {
+            "id": "balancer",
+            "name": "Balancer",
+            "rank": 161,
+            "logo": "https://cryptologos.cc/logos/balancer-bal-logo.svg",
+            "symbol": "BAL",
+            "address": "0x9a71012B13CA4d3D0Cdc72A177DF3ef03b0E76A3"
+        },
+        {
+            "id": "uniswap",
+            "name": "Uniswap",
+            "rank": 172,
+            "logo": "https://cryptologos.cc/logos/uniswap-uni-logo.svg",
+            "symbol": "UNI",
+            "address": "0xb33EaAd8d922B1083446DC23f610c2567fB5180f"
+        },
+        {
+            "id": "magic-internet-money",
+            "name": "Magic Internet Money",
+            "rank": 385,
+            "logo": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x82f0B8B456c1A451378467398982d4834b6829c1/logo.png",
+            "symbol": "MIM",
+            "address": "0x49a0400587A7F65072c87c4910449fDcC5c47242"
+        },
+        {
+            "id": "frax",
+            "name": "Frax",
+            "rank": 570,
+            "logo": "https://cryptologos.cc/logos/frax-frax-logo.svg",
+            "symbol": "FRAX",
+            "address": "0x45c32fA6DF82ead1e2EF74d17b76547EDdFaFF89"
+        },
+        {
+            "id": "frax-share",
+            "name": "Frax Share",
+            "rank": 784,
+            "logo": "https://cryptologos.cc/logos/frax-share-fxs-logo.svg",
+            "symbol": "FXS",
+            "address": "0x1a3acf6D19267E2d3e7f898f42803e90C9219062"
+        },
+        {
+            "id": "ice-token",
+            "name": "Popsicle Finance",
+            "rank": 942,
+            "logo": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xf16e81dce15B08F326220742020379B855B87DF9/logo.png",
+            "symbol": "ICE",
+            "address": "0x4e1581f01046eFDd7a1a2CDB0F82cdd7F71F2E59"
         }
     ]
 }

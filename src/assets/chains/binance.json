@@ -30,7 +30,7 @@
             "rank": 25,
             "logo": "https://cryptologos.cc/logos/fantom-ftm-logo.svg",
             "symbol": "FTM",
-            "address": "0xad29abb318791d579433d831ed122afeaf29dcfe"
+            "address": "0xAD29AbB318791D579433D831ed122aFeAf29dcfe"
         },
         {
             "id": "matic-network",
@@ -38,7 +38,7 @@
             "rank": 47,
             "logo": "https://cryptologos.cc/logos/polygon-matic-logo.svg",
             "symbol": "MATIC",
-            "address": "0xcc42724c6683b7e57334c4e856f4c9965ed682bd"
+            "address": "0xCC42724C6683B7E57334c4E856f4c9965ED682bD"
         },
         {
             "id": "usd-coin",
@@ -46,23 +46,23 @@
             "rank": 56,
             "logo": "https://cryptologos.cc/logos/usd-coin-usdc-logo.svg",
             "symbol": "USDC",
-            "address": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d"
+            "address": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d"
         },
         {
             "id": "true-usd",
-            "name": "TrueUSD",
+            "name": "True USD",
             "rank": 111,
             "logo": "https://cryptologos.cc/logos/trueusd-tusd-logo.svg",
             "symbol": "TUSD",
-            "address": "0x14016e85a25aeb13065688cafb43044c2ef86784"
+            "address": "0x14016E85a25aeb13065688cAFB43044C2ef86784"
         },
         {
             "id": "tether",
-            "name": "Tether",
+            "name": "Tether USD",
             "rank": 146,
             "logo": "https://cryptologos.cc/logos/tether-usdt-logo.svg",
             "symbol": "USDT",
-            "address": "0x55d398326f99059ff775485246999027b3197955"
+            "address": "0x55d398326f99059fF775485246999027B3197955"
         },
         {
             "id": "dai",
@@ -70,7 +70,7 @@
             "rank": 169,
             "logo": "https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.svg",
             "symbol": "DAI",
-            "address": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3"
+            "address": "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3"
         },
         {
             "id": "binance-usd",
@@ -78,7 +78,79 @@
             "rank": 222,
             "logo": "https://cryptologos.cc/logos/binance-usd-busd-logo.svg",
             "symbol": "BUSD",
-            "address": "0xe9e7cea3dedca5984780bafc599bd69add087d56"
+            "address": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56"
+        },
+        {
+            "id": "dogecoin",
+            "name": "Dogecoin",
+            "rank": 6,
+            "logo": "https://cryptologos.cc/logos/dogecoin-doge-logo.svg",
+            "symbol": "DOGE",
+            "address": "0x4206931337dc273a630d328dA6441786BfaD668f"
+        },
+        {
+            "id": "chainlink",
+            "name": "Chainlink",
+            "rank": 9,
+            "logo": "https://cryptologos.cc/logos/chainlink-link-logo.svg",
+            "symbol": "LINK",
+            "address": "0xF8A0BF9cF54Bb92F17374d9e9A321E6a111a51bD"
+        },
+        {
+            "id": "cosmos",
+            "name": "Cosmos",
+            "rank": 21,
+            "logo": "https://cryptologos.cc/logos/cosmos-atom-logo.svg",
+            "symbol": "ATOM",
+            "address": "0x0Eb3a705fc54725037CC9e008bDede697f62F335"
+        },
+        {
+            "id": "kyber-network-crystal",
+            "name": "Kyber Network Crystal",
+            "rank": 84,
+            "logo": "https://cryptologos.cc/logos/kyber-network-crystal-v2-knc-logo.svg",
+            "symbol": "KNC",
+            "address": "0xfe56d5892BDffC7BF58f2E84BE1b2C32D21C308b"
+        },
+        {
+            "id": "compound-governance-token",
+            "name": "Compound",
+            "rank": 116,
+            "logo": "https://cryptologos.cc/logos/compound-comp-logo.svg",
+            "symbol": "COMP",
+            "address": "0x52CE071Bd9b1C4B00A0b92D298c512478CaD67e8"
+        },
+        {
+            "id": "ankr",
+            "name": "Ankr",
+            "rank": 142,
+            "logo": "https://cryptologos.cc/logos/ankr-ankr-logo.svg",
+            "symbol": "ANKR",
+            "address": "0xf307910A4c7bbc79691fD374889b36d8531B08e3"
+        },
+        {
+            "id": "uniswap",
+            "name": "Uniswap",
+            "rank": 172,
+            "logo": "https://cryptologos.cc/logos/uniswap-uni-logo.svg",
+            "symbol": "UNI",
+            "address": "0xBf5140A22578168FD562DCcF235E5D43A02ce9B1"
+        },
+        {
+            "id": "pancakeswap-token",
+            "name": "PancakeSwap",
+            "rank": 405,
+            "logo": "https://cryptologos.cc/logos/pancakeswap-cake-logo.svg",
+            "symbol": "CAKE",
+            "address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82"
+        },
+        {
+            "id": "frax",
+            "name": "Frax",
+            "rank": 570,
+            "logo": "https://cryptologos.cc/logos/frax-frax-logo.svg",
+            "symbol": "FRAX",
+            "address": "0x90C97F71E18723b0Cf0dfa30ee176Ab653E89F40"
         }
     ]
 }
