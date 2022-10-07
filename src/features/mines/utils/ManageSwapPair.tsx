@@ -11,12 +11,12 @@ import { Percent } from 'sdk'
 import PoolAddLiquidity from './PoolAddLiquidity'
 import PoolRemoveLiquidity from './PoolRemoveLiquidity'
 import { useUserSlippageToleranceWithDefault } from 'state/user/hooks'
+import { DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE } from 'features/trident/constants'
 
 const ManageSwapPair = ({ farm }) => {
   const { i18n } = useLingui()
   const [toggle, setToggle] = useState(true)
   
-  const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(100, 10_000)
 
 const allowedSlippage = useUserSlippageToleranceWithDefault(DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE) // custom from users
   const token0 = useCurrency(farm.pair.token0.id)

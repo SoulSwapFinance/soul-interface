@@ -20,11 +20,11 @@ import React, { FC, useState } from 'react'
 
 interface SettingsTabProps {
   placeholderSlippage?: Percent
-  trident?: boolean
+  // trident?: boolean
   className?: string
 }
 
-const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className, trident = false }) => {
+const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className }) => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
 
@@ -45,7 +45,6 @@ const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className, tri
                 {i18n._(t`Transaction Settings`)}
               </Typography>
               <TransactionSettings placeholderSlippage={placeholderSlippage} 
-              // trident={trident} 
               />
             </div>
             <div className="flex flex-col gap-3 p-3 border rounded border-dark-800/60">
@@ -83,7 +82,7 @@ const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className, tri
                   color="gradient"
                 />
               </div>
-              {!trident && (
+              {/* {!trident && ( */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <Typography variant="xs" className="text-high-emphesis" weight={700}>
@@ -101,7 +100,7 @@ const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className, tri
                     color="gradient"
                   />
                 </div>
-              )}
+              {/* )} */}
               {/* {OPENMEV_ENABLED && OPENMEV_SUPPORTED_NETWORKS.includes(chainId) && (
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">

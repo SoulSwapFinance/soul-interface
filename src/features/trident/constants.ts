@@ -5,6 +5,7 @@ import { PoolType } from 'sdk/types'
 
 export const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
 export const DEFAULT_REMOVE_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
+export const V2_SWAP_DEFAULT_SLIPPAGE = new Percent(50, 10_000) // .50%
 
 type PoolTypesInterface = Record<
   PoolType,

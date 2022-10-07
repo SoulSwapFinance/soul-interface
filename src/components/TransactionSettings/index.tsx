@@ -12,6 +12,7 @@ import QuestionHelper from '../QuestionHelper'
 import Typography from '../Typography'
 import { getChainColorCode } from 'constants/chains'
 import { useActiveWeb3React } from 'services/web3'
+import { V2_SWAP_DEFAULT_SLIPPAGE } from 'features/trident/constants'
 
 enum SlippageError {
   InvalidInput = 'InvalidInput',
@@ -27,7 +28,7 @@ export interface TransactionSettingsProps {
   placeholderSlippage?: Percent // varies according to the context in which the settings dialog is placed
 }
 
-const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage }) => {
+const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage = V2_SWAP_DEFAULT_SLIPPAGE }) => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const userSlippageTolerance = useUserSlippageTolerance()
@@ -142,10 +143,10 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
             </div>
           </div>
           <Button
-            height="2rem"
-            size="sm"
+            // height="0rem"
+            size="xs"
             color={userSlippageTolerance === 'auto' ? `${getChainColorCode(chainId)}` : 'gray'}
-            variant="filled"
+            variant="outlined"
             onClick={() => parseSlippageInput('')}
           >
             {i18n._(t`Auto`)}
@@ -186,7 +187,7 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
               deadlineError ? 'text-red' : '',
               'font-bold bg-transparent placeholder-low-emphesis bg-dark-1000/40 border-2 border-dark-800 rounded px-3 py-2 max-w-[100px] focus:border-blue'
             )}
-            placeholder={(DEFAULT_DEADLINE_FROM_NOW / 60).toString()}
+            placeholder={`${(DEFAULT_DEADLINE_FROM_NOW / 60).toString()}mins`}
             value={
               deadlineInput.length > 0
                 ? deadlineInput
@@ -202,7 +203,7 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
             color={deadlineError ? 'red' : ''}
           />
           <Typography variant="sm" weight={700} className="text-secondary">
-            {i18n._(t`minutes`)}
+            {/* {i18n._(t`minutes`)} */}
           </Typography>
         </div>
       </div>
