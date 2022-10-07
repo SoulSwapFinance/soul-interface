@@ -32,7 +32,7 @@ export const FTM_AVALANCHE_STABLE = [
 ];
 export const BASE_URL = "https://bridgeapi.anyswap.exchange";
 export enum MULTICHAIN_METHODS {
-  GET_CHAIN_TOKENS = "/v2/serverInfo",
+  GET_CHAIN_TOKENS = "/v4/tokenlistv4",
 }
 
 export const isNativeForDestChain = (tokenid: string, destChainId: number) => {

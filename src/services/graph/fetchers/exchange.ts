@@ -22,8 +22,8 @@ export const EXCHANGE = {
   [ChainId.ETHEREUM]: 'soulswapfinance/fantom-exchange',
   [ChainId.FANTOM]: 'soulswapfinance/fantom-exchange',
   [ChainId.AVALANCHE]: 'soulswapfinance/avalanche-exchange',
-  // [ChainId.BSC]: 'sushiswap/bsc-exchange',
   [ChainId.BSC]: 'soulswapfinance/fantom-exchange',
+  // [ChainId.BSC]: 'sushiswap/bsc-exchange',
 }
 
 export const exchange = async (chainId = ChainId.FANTOM, query, variables = {}) =>
@@ -96,14 +96,6 @@ export const getEthPrice = async (variables = undefined) => {
 // export const getPrice = (tokenAddress: string) => async (variables = {}) => {
 //   return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
 //     id: tokenAddress,
-//     ...variables,
-//   })
-// }
-
-// export const getSushiPrice = async (variables = {}) => {
-//   // console.log('getSushiPrice')
-//   return getTokenPrice(ChainId.ETHEREUM, tokenPriceQuery, {
-//     id: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
 //     ...variables,
 //   })
 // }

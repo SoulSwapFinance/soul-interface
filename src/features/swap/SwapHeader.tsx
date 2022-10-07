@@ -104,6 +104,19 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           }}
         >
           <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
+            {i18n._(t`Cross`)}
+          </Typography>
+        </NavLink>
+        <NavLink
+          activeClassName={classNames(
+            "border rounded bg-black",
+            chainColor
+          )}
+          href={{
+            pathname: '/bridge',
+          }}
+        >
+          <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
             {i18n._(t`Bridge`)}
           </Typography>
         </NavLink>
