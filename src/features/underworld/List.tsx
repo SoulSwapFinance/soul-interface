@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 
 import { Underworld } from './Key'
 import { Row } from './Row'
-import { FantomMarkets } from './Markets'
+import { FantomMarkets, AvalancheMarkets } from './Markets'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
@@ -16,7 +16,16 @@ export const List = () => {
 
   const { chainId } = useActiveWeb3React()
   
-  const lendList = FantomMarkets.map((market) => (
+  const ftmList = FantomMarkets.map((market) => (
+    <Row
+    key={market.id}
+    lpToken={market.lpAddress}
+    assetAddress={market.assetAddress}
+    pair={market}
+    />
+    ))
+ 
+  const avaxList = AvalancheMarkets.map((market) => (
     <Row
     key={market.id}
     lpToken={market.lpAddress}
@@ -78,7 +87,7 @@ export const List = () => {
         Lending Markets
       </Typography>
         <Underworld />
-        <>{lendList}</>
+        <>{chainId == ChainId.FANTOM ? ftmList : avaxList}</>
      {/* <Typography className="text-2xl mb-12 mt-6 border border-dark-600 hover:border-blue p-3 font-bold text-center">
        Borrow Markets
       </Typography>

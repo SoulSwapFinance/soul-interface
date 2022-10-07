@@ -52,18 +52,16 @@ import {
   LUX_HELPER_ADDRESS,
   LUXOR_STAKING_ADDRESS,
   LUXOR_STAKING_HELPER_ADDRESS,
-  LUM_ADDRESS,
-  SOUL_BOND_ADDRESS,
-} from 'sdk'
-import {
-  COFFIN_BOX_ADDRESS,
-  CHAINLINK_ORACLE_ADDRESS,
-  MERKLE_DISTRIBUTOR_ADDRESS,
-  UNDERWORLD_ADDRESS,
   SOULSWAP_TWAP_0_ORACLE_ADDRESS,
   SOULSWAP_TWAP_1_ORACLE_ADDRESS,
+  LUM_ADDRESS,
+  SOUL_BOND_ADDRESS,
+  COFFIN_BOX_ADDRESS,
   SOULSWAP_SWAPPER_ADDRESS,
-} from 'constants/addresses'
+  UNDERWORLD_ADDRESS,
+  CHAINLINK_ORACLE_ADDRESS,
+  MERKLE_DISTRIBUTOR_ADDRESS,
+} from 'sdk'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from 'constants/multicall'
 import SOUL_BOND_ABI from 'constants/abis/soulbond.json' 
 import SOUL_BOND_V2_ABI from 'constants/abis/soulswap/soulbondv2.json'
@@ -308,15 +306,7 @@ export function useSoulFtmContract(withSignerIfPossible?: boolean): Contract | n
 
 export function useBoringHelperContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(
-    chainId
-      ? chainId === ChainId.FANTOM
-        ? '0x26bbB91Ade07f995E1c5D1F4A050639763F4C44b'
-        : BORING_HELPER_ADDRESS[chainId]
-      : undefined,
-    BORING_HELPER_ABI,
-    false
-  )
+  return useContract(BORING_HELPER_ADDRESS[chainId], BORING_HELPER_ABI)
 }
 
 export function useSoulUsdcContract(withSignerIfPossible?: boolean): Contract | null {
@@ -549,20 +539,13 @@ export function useDashboardContract(): Contract | null {
   return useContract(address, DASHBOARD_ABI, false)
 }
 
-// export function useSoulSwapTWAP0Oracle(): Contract | null {
-//   return useContract(SOULSWAP_TWAP_0_ORACLE_ADDRESS, SOULSWAP_TWAP_ORACLE_ABI)
-// }
-
-// export function useSoulSwapTWAP1Oracle(): Contract | null {
-//   return useContract(SOULSWAP_TWAP_1_ORACLE_ADDRESS, SOULSWAP_TWAP_ORACLE_ABI)
-// }
-
 export function useSoulSwapTWAPContract(address?: string): Contract | null {
-  const TWAP_0 = useContract(SOULSWAP_TWAP_0_ORACLE_ADDRESS, SOULSWAP_TWAP_ORACLE_ABI)
-  const TWAP_1 = useContract(SOULSWAP_TWAP_1_ORACLE_ADDRESS, SOULSWAP_TWAP_ORACLE_ABI)
-  if (address === SOULSWAP_TWAP_0_ORACLE_ADDRESS) {
+  const { chainId } = useActiveWeb3React()
+  const TWAP_0 = useContract(SOULSWAP_TWAP_0_ORACLE_ADDRESS[chainId], SOULSWAP_TWAP_ORACLE_ABI)
+  const TWAP_1 = useContract(SOULSWAP_TWAP_1_ORACLE_ADDRESS[chainId], SOULSWAP_TWAP_ORACLE_ABI)
+  if (address === SOULSWAP_TWAP_0_ORACLE_ADDRESS[chainId]) {
     return TWAP_0
-  } else if (address === SOULSWAP_TWAP_1_ORACLE_ADDRESS) {
+  } else if (address === SOULSWAP_TWAP_1_ORACLE_ADDRESS[chainId]) {
     return TWAP_1
   }
   return undefined

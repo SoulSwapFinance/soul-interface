@@ -43,7 +43,7 @@ export const BORING_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x26bbB91Ade07f995E1c5D1F4A050639763F4C44b',
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
+  [ChainId.AVALANCHE]: '0xF6a718C17cce5Fbc7a838b0D494C1844B1db39Da', // OCT22
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
@@ -138,6 +138,19 @@ export const UNDERWORLD_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+}
+
+// TODO: specify merkle distributor for mainnet
+export const MERKLE_DISTRIBUTOR_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '0xcBE6B83e77cdc011Cc18F6f0Df8444E5783ed982',
+  [ChainId.FANTOM]: '0xA121b64fd62a99869767650879C5bEc776415a45',
+  [ChainId.TELOS]: '',
+  [ChainId.AVALANCHE]: undefined,
+  [ChainId.MATIC]: undefined,
+  [ChainId.ARBITRUM]: undefined,
+  [ChainId.MOONRIVER]: undefined,
+  56: undefined,
+  4002: undefined
 }
 
 export const SUMMONER_ADDRESS: { [chainId in ChainId]: string } = {
@@ -460,6 +473,7 @@ export const SOULSWAP_MULTISWAPPER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x545820d5Cc05248da112419fEfb18522c63C8e12',
   [ChainId.BSC]: '0x86c655cAc122e9A2fd9Ae1f79Df27b30E357968c',
   [ChainId.FANTOM]: '0xbA1d9DdC58bD750ab05217b1eDD864FDb495Ab57', // FEB22
+  [ChainId.AVALANCHE]: '0x5a5aB985039F7BF51A2157c99b9b245D65b25BF8', // OCT22
 }
 
 export const SOULSWAP_MULTI_EXACT_SWAPPER_ADDRESS: AddressMap = {
@@ -467,6 +481,23 @@ export const SOULSWAP_MULTI_EXACT_SWAPPER_ADDRESS: AddressMap = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '0x1B16149Edaf1EFa6ADE6aEEF33e63C6e08c9bB1B',
   [ChainId.FANTOM]: '0xb988D44aF0065649E05e61B7d35b6121ff2b537E', // FEB22
+  [ChainId.AVALANCHE]: '0xbDA06F519DB2DB8141d5Cac47D7AEa66ed8Dd326', // OCT22
+}
+
+export const SOULSWAP_TWAP_0_ORACLE_ADDRESS = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x7a6d653B8248dA8d2DED372Ae6b3669bA1d81cFC', // FEB22
+  [ChainId.AVALANCHE]: '0x82769332eFFcC20F6494887A417397a4e2518a68', // OCT22
+}
+
+export const SOULSWAP_TWAP_1_ORACLE_ADDRESS = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x7b00f395e20d07eD50f03FC61eE1e72Fd0D331d9', // FEB22
+  [ChainId.AVALANCHE]: '0xc6CE6E4163ca4a42c67b0ac4ae70A75A0cAe898e', // OCT22
 }
 
 export const BOND_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
