@@ -36,13 +36,23 @@ import { WrappedCrossChainTrade } from "rubic-sdk/lib/features/cross-chain/provi
 import { useMulticallContract } from "hooks/useContract";
 import { getLastExchange, setLastExchange } from "utils/rubic/hooks";
 import { AVAX, CHAIN_BY_ID, FTM, NATIVE_ADDRESS, rubicConfiguration } from "utils/rubic/configuration";
-import { BalancePromiseToUnit } from "pages/bridge";
+import { ChainId } from "sdk";
+// import { BalancePromiseToUnit } from "pages/bridge";
 
 export default function Exchange() {
-  const lastExchange = useMemo(() => {
-    return getLastExchange() ?? { from: { chain: FANTOM, token: FTM }, to: { chain: AVALANCHE, token: AVAX } };
-  }, []);
   const { account, chainId } = useActiveWeb3React()
+  
+  const lastExchange = useMemo(() => {
+    // return getLastExchange() ?? 
+    return { from: { 
+      chain: chainId == ChainId.FANTOM ? FANTOM : AVALANCHE, 
+      token: chainId == ChainId.FANTOM ? FTM : AVAX
+    }, 
+    to: { chain: chainId == ChainId.FANTOM ? AVALANCHE : FANTOM, 
+      token: chainId == ChainId.FANTOM ? AVAX : FTM
+    } 
+  };
+  }, []);
   const [providerAddress, setProvider] = useState('')
   const [wallet, setWallet] = useState<WalletProvider>(null)
 
@@ -109,10 +119,10 @@ export default function Exchange() {
     if (!account) {
       return EthersBigNumber.from(0);
     }
-    if (from.isNative) {
+    if (from?.isNative) {
       return nativeBalance
     }
-    const IERC20 = new ethers.Contract(from.address, ERC20_ABI, provider);
+    const IERC20 = new ethers.Contract(from?.address, ERC20_ABI, provider);
     try {
       return await IERC20.balanceOf(account);
     } catch (e) {
@@ -132,7 +142,7 @@ export default function Exchange() {
         return;
       }
 
-      const erc20 = new ethers.Contract(from.address, ERC20_ABI, provider);
+      const erc20 = new ethers.Contract(from?.address, ERC20_ABI, provider);
       try {
         const decimals = await erc20.decimals();
         if (disposed) {
@@ -459,7 +469,7 @@ export default function Exchange() {
                   </div>
 
                   <div className="flex justify-center mt-2 font-bold text-2xl">
-                    {from.symbol}
+                    {from?.symbol}
                   </div>
                 </Button>
                 <div
@@ -591,7 +601,7 @@ export default function Exchange() {
                   "bg-dark-1000 font-bold", `text-[${fromChain?.color}]`
                 )}
               >
-                {formatNumber(fromAmount, false, true)} {from.symbol} ({formatNumber(fromUsd, true, true)})
+                {formatNumber(fromAmount, false, true)} {from?.symbol} ({formatNumber(fromUsd, true, true)})
                 <div
                   className="flex text-white"
                 >

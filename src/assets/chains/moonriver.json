@@ -21,7 +21,7 @@
             "rank": 1,
             "logo": "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/moonriver/Moonriver.svg",
             "symbol": "MOVR",
-            "address": "0x98878b06940ae243284ca214f92bb71a2b032b8a",
+            "address": "0x98878B06940aE243284CA214f92Bb71a2b032B8A",
             "isNative": true,
             "decimals": 18
         },
@@ -31,7 +31,7 @@
             "rank": 2,
             "logo": "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/avalanche/Avalanche.svg",
             "symbol": "AVAX",
-            "address": "0x14a0243c333a5b238143068dc3a7323ba4c30ecb"
+            "address": "0x14a0243C333A5b238143068dC3A7323Ba4C30ECB"
         },
         {
             "id": "fantom",
@@ -39,7 +39,7 @@
             "rank": 3,
             "logo": "https://cryptologos.cc/logos/fantom-ftm-logo.svg",
             "symbol": "FTM",
-            "address": "0xad12dab5959f30b9ff3c2d6709f53c335dc39908"
+            "address": "0xaD12daB5959f30b9fF3c2d6709f53C335dC39908"
         },
         {
             "id": "matic-network",
@@ -47,7 +47,7 @@
             "rank": 4,
             "logo": "https://cryptologos.cc/logos/polygon-matic-logo.svg",
             "symbol": "MATIC",
-            "address": "0x682f81e57eaa716504090c3ecba8595fb54561d8"
+            "address": "0x682F81e57EAa716504090C3ECBa8595fB54561D8"
         },
         {
             "id": "dai",
@@ -55,7 +55,7 @@
             "rank": 4,
             "logo": "https://cryptologos.cc/logos/multi-collateral-dai-dai-logo.svg",
             "symbol": "DAI",
-            "address": "0x80a16016cc4a2e6a2caca8a4a498b1699ff0f844"
+            "address": "0x80A16016cC4A2E6a2CACA8a4a498b1699fF0f844"
         },
         {
             "id": "wrapped-bitcoin",
@@ -63,7 +63,7 @@
             "rank": 393,
             "logo": "https://cryptologos.cc/logos/wrapped-bitcoin-wbtc-logo.svg",
             "symbol": "WBTC",
-            "address": "0x6ab6d61428fde76768d7b45d8bfeec19c6ef91a8"
+            "address": "0x6aB6d61428fde76768D7b45D8BFeec19c6eF91A8"
         },
         {
             "id": "weth",
@@ -71,15 +71,63 @@
             "rank": 2375,
             "logo": "https://cryptologos.cc/logos/ethereum-eth-logo.svg",
             "symbol": "WETH",
-            "address": "0x639a647fbe20b6c8ac19e48e2de44ea792c62c5c"
+            "address": "0x639A647fbe20b6c8ac19E48E2de44ea792c62c5C"
         },
         {
             "id": "wbnb",
             "name": "Wrapped BNB",
             "rank": 2651,
-            "logo": "https://assets.coingecko.com/coins/images/12591/small/binance-coin-logo.png?1600947313",
+            "logo": "https://cryptologos.cc/logos/bnb-bnb-logo.svg",
             "symbol": "WBNB",
-            "address": "0x2bf9b864cdc97b08b6d79ad4663e71b8ab65c45c"
+            "address": "0x2bF9b864cdc97b08B6D79ad4663e71B8aB65c45c"
+        },
+        {
+            "id": "frax",
+            "name": "Frax",
+            "rank": 570,
+            "logo": "https://cryptologos.cc/logos/frax-frax-logo.svg",
+            "symbol": "FRAX",
+            "address": "0x1A93B23281CC1CDE4C4741353F3064709A16197d"
+        },
+        {
+            "id": "frax-share",
+            "name": "Frax Share",
+            "rank": 784,
+            "logo": "https://cryptologos.cc/logos/frax-share-fxs-logo.svg",
+            "symbol": "FXS",
+            "address": "0x6f1D1Ee50846Fcbc3de91723E61cb68CFa6D0E98"
+        },
+        {
+            "id": "ankr",
+            "name": "Ankr",
+            "rank": 142,
+            "logo": "https://cryptologos.cc/logos/ankr-ankr-logo.svg",
+            "symbol": "ANKR",
+            "address": "0xFd301Ca82D007880e678bB750a771550C5104Ff2"
+        },
+        {
+            "id": "tether",
+            "name": "Tether USD",
+            "rank": 146,
+            "logo": "https://cryptologos.cc/logos/tether-usdt-logo.svg",
+            "symbol": "USDT",
+            "address": "0xB44a9B6905aF7c801311e8F4E76932ee959c663C"
+        },
+        {
+            "id": "magic-internet-money",
+            "name": "Magic Internet Money",
+            "rank": 385,
+            "logo": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x82f0B8B456c1A451378467398982d4834b6829c1/logo.png",
+            "symbol": "MIM",
+            "address": "0x0caE51e1032e8461f4806e26332c030E34De3aDb"
+        },
+        {
+            "id": "multichain",
+            "name": "Multichain",
+            "rank": 4716,
+            "logo": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x9Fb9a33956351cf4fa040f65A13b835A3C8764E3/logo.png",
+            "symbol": "MULTI",
+            "address": "0x9Fb9a33956351cf4fa040f65A13b835A3C8764E3"
         }
     ]
 }

@@ -33,7 +33,7 @@
         },
         {
             "id": "soulswap",
-            "name": "SoulPower",
+            "name": "Soul Power",
             "rank": 1,
             "logo": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png",
             "symbol": "SOUL",
@@ -46,7 +46,7 @@
             "logo": "https://cryptologos.cc/logos/curve-dao-token-crv-logo.svg",
             "symbol": "CRV",
             "address": "0x1E4F97b9f9F913c46F1632781732927B9019C68b"
-        }, 
+        },
         {
             "id": "dai",
             "name": "Dai Stablecoin",
@@ -66,11 +66,11 @@
         },
         {
             "id": "wrapped-avax",
-            "name": "Wrapped AVAX",
+            "name": "Wrapped Avalanche",
             "rank": 911,
             "logo": "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/avalanche/Avalanche.svg",
             "symbol": "WAVAX",
-            "address": "0x511d35c52a3c244e7b8bd92c0c297755fbd89212"
+            "address": "0x511D35c52a3C244E7b8bd92c0C297755FbD89212"
         },
         {
             "id": "wrapped-bitcoin",
@@ -78,7 +78,96 @@
             "rank": 393,
             "logo": "https://cryptologos.cc/logos/wrapped-bitcoin-wbtc-logo.svg",
             "symbol": "WBTC",
-            "address": "0x321162cd933e2be498cd2267a90534a804051b11"
+            "address": "0x321162Cd933E2Be498Cd2267a90534A804051b11"
+        },
+        {
+            "id": "band-protocol",
+            "name": "Band Protocol",
+            "rank": 92,
+            "logo": "https://cryptologos.cc/logos/band-protocol-band-logo.svg",
+            "symbol": "BAND",
+            "address": "0x46E7628E8b4350b2716ab470eE0bA1fa9e76c6C5"
+        },
+        {
+            "id": "yearn-finance",
+            "name": "Yearn Finance",
+            "rank": 95,
+            "logo": "https://cryptologos.cc/logos/yearn-finance-yfi-logo.svg",
+            "symbol": "YFI",
+            "address": "0x29b0Da86e484E1C0029B56e817912d778aC0EC69"
+        },
+        {
+            "id": "true-usd",
+            "name": "True USD",
+            "rank": 111,
+            "logo": "https://cryptologos.cc/logos/trueusd-tusd-logo.svg",
+            "symbol": "TUSD",
+            "address": "0x9879aBDea01a879644185341F7aF7d8343556B7a"
+        },
+        {
+            "id": "tether",
+            "name": "Tether USD",
+            "rank": 146,
+            "logo": "https://cryptologos.cc/logos/tether-usdt-logo.svg",
+            "symbol": "USDT",
+            "address": "0x049d68029688eAbF473097a2fC38ef61633A3C7A"
+        },
+        {
+            "id": "nexo",
+            "name": "NEXO",
+            "rank": 213,
+            "logo": "https://cryptologos.cc/logos/nexo-nexo-logo.svg",
+            "symbol": "NEXO",
+            "address": "0x7C598c96D02398d89FbCb9d41Eab3DF0C16F227D"
+        },
+        {
+            "id": "wrapped-fantom",
+            "name": "Wrapped Fantom",
+            "rank": 355,
+            "logo": "https://cryptologos.cc/logos/fantom-ftm-logo.svg",
+            "symbol": "WFTM",
+            "address": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83"
+        },
+        {
+            "id": "magic-internet-money",
+            "name": "Magic Internet Money",
+            "rank": 385,
+            "logo": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x82f0B8B456c1A451378467398982d4834b6829c1/logo.png",
+            "symbol": "MIM",
+            "address": "0x82f0B8B456c1A451378467398982d4834b6829c1"
+        },
+        {
+            "id": "multichain",
+            "name": "Multichain",
+            "rank": 769,
+            "logo": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x9Fb9a33956351cf4fa040f65A13b835A3C8764E3/logo.png",
+            "symbol": "MULTI",
+            "address": "0x9Fb9a33956351cf4fa040f65A13b835A3C8764E3"
+        },
+        {
+            "id": "spiritswap",
+            "name": "SpiritSwap",
+            "rank": 1629,
+            "logo": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x5Cc61A78F164885776AA610fb0FE1257df78E59B/logo.png",
+            "symbol": "SPIRIT",
+            "address": "0x5Cc61A78F164885776AA610fb0FE1257df78E59B"
+        },
+        {
+            "id": "spookyswap",
+            "name": "Spookyswap",
+            "rank": 838,
+            "logo": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x841FAD6EAe12c286d1Fd18d1d525DFfA75C7EFFE/logo.png",
+            "symbol": "BOO",
+            "address": "0x841FAD6EAe12c286d1Fd18d1d525DFfA75C7EFFE"
+        },
+        {
+            "id": "ice-token",
+            "name": "Popsicle Finance",
+            "rank": 942,
+            "logo": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xf16e81dce15B08F326220742020379B855B87DF9/logo.png",
+            "symbol": "ICE",
+            "address": "0xf16e81dce15B08F326220742020379B855B87DF9"
         }
     ]
 }
+

@@ -23,12 +23,12 @@ export function setLastExchange(from: { chain: Chain; token: Token }, to: { chai
     localStorage.setItem(
       "exchange",
       JSON.stringify({
-        from: { chain: from.chain.chainId, token: from.token.id },
-        to: { chain: to?.chain.chainId, token: to?.token?.id },
+        from: { chain: from?.chain?.chainId, token: from?.token?.id },
+        to: { chain: to?.chain?.chainId, token: to?.token?.id },
       }),
     );
   }
   
-// const FTM = FANTOM.tokens.find(t => t.id === "fantom");
-// const AVAX = AVALANCHE.tokens.find(t => t.id === "avalanche-2");
+const FTM = FANTOM.tokens.find(t => t.id === "fantom");
+const AVAX = AVALANCHE.tokens.find(t => t.id === "avalanche-2");
   
