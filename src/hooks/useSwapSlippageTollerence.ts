@@ -2,8 +2,8 @@ import { Currency, Percent, Trade, TradeType, TridentTrade } from 'sdk'
 import { useAppSelector } from 'state/hooks'
 import { selectSlippageWithDefault } from 'state/slippage/slippageSlice'
 import { useMemo } from 'react'
+import { V2_SWAP_DEFAULT_SLIPPAGE } from 'features/trident/constants'
 
-const V2_SWAP_DEFAULT_SLIPPAGE = new Percent(50, 10_000) // .50%
 const ONE_TENTHS_PERCENT = new Percent(10, 10_000) // .10%
 
 export default function useSwapSlippageTolerance(

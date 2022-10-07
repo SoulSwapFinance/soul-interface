@@ -1,4 +1,4 @@
-import { ChainId, Currency, Percent } from '../sdk'
+import { ChainId, Currency, NATIVE, Percent } from '../sdk'
 import React, { FC, useState } from 'react'
 import Image from 'next/image'
 import Gas from './Gas'
@@ -9,12 +9,14 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
 import Typography from '../components/Typography'
+import { useActiveWeb3React } from 'services/web3'
 
 const getQuery = (input, output) => {
+  const { chainId } = useActiveWeb3React()
   if (!input && !output) return
 
   if (input && !output) {
-    return { inputCurrency: input.address || 'FTM' }
+    return { inputCurrency: input.address || NATIVE[chainId].symbol }
   } else if (input && output) {
     return { inputCurrency: input.address, outputCurrency: output.address }
   }

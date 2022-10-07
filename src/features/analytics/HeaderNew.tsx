@@ -1,4 +1,4 @@
-import { ChainId, Currency, Percent } from '../../sdk'
+import { ChainId, Currency, NATIVE, Percent } from '../../sdk'
 import React, { FC, useState } from 'react'
 
 import Gas from '../../components/Gas'
@@ -11,10 +11,11 @@ import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
 
 const getQuery = (input, output) => {
+  const { chainId } = useActiveWeb3React()
   if (!input && !output) return
 
   if (input && !output) {
-    return { inputCurrency: input.address || 'FTM' }
+    return { inputCurrency: input.address || NATIVE[chainId].symbol }
   } else if (input && output) {
     return { inputCurrency: input.address, outputCurrency: output.address }
   }
@@ -28,7 +29,6 @@ interface AnalyticsHeaderProps {
 
 const AnalyticsHeaderNew: FC<AnalyticsHeaderProps> = ({ input, output, allowedSlippage }) => {
   const { i18n } = useLingui()
-  const { chainId } = useActiveWeb3React()
   const router = useRouter()
   const [animateWallet, setAnimateWallet] = useState(false)
   const isRemove = router.asPath.startsWith('/remove')

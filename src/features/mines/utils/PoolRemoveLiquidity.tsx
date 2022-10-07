@@ -23,8 +23,8 @@ import { useTransactionAdder } from 'state/transactions/hooks'
 import { useUserSlippageToleranceWithDefault } from 'state/user/hooks'
 import React, { useCallback, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
+import { DEFAULT_REMOVE_V2_SLIPPAGE_TOLERANCE } from 'features/trident/constants'
 
-const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(100, 10_000)
 
 // @ts-ignore TYPE NEEDS FIXING
 const PoolWithdraw = ({ currencyA, currencyB, header }) => {
@@ -49,7 +49,7 @@ const PoolWithdraw = ({ currencyA, currencyB, header }) => {
 
   // txn values
   const deadline = useTransactionDeadline()
-  const allowedSlippage = useUserSlippageToleranceWithDefault(DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE)
+  const allowedSlippage = useUserSlippageToleranceWithDefault(DEFAULT_REMOVE_V2_SLIPPAGE_TOLERANCE)
 
   // pair contract
   const pairContract = usePairContract(pair?.liquidityToken?.address)
