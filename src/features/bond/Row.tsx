@@ -326,7 +326,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                     />
                   }
                   <Wrap padding="0" margin="0" display="flex">
-                    {(approved && isStakeable) ?
+                    { approved && isStakeable ?
                       (bond.token0Symbol == WNATIVE[chainId].symbol ? (
                         <SubmitButton
                           primaryColor={getChainColor(chainId)}
@@ -341,7 +341,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                             CREATE {bond.lpSymbol} PAIR
                           </TokenPairLink>
                         </SubmitButton>
-                      ) :
+                      ) : (
                         <SubmitButton
                           primaryColor={getChainColor(chainId)}
                         >
@@ -355,7 +355,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                             CREATE {bond.lpSymbol} PAIR
                           </TokenPairLink>
                         </SubmitButton>
-                      ) :
+                      )
                       (approved && isStakeable ?
                         (
                           <SubmitButton
