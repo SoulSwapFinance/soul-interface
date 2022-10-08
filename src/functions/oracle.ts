@@ -1,12 +1,12 @@
 import { defaultAbiCoder } from '@ethersproject/abi'
 import { AddressZero } from '@ethersproject/constants'
-import { ChainId } from 'sdk'
+import { ChainId, CHAINLINK_ORACLE_ADDRESS} from 'sdk'
 import { CHAINLINK_PRICE_FEED_MAP } from 'config/oracles/chainlink'
 import { ChainlinkOracle } from 'entities/oracles'
 import { IOracle } from 'interfaces'
 
 import { e10 } from './math'
-import { CHAINLINK_ORACLE_ADDRESS } from '../constants'
+import {  } from '../constants'
 
 export function getOracle(chainId: ChainId, address: string, data: string): IOracle {
   if (address.toLowerCase() === CHAINLINK_ORACLE_ADDRESS[chainId].toLowerCase()) {
