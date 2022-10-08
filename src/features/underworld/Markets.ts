@@ -114,5 +114,25 @@ export const AvalancheMarkets = [
     assetAddress: WNATIVE_ADDRESS[ChainId.AVALANCHE],
     collateralAddress: DAI_ADDRESS[ChainId.AVALANCHE],
   },
+  {
+    // LENDING
+    id: 2,
+    asset: 'BTC',
+    collateral: 'DAI',
+    lpSymbol: 'DAI-BTC',
+    lpAddress: '0x19fA70E88E93e816eC9E10996dd663C07897938D',
+    assetAddress: WBTC_ADDRESS[ChainId.AVALANCHE],
+    collateralAddress: DAI_ADDRESS[ChainId.AVALANCHE],
+  },
+  {
+    // LENDING
+    id: 3,
+    asset: 'WETH',
+    collateral: 'DAI',
+    lpSymbol: 'DAI-ETH',
+    lpAddress: '0x812A74ADDBCBe85144a4db3afBee532C97328864',
+    assetAddress: WETH_ADDRESS[ChainId.AVALANCHE],
+    collateralAddress: DAI_ADDRESS[ChainId.AVALANCHE],
+  },
 
 ]
