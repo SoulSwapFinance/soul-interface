@@ -215,6 +215,7 @@ export const FantomBonds = [
 
   {
     pid: 23,
+    status: 'closed',
     bondAddress: '0x4Ac427a4DFF61023c2e84d8316180CF109c5e45C',
     assetName: 'SOR',
     assetAddress: SOR_ADDRESS[ChainId.FANTOM],
