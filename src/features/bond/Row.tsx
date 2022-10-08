@@ -376,9 +376,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                             height="2.5rem" onClick={() => handleApprove()}>
                             APPROVE LP
                           </SubmitButton>
-                        )
-
-                      )}
+                        )}
                   </Wrap>
                 </FunctionBox>
 
