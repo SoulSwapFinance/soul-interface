@@ -43,7 +43,7 @@ export const BORING_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x26bbB91Ade07f995E1c5D1F4A050639763F4C44b',
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '0xF6a718C17cce5Fbc7a838b0D494C1844B1db39Da', // OCT22
+  [ChainId.AVALANCHE]: '0x78b02521057adc0124C12dDB99De167fC65a9198', // OCT22
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',

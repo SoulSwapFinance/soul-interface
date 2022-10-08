@@ -235,10 +235,6 @@ export function useSoulGuideContract(): Contract | null {
   return useContract(chainId && SOUL_GUIDE_ADDRESS[chainId], SOUL_GUIDE_ABI, false)
 }
 
-export function usePendingContract(): Contract | null {
-  return useContract('0x9aeadfE6cd03A2b5730474bF6dd79802d5bCD029', PENDING_ABI, false)
-}
-
 export function usePriceHelperContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && PRICE_HELPER_ADDRESS[chainId], PRICE_HELPER_ABI, false)
@@ -306,7 +302,7 @@ export function useSoulFtmContract(withSignerIfPossible?: boolean): Contract | n
 
 export function useBoringHelperContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(BORING_HELPER_ADDRESS[chainId], BORING_HELPER_ABI)
+  return useContract(chainId && BORING_HELPER_ADDRESS[chainId], BORING_HELPER_ABI)
 }
 
 export function useSoulUsdcContract(withSignerIfPossible?: boolean): Contract | null {

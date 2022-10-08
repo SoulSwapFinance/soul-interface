@@ -1,4 +1,4 @@
-import { ChainId } from 'sdk'
+import { ChainId, SOUL_ADDRESS, WBTC_ADDRESS } from 'sdk'
 import { GRAPH_HOST } from 'services/graph/constants'
 import { pager } from 'services/graph/fetchers/pager'
 import { GraphProps } from 'services/graph/interfaces'
@@ -22,10 +22,12 @@ import {
 // import { useActiveWeb3React } from 'services/web3'
 import useSWR, { SWRConfiguration } from 'swr'
 import stringify from 'fast-json-stable-stringify'
+import { useActiveWeb3React } from 'services/web3'
 
 export const EXCHANGE = {
   [ChainId.ETHEREUM]: 'soulswapfinance/fantom-exchange',
   [ChainId.FANTOM]: 'soulswapfinance/fantom-exchange',
+  [ChainId.AVALANCHE]: 'soulswapfinance/avalanche-exchange',
   [ChainId.BSC]: 'soulswapfinance/fantom-exchange',
 }
 
@@ -130,8 +132,9 @@ export const getNativePrice = async (chainId = ChainId.FANTOM, variables = undef
 // }
 
 export const getSoulPrice = async (variables = {}) => {
-  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: '0xe2fb177009ff39f52c0134e8007fa0e4baacbd07',
+  const { chainId } = useActiveWeb3React()
+  return getTokenPrice(chainId, tokenPriceQuery, {
+    id: SOUL_ADDRESS[chainId].toLowerCase(),
     ...variables,
   })
 }
@@ -183,19 +186,22 @@ export const getWrappedEthPrice = async () => {
 }
 
 export const getWrappedBtcPrice = async () => {
-  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: '0x321162cd933e2be498cd2267a90534a804051b11',
+  const { chainId } = useActiveWeb3React()
+  return getTokenPrice(chainId, tokenPriceQuery, {
+    id: WBTC_ADDRESS[chainId].toLowerCase(),
   })
 }
 
 export function getTokensPrice(address: string) {
-  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
+  const { chainId } = useActiveWeb3React()
+  return getTokenPrice(chainId, tokenPriceQuery, {
     id: address,
   })
 }
 
 export function getPairsPrice(address: string) {
-  return getPairPrice(ChainId.FANTOM, pairReserveQuery, {
+  const { chainId } = useActiveWeb3React()
+  return getPairPrice(chainId, pairReserveQuery, {
     id: address,
   })
 }
