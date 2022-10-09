@@ -154,7 +154,8 @@ export const FarmList = () => {
         <Button variant="filled"
           color={"purple"}  
         // color={getChainColorCode(chainId)} 
-        size="lg" className={chainId == ChainId.FANTOM ? '' : 'hidden'}>
+        size="lg"
+        >
           <NavLink href={'/underworld'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span> Lend </span>
@@ -175,12 +176,9 @@ export const FarmList = () => {
       <Typography className="text-2xl bg-dark-1000 mb-3 mt-6 border border-dark-600 p-3 font-bold text-center">SoulSwap Pools</Typography>
       <Active />
       <>{chainId == ChainId.FANTOM ? ftmList : avaxList}</>
-      {chainId == ChainId.FANTOM &&
         <div>
           <Typography className="text-2xl bg-dark-1000 mb-3 mt-6 border border-blue p-3 font-bold text-center">Lending Pools</Typography>
-          {chainId == ChainId.FANTOM &&
-            <Underworld />
-          }
+      <Underworld />
           {chainId == ChainId.FANTOM ? ftmLendList : avaxLendList}
           <Typography className="text-2xl bg-dark-1000 mb-3 mt-6 border border-pink p-3 font-bold text-center">Retired Pools</Typography>
           <>
@@ -188,7 +186,6 @@ export const FarmList = () => {
             {chainId == ChainId.FANTOM ? inactiveFtmList : inactiveAvaxList}
           </>
         </div>
-      }
     </div>
   )
 }

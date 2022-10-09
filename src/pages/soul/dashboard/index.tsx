@@ -221,7 +221,7 @@ const HideOnMobile = styled.div`
       <div className="grid grid-cols justify-center">
 <HideOnMobile>
       <div className="py-1 mb-1 mt-3 ml-3 mr-3 bg-dark-600" />
-        <div className="py-1 mb-1 ml-3 mr-3  bg-purple" />
+        <div className="py-1 mb-1 ml-3 mr-3 bg-purple" />
         <Typography variant="h1" className="text-center mt-4 mb-4 text-dark-600" component="h1">
           SOULSWAP FINANCE
         </Typography>
@@ -230,35 +230,35 @@ const HideOnMobile = styled.div`
         </HideOnMobile>
 
       <div className="flex ml-4 mr-4 mb-4 gap-1 items-center justify-center">
-        <Button variant="bordered" color={getChainColorCode(chainId)} size="lg" className={classNames([ChainId.FANTOM].includes(chainId) ? '' : 'hidden')}>
+        <Button variant="bordered" color={"purple"} size="lg" className={classNames([ChainId.FANTOM].includes(chainId) ? '' : 'hidden')}>
           <NavLink href={'/seance'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Stake </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="bordered" color={getChainColorCode(chainId)} size="lg">
+        <Button variant="bordered" color={"purple"} size="lg">
           <NavLink href={'/summoner'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Farm </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="bordered" color={getChainColorCode(chainId)} size="lg">
+        <Button variant="bordered" color={"purple"} size="lg">
           <NavLink href={'/bonds'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Bond </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="bordered" color={getChainColorCode(chainId)} size="lg" className={chainId == ChainId.FANTOM ? '' : 'hidden'}>
+        <Button variant="bordered" color={"purple"} size="lg">
           <NavLink href={'/underworld'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Lend </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="bordered" color={getChainColorCode(chainId)} size="lg">
+        <Button variant="bordered" color={"purple"} size="lg">
           <NavLink href={'/autostake'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Vault </span>
