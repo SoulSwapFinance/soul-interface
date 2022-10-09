@@ -25,7 +25,7 @@ export const Row = ({ pair, assetAddress, lpToken }) => {
     const [openLend, setOpenLend] = useState(false)
     const [openBorrow, setOpenBorrow] = useState(false)
     
-    const { underworldPairInfo } = useUnderworldPairInfo(assetAddress)
+    const { underworldPairInfo } = useUnderworldPairInfo(pair.lpAddress)
     // const lpDecimals = Number(underworldPairInfo.decimals)
     // const assetAddress = underworldPairInfo.assetAddress
     const assetSymbol = underworldPairInfo.assetTicker

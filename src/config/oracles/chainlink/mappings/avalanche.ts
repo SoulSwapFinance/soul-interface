@@ -39,6 +39,14 @@ const AVALANCHE_CHAINLINK_MAPPING = {
       fromDecimals: 6,
       toDecimals: 8,
     },
+    // JOE / USD
+    '0x02D35d3a8aC3e1626d3eE09A78Dd87286F5E8e3a': {
+      from: '0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd',
+      to: '0x0000000000000000000000000000000000000001',
+      decimals: 8,
+      fromDecimals: 18,
+      toDecimals: 8,
+    },
   }
   
   export default AVALANCHE_CHAINLINK_MAPPING

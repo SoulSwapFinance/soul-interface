@@ -1,4 +1,6 @@
+import { getChainColorCode } from "constants/chains";
 import React from "react";
+import { useActiveWeb3React } from "services/web3";
 import styled from "styled-components";
 
 // const HideOnSmall = styled.div`
@@ -50,10 +52,11 @@ const Text = styled.p`
 `;
 
 export function Underworld() {
+  const { chainId } = useActiveWeb3React()
   return (
     <div className="justify-center">
         <FarmContainer>
-          <div className = "grid grid-cols-1 rounded bg-blue font-bold border border-transparent" >
+          <div className = {`grid grid-cols-1 rounded bg-${getChainColorCode(chainId)} font-bold border border-transparent`}>
             <FarmContentWrapper>
               
               <FarmItemBox>

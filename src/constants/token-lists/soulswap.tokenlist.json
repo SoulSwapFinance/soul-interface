@@ -68,7 +68,7 @@
         "symbol": "WAVAX",
         "decimals": 18,
         "chainId": 43114,
-        "logoURI": "https://snowtrace.io/token/images/avax_32.png"
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/avalanche/assets/0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7/logo.png"
       },
       {
         "name": "Dai Stablecoin",
