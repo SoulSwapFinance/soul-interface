@@ -60,6 +60,10 @@ export const MIM_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x82f0B8B456c1A451378467398982d4834b6829c1',
 }
 
+export const JOE_ADDRESS: AddressMap = {
+  [ChainId.AVALANCHE]: '0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd',
+}
+
 export const STOP_LIMIT_ORDER_ADDRESS: AddressMap = {
   // [ChainId.KOVAN]: '0xce9365dB1C99897f04B3923C03ba9a5f80E8DB87',
   // [ChainId.MATIC]: '0x1aDb3Bd86bb01797667eC382a0BC6A9854b4005f',

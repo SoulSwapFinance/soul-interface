@@ -9,6 +9,7 @@ import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
 import { getChainColorCode } from 'constants/chains'
 import { useSummonerContract } from 'hooks/useContract'
+import { classNames } from 'functions'
 
 export const FarmList = () => {
   const { chainId } = useActiveWeb3React()
@@ -180,11 +181,15 @@ export const FarmList = () => {
           <Typography className="text-2xl bg-dark-1000 mb-3 mt-6 border border-blue p-3 font-bold text-center">Lending Pools</Typography>
       <Underworld />
           {chainId == ChainId.FANTOM ? ftmLendList : avaxLendList}
-          <Typography className="text-2xl bg-dark-1000 mb-3 mt-6 border border-pink p-3 font-bold text-center">Retired Pools</Typography>
-          <>
-            <Inactive />
+          <Typography 
+            className={classNames(inactiveAvaxList.length == 0 ? 'hidden' : `text-2xl bg-dark-1000 mb-3 mt-6 border border-pink p-3 font-bold text-center`)}
+          >
+              Retired Pools
+            </Typography>
+            { inactiveAvaxList.length > 0 &&
+            <Inactive/>
+            }
             {chainId == ChainId.FANTOM ? inactiveFtmList : inactiveAvaxList}
-          </>
         </div>
     </div>
   )

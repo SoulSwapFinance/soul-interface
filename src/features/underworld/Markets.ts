@@ -1,4 +1,4 @@
-import { BNB_ADDRESS, ChainId, DAI_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
+import { BNB_ADDRESS, ChainId, DAI_ADDRESS, JOE_ADDRESS, USDC_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
 
 export const FantomMarkets = [
   {
@@ -135,5 +135,54 @@ export const AvalancheMarkets = [
     collateralAddress: DAI_ADDRESS[ChainId.AVALANCHE],
   },
   */
-
+  {
+   // LENDING
+   id: 0,
+   asset: 'USDC',
+   collateral: 'AVAX',
+   lpSymbol: 'AVAX-USDC',
+   lpAddress: '0x7ef603f01Ffa9D21c9ee8159AF4adFbE78DC925B',
+   assetAddress: USDC_ADDRESS[ChainId.AVALANCHE],
+   collateralAddress: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+  },
+  {
+    // LENDING
+    id: 1,
+    asset: 'AVAX',
+    collateral: 'USDC',
+    lpSymbol: 'USDC-AVAX',
+    lpAddress: '0xa34fe600E6349d67fcd6989A9c4007b5ee5A494B',
+    assetAddress: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+    collateralAddress: USDC_ADDRESS[ChainId.AVALANCHE],
+  },
+  {
+    // LENDING
+    id: 2,
+    asset: 'WETH',
+    collateral: 'USDC',
+    lpSymbol: 'USDC-WETH',
+    lpAddress: '0xD981D3e065bA8E89Ac56DB994D86F22dA409cf20',
+    assetAddress: WETH_ADDRESS[ChainId.AVALANCHE],
+    collateralAddress: USDC_ADDRESS[ChainId.AVALANCHE],
+  },
+  {
+    // LENDING
+    id: 3,
+    asset: 'WBTC',
+    collateral: 'USDC',
+    lpSymbol: 'USDC-WBTC',
+    lpAddress: '0x142c9eE960bB6AD872f22712C4b129783999c35E',
+    assetAddress: WBTC_ADDRESS[ChainId.AVALANCHE],
+    collateralAddress: USDC_ADDRESS[ChainId.AVALANCHE],
+  },
+  // {
+  //   // LENDING
+  //   id: 4,
+  //   asset: 'JOE',
+  //   collateral: 'USDC',
+  //   lpSymbol: 'USDC-JOE',
+  //   lpAddress: '0x25A9f83532990Ce500C9f576FAcDb091fA4f7D41',
+  //   assetAddress: JOE_ADDRESS[ChainId.AVALANCHE],
+  //   collateralAddress: USDC_ADDRESS[ChainId.AVALANCHE],
+  // },
 ]

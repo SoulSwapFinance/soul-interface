@@ -42,14 +42,17 @@ if (!pair) return <div />
   const assetSymbol = pair?.asset.tokenInfo.symbol
   const collateralSymbol = pair?.collateral.tokenInfo.symbol
   const assetDecimals = pair?.asset.tokenInfo.decimals
+  const assetAddress = pair?.asset.tokenInfo.address
+  const collateralAddress = pair?.collateral.tokenInfo.address
   // const oracle = pair?.oracle.address
 
   const assetPrice = pair?.asset.usd / 1e18
   const userDepositAmount = pair?.userAssetFraction / 10**(assetDecimals)
   const userDepositValue = userDepositAmount * assetPrice
     
-  const assetURL = pair?.asset.tokenInfo.logoURI
-  const collateralURL = pair?.collateral.tokenInfo.logoURI
+  const assetURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/assets/${assetAddress}/logo.png`
+  //pair?.asset.tokenInfo.logoURI
+  const collateralURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/assets/${collateralAddress}/logo.png`
 
   return (
     <PairLayout>
