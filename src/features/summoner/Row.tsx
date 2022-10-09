@@ -78,7 +78,10 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const token0Decimals = Number(pairInfo.token0Decimals)
     const token1Decimals = Number(pairInfo.token1Decimals)
     // BTC has 8 decimals
-    const assetDecimals = isUnderworldPair &&  token0Symbol == 'BTC' ? 8 : Number(pairInfo.pairDecimals)
+    const assetDecimals 
+      = isUnderworldPair && token0Symbol == 'BTC' ? 8 : 
+      isUnderworldPair && token0Symbol == 'USDC' ? 6 :
+      Number(pairInfo.pairDecimals)
 
     const [showOptions, setShowOptions] = useState(false)
     const [openDeposit, setOpenDeposit] = useState(false)
