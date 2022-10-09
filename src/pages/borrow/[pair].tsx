@@ -24,11 +24,14 @@ import { useRouter } from 'next/router'
 import { RecoilRoot } from 'recoil'
 import { e10 } from 'functions/math'
 import usePriceApi from 'hooks/usePriceApi'
+import { ChainId } from 'sdk'
+import { useActiveWeb3React } from 'services/web3'
 
 export default function Pair() {
   useRedirectOnChainId('/borrow')
 
   const router = useRouter()
+  const { chainId } = useActiveWeb3React()
   const { i18n } = useLingui()
 
   const pair = useUnderworldPair(router.query.pair as string)
@@ -38,7 +41,12 @@ export default function Pair() {
   const borrowPrice = usePriceApi(pair?.asset.address)
   
   const assetSymbol = pair?.asset.tokenInfo.symbol
-  
+  const assetAddress = pair?.asset.tokenInfo.address
+  const collateralAddress = pair?.collateral.tokenInfo.address
+    const blockchain = chainId == ChainId.FANTOM ? 'fantom' : 'avalanche'
+  const assetURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${assetAddress}/logo.png`
+  const collateralURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${collateralAddress}/logo.png`
+
   const userCollateralValue = userCollateralBalance * collateralPrice
   const userBorrowValue = userBorrowBalance * borrowPrice
   const pairUtilization = userBorrowValue * 10**(pair?.collateral.tokenInfo.decimals) / Number(userCollateralValue) * 100
@@ -67,7 +75,7 @@ export default function Pair() {
                     <Image
                       height={48}
                       width={48}
-                      src={pair.asset.tokenInfo.logoURI}
+                      src={assetURL}
                       className="block w-10 h-10 rounded-lg sm:w-12 sm:h-12"
                       alt={pair.asset.tokenInfo.symbol}
                     />
@@ -75,7 +83,7 @@ export default function Pair() {
                     <Image
                       height={48}
                       width={48}
-                      src={pair.collateral.tokenInfo.logoURI}
+                      src={collateralURL}
                       className="block w-10 h-10 rounded-lg sm:w-12 sm:h-12"
                       alt={pair.collateral.tokenInfo.symbol}
                     />
