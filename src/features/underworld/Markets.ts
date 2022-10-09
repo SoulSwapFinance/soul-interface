@@ -94,7 +94,7 @@ export const FantomMarkets = [
 ]
 
 export const AvalancheMarkets = [
-  {
+  /* {
     // LENDING
     id: 0,
     asset: 'DAI',
@@ -134,5 +134,6 @@ export const AvalancheMarkets = [
     assetAddress: WETH_ADDRESS[ChainId.AVALANCHE],
     collateralAddress: DAI_ADDRESS[ChainId.AVALANCHE],
   },
+  */
 
 ]
