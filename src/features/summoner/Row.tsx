@@ -576,9 +576,9 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                         </div>
                                     )}
 
-                                    {Number(walletBalance) > 0 && (
+                                    {/* {Number(walletBalance) > 0 && (
                                         <div className="h-px my-6 bg-dark-1000" />
-                                    )}
+                                    )} */}
 
                                     <div className="flex justify-between">
                                         <Typography className="text-white" fontFamily={'medium'}>
