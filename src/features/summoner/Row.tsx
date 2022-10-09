@@ -325,7 +325,11 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                         <FarmContentWrapper>
                             <div className="items-center">
                                 <FarmItemBox>
-                                    {Number(allocPoint) != 420 ?
+                                    {
+                                        (
+                                            (chainId == ChainId.FANTOM && Number(allocPoint) != 420)
+                                            || (chainId == ChainId.AVALANCHE && Number(allocPoint) != 220))
+                                        ?
                                         <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
                                         :
                                         <CurrencyLogo
@@ -658,7 +662,9 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                     >
                                         <div className="flex text-lg gap-2">
                                         <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                            DEPOSIT {Number(allocPoint) == 420 ? token0Symbol : farm.lpSymbol}
+                                            DEPOSIT {
+                                                ((chainId == 250 && Number(allocPoint) == 420) || 
+                                                chainId == 43114 && Number(allocPoint) == 220) ? token0Symbol : farm.lpSymbol}
                                         </div>
                                     </SubmitButton>
                                 )}

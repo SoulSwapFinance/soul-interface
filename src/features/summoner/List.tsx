@@ -182,11 +182,11 @@ export const FarmList = () => {
       <Underworld />
           {chainId == ChainId.FANTOM ? ftmLendList : avaxLendList}
           <Typography 
-            className={classNames(inactiveAvaxList.length == 0 ? 'hidden' : `text-2xl bg-dark-1000 mb-3 mt-6 border border-pink p-3 font-bold text-center`)}
+            className={classNames(chainId == ChainId.AVALANCHE ? 'hidden' : `text-2xl bg-dark-1000 mb-3 mt-6 border border-pink p-3 font-bold text-center`)}
           >
               Retired Pools
             </Typography>
-            { inactiveAvaxList.length > 0 &&
+            { chainId == ChainId.FANTOM &&
             <Inactive/>
             }
             {chainId == ChainId.FANTOM ? inactiveFtmList : inactiveAvaxList}
