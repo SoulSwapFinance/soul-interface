@@ -118,6 +118,50 @@ export const AvalanchePools = [
   },
 ]
 
+export const AvalancheLendingPools = [
+  /* {
+    // LENDING
+    pid: 8,
+    token0Symbol: 'AVAX', // EXEMPT //
+    token1Symbol: 'USDC',
+    lpSymbol: 'USDC-AVAX', // EXEMPT //
+    lpAddress: '',
+    token0Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+    token1Address: USDC_ADDRESS[ChainId.AVALANCHE],
+  },
+  {
+    // LENDING
+    pid: 9,
+    token0Symbol: 'USDC', // EXEMPT //
+    token1Symbol: 'AVAX',
+    lpSymbol: 'AVAX-USDC', // EXEMPT //
+    lpAddress: '',
+    token0Address: USDC_ADDRESS[ChainId.AVALANCHE],
+    token1Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+  },
+  {
+    // LENDING
+    pid: 10,
+    token0Symbol: 'BTC', // EXEMPT //
+    token1Symbol: 'USDC',
+    lpSymbol: 'USDC-BTC', // EXEMPT //
+    lpAddress: '',
+    token0Address: WBTC_ADDRESS[ChainId.AVALANCHE],
+    token1Address: USDC_ADDRESS[ChainId.AVALANCHE],
+  },
+  {
+    // LENDING
+    pid: 11,
+    token0Symbol: 'ETH', // EXEMPT //
+    token1Symbol: 'USDC',
+    lpSymbol: 'USDC-ETH', // EXEMPT //
+    lpAddress: '',
+    token0Address: WETH_ADDRESS[ChainId.AVALANCHE],
+    token1Address: USDC_ADDRESS[ChainId.AVALANCHE],
+  }, */
+]
+
+
 export const FantomPools = [
   {
     // 7500
@@ -319,50 +363,6 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: GRIMEVO_ADDRESS[ChainId.FANTOM],
   },
-]
-
-
-export const AvalancheLendingPools = [
-  /* {
-    // LENDING
-    pid: 8,
-    token0Symbol: 'AVAX', // EXEMPT //
-    token1Symbol: 'DAI',
-    lpSymbol: 'DAI-AVAX', // EXEMPT //
-    lpAddress: '0x8ebB2f94685a2396c6b87ab50Cc1114B6ff7e284',
-    token0Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
-    token1Address: DAI_ADDRESS[ChainId.AVALANCHE],
-  },
-  {
-    // LENDING
-    pid: 9,
-    token0Symbol: 'DAI', // EXEMPT //
-    token1Symbol: 'AVAX',
-    lpSymbol: 'AVAX-DAI', // EXEMPT //
-    lpAddress: '0x52782a587C6EDd2ba5C3001813C8c4F2211B2b06',
-    token0Address: DAI_ADDRESS[ChainId.AVALANCHE],
-    token1Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
-  },
-  {
-    // LENDING
-    pid: 10,
-    token0Symbol: 'BTC', // EXEMPT //
-    token1Symbol: 'DAI',
-    lpSymbol: 'DAI-BTC', // EXEMPT //
-    lpAddress: '0x19fA70E88E93e816eC9E10996dd663C07897938D',
-    token0Address: WBTC_ADDRESS[ChainId.AVALANCHE],
-    token1Address: DAI_ADDRESS[ChainId.AVALANCHE],
-  },
-  {
-    // LENDING
-    pid: 11,
-    token0Symbol: 'ETH', // EXEMPT //
-    token1Symbol: 'DAI',
-    lpSymbol: 'DAI-ETH', // EXEMPT //
-    lpAddress: '0x812A74ADDBCBe85144a4db3afBee532C97328864',
-    token0Address: WETH_ADDRESS[ChainId.AVALANCHE],
-    token1Address: DAI_ADDRESS[ChainId.AVALANCHE],
-  }, */
 ]
 
 export const FantomLendingPools = [

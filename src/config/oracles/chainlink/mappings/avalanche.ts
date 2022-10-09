@@ -16,13 +16,13 @@ const AVALANCHE_CHAINLINK_MAPPING = {
       toDecimals: 8,
     },
     // DAI / USD
-    '0x51D7180edA2260cc4F6e4EebB82FEF5c3c2B8300': {
+    /* '0x51D7180edA2260cc4F6e4EebB82FEF5c3c2B8300': {
       from: '0xd586E7F844cEa2F87f50152665BCbc2C279D8d70',
       to: '0x0000000000000000000000000000000000000001',
       decimals: 8,
       fromDecimals: 18,
       toDecimals: 8,
-    },
+    }, */
     // ETH / USD
     '0x976B3D034E162d8bD72D6b9C989d545b839003b0': {
       from: '0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB',
