@@ -31,6 +31,14 @@ const AVALANCHE_CHAINLINK_MAPPING = {
       fromDecimals: 18,
       toDecimals: 8,
     },
+    // USDC / USD
+    '0xF096872672F44d6EBA71458D74fe67F9a77a23B9': {
+      from: '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
+      to: '0x0000000000000000000000000000000000000001',
+      decimals: 8,
+      fromDecimals: 6,
+      toDecimals: 8,
+    },
   }
   
   export default AVALANCHE_CHAINLINK_MAPPING
