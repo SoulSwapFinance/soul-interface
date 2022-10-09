@@ -18,6 +18,8 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { RecoilRoot } from 'recoil'
 import { useUnderworldPair } from 'features/lending/hooks'
+import { ChainId } from 'sdk'
+import { useActiveWeb3React } from 'services/web3'
 // import { useSingleCallResult } from 'state/multicall/hooks'
 
 export default function Pair() {
@@ -25,9 +27,8 @@ export default function Pair() {
 
   const router = useRouter()
   // const { i18n } = useLingui()
-
+  const { chainId } = useActiveWeb3React()
   const pair = useUnderworldPair(router.query.pair as string)
-  
   /*
   const { underworldPairInfo } = useUnderworldPairInfo(pair?.address)
   const assetDecimals = Number(underworldPairInfo.assetDecimals)
@@ -49,10 +50,10 @@ if (!pair) return <div />
   const assetPrice = pair?.asset.usd / 1e18
   const userDepositAmount = pair?.userAssetFraction / 10**(assetDecimals)
   const userDepositValue = userDepositAmount * assetPrice
-    
-  const assetURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/assets/${assetAddress}/logo.png`
+  const blockchain = chainId == ChainId.FANTOM ? 'fantom' : 'avalanche'
+  const assetURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${assetAddress}/logo.png`
   //pair?.asset.tokenInfo.logoURI
-  const collateralURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/assets/${collateralAddress}/logo.png`
+  const collateralURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${collateralAddress}/logo.png`
 
   return (
     <PairLayout>
