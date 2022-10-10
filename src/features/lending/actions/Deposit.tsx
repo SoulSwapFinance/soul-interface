@@ -1,7 +1,7 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { NATIVE, WNATIVE } from 'sdk'
+import { WNATIVE } from 'sdk'
 import { Button } from 'components/Button'
 import UnderworldCooker from 'entities/UnderworldCooker'
 import { Direction, TransactionReview } from 'entities/TransactionReview'
@@ -18,22 +18,27 @@ import { UnderworldApproveButton, TokenApproveButton } from '../components/Butto
 import SmartNumberInput from '../components/SmartNumberInput'
 import TransactionReviewList from '../components/TransactionReview'
 import WarningsList from '../components/WarningsList'
-import AssetInput from 'components/AssetInput'
-import Typography from 'components/Typography'
+import { useUnderworldPairInfo } from 'hooks/useAPI'
+// import AssetInput from 'components/AssetInput'
+// import Typography from 'components/Typography'
 
 export default function Deposit({ pair }: any): JSX.Element {
   const { account, chainId } = useActiveWeb3React()
   const assetToken = useCurrency(pair.asset.address) || undefined
   const coffinBoxContract = useCoffinBoxContract()
   const { i18n } = useLingui()
-
+  const { underworldPairInfo } = useUnderworldPairInfo(pair.lpAddress)
+  const assetDecimals = Number(underworldPairInfo.assetDecimals)
+  const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
+  const assetPrice = Number(underworldPairInfo.assetPrice)
+  const collateralPrice = Number(underworldPairInfo.collateralPrice)
+  
   // State
   // const [useCoffin, setUseCoffin] = useState<boolean>(Number(pair.asset.coffinBalance) > 0)
   const [useCoffin, setUseCoffin] = useState<boolean>(false)
   const [value, setValue] = useState('')
 
   // Calculated
-  // @ts-ignore TYPE NEEDS FIXING
   const assetNative = WNATIVE[chainId].address === pair.asset.address
 
   // @ts-ignore TYPE NEEDS FIXING
@@ -55,7 +60,7 @@ export default function Deposit({ pair }: any): JSX.Element {
 
   const warnings = new Warnings()
 
-  const assetPrice = pair.asset.usd / (10**pair.asset.tokenInfo.decimals)
+  // const assetPrice = pair.asset.usd / (10**pair.asset.tokenInfo.decimals)
   const userDepositAmount = pair.userAssetFraction / 10**(pair?.asset.tokenInfo.decimals)
   const userDepositValue = userDepositAmount * assetPrice
 
@@ -76,7 +81,7 @@ export default function Deposit({ pair }: any): JSX.Element {
 
   if (value && !warnings.broken) {
     const amount = Number(value).toString().toBigNumber(pair.asset.tokenInfo.decimals) //.toFixed(4)
-    const newUserAssetAmount = pair.userAssetFraction.add(amount)//.toBigNumber(pair.asset.tokenInfo.decimals))
+    // const newUserAssetAmount = pair.userAssetFraction.add(amount)//.toBigNumber(pair.asset.tokenInfo.decimals))
       
     transactionReview.addTokenAmount(
       i18n._(t`Balance`),
@@ -88,9 +93,9 @@ export default function Deposit({ pair }: any): JSX.Element {
       pair.userAssetFraction.div(e10(12)),//.toString().toBigNumber(pair.asset.tokenInfo.decimals),
       BigNumber.from(pair.userAssetFraction).add(amount).div(e10(12)),
       pair.asset)
-    const newUtilization
+    // const newUtilization
       // = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value).add(amount)
-      = 1e18 * Number(pair.currentBorrowAmount.value) / Number(pair.currentAllAssets.value) + Number(amount) //.toString()
+      // = 1e18 * Number(pair.currentBorrowAmount.value) / Number(pair.currentAllAssets.value) + Number(amount) //.toString() // USE THIS
     // transactionReview.addPercentage(i18n._(t`Borrowed`), BigNumber.from(pair.utilization.value || 0), BigNumber.from(newUtilization))
     if (pair.currentExchangeRate.isZero()) {
       transactionReview.add(

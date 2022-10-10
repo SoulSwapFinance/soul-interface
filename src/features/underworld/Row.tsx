@@ -26,6 +26,10 @@ export const Row = ({ pair, assetAddress, lpToken }) => {
     const [openBorrow, setOpenBorrow] = useState(false)
     
     const { underworldPairInfo } = useUnderworldPairInfo(pair.lpAddress)
+    const assetDecimals = Number(underworldPairInfo.assetDecimals)
+    const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
+    const assetPrice = Number(underworldPairInfo.assetPrice)
+    const collateralPrice = Number(underworldPairInfo.collateralPrice)
     // const lpDecimals = Number(underworldPairInfo.decimals)
     // const assetAddress = underworldPairInfo.assetAddress
     
@@ -46,10 +50,7 @@ export const Row = ({ pair, assetAddress, lpToken }) => {
             : bTicker
    
     // const collateralAddress = Number(underworldPairInfo.collateralAddress)
-    const assetDecimals = Number(underworldPairInfo.assetDecimals)
-    const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
-    const assetPrice = Number(underworldPairInfo.assetPrice)
-    const collateralPrice = Number(underworldPairInfo.collateralPrice)
+   
     // const interestPerSecond = Number(underworldPairInfo.interestPerSecond) / 1e16
     // const secondsPerYear = 86_400 * 365
     // const apr = interestPerSecond * secondsPerYear
