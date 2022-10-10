@@ -1,6 +1,6 @@
 import { Popover, Transition } from '@headlessui/react'
 import React, { Fragment } from 'react'
-
+import { ChainId } from 'sdk'
 import ExternalLink from '../ExternalLink'
 import { I18n } from '@lingui/core'
 import Image from 'next/image'
@@ -11,7 +11,13 @@ import NavLink from '../NavLink'
 import { getChainColorCode } from 'constants/chains'
 import { useActiveWeb3React } from 'services/web3'
 
-const items = (i18n: I18n) => [
+export default function Menu() {
+  const { i18n } = useLingui()
+  const { chainId } = useActiveWeb3React()
+  const blockchainPrefix = chainId 
+    == ChainId.AVALANCHE ? 'avax-info' : 'info'
+  
+  const items = (i18n: I18n) => [
   {
     name: i18n._(t`Documentation`),
     description: i18n._(t`Read the Documentation.`),
@@ -21,7 +27,7 @@ const items = (i18n: I18n) => [
   {
     name: i18n._(t`Analytics`),
     description: i18n._(t`View our Data.`),
-    href: 'https://info.soul.sh',
+    href: `${blockchainPrefix}.soulswap.finance`,
     external: true,
   },
   {
@@ -32,10 +38,7 @@ const items = (i18n: I18n) => [
   },
 ]
 
-export default function Menu() {
-  const { i18n } = useLingui()
   const solutions = items(i18n)
-  const { chainId } = useActiveWeb3React()
 
   return (
     <Popover className="relative ml-auto lg:m-0">
