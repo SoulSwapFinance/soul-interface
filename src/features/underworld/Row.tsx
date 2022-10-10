@@ -28,8 +28,23 @@ export const Row = ({ pair, assetAddress, lpToken }) => {
     const { underworldPairInfo } = useUnderworldPairInfo(pair.lpAddress)
     // const lpDecimals = Number(underworldPairInfo.decimals)
     // const assetAddress = underworldPairInfo.assetAddress
-    const assetSymbol = underworldPairInfo.assetTicker
-    const collateralSymbol = underworldPairInfo.collateralTicker
+    
+    // format tickers //
+    const aTicker = underworldPairInfo.assetTicker
+    const bTicker = underworldPairInfo.collateralTicker
+    
+    const assetSymbol 
+        = aTicker == 'WAVAX' ? 'AVAX'
+            : aTicker == 'WETH.e' ? 'ETH'
+            : aTicker == 'WBTC.e' ? 'BTC'
+            : aTicker
+
+    const collateralSymbol 
+        = bTicker == 'WAVAX' ? 'AVAX'
+            : bTicker == 'WETH.e' ? 'ETH'
+            : bTicker == 'WBTC.e' ? 'BTC'
+            : bTicker
+   
     // const collateralAddress = Number(underworldPairInfo.collateralAddress)
     const assetDecimals = Number(underworldPairInfo.assetDecimals)
     const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
@@ -48,7 +63,7 @@ export const Row = ({ pair, assetAddress, lpToken }) => {
     const collateralValue = collateralAmount * collateralPrice
     const suppliedValue = suppliedAmount * assetPrice
     
-    const LTV = (1 - (collateralValue - borrowedValue) / collateralValue) * 100
+    const LTV = collateralValue == 0 ? 0 : (1 - (collateralValue - borrowedValue) / collateralValue) * 100
     const leeway = (75 - LTV) / 100
 
     // const parsedBalance = tryParseAmount(assetBalance, pair.lpToken)
@@ -162,7 +177,7 @@ export const Row = ({ pair, assetAddress, lpToken }) => {
                             {/* BORROWED AMOUNT */}
                                 <LendItemBox>
                                     <LendItem>
-                                       { formatNumber(borrowedAmount, false, true) } { assetSymbol }
+                                       { formatNumber(borrowedAmount.toFixed(2), false, true) } { assetSymbol }
                                     </LendItem>
                                 </LendItemBox>
 
@@ -170,7 +185,7 @@ export const Row = ({ pair, assetAddress, lpToken }) => {
                             <HideOnMobile>
                                 <LendItemBox>
                                     <LendItem>
-                                       { formatNumber(collateralAmount, false, true) } { collateralSymbol }
+                                       { formatNumber(collateralAmount.toFixed(2), false, true) } { collateralSymbol }
                                     </LendItem>
                                 </LendItemBox>
                             </HideOnMobile>
@@ -179,7 +194,8 @@ export const Row = ({ pair, assetAddress, lpToken }) => {
                             <HideOnMobile>
                                 <LendItemBox>
                                     <LendItem>
-                                    { formatNumber(LTV, false, true) }%                                    </LendItem>
+                                    { LTV.toFixed(2) }%                                    
+                                    </LendItem>
                                 </LendItemBox>
                             </HideOnMobile>
 
