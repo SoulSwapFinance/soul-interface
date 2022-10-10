@@ -1,13 +1,19 @@
 import Container from '../../../components/Container'
 import Head from 'next/head'
 import AnalyticsHeader from '../../../features/analytics/Header'
+import { useActiveWeb3React } from 'services/web3'
+import { ChainId } from 'sdk'
 
 export default function Home() {
+const { chainId } = useActiveWeb3React()
+const blockchainPrefix = chainId 
+    == ChainId.AVALANCHE ? 'avax-info' : 'info' 
+
   return (
     <>
       <Head>
-        <title>SoulSwap Liquidity Pair (SLP) Analytics | Soul</title>
-        <meta name="description" content="SoulSwap Liquidity Pair (SLP) Analytics by Soul" />
+        <title>Analytics | Home</title>
+        <meta name="description" content="SoulSwap Analytics" />
       </Head>
       <AnalyticsHeader />   
       <Container maxWidth="full" className="grid h-full grid-flow-col grid-cols-5 mx-auto gap-9">
@@ -15,7 +21,7 @@ export default function Home() {
       <iframe 
   			frameBorder={"none"}
     		title={"INFO"}
-    		src="https://charts.soul.sh/home"
+    		src={`https://${blockchainPrefix}.soulswap.finance/home`}
     		height={"800px"}
     		width={"100%"}
       />

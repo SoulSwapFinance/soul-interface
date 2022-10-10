@@ -2,9 +2,10 @@ import Container from '../../../components/Container'
 import Head from 'next/head'
 import AnalyticsHeader from '../../../features/analytics/Header'
 import { useActiveWeb3React } from 'services/web3'
+import { ChainId } from 'sdk'
 
 export default function Pairs() {
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
 
   return (
     <>
@@ -18,7 +19,7 @@ export default function Pairs() {
       <iframe 
   			frameBorder={"none"}
     		title={"INFO"}
-    		src={"https://charts.soul.sh/pairs"}
+            src={`https://${blockchainPrefix}.soulswap.finance/pairs`}
     		height={"800px"}
     		width={"100%"}
       />
