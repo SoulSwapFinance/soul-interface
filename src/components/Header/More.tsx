@@ -1,6 +1,6 @@
 import { Popover, Transition } from '@headlessui/react'
 import React, { Fragment } from 'react'
-inport { ChainId } from 'sdk'
+import { ChainId } from 'sdk'
 import ExternalLink from '../ExternalLink'
 import { I18n } from '@lingui/core'
 import Image from 'next/image'
