@@ -13,10 +13,10 @@ import { useActiveWeb3React } from 'services/web3'
 
 export default function Menu() {
   const { i18n } = useLingui()
-  const solutions = items(i18n)
   const { chainId } = useActiveWeb3React()
   const blockchainPrefix = chainId 
     == ChainId.AVALANCHE ? 'avax-info' : 'info'
+  
   const items = (i18n: I18n) => [
   {
     name: i18n._(t`Documentation`),
@@ -37,6 +37,8 @@ export default function Menu() {
     external: true,
   },
 ]
+
+  const solutions = items(i18n)
 
   return (
     <Popover className="relative ml-auto lg:m-0">
