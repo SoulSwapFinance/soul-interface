@@ -6,7 +6,9 @@ import { ChainId } from 'sdk'
 
 export default function Pairs() {
   const { account, chainId } = useActiveWeb3React()
-
+  const blockchainPrefix = chainId 
+    == ChainId.AVALANCHE ? 'avax-info' : 'info' 
+ 
   return (
     <>
       <Head>
