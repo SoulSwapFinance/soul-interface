@@ -8,7 +8,7 @@ function getBaseUrl() {
   const { chainId } = useActiveWeb3React()
   let URL
   chainId == 250 ?
-  URL = 'https://api.soulswap.finance' : URL = 'https://avax-api.soulswap.finance'
+  URL = 'https://archived-api.soulswap.finance' : URL = 'https://avax-api.soulswap.finance'
 }
 
 const BASE_URL = 'https://api.soulswap.finance'
