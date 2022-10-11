@@ -9,10 +9,11 @@ import { UnderworldCooker } from 'entities'
 import { formatPercent } from 'functions'
 import { ZERO } from 'functions/math'
 import useUnderworldApproveCallback from 'hooks/useUnderworldApproveCallback'
+import { useUnderworldPairContract } from 'hooks/useContract'
 
 export default function PairTools({ pair }) {
   const [, , , , onCook] = useUnderworldApproveCallback()
-
+  const UnderworldPair = useUnderworldPairContract(pair.address)
   async function onUpdatePrice(cooker: UnderworldCooker): Promise<string> {
     cooker.updateExchangeRate(false, ZERO, ZERO)
     return `${i18n._(t`Update Price`)} ${pair.asset.tokenInfo.symbol}/${pair.collateral.tokenInfo.symbol}`
@@ -34,29 +35,30 @@ export default function PairTools({ pair }) {
 
   return (
     <div className="flex flex-row flex-shrink space-x-2">
-      <QuestionHelper text={'Sync Market APR to Supply APR'}>
-        <Button color="blue" variant="filled" size="xs" className="w-full" onClick={() => onCook(pair, onAccrue)}>
-          Accrue
-        </Button>
-      </QuestionHelper>
+      <Button color="blue" variant="filled" size="xs" className="w-full" onClick={() => onCook(pair, onAccrue)}>
+        Accrue
+      </Button>
+      <QuestionHelper text={'Sync Market APR to Supply APR'} />
+      <Button
+        color="purple"
+        variant="filled"
+        size="xs"
+        className="w-full"
+        onClick={() => onCook(pair, onUpdatePrice)}
+      >
+        Update Price
+      </Button>
       <QuestionHelper
         text={
           <div>
             <div>Update Exchange Rate</div>
             <div>Current Deviation: {formatPercent(priceChange)}</div>
+            {/* <div> Address: {pair.address}</div> */}
+
           </div>
         }
-      >
-        <Button
-          color="purple"
-          variant="filled"
-          size="xs"
-          className="w-full"
-          onClick={() => onCook(pair, onUpdatePrice)}
-        >
-          Update Price
-        </Button>
-      </QuestionHelper>
+      />
+
     </div>
   )
 }

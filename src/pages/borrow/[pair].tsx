@@ -11,7 +11,7 @@ import Image from 'components/Image'
 import QuestionHelper from 'components/QuestionHelper'
 import { Feature } from 'enums'
 import { Borrow, PairTools, Repay, Strategy } from 'features/lending'
-import { useUnderworldPair } from 'features/lending/hooks'
+import { useUnderworldPairInfo } from 'hooks/useAPI'
 import { formatNumber, formatPercent } from 'functions/format'
 import NetworkGuard from 'guards/Network'
 import { useUSDCPrice } from 'hooks'
@@ -26,6 +26,7 @@ import { e10 } from 'functions/math'
 import usePriceApi from 'hooks/usePriceApi'
 import { ChainId } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
+import { useUnderworldPair } from 'features/lending/hooks'
 
 export default function Pair() {
   useRedirectOnChainId('/borrow')
@@ -35,21 +36,41 @@ export default function Pair() {
   const { i18n } = useLingui()
 
   const pair = useUnderworldPair(router.query.pair as string)
+  const { underworldPairInfo } = useUnderworldPairInfo(router.query.pair as string)
   const userCollateralBalance = Number(pair?.userCollateralShare / 1e18) // √
   const userBorrowBalance = Number(pair?.currentUserBorrowAmount.string / 1e18) // √
-  const collateralPrice = usePriceApi(pair?.collateral.address)
+  // const collateralPrice = usePriceApi(pair?.collateral.address)
   const borrowPrice = usePriceApi(pair?.asset.address)
-  
-  const assetSymbol = pair?.asset.tokenInfo.symbol
+  const assetPrice = Number(underworldPairInfo.assetPrice)
+  const collateralPrice = Number(underworldPairInfo.collateralPrice)
+  // const lpDecimals = Number(underworldPairInfo.decimals)
+  // const assetAddress = underworldPairInfo.assetAddress
+
+  // format tickers //
+  const aTicker = underworldPairInfo.assetTicker
+  const bTicker = underworldPairInfo.collateralTicker
+
+  const assetSymbol
+    = aTicker == 'WAVAX' ? 'AVAX'
+      : aTicker == 'WETH.e' ? 'ETH'
+        : aTicker == 'WBTC.e' ? 'BTC'
+          : aTicker
+  const collateralSymbol
+    = bTicker == 'WAVAX' ? 'AVAX'
+      : bTicker == 'WETH.e' ? 'ETH'
+        : bTicker == 'WBTC.e' ? 'BTC'
+          : bTicker
+
+  // const assetSymbol = pair?.asset.tokenInfo.symbol
   const assetAddress = pair?.asset.tokenInfo.address
   const collateralAddress = pair?.collateral.tokenInfo.address
-    const blockchain = chainId == ChainId.FANTOM ? 'fantom' : 'avalanche'
+  const blockchain = chainId == ChainId.FANTOM ? 'fantom' : 'avalanche'
   const assetURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${assetAddress}/logo.png`
   const collateralURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${collateralAddress}/logo.png`
 
   const userCollateralValue = userCollateralBalance * collateralPrice
   const userBorrowValue = userBorrowBalance * borrowPrice
-  const pairUtilization = userBorrowValue * 10**(pair?.collateral.tokenInfo.decimals) / Number(userCollateralValue) * 100
+  const pairUtilization = userBorrowValue * 10 ** (pair?.collateral.tokenInfo.decimals) / Number(userCollateralValue) * 100
   const pairHealth = pairUtilization
 
   if (!pair) return <div />
@@ -77,7 +98,7 @@ export default function Pair() {
                       width={48}
                       src={assetURL}
                       className="block w-10 h-10 rounded-lg sm:w-12 sm:h-12"
-                      alt={pair.asset.tokenInfo.symbol}
+                      alt={assetSymbol}
                     />
 
                     <Image
@@ -85,7 +106,7 @@ export default function Pair() {
                       width={48}
                       src={collateralURL}
                       className="block w-10 h-10 rounded-lg sm:w-12 sm:h-12"
-                      alt={pair.collateral.tokenInfo.symbol}
+                      alt={collateralSymbol}
                     />
                   </>
                 )}
@@ -93,11 +114,11 @@ export default function Pair() {
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-3xl text-high-emphesis">
-                        {`Borrow`} {pair && assetSymbol} 
+                    {`Borrow`} {pair && assetSymbol}
                   </div>
                   <div className="flex items-center">
                     <div className="mr-1 text-sm text-secondary">{i18n._(t`Collateral`)}:</div>
-                    <div className="mr-2 text-sm text-high-emphesis">{pair.collateral.tokenInfo.symbol}</div>
+                    <div className="mr-2 text-sm text-high-emphesis">{collateralSymbol}</div>
                     {/* <div className="mr-1 text-sm text-secondary">{i18n._(t`Oracle`)}:</div> */}
                     {/* <div className="text-sm text-high-emphesis">{pair.oracle.name}</div> */}
                   </div>
@@ -111,24 +132,24 @@ export default function Pair() {
           <div>
             <div className="text-center text-md sm:text-lg text-secondary">{i18n._(t`Collateral`)}</div>
             <div className="text-center text-lg sm:text-2xl text-blue">
-              {formatNumber(userCollateralBalance)} {pair.collateral.tokenInfo.symbol}
+              {formatNumber(userCollateralBalance)} {collateralSymbol}
             </div>
             <div className="text-center text-md sm:text-lg text-high-emphesis">{formatNumber(userCollateralValue, true)}</div>
           </div>
           <div>
             <div className="text-center text-md sm:text-lg text-secondary">{i18n._(t`Borrowed`)}</div>
             <div className="text-center texl-lg sm:text-2xl text-purple">
-            {formatNumber(pair.currentUserBorrowAmount.string)} {pair.asset.tokenInfo.symbol}
+              {formatNumber(pair.currentUserBorrowAmount.string)} {assetSymbol}
             </div>
             <div className="items-center text-center flex justify-center text-md sm:text-lg text-high-emphesis">
-              { formatPercent(pairHealth) }
+              {formatPercent(pairHealth)}
               <GradientDot percent={pairHealth}></GradientDot>
             </div>
           </div>
           <div className="text-right">
             <div>
               <div className="text-center text-md sm:text-lg text-secondary">{i18n._(t`Available`)}</div>
-              <div className="text-lg sm:text-2xl text-high-emphesis">{formatPercent(75-pairUtilization)}</div>
+              <div className="text-lg sm:text-2xl text-high-emphesis">{formatPercent(75 - pairUtilization)}</div>
             </div>
             {/* <div>
               <div className="text-center text-md sm:text-lg text-secondary">{i18n._(t`APR`)}</div>
@@ -140,8 +161,7 @@ export default function Pair() {
           <Tab.List className="flex p-1 rounded bg-dark-800">
             <Tab
               className={({ selected }) =>
-                `${
-                  selected ? 'bg-purple text-high-emphesis' : ''
+                `${selected ? 'bg-purple text-high-emphesis' : ''
                 } flex items-center justify-center flex-1 px-1 py-1 text-lg rounded cursor-pointer select-none text-secondary hover:text-primary hover:bg-dark-700 focus:outline-none`
               }
             >
@@ -149,8 +169,7 @@ export default function Pair() {
             </Tab>
             <Tab
               className={({ selected }) =>
-                `${
-                  selected ? 'bg-purple text-high-emphesis' : ''
+                `${selected ? 'bg-purple text-high-emphesis' : ''
                 } flex items-center justify-center flex-1 px-1 py-1 text-lg rounded cursor-pointer select-none text-secondary hover:text-primary hover:bg-dark-700 focus:outline-none`
               }
             >
@@ -175,12 +194,33 @@ const PairLayout = ({ children }) => {
   const { i18n } = useLingui()
   const router = useRouter()
   const pair = useUnderworldPair(router.query.pair as string)
-  const asset = useToken(pair?.asset.address) 
-  const collateral = useToken(pair?.collateral.address) 
+  const { underworldPairInfo } = useUnderworldPairInfo(router.query.pair as string)
+
+  const asset = useToken(pair?.asset.address)
+  const collateral = useToken(pair?.collateral.address)
   const [pairState, liquidityPair] = useV2Pair(asset, collateral)
-  const assetPrice = usePriceApi(asset?.address)
-  const collateralPrice = usePriceApi(collateral?.address)
-  
+  const assetPrice = Number(underworldPairInfo.assetPrice)
+  const collateralPrice = Number(underworldPairInfo.collateralPrice)
+
+  // const assetPrice = usePriceApi(asset?.address)
+  // const collateralPrice = usePriceApi(collateral?.address)
+  const assetDecimals = Number(underworldPairInfo.assetDecimals)
+  // const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
+  // format tickers //
+  const aTicker = underworldPairInfo.assetTicker
+  const bTicker = underworldPairInfo.collateralTicker
+
+  const assetSymbol
+    = aTicker == 'WAVAX' ? 'AVAX'
+      : aTicker == 'WETH.e' ? 'ETH'
+        : aTicker == 'WBTC.e' ? 'BTC'
+          : aTicker
+  const collateralSymbol
+    = bTicker == 'WAVAX' ? 'AVAX'
+      : bTicker == 'WETH.e' ? 'ETH'
+        : bTicker == 'WBTC.e' ? 'BTC'
+          : bTicker
+
   // const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 
   return pair ? (
@@ -199,14 +239,14 @@ const PairLayout = ({ children }) => {
         <Card className="h-full p-4 bg-dark-900 xl:p-0">
           <div className="flex-col space-y-2">
             <div className="flex justify-between">
-            <div className="text-xl text-high-emphesis">{`Market`}</div>
+              <div className="text-xl text-high-emphesis">{`Market`}</div>
             </div>
-            <div className="flex justify-between">
+            {/* <div className="flex justify-between">
               <div className="text-lg text-secondary">{`% APR`}</div>
               <div className="flex items-center">
                 <div className="text-lg text-high-emphesis">{formatPercent(pair?.interestPerYear.string)}</div>
               </div>
-            </div>
+            </div> */}
             <div className="flex justify-between">
               <div className="text-lg text-secondary">{`% LTV`}</div>
               <div className="text-lg text-high-emphesis">75%</div>
@@ -214,17 +254,23 @@ const PairLayout = ({ children }) => {
             <div className="flex justify-between">
               <div className="text-lg text-secondary">{`Total Assets`}</div>
               <div className="text-lg text-high-emphesis">
-              {formatNumber(pair?.totalAsset.base.div(e10(18)))} {pair?.asset.tokenInfo.symbol}
+                {formatNumber(pair?.totalAsset.base / 10 ** (assetDecimals))} {assetSymbol}
               </div>
+            </div>
+            <div className="flex justify-between">
+              <div className="text-lg text-secondary">{`Oracle`}</div>
+              <div className="text-lg text-high-emphesis">
+              {pair?.oracle.name}             
+            </div>
             </div>
             <div className="flex justify-between">
               <div className="text-green text-lg text-secondary">{`Available`}</div>
               <div className="flex items-center">
                 <div className="text-green text-lg text-high-emphesis">
                 {formatPercent(100-
-                ((pair?.totalAsset.base.div(e10(18))) -
-                  (pair?.totalAsset.base.sub(pair?.totalBorrow.base).div(e10(18))))
-                  / (pair?.totalAsset.base.div(e10(18))) * 100
+                ((pair?.totalAsset.base / 10**(assetDecimals)) -
+                  (pair?.totalAsset.base.sub(pair?.totalBorrow.base) / 10**(assetDecimals)))
+                  / (pair?.totalAsset.base / 10**(assetDecimals)) * 100
                 )}</div>
               </div>
             </div>
@@ -232,8 +278,8 @@ const PairLayout = ({ children }) => {
               <div className="text-lg text-secondary">{`Borrowed`}</div>
               <div className="flex items-center">
                 <div className="text-lg text-high-emphesis"> */}
-                  {/* AVAILABLE - TOTAL / TOTAL * 100 */}
-                {/* {formatPercent(
+            {/* AVAILABLE - TOTAL / TOTAL * 100 */}
+            {/* {formatPercent(
                 ((pair?.totalAsset.base.div(e10(18))) -
                   (pair?.totalAsset.base.sub(pair?.totalBorrow.base).div(e10(18))))
                   / (pair?.totalAsset.base.div(e10(18))) * 100
@@ -241,17 +287,17 @@ const PairLayout = ({ children }) => {
               </div>
             </div> */}
 
-            {/* <PairTools pair={pair} /> */}
 
-            <div className="flex justify-between pt-3">
+            {/* <div className="flex justify-between pt-3">
               <div className="text-xl text-high-emphesis">{i18n._(t`Oracle`)}</div>
             </div>
 
             <div className="flex justify-between">
               <div className="text-lg text-secondary">Name</div>
               <div className="text-lg text-high-emphesis">{pair?.oracle.name}</div>
-            </div>
-
+            </div> */}
+          
+          {/* 
             <div className="flex justify-between pt-3">
               <div className="text-xl text-high-emphesis">{i18n._(t`CoffinBox`)}</div>
             </div>
@@ -271,7 +317,12 @@ const PairLayout = ({ children }) => {
                   </>
                 )}
               </div>
+            </div> */}
+
+            <div className="flex justify-between">
+              <div className="text-xl mt-4 text-high-emphesis">{``}</div>
             </div>
+            <PairTools pair={pair} />
 
             <Strategy token={pair.collateral} />
 

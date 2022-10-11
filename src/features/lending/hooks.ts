@@ -2,7 +2,7 @@ import { defaultAbiCoder } from '@ethersproject/abi'
 import { getAddress } from '@ethersproject/address'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Zero } from '@ethersproject/constants'
-import { ChainId, UNDERWORLD_ADDRESS, NATIVE, Token, USD, WNATIVE_ADDRESS } from 'sdk'
+import { ChainId, UNDERWORLD_ADDRESS, NATIVE, Token, USD, WNATIVE_ADDRESS, USDC } from 'sdk'
 import { CHAINLINK_PRICE_FEED_MAP } from 'config/oracles/chainlink'
 import { Fraction } from 'entities'
 import { Feature } from 'enums'
@@ -128,7 +128,7 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
   // @ts-ignore TYPE NEEDS FIXING
   const wnative = WNATIVE_ADDRESS[chainId]
 
-  const currency: Token = DAI[chainId]
+  const currency: Token = chainId == ChainId.FANTOM ? DAI[chainId] : USDC[chainId]
 
   const allTokens = useUnderworldTokens()
 
