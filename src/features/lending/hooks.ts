@@ -136,8 +136,7 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
 
   // TODO: Replace
   // @ts-ignore TYPE NEEDS FIXING
-  const pollUnderworldPairs 
-    = useSingleCallResult(boringHelperContract, 'pollKashiPairs', pollArgs, { blocksPerFetch: 0 })?.result?.[0]
+  const pollUnderworldPairs = useSingleCallResult(boringHelperContract, 'pollKashiPairs', pollArgs, { blocksPerFetch: 0 })?.result?.[0]
 
   const strategies = useCoffinStrategies({ chainId })
 
