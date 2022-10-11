@@ -16,11 +16,29 @@ import WarningsView from '../components/WarningsList'
 import { useCurrency } from 'hooks/Tokens'
 import LendAssetInput from 'components/LendAssetInput'
 import SmartNumberInput from '../components/SmartNumberInput'
+import { useUnderworldPairInfo } from 'hooks/useAPI'
 
 export default function Withdraw({ pair }: any): JSX.Element {
   const { account } = useActiveWeb3React()
   const pendingApprovalMessage = useUnderworldApprovalPending()
   const assetToken = useCurrency(pair.asset.address) || undefined
+  const { underworldPairInfo } = useUnderworldPairInfo(pair.address)
+  const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
+  const assetDecimals = Number(underworldPairInfo.assetDecimals)
+  // format tickers //
+  const aTicker = underworldPairInfo.assetTicker
+  const bTicker = underworldPairInfo.collateralTicker
+
+  const assetSymbol
+    = aTicker == 'WAVAX' ? 'AVAX'
+      : aTicker == 'WETH.e' ? 'ETH'
+        : aTicker == 'WBTC.e' ? 'BTC'
+          : aTicker
+  const collateralSymbol
+    = bTicker == 'WAVAX' ? 'AVAX'
+      : bTicker == 'WETH.e' ? 'ETH'
+        : bTicker == 'WBTC.e' ? 'BTC'
+          : bTicker
 
   const { i18n } = useLingui()
 
@@ -42,17 +60,17 @@ export default function Withdraw({ pair }: any): JSX.Element {
       ? pair.userAssetFraction //.sub(pair.currentUserLentAmount.value)
       : pair.currentUserAssetAmount.value
 
-  const displayValue = pinMax ? max.toFixed(pair.asset.tokenInfo.decimals) : value
+  const displayValue = pinMax ? max.toFixed(assetDecimals) : value
 
   const fraction = pinMax
     ? minimum(pair.userAssetFraction, pair.maxAssetAvailableFraction)
-    : value.toBigNumber(pair.asset.tokenInfo.decimals).mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
+    : value.toBigNumber(assetDecimals).mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
 
   const warnings = new Warnings()
     // CHECKS: WITHDRAW AMOUNT !> DEPOSITED AMOUNT - LENT AMOUNT
     .add(
       pair.userAssetFraction.sub(pair.currentUserLentAmount.value)
-        .lt(value.toBigNumber(pair.asset.tokenInfo.decimals)),
+        .lt(value.toBigNumber(assetDecimals)),
       i18n._(
         t`Please make sure your ${useCoffin ? 'CoffinBox' : 'wallet'
           } balance is sufficient to withdraw and then try again.`
@@ -69,7 +87,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
 
   const transactionReview = new TransactionReview()
   if (displayValue && !warnings.broken) {
-    const amount = displayValue.toBigNumber(pair.asset.tokenInfo.decimals)
+    const amount = displayValue.toBigNumber(assetDecimals)
     const newUserAssetAmount = pair.userAssetFraction.sub(amount)
     transactionReview.addTokenAmount(
       i18n._(t`Balance`),
@@ -92,17 +110,17 @@ export default function Withdraw({ pair }: any): JSX.Element {
       // ? minimum(pair.userAssetFraction, pair.maxAssetAvailableFraction)
       ? pair.userAssetFraction
       : value
-        .toBigNumber(pair.asset.tokenInfo.decimals)
+        .toBigNumber(assetDecimals)
         // .mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
 
     cooker.removeAsset(fraction, useCoffin)
-    return `${i18n._(t`Withdraw`)} ${pair.asset.tokenInfo.symbol}`
+    return `${i18n._(t`Withdraw`)} ${assetSymbol}`
   }
 
   return (
     <>
       <div className="mt-6 text-3xl text-high-emphesis">
-        {/* {i18n._(t`Withdraw`)} {pair.asset.tokenInfo.symbol} */}
+        {/* {i18n._(t`Withdraw`)} {assetSymbol} */}
       </div>
 
       <SmartNumberInput
@@ -112,8 +130,10 @@ export default function Withdraw({ pair }: any): JSX.Element {
         setValue={setValue}
         useCoffinTitleDirection="up"
         useCoffinTitle="to"
-        useCoffin={true}
+        // useCoffin={true}
+        useCoffin={useCoffin}
         setUseCoffin={setUseCoffin}
+        maxTitle={`${assetSymbol}`}
         max={max}
         pinMax={pinMax}
         setPinMax={setPinMax}
@@ -140,7 +160,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
         content={(onCook: any) => (
           <Button
             onClick={() => onCook(pair, onExecute)}
-            disabled={displayValue.toBigNumber(pair.asset.tokenInfo.decimals).lte(0) || warnings.broken}
+            disabled={displayValue.toBigNumber(assetDecimals).lte(0) || warnings.broken}
             className="w-full"
             >
             {i18n._(t`Withdraw`)}

@@ -27,8 +27,23 @@ export default function Deposit({ pair }: any): JSX.Element {
   const assetToken = useCurrency(pair.asset.address) || undefined
   const coffinBoxContract = useCoffinBoxContract()
   const { i18n } = useLingui()
-  const { underworldPairInfo } = useUnderworldPairInfo(pair.lpAddress)
-  // const assetDecimals = Number(underworldPairInfo.assetDecimals)
+  const { underworldPairInfo } = useUnderworldPairInfo(pair.address)
+  const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
+  const assetDecimals = Number(underworldPairInfo.assetDecimals)
+  // format tickers //
+  const aTicker = underworldPairInfo.assetTicker
+  const bTicker = underworldPairInfo.collateralTicker
+
+  const assetSymbol
+    = aTicker == 'WAVAX' ? 'AVAX'
+      : aTicker == 'WETH.e' ? 'ETH'
+        : aTicker == 'WBTC.e' ? 'BTC'
+          : aTicker
+  const collateralSymbol
+    = bTicker == 'WAVAX' ? 'AVAX'
+      : bTicker == 'WETH.e' ? 'ETH'
+        : bTicker == 'WBTC.e' ? 'BTC'
+          : bTicker  // const assetDecimals = Number(underworldPairInfo.assetDecimals)
   // const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
   // const assetPrice = Number(underworldPairInfo.assetPrice)
   // const collateralPrice = Number(underworldPairInfo.collateralPrice)
@@ -141,7 +156,7 @@ export default function Deposit({ pair }: any): JSX.Element {
         useCoffinTitle="from"
         useCoffin={useCoffin}
         setUseCoffin={setUseCoffin}
-        maxTitle="Balance"
+        maxTitle={`${assetSymbol}`}
         max={max}
         showMax={true}
       />
