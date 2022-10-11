@@ -295,15 +295,6 @@ const PairLayout = ({ children }) => {
               </div>
             </div> */}
 
-            {/* <div className="flex justify-between pt-3">
-              <div className="text-xl text-high-emphesis">{`Oracle`}</div>
-            </div>
-
-            <div className="flex justify-between">
-              <div className="text-lg text-secondary">Name</div>
-              <div className="text-lg text-high-emphesis">{oracle}</div>
-            </div> */}
-
             <div className="flex justify-between">
               <div className="text-xl mt-4 text-high-emphesis">{``}</div>
             </div>
