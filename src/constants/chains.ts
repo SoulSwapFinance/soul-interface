@@ -42,9 +42,9 @@ export function getChainLogoURL(chainId: number) {
   chainId== 250 ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/'
     : chainId == 43114 ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/avalanche/assets/'
       : chainId == 1 ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/ethereum/assets/'
-        : chainId == 56 ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/'
-        : chainId == 137 ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/'
-          : chainId == 1285 ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/'
+        : chainId == 56 ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/binance/assets/'
+        : chainId == 137 ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/polygon/assets/'
+          : chainId == 1285 ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/moonriver/assets/'
             : 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/'
 
   return logoURL
@@ -65,8 +65,8 @@ let output: string
             : output =  ''
       ) : chainId == ChainId.ETHEREUM ? (
         option == 'NETWORK' ? output = 'Ethereum'
-          : option == 'NAME' ? output = 'Avalanche'
-            : option == 'SYMBOL' ? output = 'AVAX'
+          : option == 'NAME' ? output = 'Ethereum'
+            : option == 'SYMBOL' ? output = 'ETH'
               : output =  ''
         ) : output = ''
   

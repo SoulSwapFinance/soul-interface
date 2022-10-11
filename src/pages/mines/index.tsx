@@ -1,4 +1,4 @@
-import { ChainId, SOUL_ADDRESS, WNATIVE } from 'sdk'
+import { ChainId, NATIVE, SOUL_ADDRESS, WNATIVE } from 'sdk'
 import Search from 'components/Search'
 import MineList from 'features/mines/MineList'
 import Menu from 'features/mines/components/MineMenu'
@@ -133,6 +133,7 @@ export default function Mines(): JSX.Element {
     single: (farm) => farm.pair.token0 && !farm.pair.token1,
     lending: (farm) => farm.allocPoint > 0 && farm.pair.type == 'underworld',
     fantom: (farm) => farm.allocPoint > 0 && (farm.pair.token0?.symbol == 'FTM' || farm.pair.token1?.symbol == 'FTM'),
+    native: (farm) => farm.allocPoint > 0 && (farm.pair.token0?.symbol == NATIVE[chainId].symbol || farm.pair.token1?.symbol == NATIVE[chainId].symbol),
     stables: (farm) => farm.allocPoint == 200 // since all [active] stables have 200 AP <3
   }
 

@@ -256,11 +256,7 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId)
   // let recipient = validatedRecipient(parsedQs.recipient)
   let toChain = chainId
 
-  const input 
-    = chainId === ChainId.FANTOM ? 'FTM' 
-    : chainId === ChainId.BSC ? 'BSC'
-    : chainId === ChainId.AVALANCHE ? 'AVAX'
-    : 'ETH'
+  const input = NATIVE[chainId].symbol
   const output = chainId == ChainId.FANTOM 
           ? SOUL[ChainId.FANTOM].address
          : chainId == ChainId.ETHEREUM

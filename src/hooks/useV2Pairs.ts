@@ -85,7 +85,7 @@ export function useVaultTVL(): TVLInfo[] {
   const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId]).tokenInfo.price)
   const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
 
-  console.log('soulP:%s', soulPrice)
+  // console.log('soulP:%s', soulPrice)
   const seancePrice = useSeancePrice()
 
   const farmingPools = Object.keys(VAULTS[chainId]).map((key) => {
@@ -221,6 +221,7 @@ export function useTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[ChainId.FANTOM]).tokenInfo.price) // only on FTM and ETH
   const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
+  const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId]).tokenInfo.price)
   const seancePrice = useSeancePrice()
   const luxPrice = useLuxorPrice()
   const wethPrice = useWrappedEthPrice()
@@ -248,9 +249,10 @@ export function useTVL(): TVLInfo[] {
       return (
         token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' ||
-        token.symbol == 'WAVAX' ||
-        token.symbol == 'LUX' ||
         token.symbol == 'FTM' ||
+        token.symbol == 'LUX' ||
+        token.symbol == 'WAVAX' ||
+        token.symbol == 'AVAX' ||
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
         token.symbol == 'USDT' ||
@@ -267,6 +269,9 @@ export function useTVL(): TVLInfo[] {
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
         return ftmPrice
+      }
+      if (token.symbol == 'WAVAX' || token.symbol == 'AVAX') {
+        return avaxPrice
       }
       if (token.symbol == 'SEANCE') {
         return seancePrice
@@ -634,6 +639,7 @@ export function useLuxTVL(): TVLInfo[] {
   const seancePrice = useSeancePrice()
   const luxPrice = useLuxorPrice()
   const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId]).tokenInfo.price)
+  const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId]).tokenInfo.price)
 
   const liquidityPools = Object.keys(POOLS[chainId]).map((key) => {
     return { ...POOLS[chainId][key], lpToken: key }
@@ -659,8 +665,10 @@ export function useLuxTVL(): TVLInfo[] {
         token.id.toLowerCase() == SOUL[chainId].address.toLowerCase() ||
         token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' ||
-        token.symbol == 'LUX' ||
         token.symbol == 'FTM' ||
+        token.symbol == 'WAVAX' ||
+        token.symbol == 'AVAX' ||
+        token.symbol == 'LUX' ||
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
         token.symbol == 'USDT' ||
@@ -677,6 +685,9 @@ export function useLuxTVL(): TVLInfo[] {
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
         return ftmPrice
+      }
+      if (token.symbol == 'WAVAX' || token.symbol == 'AVAX') {
+        return avaxPrice
       }
       if (token.symbol == 'SEANCE') {
         return seancePrice
@@ -763,6 +774,7 @@ export function useV2PairsWithPrice(
   const seancePrice = useSeancePrice()
   const luxPrice = useLuxorPrice()
   const wethPrice = useWrappedEthPrice()
+  const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId]).tokenInfo.price)
 
   const tokens = useMemo(
     () => currencies.map(([currencyA, currencyB]) => [currencyA?.wrapped, currencyB?.wrapped]),
@@ -795,6 +807,7 @@ export function useV2PairsWithPrice(
       return (
         token.symbol == 'SOUL' || token.symbol == 'SEANCE' ||
         token.symbol == 'WFTM' || token.symbol == 'FTM' || 
+        token.symbol == 'WAVAX' || token.symbol == 'AVAX' || 
         token.symbol == 'WETH' || token.symbol == 'ETH' ||
         token.symbol == 'USDC' || token.symbol == 'USDT' || 
         token.symbol == 'DAI' || token.symbol == 'LUX' 
@@ -808,6 +821,9 @@ export function useV2PairsWithPrice(
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
         return ftmPrice
+      }
+      if (token.symbol == 'WAVAX' || token.symbol == 'AVAX') {
+        return avaxPrice
       }
       if (token.symbol == 'WETH' || token.symbol == 'ETH') {
         return wethPrice

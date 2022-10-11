@@ -6,10 +6,13 @@ import React, { Fragment } from 'react'
 import NavLink from 'components/NavLink'
 import Typography from 'components/Typography'
 import { PairType } from '../enum'
+import { NATIVE } from 'sdk'
+import { useActiveWeb3React } from 'services/web3'
 
 // @ts-ignore TYPE NEEDS FIXING
 const InformationDisclosure = ({ farm }) => {
   const { i18n } = useLingui()
+  const { chainId } = useActiveWeb3React()
 
   return (
     <div className="flex flex-col gap-6 p-2">
@@ -23,18 +26,18 @@ const InformationDisclosure = ({ farm }) => {
           <Typography variant="xs">
             {i18n._(t`Provide liquidity to the`)}
             {` `}
-            {farm.pair.token0?.symbol == 'FTM' ?
+            {farm.pair.token0?.symbol == NATIVE[chainId].symbol  ?
               <NavLink href={
-                `/add/FTM/${farm.pair.token1?.id}`}
+                `/add/${NATIVE[chainId].symbol}/${farm.pair.token1?.id}`}
               >
                 <a className="text-sm text-blue">
                   {farm.pair.token0?.symbol}/{farm.pair.token1?.symbol}
                 </a>
               </NavLink>
               :
-              farm.pair.token1?.symbol == 'FTM' ?
+              farm.pair.token1?.symbol == NATIVE[chainId].symbol  ?
                 <NavLink href={
-                  `/add/${farm.pair.token0?.id}/FTM`}
+                  `/add/${farm.pair.token0?.id}/${NATIVE[chainId].symbol}`}
                 >
                   <a className="text-sm text-blue">
                     {farm.pair.token0.symbol}/{farm.pair.token1.symbol}

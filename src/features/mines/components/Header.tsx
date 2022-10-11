@@ -1,16 +1,18 @@
-import { Currency, Percent } from 'sdk'
+import { Currency, NATIVE, Percent } from 'sdk'
 import React, { FC, useCallback, useState } from 'react'
 import NavLink from 'components/NavLink'
 
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import Search from 'components/Search';
+import { useActiveWeb3React } from 'services/web3'
 
 const getQuery = (input, output) => {
+  const { chainId } = useActiveWeb3React()
   if (!input && !output) return
 
   if (input && !output) {
-    return { inputCurrency: input.address || 'FTM' }
+    return { inputCurrency: input.address || NATIVE[chainId].symbol  }
   } else if (input && output) {
     return { inputCurrency: input.address, outputCurrency: output.address }
   }

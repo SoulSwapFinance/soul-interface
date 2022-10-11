@@ -17,6 +17,7 @@ import { Button } from 'components/Button'
 
 export const CoffinBalances = ({ account }: { account: string }) => {
   const { i18n } = useLingui()
+  const { chainId } = useActiveWeb3React()
   const dispatch = useAppDispatch()
   const { data: balances, loading } = useCoffinBalancesV2ForAccount(account)
   const assets = balances.reduce<Assets[]>((acc, el) => {
@@ -29,7 +30,7 @@ export const CoffinBalances = ({ account }: { account: string }) => {
       const { currency } = row.values.asset
       dispatch(
         setBalancesState({
-          currency: currency.isNative ? 'FTM' : row.values.asset.currency.address,
+          currency: currency.isNative ? NATIVE[chainId].symbol : row.values.asset.currency.address,
           activeModal: ActiveModal.WITHDRAW,
         })
       )

@@ -43,13 +43,14 @@ export function useLimitOrderActionHandlers(): {
   onUserInput(field: Field, typedValue: string): void
   onChangeRecipient(recipient?: string): void
 } {
+  const { chainId } = useActiveWeb3React()
   const dispatch = useAppDispatch()
   const onCurrencySelection = useCallback(
     (field: Field, currency: Currency) => {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency.isToken ? currency.address : currency.isNative ? 'FTM' : '',
+          currencyId: currency.isToken ? currency.address : currency.isNative ? NATIVE[chainId].symbol : '',
         })
       )
     },
@@ -88,10 +89,11 @@ export function useLimitOrderState(): LimitOrderState {
 }
 
 function parseCurrencyFromURLParameter(urlParam: any): string {
+  const { chainId } = useActiveWeb3React()
   if (typeof urlParam === 'string') {
     const valid = isAddress(urlParam)
     if (valid) return valid
-    if (urlParam.toUpperCase() === 'FTM') return 'FTM'
+    if (urlParam.toUpperCase() === NATIVE[chainId].symbol) return NATIVE[chainId].symbol
   }
   return ''
 }
@@ -126,8 +128,7 @@ export function queryParametersToSwapState(chainId: ChainId, parsedQs: ParsedQs)
   let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
   const eth = NATIVE[chainId].symbol
-  // chainId === ChainId.CELO ? WNATIVE_ADDRESS[chainId] : 'FTM'
-  const soul = SOUL[chainId | 250].address
+  const soul = SOUL[chainId].address
   if (inputCurrency === '' && outputCurrency === '') {
     inputCurrency = eth
     outputCurrency = soul
