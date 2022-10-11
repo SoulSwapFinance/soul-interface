@@ -31,11 +31,13 @@ export default function Withdraw({ pair }: any): JSX.Element {
 
   const assetSymbol
     = aTicker == 'WAVAX' ? 'AVAX'
+      : aTicker == 'WFTM' ? 'FTM'
       : aTicker == 'WETH.e' ? 'ETH'
         : aTicker == 'WBTC.e' ? 'BTC'
           : aTicker
   const collateralSymbol
     = bTicker == 'WAVAX' ? 'AVAX'
+      : bTicker == 'WFTM' ? 'FTM'
       : bTicker == 'WETH.e' ? 'ETH'
         : bTicker == 'WBTC.e' ? 'BTC'
           : bTicker

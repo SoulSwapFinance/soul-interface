@@ -39,12 +39,14 @@ export const Row = ({ pair, assetAddress, lpToken }) => {
     
     const assetSymbol 
         = aTicker == 'WAVAX' ? 'AVAX'
+            : aTicker == 'WFTM' ? 'FTM'
             : aTicker == 'WETH.e' ? 'ETH'
             : aTicker == 'WBTC.e' ? 'BTC'
             : aTicker
 
     const collateralSymbol 
         = bTicker == 'WAVAX' ? 'AVAX'
+            : bTicker == 'WFTM' ? 'FTM'
             : bTicker == 'WETH.e' ? 'ETH'
             : bTicker == 'WBTC.e' ? 'BTC'
             : bTicker
