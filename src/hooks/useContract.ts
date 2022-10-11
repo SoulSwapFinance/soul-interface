@@ -485,9 +485,9 @@ export function useCoffinBoxContract(withSignerIfPossible?: boolean): Contract |
   return useContract(chainId && COFFIN_BOX_ADDRESS[chainId], COFFIN_BOX_ABI, withSignerIfPossible)
 }
 
-export function useUnderworldPairContract(withSignerIfPossible?: boolean): Contract | null {
+export function useUnderworldPairContract(PAIR_ADDRESS: string, withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && UNDERWORLD_ADDRESS[chainId], UNDERWORLD_ABI, withSignerIfPossible)
+  return useContract(chainId && PAIR_ADDRESS[chainId], UNDERWORLD_ABI, withSignerIfPossible)
 }
 
 export function useSoulSwapSwapper(): Contract | null {

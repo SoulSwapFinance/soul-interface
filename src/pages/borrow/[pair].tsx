@@ -201,12 +201,12 @@ const PairLayout = ({ children }) => {
             <div className="flex justify-between">
             <div className="text-xl text-high-emphesis">{`Market`}</div>
             </div>
-            <div className="flex justify-between">
+            {/* <div className="flex justify-between">
               <div className="text-lg text-secondary">{`% APR`}</div>
               <div className="flex items-center">
                 <div className="text-lg text-high-emphesis">{formatPercent(pair?.interestPerYear.string)}</div>
               </div>
-            </div>
+            </div> */}
             <div className="flex justify-between">
               <div className="text-lg text-secondary">{`% LTV`}</div>
               <div className="text-lg text-high-emphesis">75%</div>

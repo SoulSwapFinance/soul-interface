@@ -1,16 +1,13 @@
 import { Tab } from '@headlessui/react'
-// import { t } from '@lingui/macro'
-// import { useLingui } from '@lingui/react'
 import Card from 'components/Card'
 import Image from 'components/Image'
-import QuestionHelper from 'components/QuestionHelper'
+// import QuestionHelper from 'components/QuestionHelper'
 import { Feature } from 'enums'
-import { Deposit, Strategy, Withdraw } from 'features/lending'
+import { Deposit, PairTools, Strategy, Withdraw } from 'features/lending'
 import { useUnderworldPairInfo } from 'hooks/useAPI'
 import { formatNumber, formatPercent } from 'functions/format'
 import { e10 } from 'functions/math'
 import NetworkGuard from 'guards/Network'
-// import useContractTokenBalance from 'hooks/useContractTokenBalance'
 import { useRedirectOnChainId } from 'hooks/useRedirectOnChainId'
 import Layout from 'layouts/Underworld'
 import Head from 'next/head'
@@ -29,6 +26,8 @@ export default function Pair() {
   // const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const pair = useUnderworldPair(router.query.pair as string)
+  const { underworldPairInfo } = useUnderworldPairInfo(router.query.pair)
+
   /*
   const { underworldPairInfo } = useUnderworldPairInfo(pair?.address)
   const assetDecimals = Number(underworldPairInfo.assetDecimals)
@@ -36,18 +35,43 @@ export default function Pair() {
   const oracle = underworldPairInfo.oracle
   const assetURL = underworldPairInfo.assetLogoURI
   const collateralURL = underworldPairInfo.collateralLogoURI
-  const collateralSymbol = underworldPairInfo.collateralTicker
   */
  
 if (!pair) return <div />
-  const assetSymbol = pair?.asset.tokenInfo.symbol
-  const collateralSymbol = pair?.collateral.tokenInfo.symbol
-  const assetDecimals = pair?.asset.tokenInfo.decimals
+const assetDecimals = Number(underworldPairInfo.assetDecimals)
+const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
+const assetPrice = Number(underworldPairInfo.assetPrice)
+const collateralPrice = Number(underworldPairInfo.collateralPrice)
+// const lpDecimals = Number(underworldPairInfo.decimals)
+// const assetAddress = underworldPairInfo.assetAddress
+
+// format tickers //
+const aTicker = underworldPairInfo.assetTicker
+const bTicker = underworldPairInfo.collateralTicker
+
+const assetSymbol 
+    = aTicker == 'WAVAX' ? 'AVAX'
+        : aTicker == 'WETH.e' ? 'ETH'
+        : aTicker == 'WBTC.e' ? 'BTC'
+        : aTicker
+
+const collateralSymbol 
+    = bTicker == 'WAVAX' ? 'AVAX'
+        : bTicker == 'WETH.e' ? 'ETH'
+        : bTicker == 'WBTC.e' ? 'BTC'
+        : bTicker
+  // const assetSymbol = pair?.asset.tokenInfo.symbol
+  // const collateralSymbol = pair?.collateral.tokenInfo.symbol
+  // const assetDecimals = pair?.asset.tokenInfo.decimals
   const assetAddress = pair?.asset.tokenInfo.address
   const collateralAddress = pair?.collateral.tokenInfo.address
   // const oracle = pair?.oracle.address
-
-  const assetPrice = pair?.asset.usd / 1e18
+  // const assetDecimals = Number(underworldPairInfo.assetDecimals)
+  // const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
+  // const assetPrice = Number(underworldPairInfo.assetPrice)
+  // const collateralPrice = Number(underworldPairInfo.collateralPrice)
+  const totalAssets = Number(underworldPairInfo.supply)
+  // const assetPrice = pair?.asset.usd / 1e18
   const userDepositAmount = pair?.userAssetFraction / 10**(assetDecimals)
   const userDepositValue = userDepositAmount * assetPrice
   const blockchain = chainId == ChainId.FANTOM ? 'fantom' : 'avalanche'
@@ -171,19 +195,35 @@ const PairLayout = ({ children }) => {
   const router = useRouter()
   // const { i18n } = useLingui()
   const pair = useUnderworldPair(router.query.pair as string)
-  // const { underworldPairInfo } = useUnderworldPairInfo(pair)
-  // const assetSymbol = underworldPairInfo.assetTicker
+
+  // const lpDecimals = Number(underworldPairInfo.decimals)
+  // const assetAddress = underworldPairInfo.assetAddress
+  
+
+  
+
   // const oracle = underworldPairInfo.oracle
-  // const assetDecimals = Number(underworldPairInfo.assetDecimals)
   // const interestPerSecond = underworldPairInfo.interestPerSecond
   // const interestPerYear = Number(interestPerSecond) * 86_400 * 365 / 1e18
   
-  const assetDecimals = pair?.asset.tokenInfo.decimals
-  
-  const assetSymbol = pair?.asset.tokenInfo.symbol
-  
   const oracle = pair?.oracle.name
   
+  const assetDecimals = pair?.asset.tokenInfo.decimals
+  const aTicker = pair?.asset.tokenInfo.symbol
+  const cTicker = pair?.collateral.tokenInfo.symbol
+
+  const assetSymbol 
+      = aTicker == 'WAVAX' ? 'AVAX'
+          : aTicker == 'WETH.e' ? 'ETH'
+          : aTicker == 'WBTC.e' ? 'BTC'
+          : aTicker
+
+  const collateralSymbol 
+      = cTicker == 'WAVAX' ? 'AVAX'
+          : cTicker == 'WETH.e' ? 'ETH'
+          : cTicker == 'WBTC.e' ? 'BTC'
+          : cTicker
+
   const interestPerYear = pair?.interestPerYear.string
   console.log('interestPerYear:%s', interestPerYear)
 
@@ -205,12 +245,12 @@ const PairLayout = ({ children }) => {
           <div className="flex justify-between">
               <div className="text-xl text-high-emphesis">{`Market`}</div>
             </div>
-            <div className="flex justify-between">
+            {/* <div className="flex justify-between">
               <div className="text-lg text-secondary">{`% APR`}</div>
               <div className="flex items-center">
                 <div className="text-lg text-high-emphesis">{formatPercent(interestPerYear)}</div>
               </div>
-            </div>
+            </div> */}
             <div className="flex justify-between">
               <div className="text-lg text-secondary">{`% LTV`}</div>
               <div className="text-lg text-high-emphesis">75%</div>
@@ -221,6 +261,13 @@ const PairLayout = ({ children }) => {
               </div>
               {/* {formatNumber(pair?.totalAsset.base.div(e10(assetDecimals)))} {assetSymbol} */}
               {formatNumber(pair?.totalAsset.base / 10**(assetDecimals))} {assetSymbol}
+            </div>
+            <div className="flex justify-between">
+              <div className="text-lg text-secondary">{`Oracle`}</div>
+              <div className="text-lg text-high-emphesis">
+              </div>
+              {/* {formatNumber(pair?.totalAsset.base.div(e10(assetDecimals)))} {assetSymbol} */}
+              { oracle }
             </div>
             <div className="flex justify-between">
               <div className="text-green text-lg text-secondary">{`Available`}</div>
@@ -246,18 +293,21 @@ const PairLayout = ({ children }) => {
               </div>
             </div> */}
 
-            {/* <PairTools pair={pair} /> */}
-
-            <div className="flex justify-between pt-3">
+            {/* <div className="flex justify-between pt-3">
               <div className="text-xl text-high-emphesis">{`Oracle`}</div>
             </div>
 
             <div className="flex justify-between">
               <div className="text-lg text-secondary">Name</div>
               <div className="text-lg text-high-emphesis">{oracle}</div>
-            </div>
+            </div> */}
 
-            <div className="flex justify-between pt-3">
+            <div className="flex justify-between">
+              <div className="text-xl mt-4 text-high-emphesis">{``}</div>
+            </div>
+            <PairTools pair={pair} />
+
+            {/* <div className="flex justify-between pt-3">
               <div className="text-xl text-high-emphesis">{`CoffinBox`}</div>
             </div>
             <div className="flex justify-between">
@@ -276,7 +326,7 @@ const PairLayout = ({ children }) => {
                   </>
                 )}
               </div>
-            </div>
+            </div> */}
 
             <Strategy token={pair.asset} />
           </div>
@@ -288,6 +338,6 @@ const PairLayout = ({ children }) => {
   ) : null
 }
 
-//Pair.Layout = PairLayout
+// Pair.Layout = PairLayout
 
 Pair.Guard = NetworkGuard(Feature.UNDERWORLD)
