@@ -7,7 +7,7 @@ import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
-import { getChainColorCode } from 'constants/chains'
+// import { getChainColorCode } from 'constants/chains'
 import { useSummonerContract } from 'hooks/useContract'
 import { classNames } from 'functions'
 

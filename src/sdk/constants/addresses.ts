@@ -162,6 +162,7 @@ export const SUMMONER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xce6ccbB1EdAD497B4d53d829DF491aF70065AB5B', // Summoner
+  // [ChainId.FANTOM]: '0xb898226dE3c5ca980381fE85F2Bc10e35e00634c', // V2
   [ChainId.FANTOM_TESTNET]: '',
   [ChainId.AVALANCHE]: '0xB1e330401c920077Ddf157AbA5594238d36b54B1', // V2
   // [ChainId.AVALANCHE]: '0x090D4911Db910efaA498f9b97b8999FbE7A41Dd7', // SEP22
