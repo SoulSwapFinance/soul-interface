@@ -38,7 +38,7 @@ export default function PairTools({ pair }) {
       <Button color="blue" variant="filled" size="xs" className="w-full" onClick={() => onCook(pair, onAccrue)}>
         Accrue
       </Button>
-      <QuestionHelper text={'Sync Market APR to Supply APR'} />
+      <QuestionHelper text={'Sync Market to Supply APR'} />
       <Button
         color="purple"
         variant="filled"

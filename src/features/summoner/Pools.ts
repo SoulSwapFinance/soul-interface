@@ -169,7 +169,7 @@ export const FantomPools = [
     token0Symbol: 'WFTM',
     token1Symbol: 'SOUL',
     lpSymbol: 'FTM-SOUL',
-    lpAddress: '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57',
+    lpAddress: SOUL_NATIVE[ChainId.FANTOM],
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: SOUL_ADDRESS[ChainId.FANTOM],
   },
