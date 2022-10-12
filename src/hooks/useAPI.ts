@@ -11,7 +11,7 @@ function getBaseUrl() {
   URL = 'https://archived-api.soulswap.finance' : URL = 'https://avax-api.soulswap.finance'
 }
 
-const BASE_URL = 'https://api.soulswap.finance'
+const BASE_URL = 'https://archived-api.soulswap.finance'
 
 export function usePriceUSD(tokenAddress): { status: string; price: T } {
     const { chainId } = useActiveWeb3React()
