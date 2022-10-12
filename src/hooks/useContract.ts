@@ -406,9 +406,7 @@ export function useLotteryContract(withSignerIfPossible?: boolean): Contract | n
 
 export function useSummonerContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SUMMONER_ADDRESS[chainId], 
-    chainId == ChainId.FANTOM ? SUMMONER_ABI : SOUL_MANIFESTER_ABI,
-    withSignerIfPossible)
+  return useContract(chainId && SUMMONER_ADDRESS[chainId], SOUL_MANIFESTER_ABI, withSignerIfPossible)
 }
 
 export function useAutoStakeContract(withSignerIfPossible?: boolean): Contract | null {

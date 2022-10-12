@@ -80,7 +80,7 @@ export abstract class SoulSwapRouter {
    */
   public static swapCallParameters(
     trade: Trade<Currency, Currency, TradeType>,
-    options: TradeOptions | TradeOptionsDeadline
+    options: TradeOptions | TradeOptionsDeadline,
   ): SwapParameters {
     const etherIn = trade.inputAmount.currency.isNative
     const etherOut = trade.outputAmount.currency.isNative
@@ -111,7 +111,8 @@ export abstract class SoulSwapRouter {
     switch (trade.tradeType) {
       case TradeType.EXACT_INPUT:
         if (etherIn) {
-          methodName = useFeeOnTransfer
+          methodName 
+            = useFeeOnTransfer
             ? 'swapExactETHForTokensSupportingFeeOnTransferTokens'
             : 'swapExactETHForTokens'
           // (uint amountOutMin, address[] calldata path, address to, uint deadline)

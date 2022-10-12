@@ -91,7 +91,7 @@ export const PairSearch = ({ selectedPair, onPairSelect, onDismiss, isOpen, filt
         <PaddedColumn gap="16px">
           <RowBetween>
             <TYPE.Body fontWeight={500} fontSize={16}>
-              Select a pair
+              Select Pair
             </TYPE.Body>
             <CloseIcon onClick={onDismiss} data-testid="close-search-pair" />
           </RowBetween>

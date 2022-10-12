@@ -78,10 +78,10 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const token0Decimals = Number(pairInfo.token0Decimals)
     const token1Decimals = Number(pairInfo.token1Decimals)
     // BTC has 8 decimals
-    const assetDecimals 
-      = isUnderworldPair && token0Symbol == 'BTC' ? 8 : 
-      isUnderworldPair && token0Symbol == 'USDC' ? 6 :
-      Number(pairInfo.pairDecimals)
+    const assetDecimals
+        = isUnderworldPair && token0Symbol == 'BTC' ? 8 :
+            isUnderworldPair && token0Symbol == 'USDC' ? 6 :
+                Number(pairInfo.pairDecimals)
 
     const [showOptions, setShowOptions] = useState(false)
     const [openDeposit, setOpenDeposit] = useState(false)
@@ -95,19 +95,12 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const earnedAmount = summonerUserInfo.pendingSoul
     const earnedValue = summonerUserInfo.pendingValue
     const lpPrice = Number(summonerUserInfo.lpPrice)
-    const firstDepositTime = Number(summonerUserInfo.firstDepositTime)
+    // const firstDepositTime = Number(summonerUserInfo.firstDepositTime)
     const currentRate = Number(summonerUserInfo.currentRate)
-    const currentTime = nowTime / 1_000
-    const timeDelta = currentTime - firstDepositTime
-    const daysElapsed = timeDelta / 86_400
-    const withdrawFee
-        = chainId == ChainId.FANTOM
-            ? (daysElapsed <= 14 ? startRate - daysElapsed
-                // staked, but beyond 14 days
-                : stakedBalance > 0 ? 0
-                    // not staked (to forewarn)
-                    : 14)
-            : currentRate
+    // const currentTime = nowTime / 1_000
+    // const timeDelta = currentTime - firstDepositTime
+    // const daysElapsed = timeDelta / 86_400
+    const withdrawFee = currentRate
     const feeAmount
         = withdrawFee * stakedBalance / 100
     const withdrawable = stakedBalance - feeAmount
@@ -271,16 +264,16 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     // handles deposit
     const handleDeposit = async (pid, amount) => {
         try {
-            const tx = await SoulSummonerContract?.deposit(pid, 
+            const tx = await SoulSummonerContract?.deposit(pid,
                 parsedDepositValue?.quotient.toString()
-                )
-                await tx.wait()
-                console.log('depositing: %s:', parsedDepositValue)
-            } catch (e) {
-            const tx = await SoulSummonerContract?.deposit(pid, 
+            )
+            await tx.wait()
+            console.log('depositing: %s:', parsedDepositValue)
+        } catch (e) {
+            const tx = await SoulSummonerContract?.deposit(pid,
                 Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
-                console.log('depositing: %s:', depositValue)
-                await tx.wait()
+            console.log('depositing: %s:', depositValue)
+            await tx.wait()
             // alert(e.message)
             console.log(e)
         }
@@ -289,13 +282,13 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     // handles withdrawal
     const handleWithdraw = async (pid, amount) => {
         try {
-            const tx = await SoulSummonerContract?.withdraw(pid, 
-            parsedWithdrawValue?.quotient.toString())
+            const tx = await SoulSummonerContract?.withdraw(pid,
+                parsedWithdrawValue?.quotient.toString())
             await tx.wait()
         } catch (e) {
-            const tx = await SoulSummonerContract?.withdraw(pid, 
+            const tx = await SoulSummonerContract?.withdraw(pid,
                 Number(withdrawValue).toFixed(assetDecimals).toBigNumber(assetDecimals)
-                )
+            )
             // alert(e.message)
             console.log(e)
         }
@@ -328,17 +321,9 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                         <FarmContentWrapper>
                             <div className="items-center">
                                 <FarmItemBox>
-                                    {
-                                        (
-                                            (chainId == ChainId.FANTOM && Number(allocPoint) != 420)
-                                            || (chainId == ChainId.AVALANCHE && Number(allocPoint) != 220))
-                                        ?
-                                        <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
-                                        :
-                                        <CurrencyLogo
-                                            currency={token0} // TOKEN0
-                                            size={40}
-                                        />
+                                    {Number(allocPoint) != 220
+                                        ? <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
+                                        : <CurrencyLogo currency={token0} size={40} />
                                     }
                                 </FarmItemBox>
                             </div>
@@ -543,7 +528,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                             </Typography>
                                         </div>
                                     )
-                                    */} 
+                                    */}
 
                                     {/* Number(walletValue) > 0 && (
                                         <div className="flex justify-between">
@@ -556,8 +541,8 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                         </div>
                                     )
                                     */}
-  
-                                      {Number(stakedBalance) > 0 && (
+
+                                    {Number(stakedBalance) > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
                                                 Staked Balance
@@ -664,10 +649,10 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                         }
                                     >
                                         <div className="flex text-lg gap-2">
-                                        <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
+                                            <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
                                             DEPOSIT {
-                                                ((chainId == 250 && Number(allocPoint) == 420) || 
-                                                chainId == 43114 && Number(allocPoint) == 220) ? token0Symbol : farm.lpSymbol}
+                                                ((chainId == 250 && Number(allocPoint) == 420) ||
+                                                    chainId == 43114 && Number(allocPoint) == 220) ? token0Symbol : farm.lpSymbol}
                                         </div>
                                     </SubmitButton>
                                 )}
@@ -718,7 +703,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                                     {`/exchange/add/${farm.token0Address}/${farm.token1Address}`}
                                                 >
                                                     <div className="flex text-lg gap-2">
-                                                    <CollectionIcon width={26} className={classNames(`text-white`)} />
+                                                        <CollectionIcon width={26} className={classNames(`text-white`)} />
                                                         CREATE {farm.lpSymbol} LP
                                                     </div>                                            </TokenPairLink>
                                             </SubmitButton>
@@ -780,8 +765,8 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                             }
                                         >
                                             <div className="flex text-lg gap-1">
-                                            {/* <Zap width={26} className={classNames(`text-white`)} /> */}
-                                                ZAP 
+                                                {/* <Zap width={26} className={classNames(`text-white`)} /> */}
+                                                ZAP
                                                 <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
                                                 &rarr; {`${farm.lpSymbol}`}
                                             </div>
@@ -902,7 +887,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                         primaryColor={buttonColor}
                                         color={buttonTextColor}
                                         margin=".5rem 0 0rem 0"
-                                        onClick={ () => setShowConfirmation(true) }
+                                        onClick={() => setShowConfirmation(true)}
                                     >
                                         WITHDRAW {farm.lpSymbol}
                                     </SubmitButton>

@@ -169,11 +169,6 @@ const useMenu: UseBar = () => {
             link: '/autostake',
           },
           {
-            key: 'staking',
-            title: i18n._(t`Stake`),
-            link: '/seance',
-          },
-          {
             key: 'bonds',
             title: i18n._(t`Bonds`),
             link: '/bonds',

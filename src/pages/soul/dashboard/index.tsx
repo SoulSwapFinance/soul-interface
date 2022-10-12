@@ -16,6 +16,7 @@ import { useSoulInfo, useBondInfo, usePriceUSD, useTokenInfo } from 'hooks/useAP
 import { ChainId, NATIVE, SOUL_ADDRESS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 import { getChainInfo, getChainColorCode } from 'constants/chains'
+import ExternalLink from 'components/ExternalLink'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
@@ -231,11 +232,11 @@ const HideOnMobile = styled.div`
 
       <div className="flex ml-4 mr-4 mb-4 gap-1 items-center justify-center">
         <Button variant="bordered" color={"purple"} size="lg" className={classNames([ChainId.FANTOM].includes(chainId) ? '' : 'hidden')}>
-          <NavLink href={'/seance'}>
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Stake </span>
+        <ExternalLink href={'https://archived.soulswap.finance'}>
+            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Archive </span>
             </a>
-          </NavLink>
+        </ExternalLink>
         </Button>
         <Button variant="bordered" color={"purple"} size="lg">
           <NavLink href={'/summoner'}>

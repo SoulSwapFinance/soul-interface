@@ -198,22 +198,6 @@ export default function Vesting() {
             <div className="flex flex-col gap-3 p-4">
               <div className={classNames([ChainId.FANTOM].includes(chainId) ? "font-bold text-white" : 'hidden')}>{i18n._(t`Things you can do with your SOUL`)}</div>
               <div className="p-4 rounded bg-dark-800">
-                <Link href="/seance">
-                  <a className="flex items-center justify-between gap-3">
-                    <div className="flex flex-col gap-1">
-                      <div className="font-bold text-white">{i18n._(t`Stake SOUL for SEANCE`)}</div>
-                      <div className="text-sm text-secondary">
-                        {t`Gain governance rights with SEANCE and earn 5% APR (0.05% of
-                                                            all swaps from all chains)`}
-                      </div>
-                    </div>
-                    <div className="min-w-[32px]">
-                      <ChevronRight />
-                    </div>
-                  </a>
-                </Link>
-              </div>
-              <div className="p-4 rounded bg-dark-800">
                 <Link href={`/saave`}>
                   <a className="flex items-center justify-between gap-3">
                     {/* <div className="flex flex-col gap-1">

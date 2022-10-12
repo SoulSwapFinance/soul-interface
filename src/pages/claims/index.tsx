@@ -190,21 +190,6 @@ export default function Claims() {
             <div className="flex flex-col gap-3 p-4">
               <div className={classNames([ChainId.FANTOM].includes(chainId) ? "font-bold text-white" : 'hidden')}>{i18n._(t`Things you may do with your SOUL`)}</div>
               <div className="p-4 rounded bg-dark-800">
-                <Link href="/seance">
-                  <a className="flex items-center justify-between gap-3">
-                    <div className="flex flex-col gap-1">
-                      <div className="font-bold text-white">{i18n._(t`Stake for Seance`)}</div>
-                      <div className="text-sm text-secondary">
-                        {t`Gain governance rights with SEANCE, while earning SOUL every second.`}
-                      </div>
-                    </div>
-                    <div className="min-w-[32px]">
-                      <ChevronRight />
-                    </div>
-                  </a>
-                </Link>
-              </div>
-              <div className="p-4 rounded bg-dark-800">
                 <Link href={`/summoner`}>
                   <a className="flex items-center justify-between gap-3">
                     <div className="flex flex-col gap-1">

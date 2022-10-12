@@ -10,7 +10,7 @@ import { Button } from 'components/Button'
 import VaultInputPanel from 'components/VaultInputPanel'
 import { ApprovalState, useApproveCallback, useAutoStakeContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
-import { AUTO_STAKE_ADDRESS, max, Token, SOUL } from 'sdk'
+import { AUTO_STAKE_ADDRESS, max, Token, SOUL, ChainId } from 'sdk'
 import { SOUL_ADDRESS } from 'constants/addresses'
 import { tryParseAmount, formatNumber, classNames } from 'functions'
 import { useCurrencyBalance } from 'state/wallet/hooks'
@@ -21,6 +21,7 @@ import NavLink from 'components/NavLink'
 import { useSoulPrice } from 'hooks/getPrices'
 import { useAutoStakeInfo, useUserAutoStakeInfo } from 'hooks/useAPI'
 import { SubmitButton } from 'features/autostake/Styles'
+import ExternalLink from 'components/ExternalLink'
 
 export default function AutoStake() {
   const { i18n } = useLingui()
@@ -199,19 +200,19 @@ export default function AutoStake() {
             </a>
           </NavLink>
         </Button>
-        <Button variant="filled" color="purple" size="lg" className={classNames([250, 43114].includes(chainId) ? '' : 'hidden')}>
+        <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/summoner'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Farm </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="filled" color="purple" size="lg"  className={classNames([250].includes(chainId) ? '' : 'hidden')}>
-          <NavLink href={'/seance'}>
+        <Button variant="filled" color="purple" size="lg"  className={classNames([ChainId.FANTOM].includes(chainId) ? '' : 'hidden')}>
+          <ExternalLink href={'https://archived.soulswap.finance'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Stake </span>
+            <span> Archive </span>
             </a>
-          </NavLink>
+          </ExternalLink>
         </Button>
       </div>
       <DoubleGlowShadowV2>

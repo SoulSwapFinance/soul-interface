@@ -27,6 +27,7 @@ import { useAutoStakeInfo, useLuxorInfo, useLuxorUserInfo, useUserAutoStakeInfo 
 import { SubmitButton } from 'features/autostake/Styles'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
+import ExternalLink from 'components/ExternalLink'
 
 export default function Stake() {
   const addTransaction = useTransactionAdder()
@@ -176,11 +177,11 @@ export default function Stake() {
           </NavLink>
         </Button>
         <Button variant="filled" color="purple" size="lg" className={classNames([250].includes(chainId) ? '' : 'hidden')}>
-          <NavLink href={'/seance'}>
+        <ExternalLink href={'https://archived.soulswap.finance'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Stake </span>
+            <span> Archive </span>
             </a>
-          </NavLink>
+        </ExternalLink>
         </Button>
       </div>
       <DoubleGlowShadowV2>
