@@ -29,7 +29,7 @@ const useAllowance = (tokenAddress: string) => {
     if (account && coffinBoxContract && tokenContract) {
       fetchAllowance()
     }
-    const refreshInterval = setInterval(fetchAllowance, 10000)
+    const refreshInterval = setInterval(fetchAllowance, 10_000)
     return () => clearInterval(refreshInterval)
   }, [account, coffinBoxContract, fetchAllowance, tokenContract])
 

@@ -112,6 +112,10 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
     == ChainId.FANTOM && stakedBal == 0 
         || chainId == ChainId.AVALANCHE
 
+  const depositable 
+      = chainId == ChainId.FANTOM && pid == '2' ? false
+      : true
+
   // CALCULATIONS
   const stakedLpValue = temporaryBoost
     ? stakedBal * lpPrice * temporaryBoostMultiplier
@@ -326,7 +330,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                     />
                   }
                   <Wrap padding="0" margin="0" display="flex">
-                    {(approved && isStakeable && Number(unstakedBal) == 0) ?
+                    {(approved && isStakeable && Number(unstakedBal) == 0 && depositable ?
                       (bond.token0Symbol == WNATIVE[chainId].symbol ? (
                         <SubmitButton
                           primaryColor={getChainColor(chainId)}
@@ -356,7 +360,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
                           </TokenPairLink>
                         </SubmitButton>
                       ) :
-                      (approved && isStakeable ?
+                      (approved && isStakeable && depositable) ?
                         (
                           <SubmitButton
                             height="2.5rem"

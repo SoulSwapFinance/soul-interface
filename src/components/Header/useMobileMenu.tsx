@@ -142,11 +142,6 @@ const useMobileMenu: UseMobileMenu = () => {
             link: '/autostake',
           },
           {
-            key: 'staking',
-            title: i18n._(t`Stake`),
-            link: '/seance',
-          },
-          {
             key: 'sor',
             title: i18n._(t`Stable`),
             link: '/luxor/sor',

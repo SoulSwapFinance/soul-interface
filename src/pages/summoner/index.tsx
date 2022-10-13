@@ -13,7 +13,7 @@ import { usePositions } from 'features/mines/hooks'
 import { useSummonerContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
 import { TridentHeader } from 'layouts/Trident'
-import {  formatNumberScale } from 'functions'
+import { formatNumberScale } from 'functions'
 import { Button } from 'components/Button'
 import { addTransaction } from 'state/transactions/actions'
 import { XIcon } from '@heroicons/react/solid'
@@ -21,6 +21,8 @@ import { ChainId, SOUL_ADDRESS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 import { getChainColorCode } from 'constants/chains'
 import { useTokenInfo } from 'hooks/useAPI'
+import ExternalLink from 'components/ExternalLink'
+import { SubmitButton } from 'features/bond/Styles'
 
 const Summoner = () => {
   const { chainId } = useActiveWeb3React()
@@ -69,7 +71,7 @@ const Summoner = () => {
 
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
-      {showBalances && [ChainId.FANTOM].includes(chainId) &&
+      {showBalances &&
       <div className={`flex flex-row text-${getChainColorCode(chainId)} justify-end`}>
         <XIcon
           height="24px"
@@ -78,7 +80,7 @@ const Summoner = () => {
         />
       </div>
       }
-      {showBalances && [ChainId.FANTOM].includes(chainId) &&
+      { showBalances &&
         <TridentHeader className="sm:!flex-row justify-center items-center bg-transparent" pattern="bg-bubble">
           <div>
           </div>
@@ -92,30 +94,7 @@ const Summoner = () => {
               >
                 {formatNumberScale(allStaked, true)} {' STAKED'}
               </Button>
-              {positions.length > 0 && [ChainId.FANTOM].includes(chainId) && (
-                <Button
-                  color={getChainColorCode(chainId)}
-                  className="text-emphasis"
-                  variant="flexed"
-                  size={"sm"}
-                  disabled={pendingTx}
-                  onClick={async () => {
-                    setPendingTx(true)
-                    for (const pos of positions) {
-                      try {
-                        const tx = await harvest(parseInt(pos.id))
-                        addTransaction(tx)
-                      } catch (error) {
-                        console.error(error)
-                      }
-                    }
-                    setPendingTx(false)
-                  }}
-                >
-                  CLAIM ALL {formatNumberScale(pendingValue, true)}
-                </Button>
-              )}
-              {positions.length > 0 && [ChainId.AVALANCHE].includes(chainId) && (
+              { positions.length > 0 && (
                 <Button
                   color={getChainColorCode(chainId)}
                   className="text-emphasis"
@@ -150,8 +129,23 @@ const Summoner = () => {
         }
       <DoubleGlowShadowV2 opacity="0.6">
         <Container id="farm-page">
-            {/* <TwitterBanner chainId={chainId} /> */}
-            {/* {<HarvestAll/>} */}
+      {/* <SubmitButton
+        height= "2rem"
+        primaryColor={"#6F1BD9"} 
+        // color={"purple"}
+        size="lg"
+        className={chainId == ChainId.FANTOM ? 'mb-4' : 'hidden'}
+        >
+        <ExternalLink 
+          href = "https://archived.soulswap.finance" 
+          target = "_blank" 
+          rel="noreferrer"
+        >
+        <a className="block text-md font-bold md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+          <span> Migrate from Here: Archived Farms </span>
+        </a>
+        </ExternalLink>
+      </SubmitButton> */}
           <br />
           <Head>
             <title>Farm | Soul</title>

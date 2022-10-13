@@ -3,7 +3,7 @@ import { useModalOpen, useToggleTokenStatsModal } from 'state/application/hooks'
 import { ApplicationModal } from 'state/application/actions'
 import Image from 'next/image'
 import Typography from 'components/Typography'
-import { useTokenInfo } from 'hooks/useAPI'
+import { useBondInfo, useTokenInfo } from 'hooks/useAPI'
 import { formatNumber, formatNumberScale } from 'functions'
 import { SOUL_ADDRESS, SEANCE_ADDRESS } from 'constants/addresses'
 import QuestionHelper from '../../components/QuestionHelper'
@@ -40,26 +40,32 @@ export default function TokenStatsModal(): JSX.Element | null {
   const totalSoul = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.supply) / 1e18
   const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
   // const seancePrice = Number(useTokenInfo(SEANCE_ADDRESS[250]).tokenInfo.price)
-
+  const { bondInfo } = useBondInfo()
+  const bondTVL = Number(bondInfo.totalValue)
+  // console.log('bondTVL:%s', bondTVL)
   const tvlInfo = useTVL()
-  const bondInfo = useBondTVL()
+  const bondsInfo = useBondTVL()
   const stakedTvl  = Number(soulPrice) * totalSeance
   const soulInfo = useSoulTVL()
 
-  let bondsTvl = bondInfo?.reduce((previousValue, currentValue) => {
+  let bondTvl
+  = bondsInfo?.reduce((previousValue, currentValue) => {
     return previousValue + currentValue?.tvl
   }, 0)
 
-  let soulTvl = soulInfo?.reduce((previousValue, currentValue) => {
+  let soulTVL = soulInfo?.reduce((previousValue, currentValue) => {
     return previousValue + currentValue?.tvl
   }, 0)
 
-  let farmsTvl = tvlInfo?.reduce((previousValue, currentValue) => {
+  let farmTVL = tvlInfo?.reduce((previousValue, currentValue) => {
     return previousValue + currentValue?.tvl
   }, 0)
 
-  let podl = bondsTvl + soulTvl
-  let tvl = bondsTvl + soulTvl + farmsTvl
+  const daoTVL = chainId == ChainId.FANTOM ? soulTVL : soulTVL - bondTVL
+  const TVL = daoTVL + bondTVL + farmTVL
+
+  let podl = bondTVL + soulTVL
+  let tvl = bondTVL + soulTVL + farmTVL
   function getSummaryLine(title, value) {
 
     return (
@@ -244,21 +250,28 @@ export default function TokenStatsModal(): JSX.Element | null {
             - (Number(totalSoul) * 0.125)
             , false)
         )} */}
-         {getSummaryLine(
+         {/* {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Circulating Supply`}
           </Typography>,
           formatNumberScale(
             Number(totalSoul), false
-            ))}
-        {getSummaryLine(
+            ))} */}
+        {/* {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Total Market Cap`}
           </Typography>,
           formatCurrency(
             Number(totalSoul) * Number(soulPrice)
-        ))}
-        { [ChainId.FANTOM].includes(chainId) && getSummaryLine(
+        ))} */}
+        {getSummaryLine(
+        <Typography variant="sm" className="flex items-center py-0.5">
+          {`Market Cap`}
+        </Typography>,
+        formatNumberScale(
+          Number(250_000_000 * soulPrice), true
+          ))}
+        { [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) && getSummaryLine(
           <div className="flex items-center">
             <Typography variant="sm" className="flex items-center py-0.5">
               {`Total Value Locked`}
@@ -268,26 +281,34 @@ export default function TokenStatsModal(): JSX.Element | null {
                 <div className="flex flex-col gap-2 py-1 px-3 w-full">
                   <div className="flex items-center justify-between">
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      Farming
+                      Farms
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      {formatNumberScale(farmsTvl - stakedTvl, true)}
+                      {formatNumberScale(farmTVL, true)}
                     </Typography>
                   </div>
-                  <div className="flex items-center justify-between">
+                  {/* <div className="flex items-center justify-between">
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
                       Staked
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
                       {formatNumberScale(stakedTvl, true)}
                     </Typography>
+                  </div> */}
+                  <div className="flex items-center justify-between">
+                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
+                      Bonds
+                    </Typography>
+                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
+                      {formatNumberScale(bondTVL, true)}
+                    </Typography>
                   </div>
                   <div className="flex items-center justify-between">
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      Bonded
+                      DAO
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      {formatNumberScale(bondsTvl, true)}
+                      {formatNumberScale(daoTVL, true)}
                     </Typography>
                   </div>
                   <hr></hr>
@@ -298,9 +319,9 @@ export default function TokenStatsModal(): JSX.Element | null {
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
                       {formatNumberScale(
-                        Number(farmsTvl) // FARMS ONLY
-                        // + stakedTvl // STAKED ONLY
-                        + Number(bondsTvl) // BONDS ONLY
+                        Number(farmTVL) // FARMS ONLY
+                        + Number(bondTVL) // BONDS ONLY
+                        + Number(daoTVL) // DAO ONLY
                         , true)}
                     </Typography>
                   </div>
@@ -309,9 +330,9 @@ export default function TokenStatsModal(): JSX.Element | null {
             />
           </div>,
           formatCurrency(
-            Number(farmsTvl + bondsTvl), 0)
+            Number(TVL), 0)
         )}
-        { [ChainId.FANTOM].includes(chainId) && getSummaryLine(
+        { [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) && getSummaryLine(
           <div className="flex items-center">
             <Typography variant="sm" className="flex items-center py-0.5">
               {`Protocol Liquidity`}
@@ -324,7 +345,7 @@ export default function TokenStatsModal(): JSX.Element | null {
                       Bonded
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      {formatNumberScale(bondsTvl, true)}
+                      {formatNumberScale(bondTVL, true)}
                     </Typography>
                   </div>
                   <div className="flex items-center justify-between">
@@ -332,7 +353,7 @@ export default function TokenStatsModal(): JSX.Element | null {
                       DAO
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      {formatNumberScale(soulTvl, true)}
+                      {formatNumberScale(daoTVL, true)}
                     </Typography>
                   </div>
                   <hr></hr>
@@ -343,8 +364,8 @@ export default function TokenStatsModal(): JSX.Element | null {
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
                       {formatNumberScale(
-                        Number(bondsTvl)
-                       + Number(soulTvl)
+                        Number(bondTVL)
+                       + Number(soulTVL)
                         , true)}
                     </Typography>
                   </div>
@@ -353,7 +374,7 @@ export default function TokenStatsModal(): JSX.Element | null {
             />
           </div>,
           concat(formatNumberScale(
-            Number(bondsTvl + soulTvl), true)
+            Number(bondTVL + soulTVL), true)
             , 
             ` (${((podl / tvl * 100).toFixed(0))}%)`
             ))

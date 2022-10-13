@@ -171,7 +171,7 @@ const useAsync = (asyncFunction, immediate = true) => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       execute()
-    }, 60000)
+    }, 60_000)
 
     if (immediate) {
       execute()

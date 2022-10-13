@@ -38,6 +38,7 @@ export const AVERAGE_BLOCK_TIME = {
 
 export const SOULSWAP_URI: { [chainId in ChainId]?: string } = {
   [ChainId.FANTOM]: 'https://api.soulswap.finance',
+  [ChainId.AVALANCHE]: 'https://avax-api.soulswap.finance',
 }
 
 // export const COMMON_CONTRACT_NAMES: { [address: string]: string } = {

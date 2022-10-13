@@ -15,7 +15,6 @@ import { SOUL } from '../../../constants'
 
 export function useUserInfo(farm, token) {
   const { account } = useActiveWeb3React()
-
   const contract = useSummonerContract()
 
   const args = useMemo(() => {
@@ -34,27 +33,6 @@ export function useUserInfo(farm, token) {
 
   return amount ? CurrencyAmount.fromRawAmount(token, amount) : undefined
 }
-
-// export function useUserInfo(farm, token) {
-//   const { account } = useActiveWeb3React()
-
-//   const contract = useSummonerContract(farm.chef)
-
-//   const args = useMemo(() => {
-//     if (!account) {
-//       return
-//     }
-//     return [String(farm.id), String(account)]
-//   }, [farm, account])
-
-//   const result = useSingleCallResult(args ? contract : null, 'userInfo', args)?.result
-
-//   const value = result?.[0]
-
-//   const amount = value ? JSBI.BigInt(value.toString()) : undefined
-
-//   return amount ? CurrencyAmount.fromRawAmount(token, amount) : undefined
-// }
 
 export function usePendingSoul(farm) {
   const { account, chainId } = useActiveWeb3React()
@@ -110,14 +88,7 @@ export function useChefPositions(contract?: Contract | null, rewarder?: Contract
   }, [numberOfPools, account])
 
   const pendingSoul = useSingleContractMultipleData(args ? contract : null, 'pendingSoul', args)
-
   const userInfo = useSingleContractMultipleData(args ? contract : null, 'userInfo', args)
-
-  // const pendingTokens = useSingleContractMultipleData(
-  //     rewarder,
-  //     'pendingTokens',
-  //     args.map((arg) => [...arg, '0'])
-  // )
 
   return useMemo(() => {
     if (!pendingSoul || !userInfo) {
@@ -215,19 +186,19 @@ const useAsync = (asyncFunction, immediate = true) => {
   // Call execute if we want to fire it right away.
   // Otherwise execute can be called later, such as
   // in an onClick handler.
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      execute()
-    }, 60000)
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     execute()
+  //   }, 60000)
 
-    if (immediate) {
-      execute()
-    }
+  //   if (immediate) {
+  //     execute()
+  //   }
 
-    return () => {
-      clearInterval(intervalId) // This is important
-    }
-  }, [execute, immediate])
+  //   return () => {
+  //     clearInterval(intervalId) // This is important
+  //   }
+  // }, [execute, immediate])
 
   return useMemo(() => {
     return value

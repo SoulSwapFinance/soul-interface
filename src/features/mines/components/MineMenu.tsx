@@ -81,9 +81,6 @@ const MineMenu = () => {
       // ) : (
       //   <MenuLink onClick={toggleWalletModal} label={i18n._(t`Deposited`)} />
       // ),
-      // [FarmFilter.Staking]: (
-      //   <MenuLink href={'/seance'} label={i18n._(t`Staking`)} />
-      // ),
       // [FarmFilter.Lending]: (
       //   <MenuLink href={'/mines?filter=lending'} label={i18n._(t`Lending`)} />
       // ),

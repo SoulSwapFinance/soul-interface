@@ -66,14 +66,6 @@ const MineHeader: FC<MineHeaderProps> = ({ input, output, search }) => {
             {i18n._(t`SOUL`)}
           </a>
         </NavLink>
-        {/* <NavLink
-          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
-          href={"/seance"}
-          >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`STAKE`)}
-          </a>
-        </NavLink> */}
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
           href={"/mines?filter=inactive"}
