@@ -42,13 +42,6 @@ const Bonds = () => {
           <meta key="description" name="description" content="Mint SOUL" />
         </Head>
         <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
-        <Button variant="filled" color="purple" size="lg" className={chainId == ChainId.FANTOM ? '' : 'hidden'}>
-          <ExternalLink href={'https://archived.soulswap.finance'}>
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Archive </span>
-            </a>
-          </ExternalLink>
-        </Button>
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/summoner'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">

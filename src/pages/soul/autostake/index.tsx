@@ -206,13 +206,6 @@ export default function AutoStake() {
             </a>
           </NavLink>
         </Button>
-        <Button variant="filled" color="purple" size="lg"  className={classNames([ChainId.FANTOM].includes(chainId) ? '' : 'hidden')}>
-          <ExternalLink href={'https://archived.soulswap.finance'}>
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Archive </span>
-            </a>
-          </ExternalLink>
-        </Button>
       </div>
       <DoubleGlowShadowV2>
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
