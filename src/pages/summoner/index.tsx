@@ -23,6 +23,7 @@ import { getChainColorCode } from 'constants/chains'
 import { useTokenInfo } from 'hooks/useAPI'
 import ExternalLink from 'components/ExternalLink'
 import { SubmitButton } from 'features/bond/Styles'
+import { i18n } from '@lingui/core'
 
 const Summoner = () => {
   const { chainId } = useActiveWeb3React()
@@ -129,12 +130,14 @@ const Summoner = () => {
         }
       <DoubleGlowShadowV2 opacity="0.6">
         <Container id="farm-page">
-      {/* <SubmitButton
+       <div        
+      className={chainId == ChainId.FANTOM ? 'mb-4' : 'hidden'}
+      >
+        <SubmitButton
         height= "2rem"
         primaryColor={"#6F1BD9"} 
         // color={"purple"}
         size="lg"
-        className={chainId == ChainId.FANTOM ? 'mb-4' : 'hidden'}
         >
         <ExternalLink 
           href = "https://archived.soulswap.finance" 
@@ -145,8 +148,9 @@ const Summoner = () => {
           <span> Migrate from Here: Archived Farms </span>
         </a>
         </ExternalLink>
-      </SubmitButton> */}
-          <br />
+      </SubmitButton>
+      </div> 
+          {/* <br /> */}
           <Head>
             <title>Farm | Soul</title>
             <meta key="description" name="description" content="Farm" />
