@@ -199,7 +199,7 @@ export const AUTO_STAKE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x083423C61B9373050e62E2A6Ec170e663F9c7BFa',
+  [ChainId.FANTOM]: '0xb844360d6CF54ed63FBA8C5aD06Cb00d4bdf46E0',
   [ChainId.FANTOM_TESTNET]: '',
   [ChainId.AVALANCHE]: '0x5647Ed56e3781D490182fcEaf090f9b43c7322c3', // V2
   // [ChainId.AVALANCHE]: '0xD191F9C5Bd60c9b2239E321C37a2397269170D61',
@@ -308,7 +308,7 @@ export const CHANT_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x083423C61B9373050e62E2A6Ec170e663F9c7BFa',
+  [ChainId.FANTOM]: '0xb844360d6CF54ed63FBA8C5aD06Cb00d4bdf46E0',
   [ChainId.FANTOM_TESTNET]: '',
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
@@ -394,7 +394,7 @@ export const AURA_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xf4253A709733CdD8568542bD9eb4029516a0147A',
+  [ChainId.FANTOM]: '0x07Df38A48dCab8fe52c57fBE5dEAe7f2C7613972',
   [ChainId.FANTOM_TESTNET]: '',
   [ChainId.AVALANCHE]: '0xe7E8C78DAb7Cf3112b6E8EE6FbF3b429D96D2222', // V2
   // [ChainId.AVALANCHE]: '0x385cC4Ce661a32891919153676efd4E208AAc3Bc', // SEP22

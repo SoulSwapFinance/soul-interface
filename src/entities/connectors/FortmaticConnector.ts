@@ -37,7 +37,7 @@ export class FortmaticConnector extends FortmaticConnectorCore {
           this.emit(OVERLAY_READY)
           resolve()
         }
-      }, 200)
+      }, 1_000)
     })
 
     const [account] = await Promise.all([

@@ -171,19 +171,19 @@ const useAsync = (asyncFunction, immediate = true) => {
   // Call execute if we want to fire it right away.
   // Otherwise execute can be called later, such as
   // in an onClick handler.
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      execute()
-    }, 60000)
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     execute()
+  //   }, 60000)
 
-    if (immediate) {
-      execute()
-    }
+  //   if (immediate) {
+  //     execute()
+  //   }
 
-    return () => {
-      clearInterval(intervalId) //This is important
-    }
-  }, [execute, immediate])
+  //   return () => {
+  //     clearInterval(intervalId) //This is important
+  //   }
+  // }, [execute, immediate])
 
   return value
 }
