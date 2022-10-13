@@ -82,11 +82,9 @@ const Summoner = () => {
       </div>
       }
       { showBalances &&
-        <TridentHeader className="sm:!flex-row justify-center items-center bg-transparent" pattern="bg-bubble">
-          <div>
-          </div>
-          <div className={`flex items-center justify-between px-2 py-2`}>
-            <div className="flex gap-2">
+        // <TridentHeader className="sm:!flex-row justify-center items-center" pattern="bg-bubble">
+        // <div>
+            <div className="flex justify-center gap-2 mb-4">
               <Button
                 color={getChainColorCode(chainId)}
                 className="text-emphasis"
@@ -121,12 +119,10 @@ const Summoner = () => {
                 variant={'outlined'}
                 size={"sm"}
               >
-                {/* {'TOTAL: '} */}
                 {formatNumberScale(summTvl, true)} {' '} TOTAL
               </Button>
             </div>
-          </div>
-          </TridentHeader>
+          /* // </TridentHeader> */
         }
       <DoubleGlowShadowV2 opacity="0.6">
         <Container id="farm-page">

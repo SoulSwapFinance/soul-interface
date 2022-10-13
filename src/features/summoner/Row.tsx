@@ -268,11 +268,11 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                 parsedDepositValue?.quotient.toString()
             )
             await tx.wait()
-            console.log('depositing: %s:', parsedDepositValue)
+            // console.log('depositing: %s:', parsedDepositValue)
         } catch (e) {
             const tx = await SoulSummonerContract?.deposit(pid,
-                Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
-            console.log('depositing: %s:', depositValue)
+                Number(depositValue).toString(assetDecimals).toBigNumber(assetDecimals))
+            // console.log('depositing: %s:', depositValue)
             await tx.wait()
             // alert(e.message)
             console.log(e)
@@ -287,7 +287,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
             await tx.wait()
         } catch (e) {
             const tx = await SoulSummonerContract?.withdraw(pid,
-                Number(withdrawValue).toFixed(assetDecimals).toBigNumber(assetDecimals)
+                Number(withdrawValue).toString(assetDecimals).toBigNumber(assetDecimals)
             )
             // alert(e.message)
             console.log(e)
