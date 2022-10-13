@@ -284,7 +284,7 @@ export default function TokenStatsModal(): JSX.Element | null {
                       Farms
                     </Typography>
                     <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      {formatNumberScale(farmTVL - stakedTvl, true)}
+                      {formatNumberScale(farmTVL, true)}
                     </Typography>
                   </div>
                   {/* <div className="flex items-center justify-between">
