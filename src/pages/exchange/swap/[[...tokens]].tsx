@@ -51,6 +51,7 @@ import NavLink from 'components/NavLink'
 import { WrappedCrossChainTrade } from 'rubic-sdk/lib/features/cross-chain/providers/common/models/wrapped-cross-chain-trade'
 import { sleep } from 'features/crosschain/utils'
 import { getLastExchange } from 'utils/rubic/hooks'
+import Analytics from 'components/Analytics'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -75,6 +76,7 @@ const Swap = () => {
   }, [])
 
   const [showChart, setShowChart] = useState(false)
+  const [showData, setShowData] = useState(false)
 
   // dismiss warning if all imported tokens are in active lists
   const importTokensNotInDefault =
@@ -689,8 +691,26 @@ const Swap = () => {
                   </NavLink>
                 </Button>
               </div>
-        { [ChainId.FANTOM].includes(chainId) &&
+        <div className={classNames(chainId == ChainId.FANTOM ? "flex justify-between" 
+          : chainId == ChainId.AVALANCHE ? "flex justify-end" : "hidden" )}>
         <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
+          <Toggle
+            id="toggle-button"
+            optionA="Data"
+            optionB="Data"
+            isActive={showData}
+            toggle={
+              showData
+                ? () => {
+                  setShowData(false)
+                }
+                : () => {
+                  setShowData(true)
+                }
+            }
+          />
+        </div>
+        <div className={classNames(chainId == ChainId.FANTOM ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}>
           <Toggle
             id="toggle-button"
             optionA="Chart"
@@ -707,12 +727,7 @@ const Swap = () => {
             }
           />
         </div>
-        }
-        {!showChart &&
-          <>
-            <div className="flex mt-3" /><SocialWidget />
-          </>
-        }
+          </div>
         { showChart && [ChainId.FANTOM].includes(chainId) &&
           <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
             <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
@@ -720,7 +735,17 @@ const Swap = () => {
             </div>
           </div>
         }
-      </SwapLayoutCard>
+        { showData && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+          <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
+            <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
+              <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+            </div>
+          </div>
+        }
+      {(!showChart && !showData) &&
+           <SocialWidget />
+        }
+        </SwapLayoutCard>
         }
     </>
   )

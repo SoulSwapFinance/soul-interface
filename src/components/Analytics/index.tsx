@@ -98,12 +98,12 @@ const fillCandlestickGaps = (candleData: NumericalCandlestickDatum[], candlePeri
   return formattedCandleData
 }
 
-interface ChartProps {
+interface AnalyticsProps {
   inputCurrency: Currency | Token | undefined
   outputCurrency: Currency | Token | undefined
 }
 
-export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
+export default function Analytics({ inputCurrency, outputCurrency }: AnalyticsProps) {
   // const [candlePeriod, setCandlePeriod] = useState(CandlePeriod.OneHour)
   const { chainId } = useActiveWeb3React()
   const [candlestickSeries, setCandlestickSeries] = useState<{ data: NumericalCandlestickDatum[] }[]>([{ data: [] }])
@@ -295,8 +295,8 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
         {inputCurrency?.isToken ?
           <iframe
             frameBorder={"none"}
-            // src={`https://${blockchainPrefix}.soulswap.finance/pair/${pairAddress}`}
-            src={`https://kek.tools/t/${inputCurrency?.address}/chart?pair=${pairAddress}&accent=7B48BE`}
+            src={`https://${blockchainPrefix}.soulswap.finance/pair/${pairAddress}`}
+            // src={`https://kek.tools/t/${inputCurrency?.address}/chart?pair=${pairAddress}&accent=7B48BE`}
             height={"480"}
             width={"100%"}
           />
@@ -305,16 +305,16 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
             // outputCurrency?.isNative ?
             <iframe
               frameBorder={"none"}
-              // src={`https://${blockchainPrefix}.soulswap.finance/pair/${pairAddress}`}
-              src={`https://kek.tools/t/${outputCurrency?.address}/chart?currencyType=native&pair=${pairAddress}&accent=7B48BE`}
+              src={`https://${blockchainPrefix}.soulswap.finance/pair/${pairAddress}`}
+              // src={`https://kek.tools/t/${outputCurrency?.address}/chart?currencyType=native&pair=${pairAddress}&accent=7B48BE`}
               height={"480"}
               width={"100%"}
             />
             :
             <iframe
             frameBorder={"none"}
-            // src={`https://${blockchainPrefix}.soulswap.finance/pair/0x6da1ad717c7577aab46c19ab6d3d9c31aff32a00`}
-            src={'https://kek.tools/t/0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83/chart?&accent=B026FF'}
+            src={`https://${blockchainPrefix}.soulswap.finance/pair/0x6da1ad717c7577aab46c19ab6d3d9c31aff32a00`}
+            // src={'https://kek.tools/t/0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83/chart?&accent=B026FF'}
             height={"480"}
             width={"100%"}
           />
