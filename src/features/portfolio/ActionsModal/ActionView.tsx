@@ -44,7 +44,7 @@ const ActionView: FC<ActionViewProps> = ({ onClose }) => {
       <HeadlessUiModal.Header header={i18n._(t`Available Actions`)} onClose={onClose} />
       <ActionItem
         svg={<SwitchHorizontalIcon width={24} />}
-        label={i18n._(t`Swap ${currency?.symbol}`)}
+        label={i18n._(t`Swap ${currency?.isNative ? NATIVE[chainId].symbol : currency?.symbol}`)}
         onClick={swapActionHandler}
       />
       {/*@ts-ignore TYPE NEEDS FIXING*/}
@@ -52,12 +52,13 @@ const ActionView: FC<ActionViewProps> = ({ onClose }) => {
         <>
           <ActionItem
             svg={<CoffinboxIcon width={20} height={20} />}
-            label={i18n._(t`Deposit ${currency?.wrapped.symbol} to CoffinBox`)}
+            label={i18n._(t`Deposit to CoffinBox`)}
             onClick={() => dispatch(setBalancesActiveModal(ActiveModal.DEPOSIT))}
           />
           <ActionItem
             svg={<WalletIcon width={20} height={20} />}
-            label={i18n._(t`Withdraw ${currency?.wrapped.symbol} to Wallet`)}
+            label={i18n._(t`Withdraw ${currency?.isNative ? NATIVE[chainId].symbol : currency?.wrapped.symbol} to Wallet`)}
+            label={i18n._(t`Withdraw to Wallet`)}
             onClick={() => dispatch(setBalancesActiveModal(ActiveModal.WITHDRAW))}
           />
         </>
