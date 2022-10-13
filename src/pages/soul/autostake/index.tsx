@@ -19,7 +19,7 @@ import Dots from 'components/Dots'
 import { useActiveWeb3React } from 'services/web3/hooks'
 import NavLink from 'components/NavLink'
 import { useSoulPrice } from 'hooks/getPrices'
-import { useAutoStakeInfo, useUserAutoStakeInfo } from 'hooks/useAPI'
+import { useAutoStakeInfo, useTokenInfo, useUserAutoStakeInfo } from 'hooks/useAPI'
 import { SubmitButton } from 'features/autostake/Styles'
 import ExternalLink from 'components/ExternalLink'
 
@@ -30,8 +30,7 @@ export default function AutoStake() {
   const [withdrawValue, setWithdrawValue] = useState('0')
   const parsedDepositValue = tryParseAmount(stakeValue, SOUL[chainId])
   const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[chainId])
-
-  const soulPrice = useSoulPrice()
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
   const AutoStakeContract = useAutoStakeContract()
 
   const soulToken = new Token(chainId, getAddress(SOUL_ADDRESS[chainId]), 18, 'SOUL')
