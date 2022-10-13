@@ -107,7 +107,7 @@ export const FarmList = () => {
 
   return (
     <div>
-      <Button
+      {/* <Button
         height="2rem"
         variant="bordered" 
         color={"purple"} 
@@ -116,7 +116,7 @@ export const FarmList = () => {
         <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
           <span> Harvest All </span>
         </a>
-      </Button>
+      </Button> */}
 
       <div className="flex ml-2 mt-2 mr-2 mb-4 gap-1 items-center justify-center">
         <Button variant="filled" 
