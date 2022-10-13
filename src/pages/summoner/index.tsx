@@ -140,7 +140,7 @@ const Summoner = () => {
         size="lg"
         >
         <ExternalLink 
-          href = "https://archived.soulswap.finance" 
+          href = "https://archived.soulswap.finance/farms" 
           target = "_blank" 
           rel="noreferrer"
         >
