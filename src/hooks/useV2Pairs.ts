@@ -1,4 +1,4 @@
-import { AVAX_ADDRESS, ChainId, computePairAddress, Currency, CurrencyAmount, Pair, SOUL, SOUL_ADDRESS, SUMMONER_ADDRESS, Token, WETH_ADDRESS, WNATIVE_ADDRESS } from '../sdk'
+import { AVAX_ADDRESS, ChainId, computePairAddress, Currency, CurrencyAmount, LUX_ADDRESS, Pair, SOUL, SOUL_ADDRESS, SUMMONER_ADDRESS, Token, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from '../sdk'
 import ISoulSwapPair from '../constants/abis/soulswap/ISoulSwapPair.json'
 import { Interface } from '@ethersproject/abi'
 import { useMemo } from 'react'
@@ -11,7 +11,7 @@ import { useActiveWeb3React } from 'services/web3'
 import { SOUL_BOND_ADDRESS } from 'sdk'
 import { BONDS } from 'constants/bonds'
 import { useFantomPrice, useLuxorPrice, useSeancePrice, useSoulPrice, useWrappedEthPrice, useWrappedLumPrice } from './getPrices'
-import { useTokenInfo } from './useAPI'
+import { useBondInfo, useTokenInfo } from './useAPI'
 
 const PAIR_INTERFACE = new Interface(ISoulSwapPair)
 
@@ -224,7 +224,8 @@ export function useTVL(): TVLInfo[] {
   const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId]).tokenInfo.price)
   const seancePrice = useSeancePrice()
   const luxPrice = useLuxorPrice()
-  const wethPrice = useWrappedEthPrice()
+  const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId]).tokenInfo.price)
+  const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId]).tokenInfo.price)
 
   const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
     return { ...POOLS[chainId][key], lpToken: key }
@@ -253,6 +254,8 @@ export function useTVL(): TVLInfo[] {
         token.symbol == 'LUX' ||
         token.symbol == 'WAVAX' ||
         token.symbol == 'AVAX' ||
+        token.symbol == 'WBTC' ||
+        token.symbol == 'BTC' ||
         token.symbol == 'SEANCE' ||
         token.symbol == 'USDC' ||
         token.symbol == 'USDT' ||
@@ -273,14 +276,20 @@ export function useTVL(): TVLInfo[] {
       if (token.symbol == 'WAVAX' || token.symbol == 'AVAX') {
         return avaxPrice
       }
+      if (token.symbol == 'WBTC' || token.symbol == 'BTC') {
+        return wbtcPrice
+      }
       if (token.symbol == 'SEANCE') {
         return seancePrice
       }
       if (token.symbol == 'LUX') {
         return luxPrice
       }
-      if (token.symbol == 'WETH') {
+      if (token.symbol == 'WETH' || token.symbol == 'ETH') {
         return wethPrice
+      }
+      if (token.symbol == 'WBTC' || token.symbol == 'BTC') {
+        return wbtcPrice
       }
       if (
         token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI' ||
@@ -374,7 +383,8 @@ export function useBondTVL(): TVLInfo[] {
   const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
   const seancePrice = useSeancePrice()
   const luxPrice = useLuxorPrice()
-  const wethPrice = useWrappedEthPrice()
+  const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId]).tokenInfo.price)
+  const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId]).tokenInfo.price)
   const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId]).tokenInfo.price)
 
   const bondingPools = Object.keys(BONDS[chainId]).map((key) => {
@@ -388,8 +398,7 @@ export function useBondTVL(): TVLInfo[] {
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
   const totalSupply = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'totalSupply')
   const bondBalance = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_BOND_ADDRESS[chainId],
-  ])
+    SOUL_BOND_ADDRESS[chainId]])
 
   return useMemo(() => {
     function isKnownToken(token: TokenInfo) {
@@ -398,16 +407,14 @@ export function useBondTVL(): TVLInfo[] {
         token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' ||
         token.symbol == 'FTM' ||
-        token.symbol == 'AVAX' ||
-        token.symbol == 'WAVAX' ||
+        token.symbol == 'AVAX' || token.symbol == 'WAVAX' ||
         token.symbol == 'LUX' ||
         token.symbol == 'SEANCE' ||
-        token.symbol == 'USDC' ||
-        token.symbol == 'USDT' ||
-        token.symbol == 'FUSDT' ||
-        token.symbol == 'MIM' ||
+        token.symbol == 'USDC' ||  token.symbol == 'USDT' ||
+        token.symbol == 'FUSDT' || token.symbol == 'MIM' ||
         token.symbol == 'DAI' ||
-        token.symbol == 'WETH'
+        token.symbol == 'WETH' || token.symbol == 'ETH' ||
+        token.symbol == 'WBTC' || token.symbol == 'BTC'
       )
     }
 
@@ -427,8 +434,11 @@ export function useBondTVL(): TVLInfo[] {
       if (token.symbol == 'LUX') {
         return luxPrice
       }
-      if (token.symbol == 'WETH') {
+      if (token.symbol == 'WETH' || token.symbol == 'ETH') {
         return wethPrice
+      }
+      if (token.symbol == 'WBTC' || token.symbol == 'BTC') {
+        return wbtcPrice
       }
       if (
         token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI' ||
@@ -486,6 +496,8 @@ export function useBondTVL(): TVLInfo[] {
     chainId,
     soulPrice,
     ftmPrice,
+    wbtcPrice,
+    wethPrice,
     seancePrice,
     totalSupply,
     bondBalance,
@@ -499,10 +511,11 @@ export function useSoulTVL(): TVLInfo[] {
   const ftmPrice = useFantomPrice()
   const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
   const seancePrice = useSeancePrice()
-  const luxPrice = useLuxorPrice()
-  const wethPrice = useWrappedEthPrice()
+  const luxPrice = Number(useTokenInfo(LUX_ADDRESS[chainId]).tokenInfo.price)
+  const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId]).tokenInfo.price)
   const wlumPrice = useWrappedLumPrice()
   const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId]).tokenInfo.price)
+  const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId]).tokenInfo.price)
 
   const liquidityPools = Object.keys(POOLS[chainId]).map((key) => {
     return { ...POOLS[chainId][key], lpToken: key }
@@ -516,10 +529,10 @@ export function useSoulTVL(): TVLInfo[] {
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
   const totalSupply = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'totalSupply')
   const daoBalance = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_DAO_ADDRESS[ChainId.FANTOM],
+    SOUL_DAO_ADDRESS[chainId],
   ])
   const daoBalanceSingle = useMultipleContractSingleData(singleAddresses, PAIR_INTERFACE, 'balanceOf', [
-    SOUL_DAO_ADDRESS[ChainId.FANTOM],
+    SOUL_DAO_ADDRESS[chainId],
   ])
 
   return useMemo(() => {
@@ -538,7 +551,9 @@ export function useSoulTVL(): TVLInfo[] {
         token.symbol == 'FUSDT' ||
         token.symbol == 'MIM' ||
         token.symbol == 'DAI' ||
-        token.symbol == 'WETH'
+        token.symbol == 'WETH' || token.symbol == 'ETH' ||
+        token.symbol == 'WBTC' || token.symbol == 'BTC'
+
       )
     }
 
@@ -564,6 +579,9 @@ export function useSoulTVL(): TVLInfo[] {
       }
       if (token.symbol == 'WETH' || token.symbol == "ETH") {
         return wethPrice
+      }
+      if (token.symbol == 'WBTC' || token.symbol == "BTC") {
+        return wbtcPrice
       }
       if (
         token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI' ||
@@ -625,6 +643,7 @@ export function useSoulTVL(): TVLInfo[] {
     seancePrice,
     luxPrice,
     wethPrice,
+    wbtcPrice,
     totalSupply,
     daoBalanceSingle,
     lpPools,
@@ -769,12 +788,13 @@ export function useV2PairsWithPrice(
   currencies: [Currency | undefined, Currency | undefined][]
 ): [PairState, Pair | null, number][] {
   const { chainId } = useActiveWeb3React()
-  const ftmPrice = useFantomPrice()
-  const soulPrice = useSoulPrice()
+  const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[ChainId.FANTOM]).tokenInfo.price) // only on FTM and ETH
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
   const seancePrice = useSeancePrice()
   const luxPrice = useLuxorPrice()
-  const wethPrice = useWrappedEthPrice()
+  const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId]).tokenInfo.price)
   const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId]).tokenInfo.price)
+  const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId]).tokenInfo.price)
 
   const tokens = useMemo(
     () => currencies.map(([currencyA, currencyB]) => [currencyA?.wrapped, currencyB?.wrapped]),
@@ -809,6 +829,7 @@ export function useV2PairsWithPrice(
         token.symbol == 'WFTM' || token.symbol == 'FTM' || 
         token.symbol == 'WAVAX' || token.symbol == 'AVAX' || 
         token.symbol == 'WETH' || token.symbol == 'ETH' ||
+        token.symbol == 'WBTC' || token.symbol == 'BTC' ||
         token.symbol == 'USDC' || token.symbol == 'USDT' || 
         token.symbol == 'DAI' || token.symbol == 'LUX' 
         || token.symbol == 'WLUM' 
@@ -827,6 +848,9 @@ export function useV2PairsWithPrice(
       }
       if (token.symbol == 'WETH' || token.symbol == 'ETH') {
         return wethPrice
+      }
+      if (token.symbol == 'WBTC' || token.symbol == 'BTC') {
+        return wbtcPrice
       }
       if (token.symbol == 'SEANCE') {
         return seancePrice

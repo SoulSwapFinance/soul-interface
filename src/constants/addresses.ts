@@ -184,7 +184,7 @@ export const SOUL_DAO_ADDRESS: AddressMap = {
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x1C63C726926197BD3CB75d86bCFB1DaeBcD87250',
   [ChainId.FANTOM_TESTNET]: '',
-  [ChainId.AVALANCHE]: '',
+  [ChainId.AVALANCHE]: '0xf551D88fE8fae7a97292d28876A0cdD49dC373fa',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
   [ChainId.MOONRIVER]: '',
