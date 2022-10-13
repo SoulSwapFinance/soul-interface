@@ -101,7 +101,7 @@ export const POOLS: AddressMap = {
     },
     '0x5796Bf89f6C7C47811E4E59Ecd7aCACC8A5B9dEF': {
       id: 5,
-      address: ETH_NATIVE[ChainId.AVALANCHE],
+      address: WETH_NATIVE[ChainId.AVALANCHE],
       token0: {
         id: WNATIVE_ADDRESS[ChainId.AVALANCHE],
         name: 'Wrapped Avalanche',
@@ -146,65 +146,71 @@ export const POOLS: AddressMap = {
         symbol: 'USDC',
         decimals: 6,
       },
-  
-    // '': {
-    //   id: 8,
-    //   address: SOUL_USDC[ChainId.AVALANCHE],
-    //   token0: {
-    //     id: SOUL_ADDRESS[ChainId.AVALANCHE],
-    //     name: 'Soul Power',
-    //     symbol: 'SOUL',
-    //     decimals: 18
-    //   },
-    //   token1: {
-    //     id: USDC_ADDRESS[ChainId.AVALANCHE],
-    //     name: 'USD Coin',
-    //     symbol: 'USDC',
-    //     decimals: 6,
-    //   },
-    // },
-    
-    /* TODO: add lending pools {
-    // LENDING
-    pid: 8,
-    token0Symbol: 'AVAX', // EXEMPT //
-    token1Symbol: 'USDC',
-    lpSymbol: 'USDC-AVAX', // EXEMPT //
-    lpAddress: '0xa34fe600E6349d67fcd6989A9c4007b5ee5A494B',
-    token0Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
-    token1Address: USDC_ADDRESS[ChainId.AVALANCHE],
-  },
-  {
-    // LENDING
-    pid: 9,
-    token0Symbol: 'USDC', // EXEMPT //
-    token1Symbol: 'AVAX',
-    lpSymbol: 'AVAX-USDC', // EXEMPT //
-    lpAddress: '0x7ef603f01Ffa9D21c9ee8159AF4adFbE78DC925B',
-    token0Address: USDC_ADDRESS[ChainId.AVALANCHE],
-    token1Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
-  },
-  {
-    // LENDING
-    pid: 10,
-    token0Symbol: 'ETH', // EXEMPT //
-    token1Symbol: 'USDC',
-    lpSymbol: 'USDC-ETH', // EXEMPT //
-    lpAddress: '0xD981D3e065bA8E89Ac56DB994D86F22dA409cf20',
-    token0Address: WETH_ADDRESS[ChainId.AVALANCHE],
-    token1Address: USDC_ADDRESS[ChainId.AVALANCHE],
-  },
-  {
-    // LENDING
-    pid: 11,
-    token0Symbol: 'BTC', // EXEMPT //
-    token1Symbol: 'USDC',
-    lpSymbol: 'USDC-BTC', // EXEMPT //
-    lpAddress: '0x142c9eE960bB6AD872f22712C4b129783999c35E',
-    token0Address: WBTC_ADDRESS[ChainId.AVALANCHE],
-    token1Address: USDC_ADDRESS[ChainId.AVALANCHE],
-  }, */
-  
+    },      
+    '0xa34fe600E6349d67fcd6989A9c4007b5ee5A494B': {
+      id: 8,
+      address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+      token0: {
+        id: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+        name: 'Avalanche',
+        symbol: 'AVAX',
+        decimals: 18,
+      },
+      token1: {
+        id: USDC_ADDRESS[ChainId.AVALANCHE],
+        name: 'USD Coin',
+        symbol: 'USDC',
+        decimals: 6,
+      },
+    },
+    '0x7ef603f01Ffa9D21c9ee8159AF4adFbE78DC925B': {
+      id: 9,
+      address: USDC_ADDRESS[ChainId.AVALANCHE],
+      token0: {
+        id: USDC_ADDRESS[ChainId.AVALANCHE],
+        name: 'USD Coin',
+        symbol: 'USDC',
+        decimals: 6,
+      },
+      token1: {
+        id: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+        name: 'Avalanche',
+        symbol: 'AVAX',
+        decimals: 18,
+      },
+    }, 
+    '0xD981D3e065bA8E89Ac56DB994D86F22dA409cf20': {
+      id: 10,
+      address: WETH_ADDRESS[ChainId.AVALANCHE],
+      token0: {
+        id: WETH_ADDRESS[ChainId.AVALANCHE],
+        name: 'Wrapped Ethereum',
+        symbol: 'WETH',
+        decimals: 18,
+      },
+      token1: {
+        id: USDC_ADDRESS[ChainId.AVALANCHE],
+        name: 'USD Coin',
+        symbol: 'USDC',
+        decimals: 6,
+      },
+    },
+    '0x142c9eE960bB6AD872f22712C4b129783999c35E': {
+      id: 11,
+      address: WBTC_ADDRESS[ChainId.AVALANCHE],
+      token0: {
+        id: WBTC_ADDRESS[ChainId.AVALANCHE],
+        name: 'Wrapped Bitcoin',
+        symbol: 'WBTC',
+        decimals: 8,
+      },
+      token1: {
+        id: USDC_ADDRESS[ChainId.AVALANCHE],
+        name: 'USD Coin',
+        symbol: 'USDC',
+        decimals: 6,
+      },
+    },
   },
   [ChainId.FANTOM]: {
     '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07': {
