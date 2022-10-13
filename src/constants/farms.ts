@@ -516,5 +516,5 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
     },
-  },
+  }, 
 }
