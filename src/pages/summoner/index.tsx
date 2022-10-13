@@ -13,7 +13,7 @@ import { usePositions } from 'features/mines/hooks'
 import { useSummonerContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
 import { TridentHeader } from 'layouts/Trident'
-import {  formatNumberScale } from 'functions'
+import { formatNumberScale } from 'functions'
 import { Button } from 'components/Button'
 import { addTransaction } from 'state/transactions/actions'
 import { XIcon } from '@heroicons/react/solid'
@@ -21,6 +21,8 @@ import { ChainId, SOUL_ADDRESS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 import { getChainColorCode } from 'constants/chains'
 import { useTokenInfo } from 'hooks/useAPI'
+import ExternalLink from 'components/ExternalLink'
+import { SubmitButton } from 'features/bond/Styles'
 
 const Summoner = () => {
   const { chainId } = useActiveWeb3React()
@@ -152,6 +154,25 @@ const Summoner = () => {
         <Container id="farm-page">
             {/* <TwitterBanner chainId={chainId} /> */}
             {/* {<HarvestAll/>} */}
+      <SubmitButton
+        height= "2rem"
+        // variant="outlined" 
+        primaryColor={"#6F1BD9"} 
+        // color={"purple"} 
+        // color={getChainColorCode(chainId)} 
+        size="lg"
+        // className={chainId == ChainId.AVALANCHE ? 'mb-4' : 'hidden'}
+        >
+        <ExternalLink 
+          href = "https://archived.soulswap.finance" 
+          target = "_blank" 
+          rel="noreferrer"
+        >
+        <a className="block text-md font-bold md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+          <span> Click Here: Unstake from Archived Farms </span>
+        </a>
+        </ExternalLink>
+      </SubmitButton>
           <br />
           <Head>
             <title>Farm | Soul</title>
