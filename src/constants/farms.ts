@@ -101,7 +101,7 @@ export const POOLS: AddressMap = {
     },
     '0x5796Bf89f6C7C47811E4E59Ecd7aCACC8A5B9dEF': {
       id: 5,
-      address: WETH_NATIVE[ChainId.AVALANCHE],
+      address: ETH_NATIVE[ChainId.AVALANCHE],
       token0: {
         id: WNATIVE_ADDRESS[ChainId.AVALANCHE],
         name: 'Wrapped Avalanche',
