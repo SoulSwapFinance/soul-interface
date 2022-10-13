@@ -71,7 +71,7 @@ const Summoner = () => {
 
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
-      {showBalances && [ChainId.FANTOM].includes(chainId) &&
+      {showBalances &&
       <div className={`flex flex-row text-${getChainColorCode(chainId)} justify-end`}>
         <XIcon
           height="24px"
@@ -129,7 +129,7 @@ const Summoner = () => {
         }
       <DoubleGlowShadowV2 opacity="0.6">
         <Container id="farm-page">
-      <SubmitButton
+      {/* <SubmitButton
         height= "2rem"
         primaryColor={"#6F1BD9"} 
         // color={"purple"}
@@ -145,7 +145,7 @@ const Summoner = () => {
           <span> Migrate from Here: Archived Farms </span>
         </a>
         </ExternalLink>
-      </SubmitButton>
+      </SubmitButton> */}
           <br />
           <Head>
             <title>Farm | Soul</title>
