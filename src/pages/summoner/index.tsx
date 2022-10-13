@@ -80,7 +80,7 @@ const Summoner = () => {
         />
       </div>
       }
-      {showBalances && [ChainId.FANTOM].includes(chainId) &&
+      { showBalances &&
         <TridentHeader className="sm:!flex-row justify-center items-center bg-transparent" pattern="bg-bubble">
           <div>
           </div>
@@ -94,30 +94,7 @@ const Summoner = () => {
               >
                 {formatNumberScale(allStaked, true)} {' STAKED'}
               </Button>
-              {positions.length > 0 && [ChainId.FANTOM].includes(chainId) && (
-                <Button
-                  color={getChainColorCode(chainId)}
-                  className="text-emphasis"
-                  variant="flexed"
-                  size={"sm"}
-                  disabled={pendingTx}
-                  onClick={async () => {
-                    setPendingTx(true)
-                    for (const pos of positions) {
-                      try {
-                        const tx = await harvest(parseInt(pos.id))
-                        addTransaction(tx)
-                      } catch (error) {
-                        console.error(error)
-                      }
-                    }
-                    setPendingTx(false)
-                  }}
-                >
-                  CLAIM ALL {formatNumberScale(pendingValue, true)}
-                </Button>
-              )}
-              {positions.length > 0 && [ChainId.AVALANCHE].includes(chainId) && (
+              { positions.length > 0 && (
                 <Button
                   color={getChainColorCode(chainId)}
                   className="text-emphasis"
@@ -152,16 +129,12 @@ const Summoner = () => {
         }
       <DoubleGlowShadowV2 opacity="0.6">
         <Container id="farm-page">
-            {/* <TwitterBanner chainId={chainId} /> */}
-            {/* {<HarvestAll/>} */}
       <SubmitButton
         height= "2rem"
-        // variant="outlined" 
         primaryColor={"#6F1BD9"} 
-        // color={"purple"} 
-        // color={getChainColorCode(chainId)} 
+        // color={"purple"}
         size="lg"
-        // className={chainId == ChainId.AVALANCHE ? 'mb-4' : 'hidden'}
+        className={chainId == ChainId.FANTOM ? 'mb-4' : 'hidden'}
         >
         <ExternalLink 
           href = "https://archived.soulswap.finance" 
@@ -169,7 +142,7 @@ const Summoner = () => {
           rel="noreferrer"
         >
         <a className="block text-md font-bold md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-          <span> Click Here: Unstake from Archived Farms </span>
+          <span> Migrate from Here: Archived Farms </span>
         </a>
         </ExternalLink>
       </SubmitButton>
