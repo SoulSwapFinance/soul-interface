@@ -58,7 +58,6 @@ const ActionView: FC<ActionViewProps> = ({ onClose }) => {
           <ActionItem
             svg={<WalletIcon width={20} height={20} />}
             label={i18n._(t`Withdraw ${currency?.isNative ? NATIVE[chainId].symbol : currency?.wrapped.symbol} to Wallet`)}
-            label={i18n._(t`Withdraw to Wallet`)}
             onClick={() => dispatch(setBalancesActiveModal(ActiveModal.WITHDRAW))}
           />
         </>

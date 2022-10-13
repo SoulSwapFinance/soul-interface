@@ -19,38 +19,7 @@ export const InactiveAvalanchePools = [
   // }
 ]
 
-export const InactiveFantomPools = [
-  {
-    // 0
-    pid: 16,
-    token0Symbol: 'DAI',
-    token1Symbol: 'gFUSDT',
-    lpSymbol: 'DAI-gFUSDT',
-    lpAddress: '0xe637D90A993EDBD75AC09E9fcB16313D193B9451',
-    token0Address: DAI_ADDRESS[ChainId.FANTOM], 
-    token1Address: '0x940F41F0ec9ba1A34CF001cc03347ac092F5F6B5', // gFUSDT,
-  },
-  {
-    // 0
-    pid: 6,
-    token0Symbol: 'USDC',
-    token1Symbol: 'FUSD',
-    lpSymbol: 'USDC-FUSD',
-    lpAddress: '0xD5F5E2638d636A98eD4aAEBfd2045441316e0c08',
-    token0Address: USDC_ADDRESS[ChainId.FANTOM],
-    token1Address: FUSD_ADDRESS[ChainId.FANTOM],
-  },
-  {
-    // 0
-    pid: 9,
-    token0Symbol: 'USDC',
-    token1Symbol: 'USDT',
-    lpSymbol: 'USDC-USDT',
-    lpAddress: '0x298c12d6d9d6746dd0ef0a89421288f52d5566ef',
-    token0Address: USDC_ADDRESS[ChainId.FANTOM],
-    token1Address: USDT_ADDRESS[ChainId.FANTOM],
-  },
-]
+export const InactiveFantomPools = []
 
 export const AvalanchePools = [
   {
