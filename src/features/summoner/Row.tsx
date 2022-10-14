@@ -619,7 +619,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     <FarmInputPanel
                                         pid={farm.pid}
                                         onUserInput={(value) => setDepositValue(value)}
-                                        onMax={() => setDepositValue(walletBalance.toFixed(assetDecimals))}
+                                        onMax={() => setDepositValue(walletBalance.toString())}
                                         value={depositValue}
                                         balance={walletBalance.toString()}
                                         // balance={balance.toString()}
