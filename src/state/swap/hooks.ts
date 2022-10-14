@@ -89,7 +89,7 @@ export function useSwapActionHandlers(): {
 }
 
 // TODO: Switch for ours...
-const BAD_RECIPIENT_ADDRESSES: { [chainId: string]: { [address: string]: true } } = {
+export const BAD_RECIPIENT_ADDRESSES: { [chainId: string]: { [address: string]: true } } = {
   [ChainId.ETHEREUM]: {
     '0x794d858b0b152fb68a5CE465451D729EFfA67f08': true, // v2 factory
     '0x2a8B48a8B8a8a8E4a184280333c418BcdcE72dE9': true, // v2 router 02

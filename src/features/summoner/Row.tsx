@@ -26,6 +26,7 @@ import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import { getChainColor } from 'constants/chains'
 import { ExternalLink } from 'components/ReusableStyles'
 import { BriefcaseIcon, CollectionIcon, CurrencyDollarIcon, DatabaseIcon, PlusIcon, SparklesIcon } from '@heroicons/react/outline'
+import { useCurrencyBalance } from 'state/wallet/hooks'
 
 const HideOnSmall = styled.div`
 @media screen and (max-width: 900px) {
@@ -70,7 +71,10 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const lpAddress = summonerPoolInfo.lpAddress
     const pairStatus = summonerPoolInfo.status
 
+    // pair types //
     const isUnderworldPair = pairType == "lend"
+    const isSwapPair = pairType == "swap"
+
     // const { userInfo } = useUserInfo()
     const { pairInfo } = usePairInfo(lpAddress)
     // assumes 18, since only SOUL-LP farms are eligible for Zap   
@@ -105,7 +109,6 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     // const parsedBalance = tryParseAmount(walletBalance.toString(), farm.lpToken)
     // const userBalance = useCurrencyBalance(account, lpToken)
     const hasBalance = Number(walletBalance) > 0
-    const isSwapPair = pairType == "swap"
     const isActive = pairStatus == "active"
     const assetToken = new Token(chainId, farm.lpAddress, decimals)
 
@@ -616,9 +619,10 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     <FarmInputPanel
                                         pid={farm.pid}
                                         onUserInput={(value) => setDepositValue(value)}
-                                        onMax={() => setDepositValue(walletBalance.toString())}
+                                        onMax={() => setDepositValue(walletBalance.toFixed(assetDecimals))}
                                         value={depositValue}
-                                        balance={balance.toString()}
+                                        balance={walletBalance.toString()}
+                                        // balance={balance.toString()}
                                         id={pid}
                                     />
                                 }
