@@ -19,6 +19,7 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
+      decimals={farm.decimals}
       pairType={farm.type}
       lpToken={farm.lpAddress}
       token0Symbol={farm.token0Symbol}
@@ -33,6 +34,7 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
+      decimals={farm.decimals}
       pairType={farm.type}
       lpToken={farm.lpAddress}
       token0Symbol={farm.token0Symbol}
@@ -47,6 +49,7 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
+      decimals={farm.decimals}
       pairType={farm.type}
       lpToken={farm.lpAddress}
       token0Symbol={farm.token0Symbol}
@@ -59,8 +62,9 @@ export const FarmList = () => {
 
   const avaxLendList = AvalancheLendingPools.map((farm) => (
     <ActiveRow
-      key={farm.pid}
+      key={farm.pid} 
       pid={farm.pid}
+      decimals={farm.decimals}
       pairType={farm.type}
       lpToken={farm.lpAddress}
       token0Symbol={farm.token0Symbol}
@@ -75,6 +79,7 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
+      decimals={farm.decimals}
       pairType={farm.type}
       lpToken={farm.lpAddress}
       token0Symbol={farm.token0Symbol}
@@ -89,6 +94,7 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
+      decimals={farm.decimals}
       pairType={farm.type}
       lpToken={farm.lpAddress}
       token0Symbol={farm.token0Symbol}
