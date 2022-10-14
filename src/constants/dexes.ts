@@ -9,15 +9,10 @@ export const DEX_TO_COMPARE: { [chainId in ChainId]?: string } = {
   [ChainId.ARBITRUM]: 'sushiswap',
 }
 
-export const kyberswapDexes = [
+export const soulswapDexes = [
   {
-    name: 'KyberSwap Elastic',
-    id: 'kyberswapv2',
-    logoURL: 'https://kyberswap.com/favicon.ico',
-  },
-  {
-    name: 'KyberSwap Classic',
-    id: 'kyberswapv1',
-    logoURL: 'https://kyberswap.com/favicon.ico',
+    name: 'SoulSwap',
+    id: 'soulswap',
+    logoURL: 'https://soulswap.finance/favicon.ico',
   },
 ]

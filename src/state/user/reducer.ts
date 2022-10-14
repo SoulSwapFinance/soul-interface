@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit'
-import { DEFAULT_DEADLINE_FROM_NOW, INITIAL_ALLOWED_SLIPPAGE } from '../../constants'
+import { COMMON_BASES, DEFAULT_DEADLINE_FROM_NOW, INITIAL_ALLOWED_SLIPPAGE } from '../../constants' // SUGGESTED_BASES
 import { updateVersion } from 'state/global/actions'
 
 import {
@@ -19,7 +19,8 @@ import {
   updateUserSlippageTolerance,
   updateUserUseOpenMev,
 } from './actions'
-
+import { ChainId } from 'sdk'
+// getFavoriteTokenDefault
 const currentTimestamp = () => new Date().getTime()
 
 export interface UserState {
@@ -54,14 +55,25 @@ export interface UserState {
   }
 
   timestamp: number
+  showLiveCharts: {
+    [chainId: number]: boolean
+  }
   userDarkMode: boolean | null // the user's choice for dark mode or light mode
   matchesDarkMode: boolean // whether the dark mode media query matches
 
   URLWarningVisible: boolean
 }
 
-function pairKey(token0Address: string, token1Address: string) {
-  return `${token0Address};${token1Address}`
+export const defaultShowLiveCharts: { [chainId in ChainId]: boolean } = {
+  [ChainId.ETHEREUM]: true,
+  [ChainId.TELOS]: false,
+  [ChainId.MATIC]: false,
+  [ChainId.BSC]: false,
+  [ChainId.AVALANCHE]: true,
+  [ChainId.FANTOM]: true,
+  [ChainId.FANTOM_TESTNET]: false,
+  [ChainId.MOONRIVER]: false,
+  [ChainId.ARBITRUM]: false
 }
 
 export const initialState: UserState = {
@@ -73,11 +85,22 @@ export const initialState: UserState = {
   tokens: {},
   pairs: {},
   timestamp: currentTimestamp(),
+  showLiveCharts: { ...defaultShowLiveCharts },
   userDarkMode: null,
   matchesDarkMode: false,
   URLWarningVisible: true,
   userUseOpenMev: true,
 }
+
+function pairKey(token0Address: string, token1Address: string) {
+  return `${token0Address};${token1Address}`
+}
+
+export const getFavoriteTokenDefault = (chainId: ChainId) => ({
+  addresses: COMMON_BASES[chainId].map(e => e.address),
+  // addresses: SUGGESTED_BASES[chainId].map(e => e.address),
+  includeNativeToken: true,
+})
 
 export default createReducer(initialState, (builder) =>
   builder

@@ -23,6 +23,7 @@ import {
   TridentTrade,
   Trade as LegacyTrade,
   TradeType,
+  Trade,
 } from 'sdk'
 import { getBigNumber, MultiRoute } from 'sdk/tines'
 import { EIP_1559_ACTIVATION_BLOCK } from '../constants'
@@ -88,6 +89,7 @@ interface TridentTradeContext {
 }
 
 export type EstimatedSwapCall = SuccessfulCall | FailedCall
+export type AnyTrade = Trade<Currency, Currency, TradeType>  // | ProAmmTrade<Currency, Currency, TradeType>
 
 export function getTridentRouterParams(
   multiRoute: MultiRoute,

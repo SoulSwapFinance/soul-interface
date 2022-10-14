@@ -1,5 +1,6 @@
 import { ChainId, JSBI, Percent, USD } from '../sdk'
 import { binance, clover, injected, walletconnect } from '../connectors'
+import { v4 as uuid } from 'uuid'
 
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { BigNumber } from 'ethers'
@@ -23,11 +24,17 @@ export const RPC = {
 }
 
 export const POOL_DENY = []
+export const SOULSWAP_SOURCE = '{"source":"soulswap"}'
+export const sentryRequestId = uuid()
 
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
 export const AVERAGE_BLOCK_TIME_IN_SECS = 1
 
-export const ZERO_USD = CurrencyAmount.fromRawAmount(USD[250], 0)
+export const ZERO_USD = { 
+  [ChainId.ETHEREUM]: CurrencyAmount.fromRawAmount(USD[ChainId.ETHEREUM], 0),
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(USD[ChainId.FANTOM], 0),
+  [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(USD[ChainId.AVALANCHE], 0),
+}
 
 export const AVERAGE_BLOCK_TIME = {
   [ChainId.ETHEREUM]: 12,

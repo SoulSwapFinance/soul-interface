@@ -26,6 +26,7 @@ import flatMap from 'lodash/flatMap'
 import { useCallback, useMemo } from 'react'
 import ReactGA from 'react-ga'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
+import { defaultShowLiveCharts, getFavoriteTokenDefault } from 'state/user/reducer'
 
 import {
   addSerializedPair,
@@ -136,6 +137,18 @@ export function useSetUserSlippageTolerance(): (slippageTolerance: Percent | 'au
   )
 }
 
+export function useShowLiveChart(): boolean {
+  const { chainId } = useActiveWeb3React()
+  let showLiveChart = useSelector((state: AppState) => state.user.showLiveCharts)
+  if (typeof showLiveChart?.[chainId || 1] !== 'boolean') {
+    showLiveChart = defaultShowLiveCharts
+  }
+
+  const show = showLiveChart[chainId || 1]
+
+  return !!show
+}
+
 /**
  * Return the user's slippage tolerance, from the redux store, and a function to update the slippage tolerance
  */
@@ -150,6 +163,21 @@ export function useUserSlippageTolerance(): Percent | 'auto' {
   )
 }
 
+export function useUserSlippageToleranceV2(): [number, (slippage: number) => void] {
+  const dispatch = useDispatch<AppDispatch>()
+  const userSlippageTolerance = useSelector<AppState, AppState['user']['userSlippageTolerance']>(state => {
+    return state.user.userSlippageTolerance
+  })
+
+  const setUserSlippageTolerance = useCallback(
+    (userSlippageTolerance: number) => {
+      dispatch(updateUserSlippageTolerance({ userSlippageTolerance }))
+    },
+    [dispatch],
+  )
+
+  return [Number(userSlippageTolerance), setUserSlippageTolerance]
+}
 export function useUserTransactionTTL(): [number, (slippage: number) => void] {
   const dispatch = useAppDispatch()
   const userDeadline = useSelector<AppState, AppState['user']['userDeadline']>((state) => {
@@ -374,6 +402,7 @@ export const computeUnderworldPairAddress = ({
  * @param tokenB the other token
  */
 export function toUnderworldLiquidityToken([collateral, asset]: [Token, Token]): Token {
+  // const { chainId } = useActiveWeb3React()
   if (collateral.chainId !== asset.chainId) throw new Error('Not matching chain IDs')
   if (collateral.equals(asset)) throw new Error('Tokens cannot be equal')
   if (!COFFIN_BOX_ADDRESS[collateral.chainId]) throw new Error('No CoffinBox factory address on this chain')
@@ -395,7 +424,7 @@ export function toUnderworldLiquidityToken([collateral, asset]: [Token, Token]):
       oracleData: computeOracleData(collateral, asset),
     }),
     18,
-    'KM',
+    collateral.chainId == ChainId.FANTOM ? 'KM' : 'UW',
     'Underworld Medium Risk'
   )
 }

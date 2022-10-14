@@ -1,5 +1,5 @@
 import { BigNumber } from "@ethersproject/bignumber";
-import { Currency } from "sdk";
+import { Currency, JSBI, Percent } from "sdk";
 import Notify from 'bnc-notify'
 import { ethers } from 'ethers'
 import { Pair, Token } from "sdk";
@@ -19,6 +19,12 @@ export function ASSERT(f: () => boolean, t?: string) {
     return Math.abs(a / b - 1) < accuracy;
   }
   
+// converts a basis points value to a sdk percent
+export function basisPointsToPercent(num: number): Percent {
+  return new Percent(JSBI.BigInt(num), JSBI.BigInt(10_000))
+}
+
+
   export function calcSquareEquation(
     a: number,
     b: number,

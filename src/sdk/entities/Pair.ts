@@ -13,6 +13,7 @@ import { JSBI } from 'sdk'
 export class Pair {
   public readonly liquidityToken: Token
   private readonly tokenAmounts: [CurrencyAmount<Token>, CurrencyAmount<Token>]
+    fee: any
 
   public static getAddress(tokenA: Token, tokenB: Token): string {
     return computePairAddress({
