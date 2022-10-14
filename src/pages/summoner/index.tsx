@@ -73,7 +73,9 @@ const Summoner = () => {
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
       {showBalances &&
-      <div className={`flex flex-row text-${getChainColorCode(chainId)} justify-end`}>
+      <div className={`flex flex-row 
+      text-white
+      justify-end`}>
         <XIcon
           height="24px"
           id="toggle-button"
@@ -97,7 +99,7 @@ const Summoner = () => {
                 <Button
                   color={getChainColorCode(chainId)}
                   className="text-emphasis"
-                  variant="flexed"
+                  variant="outlined"
                   size={"sm"}
                   disabled={pendingTx}
                   onClick={async () => {
