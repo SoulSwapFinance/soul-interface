@@ -25,7 +25,7 @@ export const AvalanchePools = [
   },
   {
     pid: 2,
-    type: 'swap'
+    type: 'swap',
     decimals: 18,
     token0Symbol: 'SOUL',
     token1Symbol: 'USDC',
