@@ -69,14 +69,14 @@ module.exports = withBundleAnalyzer(
         },        
         {
           source: '/mine',
-          destination: '/summoner',
+          destination: '/mines',
           permanent: true,
         },
-        {
+        /* {
           source: '/mines',
-          destination: '/summoner',
+          destination: '/mones',
           permanent: true,
-        },
+        }, */
         {
           source: '/bond',
           destination: '/bonds',
@@ -182,10 +182,10 @@ module.exports = withBundleAnalyzer(
           source: '/farms',
           destination: '/summoner',
         },
-        {
+        /* {
           source: '/mines',
           destination: '/summoner',
-        },
+        }, */
         {
           source: '/autostake',
           destination: '/soul/autostake',
