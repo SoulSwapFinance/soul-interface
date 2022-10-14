@@ -7,23 +7,15 @@ import { ChainId, SOUL_ADDRESS, USDC_ADDRESS, LUX_ADDRESS, WLUM_ADDRESS, WNATIVE
 
 // take note of exemptions (usually in lending) //
 
-export const InactiveAvalanchePools = [
-  // { 
-  //   pid: undefined,
-  //   token0Symbol: undefined,
-  //   token1Symbol: undefined,
-  //   lpSymbol: undefined,
-  //   lpAddress: '',
-  //   token0Address: '', 
-  //   token1Address: '', 
-  // }
-]
+export const InactiveAvalanchePools = []
 
 export const InactiveFantomPools = []
 
 export const AvalanchePools = [
   {
     pid: 1,
+    type: 'swap',
+    decimals: 18,
     token0Symbol: 'WAVAX',
     token1Symbol: 'SOUL',
     lpSymbol: 'AVAX-SOUL',
@@ -33,6 +25,8 @@ export const AvalanchePools = [
   },
   {
     pid: 2,
+    type: 'swap'
+    decimals: 18,
     token0Symbol: 'SOUL',
     token1Symbol: 'USDC',
     lpSymbol: 'SOUL-USDC',
@@ -42,6 +36,8 @@ export const AvalanchePools = [
   },
   {
     pid: 3,
+    type: 'swap',
+    decimals: 18,
     token0Symbol: 'WAVAX',
     token1Symbol: 'USDC',
     lpSymbol: 'AVAX-USDC',
@@ -51,6 +47,8 @@ export const AvalanchePools = [
   },
   {
     pid: 4,
+    type: 'swap',
+    decimals: 18,
     token0Symbol: 'WAVAX',
     token1Symbol: 'BTC',
     lpSymbol: 'AVAX-BTC',
@@ -60,6 +58,8 @@ export const AvalanchePools = [
   },
   {
     pid: 5,
+    type: 'swap',
+    decimals: 18,
     token0Symbol: 'WAVAX',
     token1Symbol: 'ETH',
     lpSymbol: 'AVAX-ETH',
@@ -69,6 +69,8 @@ export const AvalanchePools = [
   },
   {
     pid: 6,
+    type: 'swap',
+    decimals: 18,
     token0Symbol: 'WAVAX',
     token1Symbol: 'BNB',
     lpSymbol: 'AVAX-BNB',
@@ -78,6 +80,8 @@ export const AvalanchePools = [
   },
   {
     pid: 7,
+    type: 'swap',
+    decimals: 18,
     token0Symbol: 'DAI',
     token1Symbol: 'USDC',
     lpSymbol: 'DAI-USDC',
@@ -91,6 +95,8 @@ export const AvalancheLendingPools = [
   {
     // LENDING
     pid: 8,
+    type: 'lend',
+    decimals: 18,
     token0Symbol: 'AVAX', // EXEMPT //
     token1Symbol: 'USDC',
     lpSymbol: 'USDC-AVAX', // EXEMPT //
@@ -101,6 +107,8 @@ export const AvalancheLendingPools = [
   {
     // LENDING
     pid: 9,
+    type: 'lend',
+    decimals: 6,
     token0Symbol: 'USDC', // EXEMPT //
     token1Symbol: 'AVAX',
     lpSymbol: 'AVAX-USDC', // EXEMPT //
@@ -111,6 +119,8 @@ export const AvalancheLendingPools = [
   {
     // LENDING
     pid: 10,
+    type: 'lend',
+    decimals: 18,
     token0Symbol: 'ETH', // EXEMPT //
     token1Symbol: 'USDC',
     lpSymbol: 'USDC-ETH', // EXEMPT //
@@ -121,6 +131,8 @@ export const AvalancheLendingPools = [
   {
     // LENDING
     pid: 11,
+    type: 'lend',
+    decimals: 8,
     token0Symbol: 'BTC', // EXEMPT //
     token1Symbol: 'USDC',
     lpSymbol: 'USDC-BTC', // EXEMPT //
@@ -134,6 +146,8 @@ export const AvalancheLendingPools = [
 export const FantomPools = [
   { // 1,200
     pid: 1,
+    type: 'swap',
+    decimals: 18,
     token0Symbol: 'WFTM',
     token1Symbol: 'SOUL',
     lpSymbol: 'FTM-SOUL',
@@ -143,6 +157,8 @@ export const FantomPools = [
   },
   { // 800
     pid: 2,
+    type: 'swap',
+    decimals: 18,
     token0Symbol: 'SOUL',
     token1Symbol: 'USDC',
     lpSymbol: 'SOUL-USDC',
@@ -152,6 +168,8 @@ export const FantomPools = [
   },
   { // 600 
     pid: 3,
+    type: 'swap',
+    decimals: 18,
     token0Symbol: 'WFTM',
     token1Symbol: 'USDC',
     lpSymbol: 'FTM-USDC',
@@ -161,6 +179,8 @@ export const FantomPools = [
   },
   { // 600
     pid: 4,
+    type: 'swap',
+    decimals: 18,
     token0Symbol: 'WFTM',
     token1Symbol: 'BTC',
     lpSymbol: 'FTM-BTC',
@@ -170,6 +190,8 @@ export const FantomPools = [
   },
   { // 600
     pid: 5,
+    type: 'swap',
+    decimals: 18,
     token0Symbol: 'WFTM',
     token1Symbol: 'ETH',
     lpSymbol: 'FTM-ETH',
@@ -179,6 +201,8 @@ export const FantomPools = [
   },
   { // 600
     pid: 6,
+    type: 'swap',
+    decimals: 18,
     token0Symbol: 'WFTM',
     token1Symbol: 'BNB',
     lpSymbol: 'FTM-BNB',
@@ -188,6 +212,8 @@ export const FantomPools = [
   },
   { // 600
     pid: 7,
+    type: 'swap',
+    decimals: 18,
     token0Symbol: 'WFTM',
     token1Symbol: 'AVAX',
     lpSymbol: 'FTM-AVAX',
@@ -197,6 +223,8 @@ export const FantomPools = [
   },
   { // 600
     pid: 8,
+    type: 'swap',
+    decimals: 18,
     token0Symbol: 'WFTM',
     token1Symbol: 'DAI',
     lpSymbol: 'FTM-DAI',
@@ -206,6 +234,8 @@ export const FantomPools = [
   },
   { // 300
     pid: 9,
+    type: 'swap',
+    decimals: 18,
     token0Symbol: 'WETH',
     token1Symbol: 'BTC',
     lpSymbol: 'ETH-BTC',
@@ -215,6 +245,8 @@ export const FantomPools = [
   },
   { // 200
     pid: 10,
+    type: 'swap',
+    decimals: 18,
     token0Symbol: 'WFTM',
     token1Symbol: 'EVO',
     lpSymbol: 'FTM-EVO',
@@ -224,6 +256,8 @@ export const FantomPools = [
   },
   { // 200
     pid: 11,
+    type: 'swap',
+    decimals: 18,
     token0Symbol: 'WETH',
     token1Symbol: 'USDC',
     lpSymbol: 'ETH-USDC',
@@ -233,6 +267,8 @@ export const FantomPools = [
   },
   { // 200
     pid: 12,
+    type: 'swap',
+    decimals: 18,
     token0Symbol: 'BTC',
     token1Symbol: 'USDC',
     lpSymbol: 'BTC-USDC',
@@ -242,6 +278,8 @@ export const FantomPools = [
   },
   { // 200
     pid: 16,
+    type: 'swap',
+    decimals: 18,
     token0Symbol: 'WFTM',
     token1Symbol: 'WLUM',
     lpSymbol: 'FTM-WLUM',
@@ -254,6 +292,8 @@ export const FantomPools = [
 export const FantomLendingPools = [
   { // LENDING
     pid: 13,
+    type: 'lend',
+    decimals: 18,
     token0Symbol: 'FTM', // EXEMPT //
     token1Symbol: 'DAI',
     lpSymbol: 'DAI-FTM', // EXEMPT //
@@ -263,6 +303,8 @@ export const FantomLendingPools = [
   },
   { // LENDING
     pid: 14,
+    type: 'lend',
+    decimals: 18,
     token0Symbol: 'DAI',
     token1Symbol: 'FTM', // EXEMPT //
     lpSymbol: 'FTM-DAI',
@@ -272,7 +314,9 @@ export const FantomLendingPools = [
   },
   { // LENDING
     pid: 17,
-    token0Symbol: 'WETH',
+    type: 'lend',
+    decimals: 18,
+    token0Symbol: 'ETH',
     token1Symbol: 'DAI',
     lpSymbol: 'DAI-ETH',
     lpAddress: '0x9fA5de19495331E13b443F787B90CdD22B32263d',
@@ -281,6 +325,8 @@ export const FantomLendingPools = [
   },
   { // LENDING
     pid: 18,
+    type: 'lend',
+    decimals: 8,
     token0Symbol: 'BTC',
     token1Symbol: 'DAI',
     lpSymbol: 'DAI-BTC',
@@ -290,6 +336,8 @@ export const FantomLendingPools = [
   },
   { // LENDING
     pid: 15,
+    type: 'lend',
+    decimals: 18,
     token0Symbol: 'BNB',
     token1Symbol: 'DAI',
     lpSymbol: 'DAI-BNB',

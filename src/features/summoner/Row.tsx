@@ -44,7 +44,7 @@ const TokenPairLink = styled(ExternalLink)`
   padding-left: 10;
 `
 
-export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, token0Address, token1Address }) => {
+export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol, token1Symbol, token0Address, token1Address }) => {
     const { account, chainId, library } = useActiveWeb3React()
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
 
@@ -68,20 +68,15 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const apr = summonerPoolInfo.apr
     const allocPoint = summonerPoolInfo.allocPoint
     const lpAddress = summonerPoolInfo.lpAddress
-    const pairType = summonerPoolInfo.pairType
     const pairStatus = summonerPoolInfo.status
 
-    const isUnderworldPair = pairType == "underworld"
+    const isUnderworldPair = pairType == "lend"
     // const { userInfo } = useUserInfo()
     const { pairInfo } = usePairInfo(lpAddress)
     // assumes 18, since only SOUL-LP farms are eligible for Zap   
     const token0Decimals = Number(pairInfo.token0Decimals)
     const token1Decimals = Number(pairInfo.token1Decimals)
-    // BTC has 8 decimals
-    const assetDecimals
-        = isUnderworldPair && token0Symbol == 'BTC' ? 8 :
-            isUnderworldPair && token0Symbol == 'USDC' ? 6 :
-                Number(pairInfo.pairDecimals)
+    const assetDecimals = decimals
 
     const [showOptions, setShowOptions] = useState(false)
     const [openDeposit, setOpenDeposit] = useState(false)
@@ -110,9 +105,12 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     // const parsedBalance = tryParseAmount(walletBalance.toString(), farm.lpToken)
     // const userBalance = useCurrencyBalance(account, lpToken)
     const hasBalance = Number(walletBalance) > 0
-    const isSwapPair = pairType == "farm"
+    const isSwapPair = pairType == "swap"
     const isActive = pairStatus == "active"
-    const assetToken = new Token(chainId, farm.lpAddress, assetDecimals)
+    const assetToken = new Token(chainId, farm.lpAddress, decimals)
+
+  const balance = useCurrencyBalance(account ?? undefined, assetToken)
+  
     const parsedDepositValue = tryParseAmount(depositValue, assetToken)
     const parsedWithdrawValue = tryParseAmount(withdrawValue, assetToken)
 
@@ -620,7 +618,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                         onUserInput={(value) => setDepositValue(value)}
                                         onMax={() => setDepositValue(walletBalance.toString())}
                                         value={depositValue}
-                                        balance={walletBalance.toString()}
+                                        balance={balance.toString()}
                                         id={pid}
                                     />
                                 }
