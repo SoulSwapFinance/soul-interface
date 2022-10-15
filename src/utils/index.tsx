@@ -7,7 +7,7 @@ import { TokenAddressMap } from "state/lists/hooks";
 export * from './tools/axios'
 export * from './tools/getPrice'
 export * from './tools/rate'
-
+import Numeral from 'numeral'
 
 export function ASSERT(f: () => boolean, t?: string) {
     if (!f() && t) console.error(t);
@@ -24,7 +24,15 @@ export function basisPointsToPercent(num: number): Percent {
   return new Percent(JSBI.BigInt(num), JSBI.BigInt(10_000))
 }
 
+export const toK = (num: string) => {
+  return Numeral(num).format('0.[00]a')
+}
 
+export const toKInChart = (num: string, unit?: string) => {
+  if (parseFloat(num) < 0.0000001) return `< ${unit ?? ''}0.0000001`
+  if (parseFloat(num) >= 0.1) return (unit ?? '') + Numeral(num).format('0.[00]a')
+  return (unit ?? '') + Numeral(num).format('0.[0000000]a')
+}
   export function calcSquareEquation(
     a: number,
     b: number,

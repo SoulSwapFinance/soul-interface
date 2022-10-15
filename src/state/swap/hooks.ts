@@ -39,7 +39,8 @@ import { Field,
   resetSelectCurrency,
   chooseToSaveGas,
   setTrade,
-  switchCurrencies, 
+  switchCurrencies,
+  switchCurrenciesV2,
   typeInput } from './actions'
 import { SwapState } from './reducer'
 import { useCurrencyBalances } from 'state/wallet/hooks'
@@ -53,6 +54,7 @@ export function useSwapState(): AppState['swap'] {
 export function useSwapActionHandlers(): {
   onCurrencySelection: (field: Field, currency: Currency) => void
   onSwitchTokens: () => void
+  onSwitchTokensV2: () => void
   onUserInput: (field: Field, typedValue: string) => void
   onChangeRecipient: (recipient?: string | null) => void
   onChooseToSaveGas: (saveGas: boolean) => void
@@ -90,6 +92,10 @@ export function useSwapActionHandlers(): {
     dispatch(switchCurrencies())
   }, [dispatch])
 
+  const onSwitchTokensV2 = useCallback(() => {
+    dispatch(switchCurrenciesV2())
+  }, [dispatch])
+
   const onUserInput = useCallback(
     (field: Field, typedValue: string) => {
       dispatch(typeInput({ field, typedValue }))
@@ -120,6 +126,7 @@ export function useSwapActionHandlers(): {
 
   return {
     onSwitchTokens,
+    onSwitchTokensV2,
     onCurrencySelection,
     onUserInput,
     onChangeRecipient,
