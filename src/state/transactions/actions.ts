@@ -19,6 +19,7 @@ export const addTransaction = createAction<{
   approval?: { tokenAddress: string; spender: string }
   claim?: { recipient: string }
   summary?: string
+  arbitrary?: any
   archer?: {
     rawTransaction: string
     deadline: number

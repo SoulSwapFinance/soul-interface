@@ -12,6 +12,7 @@ import {
 const now = () => new Date().getTime()
 
 export interface TransactionDetails {
+  arbitrary: any // To store anything arbitrary, so it has any type
   hash: string
   approval?: { tokenAddress: string; spender: string }
   summary?: string
@@ -31,7 +32,7 @@ export const initialState: TransactionState = {}
 
 export default createReducer(initialState, (builder) =>
   builder
-    .addCase(addTransaction, (transactions, { payload: { chainId, from, hash, approval, summary, claim } }) => {
+    .addCase(addTransaction, (transactions, { payload: { chainId, from, hash, approval, summary, claim, arbitrary } }) => {
       if (transactions[chainId]?.[hash]) {
         throw Error('Attempted to add existing transaction.')
       }
@@ -41,6 +42,7 @@ export default createReducer(initialState, (builder) =>
         approval,
         summary,
         claim,
+        arbitrary,
         from,
         addedTime: now(),
       }

@@ -23,6 +23,8 @@ export const RPC = {
   [ChainId.ARBITRUM]: 'https://arb1.arbitrum.io/rpc',
 }
 
+export const COINGECKO_API_URL = 'https://api.coingecko.com/api/v3'
+export const SOUL_COINGECKO_ID = 'soul-swap'
 export const POOL_DENY = []
 export const SOULSWAP_SOURCE = '{"source":"soulswap"}'
 export const sentryRequestId = uuid()

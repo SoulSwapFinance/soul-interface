@@ -18,12 +18,20 @@ import {
   updateUserSingleHopOnly,
   updateUserSlippageTolerance,
   updateUserUseOpenMev,
+  toggleLiveChart,
+  toggleProLiveChart,
+  toggleTokenInfo,
+  toggleTopTrendingTokens,
 } from './actions'
 import { ChainId } from 'sdk'
 // getFavoriteTokenDefault
 const currentTimestamp = () => new Date().getTime()
 
 export interface UserState {
+  showProLiveChart: boolean
+  showTradeRoutes: boolean
+  showTokenInfo: boolean
+  showTopTrendingSoonTokens: boolean
   // the timestamp of the last updateVersion action
   lastUpdateVersionTimestamp?: number
 
@@ -90,6 +98,10 @@ export const initialState: UserState = {
   matchesDarkMode: false,
   URLWarningVisible: true,
   userUseOpenMev: true,
+  showTokenInfo: false,
+  showProLiveChart: false,
+  showTradeRoutes: false,
+  showTopTrendingSoonTokens: false
 }
 
 function pairKey(token0Address: string, token1Address: string) {
@@ -182,5 +194,20 @@ export default createReducer(initialState, (builder) =>
     })
     .addCase(updateUserUseOpenMev, (state, action) => {
       state.userUseOpenMev = action.payload.userUseOpenMev
+    })
+    .addCase(toggleLiveChart, (state, { payload: { chainId } }) => {
+      if (typeof state.showLiveCharts?.[chainId] !== 'boolean') {
+        state.showLiveCharts = { ...defaultShowLiveCharts }
+      }
+      state.showLiveCharts[chainId] = !state.showLiveCharts[chainId]
+    })
+    .addCase(toggleProLiveChart, state => {
+      state.showProLiveChart = !state.showProLiveChart
+    })
+    .addCase(toggleTokenInfo, state => {
+      state.showTokenInfo = !state.showTokenInfo
+    })
+    .addCase(toggleTopTrendingTokens, state => {
+      state.showTopTrendingSoonTokens = !state.showTopTrendingSoonTokens
     })
 )

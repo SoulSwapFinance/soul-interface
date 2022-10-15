@@ -36,6 +36,7 @@ import {
   SerializedPair,
   SerializedToken,
   toggleURLWarning,
+  toggleLiveChart,
   updateUserDeadline,
   updateUserExpertMode,
   updateUserCrossChainMode,
@@ -43,6 +44,7 @@ import {
   updateUserSlippageTolerance,
   updateUserUseOpenMev,
   updateUserDarkMode,
+  toggleProLiveChart,
 } from './actions'
 import { PairState, usePairs } from 'data/Reserves'
 
@@ -147,6 +149,35 @@ export function useShowLiveChart(): boolean {
   const show = showLiveChart[chainId || 1]
 
   return !!show
+}
+export function useShowProLiveChart(): boolean {
+  const showProLiveChart = useSelector((state: AppState) => state.user.showProLiveChart)
+  return showProLiveChart
+}
+
+export function useShowTradeRoutes(): boolean {
+  const showTradeRoutes = useSelector((state: AppState) => state.user.showTradeRoutes)
+  return showTradeRoutes
+}
+
+export function useShowTokenInfo(): boolean {
+  return useSelector((state: AppState) => state.user.showTokenInfo) ?? true
+}
+
+export function useShowTopTrendingSoonTokens(): boolean {
+  const showTrendingSoon = useSelector((state: AppState) => state.user.showTopTrendingSoonTokens)
+  return showTrendingSoon ?? true
+}
+
+export function useToggleLiveChart(): () => void {
+  const dispatch = useDispatch<AppDispatch>()
+  const { chainId } = useActiveWeb3React()
+  return useCallback(() => dispatch(toggleLiveChart({ chainId: chainId || 1 })), [dispatch, chainId])
+}
+
+export function useToggleProLiveChart(): () => void {
+  const dispatch = useDispatch<AppDispatch>()
+  return useCallback(() => dispatch(toggleProLiveChart()), [dispatch])
 }
 
 /**
@@ -547,3 +578,4 @@ export function useDarkModeManager(): [boolean, () => void] {
 
   return [darkMode, toggleSetDarkMode]
 }
+

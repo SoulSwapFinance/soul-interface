@@ -35,6 +35,11 @@ export const addSerializedPair = createAction<{
 }>('user/addSerializedPair')
 export const removeSerializedPair = createAction<{ serializedPair: SerializedPair }>('user/removeSerializedPair')
 export const toggleURLWarning = createAction<void>('app/toggleURLWarning')
+export const toggleTokenInfo = createAction<void>('user/toggleTokenInfo')
+export const toggleLiveChart = createAction<{ chainId: number }>('user/toggleLiveChart')
+export const toggleTopTrendingTokens = createAction<void>('user/toggleTopTrendingTokens')
+export const toggleProLiveChart = createAction<void>('user/toggleProLiveChart')
+
 export const updateUserUseOpenMev = createAction<{
   userUseOpenMev: boolean
 }>('user/updateUserUseOpenMev')
