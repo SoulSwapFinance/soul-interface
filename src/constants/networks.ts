@@ -1,4 +1,15 @@
 import { ChainId, WNATIVE_ADDRESS } from '../sdk'
+import { NetworkInfo } from './type'
+import {
+  arbitrum,
+  avax,
+  bsc,
+  eth,
+  ftm,
+  matic,
+} from './networks/index'
+
+type NetToChain = { [p: string]: ChainId }
 
 const Fantom = 'https://cryptologos.cc/logos/fantom-ftm-logo.svg'
 const Mainnet = 'https://cryptologos.cc/logos/ethereum-eth-logo.svg'
@@ -93,4 +104,41 @@ export const NATIVE_WRAPPED_TOKEN_ADDRESS = {
   [ChainId.FANTOM]: WNATIVE_ADDRESS[250],
   [ChainId.AVALANCHE]: WNATIVE_ADDRESS[43114],
   [ChainId.MOONRIVER]: WNATIVE_ADDRESS[1285],
+}
+
+//todo move this to NETWORKS_INFO
+export const TRUESIGHT_NETWORK_TO_CHAINID: NetToChain = {
+  eth: ChainId.ETHEREUM,
+  bsc: ChainId.BSC,
+  avax: ChainId.AVALANCHE,
+  polygon: ChainId.MATIC,
+  fantom: ChainId.FANTOM,
+}
+
+export const NETWORKS_INFO_CONFIG: { [chain in ChainId]: NetworkInfo } = {
+  [ChainId.ETHEREUM]: eth,
+    // todo: fix below
+  [ChainId.TELOS]: eth,
+  [ChainId.MATIC]: matic,
+  [ChainId.BSC]: bsc,
+  [ChainId.AVALANCHE]: avax,
+  [ChainId.FANTOM]: ftm,
+  // todo: fix below
+  [ChainId.FANTOM_TESTNET]: ftm,
+  [ChainId.ARBITRUM]: arbitrum,
+  // todo: fix below
+  [ChainId.MOONRIVER]: arbitrum,
+}
+
+//this Proxy helps fallback undefined ChainId by Ethereum info
+export const NETWORKS_INFO = new Proxy(NETWORKS_INFO_CONFIG, {
+  get(target, p) {
+    const prop = p as any as ChainId
+    if (p && target[prop]) return target[prop]
+    return target[ChainId.ETHEREUM]
+  },
+})
+
+export const chainIdMapping: Partial<Record<ChainId, string>> = {
+  [ChainId.BSC]: 'bsc',
 }
