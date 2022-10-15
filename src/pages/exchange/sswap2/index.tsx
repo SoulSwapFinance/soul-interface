@@ -1,4 +1,20 @@
-import { ChainId, Currency, CurrencyAmount, Percent, Token, USDC_ADDRESS } from 'sdk'
+// import Container from "components/Container";
+import React from "react";
+
+const SwapV2 = () => {
+	return (
+      <iframe 
+			frameBorder={"none"}
+    		title={"SwapV2"}
+    		src="https://kyberswap.com/swap"
+    		height={"900px"}
+    		width={"100%"}
+    />
+	);
+};
+export default SwapV2;
+
+/* import { ChainId, Currency, CurrencyAmount, Percent, Token, USDC_ADDRESS } from 'sdk'
 import { Trans, t } from '@lingui/macro'
 import JSBI from 'jsbi'
 import { stringify } from 'qs'
@@ -1146,4 +1162,5 @@ export default function Swap({ history }) {
       </PageWrapper>
     </>
   )
-}
+} */
+
