@@ -243,7 +243,7 @@ export const FantomPools = [
     token0Address: WETH_ADDRESS[ChainId.FANTOM],
     token1Address: WBTC_ADDRESS[ChainId.FANTOM],
   },
-  { // 200
+  /* { // 20
     pid: 10,
     type: 'swap',
     decimals: 18,
@@ -253,7 +253,7 @@ export const FantomPools = [
     lpAddress: '0x857107e8F42023F7623C7ca413811DB1853F7f4b',
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: GRIMEVO_ADDRESS[ChainId.FANTOM],
-  },
+  }, */
   { // 200
     pid: 11,
     type: 'swap',
