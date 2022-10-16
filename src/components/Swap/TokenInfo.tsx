@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { ArrowLeft } from 'react-feather'
 import { Flex } from 'rebass'
 import styled from 'styled-components'
-import Image from 'components/Image'
+
 import CoingeckoLight from 'assets/svg/coingecko-light.svg'
 import Coingecko from 'assets/svg/coingecko.svg'
 import AddTokenToMetaMask from 'components/AddToMetamask'
@@ -225,7 +225,7 @@ const TokenInfo = ({ currencies, onBack }: { currencies: { [field in Field]?: Cu
         <PoweredByText>
           <Trans>Powered by</Trans>
         </PoweredByText>{' '}
-        <Image src={darkMode ? Coingecko : CoingeckoLight} alt="Coingecko logo" />
+        <img src={darkMode ? Coingecko : CoingeckoLight} alt="Coingecko logo" />
       </PoweredByWrapper>
     </>
   )
