@@ -68,10 +68,6 @@ export function useToggleSettingsMenu(): () => void {
   return useToggleModal(ApplicationModal.SETTINGS)
 }
 
-export function useToggleTransactionSettingsMenu(): () => void {
-  return useToggleModal(ApplicationModal.TRANSACTION_SETTINGS)
-}
-
 export function useToggleCrossChainMode(): () => void {
   return useToggleModal(ApplicationModal.CROSSCHAIN)
 }

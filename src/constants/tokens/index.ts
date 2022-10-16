@@ -1,5 +1,5 @@
 import { WBTC_ADDRESS, WETH_ADDRESS } from 'constants/addresses'
-import { BNB_ADDRESS, ChainId, DAI_ADDRESS, Ether, LUX_ADDRESS, NativeCurrency, SEANCE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
+import { BNB_ADDRESS, ChainId, DAI_ADDRESS, Ether, LUX_ADDRESS, SEANCE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
 
 import { SupportedChainId } from '../chains'
 
@@ -233,5 +233,3 @@ export class ExtendedEther extends Ether {
     return new ExtendedEther(chainId)
   }
 }
-
-const cachedNativeCurrency: { [chainId: number]: NativeCurrency } = {}
