@@ -1,5 +1,5 @@
 import { ChainId, Currency, Token } from 'sdk'
-import { Trans, t } from '@lingui/macro'
+import { t } from '@lingui/macro'
 import React, { useState } from 'react'
 import { ArrowUpCircle } from 'react-feather'
 import { Text } from 'rebass'
@@ -97,7 +97,7 @@ function ConfirmationPendingContent({
         </ConfirmedIcon>
         <AutoColumn gap="12px" justify={'center'}>
           <Text fontWeight={500} fontSize={20}>
-            <Trans>Waiting For Confirmation</Trans>
+            Waiting For Confirmation
           </Text>
           <AutoColumn gap="12px" justify={'center'}>
             <Text fontWeight={600} fontSize={14} color="" textAlign="center">
@@ -105,7 +105,7 @@ function ConfirmationPendingContent({
             </Text>
           </AutoColumn>
           <Text fontSize={12} color="#565A69" textAlign="center">
-            <Trans>Confirm this transaction in your wallet</Trans>
+            Confirm this transaction in your wallet
           </Text>
         </AutoColumn>
       </Section>
@@ -151,9 +151,9 @@ function AddTokenToInjectedWallet({ token, chainId }: { token: Token; chainId: C
   return (
     <ButtonLight mt="12px" padding="6px 12px" width="fit-content" onClick={handleClick}>
       <RowFixed>
-        <Trans>
+        
           Add {token.symbol} to {walletConfig.name}
-        </Trans>{' '}
+        {' '}
         <StyledLogo
           src={require(`../../assets/images/${isDarkMode ? '' : 'light-'}${walletConfig.iconName}`).default}
         />
@@ -200,7 +200,7 @@ function TransactionSubmittedContent({
         </ConfirmedIcon>
         <AutoColumn gap="16px" justify={'center'}>
           <Text fontWeight={500} fontSize={20}>
-            <Trans>Transaction Submitted</Trans>
+            Transaction Submitted
           </Text>
           {chainId && hash && (
             <ExternalLink href={getExplorerLink(chainId, hash, 'transaction')}>
@@ -214,7 +214,7 @@ function TransactionSubmittedContent({
           )}
           <ButtonPrimary onClick={onDismiss} style={{ margin: '24px 0 0 0' }}>
             <Text fontWeight={500} fontSize={14}>
-              <Trans>Close</Trans>
+              Close
             </Text>
           </ButtonPrimary>
         </AutoColumn>
@@ -275,7 +275,7 @@ export function TransactionErrorContent({ message, onDismiss }: { message: strin
       <Section>
         <RowBetween>
           <Text fontWeight={500} fontSize={20}>
-            <Trans>Error</Trans>
+            Error
           </Text>
           <CloseIcon onClick={onDismiss} />
         </RowBetween>
@@ -309,7 +309,7 @@ export function TransactionErrorContent({ message, onDismiss }: { message: strin
       </Section>
       <BottomSection gap="12px">
         <ButtonPrimary onClick={onDismiss}>
-          <Trans>Dismiss</Trans>
+          Dismiss
         </ButtonPrimary>
       </BottomSection>
     </Wrapper>

@@ -1,6 +1,6 @@
 import { ChainId } from 'sdk'
 
-import EthereumLogo from 'assets/images/ethereum-logo.png'
+// import EthereumLogo from 'assets/images/ethereum-logo.png'
 import { SS_SETTING_API } from 'constants/env'
 import { createClient } from 'utils/client'
 
@@ -13,7 +13,7 @@ const ARBITRUM = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/maste
 const ETH = "https://cryptologos.cc/logos/ethereum-eth-logo.svg"
 
 const arbitrumInfo: NetworkInfo = {
-  chainId: ChainId.ARBITRUM,
+  chainId: 42161,
   route: 'arbitrum',
   name: 'Arbitrum',
   icon: ARBITRUM,
@@ -24,7 +24,7 @@ const arbitrumInfo: NetworkInfo = {
   blockClient: createClient('https://api.thegraph.com/subgraphs/name/kybernetwork/arbitrum-blocks'),
   etherscanUrl: 'https://arbiscan.io',
   etherscanName: 'Arbiscan',
-  tokenListUrl: `${SS_SETTING_API}/v1/tokens?chainIds=${ChainId.ARBITRUM}&isWhitelisted=${true}`,
+  tokenListUrl: `${SS_SETTING_API}/v1/tokens?chainIds=${42161}&isWhitelisted=${true}`,
   bridgeURL: 'https://bridge.arbitrum.io',
   nativeToken: {
     symbol: 'ETH',

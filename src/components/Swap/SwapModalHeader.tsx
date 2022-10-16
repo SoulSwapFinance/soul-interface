@@ -1,5 +1,5 @@
 import { TradeType } from 'sdk'
-import { Trans, t } from '@lingui/macro'
+import { t } from '@lingui/macro'
 import React, { useMemo } from 'react'
 import { AlertTriangle, ArrowDown } from 'react-feather'
 import { Text } from 'rebass'
@@ -95,7 +95,7 @@ export default function SwapModalHeader({
               style={{ padding: '.5rem', width: 'fit-content', fontSize: '0.825rem', borderRadius: '12px' }}
               onClick={onAcceptChanges}
             >
-              <Trans>Accept</Trans>
+              Accept
             </ButtonPrimary>
           </RowBetween>
         </SwapShowAcceptChanges>

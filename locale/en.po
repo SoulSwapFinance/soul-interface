@@ -85,9 +85,6 @@ msgstr "Account"
 msgid "Accrue"
 msgstr "Accrue"
 
-msgid "Active"
-msgstr "Active"
-
 msgid "Add"
 msgstr "Add"
 
@@ -183,6 +180,9 @@ msgstr "Available"
 
 msgid "Available Actions"
 msgstr "Available Actions"
+
+msgid "Average"
+msgstr "Average"
 
 msgid "Avg. APY"
 msgstr "Avg. APY"
@@ -323,9 +323,6 @@ msgstr "CoffinBox"
 msgid "CoffinBox Balances"
 msgstr "CoffinBox Balances"
 
-msgid "CoffinBox strategies can create yield for your liquidity while it is not lent out. This token does not yet have a strategy in the CoffinBox."
-msgstr "CoffinBox strategies can create yield for your liquidity while it is not lent out. This token does not yet have a strategy in the CoffinBox."
-
 msgid "Collateral"
 msgstr "Collateral"
 
@@ -359,9 +356,6 @@ msgstr "Confirm Removal"
 msgid "Confirm Remove Liquidity"
 msgstr "Confirm Remove Liquidity"
 
-msgid "Confirm Staking"
-msgstr "Confirm Staking"
-
 msgid "Confirm Supply"
 msgstr "Confirm Supply"
 
@@ -391,6 +385,9 @@ msgstr "Connect Wallet"
 
 msgid "Connect Wallet ↗"
 msgstr "Connect Wallet ↗"
+
+msgid "Connect wallet"
+msgstr "Connect wallet"
 
 msgid "Considerations"
 msgstr "Considerations"
@@ -431,9 +428,6 @@ msgstr "Current Percentage"
 msgid "Custom tokens are stored locally in your browser"
 msgstr "Custom tokens are stored locally in your browser"
 
-msgid "DEPOSIT"
-msgstr "DEPOSIT"
-
 msgid "DEPOSIT LUX"
 msgstr "DEPOSIT LUX"
 
@@ -442,6 +436,9 @@ msgstr "Dashboard"
 
 msgid "Data"
 msgstr "Data"
+
+msgid "Deadline"
+msgstr "Deadline"
 
 msgid "Deposit"
 msgstr "Deposit"
@@ -466,9 +463,6 @@ msgstr "Deposit to CoffinBox"
 
 msgid "Deposit your SOUL-LP to earn $SOUL rewards."
 msgstr "Deposit your SOUL-LP to earn $SOUL rewards."
-
-msgid "Deposit {0} to CoffinBox"
-msgstr "Deposit {0} to CoffinBox"
 
 msgid "Deposited"
 msgstr "Deposited"
@@ -524,8 +518,11 @@ msgstr "Enter Amount"
 msgid "Enter Recipient"
 msgstr "Enter Recipient"
 
-msgid "Enter a valid slippage percentage"
-msgstr "Enter a valid slippage percentage"
+msgid "Enter a recipient"
+msgstr "Enter a recipient"
+
+msgid "Enter an amount"
+msgstr "Enter an amount"
 
 msgid "Epoch Remaining"
 msgstr "Epoch Remaining"
@@ -582,6 +579,9 @@ msgstr "Explorer"
 msgid "Failed"
 msgstr "Failed"
 
+msgid "Failure Risk"
+msgstr "Failure Risk"
+
 msgid "Fantom Faucet"
 msgstr "Fantom Faucet"
 
@@ -627,18 +627,14 @@ msgstr "Forfeit"
 msgid "French"
 msgstr "French"
 
+msgid "Frontrun Risk"
+msgstr "Frontrun Risk"
+
 msgid "Gain exposure to tokens without reducing your assets. Leverage will enable you to take short positions against assets and earn from downside movements."
 msgstr "Gain exposure to tokens without reducing your assets. Leverage will enable you to take short positions against assets and earn from downside movements."
 
-msgid ""
-"Gain governance rights with SEANCE and earn 5% APR (0.05% of\n"
-"all swaps from all chains)"
-msgstr ""
-"Gain governance rights with SEANCE and earn 5% APR (0.05% of\n"
-"all swaps from all chains)"
-
-msgid "Gain governance rights with SEANCE, while earning SOUL every second."
-msgstr "Gain governance rights with SEANCE, while earning SOUL every second."
+msgid "Gas Price Tracker"
+msgstr "Gas Price Tracker"
 
 msgid "German"
 msgstr "German"
@@ -672,6 +668,9 @@ msgstr "Harvest {0} SOUL"
 
 msgid "Harvest {0}/{1}"
 msgstr "Harvest {0}/{1}"
+
+msgid "High"
+msgstr "High"
 
 msgid "Historical Total Locked: Connect Wallet"
 msgstr "Historical Total Locked: Connect Wallet"
@@ -742,17 +741,23 @@ msgstr "Insufficient {0} balance"
 msgid "Interest"
 msgstr "Interest"
 
-msgid "Interface Settings"
-msgstr "Interface Settings"
-
 msgid "Invalid Pool"
 msgstr "Invalid Pool"
 
 msgid "Invalid Recipient"
 msgstr "Invalid Recipient"
 
+msgid "Invalid Slippage"
+msgstr "Invalid Slippage"
+
+msgid "Invalid amount"
+msgstr "Invalid amount"
+
 msgid "Invalid pair"
 msgstr "Invalid pair"
+
+msgid "Invalid recipient"
+msgstr "Invalid recipient"
 
 msgid "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
 msgstr "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
@@ -840,6 +845,9 @@ msgstr "Locked Balance"
 
 msgid "Lockup"
 msgstr "Lockup"
+
+msgid "Low"
+msgstr "Low"
 
 msgid "Lower price impacts. The closer to equilibrium you interact with a pool, the lower price impact there is on your investment."
 msgstr "Lower price impacts. The closer to equilibrium you interact with a pool, the lower price impact there is on your investment."
@@ -997,9 +1005,6 @@ msgstr ""
 
 msgid "Output is estimated. If the price changes by more than {0}% your transaction will revert."
 msgstr "Output is estimated. If the price changes by more than {0}% your transaction will revert."
-
-msgid "Output is estimated. You will receive at least"
-msgstr "Output is estimated. You will receive at least"
 
 msgid "Overview"
 msgstr "Overview"
@@ -1194,17 +1199,6 @@ msgstr "Routing through these tokens resulted in the best price for your trade."
 msgid "Russian"
 msgstr "Russian"
 
-msgid ""
-"SEANCE is a receipt for your staked SOUL.\n"
-"Use SEANCE to reclaim your SOUL when you want to withdraw.\n"
-"You may trade or farm your SEANCE and risk locking your SOUL for all eternity...\n"
-"Either way, while staked, you'll earn more SOUL over time."
-msgstr ""
-"SEANCE is a receipt for your staked SOUL.\n"
-"Use SEANCE to reclaim your SOUL when you want to withdraw.\n"
-"You may trade or farm your SEANCE and risk locking your SOUL for all eternity...\n"
-"Either way, while staked, you'll earn more SOUL over time."
-
 msgid "SELECT PATH"
 msgstr "SELECT PATH"
 
@@ -1229,6 +1223,9 @@ msgstr "SOUL ECONOMY"
 msgid "SOUL TREASURY"
 msgstr "SOUL TREASURY"
 
+msgid "SWITCH CHAIN"
+msgstr "SWITCH CHAIN"
+
 msgid "Sacrifice"
 msgstr "Sacrifice"
 
@@ -1240,6 +1237,9 @@ msgstr "Scarabs are a neat way to share your SOUL with anyone, so long as they'r
 
 msgid "Search Lockers"
 msgstr "Search Lockers"
+
+msgid "Search for a liquidity source"
+msgstr "Search for a liquidity source"
 
 msgid "Search lockers"
 msgstr "Search lockers"
@@ -1265,11 +1265,17 @@ msgstr "Select Token"
 msgid "Select Wallet"
 msgstr "Select Wallet"
 
+msgid "Select a token"
+msgstr "Select a token"
+
 msgid "Select a token to find your liquidity"
 msgstr "Select a token to find your liquidity"
 
 msgid "Send to:"
 msgstr "Send to:"
+
+msgid "Settings"
+msgstr "Settings"
 
 msgid "Share of Pool"
 msgstr "Share of Pool"
@@ -1280,11 +1286,11 @@ msgstr "Share of Pool:"
 msgid "Showing Results"
 msgstr "Showing Results"
 
+msgid "Slippage"
+msgstr "Slippage"
+
 msgid "Slippage Tolerance"
 msgstr "Slippage Tolerance"
-
-msgid "Slippage tolerance"
-msgstr "Slippage tolerance"
 
 msgid "Socials"
 msgstr "Socials"
@@ -1307,30 +1313,11 @@ msgstr "Spanish"
 msgid "Stable"
 msgstr "Stable"
 
-msgid "Stack Yields with SAAVE"
-msgstr "Stack Yields with SAAVE"
-
 msgid "Stake"
 msgstr "Stake"
 
 msgid "Stake Luxor"
 msgstr "Stake Luxor"
-
-msgid "Stake SOUL for SEANCE"
-msgstr "Stake SOUL for SEANCE"
-
-msgid "Stake SOUL to borrow SEANCE"
-msgstr "Stake SOUL to borrow SEANCE"
-
-msgid "Stake for Seance"
-msgstr "Stake for Seance"
-
-msgid ""
-"Stake into SEANCE add collateral as aSEANCE on Aave all in\n"
-"one click"
-msgstr ""
-"Stake into SEANCE add collateral as aSEANCE on Aave all in\n"
-"one click"
 
 msgid "Staked"
 msgstr "Staked"
@@ -1388,9 +1375,6 @@ msgstr "Supply Distribution"
 
 msgid "Supplying {0} {1} and {2} {3}"
 msgstr "Supplying {0} {1} and {2} {3}"
-
-msgid "Supported On"
-msgstr "Supported On"
 
 msgid "Swap"
 msgstr "Swap"
@@ -1470,12 +1454,6 @@ msgstr "This transaction will not succeed either due to price movement or fee on
 msgid "Time Remaining"
 msgstr "Time Remaining"
 
-msgid "Toggle Expert Mode"
-msgstr "Toggle Expert Mode"
-
-msgid "Toggle expert mode"
-msgstr "Toggle expert mode"
-
 msgid "Token"
 msgstr "Token"
 
@@ -1522,11 +1500,17 @@ msgstr "Transaction Settings"
 msgid "Transaction Submitted"
 msgstr "Transaction Submitted"
 
-msgid "Transaction deadline"
-msgstr "Transaction deadline"
+msgid "Transaction reverts if pending past deadline."
+msgstr "Transaction reverts if pending past deadline."
 
 msgid "Transactions"
 msgstr "Transactions"
+
+msgid "Transactions revert if price changes unfavorably by more than this percentage."
+msgstr "Transactions revert if price changes unfavorably by more than this percentage."
+
+msgid "Transactions revert if there is a large, unfavorable price movement before it is confirmed."
+msgstr "Transactions revert if there is a large, unfavorable price movement before it is confirmed."
 
 msgid "Treasury Distribution"
 msgstr "Treasury Distribution"
@@ -1536,6 +1520,9 @@ msgstr "Tribute"
 
 msgid "Try enabling multi-hop trades"
 msgstr "Try enabling multi-hop trades"
+
+msgid "Try typing \"10 ETH to KNC\""
+msgstr "Try typing \"10 ETH to KNC\""
 
 msgid "Turn On Expert Mode"
 msgstr "Turn On Expert Mode"
@@ -1548,9 +1535,6 @@ msgstr "Tutorials"
 
 msgid "UNWRAP"
 msgstr "UNWRAP"
-
-msgid "Unavailable on {0}."
-msgstr "Unavailable on {0}."
 
 msgid "Underworld Assets"
 msgstr "Underworld Assets"
@@ -1642,9 +1626,6 @@ msgstr "Vote"
 msgid "WALLET"
 msgstr "WALLET"
 
-msgid "WITHDRAW"
-msgstr "WITHDRAW"
-
 msgid "WRAP"
 msgstr "WRAP"
 
@@ -1720,6 +1701,9 @@ msgstr "You are depositing:"
 msgid "You are on the wrong network"
 msgstr "You are on the wrong network"
 
+msgid "You can only favorite up to three token pairs"
+msgstr "You can only favorite up to three token pairs"
+
 msgid "You can think of this as having \"account balances\" for asset within SoulSwap."
 msgstr "You can think of this as having \"account balances\" for asset within SoulSwap."
 
@@ -1731,6 +1715,9 @@ msgstr "You must unstake first, if you want to remove from your staked position.
 
 msgid "You need to first approve LP tokens and then migrate it"
 msgstr "You need to first approve LP tokens and then migrate it"
+
+msgid "You will receive at least"
+msgstr "You will receive at least"
 
 msgid "You'll receive (at least):"
 msgstr "You'll receive (at least):"
@@ -1768,21 +1755,6 @@ msgstr "Your net return over the total investment."
 msgid "Your transaction got rejected"
 msgstr "Your transaction got rejected"
 
-msgid "Your transaction may be frontrun"
-msgstr "Your transaction may be frontrun"
-
-msgid "Your transaction may fail"
-msgstr "Your transaction may fail"
-
-msgid "Your transaction will revert if it is pending for more than this long."
-msgstr "Your transaction will revert if it is pending for more than this long."
-
-msgid "Your transaction will revert if the price changes unfavorably by more than this percentage."
-msgstr "Your transaction will revert if the price changes unfavorably by more than this percentage."
-
-msgid "Your transaction will revert if there is a large, unfavorable price movement before it is confirmed."
-msgstr "Your transaction will revert if there is a large, unfavorable price movement before it is confirmed."
-
 msgid "Your transactions will appear here..."
 msgstr "Your transactions will appear here..."
 
@@ -1816,9 +1788,6 @@ msgstr "liquidity pool."
 msgid "loading..."
 msgstr "loading..."
 
-msgid "minutes"
-msgstr "minutes"
-
 msgid "or the transaction will revert."
 msgstr "or the transaction will revert."
 
@@ -1834,17 +1803,11 @@ msgstr "tokens into the farm to start earning rewards."
 msgid "{0} Deposited"
 msgstr "{0} Deposited"
 
-msgid "{0} Strategy"
-msgstr "{0} Strategy"
-
 msgid "{0} tokens"
 msgstr "{0} tokens"
 
 msgid "{0}/{1} Burned"
 msgstr "{0}/{1} Burned"
-
-msgid "{link} or change network."
-msgstr "{link} or change network."
 
 msgid "{text}"
 msgstr "{text}"
