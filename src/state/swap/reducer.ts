@@ -1,7 +1,20 @@
-import { Field, replaceSwapState, selectCurrency, setRecipient, setToChain, switchCurrencies, typeInput } from './actions'
+import { 
+    Field,
+    chooseToSaveGas,
+    replaceSwapState, 
+    selectCurrency, 
+    setRecipient,
+    setTrendingSoonShowed,
+    setFeeConfig,
+    setTrade,
+    setToChain, 
+    switchCurrencies, 
+    typeInput } from './actions'
 
 import { createReducer } from '@reduxjs/toolkit'
 import { ChainId } from 'sdk'
+import { FeeConfig } from 'hooks/useSwapV2Callback'
+import { Aggregator } from 'utils/swap/aggregator'
 
 export interface SwapState {
   readonly independentField: Field
@@ -14,6 +27,10 @@ export interface SwapState {
   }
   // the typed recipient address or ENS name, or null if swap should go to sender
   readonly recipient: string | null
+  readonly saveGas: boolean
+  readonly feeConfig: FeeConfig | undefined
+  readonly trendingSoonShowed?: boolean
+  readonly trade?: Aggregator
   readonly toChain: ChainId
 }
 
@@ -27,6 +44,10 @@ const initialState: SwapState = {
     currencyId: '',
   },
   recipient: null,
+  feeConfig: undefined,
+  saveGas: false,
+  trade: undefined,
+  trendingSoonShowed: false,
   toChain: ChainId.FANTOM,
 }
 
@@ -34,7 +55,7 @@ export default createReducer<SwapState>(initialState, (builder) =>
   builder
     .addCase(
       replaceSwapState,
-      (state, { payload: { typedValue, recipient, toChain, field, inputCurrencyId, outputCurrencyId } }) => {
+      (state, { payload: { typedValue, recipient, feeConfig, toChain, field, inputCurrencyId, outputCurrencyId } }) => {
         return {
           [Field.INPUT]: {
             currencyId: inputCurrencyId,
@@ -45,6 +66,10 @@ export default createReducer<SwapState>(initialState, (builder) =>
           independentField: field,
           typedValue: typedValue,
           recipient,
+          saveGas: state.saveGas,
+          feeConfig,
+          trendingSoonShowed: state.trendingSoonShowed,
+          trade: state.trade,
           toChain,
         }
       }
@@ -85,6 +110,18 @@ export default createReducer<SwapState>(initialState, (builder) =>
     })
     .addCase(setRecipient, (state, { payload: { recipient } }) => {
       state.recipient = recipient
+    })
+    .addCase(chooseToSaveGas, (state, { payload: { saveGas } }) => {
+      state.saveGas = saveGas
+    })
+    .addCase(setFeeConfig, (state, { payload: { feeConfig } }) => {
+      state.feeConfig = feeConfig
+    })
+    .addCase(setTrendingSoonShowed, state => {
+      state.trendingSoonShowed = true
+    })
+    .addCase(setTrade, (state, { payload: { trade } }) => {
+      state.trade = trade
     })
     .addCase(setToChain, (state, { payload: { toChain } }) => {
       state.toChain = toChain

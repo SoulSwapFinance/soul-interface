@@ -32,9 +32,20 @@ import { useCallback, useEffect, useState } from 'react'
 //   SuccessfulCall,
 //   useSwapCallArguments,
 // } from "../../hooks/useSwapCallback";
-import { Field, replaceSwapState, selectCurrency, setRecipient, switchCurrencies, typeInput } from './actions'
+import { Field, 
+  replaceSwapState, 
+  selectCurrency, 
+  setRecipient,
+  resetSelectCurrency,
+  chooseToSaveGas,
+  setTrade,
+  switchCurrencies,
+  switchCurrenciesV2,
+  typeInput } from './actions'
 import { SwapState } from './reducer'
 import { useCurrencyBalances } from 'state/wallet/hooks'
+import { FeeConfig } from 'hooks/useSwapV2Callback'
+import { Aggregator } from 'utils/swap/aggregator'
 
 export function useSwapState(): AppState['swap'] {
   return useAppSelector((state) => state.swap)
@@ -43,8 +54,12 @@ export function useSwapState(): AppState['swap'] {
 export function useSwapActionHandlers(): {
   onCurrencySelection: (field: Field, currency: Currency) => void
   onSwitchTokens: () => void
+  onSwitchTokensV2: () => void
   onUserInput: (field: Field, typedValue: string) => void
   onChangeRecipient: (recipient?: string | null) => void
+  onChooseToSaveGas: (saveGas: boolean) => void
+  onResetSelectCurrency: (field: Field) => void
+  onChangeTrade: (trade: Aggregator | undefined) => void
 } {
   const dispatch = useAppDispatch()
   const onCurrencySelection = useCallback(
@@ -62,8 +77,23 @@ export function useSwapActionHandlers(): {
     [dispatch]
   )
 
+  const onResetSelectCurrency = useCallback(
+    (field: Field) => {
+      dispatch(
+        resetSelectCurrency({
+          field,
+        }),
+      )
+    },
+    [dispatch],
+  )
+
   const onSwitchTokens = useCallback(() => {
     dispatch(switchCurrencies())
+  }, [dispatch])
+
+  const onSwitchTokensV2 = useCallback(() => {
+    dispatch(switchCurrenciesV2())
   }, [dispatch])
 
   const onUserInput = useCallback(
@@ -79,17 +109,35 @@ export function useSwapActionHandlers(): {
     },
     [dispatch]
   )
-  
+
+  const onChooseToSaveGas = useCallback(
+    (saveGas: boolean) => {
+      dispatch(chooseToSaveGas({ saveGas }))
+    },
+    [dispatch],
+  )
+
+  const onChangeTrade = useCallback(
+    (trade: Aggregator | undefined) => {
+      dispatch(setTrade({ trade }))
+    },
+    [dispatch],
+  )
+
   return {
     onSwitchTokens,
+    onSwitchTokensV2,
     onCurrencySelection,
     onUserInput,
     onChangeRecipient,
+    onChooseToSaveGas,
+    onResetSelectCurrency, // deselect token in select input: (use cases: remove "imported token")
+    onChangeTrade,
   }
 }
 
 // TODO: Switch for ours...
-const BAD_RECIPIENT_ADDRESSES: { [chainId: string]: { [address: string]: true } } = {
+export const BAD_RECIPIENT_ADDRESSES: { [chainId: string]: { [address: string]: true } } = {
   [ChainId.ETHEREUM]: {
     '0x794d858b0b152fb68a5CE465451D729EFfA67f08': true, // v2 factory
     '0x2a8B48a8B8a8a8E4a184280333c418BcdcE72dE9': true, // v2 router 02
@@ -250,7 +298,7 @@ function validatedRecipient(recipient: any): string | undefined {
   if (ADDRESS_REGEX.test(recipient)) return recipient
   return undefined
 }
-export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId): SwapState {
+export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId): Omit<SwapState, 'saveGas'> {
   let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency, chainId)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency, chainId)
   // let recipient = validatedRecipient(parsedQs.recipient)
@@ -277,8 +325,16 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId)
   }
 
   const recipient = validatedRecipient(parsedQs.recipient)
-
-  
+  const feePercent = parseInt(parsedQs?.['fee_bip']?.toString() || '0')
+  const feeConfig: FeeConfig | undefined =
+    parsedQs.referral && isAddress(parsedQs.referral) && parsedQs['fee_bip'] && !isNaN(feePercent)
+      ? {
+          chargeFeeBy: 'currency_in',
+          feeReceiver: parsedQs.referral.toString(),
+          isInBps: true,
+          feeAmount: feePercent < 1 ? '1' : feePercent > 10 ? '10' : feePercent.toString(),
+        }
+      : undefined
   return {
     [Field.INPUT]: {
       currencyId: inputCurrency,
@@ -289,7 +345,8 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId)
     typedValue: parseTokenAmountURLParameter(parsedQs.exactAmount),
     independentField: parseIndependentFieldURLParameter(parsedQs.exactField),
     recipient,
-    toChain: toChain
+    feeConfig,
+    toChain,
   }
 }
 
@@ -308,8 +365,8 @@ export function useDefaultsFromURLSearch():
     | {
         inputCurrencyId: string | undefined
         outputCurrencyId: string | undefined
-        // recipient: string | undefined
-        // toChain: ChainId
+        recipient: string | undefined
+        toChain: ChainId
       }
     | undefined
   >()
@@ -325,6 +382,7 @@ export function useDefaultsFromURLSearch():
         inputCurrencyId: parsed[Field.INPUT].currencyId,
         outputCurrencyId: parsed[Field.OUTPUT].currencyId,
         recipient: expertMode ? parsed.recipient : null,
+        feeConfig: parsed.feeConfig,
         toChain: parsed.toChain
       })
     )
@@ -332,8 +390,8 @@ export function useDefaultsFromURLSearch():
     setResult({
       inputCurrencyId: parsed[Field.INPUT].currencyId,
       outputCurrencyId: parsed[Field.OUTPUT].currencyId,
-      // recipient: expertMode ? parsed.recipient : null,
-      // toChain: expertMode ? parsed.toChain : ChainId.FANTOM
+      recipient: expertMode ? parsed.recipient : null,
+      toChain: expertMode ? parsed.toChain : ChainId.FANTOM
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, chainId])

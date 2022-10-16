@@ -15,8 +15,11 @@ export function useTransactionAdder(): (
   response: TransactionResponseLight,
   customData?: {
     summary?: string
+    type?: string
     approval?: { tokenAddress: string; spender: string }
     claim?: { recipient: string }
+    arbitrary?: any
+
   }
 ) => void {
   const { chainId, account } = useActiveWeb3React()
@@ -29,10 +32,15 @@ export function useTransactionAdder(): (
         summary,
         approval,
         claim,
+        type,
+        arbitrary,
       }: {
         summary?: string
+        type?: string
         claim?: { recipient: string }
         approval?: { tokenAddress: string; spender: string }
+        arbitrary?: any
+
       } = {}
     ) => {
       if (!account) return
@@ -50,6 +58,8 @@ export function useTransactionAdder(): (
           approval,
           summary,
           claim,
+          type,
+          arbitrary,
         })
       )
     },

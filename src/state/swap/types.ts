@@ -1,3 +1,5 @@
+import { Currency, CurrencyAmount } from "sdk";
+
 export enum Field {
     INPUT = 'INPUT',
     OUTPUT = 'OUTPUT',
@@ -16,4 +18,18 @@ export enum Field {
     readonly recipient: string | null
     
     readonly protocolFeeTo: string | undefined
+  }
+
+  export interface AggregationComparer {
+    inputAmount: CurrencyAmount<Currency>
+    outputAmount: CurrencyAmount<Currency>
+    amountInUsd: string
+    amountOutUsd: string
+    receivedUsd: string
+    // outputPriceUSD: number
+    comparedDex: string
+    tradeSaved?: {
+      percent?: number
+      usd?: string
+    }
   }

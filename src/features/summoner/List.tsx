@@ -19,6 +19,8 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
+      decimals={farm.decimals}
+      pairType={farm.type}
       lpToken={farm.lpAddress}
       token0Symbol={farm.token0Symbol}
       token1Symbol={farm.token1Symbol}
@@ -32,6 +34,8 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
+      decimals={farm.decimals}
+      pairType={farm.type}
       lpToken={farm.lpAddress}
       token0Symbol={farm.token0Symbol}
       token1Symbol={farm.token1Symbol}
@@ -45,6 +49,8 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
+      decimals={farm.decimals}
+      pairType={farm.type}
       lpToken={farm.lpAddress}
       token0Symbol={farm.token0Symbol}
       token1Symbol={farm.token1Symbol}
@@ -56,8 +62,10 @@ export const FarmList = () => {
 
   const avaxLendList = AvalancheLendingPools.map((farm) => (
     <ActiveRow
-      key={farm.pid}
+      key={farm.pid} 
       pid={farm.pid}
+      decimals={farm.decimals}
+      pairType={farm.type}
       lpToken={farm.lpAddress}
       token0Symbol={farm.token0Symbol}
       token1Symbol={farm.token1Symbol}
@@ -71,6 +79,8 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
+      decimals={farm.decimals}
+      pairType={farm.type}
       lpToken={farm.lpAddress}
       token0Symbol={farm.token0Symbol}
       token1Symbol={farm.token1Symbol}
@@ -84,6 +94,8 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
+      decimals={farm.decimals}
+      pairType={farm.type}
       lpToken={farm.lpAddress}
       token0Symbol={farm.token0Symbol}
       token1Symbol={farm.token1Symbol}
@@ -107,17 +119,6 @@ export const FarmList = () => {
 
   return (
     <div>
-      {/* <Button
-        height="2rem"
-        variant="bordered" 
-        color={"purple"} 
-        size="lg"
-        onClick={async () => await handleHarvestAll()}>
-        <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-          <span> Harvest All </span>
-        </a>
-      </Button> */}
-
       <div className="flex ml-2 mt-2 mr-2 mb-4 gap-1 items-center justify-center">
         <Button variant="filled" 
         color={"purple"} 

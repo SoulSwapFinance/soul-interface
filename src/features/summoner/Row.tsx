@@ -26,6 +26,7 @@ import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import { getChainColor } from 'constants/chains'
 import { ExternalLink } from 'components/ReusableStyles'
 import { BriefcaseIcon, CollectionIcon, CurrencyDollarIcon, DatabaseIcon, PlusIcon, SparklesIcon } from '@heroicons/react/outline'
+import { useCurrencyBalance } from 'state/wallet/hooks'
 
 const HideOnSmall = styled.div`
 @media screen and (max-width: 900px) {
@@ -44,7 +45,7 @@ const TokenPairLink = styled(ExternalLink)`
   padding-left: 10;
 `
 
-export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, token0Address, token1Address }) => {
+export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol, token1Symbol, token0Address, token1Address }) => {
     const { account, chainId, library } = useActiveWeb3React()
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
 
@@ -68,20 +69,18 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const apr = summonerPoolInfo.apr
     const allocPoint = summonerPoolInfo.allocPoint
     const lpAddress = summonerPoolInfo.lpAddress
-    const pairType = summonerPoolInfo.pairType
     const pairStatus = summonerPoolInfo.status
 
-    const isUnderworldPair = pairType == "underworld"
+    // pair types //
+    const isUnderworldPair = pairType == "lend"
+    const isSwapPair = pairType == "swap"
+
     // const { userInfo } = useUserInfo()
     const { pairInfo } = usePairInfo(lpAddress)
     // assumes 18, since only SOUL-LP farms are eligible for Zap   
     const token0Decimals = Number(pairInfo.token0Decimals)
     const token1Decimals = Number(pairInfo.token1Decimals)
-    // BTC has 8 decimals
-    const assetDecimals
-        = isUnderworldPair && token0Symbol == 'BTC' ? 8 :
-            isUnderworldPair && token0Symbol == 'USDC' ? 6 :
-                Number(pairInfo.pairDecimals)
+    const assetDecimals = decimals
 
     const [showOptions, setShowOptions] = useState(false)
     const [openDeposit, setOpenDeposit] = useState(false)
@@ -110,9 +109,11 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     // const parsedBalance = tryParseAmount(walletBalance.toString(), farm.lpToken)
     // const userBalance = useCurrencyBalance(account, lpToken)
     const hasBalance = Number(walletBalance) > 0
-    const isSwapPair = pairType == "farm"
     const isActive = pairStatus == "active"
-    const assetToken = new Token(chainId, farm.lpAddress, assetDecimals)
+    const assetToken = new Token(chainId, farm.lpAddress, decimals)
+
+  const balance = useCurrencyBalance(account ?? undefined, assetToken)
+  
     const parsedDepositValue = tryParseAmount(depositValue, assetToken)
     const parsedWithdrawValue = tryParseAmount(withdrawValue, assetToken)
 
@@ -650,9 +651,11 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                     >
                                         <div className="flex text-lg gap-2">
                                             <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                            DEPOSIT {
-                                                ((chainId == 250 && Number(allocPoint) == 420) ||
-                                                    chainId == 43114 && Number(allocPoint) == 220) ? token0Symbol : farm.lpSymbol}
+                                DEPOSIT {
+                                  Number(allocPoint) == 220
+                                  ? token0Symbol 
+                                  : farm.lpSymbol
+                                }
                                         </div>
                                     </SubmitButton>
                                 )}

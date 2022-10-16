@@ -25,10 +25,12 @@ import transactions from './transactions/reducer'
 import user from './user/reducer'
 import zap from './zap/reducer'
 import { gelatoReducers } from 'soulswap-limit-orders-react'
+import customizeDexes from './customizeDexes'
 
 const reducer = combineReducers({
   application,
   user,
+  customizeDexes,
   transactions,
   fees,
   swap,

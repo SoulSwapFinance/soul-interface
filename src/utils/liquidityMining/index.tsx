@@ -5,15 +5,11 @@ import {
   CurrencyAmount,
   Token,
   LiquidityMiningCampaign,
-  SingleSidedLiquidityMiningCampaign,
-  Pair,
-  Price,
+  SingleSidedLiquidityMiningCampaign
 } from 'sdk'
 import { getAddress, parseUnits } from 'ethers/lib/utils'
-import { DateTime, Duration } from 'luxon'
 
 import { SubgraphLiquidityMiningCampaign, SubgraphSingleSidedStakingCampaign } from 'apollo/index'
-// import { getLpTokenPrice } from './prices'
 import { useActiveWeb3React } from 'services/web3'
 import { usePairPrice } from 'hooks/usePairData'
 
@@ -25,7 +21,7 @@ export function getRemainingRewardsUSD(
   const { chainId } = useActiveWeb3React()
   const remainingRewards = campaign.remainingRewards
   let remainingRewardsUSD
-  //ZERO_USD
+  // ZERO_USD[chainId]
   for (let i = 0; i < remainingRewards.length; i++) {
     remainingRewardsUSD = remainingRewardsUSD.add(
       CurrencyAmount
@@ -48,7 +44,7 @@ export function getRemainingRewardsUSD(
 //   if (pair.liquidityMiningCampaigns.length === 0) return ZERO_USD
 //   return pair.liquidityMiningCampaigns.reduce((accumulator: CurrencyAmount, campaign) => {
 //     return accumulator.add(getRemainingRewardsUSD(campaign, nativeCurrencyUSDPrice))
-//   }, ZERO_USD)
+//   }, ZERO_USD[chainId])
 // }
 
 // export function tokenToPricedTokenAmount(
