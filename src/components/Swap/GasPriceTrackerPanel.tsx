@@ -4,7 +4,7 @@ import { ArrowLeft } from 'react-feather'
 import { Box, Flex } from 'rebass'
 import styled from 'styled-components'
 
-import { GasStation } from 'components/Icons'
+import GasStation from 'components/Icons/GasStation'
 import useGasPriceFromDeBank, { GasLevel } from 'hooks/useGasPriceFromDeBank'
 
 type Props = {
