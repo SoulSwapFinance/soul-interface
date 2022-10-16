@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/macro'
 import React from 'react'
 import { Text } from 'rebass/styled-components'
 
@@ -16,13 +15,13 @@ export default function TradeTypeSelection() {
       <ButtonReturnType onClick={() => onChooseToSaveGas(false)} active={!saveGas} role="button">
         <MoneyFill />
         <Text marginLeft="4px">
-          <Trans>Maximum Return</Trans>
+          Maximum Return
         </Text>
       </ButtonReturnType>
       <ButtonReturnType onClick={() => onChooseToSaveGas(true)} active={saveGas} role="button">
         <GasStation />
         <Text marginLeft="4px">
-          <Trans>Lowest Gas</Trans>
+          Lowest Gas
         </Text>
       </ButtonReturnType>
     </GroupButtonReturnTypes>
