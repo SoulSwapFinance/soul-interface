@@ -622,7 +622,6 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         onMax={() => setDepositValue(walletBalance.toString())}
                                         value={depositValue}
                                         balance={walletBalance.toString()}
-                                        // balance={balance.toString()}
                                         id={pid}
                                     />
                                 }
@@ -652,9 +651,11 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     >
                                         <div className="flex text-lg gap-2">
                                             <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                            DEPOSIT {
-                                                ((chainId == 250 && Number(allocPoint) == 420) ||
-                                                    chainId == 43114 && Number(allocPoint) == 220) ? token0Symbol : farm.lpSymbol}
+                                DEPOSIT {
+                                  Number(allocPoint) == 220
+                                  ? token0Symbol 
+                                  : farm.lpSymbol
+                                }
                                         </div>
                                     </SubmitButton>
                                 )}
