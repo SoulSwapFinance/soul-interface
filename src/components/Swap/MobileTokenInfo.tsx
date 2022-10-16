@@ -47,7 +47,9 @@ function MobileTradeRoutes({
         </MobileModalWrapper>
       </MobileView>
       <StyledActionButtonSwapForm onClick={isMobile ? toggle : onClick}>
-        <MouseoverTooltip text={t`Token Info`} placement="top" width="fit-content">
+        <MouseoverTooltip text={t`Token Info`} placement="top" 
+          // width="fit-content"
+        >
           <Info color={theme.subText} size={20} />
         </MouseoverTooltip>
       </StyledActionButtonSwapForm>
