@@ -31,6 +31,7 @@ import { Aggregator } from 'utils/swap/aggregator'
 import { useTokenInfo } from './useAPI'
 import { WNATIVE_ADDRESS } from 'sdk'
 
+const REACT_APP_MIXPANEL_PROJECT_TOKEN = 'ff1eea26c19dcf4a7c35ebbc8631e714'
 export enum MIXPANEL_TYPE {
   PAGE_VIEWED,
   WALLET_CONNECTED,
@@ -919,7 +920,7 @@ export const useGlobalMixpanelEvents = () => {
 
   useEffect(() => {
     if (account && isAddress(account)) {
-      mixpanel.init(process.env.REACT_APP_MIXPANEL_PROJECT_TOKEN || '', {
+      mixpanel.init(REACT_APP_MIXPANEL_PROJECT_TOKEN || '', {
         debug: process.env.REACT_APP_MAINNET_ENV === 'staging',
       })
       mixpanel.identify(account)

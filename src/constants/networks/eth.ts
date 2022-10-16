@@ -1,5 +1,5 @@
 import { ChainId } from 'sdk'
-import { SS_SETTING_API } from 'constants/env'
+import { ROUTER_URI, SS_SETTING_API } from 'constants/env'
 import { createClient } from 'utils/client'
 
 import { NetworkInfo } from '../type'
@@ -10,7 +10,7 @@ const NOT_SUPPORT = null
 const ETH = "https://cryptologos.cc/logos/ethereum-eth-logo.svg"
 
 const ethereumInfo: NetworkInfo = {
-  chainId: ChainId.ETHEREUM,
+  chainId: 1,
   route: 'ethereum',
   name: 'Ethereum',
   icon: ETH,
@@ -19,7 +19,7 @@ const ethereumInfo: NetworkInfo = {
   blockClient: createClient('https://api.thegraph.com/subgraphs/name/dynamic-amm/ethereum-blocks-ethereum'),
   etherscanUrl: 'https://etherscan.io',
   etherscanName: 'Etherscan',
-  tokenListUrl: `${SS_SETTING_API}/v1/tokens?chainIds=${ChainId.ETHEREUM}&isWhitelisted=${true}`,
+  tokenListUrl: `${SS_SETTING_API}/v1/tokens?chainIds=$ 1}&isWhitelisted=${true}`,
   bridgeURL: EMPTY,
   nativeToken: {
     symbol: 'ETH',
@@ -29,7 +29,7 @@ const ethereumInfo: NetworkInfo = {
     decimal: 18,
   },
   rpcUrl: 'https://ethereum.kyberengineering.io',
-  routerUri: `${process.env.REACT_APP_AGGREGATOR_API}/ethereum/route/encode`,
+  routerUri: `${ROUTER_URI}/ethereum/route/encode`,
   classic: {
     static: {
       zap: '0x2abE8750e4a65584d7452316356128C936273e0D',
