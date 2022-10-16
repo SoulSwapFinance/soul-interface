@@ -224,3 +224,5 @@ export function useIsUserAddedPair(pair: Pair): boolean {
         // )
       )
 }
+
+export type AllTokenType = { [address: string]: Token }

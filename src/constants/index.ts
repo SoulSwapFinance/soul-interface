@@ -28,9 +28,13 @@ export const SOUL_COINGECKO_ID = 'soul-swap'
 export const POOL_DENY = []
 export const SOULSWAP_SOURCE = '{"source":"soulswap"}'
 export const sentryRequestId = uuid()
+export const RESERVE_USD_DECIMALS = 100
 
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
 export const AVERAGE_BLOCK_TIME_IN_SECS = 1
+// denominated in seconds
+export const TIME_TO_REFRESH_SWAP_RATE = 10
+export const AGGREGATOR_WAITING_TIME = 1700 // 1700 means that we at least show '.' '..' '...' '.' '..' '...'
 
 export const ZERO_USD = { 
   [ChainId.ETHEREUM]: CurrencyAmount.fromRawAmount(USD[ChainId.ETHEREUM], 0),

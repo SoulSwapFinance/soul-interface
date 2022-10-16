@@ -16,3 +16,8 @@ export const soulswapDexes = [
     logoURL: 'https://soulswap.finance/favicon.ico',
   },
 ]
+
+export const ELASTIC_NOT_SUPPORTED: { [key: string]: string } = {
+  // [ChainId.AURORA]: t`Elastic is not supported on Aurora. Please switch to other chains`,
+  // [ChainId.VELAS]: t`Elastic will be available soon`,
+}

@@ -1,5 +1,5 @@
 import { BigNumber } from "@ethersproject/bignumber";
-import { Currency, JSBI, Percent } from "sdk";
+import { ChainId, Currency, JSBI, Percent, WNATIVE } from "sdk";
 import Notify from 'bnc-notify'
 import { ethers } from 'ethers'
 import { Pair, Token } from "sdk";
@@ -8,6 +8,10 @@ export * from './tools/axios'
 export * from './tools/getPrice'
 export * from './tools/rate'
 import Numeral from 'numeral'
+import { NETWORKS_INFO } from "constants/networks";
+import store from "state";
+import { ZERO_ADDRESS } from "constants/addresses";
+import { isAddress } from "functions/validate";
 
 export function ASSERT(f: () => boolean, t?: string) {
     if (!f() && t) console.error(t);
@@ -213,4 +217,57 @@ export function isPairOnList(pairs: Pair[], pair?: Pair): boolean {
       = pair
       // )
     )
+}
+
+export const getTokenLogoURL = (inputAddress: string, chainId?: ChainId): string => {
+  let address = inputAddress
+  if (address === ZERO_ADDRESS && chainId) {
+    address = WNATIVE[chainId].address
+  }
+    // WBTC
+    if (address.toLowerCase() === '0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f') {
+      return 'https://assets.coingecko.com/coins/images/7598/thumb/wrapped_bitcoin_wbtc.png?1548822744'
+  }
+
+  let imageURL
+
+  imageURL = store
+    .getState()
+    .lists.byUrl[NETWORKS_INFO[chainId || ChainId.ETHEREUM].tokenListUrl].current?.tokens.find(
+      item => item.address.toLowerCase() === address.toLowerCase(),
+    )?.logoURI
+
+  if (imageURL) return imageURL
+
+  switch (chainId) {
+    //todo namgold: merge these adhoc func to tokenllist
+    case ChainId.ETHEREUM:
+      imageURL = "https://cryptologos.cc/logos/ethereum-eth-logo.svg"
+      break
+    case ChainId.MATIC:
+      imageURL = "https://cryptologos.cc/logos/polygon-matic-logo.svg"
+      break
+    case ChainId.BSC:
+      imageURL = "https://cryptologos.cc/logos/bnb-bnb-logo.svg"
+      break
+    case ChainId.MOONRIVER:
+      imageURL = "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/moonriver/Moonriver.svg"
+      break
+    case ChainId.AVALANCHE:
+      imageURL = "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/avalanche/Avalanche.svg"
+      break
+    case ChainId.FANTOM:
+      imageURL = "https://cryptologos.cc/logos/fantom-ftm-logo.svg"
+      break
+    case ChainId.ARBITRUM:
+      imageURL = `https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/arbitrum/assets/${address}/logo.png`
+      break
+    default:
+      imageURL = `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${isAddress(
+        address,
+      )}/logo.png`
+      break
+  }
+
+  return imageURL
 }
