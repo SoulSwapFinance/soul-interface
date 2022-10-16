@@ -2,7 +2,7 @@ import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
 import { ChainId } from 'sdk'
 
 export type NetworkInfo = {
-  readonly chainId?: ChainId
+  readonly chainId: ChainId
 
   // route can be used to detect which chain is favored in query param, check out useActiveNetwork.ts
   readonly route: string

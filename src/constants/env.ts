@@ -6,5 +6,3 @@ export const SS_SETTING_API = 'https://ks-setting.kyberswap.com/api'
 
 // export const SS_SETTING_API = process.env.REACT_APP_SS_SETTING_API as string
 // if (SS_SETTING_API === undefined) throw new Error('process.env.REACT_APP_SS_SETTING_API is undefined.')
-
-export const ROUTER_URI = 'https://aggregator-api.kyberswap.com'

@@ -1,5 +1,9 @@
-import { ROUTER_URI, SS_SETTING_API } from 'constants/env'
+import { ChainId } from 'sdk'
+
+import Polygon from 'assets/networks/polygon-network.png'
+import { SS_SETTING_API } from 'constants/env'
 import { createClient } from 'utils/client'
+
 import { NetworkInfo } from '../type'
 
 const EMPTY_ARRAY: any[] = []
@@ -7,7 +11,7 @@ const NOT_SUPPORT = null
 const MATIC = "https://cryptologos.cc/logos/polygon-matic-logo.svg"
 
 const maticInfo: NetworkInfo = {
-  chainId: 137,
+  chainId: ChainId.MATIC,
   route: 'polygon',
   name: 'Polygon',
   icon: MATIC,
@@ -16,7 +20,7 @@ const maticInfo: NetworkInfo = {
   blockClient: createClient('https://api.thegraph.com/subgraphs/name/dynamic-amm/ethereum-blocks-polygon'),
   etherscanUrl: 'https://polygonscan.com',
   etherscanName: 'Polygonscan',
-  tokenListUrl: `${SS_SETTING_API}/v1/tokens?chainIds=${137}&isWhitelisted=${true}`,
+  tokenListUrl: `${SS_SETTING_API}/v1/tokens?chainIds=${ChainId.MATIC}&isWhitelisted=${true}`,
   bridgeURL: 'https://wallet.matic.network/bridge',
   nativeToken: {
     symbol: 'MATIC',
@@ -26,7 +30,7 @@ const maticInfo: NetworkInfo = {
     decimal: 18,
   },
   rpcUrl: 'https://polygon.kyberengineering.io',
-  routerUri: `${ROUTER_URI}/polygon/route/encode`,
+  routerUri: `${process.env.REACT_APP_AGGREGATOR_API}/polygon/route/encode`,
   classic: {
     static: {
       zap: '0x2abE8750e4a65584d7452316356128C936273e0D',

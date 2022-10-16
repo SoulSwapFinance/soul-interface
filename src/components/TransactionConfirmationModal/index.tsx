@@ -50,18 +50,18 @@ const StyledLogo = styled.img`
 const getBrowserWalletConfig = () => {
   const { ethereum } = window
   const hasInjectedWallet = !!ethereum
-  const { isMetaMask } = ethereum || {}
+  const { isCoin98, isBraveWallet, isMetaMask } = ethereum || {}
 
   if (hasInjectedWallet) {
-    // if (isCoin98) {
-    //   const { name, iconName } = SUPPORTED_WALLETS.COIN98
-    //   return { name, iconName }
-    // }
+    if (isCoin98) {
+      const { name, iconName } = SUPPORTED_WALLETS.COIN98
+      return { name, iconName }
+    }
 
-    // if (isBraveWallet) {
-    //   const { name, iconName } = SUPPORTED_WALLETS.BRAVE
-    //   return { name, iconName }
-    // }
+    if (isBraveWallet) {
+      const { name, iconName } = SUPPORTED_WALLETS.BRAVE
+      return { name, iconName }
+    }
 
     if (isMetaMask) {
       const { name, iconName } = SUPPORTED_WALLETS.METAMASK

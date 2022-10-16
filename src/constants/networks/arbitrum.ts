@@ -1,10 +1,11 @@
 import { ChainId } from 'sdk'
 
 // import EthereumLogo from 'assets/images/ethereum-logo.png'
-import { ROUTER_URI, SS_SETTING_API } from 'constants/env'
+import { SS_SETTING_API } from 'constants/env'
 import { createClient } from 'utils/client'
 
 import { NetworkInfo } from '../type'
+
 const EMPTY = ''
 const EMPTY_ARRAY: any[] = []
 const NOT_SUPPORT = null
@@ -33,7 +34,7 @@ const arbitrumInfo: NetworkInfo = {
     decimal: 18,
   },
   rpcUrl: 'https://arbitrum.kyberengineering.io',
-  routerUri: `${ROUTER_URI}/arbitrum/route/encode`,
+  routerUri: `${process.env.REACT_APP_AGGREGATOR_API}/arbitrum/route/encode`,
   classic: {
     static: {
       zap: '0x2abE8750e4a65584d7452316356128C936273e0D',

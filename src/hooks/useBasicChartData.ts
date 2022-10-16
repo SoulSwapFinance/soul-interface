@@ -8,8 +8,6 @@ import { COINGECKO_API_URL } from 'constants/index'
 import { NETWORKS_INFO } from 'constants/networks'
 import { useActiveWeb3React } from 'services/web3'
 
-const ROUTER_URI = 'https://aggregator-api.kyberswap.com'
-
 export enum LiveDataTimeframeEnum {
   HOUR = '1H',
   FOUR_HOURS = '4H',
@@ -66,12 +64,12 @@ export interface ChartDataInfo {
 }
 
 const liveDataApi: { [chainId in ChainId]?: string } = {
-  [ChainId.ETHEREUM]: `${ROUTER_URI}/ethereum/tokens`,
-  [ChainId.BSC]: `${ROUTER_URI}/bsc/tokens`,
-  [ChainId.MATIC]: `${ROUTER_URI}/polygon/tokens`,
-  [ChainId.AVALANCHE]: `${ROUTER_URI}/avalanche/tokens`,
-  [ChainId.FANTOM]: `${ROUTER_URI}/fantom/tokens`,
-  [ChainId.ARBITRUM]: `${ROUTER_URI}/arbitrum/tokens`,
+  [ChainId.ETHEREUM]: `${process.env.REACT_APP_AGGREGATOR_API}/ethereum/tokens`,
+  [ChainId.BSC]: `${process.env.REACT_APP_AGGREGATOR_API}/bsc/tokens`,
+  [ChainId.MATIC]: `${process.env.REACT_APP_AGGREGATOR_API}/polygon/tokens`,
+  [ChainId.AVALANCHE]: `${process.env.REACT_APP_AGGREGATOR_API}/avalanche/tokens`,
+  [ChainId.FANTOM]: `${process.env.REACT_APP_AGGREGATOR_API}/fantom/tokens`,
+  [ChainId.ARBITRUM]: `${process.env.REACT_APP_AGGREGATOR_API}/arbitrum/tokens`,
 }
 
 const fetchSoulDataSWR = async (url: string) => {

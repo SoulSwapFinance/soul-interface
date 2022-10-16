@@ -1,5 +1,5 @@
 import { ChainId } from 'sdk'
-import { ROUTER_URI, SS_SETTING_API } from 'constants/env'
+import { SS_SETTING_API } from 'constants/env'
 import { createClient } from 'utils/client'
 
 import { NetworkInfo } from '../type'
@@ -10,7 +10,7 @@ const NOT_SUPPORT = null
 const FTM = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/ftm.jpg'
 
 const fantomInfo: NetworkInfo = {
-  chainId: 250,
+  chainId: ChainId.FANTOM,
   route: 'fantom',
   name: 'Fantom',
   icon: FTM,
@@ -19,7 +19,7 @@ const fantomInfo: NetworkInfo = {
   blockClient: createClient('https://api.thegraph.com/subgraphs/name/kybernetwork/fantom-blocks'),
   etherscanUrl: 'https://ftmscan.com',
   etherscanName: 'Ftmscan',
-  tokenListUrl: `${SS_SETTING_API}/v1/tokens?chainIds=${250}&isWhitelisted=${true}`,
+  tokenListUrl: `${SS_SETTING_API}/v1/tokens?chainIds=${ChainId.FANTOM}&isWhitelisted=${true}`,
   bridgeURL: 'https://multichain.xyz',
   nativeToken: {
     symbol: 'FTM',
@@ -29,7 +29,7 @@ const fantomInfo: NetworkInfo = {
     decimal: 18,
   },
   rpcUrl: 'https://fantom.kyberengineering.io',
-  routerUri: `${ROUTER_URI}/fantom/route/encode`,
+  routerUri: `${process.env.REACT_APP_AGGREGATOR_API}/fantom/route/encode`,
   classic: {
     static: {
       zap: '0x2abE8750e4a65584d7452316356128C936273e0D',

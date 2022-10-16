@@ -1,6 +1,7 @@
 import { ChainId } from 'sdk'
 
-import { ROUTER_URI, SS_SETTING_API } from 'constants/env'
+// import AVAX from 'assets/networks/avax-network.png'
+import { SS_SETTING_API } from 'constants/env'
 import { createClient } from 'utils/client'
 
 import { NetworkInfo } from '../type'
@@ -8,7 +9,7 @@ import { NetworkInfo } from '../type'
 const NOT_SUPPORT = null
 
 const avaxInfo: NetworkInfo = {
-  chainId: 43114,
+  chainId: ChainId.AVALANCHE,
   route: 'avalanche',
   name: 'Avalanche',
   icon: "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/avalanche/Avalanche.svg",
@@ -17,7 +18,7 @@ const avaxInfo: NetworkInfo = {
   blockClient: createClient('https://api.thegraph.com/subgraphs/name/ducquangkstn/avalache-blocks'),
   etherscanUrl: 'https://snowtrace.io',
   etherscanName: 'Snowtrace',
-  tokenListUrl: `${SS_SETTING_API}/v1/tokens?chainIds=${43114}&isWhitelisted=${true}`,
+  tokenListUrl: `${SS_SETTING_API}/v1/tokens?chainIds=${ChainId.AVALANCHE}&isWhitelisted=${true}`,
   bridgeURL: 'https://bridge.avax.network',
   nativeToken: {
     symbol: 'AVAX',
@@ -27,7 +28,7 @@ const avaxInfo: NetworkInfo = {
     decimal: 18,
   },
   rpcUrl: 'https://avalanche.kyberengineering.io',
-  routerUri: `${ROUTER_URI}/avalanche/route/encode`,
+  routerUri: `${process.env.REACT_APP_AGGREGATOR_API}/avalanche/route/encode`,
   classic: {
     static: {
       zap: '0x2abE8750e4a65584d7452316356128C936273e0D',

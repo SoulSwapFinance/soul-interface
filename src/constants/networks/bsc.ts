@@ -1,6 +1,6 @@
 import { ChainId } from 'sdk'
 import BnbLogo from 'assets/images/bnb-logo.png'
-import { ROUTER_URI, SS_SETTING_API } from 'constants/env'
+import { SS_SETTING_API } from 'constants/env'
 import { createClient } from 'utils/client'
 
 import { NetworkInfo } from '../type'
@@ -9,7 +9,7 @@ const EMPTY = ''
 const NOT_SUPPORT = null
 const BSC = "https://cryptologos.cc/logos/bnb-bnb-logo.svg"
 const bnbInfo: NetworkInfo = {
-  chainId: 56,
+  chainId: ChainId.BSC,
   route: 'bnb',
   name: 'BNB Chain',
   icon: BSC,
@@ -18,7 +18,7 @@ const bnbInfo: NetworkInfo = {
   blockClient: createClient('https://api.thegraph.com/subgraphs/name/dynamic-amm/ethereum-blocks-bsc'),
   etherscanUrl: 'https://bscscan.com',
   etherscanName: 'BscScan',
-  tokenListUrl: `${SS_SETTING_API}/v1/tokens?chainIds=${56}&isWhitelisted=${true}`,
+  tokenListUrl: `${SS_SETTING_API}/v1/tokens?chainIds=${ChainId.BSC}&isWhitelisted=${true}`,
   bridgeURL: 'https://www.binance.org/en/bridge',
   nativeToken: {
     symbol: 'BNB',
@@ -28,7 +28,7 @@ const bnbInfo: NetworkInfo = {
     decimal: 18,
   },
   rpcUrl: 'https://bsc.kyberengineering.io',
-  routerUri: `${ROUTER_URI}/bsc/route/encode`,
+  routerUri: `${process.env.REACT_APP_AGGREGATOR_API}/bsc/route/encode`,
   classic: {
     static: {
       zap: '0x2abE8750e4a65584d7452316356128C936273e0D',
