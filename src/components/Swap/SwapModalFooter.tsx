@@ -1,5 +1,5 @@
 import { Currency, TradeType } from 'sdk'
-import { t } from '@lingui/macro'
+import { Trans, t } from '@lingui/macro'
 import { rgba } from 'polished'
 import React, { useMemo, useState } from 'react'
 import { AlertTriangle, Repeat } from 'react-feather'
@@ -59,7 +59,7 @@ export default function SwapModalFooter({
       <AutoColumn gap="0.5rem" style={{ padding: '1rem', border: `1px solid ${theme.border}`, borderRadius: '8px' }}>
         <RowBetween align="center">
           <Text fontWeight={400} fontSize={14} color={theme.subText}>
-            Current Price
+            <Trans>Current Price</Trans>
           </Text>
           <Text
             fontWeight={500}
@@ -101,7 +101,7 @@ export default function SwapModalFooter({
         <RowBetween>
           <RowFixed>
             <TYPE.Black fontSize={14} fontWeight={400} color={theme.subText}>
-              Gas Fee
+              <Trans>Gas Fee</Trans>
             </TYPE.Black>
             <InfoHelper size={14} text={t`Estimated network fee for your transaction`} />
           </RowFixed>
@@ -114,7 +114,7 @@ export default function SwapModalFooter({
         <RowBetween>
           <RowFixed>
             <TYPE.Black fontSize={14} fontWeight={400} color={theme.subText}>
-              Price Impact
+              <Trans>Price Impact</Trans>
             </TYPE.Black>
             <InfoHelper size={14} text={t`Estimated change in price due to the size of your transaction`} />
           </RowFixed>
@@ -129,7 +129,7 @@ export default function SwapModalFooter({
         <RowBetween>
           <RowFixed>
             <TYPE.Black fontSize={14} fontWeight={400} color={theme.subText}>
-              Slippage
+              <Trans>Slippage</Trans>
             </TYPE.Black>
           </RowFixed>
           <TYPE.Black fontSize={14}>{allowedSlippage / 100}%</TYPE.Black>
@@ -139,7 +139,7 @@ export default function SwapModalFooter({
           <RowBetween>
             <RowFixed>
               <TYPE.Black fontSize={14} fontWeight={400} color={theme.subText}>
-                Referral Fee
+                <Trans>Referral Fee</Trans>
               </TYPE.Black>
               <InfoHelper size={14} text={t`Commission fee to be paid directly to your referrer`} />
             </RowFixed>
@@ -167,7 +167,7 @@ export default function SwapModalFooter({
             size={16}
             style={{ marginRight: '10px' }}
           />
-          {veryHighPriceImpact ? Price impact is Very High! : Price impact is High!}
+          {veryHighPriceImpact ? <Trans>Price impact is Very High!</Trans> : <Trans>Price impact is High!</Trans>}
         </AutoRow>
       )}
       <AutoRow>

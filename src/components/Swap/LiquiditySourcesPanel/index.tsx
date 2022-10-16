@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro'
+import { Trans, t } from '@lingui/macro'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { ArrowLeft } from 'react-feather'
 import { Box, Flex, Text } from 'rebass'
@@ -200,7 +200,7 @@ const LiquiditySourcesPanel: React.FC<Props> = ({ onBack }) => {
             }}
           />
           <Text>
-            Liquidity Sources
+            <Trans>Liquidity Sources</Trans>
           </Text>
         </LiquiditySourceHeader>
 

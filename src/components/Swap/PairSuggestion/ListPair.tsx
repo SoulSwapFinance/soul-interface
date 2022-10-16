@@ -1,4 +1,4 @@
-import { t } from '@lingui/macro'
+import { Trans, t } from '@lingui/macro'
 import React from 'react'
 import { AlertTriangle, Star } from 'react-feather'
 import { Flex, Text } from 'rebass'
@@ -100,7 +100,7 @@ export default function ListPair({
             <Container>
               <Title>
                 <Flex justifyContent="space-between">
-                  Favorites
+                  <Trans>Favourites</Trans>
                   <div>
                     {favoritePairs.length}/{MAX_FAVORITE_PAIRS}
                   </div>
@@ -135,7 +135,7 @@ export default function ListPair({
           {!isSearch && (
             <Container>
               <Title>
-                Top traded pairs
+                <Trans>Top traded pairs</Trans>
               </Title>
             </Container>
           )}

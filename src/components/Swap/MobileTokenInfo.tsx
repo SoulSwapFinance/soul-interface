@@ -1,5 +1,5 @@
 import { Currency } from 'sdk'
-import { t } from '@lingui/macro'
+import { Trans, t } from '@lingui/macro'
 import { MobileView, isMobile } from 'react-device-detect'
 import { Info, X } from 'react-feather'
 import { Flex, Text } from 'rebass'
@@ -33,7 +33,7 @@ function MobileTradeRoutes({
             <Flex flexDirection="column" width="100%" padding="16px 16px 0px" marginBottom="1rem">
               <RowBetween>
                 <Text fontSize={16} fontWeight={500}>
-                  Info
+                  <Trans>Info</Trans>
                 </Text>
                 <ButtonText onClick={toggle} style={{ alignSelf: 'flex-end', lineHeight: 0 }}>
                   <X color={theme.subText} size={24} />

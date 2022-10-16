@@ -1,5 +1,5 @@
 import { Currency } from 'sdk'
-import { t } from '@lingui/macro'
+import { Trans, t } from '@lingui/macro'
 import React, { useEffect, useState } from 'react'
 import { ArrowLeft } from 'react-feather'
 import { Flex } from 'rebass'
@@ -193,7 +193,7 @@ const TokenInfo = ({ currencies, onBack }: { currencies: { [field in Field]?: Cu
         {listData.map(item => (
           <InfoRow key={item.label}>
             <InfoRowLabel>
-              {item.label}
+              <Trans>{item.label}</Trans>
             </InfoRowLabel>
             <InfoRowValue>{
               // loading ? <Loader size="10px" /> :
@@ -204,7 +204,7 @@ const TokenInfo = ({ currencies, onBack }: { currencies: { [field in Field]?: Cu
 
         <InfoRow style={{ borderBottom: 'none', paddingBottom: 0 }}>
           <InfoRowLabel>
-            Contract Address
+            <Trans>Contract Address</Trans>
           </InfoRowLabel>
 
           <AutoRow width="fit-content" gap="4px">
@@ -223,7 +223,7 @@ const TokenInfo = ({ currencies, onBack }: { currencies: { [field in Field]?: Cu
       </Wrapper>
       <PoweredByWrapper>
         <PoweredByText>
-          Powered by
+          <Trans>Powered by</Trans>
         </PoweredByText>{' '}
         <Image src={darkMode ? Coingecko : CoingeckoLight} alt="Coingecko logo" />
       </PoweredByWrapper>
