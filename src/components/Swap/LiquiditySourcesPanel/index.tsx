@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { ArrowLeft } from 'react-feather'
 import { Box, Flex, Text } from 'rebass'
 import styled from 'styled-components'
-
+import Image from 'components/Image'
 import Checkbox from 'components/Checkbox/CheckboxV2'
 import { ELASTIC_NOT_SUPPORTED, soulswapDexes } from 'constants/dexes'
 import { useActiveWeb3React } from 'hooks'
@@ -225,7 +225,7 @@ const LiquiditySourcesPanel: React.FC<Props> = ({ onBack }) => {
                   }}
                 />
                 <ImageWrapper>
-                  <img src="https://kyberswap.com/favicon.ico" alt="ks logo" />
+                  <Image src="https://kyberswap.com/favicon.ico" alt="ks logo" />
                 </ImageWrapper>
                 <SourceName>Kyberswap - All</SourceName>
               </Source>
@@ -242,7 +242,7 @@ const LiquiditySourcesPanel: React.FC<Props> = ({ onBack }) => {
                       />
 
                       <ImageWrapper>
-                        <img src={logoURL} alt="" />
+                        <Image src={logoURL} alt="" />
                       </ImageWrapper>
 
                       <SourceName>{name}</SourceName>
@@ -258,7 +258,7 @@ const LiquiditySourcesPanel: React.FC<Props> = ({ onBack }) => {
                 <Checkbox type="checkbox" checked={!excludeDexes.includes(id)} onChange={() => handleToggleDex(id)} />
 
                 <ImageWrapper>
-                  <img src={logoURL} alt="" />
+                  <Image src={logoURL} alt="" />
                 </ImageWrapper>
 
                 <SourceName>{name}</SourceName>
