@@ -167,7 +167,7 @@ export default function SwapModalFooter({
             size={16}
             style={{ marginRight: '10px' }}
           />
-          {veryHighPriceImpact ? 'Price impact is Very High!' : 'Price impact is High!'}
+          {veryHighPriceImpact ? Price impact is Very High! : Price impact is High!}
         </AutoRow>
       )}
       <AutoRow>
