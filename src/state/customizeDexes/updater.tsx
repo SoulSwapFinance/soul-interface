@@ -18,9 +18,11 @@ export default function Updater(): null {
   // filterout kyberswap dexes, will hardcode
   const normalizeDexes = useMemo(() => {
     const temp =
-      dexes?.map(item => ({ ...item, id: item.dexId })).filter(item => !item.dexId.includes('kyberswap')) || []
+      dexes?.map(item => ({ ...item, id: item.dexId })).filter(item => !item.dexId.includes('soulswap')) || []
+      // dexes?.map(item => ({ ...item, id: item.dexId })).filter(item => !item.dexId.includes('kyberswap')) || []
     const isSupportkSElastic = false // !ELASTIC_NOT_SUPPORTED[chainId || 1]
-    return [...temp, ...soulswapDexes.filter(item => (isSupportkSElastic ? true : item.id !== 'kyberswapv2'))]
+    return [...temp, ...soulswapDexes.filter(item => (isSupportkSElastic ? true : item.id !== 'soulswap'))]
+    // return [...temp, ...soulswapDexes.filter(item => (isSupportkSElastic ? true : item.id !== 'kyberswapv2'))]
   }, [dexes, chainId])
 
   useEffect(() => {

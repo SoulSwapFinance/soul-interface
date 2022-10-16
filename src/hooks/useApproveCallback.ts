@@ -10,6 +10,9 @@ import { calculateGasMargin } from '../functions/trade'
 import { useActiveWeb3React } from 'services/web3'
 import { useTokenAllowance } from './useTokenAllowance'
 import { useTokenContract } from './useContract'
+import { computeSlippageAdjustedAmounts } from 'utils/prices'
+import { Aggregator } from 'utils/swap/aggregator'
+import { Field } from 'state/swap/actions'
 
 export enum ApprovalState {
   UNKNOWN = 'UNKNOWN',
@@ -122,4 +125,14 @@ export function useApproveCallbackFromTrade(
         : undefined
       : undefined
   )
+}
+
+// wraps useApproveCallback in the context of a swap
+export function useApproveCallbackFromTradeV2(trade?: Aggregator, allowedSlippage = 0) {
+  const { chainId } = useActiveWeb3React()
+  const amountToApprove = useMemo(
+    () => (trade ? computeSlippageAdjustedAmounts(trade, allowedSlippage)[Field.INPUT] : undefined),
+    [trade, allowedSlippage],
+  )
+  return useApproveCallback(amountToApprove, !!chainId && trade?.routerAddress ? trade.routerAddress : undefined)
 }

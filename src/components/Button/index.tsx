@@ -240,6 +240,18 @@ export function Button({
   )
 }
 
+export const ButtonEmpty = styled(Base)`
+  background-color: transparent;
+  color: ${({ theme }) => theme.primary};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:disabled {
+    opacity: 50%;
+    cursor: not-allowed;
+  }
+`
+
 export function ButtonConfirmed({
   confirmed,
   disabled,

@@ -33,9 +33,11 @@ export const finalizeTransaction = createAction<{
   chainId: ChainId
   hash: string
   receipt: SerializableTransactionReceipt
+  needCheckSubgraph?: boolean
 }>('transactions/finalizeTransaction')
 export const checkedTransaction = createAction<{
   chainId: ChainId
   hash: string
   blockNumber: number
 }>('transactions/checkedTransaction')
+export const checkedSubgraph = createAction<{ chainId: ChainId; hash: string }>('transactions/checkedSubgraph')

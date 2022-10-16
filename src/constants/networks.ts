@@ -139,6 +139,8 @@ export const NETWORKS_INFO = new Proxy(NETWORKS_INFO_CONFIG, {
   },
 })
 
+export const SUPPORTED_NETWORKS = Object.keys(NETWORKS_INFO).map(Number) as ChainId[]
+
 export const chainIdMapping: Partial<Record<ChainId, string>> = {
   [ChainId.BSC]: 'bsc',
 }

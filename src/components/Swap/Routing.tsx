@@ -2,7 +2,7 @@ import React, { memo, useCallback, useEffect, useMemo, useRef } from 'react'
 import { ChainId, Currency, CurrencyAmount } from 'sdk'
 import ScrollContainer from 'react-indiana-drag-scroll'
 import styled, { css } from 'styled-components'
-
+import Image from 'components/Image'
 import { useActiveWeb3React } from 'hooks'
 import { useAllTokens } from 'hooks/Tokens'
 import useThrottle from 'hooks/useThrottle'
@@ -416,7 +416,7 @@ const RouteRow = ({ route, chainId, backgroundColor }: RouteRowProps) => {
                         })(
                           <>
                             {dex?.logoURL ? (
-                              <img src={dex?.logoURL} alt="" className="img--sm" />
+                              <Image src={dex?.logoURL} alt="" className="img--sm" />
                             ) : (
                               <i className="img--sm" />
                             )}
