@@ -143,14 +143,6 @@
         "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454/logo.png"
       },
       {
-        "name": "Curve DAO",
-        "address": "0x1E4F97b9f9F913c46F1632781732927B9019C68b",
-        "symbol": "CRV",
-        "decimals": 18,
-        "chainId": 250,
-        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x1E4F97b9f9F913c46F1632781732927B9019C68b/logo.png"
-      },
-      {
         "name": "Dai Stablecoin",
         "address": "0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E",
         "symbol": "DAI",
@@ -159,28 +151,12 @@
         "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E/logo.png"
       },
       {
-        "name": "Fantom USD",
-        "address": "0xAd84341756Bf337f5a0164515b1f6F993D194E1f",
-        "symbol": "fUSD",
-        "decimals": 18,
-        "chainId": 250,
-        "logoURI": "https://ftmscan.com/token/images/fUSD_32.png"
-      },
-      {
         "name": "Luxor Money",
         "address": "0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b",
         "symbol": "LUX",
         "decimals": 9,
         "chainId": 250,
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b/logo.png"
-      },
-      {
-        "name": "Seance Circle",
-        "address": "0x124B06C5ce47De7A6e9EFDA71a946717130079E6",
-        "symbol": "SEANCE",
-        "decimals": 18,
-        "chainId": 250,
-        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x124B06C5ce47De7A6e9EFDA71a946717130079E6/logo.png"
       },
       {
         "name": "Soul Power",
@@ -237,14 +213,6 @@
         "decimals": 9,
         "chainId": 250,
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/analytics/blockchains/fantom/assets/0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208/logo.png"
-      },
-      {
-        "name": "Grim EVO",
-        "address": "0x0a77866C01429941BFC7854c0c0675dB1015218b",
-        "symbol": "GRIMEVO",
-        "decimals": 18,
-        "chainId": 250,
-        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x0a77866C01429941BFC7854c0c0675dB1015218b/logo.png"
       },
       {
         "name": "Avalanche",
