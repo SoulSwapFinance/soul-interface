@@ -6,7 +6,7 @@ import { ArrowDown } from 'react-feather'
 // import { RouteComponentProps } from 'react-router-dom'
 import { Text } from 'rebass'
 import styled from 'styled-components'
-
+// import Image from 'components/Image'
 // import SwapIcon from 'assets/svg/swap.svg'
 import AddressInputPanel from 'components/AddressInputPanel'
 import { ButtonConfirmed, ButtonError, ButtonLight, ButtonPrimary } from 'components/Button'
@@ -306,7 +306,7 @@ export default function Swap({ history }) {
             <AutoColumn justify="space-between">
               <AutoRow justify={isExpertMode ? 'space-between' : 'center'} style={{ padding: '0 1rem' }}>
                 <ArrowWrapper clickable>
-                  {/* <img
+                  {/* <Image
                     src={SwapIcon}
                     alt="SwapIcon"
                     width="22"
