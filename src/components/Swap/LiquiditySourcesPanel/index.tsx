@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import Image from 'components/Image'
 import Checkbox from 'components/Checkbox/CheckboxV2'
 import { ELASTIC_NOT_SUPPORTED, soulswapDexes } from 'constants/dexes'
-import { useActiveWeb3React } from 'services/web3'
+import { useActiveWeb3React } from 'hooks'
 import useDebounce from 'hooks/useDebounce'
 import { useAllDexes, useExcludeDexes } from 'state/customizeDexes/hooks'
 

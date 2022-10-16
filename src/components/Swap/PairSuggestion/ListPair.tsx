@@ -5,7 +5,7 @@ import { Flex, Text } from 'rebass'
 import styled, { css } from 'styled-components'
 
 import { Z_INDEXS } from 'constants/styles'
-import { useActiveWeb3React } from 'services/web3'
+import { useActiveWeb3React } from 'hooks'
 import useTheme from 'hooks/useTheme'
 
 import PairSuggestionItem from './PairSuggestionItem'

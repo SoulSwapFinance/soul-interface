@@ -115,9 +115,6 @@ msgstr ""
 msgid "Additional records and weekly merkle updates can be found on"
 msgstr ""
 
-msgid "Advanced mode is on!"
-msgstr ""
-
 msgid "Allocated: {0} SOUL"
 msgstr ""
 
@@ -265,9 +262,6 @@ msgstr ""
 msgid "Cancelled"
 msgstr ""
 
-msgid "Checking allowance..."
-msgstr ""
-
 msgid "Chinese"
 msgstr ""
 
@@ -331,9 +325,6 @@ msgid "Collateral Distribution"
 msgstr ""
 
 msgid "Come on Over..."
-msgstr ""
-
-msgid "Commission fee to be paid directly to your referrer"
 msgstr ""
 
 msgid "Community Approval"
@@ -540,13 +531,7 @@ msgstr ""
 msgid "Error connecting. Try refreshing the page."
 msgstr ""
 
-msgid "Estimated change in price due to the size of your transaction"
-msgstr ""
-
 msgid "Estimated network Fee"
-msgstr ""
-
-msgid "Estimated network fee for your transaction"
 msgstr ""
 
 msgid "Everytime you stake or claim rewards your lock time renews."
@@ -731,9 +716,6 @@ msgstr ""
 msgid "Including fees"
 msgstr ""
 
-msgid "Info"
-msgstr ""
-
 msgid "Input is estimated. You will sell at most"
 msgstr ""
 
@@ -824,9 +806,6 @@ msgstr ""
 msgid "Liquidity Provider Fee"
 msgstr ""
 
-msgid "Liquidity Sources"
-msgstr ""
-
 msgid "Liquidity provider fee"
 msgstr ""
 
@@ -908,9 +887,6 @@ msgstr ""
 msgid "Max Redeem"
 msgstr ""
 
-msgid "Maximum Sold"
-msgstr ""
-
 msgid "Me"
 msgstr ""
 
@@ -924,9 +900,6 @@ msgid "Migration is done in one-click using your signature (permit)"
 msgstr ""
 
 msgid "Minimum Received"
-msgstr ""
-
-msgid "Minimum amount you will receive or your transaction will revert"
 msgstr ""
 
 msgid "Minimum received after slippage"
@@ -1022,9 +995,6 @@ msgid ""
 msgstr ""
 
 msgid "Output is estimated. If the price changes by more than {0}% your transaction will revert."
-msgstr ""
-
-msgid "Output is estimated. You will receive at least"
 msgstr ""
 
 msgid "Overview"
@@ -1476,9 +1446,6 @@ msgstr ""
 msgid "Token"
 msgstr ""
 
-msgid "Token Info"
-msgstr ""
-
 msgid "Tokens"
 msgstr ""
 
@@ -1545,12 +1512,6 @@ msgid "Try typing \"10 ETH to KNC\""
 msgstr ""
 
 msgid "Turn On Expert Mode"
-msgstr ""
-
-msgid "Turn on Advanced Mode from settings to execute trades with high price impact"
-msgstr ""
-
-msgid "Turn on Advanced Mode to trade"
 msgstr ""
 
 msgid "Tutorial"
@@ -1640,9 +1601,6 @@ msgstr ""
 msgid "View our Data."
 msgstr ""
 
-msgid "View transaction"
-msgstr ""
-
 msgid "View your Dashboard."
 msgstr ""
 
@@ -1677,9 +1635,6 @@ msgid "Wallet address or ENS name"
 msgstr ""
 
 msgid "Warmup Period"
-msgstr ""
-
-msgid "We could not find anything. Try again."
 msgstr ""
 
 msgid "Why use Balance Mode?"
@@ -1742,9 +1697,6 @@ msgstr ""
 msgid "You don’t have liquidity in this pool yet"
 msgstr ""
 
-msgid "You have turned on Advanced Mode from settings. Trades with high price impact can be executed"
-msgstr ""
-
 msgid "You must unstake first, if you want to remove from your staked position."
 msgstr ""
 
@@ -1782,9 +1734,6 @@ msgid "Your Staked"
 msgstr ""
 
 msgid "Your Wallet"
-msgstr ""
-
-msgid "Your favourite pairs will appear here"
 msgstr ""
 
 msgid "Your net return over the total investment."
@@ -1836,9 +1785,6 @@ msgid "to staking pool."
 msgstr ""
 
 msgid "tokens into the farm to start earning rewards."
-msgstr ""
-
-msgid "your wallet"
 msgstr ""
 
 msgid "{0} Deposited"

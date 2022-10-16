@@ -6,7 +6,7 @@ import { stringify } from 'qs'
 import { useLocation } from 'react-router'
 
 import { NETWORKS_INFO, SUPPORTED_NETWORKS } from 'constants/networks'
-import { useActiveWeb3React } from 'services/web3'
+import { useActiveWeb3React } from 'hooks'
 // import { updateChainIdWhenNotConnected } from 'state/application/actions'
 // import { NotificationType, useNotify } from 'state/application/hooks'
 import { useAppDispatch } from 'state/hooks'
