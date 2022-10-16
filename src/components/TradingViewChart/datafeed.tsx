@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { DAI, USDC, USDT } from 'constants/index'
 import { NETWORKS_INFO } from 'constants/networks'
 // import { STABLE_COINS_ADDRESS } from 'constants/tokens'
-import { useActiveWeb3React } from 'hooks'
+import { useActiveWeb3React } from 'services/web3'
 import { Field } from 'state/swap/actions'
 
 import {

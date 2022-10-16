@@ -4,7 +4,7 @@ import JSBI from 'jsbi'
 import { useMemo } from 'react'
 
 // import { BAD_RECIPIENT_ADDRESSES } from 'constants/index'
-import { useActiveWeb3React } from 'hooks'
+import { useActiveWeb3React } from 'services/web3'
 import { useCurrency } from 'hooks/Tokens'
 import { useTradeExactInV2 } from 'hooks/Trades'
 import useENS from 'hooks/useENS'

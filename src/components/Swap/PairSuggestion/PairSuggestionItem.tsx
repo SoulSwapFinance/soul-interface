@@ -8,7 +8,7 @@ import styled from 'styled-components'
 
 import Logo from 'components/Logo'
 import { MouseoverTooltip } from 'components/Tooltip'
-import { useActiveWeb3React } from 'hooks'
+import { useActiveWeb3React } from 'services/web3'
 import { useAllTokens } from 'hooks/Tokens'
 import useTheme from 'hooks/useTheme'
 

@@ -1,6 +1,6 @@
 import useSWR from 'swr'
 import { NETWORKS_INFO } from 'constants/networks'
-import { useActiveWeb3React } from 'hooks'
+import { useActiveWeb3React } from 'services/web3'
 import { useTokenInfo } from './useAPI'
 import { WNATIVE_ADDRESS } from 'sdk'
 

@@ -5,14 +5,14 @@ import { network } from 'config/wallets'
 import { NetworkContextName } from '../../constants'
 import useEagerConnect from 'hooks/useEagerConnect'
 import useInactiveListener from 'hooks/useInactiveListener'
-import dynamic from 'next/dynamic'
+// import dynamic from 'next/dynamic'
 import React, { useEffect, useState } from 'react'
 
 import Loader from '../Loader'
 
-const GnosisManagerNoSSR = dynamic(() => import('./GnosisManager'), {
-  ssr: false,
-})
+// const GnosisManagerNoSSR = dynamic(() => import('./GnosisManager'), {
+//   ssr: false,
+// })
 
 export default function Web3ReactManager({ children }: { children: JSX.Element }) {
   const { i18n } = useLingui()

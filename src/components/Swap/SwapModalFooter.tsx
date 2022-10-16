@@ -6,7 +6,7 @@ import { AlertTriangle, Repeat } from 'react-feather'
 import { Text } from 'rebass'
 
 import InfoHelper from 'components/InfoHelper'
-import { useActiveWeb3React } from 'hooks'
+import { useActiveWeb3React } from 'services/web3'
 import { FeeConfig } from 'hooks/useSwapV2Callback'
 import useTheme from 'hooks/useTheme'
 import { Aggregator } from 'utils/swap/aggregator'
