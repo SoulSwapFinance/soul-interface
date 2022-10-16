@@ -1,4 +1,5 @@
 import { Currency } from 'sdk'
+import { Trans } from '@lingui/macro'
 import React, { useEffect, useMemo, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import { Repeat } from 'react-feather'
@@ -238,9 +239,11 @@ function LiveChart({
         >
           {/* <CircleInfoIcon /> */}
           <Text fontSize={16} textAlign={'center'}>
+            <Trans>
               You can swap {nativeInputCurrency?.symbol} for {nativeOutputCurrency?.symbol} (and vice versa)
               <br />
               Exchange rate is always 1 to 1.
+            </Trans>
           </Text>
         </Flex>
       ) : (
@@ -332,7 +335,7 @@ function LiveChart({
                         <>
                           <WarningIcon />
                           <Text fontSize={16}>
-                           Chart is unavailable right now.
+                            <Trans>Chart is unavailable right now</Trans>
                           </Text>
                         </>
                       )
