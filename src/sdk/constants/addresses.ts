@@ -722,6 +722,7 @@ export const FUSD_NATIVE: AddressMap = {
 
 export const DAI_NATIVE: AddressMap = {
   [ChainId.FANTOM]: '0xF3d6E8Ecece8647B456d57375Ce0B51B8F0cD40b',
+  [ChainId.AVALANCHE]: '0xEF1D48b24E87F8ccfF97f7C295B31B92E30F372B',
 }
 
 export const WLUM_NATIVE: AddressMap = {

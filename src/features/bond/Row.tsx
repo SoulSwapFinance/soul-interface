@@ -75,15 +75,8 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
   const { soulBondUserInfo } = useBondUserInfo(pid, account)
   const { pairUserInfo } = useUserPairInfo(account, assetAddress)
   const { pairInfo } = usePairInfo(assetAddress)
-  // todo: temp-fix
-  const temporaryBoost 
-    = [ChainId.AVALANCHE].includes(chainId) && pid == '4'
-  const temporaryBoostMultiplier = 3.25
   const assetName = soulBondUserInfo.symbol
-  const liquidity
-    = temporaryBoost
-      ? Number(soulBondUserInfo.tvl) * temporaryBoostMultiplier
-      : Number(soulBondUserInfo.tvl)
+  const liquidity = Number(soulBondUserInfo.tvl)
   const lpPrice = Number(soulBondUserInfo.pairPrice)
   const stakedBal = Number(soulBondUserInfo.stakedBalance)
   const unstakedBal = Number(soulBondUserInfo.userBalance)
@@ -117,9 +110,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
       : true
 
   // CALCULATIONS
-  const stakedLpValue = temporaryBoost
-    ? stakedBal * lpPrice * temporaryBoostMultiplier
-    : stakedBal * lpPrice
+  const stakedLpValue = stakedBal * lpPrice
   // const availableValue = unstakedBal * lpPrice
   const pendingValue = pending * soulPrice
   const percOfBond = 100 * stakedLpValue / liquidity
