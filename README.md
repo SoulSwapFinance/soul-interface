@@ -15,7 +15,7 @@ Home repository for the SoulSwap Decentralized Finance Application.
   - #### [add](./src/pages/exchange/add)
   - #### [remove](./src/pages/exchange/remove)
   - #### [find](./src/pages/exchange/find)
-- ### [Mines](./src/pages/mines)
+- ### [Summoner](./src/pages/summoner)
 - ### [Launchpad](./src/pages/launchpad/index.tsx)
 - ### [Lend](./src/pages/lend)
 - ### [Borrow](./src/pages/borrow/index.tsx)

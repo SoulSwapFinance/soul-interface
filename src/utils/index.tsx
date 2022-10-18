@@ -163,17 +163,6 @@ export function amountFormatter(amount, baseDecimals = 18, displayDecimals = 3, 
   }
 }
 
-export const trackTx = (hash, chainId) => {
-  if (process.env.REACT_APP_BLOCK_NATIVE) {
-    const notify = Notify({
-      dappId: process.env.REACT_APP_BLOCK_NATIVE, // [String] The API key created by step one above
-      networkId: chainId, // [Integer] The Ethereum network ID your Dapp uses.
-    })
-    // Track Tx progress
-    notify.hash(hash)
-  }
-}
-
 export function safeAccess(object, path) {
   return object
     ? path.reduce(

@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { lazy, SetStateAction, useState } from 'react'
 import { BigNumber } from 'bignumber.js'
-import { useTokenContract } from 'hooks/useContract';
+import { useTokenContract } from 'hooks/useContract'
 import qs from 'qs'
 import Typography from 'components/Typography'
-import { useActiveWeb3React } from 'services/web3';
+import { useActiveWeb3React } from 'services/web3'
 import Web3 from 'web3'
-import { NATIVE } from 'sdk';
+import { Currency, NATIVE, Token, WNATIVE } from 'sdk';
+import TradingView from 'components/TradingViewChart'
+import LiveChart from 'components/LiveChart'
+import LineChart from 'components/LiveChart/LineChart'
+import LineGraph from 'components/Dashboard/LineGraph'
+import TokenList from 'features/analytics/Tokens/TokenList'
+
+// const  = lazy(() => import('components/LiveChart'))
 
 export default function Aggregate() {
     const { account, chainId } = useActiveWeb3React()
@@ -16,8 +23,8 @@ export default function Aggregate() {
     const [ inputLogo, setInputLogo ] = useState(0)
     const [ outputLogo, setOutputLogo ] = useState(0)
     
-    const [ from, setFrom ] = useState(NATIVE[chainId])
-    const [ to, setTo ] = useState(NATIVE[chainId])
+    const [ from, setFrom ] = useState(WNATIVE[chainId])
+    const [ to, setTo ] = useState(WNATIVE[chainId])
 
 let currentSelectSide;
 let currentTrade: {
@@ -136,7 +143,7 @@ async function getQuote(account){
     console.log("Getting Quote");
   
     if (!from || !to || !inputAmount) return;
-    let amount = Number(inputAmount * 10 ** from.fromDecimals);
+    let amount = Number(inputAmount * 10 ** from.wrapped.decimals);
   
     const params = {
         sellToken: from.address,
@@ -215,8 +222,10 @@ return (
         <Typography>  fromAddress: {from.wrapped.address} </Typography>
 
         <Typography>  To: {to.symbol} </Typography>
-        <Typography>  toAddress: {to.address} </Typography>
+        <Typography>  toAddress: {to.wrapped.address} </Typography>
         </div>
-    </div>
+
+        <TokenList tokens={[]}/>  
+        </div>
 )
 }

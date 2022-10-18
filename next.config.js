@@ -66,17 +66,7 @@ module.exports = withBundleAnalyzer(
           source: '/farm',
           destination: '/summoner',
           permanent: true,
-        },        
-        {
-          source: '/mine',
-          destination: '/mines',
-          permanent: true,
         },
-        /* {
-          source: '/mines',
-          destination: '/mones',
-          permanent: true,
-        }, */
         {
           source: '/bond',
           destination: '/bonds',
@@ -131,6 +121,10 @@ module.exports = withBundleAnalyzer(
           destination: '/exchange/swap/:token*',
         },
         {
+          source: '/aggregate',
+          destination: '/exchange/aggregate',
+        },
+        {
           source: '/cross',
           destination: '/exchange/cross',
         },
@@ -182,10 +176,6 @@ module.exports = withBundleAnalyzer(
           source: '/farms',
           destination: '/summoner',
         },
-        /* {
-          source: '/mines',
-          destination: '/summoner',
-        }, */
         {
           source: '/autostake',
           destination: '/soul/autostake',

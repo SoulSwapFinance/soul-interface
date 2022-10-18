@@ -13,14 +13,14 @@ export const SECONDS = {
   // [ChainId.XDAI]: 'matthewlilley/xdai-blocks',
   [ChainId.MATIC]: 'matthewlilley/polygon-blocks',
   // [ChainId.HARMONY]: 'sushiswap/harmony-blocks',
-  // [ChainId.AVALANCHE]: 'matthewlilley/avalanche-blocks',
+  [ChainId.AVALANCHE]: 'matthewlilley/avalanche-blocks',
   // [ChainId.CELO]: 'sushiswap/celo-blocks',
 }
 
-export const timeFetcher = async (chainId = ChainId.ETHEREUM, query, variables) =>
+export const timeFetcher = async (chainId = ChainId.FANTOM, query, variables) =>
   request(`${GRAPH_HOST[chainId]}/subgraphs/name/${SECONDS[chainId]}`, query, variables)
 
-export const getSeconds = async (chainId = ChainId.ETHEREUM, start, end) => {
+export const getSeconds = async (chainId = ChainId.FANTOM, start, end) => {
   const { seconds } = await timeFetcher(chainId, secondsQuery, {
     start,
     end,
@@ -28,7 +28,7 @@ export const getSeconds = async (chainId = ChainId.ETHEREUM, start, end) => {
   return seconds
 }
 
-export const getOneDay = async (chainId = ChainId.ETHEREUM) => {
+export const getOneDay = async (chainId = ChainId.FANTOM) => {
   const date = startOfHour(subDays(Date.now(), 1))
   const start = Math.floor(Number(date) / 1000)
   const end = Math.floor(Number(date) / 1000) + 600
@@ -36,7 +36,7 @@ export const getOneDay = async (chainId = ChainId.ETHEREUM) => {
   return seconds?.[0]?.number
 }
 
-export const getOneWeek = async (chainId = ChainId.ETHEREUM) => {
+export const getOneWeek = async (chainId = ChainId.FANTOM) => {
   const date = startOfHour(subDays(Date.now(), 7))
   const start = Math.floor(Number(date) / 1000)
   const end = Math.floor(Number(date) / 1000) + 600
@@ -44,7 +44,7 @@ export const getOneWeek = async (chainId = ChainId.ETHEREUM) => {
   return seconds?.[0]?.number
 }
 
-export const getCustomDay = async (chainId = ChainId.ETHEREUM, days: number) => {
+export const getCustomDay = async (chainId = ChainId.FANTOM, days: number) => {
   const date = startOfHour(subDays(Date.now(), days))
   const start = Math.floor(Number(date) / 1000)
   const end = Math.floor(Number(date) / 1000) + 600

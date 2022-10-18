@@ -1,21 +1,16 @@
 import React, { useState } from 'react'
 import { Wrap } from 'components/ReusableStyles'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
-// import { TwitterBanner } from 'components/Banner'
-// import { useRouter } from 'next/router'
 import Container from 'components/Container'
 import Head from 'next/head'
 import FarmList from 'features/summoner/List'
 import { POOLS } from 'constants/farms'
-import useSummoner from 'features/mines/hooks/useMasterChef'
 import { useTVL } from 'hooks/useV2Pairs'
-import { usePositions } from 'features/mines/hooks'
+import { usePositions } from 'features/summoner/hooks'
 import { useSummonerContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
-import { TridentHeader } from 'layouts/Trident'
 import { formatNumberScale } from 'functions'
 import { Button } from 'components/Button'
-import { addTransaction } from 'state/transactions/actions'
 import { XIcon } from '@heroicons/react/solid'
 import { ChainId, SOUL_ADDRESS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
@@ -23,7 +18,12 @@ import { getChainColorCode } from 'constants/chains'
 import { useTokenInfo } from 'hooks/useAPI'
 import ExternalLink from 'components/ExternalLink'
 import { SubmitButton } from 'features/bond/Styles'
-import { i18n } from '@lingui/core'
+
+// import { TwitterBanner } from 'components/Banner'
+// import { useRouter } from 'next/router'
+// import { TridentHeader } from 'layouts/Trident'
+// import { addTransaction } from 'state/transactions/actions'
+// import { i18n } from '@lingui/core'
 
 const Summoner = () => {
   const { chainId } = useActiveWeb3React()
@@ -31,7 +31,6 @@ const Summoner = () => {
   const [showBalances, openShowBalances] = useState(true)
   const { tokenInfo } = useTokenInfo(SOUL_ADDRESS[chainId])
   const soulPrice = Number(tokenInfo.price)
-  const { harvest } = useSummoner()
   const SummonerContract = useSummonerContract()
   const positions = usePositions()
   const tvl = useTVL()

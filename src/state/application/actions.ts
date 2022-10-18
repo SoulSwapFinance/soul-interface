@@ -26,7 +26,6 @@ export enum ApplicationModal {
   ADDRESS_CLAIM,
   CLAIM_POPUP,
   MENU,
-  MINES,
   SEANCE,
   BONDS,
   DELEGATE,
