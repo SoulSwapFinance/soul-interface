@@ -89,15 +89,6 @@ export default function Stablecoin() {
           <title>Wrap | Luxor</title>
           <meta key="description" name="description" />
         </Head>
-        <div className="mt-2 mb-2">
-          <Button variant="filled" color="yellow" size="lg">
-            <NavLink href={'/swap?inputCurrency=&outputCurrency=0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b'}>
-              <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                <span>Market Price: ${Number(luxorPrice).toFixed(2)}</span>
-              </a>
-            </NavLink>
-          </Button>
-        </div>
         <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
           <Button variant="filled" color="yellow" size="lg">
             <NavLink href={'/luxor/dashboard'}>

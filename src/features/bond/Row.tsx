@@ -186,7 +186,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, token0Address, token1Symbol
       return result
     } catch (e) {
       console.log(e)
-      alert(e.message)
+      // alert(e.message)
       return e
     }
   }
