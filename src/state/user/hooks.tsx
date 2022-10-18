@@ -38,7 +38,6 @@ import {
   toggleURLWarning,
   toggleLiveChart,
   updateUserDeadline,
-  updateUserExpertMode,
   updateUserCrossChainMode,
   updateUserSingleHopOnly,
   updateUserSlippageTolerance,
@@ -81,21 +80,6 @@ export function useCrossChainModeManager(): [boolean, () => void] {
   }, [crosschainMode, dispatch])
 
   return [crosschainMode, toggleSetCrossChainMode]
-}
-
-export function useIsExpertMode(): boolean {
-  return useAppSelector((state) => state.user.userExpertMode)
-}
-
-export function useExpertModeManager(): [boolean, () => void] {
-  const dispatch = useAppDispatch()
-  const expertMode = useIsExpertMode()
-
-  const toggleSetExpertMode = useCallback(() => {
-    dispatch(updateUserExpertMode({ userExpertMode: !expertMode }))
-  }, [expertMode, dispatch])
-
-  return [expertMode, toggleSetExpertMode]
 }
 
 export function useUserSingleHopOnly(): [boolean, (newSingleHopOnly: boolean) => void] {

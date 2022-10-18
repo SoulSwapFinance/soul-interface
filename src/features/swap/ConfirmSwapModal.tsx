@@ -93,8 +93,8 @@ export default function ConfirmSwapModal({
 
   // text to show while loading
   const pendingText =
-    `Swapping ${formatNumberScale(trade?.inputAmount?.toSignificant(6))} ${trade?.inputAmount?.currency?.symbol
-    } for ${formatNumberScale(trade?.outputAmount?.toSignificant(6))} ${trade?.outputAmount?.currency?.symbol}`
+    `Swapping ${formatNumberScale(trade?.inputAmount?.toSignificant(2))} ${trade?.inputAmount?.currency?.symbol
+    } for ${formatNumberScale(trade?.outputAmount?.toSignificant(2))} ${trade?.outputAmount?.currency?.symbol}`
 
   // const pendingText2 = minerBribe
   //   ? `Plus ${CurrencyAmount.fromRawAmount(Ether.onChain(ChainId.ETHEREUM), minerBribe).toSignificant(6)} ETH Miner Tip`

@@ -3,7 +3,6 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { ChainId, Currency, JSBI, Token, Trade as V2Trade, TradeType } from 'sdk'
 import { Button } from 'components/Button'
-import RecipientField from 'components/RecipientField'
 import Typography from 'components/Typography'
 import Web3Connect from 'components/Web3Connect'
 import ConfirmSwapModal from 'features/swap/ConfirmSwapModal'
@@ -29,7 +28,7 @@ import { useActiveWeb3React } from 'services/web3'
 import { Field, setRecipient } from 'state/swap/actions'
 import { AVAX, CHAIN_BY_ID, FTM, NATIVE_ADDRESS, rubicConfiguration } from 'utils/rubic/configuration'
 import { useDefaultsFromURLSearch, useDerivedSwapInfo, useSwapActionHandlers, useSwapState } from 'state/swap/hooks'
-import { useExpertModeManager, useUserOpenMev, useUserSingleHopOnly } from 'state/user/hooks' // useCrossChainModeManager
+import { useUserOpenMev, useUserSingleHopOnly } from 'state/user/hooks' // useCrossChainModeManager
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
 import Chart from 'components/Chart'
@@ -58,7 +57,6 @@ const Swap = () => {
   const loadedUrlParams = useDefaultsFromURLSearch()
   const { account, chainId } = useActiveWeb3React()
   const defaultTokens = useAllTokens()
-  const [isExpertMode] = useExpertModeManager()
   const { independentField, typedValue, recipient } = useSwapState()
   const { v2Trade, parsedAmount, currencies, inputError: swapInputError, allowedSlippage, to } = useDerivedSwapInfo()
   const [loadedInputCurrency, loadedOutputCurrency] = [
@@ -282,7 +280,7 @@ const Swap = () => {
     (approvalState === ApprovalState.NOT_APPROVED ||
       approvalState === ApprovalState.PENDING ||
       (approvalSubmitted && approvalState === ApprovalState.APPROVED)) &&
-      !(priceImpactSeverity > 3 && !isExpertMode)
+      !(priceImpactSeverity > 3)
 
   const handleConfirmDismiss = useCallback(() => {
     setSwapState({
@@ -428,10 +426,11 @@ const Swap = () => {
           setFromUsd((Number(newFromUsd) * Number(newTrade.from.tokenAmount)).toString())
           setToUsd((Number(newToUsd) * Number((newTrade.to?.tokenAmount))).toString())
         } else {
-          setCrossTrade(newTrade);
-          setFromUsd((Number(newFromUsd) * Number(newTrade.trade.from?.tokenAmount)).toString())
-          setToUsd((Number(newToUsd) * Number((newTrade.trade.to?.tokenAmount))).toString())
-          setOutputAmount(Number(newTrade.trade.to?.tokenAmount).toString())
+          const test = newTrade
+          setCrossTrade(test);
+          setFromUsd((Number(newFromUsd) * Number(test.trade.from?.tokenAmount)).toString())
+          setToUsd((Number(newToUsd) * Number((test.trade.to?.tokenAmount))).toString())
+          setOutputAmount(Number(test.trade.to?.tokenAmount).toString())
           // console.log('outputAmount:%s', outputAmount)
         }
 
@@ -551,8 +550,6 @@ const Swap = () => {
             priceImpact={priceImpact}
             priceImpactCss={priceImpactCss}
           />
-        {isExpertMode && <RecipientField recipient={recipient} action={setRecipient} />}
-         {/* isCrossMode && <ToChainField toChain={toChain} action={setToChain} /> */}
         {Boolean(trade) && (
           <SwapDetails
             inputCurrency={currencies[Field.INPUT]}
@@ -609,9 +606,6 @@ const Swap = () => {
                 color={isValid && priceImpactSeverity > 2 ? 'red' : `${getChainColorCode(chainId)}`
                 }
                 onClick={() => {
-                  if (isExpertMode) {
-                    handleSwap()
-                  } else {
                     setSwapState({
                       tradeToConfirm: trade,
                       attemptingTxn: false,
@@ -620,14 +614,14 @@ const Swap = () => {
                       txHash: undefined,
                     })
                     }
-                  }}
+                  }
                 id="swap-button"
                 disabled={
                   !isValid || approvalState !== ApprovalState.APPROVED || (priceImpactSeverity > 3)
                 }
                 className="rounded-2xl w-full md:rounded"
               >
-                  {priceImpactSeverity > 3 && !isExpertMode
+                  {priceImpactSeverity > 3
                   ? i18n._(t`Price Impact High`)
                   : priceImpactSeverity > 2
                     ? i18n._(t`Swap Anyway`)
@@ -639,10 +633,7 @@ const Swap = () => {
           <Button
             color={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'red' : `${getChainColorCode(chainId)}`}
             onClick={() => {
-              if (isExpertMode) {
-                handleSwap()
-              } else {
-                setSwapState({
+              setSwapState({
                   tradeToConfirm: trade,
                   attemptingTxn: false,
                   swapErrorMessage: undefined,
@@ -650,7 +641,7 @@ const Swap = () => {
                   txHash: undefined,
                 })
               }
-            }}
+            }
             id="swap-button"
             disabled={!isValid || (priceImpactSeverity > 3) || !!swapCallbackError}
             className="rounded-2xl w-full md:rounded"
@@ -664,7 +655,6 @@ const Swap = () => {
                   : i18n._(t`Swap`)}
           </Button>
         )}
-          {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
         {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} show={false} /> : null}
         {/* </div> */}
         <div className="flex border-dark-900 mt-3 mb-0 gap-1 items-center justify-center">

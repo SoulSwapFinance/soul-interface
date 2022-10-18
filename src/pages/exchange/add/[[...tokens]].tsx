@@ -8,7 +8,7 @@ import TransactionConfirmationModal, { ConfirmationModalContent } from 'modals/T
 import { calculateGasMargin, calculateSlippageAmount } from 'functions/trade'
 import { currencyId, halfAmountSpend, maxAmountSpend } from 'functions/currency'
 import { useDerivedMintInfo, useMintActionHandlers, useMintState } from 'state/mint/hooks'
-import { useExpertModeManager, useUserSlippageToleranceWithDefault } from 'state/user/hooks'
+import { useUserSlippageToleranceWithDefault } from 'state/user/hooks'
 
 import { AutoColumn } from 'components/Column'
 import { BigNumber } from '@ethersproject/bignumber'
@@ -69,8 +69,6 @@ export default function Add() {
   )
 
   // const toggleWalletModal = useWalletModalToggle() // toggle wallet when disconnected
-
-  const [isExpertMode] = useExpertModeManager()
 
   // mint state
   const { independentField, typedValue, otherTypedValue } = useMintState()
@@ -437,16 +435,6 @@ export default function Add() {
                 balance={maxAmounts.CURRENCY_A}
                 showMax={false}
               /> */}
-              {/* <AutoColumn justify="center" className="mt-3">
-                  <AutoRow justify={isExpertMode ? 'space-between' : 'flex-end'} style={{ padding: '0 1rem' }}>
-                    <button className="z-10 -mt-6 -mb-6 rounded-full cursor-default bg-dark-900 p-3px">
-                      <div className="p-3 rounded-full bg-dark-800">
-                        <Plus size="18" />
-                      </div>
-
-                    </button>
-                  </AutoRow>
-                </AutoColumn> */}
               <div className="flex justify-center -mt-8 -mb-4 z-0">
                 <div
                   role="button"
@@ -564,7 +552,7 @@ export default function Add() {
                   {approvalA === ApprovalState.APPROVED && approvalB === ApprovalState.APPROVED && (
                     <ButtonError
                       onClick={() => {
-                        isExpertMode ? onAdd() : setShowConfirm(true)
+                        setShowConfirm(true)
                       }}
                       disabled={
                         !isValid || approvalA !== ApprovalState.APPROVED || approvalB !== ApprovalState.APPROVED

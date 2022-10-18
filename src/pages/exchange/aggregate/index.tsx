@@ -1,16 +1,29 @@
-import React, { lazy, SetStateAction, useState } from 'react'
+import React, { lazy, SetStateAction, useCallback, useMemo, useState } from 'react'
 import { BigNumber } from 'bignumber.js'
 import { useTokenContract } from 'hooks/useContract'
 import qs from 'qs'
 import Typography from 'components/Typography'
 import { useActiveWeb3React } from 'services/web3'
 import Web3 from 'web3'
-import { Currency, NATIVE, Token, WNATIVE } from 'sdk';
-import TradingView from 'components/TradingViewChart'
-import LiveChart from 'components/LiveChart'
-import LineChart from 'components/LiveChart/LineChart'
-import LineGraph from 'components/Dashboard/LineGraph'
-import TokenList from 'features/analytics/Tokens/TokenList'
+import { ChainId, Currency, NATIVE, Token, WNATIVE } from 'sdk';
+// import TradingView from 'components/TradingViewChart'
+// import LiveChart from 'components/LiveChart'
+// import LineChart from 'components/LiveChart/LineChart'
+// import LineGraph from 'components/Dashboard/LineGraph'
+// import TokenList from 'features/analytics/Tokens/TokenList'
+import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
+import { classNames } from 'functions/styling'
+import { SwapLayoutCard } from 'layouts/SwapLayout'
+import { useDerivedSwapInfo, useSwapActionHandlers, useSwapState } from 'state/swap/hooks'
+import useWrapCallback, { WrapType } from 'hooks/useWrapCallback'
+import { Field } from 'state/swap/actions'
+import SwapHeader from 'features/swap/SwapHeader'
+import { ArrowDownIcon } from '@heroicons/react/outline'
+import SwapDetails from 'features/swap/SwapDetails'
+import { getChainColorCode } from 'constants/chains'
+import { useUSDCValue } from 'hooks/useUSDCPrice'
+import { computeFiatValuePriceImpact } from 'functions/trade'
+import { warningSeverity } from 'functions/prices'
 
 // const  = lazy(() => import('components/LiveChart'))
 
@@ -19,12 +32,14 @@ export default function Aggregate() {
     
     const [ inputAmount, setInputAmount ] = useState(0)
     const [ outputAmount, setOutputAmount ] = useState(0)
-    
+    const { independentField, typedValue, recipient } = useSwapState()
+    const { onSwitchTokens, onCurrencySelection, onUserInput } = useSwapActionHandlers()
+
     const [ inputLogo, setInputLogo ] = useState(0)
     const [ outputLogo, setOutputLogo ] = useState(0)
     
     const [ from, setFrom ] = useState(WNATIVE[chainId])
-    const [ to, setTo ] = useState(WNATIVE[chainId])
+    const [ toToken, setToToken ] = useState(WNATIVE[chainId])
 
 let currentSelectSide;
 let currentTrade: {
@@ -44,6 +59,16 @@ let tokens;
 async function init() {
     await listAvailableTokens();
 }
+
+const [approvalSubmitted, setApprovalSubmitted] = useState<boolean>(false)
+
+
+const { v2Trade, parsedAmount, currencies, inputError: swapInputError, allowedSlippage, to } = useDerivedSwapInfo()
+const {
+    wrapType,
+    execute: onWrap,
+    inputError: wrapInputError,
+  } = useWrapCallback(currencies[Field.INPUT], currencies[Field.OUTPUT], typedValue)
 
 async function listAvailableTokens(){
     console.log("initializing");
@@ -125,7 +150,7 @@ async function getPrice(){
   
     const params = {
         sellToken: from.address,
-        buyToken: to.address,
+        buyToken: Field.OUTPUT,
         sellAmount: amount,
     }
   
@@ -135,7 +160,7 @@ async function getPrice(){
     let swapPriceJSON = await response.json();
     console.log("Price: ", swapPriceJSON);
     
-   setOutputAmount(swapPriceJSON.buyAmount / (10 ** to.decimals))
+   setOutputAmount(swapPriceJSON.buyAmount / (10 ** toToken.decimals))
     // document.getElementById("gas_estimate").innerHTML = swapPriceJSON.estimatedGas;
 }
 
@@ -147,7 +172,7 @@ async function getQuote(account){
   
     const params = {
         sellToken: from.address,
-        buyToken: to.address,
+        buyToken: toToken.address,
         sellAmount: amount,
         takerAddress: account,
     }
@@ -158,7 +183,7 @@ async function getQuote(account){
     let swapQuoteJSON = await response.json();
     console.log("Quote: ", swapQuoteJSON);
     
-    setOutputAmount(swapQuoteJSON.buyAmount / (10 ** to.decimals))
+    setOutputAmount(swapQuoteJSON.buyAmount / (10 ** toToken.decimals))
     // document.getElementById("gas_estimate").innerHTML = swapQuoteJSON.estimatedGas;
   
     return swapQuoteJSON;
@@ -200,8 +225,89 @@ async function trySwap(){
     // Perform the swap
     const receipt = await web3.eth.sendTransaction(swapQuoteJSON);
     // console.log("receipt: ", receipt);
-}
+}  
+const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE
 
+const isValid = !swapInputError
+const dependentField: Field = independentField === Field.INPUT ? Field.OUTPUT : Field.INPUT
+const trade = showWrap ? undefined : v2Trade
+
+const parsedAmounts = useMemo(
+  () =>
+    showWrap
+      ? {
+        [Field.INPUT]: parsedAmount,
+        [Field.OUTPUT]: parsedAmount,
+      }
+      : {
+        [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
+        [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount,
+      },
+  [independentField, parsedAmount, showWrap, trade]
+)
+
+const handleInputSelect = useCallback(
+    (inputCurrency) => {
+      setApprovalSubmitted(false) // reset 2 step UI for approvals
+      onCurrencySelection(Field.INPUT, inputCurrency)
+    },
+    [onCurrencySelection]
+  )
+
+  const handleOutputSelect = useCallback(
+    (outputCurrency) => onCurrencySelection(Field.OUTPUT, outputCurrency),
+    [onCurrencySelection]
+  )
+
+const fiatValueInput = useUSDCValue(parsedAmounts[Field.INPUT])
+const fiatValueOutput = useUSDCValue(parsedAmounts[Field.OUTPUT])
+const priceImpact = computeFiatValuePriceImpact(fiatValueInput, fiatValueOutput)
+
+const formattedAmounts = {
+    [independentField]: typedValue,
+    [dependentField]: showWrap
+      ? parsedAmounts[independentField]?.toExact() ?? ''
+      : parsedAmounts[dependentField]?.toSignificant(6) ?? '',
+  }
+
+  const handleTypeInput = useCallback(
+    (value: string) => {
+      onUserInput(Field.INPUT, value)
+    },
+    [onUserInput]
+  )
+
+  const handleTypeOutput = useCallback(
+    (value: string) => {
+      onUserInput(Field.OUTPUT, value)
+    },
+    [onUserInput]
+  )
+
+  const priceImpactSeverity = useMemo(() => {
+    const executionPriceImpact = trade?.priceImpact
+    return warningSeverity(
+      executionPriceImpact && priceImpact
+        ? executionPriceImpact.greaterThan(priceImpact)
+          ? executionPriceImpact
+          : priceImpact
+        : executionPriceImpact ?? priceImpact
+    )
+  }, [priceImpact, trade])
+  
+  const priceImpactCss = useMemo(() => {
+    switch (priceImpactSeverity) {
+      case 0:
+      case 1:
+      case 2:
+      default:
+        return 'text-low-emphesis'
+      case 3:
+        return 'text-yellow'
+      case 4:
+        return 'text-red'
+    }
+  }, [priceImpactSeverity])
 // init();
 
 // document.getElementById("login_button").onclick = connect;
@@ -217,15 +323,76 @@ async function trySwap(){
 
 return (
     <div>
+            <SwapHeader inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+          <SwapAssetPanel
+            spendFromWallet={true}
+            chainId={chainId}
+            header={(props) => (
+              <SwapAssetPanel.Header
+                {...props}
+                label={'SwapFrom'}
+              />
+            )}
+            currency={currencies[Field.INPUT]}
+            value={formattedAmounts[Field.INPUT]}
+            onChange={handleTypeInput}
+            onSelect={handleInputSelect}
+          />
+          
+        <div className={ classNames("flex justify-center -mt-6 -mb-6 z-0") }>
+          <div
+            role="button"
+            className={classNames(`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`)}
+            onClick={() => {
+            //   setApprovalSubmitted(false) // reset 2 step UI for approvals
+            //   onSwitchTokens()
+            }}
+          >
+            { <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" /> }
+          </div>
+        </div>
+
+        {/* TO ASSET PANEL */}
+          <SwapAssetPanel
+            spendFromWallet={true}
+            chainId={chainId}
+            header={(props) => (
+              <SwapAssetPanel.Header
+                {...props}
+                label={'Swap to:'}
+              />
+            )}
+            currency={currencies[Field.OUTPUT]}
+            value={formattedAmounts[Field.OUTPUT]}
+            onChange={handleTypeOutput}
+            onSelect={handleOutputSelect}
+            priceImpact={priceImpact}
+            priceImpactCss={priceImpactCss}
+          />
+        {Boolean(trade) && (
+          <SwapDetails
+            inputCurrency={currencies[Field.INPUT]}
+            outputCurrency={currencies[Field.OUTPUT]}
+            trade={trade}
+            recipient={recipient ?? undefined}
+          />
+          )}
+        {/* {trade && routeNotFound && userHasSpecifiedInputOutput && (
+          <Typography variant="xs" className="text-center py-2">
+            {`Insufficient liquidity for this trade.`}{' '}
+            {singleHopOnly && `Try enabling multi-hop trades`}
+          </Typography>
+        )} */}
+        
         <div className={'grid grid-cols-1 justify-between'}>
         <Typography>  From: {from.symbol} </Typography>
         <Typography>  fromAddress: {from.wrapped.address} </Typography>
+        <Typography>  inputAmount: {inputAmount} </Typography>
 
-        <Typography>  To: {to.symbol} </Typography>
-        <Typography>  toAddress: {to.wrapped.address} </Typography>
+        <Typography>  To: {toToken.symbol} </Typography>
+        <Typography>  toAddress: {toToken.wrapped.address} </Typography>
+        <Typography>  outputAmount: {outputAmount} </Typography>
         </div>
-
-        <TokenList tokens={[]}/>  
         </div>
 )
 }

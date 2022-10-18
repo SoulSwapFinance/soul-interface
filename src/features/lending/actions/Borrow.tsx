@@ -16,7 +16,6 @@ import { useV2TradeExactIn } from 'hooks/useV2Trades'
 import { useActiveWeb3React } from 'services/web3'
 import { useAppSelector } from 'state/hooks'
 import { selectSlippage } from 'state/slippage/slippageSlice'
-import { useExpertModeManager } from 'state/user/hooks'
 import { useETHBalances } from 'state/wallet/hooks'
 import React, { useMemo, useState } from 'react'
 
@@ -26,9 +25,6 @@ import SmartNumberInput from '../components/SmartNumberInput'
 import TradeReview from '../components/TradeReview'
 import TransactionReviewView from '../components/TransactionReview'
 import WarningsView from '../components/WarningsList'
-import { usePrice } from 'hooks'
-import AssetInput from 'components/AssetInput'
-import LendAssetInput from 'components/LendAssetInput'
 import usePriceApi from 'hooks/usePriceApi'
 import { useUnderworldPairInfo } from 'hooks/useAPI'
 
@@ -214,9 +210,7 @@ export default function Borrow({ pair }: BorrowProps) {
 
   const trade = swap && borrowValueSet ? foundTrade : undefined
 
-  const [isExpertMode] = useExpertModeManager()
-
-  // const { priceImpactWithoutFee } = computeTradePriceBreakdown(trade);
+ // const { priceImpactWithoutFee } = computeTradePriceBreakdown(trade);
 
   const priceImpactSeverity = warningSeverity(priceImpact)
 
@@ -343,7 +337,7 @@ export default function Borrow({ pair }: BorrowProps) {
     actionName = trade ? 'Borrow, Swap, Collateralize' : `Borrow ${assetSymbol}`
   }
 
-  if (swap && priceImpactSeverity > 3 && !isExpertMode) {
+  if (swap && priceImpactSeverity > 3) {
     actionName = 'Price Impact High'
   } else if (swap && priceImpactSeverity > 2) {
     actionName = actionName + ' anyway'
@@ -355,7 +349,7 @@ export default function Borrow({ pair }: BorrowProps) {
     // || 
     collateralWarnings.broken
     || (borrowValue.length > 0 && borrowWarnings.broken)
-    || (swap && priceImpactSeverity > 3 && !isExpertMode)
+    || (swap && priceImpactSeverity > 3)
     // || (userCollateralValue == 0  && !collateralValueSet)
 
   // Handlers
@@ -590,7 +584,7 @@ export default function Borrow({ pair }: BorrowProps) {
 
       {(collateralValueSet ||
         (borrowValueSet && userCollateralAmount > 0) ||
-        (swap && (priceImpactSeverity < 3 || isExpertMode))) && (
+        (swap && (priceImpactSeverity < 3))) && (
           <TransactionReviewView transactionReview={transactionReview} />
         )}
 

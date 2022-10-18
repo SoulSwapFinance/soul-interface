@@ -16,9 +16,6 @@ msgstr ""
 msgid "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies."
 msgstr ""
 
-msgid "+ Add Recipient (optional)"
-msgstr ""
-
 msgid "+/-"
 msgstr ""
 
@@ -92,9 +89,6 @@ msgid "Add Liquidity"
 msgstr ""
 
 msgid "Add Liquidity & Earn Fees (0.25%)"
-msgstr ""
-
-msgid "Add Recipient"
 msgstr ""
 
 msgid "Add collateral in order to borrow assets"
@@ -236,9 +230,6 @@ msgid ""
 "By adding this list you are implicitly trusting that the data is correct. Anyone can create a list,\n"
 "including creating fake versions of existing lists and lists that claim to represent projects that do not\n"
 "have one."
-msgstr ""
-
-msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
 msgstr ""
 
 msgid "COFFIN"
@@ -468,9 +459,6 @@ msgstr ""
 msgid "Earned"
 msgstr ""
 
-msgid "Enable Expert Mode"
-msgstr ""
-
 msgid "English"
 msgstr ""
 
@@ -517,14 +505,6 @@ msgid "Expanded results from inactive token lists"
 msgstr ""
 
 msgid "Expected Output"
-msgstr ""
-
-msgid "Expert Mode"
-msgstr ""
-
-msgid ""
-"Expert mode turns off the confirm transaction prompt and allows high slippage trades\n"
-"that often result in bad rates and lost funds."
 msgstr ""
 
 msgid "Explore"
@@ -884,13 +864,7 @@ msgstr ""
 msgid "Number of Assets"
 msgstr ""
 
-msgid "ONLY USE THIS MODE IF YOU KNOW WHAT YOU ARE DOING."
-msgstr ""
-
 msgid "Onchain oracle that tracks pricing for this pair."
-msgstr ""
-
-msgid "Only use this mode if you know what you are doing."
 msgstr ""
 
 msgid "Oops!"
@@ -941,9 +915,6 @@ msgid "Please connect to the appropriate network."
 msgstr ""
 
 msgid "Please make sure your {0} balance is sufficient to withdraw and then try again."
-msgstr ""
-
-msgid "Please note the recipient address is different from the connected wallet address."
 msgstr ""
 
 msgid "Please refer to the"
@@ -1039,9 +1010,6 @@ msgid "Remove Liquidity"
 msgstr ""
 
 msgid "Remove liquidity of Soul"
-msgstr ""
-
-msgid "Remove recipient"
 msgstr ""
 
 msgid "Remove to Wallet"
@@ -1391,9 +1359,6 @@ msgstr ""
 msgid "Try typing \"10 ETH to KNC\""
 msgstr ""
 
-msgid "Turn On Expert Mode"
-msgstr ""
-
 msgid "Tutorial"
 msgstr ""
 
@@ -1503,9 +1468,6 @@ msgid "Wallet Balance"
 msgstr ""
 
 msgid "Wallet Balances"
-msgstr ""
-
-msgid "Wallet address or ENS name"
 msgstr ""
 
 msgid "Warmup Period"

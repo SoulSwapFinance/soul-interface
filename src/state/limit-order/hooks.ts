@@ -21,7 +21,7 @@ import useParsedQueryString from 'hooks/useParsedQueryString'
 import { useV2TradeExactIn as useTradeExactIn, useV2TradeExactOut as useTradeExactOut } from 'hooks/useV2Trades'
 import { useActiveWeb3React } from 'services/web3'
 import { useAppDispatch } from 'state/hooks'
-import { useExpertModeManager, useUserSingleHopOnly } from 'state/user/hooks'
+import { useUserSingleHopOnly } from 'state/user/hooks'
 import { ParsedQs } from 'qs'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -155,7 +155,6 @@ export function useDefaultsFromURLSearch() {
   const { chainId } = useActiveWeb3React()
   const dispatch = useAppDispatch()
   const parsedQs = useParsedQueryString()
-  const [expertMode] = useExpertModeManager()
   const [result, setResult] = useState<
     | {
         inputCurrencyId?: string
@@ -171,7 +170,7 @@ export function useDefaultsFromURLSearch() {
     dispatch(
       replaceLimitOrderState({
         ...parsed,
-        recipient: expertMode ? parsed.recipient : undefined,
+        recipient: undefined,
       })
     )
 
@@ -272,7 +271,6 @@ export const useLimitOrderDerivedInputError: UseLimitOrderDerivedInputError = ({
   const to = !recipient ? account : recipientLookup.address
   const parsedRate = useLimitOrderDerivedLimitPrice()
   const balance = useCoffinOrWalletBalance(account ?? undefined, inputCurrency, !fromCoffinBalance)
-  const [expertMode] = useExpertModeManager()
 
   return useMemo(() => {
     return !account
@@ -289,13 +287,12 @@ export const useLimitOrderDerivedInputError: UseLimitOrderDerivedInputError = ({
       ? i18n._(t`Select Order Expiration`)
       : !balance
       ? i18n._(t`Loading Balance`)
-      : !expertMode && balance && trade?.inputAmount && balance.lessThan(trade.inputAmount)
+      : balance && trade?.inputAmount && balance.lessThan(trade.inputAmount)
       ? i18n._(t`Insufficient Balance`)
       : ''
   }, [
     account,
     balance,
-    expertMode,
     inputCurrency,
     limitPrice,
     orderExpiration,
