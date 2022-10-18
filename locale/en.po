@@ -16,9 +16,6 @@ msgstr ""
 msgid "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies."
 msgstr "(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies."
 
-msgid "+ Add Recipient (optional)"
-msgstr "+ Add Recipient (optional)"
-
 msgid "+/-"
 msgstr "+/-"
 
@@ -93,9 +90,6 @@ msgstr "Add Liquidity"
 
 msgid "Add Liquidity & Earn Fees (0.25%)"
 msgstr "Add Liquidity & Earn Fees (0.25%)"
-
-msgid "Add Recipient"
-msgstr "Add Recipient"
 
 msgid "Add collateral in order to borrow assets"
 msgstr "Add collateral in order to borrow assets"
@@ -240,9 +234,6 @@ msgstr ""
 "By adding this list you are implicitly trusting that the data is correct. Anyone can create a list,\n"
 "including creating fake versions of existing lists and lists that claim to represent projects that do not\n"
 "have one."
-
-msgid "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
-msgstr "Bypasses confirmation modals and allows high slippage trades. Use at your own risk."
 
 msgid "COFFIN"
 msgstr "COFFIN"
@@ -473,9 +464,6 @@ msgstr "Earn"
 msgid "Earned"
 msgstr "Earned"
 
-msgid "Enable Expert Mode"
-msgstr "Enable Expert Mode"
-
 msgid "English"
 msgstr "English"
 
@@ -523,16 +511,6 @@ msgstr "Expanded results from inactive token lists"
 
 msgid "Expected Output"
 msgstr "Expected Output"
-
-msgid "Expert Mode"
-msgstr "Expert Mode"
-
-msgid ""
-"Expert mode turns off the confirm transaction prompt and allows high slippage trades\n"
-"that often result in bad rates and lost funds."
-msgstr ""
-"Expert mode turns off the confirm transaction prompt and allows high slippage trades\n"
-"that often result in bad rates and lost funds."
 
 msgid "Explore"
 msgstr "Explore"
@@ -891,14 +869,8 @@ msgstr "Not available for legacy route"
 msgid "Number of Assets"
 msgstr "Number of Assets"
 
-msgid "ONLY USE THIS MODE IF YOU KNOW WHAT YOU ARE DOING."
-msgstr "ONLY USE THIS MODE IF YOU KNOW WHAT YOU ARE DOING."
-
 msgid "Onchain oracle that tracks pricing for this pair."
 msgstr "Onchain oracle that tracks pricing for this pair."
-
-msgid "Only use this mode if you know what you are doing."
-msgstr "Only use this mode if you know what you are doing."
 
 msgid "Oops!"
 msgstr "Oops!"
@@ -951,9 +923,6 @@ msgstr "Please connect to the appropriate network."
 
 msgid "Please make sure your {0} balance is sufficient to withdraw and then try again."
 msgstr "Please make sure your {0} balance is sufficient to withdraw and then try again."
-
-msgid "Please note the recipient address is different from the connected wallet address."
-msgstr "Please note the recipient address is different from the connected wallet address."
 
 msgid "Please refer to the"
 msgstr "Please refer to the"
@@ -1051,9 +1020,6 @@ msgstr "Remove Liquidity"
 
 msgid "Remove liquidity of Soul"
 msgstr "Remove liquidity of Soul"
-
-msgid "Remove recipient"
-msgstr "Remove recipient"
 
 msgid "Remove to Wallet"
 msgstr "Remove to Wallet"
@@ -1404,9 +1370,6 @@ msgstr "Try enabling multi-hop trades"
 msgid "Try typing \"10 ETH to KNC\""
 msgstr "Try typing \"10 ETH to KNC\""
 
-msgid "Turn On Expert Mode"
-msgstr "Turn On Expert Mode"
-
 msgid "Tutorial"
 msgstr "Tutorial"
 
@@ -1517,9 +1480,6 @@ msgstr "Wallet Balance"
 
 msgid "Wallet Balances"
 msgstr "Wallet Balances"
-
-msgid "Wallet address or ENS name"
-msgstr "Wallet address or ENS name"
 
 msgid "Warmup Period"
 msgstr "Warmup Period"

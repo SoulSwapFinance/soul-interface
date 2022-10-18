@@ -97,6 +97,7 @@ export default function AutoStake() {
   const nowTime = new Date().getTime()
   const withdrawFeeRate = Number(autoStakeInfo.withdrawFee)
   const feeHours = Number(autoStakeInfo.withdrawFeeHours)
+  const feeDays = feeHours / 24
   const feeDuration = Number(autoStakeInfo.withdrawFeePeriod) * 1_000
   const lastDepositTime = Number(userAutoStakeInfo.lastDepositedTime) * 1_000
   const feeExpiration = (lastDepositTime + feeDuration)
@@ -105,7 +106,7 @@ export default function AutoStake() {
   // const feeSecondsRemaining = feeExpiration - nowTime
   const remainingSeconds = feeExpiration - Number(nowTime)
   // console.log('remainingSecs:%s', remainingSeconds)
-  const remainingHours = remainingSeconds / 3_600_000
+  const remainingHours = max(remainingSeconds / 3_600_000, 0)
   const remainingMinutes = max(remainingHours * 60, 0)
   
   const feeAmount = 
@@ -253,7 +254,7 @@ export default function AutoStake() {
                   {i18n._(t`Ritual (Fee) Duration`)}
                 </Typography>
                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                  { feeHours } hours
+                  { feeDays } days
                 </Typography>
               </div>
               
@@ -356,7 +357,7 @@ export default function AutoStake() {
       {i18n._(t`Until Salvation`)}
     </Typography>
     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-    { (formatNumber(remainingMinutes, false, true)) } mins
+    { (formatNumber(remainingHours, false, true)) } hours
     </Typography>
 </div>             
 

@@ -12,7 +12,6 @@ import { Feature } from 'enums'
 import ConfirmSwapModal from 'features/swap/ConfirmSwapModal'
 import _useSwapPage from 'features/trident/swap/_useSwapPage'
 import { DerivedTradeContext } from 'features/trident/swap/DerivedTradeContext'
-import RecipientPanel from 'features/trident/swap/RecipientPanel'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 import SwapButton from 'features/trident/swap/SwapButton'
 import SwapRate from 'features/trident/swap/SwapRate'
@@ -33,7 +32,6 @@ import { useSwapCallback } from 'hooks/useSwapCallback'
 import useSwapSlippageTolerance from 'hooks/useSwapSlippageTollerence'
 import { useActiveWeb3React } from 'services/web3'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
-import { useExpertModeManager } from 'state/user/hooks'
 import { TradeUnion } from 'types'
 import React, { useCallback, useMemo, useState } from 'react'
 
@@ -43,7 +41,6 @@ const Swap = () => {
   const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
   const { currencies, setURLCurrency, switchCurrencies } = useCurrenciesFromURL()
-  const [expertMode] = useExpertModeManager()
   const dispatch = useAppDispatch()
   const tridentSwapState = useAppSelector(selectTridentSwap)
   const {
@@ -196,11 +193,6 @@ const Swap = () => {
                 [cbError, error, formattedAmounts, isWrap, parsedAmounts, priceImpact, swapStateError, trade]
               )}
             >
-              {expertMode && (
-                <div className="mb-3 lg:mb-0">
-                  <RecipientPanel />
-                </div>
-              )}
               {trade && (
                 <div className="flex flex-col px-3 mb-3 border divide-y rounded border-dark-800 lg:mb-0 divide-dark-800">
                   <div className="flex justify-between py-2">

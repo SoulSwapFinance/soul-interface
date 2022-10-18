@@ -23,7 +23,7 @@ import { useV2TradeExactIn as useTradeExactIn, useV2TradeExactOut as useTradeExa
 import { useActiveWeb3React } from 'services/web3'
 import { AppState } from 'state'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
-import { useExpertModeManager, useUserSingleHopOnly } from 'state/user/hooks'
+import { useUserSingleHopOnly } from 'state/user/hooks'
 import { ParsedQs } from 'qs'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -360,7 +360,6 @@ export function useDefaultsFromURLSearch():
   const { chainId } = useActiveWeb3React()
   const dispatch = useAppDispatch()
   const parsedQs = useParsedQueryString()
-  const [expertMode] = useExpertModeManager()
   const [result, setResult] = useState<
     | {
         inputCurrencyId: string | undefined
@@ -381,7 +380,7 @@ export function useDefaultsFromURLSearch():
         field: parsed.independentField,
         inputCurrencyId: parsed[Field.INPUT].currencyId,
         outputCurrencyId: parsed[Field.OUTPUT].currencyId,
-        recipient: expertMode ? parsed.recipient : null,
+        recipient: null,
         feeConfig: parsed.feeConfig,
         toChain: parsed.toChain
       })
@@ -390,8 +389,8 @@ export function useDefaultsFromURLSearch():
     setResult({
       inputCurrencyId: parsed[Field.INPUT].currencyId,
       outputCurrencyId: parsed[Field.OUTPUT].currencyId,
-      recipient: expertMode ? parsed.recipient : null,
-      toChain: expertMode ? parsed.toChain : ChainId.FANTOM
+      recipient: null,
+      toChain: ChainId.FANTOM
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, chainId])
