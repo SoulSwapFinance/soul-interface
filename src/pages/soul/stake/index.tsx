@@ -145,15 +145,6 @@ export default function Stake() {
         <title>AutoStake | Soul</title>
         <meta key="description" name="description" />
       </Head>
-      <div className="mt-2 mb-2">
-        <Button variant="filled" color="purple" size="lg">
-          <NavLink href={`/swap?inputCurrency=&outputCurrency=${SOUL_ADDRESS[chainId]}`}>
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span>Market Price: ${Number(soulPrice).toFixed(2)}</span>
-            </a>
-          </NavLink>
-        </Button>
-      </div>
       <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/dashboard'}>
@@ -173,6 +164,13 @@ export default function Stake() {
           <NavLink href={'/summoner'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Farm </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="purple" size="lg">
+          <NavLink href={'/underworld'}>
+            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Lend </span>
             </a>
           </NavLink>
         </Button>
