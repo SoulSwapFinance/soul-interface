@@ -102,15 +102,14 @@ export default function AutoStake() {
   const lastDepositTime = Number(userAutoStakeInfo.lastDepositedTime) * 1_000
   const feeExpiration = (lastDepositTime + feeDuration)
   const unlockTime = new Date(feeExpiration).toLocaleString()
-  const timeSinceDeposit = nowTime - lastDepositTime / 3_600_000
+  // const timeSinceDeposit = nowTime - lastDepositTime / 3_600_000
   // const feeSecondsRemaining = feeExpiration - nowTime
   const remainingSeconds = feeExpiration - Number(nowTime)
   // console.log('remainingSecs:%s', remainingSeconds)
   const remainingHours = max(remainingSeconds / 3_600_000, 0)
   const remainingMinutes = max(Number(remainingHours) * 60, 0)
   
-  const feeAmount = 
-    remainingMinutes == 0 ? 0 : withdrawFeeRate * stakedBal / 100 // * Number(withdrawValue)
+  const feeAmount = remainingMinutes == 0 ? 0 : withdrawFeeRate * stakedBal / 100 // * Number(withdrawValue)
 
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
     parsedStakeValue,
@@ -124,39 +123,39 @@ export default function AutoStake() {
         : undefined
 
   const isStakeValid = !stakeError
-  
+
   // HANDLE HARVEST //
-    const handleHarvest = async () => {
-        try {
-            let tx
-            tx = await AutoStakeContract?.harvest()
-          await tx?.wait()
-        } catch (e) {
-            // alert(e.message)
-            console.log(e)
-        }
-    }
-    
-    // HANDLE DEPOSIT //
-     const handleDeposit = async (amount) => {
+  const handleHarvest = async () => {
       try {
-          const tx = await AutoStakeContract?.deposit(account, parsedDepositValue?.quotient.toString())
-          await tx.wait()
+          let tx
+          tx = await AutoStakeContract?.harvest()
+        await tx?.wait()
       } catch (e) {
           // alert(e.message)
           console.log(e)
       }
   }
-    // HANDLE WITHDRAW //
-    const handleWithdraw = async (amount) => {
-        try {
-            const tx = await AutoStakeContract?.withdraw(parsedWithdrawValue?.quotient.toString())
-            await tx?.wait()
-        } catch (e) {
-            console.log(e)
-        }
-    }
 
+  // HANDLE DEPOSIT //
+    const handleDeposit = async (amount) => {
+    try {
+        const tx = await AutoStakeContract?.deposit(account, parsedDepositValue?.quotient.toString())
+        await tx.wait()
+    } catch (e) {
+        // alert(e.message)
+        console.log(e)
+    }
+  }
+
+  // HANDLE WITHDRAW //
+  const handleWithdraw = async (amount) => {
+      try {
+          const tx = await AutoStakeContract?.withdraw(parsedWithdrawValue?.quotient.toString())
+          await tx?.wait()
+      } catch (e) {
+          console.log(e)
+      }
+  }
 
   const handleWithdrawAll = async () => {
     try {
@@ -167,8 +166,7 @@ export default function AutoStake() {
         // alert(e.message)
         console.log(e)
     }
-}
-
+  }
 
   return (
     <Container id="autostake-page" className="py-4 md:py-8 lg:py-12">
@@ -268,25 +266,25 @@ export default function AutoStake() {
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-purple w-full space-y-1">
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Staked`)}
+                    {i18n._(t`Staked Balance`)}
                   </Typography>
-                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                  <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
                     {formatNumber(stakedBal, false, true)} SOUL ({ formatNumber(stakedValue, true, true) })
                   </Typography>
                 </div>
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Earned`)}
+                    {i18n._(t`Pending Reward`)}
                   </Typography>
-                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {formatNumber(earnedAmount, false, true)} SOUL ({ formatNumber(earnedValue, true, true) })
+                  <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
+                    {earnedAmount.toFixed(0)} SOUL ({ formatNumber(earnedValue, true, true) })
                   </Typography>
                 </div>
                   <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Bounty`)}
+                    {i18n._(t`Compound Bounty`)}
                   </Typography>
-                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                  <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
                     {formatNumber(bounty, false, true)} SOUL
                   </Typography>
                 </div>
@@ -330,7 +328,7 @@ export default function AutoStake() {
                   onClick={() =>
                       handleHarvest()}
                   >
-                  CLAIM BOUNTY
+                  COMPOUND
               </SubmitButton>
               </div>
             </Tab.Panel>
@@ -355,7 +353,7 @@ export default function AutoStake() {
       {i18n._(t`Until Salvation`)}
     </Typography>
     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-    { (formatNumber(remainingHours, false, true)) } hours
+    { remainingHours > 0 ? remainingHours.toFixed(0) : 0} hours
     </Typography>
 </div>             
 
@@ -371,7 +369,7 @@ export default function AutoStake() {
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-purple w-full space-y-1">
               <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Deposited`)}
+                    {i18n._(t`Staked`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                   {formatNumber(stakedBal, false, true)} SOUL
@@ -379,10 +377,11 @@ export default function AutoStake() {
                 </div>
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Sacrifice`)} ({withdrawFeeRate.toFixed(2)}%)
+                    {/* {i18n._(t`Sacrifice`)} ({withdrawFeeRate.toFixed(2)}%) */}
+                    {i18n._(t`Sacrifice`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {feeAmount.toFixed(2)} SOUL
+                    {formatNumber(feeAmount, false, true)} SOUL
                   </Typography>
                 </div>
                 <div className="flex justify-between">

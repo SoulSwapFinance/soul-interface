@@ -58,52 +58,11 @@ export const SubmitButton = styled(Button)`
 `
 
 
-// ---------------------
-//  Dropdown Section
-// ---------------------
-
-export const DetailsContainer = styled.div`
-  margin: 2px;
-  width: 55rem;
-
-  @media screen and (max-width: 900px) {
-    width: auto;
-  }
-`
-
 /// --------------------- ///
 
 export const FunctionBox = styled.div`
   padding: 0px;
   width: ${({ width }) => (width ? `${width}` : `100%`)};
-`
-
-export const DetailsWrapper = styled.div`
-  display: flex;
-  background-color: #18191A;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  width: 55rem;
-  padding: 5px 10px;
-
-  @media screen and (max-width: 3200px) {
-    display: block;
-    width: 55rem
-  }
-
-  @media screen and (max-width: 900px) {
-    display: block;
-    width: 32rem
-  }
-
-  @media screen and (max-width: 720px) {
-    display: block;
-    width: 28rem
-  }
-
-  @media screen and (max-width: 400px) {
-    width: 20rem;
-  }
 `
 
 // FARM //
@@ -132,7 +91,7 @@ export const FarmContentWrapper = styled.div`
   }
 
   @media screen and (max-width: 720px) {
-    padding: 0;
+    padding: 0 0rem 0 0;
   }
 `
 
