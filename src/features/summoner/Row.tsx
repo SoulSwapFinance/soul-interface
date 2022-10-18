@@ -249,36 +249,37 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     }
 
     // // deposits: selected amount into the summoner
-    // const handleDeposit = async (pid) => {
-    //     let tx
-    //     try {
-    //         tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
-    //         await tx.wait()
-    //     } catch (e) {
-    //         const smallerValue = Number(depositValue) - 0.000001
-    //         tx = await SoulSummonerContract?.deposit(pid, Number(smallerValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
-    //         await tx.wait()
-    //         console.log(e)
-    //     }
-    // }
-
-    // handles deposit
-    const handleDeposit = async (pid, amount) => {
+    const handleDeposit = async (pid) => {
+        let tx
         try {
-            const tx = await SoulSummonerContract?.deposit(pid,
-                parsedDepositValue?.quotient.toString()
-            )
+            tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
-            // console.log('depositing: %s:', parsedDepositValue)
         } catch (e) {
-            const tx = await SoulSummonerContract?.deposit(pid,
-                Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
-            // console.log('depositing: %s:', depositValue)
+            const smallerValue = Number(depositValue) - 0.000001
+            tx = await SoulSummonerContract?.deposit(pid, Number(smallerValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
-            // alert(e.message)
             console.log(e)
         }
     }
+
+    // handles deposit
+    // const handleDeposit = async (pid, amount) => {
+    //     try {
+    //         const tx = await SoulSummonerContract?.deposit(pid,
+    //             parsedDepositValue?.quotient.toString()
+    //         )
+    //         await tx.wait()
+    //         // console.log('depositing: %s:', parsedDepositValue)
+    //     } catch (e) {
+    //         const smallerValue = Number(depositValue) - 0.000001
+    //         let tx = await SoulSummonerContract?.deposit(pid, Number(smallerValue))
+    //             // Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
+    //         // console.log('depositing: %s:', depositValue)
+    //         await tx.wait()
+    //         // alert(e.message)
+    //         console.log(e)
+    //     }
+    // }
 
     // handles withdrawal
     const handleWithdraw = async (pid, amount) => {
