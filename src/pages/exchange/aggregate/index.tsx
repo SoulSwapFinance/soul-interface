@@ -215,7 +215,7 @@ return (
         <Typography>  fromAddress: {from.wrapped.address} </Typography>
 
         <Typography>  To: {to.symbol} </Typography>
-        <Typography>  toAddress: {to.address} </Typography>
+        <Typography>  toAddress: {to.wrapped.address} </Typography>
         </div>
     </div>
 )
