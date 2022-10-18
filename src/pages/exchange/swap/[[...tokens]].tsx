@@ -428,10 +428,11 @@ const Swap = () => {
           setFromUsd((Number(newFromUsd) * Number(newTrade.from.tokenAmount)).toString())
           setToUsd((Number(newToUsd) * Number((newTrade.to?.tokenAmount))).toString())
         } else {
-          setCrossTrade(newTrade);
-          setFromUsd((Number(newFromUsd) * Number(newTrade.trade.from?.tokenAmount)).toString())
-          setToUsd((Number(newToUsd) * Number((newTrade.trade.to?.tokenAmount))).toString())
-          setOutputAmount(Number(newTrade.trade.to?.tokenAmount).toString())
+          const test = newTrade
+          setCrossTrade(test);
+          setFromUsd((Number(newFromUsd) * Number(test.trade.from?.tokenAmount)).toString())
+          setToUsd((Number(newToUsd) * Number((test.trade.to?.tokenAmount))).toString())
+          setOutputAmount(Number(test.trade.to?.tokenAmount).toString())
           // console.log('outputAmount:%s', outputAmount)
         }
 
@@ -552,7 +553,6 @@ const Swap = () => {
             priceImpactCss={priceImpactCss}
           />
         {isExpertMode && <RecipientField recipient={recipient} action={setRecipient} />}
-         {/* isCrossMode && <ToChainField toChain={toChain} action={setToChain} /> */}
         {Boolean(trade) && (
           <SwapDetails
             inputCurrency={currencies[Field.INPUT]}
