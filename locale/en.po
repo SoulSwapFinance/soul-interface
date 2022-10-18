@@ -145,9 +145,6 @@ msgstr "Approve CoffinBox"
 msgid "Approve Underworld"
 msgstr "Approve Underworld"
 
-msgid "Approve and then deposit your"
-msgstr "Approve and then deposit your"
-
 msgid "Approve {0}"
 msgstr "Approve {0}"
 
@@ -335,9 +332,6 @@ msgstr "Community Approval"
 msgid "Confirm"
 msgstr "Confirm"
 
-msgid "Confirm Add Liquidity"
-msgstr "Confirm Add Liquidity"
-
 msgid "Confirm Adding Liquidity"
 msgstr "Confirm Adding Liquidity"
 
@@ -347,26 +341,17 @@ msgstr "Confirm Deposit"
 msgid "Confirm Removal"
 msgstr "Confirm Removal"
 
-msgid "Confirm Remove Liquidity"
-msgstr "Confirm Remove Liquidity"
-
 msgid "Confirm Supply"
 msgstr "Confirm Supply"
 
 msgid "Confirm Swap"
 msgstr "Confirm Swap"
 
-msgid "Confirm Withdraw"
-msgstr "Confirm Withdraw"
-
 msgid "Confirm Withdrawal"
 msgstr "Confirm Withdrawal"
 
 msgid "Confirm add liquidity"
 msgstr "Confirm add liquidity"
-
-msgid "Confirm create pool"
-msgstr "Confirm create pool"
 
 msgid "Confirm this transaction in your wallet"
 msgstr "Confirm this transaction in your wallet"
@@ -437,9 +422,6 @@ msgstr "Deadline"
 msgid "Deposit"
 msgstr "Deposit"
 
-msgid "Deposit Liquidity"
-msgstr "Deposit Liquidity"
-
 msgid "Deposit SOUL into CoffinBox"
 msgstr "Deposit SOUL into CoffinBox"
 
@@ -466,9 +448,6 @@ msgstr "Deposited Amount"
 
 msgid "Depositing with Zap Mode involves swapping your asset for the assets in the pool - this makes your transaction subject to swap-related fees."
 msgstr "Depositing with Zap Mode involves swapping your asset for the assets in the pool - this makes your transaction subject to swap-related fees."
-
-msgid "Depositing:"
-msgstr "Depositing:"
 
 msgid "Deposits"
 msgstr "Deposits"
@@ -639,20 +618,8 @@ msgstr "Harvest"
 msgid "Harvest Redistribution"
 msgstr "Harvest Redistribution"
 
-msgid "Harvest SOUL"
-msgstr "Harvest SOUL"
-
-msgid "Harvest rewards and unstake your LP tokens at any time. You can then remove your liquidity to receive your base investment tokens back in your wallet."
-msgstr "Harvest rewards and unstake your LP tokens at any time. You can then remove your liquidity to receive your base investment tokens back in your wallet."
-
-msgid "Harvest rewards and unstake your MP tokens at any time. You can then withdraw your lent"
-msgstr "Harvest rewards and unstake your MP tokens at any time. You can then withdraw your lent"
-
 msgid "Harvest {0} SOUL"
 msgstr "Harvest {0} SOUL"
-
-msgid "Harvest {0}/{1}"
-msgstr "Harvest {0}/{1}"
 
 msgid "Historical Total Locked: Connect Wallet"
 msgstr "Historical Total Locked: Connect Wallet"
@@ -662,9 +629,6 @@ msgstr "Historical Total Locked: Fetching Total"
 
 msgid "Historical Total Locked: {0} SOUL"
 msgstr "Historical Total Locked: {0} SOUL"
-
-msgid "How to Participate?"
-msgstr "How to Participate?"
 
 msgid "How to use"
 msgstr "How to use"
@@ -677,9 +641,6 @@ msgstr "If you purchase a token from this list, you may not be able to sell it b
 
 msgid "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
 msgstr "If you want to supply to a market that is not listed yet, you can use this tool to create a new pair."
-
-msgid "If your asset is staked, you cannot withdraw your lent tokens. You must unstake first."
-msgstr "If your asset is staked, you cannot withdraw your lent tokens. You must unstake first."
 
 msgid "Import"
 msgstr "Import"
@@ -698,9 +659,6 @@ msgstr "Import token"
 
 msgid "In Wallet"
 msgstr "In Wallet"
-
-msgid "Inactive"
-msgstr "Inactive"
 
 msgid "Including fees"
 msgstr "Including fees"
@@ -768,14 +726,8 @@ msgstr "Learn About Wallets"
 msgid "Lend"
 msgstr "Lend"
 
-msgid "Lend Asset"
-msgstr "Lend Asset"
-
 msgid "Lend your assets, earn yield with ZERO impermanent loss"
 msgstr "Lend your assets, earn yield with ZERO impermanent loss"
-
-msgid "Lending"
-msgstr "Lending"
 
 msgid "Lent"
 msgstr "Lent"
@@ -846,12 +798,6 @@ msgstr "MINT SOR"
 msgid "Manage"
 msgstr "Manage"
 
-msgid "Manage Liquidity"
-msgstr "Manage Liquidity"
-
-msgid "Manage Position"
-msgstr "Manage Position"
-
 msgid "Manage Token Lists"
 msgstr "Manage Token Lists"
 
@@ -863,9 +809,6 @@ msgstr "Margin"
 
 msgid "Markets"
 msgstr "Markets"
-
-msgid "Max"
-msgstr "Max"
 
 msgid "Max Mint"
 msgstr "Max Mint"
@@ -972,9 +915,6 @@ msgstr "Our Resources."
 msgid "Output is estimated. If the price changes by more than 0.5% your transaction will revert."
 msgstr "Output is estimated. If the price changes by more than 0.5% your transaction will revert."
 
-msgid "Output is estimated. If the price changes by more than your chosen slippage it'll revert."
-msgstr "Output is estimated. If the price changes by more than your chosen slippage it'll revert."
-
 msgid ""
 "Output is estimated. If the price changes by more than {0}% your transaction\n"
 "will revert."
@@ -1036,9 +976,6 @@ msgstr "Pool Tokens"
 msgid "Portfolio"
 msgstr "Portfolio"
 
-msgid "Position and Rewards"
-msgstr "Position and Rewards"
-
 msgid "Positions"
 msgstr "Positions"
 
@@ -1070,14 +1007,8 @@ msgstr "Processing"
 msgid "Provide"
 msgstr "Provide"
 
-msgid "Provide liquidity to the"
-msgstr "Provide liquidity to the"
-
 msgid "Public good blockchain development guide."
 msgstr "Public good blockchain development guide."
-
-msgid "RETIRED"
-msgstr "RETIRED"
 
 msgid "RETURNS"
 msgstr "RETURNS"
@@ -1094,14 +1025,8 @@ msgstr "Read the Documentation."
 msgid "Receive"
 msgstr "Receive"
 
-msgid "Receive (minimum):"
-msgstr "Receive (minimum):"
-
 msgid "Receive to"
 msgstr "Receive to"
-
-msgid "Receive:"
-msgstr "Receive:"
 
 msgid "Recent Transactions"
 msgstr "Recent Transactions"
@@ -1135,9 +1060,6 @@ msgstr "Remove to Wallet"
 
 msgid "Remove {0} {1} and {2} {3}"
 msgstr "Remove {0} {1} and {2} {3}"
-
-msgid "Remove:"
-msgstr "Remove:"
 
 msgid "Removing {0} {1} and {2} {3}"
 msgstr "Removing {0} {1} and {2} {3}"
@@ -1301,20 +1223,8 @@ msgstr "Staked"
 msgid "Staked Balance"
 msgstr "Staked Balance"
 
-msgid "Staking"
-msgstr "Staking"
-
 msgid "Status"
 msgstr "Status"
-
-msgid "Step One"
-msgstr "Step One"
-
-msgid "Step Three"
-msgstr "Step Three"
-
-msgid "Step Two"
-msgstr "Step Two"
 
 msgid "Stream"
 msgstr "Stream"
@@ -1330,12 +1240,6 @@ msgstr "Success!"
 
 msgid "Success! Deposit Submitted"
 msgstr "Success! Deposit Submitted"
-
-msgid "Success! Transaction successfully submitted"
-msgstr "Success! Transaction successfully submitted"
-
-msgid "Success! Withdrawal Submitted"
-msgstr "Success! Withdrawal Submitted"
 
 msgid "Summon Scarabs"
 msgstr "Summon Scarabs"
@@ -1554,12 +1458,6 @@ msgstr "Unwrap {0} {1} to {2}"
 msgid "Update Price"
 msgstr "Update Price"
 
-msgid "Use"
-msgstr "Use"
-
-msgid "Use one of the buttons to set a percentage or enter a value manually using the input field."
-msgstr "Use one of the buttons to set a percentage or enter a value manually using the input field."
-
 msgid "Use the toggle to switch between balances when interacting with our platform."
 msgstr "Use the toggle to switch between balances when interacting with our platform."
 
@@ -1632,9 +1530,6 @@ msgstr "Why use Balance Mode?"
 msgid "Withdraw"
 msgstr "Withdraw"
 
-msgid "Withdraw Liquidity"
-msgstr "Withdraw Liquidity"
-
 msgid "Withdraw from Scarab {id}"
 msgstr "Withdraw from Scarab {id}"
 
@@ -1659,9 +1554,6 @@ msgstr "Wrap {0} {1} to {2}"
 msgid "Wrong Network"
 msgstr "Wrong Network"
 
-msgid "YOURS"
-msgstr "YOURS"
-
 msgid "Yield Details"
 msgstr "Yield Details"
 
@@ -1682,9 +1574,6 @@ msgstr "You can think of this as having \"account balances\" for asset within So
 
 msgid "You don’t have liquidity in this pool yet"
 msgstr "You don’t have liquidity in this pool yet"
-
-msgid "You must unstake first, if you want to remove from your staked position."
-msgstr "You must unstake first, if you want to remove from your staked position."
 
 msgid "You need to first approve LP tokens and then migrate it"
 msgstr "You need to first approve LP tokens and then migrate it"
@@ -1752,26 +1641,11 @@ msgstr "for deliberations on additional points."
 msgid "forum discussion"
 msgstr "forum discussion"
 
-msgid "into your wallet or CoffinBox."
-msgstr "into your wallet or CoffinBox."
-
-msgid "liquidity pool."
-msgstr "liquidity pool."
-
 msgid "loading..."
 msgstr "loading..."
 
 msgid "or the transaction will revert."
 msgstr "or the transaction will revert."
-
-msgid "to lending pool."
-msgstr "to lending pool."
-
-msgid "to staking pool."
-msgstr "to staking pool."
-
-msgid "tokens into the farm to start earning rewards."
-msgstr "tokens into the farm to start earning rewards."
 
 msgid "{0} Deposited"
 msgstr "{0} Deposited"
