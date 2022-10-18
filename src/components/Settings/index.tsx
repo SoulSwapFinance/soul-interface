@@ -2,7 +2,6 @@ import { ChainId, Percent } from '../../sdk'
 import React, { useCallback, useRef, useState } from 'react'
 import { CheckIcon, CogIcon } from '@heroicons/react/outline'
 import {
-  useExpertModeManager,
   // useCrossChainModeManager,
   // useUserArcherUseRelay,
   useUserSingleHopOnly,
@@ -32,9 +31,6 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
   const node = useRef<HTMLDivElement>(null)
   const open = useModalOpen(ApplicationModal.SETTINGS)
   const toggle = useToggleSettingsMenu()
-  // const expertMode = false
-  // const [expertMode, toggleExpertMode] = useExpertModeManager()
-
   const [singleHopOnly, setSingleHopOnly] = useUserSingleHopOnly()
 
   // show confirmation view before turning on
@@ -67,32 +63,6 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
             {/* <Typography className="text-high-emphesis" weight={700}>
               {i18n._(t`Settings`)}
             </Typography> */}
-
-            {/* <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <Typography variant="sm" className="text-primary">
-                  {i18n._(t`Toggle Expert Mode`)}
-                </Typography>
-                <QuestionHelper
-                  text={i18n._(t`Bypasses confirmation modals and allows high slippage trades. Use at your own risk.`)}
-                />
-              </div>
-              <Toggle
-                id="toggle-expert-mode-button"
-                isActive={expertMode}
-                toggle={
-                  expertMode
-                    ? () => {
-                        toggleExpertMode()
-                        setShowConfirmation(false)
-                      }
-                    : () => {
-                        toggle()
-                        setShowConfirmation(true)
-                      }
-                }
-              />
-            </div> */}
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <Typography variant="sm" className="text-primary">
@@ -128,37 +98,6 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
           </div>
         </div>
       )}
-
-      <Modal isOpen={showConfirmation} onDismiss={() => setShowConfirmation(false)}>
-        <div className="space-y-4">
-          <ModalHeader 
-            // title={i18n._(t`Are you sure?`)} 
-            onClose={() => setShowConfirmation(false)} header={'Are you sure?'} />
-          <Typography variant="lg">
-            {i18n._(t`Expert mode turns off the confirm transaction prompt and allows high slippage trades
-                                that often result in bad rates and lost funds.`)}
-          </Typography>
-          <Typography variant="sm" className="font-medium">
-            {i18n._(t`ONLY USE THIS MODE IF YOU KNOW WHAT YOU ARE DOING.`)}
-          </Typography>
-          <Button
-            color="red"
-            size="lg"
-            onClick={() => {
-              // if (window.prompt(i18n._(t`Please type the word "confirm" to enable expert mode.`)) === 'confirm') {
-              //   toggleExpertMode()
-              //   setShowConfirmation(false)
-              // }
-              // toggleExpertMode()
-              setShowConfirmation(false)
-            }}
-          >
-            <Typography variant="lg" id="confirm-expert-mode">
-              {i18n._(t`Turn On Expert Mode`)}
-            </Typography>
-          </Button>
-        </div>
-      </Modal>
     </div>
   )
 }

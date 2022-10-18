@@ -16,7 +16,6 @@ import { useV2TradeExactOut } from 'hooks/useV2Trades'
 import { useActiveWeb3React } from 'services/web3'
 import { useAppSelector } from 'state/hooks'
 import { selectSlippageWithDefault } from 'state/slippage/slippageSlice'
-import { useExpertModeManager } from 'state/user/hooks'
 import { useETHBalances } from 'state/wallet/hooks'
 import React, { useMemo, useState } from 'react'
 
@@ -222,8 +221,6 @@ export default function Repay({ pair }: RepayProps) {
   // const trade = swap ? foundTrade : undefined;
   // const trade = swap && removeValueSet ? foundTrade : undefined
 
-  const [isExpertMode] = useExpertModeManager()
-
   // const { priceImpactWithoutFee } = computeTradePriceBreakdown(trade);
 
   const priceImpactSeverity = warningSeverity(priceImpact)
@@ -409,7 +406,7 @@ export default function Repay({ pair }: RepayProps) {
 
       {swap && trade && <TradeReview trade={trade} allowedSlippage={allowedSlippage} />}
 
-      {swap && (priceImpactSeverity < 3 || isExpertMode) && (
+      {swap && (priceImpactSeverity < 3) && (
         <TransactionReviewView transactionReview={transactionReview} />
       )}
 

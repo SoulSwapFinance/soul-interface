@@ -352,7 +352,7 @@ return (
           </div>
         </div>
 
-        /* TO ASSET PANEL */
+        {/* TO ASSET PANEL */}
           <SwapAssetPanel
             spendFromWallet={true}
             chainId={chainId}
@@ -369,7 +369,6 @@ return (
             priceImpact={priceImpact}
             priceImpactCss={priceImpactCss}
           />
-        {/* {isExpertMode && <RecipientField recipient={recipient} action={setRecipient} />} */}
         {Boolean(trade) && (
           <SwapDetails
             inputCurrency={currencies[Field.INPUT]}

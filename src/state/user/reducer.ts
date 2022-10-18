@@ -12,7 +12,6 @@ import {
   toggleURLWarning,
   updateMatchesDarkMode,
   updateUserCrossChainMode,
-  updateUserExpertMode,
   updateUserDarkMode,
   updateUserDeadline,
   updateUserSingleHopOnly,
@@ -34,8 +33,6 @@ export interface UserState {
   showTopTrendingSoonTokens: boolean
   // the timestamp of the last updateVersion action
   lastUpdateVersionTimestamp?: number
-
-  userExpertMode: boolean
   userCrossChainMode: boolean
 
   userSingleHopOnly: boolean // only allow swaps on direct pairs
@@ -86,7 +83,6 @@ export const defaultShowLiveCharts: { [chainId in ChainId]: boolean } = {
 
 export const initialState: UserState = {
   userCrossChainMode: false,
-  userExpertMode: false,
   userSingleHopOnly: false,
   userSlippageTolerance: INITIAL_ALLOWED_SLIPPAGE,
   userDeadline: DEFAULT_DEADLINE_FROM_NOW,
@@ -137,10 +133,6 @@ export default createReducer(initialState, (builder) =>
     })
     .addCase(updateMatchesDarkMode, (state, action) => {
       state.matchesDarkMode = action.payload.matchesDarkMode
-      state.timestamp = currentTimestamp()
-    })
-    .addCase(updateUserExpertMode, (state, action) => {
-      state.userExpertMode = action.payload.userExpertMode
       state.timestamp = currentTimestamp()
     })
     .addCase(updateUserCrossChainMode, (state, action) => {
