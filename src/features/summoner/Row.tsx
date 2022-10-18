@@ -249,7 +249,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     }
 
     // // deposits: selected amount into the summoner
-    const handleDeposit = async (pid) => {
+    const handleDeposit = async (pid, anount) => {
         let tx
         try {
             tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
