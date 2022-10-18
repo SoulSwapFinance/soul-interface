@@ -26,19 +26,20 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
 import { ExternalLink as LinkIcon } from 'react-feather'
+import { getChainColorCode } from 'constants/chains'
 
 const chartTimespans = [
   {
     text: '1W',
-    length: 604800,
+    length: 604_800,
   },
   {
     text: '1M',
-    length: 2629746,
+    length: 2_629_746,
   },
   {
     text: '1Y',
-    length: 31556952,
+    length: 31_556_952,
   },
   {
     text: 'ALL',
@@ -51,7 +52,6 @@ export default function Token() {
   const id = (router.query.id as string)?.toLowerCase()
 
   const { chainId } = useActiveWeb3React()
-
   const [isCopied, setCopied] = useCopyClipboard()
 
   const [totalSupply, setTotalSupply] = useState(0)
@@ -144,16 +144,16 @@ export default function Token() {
   const chartData = useMemo(
     () => ({
       liquidityChart: tokenDayData
-        /* @ts-ignore TYPE NEEDS FIXING */
         ?.sort((a, b) => a.date - b.date)
-        /* @ts-ignore TYPE NEEDS FIXING */
         .map((day) => ({ x: new Date(day.date * 1000), y: Number(day.liquidityUSD) })),
 
       volumeChart: tokenDayData
-        /* @ts-ignore TYPE NEEDS FIXING */
         ?.sort((a, b) => a.date - b.date)
-        /* @ts-ignore TYPE NEEDS FIXING */
         .map((day) => ({ x: new Date(day.date * 1000), y: Number(day.volumeUSD) })),
+      
+      priceChart: tokenDayData
+        ?.sort((a, b) => a.date - b.date)
+        .map((day) => ({ x: new Date(day.date * 1000), y: Number(day.price) })),
     }),
     [tokenDayData]
   )
@@ -260,7 +260,7 @@ export default function Token() {
                 </td>
                 <td>
                   <a
-                    className="flex flex-row items-center justify-end space-x-1 text-purple"
+                    className={`flex flex-row items-center justify-end space-x-1 text-${getChainColorCode(chainId)}`}
                     href={getExplorerLink(chainId, id, 'token')}
                     target="_blank"
                     rel="noreferrer"

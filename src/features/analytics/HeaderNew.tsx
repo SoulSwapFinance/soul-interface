@@ -9,6 +9,7 @@ import { t } from '@lingui/macro'
 import { useActiveWeb3React } from 'services/web3'
 import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
+import { getChainColorCode } from 'constants/chains'
 
 const getQuery = (input, output) => {
   const { chainId } = useActiveWeb3React()
@@ -29,6 +30,7 @@ interface AnalyticsHeaderProps {
 
 const AnalyticsHeaderNew: FC<AnalyticsHeaderProps> = ({ input, output, allowedSlippage }) => {
   const { i18n } = useLingui()
+  const { chainId } = useActiveWeb3React()
   const router = useRouter()
   const [animateWallet, setAnimateWallet] = useState(false)
   const isRemove = router.asPath.startsWith('/remove')
@@ -36,10 +38,10 @@ const AnalyticsHeaderNew: FC<AnalyticsHeaderProps> = ({ input, output, allowedSl
  
 
   return (
-    <div className="flex items-center justify-center mb-6 space-x-3">
-      <div className="grid mt-4 grid-cols-4 rounded p-3px bg-dark-800 h-[46px]">
+    <div className="flex items-center justify-center mb-2 space-x-3">
+      <div className="grid mt-2 grid-cols-4 rounded p-3x bg-dark-800 h-[24px]">
         <NavLink
-          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple"
+          activeClassName={`font-bold border rounded text-high-emphesis border-dark-800 bg-${getChainColorCode(chainId)} from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple`}
           href={{
             pathname: '/analytics/dashboard',
             query: getQuery(input, output),
@@ -50,7 +52,7 @@ const AnalyticsHeaderNew: FC<AnalyticsHeaderProps> = ({ input, output, allowedSl
           </a>
         </NavLink>
         <NavLink
-          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple"
+          activeClassName={`font-bold border rounded text-high-emphesis border-dark-800 bg-${getChainColorCode(chainId)} from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple`}
           href={"/analytics/coffinbox"}
           // href={`/${!isRemove ? 'add' : 'remove'}${input ? `/${currencyId(input)}` : ''}${
           //   output ? `/${currencyId(output)}` : ''
@@ -61,7 +63,7 @@ const AnalyticsHeaderNew: FC<AnalyticsHeaderProps> = ({ input, output, allowedSl
           </a>
         </NavLink>
         <NavLink
-          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple"
+          activeClassName={`font-bold border rounded text-high-emphesis border-dark-800 bg-${getChainColorCode(chainId)} from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple`}
           href={"/analytics/tokens"}
           // href={`${output ? `https://charts.soul.sh/token/${currencyId(output)}` : ''}`}
         >
@@ -70,7 +72,7 @@ const AnalyticsHeaderNew: FC<AnalyticsHeaderProps> = ({ input, output, allowedSl
           </a>
         </NavLink>
         <NavLink
-          activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple"
+          activeClassName={`font-bold border rounded text-high-emphesis border-dark-800 bg-${getChainColorCode(chainId)} from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple`}
           href={"/analytics/pairs"}
           // href={`${output ? `https://charts.soul.sh/token/${currencyId(output)}` : ''}`}
         >
