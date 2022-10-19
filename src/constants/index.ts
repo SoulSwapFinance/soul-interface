@@ -33,24 +33,6 @@ export const MAX_AMOUNT_TOKENS_IN_UNITS = 100000000000000000000000000000000000;
 export const UI_DECIMALS_DISPLAYED_ORDER_SIZE = 0;
 export const UI_DECIMALS_DISPLAYED_PRICE_ETH = 7;
 export const UI_DECIMALS_DISPLAYED_SPREAD_PERCENT = 2;
-export const RELAYER_URL = "https://clickbackend.cloud/v3"
-export const RELAYER_WS_URL = "wss://clickbackend.cloud/websocket/"
-export const RELAYER_RPS = 5;
-
-export enum OrderSide {
-	Sell,
-	Buy,
-}
-
-export const USE_ORDERBOOK_PRICES: boolean = false // process.env.USE_ORDERBOOK_PRICES === "true";
-export const USE_RELAYER_MARKET_UPDATES = "true" // process.env.REACT_APP_USE_RELAYER_MARKET_UPDATES === "true";
-
-// Default value is enabled, 0 is disabled
-export const UPDATE_ERC20_MARKETS: number = process.env.REACT_APP_UPDATE_ERC20_MARKETS_INTERVAL
-	? Number.parseInt(process.env.REACT_APP_UPDATE_ERC20_MARKETS_INTERVAL as string, 10)
-	: 60000;
-
-// END MARKETS PAGE //
 
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
 export const AVERAGE_BLOCK_TIME_IN_SECS = 1

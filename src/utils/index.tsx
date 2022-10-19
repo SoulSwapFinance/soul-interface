@@ -1,5 +1,5 @@
 import { BigNumber } from "@ethersproject/bignumber";
-import { Currency, getProviderOrSigner, JSBI, Percent } from "sdk";
+import { Currency, JSBI, Percent } from "sdk";
 import Notify from 'bnc-notify'
 import { ethers } from 'ethers'
 import { Pair, Token } from "sdk";
@@ -8,10 +8,6 @@ export * from './tools/axios'
 export * from './tools/getPrice'
 export * from './tools/rate'
 import Numeral from 'numeral'
-import { isAddress } from "functions/validate";
-import { ZERO_ADDRESS } from "constants/index";
-import { Web3Provider } from "@ethersproject/providers";
-import { Contract } from "@ethersproject/contracts";
 
 export function ASSERT(f: () => boolean, t?: string) {
     if (!f() && t) console.error(t);
@@ -206,13 +202,4 @@ export function isPairOnList(pairs: Pair[], pair?: Pair): boolean {
       = pair
       // )
     )
-}
-
-// account is optional
-export function getContract(address: string, ABI: any, library: Web3Provider, account?: string): Contract {
-	if (!isAddress(address) || address === ZERO_ADDRESS) {
-		throw Error(`Invalid 'address' parameter '${address}'.`);
-	}
-
-	return new Contract(address, ABI, getProviderOrSigner(library, account) as any);
 }
