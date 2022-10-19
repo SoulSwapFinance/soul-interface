@@ -27,6 +27,13 @@ export const POOL_DENY = []
 export const SOULSWAP_SOURCE = '{"source":"soulswap"}'
 export const sentryRequestId = uuid()
 
+// MARKETS PAGE //
+export const UI_DECIMALS_DISPLAYED_DEFAULT_PRECISION = 2;
+export const MAX_AMOUNT_TOKENS_IN_UNITS = 100000000000000000000000000000000000;
+export const UI_DECIMALS_DISPLAYED_ORDER_SIZE = 0;
+export const UI_DECIMALS_DISPLAYED_PRICE_ETH = 7;
+export const UI_DECIMALS_DISPLAYED_SPREAD_PERCENT = 2;
+
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
 export const AVERAGE_BLOCK_TIME_IN_SECS = 1
 
