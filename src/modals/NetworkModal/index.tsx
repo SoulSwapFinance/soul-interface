@@ -69,17 +69,6 @@ export const SUPPORTED_NETWORKS: {
     rpcUrls: ['https://bsc-dataseed.binance.org'],
     blockExplorerUrls: ['https://bscscan.com'],
   },
-  [ChainId.FANTOM_TESTNET]: {
-    chainId: '0xFA2',
-    chainName: 'Fantom Testnet',
-    nativeCurrency: {
-      name: 'Fantom',
-      symbol: 'FTM',
-      decimals: 18,
-    },
-    rpcUrls: ['https://rpc.testnet.fantom.network'],
-    blockExplorerUrls: ['https://testnet.ftmscan.com'],
-  },
   [ChainId.MATIC]: {
     chainId: '0x89',
     chainName: 'Matic',

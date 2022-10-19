@@ -40,7 +40,6 @@ export const NETWORK_ICON = {
   [ChainId.AVALANCHE]: Avalanche,
   [ChainId.MOONRIVER]: Moonriver,
   [ChainId.MATIC]: Polygon,
-  // [ChainId.FANTOM_TESTNET]: Fantom,
   // [ChainId.ROPSTEN]: Ropsten,
   // [ChainId.RINKEBY]: Rinkeby,
   // [ChainId.GÖRLI]: Goerli,
@@ -68,7 +67,6 @@ export const NETWORK_LABEL: { [chainId in ChainId]?: string } = {
   [ChainId.AVALANCHE]: 'Avalanche',
   [ChainId.MOONRIVER]: 'Moonriver',
   [ChainId.MATIC]: 'Polygon',
-  // [ChainId.FANTOM_TESTNET]: 'Fantom Testnet',
   // [ChainId.RINKEBY]: 'Rinkeby',
   // [ChainId.ROPSTEN]: 'Ropsten',
   // [ChainId.GÖRLI]: 'Görli',
@@ -124,7 +122,6 @@ export const NETWORKS_INFO_CONFIG: { [chain in ChainId]: NetworkInfo } = {
   [ChainId.AVALANCHE]: avax,
   [ChainId.FANTOM]: ftm,
   // todo: fix below
-  [ChainId.FANTOM_TESTNET]: ftm,
   [ChainId.ARBITRUM]: arbitrum,
   // todo: fix below
   [ChainId.MOONRIVER]: arbitrum,

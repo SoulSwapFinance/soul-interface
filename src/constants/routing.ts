@@ -2,8 +2,7 @@ import {
   BSC,
   FANTOM,
   AVALANCHE,
-  TELOS,
-  FANTOM_TESTNET
+  TELOS
 } from './tokens'
 // a list of tokens by chain
 import { ChainId, Currency, Token, WNATIVE } from '../sdk'
@@ -16,10 +15,9 @@ type ChainTokenList = {
 // TODO: SDK should have two maps, WETH map and WNATIVE map.
 const WRAPPED_NATIVE_ONLY: ChainTokenList = {
   [ChainId.ETHEREUM]: [WNATIVE[ChainId.ETHEREUM]],
-   [ChainId.TELOS]: [WNATIVE[ChainId.TELOS]],
-   [ChainId.BSC]: [WNATIVE[ChainId.BSC]],
+  [ChainId.TELOS]: [WNATIVE[ChainId.TELOS]],
+  [ChainId.BSC]: [WNATIVE[ChainId.BSC]],
   [ChainId.FANTOM]: [WNATIVE[ChainId.FANTOM]],
-  [ChainId.FANTOM_TESTNET]: [WNATIVE[ChainId.FANTOM_TESTNET]],
   [ChainId.AVALANCHE]: [WNATIVE[ChainId.AVALANCHE]],
   [ChainId.MATIC]: [WNATIVE[ChainId.MATIC]],
   [ChainId.ARBITRUM]: [WNATIVE[ChainId.ARBITRUM]],
@@ -34,16 +32,20 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
     FANTOM.SOUL,
-    FANTOM.SEANCE,
     FANTOM.DAI, 
     FANTOM.USDC, 
-    FANTOM.USDT, 
     FANTOM.WBTC, 
     FANTOM.WETH
   ], // 27 AUG
   [ChainId.BSC]: [...WRAPPED_NATIVE_ONLY[ChainId.BSC], BSC.DAI, BSC.USD, BSC.USDC, BSC.USDT, BSC.BTCB, BSC.WETH],
-  [ChainId.AVALANCHE]: [...WRAPPED_NATIVE_ONLY[ChainId.AVALANCHE], AVALANCHE.USDC, AVALANCHE.SOUL, AVALANCHE.WETH, AVALANCHE.WBTC, AVALANCHE.DAI],
-
+  [ChainId.AVALANCHE]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.AVALANCHE], 
+    AVALANCHE.USDC, 
+    AVALANCHE.SOUL, 
+    AVALANCHE.WETH, 
+    AVALANCHE.WBTC, 
+    AVALANCHE.DAI
+  ],
 }
 
 /**
@@ -76,12 +78,6 @@ export const COMMON_BASES: ChainTokenList = {
     FANTOM.USDC,
     FANTOM.WBTC,
     FANTOM.WETH,
-  ],
-  [ChainId.FANTOM_TESTNET]: [
-    ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM_TESTNET],
-    FANTOM_TESTNET.SOUL,
-    FANTOM_TESTNET.FUSD,
-    FANTOM_TESTNET.FETH,
   ],
   [ChainId.BSC]: [...WRAPPED_NATIVE_ONLY[ChainId.BSC], BSC.DAI, BSC.USD, BSC.USDC, BSC.USDT, BSC.BTCB, BSC.WETH],
   [ChainId.AVALANCHE]: [

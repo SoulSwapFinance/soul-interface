@@ -78,10 +78,6 @@ const features: FeatureMap = {
     Feature.SOULSWAP,
     Feature.UNDERWORLD
   ],
-
-  [ChainId.FANTOM_TESTNET]: [
-    Feature.AMM
-  ],
 }
 
 export default features

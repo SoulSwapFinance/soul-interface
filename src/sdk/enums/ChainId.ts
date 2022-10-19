@@ -3,7 +3,6 @@ export enum ChainId {
   TELOS = 40,
   BSC = 56,
   FANTOM = 250,
-  FANTOM_TESTNET = 4002,
   AVALANCHE = 43114,
   MATIC = 137,
   ARBITRUM = 42161,

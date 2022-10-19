@@ -82,29 +82,17 @@ export interface BestTradeOptions {
  * Does not account for slippage, i.e. trades that front run this trade and move the price.
  */
 export class Trade<TInput extends Currency, TOutput extends Currency, TTradeType extends TradeType> {
-  /**
-   * The route of the trade, i.e. which pairs the trade goes through and the input/output currencies.
-   */
+  // route of the trade, i.e. which pairs the trade goes through and the input/output currencies.
   public readonly route: Route<TInput, TOutput>
-  /**
-   * The type of the trade, either exact in or exact out.
-   */
+  // type of the trade, either exact in or exact out.
   public readonly tradeType: TTradeType
-  /**
-   * The input amount for the trade assuming no slippage.
-   */
+  // input amount for the trade assuming no slippage.
   public readonly inputAmount: CurrencyAmount<TInput>
-  /**
-   * The output amount for the trade assuming no slippage.
-   */
+  // output amount for the trade assuming no slippage.
   public readonly outputAmount: CurrencyAmount<TOutput>
-  /**
-   * The price expressed in terms of output amount/input amount.
-   */
+  // price expressed in terms of output amount/input amount.
   public readonly executionPrice: Price<TInput, TOutput>
-  /**
-   * The percent difference between the mid price before the trade and the trade execution price.
-   */
+  // % difference between the mid-price before the trade and the trade execution price.
   public readonly priceImpact: Percent
 
   /**

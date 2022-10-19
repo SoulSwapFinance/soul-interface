@@ -8,7 +8,6 @@ export enum SupportedChainId {
   AVALANCHE = 43114,
   MOONRIVER = 1285,
   MATIC = 137
-  // FANTOM_TESTNET = 4002,
 }
 
 export function getChainColor(chainId: number) {
