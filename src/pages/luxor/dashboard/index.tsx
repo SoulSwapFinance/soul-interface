@@ -16,7 +16,6 @@ import DashboardChartLegend from 'components/Dashboard/ChartLegend'
 // import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
 import { useFantomPrice, useLuxorPrice, useWrappedLumPrice } from 'hooks/getPrices'
 import { usePairPrice } from 'hooks/usePairData'
-import { LuxorBanner } from 'components/Banner'
 // import { useLuxTVL } from 'hooks/useV2Pairs'
 import { useSorContract, useLuxorContract, useWrappedLumensContract,  useLuxorStakingContract, useLuxorTreasuryContract, useSorMasterContract } from 'hooks/useContract'
 // import { LUX_TREASURY_ADDRESS, WFTM_ADDRESS } from 'constants/addresses'
@@ -317,7 +316,6 @@ const HideOnMobile = styled.div`
 
   return (
     <Container id="dashboard-page" className="py-4 space-y-4 md:py-8 max-w-min">
-      {/* <LuxorBanner /> */}
       <LuxorGlowShadow>
       <Head>
         <title>Dashboard | Luxor</title>
