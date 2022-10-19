@@ -61,9 +61,6 @@ const PERMITTABLE_TOKENS: {
   [250]: {
     [SOUL_ADDRESS[250]]: { type: PermitType.AMOUNT, name: 'Soul Power' },
   },
-  [4002]: {
-    [SOUL_ADDRESS[4002]]: { type: PermitType.AMOUNT, name: 'Soul Power' },
-  },
   [43114]: {
     [DAI_ADDRESS[43114]]: { type: PermitType.AMOUNT, name: 'Dai Stablecoin' },
   },

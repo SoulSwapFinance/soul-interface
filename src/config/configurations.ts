@@ -23,25 +23,6 @@ const config = {
     explorerTransactionPath: "tx",
   };
   
-  if (process.env.REACT_APP_USE === "testnet") {
-    console.warn("App is using TESTNET!");
-    config.providers = [
-      {
-        // http: "https://xapi.testnet.fantom.network/api",
-        http:
-          process.env.USE_PROXY === "true"
-            ? "/api"
-            : "https://xapi.testnet.fantom.network/api/",
-        // for subscriptions
-        ws: "",
-      },
-    ];
-    config.supportedChains = [4002];
-    config.rpc = "https://xapi.testnet.fantom.network/lachesis";
-    config.explorerUrl = "https://testnet.ftmscan.com/";
-    config.chainId = "0xfa2";
-  }
-  
   if (process.env.USE_PROXY) {
     console.warn("As using proxy");
   }
