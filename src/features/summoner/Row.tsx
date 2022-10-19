@@ -7,7 +7,7 @@ import { useTokenContract, useSummonerContract, useZapperContract } from 'hooks/
 import useApprove from 'hooks/useApprove'
 import { Tab } from '@headlessui/react'
 import {
-    FarmContentWrapper, FarmContainer, FarmItem, FarmItemBox, Text, FunctionBox, SubmitButton, Wrap
+    FarmContentWrapper, FarmContainer, FarmItem, FarmItemBox, Text, SubmitButton, Wrap
 } from './Styles'
 import { classNames, formatNumber, tryParseAmount } from 'functions'
 import { usePairInfo, useSummonerInfo, useSummonerPoolInfo, useSummonerUserInfo, useTokenInfo, useUserTokenInfo } from 'hooks/useAPI'
@@ -405,7 +405,8 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     </Text>
                                 ) : (
                                     <Text padding="0" fontSize="1rem" color="#F36FFE">
-                                        {formatNumber(Number(earnedAmount), false, true)} SOUL
+                                        {Number(earnedAmount).toFixed(0)} SOUL
+                                        {/* {formatNumber(Number(earnedAmount), false, true)} SOUL */}
                                     </Text>
                                 )}
                             </FarmItemBox>
@@ -602,14 +603,13 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         </div>
                                     )}
                                     <div className="h-px my-6 bg-dark-1000" />
-                                    <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
+                                <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
                                         <div className="text-white">
                                             <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                                                 <span> {formatNumber(Number(apr), false, true)}% APR</span>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
 
                                 <div className="h-px my-1 bg-dark-1000" />

@@ -40,14 +40,6 @@ export const FANTOM: { [key: string]: Token } = {
   SPELL: new Token(ChainId.FANTOM, '0x468003B688943977e6130F4F68F23aad939a1040', 18, 'SPELL', 'Spell Token'),
 }
 
-export const FANTOM_TESTNET: { [key: string]: Token } = {
-  SOUL: new Token(ChainId.FANTOM_TESTNET, '0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5', 18, 'SOUL', 'Soul Power'), // 30 JUL
-  SEANCE: new Token(ChainId.FANTOM_TESTNET, '0xD858E1a257Cb595Ba395520daD4c9C9592307734', 18, 'SEANCE', 'Seance Circle'), // 30 JUL
-  FUSD: new Token(ChainId.FANTOM_TESTNET, '0x306557358e20AEa124b16a548597897858D13cb2', 18, 'FUSD', 'Fantom USD'), // 31 JUL
-  FETH: new Token(ChainId.FANTOM_TESTNET, '0x910a38cE2a26278c3493A95fe83e092aE821dF26', 18, 'fETH', 'Fantom Synthetic ETH'), // 31 JUL
-  WBTC: new Token(ChainId.FANTOM_TESTNET, '0x2Eb4Ee20d9816Bd6810F69166dD046F09C737201', 18, 'fBTC', 'Fantom Synthetic BTC'),
-}
-
 export const AVALANCHE: { [key: string]: Token } = {
   BNB: new Token(ChainId.AVALANCHE, BNB_ADDRESS[ChainId.AVALANCHE], 18, 'BNB', 'Binance'),
   SOUL: new Token(ChainId.AVALANCHE, SOUL_ADDRESS[ChainId.AVALANCHE], 18, 'SOUL', 'SoulPower'),
@@ -79,7 +71,6 @@ type ChainTokenMap = {
 export const SOUL: ChainTokenMap = {
   [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, SOUL_ADDRESS[ChainId.ETHEREUM], 18, 'SOUL', 'Soul Power'), // SEP22
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, SOUL_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'Soul Power'), // AUG21
-  [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xCF174A6793FA36A73e8fF18A71bd81C985ef5aB5', 18, 'SOUL', 'Soul Power'), // JUL21
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, SOUL_ADDRESS[ChainId.AVALANCHE], 18, 'SOUL', 'Soul Power'), // SEP22
 }
 
@@ -185,7 +176,6 @@ export const AVAX: ChainTokenMap = {
 // SEANCE
 export const SEANCE: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', 18, 'SEANCE', 'Seance Circle'),  // JUL21
-  [ChainId.FANTOM_TESTNET]: new Token(ChainId.FANTOM_TESTNET, '0xD54Cf31D5653F4a062f5DA4C83170A5867d04442', 18, 'SEANCE', 'Seance Circle'),  // JUL21
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0x97Ee3C9Cf4E5DE384f95e595a8F327e65265cC4E', 18, 'SEANCE', 'Seance Circle'),  // SEP22
 }
 

@@ -57,7 +57,6 @@ function combineMaps(map1: TokenAddressMap, map2: TokenAddressMap): TokenAddress
     40: { ...map1[ChainId.TELOS], ...map2[ChainId.TELOS] }, // telos
     56: { ...map1[ChainId.BSC], ...map2[ChainId.BSC] }, // bsc
     250: { ...map1[ChainId.FANTOM], ...map2[ChainId.FANTOM] }, // fantom
-    4002: { ...map1[ChainId.FANTOM_TESTNET], ...map2[ChainId.FANTOM_TESTNET] }, // fantom testnet
     43114: { ...map1[ChainId.AVALANCHE], ...map2[ChainId.AVALANCHE] }, // avalanche
     137: { ...map1[ChainId.MATIC], ...map2[ChainId.MATIC] }, // matic
     42161: { ...map1[ChainId.ARBITRUM], ...map2[ChainId.ARBITRUM] }, // arbitrum

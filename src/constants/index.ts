@@ -10,17 +10,15 @@ export const RPC = {
   [ChainId.ETHEREUM]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
   [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
   [ChainId.FANTOM]: 'https://rpcapi.fantom.network',
-  // [ChainId.FANTOM]: 'https://rpc.ftm.tools/',
-  [ChainId.FANTOM_TESTNET]: 'https://rpc.testnet.fantom.network',
   [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com',
-  // [ChainId.MATIC]: 'https://apis.ankr.com/e22bfa5f5a124b9aa1f911b742f6adfe/c06bb163c3c2a10a4028959f4d82836d/polygon/full/main',
-  // [ChainId.MATIC_TESTNET]: 'https://rpc-mumbai.matic.today',
-  // [ChainId.MOONRIVER]: 'https://moonriver-api.bwarelabs.com/0e63ad82-4f98-46f9-8496-f75657e3a8e', //'https://moonriver.api.onfinality.io/public',
   [ChainId.MOONRIVER]: 'https://rpc.ankr.com/moonbeam',
   [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc',
+  [ChainId.ARBITRUM]: 'https://arb1.arbitrum.io/rpc',
+  // [ChainId.FANTOM]: 'https://rpc.ftm.tools/',
+  // [ChainId.MATIC]: 'https://apis.ankr.com/e22bfa5f5a124b9aa1f911b742f6adfe/c06bb163c3c2a10a4028959f4d82836d/polygon/full/main',
+  // [ChainId.MOONRIVER]: 'https://moonriver-api.bwarelabs.com/0e63ad82-4f98-46f9-8496-f75657e3a8e', //'https://moonriver.api.onfinality.io/public',
   // [ChainId.AVALANCHE_TESTNET]: 'https://api.avax-test.network/ext/bc/C/rpc',
   // [ChainId.HARMONY]: 'https://api.harmony.one',
-  [ChainId.ARBITRUM]: 'https://arb1.arbitrum.io/rpc',
 }
 
 export const COINGECKO_API_URL = 'https://api.coingecko.com/api/v3'
@@ -261,8 +259,7 @@ export const ANALYTICS_URL: { [chainId in ChainId]?: string } = {
   [ChainId.ETHEREUM]: 'https://analytics.soulswap.finance',
   [ChainId.BSC]: 'https://analytics.soulswap.finance',
   [ChainId.FANTOM]: 'https://analytics.soulswap.finance',
-  [ChainId.AVALANCHE]: 'https://analytics.soulswap.finance',
-  [ChainId.FANTOM_TESTNET]: 'https://analytics.soulswap.finance',
+  [ChainId.AVALANCHE]: 'https://analytics.soulswap.finance'
 }
 
 export const EIP_1559_ACTIVATION_BLOCK: { [chainId in ChainId]?: number } = {

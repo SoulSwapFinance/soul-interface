@@ -111,8 +111,8 @@ const useMenu: UseMenu = () => {
 
     if ([250, 43114].includes(chainId)) {
       const mintItems = {
-        key: 'mint',
-        title: i18n._(t`Mint`),
+        key: 'bond',
+        title: i18n._(t`Bond`),
         icon: <MoonIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
         link: '/bonds'
       }
@@ -129,25 +129,25 @@ const useMenu: UseMenu = () => {
       mainItems.push(stakeItems)
     }
 
-    if ([250].includes(chainId)) {
-      const luxorItems = {
-        key: 'Luxor',
-        title: i18n._(t`Bond`),
-        icon: <SunIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
-        link: '/luxor/bonds'
-      }
-      mainItems.push(luxorItems)
-    }
+    // if ([250].includes(chainId)) {
+    //   const luxorItems = {
+    //     key: 'Luxor',
+    //     title: i18n._(t`Luxor`),
+    //     icon: <SunIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+    //     link: '/luxor/bonds'
+    //   }
+    //   mainItems.push(luxorItems)
+    // }
 
-    if ([1, 250, 43114].includes(chainId)) {
-      const bridgeItem = {
-        key: 'bridge',
-        title: i18n._(t`Bridge`),
-        icon: <GlobeIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
-        link: '/bridge'
-      }
-      mainItems.push(bridgeItem)
-    }
+    // if ([1, 250, 43114].includes(chainId)) {
+    //   const bridgeItem = {
+    //     key: 'bridge',
+    //     title: i18n._(t`Bridge`),
+    //     icon: <GlobeIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+    //     link: '/bridge'
+    //   }
+    //   mainItems.push(bridgeItem)
+    // }
 
 
     if (featureEnabled(Feature.UNDERWORLD, chainId)) {

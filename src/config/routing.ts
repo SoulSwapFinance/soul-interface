@@ -15,7 +15,6 @@ const WRAPPED_NATIVE_ONLY: ChainTokenList = {
   [ChainId.ETHEREUM]: [WNATIVE[ChainId.ETHEREUM]],
   [ChainId.TELOS]: [WNATIVE[ChainId.TELOS]],
   [ChainId.FANTOM]: [WNATIVE[ChainId.FANTOM]],
-  [ChainId.FANTOM_TESTNET]: [WNATIVE[ChainId.FANTOM_TESTNET]],
   [ChainId.BSC]: [WNATIVE[ChainId.BSC]],
   [ChainId.AVALANCHE]: [WNATIVE[ChainId.AVALANCHE]],
   [ChainId.MATIC]: [WNATIVE[ChainId.MATIC]],
@@ -71,9 +70,6 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     AVALANCHE.USDC,
     AVALANCHE.WETH,
     AVALANCHE.WBTC,
-  ],
-  [ChainId.FANTOM_TESTNET]: [
-    ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM_TESTNET]
   ],
 }
 
@@ -137,9 +133,6 @@ export const COMMON_BASES: ChainTokenList = {
     BSC.USDC,
     BSC.USDT,
     BSC.USD,
-  ],
-  [ChainId.FANTOM_TESTNET]: [
-    ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM_TESTNET]
   ],
   [ChainId.TELOS]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.TELOS]

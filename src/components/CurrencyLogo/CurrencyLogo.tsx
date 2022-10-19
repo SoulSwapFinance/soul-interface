@@ -58,7 +58,6 @@ const LOGO: Record<ChainId, string> = {
   [ChainId.ETHEREUM]: EthereumLogo,
   [ChainId.FANTOM]: FantomLogo,
   [ChainId.TELOS]: TelosLogo,
-  [ChainId.FANTOM_TESTNET]: FantomLogo,
   [ChainId.BSC]: BinanceLogo,
   [ChainId.AVALANCHE]: AvalancheLogo,
   [ChainId.MATIC]: PolygonLogo,

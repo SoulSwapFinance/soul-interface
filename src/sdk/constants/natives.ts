@@ -15,7 +15,6 @@ export const NATIVE = {
   [ChainId.TELOS]: Telos.onChain(ChainId.TELOS),
   [ChainId.BSC]: Binance.onChain(ChainId.BSC),
   [ChainId.FANTOM]: Fantom.onChain(ChainId.FANTOM),
-  [ChainId.FANTOM_TESTNET]: Fantom.onChain(ChainId.FANTOM_TESTNET),
   [ChainId.AVALANCHE]: Avalanche.onChain(ChainId.AVALANCHE),
   [ChainId.MOONRIVER]: Moonriver.onChain(ChainId.MOONRIVER),
   [ChainId.MATIC]: Polygon.onChain(ChainId.MATIC),
