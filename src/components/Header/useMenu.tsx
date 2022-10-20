@@ -1,5 +1,5 @@
 import React, { ReactNode, useMemo } from 'react'
-import { GlobeIcon, SwitchVerticalIcon, TrendingUpIcon, SunIcon, CurrencyDollarIcon, UserGroupIcon, PlusIcon, MoonIcon, StarIcon } from '@heroicons/react/outline'
+import { GlobeIcon, SwitchVerticalIcon, TrendingUpIcon, CurrencyDollarIcon, UserGroupIcon, MoonIcon, StarIcon } from '@heroicons/react/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { SOUL_ADDRESS } from 'sdk'
@@ -226,9 +226,19 @@ const useMenu: UseMenu = () => {
 
     if (featureEnabled(Feature.AMM, chainId)) {
       mainItems.push({
+        key: 'explorer',
+        title: i18n._(t`Explore`),
+        icon: <GlobeIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+        link: `/explorer`,
+      })
+    }
+
+    if (featureEnabled(Feature.AMM, chainId)) {
+      mainItems.push({
         key: 'socials',
         title: i18n._(t`Follow`),
-        icon: <UserGroupIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+        icon: <UserGroupIcon width={20} 
+        className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
         link: `https://twitter.com/${isLuxor ? 'LuxorMoney' : 'SoulSwapFinance'}`,
         // items: [
         //   {
