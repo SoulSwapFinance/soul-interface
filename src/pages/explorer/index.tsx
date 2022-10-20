@@ -1,44 +1,53 @@
 // import Container from "components/Container";
-import React from "react";
 // import { styled } from 'styled-components'
+import React from "react";
 
+// --xl-bp: 1620px;
+// --l-bp: 1360px;
+// --md-bp: 959px;
+// --s-bp: 600px;
+// --xs-bp: 416px;
 const Explorer = () => {
 	return (
-		<div className="w-full justify-center">
-		<div className="md:hidden sm:flex sm:w-full sm:h-full">
+		// <div className="w-full justify-center">
+		<div className="flex w-full">
 			<iframe
+			className={'sm:flex md:hidden'}
 				frameBorder={"none"}
 				title={"Explorer"}
 				src="https://explore.soulswap.finance"
 				// src="https://soulswap.finance"
-				height={"900px"}
+				height={"800px"}
 				width={'100%'}
-				/>
-		</div>
-	
-		<div className="xl:hidden lg:flex lg:w-full lg:h-full">
+			/>
 			<iframe
+			className={'hidden md:flex lg:hidden'}
 				frameBorder={"none"}
 				title={"Explorer"}
 				src="https://explore.soulswap.finance"
 				// src="https://soulswap.finance"
-				height={"1200px"}
+				height={"959px"}
 				width={'100%'}
-				/>
-		</div>
-
-		<div className="xl:hidden xl:flex xl:w-full xl:h-full">
+			/>
 			<iframe
+			className={'hidden lg:flex xl:hidden'}
 				frameBorder={"none"}
 				title={"Explorer"}
 				src="https://explore.soulswap.finance"
 				// src="https://soulswap.finance"
-				height={"3600px"}
+				height={"1360px"}
 				width={'100%'}
-				/>
-		</div>
-		</div>
-
+			/>
+			<iframe
+			className={'hidden xl:flex'}
+				frameBorder={"none"}
+				title={"Explorer"}
+				src="https://explore.soulswap.finance"
+				// src="https://soulswap.finance"
+				height={"2100px"}
+				width={'100%'}
+			/>
+		 </div>
 	);
 };
 export default Explorer;
