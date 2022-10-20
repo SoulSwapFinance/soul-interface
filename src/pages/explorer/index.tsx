@@ -15,8 +15,7 @@ const Explorer = () => {
 			className={'sm:flex md:hidden'}
 				frameBorder={"none"}
 				title={"Explorer"}
-				src="https://explore.soulswap.finance"
-				// src="https://soulswap.finance"
+				src="https://explore.soulswap.finance/#/tokens/ethereum"
 				height={"800px"}
 				width={'100%'}
 			/>
@@ -24,8 +23,7 @@ const Explorer = () => {
 			className={'hidden md:flex lg:hidden'}
 				frameBorder={"none"}
 				title={"Explorer"}
-				src="https://explore.soulswap.finance"
-				// src="https://soulswap.finance"
+				src="https://explore.soulswap.finance/#/tokens/ethereum"
 				height={"959px"}
 				width={'100%'}
 			/>
@@ -33,8 +31,7 @@ const Explorer = () => {
 			className={'hidden lg:flex xl:hidden'}
 				frameBorder={"none"}
 				title={"Explorer"}
-				src="https://explore.soulswap.finance"
-				// src="https://soulswap.finance"
+				src="https://explore.soulswap.finance/#/tokens/ethereum"
 				height={"1360px"}
 				width={'100%'}
 			/>
@@ -42,8 +39,7 @@ const Explorer = () => {
 			className={'hidden xl:flex'}
 				frameBorder={"none"}
 				title={"Explorer"}
-				src="https://explore.soulswap.finance"
-				// src="https://soulswap.finance"
+				src="https://explore.soulswap.finance/#/tokens/ethereum"
 				height={"2100px"}
 				width={'100%'}
 			/>
