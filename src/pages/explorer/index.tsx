@@ -27,7 +27,7 @@ const Explorer = () => {
 				/>
 		</div>
 
-		<div className="lg:flex lg:w-full lg:h-full">
+		<div className="xl:hidden xl:flex xl:w-full xl:h-full">
 			<iframe
 				frameBorder={"none"}
 				title={"Explorer"}
