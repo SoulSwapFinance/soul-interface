@@ -211,9 +211,6 @@ msgstr "Borrowed"
 msgid "Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest."
 msgstr "Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest."
 
-msgid "Bounty"
-msgstr "Bounty"
-
 msgid "Bridge"
 msgstr "Bridge"
 
@@ -319,6 +316,9 @@ msgstr "Come on Over..."
 
 msgid "Community Approval"
 msgstr "Community Approval"
+
+msgid "Compound Bounty"
+msgstr "Compound Bounty"
 
 msgid "Confirm"
 msgstr "Confirm"
@@ -431,9 +431,6 @@ msgstr "Deposit to CoffinBox"
 msgid "Deposit your SOUL-LP to earn $SOUL rewards."
 msgstr "Deposit your SOUL-LP to earn $SOUL rewards."
 
-msgid "Deposited"
-msgstr "Deposited"
-
 msgid "Deposited Amount"
 msgstr "Deposited Amount"
 
@@ -460,9 +457,6 @@ msgstr "Documentation"
 
 msgid "Earn"
 msgstr "Earn"
-
-msgid "Earned"
-msgstr "Earned"
 
 msgid "English"
 msgstr "English"
@@ -914,6 +908,9 @@ msgstr "Pay from"
 
 msgid "Pending"
 msgstr "Pending"
+
+msgid "Pending Reward"
+msgstr "Pending Reward"
 
 msgid "Pending Treasury Transfer"
 msgstr "Pending Treasury Transfer"

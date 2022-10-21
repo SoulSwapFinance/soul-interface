@@ -211,9 +211,6 @@ msgstr ""
 msgid "Borrowing allows you to obtain liquidity without selling. Your borrow limit depends on the amount of deposited collateral. You will be able to borrow up to 75% of your collateral and repay at any time with accrued interest."
 msgstr ""
 
-msgid "Bounty"
-msgstr ""
-
 msgid "Bridge"
 msgstr ""
 
@@ -313,6 +310,9 @@ msgid "Come on Over..."
 msgstr ""
 
 msgid "Community Approval"
+msgstr ""
+
+msgid "Compound Bounty"
 msgstr ""
 
 msgid "Confirm"
@@ -426,9 +426,6 @@ msgstr ""
 msgid "Deposit your SOUL-LP to earn $SOUL rewards."
 msgstr ""
 
-msgid "Deposited"
-msgstr ""
-
 msgid "Deposited Amount"
 msgstr ""
 
@@ -454,9 +451,6 @@ msgid "Documentation"
 msgstr ""
 
 msgid "Earn"
-msgstr ""
-
-msgid "Earned"
 msgstr ""
 
 msgid "English"
@@ -906,6 +900,9 @@ msgid "Pay from"
 msgstr ""
 
 msgid "Pending"
+msgstr ""
+
+msgid "Pending Reward"
 msgstr ""
 
 msgid "Pending Treasury Transfer"
