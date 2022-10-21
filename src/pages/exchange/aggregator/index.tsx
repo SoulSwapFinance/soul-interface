@@ -34,7 +34,7 @@ import {
   weiToMaxUnit,
   weiToUnit,
 } from "utils/conversion";
-import SwapImg from "assets/img/symbols/Swap.svg";
+// import SwapImg from "assets/img/symbols/Swap.svg";
 import useFantomNative from "hooks/useFantomNative";
 import useFantomERC20 from "hooks/useFantomERC20";
 import config from "features/aggregator/config";
@@ -488,7 +488,7 @@ const SwapTokensContent: React.FC<any> = ({
                 borderRadius: "50%",
               }}
             >
-              <img alt="swap" style={{ height: "20px" }} src={SwapImg} />
+              {/* <img alt="swap" style={{ height: "20px" }} src={SwapImg} /> */}
             </Row>
           </OverlayButton>
           <div
