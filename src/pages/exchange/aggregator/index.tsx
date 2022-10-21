@@ -48,7 +48,7 @@ import Chart from "components/Chart";
 // import { formatDate } from "utils/common";
 import FadeInOut from "components/AnimationFade";
 import useDetectResolutionType from "hooks/useDetectResolutionType";
-import openoceanImg from "assets/img/icons/openocean.svg";
+// import openoceanImg from "assets/img/icons/openocean.svg";
 import { formatDate } from "functions/format";
 
 const SwapTokenInput: React.FC<any> = ({
@@ -454,7 +454,7 @@ const SwapTokensContent: React.FC<any> = ({
               >
                 Powered by OpenOcean
               </Typo3>
-              <img src={openoceanImg} />
+              {/* <img src={openoceanImg} /> */}
             </Row>
           </div>
         </Row>
