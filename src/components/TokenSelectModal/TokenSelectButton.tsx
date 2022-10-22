@@ -37,9 +37,13 @@ const TokenSelectButton: React.FC<any> = ({
           src={currentToken.symbol === "FTM" ? ftmIcon : currentToken.logoURL}
           style={{ height: "24px" }}
         />
-        <Spacer size="xxs" />
+        <Spacer 
+        // size="xxs" 
+        />
         <Typo2>{currentToken.symbol}</Typo2>
-        <Spacer size="sm" />
+        <Spacer 
+        // size="sm" 
+        />
         <img alt="" src={vShape} />
       </Row>
     </Button>

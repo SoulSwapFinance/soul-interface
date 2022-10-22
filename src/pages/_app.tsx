@@ -34,6 +34,21 @@ import { GelatoProvider } from 'soulswap-limit-orders-react'
 import { useActiveWeb3React } from 'services/web3'
 import { ApiDataProvider } from 'contexts/ApiDataProvider'
 import ModalProvider from 'contexts/ModalProvider'
+import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client'
+import config from 'features/aggregator/config'
+
+
+const link = createHttpLink({
+  uri: config.providers[0].http,
+  // headers: { authorization: token },  // The token in the auth header will be removed when the cookie approach is working)
+});
+
+const client = new ApolloClient({
+  cache: new InMemoryCache({ addTypename: true }),
+  // uri: "/api",
+  link,
+  connectToDevTools: process.env.NODE_ENV === "development",
+});
 
 const Web3ProviderNetwork = dynamic(() => import('components/Web3ProviderNetwork'), { ssr: false })
 
@@ -140,6 +155,8 @@ function MyApp({ Component, pageProps, fallback, err }) {
       <I18nProvider i18n={i18n} forceRenderOnLocaleChange={false}>
         <Web3ReactProvider getLibrary={getLibrary}>
         <ApiDataProvider>
+          <ApolloProvider client={client}>
+          {/*@ts-ignore TYPE NEEDS FIXING*/}
           <FantomApiProvider>
           <Web3ProviderNetwork getLibrary={getLibrary}>
             <Web3ReactManager>
@@ -176,6 +193,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
             </Web3ReactManager>
           </Web3ProviderNetwork>
           </FantomApiProvider>
+          </ApolloProvider>
           </ApiDataProvider>
         </Web3ReactProvider>
       </I18nProvider>

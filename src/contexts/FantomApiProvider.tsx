@@ -16,8 +16,8 @@ const initial: any = {
   getEstimatedRewards: null,
 };
 export const FantomApiContext = React.createContext(null);
-
-export const FantomApiProvider: React.FC<any> = ({ children }) => {
+// @ts-ignore
+export const FantomApiProvider: React.FC = ({ children }) => {
   const fantomApiReducer = (state: any, action: any) => {
     switch (action.type) {
       case "success":

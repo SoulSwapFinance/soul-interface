@@ -17,7 +17,8 @@ import {
   import { useQuery } from "@apollo/client";
   import { useEffect } from "react";
   import useFantomApiData from "./useFantomAPIData";
-  import useWalletProvider from "./useWalletProvider";
+import { useActiveWeb3React } from "services/web3";
+//   import useWalletProvider from "./useWalletProvider";
   
   export enum FantomApiMethods {
     getAccountBalance = "getAccountBalance",
@@ -64,9 +65,9 @@ import {
     pollInterval?: number,
     args?: any[]
   ) => {
-    const { walletContext } = useWalletProvider();
+    // const { walletContext } = useWalletProvider();
     const { dispatchApiData } = useFantomApiData();
-  
+    const { account } = useActiveWeb3React()
     const createOptions = () => {
       if (!variables && !pollInterval) return null;
   
@@ -86,7 +87,9 @@ import {
     );
   
     useEffect(() => {
-      if (!walletContext.activeWallet.address) {
+      if (!account) {
+    //   if (!walletContext.activeWallet.address) 
+    {
         return;
       }
   
@@ -115,8 +118,8 @@ import {
           method: request,
         });
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [loading, error, data, request, walletContext.activeWallet.address]);
-  };
+    } [loading, error, data, request, account ]});
+        // walletContext.activeWallet.address
+  }
   
-  export default useFantomApi;
+  export default useFantomApi

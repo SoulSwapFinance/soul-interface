@@ -55,7 +55,9 @@ const InputTextBox: React.FC<any> = ({
           </Typo2>
         </Row>
       )}
-      <Spacer size="xs" />
+      <Spacer 
+    //   size="xs" 
+      />
       {textArea ? (
         <Row
           style={{
@@ -90,14 +92,18 @@ const InputTextBox: React.FC<any> = ({
         >
           {pre && (
             <>
-              <Spacer size="sm" />
-              <Typo2 style={{ fontWeight: !disabled ? "bold" : "normal" }}>
+          <Spacer 
+          // size="sm" 
+          />              
+          <Typo2 style={{ fontWeight: !disabled ? "bold" : "normal" }}>
                 {pre}
               </Typo2>
             </>
           )}
-          <Spacer size="sm" />
-          <Input
+        <Spacer 
+          // size="sm" 
+        />
+        <Input
             fontSize={small && "16px"}
             fontWeight={small && "bold"}
             disabled={disabled}
@@ -122,7 +128,9 @@ const InputTextBox: React.FC<any> = ({
       )}
       {!small && (
         <>
-          <Spacer size="xs" />
+          <Spacer 
+        //   size="xs" 
+          />
           <Row
             style={{
               justifyContent: "space-between",
@@ -132,7 +140,9 @@ const InputTextBox: React.FC<any> = ({
             {internalError ? (
               <InputError fontSize="18px" error={internalError} />
             ) : (
-              <Spacer size="lg" />
+              <Spacer 
+            //   size="lg"
+            />
             )}
             {maxLength && (
               <Typo2>
