@@ -6,7 +6,7 @@ import AutoSizer from 'react-virtualized-auto-sizer'
 import { FixedSizeList } from 'react-window'
 import { Box, Flex, Text } from 'rebass'
 
-import { useActiveWeb3React } from 'hooks'
+import { useActiveWeb3React } from 'services/web3'
 import { useIsUserAddedPair } from 'hooks/Tokens'
 import { useAllPairs } from 'hooks/useAllPairs'
 import { usePairAdder, usePairRemover } from 'state/user/hooks'

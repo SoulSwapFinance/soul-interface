@@ -241,11 +241,6 @@ const useMenu: UseBar = () => {
             link: '/luxor/bonds',
           },
           {
-            key: 'sor',
-            title: i18n._(t`Stable`),
-            link: '/luxor/sor',
-          },
-          {
             key: 'luxor-staking',
             title: i18n._(t`Stake`),
             link: '/luxor/stake',

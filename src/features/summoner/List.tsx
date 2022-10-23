@@ -1,6 +1,6 @@
 import React from 'react'
 import Typography from 'components/Typography'
-import { Active, Underworld } from './Key' // Inactive
+import { Active, Inactive, Underworld } from './Key'
 import { ActiveRow } from './Row'
 import { AvalanchePools, FantomPools, AvalancheLendingPools, FantomLendingPools, InactiveFantomPools, InactiveAvalanchePools } from './Pools'
 import { Button } from 'components/Button'
@@ -9,6 +9,7 @@ import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
 import { useSummonerContract } from 'hooks/useContract'
 import ExternalLink from 'components/ExternalLink'
+import { classNames } from 'functions'
 // import { getChainColorCode } from 'constants/chains'
 // import { classNames } from 'functions'
 
@@ -167,13 +168,13 @@ export const FarmList = () => {
           <Typography className="text-2xl bg-dark-1000 mb-3 mt-6 border border-blue p-3 font-bold text-center">Lending Pools</Typography>
       <Underworld />
           {chainId == ChainId.FANTOM ? ftmLendList : avaxLendList}
-          {/* <Typography 
+          <Typography 
             className={classNames(chainId == ChainId.AVALANCHE ? 'hidden' : `text-2xl bg-dark-1000 mb-3 mt-6 border border-pink p-3 font-bold text-center`)}
           >
               Retired Pools
             </Typography>
             <Inactive/>
-            {chainId == ChainId.FANTOM ? inactiveFtmList : inactiveAvaxList} */}
+            {chainId == ChainId.FANTOM ? inactiveFtmList : inactiveAvaxList}
         </div>
     </div>
   )

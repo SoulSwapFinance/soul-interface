@@ -144,10 +144,6 @@ module.exports = withBundleAnalyzer(
           source: '/luxor',
           destination: '/luxor/bonds',
         },
-        {
-          source: '/sor',
-          destination: '/luxor/sor',
-        },
         // {
         //   source: '/migrate',
         //   destination: '/exchange/migrate',

@@ -142,11 +142,6 @@ const useMobileMenu: UseMobileMenu = () => {
             link: '/autostake',
           },
           {
-            key: 'sor',
-            title: i18n._(t`Stable`),
-            link: '/luxor/sor',
-          },
-          {
             key: 'luxor',
             title: i18n._(t`Luxor`),
             link: '/luxor/bonds',

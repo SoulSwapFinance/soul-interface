@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { soulswapDexes } from 'constants/dexes'
 // import { ELASTIC_NOT_SUPPORTED } from 'constants/v2'
-import { useActiveWeb3React } from 'hooks'
+import { useActiveWeb3React } from 'services/web3'
 import useLiquiditySources from 'hooks/useAggregatorStats'
 
 import { updateAllDexes } from '.'
