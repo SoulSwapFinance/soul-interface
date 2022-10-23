@@ -6,7 +6,7 @@ import { getAccountAssets, getAccountBalance } from "utils/account";
 import {
   Button,
   ContentBox,
-  Heading3,
+  // Heading3,
   OverlayButton,
   Typo1,
   Typo2,
@@ -43,14 +43,14 @@ import useCoingeckoApi, {
   COINGECKO_BASEURL,
   COINGECKO_METHODS,
 } from "hooks/useCoinGeckoAPI";
-import Chart from "components/Aggregator/Chart";
+// import Chart from "components/Aggregator/Chart";
 // import { formatDate } from "utils/common";
 import FadeInOut from "components/AnimationFade";
 import useDetectResolutionType from "hooks/useDetectResolutionType";
 import { formatDate } from "functions/format";
 import { useActiveWeb3React } from "services/web3";
 import { ChainId, OPEN_OCEAN_EXCHANGE_ADDRESS, Token, WNATIVE } from "sdk";
-import { useUserTokenInfo } from "hooks/useAPI";
+// import { useUserTokenInfo } from "hooks/useAPI";
 import { Toggle } from "components/Toggle";
 import { classNames } from "functions";
 import { DoubleGlowShadowV2 } from "components/DoubleGlow";
@@ -737,11 +737,11 @@ const TokenChart: React.FC<any> = ({ showChart = false, activeTokens, refetchTim
               </Typo1>
             </Column>
           </Row>
-          {chartData && showChart && (
+          {/* {chartData && showChart && (
             <div key={width + (chartData?.length || 0)}>
               <Chart data={chartData} handleCrossHairData={handleCrosshairData} />
             </div>
-          )}
+          )} */}
         </Column>
       }
     </div>
