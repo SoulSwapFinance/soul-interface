@@ -34,13 +34,13 @@ const TokenSelectButton: React.FC<any> = ({
       <Row style={{ alignItems: "center" }}>
         <img
           alt=""
-          src={currentToken.symbol === "FTM" ? ftmIcon : currentToken.logoURL}
+          src={currentToken?.symbol === "FTM" ? ftmIcon : currentToken?.logoURL}
           style={{ height: "24px" }}
         />
         <Spacer 
         // size="xxs" 
         />
-        <Typo2>{currentToken.symbol}</Typo2>
+        <Typo2>{currentToken?.symbol}</Typo2>
         <Spacer 
         // size="sm" 
         />

@@ -51,7 +51,8 @@ import useDetectResolutionType from "hooks/useDetectResolutionType";
 // import openoceanImg from "assets/img/icons/openocean.svg";
 import { formatDate } from "functions/format";
 import { useActiveWeb3React } from "services/web3";
-import { OPEN_OCEAN_EXCHANGE_ADDRESS } from "sdk";
+import { OPEN_OCEAN_EXCHANGE_ADDRESS, Token, WNATIVE } from "sdk";
+import { useUserTokenInfo } from "hooks/useAPI";
 
 const SwapTokenInput: React.FC<any> = ({
   inputValue,
@@ -64,8 +65,10 @@ const SwapTokenInput: React.FC<any> = ({
   disabledInput,
   refetchTimer,
 }) => {
-  const { color } = useContext(ThemeContext);
+  // const { color } = useContext(ThemeContext);
   const { getTokenBalance } = useFantomERC20();
+  // const { account, chainId } = useActiveWeb3React()
+  // const userTokenBalance = useUserTokenInfo(account, token?.address).userTokenInfo.balance
   const { getBalance } = useFantomNative();
   const [error, setError] = useState(null);
   const [tokenBalance, setTokenBalance] = useState(BigNumber.from(0));
@@ -99,6 +102,7 @@ const SwapTokenInput: React.FC<any> = ({
   useEffect(() => {
     if (token) {
       setTokenBalance(BigNumber.from(token.balanceOf));
+      // setTokenBalance(BigNumber.from(userTokenBalance));
       setFormattedTokenBalance(
         toFormattedBalance(
           weiToUnit(BigNumber.from(token.balanceOf), token.decimals)
@@ -106,6 +110,7 @@ const SwapTokenInput: React.FC<any> = ({
       );
       if (!disableMaximum) {
         setMaximum(weiToMaxUnit(token.balanceOf, token.decimals));
+        // setMaximum(weiToMaxUnit(userTokenBalance, token.decimals));
       }
     }
   }, [token]);
@@ -136,7 +141,7 @@ const SwapTokenInput: React.FC<any> = ({
           />
           <FormattedValue
             formattedValue={formattedTokenBalance}
-            tokenSymbol={token.symbol}
+            tokenSymbol={token?.symbol}
             color={'grey'}
             fontSize="16px"
           />
@@ -206,11 +211,10 @@ const SwapTokensContent: React.FC<any> = ({
   setSwapRoute,
   refetchTimer,
 }) => {
-  const { color } = useContext(ThemeContext);
+  // const { color } = useContext(ThemeContext);
   // const { walletContext } = useWalletProvider();
   const { account, chainId } = useActiveWeb3React()
   const { sendTx } = useFantomNative();
-  const { getAllowance, approve } = useFantomERC20();
   const { getSwapQuote, getQuote } = useOpenOceanApi();
   const { getPrice } = useCoingeckoApi();
   const { apiData } = useApiData();
@@ -225,6 +229,8 @@ const SwapTokensContent: React.FC<any> = ({
 
   const [inToken, setInToken] = useState(null);
   const [outToken, setOutToken] = useState(null);
+  const { getAllowance, approve } = useFantomERC20();
+
   const [inTokenAmount, setInTokenAmount] = useState("1");
   const [outTokenAmount, setOutTokenAmount] = useState("");
   const [estimatedGas, setEstimatedGas] = useState(null);
@@ -502,7 +508,7 @@ const SwapTokensContent: React.FC<any> = ({
         // size="lg" 
         />
         <Spacer />
-        {outToken && (
+       {outToken && (
           <SwapTokenInput
             inputValue={outTokenAmount}
             setInputValue={setOutTokenAmount}
@@ -571,7 +577,7 @@ const SwapTokensContent: React.FC<any> = ({
                 justifyContent: "space-between",
               }}
             >
-              <div>Estimated cost</div>
+              <div>Estimated Cost</div>
               {estimatedGas ? (
                 <FormattedValue
                   formattedValue={toFormattedBalance(estimatedGas.toString())}
@@ -588,7 +594,7 @@ const SwapTokensContent: React.FC<any> = ({
                 justifyContent: "space-between",
               }}
             >
-              <div>Price impact</div>
+              <div>Price Impact</div>
               {priceImpact ? (
                 <FormattedValue
                   formattedValue={toFormattedBalance(priceImpact.toString())}
@@ -775,7 +781,7 @@ const SwapRoute: React.FC<any> = ({ route, tokenList, activeTokens }) => {
     );
     return (
       <ContentBox
-        key={`route-column-${part.parts}-${part.dexes[0].dex}-${token.symbol}`}
+        key={`route-column-${part.parts}-${part.dexes[0].dex}-${token?.symbol}`}
         style={{ padding: ".5rem", width: "150px" }}
       >
         <Row style={{ alignItems: "center" }}>

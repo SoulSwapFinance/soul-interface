@@ -28,24 +28,24 @@ const TokenSelectModal: React.FC<any> = ({
   setTokenSelected,
   includeNative,
 }) => {
-  const { color } = useContext(ThemeContext);
+  // const { color } = useContext(ThemeContext);
   const allAssets = includeNative
     ? [{ ...FANTOM_NATIVE, balanceOf: ftmBalance }, ...assets]
     : assets;
-  const erc20Assets = allAssets.filter((asset: any) => {
-    return asset.decimals > 0;
+  const erc20Assets = allAssets?.filter((asset: any) => {
+    return asset?.decimals > 0;
   });
   const sortedAssets = [...erc20Assets]
     .filter(
-      (asset: any) => !stickyTokensList.includes(asset.symbol.toLowerCase())
+      (asset: any) => !stickyTokensList?.includes(asset?.symbol.toLowerCase())
     )
     .sort(
       (a: any, b: any) =>
         compare(hexToUnit(b.balanceOf), hexToUnit(a.balanceOf)) ||
         compare(a.symbol, b.symbol)
     );
-  const stickyAssets = [...erc20Assets].filter((asset: any) =>
-    stickyTokensList.includes(asset.symbol.toLowerCase())
+    const stickyAssets = [...erc20Assets].filter((asset: any) =>
+    stickyTokensList.includes(asset?.symbol.toLowerCase())
   );
 
   const [search, setSearch] = useState("");
@@ -57,12 +57,13 @@ const TokenSelectModal: React.FC<any> = ({
   useEffect(() => {
     const filteredAssets = [...stickyAssets, ...sortedAssets].filter(
       (asset: any) => {
-        const result = asset.symbol.toLowerCase().search(search.toLowerCase());
+        const result = asset?.symbol.toLowerCase().search(search.toLowerCase());
         return result >= 0;
       }
     );
 
     setListAssets(filteredAssets);
+    // setListAssets(['ftm', 'dai', 'usdc', 'soul']);
   }, [search]);
 
   return (
@@ -90,7 +91,7 @@ const TokenSelectModal: React.FC<any> = ({
               style={{
                 textAlign: "left",
                 width: "8rem",
-                color: color.greys.grey(),
+                color: '#B7BECB',
               }}
             >
               TOKEN NAME
@@ -99,7 +100,7 @@ const TokenSelectModal: React.FC<any> = ({
               style={{
                 textAlign: "right",
                 width: "8rem",
-                color: color.greys.grey(),
+                color: '#B7BECB',
               }}
             >
               BALANCE
@@ -110,7 +111,7 @@ const TokenSelectModal: React.FC<any> = ({
               {listAssets.map((asset: any) => {
                 return (
                   <StyledOverlayButton
-                    key={"token-select-" + asset.address}
+                    key={"token-select-" + asset?.address}
                     onClick={() => {
                       setTokenSelected(asset);
                       onDismiss();
@@ -131,7 +132,7 @@ const TokenSelectModal: React.FC<any> = ({
 
 const StyledOverlayButton = styled(OverlayButton)`
   :hover {
-    background-color: ${(props) => props.theme.color.primary.semiWhite(0.1)};
+    background-color: ${'#FFFFFF'};
   }
 `;
 

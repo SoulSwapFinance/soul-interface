@@ -4,10 +4,15 @@ import { loadERC20Contract } from "utils/wallet";
 import { useActiveWeb3React } from "services/web3";
 import { getSigner } from "sdk";
 import { useAppDispatch } from "state/hooks";
+import { useUserTokenInfo } from "./useAPI";
+import { BigNumber } from "@ethersproject/bignumber";
 
 const useFantomERC20 = () => {
   const dispatch = useAppDispatch()
   const { account, chainId, library } = useActiveWeb3React()
+  // const tokenBalance = useUserTokenInfo(account, tokenAddress).userTokenInfo.balance
+  // const tokenDecimals = useUserTokenInfo(account, tokenAddress).userTokenInfo.decimals
+
   const approve = async (
     contractAddress: string,
     approveAddress: string,
