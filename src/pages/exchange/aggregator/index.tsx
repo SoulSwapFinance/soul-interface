@@ -766,11 +766,11 @@ const TokenChart: React.FC<any> = ({ activeTokens, refetchTimer, width }) => {
           </Typo1>
         </Column>
       </Row>
-      {chartData && showChart && (
+      {/* {chartData && showChart && (
         <div key={width + (chartData?.length || 0)}>
           <Chart data={chartData} handleCrossHairData={handleCrosshairData} />
         </div>
-      )}
+      )} */}
     </Column>
   );
 };
