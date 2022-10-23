@@ -206,7 +206,7 @@
     "jotai": "^1.6.1",
     "kaktana-react-lightweight-charts": "2.0.0",
     "lifi-web": "^0.0.1",
-    "lightweight-charts": "^3.7.0",
+    "lightweight-charts": "^3.8.0",
     "luxon": "2.4.0",
     "mixpanel-browser": "^2.45.0",
     "moment": "^2.29.1",
