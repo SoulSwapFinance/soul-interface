@@ -23,7 +23,7 @@ const InputTextBox: React.FC<any> = ({
   small = false,
   pre = null,
 }) => {
-  const { color } = useContext(ThemeContext);
+//   const { color } = useContext(ThemeContext);
   const [internalError, setInternalError] = useState(error);
 
   const onHandleChange = (value: string) => {
@@ -50,7 +50,7 @@ const InputTextBox: React.FC<any> = ({
     <Column style={{ ...style }}>
       {title && (
         <Row style={{ justifyContent: "space-between" }}>
-          <Typo2 style={{ fontWeight: "bold", color: color.greys.grey() }}>
+          <Typo2 style={{ fontWeight: "bold", color: 'white' }}>
             {title}
           </Typo2>
         </Row>
@@ -134,7 +134,7 @@ const InputTextBox: React.FC<any> = ({
           <Row
             style={{
               justifyContent: "space-between",
-              color: color.greys.darkGrey(),
+              color: 'white',
             }}
           >
             {internalError ? (

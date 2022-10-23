@@ -3,9 +3,10 @@ import { ThemeContext } from "styled-components";
 import { hexToUnit, toFormattedBalance } from "../../utils/conversion";
 import Row from "../Row";
 import { Typo1, Typo2 } from "../index";
+import Image from 'components/Image'
 
 export const TokenBalance: React.FC<any> = ({ token, imageSize = " 32px" }) => {
-  const { color } = useContext(ThemeContext);
+  // const { color } = useContext(ThemeContext);
 
   const formattedBalance = toFormattedBalance(
     hexToUnit(token.balanceOf, token.decimals)
@@ -13,7 +14,7 @@ export const TokenBalance: React.FC<any> = ({ token, imageSize = " 32px" }) => {
   return (
     <Row style={{ justifyContent: "space-between" }}>
       <Row style={{ alignItems: "center" }}>
-        <img
+        <Image
           alt=""
           style={{ width: imageSize, height: imageSize, marginRight: ".4rem" }}
           src={token.logoURL}
@@ -24,7 +25,7 @@ export const TokenBalance: React.FC<any> = ({ token, imageSize = " 32px" }) => {
         <Typo2
           style={{
             fontWeight: "bold",
-            color: color.primary.semiWhite(),
+            color: 'white',
           }}
         >
           {formattedBalance[0]}

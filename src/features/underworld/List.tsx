@@ -1,6 +1,5 @@
 import Typography from 'components/Typography'
 import React, { useEffect, useState } from 'react'
-// import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 import { Underworld } from './Key'
 import { Row } from './Row'
@@ -10,7 +9,7 @@ import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
 import { getChainColorCode } from 'constants/chains'
-import ExternalLink from 'components/ExternalLink'
+// import ExternalLink from 'components/ExternalLink'
 // import { ArrowLeftIcon, ArrowRightIcon, XIcon } from '@heroicons/react/outline'
 // import Header from 'components/Header'
 

@@ -6,6 +6,8 @@ import InputCurrency from "./InputCurrency"
 import { Button } from "../index"
 import { Token } from 'utils/account/types'
 import FtmLogo from "assets/networks/fantom.svg";
+import { NATIVE } from "sdk"
+import { useActiveWeb3React } from "services/web3"
 
 export const FANTOM_NATIVE: Token = {
   address: null,
@@ -23,8 +25,9 @@ const InputCurrencyBox: React.FC<any> = ({
   minus,
   variant = "old",
 }) => {
-  const { color } = useContext(ThemeContext);
+  // const { color } = useContext(ThemeContext);
   const [error, setError] = useState(null);
+  const { chainId } = useActiveWeb3React()
   const handleSetMax = () => {
     setError(null);
     setValue(max);
@@ -34,7 +37,7 @@ const InputCurrencyBox: React.FC<any> = ({
     <Row
       style={{
         width: "100%",
-        backgroundColor: variant === "new" ? color.primary.black() : "#202F49",
+        backgroundColor: variant === "new" ? 'black' : "#202F49",
         borderRadius: "8px",
         height: "64px",
         alignItems: "center",
@@ -47,13 +50,13 @@ const InputCurrencyBox: React.FC<any> = ({
         max={max}
         handleValue={setValue}
         handleError={setError}
-        token={FANTOM_NATIVE}
+        token={NATIVE[chainId]}
       />
       <Row style={{ alignItems: "center" }}>
         <Button
           disabled={disabled}
           fontSize="14px"
-          color={color.greys.grey()}
+          color={'grey'}
           padding="8px"
           style={{ flex: 1 }}
           variant="tertiary"

@@ -1,4 +1,4 @@
-import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 import { useAutoStakeContract } from 'hooks/useContract'
 import { useMemo, useCallback, useState } from 'react'
 import { useSingleCallResult } from '../../state/multicall/hooks'

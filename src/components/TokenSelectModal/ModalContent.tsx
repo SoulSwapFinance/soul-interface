@@ -12,7 +12,7 @@ const StyledModalContent = styled.div`
   background-color: #172641;
   border-radius: 8px;
   text-align: center;
-  @media (max-width: ${(props) => props.theme.breakpoints.mobile}px) {
+  @media (max-width: ${576}px) {
     flex: 1;
     overflow: auto;
   }

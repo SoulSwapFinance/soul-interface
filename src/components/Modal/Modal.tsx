@@ -33,7 +33,7 @@ const StyledResponsiveWrapper = styled.div<any>`
   justify-content: flex-end;
   position: relative;
 
-  @media (max-width: ${(props) => props.theme.breakpoints.tablet}px) {
+  @media (max-width: ${768}px) {
     flex: 1;
     top: 100%;
     right: 0;

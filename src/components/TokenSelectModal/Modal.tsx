@@ -33,7 +33,7 @@ const StyledResponsiveWrapper = styled.div<any>`
   justify-content: flex-end;
   position: relative;
 
-  @media (max-width: ${(props) => props.theme.breakpoints.tablet}px) {
+  @media (max-width: ${768}px) {
     flex: 1;
     top: 100%;
     right: 0;
@@ -47,8 +47,8 @@ const StyledResponsiveWrapper = styled.div<any>`
 const StyledModal = styled.div<any>`
   padding: ${(props) =>
     props.padding === undefined ? "20px 40px" : props.padding};
-  background: ${(props) => props.theme.color.secondary.navy()};
-  color: ${(props) => props.theme.color.white};
+  background: ${'black'};
+  color: ${'white'};
   font-family: "proxima-nova", sans-serif;
   border-radius: 8px;
   backdrop-filter: blur(40px);

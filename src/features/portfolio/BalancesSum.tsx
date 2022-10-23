@@ -6,12 +6,11 @@ import { reduceBalances, useUnderworldPositions } from 'features/portfolio/Asset
 import SumUSDCValues from 'features/trident/SumUSDCValues'
 import { currencyFormatter } from 'functions'
 // import { useTridentLiquidityPositions } from 'services/graph'
-// import { useActiveWeb3React } from 'services/web3'
 import { useCoffinBalancesV2ForAccount } from 'state/coffinbox/hooks'
 import { useAllTokenBalancesWithLoadingIndicator, useCurrencyBalance } from 'state/wallet/hooks'
 import React, { FC, useMemo } from 'react'
 import { useLiquidityPositions } from 'services/graph'
-import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
+import { useActiveWeb3React } from 'services/web3'
 
 export const LiquidityPositionsBalancesSum = () => {
   const { i18n } = useLingui()
