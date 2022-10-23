@@ -78,7 +78,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             </Typography>
           </NavLink>
         }
-        {chainId == 250 &&
+        {chainId == ChainId.FANTOM &&
           <NavLink
             activeClassName={classNames(
               "border rounded bg-black",
@@ -107,7 +107,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Cross`)}
           </Typography>
         </NavLink>
-        <NavLink
+        {/* <NavLink
           activeClassName={classNames(
             "border rounded bg-black",
             chainColor
@@ -118,6 +118,19 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
         >
           <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
             {i18n._(t`Bridge`)}
+          </Typography>
+        </NavLink> */}
+        <NavLink
+          activeClassName={classNames(
+            "border rounded bg-black",
+            chainColor
+          )}
+          href={{
+            pathname: '/aggregator',
+          }}
+        >
+          <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
+            {i18n._(t`Multi`)}
           </Typography>
         </NavLink>
       </div>

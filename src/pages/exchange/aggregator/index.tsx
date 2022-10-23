@@ -34,7 +34,7 @@ import {
   weiToMaxUnit,
   weiToUnit,
 } from "utils/conversion";
-// import SwapImg from "assets/img/symbols/Swap.svg";
+import SwapImg from "assets/icons/Swap.svg";
 import useFantomNative from "hooks/useFantomNative";
 import useFantomERC20 from "hooks/useFantomERC20";
 // import config from "features/aggregator/config";
@@ -47,11 +47,18 @@ import Chart from "components/Aggregator/Chart";
 // import { formatDate } from "utils/common";
 import FadeInOut from "components/AnimationFade";
 import useDetectResolutionType from "hooks/useDetectResolutionType";
-// import openoceanImg from "assets/img/icons/openocean.svg";
 import { formatDate } from "functions/format";
 import { useActiveWeb3React } from "services/web3";
-import { OPEN_OCEAN_EXCHANGE_ADDRESS, Token, WNATIVE } from "sdk";
+import { ChainId, OPEN_OCEAN_EXCHANGE_ADDRESS, Token, WNATIVE } from "sdk";
 import { useUserTokenInfo } from "hooks/useAPI";
+import { Toggle } from "components/Toggle";
+import { classNames } from "functions";
+import { DoubleGlowShadowV2 } from "components/DoubleGlow";
+import Container from "components/Container";
+import SwapHeader from "features/swap/SwapHeader";
+import { SwapLayoutCard } from "layouts/SwapLayout";
+import { SubmitButton } from "features/summoner/Styles";
+import { getChainColor, getChainColorCode } from "constants/chains";
 
 const SwapTokenInput: React.FC<any> = ({
   inputValue,
@@ -67,7 +74,7 @@ const SwapTokenInput: React.FC<any> = ({
   // const { color } = useContext(ThemeContext);
   // const { getTokenBalance } = useFantomERC20();
   const { account, chainId } = useActiveWeb3React()
-  const userTokenBalance =  Number(useUserTokenInfo(account, token?.address).userTokenInfo.balance)
+  // const userTokenBalance = Number(useUserTokenInfo(account, token?.address).userTokenInfo.balance)
   // const { getBalance } = useFantomNative();
   const [error, setError] = useState(null);
   const [tokenBalance, setTokenBalance] = useState(BigNumber.from(0));
@@ -103,61 +110,44 @@ const SwapTokenInput: React.FC<any> = ({
       setTokenBalance(BigNumber.from(token.balanceOf));
       // setTokenBalance(BigNumber.from(userTokenBalance));
     } else setFormattedTokenBalance(
-        toFormattedBalance(
-          weiToUnit(BigNumber.from(token.balanceOf), token.decimals)
-        )
-      );
-      if (!disableMaximum) {
-        setMaximum(weiToMaxUnit(token.balanceOf, token.decimals));
-        // setMaximum(weiToMaxUnit(userTokenBalance, token.decimals));
-      }
-    }, [token])
+      toFormattedBalance(
+        weiToUnit(BigNumber.from(token.balanceOf), token.decimals)
+      )
+    );
+    if (!disableMaximum) {
+      setMaximum(weiToMaxUnit(token.balanceOf, token.decimals));
+      // setMaximum(weiToMaxUnit(userTokenBalance, token.decimals));
+    }
+  }, [token])
 
-    // useEffect(() => {
-    //   if (token) {
-    //     if (token.address === "0x0000000000000000000000000000000000000000") {
-    //       return getBalance().then((balance: any) => {
-    //         setFormattedTokenBalance(toFormattedBalance(weiToUnit(balance)));
-    //       });
-    //     }
-    //     return getTokenBalance(token.address).then((tokenBalance) =>
-    //       setFormattedTokenBalance(
-    //         toFormattedBalance(weiToUnit(tokenBalance, token.decimals))
-    //       )
-    //     );
-    //   }
-    // }, [token, refetchTimer]);
-  
+  // useEffect(() => {
+  //   if (token) {
+  //     if (token.address === "0x0000000000000000000000000000000000000000") {
+  //       return getBalance().then((balance: any) => {
+  //         setFormattedTokenBalance(toFormattedBalance(weiToUnit(balance)));
+  //       });
+  //     }
+  //     return getTokenBalance(token.address).then((tokenBalance) =>
+  //       setFormattedTokenBalance(
+  //         toFormattedBalance(weiToUnit(tokenBalance, token.decimals))
+  //       )
+  //     );
+  //   }
+  // }, [token, refetchTimer]);
+
 
   return (
-    <Column>
-      <Row style={{ position: "relative", justifyContent: "space-between" }}>
-        <Typo2 style={{ color: '#FFFFFF' }}>{title}</Typo2>
-        <Row>
-          {/* <Image width="40px" height={"40px"} alt="wallet symbol" src={walletSymbol} /> */}
-          <Spacer 
-          size="xs" 
-          />
-          <FormattedValue
-            formattedValue={formattedTokenBalance}
-            tokenSymbol={token?.symbol}
-            color={'#FFFFFF'}
-            fontSize="16px"
-          />
-        </Row>
-      </Row>
-      <Spacer 
-        size="xs" 
-        />     
+    <Column 
+    // style={{ width: '100%' }}
+    >
       <Row
         style={{
           backgroundColor: "#000000",
-          borderRadius: "8px",
+          borderRadius: "12px",
           height: "64px",
           alignItems: "center",
         }}
       >
-        <Spacer />
         <InputCurrency
           disabled={disabledInput}
           value={inputValue}
@@ -166,40 +156,46 @@ const SwapTokenInput: React.FC<any> = ({
           handleError={setError}
           token={token}
         />
-        <Row style={{ flex: 1, alignItems: "center" }}>
-          <Spacer />
-          {!disabledInput && (
-            <Button
-              fontSize="14px"
-              color={'grey'}
-              padding="8px"
-              style={{ flex: 1 }}
-              variant="tertiary"
+        {/* <Row 
+        style={{ flex: 1, alignItems: "center"}}
+        > */}
+          <Spacer size="md" />
+          <Row
+        style={{
+          backgroundColor: "#000000",
+          borderRadius: "12px",
+          height: "64px",
+          alignItems: "center",
+        }}
+      >
+         {!disabledInput && (
+            <SubmitButton
+              fontSize="16px"
+              primaryColor={getChainColor(chainId)}
+              // color={'grey'}
+              padding="6px"
+              style={{ flex: 1, marginLeft: '5rem', marginRight: '2.5rem' }}
+              // variant="tertiary"
+              variant="outlined"
               onClick={handleSetMax}
             >
-              {token?.address === "0x0000000000000000000000000000000000000000"
-                ? "MAX"
-                : "MAX"}
-            </Button>
+              {"MAX"}
+            </SubmitButton>
           )}
-          <Spacer />
           <TokenSelectButton
-            currentToken={ token }
+            // chainId = {chainId}
+            currentToken={token}
             ftmBalance={BigNumber.from(tokenBalance)}
             assets={tokenList}
             setTokenSelected={handleTokenChange}
             includeNative={false}
           />
-          <Spacer />
+          </Row>
+
+          <Spacer size="lg" />
         </Row>
-      </Row>
-      <Spacer 
-      size="xs" 
-      />
-      {error ? <InputError error={error} /> 
-      : <Spacer 
-      size="lg" 
-      />}
+      {/* </Row> */}
+      { error && <InputError error={error} /> }
     </Column>
   );
 };
@@ -230,7 +226,8 @@ const SwapTokensContent: React.FC<any> = ({
   const [outToken, setOutToken] = useState(null);
   const { getAllowance, approve } = useFantomERC20();
 
-  const [inTokenAmount, setInTokenAmount] = useState("1");
+  const [inTokenAmount, setInTokenAmount] = useState("1")
+  // const [inTokenDecimals, setInTokenDecimals] = useState(18);
   const [outTokenAmount, setOutTokenAmount] = useState("");
   const [estimatedGas, setEstimatedGas] = useState(null);
   const [priceImpact, setPriceImpact] = useState(null);
@@ -238,8 +235,9 @@ const SwapTokensContent: React.FC<any> = ({
   const [allowance, setAllowance] = useState(BigNumber.from(0));
 
   const hasAllowance = (value: BigNumber) => {
-    if (inToken?.decimals) {
-      if (inToken.address === "0x0000000000000000000000000000000000000000") {
+    // if (inTokenDecimals) {
+    if (inToken && inToken.decimals) {
+      if (inToken?.address === "0x0000000000000000000000000000000000000000") {
         if (isApproveCompleted) {
           resetApproveTx();
         }
@@ -257,7 +255,7 @@ const SwapTokensContent: React.FC<any> = ({
     reset: resetApproveTx,
   } = useSendTransaction(() =>
     approve(
-      inToken.address,
+      inToken?.address,
       OPEN_OCEAN_EXCHANGE_ADDRESS[chainId],
       unitToWei(inTokenAmount, inToken.decimals).toString()
     )
@@ -327,7 +325,7 @@ const SwapTokensContent: React.FC<any> = ({
         setInTokenAmount("1");
         setOutTokenAmount("");
         resetSwapTx();
-      }, 2000);
+      }, 20_000);
     }
     return () => clearTimeout(timeout);
   }, [isSwapCompleted]);
@@ -362,9 +360,9 @@ const SwapTokensContent: React.FC<any> = ({
         return;
       }
       getAllowance(
-        inToken.address,
+        inToken?.address,
         OPEN_OCEAN_EXCHANGE_ADDRESS[chainId],
-        ).then((result) => {
+      ).then((result) => {
         setAllowance(result);
       });
     }
@@ -429,11 +427,11 @@ const SwapTokensContent: React.FC<any> = ({
     ) {
       const inTokenAmount = weiToUnit(
         BigNumber.from(OOSwapQuoteData?.inAmount),
-        inToken.decimals
+        inToken?.decimals
       );
       const outTokenAmount = weiToUnit(
         BigNumber.from(OOSwapQuoteData?.outAmount),
-        outToken.decimals
+        outToken?.decimals
       );
       const inTokenPrice = tokenPriceData[inToken.data] ? tokenPriceData[inToken?.code]["usd"] : '-'
       const outTokenPrice = tokenPriceData[outToken.data] ? tokenPriceData[outToken?.code]["usd"] : '-'
@@ -447,23 +445,7 @@ const SwapTokensContent: React.FC<any> = ({
   }, [OOSwapQuoteData, tokenPriceData]);
 
   return (
-    <ContentBox>
-      <Column>
-        <Row style={{ justifyContent: "space-between" }}>
-          <div
-            style={{
-              fontSize: "20px",
-              fontWeight: "bold",
-              color: '#FFFFFF',
-            }}
-          >
-            Swap Tokens
-          </div>
-
-        </Row>
-        <Spacer 
-        size="lg" 
-        />
+      <Column style={{ width: "100%" }}>
         {inToken && (
           <SwapTokenInput
             inputValue={inTokenAmount}
@@ -471,15 +453,13 @@ const SwapTokensContent: React.FC<any> = ({
             tokenList={tokenList}
             setToken={setInToken}
             token={inToken}
-            title={"Pay"}
+            // title={"Pay"}
             refetchTimer={refetchTimer}
             disabledInput={isSwapPending || isSwapCompleted}
           />
         )}
 
-        <Spacer 
-        size="lg" 
-        />
+          <Spacer size="sm" />
         <Row style={{ justifyContent: "center", alignItems: "center" }}>
           <div
             style={{ height: "1px", width: "100%", backgroundColor: "#000000" }}
@@ -489,24 +469,21 @@ const SwapTokensContent: React.FC<any> = ({
               style={{
                 alignItems: "center",
                 justifyContent: "center",
-                height: "64px",
-                width: "64px",
+                height: "32px",
+                width: "32px",
                 border: "1px solid #67748B",
                 borderRadius: "50%",
               }}
             >
-              {/* <Image alt="swap" style={{ height: "20px" }} src={SwapImg} /> */}
+              <Image alt="swap" style={{ height: "20px" }} src={SwapImg} />
             </Row>
           </OverlayButton>
           <div
             style={{ height: "1px", width: "100%", backgroundColor: "#000000" }}
           />
         </Row>
-        <Spacer 
-        size="lg" 
-        />
-        <Spacer />
-       {outToken && (
+        <Spacer size="sm" />
+        {outToken && (
           <SwapTokenInput
             inputValue={outTokenAmount}
             setInputValue={setOutTokenAmount}
@@ -514,14 +491,13 @@ const SwapTokensContent: React.FC<any> = ({
             tokenList={tokenList}
             setToken={setOutToken}
             token={outToken}
-            title={"Receive"}
+            // title={"Receive"}
             refetchTimer={refetchTimer}
           />
         )}
-        <Spacer 
-        size="lg" 
+        <Spacer
+          size="lg"
         />
-        <Spacer />
         {hasAllowance(allowance) ? (
           <Button
             variant="primary"
@@ -531,10 +507,10 @@ const SwapTokensContent: React.FC<any> = ({
             {isSwapPending
               ? "Swapping..."
               : isSwapCompleted
-              ? "Swap successful"
-              : !minReceived
-              ? "Fetching best price..."
-              : "Swap"}
+                ? "Swap successful"
+                : !minReceived
+                  ? "Fetching best price..."
+                  : "Swap"}
           </Button>
         ) : (
           <Button
@@ -545,26 +521,12 @@ const SwapTokensContent: React.FC<any> = ({
             {isApprovePending
               ? "Approving..."
               : isApproveCompleted
-              ? "Approved!"
-              : "Approve"}
+                ? "Approved!"
+                : "Approve"}
           </Button>
         )}
-        {/*{tx && tx.error ? (*/}
-        {/*  <>*/}
-        {/*    <Spacer size="xs" />*/}
-        {/*    <Row style={{ justifyContent: "center" }}>*/}
-        {/*      <InputError fontSize="18px" error={tx.error.message} />*/}
-        {/*    </Row>*/}
-        {/*    <Spacer />*/}
-        {/*  </>*/}
-        {/*) : (*/}
-        {/*  <>*/}
-        {/*    <Spacer />*/}
-        {/*    <Spacer />*/}
-        {/*  </>*/}
-        {/*)}*/}
-        <Spacer 
-        size="xxl" 
+        <Spacer
+          size="lg"
         />
         <ContentBox style={{ backgroundColor: "#000000" }}>
           <Column style={{ width: "100%", gap: "1rem" }}>
@@ -622,18 +584,18 @@ const SwapTokensContent: React.FC<any> = ({
           </Column>
         </ContentBox>
       </Column>
-    </ContentBox>
   );
 };
 
-const TokenChart: React.FC<any> = ({ activeTokens, refetchTimer, width }) => {
+const TokenChart: React.FC<any> = ({ showChart = false, activeTokens, refetchTimer, width }) => {
   const { getMarketHistory } = useCoingeckoApi();
   const { apiData } = useApiData();
+  const { chainId } = useActiveWeb3React()
   const [interval, setInterval] = useState("15m");
   const [chartData, setChartData] = useState(null);
   const [pricePoint, setPricePoint] = useState(null);
   const [priceTime, setPriceTime] = useState(null);
-  const [showChart, setShowChart] = useState(false)
+  // const [showChart, setShowChart] = useState(false)
 
   const handleCrosshairData = (data: any[]) => {
     setPricePoint(data[1] ? data[1] : chartData[chartData.length - 1].value);
@@ -643,14 +605,14 @@ const TokenChart: React.FC<any> = ({ activeTokens, refetchTimer, width }) => {
   const inTokenChartData =
     apiData[
       COINGECKO_BASEURL +
-        COINGECKO_METHODS.GET_MARKET_CHART +
-        `/${activeTokens[0]?.code}/market_chart`
+      COINGECKO_METHODS.GET_MARKET_CHART +
+      `/${activeTokens[0]?.code}/market_chart`
     ]?.response?.data;
   const outTokenChartData =
     apiData[
       COINGECKO_BASEURL +
-        COINGECKO_METHODS.GET_MARKET_CHART +
-        `/${activeTokens[1]?.code}/market_chart`
+      COINGECKO_METHODS.GET_MARKET_CHART +
+      `/${activeTokens[1]?.code}/market_chart`
     ]?.response?.data;
 
   const intervalToDays = {
@@ -693,7 +655,7 @@ const TokenChart: React.FC<any> = ({ activeTokens, refetchTimer, width }) => {
       setChartData(graphData);
       setPricePoint(graphData[graphData.length - 1].value);
       setPriceTime(graphData[graphData.length - 1].time);
-      setShowChart(true)
+      // setShowChart(true)
     }
   }, [inTokenChartData, outTokenChartData]);
 
@@ -701,79 +663,90 @@ const TokenChart: React.FC<any> = ({ activeTokens, refetchTimer, width }) => {
     if (!chartData) {
       setPricePoint(null);
       setPriceTime(null);
-      setShowChart(false)
+      // setShowChart(false)
     }
   }, [chartData]);
 
   return (
-    <Column>
-      <Row style={{ justifyContent: "space-between" }}>
+    <div className="grid">
+
+      { showChart &&
         <Column>
-          <Row>
-            <Image
-            alt={`${activeTokens[0]?.symbol} icon`}
-            width="40px" height={"40px"}
-            style={{ height: "40px", width: "40px", zIndex: 2 }}
-            src={activeTokens[0]?.icon}
-            />
-            <Image
-            alt={`${activeTokens[1]?.symbol} icon`}
-            width="40px" height={"40px"}
-              src={activeTokens[1]?.icon}
-              style={{ height: "40px", width: "40px", marginLeft: "-.5rem" }}
-            />
-            <Spacer />
-            {activeTokens[0]?.symbol}
-            <Spacer 
-            size="xs" 
-            />
-            /
-            <Spacer 
-            size="xs" 
-            />
-            {activeTokens[1]?.symbol}
+          <Row style={{ justifyContent: "space-between" }}>
+            <Column>
+              <Row>
+                <Image
+                  alt={`${activeTokens[0]?.symbol} icon`}
+                  width="40px" height={"40px"}
+                  style={{ height: "40px", width: "40px", zIndex: 2 }}
+                  src={activeTokens[0]?.icon}
+                />
+                <Spacer
+                size="lg"
+                />
+                <Image
+                  alt={`${activeTokens[1]?.symbol} icon`}
+                  width="40px" height={"40px"}
+                  src={activeTokens[1]?.icon}
+                  style={{ height: "40px", width: "40px", marginLeft: "-.5rem" }}
+                />
+                <Spacer />
+                {activeTokens[0]?.symbol}
+                <Spacer
+                  size="xs"
+                />
+                /
+                <Spacer
+                  size="xs"
+                />
+                {activeTokens[1]?.symbol}
+              </Row>
+              <Spacer
+                size="sm"
+              />
+              <Row>
+                {["5m", "15m", "30m", "1h", "1d"].map((selectInterval) => {
+                  return (
+                    <OverlayButton
+                      key={`interval-${selectInterval}`}
+                      onClick={() => setInterval(selectInterval)}
+                    >
+                      <Typo1
+                        style={{
+                          // justifyContent: 'space-between',
+                          fontWeight:
+                            selectInterval === interval ? "bold" : "normal",
+                        }}
+                      >
+                        {selectInterval}
+                      </Typo1>
+                    </OverlayButton>
+                  );
+                })}
+              </Row>
+            </Column>
+            <Column 
+            style={{ alignItems: "center" }}
+            >
+              {pricePoint ? pricePoint.toFixed(6) : ""}
+              <Spacer
+                size="sm"
+              />
+              <Typo1>
+                {priceTime ? formatDate(new Date(priceTime * 1000)) : ""}
+              </Typo1>
+            </Column>
           </Row>
-          <Spacer 
-          size="sm" 
-          />
-          <Row>
-            {["5m", "15m", "30m", "1h", "1d"].map((selectInterval) => {
-              return (
-                <OverlayButton
-                  key={`interval-${selectInterval}`}
-                  onClick={() => setInterval(selectInterval)}
-                >
-                  <Typo1
-                    style={{
-                      fontWeight:
-                        selectInterval === interval ? "bold" : "normal",
-                    }}
-                  >
-                    {selectInterval}
-                  </Typo1>
-                </OverlayButton>
-              );
-            })}
-          </Row>
+          {chartData && showChart && (
+            <div key={width + (chartData?.length || 0)}>
+              <Chart data={chartData} handleCrossHairData={handleCrosshairData} />
+            </div>
+          )}
         </Column>
-        <Column style={{ alignItems: "end" }}>
-          {pricePoint ? pricePoint.toFixed(6) : ""}
-          <Spacer 
-          size="sm" 
-          />
-          <Typo1>
-            {priceTime ? formatDate(new Date(priceTime * 1000)) : ""}
-          </Typo1>
-        </Column>
-      </Row>
-      {/* {chartData && showChart && (
-        <div key={width + (chartData?.length || 0)}>
-          <Chart data={chartData} handleCrossHairData={handleCrosshairData} />
-        </div>
-      )} */}
-    </Column>
-  );
-};
+      }
+    </div>
+  )
+}
 
 const SwapRoute: React.FC<any> = ({ route, tokenList, activeTokens }) => {
   const RouteBox = (part: any, first: boolean) => {
@@ -783,42 +756,46 @@ const SwapRoute: React.FC<any> = ({ route, tokenList, activeTokens }) => {
         (first ? part.from.toLowerCase() : part.to.toLowerCase())
     );
     return (
+      <div className="flex justify-between">
       <ContentBox
         key={`route-column-${part.parts}-${part.dexes[0].dex}-${token?.symbol}`}
-        style={{ padding: ".5rem", width: "150px" }}
-      >
+        style={{ padding: ".5rem", width: "100%" }}
+        >
         <Row style={{ alignItems: "center" }}>
           <Image
-              alt={`${token?.symbol} icon`}
-              width="40px" height={"40px"} style={{ height: "32px", width: "32px" }} src={token?.icon} />
-          <Spacer 
-          size="sm" 
-          />
+            alt={`${token?.symbol} icon`}
+            width="36px" height={"36px"} style={{ height: "36px", width: "36px" }} src={token?.icon} />
+          <Spacer
+            size="lg"
+            />
           <Column>
             <Typo3 style={{ fontWeight: "bold" }}>{token.symbol}</Typo3>
             <Typo3>{part.dexes[0].dex}</Typo3>
           </Column>
         </Row>
       </ContentBox>
+    </div>
     );
   };
 
   return (
     <Column style={{ width: "100%" }}>
-      <Heading3>Routing</Heading3>
-      <Spacer 
-      size="xs" 
-      />
-      <Row style={{ justifyContent: "space-between", alignItems: "center" }}>
+      {/* <Heading3>Routing</Heading3>
+      <Spacer
+        size="xs"
+      /> */}
+      <Row 
+        style={ { justifyContent: "space-between", alignItems: "center" }}
+        >
         <Row style={{ alignItems: "center" }}>
           <Image
-          alt={`${activeTokens[0]?.symbol} logo`}
-          width="40px" height={"40px"}
+            alt={`${activeTokens[0]?.symbol} logo`}
+            width="40px" height={"40px"}
             style={{ height: "40px", width: "40px" }}
             src={activeTokens[0]?.icon}
           />
-          <Spacer 
-          size="sm" 
+          <Spacer
+            size="sm"
           />
           <div
             style={{ width: "1px", height: "30px", backgroundColor: "#232F46" }}
@@ -832,7 +809,7 @@ const SwapRoute: React.FC<any> = ({ route, tokenList, activeTokens }) => {
                 style={{
                   gap: ".2rem",
                   flexWrap: "wrap",
-                  justifyContent: "center",
+                  justifyContent: "space-between",
                 }}
               >
                 {routePart.subRoutes.map((subRoutePart: any, index: number) => {
@@ -846,12 +823,12 @@ const SwapRoute: React.FC<any> = ({ route, tokenList, activeTokens }) => {
           <div
             style={{ width: "1px", height: "30px", backgroundColor: "#232F46" }}
           />
-          <Spacer 
-          size="sm" 
+          <Spacer
+            size="sm"
           />
           <Image
-          alt={`${activeTokens[1]?.symbol} logo`}
-          width="40px" height={"40px"}
+            alt={`${activeTokens[1]?.symbol} logo`}
+            width="40px" height={"40px"}
             style={{ height: "40px", width: "40px" }}
             src={activeTokens[1]?.icon}
           />
@@ -861,17 +838,18 @@ const SwapRoute: React.FC<any> = ({ route, tokenList, activeTokens }) => {
   );
 };
 
-const Swap: React.FC<any> = () => {
+const Aggregator: React.FC<any> = () => {
   const { getTokenList } = useOpenOceanApi();
   // const { walletContext } = useWalletProvider();
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const { apiData: fantomApiData } = useFantomApiData();
   const { width } = useDetectResolutionType();
   const { apiData } = useApiData();
   const [tokenList, setTokenList] = useState(null);
+  const [showChart, setShowChart] = useState(false)
   const [activeTokens, setActiveTokens] = useState(
     [tokenList?.find((token: OOToken) => token.symbol === "FTM"),
-  tokenList?.find((token: OOToken) => token.symbol === "USDC")]
+    tokenList?.find((token: OOToken) => token.symbol === "USDC")]
     // {
     //   address: "0x0000000000000000000000000000000000000000",
     //   code: "fantom",
@@ -955,8 +933,8 @@ const Swap: React.FC<any> = () => {
               OOToken.address === "0x0000000000000000000000000000000000000000"
                 ? fantomBalance
                 : accountToken
-                ? accountToken.balanceOf
-                : "0x0",
+                  ? accountToken.balanceOf
+                  : "0x0",
             logoURL: OOToken.icon,
           };
         })
@@ -966,37 +944,70 @@ const Swap: React.FC<any> = () => {
 
   //https://api.coingecko.com/api/v3/coins/beethoven-x/market_chart?vs_currency=usd&days=60
   return (
-    <FadeInOut>
-      <Row
-        style={{
-          gap: "2rem",
-          flexWrap: "wrap",
-          justifyContent: "center",
-        }}
-      >
-        <SwapTokensContent
-          tokenList={tokenList}
-          setActiveTokens={setActiveTokens}
-          setSwapRoute={setSwapRoute}
-          refetchTimer={refetchTimer}
-        />
-        <Column style={{ flex: 2, minWidth: "500px" }}>
-          <TokenChart
-            width={width}
-            activeTokens={activeTokens}
-            refetchTimer={refetchTimer}
-          />
-          <Spacer />
-          <SwapRoute
-            route={swapRoute}
-            tokenList={tokenList}
-            activeTokens={activeTokens}
-          />
-        </Column>
-      </Row>
-      <Spacer />
-    </FadeInOut>
+    <Container id="aggregator-page" maxWidth="2xl" className="space-y-4">
+      <DoubleGlowShadowV2>
+        <div className="p-4 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+          <div className="px-2">
+            <SwapHeader />
+          </div>
+          <SwapLayoutCard>
+            <FadeInOut>
+              <div className="flex">
+              <Row
+                style={{
+                  gap: "2rem",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                }}
+              >
+                <SwapTokensContent
+                  tokenList={tokenList}
+                  setActiveTokens={setActiveTokens}
+                  setSwapRoute={setSwapRoute}
+                  refetchTimer={refetchTimer}
+                />
+                <Column style={{ flex: 2, minWidth: "100%" }}>
+                <div className={classNames(chainId == ChainId.FANTOM ? `flex flex-cols-2 gap-0 text-white justify-end` : 'hidden')}>
+                <Toggle
+                  id="toggle-button"
+                  optionA="Chart"
+                  optionB="Chart"
+                  isActive={showChart}
+                  toggle={
+                    showChart
+                      ? () => {
+                        setShowChart(false)
+                      }
+                      : () => {
+                        setShowChart(true)
+                      }
+                  }
+                />
+              </div>
+                  { showChart &&
+                  <TokenChart
+                    showChart={showChart}
+                    width={width}
+                    activeTokens={activeTokens}
+                    refetchTimer={refetchTimer}
+                  />
+                  }
+                  <Spacer />
+                  <SwapRoute
+                    route={swapRoute}
+                    tokenList={tokenList}
+                    activeTokens={activeTokens}
+                  />
+                </Column>
+              </Row>
+              </div>
+              <Spacer />
+            </FadeInOut>
+          </SwapLayoutCard>
+        </div>
+      </DoubleGlowShadowV2>
+    </Container>
   );
 };
 
-export default Swap;
+export default Aggregator;

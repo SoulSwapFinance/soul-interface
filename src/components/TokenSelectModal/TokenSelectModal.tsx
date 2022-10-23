@@ -7,12 +7,13 @@ import Spacer from "../Spacer";
 import Column from "../Column";
 import styled, { ThemeContext } from "styled-components";
 import TokenBalance from "./TokenBalance";
-import ModalTitle from "./ModalTitle";
+// import ModalTitle from "./ModalTitle";
 import ModalContent from "./ModalContent";
 import Scrollbar from "../Scrollbar";
 import InputTextBox from "./InputTextBox";
 import { hexToUnit } from "../../utils/conversion";
 import { stickyTokensList } from "features/aggregator/token";
+import { NATIVE } from "sdk";
 import { FANTOM_NATIVE } from "components/InputCurrency/InputCurrencyBox";
 
 export const compare = (a: any, b: any) => {
@@ -24,13 +25,15 @@ export const compare = (a: any, b: any) => {
 const TokenSelectModal: React.FC<any> = ({
   onDismiss,
   ftmBalance,
+  // chainId,
   assets = [],
   setTokenSelected,
   includeNative,
 }) => {
   // const { color } = useContext(ThemeContext);
   const allAssets = includeNative
-    ? [{ ...FANTOM_NATIVE, balanceOf: ftmBalance }, ...assets]
+  ? [{ ...FANTOM_NATIVE, balanceOf: ftmBalance }, ...assets]
+    // ? [{ ...NATIVE[chainId], balanceOf: ftmBalance }, ...assets]
     : assets;
   const erc20Assets = allAssets?.filter((asset: any) => {
     return asset?.decimals > 0;
@@ -63,15 +66,14 @@ const TokenSelectModal: React.FC<any> = ({
     );
 
     setListAssets(filteredAssets);
-    // setListAssets(['ftm', 'dai', 'usdc', 'soul']);
   }, [search]);
 
   return (
     <Modal
-      style={{ padding: "20px 24px", maxHeight: "80vh" }}
+      style={{ padding: "16px 0px", maxHeight: "80vh" }}
       onDismiss={onDismiss}
     >
-      <ModalTitle text="Select Token" />
+      {/* <ModalTitle text="Select Token" /> */}
       <InputTextBox
         text={search}
         setText={setSearch}
@@ -79,7 +81,7 @@ const TokenSelectModal: React.FC<any> = ({
         small
       />
       <Spacer />
-      <ModalContent style={{ padding: "16px 0px" }}>
+      <ModalContent style={{ padding: "12px 0px" }}>
         <Column>
           <Row
             style={{
@@ -94,7 +96,7 @@ const TokenSelectModal: React.FC<any> = ({
                 color: '#B7BECB',
               }}
             >
-              TOKEN NAME
+              SYMBOL
             </Typo3>
             <Typo3
               style={{
@@ -116,7 +118,7 @@ const TokenSelectModal: React.FC<any> = ({
                       setTokenSelected(asset);
                       onDismiss();
                     }}
-                    style={{ padding: ".8rem" }}
+                    style={{ padding: ".8rem 0.2rem 0rem" }}
                   >
                     <TokenBalance token={asset} height={'24px'} width={'24px'} imageSize="24px" />
                   </StyledOverlayButton>
@@ -132,7 +134,7 @@ const TokenSelectModal: React.FC<any> = ({
 
 const StyledOverlayButton = styled(OverlayButton)`
   :hover {
-    background-color: ${'#FFFFFF'};
+    background-color: ${'#000000'};
   }
 `;
 

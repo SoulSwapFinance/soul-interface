@@ -121,7 +121,7 @@ export const Button = styled.button<{
   font-weight: bold;
   text-align: center;
   text-decoration: none;
-  padding: ${(props) => (props.padding ? props.padding : "14px 24px")};
+  padding: ${(props) => (props.padding ? props.padding : "8px 16px")};
   transition: 0.2s all;
   width: ${(props) => props.width && props.width};
 
@@ -158,7 +158,7 @@ export const Input = styled.input<{
   background-color: transparent;
   border: none;
   color: white;
-  font-size: ${(props) => props.fontSize || "20px"};
+  font-size: ${(props) => props.fontSize || "24px"};
   font-weight: ${(props) => props.fontWeight && props.fontWeight};
   opacity: ${(props) => props.disabled && 0.6};
 

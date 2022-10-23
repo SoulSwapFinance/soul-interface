@@ -47,8 +47,8 @@ const StyledResponsiveWrapper = styled.div<any>`
 const StyledModal = styled.div<any>`
   padding: ${(props) =>
     props.padding === undefined ? "20px 40px" : props.padding};
-  background: ${'black'};
-  color: ${'white'};
+  background: ${'#000000'};
+  color: ${'#FFFFFF'};
   font-family: "proxima-nova", sans-serif;
   border-radius: 8px;
   backdrop-filter: blur(40px);
