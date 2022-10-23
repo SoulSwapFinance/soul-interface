@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 
-import { useActiveWeb3React } from 'hooks'
+import { useActiveWeb3React } from 'services/web3'
 import { AppState } from 'state'
 import { useAppDispatch } from 'state/hooks'
 

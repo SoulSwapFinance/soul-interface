@@ -4,7 +4,7 @@ import { captureException } from '@sentry/react'
 import { ethers } from 'ethers'
 import { useCallback } from 'react'
 
-import { useActiveWeb3React } from 'hooks/index'
+import { useActiveWeb3React } from 'services/web3'
 import { calculateGasMargin } from 'functions/trade'
 
 export default function useSendTransactionCallback() {

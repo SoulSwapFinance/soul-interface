@@ -13,7 +13,7 @@ export const send = async (
       });
       console.log("PENDING", hash);
       new Promise((resolve) => {
-        provider.once(hash, (transaction: any) => {
+        provider?.once(hash, (transaction: any) => {
           dispatch({
             type: "transactionCompleted",
             hash,

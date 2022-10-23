@@ -209,6 +209,18 @@ export const FantomBonds = [
     term: '5D',
   },
 
+  // SOR-FTM BONDS //
+  {
+    pid: 26,
+    status: 'closed',
+    bondAddress: '0x4b66619b1469b2198A52cA23b181813199a731E5',
+    assetName: 'SOR-FTM',
+    assetAddress: SOR_FTM[ChainId.FANTOM],
+    token1Address: SOR_ADDRESS[ChainId.FANTOM],
+    token2Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+    term: '5D',
+  },
+
   /// LIVE BONDS ///
 
   // SOR & DAI BONDS //
@@ -238,17 +250,6 @@ export const FantomBonds = [
     assetName: 'WFTM',
     assetAddress: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    term: '5D',
-  },
-  
-  // SOR-FTM BONDS //
-  {
-    pid: 26,
-    bondAddress: '0x4b66619b1469b2198A52cA23b181813199a731E5',
-    assetName: 'SOR-FTM',
-    assetAddress: SOR_FTM[ChainId.FANTOM],
-    token1Address: SOR_ADDRESS[ChainId.FANTOM],
-    token2Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     term: '5D',
   },
 

@@ -606,6 +606,9 @@ export const FTM_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: WNATIVE_ADDRESS[ChainId.FANTOM]
 }
 
+export const OPEN_OCEAN_EXCHANGE_ADDRESS: AddressMap = {
+  [ChainId.FANTOM]: '0x6352a56caadC4F1E25CD6c75970Fa768A3304e64',
+}
 // LP TOKEN ADDRESS //
 
 export const LUX_NATIVE: AddressMap = {

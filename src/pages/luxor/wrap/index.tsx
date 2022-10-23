@@ -109,13 +109,6 @@ export default function Stablecoin() {
               </a>
             </NavLink>
           </Button>
-          <Button variant="filled" color="yellow" size="lg">
-            <NavLink href={'/luxor/sor'}>
-              <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                <span> Stable </span>
-              </a>
-            </NavLink>
-          </Button>
         </div>
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
           <Tab.Group>

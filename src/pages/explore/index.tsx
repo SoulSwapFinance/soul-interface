@@ -56,7 +56,7 @@ const LUXOR = (i18n: I18n) => [
   {
     id: 1,
     name: 'MINTER',
-    description: 'Bond with SOR, FTM, and SOR-FTM. Mint LUX.',
+    description: 'Bond with DAI, FTM, and LUX-FTM. Mint LUX.',
     href: './luxor/bonds'
   },
   {
@@ -64,13 +64,7 @@ const LUXOR = (i18n: I18n) => [
     name: 'STAKER',
     description: 'Stake LUX. Earn LUX (Rebases).',
     href: './luxor/stake'
-  },
-  {
-    id: 3,
-    name: 'FARMER',
-    description: 'Farm LUX-FTM and SOR-FTM. Earn SOUL.',
-    href: './summoner'
-  },
+  }
 ]
 
 export default function Explore() {

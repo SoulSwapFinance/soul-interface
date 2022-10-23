@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import { JsonRpcProvider } from "@ethersproject/providers";
 
-import config from "config/configurations";
+import config from "features/aggregator/config";
 
 export const ActiveWalletContext = React.createContext(null);
 const initial = {
@@ -9,7 +9,8 @@ const initial = {
     address: null,
     chainId: null,
     contracts: new Map([]),
-    provider: new JsonRpcProvider(config.rpc),
+    // provider: new JsonRpcProvider(config.rpc),
+    provider: new JsonRpcProvider('https://rpc.ankr.com/fantom'),
     signer: null,
     providerType: null,
   },
@@ -24,7 +25,8 @@ const initial = {
     isWrongApp: false,
   },
 } as any;
-export const ActiveWalletProvider: React.FC<any> = ({ children }) => {
+// @ts-ignore
+export const ActiveWalletProvider: React.FC = ({ children }) => {
   const activeWalletReducer = (state: any, action: any) => {
     switch (action.type) {
       case "setActiveWallet":
@@ -100,7 +102,7 @@ export const ActiveWalletProvider: React.FC<any> = ({ children }) => {
 
   return (
     <ActiveWalletContext.Provider value={[state, dispatch]}>
-      { children }
+      {children}
     </ActiveWalletContext.Provider>
   );
 };

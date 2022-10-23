@@ -9,7 +9,19 @@ import { ChainId, SOUL_ADDRESS, USDC_ADDRESS, LUX_ADDRESS, WLUM_ADDRESS, WNATIVE
 
 export const InactiveAvalanchePools = []
 
-export const InactiveFantomPools = []
+export const InactiveFantomPools = [
+  { // 200
+    pid: 16,
+    type: 'swap',
+    decimals: 18,
+    token0Symbol: 'WFTM',
+    token1Symbol: 'WLUM',
+    lpSymbol: 'FTM-WLUM',
+    lpAddress: '0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99',
+    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+    token1Address: WLUM_ADDRESS[ChainId.FANTOM],
+  },
+]
 
 export const AvalanchePools = [
   {
@@ -275,18 +287,7 @@ export const FantomPools = [
     lpAddress: BTC_USDC[ChainId.FANTOM],
     token0Address: WBTC_ADDRESS[ChainId.FANTOM],
     token1Address: USDC_ADDRESS[ChainId.FANTOM],
-  },
-  { // 200
-    pid: 16,
-    type: 'swap',
-    decimals: 18,
-    token0Symbol: 'WFTM',
-    token1Symbol: 'WLUM',
-    lpSymbol: 'FTM-WLUM',
-    lpAddress: '0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99',
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: WLUM_ADDRESS[ChainId.FANTOM],
-  },
+  }
 ]
 
 export const FantomLendingPools = [

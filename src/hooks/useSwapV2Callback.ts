@@ -8,7 +8,7 @@ import { useTransactionAdder } from 'state/transactions/hooks'
 // import { useUserSlippageTolerance } from 'state/user/hooks'
 import { Aggregator } from 'utils/swap/aggregator'
 
-import { useActiveWeb3React } from './index'
+import { useActiveWeb3React } from 'services/web3'
 import useENS from './useENS'
 import { formatCurrencyAmount, shortenAddress } from 'functions/format'
 import { isAddress } from 'functions/validate'

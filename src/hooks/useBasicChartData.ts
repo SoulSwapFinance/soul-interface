@@ -6,7 +6,7 @@ import useSWR from 'swr'
 
 import { COINGECKO_API_URL } from 'constants/index'
 import { NETWORKS_INFO } from 'constants/networks'
-import { useActiveWeb3React } from 'hooks'
+import { useActiveWeb3React } from 'services/web3'
 
 export enum LiveDataTimeframeEnum {
   HOUR = '1H',

@@ -13,7 +13,6 @@ import DashboardChartLegend from 'components/Dashboard/ChartLegend'
 // import QuestionHelper from 'components/QuestionHelper/Helper'
 // import useLuxorDashboard from 'hooks/useLuxorDashboard'
 // import { AutoSizer } from 'react-virtualized'
-// import { useActiveWeb3React } from 'hooks/useActiveWeb3React'
 import { useFantomPrice, useLuxorPrice, useWrappedLumPrice } from 'hooks/getPrices'
 import { usePairPrice } from 'hooks/usePairData'
 // import { useLuxTVL } from 'hooks/useV2Pairs'
@@ -351,13 +350,6 @@ const HideOnMobile = styled.div`
           <NavLink href={'/luxor/wrap'}>
             <a className="block text-lg md:text-xl text-black text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Wrap </span>
-            </a>
-          </NavLink>
-        </Button>
-        <Button variant="filled" color="gold" size="lg">
-          <NavLink href={'/luxor/sor'}>
-            <a className="block text-lg md:text-xl text-black text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Stable </span>
             </a>
           </NavLink>
         </Button>
