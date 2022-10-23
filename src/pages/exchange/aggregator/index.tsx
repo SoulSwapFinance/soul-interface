@@ -44,7 +44,7 @@ import useCoingeckoApi, {
   COINGECKO_BASEURL,
   COINGECKO_METHODS,
 } from "hooks/useCoinGeckoAPI";
-import Chart from "components/Chart";
+import Chart from "components/Aggregator/Chart";
 // import { formatDate } from "utils/common";
 import FadeInOut from "components/AnimationFade";
 import useDetectResolutionType from "hooks/useDetectResolutionType";
@@ -759,7 +759,7 @@ const TokenChart: React.FC<any> = ({ activeTokens, refetchTimer, width }) => {
       </Row>
       {chartData && (
         <div key={width + (chartData?.length || 0)}>
-          {/* <Chart data={chartData} handleCrossHairData={handleCrosshairData} /> */}
+          <Chart data={chartData} handleCrossHairData={handleCrosshairData} />
         </div>
       )}
     </Column>
