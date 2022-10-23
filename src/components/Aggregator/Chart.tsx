@@ -14,9 +14,9 @@ const Chart: React.FC<any> = ({ data, handleCrossHairData }) => {
   };
 
   React.useEffect(() => {
-    if (chartRef.current) {
+    if (chartRef?.current) {
       setChart(
-        createChart(chartRef.current, {
+        createChart(chartRef?.current, {
           // width: 700,
           height: 300,
           layout: {

@@ -712,7 +712,7 @@ const Bridge: React.FC<any> = () => {
   const { approve, getAllowance } = useFantomERC20();
   const [tokenList, setTokenList] = useState(null);
   const [fromChain, setFromChain] = useState(chainId);
-  const [toChain, setToChain] = useState(250);
+  const [toChain, setToChain] = useState(chainId == 250 ? 43114 : 250);
   const [selectedToken, setSelectedToken] = useState(null);
   const [isApproved, setIsApproved] = useState(true);
   const [amount, setAmount] = useState("");

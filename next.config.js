@@ -126,6 +126,10 @@ module.exports = withBundleAnalyzer(
           destination: '/exchange/aggregate',
         },
         {
+          source: '/aggregator',
+          destination: '/exchange/aggregator',
+        },
+        {
           source: '/cross',
           destination: '/exchange/cross',
         },

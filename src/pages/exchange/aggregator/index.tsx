@@ -84,13 +84,13 @@ const SwapTokenInput: React.FC<any> = ({
         tokenBalance
           .sub(
             BigNumber.from(10).pow(
-              token.address === "0x0000000000000000000000000000000000000000"
-                ? token.decimals
+              token?.address === "0x0000000000000000000000000000000000000000"
+                ? token?.decimals
                 : 1
             )
           )
           .toString(),
-        token.decimals
+        token?.decimals
       )
     );
   };
@@ -137,7 +137,7 @@ const SwapTokenInput: React.FC<any> = ({
         <Row>
           <Image width="40px" height={"40px"} alt="" src={walletSymbol} />
           <Spacer 
-          // size="xs" 
+          size="xs" 
           />
           <FormattedValue
             formattedValue={formattedTokenBalance}
@@ -148,7 +148,7 @@ const SwapTokenInput: React.FC<any> = ({
         </Row>
       </Row>
       <Spacer 
-        // size="xs" 
+        size="xs" 
         />     
       <Row
         style={{
@@ -178,14 +178,14 @@ const SwapTokenInput: React.FC<any> = ({
               variant="tertiary"
               onClick={handleSetMax}
             >
-              {token.address === "0x0000000000000000000000000000000000000000"
+              {token?.address === "0x0000000000000000000000000000000000000000"
                 ? "MAX"
                 : "MAX"}
             </Button>
           )}
           <Spacer />
           <TokenSelectButton
-            currentToken={token}
+            currentToken={ token }
             ftmBalance={BigNumber.from(tokenBalance)}
             assets={tokenList}
             setTokenSelected={handleTokenChange}
@@ -195,11 +195,11 @@ const SwapTokenInput: React.FC<any> = ({
         </Row>
       </Row>
       <Spacer 
-      // size="xs" 
+      size="xs" 
       />
       {error ? <InputError error={error} /> 
       : <Spacer 
-      // size="lg" 
+      size="lg" 
       />}
     </Column>
   );
@@ -294,7 +294,7 @@ const SwapTokensContent: React.FC<any> = ({
 
   useEffect(() => {
     if (tokenList) {
-      setInToken(tokenList.find((token: OOToken) => token.symbol === "FTM"));
+      setInToken(tokenList?.find((token: OOToken) => token.symbol === "WFTM"));
       setOutToken(tokenList.find((token: OOToken) => token.symbol === "USDC"));
     }
   }, [tokenList]);
@@ -342,7 +342,6 @@ const SwapTokensContent: React.FC<any> = ({
         inTokenAmount,
         2,
         account
-        // walletContext.activeWallet.address
       );
     }
   }, [inToken, outToken, inTokenAmount, refetchTimer]);
@@ -464,7 +463,7 @@ const SwapTokensContent: React.FC<any> = ({
 
         </Row>
         <Spacer 
-        // size="lg" 
+        size="lg" 
         />
         {inToken && (
           <SwapTokenInput
@@ -480,7 +479,7 @@ const SwapTokensContent: React.FC<any> = ({
         )}
 
         <Spacer 
-        // size="lg" 
+        size="lg" 
         />
         <Row style={{ justifyContent: "center", alignItems: "center" }}>
           <div
@@ -505,7 +504,7 @@ const SwapTokensContent: React.FC<any> = ({
           />
         </Row>
         <Spacer 
-        // size="lg" 
+        size="lg" 
         />
         <Spacer />
        {outToken && (
@@ -521,7 +520,7 @@ const SwapTokensContent: React.FC<any> = ({
           />
         )}
         <Spacer 
-        // size="lg" 
+        size="lg" 
         />
         <Spacer />
         {hasAllowance(allowance) ? (
@@ -566,7 +565,7 @@ const SwapTokensContent: React.FC<any> = ({
         {/*  </>*/}
         {/*)}*/}
         <Spacer 
-        // size="xxl" 
+        size="xxl" 
         />
         <ContentBox style={{ backgroundColor: "#202f49" }}>
           <Column style={{ width: "100%", gap: "1rem" }}>
@@ -712,7 +711,7 @@ const TokenChart: React.FC<any> = ({ activeTokens, refetchTimer, width }) => {
             <Image
             width="40px" height={"40px"}
               style={{ height: "40px", width: "40px", zIndex: 2 }}
-              src={activeTokens[0].icon}
+              src={activeTokens[0]?.icon}
             />
             <Image
             width="40px" height={"40px"}
@@ -722,16 +721,16 @@ const TokenChart: React.FC<any> = ({ activeTokens, refetchTimer, width }) => {
             <Spacer />
             {activeTokens[0].symbol}
             <Spacer 
-            // size="xs" 
+            size="xs" 
             />
             /
             <Spacer 
-            // size="xs" 
+            size="xs" 
             />
             {activeTokens[1].symbol}
           </Row>
           <Spacer 
-          // size="sm" 
+          size="sm" 
           />
           <Row>
             {["5m", "15m", "30m", "1h", "1d"].map((selectInterval) => {
@@ -756,7 +755,7 @@ const TokenChart: React.FC<any> = ({ activeTokens, refetchTimer, width }) => {
         <Column style={{ alignItems: "end" }}>
           {pricePoint ? pricePoint.toFixed(6) : ""}
           <Spacer 
-          // size="sm" 
+          size="sm" 
           />
           <Typo1>
             {priceTime ? formatDate(new Date(priceTime * 1000)) : ""}
@@ -787,7 +786,7 @@ const SwapRoute: React.FC<any> = ({ route, tokenList, activeTokens }) => {
         <Row style={{ alignItems: "center" }}>
           <Image width="40px" height={"40px"} style={{ height: "32px", width: "32px" }} src={token?.icon} />
           <Spacer 
-          // size="sm" 
+          size="sm" 
           />
           <Column>
             <Typo3 style={{ fontWeight: "bold" }}>{token.symbol}</Typo3>
@@ -802,7 +801,7 @@ const SwapRoute: React.FC<any> = ({ route, tokenList, activeTokens }) => {
     <Column style={{ width: "100%" }}>
       <Heading3>Routing</Heading3>
       <Spacer 
-      // size="xs" 
+      size="xs" 
       />
       <Row style={{ justifyContent: "space-between", alignItems: "center" }}>
         <Row style={{ alignItems: "center" }}>
@@ -812,7 +811,7 @@ const SwapRoute: React.FC<any> = ({ route, tokenList, activeTokens }) => {
             src={activeTokens[0].icon}
           />
           <Spacer 
-          // size="sm" 
+          size="sm" 
           />
           <div
             style={{ width: "1px", height: "30px", backgroundColor: "#232F46" }}
@@ -841,7 +840,7 @@ const SwapRoute: React.FC<any> = ({ route, tokenList, activeTokens }) => {
             style={{ width: "1px", height: "30px", backgroundColor: "#232F46" }}
           />
           <Spacer 
-          // size="sm" 
+          size="sm" 
           />
           <Image
           width="40px" height={"40px"}
@@ -882,7 +881,7 @@ const Swap: React.FC<any> = () => {
   ]);
   const [swapRoute, setSwapRoute] = useState(null);
   const [refetchTimer, setRefetchTimer] = useState(0);
-  const activeAddress = account ? account : null
+  const activeAddress = account ? account.toLowerCase() : null
   // walletContext.activeWallet.address
   //   ? walletContext.activeWallet.address.toLowerCase()
   //   : null;

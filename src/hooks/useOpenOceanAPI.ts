@@ -6,6 +6,7 @@ export enum OPENOCEAN_METHODS {
   GET_TOKENLIST = "/tokenList",
   GET_QUOTE = "/quote",
   GET_SWAP_QUOTE = "/swap_quote",
+  // GET_BALANCE = "/getBalance",
 }
 
 export type OOToken = {
@@ -48,6 +49,22 @@ const useOpenOceanApi = () => {
       ],
     });
   };
+  
+  // const getBalance = (
+  //   inToken: OOToken,
+  //   outToken: OOToken,
+  //   account: string
+  // ) => {
+  //   return get({
+  //     path: OPENOCEAN_METHODS.GET_BALANCE,
+  //     queryParams: [
+  //       ["account", account],
+  //       ["chain", 250],
+  //       ["inTokenAddress", inToken.address],
+  //       ["outTokenAddress", outToken.address],
+  //     ],
+  //   });
+  // };
 
   const getSwapQuote = (
     inToken: OOToken,
@@ -81,6 +98,7 @@ const useOpenOceanApi = () => {
     getTokenList,
     getQuote,
     getSwapQuote,
+    // getBalance,
   };
 };
 
