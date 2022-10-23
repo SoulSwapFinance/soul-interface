@@ -1,6 +1,6 @@
 import useRestApi from "./useRestApi";
 
-export const OPENOCEAN_BASEURL = "https://open-api.openocean.finance/v3/cross";
+export const OPENOCEAN_BASEURL = "https://open-api.openocean.finance/v1/cross";
 
 export enum OPENOCEAN_METHODS {
   GET_TOKENLIST = "/tokenList",

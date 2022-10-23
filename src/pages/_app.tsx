@@ -38,7 +38,8 @@ import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@ap
 import { RPC } from 'connectors'
 
 const link = createHttpLink({
-  uri: RPC[250],
+  // uri: RPC[250],
+  uri: 'https://xapi-nodee.fantom.network/',
   // headers: { authorization: token },  // The token in the auth header will be removed when the cookie approach is working)
 });
 
