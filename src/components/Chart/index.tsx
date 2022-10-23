@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react'
 import { classNames } from '../../functions'
 // import Lottie from 'lottie-react'
 // import soulLoading from '../../animation/solarbeam-loading.json'
-import { computePairAddress } from '../../sdk'
+import { computePairAddress } from 'sdk'
 // import { AutoColumn } from '../Column'
 import { useActiveWeb3React } from 'services/web3'
 const KChart = dynamic(() => import('kaktana-react-lightweight-charts'), { ssr: false })
