@@ -1,6 +1,6 @@
 import { ChainId, WETH9, Currency, NATIVE } from 'sdk'
 
-import { useActiveWeb3React } from './index'
+import { useActiveWeb3React } from 'services/web3'
 
 export function useNativeCurrency(chainId?: ChainId): Currency {
   const { chainId: activeChainId } = useActiveWeb3React()

@@ -18,7 +18,7 @@ import {
 } from 'utils/liquidityMining'
 import { useNativeCurrency } from './useNativeCurrency'
 
-import { useActiveWeb3React } from './index'
+import { useActiveWeb3React } from 'services/web3'
 import { getTokenList } from 'functions/list'
 
 const DEFAULT_TOKEN_LIST = 'https://raw.githubusercontent.com/soulswapfinance/default-token-list/prod/soulswap.tokenlist.json'

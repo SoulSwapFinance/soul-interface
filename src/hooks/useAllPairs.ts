@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 
 // import { useGetPairsQuery } from '../graphql/generated/schema'
 
-import { useActiveWeb3React } from './index'
+import { useActiveWeb3React } from 'services/web3'
 import { getPairs } from 'services/graph'
 
 // export function useAllPairs(): { loading: boolean; pairs: Pair[] } {

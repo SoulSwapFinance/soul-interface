@@ -2,7 +2,7 @@ import { Currency, Token } from 'sdk'
 import { useMemo } from 'react'
 
 import { BASES_TO_CHECK_TRADES_AGAINST } from '../constants'
-import { useActiveWeb3React } from './index'
+import { useActiveWeb3React } from 'services/web3'
 import { CUSTOM_BASES } from 'config/routing'
 
 export function useAllCurrencyCombinations(currencyA?: Currency, currencyB?: Currency): [Token, Token][] {
