@@ -1,7 +1,7 @@
 import { Contract } from "@ethersproject/contracts"
 import { ERC20_ABI } from "constants/abis/erc20"
 import { getContract } from "functions/contract"
-import { useActiveWeb3React } from "hooks"
+import { useActiveWeb3React } from "services/web3"
 import { useMemo } from "react"
 import { WNATIVE } from "sdk"
 import ERC20_BYTES32_ABI from 'constants/abis/erc20_bytes32.json'
