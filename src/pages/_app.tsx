@@ -83,7 +83,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
 
   useEffect(() => {
     async function load(locale) {
-      i18n.loadLocaleData(locale, { plurals: plurals[locale.split('_')[0]] })
+      i18n.loadLocaleData(locale, { plurals: plurals[locale?.split('_')[0]] })
 
       try {
         // Load messages from AWS, use q session param to get latest version from cache
