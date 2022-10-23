@@ -156,10 +156,10 @@ const SwapTokenInput: React.FC<any> = ({
           handleError={setError}
           token={token}
         />
-        {/* <Row 
-        style={{ flex: 1, alignItems: "center"}}
-        > */}
-          <Spacer size="md" />
+        <Row 
+        style={{ flex: 0.25, alignItems: "right"}}
+        >
+          <Spacer />
           <Row
         style={{
           backgroundColor: "#000000",
@@ -174,7 +174,7 @@ const SwapTokenInput: React.FC<any> = ({
               primaryColor={getChainColor(chainId)}
               // color={'grey'}
               padding="6px"
-              style={{ flex: 1, marginLeft: '5rem', marginRight: '2.5rem' }}
+              style={{ flex: 0 }}
               // variant="tertiary"
               variant="outlined"
               onClick={handleSetMax}
@@ -192,9 +192,9 @@ const SwapTokenInput: React.FC<any> = ({
           />
           </Row>
 
-          <Spacer size="lg" />
+          {/* <Spacer size="sm" /> */}
         </Row>
-      {/* </Row> */}
+      </Row>
       { error && <InputError error={error} /> }
     </Column>
   );
