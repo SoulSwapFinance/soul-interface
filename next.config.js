@@ -35,7 +35,8 @@ module.exports = withBundleAnalyzer(
         'avatars.githubusercontent.com',
         'logos.covalenthq.com',
         'pbs.twimg.com',
-        "api.rango.exchange"
+        'api.rango.exchange',
+        'ethapi.openocean.finance'
       ],
       deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     },

@@ -1,8 +1,6 @@
 import React, { useReducer } from "react";
 import { JsonRpcProvider } from "@ethersproject/providers";
 
-import config from "features/aggregator/config";
-
 export const ActiveWalletContext = React.createContext(null);
 const initial = {
   activeWallet: {

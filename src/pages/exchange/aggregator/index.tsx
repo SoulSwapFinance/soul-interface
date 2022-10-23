@@ -15,6 +15,7 @@ import {
 } from "components";
 import Row from "components/Row";
 import InputError from "components/InputError";
+import Image from 'next/image'
 import useOpenOceanApi, {
   OOToken,
   OPENOCEAN_BASEURL,
@@ -37,8 +38,7 @@ import {
 // import SwapImg from "assets/img/symbols/Swap.svg";
 import useFantomNative from "hooks/useFantomNative";
 import useFantomERC20 from "hooks/useFantomERC20";
-import config from "features/aggregator/config";
-import addresses from "features/aggregator/addresses";
+// import config from "features/aggregator/config";
 import useSendTransaction from "hooks/useSendTransaction";
 import useCoingeckoApi, {
   COINGECKO_BASEURL,
@@ -51,6 +51,7 @@ import useDetectResolutionType from "hooks/useDetectResolutionType";
 // import openoceanImg from "assets/img/icons/openocean.svg";
 import { formatDate } from "functions/format";
 import { useActiveWeb3React } from "services/web3";
+import { OPEN_OCEAN_EXCHANGE_ADDRESS } from "sdk";
 
 const SwapTokenInput: React.FC<any> = ({
   inputValue,
@@ -129,7 +130,7 @@ const SwapTokenInput: React.FC<any> = ({
       <Row style={{ position: "relative", justifyContent: "space-between" }}>
         <Typo2 style={{ color: 'grey' }}>{title}</Typo2>
         <Row>
-          <img alt="" src={walletSymbol} />
+          <Image width="40px" height={"40px"} alt="" src={walletSymbol} />
           <Spacer 
           // size="xs" 
           />
@@ -207,7 +208,7 @@ const SwapTokensContent: React.FC<any> = ({
 }) => {
   const { color } = useContext(ThemeContext);
   // const { walletContext } = useWalletProvider();
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const { sendTx } = useFantomNative();
   const { getAllowance, approve } = useFantomERC20();
   const { getSwapQuote, getQuote } = useOpenOceanApi();
@@ -252,7 +253,7 @@ const SwapTokensContent: React.FC<any> = ({
   } = useSendTransaction(() =>
     approve(
       inToken.address,
-      addresses[parseInt(config.chainId)]["openOceanExchange"],
+      OPEN_OCEAN_EXCHANGE_ADDRESS[chainId],
       unitToWei(inTokenAmount, inToken.decimals).toString()
     )
   );
@@ -358,8 +359,8 @@ const SwapTokensContent: React.FC<any> = ({
       }
       getAllowance(
         inToken.address,
-        addresses[parseInt(config.chainId)]["openOceanExchange"]
-      ).then((result) => {
+        OPEN_OCEAN_EXCHANGE_ADDRESS[chainId],
+        ).then((result) => {
         setAllowance(result);
       });
     }
@@ -454,21 +455,7 @@ const SwapTokensContent: React.FC<any> = ({
           >
             Swap Tokens
           </div>
-          <div
-            style={{
-              borderRadius: "34px",
-              backgroundColor: 'black',
-            }}
-          >
-            <Row style={{ justifyContent: "space-between", gap: "1rem" }}>
-              <Typo3
-                style={{ color: "#67748B", padding: ".5rem 0 .5rem 1rem" }}
-              >
-                Powered by OpenOcean
-              </Typo3>
-              {/* <img src={openoceanImg} /> */}
-            </Row>
-          </div>
+
         </Row>
         <Spacer 
         // size="lg" 
@@ -504,7 +491,7 @@ const SwapTokensContent: React.FC<any> = ({
                 borderRadius: "50%",
               }}
             >
-              {/* <img alt="swap" style={{ height: "20px" }} src={SwapImg} /> */}
+              {/* <Image alt="swap" style={{ height: "20px" }} src={SwapImg} /> */}
             </Row>
           </OverlayButton>
           <div
@@ -618,7 +605,7 @@ const SwapTokensContent: React.FC<any> = ({
                 justifyContent: "space-between",
               }}
             >
-              <div>Minimum received</div>
+              <div>Minimum Received</div>
               {minReceived ? (
                 <FormattedValue
                   formattedValue={toFormattedBalance(minReceived.toString())}
@@ -716,11 +703,13 @@ const TokenChart: React.FC<any> = ({ activeTokens, refetchTimer, width }) => {
       <Row style={{ justifyContent: "space-between" }}>
         <Column>
           <Row>
-            <img
+            <Image
+            width="40px" height={"40px"}
               style={{ height: "40px", width: "40px", zIndex: 2 }}
               src={activeTokens[0].icon}
             />
-            <img
+            <Image
+            width="40px" height={"40px"}
               src={activeTokens[1].icon}
               style={{ height: "40px", width: "40px", marginLeft: "-.5rem" }}
             />
@@ -790,7 +779,7 @@ const SwapRoute: React.FC<any> = ({ route, tokenList, activeTokens }) => {
         style={{ padding: ".5rem", width: "150px" }}
       >
         <Row style={{ alignItems: "center" }}>
-          <img style={{ height: "32px", width: "32px" }} src={token?.icon} />
+          <Image width="40px" height={"40px"} style={{ height: "32px", width: "32px" }} src={token?.icon} />
           <Spacer 
           // size="sm" 
           />
@@ -811,7 +800,8 @@ const SwapRoute: React.FC<any> = ({ route, tokenList, activeTokens }) => {
       />
       <Row style={{ justifyContent: "space-between", alignItems: "center" }}>
         <Row style={{ alignItems: "center" }}>
-          <img
+          <Image
+          width="40px" height={"40px"}
             style={{ height: "40px", width: "40px" }}
             src={activeTokens[0].icon}
           />
@@ -847,7 +837,8 @@ const SwapRoute: React.FC<any> = ({ route, tokenList, activeTokens }) => {
           <Spacer 
           // size="sm" 
           />
-          <img
+          <Image
+          width="40px" height={"40px"}
             style={{ height: "40px", width: "40px" }}
             src={activeTokens[1].icon}
           />
@@ -959,7 +950,6 @@ const Swap: React.FC<any> = () => {
   }, [assetsListData, OOTokenListData, accountFantomBalanceData]);
 
   //https://api.coingecko.com/api/v3/coins/beethoven-x/market_chart?vs_currency=usd&days=60
-  //https://api.coingecko.com/api/v3/coins/beethoven-x/market-chart?vs_currency=usd&days=1
   return (
     <FadeInOut>
       <Row
