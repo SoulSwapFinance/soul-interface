@@ -134,7 +134,7 @@ const SwapTokenInput: React.FC<any> = ({
       <Row style={{ position: "relative", justifyContent: "space-between" }}>
         <Typo2 style={{ color: '#FFFFFF' }}>{title}</Typo2>
         <Row>
-          {/* <Image width="40px" height={"40px"} alt="" src={walletSymbol} /> */}
+          {/* <Image width="40px" height={"40px"} alt="wallet symbol" src={walletSymbol} /> */}
           <Spacer 
           size="xs" 
           />
@@ -711,11 +711,13 @@ const TokenChart: React.FC<any> = ({ activeTokens, refetchTimer, width }) => {
         <Column>
           <Row>
             <Image
+            alt={`${activeTokens[0]?.symbol} icon`}
             width="40px" height={"40px"}
-              style={{ height: "40px", width: "40px", zIndex: 2 }}
-              src={activeTokens[0]?.icon}
+            style={{ height: "40px", width: "40px", zIndex: 2 }}
+            src={activeTokens[0]?.icon}
             />
             <Image
+            alt={`${activeTokens[1]?.symbol} icon`}
             width="40px" height={"40px"}
               src={activeTokens[1]?.icon}
               style={{ height: "40px", width: "40px", marginLeft: "-.5rem" }}
@@ -786,7 +788,9 @@ const SwapRoute: React.FC<any> = ({ route, tokenList, activeTokens }) => {
         style={{ padding: ".5rem", width: "150px" }}
       >
         <Row style={{ alignItems: "center" }}>
-          <Image width="40px" height={"40px"} style={{ height: "32px", width: "32px" }} src={token?.icon} />
+          <Image
+              alt={`${token?.symbol} icon`}
+              width="40px" height={"40px"} style={{ height: "32px", width: "32px" }} src={token?.icon} />
           <Spacer 
           size="sm" 
           />
@@ -808,6 +812,7 @@ const SwapRoute: React.FC<any> = ({ route, tokenList, activeTokens }) => {
       <Row style={{ justifyContent: "space-between", alignItems: "center" }}>
         <Row style={{ alignItems: "center" }}>
           <Image
+          alt={`${activeTokens[0]?.symbol} logo`}
           width="40px" height={"40px"}
             style={{ height: "40px", width: "40px" }}
             src={activeTokens[0]?.icon}
@@ -845,6 +850,7 @@ const SwapRoute: React.FC<any> = ({ route, tokenList, activeTokens }) => {
           size="sm" 
           />
           <Image
+          alt={`${activeTokens[1]?.symbol} logo`}
           width="40px" height={"40px"}
             style={{ height: "40px", width: "40px" }}
             src={activeTokens[1]?.icon}
