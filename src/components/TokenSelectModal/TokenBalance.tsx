@@ -16,6 +16,8 @@ export const TokenBalance: React.FC<any> = ({ token, imageSize = " 32px" }) => {
       <Row style={{ alignItems: "center" }}>
         <Image
           alt=""
+          height={'32px'}
+          width={'32px'}
           style={{ width: imageSize, height: imageSize, marginRight: ".4rem" }}
           src={token.logoURL}
         />

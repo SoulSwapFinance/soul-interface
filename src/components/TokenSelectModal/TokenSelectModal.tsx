@@ -71,7 +71,7 @@ const TokenSelectModal: React.FC<any> = ({
       style={{ padding: "20px 24px", maxHeight: "80vh" }}
       onDismiss={onDismiss}
     >
-      <ModalTitle text="Select token" />
+      <ModalTitle text="Select Token" />
       <InputTextBox
         text={search}
         setText={setSearch}
@@ -118,7 +118,7 @@ const TokenSelectModal: React.FC<any> = ({
                     }}
                     style={{ padding: ".8rem" }}
                   >
-                    <TokenBalance token={asset} imageSize="24px" />
+                    <TokenBalance token={asset} height={'24px'} width={'24px'} imageSize="24px" />
                   </StyledOverlayButton>
                 );
               })}

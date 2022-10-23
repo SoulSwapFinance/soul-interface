@@ -31,6 +31,7 @@ module.exports = withBundleAnalyzer(
         'exchange.soulswap.finance',
         'assets.sushi.com',
         'res.cloudinary.com',
+        'cloudstorage.openocean.finance',
         'raw.githubusercontent.com',
         'avatars.githubusercontent.com',
         'logos.covalenthq.com',

@@ -12,6 +12,8 @@ const useFantomERC20 = () => {
   const { account, chainId, library } = useActiveWeb3React()
   // const tokenBalance = useUserTokenInfo(account, tokenAddress).userTokenInfo.balance
   // const tokenDecimals = useUserTokenInfo(account, tokenAddress).userTokenInfo.decimals
+  const provider = library.provider
+  const signer = library.getSigner()
 
   const approve = async (
     contractAddress: string,
@@ -33,7 +35,7 @@ const useFantomERC20 = () => {
     );
 
     return send(
-      library.provider,
+      provider,
       () => contract.approve(approveAddress, amount || MaxUint256),
       dispatch
     );
@@ -74,7 +76,7 @@ const useFantomERC20 = () => {
     );
 
     return send(
-      library?.provider,
+      provider,
       () => contract.transfer(toAddress, amount),
       dispatch
     );
