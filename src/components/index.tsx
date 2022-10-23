@@ -143,7 +143,7 @@ export const Container = styled.div<{ padding?: string }>`
 `;
 
 export const ContentBox = styled.div<{ padding?: string }>`
-  background-color: ${ "#b365ff" };
+  background-color: ${ "#00000" };
   display: inline-flex;
   padding: ${(props) => (props.padding ? props.padding : "2rem")};
   border-radius: 8px;

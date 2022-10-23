@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-// import { ThemeContext } from "styled-components";
 import { BigNumber } from "@ethersproject/bignumber";
 import Column from "components/Column";
 import Spacer from "components/Spacer";
@@ -22,7 +21,7 @@ import useOpenOceanApi, {
   OPENOCEAN_METHODS,
 } from "hooks/useOpenOceanAPI";
 import useApiData from "hooks/useApiData";
-import walletSymbol from "assets/icons/wallet.svg";
+// import walletSymbol from "assets/icons/wallet.svg";
 import FormattedValue from "components/FormattedBalance";
 import InputCurrency from "components/InputCurrency";
 import TokenSelectButton from "components/TokenSelectModal";
@@ -152,7 +151,7 @@ const SwapTokenInput: React.FC<any> = ({
         />     
       <Row
         style={{
-          backgroundColor: "#202F49",
+          backgroundColor: "#000000",
           borderRadius: "8px",
           height: "64px",
           alignItems: "center",
@@ -634,6 +633,7 @@ const TokenChart: React.FC<any> = ({ activeTokens, refetchTimer, width }) => {
   const [chartData, setChartData] = useState(null);
   const [pricePoint, setPricePoint] = useState(null);
   const [priceTime, setPriceTime] = useState(null);
+  const [showChart, setShowChart] = useState(false)
 
   const handleCrosshairData = (data: any[]) => {
     setPricePoint(data[1] ? data[1] : chartData[chartData.length - 1].value);
@@ -693,6 +693,7 @@ const TokenChart: React.FC<any> = ({ activeTokens, refetchTimer, width }) => {
       setChartData(graphData);
       setPricePoint(graphData[graphData.length - 1].value);
       setPriceTime(graphData[graphData.length - 1].time);
+      setShowChart(true)
     }
   }, [inTokenChartData, outTokenChartData]);
 
@@ -700,6 +701,7 @@ const TokenChart: React.FC<any> = ({ activeTokens, refetchTimer, width }) => {
     if (!chartData) {
       setPricePoint(null);
       setPriceTime(null);
+      setShowChart(false)
     }
   }, [chartData]);
 
@@ -762,7 +764,7 @@ const TokenChart: React.FC<any> = ({ activeTokens, refetchTimer, width }) => {
           </Typo1>
         </Column>
       </Row>
-      {chartData && (
+      {chartData && showChart && (
         <div key={width + (chartData?.length || 0)}>
           <Chart data={chartData} handleCrossHairData={handleCrosshairData} />
         </div>
