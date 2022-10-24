@@ -25,6 +25,8 @@ import { useUSDCValue } from 'hooks/useUSDCPrice'
 import { computeFiatValuePriceImpact } from 'functions/trade'
 import { warningSeverity } from 'functions/prices'
 import { SubmitButton } from 'features/summoner/Styles'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums/Feature'
 
 // const  = lazy(() => import('components/LiveChart'))
 
@@ -375,11 +377,11 @@ export default function Aggregate() {
 
       <div className={'grid grid-cols-1 justify-between'}>
         <Typography>  From: {fromToken.symbol} </Typography>
-        <Typography>  fromAddress: {fromToken.wrapped.address} </Typography>
+        {/* <Typography>  fromAddress: {fromToken.wrapped.address} </Typography> */}
         <Typography>  inputAmount: {inputAmount} </Typography>
 
         <Typography>  To: {toToken.symbol} </Typography>
-        <Typography>  toAddress: {toToken.wrapped.address} </Typography>
+        {/* <Typography>  toAddress: {toToken.wrapped.address} </Typography> */}
         <Typography>  outputAmount: {outputAmount} </Typography>
       </div>
       <SubmitButton
@@ -395,3 +397,5 @@ export default function Aggregate() {
     </div>
   )
 }
+
+Aggregate.Guard = NetworkGuard(Feature.AGGREGATE)

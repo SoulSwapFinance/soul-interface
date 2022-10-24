@@ -1,11 +1,11 @@
-import React, { lazy, SetStateAction, useCallback, useMemo, useState } from 'react'
-import { BigNumber } from 'bignumber.js'
+import React, { lazy, SetStateAction, useCallback, useEffect, useMemo, useState } from 'react'
+import { BigNumber } from "@ethersproject/bignumber";
 import { useTokenContract } from 'hooks/useContract'
 import qs from 'qs'
 import Typography from 'components/Typography'
 import { useActiveWeb3React } from 'services/web3'
 import Web3 from 'web3'
-import { ChainId, Currency, NATIVE, SOUL, Token, USDC, WNATIVE } from 'sdk';
+import { ChainId, Currency, NATIVE, OPEN_OCEAN_EXCHANGE_ADDRESS, SOUL, Token, USDC, WNATIVE } from 'sdk';
 // import TradingView from 'components/TradingViewChart'
 // import LiveChart from 'components/LiveChart'
 // import LineChart from 'components/LiveChart/LineChart'
@@ -27,23 +27,48 @@ import { warningSeverity } from 'functions/prices'
 import { SubmitButton } from 'features/summoner/Styles'
 import { DoubleGlowShadowV2 } from 'components/DoubleGlow'
 import Container from 'components/Container'
+import { unitToWei } from 'utils/account/conversion'
+import useSendTransaction from 'hooks/useSendTransaction'
+import { useTokenInfo } from 'hooks/useAPI'
+import useFantomERC20 from 'hooks/useFantomERC20'
+import useFantomNative from 'hooks/useFantomNative';
+import useApiData from 'hooks/useApiData';
+import useCoingeckoApi, { COINGECKO_BASEURL, COINGECKO_METHODS } from 'hooks/useCoinGeckoAPI';
+import { OPENOCEAN_BASEURL, OPENOCEAN_METHODS } from 'hooks/useOpenOceanAPI';
+import NetworkGuard from 'guards/Network';
+import { Feature } from 'enums/Feature';
 
 // const  = lazy(() => import('components/LiveChart'))
 
 export default function Open() {
   const { account, chainId } = useActiveWeb3React()
 
-  const [inputAmount, setInputAmount] = useState('1')
+  const [inputAmount, setInputAmount] = useState('0')
   const [outputAmount, setOutputAmount] = useState('0')
   const { independentField, typedValue, recipient } = useSwapState()
   const { onSwitchTokens, onCurrencySelection, onUserInput } = useSwapActionHandlers()
-  
+  const [minReceived, setMinReceived] = useState(null);
+  // const [priceImpact, setPriceImpact] = useState(null);
+
   const [swapQuote, setSwapQuote] = useState('')
 
   const [fromToken, setFromToken] = useState(NATIVE[chainId])
-  const [toToken, setToToken] = useState(USDC[chainId])
+  const [toToken, setToToken] = useState(SOUL[chainId])
   const [approvalSubmitted, setApprovalSubmitted] = useState<boolean>(false)
+  const fromTokenDecimals = Number(useTokenInfo(fromToken?.wrapped.address).tokenInfo.decimals)
+  const { getAllowance, approve } = useFantomERC20();
+  const [allowance, setAllowance] = useState(BigNumber.from(0));
+  const { sendTx } = useFantomNative();
 
+  // const handleSwapInOut = () => {
+  //   setInputAmount("1");
+  //   setOutputAmount("");
+  //   setEstimatedGas(null);
+  //   setMinReceived(null);
+  //   // setPriceImpact(null);
+  //   setFromToken(toToken);
+  //   setToToken(fromToken);
+  // };
 
   const { v2Trade, parsedAmount, currencies, inputError: swapInputError, allowedSlippage, to } = useDerivedSwapInfo()
   const {
@@ -113,6 +138,21 @@ export default function Open() {
   // }
 
   const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE
+  const { getPrice } = useCoingeckoApi();
+  const [swapRoute, setSwapRoute] = useState(null);
+  const [refetchTimer, setRefetchTimer] = useState(0);
+  // const [outTokenAmount, setOutTokenAmount] = useState("");
+  const [estimatedGas, setEstimatedGas] = useState(null);
+
+  const { apiData } = useApiData();
+  const OOQuoteData =
+    apiData[OPENOCEAN_BASEURL + OPENOCEAN_METHODS.GET_QUOTE]?.response?.data
+      ?.data;
+  const OOSwapQuoteData =
+    apiData[OPENOCEAN_BASEURL + OPENOCEAN_METHODS.GET_SWAP_QUOTE]?.response
+      ?.data?.data;
+  // const tokenPriceData =
+  //   apiData[COINGECKO_BASEURL + COINGECKO_METHODS.GET_PRICE]?.response?.data;
 
   const isValid = !swapInputError
   const dependentField: Field = independentField === Field.INPUT ? Field.OUTPUT : Field.INPUT
@@ -143,9 +183,10 @@ export default function Open() {
     )
     
   const handleTypeInput = useCallback(
-    (value: string) => {
+    async (value: string) => {
       onUserInput(Field.INPUT, value)
       setInputAmount(value)
+      getQuote(fromToken.wrapped.address, toToken.wrapped.address, Number(inputAmount) * 10**fromToken.wrapped.decimals)
     },
     [onUserInput]
     )
@@ -159,6 +200,19 @@ export default function Open() {
     [onCurrencySelection]
   )
 
+  useEffect(() => {
+    if (OOQuoteData && toToken?.decimals && parseFloat(outputAmount) > 0) {
+      if (
+        parseFloat(inputAmount).toFixed(4) ===
+        parseFloat(OOQuoteData.inAmount).toFixed(4)
+      ) {
+        setOutputAmount(OOQuoteData.outAmount);
+
+        setSwapRoute(OOQuoteData.path);
+      }
+    }
+  }, [OOQuoteData]);
+  
   const fiatValueInput = useUSDCValue(parsedAmounts[Field.INPUT])
   const fiatValueOutput = useUSDCValue(parsedAmounts[Field.OUTPUT])
   const priceImpact = computeFiatValuePriceImpact(fiatValueInput, fiatValueOutput)
@@ -177,6 +231,51 @@ export default function Open() {
     },
     [onUserInput]
   )
+
+  const hasAllowance = (value: BigNumber) => {
+    if (fromToken && fromToken.decimals) {
+      if (fromToken.isNative) {
+        // ?.address === "0x0000000000000000000000000000000000000000") {
+        if (isApproveCompleted) {
+          resetApproveTx();
+        }
+        return true;
+      }
+      return Number(value) >= Number(inputAmount) * 10 ** fromTokenDecimals
+    }
+    return false;
+  };
+
+  const {
+    sendTx: handleApprove,
+    isPending: isApprovePending,
+    isCompleted: isApproveCompleted,
+    reset: resetApproveTx,
+  } = useSendTransaction(() =>
+    approve(
+      fromToken?.address,
+      OPEN_OCEAN_EXCHANGE_ADDRESS[chainId],
+      unitToWei(inputAmount, fromToken?.decimals).toString()
+    )
+  )
+
+  const {
+    sendTx: handleSwap,
+    isPending: isSwapPending,
+    isCompleted: isSwapCompleted,
+    reset: resetSwapTx,
+  } = useSendTransaction(() =>
+    sendTx(
+      OOSwapQuoteData.to,
+      Math.floor(OOSwapQuoteData.estimatedGas * 1.5),
+      +OOSwapQuoteData.gasPrice * 2,
+      OOSwapQuoteData.data,
+      OOSwapQuoteData.inToken.address ===
+        "0x0000000000000000000000000000000000000000"
+        ? OOSwapQuoteData.value
+        : null
+    )
+  );
 
   const priceImpactSeverity = useMemo(() => {
     const executionPriceImpact = trade?.priceImpact
@@ -280,8 +379,37 @@ export default function Open() {
       }
       >
       </SubmitButton>
+      {hasAllowance(allowance) ? (
+          <SubmitButton
+            variant="filled"
+            onClick={handleSwap}
+            disabled={isSwapPending || isSwapCompleted || !minReceived}
+          >
+            {isSwapPending
+              ? "Swapping..."
+              : isSwapCompleted
+                ? "Swap successful"
+                : !minReceived
+                  ? "Fetching best price..."
+                  : "Swap"}
+          </SubmitButton>
+        ) : (
+          <SubmitButton
+            variant="filled"
+            onClick={handleApprove}
+            disabled={isApproveCompleted || isApprovePending}
+          >
+            {isApprovePending
+              ? "Approving..."
+              : isApproveCompleted
+                ? "Approved!"
+                : "Approve"}
+          </SubmitButton>
+        )}
     </div>
     </DoubleGlowShadowV2>
     </Container>
   )
 }
+
+Open.Guard = NetworkGuard(Feature.AGGREGATE)

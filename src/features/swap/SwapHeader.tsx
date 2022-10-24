@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, Currency, DAI_ADDRESS, NATIVE, Percent, SOUL_ADDRESS, USDC_ADDRESS } from 'sdk'
+import { ChainId, Currency, NATIVE, Percent, SOUL_ADDRESS, USDC_ADDRESS } from 'sdk'
 import NavLink from 'components/NavLink'
 import Settings from 'components/Settings'
 // import CrossChainMode from 'components/CrossChainMode'
@@ -107,7 +107,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Cross`)}
           </Typography>
         </NavLink>
-        {/* <NavLink
+        { ![ChainId.FANTOM].includes(chainId) &&
+        <NavLink
           activeClassName={classNames(
             "border rounded bg-black",
             chainColor
@@ -119,7 +120,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
             {i18n._(t`Bridge`)}
           </Typography>
-        </NavLink> */}
+        </NavLink>
+        }
         {/* <NavLink
           activeClassName={classNames(
             "border rounded bg-black",
@@ -133,6 +135,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Multi`)}
           </Typography>
         </NavLink> */}
+        { [ChainId.FANTOM].includes(chainId) &&
         <NavLink
           activeClassName={classNames(
             "border rounded bg-black",
@@ -146,6 +149,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Open`)}
           </Typography>
         </NavLink>
+        }
       </div>
         <div className={'flex flex-cols-2 sm:gap-8 gap-6 mr-4 justify-end rounded'}>
           {isSwap && <Settings />}

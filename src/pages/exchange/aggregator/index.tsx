@@ -59,6 +59,8 @@ import SwapHeader from "features/swap/SwapHeader";
 import { SwapLayoutCard } from "layouts/SwapLayout";
 import { SubmitButton } from "features/summoner/Styles";
 import { getChainColor, getChainColorCode } from "constants/chains";
+import NetworkGuard from "guards/Network";
+import { Feature } from "enums/Feature";
 
 const SwapTokenInput: React.FC<any> = ({
   inputValue,
@@ -200,7 +202,7 @@ const SwapTokenInput: React.FC<any> = ({
   );
 };
 
-const SwapTokensContent: React.FC<any> = ({
+export const SwapTokensContent: React.FC<any> = ({
   tokenList,
   setActiveTokens,
   setSwapRoute,
@@ -1010,4 +1012,5 @@ const Aggregator: React.FC<any> = () => {
   );
 };
 
+// Aggregator.Guard = NetworkGuard(Feature.AGGREGATE)
 export default Aggregator;

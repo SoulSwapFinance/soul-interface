@@ -851,6 +851,9 @@ msgstr "Oops!"
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 msgstr "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 
+msgid "Open"
+msgstr "Open"
+
 msgid "Oracle"
 msgstr "Oracle"
 
