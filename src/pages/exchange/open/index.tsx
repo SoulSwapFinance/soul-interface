@@ -70,6 +70,15 @@ export default function Open() {
   //   setToToken(fromToken);
   // };
 
+  useEffect(() => {
+    setOutputAmount("");
+    setMinReceived(null);
+    // setPriceImpact(null);
+    if (inputAmount === "") {
+      setEstimatedGas(null);
+    }
+  }, [inputAmount]);
+
   const { v2Trade, parsedAmount, currencies, inputError: swapInputError, allowedSlippage, to } = useDerivedSwapInfo()
   const {
     wrapType,
@@ -181,16 +190,7 @@ export default function Open() {
     },
     [onCurrencySelection]
     )
-    
-  const handleTypeInput = useCallback(
-    async (value: string) => {
-      onUserInput(Field.INPUT, value)
-      setInputAmount(value)
-      getQuote(fromToken.wrapped.address, toToken.wrapped.address, Number(inputAmount) * 10**fromToken.wrapped.decimals)
-    },
-    [onUserInput]
-    )
-      
+  
   // HANDLES - OUTPUT //
   const handleOutputSelect = useCallback(
     (outputCurrency) => {
@@ -200,6 +200,16 @@ export default function Open() {
     [onCurrencySelection]
   )
 
+  const handleTypeInput = useCallback(
+    async (value: string) => {
+      onUserInput(Field.INPUT, value)
+      setInputAmount(value)
+      await handleOutputSelect
+      await getQuote(fromToken.wrapped.address, toToken.wrapped.address, Number(value) * 10**fromToken.wrapped.decimals)
+    },
+    [onUserInput]
+    )
+
   useEffect(() => {
     if (OOQuoteData && toToken?.decimals && parseFloat(outputAmount) > 0) {
       if (
@@ -207,7 +217,7 @@ export default function Open() {
         parseFloat(OOQuoteData.inAmount).toFixed(4)
       ) {
         setOutputAmount(OOQuoteData.outAmount);
-
+        // getQuote(fromToken.wrapped.address, toToken.wrapped.address, Number(inputAmount))
         setSwapRoute(OOQuoteData.path);
       }
     }
