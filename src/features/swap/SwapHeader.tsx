@@ -35,7 +35,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const { chainId } = useActiveWeb3React()
   const isRemove = asPath.startsWith('/remove')
   // const isCrossChain = asPath.startsWith('/swap')
-  const isSwap = asPath.startsWith('/exchange') || asPath.startsWith('/swap') || asPath.startsWith('/add') || asPath.startsWith('/remove') || asPath.startsWith('/cross')
+  const isSwap = asPath.startsWith('/exchange') || asPath.startsWith('/swap') || asPath.startsWith('/add') || asPath.startsWith('/remove') || asPath.startsWith('/cross') || asPath.startsWith('/open')
   const chainColor
     = chainId == ChainId.FANTOM ? `border-[#1969FF] text-[#1969FF]`
       : chainId == ChainId.AVALANCHE ? `border-[#E84142] text-[#E84142]`
@@ -120,7 +120,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Bridge`)}
           </Typography>
         </NavLink> */}
-        <NavLink
+        {/* <NavLink
           activeClassName={classNames(
             "border rounded bg-black",
             chainColor
@@ -131,6 +131,19 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
         >
           <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
             {i18n._(t`Multi`)}
+          </Typography>
+        </NavLink> */}
+        <NavLink
+          activeClassName={classNames(
+            "border rounded bg-black",
+            chainColor
+          )}
+          href={{
+            pathname: '/open',
+          }}
+        >
+          <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
+            {i18n._(t`Open`)}
           </Typography>
         </NavLink>
       </div>
