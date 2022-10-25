@@ -475,7 +475,7 @@ export const SwapTokensContent: React.FC<any> = ({
               justifyContent: "center",
               height: "32px",
               width: "32px",
-              border: "1px solid #67748B",
+              border: "1px solid #000000",
               borderRadius: "50%",
             }}
           >
@@ -845,10 +845,10 @@ const Open = () => {
   // const { walletContext } = useWalletProvider();
   const { account, chainId } = useActiveWeb3React()
   const { apiData: fantomApiData } = useFantomApiData();
-  const { width } = useDetectResolutionType();
+  // const { width } = useDetectResolutionType();
   const { apiData } = useApiData();
   const [tokenList, setTokenList] = useState(null);
-  const [showChart, setShowChart] = useState(false)
+  // const [showChart, setShowChart] = useState(false)
   const [activeTokens, setActiveTokens] = useState(
     [tokenList?.find((token: OOToken) => token.symbol === "FTM"),
     tokenList?.find((token: OOToken) => token.symbol === "SOUL")]
