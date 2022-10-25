@@ -25,7 +25,6 @@ const InputCurrencyBox: React.FC<any> = ({
   minus,
   variant = "old",
 }) => {
-  // const { color } = useContext(ThemeContext);
   const [error, setError] = useState(null);
   const { chainId } = useActiveWeb3React()
   const handleSetMax = () => {
