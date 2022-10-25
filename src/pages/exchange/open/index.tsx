@@ -46,7 +46,7 @@ import useCoingeckoApi, {
 // import Chart from "components/Aggregator/Chart";
 // import { formatDate } from "utils/common";
 import FadeInOut from "components/AnimationFade";
-import useDetectResolutionType from "hooks/useDetectResolutionType";
+// import useDetectResolutionType from "hooks/useDetectResolutionType";
 // import { formatDate } from "functions/format";
 import { useActiveWeb3React } from "services/web3";
 import { ChainId, OPEN_OCEAN_EXCHANGE_ADDRESS, Token, WNATIVE } from "sdk";
@@ -58,9 +58,12 @@ import Container from "components/Container";
 import SwapHeader from "features/swap/SwapHeader";
 import { SwapLayoutCard } from "layouts/SwapLayout";
 import { SubmitButton } from "features/summoner/Styles";
-import { getChainColor } from "constants/chains";
+import { getChainColor, getChainColorCode } from "constants/chains";
 import NetworkGuard from "guards/Network";
 import { Feature } from "enums/Feature";
+import NavLink from "components/NavLink";
+import { ArrowLeftIcon } from "@heroicons/react/outline";
+import SocialWidget from "components/Social";
 
 const SwapTokenInput: React.FC<any> = ({
   inputValue,
@@ -182,12 +185,12 @@ const SwapTokenInput: React.FC<any> = ({
       </Row>
       {error && <InputError error={error} />}
       {!disabledInput && (
-        <div className="grid grid-cols-2 gap-1">
+        <div className="grid grid-cols-2 gap-1 mt-1">
         
         <SubmitButton
           fontSize="16px"
           primaryColor={getChainColor(chainId)}
-          variant="filled"
+          variant="bordered"
           onClick={handleSetHalf}
         >
           {"50%"}
@@ -195,7 +198,7 @@ const SwapTokenInput: React.FC<any> = ({
         <SubmitButton
           fontSize="16px"
           primaryColor={getChainColor(chainId)}
-          variant="filled"
+          variant="bordered"
           onClick={handleSetMax}
         >
           {"MAX"}
@@ -500,11 +503,12 @@ export const SwapTokensContent: React.FC<any> = ({
         />
       )}
       <Spacer
-        size="lg"
+        size="sm"
       />
       {hasAllowance(allowance) ? (
-        <Button
-          variant="primary"
+        <SubmitButton
+          variant="bordered"
+          primaryColor={getChainColor(chainId)}
           onClick={handleSwap}
           disabled={isSwapPending || isSwapCompleted || !minReceived}
         >
@@ -515,11 +519,12 @@ export const SwapTokensContent: React.FC<any> = ({
               : !minReceived
                 ? "Fetching best price..."
                 : "Swap"}
-        </Button>
+        </SubmitButton>
       ) : (
-        <Button
-          variant="primary"
-          onClick={handleApprove}
+        <SubmitButton
+        variant="bordered"
+        primaryColor={getChainColor(chainId)}
+        onClick={handleApprove}
           disabled={isApproveCompleted || isApprovePending}
         >
           {isApprovePending
@@ -527,10 +532,10 @@ export const SwapTokensContent: React.FC<any> = ({
             : isApproveCompleted
               ? "Approved!"
               : "Approve"}
-        </Button>
+        </SubmitButton>
       )}
       <Spacer
-        size="lg"
+        size="sm"
       />
       <ContentBox style={{ backgroundColor: "#000000" }}>
         <Column style={{ width: "100%", gap: "1rem" }}>
@@ -1005,6 +1010,8 @@ const Open = () => {
               </div>
               <Spacer />
             </FadeInOut>
+            <SocialWidget />
+
           </SwapLayoutCard>
         </div>
       </DoubleGlowShadowV2>
