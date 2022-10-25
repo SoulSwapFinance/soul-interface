@@ -6,7 +6,7 @@ import { Button } from 'components/Button'
 import Typography from 'components/Typography'
 import Web3Connect from 'components/Web3Connect'
 import ConfirmSwapModal from 'features/swap/ConfirmSwapModal'
-import SwapCallbackError from 'features/swap/SwapCallbackError'
+// import SwapCallbackError from 'features/swap/SwapCallbackError'
 import SwapDetails from 'features/swap/SwapDetails'
 import UnsupportedCurrencyFooter from 'features/swap/UnsupportedCurrencyFooter'
 import SwapHeader from 'features/swap/SwapHeader'
@@ -45,7 +45,7 @@ import { Toggle } from 'components/Toggle'
 import SocialWidget from 'components/Social'
 import { getChainColorCode } from 'constants/chains'
 import { classNames } from 'functions/styling'
-// import { TwitterBanner } from 'components/Banner'
+import { NewFeature } from 'components/Banner'
 import NavLink from 'components/NavLink'
 import { WrappedCrossChainTrade } from 'rubic-sdk/lib/features/cross-chain/providers/common/models/wrapped-cross-chain-trade'
 import { sleep } from 'features/crosschain/utils'
@@ -459,7 +459,7 @@ const Swap = () => {
 
   return (
     <>
-      {/* <TwitterBanner chainId={chainId} /> */}
+      <NewFeature chainId={chainId} />
       <ConfirmSwapModal
         isOpen={showConfirm}
         trade={trade}
@@ -666,9 +666,10 @@ const Swap = () => {
                   color={ chainId == ChainId.AVALANCHE ? "avaxGradient" : "gradientBluePurple"}
                   size="lg"
                 >
-                <NavLink href={"/cross"}>
+                <NavLink href={chainId == ChainId.FANTOM ? "/open" : "/cross"}>
                         <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                        <span>Swap Crosschain</span>
+                        <span>{ 
+                        chainId == ChainId.FANTOM ? 'Use Aggregator' : 'Swap Crosschain' }</span>
                         </a>
                   </NavLink>
                 </Button>
