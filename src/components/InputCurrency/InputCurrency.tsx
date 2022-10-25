@@ -31,7 +31,7 @@ const InputCurrency: React.FC<any> = ({
     }
 
     if (parseFloat(value) > max) {
-      handleError("Insufficient funds");
+      handleError("Insufficient Funds");
     }
 
     if (
@@ -78,11 +78,12 @@ const InputCurrency: React.FC<any> = ({
 
   return (
     <Input
+      className="ml-6"
       disabled={disabled}
       type="text"
       value={formatValue(value)}
       onChange={(event) => handleChange(deformatValue(event.target.value))}
-      placeholder={disabled ? "" : "Enter an amount"}
+      placeholder={disabled ? "" : "Enter Amount"}
     />
   );
 };

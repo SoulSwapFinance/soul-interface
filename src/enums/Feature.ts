@@ -20,5 +20,6 @@ export enum Feature {
   SOULSWAP = 'SoulSwap',
   LUXOR = 'Luxor',
   INARI = 'Inari',
+  AGGREGATE = 'Aggregate',
   VESTING = 'Vesting'
 }

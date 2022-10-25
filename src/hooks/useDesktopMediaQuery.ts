@@ -1,11 +1,14 @@
-import getConfig from 'next/config'
+// import getConfig from 'next/config'
 import { useMediaQuery } from 'react-responsive'
-const { publicRuntimeConfig } = getConfig()
+// const { publicRuntimeConfig } = getConfig()
+
+const LG_BREAKPOINT = '1360px'
 
 const useDesktopMediaQuery = () => {
-  const { breakpoints } = publicRuntimeConfig
+  // const { breakpoints } = publicRuntimeConfig
   // return useMediaQuery({ query: `(min-width: lg` })
-  return useMediaQuery({ query: `(min-width: ${breakpoints.lg}` })
+  // return useMediaQuery({ query: `(min-width: ${breakpoints.lg}` })
+  return useMediaQuery({ query: `(min-width: ${LG_BREAKPOINT}` })
 }
 
 export const useTouchDeviceMediaQuery = () => {

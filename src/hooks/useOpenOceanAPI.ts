@@ -1,11 +1,12 @@
 import useRestApi from "./useRestApi";
 
-export const OPENOCEAN_BASEURL = "https://open-api.openocean.finance/v3/cross";
+export const OPENOCEAN_BASEURL = "https://open-api.openocean.finance/v1/cross";
 
 export enum OPENOCEAN_METHODS {
   GET_TOKENLIST = "/tokenList",
   GET_QUOTE = "/quote",
   GET_SWAP_QUOTE = "/swap_quote",
+  // GET_BALANCE = "/getBalance",
 }
 
 export type OOToken = {
@@ -48,6 +49,22 @@ const useOpenOceanApi = () => {
       ],
     });
   };
+  
+  // const getBalance = (
+  //   inToken: OOToken,
+  //   outToken: OOToken,
+  //   account: string
+  // ) => {
+  //   return get({
+  //     path: OPENOCEAN_METHODS.GET_BALANCE,
+  //     queryParams: [
+  //       ["account", account],
+  //       ["chain", 250],
+  //       ["inTokenAddress", inToken.address],
+  //       ["outTokenAddress", outToken.address],
+  //     ],
+  //   });
+  // };
 
   const getSwapQuote = (
     inToken: OOToken,
@@ -72,7 +89,8 @@ const useOpenOceanApi = () => {
         ["chainId", 250],
         ["account", account],
         ["withRoute", "routes"],
-        ["referrer", "0x1551c797c53d459c39baeafe79fe7a3a6592022c"],
+        ["referrer", "0xFd63Bf84471Bc55DD9A83fdFA293CCBD27e1F4C8"],
+        // ["referrer", "0x1551c797c53d459c39baeafe79fe7a3a6592022c"],
       ],
     });
   };
@@ -81,6 +99,7 @@ const useOpenOceanApi = () => {
     getTokenList,
     getQuote,
     getSwapQuote,
+    // getBalance,
   };
 };
 

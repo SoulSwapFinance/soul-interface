@@ -1,19 +1,14 @@
-import React, { lazy, SetStateAction, useCallback, useMemo, useState } from 'react'
-import { BigNumber } from 'bignumber.js'
+import React, { lazy, SetStateAction, useCallback, useEffect, useMemo, useState } from 'react'
+import { BigNumber } from "@ethersproject/bignumber";
 import { useTokenContract } from 'hooks/useContract'
 import qs from 'qs'
 import Typography from 'components/Typography'
 import { useActiveWeb3React } from 'services/web3'
 import Web3 from 'web3'
-import { ChainId, Currency, NATIVE, Token, WNATIVE } from 'sdk';
-// import TradingView from 'components/TradingViewChart'
-// import LiveChart from 'components/LiveChart'
-// import LineChart from 'components/LiveChart/LineChart'
-// import LineGraph from 'components/Dashboard/LineGraph'
-// import TokenList from 'features/analytics/Tokens/TokenList'
+import { ChainId, Currency, NATIVE, OPEN_OCEAN_EXCHANGE_ADDRESS, SOUL, Token, USDC, WNATIVE } from 'sdk';
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 import { classNames } from 'functions/styling'
-import { SwapLayoutCard } from 'layouts/SwapLayout'
+// import { SwapLayoutCard } from 'layouts/SwapLayout'
 import { useDerivedSwapInfo, useSwapActionHandlers, useSwapState } from 'state/swap/hooks'
 import useWrapCallback, { WrapType } from 'hooks/useWrapCallback'
 import { Field } from 'state/swap/actions'
@@ -25,48 +20,59 @@ import { useUSDCValue } from 'hooks/useUSDCPrice'
 import { computeFiatValuePriceImpact } from 'functions/trade'
 import { warningSeverity } from 'functions/prices'
 import { SubmitButton } from 'features/summoner/Styles'
-import NetworkGuard from 'guards/Network'
-import { Feature } from 'enums/Feature'
+import { DoubleGlowShadowV2 } from 'components/DoubleGlow'
+import Container from 'components/Container'
+import { unitToWei } from 'utils/account/conversion'
+import useSendTransaction from 'hooks/useSendTransaction'
+import { useTokenInfo } from 'hooks/useAPI'
+import useFantomERC20 from 'hooks/useFantomERC20'
+import useFantomNative from 'hooks/useFantomNative';
+import useApiData from 'hooks/useApiData';
+import useCoingeckoApi, { COINGECKO_BASEURL, COINGECKO_METHODS } from 'hooks/useCoinGeckoAPI';
+import { OPENOCEAN_BASEURL, OPENOCEAN_METHODS } from 'hooks/useOpenOceanAPI';
+import NetworkGuard from 'guards/Network';
+import { Feature } from 'enums/Feature';
 
 // const  = lazy(() => import('components/LiveChart'))
 
-export default function Aggregate() {
+export default function OpenV1() {
   const { account, chainId } = useActiveWeb3React()
 
   const [inputAmount, setInputAmount] = useState('0')
   const [outputAmount, setOutputAmount] = useState('0')
   const { independentField, typedValue, recipient } = useSwapState()
   const { onSwitchTokens, onCurrencySelection, onUserInput } = useSwapActionHandlers()
+  const [minReceived, setMinReceived] = useState(null);
+  // const [priceImpact, setPriceImpact] = useState(null);
 
-  const [inputLogo, setInputLogo] = useState(0)
-  const [outputLogo, setOutputLogo] = useState(0)
-  
   const [swapQuote, setSwapQuote] = useState('')
 
-  const [fromToken, setFromToken] = useState(WNATIVE[chainId])
-  const [toToken, setToToken] = useState(WNATIVE[chainId])
-
-  let currentSelectSide;
-  let currentTrade: {
-    from: {
-      address,
-      logoURI
-    },
-    to: {
-      address,
-      logoURI
-
-    },
-
-  };
-  let tokens;
-
-  async function init() {
-    await listAvailableTokens();
-  }
-
+  const [fromToken, setFromToken] = useState(NATIVE[chainId])
+  const [toToken, setToToken] = useState(SOUL[chainId])
   const [approvalSubmitted, setApprovalSubmitted] = useState<boolean>(false)
+  const fromTokenDecimals = Number(useTokenInfo(fromToken?.wrapped.address).tokenInfo.decimals)
+  const { getAllowance, approve } = useFantomERC20();
+  const [allowance, setAllowance] = useState(BigNumber.from(0));
+  const { sendTx } = useFantomNative();
 
+  // const handleSwapInOut = () => {
+  //   setInputAmount("1");
+  //   setOutputAmount("");
+  //   setEstimatedGas(null);
+  //   setMinReceived(null);
+  //   // setPriceImpact(null);
+  //   setFromToken(toToken);
+  //   setToToken(fromToken);
+  // };
+
+  useEffect(() => {
+    setOutputAmount("");
+    setMinReceived(null);
+    // setPriceImpact(null);
+    if (inputAmount === "") {
+      setEstimatedGas(null);
+    }
+  }, [inputAmount]);
 
   const { v2Trade, parsedAmount, currencies, inputError: swapInputError, allowedSlippage, to } = useDerivedSwapInfo()
   const {
@@ -75,108 +81,27 @@ export default function Aggregate() {
     inputError: wrapInputError,
   } = useWrapCallback(currencies[Field.INPUT], currencies[Field.OUTPUT], typedValue)
 
-  async function listAvailableTokens() {
-    console.log("initializing");
-    let response = await fetch('https://tokens.coingecko.com/uniswap/all.json');
-    let tokenListJSON = await response.json();
-    console.log("listing available tokens: ", tokenListJSON);
-    tokens = tokenListJSON.tokens;
-    console.log("tokens: ", tokens);
-
-    // create token list for modal
-    let parent = document.getElementById("token_list");
-    for (const i in tokens) {
-      // token row in the modal token list
-      let div = document.createElement("div");
-      div.className = "token_row";
-      let html = `
-        <img class="token_list_img" src="${tokens[i].logoURI}">
-          <span class="token_list_text">${tokens[i].symbol}</span>
-          `;
-      div.innerHTML = html;
-      div.onclick = () => {
-        selectToken(tokens[i]);
-      };
-      parent.appendChild(div);
-    };
-  }
-
-  async function selectToken(token) {
-    closeModal();
-    currentTrade[currentSelectSide] = token;
-    console.log("currentTrade: ", currentTrade);
-    renderInterface();
-  }
-
-  function renderInterface() {
-    if (fromToken) {
-      console.log(fromToken)
-      setFromToken(fromToken)
-      setInputLogo(currentTrade.from.logoURI)
-      // document.getElementById("from_token_text").innerHTML = currentTrade.from.symbol;
-    }
-    if (to) {
-      console.log(to)
-      setOutputLogo(currentTrade.to.logoURI)
-      // document.getElementById("to_token_text").innerHTML = currentTrade.to.symbol;
-    }
-  }
-
-  // async function connect() {
-  //     if (typeof window.ethereum !== "undefined") {
-  //         try {
-  //             console.log("connecting");
-  //             await window.ethereum.request({ method: "eth_requestAccounts" });
-  //         } catch (error) {
-  //             console.log(error);
-  //         }
-  //         document.getElementById("login_button").innerHTML = "Connected";
-  //         // const accounts = await ethereum.request({ method: "eth_accounts" });
-  //         document.getElementById("swap_button").disabled = false;
-  //     } else {
-  //         document.getElementById("login_button").innerHTML = "Please install MetaMask";
-  //     }
-  // }
-
-  function openModal(side) {
-    currentSelectSide = side;
-    // document.getElementById("token_modal").style.display = "block";
-  }
-
-  function closeModal() {
-    // document.getElementById("token_modal").style.display = "none";
-  }
-
-  async function getQuote(fromTokenAddress, toTokenAddress, fromAmount) {
+  async function getQuote(fromTokenAddress, toTokenAddress, inputAmount) {
     console.log("Getting Quote");
 
+    const chainName = chainId == ChainId.AVALANCHE ? 'avax' : chainId == ChainId.ETHEREUM ? 'eth' : 'fantom'
+    let amount = inputAmount / 10**fromToken.wrapped.decimals
     if (!fromToken || !to || !inputAmount) return;
-    let amount = Number(inputAmount) * 10 ** fromToken.wrapped.decimals
-
-    // const params = {
-    //   sellToken: fromToken.address,
-    //   buyToken: toToken.address,
-    //   sellAmount: amount,
-    //   takerAddress: account,
-    // }
 
     // Fetch the swap quote.
-    const response = await fetch(
-      // `https://api.0x.org/swap/v1/quote?${qs.stringify(params)}`
-      `https://api.1inch.io/v4.0/${chainId}/quote?fromTokenAddress=${fromTokenAddress}&toTokenAddress=${toTokenAddress}&amount=${fromAmount}`
-      );
-
+    const response = await fetch(`https://open-api.openocean.finance/v3/${chainName}/quote?inTokenAddress=${fromTokenAddress}&outTokenAddress=${toTokenAddress}&amount=${amount}&gasPrice=5&slippage=100`);
     let swapQuoteJSON = await response.json();
     console.log("Quote: ", swapQuoteJSON);
-    let outputAmount = swapQuoteJSON.buyAmount / (10 ** toToken.decimals)
-    console.log('output:%s', await swapQuoteJSON.toTokenAmount)
+    let outputAmount = await swapQuoteJSON.data?.outAmount / (10 ** toToken.decimals)
+    console.log('output:%s', await outputAmount)
 
-    setOutputAmount(swapQuoteJSON.toTokenAmount)
+    setOutputAmount(outputAmount.toString())
     setSwapQuote(swapQuoteJSON.toString())
-    // document.getElementById("gas_estimate").innerHTML = swapQuoteJSON.estimatedGas;
 
     return swapQuoteJSON;
   }
+
+  // getQuote(fromToken.address, toToken.address, inputAmount)
 
   // async function trySwap() {
   //   const erc20abi = [{ "inputs": [{ "internalType": "string", "name": "name", "type": "string" }, { "internalType": "string", "name": "symbol", "type": "string" }, { "internalType": "uint256", "name": "max_supply", "type": "uint256" }], "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "spender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "value", "type": "uint256" }], "name": "Approval", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "from", "type": "address" }, { "indexed": true, "internalType": "address", "name": "to", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "value", "type": "uint256" }], "name": "Transfer", "type": "event" }, { "inputs": [{ "internalType": "address", "name": "owner", "type": "address" }, { "internalType": "address", "name": "spender", "type": "address" }], "name": "allowance", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "approve", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "account", "type": "address" }], "name": "balanceOf", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "burn", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "account", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "burnFrom", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "decimals", "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "subtractedValue", "type": "uint256" }], "name": "decreaseAllowance", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "addedValue", "type": "uint256" }], "name": "increaseAllowance", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "name", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "symbol", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "totalSupply", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "recipient", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "transfer", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "sender", "type": "address" }, { "internalType": "address", "name": "recipient", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "transferFrom", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "nonpayable", "type": "function" }]
@@ -217,6 +142,21 @@ export default function Aggregate() {
   // }
 
   const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE
+  const { getPrice } = useCoingeckoApi();
+  const [swapRoute, setSwapRoute] = useState(null);
+  const [refetchTimer, setRefetchTimer] = useState(0);
+  // const [outTokenAmount, setOutTokenAmount] = useState("");
+  const [estimatedGas, setEstimatedGas] = useState(null);
+
+  const { apiData } = useApiData();
+  const OOQuoteData =
+    apiData[OPENOCEAN_BASEURL + OPENOCEAN_METHODS.GET_QUOTE]?.response?.data
+      ?.data;
+  const OOSwapQuoteData =
+    apiData[OPENOCEAN_BASEURL + OPENOCEAN_METHODS.GET_SWAP_QUOTE]?.response
+      ?.data?.data;
+  // const tokenPriceData =
+  //   apiData[COINGECKO_BASEURL + COINGECKO_METHODS.GET_PRICE]?.response?.data;
 
   const isValid = !swapInputError
   const dependentField: Field = independentField === Field.INPUT ? Field.OUTPUT : Field.INPUT
@@ -245,15 +185,7 @@ export default function Aggregate() {
     },
     [onCurrencySelection]
     )
-    
-  const handleTypeInput = useCallback(
-    (value: string) => {
-      onUserInput(Field.INPUT, value)
-      setInputAmount(value)
-    },
-    [onUserInput]
-    )
-      
+  
   // HANDLES - OUTPUT //
   const handleOutputSelect = useCallback(
     (outputCurrency) => {
@@ -263,6 +195,29 @@ export default function Aggregate() {
     [onCurrencySelection]
   )
 
+  const handleTypeInput = useCallback(
+    async (value: string) => {
+      onUserInput(Field.INPUT, value)
+      setInputAmount(value)
+      await handleOutputSelect
+      await getQuote(fromToken.wrapped.address, toToken.wrapped.address, Number(value) * 10**fromToken.wrapped.decimals)
+    },
+    [onUserInput]
+    )
+
+  useEffect(() => {
+    if (OOQuoteData && toToken?.decimals && parseFloat(outputAmount) > 0) {
+      if (
+        parseFloat(inputAmount).toFixed(4) ===
+        parseFloat(OOQuoteData.inAmount).toFixed(4)
+      ) {
+        setOutputAmount(OOQuoteData.outAmount);
+        // getQuote(fromToken.wrapped.address, toToken.wrapped.address, Number(inputAmount))
+        setSwapRoute(OOQuoteData.path);
+      }
+    }
+  }, [OOQuoteData]);
+  
   const fiatValueInput = useUSDCValue(parsedAmounts[Field.INPUT])
   const fiatValueOutput = useUSDCValue(parsedAmounts[Field.OUTPUT])
   const priceImpact = computeFiatValuePriceImpact(fiatValueInput, fiatValueOutput)
@@ -281,6 +236,51 @@ export default function Aggregate() {
     },
     [onUserInput]
   )
+
+  const hasAllowance = (value: BigNumber) => {
+    if (fromToken && fromToken.decimals) {
+      if (fromToken.isNative) {
+        // ?.address === "0x0000000000000000000000000000000000000000") {
+        if (isApproveCompleted) {
+          resetApproveTx();
+        }
+        return true;
+      }
+      return Number(value) >= Number(inputAmount) * 10 ** fromTokenDecimals
+    }
+    return false;
+  };
+
+  const {
+    sendTx: handleApprove,
+    isPending: isApprovePending,
+    isCompleted: isApproveCompleted,
+    reset: resetApproveTx,
+  } = useSendTransaction(() =>
+    approve(
+      fromToken?.address,
+      OPEN_OCEAN_EXCHANGE_ADDRESS[chainId],
+      unitToWei(inputAmount, fromToken?.decimals).toString()
+    )
+  )
+
+  const {
+    sendTx: handleSwap,
+    isPending: isSwapPending,
+    isCompleted: isSwapCompleted,
+    reset: resetSwapTx,
+  } = useSendTransaction(() =>
+    sendTx(
+      OOSwapQuoteData.to,
+      Math.floor(OOSwapQuoteData.estimatedGas * 1.5),
+      +OOSwapQuoteData.gasPrice * 2,
+      OOSwapQuoteData.data,
+      OOSwapQuoteData.inToken.address ===
+        "0x0000000000000000000000000000000000000000"
+        ? OOSwapQuoteData.value
+        : null
+    )
+  );
 
   const priceImpactSeverity = useMemo(() => {
     const executionPriceImpact = trade?.priceImpact
@@ -306,22 +306,14 @@ export default function Aggregate() {
         return 'text-red'
     }
   }, [priceImpactSeverity])
-  // init();
-
-  // document.getElementById("login_button").onclick = connect;
-  // document.getElementById("from_token_select").onclick = () => {
-  // openModal("from");
-  // };
-  // document.getElementById("to_token_select").onclick = () => {
-  //     openModal("to");
-  // };
-  // document.getElementById("modal_close").onclick = closeModal;
-  // document.getElementById("from_amount").onblur = getPrice;
-  // document.getElementById("swap_button").onclick = trySwap;
 
   return (
-    <div>
-      <SwapHeader inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+    <Container id="open-page" maxWidth="2xl" className="space-y-4">
+      <DoubleGlowShadowV2>
+      <div className="p-4 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>          
+        <div className="px-2">
+    <SwapHeader inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+    </div>      
       <SwapAssetPanel
         spendFromWallet={true}
         chainId={chainId}
@@ -356,7 +348,6 @@ export default function Aggregate() {
         header={(props) => (
           <SwapAssetPanel.Header
             {...props}
-            label={'Swap to:'}
           />
         )}
         currency={currencies[Field.OUTPUT]}
@@ -377,25 +368,53 @@ export default function Aggregate() {
 
       <div className={'grid grid-cols-1 justify-between'}>
         <Typography>  From: {fromToken.symbol} </Typography>
-        {/* <Typography>  fromAddress: {fromToken.wrapped.address} </Typography> */}
+        <Typography>  fromAddress: {fromToken.isNative ? '0x' : fromToken.wrapped.address} </Typography>
         <Typography>  inputAmount: {inputAmount} </Typography>
 
         <Typography>  To: {toToken.symbol} </Typography>
-        {/* <Typography>  toAddress: {toToken.wrapped.address} </Typography> */}
+        <Typography>  toAddress: {toToken.wrapped.address} </Typography>
         <Typography>  outputAmount: {outputAmount} </Typography>
       </div>
       <SubmitButton
       onClick={async()=> 
         {
            await getQuote(fromToken.wrapped.address, toToken.wrapped.address, Number(inputAmount) * 10**fromToken.decimals)
-           console.log('outputAmount:%s', Number(outputAmount))
+          //  console.log('outputAmount:%s', Number(outputAmount))
         }
       }
       >
-
       </SubmitButton>
+      {hasAllowance(allowance) ? (
+          <SubmitButton
+            variant="filled"
+            onClick={handleSwap}
+            disabled={isSwapPending || isSwapCompleted || !minReceived}
+          >
+            {isSwapPending
+              ? "Swapping..."
+              : isSwapCompleted
+                ? "Swap successful"
+                : !minReceived
+                  ? "Fetching best price..."
+                  : "Swap"}
+          </SubmitButton>
+        ) : (
+          <SubmitButton
+            variant="filled"
+            onClick={handleApprove}
+            disabled={isApproveCompleted || isApprovePending}
+          >
+            {isApprovePending
+              ? "Approving..."
+              : isApproveCompleted
+                ? "Approved!"
+                : "Approve"}
+          </SubmitButton>
+        )}
     </div>
+    </DoubleGlowShadowV2>
+    </Container>
   )
 }
 
-Aggregate.Guard = NetworkGuard(Feature.AGGREGATE)
+OpenV1.Guard = NetworkGuard(Feature.AGGREGATE)

@@ -1,4 +1,4 @@
-import useTransaction from "./useTransaction";
+// import useTransaction from "./useTransaction";
 import { send } from "utils/transactions";
 import { BigNumber } from "@ethersproject/bignumber";
 import { useActiveWeb3React } from "services/web3";
@@ -8,6 +8,7 @@ import { useAppDispatch } from "state/hooks";
 const useFantomNative = () => {
   const { account, chainId, library } = useActiveWeb3React()
   const dispatch = useAppDispatch()
+  const provider = library.provider
 
   const sendNativeTokens = async (toAddress: string, amount: string) => {
     if (!account) {
@@ -20,7 +21,7 @@ const useFantomNative = () => {
     }
 
     return send(
-      library?.provider,
+      provider,
       () =>
         getSigner(library, account).sendTransaction({
           to: toAddress,
@@ -55,7 +56,7 @@ const useFantomNative = () => {
     }
 
     return send(
-      library?.provider,
+      provider,
       () =>
         getSigner(library, account).sendTransaction({
           ...tx,
@@ -65,7 +66,7 @@ const useFantomNative = () => {
   };
 
   const getBalance = (address?: string) => {
-    if (!library?.provider) {
+    if (!provider) {
       console.error("[getBalance] provider not found");
       return;
     }

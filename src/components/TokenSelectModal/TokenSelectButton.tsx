@@ -2,15 +2,17 @@ import React from "react";
 import { Button, Typo2 } from "../index";
 import useModal from "../../hooks/useModal";
 import TokenSelectModal from "./TokenSelectModal";
-import Row from "../Row";
+// import Row from "../Row";
 import ftmIcon from "assets/networks/fantom.svg";
 import Spacer from "../Spacer";
 // import vShape from "../../assets/img/shapes/vShape.png";
-
+import Image from 'next/image'
+import { SubmitButton } from "features/summoner/Styles";
 const vShape = 'https://raw.githubusercontent.com/BunsDev/fWallet-interface/buns/packages/app/src/assets/img/shapes/vShape.png'
 
 const TokenSelectButton: React.FC<any> = ({
   currentToken,
+  // chainId,
   ftmBalance,
   assets,
   setTokenSelected,
@@ -26,27 +28,39 @@ const TokenSelectButton: React.FC<any> = ({
     "token-select-modal"
   );
   return (
-    <Button
-      style={{ flex: 2, padding: "10px" }}
-      variant="secondary"
+    <div className="grid grid-cols-1 sm:ml-10">
+    <SubmitButton
+      // style={{ marginLeft: '.1rem', flex: 0.25, padding: "1px" }}
+      variant="bordered"
+      primaryColor={'black'}
       onClick={() => onPresentSelectTokenModal()}
     >
-      <Row style={{ alignItems: "center" }}>
-        <img
+      {/* <Row
+      style={{ alignItems: "center" }}
+      /> */}
+        <Image
           alt=""
-          src={currentToken.symbol === "FTM" ? ftmIcon : currentToken.logoURL}
-          style={{ height: "24px" }}
+          width="36px"
+          height="36px"
+          src={currentToken?.symbol === "FTM" ? ftmIcon : currentToken?.logoURL}
+          style={{ height: "36px", width: "36px" }}
         />
-        <Spacer 
-        // size="xxs" 
-        />
-        <Typo2>{currentToken.symbol}</Typo2>
-        <Spacer 
-        // size="sm" 
-        />
-        <img alt="" src={vShape} />
-      </Row>
-    </Button>
+        {/* <Spacer 
+        size="xs" 
+        /> */}
+        {/* <Typo2 className={'font-bold'}>{currentToken?.symbol}</Typo2> */}
+        {/* <Spacer 
+        size="xxs" 
+        /> */}
+        {/* <Image
+          width="6px"
+          height="6px"
+          alt="" 
+          src={vShape} /> */}
+      {/* </Row> */}
+    </SubmitButton>    
+    </div>
+
   );
 };
 

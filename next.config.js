@@ -31,11 +31,13 @@ module.exports = withBundleAnalyzer(
         'exchange.soulswap.finance',
         'assets.sushi.com',
         'res.cloudinary.com',
+        'cloudstorage.openocean.finance',
         'raw.githubusercontent.com',
         'avatars.githubusercontent.com',
         'logos.covalenthq.com',
         'pbs.twimg.com',
-        "api.rango.exchange"
+        'api.rango.exchange',
+        'ethapi.openocean.finance'
       ],
       deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     },
@@ -96,10 +98,10 @@ module.exports = withBundleAnalyzer(
     },
     async rewrites() {
       return [
-        // {
-        //   source: '/stake',
-        //   destination: '/soul/seance',
-        // },
+        {
+          source: '/open',
+          destination: '/exchange/open',
+        },
         {
           source: '/add/:token*',
           destination: '/exchange/add/:token*',
@@ -123,6 +125,10 @@ module.exports = withBundleAnalyzer(
         {
           source: '/aggregate',
           destination: '/exchange/aggregate',
+        },
+        {
+          source: '/aggregator',
+          destination: '/exchange/aggregator',
         },
         {
           source: '/cross',

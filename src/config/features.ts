@@ -70,6 +70,7 @@ const features: FeatureMap = {
     Feature.LIQUIDITY,
     Feature.ANALYTICS,
     Feature.LIQUIDITY_MINING,
+    Feature.AGGREGATE,
     Feature.BONDS,
     Feature.COFFINBOX,
     Feature.LIMIT,

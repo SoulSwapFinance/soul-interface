@@ -39,7 +39,7 @@ const InputCurrencyBox: React.FC<any> = ({
     <Row
       style={{
         width: "100%",
-        backgroundColor: variant === "new" ? "black" : "#202F49",
+        backgroundColor: variant === "new" ? "black" : "#444444",
         borderRadius: "8px",
         height: "64px",
         alignItems: "center",

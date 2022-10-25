@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, Currency, DAI_ADDRESS, NATIVE, Percent, SOUL_ADDRESS, USDC_ADDRESS } from 'sdk'
+import { ChainId, Currency, NATIVE, Percent, SOUL_ADDRESS, USDC_ADDRESS } from 'sdk'
 import NavLink from 'components/NavLink'
 import Settings from 'components/Settings'
 // import CrossChainMode from 'components/CrossChainMode'
@@ -35,7 +35,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const { chainId } = useActiveWeb3React()
   const isRemove = asPath.startsWith('/remove')
   // const isCrossChain = asPath.startsWith('/swap')
-  const isSwap = asPath.startsWith('/exchange') || asPath.startsWith('/swap') || asPath.startsWith('/add') || asPath.startsWith('/remove') || asPath.startsWith('/cross')
+  const isSwap = asPath.startsWith('/exchange') || asPath.startsWith('/swap') || asPath.startsWith('/add') || asPath.startsWith('/remove') || asPath.startsWith('/cross') || asPath.startsWith('/open')
   const chainColor
     = chainId == ChainId.FANTOM ? `border-[#1969FF] text-[#1969FF]`
       : chainId == ChainId.AVALANCHE ? `border-[#E84142] text-[#E84142]`
@@ -78,7 +78,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             </Typography>
           </NavLink>
         }
-        {chainId == 250 &&
+        {chainId == ChainId.FANTOM &&
           <NavLink
             activeClassName={classNames(
               "border rounded bg-black",
@@ -107,6 +107,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Cross`)}
           </Typography>
         </NavLink>
+        { ![ChainId.FANTOM].includes(chainId) &&
         <NavLink
           activeClassName={classNames(
             "border rounded bg-black",
@@ -120,6 +121,35 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Bridge`)}
           </Typography>
         </NavLink>
+        }
+        {/* <NavLink
+          activeClassName={classNames(
+            "border rounded bg-black",
+            chainColor
+          )}
+          href={{
+            pathname: '/aggregator',
+          }}
+        >
+          <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
+            {i18n._(t`Multi`)}
+          </Typography>
+        </NavLink> */}
+        { [ChainId.FANTOM].includes(chainId) &&
+        <NavLink
+          activeClassName={classNames(
+            "border rounded bg-black",
+            chainColor
+          )}
+          href={{
+            pathname: '/open',
+          }}
+        >
+          <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
+            {i18n._(t`Open`)}
+          </Typography>
+        </NavLink>
+        }
       </div>
         <div className={'flex flex-cols-2 sm:gap-8 gap-6 mr-4 justify-end rounded'}>
           {isSwap && <Settings />}

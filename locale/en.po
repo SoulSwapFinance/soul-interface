@@ -265,9 +265,6 @@ msgstr "Claim Scarabs"
 msgid "Claim and Autostake"
 msgstr "Claim and Autostake"
 
-msgid "Claimable Amount"
-msgstr "Claimable Amount"
-
 msgid "Claimable: Fetching Claimable Amount"
 msgstr "Claimable: Fetching Claimable Amount"
 
@@ -764,9 +761,6 @@ msgstr "Luxor Balance"
 msgid "MAX"
 msgstr "MAX"
 
-msgid "MINT SOR"
-msgstr "MINT SOR"
-
 msgid "Manage"
 msgstr "Manage"
 
@@ -781,12 +775,6 @@ msgstr "Margin"
 
 msgid "Markets"
 msgstr "Markets"
-
-msgid "Max Mint"
-msgstr "Max Mint"
-
-msgid "Max Redeem"
-msgstr "Max Redeem"
 
 msgid "Me"
 msgstr "Me"
@@ -806,17 +794,8 @@ msgstr "Minimum Received"
 msgid "Minimum received after slippage"
 msgstr "Minimum received after slippage"
 
-msgid "Mint"
-msgstr "Mint"
-
-msgid "Mint Fee"
-msgstr "Mint Fee"
-
 msgid "Mint SOUL with Liquidity"
 msgstr "Mint SOUL with Liquidity"
-
-msgid "Minted"
-msgstr "Minted"
 
 msgid "Net Worth"
 msgstr "Net Worth"
@@ -871,6 +850,9 @@ msgstr "Oops!"
 
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
 msgstr "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
+
+msgid "Open"
+msgstr "Open"
 
 msgid "Oracle"
 msgstr "Oracle"
@@ -979,9 +961,6 @@ msgstr "Public good blockchain development guide."
 msgid "RETURNS"
 msgstr "RETURNS"
 
-msgid "Rate"
-msgstr "Rate"
-
 msgid "Rates"
 msgstr "Rates"
 
@@ -999,15 +978,6 @@ msgstr "Recent Transactions"
 
 msgid "Recipient"
 msgstr "Recipient"
-
-msgid "Redeem"
-msgstr "Redeem"
-
-msgid "Redeemed"
-msgstr "Redeemed"
-
-msgid "Redemption Fee"
-msgstr "Redemption Fee"
 
 msgid "Remove"
 msgstr "Remove"
@@ -1170,9 +1140,6 @@ msgstr "SoulSwap utilizes a token vault called CoffinBox that has balances separ
 
 msgid "Spanish"
 msgstr "Spanish"
-
-msgid "Stable"
-msgstr "Stable"
 
 msgid "Stake"
 msgstr "Stake"
@@ -1513,9 +1480,6 @@ msgstr "Wrong Network"
 
 msgid "Yield Details"
 msgstr "Yield Details"
-
-msgid "You Receive"
-msgstr "You Receive"
 
 msgid "You are creating a pool"
 msgstr "You are creating a pool"

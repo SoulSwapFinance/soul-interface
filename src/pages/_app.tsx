@@ -35,11 +35,11 @@ import { useActiveWeb3React } from 'services/web3'
 import { ApiDataProvider } from 'contexts/ApiDataProvider'
 import ModalProvider from 'contexts/ModalProvider'
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client'
-import config from 'features/aggregator/config'
-
+import { RPC } from 'connectors'
 
 const link = createHttpLink({
-  uri: config.providers[0].http,
+  // uri: RPC[250],
+  uri: 'https://xapi-nodee.fantom.network/',
   // headers: { authorization: token },  // The token in the auth header will be removed when the cookie approach is working)
 });
 
@@ -49,6 +49,7 @@ const client = new ApolloClient({
   link,
   connectToDevTools: process.env.NODE_ENV === "development",
 });
+
 
 const Web3ProviderNetwork = dynamic(() => import('components/Web3ProviderNetwork'), { ssr: false })
 
@@ -83,7 +84,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
 
   useEffect(() => {
     async function load(locale) {
-      i18n.loadLocaleData(locale, { plurals: plurals[locale.split('_')[0]] })
+      i18n.loadLocaleData(locale, { plurals: plurals[locale?.split('_')[0]] })
 
       try {
         // Load messages from AWS, use q session param to get latest version from cache

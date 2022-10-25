@@ -7,12 +7,13 @@ import Spacer from "../Spacer";
 import Column from "../Column";
 import styled, { ThemeContext } from "styled-components";
 import TokenBalance from "./TokenBalance";
-import ModalTitle from "./ModalTitle";
+// import ModalTitle from "./ModalTitle";
 import ModalContent from "./ModalContent";
 import Scrollbar from "../Scrollbar";
 import InputTextBox from "./InputTextBox";
 import { hexToUnit } from "../../utils/conversion";
 import { stickyTokensList } from "features/aggregator/token";
+import { NATIVE } from "sdk";
 import { FANTOM_NATIVE } from "components/InputCurrency/InputCurrencyBox";
 
 export const compare = (a: any, b: any) => {
@@ -24,28 +25,30 @@ export const compare = (a: any, b: any) => {
 const TokenSelectModal: React.FC<any> = ({
   onDismiss,
   ftmBalance,
+  // chainId,
   assets = [],
   setTokenSelected,
   includeNative,
 }) => {
-  const { color } = useContext(ThemeContext);
+  // const { color } = useContext(ThemeContext);
   const allAssets = includeNative
-    ? [{ ...FANTOM_NATIVE, balanceOf: ftmBalance }, ...assets]
+  ? [{ ...FANTOM_NATIVE, balanceOf: ftmBalance }, ...assets]
+    // ? [{ ...NATIVE[chainId], balanceOf: ftmBalance }, ...assets]
     : assets;
-  const erc20Assets = allAssets.filter((asset: any) => {
-    return asset.decimals > 0;
+  const erc20Assets = allAssets?.filter((asset: any) => {
+    return asset?.decimals > 0;
   });
   const sortedAssets = [...erc20Assets]
     .filter(
-      (asset: any) => !stickyTokensList.includes(asset.symbol.toLowerCase())
+      (asset: any) => !stickyTokensList?.includes(asset?.symbol.toLowerCase())
     )
     .sort(
       (a: any, b: any) =>
         compare(hexToUnit(b.balanceOf), hexToUnit(a.balanceOf)) ||
         compare(a.symbol, b.symbol)
     );
-  const stickyAssets = [...erc20Assets].filter((asset: any) =>
-    stickyTokensList.includes(asset.symbol.toLowerCase())
+    const stickyAssets = [...erc20Assets].filter((asset: any) =>
+    stickyTokensList.includes(asset?.symbol.toLowerCase())
   );
 
   const [search, setSearch] = useState("");
@@ -57,7 +60,7 @@ const TokenSelectModal: React.FC<any> = ({
   useEffect(() => {
     const filteredAssets = [...stickyAssets, ...sortedAssets].filter(
       (asset: any) => {
-        const result = asset.symbol.toLowerCase().search(search.toLowerCase());
+        const result = asset?.symbol.toLowerCase().search(search.toLowerCase());
         return result >= 0;
       }
     );
@@ -67,20 +70,23 @@ const TokenSelectModal: React.FC<any> = ({
 
   return (
     <Modal
-      style={{ padding: "20px 24px", maxHeight: "80vh" }}
+      style={{ padding: "16px 0px", maxHeight: "80vh" }}
       onDismiss={onDismiss}
     >
-      <ModalTitle text="Select token" />
+      {/* <ModalTitle text="Select Token" /> */}
       <InputTextBox
+      color={'black'}
         text={search}
         setText={setSearch}
         placeholder="Search..."
         small
       />
-      <Spacer />
-      <ModalContent style={{ padding: "16px 0px" }}>
+      <Spacer size="sm" />
+      <ModalContent 
+      style={{ padding: "12px 0px" }}
+      >
         <Column>
-          <Row
+          {/* <Row
             style={{
               justifyContent: "space-between",
               padding: "0 1rem .5rem 1rem",
@@ -88,36 +94,40 @@ const TokenSelectModal: React.FC<any> = ({
           >
             <Typo3
               style={{
-                textAlign: "left",
+                textAlign: "center",
                 width: "8rem",
-                color: color.greys.grey(),
+                color: '#B7BECB',
               }}
             >
-              TOKEN NAME
+              SYMBOL
             </Typo3>
             <Typo3
               style={{
-                textAlign: "right",
+                textAlign: "center",
                 width: "8rem",
-                color: color.greys.grey(),
+                color: '#B7BECB',
               }}
             >
               BALANCE
             </Typo3>
-          </Row>
+          </Row> */}
           <Scrollbar style={{ height: "60vh" }}>
             <Column>
               {listAssets.map((asset: any) => {
                 return (
                   <StyledOverlayButton
-                    key={"token-select-" + asset.address}
+                    key={"token-select-" + asset?.address}
                     onClick={() => {
                       setTokenSelected(asset);
                       onDismiss();
                     }}
-                    style={{ padding: ".8rem" }}
+                    style={{ padding: ".8rem 0.2rem 0rem" }}
                   >
-                    <TokenBalance token={asset} imageSize="24px" />
+                    <TokenBalance 
+                      token={asset} 
+                      height={'24px'} 
+                      width={'24px'} 
+                      imageSize="24px" />
                   </StyledOverlayButton>
                 );
               })}
@@ -131,7 +141,7 @@ const TokenSelectModal: React.FC<any> = ({
 
 const StyledOverlayButton = styled(OverlayButton)`
   :hover {
-    background-color: ${(props) => props.theme.color.primary.semiWhite(0.1)};
+    background-color: ${'#000000'};
   }
 `;
 

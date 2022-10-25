@@ -262,9 +262,6 @@ msgstr ""
 msgid "Claim and Autostake"
 msgstr ""
 
-msgid "Claimable Amount"
-msgstr ""
-
 msgid "Claimable: Fetching Claimable Amount"
 msgstr ""
 
@@ -759,9 +756,6 @@ msgstr ""
 msgid "MAX"
 msgstr ""
 
-msgid "MINT SOR"
-msgstr ""
-
 msgid "Manage"
 msgstr ""
 
@@ -775,12 +769,6 @@ msgid "Margin"
 msgstr ""
 
 msgid "Markets"
-msgstr ""
-
-msgid "Max Mint"
-msgstr ""
-
-msgid "Max Redeem"
 msgstr ""
 
 msgid "Me"
@@ -801,16 +789,7 @@ msgstr ""
 msgid "Minimum received after slippage"
 msgstr ""
 
-msgid "Mint"
-msgstr ""
-
-msgid "Mint Fee"
-msgstr ""
-
 msgid "Mint SOUL with Liquidity"
-msgstr ""
-
-msgid "Minted"
 msgstr ""
 
 msgid "Net Worth"
@@ -865,6 +844,9 @@ msgid "Oops!"
 msgstr ""
 
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
+msgstr ""
+
+msgid "Open"
 msgstr ""
 
 msgid "Oracle"
@@ -970,9 +952,6 @@ msgstr ""
 msgid "RETURNS"
 msgstr ""
 
-msgid "Rate"
-msgstr ""
-
 msgid "Rates"
 msgstr ""
 
@@ -989,15 +968,6 @@ msgid "Recent Transactions"
 msgstr ""
 
 msgid "Recipient"
-msgstr ""
-
-msgid "Redeem"
-msgstr ""
-
-msgid "Redeemed"
-msgstr ""
-
-msgid "Redemption Fee"
 msgstr ""
 
 msgid "Remove"
@@ -1160,9 +1130,6 @@ msgid "SoulSwap utilizes a token vault called CoffinBox that has balances separa
 msgstr ""
 
 msgid "Spanish"
-msgstr ""
-
-msgid "Stable"
 msgstr ""
 
 msgid "Stake"
@@ -1501,9 +1468,6 @@ msgid "Wrong Network"
 msgstr ""
 
 msgid "Yield Details"
-msgstr ""
-
-msgid "You Receive"
 msgstr ""
 
 msgid "You are creating a pool"

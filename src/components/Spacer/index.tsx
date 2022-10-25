@@ -5,8 +5,18 @@ interface SpacerProps {
   size?: "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
 }
 
+const spacing = {
+  1: 4,
+  2: 8,
+  3: 16,
+  4: 24,
+  5: 32,
+  6: 48,
+  7: 64,
+}
+
 const Spacer: React.FC<SpacerProps> = ({ size = "md" }) => {
-  const { spacing } = useContext(ThemeContext);
+  // const { spacing } = useContext(ThemeContext);
 
   let s: number;
   switch (size) {

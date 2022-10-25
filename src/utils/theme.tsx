@@ -44,6 +44,7 @@ export const breakpoints = {
   s: '600px',
   md: '959px',
   l: '1360px',
+  lg: '1360px',
   xl: '1620px',
 }
 

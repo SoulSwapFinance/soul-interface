@@ -23,7 +23,6 @@ const InputTextBox: React.FC<any> = ({
   small = false,
   pre = null,
 }) => {
-//   const { color } = useContext(ThemeContext);
   const [internalError, setInternalError] = useState(error);
 
   const onHandleChange = (value: string) => {
@@ -56,12 +55,12 @@ const InputTextBox: React.FC<any> = ({
         </Row>
       )}
       <Spacer 
-    //   size="xs" 
+      size="xs" 
       />
       {textArea ? (
         <Row
           style={{
-            backgroundColor: "#202F49",
+            backgroundColor: "#444444",
             borderRadius: "8px",
             height: "200px",
             alignItems: "center",
@@ -84,16 +83,16 @@ const InputTextBox: React.FC<any> = ({
       ) : (
         <Row
           style={{
-            backgroundColor: "#202F49",
+            backgroundColor: "#444444",
             borderRadius: "8px",
-            height: small ? "48px" : "64px",
+            height: small ? "36px" : "48px",
             alignItems: "center",
           }}
         >
           {pre && (
             <>
           <Spacer 
-          // size="sm" 
+          size="sm" 
           />              
           <Typo2 style={{ fontWeight: !disabled ? "bold" : "normal" }}>
                 {pre}
@@ -101,7 +100,7 @@ const InputTextBox: React.FC<any> = ({
             </>
           )}
         <Spacer 
-          // size="sm" 
+          size="sm" 
         />
         <Input
             fontSize={small && "16px"}
@@ -129,7 +128,7 @@ const InputTextBox: React.FC<any> = ({
       {!small && (
         <>
           <Spacer 
-        //   size="xs" 
+          // size="xs" 
           />
           <Row
             style={{
@@ -141,7 +140,7 @@ const InputTextBox: React.FC<any> = ({
               <InputError fontSize="18px" error={internalError} />
             ) : (
               <Spacer 
-            //   size="lg"
+              size="lg"
             />
             )}
             {maxLength && (
