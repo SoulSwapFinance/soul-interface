@@ -75,15 +75,18 @@ const TokenSelectModal: React.FC<any> = ({
     >
       {/* <ModalTitle text="Select Token" /> */}
       <InputTextBox
+      color={'black'}
         text={search}
         setText={setSearch}
         placeholder="Search..."
         small
       />
-      <Spacer />
-      <ModalContent style={{ padding: "12px 0px" }}>
+      <Spacer size="sm" />
+      <ModalContent 
+      style={{ padding: "12px 0px" }}
+      >
         <Column>
-          <Row
+          {/* <Row
             style={{
               justifyContent: "space-between",
               padding: "0 1rem .5rem 1rem",
@@ -91,7 +94,7 @@ const TokenSelectModal: React.FC<any> = ({
           >
             <Typo3
               style={{
-                textAlign: "left",
+                textAlign: "center",
                 width: "8rem",
                 color: '#B7BECB',
               }}
@@ -100,14 +103,14 @@ const TokenSelectModal: React.FC<any> = ({
             </Typo3>
             <Typo3
               style={{
-                textAlign: "right",
+                textAlign: "center",
                 width: "8rem",
                 color: '#B7BECB',
               }}
             >
               BALANCE
             </Typo3>
-          </Row>
+          </Row> */}
           <Scrollbar style={{ height: "60vh" }}>
             <Column>
               {listAssets.map((asset: any) => {
@@ -120,7 +123,11 @@ const TokenSelectModal: React.FC<any> = ({
                     }}
                     style={{ padding: ".8rem 0.2rem 0rem" }}
                   >
-                    <TokenBalance token={asset} height={'24px'} width={'24px'} imageSize="24px" />
+                    <TokenBalance 
+                      token={asset} 
+                      height={'24px'} 
+                      width={'24px'} 
+                      imageSize="24px" />
                   </StyledOverlayButton>
                 );
               })}

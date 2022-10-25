@@ -9,7 +9,7 @@ const StyledModalContent = styled.div`
   width: 100%;
   padding: ${(props) =>
     props.style?.padding ? props.style.padding : `${props.theme.spacing[3]}px`};
-  background-color: #172641;
+  background-color: #333333;
   border-radius: 8px;
   text-align: center;
   @media (max-width: ${576}px) {

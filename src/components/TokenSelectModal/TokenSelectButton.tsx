@@ -20,7 +20,6 @@ const TokenSelectButton: React.FC<any> = ({
 }) => {
   const [onPresentSelectTokenModal] = useModal(
     <TokenSelectModal
-      // chainId={chainId}
       ftmBalance={ftmBalance}
       assets={assets}
       setTokenSelected={setTokenSelected}
@@ -29,16 +28,16 @@ const TokenSelectButton: React.FC<any> = ({
     "token-select-modal"
   );
   return (
-    <div className="grid grid-cols-1 mr-1rem">
+    <div className="grid grid-cols-1 sm:ml-10">
     <SubmitButton
-      style={{ flex: 0.25, padding: "12px" }}
-      variant="filled"
+      // style={{ marginLeft: '.1rem', flex: 0.25, padding: "1px" }}
+      variant="bordered"
       primaryColor={'black'}
       onClick={() => onPresentSelectTokenModal()}
     >
-      {/* <Row  */}
-      {/* // style={{ alignItems: "center" }}
-      // > */}
+      {/* <Row
+      style={{ alignItems: "center" }}
+      /> */}
         <Image
           alt=""
           width="36px"
@@ -47,17 +46,17 @@ const TokenSelectButton: React.FC<any> = ({
           style={{ height: "36px", width: "36px" }}
         />
         {/* <Spacer 
+        size="xs" 
+        /> */}
+        {/* <Typo2 className={'font-bold'}>{currentToken?.symbol}</Typo2> */}
+        {/* <Spacer 
         size="xxs" 
         /> */}
-        {/* <Typo2>{currentToken?.symbol}</Typo2> */}
-        <Spacer 
-        size="sm" 
-        />
-        <Image
-          width="8px"
-          height="8px"
+        {/* <Image
+          width="6px"
+          height="6px"
           alt="" 
-          src={vShape} />
+          src={vShape} /> */}
       {/* </Row> */}
     </SubmitButton>    
     </div>

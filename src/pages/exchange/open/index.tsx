@@ -43,16 +43,16 @@ import useCoingeckoApi, {
   COINGECKO_BASEURL,
   COINGECKO_METHODS,
 } from "hooks/useCoinGeckoAPI";
-import Chart from "components/Aggregator/Chart";
+// import Chart from "components/Aggregator/Chart";
 // import { formatDate } from "utils/common";
 import FadeInOut from "components/AnimationFade";
 import useDetectResolutionType from "hooks/useDetectResolutionType";
-import { formatDate } from "functions/format";
+// import { formatDate } from "functions/format";
 import { useActiveWeb3React } from "services/web3";
 import { ChainId, OPEN_OCEAN_EXCHANGE_ADDRESS, Token, WNATIVE } from "sdk";
 // import { useUserTokenInfo } from "hooks/useAPI";
-import { Toggle } from "components/Toggle";
-import { classNames } from "functions";
+// import { Toggle } from "components/Toggle";
+// import { classNames } from "functions";
 import { DoubleGlowShadowV2 } from "components/DoubleGlow";
 import Container from "components/Container";
 import SwapHeader from "features/swap/SwapHeader";
@@ -83,6 +83,7 @@ const SwapTokenInput: React.FC<any> = ({
     "0",
   ]);
   const [maximum, setMaximum] = useState(null);
+
   const handleSetMax = () => {
     setError(null);
     setInputValue(
@@ -100,6 +101,26 @@ const SwapTokenInput: React.FC<any> = ({
       )
     );
   };
+  
+  const handleSetHalf = () => {
+    setError(null);
+    setInputValue(
+      weiToMaxUnit(
+        tokenBalance
+        .div(2)
+          .sub(
+            BigNumber.from(10).pow(
+              token?.address === "0x0000000000000000000000000000000000000000"
+                ? token?.decimals
+                : 1
+            )
+          )
+          .toString(),
+        token?.decimals
+      )
+    );
+  };
+
   const handleTokenChange = (token: any) => {
     setError(null);
     setToken(token);
@@ -139,9 +160,8 @@ const SwapTokenInput: React.FC<any> = ({
           token={token}
         />
         <Row
-          style={{ flex: 0.25, alignItems: "right" }}
+          style={{ flex: 0.2, alignItems: "right" }}
         >
-          <Spacer />
           <Row
             style={{
               backgroundColor: "#000000",
@@ -151,7 +171,6 @@ const SwapTokenInput: React.FC<any> = ({
             }}
           >
             <TokenSelectButton
-              // chainId = {chainId}
               currentToken={token}
               ftmBalance={BigNumber.from(tokenBalance)}
               assets={tokenList}
@@ -159,23 +178,30 @@ const SwapTokenInput: React.FC<any> = ({
               includeNative={false}
             />
           </Row>
-
-          {/* <Spacer size="sm" /> */}
         </Row>
       </Row>
+      {error && <InputError error={error} />}
       {!disabledInput && (
+        <div className="grid grid-cols-2 gap-1">
+        
         <SubmitButton
           fontSize="16px"
           primaryColor={getChainColor(chainId)}
-          // color={'grey'}
-          // variant="tertiary"
+          variant="filled"
+          onClick={handleSetHalf}
+        >
+          {"50%"}
+        </SubmitButton>
+        <SubmitButton
+          fontSize="16px"
+          primaryColor={getChainColor(chainId)}
           variant="filled"
           onClick={handleSetMax}
         >
           {"MAX"}
         </SubmitButton>
+        </div>
       )}
-      {error && <InputError error={error} />}
     </Column>
   );
 };
@@ -186,8 +212,6 @@ export const SwapTokensContent: React.FC<any> = ({
   setSwapRoute,
   refetchTimer,
 }) => {
-  // const { color } = useContext(ThemeContext);
-  // const { walletContext } = useWalletProvider();
   const { account, chainId } = useActiveWeb3React()
   const { sendTx } = useFantomNative();
   const { getSwapQuote, getQuote } = useOpenOceanApi();
@@ -272,7 +296,7 @@ export const SwapTokensContent: React.FC<any> = ({
   useEffect(() => {
     if (tokenList) {
       setInToken(tokenList?.find((token: OOToken) => token.symbol === "FTM"));
-      setOutToken(tokenList.find((token: OOToken) => token.symbol === "USDC"));
+      setOutToken(tokenList.find((token: OOToken) => token.symbol === "SOUL"));
     }
   }, [tokenList]);
 
@@ -510,7 +534,7 @@ export const SwapTokensContent: React.FC<any> = ({
       />
       <ContentBox style={{ backgroundColor: "#000000" }}>
         <Column style={{ width: "100%", gap: "1rem" }}>
-          <Typo2
+          {/* <Typo2
             style={{
               width: "100%",
               display: "flex",
@@ -526,8 +550,8 @@ export const SwapTokensContent: React.FC<any> = ({
             ) : (
               "-"
             )}
-          </Typo2>
-          <Typo2
+          </Typo2> */}
+          {/* <Typo2
             style={{
               width: "100%",
               display: "flex",
@@ -543,7 +567,7 @@ export const SwapTokensContent: React.FC<any> = ({
             ) : (
               "-"
             )}
-          </Typo2>
+          </Typo2> */}
           <Typo2
             style={{
               width: "100%",
@@ -567,254 +591,254 @@ export const SwapTokensContent: React.FC<any> = ({
   );
 };
 
-const TokenChart: FC<any> = ({ showChart, activeTokens, refetchTimer, width }) => {
-  const { getMarketHistory } = useCoingeckoApi();
-  const { apiData } = useApiData();
-  const [interval, setInterval] = useState("15m");
-  const [chartData, setChartData] = useState(null);
-  const [pricePoint, setPricePoint] = useState(null);
-  const [priceTime, setPriceTime] = useState(null);
+// const TokenChart: FC<any> = ({ showChart, activeTokens, refetchTimer, width }) => {
+//   const { getMarketHistory } = useCoingeckoApi();
+//   const { apiData } = useApiData();
+//   const [interval, setInterval] = useState("15m");
+//   const [chartData, setChartData] = useState(null);
+//   const [pricePoint, setPricePoint] = useState(null);
+//   const [priceTime, setPriceTime] = useState(null);
 
-  const handleCrosshairData = (data: any[]) => {
-    setPricePoint(data[1] ? data[1] : chartData[chartData.length - 1].value);
-    setPriceTime(data[0] ? data[0] : chartData[chartData.length - 1].time);
-  };
+//   const handleCrosshairData = (data: any[]) => {
+//     setPricePoint(data[1] ? data[1] : chartData[chartData.length - 1].value);
+//     setPriceTime(data[0] ? data[0] : chartData[chartData.length - 1].time);
+//   };
 
-  const inTokenChartData =
-    apiData[
-      COINGECKO_BASEURL +
-      COINGECKO_METHODS.GET_MARKET_CHART +
-      `/${activeTokens[0]?.code}/market_chart`
-    ]?.response?.data;
-  const outTokenChartData =
-    apiData[
-      COINGECKO_BASEURL +
-      COINGECKO_METHODS.GET_MARKET_CHART +
-      `/${activeTokens[1]?.code}/market_chart`
-    ]?.response?.data;
+//   const inTokenChartData =
+//     apiData[
+//       COINGECKO_BASEURL +
+//       COINGECKO_METHODS.GET_MARKET_CHART +
+//       `/${activeTokens[0]?.code}/market_chart`
+//     ]?.response?.data;
+//   const outTokenChartData =
+//     apiData[
+//       COINGECKO_BASEURL +
+//       COINGECKO_METHODS.GET_MARKET_CHART +
+//       `/${activeTokens[1]?.code}/market_chart`
+//     ]?.response?.data;
 
-  const intervalToDays = {
-    "5m": 1,
-    "15m": 3,
-    "30m": 7,
-    "1h": 14,
-    "1d": 30,
-  } as any;
+//   const intervalToDays = {
+//     "5m": 1,
+//     "15m": 3,
+//     "30m": 7,
+//     "1h": 14,
+//     "1d": 30,
+//   } as any;
 
-  useEffect(() => {
-    if (activeTokens[0]?.code !== "null" && activeTokens[1]?.code !== "null") {
-      getMarketHistory(activeTokens[0]?.code, intervalToDays[interval], "usd");
-      getMarketHistory(activeTokens[1]?.code, intervalToDays[interval], "usd");
-      return;
-    }
-    setChartData(null);
-  }, [activeTokens, interval, refetchTimer]);
+//   useEffect(() => {
+//     if (activeTokens[0]?.code !== "null" && activeTokens[1]?.code !== "null") {
+//       getMarketHistory(activeTokens[0]?.code, intervalToDays[interval], "usd");
+//       getMarketHistory(activeTokens[1]?.code, intervalToDays[interval], "usd");
+//       return;
+//     }
+//     setChartData(null);
+//   }, [activeTokens, interval, refetchTimer]);
 
-  useEffect(() => {
-    if (inTokenChartData && outTokenChartData) {
-      const inReversed = inTokenChartData.prices.reverse();
-      const outReversed = outTokenChartData.prices.reverse();
+//   useEffect(() => {
+//     if (inTokenChartData && outTokenChartData) {
+//       const inReversed = inTokenChartData.prices.reverse();
+//       const outReversed = outTokenChartData.prices.reverse();
 
-      const graphDataReversed = inReversed.map(
-        (dataPoint: any[], index: number) => {
-          if (outReversed.length > index) {
-            return {
-              time: parseInt((dataPoint[0] / 1000).toString()),
-              value: dataPoint[1] / outReversed[index][1],
-            };
-          }
-          return null;
-        }
-      );
-      const graphData = graphDataReversed
-        .filter((data: any) => data !== null)
-        .reverse();
+//       const graphDataReversed = inReversed.map(
+//         (dataPoint: any[], index: number) => {
+//           if (outReversed.length > index) {
+//             return {
+//               time: parseInt((dataPoint[0] / 1000).toString()),
+//               value: dataPoint[1] / outReversed[index][1],
+//             };
+//           }
+//           return null;
+//         }
+//       );
+//       const graphData = graphDataReversed
+//         .filter((data: any) => data !== null)
+//         .reverse();
 
-      setChartData(graphData);
-      setPricePoint(graphData[graphData.length - 1].value);
-      setPriceTime(graphData[graphData.length - 1].time);
-      // setShowChart(true)
-    }
-  }, [inTokenChartData, outTokenChartData]);
+//       setChartData(graphData);
+//       setPricePoint(graphData[graphData.length - 1].value);
+//       setPriceTime(graphData[graphData.length - 1].time);
+//       // setShowChart(true)
+//     }
+//   }, [inTokenChartData, outTokenChartData]);
 
-  useEffect(() => {
-    if (!chartData) {
-      setPricePoint(null);
-      setPriceTime(null);
-      // setShowChart(false)
-    }
-  }, [chartData]);
+//   useEffect(() => {
+//     if (!chartData) {
+//       setPricePoint(null);
+//       setPriceTime(null);
+//       // setShowChart(false)
+//     }
+//   }, [chartData]);
 
-  return (
-    <div className="grid">
+//   return (
+//     <div className="grid">
 
-      {showChart &&
-        <Column>
-          <Row style={{ justifyContent: "space-between" }}>
-            <Column>
-              <Row>
-                <Image
-                  alt={`${activeTokens[0]?.symbol} icon`}
-                  width="40px" height={"40px"}
-                  style={{ height: "40px", width: "40px", zIndex: 2 }}
-                  src={activeTokens[0]?.icon}
-                />
-                <Spacer
-                  size="lg"
-                />
-                <Image
-                  alt={`${activeTokens[1]?.symbol} icon`}
-                  width="40px" height={"40px"}
-                  src={activeTokens[1]?.icon}
-                  style={{ height: "40px", width: "40px", marginLeft: "-.5rem" }}
-                />
-                <Spacer />
-                {activeTokens[0]?.symbol}
-                <Spacer
-                  size="xs"
-                />
-                /
-                <Spacer
-                  size="xs"
-                />
-                {activeTokens[1]?.symbol}
-              </Row>
-              <Spacer
-                size="sm"
-              />
-              <Row>
-                {["5m", "15m", "30m", "1h", "1d"].map((selectInterval) => {
-                  return (
-                    <OverlayButton
-                      key={`interval-${selectInterval}`}
-                      onClick={() => setInterval(selectInterval)}
-                    >
-                      <Typo1
-                        style={{
-                          // justifyContent: 'space-between',
-                          fontWeight:
-                            selectInterval === interval ? "bold" : "normal",
-                        }}
-                      >
-                        {selectInterval}
-                      </Typo1>
-                    </OverlayButton>
-                  );
-                })}
-              </Row>
-            </Column>
-            <Column
-              style={{ alignItems: "center" }}
-            >
-              {pricePoint ? pricePoint.toFixed(6) : ""}
-              <Spacer
-                size="sm"
-              />
-              <Typo1>
-                {priceTime ? formatDate(new Date(priceTime * 1000)) : ""}
-              </Typo1>
-            </Column>
-          </Row>
-          {chartData && showChart && (
-            <div key={width + (chartData?.length || 0)}>
-              <Chart data={chartData} handleCrossHairData={handleCrosshairData} />
-            </div>
-          )}
-        </Column>
-      }
-    </div>
-  )
-}
+//       {showChart &&
+//         <Column>
+//           <Row style={{ justifyContent: "space-between" }}>
+//             <Column>
+//               <Row>
+//                 <Image
+//                   alt={`${activeTokens[0]?.symbol} icon`}
+//                   width="40px" height={"40px"}
+//                   style={{ height: "40px", width: "40px", zIndex: 2 }}
+//                   src={activeTokens[0]?.icon}
+//                 />
+//                 <Spacer
+//                   size="lg"
+//                 />
+//                 <Image
+//                   alt={`${activeTokens[1]?.symbol} icon`}
+//                   width="40px" height={"40px"}
+//                   src={activeTokens[1]?.icon}
+//                   style={{ height: "40px", width: "40px", marginLeft: "-.5rem" }}
+//                 />
+//                 <Spacer />
+//                 {activeTokens[0]?.symbol}
+//                 <Spacer
+//                   size="xs"
+//                 />
+//                 /
+//                 <Spacer
+//                   size="xs"
+//                 />
+//                 {activeTokens[1]?.symbol}
+//               </Row>
+//               <Spacer
+//                 size="sm"
+//               />
+//               <Row>
+//                 {["5m", "15m", "30m", "1h", "1d"].map((selectInterval) => {
+//                   return (
+//                     <OverlayButton
+//                       key={`interval-${selectInterval}`}
+//                       onClick={() => setInterval(selectInterval)}
+//                     >
+//                       <Typo1
+//                         style={{
+//                           // justifyContent: 'space-between',
+//                           fontWeight:
+//                             selectInterval === interval ? "bold" : "normal",
+//                         }}
+//                       >
+//                         {selectInterval}
+//                       </Typo1>
+//                     </OverlayButton>
+//                   );
+//                 })}
+//               </Row>
+//             </Column>
+//             <Column
+//               style={{ alignItems: "center" }}
+//             >
+//               {pricePoint ? pricePoint.toFixed(6) : ""}
+//               <Spacer
+//                 size="sm"
+//               />
+//               <Typo1>
+//                 {priceTime ? formatDate(new Date(priceTime * 1000)) : ""}
+//               </Typo1>
+//             </Column>
+//           </Row>
+//           {chartData && showChart && (
+//             <div key={width + (chartData?.length || 0)}>
+//               <Chart data={chartData} handleCrossHairData={handleCrosshairData} />
+//             </div>
+//           )}
+//         </Column>
+//       }
+//     </div>
+//   )
+// }
 
-const SwapRoute: FC<any> = ({ route, tokenList, activeTokens }) => {
-  const RouteBox = (part: any, first: boolean) => {
-    const token = tokenList.find(
-      (token: any) =>
-        token.address.toLowerCase() ===
-        (first ? part.from.toLowerCase() : part.to.toLowerCase())
-    );
-    return (
-      <div className="flex justify-between">
-        <ContentBox
-          key={`route-column-${part.parts}-${part.dexes[0].dex}-${token?.symbol}`}
-          style={{ padding: ".5rem", width: "100%" }}
-        >
-          <Row style={{ alignItems: "center" }}>
-            <Image
-              alt={`${token?.symbol} icon`}
-              width="36px" height={"36px"} style={{ height: "36px", width: "36px" }} src={token?.icon} />
-            <Spacer
-              size="lg"
-            />
-            <Column>
-              <Typo3 style={{ fontWeight: "bold" }}>{token.symbol}</Typo3>
-              <Typo3>{part.dexes[0].dex}</Typo3>
-            </Column>
-          </Row>
-        </ContentBox>
-      </div>
-    );
-  };
+// const SwapRoute: FC<any> = ({ route, tokenList, activeTokens }) => {
+//   const RouteBox = (part: any, first: boolean) => {
+//     const token = tokenList.find(
+//       (token: any) =>
+//         token.address.toLowerCase() ===
+//         (first ? part.from.toLowerCase() : part.to.toLowerCase())
+//     );
+//     return (
+//       <div className="flex justify-between">
+//         <ContentBox
+//           key={`route-column-${part.parts}-${part.dexes[0].dex}-${token?.symbol}`}
+//           style={{ padding: ".5rem", width: "100%" }}
+//         >
+//           <Row style={{ alignItems: "center" }}>
+//             <Image
+//               alt={`${token?.symbol} icon`}
+//               width="36px" height={"36px"} style={{ height: "36px", width: "36px" }} src={token?.icon} />
+//             <Spacer
+//               size="lg"
+//             />
+//             <Column>
+//               <Typo3 style={{ fontWeight: "bold" }}>{token.symbol}</Typo3>
+//               <Typo3>{part.dexes[0].dex}</Typo3>
+//             </Column>
+//           </Row>
+//         </ContentBox>
+//       </div>
+//     );
+//   };
 
-  return (
-    <Column style={{ width: "100%" }}>
-      {/* <Heading3>Routing</Heading3>
-      <Spacer
-        size="xs"
-      /> */}
-      <Row
-        style={{ justifyContent: "space-between", alignItems: "center" }}
-      >
-        <Row style={{ alignItems: "center" }}>
-          <Image
-            alt={`${activeTokens[0]?.symbol} logo`}
-            width="40px" height={"40px"}
-            style={{ height: "40px", width: "40px" }}
-            src={activeTokens[0]?.icon}
-          />
-          <Spacer
-            size="sm"
-          />
-          <div
-            style={{ width: "1px", height: "30px", backgroundColor: "#232F46" }}
-          />
-        </Row>
-        <Column style={{ gap: ".2rem" }}>
-          {route?.routes?.map((routePart: any) => {
-            return (
-              <Row
-                key={`route-row-${routePart.parts}`}
-                style={{
-                  gap: ".2rem",
-                  flexWrap: "wrap",
-                  justifyContent: "space-between",
-                }}
-              >
-                {routePart.subRoutes.map((subRoutePart: any, index: number) => {
-                  return RouteBox(subRoutePart, index === 0);
-                })}
-              </Row>
-            );
-          })}
-        </Column>
-        <Row style={{ alignItems: "center" }}>
-          <div
-            style={{ width: "1px", height: "30px", backgroundColor: "#232F46" }}
-          />
-          <Spacer
-            size="sm"
-          />
-          <Image
-            alt={`${activeTokens[1]?.symbol} logo`}
-            width="40px" height={"40px"}
-            style={{ height: "40px", width: "40px" }}
-            src={activeTokens[1]?.icon}
-          />
-        </Row>
-      </Row>
-    </Column>
-  );
-};
+//   return (
+//     <Column style={{ width: "100%" }}>
+//       {/* <Heading3>Routing</Heading3>
+//       <Spacer
+//         size="xs"
+//       /> */}
+//       <Row
+//         style={{ justifyContent: "space-between", alignItems: "center" }}
+//       >
+//         <Row style={{ alignItems: "center" }}>
+//           <Image
+//             alt={`${activeTokens[0]?.symbol} logo`}
+//             width="40px" height={"40px"}
+//             style={{ height: "40px", width: "40px" }}
+//             src={activeTokens[0]?.icon}
+//           />
+//           <Spacer
+//             size="sm"
+//           />
+//           <div
+//             style={{ width: "1px", height: "30px", backgroundColor: "#232F46" }}
+//           />
+//         </Row>
+//         <Column style={{ gap: ".2rem" }}>
+//           {route?.routes?.map((routePart: any) => {
+//             return (
+//               <Row
+//                 key={`route-row-${routePart.parts}`}
+//                 style={{
+//                   gap: ".2rem",
+//                   flexWrap: "wrap",
+//                   justifyContent: "space-between",
+//                 }}
+//               >
+//                 {routePart.subRoutes.map((subRoutePart: any, index: number) => {
+//                   return RouteBox(subRoutePart, index === 0);
+//                 })}
+//               </Row>
+//             );
+//           })}
+//         </Column>
+//         <Row style={{ alignItems: "center" }}>
+//           <div
+//             style={{ width: "1px", height: "30px", backgroundColor: "#232F46" }}
+//           />
+//           <Spacer
+//             size="sm"
+//           />
+//           <Image
+//             alt={`${activeTokens[1]?.symbol} logo`}
+//             width="40px" height={"40px"}
+//             style={{ height: "40px", width: "40px" }}
+//             src={activeTokens[1]?.icon}
+//           />
+//         </Row>
+//       </Row>
+//     </Column>
+//   );
+// };
 
 const Open = () => {
   const { getTokenList } = useOpenOceanApi();
@@ -827,7 +851,7 @@ const Open = () => {
   const [showChart, setShowChart] = useState(false)
   const [activeTokens, setActiveTokens] = useState(
     [tokenList?.find((token: OOToken) => token.symbol === "FTM"),
-    tokenList?.find((token: OOToken) => token.symbol === "USDC")]
+    tokenList?.find((token: OOToken) => token.symbol === "SOUL")]
     // {
     //   address: "0x0000000000000000000000000000000000000000",
     //   code: "fantom",
@@ -945,7 +969,7 @@ const Open = () => {
                     refetchTimer={refetchTimer}
                   />
                   <Column style={{ flex: 2, minWidth: "100%" }}>
-                    <div className={classNames(chainId == ChainId.FANTOM ? `flex flex-cols-2 gap-0 text-white justify-end` : 'hidden')}>
+                    {/* <div className={classNames(chainId == ChainId.FANTOM ? `flex flex-cols-2 gap-0 text-white justify-end` : 'hidden')}>
                       <Toggle
                         id="toggle-button"
                         optionA="Chart"
@@ -961,21 +985,21 @@ const Open = () => {
                             }
                         }
                       />
-                    </div>
-                    {showChart &&
+                    </div> */}
+                    {/* {showChart &&
                       <TokenChart
                         showChart={showChart}
                         width={width}
                         activeTokens={activeTokens}
                         refetchTimer={refetchTimer}
                       />
-                    }
+                    } */}
                     <Spacer />
-                    <SwapRoute
+                    {/* <SwapRoute
                       route={swapRoute}
                       tokenList={tokenList}
                       activeTokens={activeTokens}
-                    />
+                    /> */}
                   </Column>
                 </Row>
               </div>
