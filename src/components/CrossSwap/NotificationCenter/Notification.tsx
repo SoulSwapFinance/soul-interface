@@ -27,6 +27,7 @@ import {
   Typography,
 } from 'soulswap-ui'
 import React, { FC } from 'react'
+// import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useWaitForTransaction } from 'wagmi'
 
 export const STARGATE_TOKEN = new Token({
@@ -43,6 +44,7 @@ export const Notification: FC<{ data: string; showExtra?: boolean; hideStatus?: 
   hideStatus = false,
 }) => {
   const notification: NotificationData = JSON.parse(data)
+  // const { account } = useActiveWeb3React()
   const { status } = useWaitForTransaction({
     chainId: notification.chainId,
     // @ts-ignore
