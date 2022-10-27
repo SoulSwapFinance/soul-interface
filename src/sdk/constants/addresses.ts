@@ -318,11 +318,22 @@ export const MULTICALL_ADDRESS: { [chainId in ChainId]: string } = {
 }
 
 export const COFFIN_BOX_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
+  [ChainId.ETHEREUM]: '0xBC321C2e7A7FA48DcF0C09E088950C8172c2Ecc9',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xF539C37275e947F24480fAb9f7e302aE827570b2',
   [ChainId.AVALANCHE]: '0x51d7d0d03A9E38Ba550f24cea28B992AD2350fee',
+  [ChainId.MATIC]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
+
+export const SOUL_X_SWAP_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x64f2e9dA58C3B521Ef2564FC68FBFA5E32A2a5df', // OCT22
+  [ChainId.AVALANCHE]: '0x4f1B22481E83D222969daE360B0C83C656900B11', // OCT22
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
