@@ -125,12 +125,14 @@ export const useBalances: UseBalances = ({
             rebase
           )
 
-          result[validatedTokens[i].address] = {
+          result[validatedTokens[i].address] = {  
+            // TODO: UPDATE TO COFFINBOX ON SDK
             [FundSource.BENTOBOX]: amount.greaterThan(ZERO) ? amount : Amount.fromRawAmount(validatedTokens[i], '0'),
             [FundSource.WALLET]: Amount.fromRawAmount(validatedTokens[i], '0'),
           }
         } else {
           result[validatedTokens[i].address] = {
+            // TODO: UPDATE TO COFFINBOX ON SDK
             [FundSource.BENTOBOX]: Amount.fromRawAmount(validatedTokens[i], '0'),
             [FundSource.WALLET]: Amount.fromRawAmount(validatedTokens[i], '0'),
           }
@@ -141,6 +143,7 @@ export const useBalances: UseBalances = ({
       const amount = value ? JSBI.BigInt(value.toString()) : undefined
       if (!result[validatedTokens[i].address]) {
         result[validatedTokens[i].address] = {
+          // TODO: UPDATE TO COFFINBOX ON SDK
           [FundSource.BENTOBOX]: Amount.fromRawAmount(validatedTokens[i], '0'),
           [FundSource.WALLET]: Amount.fromRawAmount(validatedTokens[i], '0'),
         }
