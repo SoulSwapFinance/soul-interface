@@ -28076,6 +28076,11 @@ soulswap-redux-localstorage@^0.0.2:
   resolved "https://registry.yarnpkg.com/soulswap-redux-localstorage/-/soulswap-redux-localstorage-0.0.2.tgz#14d1605f293aff1f4e9a7c3addfbdaa4073d8650"
   integrity sha512-9k4mnmkff6gA/33gV9InUDsL8QqxLBSIBY6NetOiOw1LcZpgyEA5dqTfIJiiR04eyVRuv1RCY7N4QfVl7d9now==
 
+soulswap-stargate@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/soulswap-stargate/-/soulswap-stargate-0.0.1.tgz#020605b0b485c484ea449c9bc3428533edc14d81"
+  integrity sha512-XjK63fZ/ysQuk2tVbEQao8wAQCLV4cu0U+OLDIKh/t/mwER7pQJ3JXWCSNDRcMqWNDJw5NDRbnbNkS0SQEGmHQ==
+
 "soulswap-token-lists@workspace:*":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/soulswap-token-lists/-/soulswap-token-lists-0.0.1.tgz#f83146d72076b1540e19ff0b27d14fe0afa30810"
