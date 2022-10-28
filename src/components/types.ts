@@ -2,6 +2,7 @@ import React, { ComponentType } from 'react'
 
 export type ExtractProps<T> = T extends ComponentType<infer P> ? P : T
 export type AnyTag = keyof JSX.IntrinsicElements
+export type MaxWidth = 'full' | '7xl' | '6xl' | '5xl' | '4xl' | '3xl' | '2xl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs'
 
 // Source: https://github.com/emotion-js/emotion/blob/master/packages/styled-base/types/helper.d.ts
 // A more precise version of just React.ComponentPropsWithoutRef on its own
