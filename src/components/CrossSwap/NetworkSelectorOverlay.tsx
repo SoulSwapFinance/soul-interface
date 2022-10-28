@@ -1,9 +1,13 @@
 import { CheckIcon } from '@heroicons/react/outline'
-import chains, { ChainId } from 'soulswap-chain'
+import chains from 'soulswap-chain'
+import  { ChainId } from 'sdk'
 import { useIsSmScreen } from 'soulswap-hooks'
-import { classNames, NetworkIcon, Overlay, SlideIn, Typography } from 'soulswap-ui'
-// import { SUPPORTED_CHAIN_IDS } from 'config'
 import React, { FC, useCallback, useRef } from 'react'
+import { SlideIn } from 'components/Animated/SlideIn'
+import { NetworkIcon } from 'components/Icons/NetworkIcon'
+import Typography from 'components/Typography'
+import { classNames } from 'functions/styling'
+import { Overlay } from 'components/Overlay'
 
 interface NetworkSelectorOverlay {
   open: boolean

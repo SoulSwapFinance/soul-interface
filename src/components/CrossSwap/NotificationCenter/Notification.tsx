@@ -11,24 +11,22 @@ import {
   UploadIcon,
   XIcon,
 } from '@heroicons/react/solid'
-import chains, { ChainId } from 'soulswap-chain'
+import chains from 'soulswap-chain'
+import { ChainId } from 'sdk'
 import { Token } from 'soulswap-currency'
-import {
-  Badge,
-  classNames,
-  Currency as UICurrency,
-  Dots,
-  IconButton,
-  Link,
-  Loader,
-  NetworkIcon,
-  NotificationData,
-  TimeAgo,
-  Typography,
-} from 'soulswap-ui'
 import React, { FC } from 'react'
-// import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useWaitForTransaction } from 'wagmi'
+import Dots from 'components/Dots'
+import Typography from 'components/Typography'
+import { classNames } from 'functions/styling'
+import { IconButton } from 'components/Icons/IconButton'
+import { NetworkIcon } from 'components/Icons/NetworkIcon'
+import { Link } from 'components/Link'
+import { NotificationData } from 'components/Toast'
+import { TimeAgo } from 'components/Date'
+import Loader from 'components/Loader'
+import { Badge } from '../Badge'
+import { Currency } from '../Currency'
 
 export const STARGATE_TOKEN = new Token({
   chainId: ChainId.ETHEREUM,
@@ -94,11 +92,17 @@ export const Notification: FC<{ data: string; showExtra?: boolean; hideStatus?: 
             'relative cursor-pointer flex items-center gap-5 rounded-2xl px-4 py-3'
           )}
         >
-          <Badge badgeContent={<NetworkIcon chainId={notification.chainId} width={18} height={18} />}>
+          <Badge badgeContent=
+          {<NetworkIcon 
+            chainId={notification.chainId} 
+            width={18} height={18} 
+            />}>
             <div className="p-2 bg-slate-600 rounded-full h-[36px] w-[36px] flex justify-center items-center">
               {!hideStatus &&
                 (status === 'loading' ? (
-                  <Loader size={18} />
+                  <Loader 
+                  // size={18} 
+                  />
                 ) : status === 'error' ? (
                   <XIcon width={20} height={20} className="text-red-400" />
                 ) : (
@@ -108,7 +112,7 @@ export const Notification: FC<{ data: string; showExtra?: boolean; hideStatus?: 
                 <ArrowRightIcon width={20} height={20} />
               )}
               {(status === 'success' || notification.summary.info) && notification.type === 'stargate' && (
-                <UICurrency.Icon currency={STARGATE_TOKEN} width={20} height={20} />
+                <Currency.Icon currency={STARGATE_TOKEN} width={20} height={20} />
               )}
               {(status === 'success' || notification.summary.info) && notification.type === 'swap' && (
                 <SwitchVerticalIcon width={20} height={20} />

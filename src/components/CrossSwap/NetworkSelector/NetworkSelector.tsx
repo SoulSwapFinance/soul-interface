@@ -1,8 +1,12 @@
 import { Listbox } from '@headlessui/react'
-import chains, { ChainId } from 'soulswap-chain'
-import { classNames, NetworkIcon, Select, Typography } from 'soulswap-ui'
+import chains from 'soulswap-chain'
+import { ChainId } from 'sdk'
 import React, { FC, ReactNode, useMemo } from 'react'
 import { useNetwork, useSwitchNetwork } from 'wagmi'
+import { classNames } from 'functions'
+import { NetworkIcon } from 'components/Icons/NetworkIcon'
+import { Select } from '../Select'
+import Typography from 'components/Typography'
 
 interface NetworkSelectorProps {
   children: ReactNode

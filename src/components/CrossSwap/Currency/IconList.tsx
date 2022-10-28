@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import { classNames } from 'functions'
 import { Children, cloneElement, FC, isValidElement, ReactNode } from 'react'
 
 export interface IconListProps {

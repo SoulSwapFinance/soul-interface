@@ -1,4 +1,4 @@
-import { ChainId } from 'soulswap-chain'
+import { ChainId } from 'sdk'
 import { nanoid } from 'nanoid'
 import React, { ReactNode } from 'react'
 import { toast, ToastOptions } from 'react-toastify'

@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import { classNames } from 'functions'
 import React, { FC, ReactNode } from 'react'
 
 export interface OverlayActionProps {

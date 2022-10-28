@@ -1,5 +1,5 @@
 import { Dialog as HeadlessDialog } from '@headlessui/react'
-import classNames from 'classnames'
+import { classNames } from 'functions'
 import React, { FC } from 'react'
 
 import { ExtractProps } from '../types'

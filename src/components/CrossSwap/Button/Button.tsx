@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import { classNames } from 'functions'
 import React, { ReactNode } from 'react'
 
 import Loader from '../../Loader'

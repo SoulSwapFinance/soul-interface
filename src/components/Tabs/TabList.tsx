@@ -1,5 +1,5 @@
 import { Tab as HeadlessTab } from '@headlessui/react'
-import classNames from 'classnames'
+import { classNames } from 'functions'
 import { FC, forwardRef } from 'react'
 
 import { ExtractProps } from '../types'

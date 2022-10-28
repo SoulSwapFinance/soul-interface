@@ -1,6 +1,8 @@
 import { CashIcon, InformationCircleIcon } from '@heroicons/react/outline'
-import { Switch, Tooltip, Typography } from 'soulswap-ui'
-import { useState } from 'react'
+import { AdvancedTooltip } from 'components/Tooltip/Advanced'
+import Typography from 'components/Typography'
+import Switch from 'components/Switch'
+import React, { useState } from 'react'
 
 export const DustAmount = () => {
   const [dustAmount, setDustAmount] = useState(0)
@@ -15,7 +17,7 @@ export const DustAmount = () => {
             <Typography variant="sm" weight={500}>
               Dust Amount
             </Typography>
-            <Tooltip
+            <AdvancedTooltip
               placement="top"
               button={<InformationCircleIcon width={14} height={14} />}
               panel={

@@ -1,5 +1,5 @@
 import { ChevronLeftIcon, XIcon } from '@heroicons/react/outline'
-import classNames from 'classnames'
+import { classNames } from 'functions'
 import React, { FC, ReactNode } from 'react'
 
 import Typography from '../Typography'

@@ -2294,7 +2294,7 @@
     stream-browserify "^3.0.0"
     util "^0.12.4"
 
-"@coinbase/wallet-sdk@^3.3.0", "@coinbase/wallet-sdk@^3.5.3":
+"@coinbase/wallet-sdk@^3.5.3":
   version "3.5.4"
   resolved "https://registry.yarnpkg.com/@coinbase/wallet-sdk/-/wallet-sdk-3.5.4.tgz#957aa74521a4afa61ae99e1e2b948a6e017fcc87"
   integrity sha512-+5s05dmB6YUPUnV5vThP96GVG1O4GgS3qYvjYJhe56ds8YFz+keU3/docFBLf8FQOCIO5j7IZtZmVGvz7G+kRw==
@@ -3411,7 +3411,7 @@
     "@ethersproject/sha2" "^5.6.1"
     "@ethersproject/strings" "^5.6.1"
 
-"@ethersproject/solidity@5.7.0":
+"@ethersproject/solidity@5.7.0", "@ethersproject/solidity@^5.7.0":
   version "5.7.0"
   resolved "https://registry.yarnpkg.com/@ethersproject/solidity/-/solidity-5.7.0.tgz#5e9c911d8a2acce2a5ebb48a5e2e0af20b631cb8"
   integrity sha512-HmabMd2Dt/raavyaGukF4XxizWKhKQ24DoLtdNbBmNKUOPqwjsKQSdV9GQtj9CBEea9DlzETlVER1gYeXXBGaA==
@@ -6883,6 +6883,11 @@
     subscriptions-transport-ws "0.9.16"
     ws "7.2.0"
 
+"@sushiswap/trident@1.0.0-canary.48":
+  version "1.0.0-canary.48"
+  resolved "https://registry.yarnpkg.com/@sushiswap/trident/-/trident-1.0.0-canary.48.tgz#23b76eafd1b4d6f56c0abf608e54727d355f2dfb"
+  integrity sha512-dyeEtYuyE6hiGNh5F6eUNtKxT1TbRT5XwBPVxVPomTF1q3OUi1vmgZqklvFlzq8hAwPATw1wUTDhqz6Mc8EKCg==
+
 "@sushiswap/trident@^1.0.0-canary.5":
   version "1.0.0-canary.5"
   resolved "https://registry.yarnpkg.com/@sushiswap/trident/-/trident-1.0.0-canary.5.tgz#c6f3d025928dd21fae95d58f87fae31cdbdbccb7"
@@ -7078,14 +7083,14 @@
   resolved "https://registry.yarnpkg.com/@tanstack/query-persist-client-core/-/query-persist-client-core-4.13.0.tgz#22b112a6d90bd8dcccd3f72e38272d661cb19f4b"
   integrity sha512-ZWm0BKpfgaHDj3/3yhEi9EeZAEg/6zLiq8H52H9lg/nUHhVtHVUznWz5WDKNwR09I/wQ6+NE4eZRzfWYPztNbA==
 
-"@tanstack/query-sync-storage-persister@^4.0.10", "@tanstack/query-sync-storage-persister@^4.10.1":
+"@tanstack/query-sync-storage-persister@^4.10.1":
   version "4.13.0"
   resolved "https://registry.yarnpkg.com/@tanstack/query-sync-storage-persister/-/query-sync-storage-persister-4.13.0.tgz#cbc309f6d602f38ba75df606c3b7569f37a3ebde"
   integrity sha512-/mhwrQEXYyeteTqweZiIiQfn5ne1oIF5dEwGNR6NY9aAa1HyWBqy2o18vgcECyNBqVjctEXTtbypZv2+2Uvx5A==
   dependencies:
     "@tanstack/query-persist-client-core" "4.13.0"
 
-"@tanstack/react-query-persist-client@^4.0.10", "@tanstack/react-query-persist-client@^4.10.1":
+"@tanstack/react-query-persist-client@^4.10.1":
   version "4.13.0"
   resolved "https://registry.yarnpkg.com/@tanstack/react-query-persist-client/-/react-query-persist-client-4.13.0.tgz#022a42243cb7e3484775e43747f9aa22ae1ce3e1"
   integrity sha512-jzCFGi5PZVIPJ+6R3dko20iYRutpFjgn34PvwbvnJsAjIeZywU9wmFj0+V1tpUfyVxLCe/ZaII/o9OzwG3qHjQ==
@@ -8711,21 +8716,14 @@
     prop-types "^15.7.2"
     reduce-css-calc "^1.3.0"
 
-"@wagmi/core@0.5.7":
-  version "0.5.7"
-  resolved "https://registry.yarnpkg.com/@wagmi/core/-/core-0.5.7.tgz#59ad5691275762e3b87c43230e56a4ee599ec2bd"
-  integrity sha512-q2RL3gHJ15lozjJUcUmdOlmz2b9DCiLfF1ksxNwi1Fy/CJ7FsHbnufJrrvn26nxkJdKWbqTvr7xv46yr6Sp0Ug==
+"@wagmi/core@^0.6.6":
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/@wagmi/core/-/core-0.6.6.tgz#f39e6819b12d3c21d28a62b0523a7851992ace26"
+  integrity sha512-1gEjDFmlJ6R2uF6BX04Q768OdpoW/pNGGUTaJU+W7YP/3uOf4TwsXgqMEN/0uyZqptL+RQsworeVh11JXCbX1g==
   dependencies:
+    abitype "^0.1.7"
     eventemitter3 "^4.0.7"
-    zustand "^4.0.0"
-
-"@wagmi/core@^0.5.8":
-  version "0.5.8"
-  resolved "https://registry.yarnpkg.com/@wagmi/core/-/core-0.5.8.tgz#9e375c0dd31c3b22973d000694e1c2b06c05dbbc"
-  integrity sha512-1mABf1bXyn3AOHyQkios4FTGqoARa8y1tf7GMH6t1c7q0nAMSbpXoTDdjEidUHy8qhWoG0y3Ez4PjCi8WQnmMg==
-  dependencies:
-    eventemitter3 "^4.0.7"
-    zustand "^4.0.0"
+    zustand "^4.1.1"
 
 "@walletconnect/browser-utils@^1.7.8":
   version "1.7.8"
@@ -8825,7 +8823,7 @@
     eip1193-provider "1.0.1"
     eventemitter3 "4.0.7"
 
-"@walletconnect/ethereum-provider@^1.7.8", "@walletconnect/ethereum-provider@^1.8.0":
+"@walletconnect/ethereum-provider@^1.8.0":
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/@walletconnect/ethereum-provider/-/ethereum-provider-1.8.0.tgz#ed1dbf9cecc3b818758a060d2f9017c50bde1d32"
   integrity sha512-Nq9m+oo5P0F+njsROHw9KMWdoc/8iGHYzQdkjJN/1C7DtsqFRg5k5a3hd9rzCLpbPsOC1q8Z5lRs6JQgDvPm6Q==
@@ -28003,6 +28001,23 @@ soul-data@^2.5.0:
     subscriptions-transport-ws "^0.9.19"
     ws "^7.5.3"
 
+soulswap-amm@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/soulswap-amm/-/soulswap-amm-0.0.1.tgz#20de04ef2734a9ce15963020629cb4862d2efc51"
+  integrity sha512-z4YcsmBsA+dLWMPNJ0AKOYhtyxHMiWdPXQ0/P7/+odUAZYqaSPwIKvMaIOS84fyBnkSm7LsTx7yMOkDaUbSV+g==
+  dependencies:
+    "@ethersproject/abi" "^5.7.0"
+    "@ethersproject/address" "^5.7.0"
+    "@ethersproject/bignumber" "^5.7.0"
+    "@ethersproject/solidity" "^5.7.0"
+    "@sushiswap/trident" "1.0.0-canary.48"
+    soulswap-chain "workspace:*"
+    soulswap-currency "workspace:*"
+    soulswap-math "workspace:*"
+    soulswap-tines "workspace:*"
+    tiny-invariant "^1.2.0"
+    tiny-warning "^1.0.3"
+
 "soulswap-chain@workspace:*":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/soulswap-chain/-/soulswap-chain-0.0.1.tgz#bd7ab52ee20567907c2df18c4ce78d4ae6026b51"
@@ -28107,45 +28122,18 @@ soulswap-stargate@^0.0.1:
   resolved "https://registry.yarnpkg.com/soulswap-stargate/-/soulswap-stargate-0.0.1.tgz#020605b0b485c484ea449c9bc3428533edc14d81"
   integrity sha512-XjK63fZ/ysQuk2tVbEQao8wAQCLV4cu0U+OLDIKh/t/mwER7pQJ3JXWCSNDRcMqWNDJw5NDRbnbNkS0SQEGmHQ==
 
+"soulswap-tines@workspace:*":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/soulswap-tines/-/soulswap-tines-0.0.1.tgz#4bae7c9d3a33c67920b25dd6445508ec34c896e5"
+  integrity sha512-KYV060Jez/fRxpmvtZ08PPFlEKf6ko30Z5AUQnj/QQzQCtHlmArJnhNnXLaFZUc0WlR2o/SGFk6WOesMs8rv8w==
+  dependencies:
+    "@ethersproject/bignumber" "^5.7.0"
+    soulswap-currency "workspace:*"
+
 "soulswap-token-lists@workspace:*":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/soulswap-token-lists/-/soulswap-token-lists-0.0.1.tgz#f83146d72076b1540e19ff0b27d14fe0afa30810"
   integrity sha512-B3HlAGdlETfTajXp7AVlu7Wy53J6fLPNGf9E/Fr1XwscsYhxgFhdEITkmaLSBGTZ0odfYyFllteG29ZeViyNVw==
-
-soulswap-ui@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/soulswap-ui/-/soulswap-ui-0.0.1.tgz#6fb05094ff66245671c3a9ce809793fbd0e6bd27"
-  integrity sha512-XxMEPxul9KXuFPpfFe6DjjxoyunKbuFC6sNEA3SYsmrVOHuGzZO49a1iJyVACHR4GgW56TSlEzf25sa60mHqeQ==
-  dependencies:
-    "@fontsource/inter" "^4.5.10"
-    "@headlessui/react" "^1.7.3"
-    "@heroicons/react" "^1.0.6"
-    "@popperjs/core" "^2.11.5"
-    "@react-hook/window-scroll" "^1.3.0"
-    "@tailwindcss/aspect-ratio" "^0.4.0"
-    "@tailwindcss/forms" "^0.5.1"
-    "@tailwindcss/line-clamp" "^0.4.0"
-    "@tailwindcss/typography" "^0.5.2"
-    "@tanstack/react-table" "8.5.0"
-    classnames "^2.3.1"
-    date-fns "^2.29.1"
-    nanoid "^4.0.0"
-    rc-tooltip "^5.2.2"
-    react-dropzone "^14.2.2"
-    react-popper "^2.2.5"
-    react-spring "^9.4.4"
-    react-tiny-popover "^7.1.0"
-    react-toastify "^8.2.0"
-    react-tooltip "^4.2.21"
-    react-virtualized-auto-sizer "^1.0.6"
-    react-window "^1.8.7"
-    soulswap-chain "workspace:*"
-    soulswap-currency "workspace:*"
-    soulswap-hooks "workspace:*"
-    soulswap-token-lists "workspace:*"
-    use-resize-observer "^9.0.2"
-  optionalDependencies:
-    next "^12.3.1"
 
 soulswap-wallet-management@^1.0.1:
   version "1.0.1"
@@ -30668,17 +30656,18 @@ w3c-xmlserializer@^2.0.0:
   dependencies:
     xml-name-validator "^3.0.0"
 
-wagmi@0.6.8:
-  version "0.6.8"
-  resolved "https://registry.yarnpkg.com/wagmi/-/wagmi-0.6.8.tgz#bfc65686ec08cf1c508b1dbf5fbefbbe828653cd"
-  integrity sha512-pIOn7I56KPfdPQ1WRIWzWnpC8eJZm1V25Rcn5fbgOJ2eV3kjGNchnIub/ERY1VMKywxkCAfgXfn2D/tqwCJsWw==
+wagmi@0.7.7:
+  version "0.7.7"
+  resolved "https://registry.yarnpkg.com/wagmi/-/wagmi-0.7.7.tgz#7d120778e1e88476e9275e05c8123623f5719199"
+  integrity sha512-Pxp6iYMY+8LqSenY35EkIPxG64W4QDb3XtuhH48PqFZ8k3OE9KWpYyS2ooOMqa8bdPPCIpE/HDeTNciBJoimeQ==
   dependencies:
-    "@coinbase/wallet-sdk" "^3.3.0"
-    "@tanstack/query-sync-storage-persister" "^4.0.10"
-    "@tanstack/react-query" "^4.0.10"
-    "@tanstack/react-query-persist-client" "^4.0.10"
-    "@wagmi/core" "^0.5.8"
-    "@walletconnect/ethereum-provider" "^1.7.8"
+    "@coinbase/wallet-sdk" "^3.5.3"
+    "@tanstack/query-sync-storage-persister" "^4.10.1"
+    "@tanstack/react-query" "^4.10.1"
+    "@tanstack/react-query-persist-client" "^4.10.1"
+    "@wagmi/core" "^0.6.6"
+    "@walletconnect/ethereum-provider" "^1.8.0"
+    abitype "^0.1.7"
     use-sync-external-store "^1.2.0"
 
 walkdir@^0.4.1:
@@ -30700,29 +30689,6 @@ wallet-address-validator@^0.2.4:
   dependencies:
     base-x "^3.0.4"
     jssha "2.3.1"
-
-wammi-core@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/wammi-core/-/wammi-core-0.0.2.tgz#d50b242350caeec1b5ac9d255cd75234f68b66be"
-  integrity sha512-xVPgsMii0QczlxaHdmoayMKUNbcsIKAuj05wyPmXSCwV0oGnSMUP9IomfpJOqHGfctAIDjTG32JOIme3EkvxeQ==
-  dependencies:
-    abitype "^0.1.7"
-    eventemitter3 "^4.0.7"
-    zustand "^4.1.1"
-
-wammi@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/wammi/-/wammi-0.0.2.tgz#a71215e557415e8e74aeb73f1f6245cd8ad4a122"
-  integrity sha512-RPgDnyYQw7Nfl6K0ZDwZcpjKuKOzEuT/fPxNV90PT8EIKOrhqyfi3M+xMZSqlDxAukPqUvVuS4sJZwCmjLogDg==
-  dependencies:
-    "@coinbase/wallet-sdk" "^3.5.3"
-    "@tanstack/query-sync-storage-persister" "^4.10.1"
-    "@tanstack/react-query" "^4.10.1"
-    "@tanstack/react-query-persist-client" "^4.10.1"
-    "@walletconnect/ethereum-provider" "^1.8.0"
-    abitype "^0.1.7"
-    use-sync-external-store "^1.2.0"
-    wammi-core "^0.0.2"
 
 warning@^4.0.0, warning@^4.0.2, warning@^4.0.3:
   version "4.0.3"

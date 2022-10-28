@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import { classNames } from 'functions'
 import React, { forwardRef } from 'react'
 
 import { DEFAULT_INPUT_CLASSNAME, DEFAULT_INPUT_HOVER_BG, DEFAULT_INPUT_UNSTYLED, ERROR_INPUT_CLASSNAME } from './index'

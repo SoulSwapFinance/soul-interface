@@ -1,9 +1,9 @@
 import { Price, Type } from 'soulswap-currency'
-import { classNames, Typography } from 'soulswap-ui'
-// import { usePrices } from 'soulswap-wagmi'
-import { FC, ReactElement, ReactNode, useCallback, useState } from 'react'
+import React, { FC, ReactElement, ReactNode, useCallback, useState } from 'react'
 import { usePrices } from 'hooks/usePrices'
 import { Theme } from '@material-ui/core'
+import { classNames } from 'functions/styling'
+import Typography from 'components/Typography'
 
 interface RenderPayload {
   invert: boolean
@@ -63,7 +63,7 @@ export const Rate: FC<Rate> = ({ children, price }) => {
             {content} <span className="text-slate-500">(${usdPrice})</span>
           </div>
         ) : (
-          'Enter an amount'
+          'Enter Amount'
         )}
       </Typography>
     </div>

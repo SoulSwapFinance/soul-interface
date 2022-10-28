@@ -1,4 +1,4 @@
-import classNames from 'classnames'
+import { classNames } from 'functions'
 
 import { Address } from './Address'
 import { Counter } from './Counter'

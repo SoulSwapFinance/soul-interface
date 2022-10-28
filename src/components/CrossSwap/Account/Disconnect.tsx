@@ -1,4 +1,4 @@
-import { classNames } from 'soulswap-ui'
+import { classNames } from 'functions/styling'
 import { useDisconnect } from 'wagmi'
 
 export type Props = {

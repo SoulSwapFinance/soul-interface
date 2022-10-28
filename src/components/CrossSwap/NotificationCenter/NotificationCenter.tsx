@@ -1,5 +1,8 @@
 import { BellIcon, XIcon } from '@heroicons/react/solid'
-import { Button, Drawer, IconButton, Typography } from 'soulswap-ui'
+import { Button } from 'components/Button'
+import { Drawer } from 'components/Drawer'
+import { IconButton } from 'components/Icons/IconButton'
+import Typography from 'components/Typography'
 import React, { FC } from 'react'
 
 import { NotificationGroup } from './NotificationGroup'

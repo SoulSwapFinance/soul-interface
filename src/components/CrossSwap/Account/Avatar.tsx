@@ -1,4 +1,4 @@
-import { ChainId } from 'soulswap-chain'
+import { ChainId } from 'sdk'
 import { useEnsAvatar } from 'wagmi'
 
 export type Props = {

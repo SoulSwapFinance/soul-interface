@@ -1,6 +1,6 @@
 import { Transition } from '@headlessui/react'
 import { useIsMounted } from 'soulswap-hooks'
-import classNames from 'classnames'
+import { classNames } from 'functions'
 import React, {
   createContext,
   Dispatch,

@@ -1,5 +1,5 @@
 import { Tab as HeadlessTab } from '@headlessui/react'
-import classNames from 'classnames'
+import { classNames } from 'functions'
 import React, { FC, forwardRef, Fragment, FunctionComponent } from 'react'
 
 import { Button } from '../Button'

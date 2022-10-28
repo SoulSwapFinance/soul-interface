@@ -1,4 +1,4 @@
-import { ChainId } from 'soulswap-chain'
+import { ChainId } from 'sdk'
 import { ReactNode, useEffect } from 'react'
 import { useEnsName } from 'wagmi'
 import { UseEnsNameArgs, UseEnsNameConfig } from 'wagmi/dist/declarations/src/hooks/ens/useEnsName'

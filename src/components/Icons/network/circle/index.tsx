@@ -1,5 +1,5 @@
-import { ChainId } from 'soulswap-chain'
 import * as React from 'react'
+import { ChainId } from 'sdk'
 
 import { ArbitrumCircle } from './ArbitrumCircle'
 import { ArbitrumNovaCircle } from './ArbitrumNovaCircle'

@@ -1,36 +1,22 @@
 import { QuestionMarkCircleIcon } from '@heroicons/react/solid'
-import chains, { ChainId } from 'soulswap-chain'
+import chains from 'soulswap-chain'
+import { ChainId } from 'sdk'
+
 import { Currency } from 'soulswap-currency'
 import { WrappedTokenInfo } from 'soulswap-token-lists'
 import Image, { ImageProps } from 'next/image'
 import { FC, useEffect, useMemo, useState } from 'react'
 
-import { GradientCircleIcon } from '../icons'
-import { Link } from '../link'
+import GradientCircleIcon from '../../Icons'
+import { Link } from '../../Link'
 
 const BLOCKCHAIN: Record<number, string> = {
-  [ChainId.ARBITRUM_NOVA]: 'arbitrum-nova',
   [ChainId.ARBITRUM]: 'arbitrum',
   [ChainId.AVALANCHE]: 'avalanche',
-  [ChainId.BOBA_AVAX]: 'boba-avax',
-  [ChainId.BOBA]: 'boba',
   [ChainId.BSC]: 'bsc',
-  [ChainId.CELO]: 'celo',
   [ChainId.ETHEREUM]: 'ethereum',
   [ChainId.FANTOM]: 'fantom',
-  [ChainId.AVALANCHE_TESTNET]: 'fuji',
-  [ChainId.FUSE]: 'fuse',
-  [ChainId.GNOSIS]: 'gnosis',
-  [ChainId.HARMONY]: 'harmony',
-  [ChainId.HECO]: 'heco',
-  [ChainId.KAVA]: 'kava',
-  [ChainId.METIS]: 'metis',
-  [ChainId.MOONBEAM]: 'moonbeam',
   [ChainId.MOONRIVER]: 'moonriver',
-  [ChainId.OKEX]: 'okex',
-  [ChainId.OPTIMISM]: 'optimism',
-  [ChainId.PALM]: 'palm',
-  [ChainId.POLYGON]: 'polygon',
   [ChainId.TELOS]: 'telos',
 }
 
@@ -55,39 +41,12 @@ const BobaLogo = 'https://raw.githubusercontent.com/sushiswap/list/master/logos/
 
 const LOGO: Record<number, string> = {
   [ChainId.ETHEREUM]: EthereumLogo,
-  [ChainId.KOVAN]: EthereumLogo,
-  [ChainId.RINKEBY]: EthereumLogo,
-  [ChainId.ROPSTEN]: EthereumLogo,
-  [ChainId.GÖRLI]: EthereumLogo,
   [ChainId.FANTOM]: FtmLogo,
-  [ChainId.FANTOM_TESTNET]: FtmLogo,
-  [ChainId.POLYGON]: MaticLogo,
-  [ChainId.POLYGON_TESTNET]: MaticLogo,
-  [ChainId.GNOSIS]: xDaiLogo,
   [ChainId.BSC]: BnbLogo,
-  [ChainId.BSC_TESTNET]: BnbLogo,
   [ChainId.AVALANCHE]: AvaxLogo,
-  [ChainId.AVALANCHE_TESTNET]: AvaxLogo,
-  [ChainId.HECO]: HtLogo,
-  [ChainId.HECO_TESTNET]: HtLogo,
-  [ChainId.HARMONY]: OneLogo,
-  [ChainId.HARMONY_TESTNET]: OneLogo,
-  [ChainId.OKEX]: OktLogo,
-  [ChainId.OKEX_TESTNET]: OktLogo,
   [ChainId.ARBITRUM]: EthereumLogo,
-  [ChainId.ARBITRUM_TESTNET]: EthereumLogo,
-  [ChainId.CELO]: CeloLogo,
-  [ChainId.PALM]: PalmLogo,
   [ChainId.MOONRIVER]: MovrLogo,
-  [ChainId.FUSE]: FuseLogo,
   [ChainId.TELOS]: TelosLogo,
-  [ChainId.MOONBEAM]: GlmrLogo,
-  [ChainId.OPTIMISM]: EthereumLogo,
-  [ChainId.KAVA]: KavaLogo,
-  [ChainId.ARBITRUM_NOVA]: EthereumLogo,
-  [ChainId.METIS]: MetisLogo,
-  [ChainId.BOBA]: EthereumLogo,
-  [ChainId.BOBA_AVAX]: BobaLogo,
 }
 
 export interface IconProps extends Omit<ImageProps, 'src'> {

@@ -1,13 +1,17 @@
 import { ExclamationCircleIcon } from '@heroicons/react/outline'
-import { ChainId } from 'soulswap-chain'
 import { Amount, Native } from 'soulswap-currency'
 import { useIsMounted } from 'soulswap-hooks'
 import { JSBI } from 'soulswap-math'
-import { IconButton, Loader, NetworkIcon, Tooltip, Typography } from 'soulswap-ui'
 import React, { FC, ReactNode, useMemo } from 'react'
 import { useBalance, useNetwork } from 'wagmi'
 
 import { NetworkSelector } from '../NetworkSelector'
+import { AdvancedTooltip } from 'components/Tooltip/Advanced'
+import Typography from 'components/Typography'
+import { NetworkIcon } from 'components/Icons/NetworkIcon'
+import { IconButton } from 'components/Icons/IconButton'
+import { ChainId, NATIVE } from 'sdk'
+import Loader from 'components/Loader'
 
 export type Props = {
   address?: string
@@ -24,7 +28,7 @@ export const Balance: FC<Props> = ({ address, supportedNetworks, children }) => 
     const content = isLoading ? (
       <Loader />
     ) : isError ? (
-      <Tooltip
+      <AdvancedTooltip
         button={<ExclamationCircleIcon width={20} height={20} className="text-red" />}
         panel={
           <Typography variant="xs" className="text-center">
@@ -34,7 +38,7 @@ export const Balance: FC<Props> = ({ address, supportedNetworks, children }) => 
         }
       />
     ) : supportedNetworks && chain?.id && !supportedNetworks.includes(chain?.id) ? (
-      <Tooltip
+      <AdvancedTooltip
         button={<ExclamationCircleIcon width={20} height={20} className="text-red" />}
         panel={
           <Typography variant="xs" className="text-center">
@@ -57,7 +61,7 @@ export const Balance: FC<Props> = ({ address, supportedNetworks, children }) => 
             data &&
             Amount.fromRawAmount(Native.onChain(chain.id), JSBI.BigInt(data.value)).toSignificant(4)}
           <Typography weight={500} className="text-slate-500" as="span">
-            {chain ? Native.onChain(chain.id)?.symbol : 'ETH'}
+            {chain ? Native.onChain(chain.id)?.symbol : NATIVE[chain.id].symbol}
           </Typography>
         </Typography>
       </Typography>
