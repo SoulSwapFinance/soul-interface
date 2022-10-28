@@ -3,7 +3,7 @@ import { Type, Token } from 'soulswap-currency'
 import { FundSource, useIsMounted } from 'soulswap-hooks'
 import { FC, memo, useMemo } from 'react'
 
-import { useBalances } from 'hooks/useBalance/useBalance'
+// import { useBalances } from 'hooks/useBalance/useBalance'
 import { TokenSelectorDialog } from './TokenSelectorDialog'
 import { TokenSelectorOverlay } from './TokenSelectorOverlay'
 import { usePrices } from 'hooks/usePrices'
@@ -51,15 +51,15 @@ export const TokenSelector: FC<TokenSelectorProps> = memo(
       return Object.values(_tokenMap)
     }, [_tokenMap])
 
-    const { data: balances } = useBalances({
-      account: account,
-      chainId,
-      currencies: _tokenMapValues,
-      loadBentobox: false,
-      enabled: open,
-    })
+    // const { data: balances } = useBalances({
+    //   account: account,
+    //   chainId,
+    //   currencies: _tokenMapValues,
+    //   loadBentobox: false,
+    //   enabled: open,
+    // })
 
-    const { data: pricesMap } = usePrices({ chainId })
+    // const { data: pricesMap } = usePrices({ chainId })
 
     return useMemo(() => {
       if (!isMounted) return <></>
@@ -69,9 +69,9 @@ export const TokenSelector: FC<TokenSelectorProps> = memo(
           <TokenSelectorOverlay
             open={open}
             account={account}
-            balancesMap={balances}
+            // balancesMap={balances}
             tokenMap={_tokenMap}
-            pricesMap={pricesMap}
+            // pricesMap={pricesMap}
             chainId={chainId}
             fundSource={fundSource}
             onSelect={onSelect}
@@ -85,9 +85,9 @@ export const TokenSelector: FC<TokenSelectorProps> = memo(
         <TokenSelectorDialog
           open={open}
           account={account}
-          balancesMap={balances}
+          // balancesMap={balances}
           tokenMap={_tokenMap}
-          pricesMap={pricesMap}
+          // pricesMap={pricesMap}
           chainId={chainId}
           fundSource={fundSource}
           onSelect={onSelect}
@@ -95,7 +95,7 @@ export const TokenSelector: FC<TokenSelectorProps> = memo(
           {...props}
         />
       )
-    }, [_tokenMap, account, balances, chainId, fundSource, isMounted, onSelect, open, pricesMap, props, variant])
+    }, [_tokenMap, account, chainId, fundSource, isMounted, onSelect, open, props, variant]) // balances, pricesMap
   },
   (prevProps, nextProps) => {
     return (

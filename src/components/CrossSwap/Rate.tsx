@@ -20,10 +20,12 @@ interface Rate {
 
 export const Rate: FC<Rate> = ({ children, price }) => {
   const [invert, setInvert] = useState(false)
-  const { data: prices } = usePrices({ chainId: invert ? price?.quoteCurrency.chainId : price?.baseCurrency.chainId })
+  // const { data: prices } = usePrices({ chainId: invert ? price?.quoteCurrency.chainId : price?.baseCurrency.chainId })
+
   const usdPrice = price
-    ? prices?.[invert ? price.quoteCurrency.wrapped.address : price.baseCurrency.wrapped.address]?.toFixed(2)
-    : undefined
+    // ? prices?.[invert ? price.quoteCurrency.wrapped.address : price.baseCurrency.wrapped.address]?.toFixed(2)
+    // :
+     undefined
 
   const content = (
     <>
@@ -45,7 +47,7 @@ export const Rate: FC<Rate> = ({ children, price }) => {
   }, [])
 
   if (typeof children === 'function') {
-    return <>{children({ invert, toggleInvert, content, usdPrice })}</>
+    return <>{children({ invert, toggleInvert, content,  })}</> // usdPrice
   }
 
   return (
@@ -60,7 +62,7 @@ export const Rate: FC<Rate> = ({ children, price }) => {
       <Typography variant="xs" className={classNames('cursor-pointer h-[36px] flex items-center ')}>
         {price ? (
           <div className="flex items-center h-full gap-1 font-medium" onClick={toggleInvert}>
-            {content} <span className="text-slate-500">(${usdPrice})</span>
+            {/* {content} <span className="text-slate-500">(${usdPrice})</span> */}
           </div>
         ) : (
           'Enter Amount'

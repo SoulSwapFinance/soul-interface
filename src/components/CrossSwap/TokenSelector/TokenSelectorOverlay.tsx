@@ -7,7 +7,7 @@ import { Token, Type } from 'soulswap-currency'
 import { FundSource } from 'soulswap-hooks'
 import { Fraction } from 'soulswap-math'
 
-import { BalanceMap } from 'hooks/useBalance/types'
+// import { BalanceMap } from 'hooks/useBalance/types'
 import { TokenListFilterByQuery } from '../TokenListFilterByQuery'
 import { TokenSelectorProps } from './TokenSelector'
 import { TokenSelectorImportRow } from './TokenSelectorImportRow'
@@ -22,7 +22,7 @@ import { Overlay } from 'components/Overlay'
 
 type TokenSelectorOverlay = Omit<TokenSelectorProps, 'variant' | 'tokenMap'> & {
   account?: string
-  balancesMap?: BalanceMap
+  balancesMap?: any // BalanceMap
   tokenMap: Record<string, Token>
   pricesMap?: Record<string, Fraction> | undefined
   fundSource: FundSource

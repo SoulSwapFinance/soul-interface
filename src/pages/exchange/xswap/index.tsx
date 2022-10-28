@@ -46,6 +46,7 @@ import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 're
 
 import { usePrices } from 'hooks/usePrices'
 import { Theme } from '@material-ui/core'
+import { useTokens } from 'services/graph/hooks/exchange'
 // import { useBalance } from 'hooks/useBalance'
 // import { useTokens } from 'hooks/useTokens'
 
@@ -115,48 +116,51 @@ export const getServerSideProps: GetServerSideProps = async ({ query, res }) => 
   }
 }
 
-const Swap = () => {
-  return (
-    <div> 
-    {'hello there'}
-    </div>
-    )
-}
-
-export default Swap
-
-// export default function Swap({
-//   srcChainId,
-//   dstChainId,
-//   srcToken,
-//   dstToken,
-//   srcTypedAmount,
-// }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-//   const srcTokens = useTokens(srcChainId)
-//   const dstTokens = useTokens(dstChainId)
+// const Swap = () => {
 //   return (
-//     <Layout>
-//       <Head>
-//         <title>SoulSwap | Soul</title>
-//         <meta property="og:title" content="SoulSwap | Soul" key="title" />
-//       </Head>
-
-//       <Widget
-//         theme={theme}
-//         initialState={{
-//           srcChainId: Number(srcChainId),
-//           dstChainId: Number(dstChainId),
-//           srcToken: srcToken in srcTokens ? srcTokens[srcToken] : Native.onChain(srcChainId),
-//           dstToken: dstToken in dstTokens ? dstTokens[dstToken] : Native.onChain(dstChainId),
-//           srcTypedAmount,
-//         }}
-//         // swapCache={data}
-//         // mutateSwapCache={mutateSwapCache}
-//       />
-//       {/* <Widget header={<>Swap</>} /> */}
-//     </Layout>
-//   )
+//     <div> 
+//     {'hello there'}
+//     </div>
+//     )
 // }
+
+// export default Swap
+
+export default function Swap({
+  srcChainId,
+  dstChainId,
+  srcToken,
+  dstToken,
+  srcTypedAmount,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const srcTokens = useTokens(srcChainId)
+  const dstTokens = useTokens(dstChainId)
+  return (
+    // <Layout>
+    <div>
+
+      <Head>
+        <title>SoulSwap | Soul</title>
+        <meta property="og:title" content="SoulSwap | Soul" key="title" />
+      </Head>
+
+      {/* <Widget
+        theme={theme}
+        initialState={{
+          srcChainId: Number(srcChainId),
+          dstChainId: Number(dstChainId),
+          srcToken: srcToken in srcTokens ? srcTokens[srcToken] : Native.onChain(srcChainId),
+          dstToken: dstToken in dstTokens ? dstTokens[dstToken] : Native.onChain(dstChainId),
+          srcTypedAmount,
+        // }}
+        // swapCache={data}
+        // mutateSwapCache={mutateSwapCache}
+        // />
+       <Widget header={<>Swap</>} /> */}
+    </div>
+    // </Layout>
+  )
+}
 
 interface Swap {
   maxWidth?: number | string

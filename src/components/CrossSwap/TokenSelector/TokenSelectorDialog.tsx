@@ -7,7 +7,7 @@ import { FundSource, useIsSmScreen } from 'soulswap-hooks'
 import { Fraction } from 'soulswap-math'
 import React, { FC, useCallback } from 'react'
 
-import { BalanceMap } from 'hooks/useBalance/types'
+// import { BalanceMap } from 'hooks/useBalance/types'
 import { TokenListFilterByQuery } from '../TokenListFilterByQuery'
 import { TokenSelectorProps } from './TokenSelector'
 import { TokenSelectorImportRow } from './TokenSelectorImportRow'
@@ -25,7 +25,7 @@ import { Input } from '../CrossInput'
 
 type TokenSelectorDialog = Omit<TokenSelectorProps, 'variant' | 'tokenMap'> & {
   account?: string
-  balancesMap?: BalanceMap
+  balancesMap?: any //BalanceMap
   tokenMap: Record<string, Token>
   pricesMap?: Record<string, Fraction> | undefined
   fundSource: FundSource

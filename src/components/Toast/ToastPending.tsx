@@ -1,9 +1,11 @@
 import { Chain } from 'soulswap-chain'
-import { FC } from 'react'
+import React, { FC } from 'react'
 
-import { Loader, NotificationData } from '..'
+// import { Loader, NotificationData } from '../../Loader'
 import { ToastButtons } from './ToastButtons'
 import { ToastContent } from './ToastContent'
+import { NotificationData } from './Toast'
+import Loader from 'components/Loader'
 
 interface ToastPending extends Omit<NotificationData, 'promise'> {
   onDismiss(): void

@@ -2,7 +2,7 @@ import { Dialog as HeadlessDialog, Transition } from '@headlessui/react'
 import React, { FC, Fragment, FunctionComponent, useEffect } from 'react'
 
 import { ExtractProps } from '../types'
-import { useBreakpoint } from '../useBreakpoint'
+// import { useBreakpoint } from '../useBreakpoint'
 import DialogActions, { DialogActionProps } from './DialogActions'
 import DialogContent, { DialogContentProps } from './DialogContent'
 import DialogDescription, { DialogDescriptionProps } from './DialogDescription'
@@ -15,13 +15,13 @@ export type DialogRootProps = ExtractProps<typeof HeadlessDialog> & {
 
 const DialogRoot: FC<DialogRootProps> = ({ open, onClose, children, afterLeave, ...rest }) => {
   const { unmount } = rest
-  const { isMd } = useBreakpoint('md')
+  // const { isMd } = useBreakpoint('md')
 
   // iOS body lock fix
   // This gets the current scroll position and sets it as negative top margin before setting position fixed on body
   // This is necessary because adding position fixed to body scrolls the page to the top
   useEffect(() => {
-    if (!isMd) {
+    // if (!isMd) {
       if (open) {
         document.body.style.top = `-${window.scrollY}px`
         document.body.style.position = 'fixed'
@@ -35,8 +35,8 @@ const DialogRoot: FC<DialogRootProps> = ({ open, onClose, children, afterLeave, 
         document.body.style.right = ''
         window.scrollTo(0, parseInt(scrollY || '0') * -1)
       }
-    }
-  }, [isMd, open])
+    // }
+  }, [open]) //isMd,
 
   return (
     <Transition show={open} as={Fragment} afterLeave={afterLeave} unmount={unmount}>
@@ -66,7 +66,7 @@ const DialogRoot: FC<DialogRootProps> = ({ open, onClose, children, afterLeave, 
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               unmount={unmount}
             >
-              <HeadlessDialog.Panel className="w-full h-full max-w-md px-1">{children}</HeadlessDialog.Panel>
+              {/* <HeadlessDialog.Panel className="w-full h-full max-w-md px-1">{children}</HeadlessDialog.Panel> */}
             </Transition.Child>
           </div>
         </div>

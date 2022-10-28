@@ -1,10 +1,10 @@
 import { Chain } from 'soulswap-chain'
-import { FC } from 'react'
+import React, { FC } from 'react'
 
-import { HalfCircleIcon } from '../icons'
 import { NotificationData } from './index'
 import { ToastButtons } from './ToastButtons'
 import { ToastContent } from './ToastContent'
+import { HalfCircleIcon } from 'components/Icons/HalfCircleIcon'
 
 interface ToastInfo extends Omit<NotificationData, 'promise'> {
   onDismiss(): void

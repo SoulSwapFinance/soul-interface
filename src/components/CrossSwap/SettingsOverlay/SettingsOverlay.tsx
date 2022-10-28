@@ -9,7 +9,7 @@ import { Overlay } from 'components/Overlay'
 import { SlideIn } from 'components/Animated'
 import { IconButton } from 'components/Icons/IconButton'
 import { DustAmount } from './DustAmount'
-import { GasSettingsDisclosure } from './GasSettingsDisclosure'
+// import { GasSettingsDisclosure } from './GasSettingsDisclosure'
 
 interface SettingsOverlay {
   chainId: ChainId | undefined
@@ -28,7 +28,7 @@ export const SettingsOverlay: FC<SettingsOverlay> = ({ chainId }) => {
             <div className="h-full px-3 -ml-3 -mr-3 overflow-x-hidden overflow-y-auto scroll">
               <Overlay.Header onClose={() => setOpen(false)} title="Settings" />
               <div className="px-1 py-1">
-                <GasSettingsDisclosure chainId={chainId} />
+                {/* <GasSettingsDisclosure chainId={chainId} /> */}
                 <SlippageToleranceDisclosure />
                 <CustomTokensOverlay />
                 {/* <ExpertMode /> */}

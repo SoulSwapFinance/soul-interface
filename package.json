@@ -241,6 +241,7 @@
     "react-responsive": "^9.0.0-beta.4",
     "react-router-dom": "^6.2.1",
     "react-slick": "^0.29.0",
+    "react-toastify": "^9.0.8",
     "react-use": "^17.4.0",
     "react-vis": "^1.11.7",
     "rebass": "^4.0.7",
@@ -256,7 +257,6 @@
     "soulswap-format": "^0.0.1",
     "soulswap-hooks": "^0.0.1",
     "soulswap-limit-orders-react": "^3.9.0",
-    "soulswap-redux-localstorage": "^0.0.2",
     "soulswap-stargate": "^0.0.1",
     "soulswap-widget": "^1.0.5",
     "soulswap-widget-embedded": "^1.0.1",
@@ -265,6 +265,7 @@
     "tiny-invariant": "^1.1.0",
     "toformat": "^2.0.0",
     "token-explorer-api": "^1.0.2",
+    "use-resize-observer": "^9.0.2",
     "web3": "^1.7.0",
     "web3-eth-abi": "^1.7.0",
     "yup": "^0.32.11"

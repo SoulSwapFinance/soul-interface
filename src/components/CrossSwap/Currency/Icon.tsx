@@ -3,7 +3,8 @@ import chains from 'soulswap-chain'
 import { ChainId } from 'sdk'
 
 import { Currency } from 'soulswap-currency'
-import { WrappedTokenInfo } from 'soulswap-token-lists'
+import { WrappedTokenInfo } from 'state/lists/wrappedTokenInfo'
+
 import Image, { ImageProps } from 'next/image'
 import { FC, useEffect, useMemo, useState } from 'react'
 
