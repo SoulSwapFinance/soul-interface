@@ -1,4 +1,5 @@
-import { classNames, Link, SushiIcon } from 'soulswap-ui'
+import { Link } from 'components/Link'
+import { classNames } from 'functions/styling'
 import { FC } from 'react'
 // import { Theme } from '../types'
 
@@ -25,7 +26,7 @@ export const Caption: FC<Caption> = ({ className, theme }) => {
             'text-xs select-none w-full flex justify-center mt-1.5 -mb-1.5'
           )}
         >
-          <SushiIcon width={16} height={16} className="mr-1 hover:animate-spin hover:text-pink" />
+          {/* <SoulIcon width={16} height={16} className="mr-1 hover:animate-spin hover:text-pink" /> */}
           Powered by <span className="ml-1 font-bold">Soul</span>
         </a>
       </Link.Internal>

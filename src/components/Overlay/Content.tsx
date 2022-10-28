@@ -1,6 +1,6 @@
+import { classNames } from 'functions/styling'
 import { forwardRef, ReactNode } from 'react'
 
-import { classNames } from '../index'
 
 export interface Content {
   className?: string
