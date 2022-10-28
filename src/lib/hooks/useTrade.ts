@@ -23,12 +23,11 @@ import { useCoffinBoxContract } from 'hooks/useContract'
 import { useTokenInfo, useUserTokenInfo } from 'hooks/useAPI'
 // import { StablePoolState, useStablePools } from './useStablePools'
 
-const [gasPrice, setGasPrice] = useState<number>()
 
 
 export type UseTradeOutput =
-  | Trade<Currency, Currency, TradeType.EXACT_INPUT | TradeType.EXACT_OUTPUT, TradeVersion.V1 | TradeVersion.V2>
-  | undefined
+| Trade<Currency, Currency, TradeType.EXACT_INPUT | TradeType.EXACT_OUTPUT, TradeVersion.V1 | TradeVersion.V2>
+| undefined
 
 /**
  * Returns trade for a desired swap.
@@ -45,6 +44,8 @@ export function useTrade(
   mainCurrency?: Currency,
   otherCurrency?: Currency
 ): UseTradeOutput {
+  const [gasPrice, setGasPrice] = useState<number>()
+
   // const { data } = useFeeData({
   //   chainId,
   // })
