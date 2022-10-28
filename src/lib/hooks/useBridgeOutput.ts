@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
-import { ChainId } from 'sdk'
+import { ChainId, ZERO } from 'sdk'
 
 // import { BridgeState } from '../../components'
-import { useBridgeFees } from './useBridgeFees'
-import { SendTransactionResult } from 'wagmi/actions'
+// import { useBridgeFees } from './useBridgeFees'
 import { Amount, Price, Token, tryParseAmount, Type as Currency, Type } from 'soulswap-currency'
 import { Signature } from '@ethersproject/bytes'
+import { BigNumber } from '@ethersproject/bignumber'
 
 export type BridgeState = {
   id: string
@@ -16,7 +16,7 @@ export type BridgeState = {
   srcTypedAmount: string
   dstTypedAmount: string
   amount: Amount<Type> | undefined
-  sourceTx?: SendTransactionResult
+  sourceTx?: any | undefined //SendTransactionResult
   signature?: Signature
   timestamp?: number
   gasFee?: Amount<Type>
@@ -24,7 +24,12 @@ export type BridgeState = {
 
 export const useBridgeOutput = (state: BridgeState) => {
   const { amount, dstToken } = state
-  const { bridgeFee, isLoading } = useBridgeFees(state)
+  // const { bridgeFee, isLoading } = useBridgeFees(state)
+  
+  // dummies //
+  let bridgeFee = amount?.subtract(amount)
+  let isLoading = false
+  //
 
   const srcAmountOut = useMemo(() => (bridgeFee ? amount?.subtract(bridgeFee) : undefined), [bridgeFee, amount])
 

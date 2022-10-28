@@ -15,7 +15,6 @@ import chains from 'soulswap-chain'
 import { ChainId } from 'sdk'
 import { Token } from 'soulswap-currency'
 import React, { FC } from 'react'
-import { useWaitForTransaction } from 'wagmi'
 import Dots from 'components/Dots'
 import Typography from 'components/Typography'
 import { classNames } from 'functions/styling'
@@ -43,11 +42,12 @@ export const Notification: FC<{ data: string; showExtra?: boolean; hideStatus?: 
 }) => {
   const notification: NotificationData = JSON.parse(data)
   // const { account } = useActiveWeb3React()
-  const { status } = useWaitForTransaction({
-    chainId: notification.chainId,
-    // @ts-ignore
-    hash: notification.txHash,
-  })
+  // const { status } = useWaitForTransaction({
+  //   chainId: notification.chainId,
+  //   // @ts-ignore
+  //   hash: notification.txHash,
+  // })
+  let status = ''
 
   if (!status)
     return (

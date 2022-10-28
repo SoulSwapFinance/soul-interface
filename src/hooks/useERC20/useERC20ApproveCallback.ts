@@ -1,21 +1,18 @@
 import { AddressZero, MaxUint256 } from '@ethersproject/constants'
 import { Amount, Currency } from 'soulswap-currency'
 import { useCallback, useMemo } from 'react'
-import {
-  erc20ABI,
-  useAccount,
-  useContract,
-  // useDeprecatedSendTransaction,
-  useNetwork,
-  UserRejectedRequestError,
-  useSigner,
-} from 'wagmi'
+import ERC20ABI from 'constants/abis/bridge/erc20.json'
 
 import { calculateGasMargin } from 'utils/swap/calculateGasMargin'
-import { useERC20Allowance } from './useERC20Allowance'
+// import { useERC20Allowance } from './useERC20Allowance'
 import { Contract } from '@ethersproject/contracts'
 import useSendTransaction from 'hooks/useSendTransaction'
 import { NotificationData } from 'components/Toast'
+import { useActiveWeb3React } from 'services/web3'
+import { UserRejectedRequestError } from '@web3-react/injected-connector'
+import { useTokenContract } from 'hooks/useTokenContract'
+import { loadERC20Contract } from 'utils/wallet'
+import { getSigner } from 'sdk'
 
 export enum ApprovalState {
   UNKNOWN = 'UNKNOWN',
@@ -31,12 +28,29 @@ export function useERC20ApproveCallback(
   spender?: string,
   onSuccess?: (data: NotificationData) => void
 ): [ApprovalState, () => Promise<void>] {
-  const { chain } = useNetwork()
-  const { address } = useAccount()
-  const { data: signer } = useSigner()
+  const { chainId, account, library } = useActiveWeb3React()
 
   const token = amountToApprove?.currency?.isToken ? amountToApprove.currency : undefined
-  const currentAllowance = useERC20Allowance(watch, token, address ?? undefined, spender)
+  const TokenContract =  useTokenContract(token.address, true)
+
+  const allowance = async (
+    contractAddress: string,
+    approvedAddress: string
+  ) => {
+    const contract = await loadERC20Contract(
+      contractAddress,
+      getSigner(library, account)
+    );
+
+    return contract.allowance(
+      account,
+      approvedAddress
+    );
+  }
+
+  const currentAllowance = allowance(TokenContract.address, spender)[0]
+
+  // useERC20Allowance(watch, token, account ?? undefined, spender)
 
   // check the current approval status
   const approvalState: ApprovalState = useMemo(() => {
@@ -48,19 +62,19 @@ export function useERC20ApproveCallback(
     if (!currentAllowance) return ApprovalState.UNKNOWN
 
     // amountToApprove will be defined if currentAllowance is
-    return currentAllowance.lessThan(amountToApprove) ? ApprovalState.NOT_APPROVED : ApprovalState.APPROVED
+    return currentAllowance?.lessThan(amountToApprove) ? ApprovalState.NOT_APPROVED : ApprovalState.APPROVED
   }, [amountToApprove, currentAllowance, spender]) // isWritePending
 
   // @ts-ignore
   const tokenContract = useContract<Contract>({
   // const tokenContract = useContract<Contract>({
     addressOrName: token?.address ?? AddressZero,
-    contractInterface: erc20ABI,
-    signerOrProvider: signer,
+    contractInterface: ERC20ABI,
+    signerOrProvider: library.getSigner(),
   })
 
   const approve = useCallback(async (): Promise<void> => {
-    if (!chain?.id) {
+    if (!chainId) {
       console.error('Not connected')
       return
     }
@@ -100,7 +114,7 @@ export function useERC20ApproveCallback(
     try {
       const data = await useSendTransaction(() => ({
         request: {
-          from: address,
+          from: account,
           to: tokenContract?.address,
           data: tokenContract.interface.encodeFunctionData('approve', [
             spender,
@@ -114,7 +128,7 @@ export function useERC20ApproveCallback(
         const ts = new Date().getTime()
         onSuccess({
           type: 'approval',
-          chainId: chain?.id,
+          chainId: chainId,
           txHash: data.hash,
           promise: data?.hash, // data.await()
           summary: {
@@ -131,14 +145,14 @@ export function useERC20ApproveCallback(
       console.error(e)
     }
   }, [
-    chain?.id,
+    chainId,
     approvalState,
     token,
     tokenContract,
     amountToApprove,
     spender,
     // sendTransactionAsync,
-    address,
+    account,
     onSuccess,
   ])
 

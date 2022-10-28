@@ -5,6 +5,8 @@ import qs from 'qs'
 import Typography from 'components/Typography'
 import { useActiveWeb3React } from 'services/web3'
 import Web3 from 'web3'
+import ERC20ABI from 'constants/abis/bridge/erc20.json'
+
 import { ChainId, Currency, NATIVE, Token, WNATIVE } from 'sdk';
 // import TradingView from 'components/TradingViewChart'
 // import LiveChart from 'components/LiveChart'

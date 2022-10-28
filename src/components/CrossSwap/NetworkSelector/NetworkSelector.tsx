@@ -2,11 +2,11 @@ import { Listbox } from '@headlessui/react'
 import chains from 'soulswap-chain'
 import { ChainId } from 'sdk'
 import React, { FC, ReactNode, useMemo } from 'react'
-import { useNetwork, useSwitchNetwork } from 'wagmi'
 import { classNames } from 'functions'
 import { NetworkIcon } from 'components/Icons/NetworkIcon'
 import { Select } from '../Select'
 import Typography from 'components/Typography'
+import { useActiveWeb3React } from 'services/web3'
 
 interface NetworkSelectorProps {
   children: ReactNode
@@ -14,8 +14,9 @@ interface NetworkSelectorProps {
 }
 
 export const NetworkSelector: FC<NetworkSelectorProps> = ({ children, supportedNetworks }) => {
-  const { chain } = useNetwork()
-  const { switchNetwork } = useSwitchNetwork()
+  const { chainId } = useActiveWeb3React()
+  let chain = chainId
+  // const { switchNetwork } = useSwitchNetwork()
 
   const networks = useMemo(() => Array.from(new Set(supportedNetworks)), [supportedNetworks])
 
@@ -34,11 +35,11 @@ export const NetworkSelector: FC<NetworkSelectorProps> = ({ children, supportedN
           {networks.map((el) => (
             <div
               onClick={() => {
-                switchNetwork && switchNetwork(el)
+                // switchNetwork && switchNetwork(el)
               }}
               key={el}
               className={classNames(
-                chain?.id === el ? 'bg-slate-800' : 'hover:opacity-80',
+                chain === el ? 'bg-slate-800' : 'hover:opacity-80',
                 'px-2 flex rounded-xl justify-between gap-2 items-center cursor-pointer transform-all h-[40px]'
               )}
             >
@@ -48,7 +49,7 @@ export const NetworkSelector: FC<NetworkSelectorProps> = ({ children, supportedN
                   {chains[el].name}
                 </Typography>
               </div>
-              {chain?.id === el && <div className="w-2 h-2 mr-1 rounded-full bg-green" />}
+              {chain === el && <div className="w-2 h-2 mr-1 rounded-full bg-green" />}
             </div>
           ))}
         </div>

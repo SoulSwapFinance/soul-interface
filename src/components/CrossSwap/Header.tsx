@@ -1,5 +1,5 @@
 // import { App, AppType, BuyCrypto } from 'ui'
-import { useNotifications } from 'lib/state/storage'
+// import { useNotifications } from 'lib/state/storage'
 import React from 'react'
 import { useActiveWeb3React } from 'services/web3'
 // import { NotificationCenter } from './NotificationCenter'
@@ -7,7 +7,7 @@ import { useActiveWeb3React } from 'services/web3'
 
 export const Header = () => {
   const { account } = useActiveWeb3React()
-  const [notifications, { clearNotifications }] = useNotifications(account)
+  // const [notifications, { clearNotifications }] = useNotifications(account)
   return (
     // <App.Header
     //   appType={AppType.xSwap}

@@ -1,12 +1,12 @@
 import { FC, RefObject, useEffect, useMemo, useRef, useState } from 'react'
-import { isAddress } from '@ethersproject/address'
+// import { isAddress } from '@ethersproject/address'
 import { ChainId } from 'sdk'
 import { Native, Token, Type } from 'soulswap-currency'
 import { filterTokens, FundSource, tokenComparator, useDebounce, useSortedTokensByQuery } from 'soulswap-hooks'
 import { Fraction } from 'soulswap-math'
-import { useToken } from 'wagmi'
 
-import { BalanceMap } from 'hooks/useBalance/types'
+// import { BalanceMap } from 'hooks/useBalance/types'
+import { useToken } from 'hooks/Tokens'
 
 interface RenderProps {
   currencies: Type[]
@@ -21,7 +21,7 @@ interface Props {
   chainId?: ChainId
   tokenMap: Record<string, Token>
   pricesMap?: Record<string, Fraction>
-  balancesMap?: BalanceMap
+  balancesMap?: any // BalanceMap
   children(props: RenderProps): JSX.Element
   includeNative?: boolean
   fundSource: FundSource
@@ -52,12 +52,19 @@ export const TokenListFilterByQuery: FC<Props> = ({
     }
   }, [query])
 
-  const { data: searchTokenResult, isLoading } = useToken({
+  // const { data: searchTokenResult, isLoading } = useToken({
     // @ts-ignore TYPE NEEDS FIXING
-    address: isAddress(debouncedQuery) && !tokenMap[debouncedQuery.toLowerCase()] ? debouncedQuery : undefined,
-    chainId,
-  })
+    // address: isAddress(debouncedQuery) && !tokenMap[debouncedQuery.toLowerCase()] ? debouncedQuery : undefined,
+    // chainId,
+    // })
 
+
+    // dummy variables
+    useToken(debouncedQuery)
+    let searchTokenResult
+    let isLoading = false
+    //
+  
   const searchToken = useMemo(() => {
     if (!searchTokenResult || !chainId) return undefined
     const { decimals, address, symbol, name } = searchTokenResult
