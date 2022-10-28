@@ -1,4 +1,4 @@
-import { ChainId } from 'soulswap-chain'
+import { ChainId } from 'sdk'
 import React, { FC, useMemo } from 'react'
 
 import { NETWORK_CIRCLE_ICON, NETWORK_NAKED_ICON } from './network'
