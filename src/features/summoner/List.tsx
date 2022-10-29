@@ -161,19 +161,19 @@ export const FarmList = () => {
           </NavLink>
         </Button>
       </div>
-      <Typography className="text-2xl bg-dark-1000 mb-3 mt-6 border border-dark-600 p-3 font-bold text-center">SoulSwap Pools</Typography>
+      <Typography className="text-2xl bg-dark-1000 mt-6 border border-dark-600 p-3 font-bold text-center">SoulSwap Pools</Typography>
       <Active />
       <>{chainId == ChainId.FANTOM ? ftmList : avaxList}</>
         <div>
-          <Typography className="text-2xl bg-dark-1000 mb-3 mt-6 border border-blue p-3 font-bold text-center">Lending Pools</Typography>
+          <Typography className="text-2xl bg-dark-1000 mt-6 border border-blue p-3 font-bold text-center">Lending Pools</Typography>
       <Underworld />
           {chainId == ChainId.FANTOM ? ftmLendList : avaxLendList}
           <Typography 
-            className={classNames(chainId == ChainId.AVALANCHE ? 'hidden' : `text-2xl bg-dark-1000 mb-3 mt-6 border border-pink p-3 font-bold text-center`)}
+            className={classNames(chainId == ChainId.AVALANCHE ? 'hidden' : `text-2xl bg-dark-1000 mt-6 border border-pink p-3 font-bold text-center`)}
           >
               Retired Pools
             </Typography>
-            <Inactive/>
+            {chainId == ChainId.FANTOM ?  <Inactive/> : null }
             {chainId == ChainId.FANTOM ? inactiveFtmList : inactiveAvaxList}
         </div>
     </div>
