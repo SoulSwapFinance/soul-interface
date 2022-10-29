@@ -6,11 +6,12 @@ import React, { FC, useCallback, useMemo, useRef, useState } from 'react'
 import { usePrices } from 'hooks/usePrices'
 import { TokenSelector, TokenSelectorProps } from 'components/CrossSwap/TokenSelector'
 import { classNames } from 'functions'
-import { DEFAULT_INPUT_UNSTYLED, Input } from 'components/CrossSwap/CrossInput'
+import { DEFAULT_INPUT_UNSTYLED } from 'components/CrossSwap/CrossInput'
 import { Currency } from 'components/CrossSwap/Currency'
 import Typography from 'components/Typography'
 import { Skeleton } from 'components/Skeleton'
 import { useActiveWeb3React } from 'services/web3'
+import Numeric from 'components/CrossSwap/CrossInput/Numeric'
 
 export interface CurrencyInputProps
   extends Pick<
@@ -70,7 +71,7 @@ export const CurrencyInput: FC<CurrencyInputProps> = ({
               <Skeleton.Box className="w-[120px] h-[22px] bg-white/[0.06] rounded-full" />
             </div>
           ) : (
-            <Input.Numeric
+            <Numeric
               ref={inputRef}
               variant="unstyled"
               disabled={disabled}

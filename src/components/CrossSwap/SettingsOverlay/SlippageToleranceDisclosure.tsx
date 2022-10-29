@@ -6,7 +6,7 @@ import { DEFAULT_INPUT_UNSTYLED } from 'features/crosschain/constants'
 import { classNames } from 'functions/styling'
 import Typography from 'components/Typography'
 import { Tab } from 'components/Tabs'
-import Input from '../CrossInput/Numeric'
+import Numeric from '../CrossInput/Numeric'
 import { AdvancedTooltip } from 'components/Tooltip/Advanced'
 
 export const SlippageToleranceDisclosure: FC = () => {
@@ -91,7 +91,7 @@ export const SlippageToleranceDisclosure: FC = () => {
                         Custom Slippage
                       </Typography>
                       <div className="flex items-center gap-2">
-                        <Input
+                        <Numeric
                           variant="unstyled"
                           value={slippageTolerance ?? ''}
                           // onUserInput={(val) => updateSlippageTolerance(+val)}

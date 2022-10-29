@@ -424,46 +424,6 @@ const useMenu: UseBar = () => {
     }
       mainItems.push(exploreMenu)
 
-      
-    // if (featureEnabled(Feature.MISO, chainId)) {
-    //   mainItems.push({
-    //     key: 'launchpad',
-    //     title: i18n._(t`Launchpad`),
-    //     icon: <RocketIcon width={20} />,
-    //     items: [
-    //       {
-    //         key: 'marketplace',
-    //         title: i18n._(t`Marketplace`),
-    //         link: '/miso',
-    //       },
-    //       {
-    //         key: 'factory',
-    //         title: i18n._(t`Factory`),
-    //         link: '/miso/auction',
-    //       },
-    //     ],
-    //   })
-    // }
-
-    // if (featureEnabled(Feature.AMM, chainId)) {
-    //   mainItems.push({
-    //     key: 'academy',
-    //     title: i18n._(t`Academy`),
-    //     icon: <RocketIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
-    //     items: [
-    //       {
-    //         key: 'marketplace',
-    //         title: i18n._(t`Marketplace`),
-    //         link: '/miso',
-    //       },
-    //       {
-    //         key: 'factory',
-    //         title: i18n._(t`Factory`),
-    //         link: '/miso/auction',
-    //       },
-    //     ],
-    //   })
-    // }
     return mainItems.filter((el) => Object.keys(el).length > 0)
   }, [chainId, i18n])
 }

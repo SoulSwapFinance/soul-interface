@@ -21,7 +21,7 @@ import { Currency } from '../Currency'
 import Loader from 'components/Loader'
 import { classNames } from 'functions/styling'
 import { DEFAULT_INPUT_PADDING, DEFAULT_INPUT_UNSTYLED } from 'features/crosschain/constants'
-import { Input } from '../CrossInput'
+import { Address } from '../CrossInput/Address'
 
 type TokenSelectorDialog = Omit<TokenSelectorProps, 'variant' | 'tokenMap'> & {
   account?: string
@@ -90,7 +90,7 @@ export const TokenSelectorDialog: FC<TokenSelectorDialog> = ({
                   'my-3 mb-5 ring-offset-2 ring-offset-slate-800 flex gap-2 bg-slate-700 pr-3 w-full relative flex items-center justify-between gap-1 rounded-2xl focus-within:ring-2 text-primary ring-blue'
                 )}
               >
-                <Input.Address
+                <Address
                   variant="unstyled"
                   id="token-search"
                   ref={inputRef}

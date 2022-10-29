@@ -1,15 +1,18 @@
+import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Signature } from '@ethersproject/bytes'
-import { AddressZero } from '@ethersproject/constants'
+// import { AddressZero } from '@ethersproject/constants'
 import { Disclosure, Transition } from '@headlessui/react'
 import { ChevronDownIcon, InformationCircleIcon } from '@heroicons/react/outline'
-import chains, { Chain, ChainId } from 'soulswap-chain'
+import chains, { Chain } from 'soulswap-chain'
+import { ChainId } from 'sdk'
 import { Amount, Currency, Native, Price, tryParseAmount } from 'soulswap-currency'
 import { NATIVE, Percent, ZERO, JSBI, TradeType, COFFIN_BOX_ADDRESS } from 'sdk'
 // import { TradeType } from 'soulswap-amm'
 import { useSoulXSwapContract } from 'hooks/useContract'
-import { FundSource, useIsMounted } from 'soulswap-hooks'
+// import { FundSource, useIsMounted } from 'packages/hooks'
 import { isStargateBridgeToken, STARGATE_BRIDGE_TOKENS, STARGATE_CONFIRMATION_SECONDS } from 'soulswap-stargate'
 import Typography from 'components/Typography'
+
 // import { App, Button, classNames, Dialog, Dots, Loader, NetworkIcon, SlideIn, Tooltip } from 'soulswap-ui'
 // import { Icon } from 'soulswap-ui/currency/Icon'
 // import {
@@ -35,20 +38,41 @@ import Typography from 'components/Typography'
 import defaultTheme from 'config'
 // import { useTrade } from 'lib/hooks'
 // import { useBridgeFees } from 'lib/hooks/useBridgeFees'
-// import { useTokens } from 'lib/state/token-lists'
 // import { SoulXSwap } from 'lib/SoulXSwap'
 import { nanoid } from 'nanoid'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 // import { Theme } from 'types'
 
-import { usePrices } from 'hooks/usePrices'
+// import { usePrices } from 'hooks/usePrices'
 import { Theme } from '@material-ui/core'
-import { useTokens } from 'services/graph/hooks/exchange'
+// import { Widget } from 'components/Widget'
+import { SwapLayoutCard } from 'layouts/SwapLayout'
+import { useActiveWeb3React } from 'services/web3'
 // import { useBalance } from 'hooks/useBalance'
-// import { useTokens } from 'hooks/useTokens'
+import { useTokens } from 'hooks/Tokens'
+// import { useCustomTokens, useSettings } from 'lib/state/storage'
+// import { useTrade } from 'lib/hooks/useTrade'
+// import { Rate } from 'components/CrossSwap/Rate'
+// import { classNames } from 'functions/styling'
+// import { AdvancedTooltip } from 'components/Tooltip/Advanced'
+// import Loader from 'components/Loader'
+// import { CrossChainRoute, SameChainRoute } from 'components/CrossSwap/Route'
+// import { SlideIn } from 'components/Animated/SlideIn'
+// import { ConfirmationComponentController } from 'components/CrossSwap/ConfirmationComponentController'
+// import { Dialog } from 'components/Dialogue/Dialog'
+// import { Button } from 'components/CrossSwap/Button'
+// import { Caption } from 'components/CrossSwap/Caption'
+// import { TransactionProgressOverlay } from 'components/CrossSwap/TransactionProgressOverlay'
+// import { NetworkIcon } from 'components/Icons/NetworkIcon'
+// import { Icon } from 'components/CrossSwap/Currency/Icon'
+// import { Dots } from 'components/Swap/styleds'
+// import { CurrencyInputWithNetworkSelector } from 'components/CrossSwap/CurrencyInputWithNetworkSelector'
+import { SettingsOverlay } from 'components/CrossSwap/SettingsOverlay'
+import { App } from 'components/App'
+import { SwitchCurrenciesButton } from 'components/CrossSwap/SwitchCurrenciesButton'
+// import { useIsMounted } from 'packages/hooks'
 
 const BIPS_BASE = JSBI.BigInt(10000)
 
@@ -80,41 +104,41 @@ export function warningSeverity(priceImpact: Percent | undefined): WarningSeveri
   return 0
 }
 
-const SWAP_DEFAULT_SLIPPAGE = new Percent(50, 10_000) // 0.50%
+// const SWAP_DEFAULT_SLIPPAGE = new Percent(50, 10_000) // 0.50%
 
-const theme: Theme = {
-    ...defaultTheme,
-    shape: undefined,
-    breakpoints: undefined,
-    direction: 'ltr',
-    mixins: undefined,
-    palette: undefined,
-    // @ts-ignore
-    shadows: [],
-    spacing: undefined,
-    transitions: undefined,
-    typography: undefined,
-    zIndex: undefined
-}
+// const theme: Theme = {
+//     ...defaultTheme,
+//     shape: undefined,
+//     breakpoints: undefined,
+//     direction: 'ltr',
+//     mixins: undefined,
+//     palette: undefined,
+//     // @ts-ignore
+//     shadows: [],
+//     spacing: undefined,
+//     transitions: undefined,
+//     typography: undefined,
+//     zIndex: undefined
+// }
 
-export const getServerSideProps: GetServerSideProps = async ({ query, res }) => {
-  res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59')
+// export const getServerSideProps: GetServerSideProps = async ({ query, res }) => {
+//   res.setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59')
 
-  const { srcToken, dstToken, srcChainId, dstChainId, srcTypedAmount } = query
+//   const { srcToken, dstToken, srcChainId, dstChainId, srcTypedAmount } = query
 
-  // TODO: Need to fetch srcToken & dstToken if they're address and pass down basic object to client
-  // { chainId, name, symbol, decimals }, to avoid delay from fetching from token list
+//   // TODO: Need to fetch srcToken & dstToken if they're address and pass down basic object to client
+//   // { chainId, name, symbol, decimals }, to avoid delay from fetching from token list
 
-  return {
-    props: {
-      srcToken: srcToken ?? null,
-      dstToken: dstToken ?? null,
-      srcChainId: srcChainId ?? ChainId.ETHEREUM,
-      dstChainId: dstChainId ?? ChainId.ARBITRUM,
-      srcTypedAmount: !isNaN(Number(srcTypedAmount)) ? srcTypedAmount : '',
-    },
-  }
-}
+//   return {
+//     props: {
+//       srcToken: srcToken ?? null,
+//       dstToken: dstToken ?? null,
+//       srcChainId: srcChainId ?? ChainId.ETHEREUM,
+//       dstChainId: dstChainId ?? ChainId.ARBITRUM,
+//       srcTypedAmount: !isNaN(Number(srcTypedAmount)) ? srcTypedAmount : '',
+//     },
+//   }
+// }
 
 // const Swap = () => {
 //   return (
@@ -126,56 +150,48 @@ export const getServerSideProps: GetServerSideProps = async ({ query, res }) => 
 
 // export default Swap
 
-export default function Swap({
-  srcChainId,
-  dstChainId,
-  srcToken,
-  dstToken,
-  srcTypedAmount,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const srcTokens = useTokens(srcChainId)
-  const dstTokens = useTokens(dstChainId)
-  return (
-    // <Layout>
-    <div>
+export default function XSwap({
+  // srcChainId,
+  // dstChainId,
+  // srcToken,
+  // dstToken,
+  // srcTypedAmount,
+}
+// : InferGetServerSidePropsType<typeof getServerSideProps>) 
+){
+  const { chainId } = useActiveWeb3React()
+  // let srcChainId = chainId
+  const allTokens = useTokens()
 
+  const srcTokens = allTokens // useTokens(srcChainId)
+  // const dstTokens = useTokens(dstChainId)
+  return (
+    <SwapLayoutCard>
+    <div>
       <Head>
         <title>SoulSwap | Soul</title>
         <meta property="og:title" content="SoulSwap | Soul" key="title" />
       </Head>
-
-      {/* <Widget
-        theme={theme}
-        initialState={{
-          srcChainId: Number(srcChainId),
-          dstChainId: Number(dstChainId),
-          srcToken: srcToken in srcTokens ? srcTokens[srcToken] : Native.onChain(srcChainId),
-          dstToken: dstToken in dstTokens ? dstTokens[dstToken] : Native.onChain(dstChainId),
-          srcTypedAmount,
-        // }}
-        // swapCache={data}
-        // mutateSwapCache={mutateSwapCache}
-        // />
-       <Widget header={<>Swap</>} /> */}
+      {/* <XSwap /> */}
     </div>
-    // </Layout>
+    </SwapLayoutCard>
   )
 }
 
-interface Swap {
-  maxWidth?: number | string
-  theme?: Theme
-  initialState: {
-    srcChainId: number
-    dstChainId: number
-    srcTypedAmount: string
-    srcToken: Currency
-    dstToken: Currency
-  }
-  caption?: boolean
-  // swapCache: SwapCache
-  // mutateSwapCache: (cache: SwapCache) => void
-}
+// interface Swap {
+//   maxWidth?: number | string
+//   theme?: Theme
+//   initialState: {
+//     srcChainId: number
+//     dstChainId: number
+//     srcTypedAmount: string
+//     srcToken: Currency
+//     dstToken: Currency
+//   }
+//   caption?: boolean
+//   // swapCache: SwapCache
+//   // mutateSwapCache: (cache: SwapCache) => void
+// }
 
 // const Widget: FC<Swap> = ({
 //   maxWidth = 400,
@@ -185,10 +201,9 @@ interface Swap {
 //   // swapCache,
 //   // mutateSwapCache,
 // }) => {
-//   const { address } = useAccount()
-//   const { chain } = useNetwork()
-//   const { switchNetwork } = useSwitchNetwork()
-//   const [, { createNotification }] = useNotifications(address)
+//   const { account, chainId } = useActiveWeb3React()
+//   // const { switchNetwork } = useSwitchNetwork()
+//   // const [, { createNotification }] = useNotifications(address)
 
 //   const [isWritePending, setIsWritePending] = useState<boolean>(false)
 
@@ -196,21 +211,21 @@ interface Swap {
 
 //   const router = useRouter()
 
-//   const [{ expertMode, slippageTolerance }] = useSettings()
+//   // const [{ slippageTolerance }] = useSettings()
 
-//   const swapSlippage = useMemo(
-//     () => (slippageTolerance ? new Percent(slippageTolerance * 100, 10_000) : SWAP_DEFAULT_SLIPPAGE),
-//     [slippageTolerance]
-//   )
+//   // const swapSlippage = useMemo(
+//   //   () => (slippageTolerance ? new Percent(slippageTolerance * 100, 10_000) : SWAP_DEFAULT_SLIPPAGE),
+//   //   [slippageTolerance]
+//   // )
 
 //   const [srcChainId, setSrcChainId] = useState<number>(initialState.srcChainId)
 //   const [dstChainId, setDstChainId] = useState<number>(initialState.dstChainId)
 //   const [srcToken, setSrcToken] = useState<Currency>(initialState.srcToken)
 //   const [dstToken, setDstToken] = useState<Currency>(initialState.dstToken)
-//   const [srcCustomTokenMap, { addCustomToken: onAddSrcCustomToken, removeCustomToken: onRemoveSrcCustomToken }] =
-//     useCustomTokens(srcChainId)
-//   const [dstCustomTokenMap, { addCustomToken: onAddDstCustomToken, removeCustomToken: onRemoveDstCustomToken }] =
-//     useCustomTokens(dstChainId)
+//   // const [srcCustomTokenMap, { addCustomToken: onAddSrcCustomToken, removeCustomToken: onRemoveSrcCustomToken }] =
+//   //   useCustomTokens(srcChainId)
+//   // const [dstCustomTokenMap, { addCustomToken: onAddDstCustomToken, removeCustomToken: onRemoveDstCustomToken }] =
+//   //   useCustomTokens(dstChainId)
 
 //   useEffect(() => {
 //     setSrcToken(initialState.srcToken)
@@ -236,9 +251,11 @@ interface Swap {
 //   const [srcTypedAmount, setSrcTypedAmount] = useState<string>(initialState.srcTypedAmount)
 //   const [dstTypedAmount, setDstTypedAmount] = useState<string>('')
 
-//   const srcTokens = useTokens(srcChainId)
-//   const dstTokens = useTokens(dstChainId)
-
+//   // const srcTokens = useTokens(srcChainId)
+//   // const dstTokens = useTokens(dstChainId)
+//   let srcTokens = useTokens() // dummy
+//   let dstTokens = useTokens() // dummy
+ 
 //   // Computed
 
 //   // Same chain
@@ -259,11 +276,11 @@ interface Swap {
 //   // A transfer swap, no swap on the source, but a swap on the destination
 //   const transferSwap = crossChain && isStargateBridgeToken(srcToken) && !isStargateBridgeToken(dstToken)
 
-//   const srcInputCurrencyRebase = useCoffinBoxTotal(srcChainId, srcToken)
-//   const srcOutputCurrencyRebase = useCoffinBoxTotal(srcChainId, sameChainSwap ? dstToken : srcBridgeToken)
+//   // const srcInputCurrencyRebase = useCoffinBoxTotal(srcChainId, srcToken)
+//   // const srcOutputCurrencyRebase = useCoffinBoxTotal(srcChainId, sameChainSwap ? dstToken : srcBridgeToken)
 
 // //   const dstInputCurrencyRebase = useCoffinBoxTotal(dstChainId, dstBridgeToken)
-//   const dstOutputCurrencyRebase = useCoffinBoxTotal(dstChainId, dstToken)
+//   // const dstOutputCurrencyRebase = useCoffinBoxTotal(dstChainId, dstToken)
 
 //   // console.log('INDEX', srcTokenRebase?.base?.toString(), srcTokenRebase?.elastic?.toString())
 
@@ -309,7 +326,7 @@ interface Swap {
 
 //   const contract = useSoulXSwapContract[srcChainId]
 
-//   const contractWithProvider = useSoulXSwapContractWithProvider(srcChainId)
+//   // const contractWithProvider = useSoulXSwapContractWithProvider(srcChainId)
 
 //   // Parse the srcTypedAmount into a srcAmount
 //   const srcAmount = useMemo<Amount<Currency> | undefined>(() => {
@@ -330,22 +347,31 @@ interface Swap {
 //     crossChainSwap || swapTransfer ? srcBridgeToken : dstToken
 //   )
 
-//   const srcMinimumAmountOut = useMemo(() => srcTrade?.minimumAmountOut(swapSlippage), [srcTrade, swapSlippage])
+//   // const srcMinimumAmountOut = useMemo(() => srcTrade?.minimumAmountOut(swapSlippage), [srcTrade, swapSlippage])
+  
+//   // dummy variables //
+//   let srcMinimumAmountOut
+//   let swapSlippage
+//   let bridgeFee
+//   let eqFee
+//   let eqReward
+//   let lpFee
+//   let protocolFee
 
-//   const [eqFee, eqReward, lpFee, protocolFee] = useBridgeFees({
-//     srcChainId,
-//     dstChainId,
-//     srcBridgeToken,
-//     dstBridgeToken,
-//     amount: crossChainSwap || swapTransfer ? srcMinimumAmountOut : srcAmount,
-//   })
+//   // const [eqFee, eqReward, lpFee, protocolFee] = useBridgeFees({
+//   //   srcChainId,
+//   //   dstChainId,
+//   //   srcBridgeToken,
+//   //   dstBridgeToken,
+//   //   amount: crossChainSwap || swapTransfer ? srcMinimumAmountOut : srcAmount,
+//   // })
 
-//   const bridgeFee = useMemo(() => {
-//     if (!eqFee || !eqReward || !lpFee || !protocolFee) {
-//       return undefined
-//     }
-//     return eqFee.subtract(eqReward).add(lpFee).add(protocolFee)
-//   }, [eqFee, eqReward, lpFee, protocolFee])
+//   // const bridgeFee = useMemo(() => {
+//   //   if (!eqFee || !eqReward || !lpFee || !protocolFee) {
+//   //     return undefined
+//   //   }
+//   //   return eqFee.subtract(eqReward).add(lpFee).add(protocolFee)
+//   // }, [eqFee, eqReward, lpFee, protocolFee])
 
 //   const srcAmountMinusStargateFee = useMemo(
 //     () => ((transfer || transferSwap) && bridgeFee ? srcAmount?.subtract(bridgeFee) : undefined),
@@ -467,125 +493,125 @@ interface Swap {
 //     setDstToken(_srcToken)
 //   }, [dstChainId, dstToken, srcChainId, srcToken])
 
-//   const execute = useCallback(() => {
-//     // console.log([
-//     //   !srcChainId,
-//     //   !srcAmount,
-//     //   !dstChainId,
-//     //   !dstMinimumAmountOut,
-//     //   !address,
-//     //   !srcInputCurrencyRebase,
-//     //   !srcOutputCurrencyRebase,
-//     //   !dstOutputCurrencyRebase,
-//     //   !contract,
-//     // ])
-//     if (
-//       !srcChainId ||
-//       !srcAmount ||
-//       !dstChainId ||
-//       !dstMinimumAmountOut ||
-//       !address ||
-//       !srcInputCurrencyRebase ||
-//       !srcOutputCurrencyRebase ||
-//       !dstOutputCurrencyRebase ||
-//       !contract
-//     ) {
-//       return
-//     }
+//   // const execute = useCallback(() => {
+//   //   // console.log([
+//   //   //   !srcChainId,
+//   //   //   !srcAmount,
+//   //   //   !dstChainId,
+//   //   //   !dstMinimumAmountOut,
+//   //   //   !address,
+//   //   //   !srcInputCurrencyRebase,
+//   //   //   !srcOutputCurrencyRebase,
+//   //   //   !dstOutputCurrencyRebase,
+//   //   //   !contract,
+//   //   // ])
+//   //   if (
+//   //     !srcChainId ||
+//   //     !srcAmount ||
+//   //     !dstChainId ||
+//   //     !dstMinimumAmountOut ||
+//   //     !account ||
+//   //     // !srcInputCurrencyRebase ||
+//   //     // !srcOutputCurrencyRebase ||
+//   //     // !dstOutputCurrencyRebase ||
+//   //     !contract
+//   //   ) {
+//   //     return
+//   //   }
 
-//     const srcShare = srcAmount.toShare(srcInputCurrencyRebase)
+//     // const srcShare = srcAmount.toShare(srcInputCurrencyRebase)
 
 //     setIsWritePending(true)
 
-//     const soulXSwap = new SoulXSwap({
-//       contract,
-//       srcToken,
-//       dstToken,
-//       srcTrade,
-//       dstTrade,
-//       srcUseCoffinBox: false,
-//       dstUseCoffinBox: false,
-//       user: address,
-//       debug: true,
-//     })
+//     // const soulXSwap = new SoulXSwap({
+//     //   contract,
+//     //   srcToken,
+//     //   dstToken,
+//     //   srcTrade,
+//     //   dstTrade,
+//     //   srcUseCoffinBox: false,
+//     //   dstUseCoffinBox: false,
+//     //   user: account,
+//     //   debug: true,
+//     // })
 
-//     if (signature) {
-//       soulXSwap.srcCooker.setMasterContractApproval(signature)
-//     }
+//     // if (signature) {
+//     //   soulXSwap.srcCooker.setMasterContractApproval(signature)
+//     // }
 
-//     if (transfer) {
-//       soulXSwap.transfer(srcAmount, srcShare)
-//     } else if (sameChainSwap && srcTrade && srcTrade.route.legs.length && srcMinimumAmountOut) {
-//       soulXSwap.swap(srcAmount, srcShare, srcMinimumAmountOut, srcMinimumAmountOut.toShare(srcOutputCurrencyRebase))
-//     } else if (
-//       crossChain &&
-//       ((srcTrade && srcTrade.route.legs.length && srcMinimumAmountOut) ||
-//         (dstTrade && dstTrade.route.legs.length && dstMinimumAmountOut))
-//     ) {
-//       soulXSwap.crossChainSwap({
-//         srcAmount,
-//         srcShare,
-//         srcMinimumAmountOut,
-//         srcMinimumShareOut: srcMinimumAmountOut?.toShare(srcOutputCurrencyRebase),
-//         dstMinimumAmountOut,
-//         dstMinimumShareOut: dstMinimumAmountOut?.toShare(dstOutputCurrencyRebase),
-//       })
-//     }
+//     // if (transfer) {
+//     //   soulXSwap.transfer(srcAmount, srcShare)
+//     // } else if (sameChainSwap && srcTrade && srcTrade.route.legs.length && srcMinimumAmountOut) {
+//     //   soulXSwap.swap(srcAmount, srcShare, srcMinimumAmountOut, srcMinimumAmountOut.toShare(srcOutputCurrencyRebase))
+//     // } else if (
+//     //   crossChain &&
+//     //   ((srcTrade && srcTrade.route.legs.length && srcMinimumAmountOut) ||
+//     //     (dstTrade && dstTrade.route.legs.length && dstMinimumAmountOut))
+//     // ) {
+//     //   soulXSwap.crossChainSwap({
+//     //     srcAmount,
+//     //     srcShare,
+//     //     srcMinimumAmountOut,
+//     //     srcMinimumShareOut: srcMinimumAmountOut?.toShare(srcOutputCurrencyRebase),
+//     //     dstMinimumAmountOut,
+//     //     dstMinimumShareOut: dstMinimumAmountOut?.toShare(dstOutputCurrencyRebase),
+//     //   })
+//     // }
 
-//     if (crossChain && srcAmountOut && dstAmountIn) {
-//       soulXSwap.teleport(
-//         srcBridgeToken,
-//         dstBridgeToken,
-//         dstTrade ? dstTrade.route.gasSpent + 1000000 : undefined,
-//         nanoId
-//         // Amount.fromRawAmount(dstAmountIn.currency, new Fraction(ONE)
-//         // .add(new Percent(100, 10_000))
-//         // .invert()
-//         // .multiply(srcAmountOut).quotient)
-//       )
-//     }
+//     // if (crossChain && srcAmountOut && dstAmountIn) {
+//     //   soulXSwap.teleport(
+//     //     srcBridgeToken,
+//     //     dstBridgeToken,
+//     //     dstTrade ? dstTrade.route.gasSpent + 1000000 : undefined,
+//     //     nanoId
+//     //     // Amount.fromRawAmount(dstAmountIn.currency, new Fraction(ONE)
+//     //     // .add(new Percent(100, 10_000))
+//     //     // .invert()
+//     //     // .multiply(srcAmountOut).quotient)
+//     //   )
+//     // }
 
-//     console.debug('attempt cook')
-//     soulXSwap
-//       .cook(dstTrade ? dstTrade.route.gasSpent + 1000000 : undefined)
-//       .then((res) => {
-//         if (res) {
-//           setSrcTxHash(res.hash)
-//         }
-//         console.debug('then cooked', res)
-//       })
-//       .catch((err) => {
-//         console.error('catch err', err)
-//       })
-//       .finally(() => {
-//         setSignature(undefined)
-//         setIsWritePending(false)
-//       })
-//   }, [
-//     address,
-//     contract,
-//     crossChain,
-//     dstAmountIn,
-//     dstBridgeToken,
-//     dstChainId,
-//     dstMinimumAmountOut,
-//     dstOutputCurrencyRebase,
-//     dstToken,
-//     dstTrade,
-//     nanoId,
-//     sameChainSwap,
-//     signature,
-//     srcAmount,
-//     srcAmountOut,
-//     srcBridgeToken,
-//     srcChainId,
-//     srcInputCurrencyRebase,
-//     srcMinimumAmountOut,
-//     srcOutputCurrencyRebase,
-//     srcToken,
-//     srcTrade,
-//     transfer,
-//   ])
+//   //   console.debug('attempt cook')
+//   //   soulXSwap
+//   //     .cook(dstTrade ? dstTrade.route.gasSpent + 1000000 : undefined)
+//   //     .then((res) => {
+//   //       if (res) {
+//   //         setSrcTxHash(res.hash)
+//   //       }
+//   //       console.debug('then cooked', res)
+//   //     })
+//   //     .catch((err) => {
+//   //       console.error('catch err', err)
+//   //     })
+//   //     .finally(() => {
+//   //       setSignature(undefined)
+//   //       setIsWritePending(false)
+//   //     })
+//   // }, [
+//   //   account,
+//   //   contract,
+//   //   crossChain,
+//   //   dstAmountIn,
+//   //   dstBridgeToken,
+//   //   dstChainId,
+//   //   dstMinimumAmountOut,
+//   //   dstOutputCurrencyRebase,
+//   //   dstToken,
+//   //   dstTrade,
+//   //   nanoId,
+//   //   sameChainSwap,
+//   //   signature,
+//   //   srcAmount,
+//   //   srcAmountOut,
+//   //   srcBridgeToken,
+//   //   srcChainId,
+//   //   srcInputCurrencyRebase,
+//   //   srcMinimumAmountOut,
+//   //   srcOutputCurrencyRebase,
+//   //   srcToken,
+//   //   srcTrade,
+//   //   transfer,
+//   // ])
 
 //   // uint256 _srcPoolId,
 //   // uint256 _dstPoolId,
@@ -622,19 +648,22 @@ interface Swap {
 //     return new Percent(JSBI.BigInt(0), JSBI.BigInt(10000))
 //   }, [sameChainSwap, srcTrade, transfer, crossChainSwap, dstTrade, transferSwap, swapTransfer, bridgeImpact])
 
-//   const { data: nativeBalance } = useBalance({
-//     chainId: srcChainId,
-//     account: address,
-//     currency: Native.onChain(srcChainId),
-//   })
+//   // const { data: nativeBalance } = useBalance({
+//   //   chainId: srcChainId,
+//   //   account: account,
+//   //   currency: Native.onChain(srcChainId),
+//   // })
 
-//   const { data: srcBalance } = useBalance({ chainId: srcChainId, account: address, currency: srcToken })
+//   // const { data: srcBalance } = useBalance({ chainId: srcChainId, account: account, currency: srcToken })
 
-//   const { data: srcPrices } = usePrices({ chainId: srcChainId })
-//   const { data: dstPrices } = usePrices({ chainId: dstChainId })
+//   // const { data: srcPrices } = usePrices({ chainId: srcChainId })
+//   // const { data: dstPrices } = usePrices({ chainId: dstChainId })
 
-//   const srcTokenPrice = srcPrices?.[srcToken.wrapped.address]
-//   const dstTokenPrice = dstPrices?.[dstToken.wrapped.address]
+//   // const srcTokenPrice = srcPrices?.[srcToken.wrapped.address]
+//   // const dstTokenPrice = dstPrices?.[dstToken.wrapped.address]
+  
+//   let srcTokenPrice // dummy
+//   let dstTokenPrice // dummy
 
 //   const routeNotFound = useMemo(() => {
 //     if (swapTransfer || transferSwap) {
@@ -655,7 +684,7 @@ interface Swap {
 
 //   const priceImpactSeverity = useMemo(() => warningSeverity(priceImpact), [priceImpact])
 
-//   const priceImpactTooHigh = priceImpactSeverity > 3 && !expertMode
+//   const priceImpactTooHigh = priceImpactSeverity > 3 // && !expertMode
 
 //   const [inputUsd, outputUsd, usdPctChange] = useMemo(() => {
 //     const inputUSD = srcAmount && srcTokenPrice ? srcAmount.multiply(srcTokenPrice.asFraction) : undefined
@@ -667,114 +696,116 @@ interface Swap {
 //     return [inputUSD, outputUSD, usdPctChange]
 //   }, [dstAmountOut, dstTokenPrice, srcAmount, srcTokenPrice])
 
-//   useEffect(() => {
-//     // console.log('getFee escape hatch', [
-//     //   !srcChainId,
-//     //   !srcAmount,
-//     //   !dstChainId,
-//     //   !dstMinimumAmountOut,
-//     //   !address,
-//     //   !srcInputCurrencyRebase,
-//     //   !srcOutputCurrencyRebase,
-//     //   !dstOutputCurrencyRebase,
-//     //   !contractWithProvider,
-//     // ])
-//     if (
-//       !srcChainId ||
-//       !srcAmount ||
-//       !dstChainId ||
-//       !dstMinimumAmountOut ||
-//       !address ||
-//       !srcInputCurrencyRebase ||
-//       !srcOutputCurrencyRebase ||
-//       !dstOutputCurrencyRebase ||
-//       !contractWithProvider
-//     ) {
-//       return
-//     }
+//   // useEffect(() => {
+//   //   // console.log('getFee escape hatch', [
+//   //   //   !srcChainId,
+//   //   //   !srcAmount,
+//   //   //   !dstChainId,
+//   //   //   !dstMinimumAmountOut,
+//   //   //   !account,
+//   //   //   !srcInputCurrencyRebase,
+//   //   //   !srcOutputCurrencyRebase,
+//   //   //   !dstOutputCurrencyRebase,
+//   //   //   !contractWithProvider,
+//   //   // ])
+//   //   if (
+//   //     !srcChainId ||
+//   //     !srcAmount ||
+//   //     !dstChainId ||
+//   //     !dstMinimumAmountOut ||
+//   //     !account ||
+//   //     // !srcInputCurrencyRebase ||
+//   //     // !srcOutputCurrencyRebase ||
+//   //     // !dstOutputCurrencyRebase ||
+//   //     // !contractWithProvider
+//   //   ) {
+//   //     return
+//   //   }
 
-//     const getFee = async () => {
-//       const srcShare = srcAmount.toShare(srcInputCurrencyRebase)
+//     // const getFee = async () => {
+//     //   const srcShare = srcAmount.toShare(srcInputCurrencyRebase)
 
-//       const soulXSwap = new SoulXSwap({
-//         contract: contractWithProvider,
-//         srcToken,
-//         dstToken,
-//         srcTrade,
-//         dstTrade,
-//         srcUseCoffinBox: false,
-//         dstUseCoffinBox: false,
-//         user: AddressZero,
-//         debug: false,
-//       })
+//     //   const soulXSwap = new SoulXSwap({
+//     //     contract: contractWithProvider,
+//     //     srcToken,
+//     //     dstToken,
+//     //     srcTrade,
+//     //     dstTrade,
+//     //     srcUseCoffinBox: false,
+//     //     dstUseCoffinBox: false,
+//     //     user: AddressZero,
+//     //     debug: false,
+//     //   })
 
-//       if (transfer) {
-//         soulXSwap.transfer(srcAmount, srcShare)
-//       } else if (sameChainSwap && srcTrade && srcTrade.route.legs.length && srcMinimumAmountOut) {
-//         soulXSwap.swap(srcAmount, srcShare, srcMinimumAmountOut, srcMinimumAmountOut.toShare(srcOutputCurrencyRebase))
-//       } else if (
-//         crossChain &&
-//         ((srcTrade && srcTrade.route.legs.length && srcMinimumAmountOut) ||
-//           (dstTrade && dstTrade.route.legs.length && dstMinimumAmountOut))
-//       ) {
-//         soulXSwap.crossChainSwap({
-//           srcAmount,
-//           srcShare,
-//           srcMinimumAmountOut,
-//           srcMinimumShareOut: srcMinimumAmountOut?.toShare(srcOutputCurrencyRebase),
-//           dstMinimumAmountOut,
-//           dstMinimumShareOut: dstMinimumAmountOut?.toShare(dstOutputCurrencyRebase),
-//         })
-//       }
+//     //   if (transfer) {
+//     //     soulXSwap.transfer(srcAmount, srcShare)
+//     //   } else if (sameChainSwap && srcTrade && srcTrade.route.legs.length && srcMinimumAmountOut) {
+//     //     soulXSwap.swap(srcAmount, srcShare, srcMinimumAmountOut, srcMinimumAmountOut.toShare(srcOutputCurrencyRebase))
+//     //   } else if (
+//     //     crossChain &&
+//     //     ((srcTrade && srcTrade.route.legs.length && srcMinimumAmountOut) ||
+//     //       (dstTrade && dstTrade.route.legs.length && dstMinimumAmountOut))
+//     //   ) {
+//     //     soulXSwap.crossChainSwap({
+//     //       srcAmount,
+//     //       srcShare,
+//     //       srcMinimumAmountOut,
+//     //       srcMinimumShareOut: srcMinimumAmountOut?.toShare(srcOutputCurrencyRebase),
+//     //       dstMinimumAmountOut,
+//     //       dstMinimumShareOut: dstMinimumAmountOut?.toShare(dstOutputCurrencyRebase),
+//     //     })
+//     //   }
 
-//       if (crossChain && srcAmountOut && dstAmountIn) {
-//         soulXSwap.teleport(
-//           srcBridgeToken,
-//           dstBridgeToken,
-//           dstTrade ? dstTrade.route.gasSpent + 1000000 : undefined,
-//           nanoId
-//           // Amount.fromRawAmount(dstAmountIn.currency, new Fraction(ONE)
-//           // .add(new Percent(100, 10_000))
-//           // .invert()
-//           // .multiply(srcAmountOut).quotient)
-//         )
-//       }
+//     //   if (crossChain && srcAmountOut && dstAmountIn) {
+//     //     soulXSwap.teleport(
+//     //       srcBridgeToken,
+//     //       dstBridgeToken,
+//     //       dstTrade ? dstTrade.route.gasSpent + 1000000 : undefined,
+//     //       nanoId
+//     //       // Amount.fromRawAmount(dstAmountIn.currency, new Fraction(ONE)
+//     //       // .add(new Percent(100, 10_000))
+//     //       // .invert()
+//     //       // .multiply(srcAmountOut).quotient)
+//     //     )
+//     //   }
 
-//       try {
-//         const [fee] = await soulXSwap.getFee(dstTrade ? dstTrade.route.gasSpent + 1000000 : undefined)
-//         feeRef.current = Amount.fromRawAmount(Native.onChain(srcChainId), fee.toString())
-//       } catch (e) {
-//         console.log(e)
-//       }
-//     }
+//     //   try {
+//     //     const [fee] = await soulXSwap.getFee(dstTrade ? dstTrade.route.gasSpent + 1000000 : undefined)
+//     //     feeRef.current = Amount.fromRawAmount(Native.onChain(srcChainId), fee.toString())
+//     //   } catch (e) {
+//     //     console.log(e)
+//     //   }
+//     // }
 
-//     void getFee()
-//   }, [
-//     address,
-//     contractWithProvider,
-//     crossChain,
-//     dstAmountIn,
-//     dstBridgeToken,
-//     dstChainId,
-//     dstMinimumAmountOut,
-//     dstOutputCurrencyRebase,
-//     dstToken,
-//     dstTrade,
-//     nanoId,
-//     sameChainSwap,
-//     slippageTolerance,
-//     srcAmount,
-//     srcAmountOut,
-//     srcBridgeToken,
-//     srcChainId,
-//     srcInputCurrencyRebase,
-//     srcMinimumAmountOut,
-//     srcOutputCurrencyRebase,
-//     srcToken,
-//     srcTrade,
-//     swapSlippage,
-//     transfer,
-//   ])
+//   //   void getFee()
+//   // }, [
+//   //   account,
+//   //   contractWithProvider,
+//   //   crossChain,
+//   //   dstAmountIn,
+//   //   dstBridgeToken,
+//   //   dstChainId,
+//   //   dstMinimumAmountOut,
+//   //   dstOutputCurrencyRebase,
+//   //   dstToken,
+//   //   dstTrade,
+//   //   nanoId,
+//   //   sameChainSwap,
+//   //   slippageTolerance,
+//   //   srcAmount,
+//   //   srcAmountOut,
+//   //   srcBridgeToken,
+//   //   srcChainId,
+//   //   srcInputCurrencyRebase,
+//   //   srcMinimumAmountOut,
+//   //   srcOutputCurrencyRebase,
+//   //   srcToken,
+//   //   srcTrade,
+//   //   swapSlippage,
+//   //   transfer,
+//   // ])
+
+//   let srcPrices // dummy
 
 //   const stats = useMemo(() => {
 //     return (
@@ -824,7 +855,9 @@ interface Swap {
 //               </Typography>
 //             ) : (
 //               <div className="flex items-center justify-end">
-//                 <Loader size={14} />
+//                 <Loader 
+//                   // size={14} 
+//                 />
 //               </div>
 //             )}
 //             <Typography variant="sm" className="text-slate-400">
@@ -837,7 +870,9 @@ interface Swap {
 //               </Typography>
 //             ) : (
 //               <div className="flex items-center justify-end">
-//                 <Loader size={14} />
+//                 <Loader 
+//                 // size={14} 
+//                 />
 //               </div>
 //             )}
 //           </>
@@ -865,7 +900,8 @@ interface Swap {
 //     setDstToken(Native.onChain(chainId))
 //   }, [])
 
-//   const isMounted = useIsMounted()
+//   // const isMounted = useIsMounted()
+//   const isMounted = true // dummy
 
 //   const showWrap = false
 
@@ -942,6 +978,9 @@ interface Swap {
 //   //     srcTrade,
 //   //   ])
 
+//   let nativeBalance // dummy
+//   let srcBalance // dummy
+
 //   return useMemo(
 //     () => (
 //       <>
@@ -962,23 +1001,24 @@ interface Swap {
 //               <SettingsOverlay chainId={srcChainId} />
 //             </div>
 //           </div>
-//           <CurrencyInputWithNetworkSelector
+//           {/* <CurrencyInputWithNetworkSelector
 //             onNetworkSelect={onSrcNetworkSelect}
 //             value={srcTypedAmount}
 //             onChange={setSrcTypedAmount}
 //             onSelect={setSrcToken}
 //             currency={srcToken}
 //             chainId={srcChainId}
+//             // @ts-ignore
 //             tokenMap={srcTokens}
 //             customTokenMap={srcCustomTokenMap}
 //             onAddToken={onAddSrcCustomToken}
 //             onRemoveToken={onRemoveSrcCustomToken}
-//           />
+//           /> */}
 //           <div className="flex items-center justify-center -mt-[12px] -mb-[12px] z-10">
 //             <SwitchCurrenciesButton onClick={switchCurrencies} />
 //           </div>
 //           <div className="bg-slate-800">
-//             <CurrencyInputWithNetworkSelector
+//             {/* <CurrencyInputWithNetworkSelector
 //               className="!pb-1"
 //               disabled
 //               disableMaxButton
@@ -988,12 +1028,13 @@ interface Swap {
 //               onSelect={setDstToken}
 //               currency={dstToken}
 //               chainId={dstChainId}
+//               // @ts-ignore
 //               tokenMap={dstTokens}
 //               customTokenMap={dstCustomTokenMap}
 //               usdPctChange={usdPctChange}
 //               onAddToken={onAddDstCustomToken}
 //               onRemoveToken={onRemoveDstCustomToken}
-//             />
+//             /> */}
 
 //             <div className="p-3">
 //               <Transition
@@ -1010,14 +1051,17 @@ interface Swap {
 //                 <Disclosure>
 //                   {({ open }) => (
 //                     <>
-//                       <Rate price={price} theme={theme}>
+//                       <Rate 
+//                         price={price}
+//                         theme={undefined}
+//                       >
 //                         {({ content, usdPrice, toggleInvert }) => (
 //                           <div className="flex justify-between items-center bg-white bg-opacity-[0.04] hover:bg-opacity-[0.08] rounded-2xl px-4 mb-4 py-2 gap-2">
 //                             <div
 //                               className="text-sm text-slate-300 hover:text-slate-50 cursor-pointer flex items-center h-full gap-1 font-semibold tracking-tight h-[36px] flex items-center truncate"
 //                               onClick={toggleInvert}
 //                             >
-//                               <Tooltip
+//                               <AdvancedTooltip
 //                                 panel={<div className="grid grid-cols-2 gap-1">{stats}</div>}
 //                                 button={<InformationCircleIcon width={16} height={16} />}
 //                               />{' '}
@@ -1074,12 +1118,14 @@ interface Swap {
 //                 </Disclosure>
 //               </Transition>
 
-//               {isMounted && !address ? (
-//                 <Wallet.Button appearOnMount={false} fullWidth color="blue" size="md">
-//                   Connect Wallet
-//                 </Wallet.Button>
-//               ) : isMounted && chain && chain.id !== srcChainId ? (
-//                 <Button size="md" fullWidth onClick={() => switchNetwork && switchNetwork(srcChainId)}>
+//               {isMounted && !account ? (
+//                 // <Wallet.Button appearOnMount={false} fullWidth color="blue" size="md">
+//                   'Connect Wallet'
+//                 // </Wallet.Button>
+//               ) : isMounted && chainId && chainId !== srcChainId ? (
+//                 <Button size="md" fullWidth 
+//                 // onClick={() => switchNetwork && switchNetwork(srcChainId)}
+//                 >
 //                   Switch to {Chain.from(srcChainId).name}
 //                 </Button>
 //               ) : showWrap ? (
@@ -1093,13 +1139,16 @@ interface Swap {
 //               ) : isMounted &&
 //                 ((srcAmount?.greaterThan(0) &&
 //                   feeRef.current &&
-//                   nativeBalance &&
-//                   feeRef.current.greaterThan(nativeBalance[FundSource.WALLET])) ||
-//                   (srcBalance && srcAmount?.greaterThan(srcBalance[FundSource.WALLET]))) ? (
+//                   nativeBalance // &&
+//                   // feeRef.current.greaterThan(nativeBalance[FundSource.WALLET]
+//                   ))
+//                   // ||
+//                   // (srcBalance && srcAmount?.greaterThan(srcBalance[FundSource.WALLET])))
+//                   ? (
 //                 <Button size="md" fullWidth disabled>
 //                   Insufficient Balance
 //                 </Button>
-//               ) : isMounted && chain && chain.id == srcChainId ? (
+//               ) : isMounted && chainId && chainId == srcChainId ? (
 //                 <>
 //                   <ConfirmationComponentController
 //                     variant="dialog"
@@ -1110,7 +1159,7 @@ interface Swap {
 //                         size="md"
 //                         variant="filled"
 //                         color={priceImpactTooHigh || priceImpactSeverity > 2 ? 'red' : 'blue'}
-//                         {...(Boolean(!routeNotFound && priceImpactSeverity > 2 && !expertMode) && {
+//                         {...(Boolean(!routeNotFound && priceImpactSeverity > 2) && {
 //                           title: 'Enable expert mode to swap with high price impact',
 //                         })}
 //                         disabled={
@@ -1120,12 +1169,12 @@ interface Swap {
 //                           priceImpactTooHigh ||
 //                           !dstMinimumAmountOut ||
 //                           dstMinimumAmountOut?.equalTo(ZERO) ||
-//                           Boolean(!routeNotFound && priceImpactSeverity > 2 && !expertMode)
+//                           Boolean(!routeNotFound && priceImpactSeverity > 2)
 //                         }
 //                         onClick={() => setOpen(true)}
 //                       >
 //                         {isWritePending ? (
-//                           <Dots>Confirm transaction</Dots>
+//                           <Dots>Confirm Transaction</Dots>
 //                         ) : priceImpactTooHigh ? (
 //                           'High Price Impact'
 //                         ) : !routeNotFound && priceImpactSeverity > 2 ? (
@@ -1184,6 +1233,7 @@ interface Swap {
 //                                       >
 //                                         <NetworkIcon
 //                                           type="naked"
+//                                           // @ts-ignore
 //                                           chainId={srcAmount.currency.chainId}
 //                                           width={16}
 //                                           height={16}
@@ -1248,6 +1298,7 @@ interface Swap {
 //                                       >
 //                                         <NetworkIcon
 //                                           type="naked"
+//                                           // @ts-ignore
 //                                           chainId={dstAmountOut.currency.chainId}
 //                                           width={16}
 //                                           height={16}
@@ -1259,7 +1310,9 @@ interface Swap {
 //                                 </div>
 //                               </div>
 //                               <div className="px-4 py-3">
-//                                 <Rate price={price} theme={theme}>
+//                                 <Rate price={price}
+//                                 theme={undefined}
+//                                 >
 //                                   {({ toggleInvert, content, usdPrice }) => (
 //                                     <Typography
 //                                       as="button"
@@ -1289,7 +1342,7 @@ interface Swap {
 //                                   <SameChainRoute trade={srcTrade} />
 //                                 )}
 //                               </div>
-//                               <Approve
+//                               {/* <Approve
 //                                 className="flex-grow !justify-end pt-4"
 //                                 onSuccess={createNotification}
 //                                 components={
@@ -1317,7 +1370,7 @@ interface Swap {
 //                                     </Button>
 //                                   )
 //                                 }}
-//                               />
+//                               /> */}
 //                             </>
 //                           </SlideIn>
 //                         )}
@@ -1338,33 +1391,33 @@ interface Swap {
 //       </>
 //     ),
 //     [
-//       address,
+//       account,
 //       caption,
-//       chain,
-//       createNotification,
+//       chainId,
+//       // createNotification,
 //       crossChain,
 //       dstAmountOut,
 //       dstBridgeToken,
 //       dstChainId,
-//       dstCustomTokenMap,
+//       // dstCustomTokenMap,
 //       dstMinimumAmountOut,
 //       dstToken,
 //       dstTokens,
 //       dstTrade,
 //       dstTypedAmount,
-//       execute,
-//       expertMode,
+//       // execute,
+//       // expertMode,
 //       inputUsd,
 //       isMounted,
 //       isWritePending,
 //       maxWidth,
 //       nanoId,
 //       nativeBalance,
-//       onAddDstCustomToken,
-//       onAddSrcCustomToken,
+//       // onAddDstCustomToken,
+//       // onAddSrcCustomToken,
 //       onDstNetworkSelect,
-//       onRemoveDstCustomToken,
-//       onRemoveSrcCustomToken,
+//       // onRemoveDstCustomToken,
+//       // onRemoveSrcCustomToken,
 //       onSrcNetworkSelect,
 //       outputUsd,
 //       price,
@@ -1376,7 +1429,7 @@ interface Swap {
 //       srcBalance,
 //       srcBridgeToken,
 //       srcChainId,
-//       srcCustomTokenMap,
+//       // srcCustomTokenMap,
 //       srcToken,
 //       srcTokens,
 //       srcTrade,
@@ -1384,7 +1437,7 @@ interface Swap {
 //       srcTypedAmount,
 //       stats,
 //       switchCurrencies,
-//       switchNetwork,
+//       // switchNetwork,
 //       theme,
 //       transfer,
 //       usdPctChange,

@@ -1,5 +1,4 @@
 import { classNames } from 'functions'
-import { Input } from './Input'
 
 // Base classes
 export const DEFAULT_INPUT_FONT = 'text-left text-base md:text-sm placeholder:font-normal font-medium'
@@ -33,5 +32,3 @@ export const DEFAULT_INPUT_CLASSNAME = classNames(
   DEFAULT_INPUT_APPEARANCE,
   DEFAULT_INPUT_PADDING
 )
-
-export { Input }
