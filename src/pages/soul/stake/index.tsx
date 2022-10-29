@@ -45,7 +45,7 @@ export default function Stake() {
   const AutoStakeContract = useAutoStakeContract()
 
   const soulToken = new Token(chainId, getAddress(SOUL_ADDRESS[chainId]), 18, 'SOUL')
-  const soulBal = useCurrencyBalance(account, soulToken)
+  const soulBal = useCurrencyBalance(chainId, account, soulToken)
   const [seanceBal, setSeanceBalance] = useState(0)
   const [soulBalance, setLuxBalance] = useState(0)
 

@@ -1,7 +1,7 @@
 import { ChevronDownIcon } from '@heroicons/react/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency, CurrencyAmount, Pair, Percent, Token } from 'sdk'
+import { ChainId, Currency, CurrencyAmount, Pair, Percent, Token } from 'sdk'
 import selectCoinAnimation from 'animation/select-coin.json'
 import { classNames } from 'functions'
 import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
@@ -18,6 +18,7 @@ import { FiatValue } from './FiatValue'
 
 interface CurrencyInputPanelProps {
   value?: string
+  chainId: ChainId
   onUserInput?: (value: string) => void
   onHalf?: () => void
   onMax?: () => void
@@ -43,10 +44,11 @@ interface CurrencyInputPanelProps {
 
 export default function CurrencyInputPanel({
   value,
+  chainId,
   onUserInput,
   onHalf,
   onMax,
-  showMaxButton,
+  // showMaxButton,
   label = 'Input',
   onCurrencySelect,
   currency,
@@ -60,15 +62,15 @@ export default function CurrencyInputPanel({
   hideBalance = false,
   pair = null, // used for double token logo
   hideInput = false,
-  locked = false,
-  customBalanceText,
+  // locked = false,
+  // customBalanceText,
   allowManageTokenList = true,
   showSearch = true,
 }: CurrencyInputPanelProps) {
   const { i18n } = useLingui()
   const [modalOpen, setModalOpen] = useState(false)
   const { account } = useActiveWeb3React()
-  const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined)
+  const selectedCurrencyBalance = useCurrencyBalance(chainId, account ?? undefined, currency ?? undefined)
 
   const handleDismissSearch = useCallback(() => {
     setModalOpen(false)

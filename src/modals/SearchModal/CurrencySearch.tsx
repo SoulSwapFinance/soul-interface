@@ -44,7 +44,7 @@ export function CurrencySearch({
   const isAddressSearch = isAddress(debouncedQuery)
   const searchToken = useToken(debouncedQuery)
   const searchTokenIsAdded = useIsUserAddedToken(searchToken)
-  const tokenComparator = useTokenComparator()
+  const tokenComparator = useTokenComparator(chainId)
 
   if (router.asPath.startsWith('/create') && chainId) {
     allTokens = Object.keys(allTokens).reduce((obj, key) => {
@@ -158,6 +158,7 @@ export function CurrencySearch({
       <div className="h-full overflow-hidden overflow-y-auto border rounded border-dark-800 bg-[rgba(0,0,0,0.2)]">
         {filteredSortedTokens?.length > 0 || filteredInactiveTokens?.length > 0 ? (
           <CurrencyList
+            chainId={chainId}
             currencies={includeNative ? filteredSortedTokensWithETH : filteredSortedTokens}
             otherListTokens={filteredInactiveTokens}
             otherCurrency={otherSelectedCurrency}

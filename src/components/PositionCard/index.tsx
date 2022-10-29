@@ -1,5 +1,5 @@
 import { ChevronDownIcon, ChevronUpIcon, MinusIcon, PlusIcon } from '@heroicons/react/outline'
-import { CurrencyAmount, JSBI, Pair, Percent, SOUL_ADDRESS, Token, USD } from '../../sdk'
+import { ChainId, CurrencyAmount, JSBI, Pair, Percent, SOUL_ADDRESS, Token, USD } from '../../sdk'
 import React, { useState } from 'react'
 import { RowBetween, RowFixed } from '../Row'
 import { currencyId, unwrappedToken } from '../../functions/currency'
@@ -25,12 +25,13 @@ import { useTokenInfo } from 'hooks/useAPI'
 
 interface PositionCardProps {
   pair: Pair
+  chainId: ChainId
   showUnwrapped?: boolean
   border?: string
   stakedBalance?: CurrencyAmount<Token> // optional balance to indicate that liquidity is deposited in mining pool
 }
 
-export function MinimalPositionCard({ pair, showUnwrapped = false, border }: PositionCardProps) {
+export function MinimalPositionCard({ pair, chainId, showUnwrapped = false, border }: PositionCardProps) {
   const { i18n } = useLingui()
   const { account } = useActiveWeb3React()
 
@@ -39,7 +40,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
 
   const [showMore, setShowMore] = useState(false)
 
-  const userPoolBalance = useTokenBalance(account ?? undefined, pair.liquidityToken)
+  const userPoolBalance = useTokenBalance(chainId, account ?? undefined, pair.liquidityToken)
   const totalPoolTokens = useTotalSupply(pair.liquidityToken)
 
   const poolTokenPercentage =
@@ -115,17 +116,17 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
 }
 
 
-export default function FullPositionCard({ pair, border, stakedBalance }: PositionCardProps) {
+export default function FullPositionCard({ chainId, pair, border, stakedBalance }: PositionCardProps) {
   // const { i18n } = useLingui()
   const router = useRouter()
-  const { account, chainId } = useActiveWeb3React()
+  const { account } = useActiveWeb3React()
 
   const currency0 = unwrappedToken(pair.token0)
   const currency1 = unwrappedToken(pair.token1)
 
   const [showMore, setShowMore] = useState(false)
 
-  const userDefaultPoolBalance = useTokenBalance(account ?? undefined, pair.liquidityToken)
+  const userDefaultPoolBalance = useTokenBalance(chainId, account ?? undefined, pair.liquidityToken)
 
   const totalPoolTokens = useTotalSupply(pair.liquidityToken)
   

@@ -76,7 +76,7 @@ const Pool = ({ project, poolInfo, launchpadInfo }) => {
 
   const typedDepositValue = tryParseAmount(value, assetToken)
 
-  const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, assetToken ?? undefined)
+  const selectedCurrencyBalance = useCurrencyBalance(chainId, account ?? undefined, assetToken ?? undefined)
 
   const [approvalState, approve] = useApproveCallback(typedDepositValue, project.launchpadContract)
   const [pendingTx, setPendingTx] = useState(false)

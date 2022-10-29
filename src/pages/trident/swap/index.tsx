@@ -40,7 +40,7 @@ const Swap = () => {
   const tradeVersion = getTradeVersion(trade)
   const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
-  const { currencies, setURLCurrency, switchCurrencies } = useCurrenciesFromURL()
+  const { currencies, setURLCurrency, switchCurrencies } = useCurrenciesFromURL(chainId)
   const dispatch = useAppDispatch()
   const tridentSwapState = useAppSelector(selectTridentSwap)
   const {

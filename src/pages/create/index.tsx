@@ -182,6 +182,7 @@ export default function Create() {
         <Container maxWidth="full" className="space-y-6">
           <div className="grid grid-cols-1 grid-rows-2 gap-4 md:grid-rows-1 md:grid-cols-2">
             <CurrencyInputPanel
+              chainId={chainId}
               label="Collateral"
               showMaxButton={false}
               hideBalance={true}
@@ -197,6 +198,7 @@ export default function Create() {
 
             <CurrencyInputPanel
               label="Asset"
+              chainId={chainId}
               showMaxButton={false}
               hideBalance={true}
               hideInput={true}

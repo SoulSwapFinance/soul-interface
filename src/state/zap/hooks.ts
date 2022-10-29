@@ -114,7 +114,7 @@ export function useDerivedZapInfo(
     pairState === PairState.NOT_EXISTS || Boolean(totalSupply && JSBI.equal(totalSupply.quotient, ZERO))
 
   // balance
-  const balances = useCurrencyBalances(account ?? undefined, [currency])
+  const balances = useCurrencyBalances(chainId, account ?? undefined, [currency])
   const currencyBalance = balances[0]
 
   const parsedAmount = tryParseAmount(typedValue, currency)

@@ -58,7 +58,7 @@ export default function PoolFinder() {
         JSBI.equal(pair.reserve1.quotient, JSBI.BigInt(0))
     )
 
-  const position: CurrencyAmount<Token> | undefined = useTokenBalance(account ?? undefined, pair?.liquidityToken)
+  const position: CurrencyAmount<Token> | undefined = useTokenBalance(chainId, account ?? undefined, pair?.liquidityToken)
 
   const hasPosition = Boolean(position && JSBI.greaterThan(position.quotient, JSBI.BigInt(0)))
 
@@ -142,7 +142,7 @@ export default function PoolFinder() {
             {currency0 && currency1 ? (
               pairState === PairState.EXISTS ? (
                 hasPosition && pair ? (
-                  <MinimalPositionCard pair={pair} border="1px solid #CED0D9" />
+                  <MinimalPositionCard chainId={chainId} pair={pair} border="1px solid #CED0D9" />
                 ) : (
                   <div className="p-5 rounded bg-dark-800">
                     <AutoColumn gap="sm" justify="center">

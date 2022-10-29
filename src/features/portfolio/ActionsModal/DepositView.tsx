@@ -26,7 +26,7 @@ const DepositView: FC<DepositViewProps> = ({ onClose, onBack }) => {
   const { account, chainId } = useActiveWeb3React()
   const currency = useBalancesSelectedCurrency()
   const [attemptingTxn, setAttemptingTxn] = useState<boolean>(false)
-  const walletBalance = useCurrencyBalance(account ?? undefined, currency)
+  const walletBalance = useCurrencyBalance(chainId, account ?? undefined, currency)
   const { data: coffinBalance } = useCoffinBalanceV2(currency ? currency.wrapped.address : undefined)
   const { deposit } = useCoffinBox()
   const [value, setValue] = useState<string>()
@@ -63,6 +63,7 @@ const DepositView: FC<DepositViewProps> = ({ onClose, onBack }) => {
     <div className="flex flex-col gap-4">
       <HeadlessUiModal.Header header={i18n._(t`Deposit to CoffinBox`)} onClose={onClose} onBack={onBack} />
       <AssetInput
+        chainId={chainId}
         title={''}
         currency={currency}
         onChange={(val) => setValue(val)}

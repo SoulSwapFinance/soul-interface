@@ -41,7 +41,7 @@ const VaultListItem = ({ farm }) => {
   )
 
   // User liquidity token balance
-  const balance = useTokenBalance(account, liquidityToken)
+  const balance = useTokenBalance(chainId, account, liquidityToken)
 
   // TODO: Replace these
   const { amount } = useUserInfo(farm, liquidityToken) // nextHarvestUntil, userLockedUntil

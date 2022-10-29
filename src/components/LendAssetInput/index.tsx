@@ -70,10 +70,11 @@ const AssetInput: AssetInput<AssetInputProps> = ({
 }) => {
   const isDesktop = useDesktopMediaQuery()
   const { i18n } = useLingui()
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const [open, setOpen] = useState(false)
 
   const coffinOrWalletBalance = useCoffinOrWalletBalance(
+    chainId,
     account && !balanceProp ? account : undefined,
     props.currency,
     spendFromWallet

@@ -47,7 +47,7 @@ import { useActiveWeb3React } from 'services/web3'
   
     const typedDepositValue = tryParseAmount(value, assetToken)
   
-    const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, assetToken ?? undefined)
+    const selectedCurrencyBalance = useCurrencyBalance(250, account ?? undefined, assetToken ?? undefined)
   
     const [approvalState, approve] = useApproveCallback(typedDepositValue, LOCKER_ADDRESS[chainId])
   

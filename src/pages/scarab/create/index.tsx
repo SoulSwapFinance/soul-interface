@@ -50,7 +50,7 @@ export default function CreateScarab(): JSX.Element {
 
   const typedDepositValue = tryParseAmount(value, assetToken)
 
-  const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, assetToken ?? undefined)
+  const selectedCurrencyBalance = useCurrencyBalance(250, account ?? undefined, assetToken ?? undefined)
 
   const [approvalState, approve] = useApproveCallback(typedDepositValue, SCARAB_ADDRESS[chainId])
 

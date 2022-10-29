@@ -19,6 +19,8 @@ import { NetworkIcon } from 'components/Icons/NetworkIcon'
 import { SlideIn } from 'components/Animated/SlideIn'
 import { Currency } from '../Currency'
 import { Overlay } from 'components/Overlay'
+import { Address } from '../CrossInput/Address'
+import { DEFAULT_INPUT_PADDING, DEFAULT_INPUT_UNSTYLED } from 'features/crosschain/constants'
 
 type TokenSelectorOverlay = Omit<TokenSelectorProps, 'variant' | 'tokenMap'> & {
   account?: string
@@ -79,8 +81,7 @@ export const TokenSelectorOverlay: FC<TokenSelectorOverlay> = ({
                     'ring-offset-2 ring-offset-slate-700 flex gap-2 bg-slate-800 pr-3 w-full relative flex items-center justify-between gap-1 rounded-xl focus-within:ring-2 text-primary ring-blue'
                   )}
                 >
-                  {/* TODO */}
-                  {/* <Input.Address
+                  <Address
                     variant="unstyled"
                     id="token-search"
                     ref={inputRef}
@@ -88,7 +89,7 @@ export const TokenSelectorOverlay: FC<TokenSelectorOverlay> = ({
                     value={query}
                     onChange={onInput}
                     className={classNames(DEFAULT_INPUT_UNSTYLED, DEFAULT_INPUT_PADDING)}
-                  /> */}
+                  />
                   {searching ? (
                     <div className="relative left-[-2px]">
                       <Loader 
@@ -122,7 +123,6 @@ export const TokenSelectorOverlay: FC<TokenSelectorOverlay> = ({
                       onImport={() => queryToken[0] && handleImport(queryToken[0])}
                     />
                   )}
-                  {/* TODO */}
                   <Currency.List
                     className="divide-y hide-scrollbar divide-slate-700"
                     currencies={currencies}

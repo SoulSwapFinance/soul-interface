@@ -107,7 +107,6 @@ export default function Borrow({ pair }: BorrowProps) {
   // @ts-ignore TYPE NEEDS FIXING
   const assetNative = WNATIVE[chainId].address === pair.collateral.address
 
-  // @ts-ignore TYPE NEEDS FIXING
   const ethBalance = useETHBalances(assetNative ? [account] : [])
   // const { data: coffinBalance } = useCoffinBalanceV2(pair.collateral ? pair.collateral.address : undefined)
   // balance of the collateral token in wallet.

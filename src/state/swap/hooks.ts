@@ -195,7 +195,7 @@ export function useDerivedSwapInfo(): {
 
   const relevantTokenBalances 
     = 
-   useCurrencyBalances(account ?? undefined, [
+   useCurrencyBalances(chainId, account ?? undefined, [
     inputCurrency ?? undefined,
     outputCurrency ?? undefined,
   ])

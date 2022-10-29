@@ -275,6 +275,7 @@ export default function Zap() {
             <AutoColumn>
               <CurrencyInputPanel
                 label={'From'}
+                chainId={chainId}
                 showMaxButton={true}
                 onMax={() => {
                   onFieldInput(maxAmountSpend(currencyBalance)?.toExact() ?? '')

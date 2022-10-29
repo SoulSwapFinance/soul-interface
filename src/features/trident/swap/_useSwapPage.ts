@@ -23,7 +23,7 @@ export const _useSwapPage = () => {
   const { account, chainId } = useActiveWeb3React()
   const {
     currencies: [currencyA, currencyB],
-  } = useCurrenciesFromURL()
+  } = useCurrenciesFromURL(chainId)
   const { rebases, loading: rebasesLoading } = useCoffinRebases([currencyA, currencyB])
 
   const inputCurrencyAmount = useMemo(() => {
@@ -74,7 +74,7 @@ export const _useSwapPage = () => {
     return undefined
   }, [rebases, rebasesLoading, trade])
 
-  const balance = useCoffinOrWalletBalance(account ?? undefined, currencyA, spendFromWallet)
+  const balance = useCoffinOrWalletBalance(chainId, account ?? undefined, currencyA, spendFromWallet)
 
   const formattedAmounts = useMemo(() => {
     if (isWrap) return [value, value]

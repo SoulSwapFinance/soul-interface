@@ -34,7 +34,7 @@ export default function AutoStake() {
   const AutoStakeContract = useAutoStakeContract()
 
   const soulToken = new Token(chainId, getAddress(SOUL_ADDRESS[chainId]), 18, 'SOUL')
-  const soulBal = useCurrencyBalance(account, soulToken)
+  const soulBal = useCurrencyBalance(chainId, account, soulToken)
   // const enchantedBal = useCurrencyBalance(account, enchantedToken)
 
   const parsedStakeValue = tryParseAmount(stakeValue, soulToken)

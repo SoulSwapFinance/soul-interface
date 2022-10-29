@@ -8,7 +8,7 @@ import { WrappedTokenInfo } from './wrappedTokenInfo'
 import { sortByListPriority } from '../../functions/list'
 import { useAppSelector } from '../hooks'
 import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 import { ChainId } from 'sdk'
 
 export type TokenAddressMap = Readonly<{

@@ -16,14 +16,16 @@ import ReactGA from 'react-ga'
 import { useDispatch } from 'react-redux'
 
 import CurrencyModalView from './CurrencyModalView'
+import { useActiveWeb3React } from 'services/web3'
 
 const ImportList: FC = () => {
   const { i18n } = useLingui()
+  const { chainId } = useActiveWeb3React()
   const dispatch = useDispatch<AppDispatch>()
   const { setView, onDismiss, listUrl, importList } = useCurrencyModalContext()
   const [confirmed, setConfirmed] = useState(false)
   const lists = useAllLists()
-  const fetchList = useFetchListCallback()
+  const fetchList = useFetchListCallback(chainId)
   const [addError, setAddError] = useState<string>()
   const adding = Boolean(listUrl && lists[listUrl]?.loadingRequestId)
   const handleAddList = useCallback(() => {

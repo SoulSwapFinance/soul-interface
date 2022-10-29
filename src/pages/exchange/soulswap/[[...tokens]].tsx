@@ -5,12 +5,12 @@ import { ChainId, Currency, JSBI, Token, Trade as V2Trade, TradeType } from 'sdk
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
 import Web3Connect from 'components/Web3Connect'
-import ConfirmSwapModal from 'features/swap/ConfirmSwapModal'
-import SwapCallbackError from 'features/swap/SwapCallbackError'
-import SwapDetails from 'features/swap/SwapDetails'
-import UnsupportedCurrencyFooter from 'features/swap/UnsupportedCurrencyFooter'
-import SwapHeader from 'features/swap/SwapHeader'
-import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
+import ConfirmSwapModal from 'features/xswap/ConfirmSwapModal'
+// import SwapCallbackError from 'features/xswap/SwapCallbackError'
+import SwapDetails from 'features/xswap/SwapDetails'
+import UnsupportedCurrencyFooter from 'features/xswap/UnsupportedCurrencyFooter'
+import SwapHeader from 'features/xswap/SwapHeader'
+import SwapAssetPanel from 'features/trident/xswap/SwapAssetPanel'
 import confirmPriceImpactWithoutFee from 'functions/prices'
 import { warningSeverity } from 'functions/prices'
 import { computeFiatValuePriceImpact } from 'functions/trade'
@@ -498,6 +498,8 @@ const Swap = () => {
           <SwapAssetPanel
             spendFromWallet={true}
             chainId={chainId}
+            fromChainId={fromChain.chainId}
+            toChainId={toChain.chainId}
             header={(props) => (
               <SwapAssetPanel.Header
                 {...props}
@@ -529,6 +531,8 @@ const Swap = () => {
           <SwapAssetPanel
             spendFromWallet={true}
             chainId={chainId}
+            fromChainId={fromChain.chainId}
+            toChainId={toChain.chainId}
             header={(props) => (
               <SwapAssetPanel.Header
                 {...props}

@@ -2,7 +2,7 @@ import { ExclamationCircleIcon } from '@heroicons/react/outline'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { AVAX_ADDRESS, Currency, CurrencyAmount, Token, WNATIVE_ADDRESS } from 'sdk'
+import { AVAX_ADDRESS, ChainId, Currency, CurrencyAmount, Token, WNATIVE_ADDRESS } from 'sdk'
 import selectCoinAnimation from 'animation/select-coin.json'
 import { Button } from 'components/Button'
 import Chip from 'components/Chip'
@@ -39,6 +39,7 @@ interface AssetInputProps {
   chip?: string
   disabled?: boolean
   currencies?: string[]
+  chainId: ChainId
   id?: string
   className?: string
   currencyLogo?: boolean
@@ -59,6 +60,7 @@ const useAssetInputContextError = () => useContext(AssetInputContext)
 // AssetInput exports its children so if you need a child component of this component,
 // for example if you want this component without the title, take a look at the components this file exports
 const AssetInput: AssetInput<AssetInputProps> = ({
+  chainId,
   spendFromWallet = true,
   currencyLogo = true,
   className,
@@ -74,6 +76,7 @@ const AssetInput: AssetInput<AssetInputProps> = ({
   const [open, setOpen] = useState(false)
 
   const coffinOrWalletBalance = useCoffinOrWalletBalance(
+    chainId,
     account && !balanceProp ? account : undefined,
     props.currency,
     spendFromWallet
@@ -136,6 +139,7 @@ const AssetInput: AssetInput<AssetInputProps> = ({
         <div className="flex flex-col gap-4 lg:flex-row lg:gap-0">
           <AssetInputPanel
             {...props}
+            chainId={chainId}
             size={size}
             currencyLogo={currencyLogo}
             spendFromWallet={spendFromWallet}

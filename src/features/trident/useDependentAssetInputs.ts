@@ -24,7 +24,7 @@ export const useDependentAssetInputs: useDependentAssetInputs = ({
   inputs,
   setInputs,
 }) => {
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const { poolWithState, noLiquidity, rebases, currencies } = usePoolContext()
   const parsedAmounts = useAddLiquidityDerivedCurrencyAmounts()
 
@@ -84,7 +84,7 @@ export const useDependentAssetInputs: useDependentAssetInputs = ({
     [currencies, fixedRatio, noLiquidity, poolWithState?.pool, rebases, setInputs]
   )
 
-  const balances = useCoffinOrWalletBalances(account ?? undefined, currencies, spendFromWallet)
+  const balances = useCoffinOrWalletBalances(chainId, account ?? undefined, currencies, spendFromWallet)
 
   const onMax = useCallback(async () => {
     if (!balances || !poolWithState?.pool || !balances[0] || !balances[1] || !currencies[0]) return

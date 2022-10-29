@@ -265,12 +265,12 @@ export const useLimitOrderDerivedTypedInputAmount: UseLimitOrderDerivedTypedInpu
 type UseLimitOrderDerivedInputError = ({ trade }: { trade?: Trade<Currency, Currency, TradeType> }) => string
 export const useLimitOrderDerivedInputError: UseLimitOrderDerivedInputError = ({ trade }) => {
   const { recipient, orderExpiration, fromCoffinBalance, limitPrice, typedValue } = useLimitOrderState()
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const { inputCurrency, outputCurrency } = useLimitOrderDerivedCurrencies()
   const recipientLookup = useENS(recipient)
   const to = !recipient ? account : recipientLookup.address
   const parsedRate = useLimitOrderDerivedLimitPrice()
-  const balance = useCoffinOrWalletBalance(account ?? undefined, inputCurrency, !fromCoffinBalance)
+  const balance = useCoffinOrWalletBalance(chainId, account ?? undefined, inputCurrency, !fromCoffinBalance)
 
   return useMemo(() => {
     return !account

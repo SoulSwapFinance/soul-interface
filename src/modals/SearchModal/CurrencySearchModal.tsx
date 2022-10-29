@@ -73,7 +73,7 @@ const Component: FC<ComponentProps> = ({
   const [importToken, setImportToken] = useState<Token | undefined>()
   const [importList, setImportList] = useState<TokenList | undefined>()
   const [listUrl, setListUrl] = useState<string | undefined>()
-  const { chainId } = useActiveWeb3React()
+  // const { chainId } = useActiveWeb3React()
   const handleCurrencySelect = useCallback(
     (currency: Currency) => {
       onCurrencySelect(currency)
@@ -151,7 +151,6 @@ interface CurrencySearchModalProps extends Omit<ComponentProps, 'onDismiss'> {
 const CurrencySearchModal: CurrencySearchModal<CurrencySearchModalProps> = ({ trigger, ...props }) => {
   return (
     <HeadlessUiModal trigger={trigger}>
-      {/*@ts-ignore TYPE NEEDS FIXING*/}
       {({ setOpen }) => {
         return <Component {...props} onDismiss={() => setOpen(false)} />
       }}

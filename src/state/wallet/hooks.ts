@@ -1,5 +1,5 @@
 import { Interface } from '@ethersproject/abi'
-import { Currency, CurrencyAmount, JSBI, NATIVE, Token } from 'sdk'
+import { ChainId, Currency, CurrencyAmount, JSBI, NATIVE, Token } from 'sdk'
 import ERC20_ABI from 'constants/abis/erc20.json'
 import { isAddress } from 'functions/validate'
 import { useAllTokens } from 'hooks/Tokens'
@@ -14,7 +14,9 @@ import { TokenBalancesMap } from './types'
  * Returns a map of the given addresses to their eventually consistent ETH balances.
  */
 export function 
-useETHBalances(uncheckedAddresses?: (string | undefined)[]): {
+useETHBalances(
+  // chainId?: ChainId,
+   uncheckedAddresses?: (string | undefined)[]): {
   [address: string]: CurrencyAmount<Currency> | undefined
 } {
   const { chainId } = useActiveWeb3React()
@@ -53,6 +55,7 @@ useETHBalances(uncheckedAddresses?: (string | undefined)[]): {
  * Returns a map of token addresses to their eventually consistent token balances for a single account.
  */
 export function useTokenBalancesWithLoadingIndicator(
+  chainId?: ChainId,
   address?: string,
   tokens?: (Token | undefined)[]
 ): { data: TokenBalancesMap; loading: boolean } {
@@ -99,18 +102,19 @@ export const serializeBalancesMap = (mapping: Record<string, CurrencyAmount<Toke
     .join()
 }
 
-export function useTokenBalances(address?: string, tokens?: (Token | undefined)[]): TokenBalancesMap {
-  return useTokenBalancesWithLoadingIndicator(address, tokens).data
+export function useTokenBalances(chainId: ChainId, address?: string, tokens?: (Token | undefined)[]): TokenBalancesMap {
+  return useTokenBalancesWithLoadingIndicator(chainId, address, tokens).data
 }
 
 // get the balance for a single token/account combo
-export function useTokenBalance(account?: string, token?: Token): CurrencyAmount<Token> | undefined {
-  const tokenBalances = useTokenBalances(account, [token])
+export function useTokenBalance(chainId: ChainId, account?: string, token?: Token): CurrencyAmount<Token> | undefined {
+  const tokenBalances = useTokenBalances(chainId, account, [token])
   if (!token) return undefined
   return tokenBalances[token.address]
 }
 
 export function useCurrencyBalances(
+  chainId: ChainId,
   account?: string,
   currencies?: (Currency | undefined)[]
 ): (CurrencyAmount<Currency> | undefined)[] {
@@ -119,7 +123,7 @@ export function useCurrencyBalances(
     [currencies]
   )
 
-  const tokenBalances = useTokenBalances(account, tokens)
+  const tokenBalances = useTokenBalances(chainId, account, tokens)
   const containsETH: boolean = useMemo(() => currencies?.some((currency) => currency?.isNative) ?? false, [currencies])
   const ethBalance = useETHBalances(containsETH ? [account] : [])
 
@@ -135,23 +139,23 @@ export function useCurrencyBalances(
   )
 }
 
-export function useCurrencyBalance(account?: string, currency?: Currency): CurrencyAmount<Currency> | undefined {
-  return useCurrencyBalances(account, [currency])[0]
+export function useCurrencyBalance(chainId: ChainId, account?: string, currency?: Currency): CurrencyAmount<Currency> | undefined {
+  return useCurrencyBalances(chainId, account, [currency])[0]
 }
 
 // mimics useAllBalances
-export function useAllTokenBalances(): TokenBalancesMap {
+export function useAllTokenBalances(chainId: ChainId): TokenBalancesMap {
   const { account } = useActiveWeb3React()
   const allTokens = useAllTokens()
   const allTokensArray = useMemo(() => Object.values(allTokens ?? {}), [allTokens])
-  return useTokenBalances(account ?? undefined, allTokensArray)
+  return useTokenBalances(chainId, account ?? undefined, allTokensArray)
 }
 
-export function useAllTokenBalancesWithLoadingIndicator() {
+export function useAllTokenBalancesWithLoadingIndicator(chainId?: ChainId) {
   const { account } = useActiveWeb3React()
   const allTokens = useAllTokens()
   const allTokensArray = useMemo(() => Object.values(allTokens ?? {}), [allTokens])
-  return useTokenBalancesWithLoadingIndicator(account ?? undefined, allTokensArray)
+  return useTokenBalancesWithLoadingIndicator(chainId, account ?? undefined, allTokensArray)
 }
 
 // TODO: Replace

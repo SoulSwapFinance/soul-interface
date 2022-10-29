@@ -378,6 +378,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                 </Text>
                             </Wrap>
                             <AssetInput
+                            chainId={chainId}
                             currencyLogo={true}
                                 currency={SOUL[chainId]}
                                 currencyAddress={SOUL[chainId].address}
@@ -423,6 +424,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                             ) : (
                                 <FunctionBox>
                                     <AssetInput
+                                        chainId={chainId}
                                         currencyLogo={false}
                                         currency={SOUL[chainId]}
                                         currencyAddress={SOUL[chainId].address}

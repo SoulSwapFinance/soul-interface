@@ -19,7 +19,7 @@ const INPUT_FRACTION_AFTER_FEE = ONE_HUNDRED_PERCENT.subtract(THIRTY_BIPS_FEE)
 export function formatExecutionPrice(
   trade: Trade<Currency, Currency, TradeType>,
   inverted?: boolean,
-  chainId?: ChainId
+  // chainId?: ChainId
 ): string {
   if (!trade) {
     return ''

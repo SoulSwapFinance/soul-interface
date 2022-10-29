@@ -48,8 +48,8 @@ export default function Stake() {
   // const stakeClaimAmount = useStakeClaimAmount(luxorToken)
   // const redeemClaimAmount = useRedeemClaimAmount(luxorToken)
 
-  const lumensBalance = useCurrencyBalance(account, lumensToken)
-  const luxorBalance = useCurrencyBalance(account, luxorToken)
+  const lumensBalance = useCurrencyBalance(chainId, account, lumensToken)
+  const luxorBalance = useCurrencyBalance(chainId, account, luxorToken)
   // const LuxorWarmupAddress = LUXOR_WARMUP_ADDRESS[250]
   const [lumBalance, setLumBalance] = useState(0)
   const [luxBalance, setLuxBalance] = useState(0)

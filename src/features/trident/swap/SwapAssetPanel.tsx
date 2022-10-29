@@ -187,8 +187,8 @@ const BalancePanel: FC<Pick<SwapAssetPanel, 'disabled' | 'currency' | 'onChange'
   onChange,
   spendFromWallet,
 }) => {
-  const { account } = useActiveWeb3React()
-  const balance = useCoffinOrWalletBalance(account ? account : undefined, currency, spendFromWallet)
+  const { account, chainId } = useActiveWeb3React()
+  const balance = useCoffinOrWalletBalance(chainId, account ? account : undefined, currency, spendFromWallet)
 
   const handleHalfClick = useCallback(() => {
     if (disabled || !balance || !onChange) return

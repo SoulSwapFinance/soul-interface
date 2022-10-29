@@ -1,5 +1,5 @@
 import { AppDispatch, AppState } from '../index'
-import { Currency, CurrencyAmount, JSBI, Pair, Percent, Price, Token } from '../../sdk'
+import { ChainId, Currency, CurrencyAmount, JSBI, Pair, Percent, Price, Token } from '../../sdk'
 import { Field, typeInput } from './actions'
 import { PairState, useV2Pair } from '../../hooks/useV2Pairs'
 import { useCallback, useMemo } from 'react'
@@ -60,6 +60,7 @@ export function useDerivedMintInfo(
   currencyB: Currency | undefined
 ): {
   dependentField: Field
+  // chainId: ChainId
   currencies: { [field in Field]?: Currency }
   pair?: Pair | null
   pairState: PairState
@@ -72,7 +73,7 @@ export function useDerivedMintInfo(
   error?: string
 } {
   const { i18n } = useLingui()
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
 
   const { independentField, typedValue, otherTypedValue } = useMintState()
 
@@ -102,7 +103,7 @@ export function useDerivedMintInfo(
     )
 
   // balances
-  const balances = useCurrencyBalances(account ?? undefined, [
+  const balances = useCurrencyBalances(chainId, account ?? undefined, [
     currencies[Field.CURRENCY_A],
     currencies[Field.CURRENCY_B],
   ])
@@ -215,6 +216,7 @@ export function useDerivedMintInfo(
   return {
     dependentField,
     currencies,
+    // chainId,
     pair,
     pairState,
     currencyBalances,

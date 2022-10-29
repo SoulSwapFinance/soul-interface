@@ -45,8 +45,8 @@ export default function Stablecoin() {
   // const LumensContract = useLumensContract()
   const WrappedLumensContract = useWrappedLumensContract()
 
-  const lumensBalance = useCurrencyBalance(account, lumensToken)
-  const wlumBalance = useCurrencyBalance(account, wlumToken)
+  const lumensBalance = useCurrencyBalance(250, account, lumensToken)
+  const wlumBalance = useCurrencyBalance(250, account, wlumToken)
 
   const parsedStakeValue = tryParseAmount(wrapValue, lumensToken)
   const parsedUnwrapValue = tryParseAmount(unwrapValue, wlumToken)

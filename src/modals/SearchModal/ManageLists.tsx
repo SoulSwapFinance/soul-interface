@@ -24,6 +24,7 @@ import ReactGA from 'react-ga'
 import { useDispatch, useSelector } from 'react-redux'
 
 import CurrencyModalView from './CurrencyModalView'
+import { useActiveWeb3React } from 'services/web3'
 
 const listUrlRowHTMLId = (listUrl: string) => {
   return `list-row-${listUrl.replace(/\./g, '-')}`
@@ -159,12 +160,13 @@ const ListRow: FC<{ listUrl: string }> = memo(({ listUrl }) => {
 
 const ManageLists: FC = () => {
   const { i18n } = useLingui()
+  const { chainId } = useActiveWeb3React()
   const { setView, setImportList, setListUrl } = useCurrencyModalContext()
   const [listUrlInput, setListUrlInput] = useState<string>('')
   const lists = useAllLists()
   const activeListUrls = useActiveListUrls()
   const [activeCopy, setActiveCopy] = useState<string[] | undefined>()
-  const fetchList = useFetchListCallback()
+  const fetchList = useFetchListCallback(chainId)
   const [tempList, setTempList] = useState<TokenList>()
   const [addError, setAddError] = useState<string | undefined>()
 

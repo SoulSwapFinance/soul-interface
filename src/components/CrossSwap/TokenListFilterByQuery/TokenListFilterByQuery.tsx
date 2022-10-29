@@ -18,7 +18,7 @@ interface RenderProps {
 }
 
 interface Props {
-  chainId?: ChainId
+  chainId: ChainId
   tokenMap: Record<string, Token>
   pricesMap?: Record<string, Fraction>
   balancesMap?: any // BalanceMap

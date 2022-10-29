@@ -6,6 +6,7 @@ import { useDerivedTridentSwapContext } from 'features/trident/swap/DerivedTrade
 import React, { FC, useState } from 'react'
 
 import useCurrenciesFromURL from '../useCurrenciesFromURL'
+import { useActiveWeb3React } from 'services/web3'
 
 interface SwapRateProps {
   className?: string
@@ -13,7 +14,8 @@ interface SwapRateProps {
 
 const SwapRate: FC<SwapRateProps> = ({ className = 'text-low-emphesis' }) => {
   const { i18n } = useLingui()
-  const { currencies } = useCurrenciesFromURL()
+  const { chainId } = useActiveWeb3React()
+  const { currencies } = useCurrenciesFromURL(chainId)
   const [invert, setInvert] = useState(false)
   const { parsedAmounts } = useDerivedTridentSwapContext()
   const outputSymbol = <span className="text-secondary">{currencies[1]?.symbol}</span>
