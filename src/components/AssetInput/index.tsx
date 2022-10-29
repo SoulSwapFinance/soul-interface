@@ -60,7 +60,7 @@ const useAssetInputContextError = () => useContext(AssetInputContext)
 // AssetInput exports its children so if you need a child component of this component,
 // for example if you want this component without the title, take a look at the components this file exports
 const AssetInput: AssetInput<AssetInputProps> = ({
-  chainId,
+  // chainId,
   spendFromWallet = true,
   currencyLogo = true,
   className,
@@ -76,7 +76,7 @@ const AssetInput: AssetInput<AssetInputProps> = ({
   const [open, setOpen] = useState(false)
 
   const coffinOrWalletBalance = useCoffinOrWalletBalance(
-    chainId,
+    props.chainId,
     account && !balanceProp ? account : undefined,
     props.currency,
     spendFromWallet
@@ -112,6 +112,7 @@ const AssetInput: AssetInput<AssetInputProps> = ({
             <>
               <ChevronDownIcon width={24} height={24} className="text-secondary" />
               <CurrencySearchModal.Controlled
+                chainId={props.chainId}
                 open={open}
                 selectedCurrency={props.currency}
                 onCurrencySelect={props.onSelect}
@@ -139,7 +140,7 @@ const AssetInput: AssetInput<AssetInputProps> = ({
         <div className="flex flex-col gap-4 lg:flex-row lg:gap-0">
           <AssetInputPanel
             {...props}
-            chainId={chainId}
+            chainId={props.chainId}
             size={size}
             currencyLogo={currencyLogo}
             spendFromWallet={spendFromWallet}
@@ -232,6 +233,7 @@ const AssetInputPanel = ({
       {onSelect && (
         <>
           <CurrencySearchModal
+            chainId={chainId}
             trigger={
               <div className="inline-flex items-center">
                 <Button

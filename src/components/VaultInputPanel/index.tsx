@@ -179,6 +179,7 @@ export default function VaultInputPanel({
       </div>
       {!disableCurrencySelect && onCurrencySelect && (
         <CurrencySearchModal.Controlled
+          chainId={chainId}
           open={modalOpen}
           onDismiss={handleDismissSearch}
           onCurrencySelect={onCurrencySelect}

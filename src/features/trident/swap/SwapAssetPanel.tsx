@@ -243,6 +243,7 @@ const SwapAssetPanelHeader: FC<
   return (
     <div className="flex items-end justify-between gap-2">
       <CurrencySearchModal
+        chainId={chainId}
         selectedCurrency={currency}
         onCurrencySelect={(currency) => onSelect && onSelect(currency)}
         trigger={trigger}

@@ -938,6 +938,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
                     {/* ZAP: NATIVE --> LP */}
                     <CurrencySearchModal.Controlled
+                        chainId={chainId}
                         open={modalOpen}
                         onDismiss={handleDismissSearch}
                         onCurrencySelect={(value) => setZapTokenAddress(value.wrapped.address)}

@@ -1,4 +1,4 @@
-import { Currency, Token } from 'sdk'
+import { ChainId, Currency, Token } from 'sdk'
 import { TokenList } from '@uniswap/token-lists'
 import { HeadlessUiModal } from 'components/Modal'
 import usePrevious from 'hooks/usePrevious'
@@ -145,6 +145,7 @@ type CurrencySearchModal<P> = FC<P> & {
 }
 
 interface CurrencySearchModalProps extends Omit<ComponentProps, 'onDismiss'> {
+  chainId: ChainId
   trigger: ReactNode
 }
 
@@ -159,12 +160,13 @@ const CurrencySearchModal: CurrencySearchModal<CurrencySearchModalProps> = ({ tr
 }
 
 interface CurrencySearchModalControlledProps extends Omit<ComponentProps, 'onDismiss'> {
+  chainId: ChainId
   open: boolean
   onDismiss(): void
 }
 
-const CurrencySearchModalControlled: FC<CurrencySearchModalControlledProps> = ({ open, onDismiss, ...props }) => {
-  const { chainId } = useActiveWeb3React()
+const CurrencySearchModalControlled: FC<CurrencySearchModalControlledProps> = ({ chainId, open, onDismiss, ...props }) => {
+  // const { chainId } = useActiveWeb3React()
 
   return (
     <HeadlessUiModal.Controlled isOpen={open}

@@ -135,7 +135,11 @@ const InputPanel: FC<
   Pick<SwapAssetPanel, 'currency' | 'value' | 'chainId' | 'onChange' | 'disabled' | 'priceImpact'> & { priceImpactCss?: string }
 > = ({ currency, value, chainId, onChange, disabled, priceImpact, priceImpactCss }) => {
   // const { chainId } = useActiveWeb3React()
-  const usdcValue = [ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? useUSDCValue(tryParseAmount(value, currency)) : tryParseAmount(value, currency)
+  const usdcValue = 
+    [ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) 
+    ? useUSDCValue(tryParseAmount(value, currency)) 
+    : tryParseAmount(value, currency)
+  
   const span = useRef<HTMLSpanElement | null>(null)
   const [width, setWidth] = useState(0)
 
@@ -249,11 +253,11 @@ const SwapAssetPanelHeader: FC<
   return (
     <div className="flex items-end justify-between gap-2">
       <CurrencySearchModal
+        chainId={chainId}
         selectedCurrency={currency}
         onCurrencySelect={(currency) => onSelect && onSelect(currency)}
         trigger={trigger}
         currencyList={currencies}
-        // chainId={chainId}
       />
       {walletToggle && walletToggle({ spendFromWallet })}
     </div>

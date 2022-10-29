@@ -111,6 +111,7 @@ const AssetInput: AssetInput<AssetInputProps> = ({
             <>
               <ChevronDownIcon width={24} height={24} className="text-secondary" />
               <CurrencySearchModal.Controlled
+                chainId={chainId}
                 open={open}
                 selectedCurrency={props.currency}
                 onCurrencySelect={props.onSelect}
@@ -185,6 +186,7 @@ const AssetInputPanel = ({
   size,
 }: AssetInputPanelProps) => {
   const error = useAssetInputContextError()
+  const { chainId } = useActiveWeb3React()
   const isDesktop = useDesktopMediaQuery()
   const { i18n } = useLingui()
 
@@ -216,6 +218,7 @@ const AssetInputPanel = ({
       {onSelect && (
         <>
           <CurrencySearchModal
+            chainId={chainId}
             trigger={
               <div className="inline-flex items-center">
                 <Button
