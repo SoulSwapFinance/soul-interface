@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { Contract } from '@ethersproject/contracts'
-import { NATIVE, WNATIVE_ADDRESS } from 'sdk'
+import { ChainId, NATIVE, WNATIVE_ADDRESS } from 'sdk'
 import ERC20_ABI from 'constants/abis/erc20.json'
 import { isAddress } from 'functions/validate'
 import { useActiveWeb3React } from 'services/web3'
@@ -11,6 +11,7 @@ import { useContract } from './useContract'
 import useTransactionStatus from './useTransactionStatus'
 
 export interface BalanceProps {
+  chainId: ChainId
   value: BigNumber
   decimals: number
 }
@@ -18,12 +19,13 @@ export interface BalanceProps {
 // Do NOT use this hook, use the generic wallet hook for useTokenBalance
 // Prefer import { useTokenBalance } from 'state/wallet/hooks' and use appropriately.
 
-function useTokenBalance(tokenAddress: string): BalanceProps {
+function useTokenBalance(chainId: ChainId, tokenAddress: string): BalanceProps {
   const [balance, setBalance] = useState<BalanceProps>({
+    chainId,
     value: BigNumber.from(0),
     decimals: 18,
   })
-  const { account, chainId, library } = useActiveWeb3React()
+  const { account, library } = useActiveWeb3React()
   const currentBlockNumber = useBlockNumber()
   const currentTransactionStatus = useTransactionStatus()
   const addressCheckSum = isAddress(tokenAddress)
@@ -39,16 +41,16 @@ function useTokenBalance(tokenAddress: string): BalanceProps {
           )
         {
           const ethBalance = await library?.getBalance(account)
-          return { value: BigNumber.from(ethBalance), decimals: 18 }
+          return { chainId: chainId, value: BigNumber.from(ethBalance), decimals: 18 }
         }
 
         const balance = await contract?.balanceOf(owner)
         const decimals = await contract?.decimals()
 
-        return { value: BigNumber.from(balance), decimals: decimals }
+        return { chainId: chainId, value: BigNumber.from(balance), decimals: decimals }
       } catch (error) {
         console.error(error)
-        return { value: BigNumber.from(0), decimals: 18 }
+        return { chainId: chainId, value: BigNumber.from(0), decimals: 18 }
       }
     }
     const balance = await getBalance(tokenContract, account)

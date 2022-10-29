@@ -9,9 +9,10 @@ import { useCallback, useEffect } from 'react'
 
 import { acceptListUpdate } from './actions'
 import { useActiveListUrls, useAllLists } from './hooks'
+import { ChainId } from 'sdk'
 
 export default function Updater(): null {
-  const { library } = useActiveWeb3React()
+  const { library, chainId } = useActiveWeb3React()
   const dispatch = useAppDispatch()
   const isWindowVisible = useIsWindowVisible()
 
@@ -19,7 +20,7 @@ export default function Updater(): null {
   const lists = useAllLists()
   const activeListUrls = useActiveListUrls()
 
-  const fetchList = useFetchListCallback()
+  const fetchList = useFetchListCallback(chainId)
   const fetchAllListsCallback = useCallback(() => {
     if (!isWindowVisible) return
     Object.keys(lists).forEach((url) =>

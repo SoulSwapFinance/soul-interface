@@ -1,5 +1,5 @@
 :root {
-    --primary: #000000;
+    --primary: rgba(16, 8, 37, 0.7);
     --text-primary: #ffffff;
     /* --text-primary: #d8aeff; */
     --font-sans: "DM Sans", -apple-system, system-ui, BlinkMacSystemFont, 'Helvetica Neue', 'Helvetica', sans-serif;

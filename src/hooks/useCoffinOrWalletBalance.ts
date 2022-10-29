@@ -1,9 +1,10 @@
-import { Currency, CurrencyAmount, Token } from 'sdk'
+import { ChainId, Currency, CurrencyAmount, Token } from 'sdk'
 import { useCoffinBalancesV2 } from 'state/coffinbox/hooks'
 import { useCurrencyBalances } from 'state/wallet/hooks'
 import { useMemo } from 'react'
 
 export const useCoffinOrWalletBalances = (
+  chainId: ChainId,
   account: string | undefined,
   currencies: (Currency | Token | undefined)[],
   fromWallet?: (boolean | undefined)[]
@@ -13,7 +14,7 @@ export const useCoffinOrWalletBalances = (
     [currencies]
   )
 
-  const balance = useCurrencyBalances(account, currencies)
+  const balance = useCurrencyBalances(chainId, account, currencies)
   const { data: coffinBalance } = useCoffinBalancesV2(tokenAddresses)
 
   return useMemo(() => {
@@ -43,9 +44,9 @@ export const useCoffinOrWalletBalances = (
   }, [currencies, coffinBalance, fromWallet, balance])
 }
 
-export const useCoffinOrWalletBalance = (account?: string, currency?: Currency, fromWallet?: boolean) => {
+export const useCoffinOrWalletBalance = (chainId, account?: string, currency?: Currency, fromWallet?: boolean) => {
   const currencies = useMemo(() => [currency], [currency])
   const flags = useMemo(() => [fromWallet], [fromWallet])
-  const balances = useCoffinOrWalletBalances(account, currencies, flags)
+  const balances = useCoffinOrWalletBalances(chainId, account, currencies, flags)
   return useMemo(() => (balances ? balances[0] : undefined), [balances])
 }

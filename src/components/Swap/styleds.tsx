@@ -8,9 +8,10 @@ import { Z_INDEXS } from 'constants/styles'
 import useTheme from 'hooks/useTheme'
 import { errorFriendly } from 'utils/swap/dmm'
 
-import Alert from 'assets/images/icons/alert.svg'
+// import Alert from 'assets/images/icons/alert.svg'
 import { AutoColumn } from '../Column'
 import Modal, { ModalProps } from 'components/Modal/Modal'
+import Alert from 'components/Alert'
 
 export const PageWrapper = styled.div`
   display: flex;

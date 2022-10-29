@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount } from 'sdk'
+import { ChainId, Currency, CurrencyAmount } from 'sdk'
 import { t } from '@lingui/macro'
 import JSBI from 'jsbi'
 import { useMemo } from 'react'
@@ -21,8 +21,9 @@ import { tryParseAmount } from 'functions/parse'
 import { INITIAL_ALLOWED_SLIPPAGE } from 'constants/index'
 
 // from the current swap inputs, compute the best trade and return it.
-export function useDerivedSwapInfoV2(): {
+export function useDerivedSwapInfoV2(chainId: ChainId): {
   currencies: { [field in Field]?: Currency }
+  chainId: ChainId
   currencyBalances: { [field in Field]?: CurrencyAmount<Currency> }
   parsedAmount: CurrencyAmount<Currency> | undefined
   v2Trade: Aggregator | undefined
@@ -32,7 +33,7 @@ export function useDerivedSwapInfoV2(): {
   loading: boolean
   isPairNotfound: boolean
 } {
-  const { account, chainId } = useActiveWeb3React()
+  const { account } = useActiveWeb3React()
 
 //   temp solution
 const allowedSlippage = INITIAL_ALLOWED_SLIPPAGE
@@ -51,6 +52,7 @@ const allowedSlippage = INITIAL_ALLOWED_SLIPPAGE
   const to: string | null = (recipient === null || recipient === '' ? account : recipientLookup.address) ?? null
 
   const relevantTokenBalances = useCurrencyBalances(
+    chainId,
     account ?? undefined,
     useMemo(() => [inputCurrency ?? undefined, outputCurrency ?? undefined], [inputCurrency, outputCurrency]),
   )
@@ -164,6 +166,7 @@ const allowedSlippage = INITIAL_ALLOWED_SLIPPAGE
   return useMemo(
     () => ({
       currencies,
+      chainId,
       currencyBalances,
       parsedAmount,
       v2Trade: v2Trade ?? undefined,
@@ -175,6 +178,7 @@ const allowedSlippage = INITIAL_ALLOWED_SLIPPAGE
     }),
     [
       currencies,
+      chainId,
       currencyBalances,
       inputError,
       loading,

@@ -858,7 +858,7 @@ export default function Remove() {
               </AutoColumn>
             </div>
 
-            {pair ? <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} /> : null}
+            {pair ? <MinimalPositionCard chainId={chainId} showUnwrapped={oneCurrencyIsWETH} pair={pair} /> : null}
           </div>
           <div className="flex items-center px-4">
             <NavLink href="/pool">

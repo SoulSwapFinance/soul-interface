@@ -74,7 +74,6 @@ export default function Repay({ pair }: RepayProps) {
 
   // Calculated
   const assetNative = WNATIVE[chainId || 250].address === pair.asset.address
-  // @ts-ignore TYPE NEEDS FIXING
   const ethBalance = useETHBalances(assetNative ? [account] : [])
 
   console.log({ pair })

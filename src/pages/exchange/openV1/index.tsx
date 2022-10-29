@@ -32,6 +32,7 @@ import useCoingeckoApi, { COINGECKO_BASEURL, COINGECKO_METHODS } from 'hooks/use
 import { OPENOCEAN_BASEURL, OPENOCEAN_METHODS } from 'hooks/useOpenOceanAPI';
 import NetworkGuard from 'guards/Network';
 import { Feature } from 'enums/Feature';
+import ERC20ABI from 'constants/abis/bridge/erc20.json'
 
 // const  = lazy(() => import('components/LiveChart'))
 

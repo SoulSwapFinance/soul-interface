@@ -112,7 +112,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const isActive = pairStatus == "active"
     const assetToken = new Token(chainId, farm.lpAddress, decimals)
 
-  const balance = useCurrencyBalance(account ?? undefined, assetToken)
+  const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
   
     const parsedDepositValue = tryParseAmount(depositValue, assetToken)
     const parsedWithdrawValue = tryParseAmount(withdrawValue, assetToken)
@@ -938,6 +938,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
                     {/* ZAP: NATIVE --> LP */}
                     <CurrencySearchModal.Controlled
+                        chainId={chainId}
                         open={modalOpen}
                         onDismiss={handleDismissSearch}
                         onCurrencySelect={(value) => setZapTokenAddress(value.wrapped.address)}
@@ -946,6 +947,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                         showSearch={true}
                     />
                     <AssetInput
+                        chainId={chainId}
                         currencyLogo={true}
                         currency={zapToken}
                         value={zapValue}

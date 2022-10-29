@@ -69,8 +69,8 @@ export default function StableInputPanel({
 }: StableInputPanelProps) {
   const { i18n } = useLingui()
   const [modalOpen, setModalOpen] = useState(false)
-  const { account } = useActiveWeb3React()
-  const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined)
+  const { account, chainId } = useActiveWeb3React()
+  const selectedCurrencyBalance = useCurrencyBalance(chainId, account ?? undefined, currency ?? undefined)
 
   const handleDismissSearch = useCallback(() => {
     setModalOpen(false)
@@ -180,6 +180,7 @@ export default function StableInputPanel({
       </div>
       {!disableCurrencySelect && onCurrencySelect && (
         <CurrencySearchModal.Controlled
+          chainId={chainId}
           open={modalOpen}
           onDismiss={handleDismissSearch}
           onCurrencySelect={onCurrencySelect}

@@ -569,7 +569,7 @@ export default function Add() {
 
           {!addIsUnsupported ? (
             pair && !noLiquidity && pairState !== PairState.INVALID ? (
-              <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} />
+              <MinimalPositionCard chainId={chainId} showUnwrapped={oneCurrencyIsWETH} pair={pair} />
             ) : null
           ) : (
             <UnsupportedCurrencyFooter

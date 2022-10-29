@@ -119,6 +119,10 @@ module.exports = withBundleAnalyzer(
           destination: '/exchange/swap',
         },
         {
+          source: '/xswap',
+          destination: '/exchange/xswap',
+        },
+        {
           source: '/swap/:token*',
           destination: '/exchange/swap/:token*',
         },
@@ -133,6 +137,10 @@ module.exports = withBundleAnalyzer(
         {
           source: '/cross',
           destination: '/exchange/cross',
+        },
+        {
+          source: '/soulswap',
+          destination: '/exchange/soulswap',
         },
         {
           source: '/limit',

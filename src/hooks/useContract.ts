@@ -61,6 +61,7 @@ import {
   UNDERWORLD_ADDRESS,
   CHAINLINK_ORACLE_ADDRESS,
   MERKLE_DISTRIBUTOR_ADDRESS,
+  SOUL_X_SWAP_ADDRESS,
 } from 'sdk'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from 'constants/multicall'
 import SOUL_BOND_ABI from 'constants/abis/soulbond.json' 
@@ -93,6 +94,7 @@ import BALANCES_FETCHER_ABI from 'constants/abis/balancesfetcher.json'
 // soul
 import SOUL_SCARAB_ABI from 'constants/abis/soulswap/scarab.json'
 import SOUL_SAFE_ABI from 'constants/abis/soulswap/safe.json'
+import SOUL_X_SWAP_ABI from 'constants/abis/soulswap/soulxswap.json'
 import SOUL_GUIDE_ABI from 'constants/abis/soul-guide.json' // TODO: update abi
 import SUMMONER_ABI from 'constants/abis/soulswap/soulsummoner.json' // 28 JUL
 import SOUL_MANIFESTER_ABI from 'constants/abis/soulswap/soulmanifester.json' // 28 JUL
@@ -127,7 +129,7 @@ import ROUTER_ACTION_ABI from 'constants/abis/soulswap/bridge/router-action.json
 // unused
 import MERKLE_DISTRIBUTOR_ABI from 'constants/abis/merkle-distributor.json'
 import MULTICALL2_ABI from 'constants/abis/multicall2.json'
-import PENDING_ABI from 'constants/abis/pending.json'
+// import PENDING_ABI from 'constants/abis/pending.json'
 import ROUTER_ABI from 'constants/abis/router.json'
 import SAAVE_ABI from 'constants/abis/saave.json'
 import SOULSWAP_ABI from '@sushiswap/core/abi/SushiRoll.json'
@@ -548,6 +550,11 @@ export function useSoulSwapTWAPContract(address?: string): Contract | null {
 export function useZapperContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && ZAPPER_ADDRESS[chainId], ZAPPER_ABI, withSignerIfPossible)
+}
+
+export function useSoulXSwapContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SOUL_X_SWAP_ADDRESS[chainId], SOUL_X_SWAP_ABI, withSignerIfPossible)
 }
 
 export function useSwapUnderlyingContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {

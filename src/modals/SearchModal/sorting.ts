@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Token } from 'sdk'
+import { ChainId, Currency, CurrencyAmount, Token } from 'sdk'
 import { useAllTokenBalances } from 'state/wallet/hooks'
 
 // compare two token amounts with highest one coming first
@@ -15,8 +15,8 @@ function balanceComparator(balanceA?: CurrencyAmount<Currency>, balanceB?: Curre
 
 type TokenComparatorFn = (tokenA: Token, tokenB: Token) => number
 
-export const useTokenComparator = (): TokenComparatorFn => {
-  const balances = useAllTokenBalances()
+export const useTokenComparator = (chainId: ChainId): TokenComparatorFn => {
+  const balances = useAllTokenBalances(chainId)
   return (tokenA: Token, tokenB: Token): number => {
     // -1 = a is first
     // 1 = b is first

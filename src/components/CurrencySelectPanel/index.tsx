@@ -8,6 +8,7 @@ import Lottie from 'lottie-react'
 import React, { useCallback, useState } from 'react'
 
 import { CurrencyLogo } from '../CurrencyLogo'
+import { useActiveWeb3React } from 'services/web3'
 
 interface CurrencySelectPanelProps {
   onClick?: () => void
@@ -29,6 +30,7 @@ export default function CurrencySelectPanel({
   showCommonBases,
 }: CurrencySelectPanelProps) {
   const { i18n } = useLingui()
+  const { chainId } = useActiveWeb3React()
 
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -87,6 +89,7 @@ export default function CurrencySelectPanel({
       </div>
       {!disableCurrencySelect && onCurrencySelect && (
         <CurrencySearchModal.Controlled
+          chainId={chainId}
           open={modalOpen}
           onDismiss={handleDismissSearch}
           onCurrencySelect={onCurrencySelect}

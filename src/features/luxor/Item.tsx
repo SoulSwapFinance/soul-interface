@@ -64,7 +64,7 @@ const BondItem = ({ bond, ...rest }) => {
   const purchasedAmount = bond
     ? CurrencyAmount.fromRawAmount(principalToken, Number(bond?.purchased | 0))
     : CurrencyAmount.fromRawAmount(luxorToken, JSBI.BigInt('0'))
-  const balance = useCurrencyBalance(account, principalToken)
+  const balance = useCurrencyBalance(250, account, principalToken)
   const luxorAvailableAmount = bond
     ? CurrencyAmount.fromRawAmount(luxorToken, Number(bond?.luxorAvailable | 0))
     : CurrencyAmount.fromRawAmount(luxorToken, JSBI.BigInt('0'))
@@ -623,6 +623,7 @@ const BondItem = ({ bond, ...rest }) => {
                               <div className="flex flex-col md:flex-row gap-3">
                                 <div className="flex-1">
                                   <CurrencyInputPanel
+                                    chainId={250}
                                     label={''}
                                     showMaxButton={true}
                                     onUserInput={() => {}}
@@ -632,6 +633,7 @@ const BondItem = ({ bond, ...rest }) => {
                                 </div>
                                 <div className="flex-1">
                                   <CurrencyInputPanel
+                                    chainId={250}
                                     label={''}
                                     showMaxButton={true}
                                     onUserInput={() => {}}

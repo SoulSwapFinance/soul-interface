@@ -1,4 +1,4 @@
-import { ConstantProductPool, CurrencyAmount, Token, USDC } from 'sdk'
+import { ChainId, ConstantProductPool, CurrencyAmount, Token, USDC } from 'sdk'
 import { useTotalSupply } from 'hooks/useTotalSupply'
 import { useUSDCValue } from 'hooks/useUSDCPrice'
 import { useActiveWeb3React } from 'services/web3'
@@ -27,14 +27,14 @@ const _SLPBalance: FC<_SLPBalanceProps> = ({ sum, amounts, children, index }) =>
 }
 
 interface SLPBalanceUSDCValueProps {
+  chainId: ChainId
   pool?: ConstantProductPool
   children: (sum: CurrencyAmount<Token>) => ReactNode
 }
 
-const SLPBalanceUSDCValue: FC<SLPBalanceUSDCValueProps> = ({ pool, children }) => {
-  const { chainId } = useActiveWeb3React()
+const SLPBalanceUSDCValue: FC<SLPBalanceUSDCValueProps> = ({ chainId, pool, children }) => {
   const totalSupply = useTotalSupply(pool?.liquidityToken)
-  const balance = useTokenBalance(pool?.liquidityToken.address)
+  const balance = useTokenBalance(chainId, pool?.liquidityToken.address)
   const liquidityValues =
     pool && totalSupply && balance && pool.assets.map((asset) => pool.getLiquidityValue(asset, totalSupply, balance))
 

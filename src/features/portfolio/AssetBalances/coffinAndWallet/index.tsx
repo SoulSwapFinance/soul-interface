@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { NATIVE, ZERO } from 'sdk'
+import { ChainId, NATIVE, ZERO } from 'sdk'
 import Typography from 'components/Typography'
 import AssetBalances from 'features/portfolio/AssetBalances/AssetBalances'
 import { Assets } from 'features/portfolio/AssetBalances/types'
@@ -53,14 +53,12 @@ export const CoffinBalances = ({ account }: { account: string }) => {
   )
 }
 
-export const WalletBalances: FC<{ account: string }> = ({ account }) => {
+export const WalletBalances: FC<{ chainId: ChainId, account: string }> = ({ chainId, account }) => {
   const { i18n } = useLingui()
-  const { chainId } = useActiveWeb3React()
   const dispatch = useAppDispatch()
   const { data: _balances, loading } = useAllTokenBalancesWithLoadingIndicator()
 
-  // @ts-ignore TYPE NEEDS FIXING
-  const ethBalance = useCurrencyBalance(account ? account : undefined, chainId ? NATIVE[chainId] : undefined)
+  const ethBalance = useCurrencyBalance(chainId, account ? account : undefined, chainId ? NATIVE[chainId] : undefined)
 
   const balances = useMemo(() => {
     const res = Object.values(_balances).reduce<Assets[]>((acc, cur) => {

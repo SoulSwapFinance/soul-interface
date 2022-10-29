@@ -70,10 +70,11 @@ const AssetInput: AssetInput<AssetInputProps> = ({
 }) => {
   const isDesktop = useDesktopMediaQuery()
   const { i18n } = useLingui()
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const [open, setOpen] = useState(false)
 
   const coffinOrWalletBalance = useCoffinOrWalletBalance(
+    chainId,
     account && !balanceProp ? account : undefined,
     props.currency,
     spendFromWallet
@@ -110,6 +111,7 @@ const AssetInput: AssetInput<AssetInputProps> = ({
             <>
               <ChevronDownIcon width={24} height={24} className="text-secondary" />
               <CurrencySearchModal.Controlled
+                chainId={chainId}
                 open={open}
                 selectedCurrency={props.currency}
                 onCurrencySelect={props.onSelect}
@@ -184,6 +186,7 @@ const AssetInputPanel = ({
   size,
 }: AssetInputPanelProps) => {
   const error = useAssetInputContextError()
+  const { chainId } = useActiveWeb3React()
   const isDesktop = useDesktopMediaQuery()
   const { i18n } = useLingui()
 
@@ -215,6 +218,7 @@ const AssetInputPanel = ({
       {onSelect && (
         <>
           <CurrencySearchModal
+            chainId={chainId}
             trigger={
               <div className="inline-flex items-center">
                 <Button

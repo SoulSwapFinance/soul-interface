@@ -1,4 +1,4 @@
-import { Pair } from 'sdk'
+import { ChainId, Pair } from 'sdk'
 import { useV2Pairs } from 'hooks/useV2Pairs'
 import { useActiveWeb3React } from 'services/web3'
 import { toV2LiquidityToken, useTrackedTokenPairs } from 'state/user/hooks'
@@ -14,7 +14,7 @@ interface V2PairsWithLiquidity {
  * Fetches all of the V2 pairs the user has with a balance
  * @return V2PairsWithLiquidity
  */
-export const useV2PairsWithLiquidity = (): V2PairsWithLiquidity => {
+export const useV2PairsWithLiquidity = (chainId: ChainId): V2PairsWithLiquidity => {
   const { account } = useActiveWeb3React()
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs()
@@ -31,6 +31,7 @@ export const useV2PairsWithLiquidity = (): V2PairsWithLiquidity => {
     [tokenPairsWithLiquidityTokens]
   )
   const { data: v2PairsBalances, loading: fetchingV2PairBalances } = useTokenBalancesWithLoadingIndicator(
+    chainId,
     account ?? undefined,
     liquidityTokens
   )

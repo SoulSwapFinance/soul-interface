@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency, CurrencyAmount, ZERO } from 'sdk'
+import { ChainId, Currency, CurrencyAmount, ZERO } from 'sdk'
 import Chip from 'components/Chip'
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import Loader from 'components/Loader'
@@ -67,18 +67,19 @@ function TokenTags({ currency }: { currency: Currency }) {
 }
 
 interface CurrencyRow {
+  chainId: ChainId
   currency: Currency
   style: CSSProperties
 }
 
-const CurrencyRow: FC<CurrencyRow> = ({ currency, style }) => {
+const CurrencyRow: FC<CurrencyRow> = ({ chainId, currency, style }) => {
   const { account } = useActiveWeb3React()
   const { onSelect, currency: selectedCurrency } = useCurrencyModalContext()
   const key = currencyKey(currency)
   const selectedTokenList = useCombinedActiveList()
   const isOnSelectedList = isTokenOnList(selectedTokenList, currency.isToken ? currency : undefined)
   const customAdded = useIsUserAddedToken(currency)
-  const balance = useCurrencyBalance(account ?? undefined, currency)
+  const balance = useCurrencyBalance(chainId, account ?? undefined, currency)
 
   return (
     <div
@@ -134,13 +135,14 @@ const BreakLineComponent: FC<{ style: CSSProperties }> = ({ style }) => {
 }
 
 interface CurrencyList {
+  chainId: ChainId
   currencies: Currency[]
   otherListTokens?: WrappedTokenInfo[]
   selectedCurrency?: Currency | null
   otherCurrency?: Currency | null
 }
 
-const CurrencyList: FC<CurrencyList> = ({ currencies, otherListTokens }) => {
+const CurrencyList: FC<CurrencyList> = ({ chainId, currencies, otherListTokens }) => {
   const itemData: (Currency | BreakLine)[] = useMemo(() => {
     if (otherListTokens && otherListTokens?.length > 0) {
       return [...currencies, BREAK_LINE, ...otherListTokens]
@@ -156,7 +158,7 @@ const CurrencyList: FC<CurrencyList> = ({ currencies, otherListTokens }) => {
       return <BreakLineComponent style={style} key={key} />
     }
 
-    return <CurrencyRow currency={currency} style={style} key={key} />
+    return <CurrencyRow chainId={chainId} currency={currency} style={style} key={key} />
   }
 
   return (

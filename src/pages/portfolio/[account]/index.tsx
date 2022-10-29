@@ -9,9 +9,11 @@ import { useAccountInUrl } from 'features/portfolio/useAccountInUrl'
 import TridentLayout, { TridentBody, TridentHeader } from 'layouts/Trident'
 import Head from 'next/head'
 import React from 'react'
+import { useActiveWeb3React } from 'services/web3'
 
 const Portfolio = () => {
   const { i18n } = useLingui()
+  const { chainId } = useActiveWeb3React()
 
   const account = useAccountInUrl('/portfolio')
   if (!account) return
@@ -32,7 +34,7 @@ const Portfolio = () => {
       <TridentBody className="flex flex-col gap-10 lg:grid grid-cols-2 lg:gap-4">
        {/* <UnderworldLent />
         <UnderworldCollateral /> */}
-        <WalletBalances account={account} />
+        <WalletBalances chainId={chainId} account={account} />
         <CoffinBalances account={account} />
       </TridentBody>
       <ActionsModal />

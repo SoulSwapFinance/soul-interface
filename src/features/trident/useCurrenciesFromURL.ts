@@ -1,18 +1,19 @@
-import { Currency, Fee, NATIVE } from 'sdk'
+import { ChainId, Currency, Fee, NATIVE } from 'sdk'
 import { useCurrency } from 'hooks/Tokens'
 import { useActiveWeb3React } from 'services/web3'
 import { useRouter } from 'next/router'
 import { useCallback, useMemo } from 'react'
 import { SOUL } from 'constants/tokens'
 
-const useCurrenciesFromURL = (): {
+const useCurrenciesFromURL = (chainId: ChainId): {
+  chainId: ChainId
   currencies: (Currency | undefined)[]
   switchCurrencies: () => Promise<void>
   setURLCurrency: (cur: Currency, index: number) => void
   fee: number
   twap: boolean
 } => {
-  const { chainId } = useActiveWeb3React()
+  // const { chainId } = useActiveWeb3React()
   const router = useRouter()
   const currencyA = useCurrency(router.query.tokens?.[0]) || (chainId && NATIVE[chainId]) || undefined
   const currencyB = useCurrency(router.query.tokens?.[1]) || (chainId && SOUL[250]) || undefined
@@ -116,6 +117,7 @@ const useCurrenciesFromURL = (): {
   return useMemo(
     () => ({
       currencies: [currencyA, currencyB],
+      chainId,
       setURLCurrency,
       switchCurrencies,
       fee,

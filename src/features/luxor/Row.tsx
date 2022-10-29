@@ -452,6 +452,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                     { payout == 0 ? (
                         <FunctionBox>
                             <AssetInput
+                                chainId={250}
                                 currencyLogo={false}
                                 currency={assetToken}
                                 currencyAddress={assetAddress}
@@ -510,6 +511,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                 <Wrap padding="0" display="flex" justifyContent="space-between">
                                 </Wrap>
                                     <AssetInput
+                                        chainId={250}
                                         currencyLogo={false}
                                         currency={assetToken}
                                         currencyAddress={assetAddress}

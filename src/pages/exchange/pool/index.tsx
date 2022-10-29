@@ -36,7 +36,7 @@ export default function Pool() {
   const { i18n } = useLingui()
   const router = useRouter()
   const { account, chainId } = useActiveWeb3React()
-  const { loading, pairs } = useV2PairsWithLiquidity()
+  const { loading, pairs } = useV2PairsWithLiquidity(chainId)
 
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs()
@@ -56,6 +56,7 @@ export default function Pool() {
     [tokenPairsWithLiquidityTokens]
   )
   // const [v2PairsBalances, fetchingV2PairBalances] = useTokenBalancesWithLoadingIndicator(
+    // chainId,
   //   account ?? undefined,
   //   liquidityTokens
   // )
@@ -142,6 +143,7 @@ export default function Pool() {
               <>
                 {pairs?.map((v2Pair) => (
                   <FullPositionCard
+                    chainId={chainId}
                     key={v2Pair.liquidityToken.address}
                     pair={v2Pair}
                     stakedBalance={CurrencyAmount.fromRawAmount(v2Pair.liquidityToken, '0')}

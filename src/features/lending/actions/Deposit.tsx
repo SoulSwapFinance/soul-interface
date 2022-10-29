@@ -58,7 +58,6 @@ export default function Deposit({ pair }: any): JSX.Element {
   // Calculated
   const assetNative = WNATIVE[chainId].address === pair.asset.address
 
-  // @ts-ignore TYPE NEEDS FIXING
   const ethBalance = useETHBalances(assetNative ? [account] : [])
 
   // const balance = useCoffin

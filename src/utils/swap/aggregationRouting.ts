@@ -107,8 +107,8 @@ function formatRoutesV2(routes: SwapRoute[]): SwapRouteV2[] {
 }
 
 export function getTradeComposition(
+  chainId: ChainId,
   trade?: Aggregator,
-  chainId?: ChainId,
   allTokens?: { [address: string]: Token },
 ): SwapRouteV2[] | undefined {
   if (!trade || !trade.swaps || !chainId) {

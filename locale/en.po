@@ -955,9 +955,6 @@ msgstr "Processing"
 msgid "Provide"
 msgstr "Provide"
 
-msgid "Public good blockchain development guide."
-msgstr "Public good blockchain development guide."
-
 msgid "RETURNS"
 msgstr "RETURNS"
 

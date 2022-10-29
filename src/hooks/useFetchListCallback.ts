@@ -9,8 +9,8 @@ import { useAppDispatch } from 'state/hooks'
 import { fetchTokenList } from 'state/lists/actions'
 import { useCallback } from 'react'
 
-export function useFetchListCallback(): (listUrl: string, sendDispatch?: boolean) => Promise<TokenList> {
-  const { chainId, library } = useActiveWeb3React()
+export function useFetchListCallback(chainId: ChainId): (listUrl: string, sendDispatch?: boolean) => Promise<TokenList> {
+  const { library } = useActiveWeb3React()
   const dispatch = useAppDispatch()
 
   const ensResolver = useCallback(

@@ -34,11 +34,11 @@ export const useAddLiquidityDerivedCurrencyAmounts: UseAddLiquidityDerivedCurren
 type UseAddLiquidityDerivedInputError = () => string
 export const useAddLiquidityDerivedInputError: UseAddLiquidityDerivedInputError = () => {
   const { i18n } = useLingui()
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const { poolWithState, currencies } = usePoolContext()
   const spendFromWallet = useSelector(selectAddSpendFromWallet)
   const parsedAmounts = useAddLiquidityDerivedCurrencyAmounts()
-  const balances = useCoffinOrWalletBalances(account ?? undefined, currencies, spendFromWallet)
+  const balances = useCoffinOrWalletBalances(chainId, account ?? undefined, currencies, spendFromWallet)
 
   const insufficientBalance = useMemo(
     () =>

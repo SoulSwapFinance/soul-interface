@@ -23,10 +23,10 @@ interface RemoveViewProps {
 }
 
 const RemoveView: FC<RemoveViewProps> = ({ onClose, onBack }) => {
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const currency = useBalancesSelectedCurrency()
   const [attemptingTxn, setAttemptingTxn] = useState<boolean>(false)
-  const walletBalance = useCurrencyBalance(account ?? undefined, currency)
+  const walletBalance = useCurrencyBalance(chainId, account ?? undefined, currency)
   const { data: coffinBalance } = useCoffinBalanceV2(currency ? currency.wrapped.address : undefined)
   const { withdraw } = useCoffinBox()
   const { rebases } = useCoffinRebases([currency?.wrapped])
@@ -81,6 +81,7 @@ const RemoveView: FC<RemoveViewProps> = ({ onClose, onBack }) => {
     <div className="flex flex-col gap-4">
       <HeadlessUiModal.Header header={i18n._(t`Remove to Wallet`)} onClose={onClose} onBack={onBack} />
       <AssetInput
+        chainId={chainId}
         title={''}
         currency={currency}
         onChange={(val, isMax) => setInputState({ value: val, isMax: isMax || false })}
