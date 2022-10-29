@@ -2,7 +2,7 @@ import { ChevronRightIcon, ExternalLinkIcon } from '@heroicons/react/outline'
 import { CurrencyDollarIcon, XCircleIcon } from '@heroicons/react/solid'
 import chain from 'soulswap-chain'
 import { Token, Type } from 'soulswap-currency'
-import { useIsMounted } from 'soulswap-hooks'
+import { useIsMounted } from 'packages/hooks'
 import React, { CSSProperties, FC, useMemo, useState } from 'react'
 
 import { TokenSelectorProps } from './TokenSelector'

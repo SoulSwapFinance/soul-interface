@@ -1,4 +1,4 @@
-import { useInterval } from 'soulswap-hooks'
+import { useInterval } from 'packages/hooks'
 import { formatDistanceToNow } from 'date-fns'
 import React, { FC, useState } from 'react'
 

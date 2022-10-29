@@ -1,5 +1,5 @@
 import { Amount, Type } from 'soulswap-currency'
-import { FundSource, useInViewport } from 'soulswap-hooks'
+import { FundSource, useInViewport } from 'packages/hooks'
 import { Fraction, ZERO } from 'soulswap-math'
 import React, { CSSProperties, FC, memo, useCallback, useRef } from 'react'
 import { classNames } from 'functions/styling'

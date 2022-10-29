@@ -3,7 +3,7 @@ import { SearchIcon } from '@heroicons/react/outline'
 import { XCircleIcon } from '@heroicons/react/solid'
 import chain from 'soulswap-chain'
 import { Token, Type } from 'soulswap-currency'
-import { FundSource, useIsSmScreen } from 'soulswap-hooks'
+import { FundSource, useIsSmScreen } from 'packages/hooks'
 import { Fraction } from 'soulswap-math'
 import React, { FC, useCallback } from 'react'
 

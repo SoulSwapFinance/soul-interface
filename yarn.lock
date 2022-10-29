@@ -27536,16 +27536,6 @@ soulswap-format@^0.0.1:
     millify "^4.0.0"
     numeral "^2.0.6"
 
-soulswap-hooks@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/soulswap-hooks/-/soulswap-hooks-0.0.1.tgz#97dbc4fc053e31c52acaa36eb12e9e024ce808b3"
-  integrity sha512-N3eyuUkQJcP61D9zuYsq4JMbSEBEvIrMkJoNoJ2OVqbOhP2doo6KYIDEAA8mPu6C2SqdLAGjz1YE2a26Bh15XA==
-  dependencies:
-    "@ethersproject/address" "^5.7.0"
-    "@ethersproject/providers" "^5.7.0"
-    copy-to-clipboard "^3.3.1"
-    react-responsive "9.0.0-beta.10"
-
 soulswap-limit-orders-lib@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/soulswap-limit-orders-lib/-/soulswap-limit-orders-lib-1.1.0.tgz#7cf6506b056ada1d259adcaf85bb5aaba6e22cb7"

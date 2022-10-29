@@ -4,7 +4,7 @@ import { SearchIcon } from '@heroicons/react/outline'
 import { XCircleIcon } from '@heroicons/react/solid'
 import chain from 'soulswap-chain'
 import { Token, Type } from 'soulswap-currency'
-import { FundSource } from 'soulswap-hooks'
+import { FundSource } from 'packages/hooks'
 import { Fraction } from 'soulswap-math'
 
 // import { BalanceMap } from 'hooks/useBalance/types'

@@ -256,7 +256,6 @@
     "soulswap-currency": "^0.0.1",
     "soulswap-default-token-list": "^2.3.0",
     "soulswap-format": "^0.0.1",
-    "soulswap-hooks": "^0.0.1",
     "soulswap-limit-orders-react": "^3.9.0",
     "soulswap-stargate": "^0.0.1",
     "soulswap-widget": "^1.0.5",

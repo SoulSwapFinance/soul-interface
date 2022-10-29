@@ -1,6 +1,6 @@
 import { ChainId } from 'sdk'
 import { Type, Token } from 'soulswap-currency'
-import { FundSource, useIsMounted } from 'soulswap-hooks'
+import { FundSource, useIsMounted } from 'packages/hooks'
 import { FC, memo, useMemo } from 'react'
 
 // import { useBalances } from 'hooks/useBalance/useBalance'

@@ -2,7 +2,7 @@ import { FC, RefObject, useEffect, useMemo, useRef, useState } from 'react'
 // import { isAddress } from '@ethersproject/address'
 import { ChainId } from 'sdk'
 import { Native, Token, Type } from 'soulswap-currency'
-import { filterTokens, FundSource, tokenComparator, useDebounce, useSortedTokensByQuery } from 'soulswap-hooks'
+import { filterTokens, FundSource, tokenComparator, useDebounce, useSortedTokensByQuery } from 'packages/hooks'
 import { Fraction } from 'soulswap-math'
 
 // import { BalanceMap } from 'hooks/useBalance/types'

@@ -2,7 +2,7 @@ import React, { FC, useMemo, useState } from 'react'
 import { ChevronRightIcon, InformationCircleIcon } from '@heroicons/react/outline'
 import { CurrencyDollarIcon } from '@heroicons/react/solid'
 import { Token } from 'soulswap-currency'
-import { useIsMounted } from 'soulswap-hooks'
+import { useIsMounted } from 'packages/hooks'
 
 // import { useAllCustomTokens } from 'lib/state/storage'
 import { TokenSelectorCustomTokenRow } from '../TokenSelector/TokenSelectorCustomTokensOverlay'

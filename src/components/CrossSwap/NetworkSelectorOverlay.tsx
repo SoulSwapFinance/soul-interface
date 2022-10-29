@@ -1,7 +1,7 @@
 import { CheckIcon } from '@heroicons/react/outline'
 import chains from 'soulswap-chain'
 import  { ChainId } from 'sdk'
-import { useIsSmScreen } from 'soulswap-hooks'
+import { useIsSmScreen } from 'packages/hooks'
 import React, { FC, useCallback, useRef } from 'react'
 import { SlideIn } from 'components/Animated/SlideIn'
 import { NetworkIcon } from 'components/Icons/NetworkIcon'

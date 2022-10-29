@@ -1,7 +1,7 @@
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import chains from 'soulswap-chain'
 import { ChainId } from 'sdk'
-import { FundSource } from 'soulswap-hooks'
+import { FundSource } from 'packages/hooks'
 import { Type } from 'soulswap-currency'
 
 import React, { FC, useCallback, useMemo, useState } from 'react'

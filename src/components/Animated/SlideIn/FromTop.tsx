@@ -1,5 +1,5 @@
 import { Transition } from '@headlessui/react'
-import { useIsSmScreen } from 'soulswap-hooks'
+import { useIsSmScreen } from 'packages/hooks'
 import { classNames } from 'functions'
 import React, { FC, Fragment, ReactElement } from 'react'
 import ReactDOM from 'react-dom'
