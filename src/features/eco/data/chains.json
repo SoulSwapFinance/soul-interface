@@ -1,5 +1,5 @@
 {
-    "0x1": {
+    "1": {
         "name": "Ethereum",
         "fullName": "Ethereum",
         "token": "ETH",
@@ -15,7 +15,7 @@
             ]
         }
     },
-    "0x89": {
+    "137": {
         "name": "Polygon",
         "fullName": "Polygon Network",
         "token": "MATIC",
@@ -31,7 +31,7 @@
             ]
         }
     },
-    "0xfa": {
+    "250": {
         "name": "Fantom",
         "fullName": "Fantom Network",
         "token": "FTM",
@@ -47,7 +47,7 @@
             ]
         }
     },
-    "0xa86a": {
+    "43114": {
         "name": "Avalanche",
         "fullName": "Avalanche Network",
         "token": "AVAX",
@@ -63,7 +63,7 @@
             ]
         }
     },
-    "0x38": {
+    "56": {
         "name": "BNB Chain",
         "fullName": "BNB Chain",
         "token": "BNB",
