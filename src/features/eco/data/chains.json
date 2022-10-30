@@ -1,0 +1,82 @@
+{
+    "0x1": {
+        "name": "Ethereum",
+        "fullName": "Ethereum",
+        "token": "ETH",
+        "WETH": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "rpc": "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
+        "explorer": "https://etherscan.io",
+        "api": {
+            "endpoint": "https://api.etherscan.io",
+            "keys": [
+                "8Z5ND5ZBTKG83WGQG4WI5PXR1S776726X8",
+                "MSUS7ZCDVKX5K3U3PY9H9I3EMKYT6MIABW",
+                "T1N65JHDCQY6KM366BXCH5JFR7RXXM7D3F"
+            ]
+        }
+    },
+    "0x89": {
+        "name": "Polygon",
+        "fullName": "Polygon Network",
+        "token": "MATIC",
+        "WETH": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+        "rpc": "https://polygon-rpc.com",
+        "explorer": "https://polygonscan.com",
+        "api": {
+            "endpoint": "https://api.polygonscan.com",
+            "keys": [
+                "VFQYRVAXGPGWXIISIKS91W69R5W5251IHI",
+                "D3DJ4HIPGHRS9PK4VSTWNIX5TZMDMBH8AQ",
+                "F5CF6UHHRUTECAI4HUDUKX77N685WECJ5N"
+            ]
+        }
+    },
+    "0xfa": {
+        "name": "Fantom",
+        "fullName": "Fantom Network",
+        "token": "FTM",
+        "WETH": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+        "rpc": "https://rpc.ftm.tools",
+        "explorer": "https://ftmscan.com",
+        "api": {
+            "endpoint": "https://api.ftmscan.com",
+            "keys": [
+                "RCZ2PE9XSREXDHN5KGK3MBZP9PH36SWZQ3",
+                "JBDGVIGPEBVC1WDMWHXRP8BQ771DIMGVMX",
+                "FE1HJDEA3FFG9ANDIJXQM73BADD1RFZIUB"
+            ]
+        }
+    },
+    "0xa86a": {
+        "name": "Avalanche",
+        "fullName": "Avalanche Network",
+        "token": "AVAX",
+        "WETH": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+        "rpc": "https://api.avax.network/ext/bc/C/rpc",
+        "explorer": "https://snowtrace.io",
+        "api": {
+            "endpoint": "https://api.snowtrace.io",
+            "keys": [
+                "1V1X9IXZI6EPMNEVGGPXDA4WR9Y7XJFG8E",
+                "QYF85YTP3CGPHAPKF1Y1PHWQBUPXKESQNT",
+                "48RMUB46W83E8HGKIJT2A83RXB9V4PKR2P"
+            ]
+        }
+    },
+    "0x38": {
+        "name": "BNB Chain",
+        "fullName": "BNB Chain",
+        "token": "BNB",
+        "WETH": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+        "rpc": "https://bsc-dataseed.binance.org",
+        "explorer": "https://bscscan.com",
+        "api": {
+            "endpoint": "https://api.bscscan.com",
+            "keys": [
+                "16YNPYJREQAI4XTBHHBFJGSRZJX4GJK3UP",
+                "1SNVJDGBFD5YUAW6J7P2NIE7P52G9W48QE",
+                "V1NKYYZ92DM1QM9BZEDS1GDF7FB12J9V9F"
+            ]
+        }
+    }
+}
