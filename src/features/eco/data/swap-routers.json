@@ -1,0 +1,77 @@
+{
+    "1": {
+        "uniswap": {
+            "name": "Uniswap v2",
+            "address": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+            "ETH": "ETH"
+        },
+        "sushiswap": {
+            "name": "SushiSwap",
+            "address": "0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F",
+            "ETH": "ETH"
+        }
+    },
+    "137": {
+        "quickswap": {
+            "name": "QuickSwap",
+            "address": "0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff",
+            "ETH": "ETH"
+        },
+        "sushiswap": {
+            "name": "SushiSwap",
+            "address": "0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506",
+            "ETH": "ETH"
+        }
+    },
+    "250": {
+        "soulswap": {
+            "name": "SoulSwap",
+            "address": "0x6b3d631B87FE27aF29efeC61d2ab8CE4d621cCBF",
+            "ETH": "ETH"
+        },
+        "spookyswap": {
+            "name": "SpookySwap",
+            "address": "0xF491e7B69E4244ad4002BC14e878a34207E38c29",
+            "ETH": "ETH"
+        },
+        "spiritswap": {
+            "name": "SpiritSwap",
+            "address": "0x16327E3FbDaCA3bcF7E38F5Af2599D2DDc33aE52",
+            "ETH": "ETH"
+        },
+        "sushiswap": {
+            "name": "SushiSwap",
+            "address": "0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506",
+            "ETH": "ETH"
+        }
+    },
+    "43114": {
+        "soulswap": {
+            "name": "SoulSwap",
+            "address": "0xa4594460A9d3D41e8B85542D34E23AdAbc3c86Ef",
+            "ETH": "ETH"
+        },
+        "traderjoe": {
+            "name": "Trader Joe",
+            "address": "0x60aE616a2155Ee3d9A68541Ba4544862310933d4",
+            "ETH": "AVAX"
+        },
+        "sushiswap": {
+            "name": "SushiSwap",
+            "address": "0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506",
+            "ETH": "ETH"
+        }
+    },
+    "56": {
+        "pancakeswap": {
+            "name": "PancakeSwap",
+            "address": "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+            "ETH": "ETH"
+        },
+        "sushiswap": {
+            "name": "SushiSwap",
+            "address": "0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506",
+            "ETH": "ETH"
+        }
+    }
+}

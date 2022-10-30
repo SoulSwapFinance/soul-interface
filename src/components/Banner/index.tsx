@@ -73,7 +73,7 @@ export const NewFeature: FC<IFeature> = ({ chainId }) => (
           <NavLink href="/open">
             <Button variant="filled" color={getChainColorCode(chainId)} size="sm">
               <span className="justify-center font-bold">
-                {'Click Here: More Tokens to Exchange'}
+                {'Click Here: Exchange More Tokens'}
               </span>
             </Button>
           </NavLink>
