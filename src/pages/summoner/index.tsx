@@ -110,8 +110,8 @@ const Summoner = () => {
                         }
                     setPendingTx(false)
                   }}
-                >
-                  CLAIM ALL {formatNumberScale(pendingValue, true)}
+                  >
+                  {`CLAIM ALL ${pendingValue > 0 ? formatNumberScale(pendingValue, true) : ''}`}
                 </Button>
               )}
               <Button
@@ -133,7 +133,6 @@ const Summoner = () => {
         <SubmitButton
         height= "2rem"
         primaryColor={"#6F1BD9"} 
-        // color={"purple"}
         size="lg"
         >
         <ExternalLink 

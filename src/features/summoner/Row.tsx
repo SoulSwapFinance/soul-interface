@@ -66,7 +66,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
     const { summonerPoolInfo } = useSummonerPoolInfo(pid)
     const liquidity = summonerPoolInfo.tvl
-    const apr = summonerPoolInfo.apr
+    const APR = summonerPoolInfo.apr
     const allocPoint = summonerPoolInfo.allocPoint
     const lpAddress = summonerPoolInfo.lpAddress
     const pairStatus = summonerPoolInfo.status
@@ -88,26 +88,28 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const [openWithdraw, setOpenWithdraw] = useState(false)
     const [openZap, setOpenZap] = useState(false)
 
+    // SUMMONER USER INFO //
     const { summonerUserInfo } = useSummonerUserInfo(pid)
     const stakedBalance = Number(summonerUserInfo.stakedBalance)
     const stakedValue = Number(summonerUserInfo.stakedValue)
-    const earnedAmount = summonerUserInfo.pendingSoul
-    const earnedValue = summonerUserInfo.pendingValue
+    const earnedAmount = Number(summonerUserInfo.pendingSoul)
+    const earnedValue = Number(summonerUserInfo.pendingValue)
     const lpPrice = Number(summonerUserInfo.lpPrice)
+    const withdrawFee = Number(summonerUserInfo.currentRate)
+    const walletBalance = Number(summonerUserInfo.walletBalance)
+
+    const feeAmount = withdrawFee * stakedBalance / 100
+    const withdrawable = stakedBalance - feeAmount
+    const feeValue = feeAmount * lpPrice
+
     // const firstDepositTime = Number(summonerUserInfo.firstDepositTime)
-    const currentRate = Number(summonerUserInfo.currentRate)
     // const currentTime = nowTime / 1_000
     // const timeDelta = currentTime - firstDepositTime
     // const daysElapsed = timeDelta / 86_400
-    const withdrawFee = currentRate
-    const feeAmount
-        = withdrawFee * stakedBalance / 100
-    const withdrawable = stakedBalance - feeAmount
-    const feeValue = feeAmount * lpPrice
-    const walletBalance = Number(summonerUserInfo.walletBalance)
     // const walletValue = Number(walletBalance) * lpPrice
     // const parsedBalance = tryParseAmount(walletBalance.toString(), farm.lpToken)
     // const userBalance = useCurrencyBalance(account, lpToken)
+
     const hasBalance = Number(walletBalance) > 0
     const isActive = pairStatus == "active"
     const assetToken = new Token(chainId, farm.lpAddress, decimals)
@@ -127,13 +129,13 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const token0 = new Token(chainId, token0Address, token0Decimals)
     const token1 = new Token(chainId, token1Address, token1Decimals)
 
-    // Native Keys //
+    // NATIVE KEYS //
     // const nativeToken0 = farm.token0Symbol == WNATIVE[chainId].symbol
     // const nativeToken1 = farm.token1Symbol == WNATIVE[chainId].symbol 
 
     const nativeToken0 = farm.token0Symbol == WNATIVE[chainId].symbol
 
-    // Zap Add-Ons //
+    // ZAP ADD-ONS //
     const tokenContract = useTokenContract(zapTokenAddress)
     const zapTokenDecimals = Number(useTokenInfo(zapTokenAddress).tokenInfo.decimals)
     const zapTokenSymbol = useTokenInfo(zapTokenAddress).tokenInfo.symbol
@@ -334,7 +336,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                             <HideOnMobile>
                                 <FarmItemBox>
                                     <FarmItem>
-                                        {Number(apr).toString() === '0.00' ? (
+                                        {Number(APR).toString() === '0.00' ? (
                                             <Text padding="0" fontSize="1rem" color="#666">
                                                 0
                                             </Text>
@@ -373,13 +375,13 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                             {/* % APR */}
                             <FarmItemBox>
                                 <FarmItem>
-                                    {Number(apr).toString() === '0.00' ? (
+                                    {Number(APR).toString() === '0.00' ? (
                                         <Text padding="0" fontSize="1rem" color="#666">
                                             0
                                         </Text>
                                     ) : (
                                         <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                            {Number(apr).toFixed()}%
+                                            {Number(APR).toFixed()}%
                                         </Text>
                                     )}
                                 </FarmItem>
@@ -387,25 +389,25 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
                             {/* REWARDS VALUE */}
                             {/* <FarmItemBox className="flex">
-                                {Number(earnedValue).toFixed(0).toString() === '0' ? (
+                                {earnedValue.toFixed(0).toString() === '0' ? (
                                     <Text padding="0" fontSize="1rem" color="#666">
                                         0
                                     </Text>
                                 ) : (
                                     <Text padding="0" fontSize="1rem" color="#F36FFE">
-                                        ${Number(earnedValue).toFixed(0)}
+                                        ${earnedValue.toFixed(0)}
                                     </Text>
                                 )}
                             </FarmItemBox> */}
 
                             <FarmItemBox className="flex">
-                                {Number(earnedAmount).toFixed(0).toString() === '0' ? (
+                                {earnedAmount.toFixed(0).toString() === '0' ? (
                                     <Text padding="0" fontSize="1rem" color="#666">
                                         0
                                     </Text>
                                 ) : (
                                     <Text padding="0" fontSize="1rem" color="#F36FFE">
-                                        {Number(earnedAmount).toFixed(0)} SOUL
+                                        {formatNumber(earnedAmount.toFixed(0), false, true)} SOUL
                                         {/* {formatNumber(Number(earnedAmount), false, true)} SOUL */}
                                     </Text>
                                 )}
@@ -576,7 +578,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                             Claimable Rewards
                                         </Typography>
                                         <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                            {Number(earnedAmount).toFixed(2)} SOUL
+                                            {earnedAmount.toFixed(2)} SOUL
                                         </Typography>
                                     </div>
                                     <div className="flex justify-between">
@@ -606,7 +608,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
                                         <div className="text-white">
                                             <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                                                <span> {formatNumber(Number(apr), false, true)}% APR</span>
+                                                <span> {formatNumber(Number(APR), false, true)}% APR</span>
                                             </div>
                                         </div>
                                     </div>
@@ -736,7 +738,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
 
                                 {/* EARNED */}
-                                {Number(earnedAmount) > 0 && (
+                                {earnedAmount > 0 && (
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
@@ -898,7 +900,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
                                 </Wrap>
                                 {/* EARNED */}
-                                {Number(earnedAmount) > 0 && (
+                                {earnedAmount > 0 && (
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"

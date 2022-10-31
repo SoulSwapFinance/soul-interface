@@ -233,10 +233,10 @@ export const SwapTokensContent: React.FC<any> = ({
     ) {
       // Only update if the data fetched is still representative
       if (
-        parseFloat(inTokenAmount).toFixed(4) ===
+        parseFloat(inTokenAmount).toFixed(inToken.decimals) ===
         parseFloat(
-          weiToUnit(BigNumber.from(OOSwapQuoteData.inAmount)).toString()
-        ).toFixed(4)
+      weiToUnit(BigNumber.from(OOSwapQuoteData.inAmount)).toString()
+        ).toFixed(inToken.decimals)
       ) {
         // setOutTokenAmount(
         //   weiToUnit(
@@ -433,7 +433,7 @@ export const SwapTokensContent: React.FC<any> = ({
             <div>Minimum Received</div>
             {minReceived ? (
               <FormattedValue
-                formattedValue={toFormattedBalance(minReceived.toString())}
+          formattedValue={toFormattedBalance(minReceived.toString())}
                 tokenSymbol={outToken?.symbol}
               />
             ) : (
