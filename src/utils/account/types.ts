@@ -1,4 +1,7 @@
+import { ChainId } from "sdk";
+
 export interface Token {
+    chainId?: ChainId
     name: string;
     symbol: string;
     address: string;

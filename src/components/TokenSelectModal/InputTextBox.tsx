@@ -70,7 +70,6 @@ const InputTextBox: React.FC<any> = ({
           <TextArea
             value={text}
             onInput={(event) => {
-              // @ts-ignore
               onHandleChange(event.target.value);
             }}
             onBlur={() =>
