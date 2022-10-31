@@ -477,7 +477,7 @@ msgstr ""
 msgid "Error connecting. Try refreshing the page."
 msgstr ""
 
-msgid "Estimated network Fee"
+msgid "Estimated Network Fee"
 msgstr ""
 
 msgid "Everytime you stake or claim rewards your lock time renews."
@@ -1321,9 +1321,6 @@ msgid "Try typing \"10 ETH to KNC\""
 msgstr ""
 
 msgid "Tutorial"
-msgstr ""
-
-msgid "Tutorials"
 msgstr ""
 
 msgid "UNWRAP"

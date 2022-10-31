@@ -4,7 +4,7 @@ import { BigNumber } from "ethers"
 import { useActiveWeb3React } from "services/web3"
 import Web3 from "web3"
 import { ChainId, WNATIVE } from "sdk"
-import useSwap from "features/eco/hooks/useSwap"
+// import useSwap from "features/eco/hooks/useSwap"
 
 // const routerData = routerList.find(router => router.id === "direct")
 let web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
@@ -109,7 +109,7 @@ async function getSwap(chainId, routerId, fromAddress, toAddress, inputAmount, a
 async function getBestRouterQuote(chainId: ChainId, routers, fromAddress: string, toAddress: string, inputAmount) {
     // runs: batch request
     const batch = new web3.BatchRequest()
-    const swap = useSwap(chainId)
+    // const swap = useSwap(chainId)
     
     const requests = []
     const quotes = []

@@ -67,31 +67,45 @@ export function Underworld() {
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".9rem" color="#FFFFFF">
-                SUPPLIED
+                APR (%)
                 </Text>
               </FarmItemBox>
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".9rem" color="#FFFFFF">
-                BORROWED
+                SUPPLIED
                 </Text>
               </FarmItemBox>
+
+              {/* <FarmItemBox>
+                <Text padding="0" fontSize=".9rem" color="#FFFFFF">
+                BORROWED
+                </Text>
+              </FarmItemBox> */}
               
-              <HideOnMobile>
+              {/* <HideOnMobile>
               <FarmItemBox>
                 <Text padding="0" fontSize=".9rem" color="#FFFFFF">
                 COLLATERAL
                 </Text>
               </FarmItemBox>
-              </HideOnMobile>
+              </HideOnMobile> */}
 
               <HideOnMobile>
+              <FarmItemBox>
+                <Text padding="0" fontSize=".9rem" color="#FFFFFF">
+                VALUE ($)
+                </Text>
+              </FarmItemBox>
+              </HideOnMobile>
+
+              {/* <HideOnMobile>
               <FarmItemBox>
                 <Text padding="0" fontSize=".9rem" color="#FFFFFF">
                 UTILIZED
                 </Text>
               </FarmItemBox>
-              </HideOnMobile>
+              </HideOnMobile> */}
 
               {/* <FarmItemBox>
                 <Text padding="0" fontSize="1" color="#FFFFFF">

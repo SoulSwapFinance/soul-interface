@@ -197,7 +197,7 @@ export default function AutoStake() {
           </NavLink>
         </Button>
         <Button variant="filled" color="purple" size="lg">
-          <NavLink href={'/underworld'}>
+          <NavLink href={'/lend'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Lend </span>
             </a>

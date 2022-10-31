@@ -52,11 +52,11 @@ export default function Stake() {
   const parsedStakeValue = tryParseAmount(stakeValue, soulToken)
 
   // CONTRACTS //
-  
+
   // staking  
-  const { autoStakeInfo } = useAutoStakeInfo()
-  const { userAutoStakeInfo} = useUserAutoStakeInfo(account)
-  
+  const { autoStakeInfo } = useAutoStakeInfo()
+  const { userAutoStakeInfo } = useUserAutoStakeInfo(account)
+
 
   // STAKING DATA //
   const pricePerShare = Number(autoStakeInfo.pricePerShare)
@@ -68,13 +68,13 @@ export default function Stake() {
   // const available = autoStakeInfo.available
   // const callFeeRate = autoStakeInfo.callFee
   const bounty = autoStakeInfo.bounty
-    
+
   // AUTOSTAKE DATA //
   const tvl = Number(autoStakeInfo.tvl)
   // const apy = Number(autoStakeInfo.apy)  
   const stakingAPY = (Math.pow(1 + 3, 365 * 3) - 1) * 100
 
-    
+
   // FEE-RELATED VALUES //
   const nowTime = new Date().getTime()
   const withdrawFeeRate = Number(autoStakeInfo.withdrawFee)
@@ -89,8 +89,8 @@ export default function Stake() {
   // console.log('remainingSecs:%s', remainingSeconds)
   const remainingHours = remainingSeconds / 3_600_000
   const remainingMinutes = max(remainingHours * 60, 0)
-  
-  const feeAmount = 
+
+  const feeAmount =
     remainingMinutes == 0 ? 0 : withdrawFeeRate * Number(withdrawValue)
 
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
@@ -102,41 +102,41 @@ export default function Stake() {
     ? 'Enter Amount'
     : soulBal?.lessThan(parsedStakeValue)
       ? 'Insufficient Balance'
-        : undefined
+      : undefined
 
-  const isStakeValid = !stakeError  
+  const isStakeValid = !stakeError
 
-    // HANDLE DEPOSIT //
-     const handleDeposit = async (amount) => {
-      try {
-          const tx = await AutoStakeContract?.deposit(account, parsedDepositValue?.quotient.toString())
-          await tx.wait()
-      } catch (e) {
-          // alert(e.message)
-          console.log(e)
-      }
-  }
-    // HANDLE WITHDRAW //
-    const handleWithdraw = async (amount) => {
-        try {
-            const tx = await AutoStakeContract?.withdraw(account, parsedWithdrawValue?.quotient.toString())
-            await tx?.wait()
-        } catch (e) {
-            console.log(e)
-        }
+  // HANDLE DEPOSIT //
+  const handleDeposit = async (amount) => {
+    try {
+      const tx = await AutoStakeContract?.deposit(account, parsedDepositValue?.quotient.toString())
+      await tx.wait()
+    } catch (e) {
+      // alert(e.message)
+      console.log(e)
     }
+  }
+  // HANDLE WITHDRAW //
+  const handleWithdraw = async (amount) => {
+    try {
+      const tx = await AutoStakeContract?.withdraw(account, parsedWithdrawValue?.quotient.toString())
+      await tx?.wait()
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
 
   const handleWithdrawAll = async () => {
     try {
-        let tx
-        tx = await AutoStakeContract.withdrawAll()
-        await tx?.wait()
+      let tx
+      tx = await AutoStakeContract.withdrawAll()
+      await tx?.wait()
     } catch (e) {
-        // alert(e.message)
-        console.log(e)
+      // alert(e.message)
+      console.log(e)
     }
-}
+  }
 
 
   return (
@@ -149,56 +149,63 @@ export default function Stake() {
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/dashboard'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Data </span>
+              <span> Data </span>
             </a>
           </NavLink>
         </Button>
-        <Button variant="filled" color="purple" size="lg">
-          <NavLink href={'/bonds'}>
+        <NavLink href={'/bonds'}>
+          <Button variant="filled" color="purple" size="lg">
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Bond </span>
+              <span> Bond </span>
             </a>
-          </NavLink>
-        </Button>
-        <Button variant="filled" color="purple" size="lg">
-          <NavLink href={'/summoner'}>
+          </Button>
+        </NavLink>
+        <NavLink href={'/summoner'}>
+          <Button variant="filled" color="purple" size="lg">
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Farm </span>
+              <span> Farm </span>
             </a>
-          </NavLink>
-        </Button>
-        <Button variant="filled" color="purple" size="lg">
-          <NavLink href={'/underworld'}>
+          </Button>
+        </NavLink>
+        <NavLink href={'/lend'}>
+          <Button variant="filled" color="purple" size="lg">
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Lend </span>
+              <span> Lend </span>
             </a>
-          </NavLink>
-        </Button>
+          </Button>
+        </NavLink>
+        <NavLink href={'/borrow'}>
+          <Button variant="filled" color="purple" size="lg">
+            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              <span> Borrow </span>
+            </a>
+          </Button>
+        </NavLink>
       </div>
       <DoubleGlowShadowV2>
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
           <Tab.Group>
             <Tab.List className="flex items-center justify-center mb-1 space-x-2 p-3px text-white">
-            <div className="grid grid-cols-2 w-[95%] rounded-md p-2px bg-dark-900">
-            <Tab
-                className={({ selected }) =>
-                  `${selected ? 'border-b-2 border-accent p-2 border-[#b383ff] text-white' : 'bg-dark-900 text-white'
-                  } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-purple`
-                }
-              >
-                {i18n._(t`Deposit`)}
-              </Tab>
-              <Tab
-                className={({ selected }) =>
-                  `${selected ? 'border-b-2 border-accent p-2 border-[#b383ff] text-white' : 'bg-dark-900 text-white'
-                  } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-purple`
-                }
-              >
-                {i18n._(t`Withdraw`)}
-              </Tab>
-          </div>
+              <div className="grid grid-cols-2 w-[95%] rounded-md p-2px bg-dark-900">
+                <Tab
+                  className={({ selected }) =>
+                    `${selected ? 'border-b-2 border-accent p-2 border-[#b383ff] text-white' : 'bg-dark-900 text-white'
+                    } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-purple`
+                  }
+                >
+                  {i18n._(t`Deposit`)}
+                </Tab>
+                <Tab
+                  className={({ selected }) =>
+                    `${selected ? 'border-b-2 border-accent p-2 border-[#b383ff] text-white' : 'bg-dark-900 text-white'
+                    } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-purple`
+                  }
+                >
+                  {i18n._(t`Withdraw`)}
+                </Tab>
+              </div>
             </Tab.List>
-            
+
             <Tab.Panel className={'outline-none'}>
               <VaultInputPanel
                 value={stakeValue}
@@ -217,21 +224,21 @@ export default function Stake() {
               <div className="h-px my-2 bg-dark-1000" />
 
               <div className="flex justify-between">
-                  <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Fee Period Remaining`)}
-                  </Typography>
-                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                  { (remainingMinutes).toFixed() } mins
-                  </Typography>
-              </div>             
-              
+                <Typography className="text-white" fontFamily={'medium'}>
+                  {i18n._(t`Fee Period Remaining`)}
+                </Typography>
+                <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                  {(remainingMinutes).toFixed()} mins
+                </Typography>
+              </div>
+
               <div className="h-px my-2 bg-dark-1000" />
 
               <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-purple w-full space-y-1">
                 <div className="text-white">
-                    <div className="block text-md md:text-xl text-white text-center text-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                      <span> {formatNumber(stakingAPY)}% APY</span>
-                    </div>
+                  <div className="block text-md md:text-xl text-white text-center text-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                    <span> {formatNumber(stakingAPY)}% APY</span>
+                  </div>
                 </div>
               </div>
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-purple w-full space-y-1">
@@ -272,54 +279,54 @@ export default function Stake() {
                   </Button>
                 ) : (
                   <SubmitButton
-                  height="2rem"
-                  primaryColor="#B485FF"
-                  color="black"
-                  margin=".5rem 0 .5rem 0"
-                  onClick={() =>
+                    height="2rem"
+                    primaryColor="#B485FF"
+                    color="black"
+                    margin=".5rem 0 .5rem 0"
+                    onClick={() =>
                       handleDeposit(depositValue)
-                  }
-              >
-                  DEPOSIT
-              </SubmitButton>
+                    }
+                  >
+                    DEPOSIT
+                  </SubmitButton>
                 )}
               </div>
             </Tab.Panel>
 
             <Tab.Panel className={'outline-none'}>
-             <VaultInputPanel
+              <VaultInputPanel
                 value={withdrawValue}
                 showLogo={true}
                 showMaxButton={true}
                 onUserInput={(value) => setWithdrawValue(value)}
-                onMax={ () => setWithdrawValue(stakedBal.toString()) }
+                onMax={() => setWithdrawValue(stakedBal.toString())}
                 currency={soulToken}
                 disableCurrencySelect={true}
                 locked={!account}
                 id="stablecoin-currency-output"
               />
-<div className="h-px my-2 bg-dark-1000" />
+              <div className="h-px my-2 bg-dark-1000" />
 
-<div className="flex justify-between">
-    <Typography className="text-white" fontFamily={'medium'}>
-      {i18n._(t`Fee Period Remaining`)}
-    </Typography>
-    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-    { (remainingMinutes).toFixed() } mins
-    </Typography>
-</div>             
+              <div className="flex justify-between">
+                <Typography className="text-white" fontFamily={'medium'}>
+                  {i18n._(t`Fee Period Remaining`)}
+                </Typography>
+                <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                  {(remainingMinutes).toFixed()} mins
+                </Typography>
+              </div>
 
-<div className="h-px my-2 bg-dark-1000" />
+              <div className="h-px my-2 bg-dark-1000" />
 
-                <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-purple w-full space-y-1">
+              <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-purple w-full space-y-1">
                 <div className="text-white">
-                    <div className="block text-md md:text-xl text-white text-center text-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                      <span> {formatNumber(stakingAPY)}% APY</span>
-                    </div>
+                  <div className="block text-md md:text-xl text-white text-center text-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                    <span> {formatNumber(stakingAPY)}% APY</span>
+                  </div>
                 </div>
               </div>
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-purple w-full space-y-1">
-              <div className="flex justify-between">
+                <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
                     {i18n._(t`Deposited Amount`)}
                   </Typography>
@@ -340,12 +347,12 @@ export default function Stake() {
                     {i18n._(t`Fee Period Ends`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    { unlockTime }
+                    {unlockTime}
                   </Typography>
                 </div>
               </div>
               <div className="mt-6 flex items-center gap-2">
-                                                     {/* <AssetInput
+                {/* <AssetInput
                                         currencyLogo={true}
                                         currency={SOUL[chainId]}
                                         currencyAddress={SOUL[chainId].address}
@@ -354,18 +361,18 @@ export default function Stake() {
                                         showMax={false}
                                         showBalance={false}
                                     /> */}
-                                    
-                                        <SubmitButton
-                                            height="2rem"
-                                            primaryColor="#B485FF"
-                                            color="black"
-                                            margin=".5rem 0 .5rem 0"
-                                            onClick={() =>
-                                                handleWithdraw(withdrawValue)
-                                            }
-                                        >
-                                            WITHDRAW
-                                        </SubmitButton>
+
+                <SubmitButton
+                  height="2rem"
+                  primaryColor="#B485FF"
+                  color="black"
+                  margin=".5rem 0 .5rem 0"
+                  onClick={() =>
+                    handleWithdraw(withdrawValue)
+                  }
+                >
+                  WITHDRAW
+                </SubmitButton>
               </div>
             </Tab.Panel>
           </Tab.Group>

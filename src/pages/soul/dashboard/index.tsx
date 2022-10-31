@@ -231,34 +231,41 @@ const HideOnMobile = styled.div`
         </HideOnMobile>
 
       <div className="flex ml-4 mr-4 mb-4 gap-1 items-center justify-center">
-        <Button variant="bordered" color={"purple"} size="lg">
           <NavLink href={'/summoner'}>
+        <Button variant="bordered" color={"purple"} size="lg">
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Farm </span>
             </a>
-          </NavLink>
         </Button>
-        <Button variant="bordered" color={"purple"} size="lg">
+          </NavLink>
           <NavLink href={'/bonds'}>
+        <Button variant="bordered" color={"purple"} size="lg">
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Bond </span>
             </a>
-          </NavLink>
         </Button>
+          </NavLink>
+          <NavLink href={'/lend'}>
         <Button variant="bordered" color={"purple"} size="lg">
-          <NavLink href={'/underworld'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Lend </span>
             </a>
-          </NavLink>
         </Button>
+          </NavLink>
+          <NavLink href={'/borrow'}>
         <Button variant="bordered" color={"purple"} size="lg">
+            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Borrow </span>
+            </a>
+        </Button>
+          </NavLink>
           <NavLink href={'/autostake'}>
+        <Button variant="bordered" color={"purple"} size="lg">
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Vault </span>
             </a>
-          </NavLink>
         </Button>
+          </NavLink>
 
         </div>
       <div className="flex text-center items-center">
