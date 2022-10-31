@@ -42,34 +42,41 @@ const Bonds = () => {
           <meta key="description" name="description" content="Mint SOUL" />
         </Head>
         <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
-        <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/summoner'}>
+        <Button variant="filled" color="purple" size="lg">
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Farm </span>
             </a>
-          </NavLink>
         </Button>
-        <Button variant="filled" color="purple" size="lg" className={[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? '' : 'hidden'}>
+          </NavLink>
           <NavLink href={'/soul/dashboard'}>
+        <Button variant="filled" color="purple" size="lg" className={[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? '' : 'hidden'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Data </span>
             </a>
-          </NavLink>
         </Button>
+          </NavLink>
+          <NavLink href={'/lend'}>
         <Button variant="filled" color="purple" size="lg">
-          <NavLink href={'/underworld'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Lend </span>
             </a>
-          </NavLink>
         </Button>
-        <Button variant="filled" color="purple" size="lg" className={[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? '' : 'hidden'}>
+          </NavLink>
+          <NavLink href={'/borrow'}>
+        <Button variant="filled" color="purple" size="lg">
+            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span> Borrow </span>
+            </a>
+        </Button>
+          </NavLink>
           <NavLink href={'/autostake'}>
+        <Button variant="filled" color="purple" size="lg" className={[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? '' : 'hidden'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Vault </span>
             </a>
-          </NavLink>
         </Button>
+          </NavLink>
         </div>
         <BondList />
       </Container>

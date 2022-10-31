@@ -1,3 +1,4 @@
+
 import useRestApi from "./useRestApi";
 
 export const OPENOCEAN_BASEURL = "https://open-api.openocean.finance/v1/cross";
@@ -17,13 +18,13 @@ export type OOToken = {
   icon: string;
 };
 
-const useOpenOceanApi = () => {
+const useOpenOceanApi = (chainId, account) => {
   const { get } = useRestApi(OPENOCEAN_BASEURL);
 
   const getTokenList = () => {
     return get({
       path: OPENOCEAN_METHODS.GET_TOKENLIST,
-      queryParams: [["chainId", 250]],
+      queryParams: [["chainId", chainId]],
     });
   };
 
@@ -44,7 +45,7 @@ const useOpenOceanApi = () => {
         ["gasPrice", 100],
         ["slippage", slippage],
         ["exChange", "openoceanv2"],
-        ["chainId", 250],
+        ["chainId", chainId],
         ["withRoute", "routes"],
       ],
     });
@@ -53,26 +54,29 @@ const useOpenOceanApi = () => {
   // const getBalance = (
   //   inToken: OOToken,
   //   outToken: OOToken,
-  //   account: string
+  //   // account: string
   // ) => {
   //   return get({
   //     path: OPENOCEAN_METHODS.GET_BALANCE,
   //     queryParams: [
   //       ["account", account],
-  //       ["chain", 250],
+  //       ["chain", chainId],
   //       ["inTokenAddress", inToken.address],
   //       ["outTokenAddress", outToken.address],
   //     ],
   //   });
   // };
 
+
   const getSwapQuote = (
     inToken: OOToken,
     outToken: OOToken,
     amount: string,
     slippage: number,
-    account: string
+    account: string,
   ) => {
+    // const directQuote = await quoteSwap(chainId, inToken.address, outToken.address, amount )
+    // console.log('direct quote:%s', await directQuote?.tokenOutAmount)
     return get({
       path: OPENOCEAN_METHODS.GET_SWAP_QUOTE,
       queryParams: [
@@ -86,7 +90,7 @@ const useOpenOceanApi = () => {
         ["gasPrice", 100],
         ["slippage", slippage],
         ["exChange", "openoceanv2"],
-        ["chainId", 250],
+        ["chainId", chainId],
         ["account", account],
         ["withRoute", "routes"],
         ["referrer", "0xFd63Bf84471Bc55DD9A83fdFA293CCBD27e1F4C8"],

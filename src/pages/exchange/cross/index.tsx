@@ -6,7 +6,8 @@ import SDK, {
   InstantTrade,
   WalletProvider,
   InsufficientFundsError,
-  InsufficientLiquidityError
+  InsufficientLiquidityError,
+  UserRejectError
 } from "rubic-sdk";
 import { sleep } from "utils/sleep";
 import { ArrowDownIcon, ArrowRightIcon } from '@heroicons/react/solid'
@@ -14,7 +15,7 @@ import { BigNumber as EthersBigNumber, ethers } from "ethers";
 import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, POLYGON, MOONRIVER, Token } from "features/cross/chains";
 import { ERC20_ABI } from "constants/abis/erc20";
 import { useActiveWeb3React } from "services/web3";
-import { useUserInfo } from "hooks/useAPI";
+// import { useUserInfo } from "hooks/useAPI";
 import { Button } from "components/Button";
 import { useNetworkModalToggle } from "state/application/hooks";
 import { Input, OverlayButton } from "components/index";
@@ -27,7 +28,7 @@ import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
 import SwapHeader from "features/swap/SwapHeader";
 import { SwapLayoutCard } from "layouts/SwapLayout";
 import Modal from "components/DefaultModal";
-import { useETHBalances } from "state/wallet/hooks";
+// import { useETHBalances } from "state/wallet/hooks";
 import NetworkModal from "modals/NetworkModal";
 import { AutoColumn } from "components/Column";
 import Row from "components/Row";
@@ -37,6 +38,10 @@ import { useMulticallContract } from "hooks/useContract";
 import { getLastExchange, setLastExchange } from "utils/rubic/hooks";
 import { AVAX, CHAIN_BY_ID, FTM, NATIVE_ADDRESS, rubicConfiguration } from "utils/rubic/configuration";
 import { ChainId } from "sdk";
+import TokenSelect from "features/cross/components/TokenSelect";
+import NavLink from "components/NavLink";
+import { SubmitButton } from "features/summoner/Styles";
+import { getChainColor, getChainColorCode } from "constants/chains";
 // import { BalancePromiseToUnit } from "pages/bridge";
 
 export default function Exchange() {
@@ -102,7 +107,6 @@ export default function Exchange() {
       if (rubic) {
         await rubic.updateConfiguration(newConfiguration);
       }
-
       setProvider('0xFd63Bf84471Bc55DD9A83fdFA293CCBD27e1F4C8')
       setBalance(balance.toString());
     }
@@ -232,7 +236,7 @@ export default function Exchange() {
           setFromUsd((Number(newFromUsd) * Number(newTrade.trade.from?.tokenAmount)).toString())
           setToUsd((Number(newToUsd) * Number((newTrade.trade.to?.tokenAmount))).toString())
           setOutputAmount(Number(newTrade.trade.to?.tokenAmount).toString())
-          console.log('outputAmount:%s', outputAmount)
+          // console.log('outputAmount:%s', outputAmount)
         }
 
         setLoading(false)
@@ -270,10 +274,10 @@ export default function Exchange() {
     setLastExchange({ chain: fromChain, token: from }, { chain: toChain, token: to });
   }, [from, fromChain, to, toChain]);
 
-  const [showConfirmation, setShowConfirmation] = useState<"hide" | "show" | "poor" | "min">("hide");
+  const [showConfirmation, setShowConfirmation] = useState<"hide" | "show" | "poor" | "min" | "rej">("hide");
   const [showSelectFrom, setShowSelectFrom] = useState(false);
   const [showSelectTo, setShowSelectTo] = useState(false);
-  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  // const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const amountRef = useRef<HTMLInputElement>(null);
   const fromAmount = amount ? Number(amount) : 0
   const toAmount = outputAmount ? Number(outputAmount) : 0
@@ -281,7 +285,9 @@ export default function Exchange() {
     ? Number(fromUsd) - Number(toUsd) : 0
   const deltaPercent = 100 * deltaUsd / Number(fromUsd)
   const toggleNetworkModal = useNetworkModalToggle()
-  const wrongNetwork = fromChain?.chainId != chainId ? true : false
+  const wrongNetwork = fromChain?.chainId != chainId ? true 
+  : false
+  const sameNetworkError = fromChain?.chainId == toChain.chainId ? true : false
 
   return (
     <>
@@ -298,7 +304,7 @@ export default function Exchange() {
               setFrom(f.token);
               setFromChain(f.chain);
               setAmount("");
-              setBalance("");
+              // setBalance("");
               amountRef.current?.select();
             }}
           />
@@ -320,77 +326,6 @@ export default function Exchange() {
             }}
           />
         </div>
-      }
-
-      {setShowConfirmationModal &&
-        <Modal isOpen={showConfirmationModal}
-          className={'border border-3 border-color-[#FFFFFF]'}
-          onDismiss={
-            () => setShowConfirmationModal(false)}>
-          <div className="space-y-4">
-            <ModalHeader header={`Are you sure?`}
-              onClose={() => setShowConfirmationModal(false)}
-            />
-            <Typography variant="lg">
-              Crosschain in beta. Use at your own risk.
-              <br /><br />
-              We are committed to open source and leverage the Rubic SDK (our partners).
-            </Typography>
-            <Typography variant="sm" className="font-medium">
-              Found Bugs?
-              <a href="https://discord.com/invite/soulswap">
-                {' '} Click Here
-              </a>
-            </Typography>
-            <Button
-              variant="bordered"
-              color="black"
-              height="2.5rem"
-              className={classNames(`border-color-${toChain.color}`)}
-              onClick={
-                async () => {
-                  setShowConfirmation("show")
-                  try {
-                    if (trade instanceof InstantTrade) {
-                      await trade.swap({
-                        onConfirm: (_hash: any) => setShowConfirmation("hide")
-                      })
-                    } else {
-                      await trade.trade.swap({
-                        onConfirm: (_hash: any) => setShowConfirmation("hide")
-                      })
-                    }
-                  } catch (e) {
-                    if (e instanceof InsufficientFundsError) {
-                      setShowConfirmation("poor");
-                    } else if (e.message === "execution reverted: less than min") {
-                      setShowConfirmation("min");
-                    } else {
-                      console.error(e);
-                      setShowConfirmation("hide");
-                    }
-                  }
-                }}
-              style={{ backgroundColor: toChain?.color }}
-            >
-              I UNDERSTAND THESE TERMS
-            </Button>
-
-            {trade && showConfirmation == "min" &&
-              <div
-                className={`flex flex-col rounded gap-4 bg-dark-1000 p-3 font-bold w-full space-y-1`}
-              // style={{ backgroundColor: deltaPercent > 20 ? 'black' : toChain?.color}}
-              >
-                <div
-                  className="flex font-bold justify-center text-[#E84142]">
-                  <Typography className={classNames('text-xl font-bold', 'font-bold text-white')} weight={600} fontFamily={'semi-bold'}>
-                    Too Low: Below Minimum Amount
-                  </Typography>
-                </div>
-              </div>
-            }
-          </div>
-        </Modal>
       }
 
       <Container id="cross-page" maxWidth="2xl" className="space-y-4">
@@ -496,13 +431,18 @@ export default function Exchange() {
                     disabled={!from}
                     value={amount}
                     setValue={async (amount) => await setAmount(amount)}
-                    // max={async () => setAmount(ethers.utils.formatUnits(await getBalance(), decimals))}
                     variant="new"
                   />
                   <Button
-                    onClick={async () => setAmount(ethers.utils.formatUnits(await
-                      getBalance(), decimals))}>
-                    <div className="flex w-full text-sm justify-end font-bold">
+                    onClick={
+                        async () => { 
+                          await setAmount(
+                              ethers.utils.formatUnits(await
+                              getBalance(), decimals)
+                            )
+                      }
+                      }>
+                    <div className="flex w-full text-xs justify-end font-bold">
                       MAX
                       {/* : {
                         fromBalance
@@ -545,7 +485,6 @@ export default function Exchange() {
                 className="grid grid-cols-1 rounded bg-dark-1000 border border-4 w-full"
                 style={{ borderColor: toChain?.color }}
               >
-
                 <div
                   className={"flex w-full border border-4"}
                   style={{ borderColor: toChain?.color }}
@@ -618,10 +557,9 @@ export default function Exchange() {
               </div>
 
               {/* HIGH-SLIPPAGE WARNING */}
-              {trade &&
+              {trade && !sameNetworkError &&
                 <div
                   className={deltaPercent < 20 ? 'hidden' : `flex flex-col rounded gap-4 bg-dark-1000 p-3 font-bold w-full space-y-1`}
-                // style={{ backgroundColor: deltaPercent > 20 ? 'black' : toChain?.color}}
                 >
                   <div
                     className="flex font-bold justify-center">
@@ -631,7 +569,9 @@ export default function Exchange() {
                   </div>
                 </div>
               }
-              {trade &&
+
+              {/* SLIPPAGE AMOUNT */}
+              {trade && !sameNetworkError && deltaPercent > 0 &&
                 <div
                   className={`flex flex-col rounded gap-4 bg-dark-1000 p-3 font-bold w-full space-y-1`}
                 >
@@ -643,7 +583,22 @@ export default function Exchange() {
                   </div>
                 </div>
               }
+
               {trade && showConfirmation == "min" &&
+                <div
+                  className={`flex flex-col rounded gap-4 bg-dark-1000 p-3 font-bold w-full space-y-1`}
+                // style={{ backgroundColor: deltaPercent > 20 ? 'black' : toChain?.color}}
+                >
+                  <div
+                    className="flex justify-center">
+                    <Typography className={classNames('text-sm sm:text-lg md:text-xl', 'text-white')} weight={600} fontFamily={'semi-bold'}>
+                      Swap Not Confirming? Try Increasing Amount.
+                    </Typography>
+                  </div>
+                </div>
+              }
+              
+              {trade && showConfirmation == "rej" &&
                 <div
                   className={`flex flex-col rounded gap-4 bg-dark-1000 p-3 font-bold w-full space-y-1`}
                 // style={{ backgroundColor: deltaPercent > 20 ? 'black' : toChain?.color}}
@@ -651,7 +606,35 @@ export default function Exchange() {
                   <div
                     className="flex font-bold justify-center text-[#E84142]">
                     <Typography className={classNames('text-xl font-bold', 'font-bold text-white')} weight={600} fontFamily={'semi-bold'}>
-                      Warning: Below Minimum Amount
+                      User Rejected Transaction
+                    </Typography>
+                  </div>
+                </div>
+              }
+             
+              {trade && sameNetworkError &&
+                <NavLink href="/swap">
+                  <Button
+                  variant='bordered'
+                  color='black'
+                  className={`text-${getChainColorCode(chainId)}`}
+                  // primaryColor={`${getChainColor(chainId)}`}
+                  >
+                    <Typography className={classNames('text-xl font-bold', `font-bold text-${getChainColor(chainId)}`)} weight={600} fontFamily={'semi-bold'}>
+                      Click Here for Direct Swaps
+                    </Typography>
+                    </Button>
+                </NavLink>
+              }
+
+              {trade && showConfirmation == "poor" &&
+                <div
+                  className={`flex flex-col rounded gap-4 bg-dark-1000 p-3 font-bold w-full space-y-1`}
+                >
+                  <div
+                    className="flex font-bold justify-center text-[#E84142]">
+                    <Typography className={classNames('text-xl font-bold', 'font-bold text-white')} weight={600} fontFamily={'semi-bold'}>
+                      Warning: Insufficient Funds
                     </Typography>
                   </div>
                 </div>
@@ -660,7 +643,7 @@ export default function Exchange() {
                 trade={trade}
               />
               <div
-                className="rounded border border-2"
+                className={classNames(sameNetworkError ? `hidden` : `rounded border border-2`)}
                 style={{ borderColor: toChain?.color, backgroundColor: toChain?.color }}
               >
                 <Button
@@ -681,20 +664,29 @@ export default function Exchange() {
                           })
                         }
                       } catch (e) {
-                        if (e instanceof InsufficientFundsError) {
+                        if (e instanceof InsufficientFundsError || e.message == 'insufficient balance for transfer') {
                           setShowConfirmation("poor");
-                        } else if (e.message === "execution reverted: less than min") {
+                        } else if (e instanceof UserRejectError) {
+                          setShowConfirmation("rej");
+                         } else if (e 
+                            && e.message != 'insufficient balance for transfer') {
                           setShowConfirmation("min");
                         } else {
                           console.error(e);
                           setShowConfirmation("hide");
                         }
                       }
-                    }}
+                    }
+                  }
                   style={{ opacity: trade ? 1 : 0.5, cursor: trade ? "pointer" : "not-allowed" }}
                   disabled={trade == undefined}
                 >
-                  {fromChain?.chainId === toChain?.chainId ? "Confirm Swap" : "Confirm Crosschain"}
+                  {!trade
+                      ? "Fetching best price..."
+                      : trade 
+                      ? "Submit Swap" 
+                      : 'Enter Amount'
+                  }
                 </Button>
               </div>
             </SwapLayoutCard>
@@ -703,7 +695,10 @@ export default function Exchange() {
       </Container>
     </>
   );
+
+
 }
+
 
 interface TradeDetailProps {
   trade?: InstantTrade | WrappedCrossChainTrade;
@@ -725,180 +720,6 @@ const TradeDetail: FC<TradeDetailProps> = ({ trade }) => {
 
   return (
     <div className="flex">
-    </div>
-  );
-};
-
-interface TokenSelectProps {
-  show: boolean;
-  chain: Chain;
-  onClose: (selection?: { token: Token; chain: Chain }) => void;
-}
-const TokenSelect: React.FC<TokenSelectProps> = ({ show, onClose, chain }) => {
-  const [filter, setFilter] = useState("");
-  const [selectedChainId, setSelectedChainId] = useState(chain.chainId);
-  const selectedChain = useMemo(() => CHAINS.find(c => c.chainId === selectedChainId), [selectedChainId, CHAINS]);
-  const input = useRef<HTMLInputElement>(null);
-  const tokensList = useRef<HTMLDivElement>(null);
-  const normalizedFilter = filter.trim().toLowerCase();
-  const filteredTokens = selectedChain.tokens.filter(({ name, symbol, address }) => {
-    const isNameMatch = name.toLowerCase().includes(normalizedFilter);
-    const isSymbolMatch = symbol.toLowerCase().includes(normalizedFilter);
-    const isAddressMatch = address.startsWith(normalizedFilter) || address.startsWith("0x" + normalizedFilter);
-    return isNameMatch || isSymbolMatch || isAddressMatch;
-  });
-  const [isShowingChainSelect, showChainSelect] = useState(false);
-
-  useEffect(() => {
-    if (!show) {
-      return;
-    }
-
-    input.current?.focus();
-
-    const escape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose();
-      }
-    };
-    window.addEventListener("keydown", escape);
-    return () => {
-      window.removeEventListener("keydown", escape);
-    };
-  }, [show]);
-
-  useEffect(() => {
-    if (!show) {
-      setTimeout(() => {
-        setFilter("");
-        setSelectedChainId(chain.chainId);
-        showChainSelect(false);
-        tokensList.current?.scrollTo({ top: 0 });
-      }, 100);
-    }
-  }, [show]);
-
-  return (
-    <div className={'absolute top-20 left-0 w-[100vw] h-[0vh] z-[1000] opacity'
-    } style={{ opacity: show ? 1 : 0, pointerEvents: show ? "unset" : "none" }}>
-      <div className="absolute top-0 left-0 w-[100%] h-[100%]" onClick={() => onClose()} />
-      <div className={classNames(show ? "absolute left-[15%] bottom-[10%] top-[50%] max-w-[28ch]" : 'hidden')}
-        style={{ transform: `translate(-50%, calc(-50% + ${show ? 0 : 30}px))` }}
-      >
-        <div
-          className={classNames(isShowingChainSelect ? "w-full h-full top-0 left-0 z-10 bg-dark-1100" : "hidden")}
-        >
-
-          {/* CHAIN SELECTION */}
-          <Modal
-            isOpen={isShowingChainSelect}
-            onDismiss={() => onClose()}
-            isCustom={true}
-          >
-            <div className="flex justify-center">
-              {CHAINS.map((chain, i) => (
-                <Button
-                  key={chain.chainId}
-                  onClick={() => {
-                    setSelectedChainId(chain.chainId);
-                    tokensList.current?.scrollTo({ top: 0 });
-                    showChainSelect(false);
-                    setFilter("");
-                  }}
-                  variant="bordered"
-                  color="black"
-                  className={classNames(chain.chainId === selectedChainId && `border border-2 border-white`, "flex border border-transparent hover:border-white align-center w-[100%]")}
-                  style={{ backgroundColor: chain.color }}
-                >
-                  <div className={classNames('grid justify-center')}>
-                    <Image src={chain.logo} width={'42'} height="42" alt={chain.name + ' logo'} />
-                  </div>
-                </Button>
-              ))}
-            </div>
-          </Modal>
-        </div>
-
-        {/* TOKEN + CHAIN MODAL */}
-        <div
-          className="flex flex-cols border-radius-[8px] w-[100%] h-[100%] bg-dark-1100"
-          style={{
-            transform: isShowingChainSelect ? "translateY(50px)" : "",
-            opacity: isShowingChainSelect ? 0 : 1,
-            pointerEvents: show ? "all" : "none",
-          }}
-        >
-          <Modal
-            isOpen={true}
-            isCustom={true}
-            onDismiss={() => onClose()}
-            borderColor={selectedChain?.color}
-          >
-            <div className="bg-dark-900 rounded padding-[10px]">
-              <Button
-                className="flex p-[10px] w-[100%] gap-[8px] align-center items-center"
-                variant="bordered"
-                color="black"
-                style={{ backgroundColor: selectedChain?.color }}
-                onClick={() => showChainSelect(true)}
-              >
-                <div className="grid grid-cols-1 w-[33%]">
-                  <Image
-                    src={selectedChain?.logo}
-                    width="36" height="36"
-                    alt={selectedChain?.name + ' logo'}
-                    className={"w-full justify-center"}
-                  />
-                </div>
-                <div style={{ flexGrow: 1, fontSize: "24px", textAlign: "center" }}>{selectedChain?.name}</div>
-              </Button>
-
-              {/* SEARCH BAR */}
-              <form
-                onSubmit={e => {
-                  e.preventDefault();
-                  onClose({ token: filteredTokens[0], chain: selectedChain });
-                }}
-              >
-                <div className="w-[100%] my-6" />
-                <Input
-                  ref={input}
-                  className="w-[100%] border border-unset border-radius-[4px] text-black mb-1"
-                  placeholder={`Search ${selectedChain.name} Tokens`}
-                  value={filter}
-                  onChange={e => setFilter(e.currentTarget.value)}
-                />
-              </form>
-              <div className="w-[100%] my-6" />
-
-              {/* SELECT TOKEN LIST */}
-              {/* {filter && */}
-              <div
-                className="grid grid-cols-1 bg-dark-1100 justify-center w-[95%]"
-                ref={tokensList}>
-                {filteredTokens.map(token => (
-                  <div className="flex border border-2 m-0.5 
-                    border-dark-1000 rounded rounded-3xl bg-black font-bold justify-between"
-                    key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
-                    <Row style={{ gap: "1rem", alignItems: "center" }}>
-                      <Image src={token.logo} width="36" height="36" alt={token.name + ' logo'} />
-                      <Row
-                        style={{
-                          width: "98%",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        {`${token.name} (${token.symbol})`}
-                      </Row>
-                    </Row>
-                  </div>
-                ))}
-              </div>
-              {/* } */}
-            </div>
-          </Modal>
-        </div>
-      </div>
     </div>
   );
 };

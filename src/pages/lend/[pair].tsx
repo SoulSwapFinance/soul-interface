@@ -39,9 +39,9 @@ export default function Pair() {
  
 if (!pair) return <div />
 const assetDecimals = Number(underworldPairInfo.assetDecimals)
-const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
+// const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
 const assetPrice = Number(underworldPairInfo.assetPrice)
-const collateralPrice = Number(underworldPairInfo.collateralPrice)
+// const collateralPrice = Number(underworldPairInfo.collateralPrice)
 // const lpDecimals = Number(underworldPairInfo.decimals)
 // const assetAddress = underworldPairInfo.assetAddress
 
@@ -72,7 +72,7 @@ const collateralSymbol
   // const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
   // const assetPrice = Number(underworldPairInfo.assetPrice)
   // const collateralPrice = Number(underworldPairInfo.collateralPrice)
-  const totalAssets = Number(underworldPairInfo.supply)
+  // const totalAssets = Number(underworldPairInfo.supply)
   // const assetPrice = pair?.asset.usd / 1e18
   const userDepositAmount = pair?.userAssetFraction / 10**(assetDecimals)
   const userDepositValue = userDepositAmount * assetPrice

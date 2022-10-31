@@ -28,7 +28,8 @@ import {
 } from "utils/conversion";
 import SwapImg from "assets/icons/Swap.svg";
 import useFantomNative from "hooks/useFantomNative";
-import useFantomERC20 from "hooks/useFantomERC20";
+import useERC20 from "hooks/useERC20";
+// import useFantomERC20 from "hooks/useFantomERC20";
 // import config from "features/aggregator/config";
 import useSendTransaction from "hooks/useSendTransaction";
 import useCoingeckoApi, {
@@ -41,7 +42,7 @@ import FadeInOut from "components/AnimationFade";
 // import useDetectResolutionType from "hooks/useDetectResolutionType";
 // import { formatDate } from "functions/format";
 import { useActiveWeb3React } from "services/web3";
-import { ChainId, OPEN_OCEAN_EXCHANGE_ADDRESS, Token, WNATIVE } from "sdk";
+import { ChainId, NATIVE, OPEN_OCEAN_EXCHANGE_ADDRESS, Token, WNATIVE } from "sdk";
 // import { useUserTokenInfo } from "hooks/useAPI";
 // import { Toggle } from "components/Toggle";
 // import { classNames } from "functions";
@@ -55,6 +56,8 @@ import NetworkGuard from "guards/Network";
 import { Feature } from "enums/Feature";
 import SocialWidget from "components/Social";
 import SwapTokenInput from "features/open/SwapTokenInput";
+import { useUserInfo, useUserTokenInfo } from "hooks/useAPI";
+import useFantomERC20 from "hooks/useFantomERC20";
 
 export const SwapTokensContent: React.FC<any> = ({
   tokenList,
@@ -64,7 +67,7 @@ export const SwapTokensContent: React.FC<any> = ({
 }) => {
   const { account, chainId } = useActiveWeb3React()
   const { sendTx } = useFantomNative();
-  const { getSwapQuote, getQuote } = useOpenOceanApi();
+  const { getSwapQuote, getQuote } = useOpenOceanApi(chainId, account);
   const { getPrice } = useCoingeckoApi();
   const { apiData } = useApiData();
   const OOQuoteData =
@@ -145,8 +148,8 @@ export const SwapTokensContent: React.FC<any> = ({
 
   useEffect(() => {
     if (tokenList) {
-      setInToken(tokenList?.find((token: OOToken) => token.symbol === "FTM"));
-      setOutToken(tokenList.find((token: OOToken) => token.symbol === "SOUL"));
+      setInToken(tokenList?.find((token: OOToken) => token.symbol === NATIVE[chainId].symbol));
+      setOutToken(tokenList.find((token: OOToken) => token.symbol === "USDC"));
     }
   }, [tokenList]);
 
@@ -397,7 +400,7 @@ export const SwapTokensContent: React.FC<any> = ({
             {estimatedGas ? (
               <FormattedValue
                 formattedValue={toFormattedBalance(estimatedGas.toString())}
-                tokenSymbol={"FTM"}
+                tokenSymbol={NATIVE[chainId].symbol}
               />
             ) : (
               "-"
@@ -445,40 +448,23 @@ export const SwapTokensContent: React.FC<any> = ({
 
 
 const Open = () => {
-  const { getTokenList } = useOpenOceanApi();
-  // const { walletContext } = useWalletProvider();
   const { account, chainId } = useActiveWeb3React()
+  const { getTokenList } = useOpenOceanApi(chainId, account);
   const { apiData: fantomApiData } = useFantomApiData();
+  // const nativeBal = Number(useUserInfo().userInfo.nativeBalance)
+
   // const { width } = useDetectResolutionType();
   const { apiData } = useApiData();
   const [tokenList, setTokenList] = useState(null);
   // const [showChart, setShowChart] = useState(false)
-  const [activeTokens, setActiveTokens] = useState(
-    [tokenList?.find((token: OOToken) => token.symbol === "FTM"),
-    tokenList?.find((token: OOToken) => token.symbol === "SOUL")]
-    // {
-    //   address: "0x0000000000000000000000000000000000000000",
-    //   code: "fantom",
-    //   decimals: 18,
-    //   icon:
-    //     "https://ethapi.openocean.finance/logos/fantom/0x0000000000000000000000000000000000000000.png",
-    //   symbol: "FTM",
-    // },
-    // {
-    //   address: "0x04068da6c83afcfa0e13ba15a6696662335d5b75",
-    //   code: "usd-coin",
-    //   decimals: 6,
-    //   icon:
-    //     "https://ethapi.openocean.finance/logos/fantom/0x04068da6c83afcfa0e13ba15a6696662335d5b75.png",
-    //   symbol: "USDC",
-    // },
-  )
+  const [activeTokens, setActiveTokens] = useState
+    ([
+      tokenList?.find((token: OOToken) => token.symbol === NATIVE[chainId].symbol),
+      tokenList?.find((token: OOToken) => token.symbol === "USDC")
+    ])
   const [swapRoute, setSwapRoute] = useState(null);
   const [refetchTimer, setRefetchTimer] = useState(0);
   const activeAddress = account ? account.toLowerCase() : null
-  // walletContext.activeWallet.address
-  //   ? walletContext.activeWallet.address.toLowerCase()
-  //   : null;
 
   useFantomApi(
     FantomApiMethods.getAssetsListForAccount,
@@ -500,7 +486,7 @@ const Open = () => {
   const assetsListData = fantomApiData[
     FantomApiMethods.getAssetsListForAccount
   ].get(activeAddress)?.data;
-  const accountFantomBalanceData = fantomApiData[
+  const accountBalanceData = fantomApiData[
     FantomApiMethods.getAccountBalance
   ].get(activeAddress)?.data;
   const OOTokenListData =
@@ -524,8 +510,10 @@ const Open = () => {
     getTokenList();
   }, []);
   useEffect(() => {
-    if (assetsListData && OOTokenListData && accountFantomBalanceData) {
-      const fantomBalance = getAccountBalance(accountFantomBalanceData);
+    if (accountBalanceData && assetsListData && OOTokenListData) {
+      const nativeBalance = getAccountBalance(accountBalanceData);
+      // const nativeBalance = nativeBal.toString().toBigNumber(18)
+      console.log('nativeBal:%s', nativeBalance)
       const accountAssets = getAccountAssets(assetsListData);
       setTokenList(
         OOTokenListData.map((OOToken: OOToken) => {
@@ -537,7 +525,7 @@ const Open = () => {
             ...OOToken,
             balanceOf:
               OOToken.address === "0x0000000000000000000000000000000000000000"
-                ? fantomBalance
+                ? nativeBalance
                 : accountToken
                   ? accountToken.balanceOf
                   : "0x0",
@@ -546,7 +534,7 @@ const Open = () => {
         })
       );
     }
-  }, [assetsListData, OOTokenListData, accountFantomBalanceData]);
+  }, [assetsListData, OOTokenListData, accountBalanceData]);
 
   //https://api.coingecko.com/api/v3/coins/beethoven-x/market_chart?vs_currency=usd&days=60
   return (

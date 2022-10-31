@@ -24,7 +24,7 @@ function getEndpoint(chainId) {
 }
 
 // gets: swap quote
-async function quote(chain) {
+async function getQuote(chain) {
     // No quote
 
     const none = {
@@ -117,4 +117,4 @@ async function getSwap(chain, account) {
 
 // Exports
 
-export { quote, getSwap }
+export { getQuote, getSwap }

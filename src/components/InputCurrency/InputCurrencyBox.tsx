@@ -6,15 +6,26 @@ import InputCurrency from "./InputCurrency"
 import { Button } from "../index"
 import { Token } from 'utils/account/types'
 import FtmLogo from "assets/networks/fantom.svg";
+import AvaxLogo from "assets/networks/avalanche.svg";
 import { NATIVE } from "sdk"
 import { useActiveWeb3React } from "services/web3"
 
 export const FANTOM_NATIVE: Token = {
+  // chainId: 250,
   address: null,
   decimals: 18,
   name: "Fantom",
   symbol: "FTM",
   logoURL: FtmLogo,
+};
+
+export const AVAX_NATIVE: Token = {
+  // chainId: 43114,
+  address: null,
+  decimals: 18,
+  name: "Avalanche",
+  symbol: "AVAX",
+  logoURL: AvaxLogo,
 };
 
 const InputCurrencyBox: React.FC<any> = ({

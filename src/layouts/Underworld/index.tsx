@@ -137,7 +137,7 @@ const Layout: FC<LayoutProps> = ({ left, children, right }) => {
           <div className={'flex flex-cols-1 justify-between'}>
               <div className="mt-4">
           <NavLink
-              href='/underworld'
+              href='/lend'
               >
           <Button variant="outlined" color={'blue'}>
               <div className={`flex text-sm font-bold text-${'blue'} justify-left`}>

@@ -121,45 +121,45 @@ export const FarmList = () => {
   return (
     <div>
       <div className="flex ml-2 mt-2 mr-2 mb-4 gap-1 items-center justify-center">
+        <NavLink href={'/soul/dashboard'}>
         <Button variant="filled" 
         color={"purple"} 
         size="lg">
-          <NavLink href={'/soul/dashboard'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span> Data </span>
             </a>
-          </NavLink>
         </Button>
+          </NavLink>
+        <NavLink href={'/bonds'}>
         <Button variant="filled" 
           color={"purple"} 
         size="lg">
-          <NavLink href={'/bonds'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span> Bond </span>
             </a>
-          </NavLink>
         </Button>
+          </NavLink>
+        <NavLink href={'/lend'}>
         <Button variant="filled"
           color={"purple"}  
         size="lg"
         >
-          <NavLink href={'/underworld'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span> Lend </span>
             </a>
-          </NavLink>
         </Button>
+          </NavLink>
+          <NavLink href={'/autostake'}>
         <Button variant="filled" 
         color={"purple"} 
         // color={getChainColorCode(chainId)} 
         size="lg"
         >
-          <NavLink href={'/autostake'}>
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span> Vault </span>
             </a>
-          </NavLink>
         </Button>
+          </NavLink>
       </div>
       <Typography className="text-2xl bg-dark-1000 mt-6 border border-dark-600 p-3 font-bold text-center">SoulSwap Pools</Typography>
       <Active />

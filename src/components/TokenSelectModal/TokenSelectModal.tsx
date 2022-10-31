@@ -14,7 +14,7 @@ import InputTextBox from "./InputTextBox";
 import { hexToUnit } from "../../utils/conversion";
 import { stickyTokensList } from "features/aggregator/token";
 import { NATIVE } from "sdk";
-import { FANTOM_NATIVE } from "components/InputCurrency/InputCurrencyBox";
+import { FANTOM_NATIVE, AVAX_NATIVE } from "components/InputCurrency/InputCurrencyBox";
 
 export const compare = (a: any, b: any) => {
   if (a > b) return +1;
@@ -86,31 +86,6 @@ const TokenSelectModal: React.FC<any> = ({
       style={{ padding: "12px 0px" }}
       >
         <Column>
-          {/* <Row
-            style={{
-              justifyContent: "space-between",
-              padding: "0 1rem .5rem 1rem",
-            }}
-          >
-            <Typo3
-              style={{
-                textAlign: "center",
-                width: "8rem",
-                color: '#B7BECB',
-              }}
-            >
-              SYMBOL
-            </Typo3>
-            <Typo3
-              style={{
-                textAlign: "center",
-                width: "8rem",
-                color: '#B7BECB',
-              }}
-            >
-              BALANCE
-            </Typo3>
-          </Row> */}
           <Scrollbar style={{ height: "60vh" }}>
             <Column>
               {listAssets.map((asset: any) => {

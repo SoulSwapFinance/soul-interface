@@ -272,10 +272,20 @@ const useMenu: UseBar = () => {
          title: i18n._(t`Borrow`),
          icon: <SwitchVerticalIcon width={20} className={classNames("rotate-90", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
          items: [
-           {
-             key: 'markets',
-             title: i18n._(t`Markets`),
-             link: '/underworld',
+          //  {
+          //    key: 'markets',
+          //    title: i18n._(t`Markets`),
+          //    link: '/underworld',
+          //   },
+            {
+              key: 'lend',
+              title: i18n._(t`Lend`),
+              link: '/lend',
+            },
+            {
+              key: 'borrow',
+              title: i18n._(t`Borrow`),
+              link: '/borrow',
             },
             {
               key: 'underworld-farms',
@@ -289,7 +299,7 @@ const useMenu: UseBar = () => {
             },
             {
               key: 'borrow-docs',
-              title: i18n._(t`Tutorials`),
+              title: i18n._(t`Tutorial`),
               link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
             },
          ],

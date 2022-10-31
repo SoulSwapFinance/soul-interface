@@ -6,12 +6,13 @@ import { Tab } from '@headlessui/react'
 import { LendContentWrapper,
     LendContainer, LendItem, LendItemBox, SubmitButton
 } from './Styles'
-import { classNames, formatNumber, tryParseAmount } from 'functions'
+import { classNames, formatNumber, formatPercent, tryParseAmount } from 'functions'
 import { useUnderworldPairInfo, useUnderworldUserInfo } from 'hooks/useAPI'
 import Modal from 'components/DefaultModal'
 import Typography from 'components/Typography'
 import NavLink from 'components/NavLink'
 import { CurrencyLogo } from 'components/CurrencyLogo'
+import { useUnderworldPair, useUnderworldPairs } from 'features/lending/hooks'
 
 const HideOnMobile = styled.div`
 @media screen and (max-width: 600px) {
@@ -24,12 +25,25 @@ export const Row = ({ pair, assetAddress, lpToken }) => {
     const [showOptions, setShowOptions] = useState(false)
     const [openLend, setOpenLend] = useState(false)
     const [openBorrow, setOpenBorrow] = useState(false)
-    
+    // const pairData = useUnderworldPairs('0x290DdA59400f86d8E585e0Fa9448CFFAbB19479C')
+
     const { underworldPairInfo } = useUnderworldPairInfo(pair.lpAddress)
     const assetDecimals = Number(underworldPairInfo.assetDecimals)
     const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
     const assetPrice = Number(underworldPairInfo.assetPrice)
+    const interestPerSecond = Number(underworldPairInfo.interestPerSecond)
     const collateralPrice = Number(underworldPairInfo.collateralPrice)
+    const assetSupply = Number(underworldPairInfo.supply) / 10**assetDecimals
+    const assetBorrowed = Number(underworldPairInfo.borrowTotalElastic) / 10**assetDecimals
+    const utilization = (assetSupply - assetBorrowed) / assetSupply
+    const TVL = assetSupply * assetPrice
+    const APR = interestPerSecond * 86_400 * 365 * assetBorrowed * utilization / 1E16
+    // pairData.currentSupplyAPR.stringWithStrategy
+    console.log(assetBorrowed)
+    // console.log('data:%s', pairData?.currentInterestPerYear.value)
+
+    // const APR = interestPerSecond * 86_400 * 365 / 1E18
+
     // const lpDecimals = Number(underworldPairInfo.decimals)
     // const assetAddress = underworldPairInfo.assetAddress
     
@@ -59,7 +73,7 @@ export const Row = ({ pair, assetAddress, lpToken }) => {
     const { underworldUserInfo } = useUnderworldUserInfo(pair.lpAddress)
     const assetBalance = Number(underworldUserInfo.userAssetBalance) // 10**assetDecimals
     const borrowedAmount = Number(underworldUserInfo.userBorrowPart) / 10**assetDecimals
-    const suppliedAmount = Number(underworldUserInfo.userBalance) // 10**lpDecimals
+    const suppliedAmount = Number(underworldUserInfo.userBalance)
     const collateralAmount = Number(underworldUserInfo.userCollateralShare) / 10**collateralDecimals
     const walletValue = assetBalance * assetPrice
     const borrowedValue = borrowedAmount * assetPrice
@@ -167,40 +181,58 @@ export const Row = ({ pair, assetAddress, lpToken }) => {
                                 </HideOnMobile> 
                             */}
 
+
+                            {/* APR */}
+                                <LendItemBox>
+                                    <LendItem>
+                                    { formatPercent(APR) }                                  
+                                    </LendItem>
+                                </LendItemBox>
+
                             {/* SUPPLIED AMOUNT */}
                                 <LendItemBox>
                                     <LendItem>
-                                       { suppliedAmount.toFixed(6).toString() == '0.000000' ? '0'
-                                            : formatNumber(suppliedAmount, false, true)
+                                       { assetSupply.toFixed(6).toString() == '0.000000' ? '0'
+                                            : formatNumber(assetSupply, false, true)
                                         } { ' ' }
                                             { assetSymbol }
+                                            
                                     </LendItem>
                                 </LendItemBox>
 
                             {/* BORROWED AMOUNT */}
-                                <LendItemBox>
+                                {/* <LendItemBox>
                                     <LendItem>
                                        { formatNumber(borrowedAmount.toFixed(2), false, true) } { assetSymbol }
                                     </LendItem>
-                                </LendItemBox>
+                                </LendItemBox> */}
 
                             {/* COLLATERAL AMOUNT */}
-                            <HideOnMobile>
+                            {/* <HideOnMobile>
                                 <LendItemBox>
                                     <LendItem>
                                        { formatNumber(collateralAmount.toFixed(2), false, true) } { collateralSymbol }
                                     </LendItem>
                                 </LendItemBox>
-                            </HideOnMobile>
+                            </HideOnMobile> */}
 
-                            {/* UTILIZATION */}
+                            {/* TVL */}
                             <HideOnMobile>
+                                <LendItemBox>
+                                    <LendItem>
+                                    { formatNumber(TVL, true, true) }                                    
+                                    </LendItem>
+                                </LendItemBox>
+                            </HideOnMobile>
+                            
+                            {/* UTILIZATION */}
+                            {/* <HideOnMobile>
                                 <LendItemBox>
                                     <LendItem>
                                     { LTV.toFixed(2) }%                                    
                                     </LendItem>
                                 </LendItemBox>
-                            </HideOnMobile>
+                            </HideOnMobile> */}
 
                             {/* STAKED OWNERSHIP */}
                             {/* <HideOnSmall>

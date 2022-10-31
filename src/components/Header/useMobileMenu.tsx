@@ -187,11 +187,11 @@ const useMobileMenu: UseMobileMenu = () => {
         title: i18n._(t`Lend`),
         // icon: <SwitchVerticalIcon width={16} className="rotate-90 filter" />,
         items: [
-          {
-            key: 'markets',
-            title: i18n._(t`Markets`),
-            link: '/underworld',
-           },
+          // {
+          //   key: 'markets',
+          //   title: i18n._(t`Markets`),
+          //   link: '/underworld',
+          //  },
           {
             key: 'lend',
             title: i18n._(t`Lend`),

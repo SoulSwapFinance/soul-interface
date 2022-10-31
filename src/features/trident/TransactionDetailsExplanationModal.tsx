@@ -50,7 +50,7 @@ const TransactionDetailsExplanationModal: FC = ({ children }) => {
             </div>
             <div className="flex flex-col gap-2">
               <Typography weight={700} variant="sm" className="text-high-emphesis">
-                {i18n._(t`Estimated network Fee`)}
+                {i18n._(t`Estimated Network Fee`)}
               </Typography>
               <Typography variant="sm">
                 {i18n._(
