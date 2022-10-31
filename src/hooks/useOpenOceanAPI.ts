@@ -1,5 +1,4 @@
-import quoteSwap from "features/eco/hooks/useQuote";
-import { ChainId } from "sdk";
+
 import useRestApi from "./useRestApi";
 
 export const OPENOCEAN_BASEURL = "https://open-api.openocean.finance/v1/cross";
