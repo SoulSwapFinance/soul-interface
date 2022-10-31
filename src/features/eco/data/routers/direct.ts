@@ -1,42 +1,42 @@
-import routerList from "../routers.json"
 import swapRouters from "../swap-routers.json"
 import routeTokens from "../../data/route-tokens.json"
 import { BigNumber } from "ethers"
 import { useActiveWeb3React } from "services/web3"
 import Web3 from "web3"
+import { ChainId, WNATIVE } from "sdk"
+import useSwap from "features/eco/hooks/useSwap"
 
-const routerData = routerList.find(router => router.id === "direct")
+// const routerData = routerList.find(router => router.id === "direct")
 let web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
 
 // Quote swap
 
-async function quote(chain) {
-    const { chainId, library } = useActiveWeb3React()
-    const provider = library.provider
+async function getQuote(chainId, fromAddress: string, toAddress, inputAmount) {
+    // const { chainId, library } = useActiveWeb3React()
+    // const provider = library.provider
 
     // let web3 = new Web3(RPC[chainId])
     // No quote
 
     const none = {
-        ...routerData,
+        // ...routerData,
         out: false,
         priority: 0
     }
 
     // Check swap parameters
 
-    if (!chain.swapSettings.routers[routerData.id].enabled) return none
-    const routers = swapRouters[chain.id]
-    if (!Object.keys(routers).length) return none
+    const routers = swapRouters[chainId]
+    // if (!Object.keys(routers).length) return none
 
     try {
         // Find best router quote
 
-        const best = await getBestRouterQuote(chain, routers)
+        const best = await getBestRouterQuote(chainId, routers, fromAddress, toAddress, inputAmount)
         if (best.out.isZero()) return none
         
         return {
-            id: routerData.id,
+            id: 'direct',
             routerId: best.router,
             name: routers[best.router].name,
             out: best.out,
@@ -51,32 +51,31 @@ async function quote(chain) {
 
 // Get swap
 
-async function getSwap(chain, account) {
-    // No swap
+async function getSwap(chainId, routerId, fromAddress, toAddress, inputAmount, account) {
+    let routers = swapRouters[chainId]
 
+    // initial state swap
     const none = {
-        router: routerData,
+        // router: routerData,
         out: false,
         priority: 0
     }
 
-    // Check swap parameters
-
-    if (!chain.swapSettings.routers[routerData.id].enabled) return none
-    const routers = swapRouters[chain.id]
+    // checks: swap parameters
+    if (!routers[routerId].enabled) return none
+    routers = swapRouters[chainId]
     if (!Object.keys(routers).length) return none
-    const swap = chain.swap
 
     try {
         // Find best router quote
 
-        const best = await getBestRouterQuote(chain, routers)
+        const best = await getBestRouterQuote(chainId, routers, fromAddress, toAddress, inputAmount)
         if (best.out.isZero()) return none
-        const swapData = encodeSwapData(chain, account, routers[best.router], swap.tokenIn.address, swap.tokenOut.address, best.path, swap.tokenInAmount, best.out)
-        const gas = await chain.web3.eth.estimateGas({
+        const swapData = encodeSwapData(chainId, account, routers[best.router], fromAddress, toAddress, best.path, inputAmount, best.out)
+        const gas = await web3.eth.estimateGas({
             from: account,
             to: routers[best.router].address,
-            value: swap.tokenIn.address === "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" ? swap.tokenInAmount : 0,
+            value: fromAddress === "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" ? inputAmount : 0,
             data: swapData
         }).catch(() => {})
 
@@ -84,11 +83,11 @@ async function getSwap(chain, account) {
 
         return {
             router: {
-                id: routerData.id,
+                id: routerId,
                 routerId: best.router,
                 name: routers[best.router].name
             },
-            in: swap.tokenInAmount,
+            in: inputAmount,
             out: best.out,
             tx: {
                 from: account,
@@ -107,21 +106,24 @@ async function getSwap(chain, account) {
 
 // Get best router quote
 
-async function getBestRouterQuote(chain, routers) {
+async function getBestRouterQuote(chainId: ChainId, routers, fromAddress: string, toAddress: string, inputAmount) {
     // runs: batch request
-    const batch = new chain.web3.BatchRequest()
+    const batch = new web3.BatchRequest()
+    const swap = useSwap(chainId)
+    
     const requests = []
     const quotes = []
     const signature = web3.eth.abi.encodeFunctionSignature("getAmountsOut(uint256,address[])")
-    const paths = getPaths(chain, chain.swap.tokenIn.address, chain.swap.tokenOut.address)
+    const paths = getPaths(chainId, fromAddress, toAddress)
 
     for (const path of paths) {
-        const calldata = web3.eth.abi.encodeParameters(["uint256", "address[]"], [chain.swap.tokenInAmount, path])
+        const calldata = web3.eth.abi.encodeParameters(["uint256", "address[]"], [inputAmount, path])
         for (const router in routers) {
             // <void> ?
             requests.push(new Promise<void>(resolve => {
                 const swapPath = path.slice()
-                batch.add(chain.web3.eth.call.request({
+                // @ts-ignore : TODO
+                batch.add(web3.eth.call.request({
                     to: routers[router].address,
                     data: `${signature}${calldata.slice(2)}`
                 }, (error, result) => {
@@ -159,16 +161,15 @@ async function getBestRouterQuote(chain, routers) {
     return best
 }
 
-// Get swap paths with route tokens
-
-function getPaths(chain, tokenIn, tokenOut) {
+// gets: swap paths with route tokens.
+function getPaths(chainId, tokenIn, tokenOut) {
     // Generate all paths with chain route tokens
 
-    const addressIn = tokenIn === "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" ? chain.WETH : tokenIn
-    const addressOut = tokenOut === "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" ? chain.WETH : tokenOut
+    const addressIn = tokenIn === "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" ? WNATIVE[chainId] : tokenIn
+    const addressOut = tokenOut === "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" ? WNATIVE[chainId] : tokenOut
     const paths = [[addressIn, addressOut]]
 
-    for (const token of routeTokens[chain.id]) {
+    for (const token of routeTokens[chainId]) {
         if (token !== addressIn && token !== addressOut) {
             paths.push([addressIn, token, addressOut])
         }
@@ -225,4 +226,4 @@ function encodeSwapData(chain, account, router, tokenIn, tokenOut, path, amountI
 
 // Exports
 
-export { quote, getSwap }
+export { getQuote, getSwap }
