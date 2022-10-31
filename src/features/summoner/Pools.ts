@@ -214,16 +214,6 @@ export const FantomPools = [
     token1Address: USDC_ADDRESS[ChainId.FANTOM],
   },
   {
-    // 750
-    pid: 54,
-    token0Symbol: 'WFTM',
-    token1Symbol: 'SOR',
-    lpSymbol: 'FTM-SOR',
-    lpAddress: '0xdfB2218b48627794711E6cFd72e26c541E456F6F',
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: SOR_ADDRESS[ChainId.FANTOM],
-  },
-  {
     // 1500
     pid: 47,
     token0Symbol: 'WFTM',
@@ -233,26 +223,26 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: WLUM_ADDRESS[ChainId.FANTOM],
   },
-  {
-    // 1000
-    pid: 44,
-    token0Symbol: 'WFTM',
-    token1Symbol: 'LUX',
-    lpSymbol: 'FTM-LUX',
-    lpAddress: '0x951BBB838e49F7081072895947735b0892cCcbCD',
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: LUX_ADDRESS[ChainId.FANTOM],
-  },
-  {
-    // 300
-    pid: 38,
-    token0Symbol: 'WFTM',
-    token1Symbol: 'FUSD',
-    lpSymbol: 'FTM-FUSD',
-    lpAddress: '0x1AE16105a7d4bE7DFD9737FD13D9A50AEFed1437',
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: FUSD_ADDRESS[ChainId.FANTOM], // FUSD
-  },
+  // {
+  //   // 1000
+  //   pid: 44,
+  //   token0Symbol: 'WFTM',
+  //   token1Symbol: 'LUX',
+  //   lpSymbol: 'FTM-LUX',
+  //   lpAddress: '0x951BBB838e49F7081072895947735b0892cCcbCD',
+  //   token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+  //   token1Address: LUX_ADDRESS[ChainId.FANTOM],
+  // },
+  // {
+  //   // 300
+  //   pid: 38,
+  //   token0Symbol: 'WFTM',
+  //   token1Symbol: 'FUSD',
+  //   lpSymbol: 'FTM-FUSD',
+  //   lpAddress: '0x1AE16105a7d4bE7DFD9737FD13D9A50AEFed1437',
+  //   token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+  //   token1Address: FUSD_ADDRESS[ChainId.FANTOM], // FUSD
+  // },
   {
     // 600
     pid: 23,
@@ -366,26 +356,26 @@ export const FantomPools = [
 ]
 
 export const FantomLendingPools = [
-  {
-    // LENDING
-    pid: 48,
-    token0Symbol: 'FTM', // EXEMPT //
-    token1Symbol: 'DAI',
-    lpSymbol: 'DAI-FTM', // EXEMPT //
-    lpAddress: '0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd',
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: DAI_ADDRESS[ChainId.FANTOM],
-  },
-  {
-    // LENDING
-    pid: 49,
-    token0Symbol: 'DAI',
-    token1Symbol: 'FTM', // EXEMPT //
-    lpSymbol: 'FTM-DAI',
-    lpAddress: '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61',
-    token0Address: DAI_ADDRESS[ChainId.FANTOM],
-    token1Address: WNATIVE_ADDRESS[ChainId.FANTOM], // EXEMPT //
-  },
+  // {
+  //   // LENDING
+  //   pid: 48,
+  //   token0Symbol: 'FTM', // EXEMPT //
+  //   token1Symbol: 'DAI',
+  //   lpSymbol: 'DAI-FTM', // EXEMPT //
+  //   lpAddress: '0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd',
+  //   token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+  //   token1Address: DAI_ADDRESS[ChainId.FANTOM],
+  // },
+  // {
+  //   // LENDING
+  //   pid: 49,
+  //   token0Symbol: 'DAI',
+  //   token1Symbol: 'FTM', // EXEMPT //
+  //   lpSymbol: 'FTM-DAI',
+  //   lpAddress: '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61',
+  //   token0Address: DAI_ADDRESS[ChainId.FANTOM],
+  //   token1Address: WNATIVE_ADDRESS[ChainId.FANTOM], // EXEMPT //
+  // },
   {
     // LENDING
     pid: 51,
@@ -396,24 +386,24 @@ export const FantomLendingPools = [
     token0Address: WETH_ADDRESS[ChainId.FANTOM],
     token1Address: DAI_ADDRESS[ChainId.FANTOM],
   },
-  {
-    // LENDING
-    pid: 53,
-    token0Symbol: 'BNB',
-    token1Symbol: 'DAI',
-    lpSymbol: 'DAI-BNB',
-    lpAddress: '0xbDa9204e6D596feCf9bd48108723F9BDAa2019f6',
-    token0Address: BNB_ADDRESS[ChainId.FANTOM],
-    token1Address: DAI_ADDRESS[ChainId.FANTOM],
-  },
-  {
-    // LENDING
-    pid: 56,
-    token0Symbol: 'BTC',
-    token1Symbol: 'DAI',
-    lpSymbol: 'DAI-BTC',
-    lpAddress: '0xaf28730165634A56434ca7f0B302CC54F862046F',
-    token0Address: WBTC_ADDRESS[ChainId.FANTOM],
-    token1Address: DAI_ADDRESS[ChainId.FANTOM],
-  },
+  // {
+  //   // LENDING
+  //   pid: 53,
+  //   token0Symbol: 'BNB',
+  //   token1Symbol: 'DAI',
+  //   lpSymbol: 'DAI-BNB',
+  //   lpAddress: '0xbDa9204e6D596feCf9bd48108723F9BDAa2019f6',
+  //   token0Address: BNB_ADDRESS[ChainId.FANTOM],
+  //   token1Address: DAI_ADDRESS[ChainId.FANTOM],
+  // },
+  // {
+  //   // LENDING
+  //   pid: 56,
+  //   token0Symbol: 'BTC',
+  //   token1Symbol: 'DAI',
+  //   lpSymbol: 'DAI-BTC',
+  //   lpAddress: '0xaf28730165634A56434ca7f0B302CC54F862046F',
+  //   token0Address: WBTC_ADDRESS[ChainId.FANTOM],
+  //   token1Address: DAI_ADDRESS[ChainId.FANTOM],
+  // },
 ]

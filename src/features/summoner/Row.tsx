@@ -97,6 +97,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const lpPrice = Number(summonerUserInfo.lpPrice)
     const firstDepositTime = Number(summonerUserInfo.firstDepositTime)
     const currentRate = Number(summonerUserInfo.currentRate)
+
     const currentTime = nowTime / 1_000
     const timeDelta = currentTime - firstDepositTime
     const daysElapsed = timeDelta / 86_400
@@ -108,10 +109,10 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                     // not staked (to forewarn)
                     : 14)
             : currentRate
-    const feeAmount
-        = withdrawFee * stakedBalance / 100
+    const feeAmount = withdrawFee * stakedBalance / 100
     const withdrawable = stakedBalance - feeAmount
     const feeValue = feeAmount * lpPrice
+    const isStaked = stakedBalance > 0
     const walletBalance = Number(summonerUserInfo.walletBalance)
     // const walletValue = Number(walletBalance) * lpPrice
     // const parsedBalance = tryParseAmount(walletBalance.toString(), farm.lpToken)
@@ -316,11 +317,9 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
         <>
             <div className="flex justify-center w-full">
                 <FarmContainer>
-                    <div className={classNames("bg-dark-900 p-3 border border-blue", !hasBalance && "border-dark-1000",
+                    <div className={classNames("bg-dark-900 p-3 border border-blue", !isStaked && "border-dark-1000",
                         isUnderworldPair ? "hover:border-blue" : !isActive ? "hover:border-pink"
-                            : hasBalance && isUnderworldPair ? "hover:border-blue border-blue"
-                                : hasBalance && !isUnderworldPair ? "border-dark-600"
-                                    : hasBalance && !isActive ? "hover:border-pink border-pink"
+                            : isStaked ? 'border border-avaxRed'
                                         : "hover:border-dark-600"
                     )}
                         onClick={() => handleShowOptions()}
@@ -344,27 +343,21 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                             </div>
 
                             {/* STAKED VALUE */}
-                            <HideOnMobile>
                                 <FarmItemBox>
                                     <FarmItem>
-                                        {Number(apr).toString() === '0.00' ? (
-                                            <Text padding="0" fontSize="1rem" color="#666">
-                                                0
-                                            </Text>
-                                        ) : (
-                                            <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                                ${
-                                                    stakedValue == 0 ? 0
-                                                        : stakedValue.toString(2) == '0.00' ? '<0.00'
-                                                            : stakedValue < 1 && stakedValue.toString(4) ? stakedValue.toFixed(4)
-                                                                : stakedValue > 0 ? stakedValue.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                                                                    : 0
-                                                }
-                                            </Text>
-                                        )}
+                                        {
+                                        <Text padding="0" fontSize="1rem" color="#FFFFFF">
+                                            ${
+                                            stakedValue == 0 ? 0
+                                                : stakedValue.toFixed(2).toString() == '0.00' ? '0.01'
+                                                    // : stakedValue < 1 && stakedValue.toString(4) ? stakedValue.toFixed(4)
+                                                        : stakedValue > 0 ? stakedValue.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                                                            : 0
+                                            }
+                                        </Text>
+                                        }
                                     </FarmItem>
                                 </FarmItemBox>
-                            </HideOnMobile>
 
                             {/* STAKED OWNERSHIP */}
                             <HideOnSmall>
@@ -382,34 +375,6 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                     </FarmItem>
                                 </FarmItemBox>
                             </HideOnSmall>
-
-                            {/* % APR */}
-                            <FarmItemBox>
-                                <FarmItem>
-                                    {Number(apr).toString() === '0.00' ? (
-                                        <Text padding="0" fontSize="1rem" color="#666">
-                                            0
-                                        </Text>
-                                    ) : (
-                                        <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                            {Number(apr).toFixed()}%
-                                        </Text>
-                                    )}
-                                </FarmItem>
-                            </FarmItemBox>
-
-                            {/* REWARDS VALUE */}
-                            {/* <FarmItemBox className="flex">
-                                {Number(earnedValue).toFixed(0).toString() === '0' ? (
-                                    <Text padding="0" fontSize="1rem" color="#666">
-                                        0
-                                    </Text>
-                                ) : (
-                                    <Text padding="0" fontSize="1rem" color="#F36FFE">
-                                        ${Number(earnedValue).toFixed(0)}
-                                    </Text>
-                                )}
-                            </FarmItemBox> */}
 
                             <FarmItemBox className="flex">
                                 {Number(earnedAmount).toFixed(0).toString() === '0' ? (
@@ -462,23 +427,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                     <div className="p-3 space-y-6 bg-dark-900 rounded z-1 relative">
                         <Tab.Group>
                             <Tab.List className="flex items-center justify-center mb-1 space-x-2 p-3px text-white">
-                                <div className="grid grid-cols-2 w-[95%] rounded-md p-2px bg-dark-900">
-                                    <Tab
-                                        className={({ selected }) =>
-                                            `${selected && !isUnderworldPair && isActive ? 'border-b-2 border-accent p-2 text-white border-dark-600'
-                                                : selected && isUnderworldPair ? 'border-b-2 border-accent p-2 text-white border-[#0993EC]'
-                                                    : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-pink'
-                                                        : 'bg-dark-900 text-white'
-                                            }
-                  flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 
-                  ${isUnderworldPair ? "hover:border-blue"
-                                                : !isActive ? "hover:border-pink"
-                                                    : "hover:border-dark-600"
-                                            }`
-                                        }
-                                    >
-                                        DEPOSIT
-                                    </Tab>
+                                <div className="grid grid-cols-1 w-[95%] rounded-md p-2px bg-dark-900">
                                     <Tab
                                         className={({ selected }) =>
                                             `${selected && !isUnderworldPair && isActive ? 'border-b-2 border-accent p-2 text-white border-dark-600'
@@ -497,314 +446,8 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                     </Tab>
                                 </div>
                             </Tab.List>
-
-                            {/*------ DEPOSIT TAB PANEL ------*/}
-                            <Tab.Panel className={'outline-none'}>
-
-                                <Button variant={'link'} className="absolute top-0 right-0 flex justify-center max-h-[30px] max-w-[30px]">
-                                    <QuestionHelper
-                                        text={
-                                            <div className="flex flex-col space-y-1">
-                                                <div className="flex flex-col">
-                                                    {withdrawFee == 0 ? (
-                                                        <p>
-                                                            {`After creating liquidity or lending, navigate to the associated farm to deposit.`}
-                                                        </p>
-                                                    ) : (
-                                                        <p>
-                                                            {`After creating liquidity or lending, navigate to the associated farm to deposit.`}
-                                                            <br /> <br />
-                                                            {`The fee decreases by 1% each day and is NOT affected by depositing more.`}
-                                                        </p>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        }
-                                    />
-                                </Button>
-
-                                <div className=
-                                    {classNames(
-                                        "flex flex-col bg-dark-1000 mb-3 p-3 border border-2 border-dark-1000",
-                                        isUnderworldPair ? "hover:border-blue"
-                                            : !isActive ? "hover:border-pink"
-                                                : "hover:border-dark-600",
-
-                                        "w-full space-y-1")
-
-                                    }>
-                                    {/* Number(walletBalance) > 0 && (
-                                        <div className="flex justify-between">
-                                            <Typography className="text-white font-bold" fontFamily={'medium'}>
-                                                Wallet Balance
-                                            </Typography>
-                                            <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(walletBalance, false, true)} {tokenSymbol}
-                                            </Typography>
-                                        </div>
-                                    )
-                                    */} 
-
-                                    {/* Number(walletValue) > 0 && (
-                                        <div className="flex justify-between">
-                                            <Typography className="text-white" fontFamily={'medium'}>
-                                                Balance (USD)
-                                            </Typography>
-                                            <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(walletValue, true, true)}
-                                            </Typography>
-                                        </div>
-                                    )
-                                    */}
-  
-                                      {Number(stakedBalance) > 0 && (
-                                        <div className="flex justify-between">
-                                            <Typography className="text-white" fontFamily={'medium'}>
-                                                Staked Balance
-                                            </Typography>
-                                            <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(stakedBalance, false, true)} {farm.lpSymbol}
-                                            </Typography>
-                                        </div>
-                                    )}
-
-                                    {stakedValue > 0 && (
-                                        <div className="flex justify-between">
-                                            <Typography className="text-white" fontFamily={'medium'}>
-                                                Balance (USD)
-                                            </Typography>
-                                            <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(stakedValue, true, true)}
-                                            </Typography>
-                                        </div>
-                                    )}
-
-                                    {/* {Number(walletBalance) > 0 && (
-                                        <div className="h-px my-6 bg-dark-1000" />
-                                    )} */}
-
-                                    <div className="flex justify-between">
-                                        <Typography className="text-white" fontFamily={'medium'}>
-                                            Claimable Rewards
-                                        </Typography>
-                                        <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                            {Number(earnedAmount).toFixed(2)} SOUL
-                                        </Typography>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <Typography className="text-white" fontFamily={'medium'}>
-                                            Rewards (USD)
-                                        </Typography>
-                                        <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
-                                            {formatNumber(earnedValue, true, true)}
-                                        </Typography>
-                                    </div>
-
-                                    <div className="h-px my-1 bg-dark-1000" />
-
-                                    {/* WITHDRAWAL FREE */}
-                                    {Number(withdrawFee) > 0 && (
-                                        <div className="flex flex-col bg-dark-1000 mb-2 p-3 border-1 hover:border-dark-600 w-full space-y-1">
-                                            <div className="text-white">
-                                                <div className="block text-sm md:text-md text-white text-center font-bold p-1 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                                                    <span>
-                                                        {`Fee Duration: ${Number(withdrawFee).toFixed(0)} days`}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
-                                    <div className="h-px my-6 bg-dark-1000" />
-                                    <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
-                                        <div className="text-white">
-                                            <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                                                <span> {formatNumber(Number(apr), false, true)}% APR</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div className="h-px my-1 bg-dark-1000" />
-
-                                {/* DEPOSIT: ASSET PANEL */}
-
-                                {Number(walletBalance) != 0 &&
-                                    <FarmInputPanel
-                                        pid={farm.pid}
-                                        onUserInput={(value) => setDepositValue(value)}
-                                        onMax={() => setDepositValue(walletBalance.toString())}
-                                        value={depositValue}
-                                        balance={walletBalance.toString()}
-                                        id={pid}
-                                    />
-                                }
-                                {/* UN-APPROVED */}
-                                {!approved && hasBalance && (
-                                    <SubmitButton
-                                        height="2rem"
-                                        primaryColor={buttonColor}
-                                        color={buttonTextColor}
-                                        margin=".5rem 0 0rem 0"
-                                        onClick={() => handleApprove()}>
-                                        <div className="flex text-lg gap-2">
-                                            {`APPROVE ASSET`}
-                                        </div>
-                                    </SubmitButton>
-                                )}
-                                {/* APPROVED */}
-                                {approved && hasBalance && (
-                                    <SubmitButton
-                                        height="2rem"
-                                        primaryColor={buttonColor}
-                                        color={buttonTextColor}
-                                        margin=".5rem 0 0rem 0"
-                                        onClick={() =>
-                                            handleDeposit(pid, depositValue)
-                                        }
-                                    >
-                                        <div className="flex text-lg gap-2">
-                                        <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                            DEPOSIT {
-                                                ((chainId == 250 && Number(allocPoint) == 420) || 
-                                                chainId == 43114 && Number(allocPoint) == 220) ? token0Symbol : farm.lpSymbol}
-                                        </div>
-                                    </SubmitButton>
-                                )}
-                                {/* CREATE ASSET PAIR */}
-                                {(nativeToken0 && !isUnderworldPair && isActive) ? (
-                                    <NavLink
-                                        href={`/exchange/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
-                                    >
-                                        <a>
-                                            <SubmitButton
-                                                height="2rem"
-                                                primaryColor={buttonColor}
-                                                color={buttonTextColor}
-                                                margin=".5rem 0 0rem 0"
-                                            >
-                                                <TokenPairLink
-                                                    target="_blank"
-                                                    rel="noopener"
-                                                    primaryColor={buttonColor}
-                                                    color={buttonTextColor}
-                                                    href=
-                                                    // [if] token0 is the native token, then only use the address of token1 [else] token0 address
-                                                    {`/exchange/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
-                                                >
-                                                    <div className="flex text-lg gap-2">
-                                                        <CollectionIcon width={26} className={classNames(`text-white`)} />
-                                                        {/* {farm.lpSymbol} */}
-                                                        CREATE {farm.lpSymbol} LP
-                                                    </div>
-                                                </TokenPairLink>
-                                            </SubmitButton>
-                                        </a>
-                                    </NavLink>
-                                ) : (!isUnderworldPair &&
-                                    <NavLink
-                                        href={`/exchange/add/${farm.token1Address}/${farm.token0Address}`}
-                                    >
-                                        <a>
-                                            <SubmitButton
-                                                height="2rem"
-                                                primaryColor={getChainColor(chainId)}
-                                                margin=".5rem 0 0rem 0"
-                                            >
-                                                <TokenPairLink
-                                                    target="_blank"
-                                                    rel="noopener"
-                                                    href=
-                                                    {`/exchange/add/${farm.token0Address}/${farm.token1Address}`}
-                                                >
-                                                    <div className="flex text-lg gap-2">
-                                                    <CollectionIcon width={26} className={classNames(`text-white`)} />
-                                                        CREATE {farm.lpSymbol} LP
-                                                    </div>                                            </TokenPairLink>
-                                            </SubmitButton>
-                                        </a>
-                                    </NavLink>
-                                )}
-                                {/* LEND ASSET */}
-                                {isUnderworldPair && (
-                                    <NavLink
-                                        href=
-                                        {`/lend/${lpAddress}`}
-                                    >
-                                        <SubmitButton
-                                            margin=".5rem 0 0rem 0"
-                                            height="2rem"
-                                            primaryColor={buttonColor}
-                                            color={buttonTextColor}
-                                        >
-                                            <div className="flex text-lg gap-2">
-                                                <BriefcaseIcon width={26} className={classNames(`text-white`)} />
-                                                {`LEND ${token0Symbol}`}
-                                            </div>
-                                        </SubmitButton>
-                                    </NavLink>
-                                )}
-
-
-                                {/* EARNED */}
-                                {Number(earnedAmount) > 0 && (
-                                    <Wrap padding="0" margin="0" display="flex">
-                                        <SubmitButton
-                                            height="2rem"
-                                            primaryColor={buttonColor}
-                                            color={buttonTextColor}
-                                            // className={'font-bold'}
-                                            margin=".5rem 0 0rem 0"
-                                            onClick={() =>
-                                                handleHarvest(pid)
-                                            }
-                                        >
-                                            <div className="flex text-lg gap-2">
-                                                <DatabaseIcon width={26} className={classNames(`text-white`)} />
-                                                HARVEST SOUL
-                                            </div>
-                                        </SubmitButton>
-                                    </Wrap>
-                                )}
-
-                                {isSwapPair &&
-                                    <Wrap padding="0" margin="0" display="flex">
-                                        <SubmitButton
-                                            height="2rem"
-                                            primaryColor={buttonColor}
-                                            color={buttonTextColor}
-                                            // className={'font-bold'}
-                                            margin=".5rem 0 0rem 0"
-                                            onClick={() =>
-                                                handleShowZap(pid)
-                                            }
-                                        >
-                                            <div className="flex text-lg gap-1">
-                                            {/* <Zap width={26} className={classNames(`text-white`)} /> */}
-                                                ZAP 
-                                                <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                                &rarr; {`${farm.lpSymbol}`}
-                                            </div>
-                                        </SubmitButton>
-                                    </Wrap>
-                                }
-                            </Tab.Panel>
                             {/*------ WITHDRAW TAB PANEL ------*/}
-                            <Tab.Panel className={'outline-none'}>
-                                <Button variant={'link'} className="absolute top-0 right-0 flex justify-center max-h-[30px] max-w-[30px]">
-                                    <QuestionHelper
-                                        text={
-                                            <div className="flex flex-col space-y-1">
-                                                <div className="flex flex-col">
-                                                    <p>
-                                                        Fees decrease by 1% daily, and only increase upon withdrawals.
-                                                        <br /><br />Depositing more is free and does not change your fee.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        }
-                                    />
-                                </Button>
+                            <Tab.Panel className={classNames(`outline-none`)}>
                                 <div className={
                                     classNames(
                                         "flex flex-col mb-3 bg-dark-1000 p-3 border border-2 border-dark-1000",
@@ -836,53 +479,6 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                     )}
                                     {Number(stakedBalance) > 0 && (
                                         <div className="h-px my-6 bg-dark-1000" />
-                                    )}
-
-                                    <div className="flex justify-between">
-                                        <Typography className="text-white" fontFamily={'medium'}>
-                                            Maximum Fee
-                                        </Typography>
-                                        <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                            {formatNumber(Number(stakedBalance) - withdrawable, false, true)} {farm.lpSymbol}
-                                        </Typography>
-                                    </div>
-
-                                    <div className="flex justify-between">
-                                        <Typography className="text-white" fontFamily={'medium'}>
-                                            Fee (USD)
-                                        </Typography>
-                                        <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
-                                            {formatNumber(Number(feeValue), true, true)}
-                                        </Typography>
-                                    </div>
-
-
-                                    <div className="h-px my-6 bg-dark-1000" />
-                                    {/* FEE BOX (COLOR-CODED) */}
-                                    {Number(withdrawFee) > 0 && (
-                                        <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-red border-1 hover:border-dark-600 w-full space-y-1">
-                                            <div className="text-white">
-                                                <div className={classNames("block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md",
-                                                    "hover:bg-dark-300")}>
-                                                    <span>
-                                                        {(Number(withdrawFee)).toFixed(0)}% FEE
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    {/* WITHDRAWAL FREE */}
-                                    {Number(withdrawFee) == 0 && (
-                                        <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
-                                            <div className="text-white">
-                                                <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                                                    <span>
-                                                        {(Number(withdrawFee)).toFixed(0)}% FEE
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
                                     )}
                                 </div>
 

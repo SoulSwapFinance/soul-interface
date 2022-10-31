@@ -63,13 +63,11 @@ export function Active() {
                 </Text>
               </FarmItemBox>
 
-            <HideOnMobile>
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
                   STAKED
                 </Text>
               </FarmItemBox>
-            </HideOnMobile>
  
             <HideOnSmall>
               <FarmItemBox>
@@ -78,12 +76,6 @@ export function Active() {
                 </Text>
               </FarmItemBox>
             </HideOnSmall>
-
-              <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#FFFFFF">
-                  % APR
-                </Text>
-              </FarmItemBox>
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">

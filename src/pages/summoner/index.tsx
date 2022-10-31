@@ -21,6 +21,8 @@ import { ChainId, SOUL_ADDRESS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 import { getChainColorCode } from 'constants/chains'
 import { useTokenInfo } from 'hooks/useAPI'
+import { SubmitButton } from 'features/summoner/Styles'
+import ExternalLink from 'components/ExternalLink'
 
 const Summoner = () => {
   const { chainId } = useActiveWeb3React()
@@ -69,7 +71,7 @@ const Summoner = () => {
 
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
-      {showBalances && [ChainId.FANTOM].includes(chainId) &&
+      {/* {showBalances && [ChainId.FANTOM].includes(chainId) &&
       <div className={`flex flex-row text-${getChainColorCode(chainId)} justify-end`}>
         <XIcon
           height="24px"
@@ -77,22 +79,21 @@ const Summoner = () => {
           onClick={() => openShowBalances(false)}
         />
       </div>
-      }
-      {showBalances && [ChainId.FANTOM].includes(chainId) &&
-        <TridentHeader className="sm:!flex-row justify-center items-center bg-transparent" pattern="bg-bubble">
-          <div>
-          </div>
-          <div className={`flex items-center justify-between px-2 py-2`}>
-            <div className="flex gap-2">
-              <Button
+      } */}
+      {[ChainId.FANTOM].includes(chainId) &&
+        // <TridentHeader className="sm:!flex-row justify-center items-center bg-transparent" pattern="bg-bubble">
+          // <div>
+          // </div>
+          <div className={`flex items-center justify-center`}>
+              {/* <Button
                 color={getChainColorCode(chainId)}
                 className="text-emphasis"
                 variant="outlined"
                 size={"sm"}
               >
                 {formatNumberScale(allStaked, true)} {' STAKED'}
-              </Button>
-              {positions.length > 0 && [ChainId.FANTOM].includes(chainId) && (
+              </Button> */}
+              {/* {positions.length > 0 && [ChainId.FANTOM].includes(chainId) && (
                 <Button
                   color={getChainColorCode(chainId)}
                   className="text-emphasis"
@@ -114,8 +115,8 @@ const Summoner = () => {
                 >
                   CLAIM ALL {formatNumberScale(pendingValue, true)}
                 </Button>
-              )}
-              {positions.length > 0 && [ChainId.AVALANCHE].includes(chainId) && (
+              )} */}
+              {/* {positions.length > 0 && [ChainId.AVALANCHE].includes(chainId) && (
                 <Button
                   color={getChainColorCode(chainId)}
                   className="text-emphasis"
@@ -134,24 +135,35 @@ const Summoner = () => {
                 >
                   CLAIM ALL {formatNumberScale(pendingValue, true)}
                 </Button>
-              )}
+              )} */}
               <Button
                 color={getChainColorCode(chainId)}
                 className="text-emphasis"
-                variant={'outlined'}
+                variant={'filled'}
                 size={"sm"}
               >
-                {/* {'TOTAL: '} */}
-                {formatNumberScale(summTvl, true)} {' '} TOTAL
+                {formatNumberScale(summTvl, true)} {' '} UNCLAIMED TVL
               </Button>
             </div>
-          </div>
-          </TridentHeader>
+          /* </TridentHeader> */
         }
       <DoubleGlowShadowV2 opacity="0.6">
         <Container id="farm-page">
-            {/* <TwitterBanner chainId={chainId} /> */}
-            {/* {<HarvestAll/>} */}
+        <ExternalLink 
+            href = "https://exchange.soulswap.finance/farms" 
+            target = "_blank" 
+            rel="noreferrer"
+          >
+          <SubmitButton
+          height= "2rem"
+          primaryColor={"#6F1BD9"} 
+          size="lg"
+          >
+          <a className="block text-md font-bold md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span>Return: Back to SoulSwap V2</span>
+          </a>
+        </SubmitButton>
+      </ExternalLink>
           <br />
           <Head>
             <title>Farm | Soul</title>
