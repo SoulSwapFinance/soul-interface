@@ -8,12 +8,13 @@ import { Token } from './Token'
 import { computePairAddress } from '../functions/computePairAddress'
 import invariant from 'tiny-invariant'
 import { sqrt } from '../functions/math'
-import { JSBI } from 'sdk'
+import { JSBI, RoutablePlatform } from 'sdk'
 
 export class Pair {
   public readonly liquidityToken: Token
   private readonly tokenAmounts: [CurrencyAmount<Token>, CurrencyAmount<Token>]
     fee: any
+  public readonly platform?: RoutablePlatform
 
   public static getAddress(tokenA: Token, tokenB: Token): string {
     return computePairAddress({
@@ -22,6 +23,7 @@ export class Pair {
       tokenB,
     })
   }
+
 
   public constructor(currencyAmountA: CurrencyAmount<Token>, currencyAmountB: CurrencyAmount<Token>) {
     const currencyAmounts = currencyAmountA.currency.sortsBefore(currencyAmountB.currency) // does safety checks

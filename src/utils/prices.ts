@@ -1,6 +1,6 @@
 import { Pair, Token, Trade } from 'sdk'
 import { ChainId, Currency, CurrencyAmount, Fraction, Percent, TokenAmount, TradeType } from 'sdk'
-import JSBI from 'jsbi'
+import { JSBI } from 'sdk'
 
 import { AnyTrade } from 'hooks/useSwapCallback'
 
@@ -112,4 +112,23 @@ export function computePriceImpactWithoutFee(pairs: Pair[], priceImpact?: Percen
     : undefined
 
   return priceImpactWithoutFeePercent
+}
+
+export function sortTradesByExecutionPrice(trades: (Trade<Currency, Currency, TradeType> | undefined)[]): (Trade<Currency, Currency, TradeType> | undefined)[] {
+  return trades.sort((a, b) => {
+    if (a === undefined || a === null) {
+      return 1
+    }
+    if (b === undefined || b === null) {
+      return -1
+    }
+
+    if (a.executionPrice.lessThan(b.executionPrice)) {
+      return 1
+    } else if (a.executionPrice.equalTo(b.executionPrice)) {
+      return 0
+    } else {
+      return -1
+    }
+  })
 }

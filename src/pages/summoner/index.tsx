@@ -42,11 +42,11 @@ const Summoner = () => {
   const pendingValue = positions.reduce((previousValue, currentValue) => {
     return previousValue + (currentValue.pendingSoul / 1e18) * soulPrice
   }, 0)
-  
+
   const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
     return { ...POOLS[chainId][key], lpToken: key }
   })
-  
+
   // const pendingRewards = (pendingValue / soulPrice).toFixed(0)
 
   const allStaked = positions.reduce((previousValue, currentValue) => {
@@ -56,15 +56,15 @@ const Summoner = () => {
     return !poolTvl ? previousValue + 0 : previousValue + ((currentValue.amount / 1e18) * poolTvl?.lpPrice)
   }, 0)
 
-    // harvests: all staked pools (for user)
-    const handleHarvestAll = async () => {
-      try {
-        let tx
-        tx = SummonerContract?.harvestAll()
-        await tx?.wait()
+  // harvests: all staked pools (for user)
+  const handleHarvestAll = async () => {
+    try {
+      let tx
+      tx = SummonerContract?.harvestAll()
+      await tx?.wait()
     } catch (e) {
-        console.log(e)
-        return
+      console.log(e)
+      return
     }
   }
 
@@ -72,80 +72,80 @@ const Summoner = () => {
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
       {showBalances &&
-      <div className={`flex flex-row 
+        <div className={`flex flex-row 
       text-white
       justify-end`}>
-        <XIcon
-          height="24px"
-          id="toggle-button"
-          onClick={() => openShowBalances(false)}
-        />
-      </div>
+          <XIcon
+            height="24px"
+            id="toggle-button"
+            onClick={() => openShowBalances(false)}
+          />
+        </div>
       }
-      { showBalances &&
+      {showBalances &&
         // <TridentHeader className="sm:!flex-row justify-center items-center" pattern="bg-bubble">
         // <div>
-            <div className="flex justify-center gap-2 mb-4">
-              <Button
-                color={getChainColorCode(chainId)}
-                className="text-emphasis"
-                variant="outlined"
-                size={"sm"}
-              >
-                {formatNumberScale(allStaked, true)} {' STAKED'}
-              </Button>
-              { positions.length > 0 && (
-                <Button
-                  color={getChainColorCode(chainId)}
-                  className="text-emphasis"
-                  variant="outlined"
-                  size={"sm"}
-                  disabled={pendingTx}
-                  onClick={async () => {
-                    setPendingTx(true)
-                      try { 
-                        await handleHarvestAll()
-                        } catch (error) {
-                          console.error(error)
-                        }
-                    setPendingTx(false)
-                  }}
-                  >
-                  {`CLAIM ALL ${pendingValue > 0 ? formatNumberScale(pendingValue, true) : ''}`}
-                </Button>
-              )}
-              <Button
-                color={getChainColorCode(chainId)}
-                className="text-emphasis"
-                variant={'outlined'}
-                size={"sm"}
-              >
-                {formatNumberScale(summTvl, true)} {' '} TOTAL
-              </Button>
-            </div>
-          /* // </TridentHeader> */
-        }
+        <div className="flex justify-center gap-2 mb-4">
+          <Button
+            color={getChainColorCode(chainId)}
+            className="text-emphasis"
+            variant="outlined"
+            size={"sm"}
+          >
+            {formatNumberScale(allStaked, true)} {' STAKED'}
+          </Button>
+          {positions.length > 0 && (
+            <Button
+              color={getChainColorCode(chainId)}
+              className="text-emphasis"
+              variant="outlined"
+              size={"sm"}
+              disabled={pendingTx}
+              onClick={async () => {
+                setPendingTx(true)
+                try {
+                  await handleHarvestAll()
+                } catch (error) {
+                  console.error(error)
+                }
+                setPendingTx(false)
+              }}
+            >
+              {`CLAIM ALL ${pendingValue > 0 ? formatNumberScale(pendingValue, true) : ''}`}
+            </Button>
+          )}
+          <Button
+            color={getChainColorCode(chainId)}
+            className="text-emphasis"
+            variant={'outlined'}
+            size={"sm"}
+          >
+            {formatNumberScale(summTvl, true)} {' '} TOTAL
+          </Button>
+        </div>
+        /* // </TridentHeader> */
+      }
       <DoubleGlowShadowV2 opacity="0.6">
         <Container id="farm-page">
-       <div        
-      className={chainId == ChainId.FANTOM ? 'mb-4' : 'hidden'}
-      >
-        <SubmitButton
-        height= "2rem"
-        primaryColor={"#6F1BD9"} 
-        size="lg"
-        >
-        <ExternalLink 
-          href = "https://archived.soulswap.finance/farms" 
-          target = "_blank" 
-          rel="noreferrer"
-        >
-        <a className="block text-md font-bold md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-          <span> Migrate from Here: Archived Farms </span>
-        </a>
-        </ExternalLink>
-      </SubmitButton>
-      </div> 
+          <div
+            className={chainId == ChainId.FANTOM ? 'mb-4' : 'hidden'}
+          >
+            <ExternalLink
+              href="https://archived.soulswap.finance/farms"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <SubmitButton
+                height="2rem"
+                primaryColor={"#6F1BD9"}
+                size="lg"
+              >
+                <a className="block text-md font-bold md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                  <span> Migrate Here: Archived Farms </span>
+                </a>
+              </SubmitButton>
+            </ExternalLink>
+          </div>
           {/* <br /> */}
           <Head>
             <title>Farm | Soul</title>

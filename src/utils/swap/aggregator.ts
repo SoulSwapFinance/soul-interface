@@ -6,11 +6,11 @@ import {
     NATIVE,
     Percent,
     Price,
+    JSBI,
     // TokenAmount,
     TradeType,
   } from 'sdk'
   import { captureException } from '@sentry/react'
-//   import JSBI from 'jsbi'
   import invariant from 'tiny-invariant'
   
   import { DEX_TO_COMPARE } from 'constants/dexes'

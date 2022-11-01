@@ -26,6 +26,11 @@ export class Route<TInput extends Currency, TOutput extends Currency> {
       'OUTPUT'
     )
 
+    invariant(
+      pairs.every((pair) => pair.platform === pairs[0].platform),
+      'PLATFORM'
+    )
+    
     const path: Token[] = [wrappedInput]
     for (const [i, pair] of pairs.entries()) {
       const currentInput = path[i]

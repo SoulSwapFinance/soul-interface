@@ -3,6 +3,7 @@ import { ChainId } from '../enums'
 import { Currency } from './Currency'
 import invariant from 'tiny-invariant'
 import { validateAndParseAddress } from '../functions/validateAndParseAddress'
+import { WNATIVE } from 'sdk'
 
 /**
  * Represents an ERC20 token with a unique address and some metadata.
@@ -47,6 +48,14 @@ export class Token extends AbstractCurrency {
    */
   public get wrapped(): Token {
     return this
+  }
+
+  public static getNativeWrapper(chainId: ChainId): Token {
+    return WNATIVE[chainId].wrapped
+  }
+
+  public static isNativeWrapper(token: Token): boolean {
+    return WNATIVE[token.chainId].equals(token)
   }
 }
 

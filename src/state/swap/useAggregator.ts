@@ -1,6 +1,6 @@
 import { ChainId, Currency, CurrencyAmount } from 'sdk'
 import { t } from '@lingui/macro'
-import JSBI from 'jsbi'
+import { JSBI } from 'sdk'
 import { useMemo } from 'react'
 
 // import { BAD_RECIPIENT_ADDRESSES } from 'constants/index'

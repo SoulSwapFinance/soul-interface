@@ -13,6 +13,8 @@ import { TradeType } from '../enums/TradeType'
 import { computePriceImpact } from '../functions/computePriceImpact'
 import invariant from 'tiny-invariant'
 import { sortedInsert } from '../functions/sortedInsert'
+import { Platform } from './PlatformBreakdown'
+import { RoutablePlatform } from 'sdk'
 
 // minimal interface so the input output comparator may be shared across types
 interface InputOutput<TInput extends Currency, TOutput extends Currency> {
@@ -75,6 +77,7 @@ export interface BestTradeOptions {
   maxNumResults?: number
   // the maximum number of hops a trade should contain
   maxHops?: number
+  platform?: RoutablePlatform
 }
 
 /**
@@ -84,6 +87,8 @@ export interface BestTradeOptions {
 export class Trade<TInput extends Currency, TOutput extends Currency, TTradeType extends TradeType> {
   // route of the trade, i.e. which pairs the trade goes through and the input/output currencies.
   public readonly route: Route<TInput, TOutput>
+  // platform of the trade, i.e. the selected platform for routing the trade.
+  public readonly platform?: Platform
   // type of the trade, either exact in or exact out.
   public readonly tradeType: TTradeType
   // input amount for the trade assuming no slippage.

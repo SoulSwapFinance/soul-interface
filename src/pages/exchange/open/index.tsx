@@ -360,7 +360,8 @@ export const SwapTokensContent: React.FC<any> = ({
           variant="bordered"
           primaryColor={getChainColor(chainId)}
           onClick={handleSwap}
-          disabled={isSwapPending || isSwapCompleted || !minReceived}
+          disabled={isSwapPending || isSwapCompleted}
+          // || !minReceived}
         >
           {isSwapPending
             ? "Swapping..."
@@ -423,6 +424,7 @@ export const SwapTokensContent: React.FC<any> = ({
               "-"
             )}
           </Typo2> */}
+        { minReceived && 
           <Typo2
             style={{
               width: "100%",
@@ -430,7 +432,7 @@ export const SwapTokensContent: React.FC<any> = ({
               justifyContent: "space-between",
             }}
           >
-            <div>Minimum Received</div>
+           <div>Minimum Received</div>
             {minReceived ? (
               <FormattedValue
           formattedValue={toFormattedBalance(minReceived.toString())}
@@ -440,6 +442,7 @@ export const SwapTokensContent: React.FC<any> = ({
               "-"
             )}
           </Typo2>
+          }
         </Column>
       </ContentBox>
     </Column>
