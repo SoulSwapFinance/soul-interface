@@ -20,6 +20,7 @@ export enum PairState {
 
 export function usePairs(
   currencies: [Currency | undefined, Currency | undefined][],
+  platform?: any // RoutablePlatform
   // platform: UniswapV2RoutablePlatform = UniswapV2RoutablePlatform.SOULSWAP
 ): [PairState, Pair | null][] {
   const { chainId } = useActiveWeb3React()
@@ -91,7 +92,7 @@ export function usePairs(
         ),
       ]
     })
-  }, [protocolFeeDenominator, results, swapFees, tokens]) // platform
+  }, [protocolFeeDenominator, results, swapFees, tokens, platform])
 }
 
 export function usePair(

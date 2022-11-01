@@ -1,6 +1,8 @@
-import { Currency, CurrencyAmount, Pair, Token, Trade, TradeType } from 'sdk'
+import { Currency, CurrencyAmount, Pair, RoutablePlatform, Token, Trade, TradeType } from 'sdk'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { sortTradesByExecutionPrice } from '../utils/prices'
+// import { useIsMultihop } from '../state/user/hooks'
 
 import { ZERO_ADDRESS } from 'constants/index'
 import { NETWORKS_INFO } from 'constants/networks'
@@ -14,9 +16,11 @@ import { useSwapState } from 'state/swap/hooks'
 import { AggregationComparer } from 'state/swap/types'
 import { Aggregator } from 'utils/swap/aggregator'
 import { isAddress } from 'functions/validate'
+import { BASES_TO_CHECK_TRADES_AGAINST } from 'config/routing'
+import { flatMap } from 'lodash'
 
 // TODO: fix ignores
-function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[][] {
+function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency, platform?: any): Pair[][] {
   const allPairCombinations = useAllCurrencyCombinations(currencyA, currencyB)
 
   const allPairs = usePairs(allPairCombinations)
@@ -206,4 +210,88 @@ export function useTradeExactInV2(
     onUpdateCallback,
     loading,
   }
+}
+
+/**
+ * Returns the best trade for the exact amount of tokens in to the given token out
+ */
+ export function useTradeExactInEco(
+  currencyAmountIn?: CurrencyAmount<Currency>,
+  currencyOut?: Currency,
+  platform: RoutablePlatform = RoutablePlatform.SOULSWAP
+): Trade<Currency, Currency, TradeType> | undefined {
+  const { chainId } = useActiveWeb3React()
+  const allowedPairs = useAllCommonPairs(currencyAmountIn?.currency, currencyOut, platform)
+  const multihop = true
+  // const multihop = useIsMultihop()
+
+  return useMemo(() => {
+    if (currencyAmountIn && currencyOut && allowedPairs.length > 0 && chainId && platform.supportsChain(chainId)) {
+      return (
+        // @ts-ignore
+        Trade.bestTradeExactIn(allowedPairs, currencyAmountIn, currencyOut, {
+          maxHops: multihop ? 3 : 1,
+          maxNumResults: 1
+        })[0] ?? null
+      )
+    }
+    return undefined
+  }, [currencyAmountIn, currencyOut, allowedPairs, chainId, platform, multihop])
+}
+
+/**
+ * Returns the best trade for the token in to the exact amount of token out
+ */
+export function useTradeExactOutEco(
+  currencyIn?: Currency,
+  currencyAmountOut?: CurrencyAmount<Currency>,
+  platform: RoutablePlatform = RoutablePlatform.SOULSWAP
+): Trade<Currency, Currency, TradeType> | undefined {
+  const { chainId } = useActiveWeb3React()
+  const allowedPairs = useAllCommonPairs(currencyIn, currencyAmountOut?.currency, platform)
+  const multihop = true
+  // const multihop = useIsMultihop()
+
+  return useMemo(() => {
+    if (currencyIn && currencyAmountOut && allowedPairs.length > 0 && chainId && platform.supportsChain(chainId)) {
+      return (
+        // @ts-ignore
+        Trade.bestTradeExactOut(allowedPairs, currencyIn, currencyAmountOut, {
+          maxHops: multihop ? 3 : 1,
+          maxNumResults: 1
+        })[0] ?? null
+      )
+    }
+    return undefined
+  }, [currencyIn, currencyAmountOut, allowedPairs, chainId, platform, multihop])
+}
+
+/**
+ * Returns the best trade for the exact amount of tokens in to the given token out
+ * for each supported platform. Order is by lowest price ascending.
+ */
+ export function useTradeExactInAllPlatforms(
+  currencyAmountIn?: CurrencyAmount<Currency>,
+  currencyOut?: Currency
+): (Trade<Currency, Currency, TradeType> | undefined)[] {
+  const bestTrades = [
+    useTradeExactInEco(currencyAmountIn, currencyOut, RoutablePlatform.SOULSWAP),
+    useTradeExactInEco(currencyAmountIn, currencyOut, RoutablePlatform.UNISWAP),
+  ]
+  return sortTradesByExecutionPrice(bestTrades).filter(trade => !!trade)
+}
+
+/**
+ * Returns the best trade for the token in to the exact amount of token out
+ * for each supported platform. Order is by lowest price ascending.
+ */
+export function useTradeExactOutAllPlatforms(
+  currencyIn?: Currency,
+  currencyAmountOut?: CurrencyAmount<Currency>
+): (Trade<Currency, Currency, TradeType>  | undefined)[] {
+  const bestTrades = [
+    useTradeExactOutEco(currencyIn, currencyAmountOut, RoutablePlatform.SOULSWAP),
+    useTradeExactOutEco(currencyIn, currencyAmountOut, RoutablePlatform.UNISWAP),
+  ]
+  return sortTradesByExecutionPrice(bestTrades).filter(trade => !!trade)
 }

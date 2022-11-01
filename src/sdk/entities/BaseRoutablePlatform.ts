@@ -1,7 +1,7 @@
 import { ChainId } from 'sdk'
 
 export interface IBaseRoutablePlatform {
-  chainIds: ChainId[]
+  chainIds?: ChainId[]
   name: string
 }
 
@@ -13,7 +13,7 @@ export abstract class BaseRoutablePlatform implements IBaseRoutablePlatform {
   /**
    * @returns List of chainIds supported by the platform
    */
-  public readonly chainIds: ChainId[]
+  public readonly chainIds?: ChainId[]
   /**
    * @property The name of the platform.
    */

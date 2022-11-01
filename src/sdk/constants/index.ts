@@ -1,5 +1,5 @@
 import { ChainId } from '../enums'
-import { JSBI, Percent } from 'sdk'
+import { JSBI } from 'sdk'
 
 export * from './addresses'
 export * from './underworld'
@@ -30,7 +30,7 @@ export enum SolidityType {
 /**
  * Default maximum slippage tolerance at 3%
  */
- export const maximumSlippage = new Percent('3', '100')
+ export const maximumSlippage = .03
 
  
 export const SOLIDITY_TYPE_MAXIMA = {
