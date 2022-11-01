@@ -12,10 +12,7 @@ import {
   TradeType,
   USDC,
   NATIVE,
-  RoutablePlatform,
 } from 'sdk'
-import { useTradeExactInAllPlatforms, useTradeExactOutAllPlatforms } from '../../hooks/Trades'
-
 import { tryParseAmount } from 'functions/parse'
 import { isAddress } from 'functions/validate'
 import { useCurrency } from 'hooks/Tokens'
@@ -49,7 +46,6 @@ import { SwapState } from './reducer'
 import { useCurrencyBalances } from 'state/wallet/hooks'
 import { FeeConfig } from 'hooks/useSwapV2Callback'
 import { Aggregator } from 'utils/swap/aggregator'
-import CurrencyList from 'modals/SearchModal/CurrencyList'
 
 export function useSwapState(): AppState['swap'] {
   return useAppSelector((state) => state.swap)
@@ -172,14 +168,13 @@ function involvesAddress(trade: V2Trade<Currency, Currency, TradeType>, checksum
 }
 
 // from the current swap inputs, compute the best trade and return it.
-export function useDerivedSwapInfo(platformOverride?: RoutablePlatform): {
+export function useDerivedSwapInfo(): {
   to?: string
   currencies: { [field in Field]?: Currency }
   currencyBalances: { [field in Field]?: CurrencyAmount<Currency> }
   parsedAmount: CurrencyAmount<Currency> | undefined
   inputError?: string
   v2Trade: V2Trade<Currency, Currency, TradeType> | undefined
-  allPlatformTrades?: (V2Trade<Currency, Currency, TradeType> | undefined)[] | undefined
   allowedSlippage: Percent
 } {
   const { i18n } = useLingui()
@@ -217,29 +212,7 @@ export function useDerivedSwapInfo(platformOverride?: RoutablePlatform): {
     maxHops: singleHopOnly ? 1 : undefined,
   })
 
-  const bestTradeExactInAllPlatforms = useTradeExactInAllPlatforms(
-    isExactIn ? parsedAmount : undefined,
-    outputCurrency ?? undefined
-  )
-  const bestTradeExactOutAllPlatforms = useTradeExactOutAllPlatforms(
-    inputCurrency ?? undefined,
-    !isExactIn ? parsedAmount : undefined
-  )
-
-  const bestEcoTradeExactIn = bestTradeExactInAllPlatforms[0]
-  const bestEcoTradeExactOut = bestTradeExactOutAllPlatforms[0]
-
-
-  const allPlatformTrades = isExactIn ? bestTradeExactInAllPlatforms : bestTradeExactOutAllPlatforms
-  // If overridden platform selection and a trade for that platform exists, use that.
-  // Otherwise, use the best trade
-  let platformTrade
-  if (platformOverride) {
-    // @ts-ignore: fix later
-    platformTrade = allPlatformTrades.filter(t => t?.platform === platformOverride)[0]
-  }
-
-  const v2Trade = platformTrade ? platformTrade : isExactIn ? bestTradeExactIn : bestTradeExactOut
+  const v2Trade = isExactIn ? bestTradeExactIn : bestTradeExactOut
 
   const currencyBalances = {
     [Field.INPUT]: relevantTokenBalances[0],
@@ -294,7 +267,6 @@ export function useDerivedSwapInfo(platformOverride?: RoutablePlatform): {
     parsedAmount,
     inputError,
     v2Trade: v2Trade ?? undefined,
-    allPlatformTrades,
     allowedSlippage,
   }
 }
