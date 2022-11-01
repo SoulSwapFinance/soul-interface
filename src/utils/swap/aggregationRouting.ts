@@ -1,7 +1,7 @@
 import { ZERO } from 'sdk'
 import { ChainId, Percent, Rounding, Token } from 'sdk'
 import { getAddress } from 'ethers/lib/utils'
-import JSBI from 'jsbi'
+import { JSBI } from 'sdk'
 
 import { Aggregator } from './aggregator'
 

@@ -450,6 +450,9 @@ msgstr ""
 msgid "Earn"
 msgstr ""
 
+msgid "Eco"
+msgstr ""
+
 msgid "English"
 msgstr ""
 
@@ -844,9 +847,6 @@ msgid "Oops!"
 msgstr ""
 
 msgid "Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device"
-msgstr ""
-
-msgid "Open"
 msgstr ""
 
 msgid "Oracle"

@@ -5,7 +5,7 @@ import {
   TELOS
 } from './tokens'
 // a list of tokens by chain
-import { ChainId, Currency, Token, WNATIVE } from '../sdk'
+import { ChainId, Token, WNATIVE } from '../sdk'
 
 // // a list of tokens by chain
 type ChainTokenList = {

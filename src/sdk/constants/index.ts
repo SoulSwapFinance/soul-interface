@@ -1,5 +1,5 @@
 import { ChainId } from '../enums'
-import { JSBI } from 'sdk'
+import { JSBI, Percent } from 'sdk'
 
 export * from './addresses'
 export * from './underworld'
@@ -27,6 +27,12 @@ export enum SolidityType {
   uint256 = 'uint256',
 }
 
+/**
+ * Default maximum slippage tolerance at 3%
+ */
+ export const maximumSlippage = new Percent('3', '100')
+
+ 
 export const SOLIDITY_TYPE_MAXIMA = {
   [SolidityType.uint8]: JSBI.BigInt('0xff'),
   [SolidityType.uint256]: JSBI.BigInt(
@@ -38,3 +44,20 @@ export const A_PRECISION = JSBI.BigInt(100)
 export const MAX_FEE = JSBI.BigInt(10000)
 export const LAMBDA_URL = 'https://9epjsvomc4.execute-api.us-east-1.amazonaws.com/dev'
 export const SOCKET_URL = 'wss://hfimt374ge.execute-api.us-east-1.amazonaws.com/dev'
+
+// exports for internal consumption
+export const ZERO = JSBI.BigInt(0)
+export const ONE = JSBI.BigInt(1)
+export const TWO = JSBI.BigInt(2)
+export const THREE = JSBI.BigInt(3)
+export const FIVE = JSBI.BigInt(5)
+export const TEN = JSBI.BigInt(10)
+export const _25 = JSBI.BigInt(25)
+export const SECONDS_IN_YEAR = JSBI.BigInt(31536000)
+export const _30 = JSBI.BigInt(30)
+export const _100 = JSBI.BigInt(100)
+export const _1000 = JSBI.BigInt(1000)
+export const _10000 = JSBI.BigInt(10000)
+
+export const defaultSwapFee = _25
+export const defaultProtocolFeeDenominator = FIVE

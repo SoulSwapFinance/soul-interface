@@ -26,6 +26,10 @@ export class CurrencyAmount<T extends Currency> extends Fraction {
     return new CurrencyAmount(currency, rawAmount)
   }
 
+  public get raw(): JSBI {
+    return this.numerator
+  }
+
   /**
    * Construct a currency amount with a denominator that is not equal to 1
    * @param currency the currency
