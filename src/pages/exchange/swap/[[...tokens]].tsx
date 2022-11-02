@@ -151,7 +151,6 @@ const Swap = () => {
   }
 
   const userHasSpecifiedInputOutput = Boolean(
-    /* @ts-ignore TYPE NEEDS FIXING */
     currencies[Field.INPUT] && currencies[Field.OUTPUT] && parsedAmounts[independentField]?.greaterThan(JSBI.BigInt(0))
   )
 
@@ -423,7 +422,7 @@ const Swap = () => {
           setFromUsd((Number(newFromUsd) * Number(newTrade.trade.from?.tokenAmount)).toString())
           setToUsd((Number(newToUsd) * Number((newTrade.trade.to?.tokenAmount))).toString())
           setOutputAmount(Number(newTrade.trade.to?.tokenAmount).toString())
-          console.log('outputAmount:%s', outputAmount)
+          // console.log('outputAmount:%s', outputAmount)
         }
 
         setLoading(false)
@@ -479,7 +478,7 @@ const Swap = () => {
         tokens={importTokensNotInDefault}
         onConfirm={handleConfirmTokenWarning}
       />
-        {![ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+        {![ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <div className="flex flex-col gap-3 mt-12 justify-center">
           {/* <div className="flex mb-4 items-center justify-center"> */}
           <SwapHeader inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
@@ -492,7 +491,7 @@ const Swap = () => {
           </Button>
     </div> }
 
-        { [ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+        { [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
           <SwapLayoutCard>
             <SwapHeader inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
           <SwapAssetPanel
