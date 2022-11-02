@@ -136,7 +136,7 @@ const ChainSelection: React.FC<any> = ({
   const { chainId, account, connector, deactivate, library } = useActiveWeb3React()
 
   const [fromChain, setFromChain] = useState(chainId);
-  const [toChain, setToChain] = useState(250);
+  const [toChain, setToChain] = useState(chainId == 250 ? 43114 : 250);
   const { getBridgeTokens } = useBridgeApi();
   const { forceSwap, DEFAULT_PROVIDERS } = useMultiChain();
 

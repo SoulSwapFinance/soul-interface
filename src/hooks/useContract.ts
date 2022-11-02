@@ -26,6 +26,8 @@ import {
   SUMMONER_ASSISTANT_ADDRESS,
   ONCHAIN_AGGREGATOR_ORACLE,
   OFFCHAIN_AGGREGATOR_ORACLE,
+  SPOOKY_ROUTER_ADDRESS,
+  SPIRIT_ROUTER_ADDRESS,
 } from 'constants/addresses'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
@@ -69,6 +71,7 @@ import SOUL_BOND_V2_ABI from 'constants/abis/soulswap/soulbondv2.json'
 import ALCX_REWARDER_ABI from 'constants/abis/alcx-rewarder.json'
 import CLONE_REWARDER_ABI from 'constants/abis/clone-rewarder.json'
 import ARCHER_ROUTER_ABI from 'constants/abis/archer-router.json'
+import SPIRIT_ROUTER_ABI from 'constants/abis/spiritswap-router.json'
 import BASE_SWAPPER_ABI from 'constants/abis/swapper.json'
 import ANYSWAP_ERC20_ABI from 'constants/abis/anyswap_erc20.json'
 import SPOOKY_FACTORY_ABI from 'constants/abis/spookyswap-factory.json'
@@ -102,6 +105,7 @@ import LOTTERY_ABI from 'constants/abis/soulswap/lottery.json' // 28 JUL
 import LUXOR_ABI from 'constants/abis/soulswap/luxor.json'
 import LUXOR_TREASURY_ABI from 'constants/abis/soulswap/luxor-treasury.json'
 import TEAM_WALLET_ABI from 'constants/abis/soulswap/team-wallet.json'
+import SPOOKY_ROUTER_ABI from 'constants/abis/soulswap/spooky-router.json'
 import SOR_STAKING_ABI from 'constants/abis/soulswap/sor-staking.json'
 import LUXOR_STAKING_ABI from 'constants/abis/soulswap/luxor-staking.json'
 import LUXOR_STAKING_HELPER_ABI from 'constants/abis/soulswap/luxor-staking-helper.json'
@@ -463,6 +467,16 @@ export function useRouterContract(useArcher = false, withSignerIfPossible?: bool
   const abi = useArcher ? ARCHER_ROUTER_ABI : ROUTER_ABI
 
   return useContract(address, abi, withSignerIfPossible)
+}
+
+export function useSpookyRouterContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SPOOKY_ROUTER_ADDRESS[chainId], SPOOKY_ROUTER_ABI, withSignerIfPossible)
+}
+
+export function useSpiritRouterContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SPIRIT_ROUTER_ADDRESS[chainId], SPIRIT_ROUTER_ABI, withSignerIfPossible)
 }
 
 export function useEnchantmentContract(withSignerIfPossible?: boolean): Contract | null {

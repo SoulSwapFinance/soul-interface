@@ -367,8 +367,8 @@ export const SwapTokensContent: React.FC<any> = ({
             ? "Swapping..."
             : isSwapCompleted
               ? "Swap successful"
-              : !minReceived
-                ? "Fetching best price..."
+              // : !minReceived
+              //   ? "Fetching best price..."
                 : "Swap"}
         </SubmitButton>
       ) : (
@@ -388,7 +388,7 @@ export const SwapTokensContent: React.FC<any> = ({
       <Spacer
         size="sm"
       />
-      <ContentBox style={{ backgroundColor: "#000000" }}>
+      {/* <ContentBox style={{ backgroundColor: "#000000" }}>
         <Column style={{ width: "100%", gap: "1rem" }}>
           {/* <Typo2
             style={{
@@ -424,7 +424,7 @@ export const SwapTokensContent: React.FC<any> = ({
               "-"
             )}
           </Typo2> */}
-        { minReceived && 
+        {/* { minReceived && 
           <Typo2
             style={{
               width: "100%",
@@ -444,7 +444,7 @@ export const SwapTokensContent: React.FC<any> = ({
           </Typo2>
           }
         </Column>
-      </ContentBox>
+      </ContentBox> */}
     </Column>
   );
 };
