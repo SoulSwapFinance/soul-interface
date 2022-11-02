@@ -7,12 +7,12 @@ const ModalClose: React.FC<any> = ({ onDismiss }) => {
   return (
     <div style={{ position: "absolute", right: "1.5rem", top: "1.5rem" }}>
       <OverlayButton onClick={() => onDismiss()}>
-        <Image
+        {/* <Image
           alt="cross symbol"
           src={CrossSymbol}
           width="0.7rem"
           height="0.7rem"
-        />
+        /> */}
       </OverlayButton>
     </div>
   );
