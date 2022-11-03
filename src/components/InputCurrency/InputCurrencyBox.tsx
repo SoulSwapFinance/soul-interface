@@ -61,6 +61,7 @@ const InputCurrencyBox: React.FC<any> = ({
         handleValue={setValue}
         handleError={setError}
         token={NATIVE[chainId]}
+        chainId={chainId}
       />
       <Row style={{ alignItems: "center" }}>
         <Button

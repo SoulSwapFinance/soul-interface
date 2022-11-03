@@ -5,17 +5,22 @@ import Row from "../Row";
 import { Typo1, Typo2 } from "../index";
 import Image from 'components/Image'
 import Spacer from "components/Spacer";
+import { useActiveWeb3React } from "services/web3";
+import { ChainId } from "sdk";
+import Typography from "components/Typography";
 
 export const TokenBalance: React.FC<any> = ({ token }) => {
+  const { chainId } = useActiveWeb3React()
 
   const formattedBalance = toFormattedBalance(
     hexToUnit(token.balanceOf, token.decimals)
   );
   return (
     <Row 
-    style={{ justifyContent: "space-between" }}
+    style={ { justifyContent: "space-between" } }
     >
-      <Row style={{ alignItems: "center" }}>
+      { [ChainId.FANTOM].includes(chainId) && ( 
+        <Row style={{ alignItems: "center" }}>
         <Spacer size={'xs'} />
         <Image
           alt=""
@@ -27,7 +32,25 @@ export const TokenBalance: React.FC<any> = ({ token }) => {
       <Spacer size={'lg'} />
         <Typo1 style={{ fontWeight: "bold" }}>{token.symbol}</Typo1>
       </Row>
-      <Spacer size={'md'} />
+      )}
+      { [ChainId.AVALANCHE].includes(chainId) && ( 
+        <div className={"flex justify-betwwen"}>
+        <Spacer size={'lg'} />
+        <Image
+          alt=""
+          height={'28px'}
+          width={'28px'}
+          // style={{ marginLeft: ".1rem" }}
+          src={token.logoURL}
+        />
+      <Spacer size={'sm'} />
+        <Typography>{`${token.name} (${token.symbol})`}</Typography>
+        {/* <Typo1 style={{ fontWeight: "bold" }}>{token.symbol}</Typo1> */}
+      </div>
+      )}
+      { [ChainId.FANTOM].includes(chainId) && (
+      <Spacer size={'md'} />)}
+      { [ChainId.FANTOM].includes(chainId) && (
       <Row style={{ alignItems: "center" }}>
       <Spacer size={'lg'} />
         <Typo2
@@ -41,6 +64,7 @@ export const TokenBalance: React.FC<any> = ({ token }) => {
           {formattedBalance[1]}
         </Typo2>
       </Row>
+      )}
     </Row>
   );
 };

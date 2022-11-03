@@ -20,7 +20,7 @@ const SOUL = (i18n: I18n) => [
 const Markets = () => {
 	const { chainId } = useActiveWeb3React()
 	const [selectedToken, setToken ] = useState()
-	const [logo, setLogo] = useState(0)
+	const [logo, setLogo] = useState()
 	const [tokenPrice, setTokenPrice] = useState()
 	const [tokenSymbol, setTokenSymbol] = useState()
 	const [marketData, setMarketData] = useState(false)
