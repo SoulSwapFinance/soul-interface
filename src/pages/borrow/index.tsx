@@ -21,14 +21,18 @@ import MarketHeader from 'features/lending/components/MarketHeader'
 import { useUnderworldBorrowPositions } from 'features/portfolio/AssetBalances/underworld/hooks'
 import { e10 } from 'functions/math'
 import router from 'next/router'
+import { useActiveWeb3React } from 'services/web3'
+import { UNDERWORLD_PAIRS } from 'sdk'
+import { useUnderworldPairInfo, useUnderworldUserInfo } from 'hooks/useAPI'
 
 // const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 
 export default function Borrow() {
   const { i18n } = useLingui()
-  const addresses = useUnderworldPairAddresses()
+  const { chainId } = useActiveWeb3React()
+  // const addresses = useUnderworldPairAddresses()
+  const addresses = UNDERWORLD_PAIRS[chainId]
   const pairs = useUnderworldPairs(addresses)
-
   const positions = useUnderworldBorrowPositions(pairs)
 
   const data = useSearchAndSort(
@@ -38,7 +42,6 @@ export default function Borrow() {
   )
 
   const [numDisplayed, setNumDisplayed] = useInfiniteScroll(data.items)
-  // let pairPrice = '0'
 
   return (
     <BorrowLayout>

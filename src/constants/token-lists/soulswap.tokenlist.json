@@ -44,7 +44,7 @@
         "symbol": "USDC",
         "decimals": 6,
         "chainId": 43114,
-        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/avalanche/assets/0x04068DA6C83AFCFA0e13ba15A6696662335D5B75/logo.png"
+        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/avalanche/assets/0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E/logo.png"
       },
       {
         "name": "Wrapped Bitcoin",

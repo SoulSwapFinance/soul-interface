@@ -6,7 +6,6 @@ import { ChainlinkOracle } from 'entities/oracles'
 import { IOracle } from 'interfaces'
 
 import { e10 } from './math'
-import {  } from '../constants'
 
 export function getOracle(chainId: ChainId, address: string, data: string): IOracle {
   if (address.toLowerCase() === CHAINLINK_ORACLE_ADDRESS[chainId].toLowerCase()) {
