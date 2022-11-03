@@ -107,7 +107,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Cross`)}
           </Typography>
         </NavLink>
-        { ![ChainId.FANTOM].includes(chainId) &&
+        { ![ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <NavLink
           activeClassName={classNames(
             "border rounded bg-black",
@@ -135,7 +135,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Multi`)}
           </Typography>
         </NavLink> */}
-        { [ChainId.FANTOM].includes(chainId) &&
+        { [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <NavLink
           activeClassName={classNames(
             "border rounded bg-black",
