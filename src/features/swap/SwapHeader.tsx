@@ -47,7 +47,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const hoverColor = `${chainColor} hover:text-white`
   return (
     <div className="flex items-center justify-between gap-2">
-      <div className="flex gap-4 mx-2">
+      <div className="flex gap-1 mx-1">
       {featureEnabled(Feature.SWAP, chainId) &&
           <NavLink
             activeClassName={classNames(
@@ -107,7 +107,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Cross`)}
           </Typography>
         </NavLink>
-        { ![ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+        {/* { ![ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) && */}
         <NavLink
           activeClassName={classNames(
             "border rounded bg-black",
@@ -121,7 +121,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Bridge`)}
           </Typography>
         </NavLink>
-        }
+        {/* } */}
         {/* <NavLink
           activeClassName={classNames(
             "border rounded bg-black",
