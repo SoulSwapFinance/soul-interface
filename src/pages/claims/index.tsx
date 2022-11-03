@@ -1,6 +1,6 @@
 import { ChainId, Currency, CurrencyAmount, Token } from 'sdk'
 import React, { useEffect, useState } from 'react'
-import { useClaimCallback, useUserClaimData, useUserUnclaimedAmount } from 'state/claim/hooks'
+import { useClaimCallback, useUserUnclaimedAmount } from 'state/claim/hooks' // 
 import { useModalOpen, useToggleSelfClaimModal } from 'state/application/hooks'
 import { ApplicationModal } from 'state/application/actions'
 import { Button } from 'components/Button'
@@ -35,11 +35,11 @@ export default function Claims() {
   const [attempting, setAttempting] = useState<boolean>(false)
 
   // get user claim data
-  const userClaimData = useUserClaimData(account)
+  // const userClaimData = useUserClaimData(account)
 
   // monitor the status of the claim from contracts and txns
-  const { claimCallback } = useClaimCallback(account)
-  const unclaimedAmount: CurrencyAmount<Currency> | undefined = useUserUnclaimedAmount(account)
+  const { claimCallback } = useClaimCallback()
+  const unclaimedAmount: CurrencyAmount<Currency> | undefined = useUserUnclaimedAmount()
   const { claimSubmitted } = useUserHasSubmittedClaim(account ?? undefined)
   // const claimConfirmed = Boolean(claimTxn?.receipt)
   const claimConfirmed = false

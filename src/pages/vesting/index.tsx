@@ -39,10 +39,10 @@ export default function Vesting() {
   // const userClaimData = useUserClaimData(account)
 
   // monitor the status of the claim from contracts and txns
-  const { claimCallback } = useClaimCallback(account)
-  const unclaimedAmount: CurrencyAmount<Currency> | undefined = useUserUnclaimedAmount(account)
-  // console.log('unclaimedAmount:', unclaimedAmount)
+  const { claimCallback } = useClaimCallback()
+  const unclaimedAmount: CurrencyAmount<Currency> | undefined = useUserUnclaimedAmount()
   const { claimSubmitted } = useUserHasSubmittedClaim(account ?? undefined)
+  // console.log('unclaimedAmount:', unclaimedAmount)
   // const claimConfirmed = Boolean(claimTxn?.receipt)
   const claimConfirmed = false
 
