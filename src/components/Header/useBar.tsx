@@ -282,11 +282,11 @@ const useMenu: UseBar = () => {
               title: i18n._(t`Lend`),
               link: '/lend',
             },
-            {
-              key: 'borrow',
-              title: i18n._(t`Borrow`),
-              link: '/borrow',
-            },
+            // {
+            //   key: 'borrow',
+            //   title: i18n._(t`Borrow`),
+            //   link: '/borrow',
+            // },
             {
               key: 'underworld-farms',
               title: i18n._(t`Farms`),

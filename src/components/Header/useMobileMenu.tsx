@@ -197,11 +197,11 @@ const useMobileMenu: UseMobileMenu = () => {
             title: i18n._(t`Lend`),
             link: '/lend',
            },
-          {
-            key: 'borrow',
-            title: i18n._(t`Borrow`),
-            link: '/borrow',
-           },
+          // {
+          //   key: 'borrow',
+          //   title: i18n._(t`Borrow`),
+          //   link: '/borrow',
+          //  },
         ],
       })
 
