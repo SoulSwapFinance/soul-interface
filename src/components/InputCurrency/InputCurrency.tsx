@@ -32,7 +32,7 @@ const InputCurrency: React.FC<any> = ({
       return;
     }
 
-    if (chainId == ChainId.FANTON && parseFloat(value) > max) {
+    if (chainId == ChainId.FANTOM && parseFloat(value) > max) {
       handleError("Insufficient Funds");
     }
 
