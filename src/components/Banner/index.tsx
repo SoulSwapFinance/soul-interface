@@ -64,7 +64,7 @@ export const Feature: FC<IFeature> = ({ chainId }) => (
 )
 
 export const NewFeature: FC<IFeature> = ({ chainId }) => (
-  <div className={classNames(chainId == ChainId.FANTOM ? "relative items-center w-full" : 'hidden')}>
+  <div className={classNames([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? "relative items-center w-full" : 'hidden')}>
     <div className="w-full">
       <div className="text-center">
         <p className="font-medium mb-2 mt-2 text-center text-white">
