@@ -78,7 +78,7 @@ const SwapModalHeader: FC<SwapModalHeader> = ({
                   <Typography className="text-secondary">
                     ${fiatValueOutput?.toFixed(2)}{' '}
                     <Typography variant="xs" component="span">
-                      ({change.toFixed(2)}%)
+                      {change > 0 && `(${change.toFixed(2)}%)`}
                     </Typography>
                   </Typography>
                 )}

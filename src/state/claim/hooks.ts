@@ -47,16 +47,17 @@ function fetchClaim(account: string, chainId: ChainId): Promise<any | UserClaimD
 
 // parse soulDistributorContract blob and detect if user has claim data
 // null means we know it does not
-export function useUserClaimData(account: string | null | undefined): UserClaimData | null | undefined {
+export function useUserClaimData(): UserClaimData | null | undefined {
+  const { account, chainId } = useActiveWeb3React()
 
-  const key = `${250}:${account}`
+  const key = `${chainId}:${account}`
   const [claimInfo, setClaimInfo] = useState<{
     [key: string]: UserClaimData | null
   }>({})
 
   useEffect(() => {
-    if (!account || !250) return
-    fetchClaim(account, 250).then((accountClaimInfo) =>
+    if (!account || !chainId) return
+    fetchClaim(account, chainId).then((accountClaimInfo) =>
       setClaimInfo((claimInfo) => {
         // console.log('claimInfo:', claimInfo, accountClaimInfo, key)
         return {
@@ -65,25 +66,27 @@ export function useUserClaimData(account: string | null | undefined): UserClaimD
         }
       })
     )
-  }, [account, 250, key])
+  }, [account, chainId, key])
 
-  return account && 250 ? claimInfo[key] : undefined
+  return account && chainId ? claimInfo[key] : undefined
 }
 
 // check if user is in blob and has not yet claimed SOUL
-export function useUserHasAvailableClaim(account: string | null | undefined): boolean {
-  const userClaimData = useUserClaimData(account)
+export function useUserHasAvailableClaim(): boolean {
+  
+  const userClaimData = useUserClaimData()
   const soulDistributorContract = useMerkleDistributorContract()
   const isClaimedResult = useSingleCallResult(soulDistributorContract, 'isClaimed', [userClaimData?.index])
   // user is in blob and contract marks as unclaimed
   return Boolean(userClaimData && !isClaimedResult.loading && isClaimedResult.result?.[0] === false)
 }
 
-export function useUserUnclaimedAmount(account: string | null | undefined): CurrencyAmount<Currency> | undefined {
-  const userClaimData = useUserClaimData(account)
-  const canClaim = useUserHasAvailableClaim(account)
+export function useUserUnclaimedAmount(): CurrencyAmount<Currency> | undefined {
+  const { account, chainId } = useActiveWeb3React()
+  const userClaimData = useUserClaimData()
+  const canClaim = useUserHasAvailableClaim()
 
-  const soul = SOUL[250]
+  const soul = SOUL[chainId]
 
   console.log('claimStats:', {
     canClaim: canClaim,
@@ -98,15 +101,15 @@ export function useUserUnclaimedAmount(account: string | null | undefined): Curr
   return CurrencyAmount.fromRawAmount(soul, JSBI.BigInt(userClaimData.amount))
 }
 
-export function useClaimCallback(account: string | null | undefined): {
+export function useClaimCallback(): {
   claimCallback: () => Promise<string>
 } {
   // get claim data for this account
-  const { library, chainId } = useActiveWeb3React()
-  const claimData = useUserClaimData(account)
+  const { library, account, chainId } = useActiveWeb3React()
+  const claimData = useUserClaimData()
 
   // used for popup summary
-  const unClaimedAmount: CurrencyAmount<Currency> | undefined = useUserUnclaimedAmount(account)
+  const unClaimedAmount: CurrencyAmount<Currency> | undefined = useUserUnclaimedAmount()
   const addTransaction = useTransactionAdder()
   const soulDistributorContract = useMerkleDistributorContract()
 
