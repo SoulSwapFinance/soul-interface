@@ -57,8 +57,9 @@ const features: FeatureMap = {
     Feature.BONDS,
     Feature.VAULT,
     Feature.COFFINBOX,
+    Feature.AGGREGATE,
     Feature.EXPLORE,
-    Feature.UNDERWORLD,
+    Feature.UNDERWORLD
   ],
 
   [ChainId.FANTOM]: [
