@@ -151,12 +151,12 @@ export default function Pair() {
               </div>
               <div className="text-xs text-secondary">Liquidity Pool</div>
             </div>
-            <div className="rounded-3xl text-sm bg-[#414a6c] py-px px-2 flex items-center space-x-1">
+            {/* <div className="rounded-3xl text-sm bg-[#414a6c] py-px px-2 flex items-center space-x-1">
                         <div className="overflow-hidden overflow-ellipsis whitespace-nowrap">View Terminal</div>
                       <a href={`https://geckoterminal.com/ftm/pools/${pair?.id}`} target="_blank" rel="noreferrer">
                         <LinkIcon size={16} />
               </a>
-                </div>
+                </div> */}
                 </div>
         </div>
       </Background>
@@ -200,7 +200,7 @@ export default function Pair() {
               <div className="font-bold">
                 1 {[pair?.token0, pair?.token1][i]?.symbol} = {formatNumber([pair?.token1Price, pair?.token0Price][i])}{' '}
                 {[pair?.token1, pair?.token0][i]?.symbol} (
-                {formatNumber([pair?.token1, pair?.token0][i]?.derivedETH * nativePrice, true)})
+                {formatNumber([pair?.token0, pair?.token1][i]?.derivedETH * nativePrice, true)})
               </div>
             </div>
           ))}
