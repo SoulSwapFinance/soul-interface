@@ -5,15 +5,10 @@ const initial: any = {
   getAccountTransactionHistory: new Map([]),
   getTokenPrice: null,
   getGasPrice: null,
-  getFMintForAccount: new Map([]),
   getDelegationsForAccount: new Map([]),
   getDelegations: null,
   getTokenListForAccount: new Map([]),
   getAssetsListForAccount: new Map([]),
-  getGovernanceContracts: null,
-  getGovernanceProposals: null,
-  getGovernanceProposal: null,
-  getEstimatedRewards: null,
 };
 export const FantomApiContext = React.createContext(null);
 // @ts-ignore

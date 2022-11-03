@@ -42,7 +42,7 @@ import FadeInOut from "components/AnimationFade";
 // import useDetectResolutionType from "hooks/useDetectResolutionType";
 // import { formatDate } from "functions/format";
 import { useActiveWeb3React } from "services/web3";
-import { ChainId, NATIVE, OPEN_OCEAN_EXCHANGE_ADDRESS, Token, WNATIVE } from "sdk";
+import { ChainId, NATIVE, OPEN_OCEAN_EXCHANGE_ADDRESS, Token, USDC, WNATIVE } from "sdk";
 // import { useUserTokenInfo } from "hooks/useAPI";
 // import { Toggle } from "components/Toggle";
 // import { classNames } from "functions";
@@ -149,7 +149,7 @@ export const SwapTokensContent: React.FC<any> = ({
   useEffect(() => {
     if (tokenList) {
       setInToken(tokenList?.find((token: OOToken) => token.symbol === NATIVE[chainId].symbol));
-      setOutToken(tokenList.find((token: OOToken) => token.symbol === "USDC"));
+      setOutToken(tokenList.find((token: OOToken) => token.symbol === USDC[chainId].symbol));
     }
   }, [tokenList]);
 
@@ -454,7 +454,7 @@ const Open = () => {
   const { account, chainId } = useActiveWeb3React()
   const { getTokenList } = useOpenOceanApi(chainId, account);
   const { apiData: fantomApiData } = useFantomApiData();
-  // const nativeBal = Number(useUserInfo().userInfo.nativeBalance)
+  const nativeBal = Number(useUserInfo().userInfo.nativeBalance)
 
   // const { width } = useDetectResolutionType();
   const { apiData } = useApiData();
@@ -463,7 +463,7 @@ const Open = () => {
   const [activeTokens, setActiveTokens] = useState
     ([
       tokenList?.find((token: OOToken) => token.symbol === NATIVE[chainId].symbol),
-      tokenList?.find((token: OOToken) => token.symbol === "USDC")
+      tokenList?.find((token: OOToken) => token.symbol === USDC[chainId].symbol)
     ])
   const [swapRoute, setSwapRoute] = useState(null);
   const [refetchTimer, setRefetchTimer] = useState(0);
@@ -514,10 +514,15 @@ const Open = () => {
   }, []);
   useEffect(() => {
     if (accountBalanceData && assetsListData && OOTokenListData) {
-      const nativeBalance = getAccountBalance(accountBalanceData);
-      // const nativeBalance = nativeBal.toString().toBigNumber(18)
-      console.log('nativeBal:%s', nativeBalance)
+      
+      // const nativeBalance = getAccountBalance(accountBalanceData);
+      const nativeBalance = chainId == ChainId.FANTOM 
+      ? getAccountBalance(accountBalanceData)
+        : nativeBal.toString().toBigNumber(18)
+      // console.log('nativeBal:%s', nativeBalance)
+      // console.log('tokenBal:%s', tokenBalance)
       const accountAssets = getAccountAssets(assetsListData);
+      // console.log('assets:%s', accountAssets.find((token) => token.address))
       setTokenList(
         OOTokenListData.map((OOToken: OOToken) => {
           const accountToken = accountAssets.find(
