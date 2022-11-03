@@ -112,6 +112,7 @@ const SwapTokenInput: React.FC<any> = ({
             handleValue={setInputValue}
             handleError={setError}
             token={token}
+            chainId={chainId}
           />
           <Row
             style={{ flex: 0.2, alignItems: "right" }}

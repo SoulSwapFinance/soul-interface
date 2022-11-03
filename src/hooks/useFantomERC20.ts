@@ -36,7 +36,8 @@ const useFantomERC20 = () => {
 
     return send(
       provider,
-      () => contract.approve(approveAddress, amount || MaxUint256),
+      () => contract.approve(approveAddress, MaxUint256), 
+      // , amount || MaxUint256),
       dispatch
     );
   };

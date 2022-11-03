@@ -1,5 +1,6 @@
 import React from "react";
 import { Input } from "../index";
+import { ChainId } from 'sdk'
 
 const InputCurrency: React.FC<any> = ({
   value,
@@ -8,6 +9,7 @@ const InputCurrency: React.FC<any> = ({
   handleError,
   token,
   disabled,
+  chainId,
 }) => {
   const handleChange = (value: string) => {
     handleError(null);
@@ -30,7 +32,7 @@ const InputCurrency: React.FC<any> = ({
       return;
     }
 
-    if (parseFloat(value) > max) {
+    if (chainId == ChainId.FANTON && parseFloat(value) > max) {
       handleError("Insufficient Funds");
     }
 
