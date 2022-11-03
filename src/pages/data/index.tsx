@@ -17,7 +17,7 @@ export default function Data() {
   const { tokenInfo } = useTokenInfo(SOUL_ADDRESS[ChainId.FANTOM])
   // const { price }= usePriceUSD(SOUL_ADDRESS[ChainId.FANTOM])
   // const { supply }= useTotalSupply(SOUL_ADDRESS[ChainId.FANTOM])
-  // const price = getPrice()//0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7, 0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e, 10000000000000000000, 43114)
+  // const price = getPrice()//0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7, 0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E, 10000000000000000000, 43114)
   // const [tabIndex, setTabIndex] = useState(0)
   return (
     <Container id="chains-page" className="py-4 space-y-6 md:py-8 lg:py-12" maxWidth="6xl">

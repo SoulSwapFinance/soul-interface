@@ -1,5 +1,4 @@
 import { ChainId } from 'sdk'
-
 import { Oracle } from './Oracle'
 
 // https://docs.chain.link/docs/ethereum-addresses

@@ -67,8 +67,10 @@ export function useUnderworldPairAddresses(): string[] {
   const coffinBoxContract = useCoffinBoxContract()
   const { chainId } = useActiveWeb3React()
   // const useEvents = false
-  const useEvents = chainId && chainId !== ChainId.BSC && chainId 
-  !== ChainId.MATIC && chainId !== ChainId.ARBITRUM
+  const useEvents = chainId 
+  && chainId !== ChainId.BSC 
+  && chainId !== ChainId.MATIC 
+  && chainId !== ChainId.ARBITRUM
   const allTokens = useUnderworldTokens()
   const events = useQueryFilter({
     chainId,
@@ -84,9 +86,7 @@ export function useUnderworldPairAddresses(): string[] {
       useEvents
         ? events?.map((event) => ({
             address:
-              // @ts-ignore TYPE NEEDS FIXING
               event.args.cloneAddress,
-            // @ts-ignore TYPE NEEDS FIXING
             data: event.args.data,
           }))
         : clones
@@ -102,7 +102,6 @@ export function useUnderworldPairAddresses(): string[] {
             BLACKLISTED_TOKENS.includes(collateral) ||
             BLACKLISTED_TOKENS.includes(asset) ||
             BLACKLISTED_ORACLES.includes(oracle) ||
-            // @ts-ignore TYPE NEEDS FIXING
             !validateChainlinkOracleData(chainId, allTokens[collateral], allTokens[asset], oracleData)
           ) {
             return previousValue
@@ -125,7 +124,6 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
 
   const boringHelperContract = useBoringHelperContract()
 
-  // @ts-ignore TYPE NEEDS FIXING
   const wnative = WNATIVE_ADDRESS[chainId]
 
   const currency: Token = chainId == ChainId.FANTOM ? DAI[chainId] : USDC[chainId]
@@ -135,7 +133,6 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
   const pollArgs = useMemo(() => [account, addresses], [account, addresses])
 
   // TODO: Replace
-  // @ts-ignore TYPE NEEDS FIXING
   const pollUnderworldPairs = useSingleCallResult(boringHelperContract, 'pollKashiPairs', pollArgs, { blocksPerFetch: 0 })?.result?.[0]
 
   const strategies = useCoffinStrategies({ chainId })
@@ -145,11 +142,9 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
   const getBalancesArgs = useMemo(() => [account, tokenAddresses], [account, tokenAddresses])
 
   // TODO: Replace
-  // @ts-ignore TYPE NEEDS FIXING
   const balancesCallState = useSingleCallResult(boringHelperContract, 'getBalances', getBalancesArgs)
 
   const balances = balancesCallState?.result?.[0]?.reduce(
-    // @ts-ignore TYPE NEEDS FIXING
     (previousValue, currentValue) => {
       return { ...previousValue, [currentValue[0]]: currentValue }
     },
@@ -167,7 +162,6 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
       const usd = e10(currentValue.decimals).mulDiv((balances[currency.address]?.rate || 0), balance.rate)
       // : usd = BigNumber.from(0)
       
-      // @ts-ignore TYPE NEEDS FIXING
       const symbol = currentValue.address === wnative ? NATIVE[chainId].symbol : currentValue.symbol
       return {
         ...previousValue,
@@ -195,9 +189,7 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
 
         pair.address = currentValue
         pair.oracle = getOracle(chainId, pair.oracle, pair.oracle.data)
-        // @ts-ignore TYPE NEEDS FIXING
         pair.asset = pairTokens[pair.asset]
-        // @ts-ignore TYPE NEEDS FIXING
         pair.collateral = pairTokens[pair.collateral]
 
         pair.elapsedSeconds = BigNumber.from(Date.now()).div('1000').sub(pair.accrueInfo.lastAccrued)
@@ -404,6 +396,5 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
 }
 
 export function useUnderworldPair(address: string) {
-  // @ts-ignore TYPE NEEDS FIXING
   return useUnderworldPairs([getAddress(address)])[0]
 }

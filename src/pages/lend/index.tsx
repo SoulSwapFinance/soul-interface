@@ -21,14 +21,19 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import { RecoilRoot } from 'recoil'
 // import { e10 } from 'functions/math'
 import { useUnderworldPairInfo, useUnderworldUserInfo } from 'hooks/useAPI'
+import { ChainId, UNDERWORLD_PAIRS } from 'sdk'
+import { useActiveWeb3React } from 'services/web3'
 
 // const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 
 export default function Lend() {
   const { i18n } = useLingui()
+  const { chainId } = useActiveWeb3React()
 
-  const addresses = useUnderworldPairAddresses()
-
+  // const addresses = useUnderworldPairAddresses()
+  const addresses = UNDERWORLD_PAIRS[chainId]
+  // console.log('Underworld Addresses', addresses)
+  
   const pairs = useUnderworldPairs(addresses)
 
   const positions = useUnderworldLendPositions(pairs)
@@ -205,7 +210,11 @@ const LendEntry = ({ pair, userPosition = false }) => {
   const borrowedAmount = Number(underworldUserInfo.userBorrowPart) / 10**assetDecimals
   const suppliedAmount = Number(underworldUserInfo.userBalance) // 10**lpDecimals
   const collateralAmount = Number(underworldUserInfo.userCollateralShare) / 10**collateralDecimals
+  
   // const walletValue = assetBalance * assetPrice
+  const assetLogoURI =underworldUserInfo.assetLogoURI
+  const collateralLogoURI =underworldUserInfo.collateralLogoURI
+
   const borrowedValue = borrowedAmount * assetPrice
   const collateralValue = collateralAmount * collateralPrice
   const userDepositedValue = suppliedAmount * assetPrice
@@ -235,7 +244,7 @@ const LendEntry = ({ pair, userPosition = false }) => {
               <Image
                 height={48}
                 width={48}
-                src={pair.asset.tokenInfo.logoURI}
+                src={assetLogoURI}
                 className="w-5 h-5 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
                 alt={pair.asset.tokenInfo.symbol}
               />
@@ -243,7 +252,7 @@ const LendEntry = ({ pair, userPosition = false }) => {
               <Image
                 height={48}
                 width={48}
-                src={pair.collateral.tokenInfo.logoURI}
+                src={collateralLogoURI}
                 className="w-5 h-5 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
                 alt={pair.collateral.tokenInfo.symbol}
               />
@@ -260,14 +269,14 @@ const LendEntry = ({ pair, userPosition = false }) => {
                 <Image
                 height={36}
                 width={36}
-                src={pair.asset.tokenInfo.logoURI}
+                src={assetLogoURI}
                 className="w-2 h-2 p-2 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
                 alt={pair.asset.tokenInfo.symbol}
               />
                 <Image
                 height={36}
                 width={36}
-                src={pair.collateral.tokenInfo.logoURI}
+                src={collateralLogoURI}
                 className="w-2 h-2 p-2 rounded-sm md:w-10 md:h-10 lg:w-12 lg:h-12"
                 alt={pair.collateral.tokenInfo.symbol}
               />
