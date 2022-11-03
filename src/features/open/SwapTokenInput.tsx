@@ -14,6 +14,7 @@ import useFantomNative from "hooks/useFantomNative";
 import { useActiveWeb3React } from "services/web3";
 import { SubmitButton } from "features/summoner/Styles";
 import { getChainColor } from "constants/chains";
+import { ChainId } from "sdk";
 
 const SwapTokenInput: React.FC<any> = ({
     inputValue,
@@ -134,7 +135,7 @@ const SwapTokenInput: React.FC<any> = ({
           </Row>
         </Row>
         {error && <InputError error={error} />}
-        {!disabledInput && (
+        {!disabledInput && chainId == ChainId.FANTOM && (
           <div className="grid grid-cols-2 gap-1 mt-1">
           
           <SubmitButton
