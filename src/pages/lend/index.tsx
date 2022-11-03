@@ -23,8 +23,11 @@ import { RecoilRoot } from 'recoil'
 import { useUnderworldPairInfo, useUnderworldUserInfo } from 'hooks/useAPI'
 import { ChainId, UNDERWORLD_PAIRS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
-
-// const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
+import NavLink from 'components/NavLink'
+import { Button } from 'components/Button'
+import Typography from 'components/Typography'
+import { SubmitButton } from 'features/summoner/Styles'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 
 export default function Lend() {
   const { i18n } = useLingui()
@@ -99,7 +102,7 @@ export default function Lend() {
                   sortKey="currentUserLentAmount.usdValue"
                   direction="descending"
                 >
-                  {i18n._(t`Borrowed`)}
+                  {i18n._(t`Action`)}
                 </ListHeaderWithSort> */}
                 <ListHeaderWithSort
                   className="justify-center"
@@ -171,7 +174,7 @@ export default function Lend() {
               sortKey="currentUserBorrowAmount.usdValue"
               direction="descending"
             >
-              {i18n._(t`Borrowed`)}
+              {i18n._(t`Action`)}
             </ListHeaderWithSort>
           </div>
 
@@ -197,10 +200,10 @@ export default function Lend() {
   )
 }
 
-// @ts-ignore TYPE NEEDS FIXING
 const LendEntry = ({ pair, userPosition = false }) => {
   const { underworldUserInfo } = useUnderworldUserInfo(pair.address)
   const { underworldPairInfo } = useUnderworldPairInfo(pair.address)
+  const { chainId } = useActiveWeb3React()
 
   const assetDecimals = Number(underworldPairInfo.assetDecimals)
   const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
@@ -236,8 +239,8 @@ const LendEntry = ({ pair, userPosition = false }) => {
     / 10**assetDecimals
 
   return (
-    <Link href={'/lend/' + pair.address}>
-      <a className="block text-high-emphesis">
+    // <Link href={'/lend/' + pair.address}>
+      // <a className="block text-high-emphesis">
         <div className="grid items-center grid-flow-col grid-cols-4 gap-4 px-4 py-4 text-sm rounded md:grid-cols-6 lg:grid-cols-7 align-center bg-dark-800 hover:bg-dark-blue">
           <div className="flex flex-col items-start md:flex-row items-center">
             <div className="hidden space-x-2 md:flex">
@@ -328,20 +331,35 @@ const LendEntry = ({ pair, userPosition = false }) => {
                 </div>
               </div>
               <div className="text-center">
-                {formatPercent(pair.currentSupplyAPR.stringWithStrategy)}
+                {formatPercent(pair.currentSupplyAPR.stringWithStrategy > 0 ? pair.currentSupplyAPR.stringWithStrategy : 1)}
               </div>
-              <div className="text-center">{
+              <div className="grid grid-cols-2 gap-2 text-center justify-center">
+                <NavLink href={`/lend/${pair.address}`}>
+                  <SubmitButton variant="bordered" primaryColor={getChainColor(chainId)}>
+                    <Typography className="text-xs text-center">
+                    L
+                    </Typography>
+                  </SubmitButton>
+                </NavLink>
+                <NavLink href={`/borrow/${pair.address}`}>
+                <SubmitButton variant="bordered" primaryColor={getChainColor(chainId)}>
+                  <Typography className="text-xs text-center">
+                    B
+                    </Typography>
+                  </SubmitButton>
+                </NavLink>
+                {/* {
                 formatPercent(
                   ((pair?.totalAsset.base / 10**(assetDecimals)) -
                     (pair?.totalAsset.base.sub(pair?.totalBorrow.base) / 10**(assetDecimals)))
                   / (pair?.totalAsset.base / 10**(assetDecimals)) * 100
-                )}
+                )} */}
               </div>
             </>
           )}
         </div>
-      </a>
-    </Link>
+      /* </a> */
+    /* </Link> */
   )
 }
 

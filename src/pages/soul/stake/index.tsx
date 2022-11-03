@@ -174,13 +174,6 @@ export default function Stake() {
             </a>
           </Button>
         </NavLink>
-        <NavLink href={'/borrow'}>
-          <Button variant="filled" color="purple" size="lg">
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> Borrow </span>
-            </a>
-          </Button>
-        </NavLink>
       </div>
       <DoubleGlowShadowV2>
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">

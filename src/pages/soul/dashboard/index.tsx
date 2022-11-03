@@ -37,7 +37,7 @@ export default function Dashboard() {
   const soulBalance = Number(soulInfo.SoulBalance)
   const totalSupply = Number(soulInfo.supply)
   const circulatingSupply = Number(totalSupply - soulBalance - stakedSoul)
-  
+
   // console.log('totalSupply:%s', totalSupply)
   const daoLiquidityValue = Number(soulInfo.totalLiquidityValue)
 
@@ -45,7 +45,7 @@ export default function Dashboard() {
   const treasurySoulValue = soulBalance * soulPrice
   const treasuryNativeValue = Number(soulInfo.NativeValue)
   // const treasuryReserveValue = treasurySoulValue + treasuryNativeValue
-  
+
   // GET LIQUIDITY BALANCES //
   const { bondInfo } = useBondInfo()
   const treasuryLiquidityValue = Number(soulInfo.totalLiquidityValue)
@@ -102,16 +102,16 @@ export default function Dashboard() {
       "percent": ((NativeComposition / liquidityValue) * 100).toFixed()
     },
     {
-        "label": "BTC, ETH, & BNB",
-        "angle": BitcoinComposition + EthereumComposition + BinanceComposition,
-        "color": "#B452FF",
-        "percent": (((BitcoinComposition + EthereumComposition + BinanceComposition) / liquidityValue) * 100).toFixed()
+      "label": "BTC, ETH, & BNB",
+      "angle": BitcoinComposition + EthereumComposition + BinanceComposition,
+      "color": "#B452FF",
+      "percent": (((BitcoinComposition + EthereumComposition + BinanceComposition) / liquidityValue) * 100).toFixed()
     },
     {
-        "label": "SOUL & SEANCE",
-        "angle": SoulComposition + SeanceComposition,
-        "color": "#B465FF",
-        "percent": (((SoulComposition + SeanceComposition) / liquidityValue) * 100).toFixed()
+      "label": "SOUL & SEANCE",
+      "angle": SoulComposition + SeanceComposition,
+      "color": "#B465FF",
+      "percent": (((SoulComposition + SeanceComposition) / liquidityValue) * 100).toFixed()
     },
     // {
     //     "label": "ETHEREUM",
@@ -133,53 +133,53 @@ export default function Dashboard() {
     // },
   ]
   let treasuryValueData
-chainId == ChainId.FANTOM ?
-   treasuryValueData = [
-    {
+  chainId == ChainId.FANTOM ?
+    treasuryValueData = [
+      {
         "label": "BONDED (USD)",
         "angle": bondedValue,
         "color": "#B485FF",
         "percent": ((bondedValue / treasuryValue) * 100).toFixed()
-    },
-    {
+      },
+      {
         "label": "LIQUIDITY (USD)",
         "angle": treasuryLiquidityValue,
         "color": "#B465FF",
         "percent": ((treasuryLiquidityValue / treasuryValue) * 100).toFixed()
-    },
-    {
+      },
+      {
         "label": "SOUL (USD)",
         "angle": treasurySoulValue,
         "color": "#B445FF",
         "percent": ((treasurySoulValue / treasuryValue) * 100).toFixed()
-    },
-    {
+      },
+      {
         "label": `${NATIVE[chainId].symbol.toUpperCase()} (USD)`,
         "angle": treasuryNativeValue,
         "color": "#B425FF",
         "percent": ((treasuryNativeValue / treasuryValue) * 100).toFixed()
-    },
-  ]
-  : treasuryValueData = [
-    {
+      },
+    ]
+    : treasuryValueData = [
+      {
         "label": "LIQUIDITY (USD)",
         "angle": treasuryLiquidityValue,
         "color": "#B465FF",
         "percent": ((treasuryLiquidityValue / treasuryValue) * 100).toFixed()
-    },
-    {
+      },
+      {
         "label": "SOUL (USD)",
         "angle": treasurySoulValue,
         "color": "#B445FF",
         "percent": ((treasurySoulValue / treasuryValue) * 100).toFixed()
-    },
-    {
+      },
+      {
         "label": `${NATIVE[chainId].symbol.toUpperCase()} (USD)`,
         "angle": treasuryNativeValue,
         "color": "#B425FF",
         "percent": ((treasuryNativeValue / treasuryValue) * 100).toFixed()
-    },
-  ]
+      },
+    ]
 
   const soulSupplyData = [
     {
@@ -206,7 +206,7 @@ chainId == ChainId.FANTOM ?
   ]
 
 
-const HideOnMobile = styled.div`
+  const HideOnMobile = styled.div`
   @media screen and (max-width: 900px) {
     display: none;
    }
@@ -215,231 +215,224 @@ const HideOnMobile = styled.div`
   return (
     <Container id="dashboard-page" className="py-4 space-y-4 md:py-8 max-w-min">
       <DoubleGlowShadowV2>
-      <Head>
-        <title>Dashboard | Soul</title>
-        <meta key="description" name="description" />
-      </Head>
-      <div className="grid grid-cols justify-center">
-<HideOnMobile>
-      <div className="py-1 mb-1 mt-3 ml-3 mr-3 bg-dark-600" />
-        <div className="py-1 mb-1 ml-3 mr-3 bg-purple" />
-        <Typography variant="h1" className="text-center mt-4 mb-4 text-dark-600" component="h1">
-          SOULSWAP FINANCE
-        </Typography>
-        <div className="py-1 mt-1 ml-3 mr-3 bg-dark-600" />
-        <div className="py-1 mt-1 ml-3 mr-3 mb-3 bg-purple" />
-        </HideOnMobile>
-
-      <div className="flex ml-4 mr-4 mb-4 gap-1 items-center justify-center">
-          <NavLink href={'/summoner'}>
-        <Button variant="bordered" color={"purple"} size="lg">
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Farm </span>
-            </a>
-        </Button>
-          </NavLink>
-          <NavLink href={'/bonds'}>
-        <Button variant="bordered" color={"purple"} size="lg">
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Bond </span>
-            </a>
-        </Button>
-          </NavLink>
-          <NavLink href={'/lend'}>
-        <Button variant="bordered" color={"purple"} size="lg">
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Lend </span>
-            </a>
-        </Button>
-          </NavLink>
-          <NavLink href={'/borrow'}>
-        <Button variant="bordered" color={"purple"} size="lg">
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Borrow </span>
-            </a>
-        </Button>
-          </NavLink>
-          <NavLink href={'/autostake'}>
-        <Button variant="bordered" color={"purple"} size="lg">
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Vault </span>
-            </a>
-        </Button>
-          </NavLink>
-
-        </div>
-      <div className="flex text-center items-center">
-      </div>
-        <div className="p-1 shadow-4 bg-[#A654DD] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
-        <div className="bg-dark-1000 p-4">
-          <Typography
-            className="text-2xl flex gap-1 justify-center items-center"
-            weight={600}
-            lineHeight={48}
-            textColor="text-accent text-[#FFFFFF]"
-            fontFamily={'semi-bold'}
-          >
-            {i18n._(t`SOUL ECONOMY`).toUpperCase()}
-          </Typography>
-          <div className="h-px my-4 bg-[#A654DD]" />
-          <div>
-            <Typography 
-              className={'flex text-xl justify-center items-baseline'}
-              fontFamily={'medium'} textColor={'text-white'}>
-              {getChainInfo(chainId, 'NAME')} Market
+        <Head>
+          <title>Dashboard | Soul</title>
+          <meta key="description" name="description" />
+        </Head>
+        <div className="grid grid-cols justify-center">
+          <HideOnMobile>
+            <div className="py-1 mb-1 mt-3 ml-3 mr-3 bg-dark-600" />
+            <div className="py-1 mb-1 ml-3 mr-3 bg-purple" />
+            <Typography variant="h1" className="text-center mt-4 mb-4 text-dark-600" component="h1">
+              SOULSWAP FINANCE
             </Typography>
-            <div className="h-px my-1 mb-3 bg-dark-1000" />
-            <Typography
-              className={'flex justify-center items-baseline'}
-              variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               { formatNumber(soulPrice * totalSupply, true, false, 0) }
-            </Typography>
+            <div className="py-1 mt-1 ml-3 mr-3 bg-dark-600" />
+            <div className="py-1 mt-1 ml-3 mr-3 mb-3 bg-purple" />
+          </HideOnMobile>
+
+          <div className="flex ml-4 mr-4 mb-4 gap-1 items-center justify-center">
+            <NavLink href={'/summoner'}>
+              <Button variant="bordered" color={"purple"} size="lg">
+                <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                  <span> Farm </span>
+                </a>
+              </Button>
+            </NavLink>
+            <NavLink href={'/bonds'}>
+              <Button variant="bordered" color={"purple"} size="lg">
+                <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                  <span> Bond </span>
+                </a>
+              </Button>
+            </NavLink>
+            <NavLink href={'/lend'}>
+              <Button variant="bordered" color={"purple"} size="lg">
+                <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                  <span> Lend </span>
+                </a>
+              </Button>
+            </NavLink>
+            <NavLink href={'/autostake'}>
+              <Button variant="bordered" color={"purple"} size="lg">
+                <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                  <span> Vault </span>
+                </a>
+              </Button>
+            </NavLink>
+
           </div>
-          <div className="lg:hidden h-px my-4 mb-3 bg-dark-1000" />
-            <div>
-              <div className="lg:hidden grid grid-cols-2 space-between-3">
-                <Typography
-                  className="flex gap-1 text-lg justify-center items-center mb-3"
-                  lineHeight={48} fontFamily={'medium'}>
-                  Market Price
-                </Typography>
-                <Typography
-                  className="flex gap-1 text-lg justify-center items-center mb-3"
-                  lineHeight={48} fontFamily={'medium'}>
-                  {getChainInfo(chainId, 'NAME')} Supply
-                </Typography>
-              </div>
-              <div className="lg:hidden grid grid-cols-2 space-between-3">
-                <Typography
-                  className={'flex justify-center items-baseline'}
-                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  { formatNumber(soulPrice, true, false, 0) }
-                </Typography>
-                <Typography
-                  className={'flex justify-center items-baseline'}
-                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               { formatNumber(totalSupply, false, true) }
-                </Typography>
-              </div>
-            </div>
-          <div>
-        </div>
-            <div className="h-px my-4 bg-dark-1000" />
-            <div>
-              <div className="hidden lg:grid lg:grid-cols-2 space-between-3">
-                <Typography
-                  className="flex gap-1 text-xl justify-center items-center mb-3"
-                  lineHeight={48} fontFamily={'medium'}>
-                  Market Price
-                </Typography>
-                <Typography
-                  className="flex gap-1 text-lg justify-center items-center mb-3"
-                  lineHeight={48} fontFamily={'medium'}>
-                  Total Supply
-                </Typography>
-              </div>
-            </div>
-            <div>
-            <div className="hidden lg:grid lg:grid-cols-2 space-between-3">
+          <div className="flex text-center items-center">
+          </div>
+          <div className="p-1 shadow-4 bg-[#A654DD] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
+            <div className="bg-dark-1000 p-4">
               <Typography
-                  className={'flex justify-center items-baseline'}
-                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  { formatNumber(soulPrice, true, false, 0) }
+                className="text-2xl flex gap-1 justify-center items-center"
+                weight={600}
+                lineHeight={48}
+                textColor="text-accent text-[#FFFFFF]"
+                fontFamily={'semi-bold'}
+              >
+                {i18n._(t`SOUL ECONOMY`).toUpperCase()}
+              </Typography>
+              <div className="h-px my-4 bg-[#A654DD]" />
+              <div>
+                <Typography
+                  className={'flex text-xl justify-center items-baseline'}
+                  fontFamily={'medium'} textColor={'text-white'}>
+                  {getChainInfo(chainId, 'NAME')} Market
                 </Typography>
+                <div className="h-px my-1 mb-3 bg-dark-1000" />
                 <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  { formatNumber(totalSupply, false, true) }
+                  {formatNumber(soulPrice * totalSupply, true, false, 0)}
                 </Typography>
+              </div>
+              <div className="lg:hidden h-px my-4 mb-3 bg-dark-1000" />
+              <div>
+                <div className="lg:hidden grid grid-cols-2 space-between-3">
+                  <Typography
+                    className="flex gap-1 text-lg justify-center items-center mb-3"
+                    lineHeight={48} fontFamily={'medium'}>
+                    Market Price
+                  </Typography>
+                  <Typography
+                    className="flex gap-1 text-lg justify-center items-center mb-3"
+                    lineHeight={48} fontFamily={'medium'}>
+                    {getChainInfo(chainId, 'NAME')} Supply
+                  </Typography>
+                </div>
+                <div className="lg:hidden grid grid-cols-2 space-between-3">
+                  <Typography
+                    className={'flex justify-center items-baseline'}
+                    variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                    {formatNumber(soulPrice, true, false, 0)}
+                  </Typography>
+                  <Typography
+                    className={'flex justify-center items-baseline'}
+                    variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                    {formatNumber(totalSupply, false, true)}
+                  </Typography>
+                </div>
+              </div>
+              <div>
               </div>
               <div className="h-px my-4 bg-dark-1000" />
+              <div>
+                <div className="hidden lg:grid lg:grid-cols-2 space-between-3">
+                  <Typography
+                    className="flex gap-1 text-xl justify-center items-center mb-3"
+                    lineHeight={48} fontFamily={'medium'}>
+                    Market Price
+                  </Typography>
+                  <Typography
+                    className="flex gap-1 text-lg justify-center items-center mb-3"
+                    lineHeight={48} fontFamily={'medium'}>
+                    Total Supply
+                  </Typography>
+                </div>
+              </div>
+              <div>
+                <div className="hidden lg:grid lg:grid-cols-2 space-between-3">
+                  <Typography
+                    className={'flex justify-center items-baseline'}
+                    variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                    {formatNumber(soulPrice, true, false, 0)}
+                  </Typography>
+                  <Typography
+                    className={'flex justify-center items-baseline'}
+                    variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                    {formatNumber(totalSupply, false, true)}
+                  </Typography>
+                </div>
+                <div className="h-px my-4 bg-dark-1000" />
+                <div>
+                  <Typography
+                    className="flex text-2xl justify-center gap-1 items-center"
+                    fontFamily={'medium'}
+                    textColor={'text-white'}
+                  >
+                    {i18n._(t`Supply Distribution`)}
+                  </Typography>
+                  <div className="h-px my-4 bg-dark-1000" />
+                </div>
+
+                {/* SOUL DISTRIBUTION CHART */}
+
+                <div className="flex justify-center flex-col sm:flex-row">
+                  <DashboardDonutChart width={200} data={soulSupplyData} />
+                  <DashboardChartLegend
+                    data={soulSupplyData}
+                    hasInfo={true}
+                    currency={'SOUL'}
+                    leadingCurrency={false}
+                    theme={'dark'}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-1 shadow-4 bg-[#A654DD] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
+            <div className="bg-dark-1000 p-4">
+              <Typography
+                className="text-2xl flex gap-1 justify-center items-center"
+                weight={600}
+                lineHeight={48}
+                textColor="text-accent text-[#FFFFFF]"
+                fontFamily={'semi-bold'}
+              >
+                {i18n._(t`SOUL TREASURY`).toUpperCase()}
+              </Typography>
+              <div className="h-px my-4 bg-[#A654DD]" />
               <div>
                 <Typography
                   className="flex text-2xl justify-center gap-1 items-center"
                   fontFamily={'medium'}
                   textColor={'text-white'}
                 >
-                  {i18n._(t`Supply Distribution`)}
+                  Protocol Balance
                 </Typography>
-                <div className="h-px my-4 bg-dark-1000" />
-            </div>
-
-          {/* SOUL DISTRIBUTION CHART */}
-
-          <div className="flex justify-center flex-col sm:flex-row">
-              <DashboardDonutChart width={200} data={soulSupplyData} />
-              <DashboardChartLegend
-                data={soulSupplyData}
-                hasInfo={true}
-                currency={'SOUL'}
-                leadingCurrency={false}
-                theme={'dark'}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="p-1 shadow-4 bg-[#A654DD] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
-        <div className="bg-dark-1000 p-4">
-          <Typography
-            className="text-2xl flex gap-1 justify-center items-center"
-            weight={600}
-            lineHeight={48}
-            textColor="text-accent text-[#FFFFFF]"
-            fontFamily={'semi-bold'}
-          >
-            {i18n._(t`SOUL TREASURY`).toUpperCase()}
-          </Typography>
-          <div className="h-px my-4 bg-[#A654DD]" />
-          <div>
-            <Typography
-              className="flex text-2xl justify-center gap-1 items-center"
-              fontFamily={'medium'}
-              textColor={'text-white'}
-            >
-              Protocol Balance
-            </Typography>
-            <div className="h-px my-2 bg-dark-1000" />
-            <Typography 
-              className="flex justify-center gap-1 items-center"
-              variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {formatNumber(treasuryValue, true)}
-            </Typography>
-          </div>
-          <div>
-            {/* <AutoSizer disableHeight>
+                <div className="h-px my-2 bg-dark-1000" />
+                <Typography
+                  className="flex justify-center gap-1 items-center"
+                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                  {formatNumber(treasuryValue, true)}
+                </Typography>
+              </div>
+              <div>
+                {/* <AutoSizer disableHeight>
               {({ width }) => (
                 <DashboardLineGraph width={width} height={110} data={treasuryValueData} theme={'dark'} />
               )}
             </AutoSizer> */}
-          </div>
-
-          <div className="h-px my-4 bg-dark-1000" />
-
-          <div>
-            <Typography
-              className="flex text-2xl justify-center gap-1 items-center"
-              fontFamily={'medium'}
-              textColor={'text-white'}
-            >
-              {i18n._(t`Treasury Distribution`)}
-            </Typography>
-            <div className="h-px my-4 bg-dark-1000" />
-          </div>
-          <div className="flex justify-center flex-col gap-3 sm:flex-row">
-            <DashboardDonutChart width={200} data={treasuryValueData} />
-            <div className="flex justify-center flex-col gap-3 sm:flex-row">
-            <DashboardChartLegend
-              data={treasuryValueData}
-              hasInfo={false}
-              currency={'$'}
-              leadingCurrency={true}
-              theme={'dark'}
-            />
               </div>
-            </div>
-          {/* <div>
+
+              <div className="h-px my-4 bg-dark-1000" />
+
+              <div>
+                <Typography
+                  className="flex text-2xl justify-center gap-1 items-center"
+                  fontFamily={'medium'}
+                  textColor={'text-white'}
+                >
+                  {i18n._(t`Treasury Distribution`)}
+                </Typography>
+                <div className="h-px my-4 bg-dark-1000" />
+              </div>
+              <div className="flex justify-center flex-col gap-3 sm:flex-row">
+                <DashboardDonutChart width={200} data={treasuryValueData} />
+                <div className="flex justify-center flex-col gap-3 sm:flex-row">
+                  <DashboardChartLegend
+                    data={treasuryValueData}
+                    hasInfo={false}
+                    currency={'$'}
+                    leadingCurrency={true}
+                    theme={'dark'}
+                  />
+                </div>
+              </div>
+              {/* <div>
             <Typography
               className="flex mt-8 text-2xl justify-center gap-1 items-center"
               fontFamily={'medium'}
@@ -449,7 +442,7 @@ const HideOnMobile = styled.div`
             </Typography>
             <div className="h-px my-4 bg-dark-1000" />
           </div> */}
-          {/* <div className="flex justify-center flex-col gap-3 sm:flex-row">
+              {/* <div className="flex justify-center flex-col gap-3 sm:flex-row">
             <DashboardDonutChart width={200} data={liquidityValueData} />
             <div className="flex justify-center flex-col gap-3 sm:flex-row">
             <DashboardChartLegend
@@ -461,10 +454,10 @@ const HideOnMobile = styled.div`
             />
               </div>
             </div> */}
+            </div>
           </div>
         </div>
-      </div>
-    </DoubleGlowShadowV2>
-  </Container>
+      </DoubleGlowShadowV2>
+    </Container>
   )
 }

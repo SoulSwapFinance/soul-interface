@@ -149,16 +149,6 @@ export const FarmList = () => {
             </a>
           </Button>
         </NavLink>
-        <NavLink href={'/borrow'}>
-          <Button variant="filled"
-            color={"purple"}
-            size="lg"
-          >
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> Borrow </span>
-            </a>
-          </Button>
-        </NavLink>
         <NavLink href={'/autostake'}>
           <Button variant="filled"
             color={"purple"}
