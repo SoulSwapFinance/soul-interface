@@ -46,17 +46,19 @@ import { getChainColor, getChainColorCode } from "constants/chains";
 
 export default function Exchange() {
   const { account, chainId } = useActiveWeb3React()
-  
+
   const lastExchange = useMemo(() => {
     // return getLastExchange() ?? 
-    return { from: { 
-      chain: chainId == ChainId.FANTOM ? FANTOM : AVALANCHE, 
-      token: chainId == ChainId.FANTOM ? FTM : AVAX
-    }, 
-    to: { chain: chainId == ChainId.FANTOM ? AVALANCHE : FANTOM, 
-      token: chainId == ChainId.FANTOM ? AVAX : FTM
-    } 
-  };
+    return {
+      from: {
+        chain: chainId == ChainId.FANTOM ? FANTOM : AVALANCHE,
+        token: chainId == ChainId.FANTOM ? FTM : AVAX
+      },
+      to: {
+        chain: chainId == ChainId.FANTOM ? AVALANCHE : FANTOM,
+        token: chainId == ChainId.FANTOM ? AVAX : FTM
+      }
+    };
   }, []);
   const [providerAddress, setProvider] = useState('')
   const [wallet, setWallet] = useState<WalletProvider>(null)
@@ -285,8 +287,8 @@ export default function Exchange() {
     ? Number(fromUsd) - Number(toUsd) : 0
   const deltaPercent = 100 * deltaUsd / Number(fromUsd)
   const toggleNetworkModal = useNetworkModalToggle()
-  const wrongNetwork = fromChain?.chainId != chainId ? true 
-  : false
+  const wrongNetwork = fromChain?.chainId != chainId ? true
+    : false
   const sameNetworkError = fromChain?.chainId == toChain.chainId ? true : false
 
   return (
@@ -417,9 +419,16 @@ export default function Exchange() {
                   >
                     <div className="flex justify-center">
                       <Typography className={classNames('text-lg font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
-                        {trade
-                          ? `${formatNumber(Number(fromAmount), false, true)} ${from.symbol} (${formatNumber(fromUsd, true, true)}) `
-                          : "0 ($0.00)"}
+                        {trade && Number(fromUsd) > 0 && Number(toUsd) > 0
+                          ? `${formatNumber(Number(fromAmount), false, true)} ${from?.symbol} (${formatNumber(Number(fromUsd), true, true)})`
+                          : trade && Number(fromUsd) > 0
+                            ? `${formatNumber(Number(fromAmount), false, true)} ${from?.symbol} (${formatNumber(Number(fromUsd), true, true)})`
+                            : trade && Number(toUsd) > 0
+                              ? `${formatNumber(Number(fromAmount), false, true)} ${from?.symbol} (${formatNumber(Number(toUsd) + 1, true, true)})`
+                              : trade && Number(fromUsd) == 0 && Number(toUsd) == 0
+                                ? `${formatNumber(Number(fromAmount), false, true)} ${from?.symbol}`
+                                : "0 ($0.00)"
+                        }
                       </Typography>
                     </div>
                   </div>
@@ -435,13 +444,13 @@ export default function Exchange() {
                   />
                   <Button
                     onClick={
-                        async () => { 
-                          await setAmount(
-                              ethers.utils.formatUnits(await
-                              getBalance(), decimals)
-                            )
+                      async () => {
+                        await setAmount(
+                          ethers.utils.formatUnits(await
+                            getBalance(), decimals)
+                        )
                       }
-                      }>
+                    }>
                     <div className="flex w-full text-xs justify-end font-bold">
                       MAX
                       {/* : {
@@ -525,9 +534,13 @@ export default function Exchange() {
                 >
                   <div className="flex justify-center">
                     <Typography className={classNames('sm:text-lg text-md font-bold', 'text-white')} weight={600} fontFamily={'semi-bold'}>
-                      {trade
+                      {trade && Number(fromUsd) > 0 && Number(toUsd) > 0
                         ? `${formatNumber(Number(toAmount), false, true)} ${to?.symbol} (${formatNumber(Number(toUsd), true, true)})`
-                        : "0 ($0.00)"
+                        : trade && Number(fromUsd) > 0
+                          ? `${formatNumber(Number(toAmount), false, true)} ${to?.symbol} (${formatNumber(Number(fromUsd) - 1, true, true)})`
+                          : trade && Number(fromUsd) == 0 && Number(toUsd) == 0
+                            ? `${formatNumber(Number(toAmount), false, true)} ${to?.symbol}`
+                            : "0 ($0.00)"
                       }
                     </Typography>
                   </div>
@@ -540,7 +553,16 @@ export default function Exchange() {
                   "bg-dark-1000 font-bold", `text-[${fromChain?.color}]`
                 )}
               >
-                {formatNumber(fromAmount, false, true)} {from?.symbol} ({formatNumber(fromUsd, true, true)})
+                {trade && Number(fromUsd) > 0 && Number(toUsd) > 0
+                  ? `${formatNumber(Number(fromAmount), false, true)} ${from?.symbol} (${formatNumber(Number(fromUsd), true, true)})`
+                  : trade && Number(fromUsd) > 0
+                    ? `${formatNumber(Number(fromAmount), false, true)} ${from?.symbol} (${formatNumber(Number(fromUsd), true, true)})`
+                    : trade && Number(toUsd) > 0
+                      ? `${formatNumber(Number(fromAmount), false, true)} ${from?.symbol} (${formatNumber(Number(toUsd) + 1, true, true)})`
+                      : trade && Number(fromUsd) == 0 && Number(toUsd) == 0
+                        ? `${formatNumber(Number(fromAmount), false, true)} ${from?.symbol}`
+                        : "0 ($0.00)"
+                }
                 <div
                   className="flex text-white"
                 >
@@ -552,7 +574,14 @@ export default function Exchange() {
                 <div
                   className={classNames("flex", `text-[${toChain?.color}]`)}
                 >
-                  {formatNumber(toAmount, false, true)} {to?.symbol} ({formatNumber(Number(toUsd), true, true)})
+                  {trade && Number(fromUsd) > 0 && Number(toUsd) > 0
+                    ? `${formatNumber(Number(toAmount), false, true)} ${to?.symbol} (${formatNumber(Number(toUsd), true, true)})`
+                    : trade && Number(fromUsd) > 0
+                      ? `${formatNumber(Number(toAmount), false, true)} ${to?.symbol} (${formatNumber(Number(fromUsd) - 1, true, true)})`
+                      : trade && Number(fromUsd) == 0 && Number(toUsd) == 0
+                        ? `${formatNumber(Number(toAmount), false, true)} ${to?.symbol}`
+                        : "0 ($0.00)"
+                  }
                 </div>
               </div>
 
@@ -597,7 +626,7 @@ export default function Exchange() {
                   </div>
                 </div>
               }
-              
+
               {trade && showConfirmation == "rej" &&
                 <div
                   className={`flex flex-col rounded gap-4 bg-dark-1000 p-3 font-bold w-full space-y-1`}
@@ -611,19 +640,19 @@ export default function Exchange() {
                   </div>
                 </div>
               }
-             
+
               {trade && sameNetworkError &&
                 <NavLink href="/swap">
                   <Button
-                  variant='bordered'
-                  color='black'
-                  className={`text-${getChainColorCode(chainId)}`}
+                    variant='bordered'
+                    color='black'
+                    className={`text-${getChainColorCode(chainId)}`}
                   // primaryColor={`${getChainColor(chainId)}`}
                   >
                     <Typography className={classNames('text-xl font-bold', `font-bold text-${getChainColor(chainId)}`)} weight={600} fontFamily={'semi-bold'}>
                       Click Here for Direct Swaps
                     </Typography>
-                    </Button>
+                  </Button>
                 </NavLink>
               }
 
@@ -668,8 +697,8 @@ export default function Exchange() {
                           setShowConfirmation("poor");
                         } else if (e instanceof UserRejectError) {
                           setShowConfirmation("rej");
-                         } else if (e 
-                            && e.message != 'insufficient balance for transfer') {
+                        } else if (e
+                          && e.message != 'insufficient balance for transfer') {
                           setShowConfirmation("min");
                         } else {
                           console.error(e);
@@ -682,9 +711,9 @@ export default function Exchange() {
                   disabled={trade == undefined}
                 >
                   {!trade
-                      ? "Fetching best price..."
-                      : trade 
-                      ? "Submit Swap" 
+                    ? "Fetching best price..."
+                    : trade
+                      ? "Submit Swap"
                       : 'Enter Amount'
                   }
                 </Button>
