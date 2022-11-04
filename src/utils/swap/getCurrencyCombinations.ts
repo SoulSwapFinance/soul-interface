@@ -1,5 +1,5 @@
 import { ADDITIONAL_BASES, BASES_TO_CHECK_TRADES_AGAINST, CUSTOM_BASES } from "config/routing";
-import { flatMap } from "lodash/flatMap";
+import flatMap from "lodash/flatMap";
 import { Currency } from "sdk";
 
 export function getCurrencyCombinations(chainId: number, currencyA: Currency, currencyB: Currency) {
