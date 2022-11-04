@@ -1,9 +1,7 @@
 import { isAddress } from '@ethersproject/address'
 import { useMemo } from 'react'
-import { Currency, CurrencyAmount, NATIVE } from 'sdk'
+import { Currency, CurrencyAmount, Fraction, NATIVE } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
-import { Fraction } from 'soulswap-math'
-
 import { FundSource } from './useFundSourceToggler'
 
 const alwaysTrue = () => true

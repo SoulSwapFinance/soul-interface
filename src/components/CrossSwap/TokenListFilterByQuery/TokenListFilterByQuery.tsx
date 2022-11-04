@@ -1,8 +1,7 @@
 import { FC, RefObject, useEffect, useMemo, useRef, useState } from 'react'
 // import { isAddress } from '@ethersproject/address'
-import { ChainId, Currency, NATIVE, Token } from 'sdk'
+import { ChainId, Currency, Fraction, NATIVE, Token } from 'sdk'
 import { filterTokens, FundSource, tokenComparator, useDebounce, useSortedTokensByQuery } from 'packages/hooks'
-import { Fraction } from 'soulswap-math'
 
 // import { BalanceMap } from 'hooks/useBalance/types'
 import { useToken } from 'hooks/Tokens'

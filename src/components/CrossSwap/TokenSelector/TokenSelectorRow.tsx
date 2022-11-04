@@ -1,10 +1,9 @@
 import { FundSource, useInViewport } from 'packages/hooks'
-import { Fraction, ZERO } from 'soulswap-math'
 import React, { CSSProperties, FC, memo, useCallback, useRef } from 'react'
 import { classNames } from 'functions/styling'
 import Typography from 'components/Typography'
 import { Icon } from '../Currency/Icon'
-import { Currency, CurrencyAmount } from 'sdk'
+import { Currency, CurrencyAmount, Fraction, ZERO } from 'sdk'
 
 interface TokenSelectorRow {
   account?: string

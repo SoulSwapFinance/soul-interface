@@ -4,7 +4,6 @@ import { SearchIcon } from '@heroicons/react/outline'
 import { XCircleIcon } from '@heroicons/react/solid'
 import xchain from 'constants/xchains'
 import { FundSource } from 'packages/hooks'
-import { Fraction } from 'soulswap-math'
 
 // import { BalanceMap } from 'hooks/useBalance/types'
 import { TokenListFilterByQuery } from '../TokenListFilterByQuery'
@@ -20,7 +19,7 @@ import { Currency as CrossCurrency } from '../Currency'
 import { Overlay } from 'components/Overlay'
 import { Address } from '../CrossInput/Address'
 import { DEFAULT_INPUT_PADDING, DEFAULT_INPUT_UNSTYLED } from 'features/crosschain/constants'
-import { Currency } from 'sdk'
+import { Currency, Fraction } from 'sdk'
 
 type TokenSelectorOverlay = Omit<TokenSelectorProps, 'variant' | 'tokenMap'> & {
   account?: string
