@@ -239,9 +239,7 @@ import {
           if (!e?.message?.includes('Fetch is aborted') && !e?.message?.includes('The user aborted a request')) {
             const e = new Error('Aggregator API call failed')
             e.name = 'AggregatorAPIError'
-            captureException(e, { 
-              // level: 'error' 
-            })
+            captureException(e, { level: 'error' })
           }
         }
       }
@@ -347,9 +345,7 @@ import {
           if (!e?.message?.includes('Fetch is aborted') && !e?.message?.includes('The user aborted a request')) {
             const e = new Error('Aggregator API (comparedDex) call failed')
             e.name = 'AggregatorAPIError'
-            captureException(e, { 
-              // level: 'error' 
-            })
+            captureException(e, { level: 'error' })
           }
         }
       }
