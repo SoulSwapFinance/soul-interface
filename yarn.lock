@@ -14086,9 +14086,9 @@ graph-results-pager@^1.0.3:
   dependencies:
     node-fetch "2.6.1"
 
-"graph-results-pager@git+https://github.com/LufyCZ/graph-results-pager.git":
+"graph-results-pager@https://github.com/LufyCZ/graph-results-pager":
   version "1.0.3"
-  resolved "git+https://github.com/LufyCZ/graph-results-pager.git#9b230f05b8d79aeedc9e167ac5a1fea33e04d51f"
+  resolved "https://github.com/LufyCZ/graph-results-pager#9b230f05b8d79aeedc9e167ac5a1fea33e04d51f"
   dependencies:
     node-fetch "2.6.1"
 
@@ -22098,7 +22098,7 @@ soul-data@^2.5.0:
     subscriptions-transport-ws "^0.9.19"
     ws "^7.5.3"
 
-soulswap-limit-orders-lib@latest:
+soulswap-limit-orders-lib@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/soulswap-limit-orders-lib/-/soulswap-limit-orders-lib-1.1.0.tgz#7cf6506b056ada1d259adcaf85bb5aaba6e22cb7"
   integrity sha512-79QO9EjVpueqS44sqa24r40Frc+0JEVL0Fdnunzm5LDbp52pMEhsDEz56QhPpg3/lT+2TT9Y3AVc4Fegs5oy/A==
@@ -22108,10 +22108,10 @@ soulswap-limit-orders-lib@latest:
     graphql-request "^3.5.0"
     tslib "^2.3.1"
 
-soulswap-limit-orders-react@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/soulswap-limit-orders-react/-/soulswap-limit-orders-react-4.0.2.tgz#aa0fd838bd864f6b37e3443b444a55a8591a2285"
-  integrity sha512-QTQwOAG6RghPtxfoSOkowkmp+Frq9VXyt6fcOck/46jl6MB+J+ZL/hUejuuVc3hX1rEJvbixrLMKzF0ykd0lDw==
+soulswap-limit-orders-react@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/soulswap-limit-orders-react/-/soulswap-limit-orders-react-4.0.3.tgz#d3881e83b6fb6b6bb8e5570aa2e14f421fd1f733"
+  integrity sha512-WdAKZqOGFofZX8tR38sAt8SK+I30l7YXuhRVJG3Qn2z3dQj8bS0y/B9zM6u0kldX79c8BZ2LH8ZHP3cJOYHXUw==
   dependencies:
     "@ethersproject/units" "^5.6.0"
     "@heroicons/react" "^1.0.6"
@@ -22136,7 +22136,7 @@ soulswap-limit-orders-react@^4.0.2:
     react-virtualized-auto-sizer "^1.0.5"
     react-window "^1.8.6"
     rebass "^4.0.7"
-    soulswap-limit-orders-lib latest
+    soulswap-limit-orders-lib "^1.1.0"
     tslib "^2.3.1"
     wcag-contrast "^3.0.0"
 
