@@ -42,7 +42,7 @@ import { useMemo } from 'react'
 
 import { OPENMEV_SUPPORTED_NETWORKS, OPENMEV_URI } from '../config/openmev'
 import { useArgentWalletContract } from './useArgentWalletContract'
-import { useRouterContract, useTridentRouterContract } from './useContract'
+import { useRouterContract, useSpookyRouterContract, useTridentRouterContract } from './useContract'
 import useENS from './useENS'
 import { SignatureData } from './useERC20Permit'
 import useTransactionDeadline from './useTransactionDeadline'
@@ -440,7 +440,6 @@ export function useSwapCallArguments(
 
       const actions = [
         approveMasterContractAction({ router: tridentRouterContract, signature: coffinPermit }),
-        // @ts-ignore TYPE NEEDS FIXING
         tridentRouterContract.interface.encodeFunctionData(method[routeType], [rest]),
       ]
 
@@ -522,6 +521,168 @@ export function swapErrorToUserReadableMessage(error: any): string {
       }
       return t`Unknown error${reason ? `: "${reason}"` : ''}. Try increasing your slippage tolerance.`
   }
+}
+
+/**
+ * Returns the swap calls that can be used to make the trade
+ * @param trade trade to execute
+ * @param allowedSlippage user allowed slippage
+ * @param recipientAddressOrName the ENS name or address of the recipient of the swap output
+ * @param signatureData the signature data of the permit of the input token amount, if available
+ * @param tridentTradeContext context for a trident trade that contains boolean flags on whether to spend from wallet and/or receive to wallet
+ */
+ export function useSwapEcoCallArguments(
+  trade: LegacyTrade<Currency, Currency, TradeType> | TridentTrade<Currency, Currency, TradeType> | undefined, // trade to execute, required
+  allowedSlippage: Percent, // in bips
+  recipientAddressOrName: string | undefined, // the ENS name or address of the recipient of the trade, or null if swap should be returned to sender
+  signatureData: SignatureData | null | undefined,
+  tridentTradeContext?: TridentTradeContext
+): SwapCall[] {
+  const { account, chainId, library } = useActiveWeb3React()
+
+  const { address: recipientAddress } = useENS(recipientAddressOrName)
+  const recipient = recipientAddressOrName === null ? account : recipientAddress
+  const deadline = useTransactionDeadline()
+
+  const legacyRouterContract = useRouterContract()
+  const tridentRouterContract = useTridentRouterContract()
+
+  const argentWalletContract = useArgentWalletContract()
+  const spookyRouterContract = useSpookyRouterContract()
+  const { rebase } = useCoffinRebase(trade?.inputAmount.currency)
+
+  return useMemo<SwapCall[]>(() => {
+    let result: SwapCall[] = []
+    if (
+      (featureEnabled(Feature.COFFINBOX, chainId) && !rebase) ||
+      !trade ||
+      !recipient ||
+      !library ||
+      !account ||
+      !chainId
+    )
+      return result
+
+    if (trade instanceof LegacyTrade) {
+      if (!legacyRouterContract || !deadline) return result
+
+      const swapMethods: SwapParameters[] = []
+      swapMethods.push(
+        SoulSwapRouter.swapCallParameters(trade, {
+          feeOnTransfer: false,
+          allowedSlippage,
+          recipient,
+          deadline: deadline.toNumber(),
+        })
+      )
+
+      if (trade.tradeType === TradeType.EXACT_INPUT) {
+        swapMethods.push(
+          SoulSwapRouter.swapCallParameters(trade, {
+            feeOnTransfer: true,
+            allowedSlippage,
+            recipient,
+            deadline: deadline.toNumber(),
+          })
+        )
+      }
+
+      result = swapMethods.map(({ methodName, args, value }) => {
+        if (argentWalletContract && trade.inputAmount.currency.isToken) {
+          return {
+            address: argentWalletContract.address,
+            calldata: argentWalletContract.interface.encodeFunctionData('wc_multiCall', [
+              [
+                approveAmountCalldata(trade.maximumAmountIn(allowedSlippage), legacyRouterContract.address),
+                {
+                  to: legacyRouterContract.address,
+                  value: value,
+                  data: legacyRouterContract.interface.encodeFunctionData(methodName, args),
+                },
+              ],
+            ]),
+            value: '0x0',
+          }
+        } else {
+          return {
+            address: legacyRouterContract.address,
+            calldata: legacyRouterContract.interface.encodeFunctionData(methodName, args),
+            value,
+          }
+        }
+      })
+
+      return result
+    } else if (trade instanceof TridentTrade) {
+      if (!tridentTradeContext) return result
+
+      const { parsedAmounts, receiveToWallet, fromWallet, coffinPermit } = tridentTradeContext
+      if (!tridentRouterContract || !trade.route || !parsedAmounts?.[0]) return result
+
+      const { routeType, ...rest } = getTridentRouterParams(
+        trade.route,
+        trade?.outputAmount?.currency.isNative && receiveToWallet ? tridentRouterContract?.address : recipient,
+        tridentRouterContract?.address,
+        Number(allowedSlippage.asFraction.multiply(100).toSignificant(2)),
+        parsedAmounts[0],
+        fromWallet,
+        receiveToWallet
+      )
+
+      const method = {
+        [RouteType.SinglePool]: fromWallet ? 'exactInputSingleWithNativeToken' : 'exactInputSingle',
+        [RouteType.SinglePath]: fromWallet ? 'exactInputWithNativeToken' : 'exactInput',
+        [RouteType.ComplexPath]: 'complexPath',
+      }
+
+      // if you spend from wallet send as amount instead of share
+      let value = '0x0'
+      if (parsedAmounts[0] && fromWallet && trade?.inputAmount.currency?.isNative) {
+        value = toHex(parsedAmounts[0])
+      }
+
+      const actions = [
+        approveMasterContractAction({ router: tridentRouterContract, signature: coffinPermit }),
+        // @ts-ignore TYPE NEEDS FIXING
+        tridentRouterContract.interface.encodeFunctionData(method[routeType], [rest]),
+      ]
+
+      if (trade?.outputAmount?.currency.isNative && receiveToWallet)
+        actions.push(
+          unwrapWETHAction({
+            router: tridentRouterContract,
+            recipient,
+            amountMinimum: trade?.minimumAmountOut(allowedSlippage).quotient.toString(),
+          })
+        )
+
+      result.push({
+        address: tridentRouterContract.address,
+        calldata: batchAction({
+          contract: tridentRouterContract,
+          actions,
+        }),
+        value,
+      } as SwapCall)
+
+      return result
+    }
+
+    return result
+  }, [
+    account,
+    allowedSlippage,
+    argentWalletContract,
+    chainId,
+    deadline,
+    legacyRouterContract,
+    library,
+    rebase,
+    recipient,
+    trade,
+    tridentRouterContract,
+    tridentTradeContext,
+  ])
 }
 
 // returns a function that will execute a swap, if the parameters are all valid
@@ -756,6 +917,275 @@ export function useSwapCallback(
                 tridentTradeContext?.parsedAmounts[0].currency?.symbol
               } for ${tridentTradeContext?.parsedAmounts[1]?.toSignificant(4)} ${
                 // @ts-ignore TYPE NEEDS FIXING
+                tridentTradeContext?.parsedAmounts[1].currency?.symbol
+              }`
+            }
+
+            if (tridentTradeContext?.coffinPermit && tridentTradeContext?.resetCoffinPermit) {
+              tridentTradeContext.resetCoffinPermit()
+            }
+
+            const withRecipient =
+              recipient === account
+                ? base
+                : `${base} to ${
+                    recipientAddressOrName && isAddress(recipientAddressOrName)
+                      ? shortenAddress(recipientAddressOrName)
+                      : recipientAddressOrName
+                  }`
+
+            addTransaction(response, {
+              summary: withRecipient,
+            })
+
+            return response.hash
+          })
+          .catch((error) => {
+            // if the user rejected the tx, pass this along
+            if (error?.code === 4001) {
+              throw new Error('Transaction Rejected.')
+            } else {
+              // otherwise, the error was unexpected and we need to convey that
+              console.error(`Swap failed`, error, address, calldata, value)
+
+              throw new Error(`Swap failed: ${swapErrorToUserReadableMessage(error)}`)
+            }
+          })
+      },
+      error: null,
+    }
+  }, [trade, library, account, chainId, recipient, recipientAddressOrName, swapCalls, eip1559, addTransaction])
+}
+
+// returns a function that will execute a swap, if the parameters are all valid
+// and the user has approved the slippage adjusted input amount for the trade
+export function useEcoSwapCallback(
+  trade: LegacyTrade<Currency, Currency, TradeType> | TridentTrade<Currency, Currency, TradeType> | undefined, // trade to execute, required
+  allowedSlippage: Percent, // in bips
+  recipientAddressOrName: string | undefined, // the ENS name or address of the recipient of the trade, or null if swap should be returned to sender
+  signatureData: SignatureData | undefined | null,
+  tridentTradeContext?: TridentTradeContext,
+  useOpenMev: boolean = false
+): {
+  state: SwapCallbackState
+  callback: null | (() => Promise<string>)
+  error: string | null
+} {
+  const { account, chainId, library } = useActiveWeb3React()
+  const blockNumber = useBlockNumber()
+
+  const eip1559 =
+    EIP_1559_ACTIVATION_BLOCK[chainId] == undefined ? false : blockNumber >= EIP_1559_ACTIVATION_BLOCK[chainId]
+
+  const swapCalls = useSwapEcoCallArguments(
+    trade,
+    allowedSlippage,
+    recipientAddressOrName,
+    signatureData,
+    tridentTradeContext
+  )
+
+  const addTransaction = useTransactionAdder()
+
+  const { address: recipientAddress } = useENS(recipientAddressOrName)
+
+  const recipient = recipientAddressOrName === null ? account : recipientAddress
+
+  return useMemo(() => {
+    if (!trade || !library || !account || !chainId) {
+      return {
+        state: SwapCallbackState.INVALID,
+        callback: null,
+        error: 'Missing dependencies',
+      }
+    }
+    if (!recipient) {
+      if (recipientAddressOrName !== null) {
+        return {
+          state: SwapCallbackState.INVALID,
+          callback: null,
+          error: 'Invalid recipient',
+        }
+      } else {
+        return {
+          state: SwapCallbackState.LOADING,
+          callback: null,
+          error: null,
+        }
+      }
+    }
+
+    return {
+      state: SwapCallbackState.VALID,
+      callback: async function onSwap(): Promise<string> {
+        console.log('onSwap callback')
+        const estimatedCalls: SwapCallEstimate[] = await Promise.all(
+          swapCalls.map((call) => {
+            const { address, calldata, value } = call
+
+            const tx =
+              !value || isZero(value)
+                ? { from: account, to: address, data: calldata }
+                : {
+                    from: account,
+                    to: address,
+                    data: calldata,
+                    value,
+                  }
+
+            console.log('SWAP TRANSACTION', { tx, value })
+
+            return library
+              .estimateGas(tx)
+              .then((gasEstimate) => {
+                console.log('returning gas estimate')
+                return {
+                  call,
+                  gasEstimate,
+                }
+              })
+              .catch((gasError) => {
+                console.debug('Gas estimate failed, trying eth_call to extract error', call)
+
+                return library
+                  .call(tx)
+                  .then((result) => {
+                    console.debug('Unexpected successful call after failed estimate gas', call, gasError, result)
+                    return {
+                      call,
+                      error: new Error('Unexpected issue with estimating the gas. Please try again.'),
+                    }
+                  })
+                  .catch((callError) => {
+                    console.debug('Call threw error', call, callError)
+                    return {
+                      call,
+                      error: new Error(swapErrorToUserReadableMessage(callError)),
+                    }
+                  })
+              })
+          })
+        )
+
+        // a successful estimation is a bignumber gas estimate and the next call is also a bignumber gas estimate
+        let bestCallOption: SuccessfulCall | SwapCallEstimate | undefined = estimatedCalls.find(
+          (el, ix, list): el is SuccessfulCall =>
+            'gasEstimate' in el && (ix === list.length - 1 || 'gasEstimate' in list[ix + 1])
+        )
+
+        // check if any calls errored with a recognizable error
+        if (!bestCallOption) {
+          const errorCalls = estimatedCalls.filter((call): call is FailedCall => 'error' in call)
+          if (errorCalls.length > 0) throw errorCalls[errorCalls.length - 1].error
+          const firstNoErrorCall = estimatedCalls.find<SwapCallEstimate>(
+            (call): call is SwapCallEstimate => !('error' in call)
+          )
+          if (!firstNoErrorCall) throw new Error('Unexpected error. Could not estimate gas for the swap.')
+          bestCallOption = firstNoErrorCall
+        }
+
+        const {
+          call: { address, calldata, value },
+        } = bestCallOption
+
+        console.log('gasEstimate' in bestCallOption ? { gasLimit: calculateGasMargin(bestCallOption.gasEstimate) } : {})
+
+        const txParams: TransactionRequest = {
+          from: account,
+          to: address,
+          data: calldata,
+          // let the wallet try if we can't estimate the gas
+          ...('gasEstimate' in bestCallOption ? { gasLimit: calculateGasMargin(bestCallOption.gasEstimate) } : {}),
+          // gasPrice: !eip1559 && chainId === ChainId.HARMONY ? BigNumber.from('2000000000') : undefined,
+          ...(value && !isZero(value) ? { value } : {}),
+        }
+
+        let txResponse: Promise<TransactionResponseLight>
+        if (
+          !OPENMEV_SUPPORTED_NETWORKS.includes(chainId) ||
+          (OPENMEV_SUPPORTED_NETWORKS.includes(chainId) && !useOpenMev)
+        ) {
+          txResponse = library.getSigner().sendTransaction(txParams)
+        } else {
+          const supportedNetwork = OPENMEV_SUPPORTED_NETWORKS.includes(chainId)
+          if (!supportedNetwork) throw new Error(`Unsupported OpenMEV network id ${chainId} when building transaction`)
+
+          // @ts-ignore TYPE NEEDS FIXING
+          txResponse = library
+            .getSigner()
+            .populateTransaction({
+              type: eip1559 ? 2 : 0, // EIP1559, otherwise Legacy
+              ...txParams,
+            })
+            .then((fullTx) => {
+              const { type, chainId, nonce, gasLimit, maxFeePerGas, maxPriorityFeePerGas, to, value, data } = fullTx
+
+              const hOpts: DataOptions = { hexPad: 'left' }
+
+              const txToSign = TransactionFactory.fromTxData({
+                type: type ? hexlify(type) : undefined,
+                chainId: chainId ? hexlify(chainId) : undefined,
+                nonce: nonce ? hexlify(nonce, hOpts) : undefined,
+                gasLimit: gasLimit ? hexlify(gasLimit, hOpts) : undefined,
+                maxFeePerGas: maxFeePerGas ? hexlify(maxFeePerGas, hOpts) : undefined,
+                maxPriorityFeePerGas: maxPriorityFeePerGas ? hexlify(maxPriorityFeePerGas, hOpts) : undefined,
+                to,
+                value: value ? hexlify(value, hOpts) : undefined,
+                data: data?.toString(),
+              })
+
+              return library.provider
+                .request({ method: 'eth_sign', params: [account, hexlify(txToSign.getMessageToSign())] })
+                .then((signature) => {
+                  const { v, r, s } = splitSignature(signature)
+                  // eslint-disable-next-line
+                  // @ts-ignore
+                  const txWithSignature: TypedTransaction = txToSign._processSignature(v, arrayify(r), arrayify(s))
+                  return { signedTx: hexlify(txWithSignature.serialize()), fullTx }
+                })
+            })
+            .then(({ signedTx }) => {
+              const body = JSON.stringify({
+                jsonrpc: '2.0',
+                id: new Date().getTime(),
+                method: 'eth_sendRawTransaction',
+                params: [signedTx],
+              })
+
+              // @ts-ignore TYPE NEEDS FIXING
+              return fetch(OPENMEV_URI[chainId], {
+                method: 'POST',
+                body,
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              }).then((res: Response) => {
+                // Handle success
+                if (res.status === 200) {
+                  return res.json().then((json) => {
+                    // But first check if there are some errors present and throw accordingly
+                    if (json.error) throw json.error
+
+                    // Otherwise return a TransactionResponseLight object
+                    return { hash: json.result } as TransactionResponseLight
+                  })
+                }
+
+                // Generic error
+                if (res.status !== 200) throw Error(res.statusText)
+              })
+            })
+        }
+
+        return txResponse
+          .then((response: TransactionResponseLight) => {
+            let base = `Swap ${trade?.inputAmount?.toSignificant(4)} ${
+              trade?.inputAmount.currency?.symbol
+            } for ${trade?.outputAmount?.toSignificant(4)} ${trade?.outputAmount.currency?.symbol}`
+            if (tridentTradeContext?.parsedAmounts) {
+              base = `Swap ${tridentTradeContext?.parsedAmounts[0]?.toSignificant(4)} ${
+                tridentTradeContext?.parsedAmounts[0].currency?.symbol
+              } for ${tridentTradeContext?.parsedAmounts[1]?.toSignificant(4)} ${
                 tridentTradeContext?.parsedAmounts[1].currency?.symbol
               }`
             }
