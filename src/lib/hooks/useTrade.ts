@@ -1,5 +1,6 @@
 import { Currency, CurrencyAmount, ChainId, COFFIN_BOX_ADDRESS, JSBI, findMultiRouteExactIn, findSingleRouteExactIn, Pair, Trade,
   TradeType, TradeVersion, WNATIVE } from 'sdk'
+import { RouteStatus } from 'soulswap-tines'
 import { BigNumber } from 'ethers'
 import { useMemo, useState } from 'react'
 
