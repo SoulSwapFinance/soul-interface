@@ -776,9 +776,6 @@ msgstr "Manage Token Lists"
 msgid "Manage this pool"
 msgstr "Manage this pool"
 
-msgid "Margin"
-msgstr "Margin"
-
 msgid "Markets"
 msgstr "Markets"
 

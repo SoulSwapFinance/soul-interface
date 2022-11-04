@@ -1,5 +1,4 @@
 import { AddressZero, MaxUint256 } from '@ethersproject/constants'
-import { Amount, Currency } from 'soulswap-currency'
 import { useCallback, useMemo } from 'react'
 import ERC20ABI from 'constants/abis/bridge/erc20.json'
 
@@ -12,7 +11,7 @@ import { useActiveWeb3React } from 'services/web3'
 import { UserRejectedRequestError } from '@web3-react/injected-connector'
 import { useTokenContract } from 'hooks/useTokenContract'
 import { loadERC20Contract } from 'utils/wallet'
-import { getSigner } from 'sdk'
+import { Currency, CurrencyAmount, getSigner } from 'sdk'
 
 export enum ApprovalState {
   UNKNOWN = 'UNKNOWN',
@@ -24,7 +23,7 @@ export enum ApprovalState {
 // returns a variable indicating the state of the approval and a function which approves if necessary or early returns
 export function useERC20ApproveCallback(
   watch: boolean,
-  amountToApprove?: Amount<Currency>,
+  amountToApprove?: CurrencyAmount<Currency>,
   spender?: string,
   onSuccess?: (data: NotificationData) => void
 ): [ApprovalState, () => Promise<void>] {

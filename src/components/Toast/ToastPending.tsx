@@ -1,4 +1,4 @@
-import { Chain } from 'soulswap-chain'
+import { Chain } from 'constants/xchains'
 import React, { FC } from 'react'
 
 // import { Loader, NotificationData } from '../../Loader'

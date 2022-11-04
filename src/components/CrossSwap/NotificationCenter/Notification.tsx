@@ -11,9 +11,8 @@ import {
   UploadIcon,
   XIcon,
 } from '@heroicons/react/solid'
-import chains from 'soulswap-chain'
-import { ChainId } from 'sdk'
-import { Token } from 'soulswap-currency'
+import chains from 'constants/xchains'
+import { ChainId, Token } from 'sdk'
 import React, { FC } from 'react'
 import Dots from 'components/Dots'
 import Typography from 'components/Typography'
@@ -25,15 +24,15 @@ import { NotificationData } from 'components/Toast'
 import { TimeAgo } from 'components/Date'
 import Loader from 'components/Loader'
 import { Badge } from '../Badge'
-import { Currency } from '../Currency'
+import { Currency as CrossCurrency } from '../Currency'
 
-export const STARGATE_TOKEN = new Token({
-  chainId: ChainId.ETHEREUM,
-  address: '0xaf5191b0de278c7286d6c7cc6ab6bb8a73ba2cd6',
-  decimals: 18,
-  symbol: 'STG',
-  name: 'StargateToken',
-})
+export const STARGATE_TOKEN = new Token(
+  ChainId.ETHEREUM,
+  '0xaf5191b0de278c7286d6c7cc6ab6bb8a73ba2cd6',
+  18,
+  'STG',
+  'StargateToken'
+)
 
 export const Notification: FC<{ data: string; showExtra?: boolean; hideStatus?: boolean }> = ({
   data,
@@ -112,7 +111,7 @@ export const Notification: FC<{ data: string; showExtra?: boolean; hideStatus?: 
                 <ArrowRightIcon width={20} height={20} />
               )}
               {(status === 'success' || notification.summary.info) && notification.type === 'stargate' && (
-                <Currency.Icon currency={STARGATE_TOKEN} width={20} height={20} />
+                <CrossCurrency.Icon currency={STARGATE_TOKEN} width={20} height={20} />
               )}
               {(status === 'success' || notification.summary.info) && notification.type === 'swap' && (
                 <SwitchVerticalIcon width={20} height={20} />

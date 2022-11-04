@@ -1,7 +1,5 @@
 import { ExclamationIcon, ExternalLinkIcon } from '@heroicons/react/outline'
-import chain from 'soulswap-chain'
-import { Token } from 'soulswap-currency'
-import { shortenAddress } from 'soulswap-format'
+import chain from 'constants/xchains'
 import React, { FC, useMemo, useState } from 'react'
 import Typography from 'components/Typography'
 import { Button } from 'components/Button'
@@ -10,10 +8,12 @@ import CopyHelper from 'components/Copy'
 import { Icon } from '../Currency/Icon'
 import { SlideIn } from 'components/Animated/SlideIn'
 import { Overlay } from 'components/Overlay'
+import { shortenAddress } from 'functions/format'
+import { Currency } from 'sdk'
 
 interface TokenSelectorImportRow {
   hideIcons?: boolean
-  currencies: (Token | undefined)[]
+  currencies: (Currency | undefined)[]
   className?: string
   onImport(): void
   slideIn?: boolean

@@ -1,16 +1,16 @@
-import { Type } from 'soulswap-currency'
 import React, { CSSProperties, FC, memo, ReactElement, useCallback } from 'react'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { FixedSizeList } from 'react-window'
+import { Currency } from 'sdk'
 
 interface RendererPayload {
-  currency: Type
+  currency: Currency
   style: CSSProperties
 }
 
 export interface ListProps {
   className?: string
-  currencies: Type[]
+  currencies: Currency[]
   rowHeight?: number
   rowRenderer(payload: RendererPayload): ReactElement
   deps?: any[]

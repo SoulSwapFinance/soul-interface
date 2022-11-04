@@ -1,5 +1,5 @@
 import { CheckIcon } from '@heroicons/react/outline'
-import chains from 'soulswap-chain'
+import chains from 'constants/xchains'
 import  { ChainId } from 'sdk'
 import { useIsSmScreen } from 'packages/hooks'
 import React, { FC, useCallback, useRef } from 'react'

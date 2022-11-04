@@ -2,16 +2,16 @@ import React, { FC, ReactNode, useCallback, useEffect, useMemo, useState } from 
 
 // import { useTokens } from 'hooks/useTokens'
 import { TokenSelectorImportRow } from './TokenSelectorImportRow'
-import { Token } from 'soulswap-currency'
+import { Currency, Token } from 'sdk'
 import { Dialog } from 'components/Dialogue'
 import { useTokens } from 'services/graph/hooks'
 
 interface TokenListImportCheckerProps {
   children: ReactNode
-  onAddTokens: (tokens: Token[]) => void
+  onAddTokens: (tokens: Currency[]) => void
   tokens?: { address: string; chainId: number }[]
-  tokenMap: Record<string, Token>
-  customTokensMap: Record<string, Token>
+  tokenMap: Record<string, Currency>
+  customTokensMap: Record<string, Currency>
 }
 
 export const TokenListImportChecker: FC<TokenListImportCheckerProps> = ({
@@ -62,7 +62,7 @@ const _TokenListImportChecker: FC<TokenListImportCheckerProps & { tokens: { addr
     if (!currencies) return
     return currencies.map((el, idx) => {
       const { address, name, symbol, decimals } = el
-      return new Token({ address, name, symbol, decimals, chainId: tokens[idx].chainId })
+      return new Token(tokens[idx].chainId, address,decimals, symbol, name)
     })
   }, [currencies, tokens])
 

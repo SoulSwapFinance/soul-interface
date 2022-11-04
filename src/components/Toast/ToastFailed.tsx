@@ -1,5 +1,5 @@
 import { XCircleIcon } from '@heroicons/react/outline'
-import { Chain } from 'soulswap-chain'
+import { Chain } from 'constants/xchains'
 import { FC } from 'react'
 
 import { NotificationData } from './index'

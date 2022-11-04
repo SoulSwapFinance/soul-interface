@@ -1,4 +1,4 @@
-import { Price, Type } from 'soulswap-currency'
+import { Price, Currency } from 'sdk'
 import React, { FC, ReactElement, ReactNode, useCallback, useState } from 'react'
 import { usePrices } from 'hooks/usePrices'
 import { Theme } from '@material-ui/core'
@@ -13,7 +13,7 @@ interface RenderPayload {
 }
 
 interface Rate {
-  price: Price<Type, Type> | undefined
+  price: Price<Currency, Currency> | undefined
   theme: Theme
   children?: (payload: RenderPayload) => ReactNode
 }

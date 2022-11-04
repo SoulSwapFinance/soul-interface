@@ -1,20 +1,20 @@
 import React, { FC } from 'react'
-import { Amount, Token, Type } from 'soulswap-currency'
-import { STARGATE_CONFIRMATION_SECONDS } from 'soulswap-stargate'
+import { CurrencyAmount, Currency } from 'sdk'
 
 import { TransactionProgressStepper } from './TransactionProgressStepper'
 import { classNames } from 'functions/styling'
 import { Dialog } from 'components/Dialogue'
 import Typography from 'components/Typography'
+import { STARGATE_CONFIRMATION_SECONDS } from 'constants/index'
 
 interface TransactionProgressOverlay {
   onClose(): void
   id: string
   srcTxHash: string
-  inputAmount?: Amount<Type>
-  outputAmount?: Amount<Type>
-  srcBridgeToken: Token
-  dstBridgeToken: Token
+  inputAmount?: CurrencyAmount<Currency>
+  outputAmount?: CurrencyAmount<Currency>
+  srcBridgeToken: Currency
+  dstBridgeToken: Currency
   crossChain: boolean
 }
 

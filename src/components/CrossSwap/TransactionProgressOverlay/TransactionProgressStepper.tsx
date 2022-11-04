@@ -1,21 +1,20 @@
-import chain, { chains } from 'soulswap-chain'
-import { Amount, Token, Type } from 'soulswap-currency'
-import { STARGATE_TOKEN } from 'soulswap-stargate'
-import { formatBytes32String } from 'ethers/lib/utils'
+import chain, { chains } from 'constants/xchains'
+// import { formatBytes32String } from 'ethers/lib/utils'
 import React, { FC, useEffect, useState } from 'react'
 
 import { TransactionProgressStep } from './TransactionProgressStep'
-import { Link } from 'components/Link'
-import Typography from 'components/Typography'
+// import { Link } from 'components/Link'
+// import Typography from 'components/Typography'
 import { NetworkIcon } from 'components/Icons/NetworkIcon'
-import { Icon } from '../Currency/Icon'
+import { Currency, CurrencyAmount } from 'sdk'
+// import { Icon } from '../Currency/Icon'
 
 interface TransactionProgressStepper {
   id: string
-  inputAmount?: Amount<Type>
-  outputAmount?: Amount<Type>
-  srcBridgeToken: Token
-  dstBridgeToken: Token
+  inputAmount?: CurrencyAmount<Currency>
+  outputAmount?: CurrencyAmount<Currency>
+  srcBridgeToken: Currency
+  dstBridgeToken: Currency
   srcTxHash: string
   crossChain: boolean
 }
@@ -152,30 +151,10 @@ export const TransactionProgressStepper: FC<TransactionProgressStepper> = ({
       <TransactionProgressStep
         comingSoon
         status={dstTxState ? 'success' : isError ? 'skipped' : isSuccess ? 'pending' : 'idle'}
-        header={
-          <TransactionProgressStep.Header>
-            Send <b>{srcBridgeToken.symbol}</b> to destination chain
-          </TransactionProgressStep.Header>
-        }
-        subheader={
-          <TransactionProgressStep.SubHeader
-            icon={
-              <Icon 
-                currency={STARGATE_TOKEN} 
-                width={16} 
-                height={16} 
-              />
-            }
-            caption={
-              <Typography variant="xs">
-                Powered by{' '}
-                <Link.External href="https://stargate.finance" className="underline">
-                  Stargate Finance
-                </Link.External>
-              </Typography>
-            }
-          />
-        }
+        subheader={''}
+        header={<TransactionProgressStep.Header>
+          Send <b>{srcBridgeToken.symbol}</b> to destination chain
+        </TransactionProgressStep.Header>} 
       />
       {outputAmount && (
         <TransactionProgressStep

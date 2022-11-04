@@ -2,8 +2,7 @@ import React, { FC, useCallback } from 'react'
 import { AddressZero } from '@ethersproject/constants'
 import { SearchIcon } from '@heroicons/react/outline'
 import { XCircleIcon } from '@heroicons/react/solid'
-import chain from 'soulswap-chain'
-import { Token, Type } from 'soulswap-currency'
+import xchain from 'constants/xchains'
 import { FundSource } from 'packages/hooks'
 import { Fraction } from 'soulswap-math'
 
@@ -17,15 +16,16 @@ import Loader from 'components/Loader'
 import Typography from 'components/Typography'
 import { NetworkIcon } from 'components/Icons/NetworkIcon'
 import { SlideIn } from 'components/Animated/SlideIn'
-import { Currency } from '../Currency'
+import { Currency as CrossCurrency } from '../Currency'
 import { Overlay } from 'components/Overlay'
 import { Address } from '../CrossInput/Address'
 import { DEFAULT_INPUT_PADDING, DEFAULT_INPUT_UNSTYLED } from 'features/crosschain/constants'
+import { Currency } from 'sdk'
 
 type TokenSelectorOverlay = Omit<TokenSelectorProps, 'variant' | 'tokenMap'> & {
   account?: string
   balancesMap?: any // BalanceMap
-  tokenMap: Record<string, Token>
+  tokenMap: Record<string, Currency>
   pricesMap?: Record<string, Fraction> | undefined
   fundSource: FundSource
   includeNative?: boolean
@@ -45,7 +45,7 @@ export const TokenSelectorOverlay: FC<TokenSelectorOverlay> = ({
   includeNative,
 }) => {
   const handleSelect = useCallback(
-    (currency: Type) => {
+    (currency: Currency) => {
       onSelect && onSelect(currency)
       onClose()
     },
@@ -53,7 +53,7 @@ export const TokenSelectorOverlay: FC<TokenSelectorOverlay> = ({
   )
 
   const handleImport = useCallback(
-    (currency: Token) => {
+    (currency: Currency) => {
       onAddToken && onAddToken(currency)
       onSelect && onSelect(currency)
       onClose()
@@ -123,7 +123,7 @@ export const TokenSelectorOverlay: FC<TokenSelectorOverlay> = ({
                       onImport={() => queryToken[0] && handleImport(queryToken[0])}
                     />
                   )}
-                  <Currency.List
+                  <CrossCurrency.List
                     className="divide-y hide-scrollbar divide-slate-700"
                     currencies={currencies}
                     rowRenderer={({ currency, style }) => (
@@ -151,7 +151,7 @@ export const TokenSelectorOverlay: FC<TokenSelectorOverlay> = ({
                             height={14}
                             chainId={chainId} 
                           /> 
-                          {chain[chainId].name}
+                          {xchain[chainId].name}
                         </Typography>
                       </div>
                     </div>

@@ -1,17 +1,17 @@
 import { ChevronDownIcon } from '@heroicons/react/solid'
-import { tryParseAmount, Type } from 'soulswap-currency'
 import { FundSource, useIsMounted } from 'packages/hooks'
 import React, { FC, useCallback, useMemo, useRef, useState } from 'react'
 
 import { usePrices } from 'hooks/usePrices'
 import { TokenSelector, TokenSelectorProps } from 'components/CrossSwap/TokenSelector'
-import { classNames } from 'functions'
+import { classNames, tryParseAmount } from 'functions'
 import { DEFAULT_INPUT_UNSTYLED } from 'components/CrossSwap/CrossInput'
-import { Currency } from 'components/CrossSwap/Currency'
+import { Currency as CrossCurrency } from 'components/CrossSwap/Currency'
 import Typography from 'components/Typography'
 import { Skeleton } from 'components/Skeleton'
 import { useActiveWeb3React } from 'services/web3'
 import Numeric from 'components/CrossSwap/CrossInput/Numeric'
+import { Currency } from 'sdk'
 
 export interface CurrencyInputProps
   extends Pick<
@@ -21,7 +21,7 @@ export interface CurrencyInputProps
   value: string
   disabled?: boolean
   onChange(value: string): void
-  currency: Type | undefined
+  currency: Currency | undefined
   usdPctChange?: number
   disableMaxButton?: boolean
   className?: string
@@ -103,7 +103,7 @@ export const CurrencyInput: FC<CurrencyInputProps> = ({
             ) : currency ? (
               <>
                 <div className="w-5 h-5">
-                  <Currency.Icon
+                  <CrossCurrency.Icon
                     disableLink
                     layout="responsive"
                     currency={currency}

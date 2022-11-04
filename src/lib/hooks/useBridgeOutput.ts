@@ -1,25 +1,24 @@
 import { useMemo } from 'react'
-import { ChainId, ZERO } from 'sdk'
-
+import { ChainId, Currency, CurrencyAmount, Price, ZERO } from 'sdk'
 // import { BridgeState } from '../../components'
 // import { useBridgeFees } from './useBridgeFees'
-import { Amount, Price, Token, tryParseAmount, Type as Currency, Type } from 'soulswap-currency'
 import { Signature } from '@ethersproject/bytes'
-import { BigNumber } from '@ethersproject/bignumber'
+// import { BigNumber } from '@ethersproject/bignumber'
+import { tryParseAmount } from 'functions/parse'
 
 export type BridgeState = {
   id: string
   srcChainId: ChainId
   dstChainId: ChainId
-  srcToken: Type | undefined
-  dstToken: Type | undefined
+  srcToken: Currency | undefined
+  dstToken: Currency | undefined
   srcTypedAmount: string
   dstTypedAmount: string
-  amount: Amount<Type> | undefined
+  amount: CurrencyAmount<Currency> | undefined
   sourceTx?: any | undefined //SendTransactionResult
   signature?: Signature
   timestamp?: number
-  gasFee?: Amount<Type>
+  gasFee?: CurrencyAmount<Currency>
 }
 
 export const useBridgeOutput = (state: BridgeState) => {
