@@ -257,7 +257,7 @@
     "soulswap-currency": "^0.0.1",
     "soulswap-default-token-list": "^5.0.4",
     "soulswap-format": "^0.0.1",
-    "soulswap-limit-orders-react": "^4.0.2",
+    "soulswap-limit-orders-react": "^4.0.3",
     "soulswap-stargate": "^0.0.1",
     "soulswap-widget": "^1.0.5",
     "stream-browserify": "^3.0.0",
