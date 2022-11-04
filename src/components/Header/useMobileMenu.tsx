@@ -67,12 +67,7 @@ const useMobileMenu: UseMobileMenu = () => {
             key: 'limit',
             title: i18n._(t`Limit`),
             link: '/limit',
-          },
-          {
-            key: 'margin',
-            title: i18n._(t`Margin`),
-            link: '/margin',
-          },
+          }
         ],
       }
     }
