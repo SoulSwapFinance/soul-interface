@@ -35,7 +35,10 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const { chainId } = useActiveWeb3React()
   const isRemove = asPath.startsWith('/remove')
   // const isCrossChain = asPath.startsWith('/swap')
-  const isSwap = asPath.startsWith('/exchange') || asPath.startsWith('/swap') || asPath.startsWith('/add') || asPath.startsWith('/remove') || asPath.startsWith('/cross') || asPath.startsWith('/open')
+  const isSwap = asPath.startsWith('/exchange/swap') || asPath.startsWith('/swap') 
+  || asPath.startsWith('/add') || asPath.startsWith('exchange/add') 
+  || asPath.startsWith('/remove') || asPath.startsWith('exchange/remove')
+
   const chainColor
     = chainId == ChainId.FANTOM ? `border-[#1969FF] text-[#1969FF]`
       : chainId == ChainId.AVALANCHE ? `border-[#E84142] text-[#E84142]`
@@ -78,7 +81,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             </Typography>
           </NavLink>
         }
-        {chainId == ChainId.FANTOM &&
+        {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
           <NavLink
             activeClassName={classNames(
               "border rounded bg-black",

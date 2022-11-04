@@ -24726,10 +24726,10 @@ soulswap-limit-orders-lib@^1.1.0:
     graphql-request "^3.5.0"
     tslib "^2.3.1"
 
-soulswap-limit-orders-react@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/soulswap-limit-orders-react/-/soulswap-limit-orders-react-4.0.3.tgz#d3881e83b6fb6b6bb8e5570aa2e14f421fd1f733"
-  integrity sha512-WdAKZqOGFofZX8tR38sAt8SK+I30l7YXuhRVJG3Qn2z3dQj8bS0y/B9zM6u0kldX79c8BZ2LH8ZHP3cJOYHXUw==
+soulswap-limit-orders-react@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/soulswap-limit-orders-react/-/soulswap-limit-orders-react-4.0.4.tgz#b5a9d0b5e4d1081b824b64bd0d564ba8ce61b44c"
+  integrity sha512-J4ZpwBCfzDSVjUasjBG0FeBBxuaDMlRMlqsvjJR27JhKkI9t5rgB89AIWi2fUKyVDajzs1Hc8TpksHwimTDK5A==
   dependencies:
     "@ethersproject/units" "^5.6.0"
     "@heroicons/react" "^1.0.6"
