@@ -35,7 +35,10 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const { chainId } = useActiveWeb3React()
   const isRemove = asPath.startsWith('/remove')
   // const isCrossChain = asPath.startsWith('/swap')
-  const isSwap = asPath.startsWith('/exchange') || asPath.startsWith('/swap') || asPath.startsWith('/add') || asPath.startsWith('/remove') || asPath.startsWith('/cross') || asPath.startsWith('/open')
+  const isSwap = asPath.startsWith('/exchange/swap') || asPath.startsWith('/swap') 
+  || asPath.startsWith('/add') || asPath.startsWith('exchange/add') 
+  || asPath.startsWith('/remove') || asPath.startsWith('exchange/remove')
+
   const chainColor
     = chainId == ChainId.FANTOM ? `border-[#1969FF] text-[#1969FF]`
       : chainId == ChainId.AVALANCHE ? `border-[#E84142] text-[#E84142]`
@@ -47,7 +50,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const hoverColor = `${chainColor} hover:text-white`
   return (
     <div className="flex items-center justify-between gap-2">
-      <div className="flex gap-4 mx-2">
+      <div className="flex gap-1 mx-1">
       {featureEnabled(Feature.SWAP, chainId) &&
           <NavLink
             activeClassName={classNames(
@@ -78,7 +81,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             </Typography>
           </NavLink>
         }
-        {chainId == ChainId.FANTOM &&
+        {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
           <NavLink
             activeClassName={classNames(
               "border rounded bg-black",
@@ -107,7 +110,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Cross`)}
           </Typography>
         </NavLink>
-        { ![ChainId.FANTOM].includes(chainId) &&
+        {/* { ![ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) && */}
         <NavLink
           activeClassName={classNames(
             "border rounded bg-black",
@@ -121,7 +124,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Bridge`)}
           </Typography>
         </NavLink>
-        }
+        {/* } */}
         {/* <NavLink
           activeClassName={classNames(
             "border rounded bg-black",
@@ -135,7 +138,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Multi`)}
           </Typography>
         </NavLink> */}
-        { [ChainId.FANTOM].includes(chainId) &&
+        { [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <NavLink
           activeClassName={classNames(
             "border rounded bg-black",

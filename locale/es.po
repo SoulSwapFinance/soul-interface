@@ -771,9 +771,6 @@ msgstr ""
 msgid "Manage this pool"
 msgstr ""
 
-msgid "Margin"
-msgstr ""
-
 msgid "Markets"
 msgstr ""
 
