@@ -59,6 +59,7 @@ const features: FeatureMap = {
     Feature.COFFINBOX,
     Feature.AGGREGATE,
     Feature.EXPLORE,
+    Feature.LIMIT,
     Feature.UNDERWORLD
   ],
 
