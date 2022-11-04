@@ -82,6 +82,9 @@ msgstr "Account"
 msgid "Accrue"
 msgstr "Accrue"
 
+msgid "Action"
+msgstr "Action"
+
 msgid "Add"
 msgstr "Add"
 
