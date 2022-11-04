@@ -1,8 +1,9 @@
-import { useMemo } from 'react'
 // import { getAddress, isAddress } from '@ethersproject/address'
+import { Fraction } from 'soulswap-math'
 import { UseQueryOptions } from '@tanstack/react-query'
 // import { parseUnits } from 'ethers/lib/utils'
-import { ChainId, Fraction } from 'sdk'
+import { useMemo } from 'react'
+import { ChainId } from 'sdk'
 
 type UsePrices = ({
   chainId,
