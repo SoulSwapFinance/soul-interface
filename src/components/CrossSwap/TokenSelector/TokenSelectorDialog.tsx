@@ -1,8 +1,8 @@
 import { AddressZero } from '@ethersproject/constants'
 import { SearchIcon } from '@heroicons/react/outline'
 import { XCircleIcon } from '@heroicons/react/solid'
-import chain from 'constants/xchains'
-import { Currency } from 'sdk'
+import chain from 'soulswap-chain'
+import { Token, Type } from 'soulswap-currency'
 import { FundSource, useIsSmScreen } from 'packages/hooks'
 import { Fraction } from 'soulswap-math'
 import React, { FC, useCallback } from 'react'
@@ -17,7 +17,7 @@ import { SlideIn } from 'components/Animated/SlideIn'
 import { Dialog } from 'components/Dialogue/Dialog'
 import Typography from 'components/Typography'
 import { NetworkIcon } from 'components/Icons/NetworkIcon'
-import { Currency as CrossCurrency } from '../Currency'
+import { Currency } from '../Currency'
 import Loader from 'components/Loader'
 import { classNames } from 'functions/styling'
 import { DEFAULT_INPUT_PADDING, DEFAULT_INPUT_UNSTYLED } from 'features/crosschain/constants'
@@ -26,7 +26,7 @@ import { Address } from '../CrossInput/Address'
 type TokenSelectorDialog = Omit<TokenSelectorProps, 'variant' | 'tokenMap'> & {
   account?: string
   balancesMap?: any //BalanceMap
-  tokenMap: Record<string, Currency>
+  tokenMap: Record<string, Token>
   pricesMap?: Record<string, Fraction> | undefined
   fundSource: FundSource
   includeNative?: boolean
@@ -51,7 +51,7 @@ export const TokenSelectorDialog: FC<TokenSelectorDialog> = ({
   const isSmallScreen = useIsSmScreen()
 
   const handleSelect = useCallback(
-    (currency: Currency) => {
+    (currency: Type) => {
       onSelect && onSelect(currency)
       onClose()
     },
@@ -59,7 +59,7 @@ export const TokenSelectorDialog: FC<TokenSelectorDialog> = ({
   )
 
   const handleImport = useCallback(
-    (currency: Currency) => {
+    (currency: Token) => {
       onAddToken && onAddToken(currency)
       onSelect && onSelect(currency)
       onClose()
@@ -80,7 +80,7 @@ export const TokenSelectorDialog: FC<TokenSelectorDialog> = ({
         <Dialog open={open} unmount={false} onClose={onClose} initialFocus={isSmallScreen ? undefined : inputRef}>
           <Dialog.Content className="!max-w-md overflow-hidden h-[75vh] sm:h-[640px] pb-[116px]">
             <SlideIn>
-              <Dialog.Header onClose={onClose} title="Select Currency">
+              <Dialog.Header onClose={onClose} title="Select Token">
                 {customTokenMap && (
                   <TokenSelectorSettingsOverlay customTokenMap={customTokenMap} onRemoveToken={onRemoveToken} />
                 )}
@@ -132,7 +132,7 @@ export const TokenSelectorDialog: FC<TokenSelectorDialog> = ({
                         onImport={() => queryToken[0] && handleImport(queryToken[0])}
                       />
                     )}
-                    <CrossCurrency.List
+                    <Currency.List
                       className="divide-y hide-scrollbar divide-slate-700"
                       currencies={currencies}
                       rowRenderer={({ currency, style }) => (

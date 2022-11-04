@@ -1,6 +1,7 @@
 import { FC, RefObject, useEffect, useMemo, useRef, useState } from 'react'
 // import { isAddress } from '@ethersproject/address'
-import { ChainId, Currency, NATIVE, Token } from 'sdk'
+import { ChainId } from 'sdk'
+import { Native, Token, Type } from 'soulswap-currency'
 import { filterTokens, FundSource, tokenComparator, useDebounce, useSortedTokensByQuery } from 'packages/hooks'
 import { Fraction } from 'soulswap-math'
 
@@ -8,17 +9,17 @@ import { Fraction } from 'soulswap-math'
 import { useToken } from 'hooks/Tokens'
 
 interface RenderProps {
-  currencies: Currency[]
+  currencies: Type[]
   inputRef: RefObject<HTMLInputElement>
   query: string
   onInput(query: string): void
   searching: boolean
-  queryToken: [Currency | undefined]
+  queryToken: [Token | undefined]
 }
 
 interface Props {
   chainId: ChainId
-  tokenMap: Record<string, Currency>
+  tokenMap: Record<string, Token>
   pricesMap?: Record<string, Fraction>
   balancesMap?: any // BalanceMap
   children(props: RenderProps): JSX.Element
@@ -43,7 +44,7 @@ export const TokenListFilterByQuery: FC<Props> = ({
   const _includeNative =
     includeNative &&
     chainId &&
-    (!debouncedQuery || debouncedQuery.toLowerCase().includes(NATIVE[chainId].symbol.toLowerCase()))
+    (!debouncedQuery || debouncedQuery.toLowerCase().includes(Native.onChain(chainId).symbol.toLowerCase()))
 
   useEffect(() => {
     if (query.length > 0) {
@@ -67,16 +68,16 @@ export const TokenListFilterByQuery: FC<Props> = ({
   const searchToken = useMemo(() => {
     if (!searchTokenResult || !chainId) return undefined
     const { decimals, address, symbol, name } = searchTokenResult
-    return new Token( chainId, address, decimals, symbol, name )
+    return new Token({ chainId, decimals, address, symbol, name })
   }, [chainId, searchTokenResult])
 
-  const filteredTokens: Currency[] = useMemo(() => {
+  const filteredTokens: Token[] = useMemo(() => {
     const filtered = filterTokens(tokenMapValues, debouncedQuery)
     searching.current = false
     return filtered
   }, [tokenMapValues, debouncedQuery])
 
-  const sortedTokens: Currency[] = useMemo(() => {
+  const sortedTokens: Token[] = useMemo(() => {
     return [...filteredTokens].sort(tokenComparator(balancesMap, pricesMap, fundSource))
 
     // TODO adding balancesMap to this array causes infinite loop
@@ -85,7 +86,7 @@ export const TokenListFilterByQuery: FC<Props> = ({
   const filteredSortedTokens = useSortedTokensByQuery(sortedTokens, debouncedQuery)
 
   const filteredSortedTokensWithNative = useMemo(() => {
-    if (_includeNative) return [NATIVE[chainId], ...filteredSortedTokens]
+    if (_includeNative) return [Native.onChain(chainId), ...filteredSortedTokens]
     return filteredSortedTokens
   }, [_includeNative, chainId, filteredSortedTokens])
 

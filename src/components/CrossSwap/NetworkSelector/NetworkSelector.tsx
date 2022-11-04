@@ -1,5 +1,5 @@
 import { Listbox } from '@headlessui/react'
-import chains from 'constants/xchains'
+import chains from 'soulswap-chain'
 import { ChainId } from 'sdk'
 import React, { FC, ReactNode, useMemo } from 'react'
 import { classNames } from 'functions'

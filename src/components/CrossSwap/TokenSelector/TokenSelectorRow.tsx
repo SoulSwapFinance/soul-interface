@@ -1,19 +1,19 @@
+import { Amount, Type } from 'soulswap-currency'
 import { FundSource, useInViewport } from 'packages/hooks'
 import { Fraction, ZERO } from 'soulswap-math'
 import React, { CSSProperties, FC, memo, useCallback, useRef } from 'react'
 import { classNames } from 'functions/styling'
 import Typography from 'components/Typography'
 import { Icon } from '../Currency/Icon'
-import { Currency, CurrencyAmount } from 'sdk'
 
 interface TokenSelectorRow {
   account?: string
-  currency: Currency
+  currency: Type
   style?: CSSProperties
   className?: string
-  onCurrency(currency: Currency): void
+  onCurrency(currency: Type): void
   fundSource: FundSource
-  balance?: Record<FundSource, CurrencyAmount<Currency> | undefined>
+  balance?: Record<FundSource, Amount<Type> | undefined>
   price?: Fraction
 }
 

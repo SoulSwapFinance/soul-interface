@@ -1,9 +1,10 @@
 import { Interface } from '@ethersproject/abi'
+import { Amount, Type as Currency } from 'soulswap-currency'
+import { computePairAddress, FACTORY_ADDRESS, Pair } from 'soulswap-amm'
 import ISoulSwapPairABI from 'constants/abis/soulswap/ISoulSwapPair.json'
 import { useMultipleContractSingleData } from 'lib/state/multicall'
 import { useMemo } from 'react'
 import { useBlockNumber } from 'state/application/hooks'
-import { computePairAddress, Currency, CurrencyAmount, Pair, FACTORY_ADDRESS } from 'sdk'
 
 const PAIR_INTERFACE = new Interface(ISoulSwapPairABI)
 
@@ -59,7 +60,7 @@ export function usePairs(
       const [token0, token1] = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA]
       return [
         PairState.EXISTS,
-        new Pair(CurrencyAmount.fromRawAmount(token0, reserve0.toString()), CurrencyAmount.fromRawAmount(token1, reserve1.toString())),
+        new Pair(Amount.fromRawAmount(token0, reserve0.toString()), Amount.fromRawAmount(token1, reserve1.toString())),
       ]
     })
   }, [results, tokens])

@@ -1,7 +1,7 @@
 import React, { FC, useMemo, useState } from 'react'
 import { ChevronRightIcon, InformationCircleIcon } from '@heroicons/react/outline'
 import { CurrencyDollarIcon } from '@heroicons/react/solid'
-import { Currency } from 'sdk'
+import { Token } from 'soulswap-currency'
 import { useIsMounted } from 'packages/hooks'
 
 // import { useAllCustomTokens } from 'lib/state/storage'
@@ -10,7 +10,7 @@ import Typography from 'components/Typography'
 import { AdvancedTooltip } from 'components/Tooltip/Advanced'
 import { SlideIn } from 'components/Animated/SlideIn'
 import { Overlay } from 'components/Overlay'
-import { Currency as CrossCurrency } from '../Currency'
+import { Currency } from '../Currency'
 
 export const CustomTokensOverlay: FC = () => {
   const isMounted = useIsMounted()
@@ -20,7 +20,7 @@ export const CustomTokensOverlay: FC = () => {
   // const [customTokens, { removeCustomToken }] = useAllCustomTokens()
   const [ids, tokens] = useMemo(() => {
     const ids: string[] = []
-    const tokens: Currency[] = []
+    const tokens: Token[] = []
     Object.values(customTokens).forEach((customTokensPerChain) =>
       Object.entries(customTokensPerChain).forEach(([k, v]) => {
         ids.push(k)
@@ -73,7 +73,7 @@ export const CustomTokensOverlay: FC = () => {
         <Overlay.Content className="!bg-slate-800">
           <Overlay.Header onClose={() => setOpen(false)} title="Custom Tokens" />
           <div className="border-t border-slate-200/5 -ml-3 -mr-3 relative min-h-[320px] rounded-t-none lg:max-h-[calc(100%-108px)] rounded-xl overflow-hidden h-full">
-            <CrossCurrency.List
+            <Currency.List
               className="h-full"
               currencies={tokens}
               rowRenderer={({ style, currency }) => (

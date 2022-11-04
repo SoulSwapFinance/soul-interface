@@ -1,8 +1,7 @@
 import { useMemo } from 'react'
-import { Currency } from 'sdk'
-import { getCurrencyCombinations } from 'utils/swap/getCurrencyCombinations'
+import { getCurrencyCombinations, Token, Type } from 'soulswap-currency'
 
-export function useCurrencyCombinations(chainId: number, currencyA?: Currency, currencyB?: Currency): [Currency, Currency][] {
+export function useCurrencyCombinations(chainId: number, currencyA?: Type, currencyB?: Type): [Token, Token][] {
   return useMemo(
     () => (chainId && currencyA && currencyB ? getCurrencyCombinations(chainId, currencyA, currencyB) : []),
     [chainId, currencyA, currencyB]

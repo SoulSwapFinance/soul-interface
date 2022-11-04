@@ -1,7 +1,8 @@
 import { ChevronDownIcon } from '@heroicons/react/solid'
-import chains from 'constants/xchains'
-import { ChainId, Currency } from 'sdk'
+import chains from 'soulswap-chain'
+import { ChainId } from 'sdk'
 import { FundSource } from 'packages/hooks'
+import { Type } from 'soulswap-currency'
 
 import React, { FC, useCallback, useMemo, useState } from 'react'
 
@@ -19,7 +20,7 @@ export interface CurrencyInputProps
   value: string
   disabled?: boolean
   onChange(value: string): void
-  currency: Currency | undefined
+  currency: Type | undefined
   usdPctChange?: number
   disableMaxButton?: boolean
   className?: string

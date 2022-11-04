@@ -265,26 +265,6 @@ export const ANALYTICS_URL: { [chainId in ChainId]?: string } = {
 export const EIP_1559_ACTIVATION_BLOCK: { [chainId in ChainId]?: number } = {
 }
 
-export const STARGATE_BLOCK_CONFIRMATIONS = {
-  [ChainId.ETHEREUM]: 15,
-  [ChainId.FANTOM]: 5,
-  [ChainId.AVALANCHE]: 12,
-  // [ChainId.BSC]: 20,
-  // [ChainId.POLYGON]: 512,
-  // [ChainId.ARBITRUM]: 20,
-  // [ChainId.OPTIMISM]: 20,
-}
-
-export const STARGATE_CONFIRMATION_SECONDS: Record<keyof typeof STARGATE_BLOCK_CONFIRMATIONS, number> = {
-  [ChainId.ETHEREUM]: STARGATE_BLOCK_CONFIRMATIONS[ChainId.ETHEREUM] * 14,
-  [ChainId.AVALANCHE]: STARGATE_BLOCK_CONFIRMATIONS[ChainId.AVALANCHE] * 3,
-  [ChainId.FANTOM]: STARGATE_BLOCK_CONFIRMATIONS[ChainId.FANTOM] * 2,
-  // [ChainId.BSC]: STARGATE_BLOCK_CONFIRMATIONS[ChainId.BSC] * 3,
-  // [ChainId.POLYGON]: STARGATE_BLOCK_CONFIRMATIONS[ChainId.POLYGON] * 3,
-  // [ChainId.ARBITRUM]: STARGATE_BLOCK_CONFIRMATIONS[ChainId.ARBITRUM] * 15,
-  // [ChainId.OPTIMISM]: STARGATE_BLOCK_CONFIRMATIONS[ChainId.OPTIMISM] * 13,
-}
-
 export const DEFAULT_TXN_DISMISS_MS = 25000
 export const IS_IN_IFRAME = typeof window !== 'undefined' && window.parent !== window
 
@@ -292,4 +272,3 @@ export * from './routing'
 export * from './addresses'
 export * from './networks'
 export * from './tokens'
-export * from './xchains'

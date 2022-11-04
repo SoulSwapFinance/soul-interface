@@ -1,8 +1,8 @@
 import { QuestionMarkCircleIcon } from '@heroicons/react/solid'
-import chains from 'constants/xchains'
+import chains from 'soulswap-chain'
 import { ChainId } from 'sdk'
 
-import { Currency } from 'sdk'
+import { Currency } from 'soulswap-currency'
 import { WrappedTokenInfo } from 'state/lists/wrappedTokenInfo'
 
 import Image, { ImageProps } from 'next/image'
@@ -10,7 +10,6 @@ import { FC, useEffect, useMemo, useState } from 'react'
 
 import GradientCircleIcon from '../../Icons'
 import { Link } from '../../Link'
-import { useActiveWeb3React } from 'services/web3'
 
 const BLOCKCHAIN: Record<number, string> = {
   [ChainId.ARBITRUM]: 'arbitrum',
@@ -59,11 +58,10 @@ export interface IconProps extends Omit<ImageProps, 'src'> {
 export const Icon: FC<IconProps> = ({ currency, disableLink, ...rest }) => {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
-  const { chainId } = useActiveWeb3React()
 
   const src = useMemo(() => {
     if (currency.isNative) {
-      return LOGO[chainId]
+      return LOGO[currency.chainId]
     }
 
     if (currency instanceof WrappedTokenInfo && currency.logoURI) {

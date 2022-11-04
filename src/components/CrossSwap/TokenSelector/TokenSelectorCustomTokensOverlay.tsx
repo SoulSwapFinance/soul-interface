@@ -1,7 +1,7 @@
 import { ChevronRightIcon, ExternalLinkIcon } from '@heroicons/react/outline'
 import { CurrencyDollarIcon, XCircleIcon } from '@heroicons/react/solid'
-import chain from 'constants/xchains'
-import { Currency } from 'sdk'
+import chain from 'soulswap-chain'
+import { Token, Type } from 'soulswap-currency'
 import { useIsMounted } from 'packages/hooks'
 import React, { CSSProperties, FC, useMemo, useState } from 'react'
 
@@ -10,11 +10,11 @@ import Typography from 'components/Typography'
 import { IconButton } from 'components/Icons/IconButton'
 import { Overlay } from 'components/Overlay'
 import { SlideIn } from 'components/Animated/SlideIn'
-import { Currency as CrossCurrency } from '../Currency'
+import { Currency } from '../Currency'
 import { Icon } from '../Currency/Icon'
 import { NetworkIcon } from 'components/Icons/NetworkIcon'
 
-export const TokenSelectorCustomTokenRow: FC<{ style: CSSProperties; currency: Currency; onRemove(): void }> = ({
+export const TokenSelectorCustomTokenRow: FC<{ style: CSSProperties; currency: Type; onRemove(): void }> = ({
   style,
   currency,
   onRemove,
@@ -69,7 +69,7 @@ export const TokenSelectorCustomTokensOverlay: FC<TokenSelectorSettingsOverlayPr
   const [open, setOpen] = useState<boolean>(false)
   const [ids, tokens] = useMemo(() => {
     const ids: string[] = []
-    const tokens: Currency[] = []
+    const tokens: Token[] = []
     if (customTokenMap) {
       Object.entries(customTokenMap).forEach(([k, v]) => {
         ids.push(k)
@@ -109,7 +109,7 @@ export const TokenSelectorCustomTokensOverlay: FC<TokenSelectorSettingsOverlayPr
         <Overlay.Content className="!bg-slate-800">
           <Overlay.Header onClose={() => setOpen(false)} title="Custom Tokens" />
           <div className="border-t border-slate-200/5 -ml-3 -mr-3 relative min-h-[320px] rounded-t-none lg:max-h-[calc(100%-108px)] rounded-xl overflow-hidden h-full">
-            <CrossCurrency.List
+            <Currency.List
               className="h-full"
               currencies={tokens}
               rowRenderer={({ style, currency }) => (

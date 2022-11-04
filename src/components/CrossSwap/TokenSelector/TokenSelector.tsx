@@ -1,23 +1,24 @@
-import { ChainId, Currency } from 'sdk'
+import { ChainId } from 'sdk'
+import { Type, Token } from 'soulswap-currency'
 import { FundSource, useIsMounted } from 'packages/hooks'
 import { FC, memo, useMemo } from 'react'
 
 // import { useBalances } from 'hooks/useBalance/useBalance'
 import { TokenSelectorDialog } from './TokenSelectorDialog'
 import { TokenSelectorOverlay } from './TokenSelectorOverlay'
-// import { usePrices } from 'hooks/usePrices'
+import { usePrices } from 'hooks/usePrices'
 import { useActiveWeb3React } from 'services/web3'
 
 export type TokenSelectorProps = {
   variant: 'overlay' | 'dialog'
-  currency?: Currency
+  currency?: Type
   open: boolean
   chainId: ChainId | undefined
-  tokenMap: Record<string, Currency>
-  customTokenMap?: Record<string, Currency>
+  tokenMap: Record<string, Token>
+  customTokenMap?: Record<string, Token>
   onClose(): void
-  onSelect?(currency: Currency): void
-  onAddToken?(token: Currency): void
+  onSelect?(currency: Type): void
+  onAddToken?(token: Token): void
   onRemoveToken?({ chainId, address }: { chainId: ChainId; address: string }): void
   fundSource?: FundSource
   includeNative?: boolean
@@ -38,7 +39,7 @@ export const TokenSelector: FC<TokenSelectorProps> = memo(
     const { account } = useActiveWeb3React()
     const isMounted = useIsMounted()
 
-    const _tokenMap: Record<string, Currency> = useMemo(
+    const _tokenMap: Record<string, Token> = useMemo(
       () => ({ ...tokenMap, ...customTokenMap }),
       [tokenMap, customTokenMap]
     )
