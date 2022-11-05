@@ -267,6 +267,7 @@ export const EIP_1559_ACTIVATION_BLOCK: { [chainId in ChainId]?: number } = {
 
 export const DEFAULT_TXN_DISMISS_MS = 25000
 export const IS_IN_IFRAME = typeof window !== 'undefined' && window.parent !== window
+export const GENERIC_GAS_LIMIT_ORDER_EXECUTION = BigNumber.from(500000);
 
 export * from './routing'
 export * from './addresses'
