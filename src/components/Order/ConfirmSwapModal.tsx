@@ -5,7 +5,7 @@ import {
   TradeType,
 } from "sdk";
 import { Trade } from "sdk";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 // import TransactionConfirmationModal, {
 //   ConfirmationModalContent,
 //   TransactionErrorContent,
@@ -21,6 +21,7 @@ export default function ConfirmSwapModal({
   onDismiss,
   recipient,
   swapErrorMessage,
+  originalTrade,
   isOpen,
   attemptingTxn,
   txHash,
@@ -45,14 +46,14 @@ export default function ConfirmSwapModal({
   //   () =>
   //     Boolean(
   //       trade instanceof Trade &&
-  //         originalTrade instanceof Trade &&
-  //         tradeMeaningfullyDiffers(trade, originalTrade)
+  //         originalTrade instanceof Trade // &&
+  //         // tradeMeaningfullyDiffers(trade, originalTrade)
   //     ),
   //   [originalTrade, trade]
   // );
 
   const [disclaimer, setDisclaimer] = useState<boolean>(false);
-  // const showAcceptChanges = false;
+  const showAcceptChanges = false;
 
   const modalHeader = useCallback(() => {
     return (

@@ -22,10 +22,11 @@ interface CurrencyInputPanelProps {
   onUserInput?: (value: string) => void
   onHalf?: () => void
   onMax?: () => void
-  showMaxButton: boolean
+  // showMaxButton: boolean
   label?: string
   onCurrencySelect?: (currency: Currency) => void
   currency?: Currency | null
+  showCurrencySelect?: boolean
   disableCurrencySelect?: boolean
   hideBalance?: boolean
   pair?: Pair | null
@@ -49,8 +50,9 @@ export default function CurrencyInputPanel({
   onHalf,
   onMax,
   // showMaxButton,
-  label = 'Input',
+  label = '',
   onCurrencySelect,
+  // showCurrencySelect = true,
   currency,
   disableCurrencySelect = false,
   otherCurrency,
@@ -78,7 +80,8 @@ export default function CurrencyInputPanel({
 
   return (
     <div id={id} className={classNames(hideInput ? 'p-4' : 'p-5', 'rounded bg-dark-800')}>
-      <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
+      {/* <div className={classNames(disableCurrencySelect ? "flex justify-center" : "flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row")}> */}
+      <div className={classNames("flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row")}>
         <div className={classNames('w-full sm:w-2/5')}>
           <button
             type="button"
@@ -92,7 +95,7 @@ export default function CurrencyInputPanel({
               }
             }}
           >
-            <div className="flex">
+            <div className={classNames("flex")}>
               {pair ? (
                 <DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={54} margin={true} />
               ) : currency ? (
@@ -101,11 +104,12 @@ export default function CurrencyInputPanel({
                 </div>
               ) : (
                 <div className="rounded bg-dark-700" style={{ maxWidth: 54, maxHeight: 54 }}>
-                  <div style={{ width: 54, height: 54 }}>
+                  <div className={classNames(disableCurrencySelect ? 'hidden' : '')} style={{ width: 54, height: 54 }}>
                     <Lottie animationData={selectCoinAnimation} autoplay loop />
                   </div>
                 </div>
-              )}
+              )
+              }
               {pair ? (
                 <span
                   className={classNames(
@@ -116,8 +120,8 @@ export default function CurrencyInputPanel({
                   {pair?.token0.symbol}:{pair?.token1.symbol}
                 </span>
               ) : (
-                <div className="flex flex-1 flex-col items-start justify-center mx-3.5">
-                  {label && <div className="text-xs font-medium text-secondary whitespace-nowrap">{label}</div>}
+                <div className={classNames(disableCurrencySelect ? "flex" : "flex flex-1 flex-col items-start justify-center mx-3.5")}>
+                  {label && <div className={disableCurrencySelect ? "flex justify-center text-xl font-bold" : "text-xs font-medium text-secondary whitespace-nowrap"}>{label}</div>}
                   <div className="flex items-center">
                     <div className="text-lg font-bold token-symbol-container md:text-2xl">
                       {(currency && currency.symbol && currency.symbol.length > 20
@@ -125,7 +129,7 @@ export default function CurrencyInputPanel({
                           '...' +
                           currency.symbol.slice(currency.symbol.length - 5, currency.symbol.length)
                         : currency?.symbol) || (
-                        <div className="px-2 py-1 mt-1 text-xs font-medium bg-transparent border rounded-full hover:bg-primary border-low-emphesis text-secondary whitespace-nowrap ">
+                        <div className={classNames(disableCurrencySelect ? "hidden" : "px-2 py-1 mt-1 text-xs font-medium bg-transparent border rounded-full hover:bg-primary border-low-emphesis text-secondary whitespace-nowrap")}>
                           {i18n._(t`Select Token`)}
                         </div>
                       )}
@@ -156,7 +160,7 @@ export default function CurrencyInputPanel({
               />
               {!hideBalance && currency && selectedCurrencyBalance ? (
                 <div className="flex flex-cols-2">
-                  <div onClick={onHalf} className="text-xs font-medium text-right cursor-pointer text-low-emphesis">
+                  {/* <div onClick={onHalf} className="text-xs font-medium text-right cursor-pointer text-low-emphesis">
                     {renderBalance ? (
                       renderBalance(selectedCurrencyBalance)
                     ) : (           
@@ -165,19 +169,23 @@ export default function CurrencyInputPanel({
                         {i18n._(t`50%`)} 
                       </>
                     )}
-                  </div>
-                  <br/>
-                  <div onClick={onMax} className="text-xs font-medium text-right cursor-pointer text-low-emphesis">
+                  </div> 
+                  <br/> */}
+                  <div onClick={onMax} className="text-xs font-medium text-right cursor-pointer text-low-emphesis mr-2">
                     {renderBalance ? (
                       renderBalance(selectedCurrencyBalance)
                     ) : (           
 
                       <>
-                        {selectedCurrencyBalance?.toSignificant(6, { groupSeparator: ',' }) || '0'} {currency?.symbol}
+                        {`MAX: ${selectedCurrencyBalance?.toSignificant(2, { groupSeparator: ',' })} ` || '0'} 
+                        {/* {`MAX`} */}
+                        {/* {currency?.symbol} */}
                       </>
                     )}
-                  </div>
+                <div>
                   <FiatValue fiatValue={fiatValue} priceImpact={priceImpact} />
+                </div>
+                  </div>
                 </div>
               ) : null}
             </>

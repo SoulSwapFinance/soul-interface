@@ -19,9 +19,13 @@ import {
 } from "react-feather";
 import { Text } from "rebass";
 import styled from "styled-components";
+// import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
+// import { useModalOpen, useWalletModalToggle } from 'state/application/hooks'
+
 import {
   ButtonConfirmed,
   ButtonError,
+  ButtonLight,
   // ButtonLight,
   ButtonPrimary,
 } from "components/Button";
@@ -45,7 +49,6 @@ import {
 import Loader from "components/Loader";
 import { SOUL_FANTOM } from "constants/gelato/tokens.fantom";
 import { CurrencyLogo } from "components/CurrencyLogo";
-import { useActiveWeb3React } from "services/web3";
 import { tryParseAmount } from "functions/parse";
 import { TYPE } from "theme";
 import { ArrowWrapper, BottomGrouping, Dots, SwapCallbackError, Wrapper } from "components/Order/styleds";
@@ -53,15 +56,21 @@ import ConfirmSwapModal from "components/Order/ConfirmSwapModal";
 import UnsupportedCurrencyFooter from "components/Order/UnsupportedCurrencyFooter";
 import useGasOverhead from "hooks/gelato/useGasOverhead";
 import TradePrice from "components/Order/TradePrice";
-import { AdvancedSwapDetails } from "components/Order/AdvancedSwapDetails";
+// import { AdvancedSwapDetails } from "components/Order/AdvancedSwapDetails";
 import CurrencyInputPanel from "components/CurrencyInputPanel";
-import Input from "components/Input";
+// import Input from "components/Input";
+import OrderHeader from "components/Order/OrderHeader";
+import { classNames } from "functions";
+import { useActiveWeb3React } from "services/web3";
+import SwapHeader from "features/swap/SwapHeader";
+import Container from "components/Container";
 // import CurrencyInputPanel from "components/Order/CurrencyInputPanel";
+import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
 
 const BodyWrapper = styled.div<{ margin?: string }>`
-  position: relative;
-  margin-top: ${({ margin }) => margin ?? "0px"};
-  max-width: 1080px;
+position: relative;
+margin-top: ${({ margin }) => margin ?? "0px"};
+max-width: 1080px;
   width: 100%;
   background: ${({ theme }) => theme.bg7};
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04),
@@ -103,7 +112,7 @@ interface GelatoLimitOrderProps {
 }
 
 const Limit = () => {
-  const { account, toggleWalletModal } = useWeb3();
+  const { account } = useActiveWeb3React();
 
   const theme = useTheme();
   const recipient = account ?? null;
@@ -379,9 +388,11 @@ const Limit = () => {
   }, [approveCallback]);
 
   return (
-    <Fragment>
-      <AppBody>
-        {/* <SwapHeader handleActiveTab={handleActiveTab} activeTab={activeTab} /> */}
+<Container id="cross-page" maxWidth="2xl" className="space-y-4">
+          <DoubleGlowShadowV2>
+          <div className="p-4 px-2 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+            <SwapHeader />
+        <OrderHeader handleActiveTab={handleActiveTab} activeTab={activeTab} />
         <Wrapper id="limit-order-page">
           <ConfirmSwapModal
             isOpen={showConfirm}
@@ -403,11 +414,11 @@ const Limit = () => {
             <div style={{ display: "relative" }}>
               <CurrencyInputPanel
                 chainId={chainId}
-                label={
-                  independentField === Field.OUTPUT ? "From (at most)" : "From"
-                }
+                // label={
+                //   independentField === Field.OUTPUT ? "From (at most)" : "From"
+                // }
                 value={formattedAmounts.input}
-                showMaxButton={showMaxButton}
+                // showMaxButton={showMaxButton}
                 currency={currencies.input}
                 onUserInput={handleTypeInput}
                 onMax={handleMaxInput}
@@ -438,37 +449,39 @@ const Limit = () => {
                   />
                 )}
               </ArrowWrapper>
-              <Input.Numeric
-                id="rate-input"
-                value={formattedAmounts.price}
-                onUserInput={(val) => {
-                  handleTypeDesiredRate(val)
-                }}
-                />
-              {/* <CurrencyInputPanel
+              <CurrencyInputPanel
                 chainId={chainId}
                 value={formattedAmounts.price}
-                showMaxButton={showMaxButton}
+                // showMaxButton={false}
+                showCurrencySelect={false}
                 // currency={currencies.input}
                 onUserInput={handleTypeDesiredRate}
                 fiatValue={fiatValueDesiredRate ?? undefined}
                 onCurrencySelect={handleInputSelect}
-                otherCurrency={currencies.output}
+                // otherCurrency={currencies.output}
                 showCommonBases={false}
                 id="limit-order-currency-rate"
                 disableCurrencySelect={true}
                 hideBalance={true}
+                label={
+                  !trade  ? '' : trade && rateType === Rate.DIV
+                  // ? `${currencies.input.symbol} ≈ ${Number(formattedAmounts.price).toFixed(2)} ${currencies.output.symbol}`
+                  ? `≈ ${(1/Number(formattedAmounts.price)).toFixed(4)} (${currencies.output.symbol})`
+                  : `≈ ${(1/Number(formattedAmounts.price)).toFixed(4)} (${currencies.input.symbol})`
+                  // : `${currencies.output.symbol} : ${currencies.input.symbol}`
+
+                }
+                // label={`Price Ratio`}
                 // showRate={true}
                 // isInvertedRate={rateType === Rate.MUL ? false : true}
                 // gasPrice={gasPrice}
                 // realExecutionPrice={realExecutionPrice ?? undefined}
                 // realExecutionPriceAsString={realExecutionPriceAsString}
-              /> */}
+              />
               <ArrowWrapper clickable>
                 <ArrowDown
                   size="16"
                   onClick={() => {
-                    //   setApprovalSubmitted(false); // reset 2 step UI for approvals
                     handleSwitchTokens();
                   }}
                   color={
@@ -482,10 +495,10 @@ const Limit = () => {
                 chainId={chainId}
                 value={formattedAmounts.output}
                 onUserInput={handleTypeOutput}
-                label={
-                  independentField === Field.INPUT ? "To (at least)" : "To"
-                }
-                showMaxButton={false}
+                // label={
+                //   independentField === Field.INPUT ? "To (at least)" : "To"
+                // }
+                // showMaxButton={false}
                 hideBalance={false}
                 priceImpact={percentageRateDifference}
                 currency={currencies.output}
@@ -497,35 +510,33 @@ const Limit = () => {
               />
             </div>
 
-            <Row
-              style={{ justifyContent: !trade ? "center" : "space-between" }}
-            >
-              {trade ? (
-                <RowFixed>
-                  {/* Current Market Rate */}
+            { trade &&
+              <div className={classNames(!trade ? "hidden" : "flex justify-between")}>
+                  <div className={'flex mx-2'}>
+                  Current Market Rate
+                  </div>
+                  <div className={'flex mx-2'}>
                   <TradePrice
-                    price={trade.executionPrice}
+                    price={trade?.executionPrice}
                     showInverted={showInverted}
                     setShowInverted={setShowInverted}
                   />
-                  <MouseoverTooltipContent content={<AdvancedSwapDetails />}>
-                    <StyledInfo />
-                  </MouseoverTooltipContent>
-                </RowFixed>
-              ) : null}
-            </Row>
+                  </div>
+              </div>
+              }
 
             <BottomGrouping>
               {swapIsUnsupported ? (
                 <ButtonPrimary disabled={true}>
                   <TYPE.Main mb="4px">Unsupported Asset</TYPE.Main>
                 </ButtonPrimary>
-            //   ) : 
-            //   !account ? (
-            //     <ButtonLight onClick={toggleWalletModal}>
-            //       Connect Wallet
-            //     </ButtonLight>
-              ) : routeNotFound && isLoadingRoute ? (
+              ) : 
+              // !account ? (
+              //   <ButtonLight onClick={useWalletModalToggle}>
+              //     Connect Wallet
+              //   </ButtonLight>
+              // ) : 
+              routeNotFound && isLoadingRoute ? (
                 <PurpleCard style={{ textAlign: "center" }}>
                   <TYPE.Main mb="4px">
                     <Dots>Loading</Dots>
@@ -631,15 +642,16 @@ const Limit = () => {
             </BottomGrouping>
           </AutoColumn>
         </Wrapper>
-      </AppBody>
 
       {!swapIsUnsupported ? null : (
         <UnsupportedCurrencyFooter
-          show={swapIsUnsupported}
-          currencies={[currencies.input, currencies.output]}
+        show={swapIsUnsupported}
+        currencies={[currencies.input, currencies.output]}
         />
-      )}
-    </Fragment>
+        )}
+        </div>
+        </DoubleGlowShadowV2>
+    </Container>
   );
 }
 

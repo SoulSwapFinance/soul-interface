@@ -65,12 +65,12 @@ export function AdvancedSwapDetails() {
         gelatoFeePercentage: undefined,
       };
 
-    // if (utils.isTransactionCostDependentChain(chainId))
-    //   return {
-    //     minReturn: outputAmount,
-    //     slippagePercentage: undefined,
-    //     gelatoFeePercentage: undefined,
-    //   };
+    if (isTransactionCostDependentChain(chainId))
+      return {
+        minReturn: outputAmount,
+        slippagePercentage: undefined,
+        gelatoFeePercentage: undefined,
+      };
 
     const { minReturn } = library.getFeeAndSlippageAdjustedMinReturn(
       rawOutputAmount

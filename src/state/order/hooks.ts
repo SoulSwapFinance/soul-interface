@@ -26,6 +26,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState } from ".."
 import { useWeb3 } from "services/web3/hooks/useWeb3";
 import { useCurrencyBalances } from "state/wallet/hooks";
+import { useActiveWeb3React } from "services/web3";
 
 export function applyExchangeRateTo(
   inputValue: string,
@@ -181,7 +182,7 @@ export interface DerivedOrderInfo {
 
 // from the current swap inputs, compute the best trade and return it.
 export function useDerivedOrderInfo(): DerivedOrderInfo {
-  const { account, handler, chainId } = useWeb3();
+  const { account, chainId } = useActiveWeb3React();
 
   const {
     independentField,
@@ -242,12 +243,12 @@ export function useDerivedOrderInfo(): DerivedOrderInfo {
   const bestTradeExactIn = useTradeExactIn(
     isExactIn ? parsedAmountToUse : undefined,
     outputCurrency ?? undefined,
-    handler
+    'soulswap'
   );
   const bestTradeExactOut = useTradeExactOut(
     inputCurrency ?? undefined,
     !isExactIn ? parsedAmountToUse : undefined,
-    handler
+    'soulswap'
   );
 
   const trade = isExactIn ? bestTradeExactIn : bestTradeExactOut;
