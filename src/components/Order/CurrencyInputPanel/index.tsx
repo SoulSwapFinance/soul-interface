@@ -34,6 +34,7 @@ import { TYPE } from "theme";
 import { useWeb3 } from "services/web3/hooks/useWeb3";
 import { ArrowDownIcon } from "@heroicons/react/solid";
 import CurrencySearchModal from "modals/SearchModal/CurrencySearchModal";
+import { useActiveWeb3React } from "services/web3";
 // import Loader from "../Loader";
 
 const InputPanel = styled.div<{ hideInput?: boolean }>`
@@ -185,7 +186,7 @@ interface CurrencyInputPanelProps {
   pair?: Pair | null;
   hideInput?: boolean;
   otherCurrency?: Currency | null;
-  fiatValue?: CurrencyAmount<Token> | null;
+  fiatValue?: CurrencyAmount<Currency> | null;
   priceImpact?: Percent;
   id: string;
   showCommonBases?: boolean;
@@ -228,7 +229,7 @@ export default function CurrencyInputPanel({
   const [modalOpen, setModalOpen] = useState(false);
   // const [showInverted, setShowInverted] = useState<boolean>(true);
 
-  const { account, chainId } = useWeb3();
+  const { account, chainId } = useActiveWeb3React();
   const selectedCurrencyBalance = useCurrencyBalance(
     chainId,
     account ?? undefined,

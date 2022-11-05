@@ -1,5 +1,5 @@
-import { CurrencyAmount, Token } from '../../sdk'
+import { CurrencyAmount, Currency } from '../../sdk'
 
 type TokenAddress = string
 
-export type TokenBalancesMap = Record<TokenAddress, CurrencyAmount<Token>>
+export type TokenBalancesMap = Record<TokenAddress, CurrencyAmount<Currency>>

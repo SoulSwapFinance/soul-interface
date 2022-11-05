@@ -12,25 +12,25 @@ export default function OrderHeader({
   activeTab: string;
 }) {
   const { chainId } = useActiveWeb3React()
-  const isBuy = activeTab === "buy"
-  const isSell = !isBuy
+  const isSell = activeTab === "sell"
+  const isBuy = !isSell
 
   return (
     <div className={'grid grid-cols-2 gap-2 m-1'}>
 
 
-      <div className={classNames(isBuy ? `bg-${getChainColorCode(chainId)} text-white` : `text-${getChainColorCode(chainId)}`, `grid grid-cols-1 m-2 bg-dark-800 rounded rounded-xl`)}>
-        <Button
-          active={activeTab === "buy"}
-          onClick={() => handleActiveTab("buy")}
-        >
-          SELL
-        </Button>
-      </div>
       <div className={classNames(isSell ? `bg-${getChainColorCode(chainId)} text-white` : `text-${getChainColorCode(chainId)}`, `grid grid-cols-1 m-2 bg-dark-800 rounded rounded-xl`)}>
         <Button
           active={activeTab === "sell"}
           onClick={() => handleActiveTab("sell")}
+        >
+          SELL
+        </Button>
+      </div>
+      <div className={classNames(isBuy ? `bg-${getChainColorCode(chainId)} text-white` : `text-${getChainColorCode(chainId)}`, `grid grid-cols-1 m-2 bg-dark-800 rounded rounded-xl`)}>
+        <Button
+          active={activeTab === "buy"}
+          onClick={() => handleActiveTab("buy")}
         >
           BUY
         </Button>

@@ -1,14 +1,15 @@
-import React, { useCallback, useState, Fragment, useEffect } from "react";
+import React, { useCallback, useState, Fragment, useEffect } from "react"
 import {
+  ChainId,
   Currency,
   CurrencyAmount,
   Percent,
   TradeType,
-} from "sdk";
-import { NATIVE, Trade } from "sdk";
-// import { AdvancedSwapDetails } from "../order/AdvancedSwapDetails";
-// import UnsupportedCurrencyFooter from "../order/UnsupportedCurrencyFooter";
-import { MouseoverTooltip, MouseoverTooltipContent } from "components/Tooltip";
+} from "sdk"
+import { Trade } from "sdk"
+// import { AdvancedSwapDetails } from "../order/AdvancedSwapDetails"
+// import UnsupportedCurrencyFooter from "../order/UnsupportedCurrencyFooter"
+import { MouseoverTooltip, MouseoverTooltipContent } from "components/Tooltip"
 import {
   ArrowDown,
   Info,
@@ -16,11 +17,11 @@ import {
   X,
   CheckCircle,
   HelpCircle,
-} from "react-feather";
-import { Text } from "rebass";
-import styled from "styled-components";
+} from "react-feather"
+import { Text } from "rebass"
+import styled from "styled-components"
 // import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
-// import { useModalOpen, useWalletModalToggle } from 'state/application/hooks'
+import { useModalOpen, useWalletModalToggle } from 'state/application/hooks'
 
 import {
   ButtonConfirmed,
@@ -28,44 +29,50 @@ import {
   ButtonLight,
   // ButtonLight,
   ButtonPrimary,
-} from "components/Button";
-import PurpleCard from "components/Card";
-import { AutoColumn } from "components/Column";
-// import CurrencyInputPanel from "components/CurrencyInputPanel";
-import Row, { AutoRow, RowFixed } from "components/Row";
-// import TradePrice from "../order/TradePrice";
-import useGelatoLimitOrders from "hooks/gelato/useGelatoLimitOrders";
-import { useIsSwapUnsupported } from "hooks/useIsSwapUnsupported";
-import { useUSDCValue } from "hooks/useUSDCPrice";
-import { Field } from "state/order/actions";
-// import { tryParseAmount } from "state/gorder/hooks";
-import { maxAmountSpend } from "utils/currency/maxAmountSpend";
-import { useWeb3 } from "services/web3/hooks/useWeb3";
-import useTheme from "hooks/useTheme";
+} from "components/Button"
+import PurpleCard from "components/Card"
+import { AutoColumn } from "components/Column"
+// import CurrencyInputPanel from "components/CurrencyInputPanel"
+import Row, { AutoRow, RowFixed } from "components/Row"
+// import TradePrice from "../order/TradePrice"
+import useGelatoLimitOrders from "hooks/gelato/useGelatoLimitOrders"
+import { useIsSwapUnsupported } from "hooks/useIsSwapUnsupported"
+import { useUSDCValue } from "hooks/useUSDCPrice"
+import { Field } from "state/order/actions"
+// import { tryParseAmount } from "state/gorder/hooks"
+import { maxAmountSpend } from "utils/currency/maxAmountSpend"
+import useTheme from "hooks/useTheme"
 import {
   ApprovalState,
   useApproveCallbackFromInputCurrencyAmount,
-} from "hooks/useApproveCallback";
-import Loader from "components/Loader";
-import { SOUL_FANTOM } from "constants/gelato/tokens.fantom";
-import { CurrencyLogo } from "components/CurrencyLogo";
-import { tryParseAmount } from "functions/parse";
-import { TYPE } from "theme";
-import { ArrowWrapper, BottomGrouping, Dots, SwapCallbackError, Wrapper } from "components/Order/styleds";
-import ConfirmSwapModal from "components/Order/ConfirmSwapModal";
-import UnsupportedCurrencyFooter from "components/Order/UnsupportedCurrencyFooter";
-import useGasOverhead from "hooks/gelato/useGasOverhead";
-import TradePrice from "components/Order/TradePrice";
-// import { AdvancedSwapDetails } from "components/Order/AdvancedSwapDetails";
-import CurrencyInputPanel from "components/CurrencyInputPanel";
-// import Input from "components/Input";
-import OrderHeader from "components/Order/OrderHeader";
-import { classNames } from "functions";
-import { useActiveWeb3React } from "services/web3";
-import SwapHeader from "features/swap/SwapHeader";
-import Container from "components/Container";
-// import CurrencyInputPanel from "components/Order/CurrencyInputPanel";
-import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
+} from "hooks/useApproveCallback"
+import Loader from "components/Loader"
+// import { SOUL_FANTOM } from "constants/gelato/tokens.fantom"
+import { CurrencyLogo } from "components/CurrencyLogo"
+import { tryParseAmount } from "functions/parse"
+import { TYPE } from "theme"
+import { ArrowWrapper, BottomGrouping, Dots, SwapCallbackError, Wrapper } from "components/Order/styleds"
+import ConfirmSwapModal from "components/Order/ConfirmSwapModal"
+import UnsupportedCurrencyFooter from "components/Order/UnsupportedCurrencyFooter"
+import useGasOverhead from "hooks/gelato/useGasOverhead"
+import TradePrice from "components/Order/TradePrice"
+// import { AdvancedSwapDetails } from "components/Order/AdvancedSwapDetails"
+import CurrencyInputPanel from "components/CurrencyInputPanel"
+// import Input from "components/Input"
+// import OrderHeader from "components/Order/OrderHeader"
+import { classNames } from "functions"
+import { useActiveWeb3React } from "services/web3"
+import SwapHeader from "features/swap/SwapHeader"
+import Container from "components/Container"
+// import CurrencyInputPanel from "components/Order/CurrencyInputPanel"
+import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2"
+import { NATIVE } from "constants/addresses"
+import NetworkGuard from "guards/Network"
+import { Feature } from "enums/Feature"
+import { SwapLayout } from "layouts/SwapLayout"
+import Image from 'next/image'
+import { GelatoLimitOrdersHistoryPanel } from "soulswap-limit-orders-react"
+import { Toggle } from "components/Toggle"
 
 const BodyWrapper = styled.div<{ margin?: string }>`
 position: relative;
@@ -107,15 +114,18 @@ enum Rate {
   MUL = "MUL",
 }
 
-interface GelatoLimitOrderProps {
-  showCommonBases?: boolean;
-}
+// interface GelatoLimitOrderProps {
+//   showCommonBases?: boolean;
+// }
 
 const Limit = () => {
   const { account } = useActiveWeb3React();
 
   const theme = useTheme();
   const recipient = account ?? null;
+
+  const [showOrders, setShowOrders] = useState(false)
+
 
   const {
     handlers: {
@@ -232,10 +242,10 @@ const Limit = () => {
   const maxInputAmount: CurrencyAmount<Currency> | undefined = maxAmountSpend(
     currencyBalances.input
   );
-  const showMaxButton = Boolean(
-    maxInputAmount?.greaterThan(0) &&
-      !parsedAmounts.input?.equalTo(maxInputAmount)
-  );
+  // const showMaxButton = Boolean(
+  //   maxInputAmount?.greaterThan(0) &&
+  //   !parsedAmounts.input?.equalTo(maxInputAmount)
+  // );
 
   const handleSwap = useCallback(() => {
     if (!handleLimitOrderSubmission) {
@@ -273,10 +283,10 @@ const Limit = () => {
 
       handleLimitOrderSubmission({
         inputToken: currencies.input?.isNative
-          ? NATIVE[chainId]
+          ? NATIVE
           : currencies.input?.wrapped.address,
         outputToken: currencies.output?.isNative
-          ? NATIVE[chainId]
+          ? NATIVE
           : currencies.output?.wrapped.address,
         inputAmount: rawAmounts.input,
         outputAmount: rawAmounts.output,
@@ -371,11 +381,11 @@ const Limit = () => {
     currencies?.output
   );
 
-  const {
-    gasPrice,
-    realExecutionPrice,
-    realExecutionPriceAsString,
-  } = useGasOverhead(parsedAmounts.input, parsedAmounts.output, rateType);
+  // const {
+  //   gasPrice,
+  //   realExecutionPrice,
+  //   realExecutionPriceAsString,
+  // } = useGasOverhead(parsedAmounts.input, parsedAmounts.output, rateType);
 
   const showApproveFlow =
     !inputError &&
@@ -388,271 +398,303 @@ const Limit = () => {
   }, [approveCallback]);
 
   return (
-<Container id="cross-page" maxWidth="2xl" className="space-y-4">
-          <DoubleGlowShadowV2>
-          <div className="p-4 px-2 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-            <SwapHeader />
-        <OrderHeader handleActiveTab={handleActiveTab} activeTab={activeTab} />
-        <Wrapper id="limit-order-page">
-          <ConfirmSwapModal
-            isOpen={showConfirm}
-            trade={trade}
-            originalTrade={tradeToConfirm}
-            onAcceptChanges={handleAcceptChanges}
-            attemptingTxn={attemptingTxn}
-            txHash={txHash}
-            recipient={recipient}
-            allowedSlippage={allowedSlippage}
-            onConfirm={handleSwap}
-            swapErrorMessage={swapErrorMessage}
-            onDismiss={handleConfirmDismiss}
-            inputAmount={parsedAmounts.input}
-            outputAmount={parsedAmounts.output}
-          />
+    <Container id="cross-page" maxWidth="2xl" className="space-y-4">
+      <DoubleGlowShadowV2>
+        <div className="p-4 px-2 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+          <SwapHeader />
+          {/* <OrderHeader handleActiveTab={handleActiveTab} activeTab={activeTab} /> */}
+          <Wrapper id="limit-order-page">
+            <ConfirmSwapModal
+              isOpen={showConfirm}
+              trade={trade}
+              originalTrade={tradeToConfirm}
+              onAcceptChanges={handleAcceptChanges}
+              attemptingTxn={attemptingTxn}
+              txHash={txHash}
+              recipient={recipient}
+              allowedSlippage={allowedSlippage}
+              onConfirm={handleSwap}
+              swapErrorMessage={swapErrorMessage}
+              onDismiss={handleConfirmDismiss}
+              inputAmount={parsedAmounts.input}
+              outputAmount={parsedAmounts.output}
+            />
 
-          <AutoColumn gap={"md"}>
-            <div style={{ display: "relative" }}>
-              <CurrencyInputPanel
-                chainId={chainId}
-                // label={
-                //   independentField === Field.OUTPUT ? "From (at most)" : "From"
-                // }
-                value={formattedAmounts.input}
-                // showMaxButton={showMaxButton}
-                currency={currencies.input}
-                onUserInput={handleTypeInput}
-                onMax={handleMaxInput}
-                fiatValue={fiatValueInput ?? undefined}
-                onCurrencySelect={handleInputSelect}
-                otherCurrency={currencies.output || SOUL_FANTOM}
-                showCommonBases={false}
-                id="limit-order-currency-input"
-              />
-              <ArrowWrapper clickable={false}>
-                {rateType === Rate.MUL ? (
-                  <X
-                    size="16"
-                    color={
-                      currencies.input && currencies.output
-                        ? theme.text1
-                        : theme.text3
-                    }
-                  />
-                ) : (
-                  <Divide
-                    size="16"
-                    color={
-                      currencies.input && currencies.output
-                        ? theme.text1
-                        : theme.text3
-                    }
-                  />
-                )}
-              </ArrowWrapper>
-              <CurrencyInputPanel
-                chainId={chainId}
-                value={formattedAmounts.price}
-                // showMaxButton={false}
-                showCurrencySelect={false}
-                // currency={currencies.input}
-                onUserInput={handleTypeDesiredRate}
-                fiatValue={fiatValueDesiredRate ?? undefined}
-                onCurrencySelect={handleInputSelect}
-                // otherCurrency={currencies.output}
-                showCommonBases={false}
-                id="limit-order-currency-rate"
-                disableCurrencySelect={true}
-                hideBalance={true}
-                label={
-                  !trade  ? '' : trade && rateType === Rate.DIV
-                  // ? `${currencies.input.symbol} ≈ ${Number(formattedAmounts.price).toFixed(2)} ${currencies.output.symbol}`
-                  ? `≈ ${(1/Number(formattedAmounts.price)).toFixed(4)} (${currencies.output.symbol})`
-                  : `≈ ${(1/Number(formattedAmounts.price)).toFixed(4)} (${currencies.input.symbol})`
-                  // : `${currencies.output.symbol} : ${currencies.input.symbol}`
+            <AutoColumn gap={"md"}>
+              <div style={{ display: "relative" }}>
+                <CurrencyInputPanel
+                  chainId={chainId}
+                  // label={
+                  //   independentField === Field.OUTPUT ? "From (at most)" : "From"
+                  // }
+                  value={formattedAmounts.input}
+                  // showMaxButton={showMaxButton}
+                  currency={currencies.input}
+                  onUserInput={handleTypeInput}
+                  onMax={handleMaxInput}
+                  fiatValue={fiatValueInput ?? undefined}
+                  onCurrencySelect={handleInputSelect}
+                  // otherCurrency={currencies.output || SOUL_FANTOM}
+                  showCommonBases={false}
+                  id="limit-order-currency-input"
+                />
+                <ArrowWrapper clickable={false}>
+                  {rateType === Rate.MUL ? (
+                    <X
+                      size="16"
+                      color={
+                        currencies.input && currencies.output
+                          ? theme.text1
+                          : theme.text3
+                      }
+                    />
+                  ) : (
+                    <Divide
+                      size="16"
+                      color={
+                        currencies.input && currencies.output
+                          ? theme.text1
+                          : theme.text3
+                      }
+                    />
+                  )}
+                </ArrowWrapper>
+                <CurrencyInputPanel
+                  chainId={chainId}
+                  value={formattedAmounts.price}
+                  // showMaxButton={false}
+                  showCurrencySelect={false}
+                  // currency={currencies.input}
+                  onUserInput={handleTypeDesiredRate}
+                  fiatValue={fiatValueDesiredRate ?? undefined}
+                  onCurrencySelect={handleInputSelect}
+                  // otherCurrency={currencies.output}
+                  showCommonBases={false}
+                  id="limit-order-currency-rate"
+                  disableCurrencySelect={true}
+                  hideBalance={true}
+                  label={
+                    trade && rateType === Rate.MUL  ? 
+                    `≈ ${(Number(formattedAmounts.price)).toFixed(4)} (${currencies.output.symbol})`
+                    : 'Sell Price'
+                      // ? `${currencies.input.symbol} ≈ ${Number(formattedAmounts.price).toFixed(2)} ${currencies.output.symbol}`
+                      // ? `≈ ${(1 / Number(formattedAmounts.price)).toFixed(4)} (${currencies.output.symbol})`
+                      // : `≈ ${(1 / Number(formattedAmounts.price)).toFixed(4)} (${currencies.input.symbol})`
+                    // : `${currencies.output.symbol} : ${currencies.input.symbol}`
 
-                }
+                  }
                 // label={`Price Ratio`}
                 // showRate={true}
                 // isInvertedRate={rateType === Rate.MUL ? false : true}
                 // gasPrice={gasPrice}
                 // realExecutionPrice={realExecutionPrice ?? undefined}
                 // realExecutionPriceAsString={realExecutionPriceAsString}
-              />
-              <ArrowWrapper clickable>
-                <ArrowDown
-                  size="16"
-                  onClick={() => {
-                    handleSwitchTokens();
-                  }}
-                  color={
-                    currencies.input && currencies.output
-                      ? theme.text1
-                      : theme.text3
-                  }
                 />
-              </ArrowWrapper>
-              <CurrencyInputPanel
-                chainId={chainId}
-                value={formattedAmounts.output}
-                onUserInput={handleTypeOutput}
-                // label={
-                //   independentField === Field.INPUT ? "To (at least)" : "To"
-                // }
-                // showMaxButton={false}
-                hideBalance={false}
-                priceImpact={percentageRateDifference}
-                currency={currencies.output}
-                onCurrencySelect={handleOutputSelect}
-                otherCurrency={currencies.input}
-                showCommonBases={false}
-                // rateType={rateType}
-                id="limit-order-currency-output"
-              />
-            </div>
-
-            { trade &&
-              <div className={classNames(!trade ? "hidden" : "flex justify-between")}>
-                  <div className={'flex mx-2'}>
-                  Current Market Rate
-                  </div>
-                  <div className={'flex mx-2'}>
-                  <TradePrice
-                    price={trade?.executionPrice}
-                    showInverted={showInverted}
-                    setShowInverted={setShowInverted}
+                <ArrowWrapper clickable>
+                  <ArrowDown
+                    size="16"
+                    onClick={() => {
+                      handleSwitchTokens();
+                    }}
+                    color={
+                      currencies.input && currencies.output
+                        ? theme.text1
+                        : theme.text3
+                    }
                   />
-                  </div>
+                </ArrowWrapper>
+                <CurrencyInputPanel
+                  chainId={chainId}
+                  value={formattedAmounts.output}
+                  onUserInput={handleTypeOutput}
+                  // label={
+                  //   independentField === Field.INPUT ? "To (at least)" : "To"
+                  // }
+                  // showMaxButton={false}
+                  hideBalance={false}
+                  // priceImpact={percentageRateDifference}
+                  priceImpact={percentageRateDifference}
+                  currency={currencies.output}
+                  onCurrencySelect={handleOutputSelect}
+                  otherCurrency={currencies.input}
+                  showCommonBases={false}
+                  // rateType={rateType}
+                  id="limit-order-currency-output"
+                />
               </div>
+
+              {trade &&
+                <div className={classNames(!trade ? "hidden" : "flex justify-between")}>
+                  <div className={'flex mx-2'}>
+                    Current Market Rate
+                  </div>
+                  <div className={'flex mx-2'}>
+                    <TradePrice
+                      price={trade?.executionPrice}
+                      showInverted={showInverted}
+                      setShowInverted={setShowInverted}
+                    />
+                  </div>
+                </div>
               }
 
-            <BottomGrouping>
-              {swapIsUnsupported ? (
-                <ButtonPrimary disabled={true}>
-                  <TYPE.Main mb="4px">Unsupported Asset</TYPE.Main>
-                </ButtonPrimary>
-              ) : 
-              // !account ? (
-              //   <ButtonLight onClick={useWalletModalToggle}>
-              //     Connect Wallet
-              //   </ButtonLight>
-              // ) : 
-              routeNotFound && isLoadingRoute ? (
-                <PurpleCard style={{ textAlign: "center" }}>
-                  <TYPE.Main mb="4px">
-                    <Dots>Loading</Dots>
-                  </TYPE.Main>
-                </PurpleCard>
-              ) : showApproveFlow ? (
-                <AutoRow style={{ flexWrap: "nowrap", width: "100%" }}>
-                  <AutoColumn style={{ width: "100%" }} gap="12px">
-                    <ButtonConfirmed
-                      onClick={handleApprove}
-                      disabled={
-                        approvalState !== ApprovalState.NOT_APPROVED ||
-                        approvalSubmitted
-                      }
-                      width="100%"
-                      altDisabledStyle={approvalState === ApprovalState.PENDING} // show solid button while waiting
-                      confirmed={approvalState === ApprovalState.APPROVED}
-                    >
-                      <AutoRow
-                        justify="space-between"
-                        style={{ flexWrap: "nowrap" }}
-                      >
-                        <span style={{ display: "flex", alignItems: "center" }}>
-                          <CurrencyLogo
-                            currency={currencies.input}
-                            size={"20px"}
-                            style={{ marginRight: "8px", flexShrink: 0 }}
-                          />
-                          {/* we need to shorten this string on mobile */}
-                          {approvalState === ApprovalState.APPROVED
-                            ? `${currencies.input?.symbol} Allowed.`
-                            : `Approve
+              <BottomGrouping>
+                {swapIsUnsupported ? (
+                  <ButtonPrimary disabled={true}>
+                    <TYPE.Main mb="4px">Unsupported Asset</TYPE.Main>
+                  </ButtonPrimary>
+                ) :
+                  !account ? (
+                    <ButtonLight onClick={useWalletModalToggle}>
+                      Connect Wallet
+                    </ButtonLight>
+                  ) :
+                    routeNotFound && isLoadingRoute ? (
+                      <PurpleCard style={{ textAlign: "center" }}>
+                        <TYPE.Main mb="4px">
+                          <Dots>Loading</Dots>
+                        </TYPE.Main>
+                      </PurpleCard>
+                    ) : showApproveFlow ? (
+                      <AutoRow style={{ flexWrap: "nowrap", width: "100%" }}>
+                        <AutoColumn style={{ width: "100%" }} gap="12px">
+                          <ButtonConfirmed
+                            onClick={handleApprove}
+                            disabled={
+                              approvalState !== ApprovalState.NOT_APPROVED ||
+                              approvalSubmitted
+                            }
+                            width="100%"
+                            altDisabledStyle={approvalState === ApprovalState.PENDING} // show solid button while waiting
+                            confirmed={approvalState === ApprovalState.APPROVED}
+                          >
+                            <AutoRow
+                              justify="space-between"
+                              style={{ flexWrap: "nowrap" }}
+                            >
+                              <span style={{ display: "flex", alignItems: "center" }}>
+                                <CurrencyLogo
+                                  currency={currencies.input}
+                                  size={"20px"}
+                                  style={{ marginRight: "8px", flexShrink: 0 }}
+                                />
+                                {/* we need to shorten this string on mobile */}
+                                {approvalState === ApprovalState.APPROVED
+                                  ? `${currencies.input?.symbol} Allowed.`
+                                  : `Approve
                               ${currencies.input?.symbol}.`}
-                        </span>
-                        {approvalState === ApprovalState.PENDING ||
-                        (approvalSubmitted &&
-                          approvalState === ApprovalState.NOT_APPROVED) ? (
-                          <Loader stroke="white" />
-                        ) : approvalSubmitted &&
-                          approvalState === ApprovalState.APPROVED ? (
-                          <CheckCircle size="20" color={theme.green1} />
-                        ) : (
-                          <MouseoverTooltip
-                            text={`You must give the Limit Orders smart contracts
+                              </span>
+                              {approvalState === ApprovalState.PENDING ||
+                                (approvalSubmitted &&
+                                  approvalState === ApprovalState.NOT_APPROVED) ? (
+                                <Loader stroke="white" />
+                              ) : approvalSubmitted &&
+                                approvalState === ApprovalState.APPROVED ? (
+                                <CheckCircle size="20" color={theme.green1} />
+                              ) : (
+                                <MouseoverTooltip
+                                  text={`You must give the Limit Orders smart contracts
                                 permission to use your 
                                 ${currencies.input?.symbol}. You only have to do
                                 this once per token.`}
+                                >
+                                  <HelpCircle
+                                    size="20"
+                                    color={"white"}
+                                    style={{ marginLeft: "8px" }}
+                                  />
+                                </MouseoverTooltip>
+                              )}
+                            </AutoRow>
+                          </ButtonConfirmed>
+                          <ButtonError
+                            onClick={() => {
+                              setSwapState({
+                                tradeToConfirm: trade,
+                                attemptingTxn: false,
+                                swapErrorMessage: undefined,
+                                showConfirm: true,
+                                txHash: undefined,
+                              });
+                            }}
+                            id="limit-order-button"
+                            disabled={
+                              !isValid || approvalState !== ApprovalState.APPROVED
+                            }
+                            error={false}
                           >
-                            <HelpCircle
-                              size="20"
-                              color={"white"}
-                              style={{ marginLeft: "8px" }}
-                            />
-                          </MouseoverTooltip>
-                        )}
+                            <Text fontSize={20} fontWeight={500}>
+                              {inputError ? inputError : `Place Order`}
+                            </Text>
+                          </ButtonError>
+                        </AutoColumn>
                       </AutoRow>
-                    </ButtonConfirmed>
-                    <ButtonError
-                      onClick={() => {
-                        setSwapState({
-                          tradeToConfirm: trade,
-                          attemptingTxn: false,
-                          swapErrorMessage: undefined,
-                          showConfirm: true,
-                          txHash: undefined,
-                        });
-                      }}
-                      id="limit-order-button"
-                      disabled={
-                        !isValid || approvalState !== ApprovalState.APPROVED
-                      }
-                      error={false}
-                    >
-                      <Text fontSize={20} fontWeight={500}>
-                        {inputError ? inputError : `Place Order`}
-                      </Text>
-                    </ButtonError>
-                  </AutoColumn>
-                </AutoRow>
-              ) : (
-                <ButtonError
-                  onClick={() => {
-                    setSwapState({
-                      tradeToConfirm: trade,
-                      attemptingTxn: false,
-                      swapErrorMessage: undefined,
-                      showConfirm: true,
-                      txHash: undefined,
-                    });
-                  }}
-                  id="limit-order-button"
-                  disabled={!isValid}
-                  error={false}
-                >
-                  <Text fontSize={20} fontWeight={500}>
-                    {inputError ? inputError : `Place Order`}
-                  </Text>
-                </ButtonError>
-              )}
-              {swapErrorMessage && isValid ? (
-                <SwapCallbackError error={swapErrorMessage} />
-              ) : null}
-            </BottomGrouping>
-          </AutoColumn>
-        </Wrapper>
+                    ) : (
+                      <ButtonError
+                        onClick={() => {
+                          setSwapState({
+                            tradeToConfirm: trade,
+                            attemptingTxn: false,
+                            swapErrorMessage: undefined,
+                            showConfirm: true,
+                            txHash: undefined,
+                          });
+                        }}
+                        id="limit-order-button"
+                        disabled={!isValid}
+                        error={false}
+                      >
+                        <Text fontSize={20} fontWeight={500}>
+                          {inputError ? inputError : `Place Order`}
+                        </Text>
+                      </ButtonError>
+                    )}
+                {swapErrorMessage && isValid ? (
+                  <SwapCallbackError error={swapErrorMessage} />
+                ) : null}
+              </BottomGrouping>
+            </AutoColumn>
+          </Wrapper>
 
-      {!swapIsUnsupported ? null : (
-        <UnsupportedCurrencyFooter
-        show={swapIsUnsupported}
-        currencies={[currencies.input, currencies.output]}
-        />
-        )}
+          {!swapIsUnsupported ? null : (
+            <UnsupportedCurrencyFooter
+              show={swapIsUnsupported}
+              currencies={[currencies.input, currencies.output]}
+            />
+          )}
         </div>
-        </DoubleGlowShadowV2>
+      <div className={classNames([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `flex flex-cols-2 gap-3 text-white justify-end` : `hidden`)}>
+        <Toggle
+          id="toggle-button"
+          optionA="Orders"
+          optionB="Orders"
+          isActive={showOrders}
+          toggle={
+            showOrders
+            ? () => {
+              setShowOrders(false)
+            }
+            : () => {
+              setShowOrders(true)
+            }
+          }
+          />
+      </div>
+      {!showOrders &&
+        <div className="grid grid-cols-1">
+          <Image src='https://app.soulswap.finance/title-soul-halfs.png' height="400px" width="600px" alt="logo" />
+        </div>
+      }
+      {showOrders &&
+        <div className="ml-0 mb-4 sm:ml-0">
+          <GelatoLimitOrdersHistoryPanel />
+        </div>
+      }
+      </DoubleGlowShadowV2>
     </Container>
   );
 }
 
 export default Limit
+Limit.Guard = NetworkGuard(Feature.LIMIT)
+Limit.Layout = SwapLayout('limit-order-page')

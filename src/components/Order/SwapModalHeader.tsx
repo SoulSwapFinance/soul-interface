@@ -67,7 +67,7 @@ export default function SwapModalHeader({
 
   const [showInverted, setShowInverted] = useState<boolean>(false);
   const [showDisclaimer, setShowDisclaimer] = useState<boolean>(true);
-  const [disclaimer, setDisclaimer] = useState<boolean>(false);
+  const [disclaimer, setDisclaimer] = useState<boolean>(true);
 
   const {
     derivedOrderInfo: { price, parsedAmounts },
@@ -152,9 +152,9 @@ export default function SwapModalHeader({
         </AutoColumn>
       </DarkGreyCard>
       <RowBetween style={{ marginTop: "0.25rem", padding: "0 1rem" }}>
-        <TYPE.Body color={theme.text2} fontWeight={500} fontSize={14}>
+        {/* <TYPE.Body color={theme.text2} fontWeight={500} fontSize={14}>
           {"Limit Price:"}
-        </TYPE.Body>
+        </TYPE.Body> */}
         <TradePrice
           price={price!}
           showInverted={showInverted}
@@ -162,9 +162,9 @@ export default function SwapModalHeader({
         />
       </RowBetween>
 
-      <LightCard style={{ padding: ".75rem", marginTop: "0.5rem" }}>
+      {/* <LightCard style={{ padding: ".75rem", marginTop: "0.5rem" }}>
         <AdvancedSwapDetails />
-      </LightCard>
+      </LightCard> */}
 
       {showDisclaimer && (
         <AnimatedCard
@@ -186,7 +186,7 @@ export default function SwapModalHeader({
           {!showDisclaimer ? "Show" : "Hide"}
         </TYPE.Link>
         <Toggle 
-          isActive={false}
+          isActive={disclaimer}
           toggle={() => handleDisclaimer(!disclaimer)}
           // name={"disclaimer"}
           // disabled={false}
