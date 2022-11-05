@@ -22,12 +22,12 @@ import styled from "styled-components";
 import {
   ButtonConfirmed,
   ButtonError,
-  ButtonLight,
+  // ButtonLight,
   ButtonPrimary,
 } from "components/Button";
 import PurpleCard from "components/Card";
 import { AutoColumn } from "components/Column";
-import CurrencyInputPanel from "components/CurrencyInputPanel";
+// import CurrencyInputPanel from "components/CurrencyInputPanel";
 import Row, { AutoRow, RowFixed } from "components/Row";
 // import TradePrice from "../order/TradePrice";
 import useGelatoLimitOrders from "hooks/gelato/useGelatoLimitOrders";
@@ -54,6 +54,9 @@ import UnsupportedCurrencyFooter from "components/Order/UnsupportedCurrencyFoote
 import useGasOverhead from "hooks/gelato/useGasOverhead";
 import TradePrice from "components/Order/TradePrice";
 import { AdvancedSwapDetails } from "components/Order/AdvancedSwapDetails";
+import CurrencyInputPanel from "components/CurrencyInputPanel";
+import Input from "components/Input";
+// import CurrencyInputPanel from "components/Order/CurrencyInputPanel";
 
 const BodyWrapper = styled.div<{ margin?: string }>`
   position: relative;
@@ -359,11 +362,11 @@ const Limit = () => {
     currencies?.output
   );
 
-  // const {
-  //   gasPrice,
-  //   realExecutionPrice,
-  //   realExecutionPriceAsString,
-  // } = useGasOverhead(parsedAmounts.input, parsedAmounts.output, rateType);
+  const {
+    gasPrice,
+    realExecutionPrice,
+    realExecutionPriceAsString,
+  } = useGasOverhead(parsedAmounts.input, parsedAmounts.output, rateType);
 
   const showApproveFlow =
     !inputError &&
@@ -399,10 +402,10 @@ const Limit = () => {
           <AutoColumn gap={"md"}>
             <div style={{ display: "relative" }}>
               <CurrencyInputPanel
+                chainId={chainId}
                 label={
                   independentField === Field.OUTPUT ? "From (at most)" : "From"
                 }
-                chainId={chainId}
                 value={formattedAmounts.input}
                 showMaxButton={showMaxButton}
                 currency={currencies.input}
@@ -435,25 +438,32 @@ const Limit = () => {
                   />
                 )}
               </ArrowWrapper>
-              <CurrencyInputPanel
+              <Input.Numeric
+                id="rate-input"
+                value={formattedAmounts.price}
+                onUserInput={(val) => {
+                  handleTypeDesiredRate(val)
+                }}
+                />
+              {/* <CurrencyInputPanel
                 chainId={chainId}
                 value={formattedAmounts.price}
                 showMaxButton={showMaxButton}
-                currency={currencies.input}
+                // currency={currencies.input}
                 onUserInput={handleTypeDesiredRate}
                 fiatValue={fiatValueDesiredRate ?? undefined}
                 onCurrencySelect={handleInputSelect}
                 otherCurrency={currencies.output}
                 showCommonBases={false}
                 id="limit-order-currency-rate"
-                // showCurrencySelector={false}
+                disableCurrencySelect={true}
                 hideBalance={true}
                 // showRate={true}
                 // isInvertedRate={rateType === Rate.MUL ? false : true}
                 // gasPrice={gasPrice}
                 // realExecutionPrice={realExecutionPrice ?? undefined}
                 // realExecutionPriceAsString={realExecutionPriceAsString}
-              />
+              /> */}
               <ArrowWrapper clickable>
                 <ArrowDown
                   size="16"
@@ -477,7 +487,7 @@ const Limit = () => {
                 }
                 showMaxButton={false}
                 hideBalance={false}
-                // priceImpact={percentageRateDifference}
+                priceImpact={percentageRateDifference}
                 currency={currencies.output}
                 onCurrencySelect={handleOutputSelect}
                 otherCurrency={currencies.input}

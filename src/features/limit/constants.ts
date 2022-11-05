@@ -1,4 +1,5 @@
 import { BigNumber } from "@ethersproject/bignumber";
+import { Tags, TokenInfo, Version } from "@uniswap/token-lists";
 import { BIPS_BASE } from "constants/index";
 import { JSBI, Percent } from "sdk";
 
@@ -16,3 +17,13 @@ export const ALLOWED_PRICE_IMPACT_LOW: Percent = new Percent(
   ); // 5%
 
 export const GENERIC_GAS_LIMIT_ORDER_EXECUTION = BigNumber.from(500000);
+
+export interface TokenList {
+  readonly name: string;
+  readonly timestamp: string;
+  readonly version: Version;
+  readonly tokens: TokenInfo[];
+  readonly keywords?: string[];
+  readonly tags?: Tags;
+  readonly logoURI?: string;
+}

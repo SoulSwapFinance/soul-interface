@@ -2,7 +2,7 @@ import { Token } from "sdk";
 
 export const USDC_FANTOM = new Token(
   250,
-  "0x04068da6c83afcfa0e13ba15a6696662335d5b75",
+  "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75",
   6,
   "USDC",
   "USD Coin"
