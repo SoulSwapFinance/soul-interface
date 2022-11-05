@@ -11,7 +11,7 @@ import SwapDetails from 'features/xswap/SwapDetails'
 import UnsupportedCurrencyFooter from 'features/xswap/UnsupportedCurrencyFooter'
 import SwapHeader from 'features/xswap/SwapHeader'
 import SwapAssetPanel from 'features/trident/xswap/SwapAssetPanel'
-import confirmPriceImpactWithoutFee from 'functions/prices'
+import ConfirmPriceImpactWithoutFee from 'functions/prices'
 import { warningSeverity } from 'functions/prices'
 import { computeFiatValuePriceImpact } from 'functions/trade'
 import { useAllTokens, useCurrency } from 'hooks/Tokens'
@@ -194,7 +194,7 @@ const Swap = () => {
     if (!swapCallback) {
       return
     }
-    if (priceImpact && !confirmPriceImpactWithoutFee(priceImpact)) {
+    if (priceImpact && !ConfirmPriceImpactWithoutFee(priceImpact)) {
       return
     }
     setSwapState({

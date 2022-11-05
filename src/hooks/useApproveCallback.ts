@@ -1,5 +1,5 @@
 import { ROUTER_ADDRESS } from '../sdk'
-import { Currency, CurrencyAmount, Percent, TradeType, Trade as V2Trade } from '../sdk'
+import { Currency, CurrencyAmount, Percent, TradeType, Trade as V2Trade } from 'sdk'
 import { useCallback, useMemo } from 'react'
 import { useHasPendingApproval, useTransactionAdder } from '../state/transactions/hooks'
 
@@ -13,6 +13,7 @@ import { useTokenContract } from './useContract'
 import { computeSlippageAdjustedAmounts } from 'utils/prices'
 import { Aggregator } from 'utils/swap/aggregator'
 import { Field } from 'state/swap/actions'
+import useGelatoLimitOrdersLib from './gelato/useGelatoLimitOrdersLib'
 
 export enum ApprovalState {
   UNKNOWN = 'UNKNOWN',
@@ -135,4 +136,16 @@ export function useApproveCallbackFromTradeV2(trade?: Aggregator, allowedSlippag
     [trade, allowedSlippage],
   )
   return useApproveCallback(amountToApprove, !!chainId && trade?.routerAddress ? trade.routerAddress : undefined)
+}
+
+// wraps useApproveCallback in the context of a swap
+export function useApproveCallbackFromInputCurrencyAmount(
+  currencyAmountIn: CurrencyAmount<Currency> | undefined
+) {
+  const gelatoLibrary = useGelatoLimitOrdersLib();
+
+  return useApproveCallback(
+    currencyAmountIn,
+    gelatoLibrary?.erc20OrderRouter.address ?? undefined
+  );
 }

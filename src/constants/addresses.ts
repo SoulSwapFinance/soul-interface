@@ -596,3 +596,5 @@ export const SOUL_GUIDE_ADDRESS = {
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '',
 }
+
+export const NATIVE = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";

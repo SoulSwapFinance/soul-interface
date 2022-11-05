@@ -91,7 +91,7 @@ export function warningSeverity(priceImpact: Percent | undefined): WarningSeveri
  *
  * @param priceImpactWithoutFee price impact of the trade without the fee.
  */
-export default function confirmPriceImpactWithoutFee(priceImpactWithoutFee: Percent): boolean {
+export default function ConfirmPriceImpactWithoutFee(priceImpactWithoutFee: Percent): boolean {
   if (!priceImpactWithoutFee.lessThan(PRICE_IMPACT_WITHOUT_FEE_CONFIRM_MIN)) {
     return (
       window.prompt(

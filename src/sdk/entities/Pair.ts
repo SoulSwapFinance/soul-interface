@@ -15,8 +15,9 @@ export class Pair {
   private readonly tokenAmounts: [CurrencyAmount<Token>, CurrencyAmount<Token>]
     fee: any
   public readonly platform?: RoutablePlatform
+  public readonly handler?: string
 
-  public static getAddress(tokenA: Token, tokenB: Token): string {
+  public static getAddress(tokenA: Token, tokenB: Token, handler?: string): string {
     return computePairAddress({
       factoryAddress: FACTORY_ADDRESS[tokenA.chainId],
       tokenA,

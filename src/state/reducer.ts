@@ -22,6 +22,8 @@ import slippage from './slippage/slippageSlice'
 import swap from './swap/reducer'
 import transactions from './transactions/reducer'
 import user from './user/reducer'
+import order from './order/reducer'
+import gtransactions from './gtransactions/reducer'
 import zap from './zap/reducer'
 import { gelatoReducers } from 'soulswap-limit-orders-react'
 import customizeDexes from './customizeDexes'
@@ -38,10 +40,12 @@ const reducer = combineReducers({
   multicall,
   lists,
   limitOrder,
+  order,
   create,
   // markets,
   portfolio,
   slippage,
+  gtransactions,
   tridentSwap,
   tridentAdd,
   // tridentRemove,
