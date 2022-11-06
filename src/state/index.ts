@@ -5,7 +5,7 @@ import { GELATO_PERSISTED_KEYS } from 'soulswap-limit-orders-react'
 
 import reducer from './reducer'
 
-const PERSISTED_KEYS: string[] = ['user', 'transactions', 'lists', 
+const PERSISTED_KEYS: string[] = ['user', 'transactions', 'lists', //, 'order', 'gtransactions']
 ...GELATO_PERSISTED_KEYS]
 
 const persistConfig = {

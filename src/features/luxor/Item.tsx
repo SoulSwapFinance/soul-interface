@@ -625,7 +625,6 @@ const BondItem = ({ bond, ...rest }) => {
                                   <CurrencyInputPanel
                                     chainId={250}
                                     label={''}
-                                    showMaxButton={true}
                                     onUserInput={() => {}}
                                     onMax={() => {}}
                                     id="liquidity-currency-input"
@@ -635,7 +634,6 @@ const BondItem = ({ bond, ...rest }) => {
                                   <CurrencyInputPanel
                                     chainId={250}
                                     label={''}
-                                    showMaxButton={true}
                                     onUserInput={() => {}}
                                     onMax={() => {}}
                                     id="liquidity-currency-output"

@@ -1,8 +1,8 @@
+import React, { FC, useCallback } from 'react'
 import { Currency, Price, ZERO } from 'sdk'
 import Typography from 'components/Typography'
 import { classNames } from 'functions'
 import { useUSDCPrice } from 'hooks'
-import React, { FC, useCallback } from 'react'
 
 interface TradePriceProps {
   price?: Price<Currency, Currency>

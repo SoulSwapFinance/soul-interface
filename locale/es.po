@@ -52,9 +52,6 @@ msgstr ""
 msgid "0.25% of each swap goes to liquidity providers."
 msgstr ""
 
-msgid "50%"
-msgstr ""
-
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
 msgstr ""
 

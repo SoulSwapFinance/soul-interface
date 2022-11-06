@@ -192,6 +192,10 @@ export function useCurrency(currencyId: string | undefined): Currency | null | u
   ? isETH = currencyId?.toUpperCase() === 'BNB'
   : isETH = currencyId?.toUpperCase() === 'BNB'
 
+  const isNative =
+    currencyId?.toUpperCase() === "NATIVE" ||
+    currencyId?.toLowerCase() === "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  
   // const isDual = false
   // = [ChainId.CELO].includes(chainId)
 
