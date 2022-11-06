@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { NATIVE } from "constants/addresses";
+// import { NATIVE } from "constants/addresses";
 import {
   Field,
   Rate,
@@ -31,7 +31,7 @@ export const initialState: OrderState = {
   typedValue: "",
   inputValue: "",
   [Field.INPUT]: {
-    currencyId: NATIVE,
+    currencyId: "USDC",
   },
   [Field.OUTPUT]: {
     currencyId: "SOUL",

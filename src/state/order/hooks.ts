@@ -3,8 +3,10 @@ import {
   Currency,
   CurrencyAmount,
   JSBI,
+  NATIVE,
   NativeCurrency,
   Price,
+  SOUL,
   Token,
   Trade,
   TradeType,
@@ -34,7 +36,7 @@ export function applyExchangeRateTo(
   inputCurrency: Currency,
   outputCurrency: Currency,
   isInverted: boolean
-): CurrencyAmount<NativeCurrency | Token> | undefined {
+): CurrencyAmount<Currency> | undefined {
   const parsedInputAmount = tryParseAmount(
     inputValue,
     isInverted ? outputCurrency : inputCurrency
@@ -50,7 +52,7 @@ export function applyExchangeRateTo(
           ?.multiply(
             JSBI.exponentiate(
               JSBI.BigInt(10),
-              JSBI.BigInt(inputCurrency.decimals)
+              JSBI.BigInt(inputCurrency.wrapped.decimals)
             )
           )
           ?.divide(parsedExchangeRate.asFraction)
@@ -62,7 +64,7 @@ export function applyExchangeRateTo(
           .divide(
             JSBI.exponentiate(
               JSBI.BigInt(10),
-              JSBI.BigInt(outputCurrency.decimals)
+              JSBI.BigInt(outputCurrency.wrapped.decimals)
             )
           )
       : undefined;
@@ -89,7 +91,7 @@ export function useOrderActionHandlers(): {
           currencyId: currency.isToken
             ? currency.address
             : currency.isNative
-            ? "ETH"
+            ? NATIVE[currency.chainId].symbol // "ETH"
             : "",
         })
       );
@@ -199,8 +201,8 @@ export function useDerivedOrderInfo(): DerivedOrderInfo {
   const relevantTokenBalances = useCurrencyBalances(
     chainId,
     account ?? undefined, [
-    inputCurrency ?? undefined,
-    outputCurrency ?? undefined,
+    inputCurrency ? inputCurrency : NATIVE[chainId],
+    outputCurrency ? outputCurrency : SOUL[chainId],
   ]);
 
   const isExactIn: boolean = independentField === Field.INPUT;
@@ -242,11 +244,11 @@ export function useDerivedOrderInfo(): DerivedOrderInfo {
 
   const bestTradeExactIn = useTradeExactIn(
     isExactIn ? parsedAmountToUse : undefined,
-    outputCurrency ?? undefined,
+    outputCurrency ? outputCurrency : SOUL[chainId],
     'soulswap'
   );
   const bestTradeExactOut = useTradeExactOut(
-    inputCurrency ?? undefined,
+    inputCurrency ? inputCurrency : NATIVE[chainId],
     !isExactIn ? parsedAmountToUse : undefined,
     'soulswap'
   );
@@ -255,7 +257,6 @@ export function useDerivedOrderInfo(): DerivedOrderInfo {
 
   const inputAmount = useMemo(() => {
     return tryParseAmount(inputValue, inputCurrency ?? undefined);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValue, inputCurrencyId]);
 
   const currencyBalances = {
@@ -265,8 +266,8 @@ export function useDerivedOrderInfo(): DerivedOrderInfo {
 
   const currencies = useMemo(
     () => ({
-      input: inputCurrency ?? undefined,
-      output: outputCurrency ?? undefined,
+      input: inputCurrency ? inputCurrency : NATIVE[chainId],
+      output: outputCurrency ? outputCurrency : SOUL[chainId],
     }),
     [inputCurrency, outputCurrency]
   );
@@ -310,7 +311,7 @@ export function useDerivedOrderInfo(): DerivedOrderInfo {
     !trade
   ) {
     const extraMessage =
-      chainId === 1 ? ". Only Uniswap V2 pools supported" : "";
+      chainId == 1 ? ". Only Uniswap V2 pools supported" : "";
     inputError =
       inputError ?? "Insufficient liquidity for this trade" + extraMessage;
   }
