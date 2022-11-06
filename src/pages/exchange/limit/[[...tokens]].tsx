@@ -446,7 +446,6 @@ const Limit = () => {
                     label={''}
                   />
                 )}
-                // currency={currencies.input}
                 currency={currencies.input}
                 value={formattedAmounts.input}
                 onChange={handleTypeInput}
