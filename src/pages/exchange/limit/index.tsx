@@ -77,7 +77,6 @@ import { GelatoLimitOrdersHistoryPanel } from "soulswap-limit-orders-react"
 import { Toggle } from "components/Toggle"
 import SwapAssetPanel from "features/trident/swap/SwapAssetPanel"
 import { maxAmountSpend } from "utils/currency/maxAmountSpend"
-import { ZERO_ADDRESS } from "constants/index"
 // import { useDefaultsFromURLSearch } from "state/limit-order/hooks"
 // import { useCurrency } from "hooks/Tokens"
 
@@ -130,6 +129,8 @@ const Limit = () => {
   const { account, chainId } = useActiveWeb3React();
   // const [inputCurrency, setInputCurrency] = useState(NATIVE[chainId])
   // const [ouputCurrency, setOutputCurrency] = useState(SOUL[chainId])
+  
+  const ZERO_ADDRESS = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
 
   const theme = useTheme();
   const recipient = account ?? null;
