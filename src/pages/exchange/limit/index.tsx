@@ -77,8 +77,6 @@ import { GelatoLimitOrdersHistoryPanel } from "soulswap-limit-orders-react"
 import { Toggle } from "components/Toggle"
 import SwapAssetPanel from "features/trident/swap/SwapAssetPanel"
 import { maxAmountSpend } from "utils/currency/maxAmountSpend"
-// import { useDefaultsFromURLSearch } from "state/limit-order/hooks"
-// import { useCurrency } from "hooks/Tokens"
 
 const BodyWrapper = styled.div<{ margin?: string }>`
 position: relative;

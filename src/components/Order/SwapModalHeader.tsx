@@ -28,6 +28,7 @@ import useTheme from "../../hooks/useTheme";
 import TradePrice from "features/swap/TradePrice";
 import useGelatoLimitOrders from "hooks/gelato/useGelatoLimitOrders";
 import { Toggle } from "components/Toggle";
+import Typography from "components/Typography";
 
 export const AnimatedCard = styled(LightCard)<{ expand: boolean }>`
   padding: 0.75rem;
@@ -91,25 +92,25 @@ export default function SwapModalHeader({
   };
 
   return (
-    <AutoColumn gap={"4px"} style={{ marginTop: "1rem" }}>
+    <AutoColumn gap={"4px"} style={{ marginTop: "0rem" }}>
       <DarkGreyCard 
       // padding="0.75rem 1rem"
       >
-        <AutoColumn gap={"8px"}>
+        <AutoColumn gap={"12px"}>
           <RowBetween align="center">
-            <RowFixed gap={"0px"}>
+            <RowFixed gap={"12px"}>
               <CurrencyLogo
                 currency={inputAmount.currency}
-                size={"20px"}
+                size={"36px"}
                 style={{ marginRight: "12px" }}
               />
-              <Text fontSize={20} fontWeight={500}>
+              <Typography className={"flex m-2 text-lg sm:text-xl font-bold"}>
                 {inputAmount.currency.symbol}
-              </Text>
+              </Typography>
             </RowFixed>
-            <RowFixed gap={"0px"}>
+            <RowFixed gap={"12px"}>
               <TruncatedText
-                fontSize={24}
+                fontSize={21}
                 fontWeight={500}
                 color={
                   showAcceptChanges &&
@@ -131,20 +132,20 @@ export default function SwapModalHeader({
         // padding="0.75rem 1rem" 
         style={{ marginBottom: "0.25rem" }}
         >
-        <AutoColumn gap={"8px"}>
+        <AutoColumn gap={"12px"}>
           <RowBetween align="flex-end">
-            <RowFixed gap={"0px"}>
+            <RowFixed gap={"12px"}>
               <CurrencyLogo
                 currency={outputAmount.currency}
-                size={"20px"}
+                size={"36px"}
                 style={{ marginRight: "12px" }}
               />
-              <Text fontSize={20} fontWeight={500}>
+              <Typography className={"flex m-2 text-lg sm:text-xl font-bold"}>
                 {outputAmount.currency.symbol}
-              </Text>
+              </Typography>
             </RowFixed>
-            <RowFixed gap={"0px"}>
-              <TruncatedText fontSize={24} fontWeight={500}>
+            <RowFixed gap={"12px"}>
+              <TruncatedText fontSize={21} fontWeight={500}>
                 {outputAmount.toSignificant(6)}
               </TruncatedText>
             </RowFixed>
@@ -160,23 +161,23 @@ export default function SwapModalHeader({
           showInverted={showInverted}
           setShowInverted={setShowInverted}
         />
-      </RowBetween>
+      {/* </RowBetween> */}
 
       {/* <LightCard style={{ padding: ".75rem", marginTop: "0.5rem" }}>
         <AdvancedSwapDetails />
       </LightCard> */}
 
-      {showDisclaimer && (
+      {/* {showDisclaimer && (
         <AnimatedCard
           style={{ padding: ".75rem", marginTop: "0.5rem" }}
           expand={showDisclaimer}
         >
           <DisclaimerText />
         </AnimatedCard>
-      )}
+      )} */}
 
-      <RowBetween style={{ marginTop: "0.25rem", padding: "0 1rem" }}>
-        <TYPE.Link
+      {/* <RowBetween style={{ marginTop: "0.25rem", padding: "0 1rem" }}> */}
+        {/* <TYPE.Link
           color={theme.purple}
           fontWeight={500}
           fontSize={14}
@@ -184,7 +185,7 @@ export default function SwapModalHeader({
           onClick={() => setShowDisclaimer(!showDisclaimer)}
         >
           {!showDisclaimer ? "Show" : "Hide"}
-        </TYPE.Link>
+        </TYPE.Link> */}
         <Toggle 
           isActive={disclaimer}
           toggle={() => handleDisclaimer(!disclaimer)}
