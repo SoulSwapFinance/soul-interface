@@ -22,7 +22,6 @@ interface CurrencyInputPanelProps {
   onUserInput?: (value: string) => void
   onHalf?: () => void
   onMax?: () => void
-  // showMaxButton: boolean
   label?: string
   onCurrencySelect?: (currency: Currency) => void
   currency?: Currency | null
@@ -49,7 +48,6 @@ export default function CurrencyInputPanel({
   onUserInput,
   onHalf,
   onMax,
-  // showMaxButton,
   label = '',
   onCurrencySelect,
   // showCurrencySelect = true,
