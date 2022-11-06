@@ -14,14 +14,14 @@ export enum Rate {
 export const selectCurrency = createAction<{
   field: Field;
   currencyId: string;
-}>("gorder/selectCurrency");
-export const switchCurrencies = createAction<void>("gorder/switchCurrencies");
+}>("order/selectCurrency");
+export const switchCurrencies = createAction<void>("order/switchCurrencies");
 export const typeInput = createAction<{ field: Field; typedValue: string }>(
-  "gorder/typeInput"
+  "order/typeInput"
 );
 export const setRecipient = createAction<{ recipient: string | null }>(
-  "gorder/setRecipient"
+  "order/setRecipient"
 );
 export const setRateType = createAction<{ rateType: Rate }>(
-  "gorder/setRateType"
+  "order/setRateType"
 );

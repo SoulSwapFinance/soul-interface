@@ -31,10 +31,10 @@ export const initialState: OrderState = {
   typedValue: "",
   inputValue: "",
   [Field.INPUT]: {
-    currencyId: "USDC",
+    currencyId: "",
   },
   [Field.OUTPUT]: {
-    currencyId: "SOUL",
+    currencyId: "",
   },
   rateType: Rate.MUL,
   recipient: null,

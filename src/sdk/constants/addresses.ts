@@ -622,6 +622,10 @@ export const FTM_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: WNATIVE_ADDRESS[ChainId.FANTOM]
 }
 
+export const GELATO_PINE_ADDRESS: AddressMap = {
+  [ChainId.FANTOM]: '0x05Ad1094Eb6Cde564d732196F6754Ee464896031',
+}
+
 export const OPEN_OCEAN_EXCHANGE_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x6352a56caadC4F1E25CD6c75970Fa768A3304e64',
   [ChainId.AVALANCHE]: '0x6352a56caadC4F1E25CD6c75970Fa768A3304e64',
@@ -720,3 +724,5 @@ export const BTC_ETH: AddressMap = {
 export const AVAX_NATIVE: AddressMap = {
   [ChainId.FANTOM]: '0x5159Ba92FDC80b3a4B19De279711b1822de06c86',
 }
+
+export const NATIVE_ADDRESS = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";

@@ -79,7 +79,7 @@ export default function ConfirmSwapModal({
   }, [onConfirm, disclaimer, swapErrorMessage, trade]);
 
   // text to show while loading
-  const pendingText = `Submitting order to swap ${inputAmount?.toSignificant(
+  const pendingText = `Submitting: ${inputAmount?.toSignificant(
     6
   )} ${inputAmount?.currency?.symbol} for ${outputAmount?.toSignificant(6)} ${
     outputAmount?.currency?.symbol
