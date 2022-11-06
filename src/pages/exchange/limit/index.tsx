@@ -1,9 +1,12 @@
-import React, { useCallback, useState, Fragment, useEffect } from "react"
+import React, { useCallback, useState, Fragment, useEffect, useMemo } from "react"
 import {
   ChainId,
   Currency,
   CurrencyAmount,
+  NATIVE,
   Percent,
+  SOUL,
+  Token,
   TradeType,
 } from "sdk"
 import { Trade } from "sdk"
@@ -39,8 +42,8 @@ import useGelatoLimitOrders from "hooks/gelato/useGelatoLimitOrders"
 import { useIsSwapUnsupported } from "hooks/useIsSwapUnsupported"
 import { useUSDCValue } from "hooks/useUSDCPrice"
 import { Field } from "state/order/actions"
-// import { tryParseAmount } from "state/gorder/hooks"
-import { maxAmountSpend } from "utils/currency/maxAmountSpend"
+// import { tryParseAmount } from "state/order/hooks"
+// import { maxAmountSpend } from "utils/currency/maxAmountSpend"
 import useTheme from "hooks/useTheme"
 import {
   ApprovalState,
@@ -54,25 +57,28 @@ import { TYPE } from "theme"
 import { ArrowWrapper, BottomGrouping, Dots, SwapCallbackError, Wrapper } from "components/Order/styleds"
 import ConfirmSwapModal from "components/Order/ConfirmSwapModal"
 import UnsupportedCurrencyFooter from "components/Order/UnsupportedCurrencyFooter"
-import useGasOverhead from "hooks/gelato/useGasOverhead"
+// import useGasOverhead from "hooks/gelato/useGasOverhead"
 import TradePrice from "components/Order/TradePrice"
 // import { AdvancedSwapDetails } from "components/Order/AdvancedSwapDetails"
 import CurrencyInputPanel from "components/CurrencyInputPanel"
 // import Input from "components/Input"
 // import OrderHeader from "components/Order/OrderHeader"
-import { classNames } from "functions"
+import { classNames, formatNumber, formatPercent } from "functions"
 import { useActiveWeb3React } from "services/web3"
 import SwapHeader from "features/swap/SwapHeader"
 import Container from "components/Container"
 // import CurrencyInputPanel from "components/Order/CurrencyInputPanel"
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2"
-import { NATIVE } from "constants/addresses"
 import NetworkGuard from "guards/Network"
 import { Feature } from "enums/Feature"
 import { SwapLayout } from "layouts/SwapLayout"
 import Image from 'next/image'
 import { GelatoLimitOrdersHistoryPanel } from "soulswap-limit-orders-react"
 import { Toggle } from "components/Toggle"
+import SwapAssetPanel from "features/trident/swap/SwapAssetPanel"
+import { maxAmountSpend } from "utils/currency/maxAmountSpend"
+// import { useDefaultsFromURLSearch } from "state/limit-order/hooks"
+// import { useCurrency } from "hooks/Tokens"
 
 const BodyWrapper = styled.div<{ margin?: string }>`
 position: relative;
@@ -119,7 +125,10 @@ enum Rate {
 // }
 
 const Limit = () => {
-  const { account } = useActiveWeb3React();
+
+  const { account, chainId } = useActiveWeb3React();
+  // const [inputCurrency, setInputCurrency] = useState(NATIVE[chainId])
+  // const [ouputCurrency, setOutputCurrency] = useState(SOUL[chainId])
 
   const theme = useTheme();
   const recipient = account ?? null;
@@ -169,6 +178,13 @@ const Limit = () => {
     : undefined;
 
   const isValid = !inputError;
+  const rawPriceDelta = Number(formattedAmounts.price) - Number(trade?.executionPrice.toSignificant(4))
+  const rawPercentDelta = 100 * (rawPriceDelta) / Number(trade?.executionPrice.toSignificant(8))
+  const percentDelta = Math.abs(rawPercentDelta)
+  const priceDelta = Math.abs(rawPriceDelta)
+  const isSell = trade && rateType === Rate.MUL
+  const isBuy = trade && rateType === Rate.DIV
+  const isProfitable = isSell && rawPriceDelta > 0 || isBuy && rawPriceDelta < 0
 
   const [activeTab, setActiveTab] = useState<"sell" | "buy">("sell");
   const handleActiveTab = (tab: "sell" | "buy") => {
@@ -262,31 +278,31 @@ const Limit = () => {
 
     try {
       if (!currencies.input?.wrapped.address) {
-        throw new Error("Invalid input currency");
+        throw new Error("Invalid Input Currency");
       }
 
       if (!currencies.output?.wrapped.address) {
-        throw new Error("Invalid output currency");
+        throw new Error("Invalid Output Currency");
       }
 
       if (!rawAmounts.input) {
-        throw new Error("Invalid input amount");
+        throw new Error("Invalid Input Amount");
       }
 
       if (!rawAmounts.output) {
-        throw new Error("Invalid output amount");
+        throw new Error("Invalid Output Amount");
       }
 
       if (!account) {
-        throw new Error("No account");
+        throw new Error("No Account");
       }
 
       handleLimitOrderSubmission({
         inputToken: currencies.input?.isNative
-          ? NATIVE
+          ? NATIVE[chainId].address
           : currencies.input?.wrapped.address,
-        outputToken: currencies.output?.isNative
-          ? NATIVE
+          outputToken: currencies.output?.isNative
+          ? NATIVE[chainId].address
           : currencies.output?.wrapped.address,
         inputAmount: rawAmounts.input,
         outputAmount: rawAmounts.output,
@@ -333,7 +349,6 @@ const Limit = () => {
   ]);
 
   const [showInverted, setShowInverted] = useState<boolean>(false);
-  const { chainId } = useActiveWeb3React()
 
   const handleConfirmDismiss = useCallback(() => {
     setSwapState({
@@ -367,9 +382,9 @@ const Limit = () => {
     [handleCurrencySelection]
   );
 
-  const handleMaxInput = useCallback(() => {
-    maxInputAmount && handleInput(Field.INPUT, maxInputAmount.toExact());
-  }, [maxInputAmount, handleInput]);
+  // const handleMaxInput = useCallback(() => {
+  //   maxInputAmount && handleInput(Field.INPUT, maxInputAmount.toExact());
+  // }, [maxInputAmount, handleInput]);
 
   const handleOutputSelect = useCallback(
     (outputCurrency) => handleCurrencySelection(Field.OUTPUT, outputCurrency),
@@ -422,7 +437,22 @@ const Limit = () => {
 
             <AutoColumn gap={"md"}>
               <div style={{ display: "relative" }}>
-                <CurrencyInputPanel
+              <SwapAssetPanel
+                spendFromWallet={true}
+                chainId={chainId}
+                header={(props) => (
+                  <SwapAssetPanel.Header
+                    {...props}
+                    label={''}
+                  />
+                )}
+                // currency={currencies.input}
+                currency={currencies.input}
+                value={formattedAmounts.input}
+                onChange={handleTypeInput}
+                onSelect={handleInputSelect}
+              />
+                {/* <CurrencyInputPanel
                   chainId={chainId}
                   // label={
                   //   independentField === Field.OUTPUT ? "From (at most)" : "From"
@@ -436,7 +466,7 @@ const Limit = () => {
                   // otherCurrency={currencies.output || SOUL_FANTOM}
                   showCommonBases={false}
                   id="limit-order-currency-input"
-                />
+                /> */}
                 <ArrowWrapper clickable={false}>
                   {rateType === Rate.MUL ? (
                     <X
@@ -472,9 +502,10 @@ const Limit = () => {
                   disableCurrencySelect={true}
                   hideBalance={true}
                   label={
-                    trade && rateType === Rate.MUL  ? 
-                    `≈ ${(Number(formattedAmounts.price)).toFixed(4)} (${currencies.output.symbol})`
-                    : 'Sell Price'
+                    // trade && rateType === Rate.MUL ? `≈ ${formatNumber(formattedAmounts.price, false, true)} (${currencies.output.symbol})`
+                    // : trade && rateType === Rate.MUL ? `≈ ${formatNumber(formattedAmounts.price, false, true)} (${currencies.input.symbol})`
+                    // : 
+                    `1 ${currencies.input.symbol} ≈ ${formatNumber(formattedAmounts.price)} ${currencies.output.symbol}`
                       // ? `${currencies.input.symbol} ≈ ${Number(formattedAmounts.price).toFixed(2)} ${currencies.output.symbol}`
                       // ? `≈ ${(1 / Number(formattedAmounts.price)).toFixed(4)} (${currencies.output.symbol})`
                       // : `≈ ${(1 / Number(formattedAmounts.price)).toFixed(4)} (${currencies.input.symbol})`
@@ -501,7 +532,23 @@ const Limit = () => {
                     }
                   />
                 </ArrowWrapper>
-                <CurrencyInputPanel
+                <SwapAssetPanel
+                spendFromWallet={true}
+                chainId={chainId}
+                header={
+                  (props) => (
+                  <SwapAssetPanel.Header
+                    {...props}
+                    label={''}
+                  />
+                )
+              }
+                currency={currencies.output}
+                value={formattedAmounts.output}
+                onChange={handleTypeOutput}
+                onSelect={handleOutputSelect}
+              />
+                {/* <CurrencyInputPanel
                   chainId={chainId}
                   value={formattedAmounts.output}
                   onUserInput={handleTypeOutput}
@@ -517,10 +564,11 @@ const Limit = () => {
                   showCommonBases={false}
                   // rateType={rateType}
                   id="limit-order-currency-output"
-                />
+                /> */}
               </div>
 
               {trade &&
+              <div>
                 <div className={classNames(!trade ? "hidden" : "flex justify-between")}>
                   <div className={'flex mx-2'}>
                     Current Market Rate
@@ -533,6 +581,27 @@ const Limit = () => {
                     />
                   </div>
                 </div>
+                <div className={classNames(!trade ? "hidden" : "flex justify-between")}>
+                  <div className={'flex mx-2'}>
+                    Price {`${trade && rateType === Rate.MUL ? `Premium` : `Discount`}`}
+                  </div>
+                  <div className={classNames(isProfitable ? `text-green` : `text-red`, 'flex mx-2')}>
+                    {/* { `${formattedAmounts.price} vs. ${trade?.executionPrice.toSignificant(4)}` } */}
+                    {/* { `${Number(formattedAmounts.price) - Number(trade?.executionPrice.toSignificant(4))}` } */}
+                    {rawPriceDelta > 0 ? formatNumber(rawPriceDelta, false, true) : `${formatNumber(priceDelta, false, true)} below Market.`}
+                  </div>
+                </div>
+                <div className={classNames(!trade ? "hidden" : "flex justify-between")}>
+                  <div className={'flex mx-2'}>
+                    Percent {`${trade && rateType === Rate.MUL ? `Premium` : `Discount`}`}
+                  </div>
+                  <div className={classNames(isProfitable ? `text-green` : `text-red`, 'flex mx-2')}>
+                    {/* { `${formattedAmounts.price} vs. ${trade?.executionPrice.toSignificant(4)}` } */}
+                    {/* { `${Number(formattedAmounts.price) - Number(trade?.executionPrice.toSignificant(4))}` } */}
+                    {`${rawPercentDelta > 0 ? formatPercent(rawPercentDelta) : `${formatPercent(percentDelta)} below Market.`}`}
+                  </div>
+                </div>
+              </div>
               }
 
               <BottomGrouping>
