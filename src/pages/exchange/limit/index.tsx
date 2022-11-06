@@ -428,7 +428,6 @@ const Limit = () => {
                   //   independentField === Field.OUTPUT ? "From (at most)" : "From"
                   // }
                   value={formattedAmounts.input}
-                  // showMaxButton={showMaxButton}
                   currency={currencies.input}
                   onUserInput={handleTypeInput}
                   onMax={handleMaxInput}
@@ -462,7 +461,6 @@ const Limit = () => {
                 <CurrencyInputPanel
                   chainId={chainId}
                   value={formattedAmounts.price}
-                  // showMaxButton={false}
                   showCurrencySelect={false}
                   // currency={currencies.input}
                   onUserInput={handleTypeDesiredRate}
@@ -510,7 +508,6 @@ const Limit = () => {
                   // label={
                   //   independentField === Field.INPUT ? "To (at least)" : "To"
                   // }
-                  // showMaxButton={false}
                   hideBalance={false}
                   // priceImpact={percentageRateDifference}
                   priceImpact={percentageRateDifference}

@@ -52,9 +52,6 @@ msgstr "0.055% of each swap goes to burning SOUL."
 msgid "0.25% of each swap goes to liquidity providers."
 msgstr "0.25% of each swap goes to liquidity providers."
 
-msgid "50%"
-msgstr "50%"
-
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
 msgstr "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
 

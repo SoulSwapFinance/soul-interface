@@ -184,7 +184,6 @@ export default function Create() {
             <CurrencyInputPanel
               chainId={chainId}
               label="Collateral"
-              showMaxButton={false}
               hideBalance={true}
               hideInput={true}
               currency={currencies[Field.COLLATERAL]}
@@ -199,7 +198,6 @@ export default function Create() {
             <CurrencyInputPanel
               label="Asset"
               chainId={chainId}
-              showMaxButton={false}
               hideBalance={true}
               hideInput={true}
               currency={currencies[Field.ASSET]}
