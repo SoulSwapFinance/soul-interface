@@ -502,10 +502,11 @@ const Limit = () => {
                   disableCurrencySelect={true}
                   hideBalance={true}
                   label={
+                    trade &&
                     // trade && rateType === Rate.MUL ? `≈ ${formatNumber(formattedAmounts.price, false, true)} (${currencies.output.symbol})`
                     // : trade && rateType === Rate.MUL ? `≈ ${formatNumber(formattedAmounts.price, false, true)} (${currencies.input.symbol})`
                     // : 
-                    `1 ${currencies.input.symbol} ≈ ${formatNumber(formattedAmounts.price)} ${currencies.output.symbol}`
+                    `1 ${currencies.input?.symbol} ≈ ${formatNumber(formattedAmounts.price)} ${currencies.output?.symbol}`
                       // ? `${currencies.input.symbol} ≈ ${Number(formattedAmounts.price).toFixed(2)} ${currencies.output.symbol}`
                       // ? `≈ ${(1 / Number(formattedAmounts.price)).toFixed(4)} (${currencies.output.symbol})`
                       // : `≈ ${(1 / Number(formattedAmounts.price)).toFixed(4)} (${currencies.input.symbol})`
