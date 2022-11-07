@@ -42,9 +42,9 @@ export default function Borrow({ pair }: BorrowProps) {
   // const [useCoffinCollateral, setUseCoffinCollateral] = useState<boolean>(Number(pair.coffinBalance) > 0)
   const [useCoffinCollateral, setUseCoffinCollateral] = useState<boolean>(false)
   const [useCoffinBorrow, setUseCoffinBorrow] = useState<boolean>(false)
-  const [collateralValue, setCollateralValue] = useState('')
-  const [borrowValue, setBorrowValue] = useState('')
-  const [swapBorrowValue, setSwapBorrowValue] = useState('')
+  const [collateralValue, setCollateralValue] = useState(ZERO)
+  const [borrowValue, setBorrowValue] = useState(ZERO)
+  // const [swapBorrowValue, setSwapBorrowValue] = useState('')
   const [updateOracle, setUpdateOracle] = useState(DEFAULT_UPDATE_ORACLE)
   const [swap, setSwap] = useState(false)
   const { underworldPairInfo } = useUnderworldPairInfo(pair.address)
@@ -121,7 +121,7 @@ export default function Borrow({ pair }: BorrowProps) {
 
   const allowedSlippage = useAppSelector(selectSlippage)
 
-  const parsedAmount = tryParseAmount(borrowValue, assetToken)
+  const parsedAmount = tryParseAmount(borrowValue.toString(), assetToken)
 
   const foundTrade = useV2TradeExactIn(parsedAmount, collateralToken)
 
@@ -254,7 +254,7 @@ export default function Borrow({ pair }: BorrowProps) {
       Number(borrowValue) > 0
       && nextMaxBorrowMinimum
         .add((collateralBalance || 0).toString().toBigNumber(collateralDecimals)
-          .mul('75').div('100')).lt(borrowValue.toBigNumber(assetDecimals)),
+          .mul('75').div('100')).lt(borrowValue),
       'Not enough liquidity in this pair.',
       true
     )
@@ -347,7 +347,7 @@ export default function Borrow({ pair }: BorrowProps) {
     //   userBorrowValue.toString().toBigNumber(assetDecimals).lte(0))
     // || 
     collateralWarnings.broken
-    || (borrowValue.length > 0 && borrowWarnings.broken)
+    || (Number(borrowValue) > 0 && borrowWarnings.broken)
     || (swap && priceImpactSeverity > 3)
     // || (userCollateralValue == 0  && !collateralValueSet)
 
@@ -365,7 +365,7 @@ export default function Borrow({ pair }: BorrowProps) {
       }
 
       cooker.borrow(
-        borrowValue.toBigNumber(assetDecimals),
+        borrowValue,
         swap || useCoffinBorrow,
         swap ? SOULSWAP_MULTISWAPPER_ADDRESS[chainId || 250] : ''
       )
@@ -385,7 +385,7 @@ export default function Borrow({ pair }: BorrowProps) {
         path.length > 3 ? path[2] : AddressZero,
         account,
         toShare(pair.collateral, collateralValue.toString().toBigNumber(collateralDecimals)),
-        borrowValue.toBigNumber(assetDecimals),
+        borrowValue,
       ])
 
       const data = defaultAbiCoder.encode(
@@ -456,7 +456,7 @@ export default function Borrow({ pair }: BorrowProps) {
 
     // console.log('multipliedBorrow:', multipliedBorrow)
 
-    setBorrowValue(multipliedBorrow.toFixed(assetDecimals))
+    setBorrowValue(multipliedBorrow)
   }
 
   return (
@@ -492,7 +492,7 @@ export default function Borrow({ pair }: BorrowProps) {
       <SmartNumberInput
         color="purple"
         token={pair.asset}
-        value={borrowValue}
+        value={borrowValue.toString()}
         setValue={setBorrowValue}
         useCoffinTitleDirection="up"
         useCoffinTitle={`Borrow ${assetSymbol}`}
