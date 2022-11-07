@@ -37,8 +37,12 @@ export default function Pair() {
 
   const pair = useUnderworldPair(router.query.pair as string)
   const { underworldPairInfo } = useUnderworldPairInfo(router.query.pair as string)
-  const userCollateralBalance = Number(pair?.userCollateralShare / 1e18) // √
-  const userBorrowBalance = Number(pair?.currentUserBorrowAmount.string / 1e18) // √
+  const cDecimals = Number(underworldPairInfo.collateralDecimals)
+  const aDecimals = Number(underworldPairInfo.assetDecimals)
+  const cDivisor = 10 ** cDecimals
+  const aDivisor = 10 ** aDecimals
+  const userCollateralBalance = Number(pair?.userCollateralShare / cDivisor) // √
+  const userBorrowBalance = Number(pair?.currentUserBorrowAmount.string / aDivisor) // √
   // const collateralPrice = usePriceApi(pair?.collateral.address)
   const borrowPrice = usePriceApi(pair?.asset.address)
   const assetPrice = Number(underworldPairInfo.assetPrice)
@@ -273,7 +277,8 @@ const PairLayout = ({ children }) => {
                 ((pair?.totalAsset.base / 10**(assetDecimals)) -
                   (pair?.totalAsset.base.sub(pair?.totalBorrow.base) / 10**(assetDecimals)))
                   / (pair?.totalAsset.base / 10**(assetDecimals)) * 100
-                )}</div>
+                )}
+                </div>
               </div>
             </div>
             {/* <div className="flex justify-between">
