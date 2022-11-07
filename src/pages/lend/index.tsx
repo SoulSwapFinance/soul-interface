@@ -214,9 +214,15 @@ const LendEntry = ({ pair, userPosition = false }) => {
   const suppliedAmount = Number(underworldUserInfo.userBalance) // 10**lpDecimals
   const collateralAmount = Number(underworldUserInfo.userCollateralShare) / 10**collateralDecimals
   
+  const assetAddress = pair?.asset.tokenInfo.address
+  const collateralAddress = pair?.collateral.tokenInfo.address
+  const blockchain = chainId == ChainId.FANTOM ? 'fantom' : 'avalanche'
+  const assetLogoURI = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${assetAddress}/logo.png`
+  const collateralLogoURI = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${collateralAddress}/logo.png`
+
   // const walletValue = assetBalance * assetPrice
-  const assetLogoURI =underworldUserInfo.assetLogoURI
-  const collateralLogoURI =underworldUserInfo.collateralLogoURI
+  // const assetLogoURI =underworldUserInfo.assetLogoURI
+  // const collateralLogoURI =underworldUserInfo.collateralLogoURI
 
   const borrowedValue = borrowedAmount * assetPrice
   const collateralValue = collateralAmount * collateralPrice

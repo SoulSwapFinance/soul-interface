@@ -239,7 +239,7 @@ export const BTC_NATIVE_ADDRESS: { [chainId in ChainId]: string } = {
 }
 
 export const ETH_NATIVE_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
+  [ChainId.ETHEREUM]: undefined,
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '',
