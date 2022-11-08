@@ -47,7 +47,8 @@ import { useActiveWeb3React } from 'services/web3'
 // import AssetInput from 'components/AssetInput'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 import { ArrowDownIcon, PlusIcon } from '@heroicons/react/solid'
-import { getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
+import { SubmitButton } from 'features/summoner/Styles'
 // import SoulLogo from 'components/SoulLogo'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
@@ -576,11 +577,28 @@ export default function Add() {
             />
           )}
         </div>
-        <div className="flex items-center px-4">
+        <div className={"grid grid-cols-2 gap-2 text-white justify-center m-2"}>
           <NavLink href="/pool">
-            <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
-              <span>{i18n._(t`View Liquidity Positions`)}</span>
-            </a>
+            <Button
+              variant={'outlined'}
+              color={`${getChainColorCode(chainId)}`}
+              primaryColor={'black'}
+            >
+              <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
+                <span>{i18n._(t`View Positions`)}</span>
+              </a>
+            </Button>
+          </NavLink>
+          <NavLink href="/analytics">
+            <Button
+              variant={'outlined'}
+              color={`${getChainColorCode(chainId)}`}
+              primaryColor={'black'}
+            >
+              <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
+                <span>{i18n._(t`View Analytics`)}</span>
+              </a>
+            </Button>
           </NavLink>
         </div>
         </DoubleGlowShadowV2>

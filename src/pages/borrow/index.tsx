@@ -22,8 +22,9 @@ import { useUnderworldBorrowPositions } from 'features/portfolio/AssetBalances/u
 import { e10 } from 'functions/math'
 import router from 'next/router'
 import { useActiveWeb3React } from 'services/web3'
-import { UNDERWORLD_PAIRS } from 'sdk'
+import { ChainId, UNDERWORLD_PAIRS } from 'sdk'
 import { useUnderworldPairInfo, useUnderworldUserInfo } from 'hooks/useAPI'
+import { formatAddress } from 'utils/wallet'
 
 // const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 
@@ -132,7 +133,12 @@ export default function Borrow() {
                     const userBorrowValue = userBorrowBalance * borrowPrice
                     const pairUtilization = userBorrowValue * 10**(pair?.collateral.tokenInfo.decimals) / Number(userCollateralValue) * 100
                     const pairHealth = pairUtilization / 1e6
-                  
+                    const assetAddress = pair?.asset.tokenInfo.address
+                    const collateralAddress = pair?.collateral.tokenInfo.address
+                    const blockchain = chainId == ChainId.FANTOM ? 'fantom' : 'avalanche'
+                    const assetLogoURI = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${assetAddress}/logo.png`
+                    const collateralLogoURI = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${collateralAddress}/logo.png`
+
                   return (
                     <div key={pair.address}>
                       <Link href={'/borrow/' + pair.address}>
@@ -143,7 +149,7 @@ export default function Borrow() {
                           <Image
                             height={48}
                             width={48}
-                            src={pair.asset.tokenInfo.logoURI}
+                            src={assetLogoURI}
                             className="w-6 h-6 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
                             alt={pair.asset.tokenInfo.symbol}
                           />
@@ -151,7 +157,7 @@ export default function Borrow() {
                           <Image
                             height={48}
                             width={48}
-                            src={pair.collateral.tokenInfo.logoURI}
+                            src={collateralLogoURI}
                             className="w-6 h-6 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
                             alt={pair.collateral.tokenInfo.symbol}
                           />
@@ -168,14 +174,14 @@ export default function Borrow() {
                             <Image
                               height={36}
                               width={36}
-                              src={pair.asset.tokenInfo.logoURI}
+                              src={assetLogoURI}
                               className="w-2 h-2 p-2 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
                               alt={pair.asset.tokenInfo.symbol}
                             />
                             <Image
                               height={36}
                               width={36}
-                              src={pair.collateral.tokenInfo.logoURI}
+                              src={collateralLogoURI}
                               className="w-2 h-2 p-2 rounded-sm md:w-10 md:h-10 lg:w-12 lg:h-12"
                               alt={pair.collateral.tokenInfo.symbol}
                             />
@@ -284,111 +290,172 @@ export default function Borrow() {
             </div>
           }
         >
-          <div className="flex-col space-y-2">
-            {data.items.slice(0, numDisplayed).map((pair) => (
-              <div key={pair.address}>
-                <Link href={'/borrow/' + String(pair.address).toLowerCase()}>
-                  <a className="block text-high-emphesis">
-                  <div className="grid items-center grid-cols-4 gap-2 px-2 py-4 text-sm md:grid-cols-5 lg:grid-cols-5 align-center bg-dark-800 hover:bg-dark-purple">
-                          <div className="flex justify-center flex-col md:flex-row items-center">
-                        <div className="hidden justify-center text-center items-center space-x-2 sm:flex">
-                          <Image
-                            height={48}
-                            width={48}
-                            src={pair.asset.tokenInfo.logoURI}
-                            className="w-5 h-5 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
-                            alt={pair.asset.tokenInfo.symbol}
-                          />
+          <BorrowRow data={data} numDisplayed={numDisplayed} />
 
-                          <Image
-                            height={48}
-                            width={48}
-                            src={pair.collateral.tokenInfo.logoURI}
-                            className="w-5 h-5 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
-                            alt={pair.collateral.tokenInfo.symbol}
-                          />
-                        </div>
-                        <div className="hidden sm:items-end md:hidden">
-                          <div>
-                            <strong>{pair.asset.tokenInfo.symbol}</strong> / {pair.collateral.tokenInfo.symbol}
-                          </div>
-                          <div className="block mt-0 text-xs text-left text-white-500 hidden">{pair.oracle.name}</div>
-                        </div>
-                        <div className="text-center justify-center items-center sm:hidden">
-                          <div className="grid items-center grid-cols-2">
-                            {/* <strong>{pair.collateral.tokenInfo.symbol}</strong> */}
-                            <Image
-                              height={36}
-                              width={36}
-                              src={pair.asset.tokenInfo.logoURI}
-                              className="w-2 h-2 p-2 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
-                              alt={pair.asset.tokenInfo.symbol}
-                            />
-                            <Image
-                              height={36}
-                              width={36}
-                              src={pair.collateral.tokenInfo.logoURI}
-                              className="w-2 h-2 p-2 rounded-sm md:w-10 md:h-10 lg:w-12 lg:h-12"
-                              alt={pair.collateral.tokenInfo.symbol}
-                            />
-                          </div>
-                          <div className="block mt-0 text-xs text-left text-white-500 hidden">{pair.oracle.name}</div>
-                        </div>
-                      </div>
-                      {/* <div className="hidden text-white md:block">
-                        <strong>{pair.asset.tokenInfo.symbol}</strong>
-                      </div> */}
-                      <div className="hidden text-center md:block">
-                        {formatNumber(pair?.totalCollateralShare.div(e10(18)), false)}{' '}
-                        {pair.collateral.tokenInfo.symbol}
-                        <div className="text-secondary">{formatNumber(pair.totalCollateralShare / 1e18 * pair.collateral.usd / 1e18, true)}
-                        </div>
-                      </div>
-                      {/* <div className="hidden lg:block">{pair.oracle.name}</div> */}
-                      <div className="text-center md:text-right">
-                        {/* <div className="md:hidden"> */}
-                        {/* <div className="flex flex-col"> */}
-                        {/* <div>{formatNumber(pair.currentAllAssets)}</div> */}
-                        {/* <div>{formatNumber(pair.currentAllAssets)}</div> */}
-                        {/* </div>                        */}
-                        {/* </div> */}
-                        <div className="text-center md:block">
-                          {formatNumber(pair.currentBorrowAmount.string)} {pair.asset.tokenInfo.symbol}
-                          <div className="text-secondary">{formatNumber(pair.currentBorrowAmount.usdValue.div(e10(18)), true)}</div>
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <div className="md:hidden">
-                          <div className="text-green flex flex-col">
-                            {/* <div>{formatNumber(pair.totalAssetAmount.string)}</div> */}
-                            {formatPercent(100 -
-                              ((pair?.totalAsset.base.div(e10(18))) -
-                                (pair?.totalAsset.base.sub(pair?.totalBorrow.base).div(e10(18))))
-                              / (pair?.totalAsset.base.div(e10(18))) * 100
-                            )}
-                            {/* <div>{pair.asset.tokenInfo.symbol}</div> */}
-                          </div>
-                          <div className="text-secondary">{formatNumber(pair.asset.usd / 1e18 * Number(pair?.totalAsset.base) / 1e18, true)}</div>
-                        </div>
-                        <div className="hidden md:block">
-                          {formatNumber(pair.totalAsset.base.div(e10(18)))} {pair.asset.tokenInfo.symbol}
-                          <div className="text-secondary">{formatNumber(Number(pair.asset.usd) / 1e18 * Number(pair.totalAsset.base / 1e18), true)}</div>
-                        </div>
-                      </div>
-                      <div className="text-center">{formatPercent(pair.currentInterestPerYear.value / 1e16)}</div>
-                      {/* <div className="text-right">{formatPercent(pair.currentInterestPerYear.value)}</div> */}
-                    </div>
-                  </a>
-                </Link>
-              </div>
-            ))}
-          </div>
         </InfiniteScroll>
       </Card>
     </BorrowLayout>
   )
 }
 
+const BorrowRow = ({ data, numDisplayed }) => {
+  const { chainId } = useActiveWeb3React()
+  const blockchain = chainId == ChainId.AVALANCHE ? 'avalanche' : 'fantom'
+  // const { underworldUserInfo } = useUnderworldUserInfo(pair.address)
+
+  // const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
+  // // const assetBalance = Number(underworldUserInfo.userAssetBalance) // 10**assetDecimals
+  // const borrowedAmount = Number(underworldUserInfo.userBorrowPart) / 10**assetDecimals
+  // const suppliedAmount = Number(underworldUserInfo.userBalance) // 10**lpDecimals
+  // const collateralAmount = Number(underworldUserInfo.userCollateralShare) / 10**collateralDecimals
+
+  // const assetInfo = (pair) => { 
+  //   // let collateralAddress = pair?.collateral.tokenInfo.address
+  //   let assetAddress = pair?.asset.tokenInfo.address
+  //   let pairAddress = pair?.address
+  //   let logo = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${assetAddress}/logo.png`
+  //   // let symbol = useUnderworldPairInfo(pairAddress).underworldPairInfo.assetTicker
+  //   let decimals = Number(useUnderworldPairInfo(pair.address).underworldPairInfo.assetDecimals)
+  //   let price = Number(useUnderworldPairInfo(pair.address).underworldPairInfo.assetPrice)
+  //   return { logo, decimals, price }
+  // }
+  
+  // const collateralInfo = (pairAddress) => { 
+  //   // let collateralAddress = pair?.collateral.tokenInfo.address
+  //   let symbol = useUnderworldPairInfo(pairAddress).underworldPairInfo?.collateralTicker
+  //   let decimals = Number(useUnderworldPairInfo(pairAddress).underworldPairInfo?.collateralDecimals)
+  //   let price = Number(useUnderworldPairInfo(pairAddress).underworldPairInfo?.collateralPrice)
+  //   return { symbol, decimals, price }
+  // }
+
+  // const borrowedAmount = (pair) => { 
+  //   // let collateralAddress = pair?.collateral.tokenInfo.address
+  //   let bAmount = Number(useUnderworldPairInfo(pair.address).underworldPairInfo.assetPricePrice)
+  //   console.log('bAmount:%s', bAmount)
+  //   return bAmount
+  // }
+  
+  // const assetPrice = (pair) => { 
+  //   // let collateralAddress = pair?.collateral.tokenInfo.address
+  //   let aPrice = Number(useUnderworldPairInfo(pair.address).underworldPairInfo.assetPricePrice)
+  //   console.log('aPrice:%s', aPrice)
+  //   return aPrice
+  // }
+
+  // const collateralPrice = (pair) => { 
+  //   // let collateralAddress = pair?.collateral.tokenInfo.address
+  //   let cPrice = Number(useUnderworldPairInfo(pair.address).underworldPairInfo.collateralPrice)
+  //   console.log('cPrice:%s', cPrice)
+  //   return cPrice
+  // }
+
+  // const borrowedValue = borrowedAmount * assetPrice
+  // const collateralValue = collateralAmount * collateralPrice
+  // const userDepositedValue = suppliedAmount * assetPrice
+  
+
+  return (
+    <div className="flex-col space-y-2">
+    {data.items.slice(0, numDisplayed).map((pair) => (
+      <div key={pair.address}>
+        <Link href={'/borrow/' + String(pair.address).toLowerCase()}>
+          <a className="block text-high-emphesis">
+          <div className="grid items-center grid-cols-4 gap-2 px-2 py-4 text-sm md:grid-cols-5 lg:grid-cols-5 align-center bg-dark-800 hover:bg-dark-purple">
+                  <div className="flex justify-center flex-col md:flex-row items-center">
+                <div className="hidden justify-center text-center items-center space-x-2 sm:flex">
+                  <Image
+                    height={48}
+                    width={48}
+                    src={`https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${pair?.asset.tokenInfo.address}/logo.png`}
+                    className="w-5 h-5 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
+                    alt={pair.asset.tokenInfo.symbol}
+                  />
+
+                  <Image
+                    height={48}
+                    width={48}
+                    src={`https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${pair?.collateral.tokenInfo.address}/logo.png`}
+                    className="w-5 h-5 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
+                    alt={pair.collateral.tokenInfo.symbol}
+                  />
+                </div>
+                <div className="hidden sm:items-end md:hidden">
+                  <div>
+                  <strong>{pair.asset.tokenInfo.symbol}</strong> / {pair.collateral.tokenInfo.symbol}
+                  </div>
+                  <div className="block mt-0 text-xs text-left text-white-500 hidden">{pair.oracle.name}</div>
+                </div>
+                <div className="text-center justify-center items-center sm:hidden">
+                  <div className="grid items-center grid-cols-2">
+                    {/* <strong>{collateralInfo(pair).symbol}</strong> */}
+                    <Image
+                      height={36}
+                      width={36}
+                      src={`https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${pair?.asset.tokenInfo.address}/logo.png`}
+                      className="w-2 h-2 p-2 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
+                      alt={pair.asset.tokenInfo.symbol}
+                    />
+                    <Image
+                      height={36}
+                      width={36}
+                      src={`https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${pair?.collateral.tokenInfo.address}/logo.png`}
+                      className="w-2 h-2 p-2 rounded-sm md:w-10 md:h-10 lg:w-12 lg:h-12"
+                      alt={pair.collateral.tokenInfo.symbol}
+                    />
+                  </div>
+                  <div className="block mt-0 text-xs text-left text-white-500 hidden">{pair.oracle.name}</div>
+                </div>
+              </div>
+              {/* <div className="hidden text-white md:block">
+                <strong>{pair.asset.tokenInfo.symbol}</strong>
+              </div> */}
+              <div className="hidden text-center md:block">
+                {formatNumber(pair?.totalCollateralShare.div(e10(18)), false)}{' '}
+                {pair.collateral.tokenInfo.symbol}
+                <div className="text-secondary">{formatNumber(pair.totalCollateralShare / 1e18 * pair.collateral.usd / 1e18, true)}
+                </div>
+              </div>
+              {/* <div className="hidden lg:block">{pair.oracle.name}</div> */}
+              <div className="text-center md:text-right">
+                {/* <div className="md:hidden"> */}
+                {/* <div className="flex flex-col"> */}
+                {/* <div>{formatNumber(pair.currentAllAssets)}</div> */}
+                {/* <div>{formatNumber(pair.currentAllAssets)}</div> */}
+                {/* </div>                        */}
+                {/* </div> */}
+                <div className="text-center md:block">
+                  {formatNumber(pair.currentBorrowAmount.string)} {pair.asset.tokenInfo.symbol}
+                  <div className="text-secondary">{formatNumber(pair.currentBorrowAmount.usdValue.div(e10(18)), true)}</div>
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="md:hidden">
+                  <div className="text-green flex flex-col">
+                    {/* <div>{formatNumber(pair.totalAssetAmount.string)}</div> */}
+                    {formatPercent(100 -
+                      ((pair?.totalAsset.base.div(e10(18))) -
+                        (pair?.totalAsset.base.sub(pair?.totalBorrow.base).div(e10(18))))
+                      / (pair?.totalAsset.base.div(e10(18))) * 100
+                    )}
+                    {/* <div>{pair.asset.tokenInfo.symbol}</div> */}
+                    </div>
+                  <div className="text-secondary">{formatNumber(pair.asset.usd / 1e18 * Number(pair?.totalAsset.base) / 1e18, true)}</div>
+                </div>
+                <div className="hidden md:block">
+                  {formatNumber(pair.totalAsset.base.div(e10(18)))} {pair.asset.tokenInfo.symbol}
+                  <div className="text-secondary">{formatNumber(Number(pair.asset.usd) / 1e18 * Number(pair.totalAsset.base / 1e18), true)}</div>
+                </div>
+              </div>
+              <div className="text-center">{formatPercent(pair.currentInterestPerYear.value / 1e16)}</div>
+              {/* <div className="text-right">{formatPercent(pair.currentInterestPerYear.value)}</div> */}
+            </div>
+          </a>
+        </Link>
+      </div>
+    ))}
+  </div>
+  )
+}
 Borrow.Provider = RecoilRoot
 
 // @ts-ignore TYPE NEEDS FIXING

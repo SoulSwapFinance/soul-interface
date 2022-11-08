@@ -8,13 +8,13 @@ import Card from 'components/Card'
 import Dots from 'components/Dots'
 import GradientDot from 'components/GradientDot'
 import Image from 'components/Image'
-import QuestionHelper from 'components/QuestionHelper'
+// import QuestionHelper from 'components/QuestionHelper'
 import { Feature } from 'enums'
 import { Borrow, PairTools, Repay, Strategy } from 'features/lending'
-import { useUnderworldPairInfo } from 'hooks/useAPI'
+import { useUnderworldPairInfo, useUnderworldUserInfo } from 'hooks/useAPI'
 import { formatNumber, formatPercent } from 'functions/format'
 import NetworkGuard from 'guards/Network'
-import { useUSDCPrice } from 'hooks'
+// import { useUSDCPrice } from 'hooks'
 import { useToken } from 'hooks/Tokens'
 import { useRedirectOnChainId } from 'hooks/useRedirectOnChainId'
 import { useV2Pair } from 'hooks/useV2Pairs'
@@ -22,8 +22,8 @@ import Layout from 'layouts/Underworld'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { RecoilRoot } from 'recoil'
-import { e10 } from 'functions/math'
-import usePriceApi from 'hooks/usePriceApi'
+// import { e10 } from 'functions/math'
+// import usePriceApi from 'hooks/usePriceApi'
 import { ChainId } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 import { useUnderworldPair } from 'features/lending/hooks'
@@ -37,10 +37,14 @@ export default function Pair() {
 
   const pair = useUnderworldPair(router.query.pair as string)
   const { underworldPairInfo } = useUnderworldPairInfo(router.query.pair as string)
-  const userCollateralBalance = Number(pair?.userCollateralShare / 1e18) // √
-  const userBorrowBalance = Number(pair?.currentUserBorrowAmount.string / 1e18) // √
-  // const collateralPrice = usePriceApi(pair?.collateral.address)
-  const borrowPrice = usePriceApi(pair?.asset.address)
+  const { underworldUserInfo } = useUnderworldUserInfo(router.query.pair as string)
+  const cDecimals = Number(underworldPairInfo.collateralDecimals)
+  const aDecimals = Number(underworldPairInfo.assetDecimals)
+  const cDivisor = 10 ** cDecimals
+  const aDivisor = 10 ** aDecimals
+  const userCollateralBalance = Number(underworldUserInfo.userCollateralBalance) // √
+  conse userCollateralShare = Number(underworldUserInfo.userCollateralShare) / cDivisor
+  const userBorrowBalance = Number(underworldUserInfo.userBorrowPart) / aDivisor // √
   const assetPrice = Number(underworldPairInfo.assetPrice)
   const collateralPrice = Number(underworldPairInfo.collateralPrice)
   // const lpDecimals = Number(underworldPairInfo.decimals)
@@ -70,9 +74,9 @@ export default function Pair() {
   const assetURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${assetAddress}/logo.png`
   const collateralURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${collateralAddress}/logo.png`
 
-  const userCollateralValue = userCollateralBalance * collateralPrice
-  const userBorrowValue = userBorrowBalance * borrowPrice
-  const pairUtilization = userBorrowValue * 10 ** (pair?.collateral.tokenInfo.decimals) / Number(userCollateralValue) * 100
+  const userCollateralValue = userCollateralShare * collateralPrice
+  const userBorrowValue = userBorrowBalance * assetPrice
+  const pairUtilization = userBorrowValue / Number(userCollateralValue) * 100
   const pairHealth = pairUtilization
 
   if (!pair) return <div />
@@ -80,11 +84,11 @@ export default function Pair() {
   return (
     <PairLayout>
       <Head>
-        <title>{i18n._(t`Borrow ${pair?.asset?.symbol}-${pair?.collateral?.symbol}`)} | Soul</title>
+        <title>{i18n._(t`Borrow ${assetSymbol}-${collateralSymbol}`)} | Soul</title>
         <meta
           key="description"
           name="description"
-          content={`Borrow ${pair?.asset?.symbol} against ${pair?.collateral?.symbol} collateral in the Underworld by Soul`}
+          content={`Borrow ${assetSymbol} against ${collateralSymbol} collateral in the Underworld by Soul`}
         />
       </Head>
       <Card
@@ -134,14 +138,14 @@ export default function Pair() {
           <div>
             <div className="text-center text-md sm:text-lg text-secondary">{i18n._(t`Collateral`)}</div>
             <div className="text-center text-lg sm:text-2xl text-blue">
-              {formatNumber(userCollateralBalance)} {collateralSymbol}
+              {formatNumber(userCollateralShare)} {collateralSymbol}
             </div>
             <div className="text-center text-md sm:text-lg text-high-emphesis">{formatNumber(userCollateralValue, true)}</div>
           </div>
           <div>
             <div className="text-center text-md sm:text-lg text-secondary">{i18n._(t`Borrowed`)}</div>
             <div className="text-center texl-lg sm:text-2xl text-purple">
-              {formatNumber(pair.currentUserBorrowAmount.string)} {assetSymbol}
+              {formatNumber(userBorrowBalance)} {assetSymbol}
             </div>
             <div className="items-center text-center flex justify-center text-md sm:text-lg text-high-emphesis">
               {formatPercent(pairHealth)}
@@ -206,7 +210,8 @@ const PairLayout = ({ children }) => {
 
   // const assetPrice = usePriceApi(asset?.address)
   // const collateralPrice = usePriceApi(collateral?.address)
-  const assetDecimals = Number(underworldPairInfo.assetDecimals)
+  const aDecimals = Number(underworldPairInfo.assetDecimals)
+  const aDivisor = 10**aDecimals
   // const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
   // format tickers //
   const aTicker = underworldPairInfo.assetTicker
@@ -256,7 +261,7 @@ const PairLayout = ({ children }) => {
             <div className="flex justify-between">
               <div className="text-lg text-secondary">{`Total Assets`}</div>
               <div className="text-lg text-high-emphesis">
-                {formatNumber(pair?.totalAsset.base / 10 ** (assetDecimals))} {assetSymbol}
+                {formatNumber(pair?.totalAsset.base / aDivisor)} {assetSymbol}
               </div>
             </div>
             <div className="flex justify-between">
@@ -270,10 +275,11 @@ const PairLayout = ({ children }) => {
               <div className="flex items-center">
                 <div className="text-green text-lg text-high-emphesis">
                 {formatPercent(100-
-                ((pair?.totalAsset.base / 10**(assetDecimals)) -
-                  (pair?.totalAsset.base.sub(pair?.totalBorrow.base) / 10**(assetDecimals)))
-                  / (pair?.totalAsset.base / 10**(assetDecimals)) * 100
-                )}</div>
+                ((pair?.totalAsset.base / aDivisor) -
+                  (pair?.totalAsset.base.sub(pair?.totalBorrow.base) / aDivisor))
+                  / (pair?.totalAsset.base / aDivisor) * 100
+                )}
+                </div>
               </div>
             </div>
             {/* <div className="flex justify-between">
