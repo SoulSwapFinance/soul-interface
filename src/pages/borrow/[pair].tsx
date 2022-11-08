@@ -137,7 +137,7 @@ export default function Pair() {
           <div>
             <div className="text-center text-md sm:text-lg text-secondary">{i18n._(t`Collateral`)}</div>
             <div className="text-center text-lg sm:text-2xl text-blue">
-              {formatNumber(userCollateralBalance)} {collateralSymbol}
+              {formatNumber(userCollateralBalance / cDivisor)} {collateralSymbol}
             </div>
             <div className="text-center text-md sm:text-lg text-high-emphesis">{formatNumber(userCollateralValue, true)}</div>
           </div>
