@@ -43,6 +43,7 @@ export default function Pair() {
   const cDivisor = 10 ** cDecimals
   const aDivisor = 10 ** aDecimals
   const userCollateralBalance = Number(underworldUserInfo.userCollateralBalance) // √
+  conse userCollateralShare = Number(underworldUserInfo.userCollateralShare) / cDivisor
   const userBorrowBalance = Number(underworldUserInfo.userBorrowPart) / aDivisor // √
   const assetPrice = Number(underworldPairInfo.assetPrice)
   const collateralPrice = Number(underworldPairInfo.collateralPrice)
@@ -73,7 +74,7 @@ export default function Pair() {
   const assetURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${assetAddress}/logo.png`
   const collateralURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${collateralAddress}/logo.png`
 
-  const userCollateralValue = userCollateralBalance * collateralPrice / cDivisor
+  const userCollateralValue = userCollateralShare * collateralPrice
   const userBorrowValue = userBorrowBalance * assetPrice
   const pairUtilization = userBorrowValue / Number(userCollateralValue) * 100
   const pairHealth = pairUtilization
@@ -137,7 +138,7 @@ export default function Pair() {
           <div>
             <div className="text-center text-md sm:text-lg text-secondary">{i18n._(t`Collateral`)}</div>
             <div className="text-center text-lg sm:text-2xl text-blue">
-              {formatNumber(userCollateralBalance / cDivisor)} {collateralSymbol}
+              {formatNumber(userCollateralShare)} {collateralSymbol}
             </div>
             <div className="text-center text-md sm:text-lg text-high-emphesis">{formatNumber(userCollateralValue, true)}</div>
           </div>
