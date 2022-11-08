@@ -28,6 +28,7 @@ import { useTokens } from 'hooks/Tokens'
 import { useCoffinStrategies, useClones } from 'services/graph'
 import { useActiveWeb3React, useQueryFilter } from 'services/web3'
 import { useSingleCallResult } from 'state/multicall/hooks'
+import { useUnderworldPairInfo } from 'hooks/useAPI'
 import { useMemo } from 'react'
 import { DAI } from 'constants/tokens'
 
@@ -151,8 +152,12 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
   const pairTokens = Object.values(allTokens)
     .filter((token) => balances?.[token.address])
     .reduce((previousValue, currentValue) => {
-      const balance = balances[currentValue.address]
-      const strategy = strategies?.find((strategy) => strategy.token === currentValue.address.toLowerCase())
+      const pairAddress = currentValue.address
+      const { underworldPairInfo } = useUnderworldPairInfo(pairAddress)
+      const assetDecimals = Number(underworldPairInfo.assetDecimals)
+ 
+      const balance = balances[pairAddress]
+      const strategy = strategies?.find((strategy) => strategy.token === pairAddress.toLowerCase())
       // let usd = BigNumber.from(0)
       // balances[currency.address]?.rate > 0 ? 
       const usd = e10(currentValue.decimals).mulDiv((balances[currency.address]?.rate || 0), balance.rate)
