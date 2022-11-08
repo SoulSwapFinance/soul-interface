@@ -43,7 +43,7 @@ export default function Pair() {
   const cDivisor = 10 ** cDecimals
   const aDivisor = 10 ** aDecimals
   const userCollateralBalance = Number(underworldUserInfo.userCollateralBalance) // √
-  conse userCollateralShare = Number(underworldUserInfo.userCollateralShare) / cDivisor
+  const userCollateralShare = Number(underworldUserInfo.userCollateralShare) / cDivisor
   const userBorrowBalance = Number(underworldUserInfo.userBorrowPart) / aDivisor // √
   const assetPrice = Number(underworldPairInfo.assetPrice)
   const collateralPrice = Number(underworldPairInfo.collateralPrice)
