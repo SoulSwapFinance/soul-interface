@@ -247,7 +247,7 @@ export default function Borrow({ pair }: BorrowProps) {
 
   collateralWarnings.add(
     // wallet balance < resultant sum - current collateral
-    collateralWalletBalance_BN?.lt(nextUserCollateralAmount.sub(userCollateralBalance)),
+    collateralWalletBalance_BN?.lt(nextUserCollateralAmount.sub(userCollateralBalance.toString().toBigNumber(cDecimals))),
     // collateralBalance.lt(nextUserCollateralAmount.sub(userCollateralBalance)),
     //.toString().toBigNumber(cDecimals)),
     `Ensure your ${useCoffinCollateral ? 'CoffinBox' : 'wallet'
@@ -614,11 +614,11 @@ export default function Borrow({ pair }: BorrowProps) {
 
       {swap && trade && <TradeReview trade={trade} allowedSlippage={allowedSlippage} />}
 
-      {(collateralValueSet ||
+      {/* {(collateralValueSet ||
         (borrowValueSet && userCollateralBalance.gt(ZERO)) ||
         (swap && (priceImpactSeverity < 3))) && (
           <TransactionReviewView transactionReview={transactionReview} />
-        )}
+        )} */}
 
       <UnderworldApproveButton
         color="purple"
