@@ -211,7 +211,7 @@ const LendEntry = ({ pair, userPosition = false }) => {
   const collateralPrice = Number(underworldPairInfo.collateralPrice)
   const assetBalance = Number(underworldUserInfo.userAssetBalance) // 10**assetDecimals
   const borrowedAmount = Number(underworldUserInfo.userBorrowPart) / 10**assetDecimals
-  const suppliedAmount = Number(underworldUserInfo.userBalance) // 10**lpDecimals
+  const suppliedAmount = Number(underworldUserInfo.userBalance) / 10**assetDecimals
   const collateralAmount = Number(underworldUserInfo.userCollateralShare) / 10**collateralDecimals
   
   const assetAddress = pair?.asset.tokenInfo.address
