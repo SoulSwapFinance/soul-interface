@@ -792,10 +792,11 @@ export function useUnderworldUserInfo(pairAddress): { status: string; underworld
       collateralPrice: '0',
 
       userAssetBalance: '0',
+      userCollateralBalance: '0',
       userBalance: '0',
       userBorrowPart: '0',
       userCollateralShare: '0',
-      
+
       api: ''
   })  
   useEffect(() => {
