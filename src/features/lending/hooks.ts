@@ -75,9 +75,7 @@ export function useUnderworldPairAddresses(): string[] {
   const events = useQueryFilter({
     chainId,
     contract: coffinBoxContract,
-    // @ts-ignore TYPE NEEDS FIXING
     event: coffinBoxContract && coffinBoxContract.filters.LogDeploy(UNDERWORLD_ADDRESS[chainId]),
-    // @ts-ignore TYPE NEEDS FIXING
     shouldFetch: useEvents && featureEnabled(Feature.UNDERWORLD, chainId),
   })
   const clones = useClones({ chainId, shouldFetch: !useEvents })
@@ -123,9 +121,7 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
   const { chainId } = useActiveWeb3React()
 
   const boringHelperContract = useBoringHelperContract()
-
   const wnative = WNATIVE_ADDRESS[chainId]
-
   const currency: Token = chainId == ChainId.FANTOM ? DAI[chainId] : USDC[chainId]
 
   const allTokens = useUnderworldTokens()
@@ -194,19 +190,19 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
 
         pair.elapsedSeconds = BigNumber.from(Date.now()).div('1000').sub(pair.accrueInfo.lastAccrued)
 
-        // Interest per year at last accrue, this will apply during the next accrue
+        // annual interest, applies during the next accrue
         pair.interestPerYear = pair.accrueInfo.interestPerSecond.mul('60').mul('60').mul('24').mul('365')
 
-        // The total collateral in the market (stable, doesn't accrue)
+        // total collateral in the market (stable, doesn't accrue)
         pair.totalCollateralAmount = easyAmount(toAmount(pair.collateral, pair.totalCollateralShare), pair.collateral)
 
-        // The total assets unborrowed in the market (stable, doesn't accrue)
+        // total unborrowed assets (stable, doesn't accrue)
         pair.totalAssetAmount = easyAmount(toAmount(pair.asset, pair.totalAsset.elastic), pair.asset)
 
-        // The total assets borrowed in the market right now
+        // total assets borrowed in the market right now
         pair.currentBorrowAmount = easyAmount(accrue(pair, pair.totalBorrow.elastic, true), pair.asset)
 
-        // The total amount of assets, both borrowed and still available right now
+        // total assets: both borrowed and still available
         pair.currentAllAssets = easyAmount(pair.totalAssetAmount.value.add(pair.currentBorrowAmount.value), pair.asset)
 
         pair.marketHealth = pair.totalCollateralAmount.value
@@ -222,7 +218,7 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
 
         pair.currentAllAssetShares = toShare(pair.asset, pair.currentAllAssets.value)
 
-        // Maximum amount of assets available for withdrawal or borrow
+        // max. assets available for withdrawal or borrow
         pair.maxAssetAvailable = minimum(
           pair.totalAsset.elastic.mulDiv(pair.currentAllAssets.value, pair.currentAllAssetShares),
           toAmount(pair.asset, toElastic(pair.currentTotalAsset, pair.totalAsset.base.sub(1000), false))
@@ -233,16 +229,16 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
           pair.currentAllAssets.value
         )
 
-        // The percentage of assets that is borrowed out right now
+        // percentage of assets that is currently borrowed
         pair.utilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value)
 
-        // Interest per year received by lenders as of now
+        // annual interest received by lenders
         pair.supplyAPR = takeFee(pair.interestPerYear.mulDiv(pair.utilization, e10(18)))
 
         // Interest payable by borrowers per year as of now
         pair.currentInterestPerYear = interestAccrue(pair, pair.interestPerYear)
 
-        // Interest per year received by lenders as of now
+        // annual interest received by lenders (current)
         pair.currentSupplyAPR = takeFee(
           pair.currentInterestPerYear.mulDiv(pair.utilization, e10(18)))
 
