@@ -33,6 +33,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
 import Chart from 'components/Chart'
 import { FANTOM, AVALANCHE, Chain, Token as CrossToken } from "features/cross/chains";
+import Image from 'next/image'
 import SDK, {
   // BLOCKCHAIN_NAME,
   // Configuration,
@@ -728,6 +729,14 @@ const Swap = () => {
         }
         </SwapLayoutCard>
         }
+        {
+        <div className="grid grid-cols-1">
+          <Image 
+            src='https://app.soulswap.finance/title-soul-halfs.png'
+            height="400px" width="600px" alt="logo" 
+          />
+        </div>
+      }
     </>
   )
 }

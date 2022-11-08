@@ -860,13 +860,30 @@ export default function Remove() {
 
             {pair ? <MinimalPositionCard chainId={chainId} showUnwrapped={oneCurrencyIsWETH} pair={pair} /> : null}
           </div>
-          <div className="flex items-center px-4">
-            <NavLink href="/pool">
-              <a className="flex items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis">
-                <span>{i18n._(t`View Liquidity Positions`)}</span>
+          <div className={"grid grid-cols-2 gap-2 text-white justify-center m-2"}>
+          <NavLink href="/pool">
+            <Button
+              variant={'outlined'}
+              color={`${getChainColorCode(chainId)}`}
+              primaryColor={'black'}
+            >
+              <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
+                <span>{i18n._(t`View Positions`)}</span>
               </a>
-            </NavLink>
-          </div>
+            </Button>
+          </NavLink>
+          <NavLink href="/analytics">
+            <Button
+              variant={'outlined'}
+              color={`${getChainColorCode(chainId)}`}
+              primaryColor={'black'}
+            >
+              <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
+                <span>{i18n._(t`View Analytics`)}</span>
+              </a>
+            </Button>
+          </NavLink>
+        </div>
         </DoubleGlowShadowV2>
       </Container>
     </>
