@@ -293,7 +293,7 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: WETH_ADDRESS[ChainId.FANTOM],
   },
-  {
+  /* {
     // 600
     pid: 13,
     token0Symbol: 'WFTM',
@@ -302,7 +302,7 @@ export const FantomPools = [
     lpAddress: '0xecB41D6B5885E75a149EDA173e92267aa271D895',
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: WBTC_ADDRESS[ChainId.FANTOM],
-  },
+  }, */
   {
     // 300
     pid: 41,
