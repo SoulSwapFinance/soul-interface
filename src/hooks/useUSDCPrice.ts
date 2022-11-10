@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import { useV2TradeExactOut } from './useV2Trades'
 
 import { tryParseAmount } from 'functions'
-import { BNB, CRV, LUXOR, MIM, AVAX, SEANCE, SOUL, FUSD, USDC, USDT, UNIDX, WBTC, WETH, WFTM, WLUM, GRIMEVO, DAI, SOR } from 'constants/tokens'
+import { BNB, CRV, LUXOR, MIM, AVAX, SEANCE, SOUL, FUSD, USDC, WBTC, WETH, WFTM, WLUM, GRIMEVO, DAI, SOR } from 'constants/tokens'
 import { AVAX_ADDRESS, BNB_ADDRESS, CRV_ADDRESS, FUSD_ADDRESS, 
   GRIMEVO_ADDRESS, LUX_ADDRESS, SEANCE_ADDRESS, WFTM_ADDRESS, 
   SOUL_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS } 
@@ -19,10 +19,6 @@ const STABLECOIN_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.ETHEREUM]: CurrencyAmount.fromRawAmount(USDC[ChainId.ETHEREUM], 100_000e6),
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(USDC[ChainId.FANTOM], 100_000e6),
   [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(USDC[ChainId.AVALANCHE], 100_000e6),
-}
-
-const USDT_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(USDT[ChainId.FANTOM], 100_000e6),
 }
 
 const DAI_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
@@ -150,6 +146,8 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const grimEVO = grimEVOAmountOut?.currency
   const avax = avaxAmountOut?.currency
 
+  const WBTC_MULTIPLIER = chainId == ChainId.FANTOM ? 2 : ChainId.AVALANCHE ? 3.5 : 0
+
   // TODO(#2808): remove dependency on useBestV2Trade
   /* const v2USDCTrade = useBestV2Trade(TradeType.EXACT_OUTPUT, amountOut, currency, {
     maxHops: 2,
@@ -221,7 +219,7 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
 
     // handle wbtc
     if (currency?.wrapped.equals(wbtc)) {
-      return new Price(wbtc, wbtc, '1', Number(wbtcPrice * 2).toFixed())
+      return new Price(wbtc, wbtc, '1', Number(wbtcPrice * WBTC_MULTIPLIER).toFixed())
     }
     
     // handle bnb
