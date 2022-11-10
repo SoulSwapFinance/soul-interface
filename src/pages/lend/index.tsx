@@ -15,7 +15,7 @@ import { useInfiniteScroll } from 'hooks/useInfiniteScroll'
 import useSearchAndSort from 'hooks/useSearchAndSort'
 import Layout from 'layouts/Underworld'
 import Head from 'next/head'
-import Link from 'next/link'
+// import Link from 'next/link'
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { RecoilRoot } from 'recoil'
@@ -24,7 +24,7 @@ import { useUnderworldPairInfo, useUnderworldUserInfo } from 'hooks/useAPI'
 import { ChainId, UNDERWORLD_PAIRS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 import NavLink from 'components/NavLink'
-import { Button } from 'components/Button'
+// import { Button } from 'components/Button'
 import Typography from 'components/Typography'
 import { SubmitButton } from 'features/summoner/Styles'
 import { getChainColor, getChainColorCode } from 'constants/chains'
@@ -228,7 +228,7 @@ const LendEntry = ({ pair, userPosition = false }) => {
   const collateralValue = collateralAmount * collateralPrice
   const userDepositedValue = suppliedAmount * assetPrice
   
-  const LTV = (1 - (collateralValue - borrowedValue) / collateralValue) * 100
+  // const LTV = (1 - (collateralValue - borrowedValue) / collateralValue) * 100
   // const leeway = (75 - LTV) / 100
 
   // const userDepositedBalance = pair?.userAssetFraction // √

@@ -125,7 +125,7 @@ const allowedSlippage = INITIAL_ALLOWED_SLIPPAGE
 
   let inputError: string | undefined
   if (!account) {
-    inputError = t`Connect wallet`
+    inputError = t`Connect Wallet`
   }
 
   if (!parsedAmount) {
@@ -139,12 +139,12 @@ const allowedSlippage = INITIAL_ALLOWED_SLIPPAGE
 
   const formattedTo = isAddress(to)
   if (!to || !formattedTo) {
-    inputError = inputError ?? t`Enter a recipient`
+    inputError = inputError ?? t`Enter Recipient`
   } else {
       // todo: verify below
     // if (BAD_RECIPIENT_ADDRESSES[chainId] == formattedTo) 
     {
-      inputError = inputError ?? t`Invalid recipient`
+      inputError = inputError ?? t`Invalid Recipient`
     }
   }
 
@@ -157,7 +157,7 @@ const allowedSlippage = INITIAL_ALLOWED_SLIPPAGE
   ]
 
   if (amountIn && ((balanceIn && balanceIn.lessThan(amountIn)) || !balanceIn)) {
-    inputError = t`Insufficient ${amountIn.currency.symbol} balance`
+    inputError = t`Insufficient ${amountIn.currency.symbol} Balance`
   }
 
   // inputCurrency/outputCurrency null is loading, undefined is not found, see useToken for detail
