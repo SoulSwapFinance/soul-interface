@@ -127,6 +127,10 @@ module.exports = withBundleAnalyzer(
           destination: '/exchange/swap/:token*',
         },
         {
+          source: '/limit',
+          destination: '/exchange/limit',
+        },
+        {
           source: '/aggregate',
           destination: '/exchange/aggregate',
         },
@@ -141,10 +145,6 @@ module.exports = withBundleAnalyzer(
         {
           source: '/soulswap',
           destination: '/exchange/soulswap',
-        },
-        {
-          source: '/limit',
-          destination: '/exchange/limit',
         },
         {
           source: '/open-order',

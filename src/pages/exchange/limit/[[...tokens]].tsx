@@ -3,11 +3,14 @@ import {
   ChainId,
   Currency,
   CurrencyAmount,
+  currencyEquals,
   NATIVE,
+  NATIVE_ADDRESS,
   Percent,
   SOUL,
   Token,
   TradeType,
+  WNATIVE,
 } from "sdk"
 import { Trade } from "sdk"
 // import { AdvancedSwapDetails } from "../order/AdvancedSwapDetails"
@@ -71,12 +74,16 @@ import Container from "components/Container"
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2"
 import NetworkGuard from "guards/Network"
 import { Feature } from "enums/Feature"
-import { SwapLayout } from "layouts/SwapLayout"
+import { SwapLayout, SwapLayoutCard } from "layouts/SwapLayout"
 import Image from 'next/image'
 import { GelatoLimitOrdersHistoryPanel } from "soulswap-limit-orders-react"
 import { Toggle } from "components/Toggle"
 import SwapAssetPanel from "features/trident/swap/SwapAssetPanel"
-import { maxAmountSpend } from "utils/currency/maxAmountSpend"
+// import { maxAmountSpend } from "utils/currency/maxAmountSpend"
+import { currencyId } from "functions/currency"
+import { useRouter } from "next/router"
+import { useCurrency } from "hooks/Tokens"
+import SocialWidget from "components/Social"
 
 const BodyWrapper = styled.div<{ margin?: string }>`
 position: relative;
@@ -103,15 +110,15 @@ function AppBody({
 }
 
 
-const StyledInfo = styled(Info)`
-  opacity: 0.4;
-  color: ${({ theme }) => theme.text1};
-  height: 16px;
-  width: 16px;
-  :hover {
-    opacity: 0.8;
-  }
-`;
+// const StyledInfo = styled(Info)`
+//   opacity: 0.4;
+//   color: ${({ theme }) => theme.text1};
+//   height: 16px;
+//   width: 16px;
+//   :hover {
+//     opacity: 0.8;
+//   }
+// `;
 
 enum Rate {
   DIV = "DIV",
@@ -127,14 +134,44 @@ const Limit = () => {
   const { account, chainId } = useActiveWeb3React();
   // const [inputCurrency, setInputCurrency] = useState(NATIVE[chainId])
   // const [ouputCurrency, setOutputCurrency] = useState(SOUL[chainId])
-  
-  const ZERO_ADDRESS = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
-
   const theme = useTheme();
-  const recipient = account ?? null;
-
   const [showOrders, setShowOrders] = useState(false)
+  const router = useRouter()
+  const tokens = router.query.tokens
+  const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
 
+  // const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
+  const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
+// 
+  // const currencyA = useCurrency(currencyIdA)
+  // const currencyB = useCurrency(currencyIdB)
+
+  const handleCurrencyASelect = useCallback(
+    (currencyA: Currency) => {
+      const newCurrencyIdA = currencyId(currencyA)
+      if (newCurrencyIdA === currencyIdB) {
+        router.push(`/exchange/limit/${currencyIdB}/${currencyIdA}`)
+      } else {
+        router.push(`/exchange/limit/${newCurrencyIdA}/${currencyIdB}`)
+      }
+    },
+    [currencyIdB, router, currencyIdA]
+  )
+  const handleCurrencyBSelect = useCallback(
+    (currencyB: Currency) => {
+      const newCurrencyIdB = currencyId(currencyB)
+      if (currencyIdA === newCurrencyIdB) {
+        if (currencyIdB) {
+          router.push(`/exchange/limit/${currencyIdB}/${newCurrencyIdB}`)
+        } else {
+          router.push(`/exchange/limit/${newCurrencyIdB}`)
+        }
+      } else {
+        router.push(`/exchange/limit/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
+      }
+    },
+    [currencyIdA, router, currencyIdB]
+  )
 
   const {
     handlers: {
@@ -157,7 +194,7 @@ const Limit = () => {
     orderState: { independentField, rateType },
   } = useGelatoLimitOrders();
 
-  const fiatValueInput = useUSDCValue(parsedAmounts.input);
+  // const fiatValueInput = useUSDCValue(parsedAmounts.input);
 
   const desiredRateInCurrencyAmount = tryParseAmount(
     trade?.outputAmount.toSignificant(6),
@@ -166,16 +203,16 @@ const Limit = () => {
 
   const fiatValueDesiredRate = useUSDCValue(desiredRateInCurrencyAmount);
 
-  const currentMarketRate = trade?.executionPrice ?? undefined;
+  // const currentMarketRate = trade?.executionPrice ?? undefined;
 
-  const pct =
-    currentMarketRate && price
-      ? price.subtract(currentMarketRate).divide(currentMarketRate)
-      : undefined;
+  // const pct =
+  //   currentMarketRate && price
+  //     ? price.subtract(currentMarketRate).divide(currentMarketRate)
+  //     : undefined;
 
-  const percentageRateDifference = pct
-    ? new Percent(pct.numerator, pct.denominator)
-    : undefined;
+  // const percentageRateDifference = pct
+  //   ? new Percent(pct.numerator, pct.denominator)
+  //   : undefined;
 
   const isValid = !inputError;
   const rawPriceDelta = Number(formattedAmounts.price) - Number(trade?.executionPrice.toSignificant(4))
@@ -186,13 +223,13 @@ const Limit = () => {
   const isBuy = trade && rateType === Rate.DIV
   const isProfitable = isSell && rawPriceDelta > 0 || isBuy && rawPriceDelta < 0
 
-  const [activeTab, setActiveTab] = useState<"sell" | "buy">("sell");
-  const handleActiveTab = (tab: "sell" | "buy") => {
-    if (activeTab === tab) return;
+  // const [activeTab, setActiveTab] = useState<"sell" | "buy">("sell");
+  // const handleActiveTab = (tab: "sell" | "buy") => {
+  //   if (activeTab === tab) return;
 
-    handleRateType(rateType, price);
-    setActiveTab(tab);
-  };
+  //   handleRateType(rateType, price);
+  //   setActiveTab(tab);
+  // };
   const handleTypeInput = useCallback(
     (value: string) => {
       handleInput(Field.INPUT, value);
@@ -255,9 +292,9 @@ const Limit = () => {
     ((parsedAmounts.input && !parsedAmounts.output) ||
       (!parsedAmounts.input && parsedAmounts.output));
 
-  const maxInputAmount: CurrencyAmount<Currency> | undefined = maxAmountSpend(
-    currencyBalances.input
-  );
+  // const maxInputAmount: CurrencyAmount<Currency> | undefined = maxAmountSpend(
+  //   currencyBalances.input
+  // );
   // const showMaxButton = Boolean(
   //   maxInputAmount?.greaterThan(0) &&
   //   !parsedAmounts.input?.equalTo(maxInputAmount)
@@ -299,10 +336,10 @@ const Limit = () => {
 
       handleLimitOrderSubmission({
         inputToken: currencies.input?.isNative
-          ? ZERO_ADDRESS
+          ? NATIVE_ADDRESS
           : currencies.input?.wrapped.address,
           outputToken: currencies.output?.isNative
-          ? ZERO_ADDRESS
+          ? NATIVE_ADDRESS
           : currencies.output?.wrapped.address,
         inputAmount: rawAmounts.input,
         outputAmount: rawAmounts.output,
@@ -378,6 +415,7 @@ const Limit = () => {
     (inputCurrency) => {
       //  setApprovalSubmitted(false); // reset 2 step UI for approvals
       handleCurrencySelection(Field.INPUT, inputCurrency);
+      handleCurrencyASelect(inputCurrency)
     },
     [handleCurrencySelection]
   );
@@ -387,7 +425,10 @@ const Limit = () => {
   // }, [maxInputAmount, handleInput]);
 
   const handleOutputSelect = useCallback(
-    (outputCurrency) => handleCurrencySelection(Field.OUTPUT, outputCurrency),
+    (outputCurrency) => { 
+      handleCurrencySelection(Field.OUTPUT, outputCurrency)
+      handleCurrencyBSelect(outputCurrency)
+    },
     [handleCurrencySelection]
   );
 
@@ -415,8 +456,14 @@ const Limit = () => {
   return (
     <Container id="cross-page" maxWidth="2xl" className="space-y-4">
       <DoubleGlowShadowV2>
+      <SwapLayoutCard>
+
         <div className="p-4 px-2 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-          <SwapHeader />
+        <SwapHeader
+            inputCurrency={currencies[Field.INPUT]}
+            outputCurrency={currencies.output}
+            allowedSlippage={allowedSlippage}
+          />          
           {/* <OrderHeader handleActiveTab={handleActiveTab} activeTab={activeTab} /> */}
           <Wrapper id="limit-order-page">
             <ConfirmSwapModal
@@ -426,7 +473,7 @@ const Limit = () => {
               onAcceptChanges={handleAcceptChanges}
               attemptingTxn={attemptingTxn}
               txHash={txHash}
-              recipient={recipient}
+              recipient={account}
               allowedSlippage={allowedSlippage}
               onConfirm={handleSwap}
               swapErrorMessage={swapErrorMessage}
@@ -543,7 +590,7 @@ const Limit = () => {
                   />
                 )
               }
-                currency={currencies.output}
+                currency={currencies.output || SOUL[chainId]}
                 value={formattedAmounts.output}
                 onChange={handleTypeOutput}
                 onSelect={handleOutputSelect}
@@ -728,8 +775,7 @@ const Limit = () => {
               currencies={[currencies.input, currencies.output]}
             />
           )}
-        </div>
-      <div className={classNames([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `flex flex-cols-2 gap-3 text-white justify-end` : `hidden`)}>
+          <div className={classNames([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `flex flex-cols-2 gap-3 text-white justify-end` : `hidden`)}>
         <Toggle
           id="toggle-button"
           optionA="Orders"
@@ -746,6 +792,11 @@ const Limit = () => {
           }
           />
       </div>
+    </div>
+  {(!showOrders) &&
+       <SocialWidget />
+    }
+  </SwapLayoutCard>
       {!showOrders &&
         <div className="grid grid-cols-1">
           <Image src='https://app.soulswap.finance/title-soul-halfs.png' height="400px" width="600px" alt="logo" />
@@ -758,6 +809,7 @@ const Limit = () => {
       }
       </DoubleGlowShadowV2>
     </Container>
+
   );
 }
 

@@ -36,6 +36,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const isRemove = asPath.startsWith('/remove')
   // const isCrossChain = asPath.startsWith('/swap')
   const isSwap = asPath.startsWith('/exchange/swap') || asPath.startsWith('/swap') 
+  || asPath.startsWith('/limit') || asPath.startsWith('exchange/limit') 
   || asPath.startsWith('/add') || asPath.startsWith('exchange/add') 
   || asPath.startsWith('/remove') || asPath.startsWith('exchange/remove')
 
@@ -73,7 +74,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               "border rounded bg-black",
               chainColor
             )}
-            href={`/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([1, 250, 43114].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
+            href={`/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
               }`}
           >
             <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
@@ -87,9 +88,12 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               "border rounded bg-black",
               chainColor
             )}
+            // href=
+
             href={{
-              pathname: '/exchange/limit',
-              query: getQuery(inputCurrency, outputCurrency),
+              pathname:`/exchange/limit/${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)}`,
+              // pathname: '/exchange/limit',
+              // query: getQuery(inputCurrency, outputCurrency),
             }}
           >
             <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
