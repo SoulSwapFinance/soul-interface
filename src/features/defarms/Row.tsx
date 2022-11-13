@@ -68,14 +68,13 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
     const liquidity = summonerPoolInfo.tvl
     const APR = summonerPoolInfo.apr
     const allocPoint = summonerPoolInfo.allocPoint
-    const lpAddress = summonerPoolInfo.lpAddress
     const pairStatus = summonerPoolInfo.status
 
     // pair types //
     const isSwapPair = pairType == "swap"
 
     // const { userInfo } = useUserInfo()
-    const { pairInfo } = usePairInfo(lpAddress)
+    const { pairInfo } = usePairInfo(farm?.depositAddress)
     // assumes 18, since only SOUL-LP farms are eligible for Zap   
     const token0Decimals = Number(pairInfo.token0Decimals)
     const token1Decimals = Number(pairInfo.token1Decimals)
@@ -112,6 +111,7 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
     const hasBalance = Number(walletBalance) > 0
     const isActive = pairStatus == "active"
     const assetToken = new Token(chainId, depositAddress, decimals)
+    console.log('depositAddress:%s', depositAddress)
     // reward always 18 decimals
     const rewardToken = new Token(chainId, rewardAddress, 18)
 
@@ -299,10 +299,10 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
     }
 
     // HANDLE ZAP //
-    const handleZap = async (zapTokenAddress, lpAddress) => {
+    const handleZap = async (zapTokenAddress, depositAddress) => {
         try {
             let tx
-            tx = await ZapContract?.zapInToken(zapTokenAddress, Number(zapValue).toFixed(zapTokenDecimals).toBigNumber(zapTokenDecimals), lpAddress, ROUTER_ADDRESS[chainId], account)
+            tx = await ZapContract?.zapInToken(zapTokenAddress, Number(zapValue).toFixed(zapTokenDecimals).toBigNumber(zapTokenDecimals), depositAddress, ROUTER_ADDRESS[chainId], account)
             await tx?.wait()
         } catch (e) {
             console.log(e)
@@ -534,7 +534,7 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
                                                 Staked Balance
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(stakedBalance, false, true)} {farm.lpSymbol}
+                                                {formatNumber(stakedBalance, false, true)} {farm.depositSymbol}
                                             </Typography>
                                         </div>
                                     )}
@@ -638,7 +638,7 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
                                 DEPOSIT {
                                   Number(allocPoint) == 220
                                   ? token0Symbol 
-                                  : farm.lpSymbol
+                                  : farm.depositSymbol
                                 }
                                         </div>
                                     </SubmitButton>
@@ -666,8 +666,8 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
                                                 >
                                                     <div className="flex text-lg gap-2">
                                                         <CollectionIcon width={26} className={classNames(`text-white`)} />
-                                                        {/* {farm.lpSymbol} */}
-                                                        CREATE {farm.lpSymbol} LP
+                                                        {/* {farm.depositSymbol} */}
+                                                        CREATE {farm.depositSymbol} LP
                                                     </div>
                                                 </TokenPairLink>
                                             </SubmitButton>
@@ -691,7 +691,7 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
                                                 >
                                                     <div className="flex text-lg gap-2">
                                                         <CollectionIcon width={26} className={classNames(`text-white`)} />
-                                                        CREATE {farm.lpSymbol} LP
+                                                        CREATE {farm.depositSymbol} LP
                                                     </div>                                            </TokenPairLink>
                                             </SubmitButton>
                                         </a>
@@ -735,7 +735,7 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
                                                 {/* <Zap width={26} className={classNames(`text-white`)} /> */}
                                                 ZAP
                                                 <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                                &rarr; {`${farm.lpSymbol}`}
+                                                &rarr; {`${farm.depositSymbol}`}
                                             </div>
                                         </SubmitButton>
                                     </Wrap>
@@ -770,7 +770,7 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
                                                 Staked Balance
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(stakedBalance, false, true)} {farm.lpSymbol}
+                                                {formatNumber(stakedBalance, false, true)} {farm.depositSymbol}
                                             </Typography>
                                         </div>
                                     )}
@@ -794,7 +794,7 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
                                             Maximum Fee
                                         </Typography>
                                         <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                            {formatNumber(Number(stakedBalance) - withdrawable, false, true)} {farm.lpSymbol}
+                                            {formatNumber(Number(stakedBalance) - withdrawable, false, true)} {farm.depositSymbol}
                                         </Typography>
                                     </div>
 
@@ -855,7 +855,7 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
                                         margin=".5rem 0 0rem 0"
                                         onClick={() => setShowConfirmation(true)}
                                     >
-                                        WITHDRAW {farm.lpSymbol}
+                                        WITHDRAW {farm.depositSymbol}
                                     </SubmitButton>
 
                                 </Wrap>
@@ -958,10 +958,10 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
                             className={'font-bold'}
                             margin=".5rem 0 0rem 0"
                             onClick={() =>
-                                handleZap(zapTokenAddress, lpAddress)
+                                handleZap(zapTokenAddress, depositAddress)
                             }
                         >
-                            ZAP INTO {farm.lpSymbol}
+                            ZAP INTO {farm.depositSymbol}
                         </SubmitButton>
                     </Wrap>
                     {/* } */}
@@ -983,7 +983,7 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
                                 Estimated Fee Outcomes
                             </div>
                             • <b>Current Rate</b>: {Number(withdrawFee).toFixed(0)}% <br />
-                            • <b>Fee Amount</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {farm.lpSymbol}<br />
+                            • <b>Fee Amount</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {farm.depositSymbol}<br />
                             • <b>Fee Value</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) * Number(lpPrice) / 100, true, true)}
 
                             <div className="mt-6 text-center">

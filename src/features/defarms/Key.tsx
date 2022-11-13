@@ -83,15 +83,9 @@ export function Active() {
               </Text>
             </FarmItemBox>
 
-            {/* <FarmItemBox>
-              <Text padding="0" fontSize=".8" color="#FFFFFF">
-                REWARD
-              </Text>
-            </FarmItemBox> */}
-
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                  LIQUIDITY
+                  TVL
                 </Text>
               </FarmItemBox>
 
@@ -134,17 +128,11 @@ export function Inactive() {
                 YIELD
               </Text>
             </FarmItemBox>
-{/* 
-            <FarmItemBox>
-              <Text padding="0" fontSize=".8" color="#FFFFFF">
-                REWARD
-              </Text>
-            </FarmItemBox> */}
 
             <HideOnSmall>
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                  LIQUIDITY
+                  TVL
                 </Text>
               </FarmItemBox>
             </HideOnSmall>
