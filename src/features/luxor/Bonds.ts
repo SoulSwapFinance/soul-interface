@@ -242,7 +242,7 @@ export const FantomBonds = [
     token1Address: DAI_ADDRESS[ChainId.FANTOM],
     term: '5D',
   },
-
+  
   // FTM BONDS //
   {
     pid: 25,
@@ -252,10 +252,11 @@ export const FantomBonds = [
     token1Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     term: '5D',
   },
-
+  
   // LUX-FTM BONDS //
   {
     pid: 27,
+    status: 'closed',
     bondAddress: '0x6d9b32219455f42E24159E089aFc8D744819cd23',
     assetName: 'LUX-FTM',
     assetAddress: LUX_NATIVE[ChainId.FANTOM],

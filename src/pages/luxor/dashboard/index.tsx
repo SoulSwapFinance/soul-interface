@@ -210,19 +210,19 @@ export default function Dashboard() {
       {
           "angle": sorStableCollateral,
           "color": "#FFA300",
-          "label": "Stable Collateral",
+          "label": "Stable (DAI) Collateral",
           "percent": (sorStableCollateral / totalSorCollateral * 100).toFixed()
       },
-      {
-          "angle": sorLuxCollateral + sorWrappedLumensCollateral,
-          "color": "#FFC300",
-          "label": "Luxor Collateral",
-          "percent": ((sorLuxCollateral + sorWrappedLumensCollateral) / totalSorCollateral * 100).toFixed()
-      },
+      // {
+      //     "angle": sorLuxCollateral + sorWrappedLumensCollateral,
+      //     "color": "#FFC300",
+      //     "label": "Luxor Collateral",
+      //     "percent": ((sorLuxCollateral + sorWrappedLumensCollateral) / totalSorCollateral * 100).toFixed()
+      // },
       {
            "angle": sorFtmCollateral,
            "color": "#FFE300",
-           "label": "Fantom Collateral",
+           "label": "Fantom (FTM) Collateral",
            "percent": (sorFtmCollateral / totalSorCollateral * 100).toFixed()
        },
       /* {
@@ -296,14 +296,14 @@ export default function Dashboard() {
       percent: ((lockedLuxor / luxorSupply) * 100).toFixed()
       ,
     },
-    {
-      angle: storedLuxor,
-      color: '#FFD300',
-      label: 'SOR BACKING',
-      text: 'The portion of supply not in circulation as it is currently locked into the SOR contract as backing value.',
-      percent: ((storedLuxor / luxorSupply) * 100).toFixed()
-      ,
-    },
+    // {
+    //   angle: storedLuxor,
+    //   color: '#FFD300',
+    //   label: 'SOR BACKING',
+    //   text: 'The portion of supply not in circulation as it is currently locked into the SOR contract as backing value.',
+    //   percent: ((storedLuxor / luxorSupply) * 100).toFixed()
+    //   ,
+    // },
   ]
 
 const HideOnMobile = styled.div`
