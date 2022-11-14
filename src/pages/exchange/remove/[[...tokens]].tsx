@@ -21,7 +21,6 @@ import { CurrencyLogo } from 'components/CurrencyLogo'
 import Dots from 'components/Dots'
 import { Field } from 'state/burn/actions'
 import Head from 'next/head'
-// import Header from 'components/ExchangeHeader'
 import Link from 'next/link'
 import SwapHeader from 'features/swap/SwapHeader'
 import LiquidityHeader from 'features/liquidity/LiquidityHeader'
@@ -141,18 +140,18 @@ export default function Remove() {
     [_onUserInput]
   )
 
-  const onLiquidityInput = useCallback(
-    (typedValue: string): void => onUserInput(Field.LIQUIDITY, typedValue),
-    [onUserInput]
-  )
-  const onCurrencyAInput = useCallback(
-    (typedValue: string): void => onUserInput(Field.CURRENCY_A, typedValue),
-    [onUserInput]
-  )
-  const onCurrencyBInput = useCallback(
-    (typedValue: string): void => onUserInput(Field.CURRENCY_B, typedValue),
-    [onUserInput]
-  )
+  // const onLiquidityInput = useCallback(
+  //   (typedValue: string): void => onUserInput(Field.LIQUIDITY, typedValue),
+  //   [onUserInput]
+  // )
+  // const onCurrencyAInput = useCallback(
+  //   (typedValue: string): void => onUserInput(Field.CURRENCY_A, typedValue),
+  //   [onUserInput]
+  // )
+  // const onCurrencyBInput = useCallback(
+  //   (typedValue: string): void => onUserInput(Field.CURRENCY_B, typedValue),
+  //   [onUserInput]
+  // )
 
   // tx sending
   const addTransaction = useTransactionAdder()

@@ -64,6 +64,7 @@ import {
   CHAINLINK_ORACLE_ADDRESS,
   MERKLE_DISTRIBUTOR_ADDRESS,
   SOUL_X_SWAP_ADDRESS,
+  MANIFESTER_ADDRESS,
 } from 'sdk'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from 'constants/multicall'
 import SOUL_BOND_ABI from 'constants/abis/soulbond.json' 
@@ -100,7 +101,8 @@ import SOUL_SAFE_ABI from 'constants/abis/soulswap/safe.json'
 import SOUL_X_SWAP_ABI from 'constants/abis/soulswap/soulxswap.json'
 import SOUL_GUIDE_ABI from 'constants/abis/soul-guide.json' // TODO: update abi
 import SUMMONER_ABI from 'constants/abis/soulswap/soulsummoner.json' // 28 JUL
-import SOUL_MANIFESTER_ABI from 'constants/abis/soulswap/soulmanifester.json' // 28 JUL
+import SOUL_MANIFESTER_ABI from 'constants/abis/soulswap/soulmanifester.json' 
+import FARM_MANIFESTER_ABI from 'constants/abis/soulswap/farm-manifester.json'
 import LOTTERY_ABI from 'constants/abis/soulswap/lottery.json' // 28 JUL
 import LUXOR_ABI from 'constants/abis/soulswap/luxor.json'
 import LUXOR_TREASURY_ABI from 'constants/abis/soulswap/luxor-treasury.json'
@@ -413,6 +415,11 @@ export function useLotteryContract(withSignerIfPossible?: boolean): Contract | n
 export function useSummonerContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SUMMONER_ADDRESS[chainId], SOUL_MANIFESTER_ABI, withSignerIfPossible)
+}
+
+export function useManifesterContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && MANIFESTER_ADDRESS[chainId], FARM_MANIFESTER_ABI, withSignerIfPossible)
 }
 
 export function useAutoStakeContract(withSignerIfPossible?: boolean): Contract | null {

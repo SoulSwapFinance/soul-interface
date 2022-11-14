@@ -230,7 +230,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
         {getSummaryLine(
           <div className="flex items-center">
             <Typography variant="sm" className="flex items-center py-0.5">
-              { `Total Supply` }
+              { `Max Supply` }
               {/* `Circulating Supply`*/}
             </Typography>
             {/* <QuestionHelper
@@ -277,23 +277,25 @@ export default function LuxorStatsModal(): JSX.Element | null {
               }
             /> */}
           </div>,
-          formatNumberScale(
-            Number(luxorInfo?.supply)
+            '21,000,000'
+          // formatNumberScale(
+            // Number(luxorInfo?.supply)
             // -  Number(luxorInfo?.circulatingLumens)
             // - (Number(luxorInfo?.supply) * 0.19) 
             // TODO: make exact
-            , false)
+            // , false)
         )}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
-            {`Total Market Cap`}
+            {`Market Cap`}
           </Typography>,
           formatCurrency(
-            Number(luxorInfo?.supply) * Number(luxorPrice))
+            21_000_000 * Number(luxorPrice))
+            // Number(luxorInfo?.supply) * Number(luxorPrice))
         )}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
-            {`Protocol Liquidity`}
+            {`Owned Liquidity`}
           </Typography>,
           concat(formatNumberScale(
             treasuryLiquidityBalance, true)
@@ -305,14 +307,13 @@ export default function LuxorStatsModal(): JSX.Element | null {
             {`Luxor Market Price`}
           </Typography>,
           formatNumber(
-            luxorPrice, true, true)
+            luxorPrice?.toFixed(2), true, true)
         )}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`wLumens Market Price`}
           </Typography>,
-          formatNumber(
-            wLumPrice, true, true)
+         `$${wLumPrice?.toFixed(0)}`
         )}
         <div className="flex mt-3" />
         {/* <div className="flex"> */}
