@@ -7,21 +7,14 @@ import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
-import { useSummonerContract } from 'hooks/useContract'
-// import ExternalLink from 'components/ExternalLink'
-import { classNames } from 'functions'
-// import { getChainColorCode } from 'constants/chains'
-// import { classNames } from 'functions'
 
 export const FarmList = () => {
   const { chainId } = useActiveWeb3React()
-  const SummonerContract = useSummonerContract()
   const ftmList = FantomPools.map((farm) => (
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
       decimals={farm.decimals}
-      pairType={farm.type}
       depositAddress={farm.depositAddress}
       rewardAddress={farm.rewardAddress}
       token0Symbol={farm.token0Symbol}
@@ -37,7 +30,6 @@ export const FarmList = () => {
       key={farm.pid}
       pid={farm.pid}
       decimals={farm.decimals}
-      pairType={farm.type}
       depositAddress={farm.depositAddress}
       rewardAddress={farm.rewardAddress}
       token0Symbol={farm.token0Symbol}
@@ -53,7 +45,6 @@ export const FarmList = () => {
       key={farm.pid}
       pid={farm.pid}
       decimals={farm.decimals}
-      pairType={farm.type}
       depositAddress={farm.depositAddress}
       rewardAddress={farm.rewardAddress}
       token0Symbol={farm.token0Symbol}
@@ -69,7 +60,6 @@ export const FarmList = () => {
       key={farm.pid}
       pid={farm.pid}
       decimals={farm.decimals}
-      pairType={farm.type}
       depositAddress={farm.depositAddress}
       rewardAddress={farm.rewardAddress}
       token0Symbol={farm.token0Symbol}
@@ -125,7 +115,7 @@ export const FarmList = () => {
       <Typography className="text-2xl bg-dark-1000 mt-6 border border-dark-600 p-3 font-bold text-center">SoulSwap Pools</Typography>
       <Active />
       <>{chainId == ChainId.FANTOM ? ftmList : avaxList}</>
-      <div>
+      {/* <div>
         <Typography
           className={classNames(chainId == ChainId.AVALANCHE ? 'hidden' : `text-2xl bg-dark-1000 mt-6 border border-pink p-3 font-bold text-center`)}
         >
@@ -133,7 +123,7 @@ export const FarmList = () => {
         </Typography>
         {chainId == ChainId.FANTOM ? <Inactive /> : null}
         {chainId == ChainId.FANTOM ? inactiveFtmList : inactiveAvaxList}
-      </div>
+      </div> */}
     </div>
   )
 }

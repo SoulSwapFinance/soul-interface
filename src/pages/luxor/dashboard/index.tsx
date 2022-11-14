@@ -69,6 +69,7 @@ export default function Dashboard() {
   const LuxorAddress = LUX_ADDRESS[250]
   const LuxSorAddress = LuxSorContract.address
   const luxorSupply = Number(useTokenInfo(LuxorAddress).tokenInfo.supply) / 1e9
+  const maxLuxorSupply = Number(21_000_000)
 
   // Calculate Minting Rate
   const startTime = 1638424800000
@@ -457,7 +458,7 @@ const HideOnMobile = styled.div`
             <Typography
               className={'flex justify-center items-baseline'}
               variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-               {formatNumber(luxorPrice * luxorSupply, true, false, 0)}
+               {formatNumber(luxorPrice * maxLuxorSupply, true, false, 0)}
             </Typography>
           </div>
             <div className="md:hidden h-px my-4 mb-3 bg-dark-1000" />
@@ -479,12 +480,12 @@ const HideOnMobile = styled.div`
                 <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  {formatNumber(luxorPrice, true, false, 0)}
+                  {formatNumber(luxorPrice?.toFixed(2), true, true)}
                 </Typography>
                 <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  {formatNumber(luxorFloorPrice, true, false, 0)}
+                  {formatNumber(luxorFloorPrice?.toFixed(2), true, true)}
                 </Typography>
               </div>
             </div>
@@ -511,7 +512,7 @@ const HideOnMobile = styled.div`
             <Typography 
             className={'flex justify-center items-baseline'}
             variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-              { formatNumber(luxorPerDay, false, true) }
+              { luxorPerDay.toFixed(0) }
                <span className="text-xs leading-5 text-black-50 ml-1">{i18n._(t`/ DAY`).toUpperCase()}</span>
             </Typography>
             </div>
@@ -547,12 +548,12 @@ const HideOnMobile = styled.div`
               <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  {formatNumber(luxorPrice, true, false, 0)}
+                  {formatNumber(luxorPrice?.toFixed(2), true, true)}
                 </Typography>
                 <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  {formatNumber(luxorFloorPrice, true, false, 0)}
+                  {formatNumber(luxorFloorPrice?.toFixed(2), true, true)}
                 </Typography>
                 <Typography
                   className={'flex justify-center items-baseline'}
@@ -562,7 +563,7 @@ const HideOnMobile = styled.div`
                 <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  { formatNumber(luxorPerDay, false, true) }
+                  { luxorPerDay.toFixed(0) }
                   <span className="text-xs leading-5 text-black-50 ml-1">{i18n._(t`/ DAY`).toUpperCase()}</span>
                 </Typography>
               </div>
@@ -713,8 +714,8 @@ const HideOnMobile = styled.div`
           </div>
         </div> */}
 
-        <div className="p-1 shadow-4 bg-[#F5D100] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
-        <div className="bg-dark-1000 p-4">
+       {/* <div className="p-1 shadow-4 bg-[#F5D100] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
+         <div className="bg-dark-1000 p-4">
         <Typography
             className="text-2xl flex gap-1 justify-center items-center"
             weight={600}
@@ -851,7 +852,7 @@ const HideOnMobile = styled.div`
                {formatNumber(totalSorSupply, false, true)}{' '}
               <span className="text-sm leading-5 text-black-50 ml-2">{i18n._(t`SOR`).toUpperCase()}</span>
             </Typography>
-          </div> */}
+          </div> //
           <div className="h-px my-4 bg-dark-1000" />
           <div>
             <Typography
@@ -877,7 +878,7 @@ const HideOnMobile = styled.div`
               </div>
             </div>
             </div>
-          </div>
+          </div> */}
 
         <div className="p-1 shadow-4 bg-[#F5D100] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
         <div className="bg-dark-1000 p-4">

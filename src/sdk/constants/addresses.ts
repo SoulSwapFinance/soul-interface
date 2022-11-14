@@ -160,6 +160,11 @@ export const SUMMONER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
+export const MANIFESTER_ADDRESS: AddressMap = {
+  [ChainId.FANTOM]: '0xa7b78ce06380C5649a7256B3d438a553498172a7',
+  // [ChainId.AVALANCHE]: '',
+}
+
 export const MASTERCHEF_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',

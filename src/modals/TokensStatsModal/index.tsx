@@ -192,9 +192,11 @@ export default function TokenStatsModal(): JSX.Element | null {
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Maximum Supply`}
           </Typography>,
-          formatNumberScale(
-            Number(250_000_000), false)
-            )}
+          '250,000,000'
+          // formatNumberScale(
+          //   Number(250_000_000), false)
+            )
+        }
           {/* {getSummaryLine(
             <div className="flex items-center">
             <Typography variant="sm" className="flex items-center py-0.5">
@@ -333,45 +335,46 @@ export default function TokenStatsModal(): JSX.Element | null {
             Number(TVL), 0)
         )}
         { [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) && getSummaryLine(
-          <div className="flex items-center">
+          <div className="flex items-center gap-1">
             <Typography variant="sm" className="flex items-center py-0.5">
-              {`Protocol Liquidity`}
+              {`DAO Liquidity`}
             </Typography>
+            
             <QuestionHelper
-              text={
-                <div className="flex flex-col gap-2 py-1 px-3 w-full">
-                  <div className="flex items-center justify-between">
-                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      Bonded
-                    </Typography>
-                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      {formatNumberScale(bondTVL, true)}
-                    </Typography>
+                text={
+                  <div className="flex flex-col gap-2 py-1 px-3 w-full">
+                    <div className="flex items-center justify-between">
+                      <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
+                        Bonded
+                      </Typography>
+                      <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
+                        {formatNumberScale(bondTVL, true)}
+                      </Typography>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
+                        DAO
+                      </Typography>
+                      <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
+                        {formatNumberScale(daoTVL, true)}
+                      </Typography>
+                    </div>
+                    <hr></hr>
+                    <div />
+                    <div className="flex items-center justify-between">
+                      <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
+                        Total Value
+                      </Typography>
+                      <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
+                        {formatNumberScale(
+                          Number(bondTVL)
+                         + Number(soulTVL)
+                          , true)}
+                      </Typography>
+                    </div>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      DAO
-                    </Typography>
-                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      {formatNumberScale(daoTVL, true)}
-                    </Typography>
-                  </div>
-                  <hr></hr>
-                  <div />
-                  <div className="flex items-center justify-between">
-                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      Total Value
-                    </Typography>
-                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      {formatNumberScale(
-                        Number(bondTVL)
-                       + Number(soulTVL)
-                        , true)}
-                    </Typography>
-                  </div>
-                </div>
-              }
-            />
+                }
+              />
           </div>,
           concat(formatNumberScale(
             Number(bondTVL + soulTVL), true)

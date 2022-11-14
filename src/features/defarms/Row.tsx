@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, SUMMONER_ADDRESS, Token, WNATIVE } from 'sdk'
-import { useTokenContract, useSummonerContract, useZapperContract } from 'hooks/useContract'
+import { useTokenContract, useSummonerContract, useZapperContract, useManifesterContract } from 'hooks/useContract'
 import useApprove from 'hooks/useApprove'
 import { Tab } from '@headlessui/react'
 import {
@@ -45,7 +45,7 @@ const TokenPairLink = styled(ExternalLink)`
   padding-left: 10;
 `
 
-export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewardAddress, token0Symbol, token1Symbol, token0Address, token1Address }) => {
+export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, token0Symbol, token1Symbol, token0Address, token1Address }) => {
     const { account, chainId, library } = useActiveWeb3React()
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(depositAddress)
 
@@ -54,6 +54,7 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
     const [withdrawValue, setWithdrawValue] = useState('0')
     const [depositValue, setDepositValue] = useState('0')
     const [zapValue, setZapValue] = useState('0')
+    const [farmAddress, setFarmAddress] = useState('0xe7A3d3a56b08358f6EB0120eE46b2DD7930c4C26')
     const [zapTokenAddress, setZapTokenAddress] = useState(SOUL_ADDRESS[chainId])
 
     const SoulSummonerContract = useSummonerContract()
@@ -70,9 +71,16 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
     const allocPoint = summonerPoolInfo.allocPoint
     const pairStatus = summonerPoolInfo.status
 
-    // pair types //
-    const isSwapPair = pairType == "swap"
+    const ManifesterContract = useManifesterContract()
+    
+    async function getFarmAddress(_pid) {
+        let farmAddress = await ManifesterContract.allFarms(_pid)
+        //  console.log('farmAddress: %s ', _farmAddress)
 
+         setFarmAddress(farmAddress)
+         return farmAddress
+    }
+    
     // const { userInfo } = useUserInfo()
     const { pairInfo } = usePairInfo(farm?.depositAddress)
     // assumes 18, since only SOUL-LP farms are eligible for Zap   
@@ -111,7 +119,7 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
     const hasBalance = Number(walletBalance) > 0
     const isActive = pairStatus == "active"
     const assetToken = new Token(chainId, depositAddress, decimals)
-    console.log('depositAddress:%s', depositAddress)
+    // console.log('depositAddress:%s', depositAddress)
     // reward always 18 decimals
     const rewardToken = new Token(chainId, rewardAddress, 18)
 
@@ -436,7 +444,7 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
                         !isActive ? 'border-dark-900 hover:border-pink' : 'border-dark-900 hover:border-dark-420'
                     }
                     className={classNames("border",
-                        isActive && isSwapPair ? "hover:border-dark-600"
+                        isActive ? "hover:border-dark-600"
                                 : "hover:border-pink",
                         "p-4 mt-3 mb-3 sm:p-0.5 w-full")}
                 >
@@ -719,7 +727,6 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
                                     </Wrap>
                                 )}
 
-                                {isSwapPair &&
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
@@ -739,7 +746,6 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
                                             </div>
                                         </SubmitButton>
                                     </Wrap>
-                                }
                             </Tab.Panel>
                             {/*------ WITHDRAW TAB PANEL ------*/}
                             <Tab.Panel className={'outline-none'}>
@@ -891,7 +897,7 @@ export const ActiveRow = ({ pid, farm, pairType, depositAddress, decimals, rewar
                         !isActive ? 'border-dark-900 hover:border-pink' : 'border-dark-900 hover:border-dark-420'
                     }
                     className={classNames("border",
-                        isActive && isSwapPair ? "hover:border-dark-600"
+                        isActive ? "hover:border-dark-600"
                             : "hover:border-pink",
                         "p-4 mt-3 mb-3 sm:p-0.5 w-full")}
                 >
