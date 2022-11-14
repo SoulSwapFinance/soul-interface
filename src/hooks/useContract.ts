@@ -103,6 +103,7 @@ import SOUL_GUIDE_ABI from 'constants/abis/soul-guide.json' // TODO: update abi
 import SUMMONER_ABI from 'constants/abis/soulswap/soulsummoner.json' // 28 JUL
 import SOUL_MANIFESTER_ABI from 'constants/abis/soulswap/soulmanifester.json' 
 import FARM_MANIFESTER_ABI from 'constants/abis/soulswap/farm-manifester.json'
+import MANIFESTATION_ABI from 'constants/abis/soulswap/manifestation.json'
 import LOTTERY_ABI from 'constants/abis/soulswap/lottery.json' // 28 JUL
 import LUXOR_ABI from 'constants/abis/soulswap/luxor.json'
 import LUXOR_TREASURY_ABI from 'constants/abis/soulswap/luxor-treasury.json'
@@ -420,6 +421,11 @@ export function useSummonerContract(withSignerIfPossible?: boolean): Contract | 
 export function useManifesterContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && MANIFESTER_ADDRESS[chainId], FARM_MANIFESTER_ABI, withSignerIfPossible)
+}
+
+export function useManifestationContract(address: string, withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && address, MANIFESTATION_ABI, withSignerIfPossible)
 }
 
 export function useAutoStakeContract(withSignerIfPossible?: boolean): Contract | null {

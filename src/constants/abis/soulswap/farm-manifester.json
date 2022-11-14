@@ -10,55 +10,6 @@
             {
                 "indexed": true,
                 "internalType": "address",
-                "name": "creatorAddress",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "internalType": "address",
-                "name": "depositToken",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "rewardToken",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "farm",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "duraDays",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "feeDays",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "totalFarms",
-                "type": "uint256"
-            }
-        ],
-        "name": "FarmCreated",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": true,
-                "internalType": "address",
                 "name": "previousOwner",
                 "type": "address"
             },
@@ -83,6 +34,55 @@
             }
         ],
         "name": "Paused",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "creatorAddress",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "depositToken",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "rewardToken",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "manifestation",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "duraDays",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "feeDays",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "totalManifestations",
+                "type": "uint256"
+            }
+        ],
+        "name": "SummonedManifestation",
         "type": "event"
     },
     {
@@ -113,29 +113,10 @@
     },
     {
         "inputs": [],
-        "name": "WNATIVE_ADDRESS",
+        "name": "WNATIVE",
         "outputs": [
             {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "name": "allFarms",
-        "outputs": [
-            {
-                "internalType": "address",
+                "internalType": "contract IERC20",
                 "name": "",
                 "type": "address"
             }
@@ -173,30 +154,30 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "rewardToken",
+                "name": "_rewardToken",
                 "type": "address"
             },
             {
                 "internalType": "uint256",
-                "name": "duraDays",
+                "name": "_duraDays",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "feeDays",
+                "name": "_feeDays",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "dailyReward",
+                "name": "_dailyReward",
                 "type": "uint256"
             }
         ],
-        "name": "createFarm",
+        "name": "createManifestation",
         "outputs": [
             {
                 "internalType": "address",
-                "name": "farm",
+                "name": "manifestation",
                 "type": "address"
             }
         ],
@@ -225,6 +206,40 @@
     {
         "inputs": [
             {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            }
+        ],
+        "name": "getInfo",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "mAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "symbol",
+                "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "rewardPerSecond",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "address",
                 "name": "",
                 "type": "address"
@@ -235,11 +250,37 @@
                 "type": "address"
             }
         ],
-        "name": "getFarm",
+        "name": "getManifestation",
         "outputs": [
             {
                 "internalType": "address",
                 "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getNativeSymbol",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getOracleAddress",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "oracleAddress",
                 "type": "address"
             }
         ],
@@ -291,12 +332,70 @@
     },
     {
         "inputs": [],
+        "name": "getWrappedAddress",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "_wnativeAddress",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "isPaused",
         "outputs": [
             {
                 "internalType": "bool",
                 "name": "",
                 "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "manifestations",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "nativeOracle",
+        "outputs": [
+            {
+                "internalType": "contract IOracle",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "nativeSymbol",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
             }
         ],
         "stateMutability": "view",
@@ -368,21 +467,8 @@
         "type": "function"
     },
     {
-        "inputs": [
-            {
-                "internalType": "bool",
-                "name": "enabled",
-                "type": "bool"
-            }
-        ],
-        "name": "toggleTestMode",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
         "inputs": [],
-        "name": "totalFarms",
+        "name": "totalManifestations",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -410,11 +496,11 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "_daoAddress",
+                "name": "_DAOAddress",
                 "type": "address"
             }
         ],
-        "name": "updateDao",
+        "name": "updateDAO",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"

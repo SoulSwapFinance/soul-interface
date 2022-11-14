@@ -74,7 +74,7 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
     const ManifesterContract = useManifesterContract()
     
     async function getFarmAddress(_pid) {
-        let farmAddress = await ManifesterContract.allFarms(_pid)
+        let farmAddress = await ManifesterContract.manifestations(_pid)
         //  console.log('farmAddress: %s ', _farmAddress)
 
          setFarmAddress(farmAddress)
@@ -124,7 +124,6 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
     const rewardToken = new Token(chainId, rewardAddress, 18)
 
     const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
-  
     const parsedDepositValue = tryParseAmount(depositValue, assetToken)
     const parsedWithdrawValue = tryParseAmount(withdrawValue, assetToken)
 

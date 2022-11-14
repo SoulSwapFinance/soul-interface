@@ -15,7 +15,7 @@ export const AvalanchePools = []
 
 
 export const FantomPools = [
-  { // 600 
+  {
     pid: 0,
     decimals: 18,
     // logoURI: 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png',

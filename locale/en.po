@@ -202,8 +202,8 @@ msgstr "Borrow"
 msgid "Borrow assets and leverage up"
 msgstr "Borrow assets and leverage up"
 
-msgid "Borrow {0}-{1}"
-msgstr "Borrow {0}-{1}"
+msgid "Borrow {assetSymbol}-{collateralSymbol}"
+msgstr "Borrow {assetSymbol}-{collateralSymbol}"
 
 msgid "Borrowed"
 msgstr "Borrowed"
@@ -305,9 +305,6 @@ msgstr "CoffinBox Balances"
 msgid "Collateral"
 msgstr "Collateral"
 
-msgid "Collateral Distribution"
-msgstr "Collateral Distribution"
-
 msgid "Come on Over..."
 msgstr "Come on Over..."
 
@@ -352,9 +349,6 @@ msgstr "Connect Wallet"
 
 msgid "Connect Wallet ↗"
 msgstr "Connect Wallet ↗"
-
-msgid "Connect wallet"
-msgstr "Connect wallet"
 
 msgid "Considerations"
 msgstr "Considerations"
@@ -466,9 +460,6 @@ msgstr "Enter Amount"
 
 msgid "Enter Recipient"
 msgstr "Enter Recipient"
-
-msgid "Enter a recipient"
-msgstr "Enter a recipient"
 
 msgid "Enter an amount"
 msgstr "Enter an amount"
@@ -647,6 +638,9 @@ msgstr "Insufficient balance to cover for fees"
 msgid "Insufficient liquidity for this trade."
 msgstr "Insufficient liquidity for this trade."
 
+msgid "Insufficient {0} Balance"
+msgstr "Insufficient {0} Balance"
+
 msgid "Insufficient {0} balance"
 msgstr "Insufficient {0} balance"
 
@@ -667,9 +661,6 @@ msgstr "Invalid amount"
 
 msgid "Invalid pair"
 msgstr "Invalid pair"
-
-msgid "Invalid recipient"
-msgstr "Invalid recipient"
 
 msgid "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
 msgstr "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
@@ -1036,9 +1027,6 @@ msgstr "SELF"
 msgid "SLP"
 msgstr "SLP"
 
-msgid "SOR STABLECOIN"
-msgstr "SOR STABLECOIN"
-
 msgid "SOUL"
 msgstr "SOUL"
 
@@ -1397,8 +1385,11 @@ msgstr "Vesting is executed within the guidelines selected by the community in"
 msgid "Vietnamese"
 msgstr "Vietnamese"
 
-msgid "View Liquidity Positions"
-msgstr "View Liquidity Positions"
+msgid "View Analytics"
+msgstr "View Analytics"
+
+msgid "View Positions"
+msgstr "View Positions"
 
 msgid "View on Explorer"
 msgstr "View on Explorer"
