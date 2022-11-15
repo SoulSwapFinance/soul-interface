@@ -8,28 +8,9 @@
         "anonymous": false,
         "inputs": [
             {
-                "indexed": true,
-                "internalType": "address",
-                "name": "previousOwner",
-                "type": "address"
-            },
-            {
-                "indexed": true,
-                "internalType": "address",
-                "name": "newOwner",
-                "type": "address"
-            }
-        ],
-        "name": "OwnershipTransferred",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
                 "indexed": false,
                 "internalType": "address",
-                "name": "pauserAddress",
+                "name": "msgSender",
                 "type": "address"
             }
         ],
@@ -41,9 +22,9 @@
         "inputs": [
             {
                 "indexed": true,
-                "internalType": "address",
-                "name": "creatorAddress",
-                "type": "address"
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
             },
             {
                 "indexed": true,
@@ -60,43 +41,44 @@
             {
                 "indexed": false,
                 "internalType": "address",
-                "name": "manifestation",
+                "name": "creatorAddress",
                 "type": "address"
             },
             {
                 "indexed": false,
-                "internalType": "uint256",
-                "name": "duraDays",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "feeDays",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "totalManifestations",
-                "type": "uint256"
+                "internalType": "address",
+                "name": "manifestation",
+                "type": "address"
             }
         ],
         "name": "SummonedManifestation",
         "type": "event"
     },
     {
-        "inputs": [],
-        "name": "Factory",
-        "outputs": [
+        "anonymous": false,
+        "inputs": [
             {
-                "internalType": "contract ISoulSwapFactory",
-                "name": "",
+                "indexed": false,
+                "internalType": "address",
+                "name": "msgSender",
                 "type": "address"
             }
         ],
-        "stateMutability": "view",
-        "type": "function"
+        "name": "UpdatedDAO",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "msgSender",
+                "type": "address"
+            }
+        ],
+        "name": "UpdatedSacrifice",
+        "type": "event"
     },
     {
         "inputs": [],
@@ -113,10 +95,10 @@
     },
     {
         "inputs": [],
-        "name": "WNATIVE",
+        "name": "SoulSwapFactory",
         "outputs": [
             {
-                "internalType": "contract IERC20",
+                "internalType": "contract ISoulSwapFactory",
                 "name": "",
                 "type": "address"
             }
@@ -154,22 +136,22 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "_rewardToken",
+                "name": "rewardToken",
                 "type": "address"
             },
             {
                 "internalType": "uint256",
-                "name": "_duraDays",
+                "name": "duraDays",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "_feeDays",
+                "name": "feeDays",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "_dailyReward",
+                "name": "dailyReward",
                 "type": "uint256"
             }
         ],
@@ -179,6 +161,11 @@
                 "internalType": "address",
                 "name": "manifestation",
                 "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
             }
         ],
         "stateMutability": "nonpayable",
@@ -229,8 +216,48 @@
                 "type": "string"
             },
             {
+                "internalType": "string",
+                "name": "logoURI",
+                "type": "string"
+            },
+            {
+                "internalType": "address",
+                "name": "rewardToken",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "depositToken",
+                "type": "address"
+            },
+            {
                 "internalType": "uint256",
                 "name": "rewardPerSecond",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "rewardRemaining",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "startTime",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "endTime",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "dailyReward",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "feeDays",
                 "type": "uint256"
             }
         ],
@@ -245,9 +272,9 @@
                 "type": "address"
             },
             {
-                "internalType": "address",
+                "internalType": "uint256",
                 "name": "",
-                "type": "address"
+                "type": "uint256"
             }
         ],
         "name": "getManifestation",
@@ -263,25 +290,12 @@
     },
     {
         "inputs": [],
-        "name": "getNativeSymbol",
+        "name": "getNativePrice",
         "outputs": [
             {
-                "internalType": "string",
+                "internalType": "int256",
                 "name": "",
-                "type": "string"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "getOracleAddress",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "oracleAddress",
-                "type": "address"
+                "type": "int256"
             }
         ],
         "stateMutability": "view",
@@ -331,13 +345,54 @@
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "getWrappedAddress",
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "getUserInfo",
         "outputs": [
             {
                 "internalType": "address",
-                "name": "_wnativeAddress",
+                "name": "mAddress",
                 "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "rewardDebt",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "withdrawTime",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "depositTime",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "timeDelta",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "deltaDays",
+                "type": "uint256"
             }
         ],
         "stateMutability": "view",
@@ -403,22 +458,15 @@
     },
     {
         "inputs": [],
-        "name": "owner",
+        "name": "oracleDecimals",
         "outputs": [
             {
-                "internalType": "address",
+                "internalType": "uint256",
                 "name": "",
-                "type": "address"
+                "type": "uint256"
             }
         ],
         "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "renounceOwnership",
-        "outputs": [],
-        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -483,20 +531,7 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "newOwner",
-                "type": "address"
-            }
-        ],
-        "name": "transferOwnership",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "_DAOAddress",
+                "name": "_soulDAO",
                 "type": "address"
             }
         ],
@@ -529,6 +564,19 @@
         "name": "updateSacrifice",
         "outputs": [],
         "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "wnativeAddress",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
         "type": "function"
     }
 ]

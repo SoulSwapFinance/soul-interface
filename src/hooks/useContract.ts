@@ -102,7 +102,7 @@ import SOUL_X_SWAP_ABI from 'constants/abis/soulswap/soulxswap.json'
 import SOUL_GUIDE_ABI from 'constants/abis/soul-guide.json' // TODO: update abi
 import SUMMONER_ABI from 'constants/abis/soulswap/soulsummoner.json' // 28 JUL
 import SOUL_MANIFESTER_ABI from 'constants/abis/soulswap/soulmanifester.json' 
-import FARM_MANIFESTER_ABI from 'constants/abis/soulswap/farm-manifester.json'
+import FARM_MANIFESTER_ABI from 'constants/abis/soulswap/manifester.json'
 import MANIFESTATION_ABI from 'constants/abis/soulswap/manifestation.json'
 import LOTTERY_ABI from 'constants/abis/soulswap/lottery.json' // 28 JUL
 import LUXOR_ABI from 'constants/abis/soulswap/luxor.json'
