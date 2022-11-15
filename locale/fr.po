@@ -202,7 +202,7 @@ msgstr ""
 msgid "Borrow assets and leverage up"
 msgstr ""
 
-msgid "Borrow {0}-{1}"
+msgid "Borrow {assetSymbol}-{collateralSymbol}"
 msgstr ""
 
 msgid "Borrowed"
@@ -300,9 +300,6 @@ msgstr ""
 msgid "Collateral"
 msgstr ""
 
-msgid "Collateral Distribution"
-msgstr ""
-
 msgid "Come on Over..."
 msgstr ""
 
@@ -346,9 +343,6 @@ msgid "Connect Wallet"
 msgstr ""
 
 msgid "Connect Wallet ↗"
-msgstr ""
-
-msgid "Connect wallet"
 msgstr ""
 
 msgid "Considerations"
@@ -460,9 +454,6 @@ msgid "Enter Amount"
 msgstr ""
 
 msgid "Enter Recipient"
-msgstr ""
-
-msgid "Enter a recipient"
 msgstr ""
 
 msgid "Enter an amount"
@@ -642,6 +633,9 @@ msgstr ""
 msgid "Insufficient liquidity for this trade."
 msgstr ""
 
+msgid "Insufficient {0} Balance"
+msgstr ""
+
 msgid "Insufficient {0} balance"
 msgstr ""
 
@@ -661,9 +655,6 @@ msgid "Invalid amount"
 msgstr ""
 
 msgid "Invalid pair"
-msgstr ""
-
-msgid "Invalid recipient"
 msgstr ""
 
 msgid "Isolated lending markets mitigate your risks as an asset lender. Know exactly what collateral is available to you in the event of counter party insolvency."
@@ -1027,9 +1018,6 @@ msgstr ""
 msgid "SLP"
 msgstr ""
 
-msgid "SOR STABLECOIN"
-msgstr ""
-
 msgid "SOUL"
 msgstr ""
 
@@ -1386,7 +1374,10 @@ msgstr ""
 msgid "Vietnamese"
 msgstr ""
 
-msgid "View Liquidity Positions"
+msgid "View Analytics"
+msgstr ""
+
+msgid "View Positions"
 msgstr ""
 
 msgid "View on Explorer"

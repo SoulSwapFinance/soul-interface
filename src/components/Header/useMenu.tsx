@@ -150,7 +150,7 @@ const useMenu: UseMenu = () => {
     // }
 
 
-    if (featureEnabled(Feature.UNDERWORLD, chainId)) {
+    // if (featureEnabled(Feature.UNDERWORLD, chainId)) {
       //   mainItems.push({
       //     key: 'lending',
       //     title: i18n._(t`Lend`),
@@ -188,8 +188,7 @@ const useMenu: UseMenu = () => {
       //       },
       //     ],
       //   })
-
-    }
+    // }
 
     if (featureEnabled(Feature.ANALYTICS, chainId)) {
       let analyticsMenu: MenuItem = {
@@ -230,6 +229,15 @@ const useMenu: UseMenu = () => {
         title: i18n._(t`Explore`),
         icon: <GlobeIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
         link: `/explorer`,
+      })
+    }
+
+    if (featureEnabled(Feature.AMM, chainId)) {
+      mainItems.push({
+          key: 'lending',
+          title: i18n._(t`Lend`),
+          icon: <SwitchVerticalIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+          link: '/lend'
       })
     }
 
