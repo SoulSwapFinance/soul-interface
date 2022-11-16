@@ -134,6 +134,10 @@ export default function Token() {
   const volumeUSD2d = token1d?.volumeUSD - token2d?.volumeUSD
   const volumeUSD1dChange = (volumeUSD1d / volumeUSD2d) * 100 - 100
 
+  const priceUSD1d = token?.priceUSD - token1d?.priceUSD
+  const priceUSD2d = token1d?.priceUSD - token2d?.priceUSD
+  const priceUSD1dChange = (priceUSD1d / priceUSD2d) * 100 - 100
+
   // The Chart
   const tokenDayData = useTokenDayData({
     chainId,
@@ -152,9 +156,11 @@ export default function Token() {
         .map((day) => ({ x: new Date(day.date * 1000), y: Number(day.volumeUSD) })),
       
       priceChart: tokenDayData
+        /* @ts-ignore TYPE NEEDS FIXING */
         ?.sort((a, b) => a.date - b.date)
-        .map((day) => ({ x: new Date(day.date * 1000), y: Number(day.price) })),
-    }),
+        /* @ts-ignore TYPE NEEDS FIXING */
+        .map((day) => ({ x: new Date(day.date * 1000), y: Number(day.priceUSD) })),
+     }),
     [tokenDayData]
   )
 
@@ -214,26 +220,37 @@ export default function Token() {
         </div>
       </Background>
       <div className="px-4 pt-4 space-y-4 lg:px-14">
-        <div className="text-3xl font-bold text-high-emphesis">Overview</div>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <ChartCard
-            header="Liquidity"
-            subheader={token?.symbol}
-            figure={liquidityUSD}
-            change={liquidityUSDChange}
-            chart={chartData.liquidityChart}
-            defaultTimespan="1W"
-            timespans={chartTimespans}
-          />
-          <ChartCard
-            header="Volume"
-            subheader={token?.symbol}
-            figure={volumeUSD1d}
-            change={volumeUSD1dChange}
-            chart={chartData.volumeChart}
-            defaultTimespan="1W"
-            timespans={chartTimespans}
-          />
+      <div className="text-3xl font-bold text-high-emphesis">Overview</div>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <ChartCard
+          header="Liquidity"
+          subheader={token?.symbol}
+          figure={liquidityUSD}
+          change={liquidityUSDChange}
+          chart={chartData.liquidityChart}
+          defaultTimespan="1W"
+          timespans={chartTimespans}
+        />
+        <ChartCard
+          header="Volume"
+          subheader={token?.symbol}
+          figure={volumeUSD1d}
+          change={volumeUSD1dChange}
+          chart={chartData.volumeChart}
+          defaultTimespan="1W"
+          timespans={chartTimespans}
+        />
+      </div>
+      <div className="grid grid-cols-1 gap-4">
+            <ChartCard
+              header="Price"
+              subheader={token?.symbol}
+              figure={priceUSD1d}
+              change={priceUSD1dChange}
+              chart={chartData.priceChart}
+              defaultTimespan="1W"
+              timespans={chartTimespans}
+            />
         </div>
         <div className="flex flex-row justify-between flex-grow space-x-4 overflow-x-auto">
           <InfoCard text="Liquidity (24H)" number={liquidityUSD} percent={liquidityUSDChange} />

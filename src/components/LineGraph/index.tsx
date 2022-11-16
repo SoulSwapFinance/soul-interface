@@ -2,7 +2,6 @@ import { localPoint } from '@visx/event'
 import { LinearGradient } from '@visx/gradient'
 import { scaleLinear } from '@visx/scale'
 import { Bar, LinePath } from '@visx/shape'
-// @ts-ignore TYPE NEEDS FIXING
 import { bisector } from 'd3-array'
 import { FC, MouseEvent, TouchEvent, useRef } from 'react'
 import { useCallback, useMemo } from 'react'
@@ -62,9 +61,7 @@ const Graph: FC<GraphProps> = ({ data, stroke, strokeWidth, width, height, setSe
     (event: TouchEvent<SVGRectElement> | MouseEvent<SVGRectElement>) => {
       const { x } = localPoint(event) || { x: 0 }
       const x0 = xScale.invert(x)
-      // @ts-ignore TYPE NEEDS FIXING
-      const index = bisector(data, x0, 0)
-      // const index = bisect(data, x0, 0)
+      const index = bisect(data, x0, 0)
       const d = data[index]
 
       // Add check to avoid unnecessary changes and setState to DOM
