@@ -30,12 +30,17 @@ export default function Tokens() {
       <div className="relative h-8">
         <div className="absolute w-full h-full bg-gradient-to-r from-blue to-purple opacity-5" />
         <div className="absolute flex items-center w-full p-2 lg:pl-14">
-          <div className="text-xs font-medium text-secondary">
-            <Link href="/analytics">Analytics</Link>&nbsp;
-            {'>'}&nbsp;
+          <div className="text-xs font-medium text-secondary m-1">
+            <Link href="/analytics">Dashboard</Link>&nbsp;
           </div>
-          <div className={`text-xs font-bold text-high-emphesis text-${getChainColorCode(chainId)}`}>
-            Tokens
+          <div className="text-xs font-medium text-secondary m-1">
+            <Link href="/analytics/coffinbox">CoffinBox</Link>&nbsp;
+          </div>
+          <div className="text-xs font-medium text-secondary m-1">
+            <Link href="/analytics/pairs">Pairs</Link>&nbsp;
+          </div>
+          <div className={`text-xs font-bold text-high-emphesis m-1 text-${getChainColorCode(chainId)}`}>
+            Tokens&nbsp;
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/solid'
-import { t } from '@lingui/macro'
+// import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { LoadingSpinner } from 'components/LoadingSpinner'
+// import { LoadingSpinner } from 'components/LoadingSpinner'
 import {
   TABLE_TABLE_CLASSNAME,
   TABLE_TBODY_TD_CLASSNAME,
@@ -15,7 +15,7 @@ import React, { FC } from 'react'
 // @ts-ignore TYPE NEEDS FIXING
 import { useFlexLayout, usePagination, useSortBy, useTable } from 'react-table'
 
-import Typography from '../../components/Typography'
+// import Typography from '../../components/Typography'
 import { TablePageToggler } from './TablePageToggler'
 import { TransactionFetcherState } from './types'
 import { useTableConfig } from './useTableConfig'
@@ -54,13 +54,13 @@ const _Transactions: FC<TransactionFetcherState> = ({ transactions, error, loadi
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="flex items-center gap-3">
+      {/* <div className="flex items-center gap-3">
         <Typography variant="h3" className="text-high-emphesis" weight={700}>
           {i18n._(t`Transactions`)}
         </Typography>
         <LoadingSpinner active={loading} />
         {error && <span className="-ml-2 text-sm italic text-red">{i18n._(t`⚠️ Loading Error`)}</span>}
-      </div>
+      </div> */}
 
       <div className={TABLE_WRAPPER_DIV_CLASSNAME}>
         <table {...getTableProps()} className={TABLE_TABLE_CLASSNAME}>
@@ -69,10 +69,10 @@ const _Transactions: FC<TransactionFetcherState> = ({ transactions, error, loadi
               <tr {...headerGroup.getHeaderGroupProps()} key={i}>
                 {headerGroup.headers.map((column, i) => (
                   <th
-                    // @ts-ignore TYPE NEEDS FIXING
-                    {...column.getHeaderProps(column.getSortByToggleProps())}
-                    key={i}
-                    className={TABLE_TR_TH_CLASSNAME(i, headerGroup.headers.length)}
+                  // @ts-ignore TYPE NEEDS FIXING
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                  key={i}
+                  className={TABLE_TR_TH_CLASSNAME(i, headerGroup.headers.length)}
                   >
                     {column.render('Header')}
                     <span className="inline-block ml-1 align-middle">
@@ -81,12 +81,12 @@ const _Transactions: FC<TransactionFetcherState> = ({ transactions, error, loadi
                         // @ts-ignore TYPE NEEDS FIXING
                         column.isSortedDesc ? (
                           <ArrowDownIcon width={12} />
-                        ) : (
-                          <ArrowUpIcon width={12} />
-                        )
-                      ) : (
-                        ''
-                      )}
+                          ) : (
+                            <ArrowUpIcon width={12} />
+                            )
+                            ) : (
+                              ''
+                              )}
                     </span>
                   </th>
                 ))}

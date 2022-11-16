@@ -285,6 +285,9 @@ msgid ""
 "migrate"
 msgstr ""
 
+msgid "Click on the column name to sort CoffinBox tokens by price, liquidity, volume, APY etc..."
+msgstr ""
+
 msgid "Close"
 msgstr ""
 
@@ -292,6 +295,9 @@ msgid "Coffin"
 msgstr ""
 
 msgid "CoffinBox"
+msgstr ""
+
+msgid "CoffinBox Analytics."
 msgstr ""
 
 msgid "CoffinBox Balances"
@@ -705,9 +711,6 @@ msgstr ""
 msgid "Liquidity Provider Fee"
 msgstr ""
 
-msgid "Liquidity provider fee"
-msgstr ""
-
 msgid "Lists"
 msgstr ""
 
@@ -774,10 +777,13 @@ msgstr ""
 msgid "Migration is done in one-click using your signature (permit)"
 msgstr ""
 
-msgid "Minimum Received"
+msgid "Min. Received (after slippage)"
 msgstr ""
 
-msgid "Minimum received after slippage"
+msgid "Min. Recieved (after slippage)"
+msgstr ""
+
+msgid "Minimum Received"
 msgstr ""
 
 msgid "Mint SOUL with Liquidity"
@@ -1051,6 +1057,9 @@ msgstr ""
 msgid "Search name or paste address"
 msgstr ""
 
+msgid "Search results for"
+msgstr ""
+
 msgid "Select Asset"
 msgstr ""
 
@@ -1192,7 +1201,7 @@ msgstr ""
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr ""
 
-msgid "The difference between market price and estimated price due to the proportional makeup of the assets deposited."
+msgid "The difference between market and estimate due to the proportional makeup of the assets deposited."
 msgstr ""
 
 msgid "The difference between the market price and estimated price due to trade size."
@@ -1251,6 +1260,9 @@ msgstr ""
 msgid "Tools"
 msgstr ""
 
+msgid "Top Tokens"
+msgstr ""
+
 msgid "Total"
 msgstr ""
 
@@ -1282,9 +1294,6 @@ msgid "Transaction Submitted"
 msgstr ""
 
 msgid "Transaction reverts if pending past deadline."
-msgstr ""
-
-msgid "Transactions"
 msgstr ""
 
 msgid "Transactions revert if price changes unfavorably by more than this percentage."
@@ -1555,7 +1564,4 @@ msgid "• 10% in Seance"
 msgstr ""
 
 msgid "• Soul is unlockable before the unlock time."
-msgstr ""
-
-msgid "⚠️ Loading Error"
 msgstr ""
