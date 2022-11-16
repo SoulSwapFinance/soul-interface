@@ -6,7 +6,9 @@ import PairTabs from 'features/analytics/Pairs/PairTabs'
 import useFuse from 'hooks/useFuse'
 import { useOneDayBlock, useOneWeekBlock, useSoulPairs, useTwoDayBlock, useTwoWeekBlock } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
-import { useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
+import Link from 'next/link'
+import { getChainColorCode } from 'constants/chains'
 
 export default function Pairs() {
   const [type, setType] = useState<'all' | 'gainers' | 'losers'>('all')
@@ -27,8 +29,26 @@ export default function Pairs() {
   const pairsFormatted = useMemo(() => {
     return type === 'all'
       ? pairs?.map((pair) => {
+        const pair1d = pairs1d?.find((p) => pair.id === p.id) ?? pair
+        const pair1w = pairs1w?.find((p) => pair.id === p.id) ?? pair1d
+
+        return {
+          pair: {
+            token0: pair.token0,
+            token1: pair.token1,
+            id: pair.id,
+          },
+          liquidity: pair.reserveUSD,
+          volume1d: pair.volumeUSD - pair1d.volumeUSD,
+          volume1w: pair.volumeUSD - pair1w.volumeUSD,
+        }
+      })
+      : pairs
+        ?.map((pair) => {
           const pair1d = pairs1d?.find((p) => pair.id === p.id) ?? pair
-          const pair1w = pairs1w?.find((p) => pair.id === p.id) ?? pair1d
+          const pair2d = pairs2d?.find((p) => pair.id === p.id) ?? pair1d
+          const pair1w = pairs1w?.find((p) => pair.id === p.id) ?? pair2d
+          const pair2w = pairs2w?.find((p) => pair.id === p.id) ?? pair1w
 
           return {
             pair: {
@@ -36,38 +56,20 @@ export default function Pairs() {
               token1: pair.token1,
               id: pair.id,
             },
-            liquidity: pair.reserveUSD,
-            volume1d: pair.volumeUSD - pair1d.volumeUSD,
-            volume1w: pair.volumeUSD - pair1w.volumeUSD,
+            liquidityChangeNumber1d: pair.reserveUSD - pair1d.reserveUSD,
+            liquidityChangePercent1d: (pair.reserveUSD / pair1d.reserveUSD) * 100 - 100,
+            liquidityChangeNumber1w: pair.reserveUSD - pair1w.reserveUSD,
+            liquidityChangePercent1w: (pair.reserveUSD / pair1w.reserveUSD) * 100 - 100,
+
+            volumeChangeNumber1d: pair.volumeUSD - pair1d.volumeUSD - (pair1d.volumeUSD - pair2d.volumeUSD),
+            volumeChangePercent1d:
+              ((pair.volumeUSD - pair1d.volumeUSD) / (pair1d.volumeUSD - pair2d.volumeUSD)) * 100 - 100,
+            volumeChangeNumber1w: pair.volumeUSD - pair1w.volumeUSD - (pair1w.volumeUSD - pair2w.volumeUSD),
+            volumeChangePercent1w:
+              ((pair.volumeUSD - pair1w.volumeUSD) / (pair1w.volumeUSD - pair2w.volumeUSD)) * 100 - 100,
           }
         })
-      : pairs
-          ?.map((pair) => {
-            const pair1d = pairs1d?.find((p) => pair.id === p.id) ?? pair
-            const pair2d = pairs2d?.find((p) => pair.id === p.id) ?? pair1d
-            const pair1w = pairs1w?.find((p) => pair.id === p.id) ?? pair2d
-            const pair2w = pairs2w?.find((p) => pair.id === p.id) ?? pair1w
-
-            return {
-              pair: {
-                token0: pair.token0,
-                token1: pair.token1,
-                id: pair.id,
-              },
-              liquidityChangeNumber1d: pair.reserveUSD - pair1d.reserveUSD,
-              liquidityChangePercent1d: (pair.reserveUSD / pair1d.reserveUSD) * 100 - 100,
-              liquidityChangeNumber1w: pair.reserveUSD - pair1w.reserveUSD,
-              liquidityChangePercent1w: (pair.reserveUSD / pair1w.reserveUSD) * 100 - 100,
-
-              volumeChangeNumber1d: pair.volumeUSD - pair1d.volumeUSD - (pair1d.volumeUSD - pair2d.volumeUSD),
-              volumeChangePercent1d:
-                ((pair.volumeUSD - pair1d.volumeUSD) / (pair1d.volumeUSD - pair2d.volumeUSD)) * 100 - 100,
-              volumeChangeNumber1w: pair.volumeUSD - pair1w.volumeUSD - (pair1w.volumeUSD - pair2w.volumeUSD),
-              volumeChangePercent1w:
-                ((pair.volumeUSD - pair1w.volumeUSD) / (pair1w.volumeUSD - pair2w.volumeUSD)) * 100 - 100,
-            }
-          })
-          .sort((a, b) => b.liquidityChangeNumber1d - a.liquidityChangeNumber1d)
+        .sort((a, b) => b.liquidityChangeNumber1d - a.liquidityChangeNumber1d)
   }, [type, pairs, pairs1d, pairs2d, pairs1w, pairs2w])
 
   const options = useMemo(
@@ -89,6 +91,18 @@ export default function Pairs() {
 
   return (
     <AnalyticsContainer>
+      <div className="relative h-8">
+        <div className="absolute w-full h-full bg-gradient-to-r from-blue to-purple opacity-5" />
+        <div className="absolute flex items-center w-full p-2 lg:pl-14">
+          <div className="text-xs font-medium text-secondary">
+            <Link href="/analytics">Dashboard</Link>&nbsp;
+            {'>'}&nbsp;
+          </div>
+          <div className={`text-xs font-bold text-high-emphesis text-${getChainColorCode(chainId)}`}>
+            Pairs
+          </div>
+        </div>
+      </div>
       <Background background="pools">
         <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-2">
           <div>

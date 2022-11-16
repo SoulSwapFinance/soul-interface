@@ -7,7 +7,7 @@ import React from 'react'
 
 import ColoredNumber from '../ColoredNumber'
 
-type TokenListColumnType = 'name' | 'price' | 'liquidity' | 'priceChange' | 'volumeChange' | 'lastWeekGraph'
+type TokenListColumnType = 'name' | 'price' | 'liquidity' | 'priceChange' | 'volumeChange' // | 'lastWeekGraph'
 
 interface Token {
   token: {
@@ -111,20 +111,20 @@ const TokenListColumns: Record<TokenListColumnType, Column> = {
     ),
     align: 'right',
   },
-  lastWeekGraph: {
-    Header: 'Last Week',
-    accessor: 'graph',
-    Cell: (props) => (
-      <div className="flex justify-end w-full h-full py-2 pr-2">
-        { props.row.original.volume1d >= 0.25 ?
-        <div className="w-32 h-10">
-          <LineGraph data={props.value} stroke={{ solid: props.row.original.change1w >= 0 ? '#00ff4f' : '#ff3838' }} />
-        </div>
-          : undefined
-        }
-      </div>
-    ),
-    disableSortBy: true,
-    align: 'right',
-  },
+  // lastWeekGraph: {
+  //   Header: 'Last Week',
+  //   accessor: 'graph',
+  //   Cell: (props) => (
+  //     <div className="flex justify-end w-full h-full py-2 pr-2">
+  //       { props.row.original.volume1d >= 0.25 ?
+  //       <div className="w-32 h-10">
+  //         <LineGraph data={props.value} stroke={{ solid: props.row.original.change1w >= 0 ? '#00ff4f' : '#ff3838' }} />
+  //       </div>
+  //         : undefined
+  //       }
+  //     </div>
+  //   ),
+  //   disableSortBy: true,
+  //   align: 'right',
+  // },
 }

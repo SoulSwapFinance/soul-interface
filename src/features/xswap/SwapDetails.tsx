@@ -115,7 +115,7 @@ const SwapDetailsContent: FC<SwapDetails> = ({ trade, recipient }) => {
       <div className="flex flex-col gap-1 pt-2">
         <div className="flex justify-between gap-4">
           <Typography variant="xs" className="text-secondary">
-            {i18n._(t`Minimum received after slippage`)} ({allowedSlippage.toFixed(2)}%)
+            {i18n._(t`Min. Received (after slippage)`)} ({allowedSlippage.toFixed(2)}%)
           </Typography>
           <Typography variant="xs" className="text-right text-secondary">
             {minReceived?.toSignificant(6)} {minReceived?.currency.symbol}
@@ -124,7 +124,7 @@ const SwapDetailsContent: FC<SwapDetails> = ({ trade, recipient }) => {
         {realizedLpFeePercent && (
           <div className="flex justify-between gap-4">
             <Typography variant="xs" className="text-secondary">
-              {i18n._(t`Liquidity provider fee`)}
+              {i18n._(t`Liquidity Provider Fee`)}
             </Typography>
             <Typography variant="xs" className="text-right text-secondary">
               {realizedLpFeePercent.toFixed(2)}%

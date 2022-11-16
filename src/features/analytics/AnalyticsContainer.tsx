@@ -10,9 +10,9 @@ export default function AnalyticsContainer({ children }): JSX.Element {
     <>
       <Head>
         <title>Soul Analytics | Soul</title>
-        <meta name="description" content="SoulSwap Liquidity Pair (SLP) Analytics by Soul" />
+        <meta name="description" content="SoulSwap Liquidity Analytics" />
       </Head>
-      <AnalyticsHeaderNew />
+      {/* <AnalyticsHeaderNew /> */}
       <Container
         id="analytics"
         maxWidth="full"
