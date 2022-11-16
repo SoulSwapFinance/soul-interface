@@ -1,10 +1,6 @@
 import Tabs from './../Tabs'
 
 const tabs = [
-  // {
-  //   name: 'Top Farms',
-  //   type: 'pools',
-  // },
   {
     name: 'Top Pairs',
     type: 'pairs',
@@ -12,6 +8,10 @@ const tabs = [
   {
     name: 'Top Tokens',
     type: 'tokens',
+  },
+  {
+    name: 'Top Markets',
+    type: 'coffin',
   },
 ]
 

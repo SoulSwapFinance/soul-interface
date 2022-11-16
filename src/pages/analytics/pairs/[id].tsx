@@ -18,6 +18,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useMemo } from 'react'
 import { ExternalLink as LinkIcon } from 'react-feather'
+import NavLink from 'components/NavLink'
+import { Button } from 'components/Button'
+import { getChainColorCode } from 'constants/chains'
 
 const chartTimespans = [
   {
@@ -91,11 +94,15 @@ export default function Pair() {
     [pair, pair1d, pair2d, pairDayData]
   )
 
-  // For the logos
+  // for logos
   const currency0 = useCurrency(pair?.token0?.id)
   const currency1 = useCurrency(pair?.token1?.id)
 
-  // For the Info Cards
+  // for links
+  const token0Address = currency0?.isToken ? currency0.address : currency0?.wrapped.address
+  const token1Address = currency1?.isToken ? currency1.address : currency1?.wrapped.address
+
+  // for info cards
   const liquidityUSDChange = pair?.reserveUSD / pair1d?.reserveUSD
 
   const volumeUSD1d = pair?.volumeUSD - pair1d?.volumeUSD
@@ -125,7 +132,7 @@ export default function Pair() {
             <Link href="/analytics/pairs">Pairs</Link>&nbsp;
             {'> '}&nbsp;
           </div>
-          <div className="text-xs font-bold text-high-emphesis">
+          <div className={`text-xs font-bold text-high-emphesis text-${getChainColorCode(chainId)}`}>
             {pair?.token0?.symbol}-{pair?.token1?.symbol}
           </div>
         </div>
@@ -190,13 +197,20 @@ export default function Pair() {
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {times(2).map((i) => (
-            <div key={i} className="w-full p-6 space-y-2 border rounded bg-dark-900 border-dark-700">
+            <div key={i} className="w-full p-6 space-y-2 border rounded bg-dark-1000 border-dark-700">
+                <NavLink href={`/analytics/tokens/${[token0Address, token1Address][i]}`}>
+              <Button
+                className={`w-full hover:border hover:border-purple`}
+                // variant="filled"
+                // color={getChainColorCode(chainId)}
+              >
               <div className="flex flex-row items-center space-x-2">
-                {/*@ts-ignore TYPE NEEDS FIXING*/}
-                <CurrencyLogo size={32} currency={[currency0, currency1][i]} />
-                <div className="text-2xl font-bold">{formatNumber([pair?.reserve0, pair?.reserve1][i])}</div>
-                <div className="text-lg text-secondary">{[pair?.token0, pair?.token1][i]?.symbol}</div>
+                  <CurrencyLogo size={32} currency={[currency0, currency1][i]} />
+                <div className="text-2xl text-center font-bold">{formatNumber([pair?.reserve0, pair?.reserve1][i])}</div>
+                <div className="text-xl m-1 text-white font-bold">{[pair?.token0, pair?.token1][i]?.symbol}</div>
               </div>
+              </Button>
+                </NavLink>
               <div className="font-bold">
                 1 {[pair?.token0, pair?.token1][i]?.symbol} = {formatNumber([pair?.token1Price, pair?.token0Price][i])}{' '}
                 {[pair?.token1, pair?.token0][i]?.symbol} (

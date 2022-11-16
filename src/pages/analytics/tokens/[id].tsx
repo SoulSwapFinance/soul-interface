@@ -27,6 +27,7 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
 import { ExternalLink as LinkIcon } from 'react-feather'
 import { getChainColorCode } from 'constants/chains'
+import { NextSeo } from 'next-seo'
 
 const chartTimespans = [
   {
@@ -165,7 +166,9 @@ export default function Token() {
   )
 
   return (
+    
     <AnalyticsContainer>
+      <NextSeo title={`${token?.name} Analytics`} />
       <div className="relative h-8">
         <div className="absolute w-full h-full bg-gradient-to-r from-blue to-purple opacity-5" />
         <div className="absolute flex items-center w-full p-2 lg:pl-14">
@@ -175,7 +178,9 @@ export default function Token() {
             <Link href="/analytics/tokens">Tokens</Link>&nbsp;
             {'> '}&nbsp;
           </div>
-          <div className="text-xs font-bold text-high-emphesis">{token?.symbol}</div>
+          <div className={`text-xs font-bold text-high-emphesis text-${getChainColorCode(chainId)}`}>
+            {token?.symbol}
+          </div>
         </div>
       </div>
       <Background background="token">

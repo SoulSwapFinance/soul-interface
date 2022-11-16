@@ -52,11 +52,11 @@ export const TablePageToggler: FC<PageTogglerProps> = ({
 
       {/* Mobile */}
       <div className="select-none mb-16 lg:hidden">
-        <div className="rounded-t overflow-hidden border border-dark-700 bg-dark-800 flex justify-between p-3">
+        <div className="rounded-t overflow-hidden border border-dark-700 bg-dark-1000 flex justify-between p-3">
           <span>{i18n._(t`Showing Results`)}</span>
           <span className="text-high-emphesis"> {summaryString}</span>{' '}
         </div>
-        <div className="border-b rounded-b border-l border-r border-dark-700 bg-dark-900 overflow-hidden flex justify-between">
+        <div className="border-b rounded-b border-l border-r border-dark-700 bg-dark-1000 overflow-hidden flex justify-between">
           <div
             onClick={() => gotoPage(pageIndex - 1)}
             className={`flex-grow border-r p-3 border-dark-700 ${

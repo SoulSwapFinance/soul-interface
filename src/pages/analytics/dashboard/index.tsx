@@ -8,6 +8,7 @@ import PairList from 'features/analytics/Pairs/PairList'
 import TokenList from 'features/analytics/Tokens/TokenList'
 import useFuse from 'hooks/useFuse'
 import {
+  useCoffinBox,
   useDayData,
   useFactory,
   useNativePrice,
@@ -18,7 +19,12 @@ import {
   useTwoDayBlock,
 } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
-import { useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
+import Link from 'next/link'
+import CoffinBox from '../coffinbox'
+import { featureEnabled } from 'functions/feature'
+import { Feature } from 'enums/Feature'
+import { getChainColorCode } from 'constants/chains'
 
 const chartTimespans = [
   {
@@ -41,8 +47,8 @@ const chartTimespans = [
 
 export default function Dashboard(): JSX.Element {
   const [type, setType]
-    = useState<'pairs' | 'tokens'>('pairs')
-    // = useState<'pools' | 'pairs' | 'tokens'>('pools')
+    = useState<'coffin' | 'pairs' | 'tokens'>('pairs')
+  // = useState<'pools' | 'pairs' | 'tokens'>('pools')
 
   const { chainId } = useActiveWeb3React()
 
@@ -108,30 +114,30 @@ export default function Dashboard(): JSX.Element {
   )
 
   // For Top Farms
-//   const farms = useFarmRewards()
-//   const nativePrice = useNativePrice({ chainId })
-//   const farmsFormatted = useMemo(
-//     () =>
-//       farms
-//         ?.map((farm) => ({
-//           pair: {
-//             token0: farm.pair.token0,
-//             token1: farm.pair.token1,
-//             id: farm.pair.id,
-//             name: farm.pair.symbol ?? `${farm.pair.token0.symbol}-${farm.pair.token1.symbol}`,
-//             type: farm.pair.symbol ? 'Underworld Farm' : 'Soul Farm',
-//           },
-//           rewards: farm.rewards,
-//           liquidity: farm.tvl,
-//           apr: {
-//             daily: (farm.roiPerYear / 365) * 100,
-//             monthly: (farm.roiPerYear / 12) * 100,
-//             annual: farm.roiPerYear * 100,
-//           },
-//         }))
-//         .filter((farm) => (farm ? true : false)),
-//     [farms]
-//   )
+  //   const farms = useFarmRewards()
+  //   const nativePrice = useNativePrice({ chainId })
+  //   const farmsFormatted = useMemo(
+  //     () =>
+  //       farms
+  //         ?.map((farm) => ({
+  //           pair: {
+  //             token0: farm.pair.token0,
+  //             token1: farm.pair.token1,
+  //             id: farm.pair.id,
+  //             name: farm.pair.symbol ?? `${farm.pair.token0.symbol}-${farm.pair.token1.symbol}`,
+  //             type: farm.pair.symbol ? 'Underworld Farm' : 'Soul Farm',
+  //           },
+  //           rewards: farm.rewards,
+  //           liquidity: farm.tvl,
+  //           apr: {
+  //             daily: (farm.roiPerYear / 365) * 100,
+  //             monthly: (farm.roiPerYear / 12) * 100,
+  //             annual: farm.roiPerYear * 100,
+  //           },
+  //         }))
+  //         .filter((farm) => (farm ? true : false)),
+  //     [farms]
+  //   )
 
   // For Top Tokens
   const nativePrice1d = useNativePrice({ chainId, variables: { block: block1d } })
@@ -145,52 +151,108 @@ export default function Dashboard(): JSX.Element {
     () =>
       tokens && tokens1d && tokens1w && nativePrice1d && nativePrice1d && nativePrice1w
         ? // @ts-ignore TYPE NEEDS FIXING
-          tokens.map((token) => {
-            // @ts-ignore TYPE NEEDS FIXING
-            const token1d = tokens1d.find((p) => token.id === p.id) ?? token
-            // @ts-ignore TYPE NEEDS FIXING
-            const token1w = tokens1w.find((p) => token.id === p.id) ?? token
+        tokens.map((token) => {
+          // @ts-ignore TYPE NEEDS FIXING
+          const token1d = tokens1d.find((p) => token.id === p.id) ?? token
+          // @ts-ignore TYPE NEEDS FIXING
+          const token1w = tokens1w.find((p) => token.id === p.id) ?? token
 
-            return {
-              token: {
-                id: token.id,
-                symbol: token.symbol,
-                name: token.name,
-              },
-              liquidity: token.liquidity * token.derivedETH * nativePrice1d,
-              volume1d: token.volumeUSD - token1d.volumeUSD,
-              volume1w: token.volumeUSD - token1w.volumeUSD,
-              price: token.derivedETH * nativePrice1d,
-              change1d: ((token.derivedETH * nativePrice1d) / (token1d.derivedETH * nativePrice1d)) * 100 - 100,
-              change1w: ((token.derivedETH * nativePrice1d) / (token1w.derivedETH * nativePrice1w)) * 100 - 100,
-              graph: token.dayData
-                .slice(0)
-                .reverse()
-                // @ts-ignore TYPE NEEDS FIXING
-                .map((day, i) => ({ x: i, y: Number(day.priceUSD) })),
-            }
-          })
+          return {
+            token: {
+              id: token.id,
+              symbol: token.symbol,
+              name: token.name,
+            },
+            liquidity: token.liquidity * token.derivedETH * nativePrice1d,
+            volume1d: token.volumeUSD - token1d.volumeUSD,
+            volume1w: token.volumeUSD - token1w.volumeUSD,
+            price: token.derivedETH * nativePrice1d,
+            change1d: ((token.derivedETH * nativePrice1d) / (token1d.derivedETH * nativePrice1d)) * 100 - 100,
+            change1w: ((token.derivedETH * nativePrice1d) / (token1w.derivedETH * nativePrice1w)) * 100 - 100,
+            graph: token.dayData
+              .slice(0)
+              .reverse()
+              // @ts-ignore TYPE NEEDS FIXING
+              .map((day, i) => ({ x: i, y: Number(day.priceUSD) })),
+          }
+        })
         : [],
     [nativePrice1d, nativePrice1d, nativePrice1w, tokens, tokens1d, tokens1w]
+  )
+
+  // For Top Markets
+  const nativePrice = useNativePrice({ chainId })
+
+  const tokenIdToPrice = useMemo<
+    Map<string, { derivedETH: number; volumeUSD: number; dayData: Array<{ priceUSD: number }> }>
+  >(() => {
+    return new Map(tokens?.map((token) => [token.id, token]))
+  }, [tokens])
+
+  const token1dIdToPrice = useMemo<Map<string, { derivedETH: number; volumeUSD: number }>>(() => {
+    return new Map(tokens1d?.map((token) => [token.id, token]))
+  }, [tokens1d])
+
+  const token1wIdToPrice = useMemo<Map<string, { derivedETH: number; volumeUSD: number }>>(() => {
+    return new Map(tokens1w?.map((token) => [token.id, token]))
+  }, [tokens1w])
+
+  const coffinBox = useCoffinBox({ chainId, shouldFetch: featureEnabled(Feature.COFFINBOX, chainId) })
+
+  const coffinBoxTokensFormatted = useMemo<Array<any>>(
+    () =>
+      (coffinBox?.tokens || [])
+
+        .map(({ id, totalSupplyElastic, decimals, symbol, name }) => {
+          const token = tokenIdToPrice.get(id)
+          const token1d = token1dIdToPrice.get(id)
+          const token1w = token1wIdToPrice.get(id)
+
+          const supply = totalSupplyElastic / Math.pow(10, decimals)
+          const tokenDerivedETH = token?.derivedETH
+          const price = (tokenDerivedETH ?? 0) * nativePrice
+          const tvl = price * supply
+
+          const token1dPrice = (token1d?.derivedETH ?? 0) * nativePrice1d
+          const token1wPrice = (token1w?.derivedETH ?? 0) * nativePrice1w
+
+          return {
+            token: {
+              id,
+              symbol,
+              name,
+            },
+            price,
+            liquidity: tvl,
+            change1d: (price / token1dPrice) * 100 - 100,
+            change1w: (price / token1wPrice) * 100 - 100,
+            graph: token?.dayData
+              .slice(0)
+              .reverse()
+              .map((day, i) => ({ x: i, y: Number(day.priceUSD) })),
+          }
+        })
+        .filter(Boolean),
+    [coffinBox, tokenIdToPrice, nativePrice, token1dIdToPrice, token1wIdToPrice, nativePrice1d, nativePrice1w]
   )
 
   const { options, data } = useMemo(() => {
     switch (type) {
       // case 'pools':
       //   return {
-    //       options: {
-    //         keys: [
-    //           'pair.token0.id',
-    //           'pair.token0.symbol',
-    //           'pair.token0.name',
-    //           'pair.token1.id',
-    //           'pair.token1.symbol',
-    //           'pair.token1.name',
-    //         ],
-    //         threshold: 0.4,
-    //       },
-    //       data: farmsFormatted,
-        // }
+      //       options: {
+      //         keys: [
+      //           'pair.token0.id',
+      //           'pair.token0.symbol',
+      //           'pair.token0.name',
+      //           'pair.token1.id',
+      //           'pair.token1.symbol',
+      //           'pair.token1.name',
+      //         ],
+      //         threshold: 0.4,
+      //       },
+      //       data: farmsFormatted,
+      // }
 
       case 'pairs':
         return {
@@ -216,6 +278,15 @@ export default function Dashboard(): JSX.Element {
           },
           data: tokensFormatted,
         }
+
+      case 'coffin':
+        return {
+          options: {
+            keys: ['coffin.token.id', 'coffin.token.symbol', 'coffin.token.name'],
+            threshold: 0.4,
+          },
+          data: coffinBoxTokensFormatted,
+        }
     }
   }, [type, pairsFormatted, tokensFormatted])
 
@@ -230,6 +301,23 @@ export default function Dashboard(): JSX.Element {
 
   return (
     <AnalyticsContainer>
+      <div className="relative h-8">
+        <div className="absolute w-full h-full bg-gradient-to-r from-blue to-purple opacity-5" />
+        <div className="absolute flex items-center w-full p-2 lg:pl-14">
+          <div className={`text-xs font-bold text-high-emphesis m-1 text-${getChainColorCode(chainId)}`}>
+            Dashboard&nbsp;
+          </div>
+          <div className="text-xs font-medium text-secondary m-1">
+            <Link href="/analytics/coffinbox">CoffinBox</Link>&nbsp;
+          </div>
+          <div className="text-xs font-medium text-secondary m-1">
+            <Link href="/analytics/pairs">Pairs</Link>&nbsp;
+          </div>
+          <div className="text-xs font-medium text-secondary m-1">
+            <Link href="/analytics/tokens">Tokens</Link>&nbsp;
+          </div>
+        </div>
+      </div>
       {/* <Background background="dashboard">
         <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-2">
           <div>
@@ -267,9 +355,9 @@ export default function Dashboard(): JSX.Element {
       </div>
       <DashboardTabs currentType={type} setType={setType} />
       <div className="px-4 pt-4 lg:px-14">
-        {/* {type === 'pools' && <PoolList pools={searched} />} */}
         {type === 'pairs' && <PairList pairs={searched} type={'all'} />}
         {type === 'tokens' && <TokenList tokens={searched} />}
+        {type === 'coffin' && <TokenList tokens={searched} />}
       </div>
     </AnalyticsContainer>
   )

@@ -9,8 +9,10 @@ import { formatNumber } from 'functions/format'
 import useFuse from 'hooks/useFuse'
 import { useCoffinBox, useNativePrice, useOneDayBlock, useOneWeekBlock, useTokens } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { useUnderworldTokens } from 'features/lending/hooks'
+import { getChainColorCode } from 'constants/chains'
+import Link from 'next/link'
 
 export default function CoffinBox(): JSX.Element {
   const { chainId } = useActiveWeb3React()
@@ -96,6 +98,23 @@ export default function CoffinBox(): JSX.Element {
 
   return (
     <AnalyticsContainer>
+            <div className="relative h-8">
+        <div className="absolute w-full h-full bg-gradient-to-r from-blue to-purple opacity-5" />
+        <div className="absolute flex items-center w-full p-2 lg:pl-14">
+          <div className="text-xs font-medium text-secondary m-1">
+          <Link href="/analytics">Dashboard</Link>&nbsp;
+          </div>
+          <div className={`text-xs font-bold text-high-emphesis m-1 text-${getChainColorCode(chainId)}`}>
+            CoffinBox&nbsp;
+          </div>
+          <div className="text-xs font-medium text-secondary m-1">
+            <Link href="/analytics/pairs">Pairs</Link>&nbsp;
+          </div>
+          <div className="text-xs font-medium text-secondary m-1">
+            <Link href="/analytics/tokens">Tokens</Link>&nbsp;
+          </div>
+        </div>
+      </div>
       <Background background="dashboard">
         <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2">
           <div>
@@ -124,7 +143,7 @@ export default function CoffinBox(): JSX.Element {
       </div>
       <div className="py-6 space-y-4 text-2xl font-bold text-high-emphesis lg:px-14">Tokens</div>
       <div className="pt-4 lg:px-14">
-        <TokenList tokens={searched} enabledColumns={['name', 'liquidity', 'price', 'priceChange', 'lastWeekGraph']} />
+        <TokenList tokens={searched} enabledColumns={['name', 'liquidity', 'price', 'priceChange']} />
       </div>
     </AnalyticsContainer>
   )

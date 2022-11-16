@@ -1,12 +1,17 @@
 import Search from 'components/Search'
+import { getChainColorCode } from 'constants/chains'
 import AnalyticsContainer from 'features/analytics/AnalyticsContainer'
 import Background from 'features/analytics/Background'
 import useTokensAnalytics from 'features/analytics/hooks/useTokensAnalytics'
 import TokenList from 'features/analytics/Tokens/TokenList'
 import useFuse from 'hooks/useFuse'
+import Link from 'next/link'
+import React from 'react'
+import { useActiveWeb3React } from 'services/web3'
 
 export default function Tokens() {
   const tokens = useTokensAnalytics()
+  const { chainId } = useActiveWeb3React()
 
   const {
     result: tokensSearched,
@@ -22,6 +27,18 @@ export default function Tokens() {
 
   return (
     <AnalyticsContainer>
+      <div className="relative h-8">
+        <div className="absolute w-full h-full bg-gradient-to-r from-blue to-purple opacity-5" />
+        <div className="absolute flex items-center w-full p-2 lg:pl-14">
+          <div className="text-xs font-medium text-secondary">
+            <Link href="/analytics">Analytics</Link>&nbsp;
+            {'>'}&nbsp;
+          </div>
+          <div className={`text-xs font-bold text-high-emphesis text-${getChainColorCode(chainId)}`}>
+            Tokens
+          </div>
+        </div>
+      </div>
       <Background background="tokens">
         <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-2">
           <div>

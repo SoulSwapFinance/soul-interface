@@ -30,7 +30,7 @@ const TransactionDetailsExplanationModal: FC = ({ children }) => {
               </Typography>
               <Typography variant="sm">
                 {i18n._(
-                  t`The difference between market price and estimated price due to the proportional makeup of the assets deposited.`
+                  t`The difference between market and estimate due to the proportional makeup of the assets deposited.`
                 )}{' '}
               </Typography>
             </div>
