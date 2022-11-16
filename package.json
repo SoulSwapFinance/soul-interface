@@ -196,6 +196,7 @@
     "cids": "^1.1.7",
     "combinate": "1.1.7",
     "crosschain-react": "^1.0.2",
+    "d3": "^7.6.1",
     "d3-array": "3.0.2",
     "dayjs": "^1.10.7",
     "decimal.js-light": "^2.5.1",
