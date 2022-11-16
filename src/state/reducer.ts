@@ -11,6 +11,7 @@ import tridentAdd from '../features/trident/add/addSlice'
 import tridentSwap from '../features/trident/swap/swapSlice'
 import application from './application/reducer'
 import burn from './burn/reducer'
+import tokens from './tokens/slice'
 import create from './create/reducer'
 import web3Context from './global/web3ContextSlice'
 import limitOrder from './limit-order/reducer'
@@ -46,6 +47,7 @@ const reducer = combineReducers({
   portfolio,
   slippage,
   gtransactions,
+  tokens,
   tridentSwap,
   tridentAdd,
   // tridentRemove,

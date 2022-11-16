@@ -28,7 +28,7 @@ const backgrounds = {
 
 export default function Background({ background, children }: BackgroundProps) {
   return (
-    <div className="h-[200px] md:h-[151px] w-full relative bg-dark-1000">
+    <div className="h-[140px] md:h-[151px] w-full relative bg-dark-1000">
       <div
         className={classNames(
           'absolute w-full h-full',
@@ -39,7 +39,7 @@ export default function Background({ background, children }: BackgroundProps) {
           WebkitMaskImage: `url('${backgrounds[background]}')`,
         }}
       />
-      <div className="absolute w-full px-8 py-8 lg:px-14 z-1">{children}</div>
+      <div className="absolute w-full px-8 py-2 lg:px-14 z-1">{children}</div>
     </div>
   )
 }

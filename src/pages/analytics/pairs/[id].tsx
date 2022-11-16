@@ -21,6 +21,8 @@ import { ExternalLink as LinkIcon } from 'react-feather'
 import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
 import { getChainColorCode } from 'constants/chains'
+import Typography from 'components/Typography'
+import { TridentHeader } from 'layouts/Trident'
 
 const chartTimespans = [
   {
@@ -123,50 +125,42 @@ export default function Pair() {
 
   return (
     <AnalyticsContainer>
-      <div className="relative h-8">
+            <div className="relative h-8">
         <div className="absolute w-full h-full bg-gradient-to-r from-blue to-purple opacity-5" />
         <div className="absolute flex items-center w-full p-2 lg:pl-14">
-          <div className="text-xs font-medium text-secondary">
-            <Link href="/analytics">Analytics</Link>&nbsp;
-            {'>'}&nbsp;
-            <Link href="/analytics/pairs">Pairs</Link>&nbsp;
-            {'> '}&nbsp;
+          <div className="text-xs font-medium text-secondary m-1">
+            <Link href="/analytics">Dashboard</Link>&nbsp;
           </div>
-          <div className={`text-xs font-bold text-high-emphesis text-${getChainColorCode(chainId)}`}>
-            {pair?.token0?.symbol}-{pair?.token1?.symbol}
+          <div className="text-xs font-medium text-secondary m-1">
+            <Link href="/analytics/coffinbox">CoffinBox</Link>&nbsp;
+          </div>
+          <div className={`text-xs font-bold text-high-emphesis m-1 text-${getChainColorCode(chainId)}`}>
+            Pairs&nbsp;
+          </div>
+          <div className="text-xs font-medium text-secondary m-1">
+            <Link href="/analytics/tokens">Tokens</Link>&nbsp;
           </div>
         </div>
       </div>
-      <Background background="pool">
-        <div className="items-center -mt-4 space-y-6">
-          <button onClick={() => router.back()} className="text-sm text-blue">
-            {'<'} Go Back
-          </button>
-          <div className="flex items-center space-x-4">
-            <DoubleCurrencyLogo
-            //   className="-space-x-3"
-            //   logoClassName="rounded-full"
-              /* @ts-ignore TYPE NEEDS FIXING */
-              currency0={currency0}
-              /* @ts-ignore TYPE NEEDS FIXING */
-              currency1={currency1}
-              size={54}
-            />
-            <div>
-              <div className="text-lg font-bold text-high-emphesis">
+      <TridentHeader className="sm:!flex-row justify-between items-center" pattern="bg-bubble">
+        <div className="space-y-4">
+            <div className="flex items-center mt-2 space-x-4">
+              <DoubleCurrencyLogo
+                // className="-space-x-3"
+                // logoClassName="rounded-full"
+                currency0={currency0}
+                currency1={currency1}
+                size={54}
+              />
+              <Typography variant="h2" className="text-high-emphesis" weight={700}>
                 {pair?.token0?.symbol}-{pair?.token1?.symbol}
-              </div>
-              <div className="text-xs text-secondary">Liquidity Pool</div>
+              </Typography>
             </div>
-            {/* <div className="rounded-3xl text-sm bg-[#414a6c] py-px px-2 flex items-center space-x-1">
-                        <div className="overflow-hidden overflow-ellipsis whitespace-nowrap">View Terminal</div>
-                      <a href={`https://geckoterminal.com/ftm/pools/${pair?.id}`} target="_blank" rel="noreferrer">
-                        <LinkIcon size={16} />
-              </a>
-                </div> */}
-                </div>
+            {/* <Typography variant="sm" weight={400}>
+              Dive deeper in the analytics of the {currency0.symbol}-{currency1.symbol} liquidity pool.
+            </Typography> */}
         </div>
-      </Background>
+      </TridentHeader>
       <div className="px-4 pt-4 space-y-4 lg:px-14">
         <div className="relative h-12">
           <div className="absolute w-full h-full">
@@ -178,7 +172,7 @@ export default function Pair() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <ChartCard
             header="Liquidity"
-            subheader={`${pair?.token0?.symbol}-${pair?.token1?.symbol}`}
+            subheader={`${pair?.pair?.token0?.symbol}-${pair?.token1?.symbol}`}
             figure={chartData.liquidity}
             change={chartData.liquidityChange}
             chart={chartData.liquidityChart}

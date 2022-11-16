@@ -13,6 +13,7 @@ import React, { useMemo } from 'react'
 import { useUnderworldTokens } from 'features/lending/hooks'
 import { getChainColorCode } from 'constants/chains'
 import Link from 'next/link'
+import { TridentBody, TridentHeader } from 'layouts/Trident'
 
 export default function CoffinBox(): JSX.Element {
   const { chainId } = useActiveWeb3React()
@@ -50,7 +51,7 @@ export default function CoffinBox(): JSX.Element {
   const coffinBoxTokensFormatted = useMemo<Array<any>>(
     () =>
       (coffinBox?.tokens || [])
-  
+
         .map(({ id, totalSupplyElastic, decimals, symbol, name }) => {
           const token = tokenIdToPrice.get(id)
           const token1d = token1dIdToPrice.get(id)
@@ -98,11 +99,11 @@ export default function CoffinBox(): JSX.Element {
 
   return (
     <AnalyticsContainer>
-            <div className="relative h-8">
+      <div className="relative h-8">
         <div className="absolute w-full h-full bg-gradient-to-r from-blue to-purple opacity-5" />
         <div className="absolute flex items-center w-full p-2 lg:pl-14">
           <div className="text-xs font-medium text-secondary m-1">
-          <Link href="/analytics">Dashboard</Link>&nbsp;
+            <Link href="/analytics">Dashboard</Link>&nbsp;
           </div>
           <div className={`text-xs font-bold text-high-emphesis m-1 text-${getChainColorCode(chainId)}`}>
             CoffinBox&nbsp;
@@ -115,15 +116,15 @@ export default function CoffinBox(): JSX.Element {
           </div>
         </div>
       </div>
-      <Background background="dashboard">
-        <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2">
+      <TridentBody>
+        <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-2">
           <div>
-            <div className="text-3xl font-bold text-high-emphesis">Coffin Box</div>
+            <div className="text-3xl font-bold text-high-emphesis">CoffinBox</div>
             <div className="">Click headers to sort by price or liquidity.</div>
           </div>
           <Search term={term} search={search} />
         </div>
-      </Background>
+      </TridentBody>
       <div className="py-6 space-y-4 lg:px-14">
         {/* <div className="text-2xl font-bold text-high-emphesis">Overview</div> */}
         <div className="flex flex-row space-x-4 overflow-auto">

@@ -94,12 +94,17 @@ export default function Pairs() {
       <div className="relative h-8">
         <div className="absolute w-full h-full bg-gradient-to-r from-blue to-purple opacity-5" />
         <div className="absolute flex items-center w-full p-2 lg:pl-14">
-          <div className="text-xs font-medium text-secondary">
+          <div className="text-xs font-medium text-secondary m-1">
             <Link href="/analytics">Dashboard</Link>&nbsp;
-            {'>'}&nbsp;
           </div>
-          <div className={`text-xs font-bold text-high-emphesis text-${getChainColorCode(chainId)}`}>
-            Pairs
+          <div className="text-xs font-medium text-secondary m-1">
+            <Link href="/analytics/coffinbox">CoffinBox</Link>&nbsp;
+          </div>
+          <div className={`text-xs font-bold text-high-emphesis m-1 text-${getChainColorCode(chainId)}`}>
+            Pairs&nbsp;
+          </div>
+          <div className="text-xs font-medium text-secondary m-1">
+            <Link href="/analytics/tokens">Tokens</Link>&nbsp;
           </div>
         </div>
       </div>

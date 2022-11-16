@@ -28,6 +28,8 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { ExternalLink as LinkIcon } from 'react-feather'
 import { getChainColorCode } from 'constants/chains'
 import { NextSeo } from 'next-seo'
+import { TridentHeader } from 'layouts/Trident'
+import Typography from 'components/Typography'
 
 const chartTimespans = [
   {
@@ -126,6 +128,7 @@ export default function Token() {
   // For the Info Cards
   const price = token?.derivedETH * nativePrice
   const priceChange = ((token?.derivedETH * nativePrice) / (token1d?.derivedETH * nativePrice1d)) * 100 - 100
+  const formattedSupply = totalSupply / 10 ** token?.decimals
 
   const liquidityUSD = token?.liquidity * token?.derivedETH * nativePrice
   const liquidityUSDChange =
@@ -172,58 +175,52 @@ export default function Token() {
       <div className="relative h-8">
         <div className="absolute w-full h-full bg-gradient-to-r from-blue to-purple opacity-5" />
         <div className="absolute flex items-center w-full p-2 lg:pl-14">
-          <div className="text-xs font-medium text-secondary">
-            <Link href="/analytics">Analytics</Link>&nbsp;
-            {'>'}&nbsp;
-            <Link href="/analytics/tokens">Tokens</Link>&nbsp;
-            {'> '}&nbsp;
+          <div className="text-xs font-medium text-secondary m-1">
+            <Link href="/analytics">Dashboard</Link>&nbsp;
           </div>
-          <div className={`text-xs font-bold text-high-emphesis text-${getChainColorCode(chainId)}`}>
-            {token?.symbol}
+          <div className="text-xs font-medium text-secondary m-1">
+            <Link href="/analytics/coffinbox">CoffinBox</Link>&nbsp;
+          </div>
+          <div className="text-xs font-medium text-secondary m-1">
+            <Link href="/analytics/pairs">Pairs</Link>&nbsp;
+          </div>
+          <div className={`text-xs font-bold text-high-emphesis m-1 text-${getChainColorCode(chainId)}`}>
+            Tokens&nbsp;
           </div>
         </div>
       </div>
-      <Background background="token">
-        <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2">
-          <div className="items-center -mt-4 space-y-6">
-            <button onClick={() => router.back()} className="text-sm text-blue">
-              {'<'} Go Back
-            </button>
-            <div className="flex items-center space-x-4">
-              {/*@ts-ignore TYPE NEEDS FIXING*/}
-              <CurrencyLogo className="rounded-full" currency={currency} size={60} />
-              <div>
-                <div className="text-sm font-medium text-secondary">{token?.symbol}</div>
-                <div className="text-lg font-bold text-high-emphesis">{token?.name}</div>
-              </div>
-              <div className="rounded-3xl text-sm bg-[#414a6c] py-px px-2 flex items-center space-x-1">
-                <div>{shortenAddress(id)}</div>
-                <div className="cursor-pointer" onClick={() => setCopied(id)}>
-                  {isCopied ? <CheckIcon height={16} /> : <DuplicateIcon height={16} className="scale-x-[-1]" />}
-                </div>
-              </div>
+      <TridentHeader className="sm:!flex-row justify-between items-center" pattern="bg-bubble">
+        <div className="space-y-4">
+          <div className="flex items-center space-x-4">
+            <CurrencyLogo className="rounded-full" currency={currency} size={60} />
+            <Typography variant="h2" className="text-high-emphesis" weight={700}>
+              {token?.name}
+            </Typography>
+          </div>
+
+          {/* <Typography variant="sm" weight={400}>
+            Analytics for {token?.name}.
+          </Typography> */}
+        </div>
+        <div className="flex flex-row space-x-4">
+          <div className="flex flex-col">
+            <div className="text-secondary">Price</div>
+            <div className="flex items-center space-x-2">
+              <div className="text-xl font-medium text-high-emphesis">{formatNumber(price ?? 0, true)}</div>
+              <ColoredNumber number={priceChange} percent={true} />
             </div>
           </div>
-          <div className="flex space-x-12">
-            <div className="flex flex-col">
-              <div>Price</div>
-              <div className="flex items-center space-x-2">
-                <div className="text-lg font-medium text-high-emphesis">{formatNumber(price ?? 0, true)}</div>
-                <ColoredNumber number={priceChange} percent={true} />
+          <div className="flex flex-col">
+            <div className="text-secondary">Market Cap</div>
+            <div className="flex items-center space-x-2">
+              <div className="text-xl font-medium text-high-emphesis">
+                {formatNumber(price * formattedSupply ?? 0, true, false)}
               </div>
-            </div>
-            <div className="flex flex-col">
-              <div>Market Cap</div>
-              <div className="flex items-center space-x-2">
-                <div className="text-lg font-medium text-high-emphesis">
-                  {formatNumber(price * (totalSupply / 10 ** token?.decimals) ?? 0, true, false)}
-                </div>
-                <ColoredNumber number={priceChange} percent={true} />
-              </div>
+              <ColoredNumber number={priceChange} percent={true} />
             </div>
           </div>
         </div>
-      </Background>
+      </TridentHeader>
       <div className="px-4 pt-4 space-y-4 lg:px-14">
       <div className="text-3xl font-bold text-high-emphesis">Overview</div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -296,10 +293,9 @@ export default function Token() {
           </table>
         </div>
         <div>
-          <div className="text-2xl font-bold text-high-emphesis">Top Pairs</div>
+          {/* <div className="text-2xl font-bold text-high-emphesis">Top Pairs</div> */}
           <PairList pairs={tokenPairsFormatted} type="all" />
         </div>
-        {/*@ts-ignore TYPE NEEDS FIXING*/}
         <LegacyTransactions pairs={tokenPairs ? tokenPairs.map((pair) => pair.id) : []} />
       </div>
     </AnalyticsContainer>

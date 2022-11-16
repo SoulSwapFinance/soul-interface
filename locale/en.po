@@ -290,6 +290,9 @@ msgstr ""
 "Click on a pool below, input the amount you wish to migrate or select max, and click\n"
 "migrate"
 
+msgid "Click on the column name to sort CoffinBox tokens by price, liquidity, volume, APY etc..."
+msgstr "Click on the column name to sort CoffinBox tokens by price, liquidity, volume, APY etc..."
+
 msgid "Close"
 msgstr "Close"
 
@@ -298,6 +301,9 @@ msgstr "Coffin"
 
 msgid "CoffinBox"
 msgstr "CoffinBox"
+
+msgid "CoffinBox Analytics."
+msgstr "CoffinBox Analytics."
 
 msgid "CoffinBox Balances"
 msgstr "CoffinBox Balances"
@@ -710,9 +716,6 @@ msgstr "Liquidity Positions"
 msgid "Liquidity Provider Fee"
 msgstr "Liquidity Provider Fee"
 
-msgid "Liquidity provider fee"
-msgstr "Liquidity provider fee"
-
 msgid "Lists"
 msgstr "Lists"
 
@@ -779,11 +782,14 @@ msgstr "Migrate {exchange} Liquidity"
 msgid "Migration is done in one-click using your signature (permit)"
 msgstr "Migration is done in one-click using your signature (permit)"
 
+msgid "Min. Received (after slippage)"
+msgstr "Min. Received (after slippage)"
+
+msgid "Min. Recieved (after slippage)"
+msgstr "Min. Recieved (after slippage)"
+
 msgid "Minimum Received"
 msgstr "Minimum Received"
-
-msgid "Minimum received after slippage"
-msgstr "Minimum received after slippage"
 
 msgid "Mint SOUL with Liquidity"
 msgstr "Mint SOUL with Liquidity"
@@ -1060,6 +1066,9 @@ msgstr "Search lockers"
 msgid "Search name or paste address"
 msgstr "Search name or paste address"
 
+msgid "Search results for"
+msgstr "Search results for"
+
 msgid "Select Asset"
 msgstr "Select Asset"
 
@@ -1201,8 +1210,8 @@ msgstr "Target Percentage"
 msgid "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 msgstr "The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer."
 
-msgid "The difference between market price and estimated price due to the proportional makeup of the assets deposited."
-msgstr "The difference between market price and estimated price due to the proportional makeup of the assets deposited."
+msgid "The difference between market and estimate due to the proportional makeup of the assets deposited."
+msgstr "The difference between market and estimate due to the proportional makeup of the assets deposited."
 
 msgid "The difference between the market price and estimated price due to trade size."
 msgstr "The difference between the market price and estimated price due to trade size."
@@ -1262,6 +1271,9 @@ msgstr ""
 msgid "Tools"
 msgstr "Tools"
 
+msgid "Top Tokens"
+msgstr "Top Tokens"
+
 msgid "Total"
 msgstr "Total"
 
@@ -1294,9 +1306,6 @@ msgstr "Transaction Submitted"
 
 msgid "Transaction reverts if pending past deadline."
 msgstr "Transaction reverts if pending past deadline."
-
-msgid "Transactions"
-msgstr "Transactions"
 
 msgid "Transactions revert if price changes unfavorably by more than this percentage."
 msgstr "Transactions revert if price changes unfavorably by more than this percentage."
@@ -1567,6 +1576,3 @@ msgstr "• 10% in Seance"
 
 msgid "• Soul is unlockable before the unlock time."
 msgstr "• Soul is unlockable before the unlock time."
-
-msgid "⚠️ Loading Error"
-msgstr "⚠️ Loading Error"
