@@ -85,29 +85,29 @@ import { useRouter } from "next/router"
 import { useCurrency } from "hooks/Tokens"
 import SocialWidget from "components/Social"
 
-const BodyWrapper = styled.div<{ margin?: string }>`
-position: relative;
-margin-top: ${({ margin }) => margin ?? "0px"};
-max-width: 1080px;
-  width: 100%;
-  background: ${({ theme }) => theme.bg7};
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04),
-    0px 16px 24px rgba(0, 0, 0, 0.04), 0px 24px 32px rgba(0, 0, 0, 0.01);
-  border-radius: 24px;
-  margin-top: 1rem;
-`;
+// const BodyWrapper = styled.div<{ margin?: string }>`
+// position: relative;
+// margin-top: ${({ margin }) => margin ?? "0px"};
+// max-width: 1080px;
+//   width: 100%;
+//   background: ${({ theme }) => theme.bg7};
+//   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04),
+//     0px 16px 24px rgba(0, 0, 0, 0.04), 0px 24px 32px rgba(0, 0, 0, 0.01);
+//   border-radius: 24px;
+//   margin-top: 1rem;
+// `;
 
 /**
  * The styled container element that wraps the content of most pages and the tabs.
  */
-function AppBody({
-  children,
-  ...rest
-}: {
-  children: React.ReactNode;
-}) {
-  return <BodyWrapper {...rest}>{children}</BodyWrapper>;
-}
+// function AppBody({
+//   children,
+//   ...rest
+// }: {
+//   children: React.ReactNode;
+// }) {
+//   return <BodyWrapper {...rest}>{children}</BodyWrapper>;
+// }
 
 
 // const StyledInfo = styled(Info)`
@@ -120,28 +120,29 @@ function AppBody({
 //   }
 // `;
 
-enum Rate {
-  DIV = "DIV",
-  MUL = "MUL",
-}
 
 // interface GelatoLimitOrderProps {
-//   showCommonBases?: boolean;
-// }
-
-const Limit = () => {
-
-  const { account, chainId } = useActiveWeb3React();
-  // const [inputCurrency, setInputCurrency] = useState(NATIVE[chainId])
-  // const [ouputCurrency, setOutputCurrency] = useState(SOUL[chainId])
-  const theme = useTheme();
-  const [showOrders, setShowOrders] = useState(false)
-  const router = useRouter()
-  const tokens = router.query.tokens
-  const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
-
-  // const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
-  const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
+  //   showCommonBases?: boolean;
+  // }
+  
+  const Limit = () => {
+    
+    const { account, chainId } = useActiveWeb3React();
+    // const [inputCurrency, setInputCurrency] = useState(NATIVE[chainId])
+    // const [ouputCurrency, setOutputCurrency] = useState(SOUL[chainId])
+    const theme = useTheme();
+    const [showOrders, setShowOrders] = useState(false)
+    const router = useRouter()
+    const tokens = router.query.tokens
+    const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
+    
+    // const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
+    const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
+    
+    enum Rate {
+      DIV = "DIV",
+      MUL = "MUL",
+    }
 
   const handleCurrencyASelect = useCallback(
     (currencyA: Currency) => {
@@ -459,9 +460,9 @@ const Limit = () => {
   return (
     <Container id="cross-page" maxWidth="2xl" className="space-y-4">
       <DoubleGlowShadowV2>
-      <SwapLayoutCard>
+      {/* <SwapLayoutCard> */}
 
-        <div className="p-4 px-2 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+        <div className="p-4 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
         <SwapHeader
             inputCurrency={currencyA}
             outputCurrency={currencyB}
@@ -795,11 +796,9 @@ const Limit = () => {
           }
           />
       </div>
-    </div>
-  {(!showOrders) &&
+  {/* {(!showOrders) &&
        <SocialWidget />
-    }
-  </SwapLayoutCard>
+      } */}
       {!showOrders &&
         <div className="grid grid-cols-1">
           <Image src='https://app.soulswap.finance/title-soul-halfs.png' height="400px" width="600px" alt="logo" />
@@ -810,6 +809,8 @@ const Limit = () => {
           <GelatoLimitOrdersHistoryPanel />
         </div>
       }
+    </div>
+  {/* </SwapLayoutCard> */}
       </DoubleGlowShadowV2>
     </Container>
 

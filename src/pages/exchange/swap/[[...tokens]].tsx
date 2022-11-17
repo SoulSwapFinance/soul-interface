@@ -1,7 +1,7 @@
 import { ArrowDownIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, Currency, JSBI, Token, Trade as V2Trade, TradeType } from 'sdk'
+import { ChainId, Currency, JSBI, NATIVE, Token, Trade as V2Trade, TradeType } from 'sdk'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
 import Web3Connect from 'components/Web3Connect'
@@ -54,6 +54,8 @@ import { getLastExchange } from 'utils/rubic/hooks'
 import Analytics from 'components/Analytics'
 import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
+import { currencyId } from 'functions/currency'
+import { useRouter } from 'next/router'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -66,6 +68,40 @@ const Swap = () => {
     useCurrency(loadedUrlParams?.inputCurrencyId),
     useCurrency(loadedUrlParams?.outputCurrencyId),
   ]
+
+  const router = useRouter()
+  const tokens = router.query.tokens
+  const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
+
+  // const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
+  const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
+
+  const handleCurrencyASelect = useCallback(
+    (currencyA: Currency) => {
+      const newCurrencyIdA = currencyId(currencyA)
+      if (newCurrencyIdA === currencyIdB) {
+        router.push(`/exchange/limit/${currencyIdB}/${currencyIdA}`)
+      } else {
+        router.push(`/exchange/limit/${newCurrencyIdA}/${currencyIdB}`)
+      }
+    },
+    [currencyIdB, router, currencyIdA]
+  )
+  const handleCurrencyBSelect = useCallback(
+    (currencyB: Currency) => {
+      const newCurrencyIdB = currencyId(currencyB)
+      if (currencyIdA === newCurrencyIdB) {
+        if (currencyIdB) {
+          router.push(`/exchange/limit/${currencyIdB}/${newCurrencyIdB}`)
+        } else {
+          router.push(`/exchange/limit/${newCurrencyIdB}`)
+        }
+      } else {
+        router.push(`/exchange/limit/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
+      }
+    },
+    [currencyIdA, router, currencyIdB]
+  )
 
   const [dismissTokenWarning, setDismissTokenWarning] = useState<boolean>(false)
   const urlLoadedTokens: Token[] = useMemo(

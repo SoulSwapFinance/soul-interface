@@ -82,7 +82,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             </Typography>
           </NavLink>
         }
-        {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+        {featureEnabled(Feature.LIMIT, chainId) &&
           <NavLink
             activeClassName={classNames(
               "border rounded bg-black",
