@@ -33,6 +33,7 @@ import { OPENOCEAN_BASEURL, OPENOCEAN_METHODS } from 'hooks/useOpenOceanAPI';
 import NetworkGuard from 'guards/Network';
 import { Feature } from 'enums/Feature';
 import ERC20ABI from 'constants/abis/bridge/erc20.json'
+import { Button } from 'components/Button';
 
 // const  = lazy(() => import('components/LiveChart'))
 
@@ -55,6 +56,7 @@ export default function OpenV1() {
   const { getAllowance, approve } = useFantomERC20();
   const [allowance, setAllowance] = useState(BigNumber.from(0));
   const { sendTx } = useFantomNative();
+  const [updated, setUpdated] = useState(false)
 
   // const handleSwapInOut = () => {
   //   setInputAmount("1");
@@ -86,7 +88,7 @@ export default function OpenV1() {
     console.log("Getting Quote");
 
     const chainName = chainId == ChainId.AVALANCHE ? 'avax' : chainId == ChainId.ETHEREUM ? 'eth' : 'fantom'
-    let amount = inputAmount / 10**fromToken.wrapped.decimals
+    let amount = inputAmount / 10 ** fromToken.wrapped.decimals
     if (!fromToken || !to || !inputAmount) return;
 
     // Fetch the swap quote.
@@ -185,8 +187,8 @@ export default function OpenV1() {
       setFromToken(inputCurrency)
     },
     [onCurrencySelection]
-    )
-  
+  )
+
   // HANDLES - OUTPUT //
   const handleOutputSelect = useCallback(
     (outputCurrency) => {
@@ -201,10 +203,10 @@ export default function OpenV1() {
       onUserInput(Field.INPUT, value)
       setInputAmount(value)
       await handleOutputSelect
-      await getQuote(fromToken.wrapped.address, toToken.wrapped.address, Number(value) * 10**fromToken.wrapped.decimals)
+      await getQuote(fromToken.wrapped.address, toToken.wrapped.address, Number(value) * 10 ** fromToken.wrapped.decimals)
     },
     [onUserInput]
-    )
+  )
 
   useEffect(() => {
     if (OOQuoteData && toToken?.decimals && parseFloat(outputAmount) > 0) {
@@ -218,7 +220,7 @@ export default function OpenV1() {
       }
     }
   }, [OOQuoteData]);
-  
+
   const fiatValueInput = useUSDCValue(parsedAmounts[Field.INPUT])
   const fiatValueOutput = useUSDCValue(parsedAmounts[Field.OUTPUT])
   const priceImpact = computeFiatValuePriceImpact(fiatValueInput, fiatValueOutput)
@@ -311,109 +313,152 @@ export default function OpenV1() {
   return (
     <Container id="open-page" maxWidth="2xl" className="space-y-4">
       <DoubleGlowShadowV2>
-      <div className="p-4 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>          
-        <div className="px-2">
-    <SwapHeader inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
-    </div>      
-      <SwapAssetPanel
-        spendFromWallet={true}
-        chainId={chainId}
-        header={(props) => (
-          <SwapAssetPanel.Header
-            {...props}
-            label={'Swap from:'}
+        <div className="p-4 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+          <div className="px-2">
+            <SwapHeader inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+          </div>
+          <SwapAssetPanel
+            spendFromWallet={true}
+            chainId={chainId}
+            header={(props) => (
+              <SwapAssetPanel.Header
+                {...props}
+                label={'Swap from:'}
+              />
+            )}
+            currency={currencies[Field.INPUT]}
+            value={formattedAmounts[Field.INPUT]}
+            onChange={handleTypeInput}
+            onSelect={handleInputSelect}
           />
-        )}
-        currency={currencies[Field.INPUT]}
-        value={formattedAmounts[Field.INPUT]}
-        onChange={handleTypeInput}
-        onSelect={handleInputSelect}
-      />
 
-      <div className={classNames("flex justify-center -mt-6 -mb-6 z-0")}>
-        <div
-          role="button"
-          className={classNames(`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`)}
-          onClick={() => {
-              onSwitchTokens()
-          }}
-        >
-          {<ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />}
+          <div className={classNames("flex justify-center -mt-6 -mb-6 z-0")}>
+            <div
+              role="button"
+              className={classNames(`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`)}
+              onClick={() => {
+                onSwitchTokens()
+              }}
+            >
+              {<ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />}
+            </div>
+          </div>
+
+          {/* TO ASSET PANEL */}
+          <SwapAssetPanel
+            spendFromWallet={true}
+            chainId={chainId}
+            header={(props) => (
+              <SwapAssetPanel.Header
+                {...props}
+              />
+            )}
+            currency={currencies[Field.OUTPUT]}
+            value={formattedAmounts[Field.OUTPUT]}
+            onChange={()=>{}}
+            // onChange={handleTypeOutput}
+            onSelect={handleOutputSelect}
+            priceImpact={priceImpact}
+            priceImpactCss={priceImpactCss}
+          />
+
+          {/* {Boolean(trade) && (
+            <SwapDetails
+              inputCurrency={currencies[Field.INPUT]}
+              outputCurrency={currencies[Field.OUTPUT]}
+              trade={trade}
+              recipient={recipient ?? undefined}
+            />
+          )} */}
+
+          {/* <div className={'grid grid-cols-1 justify-between'}>
+            <Typography>  </Typography>
+            <Typography>  fromAddress: {fromToken.isNative ? '0x' : fromToken.wrapped.address} </Typography>
+            <Typography>  inputAmount:  </Typography>
+
+            <Typography>  To:  </Typography>
+            <Typography>  toAddress: {toToken.wrapped.address} </Typography>
+            <Typography>  outputAmount:  </Typography>
+          </div> */}
+          <div className="flex justify-between">
+            <Typography className="text-white" fontFamily={'medium'}>
+            Input Amount
+            </Typography>
+            <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+            {inputAmount} {fromToken.symbol}
+            </Typography>
+          </div>
+          <div className="flex justify-between">
+            <Typography className="text-white" fontFamily={'medium'}>
+             Expected Output
+            </Typography>
+            <Typography className={'text-white'} weight={600} fontFamily={'semi-bold'}>
+            { outputAmount && updated ?  
+              `${outputAmount} ${toToken.symbol}`
+              : <Button
+                size="xs"
+                onClick={
+                  async () => {
+                  await getQuote(fromToken.wrapped.address, toToken.wrapped.address, Number(inputAmount) * 10 ** fromToken.decimals)
+                  await setUpdated(true)
+                  }
+                }
+                >
+                {`Click to Refresh`}
+                </Button>
+              //  console.log('outputAmount:%s', Number(outputAmount))
+
+          }
+            </Typography>
+          </div>
+          {hasAllowance(allowance) ? (
+            <Button
+              variant="filled"
+              color={getChainColorCode(chainId)}
+              onClick={handleSwap}
+              disabled={isSwapPending || isSwapCompleted} // || !minReceived}
+            >
+              {isSwapPending
+                ? "Swapping..."
+                : isSwapCompleted
+                  ? "Swap successful"
+                  // : !minReceived
+                  //   ? "Fetching best price..."
+                  : "Swap"
+              }
+            </Button>
+          ) : (
+            <Button
+              variant="filled"
+              color={getChainColorCode(chainId)}
+              onClick={handleApprove}
+              disabled={isApproveCompleted || isApprovePending}
+            >
+              {isApprovePending
+                ? "Approving..."
+                : isApproveCompleted
+                  ? "Approved!"
+                  : "Approve"}
+            </Button>
+          )}
+
+          {/* <Button
+            variant={'bordered'}
+            primaryColor={'blue'}
+            size={'xs'}
+            // color={"white"}
+            onClick={async () => {
+              await getQuote(fromToken.wrapped.address, toToken.wrapped.address, Number(inputAmount) * 10 ** fromToken.decimals)
+              //  console.log('outputAmount:%s', Number(outputAmount))
+            }
+            }
+          >
+            <Typography className={'text-white'}>
+              Refresh Quote
+            </Typography>
+          </Button> */}
         </div>
-      </div>
-
-      {/* TO ASSET PANEL */}
-      <SwapAssetPanel
-        spendFromWallet={true}
-        chainId={chainId}
-        header={(props) => (
-          <SwapAssetPanel.Header
-            {...props}
-          />
-        )}
-        currency={currencies[Field.OUTPUT]}
-        value={formattedAmounts[Field.OUTPUT]}
-        onChange={handleTypeOutput}
-        onSelect={handleOutputSelect}
-        priceImpact={priceImpact}
-        priceImpactCss={priceImpactCss}
-      />
-      {Boolean(trade) && (
-        <SwapDetails
-          inputCurrency={currencies[Field.INPUT]}
-          outputCurrency={currencies[Field.OUTPUT]}
-          trade={trade}
-          recipient={recipient ?? undefined}
-        />
-      )}
-
-      <div className={'grid grid-cols-1 justify-between'}>
-        <Typography>  From: {fromToken.symbol} </Typography>
-        <Typography>  fromAddress: {fromToken.isNative ? '0x' : fromToken.wrapped.address} </Typography>
-        <Typography>  inputAmount: {inputAmount} </Typography>
-
-        <Typography>  To: {toToken.symbol} </Typography>
-        <Typography>  toAddress: {toToken.wrapped.address} </Typography>
-        <Typography>  outputAmount: {outputAmount} </Typography>
-      </div>
-      <SubmitButton
-      onClick={async()=> 
-        {
-           await getQuote(fromToken.wrapped.address, toToken.wrapped.address, Number(inputAmount) * 10**fromToken.decimals)
-          //  console.log('outputAmount:%s', Number(outputAmount))
-        }
-      }
-      >
-      </SubmitButton>
-      {hasAllowance(allowance) ? (
-          <SubmitButton
-            variant="filled"
-            onClick={handleSwap}
-            disabled={isSwapPending || isSwapCompleted || !minReceived}
-          >
-            {isSwapPending
-              ? "Swapping..."
-              : isSwapCompleted
-                ? "Swap successful"
-                : !minReceived
-                  ? "Fetching best price..."
-                  : "Swap"}
-          </SubmitButton>
-        ) : (
-          <SubmitButton
-            variant="filled"
-            onClick={handleApprove}
-            disabled={isApproveCompleted || isApprovePending}
-          >
-            {isApprovePending
-              ? "Approving..."
-              : isApproveCompleted
-                ? "Approved!"
-                : "Approve"}
-          </SubmitButton>
-        )}
-    </div>
-    </DoubleGlowShadowV2>
+      </DoubleGlowShadowV2>
     </Container>
   )
 }

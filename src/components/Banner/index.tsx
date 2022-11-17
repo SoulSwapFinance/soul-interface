@@ -8,6 +8,9 @@ import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
 import { classNames } from 'functions/styling'
 import ExternalLink from 'components/ExternalLink'
+import { featureEnabled } from 'functions/feature'
+import { Feature as Features } from 'enums'
+
 
 export const Global: FC = () => (
   <div className="relative items-center w-full">
@@ -64,7 +67,7 @@ export const Feature: FC<IFeature> = ({ chainId }) => (
 )
 
 export const NewFeature: FC<IFeature> = ({ chainId }) => (
-  <div className={classNames([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? "relative items-center w-full" : 'hidden')}>
+  <div className={classNames(featureEnabled(Features.AGGREGATE, chainId) ? "relative items-center w-full" : 'hidden')}>
     <div className="w-full">
       <div className="text-center">
         <p className="font-medium mb-2 mt-2 text-center text-white">
