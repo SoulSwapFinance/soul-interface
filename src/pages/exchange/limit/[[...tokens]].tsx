@@ -85,29 +85,29 @@ import { useRouter } from "next/router"
 import { useCurrency } from "hooks/Tokens"
 import SocialWidget from "components/Social"
 
-const BodyWrapper = styled.div<{ margin?: string }>`
-position: relative;
-margin-top: ${({ margin }) => margin ?? "0px"};
-max-width: 1080px;
-  width: 100%;
-  background: ${({ theme }) => theme.bg7};
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04),
-    0px 16px 24px rgba(0, 0, 0, 0.04), 0px 24px 32px rgba(0, 0, 0, 0.01);
-  border-radius: 24px;
-  margin-top: 1rem;
-`;
+// const BodyWrapper = styled.div<{ margin?: string }>`
+// position: relative;
+// margin-top: ${({ margin }) => margin ?? "0px"};
+// max-width: 1080px;
+//   width: 100%;
+//   background: ${({ theme }) => theme.bg7};
+//   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04),
+//     0px 16px 24px rgba(0, 0, 0, 0.04), 0px 24px 32px rgba(0, 0, 0, 0.01);
+//   border-radius: 24px;
+//   margin-top: 1rem;
+// `;
 
 /**
  * The styled container element that wraps the content of most pages and the tabs.
  */
-function AppBody({
-  children,
-  ...rest
-}: {
-  children: React.ReactNode;
-}) {
-  return <BodyWrapper {...rest}>{children}</BodyWrapper>;
-}
+// function AppBody({
+//   children,
+//   ...rest
+// }: {
+//   children: React.ReactNode;
+// }) {
+//   return <BodyWrapper {...rest}>{children}</BodyWrapper>;
+// }
 
 
 // const StyledInfo = styled(Info)`
@@ -120,31 +120,29 @@ function AppBody({
 //   }
 // `;
 
-enum Rate {
-  DIV = "DIV",
-  MUL = "MUL",
-}
 
 // interface GelatoLimitOrderProps {
-//   showCommonBases?: boolean;
-// }
-
-const Limit = () => {
-
-  const { account, chainId } = useActiveWeb3React();
-  // const [inputCurrency, setInputCurrency] = useState(NATIVE[chainId])
-  // const [ouputCurrency, setOutputCurrency] = useState(SOUL[chainId])
-  const theme = useTheme();
-  const [showOrders, setShowOrders] = useState(false)
-  const router = useRouter()
-  const tokens = router.query.tokens
-  const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
-
-  // const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
-  const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
-// 
-  // const currencyA = useCurrency(currencyIdA)
-  // const currencyB = useCurrency(currencyIdB)
+  //   showCommonBases?: boolean;
+  // }
+  
+  const Limit = () => {
+    
+    const { account, chainId } = useActiveWeb3React();
+    // const [inputCurrency, setInputCurrency] = useState(NATIVE[chainId])
+    // const [ouputCurrency, setOutputCurrency] = useState(SOUL[chainId])
+    const theme = useTheme();
+    const [showOrders, setShowOrders] = useState(false)
+    const router = useRouter()
+    const tokens = router.query.tokens
+    const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
+    
+    // const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
+    const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
+    
+    enum Rate {
+      DIV = "DIV",
+      MUL = "MUL",
+    }
 
   const handleCurrencyASelect = useCallback(
     (currencyA: Currency) => {
@@ -198,7 +196,7 @@ const Limit = () => {
 
   const desiredRateInCurrencyAmount = tryParseAmount(
     trade?.outputAmount.toSignificant(6),
-    currencies.output
+    currencyB
   );
 
   const fiatValueDesiredRate = useUSDCValue(desiredRateInCurrencyAmount);
@@ -223,6 +221,8 @@ const Limit = () => {
   const isBuy = trade && rateType === Rate.DIV
   const isProfitable = isSell && rawPriceDelta > 0 || isBuy && rawPriceDelta < 0
 
+  // const currencyA = currencyA
+
   // const [activeTab, setActiveTab] = useState<"sell" | "buy">("sell");
   // const handleActiveTab = (tab: "sell" | "buy") => {
   //   if (activeTab === tab) return;
@@ -233,14 +233,18 @@ const Limit = () => {
   const handleTypeInput = useCallback(
     (value: string) => {
       handleInput(Field.INPUT, value);
+      handleCurrencySelection(Field.INPUT, currencyA)
+      handleCurrencySelection(Field.OUTPUT, currencyB)
     },
-    [handleInput]
+    [handleInput, handleCurrencySelection]
   );
   const handleTypeOutput = useCallback(
     (value: string) => {
       handleInput(Field.OUTPUT, value);
+      handleCurrencySelection(Field.INPUT, currencyA)
+      handleCurrencySelection(Field.OUTPUT, currencyB)
     },
-    [handleInput]
+    [handleInput, handleCurrencySelection]
   );
   const handleTypeDesiredRate = useCallback(
     (value: string) => {
@@ -284,7 +288,7 @@ const Limit = () => {
 
   const allowedSlippage = new Percent(40, 10_000);
   const userHasSpecifiedInputOutput = Boolean(
-    currencies.input && currencies.output
+    currencyA && currencyB
   );
   const routeNotFound = !trade?.route;
   const isLoadingRoute =
@@ -314,11 +318,11 @@ const Limit = () => {
     });
 
     try {
-      if (!currencies.input?.wrapped.address) {
+      if (!currencyA?.wrapped.address) {
         throw new Error("Invalid Input Currency");
       }
 
-      if (!currencies.output?.wrapped.address) {
+      if (!currencyB?.wrapped.address) {
         throw new Error("Invalid Output Currency");
       }
 
@@ -335,12 +339,12 @@ const Limit = () => {
       }
 
       handleLimitOrderSubmission({
-        inputToken: currencies.input?.isNative
+        inputToken: currencyA?.isNative
           ? NATIVE_ADDRESS
-          : currencies.input?.wrapped.address,
-          outputToken: currencies.output?.isNative
+          : currencyA?.wrapped.address,
+          outputToken: currencyB?.isNative
           ? NATIVE_ADDRESS
-          : currencies.output?.wrapped.address,
+          : currencyB?.wrapped.address,
         inputAmount: rawAmounts.input,
         outputAmount: rawAmounts.output,
         owner: account,
@@ -376,10 +380,10 @@ const Limit = () => {
     handleLimitOrderSubmission,
     tradeToConfirm,
     showConfirm,
-    currencies.input?.wrapped.address,
-    currencies.input?.isNative,
-    currencies.output?.wrapped.address,
-    currencies.output?.isNative,
+    currencyA?.wrapped.address,
+    currencyA?.isNative,
+    currencyB?.wrapped.address,
+    currencyB?.isNative,
     rawAmounts.input,
     rawAmounts.output,
     account,
@@ -412,10 +416,10 @@ const Limit = () => {
   }, [attemptingTxn, showConfirm, swapErrorMessage, trade, txHash]);
 
   const handleInputSelect = useCallback(
-    (inputCurrency) => {
+    (currencyA) => {
       //  setApprovalSubmitted(false); // reset 2 step UI for approvals
-      handleCurrencySelection(Field.INPUT, inputCurrency);
-      handleCurrencyASelect(inputCurrency)
+      handleCurrencySelection(Field.INPUT, currencyA);
+      handleCurrencyASelect(currencyA)
     },
     [handleCurrencySelection]
   );
@@ -425,16 +429,16 @@ const Limit = () => {
   // }, [maxInputAmount, handleInput]);
 
   const handleOutputSelect = useCallback(
-    (outputCurrency) => { 
-      handleCurrencySelection(Field.OUTPUT, outputCurrency)
-      handleCurrencyBSelect(outputCurrency)
+    (currencyB) => { 
+      handleCurrencySelection(Field.OUTPUT, currencyB)
+      handleCurrencyBSelect(currencyB)
     },
     [handleCurrencySelection]
   );
 
   const swapIsUnsupported = useIsSwapUnsupported(
-    currencies?.input,
-    currencies?.output
+    currencyA,
+    currencyB
   );
 
   // const {
@@ -456,12 +460,12 @@ const Limit = () => {
   return (
     <Container id="cross-page" maxWidth="2xl" className="space-y-4">
       <DoubleGlowShadowV2>
-      <SwapLayoutCard>
+      {/* <SwapLayoutCard> */}
 
-        <div className="p-4 px-2 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+        <div className="p-4 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
         <SwapHeader
-            inputCurrency={currencies[Field.INPUT]}
-            outputCurrency={currencies.output}
+            inputCurrency={currencyA}
+            outputCurrency={currencyB}
             allowedSlippage={allowedSlippage}
           />          
           {/* <OrderHeader handleActiveTab={handleActiveTab} activeTab={activeTab} /> */}
@@ -493,7 +497,7 @@ const Limit = () => {
                     label={''}
                   />
                 )}
-                currency={currencies.input}
+                currency={currencyA}
                 value={formattedAmounts.input}
                 onChange={handleTypeInput}
                 onSelect={handleInputSelect}
@@ -504,12 +508,12 @@ const Limit = () => {
                   //   independentField === Field.OUTPUT ? "From (at most)" : "From"
                   // }
                   value={formattedAmounts.input}
-                  currency={currencies.input}
+                  currency={currencyA}
                   onUserInput={handleTypeInput}
                   onMax={handleMaxInput}
                   fiatValue={fiatValueInput ?? undefined}
                   onCurrencySelect={handleInputSelect}
-                  // otherCurrency={currencies.output || SOUL_FANTOM}
+                  // otherCurrency={currencyB || SOUL_FANTOM}
                   showCommonBases={false}
                   id="limit-order-currency-input"
                 /> */}
@@ -518,7 +522,7 @@ const Limit = () => {
                     <X
                       size="16"
                       color={
-                        currencies.input && currencies.output
+                        currencyA && currencyB
                           ? theme.text1
                           : theme.text3
                       }
@@ -527,7 +531,7 @@ const Limit = () => {
                     <Divide
                       size="16"
                       color={
-                        currencies.input && currencies.output
+                        currencyA && currencyB
                           ? theme.text1
                           : theme.text3
                       }
@@ -538,25 +542,25 @@ const Limit = () => {
                   chainId={chainId}
                   value={formattedAmounts.price}
                   showCurrencySelect={false}
-                  // currency={currencies.input}
+                  // currency={currencyA}
                   onUserInput={handleTypeDesiredRate}
                   fiatValue={fiatValueDesiredRate ?? undefined}
                   onCurrencySelect={handleInputSelect}
-                  // otherCurrency={currencies.output}
+                  // otherCurrency={currencyB}
                   showCommonBases={false}
                   id="limit-order-currency-rate"
                   disableCurrencySelect={true}
                   hideBalance={true}
                   label={
                     trade &&
-                    // trade && rateType === Rate.MUL ? `≈ ${formatNumber(formattedAmounts.price, false, true)} (${currencies.output.symbol})`
-                    // : trade && rateType === Rate.MUL ? `≈ ${formatNumber(formattedAmounts.price, false, true)} (${currencies.input.symbol})`
+                    // trade && rateType === Rate.MUL ? `≈ ${formatNumber(formattedAmounts.price, false, true)} (${currencyB.symbol})`
+                    // : trade && rateType === Rate.MUL ? `≈ ${formatNumber(formattedAmounts.price, false, true)} (${currencyA.symbol})`
                     // : 
-                    `1 ${currencies.input?.symbol} ≈ ${formatNumber(formattedAmounts.price)} ${currencies.output?.symbol}`
-                      // ? `${currencies.input.symbol} ≈ ${Number(formattedAmounts.price).toFixed(2)} ${currencies.output.symbol}`
-                      // ? `≈ ${(1 / Number(formattedAmounts.price)).toFixed(4)} (${currencies.output.symbol})`
-                      // : `≈ ${(1 / Number(formattedAmounts.price)).toFixed(4)} (${currencies.input.symbol})`
-                    // : `${currencies.output.symbol} : ${currencies.input.symbol}`
+                    `1 ${currencyA?.symbol} ≈ ${formatNumber(formattedAmounts.price)} ${currencyB?.symbol}`
+                      // ? `${currencyA.symbol} ≈ ${Number(formattedAmounts.price).toFixed(2)} ${currencyB.symbol}`
+                      // ? `≈ ${(1 / Number(formattedAmounts.price)).toFixed(4)} (${currencyB.symbol})`
+                      // : `≈ ${(1 / Number(formattedAmounts.price)).toFixed(4)} (${currencyA.symbol})`
+                    // : `${currencyB.symbol} : ${currencyA.symbol}`
 
                   }
                 // label={`Price Ratio`}
@@ -573,7 +577,7 @@ const Limit = () => {
                       handleSwitchTokens();
                     }}
                     color={
-                      currencies.input && currencies.output
+                      currencyA && currencyB
                         ? theme.text1
                         : theme.text3
                     }
@@ -590,7 +594,7 @@ const Limit = () => {
                   />
                 )
               }
-                currency={currencies.output || SOUL[chainId]}
+                currency={currencyB}
                 value={formattedAmounts.output}
                 onChange={handleTypeOutput}
                 onSelect={handleOutputSelect}
@@ -605,9 +609,9 @@ const Limit = () => {
                   hideBalance={false}
                   // priceImpact={percentageRateDifference}
                   priceImpact={percentageRateDifference}
-                  currency={currencies.output}
+                  currency={currencyB}
                   onCurrencySelect={handleOutputSelect}
-                  otherCurrency={currencies.input}
+                  otherCurrency={currencyA}
                   showCommonBases={false}
                   // rateType={rateType}
                   id="limit-order-currency-output"
@@ -687,15 +691,15 @@ const Limit = () => {
                             >
                               <span style={{ display: "flex", alignItems: "center" }}>
                                 <CurrencyLogo
-                                  currency={currencies.input}
+                                  currency={currencyA}
                                   size={"20px"}
                                   style={{ marginRight: "8px", flexShrink: 0 }}
                                 />
                                 {/* we need to shorten this string on mobile */}
                                 {approvalState === ApprovalState.APPROVED
-                                  ? `${currencies.input?.symbol} Allowed.`
+                                  ? `${currencyA?.symbol} Allowed.`
                                   : `Approve
-                              ${currencies.input?.symbol}.`}
+                              ${currencyA?.symbol}.`}
                               </span>
                               {approvalState === ApprovalState.PENDING ||
                                 (approvalSubmitted &&
@@ -708,7 +712,7 @@ const Limit = () => {
                                 <MouseoverTooltip
                                   text={`You must give the Limit Orders smart contracts
                                 permission to use your 
-                                ${currencies.input?.symbol}. You only have to do
+                                ${currencyA?.symbol}. You only have to do
                                 this once per token.`}
                                 >
                                   <HelpCircle
@@ -772,7 +776,7 @@ const Limit = () => {
           {!swapIsUnsupported ? null : (
             <UnsupportedCurrencyFooter
               show={swapIsUnsupported}
-              currencies={[currencies.input, currencies.output]}
+              currencies={[currencyA, currencyB]}
             />
           )}
           <div className={classNames([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `flex flex-cols-2 gap-3 text-white justify-end` : `hidden`)}>
@@ -792,11 +796,9 @@ const Limit = () => {
           }
           />
       </div>
-    </div>
-  {(!showOrders) &&
+  {/* {(!showOrders) &&
        <SocialWidget />
-    }
-  </SwapLayoutCard>
+      } */}
       {!showOrders &&
         <div className="grid grid-cols-1">
           <Image src='https://app.soulswap.finance/title-soul-halfs.png' height="400px" width="600px" alt="logo" />
@@ -807,6 +809,8 @@ const Limit = () => {
           <GelatoLimitOrdersHistoryPanel />
         </div>
       }
+    </div>
+  {/* </SwapLayoutCard> */}
       </DoubleGlowShadowV2>
     </Container>
 
