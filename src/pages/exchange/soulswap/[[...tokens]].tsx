@@ -51,6 +51,8 @@ import { WrappedCrossChainTrade } from 'rubic-sdk/lib/features/cross-chain/provi
 import { sleep } from 'features/crosschain/utils'
 import { getLastExchange } from 'utils/rubic/hooks'
 import Analytics from 'components/Analytics'
+import { featureEnabled } from 'functions/feature'
+import { Feature } from 'enums/Feature'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -670,10 +672,9 @@ const Swap = () => {
                   color={ chainId == ChainId.AVALANCHE ? "avaxGradient" : "gradientBluePurple"}
                   size="lg"
                 >
-                <NavLink href={chainId == ChainId.FANTOM ? "/open" : "/cross"}>
+                <NavLink href={featureEnabled(Feature.AGGREGATE, chainId) ? "/open" : "/cross"}>
                         <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                        <span>{ 
-                        chainId == ChainId.FANTOM ? 'Use Aggregator' : 'Swap Crosschain' }</span>
+                        <span>{featureEnabled(Feature.AGGREGATE, chainId) ? 'Use Aggregator' : 'Swap Crosschain' }</span>
                         </a>
                   </NavLink>
                 </Button>
