@@ -212,7 +212,7 @@ const LendEntry = ({ pair, userPosition = false }) => {
   const assetBalance = Number(underworldUserInfo.userAssetBalance) // 10**assetDecimals
   const borrowedAmount = Number(underworldUserInfo.userBorrowPart) / 10**assetDecimals
   const suppliedAmount = Number(underworldUserInfo.userBalance) / 10**assetDecimals
-  const collateralAmount = Number(underworldUserInfo.userCollateralShare) / 10**collateralDecimal
+  const collateralAmount = Number(underworldUserInfo.userCollateralShare) / 10**collateralDecimals
   
   const interestPerSecond = 1E18 / Number(underworldPairInfo.interestPerSecond)
   const APR = 86_600 * interestPerSecond * 365
