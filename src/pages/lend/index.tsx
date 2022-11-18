@@ -150,7 +150,7 @@ export default function Lend() {
             </ListHeaderWithSort>
             <ListHeaderWithSort className="hidden justify-center lg:flex" sort={data} sortKey="oracle.name">
               {i18n._(t`Oracle`)}
-              <QuestionHelper text={i18n._(t`Onchain oracle that tracks pricing for this pair.`)} />
+              <QuestionHelper text={i18n._(t`On-chain oracle that tracks pricing for this pair.`)} />
             </ListHeaderWithSort>
             <ListHeaderWithSort
               className="justify-center"

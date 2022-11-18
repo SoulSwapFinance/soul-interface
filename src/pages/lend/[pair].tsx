@@ -27,7 +27,7 @@ export default function Pair() {
   const { chainId } = useActiveWeb3React()
   const pair = useUnderworldPair(router.query.pair as string)
   const { underworldPairInfo } = useUnderworldPairInfo(router.query.pair)
-
+  
   /*
   const { underworldPairInfo } = useUnderworldPairInfo(pair?.address)
   const assetDecimals = Number(underworldPairInfo.assetDecimals)
@@ -44,6 +44,14 @@ const assetPrice = Number(underworldPairInfo.assetPrice)
 // const collateralPrice = Number(underworldPairInfo.collateralPrice)
 // const lpDecimals = Number(underworldPairInfo.decimals)
 // const assetAddress = underworldPairInfo.assetAddress
+
+const available = 100 -
+  ((pair?.totalAsset.base / 10**(assetDecimals)) -
+    (pair?.totalAsset.base.sub(pair?.totalBorrow.base) / 10**(assetDecimals)))
+    / (pair?.totalAsset.base / 10**(assetDecimals)) * 100
+
+  const util = 100 - available
+  const utilization = (util >= 100 || util <= 0) ? 100 : util
 
 // format tickers //
 const aTicker = underworldPairInfo.assetTicker
@@ -139,13 +147,14 @@ const collateralSymbol
             <div className="text-center text-md sm:text-lg text-high-emphesis">{formatNumber(userDepositValue, true)}</div>
             </div>
           <div>
-            <div className="text-center text-md sm:text-lg text-secondary">{`Utilization`}</div>
+            <div className="text-center text-md sm:text-lg text-secondary">{`Borrowed`}</div>
             <div className="text-center text-lg sm:text-2xl text-high-emphesis">{
-                formatPercent(
-                  ((pair?.userAssetFraction.div(e10(assetDecimals))) -
-                    (pair?.userAssetFraction.sub(pair?.currentUserLentAmount.value).div(e10(assetDecimals))))
-                  / (pair?.userAssetFraction.div(e10(assetDecimals))) * 100
-                )
+              formatPercent(utilization)
+                // formatPercent(
+                //   ((pair?.userAssetFraction.div(e10(assetDecimals))) -
+                //     (pair?.userAssetFraction.sub(pair?.currentUserLentAmount.value).div(e10(assetDecimals))))
+                //   / (pair?.userAssetFraction.div(e10(assetDecimals))) * 100
+                // )
               }</div>
           </div>
           <div className="text-right">
@@ -197,13 +206,8 @@ const PairLayout = ({ children }) => {
   const router = useRouter()
   // const { i18n } = useLingui()
   const pair = useUnderworldPair(router.query.pair as string)
-
   // const lpDecimals = Number(underworldPairInfo.decimals)
   // const assetAddress = underworldPairInfo.assetAddress
-  
-
-  
-
   // const oracle = underworldPairInfo.oracle
   // const interestPerSecond = underworldPairInfo.interestPerSecond
   // const interestPerYear = Number(interestPerSecond) * 86_400 * 365 / 1e18
@@ -214,20 +218,30 @@ const PairLayout = ({ children }) => {
   const aTicker = pair?.asset.tokenInfo.symbol
   const cTicker = pair?.collateral.tokenInfo.symbol
 
+  const available = 100 -
+  ((pair?.totalAsset.base / 10**(assetDecimals)) -
+    (pair?.totalAsset.base.sub(pair?.totalBorrow.base) / 10**(assetDecimals)))
+    / (pair?.totalAsset.base / 10**(assetDecimals)) * 100
+
+  const util = 100 - available
+  const utilization = (util >= 100 || util <= 0) ? 100 : util
+
   const assetSymbol 
       = aTicker == 'WAVAX' ? 'AVAX'
+          : aTicker == 'WFTM' ? 'FTM'
           : aTicker == 'WETH.e' ? 'ETH'
           : aTicker == 'WBTC.e' ? 'BTC'
           : aTicker
 
   const collateralSymbol 
       = cTicker == 'WAVAX' ? 'AVAX'
+          :cTicker == 'WFTM' ? 'FTM'
           : cTicker == 'WETH.e' ? 'ETH'
           : cTicker == 'WBTC.e' ? 'BTC'
           : cTicker
 
-  const interestPerYear = pair?.interestPerYear.string
-  console.log('interestPerYear:%s', interestPerYear)
+  // const interestPerYear = pair?.interestPerYear.string
+  // console.log('interestPerYear:%s', interestPerYear)
 
   return pair ? (
     <Layout
@@ -268,18 +282,14 @@ const PairLayout = ({ children }) => {
               <div className="text-lg text-secondary">{`Oracle`}</div>
               <div className="text-lg text-high-emphesis">
               </div>
-              {/* {formatNumber(pair?.totalAsset.base.div(e10(assetDecimals)))} {assetSymbol} */}
               { oracle }
             </div>
             <div className="flex justify-between">
               <div className="text-green text-lg text-secondary">{`Available`}</div>
               <div className="flex items-center">
                 <div className="text-green text-lg text-high-emphesis">
-                {formatPercent(100-
-                ((pair?.totalAsset.base / 10**(assetDecimals)) -
-                  (pair?.totalAsset.base.sub(pair?.totalBorrow.base) / 10**(assetDecimals)))
-                  / (pair?.totalAsset.base / 10**(assetDecimals)) * 100
-                )}</div>
+                {formatPercent(available)}
+                </div>
               </div>
             </div>
             {/* <div className="flex justify-between">
