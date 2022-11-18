@@ -67,6 +67,9 @@ msgstr ""
 msgid "APR"
 msgstr ""
 
+msgid "APR (annualized)"
+msgstr ""
+
 msgid "APY (Annualized)"
 msgstr ""
 
@@ -86,6 +89,9 @@ msgid "Action"
 msgstr ""
 
 msgid "Actions"
+msgstr ""
+
+msgid "Active"
 msgstr ""
 
 msgid "Add"
@@ -200,6 +206,9 @@ msgid "Balanced Mode is an optional UI setting to maintain the traditional style
 msgstr ""
 
 msgid "Balances"
+msgstr ""
+
+msgid "BentoBox strategy"
 msgstr ""
 
 msgid "Bond"
@@ -765,6 +774,9 @@ msgstr ""
 msgid "Links"
 msgstr ""
 
+msgid "Liquidation Price"
+msgstr ""
+
 msgid "Liquidity"
 msgstr ""
 
@@ -790,6 +802,9 @@ msgid "Loading your {exchange} liquidity positions"
 msgstr ""
 
 msgid "Loading..."
+msgstr ""
+
+msgid "Loan to Value (LTV)"
 msgstr ""
 
 msgid "Lock"
@@ -862,6 +877,9 @@ msgid "Net Worth"
 msgstr ""
 
 msgid "Never"
+msgstr ""
+
+msgid "New Liquidation Price"
 msgstr ""
 
 msgid "New to Fantom?"
@@ -981,6 +999,9 @@ msgid "Pool Tokens"
 msgstr ""
 
 msgid "Portfolio"
+msgstr ""
+
+msgid "Position Health"
 msgstr ""
 
 msgid "Positions"
@@ -1216,6 +1237,9 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
+msgid "Strategy APY"
+msgstr ""
+
 msgid "Stream"
 msgstr ""
 
@@ -1353,6 +1377,12 @@ msgstr ""
 msgid "Total Value"
 msgstr ""
 
+msgid "Total borrowed"
+msgstr ""
+
+msgid "Total collateral"
+msgstr ""
+
 msgid "Total in CoffinBox"
 msgstr ""
 
@@ -1404,7 +1434,13 @@ msgstr ""
 msgid "Underworld Assets"
 msgstr ""
 
+msgid "Underworld Borrowing Positions"
+msgstr ""
+
 msgid "Underworld Collateral"
+msgstr ""
+
+msgid "Underworld Lending Positions"
 msgstr ""
 
 msgid "Unknown Source"
@@ -1447,6 +1483,9 @@ msgid "Use the toggle to switch between balances when interacting with our platf
 msgstr ""
 
 msgid "Utilities"
+msgstr ""
+
+msgid "Utilization"
 msgstr ""
 
 msgid "Utilized"
@@ -1507,6 +1546,12 @@ msgid "Wallet Balances"
 msgstr ""
 
 msgid "Warmup Period"
+msgstr ""
+
+msgid "When a non-leveraged positions gets liquidated, you lose the collateral but you can keep the borrowed assets"
+msgstr ""
+
+msgid "When the value of your collateral becomes less than the asset you borrow, your position gets liquidated."
 msgstr ""
 
 msgid "Why use Balance Mode?"
@@ -1621,6 +1666,9 @@ msgid "for deliberations on additional points."
 msgstr ""
 
 msgid "forum discussion"
+msgstr ""
+
+msgid "health"
 msgstr ""
 
 msgid "loading..."

@@ -390,13 +390,13 @@ export const computeUnderworldPairAddress = ({
   oracleData: string
 }): string => {
   return getCreate2Address(
-    COFFIN_BOX_ADDRESS[collateral.chainId],
+    COFFIN_BOX_ADDRESS[collateral?.chainId],
     keccak256(
       ['bytes'],
       [
-        defaultAbiCoder.encode(
+        defaultAbiCoder?.encode(
           ['address', 'address', 'address', 'bytes'],
-          [collateral.address, asset.address, oracle, oracleData]
+          [collateral?.address, asset?.address, oracle, oracleData]
         ),
       ]
     ),
@@ -404,7 +404,7 @@ export const computeUnderworldPairAddress = ({
       ['bytes'],
       [
         '0x3d602d80600a3d3981f3363d3d373d3d3d363d73' +
-          UNDERWORLD_ADDRESS[collateral.chainId].substring(2) +
+          UNDERWORLD_ADDRESS[collateral?.chainId].substring(2) +
           '5af43d82803e903d91602b57fd5bf3',
       ]
     )
@@ -418,7 +418,7 @@ export const computeUnderworldPairAddress = ({
  */
 export function toUnderworldLiquidityToken([collateral, asset]: [Token, Token]): Token {
   // const { chainId } = useActiveWeb3React()
-  if (collateral.chainId !== asset.chainId) throw new Error('Not matching chain IDs')
+  if (collateral?.chainId !== asset?.chainId) throw new Error('Not matching chain IDs')
   if (collateral.equals(asset)) throw new Error('Tokens cannot be equal')
   if (!COFFIN_BOX_ADDRESS[collateral.chainId]) throw new Error('No CoffinBox factory address on this chain')
   if (!UNDERWORLD_ADDRESS[collateral.chainId]) throw new Error('No Underworld address on this chain')
@@ -431,15 +431,16 @@ export function toUnderworldLiquidityToken([collateral, asset]: [Token, Token]):
   const oracleData = computeOracleData(collateral, asset)
   if (!oracleData) return
   return new Token(
-    collateral.chainId,
+    collateral?.chainId,
     computeUnderworldPairAddress({
+      // chainId,
       collateral,
       asset,
-      oracle: CHAINLINK_ORACLE_ADDRESS[collateral.chainId],
+      oracle: CHAINLINK_ORACLE_ADDRESS[collateral?.chainId],
       oracleData: computeOracleData(collateral, asset),
     }),
     18,
-    collateral.chainId == ChainId.FANTOM ? 'KM' : 'UW',
+    collateral?.chainId == ChainId.FANTOM ? 'KM' : 'UW',
     'Underworld Medium Risk'
   )
 }

@@ -16,7 +16,7 @@ export function useUSDCPricesSubgraph(
 
   const stablecoin = chainId && USD[chainId] ? CurrencyAmount.fromRawAmount(USD[chainId], 0).currency : undefined
 
-  const { ethPrice } = useNativePrice({ chainId })
+  const ethPrice = useNativePrice({ chainId })
   const tokensLegacy = useTokens({
     chainId,
     variables: { where: { id_in: currencies?.map((currency) => currency.wrapped.address.toLowerCase()) } },

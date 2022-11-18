@@ -14,7 +14,7 @@ import React, { FC, memo, ReactNode } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 import { useLendingMediumRiskLendingPairs, useUnderworldPairAddresses } from './hooks'
-import { LendingMediumRiskLendingPair } from './LendingMediumRiskLendingPair'
+// import { LendingMediumRiskLendingPair } from './LendingMediumRiskLendingPair'
 
 interface LendingList {}
 
@@ -25,8 +25,7 @@ const LendingList: FC<LendingList> = () => {
 
   const { i18n } = useLingui()
   const { result, term, search } = useFuse
-  // @ts-ignore
-  <LendingMediumRiskLendingPair>
+  // <LendingMediumRiskLendingPair>
     ({
     data: markets,
     options: {
@@ -37,10 +36,10 @@ const LendingList: FC<LendingList> = () => {
     },
   })
 
-  // console.log({ result })
+  {/* console.log({ result }) */}
 
   const { items, requestSort, sortConfig } = useSortableData(result, {
-    key: 'currentAllAssetsUSD',
+    // key: 'currentAllAssetsUSD',
     direction: 'descending',
   })
 
@@ -64,29 +63,29 @@ const LendingList: FC<LendingList> = () => {
           </div>
           <div
             className={classNames('flex gap-1 items-center cursor-pointer justify-end', TABLE_TR_TH_CLASSNAME(1, 7))}
-            onClick={() => requestSort('currentAllAssetsUSD')}
+            // onClick={() => requestSort('currentAllAssetsUSD')}
           >
             <Typography variant="sm" weight={700}>
               {i18n._(t`TVL`)}
             </Typography>
-            <SortIcon
+            {/* <SortIcon
               id={sortConfig.key}
               direction={sortConfig.direction}
               active={sortConfig.key === 'currentAllAssetsUSD'}
-            />
+            /> */}
           </div>
           <div
             className={classNames('flex gap-1 items-center cursor-pointer justify-end', TABLE_TR_TH_CLASSNAME(2, 7))}
-            onClick={() => requestSort('currentBorrowAmountUSD')}
+            // onClick={() => requestSort('currentBorrowAmountUSD')}
           >
             <Typography variant="sm" weight={700}>
               {i18n._(t`Borrowed`)}
             </Typography>
-            <SortIcon
+            {/* <SortIcon
               id={sortConfig.key}
               direction={sortConfig.direction}
               active={sortConfig.key === 'currentBorrowAmountUSD'}
-            />
+            /> */}
           </div>
 
           <div
@@ -105,16 +104,16 @@ const LendingList: FC<LendingList> = () => {
 
           <div
             className={classNames('flex gap-1 items-center cursor-pointer justify-end', TABLE_TR_TH_CLASSNAME(4, 7))}
-            onClick={() => requestSort('totalAssetAmountUSD')}
+            // onClick={() => requestSort('totalAssetAmountUSD')}
           >
             <Typography variant="sm" weight={700}>
               {i18n._(t`Available`)}
             </Typography>
-            <SortIcon
+            {/* <SortIcon
               id={sortConfig.key}
               direction={sortConfig.direction}
               active={sortConfig.key === 'totalAssetAmountUSD'}
-            />
+            /> */}
           </div>
 
           <div
@@ -148,7 +147,7 @@ const LendingList: FC<LendingList> = () => {
             {items.length > 0 ? (
               <>
                 {items.slice(0, numDisplayed).reduce<ReactNode[]>((acc, market, index) => {
-                  if (market) acc.push(<LendingListItem market={market} key={index} i18n={i18n} />)
+                  if (market) acc.push(<LendingListItem market={market} key={index} />)
                   return acc
                 }, [])}
               </>

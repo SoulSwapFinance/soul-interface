@@ -77,7 +77,7 @@ export class LendingMediumRiskLendingPair {
     userAssetFraction: JSBI
     userBorrowPart: JSBI
   }) {
-    this.address = LendingMediumRiskLendingPair.getAddress(collateral.token, asset.token, oracle.address, oracle.data)
+    this.address //= LendingMediumRiskLendingPair?.getAddress(collateral.token, asset.token, oracle.address, oracle.data) // ?? '0xaf28730165634A56434ca7f0B302CC54F862046F'
     this.accrueInfo = accrueInfo
     this.collateral = collateral
     this.asset = asset

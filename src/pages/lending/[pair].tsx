@@ -5,8 +5,8 @@ import {
 import { 
     LendingMarket, 
     // LendingMarketProvider, 
-    // LendingMarketSkeleton 
-} from 'features/lending/LendingMarket/LendingMarket'
+    LendingMarketSkeleton 
+} from 'features/lending/LendingMarket'
 import { useRedirectOnChainId } from 'hooks/useRedirectOnChainId'
 import { useActiveWeb3React } from 'services/web3'
 import { useRouter } from 'next/router'
@@ -23,14 +23,13 @@ const LendingPairPage: FC<LendingPairPage> = () => {
 
   return (
     <Container maxWidth="lg" className="py-4 md:py-12 lg:py-[120px] px-2 mx-auto">
-      {market &&
-    //    ? (
+      {market ? (
         // <LendingMarketProvider market={market}>
           <LendingMarket />
         /* </LendingMarketProvider> */
-    //   ) : (
-        // <LendingMarketSkeleton />
-    //   )
+      ) : (
+        <LendingMarketSkeleton />
+      )
       }
     </Container>
   )

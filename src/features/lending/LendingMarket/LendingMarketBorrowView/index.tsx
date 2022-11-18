@@ -1,4 +1,4 @@
-// export * from './LendingMarketBorrowButton'
+export * from './LendingMarketBorrowButton'
 // export * from './LendingMarketBorrowLeverageView'
 // export * from './LendingMarketBorrowReviewModal'
 export * from './LendingMarketBorrowView'

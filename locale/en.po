@@ -67,6 +67,9 @@ msgstr "APPROVE"
 msgid "APR"
 msgstr "APR"
 
+msgid "APR (annualized)"
+msgstr "APR (annualized)"
+
 msgid "APY (Annualized)"
 msgstr "APY (Annualized)"
 
@@ -87,6 +90,9 @@ msgstr "Action"
 
 msgid "Actions"
 msgstr "Actions"
+
+msgid "Active"
+msgstr "Active"
 
 msgid "Add"
 msgstr "Add"
@@ -201,6 +207,9 @@ msgstr "Balanced Mode is an optional UI setting to maintain the traditional styl
 
 msgid "Balances"
 msgstr "Balances"
+
+msgid "BentoBox strategy"
+msgstr "BentoBox strategy"
 
 msgid "Bond"
 msgstr "Bond"
@@ -770,6 +779,9 @@ msgstr "Limit"
 msgid "Links"
 msgstr "Links"
 
+msgid "Liquidation Price"
+msgstr "Liquidation Price"
+
 msgid "Liquidity"
 msgstr "Liquidity"
 
@@ -796,6 +808,9 @@ msgstr "Loading your {exchange} liquidity positions"
 
 msgid "Loading..."
 msgstr "Loading..."
+
+msgid "Loan to Value (LTV)"
+msgstr "Loan to Value (LTV)"
 
 msgid "Lock"
 msgstr "Lock"
@@ -868,6 +883,9 @@ msgstr "Net Worth"
 
 msgid "Never"
 msgstr "Never"
+
+msgid "New Liquidation Price"
+msgstr "New Liquidation Price"
 
 msgid "New to Fantom?"
 msgstr "New to Fantom?"
@@ -989,6 +1007,9 @@ msgstr "Pool Tokens"
 
 msgid "Portfolio"
 msgstr "Portfolio"
+
+msgid "Position Health"
+msgstr "Position Health"
 
 msgid "Positions"
 msgstr "Positions"
@@ -1225,6 +1246,9 @@ msgstr "Staked Balance"
 msgid "Status"
 msgstr "Status"
 
+msgid "Strategy APY"
+msgstr "Strategy APY"
+
 msgid "Stream"
 msgstr "Stream"
 
@@ -1364,6 +1388,12 @@ msgstr "Total Locked: Connect Wallet"
 msgid "Total Value"
 msgstr "Total Value"
 
+msgid "Total borrowed"
+msgstr "Total borrowed"
+
+msgid "Total collateral"
+msgstr "Total collateral"
+
 msgid "Total in CoffinBox"
 msgstr "Total in CoffinBox"
 
@@ -1415,8 +1445,14 @@ msgstr "UNWRAP"
 msgid "Underworld Assets"
 msgstr "Underworld Assets"
 
+msgid "Underworld Borrowing Positions"
+msgstr "Underworld Borrowing Positions"
+
 msgid "Underworld Collateral"
 msgstr "Underworld Collateral"
+
+msgid "Underworld Lending Positions"
+msgstr "Underworld Lending Positions"
 
 msgid "Unknown Source"
 msgstr "Unknown Source"
@@ -1459,6 +1495,9 @@ msgstr "Use the toggle to switch between balances when interacting with our plat
 
 msgid "Utilities"
 msgstr "Utilities"
+
+msgid "Utilization"
+msgstr "Utilization"
 
 msgid "Utilized"
 msgstr "Utilized"
@@ -1519,6 +1558,12 @@ msgstr "Wallet Balances"
 
 msgid "Warmup Period"
 msgstr "Warmup Period"
+
+msgid "When a non-leveraged positions gets liquidated, you lose the collateral but you can keep the borrowed assets"
+msgstr "When a non-leveraged positions gets liquidated, you lose the collateral but you can keep the borrowed assets"
+
+msgid "When the value of your collateral becomes less than the asset you borrow, your position gets liquidated."
+msgstr "When the value of your collateral becomes less than the asset you borrow, your position gets liquidated."
 
 msgid "Why use Balance Mode?"
 msgstr "Why use Balance Mode?"
@@ -1633,6 +1678,9 @@ msgstr "for deliberations on additional points."
 
 msgid "forum discussion"
 msgstr "forum discussion"
+
+msgid "health"
+msgstr "health"
 
 msgid "loading..."
 msgstr "loading..."

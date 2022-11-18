@@ -39,7 +39,7 @@ const LendingPage: FC = () => {
             </>
           )}
 
-          {/* <Link href="/kashi/create" passHref={true}>
+          {/* <Link href="/lending/create" passHref={true}>
             <Button id="btn-create-new-pool" size="sm">
               {i18n._(t`Create Market`)}
             </Button>

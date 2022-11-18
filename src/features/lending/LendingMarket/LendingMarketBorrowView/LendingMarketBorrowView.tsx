@@ -4,9 +4,9 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { CurrencyAmount, Fraction, JSBI, maximum, minimum, ZERO } from 'sdk'
 import {
-//   LendingMarketBorrowButton,
+  LendingMarketBorrowButton,
 //   LendingMarketBorrowLeverageView,
-//   LendingMarketDetailsView,
+  LendingMarketDetailsView,
   LendingMarketView,
 } from 'features/lending/LendingMarket'
 import { useLendingMarket } from 'features/lending/LendingMarket/LendingMarketContext'
@@ -192,7 +192,7 @@ export const LendingMarketBorrowView: FC<LendingMarketBorrowView> = () => {
           afterChange={(val) => onMultiply(val, true)}
           trade={trade}
         />
-      )}
+      )} */}
       <LendingMarketDetailsView
         trade={trade}
         priceImpact={leverage ? priceImpact : undefined}
@@ -212,7 +212,7 @@ export const LendingMarketBorrowView: FC<LendingMarketBorrowView> = () => {
         nextMaxBorrowMinimum={nextMaxBorrowMinimum}
         nextMaxBorrowSafe={nextMaxBorrowSafe}
         nextMaxBorrowPossible={nextMaxBorrowPossible}
-      /> */}
+      />
     </div>
   )
 }
