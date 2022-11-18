@@ -8,7 +8,7 @@ import { Trade as LegacyTrade } from 'sdk'
 import QuestionHelper from 'components/QuestionHelper'
 import Tooltip from 'components/Tooltip'
 import Typography from 'components/Typography'
-import { LendingMarketView, useLendingMarket, useLiquidationPrice } from 'features/lending/LendingMarket'
+import { MarketView, useMarket, useLiquidationPrice } from 'features/lending/Market'
 import { classNames, formatPercent, unwrappedToken } from 'functions'
 import { useCoffinStrategies } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
@@ -16,16 +16,16 @@ import { useAppSelector } from 'state/hooks'
 import { selectSlippage } from 'state/slippage/slippageSlice'
 import React, { FC, Fragment, useState } from 'react'
 
-interface LendingMarketDetailsView {
+interface MarketDetailsView {
   collateralAmount?: CurrencyAmount<Currency>
   borrowAmount?: CurrencyAmount<Currency>
   priceImpact?: Percent
   multiplier?: Fraction
-  view: LendingMarketView
+  view: MarketView
   trade?: LegacyTrade<Currency, Currency, TradeType.EXACT_INPUT> | null
 }
 
-export const LendingMarketDetailsContentView: FC<LendingMarketDetailsView> = ({
+export const MarketDetailsContentView: FC<MarketDetailsView> = ({
   trade,
   priceImpact,
   collateralAmount,
@@ -35,7 +35,7 @@ export const LendingMarketDetailsContentView: FC<LendingMarketDetailsView> = ({
 }) => {
   const { chainId } = useActiveWeb3React()
   const { i18n } = useLingui()
-  const { market } = useLendingMarket()
+  const { market } = useMarket()
   const strategies = useCoffinStrategies({
     chainId,
     variables: { where: { token: market.collateral.token.address.toLowerCase() } },
@@ -54,16 +54,16 @@ export const LendingMarketDetailsContentView: FC<LendingMarketDetailsView> = ({
   )
 
   const extraCollateral =
-    view === LendingMarketView.BORROW && multiplier && trade
+    view === MarketView.BORROW && multiplier && trade
       ? trade.minimumAmountOut(allowedSlippage)
       : CurrencyAmount.fromRawAmount(unwrappedToken(market.collateral.token), JSBI.BigInt(0))
 
   const nextCollateralAmount = collateralAmount
-    ? userCollateralAmount[view === LendingMarketView.BORROW ? 'add' : 'subtract'](collateralAmount.add(extraCollateral))
+    ? userCollateralAmount[view === MarketView.BORROW ? 'add' : 'subtract'](collateralAmount.add(extraCollateral))
     : CurrencyAmount.fromRawAmount(market.collateral.token, market.userCollateralAmount)
 
   const nextBorrowAmount = borrowAmount
-    ? currentUserBorrowAmount[view === LendingMarketView.BORROW ? 'add' : 'subtract'](borrowAmount)
+    ? currentUserBorrowAmount[view === MarketView.BORROW ? 'add' : 'subtract'](borrowAmount)
     : CurrencyAmount.fromRawAmount(market.asset.token, market.currentUserBorrowAmount)
 
   return (
@@ -203,7 +203,7 @@ export const LendingMarketDetailsContentView: FC<LendingMarketDetailsView> = ({
   )
 }
 
-export const LendingMarketDetailsView: FC<LendingMarketDetailsView> = ({
+export const MarketDetailsView: FC<MarketDetailsView> = ({
   priceImpact,
   collateralAmount,
   borrowAmount,
@@ -219,7 +219,7 @@ export const LendingMarketDetailsView: FC<LendingMarketDetailsView> = ({
     borrowAmount,
     collateralAmount,
     trade,
-    reduce: view === LendingMarketView.REPAY,
+    reduce: view === MarketView.REPAY,
   })
 
   return (
@@ -250,7 +250,7 @@ export const LendingMarketDetailsView: FC<LendingMarketDetailsView> = ({
                     </div>
                   }
                 />
-                {view === LendingMarketView.BORROW ? i18n._(t`Liquidation Price`) : i18n._(t`New Liquidation Price`)}
+                {view === MarketView.BORROW ? i18n._(t`Liquidation Price`) : i18n._(t`New Liquidation Price`)}
               </Typography>
               {liquidationPrice && (
                 <Typography
@@ -281,7 +281,7 @@ export const LendingMarketDetailsView: FC<LendingMarketDetailsView> = ({
             unmount={false}
           >
             <Disclosure.Panel static className="px-1 pt-2">
-              <LendingMarketDetailsContentView
+              <MarketDetailsContentView
                 trade={trade}
                 priceImpact={priceImpact}
                 collateralAmount={collateralAmount}

@@ -13,10 +13,10 @@ import React, { FC, memo, useMemo, useState } from 'react'
 
 import { LTV } from './constants'
 
-interface UnderworldLendingListItem {
+interface MarketListItem {
   market: LendingMediumRiskLendingPair
 }
-const UnderworldLendingListItem: FC<UnderworldLendingListItem> = ({ market }) => {
+const MarketListItem: FC<MarketListItem> = ({ market }) => {
   const { i18n } = useLingui()
   const router = useRouter()
   const [invert, setInvert] = useState(false)
@@ -131,4 +131,4 @@ const UnderworldLendingListItem: FC<UnderworldLendingListItem> = ({ market }) =>
   )
 }
 
-export default memo(UnderworldLendingListItem)
+export default memo(MarketListItem)

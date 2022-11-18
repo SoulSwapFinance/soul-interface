@@ -23,7 +23,7 @@ import { selectSlippage } from 'state/slippage/slippageSlice'
 import { useTransactionAdder } from 'state/transactions/hooks'
 import { useCallback } from 'react'
 
-import { useLendingMarket } from '..'
+import { useMarket } from '..'
 
 export interface BorrowExecutePayload {
   permit?: Signature
@@ -43,7 +43,7 @@ export const useBorrowExecute: UseBorrowExecute = () => {
   const masterContract = chainId && UNDERWORLD_ADDRESS[chainId]
   const addTransaction = useTransactionAdder()
   const allowedSlippage = useAppSelector(selectSlippage)
-  const { market } = useLendingMarket()
+  const { market } = useMarket()
 
   return useCallback(
     async ({ trade, permit, collateralAmount, borrowAmount, leveraged, spendFromWallet, receiveInWallet }) => {

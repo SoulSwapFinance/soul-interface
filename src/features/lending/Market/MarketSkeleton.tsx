@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-export const LendingMarketSkeleton: FC = () => {
+export const MarketSkeleton: FC = () => {
   return (
     <div className="flex flex-col gap-3 p-2 md:p-4 pt-4 rounded-[24px] bg-dark-800 shadow-md shadow-dark-1000">
       <div className="grid grid-cols-3 gap-2 h-[42px] rounded-full">

@@ -1,6 +1,6 @@
 import { Currency, CurrencyAmount, Price, Trade as LegacyTrade, TradeType, ZERO } from 'sdk'
 import { LTV } from 'features/lending/constants'
-import { useLendingMarket } from 'features/lending/LendingMarket'
+import { useMarket } from 'features/lending/Market'
 import { unwrappedToken } from 'functions'
 import { useUSDCPrice } from 'hooks'
 import { useAppSelector } from 'state/hooks'
@@ -17,7 +17,7 @@ interface Payload {
 type UseLiquidationPrice = (x: Payload) => string
 
 export const useLiquidationPrice: UseLiquidationPrice = ({ borrowAmount, collateralAmount, invert, trade, reduce }) => {
-  const { market } = useLendingMarket()
+  const { market } = useMarket()
   const currentCollateralAmount = CurrencyAmount.fromRawAmount(
     unwrappedToken(market.collateral.token),
     market.userCollateralAmount

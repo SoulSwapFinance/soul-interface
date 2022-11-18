@@ -2,18 +2,19 @@
 import { createContext, FC, useContext, useMemo } from 'react'
 import LendingMediumRiskLendingPair from 'features/lending/LendingMediumRiskLendingPair'
 
-interface LendingMarketContext {
+interface MarketContext {
   market: LendingMediumRiskLendingPair
 }
 
-const Context = createContext<LendingMarketContext | undefined>(undefined)
-export const LendingMarketProvider: FC<LendingMarketContext> = ({ market }) => { // children
+const Context = createContext<MarketContext | undefined>(undefined)
+// @ts-ignore
+export const MarketProvider: FC<MarketContext> = ({ market, children }) => { // 
   return <Context.Provider value={useMemo(() => ({ market }), [market])}>
-    {/* {children} */}
+    {children}
     </Context.Provider>
 }
 
-export const useLendingMarket = () => {
+export const useMarket = () => {
   const context = useContext(Context)
   if (!context) {
     throw new Error('Hook can only be used inside Lending Market Context')

@@ -7,10 +7,10 @@ import Typography from 'components/Typography'
 import { Warning, Warnings } from 'entities/Warnings'
 import {
   BorrowExecutePayload,
-//   LendingMarketBorrowReviewModal,
-  LendingMarketView,
-  useLendingMarket,
-} from 'features/lending/LendingMarket'
+//   MarketBorrowReviewModal,
+  MarketView,
+  useMarket,
+} from 'features/lending/Market'
 import TridentApproveGate from 'features/trident/TridentApproveGate'
 import { unwrappedToken } from 'functions'
 import { useCoffinBoxContract } from 'hooks'
@@ -19,15 +19,15 @@ import { useActiveWeb3React } from 'services/web3'
 import React, { FC, ReactNode, useState } from 'react'
 import { useCurrency } from 'hooks/Tokens'
 
-export interface LendingMarketBorrowButtonProps extends Omit<BorrowExecutePayload, 'permit' | 'trade'> {
-  view: LendingMarketView
+export interface MarketBorrowButtonProps extends Omit<BorrowExecutePayload, 'permit' | 'trade'> {
+  view: MarketView
   priceImpact?: Percent
   nextMaxBorrowMinimum: JSBI
   nextMaxBorrowSafe: JSBI
   nextMaxBorrowPossible: JSBI
 }
 
-export const LendingMarketBorrowButton: FC<LendingMarketBorrowButtonProps> = ({
+export const MarketBorrowButton: FC<MarketBorrowButtonProps> = ({
   receiveInWallet,
   leveraged,
   borrowAmount,
@@ -41,7 +41,7 @@ export const LendingMarketBorrowButton: FC<LendingMarketBorrowButtonProps> = ({
 }) => {
   const { account } = useActiveWeb3React()
   const { i18n } = useLingui()
-  const { market } = useLendingMarket()
+  const { market } = useMarket()
   const { chainId } = useActiveWeb3React()
   const balance = useCoffinOrWalletBalance(
     chainId,
@@ -159,7 +159,7 @@ export const LendingMarketBorrowButton: FC<LendingMarketBorrowButtonProps> = ({
           )
         }}
       </TridentApproveGate>
-      {/* <LendingMarketBorrowReviewModal
+      {/* <MarketBorrowReviewModal
         open={open}
         permit={permit}
         onDismiss={() => setOpen(false)}

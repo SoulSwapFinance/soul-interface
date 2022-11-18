@@ -3,7 +3,7 @@
 import { CurrencyAmount, Percent } from 'sdk'
 import { CurrencyLogoArray } from 'components/CurrencyLogo'
 import Typography from 'components/Typography'
-// import { LendingMarketActions } from 'features/lending/LendingMarket'
+// import { MarketActions } from 'features/lending/Market'
 import { TABLE_TBODY_TD_CLASSNAME, TABLE_TBODY_TR_CLASSNAME } from 'features/trident/constants'
 import { classNames, formatNumber, formatPercent } from 'functions'
 import Link from 'next/link'
@@ -11,12 +11,12 @@ import React, { FC, memo, useMemo } from 'react'
 
 import LendingMediumRiskLendingPair from './LendingMediumRiskLendingPair'
 
-interface LendingMarketListItem {
+interface MarketListItem {
   market: LendingMediumRiskLendingPair
   // i18n: I18n
 }
 
-const LendingMarketListItem: FC<LendingMarketListItem> = memo(({ market }) => {
+const MarketListItem: FC<MarketListItem> = memo(({ market }) => {
   const asset = market.asset.token
   const collateral = market.collateral.token
 
@@ -100,11 +100,11 @@ const LendingMarketListItem: FC<LendingMarketListItem> = memo(({ market }) => {
           </Typography>
         </div>
         <div className={classNames('flex flex-col !items-end', TABLE_TBODY_TD_CLASSNAME(6, 7))}>
-          {/* <LendingMarketActions market={market} /> */}
+          {/* <MarketActions market={market} /> */}
         </div>
       </div>
     </Link>
   )
 })
 
-export default memo(LendingMarketListItem)
+export default memo(MarketListItem)

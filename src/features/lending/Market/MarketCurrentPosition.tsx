@@ -4,21 +4,21 @@ import { CurrencyAmount, Percent } from '@sushiswap/core-sdk'
 import GradientDot from 'components/GradientDot'
 import QuestionHelper from 'components/QuestionHelper'
 import Typography from 'components/Typography'
-import { useLendingMarket } from 'features/lending/LendingMarket/LendingMarketContext'
+import { useMarket } from 'features/lending/Market/MarketContext'
 import { classNames, unwrappedToken } from 'functions'
 import React, { FC } from 'react'
 
-interface LendingMarketCurrentPosition {
+interface MarketCurrentPosition {
   setCollateralAmount?(x: string): void
   setBorrowAmount?(x: string): void
 }
 
-export const LendingMarketCurrentPosition: FC<LendingMarketCurrentPosition> = ({
+export const MarketCurrentPosition: FC<MarketCurrentPosition> = ({
   setCollateralAmount,
   setBorrowAmount,
 }) => {
   const { i18n } = useLingui()
-  const { market } = useLendingMarket()
+  const { market } = useMarket()
 
   const currentCollateral = CurrencyAmount.fromRawAmount(
     unwrappedToken(market.collateral.token),

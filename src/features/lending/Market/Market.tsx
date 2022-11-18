@@ -4,29 +4,29 @@ import QuestionHelper from 'components/QuestionHelper'
 import ToggleButtonGroup from 'components/ToggleButton'
 import Typography from 'components/Typography'
 import {
-  LendingMarketBorrowView,
-//   LendingMarketDepositView,
-//   LendingMarketRepayView,
-//   LendingMarketWithdrawView,
-} from 'features/lending/LendingMarket'
+  MarketBorrowView,
+//   MarketDepositView,
+//   MarketRepayView,
+//   MarketWithdrawView,
+} from 'features/lending/Market'
 import { SwapLayoutCard } from 'layouts/SwapLayout'
 import { useRouter } from 'next/router'
 import React, { FC, useState } from 'react'
 
-interface LendingMarketProps {}
+interface MarketProps {}
 
-export enum LendingMarketView {
+export enum MarketView {
   DEPOSIT = 'deposit',
   WITHDRAW = 'withdraw',
   BORROW = 'borrow',
   REPAY = 'repay',
 }
 
-export const LendingMarket: FC<LendingMarketProps> = () => {
+export const Market: FC<MarketProps> = () => {
   const { i18n } = useLingui()
   const router = useRouter()
 
-  const [view, setView] = useState((router.query.view as string) || LendingMarketView.BORROW)
+  const [view, setView] = useState((router.query.view as string) || MarketView.BORROW)
 
   return (
     <SwapLayoutCard>
@@ -38,7 +38,7 @@ export const LendingMarket: FC<LendingMarketProps> = () => {
           variant="filled"
           className="flex flex-grow bg-dark-800"
         >
-          <ToggleButtonGroup.Button value={LendingMarketView.BORROW}>
+          <ToggleButtonGroup.Button value={MarketView.BORROW}>
             {i18n._(t`Borrow`)}
             <QuestionHelper
             //   gap={false}
@@ -54,8 +54,8 @@ export const LendingMarket: FC<LendingMarketProps> = () => {
               }
             />
           </ToggleButtonGroup.Button>
-          <ToggleButtonGroup.Button value={LendingMarketView.REPAY}>{i18n._(t`Repay`)}</ToggleButtonGroup.Button>
-          <ToggleButtonGroup.Button value={LendingMarketView.DEPOSIT}>
+          <ToggleButtonGroup.Button value={MarketView.REPAY}>{i18n._(t`Repay`)}</ToggleButtonGroup.Button>
+          <ToggleButtonGroup.Button value={MarketView.DEPOSIT}>
             {i18n._(t`Deposit`)}
             <QuestionHelper
             //   gap={false}
@@ -71,12 +71,12 @@ export const LendingMarket: FC<LendingMarketProps> = () => {
               }
             />
           </ToggleButtonGroup.Button>
-          <ToggleButtonGroup.Button value={LendingMarketView.WITHDRAW}>{i18n._(t`Withdraw`)}</ToggleButtonGroup.Button>
+          <ToggleButtonGroup.Button value={MarketView.WITHDRAW}>{i18n._(t`Withdraw`)}</ToggleButtonGroup.Button>
         </ToggleButtonGroup>
-        {view === LendingMarketView.BORROW && <LendingMarketBorrowView />}
-        {/* {view === LendingMarketView.REPAY && <LendingMarketRepayView />}
-        {view === LendingMarketView.DEPOSIT && <LendingMarketDepositView />}
-        {view === LendingMarketView.WITHDRAW && <LendingMarketWithdrawView />} */}
+        {view === MarketView.BORROW && <MarketBorrowView />}
+        {/* {view === MarketView.REPAY && <MarketRepayView />}
+        {view === MarketView.DEPOSIT && <MarketDepositView />}
+        {view === MarketView.WITHDRAW && <MarketWithdrawView />} */}
       </div>
     </SwapLayoutCard>
   )

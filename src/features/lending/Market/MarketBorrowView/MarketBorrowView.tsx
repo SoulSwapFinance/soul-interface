@@ -4,13 +4,13 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { CurrencyAmount, Fraction, JSBI, maximum, minimum, ZERO } from 'sdk'
 import {
-  LendingMarketBorrowButton,
-//   LendingMarketBorrowLeverageView,
-  LendingMarketDetailsView,
-  LendingMarketView,
-} from 'features/lending/LendingMarket'
-import { useLendingMarket } from 'features/lending/LendingMarket/LendingMarketContext'
-import { LendingMarketCurrentPosition } from 'features/lending/LendingMarket/LendingMarketCurrentPosition'
+  MarketBorrowButton,
+//   MarketBorrowLeverageView,
+  MarketDetailsView,
+  MarketView,
+} from 'features/lending/Market'
+import { useMarket } from 'features/lending/Market/MarketContext'
+import { MarketCurrentPosition } from 'features/lending/Market/MarketCurrentPosition'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 import { computeRealizedLPFeePercent, tryParseAmount, unwrappedToken } from 'functions'
 import { useV2TradeExactIn } from 'hooks/useV2Trades'
@@ -19,13 +19,13 @@ import { selectSlippage } from 'state/slippage/slippageSlice'
 import React, { FC, useCallback, useMemo, useRef, useState } from 'react'
 import { useActiveWeb3React } from 'services/web3'
 
-interface LendingMarketBorrowView {}
+interface MarketBorrowView {}
 
 const DEFAULT_UPDATE_ORACLE = true
 
-export const LendingMarketBorrowView: FC<LendingMarketBorrowView> = () => {
+export const MarketBorrowView: FC<MarketBorrowView> = () => {
   const { i18n } = useLingui()
-  const { market } = useLendingMarket()
+  const { market } = useMarket()
   const { chainId } = useActiveWeb3React()
 
   const inputRef = useRef<HTMLInputElement>(null)
@@ -130,7 +130,7 @@ export const LendingMarketBorrowView: FC<LendingMarketBorrowView> = () => {
 
   return (
     <div className="flex flex-col gap-3">
-      <LendingMarketCurrentPosition setBorrowAmount={setBorrowAmount} setCollateralAmount={setCollateralAmount} />
+      <MarketCurrentPosition setBorrowAmount={setBorrowAmount} setCollateralAmount={setCollateralAmount} />
       <SwapAssetPanel
         chainId={chainId}
         error={false}
@@ -183,7 +183,7 @@ export const LendingMarketBorrowView: FC<LendingMarketBorrowView> = () => {
         // balancePanel={() => <></>}
       />
       {/* {collateralAmountCurrencyAmount?.greaterThan(ZERO) && (
-        <LendingMarketBorrowLeverageView
+        <MarketBorrowLeverageView
           borrowAmount={borrowAmountCurrencyAmount}
           collateralAmount={collateralAmountCurrencyAmount}
           enabled={leverage}
@@ -193,22 +193,22 @@ export const LendingMarketBorrowView: FC<LendingMarketBorrowView> = () => {
           trade={trade}
         />
       )} */}
-      <LendingMarketDetailsView
+      <MarketDetailsView
         trade={trade}
         priceImpact={leverage ? priceImpact : undefined}
         borrowAmount={borrowAmountCurrencyAmount}
         collateralAmount={collateralAmountCurrencyAmount}
         multiplier={leverage ? multiplierRef.current : undefined}
-        view={LendingMarketView.BORROW}
+        view={MarketView.BORROW}
       />
-      <LendingMarketBorrowButton
+      <MarketBorrowButton
         priceImpact={leverage ? priceImpact : undefined}
         borrowAmount={borrowAmountCurrencyAmount}
         collateralAmount={collateralAmountCurrencyAmount}
         spendFromWallet={spendFromWallet}
         leveraged={leverage}
         receiveInWallet={receiveInWallet}
-        view={LendingMarketView.BORROW}
+        view={MarketView.BORROW}
         nextMaxBorrowMinimum={nextMaxBorrowMinimum}
         nextMaxBorrowSafe={nextMaxBorrowSafe}
         nextMaxBorrowPossible={nextMaxBorrowPossible}
