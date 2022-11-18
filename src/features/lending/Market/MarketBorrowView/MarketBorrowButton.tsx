@@ -7,7 +7,7 @@ import Typography from 'components/Typography'
 import { Warning, Warnings } from 'entities/Warnings'
 import {
   BorrowExecutePayload,
-//   MarketBorrowReviewModal,
+  MarketBorrowReviewModal,
   MarketView,
   useMarket,
 } from 'features/lending/Market'
@@ -134,7 +134,7 @@ export const MarketBorrowButton: FC<MarketBorrowButtonProps> = ({
         </Typography>
       )}
       <TridentApproveGate
-    //   chainId={chainId}
+        //   chainId={chainId}
         // spendFromWallet={spendFromWallet}
         inputAmounts={[collateralAmount]}
         tokenApproveOn={coffinboxContract?.address}
@@ -159,7 +159,7 @@ export const MarketBorrowButton: FC<MarketBorrowButtonProps> = ({
           )
         }}
       </TridentApproveGate>
-      {/* <MarketBorrowReviewModal
+      <MarketBorrowReviewModal
         open={open}
         permit={permit}
         onDismiss={() => setOpen(false)}
@@ -170,7 +170,7 @@ export const MarketBorrowButton: FC<MarketBorrowButtonProps> = ({
         borrowAmount={borrowAmount}
         view={view}
         priceImpact={priceImpact}
-      /> */}
+      />
     </>
   )
 }

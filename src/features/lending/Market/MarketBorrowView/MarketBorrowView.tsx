@@ -5,7 +5,7 @@ import { useLingui } from '@lingui/react'
 import { CurrencyAmount, Fraction, JSBI, maximum, minimum, ZERO } from 'sdk'
 import {
   MarketBorrowButton,
-//   MarketBorrowLeverageView,
+  MarketBorrowLeverageView,
   MarketDetailsView,
   MarketView,
 } from 'features/lending/Market'
@@ -182,7 +182,7 @@ export const MarketBorrowView: FC<MarketBorrowView> = () => {
         onChange={setBorrowAmount}
         // balancePanel={() => <></>}
       />
-      {/* {collateralAmountCurrencyAmount?.greaterThan(ZERO) && (
+      {collateralAmountCurrencyAmount?.greaterThan(ZERO) && (
         <MarketBorrowLeverageView
           borrowAmount={borrowAmountCurrencyAmount}
           collateralAmount={collateralAmountCurrencyAmount}
@@ -192,7 +192,7 @@ export const MarketBorrowView: FC<MarketBorrowView> = () => {
           afterChange={(val) => onMultiply(val, true)}
           trade={trade}
         />
-      )} */}
+      )}
       <MarketDetailsView
         trade={trade}
         priceImpact={leverage ? priceImpact : undefined}
