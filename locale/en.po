@@ -52,6 +52,9 @@ msgstr "0.055% of each swap goes to burning SOUL."
 msgid "0.25% of each swap goes to liquidity providers."
 msgstr "0.25% of each swap goes to liquidity providers."
 
+msgid "100% means you are at max borrow"
+msgstr "100% means you are at max borrow"
+
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
 msgstr "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
 
@@ -63,6 +66,9 @@ msgstr "APPROVE"
 
 msgid "APR"
 msgstr "APR"
+
+msgid "APR (annualized)"
+msgstr "APR (annualized)"
 
 msgid "APY (Annualized)"
 msgstr "APY (Annualized)"
@@ -81,6 +87,12 @@ msgstr "Accrue"
 
 msgid "Action"
 msgstr "Action"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "Active"
+msgstr "Active"
 
 msgid "Add"
 msgstr "Add"
@@ -102,6 +114,9 @@ msgstr "Add {0} {1} and {2} {3} into {4}/{5}"
 
 msgid "Added"
 msgstr "Added"
+
+msgid "Adding {0} {1} as collateral"
+msgstr "Adding {0} {1} as collateral"
 
 msgid "Additional records and merkle updates can be found on"
 msgstr "Additional records and merkle updates can be found on"
@@ -157,6 +172,9 @@ msgstr "Approving {0}"
 msgid "Approving {contractName} Master Contract"
 msgstr "Approving {contractName} Master Contract"
 
+msgid "Asset / Collateral"
+msgstr "Asset / Collateral"
+
 msgid "Assets"
 msgstr "Assets"
 
@@ -190,6 +208,9 @@ msgstr "Balanced Mode is an optional UI setting to maintain the traditional styl
 msgid "Balances"
 msgstr "Balances"
 
+msgid "BentoBox strategy"
+msgstr "BentoBox strategy"
+
 msgid "Bond"
 msgstr "Bond"
 
@@ -199,8 +220,20 @@ msgstr "Bonds"
 msgid "Borrow"
 msgstr "Borrow"
 
+msgid "Borrow APR"
+msgstr "Borrow APR"
+
+msgid "Borrow Asset"
+msgstr "Borrow Asset"
+
 msgid "Borrow assets and leverage up"
 msgstr "Borrow assets and leverage up"
+
+msgid "Borrow {0} {1}"
+msgstr "Borrow {0} {1}"
+
+msgid "Borrow {0} {1} using {2} {3} as collateral"
+msgstr "Borrow {0} {1} using {2} {3} as collateral"
 
 msgid "Borrow {assetSymbol}-{collateralSymbol}"
 msgstr "Borrow {assetSymbol}-{collateralSymbol}"
@@ -311,6 +344,9 @@ msgstr "CoffinBox Balances"
 msgid "Collateral"
 msgstr "Collateral"
 
+msgid "Collateralized"
+msgstr "Collateralized"
+
 msgid "Come on Over..."
 msgstr "Come on Over..."
 
@@ -410,11 +446,20 @@ msgstr "Deadline"
 msgid "Deposit"
 msgstr "Deposit"
 
+msgid "Deposit Collateral"
+msgstr "Deposit Collateral"
+
 msgid "Deposit SOUL into CoffinBox"
 msgstr "Deposit SOUL into CoffinBox"
 
+msgid "Deposit and Borrow"
+msgstr "Deposit and Borrow"
+
 msgid "Deposit assets in equal amounts"
 msgstr "Deposit assets in equal amounts"
+
+msgid "Deposit from"
+msgstr "Deposit from"
 
 msgid "Deposit liquidity or lent assets. Earn SOUL."
 msgstr "Deposit liquidity or lent assets. Earn SOUL."
@@ -566,6 +611,9 @@ msgstr "French"
 msgid "Frontrun Risk"
 msgstr "Frontrun Risk"
 
+msgid "Gain exposure to tokens without reducing your assets."
+msgstr "Gain exposure to tokens without reducing your assets."
+
 msgid "Gain exposure to tokens without reducing your assets. Leverage will enable you to take short positions against assets and earn from downside movements."
 msgstr "Gain exposure to tokens without reducing your assets. Leverage will enable you to take short positions against assets and earn from downside movements."
 
@@ -589,6 +637,15 @@ msgstr "Harvest Redistribution"
 
 msgid "Harvest {0} SOUL"
 msgstr "Harvest {0} SOUL"
+
+msgid "Have assets you want to earn additional interest on?"
+msgstr "Have assets you want to earn additional interest on?"
+
+msgid "Health"
+msgstr "Health"
+
+msgid "Health of your position defined as your current borrowed amount divided by the max borrow amount given current collateral."
+msgstr "Health of your position defined as your current borrowed amount divided by the max borrow amount given current collateral."
 
 msgid "Historical Total Locked: Connect Wallet"
 msgstr "Historical Total Locked: Connect Wallet"
@@ -637,6 +694,9 @@ msgstr "Input is estimated. You will sell at most"
 
 msgid "Insufficient Balance"
 msgstr "Insufficient Balance"
+
+msgid "Insufficient balance"
+msgstr "Insufficient balance"
 
 msgid "Insufficient balance to cover for fees"
 msgstr "Insufficient balance to cover for fees"
@@ -695,17 +755,32 @@ msgstr "Learn About Wallets"
 msgid "Lend"
 msgstr "Lend"
 
+msgid "Lend and borrow assets in Lending isolated risk markets"
+msgstr "Lend and borrow assets in Lending isolated risk markets"
+
+msgid "Lend them in isolated markets and earn interest from borrowers."
+msgstr "Lend them in isolated markets and earn interest from borrowers."
+
 msgid "Lend your assets, earn yield with ZERO impermanent loss"
 msgstr "Lend your assets, earn yield with ZERO impermanent loss"
 
+msgid "Lending Markets"
+msgstr "Lending Markets"
+
 msgid "Lent"
 msgstr "Lent"
+
+msgid "Leverage will enable you to take long or short positions."
+msgstr "Leverage will enable you to take long or short positions."
 
 msgid "Limit"
 msgstr "Limit"
 
 msgid "Links"
 msgstr "Links"
+
+msgid "Liquidation Price"
+msgstr "Liquidation Price"
 
 msgid "Liquidity"
 msgstr "Liquidity"
@@ -733,6 +808,9 @@ msgstr "Loading your {exchange} liquidity positions"
 
 msgid "Loading..."
 msgstr "Loading..."
+
+msgid "Loan to Value (LTV)"
+msgstr "Loan to Value (LTV)"
 
 msgid "Lock"
 msgstr "Lock"
@@ -794,11 +872,20 @@ msgstr "Minimum Received"
 msgid "Mint SOUL with Liquidity"
 msgstr "Mint SOUL with Liquidity"
 
+msgid "My Borrowing"
+msgstr "My Borrowing"
+
+msgid "My Lending"
+msgstr "My Lending"
+
 msgid "Net Worth"
 msgstr "Net Worth"
 
 msgid "Never"
 msgstr "Never"
+
+msgid "New Liquidation Price"
+msgstr "New Liquidation Price"
 
 msgid "New to Fantom?"
 msgstr "New to Fantom?"
@@ -835,6 +922,9 @@ msgstr "None"
 
 msgid "Not available for legacy route"
 msgstr "Not available for legacy route"
+
+msgid "Not enough {0} available"
+msgstr "Not enough {0} available"
 
 msgid "Number of Assets"
 msgstr "Number of Assets"
@@ -918,6 +1008,9 @@ msgstr "Pool Tokens"
 msgid "Portfolio"
 msgstr "Portfolio"
 
+msgid "Position Health"
+msgstr "Position Health"
+
 msgid "Positions"
 msgstr "Positions"
 
@@ -960,6 +1053,9 @@ msgstr "Read the Documentation."
 
 msgid "Receive"
 msgstr "Receive"
+
+msgid "Receive in"
+msgstr "Receive in"
 
 msgid "Receive to"
 msgstr "Receive to"
@@ -1117,6 +1213,9 @@ msgstr "Slippage Tolerance"
 msgid "Socials"
 msgstr "Socials"
 
+msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve CoffinBox' again for approving using the fallback method"
+msgstr "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve CoffinBox' again for approving using the fallback method"
+
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 
@@ -1147,6 +1246,9 @@ msgstr "Staked Balance"
 msgid "Status"
 msgstr "Status"
 
+msgid "Strategy APY"
+msgstr "Strategy APY"
+
 msgid "Stream"
 msgstr "Stream"
 
@@ -1170,6 +1272,9 @@ msgstr "Summon Souls with Liquidity."
 
 msgid "Supplied"
 msgstr "Supplied"
+
+msgid "Supply APR"
+msgstr "Supply APR"
 
 msgid "Supply Distribution"
 msgstr "Supply Distribution"
@@ -1283,6 +1388,12 @@ msgstr "Total Locked: Connect Wallet"
 msgid "Total Value"
 msgstr "Total Value"
 
+msgid "Total borrowed"
+msgstr "Total borrowed"
+
+msgid "Total collateral"
+msgstr "Total collateral"
+
 msgid "Total in CoffinBox"
 msgstr "Total in CoffinBox"
 
@@ -1334,8 +1445,14 @@ msgstr "UNWRAP"
 msgid "Underworld Assets"
 msgstr "Underworld Assets"
 
+msgid "Underworld Borrowing Positions"
+msgstr "Underworld Borrowing Positions"
+
 msgid "Underworld Collateral"
 msgstr "Underworld Collateral"
+
+msgid "Underworld Lending Positions"
+msgstr "Underworld Lending Positions"
 
 msgid "Unknown Source"
 msgstr "Unknown Source"
@@ -1378,6 +1495,9 @@ msgstr "Use the toggle to switch between balances when interacting with our plat
 
 msgid "Utilities"
 msgstr "Utilities"
+
+msgid "Utilization"
+msgstr "Utilization"
 
 msgid "Utilized"
 msgstr "Utilized"
@@ -1438,6 +1558,12 @@ msgstr "Wallet Balances"
 
 msgid "Warmup Period"
 msgstr "Warmup Period"
+
+msgid "When a non-leveraged positions gets liquidated, you lose the collateral but you can keep the borrowed assets"
+msgstr "When a non-leveraged positions gets liquidated, you lose the collateral but you can keep the borrowed assets"
+
+msgid "When the value of your collateral becomes less than the asset you borrow, your position gets liquidated."
+msgstr "When the value of your collateral becomes less than the asset you borrow, your position gets liquidated."
 
 msgid "Why use Balance Mode?"
 msgstr "Why use Balance Mode?"
@@ -1552,6 +1678,9 @@ msgstr "for deliberations on additional points."
 
 msgid "forum discussion"
 msgstr "forum discussion"
+
+msgid "health"
+msgstr "health"
 
 msgid "loading..."
 msgstr "loading..."

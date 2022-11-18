@@ -26,7 +26,7 @@ const useZapperFarms = () => {
         }), // results[1]
         soulData.utils.getAverageBlockTime(), // results[2]
         soulData.soul.priceUSD(), // results[3]
-        // soulData.coffinbox.kashiStakedInfo(), // results[4]
+        // soulData.coffinbox.lendingStakedInfo(), // results[4]
         soulData.exchange.pairs(), // results[5]
         soulData.summoner.info(), // results[6]
       ]

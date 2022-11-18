@@ -52,6 +52,9 @@ msgstr ""
 msgid "0.25% of each swap goes to liquidity providers."
 msgstr ""
 
+msgid "100% means you are at max borrow"
+msgstr ""
+
 msgid "A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive."
 msgstr ""
 
@@ -62,6 +65,9 @@ msgid "APPROVE"
 msgstr ""
 
 msgid "APR"
+msgstr ""
+
+msgid "APR (annualized)"
 msgstr ""
 
 msgid "APY (Annualized)"
@@ -80,6 +86,12 @@ msgid "Accrue"
 msgstr ""
 
 msgid "Action"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Active"
 msgstr ""
 
 msgid "Add"
@@ -101,6 +113,9 @@ msgid "Add {0} {1} and {2} {3} into {4}/{5}"
 msgstr ""
 
 msgid "Added"
+msgstr ""
+
+msgid "Adding {0} {1} as collateral"
 msgstr ""
 
 msgid "Additional records and merkle updates can be found on"
@@ -157,6 +172,9 @@ msgstr ""
 msgid "Approving {contractName} Master Contract"
 msgstr ""
 
+msgid "Asset / Collateral"
+msgstr ""
+
 msgid "Assets"
 msgstr ""
 
@@ -190,6 +208,9 @@ msgstr ""
 msgid "Balances"
 msgstr ""
 
+msgid "BentoBox strategy"
+msgstr ""
+
 msgid "Bond"
 msgstr ""
 
@@ -199,7 +220,19 @@ msgstr ""
 msgid "Borrow"
 msgstr ""
 
+msgid "Borrow APR"
+msgstr ""
+
+msgid "Borrow Asset"
+msgstr ""
+
 msgid "Borrow assets and leverage up"
+msgstr ""
+
+msgid "Borrow {0} {1}"
+msgstr ""
+
+msgid "Borrow {0} {1} using {2} {3} as collateral"
 msgstr ""
 
 msgid "Borrow {assetSymbol}-{collateralSymbol}"
@@ -306,6 +339,9 @@ msgstr ""
 msgid "Collateral"
 msgstr ""
 
+msgid "Collateralized"
+msgstr ""
+
 msgid "Come on Over..."
 msgstr ""
 
@@ -405,10 +441,19 @@ msgstr ""
 msgid "Deposit"
 msgstr ""
 
+msgid "Deposit Collateral"
+msgstr ""
+
 msgid "Deposit SOUL into CoffinBox"
 msgstr ""
 
+msgid "Deposit and Borrow"
+msgstr ""
+
 msgid "Deposit assets in equal amounts"
+msgstr ""
+
+msgid "Deposit from"
 msgstr ""
 
 msgid "Deposit liquidity or lent assets. Earn SOUL."
@@ -561,6 +606,9 @@ msgstr ""
 msgid "Frontrun Risk"
 msgstr ""
 
+msgid "Gain exposure to tokens without reducing your assets."
+msgstr ""
+
 msgid "Gain exposure to tokens without reducing your assets. Leverage will enable you to take short positions against assets and earn from downside movements."
 msgstr ""
 
@@ -583,6 +631,15 @@ msgid "Harvest Redistribution"
 msgstr ""
 
 msgid "Harvest {0} SOUL"
+msgstr ""
+
+msgid "Have assets you want to earn additional interest on?"
+msgstr ""
+
+msgid "Health"
+msgstr ""
+
+msgid "Health of your position defined as your current borrowed amount divided by the max borrow amount given current collateral."
 msgstr ""
 
 msgid "Historical Total Locked: Connect Wallet"
@@ -631,6 +688,9 @@ msgid "Input is estimated. You will sell at most"
 msgstr ""
 
 msgid "Insufficient Balance"
+msgstr ""
+
+msgid "Insufficient balance"
 msgstr ""
 
 msgid "Insufficient balance to cover for fees"
@@ -690,16 +750,31 @@ msgstr ""
 msgid "Lend"
 msgstr ""
 
+msgid "Lend and borrow assets in Lending isolated risk markets"
+msgstr ""
+
+msgid "Lend them in isolated markets and earn interest from borrowers."
+msgstr ""
+
 msgid "Lend your assets, earn yield with ZERO impermanent loss"
 msgstr ""
 
+msgid "Lending Markets"
+msgstr ""
+
 msgid "Lent"
+msgstr ""
+
+msgid "Leverage will enable you to take long or short positions."
 msgstr ""
 
 msgid "Limit"
 msgstr ""
 
 msgid "Links"
+msgstr ""
+
+msgid "Liquidation Price"
 msgstr ""
 
 msgid "Liquidity"
@@ -727,6 +802,9 @@ msgid "Loading your {exchange} liquidity positions"
 msgstr ""
 
 msgid "Loading..."
+msgstr ""
+
+msgid "Loan to Value (LTV)"
 msgstr ""
 
 msgid "Lock"
@@ -789,10 +867,19 @@ msgstr ""
 msgid "Mint SOUL with Liquidity"
 msgstr ""
 
+msgid "My Borrowing"
+msgstr ""
+
+msgid "My Lending"
+msgstr ""
+
 msgid "Net Worth"
 msgstr ""
 
 msgid "Never"
+msgstr ""
+
+msgid "New Liquidation Price"
 msgstr ""
 
 msgid "New to Fantom?"
@@ -829,6 +916,9 @@ msgid "None"
 msgstr ""
 
 msgid "Not available for legacy route"
+msgstr ""
+
+msgid "Not enough {0} available"
 msgstr ""
 
 msgid "Number of Assets"
@@ -911,6 +1001,9 @@ msgstr ""
 msgid "Portfolio"
 msgstr ""
 
+msgid "Position Health"
+msgstr ""
+
 msgid "Positions"
 msgstr ""
 
@@ -950,6 +1043,9 @@ msgid "Read the Documentation."
 msgstr ""
 
 msgid "Receive"
+msgstr ""
+
+msgid "Receive in"
 msgstr ""
 
 msgid "Receive to"
@@ -1108,6 +1204,9 @@ msgstr ""
 msgid "Socials"
 msgstr ""
 
+msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve CoffinBox' again for approving using the fallback method"
+msgstr ""
+
 msgid "Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click again and the fallback method will be used"
 msgstr ""
 
@@ -1138,6 +1237,9 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
+msgid "Strategy APY"
+msgstr ""
+
 msgid "Stream"
 msgstr ""
 
@@ -1160,6 +1262,9 @@ msgid "Summon Souls with Liquidity."
 msgstr ""
 
 msgid "Supplied"
+msgstr ""
+
+msgid "Supply APR"
 msgstr ""
 
 msgid "Supply Distribution"
@@ -1272,6 +1377,12 @@ msgstr ""
 msgid "Total Value"
 msgstr ""
 
+msgid "Total borrowed"
+msgstr ""
+
+msgid "Total collateral"
+msgstr ""
+
 msgid "Total in CoffinBox"
 msgstr ""
 
@@ -1323,7 +1434,13 @@ msgstr ""
 msgid "Underworld Assets"
 msgstr ""
 
+msgid "Underworld Borrowing Positions"
+msgstr ""
+
 msgid "Underworld Collateral"
+msgstr ""
+
+msgid "Underworld Lending Positions"
 msgstr ""
 
 msgid "Unknown Source"
@@ -1366,6 +1483,9 @@ msgid "Use the toggle to switch between balances when interacting with our platf
 msgstr ""
 
 msgid "Utilities"
+msgstr ""
+
+msgid "Utilization"
 msgstr ""
 
 msgid "Utilized"
@@ -1426,6 +1546,12 @@ msgid "Wallet Balances"
 msgstr ""
 
 msgid "Warmup Period"
+msgstr ""
+
+msgid "When a non-leveraged positions gets liquidated, you lose the collateral but you can keep the borrowed assets"
+msgstr ""
+
+msgid "When the value of your collateral becomes less than the asset you borrow, your position gets liquidated."
 msgstr ""
 
 msgid "Why use Balance Mode?"
@@ -1540,6 +1666,9 @@ msgid "for deliberations on additional points."
 msgstr ""
 
 msgid "forum discussion"
+msgstr ""
+
+msgid "health"
 msgstr ""
 
 msgid "loading..."

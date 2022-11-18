@@ -1347,7 +1347,7 @@ export default function XSwap({
 //                                 onSuccess={createNotification}
 //                                 components={
 //                                   <Approve.Components>
-//                                     <Approve.Bentobox
+//                                     <Approve.CoffinBox
 //                                       size="md"
 //                                       className="whitespace-nowrap"
 //                                       fullWidth

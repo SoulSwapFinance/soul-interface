@@ -2,8 +2,8 @@ import { defaultAbiCoder } from '@ethersproject/abi'
 import { getAddress } from '@ethersproject/address'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Zero } from '@ethersproject/constants'
-import { ChainId, UNDERWORLD_ADDRESS, NATIVE, Token, USD, WNATIVE_ADDRESS, USDC } from 'sdk'
-import { CHAINLINK_PRICE_FEED_MAP } from 'config/oracles/chainlink'
+import { ChainId, UNDERWORLD_ADDRESS, NATIVE, Token, USD, WNATIVE_ADDRESS, USDC, JSBI, ZERO } from 'sdk'
+import { ChainlinkPriceFeedEntry, CHAINLINK_PRICE_FEED_MAP } from 'config/oracles/chainlink'
 import { Fraction } from 'entities'
 import { Feature } from 'enums'
 import {
@@ -31,6 +31,10 @@ import { useSingleCallResult } from 'state/multicall/hooks'
 import { useUnderworldPairInfo } from 'hooks/useAPI'
 import { useMemo } from 'react'
 import { DAI } from 'constants/tokens'
+import { ZERO_ADDRESS } from 'constants/index'
+import { LendingMediumRiskLendingPair } from './LendingMediumRiskLendingPair'
+import useCoffinRebases from 'hooks/useCoffinRebases'
+import { useUSDCPricesSubgraph } from 'hooks/useUSDCSubgraph'
 
 const BLACKLISTED_TOKENS = ['0xC6d54D2f624bc83815b49d9c2203b1330B841cA0']
 
@@ -394,4 +398,127 @@ export function useUnderworldPairsForAccount(account: string | null | undefined,
 
 export function useUnderworldPair(address: string) {
   return useUnderworldPairs([getAddress(address)])[0]
+}
+
+//  NEW BELOW //
+
+// Reduce all tokens down to only those which are found in the Oracle mapping
+export function useLendingTokens(): { [address: string]: Token } {
+  const { chainId } = useActiveWeb3React()
+  const allTokens = useTokens()
+  return useMemo(
+    () =>
+      Object.values(allTokens).reduce((previousValue: Record<string, Token>, currentValue: Token) => {
+        if (
+          chainId &&
+          CHAINLINK_PRICE_FEED_MAP?.[chainId] &&
+          Object.values(CHAINLINK_PRICE_FEED_MAP?.[chainId])?.some((value: ChainlinkPriceFeedEntry) => {
+            return currentValue.address === value.from || currentValue.address === value.to
+          })
+        ) {
+          previousValue[currentValue.address] = currentValue
+        }
+        return previousValue
+      }, {}),
+    [allTokens, chainId]
+  )
+}
+
+export const useLendingMediumRiskLendingPositions = (account: string): LendingMediumRiskLendingPair[] => {
+  const addresses = useUnderworldPairAddresses()
+  const markets = useLendingMediumRiskLendingPairs(account, addresses)
+  return markets.filter((pair: LendingMediumRiskLendingPair) => JSBI.greaterThan(pair.userAssetFraction, ZERO))
+}
+
+export const useLendingMediumRiskBorrowingPositions = (account: string): LendingMediumRiskLendingPair[] => {
+  const addresses = useUnderworldPairAddresses()
+  const markets = useLendingMediumRiskLendingPairs(account, addresses)
+  return markets.filter(
+    (pair: LendingMediumRiskLendingPair) =>
+      JSBI.greaterThan(pair.userCollateralShare, ZERO) || JSBI.greaterThan(pair.userBorrowPart, ZERO)
+  )
+}
+
+
+export function useLendingMediumRiskLendingPairs(
+  account: string | null | undefined,
+  addresses: string[] = []
+): LendingMediumRiskLendingPair[] {
+  const { chainId } = useActiveWeb3React()
+  const boringHelperContract = useBoringHelperContract()
+  const tokens = useLendingTokens()
+  const args = useMemo(() => [account ? account : ZERO_ADDRESS, addresses], [account, addresses])
+  const { result, valid, loading, syncing, error } = useSingleCallResult(boringHelperContract, 'pollKashiPairs', args, 
+  // { gasRequired: 20_000_000, }
+    )
+
+  const { rebases } = useCoffinRebases(useMemo(() => Object.values(tokens), [tokens]))
+  const prices = useUSDCPricesSubgraph(Object.values(tokens))
+  // TODO: for skeleton loading
+  // const lendingRepositoryContract = useLendingRepositoryContract()
+  // const callStates = useSingleContractMultipleData(lendingRepositoryContract, 'getPair', args, NEVER_RELOAD)
+
+  return useMemo(() => {
+    if (!chainId || !result || !rebases || !prices) return []
+
+    return result?.[0].reduce((acc: LendingMediumRiskLendingPair[], pair: any
+      // BoringHelperLendingPair)
+      ) => {
+      if (
+        BLACKLISTED_TOKENS.includes(pair.collateral) ||
+        BLACKLISTED_TOKENS.includes(pair.asset) ||
+        BLACKLISTED_ORACLES.includes(pair.oracle) ||
+        !rebases[pair.collateral] ||
+        // @ts-ignore
+        !rebases[pair.collateral]?.token ||
+        !rebases[pair.asset]
+        // @ts-ignore
+        || !rebases[pair.asset]?.token
+      ) {
+        return acc
+      }
+
+      acc.push(
+        new LendingMediumRiskLendingPair({
+          accrueInfo: {
+            feesEarnedFraction: JSBI.BigInt(pair.accrueInfo.feesEarnedFraction.toString()),
+            lastAccrued: JSBI.BigInt(pair.accrueInfo.lastAccrued),
+            interestPerSecond: JSBI.BigInt(pair.accrueInfo.interestPerSecond.toString()),
+          },
+          // @ts-ignore
+          collateral: rebases[pair.collateral],
+          // @ts-ignore
+          asset: rebases[pair.asset],
+          collateralPrice: prices[pair.collateral],
+          assetPrice: prices[pair.asset],
+          // @ts-ignore
+          oracle: getOracle(chainId, pair.oracle, pair.oracleData),
+          totalCollateralShare: JSBI.BigInt(pair.totalCollateralShare.toString()),
+          totalAsset: {
+            elastic: JSBI.BigInt(pair.totalAsset.elastic.toString()),
+            base: JSBI.BigInt(pair.totalAsset.base.toString()),
+          },
+          totalBorrow: {
+            elastic: JSBI.BigInt(pair.totalBorrow.elastic.toString()),
+            base: JSBI.BigInt(pair.totalBorrow.base.toString()),
+          },
+          exchangeRate: JSBI.BigInt(pair.currentExchangeRate.toString()),
+          oracleExchangeRate: JSBI.BigInt(pair.oracleExchangeRate.toString()),
+          spotExchangeRate: JSBI.BigInt(pair.spotExchangeRate.toString()),
+          userCollateralShare: JSBI.BigInt(pair.userCollateralShare.toString()),
+          userAssetFraction: JSBI.BigInt(pair.userAssetFraction.toString()),
+          userBorrowPart: JSBI.BigInt(pair.userBorrowPart.toString()),
+        })
+      )
+
+      return acc
+    }, [])
+  }, [chainId, prices, rebases, result])
+}
+
+export function useLendingMediumRiskLendingPair(
+  account: string | null | undefined,
+  address: string
+): LendingMediumRiskLendingPair {
+  return useLendingMediumRiskLendingPairs(account, [getAddress(address)])[0]
 }
