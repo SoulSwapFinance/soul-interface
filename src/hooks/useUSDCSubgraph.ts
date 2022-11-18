@@ -16,13 +16,13 @@ export function useUSDCPricesSubgraph(
 
   const stablecoin = chainId && USD[chainId] ? CurrencyAmount.fromRawAmount(USD[chainId], 0).currency : undefined
 
-  const { data: ethPrice } = useNativePrice({ chainId })
+  const { ethPrice } = useNativePrice({ chainId })
   const tokensLegacy = useTokens({
     chainId,
     variables: { where: { id_in: currencies?.map((currency) => currency.wrapped.address.toLowerCase()) } },
     shouldFetch: currencies && currencies?.length > 0,
   }) as any[] | undefined
-//   const { data: tokensTrident } = useTridentTokens({
+//   const { tokensTrident } = useTridentTokens({
 //     chainId,
 //     variables: {
 //       where: { id_in: currencies?.map((currency) => currency.wrapped.address.toLowerCase()) },
