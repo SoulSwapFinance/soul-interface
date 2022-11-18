@@ -1,15 +1,16 @@
 
-import LendingMediumRiskLendingPair from 'features/lending/LendingMediumRiskLendingPair'
 import { createContext, FC, useContext, useMemo } from 'react'
+import LendingMediumRiskLendingPair from 'features/lending/LendingMediumRiskLendingPair'
 
 interface LendingMarketContext {
   market: LendingMediumRiskLendingPair
 }
 
 const Context = createContext<LendingMarketContext | undefined>(undefined)
-// @ts-ignore
-export const LendingMarketProvider: FC<LendingMarketContext> = ({ market, children }) => {
-  return <Context.Provider value={useMemo(() => ({ market }), [market])}>{children}</Context.Provider>
+export const LendingMarketProvider: FC<LendingMarketContext> = ({ market }) => { // children
+  return <Context.Provider value={useMemo(() => ({ market }), [market])}>
+    {/* {children} */}
+    </Context.Provider>
 }
 
 export const useLendingMarket = () => {

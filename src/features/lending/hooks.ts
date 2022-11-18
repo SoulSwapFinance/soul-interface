@@ -469,9 +469,11 @@ export function useLendingMediumRiskLendingPairs(
         BLACKLISTED_TOKENS.includes(pair.asset) ||
         BLACKLISTED_ORACLES.includes(pair.oracle) ||
         !rebases[pair.collateral] ||
-        // !rebases[pair.collateral]?.token ||
+        // @ts-ignore
+        !rebases[pair.collateral]?.token ||
         !rebases[pair.asset]
-        // || !rebases[pair.asset]?.token
+        // @ts-ignore
+        || !rebases[pair.asset]?.token
       ) {
         return acc
       }

@@ -396,7 +396,7 @@ export const computeUnderworldPairAddress = ({
       [
         defaultAbiCoder?.encode(
           ['address', 'address', 'address', 'bytes'],
-          [collateral?.address, asset?.address, oracle, oracleData]
+          [collateral.address, asset.address, oracle, oracleData]
         ),
       ]
     ),
@@ -404,7 +404,7 @@ export const computeUnderworldPairAddress = ({
       ['bytes'],
       [
         '0x3d602d80600a3d3981f3363d3d373d3d3d363d73' +
-          UNDERWORLD_ADDRESS[collateral?.chainId].substring(2) +
+          UNDERWORLD_ADDRESS[collateral.chainId].substring(2) +
           '5af43d82803e903d91602b57fd5bf3',
       ]
     )
