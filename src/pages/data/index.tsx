@@ -43,6 +43,7 @@ export default function Data() {
       createData(asset(0), formatNumber(price(0), true, true), utilization(0), supplyAPR(0), borrowAPR(0), aBase(0), aElastic(0), bBase(0), bElastic(0)),
       createData(asset(1), formatNumber(price(1), true, true), utilization(1), supplyAPR(1), borrowAPR(1), aBase(1), aElastic(1), bBase(1), bElastic(1)),
       createData(asset(2), formatNumber(price(2) / 1E10, true, true), utilization(2), supplyAPR(2), borrowAPR(2), aBase(2), aElastic(2), bBase(2), bElastic(2)),
+      createData(asset(4), formatNumber(1, true, true), utilization(4), supplyAPR(4), borrowAPR(4), aBase(4), aElastic(4), bBase(3), bElastic(3)),
       createData(asset(5), formatNumber(price(5), true, true), utilization(5), supplyAPR(5), borrowAPR(5), aBase(5), aElastic(5), bBase(5), bElastic(5)),
     ];
 
