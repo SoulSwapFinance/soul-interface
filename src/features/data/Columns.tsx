@@ -35,15 +35,29 @@ export const Columns: Column[] = [
         //   format: (value: number) => value.toLocaleString('en-US'),
     },
     {
+        id: 'aBase',
+        label: 'Base',
+        minWidth: 40,
+        // align: 'right',
+        //   format: (value: number) => value.toLocaleString('en-US'),
+    },
+    {
         id: 'aElastic',
-        label: 'aElastic',
+        label: 'Elastic',
+        minWidth: 40,
+        // align: 'right',
+        //   format: (value: number) => value.toLocaleString('en-US'),
+    },
+    {
+        id: 'bBase',
+        label: 'Base',
         minWidth: 40,
         // align: 'right',
         //   format: (value: number) => value.toLocaleString('en-US'),
     },
     {
         id: 'bElastic',
-        label: 'bElastic',
+        label: 'Elastic',
         minWidth: 40,
         // align: 'right',
         //   format: (value: number) => value.toLocaleString('en-US'),
@@ -56,7 +70,10 @@ export const Columns: Column[] = [
     utilization: number | string
     supplyAPR: number | string
     borrowAPR: number | string
+
+    aBase: number | string
     aElastic: number | string
+    bBase: number | string
     bElastic: number | string
 }
 
@@ -66,9 +83,12 @@ export function createData(
     utilization: number | string,
     supplyAPR: number | string,
     borrowAPR: number | string,
+
+    aBase: number | string,
     aElastic: number | string,
+    bBase: number | string,
     bElastic: number | string
 ): Data {
 //   const density = population / size;
-  return { asset, price, utilization, supplyAPR, borrowAPR, aElastic, bElastic };
+  return { asset, price, utilization, supplyAPR, borrowAPR, aBase, aElastic, bBase, bElastic };
 }

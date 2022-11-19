@@ -35,18 +35,15 @@ export default function Data() {
   const supplyAPR = (i) => formatPercent(useUnderworldPairAPI(addresses[i])[7] * 100 / 1E18)
   const borrowAPR = (i) => formatPercent(useUnderworldPairAPI(addresses[i])[8] * 100 / 1E18)
   const aElastic = (i) => formatNumber(useUnderworldPairAPI(addresses[i])[9])
-  // const aBase = (i) => formatNumber(useUnderworldPairAPI(addresses[i])[10])
+  const aBase = (i) => formatNumber(useUnderworldPairAPI(addresses[i])[10])
   const bElastic = (i) => formatNumber(useUnderworldPairAPI(addresses[i])[11])
-  // const bBase = (i) => formatNumber(useUnderworldPairAPI(addresses[i])[12])
+  const bBase = (i) => formatNumber(useUnderworldPairAPI(addresses[i])[12])
 
   const rows = [
-      createData(asset(0), formatNumber(price(0), true, true), utilization(0), supplyAPR(0), borrowAPR(0), aElastic(0), bElastic(0)),
-      createData(asset(1), formatNumber(price(1), true, true), utilization(1), supplyAPR(1), borrowAPR(1), aElastic(1), bElastic(1)),
-      createData(asset(2), formatNumber(price(2) / 1E10, true, true), utilization(2), supplyAPR(2), borrowAPR(2), aElastic(2), bElastic(2)),
-      // createData(asset(3), price(3), utilization(3), supplyAPR(3), borrowAPR(3), aElastic(0), bElastic(0)),
-      // createData(asset(4), price(4), utilization(4), supplyAPR(4), borrowAPR(4), aElastic(0), bElastic(0)),
-      createData(asset(5), formatNumber(price(5), true, true), utilization(5), supplyAPR(5), borrowAPR(5), aElastic(5), bElastic(5)),
-      // createData(asset(6), price(6), utilization(6), supplyAPR(6), borrowAPR(6), aElastic(0), bElastic(0)),
+      createData(asset(0), formatNumber(price(0), true, true), utilization(0), supplyAPR(0), borrowAPR(0), aBase(0), aElastic(0), bBase(0), bElastic(0)),
+      createData(asset(1), formatNumber(price(1), true, true), utilization(1), supplyAPR(1), borrowAPR(1), aBase(1), aElastic(1), bBase(1), bElastic(1)),
+      createData(asset(2), formatNumber(price(2) / 1E10, true, true), utilization(2), supplyAPR(2), borrowAPR(2), aBase(2), aElastic(2), bBase(2), bElastic(2)),
+      createData(asset(5), formatNumber(price(5), true, true), utilization(5), supplyAPR(5), borrowAPR(5), aBase(5), aElastic(5), bBase(5), bElastic(5)),
     ];
 
   // const [asset, setAsset] = useState(a0)
@@ -57,36 +54,8 @@ export default function Data() {
         <Typography component="h1" variant="h1" className="w-full text-center mb-4">
           Underworld Assets Details (Stable Pairs)
         </Typography>
-
-        {/* <Typography component="h3" variant="h3" className="w-full text-center mb-4">
-          <div className="grid gap-3 grid-row-2 m-3 mt-6 bg-dark-900 p-2 rounded">
-            <label>Choose Underworld Asset </label>
-          </div>
-        </Typography> */}
-
-        {/* <div className="grid ml-2 mr-2 grid-cols gap-2">
-
-          <Button variant="filled" className="font-bold" color={getChainColorCode(chainId)} onClick={() => setAddress(a0)}>
-            {name} {aElastic} {aBase}
-          </Button>
-
-          <Button variant="filled" className="font-bold" color={getChainColorCode(chainId)} onClick={() => setAddress(a1)}>
-            {t1}
-          </Button>
-
-          <Button variant="filled" className="font-bold" color={getChainColorCode(chainId)} onClick={() => setAddress(a2)}>
-            {t2}
-          </Button>
-
-          <Button variant="filled" className="font-bold" color={getChainColorCode(chainId)} onClick={() => setAddress(a3)}>
-            {t3}
-          </Button>
-        </div> */}
       </div>
-      
-
       <DataTable rows={rows} columns={Columns}/>
-      
 
 {/* 
       <TableHead>

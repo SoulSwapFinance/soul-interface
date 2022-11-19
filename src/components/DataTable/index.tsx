@@ -37,7 +37,10 @@ const DataTable = ({
                 Rates
               </TableCell>
               <TableCell align="center" colSpan={2} style={{ backgroundColor:'#161522', color: 'white'}}>
-                Supply
+                Lent
+              </TableCell>
+              <TableCell align="center" colSpan={2} style={{ backgroundColor:'#000000', color: 'white'}}>
+                Borrowed
               </TableCell>
             </TableRow>
             <TableRow>
@@ -52,12 +55,12 @@ const DataTable = ({
               ))}
             </TableRow>
           </TableHead>
-          <TableBody className="bg-grey">
+          <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow className="" hover role="checkbox" tabIndex={-1} key={row.code}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
@@ -80,7 +83,7 @@ const DataTable = ({
         </Table>
       </TableContainer>
       <TablePagination
-        style={{ backgroundColor:'#161522', color: 'white'}}
+        style={{ backgroundColor:'#000000', color: 'white'}}
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}
