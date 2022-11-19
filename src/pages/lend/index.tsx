@@ -214,6 +214,9 @@ const LendEntry = ({ pair, userPosition = false }) => {
   const suppliedAmount = Number(underworldUserInfo.userBalance) / 10**assetDecimals
   const collateralAmount = Number(underworldUserInfo.userCollateralShare) / 10**collateralDecimals
   
+  const interestPerSecond = 1E18 / Number(underworldPairInfo.interestPerSecond)
+  const APR = 86_600 * interestPerSecond * 365
+  
   const assetAddress = pair?.asset.tokenInfo.address
   const collateralAddress = pair?.collateral.tokenInfo.address
   const blockchain = chainId == ChainId.FANTOM ? 'fantom' : 'avalanche'
@@ -308,7 +311,10 @@ const LendEntry = ({ pair, userPosition = false }) => {
               </div>
               {/* APR */}
               <div className="text-center">
-              {formatPercent(pair.currentSupplyAPR.stringWithStrategy)}
+              {formatPercent(
+              // pair.currentSupplyAPR.stringWithStrategy
+              APR
+              )}
                 {/* <div>{formatNumber(pair.currentUserLentAmount.string)} {pair.asset.tokenInfo.symbol}</div> */}
                 {/* <div>{formatPercent(pair.utilization.string)}</div> */}
                 {/* <div className="text-center text-secondary text-sm">{formatNumber(Number(pair.currentUserLentAmount.usd) / 1e12 , true)}</div> */}
@@ -326,7 +332,10 @@ const LendEntry = ({ pair, userPosition = false }) => {
                  {formatNumber(pair?.totalAsset.base / 10**(assetDecimals))} {pair?.asset.tokenInfo.symbol}
                   <div className="text-secondary">{formatNumber(totalDepositedValue, true)}</div>
                 </div>{' '}
-              <div className="hidden sm:text-center">{formatPercent(pair.supplyAPR.stringWithStrategy)}</div>{' '}
+              <div className="hidden sm:text-center">{formatPercent(
+              // pair.supplyAPR.stringWithStrategy
+              APR
+              )}</div>{' '}
             </>
           ) : (
             <>
@@ -337,7 +346,13 @@ const LendEntry = ({ pair, userPosition = false }) => {
                 </div>
               </div>
               <div className="text-center">
-                {formatPercent(pair.currentSupplyAPR.stringWithStrategy > 0 ? pair.currentSupplyAPR.stringWithStrategy : 1)}
+                {formatPercent(
+                APR
+                // pair.currentSupplyAPR.stringWithStrategy
+                 > 0 ? 
+                 APR
+                 // pair.currentSupplyAPR.stringWithStrategy
+                  : 1)}
               </div>
               <div className="grid grid-cols-2 gap-2 text-center justify-center">
                 <NavLink href={`/lend/${pair.address}`}>
