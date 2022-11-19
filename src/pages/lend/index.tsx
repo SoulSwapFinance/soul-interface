@@ -312,8 +312,7 @@ const LendEntry = ({ pair, userPosition = false }) => {
               {/* APR */}
               <div className="text-center">
               {formatPercent(
-              // pair.currentSupplyAPR.stringWithStrategy
-              APR
+              pair.currentSupplyAPR.stringWithStrategy
               )}
                 {/* <div>{formatNumber(pair.currentUserLentAmount.string)} {pair.asset.tokenInfo.symbol}</div> */}
                 {/* <div>{formatPercent(pair.utilization.string)}</div> */}
@@ -333,8 +332,7 @@ const LendEntry = ({ pair, userPosition = false }) => {
                   <div className="text-secondary">{formatNumber(totalDepositedValue, true)}</div>
                 </div>{' '}
               <div className="hidden sm:text-center">{formatPercent(
-              // pair.supplyAPR.stringWithStrategy
-              APR
+              pair.supplyAPR.stringWithStrategy
               )}</div>{' '}
             </>
           ) : (
@@ -347,11 +345,9 @@ const LendEntry = ({ pair, userPosition = false }) => {
               </div>
               <div className="text-center">
                 {formatPercent(
-                APR
-                // pair.currentSupplyAPR.stringWithStrategy
+                pair.currentSupplyAPR.stringWithStrategy
                  > 0 ? 
-                 APR
-                 // pair.currentSupplyAPR.stringWithStrategy
+                 pair.currentSupplyAPR.stringWithStrategy
                   : 1)}
               </div>
               <div className="grid grid-cols-2 gap-2 text-center justify-center">
