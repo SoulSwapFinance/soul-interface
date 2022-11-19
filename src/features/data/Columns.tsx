@@ -22,14 +22,14 @@ export const Columns: Column[] = [
     },
     {
         id: 'supplyAPR',
-        label: 'sAPR (%)',
+        label: 'sAPR',
         minWidth: 40,
         // align: 'right',
         //   format: (value: number) => value.toLocaleString('en-US'),
     },
     {
         id: 'borrowAPR',
-        label: 'bAPR (%)',
+        label: 'bAPR',
         minWidth: 40,
         // align: 'right',
         //   format: (value: number) => value.toLocaleString('en-US'),
