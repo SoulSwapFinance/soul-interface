@@ -28,7 +28,9 @@ export default function Pair() {
   const { chainId } = useActiveWeb3React()
   const pair = useUnderworldPair(router.query.pair as string)
   const { underworldPairInfo } = useUnderworldPairInfo(router.query.pair)
-  
+  const pairAddress = router.query.pair as string
+  const _supplyAPR = Number(useUnderworldPairAPI(pairAddress)[7]) // * 100 / 1E18)
+
   /*
   const { underworldPairInfo } = useUnderworldPairInfo(pair?.address)
   const assetDecimals = Number(underworldPairInfo.assetDecimals)
@@ -89,8 +91,7 @@ const collateralSymbol
   const assetURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${assetAddress}/logo.png`
   //pair?.asset.tokenInfo.logoURI
   const collateralURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${collateralAddress}/logo.png`
-  const _supplyAPR = Number(useUnderworldPairAPI(router.query.pair)[7]) // * 100 / 1E18)
-  const supplyAPR = _supplyAPR / 1E18 * 100
+  const supplyAPR = chainId == ChainId.AVALANCHE ? pair.currentSupplyAPR.stringWithStrategy :  _supplyAPR / 1E18 * 100
 
   return (
     <PairLayout>
@@ -165,6 +166,7 @@ const collateralSymbol
               <div className="text-center text-md sm:text-lg text-secondary">{`APR`}</div>
               <div className="text-center text-lg sm:text-2xl text-high-emphesis">
                 {/* {formatPercent(pair.supplyAPR.string)} */}
+                {/* {formatPercent(pair.currentSupplyAPR.stringWithStrategy)} */}
                 {formatPercent(supplyAPR)}
                 </div>
               {/* <div className="text-center text-lg sm:text-2xl text-high-emphesis">{formatPercent(pair.supplyAPR.string)}</div> */}
