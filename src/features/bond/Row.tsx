@@ -17,7 +17,7 @@ import { Wrap, Text, ExternalLink } from 'components/ReusableStyles'
 import Modal from 'components/DefaultModal'
 import Typography from '../../components/Typography'
 import ModalHeader from 'components/Modal/Header'
-import { useBondUserInfo, usePairInfo, useUserPairInfo, useSoulBondInfo, useTokenInfo } from 'hooks/useAPI'
+import { useBondUserInfo, usePairInfo, useUserPairInfo, useSoulBondInfo, useTokenInfo, useUserTokenInfo } from 'hooks/useAPI'
 import { classNames, formatNumber, formatPercent, tryParseAmount } from 'functions'
 import { useSoulPrice } from 'hooks/getPrices'
 import { Token, NATIVE } from 'sdk'
@@ -75,6 +75,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   const apr = Number(soulBondInfo.apr)
   const { soulBondUserInfo } = useBondUserInfo(pid, account)
   const { pairUserInfo } = useUserPairInfo(account, assetAddress)
+  const { userTokenInfo } = useUserTokenInfo(account, assetAddress)
   const { pairInfo } = usePairInfo(assetAddress)
   const assetName = soulBondUserInfo.symbol
   const liquidity = Number(soulBondUserInfo.tvl)
@@ -87,6 +88,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   const assetToken = new Token(chainId, assetAddress, assetDecimals, assetName)
   // const parsedDepositValue = tryParseAmount(depositValue, assetToken)
   const walletBalance = Number(pairUserInfo.userBalance) / assetDivisor
+  // const walletBalance = Number(userTokenInfo.balance) / assetDivisor
   const token0Name = pairInfo.token0Name
 
   // const parsedWalletBalance = tryParseAmount(walletBalance, assetToken)
@@ -327,31 +329,40 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                       id={pid}
                     />
                   }
-                  <Wrap padding="0" margin="0" display="flex">
-                    {(approved && isStakeable && Number(unstakedBal) == 0 && depositable ?
+                   <Wrap padding="0" margin="0" display="flex">
+                    {(approved && isStakeable 
+                    && ((isUnderworldPair && Number(unstakedBal) != 0) 
+                    || (!isUnderworldPair && Number(unstakedBal) == 0) 
+                    ) && depositable ?
                       (bond.token0Symbol == WNATIVE[chainId].symbol ? (
-                        <ExternalLink
-                          href=
-                          {`https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token1Address}`}
+                            <SubmitButton
+                          primaryColor={getChainColor(chainId)}
                         >
-                          <SubmitButton
-                            primaryColor={getChainColor(chainId)}
+                          <TokenPairLink
+                            target="_blank"
+                            rel="noopener"
+                            color={'white'}
+                            href=
+                            {`https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token1Address}`}
                           >
-                            {isUnderworldPair ? `LEND ${bond.token0Symbol}` : `CREATE ${bond.lpSymbol} PAIR`}
-                          </SubmitButton>
-                        </ExternalLink>
+                            CREATE {bond.lpSymbol} PAIR
+                          </TokenPairLink>
+                        </SubmitButton>
                       ) :
-                        <ExternalLink
-                          href={isUnderworldPair ? `https://exchange.soulswap.finance/lend/${bond.lpAddress}`
-                            : `https://exchange.soulswap.finance/add/${bond.token0Address}/${bond.token1Address}`}
+                        <SubmitButton
+                          primaryColor={getChainColor(chainId)}
                         >
-                          <SubmitButton
-                            className="w-full"
-                            primaryColor={getChainColor(chainId)}
+                          <TokenPairLink
+                            target="_blank"
+                            rel="noopener"
+                            color={"white"}
+                            href=
+                            { isUnderworldPair ? `https://exchange.soulswap.finance/lend/${bond.lpAddress}`
+                              : `https://exchange.soulswap.finance/add/${bond.token0Address}/${bond.token1Address}`}
                           >
-                            {isUnderworldPair ? `LEND ${bond.token0Symbol}` : `CREATE ${bond.lpSymbol} PAIR`}
-                          </SubmitButton>
-                        </ExternalLink>
+                            { isUnderworldPair ? `LEND ${bond.token0Symbol}` : `CREATE ${bond.lpSymbol} PAIR`}
+                          </TokenPairLink>
+                        </SubmitButton>
                       ) :
                       (approved && isStakeable && depositable) ?
                         (
@@ -374,9 +385,15 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                             APPROVE LP
                           </SubmitButton>
                         )
-
                     )}
                   </Wrap>
+                    <div className={'grid grid-cols-1'}>
+                        <SubmitButton
+                        primaryColor={getChainColor(chainId)}
+                        height="2.5rem" onClick={() => handleApprove()}>
+                        APPROVE LP
+                      </SubmitButton>
+                    </div>
                 </FunctionBox>
 
                 <Wrap padding="0.5rem" margin="0.25rem" display="flex" justifyContent="space-between">
