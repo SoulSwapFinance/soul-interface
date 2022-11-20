@@ -3,6 +3,7 @@ import { AVAX_ADDRESS, BNB_ADDRESS, ChainId, DAI_ADDRESS, SEANCE_ADDRESS, SOUL_A
 export const AvalanchePools = [
   {
     pid: 0,
+    type: 'swap',
     // summonerPid: 1,
     token0Symbol: 'WAVAX',
     token1Symbol: 'SOUL',
@@ -13,6 +14,7 @@ export const AvalanchePools = [
   },
   {
     pid: 1,
+    type: 'swap',
     // summonerPid: 2,
     token0Symbol: 'SOUL',
     token1Symbol: 'USDC',
@@ -23,6 +25,7 @@ export const AvalanchePools = [
   },
   {
     pid: 2,
+    type: 'swap',
     // summonerPid: 3,
     token0Symbol: 'WAVAX',
     token1Symbol: 'USDC',
@@ -33,6 +36,7 @@ export const AvalanchePools = [
   }, 
   {
     pid: 3,
+    type: 'swap',
     // summonerPid: 4,
     token0Symbol: 'WAVAX',
     token1Symbol: 'ETH',
@@ -43,6 +47,7 @@ export const AvalanchePools = [
   }, 
   {
     pid: 4,
+    type: 'swap',
     // summonerPid: 5,
     token0Symbol: 'WAVAX',
     token1Symbol: 'BTC',
@@ -53,6 +58,7 @@ export const AvalanchePools = [
   },
   {
     pid: 5,
+    type: 'swap',
     // summonerPid: 6,
     token0Symbol: 'USDC',
     token1Symbol: 'DAI',
@@ -67,6 +73,7 @@ export const FantomPools = [
   {
     // 1000
     pid: 0,
+    type: 'swap',
     // summonerPid: 1,
     token0Symbol: 'WFTM',
     token1Symbol: 'SOUL',
@@ -78,6 +85,7 @@ export const FantomPools = [
   {
     // 600
     pid: 1,
+    type: 'swap',
     // summonerPid: 22,
     token0Symbol: 'SOUL',
     token1Symbol: 'USDC',
@@ -89,6 +97,7 @@ export const FantomPools = [
   {
     // 600
     pid: 2,
+    type: 'swap',
     // summonerPid: 10,
     token0Symbol: 'WFTM',
     token1Symbol: 'SEANCE',
@@ -100,6 +109,7 @@ export const FantomPools = [
   {
     // 600
     pid: 3,
+    type: 'swap',
     // summonerPid: 2,
     token0Symbol: 'WFTM',
     token1Symbol: 'USDC',
@@ -112,6 +122,7 @@ export const FantomPools = [
   {
     // 600
     pid: 4,
+    type: 'swap',
     // summonerPid: 23,
     token0Symbol: 'WFTM',
     token1Symbol: 'DAI',
@@ -123,6 +134,7 @@ export const FantomPools = [
   {
       // 600
       pid: 5,
+      type: 'swap',
       // summonerPid: 18,
       token0Symbol: 'WFTM',
       token1Symbol: 'BNB',
@@ -134,6 +146,7 @@ export const FantomPools = [
     {
       // 600
       pid: 6,
+      type: 'swap',
       // summonerPid: 4,
       token0Symbol: 'WFTM',
       token1Symbol: 'ETH',
@@ -146,6 +159,7 @@ export const FantomPools = [
     {
       // 600
       pid: 7,
+      type: 'swap',
       // summonerPid: 13,
       token0Symbol: 'WFTM',
       token1Symbol: 'BTC',
@@ -158,6 +172,7 @@ export const FantomPools = [
     /* {
     // 600
     pid: 8,
+    type: 'swap',
     token0Symbol: 'WETH',
     token1: 'BTC',
     lpSymbol: 'ETH-BTC',
@@ -169,12 +184,61 @@ export const FantomPools = [
   {
     // 600
     pid: 9,
+    type: 'swap',
     // summonerPid: 21,
     token0Symbol: 'USDC',
     token1Symbol: 'DAI',
     lpSymbol: 'USDC-DAI',
     lpAddress: '0x406de3a93f6b4179e3b21a3d81226b43e1918fd9',
     token0Address:  USDC_ADDRESS[ChainId.FANTOM],
+    token1Address: DAI_ADDRESS[ChainId.FANTOM],
+  },
+  
+]
+
+export const FantomLendingPools = [
+  { // LENDING
+    pid: 10,
+    type: 'lend',
+    decimals: 18,
+    token0Symbol: 'FTM', // EXEMPT //
+    token1Symbol: 'DAI',
+    lpSymbol: 'DAI-FTM', // EXEMPT //
+    lpAddress: '0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd',
+    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+    token1Address: DAI_ADDRESS[ChainId.FANTOM],
+  },
+  { // LENDING
+    pid: 11,
+    type: 'lend',
+    decimals: 18,
+    token0Symbol: 'DAI',
+    token1Symbol: 'FTM', // EXEMPT //
+    lpSymbol: 'FTM-DAI',
+    lpAddress: '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61',
+    token0Address: DAI_ADDRESS[ChainId.FANTOM],
+    token1Address: WNATIVE_ADDRESS[ChainId.FANTOM], // EXEMPT //
+  },
+  { // LENDING
+    pid: 12,
+    type: 'lend',
+    decimals: 18,
+    token0Symbol: 'ETH',
+    token1Symbol: 'DAI',
+    lpSymbol: 'DAI-ETH',
+    lpAddress: '0x9fA5de19495331E13b443F787B90CdD22B32263d',
+    token0Address: WETH_ADDRESS[ChainId.FANTOM],
+    token1Address: DAI_ADDRESS[ChainId.FANTOM],
+  },
+  { // LENDING
+    pid: 13,
+    type: 'lend',
+    decimals: 18,
+    token0Symbol: 'BNB',
+    token1Symbol: 'DAI',
+    lpSymbol: 'DAI-BNB',
+    lpAddress: '0xbDa9204e6D596feCf9bd48108723F9BDAa2019f6',
+    token0Address: BNB_ADDRESS[ChainId.FANTOM],
     token1Address: DAI_ADDRESS[ChainId.FANTOM],
   },
 ]
