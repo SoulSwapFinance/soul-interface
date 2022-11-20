@@ -327,31 +327,37 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                       id={pid}
                     />
                   }
-                  <Wrap padding="0" margin="0" display="flex">
+                   <Wrap padding="0" margin="0" display="flex">
                     {(approved && isStakeable && Number(unstakedBal) == 0 && depositable ?
                       (bond.token0Symbol == WNATIVE[chainId].symbol ? (
-                        <ExternalLink
-                          href=
-                          {`https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token1Address}`}
+                            <SubmitButton
+                          primaryColor={getChainColor(chainId)}
                         >
-                          <SubmitButton
-                            primaryColor={getChainColor(chainId)}
+                          <TokenPairLink
+                            target="_blank"
+                            rel="noopener"
+                            color={'white'}
+                            href=
+                            {`https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token1Address}`}
                           >
-                            {isUnderworldPair ? `LEND ${bond.token0Symbol}` : `CREATE ${bond.lpSymbol} PAIR`}
-                          </SubmitButton>
-                        </ExternalLink>
+                            CREATE {bond.lpSymbol} PAIR
+                          </TokenPairLink>
+                        </SubmitButton>
                       ) :
-                        <ExternalLink
-                          href={isUnderworldPair ? `https://exchange.soulswap.finance/lend/${bond.lpAddress}`
-                            : `https://exchange.soulswap.finance/add/${bond.token0Address}/${bond.token1Address}`}
+                        <SubmitButton
+                          primaryColor={getChainColor(chainId)}
                         >
-                          <SubmitButton
-                            className="w-full"
-                            primaryColor={getChainColor(chainId)}
+                          <TokenPairLink
+                            target="_blank"
+                            rel="noopener"
+                            color={"white"}
+                            href=
+                            { isUnderworldPair ? `https://exchange.soulswap.finance/lend/${bond.lpAddress}`
+                              : `https://exchange.soulswap.finance/add/${bond.token0Address}/${bond.token1Address}`}
                           >
-                            {isUnderworldPair ? `LEND ${bond.token0Symbol}` : `CREATE ${bond.lpSymbol} PAIR`}
-                          </SubmitButton>
-                        </ExternalLink>
+                            { isUnderworldPair ? `LEND ${bond.token0Symbol}` : `CREATE ${bond.lpSymbol} PAIR`}
+                          </TokenPairLink>
+                        </SubmitButton>
                       ) :
                       (approved && isStakeable && depositable) ?
                         (
