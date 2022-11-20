@@ -28,6 +28,7 @@ import NavLink from 'components/NavLink'
 import Typography from 'components/Typography'
 import { SubmitButton } from 'features/summoner/Styles'
 import { getChainColor, getChainColorCode } from 'constants/chains'
+import { useUnderworldPairAPI } from 'hooks/useUnderworldAPI'
 
 export default function Lend() {
   const { i18n } = useLingui()
@@ -213,10 +214,10 @@ const LendEntry = ({ pair, userPosition = false }) => {
   const borrowedAmount = Number(underworldUserInfo.userBorrowPart) / 10**assetDecimals
   const suppliedAmount = Number(underworldUserInfo.userBalance) / 10**assetDecimals
   const collateralAmount = Number(underworldUserInfo.userCollateralShare) / 10**collateralDecimals
-  
   const interestPerSecond = 1E18 / Number(underworldPairInfo.interestPerSecond)
   const APR = 86_600 * interestPerSecond * 365
-  
+  const _supplyAPR = Number(useUnderworldPairAPI(pair.address)[7]) // * 100 / 1E18)
+  const supplyAPR = _supplyAPR / 1E18 * 100
   const assetAddress = pair?.asset.tokenInfo.address
   const collateralAddress = pair?.collateral.tokenInfo.address
   const blockchain = chainId == ChainId.FANTOM ? 'fantom' : 'avalanche'
@@ -312,7 +313,7 @@ const LendEntry = ({ pair, userPosition = false }) => {
               {/* APR */}
               <div className="text-center">
               {formatPercent(
-              pair.currentSupplyAPR.stringWithStrategy
+             supplyAPR
               )}
                 {/* <div>{formatNumber(pair.currentUserLentAmount.string)} {pair.asset.tokenInfo.symbol}</div> */}
                 {/* <div>{formatPercent(pair.utilization.string)}</div> */}
@@ -345,9 +346,9 @@ const LendEntry = ({ pair, userPosition = false }) => {
               </div>
               <div className="text-center">
                 {formatPercent(
-                pair.currentSupplyAPR.stringWithStrategy
+                supplyAPR
                  > 0 ? 
-                 pair.currentSupplyAPR.stringWithStrategy
+                 supplyAPR
                   : 1)}
               </div>
               <div className="grid grid-cols-2 gap-2 text-center justify-center">
