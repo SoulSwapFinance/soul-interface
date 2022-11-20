@@ -17,6 +17,7 @@ import { RecoilRoot } from 'recoil'
 import { useUnderworldPair } from 'features/lending/hooks'
 import { ChainId } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
+import { useUnderworldPairAPI } from 'hooks/useUnderworldAPI'
 // import { useSingleCallResult } from 'state/multicall/hooks'
 
 export default function Pair() {
@@ -88,6 +89,8 @@ const collateralSymbol
   const assetURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${assetAddress}/logo.png`
   //pair?.asset.tokenInfo.logoURI
   const collateralURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${collateralAddress}/logo.png`
+  const _supplyAPR = Number(useUnderworldPairAPI(pair.address)[7]) // * 100 / 1E18)
+  const supplyAPR = _supplyAPR / 1E18 * 100
 
   return (
     <PairLayout>
@@ -162,7 +165,7 @@ const collateralSymbol
               <div className="text-center text-md sm:text-lg text-secondary">{`APR`}</div>
               <div className="text-center text-lg sm:text-2xl text-high-emphesis">
                 {/* {formatPercent(pair.supplyAPR.string)} */}
-                {formatPercent(pair.currentSupplyAPR.stringWithStrategy)}
+                {formatPercent(supplyAPR)}
                 </div>
               {/* <div className="text-center text-lg sm:text-2xl text-high-emphesis">{formatPercent(pair.supplyAPR.string)}</div> */}
             </div>

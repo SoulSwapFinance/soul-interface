@@ -58,19 +58,19 @@ export function useUnderworldPairAPI(pairAddress: string) {
   const bElastic = data?.underworldPair?.totalBorrow.elastic / divisor
   const bBase = data?.underworldPair?.totalBorrow.base / divisor
     return [
-        name,
-        symbol, 
-        decimals,
-        asset,
-        collateral,
-        exchangeRate, 
-        utilization, 
-        supplyAPR,
-        borrowAPR,
-        aElastic, 
-        aBase, 
-        bElastic, 
-        bBase
+        name,           // [0]
+        symbol,         // [1]
+        decimals,       // [2]
+        asset,          // [3]
+        collateral,     // [4]
+        exchangeRate,   // [5]
+        utilization,    // [6]
+        supplyAPR,      // [7]
+        borrowAPR,      // [8]
+        aElastic,       // [9]
+        aBase,          // [10]
+        bElastic,       // [11]
+        bBase           // [12]
     ]
 }
 
