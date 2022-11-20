@@ -114,7 +114,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const isActive = pairStatus == "active"
     const assetToken = new Token(chainId, farm.lpAddress, decimals)
 
-  const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
+    const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
   
     const parsedDepositValue = tryParseAmount(depositValue, assetToken)
     const parsedWithdrawValue = tryParseAmount(withdrawValue, assetToken)
