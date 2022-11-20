@@ -89,7 +89,7 @@ const collateralSymbol
   const assetURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${assetAddress}/logo.png`
   //pair?.asset.tokenInfo.logoURI
   const collateralURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${collateralAddress}/logo.png`
-  const _supplyAPR = Number(useUnderworldPairAPI(pair.address)[7]) // * 100 / 1E18)
+  const _supplyAPR = Number(useUnderworldPairAPI(router.query.pair)[7]) // * 100 / 1E18)
   const supplyAPR = _supplyAPR / 1E18 * 100
 
   return (
