@@ -88,8 +88,8 @@ export const TransactionSubmittedContent: FC<TransactionSubmittedContentProps> =
                 const params: any = {
                   type: 'ERC20',
                   options: {
-                    address: SOUL_ADDRESS[chainId || 250],
-                    symbol: 'SOUL',
+                    address: currencyToAdd.wrapped.address,
+                    symbol: `${currencyToAdd.symbol}`,
                     decimals: 18,
                     image: `https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/${blockchain}/assets/${currencyToAdd.wrapped.address}/logo.png`,
                   },
