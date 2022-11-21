@@ -22,7 +22,7 @@ export default function useAddTokenToMetaMask(currencyToAdd: Currency | undefine
             // @ts-ignore // need this for incorrect ethers provider type
             type: 'ERC20',
             options: {
-              address: token.address,
+              address: token.wrapped.address,
               symbol: token.symbol,
               decimals: token.decimals,
               image: getCurrencyLogoUrls(token),
