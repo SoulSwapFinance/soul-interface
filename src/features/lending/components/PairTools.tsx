@@ -9,16 +9,22 @@ import { UnderworldCooker } from 'entities'
 import { formatPercent } from 'functions'
 import { ZERO } from 'functions/math'
 import useUnderworldApproveCallback from 'hooks/useUnderworldApproveCallback'
-import { useUnderworldPairContract } from 'hooks/useContract'
+import { useMarketUpdater, useUnderworldPairContract } from 'hooks/useContract'
 
 export default function PairTools({ pair }) {
   const [, , , , onCook] = useUnderworldApproveCallback()
   const UnderworldPair = useUnderworldPairContract(pair.address)
-  async function onUpdatePrice(cooker: UnderworldCooker): Promise<string> {
-    cooker.updateExchangeRate(false, ZERO, ZERO)
-    return `${i18n._(t`Update Price`)} ${pair.asset.tokenInfo.symbol}/${pair.collateral.tokenInfo.symbol}`
-  }
+  const MarketUpdater = useMarketUpdater()
+  
+  // async function onUpdatePrice(cooker: UnderworldCooker): Promise<string> {
+  //   cooker.updateExchangeRate(false, ZERO, ZERO)
+  //   return `${i18n._(t`Update Price`)} ${pair.asset.tokenInfo.symbol}/${pair.collateral.tokenInfo.symbol}`
+  // }
+  async function onUpdatePrice() {
+        await MarketUpdater.updateAll()
+        return `${i18n._(t`Update Price`)} ${pair.asset.tokenInfo.symbol}/${pair.collateral.tokenInfo.symbol}`
 
+  }
   async function onAccrue(cooker: UnderworldCooker): Promise<string> {
     cooker.add(ACTION_ACCRUE, '0x00')
     return `${i18n._(t`Accrue`)} ${pair.asset.tokenInfo.symbol}/${pair.collateral.tokenInfo.symbol}`
@@ -44,9 +50,10 @@ export default function PairTools({ pair }) {
         variant="filled"
         size="xs"
         className="w-full"
-        onClick={() => onCook(pair, onUpdatePrice)}
+        onClick={()=> onUpdatePrice()}
+        // onClick={() => onCook(pair, onUpdatePrice)}
       >
-        Update Price
+        Update Prices
       </Button>
       <QuestionHelper
         text={
