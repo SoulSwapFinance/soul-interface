@@ -65,6 +65,7 @@ import {
   MERKLE_DISTRIBUTOR_ADDRESS,
   SOUL_X_SWAP_ADDRESS,
   MANIFESTER_ADDRESS,
+  MARKET_UPDATER_ADDRESS,
 } from 'sdk'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from 'constants/multicall'
 import SOUL_BOND_ABI from 'constants/abis/soulbond.json' 
@@ -74,6 +75,7 @@ import CLONE_REWARDER_ABI from 'constants/abis/clone-rewarder.json'
 import ARCHER_ROUTER_ABI from 'constants/abis/archer-router.json'
 import SPIRIT_ROUTER_ABI from 'constants/abis/spiritswap-router.json'
 import BASE_SWAPPER_ABI from 'constants/abis/swapper.json'
+import UPDATER_ABI from 'constants/abis/market-updater.json'
 import ANYSWAP_ERC20_ABI from 'constants/abis/anyswap_erc20.json'
 import SPOOKY_FACTORY_ABI from 'constants/abis/spookyswap-factory.json'
 import SOUL_CIRCLE_ABI from 'constants/abis/soulswap/soulcircle.json' 
@@ -578,6 +580,12 @@ export function useZapperContract(withSignerIfPossible?: boolean): Contract | nu
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && ZAPPER_ADDRESS[chainId], ZAPPER_ABI, withSignerIfPossible)
 }
+
+export function useMarketUpdater(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && MARKET_UPDATER_ADDRESS[chainId], UPDATER_ABI, withSignerIfPossible)
+}
+
 
 export function useSoulXSwapContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
