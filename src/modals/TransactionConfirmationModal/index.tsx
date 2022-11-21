@@ -89,7 +89,7 @@ export const TransactionSubmittedContent: FC<TransactionSubmittedContentProps> =
                   type: 'ERC20',
                   options: {
                     address: currencyToAdd.wrapped.address,
-                    symbol: `${currencyToAdd.symbol}`,
+                    symbol: `${currencyToAdd.wrapped.symbol}`,
                     decimals: 18,
                     image: `https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/${blockchain}/assets/${currencyToAdd.wrapped.address}/logo.png`,
                   },
