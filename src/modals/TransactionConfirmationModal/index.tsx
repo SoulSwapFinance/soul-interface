@@ -88,7 +88,7 @@ export const TransactionSubmittedContent: FC<TransactionSubmittedContentProps> =
               <RowFixed className="mx-auto space-x-2">
                 <span>Add {currencyToAdd.symbol} to MetaMask</span>
                 <Image
-                  src={`https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/${blockchain}/assets/${currencyToAdd.address}/logo.png`}
+                  src={`https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/${blockchain}/assets/${currencyToAdd.wrapped.address}/logo.png`}
                   alt={`Add ${currencyToAdd.symbol} to MetaMask`}
                   width={24}
                   height={24}
