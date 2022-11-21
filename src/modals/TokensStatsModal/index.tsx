@@ -100,7 +100,7 @@ export default function TokenStatsModal(): JSX.Element | null {
                 const params: any = {
                   type: 'ERC20',
                   options: {
-                    address: SOUL_ADDRESS[ChainId.FANTOM],
+                    address: SOUL_ADDRESS[chainId || 250],
                     symbol: 'SOUL',
                     decimals: 18,
                     image: `https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/${SOUL_ADDRESS[ChainId.FANTOM]}/logo.png`,
@@ -138,7 +138,7 @@ export default function TokenStatsModal(): JSX.Element | null {
                 const params: any = {
                   type: 'ERC20',
                   options: {
-                    address: SEANCE_ADDRESS[250],
+                    address: SEANCE_ADDRESS[chainId || 250],
                     symbol: 'SEANCE',
                     decimals: 18,
                     image: 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x124B06C5ce47De7A6e9EFDA71a946717130079E6/logo.png',
