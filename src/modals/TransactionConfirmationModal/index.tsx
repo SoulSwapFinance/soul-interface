@@ -83,7 +83,34 @@ export const TransactionSubmittedContent: FC<TransactionSubmittedContentProps> =
           </ExternalLink>
         )}
         {currencyToAdd && library?.provider?.isMetaMask && (
-          <Button color="gradient" onClick={addToken} className="w-auto mt-4">
+          <Button color="gradient" 
+                        onClick={() => {
+                const params: any = {
+                  type: 'ERC20',
+                  options: {
+                    address: SOUL_ADDRESS[chainId || 250],
+                    symbol: 'SOUL',
+                    decimals: 18,
+                    image: `https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/${blockchain}/assets/${currencyToAdd.wrapped.address}/logo.png`,
+                  },
+                }
+                if (library && library.provider.isMetaMask && library.provider.request) {
+                  library.provider
+                    .request({
+                      method: 'wallet_watchAsset',
+                      params,
+                    })
+                    .then((success) => {
+                      if (success) {
+                        console.log('Successfully added SOUL to MetaMask')
+                      } else {
+                        throw new Error('Something went wrong.')
+                      }
+                    })
+                    .catch(console.error)
+                }
+              }}
+          className="w-auto mt-4">
             {!success ? (
               <RowFixed className="mx-auto space-x-2">
                 <span>Add {currencyToAdd.symbol} to MetaMask</span>

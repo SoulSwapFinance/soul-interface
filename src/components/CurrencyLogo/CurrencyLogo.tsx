@@ -20,27 +20,14 @@ const BLOCKCHAIN = {
 export const getCurrencyLogoUrls = (currency): string[] => {
   const urls: string[] = []
 
-  if (currency.chainId in BLOCKCHAIN) {
+  // if (currency.chainId in BLOCKCHAIN) {
     urls.push(
       // @ts-ignore TYPE NEEDS FIXING
       `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${BLOCKCHAIN[currency.chainId]}/assets/${
-      // `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${
-        currency.address
+        currency.wrapped.address
     }/logo.png`
     )
-    urls.push(
-      // @ts-ignore TYPE NEEDS FIXING
-      `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${BLOCKCHAIN[currency.chainId]}/assets/${
-        currency.address
-      }/logo.png`
-    )
-    urls.push(
-      // @ts-ignore TYPE NEEDS FIXING
-      `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/${BLOCKCHAIN[currency.chainId]}/assets/${
-        currency.address
-      }/logo.png`
-    )
-  }
+   // }
   return urls
 }
 
