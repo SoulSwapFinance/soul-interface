@@ -65,6 +65,7 @@ export const TransactionSubmittedContent: FC<TransactionSubmittedContentProps> =
 }) => {
   const { i18n } = useLingui()
   const { library } = useActiveWeb3React()
+  const blockchain = chainId == 43114 ? "avalanche" : "fantom"
   const { addToken, success } = useAddTokenToMetaMask(currencyToAdd)
   return (
     <div>
@@ -87,7 +88,7 @@ export const TransactionSubmittedContent: FC<TransactionSubmittedContentProps> =
               <RowFixed className="mx-auto space-x-2">
                 <span>Add {currencyToAdd.symbol} to MetaMask</span>
                 <Image
-                  src="/images/wallets/metamask.png"
+                  src={`https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/${blockchain}/assets/${currencyToAdd.address}/logo.png`}
                   alt={`Add ${currencyToAdd.symbol} to MetaMask`}
                   width={24}
                   height={24}
