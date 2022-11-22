@@ -572,6 +572,18 @@ const Aggregator = ({ }) => {
 	const onMaxClick = () => {
 		if (balance) setAmount((balance.value?.div(e10(fromToken.decimals || 18))).toString());
 	};
+	
+	const handleCurrencySelect = useCallback(
+    (isInput: boolean, currency: Currency) => {
+      if (isInput) {
+        setFromFrom(currency)
+      } else {
+        setToToken(currency)
+      }
+    },
+    [activeField]
+  )
+
 
 	const handleTypeInput = useCallback(
 		(value: string) => {
@@ -591,6 +603,7 @@ const Aggregator = ({ }) => {
 		(inputCurrency) => {
 		//   setApprovalSubmitted(false) // reset 2 step UI for approvals
 		  setFromToken(inputCurrency)
+		  handleCurrencySelect(true, inputCurrency)
 		  setFromDecimals(fromToken.decimals)
 		},
 		[setFromToken]
@@ -599,6 +612,7 @@ const Aggregator = ({ }) => {
 		(outputCurrency) => {
 		//   setApprovalSubmitted(false) // reset 2 step UI for approvals
 		  setToToken(outputCurrency)
+		  handleCurrencySelect(true, outputCurrency)
 		},
 		[setToToken]
 	  )
@@ -743,9 +757,9 @@ const Aggregator = ({ }) => {
 			                    showCurrencySelect={true}
 								currency={toToken}
 								hideInput={true}
+								onClick={() => setToToken(toToken)}
 								onUserInput={handleTypeInput}
-								// fiatValue={route?.value ?? undefined}
-								onCurrencySelect={setToToken}
+							onCurrencySelect={handleCurrencySelect}
 								// otherCurrency={currencyB}
 								showCommonBases={false}
 								id="output-currency"
