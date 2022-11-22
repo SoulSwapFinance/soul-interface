@@ -121,7 +121,7 @@ export default function CurrencyInputPanel({
                 <div className={classNames(disableCurrencySelect ? "flex" : "flex flex-1 flex-col items-start justify-center mx-3.5")}>
                   {label && <div className={disableCurrencySelect ? "flex justify-center text-xl font-bold" : "text-xs font-medium text-secondary whitespace-nowrap"}>{label}</div>}
                   <div className="flex items-center">
-                    <div className="text-lg font-bold token-symbol-container md:text-2xl">
+                  <div className="text-lg font-bold token-symbol-container md:text-2xl">
                       {(currency && currency.symbol && currency.symbol.length > 20
                         ? currency.symbol.slice(0, 4) +
                           '...' +
@@ -156,7 +156,7 @@ export default function CurrencyInputPanel({
                   onUserInput(val)
                 }}
               />
-              {!hideBalance && currency && selectedCurrencyBalance ? (
+              {!hideBalance && currency && selectedCurrencyBalance && (
                 <div className="flex flex-cols-2">
                   {/* <div onClick={onHalf} className="text-xs font-medium text-right cursor-pointer text-low-emphesis">
                     {renderBalance ? (
@@ -185,7 +185,7 @@ export default function CurrencyInputPanel({
                 </div>
                   </div>
                 </div>
-              ) : null}
+              )}
             </>
           </div>
         )}

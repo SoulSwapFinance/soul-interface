@@ -21,7 +21,7 @@ const FILLED = {
   maticPurple: 'bg-maticPurple bg-opacity-25 text-maticPurple',
   yellow: 'bg-yellow bg-opacity-[0.35] text-yellow',
   blue: 'bg-blue bg-opacity-[0.35] text-blue',
-  green: 'bg-green bg-opacity-25 text-green',
+  green: 'bg-green bg-opacity-[0.35] text-green',
   pink: 'bg-pink bg-opacity-25 text-pink',
   red: 'bg-red bg-opacity-25 text-red',
 }

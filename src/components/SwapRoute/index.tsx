@@ -119,7 +119,7 @@ const Route = ({
 				{index === 0 ? (
 					<div style={{ marginLeft: 'auto', display: 'flex' }}>
 						{' '}
-						<Badge color="blue" value={'Best'}
+						<Badge color="green" value={'Best'}
 						// colorScheme="green"
 						/>
 						{/* Best Route */}
