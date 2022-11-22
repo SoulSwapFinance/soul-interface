@@ -58,7 +58,7 @@ const Route = ({
 	const tokenA = new Token(chainId, fromToken.address, Number(fromToken.decimals))
 	const isApproved = useTokenApprove(
 		CurrencyAmount.fromRawAmount(tokenA, amountFrom),
-		price?.tokenApprovalAddress as `0x${string}`, 
+		price?.tokenApprovalAddress as `0x${string}`,
 	);
 
 	if (!price.amountReturned) return null;
@@ -72,63 +72,52 @@ const Route = ({
 	return (
 		<RouteWrapper onClick={setRoute} selected={selected} best={index === 0}>
 			<RouteRow>
-				<Image 
+				<Image
 					src={tokenURI(toToken.address)}
-					height={'20px'}
-					width={'20px'}
-					alt="" style={{ marginRight: 4 }} 
+					height={'30px'}
+					width={'30px'}
+					alt="" style={{ marginRight: 4 }}
 				/>
-				<div>
+				<div className="ml-2 justify-center text-black">
 					{amount.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 })}{' '}
 					{Number.isFinite(+amountUsd)
 						? `($${Number(amountUsd).toLocaleString(undefined, {
-								minimumFractionDigits: 3,
-								maximumFractionDigits: 3
-						  })})`
+							minimumFractionDigits: 3,
+							maximumFractionDigits: 3
+						})})`
 						: null}
 				</div>
-				<div style={{ marginLeft: 'auto', display: 'flex' }}>
-					{name === 'CowSwap' ? (
-						<Tooltip text="Gas is taken from output amount">
-							<GasIcon />{' '}
-							<div style={{ marginLeft: 8 }}>
-								${gasUsd.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 })}
-							</div>
-						</Tooltip>
-					) : (
-						<>
-							<GasIcon />{' '}
-							<div style={{ marginLeft: 8 }}>
-								${gasUsd.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 })}
-							</div>
-						</>
-					)}
+				<div style={{ marginLeft: 'auto', display: 'flex', color: 'black' }}>
+					<GasIcon />{' '}
+					<div style={{ marginLeft: 8 }}>
+						${gasUsd.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 })}
+					</div>
 				</div>
 			</RouteRow>
 
-			<RouteRow>
+			<RouteRow  style={{color: 'black'}}>
 				{toToken.symbol} via {name}
 				{airdrop ? (
-					<Tooltip 
-                    text="This project has no token and might airdrop one in the future"
-                    >
+					<Tooltip
+						text="This project has no token and might airdrop one in the future"
+					>
 						<span style={{ marginLeft: 4 }}>🪂</span>
 					</Tooltip>
 				) : null}
 				{isApproved ? (
-					<Tooltip 
-                        text="Token is approved for this aggregator."
-                    >
+					<Tooltip
+						text="Aggregator Approved."
+					>
 						<span style={{ marginLeft: 4 }}>🔓</span>
 					</Tooltip>
 				) : null}
 				{index === 0 ? (
 					<div style={{ marginLeft: 'auto', display: 'flex' }}>
 						{' '}
-						<Badge color="gray" value={'Best'}	
+						<Badge color="blue" value={'Best'}
 						// colorScheme="green"
 						/>
-							{/* Best Route */}
+						{/* Best Route */}
 						{/* </Badge> */}
 					</div>
 				) : null}

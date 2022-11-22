@@ -53,6 +53,7 @@ import { CurrencyInputWithNetworkSelector } from 'components/CrossSwap/CurrencyI
 import Container from 'components/Container';
 import { getChainInfo } from 'constants/chains';
 import listedTokens from 'features/aggregator/tokenList.json'
+import { e10 } from 'functions/math';
 /*
 Integrated:
 - paraswap
@@ -105,17 +106,17 @@ cant integrate:
 
 const Body = styled.div<{ showRoutes: boolean }>`
 	display: grid;
-	grid-row-gap: 16px;
+	grid-row-gap: 12px;
 	padding-bottom: 4px;
 
 	min-width: 30rem;
-	max-width: 46rem;
+	// max-width: 46rem;
 
 	box-shadow: ${({ theme }) =>
 		theme.mode === 'dark'
 			? '10px 0px 50px 10px rgba(26, 26, 26, 0.9);'
 			: '10px 0px 50px 10px rgba(211, 211, 211, 0.9);;'};
-	padding: 16px;
+	padding: 8px;
 	border-radius: 16px;
 	text-align: left;
 	transition: all 0.66s ease-out;
@@ -148,12 +149,9 @@ const oneInchChains = {
 	ethereum: 1,
 	bsc: 56,
 	polygon: 137,
-	optimism: 10,
 	arbitrum: 42161,
 	avax: 43114,
-	gnosis: 100,
 	fantom: 250,
-	klaytn: 8217
 };
 
 const Balance = styled.div`
@@ -383,12 +381,14 @@ const Aggregator = ({ }) => {
 		.toFixed(0);
 
 	const balance =
-	useTokenBalance(
-		chainId,
-		fromToken?.isNative ? NATIVE_ADDRESS : fromAddress,
-		// addressOrName: address,
-		// watch: true
-	);
+		useTokenBalance(
+			chainId,
+			fromToken?.isNative ? NATIVE_ADDRESS : fromAddress,
+			// addressOrName: address,
+			// watch: true
+		);
+	
+	const formattedBalance = Number(balance) / 10**fromToken.decimals
 
 	const currentChainId = chainId;
 
@@ -556,7 +556,7 @@ const Aggregator = ({ }) => {
 	const isApproveLoading = approvalState === ApprovalState.PENDING
 
 	const onMaxClick = () => {
-		if (balance) setAmount((balance.value).toString());
+		if (balance) setAmount((balance.value?.div(e10(fromToken.decimals || 18))).toString());
 	};
 
 	const onChainChange = (newChain) => {
@@ -597,7 +597,7 @@ const Aggregator = ({ }) => {
 				</a>
 			</Head>
 
-			<Container>
+			<BodyWrapper>
 				<Body showRoutes={fromToken && toToken}>
 					<div>
 						<FormHeader>Chain</FormHeader>
@@ -645,7 +645,7 @@ const Aggregator = ({ }) => {
 					</SelectWrapper>
 
 					<div>
-						<FormHeader>Amount In</FormHeader>
+						<FormHeader>From Amount</FormHeader>
 						<TokenInput setAmount={setAmount} amount={amount} onMaxClick={onMaxClick} />
 						<InputFooter>
 							<div style={{ marginTop: 4, marginLeft: 4 }}>
@@ -737,7 +737,7 @@ const Aggregator = ({ }) => {
 						))}
 					</Routes>
 				)}
-			</Container>
+			</BodyWrapper>
 
 			{/* <FAQs /> */}
 			{/* <TransactionModal open={txModalOpen} setOpen={setTxModalOpen} link={txUrl} /> */}
