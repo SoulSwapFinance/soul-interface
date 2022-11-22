@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { groupBy, mapValues, merge, uniqBy } from 'lodash';
 // import { useAddRecentTransaction } from '@rainbow-me/rainbowkit';
@@ -54,9 +54,11 @@ import Container from 'components/Container';
 import { getChainColorCode, getChainInfo } from 'constants/chains';
 import listedTokens from 'features/aggregator/tokenList.json'
 import { e10 } from 'functions/math';
-import AssetInput from 'components/AssetInput';
-import TokenSelect from 'features/cross/components/TokenSelect';
+// import AssetInput from 'components/AssetInput';
+// import TokenSelect from 'features/cross/components/TokenSelect';
 import { CHAINS } from 'features/cross/chains';
+import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel';
+import { PlusIcon } from '@heroicons/react/solid';
 
 /*
 Integrated:
@@ -369,7 +371,8 @@ const Aggregator = ({ }) => {
 	const [toToken, setToToken] = useState(WNATIVE[chainId]);
 	const [showTokenSelect, setShowTokenSelect] = useState(false)
     const selectedTokenChain = useMemo(() => CHAINS.find(c => c.chainId === chainId), [chainId, CHAINS]);
-
+	// const [userInput, onUserInput] = useState('')
+	// const [userOutput, onUserOutput] = useState('')
 	// const toast = useToast();
 
 	const [slippage, setSlippage] = useState('1');
@@ -566,6 +569,35 @@ const Aggregator = ({ }) => {
 		if (balance) setAmount((balance.value?.div(e10(fromToken.decimals || 18))).toString());
 	};
 
+	const handleTypeInput = useCallback(
+		(value: string) => {
+		  setAmount(value)
+		},
+		[setAmount]
+	  )
+	
+	//   const handleTypeOutput = useCallback(
+	// 	(value: string) => {
+	// 	  setAmount(value)
+	// 	},
+	// 	[setAmount]
+	//   )
+
+	const handleInputSelect = useCallback(
+		(inputCurrency) => {
+		//   setApprovalSubmitted(false) // reset 2 step UI for approvals
+		  setFromToken(inputCurrency)
+		},
+		[setFromToken]
+	  )
+	const handleOutputSelect = useCallback(
+		(outputCurrency) => {
+		//   setApprovalSubmitted(false) // reset 2 step UI for approvals
+		  setToToken(outputCurrency)
+		},
+		[setToToken]
+	  )
+	  
 	const onChainChange = (newChain) => {
 		if (switchNetworkAsync === undefined) {
 			cleanState();
@@ -615,9 +647,97 @@ const Aggregator = ({ }) => {
 
 					<SelectWrapper>
 						<FormHeader>Select Tokens</FormHeader>
-						<TokenSelectDiv onClick={() => selectedTokenChain}>
-							
-							<TokenSelect 
+						<TokenSelectDiv onClick={() => setShowTokenSelect(true)}>
+						<div className="flex flex-col gap-3 space-y-3">
+            {/* {pair && pairState !== PairState.INVALID && (
+                <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
+              )} */}
+            <SwapAssetPanel
+              spendFromWallet={true}
+              chainId={chainId}
+              header={(props) => (
+                <SwapAssetPanel.Header
+                  {...props}
+                  label={
+                    `Swap from:`
+                  }
+                />
+              )}
+              currency={fromToken}
+              value={amount}
+              onChange={handleTypeInput}
+            onSelect={handleInputSelect}
+            />
+            <div>
+              {/* <CurrencyInputPanel
+                  value={formattedAmounts[Field.CURRENCY_A]}
+                  onUserInput={onFieldAInput}
+                  onHalf={() => {
+                    onFieldAInput(halfAmounts[Field.CURRENCY_A]?.toExact() ?? '')
+                  }}
+                  onMax={() => {
+                    onFieldAInput(maxAmounts[Field.CURRENCY_A]?.toExact() ?? '')
+                  }}
+                  onCurrencySelect={handleCurrencyASelect}
+                  currency={currencies[Field.CURRENCY_A]}
+                  id="add-liquidity-input-tokena"
+                  showCommonBases
+                /> */}
+              {/* <AssetInput
+                currencyLogo={true}
+                currency={currencies[Field.CURRENCY_A]}
+                value={formattedAmounts[Field.CURRENCY_A]}
+                onChange={onFieldAInput}
+                balance={maxAmounts.CURRENCY_A}
+                showMax={false}
+              /> */}
+              <div className="flex justify-center -mt-8 -mb-4 z-0">
+                <div
+                  role="button"
+                  className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`}
+                  onClick={() => {
+                    // setApprovalSubmitted(false) // reset 2 step UI for approvals
+                    // onSwitchTokens()
+                  }}
+                >
+                {/* <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" /> */}
+                  <PlusIcon width={14} className="text-high-emphesis hover:text-white" />
+                </div>
+              </div>
+              {/* <CurrencyInputPanel
+                  value={formattedAmounts[Field.CURRENCY_B]}
+                  onUserInput={onFieldBInput}
+                  onCurrencySelect={handleCurrencyBSelect}
+                  onHalf={() => {
+                    onFieldBInput(halfAmounts[Field.CURRENCY_B]?.toExact() ?? '')
+                  }}
+                  onMax={() => {
+                    onFieldBInput(maxAmounts[Field.CURRENCY_B]?.toExact() ?? '')
+                  }}
+                  currency={currencies[Field.CURRENCY_B]}
+                  id="add-liquidity-input-tokenb"
+                  showCommonBases
+                /> */}
+              <SwapAssetPanel
+                spendFromWallet={true}
+                chainId={chainId}
+                header={(props) => (
+                  <SwapAssetPanel.Header
+                    {...props}
+                    label={'Swap from'
+                    //   independentField === Field.CURRENCY_B ? i18n._(t`Swap from:`) : i18n._(t`Swap from:`)
+                    }
+                  />
+                )}
+                currency={toToken}
+                // value={route?.normalize.netOut}
+				onChange={()=> {}}
+                // onChange={handleTypeOutput}
+              onSelect={handleOutputSelect}
+              />
+            </div>
+            </div>
+							{/* <TokenSelect 
 								show={true} 
 								chain={selectedTokenChain}
 								onClose={() => { 
@@ -627,7 +747,7 @@ const Aggregator = ({ }) => {
 									// function (selection?: { token: Token; chain: Chain; }): void {
 								// throw new Error('Function not implemented.');
 							// } }
-							/>
+							/> */}
 								
 							{/* </TokenSelect> */}
 														{/* <MultiSelect
@@ -662,7 +782,7 @@ const Aggregator = ({ }) => {
 						<div style={{ textAlign: 'center', margin: ' 8px 16px' }}>
 							<Head>OR</Head>
 						</div>
-						<Search tokens={tokensInChain} setTokens={setTokens} />
+						{/* <Search tokens={tokensInChain} setTokens={setTokens} /> */}
 					</SelectWrapper>
 
 					<div>
