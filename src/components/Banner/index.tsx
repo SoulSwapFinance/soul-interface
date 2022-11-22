@@ -73,7 +73,7 @@ export const NewFeature: FC<IFeature> = ({ chainId }) => (
         <p className="font-medium mb-2 mt-2 text-center text-white">
           {/* <span className="centered md:hidden"><b>Voting Ends Soon!</b> <b>&rarr;</b></span> */}
           {/* <span className="hidden md:inline"> Voting Has Begun <b> &rarr;</b></span> */}
-          <NavLink href="/open">
+          <NavLink href="/aggregator">
             <Button variant="filled" color={getChainColorCode(chainId)} size="sm">
               <span className="justify-center font-bold">
                 {'Click Here: Exchange More Tokens'}

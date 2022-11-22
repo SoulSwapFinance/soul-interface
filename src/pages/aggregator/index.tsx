@@ -367,7 +367,8 @@ const Aggregator = ({ }) => {
 	const [fromToken, setFromToken] = useState(NATIVE[chainId]);
 	const [fromDecimals, setFromDecimals] = useState(fromToken.decimals)
 	const [fromAddress, setFromAddress] = useState(NATIVE_ADDRESS)
-	const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(fromToken)
+		const [tokenToApprove, setTokenToApprove] = useState(fromToken)
+	const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(tokenToApprove)
 	const [toToken, setToToken] = useState(DAI[chainId]);
 	const [toAddress, setToAddress] = useState(DAI_ADDRESS[chainId])
 	const [toDecimals, setToDecimals] = useState(toToken.decimals || 18)
@@ -411,11 +412,12 @@ const Aggregator = ({ }) => {
     /**
      * Approves AutoStakeContract to move lpTokens
      */
-	 const handleApprove = async () => {
+	 const handleApprove = async (token) => {
         if (!account) {
             // alert('Connect Wallet')
         } else {
             try {
+            await setTokenToApprove(token)
                 const tx = await erc20Approve(route.adapters.addressToApprove)
                 // await tx?.wait().then(await fetchApproval())
             } catch (e) {
@@ -844,7 +846,7 @@ const Aggregator = ({ }) => {
 						</InputFooter>
 					</div>
 					<SwapWrapper>
-						{route && account ? (
+						{route && account && (
 							<Button
 								variant={'filled'}
 								color={getChainColorCode(chainId)}
@@ -855,13 +857,13 @@ const Aggregator = ({ }) => {
 									if (approve) approve();
 
 									// if (+amount > +balance?.data?.formatted) return;
-									if (isApproved) handleSwap();
+									if (isApproved || fromToken.isNative) handleSwap();
 								}}
 							>
-								{isApproved ? 'Swap' : 'Approve'}
+								{(isApproved || fromToken.isNative) ? 'Swap' : 'Approve'}
 							</Button>
-						) : null}
-						{route && account && !isApproved && ['Matcha/0x', '1inch', 'CowSwap'].includes(route?.name) ? (
+						)}
+						{/* route && account && !isApproved && ['Matcha/0x', '1inch'].includes(route?.name) ? (
 							<Button
 								variant={'filled'}
 								color={getChainColorCode(chainId)}
@@ -874,7 +876,7 @@ const Aggregator = ({ }) => {
 							>
 								{'Approve Infinite'}
 							</Button>
-						) : null}
+						) : null */}
 					</SwapWrapper>
 				</Body>
 

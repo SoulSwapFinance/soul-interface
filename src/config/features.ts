@@ -57,7 +57,7 @@ const features: FeatureMap = {
     Feature.BONDS,
     Feature.VAULT,
     Feature.COFFINBOX,
-    // Feature.AGGREGATE,
+    Feature.AGGREGATE,
     Feature.EXPLORE,
     Feature.LIMIT,
     Feature.UNDERWORLD
@@ -72,7 +72,7 @@ const features: FeatureMap = {
     Feature.LIQUIDITY,
     Feature.ANALYTICS,
     Feature.LIQUIDITY_MINING,
-    // Feature.AGGREGATE,
+    Feature.AGGREGATE,
     Feature.BONDS,
     Feature.COFFINBOX,
     Feature.LIMIT,
