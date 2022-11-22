@@ -640,12 +640,12 @@ const Aggregator = ({ }) => {
 
 			<BodyWrapper>
 				<Body showRoutes={fromToken && toToken}>
-					<div>
+					{/* <div>
 						<FormHeader>Chain</FormHeader>
 						<MultiSelect options={chains} value={selectedChain} 
 						onChange={onChainChange}
 						 />
-					</div>
+					</div> */}
 
 					{/* <SelectWrapper> */}
 						<FormHeader>Select Tokens</FormHeader>
