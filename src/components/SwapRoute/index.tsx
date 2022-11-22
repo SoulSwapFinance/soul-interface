@@ -6,39 +6,37 @@ import { GasIcon } from 'components/Icons/GasIcon';
 // import { Head } from 'next/document';
 import Image from 'next/image';
 import Badge from 'components/Badge';
-import { CurrencyAmount, NATIVE, NATIVE_ADDRESS, Token } from 'sdk';
+import { Currency, CurrencyAmount, NATIVE, NATIVE_ADDRESS, Token } from 'sdk';
 import { useActiveWeb3React } from 'services/web3';
 import { useTokenInfo } from 'hooks/useAPI';
 
-interface IToken {
-	address: string;
-	logoURI: string;
-	symbol: string;
-	decimals: string;
-}
+// interface IToken {
+// 	address: string
+// 	logoURI: string
+// 	symbol: string
+// 	decimals: string
+// }
 
 interface IPrice {
-	amountReturned: string;
-	estimatedGas: string;
-	tokenApprovalAddress: string;
-	logo: string;
+	amountReturned: string
+	estimatedGas: string
+	tokenApprovalAddress: string
+	logo: string
 }
 
 interface IRoute {
-	name: string;
-	price: IPrice;
-	toToken: Token
-	fromToken: Token
-	// toToken: IToken;
-	// fromToken: IToken;
-	selectedChain: string;
-	setRoute: () => void;
-	selected: boolean;
-	index: number;
-	gasUsd: number;
-	amountUsd: string;
-	airdrop: boolean;
-	amountFrom: string;
+	name: string
+	price: IPrice
+	toToken: Currency
+	fromToken: Currency
+	selectedChain: string
+	setRoute: () => void
+	selected: boolean
+	index: number
+	gasUsd: number
+	amountUsd: string
+	airdrop: boolean
+	amountFrom: string
 }
 
 const Route = ({
@@ -56,9 +54,10 @@ const Route = ({
 }: IRoute) => {
 	const { chainId } = useActiveWeb3React()
 	const tokenA = 
-		fromToken.isNative
-			? new Token(chainId, NATIVE_ADDRESS, 18)
-			: new Token(chainId, fromToken.address, Number(fromToken.decimals))
+		// fromToken.isNative
+		// 	? new Token(chainId, NATIVE_ADDRESS, 18)
+			// : 
+			new Token(chainId, fromToken.wrapped.address, Number(fromToken.wrapped.decimals))
 	const isApproved = useTokenApprove(
 		CurrencyAmount.fromRawAmount(tokenA, amountFrom),
 		price?.tokenApprovalAddress as `0x${string}`,
@@ -66,7 +65,7 @@ const Route = ({
 
 	if (!price.amountReturned) return null;
 
-	const amount = +price.amountReturned / 10 ** +toToken?.decimals;
+	const amount = +price.amountReturned / 10 ** +toToken?.wrapped.decimals;
 	const tokenURI = (tokenAddress) => {
 		let URI = useTokenInfo(tokenAddress).tokenInfo.image
 		return URI
@@ -75,13 +74,16 @@ const Route = ({
 	return (
 		<RouteWrapper onClick={setRoute} selected={selected} best={index === 0}>
 			<RouteRow>
+				<div className="bg-dark-1000 p-1 rounded rounded-xl">
 				<Image
-					src={tokenURI(toToken.address)}
-					height={'30px'}
-					width={'30px'}
-					alt="" style={{ marginRight: 4 }}
+					src={tokenURI(toToken.wrapped.address)}
+					height={'26px'}
+					width={'26px'}
+					alt=""
+					style={{ marginRight: 0, marginTop: 1, marginBottom: 1 }}
 				/>
-				<div className="ml-2 justify-center text-black">
+				</div>
+				<div className="ml-4 justify-center text-black mt-2 text-md font-bold">
 					{amount.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 })}{' '}
 					{Number.isFinite(+amountUsd)
 						? `($${Number(amountUsd).toLocaleString(undefined, {
@@ -90,12 +92,12 @@ const Route = ({
 						})})`
 						: null}
 				</div>
-				<div style={{ marginLeft: 'auto', display: 'flex', color: 'black' }}>
+				{/* <div style={{ marginLeft: 'auto', display: 'flex', color: 'black' }}>
 					<GasIcon />{' '}
 					<div style={{ marginLeft: 8 }}>
 						${gasUsd.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 })}
 					</div>
-				</div>
+				</div> */}
 			</RouteRow>
 
 			<RouteRow  style={{color: 'black'}}>
@@ -126,8 +128,8 @@ const Route = ({
 				) : null}
 			</RouteRow>
 		</RouteWrapper>
-	);
-};
+	)
+}
 
 const RouteWrapper = styled.div<{ selected: boolean; best: boolean }>`
 	display: grid;
