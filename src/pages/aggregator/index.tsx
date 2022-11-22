@@ -39,7 +39,7 @@ import { TYPE } from 'theme';
 import Head from 'next/head';
 import { useActiveWeb3React } from 'services/web3';
 import { getExplorerLink } from 'functions/explorer';
-import { CurrencyAmount, NATIVE, NATIVE_ADDRESS, Token, USDC, USDC_ADDRESS, WNATIVE, WNATIVE_ADDRESS } from 'sdk';
+import { CurrencyAmount, DAI, DAI_ADDRESS, NATIVE, NATIVE_ADDRESS, Token, USDC, USDC_ADDRESS, WNATIVE, WNATIVE_ADDRESS } from 'sdk';
 import { addTransaction } from 'state/transactions/actions';
 import useTokenBalance from 'hooks/useTokenBalance';
 import useApprove from 'hooks/useApprove';
@@ -58,7 +58,8 @@ import { e10 } from 'functions/math';
 // import TokenSelect from 'features/cross/components/TokenSelect';
 import { CHAINS } from 'features/cross/chains';
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel';
-import { PlusIcon } from '@heroicons/react/solid';
+import { ArrowDownIcon, PlusIcon } from '@heroicons/react/solid';
+import CurrencyInputPanel from 'components/CurrencyInputPanel';
 
 /*
 Integrated:
@@ -363,12 +364,13 @@ const Aggregator = ({ }) => {
 	const signer = library.getSigner()
 	const tokenList = getTokenList()
 	const [selectedChain, setSelectedChain] = useState(startChain(chainId));
-	const [fromToken, setFromToken] = useState(USDC[chainId]);
+	const [fromToken, setFromToken] = useState(NATIVE[chainId]);
 	const [fromDecimals, setFromDecimals] = useState(fromToken.decimals)
-	const [fromAddress, setFromAddress] = useState(USDC_ADDRESS[chainId])
-	const [toAddress, setToAddress] = useState(WNATIVE_ADDRESS[chainId])
+	const [fromAddress, setFromAddress] = useState(NATIVE_ADDRESS)
 	const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(fromToken)
-	const [toToken, setToToken] = useState(WNATIVE[chainId]);
+	const [toToken, setToToken] = useState(DAI[chainId]);
+	const [toAddress, setToAddress] = useState(DAI_ADDRESS[chainId])
+	const [toDecimals, setToDecimals] = useState(toToken.decimals || 18)
 	const [showTokenSelect, setShowTokenSelect] = useState(false)
     const selectedTokenChain = useMemo(() => CHAINS.find(c => c.chainId === chainId), [chainId, CHAINS]);
 	// const [userInput, onUserInput] = useState('')
@@ -587,6 +589,7 @@ const Aggregator = ({ }) => {
 		(inputCurrency) => {
 		//   setApprovalSubmitted(false) // reset 2 step UI for approvals
 		  setFromToken(inputCurrency)
+		  setFromDecimals(fromToken.decimals)
 		},
 		[setFromToken]
 	  )
@@ -626,8 +629,7 @@ const Aggregator = ({ }) => {
 
 	return (
 		<Wrapper>
-			<div>Aggregator</div>
-
+			<div className="mt-2" />
 			<Head>
 				This product is still WIP and not ready for public release yet. Please expect things to break and if you find
 				anything broken please let us know in the{' '}
@@ -700,8 +702,8 @@ const Aggregator = ({ }) => {
                     // onSwitchTokens()
                   }}
                 >
-                {/* <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" /> */}
-                  <PlusIcon width={14} className="text-high-emphesis hover:text-white" />
+                <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
+                  {/* <PlusIcon width={14} className="text-high-emphesis hover:text-white" /> */}
                 </div>
               </div>
               {/* <CurrencyInputPanel
@@ -718,7 +720,7 @@ const Aggregator = ({ }) => {
                   id="add-liquidity-input-tokenb"
                   showCommonBases
                 /> */}
-              <SwapAssetPanel
+              {/* <SwapAssetPanel
                 spendFromWallet={true}
                 chainId={chainId}
                 header={(props) => (
@@ -734,7 +736,23 @@ const Aggregator = ({ }) => {
 				onChange={()=> {}}
                 // onChange={handleTypeOutput}
               onSelect={handleOutputSelect}
-              />
+              /> */}
+			  <CurrencyInputPanel
+			                    showCurrencySelect={true}
+								currency={toToken}
+								hideInput={true}
+								// onUserInput={handleTypeDesiredRate}
+								// fiatValue={route?.value ?? undefined}
+								onCurrencySelect={handleOutputSelect}
+								// otherCurrency={currencyB}
+								showCommonBases={false}
+								id="output-currency"
+								disableCurrencySelect={false}
+								hideBalance={true}
+			   chainId={chainId} 
+			//    currency={toToken}
+			//    id={''}
+			   />
             </div>
             </div>
 							{/* <TokenSelect 
@@ -787,7 +805,7 @@ const Aggregator = ({ }) => {
 
 					<div>
 						<FormHeader>From Amount</FormHeader>
-						<TokenInput setAmount={setAmount} amount={amount} onMaxClick={onMaxClick} />
+						{/* <TokenInput setAmount={setAmount} amount={amount} onMaxClick={onMaxClick} /> */}
 						<InputFooter>
 							<div style={{ marginTop: 4, marginLeft: 4 }}>
 								Slippage %{' '}
@@ -813,16 +831,16 @@ const Aggregator = ({ }) => {
 									</>
 								) : null}
 							</div>
-							{balance ? (
+							{/* {balance ? (
 								<Balance onClick={onMaxClick}>
-									{`Balance: ${(balance.value?.div(e10(fromToken.decimals || 18))).toString()} ${fromToken.symbol}`}
+									{/* {fromToken.isNative ? `` : `Balance: ${(balance.value?.div(e10(fromToken.decimals ?? 18))).toString()} ${fromToken.symbol}`} */}
 									{/* {(formattedBalance */}
 									{/* // ).toLocaleString(undefined, { */}
 									{/* // 	maximumFractionDigits: 3 */}
-									{/* // })} */}
+									{/* // })}
 									
 								</Balance>
-							) : null}
+							) : null} */}
 						</InputFooter>
 					</div>
 					<SwapWrapper>
