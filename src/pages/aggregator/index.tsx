@@ -645,9 +645,9 @@ const Aggregator = ({ }) => {
 						 />
 					</div>
 
-					<SelectWrapper>
+					{/* <SelectWrapper> */}
 						<FormHeader>Select Tokens</FormHeader>
-						<TokenSelectDiv onClick={() => setShowTokenSelect(true)}>
+						{/* <TokenSelectDiv onClick={() => setShowTokenSelect(true)}> */}
 						<div className="flex flex-col gap-3 space-y-3">
             {/* {pair && pairState !== PairState.INVALID && (
                 <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
@@ -778,12 +778,12 @@ const Aggregator = ({ }) => {
 								onChange={setToToken}
 								filterOption={createFilter({ ignoreAccents: false })}
 							/> */}
-						</TokenSelectDiv>
+						{/* </TokenSelectDiv> */}
 						<div style={{ textAlign: 'center', margin: ' 8px 16px' }}>
 							<Head>OR</Head>
 						</div>
 						{/* <Search tokens={tokensInChain} setTokens={setTokens} /> */}
-					</SelectWrapper>
+					{/* </SelectWrapper> */}
 
 					<div>
 						<FormHeader>From Amount</FormHeader>
