@@ -208,9 +208,6 @@ msgstr ""
 msgid "Balances"
 msgstr ""
 
-msgid "BentoBox strategy"
-msgstr ""
-
 msgid "Bond"
 msgstr ""
 
@@ -336,6 +333,9 @@ msgstr ""
 msgid "CoffinBox Balances"
 msgstr ""
 
+msgid "CoffinBox strategy"
+msgstr ""
+
 msgid "Collateral"
 msgstr ""
 
@@ -355,6 +355,9 @@ msgid "Confirm"
 msgstr ""
 
 msgid "Confirm Adding Liquidity"
+msgstr ""
+
+msgid "Confirm Borrow"
 msgstr ""
 
 msgid "Confirm Deposit"
@@ -765,7 +768,13 @@ msgstr ""
 msgid "Lent"
 msgstr ""
 
+msgid "Leverage position"
+msgstr ""
+
 msgid "Leverage will enable you to take long or short positions."
+msgstr ""
+
+msgid "Leverage your position by swapping the received borrowed {0} for {1} and use that as extra collateral to borrow more {2}."
 msgstr ""
 
 msgid "Limit"
@@ -864,6 +873,9 @@ msgstr ""
 msgid "Minimum Received"
 msgstr ""
 
+msgid "Minimum received"
+msgstr ""
+
 msgid "Mint SOUL with Liquidity"
 msgstr ""
 
@@ -924,7 +936,7 @@ msgstr ""
 msgid "Number of Assets"
 msgstr ""
 
-msgid "Onchain oracle that tracks pricing for this pair."
+msgid "On-chain oracle that tracks pricing for this pair."
 msgstr ""
 
 msgid "Oops!"
@@ -980,6 +992,9 @@ msgstr ""
 msgid "Please make sure your {0} balance is sufficient to withdraw and then try again."
 msgstr ""
 
+msgid "Please note that you won't receive any tokens when you use leverage."
+msgstr ""
+
 msgid "Please refer to the"
 msgstr ""
 
@@ -1002,6 +1017,9 @@ msgid "Portfolio"
 msgstr ""
 
 msgid "Position Health"
+msgstr ""
+
+msgid "Position Leverage"
 msgstr ""
 
 msgid "Positions"
@@ -1252,6 +1270,9 @@ msgstr ""
 msgid "Success!"
 msgstr ""
 
+msgid "Success! Borrow Submitted"
+msgstr ""
+
 msgid "Success! Deposit Submitted"
 msgstr ""
 
@@ -1349,6 +1370,9 @@ msgid "This transaction will not succeed either due to price movement or fee on 
 msgstr ""
 
 msgid "Time Remaining"
+msgstr ""
+
+msgid "To borrow"
 msgstr ""
 
 msgid "Token"
@@ -1605,6 +1629,9 @@ msgstr ""
 msgid "You need to first approve LP tokens and then migrate it"
 msgstr ""
 
+msgid "You will deposit collateral"
+msgstr ""
+
 msgid "You will receive at least"
 msgstr ""
 
@@ -1642,6 +1669,9 @@ msgid "Your net return over the total investment."
 msgstr ""
 
 msgid "Your transaction got rejected"
+msgstr ""
+
+msgid "Your transaction will revert if there is a large, unfavorable price movement before it is confirmed."
 msgstr ""
 
 msgid "Your transactions will appear here..."

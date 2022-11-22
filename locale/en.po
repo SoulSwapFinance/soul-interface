@@ -208,9 +208,6 @@ msgstr "Balanced Mode is an optional UI setting to maintain the traditional styl
 msgid "Balances"
 msgstr "Balances"
 
-msgid "BentoBox strategy"
-msgstr "BentoBox strategy"
-
 msgid "Bond"
 msgstr "Bond"
 
@@ -341,6 +338,9 @@ msgstr "CoffinBox Analytics."
 msgid "CoffinBox Balances"
 msgstr "CoffinBox Balances"
 
+msgid "CoffinBox strategy"
+msgstr "CoffinBox strategy"
+
 msgid "Collateral"
 msgstr "Collateral"
 
@@ -361,6 +361,9 @@ msgstr "Confirm"
 
 msgid "Confirm Adding Liquidity"
 msgstr "Confirm Adding Liquidity"
+
+msgid "Confirm Borrow"
+msgstr "Confirm Borrow"
 
 msgid "Confirm Deposit"
 msgstr "Confirm Deposit"
@@ -770,8 +773,14 @@ msgstr "Lending Markets"
 msgid "Lent"
 msgstr "Lent"
 
+msgid "Leverage position"
+msgstr "Leverage position"
+
 msgid "Leverage will enable you to take long or short positions."
 msgstr "Leverage will enable you to take long or short positions."
+
+msgid "Leverage your position by swapping the received borrowed {0} for {1} and use that as extra collateral to borrow more {2}."
+msgstr "Leverage your position by swapping the received borrowed {0} for {1} and use that as extra collateral to borrow more {2}."
 
 msgid "Limit"
 msgstr "Limit"
@@ -869,6 +878,9 @@ msgstr "Min. Recieved (after slippage)"
 msgid "Minimum Received"
 msgstr "Minimum Received"
 
+msgid "Minimum received"
+msgstr "Minimum received"
+
 msgid "Mint SOUL with Liquidity"
 msgstr "Mint SOUL with Liquidity"
 
@@ -929,8 +941,8 @@ msgstr "Not enough {0} available"
 msgid "Number of Assets"
 msgstr "Number of Assets"
 
-msgid "Onchain oracle that tracks pricing for this pair."
-msgstr "Onchain oracle that tracks pricing for this pair."
+msgid "On-chain oracle that tracks pricing for this pair."
+msgstr "On-chain oracle that tracks pricing for this pair."
 
 msgid "Oops!"
 msgstr "Oops!"
@@ -987,6 +999,9 @@ msgstr "Please connect to the appropriate network."
 msgid "Please make sure your {0} balance is sufficient to withdraw and then try again."
 msgstr "Please make sure your {0} balance is sufficient to withdraw and then try again."
 
+msgid "Please note that you won't receive any tokens when you use leverage."
+msgstr "Please note that you won't receive any tokens when you use leverage."
+
 msgid "Please refer to the"
 msgstr "Please refer to the"
 
@@ -1010,6 +1025,9 @@ msgstr "Portfolio"
 
 msgid "Position Health"
 msgstr "Position Health"
+
+msgid "Position Leverage"
+msgstr "Position Leverage"
 
 msgid "Positions"
 msgstr "Positions"
@@ -1261,6 +1279,9 @@ msgstr "Success"
 msgid "Success!"
 msgstr "Success!"
 
+msgid "Success! Borrow Submitted"
+msgstr "Success! Borrow Submitted"
+
 msgid "Success! Deposit Submitted"
 msgstr "Success! Deposit Submitted"
 
@@ -1359,6 +1380,9 @@ msgstr "This transaction will not succeed either due to price movement or fee on
 
 msgid "Time Remaining"
 msgstr "Time Remaining"
+
+msgid "To borrow"
+msgstr "To borrow"
 
 msgid "Token"
 msgstr "Token"
@@ -1616,6 +1640,9 @@ msgstr "You don’t have liquidity in this pool yet"
 msgid "You need to first approve LP tokens and then migrate it"
 msgstr "You need to first approve LP tokens and then migrate it"
 
+msgid "You will deposit collateral"
+msgstr "You will deposit collateral"
+
 msgid "You will receive at least"
 msgstr "You will receive at least"
 
@@ -1654,6 +1681,9 @@ msgstr "Your net return over the total investment."
 
 msgid "Your transaction got rejected"
 msgstr "Your transaction got rejected"
+
+msgid "Your transaction will revert if there is a large, unfavorable price movement before it is confirmed."
+msgstr "Your transaction will revert if there is a large, unfavorable price movement before it is confirmed."
 
 msgid "Your transactions will appear here..."
 msgstr "Your transactions will appear here..."

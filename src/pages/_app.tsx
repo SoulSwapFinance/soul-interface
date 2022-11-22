@@ -36,6 +36,7 @@ import { ApiDataProvider } from 'contexts/ApiDataProvider'
 import ModalProvider from 'contexts/ModalProvider'
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client'
 import { RPC } from 'connectors'
+import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const link = createHttpLink({
   // uri: RPC[250],
@@ -82,6 +83,8 @@ function MyApp({ Component, pageProps, fallback, err }) {
     }
   }, [events])
 
+  const [queryClient] = React.useState(() => new QueryClient());
+  
   useEffect(() => {
     async function load(locale) {
       i18n.loadLocaleData(locale, { plurals: plurals[locale?.split('_')[0]] })
@@ -155,6 +158,8 @@ function MyApp({ Component, pageProps, fallback, err }) {
       {/*@ts-ignore TYPE NEEDS FIXING*/}
       <I18nProvider i18n={i18n} forceRenderOnLocaleChange={false}>
         <Web3ReactProvider getLibrary={getLibrary}>
+      <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
         <ApiDataProvider>
           <ApolloProvider client={client}>
           {/*@ts-ignore TYPE NEEDS FIXING*/}
@@ -196,6 +201,8 @@ function MyApp({ Component, pageProps, fallback, err }) {
           </FantomApiProvider>
           </ApolloProvider>
           </ApiDataProvider>
+          </Hydrate>
+          </QueryClientProvider>
         </Web3ReactProvider>
       </I18nProvider>
     </>
