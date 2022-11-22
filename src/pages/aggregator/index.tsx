@@ -39,7 +39,7 @@ import { TYPE } from 'theme';
 import Head from 'next/head';
 import { useActiveWeb3React } from 'services/web3';
 import { getExplorerLink } from 'functions/explorer';
-import { CurrencyAmount, DAI, DAI_ADDRESS, NATIVE, NATIVE_ADDRESS, Token, USDC, USDC_ADDRESS, WNATIVE, WNATIVE_ADDRESS } from 'sdk';
+import { Currency, CurrencyAmount, DAI, DAI_ADDRESS, NATIVE, NATIVE_ADDRESS, Token, USDC, USDC_ADDRESS, WNATIVE, WNATIVE_ADDRESS } from 'sdk';
 import { addTransaction } from 'state/transactions/actions';
 import useTokenBalance from 'hooks/useTokenBalance';
 import useApprove from 'hooks/useApprove';
