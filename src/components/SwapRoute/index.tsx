@@ -8,6 +8,7 @@ import Image from 'next/image';
 import Badge from 'components/Badge';
 import { CurrencyAmount, Token } from 'sdk';
 import { useActiveWeb3React } from 'services/web3';
+import { useTokenInfo } from 'hooks/useAPI';
 
 interface IToken {
 	address: string;
@@ -26,8 +27,10 @@ interface IPrice {
 interface IRoute {
 	name: string;
 	price: IPrice;
-	toToken: IToken;
-	fromToken: IToken;
+	toToken: Token
+	fromToken: Token
+	// toToken: IToken;
+	// fromToken: IToken;
 	selectedChain: string;
 	setRoute: () => void;
 	selected: boolean;
@@ -61,11 +64,20 @@ const Route = ({
 	if (!price.amountReturned) return null;
 
 	const amount = +price.amountReturned / 10 ** +toToken?.decimals;
+	const tokenURI = (tokenAddress) => {
+		let URI = useTokenInfo(tokenAddress).tokenInfo.image
+		return URI
+	}
 
 	return (
 		<RouteWrapper onClick={setRoute} selected={selected} best={index === 0}>
 			<RouteRow>
-				<Image src={toToken?.logoURI} alt="" style={{ marginRight: 4 }} />
+				<Image 
+					src={tokenURI(toToken.address)}
+					height={'20px'}
+					width={'20px'}
+					alt="" style={{ marginRight: 4 }} 
+				/>
 				<div>
 					{amount.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 })}{' '}
 					{Number.isFinite(+amountUsd)

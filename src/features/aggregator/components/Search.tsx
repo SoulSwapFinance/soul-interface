@@ -4,7 +4,7 @@ import { Input } from './TokenInput';
 import styled from 'styled-components';
 import Head from 'next/head';
 import { Heading } from 'components/ReusableStyles';
-import CloseBtn from 'pages/aggregator';
+// import CloseBtn from 'pages/aggregator';
 import { Button } from 'components/Button';
 
 interface Props {
@@ -100,16 +100,19 @@ const Row = ({ data: { data, onClick }, index, style }) => {
 const Modal = ({ close, onInputChange, data, onClick }) => {
 	return (
 		<ModalWrapper>
-			<Header>
+				<div className="grid grid-cols justify-end"> 
+			{/* <Header>
 				<Heading fontSize={20}>Search</Heading>
-				<Button 
+			</Header> */}
+                <Button 
                     onClick={close} 
-                />
-			</Header>
-			<div>
+                >  X
+                </Button>
+                </div>
+                <div>
 				<Input placeholder="Search... (BTC-ETH)" onChange={onInputChange} autoFocus />
 			</div>
-			<List height={390} itemCount={data.length} itemSize={38} itemData={{ data, onClick }}>
+			<List height={390} itemCount={data?.length} itemSize={38} itemData={{ data, onClick }}>
 				{Row}
 			</List>
 			<Pairs></Pairs>
@@ -137,19 +140,19 @@ export default function Search({ tokens, setTokens }: Props) {
 			return;
 		}
 
-		const tokens00 = tokens.filter(({ symbol }) => symbol.toLowerCase() === symbol0.toLowerCase());
-		const tokens01 = tokens.filter(({ symbol }) => symbol.toLowerCase().includes(symbol0.toLowerCase()));
-		const tokens0 = tokens00.concat(tokens01);
+		const tokens00 = tokens?.filter(({ symbol }) => symbol.toLowerCase() === symbol0.toLowerCase());
+		const tokens01 = tokens?.filter(({ symbol }) => symbol.toLowerCase().includes(symbol0.toLowerCase()));
+		const tokens0 = tokens00?.concat(tokens01);
 
 		const tokens1 = (() => {
-			if (tokens0.length > 100 || !symbol1) return tokens.slice(0, 100);
-			else return tokens.filter(({ symbol }) => symbol.toLowerCase().includes(symbol1));
+			if (tokens0?.length > 100 || !symbol1) return tokens?.slice(0, 100);
+			else return tokens?.filter(({ symbol }) => symbol.toLowerCase().includes(symbol1));
 		})();
 
-		const data = tokens0.reduce(
+		const data = tokens0?.reduce(
 			(acc, token0) =>
 				acc.concat(
-					tokens1.map((token1) => ({
+					tokens1?.map((token1) => ({
 						token1,
 						token0,
 						label: `${token0.symbol}-${token1.symbol}`,

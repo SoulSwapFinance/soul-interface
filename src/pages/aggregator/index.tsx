@@ -39,7 +39,7 @@ import { TYPE } from 'theme';
 import Head from 'next/head';
 import { useActiveWeb3React } from 'services/web3';
 import { getExplorerLink } from 'functions/explorer';
-import { CurrencyAmount, NATIVE_ADDRESS, Token as ERC20, USDC, WNATIVE_ADDRESS } from 'sdk';
+import { CurrencyAmount, NATIVE, NATIVE_ADDRESS, Token, USDC, USDC_ADDRESS, WNATIVE, WNATIVE_ADDRESS } from 'sdk';
 import { addTransaction } from 'state/transactions/actions';
 import useTokenBalance from 'hooks/useTokenBalance';
 import useApprove from 'hooks/useApprove';
@@ -52,7 +52,7 @@ import { useToast } from 'react-toastify';
 import { CurrencyInputWithNetworkSelector } from 'components/CrossSwap/CurrencyInputWithNetworkSelector';
 import Container from 'components/Container';
 import { getChainInfo } from 'constants/chains';
-
+import listedTokens from 'features/aggregator/tokenList.json'
 /*
 Integrated:
 - paraswap
@@ -230,48 +230,54 @@ const CloseBtn = ({ onClick }) => {
 	);
 };
 
-interface Token {
-	address: string;
-	logoURI: string;
-	symbol: string;
-	decimals: string;
-	name: string;
-	chainId: number;
-}
+// interface Token {
+// 	address: string;
+// 	logoURI: string;
+// 	symbol: string;
+// 	decimals: string;
+// 	name: string;
+// 	chainId: number;
+// }
 
 async function getTokenList() {
-	const uniList = await fetch('https://tokens.uniswap.org/').then((r) => r.json());
-	const sushiList = await fetch('https://token-list.sushi.com/').then((r) => r.json());
-	const oneInch = await Promise.all(
-		Object.values(oneInchChains).map(async (chainId) =>
-			fetch(`https://tokens.1inch.io/v1.1/${chainId}`).then((r) => r.json())
-		)
-	);
-	const hecoList = await fetch('https://token-list.sushi.com/').then((r) => r.json());
-	const lifiList = await fetch('https://li.quest/v1/tokens').then((r) => r.json());
+	const tokenList = listedTokens
+	// const uniList = await fetch('https://tokens.uniswap.org/').then((r) => r.json());
+	// const sushiList = await fetch('https://token-list.sushi.com/').then((r) => r.json());
+	// const oneInch = await Promise.all(
+	// 	Object.values(oneInchChains).map(async (chainId) =>
+	// 		fetch(`https://tokens.1inch.io/v1.1/${chainId}`).then((r) => r.json())
+	// 	)
+	// );
+	// const lifiList = await fetch('https://li.quest/v1/tokens').then((r) => r.json());
 
-	const oneInchList = Object.values(oneInchChains)
-		.map((chainId, i) =>
-			Object.values(oneInch[i]).map((token: { address: string }) => ({
-				...token,
-				chainId
-			}))
-		)
-		.flat();
+	// const oneInchList = Object.values(oneInchChains)
+	// 	.map((chainId, i) =>
+	// 		Object?.values(tokenList[i]).map((token: { address: string }) => ({
+	// 			...token,
+	// 			chainId
+	// 		}))
+	// 	)
+	// 	.flat();
 
 	const tokensByChain = mapValues(
 		merge(
-			groupBy([...oneInchList, ...sushiList.tokens, ...uniList.tokens, ...hecoList.tokens, ...nativeTokens], 'chainId'),
-			lifiList.tokens
+			groupBy([
+				// ...oneInchList, 
+				// ...sushiList.tokens, 
+				...tokenList.tokens["250"]], 'chainId')
+				// ...nativeTokens], 'chainId'),
+			// lifiList.tokens
 		),
-		(val) => uniqBy(val, (token: Token) => token.address.toLowerCase())
+		(val) => uniqBy(val, (token: Token) => token.address
+		// .toLowerCase()
+		)
 	);
 
 	return {
 		props: {
-			tokenlist: tokensByChain
+			tokenlist: tokenList.tokens["250"],
 		},
-		revalidate: 5 * 60 // 5 minutes
+		revalidate: 5 * 600 // 5 minutes
 	};
 }
 
@@ -336,21 +342,34 @@ const InputFooter = styled.div`
 
 const chains = getAllChains();
 
+const startChain = (id) => {
+	let chain = chains[0] // ETH
+	id == 56 ? chain = chains[1] // BSC
+	: id == 137 ? chain = chains[2] // MATIC
+	: id == 42161 ? chain = chains[3] // ARBITRUM
+	: id == 43114 ? chain = chains[4] // AVALANCHE
+	: id == 250 ? chain = chains[5] // FANTOM
+	: id == 1285 ? chain = chains[6] // MOONRIVER
+	: chains[0] // ETH
+	return chain
+}
+
 const Aggregator = ({ }) => {
 	const { account, chainId, library } = useActiveWeb3React();
 	const signer = library.getSigner()
 	const tokenList = getTokenList()
-	const [selectedChain, setSelectedChain] = useState(chains[0]);
-	const [fromToken, setFromToken] = useState(null);
+	const [selectedChain, setSelectedChain] = useState(startChain(chainId));
+	const [fromToken, setFromToken] = useState(WNATIVE[chainId]);
 	const [fromDecimals, setFromDecimals] = useState(18)
 	const [fromAddress, setFromAddress] = useState(WNATIVE_ADDRESS[chainId])
+	const [toAddress, setToAddress] = useState(USDC_ADDRESS[chainId])
 	const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(fromToken)
-	const [toToken, setToToken] = useState(null);
+	const [toToken, setToToken] = useState(USDC[chainId]);
 	// const toast = useToast();
 
 	const [slippage, setSlippage] = useState('1');
 
-	const addRecentTransaction = addTransaction();
+	// const addRecentTransaction = addTransaction();
 
 	// const { switchNetworkAsync } = useSwitchNetwork();
 	const networkSelector = CurrencyInputWithNetworkSelector
@@ -360,7 +379,7 @@ const Aggregator = ({ }) => {
 	const [txUrl, setTxUrl] = useState('');
 
 	const amountWithDecimals = new BigNumber(amount)
-		.times(10 ** (fromToken?.decimals || 18 || 18))
+		.times(10 ** (fromDecimals || 18))
 		.toFixed(0);
 
 	const balance =
@@ -410,12 +429,12 @@ const Aggregator = ({ }) => {
 	// }, [isValidSelectedChain, currentChainId]);
 
 	// useEffect(() => {
-		// const nativeToken = tokenList[chainsMap['fantom']]?.[0] || {};
-		// setFromToken({
-		// 	...nativeToken,
-		// 	value: nativeToken.address,
-		// 	label: nativeToken.symbol
-		// });
+	// 	const nativeToken = tokenList[chainsMap[chainName(chainId)]]?.[0] || {};
+	// 	setFromToken({
+	// 		...nativeToken,
+	// 		value: nativeToken.address,
+	// 		label: nativeToken.symbol
+	// 	});
 	// 	setFromDecimals(18)
 	// 	// setFromAddress(NATIVE_ADDRESS[chainId])
 	// }, [selectedChain, tokenList]);
@@ -425,7 +444,7 @@ const Aggregator = ({ }) => {
 	// 	chainId: chainsMap[selectedChain.value]
 	// });
 
-	const tokensInChain = tokenList[chainsMap[chainName(chainId)]]?.map((token) => ({
+	const tokensInChain = tokenList[chainsMap['fantom']]?.map((token) => ({
 		...token,
 		value: token.address,
 		label: token.symbol
@@ -482,8 +501,8 @@ const Aggregator = ({ }) => {
 	const handleSwap = () => {
 		swapMutation.mutate({
 			chain: selectedChain.value,
-			from: fromToken.value,
-			to: toToken.value,
+			from: fromAddress,
+			to: toAddress,
 			amount: amountWithDecimals,
 			signer,
 			slippage,
@@ -495,8 +514,8 @@ const Aggregator = ({ }) => {
 
 	const { data: routes = [], isLoading } = useGetRoutes({
 		chain: selectedChain.value,
-		from: fromToken?.value,
-		to: toToken?.value,
+		from: fromAddress,
+		to: toAddress,
 		amount: amountWithDecimals,
 		extra: {
 			// TODO
@@ -524,7 +543,7 @@ const Aggregator = ({ }) => {
 		setTxUrl('');
 	};
 
-	const tokenA = new ERC20(chainId, fromAddress, fromDecimals)
+	const tokenA = new Token(chainId, fromAddress, fromDecimals)
 
 	const [approvalState, approve] = useTokenApprove(
 		CurrencyAmount.fromRawAmount(tokenA, amountWithDecimals),
