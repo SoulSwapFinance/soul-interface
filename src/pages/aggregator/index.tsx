@@ -60,6 +60,7 @@ import { CHAINS } from 'features/cross/chains';
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel';
 import { ArrowDownIcon, PlusIcon } from '@heroicons/react/solid';
 import CurrencyInputPanel from 'components/CurrencyInputPanel';
+import { BNB } from 'constants/tokens';
 
 /*
 Integrated:
@@ -152,14 +153,14 @@ const Wrapper = styled.div`
 	}
 `;
 
-const oneInchChains = {
-	ethereum: 1,
-	bsc: 56,
-	polygon: 137,
-	arbitrum: 42161,
-	avax: 43114,
-	fantom: 250,
-};
+// const oneInchChains = {
+// 	ethereum: 1,
+// 	bsc: 56,
+// 	polygon: 137,
+// 	arbitrum: 42161,
+// 	avax: 43114,
+// 	fantom: 250,
+// };
 
 const Balance = styled.div`
 	text-align: right;
@@ -174,9 +175,8 @@ const Routes = styled.div`
 	border-radius: 16px;
 	text-align: left;
 	overflow-y: scroll;
-	min-width: 360px;
 	max-height: 444px;
-	min-width: 26rem;
+	min-width: 30rem;
 	animation: tilt-in-fwd-in 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 
 	box-shadow: ${({ theme }) =>
@@ -213,19 +213,19 @@ const Routes = styled.div`
 		}
 	}
 `;
-const BodyWrapper = styled.div`
-	display: flex;
-	gap: 16px;
-	margin: 0 auto;
-`;
+// const BodyWrapper = styled.div`
+// 	display: flex;
+// 	gap: 16px;
+// 	margin: 0 auto;
+// `;
 
-const TokenSelectDiv = styled.div`
-	display: grid;
-	grid-column-gap: 8px;
-	margin-top: 16px;
-	margin-bottom: 8px;
-	grid-template-columns: 5fr 1fr 5fr;
-`;
+// const TokenSelectDiv = styled.div`
+// 	display: grid;
+// 	grid-column-gap: 8px;
+// 	margin-top: 16px;
+// 	margin-bottom: 8px;
+// 	grid-template-columns: 5fr 1fr 5fr;
+// `;
 
 const CloseBtn = ({ onClick }) => {
 	return (
@@ -270,11 +270,11 @@ async function getTokenList() {
 				// ...oneInchList, 
 				// ...sushiList.tokens, 
 				...tokenList.tokens["250"]], 'chainId')
-				// ...nativeTokens], 'chainId'),
+			// ...nativeTokens], 'chainId'),
 			// lifiList.tokens
 		),
 		(val) => uniqBy(val, (token: Token) => token.address
-		// .toLowerCase()
+			// .toLowerCase()
 		)
 	);
 
@@ -350,126 +350,47 @@ const chains = getAllChains();
 const startChain = (id) => {
 	let chain = chains[0] // ETH
 	id == 56 ? chain = chains[1] // BSC
-	: id == 137 ? chain = chains[2] // MATIC
-	: id == 42161 ? chain = chains[3] // ARBITRUM
-	: id == 43114 ? chain = chains[4] // AVALANCHE
-	: id == 250 ? chain = chains[5] // FANTOM
-	: id == 1285 ? chain = chains[6] // MOONRIVER
-	: chains[0] // ETH
+		: id == 137 ? chain = chains[2] // MATIC
+			: id == 42161 ? chain = chains[3] // ARBITRUM
+				: id == 43114 ? chain = chains[4] // AVALANCHE
+					: id == 250 ? chain = chains[5] // FANTOM
+						: id == 1285 ? chain = chains[6] // MOONRIVER
+							: chains[0] // ETH
 	return chain
 }
 
 const Aggregator = ({ }) => {
 	const { account, chainId, library } = useActiveWeb3React();
 	const signer = library.getSigner()
-	const tokenList = getTokenList()
-	const [selectedChain, setSelectedChain] = useState(startChain(chainId));
-	const [fromToken, setFromToken] = useState(NATIVE[chainId]);
-	const [fromDecimals, setFromDecimals] = useState(fromToken.decimals)
-	const [fromAddress, setFromAddress] = useState(NATIVE_ADDRESS)
-		const [tokenToApprove, setTokenToApprove] = useState(fromToken)
-	const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(tokenToApprove)
-	const [toToken, setToToken] = useState(DAI[chainId]);
-	const [toAddress, setToAddress] = useState(DAI_ADDRESS[chainId])
-	const [toDecimals, setToDecimals] = useState(toToken.decimals || 18)
-	const [showTokenSelect, setShowTokenSelect] = useState(false)
-    const selectedTokenChain = useMemo(() => CHAINS.find(c => c.chainId === chainId), [chainId, CHAINS]);
-	// const [userInput, onUserInput] = useState('')
-	// const [userOutput, onUserOutput] = useState('')
-	// const toast = useToast();
+	const [selectedChain, setSelectedChain] = useState(startChain(chainId))
 
-	const [slippage, setSlippage] = useState('1');
+	const [fromToken, setFromToken] = useState<Currency>()
+	const [toToken, setToToken] = useState<Currency>(DAI[chainId])
+	const [inputToken, setInputToken] = useState<Currency>()
+	const [outputToken, setOutputToken] = useState<Currency>()
+	const [fromDecimals, setFromDecimals] = useState(inputToken?.wrapped.decimals)
+	const [toDecimals, setToDecimals] = useState(outputToken?.wrapped.decimals)
 
-	// const addRecentTransaction = addTransaction();
+	const [fromAddress, setFromAddress] = useState(fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address)
+	const [toAddress, setToAddress] =  useState(toToken?.isNative ? NATIVE_ADDRESS : toToken?.wrapped.address)
+	const [tokenToApprove, setTokenToApprove] = useState<Currency>()
 
-	// const { switchNetworkAsync } = useSwitchNetwork();
-	const networkSelector = CurrencyInputWithNetworkSelector
-
+	const [slippage, setSlippage] = useState('1')
 	const [amount, setAmount] = useState('10');
 	const [txModalOpen, setTxModalOpen] = useState(false);
 	const [txUrl, setTxUrl] = useState('');
 
 	const amountWithDecimals = new BigNumber(amount)
-		.times(10 ** (fromDecimals || 18))
+		.times(10 ** (fromToken?.wrapped.decimals || 18))
 		.toFixed(0);
 
 	const balance =
 		useTokenBalance(
 			chainId,
-			fromToken?.isNative ? NATIVE_ADDRESS : fromAddress,
+			fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address,
 			// addressOrName: address,
 			// watch: true
 		);
-	
-	// const formattedBalance = Number(balance) / 10**fromToken.decimals
-
-	// const currentChainId = chainId;
-
-	// const isValidSelectedChain = chains.find(
-	// 	({ value }) => selectedChain.value === value && chainsMap[value] === currentChainId
-	// );
-
-    /**
-     * Approves AutoStakeContract to move lpTokens
-     */
-	 const handleApprove = async (token) => {
-        if (!account) {
-            // alert('Connect Wallet')
-        } else {
-            try {
-            await setTokenToApprove(token)
-                const tx = await erc20Approve(route.adapters.addressToApprove)
-                // await tx?.wait().then(await fetchApproval())
-            } catch (e) {
-                // alert(e.message)
-                console.log(e)
-                return
-            }
-        }
-    }
-
-	async function switchNetworkAsync(cid) {
-		setSelectedChain(chains.find(({ value }) => chainsMap[value] === cid.id));
-	}
-
-	const chainName = (id) => {
-		let name = getChainInfo(id, "NAME").toLowerCase()
-		return name
-	}
-
-	// useEffect(() => {
-	// 	if (!isValidSelectedChain)
-	// 		setSelectedChain(chains.find(({ value }) => chainsMap[value] === currentChainId) ?? chains[0]);
-	// }, [isValidSelectedChain, currentChainId]);
-
-	// useEffect(() => {
-	// 	const nativeToken = tokenList[chainsMap[chainName(chainId)]]?.[0] || {};
-	// 	setFromToken({
-	// 		...nativeToken,
-	// 		value: nativeToken.address,
-	// 		label: nativeToken.symbol
-	// 	});
-	// 	setFromDecimals(18)
-	// 	// setFromAddress(NATIVE_ADDRESS[chainId])
-	// }, [selectedChain, tokenList]);
-
-	// TODO
-	// const { data: gasPriceData } = useFeeData({
-	// 	chainId: chainsMap[selectedChain.value]
-	// });
-
-	const tokensInChain = tokenList[chainsMap[chainName(chainId)]]?.map((token) => ({
-		...token,
-		value: token.address,
-		label: token.symbol
-	}));
-
-	const setTokens = (tokens) => {
-		setFromToken(tokens.token0);
-		setToToken(tokens.token1);
-		setFromDecimals(fromToken.decimals)
-		setFromAddress(fromToken?.address)
-	};
 
 	const [route, setRoute] = useState(null);
 
@@ -483,7 +404,7 @@ const Aggregator = ({ }) => {
 			signer: ethers.Signer;
 			slippage: string;
 			rawQuote: any;
-			tokens: { toToken: Token; fromToken: Token };
+			tokens: { toToken: Currency; fromToken: Currency };
 		}) => swap(params),
 		onSuccess: (data, variables) => {
 			addTransaction({
@@ -492,7 +413,7 @@ const Aggregator = ({ }) => {
 				from: account,
 				summary: `Swap transaction using ${variables.adapter} is sent.`
 			});
-			const explorerUrl =  getExplorerLink(chainId, data, "transaction") // chain.blockExplorers.default.url;
+			const explorerUrl = getExplorerLink(chainId, data, "transaction") // chain.blockExplorers.default.url;
 			setTxModalOpen(true);
 
 			setTxUrl(`${explorerUrl}/tx/${data?.hash}`);
@@ -501,22 +422,22 @@ const Aggregator = ({ }) => {
 			if (err.code !== 'ACTION_REJECTED') {
 				console.log('Something went wrong, oh no!')
 			}
-				// useToast(
-				// 	// title: 'Something went wrong.',
-				// 	// description: err.reason,
-				// 	// status: 'error',
-				// 	// duration: 9000,
-				// 	// isClosable: true,
-				// 	// position: 'top'
-				// );
+			// useToast(
+			// 	// title: 'Something went wrong.',
+			// 	// description: err.reason,
+			// 	// status: 'error',
+			// 	// duration: 9000,
+			// 	// isClosable: true,
+			// 	// position: 'top'
+			// );
 		}
 	});
 
 	const handleSwap = () => {
 		swapMutation.mutate({
 			chain: selectedChain.value,
-			from: fromAddress,
-			to: toAddress,
+			from: fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address,
+			to: toToken?.isNative ? NATIVE_ADDRESS : toToken?.wrapped.address,
 			amount: amountWithDecimals,
 			signer,
 			slippage,
@@ -528,8 +449,8 @@ const Aggregator = ({ }) => {
 
 	const { data: routes = [], isLoading } = useGetRoutes({
 		chain: selectedChain.value,
-		from: fromAddress,
-		to: toAddress,
+		from: fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address,
+		to: toToken?.isNative ? NATIVE_ADDRESS : toToken?.wrapped.address,
 		amount: amountWithDecimals,
 		extra: {
 			// TODO
@@ -544,8 +465,8 @@ const Aggregator = ({ }) => {
 
 	const { data: tokenPrices } = useGetPrice({
 		chain: selectedChain.value,
-		toToken: toToken?.address,
-		fromToken: fromToken?.address
+		toToken: toToken?.isNative ? NATIVE_ADDRESS : toToken?.wrapped.address,
+		fromToken: fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address
 	});
 
 	const { gasTokenPrice = 0, toTokenPrice = 0, fromTokenPrice = 0 } = tokenPrices || {};
@@ -557,12 +478,12 @@ const Aggregator = ({ }) => {
 		setTxUrl('');
 	};
 
-	const tokenA = new Token(chainId, fromAddress, fromDecimals)
+	const tokenA = new Token(chainId, fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address || WNATIVE_ADDRESS[chainId], fromToken?.wrapped.decimals || 18)
 
 	const [approvalState, approve] = useTokenApprove(
 		CurrencyAmount.fromRawAmount(tokenA, amountWithDecimals),
 		// fromToken?.address, 
-		route?.price?.tokenApprovalAddress, 
+		route?.price?.tokenApprovalAddress,
 	);
 
 
@@ -572,62 +493,32 @@ const Aggregator = ({ }) => {
 	const onMaxClick = () => {
 		if (balance) setAmount((balance.value?.div(e10(fromToken.decimals || 18))).toString());
 	};
-	
-	const handleCurrencySelect = useCallback(
-    (isInput: boolean, currency: Currency) => {
-      if (isInput) {
-        setFromFrom(currency)
-      } else {
-        setToToken(currency)
-      }
-    },
-    [activeField]
-  )
 
+	const handleInputSelect = useCallback(
+		(inputCurrency: Currency) => {
+			setFromToken(inputCurrency)
+			setInputToken(inputCurrency)
+			setFromDecimals(inputCurrency?.wrapped.decimals)
+
+		},
+		[setFromToken]
+	)
+
+	const handleOutputSelect = useCallback(
+		(outputCurrency: Currency) => {
+			setToToken(outputCurrency)
+			setOutputToken(outputCurrency)
+			setToDecimals(outputCurrency?.wrapped.decimals)
+		},
+		[setToToken]
+	)
 
 	const handleTypeInput = useCallback(
 		(value: string) => {
-		  setAmount(value)
+			setAmount(value)
 		},
 		[setAmount]
-	  )
-	
-	//   const handleTypeOutput = useCallback(
-	// 	(value: string) => {
-	// 	  setAmount(value)
-	// 	},
-	// 	[setAmount]
-	//   )
-
-	const handleInputSelect = useCallback(
-		(inputCurrency) => {
-		//   setApprovalSubmitted(false) // reset 2 step UI for approvals
-		  setFromToken(inputCurrency)
-		  handleCurrencySelect(true, inputCurrency)
-		  setFromDecimals(fromToken.decimals)
-		},
-		[setFromToken]
-	  )
-	const handleOutputSelect = useCallback(
-		(outputCurrency) => {
-		//   setApprovalSubmitted(false) // reset 2 step UI for approvals
-		  setToToken(outputCurrency)
-		  handleCurrencySelect(true, outputCurrency)
-		},
-		[setToToken]
-	  )
-	  
-	const onChainChange = (newChain) => {
-		if (switchNetworkAsync === undefined) {
-			cleanState();
-			setSelectedChain(newChain);
-		} else {
-			switchNetworkAsync(chainsMap[newChain.value]).then((chain) => {
-				cleanState();
-				setSelectedChain(chains.find(({ value }) => chainsMap[value] === chainId));
-			});
-		}
-	};
+	)
 
 	const normalizedRoutes = [...(routes || [])]
 		?.map((route) => {
@@ -646,182 +537,63 @@ const Aggregator = ({ }) => {
 	return (
 		<Wrapper>
 			<div className="mt-2" />
-			<Head>
-				This product is still WIP and not ready for public release yet. Please expect things to break and if you find
-				anything broken please let us know in the{' '}
-				<a style={{ textDecoration: 'underline' }} href="http://discord.gg/SoulSwap">
-					soulswap discord
-				</a>
-			</Head>
 
-			<BodyWrapper>
-				<Body showRoutes={fromToken && toToken}>
-					{/* <div>
-						<FormHeader>Chain</FormHeader>
-						<MultiSelect options={chains} value={selectedChain} 
-						onChange={onChainChange}
-						 />
-					</div> */}
-
-					{/* <SelectWrapper> */}
-						<FormHeader>Select Tokens</FormHeader>
-						{/* <TokenSelectDiv onClick={() => setShowTokenSelect(true)}> */}
-						<div className="flex flex-col gap-3 space-y-3">
-            {/* {pair && pairState !== PairState.INVALID && (
-                <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
-              )} */}
-            <SwapAssetPanel
-              spendFromWallet={true}
-              chainId={chainId}
-              header={(props) => (
-                <SwapAssetPanel.Header
-                  {...props}
-                  label={
-                    `Swap from:`
-                  }
-                />
-              )}
-              currency={fromToken}
-              value={amount}
-              onChange={handleTypeInput}
-            onSelect={handleInputSelect}
-            />
-            <div>
-              {/* <CurrencyInputPanel
-                  value={formattedAmounts[Field.CURRENCY_A]}
-                  onUserInput={onFieldAInput}
-                  onHalf={() => {
-                    onFieldAInput(halfAmounts[Field.CURRENCY_A]?.toExact() ?? '')
-                  }}
-                  onMax={() => {
-                    onFieldAInput(maxAmounts[Field.CURRENCY_A]?.toExact() ?? '')
-                  }}
-                  onCurrencySelect={handleCurrencyASelect}
-                  currency={currencies[Field.CURRENCY_A]}
-                  id="add-liquidity-input-tokena"
-                  showCommonBases
-                /> */}
-              {/* <AssetInput
-                currencyLogo={true}
-                currency={currencies[Field.CURRENCY_A]}
-                value={formattedAmounts[Field.CURRENCY_A]}
-                onChange={onFieldAInput}
-                balance={maxAmounts.CURRENCY_A}
-                showMax={false}
-              /> */}
-              <div className="flex justify-center -mt-8 -mb-4 z-0">
-                <div
-                  role="button"
-                  className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`}
-                  onClick={() => {
-                    // setApprovalSubmitted(false) // reset 2 step UI for approvals
-                    // onSwitchTokens()
-                  }}
-                >
-                <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
-                  {/* <PlusIcon width={14} className="text-high-emphesis hover:text-white" /> */}
-                </div>
-              </div>
-              {/* <CurrencyInputPanel
-                  value={formattedAmounts[Field.CURRENCY_B]}
-                  onUserInput={onFieldBInput}
-                  onCurrencySelect={handleCurrencyBSelect}
-                  onHalf={() => {
-                    onFieldBInput(halfAmounts[Field.CURRENCY_B]?.toExact() ?? '')
-                  }}
-                  onMax={() => {
-                    onFieldBInput(maxAmounts[Field.CURRENCY_B]?.toExact() ?? '')
-                  }}
-                  currency={currencies[Field.CURRENCY_B]}
-                  id="add-liquidity-input-tokenb"
-                  showCommonBases
-                /> */}
-              {/* <SwapAssetPanel
-                spendFromWallet={true}
-                chainId={chainId}
-                header={(props) => (
-                  <SwapAssetPanel.Header
-                    {...props}
-                    label={'Swap from'
-                    //   independentField === Field.CURRENCY_B ? i18n._(t`Swap from:`) : i18n._(t`Swap from:`)
-                    }
-                  />
-                )}
-                currency={toToken}
-                // value={route?.normalize.netOut}
-				onChange={()=> {}}
-                // onChange={handleTypeOutput}
-              onSelect={handleOutputSelect}
-              /> */}
-			  <CurrencyInputPanel
-			                    showCurrencySelect={true}
-								currency={toToken}
-								hideInput={true}
-								onClick={() => setToToken(toToken)}
-								onUserInput={handleTypeInput}
-							onCurrencySelect={handleCurrencySelect}
-								// otherCurrency={currencyB}
-								showCommonBases={false}
-								id="output-currency"
-								disableCurrencySelect={false}
-								hideBalance={true}
-			   chainId={chainId} 
-			//    currency={toToken}
-			//    id={''}
-			   />
-            </div>
-            </div>
-							{/* <TokenSelect 
-								show={true} 
-								chain={selectedTokenChain}
-								onClose={() => { 
-									setShowTokenSelect(false)
-
-								}}
-									// function (selection?: { token: Token; chain: Chain; }): void {
-								// throw new Error('Function not implemented.');
-							// } }
-							/> */}
-								
-							{/* </TokenSelect> */}
-														{/* <MultiSelect
-								options={tokensInChain}
-								value={fromToken}
-								onChange={setFromToken}
-								filterOption={createFilter({ ignoreAccents: false })}
-							/>
-							<div>
-								<ArrowRight
-									width={24}
-									height={24}
-									display="block"
-									style={{
-										marginTop: 8,
-										marginLeft: 8,
-										cursor: 'pointer'
-									}}
-									onClick={() => {
-										setFromToken(toToken);
-										setToToken(fromToken);
-									}}
+			<div className={"grid grid-cols-1 gap-4 m-12"}>
+				<Body showRoutes={inputToken && outputToken}>
+					<FormHeader>Select Tokens</FormHeader>
+					{/* <TokenSelectDiv onClick={() => setShowTokenSelect(true)}> */}
+					<div className="flex flex-col gap-3 space-y-3">
+						<SwapAssetPanel
+							spendFromWallet={true}
+							chainId={chainId}
+							header={(props) => (
+								<SwapAssetPanel.Header
+									{...props}
+									label={
+										`Swap from:`
+									}
 								/>
+							)}
+							currency={fromToken}
+							value={amount}
+							onChange={handleTypeInput}
+							onSelect={handleInputSelect}
+						/>
+						<div>
+							<div className="flex justify-center -mt-8 -mb-4 z-0">
+								<div
+									role="button"
+									className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`}
+									onClick={() => {
+										// setApprovalSubmitted(false) // reset 2 step UI for approvals
+										// onSwitchTokens()
+									}}
+								>
+									<ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
+									{/* <PlusIcon width={14} className="text-high-emphesis hover:text-white" /> */}
+								</div>
 							</div>
-							<MultiSelect
-								options={tokensInChain}
-								value={toToken}
-								onChange={setToToken}
-								filterOption={createFilter({ ignoreAccents: false })}
-							/> */}
-						{/* </TokenSelectDiv> */}
-						<div style={{ textAlign: 'center', margin: ' 8px 16px' }}>
-							<Head>OR</Head>
+
+			  <CurrencyInputPanel
+				showCurrencySelect={true}
+				currency={outputToken}
+				hideInput={true}
+				// onClick={() => setToToken(toToken)}
+				onUserInput={handleTypeInput}
+				onCurrencySelect={handleOutputSelect}
+				// otherCurrency={currencyB}
+				showCommonBases={false}
+				id="output-currency"
+				disableCurrencySelect={false}
+				hideBalance={true}
+			   chainId={chainId}
+			   />
 						</div>
-						{/* <Search tokens={tokensInChain} setTokens={setTokens} /> */}
-					{/* </SelectWrapper> */}
+					</div>
 
 					<div>
 						<FormHeader>From Amount</FormHeader>
-						 <TokenInput setAmount={setAmount} amount={amount} onMaxClick={onMaxClick} />
+						<TokenInput setAmount={setAmount} amount={amount} onMaxClick={onMaxClick} />
 						<InputFooter>
 							<div style={{ marginTop: 4, marginLeft: 4 }}>
 								Slippage %{' '}
@@ -849,9 +621,9 @@ const Aggregator = ({ }) => {
 							</div>
 							{balance &&
 								<Balance onClick={onMaxClick}>
-									{fromToken.isNative 
-									? `Balance: ${(balance.value?.div(e10(18))).toString()} ${fromToken.symbol}`
-									: `Balance: ${(balance.value?.div(e10(fromToken.decimals ?? 18))).toString()} ${fromToken.symbol}`}
+									{fromToken?.isNative
+										? `Balance: ${(balance.value?.div(e10(18))).toString()} ${fromToken?.symbol}`
+										: `Balance: ${(balance.value?.div(e10(fromToken?.decimals ?? 18))).toString()} ${fromToken?.symbol}`}
 								</Balance>
 							}
 						</InputFooter>
@@ -891,12 +663,12 @@ const Aggregator = ({ }) => {
 					</SwapWrapper>
 				</Body>
 
-				{fromToken && toToken && (
+				{inputToken && outputToken && (
 					<Routes>
-						<FormHeader>
+						{/* <FormHeader>
 							Routes
 							<CloseBtn onClick={cleanState} />{' '}
-						</FormHeader>
+						</FormHeader> */}
 
 						{isLoading ? <Loader loaded={!isLoading} /> : null}
 
@@ -906,16 +678,16 @@ const Aggregator = ({ }) => {
 								index={i}
 								selected={route?.name === r.name}
 								setRoute={() => setRoute(r.route)}
-								toToken={toToken}
+								toToken={outputToken}
 								amountFrom={amountWithDecimals}
-								fromToken={fromToken}
+								fromToken={inputToken}
 								selectedChain={selectedChain.label}
 								key={i}
 							/>
 						))}
 					</Routes>
 				)}
-			</BodyWrapper>
+			</div>
 
 			{/* <FAQs /> */}
 			{/* <TransactionModal open={txModalOpen} setOpen={setTxModalOpen} link={txUrl} /> */}
