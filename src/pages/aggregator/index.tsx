@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { groupBy, mapValues, merge, uniqBy } from 'lodash';
 // import { useAddRecentTransaction } from '@rainbow-me/rainbowkit';
@@ -51,9 +51,13 @@ import { Button } from 'components/Button';
 import { useToast } from 'react-toastify';
 import { CurrencyInputWithNetworkSelector } from 'components/CrossSwap/CurrencyInputWithNetworkSelector';
 import Container from 'components/Container';
-import { getChainInfo } from 'constants/chains';
+import { getChainColorCode, getChainInfo } from 'constants/chains';
 import listedTokens from 'features/aggregator/tokenList.json'
 import { e10 } from 'functions/math';
+import AssetInput from 'components/AssetInput';
+import TokenSelect from 'features/cross/components/TokenSelect';
+import { CHAINS } from 'features/cross/chains';
+
 /*
 Integrated:
 - paraswap
@@ -212,7 +216,7 @@ const BodyWrapper = styled.div`
 	margin: 0 auto;
 `;
 
-const TokenSelect = styled.div`
+const TokenSelectDiv = styled.div`
 	display: grid;
 	grid-column-gap: 8px;
 	margin-top: 16px;
@@ -357,12 +361,15 @@ const Aggregator = ({ }) => {
 	const signer = library.getSigner()
 	const tokenList = getTokenList()
 	const [selectedChain, setSelectedChain] = useState(startChain(chainId));
-	const [fromToken, setFromToken] = useState(WNATIVE[chainId]);
-	const [fromDecimals, setFromDecimals] = useState(18)
-	const [fromAddress, setFromAddress] = useState(WNATIVE_ADDRESS[chainId])
-	const [toAddress, setToAddress] = useState(USDC_ADDRESS[chainId])
+	const [fromToken, setFromToken] = useState(USDC[chainId]);
+	const [fromDecimals, setFromDecimals] = useState(fromToken.decimals)
+	const [fromAddress, setFromAddress] = useState(USDC_ADDRESS[chainId])
+	const [toAddress, setToAddress] = useState(WNATIVE_ADDRESS[chainId])
 	const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(fromToken)
-	const [toToken, setToToken] = useState(USDC[chainId]);
+	const [toToken, setToToken] = useState(WNATIVE[chainId]);
+	const [showTokenSelect, setShowTokenSelect] = useState(false)
+    const selectedTokenChain = useMemo(() => CHAINS.find(c => c.chainId === chainId), [chainId, CHAINS]);
+
 	// const toast = useToast();
 
 	const [slippage, setSlippage] = useState('1');
@@ -388,9 +395,9 @@ const Aggregator = ({ }) => {
 			// watch: true
 		);
 	
-	const formattedBalance = Number(balance) / 10**fromToken.decimals
+	// const formattedBalance = Number(balance) / 10**fromToken.decimals
 
-	const currentChainId = chainId;
+	// const currentChainId = chainId;
 
 	// const isValidSelectedChain = chains.find(
 	// 	({ value }) => selectedChain.value === value && chainsMap[value] === currentChainId
@@ -444,7 +451,7 @@ const Aggregator = ({ }) => {
 	// 	chainId: chainsMap[selectedChain.value]
 	// });
 
-	const tokensInChain = tokenList[chainsMap['fantom']]?.map((token) => ({
+	const tokensInChain = tokenList[chainsMap[chainName(chainId)]]?.map((token) => ({
 		...token,
 		value: token.address,
 		label: token.symbol
@@ -608,8 +615,22 @@ const Aggregator = ({ }) => {
 
 					<SelectWrapper>
 						<FormHeader>Select Tokens</FormHeader>
-						<TokenSelect>
-							<MultiSelect
+						<TokenSelectDiv onClick={() => selectedTokenChain}>
+							
+							<TokenSelect 
+								show={true} 
+								chain={selectedTokenChain}
+								onClose={() => { 
+									setShowTokenSelect(false)
+
+								}}
+									// function (selection?: { token: Token; chain: Chain; }): void {
+								// throw new Error('Function not implemented.');
+							// } }
+							/>
+								
+							{/* </TokenSelect> */}
+														{/* <MultiSelect
 								options={tokensInChain}
 								value={fromToken}
 								onChange={setFromToken}
@@ -636,8 +657,8 @@ const Aggregator = ({ }) => {
 								value={toToken}
 								onChange={setToToken}
 								filterOption={createFilter({ ignoreAccents: false })}
-							/>
-						</TokenSelect>
+							/> */}
+						</TokenSelectDiv>
 						<div style={{ textAlign: 'center', margin: ' 8px 16px' }}>
 							<Head>OR</Head>
 						</div>
@@ -674,10 +695,12 @@ const Aggregator = ({ }) => {
 							</div>
 							{balance ? (
 								<Balance onClick={onMaxClick}>
-									Balance:{' '}
-									{/* {(+balance?.data?.formatted).toLocaleString(undefined, { */}
-										{/* maximumFractionDigits: 3 */}
-									{/* })} */}
+									{`Balance: ${(balance.value?.div(e10(fromToken.decimals || 18))).toString()} ${fromToken.symbol}`}
+									{/* {(formattedBalance */}
+									{/* // ).toLocaleString(undefined, { */}
+									{/* // 	maximumFractionDigits: 3 */}
+									{/* // })} */}
+									
 								</Balance>
 							) : null}
 						</InputFooter>
@@ -685,6 +708,8 @@ const Aggregator = ({ }) => {
 					<SwapWrapper>
 						{route && account ? (
 							<Button
+								variant={'filled'}
+								color={getChainColorCode(chainId)}
 								isLoading={swapMutation.isLoading || isApproveLoading}
 								loadingText="Preparing transaction"
 								colorScheme={'messenger'}
@@ -700,6 +725,8 @@ const Aggregator = ({ }) => {
 						) : null}
 						{route && account && !isApproved && ['Matcha/0x', '1inch', 'CowSwap'].includes(route?.name) ? (
 							<Button
+								variant={'filled'}
+								color={getChainColorCode(chainId)}
 								colorScheme={'messenger'}
 								loadingText="Preparing Transaction"
 								isLoading={isApproveLoading}
