@@ -743,7 +743,7 @@ const Aggregator = ({ }) => {
 			                    showCurrencySelect={true}
 								currency={toToken}
 								hideInput={true}
-								// onUserInput={handleTypeDesiredRate}
+								onUserInput={handleTypeInput}
 								// fiatValue={route?.value ?? undefined}
 								onCurrencySelect={handleOutputSelect}
 								// otherCurrency={currencyB}
@@ -807,7 +807,7 @@ const Aggregator = ({ }) => {
 
 					<div>
 						<FormHeader>From Amount</FormHeader>
-						{/* <TokenInput setAmount={setAmount} amount={amount} onMaxClick={onMaxClick} /> */}
+						 <TokenInput setAmount={setAmount} amount={amount} onMaxClick={onMaxClick} />
 						<InputFooter>
 							<div style={{ marginTop: 4, marginLeft: 4 }}>
 								Slippage %{' '}
@@ -833,16 +833,11 @@ const Aggregator = ({ }) => {
 									</>
 								) : null}
 							</div>
-							{/* {balance ? (
+							{balance &&
 								<Balance onClick={onMaxClick}>
-									{/* {fromToken.isNative ? `` : `Balance: ${(balance.value?.div(e10(fromToken.decimals ?? 18))).toString()} ${fromToken.symbol}`} */}
-									{/* {(formattedBalance */}
-									{/* // ).toLocaleString(undefined, { */}
-									{/* // 	maximumFractionDigits: 3 */}
-									{/* // })}
-									
+									{fromToken.isNative ? `` : `Balance: ${(balance.value?.div(e10(fromToken.decimals ?? 18))).toString()} ${fromToken.symbol}`}
 								</Balance>
-							) : null} */}
+							}
 						</InputFooter>
 					</div>
 					<SwapWrapper>
