@@ -745,7 +745,7 @@ const Aggregator = ({ }) => {
 								hideInput={true}
 								onUserInput={handleTypeInput}
 								// fiatValue={route?.value ?? undefined}
-								onCurrencySelect={handleOutputSelect}
+								onCurrencySelect={setToToken}
 								// otherCurrency={currencyB}
 								showCommonBases={false}
 								id="output-currency"
@@ -835,7 +835,9 @@ const Aggregator = ({ }) => {
 							</div>
 							{balance &&
 								<Balance onClick={onMaxClick}>
-									{fromToken.isNative ? `` : `Balance: ${(balance.value?.div(e10(fromToken.decimals ?? 18))).toString()} ${fromToken.symbol}`}
+									{fromToken.isNative 
+									? `Balance: ${(balance.value?.div(e10(18))).toString()} ${fromToken.symbol}`
+									: `Balance: ${(balance.value?.div(e10(fromToken.decimals ?? 18))).toString()} ${fromToken.symbol}`}
 								</Balance>
 							}
 						</InputFooter>
