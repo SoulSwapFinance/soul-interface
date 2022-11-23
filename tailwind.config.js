@@ -54,7 +54,8 @@ module.exports = {
         moonriverTeal: '#41A2A1',
         maticPurple: '#8247E5',
         pink: '#f338c3',
-        green: '#7cff6b',
+        // green: '#4CBB17', // kellyGreen
+        green: '#50C878', // emeraldGreen
         red: '#ff3838',
         // yellow: '#FFFF00',
         yellow: '#E6BD02',

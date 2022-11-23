@@ -672,7 +672,7 @@ const Swap = () => {
                   color={ chainId == ChainId.AVALANCHE ? "avaxGradient" : "gradientBluePurple"}
                   size="lg"
                 >
-                <NavLink href={featureEnabled(Feature.AGGREGATE, chainId) ? "/open" : "/cross"}>
+                <NavLink href={featureEnabled(Feature.AGGREGATE, chainId) ? "/aggregator" : "/cross"}>
                         <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                         <span>{featureEnabled(Feature.AGGREGATE, chainId) ? 'Use Aggregator' : 'Swap Crosschain' }</span>
                         </a>

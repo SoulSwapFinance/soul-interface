@@ -1,4 +1,4 @@
-import { ChainId, Currency, Token } from '../../sdk'
+import { ChainId, Currency, Token } from 'sdk'
 import { Tags, TokenInfo } from '@uniswap/token-lists'
 
 import { TokenList } from '@uniswap/token-lists/dist/types'
@@ -69,7 +69,7 @@ export class WrappedTokenInfo implements Token {
   }
 
   equals(other: Currency): boolean {
-    return other.chainId === this.chainId && other.isToken && other.address.toLowerCase() === this.address.toLowerCase()
+    return other?.chainId === this?.chainId && other?.isToken && other?.address.toLowerCase() === this.address?.toLowerCase()
   }
 
   sortsBefore(other: Token): boolean {

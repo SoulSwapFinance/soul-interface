@@ -4,14 +4,86 @@ import { useActiveWeb3React } from 'services/web3'
 
 type T = Record<string, string>
 
-function getBaseUrl() {
-  const { chainId } = useActiveWeb3React()
-  let URL
-  chainId == 250 ?
-  URL = 'https://api.soulswap.finance' : URL = 'https://avax-api.soulswap.finance'
-}
+// function getBaseUrl() {
+//   const { chainId } = useActiveWeb3React()
+//   let URL
+//   chainId == 250 ?
+//   URL = 'https://api.soulswap.finance' : URL = 'https://avax-api.soulswap.finance'
+// }
 
 const BASE_URL = 'https://api.soulswap.finance'
+const BASE_GAS_URL = `https://ethapi.openocean.finance/v2` 
+
+export function useGasPrice(): { status: string; gasPrice: T } {
+    const { chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [gasPrice, setGasPrice] = useState<T>(
+     {
+        standard: '',
+        fast: '',
+        instant: ''
+     }
+    )
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`${BASE_GAS_URL}/${chainId}/gas-price`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        // console.log('price:%s', json)
+        setGasPrice(json as T)
+        setStatus('fetched')
+      }
+      if ([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId)) 
+      fetchData()
+    }, [])
+  
+    return { status, gasPrice }
+}
+
+export function useSwapQuote(inputAmount, fromAddress, toAddress): { status: string; swapQuote: T } {
+    const { chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [swapQuote, setSwapQuote] = useState<T>(
+     {
+      infoAddress: "",
+      inputAmount: "1",
+      fromAddress: "",
+      toAddress: "",
+      SoulAmountOut: "",
+      SpookyAmountOut: "",
+      SpiritAmountOut: "",
+      OptimalDex: "",
+     }
+    )
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`${BASE_URL}/aggregator/${inputAmount}/${fromAddress}/${toAddress}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        // console.log('price:%s', json)
+        setSwapQuote(json as T)
+        setStatus('fetched')
+      }
+      if ([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId)) 
+      fetchData()
+    }, [])
+  
+    return { status, swapQuote }
+}
 
 export function usePriceUSD(tokenAddress): { status: string; price: T } {
     const { chainId } = useActiveWeb3React()

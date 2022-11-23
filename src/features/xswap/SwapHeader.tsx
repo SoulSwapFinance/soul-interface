@@ -145,7 +145,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             chainColor
           )}
           href={{
-            pathname: '/open',
+            pathname: '/aggregator',
           }}
         >
           <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>

@@ -1,12 +1,13 @@
 import { ArrowDownIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, Currency, JSBI, NATIVE, Token, Trade as V2Trade, TradeType } from 'sdk'
+import { ChainId, Currency, DAI, JSBI, NATIVE, NATIVE_ADDRESS, Token, Trade as V2Trade, TradeType, USDC } from 'sdk'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
 import Web3Connect from 'components/Web3Connect'
 import ConfirmSwapModal from 'features/swap/ConfirmSwapModal'
-// import SwapCallbackError from 'features/swap/SwapCallbackError'
+import { useMutation } from '@tanstack/react-query'
+import { getAllChains, swap } from 'features/aggregator/router'
 import SwapDetails from 'features/swap/SwapDetails'
 import UnsupportedCurrencyFooter from 'features/swap/UnsupportedCurrencyFooter'
 import SwapHeader from 'features/swap/SwapHeader'
@@ -26,41 +27,40 @@ import { SwapLayout, SwapLayoutCard } from 'layouts/SwapLayout'
 import TokenWarningModal from 'modals/TokenWarningModal'
 import { useActiveWeb3React } from 'services/web3'
 import { Field } from 'state/swap/actions'
-import { AVAX, CHAIN_BY_ID, FTM, NATIVE_ADDRESS, rubicConfiguration } from 'utils/rubic/configuration'
 import { useDefaultsFromURLSearch, useDerivedSwapInfo, useSwapActionHandlers, useSwapState } from 'state/swap/hooks'
 import { useUserOpenMev, useUserSingleHopOnly } from 'state/user/hooks' // useCrossChainModeManager
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
 import Chart from 'components/Chart'
-import { FANTOM, AVALANCHE, Chain, Token as CrossToken } from "features/cross/chains";
 import Image from 'next/image'
-import SDK, {
-  // BLOCKCHAIN_NAME,
-  // Configuration,
-  InstantTrade,
-  // WalletProvider,
-  // InsufficientFundsError,
-  InsufficientLiquidityError
-} from "rubic-sdk";
 import { Toggle } from 'components/Toggle'
 import SocialWidget from 'components/Social'
-import { getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 import { classNames } from 'functions/styling'
 import { NewFeature } from 'components/Banner'
 import NavLink from 'components/NavLink'
-import { WrappedCrossChainTrade } from 'rubic-sdk/lib/features/cross-chain/providers/common/models/wrapped-cross-chain-trade'
-import { sleep } from 'features/crosschain/utils'
-import { getLastExchange } from 'utils/rubic/hooks'
 import Analytics from 'components/Analytics'
 import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
-import { currencyId } from 'functions/currency'
+// import { currencyId } from 'functions/currency'
 import { useRouter } from 'next/router'
+import Aggregator, { Routes, startChain } from '../aggregator'
+import Container from 'components/Container'
+import Route from 'components/SwapRoute'
+import Loader from 'features/aggregator/components/Loader'
+import { useGasPrice } from 'hooks/useAPI'
+import BigNumber from 'bignumber.js'
+import useGetPrice from 'features/aggregator/queries/useGetPrice'
+import useGetRoutes from 'features/aggregator/queries/useGetRoutes'
+import { ethers } from 'ethers'
+import { addTransaction } from 'state/transactions/actions'
+import { getExplorerLink } from 'functions/explorer'
+import { SubmitButton } from 'features/summoner/Styles'
 
 const Swap = () => {
   const { i18n } = useLingui()
   const loadedUrlParams = useDefaultsFromURLSearch()
-  const { account, chainId } = useActiveWeb3React()
+  const { account, chainId, library } = useActiveWeb3React()
   const defaultTokens = useAllTokens()
   const { independentField, typedValue, recipient } = useSwapState()
   const { v2Trade, parsedAmount, currencies, inputError: swapInputError, allowedSlippage, to } = useDerivedSwapInfo()
@@ -68,40 +68,13 @@ const Swap = () => {
     useCurrency(loadedUrlParams?.inputCurrencyId),
     useCurrency(loadedUrlParams?.outputCurrencyId),
   ]
+  const [useAggregator, setUseAggregator] = useState(false)
 
   const router = useRouter()
   const tokens = router.query.tokens
   const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
-
   // const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
   const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
-
-  const handleCurrencyASelect = useCallback(
-    (currencyA: Currency) => {
-      const newCurrencyIdA = currencyId(currencyA)
-      if (newCurrencyIdA === currencyIdB) {
-        router.push(`/exchange/limit/${currencyIdB}/${currencyIdA}`)
-      } else {
-        router.push(`/exchange/limit/${newCurrencyIdA}/${currencyIdB}`)
-      }
-    },
-    [currencyIdB, router, currencyIdA]
-  )
-  const handleCurrencyBSelect = useCallback(
-    (currencyB: Currency) => {
-      const newCurrencyIdB = currencyId(currencyB)
-      if (currencyIdA === newCurrencyIdB) {
-        if (currencyIdB) {
-          router.push(`/exchange/limit/${currencyIdB}/${newCurrencyIdB}`)
-        } else {
-          router.push(`/exchange/limit/${newCurrencyIdB}`)
-        }
-      } else {
-        router.push(`/exchange/limit/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
-      }
-    },
-    [currencyIdA, router, currencyIdB]
-  )
 
   const [dismissTokenWarning, setDismissTokenWarning] = useState<boolean>(false)
   const urlLoadedTokens: Token[] = useMemo(
@@ -153,19 +126,7 @@ const Swap = () => {
 
   const isValid = !swapInputError
   const dependentField: Field = independentField === Field.INPUT ? Field.OUTPUT : Field.INPUT
-  const handleTypeInput = useCallback(
-    (value: string) => {
-      onUserInput(Field.INPUT, value)
-    },
-    [onUserInput]
-  )
 
-  const handleTypeOutput = useCallback(
-    (value: string) => {
-      onUserInput(Field.OUTPUT, value)
-    },
-    [onUserInput]
-  )
 
   // modal and loading
   const [{ showConfirm, tradeToConfirm, swapErrorMessage, attemptingTxn, txHash }, setSwapState] = useState<{
@@ -311,7 +272,7 @@ const Swap = () => {
     (approvalState === ApprovalState.NOT_APPROVED ||
       approvalState === ApprovalState.PENDING ||
       (approvalSubmitted && approvalState === ApprovalState.APPROVED)) &&
-      !(priceImpactSeverity > 3)
+    !(priceImpactSeverity > 3)
 
   const handleConfirmDismiss = useCallback(() => {
     setSwapState({
@@ -341,12 +302,16 @@ const Swap = () => {
     (inputCurrency) => {
       setApprovalSubmitted(false) // reset 2 step UI for approvals
       onCurrencySelection(Field.INPUT, inputCurrency)
+      handleInputTokenSelect(inputCurrency)
     },
     [onCurrencySelection]
   )
 
   const handleOutputSelect = useCallback(
-    (outputCurrency) => onCurrencySelection(Field.OUTPUT, outputCurrency),
+    (outputCurrency) => {
+      onCurrencySelection(Field.OUTPUT, outputCurrency)
+      handleOutputTokenSelect(outputCurrency)
+    },
     [onCurrencySelection]
   )
 
@@ -366,138 +331,155 @@ const Swap = () => {
     }
   }, [priceImpactSeverity])
 
-  /// CROSSCHAIN FUNCTIONALITY ///
 
-  const lastExchange = useMemo(() => {
-    return getLastExchange() ?? { from: { chain: FANTOM, token: FTM }, to: { chain: AVALANCHE, token: AVAX } };
-  }, []);
-  
-  const [crossFrom, setCrossFrom] = useState<CrossToken>(lastExchange.from.token);
-  const [crossTo, setCrossTo] = useState<CrossToken>(lastExchange.to?.token);
-  const [fromChain, setFromChain] = useState<Chain>(lastExchange.from.chain);
-  const [toChain, setToChain] = useState<Chain>(lastExchange.to?.chain);
-  const [fromUsd, setFromUsd] = useState<string>('0');
-  const [toUsd, setToUsd] = useState<string>('0');
-  const [outputAmount, setOutputAmount] = useState<string>();
-  const [amount, setAmount] = useState("");
-  const [fromBalance, setBalance] = useState("");
-  const [crossTrade, setCrossTrade] = useState<InstantTrade | WrappedCrossChainTrade>(undefined);
-  const [canBuy, setCanBuy] = useState(true);
-  const [loading, setLoading] = useState(false);
-  const [configuration, setConfiguration] = useState(rubicConfiguration);
-  const [rubic, setRubic] = useState<SDK>(null);
 
-  useEffect(() => {
-    if (!rubic) {
-      return;
+  // AGGREGATOR CONSTANTS [START] //
+  // const DEFAULT_OUTPUT = chainId == ChainId.AVALANCHE ? USDC[chainId] : DAI[chainId]
+  const [selectedChain, setSelectedChain] = useState(startChain(chainId))
+  const [inputToken, setInputToken] = useState<Currency>(NATIVE[chainId])
+  const [outputToken, setOutputToken] = useState<Currency>(DAI[chainId])
+  const [fromToken, setFromToken] = useState<Currency>(NATIVE[chainId])
+  const [toToken, setToToken] = useState<Currency>(DAI[chainId])
+
+  const [inputAmount, setInputAmount] = useState('10')
+  const [slippage, setSlippage] = useState('1')
+  const [amount, setAmount] = useState('10');
+  const [txModalOpen, setTxModalOpen] = useState(false);
+  const [txUrl, setTxUrl] = useState('');
+  const signer = library.getSigner()
+
+  const gasPrice = useGasPrice()?.gasPrice.fast
+  const amountWithDecimals = new BigNumber(inputAmount)
+    .times(10 ** (fromToken?.wrapped.decimals || 18))
+    .toFixed(0);
+
+  const [route, setRoute] = useState(null);
+
+  const handleInputTokenSelect = useCallback(
+    (inputCurrency: Currency) => {
+      setFromToken(inputCurrency)
+      // setInputToken(inputCurrency)
+    },
+    [setFromToken]
+  )
+
+  const handleOutputTokenSelect = useCallback(
+    (outputCurrency: Currency) => {
+      setToToken(outputCurrency)
+      // setOutputToken(outputCurrency)
+    },
+    [setToToken]
+  )
+
+  const { data: routes = [], isLoading } = useGetRoutes({
+    chain: selectedChain.value,
+    from: fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address,
+    to: toToken?.isNative ? NATIVE_ADDRESS : toToken?.wrapped.address,
+    amount: amountWithDecimals,
+    extra: {
+      gasPrice,
+      userAddress: account,
+      amount,
+      fromToken,
+      toToken,
+      slippage
     }
+  });
 
-    let disposed = false;
-    async function run() {
-      // avoids pinging CG and RPCs on keystrokes.
-      await sleep(300 / 1000);
+  const normalizedRoutes = [...(routes || [])]
+    ?.map((route) => {
+      const gasUsd = (gasTokenPrice * +route.price.estimatedGas * +gasPrice) / 1e18 || 0;
+      const amount = +route.price.amountReturned / 10 ** +toToken?.decimals;
+      const amountUsd = (amount * toTokenPrice).toFixed(2);
+      const netOut = +amountUsd - gasUsd;
 
-      if (disposed) {
-        return;
-      }
+      return { route, gasUsd, amountUsd, amount, netOut, ...route };
+    })
+    .filter(({ fromAmount, amount: toAmount }) => Number(toAmount) && amountWithDecimals === fromAmount)
+    .sort((a, b) => b.netOut - a.netOut);
 
-      try {
-        const tradeRequest =
-          fromChain?.chainId === toChain?.chainId
-          ? rubic.instantTrades.calculateTrade(
-            {
-                address: crossFrom.isNative ? NATIVE_ADDRESS : crossFrom.address,
-                blockchain: CHAIN_BY_ID.get(fromChain?.chainId),
-              },
-              amount,
-              crossTo?.isNative ? NATIVE_ADDRESS : crossTo?.address,
-            )
-              .then((trades: InstantTrade[]): InstantTrade => trades[0])
-              : rubic.crossChain.calculateTrade(
-                // (1) fromToken
-              {
-                address: crossFrom.isNative ? NATIVE_ADDRESS : crossFrom.address,
-                blockchain: CHAIN_BY_ID.get(fromChain?.chainId),
-              },
-              // (2) fromAmount
-              amount,
-              // (3) toToken
-              {
-                address: crossTo?.isNative ? NATIVE_ADDRESS : crossTo?.address,
-                blockchain: CHAIN_BY_ID.get(toChain.chainId),
-              },
-              // (4) options (optional)
-            )
-              .then((trades: WrappedCrossChainTrade[]): WrappedCrossChainTrade => trades[0])
 
-        const newTrade = await tradeRequest;
-        const [newFromUsd, newToUsd] = await Promise.all([
-          // the USD value of (from) being _sold_.
-          crossFrom.isNative
-            ? rubic.cryptoPriceApi.getNativeCoinPrice(CHAIN_BY_ID.get(fromChain?.chainId))
-            : rubic.cryptoPriceApi.getErc20TokenPrice({
-              address: crossFrom.address,
-              blockchain: CHAIN_BY_ID.get(fromChain?.chainId),
-            }),
+  const swapMutation = useMutation({
+    mutationFn: (params: {
+      chain: string;
+      from: string;
+      to: string;
+      amount: string;
+      adapter: string;
+      signer: ethers.Signer;
+      slippage: string;
+      rawQuote: any;
+      tokens: { toToken: Currency; fromToken: Currency };
+    }) => swap(params),
+    onSuccess: (data, variables) => {
+      addTransaction({
+        chainId: chainId,
+        hash: data?.hash,
+        from: account,
+        summary: `Swap transaction using ${variables.adapter} is sent.`
+      });
+      const explorerUrl = getExplorerLink(chainId, data, "transaction") // chain.blockExplorers.default.url;
+      setTxModalOpen(true);
 
-          // the USD value of (to) being _bought_.
-          crossTo?.isNative
-            ? rubic.cryptoPriceApi.getNativeCoinPrice(CHAIN_BY_ID.get(toChain?.chainId))
-            : rubic.cryptoPriceApi.getErc20TokenPrice({
-              address: crossTo?.address,
-              blockchain: CHAIN_BY_ID.get(toChain?.chainId),
-            }),
-        ])
-        if (disposed) {
-          return;
-        }
-
-        if (newTrade instanceof InstantTrade) {
-          setCrossTrade(newTrade);
-          setFromUsd((Number(newFromUsd) * Number(newTrade.from.tokenAmount)).toString())
-          setToUsd((Number(newToUsd) * Number((newTrade.to?.tokenAmount))).toString())
-        } else {
-          setCrossTrade(newTrade);
-          setFromUsd((Number(newFromUsd) * Number(newTrade.trade.from?.tokenAmount)).toString())
-          setToUsd((Number(newToUsd) * Number((newTrade.trade.to?.tokenAmount))).toString())
-          setOutputAmount(Number(newTrade.trade.to?.tokenAmount).toString())
-          // console.log('outputAmount:%s', outputAmount)
-        }
-
-        setLoading(false)
-
-      } catch (e) {
-        if (disposed) {
-          return;
-        }
-        setLoading(false);
-        if (e instanceof InsufficientLiquidityError) {
-          setCanBuy(false);
-        } else {
-          console.warn(e);
-        }
+      setTxUrl(`${explorerUrl}/tx/${data?.hash}`);
+    },
+    onError: (err: { reason: string; code: string }) => {
+      if (err.code !== 'ACTION_REJECTED') {
+        console.log('Transaction Rejected: %s', err.reason)
       }
     }
-    setCrossTrade(undefined);
-    setFromUsd(undefined);
-    setToUsd(undefined);
-    setCanBuy(true);
+  });
 
-    const isTradingSameToken = fromChain?.chainId === toChain?.chainId && crossFrom.id === crossTo?.id;
-    if (amount && parseFloat(amount) > 0 && !isTradingSameToken) {
-      setLoading(true);
-      run();
-      return () => {
-        disposed = true;
-      };
-    } else {
-      setLoading(false);
-    }
-  }, [crossFrom, fromChain, to, toChain, amount, rubic]);
+  const handleAggregate = () => {
+    swapMutation.mutate({
+      chain: selectedChain.value,
+      from: fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address,
+      to: toToken?.isNative ? NATIVE_ADDRESS : toToken?.wrapped.address,
+      amount: amountWithDecimals,
+      signer,
+      slippage,
+      adapter: route.name,
+      rawQuote: route?.price?.rawQuote,
+      tokens: { fromToken, toToken }
+    });
+  };
+
+  const { data: tokenPrices } = useGetPrice({
+    chain: selectedChain.value,
+    toToken: toToken?.wrapped.address,
+    fromToken: fromToken?.wrapped.address
+  });
+
+  const { gasTokenPrice = 0, toTokenPrice = 0, fromTokenPrice = 0 } = tokenPrices || {};
+
+
+  // AGGREGATOR CONSTANTS [END] //
+
+  const handleTypeInput = useCallback(
+    (value: string) => {
+      // setInputAmount('11')
+      onUserInput(Field.INPUT, value)
+    },
+    [onUserInput, setInputAmount]
+  )
+
+  const handleTypeOutput = useCallback(
+    (value: string) => {
+      onUserInput(Field.OUTPUT, value)
+    },
+    [onUserInput]
+  )
+
+  const handleUseAggregator = useCallback(
+    (using: boolean) => {
+     using ? setUseAggregator(false) : setUseAggregator(true)
+    },
+    [setUseAggregator]
+  )
 
   return (
     <>
-      <NewFeature chainId={chainId} />
+      {/* <NewFeature chainId={chainId} /> */}
       <ConfirmSwapModal
         isOpen={showConfirm}
         trade={trade}
@@ -506,7 +488,7 @@ const Swap = () => {
         attemptingTxn={attemptingTxn}
         txHash={txHash}
         recipient={recipient}
-        toChain={toChain.chainId}
+        toChain={chainId}
         allowedSlippage={allowedSlippage}
         onConfirm={handleSwap}
         swapErrorMessage={swapErrorMessage}
@@ -517,153 +499,181 @@ const Swap = () => {
         tokens={importTokensNotInDefault}
         onConfirm={handleConfirmTokenWarning}
       />
-        {![ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+      {![ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <div className="flex flex-col gap-3 mt-12 justify-center">
           {/* <div className="flex mb-4 items-center justify-center"> */}
           <SwapHeader inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
-          <Button variant="filled" color={getChainColorCode(chainId)} size="lg">
-          <NavLink href={'/cross'}>
-                <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                Go to Crosschain Swaps <span> ↗</span>
-                </a>
-          </NavLink>
-          </Button>
-    </div> }
-
-        { [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
-          <SwapLayoutCard>
-            <SwapHeader inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
-          <SwapAssetPanel
-            spendFromWallet={true}
-            chainId={chainId}
-            header={(props) => (
-              <SwapAssetPanel.Header
-                {...props}
-                label={
-                  independentField === Field.OUTPUT && !showWrap ? i18n._(t`Swap from:`) : i18n._(t`Swap from:`)
-                }
-              />
-            )}
-            currency={currencies[Field.INPUT]}
-            value={formattedAmounts[Field.INPUT]}
-            onChange={handleTypeInput}
-            onSelect={handleInputSelect}
-          />
-          
-        <div className={ classNames("flex justify-center -mt-6 -mb-6 z-0") }>
-          <div
-            role="button"
-            className={classNames( `p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}` )}
-            onClick={() => {
-              setApprovalSubmitted(false) // reset 2 step UI for approvals
-              onSwitchTokens()
-            }}
-          >
-            { <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" /> }
-          </div>
-        </div>
-
-        {/* TO ASSET PANEL */}
-          <SwapAssetPanel
-            spendFromWallet={true}
-            chainId={chainId}
-            header={(props) => (
-              <SwapAssetPanel.Header
-                {...props}
-                label={independentField === Field.INPUT && !showWrap ? i18n._(t`Swap to:`) : i18n._(t`Swap to:`)}
-              />
-            )}
-            currency={currencies[Field.OUTPUT]}
-            value={formattedAmounts[Field.OUTPUT]}
-            onChange={handleTypeOutput}
-            onSelect={handleOutputSelect}
-            priceImpact={priceImpact}
-            priceImpactCss={priceImpactCss}
-          />
-        {Boolean(trade) && (
-          <SwapDetails
-            inputCurrency={currencies[Field.INPUT]}
-            outputCurrency={currencies[Field.OUTPUT]}
-            trade={trade}
-            recipient={recipient ?? undefined}
-          />
-        )}
-        {trade && routeNotFound && userHasSpecifiedInputOutput && (
-          <Typography variant="xs" className="text-center py-2">
-            {i18n._(t`Insufficient liquidity for this trade.`)}{' '}
-            {singleHopOnly && i18n._(t`Try enabling multi-hop trades`)}
-          </Typography>
-        )}
-
-        {swapIsUnsupported ? (
-          <Button 
-          color="red" 
-          disabled 
-          className="rounded-2xl w-full md:rounded">
-            {i18n._(t`Unsupported Asset`)}
-          </Button>
-        ) : !account ? (
-          <Web3Connect color="purple" variant="filled" className="rounded-2xl md:rounded" />
-        ) : showWrap ? (
           <Button
-            color={`${getChainColorCode(chainId)}`}
-            disabled={Boolean(wrapInputError)}
-            onClick={onWrap}
-            className="rounded-2xl w-full md:rounded"
+            variant="filled"
+            color={chainId == ChainId.AVALANCHE ? "avaxGradient" : "gradientBluePurple"}
+            size="lg"
           >
-            {wrapInputError ??
-              (wrapType === WrapType.WRAP
-                ? i18n._(t`Wrap`)
-                : wrapType === WrapType.UNWRAP
-                  ? i18n._(t`Unwrap`)
-                  : null)}
+            <NavLink href={"/cross"}>
+              <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                <span>{'Swap Crosschain'}</span>
+              </a>
+            </NavLink>
           </Button>
-        ) : showApproveFlow ? (
-          <div>
-            {approvalState !== ApprovalState.APPROVED && (
-              <Button
-                color={`${getChainColorCode(chainId)}`}
-                loading={approvalState === ApprovalState.PENDING}
-                onClick={handleApprove}
-                disabled={approvalState !== ApprovalState.NOT_APPROVED || approvalSubmitted}
-                className="rounded-2xl w-full md:rounded"
-              >
-                {i18n._(t`Approve ${currencies[Field.INPUT]?.symbol}`)}
-              </Button>
-            )}
-            {approvalState === ApprovalState.APPROVED && (
-              <Button
-                color={isValid && priceImpactSeverity > 2 ? 'red' : `${getChainColorCode(chainId)}`
-                }
-                onClick={() => {
-                    setSwapState({
-                      tradeToConfirm: trade,
-                      attemptingTxn: false,
-                      swapErrorMessage: undefined,
-                      showConfirm: true,
-                      txHash: undefined,
-                    })
-                    }
+        </div>}
+
+      {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+        <SwapLayoutCard>
+          <SwapHeader inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+          <SubmitButton
+            className={classNames(featureEnabled(Feature.AGGREGATE, chainId) ?? 'hidden')}
+            onClick={() => handleUseAggregator(useAggregator)}
+            variant="bordered"
+            height="30px"
+            primaryColor={getChainColor(chainId)}
+            // primaryColor={chainId == ChainId.AVALANCHE ? "avaxGradient" : "gradientBluePurple"}
+            size="lg"
+          >
+            <div className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              <span>{useAggregator ? `SoulSwap Exchange` : `Meta-Aggregator Exchange`}</span>
+            </div>
+          </SubmitButton>
+          {!useAggregator &&
+            <SwapAssetPanel
+              spendFromWallet={true}
+              chainId={chainId}
+              header={(props) => (
+                <SwapAssetPanel.Header
+                  {...props}
+                  label={
+                    independentField === Field.OUTPUT && !showWrap ? i18n._(t`Swap from:`) : i18n._(t`Swap from:`)
                   }
-                id="swap-button"
-                disabled={
-                  !isValid || approvalState !== ApprovalState.APPROVED || (priceImpactSeverity > 3)
-                }
-                className="rounded-2xl w-full md:rounded"
+                />
+              )}
+              currency={currencies[Field.INPUT]}
+              value={formattedAmounts[Field.INPUT]}
+              onChange={handleTypeInput}
+              onSelect={handleInputSelect}
+            />
+          }
+          {!useAggregator &&
+            <div className={classNames("flex justify-center -mt-6 -mb-6 z-0")}>
+              <div
+                role="button"
+                className={classNames(`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`)}
+                onClick={() => {
+                  setApprovalSubmitted(false) // reset 2 step UI for approvals
+                  onSwitchTokens()
+                }}
               >
-                  {priceImpactSeverity > 3
-                  ? i18n._(t`Price Impact High`)
-                  : priceImpactSeverity > 2
-                    ? i18n._(t`Swap Anyway`)
-                    : i18n._(t`Swap`)}
-              </Button>
+                {<ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />}
+              </div>
+            </div>
+          }
+
+          {/* TO ASSET PANEL */}
+          {!useAggregator &&
+            <SwapAssetPanel
+              spendFromWallet={true}
+              chainId={chainId}
+              header={(props) => (
+                <SwapAssetPanel.Header
+                  {...props}
+                  label={independentField === Field.INPUT && !showWrap ? i18n._(t`Swap to:`) : i18n._(t`Swap to:`)}
+                />
+              )}
+              currency={currencies[Field.OUTPUT]}
+              value={formattedAmounts[Field.OUTPUT]}
+              onChange={handleTypeOutput}
+              onSelect={
+                handleOutputSelect
+              }
+              priceImpact={priceImpact}
+              priceImpactCss={priceImpactCss}
+            />
+          }
+          {Boolean(trade) && !useAggregator &&
+            (
+              <SwapDetails
+                inputCurrency={currencies[Field.INPUT]}
+                outputCurrency={currencies[Field.OUTPUT]}
+                trade={trade}
+                recipient={recipient ?? undefined}
+              />
             )}
-          </div>
-        ) : (
-          <Button
-            color={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'red' : `${getChainColorCode(chainId)}`}
-            onClick={() => {
-              setSwapState({
+          {trade && routeNotFound && userHasSpecifiedInputOutput && !useAggregator &&
+            (
+              <Typography variant="xs" className="text-center py-2">
+                {i18n._(t`Insufficient liquidity for this trade.`)}{' '}
+                {singleHopOnly && i18n._(t`Try enabling multi-hop trades`)}
+              </Typography>
+            )}
+
+          {swapIsUnsupported && !useAggregator ? (
+            <Button
+              color="red"
+              disabled
+              className="rounded-2xl w-full md:rounded">
+              {i18n._(t`Unsupported Asset`)}
+            </Button>
+          ) : !account && !useAggregator ? (
+            <Web3Connect color="purple" variant="filled" className="rounded-2xl md:rounded" />
+          ) : showWrap && !useAggregator ? (
+            <Button
+              color={`${getChainColorCode(chainId)}`}
+              disabled={Boolean(wrapInputError)}
+              onClick={onWrap}
+              className="rounded-2xl w-full md:rounded"
+            >
+              {wrapInputError ??
+                (wrapType === WrapType.WRAP
+                  ? i18n._(t`Wrap`)
+                  : wrapType === WrapType.UNWRAP
+                    ? i18n._(t`Unwrap`)
+                    : null)}
+            </Button>
+          ) : showApproveFlow && !useAggregator ? (
+            <div>
+              {approvalState !== ApprovalState.APPROVED &&
+                (
+                  <Button
+                    color={`${getChainColorCode(chainId)}`}
+                    loading={approvalState === ApprovalState.PENDING}
+                    onClick={handleApprove}
+                    disabled={approvalState !== ApprovalState.NOT_APPROVED || approvalSubmitted}
+                    className="rounded-2xl w-full md:rounded"
+                  >
+                    {i18n._(t`Approve ${currencies[Field.INPUT]?.symbol}`)}
+                  </Button>
+                )}
+              {approvalState === ApprovalState.APPROVED && !useAggregator &&
+                (
+                  <Button
+                    color={isValid && priceImpactSeverity > 2 ? 'red' : `${getChainColorCode(chainId)}`
+                    }
+                    onClick={() => {
+                      setSwapState({
+                        tradeToConfirm: trade,
+                        attemptingTxn: false,
+                        swapErrorMessage: undefined,
+                        showConfirm: true,
+                        txHash: undefined,
+                      })
+                    }
+                    }
+                    id="swap-button"
+                    disabled={
+                      !isValid || approvalState !== ApprovalState.APPROVED || (priceImpactSeverity > 3)
+                    }
+                    className="rounded-2xl w-full md:rounded"
+                  >
+                    {priceImpactSeverity > 3
+                      ? i18n._(t`Price Impact High`)
+                      : priceImpactSeverity > 2
+                        ? i18n._(t`Swap Anyway`)
+                        : i18n._(t`Swap`)}
+                  </Button>
+                )}
+            </div>
+          ) : (!useAggregator &&
+            <Button
+              color={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'red' : `${getChainColorCode(chainId)}`}
+              onClick={() => {
+                setSwapState({
                   tradeToConfirm: trade,
                   attemptingTxn: false,
                   swapErrorMessage: undefined,
@@ -671,107 +681,131 @@ const Swap = () => {
                   txHash: undefined,
                 })
               }
-            }
-            id="swap-button"
-            disabled={!isValid || (priceImpactSeverity > 3) || !!swapCallbackError}
-            className="rounded-2xl w-full md:rounded"
-          >
-            {swapInputError
-              ? swapInputError
-              : priceImpactSeverity > 3
-                ? i18n._(t`Price Impact Too High`)
-                : priceImpactSeverity > 2
-                  ? i18n._(t`Swap Anyway`)
-                  : i18n._(t`Swap`)}
-          </Button>
-        )}
-        {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} show={false} /> : null}
-        {/* </div> */}
-        <div className="flex border-dark-900 mt-3 mb-0 gap-1 items-center justify-center">
-                <Button 
-                  variant="filled" 
-                  color={ chainId == ChainId.AVALANCHE ? "avaxGradient" : "gradientPurpleBlue"}
-                  size="lg"
-                >
-                  <NavLink href={"/portfolio"}>
-                        <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                        <span>View Portfolio</span>
-                        </a>
-                  </NavLink>
-                </Button>
-                <Button 
-                  variant="filled" 
-                  color={ chainId == ChainId.AVALANCHE ? "avaxGradient" : "gradientBluePurple"}
-                  size="lg"
-                >
-                <NavLink href={featureEnabled(Feature.AGGREGATE, chainId) ? "/open" : "/cross"}>
-                        <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                        <span>{featureEnabled(Feature.AGGREGATE, chainId) ? 'Use Aggregator' : 'Swap Crosschain' }</span>
-                        </a>
-                  </NavLink>
-                </Button>
+              }
+              id="swap-button"
+              disabled={!isValid || (priceImpactSeverity > 3) || !!swapCallbackError}
+              className="rounded-2xl w-full md:rounded"
+            >
+              {swapInputError
+                ? swapInputError
+                : priceImpactSeverity > 3
+                  ? i18n._(t`Price Impact Too High`)
+                  : priceImpactSeverity > 2
+                    ? i18n._(t`Swap Anyway`)
+                    : i18n._(t`Swap`)}
+            </Button>
+          )}
+          {useAggregator &&
+            <Aggregator />
+          }
+          {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} show={false} /> : null}
+          <div className="flex border-dark-900 mt-3 mb-0 gap-1 items-center justify-center">
+            <Button
+              variant="filled"
+              color={chainId == ChainId.AVALANCHE ? "avaxGradient" : "gradientPurpleBlue"}
+              size="lg"
+            >
+              <NavLink href={"/portfolio"}>
+                <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                  <span>View Portfolio</span>
+                </a>
+              </NavLink>
+            </Button>
+            <Button
+              variant="filled"
+              color={chainId == ChainId.AVALANCHE ? "avaxGradient" : "gradientBluePurple"}
+              size="lg"
+            >
+              <NavLink href={"/cross"}>
+                <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                  <span>{'Swap Crosschain'}</span>
+                </a>
+              </NavLink>
+            </Button>
+          </div>
+          <div className={classNames(chainId == ChainId.FANTOM ? "flex justify-between"
+            : chainId == ChainId.AVALANCHE ? "flex justify-end" : "hidden")}>
+            <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
+              <Toggle
+                id="toggle-button"
+                optionA="Data"
+                optionB="Data"
+                isActive={showData}
+                toggle={
+                  showData
+                    ? () => {
+                      setShowData(false)
+                    }
+                    : () => {
+                      setShowData(true)
+                    }
+                }
+              />
+            </div>
+            <div className={classNames(chainId == ChainId.FANTOM ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}>
+              <Toggle
+                id="toggle-button"
+                optionA="Chart"
+                optionB="Chart"
+                isActive={showChart}
+                toggle={
+                  showChart
+                    ? () => {
+                      setShowChart(false)
+                    }
+                    : () => {
+                      setShowChart(true)
+                    }
+                }
+              />
+            </div>
+          </div>
+          {/* {inputToken && outputToken && (
+					<SwapLayoutCard>
+						<Container>
+							<Routes>
+							{isLoading ? <Loader loaded={!isLoading} /> : null}
+							{normalizedRoutes.map((r, i) => (
+								<Route
+									{...r}
+									index={i}
+									selected={route?.name === r.name}
+									setRoute={() => setRoute(r.route)}
+									toToken={outputToken}
+									amountFrom={amountWithDecimals}
+									fromToken={inputToken}
+									selectedChain={selectedChain.label}
+									key={i}
+								/>
+							))}
+							</Routes>
+						</Container>
+					</SwapLayoutCard>
+				)} */}
+          {showChart && [ChainId.FANTOM].includes(chainId) &&
+            <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
+              <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
+                <Chart inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
               </div>
-        <div className={classNames(chainId == ChainId.FANTOM ? "flex justify-between" 
-          : chainId == ChainId.AVALANCHE ? "flex justify-end" : "hidden" )}>
-        <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
-          <Toggle
-            id="toggle-button"
-            optionA="Data"
-            optionB="Data"
-            isActive={showData}
-            toggle={
-              showData
-                ? () => {
-                  setShowData(false)
-                }
-                : () => {
-                  setShowData(true)
-                }
-            }
-          />
-        </div>
-        <div className={classNames(chainId == ChainId.FANTOM ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}>
-          <Toggle
-            id="toggle-button"
-            optionA="Chart"
-            optionB="Chart"
-            isActive={showChart}
-            toggle={
-              showChart
-                ? () => {
-                  setShowChart(false)
-                }
-                : () => {
-                  setShowChart(true)
-                }
-            }
-          />
-        </div>
-          </div>
-        { showChart && [ChainId.FANTOM].includes(chainId) &&
-          <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
-            <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
-              <Chart inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
             </div>
-          </div>
-        }
-        { showData && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
-          <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
-            <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
-              <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+          }
+          {showData && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+            <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
+              <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
+                <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+              </div>
             </div>
-          </div>
-        }
-      {(!showChart && !showData) &&
-           <SocialWidget />
-        }
+          }
+          {(!showChart && !showData) &&
+            <SocialWidget />
+          }
         </SwapLayoutCard>
-        }
-        {
+      }
+      {
         <div className="grid grid-cols-1">
-          <Image 
+          <Image
             src='https://app.soulswap.finance/title-soul-halfs.png'
-            height="400px" width="600px" alt="logo" 
+            height="400px" width="600px" alt="logo"
           />
         </div>
       }

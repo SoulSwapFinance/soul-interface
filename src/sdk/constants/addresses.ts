@@ -735,4 +735,4 @@ export const AVAX_NATIVE: AddressMap = {
   [ChainId.FANTOM]: '0x5159Ba92FDC80b3a4B19De279711b1822de06c86',
 }
 
-export const NATIVE_ADDRESS = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
+export const NATIVE_ADDRESS = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";

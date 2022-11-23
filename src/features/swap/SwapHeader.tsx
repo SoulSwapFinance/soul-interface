@@ -142,21 +142,21 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             {i18n._(t`Multi`)}
           </Typography>
         </NavLink> */}
-        {featureEnabled(Feature.AGGREGATE, chainId) &&
+        {/* {featureEnabled(Feature.AGGREGATE, chainId) &&
         <NavLink
           activeClassName={classNames(
             "border rounded bg-black",
             chainColor
           )}
           href={{
-            pathname: '/open',
+            pathname: '/aggregator',
           }}
         >
           <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
             {i18n._(t`Eco`)}
           </Typography>
         </NavLink>
-        }
+        } */}
       </div>
         <div className={'flex flex-cols-2 sm:gap-8 gap-6 mr-4 justify-end rounded'}>
           {isSwap && <Settings />}
