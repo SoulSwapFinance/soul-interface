@@ -299,18 +299,18 @@ const Aggregator = ({ }) => {
 
 	const { data: tokenPrices } = useGetPrice({
 		chain: selectedChain.value,
-		toToken: toToken?.isNative ? NATIVE_ADDRESS : toToken?.wrapped.address,
-		fromToken: fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address
+		toToken: toToken?.wrapped.address,
+		fromToken: fromToken?.wrapped.address
 	});
 
 	const { gasTokenPrice = 0, toTokenPrice = 0, fromTokenPrice = 0 } = tokenPrices || {};
 
-	const cleanState = () => {
-		setFromToken(null);
-		setToToken(null);
-		setRoute(null);
-		setTxUrl('');
-	};
+	// const cleanState = () => {
+	// 	setFromToken(null);
+	// 	setToToken(null);
+	// 	setRoute(null);
+	// 	setTxUrl('');
+	// };
 
 	const tokenA = new Token(chainId, fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address || WNATIVE_ADDRESS[chainId], fromToken?.wrapped.decimals || 18)
 
@@ -399,7 +399,7 @@ const Aggregator = ({ }) => {
 							<div>
 								<div className="flex justify-center -mt-8 -mb-4 z-0">
 									<div
-										role="button"
+										// role="button"
 										className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700`}
 										onClick={() => {
 											// setApprovalSubmitted(false) // reset 2 step UI for approvals
@@ -409,8 +409,23 @@ const Aggregator = ({ }) => {
 										<ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
 									</div>
 								</div>
-
-								<CurrencyInputPanel
+								<SwapAssetPanel
+								spendFromWallet={true}
+								chainId={chainId}
+								header={(props) => (
+									<SwapAssetPanel.Header
+										{...props}
+										label={
+											`Swap to:`
+										}
+									/>
+								)}
+								currency={toToken}
+								value={(routes[0]?.price.amountReturned / (10**(outputToken?.wrapped.decimals)))?.toString() || '0'}
+								onChange={() => {}}
+								onSelect={handleOutputSelect}
+							/>
+								{/* <CurrencyInputPanel
 									showCurrencySelect={true}
 									currency={outputToken}
 									hideInput={true}
@@ -423,7 +438,7 @@ const Aggregator = ({ }) => {
 									disableCurrencySelect={false}
 									hideBalance={true}
 									chainId={chainId}
-								/>
+								/> */}
 							</div>
 						</div>
 
@@ -431,7 +446,7 @@ const Aggregator = ({ }) => {
 							{/* <FormHeader>From Amount</FormHeader> */}
 							{/* <TokenInput setAmount={setAmount} amount={amount} onMaxClick={onMaxClick} /> */}
 							<InputFooter>
-								<div className="font-bold" style={{ marginTop: 4, marginLeft: 4 }}>
+								<div className="font-bold mb-4" style={{ marginTop: 4, marginLeft: 4 }}>
 									<Input
 										value={slippage}
 										type="number"
@@ -472,7 +487,7 @@ const Aggregator = ({ }) => {
 									variant={'filled'}
 									color={getChainColorCode(chainId)}
 									isLoading={swapMutation.isLoading || isApproveLoading}
-									loadingText="Preparing transaction"
+									loadingText="Preparing Transaction"
 									colorScheme={'messenger'}
 									onClick={() => {
 										if (approve) approve();
