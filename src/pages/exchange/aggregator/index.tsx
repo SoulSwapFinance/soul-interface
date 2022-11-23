@@ -475,10 +475,11 @@ const Aggregator = ({ }) => {
 										if (approve) approve();
 
 										// if (+amount > +balance?.data?.formatted) return;
-										if (isApproved) handleSwap();
+				if (isApproved || fromToken.isNative) handleSwap();
+
 									}}
 								>
-									{isApproved ? 'Swap' : 'Approve'}
+			{(isApproved || fromToken.isNative) ? 'Swap' : 'Approve'}
 								</Button>
 							)}
 							{/* route && account && !isApproved && ['Matcha/0x', '1inch'].includes(route?.name) ? (
