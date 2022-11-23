@@ -105,17 +105,17 @@ const Body = styled.div<{ showRoutes: boolean }>`
 	}
 `;
 
-const Wrapper = styled.div`
-	width: 100%;
-	text-align: center;
-	display: grid;
-	grid-row-gap: 36px;
-	margin: 10px auto 40px;
+// const Wrapper = styled.div`
+// 	width: 100%;
+// 	text-align: center;
+// 	display: grid;
+// 	grid-row-gap: 36px;
+// 	margin: 10px auto 40px;
 
-	h1 {
-		font-weight: 500;
-	}
-`;
+// 	h1 {
+// 		font-weight: 500;
+// 	}
+// `;
 
 // const Balance = styled.div`
 // 	text-align: right;
@@ -131,7 +131,7 @@ const Routes = styled.div`
 	text-align: left;
 	overflow-y: scroll;
 	max-height: 360px;
-	min-width: 30rem;
+	min-width: 23rem;
 	animation: tilt-in-fwd-in 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 
 	&::-webkit-scrollbar {
@@ -164,12 +164,12 @@ const Routes = styled.div`
 	}
 `
 
-const FormHeader = styled.div`
-	font-weight: bold;
-	font-size: 16px;
-	margin-bottom: 4px;
-	padding-left: 4px;
-`
+// const FormHeader = styled.div`
+// 	font-weight: bold;
+// 	font-size: 16px;
+// 	margin-bottom: 4px;
+// 	padding-left: 4px;
+// `
 
 const SwapWrapper = styled.div`
 	width: 100%;
@@ -374,7 +374,9 @@ const Aggregator = ({ }) => {
 			<div className={"grid grid-cols-1 gap-2 mt-4"}>
 				<SwapLayoutCard>
 					<SwapHeader />
-					<Body showRoutes={inputToken && outputToken}>
+					<Container 
+					// showRoutes={inputToken && outputToken}
+					>
 						{/* <FormHeader>Select Tokens</FormHeader> */}
 						{/* <TokenSelectDiv onClick={() => setShowTokenSelect(true)}> */}
 						<div className="flex flex-col gap-3 space-y-3">
@@ -398,14 +400,13 @@ const Aggregator = ({ }) => {
 								<div className="flex justify-center -mt-8 -mb-4 z-0">
 									<div
 										role="button"
-										className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`}
+										className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700`}
 										onClick={() => {
 											// setApprovalSubmitted(false) // reset 2 step UI for approvals
 											// onSwitchTokens()
 										}}
 									>
 										<ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
-										{/* <PlusIcon width={14} className="text-high-emphesis hover:text-white" /> */}
 									</div>
 								</div>
 
@@ -498,19 +499,18 @@ const Aggregator = ({ }) => {
 							</Button>
 						) : null */}
 						</SwapWrapper>
-					</Body>
+					</Container>
 				</SwapLayoutCard>
 
 				{inputToken && outputToken && (
 					<SwapLayoutCard>
-						<Routes>
+						<Container>
+							<Routes>
 							{/* <FormHeader>
 							Routes
 							<CloseBtn onClick={cleanState} />{' '}
 						</FormHeader> */}
-
 							{isLoading ? <Loader loaded={!isLoading} /> : null}
-
 							{normalizedRoutes.map((r, i) => (
 								<Route
 									{...r}
@@ -524,7 +524,8 @@ const Aggregator = ({ }) => {
 									key={i}
 								/>
 							))}
-						</Routes>
+							</Routes>
+						</Container>
 					</SwapLayoutCard>
 				)}
 			</div>
