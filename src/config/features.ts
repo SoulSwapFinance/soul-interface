@@ -8,6 +8,7 @@ const features: FeatureMap = {
     Feature.AMM,
     Feature.SWAP,
     Feature.LIQUIDITY,
+    Feature.AGGREGATE,
     // Feature.ANALYTICS,
     // Feature.LIQUIDITY_MINING,
     // Feature.COFFINBOX,
@@ -30,7 +31,8 @@ const features: FeatureMap = {
   ],
 
   [ChainId.MATIC]: [
-    Feature.AMM, 
+    Feature.AMM,
+    Feature.AGGREGATE,
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD
   ],

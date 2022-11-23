@@ -47,6 +47,44 @@ export function useGasPrice(): { status: string; gasPrice: T } {
     return { status, gasPrice }
 }
 
+export function useSwapQuote(inputAmount, fromAddress, toAddress): { status: string; swapQuote: T } {
+    const { chainId } = useActiveWeb3React()
+    const [status, setStatus] = useState<string>('idle')
+    const [swapQuote, setSwapQuote] = useState<T>(
+     {
+      infoAddress: "",
+      inputAmount: "1",
+      fromAddress: "",
+      toAddress: "",
+      SoulAmountOut: "",
+      SpookyAmountOut: "",
+      SpiritAmountOut: "",
+      OptimalDex: "",
+     }
+    )
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        setStatus('fetching')
+        const response = await fetch(`${BASE_URL}/aggregator/${inputAmount}/${fromAddress}/${toAddress}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Referrer-Policy': 'no-referrer',
+          },
+        })
+        const json = await response.json()
+        // console.log('price:%s', json)
+        setSwapQuote(json as T)
+        setStatus('fetched')
+      }
+      if ([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId)) 
+      fetchData()
+    }, [])
+  
+    return { status, swapQuote }
+}
+
 export function usePriceUSD(tokenAddress): { status: string; price: T } {
     const { chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')

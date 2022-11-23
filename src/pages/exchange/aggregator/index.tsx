@@ -30,6 +30,8 @@ import { useGasPrice } from 'hooks/useAPI'
 import { SwapLayoutCard } from 'layouts/SwapLayout'
 import SwapHeader from 'features/swap/SwapHeader'
 import Container from 'components/Container'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums/Feature'
 /*
 Integrated:
 - paraswap
@@ -125,7 +127,7 @@ const Body = styled.div<{ showRoutes: boolean }>`
 // 	cursor: pointer;
 // `;
 
-const Routes = styled.div`
+export const Routes = styled.div`
 	padding: 16px;
 	border-radius: 16px;
 	text-align: left;
@@ -180,14 +182,15 @@ const SwapWrapper = styled.div`
 	}
 `
 
-const InputFooter = styled.div`
+export const InputFooter = styled.div`
 	display: flex;
+	margin-top: 1.25rem;
 	justify-content: space-between;
 `
 
-const chains = getAllChains()
+export const chains = getAllChains()
 
-const startChain = (id) => {
+export const startChain = (id) => {
 	let chain = chains[0] // ETH
 	id == 56 ? chain = chains[1] // BSC
 		: id == 137 ? chain = chains[2] // MATIC
@@ -371,12 +374,12 @@ const Aggregator = ({ }) => {
 	return (
 		<Container>
 			{/* <div className="mt-2" /> */}
-			<div className={"grid grid-cols-1 gap-2 mt-4"}>
-				<SwapLayoutCard>
-					<SwapHeader />
-					<Container 
-					// showRoutes={inputToken && outputToken}
-					>
+			<div className={"grid grid-cols-1 gap-2"}>
+				{/* <SwapLayoutCard> */}
+					{/* <SwapHeader /> */}
+					{/* <Container  */}
+					{/* // showRoutes={inputToken && outputToken} */}
+					{/* > */}
 						{/* <FormHeader>Select Tokens</FormHeader> */}
 						{/* <TokenSelectDiv onClick={() => setShowTokenSelect(true)}> */}
 						<div className="flex flex-col gap-3 space-y-3">
@@ -398,14 +401,7 @@ const Aggregator = ({ }) => {
 							/>
 							<div>
 								<div className="flex justify-center -mt-8 -mb-4 z-0">
-									<div
-										// role="button"
-										className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700`}
-										onClick={() => {
-											// setApprovalSubmitted(false) // reset 2 step UI for approvals
-											// onSwitchTokens()
-										}}
-									>
+									<div className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700`}>
 										<ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
 									</div>
 								</div>
@@ -425,28 +421,14 @@ const Aggregator = ({ }) => {
 								onChange={() => {}}
 								onSelect={handleOutputSelect}
 							/>
-								{/* <CurrencyInputPanel
-									showCurrencySelect={true}
-									currency={outputToken}
-									hideInput={true}
-									// onClick={() => setToToken(toToken)}
-									onUserInput={handleTypeInput}
-									onCurrencySelect={handleOutputSelect}
-									// otherCurrency={currencyB}
-									showCommonBases={false}
-									id="output-currency"
-									disableCurrencySelect={false}
-									hideBalance={true}
-									chainId={chainId}
-								/> */}
 							</div>
 						</div>
 
 						<div>
 							{/* <FormHeader>From Amount</FormHeader> */}
 							{/* <TokenInput setAmount={setAmount} amount={amount} onMaxClick={onMaxClick} /> */}
-							<InputFooter>
-								<div className="font-bold mb-4" style={{ marginTop: 4, marginLeft: 4 }}>
+							{/* <InputFooter className="bg-dark-1000 p-2 m-1 rounded rounded-xl">
+								<div className="font-bold p-2" style={{ marginTop: 4, marginLeft: 4 }}>
 									<Input
 										value={slippage}
 										type="number"
@@ -461,16 +443,16 @@ const Aggregator = ({ }) => {
 										}}
 									/>{' % Slippage'}
 								</div>
-								<div className="flex mt-3 font-bold">
+								<div className="flex mt-2 font-bold p-2">
 									{fromTokenPrice > 0 && (
 										<>
 											${(+fromTokenPrice * +amount).toLocaleString(undefined, {
 												maximumFractionDigits: 3
 											}) + ' Value'}
 											{/* Value: $ */}
-										</>
-									)}
-								</div>
+										{/* </> */}
+									{/* )} */}
+								{/* </div> */}
 								{/* {balance &&
 								<Balance onClick={onMaxClick}>
 									{
@@ -478,10 +460,10 @@ const Aggregator = ({ }) => {
 										// ? `Balance: ${(balance.value?.div(e10(18))).toString()} ${fromToken?.symbol}`
 									`Balance: ${(balance.value?.div(e10(fromToken?.wrapped.decimals ?? 18))).toString()} ${fromToken?.symbol}`}
 								</Balance>
-							} */}
-							</InputFooter>
+							}
+							</InputFooter> */}
 						</div>
-						<SwapWrapper>
+						{/* <SwapWrapper> */}
 							{route && account && (
 								<Button
 									variant={'filled'}
@@ -513,18 +495,15 @@ const Aggregator = ({ }) => {
 								{'Approve Infinite'}
 							</Button>
 						) : null */}
-						</SwapWrapper>
-					</Container>
-				</SwapLayoutCard>
+						{/* </SwapWrapper> */}
+					{/* </Container> */}
+				{/* </SwapLayoutCard> */}
 
 				{inputToken && outputToken && (
+				<div className={`m-2 border border-dark-800 hover:border-${getChainColorCode(chainId)} border-2 rounded rounded-xl`}>
 					<SwapLayoutCard>
 						<Container>
 							<Routes>
-							{/* <FormHeader>
-							Routes
-							<CloseBtn onClick={cleanState} />{' '}
-						</FormHeader> */}
 							{isLoading ? <Loader loaded={!isLoading} /> : null}
 							{normalizedRoutes.map((r, i) => (
 								<Route
@@ -542,6 +521,7 @@ const Aggregator = ({ }) => {
 							</Routes>
 						</Container>
 					</SwapLayoutCard>
+				</div>
 				)}
 			</div>
 
@@ -552,3 +532,4 @@ const Aggregator = ({ }) => {
 }
 
 export default Aggregator
+Aggregator.Guard = NetworkGuard(Feature.AGGREGATE)

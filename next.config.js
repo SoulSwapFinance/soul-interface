@@ -99,8 +99,8 @@ module.exports = withBundleAnalyzer(
     async rewrites() {
       return [
         {
-          source: '/open',
-          destination: '/exchange/open',
+          source: '/aggregator',
+          destination: '/exchange/aggregator',
         },
         {
           source: '/add/:token*',
