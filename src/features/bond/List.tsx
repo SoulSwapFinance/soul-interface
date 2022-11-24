@@ -62,12 +62,12 @@ const BondList = () => {
 <Typography className="text-2xl bg-dark-1000 mt-6 border border-dark-600 p-3 font-bold text-center">SoulSwap Pools</Typography>
       <BondKey />
       <>{chainId == ChainId.FANTOM ? ftmList : avaxList}</>
-      <div>
+      <div className={classNames(chainId == ChainId.FANTOM ? '' : 'hidden')}>
         <Typography className={classNames(chainId == ChainId.AVALANCHE ? 'hidden' : 'text-2xl bg-dark-1000 mt-6 border border-blue p-3 font-bold text-center')}>
         Lending Pools
         </Typography>
-        <BondKey />
-        {chainId == ChainId.FANTOM ? ftmLendList : null}
+      { chainId == ChainId.FANTOM && <BondKey /> }
+        {chainId == ChainId.FANTOM && ftmLendList}
       </div>
     </>
   )
