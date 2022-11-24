@@ -7,6 +7,11 @@
     "patch": 5
   },
   "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png",
+  "tags": {},
+  "keywords": [
+  "soulswap",
+  "default"
+  ],
   "tokens": [
     {
       "chainId": 1,
