@@ -90,7 +90,7 @@ export const TransactionSubmittedContent: FC<TransactionSubmittedContentProps> =
                   options: {
                     address: currencyToAdd.wrapped.address,
                     symbol: `${currencyToAdd.wrapped.symbol}`,
-                    decimals: 18,
+                    decimals: currencyToAdd.wrapped.decimals,
                     image: `https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/${blockchain}/assets/${currencyToAdd.wrapped.address}/logo.png`,
                   },
                 }
