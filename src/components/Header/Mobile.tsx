@@ -45,16 +45,11 @@ const Mobile: FC = () => {
           </div>
           }
           <div
-              className="flex gap-3 px-1 sm:gap-4 md:gap-18 justify-between items-center">
+              className="flex gap-2 sm:px-1 sm:gap-4 md:gap-18 justify-between items-center">
               {menu.map((node) => {
                 return <NavigationItem node={node} key={node.key} /> 
               })}
             </div>
-         {/* <div className="flex items-center w-12 mr-1">
-            <Link href="/landing" passHref={true}>
-              <Image src="/logo.png" alt="logo" width="32px" height="32px" />
-            </Link>
-          </div> */}
         </div>
         <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 z-20 overflow-hidden" onClose={setOpen} unmount={false}>
@@ -70,7 +65,7 @@ const Mobile: FC = () => {
               >
                 <Dialog.Overlay className="absolute inset-0 transition-opacity bg-dark-1000 bg-opacity-80" />
               </Transition.Child>
-              <div className="fixed inset-y-0 left-0 pr-10 max-w-[260px] flex">
+              <div className="fixed inset-y-0 left-0 pr-8 sm:pr-10 max-w-[260px] flex">
                 <Transition.Child
                   as={Fragment}
                   enter="transform transition ease-in-out duration-300"
@@ -88,7 +83,7 @@ const Mobile: FC = () => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
                       </nav>
-                      <div className="flex flex-col mt-2 gap-4 px-6">
+                      <div className="flex flex-col mt-2 gap-4 px-4 sm:px-6">
                         <div className="flex items-center justify-start gap-2">
                           {/* <div className="flex items-center w-auto text-sm font-bold border-2 rounded shadow cursor-pointer pointer-events-auto select-none border-dark-800 hover:border-dark-700 bg-dark-900 whitespace-nowrap">
                             {account && chainId && userEthBalance && (
