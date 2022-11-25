@@ -189,17 +189,15 @@ export default function Repay({ pair }: RepayProps) {
       displayRemoveValue.toBigNumber(collateralDecimals).gt(pair.userCollateralShare),
       'You have insufficient collateral. Please enter a smaller amount or repay more.'
     )
-    .addError(
+    /* .addError(
       displayRepayValue.toBigNumber(assetDecimals).gt(pair.currentUserBorrowAmount.value),
       "You can't repay more than you owe. To fully repay, please click the 'max' button.",
       new Warning(
         balance?.lt(displayRepayValue.toBigNumber(assetDecimals)),
-        `Please make sure your ${
-          useCoffinRepay ? 'CoffinBox' : 'wallet'
-        } balance is sufficient to repay and then try again.`,
+        `Please make sure your balance is sufficient to repay and then try again.`,
         true
       )
-    )
+    ) */
     .addError(
       displayRemoveValue
         .toBigNumber(collateralDecimals)
