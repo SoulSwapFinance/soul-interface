@@ -461,21 +461,21 @@ import SwapDropdown from "features/swap/SwapDropdown"
   return (
     <Container id="cross-page" maxWidth="2xl" className="space-y-4">
       <DoubleGlowShadowV2>
-      {/* <SwapLayoutCard> */}
-
-        <div className="p-4 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-        {/* <SwapHeader
-            inputCurrency={currencyA}
-            outputCurrency={currencyB}
-            allowedSlippage={allowedSlippage}
-          />           */}
+      <SwapLayoutCard>
           <SwapDropdown
             inputCurrency={currencyA}
             outputCurrency={currencyB}
             allowedSlippage={allowedSlippage}
           />
+
+        <div className="p-0 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+        {/* <SwapHeader
+            inputCurrency={currencyA}
+            outputCurrency={currencyB}
+            allowedSlippage={allowedSlippage}
+          />           */}
           {/* <OrderHeader handleActiveTab={handleActiveTab} activeTab={activeTab} /> */}
-          <Wrapper id="limit-order-page">
+          {/* <Wrapper id="limit-order-page"> */}
             <ConfirmSwapModal
               isOpen={showConfirm}
               trade={trade}
@@ -777,7 +777,7 @@ import SwapDropdown from "features/swap/SwapDropdown"
                 ) : null}
               </BottomGrouping>
             </AutoColumn>
-          </Wrapper>
+          {/* </Wrapper> */}
 
           {!swapIsUnsupported ? null : (
             <UnsupportedCurrencyFooter
@@ -816,7 +816,7 @@ import SwapDropdown from "features/swap/SwapDropdown"
         </div>
       }
     </div>
-  {/* </SwapLayoutCard> */}
+  </SwapLayoutCard>
       </DoubleGlowShadowV2>
     </Container>
 

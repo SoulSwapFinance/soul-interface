@@ -1,7 +1,7 @@
 import { ArrowDownIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, Currency, DAI, JSBI, NATIVE, NATIVE_ADDRESS, Token, Trade as V2Trade, TradeType, USDC } from 'sdk'
+import { ChainId, Currency, DAI, JSBI, NATIVE, NATIVE_ADDRESS, SOUL, Token, Trade as V2Trade, TradeType, USDC } from 'sdk'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
 import Web3Connect from 'components/Web3Connect'
@@ -37,17 +37,17 @@ import { Toggle } from 'components/Toggle'
 import SocialWidget from 'components/Social'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { classNames } from 'functions/styling'
-import { NewFeature } from 'components/Banner'
+// import { NewFeature } from 'components/Banner'
 import NavLink from 'components/NavLink'
-import Analytics from 'components/Analytics'
+// import Analytics from 'components/Analytics'
 import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 // import { currencyId } from 'functions/currency'
 import { useRouter } from 'next/router'
 import Aggregator, { Routes, startChain } from '../aggregator'
-import Container from 'components/Container'
-import Route from 'components/SwapRoute'
-import Loader from 'features/aggregator/components/Loader'
+// import Container from 'components/Container'
+// import Route from 'components/SwapRoute'
+// import Loader from 'features/aggregator/components/Loader'
 import { useGasPrice } from 'hooks/useAPI'
 import BigNumber from 'bignumber.js'
 import useGetPrice from 'features/aggregator/queries/useGetPrice'
@@ -55,8 +55,9 @@ import useGetRoutes from 'features/aggregator/queries/useGetRoutes'
 import { ethers } from 'ethers'
 import { addTransaction } from 'state/transactions/actions'
 import { getExplorerLink } from 'functions/explorer'
-import { SubmitButton } from 'features/summoner/Styles'
+// import { SubmitButton } from 'features/summoner/Styles'
 import SwapDropdown from 'features/swap/SwapDropdown'
+import Pair from 'pages/analytics/pairs/[id]'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -75,7 +76,7 @@ const Swap = () => {
   const tokens = router.query.tokens
   const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
   // const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
-  const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
+  // const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
 
   const [dismissTokenWarning, setDismissTokenWarning] = useState<boolean>(false)
   const urlLoadedTokens: Token[] = useMemo(
@@ -87,7 +88,8 @@ const Swap = () => {
   }, [])
 
   const [showChart, setShowChart] = useState(false)
-  const [showData, setShowData] = useState(false)
+  const [showAnalytics, setShowAnalytics] = useState(false)
+  // const [showAggregator, setShowAggregator] = useState(false)
 
   // dismiss warning if all imported tokens are in active lists
   const importTokensNotInDefault =
@@ -701,7 +703,7 @@ const Swap = () => {
             <Aggregator />
           }
           {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} show={false} /> : null}
-          <div className="flex border-dark-900 mt-3 mb-0 gap-1 items-center justify-center">
+          {/* <div className="flex border-dark-900 mt-3 mb-0 gap-1 items-center justify-center">
             <Button
               variant="filled"
               color={chainId == ChainId.AVALANCHE ? "avaxGradient" : "gradientPurpleBlue"}
@@ -724,39 +726,38 @@ const Swap = () => {
                 </a>
               </NavLink>
             </Button>
-          </div>
-          <div className={classNames(chainId == ChainId.FANTOM ? "flex justify-between"
-            : chainId == ChainId.AVALANCHE ? "flex justify-end" : "hidden")}>
+          </div> */}
+          <div className={classNames(featureEnabled(Feature.AGGREGATE, chainId) ? "m-1 flex justify-between" : "hidden")}>
             <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
               <Toggle
                 id="toggle-button"
-                optionA="Data"
-                optionB="Data"
-                isActive={showData}
+                optionA="Analytics"
+                optionB="Analytics"
+                isActive={showAnalytics}
                 toggle={
-                  showData
+                  showAnalytics
                     ? () => {
-                      setShowData(false)
+                      setShowAnalytics(false)
                     }
                     : () => {
-                      setShowData(true)
+                      setShowAnalytics(true)
                     }
                 }
               />
             </div>
-            <div className={classNames(chainId == ChainId.FANTOM ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}>
+            <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
               <Toggle
                 id="toggle-button"
-                optionA="Chart"
-                optionB="Chart"
-                isActive={showChart}
+                optionA="Aggregate"
+                optionB="Aggregate"
+                isActive={useAggregator}
                 toggle={
-                  showChart
+                  useAggregator
                     ? () => {
-                      setShowChart(false)
+                      setUseAggregator(false)
                     }
                     : () => {
-                      setShowChart(true)
+                      setUseAggregator(true)
                     }
                 }
               />
@@ -784,21 +785,29 @@ const Swap = () => {
 						</Container>
 					</SwapLayoutCard>
 				)} */}
-          {showChart && [ChainId.FANTOM].includes(chainId) &&
+          {/* {showChart && [ChainId.FANTOM].includes(chainId) &&
             <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
               <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
                 <Chart inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
               </div>
             </div>
-          }
-          {showData && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+          } */}
+          {/* {featureEnabled(Feature.AGGREGATE, chainId) && showAggregator &&
             <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
               <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
-                <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+                <Chart inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+              </div>
+            </div>
+          } */}
+          {showAnalytics && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+            <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
+              <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
+                {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
+                <Pair inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
               </div>
             </div>
           }
-          {(!showChart && !showData) &&
+          {(!showChart && !showAnalytics) &&
             <SocialWidget />
           }
         </SwapLayoutCard>

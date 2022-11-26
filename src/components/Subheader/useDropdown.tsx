@@ -1,5 +1,5 @@
 import React, { ReactNode, useMemo } from 'react'
-import { GlobeIcon, SwitchVerticalIcon, SparklesIcon, TrendingUpIcon, PresentationChartLineIcon, SunIcon, CurrencyDollarIcon, UserGroupIcon } from '@heroicons/react/outline'
+import { GlobeIcon, SwitchVerticalIcon, LinkIcon, SparklesIcon, TrendingUpIcon, PresentationChartLineIcon, SunIcon, CurrencyDollarIcon, UserGroupIcon, SwitchHorizontalIcon } from '@heroicons/react/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { ChainId, NATIVE, SOUL_ADDRESS } from 'sdk'
@@ -9,7 +9,7 @@ import { classNames, featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
 import { useRouter } from 'next/router'
 import { getChainColor } from 'constants/chains'
-import { MenuAlt1Icon } from '@heroicons/react/outline'
+// import { MenuAlt1Icon } from '@heroicons/react/outline'
 
 export interface DropdownItemLeaf {
   key: string
@@ -65,25 +65,15 @@ if (featureEnabled(Feature.AMM, chainId)) {
         title: i18n._(t`Swap`),
         link: '/swap',
       },
-      {
-        key: 'aggregator',
-        title: i18n._(t`Aggregate`),
-        link: '/aggregator',
-      },
+      // {
+      //   key: 'aggregator',
+      //   title: i18n._(t`Aggregate`),
+      //   link: '/aggregator',
+      // },
       {
         key: 'limit',
         title: i18n._(t`Limit`),
-        link: '/limit',
-      },
-      {
-        key: 'crosschain',
-        title: i18n._(t`Cross`),
-        link: '/cross',
-      },
-      {
-        key: 'bridge',
-        title: i18n._(t`Bridge`),
-        link: '/bridge',
+        link: `/limit/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
       }
     ],
   }
@@ -91,24 +81,14 @@ if (featureEnabled(Feature.AMM, chainId)) {
 
 if (featureEnabled(Feature.LIQUIDITY, chainId)) {
   poolMenu = {
-    key: 'pool',
+    key: 'liquidity',
     title: i18n._(t`Liquidity`),
     icon: <PoolIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     items: [
       {
-        key: 'browse',
-        title: i18n._(t`Browse`),
-        link: '/pool',
-      },
-      {
-        key: 'add-liquidity',
-        title: i18n._(t`Add`),
+        key: 'pool',
+        title: i18n._(t`Pool`),
         link: `/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
-      },
-      {
-        key: 'remove-liquidity',
-        title: i18n._(t`Remove`),
-      link: `/remove/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
       },
       {
         key: 'import',
@@ -119,52 +99,94 @@ if (featureEnabled(Feature.LIQUIDITY, chainId)) {
   }
 }
 
-let socialMenu = {
-  key: 'socials',
-  title: i18n._(t`Socials`),
-  icon: <UserGroupIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+let multiMenu = {
+  key: 'multichain',
+  title: i18n._(t`Multichain`),
+  icon: <SwitchHorizontalIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
+  // icon: <LinkIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
   items: [
     {
-      key: 'discord',
-      title: 'Discord',
-      link: 'https://discord.com/invite/DQjChB6Wa6',
+      key: 'bridge',
+      title: i18n._(t`Bridge`),
+      link: '/bridge',
     },
     {
-      key: 'telegram',
-      title: 'Telegram',
-      link: 'https://t.me/SoulSwapDeFi',
-    },
-    {
-      key: 'twitter',
-      title: 'Twitter',
-      link: `https://twitter.com/${ isLuxor ? 'LuxorMoney' : 'SoulSwapFinance' }`,
-    },
-    {
-      key: 'forum',
-      title: 'Forum',
-      link: 'https://forum.soulswap.finance',
-    },
-    {
-      key: 'medium',
-      title: 'Medium',
-      link: 'https://soulswapfinance.medium.com',
-    },
-    {
-      key: 'email',
-      title: 'Email',
-      link: 'mailto:soulswapfinance@gmail.com',
+      key: 'crosschain',
+      title: i18n._(t`Crosschain`),
+      link: '/cross',
     },
   ],
 }
 
-  const mainItems: Bar = [tradeMenu, poolMenu, socialMenu]
+// let socialMenu = {
+//   key: 'socials',
+//   title: i18n._(t`Socials`),
+//   icon: <UserGroupIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+//   items: [
+//     {
+//       key: 'discord',
+//       title: 'Discord',
+//       link: 'https://discord.com/invite/DQjChB6Wa6',
+//     },
+//     {
+//       key: 'telegram',
+//       title: 'Telegram',
+//       link: 'https://t.me/SoulSwapDeFi',
+//     },
+//     {
+//       key: 'twitter',
+//       title: 'Twitter',
+//       link: `https://twitter.com/${ isLuxor ? 'LuxorMoney' : 'SoulSwapFinance' }`,
+//     },
+//     {
+//       key: 'forum',
+//       title: 'Forum',
+//       link: 'https://forum.soulswap.finance',
+//     },
+//     {
+//       key: 'medium',
+//       title: 'Medium',
+//       link: 'https://soulswapfinance.medium.com',
+//     },
+//     {
+//       key: 'email',
+//       title: 'Email',
+//       link: 'mailto:soulswapfinance@gmail.com',
+//     },
+//   ],
+// }
+
+let dataMenu = {
+  key: 'data',
+  title: i18n._(t`Data`),
+  icon: <WalletIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
+  items: [
+    // {
+    //   key: 'account',
+    //   title: 'Account',
+    //   link: '/info/dashboard',
+    // },
+    {
+      key: 'balances',
+      title: 'Balances',
+      link: '/balances',
+    },
+    {
+      key: 'positions',
+      title: 'Positions',
+      link: '/pools',
+    },
+  ]
+}
+
+  const mainItems: Bar = [tradeMenu, poolMenu, multiMenu, dataMenu]
 
     // Balances
     // mainItems.push({
     //   key: 'balances',
     //   title: i18n._(t`Account`),
     //   link: '/balances',
-    //   icon: <WalletIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
+      
     // })
 
     // let exploreMenu: BarItem = {
