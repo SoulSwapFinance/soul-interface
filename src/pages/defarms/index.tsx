@@ -135,7 +135,7 @@ const Defarms = () => {
                 size="lg"
               >
                 <a className="block text-md font-bold md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                  <span> Migrate Here: Archived Farms </span>
+                  <span> Archived Farms ↗</span>
                 </a>
               </SubmitButton>
             </ExternalLink>
