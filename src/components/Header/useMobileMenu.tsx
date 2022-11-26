@@ -2,7 +2,7 @@ import React, { ReactNode, useMemo } from 'react'
 import { GlobeIcon, SparklesIcon, SwitchVerticalIcon, TrendingUpIcon } from '@heroicons/react/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { SOUL_ADDRESS } from 'sdk'
+import { NATIVE, SOUL_ADDRESS } from 'sdk'
 // import { PoolIcon, RocketIcon, WalletIcon } from 'components/Icon'
 import { Feature } from 'enums'
 import { featureEnabled } from 'functions'
@@ -81,12 +81,12 @@ const useMobileMenu: UseMobileMenu = () => {
       {
         key: 'add-liquidity',
         title: i18n._(t`Add`),
-        link: `/add/FTM/${SOUL_ADDRESS[chainId]}`,
+        link: `/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
       },
       {
         key: 'remove-liquidity',
         title: i18n._(t`Remove`),
-      link: `/remove/FTM/${SOUL_ADDRESS[chainId]}`,
+      link: `/remove/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
       },
       {
         key: 'import',
