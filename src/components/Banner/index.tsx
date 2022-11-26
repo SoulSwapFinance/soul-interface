@@ -180,7 +180,7 @@ export const BondsBanner: FC = () => (
             <Button variant="filled" color="purple" size="sm">
               <span className="justify-center">
                 {' '}
-                Introducing Bonds: Click to Learn More
+                Introducing: Soul Bonds ↗
               </span>
             </Button>
           </ExternalLink>

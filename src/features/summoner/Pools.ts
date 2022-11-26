@@ -10,7 +10,7 @@ import { ChainId, SOUL_ADDRESS, USDC_ADDRESS, LUX_ADDRESS, WLUM_ADDRESS, WNATIVE
 export const InactiveAvalanchePools = []
 
 export const InactiveFantomPools = [
-  { // 200
+/* { // 200
     pid: 16,
     type: 'swap',
     decimals: 18,
@@ -20,7 +20,7 @@ export const InactiveFantomPools = [
     lpAddress: '0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99',
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: WLUM_ADDRESS[ChainId.FANTOM],
-  },
+  }, */
 ]
 
 export const AvalanchePools = [

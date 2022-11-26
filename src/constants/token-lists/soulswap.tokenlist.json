@@ -1,10 +1,10 @@
 {
   "name": "SoulSwap Token List",
-  "timestamp": "2022-02-10T00:31:47.842Z",
+  "timestamp": "2022-11-24T02:00:19.939Z",
   "version": {
-    "major": 1,
-    "minor": 1,
-    "patch": 1
+    "major": 5,
+    "minor": 0,
+    "patch": 5
   },
   "tags": {},
   "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg",
@@ -30,6 +30,14 @@
         "chainId": 1,
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/ethereum/assets/0x34862060EFF6DA2AF04D382C209a433279377d16/logo.png"
       },
+      {
+		"name": "Polygon",
+		"address": "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0",
+		"symbol": "MATIC",
+		"decimals": 18,
+		"chainId": 1,
+		"logoURI": "https://cryptologos.cc/logos/polygon-matic-logo.svg"
+	},
       {
         "name": "Binance",
         "address": "0x264c1383EA520f73dd837F915ef3a732e204a493",
@@ -61,7 +69,7 @@
         "decimals": 18,
         "chainId": 43114,
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/avalanche/assets/0x11d6DD25c1695764e64F439E32cc7746f3945543/logo.png"
-      },
+      }, 
       {
         "name": "Wrapped Avalanche",
         "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
@@ -142,6 +150,14 @@
         "chainId": 250,
         "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454/logo.png"
       },
+       {
+        "name": "CurveDAO",
+        "address": "0x1E4F97b9f9F913c46F1632781732927B9019C68b",
+        "symbol": "CRV",
+        "decimals": 18,
+        "chainId": 250,
+        "logoURI": "https://cryptologos.cc/logos/curve-dao-token-crv-logo.svg"
+      },
       {
         "name": "Dai Stablecoin",
         "address": "0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E",
@@ -157,6 +173,14 @@
         "decimals": 9,
         "chainId": 250,
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b/logo.png"
+      },
+      {
+        "name": "Multichain",
+        "address": "0x9Fb9a33956351cf4fa040f65A13b835A3C8764E3",
+        "symbol": "MULTI",
+        "decimals": 18,
+        "chainId": 250,
+        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x9Fb9a33956351cf4fa040f65A13b835A3C8764E3/logo.png"
       },
       {
         "name": "Soul Power",
@@ -175,12 +199,12 @@
         "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x04068DA6C83AFCFA0e13ba15A6696662335D5B75/logo.png"
       },
       {
-        "name": "SOR",
-        "address": "0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A",
-        "symbol": "SOR",
+        "name": "Sushi",
+        "address": "0xae75A438b2E0cB8Bb01Ec1E1e376De11D44477CC",
+        "symbol": "SUSHI",
         "decimals": 18,
         "chainId": 250,
-        "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A/logo.png"
+        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/sushi.jpg"
       },
       {
         "name": "Wrapped Bitcoin",

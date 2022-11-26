@@ -70,15 +70,14 @@ export default function Withdraw({ pair }: any): JSX.Element {
 
   const warnings = new Warnings()
     // CHECKS: WITHDRAW AMOUNT !> DEPOSITED AMOUNT - LENT AMOUNT
-    .add(
+    /* .add(
       pair.userAssetFraction.sub(pair.currentUserLentAmount.value)
         .lt(value.toBigNumber(assetDecimals)),
       i18n._(
-        t`Please make sure your ${useCoffin ? 'CoffinBox' : 'wallet'
-          } balance is sufficient to withdraw and then try again.`
+        t`Please make sure your balance is sufficient to withdraw and then try again.`
       ),
       true
-    )
+    ) */
     .add(
       pair.maxAssetAvailableFraction.lt(fraction),
       i18n._(
