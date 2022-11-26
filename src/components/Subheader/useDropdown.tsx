@@ -63,7 +63,7 @@ if (featureEnabled(Feature.AMM, chainId)) {
       {
         key: 'exchange',
         title: i18n._(t`Swap`),
-        link: '/swap',
+        link: `/swap/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
       },
       // {
       //   key: 'aggregator',
