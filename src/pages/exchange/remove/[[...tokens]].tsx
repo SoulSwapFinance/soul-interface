@@ -48,6 +48,7 @@ import { useWalletModalToggle } from 'state/application/hooks'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { classNames } from 'functions'
 import { getChainColorCode } from 'constants/chains'
+import SwapDropdown from 'features/swap/SwapDropdown'
 
 const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(10, 1000) // 1%
 
@@ -732,11 +733,12 @@ export default function Remove() {
         {/* <SwapBanner /> */}
         <DoubleGlowShadowV2>
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-            <SwapHeader
+            {/* <SwapHeader
               inputCurrency={currencyA}
               outputCurrency={currencyB}
               allowedSlippage={allowedSlippage}
-            />
+            /> */}
+            <SwapDropdown />
             {/* <Header input={currencyA} output={currencyB} allowedSlippage={allowedSlippage} /> */}
             <div>
               <TransactionConfirmationModal

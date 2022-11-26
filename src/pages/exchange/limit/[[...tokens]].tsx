@@ -84,6 +84,7 @@ import { currencyId } from "functions/currency"
 import { useRouter } from "next/router"
 import { useCurrency } from "hooks/Tokens"
 import SocialWidget from "components/Social"
+import SwapDropdown from "features/swap/SwapDropdown"
 
 // const BodyWrapper = styled.div<{ margin?: string }>`
 // position: relative;
@@ -463,11 +464,12 @@ import SocialWidget from "components/Social"
       {/* <SwapLayoutCard> */}
 
         <div className="p-4 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-        <SwapHeader
+        {/* <SwapHeader
             inputCurrency={currencyA}
             outputCurrency={currencyB}
             allowedSlippage={allowedSlippage}
-          />          
+          />           */}
+          <SwapDropdown />
           {/* <OrderHeader handleActiveTab={handleActiveTab} activeTab={activeTab} /> */}
           <Wrapper id="limit-order-page">
             <ConfirmSwapModal

@@ -9,6 +9,7 @@ import { calculateGasMargin, calculateSlippageAmount } from 'functions/trade'
 import { currencyId, halfAmountSpend, maxAmountSpend } from 'functions/currency'
 import { useDerivedMintInfo, useMintActionHandlers, useMintState } from 'state/mint/hooks'
 import { useUserSlippageToleranceWithDefault } from 'state/user/hooks'
+import SwapDropdown from "features/swap/SwapDropdown"
 
 import { AutoColumn } from 'components/Column'
 import { BigNumber } from '@ethersproject/bignumber'
@@ -370,11 +371,12 @@ export default function Add() {
           <DoubleGlowShadowV2>
         {/* <SwapBanner /> */}
         <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-          <SwapHeader
+          {/* <SwapHeader
             inputCurrency={currencies[Field.CURRENCY_A]}
             outputCurrency={currencies[Field.CURRENCY_B]}
             allowedSlippage={allowedSlippage}
-          />
+          /> */}
+          <SwapDropdown />
           <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
           <TransactionConfirmationModal
             isOpen={showConfirm}

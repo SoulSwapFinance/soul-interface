@@ -32,6 +32,7 @@ import SwapHeader from 'features/swap/SwapHeader'
 import Container from 'components/Container'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
+import SwapDropdown from 'features/swap/SwapDropdown'
 /*
 Integrated:
 - paraswap
@@ -373,13 +374,13 @@ const Aggregator = ({ }) => {
 
 	return (
 		<Container>
-			{/* <div className="mt-2" /> */}
+			<div className="mt-2" />
 			<div className={"grid grid-cols-1 gap-2"}>
-				{/* <SwapLayoutCard> */}
-					{/* <SwapHeader /> */}
-					{/* <Container  */}
-					{/* // showRoutes={inputToken && outputToken} */}
-					{/* > */}
+				<SwapLayoutCard>
+					<SwapDropdown />
+					<Container 
+						// showRoutes={inputToken && outputToken}
+					>
 						{/* <FormHeader>Select Tokens</FormHeader> */}
 						{/* <TokenSelectDiv onClick={() => setShowTokenSelect(true)}> */}
 						<div className="flex flex-col gap-3 space-y-3">
@@ -482,23 +483,9 @@ const Aggregator = ({ }) => {
 			{(isApproved || fromToken.isNative) ? 'Swap' : 'Approve'}
 								</Button>
 							)}
-							{/* route && account && !isApproved && ['Matcha/0x', '1inch'].includes(route?.name) ? (
-							<Button
-								variant={'filled'}
-								color={getChainColorCode(chainId)}
-								colorScheme={'messenger'}
-								loadingText="Preparing Transaction"
-								isLoading={isApproveLoading}
-								onClick={() => {
-									if (approve) handleApprove();
-								}}
-							>
-								{'Approve Infinite'}
-							</Button>
-						) : null */}
 						{/* </SwapWrapper> */}
-					{/* </Container> */}
-				{/* </SwapLayoutCard> */}
+					</Container>
+				</SwapLayoutCard>
 
 				{inputToken && outputToken && (
 				<div className={`m-2 border border-dark-800 hover:border-${getChainColorCode(chainId)} border-2 rounded rounded-xl`}>

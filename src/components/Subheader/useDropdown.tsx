@@ -71,9 +71,9 @@ if (featureEnabled(Feature.AMM, chainId)) {
         link: '/aggregator',
       },
       {
-        key: 'limit-orders',
+        key: 'limit',
         title: i18n._(t`Limit`),
-        link: '/cross',
+        link: '/limit',
       },
       {
         key: 'crosschain',

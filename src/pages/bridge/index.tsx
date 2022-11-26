@@ -48,6 +48,7 @@ import NavLink from "components/NavLink";
 // import { useNetworkModalToggle } from "state/application/hooks";
 import Web3Network from "components/Web3Network";
 import { getChainColor, getChainColorCode } from "constants/chains";
+import SwapDropdown from "features/swap/SwapDropdown";
 
 const ChainSelect: React.FC<any> = ({ selectChain, chains }) => {
   return (
@@ -869,7 +870,9 @@ const Bridge: React.FC<any> = () => {
       <DoubleGlowShadowV2>
       <div className="p-4 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>          
         <div className="px-2">
-    <SwapHeader />
+    {/* <SwapHeader /> */}
+    <SwapDropdown />
+
     </div>
     <FadeInOut>
       {bridgeTxHash && (

@@ -56,6 +56,7 @@ import { ethers } from 'ethers'
 import { addTransaction } from 'state/transactions/actions'
 import { getExplorerLink } from 'functions/explorer'
 import { SubmitButton } from 'features/summoner/Styles'
+import SwapDropdown from 'features/swap/SwapDropdown'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -518,7 +519,7 @@ const Swap = () => {
 
       {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <SwapLayoutCard>
-          <SwapHeader inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+          <SwapDropdown inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
           <SubmitButton
             className={classNames(featureEnabled(Feature.AGGREGATE, chainId) ?? 'hidden')}
             onClick={() => handleUseAggregator(useAggregator)}
