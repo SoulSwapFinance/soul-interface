@@ -520,7 +520,7 @@ const Swap = () => {
       {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <SwapLayoutCard>
           <SwapDropdown inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
-          <SubmitButton
+        {/*  <SubmitButton
             className={classNames(featureEnabled(Feature.AGGREGATE, chainId) ?? 'hidden')}
             onClick={() => handleUseAggregator(useAggregator)}
             variant="bordered"
@@ -533,6 +533,7 @@ const Swap = () => {
               <span>{useAggregator ? `SoulSwap Exchange` : `Meta-Aggregator Exchange`} ↗</span>
             </div>
           </SubmitButton>
+        */}
           {!useAggregator &&
             <SwapAssetPanel
               spendFromWallet={true}
