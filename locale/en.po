@@ -428,6 +428,9 @@ msgstr "Create pool"
 msgid "Cross"
 msgstr "Cross"
 
+msgid "Crosschain"
+msgstr "Crosschain"
+
 msgid "Current Percentage"
 msgstr "Current Percentage"
 
@@ -884,6 +887,9 @@ msgstr "Minimum received"
 msgid "Mint SOUL with Liquidity"
 msgstr "Mint SOUL with Liquidity"
 
+msgid "Multichain"
+msgstr "Multichain"
+
 msgid "My Borrowing"
 msgstr "My Borrowing"
 
@@ -995,9 +1001,6 @@ msgstr "Pending Treasury Transfer"
 
 msgid "Please connect to the appropriate network."
 msgstr "Please connect to the appropriate network."
-
-msgid "Please make sure your {0} balance is sufficient to withdraw and then try again."
-msgstr "Please make sure your {0} balance is sufficient to withdraw and then try again."
 
 msgid "Please note that you won't receive any tokens when you use leverage."
 msgstr "Please note that you won't receive any tokens when you use leverage."

@@ -423,6 +423,9 @@ msgstr ""
 msgid "Cross"
 msgstr ""
 
+msgid "Crosschain"
+msgstr ""
+
 msgid "Current Percentage"
 msgstr ""
 
@@ -879,6 +882,9 @@ msgstr ""
 msgid "Mint SOUL with Liquidity"
 msgstr ""
 
+msgid "Multichain"
+msgstr ""
+
 msgid "My Borrowing"
 msgstr ""
 
@@ -987,9 +993,6 @@ msgid "Pending Treasury Transfer"
 msgstr ""
 
 msgid "Please connect to the appropriate network."
-msgstr ""
-
-msgid "Please make sure your {0} balance is sufficient to withdraw and then try again."
 msgstr ""
 
 msgid "Please note that you won't receive any tokens when you use leverage."

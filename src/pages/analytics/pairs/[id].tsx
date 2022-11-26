@@ -23,6 +23,8 @@ import { Button } from 'components/Button'
 import { getChainColorCode } from 'constants/chains'
 import Typography from 'components/Typography'
 import { TridentHeader } from 'layouts/Trident'
+import { computePairAddress } from 'sdk/functions/computePairAddress'
+import { Currency, FACTORY_ADDRESS, Token } from 'sdk'
 
 const chartTimespans = [
   {
@@ -43,11 +45,24 @@ const chartTimespans = [
   },
 ]
 
-export default function Pair() {
-  const router = useRouter()
-  const id = (router.query.id as string).toLowerCase()
+interface PairProps {
+  inputCurrency?: Currency | Token | undefined
+  outputCurrency?: Currency | Token | undefined
+}
 
+export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
   const { chainId } = useActiveWeb3React()
+
+  const router = useRouter()
+  const id = (inputCurrency && outputCurrency)
+    ? inputCurrency && outputCurrency && computePairAddress({
+        factoryAddress: FACTORY_ADDRESS[chainId],
+        tokenA: inputCurrency?.isToken ? inputCurrency : inputCurrency?.wrapped,
+        tokenB: outputCurrency?.isToken ? outputCurrency : outputCurrency?.wrapped,
+      }).toLowerCase() // pairAddress
+  :  (router.query.id as string).toLowerCase() // router string
+
+  // const id = pairAddress ?? (router.query.id as string).toLowerCase()
 
   const [isCopied, setCopied] = useCopyClipboard()
 

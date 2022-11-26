@@ -26,6 +26,8 @@ import InputCurrencyBox from "pages/bridge/components/InputCurrencyBox";
 import Container from "components/Container";
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
 import SwapHeader from "features/swap/SwapHeader";
+import SwapDropdown from "features/swap/SwapDropdown"
+
 import { SwapLayoutCard } from "layouts/SwapLayout";
 import Modal from "components/DefaultModal";
 // import { useETHBalances } from "state/wallet/hooks";
@@ -330,11 +332,19 @@ export default function Exchange() {
         </div>
       }
 
-      <Container id="cross-page" maxWidth="2xl" className="space-y-4">
-        <DoubleGlowShadowV2>
-          <div className="p-4 px-2 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-            <SwapHeader />
-            <SwapLayoutCard>
+<Container id="cross-page" maxWidth="2xl" className="space-y-4 mt-2">
+      <DoubleGlowShadowV2>
+      {/* <SwapLayoutCard> */}
+			<div className="mt-2" />
+
+        <div className="p-4 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+        {/* <SwapHeader
+            inputCurrency={currencyA}
+            outputCurrency={currencyB}
+            allowedSlippage={allowedSlippage}
+          />           */}
+          <SwapDropdown />
+            {/* <SwapHeader /> */}
               {/*  [F] TOKEN SELECTOR */}
               {/*    [F] CHAIN LOGO   */}
               <div
@@ -718,10 +728,11 @@ export default function Exchange() {
                   }
                 </Button>
               </div>
-            </SwapLayoutCard>
-          </div>
+              </div>
         </DoubleGlowShadowV2>
       </Container>
+          {/* </div> */}
+            {/* </SwapLayoutCard> */}
     </>
   );
 

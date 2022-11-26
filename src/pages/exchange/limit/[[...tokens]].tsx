@@ -84,6 +84,7 @@ import { currencyId } from "functions/currency"
 import { useRouter } from "next/router"
 import { useCurrency } from "hooks/Tokens"
 import SocialWidget from "components/Social"
+import SwapDropdown from "features/swap/SwapDropdown"
 
 // const BodyWrapper = styled.div<{ margin?: string }>`
 // position: relative;
@@ -460,16 +461,21 @@ import SocialWidget from "components/Social"
   return (
     <Container id="cross-page" maxWidth="2xl" className="space-y-4">
       <DoubleGlowShadowV2>
-      {/* <SwapLayoutCard> */}
-
-        <div className="p-4 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-        <SwapHeader
+      <SwapLayoutCard>
+          <SwapDropdown
             inputCurrency={currencyA}
             outputCurrency={currencyB}
             allowedSlippage={allowedSlippage}
-          />          
+          />
+
+        <div className="p-0 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+        {/* <SwapHeader
+            inputCurrency={currencyA}
+            outputCurrency={currencyB}
+            allowedSlippage={allowedSlippage}
+          />           */}
           {/* <OrderHeader handleActiveTab={handleActiveTab} activeTab={activeTab} /> */}
-          <Wrapper id="limit-order-page">
+          {/* <Wrapper id="limit-order-page"> */}
             <ConfirmSwapModal
               isOpen={showConfirm}
               trade={trade}
@@ -771,7 +777,7 @@ import SocialWidget from "components/Social"
                 ) : null}
               </BottomGrouping>
             </AutoColumn>
-          </Wrapper>
+          {/* </Wrapper> */}
 
           {!swapIsUnsupported ? null : (
             <UnsupportedCurrencyFooter
@@ -810,7 +816,7 @@ import SocialWidget from "components/Social"
         </div>
       }
     </div>
-  {/* </SwapLayoutCard> */}
+  </SwapLayoutCard>
       </DoubleGlowShadowV2>
     </Container>
 
