@@ -469,7 +469,11 @@ import SwapDropdown from "features/swap/SwapDropdown"
             outputCurrency={currencyB}
             allowedSlippage={allowedSlippage}
           />           */}
-          <SwapDropdown />
+          <SwapDropdown
+            inputCurrency={currencyA}
+            outputCurrency={currencyB}
+            allowedSlippage={allowedSlippage}
+          />
           {/* <OrderHeader handleActiveTab={handleActiveTab} activeTab={activeTab} /> */}
           <Wrapper id="limit-order-page">
             <ConfirmSwapModal

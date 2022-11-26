@@ -377,7 +377,11 @@ const Aggregator = ({ }) => {
 			<div className="mt-2" />
 			<div className={"grid grid-cols-1 gap-2"}>
 				<SwapLayoutCard>
-					<SwapDropdown />
+					<SwapDropdown
+						// inputCurrency={currencyA}
+            			// outputCurrency={currencyB}
+            			// allowedSlippage={allowedSlippage}
+					 />
 					<Container 
 						// showRoutes={inputToken && outputToken}
 					>
