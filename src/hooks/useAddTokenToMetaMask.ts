@@ -9,7 +9,7 @@ export default function useAddTokenToMetaMask(currencyToAdd: Currency | undefine
 } {
   const { chainId, library } = useActiveWeb3React()
 
-  const token: Token | undefined = currencyToAdd?.wrapped
+  const token: Currency | Token = currencyToAdd?.wrapped
 
   const [success, setSuccess] = useState<boolean | undefined>()
 
@@ -23,8 +23,8 @@ export default function useAddTokenToMetaMask(currencyToAdd: Currency | undefine
             type: 'ERC20',
             options: {
               address: token.wrapped.address,
-              symbol: token.symbol,
-              decimals: token.decimals,
+              symbol: token.wrapped.symbol,
+              decimals: token.wrapped.decimals,
               image: getCurrencyLogoUrls(token),
             },
           },

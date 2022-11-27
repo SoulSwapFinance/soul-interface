@@ -1,17 +1,19 @@
 import { CheckIcon, DuplicateIcon } from '@heroicons/react/outline'
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import AnalyticsContainer from 'features/analytics/AnalyticsContainer'
-import Background from 'features/analytics/Background'
+// import Background from 'features/analytics/Background'
+import { Token as ERC20 } from 'sdk'
 import ChartCard from 'features/analytics/ChartCard'
 import ColoredNumber from 'features/analytics/ColoredNumber'
 import InfoCard from 'features/analytics/InfoCard'
 import PairList from 'features/analytics/Pairs/PairList'
 import { LegacyTransactions } from 'features/transactions/Transactions'
 import { getExplorerLink } from 'functions/explorer'
-import { formatNumber, shortenAddress } from 'functions/format'
+import { formatNumber } from 'functions/format'
 import { useCurrency } from 'hooks/Tokens'
 import { useTokenContract } from 'hooks/useContract'
 import useCopyClipboard from 'hooks/useCopyClipboard'
+import Image from 'next/image'
 import {
   useNativePrice,
   useOneDayBlock,
@@ -25,11 +27,15 @@ import { useActiveWeb3React } from 'services/web3'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
-import { ExternalLink as LinkIcon } from 'react-feather'
-import { getChainColorCode } from 'constants/chains'
+import { CheckCircle, ExternalLink as LinkIcon } from 'react-feather'
+import { getChainColorCode, getChainInfo, getChainLogoURL } from 'constants/chains'
 import { NextSeo } from 'next-seo'
 import { TridentHeader } from 'layouts/Trident'
 import Typography from 'components/Typography'
+import useAddTokenToMetaMask from 'hooks/useAddTokenToMetaMask'
+import { Button } from 'components/Button'
+import { RowFixed } from 'components/Row'
+import { getAddress } from '@ethersproject/address'
 
 const chartTimespans = [
   {
@@ -53,20 +59,24 @@ const chartTimespans = [
 export default function Token() {
   const router = useRouter()
   const id = (router.query.id as string)?.toLowerCase()
+  const tokenAddress = id
 
-  const { chainId } = useActiveWeb3React()
+  const { chainId, library } = useActiveWeb3React()
   const [isCopied, setCopied] = useCopyClipboard()
 
   const [totalSupply, setTotalSupply] = useState(0)
+  const [tokenDecimals, setTokenDecimals] = useState(18)
+  // const [totalSupply, setTotalSupply] = useState(0)
   const tokenContract = useTokenContract(id)
 
   useEffect(() => {
     const fetch = async () => {
       /* @ts-ignore TYPE NEEDS FIXING */
       setTotalSupply(await tokenContract.totalSupply())
+      setTokenDecimals(await tokenContract.decimals())
     }
     fetch()
-  }, [tokenContract])
+  }, [tokenContract, tokenDecimals])
 
   const block1d = useOneDayBlock({ chainId })
   const block2d = useTwoDayBlock({ chainId })
@@ -124,6 +134,7 @@ export default function Token() {
 
   // For the logo
   const currency = useCurrency(token?.id)
+  const tokenToAdd = new ERC20(chainId, tokenAddress,tokenDecimals, token?.symbol, token?.name)
 
   // For the Info Cards
   const price = token?.derivedETH * nativePrice
@@ -158,18 +169,27 @@ export default function Token() {
       volumeChart: tokenDayData
         ?.sort((a, b) => a.date - b.date)
         .map((day) => ({ x: new Date(day.date * 1000), y: Number(day.volumeUSD) })),
-      
+
       priceChart: tokenDayData
         /* @ts-ignore TYPE NEEDS FIXING */
         ?.sort((a, b) => a.date - b.date)
         /* @ts-ignore TYPE NEEDS FIXING */
         .map((day) => ({ x: new Date(day.date * 1000), y: Number(day.priceUSD) })),
-     }),
+    }),
     [tokenDayData]
   )
 
+  const { addToken, success } = useAddTokenToMetaMask(currency)
+  const ADDRESS = getAddress(tokenToAdd.address)
+  const BASE_URL = getChainLogoURL(chainId)
+  const LOGO_URL = `${BASE_URL}/${ADDRESS}/logo.png`
+  const SYMBOL = tokenToAdd.symbol
+  const DECIMALS = tokenToAdd.decimals
+  const TOKEN_NAME = tokenToAdd.name
+  const NAME = TOKEN_NAME == "USD Coin" ? "USD Stablecoin" : TOKEN_NAME
+
   return (
-    
+
     <AnalyticsContainer>
       <NextSeo title={`${token?.name} Analytics`} />
       <div className="relative h-8">
@@ -190,18 +210,61 @@ export default function Token() {
         </div>
       </div>
       <TridentHeader className="sm:!flex-row justify-between items-center" pattern="bg-bubble">
-        <div className="space-y-4">
-          <div className="flex items-center space-x-4">
-            <CurrencyLogo className="rounded-full" currency={currency} size={60} />
-            <Typography variant="h2" className="text-high-emphesis" weight={700}>
-              {token?.name}
-            </Typography>
-          </div>
+        {/* <div className="space-y-4"> */}
 
-          {/* <Typography variant="sm" weight={400}>
+        {currency && library?.provider?.isMetaMask && (
+          <Button color="gradient"
+            onClick={() => {
+              const params: any = {
+                type: 'ERC20',
+                options: {
+                  address: ADDRESS,
+                  symbol: SYMBOL,
+                  decimals: DECIMALS,
+                  image: LOGO_URL,
+                },
+              }
+              if (library && library.provider.isMetaMask && library.provider.request) {
+                library.provider
+                  .request({
+                    method: 'wallet_watchAsset',
+                    params,
+                  })
+                  .then((success) => {
+                    if (success) {
+                      console.log('Successfully added SOUL to MetaMask')
+                    } else {
+                      throw new Error('Something went wrong.')
+                    }
+                  })
+                  .catch(console.error)
+              }
+            }}
+            className="w-auto mt-4">
+            {!success ? (
+              <RowFixed className="mx-auto space-x-2">
+                <CurrencyLogo className="rounded-full"
+                  currency={currency} size={60}
+                />
+                <div className="flex items-center space-x-4 md:space-x-8">
+                  <Typography variant="h2" className="text-high-emphesis" weight={700}>
+                    {NAME}
+                  </Typography>
+                </div>
+              </RowFixed>
+            ) : (
+              <RowFixed>
+                {`Added ${SYMBOL}`}
+                <CheckCircle className="ml-1.5 text-2xl text-green" size="16px" />
+              </RowFixed>
+            )}
+          </Button>
+        )}
+
+        {/* <Typography variant="sm" weight={400}>
             Analytics for {token?.name}.
           </Typography> */}
-        </div>
+        {/* </div> */}
         <div className="flex flex-row space-x-4">
           <div className="flex flex-col">
             <div className="text-secondary">Price</div>
@@ -216,43 +279,43 @@ export default function Token() {
               <div className="text-xl font-medium text-high-emphesis">
                 {formatNumber(price * formattedSupply ?? 0, true, false)}
               </div>
-              <ColoredNumber number={priceChange} percent={true} />
+              {/* <ColoredNumber number={priceChange} percent={true} /> */}
             </div>
           </div>
         </div>
       </TridentHeader>
       <div className="px-4 pt-4 space-y-4 lg:px-14">
-      <div className="text-3xl font-bold text-high-emphesis">Overview</div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <ChartCard
-          header="Liquidity"
-          subheader={token?.symbol}
-          figure={liquidityUSD}
-          change={liquidityUSDChange}
-          chart={chartData.liquidityChart}
-          defaultTimespan="1W"
-          timespans={chartTimespans}
-        />
-        <ChartCard
-          header="Volume"
-          subheader={token?.symbol}
-          figure={volumeUSD1d}
-          change={volumeUSD1dChange}
-          chart={chartData.volumeChart}
-          defaultTimespan="1W"
-          timespans={chartTimespans}
-        />
-      </div>
-      <div className="grid grid-cols-1 gap-4">
-            <ChartCard
-              header="Price"
-              subheader={token?.symbol}
-              figure={priceUSD1d}
-              change={priceUSD1dChange}
-              chart={chartData.priceChart}
-              defaultTimespan="1W"
-              timespans={chartTimespans}
-            />
+        <div className="text-3xl font-bold text-high-emphesis">Overview</div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <ChartCard
+            header="Liquidity"
+            subheader={token?.symbol}
+            figure={liquidityUSD}
+            change={liquidityUSDChange}
+            chart={chartData.liquidityChart}
+            defaultTimespan="1W"
+            timespans={chartTimespans}
+          />
+          <ChartCard
+            header="Volume"
+            subheader={token?.symbol}
+            figure={volumeUSD1d}
+            change={volumeUSD1dChange}
+            chart={chartData.volumeChart}
+            defaultTimespan="1W"
+            timespans={chartTimespans}
+          />
+        </div>
+        <div className="grid grid-cols-1 gap-4">
+          <ChartCard
+            header="Price"
+            subheader={token?.symbol}
+            figure={priceUSD1d}
+            change={priceUSD1dChange}
+            chart={chartData.priceChart}
+            defaultTimespan="1W"
+            timespans={chartTimespans}
+          />
         </div>
         <div className="flex flex-row justify-between flex-grow space-x-4 overflow-x-auto">
           <InfoCard text="Liquidity (24H)" number={liquidityUSD} percent={liquidityUSDChange} />

@@ -289,9 +289,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                             <Wrap>
                             <TokenLogo
                                 src={
-                                    `${getChainLogoURL(chainId)} +
-                                    ${pool.token1Address} +
-                                    '/logo.png`
+                                    `${getChainLogoURL(chainId)}/${pool.token1Address}/logo.png`
                                 }
                                 alt="LOGO"
                                 width="44px"
