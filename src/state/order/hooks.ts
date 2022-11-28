@@ -281,7 +281,7 @@ export function useDerivedOrderInfo(): DerivedOrderInfo {
     currencies.input?.wrapped.address.toLowerCase() ===
     currencies.output?.wrapped.address.toLowerCase()
   ) {
-    inputError = inputError ?? "Order not allowed";
+    inputError = inputError ?? "Enter Amount";
   }
 
   const parsedAmounts = useMemo(
