@@ -46,7 +46,7 @@ const features: FeatureMap = {
   [ChainId.BSC]: [
     Feature.AMM, 
     Feature.ANALYTICS,
-    // Feature.LIQUIDITY,
+    Feature.AGGREGATE,
     // Feature.UNDERWORLD
   ],
 

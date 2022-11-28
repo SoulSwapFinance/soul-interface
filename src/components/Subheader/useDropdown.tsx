@@ -59,23 +59,24 @@ if (featureEnabled(Feature.AMM, chainId)) {
     key: 'swap',
     title: i18n._(t`Swap`),
     icon: <SwitchVerticalIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
-    items: [
-      {
-        key: 'exchange',
-        title: i18n._(t`Swap`),
-        link: `/swap/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
-      },
+    link: `/exchange/swap/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
+    // items: [
+      // {
+      //   key: 'exchange',
+      //   title: i18n._(t`Swap`),
+      //   link: `/swap/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
+      // },
       // {
       //   key: 'aggregator',
       //   title: i18n._(t`Aggregate`),
       //   link: '/aggregator',
       // },
-      {
-        key: 'limit',
-        title: i18n._(t`Limit`),
-        link: `/limit/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
-      }
-    ],
+      // {
+      //   key: 'limit',
+      //   title: i18n._(t`Limit`),
+      //   link: `/limit/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
+      // }
+    // ],
   }
 }
 

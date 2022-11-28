@@ -1,4 +1,5 @@
-import { ArrowDownIcon } from '@heroicons/react/solid'
+import { ArrowDownIcon, ChevronDoubleUpIcon } from '@heroicons/react/solid'
+import ChevronUpDown from 'assets/svg/icons/ChevronUpDown.svg'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { ChainId, Currency, DAI, JSBI, NATIVE, NATIVE_ADDRESS, SOUL, Token, Trade as V2Trade, TradeType, USDC } from 'sdk'
@@ -31,7 +32,6 @@ import { useDefaultsFromURLSearch, useDerivedSwapInfo, useSwapActionHandlers, us
 import { useUserOpenMev, useUserSingleHopOnly } from 'state/user/hooks' // useCrossChainModeManager
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
-import Chart from 'components/Chart'
 import Image from 'next/image'
 import { Toggle } from 'components/Toggle'
 import SocialWidget from 'components/Social'
@@ -44,7 +44,7 @@ import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 // import { currencyId } from 'functions/currency'
 import { useRouter } from 'next/router'
-import Aggregator, { Routes, startChain } from '../aggregator'
+import Aggregator, { startChain } from '../aggregator'
 // import Container from 'components/Container'
 // import Route from 'components/SwapRoute'
 // import Loader from 'features/aggregator/components/Loader'
@@ -58,6 +58,9 @@ import { getExplorerLink } from 'functions/explorer'
 // import { SubmitButton } from 'features/summoner/Styles'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import Pair from 'pages/analytics/pairs/[id]'
+import Limits from '../limits/[[...tokens]]'
+import { currencyId } from 'functions/currency'
+import { GelatoLimitOrdersHistoryPanel } from 'soulswap-limit-orders-react'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -71,13 +74,45 @@ const Swap = () => {
     useCurrency(loadedUrlParams?.outputCurrencyId),
   ]
   const [useAggregator, setUseAggregator] = useState(false)
+  const [useLimit, setUseLimit] = useState(false)
+  const [showOrders, setShowOrders] = useState(false)
 
   const router = useRouter()
   const tokens = router.query.tokens
   const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
-  // const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
-  // const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
+  const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
 
+  enum Rate {
+    DIV = "DIV",
+    MUL = "MUL",
+  }
+
+  const handleCurrencyASelect = useCallback(
+    (currencyA: Currency) => {
+      const newCurrencyIdA = currencyId(currencyA)
+      if (newCurrencyIdA === currencyIdB) {
+        router.push(`/exchange/swap/${currencyIdB}/${currencyIdA}`)
+      } else {
+        router.push(`/exchange/swap/${newCurrencyIdA}/${currencyIdB}`)
+      }
+    },
+    [currencyIdB, router, currencyIdA]
+  )
+  const handleCurrencyBSelect = useCallback(
+    (currencyB: Currency) => {
+      const newCurrencyIdB = currencyId(currencyB)
+      if (currencyIdA === newCurrencyIdB) {
+        if (currencyIdB) {
+          router.push(`/exchange/swap/${currencyIdB}/${newCurrencyIdB}`)
+        } else {
+          router.push(`/exchange/swap/${newCurrencyIdB}`)
+        }
+      } else {
+        router.push(`/exchange/swap/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
+      }
+    },
+    [currencyIdA, router, currencyIdB]
+  )
   const [dismissTokenWarning, setDismissTokenWarning] = useState<boolean>(false)
   const urlLoadedTokens: Token[] = useMemo(
     () => [loadedInputCurrency, loadedOutputCurrency]?.filter((c): c is Token => c?.isToken ?? false) ?? [],
@@ -89,6 +124,7 @@ const Swap = () => {
 
   const [showChart, setShowChart] = useState(false)
   const [showAnalytics, setShowAnalytics] = useState(false)
+  const useSwap = !useAggregator && !useLimit
   // const [showAggregator, setShowAggregator] = useState(false)
 
   // dismiss warning if all imported tokens are in active lists
@@ -305,6 +341,7 @@ const Swap = () => {
     (inputCurrency) => {
       setApprovalSubmitted(false) // reset 2 step UI for approvals
       onCurrencySelection(Field.INPUT, inputCurrency)
+      handleCurrencyASelect(inputCurrency)
       handleInputTokenSelect(inputCurrency)
     },
     [onCurrencySelection]
@@ -313,6 +350,7 @@ const Swap = () => {
   const handleOutputSelect = useCallback(
     (outputCurrency) => {
       onCurrencySelection(Field.OUTPUT, outputCurrency)
+      handleCurrencyBSelect(outputCurrency)
       handleOutputTokenSelect(outputCurrency)
     },
     [onCurrencySelection]
@@ -447,6 +485,10 @@ const Swap = () => {
     });
   };
 
+  const handleLimitSwap = () => {
+    useLimit ? setUseLimit(false) : setUseLimit(true)
+  };
+
   const { data: tokenPrices } = useGetPrice({
     chain: selectedChain.value,
     toToken: toToken?.wrapped.address,
@@ -475,7 +517,7 @@ const Swap = () => {
 
   const handleUseAggregator = useCallback(
     (using: boolean) => {
-     using ? setUseAggregator(false) : setUseAggregator(true)
+      using ? setUseAggregator(false) : setUseAggregator(true)
     },
     [setUseAggregator]
   )
@@ -505,7 +547,7 @@ const Swap = () => {
       {![ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <div className="flex flex-col gap-3 mt-12 justify-center">
           {/* <div className="flex mb-4 items-center justify-center"> */}
-          <SwapHeader inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+          <SwapHeader inputCurrency={currencyA} outputCurrency={currencyB} />
           <Button
             variant="filled"
             color={chainId == ChainId.AVALANCHE ? "avaxGradient" : "gradientBluePurple"}
@@ -522,7 +564,7 @@ const Swap = () => {
       {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <SwapLayoutCard>
           <SwapDropdown inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
-        {/*  <SubmitButton
+          {/*  <SubmitButton
             className={classNames(featureEnabled(Feature.AGGREGATE, chainId) ?? 'hidden')}
             onClick={() => handleUseAggregator(useAggregator)}
             variant="bordered"
@@ -536,7 +578,7 @@ const Swap = () => {
             </div>
           </SubmitButton>
         */}
-          {!useAggregator &&
+          {useSwap &&
             <SwapAssetPanel
               spendFromWallet={true}
               chainId={chainId}
@@ -548,19 +590,19 @@ const Swap = () => {
                   }
                 />
               )}
-              currency={currencies[Field.INPUT]}
+              currency={currencyA}
               value={formattedAmounts[Field.INPUT]}
               onChange={handleTypeInput}
               onSelect={handleInputSelect}
             />
           }
-          {!useAggregator &&
-            <div className={classNames("flex justify-center -mt-6 -mb-6 z-0")}>
+          {useSwap &&
+            <div className={classNames("flex justify-center -mt-4 -mb-6 z-0")}>
               <div
                 role="button"
-                className={classNames(`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`)}
+                className={classNames(`p-1.5 rounded-full shadow-md bg-dark-800 border border-dark-700 hover:border-${getChainColorCode(chainId)}`)}
                 onClick={() => {
-                  setApprovalSubmitted(false) // reset 2 step UI for approvals
+                  // setApprovalSubmitted(false) // reset 2 step UI for approvals
                   onSwitchTokens()
                 }}
               >
@@ -568,9 +610,25 @@ const Swap = () => {
               </div>
             </div>
           }
+          {useSwap &&
+            <div className={classNames("flex justify-end -mt-6 -mb-8 z-0")}>
+            <Button
+              size={'sm'}
+              className={classNames(``)}
+              onClick={handleLimitSwap}
+            >
+              <Image
+                width={'21px'}
+                height={'21px'}
+                className={`justify-center rounded rounded-xl bg-${getChainColorCode(chainId)}`}
+                src={ChevronUpDown}
+              />
+            </Button>
+            </div>
+          }
 
           {/* TO ASSET PANEL */}
-          {!useAggregator &&
+          {useSwap &&
             <SwapAssetPanel
               spendFromWallet={true}
               chainId={chainId}
@@ -580,7 +638,7 @@ const Swap = () => {
                   label={independentField === Field.INPUT && !showWrap ? i18n._(t`Swap to:`) : i18n._(t`Swap to:`)}
                 />
               )}
-              currency={currencies[Field.OUTPUT]}
+              currency={currencyB}
               value={formattedAmounts[Field.OUTPUT]}
               onChange={handleTypeOutput}
               onSelect={
@@ -590,7 +648,7 @@ const Swap = () => {
               priceImpactCss={priceImpactCss}
             />
           }
-          {Boolean(trade) && !useAggregator &&
+          {Boolean(trade) && useSwap &&
             (
               <SwapDetails
                 inputCurrency={currencies[Field.INPUT]}
@@ -599,7 +657,7 @@ const Swap = () => {
                 recipient={recipient ?? undefined}
               />
             )}
-          {trade && routeNotFound && userHasSpecifiedInputOutput && !useAggregator &&
+          {trade && routeNotFound && userHasSpecifiedInputOutput && useSwap &&
             (
               <Typography variant="xs" className="text-center py-2">
                 {i18n._(t`Insufficient liquidity for this trade.`)}{' '}
@@ -607,16 +665,16 @@ const Swap = () => {
               </Typography>
             )}
 
-          {swapIsUnsupported && !useAggregator ? (
+          {swapIsUnsupported && useSwap ? (
             <Button
               color="red"
               disabled
               className="rounded-2xl w-full md:rounded">
               {i18n._(t`Unsupported Asset`)}
             </Button>
-          ) : !account && !useAggregator ? (
+          ) : !account && useSwap ? (
             <Web3Connect color="purple" variant="filled" className="rounded-2xl md:rounded" />
-          ) : showWrap && !useAggregator ? (
+          ) : showWrap && useSwap ? (
             <Button
               color={`${getChainColorCode(chainId)}`}
               disabled={Boolean(wrapInputError)}
@@ -630,7 +688,7 @@ const Swap = () => {
                     ? i18n._(t`Unwrap`)
                     : null)}
             </Button>
-          ) : showApproveFlow && !useAggregator ? (
+          ) : showApproveFlow && useSwap ? (
             <div>
               {approvalState !== ApprovalState.APPROVED &&
                 (
@@ -644,7 +702,7 @@ const Swap = () => {
                     {i18n._(t`Approve ${currencies[Field.INPUT]?.symbol}`)}
                   </Button>
                 )}
-              {approvalState === ApprovalState.APPROVED && !useAggregator &&
+              {approvalState === ApprovalState.APPROVED && useSwap &&
                 (
                   <Button
                     color={isValid && priceImpactSeverity > 2 ? 'red' : `${getChainColorCode(chainId)}`
@@ -673,7 +731,7 @@ const Swap = () => {
                   </Button>
                 )}
             </div>
-          ) : (!useAggregator &&
+          ) : (useSwap &&
             <Button
               color={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'red' : `${getChainColorCode(chainId)}`}
               onClick={() => {
@@ -699,8 +757,11 @@ const Swap = () => {
                     : i18n._(t`Swap`)}
             </Button>
           )}
-          {useAggregator &&
+          {useAggregator && !useLimit &&
             <Aggregator />
+          }
+          {useLimit && !useAggregator &&
+            <Limits />
           }
           {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} show={false} /> : null}
           {/* <div className="flex border-dark-900 mt-3 mb-0 gap-1 items-center justify-center">
@@ -728,7 +789,7 @@ const Swap = () => {
             </Button>
           </div> */}
           <div className={classNames(featureEnabled(Feature.AGGREGATE, chainId) ? "m-1 flex justify-between" : "hidden")}>
-            <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
+            <div className={classNames(useSwap ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}>
               <Toggle
                 id="toggle-button"
                 optionA="Analytics"
@@ -745,11 +806,46 @@ const Swap = () => {
                 }
               />
             </div>
-            <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
+            {/* <div className={classNames(!useAggregator ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}> */}
+            <div className={classNames(useLimit ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}>
               <Toggle
                 id="toggle-button"
-                optionA="Aggregate"
-                optionB="Aggregate"
+                optionA="Limit"
+                optionB="Limit"
+                isActive={useLimit}
+                toggle={
+                  useLimit
+                    ? () => {
+                      setUseLimit(false)
+                    }
+                    : () => {
+                      setUseLimit(true)
+                    }
+                }
+              />
+            </div>
+            <div className={classNames(useLimit ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}>
+              <Toggle
+                id="toggle-button"
+                optionA="Orders"
+                optionB="Orders"
+                isActive={showOrders}
+                toggle={
+                  showOrders
+                    ? () => {
+                      setShowOrders(false)
+                    }
+                    : () => {
+                      setShowOrders(true)
+                    }
+                }
+              />
+            </div>
+            <div className={classNames(!useLimit && !useAggregator ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}>
+              <Toggle
+                id="toggle-button"
+                optionA="Aggregator"
+                optionB="Aggregator"
                 isActive={useAggregator}
                 toggle={
                   useAggregator
@@ -763,6 +859,10 @@ const Swap = () => {
               />
             </div>
           </div>
+
+          {useLimit && showOrders && !useAggregator &&
+            <GelatoLimitOrdersHistoryPanel />
+          }
           {/* {inputToken && outputToken && (
 					<SwapLayoutCard>
 						<Container>
@@ -799,7 +899,7 @@ const Swap = () => {
               </div>
             </div>
           } */}
-          {showAnalytics && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+          {showAnalytics && useSwap && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
             <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
               <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
                 {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
