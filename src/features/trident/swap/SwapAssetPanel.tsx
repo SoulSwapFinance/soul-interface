@@ -51,8 +51,8 @@ const SwapAssetPanel = ({
   currencies,
 }: SwapAssetPanel) => {
   return (
+    // hover:border-${getChainColorCode(chainId)}
     <div className={`rounded-[14px] border border-dark-700
-    hover:border-${getChainColorCode(chainId)}
     bg-dark-900 
     p-3 flex flex-col gap-4`}>
       {header({

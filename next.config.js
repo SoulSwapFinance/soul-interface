@@ -46,7 +46,7 @@ module.exports = withBundleAnalyzer(
       return [
         {
           source: '/',
-          destination: '/swap',
+          destination: `/swap`,
           permanent: true,
         },
         {
@@ -113,10 +113,6 @@ module.exports = withBundleAnalyzer(
         {
           source: '/create/:token*',
           destination: '/exchange/add/:token*',
-        },
-        {
-          source: '/swap/:token*',
-          destination: '/exchange/swap/:token*',
         },
         {
           source: '/xswap',

@@ -1,8 +1,9 @@
 import { ArrowDownIcon, ChevronDoubleUpIcon } from '@heroicons/react/solid'
 import ChevronUpDown from 'assets/svg/icons/ChevronUpDown.svg'
+import ArrowRoundedSquare from 'assets/svg/icons/ArrowRoundedSquare.svg'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, Currency, DAI, JSBI, NATIVE, NATIVE_ADDRESS, SOUL, Token, Trade as V2Trade, TradeType, USDC } from 'sdk'
+import { ChainId, Currency, DAI, JSBI, NATIVE, NATIVE_ADDRESS, SOUL, SOUL_ADDRESS, Token, Trade as V2Trade, TradeType, USDC, USDC_ADDRESS, WBTC_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
 import Web3Connect from 'components/Web3Connect'
@@ -58,7 +59,7 @@ import { getExplorerLink } from 'functions/explorer'
 // import { SubmitButton } from 'features/summoner/Styles'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import Pair from 'pages/analytics/pairs/[id]'
-import Limits from '../limits/[[...tokens]]'
+import Limits from './limits/[[...tokens]]'
 import { currencyId } from 'functions/currency'
 import { GelatoLimitOrdersHistoryPanel } from 'soulswap-limit-orders-react'
 
@@ -76,10 +77,11 @@ const Swap = () => {
   const [useAggregator, setUseAggregator] = useState(false)
   const [useLimit, setUseLimit] = useState(false)
   const [showOrders, setShowOrders] = useState(false)
-
+  const DEFAULT_CURRENCY_A = [ChainId.ETHEREUM, ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId) ? WNATIVE_ADDRESS[chainId] : WBTC_ADDRESS[chainId]
+  const DEFAULT_CURRENCY_B = [ChainId.ETHEREUM, ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId) ? SOUL_ADDRESS[chainId] : USDC_ADDRESS[chainId]
   const router = useRouter()
   const tokens = router.query.tokens
-  const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
+  const [currencyIdA, currencyIdB] = (tokens as string[]) || [DEFAULT_CURRENCY_A, DEFAULT_CURRENCY_B]
   const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
 
   enum Rate {
@@ -356,6 +358,14 @@ const Swap = () => {
     [onCurrencySelection]
   )
 
+  const handleSwitchTokens = useCallback(
+    (inputCurrency: Currency, outputCurrency: Currency) => {
+      handleInputSelect(outputCurrency)
+      handleOutputSelect(inputCurrency)
+    },
+    [onCurrencySelection]
+  )
+
   const swapIsUnsupported = useIsSwapUnsupported(currencies?.INPUT, currencies?.OUTPUT)
 
   const priceImpactCss = useMemo(() => {
@@ -377,14 +387,12 @@ const Swap = () => {
   // AGGREGATOR CONSTANTS [START] //
   // const DEFAULT_OUTPUT = chainId == ChainId.AVALANCHE ? USDC[chainId] : DAI[chainId]
   const [selectedChain, setSelectedChain] = useState(startChain(chainId))
-  const [inputToken, setInputToken] = useState<Currency>(NATIVE[chainId])
-  const [outputToken, setOutputToken] = useState<Currency>(DAI[chainId])
-  const [fromToken, setFromToken] = useState<Currency>(NATIVE[chainId])
-  const [toToken, setToToken] = useState<Currency>(DAI[chainId])
+  const [fromToken, setFromToken] = useState<Currency>(currencyA)
+  const [toToken, setToToken] = useState<Currency>(currencyB)
 
   const [inputAmount, setInputAmount] = useState('10')
   const [slippage, setSlippage] = useState('1')
-  const [amount, setAmount] = useState('10');
+  // const [amount, setAmount] = useState('10');
   const [txModalOpen, setTxModalOpen] = useState(false);
   const [txUrl, setTxUrl] = useState('');
   const signer = library.getSigner()
@@ -412,32 +420,32 @@ const Swap = () => {
     [setToToken]
   )
 
-  const { data: routes = [], isLoading } = useGetRoutes({
-    chain: selectedChain.value,
-    from: fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address,
-    to: toToken?.isNative ? NATIVE_ADDRESS : toToken?.wrapped.address,
-    amount: amountWithDecimals,
-    extra: {
-      gasPrice,
-      userAddress: account,
-      amount,
-      fromToken,
-      toToken,
-      slippage
-    }
-  });
+  // const { data: routes = [], isLoading } = useGetRoutes({
+  //   chain: selectedChain.value,
+  //   from: fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address,
+  //   to: toToken?.isNative ? NATIVE_ADDRESS : toToken?.wrapped.address,
+  //   amount: amountWithDecimals,
+  //   extra: {
+  //     gasPrice,
+  //     userAddress: account,
+  //     amount,
+  //     fromToken,
+  //     toToken,
+  //     slippage
+  //   }
+  // });
 
-  const normalizedRoutes = [...(routes || [])]
-    ?.map((route) => {
-      const gasUsd = (gasTokenPrice * +route.price.estimatedGas * +gasPrice) / 1e18 || 0;
-      const amount = +route.price.amountReturned / 10 ** +toToken?.decimals;
-      const amountUsd = (amount * toTokenPrice).toFixed(2);
-      const netOut = +amountUsd - gasUsd;
+  // const normalizedRoutes = [...(routes || [])]
+  //   ?.map((route) => {
+  //     const gasUsd = (gasTokenPrice * +route.price.estimatedGas * +gasPrice) / 1e18 || 0;
+  //     const amount = +route.price.amountReturned / 10 ** +toToken?.decimals;
+  //     const amountUsd = (amount * toTokenPrice).toFixed(2);
+  //     const netOut = +amountUsd - gasUsd;
 
-      return { route, gasUsd, amountUsd, amount, netOut, ...route };
-    })
-    .filter(({ fromAmount, amount: toAmount }) => Number(toAmount) && amountWithDecimals === fromAmount)
-    .sort((a, b) => b.netOut - a.netOut);
+  //     return { route, gasUsd, amountUsd, amount, netOut, ...route };
+  //   })
+  //   .filter(({ fromAmount, amount: toAmount }) => Number(toAmount) && amountWithDecimals === fromAmount)
+  //   .sort((a, b) => b.netOut - a.netOut);
 
 
   const swapMutation = useMutation({
@@ -485,9 +493,13 @@ const Swap = () => {
     });
   };
 
-  const handleLimitSwap = () => {
-    useLimit ? setUseLimit(false) : setUseLimit(true)
-  };
+  const handleLimitSwap = useCallback(
+    () => {
+      // setShowHeader(false)
+      router.push(`/exchange/swap/limits/${currencyIdA}/${currencyIdB}`)
+    }, [useSwap]
+  )
+
 
   const { data: tokenPrices } = useGetPrice({
     chain: selectedChain.value,
@@ -515,12 +527,12 @@ const Swap = () => {
     [onUserInput]
   )
 
-  const handleUseAggregator = useCallback(
-    (using: boolean) => {
-      using ? setUseAggregator(false) : setUseAggregator(true)
-    },
-    [setUseAggregator]
-  )
+  // const handleUseAggregator = useCallback(
+  //   (using: boolean) => {
+  //     using ? setUseAggregator(false) : setUseAggregator(true)
+  //   },
+  //   [setUseAggregator]
+  // )
 
   return (
     <>
@@ -563,67 +575,47 @@ const Swap = () => {
 
       {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <SwapLayoutCard>
-          <SwapDropdown inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
-          {/*  <SubmitButton
-            className={classNames(featureEnabled(Feature.AGGREGATE, chainId) ?? 'hidden')}
-            onClick={() => handleUseAggregator(useAggregator)}
-            variant="bordered"
-            height="30px"
-            primaryColor={getChainColor(chainId)}
-            // primaryColor={chainId == ChainId.AVALANCHE ? "avaxGradient" : "gradientBluePurple"}
-            size="lg"
-          >
-            <div className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span>{useAggregator ? `SoulSwap Exchange` : `Meta-Aggregator Exchange`} ↗</span>
-            </div>
-          </SubmitButton>
-        */}
           {useSwap &&
-            <SwapAssetPanel
+            <><SwapDropdown inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /><SwapAssetPanel
               spendFromWallet={true}
               chainId={chainId}
               header={(props) => (
                 <SwapAssetPanel.Header
                   {...props}
-                  label={
-                    independentField === Field.OUTPUT && !showWrap ? i18n._(t`Swap from:`) : i18n._(t`Swap from:`)
-                  }
-                />
+                  label={independentField === Field.OUTPUT && !showWrap ? i18n._(t`Swap from:`) : i18n._(t`Swap from:`)} />
               )}
               currency={currencyA}
               value={formattedAmounts[Field.INPUT]}
               onChange={handleTypeInput}
-              onSelect={handleInputSelect}
-            />
+              onSelect={handleInputSelect} /></>
           }
           {useSwap &&
-            <div className={classNames("flex justify-center -mt-4 -mb-6 z-0")}>
-              <div
-                role="button"
-                className={classNames(`p-1.5 rounded-full shadow-md bg-dark-800 border border-dark-700 hover:border-${getChainColorCode(chainId)}`)}
-                onClick={() => {
-                  // setApprovalSubmitted(false) // reset 2 step UI for approvals
-                  onSwitchTokens()
-                }}
+            <div className="flex -mt-6 -mb-6 z-0 justify-between">
+              <Button
+                size={'xs'}
+                className={classNames(`mx-[42%] rounded rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
+                onClick={() =>
+                  handleSwitchTokens(currencyA, currencyB)
+                }                >
+                <Image
+                  width={'14px'}
+                  height={'14px'}
+                  className={`rounded rounded-xl`}
+                  src={ArrowRoundedSquare}
+                />
+              </Button>
+              <Button
+                size={'xs'}
+                className={classNames(`rounded rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
+                onClick={handleLimitSwap}
               >
-                {<ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />}
-              </div>
-            </div>
-          }
-          {useSwap &&
-            <div className={classNames("flex justify-end -mt-6 -mb-8 z-0")}>
-            <Button
-              size={'sm'}
-              className={classNames(``)}
-              onClick={handleLimitSwap}
-            >
-              <Image
-                width={'21px'}
-                height={'21px'}
-                className={`justify-center rounded rounded-xl bg-${getChainColorCode(chainId)}`}
-                src={ChevronUpDown}
-              />
-            </Button>
+                <Image
+                  width={'14px'}
+                  height={'14px'}
+                  className={`rounded rounded-xl`}
+                  src={ChevronUpDown}
+                />
+              </Button>
             </div>
           }
 
