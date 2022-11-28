@@ -541,21 +541,6 @@ const Limits = () => {
                   onChange={handleTypeInput}
                   onSelect={handleInputSelect}
                 />
-                {/* <CurrencyInputPanel
-                  chainId={chainId}
-                  // label={
-                  //   independentField === Field.OUTPUT ? "From (at most)" : "From"
-                  // }
-                  value={formattedAmounts.input}
-                  currency={currencyA}
-                  onUserInput={handleTypeInput}
-                  onMax={handleMaxInput}
-                  fiatValue={fiatValueInput ?? undefined}
-                  onCurrencySelect={handleInputSelect}
-                  // otherCurrency={currencyB || SOUL_FANTOM}
-                  showCommonBases={false}
-                  id="limit-order-currency-input"
-                /> */}
                 <div className="flex -mt-3 -mb-3 z-0 justify-between">
                   {rateType === Rate.MUL ? (
                     <Button

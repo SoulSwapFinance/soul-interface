@@ -45,7 +45,7 @@ import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 // import { currencyId } from 'functions/currency'
 import { useRouter } from 'next/router'
-import Aggregator, { startChain } from '../aggregator'
+import Aggregator, { startChain } from './aggregator'
 // import Container from 'components/Container'
 // import Route from 'components/SwapRoute'
 // import Loader from 'features/aggregator/components/Loader'
@@ -83,11 +83,6 @@ const Swap = () => {
   const tokens = router.query.tokens
   const [currencyIdA, currencyIdB] = (tokens as string[]) || [DEFAULT_CURRENCY_A, DEFAULT_CURRENCY_B]
   const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
-
-  enum Rate {
-    DIV = "DIV",
-    MUL = "MUL",
-  }
 
   const handleCurrencyASelect = useCallback(
     (currencyA: Currency) => {
@@ -575,7 +570,7 @@ const Swap = () => {
 
       {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <SwapLayoutCard>
-          {useSwap &&
+          {!useLimit &&
             <><SwapDropdown inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /><SwapAssetPanel
               spendFromWallet={true}
               chainId={chainId}

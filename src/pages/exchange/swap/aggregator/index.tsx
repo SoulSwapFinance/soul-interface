@@ -32,6 +32,7 @@ import SwapHeader from 'features/swap/SwapHeader'
 import Container from 'components/Container'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
+import SwapDropdown from 'features/swap/SwapDropdown'
 /*
 Integrated:
 - paraswap
@@ -375,6 +376,7 @@ const Aggregator = ({ }) => {
 		<Container>
 			{/* <div className="mt-2" /> */}
 			<div className={"grid grid-cols-1 gap-2"}>
+				{/* <SwapDropdown /> */}
 				{/* <SwapLayoutCard> */}
 					{/* <SwapHeader /> */}
 					{/* <Container  */}
