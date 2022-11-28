@@ -45,7 +45,7 @@ import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 // import { currencyId } from 'functions/currency'
 import { useRouter } from 'next/router'
-import Aggregator, { startChain } from '../aggregator'
+import Aggregator, { startChain } from './aggregator'
 // import Container from 'components/Container'
 // import Route from 'components/SwapRoute'
 // import Loader from 'features/aggregator/components/Loader'
@@ -570,7 +570,7 @@ const Swap = () => {
 
       {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <SwapLayoutCard>
-          {useSwap &&
+          {!useLimit &&
             <><SwapDropdown inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /><SwapAssetPanel
               spendFromWallet={true}
               chainId={chainId}
