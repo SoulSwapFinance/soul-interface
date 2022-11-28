@@ -571,7 +571,9 @@ const Swap = () => {
       {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <SwapLayoutCard>
           {!useLimit &&
-            <><SwapDropdown inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /><SwapAssetPanel
+            <><SwapDropdown inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+            {useSwap &&
+            <><SwapAssetPanel
               spendFromWallet={true}
               chainId={chainId}
               header={(props) => (
@@ -582,7 +584,10 @@ const Swap = () => {
               currency={currencyA}
               value={formattedAmounts[Field.INPUT]}
               onChange={handleTypeInput}
-              onSelect={handleInputSelect} /></>
+              onSelect={handleInputSelect} />
+              </>
+              }
+              </>
           }
           {useSwap &&
             <div className="flex -mt-6 -mb-6 z-0 justify-between">
