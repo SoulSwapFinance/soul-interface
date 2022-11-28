@@ -12,24 +12,24 @@ import { useTVL } from 'hooks/useV2Pairs'
 import { usePositions } from 'features/mines/hooks'
 import { useSummonerContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
-import { TridentHeader } from 'layouts/Trident'
+// import { TridentHeader } from 'layouts/Trident'
 import {  formatNumberScale } from 'functions'
 import { Button } from 'components/Button'
-import { addTransaction } from 'state/transactions/actions'
-import { XIcon } from '@heroicons/react/solid'
+// import { addTransaction } from 'state/transactions/actions'
+// import { XIcon } from '@heroicons/react/solid'
 import { ChainId, SOUL_ADDRESS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
-import { getChainColorCode } from 'constants/chains'
+// import { getChainColorCode } from 'constants/chains'
 import { useTokenInfo } from 'hooks/useAPI'
 import { SubmitButton } from 'features/summoner/Styles'
 import ExternalLink from 'components/ExternalLink'
 
 const Summoner = () => {
   const { chainId } = useActiveWeb3React()
-  const [pendingTx, setPendingTx] = useState(false)
-  const [showBalances, openShowBalances] = useState(true)
+  // const [pendingTx, setPendingTx] = useState(false)
+  // const [showBalances, openShowBalances] = useState(true)
   const { tokenInfo } = useTokenInfo(SOUL_ADDRESS[chainId])
-  const soulPrice = Number(tokenInfo.price)
+  // const soulPrice = Number(tokenInfo.price)
   const { harvest } = useSummoner()
   const SummonerContract = useSummonerContract()
   const positions = usePositions()
@@ -39,9 +39,9 @@ const Summoner = () => {
     return previousValue + currentValue.tvl
   }, 0)
 
-  const pendingValue = positions.reduce((previousValue, currentValue) => {
-    return previousValue + (currentValue.pendingSoul / 1e18) * soulPrice
-  }, 0)
+  // const pendingValue = positions.reduce((previousValue, currentValue) => {
+  //   return previousValue + (currentValue.pendingSoul / 1e18) * soulPrice
+  // }, 0)
   
   const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
     return { ...POOLS[chainId][key], lpToken: key }
@@ -136,14 +136,25 @@ const Summoner = () => {
                   CLAIM ALL {formatNumberScale(pendingValue, true)}
                 </Button>
               )} */}
+              <div className="grid grid-cols-1 gap-2">
               <Button
-                color={getChainColorCode(chainId)}
+                color={"avaxRed"}
+                  // getChainColorCode(chainId)}
                 className="text-emphasis"
                 variant={'filled'}
                 size={"sm"}
               >
                 {formatNumberScale(summTvl, true)} {' '} UNCLAIMED TVL
               </Button>
+              <Button
+                color={'red'}
+                className="text-emphasis"
+                variant={'outlined'}
+                size={"sm"}
+              >
+                {`>> MUST BE CLAIMED BEFORE 2023 <<`}
+              </Button>
+              </div>
             </div>
           /* </TridentHeader> */
         }
@@ -160,7 +171,7 @@ const Summoner = () => {
           size="lg"
           >
           <a className="block text-md font-bold md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span>Return: Back to SoulSwap V2</span>
+            <span>Latest Version ↗</span>
           </a>
         </SubmitButton>
       </ExternalLink>
