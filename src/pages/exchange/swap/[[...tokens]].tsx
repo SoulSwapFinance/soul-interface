@@ -77,7 +77,7 @@ const Swap = () => {
   const [useAggregator, setUseAggregator] = useState(false)
   const [useLimit, setUseLimit] = useState(false)
   const [showOrders, setShowOrders] = useState(false)
-  const DEFAULT_CURRENCY_A = [ChainId.ETHEREUM, ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId) ? WNATIVE_ADDRESS[chainId] : WBTC_ADDRESS[chainId]
+  const DEFAULT_CURRENCY_A = NATIVE[chainId].symbol
   const DEFAULT_CURRENCY_B = [ChainId.ETHEREUM, ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId) ? SOUL_ADDRESS[chainId] : USDC_ADDRESS[chainId]
   const router = useRouter()
   const tokens = router.query.tokens
