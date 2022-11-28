@@ -13,7 +13,7 @@ import { usePositions } from 'features/mines/hooks'
 import { useSummonerContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
 // import { TridentHeader } from 'layouts/Trident'
-import {  formatNumberScale } from 'functions'
+import { formatNumberScale } from 'functions'
 import { Button } from 'components/Button'
 // import { addTransaction } from 'state/transactions/actions'
 // import { XIcon } from '@heroicons/react/solid'
@@ -23,6 +23,7 @@ import { useActiveWeb3React } from 'services/web3'
 import { useTokenInfo } from 'hooks/useAPI'
 import { SubmitButton } from 'features/summoner/Styles'
 import ExternalLink from 'components/ExternalLink'
+import Typography from 'components/Typography'
 
 const Summoner = () => {
   const { chainId } = useActiveWeb3React()
@@ -42,11 +43,11 @@ const Summoner = () => {
   // const pendingValue = positions.reduce((previousValue, currentValue) => {
   //   return previousValue + (currentValue.pendingSoul / 1e18) * soulPrice
   // }, 0)
-  
+
   const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
     return { ...POOLS[chainId][key], lpToken: key }
   })
-  
+
   // const pendingRewards = (pendingValue / soulPrice).toFixed(0)
 
   const allStaked = positions.reduce((previousValue, currentValue) => {
@@ -56,15 +57,15 @@ const Summoner = () => {
     return !poolTvl ? previousValue + 0 : previousValue + ((currentValue.amount / 1e18) * poolTvl?.lpPrice)
   }, 0)
 
-    // harvests: all staked pools (for user)
-    const handleHarvestAll = async () => {
-      try {
-        let tx
-        tx = SummonerContract?.harvestAll()
-        await tx?.wait()
+  // harvests: all staked pools (for user)
+  const handleHarvestAll = async () => {
+    try {
+      let tx
+      tx = SummonerContract?.harvestAll()
+      await tx?.wait()
     } catch (e) {
-        console.log(e)
-        return
+      console.log(e)
+      return
     }
   }
 
@@ -82,10 +83,10 @@ const Summoner = () => {
       } */}
       {[ChainId.FANTOM].includes(chainId) &&
         // <TridentHeader className="sm:!flex-row justify-center items-center bg-transparent" pattern="bg-bubble">
-          // <div>
-          // </div>
-          <div className={`flex items-center justify-center`}>
-              {/* <Button
+        // <div>
+        // </div>
+        <div className={`flex items-center justify-center`}>
+          {/* <Button
                 color={getChainColorCode(chainId)}
                 className="text-emphasis"
                 variant="outlined"
@@ -93,7 +94,7 @@ const Summoner = () => {
               >
                 {formatNumberScale(allStaked, true)} {' STAKED'}
               </Button> */}
-              {/* {positions.length > 0 && [ChainId.FANTOM].includes(chainId) && (
+          {/* {positions.length > 0 && [ChainId.FANTOM].includes(chainId) && (
                 <Button
                   color={getChainColorCode(chainId)}
                   className="text-emphasis"
@@ -116,7 +117,7 @@ const Summoner = () => {
                   CLAIM ALL {formatNumberScale(pendingValue, true)}
                 </Button>
               )} */}
-              {/* {positions.length > 0 && [ChainId.AVALANCHE].includes(chainId) && (
+          {/* {positions.length > 0 && [ChainId.AVALANCHE].includes(chainId) && (
                 <Button
                   color={getChainColorCode(chainId)}
                   className="text-emphasis"
@@ -136,8 +137,8 @@ const Summoner = () => {
                   CLAIM ALL {formatNumberScale(pendingValue, true)}
                 </Button>
               )} */}
-              <div className="grid grid-cols-1 gap-2">
-              <Button
+          <div className="grid grid-cols-1 gap-2">
+            {/* <Button
                 color={"avaxRed"}
                   // getChainColorCode(chainId)}
                 className="text-emphasis"
@@ -145,36 +146,40 @@ const Summoner = () => {
                 size={"sm"}
               >
                 {formatNumberScale(summTvl, true)} {' '} UNCLAIMED TVL
-              </Button>
-              <Button
-                color={'red'}
-                className="text-emphasis"
-                variant={'outlined'}
-                size={"sm"}
-              >
-                {`>> MUST BE CLAIMED BEFORE 2023 <<`}
-              </Button>
-              </div>
-            </div>
-          /* </TridentHeader> */
-        }
+              </Button> */}
+            <Button
+              color={'red'}
+              className="text-emphasis"
+              variant={'outlined'}
+              size={"sm"}
+            >
+              <Typography className="mb-2 text-white"> {`> > ${formatNumberScale(summTvl, true)} STAKED < <`}
+              </Typography>
+              <Typography className="font-bold">
+                {'MUST CLAIM BEFORE 2023'}
+              </Typography>
+            </Button>
+          </div>
+        </div>
+        /* </TridentHeader> */
+      }
       <DoubleGlowShadowV2 opacity="0.6">
         <Container id="farm-page">
-        <ExternalLink 
-            href = "https://exchange.soulswap.finance/farms" 
-            target = "_blank" 
+          <ExternalLink
+            href="https://exchange.soulswap.finance/farms"
+            target="_blank"
             rel="noreferrer"
           >
-          <SubmitButton
-          height= "2rem"
-          primaryColor={"#6F1BD9"} 
-          size="lg"
-          >
-          <a className="block text-md font-bold md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span>Latest Version ↗</span>
-          </a>
-        </SubmitButton>
-      </ExternalLink>
+            <SubmitButton
+              height="2rem"
+              primaryColor={"#6F1BD9"}
+              size="lg"
+            >
+              <a className="block text-md font-bold md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                <span>Latest Version ↗</span>
+              </a>
+            </SubmitButton>
+          </ExternalLink>
           <br />
           <Head>
             <title>Farm | Soul</title>
