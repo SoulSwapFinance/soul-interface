@@ -1,5 +1,9 @@
 import React, { useCallback, useState, Fragment, useEffect, useMemo } from "react"
 import { ChevronDoubleUpIcon } from '@heroicons/react/solid'
+import ChevronDoubleUp from 'assets/svg/icons/ChevronDoubleUp.svg'
+import ChevronDown from 'assets/svg/icons/ChevronDown.svg'
+import Multiply from 'assets/svg/icons/Multiply.svg'
+import Divide from 'assets/svg/icons/Divide.svg'
 
 import {
   ChainId,
@@ -10,8 +14,10 @@ import {
   NATIVE_ADDRESS,
   Percent,
   SOUL,
+  SOUL_ADDRESS,
   Token,
   TradeType,
+  USDC_ADDRESS,
   WNATIVE,
 } from "sdk"
 import { Trade } from "sdk"
@@ -21,7 +27,7 @@ import { MouseoverTooltip, MouseoverTooltipContent } from "components/Tooltip"
 import {
   ArrowDown,
   Info,
-  Divide,
+  // Divide,
   X,
   CheckCircle,
   HelpCircle,
@@ -135,11 +141,12 @@ const Limits = () => {
   // const [ouputCurrency, setOutputCurrency] = useState(SOUL[chainId])
   const theme = useTheme();
   const [showOrders, setShowOrders] = useState(false)
+  const [useSwap, setUseSwap] = useState(false)
+  const [showHeader, setShowHeader] = useState(true)
+  const DEFAULT_CURRENCY_B = [ChainId.ETHEREUM, ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId) ? SOUL_ADDRESS[chainId] : USDC_ADDRESS[chainId]
   const router = useRouter()
   const tokens = router.query.tokens
-  const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
-  const [useSwap, setUseSwap] = useState(false)
-  // const [currencyIdA, currencyIdB] = (tokens as string[]) || [undefined, undefined]
+  const [currencyIdA, currencyIdB] = (tokens as string[]) || [NATIVE[chainId].symbol, DEFAULT_CURRENCY_B]
   const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
 
   enum Rate {
@@ -148,33 +155,41 @@ const Limits = () => {
   }
 
   const handleSetSwap = useCallback(
-    (useSwap: boolean) => {
-      router.push(`/exchange/swap/${currencyIdB}/${currencyIdA}`)
+    () => {
+      // setShowHeader(false)
+      router.push(`/exchange/swap/${currencyIdA}/${currencyIdB}`)
     }, [useSwap]
   )
+
+  // const handleShowHeader = useCallback(
+  //   () => {
+  //     setShowHeader(true)
+  //   }, [setShowHeader]
+  // )
 
   const handleCurrencyASelect = useCallback(
     (currencyA: Currency) => {
       const newCurrencyIdA = currencyId(currencyA)
       if (newCurrencyIdA === currencyIdB) {
-        router.push(`/exchange/swap/${currencyIdB}/${currencyIdA}`)
+        router.push(`/exchange/swap/limits/${currencyIdB}/${currencyIdA}`)
       } else {
-        router.push(`/exchange/swap/${newCurrencyIdA}/${currencyIdB}`)
+        router.push(`/exchange/swap/limits/${newCurrencyIdA}/${currencyIdB}`)
       }
     },
     [currencyIdB, router, currencyIdA]
   )
+
   const handleCurrencyBSelect = useCallback(
     (currencyB: Currency) => {
       const newCurrencyIdB = currencyId(currencyB)
       if (currencyIdA === newCurrencyIdB) {
         if (currencyIdB) {
-          router.push(`/exchange/swap/${currencyIdB}/${newCurrencyIdB}`)
+          router.push(`/exchange/swap/limits/${currencyIdB}/${newCurrencyIdB}`)
         } else {
-          router.push(`/exchange/swap/${newCurrencyIdB}`)
+          router.push(`/exchange/swap/limits/${newCurrencyIdB}`)
         }
       } else {
-        router.push(`/exchange/swap/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
+        router.push(`/exchange/swap/limits/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
       }
     },
     [currencyIdA, router, currencyIdB]
@@ -429,6 +444,7 @@ const Limits = () => {
       //  setApprovalSubmitted(false); // reset 2 step UI for approvals
       handleCurrencySelection(Field.INPUT, currencyA);
       handleCurrencyASelect(currencyA)
+      setShowHeader(true)
     },
     [handleCurrencySelection]
   );
@@ -441,9 +457,21 @@ const Limits = () => {
     (currencyB) => {
       handleCurrencySelection(Field.OUTPUT, currencyB)
       handleCurrencyBSelect(currencyB)
+      setShowHeader(true)
     },
     [handleCurrencySelection]
   );
+
+  const handleSwitch = useCallback(
+    (inputCurrency, outputCurrency) => {
+      // handleCurrencyASelect(inputCurrency)
+      // handleCurrencySelection(Field.OUTPUT, inputCurrency)
+      // handleCurrencySelection(Field.INPUT, outputCurrency)
+      // handleOutputSelect(inputCurrency)
+    },
+    [handleCurrencySelection]
+  );
+
 
   const swapIsUnsupported = useIsSwapUnsupported(
     currencyA,
@@ -470,18 +498,15 @@ const Limits = () => {
     <Container id="cross-page" maxWidth="2xl" className="space-y-4">
       <DoubleGlowShadowV2>
         <SwapLayoutCard>
-          {/* <SwapDropdown
-            inputCurrency={currencyA}
-            outputCurrency={currencyB}
-            allowedSlippage={allowedSlippage}
-          /> */}
-
           <div className="p-0 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-            {/* <SwapHeader
-            inputCurrency={currencyA}
-            outputCurrency={currencyB}
-            allowedSlippage={allowedSlippage}
-          />           */}
+          {showHeader &&
+            <SwapDropdown
+              inputCurrency={currencyA}
+              outputCurrency={currencyB}
+              allowedSlippage={allowedSlippage}
+            />
+          }
+
             {/* <OrderHeader handleActiveTab={handleActiveTab} activeTab={activeTab} /> */}
             {/* <Wrapper id="limit-order-page"> */}
             <ConfirmSwapModal
@@ -531,27 +556,36 @@ const Limits = () => {
                   showCommonBases={false}
                   id="limit-order-currency-input"
                 /> */}
-                <ArrowWrapper clickable={false}>
+                <div className="flex -mt-3 -mb-3 z-0 justify-between">
                   {rateType === Rate.MUL ? (
-                    <X
-                      size="16"
-                      color={
-                        currencyA && currencyB
-                          ? theme.text1
-                          : theme.text3
-                      }
-                    />
+                    <Button
+                      size={'xs'}
+                      className={classNames(`mx-[45%] rounded rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
+                      onClick={handleSetSwap}
+                    >
+                      <Image
+                        width={'14px'}
+                        height={'14px'}
+                        className={`rounded rounded-xl`}
+                        src={Multiply}
+                      />
+                    </Button>
                   ) : (
-                    <Divide
-                      size="16"
-                      color={
-                        currencyA && currencyB
-                          ? theme.text1
-                          : theme.text3
-                      }
-                    />
+                    <Button
+                      size={'xs'}
+                      className={classNames(`mx-[45%] rounded rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
+                      onClick={handleSetSwap}
+                    >
+                      <Image
+                        width={'14px'}
+                        height={'14px'}
+                        className={`rounded rounded-xl`}
+                        src={Divide}
+                      />
+                    </Button>
                   )}
-                </ArrowWrapper>
+                </div>
+                {/* </ArrowWrapper> */}
                 <CurrencyInputPanel
                   chainId={chainId}
                   value={formattedAmounts.price}
@@ -584,33 +618,33 @@ const Limits = () => {
                     color={getChainColor(chainId)}
                   />
                   </div> */}
-                <div className={classNames("flex justify-end -mt-2 -mb-6 z-0")}>
+                <div className="flex -mt-3 -mb-3 z-0 justify-between">
                   <Button
-                    size={'md'}
-                    className={classNames(``)}
+                    size={'xs'}
+                    className={classNames(`mx-[45%] rounded rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
+                  // onClick={handleSwitch(currencyA, currencyB)}
+                  >
+                    <Image
+                      width={'14px'}
+                      height={'14px'}
+                      className={`rounded rounded-xl`}
+                      src={ChevronDown}
+                    />
+                  </Button>
+                  <Button
+                    size={'xs'}
+                    className={classNames(`rounded rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
                     onClick={handleSetSwap}
                   >
-                    <ChevronDoubleUpIcon
-                      width={'16px'}
-                      height={'21px'}
-                      className={`justify-center rounded rounded-xl bg-${getChainColorCode(chainId)}`}
-                    // src={ChevronDoubleUpIcon}
+                    <Image
+                      width={'14px'}
+                      height={'14px'}
+                      className={`rounded rounded-xl`}
+                      src={ChevronDoubleUp}
                     />
                   </Button>
                 </div>
-                <ArrowWrapper clickable>
-                  <ArrowDown
-                    size="16"
-                    onClick={() => {
-                      handleSwitchTokens();
-                    }}
-                    color={
-                      currencyA && currencyB
-                        ? theme.text1
-                        : theme.text3
-                    }
-                  />
-                </ArrowWrapper>
+                {/* </ArrowWrapper> */}
 
                 <SwapAssetPanel
                   spendFromWallet={true}
@@ -628,24 +662,6 @@ const Limits = () => {
                   onChange={handleTypeOutput}
                   onSelect={handleOutputSelect}
                 />
-
-                {/* <CurrencyInputPanel
-                  chainId={chainId}
-                  value={formattedAmounts.output}
-                  onUserInput={handleTypeOutput}
-                  // label={
-                  //   independentField === Field.INPUT ? "To (at least)" : "To"
-                  // }
-                  hideBalance={false}
-                  // priceImpact={percentageRateDifference}
-                  priceImpact={percentageRateDifference}
-                  currency={currencyB}
-                  onCurrencySelect={handleOutputSelect}
-                  otherCurrency={currencyA}
-                  showCommonBases={false}
-                  // rateType={rateType}
-                  id="limit-order-currency-output"
-                /> */}
               </div>
 
               {trade &&
