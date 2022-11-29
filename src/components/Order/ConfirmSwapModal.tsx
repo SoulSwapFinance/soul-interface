@@ -6,10 +6,6 @@ import {
 } from "sdk";
 import { Trade } from "sdk";
 import React, { useCallback, useMemo, useState } from "react";
-// import TransactionConfirmationModal, {
-//   ConfirmationModalContent,
-//   TransactionErrorContent,
-// } from "../TransactionConfirmationModal";
 import SwapModalFooter from "./SwapModalFooter";
 import SwapModalHeader from "./SwapModalHeader";
 import TransactionConfirmationModal, { ConfirmationModalContent, TransactionErrorContent } from "modals/TransactionConfirmationModal";

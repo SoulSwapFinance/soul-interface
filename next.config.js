@@ -24,6 +24,7 @@ module.exports = withBundleAnalyzer(
         'snowtrace.io',
         'www.shutterstock.com',
         'cryptologos.cc',
+        'soul.sh',
         'assets.soulswap.finance',
         'assets.coingecko.com',
         'media.giphy.com',
@@ -73,11 +74,6 @@ module.exports = withBundleAnalyzer(
           source: '/bond',
           destination: '/bonds',
           permanent: true,
-        },        
-        {
-          source: '/enchantment',
-          destination: '/enchant',
-          permanent: true,
         },
         {
           source: '/luxor',
@@ -115,20 +111,12 @@ module.exports = withBundleAnalyzer(
           destination: '/exchange/add/:token*',
         },
         {
-          source: '/xswap',
-          destination: '/exchange/xswap',
-        },
-        {
           source: '/swap/:token*',
           destination: '/exchange/swap/:token*',
         },
         {
           source: '/limit/:token*',
-          destination: '/exchange/limit/:token*',
-        },
-        {
-          source: '/aggregate',
-          destination: '/exchange/aggregate',
+          destination: '/exchange/swap/limit/:token*',
         },
         {
           source: '/aggregator',
@@ -139,14 +127,6 @@ module.exports = withBundleAnalyzer(
           destination: '/exchange/cross',
         },
         {
-          source: '/soulswap',
-          destination: '/exchange/soulswap',
-        },
-        {
-          source: '/open-order',
-          destination: '/exchange/open-order',
-        },
-        {
           source: '/soul',
           destination: '/soul/dashboard',
         },
@@ -154,10 +134,6 @@ module.exports = withBundleAnalyzer(
           source: '/luxor',
           destination: '/luxor/bonds',
         },
-        // {
-        //   source: '/migrate',
-        //   destination: '/exchange/migrate',
-        // },
         {
           source: '/pool',
           destination: '/exchange/pool',

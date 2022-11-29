@@ -65,6 +65,7 @@ const HeadlessUiModal: HeadlessUiModalType<Props> = ({ children: childrenProp, t
       typeof triggerProp === 'function'
         ? triggerProp({ onClick, chainId, open, setOpen })
         : isValidElement(triggerProp)
+        // @ts-ignore
         ? cloneElement(triggerProp, { onClick })
         : null,
     [onClick, open, triggerProp]

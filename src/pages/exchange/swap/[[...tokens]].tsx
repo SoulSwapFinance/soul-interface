@@ -59,7 +59,7 @@ import { getExplorerLink } from 'functions/explorer'
 // import { SubmitButton } from 'features/summoner/Styles'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import Pair from 'pages/analytics/pairs/[id]'
-import Limits from './limits/[[...tokens]]'
+import Limits from './limit/[[...tokens]]'
 import { currencyId } from 'functions/currency'
 import { GelatoLimitOrdersHistoryPanel } from 'soulswap-limit-orders-react'
 
@@ -491,7 +491,7 @@ const Swap = () => {
   const handleLimitSwap = useCallback(
     () => {
       // setShowHeader(false)
-      router.push(`/exchange/swap/limits/${currencyIdA}/${currencyIdB}`)
+      router.push(`/exchange/swap/limit/${currencyIdA}/${currencyIdB}`)
     }, [useSwap]
   )
 
