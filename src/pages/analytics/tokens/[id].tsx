@@ -36,6 +36,7 @@ import useAddTokenToMetaMask from 'hooks/useAddTokenToMetaMask'
 import { Button } from 'components/Button'
 import { RowFixed } from 'components/Row'
 import { getAddress } from '@ethersproject/address'
+import NavLink from 'components/NavLink'
 
 const chartTimespans = [
   {
@@ -134,7 +135,7 @@ export default function Token() {
 
   // For the logo
   const currency = useCurrency(token?.id)
-  const tokenToAdd = new ERC20(chainId, tokenAddress,tokenDecimals, token?.symbol, token?.name)
+  const tokenToAdd = new ERC20(chainId, tokenAddress, tokenDecimals, token?.symbol, token?.name)
 
   // For the Info Cards
   const price = token?.derivedETH * nativePrice
@@ -213,7 +214,9 @@ export default function Token() {
         {/* <div className="space-y-4"> */}
 
         {currency && library?.provider?.isMetaMask && (
-          <Button color="gradient"
+          <Button
+            color="gradient"
+            size="xs"
             onClick={() => {
               const params: any = {
                 type: 'ERC20',
@@ -265,18 +268,30 @@ export default function Token() {
             Analytics for {token?.name}.
           </Typography> */}
         {/* </div> */}
-        <div className="flex flex-row space-x-4">
+        <div className="grid grid-cols-2 space-x-4">
           <div className="flex flex-col">
-            <div className="text-secondary">Price</div>
-            <div className="flex items-center space-x-2">
-              <div className="text-xl font-medium text-high-emphesis">{formatNumber(price ?? 0, true)}</div>
-              <ColoredNumber number={priceChange} percent={true} />
-            </div>
+
+            <div className="text-center mb-1 text-secondary">Market Price</div>
+            <NavLink
+              href={`/swap?inputCurrency=&outputCurrency=${tokenAddress}`}
+            >
+              <Button
+                size="xs"
+                variant="filled"
+                color={getChainColorCode(chainId)}
+              >
+
+                <div className="flex justify-center items-center space-x-2">
+                  <div className="text-xl items-center font-medium text-high-emphesis">{formatNumber(price ?? 0, true)}</div>
+                  <ColoredNumber number={priceChange} percent={true} />
+                </div> 
+              </Button>
+            </NavLink>
           </div>
           <div className="flex flex-col">
-            <div className="text-secondary">Market Cap</div>
+          <div className="text-center mb-1 text-secondary">Total MC</div>
             <div className="flex items-center space-x-2">
-              <div className="text-xl font-medium text-high-emphesis">
+            <div className="text-xl items-center font-medium text-high-emphesis">
                 {formatNumber(price * formattedSupply ?? 0, true, false)}
               </div>
               {/* <ColoredNumber number={priceChange} percent={true} /> */}
