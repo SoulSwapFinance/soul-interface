@@ -84,32 +84,32 @@ const Swap = () => {
   const [currencyIdA, currencyIdB] = (tokens as string[]) || [DEFAULT_CURRENCY_A, DEFAULT_CURRENCY_B]
   const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
 
-  const handleCurrencyASelect = useCallback(
-    (currencyA: Currency) => {
-      const newCurrencyIdA = currencyId(currencyA)
-      if (newCurrencyIdA === currencyIdB) {
-        router.push(`/exchange/swap/${currencyIdB}/${currencyIdA}`)
-      } else {
-        router.push(`/exchange/swap/${newCurrencyIdA}/${currencyIdB}`)
-      }
-    },
-    [currencyIdB, router, currencyIdA]
-  )
-  const handleCurrencyBSelect = useCallback(
-    (currencyB: Currency) => {
-      const newCurrencyIdB = currencyId(currencyB)
-      if (currencyIdA === newCurrencyIdB) {
-        if (currencyIdB) {
-          router.push(`/exchange/swap/${currencyIdB}/${newCurrencyIdB}`)
-        } else {
-          router.push(`/exchange/swap/${newCurrencyIdB}`)
-        }
-      } else {
-        router.push(`/exchange/swap/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
-      }
-    },
-    [currencyIdA, router, currencyIdB]
-  )
+  // const handleCurrencyASelect = useCallback(
+  //   (currencyA: Currency) => {
+  //     const newCurrencyIdA = currencyId(currencyA)
+  //     if (newCurrencyIdA === currencyIdB) {
+  //       router.push(`/exchange/swap/${currencyIdB}/${currencyIdA}`)
+  //     } else {
+  //       router.push(`/exchange/swap/${newCurrencyIdA}/${currencyIdB}`)
+  //     }
+  //   },
+  //   [currencyIdB, router, currencyIdA]
+  // )
+  // const handleCurrencyBSelect = useCallback(
+  //   (currencyB: Currency) => {
+  //     const newCurrencyIdB = currencyId(currencyB)
+  //     if (currencyIdA === newCurrencyIdB) {
+  //       if (currencyIdB) {
+  //         router.push(`/exchange/swap/${currencyIdB}/${newCurrencyIdB}`)
+  //       } else {
+  //         router.push(`/exchange/swap/${newCurrencyIdB}`)
+  //       }
+  //     } else {
+  //       router.push(`/exchange/swap/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
+  //     }
+  //   },
+  //   [currencyIdA, router, currencyIdB]
+  // )
   const [dismissTokenWarning, setDismissTokenWarning] = useState<boolean>(false)
   const urlLoadedTokens: Token[] = useMemo(
     () => [loadedInputCurrency, loadedOutputCurrency]?.filter((c): c is Token => c?.isToken ?? false) ?? [],
@@ -338,7 +338,7 @@ const Swap = () => {
     (inputCurrency) => {
       setApprovalSubmitted(false) // reset 2 step UI for approvals
       onCurrencySelection(Field.INPUT, inputCurrency)
-      handleCurrencyASelect(inputCurrency)
+      // handleCurrencyASelect(inputCurrency)
       handleInputTokenSelect(inputCurrency)
     },
     [onCurrencySelection]
@@ -347,7 +347,7 @@ const Swap = () => {
   const handleOutputSelect = useCallback(
     (outputCurrency) => {
       onCurrencySelection(Field.OUTPUT, outputCurrency)
-      handleCurrencyBSelect(outputCurrency)
+      // handleCurrencyBSelect(outputCurrency)
       handleOutputTokenSelect(outputCurrency)
     },
     [onCurrencySelection]
@@ -572,22 +572,25 @@ const Swap = () => {
         <SwapLayoutCard>
           {!useLimit &&
             <><SwapDropdown inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
-            {useSwap &&
-            <><SwapAssetPanel
-              spendFromWallet={true}
-              chainId={chainId}
-              header={(props) => (
-                <SwapAssetPanel.Header
-                  {...props}
-                  label={independentField === Field.OUTPUT && !showWrap ? i18n._(t`Swap from:`) : i18n._(t`Swap from:`)} />
-              )}
-              currency={currencyA}
-              value={formattedAmounts[Field.INPUT]}
-              onChange={handleTypeInput}
-              onSelect={handleInputSelect} />
-              </>
+              {useSwap &&
+                <SwapAssetPanel
+                  spendFromWallet={true}
+                  chainId={chainId}
+                  header={(props) => (
+                    <SwapAssetPanel.Header
+                      {...props}
+                      label={
+                        independentField === Field.OUTPUT && !showWrap ? i18n._(t`Swap from:`) : i18n._(t`Swap from:`)
+                      }
+                    />
+                  )}
+                  currency={currencies[Field.INPUT]}
+                  value={formattedAmounts[Field.INPUT]}
+                  onChange={handleTypeInput}
+                  onSelect={handleInputSelect}
+                />
               }
-              </>
+            </>
           }
           {useSwap &&
             <div className="flex -mt-6 -mb-6 z-0 justify-between">
@@ -630,7 +633,7 @@ const Swap = () => {
                   label={independentField === Field.INPUT && !showWrap ? i18n._(t`Swap to:`) : i18n._(t`Swap to:`)}
                 />
               )}
-              currency={currencyB}
+              currency={currencies[Field.OUTPUT]}
               value={formattedAmounts[Field.OUTPUT]}
               onChange={handleTypeOutput}
               onSelect={
