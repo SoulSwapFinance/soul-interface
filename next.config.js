@@ -24,6 +24,7 @@ module.exports = withBundleAnalyzer(
         'snowtrace.io',
         'www.shutterstock.com',
         'cryptologos.cc',
+        'soul.sh',
         'assets.soulswap.finance',
         'assets.coingecko.com',
         'media.giphy.com',
@@ -110,10 +111,6 @@ module.exports = withBundleAnalyzer(
           destination: '/exchange/add/:token*',
         },
         {
-          source: '/xswap',
-          destination: '/exchange/xswap',
-        },
-        {
           source: '/swap/:token*',
           destination: '/exchange/swap/:token*',
         },
@@ -130,10 +127,6 @@ module.exports = withBundleAnalyzer(
           destination: '/exchange/cross',
         },
         {
-          source: '/soulswap',
-          destination: '/exchange/soulswap',
-        },
-        {
           source: '/soul',
           destination: '/soul/dashboard',
         },
@@ -141,10 +134,6 @@ module.exports = withBundleAnalyzer(
           source: '/luxor',
           destination: '/luxor/bonds',
         },
-        // {
-        //   source: '/migrate',
-        //   destination: '/exchange/migrate',
-        // },
         {
           source: '/pool',
           destination: '/exchange/pool',

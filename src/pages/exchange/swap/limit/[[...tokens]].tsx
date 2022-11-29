@@ -603,7 +603,7 @@ const Limit = () => {
                     color={getChainColor(chainId)}
                   />
                   </div> */}
-                <div className="flex -mt-3 -mb-3 z-0 justify-between">
+                <div className="-mt-3 -mb-3 z-0">
                   <Button
                     size={'xs'}
                     className={classNames(`mx-[45%] rounded rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
@@ -618,7 +618,7 @@ const Limit = () => {
                   </Button>
                   <Button
                     size={'xs'}
-                    className={classNames(`rounded rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
+                    className={classNames(`-ml-8 sm:-ml-0 rounded rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
                     onClick={handleSetSwap}
                   >
                     <Image
