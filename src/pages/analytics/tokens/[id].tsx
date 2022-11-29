@@ -210,68 +210,66 @@ export default function Token() {
           </div>
         </div>
       </div>
-      <TridentHeader className="sm:!flex-row justify-between items-center" pattern="bg-bubble">
-        {/* <div className="space-y-4"> */}
-
-        {currency && library?.provider?.isMetaMask && (
-          <Button
-            color="gradient"
-            size="xs"
-            onClick={() => {
-              const params: any = {
-                type: 'ERC20',
-                options: {
-                  address: ADDRESS,
-                  symbol: SYMBOL,
-                  decimals: DECIMALS,
-                  image: LOGO_URL,
-                },
-              }
-              if (library && library.provider.isMetaMask && library.provider.request) {
-                library.provider
-                  .request({
-                    method: 'wallet_watchAsset',
-                    params,
-                  })
-                  .then((success) => {
-                    if (success) {
-                      console.log('Successfully added SOUL to MetaMask')
-                    } else {
-                      throw new Error('Something went wrong.')
-                    }
-                  })
-                  .catch(console.error)
-              }
-            }}
-            className="w-auto mt-4">
-            {!success ? (
-              <RowFixed className="mx-auto space-x-2">
-                <CurrencyLogo className="rounded-full"
-                  currency={currency} size={60}
-                />
-                <div className="flex items-center space-x-4 md:space-x-8">
-                  <Typography variant="h2" className="text-high-emphesis" weight={700}>
-                    {NAME}
-                  </Typography>
-                </div>
-              </RowFixed>
-            ) : (
-              <RowFixed>
-                {`Added ${SYMBOL}`}
-                <CheckCircle className="ml-1.5 text-2xl text-green" size="16px" />
-              </RowFixed>
-            )}
-          </Button>
-        )}
-
+      <TridentHeader className="sm:!flex-row sm:gap-24 justify-center" pattern="bg-bubble">
+        <div className="flex justify-center">
+          {currency && library?.provider?.isMetaMask && (
+            <Button
+              color="gradient"
+              size="xs"
+              onClick={() => {
+                const params: any = {
+                  type: 'ERC20',
+                  options: {
+                    address: ADDRESS,
+                    symbol: SYMBOL,
+                    decimals: DECIMALS,
+                    image: LOGO_URL,
+                  },
+                }
+                if (library && library.provider.isMetaMask && library.provider.request) {
+                  library.provider
+                    .request({
+                      method: 'wallet_watchAsset',
+                      params,
+                    })
+                    .then((success) => {
+                      if (success) {
+                        console.log('Added Successfully')
+                      } else {
+                        throw new Error('Failed to Add.')
+                      }
+                    })
+                    .catch(console.error)
+                }
+              }}
+              className="w-auto mt-4">
+              {!success ? (
+                <RowFixed className="mx-auto rounded rounded-xl space-x-2">
+                  <CurrencyLogo className="rounded-full bg-dark-1000 rounded rounded-xl p-1"
+                    currency={currency} size={60}
+                  />
+                  <div className="flex items-center space-x-4 md:space-x-8">
+                    <Typography variant="h2" className="text-high-emphesis" weight={700}>
+                      {NAME}
+                    </Typography>
+                  </div>
+                </RowFixed>
+              ) : (
+                <RowFixed>
+                  {`Added ${SYMBOL}`}
+                  <CheckCircle className="ml-1.5 text-2xl text-green" size="16px" />
+                </RowFixed>
+              )}
+            </Button>
+          )}
+        </div>
         {/* <Typography variant="sm" weight={400}>
             Analytics for {token?.name}.
           </Typography> */}
         {/* </div> */}
         <div className="grid grid-cols-2 space-x-4">
           <div className="flex flex-col">
-
-            <div className="text-center mb-1 text-secondary">Market Price</div>
+            <div className="text-center mb-1 text-white font-bold">Market Price</div>
             <NavLink
               href={`/swap?inputCurrency=&outputCurrency=${tokenAddress}`}
             >
@@ -281,22 +279,41 @@ export default function Token() {
                 color={getChainColorCode(chainId)}
               >
 
-                <div className="flex justify-center items-center space-x-2">
+                <div className="flex justify-center items-center space-x-1">
                   <div className="text-xl items-center font-medium text-high-emphesis">{formatNumber(price ?? 0, true)}</div>
                   <ColoredNumber number={priceChange} percent={true} />
-                </div> 
+                </div>
               </Button>
             </NavLink>
           </div>
           <div className="flex flex-col">
-          <div className="text-center mb-1 text-secondary">Total MC</div>
-            <div className="flex items-center space-x-2">
+
+            <div className="text-center mb-1 text-white font-bold">Total Market</div>
+            <NavLink
+              href={`/swap?inputCurrency=&outputCurrency=${tokenAddress}`}
+            >
+              <Button
+                size="xs"
+                variant="filled"
+                color={'black'}
+              >
+
+                <div className="flex justify-center items-center space-x-1">
+                  <div className="text-xl items-center font-medium text-high-emphesis"> {formatNumber(price * formattedSupply ?? 0, true, false)}</div>
+                  <ColoredNumber number={priceChange} percent={true} />
+                </div>
+              </Button>
+            </NavLink>
+          </div>
+          {/* <div className="flex flex-col">
+          <div className="text-center mb-1 text-secondary">Total Market</div>
+            <div className="flex items-center space-x-1">
             <div className="text-xl items-center font-medium text-high-emphesis">
                 {formatNumber(price * formattedSupply ?? 0, true, false)}
               </div>
-              {/* <ColoredNumber number={priceChange} percent={true} /> */}
+              <ColoredNumber number={priceChange} percent={true} />
             </div>
-          </div>
+        </div> */}
         </div>
       </TridentHeader>
       <div className="px-4 pt-4 space-y-4 lg:px-14">
