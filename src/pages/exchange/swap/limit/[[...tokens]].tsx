@@ -135,7 +135,7 @@ import { getChainColor, getChainColorCode } from "constants/chains"
 //   showCommonBases?: boolean;
 // }
 
-const Limits = () => {
+const Limit = () => {
   const { account, chainId } = useActiveWeb3React();
   // const [inputCurrency, setInputCurrency] = useState(NATIVE[chainId])
   // const [ouputCurrency, setOutputCurrency] = useState(SOUL[chainId])
@@ -171,9 +171,9 @@ const Limits = () => {
     (currencyA: Currency) => {
       const newCurrencyIdA = currencyId(currencyA)
       if (newCurrencyIdA === currencyIdB) {
-        router.push(`/exchange/swap/limits/${currencyIdB}/${currencyIdA}`)
+        router.push(`/exchange/swap/limit/${currencyIdB}/${currencyIdA}`)
       } else {
-        router.push(`/exchange/swap/limits/${newCurrencyIdA}/${currencyIdB}`)
+        router.push(`/exchange/swap/limit/${newCurrencyIdA}/${currencyIdB}`)
       }
     },
     [currencyIdB, router, currencyIdA]
@@ -184,12 +184,12 @@ const Limits = () => {
       const newCurrencyIdB = currencyId(currencyB)
       if (currencyIdA === newCurrencyIdB) {
         if (currencyIdB) {
-          router.push(`/exchange/swap/limits/${currencyIdB}/${newCurrencyIdB}`)
+          router.push(`/exchange/swap/limit/${currencyIdB}/${newCurrencyIdB}`)
         } else {
-          router.push(`/exchange/swap/limits/${newCurrencyIdB}`)
+          router.push(`/exchange/swap/limit/${newCurrencyIdB}`)
         }
       } else {
-        router.push(`/exchange/swap/limits/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
+        router.push(`/exchange/swap/limit/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
       }
     },
     [currencyIdA, router, currencyIdB]
@@ -499,13 +499,13 @@ const Limits = () => {
       <DoubleGlowShadowV2>
         <SwapLayoutCard>
           <div className="p-0 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-          {showHeader &&
-            <SwapDropdown
-              inputCurrency={currencyA}
-              outputCurrency={currencyB}
-              allowedSlippage={allowedSlippage}
-            />
-          }
+            {showHeader &&
+              <SwapDropdown
+                inputCurrency={currencyA}
+                outputCurrency={currencyB}
+                allowedSlippage={allowedSlippage}
+              />
+            }
 
             {/* <OrderHeader handleActiveTab={handleActiveTab} activeTab={activeTab} /> */}
             {/* <Wrapper id="limit-order-page"> */}
@@ -821,6 +821,6 @@ const Limits = () => {
   );
 }
 
-export default Limits
-Limits.Guard = NetworkGuard(Feature.LIMIT)
-Limits.Layout = SwapLayout('limit-order-page')
+export default Limit
+Limit.Guard = NetworkGuard(Feature.LIMIT)
+Limit.Layout = SwapLayout('limit-order-page')

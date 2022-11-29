@@ -73,11 +73,6 @@ module.exports = withBundleAnalyzer(
           source: '/bond',
           destination: '/bonds',
           permanent: true,
-        },        
-        {
-          source: '/enchantment',
-          destination: '/enchant',
-          permanent: true,
         },
         {
           source: '/luxor',
@@ -124,11 +119,7 @@ module.exports = withBundleAnalyzer(
         },
         {
           source: '/limit/:token*',
-          destination: '/exchange/limit/:token*',
-        },
-        {
-          source: '/aggregate',
-          destination: '/exchange/aggregate',
+          destination: '/exchange/swap/limit/:token*',
         },
         {
           source: '/aggregator',
@@ -141,10 +132,6 @@ module.exports = withBundleAnalyzer(
         {
           source: '/soulswap',
           destination: '/exchange/soulswap',
-        },
-        {
-          source: '/open-order',
-          destination: '/exchange/open-order',
         },
         {
           source: '/soul',
