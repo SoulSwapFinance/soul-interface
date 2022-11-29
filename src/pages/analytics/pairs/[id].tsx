@@ -118,15 +118,21 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
   // for links
   const token0Address = currency0?.isToken ? currency0.address : currency0?.wrapped.address
   const token1Address = currency1?.isToken ? currency1.address : currency1?.wrapped.address
+  
   const zeroIsETH = currency0?.wrapped.address == WNATIVE_ADDRESS[chainId]
   const oneIsETH = currency1?.wrapped.address == WNATIVE_ADDRESS[chainId]
+  
+  const token0Symbol = zeroIsETH ? NATIVE[chainId].symbol : currency0?.wrapped.symbol
+  const token1Symbol = oneIsETH ? NATIVE[chainId].symbol : currency1?.wrapped.symbol
+
   const containsETH = zeroIsETH || oneIsETH
-  const PAIR_URL = 
+
+  const PAIR_URL =
     containsETH && zeroIsETH
-    ? `${NATIVE[chainId].symbol}/${token1Address}` 
+      ? `${NATIVE[chainId].symbol}/${token1Address}`
       : containsETH && oneIsETH
-    ? `${NATIVE[chainId].symbol}/${token0Address}` 
-      : `${token0Address}/${token1Address}`
+        ? `${NATIVE[chainId].symbol}/${token0Address}`
+        : `${token0Address}/${token1Address}`
 
   // for info cards
   const liquidityUSDChange = pair?.reserveUSD / pair1d?.reserveUSD
@@ -175,12 +181,12 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
               size={54}
             />
             <Typography variant="h2" className="text-high-emphesis" weight={700}>
-              {pair?.token0?.symbol}-{pair?.token1?.symbol}
+              {token0Symbol}-{token1Symbol}
             </Typography>
           </div>
           <Typography variant="sm" weight={400}>
-              Dive deeper in the analytics of the {currency0.symbol}-{currency1.symbol} liquidity pool.
-            </Typography>
+            Dive deeper in the analytics of the {token0Symbol}-{token1Symbol} liquidity pool.
+          </Typography>
         </div>
       </TridentHeader>
       <div className="px-4 pt-4 space-y-4 lg:px-14">
@@ -194,7 +200,7 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <ChartCard
             header="Liquidity"
-            subheader={`${pair?.pair?.token0?.symbol}-${pair?.token1?.symbol}`}
+            subheader={`${token0Symbol}-${token1Symbol}`}
             figure={chartData.liquidity}
             change={chartData.liquidityChange}
             chart={chartData.liquidityChart}
@@ -203,7 +209,7 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
           />
           <ChartCard
             header="Volume"
-            subheader={`${pair?.token0?.symbol}-${pair?.token1?.symbol}`}
+            subheader={`${token0Symbol}-${token1Symbol}`}
             figure={chartData.volume1d}
             change={chartData.volume1dChange}
             chart={chartData.volumeChart}
@@ -268,17 +274,22 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
               <thead className="border-b border-gray-900">
                 <tr>
                   <td>
-                    {pair?.token0?.symbol}-{pair?.token1?.symbol} Address
+                    {token0Symbol}-{token1Symbol} Address
                   </td>
-                  <td>{pair?.token0?.symbol} Address</td>
-                  <td>{pair?.token1?.symbol} Address</td>
+                  <td>{token0Symbol} Address</td>
+                  <td>{token1Symbol} Address</td>
                 </tr>
               </thead>
               <tbody className="border-b border-gray-900 ">
                 <tr>
                   <td>
                     <div className="flex items-center justify-center w-11/12 space-x-1">
-                      <div className="overflow-hidden overflow-ellipsis whitespace-nowrap">{pair?.id}</div>
+                      {/* <div className="overflow-hidden overflow-ellipsis whitespace-nowrap">{pair?.id}</div> */}
+                      <Link href={`/analytics/pairs/${pair?.id}`} passHref>
+                      <div className={`overflow-hidden cursor-pointer overflow-ellipsis whitespace-nowrap text-${getChainColorCode(chainId)}`}>
+                          {pair?.id}
+                        </div>
+                      </Link>
                       <a href={getExplorerLink(chainId, pair?.id, 'token')} target="_blank" rel="noreferrer">
                         <LinkIcon size={16} />
                       </a>
@@ -287,7 +298,7 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
                   <td>
                     <div className="flex items-center w-11/12 space-x-1">
                       <Link href={`/analytics/tokens/${pair?.token0?.id}`} passHref>
-                        <div className="overflow-hidden cursor-pointer overflow-ellipsis whitespace-nowrap text-purple">
+                      <div className={`overflow-hidden cursor-pointer overflow-ellipsis whitespace-nowrap text-${getChainColorCode(chainId)}`}>
                           {pair?.token0?.id}
                         </div>
                       </Link>
@@ -299,7 +310,7 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
                   <td>
                     <div className="flex items-center w-11/12 space-x-1">
                       <Link href={`/analytics/tokens/${pair?.token1?.id}`} passHref>
-                        <div className="overflow-hidden cursor-pointer overflow-ellipsis whitespace-nowrap text-purple">
+                        <div className={`overflow-hidden cursor-pointer overflow-ellipsis whitespace-nowrap text-${getChainColorCode(chainId)}`}>
                           {pair?.token1?.id}
                         </div>
                       </Link>
