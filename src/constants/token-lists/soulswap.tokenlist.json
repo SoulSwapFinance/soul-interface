@@ -1,15 +1,12 @@
 {
   "name": "SoulSwap Token List",
-  "timestamp": "2022-11-29T01:34:21.689Z",
+  "timestamp": "2022-11-29T02:15:30.442Z",
   "version": {
     "major": 5,
     "minor": 0,
-    "patch": 7
+    "patch": 8
   },
   "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png",
-  "keywords": [
-    "soulswap", "default"
-  ],
   "tokens": [
     {
       "chainId": 1,
@@ -482,6 +479,14 @@
       "symbol": "ETH",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x74b23882a30290451A17c44f4F05243b6b58C76d/logo.png"
+    },
+    {
+      "chainId": 250,
+      "name": "ChainLink",
+      "address": "0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8",
+      "symbol": "LINK",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8/logo.png"
     },
     {
       "chainId": 250,
