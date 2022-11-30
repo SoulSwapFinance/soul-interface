@@ -601,6 +601,7 @@ const Swap = () => {
                   handleSwitchTokens(currencyA, currencyB)
                 }                >
                 <Image
+                alt={"arrow rounded square"}
                   width={'14px'}
                   height={'14px'}
                   className={`rounded rounded-xl`}
@@ -613,6 +614,7 @@ const Swap = () => {
                 onClick={handleLimitSwap}
               >
                 <Image
+                alt={"Chevron Up Down Icon"}
                   width={'14px'}
                   height={'14px'}
                   className={`rounded rounded-xl`}

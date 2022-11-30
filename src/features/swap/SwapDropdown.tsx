@@ -76,7 +76,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           }
         >
             <Typography weight={700} className={`text-secondary bg-white border mt-2 mb-2 rounded rounded-xl`}>
-            <Image src={ChevronUpDownBlack} width="24px" height="24px" />
+            <Image alt={"chevron up down black icon"}          
+            src={ChevronUpDownBlack} width="24px" height="24px" />
           </Typography>
         </NavLink>
         {featureEnabled(Feature.LIQUIDITY, chainId) &&
@@ -88,7 +89,9 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               }`}
           >
             <Typography weight={700} className={`text-secondary bg-white border mt-2 mb-2 rounded rounded-xl`}>
-            <Image src={CircleAdd} width="24px" height="24px" />
+            <Image 
+            alt={"add icon"}
+            src={CircleAdd} width="24px" height="24px" />
             </Typography>
           </NavLink>
         }
@@ -100,7 +103,9 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             href={'/bridge'}
           >
             <Typography weight={700} className={`text-secondary bg-white border mt-2 mb-2 rounded rounded-xl`}>
-              <Image src={Bridge} width="24px" height="24px" />
+              <Image 
+              alt={"bridge icon"}
+              src={Bridge} width="24px" height="24px" />
             </Typography>
           </NavLink>
         }
@@ -112,7 +117,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             href={'/cross'}
           >
             <Typography weight={700} className={`text-secondary bg-white border mt-2 mb-2 rounded rounded-xl`}>
-              <Image src={Chain} width="24px" height="24px" />
+              <Image alt={"chain icon"} src={Chain} width="24px" height="24px" />
             </Typography>
           </NavLink>
         }
