@@ -1,10 +1,13 @@
-import { Currency } from 'sdk'
+import { Currency, NATIVE } from 'sdk'
 import { selectBalancesCurrency } from 'features/portfolio/portfolioSlice'
 import { useCurrency } from 'hooks/Tokens'
 import { useSelector } from 'react-redux'
+import { useActiveWeb3React } from 'services/web3'
 
-type UseBalancesSelectedCurrency = () => Currency | undefined
+type UseBalancesSelectedCurrency = () => Currency
 export const useBalancesSelectedCurrency: UseBalancesSelectedCurrency = () => {
   const currency = useSelector(selectBalancesCurrency)
-  return useCurrency(currency) ?? undefined
+  const { chainId } = useActiveWeb3React()
+  
+  return useCurrency(currency) ?? NATIVE[chainId]
 }
