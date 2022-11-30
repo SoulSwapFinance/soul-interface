@@ -27,8 +27,8 @@ export function Toggle({ id, isActive, toggle, optionA, optionB }: ToggleProps) 
       <Switch
         checked={isActive}
         onChange={toggle}
-        className={classNames(
-          isActive ? `bg-${getChainColorCode(chainId)}` : 'bg-dark-600',
+        className={classNames(`bg-${getChainColorCode(chainId)}`,
+          isActive ? `opacity-100` : `opacity-60`,
           'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none'
         )}
       >

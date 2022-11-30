@@ -376,7 +376,7 @@ export default function Add() {
             outputCurrency={currencies[Field.CURRENCY_B]}
             allowedSlippage={allowedSlippage}
           /> */}
-          <SwapDropdown />
+          <SwapDropdown inputCurrency={currencies[Field.CURRENCY_A]} outputCurrency={currencies[Field.CURRENCY_B]} />
           <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
           <TransactionConfirmationModal
             isOpen={showConfirm}

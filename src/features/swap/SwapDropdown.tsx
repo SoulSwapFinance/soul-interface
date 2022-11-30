@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { t } from '@lingui/macro'
+// import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { ChainId, Currency, NATIVE, Percent, SOUL_ADDRESS, USDC_ADDRESS } from 'sdk'
 import NavLink from 'components/NavLink'
@@ -11,7 +11,14 @@ import { classNames, currencyId, featureEnabled } from '../../functions'
 // import ExternalLink from 'components/ExternalLink'
 import { useActiveWeb3React } from 'services/web3'
 import { Feature } from 'enums'
-import Dropdown from 'components/Subheader'
+// import Dropdown from 'components/Subheader'
+import Image from 'next/image'
+// import { Button } from 'components/Button'
+import Bridge from 'assets/svg/icons/Bridge.svg'
+import Chain from 'assets/svg/icons/Chain.svg'
+import ChevronUpDownBlack from 'assets/svg/icons/ChevronUpDownBlack.svg'
+import CircleAdd from 'assets/svg/icons/CircleAdd.svg'
+import { getChainColorCode } from 'constants/chains'
 
 const getQuery = (input?: Currency, output?: Currency) => {
   const { chainId } = useActiveWeb3React()
@@ -34,55 +41,81 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const { asPath } = useRouter()
   const { chainId } = useActiveWeb3React()
   const isRemove = asPath.startsWith('/remove')
+  // const tokenA = inputCurrency
+  // const tokenB = outputCurrency
   // const isCrossChain = asPath.startsWith('/swap')
-  const isSwap = asPath.startsWith('/exchange/swap') || asPath.startsWith('/swap') 
-  || asPath.startsWith('/limit') || asPath.startsWith('exchange/limit') 
-  || asPath.startsWith('/add') || asPath.startsWith('exchange/add') 
-  || asPath.startsWith('/remove') || asPath.startsWith('exchange/remove')
+  const isSwap = asPath.startsWith('/exchange/swap') || asPath.startsWith('/swap')
+    || asPath.startsWith('/limit') || asPath.startsWith('exchange/limit')
+    || asPath.startsWith('/add') || asPath.startsWith('exchange/add')
+    || asPath.startsWith('/remove') || asPath.startsWith('exchange/remove')
 
+  const soulEnabled = [ChainId.FANTOM, ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId)
   const chainColor
-    = chainId == ChainId.FANTOM ? `border-[#1969FF] text-[#1969FF]`
-      : chainId == ChainId.AVALANCHE ? `border-[#E84142] text-[#E84142]`
-        : chainId == ChainId.ETHEREUM ? `border-[#627EEA] text-[#627EEA]`
-          : chainId == ChainId.BSC ? `border-[#F0B90B] text-[#F0B90B]`
-            : chainId == ChainId.MATIC ? `border-[#8247E5] text-[#8247E5]`
-              : chainId == ChainId.MOONRIVER ? `border-[#53CBC9] text-[#53CBC9]`
-                : `border-[#1969FF] text-[#1969FF]`
+    = chainId == ChainId.FANTOM ? `border-[#1969FF`
+      : chainId == ChainId.AVALANCHE ? `border-[#E84142]`
+        : chainId == ChainId.ETHEREUM ? `border-[#627EEA]`
+          : chainId == ChainId.BSC ? `border-[#F0B90B]`
+            : chainId == ChainId.MATIC ? `border-[#8247E5]`
+              : chainId == ChainId.MOONRIVER ? `border-[#53CBC9]`
+                : `border-[#1969FF]`
   const hoverColor = `${chainColor} hover:text-white`
+  const activeNavLink = `border rounded text-white -mt-1 border-${getChainColorCode(chainId)}`
+  const typographyStyle = `border rounded rounded-xl ${chainColor} bg-${getChainColorCode(chainId)}`
+ 
   return (
     <div className="flex items-center justify-between gap-2">
-      <div className="flex gap-1 mx-1">
-      {featureEnabled(Feature.SWAP, chainId) &&
-          // <NavLink
-          //   activeClassName={classNames(
-          //     "border rounded bg-black",
-          //     chainColor
-          //   )}
-          //   href={{
-          //     pathname: '/swap',
-          //     query: getQuery(inputCurrency, outputCurrency),
-          //   }}
-          // >
-          //   <Typography weight={700} className={`text-secondary ml-3 hover:${hoverColor} p-1`}>
-          //     {i18n._(t`Swap`)}
-          //   </Typography>
-          // </NavLink>
-        <Dropdown />
-        }
-        {/* {featureEnabled(Feature.LIQUIDITY, chainId) &&
+      <div className="flex gap-2 mx-1">
+        <NavLink
+          activeClassName={classNames(
+            activeNavLink          
+          )}
+          href={
+            inputCurrency && outputCurrency ?
+              `/exchange/swap?inputCurrency=${currencyId(inputCurrency)}&outputCurrency=${currencyId(outputCurrency)}`
+              : `/exchange/swap?inputCurrency=${NATIVE[chainId].symbol}&outputCurrency=${soulEnabled ? SOUL_ADDRESS[chainId] : USDC_ADDRESS[chainId]}`
+          }
+        >
+            <Typography weight={700} className={`text-secondary bg-white border mt-2 mb-2 rounded rounded-xl`}>
+            <Image src={ChevronUpDownBlack} width="24px" height="24px" />
+          </Typography>
+        </NavLink>
+        {featureEnabled(Feature.LIQUIDITY, chainId) &&
           <NavLink
             activeClassName={classNames(
-              "border rounded bg-black",
-              chainColor
+              activeNavLink
             )}
-            href={`/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
+            href={`/exchange/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
               }`}
           >
-            <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-              {i18n._(t`+/-`)}
+            <Typography weight={700} className={`text-secondary bg-white border mt-2 mb-2 rounded rounded-xl`}>
+            <Image src={CircleAdd} width="24px" height="24px" />
             </Typography>
           </NavLink>
-        } */}
+        }
+        {featureEnabled(Feature.LIQUIDITY, chainId) &&
+          <NavLink
+            activeClassName={classNames(
+              activeNavLink
+            )}
+            href={'/bridge'}
+          >
+            <Typography weight={700} className={`text-secondary bg-white border mt-2 mb-2 rounded rounded-xl`}>
+              <Image src={Bridge} width="24px" height="24px" />
+            </Typography>
+          </NavLink>
+        }
+        {featureEnabled(Feature.LIQUIDITY, chainId) &&
+          <NavLink
+            activeClassName={classNames(
+              activeNavLink
+            )}
+            href={'/cross'}
+          >
+            <Typography weight={700} className={`text-secondary bg-white border mt-2 mb-2 rounded rounded-xl`}>
+              <Image src={Chain} width="24px" height="24px" />
+            </Typography>
+          </NavLink>
+        }
         {/* {featureEnabled(Feature.LIMIT, chainId) &&
           <NavLink
             activeClassName={classNames(
@@ -159,9 +192,9 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
         </NavLink>
         } */}
       </div>
-        <div className={'flex flex-cols-2 sm:gap-8 gap-6 mr-4 justify-end rounded'}>
-          {isSwap && <Settings />}
-        </div>
+      <div className={'flex flex-cols-2 sm:gap-8 gap-6 mr-4 justify-end rounded'}>
+        {isSwap && <Settings />}
+      </div>
     </div>
   )
 }

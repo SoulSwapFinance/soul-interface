@@ -32,8 +32,8 @@ const Portfolio = () => {
         <HeaderDropdown account={account} />
       </TridentHeader>
       <TridentBody className="flex flex-col gap-10 lg:grid grid-cols-2 lg:gap-4">
-       {/* <UnderworldLent />
-        <UnderworldCollateral /> */}
+       <UnderworldLent />
+        <UnderworldCollateral />
         <WalletBalances chainId={chainId} account={account} />
         <CoffinBalances account={account} />
       </TridentBody>
