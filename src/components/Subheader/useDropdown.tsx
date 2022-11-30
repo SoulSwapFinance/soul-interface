@@ -2,7 +2,7 @@ import React, { ReactNode, useMemo } from 'react'
 import { GlobeIcon, SwitchVerticalIcon, LinkIcon, SparklesIcon, TrendingUpIcon, PresentationChartLineIcon, SunIcon, CurrencyDollarIcon, UserGroupIcon, SwitchHorizontalIcon } from '@heroicons/react/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, NATIVE, SOUL_ADDRESS } from 'sdk'
+import { Currency, NATIVE, SOUL_ADDRESS } from 'sdk'
 import { PoolIcon, WalletIcon } from 'components/Icon'
 import { Feature } from 'enums'
 import { classNames, featureEnabled } from 'functions'
@@ -27,15 +27,35 @@ export interface DropdownItemNode {
 
 export type BarItem = DropdownItemLeaf | DropdownItemNode
 export type Bar = BarItem[]
+// interface HeaderProps {
+//   inputCurrency?: Currency
+//   outputCurrency?: Currency
+//   allowedSlippage?: Percent
+// }
+
+const getQuery = (input?: Currency, output?: Currency) => {
+  const { chainId } = useActiveWeb3React()
+  if (!input && !output) return
+  if (input && !output) {
+    return { inputCurrency: input || NATIVE[chainId].symbol }
+  } else if (input && output) {
+    return { inputCurrency: input, outputCurrency: output }
+  }
+}
 
 type UseDropdown = () => Bar
 const useMenu: UseDropdown = () => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
-  const router = useRouter()
-  const isLuxor = router.asPath.startsWith('/luxor')
+  // const router = useRouter()
+  const { asPath } = useRouter()
+  const isRemove = asPath.startsWith('/remove')
+  // const isCrossChain = asPath.startsWith('/swap')
+  const isSwap = asPath.startsWith('/exchange') || asPath.startsWith('/swap') 
+  || asPath.startsWith('/limit') || asPath.startsWith('/add') || asPath.startsWith('/remove')
+  // const query = getQuery(inputCurrency, outputCurrency)
 
-  return useMemo(() => {
+return useMemo(() => {
     if (!chainId) return []
 
     // By default show just a swap button
@@ -85,18 +105,19 @@ if (featureEnabled(Feature.LIQUIDITY, chainId)) {
     key: 'liquidity',
     title: i18n._(t`Liquidity`),
     icon: <PoolIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
-    items: [
-      {
-        key: 'pool',
-        title: i18n._(t`Pool`),
-        link: `/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
-      },
-      {
-        key: 'import',
-        title: i18n._(t`Import`),
-        link: '/find',
-      },
-    ],
+    link: `/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
+    // items: [
+    //   {
+    //     key: 'pool',
+    //     title: i18n._(t`Pool`),
+    //     link: `/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
+    //   },
+    //   {
+    //     key: 'import',
+    //     title: i18n._(t`Import`),
+    //     link: '/find',
+    //   },
+    // ],
   }
 }
 
