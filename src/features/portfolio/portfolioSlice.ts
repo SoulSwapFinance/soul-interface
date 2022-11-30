@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Currency } from 'sdk'
 import { AppState } from 'state'
 
 import { ActiveModal } from '../trident/types'
 
 export interface BalancesState {
-  currency?: string
+  currency?: Currency
   activeModal: ActiveModal | undefined
   modalOpen: boolean
 }
