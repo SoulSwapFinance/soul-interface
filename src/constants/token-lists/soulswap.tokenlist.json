@@ -514,6 +514,14 @@
     },
     {
       "chainId": 250,
+      "name": "Oath Token",
+      "address": "0x21Ada0D2aC28C3A5Fa3cD2eE30882dA8812279B6",
+      "symbol": "OATH",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x21Ada0D2aC28C3A5Fa3cD2eE30882dA8812279B6/logo.png"
+    },  
+    {
+      "chainId": 250,
       "name": "Soul Power",
       "address": "0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07",
       "symbol": "SOUL",
