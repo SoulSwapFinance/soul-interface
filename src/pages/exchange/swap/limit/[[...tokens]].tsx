@@ -550,6 +550,7 @@ const Limit = () => {
                     >
                       <Image
                         width={'14px'}
+                        alt={"multiply sign"}
                         height={'14px'}
                         className={`rounded rounded-xl`}
                         src={Multiply}
@@ -562,6 +563,7 @@ const Limit = () => {
                       onClick={handleSetSwap}
                     >
                       <Image
+                      alt={"divide icon"}
                         width={'14px'}
                         height={'14px'}
                         className={`rounded rounded-xl`}
@@ -610,6 +612,7 @@ const Limit = () => {
                   // onClick={handleSwitch(currencyA, currencyB)}
                   >
                     <Image
+                    alt={"chevron down icon"}
                       width={'14px'}
                       height={'14px'}
                       className={`rounded rounded-xl`}
@@ -622,6 +625,7 @@ const Limit = () => {
                     onClick={handleSetSwap}
                   >
                     <Image
+                    alt={"Chevron double up icon"}
                       width={'14px'}
                       height={'14px'}
                       className={`rounded rounded-xl`}
