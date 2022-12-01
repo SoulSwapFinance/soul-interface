@@ -1,5 +1,6 @@
 export enum Feature {
   AMM = 'AMM',
+  BRIDGE = 'Bridge',
   SWAP = 'Exchange',
   SEANCE = 'Seance',
   VAULT = 'AutoStake Vault',

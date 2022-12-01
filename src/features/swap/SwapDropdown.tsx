@@ -14,10 +14,10 @@ import { Feature } from 'enums'
 // import Dropdown from 'components/Subheader'
 import Image from 'next/image'
 // import { Button } from 'components/Button'
-import Bridge from 'assets/svg/icons/Bridge.svg'
+import Globe from 'assets/svg/icons/Globe.svg'
 import Chain from 'assets/svg/icons/Chain.svg'
-import ChevronUpDownBlack from 'assets/svg/icons/ChevronUpDownBlack.svg'
-import CircleAdd from 'assets/svg/icons/CircleAdd.svg'
+import ChevronUpDown from 'assets/svg/icons/ChevronUpDown.svg'
+import PlusSign from 'assets/svg/icons/PlusSign.svg'
 import { getChainColorCode } from 'constants/chains'
 
 const getQuery = (input?: Currency, output?: Currency) => {
@@ -75,9 +75,9 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               : `/exchange/swap?inputCurrency=${NATIVE[chainId].symbol}&outputCurrency=${soulEnabled ? SOUL_ADDRESS[chainId] : USDC_ADDRESS[chainId]}`
           }
         >
-            <Typography weight={700} className={`text-secondary bg-white border mt-2 mb-2 rounded rounded-xl`}>
-            <Image alt={"chevron up down black icon"}          
-            src={ChevronUpDownBlack} width="24px" height="24px" />
+            <Typography weight={700} className={`text-secondary bg-${getChainColorCode(chainId)} mt-4 mb-2 rounded rounded-xl`}>
+            <Image className={"mt-2"} alt={"chevron up down black icon"}          
+            src={ChevronUpDown}  />
           </Typography>
         </NavLink>
         {featureEnabled(Feature.LIQUIDITY, chainId) &&
@@ -88,24 +88,24 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             href={`/exchange/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
               }`}
           >
-            <Typography weight={700} className={`text-secondary bg-white border mt-2 mb-2 rounded rounded-xl`}>
+            <Typography weight={700} className={`text-secondary bg-${getChainColorCode(chainId)} mt-4 mb-2 rounded rounded-xl`}>
             <Image 
             alt={"add icon"}
-            src={CircleAdd} width="24px" height="24px" />
+            src={PlusSign} />
             </Typography>
           </NavLink>
         }
-        {featureEnabled(Feature.LIQUIDITY, chainId) &&
+        {featureEnabled(Feature.BRIDGE, chainId) &&
           <NavLink
             activeClassName={classNames(
               activeNavLink
             )}
             href={'/bridge'}
           >
-            <Typography weight={700} className={`text-secondary bg-white border mt-2 mb-2 rounded rounded-xl`}>
+            <Typography weight={700} className={`text-secondary bg-${getChainColorCode(chainId)} mt-4 mb-2 rounded rounded-xl`}>
               <Image 
               alt={"bridge icon"}
-              src={Bridge} width="24px" height="24px" />
+              src={Globe} />
             </Typography>
           </NavLink>
         }
@@ -116,8 +116,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             )}
             href={'/cross'}
           >
-            <Typography weight={700} className={`text-secondary bg-white border mt-2 mb-2 rounded rounded-xl`}>
-              <Image alt={"chain icon"} src={Chain} width="24px" height="24px" />
+            <Typography weight={700} className={`text-secondary bg-${getChainColorCode(chainId)} mt-4 mb-2 rounded rounded-xl`}>
+              <Image alt={"chain icon"} src={Chain} />
             </Typography>
           </NavLink>
         }
@@ -164,7 +164,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           }}
         >
           <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-            {i18n._(t`Bridge`)}
+            {i18n._(t`Globe`)}
           </Typography>
         </NavLink> */}
         {/* } */}
