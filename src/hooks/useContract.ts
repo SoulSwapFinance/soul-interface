@@ -160,6 +160,24 @@ export function useEIP2612Contract(tokenAddress?: string): Contract | null {
   return useContract(tokenAddress, EIP_2612_ABI, false)
 }
 
+const MULTICALL_ADDRESS = {
+  [ChainId.ETHEREUM]: '0x1F98415757620B543A52E61c46B32eB19261F984',
+  // [ChainId.GÖRLI]: '0x1F98415757620B543A52E61c46B32eB19261F984',
+  [ChainId.MATIC]: '0x1F98415757620B543A52E61c46B32eB19261F984',
+  [ChainId.ARBITRUM]: '0xadF885960B47eA2CD9B55E6DAc6B42b7Cb2806dB',
+  [ChainId.AVALANCHE]: '0x8C0F842791F03C095b6c633759224FcC9ACe68ea',
+  [ChainId.BSC]: '0x47A307e3167820daf22a377D777371753758f59c',
+  [ChainId.FANTOM]: '0xB1395e098c0a847CC719Bcf1Fc8114421a9F8232',
+  [ChainId.MOONRIVER]: '0x8C8BF5Dea280A1eC68219D66E8A21E60585830F5',
+  [ChainId.TELOS]: '0x64e1E895866B3126f8f2E2912B475FDB35b2F315'
+}
+
+
+export function useInterfaceMulticall(): Contract | null | undefined {
+  const { chainId } = useActiveWeb3React()
+  return useContract(MULTICALL_ADDRESS[chainId], MULTICALL_ABI, false)
+}
+
 // returns null on errors
 export function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
   const { library, account } = useActiveWeb3React()

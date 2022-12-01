@@ -17,7 +17,7 @@ import { ERC20_ABI } from "constants/abis/erc20";
 import { useActiveWeb3React } from "services/web3";
 // import { useUserInfo } from "hooks/useAPI";
 import { Button } from "components/Button";
-import { useNetworkModalToggle } from "state/application/hooks";
+// import { useNetworkModalToggle } from "state/application/hooks";
 import { Input, OverlayButton } from "components/index";
 import Typography from "components/Typography";
 import { formatNumber, formatPercent } from "functions/format";
@@ -288,7 +288,7 @@ export default function Exchange() {
   const deltaUsd = Number(fromUsd) > Number(toUsd)
     ? Number(fromUsd) - Number(toUsd) : 0
   const deltaPercent = 100 * deltaUsd / Number(fromUsd)
-  const toggleNetworkModal = useNetworkModalToggle()
+  // const toggleNetworkModal = useNetworkModalToggle()
   const wrongNetwork = fromChain?.chainId != chainId ? true
     : false
   const sameNetworkError = fromChain?.chainId == toChain.chainId ? true : false
@@ -354,7 +354,7 @@ export default function Exchange() {
                 {wrongNetwork &&
                   <div
                     className="grid grid-cols-2 items-center border-4 rounded border-dark-1000 bg-dark-1000 hover:bg-dark-900 whitespace-nowrap text-md justify-center font-bold cursor-pointer select-none pointer-events-auto"
-                    onClick={() => toggleNetworkModal()}
+                    // onClick={() => toggleNetworkModal()}
                   >
                     <div
                       className
@@ -380,7 +380,7 @@ export default function Exchange() {
                       // style={{ backgroundColor: fromChain.color }}
                       width="42" height="42"
                     />
-                    <NetworkModal />
+                    <NetworkModal switchNetwork={() => fromChain.chainId} />
                     {/* {NETWORK_LABEL[chainId]} */}
                   </div>
                 }

@@ -11,7 +11,9 @@ import Image from '../../components/Image'
 import Search from '../../components/Search'
 import { LAUNCHPAD_PROJECTS, PROJECT_STATUS } from '../../constants/launchpad'
 import { SoulLaunchpad } from '../../features/launchpad/SoulLaunchpad'
-import { useBlockNumber, useTimestampFromBlock } from '../../state/application/hooks'
+import { useBlockNumber } from 'state/application/hooks'
+import { useTimestampFromBlock } from 'hooks/useTimestampFromBlock'
+
 import { useFuse } from '../../hooks'
 
 export default function Launchpad(): JSX.Element {
