@@ -20,13 +20,15 @@ import { SoulLaunchpad } from '../../../features/launchpad/SoulLaunchpad'
 import { AboutProjectTab } from '../../../features/launchpad/AboutProjectTab'
 import { ProjectHero } from '../../../features/launchpad/ProjectHero'
 import { useLaunchpad, useLaunchInfo, useLaunchPools, useLaunchpadUserInfo } from '../../../features/launchpad/hooks'
-import { useBlockNumber, useTimestampFromBlock } from '../../../state/application/hooks'
+import { useBlockNumber } from 'state/application/hooks'
+
 import { useV2PairsWithPrice } from '../../../hooks/useV2Pairs'
 import { useCurrencyBalance } from '../../../state/wallet/hooks'
 import { useTransactionAdder } from '../../../state/transactions/hooks'
 import { CurrencyAmount } from '../../../sdk'
 import { BigNumber } from '@ethersproject/bignumber'
 import { useActiveWeb3React } from 'services/web3'
+import { useTimestampFromBlock } from 'hooks/useTimestampFromBlock'
 
 const Menu = ({ children }) => {
   return (

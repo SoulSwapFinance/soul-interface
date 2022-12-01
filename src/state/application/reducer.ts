@@ -1,18 +1,39 @@
-import { createReducer, nanoid } from '@reduxjs/toolkit'
+import { createSlice, nanoid } from '@reduxjs/toolkit'
+import { TokenList } from '@uniswap/token-lists'
+import { DEFAULT_TXN_DISMISS_MS } from 'constants/index'
 
-import {
-  addPopup,
-  ApplicationModal,
-  PopupContent,
-  removePopup,
-  setChainConnectivityWarning,
-  setImplements3085,
-  setUnderworldApprovalPending,
-  setOpenModal,
-  updateBlockNumber,
-  updateBlockTimestamp,
-  updateChainId,
-} from './actions'
+export type PopupContent =
+  | {
+      txn: {
+        hash: string
+        success?: boolean
+        summary?: string
+      }
+    }
+  | {
+      listUpdate: {
+        listUrl: string
+        oldList: TokenList
+        newList: TokenList
+        auto: boolean
+      }
+    }
+
+export enum ApplicationModal {
+  WALLET,
+  SETTINGS,
+  SELF_CLAIM,
+  ADDRESS_CLAIM,
+  CROSSCHAIN,
+  CLAIM_POPUP,
+  MENU,
+  DELEGATE,
+  VOTE,
+  SOUL_STATS,
+  LUXOR_STATS,
+  LANGUAGE,
+  NETWORK,
+}
 
 type PopupList = Array<{
   key: string
@@ -43,40 +64,42 @@ const initialState: ApplicationState = {
   underworldApprovalPending: '',
 }
 
-export default createReducer(initialState, (builder) =>
-  builder
-    .addCase(updateBlockNumber, (state, action) => {
-      const { chainId, blockNumber } = action.payload
-      if (typeof state.blockNumber[chainId] !== 'number') {
-        state.blockNumber[chainId] = blockNumber
-      } else {
-        state.blockNumber[chainId] = Math.max(blockNumber, state.blockNumber[chainId])
-      }
-    })
-    .addCase(updateBlockTimestamp, (state, action) => {
+const applicationSlice = createSlice({
+  name: 'application',
+  initialState,
+  reducers: {
+    updateChainId(state, action) {
+      const { chainId } = action.payload
+      state.chainId = chainId
+    },
+    updateBlockTimestamp(state, action) {
       const { chainId, blockTimestamp } = action.payload
       if (typeof state.blockTimestamp[chainId] !== 'number') {
         state.blockTimestamp[chainId] = blockTimestamp
       } else {
         state.blockTimestamp[chainId] = Math.max(blockTimestamp, state.blockTimestamp[chainId])
       }
-    })
-    .addCase(updateChainId, (state, action) => {
-      const { chainId } = action.payload
-      state.chainId = chainId
-    })
-    .addCase(setChainConnectivityWarning, (state, action) => {
-      const { chainConnectivityWarning } = action.payload
-      state.chainConnectivityWarning = chainConnectivityWarning
-    })
-    .addCase(setImplements3085, (state, action) => {
+    },
+    updateBlockNumber(state, action) {
+      const { chainId, blockNumber } = action.payload
+      if (typeof state.blockNumber[chainId] !== 'number') {
+        state.blockNumber[chainId] = blockNumber
+      } else {
+        state.blockNumber[chainId] = Math.max(blockNumber, state.blockNumber[chainId])
+      }
+    },
+    setChainConnectivityWarning(state, action) {
       const { implements3085 } = action.payload
       state.implements3085 = implements3085
-    })
-    .addCase(setOpenModal, (state, action) => {
+    },
+    setImplements3085(state, action) {
+      const { chainConnectivityWarning } = action.payload
+      state.chainConnectivityWarning = chainConnectivityWarning
+    },
+    setOpenModal(state, action) {
       state.openModal = action.payload
-    })
-    .addCase(addPopup, (state, { payload: { content, key, removeAfterMs = 15000 } }) => {
+    },
+    addPopup(state, { payload: { content, key, removeAfterMs = DEFAULT_TXN_DISMISS_MS } }) {
       state.popupList = (key ? state.popupList.filter((popup) => popup.key !== key) : state.popupList).concat([
         {
           key: key || nanoid(),
@@ -85,15 +108,19 @@ export default createReducer(initialState, (builder) =>
           removeAfterMs,
         },
       ])
-    })
-    .addCase(removePopup, (state, { payload: { key } }) => {
+    },
+    removePopup(state, { payload: { key } }) {
       state.popupList.forEach((p) => {
         if (p.key === key) {
           p.show = false
         }
       })
-    })
-    .addCase(setUnderworldApprovalPending, (state, action) => {
+    },
+    setUnderworldApprovalPending(state, action) {
       state.underworldApprovalPending = action.payload
-    })
-)
+    },
+  },
+})
+
+export const { updateChainId, setOpenModal, addPopup, removePopup, setUnderworldApprovalPending } = applicationSlice.actions
+export default applicationSlice.reducer
