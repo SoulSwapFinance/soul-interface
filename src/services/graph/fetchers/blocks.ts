@@ -1,4 +1,4 @@
-import { getUnixTime, startOfHour, startOfMinute, startOfSecond, subDays, subHours } from 'date-fns'
+import { addSeconds, getUnixTime, startOfHour, startOfMinute, startOfSecond, subDays, subHours } from 'date-fns'
 
 import { ChainId } from '../../../sdk'
 import { GRAPH_HOST } from '../constants'
@@ -34,6 +34,23 @@ export const getBlocks = async (chainId = ChainId.FANTOM, variables) => {
   const { blocks } = await fetcher(chainId, blocksQuery, variables)
   return blocks
 }
+
+// @ts-ignore TYPE NEEDS FIXING
+export const getBlockDaysAgo = async (chainId = ChainId.ETHEREUM, days) => {
+  const date = startOfSecond(startOfMinute(startOfHour(subDays(Date.now(), days))))
+  const start = getUnixTime(date)
+  const end = getUnixTime(addSeconds(date, 600))
+
+  const { blocks } = await fetcher(chainId, blockQuery, {
+    where: {
+      timestamp_gt: start,
+      timestamp_lt: end,
+    },
+  } as any)
+
+  return { number: Number(blocks?.[0]?.number) }
+}
+
 
 // @ts-ignore TYPE NEEDS FIXING
 export const getMassBlocks = async (chainId = ChainId.FANTOM, timestamps) => {
