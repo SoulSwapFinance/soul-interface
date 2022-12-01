@@ -807,7 +807,26 @@ const Limit = () => {
               </BottomGrouping>
             </AutoColumn>
             {/* </Wrapper> */}
-
+            <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
+              <Toggle
+                id="toggle-button"
+                optionA="Orders"
+                optionB="Orders"
+                isActive={showOrders}
+                toggle={
+                  showOrders
+                    ? () => {
+                      setShowOrders(false)
+                    }
+                    : () => {
+                      setShowOrders(true)
+                    }
+                }
+              />
+            </div>
+            {showOrders &&
+            <GelatoLimitOrdersHistoryPanel />
+            }
             {!swapIsUnsupported ? null : (
               <UnsupportedCurrencyFooter
                 show={swapIsUnsupported}

@@ -832,23 +832,6 @@ const Swap = () => {
                 }
               />
             </div>
-            <div className={classNames(useLimit ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}>
-              <Toggle
-                id="toggle-button"
-                optionA="Orders"
-                optionB="Orders"
-                isActive={showOrders}
-                toggle={
-                  showOrders
-                    ? () => {
-                      setShowOrders(false)
-                    }
-                    : () => {
-                      setShowOrders(true)
-                    }
-                }
-              />
-            </div>
             <div className={classNames(!useLimit && !useAggregator ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}>
               <Toggle
                 id="toggle-button"
@@ -867,10 +850,6 @@ const Swap = () => {
               />
             </div>
           </div>
-
-          {useLimit && showOrders && !useAggregator &&
-            <GelatoLimitOrdersHistoryPanel />
-          }
           {/* {inputToken && outputToken && (
 					<SwapLayoutCard>
 						<Container>
