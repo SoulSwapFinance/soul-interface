@@ -1,6 +1,6 @@
 import React from 'react'
-import { useModalOpen, useToggleTokenStatsModal } from 'state/application/hooks'
-import { ApplicationModal } from 'state/application/actions'
+import { useModalOpen, useToggleModal, useToggleTokenStatsModal } from 'state/application/hooks'
+import  { ApplicationModal } from 'state/application/reducer'
 import Image from 'next/image'
 import Typography from 'components/Typography'
 import { useBondInfo, useTokenInfo } from 'hooks/useAPI'

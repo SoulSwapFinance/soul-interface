@@ -1,13 +1,14 @@
 import React from 'react'
 import Image from 'next/image'
 import TokensStatsModal from 'modals/TokensStatsModal'
-import { useToggleTokenStatsModal } from 'state/application/hooks'
+import { useModalOpen, useToggleTokenStatsModal } from 'state/application/hooks'
 import styled from 'styled-components'
 import { useActiveWeb3React } from 'services/web3'
 import { useSoulPrice } from 'hooks/getPrices'
 import { formatNumber } from 'functions/format'
 import { SOUL_ADDRESS } from 'sdk'
 import { useTokenInfo } from 'hooks/useAPI'
+import  { ApplicationModal } from 'state/application/reducer'
 
 const HideOnMobile = styled.div`
 @media screen and (max-width: 500px) {
@@ -18,7 +19,7 @@ const HideOnMobile = styled.div`
 function TokenStats(): JSX.Element | null {
   const { chainId } = useActiveWeb3React()
   const toggleTokenStatsModal = useToggleTokenStatsModal()
-  // const open = useModalOpen(ApplicationModal.SOUL_STATS)
+  const open = useModalOpen(ApplicationModal.SOUL_STATS)
   const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
   // const seancePrice = useSeancePrice()
 

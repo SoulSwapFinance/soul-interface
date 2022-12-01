@@ -851,11 +851,11 @@ msgstr "MAX"
 msgid "Manage"
 msgstr "Manage"
 
+msgid "Manage Pool"
+msgstr "Manage Pool"
+
 msgid "Manage Token Lists"
 msgstr "Manage Token Lists"
-
-msgid "Manage this pool"
-msgstr "Manage this pool"
 
 msgid "Markets"
 msgstr "Markets"
@@ -1017,9 +1017,6 @@ msgstr "Please type the word \"confirm\" to {0} and withdraw your tokens after 1
 msgid "Pool"
 msgstr "Pool"
 
-msgid "Pool Found!"
-msgstr "Pool Found!"
-
 msgid "Pool Tokens"
 msgstr "Pool Tokens"
 
@@ -1050,9 +1047,6 @@ msgstr "Price Impact"
 
 msgid "Price Impact High"
 msgstr "Price Impact High"
-
-msgid "Price Impact Too High"
-msgstr "Price Impact Too High"
 
 msgid "Price Updated"
 msgstr "Price Updated"
@@ -1191,6 +1185,9 @@ msgstr "Select Asset"
 
 msgid "Select Collateral"
 msgstr "Select Collateral"
+
+msgid "Select Network"
+msgstr "Select Network"
 
 msgid "Select Order Expiration"
 msgstr "Select Order Expiration"
