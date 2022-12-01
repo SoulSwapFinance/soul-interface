@@ -1,7 +1,7 @@
 import { ChainId } from 'sdk'
 import { getBlockDaysAgo, getDayData, getFactory } from 'services/graph'
 
-export type AnalyticsDashboard = Awaited<ReturnType<typeof getAnalyticsDashboard>>
+// export type AnalyticsDashboard = Awaited<ReturnType<typeof getAnalyticsDashboard>>
 
 interface getAnalyticsDashboardProps {
   chainId: ChainId

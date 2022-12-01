@@ -846,10 +846,10 @@ msgstr ""
 msgid "Manage"
 msgstr ""
 
-msgid "Manage Token Lists"
+msgid "Manage Pool"
 msgstr ""
 
-msgid "Manage this pool"
+msgid "Manage Token Lists"
 msgstr ""
 
 msgid "Markets"
@@ -1010,9 +1010,6 @@ msgstr ""
 msgid "Pool"
 msgstr ""
 
-msgid "Pool Found!"
-msgstr ""
-
 msgid "Pool Tokens"
 msgstr ""
 
@@ -1040,9 +1037,6 @@ msgid "Price Impact"
 msgstr ""
 
 msgid "Price Impact High"
-msgstr ""
-
-msgid "Price Impact Too High"
 msgstr ""
 
 msgid "Price Updated"
@@ -1181,6 +1175,9 @@ msgid "Select Asset"
 msgstr ""
 
 msgid "Select Collateral"
+msgstr ""
+
+msgid "Select Network"
 msgstr ""
 
 msgid "Select Order Expiration"
