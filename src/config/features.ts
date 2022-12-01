@@ -9,6 +9,7 @@ const features: FeatureMap = {
     Feature.SWAP,
     Feature.LIQUIDITY,
     Feature.AGGREGATE,
+    Feature.BRIDGE,
     // Feature.ANALYTICS,
     // Feature.LIQUIDITY_MINING,
     // Feature.COFFINBOX,
@@ -26,6 +27,7 @@ const features: FeatureMap = {
 
   [ChainId.MOONRIVER]: [
     Feature.AMM,
+    Feature.BRIDGE,
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD
   ],
@@ -33,12 +35,13 @@ const features: FeatureMap = {
   [ChainId.MATIC]: [
     Feature.AMM,
     Feature.AGGREGATE,
+    Feature.BRIDGE,
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD
   ],
 
   [ChainId.ARBITRUM]: [
-    Feature.AMM, 
+    Feature.AMM,
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD
   ],
@@ -47,12 +50,14 @@ const features: FeatureMap = {
     Feature.AMM, 
     Feature.ANALYTICS,
     Feature.AGGREGATE,
+    Feature.BRIDGE,
     // Feature.UNDERWORLD
   ],
 
   [ChainId.AVALANCHE]: [
     Feature.AMM,
     Feature.SWAP,
+    Feature.BRIDGE,
     Feature.ANALYTICS,
     Feature.LIQUIDITY,
     Feature.LIQUIDITY_MINING,
@@ -67,6 +72,7 @@ const features: FeatureMap = {
 
   [ChainId.FANTOM]: [
     Feature.AMM,
+    Feature.BRIDGE,
     Feature.SWAP,
     Feature.SEANCE,
     Feature.VAULT,

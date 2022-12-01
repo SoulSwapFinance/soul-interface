@@ -54,7 +54,7 @@ const Desktop: FC = () => {
         <div className="flex justify-between flex-grow">
           <div className="p-1 bg-dark-900 rounded-full hover:bg-dark-800">
             {/* <div className="flex p-2 justify-between"> */}
-            <MenuAlt1Icon width={24} className={classNames( [1, 250, 43114].includes(chainId) ? 'text-white cursor-pointer' : 'hidden' )} onClick={() => setOpen(true)} />
+            <MenuAlt1Icon width={24} className={classNames([1, 250, 43114].includes(chainId) ? 'text-white cursor-pointer' : 'hidden')} onClick={() => setOpen(true)} />
           </div>
           {/* <div className="flex w-6 mr-4 items-center">
                   <NavLink href="/landing">
@@ -69,16 +69,16 @@ const Desktop: FC = () => {
               before:backdrop-blur-[20px] before:z-[-1] \
               before:absolute before:w-full before:h-full \
               border-b border-${getChainColorCode(chainId)} mx-4`)
-              }>
-              <Container maxWidth="3xl" className="rounded rounded-4xl text-center items-center justify-center">
+          }>
+          <Container maxWidth="3xl" className="rounded rounded-4xl text-center items-center justify-center">
             <div
               className="flex gap-1 px-1 sm:gap-4 md:gap-18 justify-left items-center">
               {menu.map((node) => {
-                return <NavigationItem node={node} key={node.key} /> 
+                return <NavigationItem node={node} key={node.key} />
               })}
               {/* <LanguageSwitch /> */}
             </div>
-            </Container>
+          </Container>
         </nav>
         {/* <NavLink
           href="/landing"
@@ -90,9 +90,9 @@ const Desktop: FC = () => {
           />
         </NavLink> */}
 
-        <Transition.Root 
-          show={open} 
-            as={Fragment}>
+        <Transition.Root
+          show={open}
+          as={Fragment}>
           <Dialog as="div" className={classNames("fixed inset-0 overflow-hidden z-20")} onClose={setOpen}>
             <div className="absolute inset-0 overflow-hidden">
               <Transition.Child
@@ -121,8 +121,8 @@ const Desktop: FC = () => {
                   <div className="w-screen max-w-sm">
                     <div className={classNames("flex flex-col h-full py-1 overflow-x-hidden overflow-y-scroll shadow-xl",
                       "bg-dark-1100")}>
-                      <nav className 
-                        = {classNames( "flex-1 py-12 bg-dark-1000 pl-6" )} aria-label="Sidebar">
+                      <nav className
+                        ={classNames("flex-1 py-12 bg-dark-1000 pl-6")} aria-label="Sidebar">
                         {bar.map((node) => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
@@ -140,9 +140,6 @@ const Desktop: FC = () => {
                             <Web3Status />
                           </div>, */}
                       </div>
-                      <div className="cols w-full flex-cols-2 inline-block">
-                        <Web3Network />
-                      </div>
                     </div>
                   </div>
                 </Transition.Child>
@@ -150,22 +147,13 @@ const Desktop: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
-        <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full xl:w-auto bg-dark-1000 hover:bg-dark-900 xl:relative xl:p-0 xl:bg-transparent">
+        <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 xl:w-auto bg-dark-1000 hover-bg-dark-900 xl:relative xl:p-0 xl:bg-transparent">
           <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
-            {/* {library && library.provider.isMetaMask && ( */}
-            { chainId == 250 &&
-            <div className="sm:inline-block">
-              <LuxorStats />
-            </div>
+            {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+              <div className="sm:inline-block">
+                <TokenStats />
+              </div>
             }
-            {/* )} */}
-            {/* {library && library.provider.isMetaMask && ( */}
-         { [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
-            <div className="sm:inline-block">
-              <TokenStats />
-            </div>
-         } 
-            {/* )} */}
             <div className="w-auto flex items-center rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto">
               {account && chainId && userEthBalance && (
                 <>
@@ -177,18 +165,16 @@ const Desktop: FC = () => {
                   </div>
                 </>
               )}
-              {/* {library && library.provider.isMetaMask && ( */}
               <div className="inline-block">
                 <Web3Status />
               </div>
-              {/* )} */}
-              {/* {library && library.provider.isMetaMask && ( */}
-              {/* <div className="inline-block">
-                  <Web3Network />
-                </div> */}
-              {/* )} */}
+              <div className="cols flex-cols-2 inline-block">
+                <Web3Network />
+              </div>
+              <div className="grid grid-cols-1 mr-2 inline-block">
+                <More />
+              </div>
             </div>
-            <More />
           </div>
         </div>
       </header>
