@@ -601,7 +601,7 @@ const Swap = () => {
                   handleSwitchTokens(currencies?.INPUT, currencies?.OUTPUT)
                 }                >
                 <Image
-                alt={"arrow rounded square"}
+                  alt={"arrow rounded square"}
                   width={'14px'}
                   height={'14px'}
                   className={`rounded rounded-xl`}
@@ -614,7 +614,7 @@ const Swap = () => {
                 onClick={handleLimitSwap}
               >
                 <Image
-                alt={"Chevron Up Down Icon"}
+                  alt={"Chevron Up Down Icon"}
                   width={'14px'}
                   height={'14px'}
                   className={`rounded rounded-xl`}
@@ -743,17 +743,28 @@ const Swap = () => {
               }
               id="swap-button"
               disabled={!isValid || (priceImpactSeverity > 3) || !!swapCallbackError}
-              className="rounded-2xl w-full md:rounded"
+              className={classNames(isValid && priceImpactSeverity > 2 ? 'hidden' : "rounded-2xl w-full md:rounded")}
             >
               {swapInputError
-                ? swapInputError
-                : priceImpactSeverity > 3
-                  ? i18n._(t`Price Impact Too High`)
+                  ? swapInputError
                   : priceImpactSeverity > 2
                     ? i18n._(t`Swap Anyway`)
                     : i18n._(t`Swap`)}
             </Button>
           )}
+
+          {useSwap && priceImpactSeverity > 2 && isValid &&
+            <Button
+              color={ `${getChainColorCode(chainId)}` }
+              onClick={() => { setUseAggregator(true) }
+              }
+              id="use-aggregator-button"
+              // disabled={}
+              className="rounded-2xl w-full md:rounded"
+            >
+              { 'Use Aggregator' }
+            </Button>
+          }
           {useAggregator && !useLimit &&
             <Aggregator />
           }
