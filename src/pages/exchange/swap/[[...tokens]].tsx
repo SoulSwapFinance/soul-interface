@@ -60,7 +60,7 @@ import { getExplorerLink } from 'functions/explorer'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import Pair from 'pages/analytics/pairs/[id]'
 import Limits from './limit/[[...tokens]]'
-// import { currencyId } from 'functions/currency'
+import { currencyId } from 'functions/currency'
 import { GelatoLimitOrdersHistoryPanel } from 'soulswap-limit-orders-react'
 
 const Swap = () => {
@@ -84,32 +84,32 @@ const Swap = () => {
   const [currencyIdA, currencyIdB] = (tokens as string[]) || [DEFAULT_CURRENCY_A, DEFAULT_CURRENCY_B]
   const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
 
-  // const handleCurrencyASelect = useCallback(
-  //   (currencyA: Currency) => {
-  //     const newCurrencyIdA = currencyId(currencyA)
-  //     if (newCurrencyIdA === currencyIdB) {
-  //       router.push(`/exchange/swap/${currencyIdB}/${currencyIdA}`)
-  //     } else {
-  //       router.push(`/exchange/swap/${newCurrencyIdA}/${currencyIdB}`)
-  //     }
-  //   },
-  //   [currencyIdB, router, currencyIdA]
-  // )
-  // const handleCurrencyBSelect = useCallback(
-  //   (currencyB: Currency) => {
-  //     const newCurrencyIdB = currencyId(currencyB)
-  //     if (currencyIdA === newCurrencyIdB) {
-  //       if (currencyIdB) {
-  //         router.push(`/exchange/swap/${currencyIdB}/${newCurrencyIdB}`)
-  //       } else {
-  //         router.push(`/exchange/swap/${newCurrencyIdB}`)
-  //       }
-  //     } else {
-  //       router.push(`/exchange/swap/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
-  //     }
-  //   },
-  //   [currencyIdA, router, currencyIdB]
-  // )
+  const handleCurrencyASelect = useCallback(
+    (currencyA: Currency) => {
+      const newCurrencyIdA = currencyId(currencyA)
+      if (newCurrencyIdA === currencyIdB) {
+        router.push(`/exchange/swap?inputCurrency=${currencyIdB}&outputCurrency=${currencyIdA}`)
+      } else {
+        router.push(`/exchange/swap?inputCurrency=${newCurrencyIdA}&outputCurrency=${currencyIdB}`)
+      }
+    },
+    [currencyIdB, router, currencyIdA]
+  )
+  const handleCurrencyBSelect = useCallback(
+    (currencyB: Currency) => {
+      const newCurrencyIdB = currencyId(currencyB)
+      if (currencyIdA === newCurrencyIdB) {
+        if (currencyIdB) {
+          router.push(`/exchange/swap?inputCurrency=${currencyIdB}&outputCurrency=${newCurrencyIdB}`)
+        } else {
+          router.push(`/exchange/swap?inputCurrency=${NATIVE[chainId].symbol}&outputCurrency=${newCurrencyIdB}`)
+        }
+      } else {
+        router.push(`/exchange/swap?inputCurrency=${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}&outputCurrency=${newCurrencyIdB}`)
+      }
+    },
+    [currencyIdA, router, currencyIdB]
+  )
   const [dismissTokenWarning, setDismissTokenWarning] = useState<boolean>(false)
   const urlLoadedTokens: Token[] = useMemo(
     () => [loadedInputCurrency, loadedOutputCurrency]?.filter((c): c is Token => c?.isToken ?? false) ?? [],
@@ -386,10 +386,10 @@ const Swap = () => {
   const [toToken, setToToken] = useState<Currency>(currencyB)
 
   const [inputAmount, setInputAmount] = useState('10')
-  const [slippage, setSlippage] = useState('1')
+  // const [slippage, setSlippage] = useState('1')
   // const [amount, setAmount] = useState('10');
-  const [txModalOpen, setTxModalOpen] = useState(false);
-  const [txUrl, setTxUrl] = useState('');
+  // const [txModalOpen, setTxModalOpen] = useState(false);
+  // const [txUrl, setTxUrl] = useState('');
   const signer = library.getSigner()
 
   const gasPrice = useGasPrice()?.gasPrice.fast
@@ -443,50 +443,50 @@ const Swap = () => {
   //   .sort((a, b) => b.netOut - a.netOut);
 
 
-  const swapMutation = useMutation({
-    mutationFn: (params: {
-      chain: string;
-      from: string;
-      to: string;
-      amount: string;
-      adapter: string;
-      signer: ethers.Signer;
-      slippage: string;
-      rawQuote: any;
-      tokens: { toToken: Currency; fromToken: Currency };
-    }) => swap(params),
-    onSuccess: (data, variables) => {
-      addTransaction({
-        chainId: chainId,
-        hash: data?.hash,
-        from: account,
-        summary: `Swap transaction using ${variables.adapter} is sent.`
-      });
-      const explorerUrl = getExplorerLink(chainId, data, "transaction") // chain.blockExplorers.default.url;
-      setTxModalOpen(true);
+  // const swapMutation = useMutation({
+  //   mutationFn: (params: {
+  //     chain: string;
+  //     from: string;
+  //     to: string;
+  //     amount: string;
+  //     adapter: string;
+  //     signer: ethers.Signer;
+  //     slippage: string;
+  //     rawQuote: any;
+  //     tokens: { toToken: Currency; fromToken: Currency };
+  //   }) => swap(params),
+  //   onSuccess: (data, variables) => {
+  //     addTransaction({
+  //       chainId: chainId,
+  //       hash: data?.hash,
+  //       from: account,
+  //       summary: `Swap transaction using ${variables.adapter} is sent.`
+  //     });
+  //     const explorerUrl = getExplorerLink(chainId, data, "transaction") // chain.blockExplorers.default.url;
+  //     setTxModalOpen(true);
 
-      setTxUrl(`${explorerUrl}/tx/${data?.hash}`);
-    },
-    onError: (err: { reason: string; code: string }) => {
-      if (err.code !== 'ACTION_REJECTED') {
-        console.log('Transaction Rejected: %s', err.reason)
-      }
-    }
-  });
+  //     setTxUrl(`${explorerUrl}/tx/${data?.hash}`);
+  //   },
+  //   onError: (err: { reason: string; code: string }) => {
+  //     if (err.code !== 'ACTION_REJECTED') {
+  //       console.log('Transaction Rejected: %s', err.reason)
+  //     }
+  //   }
+  // });
 
-  const handleAggregate = () => {
-    swapMutation.mutate({
-      chain: selectedChain.value,
-      from: fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address,
-      to: toToken?.isNative ? NATIVE_ADDRESS : toToken?.wrapped.address,
-      amount: amountWithDecimals,
-      signer,
-      slippage,
-      adapter: route.name,
-      rawQuote: route?.price?.rawQuote,
-      tokens: { fromToken, toToken }
-    });
-  };
+  // const handleAggregate = () => {
+  //   swapMutation.mutate({
+  //     chain: selectedChain.value,
+  //     from: fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address,
+  //     to: toToken?.isNative ? NATIVE_ADDRESS : toToken?.wrapped.address,
+  //     amount: amountWithDecimals,
+  //     signer,
+  //     slippage,
+  //     adapter: route.name,
+  //     rawQuote: route?.price?.rawQuote,
+  //     tokens: { fromToken, toToken }
+  //   });
+  // };
 
   const handleLimitSwap = useCallback(
     () => {
@@ -598,7 +598,7 @@ const Swap = () => {
                 size={'xs'}
                 className={classNames(`mx-[42%] rounded rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
                 onClick={() =>
-                  handleSwitchTokens(currencyA, currencyB)
+                  handleSwitchTokens(currencies?.INPUT, currencies?.OUTPUT)
                 }                >
                 <Image
                 alt={"arrow rounded square"}
