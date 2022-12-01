@@ -16,7 +16,7 @@ import Image from 'next/image'
 // import { Button } from 'components/Button'
 import Globe from 'assets/svg/icons/Globe.svg'
 import Chain from 'assets/svg/icons/Chain.svg'
-import ChevronUpDown from 'assets/svg/icons/ChevronUpDown.svg'
+import ChevronUpDownBlack from 'assets/svg/icons/ChevronUpDownBlack.svg'
 import PlusSign from 'assets/svg/icons/PlusSign.svg'
 import { getChainColorCode } from 'constants/chains'
 
@@ -77,7 +77,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
         >
             <Typography weight={700} className={`text-secondary bg-${getChainColorCode(chainId)} mt-4 mb-2 rounded rounded-xl`}>
             <Image className={"mt-2"} alt={"chevron up down black icon"}          
-            src={ChevronUpDown}  />
+            src={ChevronUpDownBlack}  />
           </Typography>
         </NavLink>
         {featureEnabled(Feature.LIQUIDITY, chainId) &&
