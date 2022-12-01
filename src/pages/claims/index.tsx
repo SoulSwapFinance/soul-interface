@@ -2,7 +2,7 @@ import { ChainId, Currency, CurrencyAmount, Token } from 'sdk'
 import React, { useEffect, useState } from 'react'
 import { useClaimCallback, useUserUnclaimedAmount } from 'state/claim/hooks' // 
 import { useModalOpen, useToggleSelfClaimModal } from 'state/application/hooks'
-import { ApplicationModal } from 'state/application/actions'
+import  { ApplicationModal } from 'state/application/reducer'
 import { Button } from 'components/Button'
 import { ChevronRight } from 'react-feather'
 import Container from 'components/Container'

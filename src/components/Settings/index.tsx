@@ -11,7 +11,7 @@ import { useModalOpen, useToggleSettingsMenu } from '../../state/application/hoo
 // import Image from '../../components/Image'
 
 // import { AdjustmentsIcon } from '@heroicons/react/outline'
-import { ApplicationModal } from '../../state/application/actions'
+import  { ApplicationModal } from 'state/application/reducer'
 import { Button } from 'components/Button'
 import Modal from 'components/DefaultModal'
 import QuestionHelper from 'components/QuestionHelper'

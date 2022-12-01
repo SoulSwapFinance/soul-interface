@@ -7,11 +7,12 @@ import {
   useUserSingleHopOnly,
   useUserTransactionTTL,
 } from '../../state/user/hooks'
+import  { ApplicationModal } from 'state/application/reducer'
+
 import { useModalOpen, useToggleCrossChainMode } from '../../state/application/hooks'
 import Image from '../../components/Image'
 
 // import { AdjustmentsIcon } from '@heroicons/react/outline'
-import { ApplicationModal } from '../../state/application/actions'
 // import {Toggle} from 'components/Toggle'
 import { CrossChainToggle } from 'components/Toggle'
 import { useLingui } from '@lingui/react'
@@ -24,7 +25,7 @@ export default function CrossChainTab({ placeholderSlippage }: { placeholderSlip
   const { chainId } = useActiveWeb3React()
 
   const node = useRef<HTMLDivElement>(null)
-  // const open = useModalOpen(ApplicationModal.CROSSCHAIN)
+  const open = useModalOpen(ApplicationModal.CROSSCHAIN)
   const toggle = useToggleCrossChainMode()
   const [crosschainMode, toggleCrossChainMode] = useCrossChainModeManager()
 

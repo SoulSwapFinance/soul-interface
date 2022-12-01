@@ -1,6 +1,6 @@
 import React from 'react'
-import { useModalOpen, useToggleLuxorStatsModal } from 'state/application/hooks'
-import { ApplicationModal } from 'state/application/actions'
+import { useModalOpen, useToggleLuxorStatsModal, useToggleModal } from 'state/application/hooks'
+import  { ApplicationModal } from 'state/application/reducer'
 import Image from 'next/image'
 import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
 import Typography from 'components/Typography'
