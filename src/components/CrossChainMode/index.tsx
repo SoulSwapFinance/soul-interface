@@ -24,7 +24,7 @@ export default function CrossChainTab({ placeholderSlippage }: { placeholderSlip
   const { chainId } = useActiveWeb3React()
 
   const node = useRef<HTMLDivElement>(null)
-  const open = useModalOpen(ApplicationModal.CROSSCHAIN)
+  // const open = useModalOpen(ApplicationModal.CROSSCHAIN)
   const toggle = useToggleCrossChainMode()
   const [crosschainMode, toggleCrossChainMode] = useCrossChainModeManager()
 
