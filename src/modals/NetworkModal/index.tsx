@@ -7,11 +7,10 @@ import Typography from 'components/Typography'
 import { NETWORK_ICON, NETWORK_LABEL } from 'config/networks'
 import { classNames } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
-// import { useModalOpen, useNetworkModalToggle } from 'state/application/hooks'
-// import { ApplicationModal } from 'state/application/reducer'
 import Image from 'next/image'
 import { useModalOpen, useNetworkModalToggle } from 'state/application/hooks'
 import { ApplicationModal } from 'state/application/reducer'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 
 export const SUPPORTED_NETWORKS: Record<
   number,
@@ -122,9 +121,8 @@ export const SUPPORTED_NETWORKS: Record<
   const { i18n } = useLingui()
   const { chainId, library, account } = useActiveWeb3React()
   const networkModalOpen = useModalOpen(ApplicationModal.NETWORK)
-  const [isShowing, setShowing] = useState(networkModalOpen)
-  const toggleNetworkModal = () => { isShowing ? setShowing(false) : setShowing(true) }
-  //  = useNetworkModalToggle()
+  const [isShowing, setShowing] = useState(false)
+  const toggleNetworkModal = useNetworkModalToggle()
 
   if (!chainId) return null
 
@@ -134,7 +132,7 @@ export const SUPPORTED_NETWORKS: Record<
     chainId={chainId}
     onDismiss={toggleNetworkModal}>      
     <div className="flex flex-col gap-4">
-        <HeadlessUiModal.Header header={i18n._(t`Select a network`)} onClose={toggleNetworkModal} />
+        <HeadlessUiModal.Header header={i18n._(t`Select Network`)} onClose={toggleNetworkModal} />
         <div className="grid grid-flow-row-dense grid-cols-1 gap-4 overflow-y-auto md:grid-cols-2">
           {[
             ChainId.ETHEREUM,
@@ -155,10 +153,9 @@ export const SUPPORTED_NETWORKS: Record<
                 return (
                   <div
                     key={i}
-                    className="bg-[rgba(0,0,0,0.2)] focus:outline-none flex items-center gap-4 w-full px-4 py-3 rounded border border-purple cursor-default"
+                    className={`bg-[rgba(0,0,0,0.2)] focus:outline-none flex items-center gap-4 w-full px-4 py-3 rounded border border-[${getChainColor(chainId)}] cursor-default`}
                   >
                     <Image
-                      // @ts-ignore TYPE NEEDS FIXING
                       src={NETWORK_ICON[key]}
                       alt="Switch Network"
                       className="rounded-full"
@@ -176,10 +173,9 @@ export const SUPPORTED_NETWORKS: Record<
                   key={i}
                   onClick={() => switchNetwork(key)}
                   className={classNames(
-                    'bg-[rgba(0,0,0,0.2)] focus:outline-none flex items-center gap-4 w-full px-4 py-3 rounded border border-dark-700 hover:border-blue'
+                    `bg-[rgba(0,0,0,0.2)] focus:outline-none flex items-center gap-4 w-full px-4 py-3 rounded border hover:border-${getChainColorCode(key)}`
                   )}
                 >
-                  {/*@ts-ignore TYPE NEEDS FIXING*/}
                   <Image
                     src={NETWORK_ICON[key]}
                     alt="Switch Network"
