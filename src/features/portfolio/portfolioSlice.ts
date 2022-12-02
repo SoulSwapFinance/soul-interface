@@ -5,7 +5,7 @@ import { AppState } from 'state'
 import { ActiveModal } from '../trident/types'
 
 export interface BalancesState {
-  currency?: string // | Currency | Token
+  currency?: Currency | Token
   activeModal: ActiveModal | undefined
   modalOpen: boolean
 }

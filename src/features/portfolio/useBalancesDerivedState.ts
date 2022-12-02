@@ -9,10 +9,6 @@ export const useBalancesSelectedCurrency: UseBalancesSelectedCurrency = () => {
   const currency = useSelector(selectBalancesCurrency)
   const { chainId } = useActiveWeb3React()
  
- const currencyId = 
-  currency.isToken ? currency.address 
-  : currency.isNative ? NATIVE[chainId].symbol
-  : ''
- 
-  return useCurrency(currencyId) ?? NATIVE[chainId]
-}
+  return currency.isToken ? useCurrency(currency.wrapped.address) : NATIVE[chainId]
+
+ }
