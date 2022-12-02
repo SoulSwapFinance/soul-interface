@@ -25006,10 +25006,10 @@ soulswap-currency@^0.0.1, "soulswap-currency@workspace:*":
     soulswap-math "workspace:*"
     tiny-invariant "^1.2.0"
 
-soulswap-default-token-list@^5.0.4:
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/soulswap-default-token-list/-/soulswap-default-token-list-5.0.4.tgz#c530b5e8eb855a77ee42799b5fdc84e82d1650a9"
-  integrity sha512-Z+XQnlRUg2wZvrRhh6OKqWatYRErpgSlLqu/JvR93nd0VTJ2flnb06kqOmO2TY7/jEk7tYrgSdQA+Jq+ILwXtw==
+soulswap-default-token-list@^5.0.5:
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/soulswap-default-token-list/-/soulswap-default-token-list-5.0.8.tgz#c620c55c6d8466f84f76bd5976fc2106f21cee89"
+  integrity sha512-hrryDVYSVOXfKR+gQdKRZsuz5oP6t8byUx4ye+6sGr3SvUIJcbOJ+o9QMciXM0eQbqabwbWlqXOZ/niVpcOuCw==
 
 soulswap-format@^0.0.1:
   version "0.0.1"

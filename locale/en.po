@@ -271,9 +271,6 @@ msgstr "COMING SOON"
 msgid "Calculated based on current rates. Rates are estimates for your convenience, they do not represent guaranteed returns."
 msgstr "Calculated based on current rates. Rates are estimates for your convenience, they do not represent guaranteed returns."
 
-msgid "Calculator"
-msgstr "Calculator"
-
 msgid "Cancelled"
 msgstr "Cancelled"
 
