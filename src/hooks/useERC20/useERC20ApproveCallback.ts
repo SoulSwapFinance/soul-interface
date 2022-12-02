@@ -1,5 +1,5 @@
 import { AddressZero, MaxUint256 } from '@ethersproject/constants'
-import { CurrencyAmount, Currency } from 'sdk'
+import { Amount, Currency } from 'soulswap-currency'
 import { useCallback, useMemo } from 'react'
 import ERC20ABI from 'constants/abis/bridge/erc20.json'
 
@@ -24,7 +24,7 @@ export enum ApprovalState {
 // returns a variable indicating the state of the approval and a function which approves if necessary or early returns
 export function useERC20ApproveCallback(
   watch: boolean,
-  amountToApprove?: CurrencyAmount<Currency>,
+  amountToApprove?: Amount<Currency>,
   spender?: string,
   onSuccess?: (data: NotificationData) => void
 ): [ApprovalState, () => Promise<void>] {
