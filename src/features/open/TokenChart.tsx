@@ -105,8 +105,8 @@ const TokenChart: FC<any> = ({ showChart, activeTokens, refetchTimer, width }) =
               <Row>
                 <Image
                   alt={`${activeTokens[0]?.symbol} icon`}
-                  width="40px" height={"40px"}
-                  style={{ height: "40px", width: "40px", zIndex: 2 }}
+                  width={40} height={ 40 }
+                  style={{ height: 40, width: 40, zIndex: 2 }}
                   src={activeTokens[0]?.icon}
                 />
                 <Spacer
@@ -114,9 +114,9 @@ const TokenChart: FC<any> = ({ showChart, activeTokens, refetchTimer, width }) =
                 />
                 <Image
                   alt={`${activeTokens[1]?.symbol} icon`}
-                  width="40px" height={"40px"}
+                  width={40} height={ 40 }
                   src={activeTokens[1]?.icon}
-                  style={{ height: "40px", width: "40px", marginLeft: "-.5rem" }}
+                  style={{ height: 40, width: 40, marginLeft: "-.5rem" }}
                 />
                 <Spacer />
                 {activeTokens[0]?.symbol}
@@ -192,7 +192,7 @@ const SwapRoute: FC<any> = ({ route, tokenList, activeTokens }) => {
           <Row style={{ alignItems: "center" }}>
             <Image
               alt={`${token?.symbol} icon`}
-              width="36px" height={"36px"} style={{ height: "36px", width: "36px" }} src={token?.icon} />
+              width={26} height={26} style={{ height: 26, width: 36 }} src={token?.icon} />
             <Spacer
               size="lg"
             />
@@ -214,8 +214,8 @@ const SwapRoute: FC<any> = ({ route, tokenList, activeTokens }) => {
         <Row style={{ alignItems: "center" }}>
           <Image
             alt={`${activeTokens[0]?.symbol} logo`}
-            width="40px" height={"40px"}
-            style={{ height: "40px", width: "40px" }}
+            width={40} height={40}
+            style={{ height: 40, width: 40 }}
             src={activeTokens[0]?.icon}
           />
           <Spacer
@@ -252,8 +252,8 @@ const SwapRoute: FC<any> = ({ route, tokenList, activeTokens }) => {
           />
           <Image
             alt={`${activeTokens[1]?.symbol} logo`}
-            width="40px" height={"40px"}
-            style={{ height: "40px", width: "40px" }}
+            width={40} height={ 40 }
+            style={{ height: 40, width: 40 }}
             src={activeTokens[1]?.icon}
           />
         </Row>

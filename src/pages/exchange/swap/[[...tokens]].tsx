@@ -903,7 +903,7 @@ const Swap = () => {
         <div className="grid grid-cols-1">
           <Image
             src='https://app.soulswap.finance/title-soul-halfs.png'
-            height="400px" width="600px" alt="logo"
+            height={400} width={600} alt="logo"
           />
         </div>
       }

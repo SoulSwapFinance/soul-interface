@@ -42,7 +42,7 @@ export default function Option({
         </div>
         {subheader && <Typography variant="xs">{subheader}</Typography>}
       </div>
-      <Image src={'/images/tokens/soul.png'} alt={'Icon'} width="32px" height="32px" />
+      <Image src={'/images/tokens/soul.png'} alt={'Icon'} width={32} height={32} />
     </div>
   )
 

@@ -33,8 +33,8 @@ function LuxorStats(): JSX.Element | null {
         <Image
           src="/images/tokens/wLUM.png"
           alt="WLUM"
-          width="28px"
-          height="28px"
+          width={28}
+          height={28}
           objectFit="contain"
           className="rounded-md"
         />
@@ -46,8 +46,8 @@ function LuxorStats(): JSX.Element | null {
         <Image
           src="/images/tokens/lux.png"
           alt="LUX"
-          width="28px"
-          height="28px"
+          width={28}
+          height={28}
           objectFit="contain"
           className="rounded-md"
         />

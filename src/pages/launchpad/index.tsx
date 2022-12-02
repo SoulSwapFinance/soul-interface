@@ -162,8 +162,8 @@ export default function Launchpad(): JSX.Element {
                               <div className={`flex flex-row justify-center items-center`}>
                                 <Image
                                   src={p.logo}
-                                  width="60px"
-                                  height="60px"
+                                  width={60}
+                                  height={60}
                                   className="rounded-full bg-white"
                                   layout="fixed"
                                   alt={p.name}

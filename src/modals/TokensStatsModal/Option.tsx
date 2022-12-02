@@ -44,7 +44,7 @@ export default function Option({
         </div>
         {subheader && <SubHeader>{subheader}</SubHeader>}
       </div>
-      <Image src={icon} alt={'Icon'} width="32px" height="32px" />
+      <Image src={icon} alt={'Icon'} width={32} height={32} />
     </div>
   )
   if (link) {
