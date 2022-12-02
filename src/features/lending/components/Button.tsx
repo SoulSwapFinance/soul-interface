@@ -59,7 +59,7 @@ export function TokenApproveButton({ children, value, token, needed, color }: an
   return showApprove ? (
     <Button color={color} onClick={approve} className="mb-4 w-full">
       {approvalState === ApprovalState.PENDING ? (
-        <Dots>Approving {token.symbol}</Dots>
+        <Dots>Approving</Dots>
       ) : (
         <>
           {i18n._(t`Approve`)} {token.symbol}

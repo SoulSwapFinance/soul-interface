@@ -16,13 +16,11 @@ function Web3Network(): JSX.Element | null {
   const toggleNetworkModal = useNetworkModalToggle()
   const [attemptingSwitchFromUrl, setAttemptingSwitchFromUrl] = useState(false)
 
-  const [switchedFromUrl, setSwitchedFromUrl] = useState(false)
+  // const [switchedFromUrl, setSwitchedFromUrl] = useState(false)
+  // const isWindowVisible = useIsWindowVisible()
+  // const prevChainId = usePrevious(chainId)
+  // const queryChainId = Number(router.query.chainId)
   const router = useRouter()
-  const isWindowVisible = useIsWindowVisible()
-
-  const prevChainId = usePrevious(chainId)
-
-  const queryChainId = Number(router.query.chainId)
 
   const networkModalOpen = useModalOpen(ApplicationModal.NETWORK)
 

@@ -127,18 +127,7 @@ const Desktop: FC = () => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
                       </nav>
-                      <div className="flex items-center justify-start gap-2 mt-1">
-                        {/* <div className="flex items-center w-auto text-sm font-bold border-2 rounded shadow cursor-pointer pointer-events-auto select-none border-dark-800 hover:border-dark-700 bg-dark-900 whitespace-nowrap">
-                            {account && chainId && userEthBalance && (
-                              <Link href={`/account/${account}`} passHref={true}>
-                                <a className="hidden px-3 text-high-emphesis text-bold md:block">
-                                  @ts-ignore
-                                  {userEthBalance?.toSignificant(4)} {NATIVE[chainId || 250].symbol}
-                                </a>
-                              </Link>
-                            )}
-                            <Web3Status />
-                          </div>, */}
+                      <div className="flex items-center justify-start gap-2">
                       </div>
                     </div>
                   </div>
@@ -147,7 +136,7 @@ const Desktop: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
-        <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 xl:w-auto bg-dark-1000 hover-bg-dark-900 xl:relative xl:p-0 xl:bg-transparent">
+        <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full xl:w-auto bg-dark-1000 hover-bg-dark-900 xl:relative xl:bg-transparent">
           <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
             {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
               <div className="sm:inline-block">

@@ -268,9 +268,6 @@ msgstr ""
 msgid "Calculated based on current rates. Rates are estimates for your convenience, they do not represent guaranteed returns."
 msgstr ""
 
-msgid "Calculator"
-msgstr ""
-
 msgid "Cancelled"
 msgstr ""
 
