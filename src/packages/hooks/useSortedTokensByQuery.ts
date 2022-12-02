@@ -1,6 +1,7 @@
 import { isAddress } from '@ethersproject/address'
 import { useMemo } from 'react'
-import { Amount, Token, Type } from 'soulswap-currency'
+import { Currency, CurrencyAmount, NATIVE } from 'sdk'
+import { useActiveWeb3React } from 'services/web3'
 import { Fraction } from 'soulswap-math'
 
 import { FundSource } from './useFundSourceToggler'
@@ -11,12 +12,13 @@ const alwaysTrue = () => true
  * Create a filter function to apply to a token for whether it matches a particular search query
  * @param search the search query to apply to the token
  */
-export function createTokenFilterFunction<T extends Token>(search: string): (tokens: T) => boolean {
+export function createTokenFilterFunction<T extends Currency>(search: string): (tokens: T) => boolean {
   const validAddress = isAddress(search)
+  const { chainId } = useActiveWeb3React()
 
   if (validAddress) {
     const lower = search.toLowerCase()
-    return (t: T) => ('isToken' in t ? search === t.address : lower === t.address.toLowerCase())
+    return (t: T) => ('!isNative' in t ? search === NATIVE[chainId].address : lower === t.wrapped.address.toLowerCase())
   }
 
   const lowerSearchParts = search
@@ -38,11 +40,11 @@ export function createTokenFilterFunction<T extends Token>(search: string): (tok
   return ({ name, symbol }: T): boolean => Boolean((symbol && matchesSearch(symbol)) || (name && matchesSearch(name)))
 }
 
-export function filterTokens<T extends Token>(tokens: T[], search: string): T[] {
+export function filterTokens<T extends Currency >(tokens: T[], search: string): T[] {
   return tokens.filter(createTokenFilterFunction(search))
 }
 
-export const balanceComparator = (balanceA?: Amount<Type>, balanceB?: Amount<Type>) => {
+export const balanceComparator = (balanceA?: CurrencyAmount<Currency>, balanceB?: CurrencyAmount<Currency>) => {
   if (balanceA && balanceB) {
     if (balanceA.asFraction.equalTo(balanceB.asFraction)) return 0
     return balanceA.asFraction.greaterThan(balanceB.asFraction) ? -1 : 1
@@ -55,16 +57,16 @@ export const balanceComparator = (balanceA?: Amount<Type>, balanceB?: Amount<Typ
 }
 
 export const tokenComparator = (
-  balancesMap: Record<string, Record<FundSource, Amount<Type> | undefined>> | undefined,
+  balancesMap: Record<string, Record<FundSource, CurrencyAmount<Currency> | undefined>> | undefined,
   pricesMap: Record<string, Fraction> | undefined,
   fundSource: FundSource
 ) => {
-  return (tokenA: Token, tokenB: Token): number => {
-    const balanceA = pricesMap?.[tokenA.address]
-      ? balancesMap?.[tokenA.address]?.[fundSource]?.multiply(pricesMap[tokenA.address])
+  return (tokenA: Currency, tokenB: Currency): number => {
+    const balanceA = pricesMap?.[tokenA.wrapped.address]
+      ? balancesMap?.[tokenA.wrapped.address]?.[fundSource]?.multiply(pricesMap[tokenA.wrapped.address])
       : undefined
-    const balanceB = pricesMap?.[tokenB.address]
-      ? balancesMap?.[tokenB.address]?.[fundSource]?.multiply(pricesMap[tokenB.address])
+    const balanceB = pricesMap?.[tokenB.wrapped.address]
+      ? balancesMap?.[tokenB.wrapped.address]?.[fundSource]?.multiply(pricesMap[tokenB.wrapped.address])
       : undefined
 
     const balanceComp = balanceComparator(balanceA, balanceB)
@@ -81,7 +83,7 @@ export const tokenComparator = (
   }
 }
 
-export function useSortedTokensByQuery(tokens: Token[] | undefined, searchQuery: string): Token[] {
+export function useSortedTokensByQuery(tokens: Currency[] | undefined, searchQuery: string): Currency[] {
   return useMemo(() => {
     if (!tokens) {
       return []
@@ -100,9 +102,9 @@ export function useSortedTokensByQuery(tokens: Token[] | undefined, searchQuery:
       return tokens
     }
 
-    const exactMatches: Token[] = []
-    const symbolSubstrings: Token[] = []
-    const rest: Token[] = []
+    const exactMatches: Currency[] = []
+    const symbolSubstrings: Currency[] = []
+    const rest: Currency[] = []
 
     // sort tokens by exact match -> subtring on symbol match -> rest
     tokens.map((token) => {

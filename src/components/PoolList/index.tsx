@@ -12,7 +12,7 @@ import React from 'react'
 import Router from 'next/router'
 import Search from '../../components/Search'
 import { useCurrency } from '../../hooks/Tokens'
-import useFarms from '../../hooks/useZapperFarms'
+// import useFarms from '../../hooks/useZapperFarms'
 
 const TokenBalance = ({ farm }: any) => {
   const currency0 = useCurrency(farm.liquidityPair.token0.id)
@@ -50,15 +50,15 @@ const TokenBalance = ({ farm }: any) => {
 }
 
 const PoolList = () => {
-  const query = useFarms()
+  // const query = useFarms()
 
-  const farms = query?.farms
-  const userFarms = query?.userFarms
+  // const farms = query?.farms
+  // const userFarms = query?.userFarms
 
   // Search Setup
   const options = { keys: ['symbol', 'name', 'pairAddress'], threshold: 0.4 }
   const { result, search, term } = useFuse({
-    data: farms && farms.length > 0 ? farms : [],
+    data: [], // farms && farms.length > 0 ? farms : [],
     options,
   })
 
