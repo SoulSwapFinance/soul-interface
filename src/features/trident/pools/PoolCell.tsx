@@ -26,8 +26,8 @@ export const PoolCell: FC<PoolCellProps> = ({ assets, twapEnabled }) => {
               src="https://app.sushi.com/images/rss.svg"
               alt="rss icon"
               layout="responsive"
-              width={14}
-              height={14}
+              width="14"
+              height="14"
             />
           </div>
         )}

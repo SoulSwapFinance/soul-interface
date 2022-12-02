@@ -118,8 +118,8 @@ const VaultListItem = ({ farm, ...rest }) => {
                       <div key={i} className="flex items-center">
                         <Image
                           src={`https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/soul.jpg`}
-                          width={50}
-                          height={50}
+                          width="50px"
+                          height="50px"
                           className="rounded-md"
                           layout="fixed"
                           alt={reward.token}

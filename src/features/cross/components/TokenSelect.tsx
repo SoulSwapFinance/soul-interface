@@ -123,7 +123,7 @@ interface TokenSelectProps {
                 <div className="grid grid-cols-1 w-[33%]">
                   <Image
                     src={selectedChain?.logo}
-                    width={36} height={36}
+                    width="36" height="36"
                     alt={selectedChain?.name + ' logo'}
                     className={"w-full justify-center"}
                   />
@@ -159,7 +159,7 @@ interface TokenSelectProps {
                     border-dark-1000 rounded rounded-3xl bg-black font-bold justify-between"
                     key={token.address} onClick={() => onClose({ token, chain: selectedChain })}>
                     <Row style={{ gap: "1rem", alignItems: "center" }}>
-                      <Image src={token.logo} width={36} height={36} alt={token.name + ' logo'} />
+                      <Image src={token.logo} width="36" height="36" alt={token.name + ' logo'} />
                       <Row
                         style={{
                           width: "98%",

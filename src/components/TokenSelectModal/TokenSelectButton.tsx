@@ -40,8 +40,8 @@ const TokenSelectButton: React.FC<any> = ({
       /> */}
         <Image
           alt=""
-          width={36}
-          height={36}
+          width="36px"
+          height="36px"
           src={currentToken?.symbol === "FTM" ? ftmIcon : currentToken?.logoURL}
           style={{ height: "36px", width: "36px" }}
         />
@@ -53,8 +53,8 @@ const TokenSelectButton: React.FC<any> = ({
         size="xxs" 
         /> */}
         {/* <Image
-          width={6}
-          height={6}
+          width="6px"
+          height="6px"
           alt="" 
           src={vShape} /> */}
       {/* </Row> */}

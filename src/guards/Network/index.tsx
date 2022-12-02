@@ -85,8 +85,8 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
                     src={NETWORK_ICON[key]}
                     alt="Switch Network"
                     className={`rounded-sm filter drop-shadow-currencyLogo bg-${getChainColorCode(Number(key))}`}
-                    width={60}
-                    height={60}
+                    width="60px"
+                    height="60px"
                   />
                 </div>
                 <NavLink

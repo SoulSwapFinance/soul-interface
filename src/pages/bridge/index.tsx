@@ -73,8 +73,8 @@ const ChainSelect: React.FC<any> = ({ selectChain, chains }) => {
               <Row style={{ gap: "1rem", alignItems: "center" }}>                
                 <Image
                   alt="chain logo"
-                  height={30}
-                  width={30}
+                  height="30px"
+                  width="30px"
                   src={chainToNetworkInfoMap[chainId].image}
                 />
                 <Typo2 style={{ fontWeight: "bold" }}>
@@ -115,8 +115,8 @@ const ChainSelect: React.FC<any> = ({ selectChain, chains }) => {
 //           <Row style={{ gap: "1rem", alignItems: "center" }}>
 //             <Image
 //               alt="chain logo"
-//               height={30}
-//               width={30}
+//               height="30px"
+//               width="30px"
 //               src={chainToNetworkInfoMap[selected].image}
 //             />
 //             <Typo2 style={{ fontWeight: "bold" }}>
@@ -351,8 +351,8 @@ const TokenSelector: React.FC<any> = ({ tokens, selected, selectToken }) => {
               <>
                 <Image
                   alt="token logo"
-                  height={30}
-                  width={30}
+                  height="30px"
+                  width="30px"
                   src={selected.logoUrl}
                 />
                 <Typo2 style={{ fontWeight: "bold" }}>{selected.symbol}</Typo2>
@@ -396,8 +396,8 @@ const NetworkSelector: React.FC<any> = ({ chains, selected, selectChain }) => {
               <>
                 <Image
                   alt="token logo"
-                  height={30}
-                  width={30}
+                  height="30px"
+                  width="30px"
                   src={chainToNetworkInfoMap[selected].image}
                 />
                 <Typo2 style={{ fontWeight: "bold" }}>{chainToNetworkInfoMap[selected].name}</Typo2>
@@ -471,8 +471,8 @@ const BridgeTokenSelectModal: React.FC<any> = ({
                         <Row style={{ gap: "1rem", alignItems: "center" }}>
                          <Image
                             alt="token logo"
-                            height={30}
-                            width={30}
+                            height="30px"
+                            width="30px"
                             src={token.logoUrl}
                           />
                           <Typo2 style={{ fontWeight: "bold" }}>
@@ -532,8 +532,8 @@ const BridgeNetworkSelectModal: React.FC<any> = ({
                         <Row style={{ gap: "1rem", alignItems: "center" }}>
                          <Image
                             alt="network logo"
-                            height={30}
-                            width={30}
+                            height="30px"
+                            width="30px"
                             src={chainToNetworkInfoMap[chains].image}
                           />
                           <Typo2 style={{ fontWeight: "bold" }}>

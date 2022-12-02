@@ -159,8 +159,8 @@ export const SUPPORTED_NETWORKS: Record<
                       src={NETWORK_ICON[key]}
                       alt="Switch Network"
                       className="rounded-full"
-                      width={32}
-                      height={32}
+                      width="32px"
+                      height="32px"
                     />
                     <Typography weight={700} className="text-high-emphesis">
                       {NETWORK_LABEL[key]}
@@ -180,8 +180,8 @@ export const SUPPORTED_NETWORKS: Record<
                     src={NETWORK_ICON[key]}
                     alt="Switch Network"
                     className="rounded-full"
-                    width={32}
-                    height={32}
+                    width="32px"
+                    height="32px"
                   />
                   <Typography weight={700} className="text-high-emphesis">
                     {NETWORK_LABEL[key]}
