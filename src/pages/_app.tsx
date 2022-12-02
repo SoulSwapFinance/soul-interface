@@ -14,6 +14,7 @@ import getLibrary from 'functions/getLibrary'
 import { exception, GOOGLE_ANALYTICS_TRACKING_ID, pageview } from 'functions/gtag'
 import DefaultLayout from 'layouts/Default'
 import { FantomApiProvider } from "contexts/FantomApiProvider";
+import { Cloudinary } from '@cloudinary/url-gen'
 
 import store, { persistor } from 'state'
 import ApplicationUpdater from 'state/application/updater'
@@ -50,6 +51,13 @@ const client = new ApolloClient({
   link,
   connectToDevTools: process.env.NODE_ENV === "development",
 });
+
+
+export const cld = new Cloudinary({
+  cloud: {
+    cloudName: 'sushi-cdn',
+  },
+})
 
 
 const Web3ProviderNetwork = dynamic(() => import('components/Web3ProviderNetwork'), { ssr: false })
