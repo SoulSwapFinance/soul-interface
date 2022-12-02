@@ -7,7 +7,7 @@ import styled, { css } from 'styled-components'
 import React from 'react'
 import { isMobile } from 'react-device-detect'
 import { transparentize } from 'polished'
-import { useGesture } from '@use-gesture/react'
+import { useGesture } from 'react-use-gesture'
 
 const AnimatedDialogOverlay = animated(DialogOverlay)
 
