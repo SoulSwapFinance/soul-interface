@@ -83,7 +83,7 @@ const Mobile: FC = () => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
                       </nav>
-                      <div className="flex flex-col mt-2 gap-4 px-4 sm:px-6">
+                      <div className="flex flex-col gap-4 px-4 sm:px-6">
                       </div>
                     </div>
                   </div>
@@ -92,7 +92,7 @@ const Mobile: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
-        <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 xl:w-auto bg-dark-1000 hover-bg-dark-900 xl:relative xl:p-0 xl:bg-transparent">
+        <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full xl:w-auto bg-dark-1000 hover-bg-dark-900 xl:relative xl:p-0 xl:bg-transparent">
           <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
             {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
               <div className="sm:inline-block">
