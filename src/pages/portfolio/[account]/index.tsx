@@ -2,8 +2,8 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import ActionsModal from 'features/portfolio/ActionsModal'
 import { CoffinBalances, WalletBalances } from 'features/portfolio/AssetBalances/coffinAndWallet'
-import { UnderworldCollateral } from 'features/portfolio/AssetBalances/underworld/UnderworldCollateral'
-import { UnderworldLent } from 'features/portfolio/AssetBalances/underworld/UnderworldLent'
+// import { UnderworldCollateral } from 'features/portfolio/AssetBalances/underworld/UnderworldCollateral'
+// import { UnderworldLent } from 'features/portfolio/AssetBalances/underworld/UnderworldLent'
 import HeaderDropdown from 'features/portfolio/HeaderDropdown'
 import { useAccountInUrl } from 'features/portfolio/useAccountInUrl'
 import TridentLayout, { TridentBody, TridentHeader } from 'layouts/Trident'
@@ -32,8 +32,8 @@ const Portfolio = () => {
         <HeaderDropdown account={account} />
       </TridentHeader>
       <TridentBody className="flex flex-col gap-10 lg:grid grid-cols-2 lg:gap-4">
-       <UnderworldLent />
-        <UnderworldCollateral />
+       {/* <UnderworldLent />
+        <UnderworldCollateral /> */}
         <WalletBalances chainId={chainId} account={account} />
         <CoffinBalances account={account} />
       </TridentBody>

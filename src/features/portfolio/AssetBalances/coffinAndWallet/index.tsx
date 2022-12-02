@@ -6,7 +6,7 @@ import AssetBalances from 'features/portfolio/AssetBalances/AssetBalances'
 import { Assets } from 'features/portfolio/AssetBalances/types'
 import { setBalancesState } from 'features/portfolio/portfolioSlice'
 import { ActiveModal } from 'features/trident/types'
-import { useActiveWeb3React } from 'services/web3'
+// import { useActiveWeb3React } from 'services/web3'
 import { useCoffinBalancesV2ForAccount } from 'state/coffinbox/hooks'
 import { useAppDispatch } from 'state/hooks'
 import { useAllTokenBalancesWithLoadingIndicator, useCurrencyBalance } from 'state/wallet/hooks'
@@ -17,7 +17,7 @@ import { Button } from 'components/Button'
 
 export const CoffinBalances = ({ account }: { account: string }) => {
   const { i18n } = useLingui()
-  const { chainId } = useActiveWeb3React()
+  // const { chainId } = useActiveWeb3React()
   const dispatch = useAppDispatch()
   const { data: balances, loading } = useCoffinBalancesV2ForAccount(account)
   const assets = balances.reduce<Assets[]>((acc, el) => {
@@ -30,7 +30,8 @@ export const CoffinBalances = ({ account }: { account: string }) => {
       const { currency } = row.values.asset
       dispatch(
         setBalancesState({
-          currency: currency.isNative ? NATIVE[chainId].symbol : row.values.asset.currency.address,
+          currency: currency,
+          // currency.isNative ? NATIVE[chainId].symbol : row.values.asset.currency.address,
           activeModal: ActiveModal.WITHDRAW,
         })
       )
@@ -79,7 +80,7 @@ export const WalletBalances: FC<{ chainId: ChainId, account: string }> = ({ chai
       const { currency } = row.values.asset
       dispatch(
         setBalancesState({
-          currency: currency.isNative ? 'ETH' : row.values.asset.currency.address,
+          currency: currency, // currency.isNative ? NATIVE[chainId].symbol : row.values.asset.currency.address,
           activeModal: ActiveModal.DEPOSIT,
         })
       )
