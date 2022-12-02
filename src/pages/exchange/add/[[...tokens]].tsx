@@ -414,28 +414,6 @@ export default function Add() {
             onSelect={handleCurrencyASelect}
             />
             <div>
-              {/* <CurrencyInputPanel
-                  value={formattedAmounts[Field.CURRENCY_A]}
-                  onUserInput={onFieldAInput}
-                  onHalf={() => {
-                    onFieldAInput(halfAmounts[Field.CURRENCY_A]?.toExact() ?? '')
-                  }}
-                  onMax={() => {
-                    onFieldAInput(maxAmounts[Field.CURRENCY_A]?.toExact() ?? '')
-                  }}
-                  onCurrencySelect={handleCurrencyASelect}
-                  currency={currencies[Field.CURRENCY_A]}
-                  id="add-liquidity-input-tokena"
-                  showCommonBases
-                /> */}
-              {/* <AssetInput
-                currencyLogo={true}
-                currency={currencies[Field.CURRENCY_A]}
-                value={formattedAmounts[Field.CURRENCY_A]}
-                onChange={onFieldAInput}
-                balance={maxAmounts.CURRENCY_A}
-                showMax={false}
-              /> */}
               <div className="flex justify-center -mt-8 -mb-4 z-0">
                 <div
                   role="button"
@@ -449,20 +427,6 @@ export default function Add() {
                   <PlusIcon width={14} className="text-high-emphesis hover:text-white" />
                 </div>
               </div>
-              {/* <CurrencyInputPanel
-                  value={formattedAmounts[Field.CURRENCY_B]}
-                  onUserInput={onFieldBInput}
-                  onCurrencySelect={handleCurrencyBSelect}
-                  onHalf={() => {
-                    onFieldBInput(halfAmounts[Field.CURRENCY_B]?.toExact() ?? '')
-                  }}
-                  onMax={() => {
-                    onFieldBInput(maxAmounts[Field.CURRENCY_B]?.toExact() ?? '')
-                  }}
-                  currency={currencies[Field.CURRENCY_B]}
-                  id="add-liquidity-input-tokenb"
-                  showCommonBases
-                /> */}
               <SwapAssetPanel
                 spendFromWallet={true}
                 chainId={chainId}
@@ -523,7 +487,7 @@ export default function Add() {
                           }}
                         >
                           {approvalA === ApprovalState.PENDING ? (
-                            <Dots>{i18n._(t`Approving ${currencies[Field.CURRENCY_A]?.symbol}`)}</Dots>
+                            <Dots>{i18n._(t`Approving`)}</Dots>
                           ) : (
                             i18n._(t`Approve ${currencies[Field.CURRENCY_A]?.symbol}`)
                           )}
@@ -540,7 +504,7 @@ export default function Add() {
                           }}
                         >
                           {approvalB === ApprovalState.PENDING ? (
-                            <Dots>{i18n._(t`Approving ${currencies[Field.CURRENCY_B]?.symbol}`)}</Dots>
+                            <Dots>{i18n._(t`Approving`)}</Dots>
                           ) : (
                             i18n._(t`Approve ${currencies[Field.CURRENCY_B]?.symbol}`)
                           )}
