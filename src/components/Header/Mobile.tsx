@@ -40,7 +40,7 @@ const Mobile: FC = () => {
       <header className="w-full flex mt-3 items-center justify-between min-h-[48px] h-[48px] px-4">
         <div className="flex justify-between flex-grow">
           {[1, 250, 43114].includes(chainId) &&
-            <div className="mt-5 rounded-full">
+            <div className="mt-2 rounded-full">
               <MenuAlt1Icon width={24} className={classNames(isLuxor ? "hover:text-yellow" : `hover:text-[${getChainColor(chainId)}]`, `text-[${getChainColor(chainId)}]`, "cursor-pointer hover:text-white")} onClick={() => setOpen(true)} />
             </div>
           }
@@ -92,17 +92,17 @@ const Mobile: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
-        <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full xl:w-auto bg-dark-1000 hover-bg-dark-900 xl:relative xl:p-0 xl:bg-transparent">
+        <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full xl:w-auto bg-dark-1100 hover-bg-dark-900 xl:relative xl:p-0 xl:bg-transparent">
           <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
-            {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
-              <div className="sm:inline-block">
+            <div className="sm:inline-block">
+              {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                 <TokenStats />
-              </div>
-            }
+              }
+            </div>
             <div className="w-auto flex items-center rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto">
               {account && chainId && userEthBalance && (
                 <>
-                  <div className="hidden 2xl:flex px-2 py-2 text-primary text-bold">
+                  <div className="flex px-2 py-2 text-primary text-bold">
                     {userEthBalance?.toSignificant(4)
                       .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                     }
@@ -113,10 +113,10 @@ const Mobile: FC = () => {
               <div className="inline-block">
                 <Web3Status />
               </div>
-              <div className="cols flex-cols-2 inline-block">
+              <div className="inline-block">
                 <Web3Network />
               </div>
-              <div className="grid grid-cols-1 mr-2 inline-block">
+              <div className="inline-block mr-2">
                 <More />
               </div>
             </div>

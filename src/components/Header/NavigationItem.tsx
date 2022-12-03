@@ -45,8 +45,8 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
         weight={700}
         variant="sm"
         className={classNames(
-          router.asPath === link ? `text-[${getChainColor(chainId)}]` : '',
-          isLuxor ? 'hover:text-yellow' : `hover:text-[${getChainColor(chainId)}]`, 'font-bold py-5 px-2 rounded flex gap-3'
+          router.asPath === link ? `bg-${getChainColorCode(chainId)}` : '',
+          isLuxor ? 'hover:text-yellow' : `hover:text-[${getChainColor(chainId)}]`, 'font-bold py-3 px-2 rounded flex gap-3'
         )}
       >
         {!isDesktop && node.icon}
@@ -68,7 +68,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
             <Typography
               weight={700}
               variant="sm"
-              className={classNames(open && !isLuxor && `text-[${getChainColor(chainId)}]`, open && isLuxor && 'text-yellow', 'font-bold py-5 px-2 rounded flex gap-3 items-center')}
+              className={classNames(open && !isLuxor && `text-[${getChainColor(chainId)}]`, open && isLuxor && 'text-yellow', 'font-bold py-2 px-2 rounded flex gap-3 items-center')}
             >
               {!isDesktop && node.icon}
               {node.title}

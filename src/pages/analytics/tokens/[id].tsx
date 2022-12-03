@@ -276,8 +276,8 @@ export default function Token() {
               <Button
                 size="xs"
                 variant="filled"
-                color={getChainColorCode(chainId)}
-              >
+                color={"ftmBlue"}
+                >
 
                 <div className="flex justify-center items-center space-x-1">
                   <div className="text-xl items-center font-medium text-high-emphesis">{formatNumber(price ?? 0, true)}</div>

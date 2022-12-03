@@ -126,9 +126,9 @@ function Web3StatusInner() {
           </div>
         ) : (
           // <div className="flex items-center gap-2">
-          <div className="grid items-center grid-flow-col items-center justify-center bg-dark-900 h-[24px] w-[24px] text-sm rounded pointer-events-auto auto-cols-max text-secondary">
+          <div className="grid items-center grid-flow-col items-center justify-center bg-dark-900 h-[24px] w-[24px] text-sm pointer-events-auto auto-cols-max text-secondary">
             {/* <div>{ENSName || shortenAddress(account)} </div> */}
-            <WalletIcon width={25} className={`text-[${getChainColor(chainId)}]`} />
+            <WalletIcon width={24} height={24} className={`text-[${getChainColor(chainId)}]`} />
             {/* <Davatar
               size={20}
               address={account}

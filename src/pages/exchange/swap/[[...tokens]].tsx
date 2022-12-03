@@ -596,7 +596,7 @@ const Swap = () => {
             <div className="flex -mt-6 -mb-6 z-0 justify-between">
               <Button
                 size={'xs'}
-                className={classNames(`mx-[42%] rounded rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
+                className={classNames(`mx-[42%] rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
                 onClick={() =>
                   handleSwitchTokens(currencies?.INPUT, currencies?.OUTPUT)
                 }                >
@@ -610,7 +610,7 @@ const Swap = () => {
               </Button>
               <Button
                 size={'xs'}
-                className={classNames(`rounded rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
+                className={classNames(`rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
                 onClick={handleLimitSwap}
               >
                 <Image
