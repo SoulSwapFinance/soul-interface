@@ -28,12 +28,36 @@ export type MenuItem = MenuItemLeaf | MenuItemNode
 export type Menu = MenuItem[]
 
 type UseMenu = () => Menu
+
 const useMenu: UseMenu = () => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
-  const router = useRouter()
-  const isLuxor = router.asPath.startsWith('/luxor')
 
+  const router = useRouter()
+  const isActive = (activeLinks) => router.asPath.startsWith(activeLinks)
+
+  // const swapLink = '/swap'
+  // const exchangeLink = '/exchange'
+
+  // const bondLink = '/bond'
+  // const bondsLink = '/bonds'
+  // const farmLink = '/farm'
+  // const farmsLink = '/farms'
+  // const summonerLink = '/summoner'
+  
+  // const stakeLink = '/stake'
+  // const autoStakeLink = '/autostake'
+
+  // const analyticsLink = '/analytics'
+  // const lendingLink = '/lend'
+  const isLuxor = router.asPath.startsWith('/luxor')
+  const isSwap =  router.asPath.startsWith('/swap')
+  const isBond = router.asPath.startsWith('/bonds')
+  const isFarm =  router.asPath.startsWith('/farm')
+  const isStake =  router.asPath.startsWith('/autostake')
+  const isAnalytics =  router.asPath.startsWith('/analytics')
+  const isLending =  router.asPath.startsWith('/lend')
+  
   return useMemo(() => {
     if (!chainId) return []
 
@@ -42,7 +66,10 @@ const useMenu: UseMenu = () => {
       key: 'swap',
       title: i18n._(t`Swap`),
       link: '/swap',
-      icon: <SwitchVerticalIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+      icon: <SwitchVerticalIcon width={20} className={
+        classNames('text-white'
+        )} 
+        />,
     }
 
     // If AMM is enabled, replace swap button with a submenu under trade
@@ -103,7 +130,11 @@ const useMenu: UseMenu = () => {
       const farmItems = {
         key: 'farm',
         title: i18n._(t`Farm`),
-        icon: <CurrencyDollarIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+        icon: <CurrencyDollarIcon width={20} className={classNames(
+          "filter", "text-white"
+          // isFarm ? 'text-black' : `text-[${getChainColor(chainId)}]`
+          // isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`
+          )} />,
         link: '/farm'
       }
       mainItems.push(farmItems)
@@ -113,7 +144,11 @@ const useMenu: UseMenu = () => {
       const mintItems = {
         key: 'bond',
         title: i18n._(t`Bond`),
-        icon: <MoonIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+        icon: <MoonIcon width={20} className={classNames(
+          "filter", "text-white"
+          // isBond ? 'text-black' : `text-[${getChainColor(chainId)}]`
+          // isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`
+          )} />,
         link: '/bonds'
       }
       mainItems.push(mintItems)
@@ -123,7 +158,11 @@ const useMenu: UseMenu = () => {
       const stakeItems = {
         key: 'stake',
         title: i18n._(t`Stake`),
-        icon: <StarIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+        icon: <StarIcon width={20} className={classNames(
+          "filter", "text-white"
+          // isStake ? 'text-black' : `text-[${getChainColor(chainId)}]`
+        )} 
+        />,
         link: '/autostake'
       }
       mainItems.push(stakeItems)
@@ -194,7 +233,11 @@ const useMenu: UseMenu = () => {
       let analyticsMenu: MenuItem = {
         key: 'analytics',
         title: i18n._(t`Data`),
-        icon: <TrendingUpIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+        icon: <TrendingUpIcon width={20} className={classNames(
+          "text-white"
+          // isAnalytics ? 'text-black' : `text-[${getChainColor(chainId)}]`
+          // isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`
+          )} />,
         link: '/analytics'
         // link: '/info'
         // items: [
@@ -223,20 +266,24 @@ const useMenu: UseMenu = () => {
       mainItems.push(analyticsMenu)
     }
 
-    if (featureEnabled(Feature.AMM, chainId)) {
-      mainItems.push({
-        key: 'explorer',
-        title: i18n._(t`Explore`),
-        icon: <GlobeIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
-        link: `/explorer`,
-      })
-    }
+    // if (featureEnabled(Feature.AMM, chainId)) {
+    //   mainItems.push({
+    //     key: 'explorer',
+    //     title: i18n._(t`Explore`),
+    //     icon: <GlobeIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+    //     link: `/explorer`,
+    //   })
+    // }
 
     if (featureEnabled(Feature.AMM, chainId)) {
       mainItems.push({
           key: 'lending',
           title: i18n._(t`Lend`),
-          icon: <SwitchVerticalIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+          icon: <SwitchVerticalIcon width={20} className={classNames(
+            "rotate-90 filter", "text-white"
+            // isLending ? 'text-black' : `text-[${getChainColor(chainId)}]`
+            // isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`
+          )} />,
           link: '/lend'
       })
     }
@@ -246,7 +293,9 @@ const useMenu: UseMenu = () => {
         key: 'socials',
         title: i18n._(t`Follow`),
         icon: <UserGroupIcon width={20} 
-        className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+        className={classNames(
+          `text-[${getChainColor(chainId)}]`
+        )} />,
         link: `https://twitter.com/${isLuxor ? 'LuxorMoney' : 'SoulSwapFinance'}`,
         // items: [
         //   {

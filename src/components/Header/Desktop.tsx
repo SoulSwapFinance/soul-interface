@@ -50,11 +50,11 @@ const Desktop: FC = () => {
 
   return (
     <>
-      <header className="w-full flex items-center text-white justify-center border border-dark-1000 min-h-[64px] h-[64px] px-4">
-        <div className="flex justify-between flex-grow">
+      <header className="w-full flex items-center text-white justify-center border border-dark-1000 min-h-[48px] h-[48px] px-4">
+        <div className="flex ml-4 justify-between flex-grow">
           <div className="p-1 bg-dark-900 rounded-full hover:bg-dark-800">
             {/* <div className="flex p-2 justify-between"> */}
-            <MenuAlt1Icon width={24} className={classNames([1, 250, 43114].includes(chainId) ? 'text-white cursor-pointer' : 'hidden')} onClick={() => setOpen(true)} />
+            <MenuAlt1Icon width={24} className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? 'text-white cursor-pointer' : 'hidden')} onClick={() => setOpen(true)} />
           </div>
           {/* <div className="flex w-6 mr-4 items-center">
                   <NavLink href="/landing">
@@ -72,7 +72,7 @@ const Desktop: FC = () => {
           }>
           <Container maxWidth="3xl" className="rounded rounded-4xl text-center items-center justify-center">
             <div
-              className="flex gap-1 px-1 sm:gap-4 md:gap-18 justify-left items-center">
+              className="flex rounded rounded-xl gap-1 px-1 sm:gap-4 md:gap-18 justify-center items-center">
               {menu.map((node) => {
                 return <NavigationItem node={node} key={node.key} />
               })}
@@ -136,17 +136,17 @@ const Desktop: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
-        <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full xl:w-auto bg-dark-1000 hover-bg-dark-900 xl:relative xl:bg-transparent">
+        <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full xl:w-auto rounded rounded-xl xl:relative xl:bg-transparent">
           <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
-            {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
-              <div className="sm:inline-block">
+            <div className="sm:inline-block rounded rounded-xl p-1.5 bg-dark-800">
+              {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                 <TokenStats />
-              </div>
-            }
-            <div className="w-auto flex items-center rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto">
+              }
+            </div>
+            <div className="w-auto flex items-center rounded bg-dark-800 hover:border hover:border-dark-900 p-1.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto">
               {account && chainId && userEthBalance && (
                 <>
-                  <div className="hidden 2xl:flex px-2 py-2 text-primary text-bold">
+                  <div className="flex px-2 py-2 text-primary text-bold">
                     {userEthBalance?.toSignificant(4)
                       .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                     }
@@ -154,15 +154,22 @@ const Desktop: FC = () => {
                   </div>
                 </>
               )}
+              {/* WALLET ICON */}
               <div className="inline-block">
                 <Web3Status />
               </div>
-              <div className="cols flex-cols-2 inline-block">
+              <div className="inline-block">
                 <Web3Network />
               </div>
-              <div className="grid grid-cols-1 mr-2 inline-block">
+              <div className="inline-block">
                 <More />
               </div>
+              {/* <div className="cols flex-cols-2 inline-block">
+                <Web3Network />
+              </div> */}
+              {/* <div className="grid grid-cols-1 mr-2 inline-block">
+                <More />
+              </div> */}
             </div>
           </div>
         </div>
