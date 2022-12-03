@@ -15,7 +15,7 @@ export default function Menu() {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const blockchainPrefix = chainId 
-    == ChainId.AVALANCHE ? 'avax-info' : 'info'
+    == ChainId.AVALANCHE ? 'https://avax-info' : 'https://info'
   
   const items = (i18n: I18n) => [
   {
