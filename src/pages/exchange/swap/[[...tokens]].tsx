@@ -1,4 +1,5 @@
-import { ArrowDownIcon, ChevronDoubleUpIcon } from '@heroicons/react/solid'
+import ReactGA from 'react-ga'
+import Image from 'next/image'
 import ChevronUpDown from 'assets/svg/icons/ChevronUpDown.svg'
 import ArrowRoundedSquare from 'assets/svg/icons/ArrowRoundedSquare.svg'
 import { t } from '@lingui/macro'
@@ -8,8 +9,6 @@ import { Button } from 'components/Button'
 import Typography from 'components/Typography'
 import Web3Connect from 'components/Web3Connect'
 import ConfirmSwapModal from 'features/swap/ConfirmSwapModal'
-import { useMutation } from '@tanstack/react-query'
-import { getAllChains, swap } from 'features/aggregator/router'
 import SwapDetails from 'features/swap/SwapDetails'
 import UnsupportedCurrencyFooter from 'features/swap/UnsupportedCurrencyFooter'
 import SwapHeader from 'features/swap/SwapHeader'
@@ -30,38 +29,21 @@ import TokenWarningModal from 'modals/TokenWarningModal'
 import { useActiveWeb3React } from 'services/web3'
 import { Field } from 'state/swap/actions'
 import { useDefaultsFromURLSearch, useDerivedSwapInfo, useSwapActionHandlers, useSwapState } from 'state/swap/hooks'
-import { useUserOpenMev, useUserSingleHopOnly } from 'state/user/hooks' // useCrossChainModeManager
+import { useUserOpenMev, useUserSingleHopOnly } from 'state/user/hooks'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import ReactGA from 'react-ga'
-import Image from 'next/image'
 import { Toggle } from 'components/Toggle'
-import SocialWidget from 'components/Social'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { classNames } from 'functions/styling'
-// import { NewFeature } from 'components/Banner'
 import NavLink from 'components/NavLink'
-// import Analytics from 'components/Analytics'
 import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
-// import { currencyId } from 'functions/currency'
 import { useRouter } from 'next/router'
 import Aggregator, { startChain } from './aggregator'
-// import Container from 'components/Container'
-// import Route from 'components/SwapRoute'
-// import Loader from 'features/aggregator/components/Loader'
-import { useGasPrice } from 'hooks/useAPI'
-import BigNumber from 'bignumber.js'
 import useGetPrice from 'features/aggregator/queries/useGetPrice'
-// import useGetRoutes from 'features/aggregator/queries/useGetRoutes'
-import { ethers } from 'ethers'
-import { addTransaction } from 'state/transactions/actions'
-import { getExplorerLink } from 'functions/explorer'
-// import { SubmitButton } from 'features/summoner/Styles'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import Pair from 'pages/analytics/pairs/[id]'
 import Limits from './limit/[[...tokens]]'
 import { currencyId } from 'functions/currency'
-import { GelatoLimitOrdersHistoryPanel } from 'soulswap-limit-orders-react'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -384,25 +366,11 @@ const Swap = () => {
   const [selectedChain, setSelectedChain] = useState(startChain(chainId))
   const [fromToken, setFromToken] = useState<Currency>(currencyA)
   const [toToken, setToToken] = useState<Currency>(currencyB)
-
   const [inputAmount, setInputAmount] = useState('10')
-  // const [slippage, setSlippage] = useState('1')
-  // const [amount, setAmount] = useState('10');
-  // const [txModalOpen, setTxModalOpen] = useState(false);
-  // const [txUrl, setTxUrl] = useState('');
-  const signer = library.getSigner()
-
-  const gasPrice = useGasPrice()?.gasPrice.fast
-  const amountWithDecimals = new BigNumber(inputAmount)
-    .times(10 ** (fromToken?.wrapped.decimals || 18))
-    .toFixed(0);
-
-  const [route, setRoute] = useState(null);
 
   const handleInputTokenSelect = useCallback(
     (inputCurrency: Currency) => {
       setFromToken(inputCurrency)
-      // setInputToken(inputCurrency)
     },
     [setFromToken]
   )
@@ -410,83 +378,9 @@ const Swap = () => {
   const handleOutputTokenSelect = useCallback(
     (outputCurrency: Currency) => {
       setToToken(outputCurrency)
-      // setOutputToken(outputCurrency)
     },
     [setToToken]
   )
-
-  // const { data: routes = [], isLoading } = useGetRoutes({
-  //   chain: selectedChain.value,
-  //   from: fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address,
-  //   to: toToken?.isNative ? NATIVE_ADDRESS : toToken?.wrapped.address,
-  //   amount: amountWithDecimals,
-  //   extra: {
-  //     gasPrice,
-  //     userAddress: account,
-  //     amount,
-  //     fromToken,
-  //     toToken,
-  //     slippage
-  //   }
-  // });
-
-  // const normalizedRoutes = [...(routes || [])]
-  //   ?.map((route) => {
-  //     const gasUsd = (gasTokenPrice * +route.price.estimatedGas * +gasPrice) / 1e18 || 0;
-  //     const amount = +route.price.amountReturned / 10 ** +toToken?.decimals;
-  //     const amountUsd = (amount * toTokenPrice).toFixed(2);
-  //     const netOut = +amountUsd - gasUsd;
-
-  //     return { route, gasUsd, amountUsd, amount, netOut, ...route };
-  //   })
-  //   .filter(({ fromAmount, amount: toAmount }) => Number(toAmount) && amountWithDecimals === fromAmount)
-  //   .sort((a, b) => b.netOut - a.netOut);
-
-
-  // const swapMutation = useMutation({
-  //   mutationFn: (params: {
-  //     chain: string;
-  //     from: string;
-  //     to: string;
-  //     amount: string;
-  //     adapter: string;
-  //     signer: ethers.Signer;
-  //     slippage: string;
-  //     rawQuote: any;
-  //     tokens: { toToken: Currency; fromToken: Currency };
-  //   }) => swap(params),
-  //   onSuccess: (data, variables) => {
-  //     addTransaction({
-  //       chainId: chainId,
-  //       hash: data?.hash,
-  //       from: account,
-  //       summary: `Swap transaction using ${variables.adapter} is sent.`
-  //     });
-  //     const explorerUrl = getExplorerLink(chainId, data, "transaction") // chain.blockExplorers.default.url;
-  //     setTxModalOpen(true);
-
-  //     setTxUrl(`${explorerUrl}/tx/${data?.hash}`);
-  //   },
-  //   onError: (err: { reason: string; code: string }) => {
-  //     if (err.code !== 'ACTION_REJECTED') {
-  //       console.log('Transaction Rejected: %s', err.reason)
-  //     }
-  //   }
-  // });
-
-  // const handleAggregate = () => {
-  //   swapMutation.mutate({
-  //     chain: selectedChain.value,
-  //     from: fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address,
-  //     to: toToken?.isNative ? NATIVE_ADDRESS : toToken?.wrapped.address,
-  //     amount: amountWithDecimals,
-  //     signer,
-  //     slippage,
-  //     adapter: route.name,
-  //     rawQuote: route?.price?.rawQuote,
-  //     tokens: { fromToken, toToken }
-  //   });
-  // };
 
   const handleLimitSwap = useCallback(
     () => {
@@ -501,9 +395,6 @@ const Swap = () => {
     toToken: toToken?.wrapped.address,
     fromToken: fromToken?.wrapped.address
   });
-
-  const { gasTokenPrice = 0, toTokenPrice = 0, fromTokenPrice = 0 } = tokenPrices || {};
-
 
   // AGGREGATOR CONSTANTS [END] //
 
@@ -521,13 +412,6 @@ const Swap = () => {
     },
     [onUserInput]
   )
-
-  // const handleUseAggregator = useCallback(
-  //   (using: boolean) => {
-  //     using ? setUseAggregator(false) : setUseAggregator(true)
-  //   },
-  //   [setUseAggregator]
-  // )
 
   return (
     <>
@@ -814,7 +698,6 @@ const Swap = () => {
                 }
               />
             </div>
-            {/* <div className={classNames(!useAggregator ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}> */}
             <div className={classNames(useLimit ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}>
               <Toggle
                 id="toggle-button"
@@ -850,42 +733,6 @@ const Swap = () => {
               />
             </div>
           </div>
-          {/* {inputToken && outputToken && (
-					<SwapLayoutCard>
-						<Container>
-							<Routes>
-							{isLoading ? <Loader loaded={!isLoading} /> : null}
-							{normalizedRoutes.map((r, i) => (
-								<Route
-									{...r}
-									index={i}
-									selected={route?.name === r.name}
-									setRoute={() => setRoute(r.route)}
-									toToken={outputToken}
-									amountFrom={amountWithDecimals}
-									fromToken={inputToken}
-									selectedChain={selectedChain.label}
-									key={i}
-								/>
-							))}
-							</Routes>
-						</Container>
-					</SwapLayoutCard>
-				)} */}
-          {/* {showChart && [ChainId.FANTOM].includes(chainId) &&
-            <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
-              <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
-                <Chart inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
-              </div>
-            </div>
-          } */}
-          {/* {featureEnabled(Feature.AGGREGATE, chainId) && showAggregator &&
-            <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
-              <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
-                <Chart inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
-              </div>
-            </div>
-          } */}
           {showAnalytics && useSwap && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
             <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
               <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
@@ -894,18 +741,10 @@ const Swap = () => {
               </div>
             </div>
           }
-          {(!showChart && !showAnalytics) &&
+          {/* {(!showChart && !showAnalytics) &&
             <SocialWidget />
-          }
+          } */}
         </SwapLayoutCard>
-      }
-      {
-        <div className="grid grid-cols-1">
-          <Image
-            src='https://app.soulswap.finance/title-soul-halfs.png'
-            height="400px" width="600px" alt="logo"
-          />
-        </div>
       }
     </>
   )

@@ -1,10 +1,10 @@
 {
   "name": "SoulSwap Token List",
-  "timestamp": "2022-11-29T02:15:30.442Z",
+  "timestamp": "2022-12-10T07:03:04.900Z",
   "version": {
     "major": 5,
     "minor": 0,
-    "patch": 8
+    "patch": 9
   },
   "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png",
   "tokens": [
@@ -514,14 +514,6 @@
     },
     {
       "chainId": 250,
-      "name": "Oath Token",
-      "address": "0x21Ada0D2aC28C3A5Fa3cD2eE30882dA8812279B6",
-      "symbol": "OATH",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x21Ada0D2aC28C3A5Fa3cD2eE30882dA8812279B6/logo.png"
-    },  
-    {
-      "chainId": 250,
       "name": "Soul Power",
       "address": "0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07",
       "symbol": "SOUL",
@@ -663,14 +655,6 @@
       "name": "Binance USD",
       "decimals": 18,
       "logoURI": "https://cryptologos.cc/logos/binance-usd-busd-logo.svg"
-    },
-    {
-      "chainId": 43114,
-      "address": "0xc3048E19E76CB9a3Aa9d77D8C03c29Fc906e2437",
-      "symbol": "COMP",
-      "name": "Compound",
-      "decimals": 18,
-      "logoURI": "https://cryptologos.cc/logos/compound-comp-logo.svg"
     },
     {
       "chainId": 43114,

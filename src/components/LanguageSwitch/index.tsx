@@ -70,12 +70,15 @@ const LANGUAGES: {
 
 export default function LangSwitcher() {
   const { locale, locales, asPath } = useRouter()
+  const ogStyle = `inline-flex justify-center w-full px-4 py-2 text-sm font-bold bg-transparent border rounded shadow-sm text-primary border-dark-800 hover:bg-dark-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-700 focus:ring-dark-800`
+  const statStyle = `flex items-center md:space-x-2 rounded bg-dark-900 border border-dark-800 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`
+  const hybridStyle = `flex items-center justify-center px-3 py-2.5 md:space-x-2 rounded bg-dark-900 border border-dark-800 hover:bg-dark-800 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`
   return (
     <Menu as="div" className="relative inline-block text-right">
       {({ open }) => (
         <>
           <div>
-            <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-bold bg-transparent border rounded shadow-sm text-primary border-dark-800 hover:bg-dark-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-700 focus:ring-dark-800">
+            <Menu.Button className={classNames(hybridStyle, ``)}>
               <Image src={LANGUAGES[locale].flag} alt={LANGUAGES[locale].language} width={20} height={20} />
               {/* <ChevronDownIcon className="w-5 h-5 ml-2 -mr-1" aria-hidden="true" /> */}
             </Menu.Button>
