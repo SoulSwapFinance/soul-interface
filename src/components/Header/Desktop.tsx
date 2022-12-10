@@ -18,7 +18,7 @@ import More from './More'
 // import NavLink from 'components/NavLink'
 // import { AURA } from 'constants/tokens'
 import Container from 'components/Container'
-// import LanguageSwitch from 'components/LanguageSwitch'
+import LanguageSwitch from 'components/LanguageSwitch'
 // import { NAV_CLASS } from './styles'
 import useMenu from './useMenu'
 import useBar from './useBar'
@@ -80,15 +80,6 @@ const Desktop: FC = () => {
             </div>
           </Container>
         </nav>
-        {/* <NavLink
-          href="/landing"
-        >
-          <Logo
-            srcs={['https://app.soulswap.finance/logo.png']}
-            width={'50px'}
-            height={'50px'}
-          />
-        </NavLink> */}
 
         <Transition.Root
           show={open}
@@ -121,16 +112,23 @@ const Desktop: FC = () => {
                   <div className="w-screen max-w-sm">
                     <div className={classNames("flex flex-col h-full py-1 overflow-x-hidden overflow-y-scroll shadow-xl",
                       "bg-dark-1100")}>
+
                       <nav className
                         ={classNames("flex-1 py-12 bg-dark-1000 pl-6")} aria-label="Sidebar">
                         {bar.map((node) => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
                       </nav>
+                      <div className="flex w-full justify-center inline-block rounded rounded-xl bg-dark-1000">
+                        {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+                          <TokenStats />
+                        }
+                      </div>
                       <div className="flex items-center justify-start gap-2">
                       </div>
                     </div>
                   </div>
+                  {/* <LanguageSwitch /> */}
                 </Transition.Child>
               </div>
             </div>
@@ -138,12 +136,8 @@ const Desktop: FC = () => {
         </Transition.Root>
         <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full xl:w-auto rounded rounded-xl xl:relative xl:bg-transparent">
           <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
-            <div className="sm:inline-block rounded rounded-xl p-1.5 bg-dark-800">
-              {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
-                <TokenStats />
-              }
-            </div>
-            <div className="w-auto flex items-center rounded bg-dark-800 hover:border hover:border-dark-900 p-1.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto">
+
+            <div className="w-auto flex items-center rounded bg-dark-900 hover:border hover:border-dark-900 p-1.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto">
               {account && chainId && userEthBalance && (
                 <>
                   <div className="flex px-2 py-2 text-primary text-bold">
@@ -155,13 +149,15 @@ const Desktop: FC = () => {
                 </>
               )}
               {/* WALLET ICON */}
-              <div className="inline-block">
+              <div className="inline-block ml-2">
                 <Web3Status />
               </div>
-              <div className="inline-block">
+              {/* NETWORK ICON */}
+              <div className="inline-block ml-2">
                 <Web3Network />
               </div>
-              <div className="inline-block">
+              {/* MORE [...] ICON */}
+              <div className="inline-block ml-1 mr-1">
                 <More />
               </div>
               {/* <div className="cols flex-cols-2 inline-block">

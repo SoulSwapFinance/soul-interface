@@ -18,7 +18,7 @@ import Globe from 'assets/svg/icons/Globe.svg'
 import Chain from 'assets/svg/icons/Chain.svg'
 import ChevronUpDownBlack from 'assets/svg/icons/ChevronUpDownBlack.svg'
 import PlusSign from 'assets/svg/icons/PlusSign.svg'
-import { getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 
 const getQuery = (input?: Currency, output?: Currency) => {
   const { chainId } = useActiveWeb3React()
@@ -37,30 +37,19 @@ interface HeaderProps {
 }
 
 const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
-  const { i18n } = useLingui()
+  // const { i18n } = useLingui()
   const { asPath } = useRouter()
   const { chainId } = useActiveWeb3React()
   const isRemove = asPath.startsWith('/remove')
-  // const tokenA = inputCurrency
-  // const tokenB = outputCurrency
-  // const isCrossChain = asPath.startsWith('/swap')
   const isSwap = asPath.startsWith('/exchange/swap') || asPath.startsWith('/swap')
     || asPath.startsWith('/limit') || asPath.startsWith('exchange/limit')
     || asPath.startsWith('/add') || asPath.startsWith('exchange/add')
     || asPath.startsWith('/remove') || asPath.startsWith('exchange/remove')
 
   const soulEnabled = [ChainId.FANTOM, ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId)
-  const chainColor
-    = chainId == ChainId.FANTOM ? `border-[#1969FF`
-      : chainId == ChainId.AVALANCHE ? `border-[#E84142]`
-        : chainId == ChainId.ETHEREUM ? `border-[#627EEA]`
-          : chainId == ChainId.BSC ? `border-[#F0B90B]`
-            : chainId == ChainId.MATIC ? `border-[#8247E5]`
-              : chainId == ChainId.MOONRIVER ? `border-[#53CBC9]`
-                : `border-[#1969FF]`
-  const hoverColor = `${chainColor} hover:text-white`
-  const activeNavLink = `border rounded text-white -mt-1 border-${getChainColorCode(chainId)}`
-  const typographyStyle = `border rounded rounded-xl ${chainColor} bg-${getChainColorCode(chainId)}`
+
+  const activeNavLink = `border border-3 bg-${getChainColorCode(chainId)} rounded text-white`
+  const inactiveNavLink = `text-secondary bg-white mt-4 mb-2 rounded rounded-xl border-[${getChainColor(chainId)}]`
  
   return (
     <div className="flex items-center justify-between gap-2">
@@ -75,7 +64,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               : `/exchange/swap?inputCurrency=${NATIVE[chainId].symbol}&outputCurrency=${soulEnabled ? SOUL_ADDRESS[chainId] : USDC_ADDRESS[chainId]}`
           }
         >
-            <Typography weight={700} className={`text-secondary bg-${getChainColorCode(chainId)} mt-4 mb-2 rounded rounded-xl`}>
+            <Typography weight={700} className={inactiveNavLink}>
             <Image className={"mt-2"} alt={"chevron up down black icon"}          
             src={ChevronUpDownBlack}  />
           </Typography>
@@ -88,7 +77,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             href={`/exchange/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
               }`}
           >
-            <Typography weight={700} className={`text-secondary bg-${getChainColorCode(chainId)} mt-4 mb-2 rounded rounded-xl`}>
+            <Typography weight={700} className={inactiveNavLink}>
             <Image 
             alt={"add icon"}
             src={PlusSign} />
@@ -102,7 +91,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             )}
             href={'/bridge'}
           >
-            <Typography weight={700} className={`text-secondary bg-${getChainColorCode(chainId)} mt-4 mb-2 rounded rounded-xl`}>
+            <Typography weight={700} className={inactiveNavLink}>
               <Image 
               alt={"bridge icon"}
               src={Globe} />
@@ -116,7 +105,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             )}
             href={'/cross'}
           >
-            <Typography weight={700} className={`text-secondary bg-${getChainColorCode(chainId)} mt-4 mb-2 rounded rounded-xl`}>
+            <Typography weight={700} className={inactiveNavLink}>
               <Image alt={"chain icon"} src={Chain} />
             </Typography>
           </NavLink>
