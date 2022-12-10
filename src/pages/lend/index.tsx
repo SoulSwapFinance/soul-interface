@@ -217,7 +217,7 @@ const LendEntry = ({ pair, userPosition = false }) => {
   const interestPerSecond = 1E18 / Number(underworldPairInfo.interestPerSecond)
   // const APR = 86_600 * interestPerSecond * 365
   const _supplyAPR = Number(useUnderworldPairAPI(pair.address)[7]) // * 100 / 1E18)
-  const supplyAPR = chainId == ChainId.AVALANCHE ? pair.supplyAPR.string :  _supplyAPR / 1E18 * 100
+  const supplyAPR = chainId == ChainId.AVALANCHE ?               pair.currentSupplyAPR.stringWithStrategy :  _supplyAPR / 1E18 * 100
   const assetAddress = pair?.asset.tokenInfo.address
   const collateralAddress = pair?.collateral.tokenInfo.address
   const blockchain = chainId == ChainId.FANTOM ? 'fantom' : 'avalanche'
