@@ -1,5 +1,5 @@
 export const createLooksRareOrder = async (payload: any): Promise<boolean> => {
-    const url = `${process.env.REACT_APP_TEMP_API_URL}/nft/createLooksRareOrder`
+    const url = `${"https://temp.api.uniswap.org/v1"}/nft/createLooksRareOrder`
     const res = await fetch(url, {
       method: 'POST',
       headers: {

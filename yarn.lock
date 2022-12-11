@@ -121,6 +121,17 @@
     "@amplitude/ua-parser-js" "^0.7.31"
     tslib "^2.3.1"
 
+"@amplitude/analytics-browser@^1.5.8":
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/@amplitude/analytics-browser/-/analytics-browser-1.6.6.tgz#33d92d60aa6e7269bfdbbfea66b2dd1b7ad0b049"
+  integrity sha512-tR7JH5TPNt9h1PMOhnMP+aJdmty81ZaFg9UhIXHf86Crdac2GoYLXnzq3vMNK2Ad809jcGKssXJnVFkfXGxgIg==
+  dependencies:
+    "@amplitude/analytics-client-common" "^0.5.0"
+    "@amplitude/analytics-core" "^0.11.0"
+    "@amplitude/analytics-types" "^0.14.0"
+    "@amplitude/ua-parser-js" "^0.7.31"
+    tslib "^2.3.1"
+
 "@amplitude/analytics-client-common@^0.3.1":
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/@amplitude/analytics-client-common/-/analytics-client-common-0.3.1.tgz#b2a912009a56863e0c20c6dc5684c4084e5d0944"
@@ -131,12 +142,30 @@
     "@amplitude/analytics-types" "^0.11.0"
     tslib "^2.3.1"
 
+"@amplitude/analytics-client-common@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@amplitude/analytics-client-common/-/analytics-client-common-0.5.0.tgz#a42ccd35a197c5b4a01875bc0fe76e6e3025446f"
+  integrity sha512-kqtv26b1bZoeGpQLaLqxW4E88S042++0mjpjCe/ekKbmk8pNlmq7nF3dfZZMDmtcAia7Z0YOxvZNgWoNPgiAUw==
+  dependencies:
+    "@amplitude/analytics-connector" "^1.4.5"
+    "@amplitude/analytics-core" "^0.11.0"
+    "@amplitude/analytics-types" "^0.14.0"
+    tslib "^2.3.1"
+
 "@amplitude/analytics-connector@^1.4.5":
   version "1.4.5"
   resolved "https://registry.yarnpkg.com/@amplitude/analytics-connector/-/analytics-connector-1.4.5.tgz#07e9375101332bd8b6f15e39e70f31f287e87ad0"
   integrity sha512-ELAP6ivg+13uSk+TOirGZE/92M+tTbeiQ/i7eXgDO4Hiy00Abf/UxO/rp9WovtxCyeFYTILrujEYxPv5cRQmFw==
   dependencies:
     "@amplitude/ua-parser-js" "0.7.31"
+
+"@amplitude/analytics-core@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@amplitude/analytics-core/-/analytics-core-0.11.0.tgz#e8bf16c08291ef86f029f039a10f415c15bc4e83"
+  integrity sha512-0X/3xMR/Ljl6JVgsIVALhKn9pBHxgyRgDqWIeRlwdingWIeWttQP8+TSpGI2S9xIeUdAdo0Urul/NMJGHFs07Q==
+  dependencies:
+    "@amplitude/analytics-types" "^0.14.0"
+    tslib "^2.3.1"
 
 "@amplitude/analytics-core@^0.9.6":
   version "0.9.6"
@@ -150,6 +179,11 @@
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/@amplitude/analytics-types/-/analytics-types-0.11.0.tgz#20efb8e36e44729a235e075bec6690346678138d"
   integrity sha512-xvqGwF9Ga1zd41AcJdfSL7HFqfv/us25gotzxc3N9a3KsRwAkrcYRfsx0baaD4iLUQDNFfFq3OCW83T/UK4lgw==
+
+"@amplitude/analytics-types@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@amplitude/analytics-types/-/analytics-types-0.14.0.tgz#06848235e52fe1d46a6e04bbc5d14090bdde15e3"
+  integrity sha512-O3E/KHyWCb4HAlYevqgCzqQdS+0LhbJV2IeVGox2eyCge+/lGwtGdJV2rJNWcoGf3p+BhnbqJBlhkPMs12iniA==
 
 "@amplitude/ua-parser-js@0.7.31", "@amplitude/ua-parser-js@^0.7.31":
   version "0.7.31"
@@ -7516,6 +7550,15 @@
   resolved "https://registry.yarnpkg.com/@ungap/promise-all-settled/-/promise-all-settled-1.1.2.tgz#aa58042711d6e3275dd37dc597e5d31e8c290a44"
   integrity sha512-sL/cEvJWAnClXw0wHk85/2L0G6Sj8UB0Ctc1TEMbKSsmpRosqhwj9gWgFRZSrBr2f9tiXISwNhCPmlfqUqyb9Q==
 
+"@uniswap/analytics@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@uniswap/analytics/-/analytics-1.2.0.tgz#38452f31ca249903e0bdc8739f42ed437fdc4911"
+  integrity sha512-oO9+mhDJVGm2tqFic6PVQ8v75snbLaGymqs3wauwMXrdy4fMeNSCrKfnaGAKElRUYus3eDLMy/cbXy3Md3iRZA==
+  dependencies:
+    "@amplitude/analytics-browser" "^1.5.8"
+    react "^18.2.0"
+    react-dom "^18.2.0"
+
 "@uniswap/default-token-list@^2.0.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@uniswap/default-token-list/-/default-token-list-2.3.0.tgz#e5e522e775791999643aac9b0faf1ccfb4c49bd8"
@@ -10341,6 +10384,11 @@ bignumber.js@9.1.0, bignumber.js@^9.0.2, bignumber.js@^9.1.0:
   version "9.1.0"
   resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-9.1.0.tgz#8d340146107fe3a6cb8d40699643c302e8773b62"
   integrity sha512-4LwHK4nfDOraBCtst+wOWIHbu1vhvAPJK8g8nROd4iuc3PSEjWif/qwbkh8jwCJz6yDBvtU4KPynETgrfh7y3A==
+
+bignumber.js@^8.1.1:
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-8.1.1.tgz#4b072ae5aea9c20f6730e4e5d529df1271c4d885"
+  integrity sha512-QD46ppGintwPGuL1KqmwhR0O+N2cZUg8JG/VzwI2e28sM9TqHjQB10lI4QAaMHVbLzwVLLAwEglpKPViWX+5NQ==
 
 bignumber.js@^9.0.0, bignumber.js@^9.0.1, bignumber.js@~9.0.2:
   version "9.0.2"
@@ -20266,6 +20314,13 @@ number-to-bn@1.7.0:
   dependencies:
     bn.js "4.11.6"
     strip-hex-prefix "1.0.0"
+
+numbro@^2.3.6:
+  version "2.3.6"
+  resolved "https://registry.yarnpkg.com/numbro/-/numbro-2.3.6.tgz#4bd622ebe59ccbc49dad365c5b9eed200781fa21"
+  integrity sha512-pxpoTT3hVxQGaOA2RTzXR/muonQNd1K1HPJbWo7QOmxPwiPmoFCFfsG9XXgW3uqjyzezJ0P9IvCPDXUtJexjwg==
+  dependencies:
+    bignumber.js "^8.1.1"
 
 numeral@^2.0.6:
   version "2.0.6"
