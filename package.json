@@ -186,6 +186,7 @@
     "@types/gtag.js": "0.0.7",
     "@types/ms.macro": "^2.0.0",
     "@uniswap/analytics": "^1.2.0",
+    "@uniswap/analytics-events": "^1.2.0",
     "@uniswap/redux-multicall": "^1.1.5",
     "@visx/event": "^2.6.0",
     "@visx/glyph": "^2.10.0",

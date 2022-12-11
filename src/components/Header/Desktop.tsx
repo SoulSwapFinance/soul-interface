@@ -1,34 +1,22 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { MenuAlt1Icon } from '@heroicons/react/outline'
 import { ChainId, NATIVE } from 'sdk'
-// import { InjectedConnector } from '@web3-react/injected-connector'
-// import { WalletLinkConnector } from '@web3-react/walletlink-connector'
-// import Web3Network from 'components/Web3Network'
 import Web3Status from 'components/Web3Status'
 import { useActiveWeb3React } from 'services/web3'
-import { useETHBalances, useTokenBalance } from 'state/wallet/hooks'
+import { useETHBalances } from 'state/wallet/hooks'
 import React, { FC, Fragment, useState } from 'react'
-import Image from 'next/image'
 
 import { NavigationItem } from './NavigationItem'
 import { SidebarItem } from './SidebarItem'
 import TokenStats from 'components/TokenStats'
-import LuxorStats from 'components/LuxorStats'
 import More from './More'
-// import NavLink from 'components/NavLink'
-// import { AURA } from 'constants/tokens'
 import Container from 'components/Container'
-import LanguageSwitch from 'components/LanguageSwitch'
-// import { NAV_CLASS } from './styles'
 import useMenu from './useMenu'
 import useBar from './useBar'
-import NavLink from 'components/NavLink'
 import { useRouter } from 'next/router'
 import { classNames } from 'functions'
 import Web3Network from 'components/Web3Network'
-import Logo from 'components/Logo'
-import { getChainColor } from 'constants/chains'
-// import useMobileMenu from './useMobileMenu'
+import LanguageMenu from './useLanguages'
 
 const HEADER_HEIGHT = 64
 
@@ -41,12 +29,6 @@ const Desktop: FC = () => {
 
   const [open, setOpen] = useState(false)
   const router = useRouter()
-  // const isLuxor = router.asPath.startsWith('/luxor')
-
-  // const isCbWallet =
-  //   connector instanceof WalletLinkConnector ||
-  //   (connector instanceof InjectedConnector && window.walletLinkExtension) ||
-  //   window?.ethereum?.isCoinbaseWallet
 
   return (
     <>
@@ -76,7 +58,6 @@ const Desktop: FC = () => {
               {menu.map((node) => {
                 return <NavigationItem node={node} key={node.key} />
               })}
-              {/* <LanguageSwitch /> */}
             </div>
           </Container>
         </nav>
@@ -155,6 +136,9 @@ const Desktop: FC = () => {
               {/* NETWORK ICON */}
               <div className="inline-block ml-2">
                 <Web3Network />
+              </div>
+              <div className="inline-block ml-1 mr-1">
+                <LanguageMenu />
               </div>
               {/* MORE [...] ICON */}
               <div className="inline-block ml-1 mr-1">

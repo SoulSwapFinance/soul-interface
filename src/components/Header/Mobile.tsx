@@ -22,6 +22,7 @@ import { classNames } from 'functions/styling'
 import { getChainColor } from 'constants/chains'
 import { NavigationItem } from './NavigationItem'
 import LanguageSwitch from 'components/LanguageSwitch'
+import LanguageMenu from './useLanguages'
 // const HEADER_HEIGHT=24
 
 const Mobile: FC = () => {
@@ -83,6 +84,12 @@ const Mobile: FC = () => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
                       </nav>
+                      <div className="flex w-full justify-center inline-block rounded rounded-xl bg-dark-1000">
+                        {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+                          <TokenStats />
+                        }
+
+                      </div>
                       <div className="flex flex-col gap-4 px-4 sm:px-6">
                       </div>
                     </div>
@@ -92,14 +99,10 @@ const Mobile: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
-        <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full xl:w-auto bg-dark-1100 hover-bg-dark-900 xl:relative xl:p-0 xl:bg-transparent">
-          <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
-            <div className="sm:inline-block">
-              {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
-                <TokenStats />
-              }
-            </div>
-            <div className="w-auto flex items-center rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto">
+        <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full xl:w-auto rounded rounded-xl xl:relative xl:bg-transparent">
+          <div className="flex items-center w-full space-x-2 justify-end">
+
+            <div className="w-auto flex items-center rounded bg-dark-900 hover:border hover:border-dark-900 p-1.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto">
               {account && chainId && userEthBalance && (
                 <>
                   <div className="flex px-2 py-2 text-primary text-bold">
@@ -110,18 +113,30 @@ const Mobile: FC = () => {
                   </div>
                 </>
               )}
-              <div className="inline-block">
+              {/* WALLET ICON */}
+              <div className="inline-block ml-2">
                 <Web3Status />
               </div>
-              <div className="inline-block">
+              {/* NETWORK ICON */}
+              <div className="inline-block ml-2">
                 <Web3Network />
               </div>
-              <div className="inline-block mr-2">
+              <div className="inline-block ml-1 mr-1">
+                          <LanguageMenu />
+                        </div>
+              {/* MORE [...] ICON */}
+              <div className="inline-block ml-1 mr-1">
                 <More />
               </div>
+              {/* <div className="cols flex-cols-2 inline-block">
+                <Web3Network />
+              </div> */}
+              {/* <div className="grid grid-cols-1 mr-2 inline-block">
+                <More />
+              </div> */}
             </div>
           </div>
-        </div>
+          </div>
       </header>
     </>
   )

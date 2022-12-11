@@ -7550,6 +7550,11 @@
   resolved "https://registry.yarnpkg.com/@ungap/promise-all-settled/-/promise-all-settled-1.1.2.tgz#aa58042711d6e3275dd37dc597e5d31e8c290a44"
   integrity sha512-sL/cEvJWAnClXw0wHk85/2L0G6Sj8UB0Ctc1TEMbKSsmpRosqhwj9gWgFRZSrBr2f9tiXISwNhCPmlfqUqyb9Q==
 
+"@uniswap/analytics-events@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@uniswap/analytics-events/-/analytics-events-1.2.0.tgz#9a509cd782dcf170b3b7cf1207126ee197658cc5"
+  integrity sha512-CGvvG6jiGx/ez5rJqWavAV3CDlecX2ZR7oBl1mMYVSnzXv9GsoleeiZAYcETJvEt2hKhmEq0tg7xjwP0pMav9A==
+
 "@uniswap/analytics@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@uniswap/analytics/-/analytics-1.2.0.tgz#38452f31ca249903e0bdc8739f42ed437fdc4911"

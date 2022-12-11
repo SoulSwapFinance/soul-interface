@@ -1,5 +1,4 @@
 import { Menu, Transition } from '@headlessui/react'
-
 import { ChevronDownIcon } from '@heroicons/react/solid'
 import { Fragment } from 'react'
 import Image from 'next/image'
@@ -84,7 +83,7 @@ export default function LangSwitcher() {
             </Menu.Button>
           </div>
 
-          <Transition
+          {/* <Transition
             show={open}
             as={Fragment}
             enter="transition ease-out duration-100"
@@ -93,6 +92,16 @@ export default function LangSwitcher() {
             leave="transition ease-in duration-75"
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
+          > */}
+          <Transition
+            show={open}
+            as={Fragment}
+            enter="transition ease-out duration-200"
+            enterFrom="opacity-0 translate-y-1"
+            enterTo="opacity-10 translate-y-0"
+            leave="transition ease-in duration-150"
+            leaveFrom="opacity-100 translate-y-0"
+            leaveTo="opacity-0 translate-y-1"
           >
             <Menu.Items className="absolute right-0 w-[161px] mt-2 origin-top-right divide-y divide-dark-600 rounded shadow-lg bg-dark-800 ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div className="p-2 space-y-2">
