@@ -88,9 +88,7 @@ const Mobile: FC = () => {
                         {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                           <TokenStats />
                         }
-                          <div className="inline-block ml-1 mr-1">
-                          <LanguageMenu />
-                        </div>
+
                       </div>
                       <div className="flex flex-col gap-4 px-4 sm:px-6">
                       </div>
@@ -123,7 +121,9 @@ const Mobile: FC = () => {
               <div className="inline-block ml-2">
                 <Web3Network />
               </div>
-
+              <div className="inline-block ml-1 mr-1">
+                          <LanguageMenu />
+                        </div>
               {/* MORE [...] ICON */}
               <div className="inline-block ml-1 mr-1">
                 <More />
