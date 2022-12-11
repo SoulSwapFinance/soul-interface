@@ -27,7 +27,7 @@ import { useRouter } from 'next/router'
 import { classNames } from 'functions'
 import Web3Network from 'components/Web3Network'
 import Logo from 'components/Logo'
-import { getChainColorCode } from 'constants/chains'
+import { getChainColor } from 'constants/chains'
 // import useMobileMenu from './useMobileMenu'
 
 const HEADER_HEIGHT = 64
@@ -50,7 +50,7 @@ const Desktop: FC = () => {
 
   return (
     <>
-      <header className="w-full flex items-center text-white justify-center border border-dark-1000 min-h-[48px] h-[48px] px-4">
+      <header className="w-full flex items-center text-white bg-dark-1000 justify-center min-h-[48px] h-[48px] px-4">
         <div className="flex ml-4 justify-between flex-grow">
           <div className="p-1 bg-dark-900 rounded-full hover:bg-dark-800">
             {/* <div className="flex p-2 justify-between"> */}
@@ -67,9 +67,9 @@ const Desktop: FC = () => {
             `backdrop-blur-fallback w-full \
               h-full before:backdrop-saturate-[1.2] \
               before:backdrop-blur-[20px] before:z-[-1] \
-              before:absolute before:w-full before:h-full \
-              border-b border-${getChainColorCode(chainId)} mx-4`)
-          }>
+              before:absolute before:w-full before:h-full mx-4`
+              )
+            }>
           <Container maxWidth="3xl" className="rounded rounded-4xl text-center items-center justify-center">
             <div
               className="flex rounded rounded-xl gap-1 px-1 sm:gap-4 md:gap-18 justify-center items-center">
