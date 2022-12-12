@@ -1,7 +1,7 @@
 import graphql from 'babel-plugin-relay/macro'
 import { parseEther } from 'ethers/lib/utils'
 // import useInterval from 'lib/hooks/useInterval'
-import ms from 'ms.macro'
+// import ms from 'ms.macro'
 import { GenieAsset, Trait } from 'features/nft/types'
 import { wrapScientificNotation } from 'features/nft/utils'
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -18,6 +18,10 @@ import useInterval from 'hooks/useInterval'
 //   NftMarketplace,
 // } from './__generated__/AssetQuery.graphql'
 // import { AssetQuery_nftAssets$data } from './__generated__/AssetQuery_nftAssets.graphql'
+
+let FIVE_SECONDS = 5 * 100 // ms`60 seconds`
+let ONE_HUNDRED_EIGHTY_DAYS = 180 * 86_400 * 100 // ms`180 days`
+let ONE_HOUR = 60 * 60 * 100 // ms`1 hour`
 
 const assetPaginationQuery = graphql`
   fragment AssetQuery_nftAssets on Query @refetchable(queryName: "AssetPaginationQuery") {
@@ -226,7 +230,7 @@ export function useLazyLoadAssetsQuery(params: AssetFetcherParams) {
   )
 
   // Poll for updates.
-  const POLLING_INTERVAL = ms`5s`
+  const POLLING_INTERVAL = FIVE_SECONDS
   const environment = useRelayEnvironment()
   const poll = useCallback(async () => {
     if (data.nftAssets?.edges?.length > ASSET_PAGE_SIZE) return

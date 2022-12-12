@@ -1,5 +1,5 @@
 import { OpacityHoverState } from '../Common'
-import ms from 'ms.macro'
+// import ms from 'ms.macro'
 import { CollectionTableColumn, Denomination, TimePeriod, VolumeType } from 'features/nft/types'
 import { fetchPrice } from 'features/nft/utils'
 import { useMemo, useState } from 'react'
@@ -9,6 +9,8 @@ import { ThemedText } from 'theme/components/text'
 
 import { fetchTrendingCollections } from 'features/nft/queries'
 import CollectionTable from './CollectionTable'
+
+let ONE_MINUTE = 60 * 100 // ms`60 seconds`
 
 const timeOptions: { label: string; value: TimePeriod }[] = [
   { label: '1D', value: TimePeriod.OneDay },
@@ -90,7 +92,7 @@ const TrendingCollections = () => {
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
-    refetchInterval: ms`1m`,
+    refetchInterval: ONE_MINUTE,
   })
 
   const trendingCollections = useMemo(() => {
