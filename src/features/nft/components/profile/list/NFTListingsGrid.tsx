@@ -44,46 +44,53 @@ export const NFTListingsGrid = ({ selectedMarkets }: { selectedMarkets: ListingM
 
   return (
     <Column>
-      <Row marginTop="20">
+      <Row 
+      // marginTop="20"
+      >
         <Column
-          marginLeft={selectedMarkets.length > 1 ? '36' : '0'}
-          transition="500"
+          // marginLeft={selectedMarkets.length > 1 ? '36' : '0'}
+          // transition="500"
+          // color="textSecondary"
+          // flex="2"
           className={bodySmall}
-          color="textSecondary"
-          flex="2"
         >
           NFT
         </Column>
-        <Row flex={{ sm: '1.5', md: '3' }}>
-          <Column className={subheadSmall} flex="1.5">
+        <Row 
+        // flex={{ sm: '1.5', md: '3' }}
+        >
+          <Column 
+            className={subheadSmall}
+            // flex="1.5"
+          >
             <SortDropdown dropDownOptions={priceDropdownOptions} mini miniPrompt="Set price by" />
           </Column>
           <Column
             className={bodySmall}
-            color="textSecondary"
-            flex="1"
-            display={{ sm: 'none', md: 'flex' }}
-            textAlign="right"
+            // color="textSecondary"
+            // flex="1"
+            // display={{ sm: 'none', md: 'flex' }}
+            // textAlign="right"
           >
             Marketplace fee
           </Column>
           <Column
             className={bodySmall}
-            color="textSecondary"
-            flex="1"
-            display={{ sm: 'none', md: 'flex' }}
-            textAlign="right"
+            // color="textSecondary"
+            // flex="1"
+            // display={{ sm: 'none', md: 'flex' }}
+            // textAlign="right"
           >
             Royalties
           </Column>
           <Column
             className={bodySmall}
-            color="textSecondary"
+            // color="textSecondary"
             style={{ flex: '1.5' }}
-            display={{ sm: 'none', md: 'flex' }}
-            textAlign="right"
+            // display={{ sm: 'none', md: 'flex' }}
+            // textAlign="right"
           >
-            You receive
+            Receive
           </Column>
         </Row>
       </Row>
@@ -148,35 +155,37 @@ const PriceTextInput = ({
   }, [listPrice])
 
   return (
-    <Column gap="12" position="relative">
+    <Column 
+    // gap="12" position="relative"
+    >
       <Row
-        color="textTertiary"
-        height="44"
-        width="min"
-        padding="4"
-        borderRadius="8"
-        borderWidth="1px"
-        borderStyle="solid"
-        borderColor={
-          warningType !== WarningType.NONE && !focused
-            ? 'orange'
-            : isGlobalPrice
-            ? 'accentAction'
-            : listPrice != null
-            ? 'textSecondary'
-            : 'blue400'
-        }
+        // color="textTertiary"
+        // height="44"
+        // width="min"
+        // padding="4"
+        // borderRadius="8"
+        // borderWidth="1px"
+        // borderStyle="solid"
+        // borderColor={
+        //   warningType !== WarningType.NONE && !focused
+        //     ? 'orange'
+        //     : isGlobalPrice
+        //     ? 'accentAction'
+        //     : listPrice != null
+        //     ? 'textSecondary'
+        //     : 'blue400'
+        // }
       >
         <NumericInput
           as="input"
           pattern="[0-9]"
-          borderStyle="none"
+          // borderStyle="none"
+          // color={{ placeholder: 'textSecondary', default: 'textPrimary' }}
+          // marginRight="0"
+          // marginLeft="14"
+          // backgroundColor="none"
           className={body}
-          color={{ placeholder: 'textSecondary', default: 'textPrimary' }}
           placeholder="0"
-          marginRight="0"
-          marginLeft="14"
-          backgroundColor="none"
           style={{ width: '68px' }}
           onFocus={() => setFocused(true)}
           onBlur={() => {
@@ -191,33 +200,40 @@ const PriceTextInput = ({
             setListPrice(isNaN(val) ? undefined : val)
           }}
         />
-        <Box color={listPrice && listPrice >= 0 ? 'textPrimary' : 'textSecondary'} marginRight="16">
+        <Box 
+          // color={listPrice && listPrice >= 0 ? 'textPrimary' : 'textSecondary'} marginRight="16"
+          >
           &nbsp;ETH
         </Box>
         <Box
-          cursor="pointer"
-          display={isGlobalPrice || globalOverride ? 'block' : 'none'}
-          position="absolute"
+          // cursor="pointer"
+          // display={isGlobalPrice || globalOverride ? 'block' : 'none'}
+          // position="absolute"
           style={{ marginTop: '-36px', marginLeft: '124px' }}
-          backgroundColor="backgroundSurface"
+          // backgroundColor="backgroundSurface"
           onClick={() => setGlobalOverride(!globalOverride)}
         >
           {globalOverride ? <AttachPriceIcon /> : <EditPriceIcon />}
         </Box>
       </Row>
       <Row
-        top="52"
-        width="max"
+        // top="52"
+        // width="max"
+        // color={warningType === WarningType.BELOW_FLOOR && !focused ? 'orange' : 'textSecondary'}
+        // position="absolute"
         className={badge}
-        color={warningType === WarningType.BELOW_FLOOR && !focused ? 'orange' : 'textSecondary'}
-        position="absolute"
       >
         {focused ? (
           <>
-            <Row display={asset.lastPrice ? 'flex' : 'none'} marginRight="8">
+            <Row 
+            // display={asset.lastPrice ? 'flex' : 'none'} 
+            // marginRight="8"
+            >
               LAST: {formatEth(asset.lastPrice)} ETH
             </Row>
-            <Row display={asset.floorPrice ? 'flex' : 'none'}>FLOOR: {formatEth(asset.floorPrice)} ETH</Row>
+            <Row 
+            // display={asset.floorPrice ? 'flex' : 'none'}
+            >FLOOR: {formatEth(asset.floorPrice)} ETH</Row>
           </>
         ) : (
           <>
@@ -231,9 +247,9 @@ const PriceTextInput = ({
                       : formatEth(asset.floor_sell_order_price)}
                     ETH
                     <Box
-                      color={warningType === WarningType.BELOW_FLOOR ? 'accentAction' : 'orange'}
-                      marginLeft="8"
-                      cursor="pointer"
+                      // color={warningType === WarningType.BELOW_FLOOR ? 'accentAction' : 'orange'}
+                      // marginLeft="8"
+                      // cursor="pointer"
                       onClick={() => {
                         warningType === WarningType.ALREADY_LISTED && removeSellAsset(asset)
                         setWarningType(WarningType.NONE)
@@ -259,15 +275,23 @@ const EthPriceDisplay = ({ ethPrice = 0 }: { ethPrice?: number }) => {
   }, [])
 
   return (
-    <Column width="full">
-      <Row width="full" justifyContent="flex-end">
+    <Column 
+    // width="full"
+    >
+      <Row 
+      // width="full" justifyContent="flex-end"
+      >
         {ethPrice !== 0 ? (
           <>
             <Column>
-              <Box className={body} color="textPrimary" marginLeft="12" marginRight="0">
+              <Box className={body} 
+              // color="textPrimary" marginLeft="12" marginRight="0"
+              >
                 {ethPrice} ETH
               </Box>
-              <Box className={body} color="textSecondary" marginLeft="12" marginRight="0">
+              <Box className={body} 
+              // color="textSecondary" marginLeft="12" marginRight="0"
+              >
                 {formatUsdPrice(ethPrice * ethConversion)}
               </Box>
             </Column>
@@ -382,11 +406,13 @@ const MarketplaceRow = ({
   }
 
   return (
-    <Row transition="500" marginLeft={selectedMarkets.length > 1 ? '20' : '0'}>
+    <Row 
+    // transition="500" marginLeft={selectedMarkets.length > 1 ? '20' : '0'}
+    >
       {showMarketplaceLogo && (
         <Column
-          position="relative"
-          cursor="pointer"
+          // position="relative"
+          // cursor="pointer"
           onMouseEnter={handleHover}
           onMouseLeave={handleHover}
           style={{ marginLeft: '-28px' }}
@@ -396,18 +422,25 @@ const MarketplaceRow = ({
             removeMarket && removeMarket()
           }}
         >
-          <Box className={styles.removeMarketplace} visibility={hovered ? 'visible' : 'hidden'} position="absolute">
-            <Box as="img" width="32" src="/nft/svgs/minusCircle.svg" alt="Remove item" />
+          <Box 
+          // visibility={hovered ? 'visible' : 'hidden'} position="absolute"
+          className={styles.removeMarketplace}
+          >
+            <Box as="img" 
+            // width="32" 
+            src="/nft/svgs/minusCircle.svg" 
+            alt="Remove item" 
+            />
           </Box>
           <Box
             as="img"
             alt={selectedMarkets[0].name}
-            width="28"
-            height="28"
-            borderRadius="4"
-            objectFit="cover"
+            // width="28"
+            // height="28"
+            // borderRadius="4"
+            // objectFit="cover"
+            // marginRight="16"
             src={selectedMarkets[0].icon}
-            marginRight="16"
           />
         </Column>
       )}
@@ -434,18 +467,30 @@ const MarketplaceRow = ({
           />
         )}
       </Column>
-      <Row flex="1" display={{ sm: 'none', md: 'flex' }}>
-        <Box className={body} color="textSecondary" width="full" textAlign="right">
+      <Row 
+      // flex="1" display={{ sm: 'none', md: 'flex' }}
+      >
+        <Box className={body} 
+        // color="textSecondary" width="full" textAlign="right"
+        >
           {marketplaceFee > 0 ? marketplaceFee + (selectedMarkets.length > 1 ? '% MAX' : '%') : '--%'}
         </Box>
       </Row>
-      <Row flex="1" display={{ sm: 'none', md: 'flex' }}>
-        <Box className={body} color="textSecondary" width="full" textAlign="right">
+      <Row 
+      // flex="1" display={{ sm: 'none', md: 'flex' }}
+      >
+        <Box className={body} 
+        // color="textSecondary" width="full" textAlign="right"
+        >
           {royalties.toFixed(1)}%
         </Box>
       </Row>
-      <Row style={{ flex: '1.5' }} display={{ sm: 'none', md: 'flex' }}>
-        <Column width="full">
+      <Row style={{ flex: '1.5' }}
+      // display={{ sm: 'none', md: 'flex' }}
+      >
+        <Column 
+        // width="full"
+        >
           <EthPriceDisplay ethPrice={userReceives} />
         </Column>
       </Row>
@@ -474,54 +519,75 @@ const NFTListRow = ({ asset, globalPriceMethod, globalPrice, setGlobalPrice, sel
   }, [selectedMarkets])
 
   return (
-    <Row marginTop="24" marginBottom="24">
-      <Row flexWrap="nowrap" flex="2" marginTop="0" marginBottom="auto" minWidth="0">
+    <Row 
+    // marginTop="24" marginBottom="24"
+    >
+      <Row 
+      // flexWrap="nowrap" flex="2" marginTop="0" marginBottom="auto" minWidth="0"
+      >
         <Box
-          transition="500"
+          // transition="500"
+          // cursor="pointer"
           style={{
             maxWidth: localMarkets.length > 1 ? '28px' : '0',
             opacity: localMarkets.length > 1 ? '1' : '0',
           }}
-          cursor="pointer"
           onClick={() => setExpandMarketplaceRows(!expandMarketplaceRows)}
         >
           {expandMarketplaceRows ? <RowsExpandedIcon /> : <RowsCollpsedIcon />}
         </Box>
         <Box
-          position="relative"
-          cursor="pointer"
+          // position="relative"
+          // cursor="pointer"
           onMouseEnter={handleHover}
           onMouseLeave={handleHover}
           onClick={() => {
             removeAsset(asset)
           }}
         >
-          <Box className={styles.removeAsset} visibility={hovered ? 'visible' : 'hidden'} position="absolute">
-            <Box as="img" width="32" src="/nft/svgs/minusCircle.svg" alt="Remove item" />
+          <Box 
+          className={styles.removeAsset} 
+          // visibility={hovered ? 'visible' : 'hidden'} 
+          // position="absolute"
+          >
+            <Box as="img" 
+            // width="32"
+            src="/nft/svgs/minusCircle.svg" alt="Remove item" 
+            />
           </Box>
           <Box
             as="img"
             alt={asset.name}
-            width="48"
-            height="48"
-            borderRadius="8"
-            marginLeft={localMarkets.length > 1 ? '8' : '0'}
-            marginRight="8"
-            transition="500"
+            // width="48"
+            // height="48"
+            // borderRadius="8"
+            // marginLeft={localMarkets.length > 1 ? '8' : '0'}
+            // marginRight="8"
+            // transition="500"
             src={asset.imageUrl || '/nft/svgs/image-placeholder.svg'}
           />
         </Box>
-        <Column gap="4" minWidth="0">
-          <Box paddingRight="8" overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap" className={subheadSmall}>
+        <Column 
+        // gap="4" minWidth="0"
+        >
+          <Box 
+          // paddingRight="8" overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap" 
+          className={subheadSmall}>
             {asset.name ? asset.name : `#${asset.tokenId}`}
           </Box>
-          <Box paddingRight="8" overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap" className={bodySmall}>
+          <Box 
+          // paddingRight="8" overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap" 
+          className={bodySmall}
+          >
             {asset.collection?.name}
             {asset.collectionIsVerified && <VerifiedIcon style={{ marginBottom: '-5px' }} />}
           </Box>
         </Column>
       </Row>
-      <Column flex={{ sm: '1', md: '3' }} gap="24">
+      <Column 
+      // flex={{ sm: '1', md: '3' }} 
+      // gap="24"
+      >
         {expandMarketplaceRows ? (
           localMarkets.map((market, index) => {
             return (

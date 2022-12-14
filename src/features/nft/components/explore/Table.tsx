@@ -148,7 +148,9 @@ export function Table<D extends Record<string, unknown>>({
   return (
     <GlowEffect>
       <table {...getTableProps()} className={styles.table}>
-        <thead className={styles.thead}>
+        <thead 
+        // className={styles.thead}
+        >
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
               {headerGroup.headers.map((column, index) => {
@@ -163,7 +165,9 @@ export function Table<D extends Record<string, unknown>>({
                     disabled={column.disableSortBy}
                     key={index}
                   >
-                    <Box as="span" color="accentAction" position="relative">
+                    <Box as="span" 
+                    // color="accentAction" position="relative"
+                    >
                       {column.isSorted ? (
                         column.isSortedDesc ? (
                           <ArrowRightIcon style={{ transform: 'rotate(90deg)', position: 'absolute' }} />
@@ -174,7 +178,9 @@ export function Table<D extends Record<string, unknown>>({
                         ''
                       )}
                     </Box>
-                    <Box as="span" paddingLeft={column.isSorted ? '18' : '0'}>
+                    <Box as="span" 
+                    // paddingLeft={column.isSorted ? '18' : '0'}
+                    >
                       {column.render('Header')}
                     </Box>
                   </StyledHeader>
@@ -244,7 +250,9 @@ function LoadingTable({ headerGroups, visibleColumns, ...props }: LoadingTablePr
   return (
     <GlowEffect>
       <table {...props} className={styles.table}>
-        <thead className={styles.thead}>
+        <thead 
+        // className={styles.thead}
+        >
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
               {headerGroup.headers.map((column, index) => {
@@ -259,7 +267,9 @@ function LoadingTable({ headerGroups, visibleColumns, ...props }: LoadingTablePr
                     disabled={index === 0}
                     key={index}
                   >
-                    <Box as="span" color="accentAction" position="relative">
+                    <Box as="span" 
+                    // color="accentAction" position="relative"
+                    >
                       {column.isSorted ? (
                         column.isSortedDesc ? (
                           <ArrowRightIcon style={{ transform: 'rotate(90deg)', position: 'absolute' }} />
@@ -270,7 +280,9 @@ function LoadingTable({ headerGroups, visibleColumns, ...props }: LoadingTablePr
                         ''
                       )}
                     </Box>
-                    <Box as="span" paddingLeft={column.isSorted ? '18' : '0'}>
+                    <Box as="span" 
+                    // paddingLeft={column.isSorted ? '18' : '0'}
+                    >
                       {column.render('Header')}
                     </Box>
                   </StyledHeader>

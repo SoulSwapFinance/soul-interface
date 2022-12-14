@@ -2,14 +2,15 @@ import { style } from '@vanilla-extract/css'
 import { sprinkles, themeVars } from 'features/nft/css/sprinkles.css'
 
 export const nftDivider = style([
-  sprinkles({
+  // sprinkles(
+    {
     height: '0',
     width: 'full',
     borderRadius: '20',
     borderWidth: '0.5px',
     borderStyle: 'solid',
     borderColor: 'backgroundOutline',
-  }),
+  },
 ])
 
 export const chevronDown = style({
@@ -17,7 +18,7 @@ export const chevronDown = style({
 })
 
 export const dropdown = style({
-  boxShadow: `0px 4px 16px ${themeVars.colors.backgroundSurface}`,
+  // boxShadow: `0px 4px 16px ${themeVars.colors.backgroundSurface}`,
   marginLeft: '-12px',
 })
 

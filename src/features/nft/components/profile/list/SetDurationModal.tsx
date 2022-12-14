@@ -113,18 +113,18 @@ export const SetDurationModal = () => {
     <ModalWrapper>
       <InputWrapper isInvalid={errorState !== ErrorState.valid}>
         <NumericInput
+          // borderStyle="none"
+          // width="32"
+          // marginRight="4"
+          // backgroundColor="none"
+          // flexShrink="0"
+          // color={{ placeholder: 'textSecondary', default: 'textPrimary' }}
           as="input"
           type="number"
           pattern="[0-9]"
-          borderStyle="none"
           className={bodySmall}
-          color={{ placeholder: 'textSecondary', default: 'textPrimary' }}
           value={amount}
-          width="32"
-          marginRight="4"
-          backgroundColor="none"
           onChange={setCustomExpiration}
-          flexShrink="0"
         />
         <DropdownWrapper className={buttonTextMedium}>
           <SortDropdown

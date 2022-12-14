@@ -88,7 +88,9 @@ export const CollectionTitleCell = ({ value }: CellProps) => {
         )}
       </CollectionName>
       {value.isVerified && (
-        <span className={styles.verifiedBadge}>
+        <span 
+        // className={styles.verifiedBadge}
+        >
           <VerifiedIcon />
         </span>
       )}
