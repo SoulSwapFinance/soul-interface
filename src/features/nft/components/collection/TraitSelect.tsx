@@ -1,4 +1,3 @@
-import { sendAnalyticsEvent } from '@uniswap/analytics'
 import useDebounce from 'hooks/useDebounce'
 import { Box } from 'features/nft/components/Box'
 import { Column, Row } from 'features/nft/components/Flex'
@@ -60,7 +59,6 @@ const TraitItem = ({
       removeTrait(trait)
       setCheckboxSelected(false)
     }
-    // sendAnalyticsEvent(EventName.NFT_FILTER_SELECTED, { filter_type: FilterTypes.TRAIT })
   }
 
   const showFullTraitName = shouldShow && trait_type === trait.trait_type && trait_value === trait.trait_value

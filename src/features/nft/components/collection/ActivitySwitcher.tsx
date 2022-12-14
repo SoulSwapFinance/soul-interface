@@ -1,5 +1,3 @@
-import { TraceEvent } from '@uniswap/analytics'
-// import { BrowserEvent, ElementName, EventName } from '@uniswap/analytics-events'
 import { Box } from 'features/nft/components/Box'
 import { Row } from 'features/nft/components/Flex'
 import { useIsCollectionLoading } from 'features/nft/hooks'

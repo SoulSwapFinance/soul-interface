@@ -53,8 +53,6 @@ export const PriceRange = () => {
     setPlaceholderText('')
     if (minPrice || maxPrice)
     { return }
-      // sendAnalyticsEvent(EventName.NFT_FILTER_SELECTED, 
-      // { filter_type: FilterTypes.PRICE_RANGE }
   }
 
   const updateMinPriceRange = (v: FormEvent<HTMLInputElement>) => {

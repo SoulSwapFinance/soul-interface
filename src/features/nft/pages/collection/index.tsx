@@ -1,5 +1,3 @@
-import { Trace } from '@uniswap/analytics'
-import { PageName } from '@uniswap/analytics-events'
 import { useWeb3React } from '@web3-react/core'
 // import { OpacityHoverState } from 'components/Common'
 import { useLoadAssetsQuery } from 'services/graphql/data/nft/Asset'
@@ -122,11 +120,6 @@ const Collection = () => {
 
   return (
     <>
-      <Trace
-        page={PageName.NFT_COLLECTION_PAGE}
-        properties={{ collection_address: contractAddress, chain_id: chainId, is_activity_view: isActivityToggled }}
-        shouldLogImpression
-      >
         <Column 
         // width="full"
         >
@@ -225,7 +218,6 @@ const Collection = () => {
             </div>
           )}
         </Column>
-      </Trace>
       <MobileHoverBag />
     </>
   )
