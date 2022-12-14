@@ -104,7 +104,9 @@ export const NFTListingsGrid = ({ selectedMarkets }: { selectedMarkets: ListingM
               setGlobalPrice={setGlobalPrice}
               selectedMarkets={selectedMarkets}
             />
-            {sellAssets.indexOf(asset) < sellAssets.length - 1 && <hr className={styles.nftDivider} />}
+            {sellAssets.indexOf(asset) < sellAssets.length - 1 && <hr 
+            // className={styles.nftDivider} 
+            />}
           </>
         )
       })}

@@ -256,7 +256,7 @@ const ProfilePageNfts = ({
               Boolean(hasNext && ownerAssets?.length) && <LoadingAssets count={DEFAULT_WALLET_ASSET_QUERY_AMOUNT} />
             }
             dataLength={ownerAssets?.length ?? 0}
-            className={ownerAssets?.length || isLoadingNext ? assetList : undefined}
+            // className={ownerAssets?.length || isLoadingNext ? assetList : undefined}
             style={{ overflow: 'unset' }}
           >
             {ownerAssets?.length
