@@ -4,7 +4,8 @@ import { sprinkles } from 'features/nft/css/sprinkles.css'
 
 export const filterButtonLoading = style([
   loadingAsset,
-  sprinkles({
+  // sprinkles(
+    {
     border: 'none',
-  }),
+  },
 ])

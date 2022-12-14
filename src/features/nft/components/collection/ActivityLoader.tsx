@@ -16,20 +16,28 @@ const LoadingSliver = () => {
 const ActivityLoadingRow = () => {
   return (
     <Box as="a" className={eventRow}>
-      <Row gap="16">
+      <Row 
+      // gap="16"
+      >
         <LoadingSquare />
         <LoadingSliver />
       </Row>
       <Row>
         <LoadingSliver />
       </Row>
-      <Row display={{ sm: 'none', md: 'flex' }}>
+      <Row 
+      // display={{ sm: 'none', md: 'flex' }}
+      >
         <LoadingSliver />
       </Row>
-      <Row display={{ sm: 'none', lg: 'flex' }}>
+      <Row 
+      // display={{ sm: 'none', lg: 'flex' }}
+      >
         <LoadingSliver />
       </Row>
-      <Row display={{ sm: 'none', xl: 'flex' }}>
+      <Row 
+      // display={{ sm: 'none', xl: 'flex' }}
+      >
         <LoadingSliver />
       </Row>
     </Box>
@@ -48,7 +56,9 @@ export const ActivityPageLoader = ({ rowCount }: { rowCount: number }) => {
 
 export const ActivityLoader = () => {
   return (
-    <Column marginTop="36">
+    <Column 
+    // marginTop="36"
+    >
       <HeaderRow />
       <ActivityPageLoader rowCount={10} />
     </Column>

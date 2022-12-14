@@ -5,10 +5,12 @@ import { loadingAsset, loadingBlock } from 'features/nft/css/loading.css'
 import { breakpoints, sprinkles, vars } from '../../css/sprinkles.css'
 
 export const statsText = style([
-  sprinkles({
-    marginTop: { sm: '8', md: '40' },
-    marginBottom: { sm: '0', md: '28' },
-  }),
+  // sprinkles(
+
+    {
+    // marginTop: { sm: '8', md: '40' },
+    // marginBottom: { sm: '0', md: '28' },
+  },
   {
     '@media': {
       [`(max-width: ${breakpoints.sm - 1}px)`]: {
@@ -18,16 +20,20 @@ export const statsText = style([
   },
 ])
 
-export const baseCollectionImage = sprinkles({
+export const baseCollectionImage = 
+// sprinkles(
+  {
   left: '0',
   borderStyle: 'solid',
   borderWidth: '4px',
   borderColor: 'backgroundSurface',
   borderRadius: 'round',
   position: 'absolute',
-})
+}
 
-export const collectionImage = style([
+export const collectionImage = 
+// style(
+  [
   baseCollectionImage,
   {
     width: '143px',
@@ -44,14 +50,16 @@ export const collectionImage = style([
       },
     },
   },
-])
+]
 
 export const statsLabel = style([
   subheadSmall,
-  sprinkles({
+  // sprinkles(
+
+    {
     color: 'textSecondary',
     whiteSpace: 'nowrap',
-  }),
+  },
   {
     lineHeight: '20px',
   },
@@ -67,54 +75,66 @@ export const statsValue = style([
 
 export const statsValueLoading = style([
   loadingAsset,
-  sprinkles({
+  // sprinkles(
+    {
     width: '60',
     height: '20',
     marginTop: '8',
-  }),
+  },
 ])
 
 export const statsLabelLoading = style([
   loadingAsset,
-  sprinkles({
+  // sprinkles(
+    {
     width: '60',
     height: '16',
-  }),
+  },
 ])
 
 export const descriptionLoading = style([
   loadingAsset,
-  sprinkles({
+  // sprinkles(
+    {
     height: '20',
-  }),
+  },
   {
     maxWidth: 'min(calc(100% - 112px), 600px)',
   },
 ])
 
-export const collectionImageIsLoadingBackground = style([
+export const collectionImageIsLoadingBackground =
+//  style(
+  [
   collectionImage,
-  sprinkles({
+  // sprinkles(
+    {
     backgroundColor: 'backgroundSurface',
-  }),
-])
+  },
+]
 
-export const collectionImageIsLoading = style([
+export const collectionImageIsLoading = 
+// style(
+  [
   loadingBlock,
   collectionImage,
-  sprinkles({
+  // sprinkles(
+    {
     borderStyle: 'solid',
     borderWidth: '4px',
     borderColor: 'backgroundSurface',
-  }),
-])
+  },
+]
 
-export const nameTextLoading = style([
+export const nameTextLoading = 
+// style(
+  [
   loadingAsset,
-  sprinkles({
+  // sprinkles(
+    {
     height: '32',
-  }),
+  },
   {
     width: 236,
   },
-])
+]

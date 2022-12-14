@@ -4,7 +4,6 @@ import { BrowserEvent, ElementName, EventName } from '@uniswap/analytics-events'
 import { useWeb3React } from '@web3-react/core'
 import clsx from 'clsx'
 import { parseEther } from 'ethers/lib/utils'
-import { NftAssetTraitInput, NftMarketplace } from 'services/graphql/data/nft/__generated__/AssetQuery.graphql'
 import {
   ASSET_PAGE_SIZE,
   AssetFetcherParams,
@@ -55,6 +54,7 @@ import { MARKETPLACE_ITEMS, MarketplaceLogo } from './MarketplaceSelect'
 import { Sweep, useSweepFetcherParams } from './Sweep'
 import { TraitChip } from './TraitChip'
 import { OpacityHoverState } from '../Common'
+import { NftAssetTraitInput } from 'services/graphql/data/__generated__/AssetQuery.graphql'
 
 interface CollectionNftsProps {
   contractAddress: string

@@ -13,18 +13,18 @@ export const CollectionSearch = () => {
   return (
     <Box
       as="input"
-      flex="1"
-      borderColor={{ default: 'backgroundOutline', focus: 'accentAction' }}
-      borderWidth="1.5px"
-      borderStyle="solid"
-      borderRadius="12"
-      padding="12"
-      backgroundColor="backgroundSurface"
-      maxWidth="332"
-      minWidth="0"
-      fontSize="16"
-      height="44"
-      color={{ placeholder: 'textTertiary', default: 'textPrimary' }}
+      // flex="1"
+      // borderColor={{ default: 'backgroundOutline', focus: 'accentAction' }}
+      // borderWidth="1.5px"
+      // borderStyle="solid"
+      // borderRadius="12"
+      // padding="12"
+      // backgroundColor="backgroundSurface"
+      // maxWidth="332"
+      // minWidth="0"
+      // fontSize="16"
+      // height="44"
+      // color={{ placeholder: 'textTertiary', default: 'textPrimary' }}
       value={searchByNameText}
       placeholder={iscollectionStatsLoading ? '' : 'Search by name'}
       className={clsx(iscollectionStatsLoading && styles.filterButtonLoading)}

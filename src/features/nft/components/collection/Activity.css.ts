@@ -3,9 +3,10 @@ import { body, bodySmall, buttonTextMedium, subhead, subheadSmall } from 'featur
 import { breakpoints, sprinkles, themeVars, vars } from 'features/nft/css/sprinkles.css'
 
 export const baseRow = style([
-  sprinkles({
+  // sprinkles(
+    {
     display: 'grid',
-  }),
+  },
   {
     gridTemplateColumns: '2.5fr 1fr',
     '@media': {
@@ -25,9 +26,12 @@ export const baseRow = style([
   },
 ])
 
-export const eventRow = style([
+export const eventRow =
+// style(
+  [
   baseRow,
-  sprinkles({
+  // sprinkles(
+    {
     paddingY: '12',
     paddingX: { sm: '4', md: '16' },
     color: 'textPrimary',
@@ -36,61 +40,73 @@ export const eventRow = style([
     borderStyle: 'solid',
     borderColor: 'transparent',
     borderBottomColor: 'backgroundOutline',
-  }),
+  },
   {
     height: '84px',
     ':hover': {
-      background: themeVars.colors.backgroundSurface,
+      // background: themeVars.colors.backgroundSurface,
     },
   },
-])
+]
 
-export const headerRow = style([
+export const headerRow = 
+// style(
+  [
   baseRow,
-  sprinkles({
+  // sprinkles(
+    {
     paddingBottom: '8',
     color: 'textSecondary',
     fontSize: '12',
     fontWeight: 'semibold',
     paddingX: '16',
-  }),
+  },
   {
     lineHeight: '16px',
   },
-])
+]
 
-export const detailsImage = sprinkles({
+export const detailsImage = 
+// sprinkles(
+  {
   width: '60',
   height: '60',
   borderRadius: '8',
-})
+}
 
-export const detailsName = style([
+export const detailsName = 
+// style(
+  [
   body,
-  sprinkles({
+  // sprinkles(
+    {
     marginBottom: '6',
     fontWeight: 'normal',
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
-  }),
-])
+  },
+]
 
-export const eventDetail = style([
+export const eventDetail = 
+// style(
+  [
   subhead,
-  sprinkles({
+  // sprinkles(
+    {
     gap: '8',
-  }),
+  },
   {
     lineHeight: '24px',
   },
-])
+]
 
 export const eventTime = style([
   bodySmall,
-  sprinkles({
+  // sprinkles(
+    {
     color: 'textSecondary',
-  }),
+  },
   {
     lineHeight: '20px',
   },
@@ -98,12 +114,13 @@ export const eventTime = style([
 
 export const addressCell = style([
   buttonTextMedium,
-  sprinkles({
+  // sprinkles(
+    {
     color: 'textPrimary',
     height: 'full',
     justifyContent: 'center',
     paddingLeft: '2',
-  }),
+  },
   {
     lineHeight: '24px',
   },
@@ -111,15 +128,16 @@ export const addressCell = style([
 
 export const baseBuyCell = style([
   buttonTextMedium,
-  sprinkles({
+  // sprinkles(
+    {
     width: 'max',
     background: 'none',
-    paddingY: '12',
-    paddingX: '16',
+    // paddingY: '12',
+    // paddingX: '16',
     border: 'none',
     borderRadius: '12',
     transition: '250',
-  }),
+  },
   {
     lineHeight: '20px',
   },
@@ -134,11 +152,11 @@ export const buyCell = style([
         color: vars.color.accentAction,
       },
       '&:disabled': {
-        color: themeVars.colors.textTertiary,
+        // color: themeVars.colors.textTertiary,
       },
       '&:hover&:enabled': {
         background: vars.color.accentAction,
-        color: themeVars.colors.explicitWhite,
+        // color: themeVars.colors.explicitWhite,
       },
     },
   },
@@ -146,44 +164,48 @@ export const buyCell = style([
 
 export const removeCell = style([
   baseBuyCell,
-  sprinkles({
+  // sprinkles(
+    {
     color: 'accentFailure',
     cursor: 'pointer',
-  }),
+  },
   {
     ':hover': {
-      background: vars.color.accentFailure,
-      color: themeVars.colors.explicitWhite,
+      // background: vars.color.accentFailure,
+      // color: themeVars.colors.explicitWhite,
     },
   },
 ])
 
 export const filter = style([
   subheadSmall,
-  sprinkles({
+  // sprinkles(
+    {
     background: 'backgroundInteractive',
     color: 'textPrimary',
-    paddingY: '12',
-    paddingX: '16',
+    // paddingY: '12',
+    // paddingX: '16',
     borderRadius: '12',
     cursor: 'pointer',
-  }),
+  },
   {
     boxSizing: 'border-box',
   },
 ])
 
 export const marketplaceIcon = style([
-  sprinkles({
+  // sprinkles(
+    {
     width: '16',
     height: '16',
     borderRadius: '4',
     flexShrink: '0',
-  }),
+  },
 ])
 
 export const rarityInfo = style([
-  sprinkles({
+  // sprinkles(
+    {
     display: 'flex',
     borderRadius: '4',
     height: '16',
@@ -192,9 +214,9 @@ export const rarityInfo = style([
     background: 'backgroundInteractive',
     fontSize: '10',
     fontWeight: 'semibold',
-    paddingX: '4',
+    // paddingX: '4',
     cursor: 'pointer',
-  }),
+  },
   {
     lineHeight: '12px',
     letterSpacing: '0.04em',

@@ -3,16 +3,17 @@ import { calc } from '@vanilla-extract/css-utils'
 import { sprinkles, themeVars, vars } from 'features/nft/css/sprinkles.css'
 
 export const card = style([
-  sprinkles({
+  // sprinkles(
+    {
     overflow: 'hidden',
     paddingBottom: '12',
     borderRadius: '16',
-  }),
+  },
   {
     boxSizing: 'border-box',
     WebkitBoxSizing: 'border-box',
     boxShadow: vars.color.cardDropShadow,
-    backgroundColor: themeVars.colors.backgroundSurface,
+    // backgroundColor: themeVars.colors.backgroundSurface,
     ':after': {
       content: '',
       position: 'absolute',
@@ -28,9 +29,14 @@ export const card = style([
   },
 ])
 
-export const loadingBackground = style({
-  background: `linear-gradient(270deg, ${themeVars.colors.backgroundOutline} 0%, ${themeVars.colors.backgroundSurface} 100%)`,
-})
+// ${themeVars.colors.backgroundOutline} 0%, 
+// ${themeVars.colors.backgroundSurface} 100%)
+export const loadingBackground = 
+style({
+  background: `linear-gradient(270deg, 
+    
+    `,
+  })
 
 export const cardImageHover = style({
   transform: 'scale(1.15)',
@@ -38,9 +44,10 @@ export const cardImageHover = style({
 
 export const selectedCard = style([
   card,
-  sprinkles({
+  // sprinkles(
+    {
     background: 'backgroundSurface',
-  }),
+  },
   {
     ':after': {
       border: '2px solid',
@@ -50,40 +57,43 @@ export const selectedCard = style([
 ])
 
 export const button = style([
-  sprinkles({
+  // sprinkles(
+    {
     display: 'flex',
     width: 'full',
     position: 'relative',
-    paddingY: '8',
-    marginTop: { sm: '8', md: '10' },
+    // paddingY: '8',
+    // marginTop: { sm: '8', md: '10' },
     marginBottom: '12',
     borderRadius: '12',
     border: 'none',
     justifyContent: 'center',
     transition: '250',
     cursor: 'pointer',
-  }),
+  },
   {
     lineHeight: '16px',
   },
 ])
 
 export const marketplaceIcon = style([
-  sprinkles({
+  // sprinkles(
+    {
     display: 'inline-block',
     width: '16',
     height: '16',
     borderRadius: '4',
     flexShrink: '0',
     marginLeft: '8',
-  }),
+  },
   {
     verticalAlign: 'top',
   },
 ])
 
 export const rarityInfo = style([
-  sprinkles({
+  // sprinkles(
+    {
     display: 'flex',
     borderRadius: '4',
     height: '16',
@@ -91,8 +101,8 @@ export const rarityInfo = style([
     background: 'backgroundInteractive',
     fontSize: '10',
     fontWeight: 'semibold',
-    paddingX: '4',
-  }),
+    // paddingX: '4',
+  },
   {
     lineHeight: '12px',
     letterSpacing: '0.04em',
@@ -101,12 +111,13 @@ export const rarityInfo = style([
 ])
 
 export const playbackSwitch = style([
-  sprinkles({
+  // sprinkles(
+    {
     position: 'absolute',
     width: '40',
     height: '40',
     zIndex: '1',
-  }),
+  },
   {
     marginLeft: calc.subtract('100%', '50px'),
     transform: 'translateY(-56px)',

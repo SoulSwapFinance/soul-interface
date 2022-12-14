@@ -22,18 +22,18 @@ export const FilterButton = ({
   return (
     <Box
       className={clsx(styles.filterButton, !isFiltersExpanded && styles.filterButtonExpanded)}
-      display="flex"
-      gap="8"
-      borderRadius="12"
-      fontSize="16"
-      cursor="pointer"
-      position="relative"
-      onClick={onClick}
-      padding="12"
-      width={isMobile ? '44' : 'auto'}
-      height="44"
-      whiteSpace="nowrap"
-      color="white"
+      // display="flex"
+      // gap="8"
+      // borderRadius="12"
+      // fontSize="16"
+      // cursor="pointer"
+      // position="relative"
+      // onClick={onClick}
+      // padding="12"
+      // width={isMobile ? '44' : 'auto'}
+      // height="44"
+      // whiteSpace="nowrap"
+      // color="white"
     >
       <FilterIcon />
       {!isMobile ? (

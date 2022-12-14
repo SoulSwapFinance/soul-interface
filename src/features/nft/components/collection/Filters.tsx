@@ -37,16 +37,20 @@ export const Filters = ({ traitsByGroup }: { traitsByGroup: Record<string, Trait
 
   return (
     <Box className={styles.container}>
-      <Row width="full" justifyContent="space-between"></Row>
-      <Column marginTop="8">
+      <Row 
+      // width="full" justifyContent="space-between"
+      ></Row>
+      <Column
+      //  marginTop="8"
+       >
         <Row
-          justifyContent="space-between"
-          className={`${styles.row} ${styles.rowHover}`}
-          gap="2"
-          borderRadius="12"
-          paddingTop="12"
-          paddingBottom="12"
-          paddingLeft="12"
+          // justifyContent="space-between"
+          // className={`${styles.row} ${styles.rowHover}`}
+          // gap="2"
+          // borderRadius="12"
+          // paddingTop="12"
+          // paddingBottom="12"
+          // paddingLeft="12"
           onClick={(e) => {
             e.preventDefault()
             handleBuyNowToggle()
@@ -65,10 +69,10 @@ export const Filters = ({ traitsByGroup }: { traitsByGroup: Record<string, Trait
         {Object.entries(traitsByGroup).length > 0 && (
           <Box
             as="span"
-            color="textSecondary"
-            paddingLeft="8"
-            marginTop="12"
-            marginBottom="12"
+            // color="textSecondary"
+            // paddingLeft="8"
+            // marginTop="12"
+            // marginBottom="12"
             className={styles.borderTop}
           ></Box>
         )}

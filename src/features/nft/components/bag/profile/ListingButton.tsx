@@ -165,38 +165,46 @@ export const ListingButton = ({ onClick, buttonText, showWarningOverride = false
   }
 
   return (
-    <Box position="relative" width="full">
+    <Box 
+    // position="relative" width="full"
+    >
       {!showWarningOverride && showWarning && warningMessage.length > 0 && (
         <Row
           className={`${bodySmall} ${styles.warningTooltip}`}
-          transition="250"
+          // transition="250"
           onClick={() => setShowWarning(false)}
-          color="textSecondary"
-          zIndex="3"
-          borderRadius="4"
-          backgroundColor="backgroundSurface"
-          height={!disableListButton ? '64' : '36'}
-          maxWidth="276"
-          position="absolute"
-          left="24"
-          bottom="52"
-          flexWrap={!disableListButton ? 'wrap' : 'nowrap'}
+          // color="textSecondary"
+          // zIndex="3"
+          // borderRadius="4"
+          // backgroundColor="backgroundSurface"
+          // height={!disableListButton ? '64' : '36'}
+          // maxWidth="276"
+          // position="absolute"
+          // left="24"
+          // bottom="52"
+          // flexWrap={!disableListButton ? 'wrap' : 'nowrap'}
           style={{ maxWidth: !disableListButton ? '225px' : '' }}
           ref={warningRef}
         >
           <HazardIcon />
-          <Box marginLeft="4" marginRight="8">
+          <Box 
+          // marginLeft="4" marginRight="8"
+          >
             {warningMessage}
           </Box>
           {!!disableListButton ? (
-            <Box paddingTop="6">
-              <XMarkIcon fill={themeVars.colors.textSecondary} height="20" width="20" />
+            <Box 
+            // paddingTop="6"
+            >
+              <XMarkIcon 
+              // fill={themeVars.colors.textSecondary} height="20" width="20" 
+              />
             </Box>
           ) : (
             <Row
-              marginLeft="72"
-              cursor="pointer"
-              color="accentAction"
+              // marginLeft="72"
+              // cursor="pointer"
+              // color="accentAction"
               onClick={() => {
                 setShowWarning(false)
                 setCanContinue(true)
@@ -211,15 +219,15 @@ export const ListingButton = ({ onClick, buttonText, showWarningOverride = false
       )}
       <Box
         as="button"
-        border="none"
-        backgroundColor="accentAction"
-        cursor={
-          [ListingStatus.APPROVED, ListingStatus.PENDING, ListingStatus.SIGNING].includes(listingStatus) ||
-          disableListButton
-            ? 'default'
-            : 'pointer'
-        }
-        color="explicitWhite"
+        // border="none"
+        // backgroundColor="accentAction"
+        // cursor={
+        //   [ListingStatus.APPROVED, ListingStatus.PENDING, ListingStatus.SIGNING].includes(listingStatus) ||
+        //   disableListButton
+        //     ? 'default'
+        //     : 'pointer'
+        // }
+        // color="explicitWhite"
         className={styles.button}
         onClick={() => listingStatus !== ListingStatus.APPROVED && warningWrappedClick()}
         type="button"
@@ -232,7 +240,9 @@ export const ListingButton = ({ onClick, buttonText, showWarningOverride = false
         }}
       >
         {listingStatus === ListingStatus.SIGNING || listingStatus === ListingStatus.PENDING ? (
-          <Row gap="8">
+          <Row 
+          // gap="8"
+          >
             <LoadingIcon stroke="backgroundSurface" height="20" width="20" />
             {listingStatus === ListingStatus.PENDING ? 'Pending' : 'Proceed in wallet'}
           </Row>

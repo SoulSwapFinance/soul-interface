@@ -40,8 +40,8 @@ export const TraitsHeader = (props: TraitsHeaderProps) => {
       {showBorderTop && (
         <Box
           className={clsx(subheadSmall, !isOpen && styles.rowHover, styles.detailsOpen)}
-          opacity={!prevTraitIsOpen && isOpen && index !== 0 ? '1' : '0'}
-          marginTop={prevTraitIsOpen ? '0' : '8'}
+          // opacity={!prevTraitIsOpen && isOpen && index !== 0 ? '1' : '0'}
+          // marginTop={prevTraitIsOpen ? '0' : '8'}
         />
       )}
 
@@ -56,8 +56,12 @@ export const TraitsHeader = (props: TraitsHeaderProps) => {
         >
           {title}
 
-          <Box display="flex" alignItems="center">
-            <Box color="textTertiary" display="inline-block" marginRight="12">
+          <Box 
+          // display="flex" alignItems="center"
+          >
+            <Box 
+            // color="textTertiary" display="inline-block" marginRight="12"
+            >
               {props.numTraits}
             </Box>
             <Box
