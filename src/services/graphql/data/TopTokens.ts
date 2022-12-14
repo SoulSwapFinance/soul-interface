@@ -9,11 +9,12 @@ import {
 import { useAtomValue } from 'jotai/utils'
 import { useEffect, useMemo, useState } from 'react'
 import { fetchQuery, useLazyLoadQuery, useRelayEnvironment } from 'react-relay'
+import { useActiveWeb3React } from 'services/web3'
 
 import type { Chain, TopTokens100Query } from './__generated__/TopTokens100Query.graphql'
 import { TopTokensSparklineQuery } from './__generated__/TopTokensSparklineQuery.graphql'
-import { isPricePoint, PricePoint } from './util'
-import { CHAIN_NAME_TO_CHAIN_ID, toHistoryDuration, unwrapToken } from './util'
+// import { isPricePoint, PricePoint } from './util'
+// import { CHAIN_NAME_TO_CHAIN_ID, toHistoryDuration, unwrapToken } from './util'
 
 const topTokens100Query = graphql`
   query TopTokens100Query($duration: HistoryDuration!, $chain: Chain!) {
@@ -114,29 +115,36 @@ function useFilteredTokens(tokens: NonNullable<TopTokens100Query['response']['to
 export const PAGE_SIZE = 20
 
 export type TopToken = NonNullable<NonNullable<TopTokens100Query['response']>['topTokens']>[number]
-export type SparklineMap = { [key: string]: PricePoint[] | undefined }
+// export type SparklineMap = { [key: string]: PricePoint[] | undefined }
+export type SparklineMap = { [key: string]: any[] | undefined }
 interface UseTopTokensReturnValue {
   tokens: TopToken[] | undefined
   sparklines: SparklineMap
 }
 
 export function useTopTokens(chain: Chain): UseTopTokensReturnValue {
-  const chainId = CHAIN_NAME_TO_CHAIN_ID[chain]
-  const duration = toHistoryDuration(useAtomValue(filterTimeAtom))
+  const { chainId } = useActiveWeb3React()
+  const duration = 1000 // toHistoryDuration(useAtomValue(filterTimeAtom))
 
   const environment = useRelayEnvironment()
   const [sparklines, setSparklines] = useState<SparklineMap>({})
   useEffect(() => {
     const subscription = fetchQuery<TopTokensSparklineQuery>(environment, tokenSparklineQuery, { duration, chain })
       .map((data) => ({
-        topTokens: data.topTokens?.map((token) => unwrapToken(chainId, token)),
+        topTokens: data.topTokens?.map((token) =>
+        (token)
+        // TODO NFT
+        //  unwrapToken(chainId, token)
+         ),
       }))
       .subscribe({
         next(data) {
           const map: SparklineMap = {}
           data.topTokens?.forEach(
             (current) =>
-              current?.address && (map[current.address] = current?.market?.priceHistory?.filter(isPricePoint))
+              // TODO NFT
+              // current?.address && (map[current.address] = current?.market?.priceHistory?.filter(isPricePoint))
+              current?.address && (map[current.address] = current?.market?.priceHistory?.filter(true))
           )
           setSparklines(map)
         },
@@ -149,7 +157,12 @@ export function useTopTokens(chain: Chain): UseTopTokensReturnValue {
   }, [duration])
 
   const { topTokens } = useLazyLoadQuery<TopTokens100Query>(topTokens100Query, { duration, chain })
-  const mappedTokens = useMemo(() => topTokens?.map((token) => unwrapToken(chainId, token)) ?? [], [chainId, topTokens])
+  const mappedTokens = useMemo(() => topTokens?.map((token) => 
+  // TODO NFT
+  []), [chainId, topTokens]
+  // TODO NFT
+  // unwrapToken(chainId, token)) ?? [], [chainId, topTokens]
+  )
   const filteredTokens = useFilteredTokens(mappedTokens)
   const sortedTokens = useSortedTokens(filteredTokens)
   return useMemo(() => ({ tokens: sortedTokens, sparklines }), [sortedTokens, sparklines])

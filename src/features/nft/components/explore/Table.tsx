@@ -15,6 +15,7 @@ import * as styles from './Explore.css'
 import { GlowEffect } from 'theme/components'
 import { ThemedText } from 'theme/components/text'
 import { useRouter } from 'next/router'
+import NavLink from 'components/NavLink'
 
 // Default table cell max width
 const CELL_WIDTH = '160px'
@@ -196,17 +197,17 @@ export function Table<D extends Record<string, unknown>>({
                 <StyledRow
                   {...row.getRowProps()}
                   key={row.id}
-                  // onClick={() => navigate(`/nfts/collection/${row.original.collection.address}`)}
-                >
+                  onClick={() => router.push(`/nfts/collection/${row.original.collection.address}`)}
+                  >
                   {row.cells.map((cell, cellIndex) => {
                     return (
                       <td
-                        className={styles.td}
-                        {...cell.getCellProps()}
-                        key={cellIndex}
-                        style={{
-                          maxWidth: cellIndex === 0 ? (isMobile ? MOBILE_CELL_WIDTH : DESKTOP_CELL_WIDTH) : CELL_WIDTH,
-                        }}
+                      className={styles.td}
+                      {...cell.getCellProps()}
+                      key={cellIndex}
+                      style={{
+                        maxWidth: cellIndex === 0 ? (isMobile ? MOBILE_CELL_WIDTH : DESKTOP_CELL_WIDTH) : CELL_WIDTH,
+                      }}
                       >
                         {cellIndex === 0 ? (
                           <RankCellContainer>
@@ -219,7 +220,7 @@ export function Table<D extends Record<string, unknown>>({
                           </RankCellContainer>
                         ) : (
                           cell.render('Cell')
-                        )}
+                          )}
                       </td>
                     )
                   })}

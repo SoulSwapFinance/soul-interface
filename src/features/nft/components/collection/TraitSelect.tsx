@@ -1,6 +1,6 @@
 import useDebounce from 'hooks/useDebounce'
 import { Box } from 'features/nft/components/Box'
-import { Column, Row } from 'features/nft/components/Flex'
+// import { Column, Row } from 'features/nft/components/Flex'
 import { Checkbox } from 'features/nft/components/layout/Checkbox'
 import { subheadSmall } from 'features/nft/css/common.css'
 import { Trait, useCollectionFilters } from 'features/nft/hooks/useCollectionFilters'
@@ -13,6 +13,8 @@ import { FixedSizeList } from 'react-window'
 import { Input } from '../layout/Input'
 import * as styles from './Filters.css'
 import { TraitsHeader } from './TraitsHeader'
+import Row from 'components/Row'
+import { Column } from '../Flex'
 
 const TRAIT_ROW_HEIGHT = 44
 

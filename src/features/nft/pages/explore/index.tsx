@@ -1,19 +1,10 @@
 // import Banner from 'features/nft/components/explore/Banner'
-import TrendingCollections from 'features/nft/components/explore/TrendingCollections'
 // import { WelcomeModal } from 'features/nft/components/explore/WelcomeModal'
+// import { useHideNFTWelcomeModal } from 'state/user/hooks'
+import TrendingCollections from 'features/nft/components/explore/TrendingCollections'
 import { useBag } from 'features/nft/hooks'
 import { useEffect } from 'react'
-// import { useHideNFTWelcomeModal } from 'state/user/hooks'
 import styled from 'styled-components/macro'
-
-// export const breakpoints = {
-//   xs: '416px',
-//   s: '600px',
-//   md: '959px',
-//   l: '1360px',
-//   lg: '1360px',
-//   xl: '1620px',
-// }
 
 const ExploreContainer = styled.div`
   display: flex;
@@ -21,17 +12,18 @@ const ExploreContainer = styled.div`
   align-items: center;
   width: 100%;
 
-  @media only screen and (max-width: ${({ theme }) => `${959}px`}) {
+  @media only screen and (max-width: ${({ theme }) => `${theme.breakpoint.md}px`}) {
     gap: 16px;
   }
 
-  @media only screen and (max-width: ${({ theme }) => `${600}px`}) {
+  @media only screen and (max-width: ${({ theme }) => `${theme.breakpoint.sm}px`}) {
     gap: 0px;
   }
 `
 
-const Explore = () => {
+const NftExplore = () => {
   const setBagExpanded = useBag((state) => state.setBagExpanded)
+  // const [isModalHidden, hideModal] = useHideNFTWelcomeModal()
 
   useEffect(() => {
     setBagExpanded({ bagExpanded: false, manualClose: false })
@@ -40,10 +32,12 @@ const Explore = () => {
   return (
     <>
         <ExploreContainer>
+          {/* <Banner /> */}
           <TrendingCollections />
         </ExploreContainer>
+        {/* {!isModalHidden && <WelcomeModal onDismissed={hideModal} />} */}
     </>
   )
 }
 
-export default Explore
+export default NftExplore
