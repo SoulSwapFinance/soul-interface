@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/macro'
 import { useWeb3React } from '@web3-react/core'
 import { EmptyNFTWalletIcon } from 'features/nft/components/icons'
 import { headlineMedium } from 'features/nft/css/common.css'
@@ -43,7 +42,7 @@ export const EmptyWalletContent = () => {
     <EmptyWalletContainer>
       <EmptyNFTWalletIcon />
       <EmptyWalletText className={headlineMedium}>
-        <Trans>No NFTs in</Trans>&nbsp;{shortenAddress(account ?? '')}
+        No NFTs in &nbsp;{shortenAddress(account ?? '')}
       </EmptyWalletText>
       <ExploreNFTsButton onClick={() => navigate('/nfts')}>Explore NFTs</ExploreNFTsButton>
     </EmptyWalletContainer>

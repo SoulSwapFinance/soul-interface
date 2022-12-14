@@ -1,5 +1,5 @@
 import { TraceEvent } from '@uniswap/analytics'
-import { BrowserEvent, ElementName, EventName } from '@uniswap/analytics-events'
+// import { BrowserEvent, ElementName, EventName } from '@uniswap/analytics-events'
 import { useWeb3React } from '@web3-react/core'
 import { LoadingBubble } from '../Loading'
 import { useWindowSize } from 'hooks/useWindowSize'
@@ -194,13 +194,6 @@ export function Table<D extends Record<string, unknown>>({
             prepareRow(row)
 
             return (
-              <TraceEvent
-                events={[BrowserEvent.onClick]}
-                name={EventName.NFT_TRENDING_ROW_SELECTED}
-                properties={{ collection_address: row.original.collection.address, chain_id: chainId }}
-                element={ElementName.NFT_TRENDING_ROW}
-                key={i}
-              >
                 <StyledRow
                   {...row.getRowProps()}
                   key={row.id}
@@ -232,7 +225,6 @@ export function Table<D extends Record<string, unknown>>({
                     )
                   })}
                 </StyledRow>
-              </TraceEvent>
             )
           })}
         </tbody>

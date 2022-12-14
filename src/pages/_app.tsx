@@ -38,7 +38,7 @@ import ModalProvider from 'contexts/ModalProvider'
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client'
 import { RPC } from 'connectors'
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { CustomUserProperties, EventName, getBrowser, PageName } from '@uniswap/analytics-events'
+// import { CustomUserProperties, EventName, getBrowser, PageName } from '@uniswap/analytics-events'
 import { initializeAnalytics, OriginApplication } from '@uniswap/analytics'
 
 const link = createHttpLink({
@@ -67,7 +67,7 @@ const ANALYTICS_PROXY_URL = process.env.REACT_APP_AMPLITUDE_PROXY_URL
 const COMMIT_HASH = process.env.REACT_APP_GIT_COMMIT_HASH
 initializeAnalytics(ANALYTICS_DUMMY_KEY, OriginApplication.INTERFACE, {
   proxyUrl: ANALYTICS_PROXY_URL,
-  defaultEventName: EventName.PAGE_VIEWED,
+  defaultEventName: '', // EventName.PAGE_VIEWED,
   commitHash: COMMIT_HASH,
   isProductionEnv: true // isProductionEnv(),
 })

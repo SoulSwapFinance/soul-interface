@@ -1,6 +1,4 @@
 import { BigNumber } from '@ethersproject/bignumber'
-import { TraceEvent } from '@uniswap/analytics'
-import { BrowserEvent, ElementName, EventName } from '@uniswap/analytics-events'
 import { useWeb3React } from '@web3-react/core'
 import clsx from 'clsx'
 import { parseEther } from 'ethers/lib/utils'
@@ -515,20 +513,12 @@ export const CollectionNfts = ({ contractAddress, collectionStats, rarityVerifie
       >
         <ActionsContainer>
           <ActionsSubContainer>
-            <TraceEvent
-              events={[BrowserEvent.onClick]}
-              element={ElementName.NFT_FILTER_BUTTON}
-              name={EventName.NFT_FILTER_OPENED}
-              shouldLogImpression={!isFiltersExpanded}
-              properties={{ collection_address: contractAddress, chain_id: chainId }}
-            >
               <FilterButton
                 isMobile={isMobile}
                 isFiltersExpanded={isFiltersExpanded}
                 collectionCount={collectionAssets?.[0]?.totalCount ?? 0}
                 onClick={() => setFiltersExpanded(!isFiltersExpanded)}
               />
-            </TraceEvent>
             <SortDropdownContainer isFiltersExpanded={isFiltersExpanded}>
               <SortDropdown dropDownOptions={sortDropDownOptions} />
             </SortDropdownContainer>

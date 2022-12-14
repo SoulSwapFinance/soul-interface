@@ -1,7 +1,4 @@
 import 'rc-slider/assets/index.css'
-
-import { sendAnalyticsEvent } from '@uniswap/analytics'
-import { EventName, FilterTypes } from '@uniswap/analytics-events'
 import { Box } from 'features/nft/components/Box'
 import { Row } from 'features/nft/components/Flex'
 import { NumericInput } from 'features/nft/components/layout/Input'
@@ -55,7 +52,9 @@ export const PriceRange = () => {
     e.currentTarget.placeholder = placeholderText
     setPlaceholderText('')
     if (minPrice || maxPrice)
-      sendAnalyticsEvent(EventName.NFT_FILTER_SELECTED, { filter_type: FilterTypes.PRICE_RANGE })
+    { return }
+      // sendAnalyticsEvent(EventName.NFT_FILTER_SELECTED, 
+      // { filter_type: FilterTypes.PRICE_RANGE }
   }
 
   const updateMinPriceRange = (v: FormEvent<HTMLInputElement>) => {

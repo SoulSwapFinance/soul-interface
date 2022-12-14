@@ -10,12 +10,13 @@ export const bannerImage = style({ objectFit: 'cover' })
 
 export const baseActivitySwitcherToggle = style([
   buttonTextMedium,
-  sprinkles({
+  // sprinkles(
+    {
     position: 'relative',
     background: 'none',
     border: 'none',
     cursor: 'pointer',
-  }),
+  },
   {
     lineHeight: '24px',
   },
@@ -23,24 +24,28 @@ export const baseActivitySwitcherToggle = style([
 
 export const activitySwitcherToggle = style([
   baseActivitySwitcherToggle,
-  sprinkles({
+  // sprinkles(
+    {
     color: 'textSecondary',
-  }),
+  },
 ])
 
 export const loadingBanner = style([
   loadingBlock,
-  sprinkles({
+  // sprinkles(
+    {
     width: 'full',
     height: '100',
-  }),
+  },
 ])
 
-export const noCollectionAssets = sprinkles({
+export const noCollectionAssets = 
+// sprinkles(
+  {
   display: 'flex',
   justifyContent: 'center',
   marginTop: '40',
-})
+}
 
 export const ScreenBreakpointsPaddings = css`
   @media screen and (min-width: ${XLARGE_MEDIA_BREAKPOINT}) {

@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { Trans, useLingui } from '@lingui/react'
+import { useLingui } from '@lingui/react'
 import { ChainId } from 'sdk'
 import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 import NavLink from 'components/NavLink'
