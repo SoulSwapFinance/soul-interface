@@ -1,9 +1,8 @@
-import { style } from '@vanilla-extract/css'
 
 import { center, subhead } from '../../css/common.css'
-import { sprinkles, vars } from '../../css/sprinkles.css'
+import { vars } from '../../css/sprinkles.css'
 
-export const image = style([
+export const image = [
   // sprinkles(
     { borderRadius: '20', height: 'full', alignSelf: 'center' },
   {
@@ -22,16 +21,16 @@ export const image = style([
       },
     },
   },
-])
+]
 
-export const embedContainer = style({
+export const embedContainer = {
   position: 'relative',
   overflow: 'hidden',
   width: '100%',
   paddingTop: '100%',
-})
+}
 
-export const embed = style([
+export const embed = [
   image,
   {
     position: 'absolute',
@@ -42,19 +41,19 @@ export const embed = style([
     width: '100%',
     height: '100%',
   },
-])
+]
 
-export const container = style([
+export const container = [
   center,
   {
     minHeight: 'calc(100vh - 97px)',
   },
-])
+]
 
 export const marketplace = 
 { borderRadius: '4' }
 
-export const tab = style([
+export const tab = [
   subhead,
   { color: 'textSecondary', border: 'none', padding: '0', background: 'transparent', cursor: 'pointer' },
   {
@@ -68,17 +67,17 @@ export const tab = style([
       },
     },
   },
-])
+]
 
-export const creator = style({
+export const creator = {
   '@media': {
     '(max-width: 640px)': {
       display: 'none',
     },
   },
-})
+}
 
-export const columns = style([
+export const columns = [
     {
     display: 'flex',
     flexDirection: 'row',
@@ -99,9 +98,9 @@ export const columns = style([
       },
     },
   },
-])
+]
 
-export const column = style({
+export const column = {
   alignSelf: 'center',
   '@media': {
     '(max-width: 1024px)': {
@@ -109,9 +108,9 @@ export const column = style({
       width: 'calc(88%)',
     },
   },
-})
+}
 
-export const columnRight = style({
+export const columnRight = {
   maxHeight: 'calc(100vh - 165px)',
   overflow: 'scroll',
   '@media': {
@@ -125,9 +124,9 @@ export const columnRight = style({
     },
   },
   scrollbarWidth: 'none',
-})
+}
 
-export const audioControls = style({
+export const audioControls = {
   position: 'absolute',
   left: '0',
   right: '0',
@@ -135,4 +134,4 @@ export const audioControls = style({
   marginRight: 'auto',
   marginLeft: 'auto',
   bottom: 'calc(10%)',
-})
+}

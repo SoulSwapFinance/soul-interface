@@ -1,16 +1,15 @@
-import { style } from '@vanilla-extract/css'
 import { loadingAsset } from 'features/nft/css/loading.css'
 import { sprinkles } from 'features/nft/css/sprinkles.css'
 
-export const activeDropdown = style({
+export const activeDropdown = {
   borderBottom: 'none',
-})
+}
 
-export const activeDropDownItems = style({
+export const activeDropDownItems = {
   borderTop: 'none',
-})
+}
 
-export const isLoadingDropdown = style([
+export const isLoadingDropdown = [
   loadingAsset,
   // sprinkles(
     {
@@ -19,4 +18,4 @@ export const isLoadingDropdown = style([
   {
     width: 220,
   },
-])
+]

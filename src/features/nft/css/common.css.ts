@@ -1,6 +1,4 @@
-import { style } from '@vanilla-extract/css'
-
-import { sprinkles, vars } from './sprinkles.css'
+import { vars } from './sprinkles.css'
 
 export const center = 
 // 

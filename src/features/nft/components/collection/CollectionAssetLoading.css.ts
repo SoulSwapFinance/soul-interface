@@ -1,23 +1,18 @@
-import { style } from '@vanilla-extract/css'
 import { loadingAsset } from 'features/nft/css/loading.css'
 
-import { sprinkles } from '../../css/sprinkles.css'
-
-export const collectionAssetLoading = style([
-  // sprinkles(
+export const collectionAssetLoading = [
     {
     borderRadius: '12',
     paddingBottom: '12',
     backgroundColor: 'backgroundSurface',
   },
-])
+]
 
-export const collectionAssetsImageLoading = style([
+export const collectionAssetsImageLoading = [
   loadingAsset,
-  // sprinkles(
     {
     position: 'absolute',
     height: 'full',
     width: 'full',
   },
-])
+]

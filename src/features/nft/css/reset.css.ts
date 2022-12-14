@@ -1,7 +1,5 @@
 import '@zag-js/focus-visible'
 
-// import { style } from '@vanilla-extract/css'
-
 const hideFocusRingsDataAttribute = '[data-js-focus-visible] &:focus:not([data-focus-visible-added]'
 
 export const base = {

@@ -1,6 +1,3 @@
-// import { style } from '@vanilla-extract/css'
-import { sprinkles } from 'features/nft/css/sprinkles.css'
-
 export const section = 
 // style(
   // [sprinkles(

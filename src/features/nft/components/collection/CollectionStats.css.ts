@@ -1,10 +1,9 @@
-import { style } from '@vanilla-extract/css'
 import { headlineSmall, subheadSmall } from 'features/nft/css/common.css'
 import { loadingAsset, loadingBlock } from 'features/nft/css/loading.css'
 
 import { breakpoints, sprinkles, vars } from '../../css/sprinkles.css'
 
-export const statsText = style([
+export const statsText = [
   // sprinkles(
 
     {
@@ -18,7 +17,7 @@ export const statsText = style([
       },
     },
   },
-])
+]
 
 export const baseCollectionImage = 
 // sprinkles(
@@ -52,7 +51,7 @@ export const collectionImage =
   },
 ]
 
-export const statsLabel = style([
+export const statsLabel = [
   subheadSmall,
   // sprinkles(
 
@@ -63,17 +62,17 @@ export const statsLabel = style([
   {
     lineHeight: '20px',
   },
-])
+]
 
-export const statsValue = style([
+export const statsValue = [
   headlineSmall,
   {
     lineHeight: '24px',
     whiteSpace: 'nowrap',
   },
-])
+]
 
-export const statsValueLoading = style([
+export const statsValueLoading = [
   loadingAsset,
   // sprinkles(
     {
@@ -81,18 +80,18 @@ export const statsValueLoading = style([
     height: '20',
     marginTop: '8',
   },
-])
+]
 
-export const statsLabelLoading = style([
+export const statsLabelLoading = [
   loadingAsset,
   // sprinkles(
     {
     width: '60',
     height: '16',
   },
-])
+]
 
-export const descriptionLoading = style([
+export const descriptionLoading = [
   loadingAsset,
   // sprinkles(
     {
@@ -101,7 +100,7 @@ export const descriptionLoading = style([
   {
     maxWidth: 'min(calc(100% - 112px), 600px)',
   },
-])
+]
 
 export const collectionImageIsLoadingBackground =
 //  style(
@@ -137,4 +136,4 @@ export const nameTextLoading =
   {
     width: 236,
   },
-]
+  ]

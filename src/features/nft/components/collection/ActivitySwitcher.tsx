@@ -15,7 +15,10 @@ const BaseActivityContainer = styled(Row)`
 
 export const ActivitySwitcherLoading = new Array(2)
   .fill(null)
-  .map((_, index) => <div className={styles.styledLoading} key={`ActivitySwitcherLoading-key-${index}`} />)
+  .map((_, index) => <div 
+  // className={styles.styledLoading} 
+  key={`ActivitySwitcherLoading-key-${index}`} 
+  />)
 
 export const ActivitySwitcher = ({
   showActivity,

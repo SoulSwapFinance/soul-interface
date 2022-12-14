@@ -1,4 +1,4 @@
-import { keyframes, style } from '@vanilla-extract/css'
+import { keyframes } from '@vanilla-extract/css'
 
 const pathAnim = keyframes({
   '0%': {
@@ -14,7 +14,7 @@ const pathAnimCommonProps = {
   animationTimingFunction: 'linear',
 }
 
-export const path = style({
+export const path = {
   selectors: {
     '&:nth-child(1)': {
       animation: `0.5s infinite ${pathAnim}`,
@@ -31,4 +31,4 @@ export const path = style({
       ...pathAnimCommonProps,
     },
   },
-})
+}

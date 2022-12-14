@@ -1,14 +1,11 @@
-import { style } from '@vanilla-extract/css'
 import { buttonTextMedium } from 'features/nft/css/common.css'
 import { loadingBlock } from 'features/nft/css/loading.css'
 import { css } from 'styled-components/macro'
 import { MOBILE_MEDIA_BREAKPOINT, SMALL_MEDIA_BREAKPOINT, XLARGE_MEDIA_BREAKPOINT } from 'theme/components'
 
-import { sprinkles } from '../../css/sprinkles.css'
+export const bannerImage = { objectFit: 'cover' }
 
-export const bannerImage = style({ objectFit: 'cover' })
-
-export const baseActivitySwitcherToggle = style([
+export const baseActivitySwitcherToggle = [
   buttonTextMedium,
   // sprinkles(
     {
@@ -20,24 +17,24 @@ export const baseActivitySwitcherToggle = style([
   {
     lineHeight: '24px',
   },
-])
+]
 
-export const activitySwitcherToggle = style([
+export const activitySwitcherToggle = [
   baseActivitySwitcherToggle,
   // sprinkles(
     {
     color: 'textSecondary',
   },
-])
+]
 
-export const loadingBanner = style([
+export const loadingBanner = [
   loadingBlock,
   // sprinkles(
     {
     width: 'full',
     height: '100',
   },
-])
+]
 
 export const noCollectionAssets = 
 // sprinkles(

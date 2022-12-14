@@ -1,18 +1,19 @@
-import { keyframes, style } from '@vanilla-extract/css'
 import { darken } from 'polished'
 
 import { sprinkles } from './sprinkles.css'
 
-const loadingAnimation = keyframes({
+const loadingAnimation = 
+// keyframes(
+  {
   '0%': {
     backgroundPosition: '100% 50%',
   },
   '100%': {
     backgroundPosition: '0% 50%',
   },
-})
+}
 
-export const loadingBlock = style([
+export const loadingBlock = [
   {
     animation: `${loadingAnimation} 1.5s infinite`,
     animationFillMode: 'both',
@@ -20,9 +21,9 @@ export const loadingBlock = style([
     backgroundSize: '400%',
     willChange: 'background-position',
   },
-])
+]
 
-export const loadingAsset = style([
+export const loadingAsset = [
   loadingBlock,
   // sprinkles({
 
@@ -33,4 +34,4 @@ export const loadingAsset = style([
   {
     userSelect: 'none',
   },
-])
+]

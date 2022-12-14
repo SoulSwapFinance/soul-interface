@@ -1,8 +1,6 @@
-import { style } from '@vanilla-extract/css'
 import { body } from 'features/nft/css/common.css'
-import { sprinkles } from 'features/nft/css/sprinkles.css'
 
-export const priceInput = style([
+export const priceInput = [
   body,
   // sprinkles(
     {
@@ -12,4 +10,4 @@ export const priceInput = style([
     borderStyle: 'solid',
     borderWidth: '1.5px',
   },
-])
+]

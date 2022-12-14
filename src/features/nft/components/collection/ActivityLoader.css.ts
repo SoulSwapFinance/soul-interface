@@ -1,8 +1,7 @@
-import { style } from '@vanilla-extract/css'
 import { loadingBlock } from 'features/nft/css/loading.css'
 import { sprinkles } from 'features/nft/css/sprinkles.css'
 
-export const loadingSquare = style([
+export const loadingSquare = [
   loadingBlock,
   // sprinkles(
     {
@@ -10,9 +9,9 @@ export const loadingSquare = style([
     height: '60',
     borderRadius: '8',
   },
-])
+]
 
-export const loadingSliver = style([
+export const loadingSliver = [
   loadingBlock,
   // sprinkles(
     {
@@ -22,4 +21,4 @@ export const loadingSliver = style([
   {
     width: '108px',
   },
-])
+]

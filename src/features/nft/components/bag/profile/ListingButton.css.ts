@@ -1,7 +1,4 @@
-import { style } from '@vanilla-extract/css'
-import { sprinkles } from 'features/nft/css/sprinkles.css'
-
-export const chevron = style([
+export const chevron = [
   // sprinkles(
     {
     height: '28',
@@ -10,14 +7,14 @@ export const chevron = style([
     marginLeft: 'auto',
     marginRight: '0',
   },
-])
+]
 
-export const chevronDown = style({
+export const chevronDown = {
   transform: 'rotate(180deg)',
   cursor: 'pointer',
-})
+}
 
-export const sectionDivider = style([
+export const sectionDivider = [
   // sprinkles(
     {
     borderRadius: '20',
@@ -27,9 +24,9 @@ export const sectionDivider = style([
     borderStyle: 'solid',
     borderColor: 'backgroundOutline',
   },
-])
+]
 
-export const button = style([
+export const button = [
   // sprinkles(
     {
     height: '40',
@@ -46,9 +43,9 @@ export const button = style([
   {
     lineHeight: '18px',
   },
-])
+]
 
-export const listingModalIcon = style([
+export const listingModalIcon = [
   // sprinkles(
     {
     borderWidth: '1px',
@@ -60,9 +57,9 @@ export const listingModalIcon = style([
     marginLeft: '-2px',
     marginRight: '4px',
   },
-])
+]
 
-export const warningTooltip = style([
+export const warningTooltip = [
   // sprinkles(
     {
     paddingTop: '8',
@@ -73,9 +70,9 @@ export const warningTooltip = style([
   {
     boxShadow: '0px 4px 16px rgba(10, 10, 59, 0.2)',
   },
-])
+]
 
-export const listingSectionBorder = style([
+export const listingSectionBorder = [
   // sprinkles(
     {
     padding: '8',
@@ -84,4 +81,4 @@ export const listingSectionBorder = style([
     borderStyle: 'solid',
     borderWidth: '1px',
   },
-])
+]
