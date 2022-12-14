@@ -27,7 +27,7 @@ const SweepContainer = styled.div`
 
 const StyledSlider = styled(Slider)`
   cursor: pointer;
-  @media only screen and (max-width: ${({ theme }) => `${theme.breakpoint.md}px`}) {
+  @media only screen and (max-width: ${({ theme }) => `${959}px`}) {
     display: none;
   }
 `
@@ -45,13 +45,13 @@ const SweepRightmostContainer = styled.div`
   align-items: center;
   gap: 8px;
   min-width: 160px;
-  @media only screen and (max-width: ${({ theme }) => `${theme.breakpoint.md}px`}) {
+  @media only screen and (max-width: ${({ theme }) => `${959}px`}) {
     display: none;
   }
 `
 
 const SweepHeaderContainer = styled.div`
-  @media only screen and (max-width: ${({ theme }) => `${theme.breakpoint.md}px`}) {
+  @media only screen and (max-width: ${({ theme }) => `${959}px`}) {
     display: none;
   }
 `
@@ -74,7 +74,7 @@ const InputContainer = styled.input`
   font-weight: 400px;
   line-height: 20px;
 
-  @media only screen and (max-width: ${({ theme }) => `${theme.breakpoint.md}px`}) {
+  @media only screen and (max-width: ${({ theme }) => `${959}px`}) {
     width: 100%;
   }
 

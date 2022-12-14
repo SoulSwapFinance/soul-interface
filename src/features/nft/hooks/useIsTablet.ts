@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 const isClient = typeof window !== 'undefined'
 
 function getIsTablet() {
-  return isClient ? window.innerWidth < breakpoints.lg && window.innerWidth >= breakpoints.sm : false
+  return isClient ? window.innerWidth < breakpoints.lg && window.innerWidth >= 600 : false
 }
 
 export function useIsTablet(): boolean {

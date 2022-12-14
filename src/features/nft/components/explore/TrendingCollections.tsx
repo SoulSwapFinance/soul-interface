@@ -33,7 +33,7 @@ const StyledHeader = styled.div`
   line-height: 44px;
   weight: 500;
 
-  @media only screen and (max-width: ${({ theme }) => `${theme.breakpoint.sm}px`}) {
+  @media only screen and (max-width: ${({ theme }) => `${600}px`}) {
     font-size: 20px;
     line-height: 28px;
   }
@@ -45,7 +45,7 @@ const FiltersRow = styled.div`
   margin-top: 36px;
   margin-bottom: 20px;
 
-  @media only screen and (max-width: ${({ theme }) => `${theme.breakpoint.sm}px`}) {
+  @media only screen and (max-width: ${({ theme }) => `${600}px`}) {
     margin-bottom: 16px;
     margin-top: 16px;
   }

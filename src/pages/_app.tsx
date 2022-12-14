@@ -37,6 +37,8 @@ import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@ap
 import { RPC } from 'connectors'
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { QueryClient as ReactQueryClient, QueryClientProvider as ReactQueryClientProvider } from 'react-query'
+import { RelayEnvironmentProvider } from 'react-relay'
+import RelayEnvironment from 'services/graphql/data/RelayEnvironment'
 
 
 const link = createHttpLink({
@@ -86,7 +88,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
   }, [events])
 
   const [queryClient] = React.useState(() => new QueryClient());
-  
+
   useEffect(() => {
     async function load(locale) {
       i18n.loadLocaleData(locale, { plurals: plurals[locale?.split('_')[0]] })
@@ -160,52 +162,54 @@ function MyApp({ Component, pageProps, fallback, err }) {
       {/*@ts-ignore TYPE NEEDS FIXING*/}
       <I18nProvider i18n={i18n} forceRenderOnLocaleChange={false}>
         <Web3ReactProvider getLibrary={getLibrary}>
-        <ReactQueryClientProvider client={reactQueryClient}>
-      <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <ApiDataProvider>
-          <ApolloProvider client={client}>
-          {/*@ts-ignore TYPE NEEDS FIXING*/}
-          <FantomApiProvider>
-          <Web3ProviderNetwork getLibrary={getLibrary}>
-            <Web3ReactManager>
-              <ReduxProvider store={store}>
-                <PersistGate loading={<Dots>loading</Dots>} persistor={persistor}>
-                  <>
-                    <ListsUpdater />
-                    <UserUpdater />
-                    <ApplicationUpdater />
-                    <MulticallUpdater />
-                  </>
-                  {/*@ts-ignore TYPE NEEDS FIXING*/}
-                  <RecoilRoot>
-                    <SyncWithRedux />
-                    <Provider>
-                    <ModalProvider>
-                      <Layout>
-                        <Guard>
-                          {/* TODO: Added alert Jan 25. Delete component after a few months. */}
-                          {/* <MultichainExploitAlertModal /> */}
-                          {/*@ts-ignore TYPE NEEDS FIXING*/}
-                          <Gelato>
-                            <Component {...pageProps} err={err} />
-                          </Gelato>
-                        </Guard>
-                        <Portals />
-                      </Layout>
-                      </ModalProvider>
-                    </Provider>
-                    <TransactionUpdater />
-                  </RecoilRoot>
-                </PersistGate>
-              </ReduxProvider>
-            </Web3ReactManager>
-          </Web3ProviderNetwork>
-          </FantomApiProvider>
-          </ApolloProvider>
-          </ApiDataProvider>
-          </Hydrate>
-          </QueryClientProvider>
+          <ReactQueryClientProvider client={reactQueryClient}>
+            <QueryClientProvider client={queryClient}>
+              <Hydrate state={pageProps.dehydratedState}>
+                <ApiDataProvider>
+                  <ApolloProvider client={client}>
+                    {/*@ts-ignore TYPE NEEDS FIXING*/}
+                    <FantomApiProvider>
+                      <Web3ProviderNetwork getLibrary={getLibrary}>
+                        <Web3ReactManager>
+                          <RelayEnvironmentProvider environment={RelayEnvironment}>
+                            <ReduxProvider store={store}>
+                              <PersistGate loading={<Dots>loading</Dots>} persistor={persistor}>
+                                <>
+                                  <ListsUpdater />
+                                  <UserUpdater />
+                                  <ApplicationUpdater />
+                                  <MulticallUpdater />
+                                </>
+                                {/*@ts-ignore TYPE NEEDS FIXING*/}
+                                <RecoilRoot>
+                                  <SyncWithRedux />
+                                  <Provider>
+                                    <ModalProvider>
+                                      <Layout>
+                                        <Guard>
+                                          {/* TODO: Added alert Jan 25. Delete component after a few months. */}
+                                          {/* <MultichainExploitAlertModal /> */}
+                                          {/*@ts-ignore TYPE NEEDS FIXING*/}
+                                          <Gelato>
+                                            <Component {...pageProps} err={err} />
+                                          </Gelato>
+                                        </Guard>
+                                        <Portals />
+                                      </Layout>
+                                    </ModalProvider>
+                                  </Provider>
+                                  <TransactionUpdater />
+                                </RecoilRoot>
+                              </PersistGate>
+                            </ReduxProvider>
+                          </RelayEnvironmentProvider>
+                        </Web3ReactManager>
+                      </Web3ProviderNetwork>
+                    </FantomApiProvider>
+                  </ApolloProvider>
+                </ApiDataProvider>
+              </Hydrate>
+            </QueryClientProvider>
           </ReactQueryClientProvider>
         </Web3ReactProvider>
       </I18nProvider>

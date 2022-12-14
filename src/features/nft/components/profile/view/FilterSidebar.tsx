@@ -28,7 +28,7 @@ import styled from 'styled-components/macro'
 import { ThemedText } from 'theme/components/text'
 
 import { WALLET_COLLECTIONS_PAGINATION_LIMIT } from './ProfilePage'
-import * as styles from './ProfilePage.css'
+// import * as styles from './ProfilePage.css'
 import { ScrollBarStyles } from '../../Common'
 import { LoadingBubble } from '../../Loading'
 import { TRANSITION_DURATIONS } from 'styles'
@@ -123,7 +123,7 @@ export const FilterSidebar = ({
       zIndex={{ sm: 'modal', md: 'auto' }}
       display={isFiltersExpanded ? 'flex' : 'none'}
     //   @ts-ignore
-      style={{ transform: isMobile ? undefined : sidebarX.to((x) => `translateX(${x}px)`) }}
+      // style={{ transform: isMobile ? undefined : sidebarX.to((x) => `translateX(${x}px)`) }}
       background="backgroundBackdrop"
     >
       <Box

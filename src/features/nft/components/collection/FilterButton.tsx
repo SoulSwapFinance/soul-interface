@@ -3,7 +3,7 @@ import { Box } from 'features/nft/components/Box'
 import * as styles from 'features/nft/components/collection/FilterButton.css'
 import { FilterIcon } from 'features/nft/components/icons'
 import { buttonTextMedium } from 'features/nft/css/common.css'
-import { breakpoints } from 'features/nft/css/sprinkles.css'
+// import { breakpoints } from 'features/nft/css/sprinkles.css'
 import { pluralize, putCommas } from 'features/nft/utils'
 
 export const FilterButton = ({
@@ -17,7 +17,7 @@ export const FilterButton = ({
   onClick: () => void
   collectionCount?: number
 }) => {
-  const hideResultsCount = window.innerWidth >= breakpoints.sm && window.innerWidth < breakpoints.md
+  const hideResultsCount = window.innerWidth >= 600 && window.innerWidth < 959
 
   return (
     <Box

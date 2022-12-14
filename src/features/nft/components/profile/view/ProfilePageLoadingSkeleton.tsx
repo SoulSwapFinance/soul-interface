@@ -11,7 +11,7 @@ const SkeletonPageWrapper = styled.div`
   padding-top: 40px;
   width: 100%;
 
-  @media only screen and (max-width: ${({ theme }) => `${theme.breakpoint.sm}px`}) {
+  @media only screen and (max-width: ${({ theme }) => `${600}px`}) {
     padding-top: 16px;
   }
 `

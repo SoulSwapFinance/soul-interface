@@ -5,22 +5,22 @@ export function useRouter() {
   const params = useParams()
   const location = useLocation()
   const [searchParams, setSearchParams] = useSearchParams()
-  const _navigate = useNavigate()
+  // const _navigate = useNavigate()
 
   const navigate = useCallback(
     (to: To | number, options?: NavigateOptions) => {
       switch (typeof to) {
         case 'string':
-          return _navigate({ pathname: to, search: searchParams.toString() }, options)
+          // return _navigate({ pathname: to, search: searchParams.toString() }, options)
         case 'object':
-          return _navigate({ ...to, search: searchParams.toString() }, options)
+          // return _navigate({ ...to, search: searchParams.toString() }, options)
         case 'number':
-          return _navigate(to)
+          // return _navigate(to)
         default:
           throw new Error('Invalid "to" value in navigate')
       }
     },
-    [_navigate, searchParams]
+    [ searchParams] // _navigate,
   )
 
   return useMemo(() => {

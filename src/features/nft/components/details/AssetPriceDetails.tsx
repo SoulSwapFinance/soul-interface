@@ -209,7 +209,7 @@ const DefaultLink = styled(Link)`
 `
 
 const OwnerContainer = ({ asset }: { asset: WalletAsset }) => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const { data: USDValue } = useQuery(['fetchPrice', {}], () => fetchPrice(), {})
   const setSellPageState = useProfilePageState((state) => state.setProfilePageState)
   const selectSellAsset = useSellAsset((state) => state.selectSellAsset)
@@ -225,7 +225,7 @@ const OwnerContainer = ({ asset }: { asset: WalletAsset }) => {
 
   const goToListPage = () => {
     resetSellAssets()
-    navigate('/nfts/profile')
+    // navigate('/nfts/profile')
     selectSellAsset(asset)
     setSellPageState(ProfilePageStateType.LISTING)
   }
