@@ -48,7 +48,6 @@ export const CollectionAsset = ({
   const itemsInBag = useBag((state) => state.itemsInBag)
   const bagExpanded = useBag((state) => state.bagExpanded)
   const setBagExpanded = useBag((state) => state.setBagExpanded)
-  // const trace = useTrace({ page: PageName.NFT_COLLECTION_PAGE })
 
   const { isSelected } = useMemo(() => {
     const matchingItems = itemsInBag.filter(
@@ -83,7 +82,7 @@ export const CollectionAsset = ({
         setBagExpanded({ bagExpanded: true })
       }
     }
-  }, [addAssetsToBag, asset, bagExpanded, bagManuallyClosed, isMobile, setBagExpanded]) // trace
+  }, [addAssetsToBag, asset, bagExpanded, bagManuallyClosed, isMobile, setBagExpanded])
 
   useEffect(() => {
     if (isSelected !== isSelectedRef.current && !usedSweep) {

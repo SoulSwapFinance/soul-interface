@@ -42,14 +42,16 @@ const ProfileContent = () => {
   const cartExpanded = useBag((state) => state.bagExpanded)
 
   return (
-      <Box className={styles.profileWrapper}>
+      <div 
+      // className={styles.profileWrapper}
+      >
         {/* <Head> TODO: figure out metadata tagging
           <title>Genie | Sell</title>
         </Head> */}
         {!!account ? (
-          <Box style={{ width: `calc(100% - ${cartExpanded ? SHOPPING_BAG_WIDTH : 0}px)` }}>
+          <div style={{ width: `calc(100% - ${cartExpanded ? SHOPPING_BAG_WIDTH : 0}px)` }}>
             {sellPageState === ProfilePageStateType.VIEWING ? <ProfilePage /> : <ListPage />}
-          </Box>
+          </div>
         ) : (
           <Column as="section" 
           // gap="60" 
@@ -58,21 +60,23 @@ const ProfileContent = () => {
               <Center className={styles.notConnected} 
               // flexDirection="column"
               >
-                <Box as="span" className={headlineMedium} 
+                <div 
+                // as="span" 
+                // className={headlineMedium} 
                 // color="textSecondary" 
                 // marginBottom="24" 
                 // display="block"
                 >
                   No items to display
-                </Box>
-                {/* <Box as="button" className={buttonMedium} onClick={toggleWalletModal}>
+                </div>
+                {/* <div as="button" className={buttonMedium} onClick={toggleWalletModal}>
                   Connect Wallet
-                </Box> */}
+                </div> */}
               </Center>
             </div>
           </Column>
         )}
-      </Box>
+      </div>
   )
 }
 
