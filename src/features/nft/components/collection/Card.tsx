@@ -30,6 +30,7 @@ import {
   useRef,
   useState,
 } from 'react'
+import NextImage from 'next/image'
 import { AlertTriangle } from 'react-feather'
 import styled from 'styled-components/macro'
 import { ThemedText } from 'theme/components/text'
@@ -705,7 +706,7 @@ const Ranking = ({ rarity, provider, rarityVerified, rarityLogo }: RankingProps)
                 <Box 
                 // display="flex" marginRight="4"
                 >
-                  <img src={rarityLogo} alt="cardLogo" width={16} />
+                  <NextImage src={rarityLogo} alt="cardLogo" width={16} />
                 </Box>
                 <Box
                 // width="full" 

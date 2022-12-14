@@ -58,15 +58,15 @@ const StyledDownArrow = styled(ArrowDownRight)`
 const MobileSocialsIcon = ({ children, href }: { children: ReactNode; href: string }) => {
   return (
     <Box
-      display="flex"
+      // display="flex"
+      // height="40"
+      // width="40"
+      // borderRadius="round"
+      // backgroundColor="backgroundSurface"
       as="a"
       target="_blank"
       rel="noreferrer"
       href={href}
-      height="40"
-      width="40"
-      borderRadius="round"
-      backgroundColor="backgroundSurface"
     >
       {children}
     </Box>
@@ -96,17 +96,21 @@ const MobileSocialsPopover = ({
     <>
       <MobileSocialsOverflowIcon onClick={toggleCollectionSocials}>
         {collectionSocialsIsOpen ? (
-          <XMarkIcon width="28" height="28" fill={themeVars.colors.textSecondary} />
+          <XMarkIcon width="28" height="28" 
+          // fill={themeVars.colors.textSecondary} 
+          />
         ) : (
-          <EllipsisIcon width="28" height="20" fill={themeVars.colors.textSecondary} />
+          <EllipsisIcon width="28" height="20" 
+          // fill={themeVars.colors.textSecondary} 
+          />
         )}
       </MobileSocialsOverflowIcon>
       {collectionSocialsIsOpen && (
         <Row
-          position="absolute"
-          gap="4"
-          alignItems="center"
-          justifyContent="center"
+          // position="absolute"
+          // gap="4"
+          // alignItems="center"
+          // justifyContent="center"
           style={{
             top: '-48px',
             right: '-6px',
@@ -114,17 +118,23 @@ const MobileSocialsPopover = ({
         >
           {collectionStats.discordUrl ? (
             <MobileSocialsIcon href={collectionStats.discordUrl}>
-              <Box margin="auto" paddingTop="4">
-                <DiscordIcon width={28} height={28} color={themeVars.colors.textSecondary} />
+              <Box 
+              // margin="auto" paddingTop="4"
+              >
+                <DiscordIcon width={28} height={28} 
+                // color={themeVars.colors.textSecondary} 
+                />
               </Box>
             </MobileSocialsIcon>
           ) : null}
           {collectionStats.twitterUrl ? (
             <MobileSocialsIcon href={'https://twitter.com/' + collectionStats.twitterUrl}>
-              <Box margin="auto" paddingTop="6">
+              <Box 
+              // margin="auto" paddingTop="6"
+              >
                 <TwitterIcon
-                  fill={themeVars.colors.textSecondary}
-                  color={themeVars.colors.textSecondary}
+                  // fill={themeVars.colors.textSecondary}
+                  // color={themeVars.colors.textSecondary}
                   width="28px"
                   height="28px"
                 />
@@ -134,16 +144,26 @@ const MobileSocialsPopover = ({
 
           {collectionStats.instagram ? (
             <MobileSocialsIcon href={'https://instagram.com/' + collectionStats.instagram}>
-              <Box margin="auto" paddingLeft="2" paddingTop="4">
-                <InstagramIcon fill={themeVars.colors.textSecondary} width="28px" height="28px" />
+              <Box 
+              // margin="auto" paddingLeft="2" paddingTop="4"
+              >
+                <InstagramIcon 
+                // fill={themeVars.colors.textSecondary} 
+                width="28px" height="28px" 
+                />
               </Box>
             </MobileSocialsIcon>
           ) : null}
 
           {collectionStats.externalUrl ? (
             <MobileSocialsIcon href={collectionStats.externalUrl}>
-              <Box margin="auto" paddingTop="4">
-                <ExternalIcon fill={themeVars.colors.textSecondary} width="28px" height="28px" />
+              <Box 
+              // margin="auto" paddingTop="4"
+              >
+                <ExternalIcon 
+                // fill={themeVars.colors.textSecondary}
+                width="28px" height="28px" 
+                />
               </Box>
             </MobileSocialsIcon>
           ) : null}
@@ -155,7 +175,9 @@ const MobileSocialsPopover = ({
 
 const SocialsIcon = ({ children, href }: { children: ReactNode; href: string }) => {
   return (
-    <Column as="a" target="_blank" rel="noreferrer" href={href} height="full" justifyContent="center">
+    <Column as="a" target="_blank" rel="noreferrer" href={href} 
+    // height="full" justifyContent="center"
+    >
       {children}
     </Column>
   )
@@ -179,8 +201,12 @@ const CollectionName = ({
   const isCollectionStatsLoading = useIsCollectionLoading((state) => state.isCollectionStatsLoading)
 
   return (
-    <Row justifyContent="space-between">
-      <Row minWidth="0">
+    <Row 
+    // justifyContent="space-between"
+    >
+      <Row 
+      // minWidth="0"
+      >
         {isCollectionStatsLoading ? (
           <CollectionNameTextLoading />
         ) : (
@@ -190,18 +216,18 @@ const CollectionName = ({
         )}
         {isVerified && <VerifiedIcon style={{ width: '32px', height: '32px' }} />}
         <Row
-          display={{ sm: 'none', md: 'flex' }}
-          alignItems="center"
-          justifyContent="center"
-          marginLeft="32"
-          gap="8"
-          height="32"
+          // display={{ sm: 'none', md: 'flex' }}
+          // alignItems="center"
+          // justifyContent="center"
+          // marginLeft="32"
+          // gap="8"
+          // height="32"
         >
           {collectionStats.discordUrl ? (
             <SocialsIcon href={collectionStats.discordUrl ?? ''}>
               <DiscordIcon
-                fill={themeVars.colors.textSecondary}
-                color={themeVars.colors.textSecondary}
+                // fill={themeVars.colors.textSecondary}
+                // color={themeVars.colors.textSecondary}
                 width="26px"
                 height="26px"
               />
@@ -210,8 +236,8 @@ const CollectionName = ({
           {collectionStats.twitterUrl ? (
             <SocialsIcon href={'https://twitter.com/' + collectionStats.twitterUrl}>
               <TwitterIcon
-                fill={themeVars.colors.textSecondary}
-                color={themeVars.colors.textSecondary}
+                // fill={themeVars.colors.textSecondary}
+                // color={themeVars.colors.textSecondary}
                 width="26px"
                 height="26px"
               />
@@ -220,12 +246,16 @@ const CollectionName = ({
 
           {collectionStats.instagram ? (
             <SocialsIcon href={'https://instagram.com/' + collectionStats.instagram}>
-              <InstagramIcon fill={themeVars.colors.textSecondary} width="26px" height="26px" />
+              <InstagramIcon 
+              // fill={themeVars.colors.textSecondary} 
+              width="26px" height="26px" />
             </SocialsIcon>
           ) : null}
           {collectionStats.externalUrl ? (
             <SocialsIcon href={collectionStats.externalUrl ?? ''}>
-              <ExternalIcon fill={themeVars.colors.textSecondary} width="26px" height="26px" />
+              <ExternalIcon 
+              // fill={themeVars.colors.textSecondary} 
+              width="26px" height="26px" />
             </SocialsIcon>
           ) : null}
         </Row>
@@ -286,7 +316,10 @@ const ReadMore = styled.span`
 `
 
 const CollectionDescriptionLoading = () => (
-  <Box marginTop={{ sm: '12', md: '16' }} className={styles.descriptionLoading} />
+  <Box 
+  // marginTop={{ sm: '12', md: '16' }} 
+  className={styles.descriptionLoading} 
+  />
 )
 
 const CollectionDescription = ({ description }: { description: string }) => {
@@ -313,7 +346,9 @@ const CollectionDescription = ({ description }: { description: string }) => {
   return isCollectionStatsLoading ? (
     <CollectionDescriptionLoading />
   ) : (
-    <Box ref={baseRef} marginTop={{ sm: '12', md: '16' }} style={{ maxWidth: '680px' }}>
+    <Box ref={baseRef} 
+    // marginTop={{ sm: '12', md: '16' }} 
+    style={{ maxWidth: '680px' }}>
       <CollectionDescriptionText readMore={readMore} ref={descriptionRef} className={isMobile ? bodySmall : body}>
         <ReactMarkdown
         // @ts-ignore
@@ -333,7 +368,12 @@ const CollectionDescription = ({ description }: { description: string }) => {
 
 const StatsItem = ({ children, label, shouldHide }: { children: ReactNode; label: string; shouldHide: boolean }) => {
   return (
-    <Box display={shouldHide ? 'none' : 'flex'} flexDirection="column" alignItems="baseline" gap="2" height="min">
+    <Box 
+    // display={shouldHide ? 'none' : 'flex'} 
+    // flexDirection="column" 
+    // alignItems="baseline" gap="2" 
+    // height="min"
+    >
       <ThemedText.SubHeader className={styles.statsValue}>{children}</ThemedText.SubHeader>
       <Box as="span" className={styles.statsLabel}>
         {label}
@@ -345,13 +385,13 @@ const StatsItem = ({ children, label, shouldHide }: { children: ReactNode; label
 const statsLoadingSkeleton = (isMobile: boolean) =>
   new Array(isMobile ? 3 : 5).fill(null).map((_, index) => (
     <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="baseline"
-      gap="2"
-      height="min"
+      // display="flex"
+      // flexDirection="column"
+      // alignItems="baseline"
+      // gap="2"
+      // height="min"
+      // marginBottom={isMobile ? '12' : '0'}
       key={`statsLoadingSkeleton-key-${index}`}
-      marginBottom={isMobile ? '12' : '0'}
     >
       <div className={styles.statsLabelLoading} />
       <span className={styles.statsValueLoading} />
@@ -376,7 +416,9 @@ const StatsRow = ({ stats, isMobile, ...props }: { stats: GenieCollection; isMob
   const arrow = stats?.stats?.one_day_floor_change ? getDeltaArrow(stats.stats.one_day_floor_change) : undefined
 
   return (
-    <Row gap={{ sm: '24', md: '36', lg: '48', xl: '60' }} {...props}>
+    <Row 
+    // gap={{ sm: '24', md: '36', lg: '48', xl: '60' }} 
+    {...props}>
       {isCollectionStatsLoading ? (
         statsLoadingSkeleton(isMobile ?? false)
       ) : (
@@ -423,7 +465,9 @@ const StatsRow = ({ stats, isMobile, ...props }: { stats: GenieCollection; isMob
 
 export const CollectionStatsLoading = ({ isMobile }: { isMobile: boolean }) => {
   return (
-    <Column position="relative" width="full">
+    <Column 
+    // position="relative" width="full"
+    >
       <Box className={styles.collectionImageIsLoadingBackground} />
       <Box className={styles.collectionImageIsLoading} />
       <Box className={styles.statsText}>
@@ -431,7 +475,9 @@ export const CollectionStatsLoading = ({ isMobile }: { isMobile: boolean }) => {
         {!isMobile && (
           <>
             <CollectionDescriptionLoading />
-            <Row gap="60" marginTop="20">
+            <Row 
+            // gap="60" marginTop="20"
+            >
               {statsLoadingSkeleton(false)}
             </Row>
           </>
@@ -440,7 +486,9 @@ export const CollectionStatsLoading = ({ isMobile }: { isMobile: boolean }) => {
       {isMobile && (
         <>
           <CollectionDescriptionLoading />
-          <Row gap="20" marginTop="20">
+          <Row 
+          // gap="20" marginTop="20"
+          >
             {statsLoadingSkeleton(true)}
           </Row>
         </>
@@ -455,21 +503,22 @@ export const CollectionStats = ({ stats, isMobile }: { stats: GenieCollection; i
 
   return (
     <Box
-      display="flex"
-      marginTop={isMobile && !stats.bannerImageUrl ? (collectionSocialsIsOpen ? '52' : '20') : '0'}
-      justifyContent="center"
-      position="relative"
-      flexDirection="column"
-      width="full"
+      className="flex relative col w-full justify-center"
+      // marginTop={isMobile && !stats.bannerImageUrl ? (collectionSocialsIsOpen ? '52' : '20') : '0'}
+      // flexDirection="column"
+      // width="full"
     >
       {isCollectionStatsLoading && (
-        <Box as="div" borderRadius="round" position="absolute" className={styles.collectionImageIsLoadingBackground} />
+        <Box as="div" 
+        // borderRadius="round" 
+        // position="absolute" 
+        className={styles.collectionImageIsLoadingBackground} />
       )}
       <Box
         as={isCollectionStatsLoading ? 'div' : 'img'}
-        background="explicitWhite"
-        borderRadius="round"
-        position="absolute"
+        // background="explicitWhite"
+        // borderRadius="round"
+        // position="absolute"
         className={isCollectionStatsLoading ? styles.collectionImageIsLoading : styles.collectionImage}
         src={stats.isFoundation && !stats.imageUrl ? '/nft/svgs/marketplaces/foundation.svg' : stats.imageUrl}
       />
@@ -485,13 +534,21 @@ export const CollectionStats = ({ stats, isMobile }: { stats: GenieCollection; i
         {(stats.description || isCollectionStatsLoading) && !isMobile && (
           <CollectionDescription description={stats.description ?? ''} />
         )}
-        <StatsRow display={{ sm: 'none', md: 'flex' }} stats={stats} marginTop="20" />
+        <StatsRow 
+        // display={{ sm: 'none', md: 'flex' }} 
+        // marginTop="20" 
+        stats={stats} 
+        />
       </Box>
       {(stats.description || isCollectionStatsLoading) && isMobile && (
         <CollectionDescription description={stats.description ?? ''} />
       )}
       <div id="nft-anchor-mobile" />
-      <StatsRow isMobile display={{ sm: 'flex', md: 'none' }} stats={stats} marginTop="20" marginBottom="12" />
+      <StatsRow isMobile 
+      // display={{ sm: 'flex', md: 'none' }} 
+      // marginTop="20" marginBottom="12" 
+      stats={stats} 
+      />
     </Box>
   )
 }

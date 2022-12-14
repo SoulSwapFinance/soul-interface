@@ -54,7 +54,7 @@ import { MARKETPLACE_ITEMS, MarketplaceLogo } from './MarketplaceSelect'
 import { Sweep, useSweepFetcherParams } from './Sweep'
 import { TraitChip } from './TraitChip'
 import { OpacityHoverState } from '../Common'
-import { NftAssetTraitInput } from 'services/graphql/data/__generated__/AssetQuery.graphql'
+import { NftAssetTraitInput } from 'services/graphql/data/nft/__generated__/AssetQuery.graphql'
 
 interface CollectionNftsProps {
   contractAddress: string
