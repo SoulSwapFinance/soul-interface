@@ -21,7 +21,8 @@ export const Box = React.forwardRef<HTMLElement, Props>(({ as = 'div', className
   const nativeProps: Record<string, unknown> = {}
 
   for (const key in props) {
-    if (sprinkles.properties.has(key as keyof Omit<Atoms, 'reset'>)) {
+    // if (sprinkles.properties.has(key as keyof Omit<Atoms, 'reset'>)) {
+    if (key as keyof Omit<Atoms, 'reset'>) {
       atomProps[key] = props[key as keyof typeof props]
     } else {
       nativeProps[key] = props[key as keyof typeof props]

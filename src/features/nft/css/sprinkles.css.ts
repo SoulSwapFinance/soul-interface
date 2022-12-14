@@ -1,5 +1,5 @@
-import { createGlobalTheme, createGlobalThemeContract } from '@vanilla-extract/css'
-import { createSprinkles, defineProperties } from '@vanilla-extract/sprinkles'
+// import { createGlobalTheme, createGlobalThemeContract } from '@vanilla-extract/css'
+// import { createSprinkles, defineProperties } from '@vanilla-extract/sprinkles'
 
 const themeContractValues = {
   colors: {
@@ -51,7 +51,9 @@ const themeContractValues = {
 
 export type Theme = typeof themeContractValues
 
-export const themeVars = createGlobalThemeContract(themeContractValues, (_, path) => `genie-${path.join('-')}`)
+export const themeVars =
+//  createGlobalThemeContract
+[themeContractValues, (_, path) => `genie-${path.join('-')}`]
 
 const dimensions = {
   '0': '0',
@@ -148,9 +150,11 @@ const zIndices = {
   modalOverTooltip: '1090',
 }
 
-export const vars = createGlobalTheme(':root', {
+export const vars = 
+// createGlobalTheme(':root', 
+{
   color: {
-    ...themeVars.colors,
+    ...themeContractValues.colors,
     fallbackGradient: 'linear-gradient(270deg, #D1D5DB 0%, #F6F6F6 100%)',
     loadingBackground: '#24272e',
     cardDropShadow: 'rgba(0, 0, 0, 10%) 0px 4px 12px',
@@ -267,7 +271,7 @@ export const vars = createGlobalTheme(':root', {
     body: 'Inter, sans-serif',
     heading: 'Adieu, sans-serif',
   },
-})
+}
 
 const flexAlignment = [
   'flex-start',
@@ -294,7 +298,9 @@ export const breakpoints = {
   xxxl: 1920,
 }
 
-const layoutStyles = defineProperties({
+const layoutStyles = 
+// defineProperties({
+  {
   conditions: {
     sm: {},
     md: { '@media': `screen and (min-width: ${breakpoints.sm}px)` },
@@ -356,9 +362,11 @@ const layoutStyles = defineProperties({
     marginX: ['marginLeft', 'marginRight'],
     marginY: ['marginTop', 'marginBottom'],
   },
-})
+}
 
-const colorStyles = defineProperties({
+const colorStyles =
+//  defineProperties({
+  {
   conditions: {
     default: {},
     hover: { selector: '&:hover' },
@@ -379,9 +387,11 @@ const colorStyles = defineProperties({
     outlineColor: vars.color,
     fill: vars.color,
   },
-})
+}
 
-const unresponsiveProperties = defineProperties({
+const unresponsiveProperties = 
+// defineProperties({
+  {
   conditions: {
     default: {},
     hover: { selector: '&:hover' },
@@ -410,13 +420,16 @@ const unresponsiveProperties = defineProperties({
     overflow,
     overflowX: overflow,
     overflowY: overflow,
-    boxShadow: { ...themeVars.shadows, none: 'none', dropShadow: vars.color.dropShadow },
+    boxShadow: { ...themeContractValues.shadows, none: 'none', dropShadow: vars.color.dropShadow },
     lineHeight: vars.lineHeight,
     transition: vars.time,
     transitionDuration: vars.time,
     animationDuration: vars.time,
   },
-})
+}
 
-export const sprinkles = createSprinkles(layoutStyles, colorStyles, unresponsiveProperties)
-export type Sprinkles = Parameters<typeof sprinkles>[0]
+export const sprinkles = 
+// createSprinkles(
+  [layoutStyles, colorStyles, unresponsiveProperties]
+// export type Sprinkles = Parameters<typeof sprinkles>[0]
+export type Sprinkles = Parameters<any>[0]

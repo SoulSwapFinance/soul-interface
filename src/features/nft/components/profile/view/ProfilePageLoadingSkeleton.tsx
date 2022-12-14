@@ -64,7 +64,9 @@ const ProfileAssetCardSkeleton = styled.div`
 
 const ProfileAssetCardDisplaySectionSkeleton = () => {
   return (
-    <Box width="full" className={assetList}>
+    <Box 
+    // width="full" 
+    className={assetList}>
       {Array.from(Array(DEFAULT_WALLET_ASSET_QUERY_AMOUNT), (_, index) => (
         <ProfileAssetCardSkeleton key={index} className={loadingAsset} />
       ))}

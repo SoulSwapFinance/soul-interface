@@ -1,10 +1,10 @@
 import '@zag-js/focus-visible'
 
-import { style } from '@vanilla-extract/css'
+// import { style } from '@vanilla-extract/css'
 
-const hideFocusRingsDataAttribute = '[data-js-focus-visible] &:focus:not([data-focus-visible-added])'
+const hideFocusRingsDataAttribute = '[data-js-focus-visible] &:focus:not([data-focus-visible-added]'
 
-export const base = style({
+export const base = {
   boxSizing: 'border-box',
   selectors: {
     [`${hideFocusRingsDataAttribute}`]: {
@@ -13,31 +13,31 @@ export const base = style({
   },
   verticalAlign: 'baseline',
   WebkitTapHighlightColor: 'transparent',
-})
+}
 
-const list = style({
+const list = {
   listStyle: 'none',
-})
+}
 
-const quote = style({
+const quote = {
   quotes: 'none',
   selectors: {
     '&:before, &:after': {
       content: "''",
     },
   },
-})
+}
 
-const table = style({
+const table = {
   borderCollapse: 'collapse',
   borderSpacing: 0,
-})
+}
 
-const appearance = style({
+const appearance = {
   appearance: 'none',
-})
+}
 
-const field = style([
+const field = [
   appearance,
   {
     '::placeholder': {
@@ -45,14 +45,14 @@ const field = style([
     },
     outline: 'none',
   },
-])
+]
 
-const mark = style({
+const mark = {
   backgroundColor: 'transparent',
   color: 'inherit',
-})
+}
 
-const select = style([
+const select = [
   field,
   {
     ':disabled': {
@@ -64,9 +64,9 @@ const select = style([
       },
     },
   },
-])
+]
 
-const input = style([
+const input = [
   field,
   {
     selectors: {
@@ -86,11 +86,11 @@ const input = style([
       outline: 'none',
     },
   },
-])
+]
 
-const a = style({
+const a = {
   textDecoration: 'none',
-})
+}
 
 export const element = {
   a,

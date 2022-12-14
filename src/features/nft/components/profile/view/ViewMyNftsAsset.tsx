@@ -38,7 +38,9 @@ const getNftDisplayComponent = (
 }
 
 const getUnsupportedNftTextComponent = (asset: WalletAsset) => (
-  <Box as="span" className={bodySmall} style={{ color: themeVars.colors.textPrimary }}>
+  <Box as="span" className={bodySmall} 
+  // style={{ color: themeVars.colors.textPrimary }}
+  >
     {asset.asset_contract.tokenType === TokenType.ERC1155 ? (
       <Trans>Selling ERC-1155s coming soon</Trans>
     ) : (
@@ -123,7 +125,9 @@ export const ViewMyNftsAsset = ({
       <Card.ImageContainer isDisabled={isDisabled}>
         <Tooltip
           text={
-            <Box as="span" className={bodySmall} color="textPrimary">
+            <Box as="span" className={bodySmall} 
+            // color="textPrimary"
+            >
               {isSelected ? <Trans>Added to bag</Trans> : <Trans>Removed from bag</Trans>}
             </Box>
           }

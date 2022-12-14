@@ -24,11 +24,12 @@ export const loadingBlock = style([
 
 export const loadingAsset = style([
   loadingBlock,
-  sprinkles({
-    borderRadius: '12',
+  // sprinkles({
+
+{  borderRadius: '12',
     cursor: 'default',
     color: 'transparent',
-  }),
+  },
   {
     userSelect: 'none',
   },

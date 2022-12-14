@@ -4,7 +4,7 @@ import { BrowserEvent, ElementName, EventName } from '@uniswap/analytics-events'
 import { useWeb3React } from '@web3-react/core'
 import clsx from 'clsx'
 import { parseEther } from 'ethers/lib/utils'
-// import { NftAssetTraitInput, NftMarketplace } from 'services/graphql/data/nft/__generated__/AssetQuery.graphql'
+import { NftAssetTraitInput, NftMarketplace } from 'services/graphql/data/nft/__generated__/AssetQuery.graphql'
 import {
   ASSET_PAGE_SIZE,
   AssetFetcherParams,
@@ -177,24 +177,35 @@ export const LoadingAssets = ({ count }: { count?: number }) => (
 )
 
 const CollectionNftsLoading = () => (
-  <Box width="full" className={styles.assetList}>
+  <Box 
+  // width="full" 
+  className={styles.assetList}
+  >
     <LoadingAssets />
   </Box>
 )
 
 export const CollectionNftsAndMenuLoading = () => (
   <InfiniteScrollWrapper>
-    <Column alignItems="flex-start" position="relative" width="full">
-      <Row marginY="12" gap="12" marginBottom="40">
-        <Box className={loadingAsset} borderRadius="12" width={{ sm: '44', md: '100' }} height="44" />
+    <Column 
+    // alignItems="flex-start" position="relative" width="full"
+    >
+      <Row 
+      // marginY="12" gap="12" marginBottom="40"
+      >
+        <Box className={loadingAsset} 
+        // borderRadius="12" width={{ sm: '44', md: '100' }} height="44" 
+        />
         <Box
           className={loadingAsset}
-          borderRadius="12"
-          height="44"
-          display={{ sm: 'none', md: 'flex' }}
+          // borderRadius="12"
+          // height="44"
+          // display={{ sm: 'none', md: 'flex' }}
           style={{ width: '220px' }}
         />
-        <Box className={loadingAsset} borderRadius="12" height="44" width={{ sm: '276', md: '332' }} />
+        <Box className={loadingAsset} 
+        // borderRadius="12" height="44" width={{ sm: '276', md: '332' }} 
+        />
       </Row>
       <CollectionNftsLoading />
     </Column>
@@ -293,8 +304,7 @@ export const CollectionNfts = ({ contractAddress, collectionStats, rarityVerifie
       traits:
         traits.length > 0
           ? traits.map((trait) => {
-            //   return { name: trait.trait_type, values: [trait.trait_value] } as unknown as NftAssetTraitInput
-              return { name: trait.trait_type, values: [trait.trait_value] } as unknown as any
+              return { name: trait.trait_type, values: [trait.trait_value] } as unknown as NftAssetTraitInput
             })
           : undefined,
     },
@@ -543,9 +553,9 @@ export const CollectionNfts = ({ contractAddress, collectionStats, rarityVerifie
             <Sweep contractAddress={contractAddress} minPrice={debouncedMinPrice} maxPrice={debouncedMaxPrice} />
           )}
           <Row
-            paddingTop={!!markets.length || !!traits.length || minMaxPriceChipText ? '12' : '0'}
-            gap="8"
-            flexWrap="wrap"
+            // paddingTop={!!markets.length || !!traits.length || minMaxPriceChipText ? '12' : '0'}
+            // gap="8"
+            // flexWrap="wrap"
           >
             {markets.map((market) => (
               <TraitChip
@@ -605,15 +615,20 @@ export const CollectionNfts = ({ contractAddress, collectionStats, rarityVerifie
           {hasNfts ? (
             assets
           ) : collectionAssets?.length === 0 ? (
-            <Center width="full" color="textSecondary" textAlign="center" style={{ height: '60vh' }}>
+            <Center 
+            // width="full" color="textSecondary" textAlign="center" 
+            style={{ height: '60vh' }}
+            >
               <EmptyCollectionWrapper>
-                <p className={headlineMedium}>No NFTS found</p>
+                <p 
+                // className={headlineMedium}
+                >No NFTS found</p>
                 <Box
                   onClick={reset}
                   type="button"
                   className={clsx(bodySmall, buttonTextMedium)}
-                  color="accentAction"
-                  cursor="pointer"
+                  // color="accentAction"
+                  // cursor="pointer"
                 >
                   <ViewFullCollection>View full collection</ViewFullCollection>
                 </Box>

@@ -29,9 +29,9 @@ const SortByItem = ({
       <Box
         as="img"
         alt={dropDownOption.displayText}
-        width="20"
-        height="20"
-        objectFit="cover"
+        // width="20"
+        // height="20"
+        // objectFit="cover"
         src="/nft/svgs/checkmark.svg"
       />
     ) : (

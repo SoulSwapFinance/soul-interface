@@ -112,7 +112,9 @@ export const BuyCell = ({
   }
 
   return (
-    <Column display={{ sm: 'none', lg: 'flex' }} height="full" justifyContent="center" marginX="auto">
+    <Column 
+    // display={{ sm: 'none', lg: 'flex' }} height="full" justifyContent="center" marginX="auto"
+    >
       {event.eventType === ActivityEventType.Listing && event.orderStatus ? (
         <Box
           as="button"
@@ -147,7 +149,7 @@ interface AddressCellProps {
 export const AddressCell = ({ address, desktopLBreakpoint, chainId }: AddressCellProps) => {
   return (
     <Column
-      display={{ sm: 'none', xl: desktopLBreakpoint ? 'none' : 'flex', xxl: 'flex' }}
+      // display={{ sm: 'none', xl: desktopLBreakpoint ? 'none' : 'flex', xxl: 'flex' }}
       className={styles.addressCell}
     >
       <AddressLink
@@ -174,7 +176,9 @@ export const MarketplaceIcon = ({ marketplace }: { marketplace: Markets }) => {
 const PriceTooltip = ({ price }: { price: string }) => (
   <MouseoverTooltip
     text={
-      <Box textAlign="left" fontSize="14" fontWeight="normal" color="textSecondary">
+      <Box 
+      // textAlign="left" fontSize="14" fontWeight="normal" color="textSecondary"
+      >
         {`${price} ETH`}
       </Box>
     }
@@ -188,7 +192,10 @@ export const PriceCell = ({ marketplace, price }: { marketplace?: Markets; price
   const formattedPrice = useMemo(() => (price ? putCommas(formatEthPrice(price))?.toString() : null), [price])
 
   return (
-    <Row display={{ sm: 'none', md: 'flex' }} gap="8">
+    <Row 
+    // display={{ sm: 'none', md: 'flex' }} 
+    // gap="8"
+    >
       {marketplace && <MarketplaceIcon marketplace={marketplace} />}
       {formattedPrice ? (
         formattedPrice.length > 6 ? (
@@ -233,7 +240,9 @@ const openEtherscanLinkInNewTab = (e: MouseEvent, transactionHash: string) => {
 }
 
 const ExternalLinkIcon = ({ transactionHash }: { transactionHash: string }) => (
-  <Row onClick={(e: MouseEvent) => openEtherscanLinkInNewTab(e, transactionHash)} marginLeft="4">
+  <Row onClick={(e: MouseEvent) => openEtherscanLinkInNewTab(e, transactionHash)}
+  //  marginLeft="4"
+  >
     <ActivityExternalLinkIcon />
   </Row>
 )
@@ -259,8 +268,12 @@ export const EventCell = ({
 }: EventCellProps) => {
   const formattedPrice = useMemo(() => (price ? putCommas(formatEthPrice(price))?.toString() : null), [price])
   return (
-    <Column height="full" justifyContent="center" gap="4">
-      <Row className={styles.eventDetail} color={eventColors(eventType)}>
+    <Column 
+    // height="full" justifyContent="center" gap="4"
+    >
+      <Row className={styles.eventDetail} 
+      // color={eventColors(eventType)}
+      >
         {renderEventIcon(eventType)}
         {ActivityEventTypeDisplay[eventType]}
       </Row>
@@ -270,7 +283,9 @@ export const EventCell = ({
           {eventTransactionHash && <ExternalLinkIcon transactionHash={eventTransactionHash} />}
         </Row>
       )}
-      {isMobile && price && <Row fontSize="16" fontWeight="normal" color="textPrimary">{`${formattedPrice} ETH`}</Row>}
+      {isMobile && price && <Row 
+      // fontSize="16" fontWeight="normal" color="textPrimary"
+      >{`${formattedPrice} ETH`}</Row>}
     </Column>
   )
 }
@@ -285,21 +300,21 @@ interface ItemCellProps {
 
 const NoContentContainer = () => (
   <Box
-    position="relative"
+    // position="relative"
     style={{
       background: `#24272e`,
     }}
     className={styles.detailsImage}
   >
     <Box
-      position="absolute"
-      textAlign="center"
-      left="1/2"
-      top="1/2"
-      style={{ transform: 'translate3d(-50%, -50%, 0)' }}
-      color="gray500"
-      fontSize="12"
-      fontWeight="normal"
+      // position="absolute"
+      // textAlign="center"
+      // left="1/2"
+      // top="1/2"
+      // style={{ transform: 'translate3d(-50%, -50%, 0)' }}
+      // color="gray500"
+      // fontSize="12"
+      // fontWeight="normal"
     >
       Image
       <br />
@@ -325,10 +340,14 @@ const Ranking = ({ details, rarity, collectionName, rarityVerified }: RankingPro
       <MouseoverTooltip
         text={
           <Row>
-            <Box display="flex" marginRight="4">
+            <Box 
+            // display="flex" marginRight="4"
+            >
               <img src={rarityProviderLogo} alt="cardLogo" width={16} />
             </Box>
-            <Box width="full" fontSize="14">
+            <Box 
+            // width="full" fontSize="14"
+            >
               {rarityVerified
                 ? `Verified by ${collectionName}`
                 : `Ranking by ${rarity.source === 'Genie' ? fallbackProvider : rarity.source}`}
@@ -338,11 +357,15 @@ const Ranking = ({ details, rarity, collectionName, rarityVerified }: RankingPro
         placement="top"
       >
         <Box className={styles.rarityInfo}>
-          <Box paddingTop="2" paddingBottom="2" display="flex">
+          <Box 
+          // paddingTop="2" paddingBottom="2" display="flex"
+          >
             {putCommas(rarity.rank)}
           </Box>
 
-          <Box display="flex" height="16">
+          <Box 
+          // display="flex" height="16"
+          >
             {rarityVerified ? <RarityVerifiedIcon /> : null}
           </Box>
         </Box>
@@ -360,7 +383,9 @@ export const ItemCell = ({ event, rarityVerified, collectionName, eventTimestamp
   const [noContent, setNoContent] = useState(!getItemImage(event.tokenMetadata))
 
   return (
-    <Row gap="16" overflow="hidden" whiteSpace="nowrap">
+    <Row 
+    // gap="16" overflow="hidden" whiteSpace="nowrap"
+    >
       {!noContent ? (
         <Box
           as="img"
@@ -377,7 +402,9 @@ export const ItemCell = ({ event, rarityVerified, collectionName, eventTimestamp
       ) : (
         <NoContentContainer />
       )}
-      <Column height="full" justifyContent="center" overflow="hidden" whiteSpace="nowrap" marginRight="24">
+      <Column 
+      // height="full" justifyContent="center" overflow="hidden" whiteSpace="nowrap" marginRight="24"
+      >
         <Box className={styles.detailsName}>{event.tokenMetadata?.name || event.tokenId}</Box>
         {event.tokenMetadata?.rarity && !isMobile && (
           <Ranking

@@ -3,7 +3,8 @@ import { style } from '@vanilla-extract/css'
 import { sprinkles } from '../../css/sprinkles.css'
 
 export const overlay = style([
-  sprinkles({
+  // sprinkles(
+    {
     top: '0',
     left: '0',
     width: 'viewWidth',
@@ -12,7 +13,7 @@ export const overlay = style([
     display: 'block',
     background: 'black',
     zIndex: 'modalBackdrop',
-  }),
+  },
   {
     opacity: 0.72,
     overflow: 'hidden',

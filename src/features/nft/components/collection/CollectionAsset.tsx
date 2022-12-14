@@ -125,7 +125,9 @@ export const CollectionAsset = ({
         <StyledContainer>
           <Tooltip
             text={
-              <Box as="span" className={bodySmall} color="textPrimary">
+              <Box as="span" className={bodySmall} 
+              // color="textPrimary"
+              >
                 {isSelected ? <Trans>Added to bag</Trans> : <Trans>Removed from bag</Trans>}
               </Box>
             }
@@ -149,7 +151,9 @@ export const CollectionAsset = ({
         )}
         <MouseoverTooltip
           text={
-            <Box as="span" className={bodySmall} color="textPrimary">
+            <Box as="span" className={bodySmall} 
+            // color="textPrimary"
+            >
               <Trans>This item is not for sale</Trans>
             </Box>
           }

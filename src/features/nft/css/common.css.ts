@@ -2,33 +2,36 @@ import { style } from '@vanilla-extract/css'
 
 import { sprinkles, vars } from './sprinkles.css'
 
-export const center = sprinkles({
+export const center = 
+// 
+  {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-})
+}
 
 // TYPOGRAPHY
-export const headlineLarge = sprinkles({ fontWeight: 'semibold', fontSize: '36', lineHeight: '44' })
-export const headlineMedium = sprinkles({ fontWeight: 'semibold', fontSize: '28', lineHeight: '36' })
-export const headlineSmall = sprinkles({ fontWeight: 'semibold', fontSize: '20', lineHeight: '28' })
+export const headlineLarge = { fontWeight: 'semibold', fontSize: '36', lineHeight: '44' }
+export const headlineMedium = { fontWeight: 'semibold', fontSize: '28', lineHeight: '36' }
+export const headlineSmall = { fontWeight: 'semibold', fontSize: '20', lineHeight: '28' }
 
-export const subhead = sprinkles({ fontWeight: 'medium', fontSize: '16', lineHeight: '24' })
-export const subheadSmall = sprinkles({ fontWeight: 'medium', fontSize: '14', lineHeight: '14' })
+export const subhead = { fontWeight: 'medium', fontSize: '16', lineHeight: '24' }
+export const subheadSmall = { fontWeight: 'medium', fontSize: '14', lineHeight: '14' }
 
-export const body = sprinkles({ fontWeight: 'normal', fontSize: '16', lineHeight: '24' })
-export const bodySmall = sprinkles({ fontWeight: 'normal', fontSize: '14', lineHeight: '20' })
-export const caption = sprinkles({ fontWeight: 'normal', fontSize: '12', lineHeight: '16' })
-export const badge = sprinkles({ fontWeight: 'semibold', fontSize: '10', lineHeight: '12' })
+export const body = { fontWeight: 'normal', fontSize: '16', lineHeight: '24' }
+export const bodySmall = { fontWeight: 'normal', fontSize: '14', lineHeight: '20' }
+export const caption = { fontWeight: 'normal', fontSize: '12', lineHeight: '16' }
+export const badge = { fontWeight: 'semibold', fontSize: '10', lineHeight: '12' }
 
-export const buttonTextMedium = sprinkles({ fontWeight: 'semibold', fontSize: '16', lineHeight: '20' })
-export const buttonTextSmall = sprinkles({ fontWeight: 'semibold', fontSize: '14', lineHeight: '16' })
+export const buttonTextMedium = { fontWeight: 'semibold', fontSize: '16', lineHeight: '20' }
+export const buttonTextSmall = { fontWeight: 'semibold', fontSize: '14', lineHeight: '16' }
 
-export const commonButtonStyles = style([
-  sprinkles({
+export const commonButtonStyles = 
+  [
+  {
     borderRadius: '12',
     transition: '250',
-  }),
+  },
   {
     border: 'none',
     ':hover': {
@@ -38,24 +41,24 @@ export const commonButtonStyles = style([
       cursor: 'auto',
     },
   },
-])
+]
 
-export const buttonMedium = style([
+export const buttonMedium = [
   buttonTextMedium,
   commonButtonStyles,
-  sprinkles({
+  {
     backgroundColor: 'accentAction',
     color: 'explicitWhite',
-  }),
+  },
   {
     padding: '14px 18px',
     ':disabled': {
       opacity: '0.3',
     },
   },
-])
+]
 
-const magicalGradient = style({
+const magicalGradient = {
   selectors: {
     '&::before': {
       content: '',
@@ -72,9 +75,9 @@ const magicalGradient = style({
       pointerEvents: 'none',
     },
   },
-})
+}
 
-export const magicalGradientOnHover = style([
+export const magicalGradientOnHover = [
   magicalGradient,
   {
     selectors: {
@@ -90,15 +93,15 @@ export const magicalGradientOnHover = style([
       },
     },
   },
-])
+]
 
-export const lightGrayOverlayOnHover = style([
-  sprinkles({
+export const lightGrayOverlayOnHover = [
+  {
     transition: '250',
-  }),
+  },
   {
     ':hover': {
       background: vars.color.lightGrayOverlay,
     },
   },
-])
+]
