@@ -8,20 +8,18 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { fetchQuery, useLazyLoadQuery, usePaginationFragment, useQueryLoader, useRelayEnvironment } from 'react-relay'
 import useInterval from 'hooks/useInterval'
 
-// import { AssetPaginationQuery } from './__generated__/AssetPaginationQuery.graphql'
-// import {
-//   AssetQuery,
-//   AssetQuery$variables,
-//   NftAssetsFilterInput,
-//   NftAssetSortableField,
-//   NftAssetTraitInput,
-//   NftMarketplace,
-// } from './__generated__/AssetQuery.graphql'
-// import { AssetQuery_nftAssets$data } from './__generated__/AssetQuery_nftAssets.graphql'
+import { AssetPaginationQuery } from './__generated__/AssetPaginationQuery.graphql'
+import {
+  AssetQuery,
+  AssetQuery$variables,
+  NftAssetsFilterInput,
+  NftAssetSortableField,
+  NftAssetTraitInput,
+  NftMarketplace,
+} from './__generated__/AssetQuery.graphql'
+import { AssetQuery_nftAssets$data } from './__generated__/AssetQuery_nftAssets.graphql'
 
-let FIVE_SECONDS = 5 * 100 // ms`60 seconds`
-let ONE_HUNDRED_EIGHTY_DAYS = 180 * 86_400 * 100 // ms`180 days`
-let ONE_HOUR = 60 * 60 * 100 // ms`1 hour`
+let FIVE_SECONDS = 5 * 100
 
 const assetPaginationQuery = graphql`
   fragment AssetQuery_nftAssets on Query @refetchable(queryName: "AssetPaginationQuery") {
@@ -126,8 +124,7 @@ const assetQuery = graphql`
 `
 
 type NftAssetsQueryAsset = NonNullable<
-//   NonNullable<NonNullable<AssetQuery_nftAssets$data['nftAssets']>['edges']>[number]
-  NonNullable<NonNullable<any['nftAssets']>['edges']>[number]
+  NonNullable<NonNullable<AssetQuery_nftAssets$data['nftAssets']>['edges']>[number]
 >
 
 function formatAssetQueryData(queryAsset: NftAssetsQueryAsset, totalCount?: number) {
@@ -187,17 +184,16 @@ export const ASSET_PAGE_SIZE = 25
 
 export interface AssetFetcherParams {
   address: string
-  orderBy: any // NftAssetSortableField
+  orderBy: NftAssetSortableField
   asc: boolean
-  filter: any // NftAssetsFilterInput
+  filter:  NftAssetsFilterInput
   first?: number
   after?: string
   last?: number
   before?: string
 }
 
-// const defaultAssetFetcherParams: Omit<AssetQuery$variables, 'address'> = {
-const defaultAssetFetcherParams: Omit<any, 'address'> = {
+const defaultAssetFetcherParams: Omit<AssetQuery$variables, 'address'> = {
   orderBy: 'PRICE',
   asc: true,
   // tokenSearchQuery must be specified so that this exactly matches the initial query.
@@ -206,8 +202,7 @@ const defaultAssetFetcherParams: Omit<any, 'address'> = {
 }
 
 export function useLoadAssetsQuery(address?: string) {
-//   const [, loadQuery] = useQueryLoader<AssetQuery>(assetQuery)
-  const [, loadQuery] = useQueryLoader<any>(assetQuery)
+  const [, loadQuery] = useQueryLoader<AssetQuery>(assetQuery)
   useEffect(() => {
     if (address) {
       loadQuery({ ...defaultAssetFetcherParams, address })
@@ -220,8 +215,7 @@ export function useLazyLoadAssetsQuery(params: AssetFetcherParams) {
   const [fetchKey, setFetchKey] = useState(0)
   // Use the store if it is available (eg from polling), or the network if it is not (eg from an incorrect preload).
   const fetchPolicy = 'store-or-network'
-//   const queryData = useLazyLoadQuery<AssetQuery>(assetQuery, vars, { fetchKey, fetchPolicy }) // this will suspend if not yet loaded
-  const queryData = useLazyLoadQuery<any>(assetQuery, vars, { fetchKey, fetchPolicy }) // this will suspend if not yet loaded
+  const queryData = useLazyLoadQuery<AssetQuery>(assetQuery, vars, { fetchKey, fetchPolicy }) // this will suspend if not yet loaded
 
 //   const { data, hasNext, loadNext, isLoadingNext } = usePaginationFragment<AssetPaginationQuery, any>(
   const { data, hasNext, loadNext, isLoadingNext } = usePaginationFragment<any, any>(
@@ -236,8 +230,7 @@ export function useLazyLoadAssetsQuery(params: AssetFetcherParams) {
     if (data.nftAssets?.edges?.length > ASSET_PAGE_SIZE) return
     // Initiate a network request. When it resolves, refresh the UI from store (to avoid re-triggering Suspense);
     // see: https://relay.dev/docs/guided-tour/refetching/refreshing-queries/#if-you-need-to-avoid-suspense-1.
-    // await fetchQuery<AssetQuery>(environment, assetQuery, { ...vars }).toPromise()
-    await fetchQuery<any>(environment, assetQuery, { ...vars }).toPromise()
+    await fetchQuery<AssetQuery>(environment, assetQuery, { ...vars }).toPromise()
     setFetchKey((fetchKey) => fetchKey + 1)
   }, [data.nftAssets?.edges?.length, environment, vars])
   useInterval(poll, isLoadingNext ? null : POLLING_INTERVAL, /* leading= */ false)
@@ -263,10 +256,8 @@ export interface SweepFetcherParams {
   traits?: Trait[]
 }
 
-// function useSweepFetcherVars({ contractAddress, markets, price, traits }: SweepFetcherParams): AssetQuery$variables {
-function useSweepFetcherVars({ contractAddress, markets, price, traits }: SweepFetcherParams): any {
-//   const filter: NftAssetsFilterInput = useMemo(
-  const filter: any = useMemo(
+function useSweepFetcherVars({ contractAddress, markets, price, traits }: SweepFetcherParams): AssetQuery$variables {
+  const filter: NftAssetsFilterInput = useMemo(
     () => ({
       listed: true,
       maxPrice: price?.high?.toString(),
@@ -274,13 +265,11 @@ function useSweepFetcherVars({ contractAddress, markets, price, traits }: SweepF
       traits:
         traits && traits.length > 0
           ? traits?.map((trait) => {
-            //   return { name: trait.trait_type, values: [trait.trait_value] } as unknown as NftAssetTraitInput
-              return { name: trait.trait_type, values: [trait.trait_value] } as unknown as any
+              return { name: trait.trait_type, values: [trait.trait_value] } as unknown as NftAssetTraitInput
             })
           : undefined,
       marketplaces:
-        // markets && markets.length > 0 ? markets?.map((market) => market.toUpperCase() as NftMarketplace) : undefined,
-        markets && markets.length > 0 ? markets?.map((market) => market.toUpperCase() as any) : undefined,
+        markets && markets.length > 0 ? markets?.map((market) => market.toUpperCase() as NftMarketplace) : undefined,
     }),
     [markets, price?.high, price?.low, traits]
   )
@@ -296,8 +285,7 @@ function useSweepFetcherVars({ contractAddress, markets, price, traits }: SweepF
   )
 }
 export function useLoadSweepAssetsQuery(params: SweepFetcherParams, enabled = true) {
-    //   const [, loadQuery] = useQueryLoader<AssetQuery>(assetQuery)
-    const [, loadQuery] = useQueryLoader<any>(assetQuery)
+      const [, loadQuery] = useQueryLoader<AssetQuery>(assetQuery)
     const vars = useSweepFetcherVars(params)
     useEffect(() => {
         if (enabled) {
@@ -312,8 +300,7 @@ export function useLoadSweepAssetsQuery(params: SweepFetcherParams, enabled = tr
 export function useLazyLoadSweepAssetsQuery(params: SweepFetcherParams): GenieAsset[] {
     const vars = useSweepFetcherVars(params)
     const queryData = useLazyLoadQuery(assetQuery, vars, { fetchPolicy: 'store-only' }) // this will suspend if not yet loaded
-    //   const { data } = usePaginationFragment<AssetPaginationQuery, any>(assetPaginationQuery, queryData)
-    const { data } = usePaginationFragment<any, any>(assetPaginationQuery, queryData)
+      const { data } = usePaginationFragment<AssetPaginationQuery, any>(assetPaginationQuery, queryData)
     return useMemo<GenieAsset[]>(
         () =>
         data.nftAssets?.edges?.map((queryAsset: NftAssetsQueryAsset) => {
