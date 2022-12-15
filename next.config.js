@@ -117,6 +117,10 @@ module.exports = withBundleAnalyzer(
           destination: '/exchange/swap/:token*',
         },
         {
+          source: '/collections/:id*',
+          destination: '/nft/collections/:id*',
+        },
+        {
           source: '/limit/:token*',
           destination: '/exchange/swap/limit/:token*',
         },

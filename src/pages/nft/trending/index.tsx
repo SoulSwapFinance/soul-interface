@@ -5,7 +5,6 @@ import setParams from 'features/nft/lib/params'
 import Head from 'next/head'
 // import FeaturedCollectionTable from 'components/FeaturedCollectionTable'
 import TrendingCollectionTable from 'components/NFT/collections/TrendingCollectionTable'
-// import SortTrendingCollections from 'components/Collections/sort/SortTrendingCollections'
 import { useMediaQuery } from '@react-hookz/web'
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -116,7 +115,7 @@ export const getStaticProps: GetStaticProps<{
   if (REDIRECT_HOMEPAGE && COLLECTION) {
     return {
       redirect: {
-        destination: `/collections/${COLLECTION}`,
+        destination: `/nft/collections/${COLLECTION}`,
         permanent: false,
       },
     }

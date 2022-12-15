@@ -7,7 +7,7 @@ import setParams from 'features/nft/lib/params'
 import NavbarLogo from './NavbarLogo'
 // import ThemeSwitcher from './ThemeSwitcher'
 
-const SearchCollections = dynamic(() => import('components/Collections/SearchCollections'))
+const SearchCollections = dynamic(() => import('components/NFT/collections/SearchCollections'))
 const CommunityDropdown = dynamic(() => import('./CommunityDropdown'))
 const EXTERNAL_LINKS = process.env.NEXT_PUBLIC_EXTERNAL_LINKS || null
 const COLLECTION = process.env.NEXT_PUBLIC_COLLECTION

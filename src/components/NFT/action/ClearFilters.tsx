@@ -7,10 +7,10 @@ const ClearFilters = ({ router }: { router: NextRouter }) => {
       <button
         className="btn-primary-outline"
         onClick={() => {
-          if (router.query.pathname === '/collections/[id]') {
+          if (router.query.pathname === '/nft/collections/[id]') {
             router.push(
               {
-                pathname: '/collections/[id]',
+                pathname: '/nft/collections/[id]',
                 query: { id: router.query.id },
               },
               undefined,
