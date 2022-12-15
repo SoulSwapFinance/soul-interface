@@ -6,6 +6,7 @@ import { optimizeImage } from 'features/nft/lib/optimizeImage'
 import CancelOffer from 'components/NFT/action/CancelOffer'
 import Toast from 'components/NFT/Toast'
 import useUserBids from 'features/nft/hooks/useUserBids'
+import Image from 'next/image'
 
 type Props = {
   data: ReturnType<typeof useUserBids>
@@ -95,11 +96,12 @@ const UserOffersTable: FC<Props> = ({
                       <div className="relative h-10 w-10">
                         {image && (
                           <div className="aspect-w-1 aspect-h-1 relative">
-                            <img
+                            <Image
+                              alt={'item image'}
                               src={optimizeImage(image, 35)}
                               className="w-[35px] object-contain"
-                              width="35"
-                              height="35"
+                              width={35}
+                              height={35}
                             />
                           </div>
                         )}
@@ -113,7 +115,7 @@ const UserOffersTable: FC<Props> = ({
                             {key} {value}
                           </span>
                         </div>
-                        <div className="enjoyooor-h6 font-headings dark:text-white">
+                        <div className="soulswap-h6 font-headings dark:text-white">
                           {tokenName}
                         </div>
                       </span>

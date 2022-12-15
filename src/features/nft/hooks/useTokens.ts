@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import useSWRInfinite, { SWRInfiniteKeyLoader } from 'swr/infinite'
 
-const PROXY_API_BASE = process.env.NEXT_PUBLIC_PROXY_API_BASE
+const PROXY_API_BASE = '/api/reservoir'
 const SOURCE_ID = process.env.NEXT_PUBLIC_SOURCE_ID
 
 type Tokens = paths['/tokens/v4']['get']['responses']['200']['schema']

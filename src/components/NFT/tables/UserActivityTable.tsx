@@ -7,7 +7,7 @@ import EthAccount from 'components/NFT/account/EthAccount'
 import { constants } from 'ethers'
 import FormatEth from 'components/NFT/format/FormatEth'
 import { useActiveWeb3React } from 'services/web3'
-
+import Image from 'next/image'
 type Props = {
   data: ReturnType<typeof useUserActivity>
   chainId: ChainId
@@ -78,18 +78,19 @@ const UserActivityTable: FC<Props> = ({
                         <div className="relative h-10 w-10">
                           {image && (
                             <div className="aspect-w-1 aspect-h-1 relative">
-                              <img
+                              <Image
                                 src={optimizeImage(image, 35)}
                                 className="w-9 object-contain"
-                                width="36"
-                                height="36"
+                                width={36}
+                                height={36}
+                                alt='item'
                               />
                             </div>
                           )}
                         </div>
                         <span className="whitespace-nowrap">
                           <div className="reservoir-body">{collectionName}</div>
-                          <div className="enjoyooor-h6 ">{name}</div>
+                          <div className="soulswap-h6 ">{name}</div>
                         </span>
                       </a>
                     </Link>

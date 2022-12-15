@@ -2,6 +2,7 @@ import useDetails from 'features/nft/hooks/useDetails'
 import { optimizeImage } from 'features/nft/lib/optimizeImage'
 import Script from 'next/script'
 import { FC } from 'react'
+import Image from 'next/image'
 
 type Props = {
   details: ReturnType<typeof useDetails>
@@ -25,7 +26,9 @@ const TokenMedia: FC<Props> = ({ details, tokenOpenSea }) => {
         src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"
       ></Script>
       {tokenOpenSea?.extension === null ? (
-        <img
+      <Image
+      height={24}
+      width={24}
           className="w-full rounded-2xl"
           src={optimizeImage(token?.token?.image, 533)}
         />
@@ -65,7 +68,11 @@ const Media: FC<{
   if (extension === 'wav' || extension === 'mp3') {
     return (
       <div>
-        <img className="mb-4 w-[533px] rounded-2xl" src={tokenImage} />
+        <Image
+        height={32} 
+        width={32} 
+        alt={'audio'}
+        className="mb-4 w-[533px] rounded-2xl" src={tokenImage} />
         <audio className="mb-4 w-full" controls src={animation_url}>
           Your browser does not support the
           <code>audio</code> element.

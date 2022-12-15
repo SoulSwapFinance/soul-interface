@@ -177,6 +177,8 @@ const AudioPlayer = ({
       />
       <Image
         // className={styles.image}
+        width={48}
+                          height={48}
         src={imageUrl}
         alt={name || collectionName}
         style={{

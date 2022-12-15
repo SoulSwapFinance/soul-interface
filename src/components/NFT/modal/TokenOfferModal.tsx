@@ -254,7 +254,7 @@ const TokenOfferModal: FC<Props> = ({ env, royalties, data, setToast }) => {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="price"
-                  className="enjoyooor-h6 font-headings dark:text-white"
+                  className="soulswap-h6 font-headings dark:text-white"
                 >
                   Price (wETH)
                 </label>
@@ -277,7 +277,7 @@ const TokenOfferModal: FC<Props> = ({ env, royalties, data, setToast }) => {
                 />
               </div>
               <div className="flex justify-between">
-                <div className="enjoyooor-h6 font-headings dark:text-white">
+                <div className="soulswap-h6 font-headings dark:text-white">
                   Fees
                 </div>
                 <div className="reservoir-body text-right dark:text-white">
@@ -291,10 +291,10 @@ const TokenOfferModal: FC<Props> = ({ env, royalties, data, setToast }) => {
                 </div>
               </div>
               <div className="flex justify-between">
-                <div className="enjoyooor-h6 font-headings dark:text-white">
+                <div className="soulswap-h6 font-headings dark:text-white">
                   Total Cost
                 </div>
-                <div className="enjoyooor-h6 font-headings dark:text-white">
+                <div className="soulswap-h6 font-headings dark:text-white">
                   <FormatEth amount={calculations.total} logoWidth={10} />
                 </div>
               </div>

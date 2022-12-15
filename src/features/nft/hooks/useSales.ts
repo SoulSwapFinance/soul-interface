@@ -5,7 +5,7 @@ import useSWRInfinite, { SWRInfiniteKeyLoader } from 'swr/infinite'
 import { useInView } from 'react-intersection-observer'
 import { useEffect } from 'react'
 
-const PROXY_API_BASE = process.env.NEXT_PUBLIC_PROXY_API_BASE
+const PROXY_API_BASE = '/api/reservoir'
 
 type SalesGetRequest = paths['/sales/v3']['get']
 type SalesData = SalesGetRequest['responses']['200']['schema']

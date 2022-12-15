@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import { FC } from 'react'
 import Image from 'next/image'
+import { useActiveWeb3React } from 'services/web3'
 
 const NAVBAR_LOGO = process.env.NEXT_PUBLIC_NAVBAR_LOGO
-const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID
 const SOURCE_ID = process.env.NEXT_PUBLIC_SOURCE_ID
 const DESKTOP_NAVBAR_LOGO = process.env.NEXT_PUBLIC_DESKTOP_NAVBAR_LOGO
 const NAVBAR_LOGO_LINK = process.env.NEXT_PUBLIC_NAVBAR_LOGO_LINK
@@ -19,7 +19,9 @@ const NavbarLogo: FC<Props> = ({ variant, className }) => {
   const logoAlt = SOURCE_ID ? `${SOURCE_ID} Logo` : 'SoulSwap Logo'
   const mobileVariant = variant == 'mobile'
   const desktopVariant = variant == 'desktop'
-  const isFantom = CHAIN_ID === '250'
+  const { chainId, library } = useActiveWeb3React()
+  const isFantom = chainId == 250
+  const CHAIN_ID = chainId
 
   return (
     <Link href={NAVBAR_LOGO_LINK || '/'}>

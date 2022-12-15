@@ -18,7 +18,6 @@ import Image from 'next/image'
 import { useActiveWeb3React } from 'services/web3'
 
 const envBannerImage = process.env.NEXT_PUBLIC_BANNER_IMAGE
-const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID
 const OPENSEA_API_KEY = process.env.NEXT_PUBLIC_OPENSEA_API_KEY
 const ENV_COLLECTION_DESCRIPTIONS =
   process.env.NEXT_PUBLIC_COLLECTION_DESCRIPTIONS
@@ -40,7 +39,9 @@ type AttibuteModalProps = ComponentProps<typeof AttributeOfferModal>
 
 const Hero: FC<Props> = ({ fallback, collectionId }) => {
   // const { data: signer } = useSigner()
-  const { library } = useActiveWeb3React()
+  const { chainId, library } = useActiveWeb3React()
+  const CHAIN_ID = chainId
+
   const signer = library.getSigner()
   const collection = useCollection(fallback.collection, collectionId)
   const router = useRouter()

@@ -23,7 +23,7 @@ import FormatEth from '../format/FormatEth'
 
 const envBannerImage = process.env.NEXT_PUBLIC_BANNER_IMAGE
 
-const PROXY_API_BASE = process.env.NEXT_PUBLIC_PROXY_API_BASE
+const PROXY_API_BASE = '/api/reservoir'
 
 const metaTitle = process.env.NEXT_PUBLIC_META_TITLE
 const metaDescription = process.env.NEXT_PUBLIC_META_DESCRIPTION
@@ -120,7 +120,7 @@ const TokensMain: FC<Props> = ({ collectionId, fallback, setToast }) => {
   const title = metaTitle ? (
     <title>{metaTitle}</title>
   ) : (
-    <title>{collection.data?.collection?.name} | Enjoyooor Market</title>
+    <title>{collection.data?.collection?.name} | SoulSwap Market</title>
   )
   const description = metaDescription ? (
     <meta name="description" content={metaDescription} />

@@ -18,7 +18,7 @@ import { getChainColor, getChainColorCode } from 'constants/chains'
 // refer to the README.md file on this repository
 // Reference: https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser
 // REQUIRED
-const SOULSWAP_API_BASE = process.env.NEXT_PUBLIC_SOULSWAP_API_BASE || 'https://api.reservoir.tools'
+const SOULSWAP_API_BASE = 'https://api.reservoir.tools' || 'https://api.reservoir.tools'
 
 // OPTIONAL
 const SOULSWAP_API_KEY = process.env.SOULSWAP_API_KEY
@@ -59,7 +59,6 @@ const Explore: NextPage<Props> = ({ fallback }) => {
   const router = useRouter()
 //   const { data: account, isLoading } = useAccount()
 const { chainId } = useActiveWeb3React()
-const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID || chainId
 
   const title = META_TITLE && metadata.title(META_TITLE)
   const description = META_DESCRIPTION && metadata.description(META_DESCRIPTION)
@@ -73,8 +72,8 @@ const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID || chainId
   // }, [COLLECTION, REDIRECT_HOMEPAGE])
 
   // Return error page if the API base url or the ENV's chain ID are missing
-  if (!CHAIN_ID) {
-    console.debug({ CHAIN_ID })
+  if (!chainId) {
+    console.debug({ chainId })
     return <div>There was an error</div>
   }
 

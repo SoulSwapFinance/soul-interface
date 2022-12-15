@@ -6,6 +6,7 @@ import FormatEth from 'components/NFT/format/FormatEth'
 import Toast from 'components/NFT/Toast'
 import CancelListing from 'components/NFT/action/CancelListing'
 import useUserAsks from 'features/nft/hooks/useUserAsks'
+import Image from 'next/image'
 
 type Props = {
   data: ReturnType<typeof useUserAsks>
@@ -89,11 +90,12 @@ const UserListingsTable: FC<Props> = ({
                       <div className="relative h-10 w-10">
                         {image && (
                           <div className="aspect-w-1 aspect-h-1 relative">
-                            <img
+                            <Image
                               src={optimizeImage(image, 35)}
                               className="w-[35px] object-contain"
-                              width="35"
-                              height="35"
+                              width={35}
+                              height={35}
+                              alt={''}
                             />
                           </div>
                         )}
@@ -102,7 +104,7 @@ const UserListingsTable: FC<Props> = ({
                         <div className="reservoir-body dark:text-white ">
                           {collectionName}
                         </div>
-                        <div className="enjoyooor-h6 font-headings dark:text-white ">
+                        <div className="soulswap-h6 font-headings dark:text-white ">
                           {name}
                         </div>
                       </span>

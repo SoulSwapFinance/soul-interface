@@ -23,6 +23,7 @@ module.exports = withBundleAnalyzer(
         'ftmscan.com',
         'i.seadn.io',
         'snowtrace.io',
+        'api.reservoir.tools',
         'storage.opensea.io',
         'www.shutterstock.com',
         'cryptologos.cc',

@@ -30,21 +30,21 @@ import * as Tabs from '@radix-ui/react-tabs'
 import { toggleOnItem } from 'features/nft/lib/router'
 import CollectionActivityTable from 'components/NFT/tables/CollectionActivityTable'
 import SortMenu from 'components/NFT/collections/sort/SortMenu'
+import { useActiveWeb3React } from 'services/web3'
 
 // Environment variables
 // For more information about these variables
 // refer to the README.md file on this repository
 // Reference: https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser
 // REQUIRED
-const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID
 
 // OPTIONAL
-const ENJOYOOOR_API_KEY = process.env.ENJOYOOOR_API_KEY
+const SOULSWAP_API_KEY = process.env.SOULSWAP_API_KEY
 
 const envBannerImage = process.env.NEXT_PUBLIC_BANNER_IMAGE
 
-const ENJOYOOOR_API_BASE = process.env.NEXT_PUBLIC_ENJOYOOOR_API_BASE
-const PROXY_API_BASE = process.env.NEXT_PUBLIC_PROXY_API_BASE
+const SOULSWAP_API_BASE = 'https://api.reservoir.tools'
+const PROXY_API_BASE = '/api/reservoir'
 
 const metaTitle = process.env.NEXT_PUBLIC_META_TITLE
 const metaDescription = process.env.NEXT_PUBLIC_META_DESCRIPTION
@@ -61,6 +61,7 @@ const Home: NextPage<Props> = ({ fallback, id }) => {
   const router = useRouter()
   const [localListings, setLocalListings] = useState(false)
   const [refreshLoading, setRefreshLoading] = useState(false)
+  const { chainId, library } = useActiveWeb3React()
 
   const collection = useCollection(fallback.collection, id)
 
@@ -78,7 +79,7 @@ const Home: NextPage<Props> = ({ fallback, id }) => {
 
   const attributes = useAttributes(id)
 
-  if (!CHAIN_ID) return null
+  if (!chainId) return null
 
   if (tokens.error) {
     return <div>There was an error</div>
@@ -191,7 +192,7 @@ const Home: NextPage<Props> = ({ fallback, id }) => {
                 id={id}
                 value={id}
                 className={
-                  'group enjoyooor-h6 relative min-w-0 whitespace-nowrap border-b-2 border-transparent py-4 px-8 text-center text-[#525252] hover:text-black focus:z-10 radix-state-active:border-black radix-state-active:text-black dark:text-white dark:radix-state-active:border-white dark:radix-state-active:text-white'
+                  'group soulswap-h6 relative min-w-0 whitespace-nowrap border-b-2 border-transparent py-4 px-8 text-center text-[#525252] hover:text-black focus:z-10 radix-state-active:border-black radix-state-active:text-black dark:text-white dark:radix-state-active:border-white dark:radix-state-active:text-white'
                 }
                 onClick={() => toggleOnItem(router, 'tab', id)}
               >
@@ -309,7 +310,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 
   if (COLLECTION && (COMMUNITY || COLLECTION_SET_ID)) {
-    const url = new URL(`/search/collections/v1`, ENJOYOOOR_API_BASE)
+    const url = new URL(`/search/collections/v1`, SOULSWAP_API_BASE)
 
     const query: paths['/search/collections/v1']['get']['parameters']['query'] =
       { limit: 20 }
@@ -369,16 +370,16 @@ export const getStaticProps: GetStaticProps<{
 }> = async ({ params }) => {
   const options: RequestInit | undefined = {}
 
-  if (ENJOYOOOR_API_KEY) {
+  if (SOULSWAP_API_KEY) {
     options.headers = {
-      'x-api-key': ENJOYOOOR_API_KEY,
+      'x-api-key': SOULSWAP_API_KEY,
     }
   }
 
   const id = params?.id?.toString()
 
   // COLLECTION
-  const collectionUrl = new URL('/collection/v2', ENJOYOOOR_API_BASE)
+  const collectionUrl = new URL('/collection/v2', SOULSWAP_API_BASE)
 
   let collectionQuery: paths['/collection/v2']['get']['parameters']['query'] = {
     id,
@@ -392,7 +393,7 @@ export const getStaticProps: GetStaticProps<{
     (await collectionRes.json()) as Props['fallback']['collection']
 
   // TOKENS
-  const tokensUrl = new URL('/tokens/v4', ENJOYOOOR_API_BASE)
+  const tokensUrl = new URL('/tokens/v4', SOULSWAP_API_BASE)
 
   let tokensQuery: paths['/tokens/v4']['get']['parameters']['query'] = {
     collection: id,

@@ -6,6 +6,7 @@ import FormatEth from 'components/NFT/format/FormatEth'
 import ListModal from 'components/NFT/modal/ListModal'
 import Toast from 'components/NFT/Toast'
 import AcceptOffer from 'components/NFT/action/AcceptOffer'
+import Image from 'next/image'
 
 type Props = {
   data: ReturnType<typeof useUserTokens>
@@ -80,11 +81,12 @@ const UserTokensTable: FC<Props> = ({
                       <div className="relative h-10 w-10">
                         {image && (
                           <div className="aspect-w-1 aspect-h-1 relative">
-                            <img
+                            <Image
                               src={optimizeImage(image, 35)}
                               className="w-[35px] object-contain"
-                              width="35"
-                              height="35"
+                              width={35}
+                              height={35}
+                              alt={'item image'}
                             />
                           </div>
                         )}
@@ -93,7 +95,7 @@ const UserTokensTable: FC<Props> = ({
                         <div className="reservoir-body dark:text-white">
                           {collectionName}
                         </div>
-                        <div className="enjoyooor-h6 font-headings dark:text-white">
+                        <div className="soulswap-h6 font-headings dark:text-white">
                           {tokenName}
                         </div>
                       </span>

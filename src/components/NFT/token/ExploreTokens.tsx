@@ -90,7 +90,7 @@ const ExploreTokens: FC<Props> = ({ viewRef, attributes }) => {
                         <span className="reservoir-subtitle text-gray-400 dark:text-white">
                           Offer
                         </span>
-                        <span className="enjoyooor-h6 font-headings dark:text-white">
+                        <span className="soulswap-h6 font-headings dark:text-white">
                           <FormatEth
                             amount={attribute?.topBid?.value}
                             logoWidth={7}
@@ -101,7 +101,7 @@ const ExploreTokens: FC<Props> = ({ viewRef, attributes }) => {
                         <span className="reservoir-subtitle text-gray-400">
                           Price
                         </span>
-                        <span className="enjoyooor-h6 font-headings dark:text-white">
+                        <span className="soulswap-h6 font-headings dark:text-white">
                           <FormatEth
                             amount={attribute?.floorAskPrices?.[0]}
                             logoWidth={5}

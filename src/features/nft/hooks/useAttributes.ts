@@ -2,7 +2,7 @@ import { paths } from 'nfnt-client-sdk/dist/types/api'
 import fetcher from 'features/nft/lib/fetcher'
 import useSWR from 'swr'
 
-const PROXY_API_BASE = process.env.NEXT_PUBLIC_PROXY_API_BASE
+const PROXY_API_BASE = '/api/reservoir'
 
 export default function useAttributes(collectionId: string | undefined) {
   function getUrl() {

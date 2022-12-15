@@ -16,7 +16,7 @@ const COLLECTION_SET_ID = process.env.NEXT_PUBLIC_COLLECTION_SET_ID
 const DEFAULT_TO_SEARCH = process.env.NEXT_PUBLIC_DEFAULT_TO_SEARCH
 
 function getInitialSearchHref() {
-  const PROXY_API_BASE = process.env.NEXT_PUBLIC_PROXY_API_BASE
+  const PROXY_API_BASE = '/api/reservoir'
   const pathname = `${PROXY_API_BASE}/search/collections/v1`
   const query: paths['/search/collections/v1']['get']['parameters']['query'] =
     {}

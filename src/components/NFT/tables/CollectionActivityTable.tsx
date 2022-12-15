@@ -5,14 +5,14 @@ import { truncateAddress } from 'features/nft/lib/truncateText'
 import { DateTime } from 'luxon'
 import Link from 'next/link'
 import { FC, useEffect, useState } from 'react'
-import { Collection, TokenSale } from 'features/nft/types'
+import { Collection, TokenSale } from 'features/nft/NftTypes'
 import Image from 'next/image'
 import { useMediaQuery } from '@react-hookz/web'
 import LoadingIcon from 'components/NFT/LoadingIcon'
 import { FiExternalLink } from 'react-icons/fi'
+import { useActiveWeb3React } from 'services/web3'
 
 const SOURCE_ID = process.env.NEXT_PUBLIC_SOURCE_ID
-const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID
 const NAVBAR_LOGO = process.env.NEXT_PUBLIC_NAVBAR_LOGO
 const SOURCE_ICON = process.env.NEXT_PUBLIC_SOURCE_ICON
 
@@ -24,6 +24,7 @@ const CollectionActivityTable: FC<Props> = ({ collection }) => {
   const headings = ['Event', 'Item', 'Price', 'From', 'To', 'Time']
   const { sales, ref: swrInfiniteRef } = useSales(collection?.id)
   const isMobile = useMediaQuery('only screen and (max-width : 730px)')
+  const { chainId, library } = useActiveWeb3React()
 
   useEffect(() => {
     if (sales.data) {
@@ -71,12 +72,14 @@ const CollectionActivityTable: FC<Props> = ({ collection }) => {
           })}
           {noSales && (
             <div className="mt-20 mb-20 flex w-full flex-col justify-center">
-              <img
+              <Image
+              height={48}
+              width={48}
                 src="/magnifying-glass.svg"
                 className="h-[59px]"
                 alt="Magnifying Glass"
               />
-              <div className="enjoyooor-h6 mt-4 mb-2 text-center dark:text-white">
+              <div className="soulswap-h6 mt-4 mb-2 text-center dark:text-white">
                 No activity yet
               </div>
               <div className="text-center text-xs font-light dark:text-white">
@@ -108,6 +111,8 @@ const CollectionActivityTableRow: FC<CollectionActivityTableRowProps> = ({
 }) => {
   const isMobile = useMediaQuery('only screen and (max-width : 730px)')
   const [toShortAddress, setToShortAddress] = useState(sale.to || '')
+  const { chainId, library } = useActiveWeb3React()
+
   const [fromShortAddress, setFromShortAddress] = useState(sale.from || '')
   const [imageSrc, setImageSrc] = useState(
     sale.token?.image || collectionImage || ''
@@ -161,7 +166,9 @@ const CollectionActivityTableRow: FC<CollectionActivityTableRowProps> = ({
       >
         <td className="flex flex-col gap-2">
           <div className="mt-6">
-            <img
+            <Image
+              height={48}
+              width={48}
               className="mr-2 inline h-6 w-6"
               src={saleSourceImgSrc}
               alt={`${sale.orderSource} Source`}
@@ -183,7 +190,7 @@ const CollectionActivityTableRow: FC<CollectionActivityTableRowProps> = ({
                 width={48}
                 height={48}
               />
-              <span className="enjoyooor-h6 ml-2 truncate dark:text-white">
+              <span className="soulswap-h6 ml-2 truncate dark:text-white">
                 {sale.token?.name}
               </span>
             </a>
@@ -207,7 +214,7 @@ const CollectionActivityTableRow: FC<CollectionActivityTableRowProps> = ({
             </Link>
             <Link
               href={`https://${
-                CHAIN_ID === '250' ? 'ftmscan.com' : 'etherscan.io'
+                chainId === 250 ? 'ftmscan.com' : 'etherscan.io'
               }/tx/${sale.txHash}`}
             >
               <a
@@ -235,7 +242,9 @@ const CollectionActivityTableRow: FC<CollectionActivityTableRowProps> = ({
     >
       <td>
         <div className="mr-2.5 flex items-center">
-          <img
+          <Image
+           width={48}
+           height={48}
             className="mr-2 h-6 w-6"
             src={saleSourceImgSrc}
             alt={`${sale.orderSource} Source`}
@@ -256,7 +265,7 @@ const CollectionActivityTableRow: FC<CollectionActivityTableRowProps> = ({
               width={48}
               height={48}
             />
-            <span className="enjoyooor-h6 ml-2 truncate dark:text-white">
+            <span className="soulswap-h6 ml-2 truncate dark:text-white">
               {sale.token?.name}
             </span>
           </a>
@@ -281,7 +290,7 @@ const CollectionActivityTableRow: FC<CollectionActivityTableRowProps> = ({
       </td>
       <td>
         <Link
-          href={`https://${CHAIN_ID === '250' ? 'ftmscan.com' : 'etherscan.io'}/tx/${
+          href={`https://${chainId === 250 ? 'ftmscan.com' : 'etherscan.io'}/tx/${
             sale.txHash
           }`}
         >

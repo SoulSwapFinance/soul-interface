@@ -3,6 +3,7 @@ import useDetails from 'features/nft/hooks/useDetails'
 import { optimizeImage } from 'features/nft/lib/optimizeImage'
 import Link from 'next/link'
 import React, { FC } from 'react'
+import Image from 'next/image'
 
 type Props = {
   collection: ReturnType<typeof useCollection>
@@ -18,10 +19,12 @@ const CollectionInfo: FC<Props> = ({ collection, details }) => {
 
   return (
     <article className="col-span-full rounded-2xl border border-gray-300 bg-white p-6 dark:border-neutral-600 dark:bg-black">
-      <div className="enjoyooor-h5 mb-4 dark:text-white">Collection Info</div>
+      <div className="soulswap-h5 mb-4 dark:text-white">Collection Info</div>
       <Link href={`/collections/${collection.data?.collection?.id}`}>
         <a className="inline-flex items-center gap-2">
-          <img
+          <Image
+           width={48}
+           height={48}
             src={optimizeImage(
               collection.data?.collection?.metadata?.imageUrl as string,
               50
@@ -29,7 +32,7 @@ const CollectionInfo: FC<Props> = ({ collection, details }) => {
             alt="collection avatar"
             className="h-9 w-9 rounded-full"
           />
-          <span className="enjoyooor-h6 font-headings dark:text-white">
+          <span className="soulswap-h6 font-headings dark:text-white">
             {token?.token?.collection?.name}
           </span>
         </a>
