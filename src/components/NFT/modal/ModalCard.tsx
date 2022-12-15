@@ -102,7 +102,7 @@ const ModalCard: FC<Props> = ({
                   target="_blank"
                 >
                   Powered by{' '}
-                  <img
+                  <Image
                     src={
                       !!DARK_MODE
                         ? `/logo.png`

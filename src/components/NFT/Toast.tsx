@@ -1,6 +1,6 @@
 import React, { FC, Fragment } from 'react'
 import { Transition } from '@headlessui/react'
-import toast, { Toast } from 'react-hot-toast'
+import toast, { Toast as HotToast } from 'react-hot-toast'
 import {
   HiOutlineCheckCircle,
   HiOutlineExclamationCircle,
@@ -10,7 +10,7 @@ import {
 } from 'react-icons/hi'
 
 type Props = {
-  t: Toast
+  t: HotToast
   toast: typeof toast
   data: {
     kind: 'error' | 'success' | 'warning' | 'info'

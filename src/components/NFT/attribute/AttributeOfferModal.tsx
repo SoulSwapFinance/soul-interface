@@ -2,13 +2,6 @@ import { ComponentProps, FC, useContext, useEffect, useState } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import ExpirationSelector from '../ExpirationSelector'
 import { BigNumber, constants, ethers } from 'ethers'
-import {
-  useAccount,
-  useBalance,
-  useNetwork,
-  useProvider,
-  useSigner,
-} from 'wagmi'
 import calculateOffer from 'features/nft/lib/calculateOffer'
 import FormatEth from '../format/FormatEth'
 import expirationPresets from 'features/nft/lib/offerExpirationPresets'
@@ -52,7 +45,8 @@ type Props = {
     bps: number | undefined
     recipient: string | undefined
   }
-  signer: ReturnType<typeof useSigner>['data']
+  // signer: ReturnType<typeof getSigner>['data']
+  signer: ReturnType<any>['data']
   stats: ReturnType<typeof useCollectionStats>
   tokens: ReturnType<typeof useTokens>['tokens']
   setToast: (data: ComponentProps<typeof Toast>['data']) => any
@@ -69,8 +63,12 @@ const AttributeOfferModal: FC<Props> = ({
   const [expiration, setExpiration] = useState<string>('oneDay')
   const [waitingTx, setWaitingTx] = useState<boolean>(false)
   const [steps, setSteps] = useState<Execute['steps']>()
-  const { account, chainId } = useActiveWeb3React()
+  const { account, chainId, library } = useActiveWeb3React()
   const { dispatch } = useContext(GlobalContext)
+
+  const signer = library.getSigner
+  const provider = library.provider
+
   const [calculations, setCalculations] = useState<
     ReturnType<typeof calculateOffer>
   >({
@@ -86,12 +84,7 @@ const AttributeOfferModal: FC<Props> = ({
     weth: Common.Helpers.Weth
     balance: BigNumber
   } | null>(null)
-  const { data: signer } = useSigner()
-  // const { data: account } = useAccount()
-  const { data: ethBalance, refetch } = useBalance({
-    addressOrName: account,
-  })
-  const provider = useProvider()
+  const ethBalance = library.getBalance(account)
 
   function getBps(royalties: number | undefined, envBps: string | undefined) {
     let sum = 0
@@ -110,7 +103,8 @@ const AttributeOfferModal: FC<Props> = ({
   useEffect(() => {
     async function loadWeth() {
       if (signer) {
-        await refetch()
+        // await refetch()
+        // @ts-ignore
         const weth = await getWeth(env.chainId as ChainId, provider, signer)
         if (weth) {
           setWeth(weth)
@@ -124,10 +118,10 @@ const AttributeOfferModal: FC<Props> = ({
     const userInput = ethers.utils.parseEther(
       offerPrice === '' ? '0' : offerPrice
     )
-    if (weth?.balance && ethBalance?.value) {
+    if (weth?.balance && ethBalance) {
       const calculations = calculateOffer(
         userInput,
-        ethBalance.value,
+        ethBalance.toString().toBigNumber(18),
         weth.balance,
         bps
       )

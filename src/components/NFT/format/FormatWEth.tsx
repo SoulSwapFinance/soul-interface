@@ -1,5 +1,6 @@
 import FormatCurrency from 'components/NFT/format/FormatCurrency'
 import { FC, ComponentProps } from 'react'
+import Image from 'next/image'
 
 type FormatWEthProps = {
   logoWidth?: number
@@ -17,7 +18,7 @@ const FormatWEth: FC<Props> = ({
       amount={amount}
       maximumFractionDigits={maximumFractionDigits}
     >
-      <img
+      <Image
         src="/weth.svg"
         alt="WETH logo"
         style={{ width: `${logoWidth}px` }}

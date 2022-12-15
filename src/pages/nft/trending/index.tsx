@@ -9,9 +9,8 @@ import SortTrendingCollections from 'components/Collections/sort/SortTrendingCol
 import { useMediaQuery } from '@react-hookz/web'
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
+import Image from 'next/image'
 // import ConnectWalletLarge from 'components/ConnectWalletLarge'
-import { useAccount } from 'wagmi'
 
 // Environment variables
 // For more information about these variables
@@ -56,7 +55,7 @@ const metadata = {
 }
 
 const Explore: NextPage<Props> = ({ fallback }) => {
-  const isSmallDevice = useMediaQuery('only screen and (max-width : 600px)')
+//   const isSmallDevice = useMediaQuery('only screen and (max-width : 600px)')
   const router = useRouter()
 //   const { data: account, isLoading } = useAccount()
 
@@ -93,11 +92,11 @@ const Explore: NextPage<Props> = ({ fallback }) => {
         {/* <div className='my-2 border border-[#FFD700]' /> */}
         {/* <div className='my-1 border border-2 border-[#FFD700]' /> */}
         {/* <header className="col-span-full mb-12 mt-[66px] px-4 md:mt-40 lg:px-0"> */}
-          {/* <img src=''https://soul.sh/title-logo.png'' width="720px" /> */}
-          <img src='/bg.png'/>
+          {/* <Image src=''https://soul.sh/title-logo.png'' width="720px" /> */}
+          <Image src='/bg.png' alt={'background image'}/>
           {/* <h1 className="nfnt-h1 text-center dark:text-white">{tagline}</h1> */}
         {/* </header> */}
-        {/* <img src={''https://soul.sh/title-logo.png''} /> */}
+        {/* <Image src={''https://soul.sh/title-logo.png''} /> */}
         {/* <div className='my-1 border border-2 border-[#FFD700]' /> */}
       </div>
       </div>

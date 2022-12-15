@@ -1,5 +1,6 @@
 import FormatCurrency from 'components/NFT/format/FormatCurrency'
 import { FC, ComponentProps } from 'react'
+import Image from 'next/image'
 
 const DARK_MODE = process.env.NEXT_PUBLIC_DARK_MODE
 
@@ -20,7 +21,7 @@ const FormatEth: FC<Props> = ({
       amount={amount}
       maximumFractionDigits={maximumFractionDigits}
     >
-      <img src={icon} alt="ETH logo" style={{ width: `${logoWidth}px` }} />
+      <Image src={icon} alt="ETH logo" style={{ width: `${logoWidth}px` }} />
     </FormatCurrency>
   )
 }

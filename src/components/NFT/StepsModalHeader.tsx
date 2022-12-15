@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { optimizeImage } from 'features/nft/lib/optimizeImage'
 import FormatEth from './format/FormatEth'
+import Image from 'next/image'
 
 type Props = {
   data: {
@@ -23,7 +24,7 @@ const StepsModalHeader: FC<Props> = ({ data }) => {
     return (
       <>
         <div className="mb-3 flex items-center gap-4">
-          <img
+          <Image
             src={optimizeImage(data.token.image, 50)}
             alt=""
             className="w-[50px]"
