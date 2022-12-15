@@ -13,8 +13,8 @@ import { FiExternalLink } from 'react-icons/fi'
 import { useActiveWeb3React } from 'services/web3'
 
 const SOURCE_ID = process.env.NEXT_PUBLIC_SOURCE_ID
-const NAVBAR_LOGO = process.env.NEXT_PUBLIC_NAVBAR_LOGO
-const SOURCE_ICON = process.env.NEXT_PUBLIC_SOURCE_ICON
+const NAVBAR_LOGO = 'https://app.soulswap.finance/logo.png' // process.env.NEXT_PUBLIC_NAVBAR_LOGO
+const SOURCE_ICON = 'https://app.soulswap.finance/logo.png' // process.env.NEXT_PUBLIC_SOURCE_ICON
 
 type Props = {
   collection: Collection

@@ -15,13 +15,13 @@ const FormatEth: FC<Props> = ({
   maximumFractionDigits,
   logoWidth = 8,
 }) => {
-  const icon = DARK_MODE ? '/eth-dark.svg' : '/eth.svg'
+  // const icon = DARK_MODE ? '/eth-dark.svg' : '/eth.svg'
   return (
     <FormatCurrency
       amount={amount}
       maximumFractionDigits={maximumFractionDigits}
     >
-      <Image src={icon} alt="ETH logo" height={16} width={16} style={{ width: `${logoWidth}px` }} />
+      {/* <Image src={icon} alt="ETH logo" height={16} width={16} style={{ width: `${logoWidth}px` }} /> */}
     </FormatCurrency>
   )
 }
