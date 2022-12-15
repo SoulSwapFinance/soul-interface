@@ -5,12 +5,13 @@ import setParams from 'features/nft/lib/params'
 import Head from 'next/head'
 // import FeaturedCollectionTable from 'components/FeaturedCollectionTable'
 import TrendingCollectionTable from 'components/Collections/TrendingCollectionTable'
-import SortTrendingCollections from 'components/Collections/sort/SortTrendingCollections'
+// import SortTrendingCollections from 'components/Collections/sort/SortTrendingCollections'
 import { useMediaQuery } from '@react-hookz/web'
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { useActiveWeb3React } from 'services/web3'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 // import ConnectWalletLarge from 'components/ConnectWalletLarge'
 
 // Environment variables
@@ -81,39 +82,25 @@ const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID || chainId
   if (REDIRECT_HOMEPAGE && COLLECTION) return null
 
   return (
-    // @ts-ignore
-    <Layout navbar={{}}>
+        <div className={`col-span-full mt-8 border border-8 border-[${getChainColor(chainId)}] mb-4`}>
       <Head>
         {title}
         {description}
         {/* {image} */}
       </Head>
 
-      <div className="col-span-full mt-8 border border-8 border-[#FFD700] mb-4">
-      <div className="col-span-full">
-        {/* <div className='my-2 border border-[#FFD700]' /> */}
-        {/* <div className='my-1 border border-2 border-[#FFD700]' /> */}
-        {/* <header className="col-span-full mb-12 mt-[66px] px-4 md:mt-40 lg:px-0"> */}
-          {/* <Image src=''https://soul.sh/title-logo.png'' width="720px" /> */}
-          <Image src='https://soul.sh/title-logo.png' alt={'background image'} width={24} height={24}/>
-          {/* <h1 className="nfnt-h1 text-center dark:text-white">{tagline}</h1> */}
-        {/* </header> */}
-        {/* <Image src={''https://soul.sh/title-logo.png''} /> */}
-        {/* <div className='my-1 border border-2 border-[#FFD700]' /> */}
-      </div>
-      </div>
       <div className="col-span-full px-6 md:px-16 mt-8">
         <div className="mb-9 flex w-full items-center justify-between">
           <div className="sm:nfnt-h4 sm:dark:text-white text-xl">
             Trending Collections
           </div>
           {/* {!isSmallDevice && <SortTrendingCollections />} */}
-          <SortTrendingCollections />
+          {/* <SortTrendingCollections /> */}
         </div>
         {/* <FeaturedCollectionTable fallback={fallback} /> */}
         <TrendingCollectionTable fallback={fallback} />
       </div>
-    </Layout>
+      </div>
   )
 }
 
