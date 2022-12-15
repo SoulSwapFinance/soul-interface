@@ -22,7 +22,7 @@ export const getAssetHref = (asset: GenieAsset | WalletAsset, origin?: DetailsOr
     (asset as GenieAsset).address !== undefined
       ? (asset as GenieAsset).address
       : (asset as WalletAsset).asset_contract.address
-  return `/nfts/asset/${address}/${asset.tokenId}${origin ? `?origin=${origin}` : ''}`
+  return `/nft/asset/${address}/${asset.tokenId}${origin ? `?origin=${origin}` : ''}`
 }
 
 export const getMarketplaceIcon = (marketplace: string) => {
@@ -41,6 +41,6 @@ export const generateTweetForPurchase = (assets: UpdatedGenieAsset[], txHashUrl:
   const multipleCollections = assets.length > 0 && assets.some((asset) => asset.address !== assets[0].address)
   const tweetText = `I just purchased ${
     multipleCollections ? `${assets.length} NFTs` : `${assets.length} ${assets[0].collectionName ?? 'NFT'}`
-  } with Uniswap 🦄\n\nhttps://app.uniswap.org/#/nfts/collection/0x60bb1e2aa1c9acafb4d34f71585d7e959f387769\n${txHashUrl}`
+  } with SoulSwap \n\nhttps://app.soulswap.finance/nft/collection/0x60bb1e2aa1c9acafb4d34f71585d7e959f387769\n${txHashUrl}`
   return `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`
 }

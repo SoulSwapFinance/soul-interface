@@ -21,7 +21,7 @@ const FormatEth: FC<Props> = ({
       amount={amount}
       maximumFractionDigits={maximumFractionDigits}
     >
-      <Image src={icon} alt="ETH logo" style={{ width: `${logoWidth}px` }} />
+      <Image src={icon} alt="ETH logo" height={16} width={16} style={{ width: `${logoWidth}px` }} />
     </FormatCurrency>
   )
 }

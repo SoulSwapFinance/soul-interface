@@ -18,6 +18,8 @@ import { getChainColorCode } from 'constants/chains'
 import { useTokenInfo } from 'hooks/useAPI'
 import ExternalLink from 'components/ExternalLink'
 import { SubmitButton } from 'features/bond/Styles'
+import { i18n } from '@lingui/core'
+import { t } from '@lingui/macro'
 
 // import { TwitterBanner } from 'components/Banner'
 // import { useRouter } from 'next/router'
@@ -120,7 +122,8 @@ const Summoner = () => {
             variant={'outlined'}
             size={"sm"}
           >
-            {formatNumberScale(summTvl, true)} {' '} TOTAL
+            {formatNumberScale(summTvl, true)} {' '} 
+            {i18n._(t`TOTAL`)}
           </Button>
         </div>
         /* // </TridentHeader> */
@@ -141,7 +144,8 @@ const Summoner = () => {
                 size="lg"
               >
                 <a className="block text-md font-bold md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                  <span> Archived Farms ↗</span>
+                  <span> 
+                  {i18n._(t`Archived Farms ↗`)}</span>
                 </a>
               </SubmitButton>
             </ExternalLink>

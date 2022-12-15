@@ -21,7 +21,9 @@ module.exports = withBundleAnalyzer(
     images: {
       domains: [
         'ftmscan.com',
+        'i.seadn.io',
         'snowtrace.io',
+        'storage.opensea.io',
         'www.shutterstock.com',
         'cryptologos.cc',
         'soul.sh',

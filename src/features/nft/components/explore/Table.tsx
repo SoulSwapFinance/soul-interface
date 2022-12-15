@@ -197,7 +197,7 @@ export function Table<D extends Record<string, unknown>>({
                 <StyledRow
                   {...row.getRowProps()}
                   key={row.id}
-                  onClick={() => router.push(`/nfts/collection/${row.original.collection.address}`)}
+                  onClick={() => router.push(`/nft/collection/${row.original.collection.address}`)}
                   >
                   {row.cells.map((cell, cellIndex) => {
                     return (

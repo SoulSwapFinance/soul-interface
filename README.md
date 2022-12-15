@@ -8,7 +8,6 @@ Home repository for the SoulSwap Decentralized Finance Application.
   - #### [dashboard](./src/pages/analytics/dashboard)
   - #### [pairs](./src/pages/analytics/pairs)
   - #### [tokens](./src/pages/analytics/tokens)
-- ### [Chains](./src/pages/chains/index.tsx)
 - ### [Exchange](./src/pages/exchange)
   - #### [swap](./src/pages/exchange/swap)
   - #### [pool](./src/pages/exchange/pool)
@@ -16,6 +15,6 @@ Home repository for the SoulSwap Decentralized Finance Application.
   - #### [remove](./src/pages/exchange/remove)
   - #### [find](./src/pages/exchange/find)
 - ### [Summoner](./src/pages/summoner)
-- ### [Launchpad](./src/pages/launchpad/index.tsx)
+<!-- - ### [Launchpad](./src/pages/launchpad/index.tsx) -->
 - ### [Lend](./src/pages/lend)
 - ### [Borrow](./src/pages/borrow/index.tsx)

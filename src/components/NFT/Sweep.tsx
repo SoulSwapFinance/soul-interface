@@ -366,8 +366,8 @@ const Sweep: FC<Props> = ({ tokens, collection, mutate, setToast }) => {
                             alt={'SoulSwap Title Logo'}
                             src={
                               !!DARK_MODE
-                                ? `/title-logo-words-brand.png`
-                                : `/title-logo-words-brand.png`
+                                ? `https://soul.sh/title-logo.png`
+                                : `https://soul.sh/title-logo.png`
                             }
                           />
                         </a>

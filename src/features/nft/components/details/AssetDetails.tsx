@@ -469,7 +469,7 @@ export const AssetDetails = ({ asset, collection }: AssetDetailsProps) => {
               {!isActivityLoading && (
                 <EmptyActivitiesContainer>
                   <div>No activities yet</div>
-                  <Link to={`/nfts/collection/${asset.address}`}>View collection items</Link>{' '}
+                  <Link to={`/nft/collection/${asset.address}`}>View Collection Items</Link>{' '}
                 </EmptyActivitiesContainer>
               )}
             </>
