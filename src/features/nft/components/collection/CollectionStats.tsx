@@ -393,12 +393,8 @@ const statsLoadingSkeleton = (isMobile: boolean) =>
       // marginBottom={isMobile ? '12' : '0'}
       key={`statsLoadingSkeleton-key-${index}`}
     >
-      <div 
-      // className={styles.statsLabelLoading} 
-      />
-      <span 
-      // className={styles.statsValueLoading} 
-      />
+      <div className={styles.statsLabelLoading} />
+      <span className={styles.statsValueLoading} />
     </Box>
   ))
 

@@ -241,9 +241,7 @@ interface LoadingTableProps {
 function LoadingTable({ headerGroups, visibleColumns, ...props }: LoadingTableProps) {
   return (
     <GlowEffect>
-      <table {...props} 
-      // className={styles.table}
-      >
+      <table {...props} className={styles.table}>
         <thead 
         // className={styles.thead}
         >
@@ -290,10 +288,7 @@ function LoadingTable({ headerGroups, visibleColumns, ...props }: LoadingTablePr
             <StyledLoadingRow key={index}>
               {[...Array(visibleColumns.length)].map((_, cellIndex) => {
                 return (
-                  <td 
-                  // className={styles.loadingTd} 
-                  key={cellIndex}
-                  >
+                  <td className={styles.loadingTd} key={cellIndex}>
                     {cellIndex === 0 ? (
                       <StyledCollectionNameHolder>
                         <StyledRankHolder />

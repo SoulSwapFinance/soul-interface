@@ -70,9 +70,7 @@ export const TraitsHeader = (props: TraitsHeaderProps) => {
                 transform: `rotate(${isOpen ? 0 : 180}deg)`,
               }}
             >
-              <ChevronUpIcon 
-              // className={styles.chevronIcon} 
-              />
+              <ChevronUpIcon className={styles.chevronIcon} />
             </Box>
           </Box>
         </Box>

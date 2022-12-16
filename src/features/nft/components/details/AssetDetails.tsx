@@ -176,7 +176,7 @@ const AudioPlayer = ({
       // width="292" controls src={animationUrl} 
       />
       <Image
-        // className={styles.image}
+        className={styles.image}
         src={imageUrl}
         alt={name || collectionName}
         style={{
@@ -216,28 +216,20 @@ const AssetView = ({
 
   switch (mediaType) {
     case MediaType.Video:
-      return <video src={asset.animationUrl} 
-      // className={styles.image} 
-      autoPlay controls muted loop style={style} 
-      />
+      return <video src={asset.animationUrl} className={styles.image} autoPlay controls muted loop style={style} />
     case MediaType.Image:
       return (
-        <Image 
-        // className={styles.image} 
-        src={asset.imageUrl} alt={asset.name || asset.collectionName} style={style} 
-        />
+        <Image className={styles.image} src={asset.imageUrl} alt={asset.name || asset.collectionName} style={style} />
       )
     case MediaType.Audio:
       return <AudioPlayer {...asset} dominantColor={dominantColor} />
     case MediaType.Embed:
       return (
-        <div
-        // className={styles.embedContainer}
-        >
+        <div className={styles.embedContainer}>
           <iframe
             title={asset.name ?? `${asset.collectionName} #${asset.tokenId}`}
             src={asset.animationUrl}
-            // className={styles.embed}
+            className={styles.embed}
             style={style}
             frameBorder={0}
             height="100%"
@@ -396,7 +388,7 @@ export const AssetDetails = ({ asset, collection }: AssetDetailsProps) => {
           <ContentNotAvailable>Content not available yet</ContentNotAvailable>
         ) : assetMediaType === MediaType.Image ? (
           <Image
-            // className={styles.image}
+            className={styles.image}
             src={asset.imageUrl}
             alt={asset.name || collection.collectionName}
             onError={() => setShowHolder(true)}
