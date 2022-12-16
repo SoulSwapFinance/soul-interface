@@ -45,7 +45,7 @@ const ExploreTable = ({
               <Link
                 href={
                   router.query.id
-                    ? `/nft/collections/${router.query.id}?${formatUrl(
+                    ? `/collections/${router.query.id}?${formatUrl(
                         `attributes[${attribute?.key}]`
                       )}=${formatUrl(`${attribute?.value}`)}`
                     : `?${formatUrl(
@@ -78,7 +78,7 @@ const ExploreTable = ({
               <Link
                 href={
                   router.query.id
-                    ? `/nft/collections/${router.query.id}?${formatUrl(
+                    ? `/collections/${router.query.id}?${formatUrl(
                         `attributes[${attribute?.key}]`
                       )}=${formatUrl(`${attribute?.value}`)}`
                     : `?${formatUrl(

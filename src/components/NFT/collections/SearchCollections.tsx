@@ -133,7 +133,7 @@ const SearchCollections: FC<Props> = ({ communityId, initialResults }) => {
                   .map((collection, index) => (
                     <Link
                       key={collection?.name}
-                      href={`/nft/collections/${collection?.collectionId}`}
+                      href={`/collections/${collection?.collectionId}`}
                     >
                       <a
                         {...getItemProps({
