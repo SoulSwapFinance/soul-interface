@@ -14,7 +14,7 @@ import * as styles from 'features/nft/pages/collection/index.css'
 import { GenieCollection } from 'features/nft/types'
 import { Suspense, useEffect } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { useSpring } from 'react-spring'
+import easings, { useSpring } from 'react-spring'
 import styled from 'styled-components/macro'
 import { ThemedText } from 'theme/components/text'
 import { TRANSITION_DURATIONS } from 'styles'
@@ -98,7 +98,7 @@ const Collection = () => {
     config: {
       duration: TRANSITION_DURATIONS.medium,
       //   @ts-ignore
-      // easing: easings.easeOutSine,
+      easing: easings.easeOutSine,
     },
   })
 
