@@ -103,9 +103,7 @@ const MarketplaceItem = ({
 
   const checkbox = (
     <Checkbox checked={isCheckboxSelected} hovered={hovered} onChange={handleCheckbox}>
-      <Box as="span" 
-      // color="textSecondary" marginLeft="4" paddingRight="12"
-      >
+      <Box as="span" color="textSecondary" marginLeft="4" paddingRight="12">
         {count}
       </Box>
     </Checkbox>
@@ -138,34 +136,30 @@ export const FilterDropdown = ({
 }) => {
   return (
     <>
-      <Box className={styles.detailsOpen} 
-      // opacity={isOpen ? '1' : '0'} 
-      />
+      <Box className={styles.detailsOpen} opacity={isOpen ? '1' : '0'} />
       <Box
         as="details"
         className={clsx(subheadSmall, !isOpen && styles.rowHover)}
         open={isOpen}
-        // borderRadius={isOpen ? '0' : '12'}
+        borderRadius={isOpen ? '0' : '12'}
       >
         <Box
           as="summary"
           className={`${styles.row} ${styles.rowHover}`}
-          // display="flex"
-          // justifyContent="space-between"
-          // alignItems="center"
-          // fontSize="16"
-          // paddingTop="12"
-          // paddingLeft="12"
-          // paddingBottom="12"
-          // lineHeight="20"
-          // borderRadius="12"
-          // maxHeight="48"
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          fontSize="16"
+          paddingTop="12"
+          paddingLeft="12"
+          paddingBottom="12"
+          lineHeight="20"
+          borderRadius="12"
+          maxHeight="48"
           onClick={onClick}
         >
           {title}
-          <Box 
-          // display="flex" alignItems="center"
-          >
+          <Box display="flex" alignItems="center">
             <Box
               className={styles.chevronContainer}
               style={{
@@ -176,9 +170,7 @@ export const FilterDropdown = ({
             </Box>
           </Box>
         </Box>
-        <Column className={styles.filterDropDowns} 
-        // paddingBottom="8" paddingLeft="0"
-        >
+        <Column className={styles.filterDropDowns} paddingBottom="8" paddingLeft="0">
           {items}
         </Column>
       </Box>

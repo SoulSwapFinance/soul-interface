@@ -2,13 +2,12 @@ import { style } from '@vanilla-extract/css'
 import { breakpoints, sprinkles, themeVars } from 'features/nft/css/sprinkles.css'
 
 export const container = style([
-  // sprinkles(
-    {
+  sprinkles({
     overflow: 'auto',
     height: 'viewHeight',
     paddingTop: '4',
-    // marginLeft: { sm: '8', md: '48' },
-  },
+    marginLeft: { sm: '8', md: '48' },
+  }),
   {
     width: '308px',
     paddingRight: '8px',
@@ -31,15 +30,14 @@ export const container = style([
 export const rowHover = style([
   {
     ':hover': {
-      // background: themeVars.colors.backgroundInteractive,
+      background: themeVars.colors.backgroundInteractive,
       borderRadius: 12,
     },
   },
 ])
 
 export const row = style([
-  // sprinkles(
-    {
+  sprinkles({
     display: 'flex',
     paddingRight: '16',
     cursor: 'pointer',
@@ -50,80 +48,64 @@ export const row = style([
     paddingLeft: '12',
     paddingTop: '10',
     paddingBottom: '10',
-  },
+  }),
 ])
 
 export const subRowHover = style({
   ':hover': {
-    // background: themeVars.colors.backgroundInteractive,
+    background: themeVars.colors.backgroundInteractive,
   },
 })
 
-export const borderTop = 
-// sprinkles(
-  {
+export const borderTop = sprinkles({
   borderTopStyle: 'solid',
   borderTopColor: 'backgroundOutline',
   borderTopWidth: '1px',
-}
+})
 
-export const borderBottom =
-// sprinkles(
-  {
+export const borderBottom = sprinkles({
   borderBottomStyle: 'solid',
   borderBottomColor: 'backgroundOutline',
   borderBottomWidth: '1px',
-}
+})
 
-export const detailsOpen = 
-// style(
-  [
+export const detailsOpen = style([
   borderTop,
-  
-  // sprinkles(
-    {
+  sprinkles({
     overflow: 'hidden',
     marginTop: '2',
     marginBottom: '2',
-  },
-]
+  }),
+])
 
 export const MAX_FILTER_DROPDOWN_HEIGHT = 302
 
-export const filterDropDowns = 
-// style(
-  [
+export const filterDropDowns = style([
   borderBottom,
-  
-  // sprinkles(
-    {
+  sprinkles({
     paddingLeft: '0',
     paddingBottom: '8',
-  },
+  }),
   {
     maxHeight: `${MAX_FILTER_DROPDOWN_HEIGHT}px`,
     '::-webkit-scrollbar': { display: 'none' },
     scrollbarWidth: 'none',
   },
-]
+])
 
 export const chevronIcon = style({
   marginLeft: -1,
 })
 
-export const chevronContainer = 
-// style(
-  [
-  
-  // sprinkles(
-    {
+export const chevronContainer = style([
+  sprinkles({
     color: 'textSecondary',
     display: 'inline-block',
     height: '28',
     width: '28',
     transition: '250',
-  },
+  }),
   {
     marginRight: -1,
   },
-]
+])

@@ -220,14 +220,14 @@ const Container = ({
   return (
     <CardContext.Provider value={providerValue}>
       <Box
-        // position="relative"
+        position="relative"
         ref={assetRef}
-        // borderRadius={BORDER_RADIUS}
+        borderRadius={BORDER_RADIUS}
         className={selected ? styles.selectedCard : styles.card}
         draggable={false}
         onMouseEnter={toggleHover}
         onMouseLeave={toggleHover}
-        // transition="250"
+        transition="250"
         onClick={isDisabled ? () => null : onClick ?? handleAssetInBag}
       >
         {children}
@@ -253,18 +253,16 @@ const Image = () => {
   }
 
   return (
-    <Box 
-    // display="flex" overflow="hidden" borderTopLeftRadius={BORDER_RADIUS} borderTopRightRadius={BORDER_RADIUS}
-    >
+    <Box display="flex" overflow="hidden" borderTopLeftRadius={BORDER_RADIUS} borderTopRightRadius={BORDER_RADIUS}>
       <Box
         as="img"
-        // width="full"
+        width="full"
         style={{
           aspectRatio: '1',
           transition: 'transform 0.25s ease 0s',
         }}
         src={asset.imageUrl || asset.smallImageUrl}
-        // objectFit="contain"
+        objectFit="contain"
         draggable={false}
         onError={() => setNoContent(true)}
         onLoad={(e) => {
@@ -300,26 +298,24 @@ const Video = ({ shouldPlay, setCurrentTokenPlayingMedia }: MediaProps) => {
 
   return (
     <>
-      <Box 
-      // display="flex" overflow="hidden"
-      >
+      <Box display="flex" overflow="hidden">
         <Box
           as="img"
           alt={asset.name || asset.tokenId}
-          // width="full"
+          width="full"
           style={{
             aspectRatio: '1',
             transition: 'transform 0.25s ease 0s',
             willChange: 'transform',
           }}
           src={asset.imageUrl || asset.smallImageUrl}
-          // objectFit="contain"
+          objectFit="contain"
           draggable={false}
           onError={() => setNoContent(true)}
           onLoad={() => {
             setImageLoaded(true)
           }}
-          // visibility={shouldPlay ? 'hidden' : 'visible'}
+          visibility={shouldPlay ? 'hidden' : 'visible'}
           className={clsx(hovered && !isMobile && styles.cardImageHover, !imageLoaded && styles.loadingBackground)}
         />
       </Box>
@@ -337,13 +333,11 @@ const Video = ({ shouldPlay, setCurrentTokenPlayingMedia }: MediaProps) => {
               className="playback-icon"
             />
           </Box>
-          <Box 
-          // position="absolute" left="0" top="0" display="flex"
-          >
+          <Box position="absolute" left="0" top="0" display="flex">
             <Box
               as="video"
               ref={vidRef}
-              // width="full"
+              width="full"
               style={{
                 aspectRatio: '1',
               }}
@@ -397,19 +391,17 @@ const Audio = ({ shouldPlay, setCurrentTokenPlayingMedia }: MediaProps) => {
 
   return (
     <>
-      <Box 
-      // display="flex" overflow="hidden"
-      >
+      <Box display="flex" overflow="hidden">
         <Box
           as="img"
           alt={asset.name || asset.tokenId}
-          // width="full"
+          width="full"
           style={{
             aspectRatio: '1',
             transition: 'transform 0.4s ease 0s',
           }}
           src={asset.imageUrl || asset.smallImageUrl}
-          // objectFit="contain"
+          objectFit="contain"
           draggable={false}
           onError={() => setNoContent(true)}
           onLoad={(e) => {
@@ -432,14 +424,12 @@ const Audio = ({ shouldPlay, setCurrentTokenPlayingMedia }: MediaProps) => {
               className="playback-icon"
             />
           </Box>
-          <Box 
-          // position="absolute" left="0" top="0" display="flex"
-          >
+          <Box position="absolute" left="0" top="0" display="flex">
             <Box
               as="audio"
               ref={audRef}
-              // width="full"
-              // height="full"
+              width="full"
+              height="full"
               onEnded={(e) => {
                 e.preventDefault()
                 setCurrentTokenPlayingMedia(undefined)
@@ -477,12 +467,12 @@ interface CardDetailsContainerProps {
 const DetailsContainer = ({ children }: CardDetailsContainerProps) => {
   return (
     <Row
-      // position="relative"
-      // paddingX="12"
-      // paddingTop="12"
-      // justifyContent="space-between"
-      // flexDirection="column"
-      // transition="250"
+      position="relative"
+      paddingX="12"
+      paddingTop="12"
+      justifyContent="space-between"
+      flexDirection="column"
+      transition="250"
     >
       {children}
     </Row>
@@ -491,9 +481,7 @@ const DetailsContainer = ({ children }: CardDetailsContainerProps) => {
 
 const InfoContainer = ({ children }: { children: ReactNode }) => {
   return (
-    <Box 
-    // overflow="hidden" width="full"
-    >
+    <Box overflow="hidden" width="full">
       {children}
     </Box>
   )
@@ -523,36 +511,28 @@ const ProfileNftDetails = ({ asset, hideDetails }: ProfileNftDetailsProps) => {
     !!asset.floor_sell_order_price && !asset.notForSale && asset.asset_contract.tokenType !== TokenType.ERC1155
 
   return (
-    <Box 
-    // overflow="hidden" width="full" flexWrap="nowrap"
-    >
+    <Box overflow="hidden" width="full" flexWrap="nowrap">
       <PrimaryRow>
         <PrimaryDetails>
-          <TruncatedTextRow className={bodySmall} 
-            // style={{ color: themeVars.colors.textSecondary }}
-            >
+          <TruncatedTextRow className={bodySmall} style={{ color: themeVars.colors.textSecondary }}>
             {!!asset.asset_contract.name && <span>{asset.asset_contract.name}</span>}
           </TruncatedTextRow>
           {asset.collectionIsVerified && <VerifiedIcon height="18px" width="18px" />}
         </PrimaryDetails>
         {!hideDetails && <DetailsLink />}
       </PrimaryRow>
-      <Row 
-      // justifyItems="flex-start"
-      >
+      <Row justifyItems="flex-start">
         <TruncatedTextRow
           className={body}
           style={{
-            // color: themeVars.colors.textPrimary,
+            color: themeVars.colors.textPrimary,
           }}
         >
           {assetName()}
         </TruncatedTextRow>
         {asset.susFlag && <Suspicious />}
       </Row>
-      <TruncatedTextRow className={buttonTextMedium} 
-      // style={{ color: themeVars.colors.textPrimary }}
-      >
+      <TruncatedTextRow className={buttonTextMedium} style={{ color: themeVars.colors.textPrimary }}>
         {shouldShowUserListedPrice ? `${floorFormatter(asset.floor_sell_order_price)} ETH` : ' '}
       </TruncatedTextRow>
     </Box>
@@ -560,43 +540,33 @@ const ProfileNftDetails = ({ asset, hideDetails }: ProfileNftDetailsProps) => {
 }
 
 const PrimaryRow = ({ children }: { children: ReactNode }) => (
-  <Row 
-  // gap="8" justifyContent="space-between"
-  >
+  <Row gap="8" justifyContent="space-between">
     {children}
   </Row>
 )
 
 const PrimaryDetails = ({ children }: { children: ReactNode }) => (
-  <Row 
-  // justifyItems="center" overflow="hidden" whiteSpace="nowrap"
-  >
+  <Row justifyItems="center" overflow="hidden" whiteSpace="nowrap">
     {children}
   </Row>
 )
 
 const PrimaryInfo = ({ children }: { children: ReactNode }) => {
   return (
-    <Box 
-    // overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis" className={body}
-    >
+    <Box overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis" className={body}>
       {children}
     </Box>
   )
 }
 
 const SecondaryRow = ({ children }: { children: ReactNode }) => (
-  <Row 
-  // height="20" justifyContent="space-between" marginTop="6"
-  >
+  <Row height="20" justifyContent="space-between" marginTop="6">
     {children}
   </Row>
 )
 
 const SecondaryDetails = ({ children }: { children: ReactNode }) => (
-  <Row 
-  // overflow="hidden" whiteSpace="nowrap"
-  >
+  <Row overflow="hidden" whiteSpace="nowrap">
     {children}
   </Row>
 )
@@ -604,10 +574,10 @@ const SecondaryDetails = ({ children }: { children: ReactNode }) => (
 const SecondaryInfo = ({ children }: { children: ReactNode }) => {
   return (
     <Box
-      // color="textPrimary"
-      // overflow="hidden"
-      // whiteSpace="nowrap"
-      // textOverflow="ellipsis"
+      color="textPrimary"
+      overflow="hidden"
+      whiteSpace="nowrap"
+      textOverflow="ellipsis"
       style={{ lineHeight: '20px' }}
       className={subhead}
     >
@@ -618,9 +588,7 @@ const SecondaryInfo = ({ children }: { children: ReactNode }) => {
 
 const TertiaryInfo = ({ children }: { children: ReactNode }) => {
   return (
-    <Box 
-    // marginTop="8" color="textSecondary"
-    >
+    <Box marginTop="8" color="textSecondary">
       {children}
     </Box>
   )
@@ -702,15 +670,10 @@ const Ranking = ({ rarity, provider, rarityVerified, rarityLogo }: RankingProps)
           <MouseoverTooltip
             text={
               <Row>
-                <Box 
-                // display="flex" marginRight="4"
-                >
+                <Box display="flex" marginRight="4">
                   <img src={rarityLogo} alt="cardLogo" width={16} />
                 </Box>
-                <Box
-                // width="full" 
-                className={bodySmall}
-                >
+                <Box width="full" className={bodySmall}>
                   {rarityVerified
                     ? `Verified by ${
                         ('collectionName' in asset && asset.collectionName) ||
@@ -723,15 +686,11 @@ const Ranking = ({ rarity, provider, rarityVerified, rarityLogo }: RankingProps)
             placement="top"
           >
             <Box className={styles.rarityInfo}>
-              <Box 
-              // paddingTop="2" paddingBottom="2" display="flex"
-              >
+              <Box paddingTop="2" paddingBottom="2" display="flex">
                 {putCommas(provider.rank)}
               </Box>
 
-              <Box 
-              // display="flex" height="16"
-              >
+              <Box display="flex" height="16">
                 {rarityVerified ? <RarityVerifiedIcon /> : null}
               </Box>
             </Box>
@@ -746,9 +705,7 @@ const SUSPICIOUS_TEXT = 'Blocked on OpenSea'
 const Suspicious = () => {
   return (
     <MouseoverTooltip text={<Box className={bodySmall}>{SUSPICIOUS_TEXT}</Box>} placement="top">
-      <Box 
-      // display="flex" flexShrink="0" marginLeft="4"
-      >
+      <Box display="flex" flexShrink="0" marginLeft="4">
         <SuspiciousIcon />
       </Box>
     </MouseoverTooltip>
@@ -765,9 +722,7 @@ const Pool = () => {
       }
       placement="top"
     >
-      <Box 
-      // display="flex" flexShrink="0" marginLeft="4" color="textSecondary"
-      >
+      <Box display="flex" flexShrink="0" marginLeft="4" color="textSecondary">
         <PoolIcon width="20" height="20" />
       </Box>
     </MouseoverTooltip>
@@ -777,20 +732,20 @@ const Pool = () => {
 const NoContentContainer = () => (
   <>
     <Box
-      // position="relative"
-      // width="full"
+      position="relative"
+      width="full"
       style={{
         paddingTop: '100%',
-        // background: `linear-gradient(90deg, ${themeVars.colors.backgroundSurface} 0%, ${themeVars.colors.backgroundInteractive} 95.83%)`,
+        background: `linear-gradient(90deg, ${themeVars.colors.backgroundSurface} 0%, ${themeVars.colors.backgroundInteractive} 95.83%)`,
       }}
     >
       <Box
-        // position="absolute"
-        // textAlign="center"
-        // left="1/2"
-        // top="1/2"
-        // color="gray500"
+        position="absolute"
+        textAlign="center"
+        left="1/2"
+        top="1/2"
         style={{ transform: 'translate3d(-50%, -50%, 0)' }}
+        color="gray500"
         className={body}
       >
         Content not

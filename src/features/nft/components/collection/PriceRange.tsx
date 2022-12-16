@@ -140,12 +140,8 @@ export const PriceRange = () => {
 
   return (
     <TraitsHeader title="Price range" index={TraitPosition.PRICE_RANGE_INDEX}>
-      <Row 
-      // marginTop="12" color="textPrimary" justifyContent="space-between"
-      >
-        <Row 
-        // position="relative"
-        >
+      <Row marginTop="12" color="textPrimary" justifyContent="space-between">
+        <Row position="relative">
           <NumericInput
             style={{
               width: '126px',
@@ -159,9 +155,7 @@ export const PriceRange = () => {
           />
         </Row>
         <Box className={body}>to</Box>
-        <Row 
-        // position="relative"
-        >
+        <Row position="relative">
           <NumericInput
             style={{
               width: '126px',
@@ -176,9 +170,7 @@ export const PriceRange = () => {
         </Row>
       </Row>
 
-      <Row 
-      // marginTop="24" marginBottom="12" paddingLeft="8" paddingRight="8"
-      >
+      <Row marginTop="24" marginBottom="12" paddingLeft="8" paddingRight="8">
         <StyledSlider
           defaultValue={[0, 100]}
           min={0}

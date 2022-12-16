@@ -69,33 +69,33 @@ const TraitItem = ({
   return (
     <Row
       key={trait.trait_value}
-      // maxWidth="full"
-      // overflowX="hidden"
-      // overflowY="hidden"
-      // fontWeight="normal"
-      // className={`${subheadSmall} ${styles.subRowHover}`}
-      // justifyContent="space-between"
-      // cursor="pointer"
-      // paddingLeft="12"
-      // paddingRight="16"
-      // borderRadius="12"
+      maxWidth="full"
+      overflowX="hidden"
+      overflowY="hidden"
+      fontWeight="normal"
+      className={`${subheadSmall} ${styles.subRowHover}`}
+      justifyContent="space-between"
+      cursor="pointer"
+      paddingLeft="12"
+      paddingRight="16"
+      borderRadius="12"
       style={{
         paddingBottom: '22px',
         paddingTop: '22px',
         ...style,
       }}
-      // maxHeight="44"
+      maxHeight="44"
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
       onClick={handleCheckbox}
     >
       <Box
         as="span"
-        // whiteSpace="nowrap"
-        // textOverflow="ellipsis"
-        // overflow="hidden"
+        whiteSpace="nowrap"
+        textOverflow="ellipsis"
+        overflow="hidden"
         style={{ minHeight: 15 }}
-        // maxWidth={!showFullTraitName ? '160' : 'full'}
+        maxWidth={!showFullTraitName ? '160' : 'full'}
         onMouseOver={(e) => isEllipsisActive(e)}
         onMouseLeave={() => toggleShowFullTraitName({ shouldShow: false, trait_type: '', trait_value: '' })}
       >
@@ -104,9 +104,7 @@ const TraitItem = ({
           : trait.trait_value}
       </Box>
       <Checkbox checked={isCheckboxSelected} hovered={hovered} onChange={handleCheckbox}>
-        <Box as="span" 
-        // color="textTertiary" minWidth="8" paddingTop="2" paddingRight="12" position="relative"
-        >
+        <Box as="span" color="textTertiary" minWidth="8" paddingTop="2" paddingRight="12" position="relative">
           {!showFullTraitName && trait.trait_count}
         </Box>
       </Checkbox>
@@ -156,11 +154,11 @@ export const TraitSelect = ({ traits, type, index }: { traits: Trait[]; type: st
         value={search}
         onChange={(e: FormEvent<HTMLInputElement>) => setSearch(e.currentTarget.value)}
         placeholder="Search"
-        // marginTop="8"
-        // marginBottom="8"
-        // autoComplete="off"
-        // position="static"
-        // width="full"
+        marginTop="8"
+        marginBottom="8"
+        autoComplete="off"
+        position="static"
+        width="full"
       />
       <Column
         className={styles.filterDropDowns}

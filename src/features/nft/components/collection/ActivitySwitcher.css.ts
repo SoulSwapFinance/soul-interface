@@ -5,14 +5,13 @@ import { sprinkles, vars } from 'features/nft/css/sprinkles.css'
 
 export const baseActivitySwitcherToggle = style([
   buttonTextMedium,
-  // sprinkles(
-    {
+  sprinkles({
     position: 'relative',
     background: 'none',
     border: 'none',
     cursor: 'pointer',
     marginBottom: '8',
-  },
+  }),
   {
     lineHeight: '24px',
   },
@@ -20,18 +19,16 @@ export const baseActivitySwitcherToggle = style([
 
 export const activitySwitcherToggle = style([
   baseActivitySwitcherToggle,
-  // sprinkles(
-    {
+  sprinkles({
     color: 'textSecondary',
-  },
+  }),
 ])
 
 export const selectedActivitySwitcherToggle = style([
   baseActivitySwitcherToggle,
-  // sprinkles(
-    {
+  sprinkles({
     color: 'textPrimary',
-  },
+  }),
   {
     ':after': {
       content: '',
