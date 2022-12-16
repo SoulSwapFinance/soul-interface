@@ -117,8 +117,8 @@ const Collection = () => {
 
   const toggleActivity = () => {
     isActivityToggled
-      ? router.push(`/nft/collection/${contractAddress}`)
-      : router.push(`/nft/collection/${contractAddress}/activity`)
+      ? router.push(`/nfts/collection/${contractAddress}`)
+      : router.push(`/nfts/collection/${contractAddress}/activity`)
   }
 
   return (
