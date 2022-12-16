@@ -1,11 +1,14 @@
+import { Trans } from '@lingui/macro'
 import { useTrace } from '@uniswap/analytics'
+import { sendAnalyticsEvent } from '@uniswap/analytics'
+import { EventName } from '@uniswap/analytics-events'
 import { MouseoverTooltip } from 'components/Tooltip'
 import Tooltip from 'components/Tooltip'
 import { Box } from 'features/nft/components/Box'
 import * as Card from 'features/nft/components/collection/Card'
 import { AssetMediaType } from 'features/nft/components/collection/Card'
 import { bodySmall } from 'features/nft/css/common.css'
-// import { themeVars } from 'features/nft/css/sprinkles.css'
+import { themeVars } from 'features/nft/css/sprinkles.css'
 import { useBag, useIsMobile, useSellAsset } from 'features/nft/hooks'
 import { TokenType, WalletAsset } from 'features/nft/types'
 import { useEffect, useMemo, useRef, useState } from 'react'
@@ -39,9 +42,9 @@ const getUnsupportedNftTextComponent = (asset: WalletAsset) => (
   // style={{ color: themeVars.colors.textPrimary }}
   >
     {asset.asset_contract.tokenType === TokenType.ERC1155 ? (
-        `Selling ERC-1155s coming soon`
+      <Trans>Selling ERC-1155s coming soon</Trans>
     ) : (
-      `Blocked from trading`
+      <Trans>Blocked from trading</Trans>
     )}
   </Box>
 )
@@ -75,11 +78,11 @@ export const ViewMyNftsAsset = ({
       removeSellAsset(asset)
     } else {
       selectSellAsset(asset)
-      // sendAnalyticsEvent(EventName.NFT_SELL_ITEM_ADDED, {
-      //   collection_address: asset.asset_contract.address,
-      //   token_id: asset.tokenId,
-      //   ...trace,
-      // })
+      sendAnalyticsEvent(EventName.NFT_SELL_ITEM_ADDED, {
+        collection_address: asset.asset_contract.address,
+        token_id: asset.tokenId,
+        ...trace,
+      })
     }
     if (
       !cartExpanded &&
@@ -125,7 +128,7 @@ export const ViewMyNftsAsset = ({
             <Box as="span" className={bodySmall} 
             // color="textPrimary"
             >
-              {isSelected ? `Added to bag` : `Removed from bag`}
+              {isSelected ? <Trans>Added to bag</Trans> : <Trans>Removed from bag</Trans>}
             </Box>
           }
           show={showTooltip}

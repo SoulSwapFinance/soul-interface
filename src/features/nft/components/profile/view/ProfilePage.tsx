@@ -21,7 +21,7 @@ import { WalletCollection } from 'features/nft/types'
 import { Dispatch, SetStateAction, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useInfiniteQuery } from 'react-query'
-import { useSpring } from 'react-spring'
+import easings, { useSpring } from 'react-spring'
 import styled from 'styled-components/macro'
 import shallow from 'zustand/shallow'
 

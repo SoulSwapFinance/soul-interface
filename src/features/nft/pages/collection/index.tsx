@@ -33,12 +33,7 @@ export const BannerWrapper = styled(Box)`
   }
 `
 
-export const CollectionBannerLoading = () => 
-<Box
-//  height="full" 
-//  width="full" 
- className={styles.loadingBanner}
-  />
+export const CollectionBannerLoading = () => <Box height="full" width="full" className={styles.loadingBanner} />
 
 const CollectionDescriptionSection = styled(Column)`
   ${styles.ScreenBreakpointsPaddings}
@@ -127,23 +122,21 @@ const Collection = () => {
         properties={{ collection_address: contractAddress, chain_id: chainId, is_activity_view: isActivityToggled }}
         shouldLogImpression
       >
-        <Column 
-        // width="full"
-        >
+        <Column width="full">
           {contractAddress ? (
             <>
               <BannerWrapper width="full">
                 <Box
                   as={collectionStats?.bannerImageUrl ? 'img' : 'div'}
-                  // height="full"
-                  // width="full"
-                  // background="none"
+                  height="full"
+                  width="full"
                   src={
                     collectionStats?.bannerImageUrl
                       ? `${collectionStats.bannerImageUrl}?w=${window.innerWidth}`
                       : undefined
                   }
                   className={styles.bannerImage}
+                  background="none"
                 />
               </BannerWrapper>
               <CollectionDescriptionSection>
@@ -161,14 +154,14 @@ const Collection = () => {
               </CollectionDescriptionSection>
               <CollectionDisplaySection>
                 <Box
-                  // position={isMobile ? 'fixed' : 'sticky'}
-                  // top={{ sm: '0', md: '72' }}
-                  // left="0"
-                  // width={isMobile ? 'full' : '0'}
-                  // height={isMobile && isFiltersExpanded ? 'full' : undefined}
-                  // background={isMobile ? 'backgroundBackdrop' : undefined}
-                  // zIndex="modalBackdrop"
-                  // overflowY={isMobile ? 'scroll' : undefined}
+                  position={isMobile ? 'fixed' : 'sticky'}
+                  top={{ sm: '0', md: '72' }}
+                  left="0"
+                  width={isMobile ? 'full' : '0'}
+                  height={isMobile && isFiltersExpanded ? 'full' : undefined}
+                  background={isMobile ? 'backgroundBackdrop' : undefined}
+                  zIndex="modalBackdrop"
+                  overflowY={isMobile ? 'scroll' : undefined}
                 >
                   {isFiltersExpanded && (
                     <>
@@ -219,10 +212,7 @@ const Collection = () => {
             </>
           ) : (
             // TODO: Put no collection asset page here
-            <div 
-            // className={styles.noCollectionAssets}
-            >No collection assets exist at this address
-            </div>
+            <div className={styles.noCollectionAssets}>No collection assets exist at this address</div>
           )}
         </Column>
       </Trace>

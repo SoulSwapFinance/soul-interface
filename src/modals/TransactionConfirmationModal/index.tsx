@@ -1,7 +1,7 @@
 import { AlertTriangle, ArrowUpCircle, CheckCircle } from 'react-feather'
 import { ChainId, Currency } from 'sdk'
 import React, { FC } from 'react'
-import { t } from '@lingui/macro'
+import { Trans, t } from '@lingui/macro'
 
 import { Button } from 'components/Button'
 import CloseIcon from 'components/CloseIcon'
