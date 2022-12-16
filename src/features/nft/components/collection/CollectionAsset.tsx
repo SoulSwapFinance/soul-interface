@@ -82,6 +82,12 @@ export const CollectionAsset = ({
       if (!bagExpanded && !isMobile && !bagManuallyClosed) {
         setBagExpanded({ bagExpanded: true })
       }
+      // sendAnalyticsEvent(EventName.NFT_BUY_ADDED, {
+      //   collection_address: asset.address,
+      //   token_id: asset.tokenId,
+      //   token_type: asset.tokenType,
+      //   ...trace,
+      // })
     }
   }, [addAssetsToBag, asset, bagExpanded, bagManuallyClosed, isMobile, setBagExpanded]) // trace
 

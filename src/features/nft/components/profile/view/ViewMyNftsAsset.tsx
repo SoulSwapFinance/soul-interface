@@ -1,3 +1,4 @@
+import { useTrace } from '@uniswap/analytics'
 import { MouseoverTooltip } from 'components/Tooltip'
 import Tooltip from 'components/Tooltip'
 import { Box } from 'features/nft/components/Box'
@@ -66,6 +67,7 @@ export const ViewMyNftsAsset = ({
 
   const [showTooltip, setShowTooltip] = useState(false)
   const isSelectedRef = useRef(isSelected)
+  const trace = useTrace()
   const onCardClick = () => handleSelect(isSelected)
 
   const handleSelect = (removeAsset: boolean) => {
@@ -73,6 +75,11 @@ export const ViewMyNftsAsset = ({
       removeSellAsset(asset)
     } else {
       selectSellAsset(asset)
+      // sendAnalyticsEvent(EventName.NFT_SELL_ITEM_ADDED, {
+      //   collection_address: asset.asset_contract.address,
+      //   token_id: asset.tokenId,
+      //   ...trace,
+      // })
     }
     if (
       !cartExpanded &&

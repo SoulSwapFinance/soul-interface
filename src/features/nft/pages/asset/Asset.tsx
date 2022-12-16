@@ -1,3 +1,5 @@
+import { Trace } from '@uniswap/analytics'
+import { PageName } from '@uniswap/analytics-events'
 import { useWeb3React } from '@web3-react/core'
 import { useDetailsQuery, useLoadDetailsQuery } from 'services/graphql/data/nft/Details'
 import { useLoadNftBalanceQuery } from 'services/graphql/data/nft/NftBalance'
@@ -44,6 +46,11 @@ const Asset = () => {
 
   return (
     <>
+      <Trace
+        page={PageName.NFT_DETAILS_PAGE}
+        properties={{ collection_address: contractAddress, token_id: tokenId }}
+        shouldLogImpression
+      >
         {asset && collection ? (
           <AssetContainer>
             <AssetDetails collection={collection} asset={asset} />
@@ -52,6 +59,7 @@ const Asset = () => {
             </AssetPriceDetailsContainer>
           </AssetContainer>
         ) : null}
+      </Trace>
     </>
   )
 }

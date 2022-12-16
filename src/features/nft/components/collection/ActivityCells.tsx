@@ -1,3 +1,5 @@
+import { sendAnalyticsEvent, useTrace } from '@uniswap/analytics'
+// import { EventName, PageName } from '@uniswap/analytics-events'
 import { ChainId } from 'sdk'
 import { MouseoverTooltip } from 'components/Tooltip'
 import { Box } from 'features/nft/components/Box'
@@ -122,6 +124,7 @@ export const BuyCell = ({
             e.preventDefault()
             isSelected ? removeAsset([asset]) : selectAsset([asset])
             !isSelected && !cartExpanded && !isMobile && toggleCart()
+            // !isSelected && sendAnalyticsEvent(EventName.NFT_BUY_ADDED, { eventProperties })
           }}
           disabled={event.orderStatus !== OrderStatus.VALID}
         >
