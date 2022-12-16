@@ -169,9 +169,6 @@ msgstr "Approving Master Contract"
 msgid "Approving {contractName} Master Contract"
 msgstr "Approving {contractName} Master Contract"
 
-msgid "Archived Farms ↗"
-msgstr "Archived Farms ↗"
-
 msgid "Asset / Collateral"
 msgstr "Asset / Collateral"
 
@@ -1323,9 +1320,6 @@ msgstr "TIMEFRAME"
 
 msgid "TOKENS"
 msgstr "TOKENS"
-
-msgid "TOTAL"
-msgstr "TOTAL"
 
 msgid "TVL"
 msgstr "TVL"
