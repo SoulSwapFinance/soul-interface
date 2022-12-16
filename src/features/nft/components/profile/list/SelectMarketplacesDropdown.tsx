@@ -59,10 +59,7 @@ const MarketplaceRow = ({ market, setSelectedMarkets, selectedMarkets }: Marketp
   }
   return (
     <MarketplaceRowWrapper onMouseEnter={toggleHovered} onMouseLeave={toggleHovered} onClick={toggleSelected}>
-      <Row 
-      // gap="12" 
-      onClick={toggleSelected}
-      >
+      <Row gap="12" onClick={toggleSelected}>
         <MarketplaceDropdownIcon alt={market.name} src={market.icon} />
         <Column>
           <ThemedText.BodyPrimary>{market.name}</ThemedText.BodyPrimary>
@@ -169,9 +166,7 @@ export const SelectMarketplacesDropdown = ({
           {dropdownDisplayText}
         </HeaderButtonContentWrapper>
 
-        <Chevron isOpen={isOpen} 
-        // secondaryColor={themeVars.colors.textPrimary} 
-        />
+        <Chevron isOpen={isOpen} secondaryColor={themeVars.colors.textPrimary} />
       </HeaderButtonWrap>
       <DropdownWrapper isOpen={isOpen}>
         {ListingMarkets.map((market) => {

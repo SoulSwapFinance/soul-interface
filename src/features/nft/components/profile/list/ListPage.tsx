@@ -89,23 +89,17 @@ export const ListPage = () => {
     <Column>
       <MarketWrap>
         <ListingHeader>
-          <Row 
-          // gap="4" marginBottom={{ sm: '18', md: '0' }}
-          >
+          <Row gap="4" marginBottom={{ sm: '18', md: '0' }}>
             <BackArrowIcon
               height={isMobile ? 20 : 32}
               width={isMobile ? 20 : 32}
-              // fill={themeVars.colors.textSecondary}
+              fill={themeVars.colors.textSecondary}
               onClick={() => setSellPageState(ProfilePageStateType.VIEWING)}
               cursor="pointer"
             />
-            <div 
-            className={isMobile ? headlineSmall.fontSize : headlineLarge.fontSize}
-            >Sell NFTs</div>
+            <div className={isMobile ? headlineSmall : headlineLarge}>Sell NFTs</div>
           </Row>
-          <Row 
-            // gap="12"
-          >
+          <Row gap="12">
             <SelectMarketplacesDropdown setSelectedMarkets={setSelectedMarkets} selectedMarkets={selectedMarkets} />
             <SetDurationModal />
           </Row>
