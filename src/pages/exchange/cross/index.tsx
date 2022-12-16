@@ -22,7 +22,7 @@ import { Input, OverlayButton } from "components/index";
 import Typography from "components/Typography";
 import { formatNumber, formatPercent } from "functions/format";
 import { classNames } from "functions/styling";
-import InputCurrencyBox from "pages/bridge/components/InputCurrencyBox";
+import InputCurrencyBox from "components/Bridge/InputCurrencyBox";
 import Container from "components/Container";
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
 import SwapHeader from "features/swap/SwapHeader";
