@@ -1,7 +1,7 @@
 import { Variables } from 'react-relay'
 import { GraphQLResponse, RequestParameters } from 'relay-runtime'
 
-const URL = "https://beta.api.uniswap.org/v1/graphql" // process.env.REACT_APP_AWS_API_ENDPOINT
+const URL = process.env.REACT_APP_AWS_API_ENDPOINT
 
 if (!URL) {
   throw new Error('AWS URL MISSING FROM ENVIRONMENT')

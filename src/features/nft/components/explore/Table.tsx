@@ -3,7 +3,7 @@ import { LoadingBubble } from '../Loading'
 import { useWindowSize } from 'hooks/useWindowSize'
 import { useIsMobile } from 'features/nft/hooks'
 import { useEffect } from 'react'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Column, ColumnInstance, HeaderGroup, IdType, useSortBy, useTable } from 'react-table'
 import styled, { useTheme } from 'styled-components/macro'
 
@@ -14,7 +14,6 @@ import { ColumnHeaders } from './CollectionTable'
 import * as styles from './Explore.css'
 import { GlowEffect } from 'theme/components'
 import { ThemedText } from 'theme/components/text'
-import { useRouter } from 'next/router'
 
 // Default table cell max width
 const CELL_WIDTH = '160px'
@@ -27,7 +26,7 @@ const RankCellContainer = styled.div`
   align-items: center;
   padding-left: 24px;
   gap: 12px;
-  @media only screen and (max-width: ${({ theme }) => `${600}px`}) {
+  @media only screen and (max-width: ${({ theme }) => `${theme.breakpoint.sm}px`}) {
     padding-left: 8px;
   }
 `
@@ -50,11 +49,11 @@ const StyledHeader = styled.th<{ disabled?: boolean }>`
   ${({ disabled }) => !disabled && `cursor: pointer;`}
 
   :hover {
-    ${({ theme, disabled }) => !disabled && `opacity: ${100};`}
+    ${({ theme, disabled }) => !disabled && `opacity: ${theme.opacity.hover};`}
   }
 
   :active {
-    ${({ theme, disabled }) => !disabled && `opacity: ${100};`}
+    ${({ theme, disabled }) => !disabled && `opacity: ${theme.opacity.click};`}
   }
 `
 
@@ -124,16 +123,16 @@ export function Table<D extends Record<string, unknown>>({
       useSortBy
     )
 
-  const router = useRouter()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!width) return
 
-    if (width <= 600) {
+    if (width <= theme.breakpoint.sm) {
       setHiddenColumns(smallHiddenColumns)
-    } else if (width <= 959) {
+    } else if (width <= theme.breakpoint.md) {
       setHiddenColumns(mediumHiddenColumns)
-    } else if (width <= 1360) {
+    } else if (width <= theme.breakpoint.lg) {
       setHiddenColumns(largeHiddenColumns)
     } else {
       setHiddenColumns([])
@@ -196,7 +195,7 @@ export function Table<D extends Record<string, unknown>>({
                 <StyledRow
                   {...row.getRowProps()}
                   key={row.id}
-                  // onClick={() => navigate(`/nfts/collection/${row.original.collection.address}`)}
+                  onClick={() => navigate(`/nfts/collection/${row.original.collection.address}`)}
                 >
                   {row.cells.map((cell, cellIndex) => {
                     return (

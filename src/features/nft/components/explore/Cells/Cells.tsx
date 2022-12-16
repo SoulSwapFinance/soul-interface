@@ -27,13 +27,14 @@ const CollectionName = styled(TruncatedText)`
   margin-left: 8px;
 `
 
-const TruncatedSubHeader = styled.div`
+// const TruncatedSubHeader = styled(ThemedText.SubHeader)`
+const TruncatedSubHeader = styled()`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 `
 // const TruncatedSubHeaderSmall = styled(ThemedText.SubHeaderSmall)`
-const TruncatedSubHeaderSmall = styled.div`
+const TruncatedSubHeaderSmall = styled()`
   color: ${({ theme }) => `${theme.textPrimary}`};
   overflow: hidden;
   white-space: nowrap;

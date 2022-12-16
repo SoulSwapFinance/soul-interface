@@ -3,7 +3,7 @@ import { css } from 'styled-components/macro'
 export const ScrollBarStyles = css<{ $isHorizontalScroll?: boolean }>`
   // Firefox scrollbar styling
   scrollbar-width: thin;
-  scrollbar-color: ${({ theme }) => `${''} transparent`};
+  scrollbar-color: ${({ theme }) => `${theme.backgroundOutline} transparent`};
   height: 100%;
 
   // safari and chrome scrollbar styling
@@ -25,24 +25,23 @@ export const ScrollBarStyles = css<{ $isHorizontalScroll?: boolean }>`
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => ''};
+    background: ${({ theme }) => theme.backgroundOutline};
     border-radius: 8px;
   }
 `
 
 export const OpacityHoverState = css`
   &:hover {
-    opacity: ${({ theme }) => 100};
+    opacity: ${({ theme }) => theme.opacity.hover};
   }
 
   &:active {
-    opacity: ${({ theme }) => 100};
+    opacity: ${({ theme }) => theme.opacity.click};
   }
 
   transition: ${({
     theme: {
-      // transition: { duration, timing },
+      transition: { duration, timing },
     },
-  }) => `opacity ${100}`};
-  `
-  // `opacity ${duration.medium} ${timing.ease}`};
+  }) => `opacity ${duration.medium} ${timing.ease}`};
+`

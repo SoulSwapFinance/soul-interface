@@ -26,7 +26,7 @@ const BAG_WIDTH = 324
 
 export const BannerWrapper = styled(Box)`
   height: 100px;
-  @media screen and (min-width: ${({ theme }) => 600}px) {
+  @media screen and (min-width: ${({ theme }) => theme.breakpoint.sm}px) {
     height: 288px;
   }
 `
@@ -73,7 +73,7 @@ const Collection = () => {
   const isMobile = useIsMobile()
   const [isFiltersExpanded, setFiltersExpanded] = useFiltersExpanded()
   const { pathname } = useLocation()
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const isActivityToggled = pathname.includes('/activity')
   const setMarketCount = useCollectionFilters((state) => state.setMarketCount)
   const isBagExpanded = useBag((state) => state.bagExpanded)
@@ -114,8 +114,8 @@ const Collection = () => {
 
   const toggleActivity = () => {
     isActivityToggled
-      // ? navigate(`/nfts/collection/${contractAddress}`)
-      // : navigate(`/nfts/collection/${contractAddress}/activity`)
+      ? navigate(`/nfts/collection/${contractAddress}`)
+      : navigate(`/nfts/collection/${contractAddress}/activity`)
   }
 
   return (

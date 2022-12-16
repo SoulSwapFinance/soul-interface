@@ -3,10 +3,10 @@ import { AnimatedBox, Box } from 'features/nft/components/Box'
 import { ClearAllButton, LoadingAssets } from 'features/nft/components/collection/CollectionNfts'
 import { assetList } from 'features/nft/components/collection/CollectionNfts.css'
 import { FilterButton } from 'features/nft/components/collection/FilterButton'
-// import { Column, Row } from 'features/nft/components/Flex'
+import { Column, Row } from 'features/nft/components/Flex'
 import { CrossIcon } from 'features/nft/components/icons'
 import { FilterSidebar } from 'features/nft/components/profile/view/FilterSidebar'
-// import { subhead } from 'features/nft/css/common.css'
+import { subhead } from 'features/nft/css/common.css'
 import {
   useBag,
   useFiltersExpanded,
@@ -29,8 +29,6 @@ import { EmptyWalletContent } from './EmptyWalletContent'
 import * as styles from './ProfilePage.css'
 import { ProfileBodyLoadingSkeleton } from './ProfilePageLoadingSkeleton'
 import { ViewMyNftsAsset } from './ViewMyNftsAsset'
-import Row from 'components/Row'
-import Column from 'components/Column'
 
 const ProfilePageColumn = styled(Column)`
   ${ScreenBreakpointsPaddings}
@@ -74,7 +72,7 @@ export const ProfilePage = () => {
   const getOwnerCollections = async ({ pageParam = 0 }) => {
     const res = await OSCollectionsFetcher({
       params: {
-        asset_owner: '0xFd63Bf84471Bc55DD9A83fdFA293CCBD27e1F4C8', // address,
+        asset_owner: address,
         offset: `${pageParam * WALLET_COLLECTIONS_PAGINATION_LIMIT}`,
         limit: `${WALLET_COLLECTIONS_PAGINATION_LIMIT}`,
       },
@@ -115,8 +113,7 @@ export const ProfilePage = () => {
       <>
         <ProfileHeader>My NFTs</ProfileHeader>
         <Row 
-        // alignItems="flex-start" 
-        // position="relative"
+        // alignItems="flex-start" position="relative"
         >
           <FilterSidebar
             fetchNextPage={fetchNextPage}
@@ -149,7 +146,7 @@ export const ProfilePage = () => {
           // borderColor="backgroundOutline"
           // borderWidth="1px"
           style={{ bottom: '68px', width: 'calc(100% - 32px)', lineHeight: '24px' }}
-          // className={subhead}
+          className={subhead}
         >
           {sellAssets.length} NFT{sellAssets.length === 1 ? '' : 's'}
           <Box
@@ -261,8 +258,7 @@ const ProfilePageNfts = ({
               Boolean(hasNext && ownerAssets?.length) && <LoadingAssets count={DEFAULT_WALLET_ASSET_QUERY_AMOUNT} />
             }
             dataLength={ownerAssets?.length ?? 0}
-            className={ownerAssets?.length.toString() || isLoadingNext ? assetList.toString() : undefined
-            }
+            // className={ownerAssets?.length || isLoadingNext ? assetList : undefined}
             style={{ overflow: 'unset' }}
           >
             {ownerAssets?.length

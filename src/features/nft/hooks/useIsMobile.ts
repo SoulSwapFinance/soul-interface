@@ -1,9 +1,10 @@
+import { breakpoints } from 'features/nft/css/sprinkles.css'
 import { useEffect, useState } from 'react'
 
 const isClient = typeof window !== 'undefined'
 
 export function getIsMobile() {
-  return isClient ? window.innerWidth < 600 : false
+  return isClient ? window.innerWidth < breakpoints.sm : false
 }
 
 export function useIsMobile(): boolean {

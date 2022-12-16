@@ -48,7 +48,7 @@ const AddressLink = styled(ExternalLink)`
   a:hover {
     color: ${({ theme }) => theme.textPrimary};
     text-decoration: none;
-    opacity: ${({ theme }) => 100};
+    opacity: ${({ theme }) => theme.opacity.hover};
   }
   a:focus {
     color: ${({ theme }) => theme.textPrimary};

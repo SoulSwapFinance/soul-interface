@@ -2,7 +2,7 @@ import { useWeb3React } from '@web3-react/core'
 import { EmptyNFTWalletIcon } from 'features/nft/components/icons'
 import { headlineMedium } from 'features/nft/css/common.css'
 import { shortenAddress } from 'functions/format'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 const EmptyWalletContainer = styled.div`
@@ -37,16 +37,14 @@ const ExploreNFTsButton = styled.button`
 
 export const EmptyWalletContent = () => {
   const { account } = useWeb3React()
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   return (
     <EmptyWalletContainer>
       <EmptyNFTWalletIcon />
       <EmptyWalletText className={headlineMedium}>
         No NFTs in &nbsp;{shortenAddress(account ?? '')}
       </EmptyWalletText>
-      <ExploreNFTsButton 
-      // onClick={() => navigate('/nfts')}
-      >Explore NFTs</ExploreNFTsButton>
+      <ExploreNFTsButton onClick={() => navigate('/nfts')}>Explore NFTs</ExploreNFTsButton>
     </EmptyWalletContainer>
   )
 }

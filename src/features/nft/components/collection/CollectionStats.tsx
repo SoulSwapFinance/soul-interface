@@ -299,11 +299,11 @@ const CollectionDescriptionText = styled.div<{ readMore: boolean }>`
     text-decoration: none;
 
     :hover {
-      opacity: ${({ theme }) => 100};
+      opacity: ${({ theme }) => theme.opacity.hover};
     }
 
     :focus {
-      opacity: ${({ theme }) => 100};
+      opacity: ${({ theme }) => theme.opacity.click};
     }
   }
 `

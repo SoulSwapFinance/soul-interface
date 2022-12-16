@@ -1,7 +1,7 @@
 import { headlineSmall, subheadSmall } from 'features/nft/css/common.css'
 import { loadingAsset, loadingBlock } from 'features/nft/css/loading.css'
 
-import { vars } from '../../css/sprinkles.css'
+import { breakpoints, sprinkles, vars } from '../../css/sprinkles.css'
 
 export const statsText = [
   // sprinkles(
@@ -12,7 +12,7 @@ export const statsText = [
   },
   {
     '@media': {
-      [`(max-width: ${600 - 1}px)`]: {
+      [`(max-width: ${breakpoints.sm - 1}px)`]: {
         marginLeft: '68px',
       },
     },
@@ -41,7 +41,7 @@ export const collectionImage =
     top: '-118px',
     boxShadow: vars.color.cardDropShadow,
     '@media': {
-      [`(max-width: ${600 - 1}px)`]: {
+      [`(max-width: ${breakpoints.sm - 1}px)`]: {
         width: '60px',
         height: '60px',
         borderWidth: '2px',

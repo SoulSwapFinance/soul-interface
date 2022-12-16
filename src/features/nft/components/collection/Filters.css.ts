@@ -1,3 +1,5 @@
+import { breakpoints, sprinkles, themeVars } from 'features/nft/css/sprinkles.css'
+
 export const container = [
   // sprinkles(
     {
@@ -11,7 +13,7 @@ export const container = [
     paddingRight: '8px',
     paddingBottom: '96px',
     '@media': {
-      [`(max-width: ${600 - 1}px)`]: {
+      [`(max-width: ${breakpoints.sm - 1}px)`]: {
         width: 'auto',
         height: 'auto',
         paddingBottom: '0px',
