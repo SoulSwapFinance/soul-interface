@@ -10,7 +10,6 @@ import {
     ExternalLink as ExternalLinkIconFeather,} from "react-feather";
 import { Link } from "components";
 
-import { Trans } from '@lingui/macro'
 import useCopyClipboard from 'hooks/useCopyClipboard'
 import React, {
   forwardRef,
@@ -261,7 +260,7 @@ export const CopyHelper = forwardRef<CopyHelperRefType, CopyHelperProps>(
       <CopyHelperContainer onClick={copy} color={color} clicked={isCopied}>
         <div style={{ display: 'flex', flexDirection: 'row', gap }}>
           {iconPosition === 'left' && <BaseIcon size={iconSize} strokeWidth={1.5} color={iconColor} />}
-          <CopyHelperText fontSize={fontSize}>{isCopied ? <Trans>Copied!</Trans> : children}</CopyHelperText>
+          <CopyHelperText fontSize={fontSize}>{isCopied ? `Copied` : children}</CopyHelperText>
           {iconPosition === 'right' && <BaseIcon size={iconSize} strokeWidth={1.5} color={iconColor} />}
         </div>
       </CopyHelperContainer>
