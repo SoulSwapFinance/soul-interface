@@ -36,7 +36,6 @@ import { ExternalLink } from 'theme'
 import * as styles from './Activity.css'
 import { getExplorerLink } from 'functions/explorer'
 import { shortenAddress } from 'functions/format'
-import Image from 'next/image'
 
 const AddressLink = styled(ExternalLink)`
   color: ${({ theme }) => theme.textPrimary};
@@ -344,7 +343,7 @@ const Ranking = ({ details, rarity, collectionName, rarityVerified }: RankingPro
             <Box 
             // display="flex" marginRight="4"
             >
-              <Image src={rarityProviderLogo} alt="cardLogo" width={16} />
+              <img src={rarityProviderLogo} alt="cardLogo" width={16} />
             </Box>
             <Box 
             // width="full" fontSize="14"

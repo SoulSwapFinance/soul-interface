@@ -1,6 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { Trans } from '@lingui/macro'
-// import {} from '@lingui/macro'
 import { sendAnalyticsEvent, useTrace } from '@uniswap/analytics'
 import { EventName, PageName } from '@uniswap/analytics-events'
 import { MouseoverTooltip } from 'components/Tooltip'
@@ -129,8 +128,7 @@ export const CollectionAsset = ({
               <Box as="span" className={bodySmall} 
               // color="textPrimary"
               >
-                {/* {isSelected ? <Trans>Added to bag</Trans> : <Trans>Removed from bag</Trans>} */}
-                {isSelected ? `Added to bag`: `Removed from bag`}
+                {isSelected ? <Trans>Added to bag</Trans> : <Trans>Removed from bag</Trans>}
               </Box>
             }
             show={showTooltip}
@@ -156,7 +154,7 @@ export const CollectionAsset = ({
             <Box as="span" className={bodySmall} 
             // color="textPrimary"
             >
-              {`This item is not for sale`}
+              <Trans>This item is not for sale</Trans>
             </Box>
           }
           placement="bottom"
