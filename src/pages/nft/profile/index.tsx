@@ -54,18 +54,10 @@ const ProfileContent = () => {
             {sellPageState === ProfilePageStateType.VIEWING ? <ProfilePage /> : <ListPage />}
           </Box>
         ) : (
-          <Column as="section" 
-          // gap="60" 
-          className={styles.section}>
+          <Column as="section" gap="60" className={styles.section}>
             <div style={{ minHeight: '70vh' }}>
-              <Center className={styles.notConnected} 
-              // flexDirection="column"
-              >
-                <Box as="span" className={headlineMedium} 
-                // color="textSecondary" 
-                // marginBottom="24" 
-                // display="block"
-                >
+              <Center className={styles.notConnected} flexDirection="column">
+                <Box as="span" className={headlineMedium} color="textSecondary" marginBottom="24" display="block">
                   No items to display
                 </Box>
                 {/* <Box as="button" className={buttonMedium} onClick={toggleWalletModal}>

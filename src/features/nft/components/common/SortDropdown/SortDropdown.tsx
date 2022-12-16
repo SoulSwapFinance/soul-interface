@@ -53,37 +53,35 @@ export const SortDropdown = ({
   return (
     <Box
       ref={ref}
-      // borderRadius="12"
-      // borderBottomLeftRadius={isOpen ? '0' : undefined}
-      // borderBottomRightRadius={isOpen ? '0' : undefined}
+      borderRadius="12"
+      borderBottomLeftRadius={isOpen ? '0' : undefined}
+      borderBottomRightRadius={isOpen ? '0' : undefined}
       style={{ width }}
     >
       <Box
         as="button"
-        // fontSize="14"
-        // borderRadius="12"
-        // borderStyle={isOpen && !mini ? 'solid' : 'none'}
-        // background={mini ? 'none' : 'backgroundInteractive'}
-        // borderColor="backgroundOutline"
-        // borderWidth="1px"
-        // borderBottomLeftRadius={isOpen ? '0' : undefined}
-        // borderBottomRightRadius={isOpen ? '0' : undefined}
-        // padding={inFilters ? '12' : mini ? '0' : '8'}
-        // color="textPrimary"
-        // whiteSpace="nowrap"
-        // display="flex"
-        // justifyContent="space-between"
-        // alignItems="center"
-        // width={inFilters ? 'full' : 'inherit'}
-        // onClick={toggleOpen}
-        // cursor="pointer"
+        fontSize="14"
+        borderRadius="12"
+        borderStyle={isOpen && !mini ? 'solid' : 'none'}
+        background={mini ? 'none' : 'backgroundInteractive'}
+        borderColor="backgroundOutline"
+        borderWidth="1px"
+        borderBottomLeftRadius={isOpen ? '0' : undefined}
+        borderBottomRightRadius={isOpen ? '0' : undefined}
+        padding={inFilters ? '12' : mini ? '0' : '8'}
+        color="textPrimary"
+        whiteSpace="nowrap"
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        width={inFilters ? 'full' : 'inherit'}
+        onClick={toggleOpen}
+        cursor="pointer"
         className={isCollectionStatsLoading ? styles.isLoadingDropdown : clsx(isOpen && !mini && styles.activeDropdown)}
       >
         {!isCollectionStatsLoading && (
           <>
-            <Box 
-            // display="flex" alignItems="center" color="textPrimary"
-            >
+            <Box display="flex" alignItems="center" color="textPrimary">
               {!isOpen && reversable && (
                 <Row
                   onClick={(e) => {
@@ -111,16 +109,16 @@ export const SortDropdown = ({
               )}
 
               <Box
-                // marginLeft={reversable ? '4' : '0'}
-                // marginRight={mini ? '2' : '0'}
-                // color="textPrimary"
+                marginLeft={reversable ? '4' : '0'}
+                marginRight={mini ? '2' : '0'}
+                color="textPrimary"
                 className={buttonTextMedium}
               >
                 {mini ? miniPrompt : isOpen ? 'Sort by' : dropDownOptions[selectedIndex].displayText}
               </Box>
             </Box>
             <ChevronUpIcon
-              // secondaryColor={mini ? themeVars.colors.textPrimary : undefined}
+              secondaryColor={mini ? themeVars.colors.textPrimary : undefined}
               secondaryWidth={mini ? '20' : undefined}
               secondaryHeight={mini ? '20' : undefined}
               style={{
@@ -131,29 +129,29 @@ export const SortDropdown = ({
         )}
       </Box>
       <Box
-        // position="absolute"
-        // zIndex="3"
-        // width={inFilters ? 'auto' : 'inherit'}
-        // right={inFilters ? '16' : 'auto'}
-        // paddingBottom="8"
-        // fontSize="14"
-        // background="backgroundModule"
-        // borderStyle="solid"
-        // borderColor="backgroundOutline"
-        // borderWidth="1px"
-        // borderRadius="8"
-        // borderTopLeftRadius={mini ? undefined : '0'}
-        // borderTopRightRadius={mini ? undefined : '0'}
-        // overflowY="hidden"
-        // transition="250"
-        // display={isOpen || !maxWidth ? 'block' : 'none'}
-        // visibility={maxWidth ? 'visible' : 'hidden'}
-        // marginTop={mini ? '12' : '0'}
-        // className={clsx(!mini && styles.activeDropDownItems)}
-        // style={{
-        //   top: top ? `${top}px` : 'inherit',
-        //   left: inFilters ? '16px' : left ? `${left}px` : 'inherit',
-        // }}
+        position="absolute"
+        zIndex="3"
+        width={inFilters ? 'auto' : 'inherit'}
+        right={inFilters ? '16' : 'auto'}
+        paddingBottom="8"
+        fontSize="14"
+        background="backgroundModule"
+        borderStyle="solid"
+        borderColor="backgroundOutline"
+        borderWidth="1px"
+        borderRadius="8"
+        borderTopLeftRadius={mini ? undefined : '0'}
+        borderTopRightRadius={mini ? undefined : '0'}
+        overflowY="hidden"
+        transition="250"
+        display={isOpen || !maxWidth ? 'block' : 'none'}
+        visibility={maxWidth ? 'visible' : 'hidden'}
+        marginTop={mini ? '12' : '0'}
+        className={clsx(!mini && styles.activeDropDownItems)}
+        style={{
+          top: top ? `${top}px` : 'inherit',
+          left: inFilters ? '16px' : left ? `${left}px` : 'inherit',
+        }}
       >
         {!maxWidth
           ? [
@@ -199,27 +197,24 @@ const DropDownItem = ({
   return (
     <Box
       as="button"
-      // border="none"
-      // key={index}
-      // display="flex"
-      // alignItems="center"
-      // paddingTop="10"
-      // paddingBottom="10"
-      // paddingLeft="12"
-      // paddingRight={mini ? '20' : '0'}
-      // width="full"
-      // background={{
-      //   default: 'backgroundModule',
-      //   hover: 'backgroundInteractive',
-      // }}
-      // color="textPrimary"
+      border="none"
+      key={index}
+      display="flex"
+      alignItems="center"
+      paddingTop="10"
+      paddingBottom="10"
+      paddingLeft="12"
+      paddingRight={mini ? '20' : '0'}
+      width="full"
+      background={{
+        default: 'backgroundModule',
+        hover: 'backgroundInteractive',
+      }}
+      color="textPrimary"
       onClick={onClick}
-      // cursor="pointer"
+      cursor="pointer"
     >
-      <Box 
-      // marginLeft="8" 
-      className={buttonTextMedium}
-      >
+      <Box marginLeft="8" className={buttonTextMedium}>
         {option.displayText}
       </Box>
     </Box>
@@ -246,9 +241,7 @@ const LargestItem = ({
   })
 
   return (
-    <Box key={index} 
-    // position="absolute" ref={maxWidthRef}
-    >
+    <Box key={index} position="absolute" ref={maxWidthRef}>
       <DropDownItem option={option} index={index} />
     </Box>
   )

@@ -14,26 +14,24 @@ export const Checkbox: React.FC<CheckboxProps> = ({ hovered, children, ...props 
   return (
     <Box
       as="label"
-      // display="flex"
-      // alignItems="center"
-      // position="relative"
-      // overflow="hidden"
-      // cursor="pointer"
-      // lineHeight="1"
+      display="flex"
+      alignItems="center"
+      position="relative"
+      overflow="hidden"
+      cursor="pointer"
+      lineHeight="1"
     >
       {children}
       <Box
         as="span"
-        // borderColor={props.checked || hovered ? 'accentAction' : 'gray400'}
+        borderColor={props.checked || hovered ? 'accentAction' : 'gray400'}
         className={styles.checkbox}
-        // background={props.checked ? 'accentAction' : undefined}
+        background={props.checked ? 'accentAction' : undefined}
         // This element is purely decorative so
         // we hide it for screen readers
         aria-hidden="true"
       />
-      <input {...props} 
-      // className={styles.input} type="checkbox" 
-      />
+      <input {...props} className={styles.input} type="checkbox" />
       <ApprovedCheckmarkIcon className={clsx(styles.checkMark, props.checked && styles.checkMarkActive)} />
     </Box>
   )

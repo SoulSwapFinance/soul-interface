@@ -3,12 +3,11 @@ import { subheadSmall } from 'features/nft/css/common.css'
 
 import { sprinkles, themeVars, vars } from '../../../css/sprinkles.css'
 
-export const section = style(
-  // sprinkles(
-  [{
-    // paddingLeft: { sm: '16', lg: '0' },
-    // paddingRight: { sm: '16', lg: '0' },
-  },
+export const section = style([
+  sprinkles({
+    paddingLeft: { sm: '16', lg: '0' },
+    paddingRight: { sm: '16', lg: '0' },
+  }),
   { maxWidth: '1000px', margin: '0 auto' },
 ])
 
@@ -20,7 +19,7 @@ export const subRowHover = style([
   subheadSmall,
   {
     ':hover': {
-      // background: themeVars.colors.backgroundInteractive,
+      background: themeVars.colors.backgroundInteractive,
     },
   },
 ])

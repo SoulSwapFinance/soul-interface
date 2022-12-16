@@ -4,20 +4,18 @@ import { loadingAsset } from 'features/nft/css/loading.css'
 import { sprinkles } from '../../css/sprinkles.css'
 
 export const collectionAssetLoading = style([
-  // sprinkles(
-    {
+  sprinkles({
     borderRadius: '12',
     paddingBottom: '12',
     backgroundColor: 'backgroundSurface',
-  },
+  }),
 ])
 
 export const collectionAssetsImageLoading = style([
   loadingAsset,
-  // sprinkles(
-    {
+  sprinkles({
     position: 'absolute',
     height: 'full',
     width: 'full',
-  },
+  }),
 ])

@@ -35,15 +35,9 @@ export const HeaderRow = () => {
     <Box className={styles.headerRow}>
       <Box>{ColumnHeaders.Item}</Box>
       <Box>{ColumnHeaders.Event}</Box>
-      <Box 
-      // display={{ sm: 'none', md: 'block' }}
-      >{ColumnHeaders.Price}</Box>
-      <Box 
-      // display={{ sm: 'none', xl: 'block' }}
-      >{ColumnHeaders.By}</Box>
-      <Box 
-      // display={{ sm: 'none', xxl: 'block' }}
-      >{ColumnHeaders.To}</Box>
+      <Box display={{ sm: 'none', md: 'block' }}>{ColumnHeaders.Price}</Box>
+      <Box display={{ sm: 'none', xl: 'block' }}>{ColumnHeaders.By}</Box>
+      <Box display={{ sm: 'none', xxl: 'block' }}>{ColumnHeaders.To}</Box>
     </Box>
   )
 }
@@ -136,10 +130,7 @@ export const Activity = ({ contractAddress, rarityVerified, collectionName, chai
       return (
         <FilterBox
           className={styles.filter}
-          backgroundColor={isActive ? activeBackgroundColor :
-            vars.color.gray200
-            //  themeVars.colors.backgroundInteractive
-            }
+          backgroundColor={isActive ? activeBackgroundColor : themeVars.colors.backgroundInteractive}
           onClick={() => filtersDispatch({ eventType })}
         >
           {eventType.charAt(0) + eventType.slice(1).toLowerCase() + 's'}
@@ -150,21 +141,15 @@ export const Activity = ({ contractAddress, rarityVerified, collectionName, chai
   )
 
   return (
-    <Box 
-    // marginLeft={{ sm: '16', md: '48' }}
-    >
-      <Row 
-      // gap="8" paddingTop={{ sm: '0', md: '16' }}
-      >
+    <Box marginLeft={{ sm: '16', md: '48' }}>
+      <Row gap="8" paddingTop={{ sm: '0', md: '16' }}>
         <Filter eventType={ActivityEventType.Listing} />
         <Filter eventType={ActivityEventType.Sale} />
         <Filter eventType={ActivityEventType.Transfer} />
       </Row>
       {isLoading && <ActivityLoader />}
       {events && (
-        <Column 
-        // marginTop="36"
-        >
+        <Column marginTop="36">
           <HeaderRow />
           <InfiniteScroll
             next={fetchNextPage}

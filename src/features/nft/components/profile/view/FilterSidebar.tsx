@@ -58,18 +58,12 @@ const MobileMenuHeader = styled(Row)`
 
 const LoadingCollectionItem = ({ style }: { style?: CSSProperties }) => {
   return (
-    <Row 
-    // display="flex" justifyContent="space-between" style={style} paddingLeft="12" paddingRight="16"
-    >
-      <Row 
-      // display="flex" flex="1"
-      >
+    <Row display="flex" justifyContent="space-between" style={style} paddingLeft="12" paddingRight="16">
+      <Row display="flex" flex="1">
         <SmallLoadingBubble />
         <LongLoadingBubble />
       </Row>
-      <Box as="span" 
-      // borderColor="backgroundOutline" className={checkbox} aria-hidden="true" 
-      />
+      <Box as="span" borderColor="backgroundOutline" className={checkbox} aria-hidden="true" />
     </Row>
   )
 }
@@ -127,10 +121,10 @@ export const FilterSidebar = ({
       background="backgroundBackdrop"
     >
       <Box
-        // paddingTop={{ sm: '24', md: '0' }}
-        // paddingLeft={{ sm: '16', md: '0' }}
-        // paddingRight="16"
-        // width={{ sm: 'full', md: '332', lg: '332' }}
+        paddingTop={{ sm: '24', md: '0' }}
+        paddingLeft={{ sm: '16', md: '0' }}
+        paddingRight="16"
+        width={{ sm: 'full', md: '332', lg: '332' }}
       >
         {isMobile && (
           <MobileMenuHeader>
@@ -138,7 +132,7 @@ export const FilterSidebar = ({
             <XMarkIcon
               height={28}
               width={28}
-              // fill={themeVars.colors.textPrimary}
+              fill={themeVars.colors.textPrimary}
               onClick={() => setFiltersExpanded(false)}
             />
           </MobileMenuHeader>
@@ -228,17 +222,11 @@ const CollectionSelect = ({
 
   return (
     <>
-      <Box className={subhead} 
-      // marginTop="12" marginBottom="16" width="276"
-      >
+      <Box className={subhead} marginTop="12" marginBottom="16" width="276">
         Collections
       </Box>
-      <Box 
-      // paddingBottom="12" borderRadius="8"
-      >
-        <Column as="ul" 
-        // paddingLeft="0" gap="10" style={{ maxHeight: '80vh' }}
-        >
+      <Box paddingBottom="12" borderRadius="8">
+        <Column as="ul" paddingLeft="0" gap="10" style={{ maxHeight: '80vh' }}>
           {!hideSearch && (
             <CollectionFilterSearch
               collectionSearchText={collectionSearchText}
@@ -288,11 +276,11 @@ const CollectionFilterSearch = ({
   return (
     <Input
       placeholder="Search"
-      // marginTop="8"
-      // marginBottom="8"
-      // autoComplete="off"
-      // position="static"
-      // width="full"
+      marginTop="8"
+      marginBottom="8"
+      autoComplete="off"
+      position="static"
+      width="full"
       value={collectionSearchText}
       onChange={(e: FormEvent<HTMLInputElement>) => setCollectionSearchText(e.currentTarget.value)}
     />
@@ -326,39 +314,36 @@ const CollectionItem = ({
   }
   return (
     <Row
-      // maxWidth="full"
-      // overflowX="hidden"
-      // overflowY="hidden"
-      // fontWeight="normal"
-      // className={styles.subRowHover}
-      // justifyContent="space-between"
-      // cursor="pointer"
-      // paddingLeft="12"
-      // paddingRight="16"
-      // borderRadius="12"
+      maxWidth="full"
+      overflowX="hidden"
+      overflowY="hidden"
+      fontWeight="normal"
+      className={styles.subRowHover}
+      justifyContent="space-between"
+      cursor="pointer"
+      paddingLeft="12"
+      paddingRight="16"
+      borderRadius="12"
       style={{
         paddingBottom: '22px',
         paddingTop: '22px',
         ...style,
       }}
-      // maxHeight={`${COLLECTION_ROW_HEIGHT}`}
+      maxHeight={`${COLLECTION_ROW_HEIGHT}`}
       as="li"
       onMouseEnter={toggleHovered}
       onMouseLeave={toggleHovered}
       onClick={handleCheckbox}
     >
       <Row>
-        <Box as="img" 
-        // borderRadius="round" width="20" height="20" 
-        src={collection.image} 
-        />
+        <Box as="img" borderRadius="round" width="20" height="20" src={collection.image} />
         <Box
           as="span"
-          // whiteSpace="nowrap"
-          // textOverflow="ellipsis"
-          // overflow="hidden"
-          // paddingLeft="12"
-          // paddingRight="14"
+          whiteSpace="nowrap"
+          textOverflow="ellipsis"
+          overflow="hidden"
+          paddingLeft="12"
+          paddingRight="14"
           style={{ minHeight: 15, maxWidth: '180px' }}
         >
           {collection.name}{' '}
@@ -366,9 +351,7 @@ const CollectionItem = ({
       </Row>
 
       <Checkbox checked={isChecked(collection.address)} hovered={hovered} onChange={handleCheckbox}>
-        <Box as="span" 
-        // color="textTertiary" marginRight="12" marginLeft="auto"
-        >
+        <Box as="span" color="textTertiary" marginRight="12" marginLeft="auto">
           {collection.count}
         </Box>
       </Checkbox>

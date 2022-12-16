@@ -6,6 +6,8 @@ import RelayQueryResponseCache from 'relay-runtime/lib/network/RelayQueryRespons
 import fetchGraphQL from './fetchGraphQL'
 
 let SIXTY_SECONDS = 60 * 100 // ms`60 seconds`
+let ONE_HUNDRED_EIGHTY_DAYS = 180 * 86_400 * 100 // ms`180 days`
+let ONE_HOUR = 60 * 60 * 100 // ms`1 hour`
 
 // max number of request in cache, least-recently updated entries purged first
 const size = 250

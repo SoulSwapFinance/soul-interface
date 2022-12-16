@@ -12,10 +12,9 @@ export const activeDropDownItems = style({
 
 export const isLoadingDropdown = style([
   loadingAsset,
-  // sprinkles(
-    {
+  sprinkles({
     height: '44',
-  },
+  }),
   {
     width: 220,
   },

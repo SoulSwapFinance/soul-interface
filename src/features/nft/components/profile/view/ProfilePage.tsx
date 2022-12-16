@@ -110,9 +110,7 @@ export const ProfilePage = () => {
     <ProfilePageColumn width="full" paddingTop={{ sm: `${PADDING}`, md: '40' }}>
       <>
         <ProfileHeader>My NFTs</ProfileHeader>
-        <Row 
-        // alignItems="flex-start" position="relative"
-        >
+        <Row alignItems="flex-start" position="relative">
           <FilterSidebar
             fetchNextPage={fetchNextPage}
             hasNextPage={hasNextPage}
@@ -132,45 +130,45 @@ export const ProfilePage = () => {
       </>
       {sellAssets.length > 0 && (
         <Row
-          // display={{ sm: 'flex', md: 'none' }}
-          // position="fixed"
-          // left="16"
-          // height="56"
-          // borderRadius="12"
-          // paddingX="16"
-          // paddingY="12"
-          // background="backgroundModule"
-          // borderStyle="solid"
-          // borderColor="backgroundOutline"
-          // borderWidth="1px"
+          display={{ sm: 'flex', md: 'none' }}
+          position="fixed"
+          left="16"
+          height="56"
+          borderRadius="12"
+          paddingX="16"
+          paddingY="12"
+          background="backgroundModule"
+          borderStyle="solid"
+          borderColor="backgroundOutline"
+          borderWidth="1px"
           style={{ bottom: '68px', width: 'calc(100% - 32px)', lineHeight: '24px' }}
           className={subhead}
         >
           {sellAssets.length} NFT{sellAssets.length === 1 ? '' : 's'}
           <Box
-            // fontWeight="semibold"
-            // fontSize="14"
-            // cursor="pointer"
-            // color="textSecondary"
-            // marginRight="20"
-            // marginLeft="auto"
+            fontWeight="semibold"
+            fontSize="14"
+            cursor="pointer"
+            color="textSecondary"
+            marginRight="20"
+            marginLeft="auto"
             onClick={resetSellAssets}
-            // lineHeight="16"
+            lineHeight="16"
           >
             Clear
           </Box>
           <Box
-            // color="white"
-            // marginRight="0"
-            // fontWeight="medium"
-            // fontSize="14"
-            // cursor="pointer"
-            // backgroundColor="accentAction"
+            color="white"
+            marginRight="0"
+            fontWeight="medium"
+            fontSize="14"
+            cursor="pointer"
+            backgroundColor="accentAction"
             onClick={toggleBag}
-            // lineHeight="16"
-            // borderRadius="12"
-            // paddingY="8"
-            // paddingX="28"
+            lineHeight="16"
+            borderRadius="12"
+            paddingY="8"
+            paddingX="28"
           >
             List for sale
           </Box>
@@ -215,9 +213,7 @@ const ProfilePageNfts = ({
   })
 
   return (
-    <Column 
-    // width="full"
-    >
+    <Column width="full">
       {ownerAssets?.length === 0 ? (
         <EmptyWalletContent />
       ) : (
@@ -232,9 +228,7 @@ const ProfilePageNfts = ({
           }}
           paddingY="20"
         >
-          <Row 
-          // gap="8" flexWrap="nowrap" justifyContent="space-between"
-          >
+          <Row gap="8" flexWrap="nowrap" justifyContent="space-between">
             <FilterButton
               isMobile={isMobile}
               isFiltersExpanded={isFiltersExpanded}
@@ -294,9 +288,7 @@ const CollectionFiltersRow = ({
   }
   const handleClearAllClick = useCallback(() => clearCollectionFilters(), [clearCollectionFilters])
   return (
-    <Row 
-    // paddingY="18" gap="8" flexWrap="wrap"
-    >
+    <Row paddingY="18" gap="8" flexWrap="wrap">
       {Boolean(collectionFilters?.length) &&
         collectionFilters.map((collectionAddress, index) => (
           <CollectionFilterItem
@@ -320,33 +312,28 @@ const CollectionFilterItem = ({
   if (!collection) return null
   return (
     <Row
-      // justifyContent="center"
-      // paddingTop="6"
-      // paddingRight="6"
-      // paddingBottom="6"
-      // paddingLeft="12"
-      // borderRadius="8"
-      // background="backgroundOutline"
-      // fontSize="14"
+      justifyContent="center"
+      paddingTop="6"
+      paddingRight="6"
+      paddingBottom="6"
+      paddingLeft="12"
+      borderRadius="8"
+      background="backgroundOutline"
+      fontSize="14"
     >
-      <Box as="img" 
-      // borderRadius="round" width="20" height="20" 
-      src={collection.image} 
-      />
-      <Box 
-      // marginLeft="6" 
-      className={styles.collectionFilterBubbleText}>
+      <Box as="img" borderRadius="round" width="20" height="20" src={collection.image} />
+      <Box marginLeft="6" className={styles.collectionFilterBubbleText}>
         {collection?.name}
       </Box>
       <Box
-        // color="textSecondary"
-        // background="none"
-        // height="28"
-        // width="28"
-        // padding="0"
-        // as="button"
-        // border="none"
-        // cursor="pointer"
+        color="textSecondary"
+        background="none"
+        height="28"
+        width="28"
+        padding="0"
+        as="button"
+        border="none"
+        cursor="pointer"
         onClick={() => setCollectionFilters(collection.address)}
       >
         <CrossIcon />
