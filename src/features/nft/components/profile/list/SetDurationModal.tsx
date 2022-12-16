@@ -1,4 +1,4 @@
-// import ms from 'ms.macro'
+import ms from 'ms.macro'
 import { SortDropdown } from 'features/nft/components/common/SortDropdown'
 import { Column, Row } from 'features/nft/components/Flex'
 import { NumericInput } from 'features/nft/components/layout/Input'
@@ -11,9 +11,6 @@ import { AlertTriangle } from 'react-feather'
 import styled from 'styled-components/macro'
 import { ThemedText } from 'theme/components/text'
 
-let SIXTY_SECONDS = 60 * 100 // ms`60 seconds`
-let ONE_HUNDRED_EIGHTY_DAYS = 180 * 86_400 * 100 // ms`180 days`
-let ONE_HOUR = 60 * 60 * 100 // ms`1 hour`
 const ModalWrapper = styled(Column)`
   gap: 4px;
   position: relative;
@@ -103,8 +100,8 @@ export const SetDurationModal = () => {
   )
   useEffect(() => {
     const expiration = convertDurationToExpiration(amount, duration)
-    if (expiration * 1000 - Date.now() < SIXTY_SECONDS) setErrorState(ErrorState.empty)
-    else if (expiration * 1000 - Date.now() > ONE_HUNDRED_EIGHTY_DAYS) setErrorState(ErrorState.overMax)
+    if (expiration * 1000 - Date.now() < ms`60 seconds`) setErrorState(ErrorState.empty)
+    else if (expiration * 1000 - Date.now() > ms`180 days`) setErrorState(ErrorState.overMax)
     else setErrorState(ErrorState.valid)
     setGlobalExpiration(expiration)
   }, [amount, duration, setGlobalExpiration])
@@ -159,5 +156,5 @@ const convertDurationToExpiration = (amount: number, duration: Duration) => {
         return 24 * 30
     }
   }
-  return Math.round((Date.now() + ONE_HOUR * durationFactor() * amount) / 1000)
+  return Math.round((Date.now() + ms`1 hour` * durationFactor() * amount) / 1000)
 }

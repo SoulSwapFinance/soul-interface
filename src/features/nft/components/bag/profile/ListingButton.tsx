@@ -1,5 +1,5 @@
 import { useOnClickOutside } from 'hooks/useOnClickOutside'
-// import ms from 'ms.macro'
+import ms from 'ms.macro'
 import { Box } from 'features/nft/components/Box'
 import { Row } from 'features/nft/components/Flex'
 import { ArrowRightIcon, HazardIcon, LoadingIcon, XMarkIcon } from 'features/nft/components/icons'
@@ -54,15 +54,13 @@ export const ListingButton = ({ onClick, buttonText, showWarningOverride = false
   ] = useMemo(() => {
     const noMarketplacesSelected = sellAssets.some((asset: WalletAsset) => asset.marketplaces === undefined)
     const missingExpiration = sellAssets.some((asset) => {
-      // return asset.expirationTime != null && asset.expirationTime * 1000 - Date.now() < ms`60 seconds`
-      return asset.expirationTime != null && asset.expirationTime * 1000 - Date.now() < 60 * 100
+      return asset.expirationTime != null && asset.expirationTime * 1000 - Date.now() < ms`60 seconds`
     })
     const invalidExpiration = sellAssets.some((asset) => {
       return asset.expirationTime != null && isNaN(asset.expirationTime)
     })
     const overMaxExpiration = sellAssets.some((asset) => {
-      // return asset.expirationTime != null && asset.expirationTime - Date.now() > ms`180 days`
-      return asset.expirationTime != null && asset.expirationTime - Date.now() > 180 * 86_400 * 100
+      return asset.expirationTime != null && asset.expirationTime - Date.now() > ms`180 days`
     })
     const listingsMissingPrice: [WalletAsset, Listing][] = []
     const listingsBelowFloor: [WalletAsset, Listing][] = []

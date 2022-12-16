@@ -1,8 +1,4 @@
-// import ms from 'ms.macro'
-
-let SIXTY_SECONDS = 60 * 100 // ms`60 seconds`
-let ONE_HUNDRED_EIGHTY_DAYS = 180 * 86_400 * 100 // ms`180 days`
-let ONE_HOUR = 60 * 60 * 100 // ms`1 hour`
+import ms from 'ms.macro'
 
 export async function PostOpenSeaSellOrder(payload?: Record<string, unknown>): Promise<boolean> {
   const body = payload ? JSON.stringify(payload) : undefined
@@ -16,7 +12,7 @@ export async function PostOpenSeaSellOrder(payload?: Record<string, unknown>): P
     body,
     signal: ac.signal,
   })
-  const timeout = setTimeout(() => ac.abort(), SIXTY_SECONDS)
+  const timeout = setTimeout(() => ac.abort(), ms`60s`)
   try {
     const res = await fetch(req)
     const data = await res.json()

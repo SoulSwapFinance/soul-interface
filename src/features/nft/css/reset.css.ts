@@ -1,4 +1,4 @@
-import '@zag-js/focus-visible'
+import 'focus-visible'
 
 import { style } from '@vanilla-extract/css'
 
