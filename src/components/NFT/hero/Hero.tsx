@@ -15,9 +15,9 @@ import HeroStats from 'components/NFT/hero/HeroStats'
 import Sweep from '../Sweep'
 import ReactMarkdown from 'react-markdown'
 import { useActiveWeb3React } from 'services/web3'
-import Image from 'next/image'
 
 const envBannerImage = process.env.NEXT_PUBLIC_BANNER_IMAGE
+const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID
 const OPENSEA_API_KEY = process.env.NEXT_PUBLIC_OPENSEA_API_KEY
 const ENV_COLLECTION_DESCRIPTIONS =
   process.env.NEXT_PUBLIC_COLLECTION_DESCRIPTIONS
@@ -38,9 +38,7 @@ type CollectionModalProps = ComponentProps<typeof CollectionOfferModal>
 type AttibuteModalProps = ComponentProps<typeof AttributeOfferModal>
 
 const Hero: FC<Props> = ({ fallback, collectionId }) => {
-  const { chainId, library } = useActiveWeb3React()
-  const CHAIN_ID = chainId
-
+  const { library } = useActiveWeb3React()
   const signer = library.getSigner()
   const collection = useCollection(fallback.collection, collectionId)
   const router = useRouter()
@@ -175,14 +173,12 @@ const Hero: FC<Props> = ({ fallback, collectionId }) => {
     {/* @ts-ignore */}
       <HeroBackground banner={header.banner}>
         <div className="z-10 flex w-full flex-col items-center gap-6">
-          <Image
-          height={20}
-          width={20}
+          <img
             className="h-20 w-20 rounded-full"
             alt={`${header.name} Logo`}
             src={header.image}
           />
-          <h1 className="soulswap-h4 text-center text-black dark:text-white">
+          <h1 className="enjoyooor-h4 text-center text-black dark:text-white">
             {header.name}
           </h1>
           <HeroSocialLinks collection={collection?.data?.collection} />

@@ -2,7 +2,7 @@ import { paths } from 'nfnt-client-sdk/dist/types/api'
 import setParams from '../params'
 import { Dispatch } from 'react'
 
-const PROXY_API_BASE = '/api/reservoir'
+const PROXY_API_BASE = process.env.NEXT_PUBLIC_PROXY_API_BASE
 
 export async function getDetails(
   contract: string | undefined,

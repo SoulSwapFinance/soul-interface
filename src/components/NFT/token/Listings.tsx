@@ -7,7 +7,6 @@ import { DateTime } from 'luxon'
 import Link from 'next/link'
 import { FC } from 'react'
 import Card from './Card'
-import Image from 'next/image'
 
 type Props = {
   asks: ReturnType<typeof useAsks>
@@ -22,7 +21,7 @@ const Listings: FC<Props> = ({ asks }) => {
     <div className="col-span-full md:col-span-4 lg:col-span-5 lg:col-start-2">
       {/* @ts-ignore */}
       <Card>
-        <div className="soulswap-h5 mb-4 font-headings dark:bg-black dark:text-white ">
+        <div className="enjoyooor-h5 mb-4 font-headings dark:bg-black dark:text-white ">
           Listings
         </div>
         <div className="max-h-96 overflow-auto rounded-2xl">
@@ -50,7 +49,7 @@ const Listings: FC<Props> = ({ asks }) => {
                     className="group h-[80px] bg-white even:bg-gray-50 dark:bg-black dark:text-white  dark:even:bg-neutral-900"
                   >
                     {/* UNIT PRICE */}
-                    <td className="soulswap-h6 whitespace-nowrap px-6 py-4 font-headings dark:text-white">
+                    <td className="enjoyooor-h6 whitespace-nowrap px-6 py-4 font-headings dark:text-white">
                       <FormatEth amount={unitPrice} />
                     </td>
 
@@ -71,10 +70,7 @@ const Listings: FC<Props> = ({ asks }) => {
                             href={source?.url}
                           >
                             {/* @ts-ignore */}
-                            <Image 
-                            height={24}
-                            width={24}
-                            src={source?.logo} alt="" />
+                            <img src={source?.logo} alt="" />
                           </a>
                           <Link href={from.href}>
                             <a className="reservoir-subtitle text-primary-700 dark:text-primary-100">

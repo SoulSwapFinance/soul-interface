@@ -6,13 +6,12 @@ import { ArrowRightIcon, HazardIcon, LoadingIcon, XMarkIcon } from 'features/nft
 import { bodySmall } from 'features/nft/css/common.css'
 import { themeVars } from 'features/nft/css/sprinkles.css'
 import { useNFTList, useSellAsset } from 'features/nft/hooks'
-// import { Listing, ListingStatus, WalletAsset } from 'features/nft/types'
+import { Listing, ListingStatus, WalletAsset } from 'features/nft/types'
 import { pluralize } from 'features/nft/utils/roundAndPluralize'
 import { useEffect, useMemo, useRef, useState } from 'react'
 
 import * as styles from './ListingModal.css'
 import { getListings } from './utils'
-import { Listing, ListingStatus, WalletAsset } from 'features/nft/types/sell'
 
 interface ListingButtonProps {
   onClick: () => void

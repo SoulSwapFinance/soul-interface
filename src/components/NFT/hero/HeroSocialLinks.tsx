@@ -52,8 +52,6 @@ const HeroSocialLinks: FC<Props> = ({ collection }) => {
                   href={social.discordUrl}
                 >
                   <Image
-                   width={48}
-                   height={48}
                     src="/icons/Discord.svg"
                     alt="Discord Icon"
                     className="h-6 w-6"
@@ -71,8 +69,6 @@ const HeroSocialLinks: FC<Props> = ({ collection }) => {
                   href={`https://twitter.com/${social.twitterUsername}`}
                 >
                   <Image
-                  width={48}
-                  height={48}
                     src="/icons/Twitter.svg"
                     alt="Twitter Icon"
                     className="h-6 w-6"
@@ -89,8 +85,6 @@ const HeroSocialLinks: FC<Props> = ({ collection }) => {
                 href={social.etherscanUrl}
               >
                 <Image
-                 width={48}
-                 height={48}
                   src={etherscanLogo}
                   alt="Etherscan Icon"
                   className="h-6 w-6"
@@ -126,8 +120,6 @@ const HeroSocialLinks: FC<Props> = ({ collection }) => {
             href={social.discordUrl}
           >
             <Image
-             width={48}
-             height={48}
               src="/icons/Discord.svg"
               alt="Discord Icon"
               className="h-6 w-6"
@@ -145,8 +137,6 @@ const HeroSocialLinks: FC<Props> = ({ collection }) => {
               src="/icons/Twitter.svg"
               alt="Twitter Icon"
               className="h-6 w-6"
-              width={48}
-              height={48}
             />
           </a>
         )}
@@ -156,9 +146,7 @@ const HeroSocialLinks: FC<Props> = ({ collection }) => {
           rel="noopener noreferrer"
           href={social.etherscanUrl}
         >
-          <Image  width={48}
-              height={48}
-              src={etherscanLogo} alt="Etherscan Icon" className="h-6 w-6" />
+          <Image src={etherscanLogo} alt="Etherscan Icon" className="h-6 w-6" />
         </a>
         {typeof social.externalUrl === 'string' && (
           <a

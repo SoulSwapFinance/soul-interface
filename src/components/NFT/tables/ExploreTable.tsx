@@ -5,7 +5,6 @@ import { optimizeImage } from 'features/nft/lib/optimizeImage'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import FormatEth from '../format/FormatEth'
-import Image from 'next/image'
 
 const ExploreTable = ({
   mappedAttributes,
@@ -120,20 +119,20 @@ const ExploreImages = ({
     {sample_images && sample_images?.length > 0 ? (
       // SMALLER IMAGE, HAS SIDE IMAGES
       sample_images.map((image) => (
-        <Image
+        <img
           key={image}
           src={optimizeImage(image, 50)}
           alt={`${value}`}
-          width={50}
-          height={50}
+          width="50"
+          height="50"
         />
       ))
     ) : (
-      <Image
+      <img
         src="https://via.placeholder.com/50"
         alt={`${value}`}
-        width={50}
-        height={50}
+        width="50"
+        height="50"
       />
     )}
   </div>

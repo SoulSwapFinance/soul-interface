@@ -64,9 +64,7 @@ const TokensGrid: FC<Props> = ({ tokens, viewRef, collectionImage }) => {
               >
                 <a className="group relative mb-6 grid transform-gpu self-start overflow-hidden rounded-[16px] border border-[#D4D4D4] bg-white transition ease-in hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-lg hover:ease-out dark:border-0 dark:bg-neutral-800 dark:ring-1 dark:ring-neutral-600">
                   {token?.source && (
-                    <Image
-                    width={48}
-                    height={48}
+                    <img
                       className="absolute top-4 left-4 z-10 h-8 w-8"
                       src={
                         SOURCE_ID &&
@@ -92,24 +90,24 @@ const TokensGrid: FC<Props> = ({ tokens, viewRef, collectionImage }) => {
                     <div className="relative w-full">
                       <div className="absolute inset-0 grid place-items-center backdrop-blur-lg">
                         <div>
-                          <Image
+                          <img
                             src={optimizeImage(collectionImage, 250)}
                             alt={`${token?.collection?.name}`}
                             className="mx-auto mb-4 h-16 w-16 overflow-hidden rounded-full border-2 border-white"
-                            width={64}
-                            height={64}
+                            width="64"
+                            height="64"
                           />
-                          <div className="soulswap-h6 text-white">
+                          <div className="enjoyooor-h6 text-white">
                             No Content Available
                           </div>
                         </div>
                       </div>
-                      <Image
+                      <img
                         src={optimizeImage(collectionImage, 250)}
                         alt={`${token?.collection?.name}`}
                         className="aspect-square w-full object-cover"
-                        width={250}
-                        height={250}
+                        width="250"
+                        height="250"
                       />
                     </div>
                   )}
@@ -125,7 +123,7 @@ const TokensGrid: FC<Props> = ({ tokens, viewRef, collectionImage }) => {
                       <div className="reservoir-subtitle text-xs text-gray-400">
                         Price
                       </div>
-                      <div className="soulswap-h6 dark:text-white">
+                      <div className="enjoyooor-h6 dark:text-white">
                         <FormatEth
                           amount={token?.floorAskPrice}
                           logoWidth={7}
@@ -136,7 +134,7 @@ const TokensGrid: FC<Props> = ({ tokens, viewRef, collectionImage }) => {
                       <div className="reservoir-subtitle text-xs text-gray-400">
                         Offer
                       </div>
-                      <div className="soulswap-h6 dark:text-white">
+                      <div className="enjoyooor-h6 dark:text-white">
                         <FormatWEth amount={token?.topBidValue} logoWidth={7} />
                       </div>
                     </div>

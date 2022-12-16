@@ -14,13 +14,13 @@ import {
   ActivityEvent,
   ActivityEventType,
   ActivityEventTypeDisplay,
-  // BagItem,
-  // GenieAsset,
-  // Markets,
+  BagItem,
+  GenieAsset,
+  Markets,
   OrderStatus,
   TokenMetadata,
   TokenRarity,
-} from 'features/nft/types/collection'
+} from 'features/nft/types'
 import { buildActivityAsset } from 'features/nft/utils/buildActivityAsset'
 import { formatEthPrice } from 'features/nft/utils/currency'
 import { getTimeDifference, isValidDate } from 'features/nft/utils/date'
@@ -35,8 +35,6 @@ import * as styles from './Activity.css'
 import { getExplorerLink } from 'functions/explorer'
 import { shortenAddress } from 'functions/format'
 import Image from 'next/image'
-import { GenieAsset, Markets } from 'features/nft/types/common'
-import { BagItem } from 'features/nft/types/checkout'
 
 const AddressLink = styled(ExternalLink)`
   color: ${({ theme }) => theme.textPrimary};

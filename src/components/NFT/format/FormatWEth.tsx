@@ -19,8 +19,6 @@ const FormatWEth: FC<Props> = ({
       maximumFractionDigits={maximumFractionDigits}
     >
       <Image
-       width={48}
-       height={48}
         src="/weth.svg"
         alt="WETH logo"
         style={{ width: `${logoWidth}px` }}

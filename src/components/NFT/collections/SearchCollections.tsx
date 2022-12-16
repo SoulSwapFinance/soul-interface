@@ -16,7 +16,7 @@ type Props = {
   initialResults?: SearchCollectionsAPISuccessResponse
 }
 
-const PROXY_API_BASE = '/api/reservoir'
+const PROXY_API_BASE = process.env.NEXT_PUBLIC_PROXY_API_BASE
 
 const SearchCollections: FC<Props> = ({ communityId, initialResults }) => {
   const router = useRouter()
@@ -157,8 +157,6 @@ const SearchCollections: FC<Props> = ({ communityId, initialResults }) => {
                             'https://via.placeholder.com/30'
                           }
                           alt={`${collection?.name}'s logo.`}
-                          width={48}
-                          height={48}
                           className="h-9 w-9 overflow-hidden rounded-full"
                         />
                         <span className="reservoir-subtitle ml-2 dark:text-white">
@@ -204,8 +202,6 @@ const SearchCollections: FC<Props> = ({ communityId, initialResults }) => {
                     }`}
                   >
                     <Image
-                     width={48}
-                     height={48}
                       src={
                         collection?.image ?? 'https://via.placeholder.com/30'
                       }

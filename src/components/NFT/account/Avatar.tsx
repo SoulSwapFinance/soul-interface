@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
-import Image from 'next/image'
 
 type Props = {
   address: string | undefined
@@ -17,9 +16,7 @@ const Avatar: FC<Props> = ({ address, avatar, size = 24 }) => {
         width: size,
       }}
     >
-      <Image
-      height={32}
-      width={32}
+      <img
         className="object-fit h-full w-full"
         src={avatar}
         alt={'ENS Avatar'}

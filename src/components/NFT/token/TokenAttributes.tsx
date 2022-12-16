@@ -6,7 +6,7 @@ import {
   Collection,
   TokenDetails,
   TokenDetailsAttribute,
-} from 'features/nft/NftTypes'
+} from 'features/nft/types'
 import { formatNumber } from 'features/nft/lib/numbers'
 
 type Props = {
@@ -20,7 +20,7 @@ const TokenAttributes: FC<Props> = ({ token, collection }: Props) => {
   return (
     <div className="col-span-full md:col-span-4 lg:col-span-5 lg:col-start-2">
       <article className="col-span-full rounded-2xl border-[1px] border-gray-300 bg-white p-6 dark:border-neutral-600 dark:bg-black">
-        <p className="soulswap-h5 mb-4 dark:text-white">Attributes</p>
+        <p className="enjoyooor-h5 mb-4 dark:text-white">Attributes</p>
         <div className="grid max-h-[440px] grid-cols-1 gap-2 overflow-y-auto lg:grid-cols-2">
           {token?.attributes
             ?.sort((a, b) => (b?.floorAskPrice || 0) - (a?.floorAskPrice || 0))
@@ -69,7 +69,7 @@ const TokenAttribute: FC<TokenAttributeProps> = ({
         </div>
         <div className="mb-1 mt-2 flex justify-between gap-1 text-sm text-black dark:text-white">
           <span
-            className="soulswap-h6 text-black dark:text-white"
+            className="enjoyooor-h6 text-black dark:text-white"
             title={attribute.value}
           >
             {attribute.value}

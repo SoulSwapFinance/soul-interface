@@ -1,7 +1,7 @@
 import type { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { LOOKSRARE_MARKETPLACE_CONTRACT, X2Y2_TRANSFER_CONTRACT } from 'features/nft/queries'
 import { OPENSEA_CROSS_CHAIN_CONDUIT } from 'features/nft/queries/openSea'
-import { AssetRow, CollectionRow, ListingMarket, ListingRow, ListingStatus, WalletAsset } from 'features/nft/types/sell'
+import { AssetRow, CollectionRow, ListingMarket, ListingRow, ListingStatus, WalletAsset } from 'features/nft/types'
 import { approveCollection, LOOKS_RARE_CREATOR_BASIS_POINTS, signListing } from 'features/nft/utils/listNfts'
 import { Dispatch } from 'react'
 

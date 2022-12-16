@@ -292,7 +292,7 @@ const ListModal: FC<Props> = ({
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="price"
-                  className="soulswap-h6 font-headings dark:text-white"
+                  className="enjoyooor-h6 font-headings dark:text-white"
                 >
                   Price (ETH)
                 </label>
@@ -318,7 +318,7 @@ const ListModal: FC<Props> = ({
                 <div className="flex items-center gap-3">
                   <label
                     htmlFor="postOpenSea"
-                    className="soulswap-h6 font-headings dark:text-white"
+                    className="enjoyooor-h6 font-headings dark:text-white"
                   >
                     Post listing to OpenSea
                   </label>
@@ -340,7 +340,7 @@ const ListModal: FC<Props> = ({
                 </div>
               )}
               <div className="flex justify-between">
-                <div className="soulswap-h6 font-headings dark:text-white">
+                <div className="enjoyooor-h6 font-headings dark:text-white">
                   Fees
                 </div>
                 <div className="reservoir-body text-right dark:text-white">
@@ -359,10 +359,10 @@ const ListModal: FC<Props> = ({
                 </div>
               </div>
               <div className="flex justify-between">
-                <div className="soulswap-h6 font-headings dark:text-white">
+                <div className="enjoyooor-h6 font-headings dark:text-white">
                   You get
                 </div>
-                <div className="soulswap-h6 font-headings dark:text-white">
+                <div className="enjoyooor-h6 font-headings dark:text-white">
                   <FormatEth amount={youGet} logoWidth={10} />
                 </div>
               </div>

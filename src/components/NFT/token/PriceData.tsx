@@ -11,8 +11,8 @@ import useDetails from 'features/nft/hooks/useDetails'
 import React, { FC, ReactNode } from 'react'
 import { setToast } from './setToast'
 import { useActiveWeb3React } from 'services/web3'
-import Image from 'next/image'
 
+const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID
 const SOURCE_ID = process.env.NEXT_PUBLIC_SOURCE_ID
 const NAVBAR_LOGO = process.env.NEXT_PUBLIC_NAVBAR_LOGO
 const SOURCE_ICON = process.env.NEXT_PUBLIC_SOURCE_ICON
@@ -25,7 +25,6 @@ type Props = {
 const PriceData: FC<Props> = ({ details, collection }) => {
   const { account, chainId, library } = useActiveWeb3React()
   const signer = library.getSigner()
-  const CHAIN_ID = chainId
 
   const token = details.data?.tokens?.[0]
 
@@ -68,7 +67,7 @@ const PriceData: FC<Props> = ({ details, collection }) => {
                   className="reservoir-body flex items-center gap-2 dark:text-white"
                 >
                   on {sourceName}
-                  <Image height={24} width={24} className="h-6 w-6" src={sourceLogo} alt="Source Logo" />
+                  <img className="h-6 w-6" src={sourceLogo} alt="Source Logo" />
                 </a>
               )
             }
@@ -180,9 +179,9 @@ const Price: FC<{ title: string; price: ReactNode; source?: ReactNode }> = ({
 }) => (
   <div className="flex flex-col space-y-5">
     <div className="flex-grow">
-      <div className="soulswap-h5 font-headings dark:text-white">{title}</div>
+      <div className="enjoyooor-h5 font-headings dark:text-white">{title}</div>
       {source}
     </div>
-    <div className="soulswap-h3 font-headings dark:text-white">{price}</div>
+    <div className="enjoyooor-h3 font-headings dark:text-white">{price}</div>
   </div>
 )

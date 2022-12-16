@@ -3,7 +3,7 @@ import fetcher from 'features/nft/lib/fetcher'
 import setParams from 'features/nft/lib/params'
 import useSWR from 'swr'
 
-const PROXY_API_BASE = '/api/reservoir'
+const PROXY_API_BASE = process.env.NEXT_PUBLIC_PROXY_API_BASE
 
 type Collection = paths['/collection/v2']['get']['responses']['200']['schema']
 

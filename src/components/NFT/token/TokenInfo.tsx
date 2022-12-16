@@ -3,9 +3,8 @@ import { truncateAddress } from 'features/nft/lib/truncateText'
 import React, { FC, useState } from 'react'
 import { FiExternalLink, FiRefreshCcw } from 'react-icons/fi'
 import { setToast } from './setToast'
-import Image from 'next/image'
 
-const PROXY_API_BASE = '/api/reservoir'
+const PROXY_API_BASE = process.env.NEXT_PUBLIC_PROXY_API_BASE
 
 type Props = {
   details: ReturnType<typeof useDetails>
@@ -69,33 +68,29 @@ const TokenInfo: FC<Props> = ({ details }) => {
   return (
     <article className="col-span-full rounded-2xl border border-gray-300 bg-white p-6 dark:border-neutral-600 dark:bg-black">
       <div className="mb-4 flex items-center justify-between">
-        <div className="soulswap-h5 font-headings dark:text-white">
+        <div className="enjoyooor-h5 font-headings dark:text-white">
           Token Info
         </div>
         <div className="flex items-center gap-2">
           <a
-            className="soulswap-h6 font-headings"
+            className="enjoyooor-h6 font-headings"
             target="_blank"
             rel="noopener noreferrer"
             href={`https://looksrare.org/collections/${token?.token?.contract}/${token?.token?.tokenId}`}
           >
-            <Image
-              height={32}
-              width={32}
+            <img
               src="/icons/LooksRare.svg"
               alt="LooksRare Icon"
               className="h-6 w-6"
-              />
+            />
           </a>
           <a
-            className="soulswap-h6 font-headings"
+            className="enjoyooor-h6 font-headings"
             target="_blank"
             rel="noopener noreferrer"
             href={`https://opensea.io/assets/${token?.token?.contract}/${token?.token?.tokenId}`}
-            >
-            <Image
-            height={32}
-            width={32}
+          >
+            <img
               src="/icons/OpenSea.svg"
               alt="OpenSea Icon"
               className="h-6 w-6"
@@ -110,7 +105,7 @@ const TokenInfo: FC<Props> = ({ details }) => {
           </div>
           <div>
             <a
-              className="soulswap-h6 flex items-center gap-2 font-headings text-primary-700 dark:text-primary-100"
+              className="enjoyooor-h6 flex items-center gap-2 font-headings text-primary-700 dark:text-primary-100"
               target="_blank"
               rel="noopener noreferrer"
               href={`https://etherscan.io/address/${token?.token?.contract}`}
@@ -123,13 +118,13 @@ const TokenInfo: FC<Props> = ({ details }) => {
       )}
       <div className="mb-4 flex items-center justify-between">
         <div className="reservoir-subtitle dark:text-white">Token ID</div>
-        <div className="soulswap-h6 max-w-[80px] truncate font-headings dark:text-white">
+        <div className="enjoyooor-h6 max-w-[80px] truncate font-headings dark:text-white">
           {token?.token?.tokenId}
         </div>
       </div>
       <div className="mb-4 flex items-center justify-between">
         <div className="reservoir-subtitle dark:text-white">Token Standard</div>
-        <div className="soulswap-h6 font-headings uppercase dark:text-white">
+        <div className="enjoyooor-h6 font-headings uppercase dark:text-white">
           {token?.token?.kind}
         </div>
       </div>
@@ -138,7 +133,7 @@ const TokenInfo: FC<Props> = ({ details }) => {
           Metadata Refresh
         </div> */}
         <button
-          className="btn-primary-outline soulswap-h6 w-full flex items-center gap-2 p-2 font-headings text-primary-700 dark:border-neutral-600 dark:text-primary-100 dark:ring-primary-900 dark:focus:ring-4"
+          className="btn-primary-outline enjoyooor-h6 w-full flex items-center gap-2 p-2 font-headings text-primary-700 dark:border-neutral-600 dark:text-primary-100 dark:ring-primary-900 dark:focus:ring-4"
           title="Refresh token"
           disabled={refreshLoading}
           onClick={() =>

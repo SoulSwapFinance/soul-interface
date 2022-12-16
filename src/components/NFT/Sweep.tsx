@@ -27,6 +27,7 @@ import Toast from './Toast'
 import Image from 'next/image'
 
 
+const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID
 const DARK_MODE = process.env.NEXT_PUBLIC_DARK_MODE
 const DISABLE_POWERED_BY_SOULSWAP =
   process.env.NEXT_PUBLIC_DISABLE_POWERED_BY_SOULSWAP
@@ -90,8 +91,6 @@ const Sweep: FC<Props> = ({ tokens, collection, mutate, setToast }) => {
   const [waitingTx, setWaitingTx] = useState<boolean>(false)
   // const { data: accountData } = useAccount()
   const { account, chainId, library } = useActiveWeb3React()
-  const CHAIN_ID = chainId
-
   const signer = library.getSigner()
   // const { data: signer } = useSigner()
   const [steps, setSteps] = useState<Execute['steps']>()
@@ -257,8 +256,6 @@ const Sweep: FC<Props> = ({ tokens, collection, mutate, setToast }) => {
                                 ?.imageUrl as string
                             }
                             alt=""
-                            height={24}
-                            width={24}
                             className="block h-12 w-12 rounded-full"
                           />
                           <div className="nfnt-h5 dark:text-white">
@@ -304,15 +301,11 @@ const Sweep: FC<Props> = ({ tokens, collection, mutate, setToast }) => {
                       {sweepTokens?.map((token) => (
                         <div className="relative" key={token.tokenId}>
                           <Image
-                          height={24}
-                          width={24}
                             className="absolute top-1 right-1 h-4 w-4"
                             src={`https://api.reservoir.tools/redirect/logo/v1?source=${token?.source}`}
                             alt={`${token?.source} icon`}
                           />
                           <Image
-                          height={24}
-                          width={24}
                             src={optimizeImage(token?.image, 72)}
                             className="mb-2 h-[72px] w-full rounded-lg object-cover"
                             alt={`${token?.name} image`}
@@ -368,8 +361,8 @@ const Sweep: FC<Props> = ({ tokens, collection, mutate, setToast }) => {
                         >
                           Powered by{' '}
                           <Image
-                            width={125}
-                            height={125}
+                            width={'125px'}
+                            height={'125px'}
                             alt={'SoulSwap Title Logo'}
                             src={
                               !!DARK_MODE
