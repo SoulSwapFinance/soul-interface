@@ -6,9 +6,9 @@ import { wrapScientificNotation } from 'features/nft/utils'
 import { useEffect } from 'react'
 import { useLazyLoadQuery, usePaginationFragment, useQueryLoader } from 'react-relay'
 
-import { NftBalancePaginationQuery } from './__generated__/NftBalancePaginationQuery.graphql'
-import { NftBalanceQuery } from './__generated__/NftBalanceQuery.graphql'
-import { NftBalanceQuery_nftBalances$data } from './__generated__/NftBalanceQuery_nftBalances.graphql'
+// import { NftBalancePaginationQuery } from './__generated__/NftBalancePaginationQuery.graphql'
+// import { NftBalanceQuery } from './__generated__/NftBalanceQuery.graphql'
+// import { NftBalanceQuery_nftBalances$data } from './__generated__/NftBalanceQuery_nftBalances.graphql'
 
 const nftBalancePaginationQuery = graphql`
   fragment NftBalanceQuery_nftBalances on Query @refetchable(queryName: "NftBalancePaginationQuery") {
@@ -113,7 +113,8 @@ const nftBalanceQuery = graphql`
 `
 
 type NftBalanceQueryAsset = NonNullable<
-  NonNullable<NonNullable<NftBalanceQuery_nftBalances$data['nftBalances']>['edges']>[number]
+//   NonNullable<NonNullable<NftBalanceQuery_nftBalances$data['nftBalances']>['edges']>[number]
+  NonNullable<NonNullable<any['nftBalances']>['edges']>[number]
 >
 
 export function useLoadNftBalanceQuery(
@@ -144,7 +145,8 @@ export function useNftBalanceQuery(
   last?: number,
   before?: string
 ) {
-  const queryData = useLazyLoadQuery<NftBalanceQuery>(
+//   const queryData = useLazyLoadQuery<NftBalanceQuery>(
+  const queryData = useLazyLoadQuery<any>(
     nftBalanceQuery,
     {
       ownerAddress,
@@ -163,7 +165,8 @@ export function useNftBalanceQuery(
     },
     { fetchPolicy: 'store-or-network' }
   )
-  const { data, hasNext, loadNext, isLoadingNext } = usePaginationFragment<NftBalancePaginationQuery, any>(
+//   const { data, hasNext, loadNext, isLoadingNext } = usePaginationFragment<NftBalancePaginationQuery, any>(
+  const { data, hasNext, loadNext, isLoadingNext } = usePaginationFragment<any, any>(
     nftBalancePaginationQuery,
     queryData
   )
