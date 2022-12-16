@@ -4179,11 +4179,6 @@
     messageformat-parser "^4.1.3"
     ramda "^0.27.1"
 
-"@looksrare/sdk@0.10.2":
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/@looksrare/sdk/-/sdk-0.10.2.tgz#08b14cb6d3a5499ad0417c817dbb2da924477f4f"
-  integrity sha512-K3VVq7rpS0hD5IwfhAcAPJZO5IjL0VbL89Zl04x8WnLsFOwXHzsUkxUpRrL8ko2/bgZdgTqWgUWCvbSoVr8hzw==
-
 "@material-ui/core@^4.11.4":
   version "4.12.4"
   resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.12.4.tgz#4ac17488e8fcaf55eb6a7f5efb2a131e10138a73"
@@ -7681,11 +7676,6 @@
     "@uniswap/sdk-core" "^3.0.0-alpha.3"
     tiny-invariant "^1.1.0"
     tiny-warning "^1.0.3"
-
-"@vanilla-extract/css-utils@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@vanilla-extract/css-utils/-/css-utils-0.1.3.tgz#cadeb6bc563547b20e9b903647d8b334d3a79ef8"
-  integrity sha512-PZAcHROlgtCUGI2y0JntdNwvPwCNyeVnkQu6KTYKdmxBbK3w72XJUmLFYapfaFfgami4I9CTLnrJTPdtmS3gpw==
 
 "@vanilla-extract/css@1.9.1":
   version "1.9.1"
