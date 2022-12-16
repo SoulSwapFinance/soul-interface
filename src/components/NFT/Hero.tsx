@@ -177,8 +177,6 @@ const Hero: FC<Props> = ({ fallback, collectionId }) => {
       <HeroBackground banner={header.banner}>
         <div className="z-10 flex w-full flex-col items-center gap-6">
           <Image
-            height={20}
-            width={20}
             className="h-20 w-20 rounded-full"
             alt={`${header.name} Logo`}
             src={header.image}

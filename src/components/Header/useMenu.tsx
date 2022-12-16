@@ -9,7 +9,7 @@ import { classNames, featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
 import { useRouter } from 'next/router'
 import { getChainColor } from 'constants/chains'
-// import Twitter from 'assets/icons/twitter.png'
+import Twitter from 'assets/icons/twitter.png'
 export interface MenuItemLeaf {
   key: string
   title?: string

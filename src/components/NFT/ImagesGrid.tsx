@@ -22,8 +22,8 @@ const ImagesGrid: FC<Props> = ({ sample_images, value }) => {
             <Image
               src={optimizeImage(sample_images[0], 250)}
               className="col-span-2 w-full rounded object-cover"
-              width={224}
-              height={224}
+              width="224"
+              height="224"
               alt={'sample image'}
             />
           ) : (
@@ -31,8 +31,8 @@ const ImagesGrid: FC<Props> = ({ sample_images, value }) => {
             <Image
               src={optimizeImage(sample_images[0], 300)}
               className="col-span-2 w-full rounded object-contain"
-              width={300}
-              height={300}
+              width="300"
+              height="300"
               alt={'sample image'}
             />
           )}
@@ -42,8 +42,8 @@ const ImagesGrid: FC<Props> = ({ sample_images, value }) => {
                 <Image
                   key={image}
                   src={optimizeImage(image, 70)}
-                  width={70}
-                  height={70}
+                  width="70"
+                  height="70"
                   className="w-[70px] rounded"
                   alt={'sample image'}
                 />

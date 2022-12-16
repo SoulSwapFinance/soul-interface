@@ -1,7 +1,6 @@
 import { Provider } from '@ethersproject/abstract-provider'
 import { BigNumber, Signer } from 'ethers'
 import { Common } from 'nfnt-sdk'
-import { useActiveWeb3React } from 'services/web3'
 
 /**
  * Get a wETH contract instance and the signers wETH balance
@@ -13,20 +12,16 @@ import { useActiveWeb3React } from 'services/web3'
  */
 export default async function getWeth(
   chainId: ChainId,
-  // provider: Provider,
+  provider: Provider,
   signer: Signer
 ) {
-  
-  
+  // @ts-ignore
+  const weth = new Common.Helpers.Weth(provider, chainId)
+  const signerAddress = await signer.getAddress()
+
   try {
-    const { library } = useActiveWeb3React()
-    const provider = library.provider
-    // @ts-ignore
-    // const weth = new Common.Helpers.Weth(provider, chainId)
-    const signerAddress = await signer.getAddress()
-    // TODO NFT
-    const balance = BigNumber.from(0) // BigNumber.from(await weth.getBalance(signerAddress))
-    // return { weth, balance }
+    const balance = BigNumber.from(await weth.getBalance(signerAddress))
+    return { weth, balance }
   } catch (err) {
     console.error(err)
   }

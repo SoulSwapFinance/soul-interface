@@ -86,9 +86,8 @@ const CollectionOfferModal: FC<Props> = ({
   //   addressOrName: account,
   // })
 
-  const ethBalance = BigNumber.from(0) //library.getBalance(account)
+  const ethBalance = library.getBalance(account)
   const signer = library.getSigner()
-  const provider = library.provider
 
   function getBps(royalties: number | undefined, envBps: string | undefined) {
     let sum = 0
@@ -203,7 +202,7 @@ const CollectionOfferModal: FC<Props> = ({
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger
-        // disabled={isInTheWrongNetwork}
+        disabled={isInTheWrongNetwork}
         className="btn-primary-outline min-w-[222px] whitespace-nowrap border border-[#D4D4D4] bg-white text-black dark:border-[#525252] dark:bg-black dark:text-white dark:ring-[#525252] dark:focus:ring-4"
       >
         Make a Collection Offer

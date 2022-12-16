@@ -148,12 +148,13 @@ export const CollectionAsset = ({
             </Box>
           }
           placement="bottom"
-          // offsetX={0}
-          // offsetY={-50}
-          // style={{ display: 'block' }}
-          // hideArrow={true}
-          // disableHover={!asset.notForSale}
-          // timeout={isMobile ? TOOLTIP_TIMEOUT : undefined}
+        //   @ts-ignore
+          offsetX={0}
+          offsetY={-50}
+          style={{ display: 'block' }}
+          hideArrow={true}
+          disableHover={!asset.notForSale}
+          timeout={isMobile ? TOOLTIP_TIMEOUT : undefined}
         >
           {assetMediaType === AssetMediaType.Image ? (
             <Card.Image />
