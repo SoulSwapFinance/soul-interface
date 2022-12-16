@@ -66,7 +66,7 @@ export const reduceFilters = (state: typeof initialFilterState, action: { eventT
   return { ...state, [action.eventType]: !state[action.eventType] }
 }
 
-const baseHref = (event: ActivityEvent) => `/#/nft/asset/${event.collectionAddress}/${event.tokenId}?origin=activity`
+const baseHref = (event: ActivityEvent) => `/#/nfts/asset/${event.collectionAddress}/${event.tokenId}?origin=activity`
 
 export const Activity = ({ contractAddress, rarityVerified, collectionName, chainId }: ActivityProps) => {
   const [activeFilters, filtersDispatch] = useReducer(reduceFilters, initialFilterState)

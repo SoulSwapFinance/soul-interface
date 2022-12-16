@@ -21,7 +21,6 @@ import styled, { css, useTheme } from 'styled-components/macro'
 import { ExternalLink } from 'theme'
 import { ThemedText } from 'theme/components/text'
 import { shortenAddress } from 'functions/format'
-import { useRouter } from 'next/router'
 
 const TWITTER_WIDTH = 560
 const TWITTER_HEIGHT = 480
@@ -210,7 +209,7 @@ const DefaultLink = styled(Link)`
 `
 
 const OwnerContainer = ({ asset }: { asset: WalletAsset }) => {
-  const router = useRouter()
+  // const navigate = useNavigate()
   const { data: USDValue } = useQuery(['fetchPrice', {}], () => fetchPrice(), {})
   const setSellPageState = useProfilePageState((state) => state.setProfilePageState)
   const selectSellAsset = useSellAsset((state) => state.selectSellAsset)
@@ -226,7 +225,7 @@ const OwnerContainer = ({ asset }: { asset: WalletAsset }) => {
 
   const goToListPage = () => {
     resetSellAssets()
-    router.push('/nft/profile')
+    // navigate('/nfts/profile')
     selectSellAsset(asset)
     setSellPageState(ProfilePageStateType.LISTING)
   }
@@ -300,7 +299,7 @@ const NotForSale = ({ collectionName, collectionUrl }: { collectionName: string;
           <ThemedText.BodySecondary fontSize="14px" lineHeight="20px">
             Discover similar NFTs for sale in
           </ThemedText.BodySecondary>
-          <StyledLink to={`/nft/collection/${collectionUrl}`}>
+          <StyledLink to={`/nfts/collection/${collectionUrl}`}>
             <ThemedText.Link lineHeight="20px">{collectionName}</ThemedText.Link>
           </StyledLink>
         </DiscoveryContainer>
@@ -355,7 +354,7 @@ export const AssetPriceDetails = ({ asset, collection }: AssetPriceDetailsProps)
     <Container>
       <AssetInfoContainer>
         <CollectionNameContainer>
-          <DefaultLink to={`/nft/collection/${asset.address}`}>
+          <DefaultLink to={`/nfts/collection/${asset.address}`}>
             <CollectionHeader>
               {collection.collectionName}
               <VerifiedIconContainer>{collection.isVerified && <StyledVerifiedIcon />}</VerifiedIconContainer>

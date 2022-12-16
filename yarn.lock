@@ -2130,6 +2130,29 @@
     stream-browserify "^3.0.0"
     util "^0.12.4"
 
+"@coinbase/wallet-sdk@^3.5.3":
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/@coinbase/wallet-sdk/-/wallet-sdk-3.6.0.tgz#52cc01d6721b171b69f8c4a83ef5029e52d997d4"
+  integrity sha512-p7RHnbhWiwVr9viX9Z5KLxKgzGoJRKcAN/BYRTsodnesgA7y+omangXncsxY+5eyQSflEL7Dqs0dv/yeDsomow==
+  dependencies:
+    "@metamask/safe-event-emitter" "2.0.0"
+    "@solana/web3.js" "1.52.0"
+    bind-decorator "^1.0.11"
+    bn.js "^5.1.1"
+    buffer "^6.0.3"
+    clsx "^1.1.0"
+    eth-block-tracker "4.4.3"
+    eth-json-rpc-filters "4.2.2"
+    eth-rpc-errors "4.0.2"
+    json-rpc-engine "6.1.0"
+    keccak "^3.0.1"
+    preact "^10.5.9"
+    qs "^6.10.3"
+    rxjs "^6.6.3"
+    sha.js "^2.4.11"
+    stream-browserify "^3.0.0"
+    util "^0.12.4"
+
 "@coinbase/wallet-sdk@^3.5.4":
   version "3.5.4"
   resolved "https://registry.yarnpkg.com/@coinbase/wallet-sdk/-/wallet-sdk-3.5.4.tgz#957aa74521a4afa61ae99e1e2b948a6e017fcc87"
@@ -6754,10 +6777,34 @@
     postcss-selector-parser "^6.0.4"
     quick-lru "^5.1.1"
 
+"@tanstack/query-core@4.15.1":
+  version "4.15.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.15.1.tgz#a282f04fe5e612b50019e1cfaf0efabd220e00ce"
+  integrity sha512-+UfqJsNbPIVo0a9ANW0ZxtjiMfGLaaoIaL9vZeVycvmBuWywJGtSi7fgPVMCPdZQFOzMsaXaOsDtSKQD5xLRVQ==
+
 "@tanstack/query-core@^4.0.0-beta.1":
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.1.3.tgz#06b24315577971376b5a15124fc132c0b3ebc1b3"
   integrity sha512-mSWGovlZnEiVwC99t+Q9uLwGdV9hnq+Z2+sHNAr8tsujzMPRLFNSmWAh/AayAaxIRWPwF4Ce9dmhV2BrYmuK1A==
+
+"@tanstack/query-persist-client-core@4.15.1":
+  version "4.15.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-persist-client-core/-/query-persist-client-core-4.15.1.tgz#27e459a531de16454755a515b8d3dc4a0b99c7bb"
+  integrity sha512-ldoGHNJ4Du83CT1CvJQqaJtQXEz4CdGcDmexVoyRG2q8DV9PAfYi+zls462ZbIWxlni93pkEgG1/q4mZVk2nqQ==
+
+"@tanstack/query-sync-storage-persister@^4.10.1":
+  version "4.15.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-sync-storage-persister/-/query-sync-storage-persister-4.15.1.tgz#a2a1407178cf429a21cf1f8e36a2e7d65d8bbc9c"
+  integrity sha512-uMk8VCTkxTS9F99nSjbJRIsNalv6cwAtBJ6HgX41dYW2BCQR4ZQrM52oohIMbZo8DqlE/gGRtplbCbQ3NDfx4g==
+  dependencies:
+    "@tanstack/query-persist-client-core" "4.15.1"
+
+"@tanstack/react-query-persist-client@^4.10.1":
+  version "4.16.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query-persist-client/-/react-query-persist-client-4.16.1.tgz#ab54352fe8435e88961cda48c75b844ab6e6e559"
+  integrity sha512-7i1Dj9amEDdRz34UMslf11uFs7QSpGqNRT9nFwc17pcJ4I3X7tSiEN1pgrAMg05eqnfGJgnSTZg+RpFR1Nsy+w==
+  dependencies:
+    "@tanstack/query-persist-client-core" "4.15.1"
 
 "@tanstack/react-query@^4.0.10":
   version "4.1.3"
@@ -6766,6 +6813,14 @@
   dependencies:
     "@tanstack/query-core" "^4.0.0-beta.1"
     "@types/use-sync-external-store" "^0.0.3"
+    use-sync-external-store "^1.2.0"
+
+"@tanstack/react-query@^4.10.1":
+  version "4.16.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.16.1.tgz#077006b8eb2c87fbe8d1597c1a0083a2d218b791"
+  integrity sha512-PDE9u49wSDykPazlCoLFevUpceLjQ0Mm8i6038HgtTEKb/aoVnUZdlUP7C392ds3Cd75+EGlHU7qpEX06R7d9Q==
+  dependencies:
+    "@tanstack/query-core" "4.15.1"
     use-sync-external-store "^1.2.0"
 
 "@tanstack/react-virtual@^3.0.0-beta.17":
@@ -30335,6 +30390,13 @@ zustand@^4.0.0, zustand@^4.0.0-rc.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.0.0.tgz#739cba69209ffe67b31e7d6741c25b51496114a7"
   integrity sha512-OrsfQTnRXF1LZ9/vR/IqN9ws5EXUhb149xmPjErZnUrkgxS/gAHGy2dPNIVkVvoxrVe1sIydn4JjF0dYHmGeeQ==
+  dependencies:
+    use-sync-external-store "1.2.0"
+
+zustand@^4.1.1:
+  version "4.1.4"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.1.4.tgz#b0286da4cc9edd35e91c96414fa54bfa4652a54d"
+  integrity sha512-k2jVOlWo8p4R83mQ+/uyB8ILPO2PCJOf+QVjcL+1PbMCk1w5OoPYpAIxy9zd93FSfmJqoH6lGdwzzjwqJIRU5A==
   dependencies:
     use-sync-external-store "1.2.0"
 

@@ -64,7 +64,7 @@ const GridItem = ({ trait, collectionAddress }: { trait: Trait; collectionAddres
   )
 
   return (
-    <GridItemContainer to={`/nft/collection/${collectionAddress}?${params}`}>
+    <GridItemContainer to={`/nfts/collection/${collectionAddress}?${params}`}>
       <TraitType>{trait_type}</TraitType>
       <TraitValue>{trait_value}</TraitValue>
     </GridItemContainer>

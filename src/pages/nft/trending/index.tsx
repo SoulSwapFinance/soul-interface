@@ -10,7 +10,6 @@ import { useMediaQuery } from '@react-hookz/web'
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import { useActiveWeb3React } from 'services/web3'
 // import ConnectWalletLarge from 'components/ConnectWalletLarge'
 
 // Environment variables
@@ -18,7 +17,8 @@ import { useActiveWeb3React } from 'services/web3'
 // refer to the README.md file on this repository
 // Reference: https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser
 // REQUIRED
-const SOULSWAP_API_BASE = process.env.NEXT_PUBLIC_SOULSWAP_API_BASE || 'https://api.reservoir.tools'
+const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID
+const SOULSWAP_API_BASE = process.env.NEXT_PUBLIC_SOULSWAP_API_BASE
 
 // OPTIONAL
 const SOULSWAP_API_KEY = process.env.SOULSWAP_API_KEY
@@ -58,19 +58,17 @@ const Explore: NextPage<Props> = ({ fallback }) => {
 //   const isSmallDevice = useMediaQuery('only screen and (max-width : 600px)')
   const router = useRouter()
 //   const { data: account, isLoading } = useAccount()
-const { chainId } = useActiveWeb3React()
-const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID || chainId
 
   const title = META_TITLE && metadata.title(META_TITLE)
   const description = META_DESCRIPTION && metadata.description(META_DESCRIPTION)
-  // const image = metadata.image(META_IMAGE || 'https://soul.sh/title-logo.png')
+  const image = metadata.image(META_IMAGE || 'https://soul.sh/title-logo.png')
   const tagline = metadata.tagline(TAGLINE)
 
-  // useEffect(() => {
-  //   if (REDIRECT_HOMEPAGE && COLLECTION) {
-  //     router.push(`/collections/${COLLECTION}`)
-  //   }
-  // }, [COLLECTION, REDIRECT_HOMEPAGE])
+  useEffect(() => {
+    if (REDIRECT_HOMEPAGE && COLLECTION) {
+      router.push(`/collections/${COLLECTION}`)
+    }
+  }, [COLLECTION, REDIRECT_HOMEPAGE])
 
   // Return error page if the API base url or the ENV's chain ID are missing
   if (!CHAIN_ID) {
@@ -86,7 +84,7 @@ const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID || chainId
       <Head>
         {title}
         {description}
-        {/* {image} */}
+        {image}
       </Head>
 
       <div className="col-span-full mt-8 border border-8 border-[#FFD700] mb-4">
@@ -95,7 +93,7 @@ const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID || chainId
         {/* <div className='my-1 border border-2 border-[#FFD700]' /> */}
         {/* <header className="col-span-full mb-12 mt-[66px] px-4 md:mt-40 lg:px-0"> */}
           {/* <Image src=''https://soul.sh/title-logo.png'' width="720px" /> */}
-          <Image src='https://soul.sh/title-logo.png' alt={'background image'} width={24} height={24}/>
+          <Image src='/bg.png' alt={'background image'}/>
           {/* <h1 className="nfnt-h1 text-center dark:text-white">{tagline}</h1> */}
         {/* </header> */}
         {/* <Image src={''https://soul.sh/title-logo.png''} /> */}

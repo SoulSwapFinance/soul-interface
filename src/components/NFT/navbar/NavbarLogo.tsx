@@ -15,7 +15,7 @@ type Props = {
 
 const NavbarLogo: FC<Props> = ({ variant, className }) => {
   const logo = NAVBAR_LOGO || '/nfnt-small-brand.png'
-  const desktopLogo = DESKTOP_NAVBAR_LOGO || 'https://soul.sh/title-logo.png'
+  const desktopLogo = DESKTOP_NAVBAR_LOGO || '/title-logo-words-brand.png'
   const logoAlt = SOURCE_ID ? `${SOURCE_ID} Logo` : 'SoulSwap Logo'
   const mobileVariant = variant == 'mobile'
   const desktopVariant = variant == 'desktop'
@@ -29,8 +29,6 @@ const NavbarLogo: FC<Props> = ({ variant, className }) => {
         <Image
           src={logo}
           alt={logoAlt}
-          width={24}
-          height={24}
           className={`h-9 w-auto ml-0 ${!variant ? 'md:hidden' : ''} ${
             desktopVariant ? 'hidden' : ''
           } ${mobileVariant ? 'block' : ''}`}
@@ -38,8 +36,6 @@ const NavbarLogo: FC<Props> = ({ variant, className }) => {
         <Image
           src={desktopLogo}
           alt={logoAlt}
-          width={24}
-          height={24}
           className={`h-9 w-auto md:block ${
             !variant ? 'hidden md:block' : ''
           } ${mobileVariant ? 'hidden' : ''} ${desktopVariant ? 'block' : ''}`}
