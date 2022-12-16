@@ -101,6 +101,15 @@ export const BuyCell = ({
     return itemsInBag.some((item) => asset.tokenId === item.asset.tokenId && asset.address === item.asset.address)
   }, [asset, itemsInBag])
 
+  // const trace = useTrace({ page: PageName.NFT_COLLECTION_PAGE })
+
+  const eventProperties = {
+    collection_address: asset.address,
+    token_id: asset.tokenId,
+    token_type: asset.tokenType,
+    // ...trace,
+  }
+
   return (
     <Column 
     // display={{ sm: 'none', lg: 'flex' }} height="full" justifyContent="center" marginX="auto"

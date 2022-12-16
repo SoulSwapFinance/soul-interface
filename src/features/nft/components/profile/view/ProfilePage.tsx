@@ -42,7 +42,7 @@ const ProfileHeader = styled.div`
   margin-bottom: 8px;
   border-bottom: 1px solid ${({ theme }) => theme.backgroundOutline};
 
-  @media only screen and (max-width: ${({ theme }) => `${400}px`}) {
+  @media only screen and (max-width: ${({ theme }) => `${theme.breakpoint.sm}px`}) {
     font-size: 20px;
     line-height: 28px;
     margin-bottom: 0px;
@@ -107,9 +107,7 @@ export const ProfilePage = () => {
   }, [ownerCollections, setWalletCollections])
 
   return (
-    <div 
-    // width="full" paddingTop={{ sm: `${PADDING}`, md: '40' }}
-    >
+    <ProfilePageColumn width="full" paddingTop={{ sm: `${PADDING}`, md: '40' }}>
       <>
         <ProfileHeader>My NFTs</ProfileHeader>
         <Row 
@@ -178,7 +176,7 @@ export const ProfilePage = () => {
           </Box>
         </Row>
       )}
-    </div>
+    </ProfilePageColumn>
   )
 }
 

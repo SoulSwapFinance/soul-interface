@@ -36,8 +36,6 @@ import ModalProvider from 'contexts/ModalProvider'
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client'
 import { RPC } from 'connectors'
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { QueryClient as ReactQueryClient, QueryClientProvider as ReactQueryClientProvider } from 'react-query'
-
 
 const link = createHttpLink({
   // uri: RPC[250],
@@ -62,7 +60,6 @@ if (typeof window !== 'undefined' && !!window.ethereum) {
 function MyApp({ Component, pageProps, fallback, err }) {
   const router = useRouter()
   const { locale, events } = router
-  const reactQueryClient = new ReactQueryClient()
 
   useEffect(() => {
     const handleRouteChange = (url) => {
@@ -160,7 +157,6 @@ function MyApp({ Component, pageProps, fallback, err }) {
       {/*@ts-ignore TYPE NEEDS FIXING*/}
       <I18nProvider i18n={i18n} forceRenderOnLocaleChange={false}>
         <Web3ReactProvider getLibrary={getLibrary}>
-        <ReactQueryClientProvider client={reactQueryClient}>
       <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <ApiDataProvider>
@@ -206,7 +202,6 @@ function MyApp({ Component, pageProps, fallback, err }) {
           </ApiDataProvider>
           </Hydrate>
           </QueryClientProvider>
-          </ReactQueryClientProvider>
         </Web3ReactProvider>
       </I18nProvider>
     </>
