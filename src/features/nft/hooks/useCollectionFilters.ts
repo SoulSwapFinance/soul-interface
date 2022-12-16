@@ -1,5 +1,5 @@
 // TODO: NFT
-// import { NftAssetSortableField } from 'graphql/data/nft/__generated__/AssetPaginationQuery.graphql'
+import { NftAssetSortableField } from 'services/graphql/data/nft/__generated__/AssetPaginationQuery.graphql'
 import create from 'zustand'
 import { devtools } from 'zustand/middleware'
 
@@ -17,7 +17,7 @@ export const SortByPointers = {
   [SortBy.CommonToRare]: 'common',
 }
 interface QueryInfo {
-  field: any // NftAssetSortableField
+  field: NftAssetSortableField
   asc: boolean
 }
 export const SortByQueries = {
