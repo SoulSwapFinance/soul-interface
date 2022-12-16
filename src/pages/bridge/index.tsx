@@ -14,12 +14,12 @@ import {
 // import DropDownButton from "../../components/DropDownButton";
 import useBridgeApi from "../../hooks/useBridgeApi";
 import useMultiChain from "../../hooks/useMultiChain";
-import Modal from "./components/Modal";
-// import ModalTitle from "./components/ModalTitle";
-import ModalContent from "./components/ModalContent";
-import Scrollbar from "../../components/Scrollbar";
+import Modal from "components/Bridge/Modal";
+// import ModalTitle from "components/Bridge/ModalTitle";
+import ModalContent from "components/Bridge/ModalContent";
+import Scrollbar from "components/Scrollbar";
 import useModal from "../../hooks/useModal";
-import InputCurrencyBox from "./components/InputCurrencyBox";
+import InputCurrencyBox from "components/Bridge/InputCurrencyBox";
 import { AddressZero } from "@ethersproject/constants";
 import {
   formatSimpleValue,
