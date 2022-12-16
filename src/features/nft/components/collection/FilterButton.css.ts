@@ -1,3 +1,4 @@
+import { style } from '@vanilla-extract/css'
 import { loadingAsset } from 'features/nft/css/loading.css'
 import { sprinkles, themeVars, vars } from 'features/nft/css/sprinkles.css'
 
@@ -8,16 +9,16 @@ export const filterButton =
   color: 'textPrimary',
 }
 
-export const filterButtonExpanded = {
+export const filterButtonExpanded = style({
   background: vars.color.backgroundInteractive,
   // color: themeVars.colors.textPrimary,
-}
+})
 
-export const filterButtonLoading = [
+export const filterButtonLoading = style([
   loadingAsset,
   // sprinkles(
     {
     height: '44',
     width: '100',
   },
-]
+])

@@ -1,4 +1,7 @@
-export const nftDivider = [
+import { style } from '@vanilla-extract/css'
+import { sprinkles, themeVars } from 'features/nft/css/sprinkles.css'
+
+export const nftDivider = style([
   // sprinkles(
     {
     height: '0',
@@ -8,23 +11,23 @@ export const nftDivider = [
     borderStyle: 'solid',
     borderColor: 'backgroundOutline',
   },
-]
+])
 
-export const chevronDown = {
+export const chevronDown = style({
   transform: 'rotate(180deg)',
-}
+})
 
-export const dropdown = {
+export const dropdown = style({
   // boxShadow: `0px 4px 16px ${themeVars.colors.backgroundSurface}`,
   marginLeft: '-12px',
-}
+})
 
-export const removeAsset = {
+export const removeAsset = style({
   top: '31px',
   left: '8px',
-}
+})
 
-export const removeMarketplace = {
+export const removeMarketplace = style({
   top: '11px',
   right: '14px',
-}
+})

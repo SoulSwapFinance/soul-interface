@@ -1,6 +1,8 @@
+import { style } from '@vanilla-extract/css'
 import { body, bodySmall } from 'features/nft/css/common.css'
+import { sprinkles } from 'features/nft/css/sprinkles.css'
 
-export const section = [
+export const section = style([
   // sprinkles(
     {
     // paddingLeft: { sm: '16', xl: '0' },
@@ -14,10 +16,10 @@ export const section = [
     flexWrap: 'nowrap',
     position: 'relative',
   },
-]
+])
 
 /* Activity Feed Styles */
-export const activityRow = [
+export const activityRow = style([
   // sprinkles(
     {
     position: 'absolute',
@@ -26,7 +28,7 @@ export const activityRow = [
   {
     transition: 'transform 0.4s ease',
   },
-]
+])
 
 export const activeRow = 
 // sprinkles(
@@ -34,7 +36,7 @@ export const activeRow =
   backgroundColor: 'gray800',
 }
 
-export const timestamp = [
+export const timestamp = style([
   // sprinkles(
     {
     position: 'absolute',
@@ -44,9 +46,9 @@ export const timestamp = [
     // left: { sm: '64', lg: 'unset' },
     // top: { sm: '28', lg: 'unset' },
   },
-]
+])
 
-export const marketplaceIcon = [
+export const marketplaceIcon = style([
   // sprinkles(
     {
     width: '16',
@@ -58,11 +60,11 @@ export const marketplaceIcon = [
   {
     verticalAlign: 'bottom',
   },
-]
+])
 
 /* Base Table Styles  */
 
-export const table = [
+export const table = style([
   {
     borderCollapse: 'collapse',
     boxShadow: '0 0 0 1px rgba(153, 161, 189, 0.24)',
@@ -75,7 +77,7 @@ export const table = [
     borderRadius: '12',
     borderStyle: 'none',
   },
-]
+])
 
 export const thead = 
 // sprinkles(
@@ -86,7 +88,7 @@ export const thead =
   borderBottomStyle: 'solid',
 }
 
-export const th = [
+export const th = style([
   bodySmall,
   {
     selectors: {
@@ -101,9 +103,9 @@ export const th = [
     paddingTop: '12',
     paddingBottom: '12',
   },
-]
+])
 
-export const td = [
+export const td = style([
   body,
   {
     selectors: {
@@ -119,9 +121,9 @@ export const td = [
     textAlign: 'right',
     position: 'relative',
   },
-]
+])
 
-export const loadingTd = [
+export const loadingTd = style([
   body,
   {
     selectors: {
@@ -137,4 +139,4 @@ export const loadingTd = [
     textAlign: 'right',
     position: 'relative',
   },
-]
+])

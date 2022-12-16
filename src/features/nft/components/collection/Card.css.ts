@@ -1,6 +1,8 @@
+import { style } from '@vanilla-extract/css'
+import { calc } from '@vanilla-extract/css-utils'
 import { sprinkles, themeVars, vars } from 'features/nft/css/sprinkles.css'
 
-export const card = [
+export const card = style([
   // sprinkles(
     {
     overflow: 'hidden',
@@ -25,22 +27,22 @@ export const card = [
       pointerEvents: 'none',
     },
   },
-]
+])
 
 // ${themeVars.colors.backgroundOutline} 0%, 
 // ${themeVars.colors.backgroundSurface} 100%)
 export const loadingBackground = 
-{
+style({
   background: `linear-gradient(270deg, 
     
     `,
-  }
+  })
 
-export const cardImageHover = {
+export const cardImageHover = style({
   transform: 'scale(1.15)',
-}
+})
 
-export const selectedCard = [
+export const selectedCard = style([
   card,
   // sprinkles(
     {
@@ -52,9 +54,9 @@ export const selectedCard = [
       borderColor: vars.color.accentAction,
     },
   },
-]
+])
 
-export const button = [
+export const button = style([
   // sprinkles(
     {
     display: 'flex',
@@ -72,9 +74,9 @@ export const button = [
   {
     lineHeight: '16px',
   },
-]
+])
 
-export const marketplaceIcon = [
+export const marketplaceIcon = style([
   // sprinkles(
     {
     display: 'inline-block',
@@ -87,9 +89,9 @@ export const marketplaceIcon = [
   {
     verticalAlign: 'top',
   },
-]
+])
 
-export const rarityInfo = [
+export const rarityInfo = style([
   // sprinkles(
     {
     display: 'flex',
@@ -106,9 +108,9 @@ export const rarityInfo = [
     letterSpacing: '0.04em',
     backdropFilter: 'blur(6px)',
   },
-]
+])
 
-export const playbackSwitch = [
+export const playbackSwitch = style([
   // sprinkles(
     {
     position: 'absolute',
@@ -117,7 +119,7 @@ export const playbackSwitch = [
     zIndex: '1',
   },
   {
-    // marginLeft: calc.subtract('100%', '50px'),
+    marginLeft: calc.subtract('100%', '50px'),
     transform: 'translateY(-56px)',
   },
-]
+])

@@ -1,6 +1,8 @@
+import { style } from '@vanilla-extract/css'
 import { buttonTextSmall } from 'features/nft/css/common.css'
+import { sprinkles } from 'features/nft/css/sprinkles.css'
 
-export const bagContainer = [
+export const bagContainer = style([
   // sprinkles(
     {
     position: 'fixed',
@@ -13,9 +15,9 @@ export const bagContainer = [
     borderRadius: '8',
     justifyContent: 'space-between',
   },
-]
+])
 
-export const viewBagButton = [
+export const viewBagButton = style([
   buttonTextSmall,
   // sprinkles(
     {
@@ -26,4 +28,4 @@ export const viewBagButton = [
     borderRadius: '12',
     cursor: 'pointer',
   },
-]
+])

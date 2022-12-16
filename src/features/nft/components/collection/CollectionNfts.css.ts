@@ -1,6 +1,8 @@
+import { style } from '@vanilla-extract/css'
+
 import { breakpoints, sprinkles } from '../../css/sprinkles.css'
 
-export const assetList = [
+export const assetList = style([
     {
     display: 'grid',
     // gap: { sm: '8', md: '8', lg: '12', xl: '16' },
@@ -26,4 +28,4 @@ export const assetList = [
       },
     },
   },
-]
+])

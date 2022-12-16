@@ -1,8 +1,9 @@
+import { style } from '@vanilla-extract/css'
 import { buttonTextMedium } from 'features/nft/css/common.css'
 import { loadingAsset } from 'features/nft/css/loading.css'
 import { sprinkles, vars } from 'features/nft/css/sprinkles.css'
 
-export const baseActivitySwitcherToggle = [
+export const baseActivitySwitcherToggle = style([
   buttonTextMedium,
   // sprinkles(
     {
@@ -15,17 +16,17 @@ export const baseActivitySwitcherToggle = [
   {
     lineHeight: '24px',
   },
-]
+])
 
-export const activitySwitcherToggle = [
+export const activitySwitcherToggle = style([
   baseActivitySwitcherToggle,
   // sprinkles(
     {
     color: 'textSecondary',
   },
-]
+])
 
-export const selectedActivitySwitcherToggle = [
+export const selectedActivitySwitcherToggle = style([
   baseActivitySwitcherToggle,
   // sprinkles(
     {
@@ -43,12 +44,12 @@ export const selectedActivitySwitcherToggle = [
       bottom: '-9px',
     },
   },
-]
+])
 
-export const styledLoading = [
+export const styledLoading = style([
   loadingAsset,
   {
     width: 58,
     height: 20,
   },
-]
+])

@@ -1,3 +1,6 @@
+// import { createGlobalTheme, createGlobalThemeContract } from '@vanilla-extract/css'
+// import { createSprinkles, defineProperties } from '@vanilla-extract/sprinkles'
+
 const themeContractValues = {
   colors: {
     accentFailure: '',

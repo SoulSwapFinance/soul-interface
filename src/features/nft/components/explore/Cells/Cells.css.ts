@@ -1,11 +1,14 @@
+import { style } from '@vanilla-extract/css'
+
 import { body } from '../../../css/common.css'
+import { sprinkles } from '../../../css/sprinkles.css'
 
 export const logo = 
 // sprinkles(
   { borderRadius: '12' }
 // )
 
-export const title = [
+export const title = style([
   body,
   // sprinkles(
     {
@@ -17,9 +20,9 @@ export const title = [
     paddingLeft: '12',
     paddingRight: '2',
   },
-]
+])
 
-export const address = [
+export const address = style([
   title,
   // sprinkles(
     {
@@ -31,7 +34,7 @@ export const address = [
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
   },
-]
+])
 
 export const verifiedBadge = 
 // sprinkles(

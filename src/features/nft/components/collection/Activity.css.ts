@@ -1,7 +1,8 @@
+import { style } from '@vanilla-extract/css'
 import { body, bodySmall, buttonTextMedium, subhead, subheadSmall } from 'features/nft/css/common.css'
 import { breakpoints, sprinkles, themeVars, vars } from 'features/nft/css/sprinkles.css'
 
-export const baseRow = [
+export const baseRow = style([
   // sprinkles(
     {
     display: 'grid',
@@ -23,9 +24,10 @@ export const baseRow = [
       },
     },
   },
-]
+])
 
 export const eventRow =
+// style(
   [
   baseRow,
   // sprinkles(
@@ -48,6 +50,7 @@ export const eventRow =
 ]
 
 export const headerRow = 
+// style(
   [
   baseRow,
   // sprinkles(
@@ -72,6 +75,7 @@ export const detailsImage =
 }
 
 export const detailsName = 
+// style(
   [
   body,
   // sprinkles(
@@ -85,6 +89,7 @@ export const detailsName =
 ]
 
 export const eventDetail = 
+// style(
   [
   subhead,
   // sprinkles(
@@ -96,7 +101,7 @@ export const eventDetail =
   },
 ]
 
-export const eventTime = [
+export const eventTime = style([
   bodySmall,
   // sprinkles(
     {
@@ -105,9 +110,9 @@ export const eventTime = [
   {
     lineHeight: '20px',
   },
-]
+])
 
-export const addressCell = [
+export const addressCell = style([
   buttonTextMedium,
   // sprinkles(
     {
@@ -119,9 +124,9 @@ export const addressCell = [
   {
     lineHeight: '24px',
   },
-]
+])
 
-export const baseBuyCell = [
+export const baseBuyCell = style([
   buttonTextMedium,
   // sprinkles(
     {
@@ -136,9 +141,9 @@ export const baseBuyCell = [
   {
     lineHeight: '20px',
   },
-]
+])
 
-export const buyCell = [
+export const buyCell = style([
   baseBuyCell,
   {
     selectors: {
@@ -155,9 +160,9 @@ export const buyCell = [
       },
     },
   },
-]
+])
 
-export const removeCell = [
+export const removeCell = style([
   baseBuyCell,
   // sprinkles(
     {
@@ -170,9 +175,9 @@ export const removeCell = [
       // color: themeVars.colors.explicitWhite,
     },
   },
-]
+])
 
-export const filter = [
+export const filter = style([
   subheadSmall,
   // sprinkles(
     {
@@ -186,9 +191,9 @@ export const filter = [
   {
     boxSizing: 'border-box',
   },
-]
+])
 
-export const marketplaceIcon = [
+export const marketplaceIcon = style([
   // sprinkles(
     {
     width: '16',
@@ -196,9 +201,9 @@ export const marketplaceIcon = [
     borderRadius: '4',
     flexShrink: '0',
   },
-]
+])
 
-export const rarityInfo = [
+export const rarityInfo = style([
   // sprinkles(
     {
     display: 'flex',
@@ -217,4 +222,4 @@ export const rarityInfo = [
     letterSpacing: '0.04em',
     backdropFilter: 'blur(6px)',
   },
-]
+])

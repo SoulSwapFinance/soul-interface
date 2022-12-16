@@ -39,7 +39,7 @@ import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@ap
 import { RPC } from 'connectors'
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 // import { CustomUserProperties, EventName, getBrowser, PageName } from '@uniswap/analytics-events'
-// import { initializeAnalytics, OriginApplication } from '@uniswap/analytics'
+import { initializeAnalytics, OriginApplication } from '@uniswap/analytics'
 
 const link = createHttpLink({
   // uri: RPC[250],
@@ -65,12 +65,12 @@ if (typeof window !== 'undefined' && !!window.ethereum) {
 const ANALYTICS_DUMMY_KEY = '00000000000000000000000000000000'
 const ANALYTICS_PROXY_URL = process.env.REACT_APP_AMPLITUDE_PROXY_URL
 const COMMIT_HASH = process.env.REACT_APP_GIT_COMMIT_HASH
-// initializeAnalytics(ANALYTICS_DUMMY_KEY, OriginApplication.INTERFACE, {
-//   proxyUrl: ANALYTICS_PROXY_URL,
-//   defaultEventName: '', // EventName.PAGE_VIEWED,
-//   commitHash: COMMIT_HASH,
-//   isProductionEnv: true // isProductionEnv(),
-// })
+initializeAnalytics(ANALYTICS_DUMMY_KEY, OriginApplication.INTERFACE, {
+  proxyUrl: ANALYTICS_PROXY_URL,
+  defaultEventName: '', // EventName.PAGE_VIEWED,
+  commitHash: COMMIT_HASH,
+  isProductionEnv: true // isProductionEnv(),
+})
 
 function MyApp({ Component, pageProps, fallback, err }) {
   const router = useRouter()

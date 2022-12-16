@@ -1,3 +1,6 @@
+import { style } from '@vanilla-extract/css'
+import { sprinkles } from 'features/nft/css/sprinkles.css'
+
 export const input = 
 // style(
   [
@@ -19,7 +22,7 @@ export const input =
   },
 ]
 
-export const checkbox = [
+export const checkbox = style([
   // sprinkles(
     {
     display: 'inline-block',
@@ -30,7 +33,7 @@ export const checkbox = [
     borderStyle: 'solid',
     borderWidth: '2px',
   },
-]
+])
 
 export const checkMark = 
 // sprinkles(
@@ -41,7 +44,7 @@ export const checkMark =
   color: 'white',
 }
 
-export const checkMarkActive = [
+export const checkMarkActive = style([
   // sprinkles(
     {
     display: 'inline-block',
@@ -50,4 +53,4 @@ export const checkMarkActive = [
     top: '0',
     right: '1',
   },
-]
+])

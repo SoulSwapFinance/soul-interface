@@ -1,4 +1,8 @@
-export const overlay = [
+import { style } from '@vanilla-extract/css'
+
+import { sprinkles } from '../../css/sprinkles.css'
+
+export const overlay = style([
   // sprinkles(
     {
     top: '0',
@@ -14,4 +18,4 @@ export const overlay = [
     opacity: 0.72,
     overflow: 'hidden',
   },
-]
+])

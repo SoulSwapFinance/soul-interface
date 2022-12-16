@@ -1,6 +1,7 @@
+import { style } from '@vanilla-extract/css'
 import { breakpoints, sprinkles, themeVars } from 'features/nft/css/sprinkles.css'
 
-export const container = [
+export const container = style([
   // sprinkles(
     {
     overflow: 'auto',
@@ -25,18 +26,18 @@ export const container = [
       },
     },
   },
-]
+])
 
-export const rowHover = [
+export const rowHover = style([
   {
     ':hover': {
       // background: themeVars.colors.backgroundInteractive,
       borderRadius: 12,
     },
   },
-]
+])
 
-export const row = [
+export const row = style([
   // sprinkles(
     {
     display: 'flex',
@@ -50,13 +51,13 @@ export const row = [
     paddingTop: '10',
     paddingBottom: '10',
   },
-]
+])
 
-export const subRowHover = {
+export const subRowHover = style({
   ':hover': {
     // background: themeVars.colors.backgroundInteractive,
   },
-}
+})
 
 export const borderTop = 
 // sprinkles(
@@ -75,7 +76,7 @@ export const borderBottom =
 }
 
 export const detailsOpen = 
-// 
+// style(
   [
   borderTop,
   
@@ -90,7 +91,7 @@ export const detailsOpen =
 export const MAX_FILTER_DROPDOWN_HEIGHT = 302
 
 export const filterDropDowns = 
-// 
+// style(
   [
   borderBottom,
   
@@ -106,12 +107,12 @@ export const filterDropDowns =
   },
 ]
 
-export const chevronIcon = {
+export const chevronIcon = style({
   marginLeft: -1,
-}
+})
 
 export const chevronContainer = 
-// 
+// style(
   [
   
   // sprinkles(

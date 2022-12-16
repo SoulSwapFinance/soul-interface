@@ -2,10 +2,10 @@ import { AnimatedBox, Box } from 'features/nft/components/Box'
 import { Column, Row } from 'features/nft/components/Flex'
 import { XMarkIcon } from 'features/nft/components/icons'
 import { Checkbox } from 'features/nft/components/layout/Checkbox'
-// import { checkbox } from 'features/nft/components/layout/Checkbox.css'
+import { checkbox } from 'features/nft/components/layout/Checkbox.css'
 import { Input } from 'features/nft/components/layout/Input'
 import { subhead } from 'features/nft/css/common.css'
-// import { themeVars } from 'features/nft/css/sprinkles.css'
+import { themeVars } from 'features/nft/css/sprinkles.css'
 import { useFiltersExpanded, useIsMobile, useWalletCollections } from 'features/nft/hooks'
 import { WalletCollection } from 'features/nft/types'
 import {
@@ -20,7 +20,7 @@ import {
   useState,
 } from 'react'
 import { useSpring } from 'react-spring'
-// import easings from 'react-spring'
+import easings from 'react-spring'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { FixedSizeList, ListOnItemsRenderedProps } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader'
@@ -103,7 +103,7 @@ export const FilterSidebar = ({
     config: {
       duration: TRANSITION_DURATIONS.medium,
     //   @ts-ignore
-      // easing: easings.easeOutSine,
+      easing: easings.easeOutSine,
     },
   })
 
