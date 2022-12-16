@@ -9,8 +9,6 @@ import { useRouter } from 'next/router'
 import { PercentageChange } from 'components/NFT/hero/HeroStats'
 import { useMediaQuery } from '@react-hookz/web'
 import { formatNumber } from 'functions/format'
-import { getChainColor } from 'constants/chains'
-import { useActiveWeb3React } from 'services/web3'
 
 type Props = {
   fallback: {
@@ -23,7 +21,6 @@ type Volumes = '1DayVolume' | '7DayVolume' | '30DayVolume'
 const TrendingCollectionTable: FC<Props> = ({ fallback }) => {
   const isSmallDevice = useMediaQuery('only screen and (max-width : 600px)')
   const router = useRouter()
-  const { chainId } = useActiveWeb3React()
   const { collections, ref } = useCollections(router, fallback.collections)
 
   const { data } = collections
@@ -79,7 +76,7 @@ const TrendingCollectionTable: FC<Props> = ({ fallback }) => {
               <tr
                 key={`${contract}-${index}`}
                 ref={index === arr.length - 5 ? ref : null}
-                className={`group h-[88px] border-b border-[${getChainColor(chainId)}] dark:border-[${getChainColor(chainId)}] dark:text-white`}
+                className="group h-[88px] border-b border-[#FFD700] dark:border-[#FFD700] dark:text-white"
               >
                 {/* COLLECTION */}
                 <td className="reservoir-body flex items-center gap-4 whitespace-nowrap px-6 py-4 dark:text-white">

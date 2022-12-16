@@ -11,8 +11,6 @@ import useCollections from 'features/nft/hooks/useCollections'
 import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
 import { blackA, whiteA, yellow } from '@radix-ui/colors'
 import React from 'react';
-import { useActiveWeb3React } from 'services/web3';
-import { getChainColor } from 'constants/chains'
 
 type Options = '24H' | '7D' | '30D'
 
@@ -25,10 +23,9 @@ const options: { [x: string]: Options } = {
 const SortTrendingCollections: FC = () => {
   const router = useRouter()
   const [open, setOpen] = useState(false)
-  const { chainId } = useActiveWeb3React()
   const [sortSelection, setSortSelection] = useState<Options>('24H')
   const { collections } = useCollections(router)
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState('1DayVolume');
 
   useEffect(() => {
     const sort = router?.query['sort']?.toString()
@@ -61,8 +58,8 @@ const SortTrendingCollections: FC = () => {
     marginLeft: 1,
     '&:first-child': { marginLeft: 0, borderTopLeftRadius: 4, borderBottomLeftRadius: 4 },
     '&:last-child': { borderTopRightRadius: 4, borderBottomRightRadius: 4 },
-    '&:hover': { backgroundColor: getChainColor(chainId)},
-    '&[data-state=on]': { backgroundColor: getChainColor(chainId), color: '#FFFFFF' },
+    '&:hover': { backgroundColor: yellow.yellow4 },
+    '&[data-state=on]': { backgroundColor: yellow.yellow9, color: '#000000' },
     '&:focus': { position: 'relative', boxShadow: `0 0 0 2px black` },
   });
 
