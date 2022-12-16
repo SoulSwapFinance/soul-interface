@@ -30,7 +30,7 @@ const ExploreContainer = styled.div`
   }
 `
 
-const Explore = () => {
+const NftExplore = () => {
   const setBagExpanded = useBag((state) => state.setBagExpanded)
 
   useEffect(() => {
@@ -46,4 +46,4 @@ const Explore = () => {
   )
 }
 
-export default Explore
+export default NftExplore

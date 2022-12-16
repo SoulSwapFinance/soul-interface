@@ -19,9 +19,6 @@ import styled from 'styled-components/macro'
 import { ThemedText } from 'theme/components/text'
 import { TRANSITION_DURATIONS } from 'styles'
 import { OpacityHoverState } from 'features/nft/components/Common'
-import { Button } from 'components/Button'
-import NavLink from 'components/NavLink'
-import { useRouter } from 'next/router'
 // import { TRANSITION_DURATIONS } from 'theme/styles'
 
 const FILTER_WIDTH = 332
@@ -76,7 +73,7 @@ const Collection = () => {
   const isMobile = useIsMobile()
   const [isFiltersExpanded, setFiltersExpanded] = useFiltersExpanded()
   const { pathname } = useLocation()
-  const router = useRouter()
+  // const navigate = useNavigate()
   const isActivityToggled = pathname.includes('/activity')
   const setMarketCount = useCollectionFilters((state) => state.setMarketCount)
   const isBagExpanded = useBag((state) => state.bagExpanded)
@@ -117,8 +114,8 @@ const Collection = () => {
 
   const toggleActivity = () => {
     isActivityToggled
-      ? router.push(`/nfts/collection/${contractAddress}`)
-      : router.push(`/nfts/collection/${contractAddress}/activity`)
+      // ? navigate(`/nfts/collection/${contractAddress}`)
+      // : navigate(`/nfts/collection/${contractAddress}/activity`)
   }
 
   return (
@@ -147,17 +144,13 @@ const Collection = () => {
                   <CollectionStats stats={collectionStats || ({} as GenieCollection)} isMobile={isMobile} />
                 )}
                 <div id="nft-anchor" />
-                <NavLink
-                  href={`/nft/collection/${contractAddress}`}
-                >
                 <ActivitySwitcher
                   showActivity={isActivityToggled}
                   toggleActivity={() => {
                     isFiltersExpanded && setFiltersExpanded(false)
                     toggleActivity()
                   }}
-                  />
-                  </NavLink>
+                />
               </CollectionDescriptionSection>
               <CollectionDisplaySection>
                 <Box

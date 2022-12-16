@@ -1,5 +1,4 @@
 import { useWeb3React } from '@web3-react/core'
-import NavLink from 'components/NavLink'
 import { EmptyNFTWalletIcon } from 'features/nft/components/icons'
 import { headlineMedium } from 'features/nft/css/common.css'
 import { shortenAddress } from 'functions/format'
@@ -45,13 +44,9 @@ export const EmptyWalletContent = () => {
       <EmptyWalletText className={headlineMedium}>
         No NFTs in &nbsp;{shortenAddress(account ?? '')}
       </EmptyWalletText>
-      <NavLink
-        href={`/nft`}
-      >
       <ExploreNFTsButton 
       // onClick={() => navigate('/nfts')}
       >Explore NFTs</ExploreNFTsButton>
-      </NavLink>
     </EmptyWalletContainer>
   )
 }

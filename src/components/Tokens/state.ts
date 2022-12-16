@@ -1,4 +1,4 @@
-// import { TimePeriod } from 'services/graphql/data/util'
+import { TimePeriod } from 'services/graphql/data/util'
 import { atom, useAtom } from 'jotai'
 import { atomWithReset } from 'jotai/utils'
 import { useCallback } from 'react'
@@ -11,8 +11,7 @@ export enum TokenSortMethod {
 }
 
 export const filterStringAtom = atomWithReset<string>('')
-// export const filterTimeAtom = atom<TimePeriod>(TimePeriod.DAY)
-export const filterTimeAtom = atom<any>('24H')
+export const filterTimeAtom = atom<TimePeriod>(TimePeriod.DAY)
 export const sortMethodAtom = atom<TokenSortMethod>(TokenSortMethod.VOLUME)
 export const sortAscendingAtom = atom<boolean>(false)
 

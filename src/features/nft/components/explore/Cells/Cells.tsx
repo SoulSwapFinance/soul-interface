@@ -5,10 +5,11 @@ import { Denomination } from 'features/nft/types'
 import { volumeFormatter } from 'features/nft/utils'
 import { ReactNode } from 'react'
 import styled from 'styled-components/macro'
-import { ethNumberStandardFormatter, formatWeiToDecimal } from 'features/nft/utils/currency'
-import { ThemedText } from 'theme/components/text'
+// import { ThemedText } from 'theme'
 
-// import * as styles from './Cells.css'
+import { ethNumberStandardFormatter, formatWeiToDecimal } from 'features/nft/utils/currency'
+import * as styles from './Cells.css'
+import { ThemedText } from 'theme/components/text'
 
 const TruncatedText = styled.div`
   overflow: hidden;
@@ -123,7 +124,7 @@ export const EthCell = ({
       : ethNumberStandardFormatter(denominatedValue, true, false, true)
     : '-'
 
-  // const isMobile = useIsMobile()
+  const isMobile = useIsMobile()
 //   const TextComponent = isMobile ? ThemedText.BodySmall : ThemedText.BodyPrimary
 
   return (

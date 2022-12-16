@@ -3,7 +3,7 @@ import graphql from 'babel-plugin-relay/macro'
 import { WrappedTokenInfo } from 'state/lists/wrappedTokenInfo'
 
 import { TokenQuery$data } from './__generated__/TokenQuery.graphql'
-// import { CHAIN_NAME_TO_CHAIN_ID } from './util'
+import { CHAIN_NAME_TO_CHAIN_ID } from './util'
 
 /*
 The difference between Token and TokenProject:

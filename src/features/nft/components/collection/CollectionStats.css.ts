@@ -4,6 +4,8 @@ import { loadingAsset, loadingBlock } from 'features/nft/css/loading.css'
 import { vars } from '../../css/sprinkles.css'
 
 export const statsText = [
+  // sprinkles(
+
     {
     // marginTop: { sm: '8', md: '40' },
     // marginBottom: { sm: '0', md: '28' },
@@ -17,7 +19,8 @@ export const statsText = [
   },
 ]
 
-export const baseCollectionImage =
+export const baseCollectionImage = 
+// sprinkles(
   {
   left: '0',
   borderStyle: 'solid',
@@ -50,6 +53,7 @@ export const collectionImage =
 
 export const statsLabel = [
   subheadSmall,
+  // sprinkles(
 
     {
     color: 'textSecondary',
@@ -70,6 +74,7 @@ export const statsValue = [
 
 export const statsValueLoading = [
   loadingAsset,
+  // sprinkles(
     {
     width: '60',
     height: '20',
@@ -79,6 +84,7 @@ export const statsValueLoading = [
 
 export const statsLabelLoading = [
   loadingAsset,
+  // sprinkles(
     {
     width: '60',
     height: '16',
@@ -87,6 +93,7 @@ export const statsLabelLoading = [
 
 export const descriptionLoading = [
   loadingAsset,
+  // sprinkles(
     {
     height: '20',
   },
@@ -96,17 +103,21 @@ export const descriptionLoading = [
 ]
 
 export const collectionImageIsLoadingBackground =
+//  style(
   [
   collectionImage,
+  // sprinkles(
     {
     backgroundColor: 'backgroundSurface',
   },
 ]
 
 export const collectionImageIsLoading = 
+// style(
   [
   loadingBlock,
   collectionImage,
+  // sprinkles(
     {
     borderStyle: 'solid',
     borderWidth: '4px',
@@ -115,8 +126,10 @@ export const collectionImageIsLoading =
 ]
 
 export const nameTextLoading = 
+// style(
   [
   loadingAsset,
+  // sprinkles(
     {
     height: '32',
   },

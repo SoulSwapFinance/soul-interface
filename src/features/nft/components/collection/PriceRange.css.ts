@@ -2,6 +2,7 @@ import { body } from 'features/nft/css/common.css'
 
 export const priceInput = [
   body,
+  // sprinkles(
     {
     backgroundColor: 'transparent',
     padding: '12',
