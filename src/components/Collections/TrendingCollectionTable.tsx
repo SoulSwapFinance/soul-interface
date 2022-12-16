@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { optimizeImage } from 'features/nft/lib/optimizeImage'
 import FormatEth from 'components/NFT/format/FormatEth'
 import useCollections from 'features/nft/hooks/useCollections'
@@ -85,10 +84,9 @@ const TrendingCollectionTable: FC<Props> = ({ fallback }) => {
                   </div>
                   <Link href={tokenHref}>
                     <a className="flex items-center gap-2">
-                      <Image
+                      <img
                         src={optimizeImage(image, 140)}
                         className="h-[64px] w-[64px] rounded-full object-cover"
-                        alt={'collection image'}
                       />
                       <div
                         className={`nfnt-h6 overflow-hidden truncate whitespace-nowrap dark:text-white ${

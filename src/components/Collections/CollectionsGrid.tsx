@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { optimizeImage } from 'features/nft/lib/optimizeImage'
 import ImagesGrid from 'components/NFT/ImagesGrid'
 import useCollections from 'features/nft/hooks/useCollections'
@@ -68,10 +67,9 @@ const CollectionsGrid: FC<Props> = ({ collections }) => {
                   />
                   <div className="mt-3 flex items-center gap-2">
                     {collection?.image ? (
-                      <Image
+                      <img
                         src={optimizeImage(collection?.image, 80)}
                         className="h-12 w-12 rounded-full"
-                        alt={'collection image'}
                       />
                     ) : (
                       <div className="h-12 w-12 flex-none rounded-full bg-gradient-to-br from-primary-500 to-primary-900"></div>

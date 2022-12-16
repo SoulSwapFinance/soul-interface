@@ -3,7 +3,6 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { paths } from 'nfnt-client-sdk'
 import { FiChevronDown } from 'react-icons/fi'
 import Link from 'next/link'
-import Image from 'next/image'
 
 type Props = {
   collections: paths['/search/collections/v1']['get']['responses']['200']['schema']['collections']
@@ -57,7 +56,7 @@ const CommunityDropdown: FC<Props> = ({ collections, defaultCollectionId }) => {
                     }}
                     className={`flex max-w-full items-center gap-2 rounded-none px-6 py-4 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800`}
                   >
-                    <Image
+                    <img
                       src={collection.image}
                       alt={`${collection.name} Collection Image`}
                       className="h-9 w-9 shrink-0 overflow-hidden rounded-full"

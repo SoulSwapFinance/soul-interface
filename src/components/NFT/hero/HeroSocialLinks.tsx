@@ -3,7 +3,6 @@ import { paths } from 'nfnt-client-sdk'
 import { FC } from 'react'
 import { FiGlobe, FiMoreVertical } from 'react-icons/fi'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import Image from 'next/image'
 
 type Props = {
   collection:
@@ -51,7 +50,7 @@ const HeroSocialLinks: FC<Props> = ({ collection }) => {
                   rel="noopener noreferrer"
                   href={social.discordUrl}
                 >
-                  <Image
+                  <img
                     src="/icons/Discord.svg"
                     alt="Discord Icon"
                     className="h-6 w-6"
@@ -68,7 +67,7 @@ const HeroSocialLinks: FC<Props> = ({ collection }) => {
                   rel="noopener noreferrer"
                   href={`https://twitter.com/${social.twitterUsername}`}
                 >
-                  <Image
+                  <img
                     src="/icons/Twitter.svg"
                     alt="Twitter Icon"
                     className="h-6 w-6"
@@ -84,7 +83,7 @@ const HeroSocialLinks: FC<Props> = ({ collection }) => {
                 rel="noopener noreferrer"
                 href={social.etherscanUrl}
               >
-                <Image
+                <img
                   src={etherscanLogo}
                   alt="Etherscan Icon"
                   className="h-6 w-6"
@@ -119,7 +118,7 @@ const HeroSocialLinks: FC<Props> = ({ collection }) => {
             rel="noopener noreferrer"
             href={social.discordUrl}
           >
-            <Image
+            <img
               src="/icons/Discord.svg"
               alt="Discord Icon"
               className="h-6 w-6"
@@ -133,7 +132,7 @@ const HeroSocialLinks: FC<Props> = ({ collection }) => {
             rel="noopener noreferrer"
             href={`https://twitter.com/${social.twitterUsername}`}
           >
-            <Image
+            <img
               src="/icons/Twitter.svg"
               alt="Twitter Icon"
               className="h-6 w-6"
@@ -146,7 +145,7 @@ const HeroSocialLinks: FC<Props> = ({ collection }) => {
           rel="noopener noreferrer"
           href={social.etherscanUrl}
         >
-          <Image src={etherscanLogo} alt="Etherscan Icon" className="h-6 w-6" />
+          <img src={etherscanLogo} alt="Etherscan Icon" className="h-6 w-6" />
         </a>
         {typeof social.externalUrl === 'string' && (
           <a

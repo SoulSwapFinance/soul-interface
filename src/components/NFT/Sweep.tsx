@@ -24,8 +24,6 @@ import Link from 'next/link'
 import { Signer } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
 import Toast from './Toast'
-import Image from 'next/image'
-
 
 const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID
 const DARK_MODE = process.env.NEXT_PUBLIC_DARK_MODE
@@ -250,7 +248,7 @@ const Sweep: FC<Props> = ({ tokens, collection, mutate, setToast }) => {
                     <div className="mb-4 flex items-center justify-between">
                       <Dialog.Title className="nfnt-h4 font-headings dark:text-white">
                         <div className="flex items-center gap-4">
-                          <Image
+                          <img
                             src={
                               collection?.data?.collection?.metadata
                                 ?.imageUrl as string
@@ -300,12 +298,12 @@ const Sweep: FC<Props> = ({ tokens, collection, mutate, setToast }) => {
                     <div className="mb-8 grid h-[215px] grid-cols-5 justify-center gap-2 overflow-y-auto pr-2 md:grid-cols-7">
                       {sweepTokens?.map((token) => (
                         <div className="relative" key={token.tokenId}>
-                          <Image
+                          <img
                             className="absolute top-1 right-1 h-4 w-4"
                             src={`https://api.reservoir.tools/redirect/logo/v1?source=${token?.source}`}
                             alt={`${token?.source} icon`}
                           />
-                          <Image
+                          <img
                             src={optimizeImage(token?.image, 72)}
                             className="mb-2 h-[72px] w-full rounded-lg object-cover"
                             alt={`${token?.name} image`}
@@ -360,10 +358,9 @@ const Sweep: FC<Props> = ({ tokens, collection, mutate, setToast }) => {
                           target="_blank"
                         >
                           Powered by{' '}
-                          <Image
+                          <img
                             width={'125px'}
                             height={'125px'}
-                            alt={'SoulSwap Title Logo'}
                             src={
                               !!DARK_MODE
                                 ? `/title-logo-words-brand.png`

@@ -1,6 +1,7 @@
 import { FC, useEffect, useState, ComponentProps, useRef } from 'react'
 import { FiChevronDown } from 'react-icons/fi'
 import { paths } from 'nfnt-client-sdk/dist/types'
+import { useSigner } from 'wagmi'
 import AttributeOfferModal from './attribute/AttributeOfferModal'
 import CollectionOfferModal from 'components/Collections/CollectionOfferModal'
 import toast from 'react-hot-toast'
@@ -14,8 +15,6 @@ import HeroStats from './hero/HeroStats'
 import Sweep from './Sweep'
 import ReactMarkdown from 'react-markdown'
 import Toast from './Toast'
-import Image from 'next/image'
-import { useActiveWeb3React } from 'services/web3'
 
 const envBannerImage = process.env.NEXT_PUBLIC_BANNER_IMAGE
 const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID
@@ -39,9 +38,7 @@ type CollectionModalProps = ComponentProps<typeof CollectionOfferModal>
 type AttibuteModalProps = ComponentProps<typeof AttributeOfferModal>
 
 const Hero: FC<Props> = ({ fallback, collectionId }) => {
-  // const { data: signer } = useSigner()
-  const { library } = useActiveWeb3React()
-  const signer = library.getSigner()
+  const { data: signer } = useSigner()
   const collection = useCollection(fallback.collection, collectionId)
   const router = useRouter()
   const stats = useCollectionStats(router, collectionId)
@@ -175,7 +172,7 @@ const Hero: FC<Props> = ({ fallback, collectionId }) => {
     {/* @ts-ignore */}
       <HeroBackground banner={header.banner}>
         <div className="z-10 flex w-full flex-col items-center gap-6">
-          <Image
+          <img
             className="h-20 w-20 rounded-full"
             alt={`${header.name} Logo`}
             src={header.image}

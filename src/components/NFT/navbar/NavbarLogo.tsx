@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { FC } from 'react'
-import Image from 'next/image'
 
 const NAVBAR_LOGO = process.env.NEXT_PUBLIC_NAVBAR_LOGO
 const CHAIN_ID = process.env.NEXT_PUBLIC_CHAIN_ID
@@ -26,14 +25,14 @@ const NavbarLogo: FC<Props> = ({ variant, className }) => {
       <a
         className={`relative inline-flex flex-none items-center gap-1 ${className}`}
       >
-        <Image
+        <img
           src={logo}
           alt={logoAlt}
           className={`h-9 w-auto ml-0 ${!variant ? 'md:hidden' : ''} ${
             desktopVariant ? 'hidden' : ''
           } ${mobileVariant ? 'block' : ''}`}
         />
-        <Image
+        <img
           src={desktopLogo}
           alt={logoAlt}
           className={`h-9 w-auto md:block ${

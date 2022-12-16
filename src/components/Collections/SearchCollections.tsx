@@ -1,6 +1,5 @@
 import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import Downshift from 'downshift'
 import { useRouter } from 'next/router'
 import setParams from 'features/nft/lib/params'
@@ -151,7 +150,7 @@ const SearchCollections: FC<Props> = ({ communityId, initialResults }) => {
                             : ''
                         }`}
                       >
-                        <Image
+                        <img
                           src={
                             collection?.image ??
                             'https://via.placeholder.com/30'
@@ -201,7 +200,7 @@ const SearchCollections: FC<Props> = ({ communityId, initialResults }) => {
                         : ''
                     }`}
                   >
-                    <Image
+                    <img
                       src={
                         collection?.image ?? 'https://via.placeholder.com/30'
                       }
