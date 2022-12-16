@@ -3,7 +3,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import ExpirationSelector from 'components/NFT/ExpirationSelector'
 import { BigNumber, constants, ethers } from 'ethers'
 import calculateOffer from 'features/nft/lib/calculateOffer'
-import FormatEth from '../format/FormatEth'
+import FormatEth from '../NFT/format/FormatEth'
 import expirationPresets from 'features/nft/lib/offerExpirationPresets'
 import { Weth } from 'nfnt-sdk/dist/common/helpers'
 import getWeth from 'features/nft/lib/getWeth'
@@ -14,7 +14,7 @@ import {
   ReservoirSDK,
   ReservoirSDKActions,
 } from 'nfnt-client-sdk'
-import ModalCard from '../modal/ModalCard'
+import ModalCard from './modal/ModalCard'
 // import Toast from './Toast'
 import { CgSpinner } from 'react-icons/cg'
 import { GlobalContext } from 'contexts/GlobalState'
