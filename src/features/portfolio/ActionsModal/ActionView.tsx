@@ -1,4 +1,4 @@
-import { SwitchHorizontalIcon } from '@heroicons/react/solid'
+import { SwitchHorizontalIcon, TrendingUpIcon } from '@heroicons/react/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { NATIVE } from 'sdk'
@@ -27,16 +27,13 @@ const ActionView: FC<ActionViewProps> = ({ onClose }) => {
   const router = useRouter()
 
   const swapActionHandler = useCallback(async () => {
-    // @ts-ignore TYPE NEEDS FIXING
-    if (featureEnabled(Feature.TRIDENT, chainId)) {
-      if (currency?.isNative) return router.push('/trident/swap')
-      // @ts-ignore TYPE NEEDS FIXING
-      return router.push(`/exchange/swap?&tokens=${NATIVE[chainId].symbol}&tokens=${currency?.wrapped.address}`)
-    }
-
     if (currency?.isNative) return router.push('/swap')
 
     return router.push(`/swap?inputCurrency=${currency?.wrapped.address}`)
+  }, [chainId, currency?.isNative, currency?.wrapped.address, router])
+
+  const analyticsActionHandler = useCallback(async () => {
+    return router.push(`/analytics/tokens/${currency?.wrapped.address}`)
   }, [chainId, currency?.isNative, currency?.wrapped.address, router])
 
   return (
@@ -47,6 +44,13 @@ const ActionView: FC<ActionViewProps> = ({ onClose }) => {
         label={i18n._(t`Swap ${currency?.isNative ? NATIVE[chainId].symbol : currency?.symbol}`)}
         onClick={swapActionHandler}
       />
+      {featureEnabled(Feature.ANALYTICS, chainId) && (
+        <ActionItem
+        svg={<TrendingUpIcon width={24} />}
+        label={i18n._(t`${currency?.isNative ? NATIVE[chainId].symbol : currency?.symbol} Analytics`)}
+        onClick={analyticsActionHandler}
+      />
+      )}
       {/*@ts-ignore TYPE NEEDS FIXING*/}
       {featureEnabled(Feature.COFFINBOX, chainId) && (
         <>
