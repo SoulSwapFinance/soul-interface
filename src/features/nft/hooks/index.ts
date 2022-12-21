@@ -1,5 +1,5 @@
 export * from './useBag'
-export * from './useCollectionFilters'
+// export * from './useCollectionFilters'
 // export * from './useFiltersExpanded'
 // export * from './useIsCollectionLoading'
 export * from './useIsMobile'

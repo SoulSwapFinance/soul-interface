@@ -4,51 +4,51 @@ import {
   Button
 } from "components/index";
 import { Button as ButtonComponent } from 'components/Button'
-import Column, { AutoColumn } from "../../components/Column";
-import styled from "styled-components";
+import Column, { AutoColumn } from "../../components/Column"
+import styled from "styled-components"
 import {
   chainToNetworkInfoMap,
   supportedChainsForBridge,
   transactionStatusMapping,
-} from "../../utils/bridge";
-// import DropDownButton from "../../components/DropDownButton";
-import useBridgeApi from "../../hooks/useBridgeApi";
-import useMultiChain from "../../hooks/useMultiChain";
-import Modal from "./components/Modal";
-// import ModalTitle from "./components/ModalTitle";
-import ModalContent from "./components/ModalContent";
-import Scrollbar from "../../components/Scrollbar";
-import useModal from "../../hooks/useModal";
-import InputCurrencyBox from "./components/InputCurrencyBox";
-import { AddressZero } from "@ethersproject/constants";
+} from "../../utils/bridge"
+// import DropDownButton from "../../components/DropDownButton"
+import useBridgeApi from "../../hooks/useBridgeApi"
+import useMultiChain from "../../hooks/useMultiChain"
+import Modal from "components/Bridge/Modal"
+// import ModalTitle from "components/Bridge/ModalTitle"
+import ModalContent from "components/Bridge/ModalContent"
+import Scrollbar from "components/Scrollbar"
+import useModal from "../../hooks/useModal"
+import InputCurrencyBox from "components/Bridge/InputCurrencyBox"
+import { AddressZero } from "@ethersproject/constants"
 import {
   formatSimpleValue,
   unitToWei,
   weiToUnit,
-} from "../../utils/conversion";
-import { formatAddress, loadERC20Contract } from "../../utils/wallet";
-import useBridge from "../../hooks/useBridge";
-import useSendTransaction from "../../hooks/useSendTransaction";
-import useFantomERC20 from "../../hooks/useFantomERC20";
-import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
-import { BigNumber } from "@ethersproject/bignumber";
-import Loader from "../../components/Loader";
-import FadeInOut from "../../components/AnimationFade";
-import { ContentBox, OverlayButton, Typo1, Typo2, Typo3 } from "components/index";
-import InputError from "components/Input/Error";
-import { useActiveWeb3React } from "services/web3";
-import { ArrowDownIcon } from "@heroicons/react/solid";
+} from "../../utils/conversion"
+import { formatAddress, loadERC20Contract } from "../../utils/wallet"
+import useBridge from "../../hooks/useBridge"
+import useSendTransaction from "../../hooks/useSendTransaction"
+import useFantomERC20 from "../../hooks/useFantomERC20"
+import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2"
+import { BigNumber } from "@ethersproject/bignumber"
+import Loader from "../../components/Loader"
+import FadeInOut from "../../components/AnimationFade"
+import { ContentBox, OverlayButton, Typo1, Typo2, Typo3 } from "components/index"
+import InputError from "components/Input/Error"
+import { useActiveWeb3React } from "services/web3"
+import { ArrowDownIcon } from "@heroicons/react/solid"
 import Image from 'next/image'
-import Typography from "components/Typography";
-import SwapHeader from "features/swap/SwapHeader";
-import Container from "components/Container";
-import NavLink from "components/NavLink";
-// import { NETWORK_ICON, NETWORK_LABEL } from "config/networks";
-// import NetworkModal from "modals/NetworkModal";
-// import { useNetworkModalToggle } from "state/application/hooks";
-import Web3Network from "components/Web3Network";
-import { getChainColor, getChainColorCode } from "constants/chains";
-import SwapDropdown from "features/swap/SwapDropdown";
+import Typography from "components/Typography"
+import SwapHeader from "features/swap/SwapHeader"
+import Container from "components/Container"
+import NavLink from "components/NavLink"
+// import { NETWORK_ICON, NETWORK_LABEL } from "config/networks"
+// import NetworkModal from "modals/NetworkModal"
+// import { useNetworkModalToggle } from "state/application/hooks"
+import Web3Network from "components/Web3Network"
+import { getChainColor, getChainColorCode } from "constants/chains"
+import SwapDropdown from "features/swap/SwapDropdown"
 
 const ChainSelect: React.FC<any> = ({ selectChain, chains }) => {
   return (

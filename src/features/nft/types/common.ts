@@ -1,4 +1,4 @@
-import { SortBy } from 'features/nft/hooks'
+// import { SortBy } from 'features/nft/hooks'
 import { SellOrder } from './sell'
 
 export interface OpenSeaCollection {
@@ -170,7 +170,7 @@ export interface DropDownOption {
   onClick: () => void
   reverseIndex?: number
   reverseOnClick?: () => void
-  sortBy?: SortBy
+  sortBy?: any // SortBy
 }
 
 export enum DetailsOrigin {

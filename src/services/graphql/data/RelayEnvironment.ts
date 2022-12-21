@@ -1,4 +1,4 @@
-import ms from 'ms.macro'
+// import ms from 'ms.macro'
 import { Variables } from 'react-relay'
 import { Environment, Network, RecordSource, RequestParameters, Store } from 'relay-runtime'
 import RelayQueryResponseCache from 'relay-runtime/lib/network/RelayQueryResponseCache'
@@ -8,7 +8,7 @@ import fetchGraphQL from './fetchGraphQL'
 // max number of request in cache, least-recently updated entries purged first
 const size = 250
 // number in milliseconds, how long records stay valid in cache
-const ttl = ms`5m`
+const ttl = 5 * 60 // 5mins
 export const cache = new RelayQueryResponseCache({ size, ttl })
 
 const fetchQuery = async function wrappedFetchQuery(params: RequestParameters, variables: Variables) {
@@ -31,7 +31,7 @@ const fetchQuery = async function wrappedFetchQuery(params: RequestParameters, v
 // and reusing cached data if its available/fresh.
 const gcReleaseBufferSize = 10
 
-const queryCacheExpirationTime = ms`1m`
+const queryCacheExpirationTime = 1 * 60 // 1min
 
 const store = new Store(new RecordSource(), { gcReleaseBufferSize, queryCacheExpirationTime })
 const network = Network.create(fetchQuery)
