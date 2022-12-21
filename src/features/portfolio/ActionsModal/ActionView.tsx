@@ -47,7 +47,7 @@ const ActionView: FC<ActionViewProps> = ({ onClose }) => {
       {featureEnabled(Feature.ANALYTICS, chainId) && (
         <ActionItem
         svg={<TrendingUpIcon width={24} />}
-        label={i18n._(t`${currency?.isNative ? NATIVE[chainId].symbol : currency?.symbol} Analytics`)}
+        label={i18n._(t`View Analytics`)}
         onClick={analyticsActionHandler}
       />
       )}
