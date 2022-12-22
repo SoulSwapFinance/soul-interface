@@ -786,34 +786,125 @@ export function useSummonerUserInfo(pid): { status: string; summonerUserInfo: T 
   return { status, summonerUserInfo }
 }
 
+export function useDeFarmInfo(): { status: string; defarmInfo: T } {
+  const { chainId } = useActiveWeb3React()
+  const [status, setStatus] = useState<string>('idle')
+  const URL = chainId == 250 ? BASE_URL : `https://avax-api.soulswap.finance`
+
+  const [defarmInfo, setInfo] = useState<T>({
+    address: "0x1E786a13C97a333A445c89487985A9eBDebe0c97",
+    poolLength: "1",
+    bloodSacrifice: "1000000000000000000"
+  })  
+  useEffect(() => {
+    const fetchData = async () => {
+      setStatus('fetching')
+      const response = await fetch(`${URL}/defarm`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Referrer-Policy': 'no-referrer',
+        },
+      })
+      const json = await response.json()
+      setInfo(json as T)
+      setStatus('fetched')
+    }
+    if ([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId)) 
+    fetchData()
+  }, [])
+
+  return { status, defarmInfo }
+}
+
+
+export function useDeFarmPoolInfo(pid): { status: string; defarmPoolInfo: T } {
+  const { chainId } = useActiveWeb3React()
+  const [status, setStatus] = useState<string>('idle')
+  const URL = chainId == 250 ? BASE_URL : `https://avax-api.soulswap.finance`
+
+  const [defarmPoolInfo, setInfo] = useState<T>({
+    pid: '0',
+    name: 'Manifest: RewardToken',
+    symbol: 'TOKEN-FTM MP',
+    rewardSymbol: 'TOKEN',
+    logoURI: '',
+    mAddress: '0xfE995046be5e26F00466b92DF4B8B947bB4422c5',
+    lpAddress: '0xA905afF2dFAd9d3925D30c782ccbaE6423345917',
+    rewardToken: '0x455783da1a4B349C3655b09747c62939e2493350',
+    rewardRemaining: '100000000000000000000',
+    status: 'active',
+    pairType: 'farm',
+    rewardPerSecond: '115740740740740',
+    startTime: '0',
+    endTime: '0',
+    dailyReward: '10000000000000000000',
+    feeDays: '4000000000000000000',
+    token0: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83',
+    token1: '0x455783da1a4B349C3655b09747c62939e2493350',
+    token0Balance: '1',
+    token1Balance: '100',
+    totalSupply: '10',
+    lpBalance: '0',
+    lpShare: '0',
+    annualRewards: '3650',
+    rewardsPrice: '0.002008373020980821',
+    annualRewardsValue: '7.330561526579998',
+    lpValue: '0.4069',
+    lpPrice: '0.04069',
+    tvl: '0',
+    apr: '0'
+  })
+  useEffect(() => {
+    const fetchData = async () => {
+      setStatus('fetching')
+      const response = await fetch(`${URL}/defarm/${pid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Referrer-Policy': 'no-referrer',
+        },
+      })
+      const json = await response.json()
+      setInfo(json as T)
+      setStatus('fetched')
+    }
+    if ([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId)) 
+    fetchData()
+  }, [])
+
+  return { status, defarmPoolInfo }
+}
+
 export function useDeFarmUserInfo(pid): { status: string; defarmUserInfo: T } {
   const { account, chainId } = useActiveWeb3React()
   const [status, setStatus] = useState<string>('idle')
   const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
 
   const [defarmUserInfo, setInfo] = useState<T>({
-      userAddress: account,
-      pairAddress: '',
-      walletBalance: '0',
-      stakedBalance: '0',
-      stakedValue: '0',
-      pendingSoul: '0',
-      pendingValue: '0',
-      lpPrice: '0',
-
-      userDelta: '0',
-      timeDelta: '0',
-      firstDepositTime: '0',
-      lastDepositTime: '0',
-      secondsRemaining: '0',
-      rewardDebtAtTimes: '0',
-      currentRate: '0',
-      api: 'https://api.soulswap.finance',
-  })  
+    userAddress: '0xFd63Bf84471Bc55DD9A83fdFA293CCBD27e1F4C8',
+    name: 'Manifest: RewardToken',
+    pairAddress:'0xA905afF2dFAd9d3925D30c782ccbaE6423345917',
+    pendingRewards: '0',
+    pendingValue: '0',
+    stakedBalance: '0',
+    walletBalance: '0',
+    stakedValue: '0',
+    lpPrice: '.04069',
+    userDelta: '0',
+    rewardDebt: '0',
+    lastWithdrawTime: '0',
+    firstDepositTime: '0',
+    timeDelta: '0',
+    secondsRemaining: '864000',
+    currentRate: '0',
+    startTime: '0',
+    endTime: '0',
+  })
   useEffect(() => {
     const fetchData = async () => {
       setStatus('fetching')
-      const response = await fetch(`${URL}/summoner/users/${account}/${pid}`, {
+      const response = await fetch(`${URL}/defarm/users/${account}/${pid}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

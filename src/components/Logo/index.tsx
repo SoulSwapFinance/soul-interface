@@ -24,7 +24,7 @@ const Logo: FC<LogoProps> = ({ srcs, width, height, alt = '', className, ...rest
     <div className="rounded">
       <Image
         unoptimized
-        src={src || 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/unknown.png'}
+        src={src || 'https://raw.githubusercontent.com/SoulSwapFinance/icons/prod/token/unknown.png'}
         loader={cloudinaryLoader}
         onError={() => {
           if (src) BAD_SRCS[src] = true

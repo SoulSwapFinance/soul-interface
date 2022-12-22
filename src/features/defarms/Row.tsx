@@ -2,15 +2,15 @@ import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
-import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, SUMMONER_ADDRESS, Token, WNATIVE } from 'sdk'
-import { useTokenContract, useSummonerContract, useZapperContract, useManifesterContract } from 'hooks/useContract'
+import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, MANIFESTER_ADDRESS, Token, WNATIVE } from 'sdk'
+import { useTokenContract, useZapperContract, useManifesterContract, useManifestationContract } from 'hooks/useContract'
 import useApprove from 'hooks/useApprove'
 import { Tab } from '@headlessui/react'
 import {
     FarmContentWrapper, FarmContainer, FarmItem, FarmItemBox, Text, SubmitButton, Wrap
 } from './Styles'
-import { classNames, formatNumber, tryParseAmount } from 'functions'
-import { usePairInfo, useSummonerInfo, useSummonerPoolInfo, useDeFarmUserInfo, useTokenInfo, useUserTokenInfo } from 'hooks/useAPI'
+import { classNames, formatDate, formatNumber, formatUnixTimestampToDay, tryParseAmount } from 'functions'
+import { usePairInfo, useDeFarmInfo, useDeFarmUserInfo, useTokenInfo, useUserTokenInfo, useDeFarmPoolInfo } from 'hooks/useAPI'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 import Modal from 'components/DefaultModal'
 import { Button } from 'components/Button'
@@ -26,6 +26,8 @@ import { getChainColor } from 'constants/chains'
 import { ExternalLink } from 'components/ReusableStyles'
 import { CollectionIcon, CurrencyDollarIcon, DatabaseIcon } from '@heroicons/react/outline'
 import { useCurrencyBalance } from 'state/wallet/hooks'
+import { t } from '@lingui/macro'
+import { i18n } from '@lingui/core'
 
 const HideOnSmall = styled.div`
 @media screen and (max-width: 900px) {
@@ -44,48 +46,20 @@ const TokenPairLink = styled(ExternalLink)`
   padding-left: 10;
 `
 
-export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, token0Symbol, token1Symbol, token0Address, token1Address }) => {
+export const ActiveRow = ({ pid, farm, depositSymbol, token0Symbol, token1Symbol, token0Address, token1Address }) => {
     const { account, chainId, library } = useActiveWeb3React()
-    const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(depositAddress)
 
     const [approved, setApproved] = useState(false)
     const [approvedZap, setZapApproved] = useState(false)
     const [withdrawValue, setWithdrawValue] = useState('0')
     const [depositValue, setDepositValue] = useState('0')
     const [zapValue, setZapValue] = useState('0')
-    const [farmAddress, setFarmAddress] = useState('0xe7A3d3a56b08358f6EB0120eE46b2DD7930c4C26')
+    // const [farmAddress, setFarmAddress] = useState('0xe7A3d3a56b08358f6EB0120eE46b2DD7930c4C26')
     const [zapTokenAddress, setZapTokenAddress] = useState(SOUL_ADDRESS[chainId])
 
-    const SoulSummonerContract = useSummonerContract()
-    const ZapContract = useZapperContract()
-    const ZapContractAddress = ZapContract.address
-
-    const nowTime = new Date().getTime()
-    const { summonerInfo } = useSummonerInfo()
-    const startRate = Number(summonerInfo.startRate)
-
-    const { summonerPoolInfo } = useSummonerPoolInfo(pid)
-    const liquidity = summonerPoolInfo.tvl
-    const APR = summonerPoolInfo.apr
-    const allocPoint = summonerPoolInfo.allocPoint
-    const pairStatus = summonerPoolInfo.status
-
-    const ManifesterContract = useManifesterContract()
-
-    async function getFarmAddress(_pid) {
-        let farmAddress = await ManifesterContract.manifestations(_pid)
-        //  console.log('farmAddress: %s ', _farmAddress)
-
-        setFarmAddress(farmAddress)
-        return farmAddress
-    }
-
-    // const { userInfo } = useUserInfo()
-    const { pairInfo } = usePairInfo(farm?.depositAddress)
-    // assumes 18, since only SOUL-LP farms are eligible for Zap   
-    const token0Decimals = Number(pairInfo.token0Decimals)
-    const token1Decimals = Number(pairInfo.token1Decimals)
-    const assetDecimals = decimals
+    // const nowTime = new Date().getTime()
+    const { defarmInfo } = useDeFarmInfo()
+    // const startRate = Number(defarmInfo.startRate)
 
     const [showOptions, setShowOptions] = useState(false)
     const [openDeposit, setOpenDeposit] = useState(false)
@@ -93,27 +67,42 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
     const [openWithdraw, setOpenWithdraw] = useState(false)
     const [openZap, setOpenZap] = useState(false)
 
-    // SUMMONER USER INFO //
+    // DEFARM USER INFO //
     const { defarmUserInfo } = useDeFarmUserInfo(pid)
     const stakedBalance = Number(defarmUserInfo.stakedBalance)
     const stakedValue = Number(defarmUserInfo.stakedValue)
-    const earnedAmount = Number(defarmUserInfo.pendingSoul)
+    const earnedAmount = Number(defarmUserInfo.pendingRewards)
     const earnedValue = Number(defarmUserInfo.pendingValue)
     const lpPrice = Number(defarmUserInfo.lpPrice)
     const withdrawFee = Number(defarmUserInfo.currentRate)
     const walletBalance = Number(defarmUserInfo.walletBalance)
-
+    // const lastWithdrawTime = Number(defarmUserInfo.lastWithdrawTime)
+    // const secondsRemaining = Number(defarmUserInfo.secondsRemaining)
+    // const currentRate = Number(defarmUserInfo.currentRate)
+    
     const feeAmount = withdrawFee * stakedBalance / 100
     const withdrawable = stakedBalance - feeAmount
     const feeValue = feeAmount * lpPrice
+    
+    // DEFARM POOL INFO //
+    const { defarmPoolInfo } = useDeFarmPoolInfo(pid)
+    const mAddress = defarmPoolInfo.mAddress
+    const rewardSymbol = defarmPoolInfo.rewardSymbol
+    const liquidity = defarmPoolInfo.tvl
+    const APR = defarmPoolInfo.apr
+    const pairStatus = defarmPoolInfo.status
+    const rewardAddress = defarmPoolInfo.rewardToken
+    const depositAddress = defarmPoolInfo.lpAddress
+    // const startTime = Number(defarmPoolInfo.startTime)
+    const symbol = defarmPoolInfo.symbol
+    const endTime = Number(defarmPoolInfo.endTime)
 
     const hasBalance = Number(walletBalance) > 0
     const isActive = pairStatus == "active"
-    const assetToken = new Token(chainId, depositAddress, decimals)
-    // console.log('depositAddress:%s', depositAddress)
-    // reward always 18 decimals
+    const assetToken = new Token(chainId, depositAddress, 18)
     const rewardToken = new Token(chainId, rewardAddress, 18)
 
+    const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(depositAddress)
     const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
     const parsedDepositValue = tryParseAmount(depositValue, assetToken)
     const parsedWithdrawValue = tryParseAmount(withdrawValue, assetToken)
@@ -123,15 +112,18 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
     const buttonTextColor = "white"
     const textColor = !isActive ? "text-pink" : "text-dark-600"
 
+    // PAIR INFO //
+    const { pairInfo } = usePairInfo(depositAddress)
+
     // (de)Constructs Tokens //
-    const token0 = new Token(chainId, token0Address, token0Decimals)
-    const token1 = new Token(chainId, token1Address, token1Decimals)
+    const token0 = new Token(chainId, token0Address, 18)
+    const token1 = new Token(chainId, token1Address, 18)
 
-    // NATIVE KEYS //
-    // const nativeToken0 = farm.token0Symbol == WNATIVE[chainId].symbol
-    // const nativeToken1 = farm.token1Symbol == WNATIVE[chainId].symbol 
-
-    const nativeToken0 = farm.token0Symbol == WNATIVE[chainId].symbol
+    // CONTRACTS //
+    const ManifesterContract = useManifesterContract()
+    const ManifestationContract = useManifestationContract(mAddress)
+    const ZapContract = useZapperContract()
+    const ZapContractAddress = ZapContract.address
 
     // ZAP ADD-ONS //
     const tokenContract = useTokenContract(zapTokenAddress)
@@ -153,7 +145,7 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
     }, [setModalOpen])
     // runs only on initial render/mount
     useEffect(() => {
-        fetchApproval()
+        fetchApproval(mAddress)
     }, [account])
 
     /**
@@ -162,7 +154,7 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
     const handleShowOptions = () => {
         setShowOptions(!showOptions)
         if (showOptions) {
-            fetchApproval()
+            fetchApproval(mAddress)
             setOpenDeposit(false)
             setOpenWithdraw(false)
         }
@@ -172,13 +164,13 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
         setOpenZap(!openZap)
     }
 
-    // checks: approval for summoner to move tokens.
-    const fetchApproval = async () => {
+    // checks: approval for defarm to move tokens.
+    const fetchApproval = async (manifestationAddress: string) => {
         if (!account) {
             // alert('Connect Wallet')
         } else {
-            // Checks if SoulSummonerContract can move tokens
-            const amount = await erc20Allowance(account, SUMMONER_ADDRESS[chainId])
+            // Checks if ManifestationContract can move tokens
+            const amount = await erc20Allowance(account, manifestationAddress)
             if (amount > 0) setApproved(true)
             return amount
         }
@@ -197,14 +189,14 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
         }
     }
 
-    // enables: summoner tranfers approval.
-    const handleApprove = async () => {
+    // enables: defarm tranfers approval.
+    const handleApprove = async (manifestationAddress: string) => {
         if (!account) {
             // alert('Connect Wallet')
         } else {
             try {
-                const tx = await erc20Approve(SUMMONER_ADDRESS[chainId])
-                await tx?.wait().then(await fetchApproval())
+                const tx = await erc20Approve(manifestationAddress)
+                await tx?.wait().then(await fetchApproval(manifestationAddress))
             } catch (e) {
                 // alert(e.message)
                 console.log(e)
@@ -226,41 +218,38 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
     }
 
     // handles: harvest for given pid
-    const handleHarvest = async (pid) => {
+    const handleHarvest = async () => {
         try {
             let tx
-            tx = await SoulSummonerContract?.deposit(pid, 0)
+            tx = await ManifestationContract?.harvest()
             await tx?.wait()
         } catch (e) {
             console.log(e)
         }
     }
 
-    // // deposits: selected amount into the summoner
-    const handleDeposit = async (pid, anount) => {
+    // // deposits: selected amount into the defarm
+    const handleDeposit = async (amount) => {
         let tx
         try {
-            tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
+            tx = await ManifestationContract?.deposit(Number(depositValue).toFixed(18).toBigNumber(18))
             await tx.wait()
         } catch (e) {
             const smallerValue = Number(depositValue) - 0.000001
-            tx = await SoulSummonerContract?.deposit(pid, Number(smallerValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
+            tx = await ManifestationContract?.deposit(Number(smallerValue).toFixed(18).toBigNumber(18))
             await tx.wait()
             console.log(e)
         }
     }
 
     // handles withdrawal
-    const handleWithdraw = async (pid, amount) => {
+    const handleWithdraw = async (amount) => {
         try {
-            const tx = await SoulSummonerContract?.withdraw(pid,
-                parsedWithdrawValue?.quotient.toString())
+            const tx = await ManifesterContract?.withdraw(parsedWithdrawValue?.quotient.toString())
             await tx.wait()
         } catch (e) {
-            const tx = await SoulSummonerContract?.withdraw(pid,
-                Number(withdrawValue).toFixed(assetDecimals).toBigNumber(assetDecimals)
-            )
-            // alert(e.message)
+            const tx = await ManifesterContract?.withdraw(Number(withdrawValue).toFixed(18).toBigNumber(18))
+            await tx.wait()
             console.log(e)
         }
     }
@@ -293,10 +282,7 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                             {/* DEPOSIT LOGO */}
                             <div className="items-center">
                                 <FarmItemBox>
-                                    {Number(allocPoint) != 220
-                                        ? <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
-                                        : <CurrencyLogo currency={token0} size={40} />
-                                    }
+                                        <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
                                 </FarmItemBox>
                             </div>
 
@@ -400,7 +386,7 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                   flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 
                   ${!isActive ? "hover:border-pink" : "hover:border-dark-600"}`}
                                     >
-                                        DEPOSIT
+                                        {i18n._(t`DEPOSIT`)}
                                     </Tab>
                                     <Tab
                                         className={({ selected }) =>
@@ -412,7 +398,7 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                   ${!isActive ? "hover:border-pink" : "hover:border-dark-600"}`
                                         }
                                     >
-                                        WITHDRAW
+                                        {i18n._(t`WITHDRAW`)}
                                     </Tab>
                                 </div>
                             </Tab.List>
@@ -455,10 +441,10 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                     {Number(stakedBalance) > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                                Staked Balance
+                                            {i18n._(t`Staked Balance`)}
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(stakedBalance, false, true)} {farm.depositSymbol}
+                                                {formatNumber(stakedBalance, false, true)} {symbol}
                                             </Typography>
                                         </div>
                                     )}
@@ -466,7 +452,7 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                     {stakedValue > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                                Staked (USD)
+                                            {i18n._(t`Staked (USD)`)}
                                             </Typography>
                                             <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
                                                 {formatNumber(stakedValue, true, true)}
@@ -476,18 +462,26 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
 
                                     <div className="flex justify-between">
                                         <Typography className="text-white" fontFamily={'medium'}>
-                                            Claimable Rewards
+                                        {i18n._(t`Claimable Rewards`)}
                                         </Typography>
                                         <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                            {earnedAmount.toFixed(2)} SOUL
+                                            {earnedAmount.toFixed(2)} {rewardSymbol}
                                         </Typography>
                                     </div>
                                     <div className="flex justify-between">
                                         <Typography className="text-white" fontFamily={'medium'}>
-                                            Rewards (USD)
+                                        {i18n._(t`Rewards (USD)`)}
                                         </Typography>
                                         <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
                                             {formatNumber(earnedValue, true, true)}
+                                        </Typography>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <Typography className="text-white" fontFamily={'medium'}>
+                                        {i18n._(t`End Date`)}
+                                        </Typography>
+                                        <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
+                                            {formatUnixTimestampToDay(endTime)}
                                         </Typography>
                                     </div>
 
@@ -520,7 +514,7 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                 {/* DEPOSIT: ASSET PANEL */}
                                 {Number(walletBalance) != 0 &&
                                     <FarmInputPanel
-                                        pid={farm.pid}
+                                        pid={pid}
                                         onUserInput={(value) => setDepositValue(value)}
                                         onMax={() => setDepositValue(walletBalance.toString())}
                                         value={depositValue}
@@ -536,9 +530,9 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                         primaryColor={buttonColor}
                                         color={buttonTextColor}
                                         margin=".5rem 0 0rem 0"
-                                        onClick={() => handleApprove()}>
+                                        onClick={() => handleApprove(mAddress)}>
                                         <div className="flex text-lg gap-2">
-                                            {`APPROVE ASSET`}
+                                            {i18n._(t`APPROVE ASSET`)}
                                         </div>
                                     </SubmitButton>
                                 )}
@@ -551,24 +545,20 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                         color={buttonTextColor}
                                         margin=".5rem 0 0rem 0"
                                         onClick={() =>
-                                            handleDeposit(pid, depositValue)
+                                            handleDeposit(depositValue)
                                         }
                                     >
                                         <div className="flex text-lg gap-2">
                                             <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                            DEPOSIT {
-                                                Number(allocPoint) == 220
-                                                    ? token0Symbol
-                                                    : farm.depositSymbol
-                                            }
+                                            {i18n._(t`DEPOSIT ${symbol}`)}
                                         </div>
                                     </SubmitButton>
                                 )}
 
                                 {/* CREATE ASSET PAIR */}
-                                {(nativeToken0 && isActive) ? (
+                                {isActive &&
                                     <NavLink
-                                        href={`/exchange/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
+                                        href={`/exchange/add/${NATIVE[chainId].symbol}/${rewardAddress}`}
                                     >
                                         <a>
                                             <SubmitButton
@@ -584,41 +574,18 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                                     color={buttonTextColor}
                                                     href=
                                                     // [if] token0 is the native token, then only use the address of token1 [else] token0 address
-                                                    {`/exchange/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
+                                                    {`/exchange/add/${NATIVE[chainId].symbol}/${rewardAddress}`}
                                                 >
                                                     <div className="flex text-lg gap-2">
                                                         <CollectionIcon width={26} className={classNames(`text-white`)} />
-                                                        {/* {farm.depositSymbol} */}
-                                                        CREATE {farm.depositSymbol} LP
+                                                        {/* {symbol} */}
+                                                        {i18n._(t`CREATE ${symbol} LP`)}
                                                     </div>
                                                 </TokenPairLink>
                                             </SubmitButton>
                                         </a>
                                     </NavLink>
-                                ) : (
-                                    <NavLink
-                                        href={`/exchange/add/${farm.token1Address}/${farm.token0Address}`}
-                                    >
-                                        <a>
-                                            <SubmitButton
-                                                height="2rem"
-                                                primaryColor={getChainColor(chainId)}
-                                                margin=".5rem 0 0rem 0"
-                                            >
-                                                <TokenPairLink
-                                                    target="_blank"
-                                                    rel="noopener"
-                                                    href=
-                                                    {`/exchange/add/${farm.token0Address}/${farm.token1Address}`}
-                                                >
-                                                    <div className="flex text-lg gap-2">
-                                                        <CollectionIcon width={26} className={classNames(`text-white`)} />
-                                                        CREATE {farm.depositSymbol} LP
-                                                    </div>                                            </TokenPairLink>
-                                            </SubmitButton>
-                                        </a>
-                                    </NavLink>
-                                )}
+                                }
 
                                 {/* EARNED */}
                                 {earnedAmount > 0 && (
@@ -630,12 +597,12 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                             // className={'font-bold'}
                                             margin=".5rem 0 0rem 0"
                                             onClick={() =>
-                                                handleHarvest(pid)
+                                                handleHarvest()
                                             }
                                         >
                                             <div className="flex text-lg gap-2">
                                                 <DatabaseIcon width={26} className={classNames(`text-white`)} />
-                                                HARVEST SOUL
+                                                {i18n._(t`HARVEST SOUL`)}
                                             </div>
                                         </SubmitButton>
                                     </Wrap>
@@ -654,9 +621,9 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                     >
                                         <div className="flex text-lg gap-1">
                                             {/* <Zap width={26} className={classNames(`text-white`)} /> */}
-                                            ZAP
+                                            {i18n._(t`ZAP`)}
                                             <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                            &rarr; {`${farm.depositSymbol}`}
+                                            &rarr; {`${symbol}`}
                                         </div>
                                     </SubmitButton>
                                 </Wrap>
@@ -670,8 +637,8 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                             <div className="flex flex-col space-y-1">
                                                 <div className="flex flex-col">
                                                     <p>
-                                                        Fees decrease by 1% daily, and only increase upon withdrawals.
-                                                        <br /><br />Depositing more is free and does not change your fee.
+                                                    {i18n._(t`Fees decrease by 1% daily, and only increase upon withdrawals.`)}
+                                                        <br /><br />{i18n._(t`Depositing more is free and does not change your fee.`)}
                                                     </p>
                                                 </div>
                                             </div>
@@ -688,10 +655,10 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                     {Number(stakedBalance) > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                                Staked Balance
+                                                {i18n._(t`Staked Balance`)}
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(stakedBalance, false, true)} {farm.depositSymbol}
+                                                {formatNumber(stakedBalance, false, true)} {symbol}
                                             </Typography>
                                         </div>
                                     )}
@@ -699,7 +666,7 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                     {stakedValue > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                                Balance (USD)
+                                            {i18n._(t`Balance`)} (USD)
                                             </Typography>
                                             <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
                                                 {formatNumber(stakedValue, true, true)}
@@ -715,13 +682,13 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                             Maximum Fee
                                         </Typography>
                                         <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                            {formatNumber(Number(stakedBalance) - withdrawable, false, true)} {farm.depositSymbol}
+                                            {formatNumber(Number(stakedBalance) - withdrawable, false, true)} {symbol}
                                         </Typography>
                                     </div>
 
                                     <div className="flex justify-between">
                                         <Typography className="text-white" fontFamily={'medium'}>
-                                            Fee (USD)
+                                            {i18n._(t`Fee`)} (USD)
                                         </Typography>
                                         <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
                                             {formatNumber(Number(feeValue), true, true)}
@@ -760,7 +727,7 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
 
                                 {/* WITHDRAW: ASSET PANEL */}
                                 <FarmInputPanel
-                                    pid={farm.pid}
+                                    pid={pid}
                                     onUserInput={(value) => setWithdrawValue(value)}
                                     onMax={() => setWithdrawValue(stakedBalance.toString())}
                                     value={withdrawValue}
@@ -776,7 +743,7 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                         margin=".5rem 0 0rem 0"
                                         onClick={() => setShowConfirmation(true)}
                                     >
-                                        WITHDRAW {farm.depositSymbol}
+                                        {i18n._(t`WITHDRAW ${symbol}`)}
                                     </SubmitButton>
 
                                 </Wrap>
@@ -789,10 +756,10 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                             color={buttonTextColor}
                                             margin=".5rem 0 .5rem 0"
                                             onClick={() =>
-                                                handleHarvest(pid)
+                                                handleHarvest()
                                             }
                                         >
-                                            HARVEST SOUL
+                                             {i18n._(t`HARVEST`)}
                                         </SubmitButton>
                                     </Wrap>
                                 )}
@@ -882,7 +849,7 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                 handleZap(zapTokenAddress, depositAddress)
                             }
                         >
-                            ZAP INTO {farm.depositSymbol}
+                            ZAP INTO {symbol}
                         </SubmitButton>
                     </Wrap>
                     {/* } */}
@@ -896,37 +863,35 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                     <div className="space-y-4">
                         <ModalHeader header={`FYI: Early Withdrawal Fee`} onClose={() => setShowConfirmation(false)} />
                         <Typography variant="sm">
-                            Since the community proposal passed, a 14-Day Early Withdrawal Fee is now live: <b><a href="https://enchant.soulswap.finance/#/proposal/0xb2ede0a82c5efc57f9c097f11db653fb1155cd313dfedd6c87142a42f68465a6">details here</a></b>.
-                            {/* <br/><br/>This means you may withdraw for 0% fees after 14 Days have elapsed.  */}
-                            <br /><br />This <b>reduces by 1% daily</b>, so consider waiting 14 Days prior to withdrawing to avoid fees.
+                            <br /><br /> {i18n._(t`The fee`)} <b> {i18n._(t`reduces by 1% daily`)}</b>,  {i18n._(t`so consider waiting prior to withdrawing to avoid fees.`)}
 
                             <div className="text-xl mt-4 mb-4 text-center border p-1.5 border-dark-600">
-                                Estimated Fee Outcomes
+                            {i18n._(t`Estimated Fee Outcomes`)}
                             </div>
-                            • <b>Current Rate</b>: {Number(withdrawFee).toFixed(0)}% <br />
-                            • <b>Fee Amount</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {farm.depositSymbol}<br />
-                            • <b>Fee Value</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) * Number(lpPrice) / 100, true, true)}
+                            • <b> {i18n._(t`Current Rate`)}</b>: {Number(withdrawFee).toFixed(0)}% <br />
+                            • <b> {i18n._(t`Fee Amount`)}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {symbol}<br />
+                            • <b> {i18n._(t`Fee Value`)}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) * Number(lpPrice) / 100, true, true)}
 
                             <div className="mt-6 text-center">
-                                <i><b>Please do not rely on our estimations</b></i>.
+                                <i><b> {i18n._(t`Please do not rely on our estimations`)}</b></i>.
                             </div>
 
                             {/* <b>100% of the fee</b> goes towards building our protocol-owned liquidity, which brings about long-term sustainability to our platform. */}
                         </Typography>
                         <Typography variant="sm" className="font-medium text-center">
-                            QUESTIONS OR CONCERNS?
+                        {i18n._(t`QUESTIONS OR CONCERNS?`)}
                             <a href="mailto:soulswapfinance@gmail.com">
-                                {' '} CONTACT US
+                                {' '}  {i18n._(t`CONTACT US`)}
                             </a>
                         </Typography>
                         <Button
                             height="2.5rem"
                             color="purple"
                             onClick={() =>
-                                handleWithdraw(pid, withdrawValue)
+                                handleWithdraw(withdrawValue)
                             }
                         >
-                            I UNDERSTAND THESE TERMS
+                            {i18n._(t`I UNDERSTAND THESE TERMS`)}
                         </Button>
                     </div>
                 </Modal>

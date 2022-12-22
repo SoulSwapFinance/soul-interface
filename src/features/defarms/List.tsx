@@ -14,9 +14,7 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
-      decimals={farm.decimals}
-      depositAddress={farm.depositAddress}
-      rewardAddress={farm.rewardAddress}
+      depositSymbol={farm.depositSymbol}
       token0Symbol={farm.token0Symbol}
       token1Symbol={farm.token1Symbol}
       token0Address={farm.token0Address}
@@ -29,9 +27,7 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
-      decimals={farm.decimals}
-      depositAddress={farm.depositAddress}
-      rewardAddress={farm.rewardAddress}
+      depositSymbol={farm.depositSymbol}
       token0Symbol={farm.token0Symbol}
       token1Symbol={farm.token1Symbol}
       token0Address={farm.token0Address}
@@ -44,9 +40,7 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
-      decimals={farm.decimals}
-      depositAddress={farm.depositAddress}
-      rewardAddress={farm.rewardAddress}
+      depositSymbol={farm.depositSymbol}
       token0Symbol={farm.token0Symbol}
       token1Symbol={farm.token1Symbol}
       token0Address={farm.token0Address}
@@ -59,9 +53,7 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
-      decimals={farm.decimals}
-      depositAddress={farm.depositAddress}
-      rewardAddress={farm.rewardAddress}
+      depositSymbol={farm.depositSymbol}
       token0Symbol={farm.token0Symbol}
       token1Symbol={farm.token1Symbol}
       token0Address={farm.token0Address}

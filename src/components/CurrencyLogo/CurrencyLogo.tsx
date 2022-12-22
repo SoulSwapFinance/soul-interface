@@ -52,7 +52,7 @@ const LOGO: Record<ChainId, string> = {
   [ChainId.MOONRIVER]: MoonriverLogo,
 }
 
-export const UNKNOWN_ICON = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/unknown.png'
+export const UNKNOWN_ICON = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/prod/token/unknown.png'
 
 export interface CurrencyLogoProps {
   currency?: Currency
