@@ -14,11 +14,6 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
-      depositSymbol={farm.depositSymbol}
-      token0Symbol={farm.token0Symbol}
-      token1Symbol={farm.token1Symbol}
-      token0Address={farm.token0Address}
-      token1Address={farm.token1Address}
       farm={farm}
     />
   ))
@@ -27,11 +22,6 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
-      depositSymbol={farm.depositSymbol}
-      token0Symbol={farm.token0Symbol}
-      token1Symbol={farm.token1Symbol}
-      token0Address={farm.token0Address}
-      token1Address={farm.token1Address}
       farm={farm}
     />
   ))
@@ -40,11 +30,6 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
-      depositSymbol={farm.depositSymbol}
-      token0Symbol={farm.token0Symbol}
-      token1Symbol={farm.token1Symbol}
-      token0Address={farm.token0Address}
-      token1Address={farm.token1Address}
       farm={farm}
     />
   ))
@@ -53,11 +38,6 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
-      depositSymbol={farm.depositSymbol}
-      token0Symbol={farm.token0Symbol}
-      token1Symbol={farm.token1Symbol}
-      token0Address={farm.token0Address}
-      token1Address={farm.token1Address}
       farm={farm}
     />
   ))

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
-import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, MANIFESTER_ADDRESS, Token, WNATIVE } from 'sdk'
+import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, MANIFESTER_ADDRESS, Token, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import { useTokenContract, useZapperContract, useManifesterContract, useManifestationContract } from 'hooks/useContract'
 import useApprove from 'hooks/useApprove'
 import { Tab } from '@headlessui/react'
@@ -46,7 +46,7 @@ const TokenPairLink = styled(ExternalLink)`
   padding-left: 10;
 `
 
-export const ActiveRow = ({ pid, farm, depositSymbol, token0Symbol, token1Symbol, token0Address, token1Address }) => {
+export const ActiveRow = ({ pid, farm }) => {
     const { account, chainId, library } = useActiveWeb3React()
 
     const [approved, setApproved] = useState(false)
@@ -113,11 +113,8 @@ export const ActiveRow = ({ pid, farm, depositSymbol, token0Symbol, token1Symbol
     const textColor = !isActive ? "text-pink" : "text-dark-600"
 
     // PAIR INFO //
-    const { pairInfo } = usePairInfo(depositAddress)
-
-    // (de)Constructs Tokens //
-    const token0 = new Token(chainId, token0Address, 18)
-    const token1 = new Token(chainId, token1Address, 18)
+    const token0 = new Token(chainId, WNATIVE_ADDRESS[chainId], 18)
+    const token1 = new Token(chainId, rewardAddress, 18)
 
     // CONTRACTS //
     const ManifesterContract = useManifesterContract()
