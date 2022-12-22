@@ -4,6 +4,7 @@ import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import Container from 'components/Container'
 import Head from 'next/head'
 import FarmList from 'features/defarms/List'
+import Image from 'next/image'
 
 const Defarms = () => {
   return (
@@ -13,7 +14,7 @@ const Defarms = () => {
           <Head>
             <title>DeFarms | Soul</title>
             <meta key="description" name="description" content="Farm" />
-            <img src="https://giphy.com/embed/kPCDnjRGh7POYS4Z5P" width={480} height={480} alt={'egg gif with tokens'}/>
+            <Image src="https://giphy.com/embed/kPCDnjRGh7POYS4Z5P" width={480} height={480} alt={'egg gif with tokens'}/>
           </Head>
           <FarmList />
           <div className="grid grid-cols-2 mt-2">
