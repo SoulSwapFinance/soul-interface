@@ -10,7 +10,7 @@ import {
     FarmContentWrapper, FarmContainer, FarmItem, FarmItemBox, Text, SubmitButton, Wrap
 } from './Styles'
 import { classNames, formatNumber, tryParseAmount } from 'functions'
-import { usePairInfo, useSummonerInfo, useSummonerPoolInfo, useSummonerUserInfo, useTokenInfo, useUserTokenInfo } from 'hooks/useAPI'
+import { usePairInfo, useSummonerInfo, useSummonerPoolInfo, useDeFarmUserInfo, useTokenInfo, useUserTokenInfo } from 'hooks/useAPI'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 import Modal from 'components/DefaultModal'
 import { Button } from 'components/Button'
@@ -20,12 +20,11 @@ import NavLink from 'components/NavLink'
 import FarmInputPanel from './Input'
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import QuestionHelper from 'components/QuestionHelper'
-// import { useUserInfo } from 'hooks/useAPI'
 import AssetInput from 'components/AssetInput'
 import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import { getChainColor } from 'constants/chains'
 import { ExternalLink } from 'components/ReusableStyles'
-import { BriefcaseIcon, CollectionIcon, CurrencyDollarIcon, DatabaseIcon, PlusIcon, SparklesIcon } from '@heroicons/react/outline'
+import { CollectionIcon, CurrencyDollarIcon, DatabaseIcon } from '@heroicons/react/outline'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 
 const HideOnSmall = styled.div`
@@ -72,15 +71,15 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
     const pairStatus = summonerPoolInfo.status
 
     const ManifesterContract = useManifesterContract()
-    
+
     async function getFarmAddress(_pid) {
         let farmAddress = await ManifesterContract.manifestations(_pid)
         //  console.log('farmAddress: %s ', _farmAddress)
 
-         setFarmAddress(farmAddress)
-         return farmAddress
+        setFarmAddress(farmAddress)
+        return farmAddress
     }
-    
+
     // const { userInfo } = useUserInfo()
     const { pairInfo } = usePairInfo(farm?.depositAddress)
     // assumes 18, since only SOUL-LP farms are eligible for Zap   
@@ -95,26 +94,18 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
     const [openZap, setOpenZap] = useState(false)
 
     // SUMMONER USER INFO //
-    const { summonerUserInfo } = useSummonerUserInfo(pid)
-    const stakedBalance = Number(summonerUserInfo.stakedBalance)
-    const stakedValue = Number(summonerUserInfo.stakedValue)
-    const earnedAmount = Number(summonerUserInfo.pendingSoul)
-    const earnedValue = Number(summonerUserInfo.pendingValue)
-    const lpPrice = Number(summonerUserInfo.lpPrice)
-    const withdrawFee = Number(summonerUserInfo.currentRate)
-    const walletBalance = Number(summonerUserInfo.walletBalance)
+    const { defarmUserInfo } = useDeFarmUserInfo(pid)
+    const stakedBalance = Number(defarmUserInfo.stakedBalance)
+    const stakedValue = Number(defarmUserInfo.stakedValue)
+    const earnedAmount = Number(defarmUserInfo.pendingSoul)
+    const earnedValue = Number(defarmUserInfo.pendingValue)
+    const lpPrice = Number(defarmUserInfo.lpPrice)
+    const withdrawFee = Number(defarmUserInfo.currentRate)
+    const walletBalance = Number(defarmUserInfo.walletBalance)
 
     const feeAmount = withdrawFee * stakedBalance / 100
     const withdrawable = stakedBalance - feeAmount
     const feeValue = feeAmount * lpPrice
-
-    // const firstDepositTime = Number(summonerUserInfo.firstDepositTime)
-    // const currentTime = nowTime / 1_000
-    // const timeDelta = currentTime - firstDepositTime
-    // const daysElapsed = timeDelta / 86_400
-    // const walletValue = Number(walletBalance) * lpPrice
-    // const parsedBalance = tryParseAmount(walletBalance.toString(), farm.lpToken)
-    // const userBalance = useCurrencyBalance(account, lpToken)
 
     const hasBalance = Number(walletBalance) > 0
     const isActive = pairStatus == "active"
@@ -234,18 +225,6 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
         }
     }
 
-    // withdraws: lp from summoner
-    // const handleWithdraw = async (pid) => {
-    //     try {
-    //         const tx = await SoulSummonerContract?.withdraw(pid, Number(withdrawValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
-    //         await tx?.wait()
-    //     } catch (e) {
-    //         // alert(e.message)
-    //         const tx = await SoulSummonerContract?.withdraw(pid, Number(withdrawValue).toFixed(6).toBigNumber(assetDecimals))
-    //         console.log(e)
-    //     }
-    // }
-
     // handles: harvest for given pid
     const handleHarvest = async (pid) => {
         try {
@@ -270,25 +249,6 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
             console.log(e)
         }
     }
-
-    // handles deposit
-    // const handleDeposit = async (pid, amount) => {
-    //     try {
-    //         const tx = await SoulSummonerContract?.deposit(pid,
-    //             parsedDepositValue?.quotient.toString()
-    //         )
-    //         await tx.wait()
-    //         // console.log('depositing: %s:', parsedDepositValue)
-    //     } catch (e) {
-    //         const smallerValue = Number(depositValue) - 0.000001
-    //         let tx = await SoulSummonerContract?.deposit(pid, Number(smallerValue))
-    //             // Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
-    //         // console.log('depositing: %s:', depositValue)
-    //         await tx.wait()
-    //         // alert(e.message)
-    //         console.log(e)
-    //     }
-    // }
 
     // handles withdrawal
     const handleWithdraw = async (pid, amount) => {
@@ -322,9 +282,9 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                 <FarmContainer>
                     <div className={classNames("bg-dark-900 p-3 border border-blue", !hasBalance && "border-dark-1000",
                         !isActive ? "hover:border-pink"
-                                : hasBalance ? "border-dark-600"
-                                    : hasBalance && !isActive ? "hover:border-pink border-pink"
-                                        : "hover:border-dark-600"
+                            : hasBalance ? "border-dark-600"
+                                : hasBalance && !isActive ? "hover:border-pink border-pink"
+                                    : "hover:border-dark-600"
                     )}
                         onClick={() => handleShowOptions()}
                     >
@@ -363,7 +323,6 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                 </FarmItemBox>
                             </HideOnMobile>
 
-
                             {/* % APR */}
                             <FarmItemBox>
                                 <FarmItem>
@@ -379,37 +338,18 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                 </FarmItem>
                             </FarmItemBox>
 
-                            {/* REWARDS VALUE */}
-                            {/* <FarmItemBox className="flex">
-                                {earnedValue.toFixed(0).toString() === '0' ? (
-                                    <Text padding="0" fontSize="1rem" color="#666">
-                                        0
-                                    </Text>
-                                ) : (
-                                    <Text padding="0" fontSize="1rem" color="#F36FFE">
-                                        ${earnedValue.toFixed(0)}
-                                    </Text>
-                                )}
-                            </FarmItemBox> */}
-
                             {/* PENDING REWARDS */}
                             <FarmItemBox className="flex">
                                 {earnedAmount.toFixed(0).toString() === '0' ? (
                                     <div className="flex flex-cols-2 sm:ml-12 gap-1">
-                                    {formatNumber(0, false, true)}<CurrencyLogo currency={rewardToken} size={24} />
-                                </div>
+                                        {formatNumber(0, false, true)}<CurrencyLogo currency={rewardToken} size={24} />
+                                    </div>
                                 ) : (
                                     <div className="flex flex-cols-2 sm:ml-12 gap-1">
                                         {formatNumber(earnedAmount.toFixed(0), false, true)}<CurrencyLogo currency={rewardToken} size={24} />
                                     </div>
                                 )}
                             </FarmItemBox>
-
-                            {/* REWARD LOGO */}
-                            {/* <div className="items-center ml-6 justify-center">
-                                <FarmItemBox>
-                                </FarmItemBox>
-                            </div> */}
 
                             {/* LIQUIDITY (TVL) */}
                             <FarmItemBox className="flex" >
@@ -444,7 +384,7 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                     }
                     className={classNames("border",
                         isActive ? "hover:border-dark-600"
-                                : "hover:border-pink",
+                            : "hover:border-pink",
                         "p-4 mt-3 mb-3 sm:p-0.5 w-full")}
                 >
                     <div className="p-3 space-y-6 bg-dark-900 rounded z-1 relative">
@@ -454,8 +394,8 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                     <Tab
                                         className={({ selected }) =>
                                             `${selected && isActive ? 'border-b-2 border-accent p-2 text-white border-dark-600'
-                                                    : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-pink'
-                                                        : 'bg-dark-900 text-white'
+                                                : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-pink'
+                                                    : 'bg-dark-900 text-white'
                                             }
                   flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 
                   ${!isActive ? "hover:border-pink" : "hover:border-dark-600"}`}
@@ -465,8 +405,8 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                     <Tab
                                         className={({ selected }) =>
                                             `${selected && isActive ? 'border-b-2 border-accent p-2 text-white border-dark-600'
-                                                    : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-pink'
-                                                        : 'bg-dark-900 text-white'
+                                                : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-pink'
+                                                    : 'bg-dark-900 text-white'
                                             } 
                   flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1
                   ${!isActive ? "hover:border-pink" : "hover:border-dark-600"}`
@@ -505,35 +445,12 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                 <div className=
                                     {classNames(
                                         "flex flex-col bg-dark-1000 mb-3 p-3 border border-2 border-dark-1000",
-                                            !isActive ? "hover:border-pink"
-                                                : "hover:border-dark-600",
+                                        !isActive ? "hover:border-pink"
+                                            : "hover:border-dark-600",
 
                                         "w-full space-y-1")
 
                                     }>
-                                    {/* Number(walletBalance) > 0 && (
-                                        <div className="flex justify-between">
-                                            <Typography className="text-white font-bold" fontFamily={'medium'}>
-                                                Wallet Balance
-                                            </Typography>
-                                            <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(walletBalance, false, true)} {tokenSymbol}
-                                            </Typography>
-                                        </div>
-                                    )
-                                    */}
-
-                                    {/* Number(walletValue) > 0 && (
-                                        <div className="flex justify-between">
-                                            <Typography className="text-white" fontFamily={'medium'}>
-                                                Balance (USD)
-                                            </Typography>
-                                            <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(walletValue, true, true)}
-                                            </Typography>
-                                        </div>
-                                    )
-                                    */}
 
                                     {Number(stakedBalance) > 0 && (
                                         <div className="flex justify-between">
@@ -556,10 +473,6 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                             </Typography>
                                         </div>
                                     )}
-
-                                    {/* {Number(walletBalance) > 0 && (
-                                        <div className="h-px my-6 bg-dark-1000" />
-                                    )} */}
 
                                     <div className="flex justify-between">
                                         <Typography className="text-white" fontFamily={'medium'}>
@@ -593,7 +506,7 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                         </div>
                                     )}
                                     <div className="h-px my-6 bg-dark-1000" />
-                                <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
+                                    <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
                                         <div className="text-white">
                                             <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                                                 <span> {formatNumber(Number(APR), false, true)}% APR</span>
@@ -605,7 +518,6 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                 <div className="h-px my-1 bg-dark-1000" />
 
                                 {/* DEPOSIT: ASSET PANEL */}
-
                                 {Number(walletBalance) != 0 &&
                                     <FarmInputPanel
                                         pid={farm.pid}
@@ -616,6 +528,7 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                         id={pid}
                                     />
                                 }
+
                                 {/* UN-APPROVED */}
                                 {!approved && hasBalance && (
                                     <SubmitButton
@@ -629,6 +542,7 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                         </div>
                                     </SubmitButton>
                                 )}
+
                                 {/* APPROVED */}
                                 {approved && hasBalance && (
                                     <SubmitButton
@@ -642,14 +556,15 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                     >
                                         <div className="flex text-lg gap-2">
                                             <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                DEPOSIT {
-                                  Number(allocPoint) == 220
-                                  ? token0Symbol 
-                                  : farm.depositSymbol
-                                }
+                                            DEPOSIT {
+                                                Number(allocPoint) == 220
+                                                    ? token0Symbol
+                                                    : farm.depositSymbol
+                                            }
                                         </div>
                                     </SubmitButton>
                                 )}
+
                                 {/* CREATE ASSET PAIR */}
                                 {(nativeToken0 && isActive) ? (
                                     <NavLink
@@ -726,26 +641,27 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                     </Wrap>
                                 )}
 
-                                    <Wrap padding="0" margin="0" display="flex">
-                                        <SubmitButton
-                                            height="2rem"
-                                            primaryColor={buttonColor}
-                                            color={buttonTextColor}
-                                            // className={'font-bold'}
-                                            margin=".5rem 0 0rem 0"
-                                            onClick={() =>
-                                                handleShowZap(pid)
-                                            }
-                                        >
-                                            <div className="flex text-lg gap-1">
-                                                {/* <Zap width={26} className={classNames(`text-white`)} /> */}
-                                                ZAP
-                                                <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                                &rarr; {`${farm.depositSymbol}`}
-                                            </div>
-                                        </SubmitButton>
-                                    </Wrap>
+                                <Wrap padding="0" margin="0" display="flex">
+                                    <SubmitButton
+                                        height="2rem"
+                                        primaryColor={buttonColor}
+                                        color={buttonTextColor}
+                                        // className={'font-bold'}
+                                        margin=".5rem 0 0rem 0"
+                                        onClick={() =>
+                                            handleShowZap(pid)
+                                        }
+                                    >
+                                        <div className="flex text-lg gap-1">
+                                            {/* <Zap width={26} className={classNames(`text-white`)} /> */}
+                                            ZAP
+                                            <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
+                                            &rarr; {`${farm.depositSymbol}`}
+                                        </div>
+                                    </SubmitButton>
+                                </Wrap>
                             </Tab.Panel>
+
                             {/*------ WITHDRAW TAB PANEL ------*/}
                             <Tab.Panel className={'outline-none'}>
                                 <Button variant={'link'} className="absolute top-0 right-0 flex justify-center max-h-[30px] max-w-[30px]">
@@ -765,8 +681,8 @@ export const ActiveRow = ({ pid, farm, depositAddress, decimals, rewardAddress, 
                                 <div className={
                                     classNames(
                                         "flex flex-col mb-3 bg-dark-1000 p-3 border border-2 border-dark-1000",
-                                            !isActive ? "hover:border-pink"
-                                                : "hover:border-dark-600",
+                                        !isActive ? "hover:border-pink"
+                                            : "hover:border-dark-600",
                                         "w-full space-y-1")}>
 
                                     {Number(stakedBalance) > 0 && (

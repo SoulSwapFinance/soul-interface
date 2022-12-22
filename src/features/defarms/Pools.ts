@@ -22,7 +22,7 @@ export const FantomPools = [
     token0Symbol: 'WFTM',
     token1Symbol: 'USDC',
     depositSymbol: 'FTM-USDC',
-    rewardSymbol: 'AVAX-SOUL',
+    rewardSymbol: SOUL[ChainId.FANTOM].symbol,
     depositAddress: USDC_NATIVE[ChainId.FANTOM],
     rewardAddress: SOUL_ADDRESS[ChainId.FANTOM],
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],

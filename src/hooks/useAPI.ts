@@ -786,6 +786,51 @@ export function useSummonerUserInfo(pid): { status: string; summonerUserInfo: T 
   return { status, summonerUserInfo }
 }
 
+export function useDeFarmUserInfo(pid): { status: string; defarmUserInfo: T } {
+  const { account, chainId } = useActiveWeb3React()
+  const [status, setStatus] = useState<string>('idle')
+  const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
+
+  const [defarmUserInfo, setInfo] = useState<T>({
+      userAddress: account,
+      pairAddress: '',
+      walletBalance: '0',
+      stakedBalance: '0',
+      stakedValue: '0',
+      pendingSoul: '0',
+      pendingValue: '0',
+      lpPrice: '0',
+
+      userDelta: '0',
+      timeDelta: '0',
+      firstDepositTime: '0',
+      lastDepositTime: '0',
+      secondsRemaining: '0',
+      rewardDebtAtTimes: '0',
+      currentRate: '0',
+      api: 'https://api.soulswap.finance',
+  })  
+  useEffect(() => {
+    const fetchData = async () => {
+      setStatus('fetching')
+      const response = await fetch(`${URL}/summoner/users/${account}/${pid}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Referrer-Policy': 'no-referrer',
+        },
+      })
+      const json = await response.json()
+      setInfo(json as T)
+      setStatus('fetched')
+    }
+    if ([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId)) 
+    fetchData()
+  }, [])
+
+  return { status, defarmUserInfo }
+}
+
 // LENDING API //
 
 export function useUnderworldPairInfo(pairAddress): { status: string; underworldPairInfo: T } {
