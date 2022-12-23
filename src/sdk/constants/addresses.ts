@@ -668,13 +668,13 @@ export const DAI_USDC: AddressMap = {
 export const BTC_USDC: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.FANTOM]: '0xE2d39F7f0c8517Ca2058Fa97eB3D8d4928F7C6D6',
-  [ChainId.AVALANCHE]: ''
+  [ChainId.AVALANCHE]: '0xd413F437F998dE70413d9D9840825156bb32941c'
 }
 
 export const ETH_USDC: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.FANTOM]: '0x5b181BBc3Cc18C66B6f36f584866a1ff09865630',
-  [ChainId.AVALANCHE]: ''
+  [ChainId.AVALANCHE]: '0x351C6327F9639664C7962B94570D1A19F47b3f44'
 }
 
 export const ETH_NATIVE: AddressMap = {

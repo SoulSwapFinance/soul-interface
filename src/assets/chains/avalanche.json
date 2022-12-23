@@ -88,14 +88,6 @@
             "address": "0x1C20E891Bab6b1727d14Da358FAe2984Ed9B59EB"
         },
         {
-            "id": "compound-governance-token",
-            "name": "Compound",
-            "rank": 116,
-            "logo": "https://cryptologos.cc/logos/compound-comp-logo.svg",
-            "symbol": "COMP",
-            "address": "0xc3048E19E76CB9a3Aa9d77D8C03c29Fc906e2437"
-        },
-        {
             "id": "magic-internet-money",
             "name": "Magic Internet Money",
             "rank": 385,
