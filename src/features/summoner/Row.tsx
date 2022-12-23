@@ -991,7 +991,6 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                     </Wrap>
                     {/* } */}
 
-                    {/* { approvedZap && */}
                     <Wrap padding="0" margin="0" display="flex">
                         <SubmitButton
                             height="2rem"
@@ -1006,7 +1005,9 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                             ZAP INTO {farm.lpSymbol}
                         </SubmitButton>
                     </Wrap>
-                    {/* } */}
+                    <Typography className="flex text-center mt-4 sm:mt-6 border border-avaxRed p-2 rounded rounded-2xl">
+                        {`Keep slippage in mind when zapping to prevent loses due to low liquidity. If you are unsure whether this applies, avoid zaps above ~$300.`}
+                    </Typography>
 
                 </Modal>
             }
