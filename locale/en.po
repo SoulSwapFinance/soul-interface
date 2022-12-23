@@ -64,6 +64,9 @@ msgstr "ALL"
 msgid "APPROVE"
 msgstr "APPROVE"
 
+msgid "APPROVE ASSET"
+msgstr "APPROVE ASSET"
+
 msgid "APR"
 msgstr "APR"
 
@@ -265,6 +268,12 @@ msgstr "COFFIN"
 msgid "COMING SOON"
 msgstr "COMING SOON"
 
+msgid "CONTACT US"
+msgstr "CONTACT US"
+
+msgid "CREATE {symbol} LP"
+msgstr "CREATE {symbol} LP"
+
 msgid "Calculated based on current rates. Rates are estimates for your convenience, they do not represent guaranteed returns."
 msgstr "Calculated based on current rates. Rates are estimates for your convenience, they do not represent guaranteed returns."
 
@@ -288,6 +297,9 @@ msgstr "Claim Scarabs"
 
 msgid "Claim and Autostake"
 msgstr "Claim and Autostake"
+
+msgid "Claimable Rewards"
+msgstr "Claimable Rewards"
 
 msgid "Claimable: Fetching Claimable Amount"
 msgstr "Claimable: Fetching Claimable Amount"
@@ -428,11 +440,20 @@ msgstr "Crosschain"
 msgid "Current Percentage"
 msgstr "Current Percentage"
 
+msgid "Current Rate"
+msgstr "Current Rate"
+
 msgid "Custom tokens are stored locally in your browser"
 msgstr "Custom tokens are stored locally in your browser"
 
+msgid "DEPOSIT"
+msgstr "DEPOSIT"
+
 msgid "DEPOSIT LUX"
 msgstr "DEPOSIT LUX"
+
+msgid "DEPOSIT {symbol}"
+msgstr "DEPOSIT {symbol}"
 
 msgid "Dashboard"
 msgstr "Dashboard"
@@ -476,6 +497,9 @@ msgstr "Deposit your SOUL-LP to earn $SOUL rewards."
 msgid "Deposited Amount"
 msgstr "Deposited Amount"
 
+msgid "Depositing more is free and does not change your fee."
+msgstr "Depositing more is free and does not change your fee."
+
 msgid "Depositing with Zap Mode involves swapping your asset for the assets in the pool - this makes your transaction subject to swap-related fees."
 msgstr "Depositing with Zap Mode involves swapping your asset for the assets in the pool - this makes your transaction subject to swap-related fees."
 
@@ -503,6 +527,9 @@ msgstr "Earn"
 msgid "Eco"
 msgstr "Eco"
 
+msgid "End Date"
+msgstr "End Date"
+
 msgid "English"
 msgstr "English"
 
@@ -526,6 +553,9 @@ msgstr "Error connecting"
 
 msgid "Error connecting. Try refreshing the page."
 msgstr "Error connecting. Try refreshing the page."
+
+msgid "Estimated Fee Outcomes"
+msgstr "Estimated Fee Outcomes"
 
 msgid "Estimated Network Fee"
 msgstr "Estimated Network Fee"
@@ -575,6 +605,9 @@ msgstr "Farm with SOUL-FTM"
 msgid "Farms"
 msgstr "Farms"
 
+msgid "Fee"
+msgstr "Fee"
+
 msgid "Fee Amount"
 msgstr "Fee Amount"
 
@@ -587,8 +620,14 @@ msgstr "Fee Period Ends"
 msgid "Fee Period Remaining"
 msgstr "Fee Period Remaining"
 
+msgid "Fee Value"
+msgstr "Fee Value"
+
 msgid "Fees"
 msgstr "Fees"
+
+msgid "Fees decrease by 1% daily, and only increase upon withdrawals."
+msgstr "Fees decrease by 1% daily, and only increase upon withdrawals."
 
 msgid "Fees:"
 msgstr "Fees:"
@@ -626,6 +665,12 @@ msgstr "Give me some FTM"
 msgid "Go Back"
 msgstr "Go Back"
 
+msgid "HARVEST"
+msgstr "HARVEST"
+
+msgid "HARVEST SOUL"
+msgstr "HARVEST SOUL"
+
 msgid "Hardware Wallet"
 msgstr "Hardware Wallet"
 
@@ -658,6 +703,9 @@ msgstr "Historical Total Locked: {0} SOUL"
 
 msgid "How to use"
 msgstr "How to use"
+
+msgid "I UNDERSTAND THESE TERMS"
+msgstr "I UNDERSTAND THESE TERMS"
 
 msgid "I understand"
 msgstr "I understand"
@@ -996,6 +1044,9 @@ msgstr "Pending Treasury Transfer"
 msgid "Please connect to the appropriate network."
 msgstr "Please connect to the appropriate network."
 
+msgid "Please do not rely on our estimations"
+msgstr "Please do not rely on our estimations"
+
 msgid "Please note that you won't receive any tokens when you use leverage."
 msgstr "Please note that you won't receive any tokens when you use leverage."
 
@@ -1050,6 +1101,9 @@ msgstr "Processing"
 
 msgid "Provide"
 msgstr "Provide"
+
+msgid "QUESTIONS OR CONCERNS?"
+msgstr "QUESTIONS OR CONCERNS?"
 
 msgid "RETURNS"
 msgstr "RETURNS"
@@ -1110,6 +1164,9 @@ msgstr "Return"
 
 msgid "Rewards"
 msgstr "Rewards"
+
+msgid "Rewards (USD)"
+msgstr "Rewards (USD)"
 
 msgid "Rewards:"
 msgstr "Rewards:"
@@ -1252,6 +1309,9 @@ msgstr "Stake Luxor"
 msgid "Staked"
 msgstr "Staked"
 
+msgid "Staked (USD)"
+msgstr "Staked (USD)"
+
 msgid "Staked Balance"
 msgstr "Staked Balance"
 
@@ -1335,6 +1395,9 @@ msgstr "The difference between market and estimate due to the proportional makeu
 
 msgid "The difference between the market price and estimated price due to trade size."
 msgstr "The difference between the market price and estimated price due to trade size."
+
+msgid "The fee"
+msgstr "The fee"
 
 msgid "The input token cannot be transferred. There may be an issue with the input token."
 msgstr "The input token cannot be transferred. There may be an issue with the input token."
@@ -1556,6 +1619,12 @@ msgstr "Vote"
 msgid "WALLET"
 msgstr "WALLET"
 
+msgid "WITHDRAW"
+msgstr "WITHDRAW"
+
+msgid "WITHDRAW {symbol}"
+msgstr "WITHDRAW {symbol}"
+
 msgid "WRAP"
 msgstr "WRAP"
 
@@ -1688,6 +1757,9 @@ msgstr "Your {exchange} {0}/{1} liquidity will become SoulSwap {2}/{3} liquidity
 msgid "You’ll see these icons next to your balance in various input fields."
 msgstr "You’ll see these icons next to your balance in various input fields."
 
+msgid "ZAP"
+msgstr "ZAP"
+
 msgid "Zap"
 msgstr "Zap"
 
@@ -1711,6 +1783,12 @@ msgstr "loading..."
 
 msgid "or the transaction will revert."
 msgstr "or the transaction will revert."
+
+msgid "reduces by 1% daily"
+msgstr "reduces by 1% daily"
+
+msgid "so consider waiting prior to withdrawing to avoid fees."
+msgstr "so consider waiting prior to withdrawing to avoid fees."
 
 msgid "{0} Deposited"
 msgstr "{0} Deposited"

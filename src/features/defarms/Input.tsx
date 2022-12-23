@@ -33,13 +33,8 @@ export default function FarmInputPanel({
   onMax,
   id,
 }: FarmInputPanelProps) {
-  const [modalOpen, setModalOpen] = useState(false)
   const { summonerPoolInfo } = useSummonerPoolInfo(pid)
   const assetPrice = summonerPoolInfo.lpPrice
-
-  const handleDismissSearch = useCallback(() => {
-    setModalOpen(false)
-  }, [setModalOpen])
 
   return (
     <div id={id} className={classNames('p-1 rounded bg-dark-1000')}>
