@@ -91,6 +91,17 @@ export const AvalanchePools = [
     token1Address: BNB_ADDRESS[ChainId.AVALANCHE],
   },
   {
+    pid: 12,
+    type: 'swap',
+    decimals: 18,
+    token0Symbol: 'WAVAX',
+    token1Symbol: 'DAI',
+    lpSymbol: 'AVAX-DAI',
+    lpAddress: DAI_NATIVE[ChainId.AVALANCHE],
+    token0Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+    token1Address: DAI_ADDRESS[ChainId.AVALANCHE],
+  },
+  {
     pid: 7,
     type: 'swap',
     decimals: 18,
