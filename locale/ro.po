@@ -67,6 +67,9 @@ msgstr ""
 msgid "APPROVE ASSET"
 msgstr ""
 
+msgid "APPROVE ZAP"
+msgstr ""
+
 msgid "APR"
 msgstr ""
 
@@ -196,6 +199,9 @@ msgstr ""
 msgid "Balance"
 msgstr ""
 
+msgid "Balance (USD)"
+msgstr ""
+
 msgid "Balance USD"
 msgstr ""
 
@@ -266,6 +272,9 @@ msgid "COMING SOON"
 msgstr ""
 
 msgid "CONTACT US"
+msgstr ""
+
+msgid "CREATE {0} LP"
 msgstr ""
 
 msgid "CREATE {symbol} LP"
@@ -582,6 +591,9 @@ msgstr ""
 msgid "Explorer"
 msgstr ""
 
+msgid "FEE"
+msgstr ""
+
 msgid "Failed"
 msgstr ""
 
@@ -601,6 +613,9 @@ msgid "Farms"
 msgstr ""
 
 msgid "Fee"
+msgstr ""
+
+msgid "Fee (USD)"
 msgstr ""
 
 msgid "Fee Amount"
@@ -664,6 +679,9 @@ msgid "HARVEST"
 msgstr ""
 
 msgid "HARVEST SOUL"
+msgstr ""
+
+msgid "HARVEST YIELD"
 msgstr ""
 
 msgid "Hardware Wallet"
@@ -895,6 +913,9 @@ msgid "Manage Token Lists"
 msgstr ""
 
 msgid "Markets"
+msgstr ""
+
+msgid "Maximum Fee"
 msgstr ""
 
 msgid "Me"
@@ -1180,6 +1201,9 @@ msgstr ""
 msgid "SELECT PATH"
 msgstr ""
 
+msgid "SELECT TOKEN"
+msgstr ""
+
 msgid "SELF"
 msgstr ""
 
@@ -1258,10 +1282,10 @@ msgstr ""
 msgid "Share of Pool"
 msgstr ""
 
-msgid "Share of Pool:"
+msgid "Showing Results"
 msgstr ""
 
-msgid "Showing Results"
+msgid "Since the community proposal passed, an Early Withdrawal Fee is now live (select pairs)"
 msgstr ""
 
 msgid "Slippage"
@@ -1414,6 +1438,9 @@ msgstr ""
 msgid "Things you may do with your SOUL"
 msgstr ""
 
+msgid "This"
+msgstr ""
+
 msgid "This is our estimate of how much the gas cost for your transaction will be. Your wallet will give the true and final gas cost, which may be different from what is quoted."
 msgstr ""
 
@@ -1504,6 +1531,9 @@ msgid "Try enabling multi-hop trades"
 msgstr ""
 
 msgid "Try typing \"10 ETH to KNC\""
+msgstr ""
+
+msgid "Turkish"
 msgstr ""
 
 msgid "Tutorial"
@@ -1609,6 +1639,9 @@ msgid "WALLET"
 msgstr ""
 
 msgid "WITHDRAW"
+msgstr ""
+
+msgid "WITHDRAW {0}"
 msgstr ""
 
 msgid "WITHDRAW {symbol}"
@@ -1749,10 +1782,16 @@ msgstr ""
 msgid "ZAP"
 msgstr ""
 
+msgid "ZAP INTO {0}"
+msgstr ""
+
 msgid "Zap"
 msgstr ""
 
 msgid "annualized"
+msgstr ""
+
+msgid "details here"
 msgstr ""
 
 msgid "failed to load"
@@ -1767,6 +1806,12 @@ msgstr ""
 msgid "health"
 msgstr ""
 
+msgid "liquidity.add"
+msgstr ""
+
+msgid "liquidity.remove"
+msgstr ""
+
 msgid "loading..."
 msgstr ""
 
@@ -1777,6 +1822,9 @@ msgid "reduces by 1% daily"
 msgstr ""
 
 msgid "so consider waiting prior to withdrawing to avoid fees."
+msgstr ""
+
+msgid "so waiting out the early withdrawal period will enable you to avoid fees."
 msgstr ""
 
 msgid "{0} Deposited"

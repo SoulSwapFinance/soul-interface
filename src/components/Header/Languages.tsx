@@ -31,6 +31,10 @@ const Languages: {
       flag: '/images/flags/vi-flag.png',
       language: t`Vietnamese`,
     },
+    tr: {
+      flag: '/images/flags/tr-flag.png',
+      language: t`Turkish`,
+    },
     'zh-CN': {
       flag: '/images/flags/ch-flag.png',
       language: t`Chinese`,

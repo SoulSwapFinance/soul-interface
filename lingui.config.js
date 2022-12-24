@@ -12,9 +12,9 @@ module.exports = {
   format: 'po-gettext',
   formatOptions: { origins: false, lineNumbers: false },
   sourceLocale: 'en',
-  locales: ['de', 'en', 'es-AR', 'es', 'it', 'ro', 'ru', 'vi', 'zh-CN', 'zh-TW', 'ko', 'ja', 'fr'],
+  locales: ['de', 'en', 'es-AR', 'es', 'it', 'ro', 'ru', 'vi', 'zh-CN', 'zh-TW', 'ko', 'ja', 'fr', 'tr'],
   orderBy: 'messageId',
   pseudoLocale: '',
-  rootDir: '.',
+  rootDir: 'src',
   runtimeConfigModule: ['@lingui/core', 'i18n'],
 }

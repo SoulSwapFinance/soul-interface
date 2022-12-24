@@ -92,7 +92,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
       try {
         // Load messages from AWS, use q session param to get latest version from cache
         const res = await fetch(
-          `https://raw.githubusercontent.com/sushiswap/translations/master/sushiswap/${locale}.json`
+          `https://raw.githubusercontent.com/soulswapfinance/translations/master/soulswap/${locale}.json`
         )
         const remoteMessages = await res.json()
 

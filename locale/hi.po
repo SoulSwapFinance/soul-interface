@@ -727,9 +727,6 @@ msgstr "अपनी लिक्विडिटी को खोजने क�
 msgid "Share of Pool"
 msgstr "पूल का हिस्सा"
 
-msgid "Share of Pool:"
-msgstr "पूल का हिस्सा:"
-
 msgid "Slippage Tolerance"
 msgstr "स्लिपेज टॉलरेंस"
 
@@ -744,14 +741,6 @@ msgstr "SAAVE के साथ लाभ को स्टेक करें"
 
 msgid "Stake"
 msgstr "स्टेक करें"
-
-msgid ""
-"Stake into SPELL add collateral as aSPELL on Aave all in"
-"one click"
-msgstr "SPELL में स्टेक करें, सिर्फ एक क्लिक में Aave पर aSPELL के रूप में कोलेटरल जोड़ें"
-
-msgid "Stake into SPELL add collateral as aSPELL on Aave all in\none click"
-msgstr "Aave पर aSPELL के रूप में कोलेटरल जोड़ें SPELL में स्टेक करें \nसब कुछ एक क्लिक में करें"
 
 msgid "Stake SOUL"
 msgstr "SOUL को स्टेक करें"
@@ -929,23 +918,20 @@ msgstr "<0>SIMP3</0> में समुदाय द्वारा चयन�
 msgid "View on Explorer"
 msgstr "एक्सप्लोरर पर देखें"
 
-msgid "View pair analytics"
+msgid "View Analytics"
 msgstr "जोड़ी विश्लेषण देखें"
 
 msgid "View Stats"
 msgstr "आँकड़े देखें"
 
-msgid "View SpellBound Stats"
-msgstr "SpellBound आँकड़े देखें"
-
-msgid "View Your Liquidity Positions"
+msgid "View Positions"
 msgstr "अपनी लिक्विडिटी पोजीशन देखें"
 
-msgid "View Your Liquidity Positions >"
+msgid "View Positions >"
 msgstr "< अपनी लिक्विडिटी पोजीशन देखें >"
 
-msgid "View your SpellBound Portfolio"
-msgstr "अपना SpellBound पोर्टफोलियो देखें"
+msgid "View Portfolio"
+msgstr "अपना पोर्टफोलियो देखें"
 
 msgid "Wallet"
 msgstr "वॉलेट"

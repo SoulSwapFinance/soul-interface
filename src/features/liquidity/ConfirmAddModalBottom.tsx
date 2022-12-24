@@ -60,7 +60,7 @@ export function ConfirmAddModalBottom({
           </div>
         </div>
         <div className="flex items-center justify-between">
-          <div className="text-sm text-secondary">{i18n._(t`Share of Pool:`)}</div>
+          <div className="text-sm text-secondary">{i18n._(t`Share of Pool`)}:</div>
           <div className="text-sm font-bold justify-center items-center flex right-align pl-1.5 text-high-emphesis">
             {noLiquidity ? '100' : poolTokenPercentage?.toSignificant(4)}%
           </div>
