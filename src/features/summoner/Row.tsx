@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
+import { i18n } from '@lingui/core'
+import { t } from '@lingui/macro'
 import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, SUMMONER_ADDRESS, Token, WNATIVE } from 'sdk'
 import { useTokenContract, useSummonerContract, useZapperContract } from 'hooks/useContract'
 import useApprove from 'hooks/useApprove'
@@ -20,12 +22,11 @@ import NavLink from 'components/NavLink'
 import FarmInputPanel from './Input'
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import QuestionHelper from 'components/QuestionHelper'
-// import { useUserInfo } from 'hooks/useAPI'
 import AssetInput from 'components/AssetInput'
 import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import { getChainColor } from 'constants/chains'
 import { ExternalLink } from 'components/ReusableStyles'
-import { BriefcaseIcon, CollectionIcon, CurrencyDollarIcon, DatabaseIcon, PlusIcon, SparklesIcon } from '@heroicons/react/outline'
+import { BriefcaseIcon, CollectionIcon, CurrencyDollarIcon, DatabaseIcon } from '@heroicons/react/outline'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 
 const HideOnSmall = styled.div`
@@ -102,20 +103,12 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const withdrawable = stakedBalance - feeAmount
     const feeValue = feeAmount * lpPrice
 
-    // const firstDepositTime = Number(summonerUserInfo.firstDepositTime)
-    // const currentTime = nowTime / 1_000
-    // const timeDelta = currentTime - firstDepositTime
-    // const daysElapsed = timeDelta / 86_400
-    // const walletValue = Number(walletBalance) * lpPrice
-    // const parsedBalance = tryParseAmount(walletBalance.toString(), farm.lpToken)
-    // const userBalance = useCurrencyBalance(account, lpToken)
-
     const hasBalance = Number(walletBalance) > 0
     const isActive = pairStatus == "active"
     const assetToken = new Token(chainId, farm.lpAddress, decimals)
 
     const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
-  
+
     const parsedDepositValue = tryParseAmount(depositValue, assetToken)
     const parsedWithdrawValue = tryParseAmount(withdrawValue, assetToken)
 
@@ -128,10 +121,6 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     // (de)Constructs Tokens //
     const token0 = new Token(chainId, token0Address, token0Decimals)
     const token1 = new Token(chainId, token1Address, token1Decimals)
-
-    // NATIVE KEYS //
-    // const nativeToken0 = farm.token0Symbol == WNATIVE[chainId].symbol
-    // const nativeToken1 = farm.token1Symbol == WNATIVE[chainId].symbol 
 
     const nativeToken0 = farm.token0Symbol == WNATIVE[chainId].symbol
 
@@ -467,7 +456,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                             }`
                                         }
                                     >
-                                        DEPOSIT
+                                        {i18n._(t`DEPOSIT`)}
                                     </Tab>
                                     <Tab
                                         className={({ selected }) =>
@@ -483,7 +472,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                             }`
                                         }
                                     >
-                                        WITHDRAW
+                                        {i18n._(t`WITHDRAW`)}
                                     </Tab>
                                 </div>
                             </Tab.List>
@@ -550,7 +539,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     {Number(stakedBalance) > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                                Staked Balance
+                                                {i18n._(t`Staked Balance`)}
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                                 {formatNumber(stakedBalance, false, true)} {farm.lpSymbol}
@@ -561,7 +550,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     {stakedValue > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                                Staked (USD)
+                                                {i18n._(t`Staked (USD)`)}
                                             </Typography>
                                             <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
                                                 {formatNumber(stakedValue, true, true)}
@@ -575,7 +564,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
                                     <div className="flex justify-between">
                                         <Typography className="text-white" fontFamily={'medium'}>
-                                            Claimable Rewards
+                                        {i18n._(t`Claimable Rewards`)}
                                         </Typography>
                                         <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                             {earnedAmount.toFixed(2)} SOUL
@@ -583,7 +572,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     </div>
                                     <div className="flex justify-between">
                                         <Typography className="text-white" fontFamily={'medium'}>
-                                            Rewards (USD)
+                                        {i18n._(t`Rewards (USD)`)}
                                         </Typography>
                                         <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
                                             {formatNumber(earnedValue, true, true)}
@@ -605,7 +594,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         </div>
                                     )}
                                     <div className="h-px my-6 bg-dark-1000" />
-                                <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
+                                    <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
                                         <div className="text-white">
                                             <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                                                 <span> {formatNumber(Number(APR), false, true)}% APR</span>
@@ -637,7 +626,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         margin=".5rem 0 0rem 0"
                                         onClick={() => handleApprove()}>
                                         <div className="flex text-lg gap-2">
-                                            {`APPROVE ASSET`}
+                                            {i18n._(t`APPROVE ASSET`)}
                                         </div>
                                     </SubmitButton>
                                 )}
@@ -654,11 +643,11 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     >
                                         <div className="flex text-lg gap-2">
                                             <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                DEPOSIT {
-                                  Number(allocPoint) == 220
-                                  ? token0Symbol 
-                                  : farm.lpSymbol
-                                }
+                                            {i18n._(t`DEPOSIT`)} {
+                                                Number(allocPoint) == 220
+                                                    ? token0Symbol
+                                                    : farm.lpSymbol
+                                            }
                                         </div>
                                     </SubmitButton>
                                 )}
@@ -686,7 +675,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                                     <div className="flex text-lg gap-2">
                                                         <CollectionIcon width={26} className={classNames(`text-white`)} />
                                                         {/* {farm.lpSymbol} */}
-                                                        CREATE {farm.lpSymbol} LP
+                                                        {i18n._(t`CREATE ${farm.lpSymbol} LP`)}
                                                     </div>
                                                 </TokenPairLink>
                                             </SubmitButton>
@@ -710,7 +699,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                                 >
                                                     <div className="flex text-lg gap-2">
                                                         <CollectionIcon width={26} className={classNames(`text-white`)} />
-                                                        CREATE {farm.lpSymbol} LP
+                                                        {i18n._(t`CREATE ${farm.lpSymbol} LP`)}
                                                     </div>                                            </TokenPairLink>
                                             </SubmitButton>
                                         </a>
@@ -752,7 +741,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         >
                                             <div className="flex text-lg gap-2">
                                                 <DatabaseIcon width={26} className={classNames(`text-white`)} />
-                                                HARVEST SOUL
+                                                {i18n._(t`HARVEST YIELD`)}
                                             </div>
                                         </SubmitButton>
                                     </Wrap>
@@ -772,7 +761,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         >
                                             <div className="flex text-lg gap-1">
                                                 {/* <Zap width={26} className={classNames(`text-white`)} /> */}
-                                                ZAP
+                                                {i18n._(t`ZAP`)}
                                                 <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
                                                 &rarr; {`${farm.lpSymbol}`}
                                             </div>
@@ -788,8 +777,8 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                             <div className="flex flex-col space-y-1">
                                                 <div className="flex flex-col">
                                                     <p>
-                                                        Fees decrease by 1% daily, and only increase upon withdrawals.
-                                                        <br /><br />Depositing more is free and does not change your fee.
+                                                        {i18n._(t`Fees decrease by 1% daily, and only increase upon withdrawals.`)}
+                                                        <br /><br />{i18n._(t`Depositing more is free and does not change your fee.`)}
                                                     </p>
                                                 </div>
                                             </div>
@@ -807,7 +796,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     {Number(stakedBalance) > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                                Staked Balance
+                                                {i18n._(t`Staked Balance`)}
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                                 {formatNumber(stakedBalance, false, true)} {farm.lpSymbol}
@@ -818,7 +807,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     {stakedValue > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                                Balance (USD)
+                                                {i18n._(t`Balance (USD)`)}
                                             </Typography>
                                             <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
                                                 {formatNumber(stakedValue, true, true)}
@@ -831,7 +820,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
                                     <div className="flex justify-between">
                                         <Typography className="text-white" fontFamily={'medium'}>
-                                            Maximum Fee
+                                            {i18n._(t`Maximum Fee`)}
                                         </Typography>
                                         <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                             {formatNumber(Number(stakedBalance) - withdrawable, false, true)} {farm.lpSymbol}
@@ -840,7 +829,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
                                     <div className="flex justify-between">
                                         <Typography className="text-white" fontFamily={'medium'}>
-                                            Fee (USD)
+                                            {i18n._(t`Fee (USD)`)}
                                         </Typography>
                                         <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
                                             {formatNumber(Number(feeValue), true, true)}
@@ -856,7 +845,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                                 <div className={classNames("block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md",
                                                     "hover:bg-dark-300")}>
                                                     <span>
-                                                        {(Number(withdrawFee)).toFixed(0)}% FEE
+                                                        {(Number(withdrawFee)).toFixed(0)}% {i18n._(t`FEE`)}
                                                     </span>
                                                 </div>
                                             </div>
@@ -869,7 +858,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                             <div className="text-white">
                                                 <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                                                     <span>
-                                                        {(Number(withdrawFee)).toFixed(0)}% FEE
+                                                        {(Number(withdrawFee)).toFixed(0)}% {i18n._(t`FEE`)}
                                                     </span>
                                                 </div>
                                             </div>
@@ -895,7 +884,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         margin=".5rem 0 0rem 0"
                                         onClick={() => setShowConfirmation(true)}
                                     >
-                                        WITHDRAW {farm.lpSymbol}
+                                        {i18n._(t`WITHDRAW ${farm.lpSymbol}`)}
                                     </SubmitButton>
 
                                 </Wrap>
@@ -911,7 +900,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                                 handleHarvest(pid)
                                             }
                                         >
-                                            HARVEST SOUL
+                                            {i18n._(t`HARVEST YIELD`)}
                                         </SubmitButton>
                                     </Wrap>
                                 )}
@@ -969,7 +958,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 setModalOpen(true)
                             }
                         >
-                            SELECT TOKEN
+                            {i18n._(t`SELECT TOKEN`)}
                         </SubmitButton>
                     </Wrap>
                     <div className="my-2 mx-8 mt-3 border border-[#FFFFFF]" />
@@ -985,7 +974,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 handleZapApprove(tokenContract)
                             }
                         >
-                            APPROVE ZAP
+                            {i18n._(t`APPROVE ZAP`)}
                             {/* {token.symbol} */}
                         </SubmitButton>
                     </Wrap>
@@ -1002,11 +991,11 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 handleZap(zapTokenAddress, lpAddress)
                             }
                         >
-                            ZAP INTO {farm.lpSymbol}
+                            {i18n._(t`ZAP INTO ${farm.lpSymbol}`)}
                         </SubmitButton>
                     </Wrap>
-                    <Typography className="flex text-center mt-4 sm:mt-6 border border-avaxRed p-2 rounded rounded-2xl">
-                        {`Keep slippage in mind when zapping to prevent loses due to low liquidity. If you are unsure whether this applies, avoid zaps above ~$300.`}
+                    <Typography className={`flex text-center mt-4 sm:mt-6 border border-[${getChainColor(chainId)}] p-2 rounded rounded-2xl`}>
+                        {`Keep slippage in mind when zapping to prevent loses due to low liquidity. If you are unsure whether this applies, avoid zaps above ~${[ChainId.FANTOM].includes(chainId) ? `$500` : `$300`}.`}
                     </Typography>
 
                 </Modal>
@@ -1018,27 +1007,27 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                     <div className="space-y-4">
                         <ModalHeader header={`FYI: Early Withdrawal Fee`} onClose={() => setShowConfirmation(false)} />
                         <Typography variant="sm">
-                            Since the community proposal passed, a 14-Day Early Withdrawal Fee is now live: <b><a href="https://enchant.soulswap.finance/#/proposal/0xb2ede0a82c5efc57f9c097f11db653fb1155cd313dfedd6c87142a42f68465a6">details here</a></b>.
+                            {i18n._(t`Since the community proposal passed, an Early Withdrawal Fee is now live (select pairs)`)} <b><a href="https://enchant.soulswap.finance/#/proposal/0xb2ede0a82c5efc57f9c097f11db653fb1155cd313dfedd6c87142a42f68465a6">{i18n._(t`details here`)}</a></b>.
                             {/* <br/><br/>This means you may withdraw for 0% fees after 14 Days have elapsed.  */}
-                            <br /><br />This <b>reduces by 1% daily</b>, so consider waiting 14 Days prior to withdrawing to avoid fees.
+                            <br /><br />{i18n._(t`This`)} <b>{i18n._(t`reduces by 1% daily`)}</b>, {i18n._(t`so waiting out the early withdrawal period will enable you to avoid fees.`)}
 
                             <div className="text-xl mt-4 mb-4 text-center border p-1.5 border-dark-600">
-                                Estimated Fee Outcomes
+                                {i18n._(t`Estimated Fee Outcomes`)}
                             </div>
-                            • <b>Current Rate</b>: {Number(withdrawFee).toFixed(0)}% <br />
-                            • <b>Fee Amount</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {farm.lpSymbol}<br />
-                            • <b>Fee Value</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) * Number(lpPrice) / 100, true, true)}
+                            • <b>{i18n._(t`Current Rate`)}</b>: {Number(withdrawFee).toFixed(0)}% <br />
+                            • <b>{i18n._(t`Fee Amount`)}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {farm.lpSymbol}<br />
+                            • <b>{i18n._(t`Fee Value`)}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) * Number(lpPrice) / 100, true, true)}
 
                             <div className="mt-6 text-center">
-                                <i><b>Please do not rely on our estimations</b></i>.
+                                <i><b>{i18n._(t`Please do not rely on our estimations`)}</b></i>.
                             </div>
 
                             {/* <b>100% of the fee</b> goes towards building our protocol-owned liquidity, which brings about long-term sustainability to our platform. */}
                         </Typography>
                         <Typography variant="sm" className="font-medium text-center">
-                            QUESTIONS OR CONCERNS?
+                            {i18n._(t`QUESTIONS OR CONCERNS?`)}
                             <a href="mailto:soulswapfinance@gmail.com">
-                                {' '} CONTACT US
+                                {' '} {i18n._(t`CONTACT US`)}
                             </a>
                         </Typography>
                         <Button
@@ -1048,7 +1037,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 handleWithdraw(pid, withdrawValue)
                             }
                         >
-                            I UNDERSTAND THESE TERMS
+                            {i18n._(t`I UNDERSTAND THESE TERMS`)}
                         </Button>
                     </div>
                 </Modal>

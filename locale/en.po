@@ -67,6 +67,9 @@ msgstr "APPROVE"
 msgid "APPROVE ASSET"
 msgstr "APPROVE ASSET"
 
+msgid "APPROVE ZAP"
+msgstr "APPROVE ZAP"
+
 msgid "APR"
 msgstr "APR"
 
@@ -196,6 +199,9 @@ msgstr "Avg. APY"
 msgid "Balance"
 msgstr "Balance"
 
+msgid "Balance (USD)"
+msgstr "Balance (USD)"
+
 msgid "Balance USD"
 msgstr "Balance USD"
 
@@ -270,6 +276,9 @@ msgstr "COMING SOON"
 
 msgid "CONTACT US"
 msgstr "CONTACT US"
+
+msgid "CREATE {0} LP"
+msgstr "CREATE {0} LP"
 
 msgid "CREATE {symbol} LP"
 msgstr "CREATE {symbol} LP"
@@ -587,6 +596,9 @@ msgstr "Explore our Protocol."
 msgid "Explorer"
 msgstr "Explorer"
 
+msgid "FEE"
+msgstr "FEE"
+
 msgid "Failed"
 msgstr "Failed"
 
@@ -607,6 +619,9 @@ msgstr "Farms"
 
 msgid "Fee"
 msgstr "Fee"
+
+msgid "Fee (USD)"
+msgstr "Fee (USD)"
 
 msgid "Fee Amount"
 msgstr "Fee Amount"
@@ -670,6 +685,9 @@ msgstr "HARVEST"
 
 msgid "HARVEST SOUL"
 msgstr "HARVEST SOUL"
+
+msgid "HARVEST YIELD"
+msgstr "HARVEST YIELD"
 
 msgid "Hardware Wallet"
 msgstr "Hardware Wallet"
@@ -901,6 +919,9 @@ msgstr "Manage Token Lists"
 
 msgid "Markets"
 msgstr "Markets"
+
+msgid "Maximum Fee"
+msgstr "Maximum Fee"
 
 msgid "Me"
 msgstr "Me"
@@ -1189,6 +1210,9 @@ msgstr "Russian"
 msgid "SELECT PATH"
 msgstr "SELECT PATH"
 
+msgid "SELECT TOKEN"
+msgstr "SELECT TOKEN"
+
 msgid "SELF"
 msgstr "SELF"
 
@@ -1267,11 +1291,11 @@ msgstr "Settings"
 msgid "Share of Pool"
 msgstr "Share of Pool"
 
-msgid "Share of Pool:"
-msgstr "Share of Pool:"
-
 msgid "Showing Results"
 msgstr "Showing Results"
+
+msgid "Since the community proposal passed, an Early Withdrawal Fee is now live (select pairs)"
+msgstr "Since the community proposal passed, an Early Withdrawal Fee is now live (select pairs)"
 
 msgid "Slippage"
 msgstr "Slippage"
@@ -1423,6 +1447,9 @@ msgstr "Things you can do with your SOUL"
 msgid "Things you may do with your SOUL"
 msgstr "Things you may do with your SOUL"
 
+msgid "This"
+msgstr "This"
+
 msgid "This is our estimate of how much the gas cost for your transaction will be. Your wallet will give the true and final gas cost, which may be different from what is quoted."
 msgstr "This is our estimate of how much the gas cost for your transaction will be. Your wallet will give the true and final gas cost, which may be different from what is quoted."
 
@@ -1516,6 +1543,9 @@ msgstr "Try enabling multi-hop trades"
 
 msgid "Try typing \"10 ETH to KNC\""
 msgstr "Try typing \"10 ETH to KNC\""
+
+msgid "Turkish"
+msgstr "Turkish"
 
 msgid "Tutorial"
 msgstr "Tutorial"
@@ -1621,6 +1651,9 @@ msgstr "WALLET"
 
 msgid "WITHDRAW"
 msgstr "WITHDRAW"
+
+msgid "WITHDRAW {0}"
+msgstr "WITHDRAW {0}"
 
 msgid "WITHDRAW {symbol}"
 msgstr "WITHDRAW {symbol}"
@@ -1760,11 +1793,17 @@ msgstr "You’ll see these icons next to your balance in various input fields."
 msgid "ZAP"
 msgstr "ZAP"
 
+msgid "ZAP INTO {0}"
+msgstr "ZAP INTO {0}"
+
 msgid "Zap"
 msgstr "Zap"
 
 msgid "annualized"
 msgstr "annualized"
+
+msgid "details here"
+msgstr "details here"
 
 msgid "failed to load"
 msgstr "failed to load"
@@ -1778,6 +1817,12 @@ msgstr "forum discussion"
 msgid "health"
 msgstr "health"
 
+msgid "liquidity.add"
+msgstr "Add Liquidity"
+
+msgid "liquidity.remove"
+msgstr "Remove Liquidity"
+
 msgid "loading..."
 msgstr "loading..."
 
@@ -1789,6 +1834,9 @@ msgstr "reduces by 1% daily"
 
 msgid "so consider waiting prior to withdrawing to avoid fees."
 msgstr "so consider waiting prior to withdrawing to avoid fees."
+
+msgid "so waiting out the early withdrawal period will enable you to avoid fees."
+msgstr "so waiting out the early withdrawal period will enable you to avoid fees."
 
 msgid "{0} Deposited"
 msgstr "{0} Deposited"
