@@ -576,7 +576,7 @@ export const ActiveRow = ({ pid, farm }) => {
                                                     <div className="flex text-lg gap-2">
                                                         <CollectionIcon width={26} className={classNames(`text-white`)} />
                                                         {/* {symbol} */}
-                                                        {i18n._(t`CREATE ${symbol} LP`)}
+                                                        CREATE {symbol} LP
                                                     </div>
                                                 </TokenPairLink>
                                             </SubmitButton>

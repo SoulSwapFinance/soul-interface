@@ -675,7 +675,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                                     <div className="flex text-lg gap-2">
                                                         <CollectionIcon width={26} className={classNames(`text-white`)} />
                                                         {/* {farm.lpSymbol} */}
-                                                        {i18n._(t`CREATE ${farm.lpSymbol} LP`)}
+                                                        CREATE {farm.lpSymbol} LP
                                                     </div>
                                                 </TokenPairLink>
                                             </SubmitButton>
@@ -699,8 +699,9 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                                 >
                                                     <div className="flex text-lg gap-2">
                                                         <CollectionIcon width={26} className={classNames(`text-white`)} />
-                                                        {i18n._(t`CREATE ${farm.lpSymbol} LP`)}
-                                                    </div>                                            </TokenPairLink>
+                                                        CREATE {farm.lpSymbol} LP
+                                                    </div>                                            
+                                                </TokenPairLink>
                                             </SubmitButton>
                                         </a>
                                     </NavLink>
