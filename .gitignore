@@ -19,4 +19,5 @@ public/sw.js.map
 public/workbox*.js
 public/workbox*.js.map
 
-.env
+.env.dev
+.env.production

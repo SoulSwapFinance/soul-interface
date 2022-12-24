@@ -1,11 +1,11 @@
 import { Popover, Transition } from '@headlessui/react'
 import React, { Fragment } from 'react'
-import { ChainId } from 'sdk'
-import { I18n } from '@lingui/core'
+// import { ChainId } from 'sdk'
+// import { I18n } from '@lingui/core'
 import Image from 'next/image'
 import { classNames } from '../../functions/styling'
 import { t } from '@lingui/macro'
-import { getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 import { useActiveWeb3React } from 'services/web3'
 import Languages from './Languages'
 import { useRouter } from 'next/router'
@@ -37,10 +37,10 @@ export default function LanguageMenu() {
                     >
                         <Popover.Panel
                             static
-                            className="absolute z-50 w-screen max-w-xs px-2 mt-3 transform -translate-x-full bottom-12 lg:top-12"
+                            className="absolute z-50 w-screen max-w-xs px-2 mt-1 transform -translate-x-full bottom-12"
                         >
-                            <div className={classNames("overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 border", `border-${getChainColorCode(chainId || 250)}`)}>
-                                <div className="relative grid gap-1 px-5 py-6 bg-dark-900 sm:p-8">
+                            <div className={classNames("overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 border", `border-[${getChainColor(chainId || 250)}]`)}>
+                                <div className="grid grid-cols-2 gap-1 px-4 py-2 bg-dark-1000 sm:p-8">
                                     {locales.map((locale) => {
                                         const { flag, language, dialect } = Languages[locale]
                                         return (
@@ -51,7 +51,7 @@ export default function LanguageMenu() {
                                                         <a
                                                             href="#"
                                                             className={classNames(
-                                                                'group flex items-center px-4 py-2 text-sm hover:bg-dark-700 focus:bg-dark-700 rounded'
+                                                                'group flex items-center px-2 py-1 text-sm hover:bg-dark-700 focus:bg-dark-700 rounded'
                                                             )}
                                                         >
                                                             <Image
@@ -62,7 +62,7 @@ export default function LanguageMenu() {
                                                                 alt={language}
                                                                 aria-hidden="true"
                                                             />
-                                                            <span className="ml-4">{language}</span>
+                                                            <span className="flex justify-center ml-3">{language}</span>
                                                             {dialect && (
                                                                 <sup>
                                                                     <small>{dialect}</small>
