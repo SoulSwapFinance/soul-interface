@@ -512,29 +512,6 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         "w-full space-y-1")
 
                                     }>
-                                    {/* Number(walletBalance) > 0 && (
-                                        <div className="flex justify-between">
-                                            <Typography className="text-white font-bold" fontFamily={'medium'}>
-                                                Wallet Balance
-                                            </Typography>
-                                            <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(walletBalance, false, true)} {tokenSymbol}
-                                            </Typography>
-                                        </div>
-                                    )
-                                    */}
-
-                                    {/* Number(walletValue) > 0 && (
-                                        <div className="flex justify-between">
-                                            <Typography className="text-white" fontFamily={'medium'}>
-                                                Balance (USD)
-                                            </Typography>
-                                            <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(walletValue, true, true)}
-                                            </Typography>
-                                        </div>
-                                    )
-                                    */}
 
                                     {Number(stakedBalance) > 0 && (
                                         <div className="flex justify-between">
@@ -885,7 +862,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         margin=".5rem 0 0rem 0"
                                         onClick={() => setShowConfirmation(true)}
                                     >
-                                        {i18n._(t`WITHDRAW ${farm.lpSymbol}`)}
+                                        {i18n._(t`WITHDRAW`)} {farm.lpSymbol}
                                     </SubmitButton>
 
                                 </Wrap>
