@@ -13,7 +13,7 @@ import Link from 'next/link'
 
 export default function LanguageMenu() {
     const { chainId } = useActiveWeb3React()
-    const hybridStyle = `flex items-center justify-center px-3 py-2.5 md:space-x-2 rounded bg-dark-900 border border-dark-800 hover:bg-dark-800 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`
+    const hybridStyle = `flex items-center justify-center px-3 py-2.5 md:space-x-2 rounded rounded-md p-2 bg-dark-1000 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`
     const { locale, locales, asPath } = useRouter()
 
     return (
@@ -51,7 +51,7 @@ export default function LanguageMenu() {
                                                         <a
                                                             href="#"
                                                             className={classNames(
-                                                                'group flex items-center px-2 py-1 text-sm hover:bg-dark-700 focus:bg-dark-700 rounded'
+                                                                'group flex items-center px-2 py-1 text-sm focus:bg-dark-1000 rounded'
                                                             )}
                                                         >
                                                             <Image

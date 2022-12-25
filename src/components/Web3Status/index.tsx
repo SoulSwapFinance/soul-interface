@@ -114,7 +114,9 @@ function Web3StatusInner() {
     return (
       <div
         id="web3-status-connected"
-        className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-dark-1000 text-primary"
+        // className= {`flex items-center justify-center px-3 py-2.5 md:space-x-2 rounded bg-dark-1000 border border-dark-900 hover:bg-dark-800 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`}
+        className={`flex items-center rounded rounded-md border p-2 border-[${getChainColor(chainId)}] bg-dark-1000 hover:bg-dark-900 whitespace-nowrap text-md justify-center font-bold cursor-pointer select-none pointer-events-auto`}
+        // className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-dark-1000 text-primary"
         onClick={toggleWalletModal}
       >
         {hasPendingTransactions ? (
@@ -126,7 +128,11 @@ function Web3StatusInner() {
           </div>
         ) : (
           // <div className="flex items-center gap-2">
-          <div className="grid items-center grid-flow-col items-center justify-center bg-dark-900 h-[24px] w-[24px] text-sm pointer-events-auto auto-cols-max text-secondary">
+          <div className=
+          // {`flex items-center rounded rounded-xl border border-[${getChainColor(chainId)}] bg-dark-1000 h-[24px] w-[24px] hover:bg-dark-900 whitespace-nowrap text-md justify-center font-bold cursor-pointer select-none pointer-events-auto`}
+
+          "grid items-center grid-flow-col items-center justify-center bg-dark-1000 h-[24px] w-[24px] text-sm pointer-events-auto auto-cols-max text-secondary"
+          >
             {/* <div>{ENSName || shortenAddress(account)} </div> */}
             <WalletIcon width={24} height={24} className={`text-[${getChainColor(chainId)}]`} />
             {/* <Davatar
