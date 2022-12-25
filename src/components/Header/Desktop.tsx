@@ -124,7 +124,9 @@ const Desktop: FC = () => {
         </Transition.Root>
         <div className={`fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full xl:w-auto rounded rounded-xl xl:relative xl:bg-transparent`}>
           <div className="flex items-center w-full space-x-2 justify-end">
-            <div className={!account && !showMenu ? `border-[${getChainColor(chainId)}] rounded rounded-lg inline-block` : `hidden`}>
+              <div 
+            className={`border-[${getChainColor(chainId)}] rounded rounded-lg inline-block`}
+             >
               <Web3Status />
             </div>
             <div className={`w-auto grid gap-1.5 items-center rounded rounded-xl bg-dark-1000  border-[${getChainColor(chainId)}] whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`}>
@@ -139,15 +141,15 @@ const Desktop: FC = () => {
                 </>
               )} */}
               {/* MORE [...] ICON */}
-              <div className={showMenu && account ? `rounded rounded-md inline-block border border-[${getChainColor(chainId)}]` : `hidden`}>
+              <div className={showMenu ? `rounded rounded-md inline-block border border-[${getChainColor(chainId)}]` : `hidden`}>
                 <div className="inline-block justify-center ml-2">
                   <More />
                 </div>
               </div>
               {/* WALLET ICON */}
-              <div className={showMenu && account ? `rounded rounded-md inline-block border border-[${getChainColor(chainId)}]` : `hidden`}>
+              {/* <div className={showMenu && account ? `rounded rounded-md inline-block border border-[${getChainColor(chainId)}]` : `hidden`}>
                 <Web3Status />
-              </div>
+              </div> */}
               {/* NETWORK ICON */}
               <div className={showMenu ? `rounded rounded-md p-2 inline-block border border-2 border-[${getChainColor(chainId)}]` : `hidden`}>
                 <Web3Network />
