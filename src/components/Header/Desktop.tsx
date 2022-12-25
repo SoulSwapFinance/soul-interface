@@ -1,11 +1,14 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { MenuAlt1Icon } from '@heroicons/react/outline'
+import BarsArrowUpIcon from 'assets/svg/icons/BarsArrowUp.svg'
+import BarsArrowDownIcon from 'assets/svg/icons/BarsArrowDown.svg'
+
 import { ChainId, NATIVE } from 'sdk'
 import Web3Status from 'components/Web3Status'
 import { useActiveWeb3React } from 'services/web3'
 import { useETHBalances } from 'state/wallet/hooks'
-import React, { FC, Fragment, useState } from 'react'
-
+import React, { FC, Fragment, useCallback, useState } from 'react'
+import Image from 'next/image'
 import { NavigationItem } from './NavigationItem'
 import { SidebarItem } from './SidebarItem'
 import TokenStats from 'components/TokenStats'
@@ -17,6 +20,7 @@ import { useRouter } from 'next/router'
 import { classNames } from 'functions'
 import Web3Network from 'components/Web3Network'
 import LanguageMenu from './useLanguages'
+import { getChainColor } from 'constants/chains'
 
 const HEADER_HEIGHT = 64
 
@@ -26,9 +30,12 @@ const Desktop: FC = () => {
   // const mobile = useMobileMenu()
   const { account, chainId, library, connector } = useActiveWeb3React()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
-
   const [open, setOpen] = useState(false)
+  const [showMenu, setShowMenu] = useState(false)
   const router = useRouter()
+  // const handleShowMenu = useCallback(() => {
+  //   setSho
+  // }, [setShowMenu])
 
   return (
     <>
@@ -50,8 +57,8 @@ const Desktop: FC = () => {
               h-full before:backdrop-saturate-[1.2] \
               before:backdrop-blur-[20px] before:z-[-1] \
               before:absolute before:w-full before:h-full mx-4`
-              )
-            }>
+          )
+          }>
           <Container maxWidth="3xl" className="rounded rounded-4xl text-center items-center justify-center">
             <div
               className="flex rounded rounded-xl gap-1 px-1 sm:gap-4 md:gap-18 justify-center items-center">
@@ -115,11 +122,13 @@ const Desktop: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
-        <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full xl:w-auto rounded rounded-xl xl:relative xl:bg-transparent">
-          <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
-
-            <div className="w-auto flex items-center rounded bg-dark-900 hover:border hover:border-dark-900 p-1.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto">
-              {account && chainId && userEthBalance && (
+        <div className={`fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full xl:w-auto rounded rounded-xl xl:relative xl:bg-transparent`}>
+          <div className="flex items-center w-full space-x-2 justify-end">
+            <div className={!account && !showMenu ? `border-[${getChainColor(chainId)}] rounded rounded-lg inline-block` : `hidden`}>
+              <Web3Status />
+            </div>
+            <div className={`w-auto grid gap-1.5 items-center rounded rounded-xl bg-dark-1000  border-[${getChainColor(chainId)}] whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`}>
+              {/* {account && chainId && userEthBalance && (
                 <>
                   <div className="flex px-2 py-2 text-primary text-bold">
                     {userEthBalance?.toSignificant(4)
@@ -128,28 +137,59 @@ const Desktop: FC = () => {
                     {NATIVE[chainId].symbol}
                   </div>
                 </>
-              )}
+              )} */}
+              {/* MORE [...] ICON */}
+              <div className={showMenu && account ? `rounded rounded-md inline-block border border-[${getChainColor(chainId)}]` : `hidden`}>
+                <div className="inline-block justify-center ml-2">
+                  <More />
+                </div>
+              </div>
               {/* WALLET ICON */}
-              <div className="inline-block ml-2">
+              <div className={showMenu && account ? `rounded rounded-md inline-block border border-[${getChainColor(chainId)}]` : `hidden`}>
                 <Web3Status />
               </div>
               {/* NETWORK ICON */}
-              <div className="inline-block ml-2">
+              <div className={showMenu ? `rounded rounded-md p-2 inline-block border border-2 border-[${getChainColor(chainId)}]` : `hidden`}>
                 <Web3Network />
               </div>
-              <div className="inline-block ml-1 mr-1">
+              {/* FLAG ICON */}
+              <div className={showMenu ? `rounded rounded-md inline-block border border-2 border-[${getChainColor(chainId)}]` : `hidden`}>
                 <LanguageMenu />
               </div>
-              {/* MORE [...] ICON */}
-              <div className="inline-block ml-1 mr-1">
-                <More />
+              {/* <div
+                className={`grid grid-cols items-center justify-center w-full h-8 bg-dark-800 border border-2 border-[${getChainColor(chainId)}] rounded rounded-xl`}
+                > */}
+              <div
+                className={
+                  showMenu
+                    ? `hidden`
+                    : `grid grid-col items-center justify-center w-12 h-8 bg-dark-1000 border border-2 border-[${getChainColor(chainId)}] rounded rounded-lg`
+                }>
+                <Image
+                  alt={"bars arrow up icon"}
+                  src={BarsArrowUpIcon}
+                  height={20}
+                  width={20}
+                  onClick={() => setShowMenu(true)}
+                />
               </div>
-              {/* <div className="cols flex-cols-2 inline-block">
-                <Web3Network />
-              </div> */}
-              {/* <div className="grid grid-cols-1 mr-2 inline-block">
-                <More />
-              </div> */}
+              <div
+                className={
+                  showMenu
+                    ? `grid grid-col items-center justify-center w-full h-8 bg-dark-1000 border border-[${getChainColor(chainId)}] rounded rounded-lg`
+                    : `hidden`
+                }>
+                <Image
+                  alt={"bars arrow up icon"}
+                  src={BarsArrowDownIcon}
+                  height={20}
+                  width={20}
+                  onClick={() => setShowMenu(false)}
+                />
+              </div>
+              {/* // className="inline-block ml-1 justify-center h-4" */}
+              {/* <BarsArrowUpIcon className="inline-block ml-1 justify-center h-4" /> */}
+              {/* </div> */}
             </div>
           </div>
         </div>

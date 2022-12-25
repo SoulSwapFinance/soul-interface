@@ -3,12 +3,12 @@ import React, { Fragment } from 'react'
 import { ChainId } from 'sdk'
 import ExternalLink from '../ExternalLink'
 import { I18n } from '@lingui/core'
-import Image from 'next/image'
+// import Image from 'next/image'
 import { classNames } from '../../functions/styling'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import NavLink from '../NavLink'
-import { getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 import { useActiveWeb3React } from 'services/web3'
 
 export default function Menu() {
@@ -20,19 +20,19 @@ export default function Menu() {
   const items = (i18n: I18n) => [
   {
     name: i18n._(t`Documentation`),
-    description: i18n._(t`Read the Documentation.`),
+    description: i18n._(t`Read our Full Documentation`),
     href: 'https://docs.soulswap.finance',
     external: true,
   },
-  {
-    name: i18n._(t`Analytics`),
-    description: i18n._(t`View our Data.`),
-    href: `${blockchainPrefix}.soulswap.finance`,
-    external: true,
-  },
+  // {
+  //   name: i18n._(t`Analytics`),
+  //   description: i18n._(t`View our Data.`),
+  //   href: `${blockchainPrefix}.soulswap.finance`,
+  //   external: true,
+  // },
   {
     name: i18n._(t`Resources`),
-    description: i18n._(t`Explore our Protocol.`),
+    description: i18n._(t`Explore our Protocol Links`),
     href: 'https://links.soul.sh',
     external: true,
   },
@@ -41,13 +41,13 @@ export default function Menu() {
   const solutions = items(i18n)
 
   return (
-    <Popover className="relative ml-auto lg:m-0">
+    <Popover className="relative ml-auto m-0">
       {({ open }) => (
         <>
           <Popover.Button
             className={classNames(
-              open ? 'text-primary' : 'text-secondary',
-              'focus:outline-none hover:text-high-emphesis'
+              open ? `text-${getChainColorCode(chainId)}` : 'text-secondary',
+              `focus:outline-none hover:text-${getChainColorCode(chainId)}`
             )}
           >
             <svg
@@ -94,25 +94,25 @@ export default function Menu() {
           >
             <Popover.Panel
               static
-              className="absolute z-50 w-screen max-w-xs px-2 mt-3 transform -translate-x-full bottom-12 lg:top-12 left-full sm:px-0"
+              className="absolute z-50 w-screen max-w-xs px-2 mt-3 transform -translate-x-full bottom-8 lg:top-12 left-full sm:px-0"
             >
-              <div className={classNames("overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 border",`border-${getChainColorCode(chainId || 250)}`)}>
-                <div className="relative grid gap-6 px-5 py-6 bg-dark-900 sm:gap-8 sm:p-8">
+              <div className={classNames(`overflow-hidden rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5 border border-2 hover:border-${getChainColorCode(chainId)}`)}>
+                <div className="relative grid gap-6 px-5 py-6 bg-dark-1000 sm:gap-8 sm:p-8">
                   {solutions.map((item) =>
                     item.external ? (
                       <ExternalLink
                         key={item.name}
                         href={item.href}
-                        className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800"
+                        className="block p-1 -m-3 transition duration-150 ease-in-out text-center rounded-md hover:bg-dark-900"
                       >
                         <p className="text-base font-medium text-high-emphesis">{item.name}</p>
-                        <p className="mt-1 text-sm text-secondary">{item.description}</p>
+                        <p className="text-sm text-secondary">{item.description}</p>
                       </ExternalLink>
                     ) : (
                       <NavLink key={item.name} href={item.href}>
-                        <a className="block p-3 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-800">
+                        <a className="block p-1 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
                           <p className="text-base font-medium text-high-emphesis">{item.name}</p>
-                          <p className="mt-1 text-sm text-secondary">{item.description}</p>
+                          <p className="text-sm text-secondary">{item.description}</p>
                         </a>
                       </NavLink>
                     )

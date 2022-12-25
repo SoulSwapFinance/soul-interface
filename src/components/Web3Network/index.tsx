@@ -58,7 +58,7 @@ function Web3Network(): JSX.Element | null {
 
   return (
     <div
-    className={`flex items-center rounded rounded-xl border-4 border-[${getChainColor(chainId)}] bg-dark-1000 hover:bg-dark-900 whitespace-nowrap text-md justify-center font-bold cursor-pointer select-none pointer-events-auto`}
+    className={`flex items-center rounded rounded-md border-4 border-[${getChainColor(chainId)}] bg-dark-1000 hover:bg-dark-900 whitespace-nowrap text-md justify-center font-bold cursor-pointer select-none pointer-events-auto`}
     onClick={() => toggleNetworkModal()}
     >
       <div className={`grid items-center grid-flow-col items-center justify-center bg-${getChainColorCode(chainId)} h-[24px] w-[24px] text-sm rounded pointer-events-auto auto-cols-max text-secondary`}>
