@@ -110,10 +110,11 @@ const Mobile: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
-        <div className={`fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full xl:w-auto rounded rounded-xl xl:relative xl:bg-transparent`}>
+        <div className={`fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full rounded rounded-xl xl:bg-transparent`}>
+          {/* xl:relative // moves to top */}
           <div className="flex items-center w-full space-x-2 justify-end">
-            <div 
-            className={`border-[${getChainColor(chainId)}] rounded rounded-lg inline-block`}
+              <div 
+            className={`border border-[${getChainColor(chainId)}] border-2 rounded rounded-xl inline-block`}
              >
               <Web3Status />
             </div>
