@@ -38,7 +38,7 @@ import NavLink from 'components/NavLink'
 import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 import { useRouter } from 'next/router'
-import Aggregator, { startChain } from './aggregator'
+// import Aggregator, { startChain } from './aggregator'
 import useGetPrice from 'features/aggregator/queries/useGetPrice'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import Pair from 'pages/analytics/pairs/[id]'
@@ -66,32 +66,32 @@ const Swap = () => {
   const [currencyIdA, currencyIdB] = (tokens as string[]) || [DEFAULT_CURRENCY_A, DEFAULT_CURRENCY_B]
   const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
 
-  const handleCurrencyASelect = useCallback(
-    (currencyA: Currency) => {
-      const newCurrencyIdA = currencyId(currencyA)
-      if (newCurrencyIdA === currencyIdB) {
-        router.push(`/exchange/swap?inputCurrency=${currencyIdB}&outputCurrency=${currencyIdA}`)
-      } else {
-        router.push(`/exchange/swap?inputCurrency=${newCurrencyIdA}&outputCurrency=${currencyIdB}`)
-      }
-    },
-    [currencyIdB, router, currencyIdA]
-  )
-  const handleCurrencyBSelect = useCallback(
-    (currencyB: Currency) => {
-      const newCurrencyIdB = currencyId(currencyB)
-      if (currencyIdA === newCurrencyIdB) {
-        if (currencyIdB) {
-          router.push(`/exchange/swap?inputCurrency=${currencyIdB}&outputCurrency=${newCurrencyIdB}`)
-        } else {
-          router.push(`/exchange/swap?inputCurrency=${NATIVE[chainId].symbol}&outputCurrency=${newCurrencyIdB}`)
-        }
-      } else {
-        router.push(`/exchange/swap?inputCurrency=${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}&outputCurrency=${newCurrencyIdB}`)
-      }
-    },
-    [currencyIdA, router, currencyIdB]
-  )
+  // const handleCurrencyASelect = useCallback(
+  //   (currencyA: Currency) => {
+  //     const newCurrencyIdA = currencyId(currencyA)
+  //     if (newCurrencyIdA === currencyIdB) {
+  //       router.push(`/exchange/swap?inputCurrency=${currencyIdB}&outputCurrency=${currencyIdA}`)
+  //     } else {
+  //       router.push(`/exchange/swap?inputCurrency=${newCurrencyIdA}&outputCurrency=${currencyIdB}`)
+  //     }
+  //   },
+  //   [currencyIdB, router, currencyIdA]
+  // )
+  // const handleCurrencyBSelect = useCallback(
+  //   (currencyB: Currency) => {
+  //     const newCurrencyIdB = currencyId(currencyB)
+  //     if (currencyIdA === newCurrencyIdB) {
+  //       if (currencyIdB) {
+  //         router.push(`/exchange/swap?inputCurrency=${currencyIdB}&outputCurrency=${newCurrencyIdB}`)
+  //       } else {
+  //         router.push(`/exchange/swap?inputCurrency=${NATIVE[chainId].symbol}&outputCurrency=${newCurrencyIdB}`)
+  //       }
+  //     } else {
+  //       router.push(`/exchange/swap?inputCurrency=${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}&outputCurrency=${newCurrencyIdB}`)
+  //     }
+  //   },
+  //   [currencyIdA, router, currencyIdB]
+  // )
   const [dismissTokenWarning, setDismissTokenWarning] = useState<boolean>(false)
   const urlLoadedTokens: Token[] = useMemo(
     () => [loadedInputCurrency, loadedOutputCurrency]?.filter((c): c is Token => c?.isToken ?? false) ?? [],
@@ -363,7 +363,7 @@ const Swap = () => {
 
   // AGGREGATOR CONSTANTS [START] //
   // const DEFAULT_OUTPUT = chainId == ChainId.AVALANCHE ? USDC[chainId] : DAI[chainId]
-  const [selectedChain, setSelectedChain] = useState(startChain(chainId))
+  // const [selectedChain, setSelectedChain] = useState(startChain(chainId))
   const [fromToken, setFromToken] = useState<Currency>(currencyA)
   const [toToken, setToToken] = useState<Currency>(currencyB)
   const [inputAmount, setInputAmount] = useState('10')
@@ -382,6 +382,13 @@ const Swap = () => {
     [setToToken]
   )
 
+  const handleShowCharts = useCallback(
+    () => {
+      setShowAnalytics(true)
+      // router.push(`/exchange/swap/aggregator/${currencyIdA}/${currencyIdB}`)
+    }, [useSwap]
+  )
+
   const handleLimitSwap = useCallback(
     () => {
       // setShowHeader(false)
@@ -389,12 +396,26 @@ const Swap = () => {
     }, [useSwap]
   )
 
+  const handleAggregatorSwap = useCallback(
+    () => {
+      // setShowHeader(false)
+      router.push(`/exchange/swap/aggregator/${currencyIdA}/${currencyIdB}`)
+    }, [useSwap]
+  )
 
-  const { data: tokenPrices } = useGetPrice({
-    chain: selectedChain.value,
-    toToken: toToken?.wrapped.address,
-    fromToken: fromToken?.wrapped.address
-  });
+  const handleBridgeSwap = useCallback(
+    () => {
+      // setShowHeader(false)
+      router.push(`/bridge`)
+    }, [useSwap]
+  )
+
+
+  // const { data: tokenPrices } = useGetPrice({
+  //   chain: selectedChain.value,
+  //   toToken: toToken?.wrapped.address,
+  //   fromToken: fromToken?.wrapped.address
+  // });
 
   // AGGREGATOR CONSTANTS [END] //
 
@@ -630,28 +651,28 @@ const Swap = () => {
               className={classNames(isValid && priceImpactSeverity > 2 ? 'hidden' : "rounded-2xl w-full md:rounded")}
             >
               {swapInputError
-                  ? swapInputError
-                  : priceImpactSeverity > 2
-                    ? i18n._(t`Swap Anyway`)
-                    : i18n._(t`Swap`)}
+                ? swapInputError
+                : priceImpactSeverity > 2
+                  ? i18n._(t`Swap Anyway`)
+                  : i18n._(t`Swap`)}
             </Button>
           )}
 
           {useSwap && priceImpactSeverity > 2 && isValid &&
             <Button
-              color={ `${getChainColorCode(chainId)}` }
+              color={`${getChainColorCode(chainId)}`}
               onClick={() => { setUseAggregator(true) }
               }
               id="use-aggregator-button"
               // disabled={}
               className="rounded-2xl w-full md:rounded"
             >
-              { 'Use Aggregator' }
+              {'Use Aggregator'}
             </Button>
           }
-          {useAggregator && !useLimit &&
+          {/* {useAggregator && !useLimit &&
             <Aggregator />
-          }
+          } */}
           {useLimit && !useAggregator &&
             <Limits />
           }
@@ -681,24 +702,7 @@ const Swap = () => {
             </Button>
           </div> */}
           <div className={classNames(featureEnabled(Feature.AGGREGATE, chainId) ? "m-1 flex justify-between" : "hidden")}>
-            <div className={classNames(useSwap ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}>
-              <Toggle
-                id="toggle-button"
-                optionA="Analytics"
-                optionB="Analytics"
-                isActive={showAnalytics}
-                toggle={
-                  showAnalytics
-                    ? () => {
-                      setShowAnalytics(false)
-                    }
-                    : () => {
-                      setShowAnalytics(true)
-                    }
-                }
-              />
-            </div>
-            <div className={classNames(useLimit ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}>
+            {/* <div className={classNames(useLimit ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}>
               <Toggle
                 id="toggle-button"
                 optionA="Limit"
@@ -714,9 +718,33 @@ const Swap = () => {
                     }
                 }
               />
-            </div>
+            </div> */}
             <div className={classNames(!useLimit && !useAggregator ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}>
-              <Toggle
+              <Button
+                size={'xs'}
+                className={classNames(`rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
+                onClick={handleBridgeSwap}
+              >
+                Bridge
+              </Button>
+              <Button
+                size={'xs'}
+                className={classNames(`rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
+                onClick={handleAggregatorSwap}
+              >
+                Aggregate
+              </Button>
+              <Button
+                size={'xs'}
+                className={classNames(showAnalytics ? `bg-${getChainColorCode(chainId)}` : ``,
+                  `rounded rounded-xl bg-dark-1000 border
+                  border-[${getChainColor(chainId)}]`)
+                }
+                onClick={handleShowCharts}
+              >
+                Charts
+              </Button>
+              {/* <Toggle
                 id="toggle-button"
                 optionA="Aggregator"
                 optionB="Aggregator"
@@ -730,7 +758,7 @@ const Swap = () => {
                       setUseAggregator(true)
                     }
                 }
-              />
+              /> */}
             </div>
           </div>
           {showAnalytics && useSwap && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&

@@ -1,38 +1,46 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
-import { groupBy, mapValues, merge, uniqBy } from 'lodash'
+// import { groupBy, mapValues, merge, uniqBy } from 'lodash'
 import { ethers } from 'ethers'
 import BigNumber from 'bignumber.js'
 // import { useFeeData } from 'wagmi'
 import styled from 'styled-components'
 import Route from 'components/SwapRoute'
 import { getAllChains, swap } from 'features/aggregator/router'
-import { Input, TokenInput } from 'features/aggregator/components/TokenInput'
-import { CrossIcon } from 'features/aggregator/components/Icons'
+// import { Input, TokenInput } from 'features/aggregator/components/TokenInput'
+// import { CrossIcon } from 'features/aggregator/components/Icons'
 import Loader from 'features/aggregator/components/Loader'
 import { ApprovalState, useTokenApprove } from 'hooks/useTokenApprove'
 import useGetRoutes from 'features/aggregator/queries/useGetRoutes'
 import useGetPrice from 'features/aggregator/queries/useGetPrice'
 import { useActiveWeb3React } from 'services/web3'
 import { getExplorerLink } from 'functions/explorer'
-import { Currency, CurrencyAmount, DAI, DAI_ADDRESS, NATIVE, NATIVE_ADDRESS, Token, USDC, USDC_ADDRESS, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
+import { ChainId, Currency, CurrencyAmount, DAI, DAI_ADDRESS, NATIVE, NATIVE_ADDRESS, SOUL_ADDRESS, Token, USDC, USDC_ADDRESS, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import { addTransaction } from 'state/transactions/actions'
 import useTokenBalance from 'hooks/useTokenBalance'
 import { Button } from 'components/Button'
 import { getChainColorCode } from 'constants/chains'
-import listedTokens from 'features/aggregator/tokenList.json'
+// import listedTokens from 'features/aggregator/tokenList.json'
 import { e10 } from 'functions/math'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 import { ArrowDownIcon } from '@heroicons/react/solid'
-import CurrencyInputPanel from 'components/CurrencyInputPanel'
-import Web3 from 'web3'
+// import CurrencyInputPanel from 'components/CurrencyInputPanel'
+// import Web3 from 'web3'
 import { useGasPrice } from 'hooks/useAPI'
 import { SwapLayoutCard } from 'layouts/SwapLayout'
 import SwapHeader from 'features/swap/SwapHeader'
 import Container from 'components/Container'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
+import { useRouter } from "next/router"
+import { useCurrency } from "hooks/Tokens"
+import { currencyId } from 'functions/currency/currencyId'
 import SwapDropdown from 'features/swap/SwapDropdown'
+import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
+import { classNames } from 'functions/styling'
+import { Toggle } from 'components/Toggle'
+import { featureEnabled } from 'functions/feature'
+
 /*
 Integrated:
 - paraswap
@@ -69,18 +77,6 @@ non evm:
 - https://twitter.com/prism_ag (solana)
 - coinhall (terra)
 - https://twitter.com/tfm_com (terra)
-
-cant integrate:
-- https://twitter.com/UniDexFinance - api broken (seems abandoned)
-- https://bebop.xyz/ - not live
-- VaporDex - not live
-- https://twitter.com/hippolabs__ - not live
-- dexguru - no api
-- https://wowmax.exchange/alpha/ - still beta + no api
-- https://twitter.com/RBXtoken - doesnt work
-- https://www.bungee.exchange/ - couldnt use it
-- wardenswap - no api + sdk is closed source
-- https://twitter.com/DexibleApp - not an aggregator, only supports exotic orders like TWAP, segmented order, stop loss...
 */
 
 const Body = styled.div<{ showRoutes: boolean }>`
@@ -208,16 +204,34 @@ const Aggregator = ({ }) => {
 	const signer = library.getSigner()
 	const [selectedChain, setSelectedChain] = useState(startChain(chainId))
 
-	const [fromToken, setFromToken] = useState<Currency>(NATIVE[chainId])
-	const [toToken, setToToken] = useState<Currency>(DAI[chainId])
-	const [inputToken, setInputToken] = useState<Currency>(NATIVE[chainId])
-	const [outputToken, setOutputToken] = useState<Currency>(DAI[chainId])
+	const router = useRouter()
+	const tokens = router.query.tokens
+
+	const DEFAULT_CURRENCY_B = [ChainId.FANTOM].includes(chainId) ? SOUL_ADDRESS[chainId] : USDC_ADDRESS[chainId]
+	const [currencyIdA, currencyIdB] = (tokens as string[]) || [NATIVE[chainId].symbol, DEFAULT_CURRENCY_B]
+	const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
+
+	const [fromToken, setFromToken] = useState<Currency>(currencyA)
+	const [toToken, setToToken] = useState<Currency>(currencyB)
+	const [inputToken, setInputToken] = useState<Currency>(currencyA)
+	const [outputToken, setOutputToken] = useState<Currency>(currencyB)
+
 	const [fromDecimals, setFromDecimals] = useState(inputToken?.wrapped.decimals)
 	const [toDecimals, setToDecimals] = useState(outputToken?.wrapped.decimals)
 
-	const [fromAddress, setFromAddress] = useState(fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address)
-	const [toAddress, setToAddress] = useState(toToken?.isNative ? NATIVE_ADDRESS : toToken?.wrapped.address)
-	const [tokenToApprove, setTokenToApprove] = useState<Currency>()
+	const [useSwap, setUseSwap] = useState(false)
+	const [showRoutes, setShowRoutes] = useState(false)
+
+	// const handleSetSwap = useCallback(
+	// 	() => {
+	// 	  // setShowHeader(false)
+	// 	  router.push(`/exchange/swap/${currencyIdA}/${currencyIdB}`)
+	// 	}, [useSwap]
+	//   )
+
+	// const [fromAddress, setFromAddress] = useState(fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address)
+	// const [toAddress, setToAddress] = useState(toToken?.isNative ? NATIVE_ADDRESS : toToken?.wrapped.address)
+	// const [tokenToApprove, setTokenToApprove] = useState<Currency>()
 
 	const [slippage, setSlippage] = useState('1')
 	const [amount, setAmount] = useState('10');
@@ -332,11 +346,40 @@ const Aggregator = ({ }) => {
 		if (balance) setAmount((balance.value?.div(e10(fromToken.decimals || 18))).toString());
 	};
 
+	const handleCurrencyASelect = useCallback(
+		(currencyA: Currency) => {
+			const newCurrencyIdA = currencyId(currencyA)
+			if (newCurrencyIdA === currencyIdB) {
+				router.push(`/exchange/swap/aggregator/${currencyIdB}/${currencyIdA}`)
+			} else {
+				router.push(`/exchange/swap/aggregator/${newCurrencyIdA}/${currencyIdB}`)
+			}
+		},
+		[currencyIdB, router, currencyIdA]
+	)
+
+	const handleCurrencyBSelect = useCallback(
+		(currencyB: Currency) => {
+			const newCurrencyIdB = currencyId(currencyB)
+			if (currencyIdA === newCurrencyIdB) {
+				if (currencyIdB) {
+					router.push(`/exchange/swap/aggregator/${currencyIdB}/${newCurrencyIdB}`)
+				} else {
+					router.push(`/exchange/swap/aggregator/${newCurrencyIdB}`)
+				}
+			} else {
+				router.push(`/exchange/swap/aggregator/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
+			}
+		},
+		[currencyIdA, router, currencyIdB]
+	)
+
 	const handleInputSelect = useCallback(
 		(inputCurrency: Currency) => {
 			setFromToken(inputCurrency)
 			setInputToken(inputCurrency)
 			setFromDecimals(inputCurrency?.wrapped.decimals)
+			handleCurrencyASelect(inputCurrency)
 
 		},
 		[setFromToken]
@@ -347,6 +390,7 @@ const Aggregator = ({ }) => {
 			setToToken(outputCurrency)
 			setOutputToken(outputCurrency)
 			setToDecimals(outputCurrency?.wrapped.decimals)
+			handleCurrencyBSelect(outputCurrency)
 		},
 		[setToToken]
 	)
@@ -373,15 +417,21 @@ const Aggregator = ({ }) => {
 		.sort((a, b) => b.netOut - a.netOut);
 
 	return (
-		<Container>
-			{/* <div className="mt-2" /> */}
-			<div className={"grid grid-cols-1 gap-2"}>
-				{/* <SwapDropdown /> */}
-				{/* <SwapLayoutCard> */}
-					{/* <SwapHeader /> */}
-					{/* <Container  */}
-					{/* // showRoutes={inputToken && outputToken} */}
-					{/* > */}
+		<Container id="cross-page" maxWidth="2xl" className="space-y-4">
+			<DoubleGlowShadowV2>
+				{/* <div className={"grid grid-cols-1 gap-2"}> */}
+				<SwapLayoutCard>
+					<div className="p-0 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+						{/* {showHeader && */}
+						<SwapDropdown
+							inputCurrency={currencyA}
+							outputCurrency={currencyB}
+						// allowedSlippage={allowedSlippage}
+						/>
+						{/* } */}
+						{/* <Container  */}
+						{/* // showRoutes={inputToken && outputToken} */}
+						{/* > */}
 						{/* <FormHeader>Select Tokens</FormHeader> */}
 						{/* <TokenSelectDiv onClick={() => setShowTokenSelect(true)}> */}
 						<div className="flex flex-col gap-3 space-y-3">
@@ -408,21 +458,21 @@ const Aggregator = ({ }) => {
 									</div>
 								</div>
 								<SwapAssetPanel
-								spendFromWallet={true}
-								chainId={chainId}
-								header={(props) => (
-									<SwapAssetPanel.Header
-										{...props}
-										label={
-											`Swap to:`
-										}
-									/>
-								)}
-								currency={toToken}
-								value={(routes[0]?.price.amountReturned / (10**(outputToken?.wrapped.decimals)))?.toString() || '0'}
-								onChange={() => {}}
-								onSelect={handleOutputSelect}
-							/>
+									spendFromWallet={true}
+									chainId={chainId}
+									header={(props) => (
+										<SwapAssetPanel.Header
+											{...props}
+											label={
+												`Swap to:`
+											}
+										/>
+									)}
+									currency={toToken}
+									value={(routes[0]?.price.amountReturned / (10 ** (outputToken?.wrapped.decimals)))?.toString() || '0'}
+									onChange={() => { }}
+									onSelect={handleOutputSelect}
+								/>
 							</div>
 						</div>
 
@@ -452,10 +502,10 @@ const Aggregator = ({ }) => {
 												maximumFractionDigits: 3
 											}) + ' Value'}
 											{/* Value: $ */}
-										{/* </> */}
-									{/* )} */}
-								{/* </div> */}
-								{/* {balance &&
+							{/* </> */}
+							{/* )} */}
+							{/* </div> */}
+							{/* {balance &&
 								<Balance onClick={onMaxClick}>
 									{
 									// fromToken?.isNative
@@ -466,25 +516,25 @@ const Aggregator = ({ }) => {
 							</InputFooter> */}
 						</div>
 						{/* <SwapWrapper> */}
-							{route && account && (
-								<Button
-									variant={'filled'}
-									color={getChainColorCode(chainId)}
-									isLoading={swapMutation.isLoading || isApproveLoading}
-									loadingText="Preparing Transaction"
-									colorScheme={'messenger'}
-									onClick={() => {
-										if (approve) approve();
+						{route && account && (
+							<Button
+								variant={'filled'}
+								color={getChainColorCode(chainId)}
+								isLoading={swapMutation.isLoading || isApproveLoading}
+								loadingText="Preparing Transaction"
+								colorScheme={'messenger'}
+								onClick={() => {
+									if (approve) approve();
 
-										// if (+amount > +balance?.data?.formatted) return;
-				if (isApproved || fromToken.isNative) handleSwap();
+									// if (+amount > +balance?.data?.formatted) return;
+									if (isApproved || fromToken.isNative) handleSwap();
 
-									}}
-								>
-			{(isApproved || fromToken.isNative) ? 'Swap' : 'Approve'}
-								</Button>
-							)}
-							{/* route && account && !isApproved && ['Matcha/0x', '1inch'].includes(route?.name) ? (
+								}}
+							>
+								{(isApproved || fromToken.isNative) ? 'Swap' : 'Approve'}
+							</Button>
+						)}
+						{/* route && account && !isApproved && ['Matcha/0x', '1inch'].includes(route?.name) ? (
 							<Button
 								variant={'filled'}
 								color={getChainColorCode(chainId)}
@@ -499,37 +549,74 @@ const Aggregator = ({ }) => {
 							</Button>
 						) : null */}
 						{/* </SwapWrapper> */}
-					{/* </Container> */}
-				{/* </SwapLayoutCard> */}
+						{/* </Container> */}
+						{/* </SwapLayoutCard> */}
 
-				{inputToken && outputToken && (
-				<div className={`m-2 border border-dark-800 hover:border-${getChainColorCode(chainId)} border-2 rounded rounded-xl`}>
-					<SwapLayoutCard>
-						<Container>
-							<Routes>
-							{isLoading ? <Loader loaded={!isLoading} /> : null}
-							{normalizedRoutes.map((r, i) => (
-								<Route
-									{...r}
-									index={i}
-									selected={route?.name === r.name}
-									setRoute={() => setRoute(r.route)}
-									toToken={outputToken}
-									amountFrom={amountWithDecimals}
-									fromToken={inputToken}
-									selectedChain={selectedChain.label}
-									key={i}
-								/>
-							))}
-							</Routes>
-						</Container>
-					</SwapLayoutCard>
-				</div>
-				)}
-			</div>
-
-			{/* <FAQs /> */}
-			{/* <TransactionModal open={txModalOpen} setOpen={setTxModalOpen} link={txUrl} /> */}
+						{inputToken && outputToken && showRoutes && (
+							<div className={`m-2 border border-dark-800 hover:border-${getChainColorCode(chainId)} border-2 rounded rounded-xl`}>
+								<SwapLayoutCard>
+									<Container>
+										<Routes>
+											{isLoading ? <Loader loaded={!isLoading} /> : null}
+											{normalizedRoutes.map((r, i) => (
+												<Route
+													{...r}
+													index={i}
+													selected={route?.name === r.name}
+													setRoute={() => setRoute(r.route)}
+													toToken={outputToken}
+													amountFrom={amountWithDecimals}
+													fromToken={inputToken}
+													selectedChain={selectedChain.label}
+													key={i}
+												/>
+											))}
+										</Routes>
+									</Container>
+								</SwapLayoutCard>
+							</div>
+						)}
+					</div>
+					<div className={classNames(featureEnabled(Feature.AGGREGATE, chainId) ? "m-1 flex justify-between" : "hidden")}>
+						<div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
+							<Toggle
+								id="toggle-button"
+								optionA="Routes"
+								optionB="Routes"
+								isActive={showRoutes}
+								toggle={
+									useSwap
+										? () => {
+											setShowRoutes(false)
+										}
+										: () => {
+											setShowRoutes(true)
+										}
+								}
+							/>
+						</div>
+						<div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
+							<Toggle
+								id="toggle-button"
+								optionA="Aggregator"
+								optionB="Aggregator"
+								isActive={useSwap}
+								toggle={
+									useSwap
+										? () => {
+											setUseSwap(false)
+										}
+										: () => {
+											setUseSwap(true)
+										}
+								}
+							/>
+						</div>
+					</div>
+					{/* <FAQs /> */}
+					{/* <TransactionModal open={txModalOpen} setOpen={setTxModalOpen} link={txUrl} /> */}
+				</SwapLayoutCard>
+			</DoubleGlowShadowV2>
 		</Container>
 	);
 }
