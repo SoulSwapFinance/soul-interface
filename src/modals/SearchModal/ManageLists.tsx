@@ -1,8 +1,9 @@
-import { CheckIcon, ExternalLinkIcon } from '@heroicons/react/outline'
+import { CheckIcon, MinusCircleIcon, RefreshIcon, ExternalLinkIcon } from '@heroicons/react/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { TokenList } from '@uniswap/token-lists'
 import CloseIcon from 'components/CloseIcon'
+// import MinusCircleIcon from 'components/MinusCircleIcon'
 import ListLogo from 'components/ListLogo'
 import { HeadlessUiModal } from 'components/Modal'
 import Popover from 'components/Popover'
@@ -22,7 +23,7 @@ import React, { FC, memo, useCallback, useEffect, useMemo, useState } from 'reac
 import { Settings } from 'react-feather'
 import ReactGA from 'react-ga'
 import { useDispatch, useSelector } from 'react-redux'
-
+import Image from 'next/image'
 import CurrencyModalView from './CurrencyModalView'
 import { useActiveWeb3React } from 'services/web3'
 
@@ -105,9 +106,7 @@ const ListRow: FC<{ listUrl: string }> = memo(({ listUrl }) => {
             </Typography>
           </Typography>
           <div className="flex gap-1 items-center">
-            <Typography variant="xs" className="text-white">
-              {i18n._(t`${list.tokens.length} tokens`)}
-            </Typography>
+
             {/* <Popover
               placement="bottom-start"
               content={
@@ -142,6 +141,22 @@ const ListRow: FC<{ listUrl: string }> = memo(({ listUrl }) => {
             >
               <Settings size={12} className="text-high-emphesis cursor-pointer hover:text-white" />
             </Popover> */}
+            <MinusCircleIcon
+              className={'w-4 mt-1 hover:border-ftmBlue border rounded'} 
+              onClick={handleRemoveList}
+            />
+            <RefreshIcon
+              className={'w-4 mt-1 hover:border-ftmBlue border rounded'} 
+              onClick={handleAcceptListUpdate}
+            />
+            {/* <Typography variant="sm" className="text-white">
+              {i18n._(t`Tokens:`)} {list.tokens.length} 
+            </Typography> */}
+            {/* <Image
+              height={12}
+              width={12}
+              src={MinusIcon
+            /> */}
           </div>
         </div>
       </div>

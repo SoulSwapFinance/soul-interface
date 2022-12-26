@@ -482,6 +482,14 @@
     },
     {
       "chainId": 250,
+      "name": "Popsicle Finance",
+      "address": "0xf16e81dce15B08F326220742020379B855B87DF9",
+      "symbol": "ICE",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xf16e81dce15B08F326220742020379B855B87DF9/logo.png"
+    },
+    {
+      "chainId": 250,
       "name": "ChainLink",
       "address": "0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8",
       "symbol": "LINK",
@@ -511,6 +519,14 @@
       "symbol": "MULTI",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x9Fb9a33956351cf4fa040f65A13b835A3C8764E3/logo.png"
+    },
+    {
+      "chainId": 250,
+      "name": "Oath Token",
+      "address": "0x21Ada0D2aC28C3A5Fa3cD2eE30882dA8812279B6",
+      "symbol": "OATH",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x21Ada0D2aC28C3A5Fa3cD2eE30882dA8812279B6/logo.png"
     },
     {
       "chainId": 250,

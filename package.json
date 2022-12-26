@@ -265,7 +265,7 @@
     "soul-data": "^2.5.0",
     "soulswap-amm": "^0.0.1",
     "soulswap-currency": "^0.0.1",
-    "soulswap-default-token-list": "^5.0.5",
+    "soulswap-default-token-list": "^5.1.0",
     "soulswap-format": "^0.0.1",
     "soulswap-limit-orders-lib": "^1.1.0",
     "soulswap-limit-orders-react": "^4.0.5",
