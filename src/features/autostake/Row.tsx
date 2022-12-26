@@ -214,7 +214,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
      */
     const fetchApproval = async () => {
         if (!account) {
-            // alert('Connect Wallet')
         } else {
             // Checks if AutoStakeContract can move tokens
             const amount = await erc20Allowance(account, AutoStakeAddress)
@@ -228,7 +227,6 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
      */
     const handleApprove = async () => {
         if (!account) {
-            // alert('Connect Wallet')
         } else {
             try {
                 const tx = await erc20Approve(AutoStakeAddress)

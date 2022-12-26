@@ -25,73 +25,73 @@ function newTransactionsFirst(a: TransactionDetails, b: TransactionDetails) {
   return b.addedTime - a.addedTime
 }
 
-function StatusIcon({ connector }: { connector: AbstractConnector; account: string; provider: Web3Provider }) {
-  if (connector === injected) {
-    return (
-      <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
-        <Image
-          src="https://exchange.soulswap.finance/images/wallets/metamask.png"
-          alt="Injected (MetaMask Etc.)"
-          width={16}
-          height={16}
-        />
-      </div>
-    )
-  } else if (connector.constructor.name === 'WalletConnectConnector') {
-    return (
-      <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
-        <Image
-          src="https://exchange.soulswap.finance/images/wallets/wallet-connect.svg"
-          alt={'Wallet Connect'}
-          width="16px"
-          height="16px"
-        />
-      </div>
-    )
-  } else if (connector.constructor.name === 'LatticeConnector') {
-    return (
-      <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
-        <Image src="https://exchange.soulswap.finance/images/wallets/lattice.png" alt={'Lattice'} width="16px" height="16px" />
-      </div>
-    )
-  } else if (connector.constructor.name === 'WalletLinkConnector') {
-    return (
-      <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
-        <Image
-          src="https://exchange.soulswap.finance/images/wallets/coinbase.svg"
-          alt={'Coinbase Wallet'}
-          width="16px"
-          height="16px"
-        />
-      </div>
-    )
-  } else if (connector.constructor.name === 'FortmaticConnector') {
-    return (
-      <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
-        <Image src="https://exchange.soulswap.finance/images/wallets/fortmatic.png" alt={'Fortmatic'} width="16px" height="16px" />
-      </div>
-    )
-  } else if (connector.constructor.name === 'PortisConnector') {
-    return (
-      <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
-        <Image src="https://exchange.soulswap.finance/images/wallets/portis.png" alt={'Portis'} width="16px" height="16px" />
-      </div>
-    )
-  } else if (connector.constructor.name === 'KeystoneConnector') {
-    return (
-      <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
-        <Image src="https://exchange.soulswap.finance/images/wallets/keystone.png" alt={'Keystone'} width="16px" height="16px" />
-      </div>
-    )
-  } else if (connector.constructor.name === 'CloverConnector') {
-    return (
-      <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
-        <Image src="https://exchange.soulswap.finance/images/wallets/clover.svg" alt={'Clover'} width="16px" height="16px" />
-      </div>
-    )
-  }
-  return null
-}
+// function StatusIcon({ connector }: { connector: AbstractConnector; account: string; provider: Web3Provider }) {
+//   if (connector === injected) {
+//     return (
+//       <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
+//         <Image
+//           src="https://exchange.soulswap.finance/images/wallets/metamask.png"
+//           alt="Injected (MetaMask Etc.)"
+//           width={16}
+//           height={16}
+//         />
+//       </div>
+//     )
+//   } else if (connector.constructor.name === 'WalletConnectConnector') {
+//     return (
+//       <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
+//         <Image
+//           src="https://exchange.soulswap.finance/images/wallets/wallet-connect.svg"
+//           alt={'Wallet Connect'}
+//           width="16px"
+//           height="16px"
+//         />
+//       </div>
+//     )
+//   } else if (connector.constructor.name === 'LatticeConnector') {
+//     return (
+//       <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
+//         <Image src="https://exchange.soulswap.finance/images/wallets/lattice.png" alt={'Lattice'} width="16px" height="16px" />
+//       </div>
+//     )
+//   } else if (connector.constructor.name === 'WalletLinkConnector') {
+//     return (
+//       <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
+//         <Image
+//           src="https://exchange.soulswap.finance/images/wallets/coinbase.svg"
+//           alt={'Coinbase Wallet'}
+//           width="16px"
+//           height="16px"
+//         />
+//       </div>
+//     )
+//   } else if (connector.constructor.name === 'FortmaticConnector') {
+//     return (
+//       <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
+//         <Image src="https://exchange.soulswap.finance/images/wallets/fortmatic.png" alt={'Fortmatic'} width="16px" height="16px" />
+//       </div>
+//     )
+//   } else if (connector.constructor.name === 'PortisConnector') {
+//     return (
+//       <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
+//         <Image src="https://exchange.soulswap.finance/images/wallets/portis.png" alt={'Portis'} width="16px" height="16px" />
+//       </div>
+//     )
+//   } else if (connector.constructor.name === 'KeystoneConnector') {
+//     return (
+//       <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
+//         <Image src="https://exchange.soulswap.finance/images/wallets/keystone.png" alt={'Keystone'} width="16px" height="16px" />
+//       </div>
+//     )
+//   } else if (connector.constructor.name === 'CloverConnector') {
+//     return (
+//       <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
+//         <Image src="https://exchange.soulswap.finance/images/wallets/clover.svg" alt={'Clover'} width="16px" height="16px" />
+//       </div>
+//     )
+//   }
+//   return null
+// }
 
 function Web3StatusInner() {
   const { i18n } = useLingui()

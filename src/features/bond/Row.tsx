@@ -165,7 +165,6 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   // approves bond to handle LP
   const handleApprove = async () => {
     if (!account) {
-      // alert('Connect Wallet')
     } else {
       try {
         const tx = await erc20Approve(SOUL_BOND_ADDRESS[chainId])
