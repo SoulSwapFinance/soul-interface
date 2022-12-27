@@ -226,10 +226,10 @@ const Aggregator = ({ }) => {
 
 	const handleUseSwap = useCallback(
 		() => {
-		  // setShowHeader(false)
-		  router.push(`/exchange/swap/${currencyIdA}/${currencyIdB}`)
+			// setShowHeader(false)
+			router.push(`/exchange/swap/${currencyIdA}/${currencyIdB}`)
 		}, [useSwap]
-	  )
+	)
 
 	// const [fromAddress, setFromAddress] = useState(fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address)
 	// const [toAddress, setToAddress] = useState(toToken?.isNative ? NATIVE_ADDRESS : toToken?.wrapped.address)
@@ -555,40 +555,42 @@ const Aggregator = ({ }) => {
 						{/* </SwapLayoutCard> */}
 
 						{inputToken && outputToken && (
-							<div className={`m-2 border border-dark-800 hover:border-${getChainColorCode(chainId)} border-2 rounded rounded-xl`}>
-								<SwapLayoutCard>
-									<Container>
-										<Routes>
-											{isLoading ? <Loader loaded={!isLoading} /> : null}
-											{normalizedRoutes.map((r, i) => (
-												<Route
-													{...r}
-													index={i}
-													selected={route?.name === r.name}
-													setRoute={() => setRoute(r.route)}
-													toToken={outputToken}
-													amountFrom={amountWithDecimals}
-													fromToken={inputToken}
-													selectedChain={selectedChain.label}
-													key={i}
-												/>
-											))}
-										</Routes>
-									</Container>
-								</SwapLayoutCard>
-							</div>
+							/* <SwapLayoutCard> */
+							// <Container>
+							// 	<div className={`m-2 border border-dark-800 hover:border-${getChainColorCode(chainId)} border-2 rounded rounded-xl`}>
+							<Routes>
+								<div className={`grid grid-col p-2 -ml-4 border border-dark-800 hover:border-${getChainColorCode(chainId)} border-1 rounded rounded-xl`}>
+									{isLoading ? <Loader loaded={!isLoading} /> : null}
+									{normalizedRoutes.map((r, i) => (
+										<Route
+											{...r}
+											index={i}
+											selected={route?.name === r.name}
+											setRoute={() => setRoute(r.route)}
+											toToken={outputToken}
+											amountFrom={amountWithDecimals}
+											fromToken={inputToken}
+											selectedChain={selectedChain.label}
+											key={i}
+										/>
+									))}
+								</div>
+							</Routes>
+							// 	</div>
+							// </Container>
+							/* </SwapLayoutCard> */
 						)}
 					</div>
 					<div className={classNames(featureEnabled(Feature.AGGREGATE, chainId) ? "m-1 flex justify-between" : "hidden")}>
-					<Button variant="outlined" 
-						color={'blue'}
-						onClick={handleUseSwap}
-					>
-					<div className={`flex text-sm font-bold text-${'blue'} justify-left`}>
-						<ArrowLeftIcon className={'mt-1 mr-1'} width="1em" height="1em" />
-						{i18n._(t`Return to Swap`)}
-					</div>
-					</Button>
+						<Button variant="outlined"
+							color={'blue'}
+							onClick={handleUseSwap}
+						>
+							<div className={`flex text-sm font-bold text-${'blue'} justify-left`}>
+								<ArrowLeftIcon className={'mt-1 mr-1'} width="1em" height="1em" />
+								{i18n._(t`Return to Swap`)}
+							</div>
+						</Button>
 						{/* <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
 							<Toggle
 								id="toggle-button"

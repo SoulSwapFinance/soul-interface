@@ -1,16 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import Tooltip from 'components/Tooltip';
-import { useTokenApprove } from 'hooks/useTokenApprove';
+// import Tooltip from 'components/Tooltip';
+// import { useTokenApprove } from 'hooks/useTokenApprove';
 import { GasIcon } from 'components/Icons/GasIcon';
 // import { Head } from 'next/document';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Badge from 'components/Badge';
 import { Currency, CurrencyAmount, NATIVE, NATIVE_ADDRESS, Token } from 'sdk';
 import { useActiveWeb3React } from 'services/web3';
 import { useTokenInfo } from 'hooks/useAPI';
-import Logo from 'components/Logo';
+// import Logo from 'components/Logo';
 import { CurrencyLogo } from 'components/CurrencyLogo';
+import Container from 'components/Container';
 
 // interface IToken {
 // 	address: string
@@ -56,10 +57,10 @@ const Route = ({
 }: IRoute) => {
 	const { chainId } = useActiveWeb3React()
 	const tokenA = new Token(chainId, fromToken.wrapped.address, Number(fromToken.wrapped.decimals))
-	const isApproved = useTokenApprove(
-		CurrencyAmount.fromRawAmount(tokenA, amountFrom),
-		price?.tokenApprovalAddress as `0x${string}`,
-	);
+	// const isApproved = useTokenApprove(
+	// 	CurrencyAmount.fromRawAmount(tokenA, amountFrom),
+	// 	price?.tokenApprovalAddress as `0x${string}`,
+	// );
 
 	if (!price.amountReturned) return null;
 
@@ -70,6 +71,8 @@ const Route = ({
 	}
 
 	return (
+		<Container>
+
 		<RouteWrapper onClick={setRoute} selected={selected} best={index === 0}>
 			<RouteRow>
 				{/* <div className="grid grid-cols-3 bg-dark-1000 p-1 rounded rounded-xl"> */}
@@ -85,8 +88,6 @@ const Route = ({
 				{/* </div> */}
 				<div className="ml-4 justify-center text-black mt-2 text-md font-bold">
 					{amount.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 })}{` ${toToken.symbol} `}
-				{/* </div> */}
-				{/* <div> */}
 					{Number.isFinite(+amountUsd)
 						&& `($${Number(amountUsd).toLocaleString(undefined, {
 							minimumFractionDigits: 3,
@@ -131,13 +132,14 @@ const Route = ({
 				) : null}
 			</RouteRow>
 		</RouteWrapper>
+		</Container>
 	)
 }
 
 const RouteWrapper = styled.div<{ selected: boolean; best: boolean }>`
 	display: grid;
 	grid-row-gap: 8px;
-	margin-top: 16px;
+	margin-top: 6px;
 
 	background-color: ${({ theme, selected }) =>
 		theme.mode === 'dark' ? (selected ? ' #161616;' : '#2d3039;') : selected ? ' #bec1c7;' : ' #dde3f3;'};
