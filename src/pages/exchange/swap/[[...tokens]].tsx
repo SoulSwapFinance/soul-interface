@@ -662,11 +662,7 @@ const Swap = () => {
           {useSwap && priceImpactSeverity > 2 && isValid &&
             <Button
               color={`${getChainColorCode(chainId)}`}
-              onClick={() => {
-              handleAggregatorSwap
-              // setUseAggregator(true) 
-              }
-              }
+              onClick={handleAggregatorSwap}
               id="use-aggregator-button"
               // disabled={}
               className="rounded-2xl w-full md:rounded"
