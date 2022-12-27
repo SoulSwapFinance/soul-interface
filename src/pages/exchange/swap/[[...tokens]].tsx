@@ -394,21 +394,21 @@ const Swap = () => {
     () => {
       // setShowHeader(false)
       router.push(`/exchange/swap/limit/${currencyIdA}/${currencyIdB}`)
-    }, [useSwap]
+    }, []
   )
 
   const handleAggregatorSwap = useCallback(
     () => {
       // setShowHeader(false)
-      router.push(`/exchange/swap/aggregator/${currencyIdA}/${currencyIdB}`)
-    }, [useSwap]
+      router.push(`/exchange/swap/aggregator/${currencies[Field.INPUT].isNative ? NATIVE[chainId].symbol : currencies[Field.INPUT]}/${currencies[Field.OUTPUT].wrapped.address}`)
+    }, []
   )
 
   const handleBridgeSwap = useCallback(
     () => {
       // setShowHeader(false)
       router.push(`/bridge`)
-    }, [useSwap]
+    }, []
   )
 
 
