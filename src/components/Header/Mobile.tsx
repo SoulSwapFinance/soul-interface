@@ -6,16 +6,16 @@ import { ChainId, NATIVE } from 'sdk'
 import useMenu from 'components/Header/useMenu'
 import Web3Network from 'components/Web3Network'
 import Web3Status from 'components/Web3Status'
-import useIsCoinbaseWallet from 'hooks/useIsCoinbaseWallet'
+// import useIsCoinbaseWallet from 'hooks/useIsCoinbaseWallet'
 import { useActiveWeb3React } from 'services/web3'
 import { useETHBalances } from 'state/wallet/hooks'
 import Image from 'next/image'
-import Link from 'next/link'
+// import Link from 'next/link'
 import React, { FC, Fragment, useCallback, useState } from 'react'
 
 import { SidebarItem } from './SidebarItem'
 // import { NavigationItem } from './NavigationItem'
-import LuxorStats from 'components/LuxorStats'
+// import LuxorStats from 'components/LuxorStats'
 import TokenStats from 'components/TokenStats'
 import More from './More'
 import useBar from './useBar'
@@ -23,12 +23,13 @@ import { useRouter } from 'next/router'
 import { classNames } from 'functions/styling'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { NavigationItem } from './NavigationItem'
-import LanguageSwitch from 'components/LanguageSwitch'
+// import LanguageSwitch from 'components/LanguageSwitch'
 import LanguageMenu from './useLanguages'
-import { Button } from 'components/Button'
-import { SubmitButton } from 'features/summoner/Styles'
-import Typography from 'components/Typography'
-import { ArrowUpIcon } from '@heroicons/react/solid'
+import MobileBar from './MobileBar'
+// import { Button } from 'components/Button'
+// import { SubmitButton } from 'features/summoner/Styles'
+// import Typography from 'components/Typography'
+// import { ArrowUpIcon } from '@heroicons/react/solid'
 // const HEADER_HEIGHT=24
 
 const Mobile: FC = () => {
@@ -57,7 +58,7 @@ const Mobile: FC = () => {
             </div>
           }
           <div
-            className="flex gap-2 sm:px-1 sm:gap-4 md:gap-18 justify-between items-center">
+            className="flex gap-2 mx-2 sm:px-1 sm:gap-4 md:gap-18 justify-between items-center">
             {menu.map((node) => {
               return <NavigationItem node={node} key={node.key} />
             })}
@@ -99,7 +100,7 @@ const Mobile: FC = () => {
                         {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                           <TokenStats />
                         }
-
+                        {/* <LanguageMenu /> */}
                       </div>
                       <div className="flex flex-col gap-4 px-4 sm:px-6">
                       </div>
@@ -110,14 +111,14 @@ const Mobile: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
-        <div className={`fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full rounded rounded-xl xl:bg-transparent`}>
+        <div className={`hidden fixed bottom-14 left-0 z-10 flex flex-row items-center justify-center w-full rounded rounded-xl xl:bg-transparent`}>
           {/* xl:relative // moves to top */}
           <div className="flex items-center w-full space-x-2 justify-end">
-              <div 
-            className={`border border-[${getChainColor(chainId)}] border-2 rounded rounded-xl inline-block`}
-             >
+            {/* <div
+              className={`border border-[${getChainColor(chainId)}] border-2 rounded rounded-xl inline-block`}
+            >
               <Web3Status />
-            </div>
+            </div> */}
             <div className={`w-auto grid gap-1.5 items-center rounded rounded-xl bg-dark-1000  border-[${getChainColor(chainId)}] whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`}>
               {/* {account && chainId && userEthBalance && (
                 <>
@@ -184,6 +185,7 @@ const Mobile: FC = () => {
             </div>
           </div>
         </div>
+        <MobileBar />
       </header>
     </>
   )

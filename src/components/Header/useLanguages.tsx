@@ -37,10 +37,10 @@ export default function LanguageMenu() {
                     >
                         <Popover.Panel
                             static
-                            className="absolute z-50 w-screen max-w-xs px-2 mt-1 transform -translate-x-full bottom-12"
+                            className="absolute z-50 w-screen max-w-xs px-2 mt-1 transform -translate-x-full bottom-12 left-28"
                         >
                             <div className={classNames("overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 border", `border-[${getChainColor(chainId || 250)}]`)}>
-                                <div className="grid grid-cols-2 gap-1 px-4 py-2 bg-dark-1000 sm:p-8">
+                                <div className="grid grid-cols-2 gap-0 ml-6 mr-8 py-1 bg-dark-1000 sm:p-8">
                                     {locales.map((locale) => {
                                         const { flag, language, dialect } = Languages[locale]
                                         return (
