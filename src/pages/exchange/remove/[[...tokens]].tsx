@@ -49,6 +49,7 @@ import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { classNames } from 'functions'
 import { getChainColorCode } from 'constants/chains'
 import SwapDropdown from 'features/swap/SwapDropdown'
+import { SwapLayoutCard } from 'layouts/SwapLayout'
 
 const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(10, 1000) // 1%
 
@@ -732,7 +733,8 @@ export default function Remove() {
       <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
         {/* <SwapBanner /> */}
         <DoubleGlowShadowV2>
-          <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+        <SwapLayoutCard>
+        <div className="p-0 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
             {/* <SwapHeader
               inputCurrency={currencyA}
               outputCurrency={currencyB}
@@ -788,7 +790,7 @@ export default function Remove() {
                                     }`}
                                 >
                                   <a className={classNames("font-bold text-baseline opacity-80 hover:opacity-100 focus:opacity-100 whitespace-nowrap", `text-${getChainColorCode(chainId)}`)}>
-                                    Receive W{NATIVE[chainId].symbol}
+                                    {i18n._(t`Receive`)} W{NATIVE[chainId].symbol}
                                   </a>
                                 </Link>
                               ) : oneCurrencyIsWETH ? (
@@ -797,7 +799,7 @@ export default function Remove() {
                                     }`}
                                 >
                                   <a className="text-baseline text-blue opacity-80 hover:opacity-100 whitespace-nowrap">
-                                    Receive {NATIVE[chainId].symbol}
+                                  {i18n._(t`Receive`)} {NATIVE[chainId].symbol}
                                   </a>
                                 </Link>
                               ) : null}
@@ -864,7 +866,7 @@ export default function Remove() {
           <div className={"grid grid-cols-2 gap-2 text-white justify-center m-2"}>
           <NavLink href="/pool">
             <Button
-              variant={'outlined'}
+              variant={'filled'}
               color={`${getChainColorCode(chainId)}`}
               primaryColor={'black'}
             >
@@ -875,7 +877,7 @@ export default function Remove() {
           </NavLink>
           <NavLink href="/analytics">
             <Button
-              variant={'outlined'}
+              variant={'filled'}
               color={`${getChainColorCode(chainId)}`}
               primaryColor={'black'}
             >
@@ -885,6 +887,7 @@ export default function Remove() {
             </Button>
           </NavLink>
         </div>
+        </SwapLayoutCard>
         </DoubleGlowShadowV2>
       </Container>
     </>

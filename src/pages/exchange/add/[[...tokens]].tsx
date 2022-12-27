@@ -48,6 +48,7 @@ import { useActiveWeb3React } from 'services/web3'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 import { ArrowDownIcon, PlusIcon } from '@heroicons/react/solid'
 import { getChainColor, getChainColorCode } from 'constants/chains'
+import { SwapLayoutCard } from 'layouts/SwapLayout'
 // import { SubmitButton } from 'features/summoner/Styles'
 // import SoulLogo from 'components/SoulLogo'
 
@@ -366,11 +367,13 @@ export default function Add() {
         allowedSlippage={allowedSlippage}
       /> */}
       {/* <SoulLogo /> */}
-      <div className="mb-4" />
-      <Container id="remove-liquidity-page" maxWidth="2xl" className="space-y-4">
+      <Container id="add-liquidity-page" maxWidth="2xl" className="space-y-4 mt-4">
           <DoubleGlowShadowV2>
         {/* <SwapBanner /> */}
-        <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+        <SwapLayoutCard>
+        <div className="p-0 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+
+        {/* <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
           {/* <SwapHeader
             inputCurrency={currencies[Field.CURRENCY_A]}
             outputCurrency={currencies[Field.CURRENCY_B]}
@@ -545,7 +548,7 @@ export default function Add() {
         <div className={"grid grid-cols-2 gap-2 text-white justify-center m-2"}>
           <NavLink href="/pool">
             <Button
-              variant={'outlined'}
+              variant={'filled'}
               color={`${getChainColorCode(chainId)}`}
               primaryColor={'black'}
             >
@@ -556,7 +559,7 @@ export default function Add() {
           </NavLink>
           <NavLink href="/analytics">
             <Button
-              variant={'outlined'}
+              variant={'filled'}
               color={`${getChainColorCode(chainId)}`}
               primaryColor={'black'}
             >
@@ -566,6 +569,7 @@ export default function Add() {
             </Button>
           </NavLink>
         </div>
+        </SwapLayoutCard>
         </DoubleGlowShadowV2>
       </Container>
     </>

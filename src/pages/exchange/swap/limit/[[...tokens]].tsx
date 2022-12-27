@@ -8,32 +8,32 @@ import Divide from 'assets/svg/icons/Divide.svg'
 import {
   ChainId,
   Currency,
-  CurrencyAmount,
-  currencyEquals,
+  // CurrencyAmount,
+  // currencyEquals,
   NATIVE,
   NATIVE_ADDRESS,
   Percent,
-  SOUL,
+  // SOUL,
   SOUL_ADDRESS,
-  Token,
+  // Token,
   TradeType,
   USDC_ADDRESS,
-  WNATIVE,
+  // WNATIVE,
 } from "sdk"
 import { Trade } from "sdk"
 // import { AdvancedSwapDetails } from "../order/AdvancedSwapDetails"
 // import UnsupportedCurrencyFooter from "../order/UnsupportedCurrencyFooter"
 import { MouseoverTooltip, MouseoverTooltipContent } from "components/Tooltip"
 import {
-  ArrowDown,
-  Info,
+  // ArrowDown,
+  // Info,
   // Divide,
-  X,
+  // X,
   CheckCircle,
   HelpCircle,
 } from "react-feather"
 import { Text } from "rebass"
-import styled from "styled-components"
+// import styled from "styled-components"
 // import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 import { useModalOpen, useWalletModalToggle } from 'state/application/hooks'
 
@@ -77,7 +77,7 @@ import CurrencyInputPanel from "components/CurrencyInputPanel"
 // import OrderHeader from "components/Order/OrderHeader"
 import { classNames, formatNumber, formatPercent } from "functions"
 import { useActiveWeb3React } from "services/web3"
-import SwapHeader from "features/swap/SwapHeader"
+// import SwapHeader from "features/swap/SwapHeader"
 import Container from "components/Container"
 // import CurrencyInputPanel from "components/Order/CurrencyInputPanel"
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2"
@@ -92,7 +92,7 @@ import SwapAssetPanel from "features/trident/swap/SwapAssetPanel"
 import { currencyId } from "functions/currency"
 import { useRouter } from "next/router"
 import { useCurrency } from "hooks/Tokens"
-import SocialWidget from "components/Social"
+// import SocialWidget from "components/Social"
 import SwapDropdown from "features/swap/SwapDropdown"
 import { getChainColor, getChainColorCode } from "constants/chains"
 
@@ -549,8 +549,8 @@ const Limit = () => {
                       onClick={handleSetSwap}
                     >
                       <Image
-                        width={'14px'}
-                        alt={"multiply sign"}
+                        width={14}
+                        alt={"m{14}sign"}
                         height={'14px'}
                         className={`rounded rounded-xl`}
                         src={Multiply}
@@ -564,8 +564,8 @@ const Limit = () => {
                     >
                       <Image
                       alt={"divide icon"}
-                        width={'14px'}
-                        height={'14px'}
+                        width={14}
+                        height={14}
                         className={`rounded rounded-xl`}
                         src={Divide}
                       />
@@ -613,21 +613,21 @@ const Limit = () => {
                   >
                     <Image
                     alt={"chevron down icon"}
-                      width={'14px'}
-                      height={'14px'}
+                      width={14}
+                      height={14}
                       className={`rounded rounded-xl`}
                       src={ChevronDown}
                     />
                   </Button>
                   <Button
                     size={'xs'}
-                    className={classNames(`-ml-8 sm:-ml-0 rounded rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
+                    className={classNames(`-ml-8 sm:-ml-2 rounded rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
                     onClick={handleSetSwap}
                   >
                     <Image
                     alt={"Chevron double up icon"}
-                      width={'14px'}
-                      height={'14px'}
+                      width={14}
+                      height={14}
                       className={`rounded rounded-xl`}
                       src={ChevronDoubleUp}
                     />

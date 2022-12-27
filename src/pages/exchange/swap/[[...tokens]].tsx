@@ -725,14 +725,14 @@ const Swap = () => {
                 className={classNames(`rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
                 onClick={handleBridgeSwap}
               >
-                Bridge
+                {i18n._(t`Bridge`)}
               </Button>
               <Button
                 size={'xs'}
                 className={classNames(`rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
                 onClick={handleAggregatorSwap}
               >
-                Aggregate
+                 {i18n._(t`Aggregate`)}
               </Button>
               <Button
                 size={'xs'}
@@ -742,7 +742,7 @@ const Swap = () => {
                 }
                 onClick={handleShowCharts}
               >
-                Charts
+                 {i18n._(t`Charts`)}
               </Button>
               {/* <Toggle
                 id="toggle-button"
