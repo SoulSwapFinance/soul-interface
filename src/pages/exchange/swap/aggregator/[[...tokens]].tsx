@@ -559,7 +559,7 @@ const Aggregator = ({ }) => {
 							// <Container>
 							// 	<div className={`m-2 border border-dark-800 hover:border-${getChainColorCode(chainId)} border-2 rounded rounded-xl`}>
 							<Routes>
-								<div className={`grid grid-col p-2 -ml-4 border border-dark-800 hover:border-${getChainColorCode(chainId)} border-1 rounded rounded-xl`}>
+								<div className={`flex flex-col justify-center p-2 -ml-4 -mr-2 sm:-mr-4 border border-dark-800 hover:border-${getChainColorCode(chainId)} border-1 rounded rounded-xl`}>
 									{isLoading ? <Loader loaded={!isLoading} /> : null}
 									{normalizedRoutes.map((r, i) => (
 										<Route
