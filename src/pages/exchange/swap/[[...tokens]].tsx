@@ -384,9 +384,10 @@ const Swap = () => {
 
   const handleShowCharts = useCallback(
     () => {
-      setShowAnalytics(true)
-      // router.push(`/exchange/swap/aggregator/${currencyIdA}/${currencyIdB}`)
-    }, [useSwap]
+      showAnalytics ? 
+        setShowAnalytics(false)
+        : setShowAnalytics(true)
+    }, []
   )
 
   const handleLimitSwap = useCallback(
@@ -661,7 +662,10 @@ const Swap = () => {
           {useSwap && priceImpactSeverity > 2 && isValid &&
             <Button
               color={`${getChainColorCode(chainId)}`}
-              onClick={() => { setUseAggregator(true) }
+              onClick={() => {
+              handleAggregatorSwap
+              // setUseAggregator(true) 
+              }
               }
               id="use-aggregator-button"
               // disabled={}
