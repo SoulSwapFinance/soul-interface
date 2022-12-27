@@ -23,7 +23,7 @@ import { getChainColorCode } from 'constants/chains'
 // import listedTokens from 'features/aggregator/tokenList.json'
 import { e10 } from 'functions/math'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
-import { ArrowDownIcon } from '@heroicons/react/solid'
+import { ArrowDownIcon, ArrowLeftIcon } from '@heroicons/react/solid'
 // import CurrencyInputPanel from 'components/CurrencyInputPanel'
 // import Web3 from 'web3'
 import { useGasPrice } from 'hooks/useAPI'
@@ -40,6 +40,8 @@ import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { classNames } from 'functions/styling'
 import { Toggle } from 'components/Toggle'
 import { featureEnabled } from 'functions/feature'
+import { i18n } from '@lingui/core'
+import { t } from '@lingui/macro'
 
 /*
 Integrated:
@@ -220,14 +222,14 @@ const Aggregator = ({ }) => {
 	const [toDecimals, setToDecimals] = useState(outputToken?.wrapped.decimals)
 
 	const [useSwap, setUseSwap] = useState(false)
-	const [showRoutes, setShowRoutes] = useState(false)
+	const [showRoutes, setShowRoutes] = useState(true)
 
-	// const handleSetSwap = useCallback(
-	// 	() => {
-	// 	  // setShowHeader(false)
-	// 	  router.push(`/exchange/swap/${currencyIdA}/${currencyIdB}`)
-	// 	}, [useSwap]
-	//   )
+	const handleUseSwap = useCallback(
+		() => {
+		  // setShowHeader(false)
+		  router.push(`/exchange/swap/${currencyIdA}/${currencyIdB}`)
+		}, [useSwap]
+	  )
 
 	// const [fromAddress, setFromAddress] = useState(fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address)
 	// const [toAddress, setToAddress] = useState(toToken?.isNative ? NATIVE_ADDRESS : toToken?.wrapped.address)
@@ -552,7 +554,7 @@ const Aggregator = ({ }) => {
 						{/* </Container> */}
 						{/* </SwapLayoutCard> */}
 
-						{inputToken && outputToken && showRoutes && (
+						{inputToken && outputToken && (
 							<div className={`m-2 border border-dark-800 hover:border-${getChainColorCode(chainId)} border-2 rounded rounded-xl`}>
 								<SwapLayoutCard>
 									<Container>
@@ -578,7 +580,16 @@ const Aggregator = ({ }) => {
 						)}
 					</div>
 					<div className={classNames(featureEnabled(Feature.AGGREGATE, chainId) ? "m-1 flex justify-between" : "hidden")}>
-						<div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
+					<Button variant="outlined" 
+						color={'blue'}
+						onClick={handleUseSwap}
+					>
+					<div className={`flex text-sm font-bold text-${'blue'} justify-left`}>
+						<ArrowLeftIcon className={'mt-1 mr-1'} width="1em" height="1em" />
+						{i18n._(t`Return to Swap`)}
+					</div>
+					</Button>
+						{/* <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
 							<Toggle
 								id="toggle-button"
 								optionA="Routes"
@@ -594,8 +605,8 @@ const Aggregator = ({ }) => {
 										}
 								}
 							/>
-						</div>
-						<div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
+						</div> */}
+						{/* <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
 							<Toggle
 								id="toggle-button"
 								optionA="Aggregator"
@@ -611,7 +622,7 @@ const Aggregator = ({ }) => {
 										}
 								}
 							/>
-						</div>
+						</div> */}
 					</div>
 					{/* <FAQs /> */}
 					{/* <TransactionModal open={txModalOpen} setOpen={setTxModalOpen} link={txUrl} /> */}

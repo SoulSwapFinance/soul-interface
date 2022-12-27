@@ -43,10 +43,11 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const { asPath } = useRouter()
   const { chainId } = useActiveWeb3React()
   const isRemove = asPath.startsWith('/remove')
+  const isAdd = asPath.startsWith('/add')
   const isSwap = asPath.startsWith('/exchange/swap') || asPath.startsWith('/swap')
     || asPath.startsWith('/limit') || asPath.startsWith('exchange/limit')
-    || asPath.startsWith('/add') || asPath.startsWith('exchange/add')
-    || asPath.startsWith('/remove') || asPath.startsWith('exchange/remove')
+    || asPath.startsWith('/add') || asPath.startsWith('exchange/add')  || asPath.startsWith('exchange/swap/add')
+    || asPath.startsWith('/remove') || asPath.startsWith('exchange/remove') || asPath.startsWith('exchange/swap/remove')
 
   const soulEnabled = [ChainId.FANTOM, ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId)
   // const globalNavStyle = ``

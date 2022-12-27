@@ -189,7 +189,7 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
 
     // handle soul
     if (currency?.wrapped.equals(soul)) {
-      return new Price(soul, soul, '1000', Number(soulPrice * 1000).toFixed())
+      return new Price(soul, soul, '100000', Number(soulPrice * 100_000).toFixed())
     }
 
     // handle seance

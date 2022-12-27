@@ -49,45 +49,47 @@ import NavLink from "components/NavLink"
 import Web3Network from "components/Web3Network"
 import { getChainColor, getChainColorCode } from "constants/chains"
 import SwapDropdown from "features/swap/SwapDropdown"
+import { SwapLayoutCard } from "layouts/SwapLayout";
+import { classNames } from "functions/styling";
 
-const ChainSelect: React.FC<any> = ({ selectChain, chains }) => {
-  return (
-    <ContentBox
-      style={{
-        width: "100%",
-        boxSizing: "border-box",
-        backgroundColor: "black",
-        borderRadius: "8px",
-        padding: "1rem",
-      }}
-    >
-      <Column style={{ gap: "1rem" }}>
-        {chains.map((chainId: number) => {
-          return (
-            <OverlayButton
-              key={`select-${chainId}`}
-              onClick={() => {
-                selectChain(chainId);
-              }}
-            >
-              <Row style={{ gap: "1rem", alignItems: "center" }}>                
-                <Image
-                  alt="chain logo"
-                  height="30px"
-                  width="30px"
-                  src={chainToNetworkInfoMap[chainId].image}
-                />
-                <Typo2 style={{ fontWeight: "bold" }}>
-                  {chainToNetworkInfoMap[chainId].name}
-                </Typo2>
-              </Row>
-            </OverlayButton>
-          );
-        })}
-      </Column>
-    </ContentBox>
-  );
-};
+// const ChainSelect: React.FC<any> = ({ selectChain, chains }) => {
+//   return (
+//     <ContentBox
+//       style={{
+//         width: "100%",
+//         boxSizing: "border-box",
+//         backgroundColor: "black",
+//         borderRadius: "8px",
+//         padding: "1rem",
+//       }}
+//     >
+//       <Column style={{ gap: "1rem" }}>
+//         {chains.map((chainId: number) => {
+//           return (
+//             <OverlayButton
+//               key={`select-${chainId}`}
+//               onClick={() => {
+//                 selectChain(chainId);
+//               }}
+//             >
+//               <Row style={{ gap: "1rem", alignItems: "center" }}>                
+//                 <Image
+//                   alt="chain logo"
+//                   height="30px"
+//                   width="30px"
+//                   src={chainToNetworkInfoMap[chainId].image}
+//                 />
+//                 <Typo2 style={{ fontWeight: "bold" }}>
+//                   {chainToNetworkInfoMap[chainId].name}
+//                 </Typo2>
+//               </Row>
+//             </OverlayButton>
+//           );
+//         })}
+//       </Column>
+//     </ContentBox>
+//   );
+// };
 
 // const ChainSelector: React.FC<any> = ({
 //   text,
@@ -866,14 +868,18 @@ const Bridge: React.FC<any> = () => {
   }, [bridgeTxHash]);
 
   return (
-    <Container id="bridge-page" maxWidth="2xl" className="space-y-4">
+    <Container id="bridge-page" maxWidth="2xl" className="space-y-4 mt-4">
       <DoubleGlowShadowV2>
-      <div className="p-4 mt-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>          
-        <div className="px-2">
+      <SwapLayoutCard>
+
+      <div
+      //  className="p-4 mt-12 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}
+      >
+        {/* <div className="px-2"> */}
     {/* <SwapHeader /> */}
     <SwapDropdown />
 
-    </div>
+    {/* </div> */}
     <FadeInOut>
       {bridgeTxHash && (
         <ContentBox
@@ -918,7 +924,10 @@ const Bridge: React.FC<any> = () => {
         </ContentBox>
       )}
       <Row style={{ width: "100%", justifyContent: "center" }}>
-        <div className={`flex -4 border border-dark-900 hover:border-${getChainColorCode(chainId)} bg-dark-900 p-2 rounded w-full`}>
+        <div className={classNames(`flex -4 border border-dark-900`,
+        // hover:border-${getChainColorCode(chainId)} 
+        `bg-dark-900 p-2 rounded w-full`)}
+        >
           <Column style={{ width: "100%" }}>
             <div />
             <>
@@ -1036,6 +1045,7 @@ const Bridge: React.FC<any> = () => {
       <div />
     </FadeInOut>
   </div>
+  </SwapLayoutCard>
 </DoubleGlowShadowV2>
 </Container>
   );
