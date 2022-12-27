@@ -16,9 +16,11 @@ import Image from 'next/image'
 // import { Button } from 'components/Button'
 import Globe from 'assets/svg/icons/Globe.svg'
 import Chain from 'assets/svg/icons/Chain.svg'
-import ChevronUpDownBlack from 'assets/svg/icons/ChevronUpDownBlack.svg'
+import ChevronUpDown from 'assets/svg/icons/ChevronUpDown.svg'
 import PlusSign from 'assets/svg/icons/PlusSign.svg'
 import { getChainColor, getChainColorCode } from 'constants/chains'
+import { i18n } from '@lingui/core'
+import { t } from '@lingui/macro'
 
 const getQuery = (input?: Currency, output?: Currency) => {
   const { chainId } = useActiveWeb3React()
@@ -47,14 +49,19 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
     || asPath.startsWith('/remove') || asPath.startsWith('exchange/remove')
 
   const soulEnabled = [ChainId.FANTOM, ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId)
-
-  const activeNavLink = `border border-3 bg-${getChainColorCode(chainId)} rounded text-white`
-  const inactiveNavLink = `text-secondary bg-white mt-4 mb-2 rounded rounded-xl border-[${getChainColor(chainId)}]`
+  // const globalNavStyle = ``
+  const activeNavLink = // `${globalNavStyle} text-${getChainColorCode(chainId)}`
+  `border bg-${getChainColorCode(chainId)} rounded text-white`
+  const inactiveNavLink = // `${globalNavStyle} text-white`
+  `text-secondary bg-white rounded rounded-xl border-[${getChainColor(chainId)}]`
  
   return (
     <div className="flex items-center justify-between gap-2">
       <div className="flex gap-2 mx-1">
         <NavLink
+          className={classNames(
+            inactiveNavLink
+            )}
           activeClassName={classNames(
             activeNavLink          
           )}
@@ -64,41 +71,48 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               : `/exchange/swap?inputCurrency=${NATIVE[chainId].symbol}&outputCurrency=${soulEnabled ? SOUL_ADDRESS[chainId] : USDC_ADDRESS[chainId]}`
           }
         >
-            <Typography weight={700} className={inactiveNavLink}>
             <Image className={"mt-2"} alt={"chevron up down black icon"}          
-            src={ChevronUpDownBlack}  />
-          </Typography>
+            src={ChevronUpDown}  />
+            {/* {`↕`} */}
         </NavLink>
         {featureEnabled(Feature.LIQUIDITY, chainId) &&
           <NavLink
+            className={classNames(
+            inactiveNavLink
+            )}
             activeClassName={classNames(
               activeNavLink
             )}
             href={`/exchange/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
               }`}
           >
-            <Typography weight={700} className={inactiveNavLink}>
             <Image 
+            height={26}
+            width={26}
             alt={"add icon"}
             src={PlusSign} />
-            </Typography>
+              {/* {`+/-`} */}
           </NavLink>
         }
         {featureEnabled(Feature.BRIDGE, chainId) &&
           <NavLink
+            className={classNames(
+            inactiveNavLink
+            )}
             activeClassName={classNames(
               activeNavLink
             )}
             href={'/bridge'}
           >
-            <Typography weight={700} className={inactiveNavLink}>
-              <Image 
+              <Image
+              height={26}
+              width={26}
               alt={"bridge icon"}
               src={Globe} />
-            </Typography>
+              {/* {i18n._(t`Bridge`)} */}
           </NavLink>
         }
-        {featureEnabled(Feature.LIQUIDITY, chainId) &&
+        {/* {featureEnabled(Feature.LIQUIDITY, chainId) &&
           <NavLink
             activeClassName={classNames(
               activeNavLink
@@ -107,9 +121,10 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           >
             <Typography weight={700} className={inactiveNavLink}>
               <Image alt={"chain icon"} src={Chain} />
+              {i18n._(t`Crosschain`)}
             </Typography>
           </NavLink>
-        }
+        } */}
         {/* {featureEnabled(Feature.LIMIT, chainId) &&
           <NavLink
             activeClassName={classNames(

@@ -807,7 +807,7 @@ const Limit = () => {
               </BottomGrouping>
             </AutoColumn>
             {/* </Wrapper> */}
-            <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
+            <div className={classNames(account ? `flex flex-cols-2 gap-3 text-white justify-end` : `hidden`)}>
               <Toggle
                 id="toggle-button"
                 optionA="Orders"
@@ -824,7 +824,7 @@ const Limit = () => {
                 }
               />
             </div>
-            {showOrders &&
+            {showOrders && account && 
             <GelatoLimitOrdersHistoryPanel />
             }
             {!swapIsUnsupported ? null : (
@@ -834,7 +834,6 @@ const Limit = () => {
               />
             )}
             <div className={classNames([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `flex flex-cols-2 gap-3 text-white justify-end` : `hidden`)}>
-
             </div>
           </div>
         </SwapLayoutCard>

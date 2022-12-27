@@ -3,7 +3,6 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { TokenList } from '@uniswap/token-lists'
 import CloseIcon from 'components/CloseIcon'
-// import MinusCircleIcon from 'components/MinusCircleIcon'
 import ListLogo from 'components/ListLogo'
 import { HeadlessUiModal } from 'components/Modal'
 import Popover from 'components/Popover'
@@ -20,10 +19,10 @@ import { AppDispatch, AppState } from 'state'
 import { acceptListUpdate, disableList, enableList, removeList } from 'state/lists/actions'
 import { useActiveListUrls, useAllLists, useIsListActive } from 'state/lists/hooks'
 import React, { FC, memo, useCallback, useEffect, useMemo, useState } from 'react'
-import { Settings } from 'react-feather'
+// import { Settings } from 'react-feather'
 import ReactGA from 'react-ga'
 import { useDispatch, useSelector } from 'react-redux'
-import Image from 'next/image'
+// import Image from 'next/image'
 import CurrencyModalView from './CurrencyModalView'
 import { useActiveWeb3React } from 'services/web3'
 
@@ -152,11 +151,6 @@ const ListRow: FC<{ listUrl: string }> = memo(({ listUrl }) => {
             {/* <Typography variant="sm" className="text-white">
               {i18n._(t`Tokens:`)} {list.tokens.length} 
             </Typography> */}
-            {/* <Image
-              height={12}
-              width={12}
-              src={MinusIcon
-            /> */}
           </div>
         </div>
       </div>
