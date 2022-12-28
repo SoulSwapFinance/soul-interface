@@ -229,42 +229,42 @@ const useMenu: UseMenu = () => {
       //   })
     // }
 
-    if (featureEnabled(Feature.ANALYTICS, chainId)) {
-      let analyticsMenu: MenuItem = {
-        key: 'analytics',
-        title: i18n._(t`Data`),
-        icon: <TrendingUpIcon width={20} className={classNames(
-          "text-white"
-          // isAnalytics ? 'text-black' : `text-[${getChainColor(chainId)}]`
-          // isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`
-          )} />,
-        link: '/analytics'
-        // link: '/info'
-        // items: [
-        //   {
-        //     key: 'dashboard',
-        //     title: 'Overview',
-        //     link: '/analytics/dashboard',
-        //   },
-        //   {
-        //     key: 'wallet',
-        //     title: 'Wallet',
-        //     link: '/balances',
-        //   },
-        //   {
-        //     key: 'tokens',
-        //     title: 'Tokens',
-        //     link: '/analytics/tokens',
-        //   },
-        //   {
-        //     key: 'pairs',
-        //     title: 'Pairs',
-        //     link: '/analytics/pairs',
-        //   },
-        // ],
-      }
-      mainItems.push(analyticsMenu)
-    }
+    // if (featureEnabled(Feature.ANALYTICS, chainId)) {
+    //   let analyticsMenu: MenuItem = {
+    //     key: 'analytics',
+    //     title: i18n._(t`Data`),
+    //     icon: <TrendingUpIcon width={20} className={classNames(
+    //       "text-white"
+    //       // isAnalytics ? 'text-black' : `text-[${getChainColor(chainId)}]`
+    //       // isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`
+    //       )} />,
+    //     link: '/analytics'
+    //     // link: '/info'
+    //     // items: [
+    //     //   {
+    //     //     key: 'dashboard',
+    //     //     title: 'Overview',
+    //     //     link: '/analytics/dashboard',
+    //     //   },
+    //     //   {
+    //     //     key: 'wallet',
+    //     //     title: 'Wallet',
+    //     //     link: '/balances',
+    //     //   },
+    //     //   {
+    //     //     key: 'tokens',
+    //     //     title: 'Tokens',
+    //     //     link: '/analytics/tokens',
+    //     //   },
+    //     //   {
+    //     //     key: 'pairs',
+    //     //     title: 'Pairs',
+    //     //     link: '/analytics/pairs',
+    //     //   },
+    //     // ],
+    //   }
+    //   mainItems.push(analyticsMenu)
+    // }
 
     // if (featureEnabled(Feature.AMM, chainId)) {
     //   mainItems.push({
