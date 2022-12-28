@@ -1,5 +1,5 @@
 import { Popover, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/outline'
+// import { ChevronDownIcon } from '@heroicons/react/outline'
 import { BarItem, BarItemLeaf, BarItemNode } from 'components/Header/useBar'
 import Typography from 'components/Typography'
 import { getChainColor, getChainColorCode } from 'constants/chains'
@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { FC, Fragment, useCallback, useRef } from 'react'
 import { useActiveWeb3React } from 'services/web3'
-import styled from 'styled-components'
+// import styled from 'styled-components'
 
 // const HideOnMobile = styled.div`
 // @media screen and (max-width: 600px) {
@@ -26,7 +26,7 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
   const { chainId } = useActiveWeb3React()
   const buttonRef = useRef<HTMLButtonElement>(null)
   // const isLuxor = router.asPath.startsWith('/luxor')
-  // const isDesktop = useDesktopHeaderMediaQuery()
+  const isDesktop = useDesktopHeaderMediaQuery()
   const touchDevice = useTouchDeviceMediaQuery()
   const { link } = node as BarItemLeaf
   // const isOpen = router.asPath === link
@@ -53,7 +53,7 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
         )}
       >
         {node.icon}
-        {node.title}
+        {isDesktop && node.title}
       </Typography>
     )
   }
@@ -76,8 +76,8 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
               'font-bold py-5 px-2 rounded flex gap-3 items-center')}
             >
               {node.icon}
-              {node.title}
-              <ChevronDownIcon strokeWidth={5} width={12} className={`text-[${getChainColor(chainId)}]`} />
+              {isDesktop && node.title}
+              {/* <ChevronDownIcon strokeWidth={5} width={12} className={`text-[${getChainColor(chainId)}]`} /> */}
             </Typography>
           </Popover.Button>
           {node.hasOwnProperty('items') && (
@@ -110,7 +110,7 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
                           }}
                           className="relative px-3 text-center py-2 m-1 rounded-lg hover:cursor-pointer hover:text-white hover:bg-white/10"
                         >
-                          {leaf.title}
+                          { leaf.title }
                         </Typography>
                       </a>
                     </Link>

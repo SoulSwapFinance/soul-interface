@@ -120,7 +120,7 @@ export const LAUNCHPAD_PROJECTS: ProjectsMap = {
       { title: 'DeFi Application', link: 'https://app.luxor.money' },
       { title: 'Twitter Profile', link: 'https://twitter.com/LuxorMoney' },
       { title: 'Official Telegram', link: 'https://t.me/SoulSwapDeFi' },
-      { title: 'Official Discord', link: 'https://discord.com/invite/DQjChB6Wa6' },
+      { title: 'Official Discord', link: 'https://discord.gg/soulswap' },
       { title: 'Project Medium', link: 'https://soulswapfinance.medium.com/' },
       { title: 'Project Documentation', link: 'https://docs.luxor.money' },
     ],

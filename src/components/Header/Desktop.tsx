@@ -1,14 +1,14 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { MenuAlt1Icon } from '@heroicons/react/outline'
-import BarsArrowUpIcon from 'assets/svg/icons/BarsArrowUp.svg'
-import BarsArrowDownIcon from 'assets/svg/icons/BarsArrowDown.svg'
+// import BarsArrowUpIcon from 'assets/svg/icons/BarsArrowUp.svg'
+// import BarsArrowDownIcon from 'assets/svg/icons/BarsArrowDown.svg'
 
 import { ChainId, NATIVE } from 'sdk'
 import Web3Status from 'components/Web3Status'
 import { useActiveWeb3React } from 'services/web3'
 import { useETHBalances } from 'state/wallet/hooks'
 import React, { FC, Fragment, useCallback, useState } from 'react'
-import Image from 'next/image'
+// import Image from 'next/image'
 import { NavigationItem } from './NavigationItem'
 import { SidebarItem } from './SidebarItem'
 import TokenStats from 'components/TokenStats'
@@ -29,17 +29,17 @@ const Desktop: FC = () => {
   const bar = useBar()
   // const mobile = useMobileMenu()
   const { account, chainId, library, connector } = useActiveWeb3React()
-  const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
+  // const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const [open, setOpen] = useState(false)
-  const [showMenu, setShowMenu] = useState(false)
-  const router = useRouter()
+  // const [showMenu, setShowMenu] = useState(false)
+  // const router = useRouter()
   // const handleShowMenu = useCallback(() => {
   //   setSho
   // }, [setShowMenu])
 
   return (
     <>
-      <header className="w-full flex items-center text-white bg-dark-1000 justify-center min-h-[48px] h-[48px] px-4">
+      <header className="w-full flex items-center text-white bg-dark-900 justify-center min-h-[48px] h-[48px] px-4">
         <div className="flex ml-4 justify-between flex-grow">
           <div className={`p-1 bg-${getChainColorCode(chainId)} rounded-full hover:bg-dark-800`}>
             {/* <div className="flex p-2 justify-between"> */}
@@ -112,10 +112,11 @@ const Desktop: FC = () => {
                         {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                           <TokenStats />
                         }
-                      </div>
-                      <div className="flex items-center justify-start gap-2">
                         <LanguageMenu />
                       </div>
+                      {/* <div className="flex items-center justify-start gap-2">
+                        <LanguageMenu />
+                      </div> */}
                       <div className="flex flex-col gap-4 px-4 sm:px-6">
                       </div>
                     </div>
@@ -125,17 +126,17 @@ const Desktop: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
+        {/* NETWORK ICON */}
+        <div className={`relative top-0.5 right-2 border border-[${getChainColor(chainId)}] p-1 rounded rounded-lg inline-block`}>
+          <Web3Network />
+        </div>
         {/* WALLET ICON */}
         <div
-          className={`relative top-0 right-2 border border-[${getChainColor(chainId)}] border-2 rounded rounded-xl inline-block`}
+          className={`relative top-0.5 right-0 rounded rounded-lg inline-block`}
         >
           <Web3Status />
         </div>
-        {/* NETWORK ICON */}
-        <div className={`relative top-0 right-0 rounded rounded-lg inline-block border border-2 border-[${getChainColor(chainId)}]`}>
-          <Web3Network />
-        </div>
-        <div className={`fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full rounded rounded-xl xl:bg-transparent`}>
+        <div className={`fixed bottom-0 right-0.5 z-10 flex flex-row items-center justify-center w-full rounded rounded-xl xl:bg-transparent`}>
           {/* xl:relative // moves to top */}
           <div className="flex items-center w-full space-x-2 justify-end">
             {/* <div
@@ -143,7 +144,7 @@ const Desktop: FC = () => {
             >
               <Web3Status />
             </div> */}
-            <div className={`w-auto grid gap-1.5 items-center rounded rounded-xl bg-dark-1000  border-[${getChainColor(chainId)}] whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`}>
+            <div className={`w-auto grid gap-1.5 items-center rounded rounded-xl bg-dark-1000 border-[${getChainColor(chainId)}] whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`}>
               {/* {account && chainId && userEthBalance && (
                 <>
                   <div className="flex px-2 py-2 text-primary text-bold">

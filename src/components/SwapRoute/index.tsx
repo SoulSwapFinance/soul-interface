@@ -65,10 +65,10 @@ const Route = ({
 	if (!price.amountReturned) return null;
 
 	const amount = +price.amountReturned / 10 ** +toToken?.wrapped.decimals;
-	const tokenURI = (tokenAddress) => {
-		let URI = useTokenInfo(tokenAddress).tokenInfo.image
-		return URI
-	}
+	// const tokenURI = (tokenAddress) => {
+	// 	let URI = useTokenInfo(tokenAddress).tokenInfo.image
+	// 	return URI
+	// }
 
 	return (
 		<Container>

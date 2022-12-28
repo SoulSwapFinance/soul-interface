@@ -1,7 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { ArrowCircleUpIcon, MenuAlt1Icon } from '@heroicons/react/outline'
-import BarsArrowUpIcon from 'assets/svg/icons/BarsArrowUp.svg'
-import BarsArrowDownIcon from 'assets/svg/icons/BarsArrowDown.svg'
+// import BarsArrowUpIcon from 'assets/svg/icons/BarsArrowUp.svg'
+// import BarsArrowDownIcon from 'assets/svg/icons/BarsArrowDown.svg'
 import { ChainId, NATIVE } from 'sdk'
 // import useMenu from 'components/Header/useMenu'
 import Web3Network from 'components/Web3Network'
@@ -9,7 +9,7 @@ import Web3Status from 'components/Web3Status'
 // import useIsCoinbaseWallet from 'hooks/useIsCoinbaseWallet'
 import { useActiveWeb3React } from 'services/web3'
 import { useETHBalances } from 'state/wallet/hooks'
-import Image from 'next/image'
+// import Image from 'next/image'
 // import Link from 'next/link'
 import React, { FC, Fragment, useCallback, useState } from 'react'
 
@@ -22,7 +22,7 @@ import useBar from './useBar'
 import { useRouter } from 'next/router'
 import { classNames } from 'functions/styling'
 import { getChainColor, getChainColorCode } from 'constants/chains'
-import { NavigationItem } from './NavigationItem'
+// import { NavigationItem } from './NavigationItem'
 // import LanguageSwitch from 'components/LanguageSwitch'
 import LanguageMenu from './useLanguages'
 import MobileBar from './MobileBar'
@@ -50,7 +50,7 @@ const Mobile: FC = () => {
 
   return (
     <>
-      <header className="w-full flex mt-3 items-center justify-between min-h-[48px] h-[48px] px-4">
+      <header className="w-full flex mt-3 items-center justify-between min-h-[36px] h-[36px] px-4">
         <div className="flex justify-between flex-grow">
           {/* {[1, 250, 43114].includes(chainId) &&
             <div className=" rounded-full">
@@ -94,23 +94,21 @@ const Mobile: FC = () => {
                   leaveTo="translate-x-[-100%]"
                   unmount={false}
                 >
-                  <div className="w-screen max-w-sm">
+                  <div className="max-w-sm">
                     <div className={classNames("flex flex-col h-full py-2 overflow-x-hidden overflow-y-scroll shadow-xl", "bg-dark-1100")}>
-                      <nav className="flex-1 bg-dark-1000 pl-6" aria-label="Sidebar">
+                      <nav className="flex-1 bg-dark-1000 pl-4" aria-label="Sidebar">
                         {bar.map((node) => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
                       </nav>
-                      <div className="flex w-full justify-center inline-block rounded rounded-xl bg-dark-1000">
+                      <div className="flex w-full p-2 mr-2 justify-center inline-block bg-dark-1000">
                         {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                           <TokenStats />
                         }
                       </div>
-                      <div className="flex w-full justify-center inline-block rounded rounded-xl bg-dark-1000">
+                      {/* <div className="flex w-full justify-center inline-block rounded rounded-xl bg-dark-1000">
                         <LanguageMenu />
-                      </div>
-                      <div className="flex flex-col gap-4 px-4 sm:px-6">
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </Transition.Child>
@@ -118,15 +116,15 @@ const Mobile: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
-                {/* WALLET ICON */}
-                <div
-          className={`relative top-0 right-2 border border-[${getChainColor(chainId)}] border-2 rounded rounded-xl inline-block`}
+        {/* NETWORK ICON */}
+        <div className={`relative top-0.5 right-2 border border-[${getChainColor(chainId)}] p-1 rounded rounded-lg inline-block`}>
+          <Web3Network />
+        </div>
+        {/* WALLET ICON */}
+        <div
+          className={`relative top-0.5 right-0 rounded rounded-lg inline-block`}
         >
           <Web3Status />
-        </div>
-        {/* NETWORK ICON */}
-        <div className={`relative top-0 right-0 rounded rounded-lg inline-block border border-2 border-[${getChainColor(chainId)}]`}>
-          <Web3Network />
         </div>
         <MobileBar />
       </header>
