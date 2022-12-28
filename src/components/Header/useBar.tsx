@@ -186,15 +186,16 @@ const useMenu: UseBar = () => {
     //   mainItems.push(farmItems)
     // }
 
-  // Luxor
-    if (featureEnabled(Feature.LUXOR, chainId)) {
+if (featureEnabled(Feature.LUXOR, chainId)) {
+      // Luxor
       mainItems.push({
         key: 'luxor',
-        title: `Luxor`,
+        title: i18n._(t`Luxor`),
         link: '/luxor/dashboard',
         icon: <SunIcon width={20} className={classNames("rotate-90", `text-[${getChainColor(chainId)}]`)} />,
       })
     }
+
 
     if (featureEnabled(Feature.BONDS, chainId)) {
       // Bond
