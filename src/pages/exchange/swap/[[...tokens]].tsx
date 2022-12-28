@@ -382,13 +382,11 @@ const Swap = () => {
     [setToToken]
   )
 
-  const handleShowCharts = useCallback(
-    () => {
-      showAnalytics ? 
-        setShowAnalytics(false)
-        : setShowAnalytics(true)
-    }, []
-  )
+  // const handleShowCharts = useCallback(
+  //   (enabled: boolean) => {
+  //       setShowAnalytics(enabled)
+  //   }, [setShowAnalytics]
+  // )
 
   const handleLimitSwap = useCallback(
     () => {
@@ -740,9 +738,9 @@ const Swap = () => {
                   `rounded rounded-xl bg-dark-1000 border
                   border-[${getChainColor(chainId)}]`)
                 }
-                onClick={handleShowCharts}
+                onClick={() => setShowAnalytics(!showAnalytics)}
               >
-                 {i18n._(t`Charts`)}
+                 {i18n._(t`Analytics`)}
               </Button>
               {/* <Toggle
                 id="toggle-button"

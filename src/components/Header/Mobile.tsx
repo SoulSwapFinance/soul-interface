@@ -141,9 +141,9 @@ const Mobile: FC = () => {
                 <Web3Status />
               </div> */}
               {/* NETWORK ICON */}
-              <div className={showMenu ? `rounded rounded-md p-2 inline-block border border-2 border-[${getChainColor(chainId)}]` : `hidden`}>
+              {/* <div className={showMenu ? `rounded rounded-md p-2 inline-block border border-2 border-[${getChainColor(chainId)}]` : `hidden`}>
                 <Web3Network />
-              </div>
+              </div> */}
               {/* FLAG ICON */}
               <div className={showMenu ? `rounded rounded-md inline-block border border-2 border-[${getChainColor(chainId)}]` : `hidden`}>
                 <LanguageMenu />

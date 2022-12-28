@@ -24,40 +24,36 @@ const MobileBar: FC = () => {
     return (
         <div>
             <div
-                className={`border border-[${getChainColor(chainId)}] border-2 rounded rounded-xl inline-block`}
+                className={`relative top-0 right-0 border border-[${getChainColor(chainId)}] border-2 rounded rounded-xl inline-block`}
             >
                 <Web3Status />
             </div>
-            <div className={`fixed bottom-0 left-auto z-10 flex flex-row items-center justify-center w-auto rounded rounded-xl xl:bg-transparent`}>
+            <div className={`fixed bottom-0 left-auto z-10 flex flex-row items-center justify-center w-auto rounded rounded-xl`}>
                 {/* xl:relative // moves to top */}
                 <div className="flex items-center w-full space-x-2 justify-end">
-                    <div className={`fixed bg-white bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full rounded rounded-xl xl:bg-transparent`}>
+                    <div className={`fixed bg-dark-1000 bottom-0 left-0 z-10 flex flex-row items-center border border-[${getChainColor(chainId)}] border-2 justify-center w-full rounded rounded-xl`}>
                         {/* xl:relative // moves to top */}
                         <div className="flex items-center w-full space-x-2 justify-end">
-                            <div className={`w-auto grid gap-1.5 items-center rounded rounded-xl bg-dark-1000  border-[${getChainColor(chainId)}] whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`}>
+                            <div className={`w-auto grid gap-0.5 items-center rounded rounded-lg bg-dark-1000 border-[${getChainColor(chainId)}] border- whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`}>
                                 {/* MORE [...] ICON */}
-                                <div className={showMenu ? `rounded rounded-md inline-block border border-[${getChainColor(chainId)}]` : `hidden`}>
-                                    <div className="inline-block justify-center ml-2">
+                                <div className={showMenu ? `rounded rounded-md inline-block border border-2 border-[${getChainColor(chainId)}]` : `hidden`}>
+                                    <div className="inline-block justify-center my-0.5 ml-2 mr-2">
                                         <More />
                                     </div>
                                 </div>
                                 {/* NETWORK ICON */}
-                                <div className={showMenu ? `rounded rounded-md p-2 inline-block border border-2 border-[${getChainColor(chainId)}]` : `hidden`}>
+                                {/* <div className={showMenu ? `rounded rounded-md p-2 inline-block border border-2 border-[${getChainColor(chainId)}]` : `hidden`}>
                                     <Web3Network />
-                                </div>
-                                {/* FLAG ICON */}
-                                {/* <div className={showMenu ? `rounded rounded-md inline-block border border-2 border-[${getChainColor(chainId)}]` : `hidden`}>
-                                <LanguageMenu />
-                            </div> */}
+                                </div> */}
                                 <div
                                     className={
                                         showMenu
                                             ? `hidden`
-                                            : `grid grid-col items-center justify-center w-12 h-8 bg-dark-1000 border border-2 border-[${getChainColor(chainId)}] rounded rounded-lg`
+                                            : `grid grid-col items-center my-0.5 justify-center mx-1 w-12 h-8 bg-dark-1000 border border-2 border-[${getChainColor(chainId)}] rounded rounded-lg`
                                     }>
                                     <Image
                                         alt={"bars arrow up icon"}
-                                        src={BarsArrowDownIcon}
+                                        src={BarsArrowUpIcon}
                                         height={20}
                                         width={20}
                                         onClick={() => setShowMenu(true)}
@@ -66,16 +62,20 @@ const MobileBar: FC = () => {
                                 <div
                                     className={
                                         showMenu
-                                            ? `grid grid-col items-center justify-center w-full h-8 bg-dark-1000 border border-[${getChainColor(chainId)}] rounded rounded-lg`
-                                            : `hidden`
+                                        ? `grid grid-col items-center my-0.5 justify-center mx-1 w-12 h-8 bg-dark-1000 border border-2 border-[${getChainColor(chainId)}] rounded rounded-lg`
+                                        : `hidden`
                                     }>
                                     <Image
-                                        alt={"bars arrow up icon"}
-                                        src={BarsArrowUpIcon}
+                                        alt={"bars arrow down icon"}
+                                        src={BarsArrowDownIcon}
                                         height={20}
                                         width={20}
                                         onClick={() => setShowMenu(false)}
                                     />
+                                </div>
+                                {/* NETWORK ICON */}
+                                <div className={`rounded rounded mx-2 my-0.5 w-auto inline-block border border-4 border-[${getChainColor(chainId)}]`}>
+                                    <Web3Network />
                                 </div>
                             </div>
                         </div>
