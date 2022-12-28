@@ -52,11 +52,16 @@ const Mobile: FC = () => {
     <>
       <header className="w-full flex mt-3 items-center justify-between min-h-[48px] h-[48px] px-4">
         <div className="flex justify-between flex-grow">
-          {[1, 250, 43114].includes(chainId) &&
+          {/* {[1, 250, 43114].includes(chainId) &&
             <div className=" rounded-full">
               <MenuAlt1Icon width={24} className={classNames(isLuxor ? "hover:text-yellow" : `hover:text-[${getChainColor(chainId)}]`, `text-[${getChainColor(chainId)}]`, "cursor-pointer hover:text-white")} onClick={() => setOpen(true)} />
             </div>
-          }
+          } */}
+          <div className={`p-1 bg-${getChainColorCode(chainId)} rounded-full hover:bg-dark-800`}>
+            {/* <div className="flex p-2 justify-between"> */}
+            <MenuAlt1Icon width={24} className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `bg-${getChainColorCode(chainId)} cursor-pointer rounded rounded-xl` : `hidden`)} onClick={() => setOpen(true)} />
+          </div>
+
           {/* <div
             className="flex gap-2 mx-2 sm:px-1 sm:gap-4 md:gap-18 justify-between items-center">
             {menu.map((node) => {
@@ -113,6 +118,16 @@ const Mobile: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
+                {/* WALLET ICON */}
+                <div
+          className={`relative top-0 right-2 border border-[${getChainColor(chainId)}] border-2 rounded rounded-xl inline-block`}
+        >
+          <Web3Status />
+        </div>
+        {/* NETWORK ICON */}
+        <div className={`relative top-0 right-0 rounded rounded-lg inline-block border border-2 border-[${getChainColor(chainId)}]`}>
+          <Web3Network />
+        </div>
         <MobileBar />
       </header>
     </>

@@ -125,16 +125,16 @@ const Desktop: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
-                      {/* WALLET ICON */}
+        {/* WALLET ICON */}
         <div
           className={`relative top-0 right-2 border border-[${getChainColor(chainId)}] border-2 rounded rounded-xl inline-block`}
         >
           <Web3Status />
         </div>
-                      {/* NETWORK ICON */}
-                      <div className={ `relative top-0 right-0 rounded rounded-lg inline-block border border-2 border-[${getChainColor(chainId)}]`}>
-                <Web3Network />
-              </div>
+        {/* NETWORK ICON */}
+        <div className={`relative top-0 right-0 rounded rounded-lg inline-block border border-2 border-[${getChainColor(chainId)}]`}>
+          <Web3Network />
+        </div>
         <div className={`fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full rounded rounded-xl xl:bg-transparent`}>
           {/* xl:relative // moves to top */}
           <div className="flex items-center w-full space-x-2 justify-end">
@@ -155,7 +155,7 @@ const Desktop: FC = () => {
                 </>
               )} */}
               {/* MORE [...] ICON */}
-              <div className={ `rounded rounded-md inline-block border border-2 border-[${getChainColor(chainId)}]`}>
+              <div className={`rounded rounded-md inline-block border border-2 border-[${getChainColor(chainId)}]`}>
                 <div className="inline-block justify-center m-1 mr-2">
                   <More />
                 </div>

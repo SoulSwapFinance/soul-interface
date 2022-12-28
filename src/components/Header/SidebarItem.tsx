@@ -25,11 +25,11 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
   const router = useRouter()
   const { chainId } = useActiveWeb3React()
   const buttonRef = useRef<HTMLButtonElement>(null)
-  const isLuxor = router.asPath.startsWith('/luxor')
-  const isDesktop = useDesktopHeaderMediaQuery()
+  // const isLuxor = router.asPath.startsWith('/luxor')
+  // const isDesktop = useDesktopHeaderMediaQuery()
   const touchDevice = useTouchDeviceMediaQuery()
   const { link } = node as BarItemLeaf
-  const isOpen = router.asPath === link
+  // const isOpen = router.asPath === link
 
   const handleToggle = useCallback((open, type) => {
     if (!open && type === 'enter') {
@@ -77,7 +77,7 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
             >
               {node.icon}
               {node.title}
-              <ChevronDownIcon strokeWidth={5} width={12} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />
+              <ChevronDownIcon strokeWidth={5} width={12} className={`text-[${getChainColor(chainId)}]`} />
             </Typography>
           </Popover.Button>
           {node.hasOwnProperty('items') && (
@@ -93,7 +93,7 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
               <Popover.Panel className="z-10 w-full justify-center absolute w-24 sm:w-32 translate-y-[-10px] sm:translate-x-[-10px] translate-x-[-2px]">
                 <div
                   className={classNames(
-                    'shadow-md shadow-black/40 border', isLuxor ? 'border-yellow' : `border-${getChainColorCode(chainId)}`, 'rounded overflow-hidden',
+                    'shadow-md shadow-black/40 border', `border-${getChainColorCode(chainId)}`, 'rounded overflow-hidden',
                     !touchDevice
                       ? "backdrop-blur-fallback before:z-[-1] before:rounded before:absolute before:w-full before:h-full before:content-[''] before:backdrop-blur-[20px] bg-dark-900 bg-opacity-[0.02]"
                       : 'bg-dark-800 inset-0'
