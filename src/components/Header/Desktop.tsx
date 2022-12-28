@@ -20,7 +20,7 @@ import { useRouter } from 'next/router'
 import { classNames } from 'functions'
 import Web3Network from 'components/Web3Network'
 import LanguageMenu from './useLanguages'
-import { getChainColor } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 
 const HEADER_HEIGHT = 64
 
@@ -41,9 +41,9 @@ const Desktop: FC = () => {
     <>
       <header className="w-full flex items-center text-white bg-dark-1000 justify-center min-h-[48px] h-[48px] px-4">
         <div className="flex ml-4 justify-between flex-grow">
-          <div className="p-1 bg-dark-900 rounded-full hover:bg-dark-800">
+          <div className={`p-1 bg-${getChainColorCode(chainId)} rounded-full hover:bg-dark-800`}>
             {/* <div className="flex p-2 justify-between"> */}
-            <MenuAlt1Icon width={24} className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? 'text-white cursor-pointer' : 'hidden')} onClick={() => setOpen(true)} />
+            <MenuAlt1Icon width={24} className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `bg-${getChainColorCode(chainId)} cursor-pointer rounded rounded-xl` : `hidden`)} onClick={() => setOpen(true)} />
           </div>
           {/* <div className="flex w-6 mr-4 items-center">
                   <NavLink href="/landing">
@@ -86,7 +86,7 @@ const Desktop: FC = () => {
                 <Dialog.Overlay className="absolute inset-0 transition-opacity bg-dark-1000 bg-opacity-80" />
               </Transition.Child>
 
-              <div className="fixed inset-y-0 left-0 pr-10 max-w-[260px] flex">
+              <div className="fixed inset-y-0 left-0 pr-16 max-w-[260px] flex">
                 <Transition.Child
                   as={Fragment}
                   enter="transform transition ease-in-out duration-300"
@@ -100,9 +100,10 @@ const Desktop: FC = () => {
                   <div className="w-screen max-w-sm">
                     <div className={classNames("flex flex-col h-full py-1 overflow-x-hidden overflow-y-scroll shadow-xl",
                       "bg-dark-1100")}>
-
-                      <nav className
-                        ={classNames("flex-1 py-12 bg-dark-1000 pl-6")} aria-label="Sidebar">
+                      <nav
+                        className={classNames("flex-1 py-12 bg-dark-1000 pl-6")} aria-label="Sidebar"
+                      /* // className="flex-1 bg-dark-1000 pl-6" aria-label="Sidebar" */
+                      >
                         {bar.map((node) => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
@@ -113,23 +114,35 @@ const Desktop: FC = () => {
                         }
                       </div>
                       <div className="flex items-center justify-start gap-2">
+                        <LanguageMenu />
+                      </div>
+                      <div className="flex flex-col gap-4 px-4 sm:px-6">
                       </div>
                     </div>
                   </div>
-                  {/* <LanguageSwitch /> */}
                 </Transition.Child>
               </div>
             </div>
           </Dialog>
         </Transition.Root>
+                      {/* WALLET ICON */}
+        <div
+          className={`relative top-0 right-2 border border-[${getChainColor(chainId)}] border-2 rounded rounded-xl inline-block`}
+        >
+          <Web3Status />
+        </div>
+                      {/* NETWORK ICON */}
+                      <div className={ `relative top-0 right-0 rounded rounded-lg inline-block border border-2 border-[${getChainColor(chainId)}]`}>
+                <Web3Network />
+              </div>
         <div className={`fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full rounded rounded-xl xl:bg-transparent`}>
           {/* xl:relative // moves to top */}
           <div className="flex items-center w-full space-x-2 justify-end">
-              <div 
-            className={`border border-[${getChainColor(chainId)}] border-2 rounded rounded-xl inline-block`}
-             >
+            {/* <div
+              className={`border border-[${getChainColor(chainId)}] border-2 rounded rounded-xl inline-block`}
+            >
               <Web3Status />
-            </div>
+            </div> */}
             <div className={`w-auto grid gap-1.5 items-center rounded rounded-xl bg-dark-1000  border-[${getChainColor(chainId)}] whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`}>
               {/* {account && chainId && userEthBalance && (
                 <>
@@ -142,8 +155,8 @@ const Desktop: FC = () => {
                 </>
               )} */}
               {/* MORE [...] ICON */}
-              <div className={showMenu ? `rounded rounded-md inline-block border border-[${getChainColor(chainId)}]` : `hidden`}>
-                <div className="inline-block justify-center ml-2">
+              <div className={ `rounded rounded-md inline-block border border-2 border-[${getChainColor(chainId)}]`}>
+                <div className="inline-block justify-center m-1 mr-2">
                   <More />
                 </div>
               </div>
@@ -152,17 +165,17 @@ const Desktop: FC = () => {
                 <Web3Status />
               </div> */}
               {/* NETWORK ICON */}
-              <div className={showMenu ? `rounded rounded-md p-2 inline-block border border-2 border-[${getChainColor(chainId)}]` : `hidden`}>
+              {/* <div className={showMenu ? `rounded rounded-md p-2 inline-block border border-2 border-[${getChainColor(chainId)}]` : `hidden`}>
                 <Web3Network />
-              </div>
-              {/* FLAG ICON */}
+              </div> */}
+              {/* FLAG ICON
               <div className={showMenu ? `rounded rounded-md inline-block border border-2 border-[${getChainColor(chainId)}]` : `hidden`}>
                 <LanguageMenu />
-              </div>
+              </div> */}
               {/* <div
                 className={`grid grid-cols items-center justify-center w-full h-8 bg-dark-800 border border-2 border-[${getChainColor(chainId)}] rounded rounded-xl`}
                 > */}
-              <div
+              {/* <div
                 className={
                   showMenu
                     ? `hidden`
@@ -189,7 +202,7 @@ const Desktop: FC = () => {
                   width={20}
                   onClick={() => setShowMenu(false)}
                 />
-              </div>
+              </div> */}
               {/* // className="inline-block ml-1 justify-center h-4" */}
               {/* <BarsArrowUpIcon className="inline-block ml-1 justify-center h-4" /> */}
               {/* </div> */}

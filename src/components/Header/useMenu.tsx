@@ -288,51 +288,51 @@ const useMenu: UseMenu = () => {
       })
     }
 
-    // if (featureEnabled(Feature.AMM, chainId)) {
-    //   mainItems.push({
-    //     key: 'socials',
-    //     title: i18n._(t`Follow`),
-    //     icon: <UserGroupIcon width={20} 
-    //     className={classNames(
-    //       `text-[${getChainColor(chainId)}]`
-    //     )} />,
-    //     link: `https://twitter.com/${isLuxor ? 'LuxorMoney' : 'SoulSwapFinance'}`,
-    //     // items: [
-    //     //   {
-    //     //     key: 'discord',
-    //     //     title: 'Discord',
-    //     //     link: 'https://discord.com/invite/DQjChB6Wa6',
-    //     //   },
-    //     //   {
-    //     //     key: 'telegram',
-    //     //     title: 'Telegram',
-    //     //     link: 'https://t.me/SoulSwapDeFi',
-    //     //   },
-    //     //   {
-    //     //     key: 'twitter',
-    //     //     title: 'Twitter',
-    //     //     link: `https://twitter.com/${isLuxor ? 'LuxorMoney' : 'SoulSwapFinance'}`,
-    //     //   },
-    //     //   {
-    //     //     key: 'feedback',
-    //     //     title: 'Feedback',
-    //     //     link: '/board',
-    //     //     // link: 'https://soulswap.nolt.io',
-    //     //   },
-    //     //   {
-    //     //     key: 'forum',
-    //     //     title: 'Forum',
-    //     //     link: 'https://forum.soulswap.finance',
-    //     //   },
-    //     //   {
-    //     //     key: 'medium',
-    //     //     title: 'Medium',
-    //     //     link: 'https://soulswapfinance.medium.com',
-    //     //   },
-    //     // ],
-    //   })
+    if (featureEnabled(Feature.AMM, chainId)) {
+      mainItems.push({
+        key: 'socials',
+        title: i18n._(t`Follow`),
+        icon: <UserGroupIcon width={20} 
+        className={classNames(
+          `text-[${getChainColor(chainId)}]`
+        )} />,
+        link: `https://twitter.com/${isLuxor ? 'LuxorMoney' : 'SoulSwapFinance'}`,
+        // items: [
+        //   {
+        //     key: 'discord',
+        //     title: 'Discord',
+        //     link: 'https://discord.com/invite/DQjChB6Wa6',
+        //   },
+        //   {
+        //     key: 'telegram',
+        //     title: 'Telegram',
+        //     link: 'https://t.me/SoulSwapDeFi',
+        //   },
+        //   {
+        //     key: 'twitter',
+        //     title: 'Twitter',
+        //     link: `https://twitter.com/${isLuxor ? 'LuxorMoney' : 'SoulSwapFinance'}`,
+        //   },
+        //   {
+        //     key: 'feedback',
+        //     title: 'Feedback',
+        //     link: '/board',
+        //     // link: 'https://soulswap.nolt.io',
+        //   },
+        //   {
+        //     key: 'forum',
+        //     title: 'Forum',
+        //     link: 'https://forum.soulswap.finance',
+        //   },
+        //   {
+        //     key: 'medium',
+        //     title: 'Medium',
+        //     link: 'https://soulswapfinance.medium.com',
+        //   },
+        // ],
+      })
 
-    // }
+    }
 
     return mainItems.filter((el) => Object.keys(el).length > 0)
   }, [chainId, i18n])

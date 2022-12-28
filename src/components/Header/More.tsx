@@ -24,6 +24,12 @@ export default function Menu() {
     href: 'https://docs.soulswap.finance',
     external: true,
   },
+  {
+    name: i18n._(t`Twitter`),
+    description: i18n._(t`Follow us on Twitter`),
+    href: 'https://twitter.com/SoulSwapFinance',
+    external: true,
+  },
   // {
   //   name: i18n._(t`Analytics`),
   //   description: i18n._(t`View our Data.`),
@@ -96,7 +102,7 @@ export default function Menu() {
               static
               className="absolute z-50 w-screen max-w-xs px-2 mt-3 transform -translate-x-full bottom-8 lg:top-12 left-full sm:px-0"
             >
-              <div className={classNames(`overflow-hidden rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5 border border-2 hover:border-${getChainColorCode(chainId)}`)}>
+              <div className={classNames(`overflow-hidden rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5 border border-2 border-[${getChainColor(chainId)}]`)}>
                 <div className="relative grid gap-6 px-5 py-6 bg-dark-1000 sm:gap-8 sm:p-8">
                   {solutions.map((item) =>
                     item.external ? (

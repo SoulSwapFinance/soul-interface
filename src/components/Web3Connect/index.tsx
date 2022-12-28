@@ -35,7 +35,8 @@ export default function Web3Connect({ color = 'purple', size = 'sm', className =
       size={size}
       {...rest}
     >
-      {i18n._(t`Connect Wallet`)}
+      {/* {i18n._(t`Connect Wallet`)} */}
+      {i18n._(t`Connect`)}
     </Button>
    :
     <Button
