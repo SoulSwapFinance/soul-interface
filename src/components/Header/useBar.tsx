@@ -134,7 +134,7 @@ const useMenu: UseBar = () => {
       key: 'pools',
       title: i18n._(t`Pool`),
       link: '/pool',
-      icon: <PoolIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
+      icon: <WalletIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     })
 
     // if (poolMenu.length > 0)
@@ -356,12 +356,12 @@ const useMenu: UseBar = () => {
     // })
 
     // Dashboard
-    // mainItems.push({
-      // key: 'dashboard',
-      // title: i18n._(t`Economy`),
-      // link: '/dashboard',
-      // icon: <TokenomicsIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
-    // })
+    mainItems.push({
+      key: 'dashboard',
+      title: i18n._(t`Economy`),
+      link: '/dashboard',
+      icon: <TokenomicsIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
+    })
 
     // Balances
     mainItems.push({
