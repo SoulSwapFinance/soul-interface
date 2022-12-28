@@ -44,6 +44,7 @@ import SwapDropdown from 'features/swap/SwapDropdown'
 import Pair from 'pages/analytics/pairs/[id]'
 import Limits from './limit/[[...tokens]]'
 import { currencyId } from 'functions/currency'
+import Portfolio from 'pages/portfolio'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -103,6 +104,7 @@ const Swap = () => {
 
   const [showChart, setShowChart] = useState(false)
   const [showAnalytics, setShowAnalytics] = useState(false)
+  const [showPortfolio, setShowPortfolio] = useState(false)
   const useSwap = !useAggregator && !useLimit
   // const [showAggregator, setShowAggregator] = useState(false)
 
@@ -730,7 +732,7 @@ const Swap = () => {
                 className={classNames(`rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
                 onClick={handleAggregatorSwap}
               >
-                 {i18n._(t`Aggregate`)}
+                {i18n._(t`Aggregate`)}
               </Button>
               <Button
                 size={'xs'}
@@ -740,8 +742,18 @@ const Swap = () => {
                 }
                 onClick={() => setShowAnalytics(!showAnalytics)}
               >
-                 {i18n._(t`Analytics`)}
+                {i18n._(t`Analytics`)}
               </Button>
+              {/* <Button
+                size={'xs'}
+                className={classNames(showPortfolio ? `bg-${getChainColorCode(chainId)}` : ``,
+                  `rounded rounded-xl bg-dark-1000 border
+                  border-[${getChainColor(chainId)}]`)
+                }
+                onClick={() => setShowPortfolio(!showPortfolio)}
+              >
+                {i18n._(t`Portfolio`)}
+              </Button> */}
               {/* <Toggle
                 id="toggle-button"
                 optionA="Aggregator"
@@ -759,14 +771,25 @@ const Swap = () => {
               /> */}
             </div>
           </div>
-          {showAnalytics && useSwap && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
-            <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
-              <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
-                {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
-                <Pair inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+          <div className={`flex flex-cols-${showAnalytics && showPortfolio ? `hidden` : `1`}`}>
+            {showAnalytics && !showPortfolio && useSwap && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+              <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
+                <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
+                  {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
+                  <Pair inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+                </div>
               </div>
-            </div>
-          }
+            }
+            {showPortfolio && useSwap && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+              <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
+                <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
+                  {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
+                  {/* <Pair inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
+                  <iframe src={`https://soulswap-portfolio.vercel.app/portfolio/${account}`} height={600} />
+                </div>
+              </div>
+            }
+          </div>
           {/* {(!showChart && !showAnalytics) &&
             <SocialWidget />
           } */}

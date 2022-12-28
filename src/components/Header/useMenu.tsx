@@ -10,6 +10,7 @@ import { useActiveWeb3React } from 'services/web3'
 import { useRouter } from 'next/router'
 import { getChainColor } from 'constants/chains'
 import Twitter from 'assets/icons/twitter.png'
+import { TwitterIcon } from 'components/Icon'
 export interface MenuItemLeaf {
   key: string
   title?: string
@@ -292,7 +293,8 @@ const useMenu: UseMenu = () => {
       mainItems.push({
         key: 'socials',
         title: i18n._(t`Follow`),
-        icon: <UserGroupIcon width={20} 
+        // icon: <UserGroupIcon width={20} 
+        icon: <TwitterIcon width={20}
         className={classNames(
           `text-[${getChainColor(chainId)}]`
         )} />,
@@ -301,7 +303,7 @@ const useMenu: UseMenu = () => {
         //   {
         //     key: 'discord',
         //     title: 'Discord',
-        //     link: 'https://discord.com/invite/DQjChB6Wa6',
+        //     link: 'https://discord.gg/soulswap',
         //   },
         //   {
         //     key: 'telegram',

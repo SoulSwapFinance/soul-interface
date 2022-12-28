@@ -148,7 +148,7 @@ let multiMenu = {
 //     {
 //       key: 'discord',
 //       title: 'Discord',
-//       link: 'https://discord.com/invite/DQjChB6Wa6',
+//       link: 'https://discord.gg/soulswap',
 //     },
 //     {
 //       key: 'telegram',

@@ -61,7 +61,7 @@ export default function Menu() {
               height="16px"
               className="inline-flex items-center w-5 h-5 ml-2"
               viewBox="0 0 24 24"
-              fill="none"
+              color={getChainColor(chainId)}
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
