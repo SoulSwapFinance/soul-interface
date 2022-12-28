@@ -134,7 +134,7 @@ const useMenu: UseBar = () => {
       key: 'pools',
       title: i18n._(t`Pool`),
       link: '/pool',
-      icon: <PoolIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
+      icon: <WalletIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     })
 
     // if (poolMenu.length > 0)
@@ -187,15 +187,41 @@ const useMenu: UseBar = () => {
     // }
 
     if (featureEnabled(Feature.LUXOR, chainId)) {
-      // Luxor
-      mainItems.push({
+      const luxorItems = {
         key: 'luxor',
         title: i18n._(t`Luxor`),
-        link: '/luxor/dashboard',
         icon: <SunIcon width={20} className={classNames("rotate-90", `text-[${getChainColor(chainId)}]`)} />,
-      })
+        items: [
+          {
+            key: 'luxor-dashboard',
+            title: i18n._(t`Overview`),
+            link: '/luxor/dashboard',
+          },
+          {
+            key: 'luxor-bonds',
+            title: i18n._(t`Bonds`),
+            link: '/luxor/bonds',
+          },
+          {
+            key: 'luxor-staking',
+            title: i18n._(t`Stake`),
+            link: '/luxor/stake',
+          },
+          {
+            key: 'luxor-wrap',
+            title: i18n._(t`Wrap`),
+            link: '/luxor/wrap',
+          },
+          // {
+          //   key: 'luxor-docs',
+          //   title: i18n._(t`Tutorial`),
+          //   link: 'https://docs.luxor.money',
+          // },
+        ],
+      }
+      mainItems.push(luxorItems)
     }
-    
+
     if (featureEnabled(Feature.BONDS, chainId)) {
       // Bond
       mainItems.push({
@@ -356,12 +382,12 @@ const useMenu: UseBar = () => {
     // })
 
     // Dashboard
-    // mainItems.push({
-      // key: 'dashboard',
-      // title: i18n._(t`Economy`),
-      // link: '/dashboard',
-      // icon: <TokenomicsIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
-    // })
+    mainItems.push({
+      key: 'dashboard',
+      title: i18n._(t`Economy`),
+      link: '/dashboard',
+      icon: <TokenomicsIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
+    })
 
     // Balances
     mainItems.push({
