@@ -289,16 +289,16 @@ const useMenu: UseMenu = () => {
       })
     }
 
-    if (featureEnabled(Feature.AMM, chainId)) {
-      mainItems.push({
-        key: 'socials',
-        title: i18n._(t`Follow`),
-        // icon: <UserGroupIcon width={20} 
-        icon: <TwitterIcon width={20}
-        className={classNames(
-          `text-[${getChainColor(chainId)}]`
-        )} />,
-        link: `https://twitter.com/${isLuxor ? 'LuxorMoney' : 'SoulSwapFinance'}`,
+    // if (featureEnabled(Feature.AMM, chainId)) {
+    //   mainItems.push({
+    //     key: 'socials',
+    //     title: i18n._(t`Follow`),
+    //     // icon: <UserGroupIcon width={20} 
+    //     icon: <TwitterIcon width={20}
+    //     className={classNames(
+    //       `text-[${getChainColor(chainId)}]`
+    //     )} />,
+    //     link: `https://twitter.com/${isLuxor ? 'LuxorMoney' : 'SoulSwapFinance'}`,
         // items: [
         //   {
         //     key: 'discord',
@@ -332,9 +332,8 @@ const useMenu: UseMenu = () => {
         //     link: 'https://soulswapfinance.medium.com',
         //   },
         // ],
-      })
-
-    }
+      // })
+    // }
 
     return mainItems.filter((el) => Object.keys(el).length > 0)
   }, [chainId, i18n])

@@ -26,10 +26,11 @@ function LuxorStats(): JSX.Element | null {
 
   return (
     <div
-      className="flex items-center md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
+      // className="flex items-center md:space-x-2 rounded bg-dark-900 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
+      className="flex items-center md:space-x-2 rounded bg-dark-900 border border-dark-800 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
       onClick={() => toggleTokenStatsModal()}
     >
-      <div className="grid items-center grid-flow-col px-1.5 py-1 space-x-2 text-sm rounded-lg pointer-events-auto auto-cols-max bg-dark-1000 text-secondary">
+       {/* <div className="grid items-center grid-flow-col px-1.5 py-1 space-x-2 text-sm rounded-lg pointer-events-auto auto-cols-max bg-dark-1000 text-secondary">
         <Image
           src="/images/tokens/wLUM.png"
           alt="WLUM"
@@ -41,8 +42,9 @@ function LuxorStats(): JSX.Element | null {
           <HideOnMobile>
           <div className="text-primary">{ formatNumber(wLumPrice, true, true) }</div>
           </HideOnMobile>
-      </div>
-      <div className="grid items-center grid-flow-col px-1.5 py-1 space-x-2 text-sm rounded-lg pointer-events-auto auto-cols-max bg-dark-1000 text-secondary">
+      </div> */}
+      {/* <div className="grid items-center grid-flow-col px-1.5 py-1 space-x-2 text-sm rounded-lg pointer-events-auto auto-cols-max bg-dark-1000 text-secondary"> */}
+      <div className="grid items-center grid-flow-col px-1.5 py-1 space-x-2 text-sm rounded-lg pointer-events-auto auto-cols-max text-secondary">
         <Image
           src="/images/tokens/lux.png"
           alt="LUX"

@@ -3,7 +3,7 @@ import { ArrowCircleUpIcon, MenuAlt1Icon } from '@heroicons/react/outline'
 // import BarsArrowUpIcon from 'assets/svg/icons/BarsArrowUp.svg'
 // import BarsArrowDownIcon from 'assets/svg/icons/BarsArrowDown.svg'
 import { ChainId, NATIVE } from 'sdk'
-// import useMenu from 'components/Header/useMenu'
+import useMenu from 'components/Header/useMenu'
 import Web3Network from 'components/Web3Network'
 import Web3Status from 'components/Web3Status'
 // import useIsCoinbaseWallet from 'hooks/useIsCoinbaseWallet'
@@ -14,15 +14,14 @@ import { useETHBalances } from 'state/wallet/hooks'
 import React, { FC, Fragment, useCallback, useState } from 'react'
 
 import { SidebarItem } from './SidebarItem'
-// import { NavigationItem } from './NavigationItem'
-// import LuxorStats from 'components/LuxorStats'
+import { NavigationItem } from './NavigationItem'
+import LuxorStats from 'components/LuxorStats'
 import TokenStats from 'components/TokenStats'
 import More from './More'
 import useBar from './useBar'
 import { useRouter } from 'next/router'
 import { classNames } from 'functions/styling'
 import { getChainColor, getChainColorCode } from 'constants/chains'
-// import { NavigationItem } from './NavigationItem'
 // import LanguageSwitch from 'components/LanguageSwitch'
 import LanguageMenu from './useLanguages'
 import MobileBar from './MobileBar'
@@ -33,7 +32,7 @@ import MobileBar from './MobileBar'
 // const HEADER_HEIGHT=24
 
 const Mobile: FC = () => {
-  // const menu = useMenu()
+  const menu = useMenu()
   const bar = useBar()
   const router = useRouter()
   const isLuxor = router.asPath.startsWith('/luxor')
@@ -50,24 +49,19 @@ const Mobile: FC = () => {
 
   return (
     <>
-      <header className="w-full flex mt-3 items-center justify-between min-h-[36px] h-[36px] px-4">
-        <div className="flex justify-between flex-grow">
-          {/* {[1, 250, 43114].includes(chainId) &&
-            <div className=" rounded-full">
-              <MenuAlt1Icon width={24} className={classNames(isLuxor ? "hover:text-yellow" : `hover:text-[${getChainColor(chainId)}]`, `text-[${getChainColor(chainId)}]`, "cursor-pointer hover:text-white")} onClick={() => setOpen(true)} />
-            </div>
-          } */}
-          <div className={`p-1 bg-${getChainColorCode(chainId)} rounded-full hover:bg-dark-800`}>
+      <header className="w-full flex mt-4 items-center justify-between min-h-[36px] h-[36px] px-2">
+      <div className="flex justify-between mt-2 flex-grow">
+          <div className={`p-2 bg-${getChainColorCode(chainId)} rounded-xl hover:border-${getChainColorCode(chainId)} border`}>
             {/* <div className="flex p-2 justify-between"> */}
-            <MenuAlt1Icon width={24} className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `bg-${getChainColorCode(chainId)} cursor-pointer rounded rounded-xl` : `hidden`)} onClick={() => setOpen(true)} />
+            <MenuAlt1Icon width={24} height={24} className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `bg-${getChainColorCode(chainId)} cursor-pointer rounded rounded-xl` : `hidden`)} onClick={() => setOpen(true)} />
           </div>
 
-          {/* <div
-            className="flex gap-2 mx-2 sm:px-1 sm:gap-4 md:gap-18 justify-between items-center">
+          <div
+            className="flex rounded rounded-md gap-1 px-4 justify-center items-center">
             {menu.map((node) => {
               return <NavigationItem node={node} key={node.key} />
             })}
-          </div> */}
+          </div>
         </div>
         <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 z-20 overflow-hidden" onClose={setOpen} unmount={false}>
@@ -101,6 +95,11 @@ const Mobile: FC = () => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
                       </nav>
+                      {/* <div className="flex w-full p-2 mr-2 justify-center inline-block bg-dark-1000">
+                        {[ChainId.FANTOM].includes(chainId) &&
+                          <LuxorStats />
+                        }
+                      </div> */}
                       <div className="flex w-full p-2 mr-2 justify-center inline-block bg-dark-1000">
                         {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                           <TokenStats />
