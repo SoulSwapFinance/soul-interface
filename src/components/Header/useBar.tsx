@@ -186,7 +186,7 @@ const useMenu: UseBar = () => {
     //   mainItems.push(farmItems)
     // }
 
-if (featureEnabled(Feature.LUXOR, chainId)) {
+    if (featureEnabled(Feature.LUXOR, chainId)) {
       // Luxor
       mainItems.push({
         key: 'luxor',
@@ -195,8 +195,7 @@ if (featureEnabled(Feature.LUXOR, chainId)) {
         icon: <SunIcon width={20} className={classNames("rotate-90", `text-[${getChainColor(chainId)}]`)} />,
       })
     }
-
-
+    
     if (featureEnabled(Feature.BONDS, chainId)) {
       // Bond
       mainItems.push({
