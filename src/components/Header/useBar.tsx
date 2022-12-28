@@ -185,44 +185,8 @@ const useMenu: UseBar = () => {
     //   }
     //   mainItems.push(farmItems)
     // }
-// forced false
-    if (featureEnabled(Feature.LUXOR, 43114)) {
-      const luxorItems = {
-        key: 'luxor',
-        title: i18n._(t`Luxor`),
-        icon: <SunIcon width={20} className={classNames("rotate-90", `text-[${getChainColor(chainId)}]`)} />,
-        items: [
-          {
-            key: 'luxor-dashboard',
-            title: i18n._(t`Overview`),
-            link: '/luxor/dashboard',
-          },
-          {
-            key: 'luxor-bonds',
-            title: i18n._(t`Bonds`),
-            link: '/luxor/bonds',
-          },
-          {
-            key: 'luxor-staking',
-            title: i18n._(t`Stake`),
-            link: '/luxor/stake',
-          },
-          {
-            key: 'luxor-wrap',
-            title: i18n._(t`Wrap`),
-            link: '/luxor/wrap',
-          },
-          // {
-          //   key: 'luxor-docs',
-          //   title: i18n._(t`Tutorial`),
-          //   link: 'https://docs.luxor.money',
-          // },
-        ],
-      }
-      mainItems.push(luxorItems)
-    }
 
-if (featureEnabled(Feature.BONDS, chainId)) {
+    if (featureEnabled(Feature.BONDS, chainId)) {
       // Bond
       mainItems.push({
         key: 'bond',
