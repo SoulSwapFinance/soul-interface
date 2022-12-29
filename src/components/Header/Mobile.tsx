@@ -40,8 +40,8 @@ const Mobile: FC = () => {
 
   return (
     <>
-         <header className="w-full flex mt-3 items-center justify-between min-h-[36px] h-[36px] px-4">
-      <div className="flex justify-between flex-grow">
+      <header className="w-full flex mt-3 items-center justify-between min-h-[36px] h-[36px] px-4">
+        <div className="flex justify-between flex-grow">
       <div className={`p-1 bg-${getChainColorCode(chainId)} rounded-full hover:bg-dark-800`}>
             {/* <div className="flex p-2 justify-between"> */}
             <Bars3Icon width={24} className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `bg-${getChainColorCode(chainId)} cursor-pointer rounded rounded-xl` : `hidden`)} onClick={() => setOpen(true)} />
@@ -93,13 +93,10 @@ const Mobile: FC = () => {
                   leaveTo="translate-x-[-100%]"
                   unmount={false}
                 >
-                  <div className="w-sm max-w-sm">
+                  <div className="max-w-sm">
                     <div className={classNames("flex flex-col h-full py-1 overflow-x-hidden overflow-y-scroll shadow-xl",
                       "bg-dark-1100")}>
-                      <nav
-                        className={classNames("flex-1 py-12 bg-dark-1000 pl-6")} aria-label="Sidebar"
-                      /* // className="flex-1 bg-dark-1000 pl-6" aria-label="Sidebar" */
-                      >
+                      <nav className="flex-1 bg-dark-1000 pl-4" aria-label="Sidebar">
                         {bar.map((node) => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
