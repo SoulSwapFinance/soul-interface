@@ -76,7 +76,7 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
               'font-bold py-5 px-2 rounded flex gap-3 items-center')}
             >
               {node.icon}
-              {isDesktop && node.title}
+              {node.title}
               {/* <ChevronDownIcon strokeWidth={5} width={12} className={`text-[${getChainColor(chainId)}]`} /> */}
             </Typography>
           </Popover.Button>

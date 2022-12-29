@@ -12,15 +12,15 @@ import { getChainColor } from 'constants/chains'
 
 export interface BarItemLeaf {
   key: string
-  title: string
   link: string
+  title?: string
   icon?: ReactNode
 }
 
 export interface BarItemNode {
   key: string
-  title: string
   items: BarItemLeaf[]
+  title: string
   icon: ReactNode
 }
 
@@ -32,7 +32,7 @@ const useMenu: UseBar = () => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const router = useRouter()
-  const isLuxor = router.asPath.startsWith('/luxor')
+  // const isLuxor = router.asPath.startsWith('/luxor')
 
   return useMemo(() => {
     if (!chainId) return []
@@ -40,8 +40,8 @@ const useMenu: UseBar = () => {
     // By default show just a swap button
     let tradeMenu: BarItem = {
       key: 'swap',
-      title: i18n._(t`Swap`),
       link: '/swap',
+      title: i18n._(t`Swap`),
       icon: <SwitchVerticalIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     }
 
@@ -132,9 +132,9 @@ const useMenu: UseBar = () => {
     // Pools
     mainItems.push({
       key: 'pools',
-      title: i18n._(t`Pool`),
       link: '/pool',
-      icon: <WalletIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
+      title: i18n._(t`Pool`),
+      icon: <PoolIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     })
 
     // if (poolMenu.length > 0)
@@ -186,23 +186,23 @@ const useMenu: UseBar = () => {
     //   mainItems.push(farmItems)
     // }
 
-if (featureEnabled(Feature.LUXOR, chainId)) {
-      // Luxor
+
+    if (featureEnabled(Feature.LUXOR, chainId)) {
+      // Bond
       mainItems.push({
         key: 'luxor',
-        title: i18n._(t`Luxor`),
         link: '/luxor/dashboard',
-        icon: <SunIcon width={20} className={classNames("rotate-90", `text-[${getChainColor(chainId)}]`)} />,
+        title: i18n._(t`Luxor`),
+        icon: <SunIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
       })
     }
-
 
     if (featureEnabled(Feature.BONDS, chainId)) {
       // Bond
       mainItems.push({
         key: 'bond',
-        title: i18n._(t`Bond`),
         link: '/bonds',
+        title: i18n._(t`Bond`),
         icon: <CurrencyDollarIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
       })
     }
@@ -211,8 +211,8 @@ if (featureEnabled(Feature.LUXOR, chainId)) {
       // Lend
       mainItems.push({
         key: 'lend',
-        title: i18n._(t`Lend`),
         link: '/lend',
+        title: i18n._(t`Lend`),
         icon: <SwitchVerticalIcon width={20} className={classNames("rotate-90", `text-[${getChainColor(chainId)}]`)} />,
       })
     }
@@ -335,55 +335,55 @@ if (featureEnabled(Feature.LUXOR, chainId)) {
     // Explore
     mainItems.push({
       key: 'explore',
-      title: i18n._(t`Explore`),
       link: '/explore',
+      title: i18n._(t`Explore`),
       icon: <GlobeIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     })
 
     // Links
     mainItems.push({
       key: 'links',
-      title: i18n._(t`Links`),
       link: 'https://links.soul.sh',
+      title: i18n._(t`Links`),
       icon: <LinkIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     })
 
     // // Explore
     // mainItems.push({
     //   key: 'explore',
-    //   title: i18n._(t`Explore`),
     //   link: '/explore',
+    //   title: i18n._(t`Explore`),
     //   icon: <GlobeIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     // })
 
     // Dashboard
     mainItems.push({
       key: 'dashboard',
-      title: i18n._(t`Economy`),
       link: '/dashboard',
+      title: i18n._(t`Economy`),
       icon: <TokenomicsIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     })
 
     // Balances
     mainItems.push({
       key: 'balances',
-      title: i18n._(t`Account`),
       link: '/balances',
+      title: i18n._(t`Account`),
       icon: <WalletIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     })
     // Documentation
     mainItems.push({
       key: 'docs',
-      title: i18n._(t`Tutorials`),
       link: 'https://docs.soulswap.finance',
+      title: i18n._(t`Tutorials`),
       icon: <DocumentIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     })
 
     // Twitter
     mainItems.push({
       key: 'twitter',
-      title: i18n._(t`Twitter`),
       link: 'https://twitter.com/SoulSwapFinance',
+      title: i18n._(t`Twitter`),
       icon: <TwitterIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     })
 

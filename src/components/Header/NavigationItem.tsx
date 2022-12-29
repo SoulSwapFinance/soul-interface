@@ -23,7 +23,7 @@ interface NavigationItem {
 
 export const NavigationItem: FC<NavigationItem> = ({ node }) => {
   const router = useRouter()
-  const isLuxor = router.asPath.startsWith('/luxor')
+  // const isLuxor = router.asPath.startsWith('/luxor')
   const buttonRef = useRef<HTMLButtonElement>(null)
   const isDesktop = useDesktopHeaderMediaQuery()
   const touchDevice = useTouchDeviceMediaQuery()
@@ -46,10 +46,10 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
         variant="sm"
         className={classNames(
           router.asPath === link ? `bg-${getChainColorCode(chainId)}` : '',
-          isLuxor ? 'hover:text-yellow' : `hover:text-[${getChainColor(chainId)}]`, 'font-bold py-3 px-2 rounded flex gap-3'
+          `hover:text-[${getChainColor(chainId)}]`, 'font-bold py-3 px-2 rounded flex gap-3'
         )}
       >
-        {!isDesktop && node.icon}
+        {/* {!isDesktop && node.icon} */}
         {isDesktop && node.title}
       </Typography>
     )
@@ -68,7 +68,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
             <Typography
               weight={700}
               variant="sm"
-              className={classNames(open && !isLuxor && `text-[${getChainColor(chainId)}]`, open && isLuxor && 'text-yellow', 'font-bold py-2 px-2 rounded flex gap-3 items-center')}
+              className={classNames(open && `text-[${getChainColor(chainId)}]`, 'font-bold py-2 px-2 rounded flex gap-3 items-center')}
             >
               {!isDesktop && node.icon}
               {node.title}
@@ -88,7 +88,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
               <Popover.Panel className="z-10 w-full justify-center absolute w-24 sm:w-32 translate-y-[-10px] sm:translate-x-[-10px] translate-x-[-2px]">
                 <div
                   className={classNames(
-                    'shadow-md shadow-black/40 border', isLuxor ? 'border-yellow' : `border-${getChainColorCode(chainId)}`, 'rounded overflow-hidden',
+                    'shadow-md shadow-black/40 border', `border-${getChainColorCode(chainId)}`, 'rounded overflow-hidden',
                     !touchDevice
                       ? "backdrop-blur-fallback before:z-[-1] before:rounded before:absolute before:w-full before:h-full before:content-[''] before:backdrop-blur-[20px] bg-dark-900 bg-opacity-[0.02]"
                       : 'bg-dark-800 inset-0'

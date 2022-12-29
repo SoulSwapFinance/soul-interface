@@ -1,31 +1,37 @@
 import { t } from "@lingui/macro";
 
 const Languages: {
-    [x: string]: { flag: string; language: string; dialect?: string }
+    [x: string]: { flag: string; language: string; abbr: string, dialect?: string }
   } = {
     en: {
       flag: '/images/flags/us-flag.png',
       language: t`English`,
+      abbr: t`EN`,
     },
     de: {
       flag: '/images/flags/de-flag.png',
       language: t`German`,
+      abbr: t`DE`
     },
     es: {
       flag: '/images/flags/es-flag.png',
       language: t`Spanish`,
+      abbr: t`ES`
     },
     fr: {
       flag: '/images/flags/fr-flag.png',
       language: t`French`,
+      abbr: t`FR`
     },
     it: {
       flag: '/images/flags/it-flag.png',
       language: t`Italian`,
+      abbr: t`IT`
     },
     tr: {
       flag: '/images/flags/tr-flag.png',
       language: t`Turkish`,
+      abbr: t`TR`
     },
     // 'zh-CN': {
     //   flag: '/images/flags/ch-flag.png',
