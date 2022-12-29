@@ -40,8 +40,8 @@ const Mobile: FC = () => {
 
   return (
     <>
-      <header className="w-full flex items-center text-white bg-dark-1000 justify-center min-h-[48px] h-[48px] px-4">
-        <div className="flex ml-2 justify-between flex-grow">
+         <header className="w-full flex mt-3 items-center justify-between min-h-[36px] h-[36px] px-4">
+      <div className="flex justify-between flex-grow">
 
           {/* <div className="flex w-6 mr-4 items-center">
                   <NavLink href="/landing">
