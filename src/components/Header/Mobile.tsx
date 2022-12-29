@@ -1,76 +1,77 @@
+
 import { Dialog, Transition } from '@headlessui/react'
-// import { Bars3Icon } from '@heroicons/react/24/outline'
+import { Bars3Icon } from '@heroicons/react/24/outline'
 // import BarsArrowUpIcon from 'assets/svg/icons/BarsArrowUp.svg'
 // import BarsArrowDownIcon from 'assets/svg/icons/BarsArrowDown.svg'
-
 import { ChainId, NATIVE } from 'sdk'
+// import useMenu from 'components/Header/useMenu'
+import Web3Network from 'components/Web3Network'
 import Web3Status from 'components/Web3Status'
+// import useIsCoinbaseWallet from 'hooks/useIsCoinbaseWallet'
 import { useActiveWeb3React } from 'services/web3'
 import { useETHBalances } from 'state/wallet/hooks'
+// import Image from 'next/image'
+// import Link from 'next/link'
 import React, { FC, Fragment, useCallback, useState } from 'react'
-import Image from 'next/image'
-// import { NavigationItem } from './NavigationItem'
+
 import { SidebarItem } from './SidebarItem'
+// import { NavigationItem } from './NavigationItem'
+// import LuxorStats from 'components/LuxorStats'
 import TokenStats from 'components/TokenStats'
-// import More from './More'
-// import Container from 'components/Container'
-import useMenu from './useMenu'
+import More from './More'
 import useBar from './useBar'
 import { useRouter } from 'next/router'
-import { classNames } from 'functions'
-import Web3Network from 'components/Web3Network'
-import LanguageMenu from './useLanguages'
+import { classNames } from 'functions/styling'
 import { getChainColor, getChainColorCode } from 'constants/chains'
+// import { NavigationItem } from './NavigationItem'
+// import LanguageSwitch from 'components/LanguageSwitch'
+import LanguageMenu from './useLanguages'
 import MobileBar from './MobileBar'
-
-const HEADER_HEIGHT = 64
+// import { Button } from 'components/Button'
+// import { SubmitButton } from 'features/summoner/Styles'
+// import Typography from 'components/Typography'
+// import { ArrowUpIcon } from '@heroicons/react/solid'
+// const HEADER_HEIGHT=24
 
 const Mobile: FC = () => {
-  const menu = useMenu()
+  // const menu = useMenu()
   const bar = useBar()
-  // const mobile = useMobileMenu()
-  const { account, chainId, library, connector } = useActiveWeb3React()
+  const router = useRouter()
+  const isLuxor = router.asPath.startsWith('/luxor')
+
+  const { account, chainId, library } = useActiveWeb3React()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const [open, setOpen] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
-  const router = useRouter()
-  // const handleShowMenu = useCallback(() => {
-  //   setSho
-  // }, [setShowMenu])
+  // const isCoinbaseWallet = useIsCoinbaseWallet()
+
+  const handleShowMenu = useCallback(() => {
+    showMenu ? setShowMenu(false) : setShowMenu(true)
+  }, [setShowMenu])
 
   return (
     <>
-      <header className="w-full flex items-center text-white bg-dark-1000 justify-center min-h-[48px] h-[48px] px-4">
-        <div className="flex ml-2 justify-between flex-grow">
-
-          {/* <div className="flex w-6 mr-4 items-center">
-                  <NavLink href="/landing">
-                    <Image src="/logo.png" alt="Soul" width="48" height="48" />
-                  </NavLink>
-                </div> */}
-        </div>
-        <nav
-          className={classNames(
-            `backdrop-blur-fallback w-full \
-              h-full before:backdrop-saturate-[1.2] \
-              before:backdrop-blur-[20px] before:z-[-1] \
-              before:absolute before:w-full before:h-full mx-4`
-          )
-          }>
-          {/* <Container maxWidth="3xl" className="rounded rounded-4xl text-center items-center justify-center">
-            <div
-              className="flex rounded rounded-xl gap-1 px-1 sm:gap-4 md:gap-18 justify-center items-center">
-              {menu.map((node) => {
-                return <NavigationItem node={node} key={node.key} />
-              })}
+      <header className="w-full flex mt-3 items-center justify-between min-h-[36px] h-[36px] px-4">
+        <div className="flex justify-between flex-grow">
+          {/* {[1, 250, 43114].includes(chainId) &&
+            <div className=" rounded-full">
+              <Bars3Icon width={24} className={classNames(isLuxor ? "hover:text-yellow" : `hover:text-[${getChainColor(chainId)}]`, `text-[${getChainColor(chainId)}]`, "cursor-pointer hover:text-white")} onClick={() => setOpen(true)} />
             </div>
-          </Container> */}
-        </nav>
+          } */}
+          <div className={`p-1 bg-${getChainColorCode(chainId)} rounded-full hover:bg-dark-800`}>
+            {/* <div className="flex p-2 justify-between"> */}
+            <Bars3Icon width={24} className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `bg-${getChainColorCode(chainId)} cursor-pointer rounded rounded-xl` : `hidden`)} onClick={() => setOpen(true)} />
+          </div>
 
-        <Transition.Root
-          show={open}
-          as={Fragment}>
-          <Dialog as="div" className={classNames("fixed inset-0 overflow-hidden z-20")} onClose={setOpen}>
+          {/* <div
+            className="flex gap-2 mx-2 sm:px-1 sm:gap-4 md:gap-18 justify-between items-center">
+            {menu.map((node) => {
+              return <NavigationItem node={node} key={node.key} />
+            })}
+          </div> */}
+        </div>
+        <Transition.Root show={open} as={Fragment}>
+          <Dialog as="div" className="fixed inset-0 z-20 overflow-hidden" onClose={setOpen} unmount={false}>
             <div className="absolute inset-0 overflow-hidden">
               <Transition.Child
                 as={Fragment}
@@ -83,8 +84,7 @@ const Mobile: FC = () => {
               >
                 <Dialog.Overlay className="absolute inset-0 transition-opacity bg-dark-1000 bg-opacity-80" />
               </Transition.Child>
-
-              <div className="fixed inset-y-0 left-0 pr-16 max-w-[260px] flex">
+              <div className="fixed inset-y-0 left-0 pr-8 sm:pr-10 max-w-[260px] flex">
                 <Transition.Child
                   as={Fragment}
                   enter="transform transition ease-in-out duration-300"
@@ -95,13 +95,9 @@ const Mobile: FC = () => {
                   leaveTo="translate-x-[-100%]"
                   unmount={false}
                 >
-                  <div className="w-sm max-w-sm">
-                    <div className={classNames("flex flex-col h-full py-1 overflow-x-hidden overflow-y-scroll shadow-xl",
-                      "bg-dark-1100")}>
-                      <nav
-                        className={classNames("flex-1 py-12 bg-dark-1000 pl-6")} aria-label="Sidebar"
-                      /* // className="flex-1 bg-dark-1000 pl-6" aria-label="Sidebar" */
-                      >
+                  <div className="max-w-sm">
+                    <div className={classNames("flex flex-col h-full py-2 overflow-x-hidden overflow-y-scroll shadow-xl", "bg-dark-1100")}>
+                      <nav className="flex-1 bg-dark-1000 pl-4" aria-label="Sidebar">
                         {bar.map((node) => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
@@ -110,9 +106,9 @@ const Mobile: FC = () => {
                         {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                           <TokenStats />
                         }
-                      <div className="flex items-center justify-start">
-                        <LanguageMenu />
-                      </div>
+                        <div className="flex items-center justify-start">
+                          <LanguageMenu />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -136,6 +132,7 @@ const Mobile: FC = () => {
     </>
   )
 }
-<div style={{ height: HEADER_HEIGHT, minHeight: HEADER_HEIGHT }} />
+{/* <div style={{ height: HEADER_HEIGHT, minHeight: HEADER_HEIGHT }} /> */ }
+
 
 export default Mobile
