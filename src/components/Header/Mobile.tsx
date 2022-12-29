@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
-// import { Bars3Icon } from '@heroicons/react/24/outline'
+import { Bars3Icon } from '@heroicons/react/24/outline'
 // import BarsArrowUpIcon from 'assets/svg/icons/BarsArrowUp.svg'
 // import BarsArrowDownIcon from 'assets/svg/icons/BarsArrowDown.svg'
 
@@ -42,12 +42,10 @@ const Mobile: FC = () => {
     <>
          <header className="w-full flex mt-3 items-center justify-between min-h-[36px] h-[36px] px-4">
       <div className="flex justify-between flex-grow">
-
-          {/* <div className="flex w-6 mr-4 items-center">
-                  <NavLink href="/landing">
-                    <Image src="/logo.png" alt="Soul" width="48" height="48" />
-                  </NavLink>
-                </div> */}
+      <div className={`p-1 bg-${getChainColorCode(chainId)} rounded-full hover:bg-dark-800`}>
+            {/* <div className="flex p-2 justify-between"> */}
+            <Bars3Icon width={24} className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `bg-${getChainColorCode(chainId)} cursor-pointer rounded rounded-xl` : `hidden`)} onClick={() => setOpen(true)} />
+          </div>
         </div>
         <nav
           className={classNames(
