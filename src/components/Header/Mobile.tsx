@@ -95,7 +95,7 @@ const Mobile: FC = () => {
                   leaveTo="translate-x-[-100%]"
                   unmount={false}
                 >
-                  <div className="max-w-sm">
+                  <div className="w-screen max-w-sm">
                     <div className={classNames("flex flex-col h-full py-2 overflow-x-hidden overflow-y-scroll shadow-xl", "bg-dark-1100")}>
                       <nav className="flex-1 bg-dark-1000 pl-4" aria-label="Sidebar">
                         {bar.map((node) => {
