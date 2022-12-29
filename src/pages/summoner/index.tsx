@@ -11,7 +11,7 @@ import { useSummonerContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
 import { formatNumberScale } from 'functions'
 import { Button } from 'components/Button'
-import { XIcon } from '@heroicons/react/solid'
+import { XCircleIcon } from '@heroicons/react/24/solid'
 import { ChainId, SOUL_ADDRESS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 import { getChainColorCode } from 'constants/chains'
@@ -75,7 +75,7 @@ const Summoner = () => {
         <div className={`flex flex-row 
       text-white
       justify-end`}>
-          <XIcon
+          <XCircleIcon
             height="24px"
             id="toggle-button"
             onClick={() => openShowBalances(false)}

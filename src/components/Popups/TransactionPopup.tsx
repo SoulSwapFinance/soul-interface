@@ -1,4 +1,4 @@
-import { ExternalLinkIcon } from '@heroicons/react/outline'
+import { LinkIcon } from '@heroicons/react/24/outline'
 import { getExplorerLink } from 'functions/explorer'
 import { useActiveWeb3React } from 'services/web3'
 import React from 'react'
@@ -33,7 +33,7 @@ export default function TransactionPopup({
             href={getExplorerLink(chainId, hash, 'transaction')}
           >
             <div className="flex flex-row items-center gap-1">
-              View on Explorer <ExternalLinkIcon width={20} height={20} className={`text-${getChainColorCode(chainId)}`} />
+              View on Explorer <LinkIcon width={20} height={20} className={`text-${getChainColorCode(chainId)}`} />
             </div>
           </ExternalLink>
         )}

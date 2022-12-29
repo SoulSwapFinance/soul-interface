@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { XIcon } from '@heroicons/react/outline'
+import { XCircleIcon } from '@heroicons/react/24/outline'
 import useToggle from '../../hooks/useToggle'
 
 const FarmBanner: FC = () => {
@@ -22,7 +22,7 @@ const FarmBanner: FC = () => {
                   {/* </a> */}
                 </span>
               </p>
-              <XIcon className='h-5 w-5 text-gray-300 hover:text-white absolute right-3 top-3' onClick={toggle} />
+              <XCircleIcon className='h-5 w-5 text-gray-300 hover:text-white absolute right-3 top-3' onClick={toggle} />
             </div>
           </div>
         </div>

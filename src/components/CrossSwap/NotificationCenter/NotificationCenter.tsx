@@ -1,4 +1,4 @@
-import { BellIcon, XIcon } from '@heroicons/react/solid'
+import { BellIcon, XCircleIcon } from '@heroicons/react/24/solid'
 import { Button } from 'components/Button'
 import { Drawer } from 'components/Drawer'
 import { IconButton } from 'components/Icons/IconButton'
@@ -34,7 +34,7 @@ export const NotificationCenter: FC<Omit<ProviderProps, 'createNotification'>> =
           <div className="absolute right-4 top-4">
             <Drawer.Button>
               <IconButton as="div">
-                <XIcon width={20} height={20} />
+                <XCircleIcon width={20} height={20} />
               </IconButton>
             </Drawer.Button>
           </div>

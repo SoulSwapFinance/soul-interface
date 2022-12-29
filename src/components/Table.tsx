@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/outline'
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/router'
 import React, { ReactNode, useState } from 'react'
 // @ts-ignore TYPE NEEDS FIXING

@@ -3572,10 +3572,15 @@
   resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.4.0.tgz#c6d424d8ab10ac925e4423d7f3cbab02c30d736a"
   integrity sha512-C+FmBVF6YGvqcEI5fa2dfVbEaXr2RGR6Kw1E5HXIISIZEfsrH/yuCgsjWw5nlRF9vbCxmQ/EKs64GAdKeb8gCw==
 
-"@heroicons/react@^1.0.4", "@heroicons/react@^1.0.6":
+"@heroicons/react@^1.0.6":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-1.0.6.tgz#35dd26987228b39ef2316db3b1245c42eb19e324"
   integrity sha512-JJCXydOFWMDpCP4q13iEplA503MQO3xLoZiKum+955ZCtHINWnx26CUxVxxFQu/uLb4LW3ge15ZpzIkXKkJ8oQ==
+
+"@heroicons/react@^2.0.13":
+  version "2.0.13"
+  resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-2.0.13.tgz#9b1cc54ff77d6625c9565efdce0054a4bcd9074c"
+  integrity sha512-iSN5XwmagrnirWlYEWNPdCDj9aRYVD/lnK3JlsC9/+fqGF80k8C7rl+1HCvBX0dBoagKqOFBs6fMhJJ1hOg1EQ==
 
 "@humanwhocodes/config-array@^0.5.0":
   version "0.5.0"
@@ -25129,10 +25134,10 @@ soulswap-currency@^0.0.1, "soulswap-currency@workspace:*":
     soulswap-math "workspace:*"
     tiny-invariant "^1.2.0"
 
-soulswap-default-token-list@^5.0.5:
-  version "5.0.8"
-  resolved "https://registry.yarnpkg.com/soulswap-default-token-list/-/soulswap-default-token-list-5.0.8.tgz#c620c55c6d8466f84f76bd5976fc2106f21cee89"
-  integrity sha512-hrryDVYSVOXfKR+gQdKRZsuz5oP6t8byUx4ye+6sGr3SvUIJcbOJ+o9QMciXM0eQbqabwbWlqXOZ/niVpcOuCw==
+soulswap-default-token-list@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/soulswap-default-token-list/-/soulswap-default-token-list-5.1.0.tgz#246a8e3ba5514171c6f50aeccd7cdf0e45be847b"
+  integrity sha512-qmc6D3rwefYEslVnDOeUHtEoWppKahf2XFpW/gNkFW5K7ta3RHh5JSXIX12DYKGkU6gkP1XyQQi+Hw8HtTCNNQ==
 
 soulswap-format@^0.0.1:
   version "0.0.1"

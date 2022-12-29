@@ -1,4 +1,4 @@
-import { CheckCircleIcon, ExclamationIcon, XCircleIcon } from '@heroicons/react/outline'
+import { CheckCircleIcon, ExclamationTriangleIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import ExternalLink from 'components/ExternalLink'
 import Loader from 'components/Loader'
 import Typography from 'components/Typography'
@@ -34,7 +34,7 @@ const Transaction: FC<{ hash: string }> = ({ hash }) => {
           ) : cancelled ? (
             <XCircleIcon width={16} height={16} />
           ) : (
-            <ExclamationIcon width={16} height={16} />
+            <ExclamationTriangleIcon width={16} height={16} />
           )}
         </div>
         <Typography variant="xs" weight={700} className="flex items-center hover:underline py-0.5">

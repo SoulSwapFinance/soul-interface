@@ -18,7 +18,7 @@ import Typography from '../Typography'
 import Copy from './Copy'
 import Transaction from './Transaction'
 import { getChainColor, getChainColorCode } from 'constants/chains'
-import { GlobeIcon } from '@heroicons/react/outline'
+import { GlobeIcon } from '@heroicons/react/24/outline'
 
 interface AccountDetailsProps {
   toggleWalletModal: () => void

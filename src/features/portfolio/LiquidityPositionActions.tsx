@@ -1,4 +1,4 @@
-import { SwitchHorizontalIcon } from '@heroicons/react/solid'
+import { ArrowsRightLeftIcon } from '@heroicons/react/24/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { CoffinboxIcon } from 'components/Icon'
@@ -31,7 +31,7 @@ const WalletActions: FC = () => {
         <Typography variant="lg" weight={700} className="text-high-emphesis">
           {i18n._(t`Available Actions`)}
         </Typography>
-        <ActionItem svg={<SwitchHorizontalIcon width={24} />} label={i18n._(t`Swap`)} onClick={swapActionHandler} />
+        <ActionItem svg={<ArrowsRightLeftIcon width={24} />} label={i18n._(t`Swap`)} onClick={swapActionHandler} />
         <ActionItem
           svg={<CoffinboxIcon width={20} height={20} />}
           label={i18n._(t`Deposit to CoffinBox`)}

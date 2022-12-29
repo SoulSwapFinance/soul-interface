@@ -10,7 +10,7 @@ import SDK, {
   UserRejectError
 } from "rubic-sdk";
 import { sleep } from "utils/sleep";
-import { ArrowDownIcon, ArrowRightIcon } from '@heroicons/react/solid'
+import { ArrowDownIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
 import { BigNumber as EthersBigNumber, ethers } from "ethers";
 import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, POLYGON, MOONRIVER, Token } from "features/cross/chains";
 import { ERC20_ABI } from "constants/abis/erc20";

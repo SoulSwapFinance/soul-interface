@@ -24,7 +24,7 @@ import AssetInput from 'components/AssetInput'
 import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import { getChainColor } from 'constants/chains'
 import { ExternalLink } from 'components/ReusableStyles'
-import { CollectionIcon, CurrencyDollarIcon, DatabaseIcon } from '@heroicons/react/outline'
+import { CircleStackIcon, CurrencyDollarIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import { t } from '@lingui/macro'
 import { i18n } from '@lingui/core'
@@ -574,7 +574,7 @@ export const ActiveRow = ({ pid, farm }) => {
                                                     {`/exchange/add/${NATIVE[chainId].symbol}/${rewardAddress}`}
                                                 >
                                                     <div className="flex text-lg gap-2">
-                                                        <CollectionIcon width={26} className={classNames(`text-white`)} />
+                                                        <PlusCircleIcon width={26} className={classNames(`text-white`)} />
                                                         {/* {symbol} */}
                                                         CREATE {symbol} LP
                                                     </div>
@@ -598,7 +598,7 @@ export const ActiveRow = ({ pid, farm }) => {
                                             }
                                         >
                                             <div className="flex text-lg gap-2">
-                                                <DatabaseIcon width={26} className={classNames(`text-white`)} />
+                                                <CircleStackIcon width={26} className={classNames(`text-white`)} />
                                                 {i18n._(t`HARVEST SOUL`)}
                                             </div>
                                         </SubmitButton>

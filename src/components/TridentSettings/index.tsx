@@ -1,4 +1,4 @@
-import { CheckIcon, CogIcon } from '@heroicons/react/outline'
+import { CheckIcon, CogIcon } from '@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Percent } from 'sdk'

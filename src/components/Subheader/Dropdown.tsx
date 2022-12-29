@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { MenuAlt1Icon } from '@heroicons/react/outline'
+import { Bars3Icon } from '@heroicons/react/24/outline'
 import { ChainId, NATIVE } from 'sdk'
 import useDropdown from 'components/Subheader/useDropdown'
 import Web3Network from 'components/Web3Network'
@@ -35,7 +35,7 @@ const Mobile: FC = () => {
         <div className="flex justify-between flex-grow">
           {/* { [1, 250, 43114].includes(chainId) &&
             <div className="mt-5 rounded-full">
-            <MenuAlt1Icon width={24} className={classNames(isLuxor ? "hover:text-yellow" : `hover:text-[${getChainColor(chainId)}]`, `text-[${getChainColor(chainId)}]`, "cursor-pointer hover:text-white")} 
+            <Bars3Icon width={24} className={classNames(isLuxor ? "hover:text-yellow" : `hover:text-[${getChainColor(chainId)}]`, `text-[${getChainColor(chainId)}]`, "cursor-pointer hover:text-white")} 
               onClick={() => setOpen(true)} />
           </div>
           } */}

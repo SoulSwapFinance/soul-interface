@@ -1,4 +1,4 @@
-import { SwitchHorizontalIcon, TrendingUpIcon } from '@heroicons/react/solid'
+import { ArrowsRightLeftIcon, ArrowTrendingUpIcon } from '@heroicons/react/24/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { NATIVE } from 'sdk'
@@ -40,13 +40,13 @@ const ActionView: FC<ActionViewProps> = ({ onClose }) => {
     <div className="flex flex-col gap-4">
       <HeadlessUiModal.Header header={i18n._(t`Available Actions`)} onClose={onClose} />
       <ActionItem
-        svg={<SwitchHorizontalIcon width={24} />}
+        svg={<ArrowsRightLeftIcon width={24} />}
         label={i18n._(t`Swap ${currency?.isNative ? NATIVE[chainId].symbol : currency?.symbol}`)}
         onClick={swapActionHandler}
       />
       {featureEnabled(Feature.ANALYTICS, chainId) && (
         <ActionItem
-        svg={<TrendingUpIcon width={24} />}
+        svg={<ArrowTrendingUpIcon width={24} />}
         label={i18n._(t`View Analytics`)}
         onClick={analyticsActionHandler}
       />

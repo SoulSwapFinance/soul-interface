@@ -1,4 +1,4 @@
-import { QuestionMarkCircleIcon } from '@heroicons/react/solid'
+import { QuestionMarkCircleIcon } from '@heroicons/react/24/solid'
 import chains from 'soulswap-chain'
 import { ChainId } from 'sdk'
 

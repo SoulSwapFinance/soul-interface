@@ -1,4 +1,4 @@
-import { ArrowNarrowLeftIcon, ArrowNarrowRightIcon, DotsHorizontalIcon } from '@heroicons/react/outline'
+import { ArrowLongLeftIcon, ArrowLongRightIcon, EllipsisHorizontalIcon } from '@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { classNames } from 'functions'
@@ -98,13 +98,13 @@ const Pagination: FC<PaginationProps> = ({
     if (page === LEFT_PAGE)
       acc.push(
         <div className="flex justify-center items-center w-10 h-10" key={index}>
-          <DotsHorizontalIcon width={12} className="text-low-emphesis w" />
+          <EllipsisHorizontalIcon width={12} className="text-low-emphesis w" />
         </div>
       )
     else if (page === RIGHT_PAGE)
       acc.push(
         <div className="flex justify-center items-center w-10 h-10" key={index}>
-          <DotsHorizontalIcon width={12} className="text-low-emphesis" />
+          <EllipsisHorizontalIcon width={12} className="text-low-emphesis" />
         </div>
       )
     else
@@ -137,7 +137,7 @@ const Pagination: FC<PaginationProps> = ({
             )}
           >
             <span className="text-pink">
-              <ArrowNarrowLeftIcon className="mr-3 h-5 w-5" aria-hidden="true" />
+              <ArrowLongLeftIcon className="mr-3 h-5 w-5" aria-hidden="true" />
             </span>
             {i18n._(t`Previous`)}
           </button>
@@ -154,7 +154,7 @@ const Pagination: FC<PaginationProps> = ({
           >
             {i18n._(t`Next`)}
             <span className="text-pink-red">
-              <ArrowNarrowRightIcon className="ml-3 h-5 w-5" aria-hidden="true" />
+              <ArrowLongRightIcon className="ml-3 h-5 w-5" aria-hidden="true" />
             </span>
           </button>
         )}

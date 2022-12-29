@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { XIcon } from '@heroicons/react/outline'
+import { XCircleIcon } from '@heroicons/react/24/outline'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import Link from 'next/link'
@@ -135,7 +135,7 @@ export const BetaFeature: FC = () => (
            <span className="sr-only">Dismiss</span> 
            */}
 
-        {/* <XIcon className="w-6 h-6 text-white" aria-hidden="true" /> */}
+        {/* <XCircleIcon className="w-6 h-6 text-white" aria-hidden="true" /> */}
         {/* </button> */}
       </div>
     </div>

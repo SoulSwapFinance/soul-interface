@@ -1,7 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { MenuAlt1Icon } from '@heroicons/react/outline'
-import BarsArrowUpIcon from 'assets/svg/icons/BarsArrowUp.svg'
-import BarsArrowDownIcon from 'assets/svg/icons/BarsArrowDown.svg'
+// import { Bars3Icon } from '@heroicons/react/24/outline'
+// import BarsArrowUpIcon from 'assets/svg/icons/BarsArrowUp.svg'
+// import BarsArrowDownIcon from 'assets/svg/icons/BarsArrowDown.svg'
 
 import { ChainId, NATIVE } from 'sdk'
 import Web3Status from 'components/Web3Status'
@@ -9,11 +9,11 @@ import { useActiveWeb3React } from 'services/web3'
 import { useETHBalances } from 'state/wallet/hooks'
 import React, { FC, Fragment, useCallback, useState } from 'react'
 import Image from 'next/image'
-import { NavigationItem } from './NavigationItem'
+// import { NavigationItem } from './NavigationItem'
 import { SidebarItem } from './SidebarItem'
 import TokenStats from 'components/TokenStats'
-import More from './More'
-import Container from 'components/Container'
+// import More from './More'
+// import Container from 'components/Container'
 import useMenu from './useMenu'
 import useBar from './useBar'
 import { useRouter } from 'next/router'
@@ -42,10 +42,7 @@ const Mobile: FC = () => {
     <>
       <header className="w-full flex items-center text-white bg-dark-1000 justify-center min-h-[48px] h-[48px] px-4">
         <div className="flex ml-2 justify-between flex-grow">
-          <div className={`p-1 bg-${getChainColorCode(chainId)} rounded-full hover:bg-dark-800`}>
-            {/* <div className="flex p-2 justify-between"> */}
-            <MenuAlt1Icon width={24} className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `bg-${getChainColorCode(chainId)} cursor-pointer rounded rounded-xl` : `hidden`)} onClick={() => setOpen(true)} />
-          </div>
+
           {/* <div className="flex w-6 mr-4 items-center">
                   <NavLink href="/landing">
                     <Image src="/logo.png" alt="Soul" width="48" height="48" />

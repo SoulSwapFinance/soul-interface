@@ -21,7 +21,7 @@ import axios from 'axios'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { FAUCET_ADDRESS } from '../../../constants'
 import NavLink from '../../../components/NavLink'
-import { ArrowLeftIcon } from '@heroicons/react/solid'
+import { ArrowLeftIcon } from '@heroicons/react/24/solid'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 
 export default function Faucet(): JSX.Element {

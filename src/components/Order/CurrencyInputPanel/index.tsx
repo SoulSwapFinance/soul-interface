@@ -32,7 +32,7 @@ import { Rate } from "state/order/actions";
 import { useCurrencyBalance } from "state/wallet/hooks";
 import { TYPE } from "theme";
 import { useWeb3 } from "services/web3/hooks/useWeb3";
-import { ArrowDownIcon } from "@heroicons/react/solid";
+import { ArrowDownIcon } from "@heroicons/react/24/solid";
 import CurrencySearchModal from "modals/SearchModal/CurrencySearchModal";
 import { useActiveWeb3React } from "services/web3";
 // import Loader from "../Loader";

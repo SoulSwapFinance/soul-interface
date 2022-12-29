@@ -1,5 +1,5 @@
 import React from 'react'
-import { Search as SearchIcon } from 'react-feather'
+import { Search as MagnifyingGlassIcon } from 'react-feather'
 import { classNames } from '../functions'
 
 export default function Search({
@@ -31,7 +31,7 @@ export default function Search({
         {...inputProps}
       />
       <div className="absolute inset-y-0 right-0 flex items-center pr-6 pointer-events-none">
-        <SearchIcon size={16} />
+        <MagnifyingGlassIcon size={16} />
       </div>
     </div>
   )

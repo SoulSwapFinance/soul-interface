@@ -1,5 +1,5 @@
 import { Listbox, Transition } from '@headlessui/react'
-import { ChevronDownIcon, ExternalLinkIcon } from '@heroicons/react/outline'
+import { ChevronDownIcon, LinkIcon } from '@heroicons/react/24/outline'
 import useScrollPosition from '@react-hook/window-scroll'
 import { useIsMounted } from 'packages/hooks'
 import React, { Fragment } from 'react'
@@ -222,7 +222,7 @@ export function Header({
                   >
                     <div className="flex items-center gap-1">
                       <span>{AppType.Legacy}</span>
-                      <ExternalLinkIcon width={14} height={14} />
+                      <LinkIcon width={14} height={14} />
                     </div>
                     <Typography variant="xs" className="text-slate-400 group-hover:text-blue-100">
                       Prefer the old app?

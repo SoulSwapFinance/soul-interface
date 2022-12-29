@@ -1,6 +1,6 @@
 import React, { Fragment, memo } from 'react'
 
-import { ChevronRightIcon } from '@heroicons/react/outline'
+import { ChevronRightIcon } from '@heroicons/react/24/outline'
 import { Currency, TradeType, Trade } from 'sdk'
 import { unwrappedToken } from 'functions/currency/wrappedCurrency'
 

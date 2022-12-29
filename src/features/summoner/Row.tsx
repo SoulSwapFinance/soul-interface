@@ -26,7 +26,7 @@ import AssetInput from 'components/AssetInput'
 import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import { getChainColor } from 'constants/chains'
 import { ExternalLink } from 'components/ReusableStyles'
-import { BriefcaseIcon, CollectionIcon, CurrencyDollarIcon, DatabaseIcon } from '@heroicons/react/outline'
+import { BriefcaseIcon, CircleStackIcon, CurrencyDollarIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 
 const HideOnSmall = styled.div`
@@ -650,7 +650,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                                     {`/exchange/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
                                                 >
                                                     <div className="flex text-lg gap-2">
-                                                        <CollectionIcon width={26} className={classNames(`text-white`)} />
+                                                        <PlusCircleIcon width={26} className={classNames(`text-white`)} />
                                                         {/* {farm.lpSymbol} */}
                                                         CREATE {farm.lpSymbol} LP
                                                     </div>
@@ -675,7 +675,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                                     {`/exchange/add/${farm.token0Address}/${farm.token1Address}`}
                                                 >
                                                     <div className="flex text-lg gap-2">
-                                                        <CollectionIcon width={26} className={classNames(`text-white`)} />
+                                                        <CircleStackIcon width={26} className={classNames(`text-white`)} />
                                                         CREATE {farm.lpSymbol} LP
                                                     </div>                                            
                                                 </TokenPairLink>
@@ -718,7 +718,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                             }
                                         >
                                             <div className="flex text-lg gap-2">
-                                                <DatabaseIcon width={26} className={classNames(`text-white`)} />
+                                                <CircleStackIcon width={26} className={classNames(`text-white`)} />
                                                 {i18n._(t`HARVEST YIELD`)}
                                             </div>
                                         </SubmitButton>

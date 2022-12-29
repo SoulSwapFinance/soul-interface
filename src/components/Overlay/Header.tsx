@@ -1,4 +1,4 @@
-import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, ChevronUpIcon, XIcon } from '@heroicons/react/outline'
+import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon, ChevronUpIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import { IconButton } from 'components/Icons/IconButton'
 import { classNames } from 'functions/styling'
 import React, { FC } from 'react'
@@ -51,7 +51,7 @@ export const Header: FC<Header> = ({ className, title, border = true, onBack, on
       {onClose ? (
         <div className="flex items-center justify-end">
           <IconButton className="flex items-center justify-end cursor-pointer" onClick={onClose}>
-            <XIcon width={24} height={24} />
+            <XCircleIcon width={24} height={24} />
           </IconButton>
         </div>
       ) : (

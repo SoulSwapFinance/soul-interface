@@ -1,6 +1,6 @@
 import React, { FC, forwardRef, Fragment, ReactNode, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
-import { ArrowRightIcon } from '@heroicons/react/solid'
+import { ArrowRightIcon } from '@heroicons/react/24/solid'
 
 import { ExtractProps } from '../../types'
 import { classNames } from 'functions'

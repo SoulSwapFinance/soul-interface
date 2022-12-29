@@ -1,4 +1,4 @@
-import { ArrowLeftIcon } from '@heroicons/react/solid'
+import { ArrowLeftIcon } from '@heroicons/react/24/solid'
 import HistoryLink from 'next/link'
 import { Percent } from '../../sdk'
 import React from 'react'

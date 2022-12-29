@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, XIcon } from '@heroicons/react/outline'
+import { ArrowLeftIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import Typography from 'components/Typography'
 import React, { FC, ReactNode } from 'react'
 
@@ -23,7 +23,7 @@ const ModalHeader: FC<ModalHeaderProps> = ({ header, subheader, onBack, onClose 
       </div>
       {onClose && (
         <div className="flex items-center justify-center w-6 h-6 cursor-pointer" onClick={onClose}>
-          <XIcon width={24} height={24} className="text-high-emphesis" />
+          <XCircleIcon width={24} height={24} className="text-high-emphesis" />
         </div>
       )}
     </div>

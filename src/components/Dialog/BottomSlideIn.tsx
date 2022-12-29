@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { XIcon } from '@heroicons/react/outline'
+import { XCircleIcon } from '@heroicons/react/24/outline'
 import { FC, Fragment, ReactNode } from 'react'
 
 import Typography from '../Typography'
@@ -52,7 +52,7 @@ const BottomSlideIn: FC<BottomSlideInProps> = ({ title, open, onClose, children,
                         ) : (
                           <button onClick={onClose}>
                             <span className="sr-only">Close Panel</span>
-                            <XIcon className="h-6 w-6 text-high-emphesis" aria-hidden="true" />
+                            <XCircleIcon className="h-6 w-6 text-high-emphesis" aria-hidden="true" />
                           </button>
                         )}
                       </div>
