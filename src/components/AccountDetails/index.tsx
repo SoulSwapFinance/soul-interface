@@ -18,7 +18,7 @@ import Typography from '../Typography'
 import Copy from './Copy'
 import Transaction from './Transaction'
 import { getChainColor, getChainColorCode } from 'constants/chains'
-import { GlobeIcon } from '@heroicons/react/24/outline'
+import { GlobeAltIcon } from '@heroicons/react/24/outline'
 
 interface AccountDetailsProps {
   toggleWalletModal: () => void
@@ -99,7 +99,7 @@ const AccountDetails: FC<AccountDetailsProps> = ({
               {chainId && account && (
                 <ExternalLink
                   color={getChainColorCode(chainId)}
-                  startIcon={<GlobeIcon width={16} />}
+                  startIcon={<GlobeAltIcon width={16} />}
                   href={chainId && getExplorerLink(chainId, ENSName || account, 'address')}
                 >
                   <Typography variant="xs" weight={700}>
