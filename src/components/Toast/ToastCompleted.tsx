@@ -1,4 +1,4 @@
-import { CheckCircleIcon } from '@heroicons/react/outline'
+import { CheckCircleIcon } from '@heroicons/react/24/outline'
 import { Chain } from 'soulswap-chain'
 import { FC } from 'react'
 

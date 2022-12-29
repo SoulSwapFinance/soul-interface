@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import React, { FC, useMemo } from 'react'

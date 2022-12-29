@@ -1,16 +1,16 @@
 import { Disclosure } from '@headlessui/react'
 import {
   ArrowRightIcon,
-  CashIcon,
+  BanknotesIcon,
   ChevronDownIcon,
-  DownloadIcon,
+  ArrowDownTrayIcon,
   FireIcon,
   LockOpenIcon,
   PlusIcon,
-  SwitchVerticalIcon,
-  UploadIcon,
-  XIcon,
-} from '@heroicons/react/solid'
+  ArrowsUpDownIcon,
+  ArrowUpTrayIcon,
+  XCircleIcon,
+} from '@heroicons/react/24/solid'
 import chains from 'soulswap-chain'
 import { ChainId } from 'sdk'
 import { Token } from 'soulswap-currency'
@@ -104,7 +104,7 @@ export const Notification: FC<{ data: string; showExtra?: boolean; hideStatus?: 
                   // size={18} 
                   />
                 ) : status === 'error' ? (
-                  <XIcon width={20} height={20} className="text-red-400" />
+                  <XCircleIcon width={20} height={20} className="text-red-400" />
                 ) : (
                   <></>
                 ))}
@@ -115,7 +115,7 @@ export const Notification: FC<{ data: string; showExtra?: boolean; hideStatus?: 
                 <Currency.Icon currency={STARGATE_TOKEN} width={20} height={20} />
               )}
               {(status === 'success' || notification.summary.info) && notification.type === 'swap' && (
-                <SwitchVerticalIcon width={20} height={20} />
+                <ArrowsUpDownIcon width={20} height={20} />
               )}
               {(status === 'success' || notification.summary.info) && notification.type === 'approval' && (
                 <LockOpenIcon width={20} height={20} />
@@ -127,13 +127,13 @@ export const Notification: FC<{ data: string; showExtra?: boolean; hideStatus?: 
                 <FireIcon width={20} height={20} />
               )}
               {(status === 'success' || notification.summary.info) && notification.type === 'enterBar' && (
-                <DownloadIcon width={20} height={20} />
+                <ArrowDownTrayIcon width={20} height={20} />
               )}
               {(status === 'success' || notification.summary.info) && notification.type === 'leaveBar' && (
-                <UploadIcon width={20} height={20} />
+                <ArrowUpTrayIcon width={20} height={20} />
               )}
               {(status === 'success' || notification.summary.info) && notification.type === 'claimRewards' && (
-                <CashIcon width={20} height={20} />
+                <BanknotesIcon width={20} height={20} />
               )}
             </div>
           </Badge>

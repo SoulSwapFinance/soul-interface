@@ -1,4 +1,4 @@
-import { XIcon } from '@heroicons/react/outline'
+import { XCircleIcon } from '@heroicons/react/24/outline'
 import { PopupContent } from 'state/application/actions'
 import { useRemovePopup } from 'state/application/hooks'
 import { useCallback, useEffect } from 'react'
@@ -66,7 +66,7 @@ export default function PopupItem({
         <div className="flex flex-row p-4">
           {popupContent}
           <div className="cursor-pointer hover:text-white">
-            <XIcon width={24} height={24} onClick={removeThisPopup} />
+            <XCircleIcon width={24} height={24} onClick={removeThisPopup} />
           </div>
         </div>
         {removeAfterMs !== null ? <AnimatedFader duration={removeAfterMs} /> : null}

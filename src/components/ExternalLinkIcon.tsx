@@ -4,7 +4,7 @@ import { ExternalLink } from 'react-feather'
 import ReactGA from 'react-ga'
 import styled from 'styled-components'
 
-export const LinkIcon = styled(ExternalLink)`
+export const ExternalLinkIcon = styled(ExternalLink)`
   height: 16px;
   width: 18px;
   margin-left: 10px;
@@ -33,7 +33,7 @@ const LinkIconWrapper = styled.a`
   }
 `
 
-export function ExternalLinkIcon({
+export function LinkIcon({
   target = '_blank',
   href,
   rel = 'noopener noreferrer',
@@ -60,7 +60,7 @@ export function ExternalLinkIcon({
   )
   return (
     <LinkIconWrapper target={target} rel={rel} href={href} onClick={handleClick} {...rest}>
-      <LinkIcon />
+      <ExternalLinkIcon />
     </LinkIconWrapper>
   )
 }

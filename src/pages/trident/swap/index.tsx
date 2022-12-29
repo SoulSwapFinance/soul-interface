@@ -1,4 +1,4 @@
-import { ArrowDownIcon } from '@heroicons/react/outline'
+import { ArrowDownIcon } from '@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { ChainId, TradeVersion } from 'sdk'

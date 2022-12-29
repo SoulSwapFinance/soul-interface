@@ -1,5 +1,5 @@
 import React, { ReactNode, useMemo } from 'react'
-import { GlobeIcon, SparklesIcon, SwitchVerticalIcon, TrendingUpIcon } from '@heroicons/react/outline'
+import { SparklesIcon, ArrowsUpDownIcon, ChartBarIcon } from'@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { NATIVE, SOUL_ADDRESS } from 'sdk'
@@ -38,7 +38,7 @@ const useMobileMenu: UseMobileMenu = () => {
       key: 'swap',
       title: i18n._(t`Exchange`),
       link: '/swap',
-      // icon: <SwitchVerticalIcon width={16} />,
+      // icon: <ArrowsUpDownIcon width={16} />,
     }
 
     // If limit orders is enabled, replace swap button with a submenu under trade
@@ -46,7 +46,7 @@ const useMobileMenu: UseMobileMenu = () => {
       tradeMenu = {
         key: 'trade',
         title: i18n._(t`Swap`),
-        // icon: <SwitchVerticalIcon width={16} />,
+        // icon: <ArrowsUpDownIcon width={16} />,
         items: [
           {
             key: 'swap',
@@ -180,7 +180,7 @@ const useMobileMenu: UseMobileMenu = () => {
       mainItems.push({
         key: 'lending',
         title: i18n._(t`Lend`),
-        // icon: <SwitchVerticalIcon width={16} className="rotate-90 filter" />,
+        // icon: <ArrowsUpDownIcon width={16} className="rotate-90 filter" />,
         items: [
           // {
           //   key: 'markets',
@@ -246,7 +246,7 @@ const useMobileMenu: UseMobileMenu = () => {
     let analyticsMenu: MenuItem = {
       key: 'analytics',
       title: i18n._(t`Data`),
-      // icon: <TrendingUpIcon width={16} />,
+      // icon: <ChartBarIcon width={16} />,
       items: [
         {
           key: 'portfolio',

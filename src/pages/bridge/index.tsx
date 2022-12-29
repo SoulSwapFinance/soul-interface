@@ -37,7 +37,7 @@ import FadeInOut from "../../components/AnimationFade"
 import { ContentBox, OverlayButton, Typo1, Typo2, Typo3 } from "components/index"
 import InputError from "components/Input/Error"
 import { useActiveWeb3React } from "services/web3"
-import { ArrowDownIcon } from "@heroicons/react/solid"
+import { ArrowDownIcon } from "@heroicons/react/24/solid"
 import Image from 'next/image'
 import Typography from "components/Typography"
 import SwapHeader from "features/swap/SwapHeader"

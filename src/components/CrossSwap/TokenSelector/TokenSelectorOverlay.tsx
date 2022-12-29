@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from 'react'
 import { AddressZero } from '@ethersproject/constants'
-import { SearchIcon } from '@heroicons/react/outline'
-import { XCircleIcon } from '@heroicons/react/solid'
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { XCircleIcon } from '@heroicons/react/24/solid'
 import chain from 'soulswap-chain'
 import { Token, Type } from 'soulswap-currency'
 import { FundSource } from 'packages/hooks'
@@ -106,7 +106,7 @@ export const TokenSelectorOverlay: FC<TokenSelectorOverlay> = ({
                       onClick={() => onInput('')}
                     />
                   ) : (
-                    <SearchIcon className="text-slate-500" strokeWidth={2} width={20} height={20} />
+                    <MagnifyingGlassIcon className="text-slate-500" strokeWidth={2} width={20} height={20} />
                   )}
                 </div>
               </div>

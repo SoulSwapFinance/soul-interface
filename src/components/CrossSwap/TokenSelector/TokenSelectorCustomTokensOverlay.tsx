@@ -1,5 +1,5 @@
-import { ChevronRightIcon, ExternalLinkIcon } from '@heroicons/react/outline'
-import { CurrencyDollarIcon, XCircleIcon } from '@heroicons/react/solid'
+import { ChevronRightIcon, LinkIcon } from '@heroicons/react/24/outline'
+import { CurrencyDollarIcon, XCircleIcon } from '@heroicons/react/24/solid'
 import chain from 'soulswap-chain'
 import { Token, Type } from 'soulswap-currency'
 import { useIsMounted } from 'packages/hooks'
@@ -51,7 +51,7 @@ export const TokenSelectorCustomTokenRow: FC<{ style: CSSProperties; currency: T
             target="_blank"
             href={chain[currency.chainId].getTokenUrl(currency.wrapped.address)}
           >
-            <ExternalLinkIcon width={20} height={20} className="text-blue" />
+            <LinkIcon width={20} height={20} className="text-blue" />
           </IconButton>
         </div>
       </div>

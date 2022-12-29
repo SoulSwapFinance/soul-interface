@@ -9,14 +9,18 @@ import More from './More'
 // import Web3Network from 'components/Web3Network'
 // import LanguageMenu from './useLanguages'
 // import Web3Status from 'components/Web3Status'
+import { ChainId } from 'sdk'
 import Typography from 'components/Typography'
 import { classNames } from 'functions/styling'
 // import styled from 'styled-components'
 // import { Container } from 'components'
+import { Bars3Icon } from '@heroicons/react/24/outline'
 
 const MobileBar: FC = () => {
     const router = useRouter()
     const { account, chainId, library } = useActiveWeb3React()
+    const [open, setOpen] = useState(false)
+
     const typeStyle = `justify-center text-center w-full border border-[${getChainColor(chainId)}] rounded p-2`
 
     const swapRoute = useCallback(() => {
@@ -44,6 +48,10 @@ const MobileBar: FC = () => {
         <div>
             <div className={`fixed bottom-0 left-auto z-10 flex flex-row items-center justify-center w-auto rounded rounded-xl`}>
                 {/* xl:relative // moves to top */}
+                <div className={`p-1 bg-${getChainColorCode(chainId)} rounded-full hover:bg-dark-800`}>
+                    {/* <div className="flex p-2 justify-between"> */}
+                    <Bars3Icon width={24} className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `bg-${getChainColorCode(chainId)} cursor-pointer rounded rounded-xl` : `hidden`)} onClick={() => setOpen(true)} />
+                </div>
                 <div className="flex items-center w-full space-x-2 justify-end">
                     <div className={`fixed bg-dark-1000 bottom-0 left-0 z-10 gap-1 flex justify-between items-center justify-center w-full rounded rounded-lg`}>
                         <Typography
@@ -58,15 +66,16 @@ const MobileBar: FC = () => {
                         >
                             {`Farm`}
                         </Typography>
-                        <div 
-                            className={`mt-1 m-1 border ${landingPage ? `border-[${getChainColor(chainId)}]` : `border-dark-800`} rounded rounded-xl p-1`}
+                        <div
+                            className={`mt-1 m-1 border ${landingPage ? `border-[${getChainColor(chainId)}]` : `border-dark-700`} rounded rounded-xl p-1`}
                             // className={classNames(typeStyle, landingPage ? `text-white` : `text-[${getChainColor(chainId)}]`, `bg-dark-1000`)}
                             onClick={landingRoute}
                         >
                             <Image
+
                                 height={200} width={200} src={'/logo.png'} alt={'soul logo'}
                                 className={classNames(typeStyle, landingPage ? `text-white` : `text-[${getChainColor(chainId)}]`, `bg-dark-1000`)}
-                                />
+                            />
                         </div>
                         <Typography
                             className={classNames(typeStyle, lendPage ? `text-white` : `text-[${getChainColor(chainId)}]`, `bg-${lendPage ? getChainColorCode(chainId) : `dark-1000`}`)}

@@ -1,5 +1,5 @@
 import React, { useCallback, useState, Fragment, useEffect, useMemo } from "react"
-import { ChevronDoubleUpIcon } from '@heroicons/react/solid'
+import { ChevronDoubleUpIcon } from '@heroicons/react/24/solid'
 import ChevronDoubleUp from 'assets/svg/icons/ChevronDoubleUp.svg'
 import ChevronDown from 'assets/svg/icons/ChevronDown.svg'
 import Multiply from 'assets/svg/icons/Multiply.svg'

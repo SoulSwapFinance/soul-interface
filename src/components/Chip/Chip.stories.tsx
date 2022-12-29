@@ -1,4 +1,4 @@
-import { QuestionMarkCircleIcon } from '@heroicons/react/solid'
+import { QuestionMarkCircleIcon } from '@heroicons/react/24/solid'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 

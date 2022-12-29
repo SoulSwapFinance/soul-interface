@@ -1,5 +1,5 @@
 import { Disclosure, Transition } from '@headlessui/react'
-import { AdjustmentsIcon, ChevronRightIcon, InformationCircleIcon } from '@heroicons/react/outline'
+import { AdjustmentsHorizontalIcon, ChevronRightIcon, InformationCircleIcon } from '@heroicons/react/24/outline'
 import React, { FC } from 'react'
 
 import { DEFAULT_INPUT_UNSTYLED } from 'features/crosschain/constants'
@@ -24,7 +24,7 @@ export const SlippageToleranceDisclosure: FC = () => {
             className="relative flex items-center justify-between w-full gap-3 group rounded-xl"
           >
             <div className="flex items-center justify-center w-5 h-5">
-              <AdjustmentsIcon width={20} height={20} className="-ml-0.5 text-slate-500" />
+              <AdjustmentsHorizontalIcon width={20} height={20} className="-ml-0.5 text-slate-500" />
             </div>
             <div className="flex items-center justify-between w-full gap-1 py-4">
               <div className="flex items-center gap-1">

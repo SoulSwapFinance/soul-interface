@@ -1,4 +1,4 @@
-import { CheckCircleIcon, DocumentDuplicateIcon } from '@heroicons/react/outline'
+import { CheckCircleIcon, DocumentDuplicateIcon } from '@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { getChainColor, getChainColorCode } from 'constants/chains'

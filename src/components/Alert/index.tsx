@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { XIcon } from '@heroicons/react/solid'
+import { XCircleIcon } from '@heroicons/react/24/solid'
 import { classNames } from '../../functions'
 
 const TYPE = {
@@ -98,7 +98,7 @@ export default function Alert({
             className="inline-flex opacity-80 hover:opacity-100 focused:opacity-100 rounded p-1.5 text-primary hover:text-high-emphesis focus:text-high-emphesis focus:outline-none focus:ring focus:ring-offset focus:ring-offset-purple focus:ring-purple"
           >
             <span className="sr-only">Dismiss</span>
-            <XIcon className="w-5 h-5" aria-hidden="true" />
+            <XCircleIcon className="w-5 h-5" aria-hidden="true" />
           </button>
         </div>
       )}

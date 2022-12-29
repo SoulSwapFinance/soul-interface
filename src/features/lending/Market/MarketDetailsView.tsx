@@ -1,6 +1,6 @@
 import { Disclosure, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/outline'
-import { ArrowSmRightIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon } from '@heroicons/react/24/outline'
+import { ArrowSmallRightIcon } from '@heroicons/react/24/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Currency, CurrencyAmount, Fraction, JSBI, Percent, TradeType } from 'sdk'
@@ -76,7 +76,7 @@ export const MarketDetailsContentView: FC<MarketDetailsView> = ({
               <Typography variant="xs" className="text-right text-secondary">
                 {new Percent(market.health, 1e18).toSignificant(6)}%
               </Typography>
-              <ArrowSmRightIcon width={14} className="text-secondary" />
+              <ArrowSmallRightIcon width={14} className="text-secondary" />
               <Typography variant="xs" className="text-right">
                 {new Percent(
                   market.simulatedHealth(nextBorrowAmount?.quotient, nextCollateralAmount?.quotient),
@@ -167,7 +167,7 @@ export const MarketDetailsContentView: FC<MarketDetailsView> = ({
               <Typography variant="xs" className="text-right text-secondary">
                 {userCollateralAmount.toSignificant(6)} {market.collateral.token.symbol}
               </Typography>
-              <ArrowSmRightIcon width={14} className="text-secondary" />
+              <ArrowSmallRightIcon width={14} className="text-secondary" />
               <Typography variant="xs" className="text-right">
                 {nextCollateralAmount?.toSignificant(6)} {market.collateral.token.symbol}
               </Typography>
@@ -183,7 +183,7 @@ export const MarketDetailsContentView: FC<MarketDetailsView> = ({
               <Typography variant="xs" className="text-right text-secondary">
                 {currentUserBorrowAmount?.toSignificant(6)} {market.asset.token.symbol}
               </Typography>
-              <ArrowSmRightIcon width={14} className="text-secondary" />
+              <ArrowSmallRightIcon width={14} className="text-secondary" />
               <Typography variant="xs" className="text-right">
                 {nextBorrowAmount?.toSignificant(6)} {market.asset.token.symbol}
               </Typography>

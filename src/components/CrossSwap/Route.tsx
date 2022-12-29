@@ -1,4 +1,4 @@
-import { DotsHorizontalIcon } from '@heroicons/react/solid'
+import { EllipsisHorizontalIcon } from '@heroicons/react/24/solid'
 import { Amount, Token, Type } from 'soulswap-currency'
 import { STARGATE_TOKEN } from 'soulswap-stargate'
 import React, { FC } from 'react'
@@ -95,11 +95,11 @@ export const CrossChainRoute: FC<CrossChainRoute> = ({
                     </div>
                   </Badge>
 
-                  <DotsHorizontalIcon width={12} className="text-slate-600" />
+                  <EllipsisHorizontalIcon width={12} className="text-slate-600" />
                   <div className="flex items-center justify-center">
                     <Icon currency={STARGATE_TOKEN} width={18} height={18} />
                   </div>
-                  <DotsHorizontalIcon width={12} className="text-slate-600" />
+                  <EllipsisHorizontalIcon width={12} className="text-slate-600" />
                   <Badge
                     badgeContent={
                       <div className="rounded-full shadow-md ring-1 ring-black/20">
@@ -187,7 +187,7 @@ export const SingleRoute: FC<{ trade: UseTradeOutput }> = ({ trade }) => {
             </Typography>
           ) : null}
 
-          <DotsHorizontalIcon width={12} className="text-slate-600" />
+          <EllipsisHorizontalIcon width={12} className="text-slate-600" />
 
           <Typography variant="xs" weight={500}>
             {leg.tokenTo.symbol}
@@ -215,13 +215,13 @@ export const ComplexRoute: FC<{ trade: UseTradeOutput }> = ({ trade }) => {
       {initialPaths.map((initialPath, i) => (
         <div key={i} className="z-10 flex items-center gap-1 text-xs font-medium leading-4 text-slate-300">
           {Number(initialPath.absolutePortion * 100).toFixed(2)}%
-          <DotsHorizontalIcon width={12} className="text-slate-600" />
+          <EllipsisHorizontalIcon width={12} className="text-slate-600" />
           <Typography variant="xs" weight={500}>
             {initialPath.tokenFrom.symbol}
           </Typography>
-          <DotsHorizontalIcon width={12} className="text-slate-600" />
+          <EllipsisHorizontalIcon width={12} className="text-slate-600" />
           {initialPath.poolFee * 100}%
-          <DotsHorizontalIcon width={12} className="text-slate-600" />
+          <EllipsisHorizontalIcon width={12} className="text-slate-600" />
           <Typography variant="xs" weight={500}>
             {initialPath.tokenTo.symbol}
           </Typography>
@@ -230,13 +230,13 @@ export const ComplexRoute: FC<{ trade: UseTradeOutput }> = ({ trade }) => {
       {percentPaths.map((percentPath, i) => (
         <div key={i} className="z-10 flex items-center gap-1 text-xs font-medium leading-4 text-slate-300">
           {Number(percentPath.absolutePortion * 100).toFixed(2)}%
-          <DotsHorizontalIcon width={12} className="text-slate-600" />
+          <EllipsisHorizontalIcon width={12} className="text-slate-600" />
           <Typography variant="xs" weight={500}>
             {percentPath.tokenFrom.symbol}
           </Typography>
-          <DotsHorizontalIcon width={12} className="text-slate-600" />
+          <EllipsisHorizontalIcon width={12} className="text-slate-600" />
           {percentPath.poolFee * 100}%
-          <DotsHorizontalIcon width={12} className="text-slate-600" />
+          <EllipsisHorizontalIcon width={12} className="text-slate-600" />
           <Typography variant="xs" weight={500}>
             {percentPath.tokenTo.symbol}
           </Typography>

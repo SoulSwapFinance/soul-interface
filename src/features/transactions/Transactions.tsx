@@ -1,4 +1,4 @@
-import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/solid'
+import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/24/solid'
 // import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 // import { LoadingSpinner } from 'components/LoadingSpinner'

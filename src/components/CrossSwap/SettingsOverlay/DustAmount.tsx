@@ -1,4 +1,4 @@
-import { CashIcon, InformationCircleIcon } from '@heroicons/react/outline'
+import { BanknotesIcon, InformationCircleIcon } from '@heroicons/react/24/outline'
 import { AdvancedTooltip } from 'components/Tooltip/Advanced'
 import Typography from 'components/Typography'
 import Switch from 'components/Switch'
@@ -10,7 +10,7 @@ export const DustAmount = () => {
     <div className="h-[52px] flex items-center">
       <div className="relative flex items-center justify-between w-full gap-3 group rounded-xl">
         <div className="flex items-center justify-center w-5 h-5">
-          <CashIcon width={20} height={20} className="-ml-0.5 text-slate-500" />
+          <BanknotesIcon width={20} height={20} className="-ml-0.5 text-slate-500" />
         </div>
         <div className="flex items-center justify-between w-full gap-1">
           <div className="flex gap-1">

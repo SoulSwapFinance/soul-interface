@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { ChainId, Currency, Percent, ZERO } from 'sdk'

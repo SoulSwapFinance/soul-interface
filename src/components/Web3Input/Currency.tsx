@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import { tryParseAmount, Type } from 'soulswap-currency'
 import { FundSource, useIsMounted } from 'packages/hooks'
 import React, { FC, useCallback, useMemo, useRef, useState } from 'react'

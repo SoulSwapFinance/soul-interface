@@ -1,6 +1,6 @@
 import React, { FC, useMemo, useState } from 'react'
-import { ChevronRightIcon, InformationCircleIcon } from '@heroicons/react/outline'
-import { CurrencyDollarIcon } from '@heroicons/react/solid'
+import { ChevronRightIcon, InformationCircleIcon } from '@heroicons/react/24/outline'
+import { CurrencyDollarIcon } from '@heroicons/react/24/solid'
 import { Token } from 'soulswap-currency'
 import { useIsMounted } from 'packages/hooks'
 

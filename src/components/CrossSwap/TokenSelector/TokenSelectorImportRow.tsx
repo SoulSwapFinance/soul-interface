@@ -1,4 +1,4 @@
-import { ExclamationIcon, ExternalLinkIcon } from '@heroicons/react/outline'
+import { ExclamationTriangleIcon, LinkIcon } from '@heroicons/react/24/outline'
 import chain from 'soulswap-chain'
 import { Token } from 'soulswap-currency'
 import { shortenAddress } from 'soulswap-format'
@@ -36,7 +36,7 @@ export const TokenSelectorImportRow: FC<TokenSelectorImportRow> = ({
             <div className="w-10 h-10 bg-white rounded-full overflow-hidden">
               <div className="flex items-center justify-center w-full h-full bg-red/10">
                 <div className="w-5 h-5">
-                  <ExclamationIcon width={20} height={20} className="text-red" />
+                  <ExclamationTriangleIcon width={20} height={20} className="text-red" />
                 </div>
               </div>
             </div>
@@ -75,7 +75,7 @@ export const TokenSelectorImportRow: FC<TokenSelectorImportRow> = ({
                   className="text-blue hover:text-blue-400 flex gap-1 items-center"
                   href={chain[currency.chainId].getTokenUrl(currency.wrapped.address)}
                 >
-                  View on Explorer <ExternalLinkIcon width={16} height={16} />
+                  View on Explorer <LinkIcon width={16} height={16} />
                 </Typography>
                 <Typography weight={500} variant="xs" className="text-slate-400 flex justify-end">
                   <CopyHelper toCopy={shortenAddress(currency.wrapped.address)}>

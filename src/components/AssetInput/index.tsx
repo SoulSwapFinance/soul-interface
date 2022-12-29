@@ -1,5 +1,5 @@
-import { ExclamationCircleIcon } from '@heroicons/react/outline'
-import { ChevronDownIcon } from '@heroicons/react/solid'
+import { ExclamationCircleIcon } from '@heroicons/react/24/outline'
+import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { AVAX_ADDRESS, ChainId, Currency, CurrencyAmount, Token, WNATIVE_ADDRESS } from 'sdk'

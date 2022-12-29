@@ -1,4 +1,4 @@
-import { CheckIcon, MinusCircleIcon, RefreshIcon, ExternalLinkIcon } from '@heroicons/react/outline'
+import { CheckIcon, MinusCircleIcon, ArrowPathIcon, LinkIcon } from '@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { TokenList } from '@uniswap/token-lists'
@@ -113,7 +113,7 @@ const ListRow: FC<{ listUrl: string }> = memo(({ listUrl }) => {
                   <a href={`https://tokenlists.org/token-list?url=${listUrl}`}>
                     <Typography variant="sm" weight={700} className="text-blue flex items-center gap-1">
                       {i18n._(t`View list`)}
-                      <ExternalLinkIcon width={16} />
+                      <LinkIcon width={16} />
                     </Typography>
                   </a>
                   <Typography
@@ -144,7 +144,7 @@ const ListRow: FC<{ listUrl: string }> = memo(({ listUrl }) => {
               className={'w-4 mt-1 hover:border-ftmBlue border rounded'} 
               onClick={handleRemoveList}
             />
-            <RefreshIcon
+            <ArrowPathIcon
               className={'w-4 mt-1 hover:border-ftmBlue border rounded'} 
               onClick={handleAcceptListUpdate}
             />

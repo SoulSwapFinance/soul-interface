@@ -9,7 +9,7 @@ import { useRouter } from 'next/router'
 import { Button } from 'components/Button'
 import { getChainColorCode } from 'constants/chains'
 import { useActiveWeb3React } from 'services/web3'
-import { ArrowLeftIcon } from '@heroicons/react/outline'
+import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 
 interface LayoutProps {
   children?: React.ReactChild

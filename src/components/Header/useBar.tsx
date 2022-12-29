@@ -1,9 +1,9 @@
 import React, { ReactNode, useMemo } from 'react'
-import { GlobeIcon, DocumentIcon, LinkIcon, SwitchVerticalIcon, SparklesIcon, TrendingUpIcon, PresentationChartLineIcon, SunIcon, CurrencyDollarIcon, UserGroupIcon } from '@heroicons/react/outline'
+import { GlobeAltIcon, DocumentIcon, LinkIcon, ArrowsUpDownIcon, BanknotesIcon, ChartPieIcon, SparklesIcon, PresentationChartLineIcon, SunIcon, CurrencyDollarIcon, WalletIcon, UserGroupIcon } from '@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { ChainId, NATIVE, SOUL_ADDRESS } from 'sdk'
-import { DiscordIcon, PoolIcon, RedditIcon, TelegramIcon, TokenomicsIcon, TwitterIcon, WalletIcon } from 'components/Icon'
+import { DiscordIcon, PoolIcon, RedditIcon, TelegramIcon, TokenomicsIcon, TwitterIcon } from 'components/Icon'
 import { Feature } from 'enums'
 import { classNames, featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
@@ -42,7 +42,7 @@ const useMenu: UseBar = () => {
       key: 'swap',
       link: '/swap',
       title: i18n._(t`Swap`),
-      icon: <SwitchVerticalIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
+      icon: <ArrowsUpDownIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     }
 
     // If AMM is enabled, replace swap button with a submenu under trade
@@ -50,7 +50,7 @@ const useMenu: UseBar = () => {
      tradeMenu = {
        key: 'exchange',
        title: i18n._(t`Swap`),
-       icon: <SwitchVerticalIcon width={20} />,
+       icon: <ArrowsUpDownIcon width={20} />,
        items: [
          {
            key: 'swap',
@@ -70,7 +70,7 @@ const useMenu: UseBar = () => {
     //   tradeMenu = {
     //     key: 'trade',
     //     title: i18n._(t`Exchange`),
-    //     icon: <SwitchVerticalIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
+    //     icon: <ArrowsUpDownIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     //     items: [
     //       {
     //         key: 'swap',
@@ -213,7 +213,7 @@ const useMenu: UseBar = () => {
         key: 'lend',
         link: '/lend',
         title: i18n._(t`Lend`),
-        icon: <SwitchVerticalIcon width={20} className={classNames("rotate-90", `text-[${getChainColor(chainId)}]`)} />,
+        icon: <ArrowsUpDownIcon width={20} className={classNames("rotate-90", `text-[${getChainColor(chainId)}]`)} />,
       })
     }
 
@@ -222,7 +222,7 @@ const useMenu: UseBar = () => {
     //  mainItems.push({
     //    key: 'lending',
     //    title: i18n._(t`Lend`),
-    //    icon: <SwitchVerticalIcon width={20} className={classNames("rotate-90", `text-[${getChainColor(chainId)}]`)} />,
+    //    icon: <ArrowsUpDownIcon width={20} className={classNames("rotate-90", `text-[${getChainColor(chainId)}]`)} />,
     //    items: [
     //     //  {
     //     //    key: 'markets',
@@ -337,7 +337,7 @@ const useMenu: UseBar = () => {
       key: 'explore',
       link: '/explore',
       title: i18n._(t`Explore`),
-      icon: <GlobeIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
+      icon: <GlobeAltIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     })
 
     // Links
@@ -361,7 +361,7 @@ const useMenu: UseBar = () => {
       key: 'dashboard',
       link: '/dashboard',
       title: i18n._(t`Economy`),
-      icon: <TokenomicsIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
+      icon: <ChartPieIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     })
 
     // Balances
@@ -371,13 +371,20 @@ const useMenu: UseBar = () => {
       title: i18n._(t`Account`),
       icon: <WalletIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     })
-    // Documentation
+    // Pay
     mainItems.push({
-      key: 'docs',
-      link: 'https://docs.soulswap.finance',
-      title: i18n._(t`Tutorials`),
-      icon: <DocumentIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
+      key: 'pay',
+      link: 'https://pay.soulswap.finance',
+      title: i18n._(t`SoulPay`),
+      icon: <BanknotesIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     })
+    // Documentation
+    // mainItems.push({
+    //   key: 'docs',
+    //   link: 'https://docs.soulswap.finance',
+    //   title: i18n._(t`Tutorials`),
+    //   icon: <DocumentIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
+    // })
 
     // Twitter
     mainItems.push({

@@ -1,4 +1,4 @@
-import { XIcon } from '@heroicons/react/solid'
+import { XCircleIcon } from '@heroicons/react/24/solid'
 import { FC, ReactNode } from 'react'
 
 import { classNames } from '../../functions'
@@ -57,7 +57,7 @@ const Chip: FC<ChipProps> = ({
   className = '',
   onClick,
   icon = undefined,
-  endIcon = <XIcon width={12} height={12} strokeWidth={5} />,
+  endIcon = <XCircleIcon width={12} height={12} strokeWidth={5} />,
   id = '',
 }) => {
   return (

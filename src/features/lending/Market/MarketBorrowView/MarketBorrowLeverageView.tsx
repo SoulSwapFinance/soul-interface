@@ -1,5 +1,5 @@
 import { Transition } from '@headlessui/react'
-import { CheckIcon } from '@heroicons/react/outline'
+import { CheckIcon } from '@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Currency, CurrencyAmount, Trade as LegacyTrade, TradeType } from 'sdk'

@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, XIcon } from '@heroicons/react/outline'
+import { ChevronLeftIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import { classNames } from 'functions'
 import React, { FC, ReactNode } from 'react'
 
@@ -40,7 +40,7 @@ const DialogHeader: FC<DialogHeaderProps> = ({ title, onBack, onClose, border = 
           children
         ) : onClose ? (
           <IconButton className="cursor-pointer" onClick={onClose}>
-            <XIcon width={24} height={24} className="hover:text-slate-50 text-slate-100" />
+            <XCircleIcon width={24} height={24} className="hover:text-slate-50 text-slate-100" />
           </IconButton>
         ) : (
           <span />

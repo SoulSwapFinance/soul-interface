@@ -1,4 +1,4 @@
-import { ChevronDownIcon, ChevronUpIcon, MinusIcon, PlusIcon } from '@heroicons/react/outline'
+import { ChevronDownIcon, ChevronUpIcon, MinusIcon, PlusIcon } from '@heroicons/react/24/outline'
 import { ChainId, CurrencyAmount, JSBI, Pair, Percent, SOUL_ADDRESS, Token, USD } from '../../sdk'
 import React, { useState } from 'react'
 import { RowBetween, RowFixed } from '../Row'

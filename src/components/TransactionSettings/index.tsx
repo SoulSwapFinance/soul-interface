@@ -1,4 +1,4 @@
-import { ExclamationIcon } from '@heroicons/react/outline'
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Percent } from 'sdk'
@@ -115,7 +115,7 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
             tabIndex={-1}
           >
             <div className="flex items-center justify-between">
-              {tooLow || tooHigh ? <ExclamationIcon className="text-yellow" width={24} /> : null}
+              {tooLow || tooHigh ? <ExclamationTriangleIcon className="text-yellow" width={24} /> : null}
               <input
                 id="text-slippage"
                 className={classNames(

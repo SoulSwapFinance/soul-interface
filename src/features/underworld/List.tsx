@@ -10,7 +10,7 @@ import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
 import { getChainColorCode } from 'constants/chains'
 // import ExternalLink from 'components/ExternalLink'
-// import { ArrowLeftIcon, ArrowRightIcon, XIcon } from '@heroicons/react/outline'
+// import { ArrowLeftIcon, ArrowRightIcon, XCircleIcon } from '@heroicons/react/24/outline'
 // import Header from 'components/Header'
 
 export const List = () => {

@@ -1,5 +1,5 @@
 import React, { ReactNode, useMemo } from 'react'
-import { GlobeIcon, SwitchVerticalIcon, LinkIcon, SparklesIcon, TrendingUpIcon, PresentationChartLineIcon, SunIcon, CurrencyDollarIcon, UserGroupIcon, SwitchHorizontalIcon } from '@heroicons/react/outline'
+import { ArrowsUpDownIcon, LinkIcon, SparklesIcon, PresentationChartLineIcon, SunIcon, CurrencyDollarIcon, UserGroupIcon, ArrowsRightLeftIcon } from '@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Currency, NATIVE, SOUL_ADDRESS } from 'sdk'
@@ -9,7 +9,7 @@ import { classNames, featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
 import { useRouter } from 'next/router'
 import { getChainColor } from 'constants/chains'
-// import { MenuAlt1Icon } from '@heroicons/react/outline'
+// import { Bars3Icon } from '@heroicons/react/24/outline'
 
 export interface DropdownItemLeaf {
   key: string
@@ -63,7 +63,7 @@ return useMemo(() => {
       key: 'swap',
       title: i18n._(t`Swap`),
       link: '/swap',
-      icon: <SwitchVerticalIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
+      icon: <ArrowsUpDownIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     }
    
    let poolMenu: BarItem = {
@@ -78,7 +78,7 @@ if (featureEnabled(Feature.AMM, chainId)) {
   tradeMenu = {
     key: 'swap',
     title: i18n._(t`Swap`),
-    icon: <SwitchVerticalIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
+    icon: <ArrowsUpDownIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     link: `/exchange/swap/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
     // items: [
       // {
@@ -124,7 +124,7 @@ if (featureEnabled(Feature.LIQUIDITY, chainId)) {
 let multiMenu = {
   key: 'multichain',
   title: i18n._(t`Multichain`),
-  icon: <SwitchHorizontalIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
+  icon: <ArrowsRightLeftIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
   // icon: <LinkIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
   items: [
     {

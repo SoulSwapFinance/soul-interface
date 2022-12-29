@@ -1,4 +1,3 @@
-import { CheckIcon, DuplicateIcon } from '@heroicons/react/outline'
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import AnalyticsContainer from 'features/analytics/AnalyticsContainer'
 // import Background from 'features/analytics/Background'

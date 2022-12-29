@@ -1,4 +1,4 @@
-import { QuestionMarkCircleIcon } from '@heroicons/react/solid'
+import { QuestionMarkCircleIcon } from '@heroicons/react/24/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import BottomSlideIn from 'components/Dialog/BottomSlideIn'

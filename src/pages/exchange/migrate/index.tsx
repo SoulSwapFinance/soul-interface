@@ -1,6 +1,6 @@
 import { AddressZero } from '@ethersproject/constants'
 import { formatUnits, parseUnits } from '@ethersproject/units'
-import { ChevronDownIcon, XIcon } from '@heroicons/react/outline'
+import { ChevronDownIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { ChainId, JSBI } from 'sdk'
@@ -116,7 +116,7 @@ const LPTokenSelect = ({ lpToken, onToggle, isSelected, updating, exchange }: Po
         >{`${lpToken.tokenA.symbol}/${lpToken.tokenB.symbol}`}</Typography>
         {lpToken.version && <Chip color="purple" label={lpToken.version} />}
       </div>
-      {isSelected ? <XIcon width={16} height={16} /> : <ChevronDownIcon width={16} height={16} />}
+      {isSelected ? <XCircleIcon width={16} height={16} /> : <ChevronDownIcon width={16} height={16} />}
     </div>
   )
 }
@@ -160,7 +160,7 @@ const MigrateModeSelect = ({ state }: { state: MigrateState }) => {
                   </Typography>
                 </div>
               </div>
-              {key === state.mode ? <XIcon width={16} height={16} /> : <ChevronDownIcon width={16} height={16} />}
+              {key === state.mode ? <XCircleIcon width={16} height={16} /> : <ChevronDownIcon width={16} height={16} />}
             </div>
           )
         return acc

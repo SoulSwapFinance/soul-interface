@@ -1,5 +1,5 @@
 import { Listbox } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import { DEFAULT_INPUT_CLASSNAME, ERROR_INPUT_CLASSNAME } from 'features/crosschain/constants'
 import { classNames } from 'functions'
 import React, { FC, forwardRef, ReactNode } from 'react'

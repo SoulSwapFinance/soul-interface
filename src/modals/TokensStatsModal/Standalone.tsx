@@ -12,7 +12,7 @@ import PendingView from './PendingView'
 import ReactGA from 'react-ga'
 import { SUPPORTED_WALLETS } from '../../constants'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
-import { XIcon } from '@heroicons/react/outline'
+import { XCircleIcon } from '@heroicons/react/24/outline'
 import { isMobile } from 'react-device-detect'
 import styled from 'styled-components'
 import usePrevious from '../../hooks/usePrevious'
@@ -279,7 +279,7 @@ export default function TokenStatsStandalone({
       return (
         <UpperSection>
           <CloseIcon onClick={toggleWalletModal}>
-            <XIcon />
+            <XCircleIcon />
           </CloseIcon>
           <HeaderRow>{error instanceof UnsupportedChainIdError ? 'Wrong Network' : 'Error connecting'}</HeaderRow>
           <ContentWrapper>

@@ -1,5 +1,5 @@
 import { parseUnits } from '@ethersproject/units'
-import { ArrowDownIcon } from '@heroicons/react/solid'
+import { ArrowDownIcon } from '@heroicons/react/24/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Rebase, JSBI, ZERO } from 'sdk'

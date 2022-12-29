@@ -1,6 +1,6 @@
 import { ChainId, Percent } from '../../sdk'
 import React, { useCallback, useRef, useState } from 'react'
-import { CheckIcon, CogIcon } from '@heroicons/react/outline'
+import { CheckIcon, CogIcon } from '@heroicons/react/24/outline'
 import {
   // useCrossChainModeManager,
   // useUserArcherUseRelay,
@@ -10,7 +10,7 @@ import {
 import { useModalOpen, useToggleSettingsMenu } from '../../state/application/hooks'
 // import Image from '../../components/Image'
 
-// import { AdjustmentsIcon } from '@heroicons/react/outline'
+// import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline'
 import  { ApplicationModal } from 'state/application/reducer'
 import { Button } from 'components/Button'
 import Modal from 'components/DefaultModal'

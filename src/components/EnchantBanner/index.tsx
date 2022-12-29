@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { XIcon } from '@heroicons/react/outline'
+import { XCircleIcon } from '@heroicons/react/24/outline'
 
 const SwapBanner: FC = () => (
   <div className="relative w-full bg-purple bg-opacity-10">
@@ -36,7 +36,7 @@ const SwapBanner: FC = () => (
            <span className="sr-only">Dismiss</span> 
            */}
 
-        {/* <XIcon className="w-6 h-6 text-white" aria-hidden="true" /> */}
+        {/* <XCircleIcon className="w-6 h-6 text-white" aria-hidden="true" /> */}
         {/* </button> */}
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { QuestionMarkCircleIcon as SolidQuestionMarkCircleIcon } from '@heroicons/react/solid'
+import { QuestionMarkCircleIcon as SolidQuestionMarkCircleIcon } from '@heroicons/react/24/solid'
 import { classNames } from 'functions'
 import { useOnClickOutside } from 'hooks/useOnClickOutside'
 import useToggle from 'hooks/useToggle'

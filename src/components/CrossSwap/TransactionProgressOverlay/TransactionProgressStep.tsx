@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react'
-import { ExternalLinkIcon } from '@heroicons/react/outline'
-import { CheckCircleIcon, ExclamationCircleIcon, XCircleIcon } from '@heroicons/react/solid'
+import { LinkIcon } from '@heroicons/react/24/outline'
+import { CheckCircleIcon, ExclamationCircleIcon, XCircleIcon } from '@heroicons/react/24/solid'
 import { CircleIcon } from 'components/Icons/CircleIcon'
 import Loader from 'components/Loader'
 import { AdvancedTooltip } from 'components/Tooltip/Advanced'
@@ -104,14 +104,14 @@ export const TransactionProgressStep: TransactionProgressStepType<TransactionPro
           <Link href={link} passHref={true}>
             <a target="_blank" className={classNames('text-slate-200', 'flex items-center gap-1 hover:text-slate-50')}>
               {header}
-              <ExternalLinkIcon width={16} className="text-inherit" />
+              <LinkIcon width={16} className="text-inherit" />
             </a>
           </Link>
         ) : comingSoon ? (
           <div className="text-slate-200 flex items-center gap-1 hover:text-slate-50">
             {header}{' '}
             <AdvancedTooltip
-              button={<ExternalLinkIcon width={16} className="text-inherit opacity-40" />}
+              button={<LinkIcon width={16} className="text-inherit opacity-40" />}
               panel={<div className="text-xs rounded-2xl text-slate-300">LzScan coming soon!</div>}
             />
           </div>

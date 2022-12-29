@@ -11,7 +11,7 @@ import { usePairContract, useRouterContract } from 'hooks/useContract'
 
 // import { AddRemoveTabs } from 'components/NavigationTabs'
 // import Alert from 'components/Alert'
-import { ArrowDownIcon } from '@heroicons/react/solid'
+import { ArrowDownIcon } from '@heroicons/react/24/solid'
 import { AutoColumn } from 'components/Column'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Button } from 'components/Button'

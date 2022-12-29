@@ -1,5 +1,5 @@
 import Davatar from '@davatar/react'
-import { LinkIcon } from '@heroicons/react/outline'
+import { LinkIcon } from '@heroicons/react/24/outline'
 import CopyHelper from 'components/AccountDetails/Copy'
 import Typography from 'components/Typography'
 import { BalancesSum } from 'features/portfolio/BalancesSum'

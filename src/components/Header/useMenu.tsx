@@ -1,5 +1,6 @@
 import React, { ReactNode, useMemo } from 'react'
-import { GlobeIcon, SwitchVerticalIcon, TrendingUpIcon, CurrencyDollarIcon, UserGroupIcon, MoonIcon, StarIcon } from '@heroicons/react/outline'
+import { CurrencyDollarIcon, UserGroupIcon, MoonIcon, StarIcon } from '@heroicons/react/24/outline'
+import { ArrowsUpDownIcon } from '@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { SOUL_ADDRESS } from 'sdk'
@@ -67,7 +68,7 @@ const useMenu: UseMenu = () => {
       key: 'swap',
       title: i18n._(t`Swap`),
       link: '/swap',
-      icon: <SwitchVerticalIcon width={20} className={
+      icon: <ArrowsUpDownIcon width={20} className={
         classNames('text-white'
         )} 
         />,
@@ -78,7 +79,7 @@ const useMenu: UseMenu = () => {
      tradeMenu = {
        key: 'exchange',
        title: i18n._(t`Exchange`),
-       icon: <SwitchVerticalIcon width={20} />,
+       icon: <ArrowsUpDownIcon width={20} />,
        items: [
          {
            key: 'swap',
@@ -194,7 +195,7 @@ const useMenu: UseMenu = () => {
       //   mainItems.push({
       //     key: 'lending',
       //     title: i18n._(t`Lend`),
-      //     icon: <SwitchVerticalIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+      //     icon: <ArrowsUpDownIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
       //     items: [
       //       {
       //         key: 'markets',
@@ -280,7 +281,7 @@ const useMenu: UseMenu = () => {
       mainItems.push({
           key: 'lending',
           title: i18n._(t`Lend`),
-          icon: <SwitchVerticalIcon width={20} className={classNames(
+          icon: <ArrowsUpDownIcon width={20} className={classNames(
             "rotate-90 filter", "text-white"
             // isLending ? 'text-black' : `text-[${getChainColor(chainId)}]`
             // isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`
