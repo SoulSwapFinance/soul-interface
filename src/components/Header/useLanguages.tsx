@@ -13,11 +13,11 @@ import Link from 'next/link'
 
 export default function LanguageMenu() {
     const { chainId } = useActiveWeb3React()
-    const hybridStyle = `flex items-center justify-center px-3 py-2.5 md:space-x-2 rounded rounded-md p-2 bg-dark-1000 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`
+    const hybridStyle = `flex items-center justify-center px-3 py-2.5 rounded rounded-md p-2 bg-dark-1000 border border-dark-800 hover:bg-dark-800 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`
     const { locale, locales, asPath } = useRouter()
 
     return (
-        <Popover className="relative ml-auto lg:m-0">
+        <Popover className="relative ml-auto">
             {({ open }) => (
                 <>
                     <div>
@@ -37,12 +37,12 @@ export default function LanguageMenu() {
                     >
                         <Popover.Panel
                             static
-                            className="absolute z-50 w-screen max-w-xs px-2 mt-1 transform -translate-x-full bottom-12 left-32"
+                            className="absolute z-50 w-screen max-w-xs mt-1 transform -translate-x-full bottom-12 left-72"
                         >
-                            <div className={classNames("overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 border", `border-[${getChainColor(chainId || 250)}]`)}>
-                                <div className="grid grid-cols-2 gap-0 ml-6 mr-8 py-1 bg-dark-1000 sm:p-8">
+                            <div className={classNames("overflow-hidden w-[40px] items-center justify-center rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 border", `border-[${getChainColor(chainId || 250)}]`)}>
+                                <div className="grid grid-cols-1 gap-0 py-1 bg-dark-1000">
                                     {locales.map((locale) => {
-                                        const { flag, language, dialect } = Languages[locale]
+                                        const { flag, language, abbr, dialect } = Languages[locale]
                                         return (
                                             <Popover.Button key={locale}>
                                                 {/* {({ active }) => ( */}
@@ -62,7 +62,8 @@ export default function LanguageMenu() {
                                                                 alt={language}
                                                                 aria-hidden="true"
                                                             />
-                                                            <span className="flex justify-center ml-3">{language}</span>
+                                                            {/* <span className="flex justify-center ml-3">{abbr}</span> */}
+                                                            {/* <span className="flex justify-center ml-3">{language}</span> */}
                                                             {dialect && (
                                                                 <sup>
                                                                     <small>{dialect}</small>

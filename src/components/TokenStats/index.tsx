@@ -19,7 +19,7 @@ const HideOnMobile = styled.div`
 function TokenStats(): JSX.Element | null {
   const { chainId } = useActiveWeb3React()
   const toggleTokenStatsModal = useToggleTokenStatsModal()
-  const open = useModalOpen(ApplicationModal.SOUL_STATS)
+  // const open = useModalOpen(ApplicationModal.SOUL_STATS)
   const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
   // const seancePrice = useSeancePrice()
 
@@ -27,7 +27,7 @@ function TokenStats(): JSX.Element | null {
 
   return (
     <div
-      className="flex items-center md:space-x-2 rounded bg-dark-900 border border-dark-800 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
+      className="flex items-center md:space-x-2 rounded bg-dark-1000 border border-dark-800 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
       onClick={() => toggleTokenStatsModal()}
     >
 
@@ -54,7 +54,9 @@ function TokenStats(): JSX.Element | null {
           objectFit="contain"
           className="rounded-md"
         />
-          {/* <div className="text-primary">{ formatNumber(soulPrice, true, true) }</div> */}
+        <HideOnMobile>
+          <div className="text-primary">{ formatNumber(soulPrice, true, true) }</div>
+        </HideOnMobile>
       </div>
       <TokensStatsModal />
     </div>
