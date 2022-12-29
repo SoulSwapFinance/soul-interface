@@ -27,6 +27,8 @@ import { useTokenBalance } from '../../../state/wallet/hooks'
 import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import { SwapLayoutCard } from 'layouts/SwapLayout'
+import { useRouter } from 'next/router'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 // import SoulLogo from '../../../components/SoulLogo'
 
 enum Fields {
@@ -37,7 +39,7 @@ enum Fields {
 export default function PoolFinder() {
   const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
-
+  const router = useRouter()
   const [activeField, setActiveField] = useState<number>(Fields.TOKEN1)
 
   const [currency0, setCurrency0] = useState<Currency | null>(() => (chainId ? NATIVE[chainId] : null))
@@ -75,8 +77,14 @@ export default function PoolFinder() {
     [activeField]
   )
 
+  const handleLink = useCallback(
+    (url: string) => {
+        router.push(url)
+      },[]
+  )
+
   const prerequisiteMessage = (
-    <div className="p-5 text-center rounded bg-dark-800">{i18n._(t`Select a token to find your liquidity`)}</div>
+    <div className="p-5 text-center rounded bg-dark-800">{i18n._(t`Select Token to Import Position`)}</div>
   )
 
   return (
@@ -127,9 +135,12 @@ export default function PoolFinder() {
                 gap={'0 3px'}
               >
                 {/* {i18n._(t`Pool Found!`)} */}
-                <Link href={`/pool`}>
-                  <a className="text-center text-purple text-bold">{i18n._(t`Manage Pool`)}</a>
-                </Link>
+                <Typography
+                  className={`flex border border-[${getChainColor(chainId)}] p-3 rounded rounded-xl w-full justify-center text-xl bg-${getChainColorCode(chainId)}`}
+                  onClick={() => handleLink('/pool')}
+                >
+                  <a className={`text-center text-bold`}>{i18n._(t`Manage Position`)}</a>
+                </Typography>
               </AutoRow>
             )}
 
@@ -154,7 +165,7 @@ export default function PoolFinder() {
                   <AutoColumn gap="sm" justify="center">
                     {i18n._(t`No pool found`)}
                     <Link href={`/exchange/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
-                      <a className="text-center">{i18n._(t`Create pool`)}</a>
+                      <a className="text-center">{i18n._(t`Create Pool`)}</a>
                     </Link>
                   </AutoColumn>
                 </div>
