@@ -106,10 +106,10 @@ const Mobile: FC = () => {
                         {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                           <TokenStats />
                         }
+                      </div>
                         <div className="flex items-center justify-start">
                           <LanguageMenu />
                         </div>
-                      </div>
                     </div>
                   </div>
                 </Transition.Child>
