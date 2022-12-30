@@ -1,11 +1,12 @@
 import { Currency, CurrencyAmount, ZERO } from 'sdk'
-import { classNames } from 'functions'
+import { classNames, unwrappedToken } from 'functions'
 import { useUSDCValue } from 'hooks/useUSDCPrice'
 import React, { FC, ReactNode } from 'react'
 
 import Chip from '../Chip'
 import { CurrencyLogo } from '../CurrencyLogo'
 import Typography from '../Typography'
+import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 
 interface ListPanelProps {
   header?: ReactNode
@@ -152,7 +153,9 @@ const CurrencyAmountItem: FC<CurrencyAmountItemProps> = ({
   hideCurrencyLogo,
   hideUSDC = false,
 }) => {
-  const usdcValue = useUSDCValue(
+  
+  const usdcValue = 
+  useUSDCValue(
     hideUSDC ? undefined : amount?.equalTo(ZERO) ? CurrencyAmount.fromRawAmount(amount?.currency, '1') : amount
   )
 

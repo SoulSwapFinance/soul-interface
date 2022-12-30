@@ -25,6 +25,7 @@ import { useTokenInfo } from 'hooks/useAPI'
 import Typography from 'components/Typography'
 import { i18n } from '@lingui/core'
 import ListPanel from 'components/ListPanel'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 
 interface PositionCardProps {
   pair: Pair
@@ -318,31 +319,35 @@ export default function FullPositionCard({ chainId, pair, border, stakedBalance 
     //     </div>
     //   </Transition>
     // </div>
-    <Disclosure as="div" className="py-2">
+    <Disclosure as="div" className="py-0">
       {({ open }) => (
         <div
-          className={classNames(
-            open ? 'bg-dark-900' : 'hover:bg-dark-800',
+          className={classNames(`border rounded rounded-xl `,
+            open ? `bg-dark-900 border-[${getChainColor(chainId)}]` : `hover:bg-dark-800`,
             'shadow-inner flex flex-col rounded-2xl gap-2 py-2 pl-1 pr-2 transition'
           )}
         >
           <Disclosure.Button as={Fragment}>
             <div className="flex justify-between gap-2 items-center pl-2 cursor-pointer">
-              <div className="flex items-center gap-2">
-                <CurrencyLogoArray currencies={[currency0, currency1]} dense />
-                <Typography variant="sm" weight={700} className="text-white">
+              <div className="flex items-center mt-2 mb-2 gap-2">
+                <CurrencyLogoArray size={32} currencies={[currency0, currency1]} dense />
+                <Typography variant="lg" weight={700} className="text-white">
                   {currency0.symbol}-{currency1.symbol}
                 </Typography>
               </div>
               <div className="flex gap-2 flex-grow items-center justify-end p-1 rounded">
-              <div className="font-semibold">
+                <div className="font-semibold">
                   {userPoolBalance ? formatNumber(pooledAmountFiatValueRaw, true)
-                    // ? pooledAmountFiatValue
-                    // ?.toSignificant(6, { groupSeparator: ',' }) // ?.toSignificant(4) */}
-                    : 0}
+                    /* {userPoolBalance
+                      ? pooledAmountFiatValueRaw > 0.01 ? formatNumber(pooledAmountFiatValueRaw, true)
+                      : formatNumber(pooledAmountFiatValueRaw, true)
+                      : Number(pooledAmountFiatValueRaw.toFixed(2) === '0.00' ? '<0.01' 
+                      : pooledAmountFiatValueRaw.toFixed(2)) != 0 ? pooledAmountFiatValueRaw.toFixed(2) */
+                    : 0
+                  }
                 </div>
                 <ChevronDownIcon
-                  width={20}
+                  width={12}
                   className={classNames(open ? 'transform rotate-180' : '', 'transition hover:text-white')}
                 />
               </div>
@@ -366,8 +371,8 @@ export default function FullPositionCard({ chainId, pair, border, stakedBalance 
                 {userDefaultPoolBalance && JSBI.greaterThan(userDefaultPoolBalance.quotient, BIG_INT_ZERO) && (
                   <div className="flex justify-between border-t border-dark-800 pt-3 mt-3">
                     <div className="flex items-center mb-1">
-                      <Typography variant="xs" className="text-low-emphesis">
-                        {i18n._(t`Pool share`)}{' '}
+                      <Typography variant="sm" className="text-low-emphesis">
+                        {i18n._(t`Share:`)} {' '}
                         {poolTokenPercentage
                           ? (poolTokenPercentage.toFixed(2) === '0.00' ? '<0.01' : poolTokenPercentage.toFixed(2)) + '%'
                           : '-'}
@@ -376,9 +381,9 @@ export default function FullPositionCard({ chainId, pair, border, stakedBalance 
                     <div className="flex gap-1">
                       <Button
                         startIcon={<MinusIcon width={14} height={14} />}
-                        size="xs"
+                        size="sm"
                         variant="outlined"
-                        color="pink"
+                        color={getChainColorCode(chainId)}
                         onClick={() => {
                           router.push(`/remove/${currencyId(currency0)}/${currencyId(currency1)}`)
                         }}
@@ -388,9 +393,9 @@ export default function FullPositionCard({ chainId, pair, border, stakedBalance 
                       </Button>
                       <Button
                         startIcon={<PlusIcon width={14} height={14} />}
-                        size="xs"
+                        size="sm"
                         variant="outlined"
-                        color="blue"
+                        color={getChainColorCode(chainId)}
                         onClick={() => {
                           router.push(`/add/${currencyId(currency0)}/${currencyId(currency1)}`)
                         }}
