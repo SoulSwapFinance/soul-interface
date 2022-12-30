@@ -67,7 +67,7 @@ const Mobile: FC = () => {
             })}
           </div> */}
         </div>
-        {/* <Transition.Root show={open} as={Fragment}>
+         <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 z-20 overflow-hidden" onClose={setOpen} unmount={false}>
             <div className="absolute inset-0 overflow-hidden">
               <Transition.Child
@@ -113,7 +113,7 @@ const Mobile: FC = () => {
               </div>
             </div>
           </Dialog>
-        </Transition.Root> */}
+        </Transition.Root>
 
         {/* NETWORK ICON */}
         <div className={`relative top-0.5 right-2 border border-[${getChainColor(chainId)}] p-1 rounded rounded-lg inline-block`}>
