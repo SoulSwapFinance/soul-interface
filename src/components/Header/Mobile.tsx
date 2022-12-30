@@ -53,12 +53,17 @@ const Mobile: FC = () => {
     <>
       <header className="w-full flex mt-3 items-center justify-between min-h-[36px] h-[36px] px-4">
         <div className="flex justify-between flex-grow">
-          {/* {[1, 250, 43114].includes(chainId) &&
-            <div className=" rounded-full">
-              <Bars3Icon width={24} className={classNames(isLuxor ? "hover:text-yellow" : `hover:text-[${getChainColor(chainId)}]`, `text-[${getChainColor(chainId)}]`, "cursor-pointer hover:text-white")} onClick={() => setOpen(true)} />
-            </div>
-          } */}
 
+                        <div className={`p-1 bg-${getChainColorCode(chainId)} border border-2 rounded border-[${getChainColor(chainId)}] hover:bg-dark-800`}>
+                            {/* <div className="flex p-2 justify-between"> */}
+                            <Bars3Icon 
+                                width={28} 
+                                className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? 
+                                `bg-${getChainColorCode(chainId)} cursor-pointer rounded rounded-xl` 
+                                : `hidden`)} 
+                                onClick={() => setOpen(true)} 
+                            />
+                        </div>
 
           {/* <div
             className="flex gap-2 mx-2 sm:px-1 sm:gap-4 md:gap-18 justify-between items-center">
