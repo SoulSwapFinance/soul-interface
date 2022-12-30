@@ -322,7 +322,7 @@ export default function FullPositionCard({ chainId, pair, border, stakedBalance 
     <Disclosure as="div" className="py-0">
       {({ open }) => (
         <div
-          className={classNames(`border rounded rounded-xl `,
+          className={classNames(`border border-dark-800 rounded rounded-xl `,
             open ? `bg-dark-900 border-[${getChainColor(chainId)}]` : `hover:bg-dark-800`,
             'shadow-inner flex flex-col rounded-2xl gap-2 py-2 pl-1 pr-2 transition'
           )}
