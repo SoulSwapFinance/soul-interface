@@ -95,9 +95,9 @@ const Mobile: FC = () => {
                   leaveTo="translate-x-[-100%]"
                   unmount={false}
                 >
-                  <div className="max-w-sm">
+                  <div className="ml-2 max-w-sm">
                     <div className={classNames("flex flex-col h-full py-2 overflow-x-hidden overflow-y-scroll shadow-xl", "bg-dark-1100")}>
-                      <nav className="flex-1 bg-dark-1000" aria-label="Sidebar">
+                      <nav className="flex-1 " aria-label="Sidebar">
                         {bar.map((node) => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
@@ -106,10 +106,10 @@ const Mobile: FC = () => {
                         {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                           <TokenStats />
                         }
-                      </div>
                         <div className="flex items-center justify-start">
                           <LanguageMenu />
                         </div>
+                      </div>
                     </div>
                   </div>
                 </Transition.Child>
