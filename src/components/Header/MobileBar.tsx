@@ -64,7 +64,7 @@ const MobileBar: FC = () => {
                             className={classNames(typeStyle, farmPage ? `text-white` : `text-[${getChainColor(chainId)}]`, `bg-${farmPage ? getChainColorCode(chainId) : `dark-1000`}`)}
                             onClick={farmRoute}
                         >
-                            {`Farm`}
+                            {`Earn`}
                         </Typography>
                         <div
                             className={`mt-1 m-1 border ${landingPage ? `border-[${getChainColor(chainId)}]` : `border-dark-700`} rounded rounded-xl p-1`}
