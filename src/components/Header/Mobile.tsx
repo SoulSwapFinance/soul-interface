@@ -58,10 +58,7 @@ const Mobile: FC = () => {
               <Bars3Icon width={24} className={classNames(isLuxor ? "hover:text-yellow" : `hover:text-[${getChainColor(chainId)}]`, `text-[${getChainColor(chainId)}]`, "cursor-pointer hover:text-white")} onClick={() => setOpen(true)} />
             </div>
           } */}
-          <div className={`p-1 bg-${getChainColorCode(chainId)} rounded-full hover:bg-dark-800`}>
-            {/* <div className="flex p-2 justify-between"> */}
-            <Bars3Icon width={24} className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `bg-${getChainColorCode(chainId)} cursor-pointer rounded rounded-xl` : `hidden`)} onClick={() => setOpen(true)} />
-          </div>
+
 
           {/* <div
             className="flex gap-2 mx-2 sm:px-1 sm:gap-4 md:gap-18 justify-between items-center">
@@ -70,7 +67,7 @@ const Mobile: FC = () => {
             })}
           </div> */}
         </div>
-        <Transition.Root show={open} as={Fragment}>
+        {/* <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 z-20 overflow-hidden" onClose={setOpen} unmount={false}>
             <div className="absolute inset-0 overflow-hidden">
               <Transition.Child
@@ -116,7 +113,8 @@ const Mobile: FC = () => {
               </div>
             </div>
           </Dialog>
-        </Transition.Root>
+        </Transition.Root> */}
+
         {/* NETWORK ICON */}
         <div className={`relative top-0.5 right-2 border border-[${getChainColor(chainId)}] p-1 rounded rounded-lg inline-block`}>
           <Web3Network />
