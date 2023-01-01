@@ -9,11 +9,11 @@ import { useCallback } from 'react'
 
 import { Field, selectCurrency, switchCurrencies, typeInput } from './actions'
 
-export function useCreateState(): AppState['create'] {
-  return useAppSelector((state) => state.create)
+export function useCreateFarmState(): AppState['defarms'] {
+  return useAppSelector((state) => state.defarms)
 }
 
-export function useCreateActionHandlers(): {
+export function useCreateFarmActionHandlers(): {
   onCurrencySelection: (field: Field, currency: Currency) => void
   onSwitchTokens: () => void
   onUserInput: (field: Field, typedValue: string) => void
@@ -50,28 +50,27 @@ export function useCreateActionHandlers(): {
   }
 }
 
-export function useDerivedCreateInfo(): {
+export function useDerivedCreateFarmInfo(): {
   currencies: { [field in Field]?: Currency }
   inputError?: string
 } {
   const { i18n } = useLingui()
-
   const { account } = useActiveWeb3React()
 
   const {
     independentField,
     typedValue,
-    [Field.COLLATERAL]: { currencyId: collateralId },
-    [Field.ASSET]: { currencyId: assetId },
-  } = useCreateState()
+    [Field.DEPOSIT]: { currencyId: depositId },
+    [Field.REWARD]: { currencyId: rewardId },
+  } = useCreateFarmState()
 
-  const collateral = useCurrency(collateralId)
+  const deposit = useCurrency(depositId)
 
-  const asset = useCurrency(assetId)
+  const reward = useCurrency(rewardId)
 
   const currencies: { [field in Field]?: Currency } = {
-    [Field.COLLATERAL]: collateral ?? undefined,
-    [Field.ASSET]: asset ?? undefined,
+    [Field.DEPOSIT]: deposit ?? undefined,
+    [Field.REWARD]: reward ?? undefined,
   }
 
   let inputError: string | undefined
@@ -80,12 +79,12 @@ export function useDerivedCreateInfo(): {
     inputError = 'Connect Wallet'
   }
 
-  if (!currencies[Field.COLLATERAL]) {
-    inputError = inputError ?? i18n._(t`Select Collateral`)
-  }
+  // if (!currencies[Field.DEPOSIT]) {
+  //   inputError = inputError ?? i18n._(t`Select Deposit`)
+  // }
 
-  if (!currencies[Field.ASSET] || !currencies[Field.ASSET]) {
-    inputError = inputError ?? i18n._(t`Select Asset`)
+  if (!currencies[Field.REWARD] || !currencies[Field.REWARD]) {
+    inputError = inputError ?? i18n._(t`Select Reward`)
   }
 
   return {

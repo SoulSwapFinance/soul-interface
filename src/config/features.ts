@@ -10,6 +10,7 @@ const features: FeatureMap = {
     Feature.LIQUIDITY,
     Feature.AGGREGATE,
     Feature.BRIDGE,
+    // Feature.DEFARM,
     // Feature.ANALYTICS,
     // Feature.LIQUIDITY_MINING,
     // Feature.COFFINBOX,
@@ -56,6 +57,7 @@ const features: FeatureMap = {
 
   [ChainId.AVALANCHE]: [
     Feature.AMM,
+    // Feature.DEFARM,
     Feature.SWAP,
     Feature.BRIDGE,
     Feature.ANALYTICS,
@@ -72,6 +74,7 @@ const features: FeatureMap = {
 
   [ChainId.FANTOM]: [
     Feature.AMM,
+    Feature.DEFARM,
     Feature.BRIDGE,
     Feature.SWAP,
     Feature.SEANCE,
