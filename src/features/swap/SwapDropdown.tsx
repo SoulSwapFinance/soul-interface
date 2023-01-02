@@ -146,30 +146,31 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             </NavLink>
           </div>
         }
-
-        {featureEnabled(Feature.BRIDGE, chainId) &&
+        
+        {featureEnabled(Feature.AGGREGATE, chainId) &&
           <div 
           className={classNames(
             `flex rounded p-0.5`, 
-            isBridge && `border border-2 border-[${getChainColor(chainId)}]`)
+            isAggregator && `border border-2 border-[${getChainColor(chainId)}]`)
           }>
           <NavLink
             className={classNames(
-              bridgeStyle
+              ecoStyle
             )}
             activeClassName={classNames(
               activeStyle
             )}
-            href={'/bridge'}
+            href={`/exchange/aggregator/${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
+              }`}
           >
             <Image
               height={26}
               width={26}
-              alt={"bridge icon"}
-              src={Bridge} />
+              alt={"arrows merge icon"}
+              src={Merge} />
           </NavLink>
           </div>
-        }
+        } 
 
         {featureEnabled(Feature.BRIDGE, chainId) &&
           <div 
@@ -194,28 +195,27 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           </NavLink>
           </div>
         }
-
-        {featureEnabled(Feature.AGGREGATE, chainId) &&
+        
+        {featureEnabled(Feature.BRIDGE, chainId) &&
           <div 
           className={classNames(
             `flex rounded p-0.5`, 
-            isAggregator && `border border-2 border-[${getChainColor(chainId)}]`)
+            isBridge && `border border-2 border-[${getChainColor(chainId)}]`)
           }>
           <NavLink
             className={classNames(
-              ecoStyle
+              bridgeStyle
             )}
             activeClassName={classNames(
               activeStyle
             )}
-            href={`/exchange/aggregator/${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
-              }`}
+            href={'/bridge'}
           >
             <Image
               height={26}
               width={26}
-              alt={"arrows merge icon"}
-              src={Merge} />
+              alt={"bridge icon"}
+              src={Bridge} />
           </NavLink>
           </div>
         }
