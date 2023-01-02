@@ -36,6 +36,7 @@ import { Button } from 'components/Button'
 import { RowFixed } from 'components/Row'
 import { getAddress } from '@ethersproject/address'
 import NavLink from 'components/NavLink'
+import ExchangeAnalyticsHeader from 'features/analytics/ExchangeAnalyticsHeader'
 
 const chartTimespans = [
   {
@@ -192,24 +193,8 @@ export default function Token() {
 
     <AnalyticsContainer>
       <NextSeo title={`${token?.name} Analytics`} />
-      <div className="relative h-8">
-        <div className="absolute w-full h-full bg-gradient-to-r from-blue to-purple opacity-5" />
-        <div className="absolute flex items-center w-full p-2 lg:pl-14">
-          <div className="text-xs font-medium text-secondary m-1">
-            <Link href="/analytics">Dashboard</Link>&nbsp;
-          </div>
-          <div className="text-xs font-medium text-secondary m-1">
-            <Link href="/analytics/coffinbox">CoffinBox</Link>&nbsp;
-          </div>
-          <div className="text-xs font-medium text-secondary m-1">
-            <Link href="/analytics/pairs">Pairs</Link>&nbsp;
-          </div>
-          <div className={`text-xs font-bold text-high-emphesis m-1 text-${getChainColorCode(chainId)}`}>
-            Tokens&nbsp;
-          </div>
-        </div>
-      </div>
-      <TridentHeader className="sm:!flex-row sm:gap-24 justify-center" pattern="bg-bubble">
+        <ExchangeAnalyticsHeader />
+          <TridentHeader className="sm:!flex-row sm:gap-24 justify-center" pattern="bg-bubble">
         <div className="flex justify-center">
           {currency && library?.provider?.isMetaMask && (
             <Button

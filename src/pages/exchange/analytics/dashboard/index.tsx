@@ -29,7 +29,7 @@ import { SwapLayoutCard } from 'layouts/SwapLayout'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import Container from 'components/Container'
-
+import ExchangeAnalyticsHeader from 'features/analytics/ExchangeAnalyticsHeader'
 
 const chartTimespans = [
   {
@@ -305,28 +305,12 @@ export default function Dashboard(): JSX.Element {
   })
 
   return (
-		<Container id="cross-page" maxWidth="2xl" className="space-y-4 mt-4">
+	<Container id="cross-page" maxWidth="2xl" className="space-y-4 mt-4">
       <DoubleGlowShadowV2>
         <SwapLayoutCard>
           <SwapDropdown />
           <AnalyticsContainer>
-            <div className="relative h-8">
-              <div className="absolute w-full h-full bg-gradient-to-r from-blue to-purple opacity-5" />
-              <div className="absolute flex items-center w-full p-2 lg:pl-14">
-                <div className={`text-xs font-bold text-high-emphesis m-1 text-${getChainColorCode(chainId)}`}>
-                  Dashboard&nbsp;
-                </div>
-                <div className="text-xs font-medium text-secondary m-1">
-                  <Link href="/exchange/analytics/coffinbox">CoffinBox</Link>&nbsp;
-                </div>
-                <div className="text-xs font-medium text-secondary m-1">
-                  <Link href="/exchange/analytics/pairs">Pairs</Link>&nbsp;
-                </div>
-                <div className="text-xs font-medium text-secondary m-1">
-                  <Link href="/exchange/analytics/tokens">Tokens</Link>&nbsp;
-                </div>
-              </div>
-            </div>
+            <ExchangeAnalyticsHeader />
             {/* <Background background="dashboard">
         <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-2">
           <div>

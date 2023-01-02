@@ -9,6 +9,7 @@ import { useActiveWeb3React } from 'services/web3'
 import React, { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { getChainColorCode } from 'constants/chains'
+import ExchangeAnalyticsHeader from 'features/analytics/ExchangeAnalyticsHeader'
 
 export default function Pairs() {
   const [type, setType] = useState<'all' | 'gainers' | 'losers'>('all')
@@ -91,23 +92,7 @@ export default function Pairs() {
 
   return (
     <AnalyticsContainer>
-      <div className="relative h-8">
-        <div className="absolute w-full h-full bg-gradient-to-r from-blue to-purple opacity-5" />
-        <div className="absolute flex items-center w-full p-2 lg:pl-14">
-          <div className="text-xs font-medium text-secondary m-1">
-            <Link href="/exchange/analytics">Dashboard</Link>&nbsp;
-          </div>
-          <div className="text-xs font-medium text-secondary m-1">
-            <Link href="exchange/analytics/coffinbox">CoffinBox</Link>&nbsp;
-          </div>
-          <div className={`text-xs font-bold text-high-emphesis m-1 text-${getChainColorCode(chainId)}`}>
-            Pairs&nbsp;
-          </div>
-          <div className="text-xs font-medium text-secondary m-1">
-            <Link href="exchange/analytics/tokens">Tokens</Link>&nbsp;
-          </div>
-        </div>
-      </div>
+      <ExchangeAnalyticsHeader />
       <Background background="pools">
         <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-2">
           <div>

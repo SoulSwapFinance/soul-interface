@@ -51,7 +51,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const isRemove = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
   const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
   const isPool = isRemove || isAdd
-  const isAnalytics = asPath.startsWith('/exchange/analytics')
+  const isExchangeAnalytics = asPath.startsWith('/exchange/analytics')
   const isBridge = router.pathname.startsWith('/bridge')
   const isLimit = router.pathname.startsWith('/limit')
     || router.pathname.startsWith('/exchange/limit')
@@ -73,6 +73,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   return (
     <div className="flex items-center justify-between gap-2">
       <div className="flex gap-2 mx-1">
+ 
         <NavLink
           className={classNames(
             swapStyle
@@ -92,6 +93,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             alt={"swap icon"}
             src={Swap} />
         </NavLink>
+ 
         {featureEnabled(Feature.LIQUIDITY, chainId) &&
           <NavLink
             className={classNames(
@@ -110,13 +112,14 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             src={Pool} />
           </NavLink>
         }
+ 
         {featureEnabled(Feature.BRIDGE, chainId) &&
           <NavLink
             className={classNames(
             bridgeStyle
             )}
             activeClassName={classNames(
-            bridgeStyle
+            activeStyle
             )}
             href={'/bridge'}
           >
@@ -128,6 +131,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               {/* {i18n._(t`Bridge`)} */}
           </NavLink>
         }
+ 
         {featureEnabled(Feature.BRIDGE, chainId) &&
           <NavLink
             className={classNames(
@@ -145,12 +149,11 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               src={Cross} />
           </NavLink>
         }
- 
-        {/* TODO */}
-        {/* {featureEnabled(Feature.ANALYTICS, chainId) &&
+
+        {featureEnabled(Feature.ANALYTICS, chainId) &&
           <NavLink
             className={classNames(
-            chartStyle
+              chartStyle
             )}
             activeClassName={classNames(
               activeStyle
@@ -163,7 +166,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               alt={"chart icon"}
               src={Chart} />
           </NavLink>
-        } */}
+        }
+ 
       </div>
       <div className={'flex flex-cols-2 sm:gap-8 gap-6 mr-4 justify-end rounded'}>
         {isSwap && <Settings />}

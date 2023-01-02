@@ -29,6 +29,7 @@ import { SwapLayoutCard } from 'layouts/SwapLayout'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import Container from 'components/Container'
+import ExchangeAnalyticsHeader from 'features/analytics/ExchangeAnalyticsHeader'
 
 const chartTimespans = [
   {
@@ -163,23 +164,7 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
         <SwapLayoutCard>
           <SwapDropdown inputCurrency={currency0} outputCurrency={currency1} />
           <AnalyticsContainer>
-            <div className="relative h-8">
-              <div className="absolute w-full h-full bg-gradient-to-r from-blue to-purple opacity-5" />
-              <div className="absolute flex items-center w-full p-2 lg:pl-14">
-                <div className="text-xs font-medium text-secondary m-1">
-                  <Link href="/analytics">Dashboard</Link>&nbsp;
-                </div>
-                <div className="text-xs font-medium text-secondary m-1">
-                  <Link href="/analytics/coffinbox">CoffinBox</Link>&nbsp;
-                </div>
-                <div className={`text-xs font-bold text-high-emphesis m-1 text-${getChainColorCode(chainId)}`}>
-                  Pairs&nbsp;
-                </div>
-                <div className="text-xs font-medium text-secondary m-1">
-                  <Link href="/analytics/tokens">Tokens</Link>&nbsp;
-                </div>
-              </div>
-            </div>
+            <ExchangeAnalyticsHeader />
             <TridentHeader className="sm:!flex-row justify-between items-center" pattern="bg-bubble">
               <div className="space-y-4">
                 <div className="flex items-center mt-2 space-x-4">

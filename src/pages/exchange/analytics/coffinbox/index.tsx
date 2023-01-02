@@ -18,6 +18,7 @@ import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import Container from 'components/Container'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import { SwapLayoutCard } from 'layouts/SwapLayout'
+import ExchangeAnalyticsHeader from 'features/analytics/ExchangeAnalyticsHeader'
 
 export default function CoffinBox(): JSX.Element {
   const { chainId } = useActiveWeb3React()
@@ -107,23 +108,7 @@ export default function CoffinBox(): JSX.Element {
         <SwapLayoutCard>
           <SwapDropdown />
           <AnalyticsContainer>
-            <div className="relative h-8">
-              <div className="absolute w-full h-full bg-gradient-to-r from-blue to-purple opacity-5" />
-              <div className="absolute flex items-center w-full p-2 lg:pl-14">
-                <div className="text-xs font-medium text-secondary m-1">
-                  <Link href="/exchange/analytics">Dashboard</Link>&nbsp;
-                </div>
-                <div className={`text-xs font-bold text-high-emphesis m-1 text-${getChainColorCode(chainId)}`}>
-                  CoffinBox&nbsp;
-                </div>
-                <div className="text-xs font-medium text-secondary m-1">
-                  <Link href="exchange/analytics/pairs">Pairs</Link>&nbsp;
-                </div>
-                <div className="text-xs font-medium text-secondary m-1">
-                  <Link href="exchange/analytics/tokens">Tokens</Link>&nbsp;
-                </div>
-              </div>
-            </div>
+          <ExchangeAnalyticsHeader />
             <TridentBody>
               <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-2">
                 <div>
