@@ -19,7 +19,7 @@ import Container from 'components/Container'
 // import CurrencyInputPanel from 'components/CurrencyInputPanel'
 import Dots from 'components/Dots'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
-import SwapHeader from 'features/swap/SwapHeader'
+// import SwapHeader from 'features/swap/SwapHeader'
 import { Field } from 'state/mint/actions'
 import Head from 'next/head'
 import LiquidityPrice from 'features/liquidity/LiquidityPrice'
@@ -371,7 +371,7 @@ export default function Add() {
           <DoubleGlowShadowV2>
         {/* <SwapBanner /> */}
         <SwapLayoutCard>
-        <div className="p-0 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+        {/* <div className="p-0 px-2 mt-0 space-y-4 rounded bg-dark-1000" style={{ zIndex: 1 }}> */}
 
         {/* <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
           {/* <SwapHeader
@@ -544,7 +544,7 @@ export default function Add() {
               currencies={[currencies.CURRENCY_A, currencies.CURRENCY_B]}
             />
           )}
-        </div>
+        {/* </div> */}
         <div className={"grid grid-cols-2 gap-2 text-white justify-center m-2"}>
           <NavLink href="/pool">
             <Button

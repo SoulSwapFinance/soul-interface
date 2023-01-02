@@ -14,10 +14,14 @@ import { Feature } from 'enums'
 // import Dropdown from 'components/Subheader'
 import Image from 'next/image'
 // import { Button } from 'components/Button'
-import Globe from 'assets/svg/icons/Globe.svg'
-import Chain from 'assets/svg/icons/Chain.svg'
+import Bridge from 'assets/svg/icons/Bridge.svg'
+import Chart from 'assets/svg/icons/Chart.svg'
+import RainDrop from 'assets/svg/icons/RainDrop.svg'
+import Swap from 'assets/svg/icons/Swap.svg'
+import Pool from 'assets/svg/icons/Pool.svg'
+// import Chain from 'assets/svg/icons/Chain.svg'
 import ChevronUpDown from 'assets/svg/icons/ChevronUpDown.svg'
-import PlusSign from 'assets/svg/icons/PlusSign.svg'
+// import PlusSign from 'assets/svg/icons/PlusSign.svg'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
@@ -41,67 +45,75 @@ interface HeaderProps {
 const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   // const { i18n } = useLingui()
   const { asPath } = useRouter()
+  const router = useRouter()
   const { chainId } = useActiveWeb3React()
-  const isRemove = asPath.startsWith('/remove')
-  const isAdd = asPath.startsWith('/add')
-  const isSwap = asPath.startsWith('/exchange/swap') || asPath.startsWith('/swap')
-    || asPath.startsWith('/limit') || asPath.startsWith('exchange/limit')
-    || asPath.startsWith('/add') || asPath.startsWith('exchange/add')  || asPath.startsWith('exchange/swap/add')
-    || asPath.startsWith('/remove') || asPath.startsWith('exchange/remove') || asPath.startsWith('exchange/swap/remove')
+  const isRemove = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
+  const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/remove')
+  const isPool = isRemove || isAdd
+  const isAnalytics = asPath.startsWith('/exchange/analytics')
+  const isBridge = router.pathname.startsWith('/bridge')
+  const isSwap = asPath.startsWith('swap') || asPath.startsWith('/exchange/swap')
+    || asPath.startsWith('/limit') || asPath.startsWith('/exchange/limit')
+    || asPath.startsWith('/add') || asPath.startsWith('/exchange/add')  || asPath.startsWith('/exchange/swap/add')
+    || asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove') || asPath.startsWith('/exchange/swap/remove')
 
   const soulEnabled = [ChainId.FANTOM, ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId)
   // const globalNavStyle = ``
-  const activeNavLink = // `${globalNavStyle} text-${getChainColorCode(chainId)}`
-  `border bg-${getChainColorCode(chainId)} rounded text-white`
-  const inactiveNavLink = // `${globalNavStyle} text-white`
-  `text-secondary bg-white rounded rounded-xl border-[${getChainColor(chainId)}]`
+  const activeStyle = `border bg-${getChainColorCode(chainId)} rounded`
+  const style = `text-secondary bg-white rounded rounded-xl border border-[${getChainColor(chainId)}]`
+  const swapStyle = isSwap ? activeStyle : style
+  const poolStyle = isPool ? activeStyle : style
+  const bridgeStyle = isBridge ? activeStyle : style
+  const chartStyle = isAnalytics ? activeStyle : style
  
   return (
     <div className="flex items-center justify-between gap-2">
       <div className="flex gap-2 mx-1">
         <NavLink
           className={classNames(
-            inactiveNavLink
+            swapStyle
             )}
           activeClassName={classNames(
-            activeNavLink          
-          )}
+            swapStyle
+            )}
           href={
             inputCurrency && outputCurrency ?
               `/exchange/swap?inputCurrency=${currencyId(inputCurrency)}&outputCurrency=${currencyId(outputCurrency)}`
               : `/exchange/swap?inputCurrency=${NATIVE[chainId].symbol}&outputCurrency=${soulEnabled ? SOUL_ADDRESS[chainId] : USDC_ADDRESS[chainId]}`
           }
         >
-            <Image className={"mt-2"} alt={"chevron up down black icon"}          
-            src={ChevronUpDown}  />
-            {/* {`↕`} */}
+            <Image 
+            height={26}
+            width={26}
+            alt={"swap icon"}
+            src={Swap} />
         </NavLink>
         {featureEnabled(Feature.LIQUIDITY, chainId) &&
           <NavLink
             className={classNames(
-            inactiveNavLink
+              poolStyle
             )}
             activeClassName={classNames(
-              activeNavLink
-            )}
+              poolStyle
+              )}
             href={`/exchange/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
               }`}
           >
             <Image 
             height={26}
             width={26}
-            alt={"add icon"}
-            src={PlusSign} />
+            alt={"wavy water icon"}
+            src={Pool} />
               {/* {`+/-`} */}
           </NavLink>
         }
         {featureEnabled(Feature.BRIDGE, chainId) &&
           <NavLink
             className={classNames(
-            inactiveNavLink
+            bridgeStyle
             )}
             activeClassName={classNames(
-              activeNavLink
+            bridgeStyle
             )}
             href={'/bridge'}
           >
@@ -109,18 +121,36 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               height={26}
               width={26}
               alt={"bridge icon"}
-              src={Globe} />
+              src={Bridge} />
               {/* {i18n._(t`Bridge`)} */}
+          </NavLink>
+        }
+        {featureEnabled(Feature.ANALYTICS, chainId) &&
+          <NavLink
+            className={classNames(
+            chartStyle
+            )}
+            activeClassName={classNames(
+              chartStyle
+            )}
+            href={'/exchange/analytics/dashboard'}
+          >
+              <Image
+              height={26}
+              width={26}
+              alt={"ranking bars icon with a star"}
+              src={Chart} />
+              {/* {i18n._(t`Charts`)} */}
           </NavLink>
         }
         {/* {featureEnabled(Feature.LIQUIDITY, chainId) &&
           <NavLink
             activeClassName={classNames(
-              activeNavLink
+              activeStyle
             )}
             href={'/cross'}
           >
-            <Typography weight={700} className={inactiveNavLink}>
+            <Typography weight={700} className={style}>
               <Image alt={"chain icon"} src={Chain} />
               {i18n._(t`Crosschain`)}
             </Typography>
