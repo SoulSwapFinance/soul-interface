@@ -44,10 +44,10 @@ interface HeaderProps {
 }
 
 const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
-  // const { i18n } = useLingui()
   const { asPath } = useRouter()
   const router = useRouter()
   const { chainId } = useActiveWeb3React()
+ 
   const isRemove = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
   const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
   const isPool = isRemove || isAdd
@@ -55,16 +55,19 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const isBridge = router.pathname.startsWith('/bridge')
   const isLimit = router.pathname.startsWith('/limit')
     || router.pathname.startsWith('/exchange/limit')
+  const isAggregator = router.pathname.startsWith('/swap/aggregator') 
+    || router.pathname.startsWith('/exchange/swap/aggregator')
   const isCross = router.pathname.startsWith('/cross') 
     || router.pathname.startsWith('/exchange/cross')
-  const isSwap = asPath.startsWith('swap') || asPath.startsWith('/exchange/swap')
-    isLimit || isPool
+  const isExchange = router.pathname.startsWith('/swap') 
+    || router.pathname.startsWith('/exchange/swap')
+  const isSwap = isExchange || isLimit || isPool
 
   const soulEnabled = [ChainId.FANTOM, ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId)
-  // const globalNavStyle = ``
+
   const activeStyle = `border bg-${getChainColorCode(chainId)} rounded`
   const style = `text-secondary bg-white rounded rounded-xl border border-[${getChainColor(chainId)}]`
-  const swapStyle = isSwap ? activeStyle : style
+  const swapStyle = isExchange || isAggregator ? activeStyle : style
   const poolStyle = isPool ? activeStyle : style
   const bridgeStyle = isBridge ? activeStyle : style
   const chartStyle = isAnalytics ? activeStyle : style
