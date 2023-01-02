@@ -332,7 +332,7 @@ export default function Exchange() {
         </div>
       }
 
-<Container id="cross-page" maxWidth="2xl" className="space-y-4 mt-2">
+    <Container id="cross-page" maxWidth="2xl" className="space-y-4 mt-4">
       <DoubleGlowShadowV2>
       {/* <SwapLayoutCard> */}
 			<div className="mt-2" />
