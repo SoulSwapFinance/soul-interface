@@ -95,10 +95,6 @@ module.exports = withBundleAnalyzer(
     async rewrites() {
       return [
         {
-          source: '/aggregator',
-          destination: '/exchange/aggregator',
-        },
-        {
           source: '/add/:token*',
           destination: '/exchange/add/:token*',
         },
@@ -119,8 +115,8 @@ module.exports = withBundleAnalyzer(
           destination: '/exchange/swap/limit/:token*',
         },
         {
-          source: '/aggregator',
-          destination: '/exchange/aggregator',
+          source: '/aggregator/:token*',
+          destination: '/exchange/aggregator/:token*',
         },
         {
           source: '/cross',

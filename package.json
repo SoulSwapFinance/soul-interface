@@ -159,6 +159,8 @@
     "@coinbase/wallet-sdk": "^3.5.4",
     "@davatar/react": "^1.11.1",
     "@emotion/react": "^11.9.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@fortawesome/vue-fontawesome": "^2.0.9",
     "@gnosis.pm/gp-v2-contracts": "1.1.2",
     "@keystonehq/keystone-connector": "^0.13.1",
     "@lifi/widget": "^1.13.1",

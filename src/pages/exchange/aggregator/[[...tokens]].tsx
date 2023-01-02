@@ -352,9 +352,9 @@ const Aggregator = ({ }) => {
 		(currencyA: Currency) => {
 			const newCurrencyIdA = currencyId(currencyA)
 			if (newCurrencyIdA === currencyIdB) {
-				router.push(`/exchange/swap/aggregator/${currencyIdB}/${currencyIdA}`)
+				router.push(`/exchange/aggregator/${currencyIdB}/${currencyIdA}`)
 			} else {
-				router.push(`/exchange/swap/aggregator/${newCurrencyIdA}/${currencyIdB}`)
+				router.push(`/exchange/aggregator/${newCurrencyIdA}/${currencyIdB}`)
 			}
 		},
 		[currencyIdB, router, currencyIdA]
@@ -365,12 +365,12 @@ const Aggregator = ({ }) => {
 			const newCurrencyIdB = currencyId(currencyB)
 			if (currencyIdA === newCurrencyIdB) {
 				if (currencyIdB) {
-					router.push(`/exchange/swap/aggregator/${currencyIdB}/${newCurrencyIdB}`)
+					router.push(`/exchange/aggregator/${currencyIdB}/${newCurrencyIdB}`)
 				} else {
-					router.push(`/exchange/swap/aggregator/${newCurrencyIdB}`)
+					router.push(`/exchange/aggregator/${newCurrencyIdB}`)
 				}
 			} else {
-				router.push(`/exchange/swap/aggregator/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
+				router.push(`/exchange/aggregator/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
 			}
 		},
 		[currencyIdA, router, currencyIdB]

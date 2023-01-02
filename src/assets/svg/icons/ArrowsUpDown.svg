@@ -5,7 +5,7 @@
     class="w-6 h-6"
 >
     <defs>
-        <style>.fa-secondary{opacity:.4}</style>
+        <!-- <style>.fa-secondary{opacity:.4}</style> -->
     </defs>
 <path 
     class="fa-primary"
@@ -13,6 +13,7 @@
     />
  <path 
     class="fa-secondary"
+    fill="#821FFF"
     d="M361.4 41.4c12.5-12.5 32.8-12.5 45.3 0l96 96c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L416 141.3V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V141.3l-41.4 41.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l96-96z"
     />
 </svg>

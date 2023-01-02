@@ -5,8 +5,8 @@ import { useLingui } from '@lingui/react'
 import { ChainId, Currency, NATIVE, Percent, SOUL_ADDRESS, USDC_ADDRESS } from 'sdk'
 import NavLink from 'components/NavLink'
 import Settings from 'components/Settings'
-
-import Typography from 'components/Typography'
+// import { SwapIcon } from 'components/Icons/exchange/SwapIcon'
+// import Typography from 'components/Typography'
 import { useRouter } from 'next/router'
 import { classNames, currencyId, featureEnabled } from '../../functions'
 
@@ -16,14 +16,14 @@ import Image from 'next/image'
 
 import Bridge from 'assets/svg/icons/Bridge.svg'
 import Chart from 'assets/svg/icons/Chart.svg'
-import RainDrop from 'assets/svg/icons/Raindrop.svg'
-import Swap from 'assets/svg/icons/Swap.svg'
+// import RainDrop from 'assets/svg/icons/Raindrop.svg'
+// import Swap from 'assets/svg/icons/Swap.svg'
 import PlusMinus from 'assets/svg/icons/PlusMinus.svg'
 import Merge from 'assets/svg/icons/Merge.svg'
 import Cross from 'assets/svg/icons/Cross.svg'
 
 import { getChainColor, getChainColorCode } from 'constants/chains'
-import ChevronUpDown from 'assets/svg/icons/ChevronUpDown.svg'
+import ArrowsUpDown from 'assets/svg/icons/ArrowsUpDown.svg'
 
 // import CrossChainMode from 'components/CrossChainMode'
 // import PlusSign from 'assets/svg/icons/PlusSign.svg'
@@ -52,37 +52,37 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const { asPath } = useRouter()
   const router = useRouter()
   const { chainId } = useActiveWeb3React()
- 
+
   const isRemove = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
   const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
   const isPool = isRemove || isAdd
-  
-  const isExchangeAnalytics 
+
+  const isExchangeAnalytics
     = asPath.startsWith('/exchange/analytics')
-      || asPath.startsWith('/exchange/analytics/coffinbox')
-      ||  asPath.startsWith('/exchange/analytics/dashboard')
-      || asPath.startsWith('/exchange/analytics/pairs')
-      || asPath.startsWith('/exchange/analytics/tokens')
+    || asPath.startsWith('/exchange/analytics/coffinbox')
+    || asPath.startsWith('/exchange/analytics/dashboard')
+    || asPath.startsWith('/exchange/analytics/pairs')
+    || asPath.startsWith('/exchange/analytics/tokens')
 
   const isBridge = router.pathname.startsWith('/bridge')
-  
-  const isLimit = router.pathname.startsWith('/limit') 
+
+  const isLimit = router.pathname.startsWith('/limit')
     || router.pathname.startsWith('/exchange/limit')
-  
-  const isAggregator = router.pathname.startsWith('/swap/aggregator') 
-    || router.pathname.startsWith('/exchange/swap/aggregator')
-  
-  const isCross = router.pathname.startsWith('/cross') 
+
+  const isAggregator = asPath.startsWith('/aggregator')
+    || asPath.startsWith('/exchange/aggregator')
+
+  const isCross = router.pathname.startsWith('/cross')
     || router.pathname.startsWith('/exchange/cross')
-  
-  const isExchange = router.pathname.startsWith('/swap') 
+
+  const isExchange = router.pathname.startsWith('/swap')
     || router.pathname.startsWith('/exchange/swap')
 
   const useSettings = isExchange || isLimit || isPool
 
   const soulEnabled = [ChainId.FANTOM, ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId)
 
-  const activeStyle = `border bg-${getChainColorCode(chainId)} rounded`
+  const activeStyle = `border border-[${getChainColor(chainId)}] rounded`
   const style = `text-secondary bg-white rounded rounded-xl border border-[${getChainColor(chainId)}]`
   const swapStyle = isExchange ? activeStyle : style
   const poolStyle = isPool ? activeStyle : style
@@ -90,70 +90,93 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const bridgeStyle = isBridge ? activeStyle : style
   const chartStyle = isExchangeAnalytics ? activeStyle : style
   const crossStyle = isCross ? activeStyle : style
- 
+
   return (
     <div className="flex items-center justify-between gap-2">
       <div className="flex gap-2 mx-1">
- 
-        <NavLink
+
+        <div
           className={classNames(
-            swapStyle
-            )}
-          activeClassName={classNames(
-            activeStyle
-            )}
-          href={
-            inputCurrency && outputCurrency ?
-              `/exchange/swap?inputCurrency=${currencyId(inputCurrency)}&outputCurrency=${currencyId(outputCurrency)}`
-              : `/exchange/swap?inputCurrency=${NATIVE[chainId].symbol}&outputCurrency=${soulEnabled ? SOUL_ADDRESS[chainId] : USDC_ADDRESS[chainId]}`
-          }
-        >
-            <Image 
-            height={26}
-            width={26}
-            alt={"swap icon"}
-            src={Swap} />
-        </NavLink>
- 
-        {featureEnabled(Feature.LIQUIDITY, chainId) &&
+            `flex rounded p-0.5`,
+            isExchange && `border border-2 border-[${getChainColor(chainId)}]`)
+          }>
           <NavLink
             className={classNames(
-              poolStyle
+              swapStyle
             )}
             activeClassName={classNames(
               activeStyle
-              )}
-            href={`/exchange/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
-              }`}
+            )}
+            href={
+              inputCurrency && outputCurrency ?
+                `/exchange/swap?inputCurrency=${currencyId(inputCurrency)}&outputCurrency=${currencyId(outputCurrency)}`
+                : `/exchange/swap?inputCurrency=${NATIVE[chainId].symbol}&outputCurrency=${soulEnabled ? SOUL_ADDRESS[chainId] : USDC_ADDRESS[chainId]}`
+            }
           >
-            <Image 
-            height={26}
-            width={26}
-            alt={"plus over minus icon"}
-            src={PlusMinus} />
+            <Image
+              height={26}
+              width={26}
+              className={'border'}
+              alt={"swap icon"}
+              src={ArrowsUpDown} />
           </NavLink>
+        </div>
+
+        {featureEnabled(Feature.LIQUIDITY, chainId) &&
+          <div
+            className={classNames(
+              `flex rounded p-0.5`,
+              isPool && `border border-2 border-[${getChainColor(chainId)}]`)
+            }>
+            <NavLink
+              className={classNames(
+                poolStyle
+              )}
+              activeClassName={classNames(
+                activeStyle
+              )}
+              href={`/exchange/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
+                }`}
+            >
+              <Image
+                height={26}
+                width={26}
+                alt={"plus over minus icon"}
+                src={PlusMinus} />
+            </NavLink>
+          </div>
         }
- 
+
         {featureEnabled(Feature.BRIDGE, chainId) &&
+          <div 
+          className={classNames(
+            `flex rounded p-0.5`, 
+            isBridge && `border border-2 border-[${getChainColor(chainId)}]`)
+          }>
           <NavLink
             className={classNames(
-            bridgeStyle
+              bridgeStyle
             )}
             activeClassName={classNames(
-            activeStyle
+              activeStyle
             )}
             href={'/bridge'}
           >
-              <Image
+            <Image
               height={26}
               width={26}
               alt={"bridge icon"}
               src={Bridge} />
-              {/* {i18n._(t`Bridge`)} */}
           </NavLink>
+          </div>
         }
- 
+
         {featureEnabled(Feature.BRIDGE, chainId) &&
+          <div 
+          className={classNames(
+            `flex rounded p-0.5`, 
+            isCross && `border border-2 border-[${getChainColor(chainId)}]`)
+          }>
           <NavLink
             className={classNames(
               crossStyle
@@ -163,15 +186,21 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             )}
             href={'/cross'}
           >
-              <Image
+            <Image
               height={26}
               width={26}
               alt={"crossed swap arrows"}
               src={Cross} />
           </NavLink>
+          </div>
         }
-        
+
         {featureEnabled(Feature.AGGREGATE, chainId) &&
+          <div 
+          className={classNames(
+            `flex rounded p-0.5`, 
+            isAggregator && `border border-2 border-[${getChainColor(chainId)}]`)
+          }>
           <NavLink
             className={classNames(
               ecoStyle
@@ -179,18 +208,24 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             activeClassName={classNames(
               activeStyle
             )}
-            href={`/exchange/swap/aggregator/${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
-            }`}
+            href={`/exchange/aggregator/${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
+              }`}
           >
-              <Image
+            <Image
               height={26}
               width={26}
               alt={"arrows merge icon"}
               src={Merge} />
           </NavLink>
+          </div>
         }
 
         {featureEnabled(Feature.ANALYTICS, chainId) &&
+          <div 
+          className={classNames(
+            `flex rounded p-0.5`, 
+            isExchangeAnalytics && `border border-2 border-[${getChainColor(chainId)}]`)
+          }>
           <NavLink
             className={classNames(
               chartStyle
@@ -200,20 +235,21 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             )}
             href={'/exchange/analytics/dashboard'}
           >
-              <Image
+            <Image
               height={26}
               width={26}
               alt={"chart icon"}
               src={Chart} />
           </NavLink>
+          </div>
         }
- 
+
       </div>
       <div className={'flex flex-cols-2 sm:gap-8 gap-6 mr-4 justify-end rounded'}>
         {useSettings && <Settings />}
       </div>
     </div>
-  )
+      )
 }
 
-export default SwapHeader
+      export default SwapHeader
