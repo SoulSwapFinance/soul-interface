@@ -361,25 +361,14 @@ export default function Add() {
           content="Add liquidity to the Soul AMM to enable gas optimised and low slippage trades across countless networks"
         />
       </Head>
-      {/* <SwapHeader
-        inputCurrency={currencyA}
-        outputCurrency={currencyB}
-        allowedSlippage={allowedSlippage}
-      /> */}
-      {/* <SoulLogo /> */}
       <Container id="add-liquidity-page" maxWidth="2xl" className="space-y-4 mt-4">
-          <DoubleGlowShadowV2>
-        {/* <SwapBanner /> */}
+        <DoubleGlowShadowV2>
         <SwapLayoutCard>
-        {/* <div className="p-0 px-2 mt-0 space-y-4 rounded bg-dark-1000" style={{ zIndex: 1 }}> */}
-
-        {/* <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
-          {/* <SwapHeader
-            inputCurrency={currencies[Field.CURRENCY_A]}
-            outputCurrency={currencies[Field.CURRENCY_B]}
-            allowedSlippage={allowedSlippage}
-          /> */}
-          <SwapDropdown inputCurrency={currencies[Field.CURRENCY_A]} outputCurrency={currencies[Field.CURRENCY_B]} />
+          <SwapDropdown 
+          inputCurrency={currencies[Field.CURRENCY_A]}
+          outputCurrency={currencies[Field.CURRENCY_B]} 
+          // allowedSlippage={allowedSlippage}
+          />
           <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
           <TransactionConfirmationModal
             isOpen={showConfirm}
@@ -397,9 +386,6 @@ export default function Add() {
             pendingText={pendingText}
           />
           <div className="flex flex-col gap-3 space-y-3">
-            {/* {pair && pairState !== PairState.INVALID && (
-                <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
-              )} */}
             <SwapAssetPanel
               spendFromWallet={true}
               chainId={chainId}

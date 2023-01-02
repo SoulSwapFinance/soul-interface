@@ -334,15 +334,8 @@ export default function Exchange() {
 
     <Container id="cross-page" maxWidth="2xl" className="space-y-4 mt-4">
       <DoubleGlowShadowV2>
-      {/* <SwapLayoutCard> */}
-			<div className="mt-2" />
-
-        <div className="p-4 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-        {/* <SwapHeader
-            inputCurrency={currencyA}
-            outputCurrency={currencyB}
-            allowedSlippage={allowedSlippage}
-          />           */}
+        <SwapLayoutCard>
+        <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
           <SwapDropdown />
             {/* <SwapHeader /> */}
               {/*  [F] TOKEN SELECTOR */}
@@ -729,10 +722,11 @@ export default function Exchange() {
                 </Button>
               </div>
               </div>
+              </SwapLayoutCard>
         </DoubleGlowShadowV2>
       </Container>
           {/* </div> */}
-            {/* </SwapLayoutCard> */}
+            {/*  */}
     </>
   );
 
