@@ -48,14 +48,16 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const router = useRouter()
   const { chainId } = useActiveWeb3React()
   const isRemove = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
-  const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/remove')
+  const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
   const isPool = isRemove || isAdd
   const isAnalytics = asPath.startsWith('/exchange/analytics')
   const isBridge = router.pathname.startsWith('/bridge')
+  const isLimit = router.pathname.startsWith('/limit')
+    || router.pathname.startsWith('/exchange/limit')
+  const isMulti = router.pathname.startsWith('/cross') 
+    || router.pathname.startsWith('/exchange/cross')
   const isSwap = asPath.startsWith('swap') || asPath.startsWith('/exchange/swap')
-    || asPath.startsWith('/limit') || asPath.startsWith('/exchange/limit')
-    || asPath.startsWith('/add') || asPath.startsWith('/exchange/add')  || asPath.startsWith('/exchange/swap/add')
-    || asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove') || asPath.startsWith('/exchange/swap/remove')
+    isLimit || isPool
 
   const soulEnabled = [ChainId.FANTOM, ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId)
   // const globalNavStyle = ``
@@ -65,6 +67,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const poolStyle = isPool ? activeStyle : style
   const bridgeStyle = isBridge ? activeStyle : style
   const chartStyle = isAnalytics ? activeStyle : style
+  const multiStyle = isMulti ? activeStyle : style
  
   return (
     <div className="flex items-center justify-between gap-2">
@@ -74,7 +77,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             swapStyle
             )}
           activeClassName={classNames(
-            swapStyle
+            activeStyle
             )}
           href={
             inputCurrency && outputCurrency ?
@@ -94,7 +97,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               poolStyle
             )}
             activeClassName={classNames(
-              poolStyle
+              activeStyle
               )}
             href={`/exchange/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
               }`}
@@ -104,7 +107,6 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             width={26}
             alt={"wavy water icon"}
             src={Pool} />
-              {/* {`+/-`} */}
           </NavLink>
         }
         {featureEnabled(Feature.BRIDGE, chainId) &&
@@ -132,7 +134,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             chartStyle
             )}
             activeClassName={classNames(
-              chartStyle
+              activeStyle
             )}
             href={'/exchange/analytics/dashboard'}
           >
@@ -146,6 +148,9 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
         } */}
         {/* {featureEnabled(Feature.LIQUIDITY, chainId) &&
           <NavLink
+          className={classNames(
+              multiStyle
+            )}
             activeClassName={classNames(
               activeStyle
             )}
