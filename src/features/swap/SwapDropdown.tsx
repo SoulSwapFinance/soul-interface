@@ -1,19 +1,19 @@
 import React, { FC, useState } from 'react'
-// import { t } from '@lingui/macro'
+import { i18n } from '@lingui/core'
+import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { ChainId, Currency, NATIVE, Percent, SOUL_ADDRESS, USDC_ADDRESS } from 'sdk'
 import NavLink from 'components/NavLink'
 import Settings from 'components/Settings'
-// import CrossChainMode from 'components/CrossChainMode'
+
 import Typography from 'components/Typography'
 import { useRouter } from 'next/router'
 import { classNames, currencyId, featureEnabled } from '../../functions'
-// import ExternalLink from 'components/ExternalLink'
+
 import { useActiveWeb3React } from 'services/web3'
 import { Feature } from 'enums'
-// import Dropdown from 'components/Subheader'
 import Image from 'next/image'
-// import { Button } from 'components/Button'
+
 import Bridge from 'assets/svg/icons/Bridge.svg'
 import Chart from 'assets/svg/icons/Chart.svg'
 import RainDrop from 'assets/svg/icons/Raindrop.svg'
@@ -21,12 +21,16 @@ import Swap from 'assets/svg/icons/Swap.svg'
 import Pool from 'assets/svg/icons/Pool.svg'
 import Wand from 'assets/svg/icons/WandSparkle.svg'
 import Cross from 'assets/svg/icons/Cross.svg'
-// import Chain from 'assets/svg/icons/Chain.svg'
-import ChevronUpDown from 'assets/svg/icons/ChevronUpDown.svg'
-// import PlusSign from 'assets/svg/icons/PlusSign.svg'
+
 import { getChainColor, getChainColorCode } from 'constants/chains'
-import { i18n } from '@lingui/core'
-import { t } from '@lingui/macro'
+import ChevronUpDown from 'assets/svg/icons/ChevronUpDown.svg'
+
+// import CrossChainMode from 'components/CrossChainMode'
+// import PlusSign from 'assets/svg/icons/PlusSign.svg'
+// import Dropdown from 'components/Subheader'
+// import { Button } from 'components/Button'
+// import Chain from 'assets/svg/icons/Chain.svg'
+// import ExternalLink from 'components/ExternalLink'
 
 const getQuery = (input?: Currency, output?: Currency) => {
   const { chainId } = useActiveWeb3React()
@@ -53,7 +57,13 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
   const isPool = isRemove || isAdd
   
-  const isExchangeAnalytics = asPath.startsWith('/exchange/analytics')
+  const isExchangeAnalytics 
+    = asPath.startsWith('/exchange/analytics')
+      || asPath.startsWith('/exchange/analytics/coffinbox')
+      ||  asPath.startsWith('/exchange/analytics/dashboard')
+      || asPath.startsWith('/exchange/analytics/pairs')
+      || asPath.startsWith('/exchange/analytics/tokens')
+
   const isBridge = router.pathname.startsWith('/bridge')
   
   const isLimit = router.pathname.startsWith('/limit') 
@@ -68,7 +78,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const isExchange = router.pathname.startsWith('/swap') 
     || router.pathname.startsWith('/exchange/swap')
 
-  const isSwap = isExchange || isLimit || isPool
+  const useSettings = isExchange || isLimit || isPool
 
   const soulEnabled = [ChainId.FANTOM, ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId)
 
@@ -199,7 +209,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
  
       </div>
       <div className={'flex flex-cols-2 sm:gap-8 gap-6 mr-4 justify-end rounded'}>
-        {isSwap && <Settings />}
+        {useSettings && <Settings />}
       </div>
     </div>
   )
