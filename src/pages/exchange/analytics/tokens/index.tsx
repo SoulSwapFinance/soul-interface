@@ -35,7 +35,9 @@ export default function Tokens() {
       <Container id="exchange-analytics-tokens-page" maxWidth="2xl" className="space-y-4 mt-4">
       <DoubleGlowShadowV2>
         <SwapLayoutCard>
-          <SwapDropdown inputCurrency={currency0} outputCurrency={currency1} />
+          <SwapDropdown 
+          // inputCurrency={currency0} outputCurrency={currency1} 
+          />
           <AnalyticsContainer>
             <ExchangeAnalyticsHeader />
       <Background background="tokens">

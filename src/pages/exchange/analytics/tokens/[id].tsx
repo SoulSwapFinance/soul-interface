@@ -198,7 +198,9 @@ export default function Token() {
   <Container id="exchange-analytics-token-page" maxWidth="2xl" className="space-y-4 mt-4">
       <DoubleGlowShadowV2>
         <SwapLayoutCard>
-          <SwapDropdown inputCurrency={currency0} outputCurrency={currency1} />
+          <SwapDropdown 
+          // inputCurrency={currency0} outputCurrency={currency1} 
+          />
           <AnalyticsContainer>
             <ExchangeAnalyticsHeader />
       <NextSeo title={`${token?.name} Analytics`} />
