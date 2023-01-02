@@ -18,8 +18,8 @@ import Bridge from 'assets/svg/icons/Bridge.svg'
 import Chart from 'assets/svg/icons/Chart.svg'
 import RainDrop from 'assets/svg/icons/Raindrop.svg'
 import Swap from 'assets/svg/icons/Swap.svg'
-import Pool from 'assets/svg/icons/Pool.svg'
-import Wand from 'assets/svg/icons/WandSparkle.svg'
+import PlusMinus from 'assets/svg/icons/PlusMinus.svg'
+import Merge from 'assets/svg/icons/Merge.svg'
 import Cross from 'assets/svg/icons/Cross.svg'
 
 import { getChainColor, getChainColorCode } from 'constants/chains'
@@ -129,8 +129,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             <Image 
             height={26}
             width={26}
-            alt={"wavy water icon"}
-            src={Pool} />
+            alt={"plus over minus icon"}
+            src={PlusMinus} />
           </NavLink>
         }
  
@@ -185,8 +185,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               <Image
               height={26}
               width={26}
-              alt={"magick wand with sparkles"}
-              src={Wand} />
+              alt={"arrows merge icon"}
+              src={Merge} />
           </NavLink>
         }
 
