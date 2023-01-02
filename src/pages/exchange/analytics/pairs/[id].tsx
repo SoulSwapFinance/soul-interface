@@ -25,11 +25,13 @@ import Typography from 'components/Typography'
 import { TridentHeader } from 'layouts/Trident'
 import { computePairAddress } from 'sdk/functions/computePairAddress'
 import { Currency, FACTORY_ADDRESS, NATIVE, Token, WNATIVE_ADDRESS } from 'sdk'
-import { SwapLayoutCard } from 'layouts/SwapLayout'
-import SwapDropdown from 'features/swap/SwapDropdown'
+
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import Container from 'components/Container'
+import SwapDropdown from 'features/swap/SwapDropdown'
+import { SwapLayoutCard } from 'layouts/SwapLayout'
 import ExchangeAnalyticsHeader from 'features/analytics/ExchangeAnalyticsHeader'
+
 
 const chartTimespans = [
   {
@@ -159,7 +161,7 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
   const utilisation1dChange = (utilisation1d / utilisation2d) * 100 - 100
 
   return (
-    <Container id="cross-page" maxWidth="2xl" className="space-y-4 mt-4">
+  <Container id="exchange-analytics-pair-page" maxWidth="2xl" className="space-y-4 mt-4">
       <DoubleGlowShadowV2>
         <SwapLayoutCard>
           <SwapDropdown inputCurrency={currency0} outputCurrency={currency1} />

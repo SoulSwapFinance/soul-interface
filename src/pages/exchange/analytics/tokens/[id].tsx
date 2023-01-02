@@ -36,6 +36,10 @@ import { Button } from 'components/Button'
 import { RowFixed } from 'components/Row'
 import { getAddress } from '@ethersproject/address'
 import NavLink from 'components/NavLink'
+import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
+import Container from 'components/Container'
+import SwapDropdown from 'features/swap/SwapDropdown'
+import { SwapLayoutCard } from 'layouts/SwapLayout'
 import ExchangeAnalyticsHeader from 'features/analytics/ExchangeAnalyticsHeader'
 
 const chartTimespans = [
@@ -191,9 +195,13 @@ export default function Token() {
 
   return (
 
-    <AnalyticsContainer>
+  <Container id="exchange-analytics-token-page" maxWidth="2xl" className="space-y-4 mt-4">
+      <DoubleGlowShadowV2>
+        <SwapLayoutCard>
+          <SwapDropdown inputCurrency={currency0} outputCurrency={currency1} />
+          <AnalyticsContainer>
+            <ExchangeAnalyticsHeader />
       <NextSeo title={`${token?.name} Analytics`} />
-        <ExchangeAnalyticsHeader />
           <TridentHeader className="sm:!flex-row sm:gap-24 justify-center" pattern="bg-bubble">
         <div className="flex justify-center">
           {currency && library?.provider?.isMetaMask && (
@@ -377,6 +385,9 @@ export default function Token() {
         </div>
         <LegacyTransactions pairs={tokenPairs ? tokenPairs.map((pair) => pair.id) : []} />
       </div>
-    </AnalyticsContainer>
+          </AnalyticsContainer>
+        </SwapLayoutCard>
+      </DoubleGlowShadowV2>
+    </Container>
   )
 }

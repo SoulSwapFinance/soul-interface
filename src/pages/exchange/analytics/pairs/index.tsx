@@ -9,6 +9,10 @@ import { useActiveWeb3React } from 'services/web3'
 import React, { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { getChainColorCode } from 'constants/chains'
+import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
+import Container from 'components/Container'
+import SwapDropdown from 'features/swap/SwapDropdown'
+import { SwapLayoutCard } from 'layouts/SwapLayout'
 import ExchangeAnalyticsHeader from 'features/analytics/ExchangeAnalyticsHeader'
 
 export default function Pairs() {
@@ -91,8 +95,12 @@ export default function Pairs() {
   })
 
   return (
-    <AnalyticsContainer>
-      <ExchangeAnalyticsHeader />
+  <Container id="exchange-analytics-pairs-page" maxWidth="2xl" className="space-y-4 mt-4">
+      <DoubleGlowShadowV2>
+        <SwapLayoutCard>
+          <SwapDropdown />
+          <AnalyticsContainer>
+          <ExchangeAnalyticsHeader />
       <Background background="pools">
         <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-2">
           <div>
@@ -106,6 +114,9 @@ export default function Pairs() {
       <div className="px-4 pt-4 lg:px-14">
         <PairList pairs={pairsSearched} type={type} />
       </div>
-    </AnalyticsContainer>
+          </AnalyticsContainer>
+        </SwapLayoutCard>
+      </DoubleGlowShadowV2>
+    </Container>
   )
 }

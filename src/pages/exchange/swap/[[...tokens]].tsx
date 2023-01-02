@@ -729,34 +729,13 @@ const Swap = () => {
             <div className={classNames(!useLimit && !useAggregator ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}>
               <Button
                 size={'xs'}
-                className={classNames(`rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
-                onClick={handleBridgeSwap}
-              >
-                {i18n._(t`Bridge`)}
-              </Button>
-              <Button
-                size={'xs'}
-                className={classNames(`rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
-                onClick={handleAggregatorSwap}
-              >
-                {i18n._(t`Aggregate`)}
-              </Button>
-              <Button
-                size={'xs'}
-                className={classNames(`rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
-                onClick={handleAnalyticsRoute}
-              >
-                {i18n._(t`Analytics`)}
-              </Button>
-              <Button
-                size={'xs'}
                 className={classNames(showChart ? `bg-${getChainColorCode(chainId)}` : ``,
                   `rounded rounded-xl bg-dark-1000 border
                   border-[${getChainColor(chainId)}]`)
                 }
                 onClick={() => setShowChart(!showChart)}
               >
-                {i18n._(t`Charts`)}
+                {i18n._(t`Show Chart`)}
               </Button>
               {/* <Button
                 size={'xs'}

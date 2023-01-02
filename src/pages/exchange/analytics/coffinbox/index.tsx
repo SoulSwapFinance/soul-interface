@@ -103,7 +103,7 @@ export default function CoffinBox(): JSX.Element {
   })
 
   return (
-    <Container id="cross-page" maxWidth="2xl" className="space-y-4 mt-4">
+    <Container id="exchange-analytics-dashboard-page" maxWidth="2xl" className="space-y-4 mt-4">
       <DoubleGlowShadowV2>
         <SwapLayoutCard>
           <SwapDropdown />

@@ -9,6 +9,11 @@ import useFuse from 'hooks/useFuse'
 import Link from 'next/link'
 import React from 'react'
 import { useActiveWeb3React } from 'services/web3'
+import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
+import Container from 'components/Container'
+import SwapDropdown from 'features/swap/SwapDropdown'
+import { SwapLayoutCard } from 'layouts/SwapLayout'
+import ExchangeAnalyticsHeader from 'features/analytics/ExchangeAnalyticsHeader'
 
 export default function Tokens() {
   const tokens = useTokensAnalytics()
@@ -27,8 +32,12 @@ export default function Tokens() {
   })
 
   return (
-    <AnalyticsContainer>
-      <ExchangeAnalyticsHeader />
+      <Container id="exchange-analytics-tokens-page" maxWidth="2xl" className="space-y-4 mt-4">
+      <DoubleGlowShadowV2>
+        <SwapLayoutCard>
+          <SwapDropdown inputCurrency={currency0} outputCurrency={currency1} />
+          <AnalyticsContainer>
+            <ExchangeAnalyticsHeader />
       <Background background="tokens">
         <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-2">
           <div>
@@ -41,6 +50,9 @@ export default function Tokens() {
       <div className="px-4 pt-4 lg:px-14">
         <TokenList tokens={tokensSearched} />
       </div>
-    </AnalyticsContainer>
+          </AnalyticsContainer>
+        </SwapLayoutCard>
+      </DoubleGlowShadowV2>
+    </Container>
   )
 }

@@ -19,6 +19,7 @@ import Chart from 'assets/svg/icons/Chart.svg'
 import RainDrop from 'assets/svg/icons/Raindrop.svg'
 import Swap from 'assets/svg/icons/Swap.svg'
 import Pool from 'assets/svg/icons/Pool.svg'
+import Wand from 'assets/svg/icons/WandSparkle.svg'
 import Cross from 'assets/svg/icons/Cross.svg'
 // import Chain from 'assets/svg/icons/Chain.svg'
 import ChevronUpDown from 'assets/svg/icons/ChevronUpDown.svg'
@@ -51,24 +52,31 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const isRemove = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
   const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
   const isPool = isRemove || isAdd
+  
   const isExchangeAnalytics = asPath.startsWith('/exchange/analytics')
   const isBridge = router.pathname.startsWith('/bridge')
-  const isLimit = router.pathname.startsWith('/limit')
+  
+  const isLimit = router.pathname.startsWith('/limit') 
     || router.pathname.startsWith('/exchange/limit')
+  
   const isAggregator = router.pathname.startsWith('/swap/aggregator') 
     || router.pathname.startsWith('/exchange/swap/aggregator')
+  
   const isCross = router.pathname.startsWith('/cross') 
     || router.pathname.startsWith('/exchange/cross')
+  
   const isExchange = router.pathname.startsWith('/swap') 
     || router.pathname.startsWith('/exchange/swap')
+
   const isSwap = isExchange || isLimit || isPool
 
   const soulEnabled = [ChainId.FANTOM, ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId)
 
   const activeStyle = `border bg-${getChainColorCode(chainId)} rounded`
   const style = `text-secondary bg-white rounded rounded-xl border border-[${getChainColor(chainId)}]`
-  const swapStyle = isExchange || isAggregator ? activeStyle : style
+  const swapStyle = isExchange ? activeStyle : style
   const poolStyle = isPool ? activeStyle : style
+  const ecoStyle = isAggregator ? activeStyle : style
   const bridgeStyle = isBridge ? activeStyle : style
   const chartStyle = isExchangeAnalytics ? activeStyle : style
   const crossStyle = isCross ? activeStyle : style
@@ -150,6 +158,24 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               width={26}
               alt={"crossed swap arrows"}
               src={Cross} />
+          </NavLink>
+        }
+        
+        {featureEnabled(Feature.AGGREGATOR, chainId) &&
+          <NavLink
+            className={classNames(
+              ecoStyle
+            )}
+            activeClassName={classNames(
+              activeStyle
+            )}
+            href={`/exchange/swap/aggregator/${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
+          >
+              <Image
+              height={26}
+              width={26}
+              alt={"magick wand with sparkles"}
+              src={Wand} />
           </NavLink>
         }
 

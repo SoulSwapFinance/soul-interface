@@ -25,10 +25,10 @@ import Link from 'next/link'
 import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 import { getChainColorCode } from 'constants/chains'
-import { SwapLayoutCard } from 'layouts/SwapLayout'
-import SwapDropdown from 'features/swap/SwapDropdown'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import Container from 'components/Container'
+import SwapDropdown from 'features/swap/SwapDropdown'
+import { SwapLayoutCard } from 'layouts/SwapLayout'
 import ExchangeAnalyticsHeader from 'features/analytics/ExchangeAnalyticsHeader'
 
 const chartTimespans = [
@@ -305,7 +305,7 @@ export default function Dashboard(): JSX.Element {
   })
 
   return (
-	<Container id="cross-page" maxWidth="2xl" className="space-y-4 mt-4">
+	<Container id="exchange-analytics-coffinbox-page" maxWidth="2xl" className="space-y-4 mt-4">
       <DoubleGlowShadowV2>
         <SwapLayoutCard>
           <SwapDropdown />
