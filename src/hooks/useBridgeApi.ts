@@ -22,25 +22,28 @@ export const FTM_ETH = [
   "YEL",
   "SNX",
   "METRIC",
+  "anySOUL"
 ];
 export const FTM_BNB = ["BNB", "BUSD", "START", "BIFI", "BISON"];
 export const FTM_MATIC = ["MATIC", "SAVG"];
-export const FTM_AVAX = [""];
+export const FTM_AVAX = ["SOUL"];
 
 // API Anyswap Stables
 export const GLOBAL_STABLE = ["anyUSDC", "anyDAI", "anyUSDT", "MIM"]; // For Fantom, Binance and Ethereum
-export const FTM_ETH_STABLE = [
+export const FTM_ETH_TOKENS = [
   ...GLOBAL_STABLE,
   "anyFTM",
   "anyETH",
   "anyWBTC",
+  "anySOUL",
 ];
-export const FTM_MATIC_STABLE = [...GLOBAL_STABLE, "anyWBTC", "anyETH"];
-export const FTM_AVALANCHE_STABLE = [
+export const FTM_MATIC_TOKENS = [...GLOBAL_STABLE, "anyWBTC", "anyETH"];
+export const FTM_AVALANCHE_TOKENS = [
   ...GLOBAL_STABLE,
   "anyAVAX",
   "anyETH",
   "anyWBTC",
+  "anySOUL",
 ];
 export const FTM_ARBRITRUM_STABLE = ["MIM", "anyUSDC", "anyEURS"];
 export const FTM_BSC_STABLE = [
@@ -51,7 +54,8 @@ export const FTM_BSC_STABLE = [
   "anyAVAX",
 ];
 
-export const MULTICHAIN_URL = "https://bridgeapi.anyswap.exchange";
+// export const MULTICHAIN_URL = "https://bridgeapi.anyswap.exchange";
+export const MULTICHAIN_URL = "https://bridgeapi.multichain.org"
 export enum MULTICHAIN_METHODS {
   // GET_CHAIN_TOKENS = "/v2/serverInfo",
   GET_CHAIN_TOKENS = "/v4/tokenlistv4",
@@ -172,16 +176,16 @@ const useBridgeApi = () => {
         const isArbitrum = chainToId === 42161 || chainFromId === 42161;
 
         if (isFantom && isPolygon) {
-          return FTM_MATIC_STABLE.includes(tokenId);
+          return FTM_MATIC_TOKENS.includes(tokenId);
         }
         if (isFantom && isAvalanche) {
-          return FTM_AVALANCHE_STABLE.includes(tokenId);
+          return FTM_AVALANCHE_TOKENS.includes(tokenId);
         }
         if (isFantom && isBinance) {
           return FTM_BSC_STABLE.includes(tokenId);
         }
         if (isFantom && isEthereum) {
-          return FTM_ETH_STABLE.includes(tokenId);
+          return FTM_ETH_TOKENS.includes(tokenId);
         }
         if (isFantom && isArbitrum) {
           return FTM_ARBRITRUM_STABLE.includes(tokenId);
@@ -325,7 +329,7 @@ const useBridgeApi = () => {
           MinimumSwapFee,
           MaximumSwapFee,
           SwapFeeRate,
-          type: "transfer",
+          type: "transfer", // UNDERLYINGV2
           toChainId: toChainId,
           fromChainId: fromChainId,
           needApprove: "false",
