@@ -16,9 +16,10 @@ import Image from 'next/image'
 // import { Button } from 'components/Button'
 import Bridge from 'assets/svg/icons/Bridge.svg'
 import Chart from 'assets/svg/icons/Chart.svg'
-import RainDrop from 'assets/svg/icons/RainDrop.svg'
+import RainDrop from 'assets/svg/icons/Raindrop.svg'
 import Swap from 'assets/svg/icons/Swap.svg'
 import Pool from 'assets/svg/icons/Pool.svg'
+import Cross from 'assets/svg/icons/Cross.svg'
 // import Chain from 'assets/svg/icons/Chain.svg'
 import ChevronUpDown from 'assets/svg/icons/ChevronUpDown.svg'
 // import PlusSign from 'assets/svg/icons/PlusSign.svg'
@@ -54,7 +55,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const isBridge = router.pathname.startsWith('/bridge')
   const isLimit = router.pathname.startsWith('/limit')
     || router.pathname.startsWith('/exchange/limit')
-  const isMulti = router.pathname.startsWith('/cross') 
+  const isCross = router.pathname.startsWith('/cross') 
     || router.pathname.startsWith('/exchange/cross')
   const isSwap = asPath.startsWith('swap') || asPath.startsWith('/exchange/swap')
     isLimit || isPool
@@ -67,7 +68,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const poolStyle = isPool ? activeStyle : style
   const bridgeStyle = isBridge ? activeStyle : style
   const chartStyle = isAnalytics ? activeStyle : style
-  const multiStyle = isMulti ? activeStyle : style
+  const crossStyle = isCross ? activeStyle : style
  
   return (
     <div className="flex items-center justify-between gap-2">
@@ -127,6 +128,24 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               {/* {i18n._(t`Bridge`)} */}
           </NavLink>
         }
+        {featureEnabled(Feature.BRIDGE, chainId) &&
+          <NavLink
+            className={classNames(
+              crossStyle
+            )}
+            activeClassName={classNames(
+              activeStyle
+            )}
+            href={'/cross'}
+          >
+              <Image
+              height={26}
+              width={26}
+              alt={"crossed swap arrows"}
+              src={Cross} />
+          </NavLink>
+        }
+ 
         {/* TODO */}
         {/* {featureEnabled(Feature.ANALYTICS, chainId) &&
           <NavLink
@@ -141,101 +160,9 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               <Image
               height={26}
               width={26}
-              alt={"ranking bars icon with a star"}
+              alt={"chart icon"}
               src={Chart} />
-              {/* {i18n._(t`Charts`)}
           </NavLink>
-        } */}
-        {/* {featureEnabled(Feature.LIQUIDITY, chainId) &&
-          <NavLink
-          className={classNames(
-              multiStyle
-            )}
-            activeClassName={classNames(
-              activeStyle
-            )}
-            href={'/cross'}
-          >
-            <Typography weight={700} className={style}>
-              <Image alt={"chain icon"} src={Chain} />
-              {i18n._(t`Crosschain`)}
-            </Typography>
-          </NavLink>
-        } */}
-        {/* {featureEnabled(Feature.LIMIT, chainId) &&
-          <NavLink
-            activeClassName={classNames(
-              "border rounded bg-black",
-              chainColor
-            )}
-            // href=
-
-            href={{
-              pathname:`/exchange/limit/${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)}`,
-              // pathname: '/exchange/limit',
-              // query: getQuery(inputCurrency, outputCurrency),
-            }}
-          >
-            <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-              {i18n._(t`Limit`)}
-            </Typography>
-          </NavLink>
-        } */}
-        {/* <NavLink
-          activeClassName={classNames(
-            "border rounded bg-black",
-            chainColor
-          )}
-          href={{
-            pathname: '/cross',
-          }}
-        >
-          <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-            {i18n._(t`Cross`)}
-          </Typography>
-        </NavLink> */}
-        {/* { ![ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) && */}
-        {/* <NavLink
-          activeClassName={classNames(
-            "border rounded bg-black",
-            chainColor
-          )}
-          href={{
-            pathname: '/bridge',
-          }}
-        >
-          <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-            {i18n._(t`Globe`)}
-          </Typography>
-        </NavLink> */}
-        {/* } */}
-        {/* <NavLink
-          activeClassName={classNames(
-            "border rounded bg-black",
-            chainColor
-          )}
-          href={{
-            pathname: '/aggregator',
-          }}
-        >
-          <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-            {i18n._(t`Multi`)}
-          </Typography>
-        </NavLink> */}
-        {/* {featureEnabled(Feature.AGGREGATE, chainId) &&
-        <NavLink
-          activeClassName={classNames(
-            "border rounded bg-black",
-            chainColor
-          )}
-          href={{
-            pathname: '/aggregator',
-          }}
-        >
-          <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-            {i18n._(t`Eco`)}
-          </Typography>
-        </NavLink>
         } */}
       </div>
       <div className={'flex flex-cols-2 sm:gap-8 gap-6 mr-4 justify-end rounded'}>
