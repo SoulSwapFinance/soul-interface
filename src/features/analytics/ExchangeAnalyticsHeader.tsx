@@ -17,7 +17,7 @@ const ExchangeAnalyticsHeader = () => {
       <div className="absolute w-full h-full bg-gradient-to-r from-blue to-purple opacity-5" />
       <div className="absolute flex items-center w-full p-2 lg:pl-14">
         <div className={isDashboardActive ? activeStyle : inactiveStyle}>
-          <Link href="/exchange/analytics">Dashboard</Link>&nbsp;
+          <Link href="/exchange/analytics/dashboard">Dashboard</Link>&nbsp;
         </div>
         <div className={isCoffinboxActive ? activeStyle : inactiveStyle}>
           <Link href="/exchange/analytics/coffinbox">CoffinBox</Link>&nbsp;
