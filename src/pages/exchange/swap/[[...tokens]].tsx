@@ -364,21 +364,18 @@ const Swap = () => {
   // HANDLERS //
   const handleLimitSwap = useCallback(
     () => {
-      // setShowHeader(false)
       router.push(`/exchange/swap/limit/${currencyIdA}/${currencyIdB}`)
     }, []
   )
 
   const handleAggregatorSwap = useCallback(
     () => {
-      // setShowHeader(false)
-      router.push(`/swap/aggregator/${currencyA.isToken ? currencyA : WNATIVE_ADDRESS[chainId]}/${currencyA.isToken ? currencyA : WNATIVE_ADDRESS[chainId]}`)
+      router.push(`/swap/aggregator/${currencyA.isToken ? currencyA.wrapped.address : WNATIVE_ADDRESS[chainId]}/${currencyB.isToken ? currencyB.wrapped.address : WNATIVE_ADDRESS[chainId]}`)
     }, []
   )
 
   const handleBridgeSwap = useCallback(
     () => {
-      // setShowHeader(false)
       router.push(`/bridge`)
     }, []
   )
@@ -432,7 +429,6 @@ const Swap = () => {
 
   const handleTypeInput = useCallback(
     (value: string) => {
-      // setInputAmount('11')
       onUserInput(Field.INPUT, value)
     },
     [onUserInput]
@@ -469,7 +465,6 @@ const Swap = () => {
       />
       {![ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <div className="flex flex-col gap-3 mt-12 justify-center">
-          {/* <div className="flex mb-4 items-center justify-center"> */}
           <SwapHeader inputCurrency={currencyA} outputCurrency={currencyB} />
           <Button
             variant="filled"
@@ -496,7 +491,9 @@ const Swap = () => {
                     <SwapAssetPanel.Header
                       {...props}
                       label={
-                        independentField === Field.OUTPUT && !showWrap ? i18n._(t`Swap from:`) : i18n._(t`Swap from:`)
+                        independentField === Field.OUTPUT && !showWrap 
+                          ? i18n._(t`Swap from:`)
+                          : i18n._(t`Swap from:`)
                       }
                     />
                   )}

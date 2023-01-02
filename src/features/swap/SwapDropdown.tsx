@@ -70,7 +70,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const swapStyle = isExchange || isAggregator ? activeStyle : style
   const poolStyle = isPool ? activeStyle : style
   const bridgeStyle = isBridge ? activeStyle : style
-  const chartStyle = isAnalytics ? activeStyle : style
+  const chartStyle = isExchangeAnalytics ? activeStyle : style
   const crossStyle = isCross ? activeStyle : style
  
   return (
