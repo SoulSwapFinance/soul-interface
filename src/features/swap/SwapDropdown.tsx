@@ -125,7 +125,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               {/* {i18n._(t`Bridge`)} */}
           </NavLink>
         }
-        {featureEnabled(Feature.ANALYTICS, chainId) &&
+        {/* TODO */}
+        {/* {featureEnabled(Feature.ANALYTICS, chainId) &&
           <NavLink
             className={classNames(
             chartStyle
@@ -140,9 +141,9 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               width={26}
               alt={"ranking bars icon with a star"}
               src={Chart} />
-              {/* {i18n._(t`Charts`)} */}
+              {/* {i18n._(t`Charts`)}
           </NavLink>
-        }
+        } */}
         {/* {featureEnabled(Feature.LIQUIDITY, chainId) &&
           <NavLink
             activeClassName={classNames(
