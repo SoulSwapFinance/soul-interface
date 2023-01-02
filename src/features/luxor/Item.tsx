@@ -546,7 +546,7 @@ const BondItem = ({ bond, ...rest }) => {
                                 <Typography variant={'xxs'} lineHeight={14} 
                                 className={'text-accent'}
                                 >
-                                  Pending Rewards
+                                  {i18n._(t`Pending Rewards`)}
                                 </Typography>
                                 <Typography variant={'base'} lineHeight={24} fontFamily={'medium'}>
                                   {account ? formatCurrencyAmount(pendingAmount, 6) : '-'} LUX

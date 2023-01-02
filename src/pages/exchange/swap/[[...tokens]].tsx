@@ -103,7 +103,6 @@ const Swap = () => {
   }, [])
 
   const [showChart, setShowChart] = useState(false)
-  const [showAnalytics, setShowAnalytics] = useState(false)
   const [showPortfolio, setShowPortfolio] = useState(false)
   const useSwap = !useAggregator && !useLimit
   // const [showAggregator, setShowAggregator] = useState(false)
@@ -386,8 +385,8 @@ const Swap = () => {
 
   // const handleShowCharts = useCallback(
   //   (enabled: boolean) => {
-  //       setShowAnalytics(enabled)
-  //   }, [setShowAnalytics]
+  //       setShowChart(enabled)
+  //   }, [setShowChart]
   // )
 
   const handleLimitSwap = useCallback(
@@ -736,11 +735,11 @@ const Swap = () => {
               </Button>
               <Button
                 size={'xs'}
-                className={classNames(showAnalytics ? `bg-${getChainColorCode(chainId)}` : ``,
+                className={classNames(showChart ? `bg-${getChainColorCode(chainId)}` : ``,
                   `rounded rounded-xl bg-dark-1000 border
                   border-[${getChainColor(chainId)}]`)
                 }
-                onClick={() => setShowAnalytics(!showAnalytics)}
+                onClick={() => setShowChart(!showChart)}
               >
                 {i18n._(t`Analytics`)}
               </Button>
@@ -771,8 +770,8 @@ const Swap = () => {
               /> */}
             </div>
           </div>
-          <div className={`flex flex-cols-${showAnalytics && showPortfolio ? `hidden` : `1`}`}>
-            {showAnalytics && !showPortfolio && useSwap && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+          <div className={`flex flex-cols-${showChart && showPortfolio ? `hidden` : `1`}`}>
+            {showChart && !showPortfolio && useSwap && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
               <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
                 <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
                   {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
@@ -790,7 +789,7 @@ const Swap = () => {
               </div>
             }
           </div>
-          {/* {(!showChart && !showAnalytics) &&
+          {/* {(!showChart && !showChart) &&
             <SocialWidget />
           } */}
         </SwapLayoutCard>

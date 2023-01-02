@@ -8,7 +8,7 @@ import { useSoulPrice } from 'hooks/getPrices'
 import { formatNumber } from 'functions/format'
 import { SOUL_ADDRESS } from 'sdk'
 import { useTokenInfo } from 'hooks/useAPI'
-import  { ApplicationModal } from 'state/application/reducer'
+import { ApplicationModal } from 'state/application/reducer'
 
 const HideOnMobile = styled.div`
 @media screen and (max-width: 500px) {
@@ -31,7 +31,7 @@ function TokenStats(): JSX.Element | null {
       onClick={() => toggleTokenStatsModal()}
     >
 
-     {/* <div className="grid items-center grid-flow-col px-1.5 py-1 space-x-2 text-sm rounded-lg pointer-events-auto auto-cols-max bg-dark-1000 text-secondary">
+      {/* <div className="grid items-center grid-flow-col px-1.5 py-1 space-x-2 text-sm rounded-lg pointer-events-auto auto-cols-max bg-dark-1000 text-secondary">
         <Image
           src="/images/tokens/seance.png"
           alt="SEANCE"
@@ -55,7 +55,7 @@ function TokenStats(): JSX.Element | null {
           className="rounded-md"
         />
         <HideOnMobile>
-          <div className="text-primary">{ formatNumber(soulPrice, true, true) }</div>
+          <div className="text-primary">{formatNumber(soulPrice, true, true)}</div>
         </HideOnMobile>
       </div>
       <TokensStatsModal />
