@@ -171,7 +171,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           </NavLink>
         }
         
-        {featureEnabled(Feature.AGGREGATOR, chainId) &&
+        {featureEnabled(Feature.AGGREGATE, chainId) &&
           <NavLink
             className={classNames(
               ecoStyle
