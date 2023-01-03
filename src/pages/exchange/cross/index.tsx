@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState, FC } from "react";
 import Image from "next/image";
 import SDK, {
-  BLOCKCHAIN_NAME,
+  // BLOCKCHAIN_NAME,
   Configuration,
   InstantTrade,
   WalletProvider,
@@ -25,16 +25,16 @@ import { classNames } from "functions/styling";
 import InputCurrencyBox from "components/Bridge/InputCurrencyBox";
 import Container from "components/Container";
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
-import SwapHeader from "features/swap/SwapHeader";
+// import SwapHeader from "features/swap/SwapHeader";
 import SwapDropdown from "features/swap/SwapDropdown"
 
 import { SwapLayoutCard } from "layouts/SwapLayout";
-import Modal from "components/DefaultModal";
+// import Modal from "components/DefaultModal";
 // import { useETHBalances } from "state/wallet/hooks";
 import NetworkModal from "modals/NetworkModal";
 import { AutoColumn } from "components/Column";
 import Row from "components/Row";
-import ModalHeader from "components/Modal/Header";
+// import ModalHeader from "components/Modal/Header";
 import { WrappedCrossChainTrade } from "rubic-sdk/lib/features/cross-chain/providers/common/models/wrapped-cross-chain-trade";
 import { useMulticallContract } from "hooks/useContract";
 import { getLastExchange, setLastExchange } from "utils/rubic/hooks";
@@ -42,7 +42,7 @@ import { AVAX, CHAIN_BY_ID, FTM, NATIVE_ADDRESS, rubicConfiguration } from "util
 import { ChainId } from "sdk";
 import TokenSelect from "features/cross/components/TokenSelect";
 import NavLink from "components/NavLink";
-import { SubmitButton } from "features/summoner/Styles";
+// import { SubmitButton } from "features/summoner/Styles";
 import { getChainColor, getChainColorCode } from "constants/chains";
 // import { BalancePromiseToUnit } from "pages/bridge";
 
@@ -335,7 +335,7 @@ export default function Exchange() {
     <Container id="cross-page" maxWidth="2xl" className="space-y-4 mt-4">
       <DoubleGlowShadowV2>
         <SwapLayoutCard>
-        <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+        {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
           <SwapDropdown />
             {/* <SwapHeader /> */}
               {/*  [F] TOKEN SELECTOR */}
@@ -721,7 +721,7 @@ export default function Exchange() {
                   }
                 </Button>
               </div>
-              </div>
+              {/* </div> */}
               </SwapLayoutCard>
         </DoubleGlowShadowV2>
       </Container>
