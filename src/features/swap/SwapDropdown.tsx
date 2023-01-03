@@ -102,8 +102,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
                   isExchange && `hover:border border-2 border-[${getChainColor(chainId)}]`)
                 }>
               <SwapIcon
-                fillPrimary={`#FFFFFF`}
-                fillSecondary={`${getChainColor(chainId)}`}
+              fillPrimary={isExchange ? `${getChainColor(chainId)}` : `#FFFFFF`}
+              fillSecondary={isExchange ? `#FFFFFF` : `${getChainColor(chainId)}`}
               />
         </div>
           </NavLink>
@@ -125,8 +125,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               isPool && `border border-2 border-[${getChainColor(chainId)}]`)
             }>
                 <PlusMinusIcon
-                fillPrimary={`#FFFFFF`}
-                fillSecondary={`${getChainColor(chainId)}`}
+              fillPrimary={isPool ? `${getChainColor(chainId)}` : `#FFFFFF`}
+              fillSecondary={isPool ? `#FFFFFF` : `${getChainColor(chainId)}`}
                 />
           </div>
             </NavLink>
@@ -149,8 +149,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             isAggregator && `border border-2 border-[${getChainColor(chainId)}]`)
           }>
             <MergeIcon
-                fillPrimary={`#FFFFFF`}
-                fillSecondary={`${getChainColor(chainId)}`}
+              fillPrimary={isAggregator ? `${getChainColor(chainId)}` : `#FFFFFF`}
+              fillSecondary={isAggregator ? `#FFFFFF` : `${getChainColor(chainId)}`}
                 />
           </div>
           </NavLink>
@@ -172,8 +172,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             isCross && `border border-2 border-[${getChainColor(chainId)}]`)
           }>
             <CrossIcon
-              fillPrimary={`#FFFFFF`}
-              fillSecondary={`${getChainColor(chainId)}`}
+              fillPrimary={isCross ? `${getChainColor(chainId)}` : `#FFFFFF`}
+              fillSecondary={isCross ? `#FFFFFF` : `${getChainColor(chainId)}`}
             />
           </div>
           </NavLink>
@@ -195,9 +195,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             isBridge && `border border-2 border-[${getChainColor(chainId)}]`)
           }>
             <BridgeIcon
-              fillPrimary={`#FFFFFF`}
-              fillSecondary={`${getChainColor(chainId)}`}
-              // onClick={handleBridgeRoute}
+              fillPrimary={isBridge ? `${getChainColor(chainId)}` : `#FFFFFF`}
+              fillSecondary={isBridge ? `#FFFFFF` : `${getChainColor(chainId)}`}
             />
           </div>
           </NavLink>
@@ -219,8 +218,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             isExchangeAnalytics && `border border-2 border-[${getChainColor(chainId)}]`)
           }>
             <ChartIcon
-              fillPrimary={`#FFFFFF`}
-              fillSecondary={`${getChainColor(chainId)}`}
+              fillPrimary={isExchangeAnalytics ? `${getChainColor(chainId)}` : `#FFFFFF`}
+              fillSecondary={isExchangeAnalytics ? `#FFFFFF` : `${getChainColor(chainId)}`}
             />
           </div>
           </NavLink>
