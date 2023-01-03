@@ -370,7 +370,7 @@ const Swap = () => {
 
   const handleAggregatorSwap = useCallback(
     () => {
-      router.push(`/swap/aggregator/${currencyA.isToken ? currencyA.wrapped.address : WNATIVE_ADDRESS[chainId]}/${currencyB.isToken ? currencyB.wrapped.address : WNATIVE_ADDRESS[chainId]}`)
+      router.push(`/exchange/aggregator/${currencyA.isToken ? currencyA.wrapped.address : WNATIVE_ADDRESS[chainId]}/${currencyB.isToken ? currencyB.wrapped.address : WNATIVE_ADDRESS[chainId]}`)
     }, []
   )
 
