@@ -60,7 +60,7 @@ export default function Create() {
 
   const getOracleData = useCallback(
     async (asset: Currency, collateral: Currency) => {
-      const oracleData = ''
+      // const oracleData = ''
 
       const mapping = CHAINLINK_PRICE_FEED_MAP[chainId]
 
@@ -120,7 +120,7 @@ export default function Create() {
       const oracleData = await getOracleData(currencies[Field.ASSET], currencies[Field.COLLATERAL])
 
       if (!oracleData) {
-        console.log('No path')
+        console.log('No Path')
         return
       }
 

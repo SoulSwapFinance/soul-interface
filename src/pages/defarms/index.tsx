@@ -14,13 +14,13 @@ const Defarms = () => {
           <Head>
             <title>DeFarms | Soul</title>
             <meta key="description" name="description" content="Farm" />
-            <Image src="https://giphy.com/embed/kPCDnjRGh7POYS4Z5P" width={480} height={480} alt={'egg gif with tokens'}/>
+            <Image src="https://giphy.com/embed/kPCDnjRGh7POYS4Z5P" width={480} height={480} alt={'egg gif with tokens'} />
           </Head>
-          <FarmList />
-          <div className="grid grid-cols-2 mt-2">
-          {/* <iframe src="https://giphy.com/embed/kPCDnjRGh7POYS4Z5P" width="100%" height="240" allowFullScreen></iframe>
-          <iframe src="https://giphy.com/embed/nPquUiVkV4K9j26fB3" width="100%" height="240" allowFullScreen></iframe> */}
-          </div>
+            <FarmList />
+            <div className="grid grid-cols-2 mt-2">
+              {/* <iframe src="https://giphy.com/embed/kPCDnjRGh7POYS4Z5P" width="100%" height="240" allowFullScreen></iframe>
+            <iframe src="https://giphy.com/embed/nPquUiVkV4K9j26fB3" width="100%" height="240" allowFullScreen></iframe> */}
+            </div>
         </Container>
       </DoubleGlowShadowV2>
     </Wrap>

@@ -171,7 +171,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
       })
     },
     name: 'Binance',
-    iconName: 'bsc.jpg',
+    iconName: 'bsc.png',
     description: 'Login using Binance hosted wallet',
     href: null,
     color: '#F0B90B',

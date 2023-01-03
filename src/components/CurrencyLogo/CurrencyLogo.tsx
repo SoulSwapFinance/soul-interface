@@ -34,7 +34,7 @@ export const getCurrencyLogoUrls = (currency): string[] => {
 // const AvalancheLogo = 'https://raw.githubusercontent.com/sushiswap/logos/main/token/avax.jpg'
 const EthereumLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/eth.jpg'
 const FantomLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/ftm.jpg'
-const BinanceLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/network/bsc.jpg'
+const BinanceLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/network/bsc.svg'
 const AvalancheLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/Avalanche.svg'
 const TelosLogo = '/images/natives/telos.png'
 const PolygonLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/polygon/Polygon.svg'

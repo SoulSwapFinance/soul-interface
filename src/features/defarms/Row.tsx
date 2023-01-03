@@ -28,6 +28,8 @@ import { CircleStackIcon, CurrencyDollarIcon, PlusCircleIcon } from '@heroicons/
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import { t } from '@lingui/macro'
 import { i18n } from '@lingui/core'
+import { Route } from 'react-router-dom'
+import { useRouter } from 'next/router'
 
 const HideOnSmall = styled.div`
 @media screen and (max-width: 900px) {
@@ -48,7 +50,7 @@ const TokenPairLink = styled(ExternalLink)`
 
 export const ActiveRow = ({ pid, farm }) => {
     const { account, chainId, library } = useActiveWeb3React()
-
+    const router = useRouter()
     const [approved, setApproved] = useState(false)
     const [approvedZap, setZapApproved] = useState(false)
     const [withdrawValue, setWithdrawValue] = useState('0')
@@ -79,11 +81,11 @@ export const ActiveRow = ({ pid, farm }) => {
     // const lastWithdrawTime = Number(defarmUserInfo.lastWithdrawTime)
     // const secondsRemaining = Number(defarmUserInfo.secondsRemaining)
     // const currentRate = Number(defarmUserInfo.currentRate)
-    
+
     const feeAmount = withdrawFee * stakedBalance / 100
     const withdrawable = stakedBalance - feeAmount
     const feeValue = feeAmount * lpPrice
-    
+
     // DEFARM POOL INFO //
     const { defarmPoolInfo } = useDeFarmPoolInfo(pid)
     const mAddress = defarmPoolInfo.mAddress
@@ -239,6 +241,15 @@ export const ActiveRow = ({ pid, farm }) => {
         }
     }
 
+    // handles: create deFarm
+    const handleCreate = useCallback(() => {
+        router.push(`/defarms/create`)
+    }, [])
+
+    // runs only on initial render/mount
+    // useEffect(() => {
+    //     fetchApproval(mAddress)
+
     // handles withdrawal
     const handleWithdraw = async (amount) => {
         try {
@@ -266,6 +277,12 @@ export const ActiveRow = ({ pid, farm }) => {
         <>
             <div className="flex justify-center w-full">
                 <FarmContainer>
+                    <Typography className={
+                        `flex mt-2 font-bold justify-center border border-2 border-[${getChainColor(chainId)}] rounded rounded-xl m-2 p-2`}
+                        onClick={handleCreate}
+                    >
+                        {i18n._(t`Create Farm`)}
+                    </Typography>
                     <div className={classNames("bg-dark-900 p-3 border border-blue", !hasBalance && "border-dark-1000",
                         !isActive ? "hover:border-pink"
                             : hasBalance ? "border-dark-600"
@@ -279,7 +296,7 @@ export const ActiveRow = ({ pid, farm }) => {
                             {/* DEPOSIT LOGO */}
                             <div className="items-center">
                                 <FarmItemBox>
-                                        <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
+                                    <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
                                 </FarmItemBox>
                             </div>
 
@@ -354,7 +371,6 @@ export const ActiveRow = ({ pid, farm }) => {
                     </div>
                 </FarmContainer>
             </div>
-
 
             {/*------ DROPDOWN OPTIONS PANEL ------*/}
             {showOptions && (
@@ -438,7 +454,7 @@ export const ActiveRow = ({ pid, farm }) => {
                                     {Number(stakedBalance) > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                            {i18n._(t`Staked Balance`)}
+                                                {i18n._(t`Staked Balance`)}
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                                 {formatNumber(stakedBalance, false, true)} {symbol}
@@ -449,7 +465,7 @@ export const ActiveRow = ({ pid, farm }) => {
                                     {stakedValue > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                            {i18n._(t`Staked (USD)`)}
+                                                {i18n._(t`Staked (USD)`)}
                                             </Typography>
                                             <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
                                                 {formatNumber(stakedValue, true, true)}
@@ -459,7 +475,7 @@ export const ActiveRow = ({ pid, farm }) => {
 
                                     <div className="flex justify-between">
                                         <Typography className="text-white" fontFamily={'medium'}>
-                                        {i18n._(t`Claimable Rewards`)}
+                                            {i18n._(t`Claimable Rewards`)}
                                         </Typography>
                                         <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                             {earnedAmount.toFixed(2)} {rewardSymbol}
@@ -467,7 +483,7 @@ export const ActiveRow = ({ pid, farm }) => {
                                     </div>
                                     <div className="flex justify-between">
                                         <Typography className="text-white" fontFamily={'medium'}>
-                                        {i18n._(t`Rewards (USD)`)}
+                                            {i18n._(t`Rewards (USD)`)}
                                         </Typography>
                                         <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
                                             {formatNumber(earnedValue, true, true)}
@@ -475,7 +491,7 @@ export const ActiveRow = ({ pid, farm }) => {
                                     </div>
                                     <div className="flex justify-between">
                                         <Typography className="text-white" fontFamily={'medium'}>
-                                        {i18n._(t`End Date`)}
+                                            {i18n._(t`End Date`)}
                                         </Typography>
                                         <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
                                             {formatUnixTimestampToDay(endTime)}
@@ -634,7 +650,7 @@ export const ActiveRow = ({ pid, farm }) => {
                                             <div className="flex flex-col space-y-1">
                                                 <div className="flex flex-col">
                                                     <p>
-                                                    {i18n._(t`Fees decrease by 1% daily, and only increase upon withdrawals.`)}
+                                                        {i18n._(t`Fees decrease by 1% daily, and only increase upon withdrawals.`)}
                                                         <br /><br />{i18n._(t`Depositing more is free and does not change your fee.`)}
                                                     </p>
                                                 </div>
@@ -663,7 +679,7 @@ export const ActiveRow = ({ pid, farm }) => {
                                     {stakedValue > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                            {i18n._(t`Balance`)} (USD)
+                                                {i18n._(t`Balance`)} (USD)
                                             </Typography>
                                             <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
                                                 {formatNumber(stakedValue, true, true)}
@@ -756,7 +772,7 @@ export const ActiveRow = ({ pid, farm }) => {
                                                 handleHarvest()
                                             }
                                         >
-                                             {i18n._(t`HARVEST`)}
+                                            {i18n._(t`HARVEST`)}
                                         </SubmitButton>
                                     </Wrap>
                                 )}
@@ -863,7 +879,7 @@ export const ActiveRow = ({ pid, farm }) => {
                             <br /><br /> {i18n._(t`The fee`)} <b> {i18n._(t`reduces by 1% daily`)}</b>,  {i18n._(t`so consider waiting prior to withdrawing to avoid fees.`)}
 
                             <div className="text-xl mt-4 mb-4 text-center border p-1.5 border-dark-600">
-                            {i18n._(t`Estimated Fee Outcomes`)}
+                                {i18n._(t`Estimated Fee Outcomes`)}
                             </div>
                             • <b> {i18n._(t`Current Rate`)}</b>: {Number(withdrawFee).toFixed(0)}% <br />
                             • <b> {i18n._(t`Fee Amount`)}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {symbol}<br />
@@ -876,7 +892,7 @@ export const ActiveRow = ({ pid, farm }) => {
                             {/* <b>100% of the fee</b> goes towards building our protocol-owned liquidity, which brings about long-term sustainability to our platform. */}
                         </Typography>
                         <Typography variant="sm" className="font-medium text-center">
-                        {i18n._(t`QUESTIONS OR CONCERNS?`)}
+                            {i18n._(t`QUESTIONS OR CONCERNS?`)}
                             <a href="mailto:soulswapfinance@gmail.com">
                                 {' '}  {i18n._(t`CONTACT US`)}
                             </a>

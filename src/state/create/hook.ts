@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { Currency } from 'sdk'
+import { Currency, NATIVE } from 'sdk'
 import { useCurrency } from 'hooks/Tokens'
 import { useActiveWeb3React } from 'services/web3'
 import { AppState } from 'state'
@@ -19,12 +19,13 @@ export function useCreateActionHandlers(): {
   onUserInput: (field: Field, typedValue: string) => void
 } {
   const dispatch = useAppDispatch()
+  const { chainId } = useActiveWeb3React()
   const onCurrencySelection = useCallback(
     (field: Field, currency: Currency) => {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency.isToken ? currency.address : currency.isNative ? 'ETH' : '',
+          currencyId: currency.isToken ? currency.address : currency.isNative ? `${NATIVE[chainId].symbol}` : '',
         })
       )
     },

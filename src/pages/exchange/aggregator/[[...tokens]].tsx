@@ -28,7 +28,7 @@ import { ArrowDownIcon, ArrowLeftIcon } from '@heroicons/react/24/solid'
 // import Web3 from 'web3'
 import { useGasPrice } from 'hooks/useAPI'
 import { SwapLayoutCard } from 'layouts/SwapLayout'
-import SwapHeader from 'features/swap/SwapHeader'
+// import SwapHeader from 'features/swap/SwapHeader'
 import Container from 'components/Container'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
@@ -38,7 +38,7 @@ import { currencyId } from 'functions/currency/currencyId'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { classNames } from 'functions/styling'
-import { Toggle } from 'components/Toggle'
+// import { Toggle } from 'components/Toggle'
 import { featureEnabled } from 'functions/feature'
 import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
@@ -352,9 +352,9 @@ const Aggregator = ({ }) => {
 		(currencyA: Currency) => {
 			const newCurrencyIdA = currencyId(currencyA)
 			if (newCurrencyIdA === currencyIdB) {
-				router.push(`/exchange/swap/aggregator/${currencyIdB}/${currencyIdA}`)
+				router.push(`/exchange/aggregator/${currencyIdB}/${currencyIdA}`)
 			} else {
-				router.push(`/exchange/swap/aggregator/${newCurrencyIdA}/${currencyIdB}`)
+				router.push(`/exchange/aggregator/${newCurrencyIdA}/${currencyIdB}`)
 			}
 		},
 		[currencyIdB, router, currencyIdA]
@@ -365,12 +365,12 @@ const Aggregator = ({ }) => {
 			const newCurrencyIdB = currencyId(currencyB)
 			if (currencyIdA === newCurrencyIdB) {
 				if (currencyIdB) {
-					router.push(`/exchange/swap/aggregator/${currencyIdB}/${newCurrencyIdB}`)
+					router.push(`/exchange/aggregator/${currencyIdB}/${newCurrencyIdB}`)
 				} else {
-					router.push(`/exchange/swap/aggregator/${newCurrencyIdB}`)
+					router.push(`/exchange/aggregator/${newCurrencyIdB}`)
 				}
 			} else {
-				router.push(`/exchange/swap/aggregator/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
+				router.push(`/exchange/aggregator/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
 			}
 		},
 		[currencyIdA, router, currencyIdB]

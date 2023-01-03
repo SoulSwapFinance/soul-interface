@@ -21,6 +21,8 @@ import { SidebarItem } from './SidebarItem'
 import TokenStats from 'components/TokenStats'
 import LanguageMenu from './useLanguages'
 import useBar from './useBar'
+import { i18n } from '@lingui/core'
+import { t } from '@lingui/macro'
 
 const MobileBar: FC = () => {
     const router = useRouter()
@@ -105,54 +107,51 @@ const MobileBar: FC = () => {
                 <div className="flex items-center w-full space-x-2 justify-end">
                     <div className={`fixed bg-dark-1000 bottom-0 left-0 z-10 gap-1 flex justify-between items-center justify-center w-full`}>
                         <div className={`p-1 bg-${getChainColorCode(chainId)} border border-2 rounded border-[${getChainColor(chainId)}] hover:bg-dark-800`}>
-                            {/* <div className="flex p-2 justify-between"> */}
-                            <Bars3Icon 
-                                width={28} 
-                                className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? 
-                                `bg-${getChainColorCode(chainId)} cursor-pointer rounded rounded-xl` 
-                                : `hidden`)} 
-                                onClick={() => setOpen(true)} 
+                            <Bars3Icon
+                                width={28}
+                                className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ?
+                                    `bg-${getChainColorCode(chainId)} cursor-pointer rounded rounded-xl`
+                                    : `hidden`)}
+                                onClick={() => setOpen(true)}
                             />
                         </div>
                         <Typography
                             className={classNames(typeStyle, swapPage ? `text-white` : `text-[${getChainColor(chainId)}]`, `bg-${swapPage ? getChainColorCode(chainId) : `dark-1000`}`)}
                             onClick={swapRoute}
                         >
-                            {`Swap`}
+                            {i18n._(t`Swap`)}
                         </Typography>
                         <Typography
                             className={classNames(typeStyle, farmPage ? `text-white` : `text-[${getChainColor(chainId)}]`, `bg-${farmPage ? getChainColorCode(chainId) : `dark-1000`}`)}
                             onClick={farmRoute}
                         >
-                            {`Farm`}
+                            {i18n._(t`Earn`)}
                         </Typography>
-                        {/* <div
+                        <div
                             className={`mt-1 m-1 border ${landingPage ? `border-[${getChainColor(chainId)}]` : `border-dark-700`} rounded rounded-xl p-1`}
                             // className={classNames(typeStyle, landingPage ? `text-white` : `text-[${getChainColor(chainId)}]`, `bg-dark-1000`)}
                             onClick={landingRoute}
                         >
                             <Image
-
                                 height={200} width={200} src={'/logo.png'} alt={'soul logo'}
                                 className={classNames(typeStyle, landingPage ? `text-white` : `text-[${getChainColor(chainId)}]`, `bg-dark-1000`)}
                             />
-                        </div> */}
+                        </div>
                         <Typography
                             className={classNames(typeStyle, lendPage ? `text-white` : `text-[${getChainColor(chainId)}]`, `bg-${lendPage ? getChainColorCode(chainId) : `dark-1000`}`)}
                             onClick={lendRoute}
                         >
-                            {`Lend`}
+                            {i18n._(t`Lend`)}
                         </Typography>
                         <Typography
                             className={classNames(typeStyle, bridgePage ? `text-white` : `text-[${getChainColor(chainId)}]`, `bg-${bridgePage ? getChainColorCode(chainId) : `dark-1000`}`)}
                             onClick={bridgeRoute}
                         >
-                            {`Bridge`}
+                            {i18n._(t`Bridge`)}
                         </Typography>
-
-                        {/* <div className={`inline-block justify-center my-0.5 ml-2 mr-2`}>
+                        <div className={`inline-block justify-center my-0.5 mr-2`}>
                             <More />
-                        </div> */}
+                        </div>
                         {/* <div className="flex items-center w-full space-x-2 justify-end"> */}
                         {/* <div className={`w-auto grid gap-0.5 items-center rounded rounded-lg bg-dark-1000 border-[${getChainColor(chainId)}] border- whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`}> */}
                         {/* MORE [...] ICON */}

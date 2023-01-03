@@ -4,7 +4,7 @@ import ChevronUpDown from 'assets/svg/icons/ChevronUpDown.svg'
 import ArrowRoundedSquare from 'assets/svg/icons/ArrowRoundedSquare.svg'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, Currency, DAI, JSBI, NATIVE, NATIVE_ADDRESS, SOUL, SOUL_ADDRESS, Token, Trade as V2Trade, TradeType, USDC, USDC_ADDRESS, WBTC_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
+import { ChainId, computePairAddress, Currency, FACTORY_ADDRESS, JSBI, NATIVE, SOUL, SOUL_ADDRESS, Token, Trade as V2Trade, TradeType, USDC_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
 import Web3Connect from 'components/Web3Connect'
@@ -31,20 +31,21 @@ import { Field } from 'state/swap/actions'
 import { useDefaultsFromURLSearch, useDerivedSwapInfo, useSwapActionHandlers, useSwapState } from 'state/swap/hooks'
 import { useUserOpenMev, useUserSingleHopOnly } from 'state/user/hooks'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { Toggle } from 'components/Toggle'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { classNames } from 'functions/styling'
 import NavLink from 'components/NavLink'
 import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 import { useRouter } from 'next/router'
-// import Aggregator, { startChain } from './aggregator'
-import useGetPrice from 'features/aggregator/queries/useGetPrice'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import Pair from 'pages/analytics/pairs/[id]'
 import Limits from './limit/[[...tokens]]'
-import { currencyId } from 'functions/currency'
-import Portfolio from 'pages/portfolio'
+
+// import { Toggle } from 'components/Toggle'
+// import Aggregator, { startChain } from './aggregator'
+// import useGetPrice from 'features/aggregator/queries/useGetPrice'
+// import { currencyId } from 'functions/currency'
+// import Portfolio from 'pages/portfolio'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -103,7 +104,6 @@ const Swap = () => {
   }, [])
 
   const [showChart, setShowChart] = useState(false)
-  const [showAnalytics, setShowAnalytics] = useState(false)
   const [showPortfolio, setShowPortfolio] = useState(false)
   const useSwap = !useAggregator && !useLimit
   // const [showAggregator, setShowAggregator] = useState(false)
@@ -323,7 +323,7 @@ const Swap = () => {
       setApprovalSubmitted(false) // reset 2 step UI for approvals
       onCurrencySelection(Field.INPUT, inputCurrency)
       // handleCurrencyASelect(inputCurrency)
-      handleInputTokenSelect(inputCurrency)
+      // handleInputTokenSelect(inputCurrency)
     },
     [onCurrencySelection]
   )
@@ -332,7 +332,7 @@ const Swap = () => {
     (outputCurrency) => {
       onCurrencySelection(Field.OUTPUT, outputCurrency)
       // handleCurrencyBSelect(outputCurrency)
-      handleOutputTokenSelect(outputCurrency)
+      // handleOutputTokenSelect(outputCurrency)
     },
     [onCurrencySelection]
   )
@@ -361,56 +361,63 @@ const Swap = () => {
     }
   }, [priceImpactSeverity])
 
-
-
-  // AGGREGATOR CONSTANTS [START] //
-  // const DEFAULT_OUTPUT = chainId == ChainId.AVALANCHE ? USDC[chainId] : DAI[chainId]
-  // const [selectedChain, setSelectedChain] = useState(startChain(chainId))
-  const [fromToken, setFromToken] = useState<Currency>(currencyA)
-  const [toToken, setToToken] = useState<Currency>(currencyB)
-  const [inputAmount, setInputAmount] = useState('10')
-
-  const handleInputTokenSelect = useCallback(
-    (inputCurrency: Currency) => {
-      setFromToken(inputCurrency)
-    },
-    [setFromToken]
-  )
-
-  const handleOutputTokenSelect = useCallback(
-    (outputCurrency: Currency) => {
-      setToToken(outputCurrency)
-    },
-    [setToToken]
-  )
-
-  // const handleShowCharts = useCallback(
-  //   (enabled: boolean) => {
-  //       setShowAnalytics(enabled)
-  //   }, [setShowAnalytics]
-  // )
-
+  // HANDLERS //
   const handleLimitSwap = useCallback(
     () => {
-      // setShowHeader(false)
       router.push(`/exchange/swap/limit/${currencyIdA}/${currencyIdB}`)
     }, []
   )
 
   const handleAggregatorSwap = useCallback(
     () => {
-      // setShowHeader(false)
-      router.push(`/exchange/swap/aggregator/${currencies[Field.INPUT].isNative ? NATIVE[chainId].symbol : currencies[Field.INPUT]}/${currencies[Field.OUTPUT].wrapped.address}`)
+      router.push(`/exchange/aggregator/${currencyA.isToken ? currencyA.wrapped.address : WNATIVE_ADDRESS[chainId]}/${currencyB.isToken ? currencyB.wrapped.address : WNATIVE_ADDRESS[chainId]}`)
     }, []
   )
 
   const handleBridgeSwap = useCallback(
     () => {
-      // setShowHeader(false)
       router.push(`/bridge`)
     }, []
   )
 
+  const handleAnalyticsRoute = useCallback(
+    () => {
+      let pairAddress = computePairAddress({
+      factoryAddress: FACTORY_ADDRESS[chainId],
+      tokenA: currencyA.isToken ? currencyA : currencyA.wrapped,
+      tokenB: currencyB.isToken ? currencyB : currencyB.wrapped
+    }).toLowerCase() // pairAddress
+      router.push(`/exchange/analytics/pairs/${pairAddress}`)
+    }, []
+  )
+
+
+  // AGGREGATOR CONSTANTS [START] //
+  // const DEFAULT_OUTPUT = chainId == ChainId.AVALANCHE ? USDC[chainId] : DAI[chainId]
+  // const [selectedChain, setSelectedChain] = useState(startChain(chainId))
+  // const [fromToken, setFromToken] = useState<Currency>(currencyA)
+  // const [toToken, setToToken] = useState<Currency>(currencyB)
+  // const [inputAmount, setInputAmount] = useState('10')
+
+  // const handleInputTokenSelect = useCallback(
+  //   (inputCurrency: Currency) => {
+  //     setFromToken(inputCurrency)
+  //   },
+  //   [setFromToken]
+  // )
+
+  // const handleOutputTokenSelect = useCallback(
+  //   (outputCurrency: Currency) => {
+  //     setToToken(outputCurrency)
+  //   },
+  //   [setToToken]
+  // )
+
+  // const handleShowCharts = useCallback(
+  //   (enabled: boolean) => {
+  //       setShowChart(enabled)
+  //   }, [setShowChart]
+  // )
 
   // const { data: tokenPrices } = useGetPrice({
   //   chain: selectedChain.value,
@@ -422,10 +429,9 @@ const Swap = () => {
 
   const handleTypeInput = useCallback(
     (value: string) => {
-      // setInputAmount('11')
       onUserInput(Field.INPUT, value)
     },
-    [onUserInput, setInputAmount]
+    [onUserInput]
   )
 
   const handleTypeOutput = useCallback(
@@ -459,7 +465,6 @@ const Swap = () => {
       />
       {![ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <div className="flex flex-col gap-3 mt-12 justify-center">
-          {/* <div className="flex mb-4 items-center justify-center"> */}
           <SwapHeader inputCurrency={currencyA} outputCurrency={currencyB} />
           <Button
             variant="filled"
@@ -486,7 +491,9 @@ const Swap = () => {
                     <SwapAssetPanel.Header
                       {...props}
                       label={
-                        independentField === Field.OUTPUT && !showWrap ? i18n._(t`Swap from:`) : i18n._(t`Swap from:`)
+                        independentField === Field.OUTPUT && !showWrap 
+                          ? i18n._(t`Swap from:`)
+                          : i18n._(t`Swap from:`)
                       }
                     />
                   )}
@@ -722,27 +729,13 @@ const Swap = () => {
             <div className={classNames(!useLimit && !useAggregator ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}>
               <Button
                 size={'xs'}
-                className={classNames(`rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
-                onClick={handleBridgeSwap}
-              >
-                {i18n._(t`Bridge`)}
-              </Button>
-              <Button
-                size={'xs'}
-                className={classNames(`rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
-                onClick={handleAggregatorSwap}
-              >
-                {i18n._(t`Aggregate`)}
-              </Button>
-              <Button
-                size={'xs'}
-                className={classNames(showAnalytics ? `bg-${getChainColorCode(chainId)}` : ``,
+                className={classNames(showChart ? `bg-${getChainColorCode(chainId)}` : ``,
                   `rounded rounded-xl bg-dark-1000 border
                   border-[${getChainColor(chainId)}]`)
                 }
-                onClick={() => setShowAnalytics(!showAnalytics)}
+                onClick={() => setShowChart(!showChart)}
               >
-                {i18n._(t`Analytics`)}
+                {i18n._(t`Show Chart`)}
               </Button>
               {/* <Button
                 size={'xs'}
@@ -771,8 +764,8 @@ const Swap = () => {
               /> */}
             </div>
           </div>
-          <div className={`flex flex-cols-${showAnalytics && showPortfolio ? `hidden` : `1`}`}>
-            {showAnalytics && !showPortfolio && useSwap && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+          <div className={`flex flex-cols-${showChart && showPortfolio ? `hidden` : `1`}`}>
+            {showChart && !showPortfolio && useSwap && [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
               <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
                 <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
                   {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
@@ -790,7 +783,7 @@ const Swap = () => {
               </div>
             }
           </div>
-          {/* {(!showChart && !showAnalytics) &&
+          {/* {(!showChart && !showChart) &&
             <SocialWidget />
           } */}
         </SwapLayoutCard>

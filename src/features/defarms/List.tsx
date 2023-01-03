@@ -7,6 +7,8 @@ import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
+import { t } from '@lingui/macro'
+import { i18n } from '@lingui/core'
 
 export const FarmList = () => {
   const { chainId } = useActiveWeb3React()
@@ -26,21 +28,21 @@ export const FarmList = () => {
     />
   ))
 
-  const inactiveFtmList = InactiveFantomPools.map((farm) => (
-    <ActiveRow
-      key={farm.pid}
-      pid={farm.pid}
-      farm={farm}
-    />
-  ))
+  // const inactiveFtmList = InactiveFantomPools.map((farm) => (
+  //   <ActiveRow
+  //     key={farm.pid}
+  //     pid={farm.pid}
+  //     farm={farm}
+  //   />
+  // ))
 
-  const inactiveAvaxList = InactiveAvalanchePools.map((farm) => (
-    <ActiveRow
-      key={farm.pid}
-      pid={farm.pid}
-      farm={farm}
-    />
-  ))
+  // const inactiveAvaxList = InactiveAvalanchePools.map((farm) => (
+  //   <ActiveRow
+  //     key={farm.pid}
+  //     pid={farm.pid}
+  //     farm={farm}
+  //   />
+  // ))
 
   return (
     <div>
@@ -50,7 +52,7 @@ export const FarmList = () => {
             color={"purple"}
             size="lg">
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> Data </span>
+              <span> {i18n._(t`Data`)} </span>
             </a>
           </Button>
         </NavLink>
@@ -59,7 +61,7 @@ export const FarmList = () => {
             color={"purple"}
             size="lg">
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> Bond </span>
+              <span> {i18n._(t`Bond`)} </span>
             </a>
           </Button>
         </NavLink>
@@ -69,7 +71,7 @@ export const FarmList = () => {
             size="lg"
           >
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> Lend </span>
+              <span> {i18n._(t`Lend`)} </span>
             </a>
           </Button>
         </NavLink>
@@ -79,7 +81,7 @@ export const FarmList = () => {
             size="lg"
           >
             <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> Vault </span>
+              <span> {i18n._(t`Vault`)} </span>
             </a>
           </Button>
         </NavLink>

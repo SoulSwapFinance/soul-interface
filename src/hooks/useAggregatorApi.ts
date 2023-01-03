@@ -30,7 +30,8 @@ export const FTM_AVALANCHE_STABLE = [
   "anyETH",
   "anyWBTC",
 ];
-export const BASE_URL = "https://bridgeapi.anyswap.exchange";
+// export const BASE_URL = "https://bridgeapi.anyswap.exchange";
+export const BASE_URL = "https://bridgeapi.multichain.org";
 export enum MULTICHAIN_METHODS {
   GET_CHAIN_TOKENS = "/v4/tokenlistv4",
 }

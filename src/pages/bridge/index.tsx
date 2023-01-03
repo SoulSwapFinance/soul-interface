@@ -37,7 +37,7 @@ import FadeInOut from "../../components/AnimationFade"
 import { ContentBox, OverlayButton, Typo1, Typo2, Typo3 } from "components/index"
 import InputError from "components/Input/Error"
 import { useActiveWeb3React } from "services/web3"
-import { ArrowDownIcon } from "@heroicons/react/24/solid"
+import { ArrowDownIcon, ArrowRightIcon } from "@heroicons/react/24/solid"
 import Image from 'next/image'
 import Typography from "components/Typography"
 import SwapHeader from "features/swap/SwapHeader"
@@ -51,6 +51,8 @@ import { getChainColor, getChainColorCode } from "constants/chains"
 import SwapDropdown from "features/swap/SwapDropdown"
 import { SwapLayoutCard } from "layouts/SwapLayout";
 import { classNames } from "functions/styling";
+import { t } from "@lingui/macro";
+import { i18n } from "@lingui/core";
 
 // const ChainSelect: React.FC<any> = ({ selectChain, chains }) => {
 //   return (
@@ -69,7 +71,7 @@ import { classNames } from "functions/styling";
 //             <OverlayButton
 //               key={`select-${chainId}`}
 //               onClick={() => {
-//                 selectChain(chainId);
+//                 selectChain(chainId)
 //               }}
 //             >
 //               <Row style={{ gap: "1rem", alignItems: "center" }}>                
@@ -84,12 +86,12 @@ import { classNames } from "functions/styling";
 //                 </Typo2>
 //               </Row>
 //             </OverlayButton>
-//           );
+//           )
 //         })}
 //       </Column>
 //     </ContentBox>
-//   );
-// };
+//   )
+// }
 
 // const ChainSelector: React.FC<any> = ({
 //   text,
@@ -128,8 +130,8 @@ import { classNames } from "functions/styling";
 //         </ContentBox>
 //       </DropDownButton>
 //     </Column>
-//   );
-// };
+//   )
+// }
 
 const ChainSelection: React.FC<any> = ({
   setTokenList,
@@ -138,30 +140,30 @@ const ChainSelection: React.FC<any> = ({
 }) => {
   const { chainId, account, connector, deactivate, library } = useActiveWeb3React()
 
-  const [fromChain, setFromChain] = useState(chainId);
-  const [toChain, setToChain] = useState(chainId == 250 ? 43114 : 250);
-  const { getBridgeTokens } = useBridgeApi();
-  const { forceSwap, DEFAULT_PROVIDERS } = useMultiChain();
+  const [fromChain, setFromChain] = useState(chainId)
+  const [toChain, setToChain] = useState(chainId == 250 ? 43114 : 250)
+  const { getBridgeTokens } = useBridgeApi()
+  const { forceSwap, DEFAULT_PROVIDERS } = useMultiChain()
 
   const getBalance = async (address: string, provider: any) => {
     if (address === AddressZero || !address) {
-      return provider.getBalance(account);
+      return provider.getBalance(account)
     }
 
-    const contract = await loadERC20Contract(address, provider);
-    return contract.balanceOf(account);
-  };
+    const contract = await loadERC20Contract(address, provider)
+    return contract.balanceOf(account)
+  }
 
   useEffect(() => {
-    connectToChain(fromChain);
-  }, [fromChain]);
+    connectToChain(fromChain)
+  }, [fromChain])
 
   useEffect(() => {
-    bridgeToChain(toChain);
-  }, [toChain]);
+    bridgeToChain(toChain)
+  }, [toChain])
 
   useEffect(() => {
-    setTokenList(null);
+    setTokenList(null)
     getBridgeTokens(toChain, fromChain)?.then((tokenList) => {
       if (tokenList?.length) {
         const tokenOrder = [
@@ -171,6 +173,7 @@ const ChainSelection: React.FC<any> = ({
           "USDT",
           "fUSDT",
           "DAI",
+          "BOO",
           "MIM",
           "ETH",
           "WETH",
@@ -186,12 +189,12 @@ const ChainSelection: React.FC<any> = ({
               return tokenList.find(
                 (token: any) =>
                   token.symbol.toLowerCase() === symbol.toLowerCase()
-              );
+              )
             })
-            .filter((item: any) => item);
+            .filter((item: any) => item)
           const restOfTokens = tokenList.filter(
             (token: any) => !stickyTokens.includes(token)
-          );
+          )
 
           const allTokens = [...stickyTokens, ...restOfTokens];
           const fromProvider = DEFAULT_PROVIDERS[fromChain];
@@ -209,48 +212,48 @@ const ChainSelection: React.FC<any> = ({
                   : token.ContractAddressTo,
                 toProvider
               ),
-            };
-          });
-          setTokenList(tokensAndBalances);
+            }
+          })
+          setTokenList(tokensAndBalances)
         }
       }
-    });
-  }, [fromChain, toChain, account]);
+    })
+  }, [fromChain, toChain, account])
 
   const handleSetFromChain = (chainId: number) => {
     if (chainId !== 250) {
-      setToChain(250);
+      setToChain(250)
     }
     if (chainId === toChain) {
-      setToChain(chainId === 250 ? 1 : 250);
+      setToChain(chainId === 250 ? 1 : 250)
     }
-    setFromChain(chainId);
-  };
+    setFromChain(chainId)
+  }
 
   const handleSetToChain = (chainId: number) => {
     if (chainId !== 250) {
-      setFromChain(250);
+      setFromChain(250)
     }
     if (chainId === fromChain) {
-      setFromChain(chainId === 250 ? 1 : 250);
+      setFromChain(chainId === 250 ? 1 : 250)
     }
-    setToChain(chainId);
+    setToChain(chainId)
     // V2 (BELOW)
-    // setToChain(chainId == 250 ? 1 : chainId);
+    // setToChain(chainId == 250 ? 1 : chainId)
 
-  };
+  }
   const handleSwap = () => {
     const fromChainOld = fromChain;
     const toChainOld = toChain;
 
-    setFromChain(toChainOld);
-    setToChain(fromChainOld);
-  };
+    setFromChain(toChainOld)
+    setToChain(fromChainOld)
+  }
 
   return (
     <Column>
-  {/* // TODO: RE-ENABLE // */}
-      <div className="flex">
+      {/* // TODO: RE-ENABLE // */}
+      <div className="flex flex-cols-3">
         {/* <ChainSelector
           selected={chainId}
           selectChain={handleSetFromChain}
@@ -258,79 +261,53 @@ const ChainSelection: React.FC<any> = ({
             (chainId) => chainId !== fromChain
           )}
         /> */}
-         <NetworkSelector
-          chains={
-            supportedChainsForBridge.filter(
-            (chainId) => chainId !== fromChain
-          )}
-          selected={fromChain}
-          selectChain={handleSetFromChain}
-        />
-        {/* <div className="flex"> */}
-        { chainId != fromChain &&
-          <Web3Network />
-        }
-        {/* </div> */}
-        {/* {chainId !== fromChain && (
-          <>
-            <div className="ml-2" />
-            <ButtonComponent
-              variant="outlined"
-              color={getChainColorCode(chainId)}
-              onClick={() => forceSwap(fromChain)}
-            >
-            <div className="ml-2 mr-2 text-white font-bold">
-                {`${chainId}`}
+        <div className="w-full justify-center">
+          <NetworkSelector
+            chains={
+              supportedChainsForBridge.filter(
+                (chainId) => chainId !== fromChain
+              )}
+            selected={fromChain}
+            selectChain={handleSetFromChain}
+          />
+        </div>
+        {/* <div style={{ justifyContent: "center", alignItems: "center" }}> */}
+        {/* <div style={{ height: "1px", width: "100%" }} /> */}
+        <OverlayButton style={{ padding: 0 }} onClick={handleSwap}>
+          <AutoColumn justify="space-between" className="py-2 -my-4 py-4">
+            <div className="flex justify-center mt-2.5 mb-2.5 z-0">
+              <div
+                role="button"
+                className={`p-1.5 rounded-full bg-dark-1000 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`}
+              >
+                <ArrowRightIcon width={14} className="text-high-emphesis hover:text-white" />
               </div>
-            </ButtonComponent>
-          </>
-        )} */}
+            </div>
+          </AutoColumn>
+        </OverlayButton>
+        {/* <div style={{ height: "1px", width: "100%" }} /> */}
+        {/* </div> */}
+        <div className="w-full justify-center">
+          <NetworkSelector
+            chains={
+              supportedChainsForBridge.filter(
+                (chainId) => chainId !== toChain
+              )}
+            selected={toChain}
+            selectChain={handleSetToChain}
+          />
+        </div>
       </div>
-      <div />
-      <Row style={{ justifyContent: "center", alignItems: "center" }}>
-        <div style={{ height: "1px", width: "100%" }} />
-          <OverlayButton style={{ padding: 0 }} onClick={handleSwap}>
-              <AutoColumn justify="space-between" className="py-2 -my-4 py-4">
-                  <div className="flex justify-center mt-2.5 mb-2.5 z-0">
-                    <div
-                      role="button"
-                      className={`p-1.5 rounded-full bg-dark-1000 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`}
-                    >
-                      <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
-                    </div>
-                  </div>
-                </AutoColumn>
-          </OverlayButton>
-        <div style={{ height: "1px", width: "100%" }} />
-      </Row>
-      <div className="flex">
-      {/* <ChainSelector
-        selected={toChain}
-        selectChain={handleSetToChain}
-        chains={supportedChainsForBridge.filter(
-          (chainId) => chainId !== toChain
-        )}
-      /> */}
-      <div className="w-full justify-center">
-      <NetworkSelector
-          chains={
-            supportedChainsForBridge.filter(
-            (chainId) => chainId !== toChain
-          )}
-          selected={toChain}
-          selectChain={handleSetToChain}
-        />
-      </div>
-    </div>
-    </Column>
-  );
-};
+      {/* </div> */}
+    </Column >
+  )
+}
 
 const TokenSelector: React.FC<any> = ({ tokens, selected, selectToken }) => {
   const [onPresentSelectTokenModal] = useModal(
     <BridgeTokenSelectModal tokens={tokens} selectToken={selectToken} />,
     "bridge-token-select-modal"
-  );
+  )
 
   return (
     <Column style={{ width: "100%", flex: 1 }}>
@@ -360,7 +337,7 @@ const TokenSelector: React.FC<any> = ({ tokens, selected, selectToken }) => {
                 <Typo2 style={{ fontWeight: "bold" }}>{selected.symbol}</Typo2>
               </>
             ) : tokens && tokens.length ? (
-              <Typo1>Select Token </Typo1>
+              <Typo1>{i18n._(t`Select Token`)}</Typo1>
             ) : (
               <Loader />
             )}
@@ -368,14 +345,14 @@ const TokenSelector: React.FC<any> = ({ tokens, selected, selectToken }) => {
         </ContentBox>
       </OverlayButton>
     </Column>
-  );
-};
+  )
+}
 
 const NetworkSelector: React.FC<any> = ({ chains, selected, selectChain }) => {
   const [onPresentSelectNetworkModal] = useModal(
     <BridgeNetworkSelectModal chains={chains} selectChain={selectChain} />,
     "bridge-token-select-modal"
-  );
+  )
 
   return (
     <Column style={{ width: "100%", flex: 1 }}>
@@ -405,7 +382,7 @@ const NetworkSelector: React.FC<any> = ({ chains, selected, selectChain }) => {
                 <Typo2 style={{ fontWeight: "bold" }}>{chainToNetworkInfoMap[selected].name}</Typo2>
               </>
             ) : chains && chains.length ? (
-              <Typo1>Select Network </Typo1>
+              <Typo1>{i18n._(t`Select Network`)}</Typo1>
             ) : (
               <Loader />
             )}
@@ -413,8 +390,8 @@ const NetworkSelector: React.FC<any> = ({ chains, selected, selectChain }) => {
         </ContentBox>
       </OverlayButton>
     </Column>
-  );
-};
+  )
+}
 
 // function SelectNetworkModal(): JSX.Element | null {
 //   const { chainId } = useActiveWeb3React()
@@ -450,7 +427,6 @@ const BridgeTokenSelectModal: React.FC<any> = ({
       <div />
       <ModalContent style={{ padding: "8px 0px" }}>
         <Column>
-         
           <Scrollbar style={{ height: "60vh" }}>
             <Column>
               {tokens &&
@@ -459,8 +435,8 @@ const BridgeTokenSelectModal: React.FC<any> = ({
                     <StyledOverlayButton
                       key={"token-select-" + token.name}
                       onClick={() => {
-                        selectToken(token);
-                        onDismiss();
+                        selectToken(token)
+                        onDismiss()
                       }}
                       style={{ padding: ".5rem" }}
                     >
@@ -471,7 +447,7 @@ const BridgeTokenSelectModal: React.FC<any> = ({
                         }}
                       >
                         <Row style={{ gap: "1rem", alignItems: "center" }}>
-                         <Image
+                          <Image
                             alt="token logo"
                             height="30px"
                             width="30px"
@@ -487,15 +463,15 @@ const BridgeTokenSelectModal: React.FC<any> = ({
                         />
                       </Row>
                     </StyledOverlayButton>
-                  );
+                  )
                 })}
             </Column>
           </Scrollbar>
         </Column>
       </ModalContent>
     </Modal>
-  );
-};
+  )
+}
 
 const BridgeNetworkSelectModal: React.FC<any> = ({
   chains,
@@ -511,7 +487,7 @@ const BridgeNetworkSelectModal: React.FC<any> = ({
       <div />
       <ModalContent style={{ padding: "8px 0px" }}>
         <Column>
-         
+
           <Scrollbar style={{ height: "60vh" }}>
             <Column>
               {chains &&
@@ -520,8 +496,8 @@ const BridgeNetworkSelectModal: React.FC<any> = ({
                     <StyledOverlayButton
                       key={"network-select-" + chainToNetworkInfoMap[chains].name}
                       onClick={() => {
-                        selectChain(chains);
-                        onDismiss();
+                        selectChain(chains)
+                        onDismiss()
                       }}
                       style={{ padding: ".5rem" }}
                     >
@@ -532,7 +508,7 @@ const BridgeNetworkSelectModal: React.FC<any> = ({
                         }}
                       >
                         <Row style={{ gap: "1rem", alignItems: "center" }}>
-                         <Image
+                          <Image
                             alt="network logo"
                             height="30px"
                             width="30px"
@@ -544,25 +520,25 @@ const BridgeNetworkSelectModal: React.FC<any> = ({
                         </Row>
                       </Row>
                     </StyledOverlayButton>
-                  );
+                  )
                 })}
             </Column>
           </Scrollbar>
         </Column>
       </ModalContent>
     </Modal>
-  );
-};
+  )
+}
 
 export const BalancePromiseToUnit: React.FC<any> = ({ promise, decimals }) => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState(null)
   useEffect(() => {
     promise.then((resolvedValue: any) => {
       if (resolvedValue) {
-        setValue(resolvedValue);
+        setValue(resolvedValue)
       }
-    });
-  }, [promise]);
+    })
+  }, [promise])
 
   return (
     <Row style={{ alignItems: "center" }}>
@@ -570,8 +546,8 @@ export const BalancePromiseToUnit: React.FC<any> = ({ promise, decimals }) => {
         {value ? weiToUnit(value, decimals) : "..."}
       </Typo2>
     </Row>
-  );
-};
+  )
+}
 
 const BridgeTokenList: React.FC<any> = ({
   tokenList,
@@ -584,43 +560,43 @@ const BridgeTokenList: React.FC<any> = ({
   isBridgeTxCompleted,
 }) => {
   const { account } = useActiveWeb3React()
-  const [token, setToken] = useState(null);
-  const [fromTokenBalance, setFromTokenBalance] = useState(null);
-  const [toTokenBalance, setToTokenBalance] = useState(null);
+  const [token, setToken] = useState(null)
+  const [fromTokenBalance, setFromTokenBalance] = useState(null)
+  const [toTokenBalance, setToTokenBalance] = useState(null)
 
   const handleSetToken = (value: any) => {
-    setFromTokenBalance(null);
-    setToTokenBalance(null);
-    setToken(value);
-  };
+    setFromTokenBalance(null)
+    setToTokenBalance(null)
+    setToken(value)
+  }
 
   useEffect(() => {
     if (tokenList && tokenList.length) {
-      setFromTokenBalance(null);
-      setToTokenBalance(null);
-      return setToken(tokenList[0]);
+      setFromTokenBalance(null)
+      setToTokenBalance(null)
+      return setToken(tokenList[0])
     }
-  }, [tokenList]);
+  }, [tokenList])
 
   useEffect(() => {
-    setSelectedToken(token);
-    setAmount("");
+    setSelectedToken(token)
+    setAmount("")
 
     if (token) {
       Promise.all([token.balance, token.balanceTo]).then(
         ([fromBalance, toBalance]) => {
-          setFromTokenBalance(fromBalance || BigNumber.from(0));
-          setToTokenBalance(toBalance || BigNumber.from(0));
+          setFromTokenBalance(fromBalance || BigNumber.from(0))
+          setToTokenBalance(toBalance || BigNumber.from(0))
           setSelectedToken({
             ...token,
             // balance: fromBalance || BigNumber.from(0),
             // balanceTo: toBalance || BigNumber.from(0),
-          });
+          })
         }
-      );
+      )
       return;
     }
-  }, [token, account, isBridgeTxCompleted]);
+  }, [token, account, isBridgeTxCompleted])
 
   return (
     <div className="grid justify-center">
@@ -635,95 +611,71 @@ const BridgeTokenList: React.FC<any> = ({
         </Row>
       </Row>
       <div />
-      <div className="hidden sm:flex">
-      <div className={`grid grid-cols-2 gap-1 mt-2 mb-2 rounded p-0 border border-dark-1000 hover:border-${getChainColorCode(fromChain?.chainId)} w-full`}>
-        <TokenSelector
-          tokens={tokenList}
-          selected={token}
-          selectToken={handleSetToken}
-        />
-        <div className="flex">
-          <InputCurrencyBox
-            disabled={!token}
-            value={amount}
-            setValue={setAmount}
-            max={
-              token && fromTokenBalance
-                ? weiToUnit(fromTokenBalance, token?.Decimals)
-                : 0
-            }
-            variant="new"
+        <div className={`flex flex-cols gap-1 mt-2 mb-2 rounded p-0 w-full`}>
+          <TokenSelector
+            tokens={tokenList}
+            selected={token}
+            selectToken={handleSetToken}
           />
-        </div>
+          <div style={{ flex: 2 }} className="mt-1">
+            <InputCurrencyBox
+              disabled={!token}
+              value={amount}
+              setValue={setAmount}
+              max={
+                token && fromTokenBalance
+                  ? weiToUnit(fromTokenBalance, token?.Decimals)
+                  : 0
+              }
+              variant="new"
+            />
+          </div>
       </div>
-      </div>
-      <div className="flex sm:hidden">
-      <div className={`grid grid-cols gap-1 mt-2 mb-2 rounded p-0 border border-dark-1000 hover:border-${getChainColorCode(fromChain?.chainId)} w-full`}>
-        <TokenSelector
-          tokens={tokenList}
-          selected={token}
-          selectToken={handleSetToken}
-        />
-        <div style={{ flex: 2 }} className="mt-2">
-          <InputCurrencyBox
-            disabled={!token}
-            value={amount}
-            setValue={setAmount}
-            max={
-              token && fromTokenBalance
-                ? weiToUnit(fromTokenBalance, token?.Decimals)
-                : 0
-            }
-            variant="new"
-          />
-        </div>
-      </div>
-      </div>
-      
+
       <div className="my-2" />
 
       <div className="flex justify-between">
-          <Typography className="text-white" fontFamily={'medium'}>
-          Balance on {chainToNetworkInfoMap[fromChain].name}
-          </Typography>
-          <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+        <Typography className="text-white" fontFamily={'medium'}>
+          {i18n._(t`Balance on`)} {chainToNetworkInfoMap[fromChain].name}
+        </Typography>
+        <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
           {token && fromTokenBalance
             ? ` ${weiToUnit(fromTokenBalance, token.Decimals) + ' ' + token.symbol}`
             : "-"}
-          </Typography>
+        </Typography>
       </div>
       <div className="flex justify-between">
-          <Typography className="text-white" fontFamily={'medium'}>
-          Balance on {chainToNetworkInfoMap[toChain].name}
-          </Typography>
-          <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+        <Typography className="text-white" fontFamily={'medium'}>
+          {i18n._(t`Balance on`)} {chainToNetworkInfoMap[toChain].name}
+        </Typography>
+        <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
           {token && toTokenBalance
             ? ` ${weiToUnit(toTokenBalance, token.DecimalsTo) + ' ' + token.symbol}`
             : "-"}
-          </Typography>
+        </Typography>
       </div>
-     </div>
-  );
-};
+    </div>
+  )
+}
 
 const Bridge: React.FC<any> = () => {
   const { chainId, account, connector, deactivate, library } = useActiveWeb3React()
-  const { setToChain: connectToChain } = useMultiChain();
-  const { bridgeStableMethod, bridgeNativeMethod, bridgeMethod } = useBridge();
-  const { getTransactionStatus } = useBridgeApi();
-  // const { transaction } = useTransaction();
-  const { approve, getAllowance } = useFantomERC20();
-  const [tokenList, setTokenList] = useState(null);
-  const [fromChain, setFromChain] = useState(chainId);
-  const [toChain, setToChain] = useState(chainId == 250 ? 43114 : 250);
-  const [selectedToken, setSelectedToken] = useState(null);
-  const [isApproved, setIsApproved] = useState(true);
-  const [amount, setAmount] = useState("");
-  const [inputError, setInputError] = useState(null);
+  const { setToChain: connectToChain } = useMultiChain()
+  const { bridgeStableMethod, bridgeNativeMethod, bridgeMethod } = useBridge()
+  const { getTransactionStatus } = useBridgeApi()
+  // const { transaction } = useTransaction()
+  const { approve, getAllowance } = useFantomERC20()
+  const [tokenList, setTokenList] = useState(null)
+  const [fromChain, setFromChain] = useState(chainId)
+  const [toChain, setToChain] = useState(chainId == 250 ? 43114 : 250)
+  const [selectedToken, setSelectedToken] = useState(null)
+  const [isApproved, setIsApproved] = useState(true)
+  const [amount, setAmount] = useState("")
+  const [inputError, setInputError] = useState(null)
   const [bridgeTxHash, setBridgeTxHash] = useState(
     window.localStorage.getItem("BridgeTxHash")
-  );
-  const [bridgeStatus, setBridgeStatus] = useState(0);
+  )
+  const [bridgeStatus, setBridgeStatus] = useState(0)
 
   const {
     ContractAddress,
@@ -733,7 +685,7 @@ const Bridge: React.FC<any> = () => {
     MinimumSwap,
     MaximumSwap,
     type,
-  } = selectedToken || {};
+  } = selectedToken || {}
 
   const validateAmount = (amount: string) => {
     if (selectedToken && balance) {
@@ -742,33 +694,33 @@ const Bridge: React.FC<any> = () => {
           resolvedBalance &&
           BigNumber.from(unitToWei(amount, Decimals)).gt(resolvedBalance)
         ) {
-          return setInputError("Insufficient Funds");
+          return setInputError(i18n._(t`Insufficient Funds`))
         }
         if (parseFloat(amount) < parseFloat(MinimumSwap)) {
-          return setInputError("Below Minimum");
+          return setInputError(i18n._(t`Below Minimum`))
         }
         if (parseFloat(amount) > parseFloat(MaximumSwap)) {
-          return setInputError("Above Maximum");
+          return setInputError(i18n._(t`Above Maximum`))
         }
-        return setInputError(null);
-      });
+        return setInputError(null)
+      })
     }
-  };
+  }
 
   const handleSetAmount = (value: string) => {
-    validateAmount(value);
-    setAmount(value);
-  };
+    validateAmount(value)
+    setAmount(value)
+  }
 
   useEffect(() => {
-    validateAmount(amount);
-  }, [selectedToken]);
+    validateAmount(amount)
+  }, [selectedToken])
 
-    // TODO: FIX //
+  // TODO: FIX //
   const isBridgeTxPending = false
   //  transaction[bridgeTxHash] && transaction[bridgeTxHash].status === "pending";
   const isBridgeTxCompleted = false
-    // transaction[bridgeTxHash] && transaction[bridgeTxHash].status === "completed";
+  // transaction[bridgeTxHash] && transaction[bridgeTxHash].status === "completed";
 
   const {
     sendTx: handleApproveToken,
@@ -776,7 +728,7 @@ const Bridge: React.FC<any> = () => {
     isCompleted: isApproveCompleted,
   } = useSendTransaction(() =>
     approve(selectedToken.ContractAddress, selectedToken.router)
-  );
+  )
 
   const handleBridgeAction = async () => {
     const isStableType =
@@ -787,41 +739,41 @@ const Bridge: React.FC<any> = () => {
 
     let tx;
     if (isNative) {
-      console.log("NATIVE BRIDGE");
+      console.log("NATIVE BRIDGE")
       tx = await bridgeNativeMethod(
         selectedToken,
         unitToWei(amount, Decimals).toString()
-      );
+      )
     } else if (isStableType) {
-      console.log("STABLE BRIDGE");
+      console.log("STABLE BRIDGE")
       tx = await bridgeStableMethod(
         selectedToken,
         unitToWei(amount, Decimals).toString()
-      );
+      )
     } else {
-      console.log("BRIDGE");
+      console.log("BRIDGE")
       tx = await bridgeMethod(
         selectedToken,
         unitToWei(amount, Decimals).toString()
-      );
+      )
     }
 
     if (tx) {
-      window.localStorage.setItem("BridgeTxHash", tx);
-      setBridgeTxHash(tx);
+      window.localStorage.setItem("BridgeTxHash", tx)
+      setBridgeTxHash(tx)
       // TODO announce is not a public api endpoint
-      // announceTransaction(tx, fromChainId, toChainId);
+      // announceTransaction(tx, fromChainId, toChainId)
     }
-  };
+  }
 
   const resetTransactionStatus = () => {
-    window.localStorage.removeItem("BridgeTxHash");
-    setBridgeTxHash(null);
-  };
+    window.localStorage.removeItem("BridgeTxHash")
+    setBridgeTxHash(null)
+  }
 
   useEffect(() => {
-    connectToChain(fromChain);
-  }, [fromChain]);
+    connectToChain(fromChain)
+  }, [fromChain])
 
   useEffect(() => {
     if (chainId !== fromChain) {
@@ -837,13 +789,13 @@ const Bridge: React.FC<any> = () => {
                 : selectedToken.balance
             )
           )
-            return setIsApproved(true);
-          return setIsApproved(false);
+            return setIsApproved(true)
+          return setIsApproved(false)
         }
-      );
+      )
     }
-    return setIsApproved(true);
-  }, [selectedToken, isApproveCompleted, chainId]);
+    return setIsApproved(true)
+  }, [selectedToken, isApproveCompleted, chainId])
 
   useEffect(() => {
     let interval: any;
@@ -854,202 +806,202 @@ const Bridge: React.FC<any> = () => {
             if (!response?.data?.info) {
               return;
             }
-            return setBridgeStatus(response.data.info.status);
+            return setBridgeStatus(response.data.info.status)
           })
-          .catch((err) => console.error(err));
+          .catch((err) => console.error(err))
 
-      interval = setInterval(() => fetchStatus(), 10_000);
+      interval = setInterval(() => fetchStatus(), 10_000)
     }
     if (!bridgeTxHash) {
-      clearInterval(interval);
+      clearInterval(interval)
     }
 
-    return () => clearInterval(interval);
-  }, [bridgeTxHash]);
+    return () => clearInterval(interval)
+  }, [bridgeTxHash])
 
   return (
     <Container id="bridge-page" maxWidth="2xl" className="space-y-4 mt-4">
       <DoubleGlowShadowV2>
-      <SwapLayoutCard>
+        <SwapLayoutCard>
 
-      <div
-      //  className="p-4 mt-12 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}
-      >
-        {/* <div className="px-2"> */}
-    {/* <SwapHeader /> */}
-    <SwapDropdown />
+          <div
+          //  className="p-4 mt-12 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}
+          >
+            {/* <div className="px-2"> */}
+            {/* <SwapHeader /> */}
+            <SwapDropdown />
 
-    {/* </div> */}
-    <FadeInOut>
-      {bridgeTxHash && (
-        <ContentBox
-          style={{
-            background: "#821fff",
-            color: "white",
-            fontFamily: "proxima-nova, sans-serif",
-            borderRadius: "8px",
-            position: "fixed",
-            right: "2rem",
-            top: "8rem",
-            zIndex: 100,
-            padding: "1rem",
-          }}
-        >
-          <Column style={{}}>
-            <Typo2 style={{ fontWeight: "bold" }}>Bridge Transaction</Typo2>
-            <div />
-            <Typo2>
-              {"Hash: "}
-              <a
-                href={`https://anyswap.net/explorer/tx?params=${bridgeTxHash}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {formatAddress(bridgeTxHash)}
-              </a>
-            </Typo2>
-            {bridgeStatus > 0 && (
-              <Typo2>
-                {transactionStatusMapping[bridgeStatus] || "Unknown"}
-              </Typo2>
-            )}
-            <div />
-            <OverlayButton
-              style={{ padding: 0 }}
-              onClick={() => resetTransactionStatus()}
-            >
-              <Typo2 style={{ fontWeight: "bold" }}>Close</Typo2>
-            </OverlayButton>
-          </Column>
-        </ContentBox>
-      )}
-      <Row style={{ width: "100%", justifyContent: "center" }}>
-        <div className={classNames(`flex -4 border border-dark-900`,
-        // hover:border-${getChainColorCode(chainId)} 
-        `bg-dark-900 p-2 rounded w-full`)}
-        >
-          <Column style={{ width: "100%" }}>
-            <div />
-            <>
-              <ChainSelection
-                setTokenList={setTokenList}
-                connectToChain={setFromChain}
-                bridgeToChain={setToChain} />
-              <div />
-              <div />
-              <BridgeTokenList
-                tokenList={tokenList}
-                setSelectedToken={setSelectedToken}
-                fromChain={fromChain}
-                toChain={toChain}
-                amount={amount}
-                setAmount={handleSetAmount}
-                inputError={inputError}
-                isBridgeTxCompleted={isBridgeTxCompleted} />
-              <div />
-              <div />
-              <div className="h-px my-6 bg-dark-1000"></div>
-              <div className={`flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-${getChainColorCode(chainId)} w-full space-y-1`}>
-                <div className="flex justify-between">
-                  <Typography className="text-white" fontFamily={'medium'}>
-                    Bridgeable Range
-                  </Typography>
-                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {selectedToken
-                      ? `${formatSimpleValue(
-                        selectedToken.MinimumSwap
-                      )} - ${formatSimpleValue(
-                        selectedToken.MaximumSwap
-                      )} ${selectedToken.symbol}`
-                      : "-"}
-                  </Typography>
-                </div>
-
-                <div className="flex justify-between">
-                  <Typography className="text-white" fontFamily={'medium'}>
-                    Minimum Amount
-                  </Typography>
-                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {selectedToken
-                      ? `${formatSimpleValue(selectedToken.MinimumSwap)} ${selectedToken.symbol}`
-                      : "-"}
-                  </Typography>
-                </div>
-
-                <div className="flex justify-between">
-                  <Typography className="text-white" fontFamily={'medium'}>
-                    Maximum Amount
-                  </Typography>
-                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {selectedToken
-                      ? `${formatSimpleValue(selectedToken.MaximumSwap)} ${selectedToken.symbol}`
-                      : "-"}
-                  </Typography>
-                </div>
-
-                <div className="flex justify-between">
-                  <Typography className="text-white" fontFamily={'medium'}>
-                    Fee (Minimum)
-                  </Typography>
-                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {'~'}
-                    {selectedToken
-                      ? `${formatSimpleValue(
-                        selectedToken.MinimumSwapFee
-                      )} ${selectedToken.symbol}`
-                      : "-"}
-                  </Typography>
-                </div>
-
-                <div className="flex justify-center">
-                  <Typography className="text-white text-xs">
-                    {selectedToken
-                      ? <i>Amounts over {formatSimpleValue(
-                        selectedToken.BigValueThreshold
-                      )} {selectedToken.symbol} may take up to 12hrs.</i>
-                      : ""}
-                  </Typography>
-                </div>
-
-              </div>
-              <div className="mt-8" />
-              <ButtonComponent variant="outlined" color={getChainColorCode(chainId)} onClick={handleApproveToken} className="mb-2">
-                {isApprovePending
-                  ? "Approving"
-                  : isApproveCompleted
-                    ? "Approve successful"
-                    : "Approve Token"}
-              </ButtonComponent>
-              
-              {isApproved && (
-
-                <ButtonComponent
-                  disabled={inputError ||
-                    !amount ||
-                    chainId !== fromChain}
-                  variant="filled"
-                  color={getChainColorCode(chainId)}
-                  onClick={handleBridgeAction}
+            {/* </div> */}
+            <FadeInOut>
+              {bridgeTxHash && (
+                <ContentBox
+                  style={{
+                    background: "#821fff",
+                    color: "white",
+                    fontFamily: "proxima-nova, sans-serif",
+                    borderRadius: "8px",
+                    position: "fixed",
+                    right: "2rem",
+                    top: "8rem",
+                    zIndex: 100,
+                    padding: "1rem",
+                  }}
                 >
-                  {isBridgeTxPending
-                    ? "Broadcasting Transaction"
-                    : "Bridge Token"}
-                </ButtonComponent>
+                  <Column style={{}}>
+                    <Typo2 style={{ fontWeight: "bold" }}>Bridge Transaction</Typo2>
+                    <div />
+                    <Typo2>
+                      {i18n._(t`Hash: `)}
+                      <a
+                        href={`https://anyswap.net/explorer/tx?params=${bridgeTxHash}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {formatAddress(bridgeTxHash)}
+                      </a>
+                    </Typo2>
+                    {bridgeStatus > 0 && (
+                      <Typo2>
+                        {transactionStatusMapping[bridgeStatus] || "Unknown"}
+                      </Typo2>
+                    )}
+                    <div />
+                    <OverlayButton
+                      style={{ padding: 0 }}
+                      onClick={() => resetTransactionStatus()}
+                    >
+                      <Typo2 style={{ fontWeight: "bold" }}>Close</Typo2>
+                    </OverlayButton>
+                  </Column>
+                </ContentBox>
               )}
-            
-              <div className="mt-4" />
-            </>
-          </Column>
-        </div>
-      </Row>
-      <div />
-    </FadeInOut>
-  </div>
-  </SwapLayoutCard>
-</DoubleGlowShadowV2>
-</Container>
-  );
-};
+              <Row style={{ width: "100%", justifyContent: "center" }}>
+                <div className={classNames(`flex -4 border border-dark-900`,
+                  // hover:border-${getChainColorCode(chainId)} 
+                  `bg-dark-900 p-2 rounded w-full`)}
+                >
+                  <Column style={{ width: "100%" }}>
+                    <div />
+                    <>
+                      <ChainSelection
+                        setTokenList={setTokenList}
+                        connectToChain={setFromChain}
+                        bridgeToChain={setToChain} />
+                      <div />
+                      <div />
+                      <BridgeTokenList
+                        tokenList={tokenList}
+                        setSelectedToken={setSelectedToken}
+                        fromChain={fromChain}
+                        toChain={toChain}
+                        amount={amount}
+                        setAmount={handleSetAmount}
+                        inputError={inputError}
+                        isBridgeTxCompleted={isBridgeTxCompleted} />
+                      <div />
+                      <div />
+                      <div className="h-px my-6 bg-dark-1000"></div>
+                      <div className={`flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-${getChainColorCode(chainId)} w-full space-y-1`}>
+                        <div className="flex justify-between">
+                          <Typography className="text-white" fontFamily={'medium'}>
+                            {i18n._(t`Bridgeable Range`)}
+                          </Typography>
+                          <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                            {selectedToken
+                              ? `${formatSimpleValue(
+                                selectedToken.MinimumSwap
+                              )} - ${formatSimpleValue(
+                                selectedToken.MaximumSwap
+                              )} ${selectedToken.symbol}`
+                              : "-"}
+                          </Typography>
+                        </div>
+
+                        <div className="flex justify-between">
+                          <Typography className="text-white" fontFamily={'medium'}>
+                            {i18n._(t`Minimum Amount`)}
+                          </Typography>
+                          <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                            {selectedToken
+                              ? `${formatSimpleValue(selectedToken.MinimumSwap)} ${selectedToken.symbol}`
+                              : "-"}
+                          </Typography>
+                        </div>
+
+                        <div className="flex justify-between">
+                          <Typography className="text-white" fontFamily={'medium'}>
+                            {i18n._(t`Maximum Amount`)}
+                          </Typography>
+                          <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                            {selectedToken
+                              ? `${formatSimpleValue(selectedToken.MaximumSwap)} ${selectedToken.symbol}`
+                              : "-"}
+                          </Typography>
+                        </div>
+
+                        <div className="flex justify-between">
+                          <Typography className="text-white" fontFamily={'medium'}>
+                            {i18n._(t`Fee (Minimum)`)}
+                          </Typography>
+                          <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                            {'~'}
+                            {selectedToken
+                              ? `${formatSimpleValue(
+                                selectedToken.MinimumSwapFee
+                              )} ${selectedToken.symbol}`
+                              : "-"}
+                          </Typography>
+                        </div>
+
+                        <div className="flex justify-center">
+                          <Typography className="text-white text-xs">
+                            {selectedToken
+                              ? <i> {i18n._(t`Amounts over`)} {formatSimpleValue(
+                                selectedToken.BigValueThreshold
+                              )} {selectedToken.symbol}  {i18n._(t`may take up to 12hrs`)}.</i>
+                              : ""}
+                          </Typography>
+                        </div>
+
+                      </div>
+                      <div className="mt-8" />
+                      <ButtonComponent variant="outlined" color={getChainColorCode(chainId)} onClick={handleApproveToken} className="mb-2">
+                        {isApprovePending
+                          ? i18n._(t`Approving`)
+                          : isApproveCompleted
+                            ? i18n._(t`Approve Successful`)
+                            : i18n._(t`Approve Token`)}
+                      </ButtonComponent>
+
+                      {isApproved && (
+
+                        <ButtonComponent
+                          disabled={inputError ||
+                            !amount ||
+                            chainId !== fromChain}
+                          variant="filled"
+                          color={getChainColorCode(chainId)}
+                          onClick={handleBridgeAction}
+                        >
+                          {isBridgeTxPending
+                            ? i18n._(t`Broadcasting Transaction`)
+                            : i18n._(t`Bridge Token`)}
+                        </ButtonComponent>
+                      )}
+
+                      <div className="mt-4" />
+                    </>
+                  </Column>
+                </div>
+              </Row>
+              <div />
+            </FadeInOut>
+          </div>
+        </SwapLayoutCard>
+      </DoubleGlowShadowV2>
+    </Container>
+  )
+}
 
 // const Divider: React.FC<any> = ({ padding = "2rem" }) => {
 //   return (
@@ -1061,8 +1013,8 @@ const Bridge: React.FC<any> = () => {
 //         backgroundColor: "#232F46",
 //       }}
 //     />
-//   );
-// };
+//   )
+// }
 
 export const StyledOverlayButton = styled(OverlayButton)`
   :hover {

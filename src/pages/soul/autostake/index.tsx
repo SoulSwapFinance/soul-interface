@@ -274,7 +274,7 @@ export default function AutoStake() {
                 </div>
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Pending Reward`)}
+                    {i18n._(t`Pending Rewards`)}
                   </Typography>
                   <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
                     {earnedAmount.toFixed(0)} SOUL ({ formatNumber(earnedValue, true, true) })
