@@ -264,7 +264,7 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: USDC_ADDRESS[ChainId.FANTOM],
   },
-  {
+/*  {
     // 600
     pid: 55,
     token0Symbol: 'WFTM',
@@ -274,6 +274,7 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: AVAX_ADDRESS[ChainId.FANTOM],
   },
+*/ 
   {
     // 600
     pid: 18,
