@@ -215,7 +215,11 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                             />
                         </div>
                         
-                        <div className={`inline-block justify-center my-0.5 mr-2`}>
+                        <div
+                            className={classNames(
+                                `flex w-[36px] h-[36px] justify-center rounded p-0.5`,)}
+                                // isLend && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
+                        >                            
                             <More />
                         </div>
                         {/* <div className="flex items-center w-full space-x-2 justify-end"> */}
