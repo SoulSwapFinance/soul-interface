@@ -155,10 +155,8 @@ const Desktop: FC = () => {
                 </>
               )} */}
               {/* MORE [...] ICON */}
-              <div className={`rounded rounded-md inline-block border border-2 border-[${getChainColor(chainId)}]`}>
-                <div className="inline-block justify-center m-1 mr-2">
+              <div className={`rounded rounded-md inline-block`}>
                   <More />
-                </div>
               </div>
               {/* WALLET ICON */}
               {/* <div className={showMenu && account ? `rounded rounded-md inline-block border border-[${getChainColor(chainId)}]` : `hidden`}>
