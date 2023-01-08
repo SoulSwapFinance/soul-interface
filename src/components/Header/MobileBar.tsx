@@ -11,7 +11,7 @@ import More from './More'
 // import Web3Network from 'components/Web3Network'
 // import LanguageMenu from './useLanguages'
 // import Web3Status from 'components/Web3Status'
-import { ChainId } from 'sdk'
+import { ChainId, Currency, NATIVE, Percent, SOUL_ADDRESS, USDC_ADDRESS } from 'sdk'
 import Typography from 'components/Typography'
 import { classNames } from 'functions/styling'
 // import styled from 'styled-components'
@@ -23,9 +23,24 @@ import LanguageMenu from './useLanguages'
 import useBar from './useBar'
 import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
+import NavLink from 'components/NavLink'
+import BookSparkles from 'components/Icons/mobile/BookSparkles'
+import { currencyId } from 'functions/currency'
+import SwapIcon from 'components/Icons/exchange/SwapIcon'
+import VaultIcon from 'components/Icons/mobile/VaultIcon'
+import CauldronIcon from 'components/Icons/mobile/CauldronIcon'
+import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
 
-const MobileBar: FC = () => {
+interface BarProps {
+    inputCurrency?: Currency
+    outputCurrency?: Currency
+    allowedSlippage?: Percent
+}
+
+const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
     const router = useRouter()
+    const { asPath } = useRouter()
+
     const { account, chainId, library } = useActiveWeb3React()
     const [open, setOpen] = useState(false)
     const bar = useBar()
@@ -35,7 +50,7 @@ const MobileBar: FC = () => {
     const swapRoute = useCallback(() => {
         router.push(`/exchange/swap`)
     }, [])
-    const landingRoute = useCallback(() => {
+    const homeRoute = useCallback(() => {
         router.push(`/landing`)
     }, [])
     const lendRoute = useCallback(() => {
@@ -51,8 +66,52 @@ const MobileBar: FC = () => {
     const swapPage = router.pathname.startsWith('/swap') || router.pathname.startsWith('/exchange')
     const landingPage = router.pathname.startsWith('/landing')
     const farmPage = router.pathname.startsWith('/farm') || router.pathname.startsWith('/summoner')
+    const bondPage = router.pathname.startsWith('/bond') || router.pathname.startsWith('/bonds')
     const lendPage = router.pathname.startsWith('/lend') || router.pathname.startsWith('/borrow')
     const bridgePage = router.pathname.startsWith('/bridge')
+
+    const isRemove = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
+    const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
+    const isPool = isRemove || isAdd
+    const isHome = landingPage
+    const isLend = lendPage
+    const isEarn = farmPage || bondPage
+
+    const isExchangeAnalytics
+        = asPath.startsWith('/exchange/analytics')
+        || asPath.startsWith('/exchange/analytics/coffinbox')
+        || asPath.startsWith('/exchange/analytics/dashboard')
+        || asPath.startsWith('/exchange/analytics/pairs')
+        || asPath.startsWith('/exchange/analytics/tokens')
+
+    // const isBridge = router.pathname.startsWith('/bridge')
+
+    // const isLimit = router.pathname.startsWith('/limit')
+    //   || router.pathname.startsWith('/exchange/limit')
+
+    // const isAggregator = asPath.startsWith('/aggregator')
+    //   || asPath.startsWith('/exchange/aggregator')
+
+    const isCross = router.pathname.startsWith('/cross')
+        || router.pathname.startsWith('/exchange/cross')
+
+    const isExchange = router.pathname.startsWith('/swap')
+        || router.pathname.startsWith('/exchange/swap')
+
+    // const useSettings = isExchange || isLimit || isPool
+
+    const soulEnabled = [ChainId.FANTOM, ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId)
+
+    const activeStyle = `border border-[${getChainColor(chainId)}] rounded`
+    const style = `text-secondary bg-white rounded rounded-xl border border-[${getChainColor(chainId)}]`
+    const homeStyle = isHome ? activeStyle : style
+    const swapStyle = isExchange ? activeStyle : style
+    // const poolStyle = isPool ? activeStyle : style
+    // const ecoStyle = isAggregator ? activeStyle : style
+    // const bridgeStyle = isBridge ? activeStyle : style
+    // const chartStyle = isExchangeAnalytics ? activeStyle : style
+    // const crossStyle = isCross ? activeStyle : style
+
     return (
         <div>
             <Transition.Root show={open} as={Fragment}>
@@ -102,53 +161,60 @@ const MobileBar: FC = () => {
                     </div>
                 </Dialog>
             </Transition.Root>
+
             <div className={`fixed bottom-0 left-auto z-10 flex flex-row items-center justify-center w-auto rounded rounded-xl`}>
                 {/* xl:relative // moves to top */}
                 <div className="flex items-center w-full space-x-2 justify-end">
                     <div className={`fixed bg-dark-1000 bottom-0 left-0 z-10 gap-1 flex justify-between items-center justify-center w-full`}>
-                        <div className={`p-1 bg-${getChainColorCode(chainId)} border border-2 rounded border-[${getChainColor(chainId)}] hover:bg-dark-800`}>
-                            <Bars3Icon
-                                width={28}
-                                className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ?
-                                    `bg-${getChainColorCode(chainId)} cursor-pointer rounded rounded-xl`
-                                    : `hidden`)}
-                                onClick={() => setOpen(true)}
+                        <div
+                            className={classNames(
+                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                isHome && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
+                            onClick={homeRoute}
+                        >
+                            <BookSparkles
+                                fillPrimary={isHome ? `${getChainColor(chainId)}` : `#FFFFFF`}
+                                fillSecondary={isHome ? `#FFFFFF` : `${getChainColor(chainId)}`}
+                                className={'w-8 h-8'}
                             />
                         </div>
-                        <Typography
-                            className={classNames(typeStyle, swapPage ? `text-white` : `text-[${getChainColor(chainId)}]`, `bg-${swapPage ? getChainColorCode(chainId) : `dark-1000`}`)}
+                        <div
+                            className={classNames(
+                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                isExchange && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                             onClick={swapRoute}
                         >
-                            {i18n._(t`Swap`)}
-                        </Typography>
-                        <Typography
-                            className={classNames(typeStyle, farmPage ? `text-white` : `text-[${getChainColor(chainId)}]`, `bg-${farmPage ? getChainColorCode(chainId) : `dark-1000`}`)}
-                            onClick={farmRoute}
-                        >
-                            {i18n._(t`Earn`)}
-                        </Typography>
-                        <div
-                            className={`mt-1 m-1 border ${landingPage ? `border-[${getChainColor(chainId)}]` : `border-dark-700`} rounded rounded-xl p-1`}
-                            // className={classNames(typeStyle, landingPage ? `text-white` : `text-[${getChainColor(chainId)}]`, `bg-dark-1000`)}
-                            onClick={landingRoute}
-                        >
-                            <Image
-                                height={200} width={200} src={'/logo.png'} alt={'soul logo'}
-                                className={classNames(typeStyle, landingPage ? `text-white` : `text-[${getChainColor(chainId)}]`, `bg-dark-1000`)}
+                            <SwapIcon
+                                fillPrimary={isExchange ? `${getChainColor(chainId)}` : `#FFFFFF`}
+                                fillSecondary={isExchange ? `#FFFFFF` : `${getChainColor(chainId)}`}
+                                className={'w-8 h-8'}
                             />
                         </div>
-                        <Typography
-                            className={classNames(typeStyle, lendPage ? `text-white` : `text-[${getChainColor(chainId)}]`, `bg-${lendPage ? getChainColorCode(chainId) : `dark-1000`}`)}
+                        <div
+                            className={classNames(
+                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                isEarn && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
+                            onClick={farmRoute}
+                        >
+                            <CauldronIcon
+                                fillPrimary={isEarn ? `${getChainColor(chainId)}` : `#FFFFFF`}
+                                fillSecondary={isEarn ? `#FFFFFF` : `${getChainColor(chainId)}`}
+                                className={'w-8 h-8'}
+                            />
+                        </div>
+                        <div
+                            className={classNames(
+                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                isLend && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                             onClick={lendRoute}
                         >
-                            {i18n._(t`Lend`)}
-                        </Typography>
-                        <Typography
-                            className={classNames(typeStyle, bridgePage ? `text-white` : `text-[${getChainColor(chainId)}]`, `bg-${bridgePage ? getChainColorCode(chainId) : `dark-1000`}`)}
-                            onClick={bridgeRoute}
-                        >
-                            {i18n._(t`Bridge`)}
-                        </Typography>
+                            <LendSkullIcon
+                                fillPrimary={isLend ? `${getChainColor(chainId)}` : `#FFFFFF`}
+                                fillSecondary={isLend ? `#FFFFFF` : `${getChainColor(chainId)}`}
+                                className={'w-8 h-8'}
+                            />
+                        </div>
+                        
                         <div className={`inline-block justify-center my-0.5 mr-2`}>
                             <More />
                         </div>

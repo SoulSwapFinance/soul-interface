@@ -1,32 +1,33 @@
 
 import { Dialog, Transition } from '@headlessui/react'
 import { Bars3Icon } from '@heroicons/react/24/outline'
-// import BarsArrowUpIcon from 'assets/svg/icons/BarsArrowUp.svg'
-// import BarsArrowDownIcon from 'assets/svg/icons/BarsArrowDown.svg'
 import { ChainId, NATIVE } from 'sdk'
-// import useMenu from 'components/Header/useMenu'
 import Web3Network from 'components/Web3Network'
 import Web3Status from 'components/Web3Status'
-// import useIsCoinbaseWallet from 'hooks/useIsCoinbaseWallet'
 import { useActiveWeb3React } from 'services/web3'
-import { useETHBalances } from 'state/wallet/hooks'
-// import Image from 'next/image'
-// import Link from 'next/link'
 import React, { FC, Fragment, useCallback, useState } from 'react'
-
 import { SidebarItem } from './SidebarItem'
-// import { NavigationItem } from './NavigationItem'
-// import LuxorStats from 'components/LuxorStats'
 import TokenStats from 'components/TokenStats'
-import More from './More'
 import useBar from './useBar'
-import { useRouter } from 'next/router'
 import { classNames } from 'functions/styling'
 import { getChainColor, getChainColorCode } from 'constants/chains'
-// import { NavigationItem } from './NavigationItem'
-// import LanguageSwitch from 'components/LanguageSwitch'
 import LanguageMenu from './useLanguages'
 import MobileBar from './MobileBar'
+
+// import { useRouter } from 'next/router'
+// import BarsArrowUpIcon from 'assets/svg/icons/BarsArrowUp.svg'
+// import BarsArrowDownIcon from 'assets/svg/icons/BarsArrowDown.svg'
+// import useMenu from 'components/Header/useMenu'
+// import useIsCoinbaseWallet from 'hooks/useIsCoinbaseWallet'
+// import { useETHBalances } from 'state/wallet/hooks'
+// import Image from 'next/image'
+// import Link from 'next/link'
+
+// import { NavigationItem } from './NavigationItem'
+// import LuxorStats from 'components/LuxorStats'
+// import More from './More'
+// import { NavigationItem } from './NavigationItem'
+// import LanguageSwitch from 'components/LanguageSwitch'
 // import { Button } from 'components/Button'
 // import { SubmitButton } from 'features/summoner/Styles'
 // import Typography from 'components/Typography'
@@ -36,34 +37,34 @@ import MobileBar from './MobileBar'
 const Mobile: FC = () => {
   // const menu = useMenu()
   const bar = useBar()
-  const router = useRouter()
-  const isLuxor = router.asPath.startsWith('/luxor')
+  // const router = useRouter()
+  // const isLuxor = router.asPath.startsWith('/luxor')
 
   const { account, chainId, library } = useActiveWeb3React()
-  const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
+  // const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const [open, setOpen] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
   // const isCoinbaseWallet = useIsCoinbaseWallet()
 
-  const handleShowMenu = useCallback(() => {
-    showMenu ? setShowMenu(false) : setShowMenu(true)
-  }, [setShowMenu])
+  // const handleShowMenu = useCallback(() => {
+  //   showMenu ? setShowMenu(false) : setShowMenu(true)
+  // }, [setShowMenu])
 
   return (
     <>
       <header className="w-full flex mt-3 items-center justify-between min-h-[36px] h-[36px] px-4">
         <div className="flex justify-between flex-grow">
 
-                        <div className={`p-1 bg-${getChainColorCode(chainId)} border border-2 rounded border-[${getChainColor(chainId)}] hover:bg-dark-800`}>
-                            {/* <div className="flex p-2 justify-between"> */}
-                            <Bars3Icon 
-                                width={28} 
-                                className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? 
-                                `bg-${getChainColorCode(chainId)} cursor-pointer rounded rounded-xl` 
-                                : `hidden`)} 
-                                onClick={() => setOpen(true)} 
-                            />
-                        </div>
+          <div className={`p-1 bg-${getChainColorCode(chainId)} border border-2 rounded border-[${getChainColor(chainId)}]`}>
+            {/* <div className="flex p-2 justify-between"> */}
+            <Bars3Icon
+              width={28}
+              className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ?
+                `bg-${getChainColorCode(chainId)} cursor-pointer rounded rounded-xl`
+                : `hidden`)}
+              onClick={() => setOpen(true)}
+            />
+          </div>
 
           {/* <div
             className="flex gap-2 mx-2 sm:px-1 sm:gap-4 md:gap-18 justify-between items-center">
@@ -72,7 +73,7 @@ const Mobile: FC = () => {
             })}
           </div> */}
         </div>
-         <Transition.Root show={open} as={Fragment}>
+        <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 z-20 overflow-hidden" onClose={setOpen} unmount={false}>
             <div className="absolute inset-0 overflow-hidden">
               <Transition.Child

@@ -1,14 +1,11 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Bars3Icon } from '@heroicons/react/24/outline'
-import BarsArrowUpIcon from 'assets/svg/icons/BarsArrowUp.svg'
-import BarsArrowDownIcon from 'assets/svg/icons/BarsArrowDown.svg'
 
 import { ChainId, NATIVE } from 'sdk'
 import Web3Status from 'components/Web3Status'
 import { useActiveWeb3React } from 'services/web3'
 import { useETHBalances } from 'state/wallet/hooks'
 import React, { FC, Fragment, useCallback, useState } from 'react'
-import Image from 'next/image'
 import { NavigationItem } from './NavigationItem'
 import { SidebarItem } from './SidebarItem'
 import TokenStats from 'components/TokenStats'
@@ -16,11 +13,15 @@ import More from './More'
 import Container from 'components/Container'
 import useMenu from './useMenu'
 import useBar from './useBar'
-import { useRouter } from 'next/router'
 import { classNames } from 'functions'
 import Web3Network from 'components/Web3Network'
 import LanguageMenu from './useLanguages'
 import { getChainColor, getChainColorCode } from 'constants/chains'
+
+// import BarsArrowUpIcon from 'assets/svg/icons/BarsArrowUp.svg'
+// import BarsArrowDownIcon from 'assets/svg/icons/BarsArrowDown.svg'
+// import Image from 'next/image'
+// import { useRouter } from 'next/router'
 
 const HEADER_HEIGHT = 64
 
@@ -29,10 +30,10 @@ const Desktop: FC = () => {
   const bar = useBar()
   // const mobile = useMobileMenu()
   const { account, chainId, library, connector } = useActiveWeb3React()
-  const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
+  // const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const [open, setOpen] = useState(false)
-  const [showMenu, setShowMenu] = useState(false)
-  const router = useRouter()
+  // const [showMenu, setShowMenu] = useState(false)
+  // const router = useRouter()
   // const handleShowMenu = useCallback(() => {
   //   setSho
   // }, [setShowMenu])
@@ -49,7 +50,8 @@ const Desktop: FC = () => {
                   <NavLink href="/landing">
                     <Image src="/logo.png" alt="Soul" width="48" height="48" />
                   </NavLink>
-                </div> */}
+              </div> 
+          */}
         </div>
         <nav
           className={classNames(
