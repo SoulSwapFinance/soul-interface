@@ -4,17 +4,18 @@ import { FC } from 'react'
 export interface Props {
   fillPrimary: string
   fillSecondary: string
+  className: string
   // chainId?: ChainId
 }
 // export const SwapIcon: <FC.ReactElement> = (fillPrimary: string, fillSecondary) => (
-  const SwapIcon: FC<Props> = ({ fillPrimary, fillSecondary }) => {
+  const SwapIcon: FC<Props> = ({ fillPrimary, fillSecondary, className }) => {
 
     return (
   <svg 
     xmlns="http://www.w3.org/2000/svg" 
     viewBox="0 0 512 512"
     // fill="#FFFFFF" 
-    className="w-6 h-6"
+    className={className ? className : "w-6 h-6"}
     fill={fillPrimary}
 >
 

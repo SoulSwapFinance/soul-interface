@@ -104,6 +104,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               <SwapIcon
               fillPrimary={isExchange ? `${getChainColor(chainId)}` : `#FFFFFF`}
               fillSecondary={isExchange ? `#FFFFFF` : `${getChainColor(chainId)}`}
+              className={`w-6 w-6`}
               />
         </div>
           </NavLink>
