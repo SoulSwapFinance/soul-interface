@@ -5,7 +5,7 @@ import { useLingui } from '@lingui/react'
 import { ChainId, Currency, NATIVE, Percent, SOUL_ADDRESS, USDC_ADDRESS } from 'sdk'
 import NavLink from 'components/NavLink'
 import Settings from 'components/Settings'
-// import { SwapIcon } from 'components/Icons/exchange/SwapIcon'
+// import { RepeatIcon } from 'components/Icons/exchange/RepeatIcon'
 // import Typography from 'components/Typography'
 import { useRouter } from 'next/router'
 import { classNames, currencyId, featureEnabled } from '../../functions'
@@ -18,7 +18,7 @@ import Bridge from 'assets/svg/icons/Bridge.svg'
 // import Chart from 'assets/svg/icons/Chart.svg'
 // import RainDrop from 'assets/svg/icons/Raindrop.svg'
 // import Swap from 'assets/svg/icons/Swap.svg'
-import SwapIcon from 'components/Icons/exchange/SwapIcon'
+import RepeatIcon from 'components/Icons/exchange/RepeatIcon'
 import PlusMinusIcon from 'components/Icons/exchange/PlusMinusIcon'
 // import  from 'assets/svg/icons/PlusMinus.svg'
 import Merge from 'assets/svg/icons/Merge.svg'
@@ -101,7 +101,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
                   `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex rounded p-0.5`,
                   isExchange && `hover:border border-2 border-[${getChainColor(chainId)}]`)
                 }>
-              <SwapIcon
+              <RepeatIcon
               fillPrimary={isExchange ? `${getChainColor(chainId)}` : `#FFFFFF`}
               fillSecondary={isExchange ? `#FFFFFF` : `${getChainColor(chainId)}`}
               className={`w-6 w-6`}
