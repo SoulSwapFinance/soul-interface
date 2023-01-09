@@ -95,6 +95,7 @@ export const FantomBonds = [
   },
   {
     pid: 10,
+    status: 'closed',
     bondAddress: '0xaFADcDca5Aa1F187B357499f2e3BA94D3Cc32ad1',
     assetName: 'LUX-DAI',
     assetAddress: LUX_DAI[ChainId.FANTOM],
