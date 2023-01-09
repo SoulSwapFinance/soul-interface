@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 // import { ethers } from 'ethers'
@@ -6,7 +6,7 @@ import { useFantomPrice, useLuxorPrice } from 'hooks/getPrices'
 import { usePairPrice } from 'hooks/usePairData'
 import { useActiveWeb3React } from 'services/web3'
 // import QuestionHelper from '../../components/QuestionHelper'
-import { ChainId, LUX_DAI, LUX_NATIVE, LUX_SOR, SOR_NATIVE, Token } from 'sdk'
+import { ChainId, LUX_DAI, LUX_NATIVE, LUX_SOR, NATIVE, SOR_NATIVE, Token } from 'sdk'
 import AssetInput from 'components/AssetInput'
 import { useLuxorBondContract } from 'hooks/useContract'
 // import { useBondContract, useStakeSharePrice, useStakeRecentProfit, sharesFromSoul } from './useBonds'
@@ -32,6 +32,8 @@ import Typography from 'components/Typography'
 import ModalHeader from 'components/Modal/Header'
 import { useLuxorBondInfo } from 'hooks/useAPI'
 import { WFTM_ADDRESS } from 'constants/addresses'
+import { Button } from 'components/Button'
+import { useRouter } from 'next/router'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -46,7 +48,8 @@ const TokenLogo = styled(Image)`
 `
 
 const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAddress, bond }) => {
-    const { account } = useActiveWeb3React()
+    const { account, chainId } = useActiveWeb3React()
+    const router = useRouter()
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(stakeToken)
     const [showing, setShowing] = useState(false)
     const BondContract = useLuxorBondContract()
@@ -157,6 +160,12 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
             fetchApproval()
         }
     }
+
+    const swapRoute = useCallback((isPair: boolean) => {
+        isPair 
+            ? router.push(`/exchange/swap`)
+            : router.push(`/exchange/swap/?inputCurrency=${NATIVE[chainId ?? 250].symbol}&outputCurrency=${bond.assetAddress}`)
+    }, [])
 
     // returns: discount & sets
     // const fetchDiscount = async () => {
@@ -463,18 +472,25 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                 showMax={false}
                             />
                             <Wrap padding="0" margin="0" display="flex" justifyContent="center">
-                            {(approved &&
-                                Number(unstakedBal) == 0) ? (
-                                <TokenPairLink
+                            {(Number(unstakedBal) == 0) ? (
+                                    <Button
+                                        // height="2rem" 
+                                        variant='filled'
+                                        // primaryColor="white"
+                                        color="yellow"
+                                        className="flex text-black font-bold justify-center mt-2"
+                                        onClick={swapRoute(false)}
+                                    >
+                                {/* <TokenPairLink
                                     target="_blank"
                                     rel="noopener"
                                     text-color="#FFB857" // golden orange/yellow
                                     href=
                                     {`https://exchange.soulswap.finance/swap`}
-                                >
-                                <div className="text-yellow justify-center items-center text-center">
-                                CLICK HERE TO ACQUIRE BOND ASSETS</div>
-                                </TokenPairLink>
+                                > */}
+                                        ACQUIRE BOND ASSET
+                                {/* </TokenPairLink> */}
+                                </Button>
                         ) :
                                 // approved (&& available) ?
                                 (approved && available) ? (

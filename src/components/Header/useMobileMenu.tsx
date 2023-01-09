@@ -2,7 +2,7 @@ import React, { ReactNode, useMemo } from 'react'
 import { SparklesIcon, ArrowsUpDownIcon, ChartBarIcon } from'@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { NATIVE, SOUL_ADDRESS } from 'sdk'
+import { ChainId, NATIVE, SOUL_ADDRESS } from 'sdk'
 // import { PoolIcon, RocketIcon, WalletIcon } from 'components/Icon'
 import { Feature } from 'enums'
 import { featureEnabled } from 'functions'
@@ -151,7 +151,7 @@ const useMobileMenu: UseMobileMenu = () => {
       mainItems.push(farmItems)
     }
 
-    if ([43114].includes(chainId)) {
+    if ([ChainId.AVALANCHE].includes(chainId)) {
       const farmItems = {
         key: 'Rewards',
         title: i18n._(t`Rewards`),
@@ -285,7 +285,7 @@ const useMobileMenu: UseMobileMenu = () => {
       mainItems.push(analyticsMenu)
     }
 
-    if ([250].includes(chainId)) {
+    if ([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId)) {
       const learnItems = {
         key: 'Learn',
         title: i18n._(t`Learn`),

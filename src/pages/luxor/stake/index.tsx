@@ -81,7 +81,7 @@ export default function Stake() {
   const stakingRebase = Number(stakingReward) / Number(circulatingLumens);
   // const fiveDayRate = Math.pow(1 + stakingRebase, 5 * 3) - 1;
   const stakingAPY = (Math.pow(1 + stakingRebase, 365 * 3) - 1) * 100
-  
+
   const nextRebase = Number(luxorInfo.nextRebase) * 1000 // ms (x1000)
   // console.log('nextRebase:%s', nextRebase)
   const nowTime = new Date().getTime()
@@ -89,9 +89,9 @@ export default function Stake() {
   const remainingSeconds = nextRebase - Number(nowTime)
   // console.log('remainingSecs:%s', remainingSeconds)
   const remainingHours = remainingSeconds / 3_600_000
-  const remainingMinutes 
+  const remainingMinutes
     = max(remainingHours * 60, 0)
-    
+
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
     parsedStakeValue,
     LUXOR_STAKING_ADDRESS[250]
@@ -106,7 +106,7 @@ export default function Stake() {
     ? 'Enter Amount'
     : luxorBalance?.lessThan(parsedStakeValue)
       ? 'Insufficient Balance'
-        : undefined
+      : undefined
 
   const isStakeValid = !stakeError
 
@@ -114,7 +114,7 @@ export default function Stake() {
     ? 'Enter Amount'
     : lumensBalance?.lessThan(parsedRedeemValue)
       ? 'Insufficient Balance'
-        : undefined
+      : undefined
   const isRedeemValid = !redeemError
 
   const {
@@ -122,9 +122,9 @@ export default function Stake() {
     isPending: isApprovePending,
     isCompleted: isApproveCompleted,
   } = useSendTransaction(() =>
-    LumensContract.approve(LUXOR_STAKING_ADDRESS[chainId | 250], (1_000_000*1e9).toString())
+    LumensContract.approve(LUXOR_STAKING_ADDRESS[chainId | 250], (1_000_000 * 1e9).toString())
   );
-  
+
   /**
    * Runs only on initial render/mount
    */
@@ -146,45 +146,45 @@ export default function Stake() {
     }
   })
 
-    const fetchBals = async () => {
-        try {
-            const lumBal = await LumensContract.balanceOf(account)
-            const lumBalance = lumBal / 1e9
-            console.log('lum:%s', Number(lumBalance))
-            setLumBalance(lumBalance)
-            
-            const luxBal = await LuxorContract.balanceOf(account)
-            const luxBalance = luxBal / 1e9
-            console.log('lux:%s', Number(luxBalance))
-            setLuxBalance(luxBalance)
-          return [lumBalance, luxBalance]
-        } catch (err) {
-            console.warn(err)
-        }
+  const fetchBals = async () => {
+    try {
+      const lumBal = await LumensContract.balanceOf(account)
+      const lumBalance = lumBal / 1e9
+      console.log('lum:%s', Number(lumBalance))
+      setLumBalance(lumBalance)
+
+      const luxBal = await LuxorContract.balanceOf(account)
+      const luxBalance = luxBal / 1e9
+      console.log('lux:%s', Number(luxBalance))
+      setLuxBalance(luxBalance)
+      return [lumBalance, luxBalance]
+    } catch (err) {
+      console.warn(err)
     }
+  }
 
-    const fetchWarmupInfo = async () => {
-        try {
-            // const epoch = await StakingHelperContract.epoch()
-            // const currentEpoch = epoch.toString()
-            // console.log('warmupValue:%s', currentEpoch)
-            // setEpoch(currentEpoch)
+  const fetchWarmupInfo = async () => {
+    try {
+      // const epoch = await StakingHelperContract.epoch()
+      // const currentEpoch = epoch.toString()
+      // console.log('warmupValue:%s', currentEpoch)
+      // setEpoch(currentEpoch)
 
-            const warmupBal = await StakingHelperContract.warmupValue(account)
-            const warmupValue = warmupBal / 1e9
-            // console.log('warmupValue:%s', Number(warmupValue))
-            setWarmupValue(warmupValue)
+      const warmupBal = await StakingHelperContract.warmupValue(account)
+      const warmupValue = warmupBal / 1e9
+      // console.log('warmupValue:%s', Number(warmupValue))
+      setWarmupValue(warmupValue)
 
-            const expiry = await StakingHelperContract.warmupExpiry(account)
-            const warmupExpiry = expiry.toString()
-            // console.log('warmupExpiry:%s', warmupExpiry)
-            setWarmupExpiry(warmupExpiry)
- 
-          return [warmupValue, warmupExpiry]
-        } catch (err) {
-            console.warn(err)
-        }
+      const expiry = await StakingHelperContract.warmupExpiry(account)
+      const warmupExpiry = expiry.toString()
+      // console.log('warmupExpiry:%s', warmupExpiry)
+      setWarmupExpiry(warmupExpiry)
+
+      return [warmupValue, warmupExpiry]
+    } catch (err) {
+      console.warn(err)
     }
+  }
 
   return (
     <Container id="stablecoin-page" className="py-4 md:py-8 lg:py-12">
@@ -196,21 +196,21 @@ export default function Stake() {
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/dashboard'}>
             <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Data </span>
+              <span> Data </span>
             </a>
           </NavLink>
         </Button>
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/bonds'}>
             <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Bond </span>
+              <span> Bond </span>
             </a>
           </NavLink>
         </Button>
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/wrap'}>
             <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Wrap </span>
+              <span> Wrap </span>
             </a>
           </NavLink>
         </Button>
@@ -219,35 +219,35 @@ export default function Stake() {
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
           <Tab.Group>
             <Tab.List className="flex items-center justify-center mb-1 space-x-2 p-3px text-white">
-            <div className="grid grid-cols-2 w-[95%] rounded-md p-2px bg-dark-900">
-            <Tab
-                className={({ selected }) =>
-                  `${selected ? 'border-b-2 border-accent p-2 text-lg border-yellow text-white' : 'bg-dark-900 text-lg text-white'
-                  } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-yellow`
-                }
-              >
-                {i18n._(t`Deposit`)}
-              </Tab>
-              <Tab
-                className={({ selected }) =>
-                  `${selected ? 'border-b-2 border-accent p-2 text-lg border-yellow text-white' : 'bg-dark-900 text-lg text-white'
-                  } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-yellow`
-                }
-              >
-                {i18n._(t`Withdraw`)}
-              </Tab>
-          </div>
+              <div className="grid grid-cols-2 w-[95%] rounded-md p-2px bg-dark-900">
+                <Tab
+                  className={({ selected }) =>
+                    `${selected ? 'border-b-2 border-accent p-2 text-lg border-yellow text-white' : 'bg-dark-900 text-lg text-white'
+                    } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-yellow`
+                  }
+                >
+                  {i18n._(t`Deposit`)}
+                </Tab>
+                <Tab
+                  className={({ selected }) =>
+                    `${selected ? 'border-b-2 border-accent p-2 text-lg border-yellow text-white' : 'bg-dark-900 text-lg text-white'
+                    } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-yellow`
+                  }
+                >
+                  {i18n._(t`Withdraw`)}
+                </Tab>
+              </div>
             </Tab.List>
-            
+
             <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-yellow w-full space-y-1">
-                <div className="text-white">
-                    <div className="block text-lg font-bold md:text-xl text-white text-center text-bold p-1 -m-4 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                      <span> {formatNumber(stakingAPY)}% APY</span>
-                    </div>
+              <div className="text-white">
+                <div className="block text-lg font-bold md:text-xl text-white text-center text-bold p-1 -m-4 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                  <span> {formatNumber(stakingAPY)}% APY</span>
                 </div>
+              </div>
             </div>
 
-              {/* <div className={classNames(dailyReward > 0 && "flex flex-col bg-dark-1000 mb-2 p-3 border border-yellow border-1 hover:border-yellow w-full space-y-1")}>
+            {/* <div className={classNames(dailyReward > 0 && "flex flex-col bg-dark-1000 mb-2 p-3 border border-yellow border-1 hover:border-yellow w-full space-y-1")}>
         <div className="text-white">
           <div className="block text-md md:text-xl text-white text-center text-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span> DAILY YIELD: {formatNumber(dailyReward)} LUM ({formatNumber(dailyReward * luxorPrice)})</span>
@@ -274,14 +274,14 @@ export default function Stake() {
               <div className="h-px my-2 bg-dark-1000" />
 
               <div className="flex justify-between">
-              <Typography className="text-white text-lg" fontFamily={'medium'}>
-                    {i18n._(t`Epoch Remaining`)}
-                  </Typography>
-                  <Typography className="text-yellow text-lg" weight={600} fontFamily={'semi-bold'}>
-                  { (remainingMinutes).toFixed() } mins
-                  </Typography>
-              </div>             
-              
+                <Typography className="text-white text-lg" fontFamily={'medium'}>
+                  {i18n._(t`Epoch Remaining`)}
+                </Typography>
+                <Typography className="text-yellow text-lg" weight={600} fontFamily={'semi-bold'}>
+                  {(remainingMinutes).toFixed()} mins
+                </Typography>
+              </div>
+
               <div className="h-px my-2 bg-dark-1000" />
 
               {/* <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-yellow w-full space-y-1">
@@ -313,7 +313,7 @@ export default function Stake() {
                     {i18n._(t`Warmup Period`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    { warmupHours } hours
+                    {warmupHours} hours
                   </Typography>
                 </div>
               </div>
@@ -336,71 +336,71 @@ export default function Stake() {
                       i18n._(t`Approve`)
                     )}
                   </Button>
-                ) : 
-                // Number(stakeClaimAmount.toExact()) === 0 ? 
-                (
-                  <ButtonError
-                  type="filled"
-                  color="yellow"
-                  className="text-black text-lg font-bold"
-                    onClick={async () => {
-                      try {
-                        const tx = await stake(BigNumber.from(parsedStakeValue.quotient.toString()))
-                        addTransaction(tx, {
-                          summary: `Stake LUX`,
-                        })
-                      } catch (error) {
-                        console.error(error)
-                      }
-                    }}
-                    disabled={!isStakeValid || !account}
-                    error={!isStakeValid && !!parsedStakeValue}
-                    style={{ width: '100%' }}
-                  >
-                    {stakeError || i18n._(t`Stake Luxor`)}
-                  </ButtonError>
-                )}
+                ) :
+                  // Number(stakeClaimAmount.toExact()) === 0 ? 
+                  (
+                    <ButtonError
+                      type="filled"
+                      color="yellow"
+                      className="text-black text-lg font-bold"
+                      onClick={async () => {
+                        try {
+                          const tx = await stake(BigNumber.from(parsedStakeValue.quotient.toString()))
+                          addTransaction(tx, {
+                            summary: `Stake LUX`,
+                          })
+                        } catch (error) {
+                          console.error(error)
+                        }
+                      }}
+                      disabled={!isStakeValid || !account}
+                      error={!isStakeValid && !!parsedStakeValue}
+                      style={{ width: '100%' }}
+                    >
+                      {stakeError || i18n._(t`Stake Luxor`)}
+                    </ButtonError>
+                  )}
               </div>
 
               <div className={'mt-6 flex items-center gap-2'}>
-              <Button
-                type="filled"
-                color="gold"
-                className="text-black font-bold"
-              >
                 <NavLink
-                href="/swap?inputCurrency=&outputCurrency=0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b"
+                  href="/swap?inputCurrency=&outputCurrency=0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b"
                 >
-                <a className="block"> BUY LUXOR </a>
+                  <Button
+                    type="filled"
+                    color="gold"
+                    className="text-black font-bold"
+                  >
+                    <a className="block"> BUY LUXOR </a>
+                  </Button>
                 </NavLink>
-              </Button>
               </div>
 
             </Tab.Panel>
 
             <Tab.Panel className={'outline-none'}>
-             <StableInputPanel
+              <StableInputPanel
                 value={redeemValue}
-                showLogo={ isMobile ? false : true }
+                showLogo={isMobile ? false : true}
                 showMaxButton={true}
                 onUserInput={(value) => setRedeemValue(value)}
-                onMax={ () => setRedeemValue(lumensBalance.toExact()) }
+                onMax={() => setRedeemValue(lumensBalance.toExact())}
                 currency={lumensToken}
                 disableCurrencySelect={true}
                 locked={!account}
                 id="stablecoin-currency-output"
               />
-<div className="h-px my-2 bg-dark-1000" />
+              <div className="h-px my-2 bg-dark-1000" />
 
-<div className={classNames("flex justify-between", "mb-4")}>
-    <Typography className="text-white text-lg" fontFamily={'medium'}>
-      {i18n._(t`Epoch Remaining`)}
-    </Typography>
-    <Typography className="text-yellow text-lg" weight={600} fontFamily={'semi-bold'}>
-    { (remainingMinutes).toFixed() } mins
-    </Typography>
-</div>             
-{/* <div className="flex justify-between">
+              <div className={classNames("flex justify-between", "mb-4")}>
+                <Typography className="text-white text-lg" fontFamily={'medium'}>
+                  {i18n._(t`Epoch Remaining`)}
+                </Typography>
+                <Typography className="text-yellow text-lg" weight={600} fontFamily={'semi-bold'}>
+                  {(remainingMinutes).toFixed()} mins
+                </Typography>
+              </div>
+              {/* <div className="flex justify-between">
     <Typography className="text-white" fontFamily={'medium'}>
       {i18n._(t`Daily Reward`)}
     </Typography>
@@ -410,8 +410,8 @@ export default function Stake() {
 </div>            */}
 
 
-<div className="h-px my-2 bg-dark-1000" />
-                {/* <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-yellow w-full space-y-1">
+              <div className="h-px my-2 bg-dark-1000" />
+              {/* <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-yellow w-full space-y-1">
                 <div className="text-white">
                     <div className="block text-md md:text-xl text-white text-center text-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                       <span> {formatNumber(stakingAPY)}% APY</span>
@@ -419,28 +419,28 @@ export default function Stake() {
                 </div>
               </div> */}
 
-              { lumBalance > 0 && 
-              <div className={classNames(lumBalance > 0 && "flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1")}>
-              {/* <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1"> */}
-<div className={classNames(lumBalance > 0 ? "flex text-xl mb-2 font-bold text-yellow" : 'hidden')}> Deposit Details </div>
-              <div className={classNames(lumBalance > 0 ? 'flex justify-between' : 'hidden')}>
-                  <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Staked Balance`)}
-                  </Typography>
-                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    { formatNumber(lumBalance, false, true) } LUX
-                  </Typography>
-                </div>
-              <div className={classNames(lumBalance > 0 && 'flex justify-between')}>
-                  <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Next Rebase`)}
-                  </Typography>
-                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    { formatNumber(nextStakedReward, false, true) } LUM
-                  </Typography>
-                </div>
-        
-{/*               
+              {lumBalance > 0 &&
+                <div className={classNames(lumBalance > 0 && "flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1")}>
+                  {/* <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1"> */}
+                  <div className={classNames(lumBalance > 0 ? "flex text-xl mb-2 font-bold text-yellow" : 'hidden')}> Deposit Details </div>
+                  <div className={classNames(lumBalance > 0 ? 'flex justify-between' : 'hidden')}>
+                    <Typography className="text-white" fontFamily={'medium'}>
+                      {i18n._(t`Staked Balance`)}
+                    </Typography>
+                    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                      {formatNumber(lumBalance, false, true)} LUX
+                    </Typography>
+                  </div>
+                  <div className={classNames(lumBalance > 0 && 'flex justify-between')}>
+                    <Typography className="text-white" fontFamily={'medium'}>
+                      {i18n._(t`Next Rebase`)}
+                    </Typography>
+                    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                      {formatNumber(nextStakedReward, false, true)} LUM
+                    </Typography>
+                  </div>
+
+                  {/*               
               <div className={classNames(lumBalance > 0 && warmupValue > 0 ? 'flex justify-between' : 'hidden')}>
                   <Typography className="text-white" fontFamily={'medium'}>
                     {i18n._(t`Next Rebase`)}
@@ -449,9 +449,9 @@ export default function Stake() {
                     { formatNumber(nextReward, false, true) } LUM
                   </Typography>
                 </div> */}
-              {/* </div> */}
-               
-                {/* <div className="flex justify-between">
+                  {/* </div> */}
+
+                  {/* <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
                   {i18n._(t`Current Epoch`)}
                   </Typography>
@@ -460,7 +460,7 @@ export default function Stake() {
                   </Typography>
                 </div> */}
 
-                {/* <div className="flex justify-between">
+                  {/* <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
                     {i18n._(t`Epoch Duration`)}
                   </Typography>
@@ -468,7 +468,7 @@ export default function Stake() {
                     { hoursPerEpoch } hours
                   </Typography>
                 </div> */}
-                {/* <div className="flex justify-between">
+                  {/* <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
                     {i18n._(t`Warmup Balance`)}
                   </Typography>
@@ -476,47 +476,47 @@ export default function Stake() {
                     { warmupAmount }
                   </Typography>
                 </div> */}
-              </div>
-          }
-          { warmupValue > 0 && 
-            <div className={classNames(warmupValue > 0 && "flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1")}>
-              <div className={classNames(warmupValue > 0 && "flex text-xl mb-2 font-bold text-gold")}> Warmup Details </div>
+                </div>
+              }
+              {warmupValue > 0 &&
+                <div className={classNames(warmupValue > 0 && "flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1")}>
+                  <div className={classNames(warmupValue > 0 && "flex text-xl mb-2 font-bold text-gold")}> Warmup Details </div>
 
-              <div className={classNames(warmupValue > 0 && "flex justify-between")}>
-                  <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Locked Balance`)}
-                  </Typography>
-                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {warmupValue.toFixed(2)} LUM
-                  </Typography>
-              </div>
-              <div className={classNames(warmupValue > 0 ? 'flex justify-between' : 'hidden')}>
-                <Typography className="text-white" fontFamily={'medium'}>
-                  {i18n._(t`Next Rebase`)}
-                </Typography>
-                <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                  { formatNumber(nextWarmupReward, false, true) } LUM
-                </Typography>
-              </div>
-              <div className="flex justify-between mt-3">
-                      <Typography className="text-white" fontFamily={'medium'}>
-                        {i18n._(t`Time Remaining`)}
-                      </Typography>
-                      <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                        {
-                          (Number(warmupExpiry) - Number(epoch)) * 8 < 0
+                  <div className={classNames(warmupValue > 0 && "flex justify-between")}>
+                    <Typography className="text-white" fontFamily={'medium'}>
+                      {i18n._(t`Locked Balance`)}
+                    </Typography>
+                    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                      {warmupValue.toFixed(2)} LUM
+                    </Typography>
+                  </div>
+                  <div className={classNames(warmupValue > 0 ? 'flex justify-between' : 'hidden')}>
+                    <Typography className="text-white" fontFamily={'medium'}>
+                      {i18n._(t`Next Rebase`)}
+                    </Typography>
+                    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                      {formatNumber(nextWarmupReward, false, true)} LUM
+                    </Typography>
+                  </div>
+                  <div className="flex justify-between mt-3">
+                    <Typography className="text-white" fontFamily={'medium'}>
+                      {i18n._(t`Time Remaining`)}
+                    </Typography>
+                    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                      {
+                        (Number(warmupExpiry) - Number(epoch)) * 8 < 0
                           ? 0 : (Number(warmupExpiry) - Number(epoch)) * 8
                           + ' hours'
-                        }
-                      </Typography>
-                    </div>
-            </div>
-            }
- 
-            <div className="mt-6 flex items-center gap-2">
-              <Button variant="outlined" color="yellow" onClick={handleApproveToken} 
-                    className="text-black text-md font-bold"
-                    >
+                      }
+                    </Typography>
+                  </div>
+                </div>
+              }
+
+              <div className="mt-6 flex items-center gap-2">
+                <Button variant="outlined" color="yellow" onClick={handleApproveToken}
+                  className="text-black text-md font-bold"
+                >
                   {isApprovePending
                     ? "Approving"
                     : isApproveCompleted
@@ -526,85 +526,6 @@ export default function Stake() {
 
                 {Number(warmupExpiry) - Number(epoch) > 0 ? (
                   <><ButtonError
-                      variant="filled"
-                      color="yellow"
-                      className="text-black text-md font-bold"
-                      onClick={async () => {
-                        try {
-                          const tx = await unstake(BigNumber.from(parsedRedeemValue?.quotient.toString()))
-                          addTransaction(tx, {
-                            summary: `Withdraw LUX`,
-                          })
-                        } catch (error) {
-                          console.error(error)
-                        }
-                      } }
-                      disabled={!isRedeemValid || !account}
-                      error={!isRedeemValid && !!parsedRedeemValue}
-                      style={{ width: '100%' }}
-                    >
-                      {redeemError || i18n._(t`Withdraw`)}
-                    </ButtonError>
-                    <Button
-                      variant="filled"
-                      color="red"
-                      className="text-white"
-                      onClick={async () => {
-                        try {
-                          const tx = await forfeit()
-                          addTransaction(tx, {
-                            summary: `Forfeit LUX`,
-                          })
-                        } catch (error) {
-                          console.error(error)
-                        }
-                      } }
-                      disabled={!account}
-                      style={{ width: '100%' }}
-                    >
-                        {i18n._(t`Forfeit`)}
-                      </Button></>
-                ) : Number(warmupExpiry) < Number(epoch) && Number(warmupValue) > 0 ? (
-                  <><ButtonError
-                      variant="filled"
-                      color="yellow"
-                      className="text-black text-md font-bold"
-                      onClick={async () => {
-                        try {
-                          const tx = await unstake(BigNumber.from(parsedRedeemValue?.quotient.toString()))
-                          addTransaction(tx, {
-                            summary: `Withdraw LUX`,
-                          })
-                        } catch (error) {
-                          console.error(error)
-                        }
-                      } }
-                      disabled={!isRedeemValid || !account}
-                      error={!isRedeemValid && !!parsedRedeemValue}
-                      style={{ width: '100%' }}
-                    >
-                      {redeemError || i18n._(t`Withdraw`)}
-                    </ButtonError>
-                    <Button
-                      variant="filled"
-                      color="green"
-                      className="text-black"
-                      onClick={async () => {
-                        try {
-                          const tx = await claim()
-                          addTransaction(tx, {
-                            summary: `Claim LUX`,
-                          })
-                        } catch (error) {
-                          console.error(error)
-                        }
-                      } }
-                      disabled={!account}
-                      style={{ width: '100%' }}
-                    >
-                        {i18n._(t`Claim`)}
-                      </Button></>
-                ) : ( <ButtonError
                     variant="filled"
                     color="yellow"
                     className="text-black text-md font-bold"
@@ -624,6 +545,85 @@ export default function Stake() {
                   >
                     {redeemError || i18n._(t`Withdraw`)}
                   </ButtonError>
+                    <Button
+                      variant="filled"
+                      color="red"
+                      className="text-white"
+                      onClick={async () => {
+                        try {
+                          const tx = await forfeit()
+                          addTransaction(tx, {
+                            summary: `Forfeit LUX`,
+                          })
+                        } catch (error) {
+                          console.error(error)
+                        }
+                      }}
+                      disabled={!account}
+                      style={{ width: '100%' }}
+                    >
+                      {i18n._(t`Forfeit`)}
+                    </Button></>
+                ) : Number(warmupExpiry) < Number(epoch) && Number(warmupValue) > 0 ? (
+                  <><ButtonError
+                    variant="filled"
+                    color="yellow"
+                    className="text-black text-md font-bold"
+                    onClick={async () => {
+                      try {
+                        const tx = await unstake(BigNumber.from(parsedRedeemValue?.quotient.toString()))
+                        addTransaction(tx, {
+                          summary: `Withdraw LUX`,
+                        })
+                      } catch (error) {
+                        console.error(error)
+                      }
+                    }}
+                    disabled={!isRedeemValid || !account}
+                    error={!isRedeemValid && !!parsedRedeemValue}
+                    style={{ width: '100%' }}
+                  >
+                    {redeemError || i18n._(t`Withdraw`)}
+                  </ButtonError>
+                    <Button
+                      variant="filled"
+                      color="green"
+                      className="text-black"
+                      onClick={async () => {
+                        try {
+                          const tx = await claim()
+                          addTransaction(tx, {
+                            summary: `Claim LUX`,
+                          })
+                        } catch (error) {
+                          console.error(error)
+                        }
+                      }}
+                      disabled={!account}
+                      style={{ width: '100%' }}
+                    >
+                      {i18n._(t`Claim`)}
+                    </Button></>
+                ) : (<ButtonError
+                  variant="filled"
+                  color="yellow"
+                  className="text-black text-md font-bold"
+                  onClick={async () => {
+                    try {
+                      const tx = await unstake(BigNumber.from(parsedRedeemValue?.quotient.toString()))
+                      addTransaction(tx, {
+                        summary: `Withdraw LUX`,
+                      })
+                    } catch (error) {
+                      console.error(error)
+                    }
+                  }}
+                  disabled={!isRedeemValid || !account}
+                  error={!isRedeemValid && !!parsedRedeemValue}
+                  style={{ width: '100%' }}
+                >
+                  {redeemError || i18n._(t`Withdraw`)}
+                </ButtonError>
                 )}
               </div>
             </Tab.Panel>

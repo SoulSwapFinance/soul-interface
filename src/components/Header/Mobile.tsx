@@ -13,65 +13,154 @@ import { classNames } from 'functions/styling'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import LanguageMenu from './useLanguages'
 import MobileBar from './MobileBar'
-
-// import { useRouter } from 'next/router'
-// import BarsArrowUpIcon from 'assets/svg/icons/BarsArrowUp.svg'
-// import BarsArrowDownIcon from 'assets/svg/icons/BarsArrowDown.svg'
-// import useMenu from 'components/Header/useMenu'
-// import useIsCoinbaseWallet from 'hooks/useIsCoinbaseWallet'
-// import { useETHBalances } from 'state/wallet/hooks'
-// import Image from 'next/image'
-// import Link from 'next/link'
-
-// import { NavigationItem } from './NavigationItem'
-// import LuxorStats from 'components/LuxorStats'
-// import More from './More'
-// import { NavigationItem } from './NavigationItem'
-// import LanguageSwitch from 'components/LanguageSwitch'
-// import { Button } from 'components/Button'
-// import { SubmitButton } from 'features/summoner/Styles'
-// import Typography from 'components/Typography'
-// import { ArrowUpIcon } from '@heroicons/react/solid'
-// const HEADER_HEIGHT=24
+import BinocularsIcon from 'components/Icons/header/BinocularsIcon'
+import WalletIcon from 'components/Icons/header/WalletIcon'
+import SwapIcon from 'components/Icons/exchange/SwapIcon'
+import DropletIcon from 'components/Icons/header/DropletIcon'
+import SunMoonIcon from 'components/Icons/header/SunMoonIcon'
+import HomeIcon from 'components/Icons/mobile/HomeIcon'
+import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
+import BarsIcon from 'components/Icons/header/BarsIcon'
+import { useRouter } from 'next/router'
+import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
+import SoulIcon from 'components/Icons/header/SoulIcon'
 
 const Mobile: FC = () => {
   // const menu = useMenu()
   const bar = useBar()
-  // const router = useRouter()
+  const router = useRouter()
+  const { asPath } = useRouter()
   // const isLuxor = router.asPath.startsWith('/luxor')
 
-  const { account, chainId, library } = useActiveWeb3React()
+  const { chainId } = useActiveWeb3React()
   // const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const [open, setOpen] = useState(false)
-  const [showMenu, setShowMenu] = useState(false)
-  // const isCoinbaseWallet = useIsCoinbaseWallet()
 
-  // const handleShowMenu = useCallback(() => {
-  //   showMenu ? setShowMenu(false) : setShowMenu(true)
-  // }, [setShowMenu])
+  const swapRoute = useCallback(() => {
+    router.push(`/exchange/swap`)
+  }, [])
+
+  const WHITE = `#FFFFFF`
+  const R = `#FF0000`
+  const O = `#FFA500`
+  const Y = `#FFFF00`
+  const G = `#008000`
+  const B = `#0000FF`
+  const I = `#811FFF`
+  const V = `#EE82EE`
+  const CHAKRAS = [R, O, Y, G, B, I, V]
+
+  const SOUL_ICON = <SoulIcon
+    height={'600px'}
+    width={'600px'}
+  />
+
+  const DEFAULT_ICON = <BarsIcon
+    fillPrimary={open ? WHITE : getChainColor(chainId)}
+    fillSecondary={open ? getChainColor(chainId) : WHITE}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  />
+
+  const HOME_ICON = <HomeIcon
+    fillPrimary={open ? WHITE : CHAKRAS[0]}
+    fillSecondary={open ? CHAKRAS[0] : WHITE}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  />
+
+  const DROPLET_ICON = <DropletIcon
+    fillPrimary={WHITE}
+    fillSecondary={CHAKRAS[1]}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  />
+
+  const SWAP_ICON = <SwapIcon
+    fillPrimary={open ? WHITE : getChainColor(chainId)}
+    fillSecondary={open ? getChainColor(chainId) : WHITE}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  />
+
+  const SUN_ICON = <SunMoonIcon
+    fillPrimary={open ? CHAKRAS[2] : WHITE}
+    fillSecondary={open ? WHITE : CHAKRAS[2]}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  />
+
+  const EARN_ICON = <SeedlingIcon
+    fillPrimary={open ? WHITE : CHAKRAS[3]}
+    fillSecondary={open ? CHAKRAS[3] : WHITE}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  />
+
+  const WALLET_ICON = <WalletIcon
+    fillPrimary={open ? WHITE : CHAKRAS[4]}
+    fillSecondary={open ? CHAKRAS[4] : WHITE}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  />
+  
+  const EXPLORE_ICON = <BinocularsIcon
+  fillPrimary={open ? WHITE : CHAKRAS[5]}
+  fillSecondary={open ? CHAKRAS[5] : WHITE}
+  className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  />
+  
+  const LEND_ICON = <LendSkullIcon
+    fillPrimary={open ? CHAKRAS[6] : WHITE}
+    fillSecondary={open ? WHITE : CHAKRAS[6]}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  />
+
+  const removePage = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
+  const addPage = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
+  const poolPage = asPath.startsWith('/pool') || asPath.startsWith('/pools')
+  const swapPage = asPath.startsWith('/swap') || asPath.startsWith('/exchange/swap')
+  const crossPage = asPath.startsWith('/cross') || asPath.startsWith('/exchange/cross')
+  const bondPage = asPath.startsWith('/bonds')
+  const landingPage = asPath.startsWith('/landing')
+  const lendPage = asPath.startsWith('/lend') || asPath.startsWith('/borrow')
+
+  const isFarm = asPath.startsWith('/farm') || asPath.startsWith('/summoner')
+  const isVault = asPath.startsWith('/autostake')
+  const isLuxor = asPath.startsWith('/luxor') || asPath.startsWith('/luxor/dashbord') || asPath.startsWith('/luxor/bonds') || asPath.startsWith('/luxor/stake')
+
+  const isLiquidity = removePage || addPage || poolPage
+  const isHome = landingPage
+  const isLend = lendPage
+  // const isExplore = explorePage
+  const isExplore = asPath.startsWith('/explore')
+  const isWallet = asPath.startsWith('/balances') || asPath.startsWith('/portfolio')
+  const isEarn = isFarm || bondPage || isVault
+  const isExchange = swapPage || crossPage
+
+  const pageIcon =
+    isExchange ? SWAP_ICON
+      : isEarn ? EARN_ICON
+        : isWallet ? WALLET_ICON
+          : isHome ? HOME_ICON
+            : isLiquidity ? DROPLET_ICON
+              : isLuxor ? SUN_ICON
+                : isExplore ? EXPLORE_ICON
+                  : isLend ? LEND_ICON
+                    : DEFAULT_ICON
 
   return (
     <>
       <header className="w-full flex mt-3 items-center justify-between min-h-[36px] h-[36px] px-4">
         <div className="flex justify-between flex-grow">
 
-          <div className={`p-1 bg-${getChainColorCode(chainId)} border border-2 rounded border-[${getChainColor(chainId)}]`}>
-            {/* <div className="flex p-2 justify-between"> */}
-            <Bars3Icon
-              width={28}
-              className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ?
-                `bg-${getChainColorCode(chainId)} cursor-pointer rounded rounded-xl`
-                : `hidden`)}
-              onClick={() => setOpen(true)}
-            />
-          </div>
-
-          {/* <div
-            className="flex gap-2 mx-2 sm:px-1 sm:gap-4 md:gap-18 justify-between items-center">
-            {menu.map((node) => {
-              return <NavigationItem node={node} key={node.key} />
-            })}
-          </div> */}
+          <div
+            className={`grid grid-cols-2 gap-2 `}
+            onClick={() => { setOpen(true) }}
+          >
+              <div
+                className={`p-1 hover:bg-dark-900 mt-1 bg-dark-1000 rounded rounded-xl border-[${getChainColor(chainId)}]`}
+                onClick={() => { setOpen(true) }}
+              > {pageIcon} 
+              </div>
+              <div
+                className={`p-1 hover:bg-dark-900 mt-1 bg-dark-1000 rounded rounded-xl border-[${getChainColor(chainId)}]`}
+                onClick={swapRoute}
+              > {SOUL_ICON}
+              </div>          </div>
         </div>
         <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 z-20 overflow-hidden" onClose={setOpen} unmount={false}>
@@ -98,7 +187,7 @@ const Mobile: FC = () => {
                   leaveTo="translate-x-[-100%]"
                   unmount={false}
                 >
-                  <div className="ml-2 max-w-sm">
+                  <div className="max-w-sm">
                     <div className={classNames("flex flex-col h-full py-2 overflow-x-hidden overflow-y-scroll shadow-xl", "bg-dark-1100")}>
                       <nav className="flex-1 " aria-label="Sidebar">
                         {bar.map((node) => {
@@ -122,12 +211,12 @@ const Mobile: FC = () => {
         </Transition.Root>
 
         {/* NETWORK ICON */}
-        <div className={`relative top-0.5 right-2 border border-[${getChainColor(chainId)}] p-1 rounded rounded-lg inline-block`}>
+        <div className={`relative top-0 right-2 p-1.5 border border-[${getChainColor(chainId)}] rounded rounded-xl inline-block`}>
           <Web3Network />
         </div>
         {/* WALLET ICON */}
         <div
-          className={`relative top-0.5 right-0 rounded rounded-lg inline-block`}
+          className={`relative top-0 right-0 rounded rounded-xl inline-block`}
         >
           <Web3Status />
         </div>

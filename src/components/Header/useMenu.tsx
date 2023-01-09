@@ -4,14 +4,16 @@ import { ArrowsUpDownIcon } from '@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { SOUL_ADDRESS } from 'sdk'
-// import { PoolIcon, RocketIcon, WalletIcon } from 'components/Icon'
 import { Feature } from 'enums'
 import { classNames, featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
-import { useRouter } from 'next/router'
-import { getChainColor } from 'constants/chains'
-import Twitter from 'assets/icons/twitter.png'
-import { TwitterIcon } from 'components/Icon'
+// import { useRouter } from 'next/router'
+
+// import { PoolIcon, RocketIcon, WalletIcon } from 'components/Icon'
+// import { getChainColor } from 'constants/chains'
+// import Twitter from 'assets/icons/twitter.png'
+// import { TwitterIcon } from 'components/Icon'
+
 export interface MenuItemLeaf {
   key: string
   title?: string
@@ -35,30 +37,16 @@ const useMenu: UseMenu = () => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
 
-  const router = useRouter()
-  const isActive = (activeLinks) => router.asPath.startsWith(activeLinks)
+  // const router = useRouter()
+  // const isActive = (activeLinks) => router.asPath.startsWith(activeLinks)
 
-  // const swapLink = '/swap'
-  // const exchangeLink = '/exchange'
-
-  // const bondLink = '/bond'
-  // const bondsLink = '/bonds'
-  // const farmLink = '/farm'
-  // const farmsLink = '/farms'
-  // const summonerLink = '/summoner'
-  
-  // const stakeLink = '/stake'
-  // const autoStakeLink = '/autostake'
-
-  // const analyticsLink = '/analytics'
-  // const lendingLink = '/lend'
-  const isLuxor = router.asPath.startsWith('/luxor')
-  const isSwap =  router.asPath.startsWith('/swap')
-  const isBond = router.asPath.startsWith('/bonds')
-  const isFarm =  router.asPath.startsWith('/farm')
-  const isStake =  router.asPath.startsWith('/autostake')
-  const isAnalytics =  router.asPath.startsWith('/analytics')
-  const isLending =  router.asPath.startsWith('/lend')
+  // const isLuxor = router.asPath.startsWith('/luxor')
+  // const isSwap =  router.asPath.startsWith('/swap')
+  // const isBond = router.asPath.startsWith('/bonds')
+  // const isFarm =  router.asPath.startsWith('/farm')
+  // const isStake =  router.asPath.startsWith('/autostake')
+  // const isAnalytics =  router.asPath.startsWith('/analytics')
+  // const isLending =  router.asPath.startsWith('/lend')
   
   return useMemo(() => {
     if (!chainId) return []
@@ -68,7 +56,8 @@ const useMenu: UseMenu = () => {
       key: 'swap',
       title: i18n._(t`Swap`),
       link: '/swap',
-      icon: <ArrowsUpDownIcon width={20} className={
+      icon: <ArrowsUpDownIcon width={20} 
+      className={
         classNames('text-white'
         )} 
         />,
@@ -170,113 +159,6 @@ const useMenu: UseMenu = () => {
       mainItems.push(stakeItems)
     }
 
-    // if ([250].includes(chainId)) {
-    //   const luxorItems = {
-    //     key: 'Luxor',
-    //     title: i18n._(t`Luxor`),
-    //     icon: <SunIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
-    //     link: '/luxor/bonds'
-    //   }
-    //   mainItems.push(luxorItems)
-    // }
-
-    // if ([1, 250, 43114].includes(chainId)) {
-    //   const bridgeItem = {
-    //     key: 'bridge',
-    //     title: i18n._(t`Bridge`),
-    //     icon: <GlobeIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
-    //     link: '/bridge'
-    //   }
-    //   mainItems.push(bridgeItem)
-    // }
-
-
-    // if (featureEnabled(Feature.UNDERWORLD, chainId)) {
-      //   mainItems.push({
-      //     key: 'lending',
-      //     title: i18n._(t`Lend`),
-      //     icon: <ArrowsUpDownIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
-      //     items: [
-      //       {
-      //         key: 'markets',
-      //         title: i18n._(t`Markets`),
-      //         link: '/underworld',
-      //        },
-      //       {
-      //         key: 'lend',
-      //         title: i18n._(t`Lend`),
-      //         link: '/lend',
-      //        },
-      //       {
-      //         key: 'borrow',
-      //         title: i18n._(t`Borrow`),
-      //         link: '/borrow',
-      //        },
-      //       {
-      //         key: 'underworld-farms',
-      //         title: i18n._(t`Farms`),
-      //         link: '/summoner',
-      //       },
-      //       {
-      //         key: 'balances',
-      //         title: 'Coffinbox',
-      //         link: '/balances',
-      //       },
-      //       {
-      //         key: 'borrow-docs',
-      //         title: i18n._(t`Tutorials`),
-      //         link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
-      //       },
-      //     ],
-      //   })
-    // }
-
-    // if (featureEnabled(Feature.ANALYTICS, chainId)) {
-    //   let analyticsMenu: MenuItem = {
-    //     key: 'analytics',
-    //     title: i18n._(t`Data`),
-    //     icon: <TrendingUpIcon width={20} className={classNames(
-    //       "text-white"
-    //       // isAnalytics ? 'text-black' : `text-[${getChainColor(chainId)}]`
-    //       // isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`
-    //       )} />,
-    //     link: '/analytics'
-    //     // link: '/info'
-    //     // items: [
-    //     //   {
-    //     //     key: 'dashboard',
-    //     //     title: 'Overview',
-    //     //     link: '/analytics/dashboard',
-    //     //   },
-    //     //   {
-    //     //     key: 'wallet',
-    //     //     title: 'Wallet',
-    //     //     link: '/balances',
-    //     //   },
-    //     //   {
-    //     //     key: 'tokens',
-    //     //     title: 'Tokens',
-    //     //     link: '/analytics/tokens',
-    //     //   },
-    //     //   {
-    //     //     key: 'pairs',
-    //     //     title: 'Pairs',
-    //     //     link: '/analytics/pairs',
-    //     //   },
-    //     // ],
-    //   }
-    //   mainItems.push(analyticsMenu)
-    // }
-
-    // if (featureEnabled(Feature.AMM, chainId)) {
-    //   mainItems.push({
-    //     key: 'explorer',
-    //     title: i18n._(t`Explore`),
-    //     icon: <GlobeIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
-    //     link: `/explorer`,
-    //   })
-    // }
-
     if (featureEnabled(Feature.AMM, chainId)) {
       mainItems.push({
           key: 'lending',
@@ -289,52 +171,6 @@ const useMenu: UseMenu = () => {
           link: '/lend'
       })
     }
-
-    // if (featureEnabled(Feature.AMM, chainId)) {
-    //   mainItems.push({
-    //     key: 'socials',
-    //     title: i18n._(t`Follow`),
-    //     // icon: <UserGroupIcon width={20} 
-    //     icon: <TwitterIcon width={20}
-    //     className={classNames(
-    //       `text-[${getChainColor(chainId)}]`
-    //     )} />,
-    //     link: `https://twitter.com/${isLuxor ? 'LuxorMoney' : 'SoulSwapFinance'}`,
-        // items: [
-        //   {
-        //     key: 'discord',
-        //     title: 'Discord',
-        //     link: 'https://discord.gg/soulswap',
-        //   },
-        //   {
-        //     key: 'telegram',
-        //     title: 'Telegram',
-        //     link: 'https://t.me/SoulSwapDeFi',
-        //   },
-        //   {
-        //     key: 'twitter',
-        //     title: 'Twitter',
-        //     link: `https://twitter.com/${isLuxor ? 'LuxorMoney' : 'SoulSwapFinance'}`,
-        //   },
-        //   {
-        //     key: 'feedback',
-        //     title: 'Feedback',
-        //     link: '/board',
-        //     // link: 'https://soulswap.nolt.io',
-        //   },
-        //   {
-        //     key: 'forum',
-        //     title: 'Forum',
-        //     link: 'https://forum.soulswap.finance',
-        //   },
-        //   {
-        //     key: 'medium',
-        //     title: 'Medium',
-        //     link: 'https://soulswapfinance.medium.com',
-        //   },
-        // ],
-      // })
-    // }
 
     return mainItems.filter((el) => Object.keys(el).length > 0)
   }, [chainId, i18n])
