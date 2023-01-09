@@ -1,5 +1,5 @@
 import React, { FC, Fragment, useCallback, useState } from 'react'
-import Image from 'next/image'
+// import Image from 'next/image'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { useActiveWeb3React } from 'services/web3'
 import { useRouter } from 'next/router'
@@ -12,23 +12,15 @@ import More from './More'
 // import LanguageMenu from './useLanguages'
 // import Web3Status from 'components/Web3Status'
 import { ChainId, Currency, NATIVE, Percent, SOUL_ADDRESS, USDC_ADDRESS } from 'sdk'
-import Typography from 'components/Typography'
+// import Typography from 'components/Typography'
 import { classNames } from 'functions/styling'
-// import styled from 'styled-components'
-// import { Container } from 'components'
-import { Bars3Icon } from '@heroicons/react/24/outline'
 import { SidebarItem } from './SidebarItem'
 import TokenStats from 'components/TokenStats'
 import LanguageMenu from './useLanguages'
 import useBar from './useBar'
-import { i18n } from '@lingui/core'
-import { t } from '@lingui/macro'
-import NavLink from 'components/NavLink'
-import BookSparkles from 'components/Icons/mobile/BookSparkles'
-import { currencyId } from 'functions/currency'
+import HomeIcon from 'components/Icons/mobile/HomeIcon'
 import SwapIcon from 'components/Icons/exchange/SwapIcon'
-import VaultIcon from 'components/Icons/mobile/VaultIcon'
-import CauldronIcon from 'components/Icons/mobile/CauldronIcon'
+import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
 import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
 
 interface BarProps {
@@ -45,7 +37,7 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
     const [open, setOpen] = useState(false)
     const bar = useBar()
 
-    const typeStyle = `justify-center text-center w-full border border-[${getChainColor(chainId)}] rounded p-2`
+    // const typeStyle = `justify-center text-center w-full border border-[${getChainColor(chainId)}] rounded p-2`
 
     const swapRoute = useCallback(() => {
         router.push(`/exchange/swap`)
@@ -63,26 +55,19 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
         router.push(`/bridge`)
     }, [])
 
-    const swapPage = router.pathname.startsWith('/swap') || router.pathname.startsWith('/exchange')
+    const swapPage = router.pathname.startsWith('/swap') || router.pathname.startsWith('/exchange/swap')
+    const crossPage = router.pathname.startsWith('/cross') || router.pathname.startsWith('/exchange/cross')
     const landingPage = router.pathname.startsWith('/landing')
     const farmPage = router.pathname.startsWith('/farm') || router.pathname.startsWith('/summoner')
     const bondPage = router.pathname.startsWith('/bond') || router.pathname.startsWith('/bonds')
     const lendPage = router.pathname.startsWith('/lend') || router.pathname.startsWith('/borrow')
-    const bridgePage = router.pathname.startsWith('/bridge')
 
-    const isRemove = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
-    const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
-    const isPool = isRemove || isAdd
-    const isHome = landingPage
-    const isLend = lendPage
-    const isEarn = farmPage || bondPage
-
-    const isExchangeAnalytics
-        = asPath.startsWith('/exchange/analytics')
-        || asPath.startsWith('/exchange/analytics/coffinbox')
-        || asPath.startsWith('/exchange/analytics/dashboard')
-        || asPath.startsWith('/exchange/analytics/pairs')
-        || asPath.startsWith('/exchange/analytics/tokens')
+    // const isExchangeAnalytics
+    //     = asPath.startsWith('/exchange/analytics')
+    //     || asPath.startsWith('/exchange/analytics/coffinbox')
+    //     || asPath.startsWith('/exchange/analytics/dashboard')
+    //     || asPath.startsWith('/exchange/analytics/pairs')
+    //     || asPath.startsWith('/exchange/analytics/tokens')
 
     // const isBridge = router.pathname.startsWith('/bridge')
 
@@ -92,25 +77,15 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
     // const isAggregator = asPath.startsWith('/aggregator')
     //   || asPath.startsWith('/exchange/aggregator')
 
-    const isCross = router.pathname.startsWith('/cross')
-        || router.pathname.startsWith('/exchange/cross')
-
-    const isExchange = router.pathname.startsWith('/swap')
-        || router.pathname.startsWith('/exchange/swap')
-
     // const useSettings = isExchange || isLimit || isPool
 
-    const soulEnabled = [ChainId.FANTOM, ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId)
-
-    const activeStyle = `border border-[${getChainColor(chainId)}] rounded`
-    const style = `text-secondary bg-white rounded rounded-xl border border-[${getChainColor(chainId)}]`
-    const homeStyle = isHome ? activeStyle : style
-    const swapStyle = isExchange ? activeStyle : style
-    // const poolStyle = isPool ? activeStyle : style
-    // const ecoStyle = isAggregator ? activeStyle : style
-    // const bridgeStyle = isBridge ? activeStyle : style
-    // const chartStyle = isExchangeAnalytics ? activeStyle : style
-    // const crossStyle = isCross ? activeStyle : style
+    const isRemove = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
+    const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
+    const isPool = isRemove || isAdd
+    const isHome = landingPage
+    const isLend = lendPage
+    const isEarn = farmPage || bondPage
+    const isExchange = swapPage || crossPage || isPool
 
     return (
         <div>
@@ -172,10 +147,10 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                                 isHome && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                             onClick={homeRoute}
                         >
-                            <BookSparkles
+                            <HomeIcon
                                 fillPrimary={isHome ? `${getChainColor(chainId)}` : `#FFFFFF`}
                                 fillSecondary={isHome ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                className={'w-8 h-8'}
+                                className={'w-7 h-7'}
                             />
                         </div>
                         <div
@@ -187,7 +162,7 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                             <SwapIcon
                                 fillPrimary={isExchange ? `${getChainColor(chainId)}` : `#FFFFFF`}
                                 fillSecondary={isExchange ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                className={'w-8 h-8'}
+                                className={'w-7 h-7'}
                             />
                         </div>
                         <div
@@ -196,10 +171,10 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                                 isEarn && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                             onClick={farmRoute}
                         >
-                            <CauldronIcon
+                            <SeedlingIcon
                                 fillPrimary={isEarn ? `${getChainColor(chainId)}` : `#FFFFFF`}
                                 fillSecondary={isEarn ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                className={'w-8 h-8'}
+                                className={'w-7 h-7'}
                             />
                         </div>
                         <div
@@ -211,15 +186,15 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                             <LendSkullIcon
                                 fillPrimary={isLend ? `${getChainColor(chainId)}` : `#FFFFFF`}
                                 fillSecondary={isLend ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                className={'w-8 h-8'}
+                                className={'w-7 h-7'}
                             />
                         </div>
-                        
+
                         <div
                             className={classNames(
                                 `flex w-[36px] h-[36px] justify-center rounded p-0.5`,)}
-                                // isLend && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
-                        >                            
+                        // isLend && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
+                        >
                             <More />
                         </div>
                         {/* <div className="flex items-center w-full space-x-2 justify-end"> */}

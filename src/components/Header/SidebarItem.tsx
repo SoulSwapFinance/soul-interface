@@ -26,7 +26,7 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
   const { chainId } = useActiveWeb3React()
   const buttonRef = useRef<HTMLButtonElement>(null)
   // const isLuxor = router.asPath.startsWith('/luxor')
-  const isDesktop = useDesktopHeaderMediaQuery()
+  // const isDesktop = useDesktopHeaderMediaQuery()
   const touchDevice = useTouchDeviceMediaQuery()
   const { link } = node as BarItemLeaf
   // const isOpen = router.asPath === link
@@ -53,7 +53,7 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
         )}
       >
         {node.icon}
-        {isDesktop && node.title}
+        {/* {isDesktop && node.title} */}
       </Typography>
     )
   }
@@ -76,7 +76,7 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
               'font-bold py-5 px-2 rounded flex gap-3 items-center')}
             >
               {node.icon}
-              {node.title}
+              {/* {node.title} */}
               {/* <ChevronDownIcon strokeWidth={5} width={12} className={`text-[${getChainColor(chainId)}]`} /> */}
             </Typography>
           </Popover.Button>
