@@ -1,10 +1,10 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Bars3Icon } from '@heroicons/react/24/outline'
+import BarsIcon from 'components/Icons/header/BarsIcon'
 
 import { ChainId, NATIVE } from 'sdk'
 import Web3Status from 'components/Web3Status'
 import { useActiveWeb3React } from 'services/web3'
-import { useETHBalances } from 'state/wallet/hooks'
+// import { useETHBalances } from 'state/wallet/hooks'
 import React, { FC, Fragment, useCallback, useState } from 'react'
 import { NavigationItem } from './NavigationItem'
 import { SidebarItem } from './SidebarItem'
@@ -38,13 +38,21 @@ const Desktop: FC = () => {
   //   setSho
   // }, [setShowMenu])
 
+  const WHITE = `#FFFFFF`
+
   return (
     <>
       <header className="w-full flex items-center text-white bg-dark-1000 justify-center min-h-[48px] h-[48px] px-4">
         <div className="flex ml-4 justify-between flex-grow">
-          <div className={`p-1 bg-${getChainColorCode(chainId)} rounded-full hover:bg-dark-800`}>
+          <div className={``}
+            onClick={() => setOpen(true)}
+            >
             {/* <div className="flex p-2 justify-between"> */}
-            <Bars3Icon width={24} className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `bg-${getChainColorCode(chainId)} cursor-pointer rounded rounded-xl` : `hidden`)} onClick={() => setOpen(true)} />
+            <BarsIcon
+              fillPrimary={ open ? WHITE : getChainColor(chainId) }
+              fillSecondary={ open ? getChainColor(chainId) : WHITE }
+              className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-8` : `hidden`)}
+            />
           </div>
           {/* <div className="flex w-6 mr-4 items-center">
                   <NavLink href="/landing">
@@ -99,7 +107,7 @@ const Desktop: FC = () => {
                   leaveTo="translate-x-[-100%]"
                   unmount={false}
                 >
-                  <div className="w-screen max-w-sm">
+                  <div className="max-w-sm">
                     <div className={classNames("flex flex-col h-full py-1 overflow-x-hidden overflow-y-scroll shadow-xl",
                       "bg-dark-1100")}>
                       <nav
@@ -114,9 +122,9 @@ const Desktop: FC = () => {
                         {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                           <TokenStats />
                         }
-                      </div>
-                      <div className="flex items-center justify-start">
-                        <LanguageMenu />
+                        <div className="flex items-center justify-start">
+                          <LanguageMenu />
+                        </div>
                       </div>
                     </div>
                   </div>

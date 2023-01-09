@@ -9,9 +9,10 @@ import { Feature } from 'enums'
 import { classNames, featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
 import { useRouter } from 'next/router'
-import { getChainColor } from 'constants/chains'
-import Twitter from 'assets/icons/twitter.png'
-import { TwitterIcon } from 'components/Icon'
+// import { getChainColor } from 'constants/chains'
+// import Twitter from 'assets/icons/twitter.png'
+// import { TwitterIcon } from 'components/Icon'
+
 export interface MenuItemLeaf {
   key: string
   title?: string
@@ -68,7 +69,8 @@ const useMenu: UseMenu = () => {
       key: 'swap',
       title: i18n._(t`Swap`),
       link: '/swap',
-      icon: <ArrowsUpDownIcon width={20} className={
+      icon: <ArrowsUpDownIcon width={20} 
+      className={
         classNames('text-white'
         )} 
         />,
