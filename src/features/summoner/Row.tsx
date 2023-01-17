@@ -973,7 +973,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                         </SubmitButton>
                     </Wrap>
                     <Typography className={`flex text-center mt-4 sm:mt-6 border border-[${getChainColor(chainId)}] p-2 rounded rounded-2xl`}>
-                        {`Keep slippage in mind when zapping to prevent loses due to low liquidity. If you are unsure whether this applies, avoid zaps above ~${[ChainId.FANTOM].includes(chainId) ? `$500` : `$300`}.`}
+                        {`Keep slippage in mind when zapping to prevent loses due to low liquidity. If yunsure whether this applies, avoid zaps above ~${[ChainId.FANTOM].includes(chainId) ? `$500` : `$300`}.`}
                     </Typography>
 
                 </Modal>
