@@ -1,14 +1,23 @@
-// import Container from "components/Container";
+import useDesktopMediaQuery from "hooks/useDesktopMediaQuery";
+import getConfig from "next/config";
 import React from "react";
 
 const Pay = () => {
+	const isDesktop = useDesktopMediaQuery()
+	const { publicRuntimeConfig } = getConfig()
+	const { breakpoints } = publicRuntimeConfig
+
+	const screenHeight= isDesktop ? `${breakpoints.lg}` : `900px`
+	const screenWidth= isDesktop ?  `${breakpoints.xl}` : `100%`
+
 	return (
-      <iframe 
-			frameBorder={"none"}
+      <iframe
+	  		className="mt-2 w-full"
+			frame-border={"none"}
     		title={"Pay"}
     		src="https://pay.soulswap.finance"
-    		height={"900px"}
-    		width={"100%"}
+    		height={screenHeight}
+    		width={screenWidth}
     />
 	);
 };

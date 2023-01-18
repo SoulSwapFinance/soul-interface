@@ -41,14 +41,15 @@ const Mobile: FC = () => {
   }, [])
 
   const WHITE = `#FFFFFF`
-  const R = `#FF0000`
-  const O = `#FFA500`
-  const Y = `#FFFF00`
-  const G = `#008000`
-  const B = `#0000FF`
-  const I = `#811FFF`
-  const V = `#EE82EE`
-  const CHAKRAS = [R, O, Y, G, B, I, V]
+  // const R = `#FF0000`
+  // const O = `#FFA500`
+  // const Y = `#FFFF00`
+  // const G = `#008000`
+  // const B = `#0000FF`
+  // const I = `#811FFF`
+  // const V = `#EE82EE`
+  // const CHAKRAS = [R, O, Y, G, B, I, V]
+  const chainColor = getChainColor(chainId)
 
   const SOUL_ICON = <SoulIcon
     height={'600px'}
@@ -62,14 +63,14 @@ const Mobile: FC = () => {
   />
 
   const HOME_ICON = <HomeIcon
-    fillPrimary={open ? WHITE : CHAKRAS[0]}
-    fillSecondary={open ? CHAKRAS[0] : WHITE}
+    fillPrimary={open ? WHITE : chainColor}
+    fillSecondary={open ? chainColor : WHITE}
     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
   />
 
   const DROPLET_ICON = <DropletIcon
     fillPrimary={WHITE}
-    fillSecondary={CHAKRAS[1]}
+    fillSecondary={chainColor}
     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
   />
 
@@ -80,32 +81,32 @@ const Mobile: FC = () => {
   />
 
   const SUN_ICON = <SunMoonIcon
-    fillPrimary={open ? CHAKRAS[2] : WHITE}
-    fillSecondary={open ? WHITE : CHAKRAS[2]}
+    fillPrimary={open ? chainColor : WHITE}
+    fillSecondary={open ? WHITE : chainColor}
     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
   />
 
   const EARN_ICON = <SeedlingIcon
-    fillPrimary={open ? WHITE : CHAKRAS[3]}
-    fillSecondary={open ? CHAKRAS[3] : WHITE}
+    fillPrimary={open ? WHITE : chainColor}
+    fillSecondary={open ? chainColor : WHITE}
     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
   />
 
   const WALLET_ICON = <WalletIcon
-    fillPrimary={open ? WHITE : CHAKRAS[4]}
-    fillSecondary={open ? CHAKRAS[4] : WHITE}
+    fillPrimary={open ? WHITE : chainColor}
+    fillSecondary={open ? chainColor : WHITE}
     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
   />
   
   const EXPLORE_ICON = <BinocularsIcon
-  fillPrimary={open ? WHITE : CHAKRAS[5]}
-  fillSecondary={open ? CHAKRAS[5] : WHITE}
+  fillPrimary={open ? WHITE : chainColor}
+  fillSecondary={open ? chainColor : WHITE}
   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
   />
   
   const LEND_ICON = <LendSkullIcon
-    fillPrimary={open ? CHAKRAS[6] : WHITE}
-    fillSecondary={open ? WHITE : CHAKRAS[6]}
+    fillPrimary={open ? chainColor : WHITE}
+    fillSecondary={open ? WHITE : chainColor}
     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
   />
 
@@ -160,7 +161,8 @@ const Mobile: FC = () => {
                 className={`p-1 hover:bg-dark-900 mt-1 bg-dark-1000 rounded rounded-xl border-[${getChainColor(chainId)}]`}
                 onClick={swapRoute}
               > {SOUL_ICON}
-              </div>          </div>
+              </div>          
+            </div>
         </div>
         <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 z-20 overflow-hidden" onClose={setOpen} unmount={false}>
