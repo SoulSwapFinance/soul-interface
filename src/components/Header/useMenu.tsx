@@ -231,7 +231,7 @@ const useMenu: UseMenu = () => {
     if (featureEnabled(Feature.AMM, chainId)) {
       mainItems.push({
           key: 'explore',
-          title: i18n._(t`Explore`),
+          title: i18n._(t`Paths`),
           icon: <ArrowsUpDownIcon width={20} className={classNames(
             "rotate-90 filter", "text-white"
           )} />,
