@@ -74,6 +74,7 @@ const features: FeatureMap = {
 
   [ChainId.FANTOM]: [
     Feature.AMM,
+    Feature.NFT,
     Feature.DEFARM,
     Feature.BRIDGE,
     Feature.SWAP,

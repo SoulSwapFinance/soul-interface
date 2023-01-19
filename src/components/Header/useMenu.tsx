@@ -217,7 +217,7 @@ const useMenu: UseMenu = () => {
       })
     }
 
-    if (featureEnabled(Feature.AMM, chainId)) {
+    if (featureEnabled(Feature.NFT, chainId)) {
       mainItems.push({
           key: 'nft',
           title: i18n._(t`Infinity`),

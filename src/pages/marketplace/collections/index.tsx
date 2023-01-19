@@ -4,7 +4,7 @@ import useDesktopMediaQuery from "hooks/useDesktopMediaQuery";
 import getConfig from "next/config";
 import React from "react";
 
-const Marketplace = () => {
+const Collections = () => {
   const isDesktop = useDesktopMediaQuery()
   const { publicRuntimeConfig } = getConfig()
   const { breakpoints } = publicRuntimeConfig
@@ -14,14 +14,14 @@ const Marketplace = () => {
 	return (
       <iframe
         className="mt-2 w-full"
-			  frame-border={"none"}
-    		title={"Marketplace"}
-    		src="https://artion-client-v2-h110s2f6q-bunsdev.vercel.app"
-    		height={screenHeight}
-    		width={screenWidth}
+        frame-border={"none"}
+        title={"Collections"}
+        src="https://artion-client-v2-h110s2f6q-bunsdev.vercel.app/collections"
+        height={screenHeight}
+        width={screenWidth}
     />
 	)
 }
-export default Marketplace;
+export default Collections;
 
-Marketplace.Guard = NetworkGuard(Feature.NFT)
+Collections.Guard = NetworkGuard(Feature.NFT)
