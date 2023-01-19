@@ -60,19 +60,19 @@ const useMenu: UseBar = () => {
     //   />,   
     // }
 
-    let tradeMenu: BarItem = {
-      key: 'swap',
-      link: '/swap',
-      title: i18n._(t`Swap`),
-      icon: <SwapIcon
-        className={classNames(`w-7 h-7 rounded rounded-md`)}
-        // className={classNames(`w-7 h-7 rounded rounded-md`, isExchange ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}] p-0.5` : ``)}
-        fillPrimary={WHITE}
-        fillSecondary={chainColor}
-      />,
-    }
+    // let tradeMenu: BarItem = {
+    //   key: 'swap',
+    //   link: '/swap',
+    //   title: i18n._(t`Swap`),
+    //   icon: <SwapIcon
+    //     className={classNames(`w-7 h-7 rounded rounded-md`)}
+    //     // className={classNames(`w-7 h-7 rounded rounded-md`, isExchange ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}] p-0.5` : ``)}
+    //     fillPrimary={WHITE}
+    //     fillSecondary={chainColor}
+    //   />,
+    // }
 
-    const mainItems: Bar = [tradeMenu]
+    const mainItems: Bar = []
 
     // Pools
     mainItems.push({
@@ -104,35 +104,35 @@ const useMenu: UseBar = () => {
       })
     }
 
-    if (featureEnabled(Feature.BONDS, chainId)) {
-      // Bond
-      mainItems.push({
-        key: 'bond',
-        link: '/bonds',
-        title: i18n._(t`Bond`),
-        icon: <SeedlingIcon
-          className={classNames(`w-7 h-7 rounded rounded-md`
-            // , isEarn ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
-          )}
-          fillPrimary={chainColor}
-          fillSecondary={WHITE}
-        />,
-      })
-    }
+    // if (featureEnabled(Feature.BONDS, chainId)) {
+    //   // Bond
+    //   mainItems.push({
+    //     key: 'bond',
+    //     link: '/bonds',
+    //     title: i18n._(t`Bond`),
+    //     icon: <SeedlingIcon
+    //       className={classNames(`w-7 h-7 rounded rounded-md`
+    //         // , isEarn ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
+    //       )}
+    //       fillPrimary={chainColor}
+    //       fillSecondary={WHITE}
+    //     />,
+    //   })
+    // }
 
-    // Lend
-    mainItems.push({
-      key: 'lend',
-      link: '/lend',
-      title: i18n._(t`Lend`),
-      icon: <LendSkullIcon
-        className={classNames(`w-7 h-7 rounded rounded-md`
-          // , isExplore ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
-        )}
-        fillPrimary={chainColor}
-        fillSecondary={WHITE}
-      />,
-    })
+    // // Lend
+    // mainItems.push({
+    //   key: 'lend',
+    //   link: '/lend',
+    //   title: i18n._(t`Lend`),
+    //   icon: <LendSkullIcon
+    //     className={classNames(`w-7 h-7 rounded rounded-md`
+    //       // , isExplore ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
+    //     )}
+    //     fillPrimary={chainColor}
+    //     fillSecondary={WHITE}
+    //   />,
+    // })
 
     // Whitepaper
     mainItems.push({
@@ -149,6 +149,7 @@ const useMenu: UseBar = () => {
     })
 
     // Infinity Marketplace
+    if (featureEnabled(Feature.NFT, chainId)) {
     mainItems.push({
       key: 'infinity',
       link: '/marketplace',
@@ -160,7 +161,7 @@ const useMenu: UseBar = () => {
         fillPrimary={WHITE}
         fillSecondary={chainColor}
       />,
-    })
+    })}
 
     // Explore
     mainItems.push({
@@ -176,19 +177,19 @@ const useMenu: UseBar = () => {
       />,
     })
     
-    // Balances
-    mainItems.push({
-      key: 'balances',
-      link: '/balances',
-      title: i18n._(t`Account`),
-      icon: <WalletIcon
-        className={classNames(`w-7 h-7 rounded rounded-md`
-          // , isWallet ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
-        )}
-        fillPrimary={chainColor}
-        fillSecondary={WHITE}
-      />,
-    })
+    // // Balances
+    // mainItems.push({
+    //   key: 'balances',
+    //   link: '/balances',
+    //   title: i18n._(t`Account`),
+    //   icon: <WalletIcon
+    //     className={classNames(`w-7 h-7 rounded rounded-md`
+    //       // , isWallet ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
+    //     )}
+    //     fillPrimary={chainColor}
+    //     fillSecondary={WHITE}
+    //   />,
+    // })
 
     // Pay
     // mainItems.push({

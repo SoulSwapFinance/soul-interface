@@ -24,6 +24,8 @@ import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
 import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
 import WalletIcon from 'components/Icons/header/WalletIcon'
 import NftIcon from 'components/Icons/mobile/NftIcon'
+import { featureEnabled } from 'functions/feature'
+import { Feature } from 'enums/Feature'
 
 interface BarProps {
     inputCurrency?: Currency
@@ -197,18 +199,20 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                                 className={'w-7 h-7'}
                             />
                         </div>
-                        <div
-                            className={classNames(
-                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
-                                isNFT && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
-                            onClick={nftRoute}
-                        >
-                            <NftIcon
-                                fillPrimary={isNFT ? `${getChainColor(chainId)}` : `#FFFFFF`}
-                                fillSecondary={isNFT ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                className={'w-7 h-7'}
-                            />
-                        </div>
+                        {featureEnabled(Feature.NFT, chainId) &&
+                            <div
+                                className={classNames(
+                                    `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                    isNFT && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
+                                onClick={nftRoute}
+                            >
+                                <NftIcon
+                                    fillPrimary={isNFT ? `${getChainColor(chainId)}` : `#FFFFFF`}
+                                    fillSecondary={isNFT ? `#FFFFFF` : `${getChainColor(chainId)}`}
+                                    className={'w-7 h-7'}
+                                />
+                            </div>
+                        }
                         <div
                             className={classNames(
                                 `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
