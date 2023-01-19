@@ -480,7 +480,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                                 color="black"
                                                 height="2rem"
                                                 // onClick={() => handleDeposit(depositValue)}>
-                                                onClick={swapRoute(false)}>
+                                                onClick={() => swapRoute(false)}>
                                                 ACQUIRE {assetName}
                                             </SubmitButton>
                                         ) :
