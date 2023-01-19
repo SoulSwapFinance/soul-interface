@@ -219,6 +219,17 @@ const useMenu: UseMenu = () => {
 
     if (featureEnabled(Feature.AMM, chainId)) {
       mainItems.push({
+          key: 'nft',
+          title: i18n._(t`Infinity`),
+          icon: <ArrowsUpDownIcon width={20} className={classNames(
+            "rotate-90 filter", "text-white"
+          )} />,
+          link: '/marketplace'
+      })
+    }
+
+    if (featureEnabled(Feature.AMM, chainId)) {
+      mainItems.push({
           key: 'explore',
           title: i18n._(t`Explore`),
           icon: <ArrowsUpDownIcon width={20} className={classNames(
