@@ -165,8 +165,8 @@ const DOCS_ICON = <DocsIcon
               before:absolute before:w-full before:h-full mx-4`
           )
           }>
-          <div className="flex p-1 justify-between flex-grow">
-            <div
+          <div className="flex justify-center bg-dark-1000 flex-grow">
+           {/*  <div
               className={`grid grid-cols-2 gap-2`}
             >
               <div
@@ -174,14 +174,14 @@ const DOCS_ICON = <DocsIcon
                 onClick={() => { setOpen(true) }}
               > {pageIcon} 
               </div>
-              {/* <div
+              <div
                 className={`p-1 hover:bg-dark-900 mt-1 bg-dark-1000 rounded rounded-md border-[${getChainColor(chainId)}]`}
                 onClick={swapRoute}
               > {SOUL_ICON}
-              </div> */}
-            </div>
+              </div>
+            </div> */}
             <div
-              className="flex rounded rounded-md bg-dark-900 gap-1 px-1 sm:gap-4 md:gap-18 justify-center items-center">
+              className="flex rounded rounded-xl bg-dark-900 gap-1 mt-0.5 sm:gap-4 md:gap-18 justify-center items-center">
               {menu.map((node) => {
                 return <NavigationItem node={node} key={node.key} />
               })}

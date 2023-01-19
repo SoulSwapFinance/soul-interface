@@ -3,7 +3,7 @@ import { CurrencyDollarIcon, UserGroupIcon, MoonIcon, StarIcon } from '@heroicon
 import { ArrowsUpDownIcon } from '@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { SOUL_ADDRESS } from 'sdk'
+import { ChainId, SOUL_ADDRESS } from 'sdk'
 import { Feature } from 'enums'
 import { classNames, featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
@@ -84,57 +84,91 @@ const useMenu: UseMenu = () => {
      }
    } */
 
-    const poolMenu = [
-      {
-        key: 'browse',
-        title: i18n._(t`Browse`),
-        link: '/pool',
-      },
-      {
-        key: 'add-liquidity',
-        title: i18n._(t`Add`),
-        link: `/add/FTM/${SOUL_ADDRESS[chainId]}`,
-      },
-      {
-        key: 'remove-liquidity',
-        title: i18n._(t`Remove`),
-        link: `/remove/FTM/${SOUL_ADDRESS[chainId]}`,
-      },
-      {
-        key: 'import',
-        title: i18n._(t`Import`),
-        link: '/find',
-      },
-    ]
-
-    if (featureEnabled(Feature.MIGRATE, chainId)) {
-      poolMenu.push({
-        key: 'migrate',
-        title: i18n._(t`Migrate`),
-        link: '/migrate',
-      })
-    }
+    // const poolMenu = [
+    //   {
+    //     key: 'browse',
+    //     title: i18n._(t`Browse`),
+    //     link: '/pool',
+    //   },
+    //   {
+    //     key: 'add-liquidity',
+    //     title: i18n._(t`Add`),
+    //     link: `/add/FTM/${SOUL_ADDRESS[chainId]}`,
+    //   },
+    //   {
+    //     key: 'remove-liquidity',
+    //     title: i18n._(t`Remove`),
+    //     link: `/remove/FTM/${SOUL_ADDRESS[chainId]}`,
+    //   },
+    //   {
+    //     key: 'import',
+    //     title: i18n._(t`Import`),
+    //     link: '/find',
+    //   },
+    // ]
 
     const mainItems: Menu = [tradeMenu]
 
-    if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
+    if (featureEnabled(Feature.AMM, chainId)) {
       const farmItems = {
-        key: 'farm',
-        title: i18n._(t`Farm`),
+        key: 'pool',
+        title: i18n._(t`Pool`),
         icon: <CurrencyDollarIcon width={20} className={classNames(
           "filter", "text-white"
           // isFarm ? 'text-black' : `text-[${getChainColor(chainId)}]`
           // isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`
           )} />,
-        link: '/farm'
+        link: '/pool'
       }
       mainItems.push(farmItems)
     }
 
-    if ([250, 43114].includes(chainId)) {
+    if (featureEnabled(Feature.LUXOR, chainId)) {
+      const farmItems = {
+        key: 'luxor',
+        title: i18n._(t`Luxor`),
+        icon: <CurrencyDollarIcon width={20} className={classNames(
+          "filter", "text-white"
+          // isFarm ? 'text-black' : `text-[${getChainColor(chainId)}]`
+          // isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`
+          )} />,
+        link: '/luxor'
+      }
+      mainItems.push(farmItems)
+    }
+    
+    // if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
+    //   const farmItems = {
+    //     key: 'farm',
+    //     title: i18n._(t`Farm`),
+    //     icon: <CurrencyDollarIcon width={20} className={classNames(
+    //       "filter", "text-white"
+    //       // isFarm ? 'text-black' : `text-[${getChainColor(chainId)}]`
+    //       // isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`
+    //       )} />,
+    //     link: '/farm'
+    //   }
+    //   mainItems.push(farmItems)
+    // }
+
+    // if ([ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId)) {
+    //   const mintItems = {
+    //     key: 'bond',
+    //     title: i18n._(t`Bond`),
+    //     icon: <MoonIcon width={20} className={classNames(
+    //       "filter", "text-white"
+    //       // isBond ? 'text-black' : `text-[${getChainColor(chainId)}]`
+    //       // isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`
+    //       )} />,
+    //     link: '/bonds'
+    //   }
+    //   mainItems.push(mintItems)
+    // }
+
+    if ([ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId)) {
       const mintItems = {
-        key: 'bond',
-        title: i18n._(t`Bond`),
+        key: 'earn',
+        title: i18n._(t`Earn`),
         icon: <MoonIcon width={20} className={classNames(
           "filter", "text-white"
           // isBond ? 'text-black' : `text-[${getChainColor(chainId)}]`
@@ -145,19 +179,19 @@ const useMenu: UseMenu = () => {
       mainItems.push(mintItems)
     }
 
-    if ([250, 43114].includes(chainId)) {
-      const stakeItems = {
-        key: 'stake',
-        title: i18n._(t`Stake`),
-        icon: <StarIcon width={20} className={classNames(
-          "filter", "text-white"
-          // isStake ? 'text-black' : `text-[${getChainColor(chainId)}]`
-        )} 
-        />,
-        link: '/autostake'
-      }
-      mainItems.push(stakeItems)
-    }
+    // if ([ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId)) {
+    //   const stakeItems = {
+    //     key: 'stake',
+    //     title: i18n._(t`Stake`),
+    //     icon: <StarIcon width={20} className={classNames(
+    //       "filter", "text-white"
+    //       // isStake ? 'text-black' : `text-[${getChainColor(chainId)}]`
+    //     )} 
+    //     />,
+    //     link: '/autostake'
+    //   }
+    //   mainItems.push(stakeItems)
+    // }
 
     if (featureEnabled(Feature.AMM, chainId)) {
       mainItems.push({
@@ -180,6 +214,17 @@ const useMenu: UseMenu = () => {
             "rotate-90 filter", "text-white"
           )} />,
           link: '/docs'
+      })
+    }
+
+    if (featureEnabled(Feature.AMM, chainId)) {
+      mainItems.push({
+          key: 'explore',
+          title: i18n._(t`Explore`),
+          icon: <ArrowsUpDownIcon width={20} className={classNames(
+            "rotate-90 filter", "text-white"
+          )} />,
+          link: '/explore'
       })
     }
 
