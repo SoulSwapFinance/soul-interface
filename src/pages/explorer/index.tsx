@@ -1,53 +1,24 @@
-// import Container from "components/Container";
-// import { styled } from 'styled-components'
+import useDesktopMediaQuery from "hooks/useDesktopMediaQuery";
+import getConfig from "next/config";
 import React from "react";
 
-// --xl-bp: 1620px;
-// --l-bp: 1360px;
-// --md-bp: 959px;
-// --s-bp: 600px;
-// --xs-bp: 416px;
 const Explorer = () => {
+	const isDesktop = useDesktopMediaQuery()
+	const { publicRuntimeConfig } = getConfig()
+	const { breakpoints } = publicRuntimeConfig
+
+	const screenHeight= isDesktop ? `${breakpoints.lg}` : `900px`
+	const screenWidth= isDesktop ?  `${breakpoints.xl}` : `100%`
+
 	return (
-		// <div className="w-full justify-center">
-		<div className="flex w-full">
-			<iframe
-			className={'sm:flex md:hidden'}
-				frameBorder={"none"}
-				title={"Explorer"}
-				// src="https://explore.soulswap.finance/#/tokens/ethereum"
-				src="https://market-explorer.vercel.app/#/tokens/ethereum"
-				height={"800px"}
-				width={'100%'}
-			/>
-			<iframe
-			className={'hidden md:flex lg:hidden'}
-				frameBorder={"none"}
-				title={"Explorer"}
-				// src="https://explore.soulswap.finance/#/tokens/ethereum"
-				src="https://market-explorer.vercel.app/#/tokens/ethereum"
-				height={"959px"}
-				width={'100%'}
-			/>
-			<iframe
-			className={'hidden lg:flex xl:hidden'}
-				frameBorder={"none"}
-				title={"Explorer"}
-				// src="https://explore.soulswap.finance/#/tokens/ethereum"
-				src="https://market-explorer.vercel.app/#/tokens/ethereum"
-				height={"1360px"}
-				width={'100%'}
-			/>
-			<iframe
-			className={'hidden xl:flex'}
-				frameBorder={"none"}
-				title={"Explorer"}
-				// src="https://explore.soulswap.finance/#/tokens/ethereum"
-				src="https://market-explorer.vercel.app/#/tokens/ethereum"
-				height={"2100px"}
-				width={'100%'}
-			/>
-		 </div>
+      <iframe
+	  		className="mt-2 w-full"
+			frame-border={"none"}
+    		title={"Explorer"}
+			src="https://market-explorer.vercel.app/#/tokens/ethereum"
+    		height={screenHeight}
+    		width={screenWidth}
+    />
 	);
 };
 export default Explorer;

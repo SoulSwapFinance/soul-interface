@@ -22,6 +22,7 @@ import HomeIcon from 'components/Icons/mobile/HomeIcon'
 import SwapIcon from 'components/Icons/exchange/SwapIcon'
 import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
 import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
+import WalletIcon from 'components/Icons/header/WalletIcon'
 
 interface BarProps {
     inputCurrency?: Currency
@@ -40,10 +41,13 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
     // const typeStyle = `justify-center text-center w-full border border-[${getChainColor(chainId)}] rounded p-2`
 
     const swapRoute = useCallback(() => {
-        router.push(`/exchange/swap`)
+        router.push(`/swap`)
     }, [])
-    const homeRoute = useCallback(() => {
-        router.push(`/landing`)
+    // const homeRoute = useCallback(() => {
+    //     router.push(`/landing`)
+    // }, [])
+    const walletRoute = useCallback(() => {
+        router.push(`/portfolio`)
     }, [])
     const lendRoute = useCallback(() => {
         router.push(`/lend`)
@@ -58,6 +62,7 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
     const swapPage = router.pathname.startsWith('/swap') || router.pathname.startsWith('/exchange/swap')
     const crossPage = router.pathname.startsWith('/cross') || router.pathname.startsWith('/exchange/cross')
     const landingPage = router.pathname.startsWith('/landing')
+    const portfolioPage = router.pathname.startsWith('/portfolio')
     const farmPage = router.pathname.startsWith('/farm') || router.pathname.startsWith('/summoner')
     const bondPage = router.pathname.startsWith('/bond') || router.pathname.startsWith('/bonds')
     const lendPage = router.pathname.startsWith('/lend') || router.pathname.startsWith('/borrow')
@@ -83,6 +88,7 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
     const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
     const isPool = isRemove || isAdd
     const isHome = landingPage
+    const isWallet = portfolioPage
     const isLend = lendPage
     const isEarn = farmPage || bondPage
     const isExchange = swapPage || crossPage || isPool
@@ -141,7 +147,7 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                 {/* xl:relative // moves to top */}
                 <div className="flex items-center w-full space-x-2 justify-end">
                     <div className={`fixed bg-dark-1000 bottom-0 left-0 z-10 gap-1 flex justify-between items-center justify-center w-full`}>
-                        <div
+                        {/* <div
                             className={classNames(
                                 `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
                                 isHome && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
@@ -152,7 +158,7 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                                 fillSecondary={isHome ? `#FFFFFF` : `${getChainColor(chainId)}`}
                                 className={'w-7 h-7'}
                             />
-                        </div>
+                        </div> */}
                         <div
                             className={classNames(
                                 `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
@@ -189,7 +195,18 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                                 className={'w-7 h-7'}
                             />
                         </div>
-
+                        <div
+                            className={classNames(
+                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                isWallet && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
+                            onClick={walletRoute}
+                        >
+                            <WalletIcon
+                                fillPrimary={isWallet ? `${getChainColor(chainId)}` : `#FFFFFF`}
+                                fillSecondary={isWallet ? `#FFFFFF` : `${getChainColor(chainId)}`}
+                                className={'w-7 h-7'}
+                            />
+                        </div>
                         <div
                             className={classNames(
                                 `flex w-[36px] h-[36px] justify-center rounded p-0.5`,)}

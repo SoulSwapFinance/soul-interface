@@ -24,6 +24,7 @@ import BarsIcon from 'components/Icons/header/BarsIcon'
 import { useRouter } from 'next/router'
 import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
 import SoulIcon from 'components/Icons/header/SoulIcon'
+import DocsIcon from 'components/Icons/mobile/DocsIcon'
 
 const Mobile: FC = () => {
   // const menu = useMenu()
@@ -109,6 +110,12 @@ const Mobile: FC = () => {
     fillSecondary={open ? WHITE : chainColor}
     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
   />
+  
+  const DOCS_ICON = <DocsIcon
+    fillPrimary={open ? WHITE : chainColor}
+    fillSecondary={open ? chainColor : WHITE}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  />
 
   const removePage = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
   const addPage = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
@@ -118,6 +125,7 @@ const Mobile: FC = () => {
   const bondPage = asPath.startsWith('/bonds')
   const landingPage = asPath.startsWith('/landing')
   const lendPage = asPath.startsWith('/lend') || asPath.startsWith('/borrow')
+  const docsPage = asPath.startsWith('/docs')
 
   const isFarm = asPath.startsWith('/farm') || asPath.startsWith('/summoner')
   const isVault = asPath.startsWith('/autostake')
@@ -126,6 +134,7 @@ const Mobile: FC = () => {
   const isLiquidity = removePage || addPage || poolPage
   const isHome = landingPage
   const isLend = lendPage
+  const isDocs = docsPage
   // const isExplore = explorePage
   const isExplore = asPath.startsWith('/explore')
   const isWallet = asPath.startsWith('/balances') || asPath.startsWith('/portfolio')
@@ -141,7 +150,8 @@ const Mobile: FC = () => {
               : isLuxor ? SUN_ICON
                 : isExplore ? EXPLORE_ICON
                   : isLend ? LEND_ICON
-                    : DEFAULT_ICON
+                    : isDocs ? DOCS_ICON
+                     : DEFAULT_ICON
 
   return (
     <>
@@ -157,11 +167,11 @@ const Mobile: FC = () => {
                 onClick={() => { setOpen(true) }}
               > {pageIcon} 
               </div>
-              <div
+              {/* <div
                 className={`p-1 hover:bg-dark-900 mt-1 bg-dark-1000 rounded rounded-xl border-[${getChainColor(chainId)}]`}
                 onClick={swapRoute}
               > {SOUL_ICON}
-              </div>          
+              </div>           */}
             </div>
         </div>
         <Transition.Root show={open} as={Fragment}>

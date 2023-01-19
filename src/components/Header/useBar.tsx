@@ -12,6 +12,8 @@ import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
 import HomeIcon from 'components/Icons/mobile/HomeIcon'
 import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
 import BinocularsIcon from 'components/Icons/header/BinocularsIcon'
+import DocsIcon from 'components/Icons/mobile/DocsIcon'
+import SwapIcon from 'components/Icons/exchange/SwapIcon'
 
 export interface BarItemLeaf {
   key: string
@@ -44,44 +46,45 @@ const useMenu: UseBar = () => {
     if (!chainId) return []
 
     // default show just a home[0] and swap[1]
-    let home: BarItem = {
-      key: 'home',
-      link: '/landing',
-      title: i18n._(t`Home`),
-      icon: <HomeIcon 
-      className={classNames(`w-7 h-7 rounded rounded-xl p-0.5`
-      // , isHome ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
-      )}
-      fillPrimary={chainColor}
-      fillSecondary={WHITE}
-      />,   
-    }
-
-    // let tradeMenu: BarItem = {
-    //   key: 'swap',
-    //   link: '/swap',
-    //   title: i18n._(t`Swap`),
-    //   icon: <SwapIcon 
-    //   className={classNames(`w-7 h-7 rounded rounded-xl p-0.5`, isExchange ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}] p-0.5` : ``)}
-    //     fillPrimary={isExchange ? chainColor : WHITE}
-    //     fillSecondary={isExchange ? WHITE : chainColor}
-    //     />,
+    // let home: BarItem = {
+    //   key: 'home',
+    //   link: '/landing',
+    //   title: i18n._(t`Home`),
+    //   icon: <HomeIcon 
+    //   className={classNames(`w-7 h-7 rounded rounded-md`
+    //   // , isHome ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
+    //   )}
+    //   fillPrimary={chainColor}
+    //   fillSecondary={WHITE}
+    //   />,   
     // }
 
-    const mainItems: Bar = [home]
+    let tradeMenu: BarItem = {
+      key: 'swap',
+      link: '/swap',
+      title: i18n._(t`Swap`),
+      icon: <SwapIcon
+        className={classNames(`w-7 h-7 rounded rounded-md`)}
+        // className={classNames(`w-7 h-7 rounded rounded-md`, isExchange ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}] p-0.5` : ``)}
+        fillPrimary={WHITE}
+        fillSecondary={chainColor}
+      />,
+    }
+
+    const mainItems: Bar = [tradeMenu]
 
     // Pools
     mainItems.push({
       key: 'pools',
       link: '/pool',
       title: i18n._(t`Pool`),
-      icon: <DropletIcon 
-        className={classNames(`w-7 h-7 rounded rounded-xl p-0.5`
-        // , isLiquidity ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
+      icon: <DropletIcon
+        className={classNames(`w-7 h-7 rounded rounded-md`
+          // , isLiquidity ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
         )}
         fillPrimary={WHITE}
         fillSecondary={chainColor}
-        />,
+      />,
     })
 
     if (featureEnabled(Feature.LUXOR, chainId)) {
@@ -90,12 +93,12 @@ const useMenu: UseBar = () => {
         key: 'luxor',
         link: '/luxor/dashboard',
         title: i18n._(t`Luxor`),
-        icon: <SunMoonIcon 
-        className={classNames(`w-7 h-7 rounded rounded-xl p-0.5`
-        // , isLuxor ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
-        )}
-        fillPrimary={WHITE}
-        fillSecondary={chainColor}
+        icon: <SunMoonIcon
+          className={classNames(`w-7 h-7 rounded rounded-md`
+            // , isLuxor ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
+          )}
+          fillPrimary={WHITE}
+          fillSecondary={chainColor}
         />,
       })
     }
@@ -107,27 +110,41 @@ const useMenu: UseBar = () => {
         link: '/bonds',
         title: i18n._(t`Bond`),
         icon: <SeedlingIcon
-        className={classNames(`w-7 h-7 rounded rounded-xl p-0.5`
-        // , isEarn ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
-        )}
-        fillPrimary={chainColor}
-        fillSecondary={WHITE}
+          className={classNames(`w-7 h-7 rounded rounded-md`
+            // , isEarn ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
+          )}
+          fillPrimary={chainColor}
+          fillSecondary={WHITE}
         />,
       })
     }
 
-    // Balances
+    // Lend
     mainItems.push({
-      key: 'balances',
-      link: '/balances',
-      title: i18n._(t`Account`),
-      icon: <WalletIcon 
-      className={classNames(`w-7 h-7 rounded rounded-xl p-0.5`
-      // , isWallet ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
-      )}
-      fillPrimary={chainColor}
-      fillSecondary={WHITE}
-      />,    
+      key: 'lend',
+      link: '/lend',
+      title: i18n._(t`Lend`),
+      icon: <LendSkullIcon
+        className={classNames(`w-7 h-7 rounded rounded-md`
+          // , isExplore ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
+        )}
+        fillPrimary={chainColor}
+        fillSecondary={WHITE}
+      />,
+    })
+
+    // Whitepaper
+    mainItems.push({
+      key: 'whitepaper',
+      link: '/docs',
+      title: i18n._(t`Docs`),
+      icon: <DocsIcon
+        className={classNames(`w-7 h-7 rounded rounded-md`
+          // , isExplore ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
+        )}
+        fillPrimary={chainColor}
+        fillSecondary={WHITE}
+      />,
     })
 
     // Explore
@@ -135,27 +152,27 @@ const useMenu: UseBar = () => {
       key: 'explore',
       link: '/explore',
       title: i18n._(t`Explore`),
-      icon: <BinocularsIcon 
-      className={classNames(`w-7 h-7 rounded rounded-xl p-0.5`
-      // , isExplore ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
-      )}
-      fillPrimary={chainColor}
-      fillSecondary={WHITE}
-      />,   
+      icon: <BinocularsIcon
+        className={classNames(`w-7 h-7 rounded rounded-md`
+          // , isExplore ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
+        )}
+        fillPrimary={chainColor}
+        fillSecondary={WHITE}
+      />,
     })
-
-    // Lend
+    
+    // Balances
     mainItems.push({
-      key: 'lend',
-      link: '/lend',
-      title: i18n._(t`Lend`),
-      icon: <LendSkullIcon 
-      className={classNames(`w-7 h-7 rounded rounded-xl p-0.5`
-      // , isExplore ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
-      )}
-      fillPrimary={chainColor}
-      fillSecondary={WHITE}
-      />,   
+      key: 'balances',
+      link: '/balances',
+      title: i18n._(t`Account`),
+      icon: <WalletIcon
+        className={classNames(`w-7 h-7 rounded rounded-md`
+          // , isWallet ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
+        )}
+        fillPrimary={chainColor}
+        fillSecondary={WHITE}
+      />,
     })
 
     // Pay
@@ -164,7 +181,7 @@ const useMenu: UseBar = () => {
     //   link: 'https://pay.soulswap.finance',
     //   title: i18n._(t`SoulPay`),
     //   icon: <DollarBillIcon 
-    //   className={classNames(`w-8 h-8 rounded rounded-xl p-0.5`)}
+    //   className={classNames(`w-8 h-8 rounded rounded-md`)}
     //   fillPrimary={chainColor}
     //   fillSecondary={WHITE}
     //   />,
