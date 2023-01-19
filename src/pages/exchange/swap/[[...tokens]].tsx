@@ -386,11 +386,10 @@ const Swap = () => {
       factoryAddress: FACTORY_ADDRESS[chainId],
       tokenA: currencyA.isToken ? currencyA : currencyA.wrapped,
       tokenB: currencyB.isToken ? currencyB : currencyB.wrapped
-    }).toLowerCase() // pairAddress
+    })?.toLowerCase() // pairAddress
       router.push(`/exchange/analytics/pairs/${pairAddress}`)
     }, []
   )
-
 
   // AGGREGATOR CONSTANTS [START] //
   // const DEFAULT_OUTPUT = chainId == ChainId.AVALANCHE ? USDC[chainId] : DAI[chainId]

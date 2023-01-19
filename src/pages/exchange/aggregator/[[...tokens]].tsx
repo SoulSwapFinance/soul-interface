@@ -15,7 +15,7 @@ import useGetRoutes from 'features/aggregator/queries/useGetRoutes'
 import useGetPrice from 'features/aggregator/queries/useGetPrice'
 import { useActiveWeb3React } from 'services/web3'
 import { getExplorerLink } from 'functions/explorer'
-import { ChainId, Currency, CurrencyAmount, DAI, DAI_ADDRESS, NATIVE, NATIVE_ADDRESS, SOUL_ADDRESS, Token, USDC, USDC_ADDRESS, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
+import { ChainId, Currency, CurrencyAmount, DAI, DAI_ADDRESS, NATIVE, NATIVE_ADDRESS, SOUL, SOUL_ADDRESS, Token, USDC, USDC_ADDRESS, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import { addTransaction } from 'state/transactions/actions'
 import useTokenBalance from 'hooks/useTokenBalance'
 import { Button } from 'components/Button'
@@ -191,11 +191,11 @@ export const chains = getAllChains()
 
 export const startChain = (id) => {
 	let chain = chains[0] // ETH
-	id == 56 ? chain = chains[1] // BSC
-		: id == 137 ? chain = chains[2] // MATIC
-			: id == 42161 ? chain = chains[3] // ARBITRUM
-				: id == 43114 ? chain = chains[4] // AVALANCHE
-					: id == 250 ? chain = chains[5] // FANTOM
+	id == ChainId.BSC ? chain = chains[1]
+		: id == ChainId.MATIC ? chain = chains[2]
+			: id == ChainId.ARBITRUM ? chain = chains[3] // ARBITRUM
+				: id == ChainId.AVALANCHE ? chain = chains[4]
+					: id == ChainId.FANTOM ? chain = chains[5]
 						: id == 1285 ? chain = chains[6] // MOONRIVER
 							: chains[0] // ETH
 	return chain
@@ -218,7 +218,7 @@ const Aggregator = ({ }) => {
 	const [inputToken, setInputToken] = useState<Currency>(currencyA)
 	const [outputToken, setOutputToken] = useState<Currency>(currencyB)
 
-	const [fromDecimals, setFromDecimals] = useState(inputToken?.wrapped.decimals)
+	// const [fromDecimals, setFromDecimals] = useState(inputToken?.wrapped.decimals)
 	const [toDecimals, setToDecimals] = useState(outputToken?.wrapped.decimals)
 
 	const [useSwap, setUseSwap] = useState(false)
@@ -340,13 +340,12 @@ const Aggregator = ({ }) => {
 		route?.price?.tokenApprovalAddress,
 	);
 
-
 	const isApproved = approvalState === ApprovalState.APPROVED
 	const isApproveLoading = approvalState === ApprovalState.PENDING
 
-	const onMaxClick = () => {
-		if (balance) setAmount((balance.value?.div(e10(fromToken.decimals || 18))).toString());
-	};
+	// const onMaxClick = () => {
+	// 	if (balance) setAmount((balance.value?.div(e10(fromToken.decimals || 18))).toString());
+	// };
 
 	const handleCurrencyASelect = useCallback(
 		(currencyA: Currency) => {
@@ -363,6 +362,7 @@ const Aggregator = ({ }) => {
 	const handleCurrencyBSelect = useCallback(
 		(currencyB: Currency) => {
 			const newCurrencyIdB = currencyId(currencyB)
+			// if ([ChainId.AVALANCHE].includes(chainId) && currencyB.wrapped.address == SOUL_ADDRESS[chainId]) { newCurrencyIdB = currencyId(USDC[chainId]) }
 			if (currencyIdA === newCurrencyIdB) {
 				if (currencyIdB) {
 					router.push(`/exchange/aggregator/${currencyIdB}/${newCurrencyIdB}`)
@@ -380,7 +380,7 @@ const Aggregator = ({ }) => {
 		(inputCurrency: Currency) => {
 			setFromToken(inputCurrency)
 			setInputToken(inputCurrency)
-			setFromDecimals(inputCurrency?.wrapped.decimals)
+			// setFromDecimals(inputCurrency?.wrapped.decimals)
 			handleCurrencyASelect(inputCurrency)
 
 		},
@@ -470,7 +470,14 @@ const Aggregator = ({ }) => {
 											}
 										/>
 									)}
-									currency={toToken}
+									currency={
+										toToken
+										// toToken
+										// [ChainId.AVALANCHE].includes(chainId)
+										// 	&& toToken.wrapped.address === SOUL_ADDRESS[chainId]
+										// 	? USDC[chainId]
+										// 	: toToken
+									}
 									value={(routes[0]?.price.amountReturned / (10 ** (outputToken?.wrapped.decimals)))?.toString() || '0'}
 									onChange={() => { }}
 									onSelect={handleOutputSelect}
