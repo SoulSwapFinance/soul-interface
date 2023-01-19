@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/link-passhref */
-
 import Head from 'next/head'
 import React, { useCallback, useState } from 'react'
 import { t } from '@lingui/macro'
@@ -23,7 +21,7 @@ import { FAUCET_ADDRESS } from '../../constants'
 
 export default function Faucet(): JSX.Element {
   const { chainId, account, library } = useActiveWeb3React()
-  const [token, setToken] = useState('')
+  // const [token, setToken] = useState('')
   const tokenBalance = useETHBalances([FAUCET_ADDRESS[chainId | 250]])
   const [pendingTx, setPendingTx] = useState(false)
   const [requested, setRequested] = useState(false)

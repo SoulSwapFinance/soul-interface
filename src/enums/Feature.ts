@@ -1,5 +1,6 @@
 export enum Feature {
   AMM = 'AMM',
+  NFT = 'NFT',
   BRIDGE = 'Bridge',
   DEFARM = 'DeFarm',
   SWAP = 'Exchange',

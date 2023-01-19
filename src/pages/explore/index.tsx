@@ -9,7 +9,7 @@ import { useLingui } from '@lingui/react'
 import React, { useMemo } from 'react'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
-import { classNames } from 'functions'
+import { classNames, featureEnabled } from 'functions'
 import { ChainId } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 
@@ -67,11 +67,27 @@ const LUXOR = (i18n: I18n) => [
   }
 ]
 
+const INFINITY = (i18n: I18n) => [
+  {
+    id: 1,
+    name: 'EXPLORE',
+    description: 'Explore the NFNT Marketplace. Discover the latest NFTs.',
+    href: './marketplace'
+  },
+  {
+    id: 2,
+    name: 'COLLECTIONS',
+    description: 'Browse NFNT Market Collections. Follow fave collections.',
+    href: './marketplace/collections'
+  }
+]
+
 export default function Explore() {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const soulFeature = useMemo(() => SOUL(i18n), [i18n])
   const luxorFeature = useMemo(() => LUXOR(i18n), [i18n])
+  const infinityFeature = useMemo(() => INFINITY(i18n), [i18n])
 
   return (
     <Container id="features-page" className="py-4 space-y-5 md:py-8 lg:py-12" maxWidth="4xl">
@@ -124,14 +140,14 @@ export default function Explore() {
                 }
           </li>
         ))}
-        <div className="py-1 bg-yellow" />
-        <div className="py-1 bg-gold" />
+        <div className={featureEnabled(Feature.LUXOR, chainId) ? `py-1 bg-yellow` : `hidden`} />
+        <div className={featureEnabled(Feature.LUXOR, chainId) ? `py-1 bg-gold` : `hidden`} />
       <Typography variant="h1" className={classNames([ChainId.FANTOM].includes(chainId) ? "text-center text-yellow" : 'hidden')} component="h1">
         LUXOR MONEY
       </Typography>
-        <div className="py-1 bg-yellow" />
-      <div className="py-1 bg-gold" />
-        {luxorFeature.map((luxorFeature) => (
+      <div className={featureEnabled(Feature.LUXOR, chainId) ? `py-1 bg-yellow` : `hidden`} />
+        <div className={featureEnabled(Feature.LUXOR, chainId) ? `py-1 bg-gold` : `hidden`} />
+        {featureEnabled(Feature.LUXOR, chainId) && luxorFeature.map((luxorFeature) => (
           <li key={luxorFeature.id} className="relative border gap-4 border-gold hover:border-yellow w-full p-4 rounded bg-dark-900 hover:bg-dark-800">
             <div className="flex justify-between space-y-4 space-x-4">
               <div className="flex-1 min-w-0">
@@ -141,6 +157,31 @@ export default function Explore() {
                     <div className="space-y-1">
                       <p className="text-xl font-bold truncate text-primary">{luxorFeature.name}</p>
                       <p className="text-sm truncate text-secondary">{luxorFeature.description}</p>
+                    </div>
+                    <ArrowRightIcon width={24} height={24} className="text-high-emphesis" />
+                  </a>
+                </Link>
+              </div>
+            </div>
+          </li>
+        ))}
+        <div className={featureEnabled(Feature.NFT, chainId) ? `py-1 bg-ftmBlue` : `hidden`} />
+        <div className={featureEnabled(Feature.NFT, chainId) ? `py-1 bg-pink` : `hidden`} />
+      <Typography variant="h1" className={classNames([ChainId.FANTOM].includes(chainId) ? "text-center text-ftmBlue" : 'hidden')} component="h1">
+        INFINITY MARKET
+      </Typography>
+      <div className={featureEnabled(Feature.NFT, chainId) ? `py-1 bg-ftmBlue` : `hidden`} />
+        <div className={featureEnabled(Feature.NFT, chainId) ? `py-1 bg-pink` : `hidden`} />
+        {featureEnabled(Feature.LUXOR, chainId) && infinityFeature.map((infinityFeature) => (
+          <li key={infinityFeature.id} className="relative border gap-4 border-pink hover:border-ftmBlue w-full p-4 rounded bg-dark-900 hover:bg-dark-800">
+            <div className="flex justify-between space-y-4 space-x-4">
+              <div className="flex-1 min-w-0">
+                <Link href={infinityFeature.href}>
+                  <a className="flex items-center justify-between focus:outline-none">
+                    <span className="absolute inset-0" aria-hidden="true" />
+                    <div className="space-y-1">
+                      <p className="text-xl font-bold truncate text-primary">{infinityFeature.name}</p>
+                      <p className="text-sm truncate text-secondary">{infinityFeature.description}</p>
                     </div>
                     <ArrowRightIcon width={24} height={24} className="text-high-emphesis" />
                   </a>

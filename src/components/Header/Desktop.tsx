@@ -18,15 +18,16 @@ import Web3Network from 'components/Web3Network'
 import LanguageMenu from './useLanguages'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { useRouter } from 'next/router'
-import SwapIcon from 'components/Icons/exchange/SwapIcon'
-import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
-import WalletIcon from 'components/Icons/header/WalletIcon'
-import DropletIcon from 'components/Icons/header/DropletIcon'
-import HomeIcon from 'components/Icons/mobile/HomeIcon'
-import SunMoonIcon from 'components/Icons/header/SunMoonIcon'
-import BinocularsIcon from 'components/Icons/header/BinocularsIcon'
-import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
-import SoulIcon from 'components/Icons/header/SoulIcon'
+// import SwapIcon from 'components/Icons/exchange/SwapIcon'
+// import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
+// import WalletIcon from 'components/Icons/header/WalletIcon'
+// import DropletIcon from 'components/Icons/header/DropletIcon'
+// import HomeIcon from 'components/Icons/mobile/HomeIcon'
+// import SunMoonIcon from 'components/Icons/header/SunMoonIcon'
+// import BinocularsIcon from 'components/Icons/header/BinocularsIcon'
+// import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
+// import SoulIcon from 'components/Icons/header/SoulIcon'
+// import DocsIcon from 'components/Icons/mobile/DocsIcon'
 // import NavLink from 'components/NavLink'
 
 // import BarsArrowUpIcon from 'assets/svg/icons/BarsArrowUp.svg'
@@ -51,106 +52,106 @@ const Desktop: FC = () => {
   }, [])
 
   const WHITE = `#FFFFFF`
-  const R = `#FF0000`
-  const O = `#FFA500`
-  const Y = `#FFFF00`
-  const G = `#008000`
-  const B = `#0000FF`
-  const I = `#811FFF`
-  const V = `#EE82EE`
-  const CHAKRAS = [R, O, Y, G, B, I, V]
+  const chainColor = getChainColor(chainId)
 
-  const SOUL_ICON = <SoulIcon
-    height={'600px'}
-    width={'600px'}
-  />
+  // const SOUL_ICON = <SoulIcon
+  //   height={'600px'}
+  //   width={'600px'}
+  // />
 
-  const DEFAULT_ICON = <BarsIcon
-    fillPrimary={open ? WHITE : getChainColor(chainId)}
-    fillSecondary={open ? getChainColor(chainId) : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  />
+//   const DEFAULT_ICON = <BarsIcon
+//     fillPrimary={open ? WHITE : getChainColor(chainId)}
+//     fillSecondary={open ? getChainColor(chainId) : WHITE}
+//     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+//   />
 
-  const HOME_ICON = <HomeIcon
-    fillPrimary={open ? WHITE : CHAKRAS[0]}
-    fillSecondary={open ? CHAKRAS[0] : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  />
+//   const HOME_ICON = <HomeIcon
+//     fillPrimary={open ? WHITE : chainColor}
+//     fillSecondary={open ? chainColor : WHITE}
+//     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+//   />
 
-  const DROPLET_ICON = <DropletIcon
-    fillPrimary={WHITE}
-    fillSecondary={CHAKRAS[1]}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  />
+//   const DROPLET_ICON = <DropletIcon
+//     fillPrimary={WHITE}
+//     fillSecondary={chainColor}
+//     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+//   />
 
-  const SWAP_ICON = <SwapIcon
-    fillPrimary={open ? WHITE : getChainColor(chainId)}
-    fillSecondary={open ? getChainColor(chainId) : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  />
+//   const SWAP_ICON = <SwapIcon
+//     fillPrimary={open ? WHITE : getChainColor(chainId)}
+//     fillSecondary={open ? getChainColor(chainId) : WHITE}
+//     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+//   />
 
-  const SUN_ICON = <SunMoonIcon
-    fillPrimary={open ? CHAKRAS[2] : WHITE}
-    fillSecondary={open ? WHITE : CHAKRAS[2]}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  />
+//   const SUN_ICON = <SunMoonIcon
+//     fillPrimary={open ? chainColor : WHITE}
+//     fillSecondary={open ? WHITE : chainColor}
+//     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+//   />
 
-  const EARN_ICON = <SeedlingIcon
-    fillPrimary={open ? WHITE : CHAKRAS[3]}
-    fillSecondary={open ? CHAKRAS[3] : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  />
+//   const EARN_ICON = <SeedlingIcon
+//     fillPrimary={open ? WHITE : chainColor}
+//     fillSecondary={open ? chainColor : WHITE}
+//     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+//   />
 
-  const WALLET_ICON = <WalletIcon
-    fillPrimary={open ? WHITE : CHAKRAS[4]}
-    fillSecondary={open ? CHAKRAS[4] : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  />
+//   const WALLET_ICON = <WalletIcon
+//     fillPrimary={open ? WHITE : chainColor}
+//     fillSecondary={open ? chainColor : WHITE}
+//     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+//   />
 
-  const EXPLORE_ICON = <BinocularsIcon
-    fillPrimary={open ? WHITE : CHAKRAS[5]}
-    fillSecondary={open ? CHAKRAS[5] : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  />
+//   const EXPLORE_ICON = <BinocularsIcon
+//     fillPrimary={open ? WHITE : chainColor}
+//     fillSecondary={open ? chainColor : WHITE}
+//     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+//   />
 
-  const LEND_ICON = <LendSkullIcon
-  fillPrimary={open ? CHAKRAS[6] : WHITE}
-  fillSecondary={open ? WHITE : CHAKRAS[6]}
-  className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-/>
+//   const LEND_ICON = <LendSkullIcon
+//   fillPrimary={open ? chainColor : WHITE}
+//   fillSecondary={open ? WHITE : chainColor}
+//   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+// />
 
-  const removePage = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
-  const addPage = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
-  const poolPage = asPath.startsWith('/pool') || asPath.startsWith('/pools')
-  const swapPage = asPath.startsWith('/swap') || asPath.startsWith('/exchange/swap')
-  const crossPage = asPath.startsWith('/cross') || asPath.startsWith('/exchange/cross')
-  const bondPage = asPath.startsWith('/bonds')
-  const landingPage = asPath.startsWith('/landing')
-  const lendPage = asPath.startsWith('/lend') || asPath.startsWith('/borrow')
+// const DOCS_ICON = <DocsIcon
+//   fillPrimary={open ? WHITE : chainColor}
+//   fillSecondary={open ? chainColor : WHITE}
+//   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+// />
 
-  const isFarm = asPath.startsWith('/farm') || asPath.startsWith('/summoner')
-  const isVault = asPath.startsWith('/autostake')
-  const isLuxor = asPath.startsWith('/luxor') || asPath.startsWith('/luxor/dashbord') || asPath.startsWith('/luxor/bonds') || asPath.startsWith('/luxor/stake')
+  // const removePage = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
+  // const addPage = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
+  // const poolPage = asPath.startsWith('/pool') || asPath.startsWith('/pools')
+  // const swapPage = asPath.startsWith('/swap') || asPath.startsWith('/exchange/swap')
+  // const crossPage = asPath.startsWith('/cross') || asPath.startsWith('/exchange/cross')
+  // const bondPage = asPath.startsWith('/bonds')
+  // const landingPage = asPath.startsWith('/landing')
+  // const lendPage = asPath.startsWith('/lend') || asPath.startsWith('/borrow')
 
-  const isLiquidity = removePage || addPage || poolPage
-  const isHome = landingPage
-  const isLend = lendPage
-  // const isExplore = explorePage
-  const isExplore = asPath.startsWith('/explore')
-  const isWallet = asPath.startsWith('/balances') || asPath.startsWith('/portfolio')
-  const isEarn = isFarm || bondPage || isVault
-  const isExchange = swapPage || crossPage
+  // const isFarm = asPath.startsWith('/farm') || asPath.startsWith('/summoner')
+  // const isVault = asPath.startsWith('/autostake')
+  // const isLuxor = asPath.startsWith('/luxor') || asPath.startsWith('/luxor/dashbord') || asPath.startsWith('/luxor/bonds') || asPath.startsWith('/luxor/stake')
 
-  const pageIcon =
-    isExchange ? SWAP_ICON
-      : isEarn ? EARN_ICON
-        : isWallet ? WALLET_ICON
-          : isHome ? HOME_ICON
-            : isLiquidity ? DROPLET_ICON
-              : isLuxor ? SUN_ICON
-                : isExplore ? EXPLORE_ICON
-                  : isLend ? LEND_ICON
-                    : DEFAULT_ICON
+  // const isLiquidity = removePage || addPage || poolPage
+  // const isHome = landingPage
+  // const isLend = lendPage
+  // const isDocs = asPath.startsWith('/docs')
+  // const isExplore = asPath.startsWith('/explore')
+  // const isWallet = asPath.startsWith('/balances') || asPath.startsWith('/portfolio')
+  // const isEarn = isFarm || bondPage || isVault
+  // const isExchange = swapPage || crossPage
+
+  // const pageIcon =
+  //   isExchange ? SWAP_ICON
+  //     : isEarn ? EARN_ICON
+  //       : isWallet ? WALLET_ICON
+  //         : isHome ? HOME_ICON
+  //           : isLiquidity ? DROPLET_ICON
+  //             : isLuxor ? SUN_ICON
+  //               : isExplore ? EXPLORE_ICON
+  //                 : isLend ? LEND_ICON
+  //                   : isDocs ? DOCS_ICON
+  //                     : DEFAULT_ICON
 
   return (
     <>
@@ -164,23 +165,23 @@ const Desktop: FC = () => {
               before:absolute before:w-full before:h-full mx-4`
           )
           }>
-          <div className="flex p-1 justify-between flex-grow">
-            <div
+          <div className="flex justify-center bg-dark-1000 flex-grow">
+           {/*  <div
               className={`grid grid-cols-2 gap-2`}
             >
               <div
-                className={`p-1 hover:bg-dark-900 mt-1 bg-dark-1000 rounded rounded-xl border-[${getChainColor(chainId)}]`}
+                className={`p-1 hover:bg-dark-900 mt-1 bg-dark-1000 rounded rounded-md border-[${getChainColor(chainId)}]`}
                 onClick={() => { setOpen(true) }}
               > {pageIcon} 
               </div>
               <div
-                className={`p-1 hover:bg-dark-900 mt-1 bg-dark-1000 rounded rounded-xl border-[${getChainColor(chainId)}]`}
+                className={`p-1 hover:bg-dark-900 mt-1 bg-dark-1000 rounded rounded-md border-[${getChainColor(chainId)}]`}
                 onClick={swapRoute}
               > {SOUL_ICON}
               </div>
-            </div>
+            </div> */}
             <div
-              className="flex rounded rounded-xl bg-dark-900 gap-1 px-1 sm:gap-4 md:gap-18 justify-center items-center">
+              className="flex rounded rounded-xl bg-dark-900 gap-1 mt-0.5 sm:gap-4 md:gap-18 justify-center items-center">
               {menu.map((node) => {
                 return <NavigationItem node={node} key={node.key} />
               })}
@@ -227,7 +228,7 @@ const Desktop: FC = () => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
                       </nav>
-                      <div className="flex w-full justify-center inline-block rounded rounded-xl bg-dark-1000">
+                      <div className="flex w-full justify-center inline-block rounded rounded-md bg-dark-1000">
                         {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                           <TokenStats />
                         }
@@ -244,7 +245,7 @@ const Desktop: FC = () => {
         </Transition.Root>
         {/* WALLET ICON */}
         <div
-          className={`relative top-0 right-2 rounded rounded-xl inline-block`}
+          className={`relative top-0 right-2 rounded rounded-md inline-block`}
         >
           <Web3Status />
         </div>
@@ -252,10 +253,10 @@ const Desktop: FC = () => {
         <div className={`relative top-0 right-0 rounded rounded-lg inline-block border border-1 p-1 border-[${getChainColor(chainId)}]`}>
           <Web3Network />
         </div>
-        <div className={`fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full rounded rounded-xl xl:bg-transparent`}>
+        <div className={`fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full rounded rounded-md xl:bg-transparent`}>
           {/* xl:relative // moves to top */}
           <div className="flex items-center w-full space-x-2 justify-end">
-            <div className={`w-auto grid gap-1.5 items-center rounded rounded-xl bg-dark-1000  border-[${getChainColor(chainId)}] whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`}>
+            <div className={`w-auto grid gap-1.5 items-center rounded rounded-md bg-dark-1000  border-[${getChainColor(chainId)}] whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`}>
               {/* MORE [...] ICON */}
               <div className={`rounded rounded-md inline-block`}>
                 <More />

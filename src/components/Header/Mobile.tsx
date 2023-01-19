@@ -24,6 +24,8 @@ import BarsIcon from 'components/Icons/header/BarsIcon'
 import { useRouter } from 'next/router'
 import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
 import SoulIcon from 'components/Icons/header/SoulIcon'
+import DocsIcon from 'components/Icons/mobile/DocsIcon'
+import NftIcon from 'components/Icons/mobile/NftIcon'
 
 const Mobile: FC = () => {
   // const menu = useMenu()
@@ -41,14 +43,15 @@ const Mobile: FC = () => {
   }, [])
 
   const WHITE = `#FFFFFF`
-  const R = `#FF0000`
-  const O = `#FFA500`
-  const Y = `#FFFF00`
-  const G = `#008000`
-  const B = `#0000FF`
-  const I = `#811FFF`
-  const V = `#EE82EE`
-  const CHAKRAS = [R, O, Y, G, B, I, V]
+  // const R = `#FF0000`
+  // const O = `#FFA500`
+  // const Y = `#FFFF00`
+  // const G = `#008000`
+  // const B = `#0000FF`
+  // const I = `#811FFF`
+  // const V = `#EE82EE`
+  // const CHAKRAS = [R, O, Y, G, B, I, V]
+  const chainColor = getChainColor(chainId)
 
   const SOUL_ICON = <SoulIcon
     height={'600px'}
@@ -62,14 +65,14 @@ const Mobile: FC = () => {
   />
 
   const HOME_ICON = <HomeIcon
-    fillPrimary={open ? WHITE : CHAKRAS[0]}
-    fillSecondary={open ? CHAKRAS[0] : WHITE}
+    fillPrimary={open ? WHITE : chainColor}
+    fillSecondary={open ? chainColor : WHITE}
     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
   />
 
   const DROPLET_ICON = <DropletIcon
     fillPrimary={WHITE}
-    fillSecondary={CHAKRAS[1]}
+    fillSecondary={chainColor}
     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
   />
 
@@ -80,32 +83,44 @@ const Mobile: FC = () => {
   />
 
   const SUN_ICON = <SunMoonIcon
-    fillPrimary={open ? CHAKRAS[2] : WHITE}
-    fillSecondary={open ? WHITE : CHAKRAS[2]}
+    fillPrimary={open ? chainColor : WHITE}
+    fillSecondary={open ? WHITE : chainColor}
     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
   />
 
   const EARN_ICON = <SeedlingIcon
-    fillPrimary={open ? WHITE : CHAKRAS[3]}
-    fillSecondary={open ? CHAKRAS[3] : WHITE}
+    fillPrimary={open ? WHITE : chainColor}
+    fillSecondary={open ? chainColor : WHITE}
     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
   />
 
   const WALLET_ICON = <WalletIcon
-    fillPrimary={open ? WHITE : CHAKRAS[4]}
-    fillSecondary={open ? CHAKRAS[4] : WHITE}
+    fillPrimary={open ? WHITE : chainColor}
+    fillSecondary={open ? chainColor : WHITE}
     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
   />
   
   const EXPLORE_ICON = <BinocularsIcon
-  fillPrimary={open ? WHITE : CHAKRAS[5]}
-  fillSecondary={open ? CHAKRAS[5] : WHITE}
+  fillPrimary={open ? WHITE : chainColor}
+  fillSecondary={open ? chainColor : WHITE}
   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
   />
   
   const LEND_ICON = <LendSkullIcon
-    fillPrimary={open ? CHAKRAS[6] : WHITE}
-    fillSecondary={open ? WHITE : CHAKRAS[6]}
+    fillPrimary={open ? chainColor : WHITE}
+    fillSecondary={open ? WHITE : chainColor}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  />
+  
+  const DOCS_ICON = <DocsIcon
+    fillPrimary={open ? WHITE : chainColor}
+    fillSecondary={open ? chainColor : WHITE}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  />
+
+  const NFT_ICON = <NftIcon
+    fillPrimary={open ? chainColor : WHITE}
+    fillSecondary={open ? WHITE : chainColor}
     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
   />
 
@@ -117,6 +132,8 @@ const Mobile: FC = () => {
   const bondPage = asPath.startsWith('/bonds')
   const landingPage = asPath.startsWith('/landing')
   const lendPage = asPath.startsWith('/lend') || asPath.startsWith('/borrow')
+  const nftPage = asPath.startsWith('/marketplace') || asPath.startsWith('/marketplace/collections')
+  const docsPage = asPath.startsWith('/docs')
 
   const isFarm = asPath.startsWith('/farm') || asPath.startsWith('/summoner')
   const isVault = asPath.startsWith('/autostake')
@@ -125,6 +142,8 @@ const Mobile: FC = () => {
   const isLiquidity = removePage || addPage || poolPage
   const isHome = landingPage
   const isLend = lendPage
+  const isDocs = docsPage
+  const isNFT = nftPage
   // const isExplore = explorePage
   const isExplore = asPath.startsWith('/explore')
   const isWallet = asPath.startsWith('/balances') || asPath.startsWith('/portfolio')
@@ -140,7 +159,9 @@ const Mobile: FC = () => {
               : isLuxor ? SUN_ICON
                 : isExplore ? EXPLORE_ICON
                   : isLend ? LEND_ICON
-                    : DEFAULT_ICON
+                    : isDocs ? DOCS_ICON
+                      : isNFT ? NFT_ICON
+                        : DEFAULT_ICON
 
   return (
     <>
@@ -156,11 +177,12 @@ const Mobile: FC = () => {
                 onClick={() => { setOpen(true) }}
               > {pageIcon} 
               </div>
-              <div
+              {/* <div
                 className={`p-1 hover:bg-dark-900 mt-1 bg-dark-1000 rounded rounded-xl border-[${getChainColor(chainId)}]`}
                 onClick={swapRoute}
               > {SOUL_ICON}
-              </div>          </div>
+              </div>           */}
+            </div>
         </div>
         <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 z-20 overflow-hidden" onClose={setOpen} unmount={false}>

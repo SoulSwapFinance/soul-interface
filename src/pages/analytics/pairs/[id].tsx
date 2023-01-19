@@ -60,7 +60,7 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
       tokenA: inputCurrency?.isToken ? inputCurrency : inputCurrency?.wrapped,
       tokenB: outputCurrency?.isToken ? outputCurrency : outputCurrency?.wrapped,
     }).toLowerCase() // pairAddress
-    : (router.query.id as string).toLowerCase() // router string
+    : (router.query.id as string)?.toLowerCase() // router string
 
   // const id = pairAddress ?? (router.query.id as string).toLowerCase()
 
