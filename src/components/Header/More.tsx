@@ -20,12 +20,12 @@ export default function Menu() {
     == ChainId.AVALANCHE ? 'https://avax-info' : 'https://info'
   
   const items = (i18n: I18n) => [
-  {
-    name: i18n._(t`Documentation`),
-    description: i18n._(t`Read our Full Documentation`),
-    href: 'https://docs.soulswap.finance',
-    external: true,
-  },
+  // {
+  //   name: i18n._(t`Documentation`),
+  //   description: i18n._(t`Read our Full Documentation`),
+  //   href: 'https://docs.soulswap.finance',
+  //   external: true,
+  // },
   {
     name: i18n._(t`Twitter`),
     description: i18n._(t`Follow us on Twitter`),
