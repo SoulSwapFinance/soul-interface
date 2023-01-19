@@ -167,12 +167,12 @@ export default function Explore() {
         ))}
         <div className={featureEnabled(Feature.NFT, chainId) ? `py-1 bg-ftmBlue` : `hidden`} />
         <div className={featureEnabled(Feature.NFT, chainId) ? `py-1 bg-pink` : `hidden`} />
-      <Typography variant="h1" className={classNames([ChainId.FANTOM].includes(chainId) ? "text-center text-ftmBlue" : 'hidden')} component="h1">
+      <Typography variant="h1" className={featureEnabled(Feature.NFT, chainId) ? "text-center text-ftmBlue" : 'hidden'} component="h1">
         INFINITY MARKET
       </Typography>
       <div className={featureEnabled(Feature.NFT, chainId) ? `py-1 bg-ftmBlue` : `hidden`} />
         <div className={featureEnabled(Feature.NFT, chainId) ? `py-1 bg-pink` : `hidden`} />
-        {featureEnabled(Feature.LUXOR, chainId) && infinityFeature.map((infinityFeature) => (
+        {featureEnabled(Feature.NFT, chainId) && infinityFeature.map((infinityFeature) => (
           <li key={infinityFeature.id} className="relative border gap-4 border-pink hover:border-ftmBlue w-full p-4 rounded bg-dark-900 hover:bg-dark-800">
             <div className="flex justify-between space-y-4 space-x-4">
               <div className="flex-1 min-w-0">
