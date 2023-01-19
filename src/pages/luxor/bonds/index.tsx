@@ -5,12 +5,12 @@ import React from 'react'
 import { FtmList } from 'features/luxor/List'
 import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
-import { useLuxorPrice } from 'hooks/getPrices'
+// import { useLuxorPrice } from 'hooks/getPrices'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
 
 const Luxor = () => {
-  const luxorPrice = useLuxorPrice()
+  // const luxorPrice = useLuxorPrice()
 
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">

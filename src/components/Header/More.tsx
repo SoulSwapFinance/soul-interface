@@ -10,8 +10,7 @@ import { useLingui } from '@lingui/react'
 import NavLink from '../NavLink'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { useActiveWeb3React } from 'services/web3'
-import SquareEllisisIcon from 'components/Icons/mobile/SquareEllipsisIcon'
-import SquareEllipsisIcon from 'components/Icons/mobile/SquareEllipsisIcon'
+// import SquareEllipsisIcon from 'components/Icons/mobile/SquareEllipsisIcon'
 
 export default function Menu() {
   const { i18n } = useLingui()
