@@ -14,6 +14,7 @@ import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
 import BinocularsIcon from 'components/Icons/header/BinocularsIcon'
 import DocsIcon from 'components/Icons/mobile/DocsIcon'
 import SwapIcon from 'components/Icons/exchange/SwapIcon'
+import NftIcon from 'components/Icons/mobile/NftIcon'
 
 export interface BarItemLeaf {
   key: string
@@ -144,6 +145,20 @@ const useMenu: UseBar = () => {
         )}
         fillPrimary={chainColor}
         fillSecondary={WHITE}
+      />,
+    })
+
+    // Infinity Marketplace
+    mainItems.push({
+      key: 'infinity',
+      link: '/marketplace',
+      title: i18n._(t`NFT`),
+      icon: <NftIcon
+        className={classNames(`w-7 h-7 rounded rounded-md`
+          // , isExplore ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
+        )}
+        fillPrimary={WHITE}
+        fillSecondary={chainColor}
       />,
     })
 

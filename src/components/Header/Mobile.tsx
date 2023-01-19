@@ -25,6 +25,7 @@ import { useRouter } from 'next/router'
 import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
 import SoulIcon from 'components/Icons/header/SoulIcon'
 import DocsIcon from 'components/Icons/mobile/DocsIcon'
+import NftIcon from 'components/Icons/mobile/NftIcon'
 
 const Mobile: FC = () => {
   // const menu = useMenu()
@@ -117,6 +118,12 @@ const Mobile: FC = () => {
     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
   />
 
+  const NFT_ICON = <NftIcon
+    fillPrimary={open ? chainColor : WHITE}
+    fillSecondary={open ? WHITE : chainColor}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  />
+
   const removePage = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
   const addPage = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
   const poolPage = asPath.startsWith('/pool') || asPath.startsWith('/pools')
@@ -125,6 +132,7 @@ const Mobile: FC = () => {
   const bondPage = asPath.startsWith('/bonds')
   const landingPage = asPath.startsWith('/landing')
   const lendPage = asPath.startsWith('/lend') || asPath.startsWith('/borrow')
+  const nftPage = asPath.startsWith('/marketplace') || asPath.startsWith('/marketplace/collections')
   const docsPage = asPath.startsWith('/docs')
 
   const isFarm = asPath.startsWith('/farm') || asPath.startsWith('/summoner')
@@ -135,6 +143,7 @@ const Mobile: FC = () => {
   const isHome = landingPage
   const isLend = lendPage
   const isDocs = docsPage
+  const isNFT = nftPage
   // const isExplore = explorePage
   const isExplore = asPath.startsWith('/explore')
   const isWallet = asPath.startsWith('/balances') || asPath.startsWith('/portfolio')
@@ -151,7 +160,8 @@ const Mobile: FC = () => {
                 : isExplore ? EXPLORE_ICON
                   : isLend ? LEND_ICON
                     : isDocs ? DOCS_ICON
-                     : DEFAULT_ICON
+                      : isNFT ? NFT_ICON
+                        : DEFAULT_ICON
 
   return (
     <>

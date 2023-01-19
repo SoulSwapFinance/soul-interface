@@ -23,6 +23,7 @@ import SwapIcon from 'components/Icons/exchange/SwapIcon'
 import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
 import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
 import WalletIcon from 'components/Icons/header/WalletIcon'
+import NftIcon from 'components/Icons/mobile/NftIcon'
 
 interface BarProps {
     inputCurrency?: Currency
@@ -55,14 +56,15 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
     const farmRoute = useCallback(() => {
         router.push(`/farm`)
     }, [])
-    const bridgeRoute = useCallback(() => {
-        router.push(`/bridge`)
+    const nftRoute = useCallback(() => {
+        router.push(`/marketplace`)
     }, [])
 
     const swapPage = router.pathname.startsWith('/swap') || router.pathname.startsWith('/exchange/swap')
     const crossPage = router.pathname.startsWith('/cross') || router.pathname.startsWith('/exchange/cross')
     const landingPage = router.pathname.startsWith('/landing')
     const portfolioPage = router.pathname.startsWith('/portfolio')
+    const nftPage = router.pathname.startsWith('/marketplace') || router.pathname.startsWith('/marketplace/collections')
     const farmPage = router.pathname.startsWith('/farm') || router.pathname.startsWith('/summoner')
     const bondPage = router.pathname.startsWith('/bond') || router.pathname.startsWith('/bonds')
     const lendPage = router.pathname.startsWith('/lend') || router.pathname.startsWith('/borrow')
@@ -87,7 +89,7 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
     const isRemove = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
     const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
     const isPool = isRemove || isAdd
-    const isHome = landingPage
+    const isNFT = nftPage
     const isWallet = portfolioPage
     const isLend = lendPage
     const isEarn = farmPage || bondPage
@@ -192,6 +194,18 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                             <LendSkullIcon
                                 fillPrimary={isLend ? `${getChainColor(chainId)}` : `#FFFFFF`}
                                 fillSecondary={isLend ? `#FFFFFF` : `${getChainColor(chainId)}`}
+                                className={'w-7 h-7'}
+                            />
+                        </div>
+                        <div
+                            className={classNames(
+                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                isNFT && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
+                            onClick={nftRoute}
+                        >
+                            <NftIcon
+                                fillPrimary={isNFT ? `${getChainColor(chainId)}` : `#FFFFFF`}
+                                fillSecondary={isNFT ? `#FFFFFF` : `${getChainColor(chainId)}`}
                                 className={'w-7 h-7'}
                             />
                         </div>
