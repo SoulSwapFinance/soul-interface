@@ -161,9 +161,11 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
         }
     }
 
-    const swapRoute = useCallback((isPair: boolean) => {
-        isPair
-            ? router.push(`/exchange/swap`)
+    const swapRoute = useCallback((
+        isPair: boolean
+        ) => {
+        isPair || bond.assetAddress == WFTM_ADDRESS[chainId] ? 
+            router.push(`/exchange/swap`)
             : router.push(`/exchange/swap?inputCurrency=${NATIVE[250].symbol}&outputCurrency=${bond.assetAddress}`)
     }, [])
 
@@ -478,7 +480,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                                 color="black"
                                                 height="2rem"
                                                 // onClick={() => handleDeposit(depositValue)}>
-                                                onClick={() => swapRoute(false)}>
+                                                onClick={swapRoute(false)}>
                                                 ACQUIRE {assetName}
                                             </SubmitButton>
                                         ) :
