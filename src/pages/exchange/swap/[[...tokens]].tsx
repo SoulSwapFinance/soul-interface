@@ -103,7 +103,7 @@ const Swap = () => {
     setDismissTokenWarning(true)
   }, [])
 
-  const [showChart, setShowChart] = useState(false)
+  const [showChart, setShowChart] = useState(true)
   const [showPortfolio, setShowPortfolio] = useState(false)
   const useSwap = !useAggregator && !useLimit
   // const [showAggregator, setShowAggregator] = useState(false)
@@ -727,7 +727,7 @@ const Swap = () => {
               />
             </div> */}
             <div className={classNames(!useLimit && !useAggregator ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}>
-              <Button
+              {/* <Button
                 size={'xs'}
                 className={classNames(showChart ? `bg-${getChainColorCode(chainId)}` : ``,
                   `rounded rounded-xl bg-dark-1000 border
@@ -736,7 +736,7 @@ const Swap = () => {
                 onClick={() => setShowChart(!showChart)}
               >
                 {i18n._(t`Show Chart`)}
-              </Button>
+              </Button> */}
               {/* <Button
                 size={'xs'}
                 className={classNames(showPortfolio ? `bg-${getChainColorCode(chainId)}` : ``,
