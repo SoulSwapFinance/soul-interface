@@ -1,15 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
-// import { ethers } from 'ethers'
 import { useFantomPrice, useLuxorPrice } from 'hooks/getPrices'
 import { usePairPrice } from 'hooks/usePairData'
 import { useActiveWeb3React } from 'services/web3'
-// import QuestionHelper from '../../components/QuestionHelper'
 import { ChainId, LUX_DAI, LUX_NATIVE, LUX_SOR, NATIVE, SOR_NATIVE, Token } from 'sdk'
 import AssetInput from 'components/AssetInput'
 import { useLuxorBondContract } from 'hooks/useContract'
-// import { useBondContract, useStakeSharePrice, useStakeRecentProfit, sharesFromSoul } from './useBonds'
 import useApprove from 'hooks/useApprove'
 import {
     StakeContainer,
@@ -25,15 +22,19 @@ import {
 } from './Styles'
 import { Wrap, Text, ExternalLink } from '../../components/ReusableStyles'
 import { formatNumber, tryParseAmount } from 'functions'
-// import { useCurrencyBalance, useTokenBalance } from 'state/wallet/hooks'
 import { useApproveCallback } from 'hooks/useApproveCallback'
 import Modal from 'components/Modal/DefaultModal'
 import Typography from 'components/Typography'
 import ModalHeader from 'components/Modal/Header'
 import { useLuxorBondInfo } from 'hooks/useAPI'
 import { WFTM_ADDRESS } from 'constants/addresses'
-import { Button } from 'components/Button'
 import { useRouter } from 'next/router'
+
+// import { ethers } from 'ethers'
+// import QuestionHelper from '../../components/QuestionHelper'
+// import { useBondContract, useStakeSharePrice, useStakeRecentProfit, sharesFromSoul } from './useBonds'
+// import { useCurrencyBalance, useTokenBalance } from 'state/wallet/hooks'
+// import { Button } from 'components/Button'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -86,7 +87,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     // const assetPrice = useTokenPrice(assetToken.address)
     // console.log('assetPrice:%s', assetPrice)
 
-    const [approvalState, approve] = useApproveCallback(parsedDepositValue, bond?.address)
+    // const [approvalState, approve] = useApproveCallback(parsedDepositValue, bond?.address)
     const [showConfirmation, setShowConfirmation] = useState(false)
     const [showDefaultConfirmation, setShowDefaultConfirmation] = useState(false)
     const [showAvailabilityMsg, setShowAvailabilityMsg] = useState(false)
@@ -161,12 +162,15 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
         }
     }
 
-    const swapRoute = useCallback((
-        isPair: boolean
-        ) => {
-        isPair || bond.assetAddress == WFTM_ADDRESS[chainId] ? 
-            router.push(`/exchange/swap`)
-            : router.push(`/exchange/swap?inputCurrency=${NATIVE[250].symbol}&outputCurrency=${bond.assetAddress}`)
+    const swapRoute = useCallback(() => {
+        // wrapped-only
+        bond.assetAddress == WFTM_ADDRESS[chainId] 
+        // implies: pair
+        || bond.token2Address
+        // use generic swap path.
+        ? router.push(`/exchange/swap`)
+        // else: use specified swap path.
+        : router.push(`/exchange/swap?inputCurrency=${NATIVE[250].symbol}&outputCurrency=${bond.assetAddress}`)
     }, [])
 
     // returns: discount & sets
@@ -462,6 +466,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                         </Wrap> */}
                             {payout == 0 ? (
                                 <FunctionBox>
+                                    { unstakedBal > 0 &&
                                     <AssetInput
                                         chainId={250}
                                         currencyLogo={false}
@@ -473,19 +478,20 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                         onChange={setDepositValue}
                                         showMax={false}
                                     />
+                                    }
                                     <Wrap padding="0" margin="0" display="flex" justifyContent="center">
-                                        {(Number(unstakedBal) == 0) ? (
-                                            <SubmitButton
+                                         <SubmitButton
                                                 primaryColor="#EDC100"
                                                 color="black"
                                                 height="2rem"
-                                                // onClick={() => handleDeposit(depositValue)}>
-                                                onClick={() => swapRoute(false)}>
+                                                onClick={() => swapRoute()}
+                                            >
                                                 ACQUIRE {assetName}
                                             </SubmitButton>
-                                        ) :
-                                            // approved (&& available) ?
-                                            (approved && available) ? (
+                                    </Wrap>
+                                    {unstakedBal > 0 &&
+                                    <Wrap padding="0" margin="0" display="flex" justifyContent="center">
+                                            {(approved && available) ? (
                                                 <SubmitButton
                                                     primaryColor="#EDC100"
                                                     color="black"
@@ -513,11 +519,13 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                                 </SubmitButton>
                                             )}
                                     </Wrap>
+                                    }
                                 </FunctionBox>
                             ) : (
                                 <FunctionBox>
                                     <Wrap padding="0" display="flex" justifyContent="space-between">
                                     </Wrap>
+                                    { 
                                     <AssetInput
                                         chainId={250}
                                         currencyLogo={false}
@@ -528,6 +536,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                         showMax={false}
                                         showBalance={true}
                                     />
+                                    }
                                     {approved && available &&
                                         <Wrap padding="0" margin="0" display="flex">
                                             <SubmitButton
