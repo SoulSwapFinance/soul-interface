@@ -213,7 +213,7 @@ const useMenu: UseMenu = () => {
           icon: <ArrowsUpDownIcon width={20} className={classNames(
             "rotate-90 filter", "text-white"
           )} />,
-          link: '/docs'
+          link: '/learn'
       })
     }
 

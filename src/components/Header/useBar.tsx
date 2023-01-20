@@ -136,9 +136,9 @@ const useMenu: UseBar = () => {
 
     // Whitepaper
     mainItems.push({
-      key: 'whitepaper',
-      link: '/docs',
-      title: i18n._(t`Docs`),
+      key: 'learn',
+      link: '/learn',
+      title: i18n._(t`Learn`),
       icon: <DocsIcon
         className={classNames(`w-7 h-7 rounded rounded-md`
           // , isExplore ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
