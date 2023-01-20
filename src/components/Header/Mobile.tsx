@@ -133,7 +133,7 @@ const Mobile: FC = () => {
   const landingPage = asPath.startsWith('/landing')
   const lendPage = asPath.startsWith('/lend') || asPath.startsWith('/borrow')
   const nftPage = asPath.startsWith('/marketplace') || asPath.startsWith('/marketplace/collections')
-  const docsPage = asPath.startsWith('/docs')
+  const docsPage = asPath.startsWith('/learn')
 
   const isFarm = asPath.startsWith('/farm') || asPath.startsWith('/summoner')
   const isVault = asPath.startsWith('/autostake')

@@ -135,7 +135,7 @@ const Desktop: FC = () => {
   // const isLiquidity = removePage || addPage || poolPage
   // const isHome = landingPage
   // const isLend = lendPage
-  // const isDocs = asPath.startsWith('/docs')
+  // const isDocs = asPath.startsWith('/learn')
   // const isExplore = asPath.startsWith('/explore')
   // const isWallet = asPath.startsWith('/balances') || asPath.startsWith('/portfolio')
   // const isEarn = isFarm || bondPage || isVault
