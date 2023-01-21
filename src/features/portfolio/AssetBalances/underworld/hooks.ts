@@ -69,7 +69,7 @@ export const useLendPositionAmounts = (): PairWithAmount[] => {
       const lentAssetAmount = JSBI.BigInt(item.userAssetFraction.toString())
       return {
         pair: item,
-        amount: CurrencyAmount.fromRawAmount(lentAsset, lentAssetAmount).multiply(LEND_MULTIPLIER(chainId, lentAsset)),
+        amount: CurrencyAmount.fromRawAmount(lentAsset, lentAssetAmount).multiply(LEND_MULTIPLIER(chainId, lentAsset.wrapped.symbol)),
       }
     })
     .filter(Boolean) as PairWithAmount[]

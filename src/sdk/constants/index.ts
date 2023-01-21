@@ -62,11 +62,11 @@ export const _10000 = JSBI.BigInt(10000)
 export const defaultSwapFee = _25
 export const defaultProtocolFeeDenominator = FIVE
 
-export const LEND_MULTIPLIER = (chainId: ChainId, lentAsset: Currency) => {
-  let lentSymbol = lentAsset.wrapped.symbol
+export const LEND_MULTIPLIER = (chainId: ChainId, lentSymbol: string) => {
+  // let lentSymbol = lentAsset.wrapped.symbol
   let multiplier = 1
   if (chainId == ChainId.FANTOM) {
-    lentSymbol == 'WFTM'
+    lentSymbol == 'FTM' || lentSymbol == 'WFTM'
       ? multiplier = 4.5
         : lentSymbol == 'DAI' || lentSymbol == 'BNB'
           ? multiplier = 4

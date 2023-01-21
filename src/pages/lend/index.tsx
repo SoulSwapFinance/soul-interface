@@ -142,17 +142,17 @@ export default function Lend() {
         <div>
           <div className="grid grid-flow-col grid-cols-4 gap-4 px-4 pb-4 text-sm sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 text-secondary">
             <ListHeaderWithSort className="justify-center" sort={data} sortKey="search">
-              <span className="justify-center md:flex">{i18n._(t`Markets`)}</span>
+              <span className="justify-center md:flex">{i18n._(t`MARKET`)}</span>
             </ListHeaderWithSort>
             <ListHeaderWithSort className="hidden justify-center md:flex" sort={data} sortKey="asset.tokenInfo.symbol">
-              {i18n._(t`Lend`)}
+              {i18n._(t`SUPPLY`)}
             </ListHeaderWithSort>
             <ListHeaderWithSort className="hidden justify-center md:flex" sort={data} sortKey="collateral.tokenInfo.symbol">
-              {i18n._(t`Collateral`)}
+              {i18n._(t`COLLATERAL`)}
             </ListHeaderWithSort>
             <ListHeaderWithSort className="hidden justify-center lg:flex" sort={data} sortKey="oracle.name">
-              {i18n._(t`Oracle`)}
-              <QuestionHelper text={i18n._(t`On-chain oracle that tracks pricing for this pair.`)} />
+              {i18n._(t`ORACLE`)}
+              {/* <QuestionHelper text={i18n._(t`On-chain oracle that tracks pricing for this pair.`)} /> */}
             </ListHeaderWithSort>
             <ListHeaderWithSort
               className="justify-center"
@@ -160,7 +160,7 @@ export default function Lend() {
               sortKey="currentAllAssets.usdValue"
               direction="descending"
             >
-              {i18n._(t`Total`)}
+              {i18n._(t`TVL`)}
             </ListHeaderWithSort>
             <ListHeaderWithSort
               className="justify-center"
@@ -168,7 +168,7 @@ export default function Lend() {
               sortKey="currentSupplyAPR.valueWithStrategy"
               direction="descending"
             >
-              {i18n._(t`Interest`)}
+              {i18n._(t`APR`)}
             </ListHeaderWithSort>
             <ListHeaderWithSort
               className="justify-center sm:flex"
@@ -176,7 +176,7 @@ export default function Lend() {
               sortKey="currentUserBorrowAmount.usdValue"
               direction="descending"
             >
-              {i18n._(t`Action`)}
+              {i18n._(t`ACTION`)}
             </ListHeaderWithSort>
           </div>
 
@@ -232,7 +232,6 @@ const LendEntry = ({ pair, userPosition = false }) => {
     = Number(pair.totalAsset.base)
     * assetPrice
     / 10 ** assetDecimals
-    * LEND_MULTIPLIER(chainId, assetToken)
 
   return (
     // <Link href={'/lend/' + pair.address}>
@@ -292,56 +291,18 @@ const LendEntry = ({ pair, userPosition = false }) => {
       </div>
       <div className="hidden text-center md:block">{pair.collateral.tokenInfo.symbol}</div>
       <div className="hidden text-center lg:block">{pair.oracle.name}</div>
-      {userPosition ? (
-        <>
+      {<><div>
           <div className="text-center">
-            <div>
-              {formatNumber(Number(pair.userAssetFraction) / 10 ** (assetDecimals), false)} {pair.asset.tokenInfo.symbol}
-            </div>
-            <div className="text-center text-sm text-secondary">{formatNumber(userDepositedValue, true)}</div>
+            {formatNumber(pair?.totalAsset.base / 10 ** (assetDecimals) * LEND_MULTIPLIER(chainId, pair?.asset.tokenInfo.symbol))} {pair?.asset.tokenInfo.symbol}
+            <div className="text-secondary">{formatNumber(totalDepositedValue * LEND_MULTIPLIER(chainId, pair?.asset.tokenInfo.symbol), true)}</div>
           </div>
-          {/* APR */}
-          <div className="text-center">
-            {formatPercent(
-              supplyAPR
-            )}
-            {/* <div>{formatNumber(pair.currentUserLentAmount.string)} {pair.asset.tokenInfo.symbol}</div> */}
-            {/* <div>{formatPercent(pair.utilization.string)}</div> */}
-            {/* <div className="text-center text-secondary text-sm">{formatNumber(Number(pair.currentUserLentAmount.usd) / 1e12 , true)}</div> */}
-          </div>
-          <div className="text-center">
-            {/* {
-                formatPercent(
-                  ((pair?.userAssetFraction.div(e10(assetDecimals))) -
-                    (pair?.userAssetFraction.sub(pair?.currentUserLentAmount.value).div(e10(assetDecimals))))
-                  / (pair?.userAssetFraction.div(e10(assetDecimals))) * 100
-                 )
-              } */}
-
-            {/* TOTAL */}
-            {formatNumber(pair?.totalAsset.base / 10 ** (assetDecimals))} {pair?.asset.tokenInfo.symbol}
-            <div className="text-secondary">{formatNumber(totalDepositedValue, true)}</div>
-          </div>{' '}
-          <div className="hidden sm:text-center">{formatPercent(
-            pair.supplyAPR.stringWithStrategy
-          )}</div>{' '}
-        </>
-      ) : (
-        <>
-          <div>
-            <div className="text-center">
-              {formatNumber(pair?.totalAsset.base / 10 ** (assetDecimals))} {pair?.asset.tokenInfo.symbol}
-              <div className="text-secondary">{formatNumber(totalDepositedValue, true)}</div>
-            </div>
-          </div>
-          <div className="text-center">
+        </div><div className="text-center">
             {formatPercent(
               supplyAPR
                 > 0 ?
                 supplyAPR
                 : 1)}
-          </div>
-          <div className="sm:flex sm:flex-cols-1 gap-0.5 text-center justify-center sm:mr-1">
+          </div><div className="sm:flex sm:flex-cols-1 gap-0.5 text-center justify-center sm:mr-1">
             <NavLink href={`/lend/${pair.address}`}>
               <SubmitButton variant="bordered" primaryColor={getChainColor(chainId)}>
                 <Typography className="text-xs text-center">
@@ -357,14 +318,13 @@ const LendEntry = ({ pair, userPosition = false }) => {
               </SubmitButton>
             </NavLink>
             {/* {
-                formatPercent(
-                  ((pair?.totalAsset.base / 10**(assetDecimals)) -
-                    (pair?.totalAsset.base.sub(pair?.totalBorrow.base) / 10**(assetDecimals)))
-                  / (pair?.totalAsset.base / 10**(assetDecimals)) * 100
-                )} */}
-          </div>
-        </>
-      )}
+        formatPercent(
+          ((pair?.totalAsset.base / 10**(assetDecimals)) -
+            (pair?.totalAsset.base.sub(pair?.totalBorrow.base) / 10**(assetDecimals)))
+          / (pair?.totalAsset.base / 10**(assetDecimals)) * 100
+        )} */}
+          </div></>
+      }
     </div>
     /* </a> */
     /* </Link> */
