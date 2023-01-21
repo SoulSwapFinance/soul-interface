@@ -1,6 +1,6 @@
 import { AddressZero } from '@ethersproject/constants'
-import { Currency, CurrencyAmount, JSBI, Token } from 'sdk'
-import { useUnderworldPairAddresses, useUnderworldPairs } from 'features/lending/hooks'
+import { Currency, CurrencyAmount, JSBI, Token, LEND_MULTIPLIER, UNDERWORLD_PAIRS } from 'sdk'
+import { useUnderworldPairs } from 'features/lending/hooks'
 import useSearchAndSort from 'hooks/useSearchAndSort'
 import { useActiveWeb3React } from 'services/web3'
 import { useMemo } from 'react'
@@ -37,7 +37,7 @@ export const useUnderworldLendPositions = (pairs: any[]) =>
 
 const useBorrowPositionAmounts = () => {
   const { chainId } = useActiveWeb3React()
-  const addresses = useUnderworldPairAddresses()
+  const addresses = UNDERWORLD_PAIRS[chainId]
   const pairs = useUnderworldPairs(addresses)
 
   return useUnderworldBorrowPositions(pairs)
@@ -58,7 +58,7 @@ type PairWithAmount = {
 
 export const useLendPositionAmounts = (): PairWithAmount[] => {
   const { chainId } = useActiveWeb3React()
-  const addresses = useUnderworldPairAddresses()
+  const addresses = UNDERWORLD_PAIRS[chainId]
   const pairs = useUnderworldPairs(addresses)
 
   return useUnderworldLendPositions(pairs)
@@ -69,7 +69,7 @@ export const useLendPositionAmounts = (): PairWithAmount[] => {
       const lentAssetAmount = JSBI.BigInt(item.userAssetFraction.toString())
       return {
         pair: item,
-        amount: CurrencyAmount.fromRawAmount(lentAsset, lentAssetAmount),
+        amount: CurrencyAmount.fromRawAmount(lentAsset, lentAssetAmount).multiply(LEND_MULTIPLIER(chainId, lentAsset)),
       }
     })
     .filter(Boolean) as PairWithAmount[]
@@ -77,7 +77,7 @@ export const useLendPositionAmounts = (): PairWithAmount[] => {
 
 export const useCollateralPositionAmounts = (): PairWithAmount[] => {
   const { chainId } = useActiveWeb3React()
-  const addresses = useUnderworldPairAddresses()
+  const addresses = UNDERWORLD_PAIRS[chainId]
   const pairs = useUnderworldPairs(addresses)
 
   return useUnderworldBorrowPositions(pairs)
