@@ -4,7 +4,7 @@ import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
 import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
-import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, SUMMONER_ADDRESS, Token, WNATIVE } from 'sdk'
+import { ChainId, LEND_MULTIPLIER, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, SUMMONER_ADDRESS, Token, WNATIVE } from 'sdk'
 import { useTokenContract, useSummonerContract, useZapperContract } from 'hooks/useContract'
 import useApprove from 'hooks/useApprove'
 import { Tab } from '@headlessui/react'
@@ -61,20 +61,28 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const ZapContract = useZapperContract()
     const ZapContractAddress = ZapContract.address
 
-    const nowTime = new Date().getTime()
-    const { summonerInfo } = useSummonerInfo()
-    const startRate = Number(summonerInfo.startRate)
+    // const nowTime = new Date().getTime()
+    // const { summonerInfo } = useSummonerInfo()
+    // const startRate = Number(summonerInfo.startRate)
+
+    // const APR = Number(summonerPoolInfo.apr)
+    // const liquidity = summonerPoolInfo.tvl
 
     const { summonerPoolInfo } = useSummonerPoolInfo(pid)
-    const liquidity = summonerPoolInfo.tvl
-    const APR = summonerPoolInfo.apr
-    const allocPoint = summonerPoolInfo.allocPoint
-    const lpAddress = summonerPoolInfo.lpAddress
-    const pairStatus = summonerPoolInfo.status
-
     // pair types //
     const isUnderworldPair = pairType == "lend"
     const isSwapPair = pairType == "swap"
+    // multiplier (adjusts for lending pairs) //
+    const MULTIPLIER = isSwapPair ? 1 : LEND_MULTIPLIER(chainId, token0Symbol)
+    
+    // for display purposes only //
+    const _liquidity = Number(summonerPoolInfo.tvl )* MULTIPLIER
+    // for display purposes only //
+    const _APR = Number(summonerPoolInfo.apr) / MULTIPLIER
+
+    const allocPoint = summonerPoolInfo.allocPoint
+    const lpAddress = summonerPoolInfo.lpAddress
+    const pairStatus = summonerPoolInfo.status
 
     // const { userInfo } = useUserInfo()
     const { pairInfo } = usePairInfo(lpAddress)
@@ -91,17 +99,34 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
     // SUMMONER USER INFO //
     const { summonerUserInfo } = useSummonerUserInfo(pid)
-    const stakedBalance = Number(summonerUserInfo.stakedBalance)
-    const stakedValue = Number(summonerUserInfo.stakedValue)
+    // const stakedBalance = Number(summonerUserInfo.stakedBalance)
+    // const stakedValue = Number(summonerUserInfo.stakedValue)
+
+    // for display purposes only //
+    const _stakedBalance = Number(summonerUserInfo.stakedBalance) * MULTIPLIER
+    // for display purposes only //
+    const _stakedValue = Number(summonerUserInfo.stakedValue) * MULTIPLIER
+
     const earnedAmount = Number(summonerUserInfo.pendingSoul)
     const earnedValue = Number(summonerUserInfo.pendingValue)
     const lpPrice = Number(summonerUserInfo.lpPrice)
     const withdrawFee = Number(summonerUserInfo.currentRate)
     const walletBalance = Number(summonerUserInfo.walletBalance)
-
-    const feeAmount = withdrawFee * stakedBalance / 100
-    const withdrawable = stakedBalance - feeAmount
-    const feeValue = feeAmount * lpPrice
+    
+    // const feeAmount = withdrawFee * stakedBalance / 100
+    // const withdrawable = stakedBalance - feeAmount
+    // const feeValue = feeAmount * lpPrice
+    
+    // for display purposes only //
+    const _walletBalance = Number(summonerUserInfo.walletBalance) * MULTIPLIER
+    // for display purposes only //
+    const _feeAmount = withdrawFee * _stakedBalance / 100
+    // for display purposes only //
+    const _withdrawable = _stakedBalance - _feeAmount
+    // for display purposes only //
+    const _feeValue = _feeAmount * lpPrice
+    // for display purposes only //
+    const _withdrawValue = Number(withdrawValue) * MULTIPLIER
 
     const hasBalance = Number(walletBalance) > 0
     const isActive = pairStatus == "active"
@@ -109,8 +134,8 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
     const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
 
-    const parsedDepositValue = tryParseAmount(depositValue, assetToken)
-    const parsedWithdrawValue = tryParseAmount(withdrawValue, assetToken)
+    // const parsedDepositValue = tryParseAmount(depositValue, assetToken)
+    // const parsedWithdrawValue = tryParseAmount(withdrawValue.toString(), assetToken)
 
     // COLOR //
     const buttonColor = getChainColor(chainId)
@@ -240,14 +265,14 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     }
 
     // // deposits: selected amount into the summoner
-    const handleDeposit = async (pid, anount) => {
+    const handleDeposit = async (pid, amount) => {
         let tx
         try {
-            tx = await SoulSummonerContract?.deposit(pid, Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
+            tx = await SoulSummonerContract?.deposit(pid, (Number(depositValue) / MULTIPLIER).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
         } catch (e) {
             const smallerValue = Number(depositValue) - 0.000001
-            tx = await SoulSummonerContract?.deposit(pid, Number(smallerValue).toFixed(assetDecimals).toBigNumber(assetDecimals))
+            tx = await SoulSummonerContract?.deposit(pid, (Number(smallerValue) / MULTIPLIER).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
             console.log(e)
         }
@@ -269,20 +294,19 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     //         await tx.wait()
     //         // alert(e.message)
     //         console.log(e)
-    //     }
+    //     }171
     // }
 
-    // handles withdrawal
+    // // withdraws: selected amount into the summoner
     const handleWithdraw = async (pid, amount) => {
+        let tx
         try {
-            const tx = await SoulSummonerContract?.withdraw(pid,
-                parsedWithdrawValue?.quotient.toString())
+            tx = await SoulSummonerContract?.withdraw(pid, (Number(withdrawValue) / MULTIPLIER).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
         } catch (e) {
-            const tx = await SoulSummonerContract?.withdraw(pid,
-                Number(withdrawValue).toFixed(assetDecimals).toBigNumber(assetDecimals)
-            )
-            // alert(e.message)
+            const smallerValue = Number(withdrawValue) - 0.000001
+            tx = await SoulSummonerContract?.withdraw(pid, (Number(smallerValue) / MULTIPLIER).toFixed(assetDecimals).toBigNumber(assetDecimals))
+            await tx.wait()
             console.log(e)
         }
     }
@@ -325,17 +349,17 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                             <HideOnMobile>
                                 <FarmItemBox>
                                     <FarmItem>
-                                        {Number(APR).toString() === '0.00' ? (
+                                        {Number(_APR).toString() === '0.00' ? (
                                             <Text padding="0" fontSize="1rem" color="#666">
                                                 0
                                             </Text>
                                         ) : (
                                             <Text padding="0" fontSize="1rem" color="#FFFFFF">
                                                 ${
-                                                    stakedValue == 0 ? 0
-                                                        : stakedValue.toString(2) == '0.00' ? '<0.00'
-                                                            : stakedValue < 1 && stakedValue.toString(4) ? stakedValue.toFixed(4)
-                                                                : stakedValue > 0 ? stakedValue.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                                                    _stakedValue == 0 ? 0
+                                                        : _stakedValue.toString(2) == '0.00' ? '<0.00'
+                                                            : _stakedValue < 1 && _stakedValue.toString(4) ? _stakedValue.toFixed(4)
+                                                                : _stakedValue > 0 ? _stakedValue.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                                                                     : 0
                                                 }
                                             </Text>
@@ -348,13 +372,13 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                             <HideOnSmall>
                                 <FarmItemBox>
                                     <FarmItem>
-                                        {stakedValue.toFixed(0).toString() === '0' ? (
+                                        {_stakedValue.toFixed(0).toString() === '0' ? (
                                             <Text padding="0" fontSize="1rem" color="#666">
                                                 0%
                                             </Text>
                                         ) : (
                                             <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                                {(stakedValue / Number(liquidity) * 100).toFixed(0)}%
+                                                {(_stakedValue / Number(_liquidity) * 100).toFixed(0)}%
                                             </Text>
                                         )}
                                     </FarmItem>
@@ -364,13 +388,13 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                             {/* % APR */}
                             <FarmItemBox>
                                 <FarmItem>
-                                    {Number(APR).toString() === '0.00' ? (
+                                    {Number(_APR).toString() === '0.00' ? (
                                         <Text padding="0" fontSize="1rem" color="#666">
                                             0
                                         </Text>
                                     ) : (
                                         <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                            {Number(APR).toFixed()}%
+                                            {Number(_APR).toFixed()}%
                                         </Text>
                                     )}
                                 </FarmItem>
@@ -402,13 +426,13 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 )}
                             </FarmItemBox>
                             <FarmItemBox className="flex" >
-                                {Number(liquidity) === 0 ? (
+                                {Number(_liquidity) === 0 ? (
                                     <Text padding="0" fontSize="1rem" color="#666">
                                         $0
                                     </Text>
                                 ) : (
                                     <Text padding="0" fontSize="1rem">
-                                        ${Number(liquidity)
+                                        ${Number(_liquidity)
                                             .toFixed(0)
                                             .toString()
                                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
@@ -513,24 +537,24 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
                                     }>
 
-                                    {Number(stakedBalance) > 0 && (
+                                    {Number(_stakedBalance) > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
                                                 {i18n._(t`Staked Balance`)}
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(stakedBalance, false, true)} {farm.lpSymbol}
+                                                {formatNumber(_stakedBalance, false, true)} {isUnderworldPair ? token0Symbol : farm.lpSymbol}
                                             </Typography>
                                         </div>
                                     )}
 
-                                    {stakedValue > 0 && (
+                                    {_stakedValue > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
                                                 {i18n._(t`Staked (USD)`)}
                                             </Typography>
                                             <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(stakedValue, true, true)}
+                                                {formatNumber(_stakedValue, true, true)}
                                             </Typography>
                                         </div>
                                     )}
@@ -544,7 +568,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         {i18n._(t`Claimable Rewards`)}
                                         </Typography>
                                         <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                            {earnedAmount.toFixed(2)} SOUL
+                                            {formatNumber(earnedAmount)} SOUL
                                         </Typography>
                                     </div>
                                     <div className="flex justify-between">
@@ -574,7 +598,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
                                         <div className="text-white">
                                             <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                                                <span> {formatNumber(Number(APR), false, true)}% APR</span>
+                                                <span> {formatNumber(Number(_APR), false, true)}% APR</span>
                                             </div>
                                         </div>
                                     </div>
@@ -588,9 +612,9 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     <FarmInputPanel
                                         pid={farm.pid}
                                         onUserInput={(value) => setDepositValue(value)}
-                                        onMax={() => setDepositValue(walletBalance.toString())}
+                                        onMax={() => setDepositValue(_walletBalance.toString())}
                                         value={depositValue}
-                                        balance={walletBalance.toString()}
+                                        balance={_walletBalance.toString()}
                                         id={pid}
                                     />
                                 }
@@ -615,7 +639,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         color={buttonTextColor}
                                         margin=".5rem 0 0rem 0"
                                         onClick={() =>
-                                            handleDeposit(pid, depositValue)
+                                            handleDeposit(pid, Number(depositValue) / MULTIPLIER)
                                         }
                                     >
                                         <div className="flex text-lg gap-2">
@@ -771,46 +795,46 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                                 : "hover:border-dark-600",
                                         "w-full space-y-1")}>
 
-                                    {Number(stakedBalance) > 0 && (
+                                    {Number(_stakedBalance) > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
                                                 {i18n._(t`Staked Balance`)}
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(stakedBalance, false, true)} {farm.lpSymbol}
+                                                {formatNumber(_stakedBalance, false, true)} {isUnderworldPair ? token0Symbol : farm.lpSymbol}
                                             </Typography>
                                         </div>
                                     )}
 
-                                    {stakedValue > 0 && (
+                                    {_stakedValue > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                                {i18n._(t`Balance (USD)`)}
+                                                {i18n._(t`Value (USD)`)}
                                             </Typography>
                                             <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(stakedValue, true, true)}
+                                                {formatNumber(_stakedValue, true, true)}
                                             </Typography>
                                         </div>
                                     )}
-                                    {Number(stakedBalance) > 0 && (
+                                    {Number(_stakedBalance) > 0 && (
                                         <div className="h-px my-6 bg-dark-1000" />
                                     )}
 
                                     <div className="flex justify-between">
                                         <Typography className="text-white" fontFamily={'medium'}>
-                                            {i18n._(t`Maximum Fee`)}
+                                            {i18n._(t`Fee Amount`)}
                                         </Typography>
                                         <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                            {formatNumber(Number(stakedBalance) - withdrawable, false, true)} {farm.lpSymbol}
+                                            {formatNumber(Number(_stakedBalance) - _withdrawable, false, true)} {isUnderworldPair ? token0Symbol : farm.lpSymbol}
                                         </Typography>
                                     </div>
 
                                     <div className="flex justify-between">
                                         <Typography className="text-white" fontFamily={'medium'}>
-                                            {i18n._(t`Fee (USD)`)}
+                                            {i18n._(t`Value (USD)`)}
                                         </Typography>
                                         <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
-                                            {formatNumber(Number(feeValue), true, true)}
+                                            {formatNumber(Number(_feeValue), true, true)}
                                         </Typography>
                                     </div>
 
@@ -848,9 +872,9 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 <FarmInputPanel
                                     pid={farm.pid}
                                     onUserInput={(value) => setWithdrawValue(value)}
-                                    onMax={() => setWithdrawValue(stakedBalance.toString())}
+                                    onMax={() => setWithdrawValue(_stakedBalance.toString())}
                                     value={withdrawValue}
-                                    balance={stakedBalance.toString()}
+                                    balance={_stakedBalance.toString()}
                                     id={pid}
                                 />
                                 <Wrap padding="0" margin="0" display="flex">
@@ -862,7 +886,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         margin=".5rem 0 0rem 0"
                                         onClick={() => setShowConfirmation(true)}
                                     >
-                                        {i18n._(t`WITHDRAW`)} {farm.lpSymbol}
+                                        {i18n._(t`WITHDRAW`)} {isUnderworldPair ? token0Symbol : farm.lpSymbol}
                                     </SubmitButton>
 
                                 </Wrap>
@@ -992,9 +1016,10 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                             <div className="text-xl mt-4 mb-4 text-center border p-1.5 border-dark-600">
                                 {i18n._(t`Estimated Fee Outcomes`)}
                             </div>
-                            • <b>{i18n._(t`Current Rate`)}</b>: {Number(withdrawFee).toFixed(0)}% <br />
-                            • <b>{i18n._(t`Fee Amount`)}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {farm.lpSymbol}<br />
-                            • <b>{i18n._(t`Fee Value`)}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) * Number(lpPrice) / 100, true, true)}
+                            • <b>{i18n._(t`Withdrawal Value`)}</b>: {formatNumber(Number(_withdrawValue) * Number(lpPrice), true, true)} <br />
+                            • <b>{i18n._(t`Fee Rate`)}</b>: {Number(withdrawFee).toFixed(0)}% <br />
+                            • <b>{i18n._(t`Fee Amount`)}</b>: {formatNumber(Number(withdrawFee) * Number(_withdrawValue) / 100, false, true)} {isUnderworldPair ? token0Symbol : farm.lpSymbol}<br />
+                            • <b>{i18n._(t`Fee Value`)}</b>: {formatNumber(Number(withdrawFee) * Number(_withdrawValue) * Number(lpPrice) / 100, true, true)}
 
                             <div className="mt-6 text-center">
                                 <i><b>{i18n._(t`Please do not rely on our estimations`)}</b></i>.
@@ -1012,7 +1037,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                             height="2.5rem"
                             color="purple"
                             onClick={() =>
-                                handleWithdraw(pid, withdrawValue)
+                                handleWithdraw(pid, Number(withdrawValue) / MULTIPLIER)
                             }
                         >
                             {i18n._(t`I UNDERSTAND THESE TERMS`)}
