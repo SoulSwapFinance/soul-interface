@@ -84,8 +84,8 @@ export default function Withdraw({ pair }: any): JSX.Element {
       // Number(minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)) == 0,
       pair.userAssetFraction.sub(pair.currentUserLentAmount.value).lte(0),
       i18n._(
-        t`There isn't enough liquidity available at the moment to withdraw significant quantities. Your options are as follows: (1) Withdraw small amounts, (2) earn SOUL by bonding your reciept tokens, or (3) try later.
-        If you decide (3) try later, while you wait, feel free to deposit into our farms to earn SOUL while you wait.`
+        t`There isn't enough available to withdraw large amounts. Your options are as follows: (1) withdraw small amounts, (2) bond your supplied tokens, or (3) try later.
+        If you (3) try later, you may farm SOUL while you wait.`
       ),
       true
     )
