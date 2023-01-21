@@ -66,9 +66,9 @@ export const LEND_MULTIPLIER = (chainId: ChainId, lentSymbol: string) => {
   // let lentSymbol = lentAsset.wrapped.symbol
   let multiplier = 1
   if (chainId == ChainId.FANTOM) {
-    lentSymbol == 'FTM' || lentSymbol == 'WFTM'
-      ? multiplier = 4.5
-        : lentSymbol == 'DAI' || lentSymbol == 'BNB'
+    // lentSymbol == 'FTM' || lentSymbol == 'WFTM'
+    //   ? multiplier = 4.5 :
+       lentSymbol == 'DAI' || lentSymbol == 'BNB' || lentSymbol == 'FTM' || lentSymbol == 'WFTM'
           ? multiplier = 4
             : lentSymbol == 'ETH' || lentSymbol == 'WETH'
               ? multiplier = 2
