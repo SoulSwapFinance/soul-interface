@@ -20,7 +20,7 @@ import React, { useMemo } from 'react'
 import { ExternalLink as LinkIcon } from 'react-feather'
 import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
-import { getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 import Typography from 'components/Typography'
 import { TridentHeader } from 'layouts/Trident'
 import { computePairAddress } from 'sdk/functions/computePairAddress'
@@ -64,7 +64,7 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
 
   // const id = pairAddress ?? (router.query.id as string).toLowerCase()
 
-  const [isCopied, setCopied] = useCopyClipboard()
+  // const [isCopied, setCopied] = useCopyClipboard()
 
   const block1d = useOneDayBlock({ chainId, shouldFetch: !!chainId })
   const block2d = useTwoDayBlock({ chainId, shouldFetch: !!chainId })
@@ -135,7 +135,7 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
         : `${token0Address}/${token1Address}`
 
   // for info cards
-  const liquidityUSDChange = pair?.reserveUSD / pair1d?.reserveUSD
+  // const liquidityUSDChange = pair?.reserveUSD / pair1d?.reserveUSD
 
   const volumeUSD1d = pair?.volumeUSD - pair1d?.volumeUSD
   const volumeUSD2d = pair1d?.volumeUSD - pair2d?.volumeUSD
@@ -184,19 +184,16 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
               {token0Symbol}-{token1Symbol}
             </Typography>
           </div>
-          <Typography variant="sm" weight={400}>
+          {/* <Typography variant="sm" weight={400}>
             Dive deeper in the analytics of the {token0Symbol}-{token1Symbol} liquidity pool.
-          </Typography>
+          </Typography> */}
         </div>
       </TridentHeader>
       <div className="px-4 pt-4 space-y-4 lg:px-14">
-        <div className="relative h-12">
-          <div className="absolute w-full h-full">
-            <div className="h-1/3" />
-            <div className="opacity-50 w-[210px] h-1/3 bg-gradient-to-r from-blue to-purple" />
-          </div>
-          <div className="absolute text-3xl font-bold text-high-emphesis">Pool Overview</div>
-        </div>
+      <div className={`border my-2 border-[${getChainColor(chainId)}]`} />
+        <div className={`flex text-2xl justify-center font-bold text-high-emphesis`}>{token0Symbol}-{token1Symbol} Overview</div>
+        <div className={`border my-2 border-[${getChainColor(chainId)}]`} />
+
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <ChartCard
             header="Liquidity"
@@ -241,20 +238,19 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
             </div>
           ))}
         </div>
+        <div className={`border my-2 border-[${getChainColor(chainId)}]`} />
+        <div className={`flex text-2xl justify-center font-bold text-high-emphesis`}>Activity Today</div>
+        <div className={`border my-2 border-[${getChainColor(chainId)}]`} />
         <div className="flex flex-row justify-between flex-grow space-x-4 overflow-x-auto">
-          <InfoCard text="Liquidity (24h)" number={pair?.reserveUSD} percent={liquidityUSDChange} />
-          <InfoCard text="Volume (24h)" number={volumeUSD1d} percent={volumeUSD1dChange} />
-          <InfoCard text="Fees (24h)" number={volumeUSD1d * 0.003} percent={volumeUSD1dChange} />
+
+          {/* <InfoCard text="Liquidity" number={pair?.reserveUSD} percent={liquidityUSDChange} /> */}
+          <InfoCard text="Volume" number={volumeUSD1d} percent={volumeUSD1dChange} />
+          <InfoCard text="Fees" number={volumeUSD1d * 0.003} percent={volumeUSD1dChange} />
         </div>
         <div className="flex flex-row justify-between flex-grow space-x-4 overflow-x-auto">
-          <InfoCard text="Tx (24h)" number={!isNaN(tx1d) ? tx1d : ''} numberType="text" percent={tx1dChange} />
-          <InfoCard text="Avg. Trade (24h)" number={avgTrade1d} percent={avgTrade1dChange} />
-          <InfoCard
-            text="Utilisation (24h)"
-            number={utilisation1d}
-            numberType="percent"
-            percent={utilisation1dChange}
-          />
+          {/* <InfoCard text="Transactions" number={!isNaN(tx1d) ? tx1d : ''} numberType="text" percent={tx1dChange} /> */}
+          <InfoCard text="Average" number={avgTrade1d} percent={avgTrade1dChange} />
+          <InfoCard text="Usage" number={utilisation1d} numberType="percent" percent={utilisation1dChange} />
         </div>
         {/* <div className="text-3xl font-bold text-high-emphesis">Information</div> */}
         <NavLink
@@ -270,11 +266,12 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
         </NavLink>
         <div>
           <div className="px-4 text-sm leading-48px text-high-emphesis">
-            <table className="w-full table-fixed">
+            <table className="w-full table-fixed text-center">
               <thead className="border-b border-gray-900">
                 <tr>
                   <td>
-                    {token0Symbol}-{token1Symbol} Address
+                    {/* {token0Symbol}-{token1Symbol}  */}
+                    Pair Address
                   </td>
                   <td>{token0Symbol} Address</td>
                   <td>{token1Symbol} Address</td>

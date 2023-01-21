@@ -365,7 +365,6 @@ const Swap = () => {
 
   return (
     <>
-      {/* <NewFeature chainId={chainId} /> */}
       <ConfirmSwapModal
         isOpen={showConfirm}
         trade={trade}

@@ -203,7 +203,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           </NavLink>
         }
 
-        {featureEnabled(Feature.ANALYTICS, chainId) &&
+        {/* {featureEnabled(Feature.ANALYTICS, chainId) &&
           <NavLink
             className={classNames(
               chartStyle
@@ -224,7 +224,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             />
           </div>
           </NavLink>
-        }
+        } */}
 
       </div>
       <div className={'flex flex-cols-2 sm:gap-8 gap-6 mr-4 justify-end rounded'}>
