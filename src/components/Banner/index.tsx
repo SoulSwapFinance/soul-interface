@@ -130,13 +130,6 @@ export const BetaFeature: FC = () => (
         </p>
       </div>
       <div className="absolute inset-y-0 right-0 flex items-start pt-1 pr-1 sm:pt-1 sm:pr-2 sm:items-start">
-        {/*
-        <button type="button" className="flex p-2 focus:outline-none">
-           <span className="sr-only">Dismiss</span> 
-           */}
-
-        {/* <XCircleIcon className="w-6 h-6 text-white" aria-hidden="true" /> */}
-        {/* </button> */}
       </div>
     </div>
   </div>
@@ -181,6 +174,30 @@ export const BondsBanner: FC = () => (
               <span className="justify-center">
                 {' '}
                 Introducing: Soul Bonds ↗
+              </span>
+            </Button>
+          </ExternalLink>
+        </p>
+      </div>
+      <div className="absolute inset-y-0 right-0 flex items-start pt-1 pr-1 sm:pt-1 sm:pr-2 sm:items-start">
+      </div>
+    </div>
+  </div>
+)
+
+export const VoteBanner: FC = () => (
+  <div className="relative items-center w-full">
+    <div className="w-full">
+      <div className="text-center">
+        <p className="font-medium text-center text-white">
+          <ExternalLink
+            href="https://enchant.soulswap.finance/#/proposal/0xce59b7c7486a3f70709c254df6c53730a7ebc930c7b802757d9ca3e435dba396" target="_blank" rel="noreferrer"
+            className="font-bold text-white text-lg"
+          >
+            <Button variant="filled" color="purple" size="sm">
+              <span className="justify-center font-bold">
+                {' '}
+                Vote Today: Reduce Emissions ↗
               </span>
             </Button>
           </ExternalLink>
