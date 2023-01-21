@@ -39,13 +39,7 @@ import { Feature } from 'enums/Feature'
 import { useRouter } from 'next/router'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import Pair from 'pages/analytics/pairs/[id]'
-// import Limits from './limit/[[...tokens]]'
-
-// import { Toggle } from 'components/Toggle'
-// import Aggregator, { startChain } from './aggregator'
-// import useGetPrice from 'features/aggregator/queries/useGetPrice'
-// import { currencyId } from 'functions/currency'
-// import Portfolio from 'pages/portfolio'
+import { VoteBanner } from 'components/Banner'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -58,9 +52,7 @@ const Swap = () => {
     useCurrency(loadedUrlParams?.inputCurrencyId),
     useCurrency(loadedUrlParams?.outputCurrencyId),
   ]
-  // const [useAggregator, setUseAggregator] = useState(false)
-  // const [useLimit, setUseLimit] = useState(false)
-  // const [showOrders, setShowOrders] = useState(false)
+
   const DEFAULT_CURRENCY_A = NATIVE[chainId].symbol
   const DEFAULT_CURRENCY_B = [ChainId.ETHEREUM, ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId) ? SOUL_ADDRESS[chainId] : USDC_ADDRESS[chainId]
   const router = useRouter()
@@ -68,32 +60,6 @@ const Swap = () => {
   const [currencyIdA, currencyIdB] = (tokens as string[]) || [DEFAULT_CURRENCY_A, DEFAULT_CURRENCY_B]
   const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
 
-  // const handleCurrencyASelect = useCallback(
-  //   (currencyA: Currency) => {
-  //     const newCurrencyIdA = currencyId(currencyA)
-  //     if (newCurrencyIdA === currencyIdB) {
-  //       router.push(`/exchange/swap?inputCurrency=${currencyIdB}&outputCurrency=${currencyIdA}`)
-  //     } else {
-  //       router.push(`/exchange/swap?inputCurrency=${newCurrencyIdA}&outputCurrency=${currencyIdB}`)
-  //     }
-  //   },
-  //   [currencyIdB, router, currencyIdA]
-  // )
-  // const handleCurrencyBSelect = useCallback(
-  //   (currencyB: Currency) => {
-  //     const newCurrencyIdB = currencyId(currencyB)
-  //     if (currencyIdA === newCurrencyIdB) {
-  //       if (currencyIdB) {
-  //         router.push(`/exchange/swap?inputCurrency=${currencyIdB}&outputCurrency=${newCurrencyIdB}`)
-  //       } else {
-  //         router.push(`/exchange/swap?inputCurrency=${NATIVE[chainId].symbol}&outputCurrency=${newCurrencyIdB}`)
-  //       }
-  //     } else {
-  //       router.push(`/exchange/swap?inputCurrency=${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}&outputCurrency=${newCurrencyIdB}`)
-  //     }
-  //   },
-  //   [currencyIdA, router, currencyIdB]
-  // )
   const [dismissTokenWarning, setDismissTokenWarning] = useState<boolean>(false)
   const urlLoadedTokens: Token[] = useMemo(
     () => [loadedInputCurrency, loadedOutputCurrency]?.filter((c): c is Token => c?.isToken ?? false) ?? [],
@@ -105,20 +71,18 @@ const Swap = () => {
 
   const [showChart, setShowChart] = useState(true)
   const [showPortfolio, setShowPortfolio] = useState(false)
-  // const useSwap = !useAggregator && !useLimit
-  // const [showAggregator, setShowAggregator] = useState(false)
   const inputWrapped = currencies[Field.INPUT] == WNATIVE[chainId]
   const inputNative = currencies[Field.INPUT] == NATIVE[chainId]
   const outputWrapped = currencies[Field.OUTPUT] == WNATIVE[chainId]
   const outputNative = currencies[Field.OUTPUT] == NATIVE[chainId]
 
   const isWrapped =
-  // ONE IS NATIVE
-  (inputNative || outputNative)
-  && 
-  // ANOTHER IS WRAPPED_NATIVE
-  (inputWrapped || outputWrapped)
-  
+    // ONE IS NATIVE
+    (inputNative || outputNative)
+    &&
+    // ANOTHER IS WRAPPED_NATIVE
+    (inputWrapped || outputWrapped)
+
   const inputCurrency = inputNative ? WNATIVE[chainId] : currencies[Field.INPUT]
   const outputCurrency = outputNative ? WNATIVE[chainId] : currencies[Field.OUTPUT]
   // dismiss warning if all imported tokens are in active lists
@@ -335,8 +299,6 @@ const Swap = () => {
     (inputCurrency) => {
       setApprovalSubmitted(false) // reset 2 step UI for approvals
       onCurrencySelection(Field.INPUT, inputCurrency)
-      // handleCurrencyASelect(inputCurrency)
-      // handleInputTokenSelect(inputCurrency)
     },
     [onCurrencySelection]
   )
@@ -344,8 +306,6 @@ const Swap = () => {
   const handleOutputSelect = useCallback(
     (outputCurrency) => {
       onCurrencySelection(Field.OUTPUT, outputCurrency)
-      // handleCurrencyBSelect(outputCurrency)
-      // handleOutputTokenSelect(outputCurrency)
     },
     [onCurrencySelection]
   )
@@ -387,56 +347,6 @@ const Swap = () => {
     }, []
   )
 
-  const handleBridgeSwap = useCallback(
-    () => {
-      router.push(`/bridge`)
-    }, []
-  )
-
-  // const handleAnalyticsRoute = useCallback(
-  //   () => {
-  //     let pairAddress = computePairAddress({
-  //     factoryAddress: FACTORY_ADDRESS[chainId],
-  //     tokenA: currencyA.isToken ? currencyA : currencyA.wrapped,
-  //     tokenB: currencyB.isToken ? currencyB : currencyB.wrapped
-  //   })?.toLowerCase() // pairAddress
-  //     router.push(`/exchange/analytics/pairs/${pairAddress}`)
-  //   }, []
-  // )
-
-  // AGGREGATOR CONSTANTS [START] //
-  // const DEFAULT_OUTPUT = chainId == ChainId.AVALANCHE ? USDC[chainId] : DAI[chainId]
-  // const [selectedChain, setSelectedChain] = useState(startChain(chainId))
-  // const [fromToken, setFromToken] = useState<Currency>(currencyA)
-  // const [toToken, setToToken] = useState<Currency>(currencyB)
-  // const [inputAmount, setInputAmount] = useState('10')
-
-  // const handleInputTokenSelect = useCallback(
-  //   (inputCurrency: Currency) => {
-  //     setFromToken(inputCurrency)
-  //   },
-  //   [setFromToken]
-  // )
-
-  // const handleOutputTokenSelect = useCallback(
-  //   (outputCurrency: Currency) => {
-  //     setToToken(outputCurrency)
-  //   },
-  //   [setToToken]
-  // )
-
-  // const handleShowCharts = useCallback(
-  //   (enabled: boolean) => {
-  //       setShowChart(enabled)
-  //   }, [setShowChart]
-  // )
-
-  // const { data: tokenPrices } = useGetPrice({
-  //   chain: selectedChain.value,
-  //   toToken: toToken?.wrapped.address,
-  //   fromToken: fromToken?.wrapped.address
-  // });
-
   // AGGREGATOR CONSTANTS [END] //
 
   const handleTypeInput = useCallback(
@@ -475,6 +385,7 @@ const Swap = () => {
         tokens={importTokensNotInDefault}
         onConfirm={handleConfirmTokenWarning}
       />
+      <VoteBanner />
       {![ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <div className="flex flex-col gap-3 mt-12 justify-center">
           <SwapHeader inputCurrency={currencyA} outputCurrency={currencyB} />
@@ -494,81 +405,81 @@ const Swap = () => {
       {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <SwapLayoutCard>
           {/* {!useLimit && */}
-            <><SwapDropdown inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
-              {/* {useSwap && */}
-                <SwapAssetPanel
-                  spendFromWallet={true}
-                  chainId={chainId}
-                  header={(props) => (
-                    <SwapAssetPanel.Header
-                      {...props}
-                      label={
-                        independentField === Field.OUTPUT && !showWrap 
-                          ? i18n._(t`Swap from:`)
-                          : i18n._(t`Swap from:`)
-                      }
-                    />
-                  )}
-                  currency={currencies[Field.INPUT]}
-                  value={formattedAmounts[Field.INPUT]}
-                  onChange={handleTypeInput}
-                  onSelect={handleInputSelect}
-                />
-              {/* } */}
-            </>
-          {/* } */}
-          {/* {useSwap && */}
-            <div className="flex -mt-6 -mb-6 z-0 justify-between">
-              <Button
-                size={'xs'}
-                className={classNames(`mx-[42%] rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
-                onClick={() =>
-                  handleSwitchTokens(currencies?.INPUT, currencies?.OUTPUT)
-                }                >
-                <Image
-                  alt={"arrow rounded square"}
-                  width={'14px'}
-                  height={'14px'}
-                  className={`rounded rounded-xl`}
-                  src={ArrowRoundedSquare}
-                />
-              </Button>
-              <Button
-                size={'xs'}
-                className={classNames(`rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
-                onClick={handleLimitSwap}
-              >
-                <Image
-                  alt={"Chevron Up Down Icon"}
-                  width={'14px'}
-                  height={'14px'}
-                  className={`rounded rounded-xl`}
-                  src={ChevronUpDown}
-                />
-              </Button>
-            </div>
-          {/* } */}
-
-          {/* TO ASSET PANEL */}
-          {/* {useSwap && */}
+          <><SwapDropdown inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+            {/* {useSwap && */}
             <SwapAssetPanel
               spendFromWallet={true}
               chainId={chainId}
               header={(props) => (
                 <SwapAssetPanel.Header
                   {...props}
-                  label={independentField === Field.INPUT && !showWrap ? i18n._(t`Swap to:`) : i18n._(t`Swap to:`)}
+                  label={
+                    independentField === Field.OUTPUT && !showWrap
+                      ? i18n._(t`Swap from:`)
+                      : i18n._(t`Swap from:`)
+                  }
                 />
               )}
-              currency={currencies[Field.OUTPUT]}
-              value={formattedAmounts[Field.OUTPUT]}
-              onChange={handleTypeOutput}
-              onSelect={
-                handleOutputSelect
-              }
-              priceImpact={priceImpact}
-              priceImpactCss={priceImpactCss}
+              currency={currencies[Field.INPUT]}
+              value={formattedAmounts[Field.INPUT]}
+              onChange={handleTypeInput}
+              onSelect={handleInputSelect}
             />
+            {/* } */}
+          </>
+          {/* } */}
+          {/* {useSwap && */}
+          <div className="flex -mt-6 -mb-6 z-0 justify-between">
+            <Button
+              size={'xs'}
+              className={classNames(`mx-[42%] rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
+              onClick={() =>
+                handleSwitchTokens(currencies?.INPUT, currencies?.OUTPUT)
+              }                >
+              <Image
+                alt={"arrow rounded square"}
+                width={'14px'}
+                height={'14px'}
+                className={`rounded rounded-xl`}
+                src={ArrowRoundedSquare}
+              />
+            </Button>
+            <Button
+              size={'xs'}
+              className={classNames(`rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
+              onClick={handleLimitSwap}
+            >
+              <Image
+                alt={"Chevron Up Down Icon"}
+                width={'14px'}
+                height={'14px'}
+                className={`rounded rounded-xl`}
+                src={ChevronUpDown}
+              />
+            </Button>
+          </div>
+          {/* } */}
+
+          {/* TO ASSET PANEL */}
+          {/* {useSwap && */}
+          <SwapAssetPanel
+            spendFromWallet={true}
+            chainId={chainId}
+            header={(props) => (
+              <SwapAssetPanel.Header
+                {...props}
+                label={independentField === Field.INPUT && !showWrap ? i18n._(t`Swap to:`) : i18n._(t`Swap to:`)}
+              />
+            )}
+            currency={currencies[Field.OUTPUT]}
+            value={formattedAmounts[Field.OUTPUT]}
+            onChange={handleTypeOutput}
+            onSelect={
+              handleOutputSelect
+            }
+            priceImpact={priceImpact}
+            priceImpactCss={priceImpactCss}
+          />
           {/* } */}
           {Boolean(trade) && // useSwap &&
             (
@@ -580,7 +491,7 @@ const Swap = () => {
               />
             )}
           {trade && routeNotFound && userHasSpecifiedInputOutput // && useSwap 
-          &&
+            &&
             (
               <Typography variant="xs" className="text-center py-2">
                 {i18n._(t`Insufficient liquidity for this trade.`)}{' '}
@@ -589,102 +500,102 @@ const Swap = () => {
             )}
 
           {swapIsUnsupported // && useSwap
-          ? (
-            <Button
-              color="red"
-              disabled
-              className="rounded-2xl w-full md:rounded">
-              {i18n._(t`Unsupported Asset`)}
-            </Button>
-          ) : !account // && useSwap 
             ? (
-            <Web3Connect color="purple" variant="filled" className="rounded-2xl md:rounded" />
-          ) : showWrap // && useSwap 
-            ? (
-            <Button
-              color={`${getChainColorCode(chainId)}`}
-              disabled={Boolean(wrapInputError)}
-              onClick={onWrap}
-              className="rounded-2xl w-full md:rounded"
-            >
-              {wrapInputError ??
-                (wrapType === WrapType.WRAP
-                  ? i18n._(t`Wrap`)
-                  : wrapType === WrapType.UNWRAP
-                    ? i18n._(t`Unwrap`)
-                    : null)}
-            </Button>
-          ) : showApproveFlow // && useSwap
-            ? (
-            <div>
-              {approvalState !== ApprovalState.APPROVED &&
-                (
+              <Button
+                color="red"
+                disabled
+                className="rounded-2xl w-full md:rounded">
+                {i18n._(t`Unsupported Asset`)}
+              </Button>
+            ) : !account // && useSwap 
+              ? (
+                <Web3Connect color="purple" variant="filled" className="rounded-2xl md:rounded" />
+              ) : showWrap // && useSwap 
+                ? (
                   <Button
                     color={`${getChainColorCode(chainId)}`}
-                    loading={approvalState === ApprovalState.PENDING}
-                    onClick={handleApprove}
-                    disabled={approvalState !== ApprovalState.NOT_APPROVED || approvalSubmitted}
+                    disabled={Boolean(wrapInputError)}
+                    onClick={onWrap}
                     className="rounded-2xl w-full md:rounded"
                   >
-                    {i18n._(t`Approve ${currencies[Field.INPUT]?.symbol}`)}
+                    {wrapInputError ??
+                      (wrapType === WrapType.WRAP
+                        ? i18n._(t`Wrap`)
+                        : wrapType === WrapType.UNWRAP
+                          ? i18n._(t`Unwrap`)
+                          : null)}
                   </Button>
-                )}
-              {approvalState === ApprovalState.APPROVED
-                // && useSwap 
-                &&
-                (
-                  <Button
-                    color={isValid && priceImpactSeverity > 2 ? 'red' : `${getChainColorCode(chainId)}`
-                    }
-                    onClick={() => {
-                      setSwapState({
-                        tradeToConfirm: trade,
-                        attemptingTxn: false,
-                        swapErrorMessage: undefined,
-                        showConfirm: true,
-                        txHash: undefined,
-                      })
-                    }
-                    }
-                    id="swap-button"
-                    disabled={
-                      !isValid || approvalState !== ApprovalState.APPROVED || (priceImpactSeverity > 3)
-                    }
-                    className="rounded-2xl w-full md:rounded"
-                  >
-                    {priceImpactSeverity > 3
-                      ? i18n._(t`Price Impact High`)
-                      : priceImpactSeverity > 2
-                        ? i18n._(t`Swap Anyway`)
-                        : i18n._(t`Swap`)}
-                  </Button>
-                )}
-            </div>
-          ) : (
-            // useSwap &&
-            <Button
-              color={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'red' : `${getChainColorCode(chainId)}`}
-              onClick={() => {
-                setSwapState({
-                  tradeToConfirm: trade,
-                  attemptingTxn: false,
-                  swapErrorMessage: undefined,
-                  showConfirm: true,
-                  txHash: undefined,
-                })
-              }
-              }
-              id="swap-button"
-              disabled={!isValid || (priceImpactSeverity > 3) || !!swapCallbackError}
-              className={classNames(isValid && priceImpactSeverity > 2 ? 'hidden' : "rounded-2xl w-full md:rounded")}
-            >
-              {swapInputError
-                ? swapInputError
-                : priceImpactSeverity > 2
-                  ? i18n._(t`Swap Anyway`)
-                  : i18n._(t`Swap`)}
-            </Button>
-          )}
+                ) : showApproveFlow // && useSwap
+                  ? (
+                    <div>
+                      {approvalState !== ApprovalState.APPROVED &&
+                        (
+                          <Button
+                            color={`${getChainColorCode(chainId)}`}
+                            loading={approvalState === ApprovalState.PENDING}
+                            onClick={handleApprove}
+                            disabled={approvalState !== ApprovalState.NOT_APPROVED || approvalSubmitted}
+                            className="rounded-2xl w-full md:rounded"
+                          >
+                            {i18n._(t`Approve ${currencies[Field.INPUT]?.symbol}`)}
+                          </Button>
+                        )}
+                      {approvalState === ApprovalState.APPROVED
+                        // && useSwap 
+                        &&
+                        (
+                          <Button
+                            color={isValid && priceImpactSeverity > 2 ? 'red' : `${getChainColorCode(chainId)}`
+                            }
+                            onClick={() => {
+                              setSwapState({
+                                tradeToConfirm: trade,
+                                attemptingTxn: false,
+                                swapErrorMessage: undefined,
+                                showConfirm: true,
+                                txHash: undefined,
+                              })
+                            }
+                            }
+                            id="swap-button"
+                            disabled={
+                              !isValid || approvalState !== ApprovalState.APPROVED || (priceImpactSeverity > 3)
+                            }
+                            className="rounded-2xl w-full md:rounded"
+                          >
+                            {priceImpactSeverity > 3
+                              ? i18n._(t`Price Impact High`)
+                              : priceImpactSeverity > 2
+                                ? i18n._(t`Swap Anyway`)
+                                : i18n._(t`Swap`)}
+                          </Button>
+                        )}
+                    </div>
+                  ) : (
+                    // useSwap &&
+                    <Button
+                      color={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'red' : `${getChainColorCode(chainId)}`}
+                      onClick={() => {
+                        setSwapState({
+                          tradeToConfirm: trade,
+                          attemptingTxn: false,
+                          swapErrorMessage: undefined,
+                          showConfirm: true,
+                          txHash: undefined,
+                        })
+                      }
+                      }
+                      id="swap-button"
+                      disabled={!isValid || (priceImpactSeverity > 3) || !!swapCallbackError}
+                      className={classNames(isValid && priceImpactSeverity > 2 ? 'hidden' : "rounded-2xl w-full md:rounded")}
+                    >
+                      {swapInputError
+                        ? swapInputError
+                        : priceImpactSeverity > 2
+                          ? i18n._(t`Swap Anyway`)
+                          : i18n._(t`Swap`)}
+                    </Button>
+                  )}
 
           {
             // useSwap && 
@@ -750,9 +661,9 @@ const Swap = () => {
             </div> */}
             <div className={classNames(
               // !useLimit && !useAggregator ? 
-              `flex flex-cols-2 gap-3 text-white justify-end` 
+              `flex flex-cols-2 gap-3 text-white justify-end`
               // : 'hidden'
-              )}>
+            )}>
               {/* <Button
                 size={'xs'}
                 className={classNames(showChart ? `bg-${getChainColorCode(chainId)}` : ``,
@@ -791,22 +702,22 @@ const Swap = () => {
             </div>
           </div>
           <div className={`flex flex-cols-${showChart && showPortfolio ? `hidden` : `1`}`}>
-            {showChart && !showPortfolio && 
+            {showChart && !showPortfolio &&
               // useSwap && 
               [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
               <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
                 <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
                   {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
-                  { !isWrapped && <Pair
+                  {!isWrapped && <Pair
                     // isWrapped={isWrapped}
                     inputCurrency={inputCurrency}
                     outputCurrency={outputCurrency}
-                    />
+                  />
                   }
                 </div>
               </div>
             }
-            {showPortfolio && 
+            {showPortfolio &&
               // useSwap && 
               [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
               <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
