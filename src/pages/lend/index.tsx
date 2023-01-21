@@ -5,7 +5,7 @@ import Dots from 'components/Dots'
 import Image from 'components/Image'
 import QuestionHelper from 'components/QuestionHelper'
 import { Feature } from 'enums'
-import { useUnderworldPairAddresses, useUnderworldPairs } from 'features/lending/hooks'
+import { useUnderworldPairs } from 'features/lending/hooks'
 import ListHeaderWithSort from 'features/lending/components/ListHeaderWithSort'
 import MarketHeader from 'features/lending/components/MarketHeader'
 import { useUnderworldLendPositions } from 'features/portfolio/AssetBalances/underworld/hooks'
@@ -15,21 +15,22 @@ import { useInfiniteScroll } from 'hooks/useInfiniteScroll'
 import useSearchAndSort from 'hooks/useSearchAndSort'
 import Layout from 'layouts/Underworld'
 import Head from 'next/head'
-// import Link from 'next/link'
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { RecoilRoot } from 'recoil'
-// import { e10 } from 'functions/math'
 import { useUnderworldPairInfo, useUnderworldUserInfo } from 'hooks/useAPI'
-import { ChainId, UNDERWORLD_PAIRS } from 'sdk'
+import { ChainId, LEND_MULTIPLIER, Token, UNDERWORLD_PAIRS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 import NavLink from 'components/NavLink'
-// import { Button } from 'components/Button'
 import Typography from 'components/Typography'
 import { SubmitButton } from 'features/summoner/Styles'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { useUnderworldPairAPI } from 'hooks/useUnderworldAPI'
+import { classNames } from 'functions'
 
+// import Link from 'next/link'
+// import { e10 } from 'functions/math'
+// import { Button } from 'components/Button'
 export default function Lend() {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
@@ -37,7 +38,7 @@ export default function Lend() {
   // const addresses = useUnderworldPairAddresses()
   const addresses = UNDERWORLD_PAIRS[chainId]
   // console.log('Underworld Addresses', addresses)
-  
+
   const pairs = useUnderworldPairs(addresses)
 
   const positions = useUnderworldLendPositions(pairs)
@@ -72,8 +73,8 @@ export default function Lend() {
           content="Underworld is a lending and margin trading platform, built upon CoffinBox, which allows for anyone to create customized and gas-efficient markets for lending, borrowing, and collateralizing a variety of DeFi tokens, stable coins, and synthetic assets."
         />
       </Head>
-      <Card className="h-full bg-dark-900" header={<MarketHeader type="Lending" lists={[pairs, positions]} />}>
-        {positions.items && positions.items.length > 0 && (
+      <Card className="h-full bg-dark-900" header={<MarketHeader type="Underworld Markets" lists={[pairs, positions]} />}>
+        {/* {positions.items && positions.items.length > 0 && (
           <div className="pb-4">
             <div>
               <div className="grid grid-flow-col grid-cols-4 gap-4 px-2 pb-4 text-sm md:grid-cols-6 lg:grid-cols-7 text-secondary">
@@ -104,7 +105,7 @@ export default function Lend() {
                   direction="descending"
                 >
                   {i18n._(t`Action`)}
-                </ListHeaderWithSort> */}
+                </ListHeaderWithSort> //
                 <ListHeaderWithSort
                   className="justify-center"
                   sort={positions}
@@ -137,21 +138,21 @@ export default function Lend() {
               </div>
             </div>
           </div>
-        )}
+        )} */}
         <div>
           <div className="grid grid-flow-col grid-cols-4 gap-4 px-4 pb-4 text-sm sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 text-secondary">
-            <ListHeaderWithSort className="justify-center"sort={data} sortKey="search">
-              <span className="justify-center md:flex">{i18n._(t`Markets`)}</span> 
+            <ListHeaderWithSort className="justify-center" sort={data} sortKey="search">
+              <span className="justify-center md:flex">{i18n._(t`MARKET`)}</span>
             </ListHeaderWithSort>
             <ListHeaderWithSort className="hidden justify-center md:flex" sort={data} sortKey="asset.tokenInfo.symbol">
-              {i18n._(t`Lend`)}
+              {i18n._(t`SUPPLY`)}
             </ListHeaderWithSort>
             <ListHeaderWithSort className="hidden justify-center md:flex" sort={data} sortKey="collateral.tokenInfo.symbol">
-              {i18n._(t`Collateral`)}
+              {i18n._(t`COLLATERAL`)}
             </ListHeaderWithSort>
             <ListHeaderWithSort className="hidden justify-center lg:flex" sort={data} sortKey="oracle.name">
-              {i18n._(t`Oracle`)}
-              <QuestionHelper text={i18n._(t`On-chain oracle that tracks pricing for this pair.`)} />
+              {i18n._(t`ORACLE`)}
+              {/* <QuestionHelper text={i18n._(t`On-chain oracle that tracks pricing for this pair.`)} /> */}
             </ListHeaderWithSort>
             <ListHeaderWithSort
               className="justify-center"
@@ -159,7 +160,7 @@ export default function Lend() {
               sortKey="currentAllAssets.usdValue"
               direction="descending"
             >
-              {i18n._(t`Total`)}
+              {i18n._(t`TVL`)}
             </ListHeaderWithSort>
             <ListHeaderWithSort
               className="justify-center"
@@ -167,7 +168,7 @@ export default function Lend() {
               sortKey="currentSupplyAPR.valueWithStrategy"
               direction="descending"
             >
-              {i18n._(t`Interest`)}
+              {i18n._(t`APR`)}
             </ListHeaderWithSort>
             <ListHeaderWithSort
               className="justify-center sm:flex"
@@ -175,7 +176,7 @@ export default function Lend() {
               sortKey="currentUserBorrowAmount.usdValue"
               direction="descending"
             >
-              {i18n._(t`Action`)}
+              {i18n._(t`ACTION`)}
             </ListHeaderWithSort>
           </div>
 
@@ -207,176 +208,125 @@ const LendEntry = ({ pair, userPosition = false }) => {
   const { chainId } = useActiveWeb3React()
 
   const assetDecimals = Number(underworldPairInfo.assetDecimals)
-  const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
   const assetPrice = Number(underworldPairInfo.assetPrice)
-  const collateralPrice = Number(underworldPairInfo.collateralPrice)
-  const assetBalance = Number(underworldUserInfo.userAssetBalance) // 10**assetDecimals
-  const borrowedAmount = Number(underworldUserInfo.userBorrowPart) / 10**assetDecimals
-  const suppliedAmount = Number(underworldUserInfo.userBalance) / 10**assetDecimals
+  const suppliedAmount = Number(underworldUserInfo.userBalance) / 10 ** assetDecimals
+  const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
   const collateralAmount = Number(underworldUserInfo.userCollateralShare) / 10**collateralDecimals
-  const interestPerSecond = 1E18 / Number(underworldPairInfo.interestPerSecond)
-  // const APR = 86_600 * interestPerSecond * 365
   const _supplyAPR = Number(useUnderworldPairAPI(pair.address)[7]) // * 100 / 1E18)
-  const supplyAPR = chainId == ChainId.AVALANCHE ?               pair.currentSupplyAPR.stringWithStrategy :  _supplyAPR / 1E18 * 100
+  const supplyAPR = chainId == ChainId.AVALANCHE
+    ? pair.currentSupplyAPR.stringWithStrategy : _supplyAPR / 1E18 * 100
   const assetAddress = pair?.asset.tokenInfo.address
   const collateralAddress = pair?.collateral.tokenInfo.address
   const blockchain = chainId == ChainId.FANTOM ? 'fantom' : 'avalanche'
   const assetLogoURI = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${assetAddress}/logo.png`
   const collateralLogoURI = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${collateralAddress}/logo.png`
-
-  // const walletValue = assetBalance * assetPrice
-  // const assetLogoURI =underworldUserInfo.assetLogoURI
-  // const collateralLogoURI =underworldUserInfo.collateralLogoURI
-
-  const borrowedValue = borrowedAmount * assetPrice
-  const collateralValue = collateralAmount * collateralPrice
   const userDepositedValue = suppliedAmount * assetPrice
-  
-  // const LTV = (1 - (collateralValue - borrowedValue) / collateralValue) * 100
-  // const leeway = (75 - LTV) / 100
+  const assetToken = new Token(chainId, assetAddress, assetDecimals)
+  // const collateralPrice = Number(underworldPairInfo.collateralPrice)
+  // const assetBalance = Number(underworldUserInfo.userAssetBalance) // 10**assetDecimals
+  // const borrowedAmount = Number(underworldUserInfo.userBorrowPart) / 10**assetDecimals
+  // const interestPerSecond = 1E18 / Number(underworldPairInfo.interestPerSecond)
+  // const APR = 86_600 * interestPerSecond * 365
 
-  // const userDepositedBalance = pair?.userAssetFraction // √
-  // const assetPrice = pair?.asset.usd / 1e18 // √
-  // const borrowPrice = pair?.collateral.usd / (10**assetDecimals)
-  // const userDepositedValue 
-  // = userDepositedBalance 
-  //   * assetPrice 
-  //   / 10**assetDecimals
-  
-  const totalDepositedValue 
-  = Number(pair.totalAsset.base) 
+  const totalDepositedValue
+    = Number(pair.totalAsset.base)
     * assetPrice
-    / 10**assetDecimals
+    / 10 ** assetDecimals
 
   return (
     // <Link href={'/lend/' + pair.address}>
-      // <a className="block text-high-emphesis">
-        <div className="grid items-center grid-flow-col grid-cols-4 gap-4 px-4 py-4 text-sm rounded md:grid-cols-6 lg:grid-cols-7 align-center bg-dark-800 hover:bg-dark-blue">
-          <div className="flex flex-col items-start md:flex-row items-center">
-            <div className="hidden space-x-2 md:flex">
-              <Image
-                height={48}
-                width={48}
-                src={assetLogoURI}
-                className="w-5 h-5 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
-                alt={pair.asset.tokenInfo.symbol}
-              />
+    // <a className="block text-high-emphesis">
+    <div className={classNames(
+      `grid items-center grid-flow-col grid-cols-4 rounded rounded-3xl gap-4 px-4 py-4 text-sm rounded md:grid-cols-6 lg:grid-cols-7 align-center bg-dark-800 hover:bg-dark-blue`,
+      suppliedAmount > 0 || collateralAmount > 0 ? `border border-2 border-[${getChainColor(chainId)}]` : `border border-2 border-dark-1000`
+    )}>
+      <div className="flex flex-col items-start md:flex-row items-center">
+        <div className="hidden space-x-2 md:flex">
+          <Image
+            height={48}
+            width={48}
+            src={assetLogoURI}
+            className="w-5 h-5 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
+            alt={pair.asset.tokenInfo.symbol}
+          />
 
-              <Image
-                height={48}
-                width={48}
-                src={collateralLogoURI}
-                className="w-5 h-5 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
-                alt={pair.collateral.tokenInfo.symbol}
-              />
-            </div>
-            <div className="hidden sm:items-end md:hidden">
-              <div>
-                <strong>{pair.asset.tokenInfo.symbol}</strong> / {pair.collateral.tokenInfo.symbol}
-              </div>
-              <div className="block mt-0 text-xs text-left text-white-500 hidden">{pair.oracle.name}</div>
-            </div>
-            <div className="text-center justify-center items-center md:hidden">
-            <div className="grid items-center grid-cols-2">
-                {/* <strong>{pair.collateral.tokenInfo.symbol}</strong> */}
-                <Image
-                height={36}
-                width={36}
-                src={assetLogoURI}
-                className="w-2 h-2 p-2 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
-                alt={pair.asset.tokenInfo.symbol}
-              />
-                <Image
-                height={36}
-                width={36}
-                src={collateralLogoURI}
-                className="w-2 h-2 p-2 rounded-sm md:w-10 md:h-10 lg:w-12 lg:h-12"
-                alt={pair.collateral.tokenInfo.symbol}
-              />
-              </div>
-              <div className="block mt-0 text-xs text-left text-white-500 hidden">{pair.oracle.name}</div>
-            </div>
-          </div>
-          <div className="hidden text-center text-white md:block">
-            <strong>{pair.asset.tokenInfo.symbol}</strong>
-          </div>
-          <div className="hidden text-center md:block">{pair.collateral.tokenInfo.symbol}</div>
-          <div className="hidden text-center lg:block">{pair.oracle.name}</div>
-          {userPosition ? (
-            <>
-              <div className="text-center">
-                <div>
-                  {formatNumber(Number(pair.userAssetFraction) / 10**(assetDecimals), false)} {pair.asset.tokenInfo.symbol}
-                </div>
-                <div className="text-center text-sm text-secondary">{formatNumber(userDepositedValue, true)}</div>
-              </div>
-              {/* APR */}
-              <div className="text-center">
-              {formatPercent(
-             supplyAPR
-              )}
-                {/* <div>{formatNumber(pair.currentUserLentAmount.string)} {pair.asset.tokenInfo.symbol}</div> */}
-                {/* <div>{formatPercent(pair.utilization.string)}</div> */}
-                {/* <div className="text-center text-secondary text-sm">{formatNumber(Number(pair.currentUserLentAmount.usd) / 1e12 , true)}</div> */}
-              </div>
-              <div className="text-center">
-              {/* {
-                formatPercent(
-                  ((pair?.userAssetFraction.div(e10(assetDecimals))) -
-                    (pair?.userAssetFraction.sub(pair?.currentUserLentAmount.value).div(e10(assetDecimals))))
-                  / (pair?.userAssetFraction.div(e10(assetDecimals))) * 100
-                 )
-              } */}
-
-              {/* TOTAL */}
-                 {formatNumber(pair?.totalAsset.base / 10**(assetDecimals))} {pair?.asset.tokenInfo.symbol}
-                  <div className="text-secondary">{formatNumber(totalDepositedValue, true)}</div>
-                </div>{' '}
-              <div className="hidden sm:text-center">{formatPercent(
-              pair.supplyAPR.stringWithStrategy
-              )}</div>{' '}
-            </>
-          ) : (
-            <>
-              <div>
-                <div className="text-center">
-                  {formatNumber(pair?.totalAsset.base / 10**(assetDecimals))} {pair?.asset.tokenInfo.symbol}
-                  <div className="text-secondary">{formatNumber(totalDepositedValue, true)}</div>
-                </div>
-              </div>
-              <div className="text-center">
-                {formatPercent(
-                supplyAPR
-                 > 0 ? 
-                 supplyAPR
-                  : 1)}
-              </div>
-              <div className="grid grid-cols-2 gap-2 text-center justify-center">
-                <NavLink href={`/lend/${pair.address}`}>
-                  <SubmitButton variant="bordered" primaryColor={getChainColor(chainId)}>
-                    <Typography className="text-xs text-center">
-                    L
-                    </Typography>
-                  </SubmitButton>
-                </NavLink>
-                <NavLink href={`/borrow/${pair.address}`}>
-                <SubmitButton variant="bordered" primaryColor={getChainColor(chainId)}>
-                  <Typography className="text-xs text-center">
-                    B
-                    </Typography>
-                  </SubmitButton>
-                </NavLink>
-                {/* {
-                formatPercent(
-                  ((pair?.totalAsset.base / 10**(assetDecimals)) -
-                    (pair?.totalAsset.base.sub(pair?.totalBorrow.base) / 10**(assetDecimals)))
-                  / (pair?.totalAsset.base / 10**(assetDecimals)) * 100
-                )} */}
-              </div>
-            </>
-          )}
+          <Image
+            height={24}
+            width={24}
+            src={collateralLogoURI}
+            className="w-5 h-5 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
+            alt={pair.collateral.tokenInfo.symbol}
+          />
         </div>
-      /* </a> */
+        <div className="hidden sm:items-end md:hidden">
+          <div>
+            <strong>{pair.asset.tokenInfo.symbol}</strong> / {pair.collateral.tokenInfo.symbol}
+          </div>
+          <div className="block mt-0 text-xs text-left text-white-500 hidden">{pair.oracle.name}</div>
+        </div>
+        <div className="flex flex-col md:hidden items-center">
+        <div className="grid grid-cols-2 space-x-3 md:hidden">
+            {/* <strong>{pair.collateral.tokenInfo.symbol}</strong> */}
+            <Image
+              height={48}
+              width={48}
+              src={assetLogoURI}
+              className="w-5 h-5 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
+              alt={pair.asset.tokenInfo.symbol}
+            />
+
+            <Image
+              height={24}
+              width={24}
+              src={collateralLogoURI}
+              className="w-5 h-5 rounded-lg md:w-10 md:h-10 lg:w-12 lg:h-12"
+              alt={pair.collateral.tokenInfo.symbol}
+            />
+          </div>
+          <div className="block mt-0 text-xs text-left text-white-500 hidden">{pair.oracle.name}</div>
+        </div>
+      </div>
+      <div className="hidden text-center text-white md:block">
+        <strong>{pair.asset.tokenInfo.symbol}</strong>
+      </div>
+      <div className="hidden text-center md:block">{pair.collateral.tokenInfo.symbol}</div>
+      <div className="hidden text-center lg:block">{pair.oracle.name}</div>
+      {<><div>
+          <div className="text-center">
+            {formatNumber(pair?.totalAsset.base / 10 ** (assetDecimals) * LEND_MULTIPLIER(chainId, pair?.asset.tokenInfo.symbol))} {pair?.asset.tokenInfo.symbol}
+            <div className="text-secondary">{formatNumber(totalDepositedValue * LEND_MULTIPLIER(chainId, pair?.asset.tokenInfo.symbol), true)}</div>
+          </div>
+        </div><div className="text-center">
+            {formatPercent(
+              supplyAPR
+                > 0 ?
+                supplyAPR
+                : 1)}
+          </div><div className="sm:flex sm:flex-cols-1 gap-0.5 text-center justify-center sm:mr-1">
+            <NavLink href={`/lend/${pair.address}`}>
+              <SubmitButton variant="bordered" primaryColor={getChainColor(chainId)}>
+                <Typography className="text-xs text-center">
+                  Lend
+                </Typography>
+              </SubmitButton>
+            </NavLink>
+            <NavLink href={`/borrow/${pair.address}`}>
+              <SubmitButton variant="bordered" primaryColor={getChainColor(chainId)}>
+                <Typography className="text-xs text-center">
+                  Borrow
+                </Typography>
+              </SubmitButton>
+            </NavLink>
+            {/* {
+        formatPercent(
+          ((pair?.totalAsset.base / 10**(assetDecimals)) -
+            (pair?.totalAsset.base.sub(pair?.totalBorrow.base) / 10**(assetDecimals)))
+          / (pair?.totalAsset.base / 10**(assetDecimals)) * 100
+        )} */}
+          </div></>
+      }
+    </div>
+    /* </a> */
     /* </Link> */
   )
 }

@@ -15,7 +15,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { RecoilRoot } from 'recoil'
 import { useUnderworldPair } from 'features/lending/hooks'
-import { ChainId } from 'sdk'
+import { ChainId, LEND_MULTIPLIER } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 import { useUnderworldPairAPI } from 'hooks/useUnderworldAPI'
 // import { useSingleCallResult } from 'state/multicall/hooks'
@@ -44,17 +44,18 @@ if (!pair) return <div />
 const assetDecimals = Number(underworldPairInfo.assetDecimals)
 // const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
 const assetPrice = Number(underworldPairInfo.assetPrice)
+const MULTIPLIER = LEND_MULTIPLIER(chainId, pair?.asset.tokenInfo.symbol)
 // const collateralPrice = Number(underworldPairInfo.collateralPrice)
 // const lpDecimals = Number(underworldPairInfo.decimals)
 // const assetAddress = underworldPairInfo.assetAddress
 
 const available = 100 -
   ((pair?.totalAsset.base / 10**(assetDecimals)) -
-    (pair?.totalAsset.base.sub(pair?.totalBorrow.base) / 10**(assetDecimals)))
+    (pair?.totalAsset.base.sub(pair?.totalBorrow.elastic) / 10**(assetDecimals)))
     / (pair?.totalAsset.base / 10**(assetDecimals)) * 100
 
   const util = 100 - available
-  const utilization = (util >= 100 || util <= 0) ? 100 : util
+  const utilization = (util >= 100 || util <= 0) ? 98 : util
 
 // format tickers //
 const aTicker = underworldPairInfo.assetTicker
@@ -146,14 +147,15 @@ const collateralSymbol
           <div>
             <div className="text-center text-md sm:text-lg text-secondary">Deposited</div>
             <div className="text-lg sm:text-2xl text-blue">
-              {formatNumber(pair.userAssetFraction / 10**(assetDecimals))} {assetSymbol}
+              {formatNumber(pair.userAssetFraction / 10**(assetDecimals) * MULTIPLIER)} {assetSymbol}
             </div>
-            <div className="text-center text-md sm:text-lg text-high-emphesis">{formatNumber(userDepositValue, true)}</div>
+            <div className="text-center text-md sm:text-lg text-high-emphesis">{formatNumber(userDepositValue * MULTIPLIER, true)}</div>
             </div>
           <div>
             <div className="text-center text-md sm:text-lg text-secondary">{`Borrowed`}</div>
             <div className="text-center text-lg sm:text-2xl text-high-emphesis">{
-              formatPercent(utilization)
+              // formatPercent(utilization)
+              `${utilization.toFixed(2)}%`
                 // formatPercent(
                 //   ((pair?.userAssetFraction.div(e10(assetDecimals))) -
                 //     (pair?.userAssetFraction.sub(pair?.currentUserLentAmount.value).div(e10(assetDecimals))))
@@ -210,6 +212,7 @@ Pair.Provider = RecoilRoot
 const PairLayout = ({ children }) => {
   const router = useRouter()
   // const { i18n } = useLingui()
+  const { chainId } = useActiveWeb3React()
   const pair = useUnderworldPair(router.query.pair as string)
   // const lpDecimals = Number(underworldPairInfo.decimals)
   // const assetAddress = underworldPairInfo.assetAddress
@@ -223,13 +226,16 @@ const PairLayout = ({ children }) => {
   const aTicker = pair?.asset.tokenInfo.symbol
   const cTicker = pair?.collateral.tokenInfo.symbol
 
-  const available = 100 -
+  const avail = 100 -
   ((pair?.totalAsset.base / 10**(assetDecimals)) -
-    (pair?.totalAsset.base.sub(pair?.totalBorrow.base) / 10**(assetDecimals)))
+    (pair?.totalAsset.base.sub(pair?.totalBorrow.elastic) / 10**(assetDecimals)))
     / (pair?.totalAsset.base / 10**(assetDecimals)) * 100
 
-  const util = 100 - available
-  const utilization = (util >= 100 || util <= 0) ? 100 : util
+  const available = avail > 100 ? 100 : avail < 0 ? 2 : avail
+
+  // const util = 100 - available
+  // const utilization = (util >= 100 || util <= 0) ? 100 : util
+  const MULTIPLIER = LEND_MULTIPLIER(chainId, pair?.asset.tokenInfo.symbol)
 
   const assetSymbol 
       = aTicker == 'WAVAX' ? 'AVAX'
@@ -281,7 +287,7 @@ const PairLayout = ({ children }) => {
               <div className="text-lg text-high-emphesis">
               </div>
               {/* {formatNumber(pair?.totalAsset.base.div(e10(assetDecimals)))} {assetSymbol} */}
-              {formatNumber(pair?.totalAsset.base / 10**(assetDecimals))} {assetSymbol}
+              {formatNumber(pair?.totalAsset.base / 10**(assetDecimals) * MULTIPLIER)} {assetSymbol}
             </div>
             <div className="flex justify-between">
               <div className="text-lg text-secondary">{`Oracle`}</div>
@@ -293,7 +299,7 @@ const PairLayout = ({ children }) => {
               <div className="text-green text-lg text-secondary">{`Available`}</div>
               <div className="flex items-center">
                 <div className="text-green text-lg text-high-emphesis">
-                {formatPercent(available)}
+                {`~${available.toFixed(2)}%`}
                 </div>
               </div>
             </div>

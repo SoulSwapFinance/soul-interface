@@ -93,40 +93,40 @@ export default function Deposit({ pair }: any): JSX.Element {
   //   true
   // )
 
-  const transactionReview = new TransactionReview()
+  // const transactionReview = new TransactionReview()
 
-  if (value && !warnings.broken) {
-    const amount = Number(value).toString().toBigNumber(pair.asset.tokenInfo.decimals) //.toFixed(4)
-    // const newUserAssetAmount = pair.userAssetFraction.add(amount)//.toBigNumber(pair.asset.tokenInfo.decimals))
+  // if (value && !warnings.broken) {
+  //   const amount = Number(value).toString().toBigNumber(pair.asset.tokenInfo.decimals) //.toFixed(4)
+  //   // const newUserAssetAmount = pair.userAssetFraction.add(amount)//.toBigNumber(pair.asset.tokenInfo.decimals))
       
-    transactionReview.addTokenAmount(
-      i18n._(t`Supplied`),
-      pair.userAssetFraction,
-      BigNumber.from(pair.userAssetFraction).add(amount),
-      pair.asset
-    )
-    // transactionReview.addUSD(i18n._(t`Balance USD`),
-    //   pair.userAssetFraction.div(e10(12)),//.toString().toBigNumber(pair.asset.tokenInfo.decimals),
-    //   BigNumber.from(pair.userAssetFraction).add(amount).div(e10(12)),
-    //   pair.asset)
-    // const newUtilization
-      // = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value).add(amount)
-      // = 1e18 * Number(pair.currentBorrowAmount.value) / Number(pair.currentAllAssets.value) + Number(amount) //.toString() // USE THIS
-    // transactionReview.addPercentage(i18n._(t`Borrowed`), BigNumber.from(pair.utilization.value || 0), BigNumber.from(newUtilization))
-    if (pair.currentExchangeRate.isZero()) {
-      transactionReview.add(
-        'Exchange Rate',
-        formatNumber(
-          pair.currentExchangeRate.toFixed(18 + pair.collateral.tokenInfo.decimals - pair.asset.tokenInfo.decimals)
-        ),
-        formatNumber(
-          pair.oracleExchangeRate.toFixed(18 + pair.collateral.tokenInfo.decimals - pair.asset.tokenInfo.decimals)
-        ),
-        Direction.UP
-      )
-    }
-    // transactionReview.addPercentage(i18n._(t`Supply APR`), pair.supplyAPR.value, pair.currentSupplyAPR.value)
-  }
+  //   transactionReview.addTokenAmount(
+  //     i18n._(t`Supplied`),
+  //     pair.userAssetFraction,
+  //     BigNumber.from(pair.userAssetFraction).add(amount),
+  //     pair.asset
+  //   )
+  //   // transactionReview.addUSD(i18n._(t`Balance USD`),
+  //   //   pair.userAssetFraction.div(e10(12)),//.toString().toBigNumber(pair.asset.tokenInfo.decimals),
+  //   //   BigNumber.from(pair.userAssetFraction).add(amount).div(e10(12)),
+  //   //   pair.asset)
+  //   // const newUtilization
+  //     // = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value).add(amount)
+  //     // = 1e18 * Number(pair.currentBorrowAmount.value) / Number(pair.currentAllAssets.value) + Number(amount) //.toString() // USE THIS
+  //   // transactionReview.addPercentage(i18n._(t`Borrowed`), BigNumber.from(pair.utilization.value || 0), BigNumber.from(newUtilization))
+  //   if (pair.currentExchangeRate.isZero()) {
+  //     transactionReview.add(
+  //       'Exchange Rate',
+  //       formatNumber(
+  //         pair.currentExchangeRate.toFixed(18 + pair.collateral.tokenInfo.decimals - pair.asset.tokenInfo.decimals)
+  //       ),
+  //       formatNumber(
+  //         pair.oracleExchangeRate.toFixed(18 + pair.collateral.tokenInfo.decimals - pair.asset.tokenInfo.decimals)
+  //       ),
+  //       Direction.UP
+  //     )
+  //   }
+  //   // transactionReview.addPercentage(i18n._(t`Supply APR`), pair.supplyAPR.value, pair.currentSupplyAPR.value)
+  // }
 
   // Handlers
   async function onExecute(cooker: UnderworldCooker): Promise<string> {
@@ -172,7 +172,7 @@ export default function Deposit({ pair }: any): JSX.Element {
         spendFromWallet={!useCoffin}
       /> */}
       <WarningsList warnings={warnings} />
-      <TransactionReviewList transactionReview={transactionReview} />
+      {/* <TransactionReviewList transactionReview={transactionReview} /> */}
       <UnderworldApproveButton
         color="blue"
         content={(onCook: any) => (

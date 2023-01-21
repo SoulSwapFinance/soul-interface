@@ -93,7 +93,7 @@ export function Active() {
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                  LIQUIDITY
+                  TVL
                 </Text>
               </FarmItemBox>
 
@@ -147,7 +147,7 @@ export function Inactive() {
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                LIQUIDITY
+                TVL
                 </Text>
               </FarmItemBox>
 
@@ -201,7 +201,7 @@ export function Underworld() {
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
-                LIQUIDITY
+                TVL
                 </Text>
               </FarmItemBox>
 

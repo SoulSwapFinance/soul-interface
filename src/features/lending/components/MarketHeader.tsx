@@ -3,8 +3,11 @@ import { Search } from 'react-feather'
 
 import Card from 'components/Card'
 import { classNames } from 'functions'
+import { useActiveWeb3React } from 'hooks'
+import { getChainColor } from 'constants/chains'
 
 function MarketHeader({ type = 'Borrow', lists }: any) {
+  const { chainId } = useActiveWeb3React()
   if (lists.setTerm) {
     lists = [lists]
   }
@@ -19,9 +22,9 @@ function MarketHeader({ type = 'Borrow', lists }: any) {
     <Card.Header
       className={classNames('border-b-8', type === 'Borrow' ? 'bg-dark-purple border-purple' : 'bg-dark-blue border-blue')}
     >
-      <div className="flex flex-col items-center justify-between w-full md:flex-row">
-        <div className="flex items-center">
-          <div className="mr-4 text-3xl text-high-emphesis">{type}</div>
+      <div className="flex flex-col items-center justify-between w-full">
+        <div className={`flex justify-center border border-2 border-[${getChainColor(chainId)}] bg-dark-900 rounded-2xl p-3 mt-6 md:mt-0`}>
+          <div className="text-3xl text-high-emphesis">{type}</div>
         </div>
 
         <div className="flex justify-end w-full py-4 md:py-0">

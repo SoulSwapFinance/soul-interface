@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import BondInputPanel from './Input'
 import { useActiveWeb3React } from 'services/web3'
 import useApprove from 'hooks/useApprove'
-import { ChainId, SOUL_ADDRESS, SOUL_BOND_ADDRESS, WNATIVE } from 'sdk'
+import { ChainId, LEND_MULTIPLIER, SOUL_ADDRESS, SOUL_BOND_ADDRESS, WNATIVE } from 'sdk'
 import {
   BondContainer,
   BondContentWrapper,
@@ -69,25 +69,36 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   const assetAddress = bond.lpAddress
   const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
   // const chain = chainId == ChainId.AVALANCHE ? 'avalanche' : 'fantom'
-
   // API DATA //
   const { soulBondInfo } = useSoulBondInfo(pid)
-  const apr = Number(soulBondInfo.apr)
   const { soulBondUserInfo } = useBondUserInfo(pid, account)
   const { pairUserInfo } = useUserPairInfo(account, assetAddress)
   const { pairInfo } = usePairInfo(assetAddress)
-  const assetName = soulBondUserInfo.symbol
-  const liquidity = Number(soulBondUserInfo.tvl)
+  const token0Name = pairInfo.token0Name
+  const isUnderworldPair = bond.type == "lend"
+  const isSwapPair = !isUnderworldPair
+  const MULTIPLIER = isSwapPair ? 1 : LEND_MULTIPLIER(chainId, token0Symbol)
+  // const APR = Number(soulBondInfo.apr)
+  const _APR = Number(soulBondInfo.apr) / MULTIPLIER
+  // const assetName = soulBondUserInfo.symbol
+  // const liquidity = Number(soulBondUserInfo.tvl)
+
+  // for display purposes only //
+  const _liquidity = Number(soulBondUserInfo.tvl )* MULTIPLIER
   const lpPrice = Number(soulBondUserInfo.pairPrice)
-  const stakedBal = Number(soulBondUserInfo.stakedBalance)
+  // const stakedBal = Number(soulBondUserInfo.stakedBalance)
+    // for display purposes only //
+    const _stakedBalance = Number(soulBondUserInfo.stakedBalance) * MULTIPLIER
+    // for display purposes only //
+    const _stakedValue = _stakedBalance * lpPrice
   const unstakedBal = Number(soulBondUserInfo.userBalance)
   const assetDecimals = Number(pairInfo.pairDecimals)
   const assetDivisor = 10 ** assetDecimals
   const pending = Number(soulBondUserInfo.pendingSoul) / 1e18
-  const assetToken = new Token(chainId, assetAddress, assetDecimals, assetName)
+  // const assetToken = new Token(chainId, assetAddress, assetDecimals, assetName)
   // const parsedDepositValue = tryParseAmount(depositValue, assetToken)
   const walletBalance = Number(pairUserInfo.userBalance) / assetDivisor
-  const token0Name = pairInfo.token0Name
+  const _walletBalance = Number(pairUserInfo.userBalance) / assetDivisor * MULTIPLIER
 
   // const parsedWalletBalance = tryParseAmount(walletBalance, assetToken)
   // const walletValue = walletBalance * lpPrice
@@ -103,19 +114,18 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
 
   // stakeble if either not yet staked and on Fantom Opera or not on Fantom Opera.
   const isStakeable = chainId
-    == ChainId.FANTOM && stakedBal == 0
+    == ChainId.FANTOM && _stakedBalance == 0
     || chainId == ChainId.AVALANCHE
 
   const depositable
     = chainId == ChainId.FANTOM && pid == '2' ? false
       : true
 
-  const isUnderworldPair = bond.type == "lend"
   // CALCULATIONS
-  const stakedLpValue = stakedBal * lpPrice
+  // const stakedValue = stakedBal * lpPrice
   // const availableValue = unstakedBal * lpPrice
   const pendingValue = pending * soulPrice
-  const percOfBond = 100 * stakedLpValue / liquidity
+  const percOfBond = 100 * _stakedValue / _liquidity
 
   // initial render/mount & reruns every 2 seconds
   // useEffect(() => {
@@ -130,10 +140,10 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   //   }
   // })
 
-  const dailyRoi = (apr / 365)
+  const dailyRoi = (_APR / 365)
   // const nowTime = new Date().toTimeString()
   // const rawMaturity = new Date(nowTime + msTilMaturity)// formatUnixTimestampToDay(nowTime + msTilMaturity)
-  const reached = formatNumber((100 * pendingValue / stakedLpValue), false, true)
+  const reached = formatNumber((100 * pendingValue / _stakedValue), false, true)
 
   const percRemaining = 100 - Number(reached)
   const daysTilMaturity = percRemaining / dailyRoi
@@ -177,43 +187,41 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
     }
   }
 
-  // // Deposit
-  const handleDeposit = async (pid, amount) => {
-    try {
-      const result = await bondContract?.deposit(pid,
-        Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals)
-        // parsedDepositValue.quotient.toString()
-      )
-      return result
-    } catch (e) {
-      console.log(e)
-      // alert(e.message)
-      return e
-    }
-  }
-
-  // // Withdraw
-  // const mint = async (pid) => {
+  // // // Deposit
+  // const handleDeposit = async (pid, amount) => {
   //   try {
-  //     let result = await bondContract?.bond(pid)
+  //     const result = await bondContract?.deposit(pid,
+  //       Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals)
+  //       // parsedDepositValue.quotient.toString()
+  //     )
   //     return result
   //   } catch (e) {
-  //     alert(e.message)
   //     console.log(e)
+  //     // alert(e.message)
   //     return e
   //   }
   // }
+    // // deposits: selected amount into the bonds
+    const handleDeposit = async (pid, amount) => {
+      let tx
+      try {
+          tx = await bondContract?.deposit(
+            pid, 
+            (Number(depositValue) / MULTIPLIER).toFixed(assetDecimals)
+            .toBigNumber(assetDecimals)
+          )
+          await tx.wait()
+      } catch (e) {
+          const smallerValue = Number(depositValue) - 0.000001
+          tx = await bondContract?.deposit(
+            pid, 
+            (Number(smallerValue) / MULTIPLIER).toFixed(assetDecimals)
+            .toBigNumber(assetDecimals))
+          await tx.wait()
+          console.log(e)
+      }
+  }
 
-  // handles deposit
-  // const handleDeposit = async (pid, amount) => {
-  //   try {
-  //       const tx = await bondContract?.deposit(pid, depositValue)
-  //       await tx.wait()
-  //   } catch (e) {
-  //       // alert(e.message)
-  //       console.log(e)
-  //   }
-  // }
 
   // mints SOUL from bond.
   const handleMint = async () => {
@@ -227,23 +235,11 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
     }
   }
 
-  // deposits to bond
-  // const handleDeposit = async (amount) => {
-  //   try {
-  //     // console.log('depositing', amount.toString())
-  //     const tx = await deposit(pid, parsedDepositValue.quotient.toString())
-  //     // await tx.wait()
-  //   } catch (e) {
-  //     // alert(e.message)
-  //     console.log(e)
-  //   }
-  // }
-
   return (
     <>
       <Wrap padding="0" display="flex" justifyContent="center">
         <BondContainer onClick={() => handleShow()}>
-          <div className={classNames("bg-dark-900 p-2 border border-dark-1000", walletBalance > 0 ? `border-dark-${getChainColorCode(chainId)}` : '')}>
+          <div className={classNames("bg-dark-900 p-2 border border-dark-1000", walletBalance > 0 ? `border-[${getChainColor(chainId)}]` : '')}>
             <BondContentWrapper>
               <div className="items-center">
                 <BondItemBox>
@@ -257,11 +253,11 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
               <HideOnMobile>
                 <BondItemBox>
                   <Text fontSize="1rem" color="#FFFFFF">
-                    {/* {`${formatNumber(stakedLpValue, true, true)}`} */}
-                    ${stakedLpValue == 0 ? 0
-                      : stakedLpValue.toString(2) == '0.00' ? '<0.00'
-                        : stakedLpValue < 1 && stakedLpValue.toString(4) ? stakedLpValue.toFixed(4)
-                          : stakedLpValue > 0 ? stakedLpValue.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                    {/* {`${formatNumber(stakedValue, true, true)}`} */}
+                    ${_stakedValue == 0 ? 0
+                      : _stakedValue.toString(2) == '0.00' ? '<0.00'
+                        : _stakedValue < 1 && _stakedValue.toString(4) ? _stakedValue.toFixed(4)
+                          : _stakedValue > 0 ? _stakedValue.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                             : '-'
                     }
                   </Text>
@@ -278,10 +274,10 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
 
               <BondItemBox>
                 <Text fontSize="1rem" color="#FFFFFF">
-                  {apr == 0 ? 0
-                    : apr.toString(2) == '0.00' ? '<0.00'
-                      : apr < 1 && apr.toString(4) ? apr.toFixed(4)
-                        : apr > 0 ? apr.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                  {_APR == 0 ? 0
+                    : _APR.toString(2) == '0.00' ? '<0.00'
+                      : _APR < 1 && _APR.toString(4) ? _APR.toFixed(4)
+                        : _APR > 0 ? _APR.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                           : '-'
                   }%                </Text>
               </BondItemBox>
@@ -294,7 +290,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
 
               <BondItemBox>
                 <Text fontSize="1rem">
-                  {formatNumber(liquidity, true, true)}
+                  {formatNumber(_liquidity, true, true)}
                 </Text>
               </BondItemBox>
             </BondContentWrapper>
@@ -313,17 +309,17 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
               >
                 <FunctionBox>
                   {/* <Text className="flex justify-center text-2xl font-bold"> 
-                  {bond.lpSymbol} 
+                  {isUnderworldPair ? token0Symbol : bond.lpSymbol} 
                 </Text> */}
                   {/* DEPOSIT: ASSET PANEL */}
                   {isStakeable && Number(walletBalance) != 0 &&
                     <BondInputPanel
-                      pid={bond.pid}
-                      onUserInput={(value) => setDepositValue(value)}
-                      onMax={() => setDepositValue(walletBalance?.toString())}
-                      value={depositValue}
-                      balance={walletBalance.toString()}
-                      id={pid}
+                    pid={bond.pid}
+                    onUserInput={(value) => setDepositValue(value)}
+                    onMax={() => setDepositValue(_walletBalance.toString())}
+                    value={depositValue}
+                    balance={_walletBalance.toString()}
+                    id={pid}
                     />
                   }
                    <Wrap padding="0" margin="0" display="flex">
@@ -339,7 +335,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                             href=
                             {`https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token1Address}`}
                           >
-                            CREATE {bond.lpSymbol} PAIR
+                            CREATE {isUnderworldPair ? token0Symbol : bond.lpSymbol} PAIR
                           </TokenPairLink>
                         </SubmitButton>
                       ) :
@@ -354,7 +350,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                             { isUnderworldPair ? `https://exchange.soulswap.finance/lend/${bond.lpAddress}`
                               : `https://exchange.soulswap.finance/add/${bond.token0Address}/${bond.token1Address}`}
                           >
-                            { isUnderworldPair ? `LEND ${bond.token0Symbol}` : `CREATE ${bond.lpSymbol} PAIR`}
+                            { isUnderworldPair ? `LEND ${bond.token0Symbol}` : `CREATE ${isUnderworldPair ? token0Symbol : bond.lpSymbol} PAIR`}
                           </TokenPairLink>
                         </SubmitButton>
                       ) :
@@ -364,12 +360,12 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                             height="2.5rem"
                             primaryColor={getChainColor(chainId)}
                             onClick={() =>
-                              stakedBal == 0
+                              _stakedBalance == 0
                                 ? handleDeposit(pid, depositValue)
                                 : setShowDepositConfirmation(true)
                             }
                           >
-                            DEPOSIT {bond.lpSymbol} LP
+                            DEPOSIT {isUnderworldPair ? token0Symbol : `${bond.lpSymbol} LP`}
                           </SubmitButton>
                         ) :
                         (!approved && isStakeable &&
@@ -386,18 +382,18 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
 
                 <Wrap padding="0.5rem" margin="0.25rem" display="flex" justifyContent="space-between">
                   <Text fontSize=".9rem" padding="0" textAlign="left">
-                    DEPOSIT:&nbsp;
-                    {stakedBal === 0
+                    BONDED:&nbsp;
+                    {_stakedBalance === 0
                       ? '0.000'
-                      : stakedBal < 0.001
+                      : _stakedBalance < 0.001
                         ? '<0.001'
-                        : formatNumber(stakedBal, false, true)
-                    }&nbsp;LP
+                        : formatNumber(_stakedBalance, false, true)
+                    }&nbsp;{isSwapPair ? `LP` : token0Symbol}
                     <br />
-                    VALUE:&nbsp;{Number(stakedLpValue) !== 0 ? `${formatNumber(stakedLpValue, true, true)}` : '0'}
+                    VALUE:&nbsp;{Number(_stakedValue) !== 0 ? `${formatNumber(_stakedValue, true, true)}` : '0'}
                   </Text>
                   <Text fontSize=".9rem" padding="0" color={getChainColorCode(chainId)} textAlign="right">
-                    {stakedBal > 0
+                    {_stakedBalance > 0
                       ? `YTD: ${formatPercent(reached)}`
                       : `~${daysTilMaturity.toFixed(0)} Days`
                       // : `MATURITY: ${(maturityDate)}`
@@ -406,7 +402,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                     {dailyRoi > 0 ? 'DAILY: ' + dailyRoi.toFixed(2) : 0}%
                   </Text>
                 </Wrap>
-                {stakedBal > 0 && showing &&
+                {_stakedBalance > 0 && showing &&
                   <Wrap padding="0" margin="0" display="flex">
                     <SubmitButton
                       height="2.5rem"
@@ -472,7 +468,8 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
             primaryColor={getChainColor(chainId)}
             height="2.5rem"
             onClick={() =>
-              handleDeposit(pid, depositValue)}
+              handleDeposit(pid, Number(depositValue) / MULTIPLIER)}
+
           >
             {`UNDERSTOOD & AGREED`}
           </SubmitButton>

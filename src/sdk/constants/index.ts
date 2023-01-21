@@ -1,5 +1,5 @@
 import { ChainId } from '../enums'
-import { JSBI } from 'sdk'
+import { Currency, JSBI } from 'sdk'
 
 export * from './addresses'
 export * from './underworld'
@@ -61,3 +61,18 @@ export const _10000 = JSBI.BigInt(10000)
 
 export const defaultSwapFee = _25
 export const defaultProtocolFeeDenominator = FIVE
+
+export const LEND_MULTIPLIER = (chainId: ChainId, lentSymbol: string) => {
+  // let lentSymbol = lentAsset.wrapped.symbol
+  let multiplier = 1
+  if (chainId == ChainId.FANTOM) {
+    // lentSymbol == 'FTM' || lentSymbol == 'WFTM'
+    //   ? multiplier = 4.5 :
+       lentSymbol == 'DAI' || lentSymbol == 'BNB' || lentSymbol == 'FTM' || lentSymbol == 'WFTM'
+          ? multiplier = 4
+            : lentSymbol == 'ETH' || lentSymbol == 'WETH'
+              ? multiplier = 2
+                : multiplier = 1
+    return multiplier
+  } else return 1
+}
