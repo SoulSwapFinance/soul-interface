@@ -59,23 +59,23 @@ const Mobile: FC = () => {
   //   width={'600px'}
   // />
 
-  const DEFAULT_ICON = <BarsIcon
-    fillPrimary={open ? WHITE : getChainColor(chainId)}
-    fillSecondary={open ? getChainColor(chainId) : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  />
+  // const DEFAULT_ICON = <BarsIcon
+  //   fillPrimary={open ? WHITE : getChainColor(chainId)}
+  //   fillSecondary={open ? getChainColor(chainId) : WHITE}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  // />
 
-  const HOME_ICON = <HomeIcon
-    fillPrimary={open ? WHITE : chainColor}
-    fillSecondary={open ? chainColor : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  />
+  // const HOME_ICON = <HomeIcon
+  //   fillPrimary={open ? WHITE : chainColor}
+  //   fillSecondary={open ? chainColor : WHITE}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  // />
 
-  const DROPLET_ICON = <DropletIcon
-    fillPrimary={WHITE}
-    fillSecondary={chainColor}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  />
+  // const DROPLET_ICON = <DropletIcon
+  //   fillPrimary={WHITE}
+  //   fillSecondary={chainColor}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  // />
 
   const SWAP_ICON = <SwapIcon
     fillPrimary={open ? WHITE : getChainColor(chainId)}
@@ -83,55 +83,55 @@ const Mobile: FC = () => {
     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
   />
 
-  const SUN_ICON = <SunMoonIcon
-    fillPrimary={open ? chainColor : WHITE}
-    fillSecondary={open ? WHITE : chainColor}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  />
+  // const SUN_ICON = <SunMoonIcon
+  //   fillPrimary={open ? chainColor : WHITE}
+  //   fillSecondary={open ? WHITE : chainColor}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  // />
 
-  const EARN_ICON = <SeedlingIcon
-    fillPrimary={open ? WHITE : chainColor}
-    fillSecondary={open ? chainColor : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  />
+  // const EARN_ICON = <SeedlingIcon
+  //   fillPrimary={open ? WHITE : chainColor}
+  //   fillSecondary={open ? chainColor : WHITE}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  // />
 
-  const WALLET_ICON = <WalletIcon
-    fillPrimary={open ? WHITE : chainColor}
-    fillSecondary={open ? chainColor : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  />
-  
-  const EXPLORE_ICON = <BinocularsIcon
-  fillPrimary={open ? WHITE : chainColor}
-  fillSecondary={open ? chainColor : WHITE}
-  className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  />
-  
-  const LEND_ICON = <LendSkullIcon
-    fillPrimary={open ? chainColor : WHITE}
-    fillSecondary={open ? WHITE : chainColor}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  />
-  
-  const DOCS_ICON = <DocsIcon
-    fillPrimary={open ? WHITE : chainColor}
-    fillSecondary={open ? chainColor : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  />
+  // const WALLET_ICON = <WalletIcon
+  //   fillPrimary={open ? WHITE : chainColor}
+  //   fillSecondary={open ? chainColor : WHITE}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  // />
 
-  const NFT_ICON = <NftIcon
-    fillPrimary={open ? chainColor : WHITE}
-    fillSecondary={open ? WHITE : chainColor}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  />
+  // const EXPLORE_ICON = <BinocularsIcon
+  // fillPrimary={open ? WHITE : chainColor}
+  // fillSecondary={open ? chainColor : WHITE}
+  // className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  // />
 
-  const SOUL_ICON = <SoulIcon
-    // fillPrimary={open ? chainColor : WHITE}
-    // fillSecondary={open ? WHITE : chainColor}
-    // className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-    height={'600px'}
-    width={'600px'}
-  />
+  // const LEND_ICON = <LendSkullIcon
+  //   fillPrimary={open ? chainColor : WHITE}
+  //   fillSecondary={open ? WHITE : chainColor}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  // />
+
+  // const DOCS_ICON = <DocsIcon
+  //   fillPrimary={open ? WHITE : chainColor}
+  //   fillSecondary={open ? chainColor : WHITE}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  // />
+
+  // const NFT_ICON = <NftIcon
+  //   fillPrimary={open ? chainColor : WHITE}
+  //   fillSecondary={open ? WHITE : chainColor}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  // />
+
+  // const SOUL_ICON = <SoulIcon
+  //   // fillPrimary={open ? chainColor : WHITE}
+  //   // fillSecondary={open ? WHITE : chainColor}
+  //   // className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  //   height={'600px'}
+  //   width={'600px'}
+  // />
 
   // const removePage = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
   // const addPage = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
@@ -174,18 +174,18 @@ const Mobile: FC = () => {
 
   return (
     <>
-      <header className="w-full flex mt-3 items-center justify-between min-h-[36px] h-[36px] px-2">
+      <header className="w-full flex mt-2 items-center justify-between min-h-[36px] h-[36px] px-2">
         <div className="flex justify-between flex-grow">
-              <div
-                className={`hover:bg-dark-900 p-1.5 -mb-3 rounded rounded-xl 
+          <div
+            className={`hover:bg-dark-900 p-1.5 -mb-0.5 rounded rounded-2xl 
                 border border-[${getChainColor(chainId)}]
                 hover:border-2
                 `}
-                // onClick={() => { setOpen(true) }}
-                onClick={swapRoute}
-              >
-              {/* {pageIcon} */}
-              <div className={`mt-1`}>
+            // onClick={() => { setOpen(true) }}
+            onClick={swapRoute}
+          >
+            {SWAP_ICON}
+            {/* <div className={`mt-1`}>
                       <Image
           src="/favicon.png"
           alt="SOUL"
@@ -193,15 +193,15 @@ const Mobile: FC = () => {
           height={32}
           objectFit="cover"
           className={`rounded-xl bg-dark-1000`}
-        />
+        /> */}
+          </div>
         </div>
-              </div>
-              {/* <div
+        {/* <div
                 className={`p-1 hover:bg-dark-900 mt-1 bg-dark-1000 rounded rounded-xl border-[${getChainColor(chainId)}]`}
                 onClick={swapRoute}
               > {SOUL_ICON}
               </div>           */}
-            </div>
+        {/* </div> */}
         <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 z-20 overflow-hidden" onClose={setOpen} unmount={false}>
             <div className="absolute inset-0 overflow-hidden">
@@ -234,14 +234,14 @@ const Mobile: FC = () => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
                       </nav>
-                      <div className="flex w-full justify-center inline-block rounded rounded-xl bg-dark-1000">
+                      {/* <div className="flex w-full justify-center inline-block rounded rounded-xl bg-dark-1000">
                         {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                           <TokenStats />
                         }
                         <div className="flex items-center justify-start">
                           <LanguageMenu />
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </Transition.Child>
@@ -250,15 +250,24 @@ const Mobile: FC = () => {
           </Dialog>
         </Transition.Root>
 
+        {/* TOKEN STATS */}
+        <div className={`relative top-0 right-6 border border-[${getChainColor(chainId)}] hover:border-2 rounded rounded-2xl inline-block`}>
+          <TokenStats />
+        </div>
+
         {/* NETWORK ICON */}
-        <div className={`relative top-0 right-2 p-1.5 border border-[${getChainColor(chainId)}] rounded rounded-xl inline-block`}>
+        <div className={`relative top-0 right-4 p-1.5 border border-[${getChainColor(chainId)}] hover:border-2 rounded rounded-2xl inline-block`}>
           <Web3Network />
         </div>
         {/* WALLET ICON */}
         <div
-          className={`relative top-0 right-0 rounded rounded-xl inline-block`}
+          className={`relative top-0 right-2 rounded rounded-2xl inline-block border border-[${getChainColor(chainId)}] hover:border-2`}
         >
           <Web3Status />
+        </div>
+        {/* LANGUAGE SELECT */}
+        <div className={`relative top-0 right-0 inline-block rounded rounded-2xl bg-dark-1000 border border-[${getChainColor(chainId)}] hover:border-2 `}>
+          <LanguageMenu />
         </div>
         <MobileBar />
       </header>
