@@ -13,7 +13,7 @@ import { useActiveWeb3React } from 'services/web3'
 import ExternalLink from 'components/ExternalLink'
 import { SubmitButton } from 'features/bond/Styles'
 import Image from 'next/image'
-import BONDS_BANNER from 'assets/branding/bonds-banner.png'
+import MINT_BANNER from 'assets/branding/mint-banner.png'
 
 const Bonds = () => {
   const { chainId } = useActiveWeb3React()
@@ -47,7 +47,7 @@ const Bonds = () => {
               width={72}
               />
           </div>
-            <Image src={BONDS_BANNER}
+            <Image src={MINT_BANNER}
               height={180}
               width={1080}
             />

@@ -43,7 +43,7 @@ import { featureEnabled } from 'functions/feature'
 import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
 import Image from 'next/image'
-import AGGREGATE_BANNER from 'assets/branding/aggregate-banner.png'
+import META_BANNER from 'assets/branding/meta-banner.png'
 import { VoteBanner } from 'components/Banner'
 
 /*
@@ -434,7 +434,7 @@ const Aggregator = ({ }) => {
 								width={72}
 							/>
 						</div>
-						<Image src={AGGREGATE_BANNER}
+						<Image src={META_BANNER}
 							height={180}
 							width={1080}
 						/>

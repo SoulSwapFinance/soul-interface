@@ -46,7 +46,7 @@ import NavLink from "components/NavLink";
 import { getChainColor, getChainColorCode } from "constants/chains";
 import { VoteBanner } from "components/Banner";
 // import { BalancePromiseToUnit } from "pages/bridge";
-import CROSSCHAIN_BANNER from 'assets/branding/crosschain-banner.png'
+import CROSS_BANNER from 'assets/branding/cross-banner.png'
 
 export default function Exchange() {
   const { account, chainId } = useActiveWeb3React()
@@ -346,7 +346,7 @@ export default function Exchange() {
               width={72}
               />
           </div>
-            <Image src={CROSSCHAIN_BANNER}
+            <Image src={CROSS_BANNER}
               height={180}
               width={1080}
             />

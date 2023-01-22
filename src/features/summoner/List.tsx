@@ -108,16 +108,16 @@ export const FarmList = () => {
   ))
 
   // harvests: all staked pools (for user)
-  const handleHarvestAll = async () => {
-    try {
-      let tx
-      tx = SummonerContract?.harvestAll()
-      await tx?.wait()
-    } catch (e) {
-      console.log(e)
-      return
-    }
-  }
+  // const handleHarvestAll = async () => {
+  //   try {
+  //     let tx
+  //     tx = SummonerContract?.harvestAll()
+  //     await tx?.wait()
+  //   } catch (e) {
+  //     console.log(e)
+  //     return
+  //   }
+  // }
 
   return (
     <div className={`grid grid-cols-1 justify-center sm:m-8 sm:max-w-[90%] md:max-w-[100%] bg-dark-900 rounded rounded-2xl border border-[${getChainColor(chainId)}]`}>
