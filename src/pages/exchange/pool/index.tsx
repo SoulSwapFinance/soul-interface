@@ -18,7 +18,7 @@ import { useRouter } from 'next/router'
 import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
 import NavLink from 'components/NavLink'
 import { useV2PairsWithLiquidity } from 'features/trident/migrate/context/useV2PairsWithLiquidity'
-import LIQUIDITY_BANNER from 'assets/branding/liquidity-banner.png'
+import POOL_BANNER from 'assets/branding/pool-banner.png'
 
 // import Alert from '../../../components/Alert'
 // import { BIG_INT_ZERO } from '../../../constants'
@@ -139,7 +139,7 @@ export default function Pool() {
                     />
                   </div>
                 </div>
-                <Image src={LIQUIDITY_BANNER}
+                <Image src={POOL_BANNER}
                   height={180}
                   width={1080}
                 />
