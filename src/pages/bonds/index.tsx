@@ -1,5 +1,5 @@
 import { Wrap } from 'components/ReusableStyles'
-import { BondsBanner } from 'components/Banner'
+// import { BondsBanner } from 'components/Banner'
 import Container from 'components/Container'
 import Head from 'next/head'
 import React from 'react'
@@ -12,6 +12,8 @@ import { ChainId } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 import ExternalLink from 'components/ExternalLink'
 import { SubmitButton } from 'features/bond/Styles'
+import Image from 'next/image'
+import BONDS_BANNER from 'assets/branding/bonds-banner.png'
 
 const Bonds = () => {
   const { chainId } = useActiveWeb3React()
@@ -37,11 +39,24 @@ const Bonds = () => {
             </a>
           </ExternalLink>
         </SubmitButton>
+        <div className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}>
+          <div className={`flex justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}>
+            <Image src={`/favicon.ico`}
+              objectFit={`contain`}
+              height={72}
+              width={72}
+              />
+          </div>
+            <Image src={BONDS_BANNER}
+              height={180}
+              width={1080}
+            />
+          </div>
         <Head>
           <title>Bonds | All</title>
           <meta key="description" name="description" content="Mint SOUL" />
         </Head>
-        <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
+        <div className="flex ml-2 mr-2 mb-4 mt-2 gap-1 items-center justify-center">
           <NavLink href={'/summoner'}>
             <Button variant="filled" color="purple" size="lg">
               <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">

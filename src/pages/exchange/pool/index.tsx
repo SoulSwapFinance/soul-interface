@@ -3,33 +3,35 @@ import React, { useMemo } from 'react'
 import { classNames, currencyId } from '../../../functions'
 import { toV2LiquidityToken, useTrackedTokenPairs } from '../../../state/user/hooks'
 
-import Alert from '../../../components/Alert'
-import { BIG_INT_ZERO } from '../../../constants'
-import Back from '../../../components/Back'
 import { Button } from '../../../components/Button'
-import Card from '../../../components/Card'
 import Container from '../../../components/Container'
 import Dots from '../../../components/Dots'
 import Empty from '../../../components/Empty'
-import ExternalLink from '../../../components/ExternalLink'
 import FullPositionCard from '../../../components/PositionCard'
 import Head from 'next/head'
 import Image from 'next/image'
-import Link from 'next/link'
 import { MigrationSupported } from '../../../features/migration'
-import Typography from '../../../components/Typography'
-import Web3Connect from '../../../components/Web3Connect'
 import { t } from '@lingui/macro'
 import { useActiveWeb3React } from 'services/web3'
-import { useETHBalances } from '../../../state/wallet/hooks'
 import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
-import { useTokenBalancesWithLoadingIndicator } from '../../../state/wallet/hooks'
-import { useV2Pairs } from '../../../hooks/useV2Pairs'
 import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
-import { chain } from 'lodash'
 import NavLink from 'components/NavLink'
 import { useV2PairsWithLiquidity } from 'features/trident/migrate/context/useV2PairsWithLiquidity'
+import LIQUIDITY_BANNER from 'assets/branding/liquidity-banner.png'
+
+// import Alert from '../../../components/Alert'
+// import { BIG_INT_ZERO } from '../../../constants'
+// import Back from '../../../components/Back'
+// import Card from '../../../components/Card'
+// import ExternalLink from '../../../components/ExternalLink'
+// import Link from 'next/link'
+// import Typography from '../../../components/Typography'
+// import Web3Connect from '../../../components/Web3Connect'
+// import { useETHBalances } from '../../../state/wallet/hooks'
+// import { useTokenBalancesWithLoadingIndicator } from '../../../state/wallet/hooks'
+// import { useV2Pairs } from '../../../hooks/useV2Pairs'
+// import { chain } from 'lodash'
 // import SoulLogo from '../../../components/SoulLogo'
 
 export default function Pool() {
@@ -56,7 +58,7 @@ export default function Pool() {
     [tokenPairsWithLiquidityTokens]
   )
   // const [v2PairsBalances, fetchingV2PairBalances] = useTokenBalancesWithLoadingIndicator(
-    // chainId,
+  // chainId,
   //   account ?? undefined,
   //   liquidityTokens
   // )
@@ -108,47 +110,60 @@ export default function Pool() {
       {/* <br /> <br /> */}
       <DoubleGlowShadowV2 opacity="0.6">
         <Container maxWidth="2xl" className="space-y-3 mt-12">
-        {/* <Alert
+          {/* <Alert
           title={i18n._(t`Liquidity Provider Rewards`)}
           message={i18n._(t`Liquidity providers earn a 0.25% fee on all trades proportional to their share of
                         the pool. Fees are added to the pool, accrue in real time and can be claimed by
                         withdrawing your liquidity at any time.`)}
           type="information"
         /> */}
-    
+
           <div className="p-4 space-y-2 bg-dark-900 rounded bg-dark-1200">
             <div className="p-4 mb-00 space-y-3">
-              <div className="text-center">
+              {/* <div className="text-center">
                 <Typography component="h1" variant="h2">
                   {i18n._(t`Liquidity Positions`)}
                 </Typography>
+              </div> */}
+              <div className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}>
+                <div className={`flex justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}>
+                  <Image src={`/favicon.ico`}
+                    objectFit={`contain`}
+                    height={72}
+                    width={72}
+                  />
+                </div>
+                <Image src={LIQUIDITY_BANNER}
+                  height={180}
+                  width={1080}
+                />
               </div>
             </div>
             <div className="flex mb-4 items-center justify-center">
-                  <Button variant="filled" color="purple" size="lg">
-                  <NavLink href={'/info/dashboard'}>
-                        <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                        View Account Analytics <span> ↗</span>
-                        </a>
-                  </NavLink>
-                  </Button>
-              </div>
+              <Button variant="filled" color="purple" size="lg">
+                <NavLink href={'/info/dashboard'}>
+                  <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                    View Account Analytics <span> ↗</span>
+                  </a>
+                </NavLink>
+              </Button>
+            </div>
             <div className="grid grid-flow-row gap-3">
-                  <div className="mb-1 mt-1" />
-                  {loading ? (
-              <Empty>
-                <Dots>{i18n._(t`Loading`)}</Dots>
-              </Empty>
-            ) : pairs?.length > 0 ? (
-              <>
-                {pairs?.map((v2Pair) => (
-                  <FullPositionCard
-                    chainId={chainId}
-                    key={v2Pair.liquidityToken.address}
-                    pair={v2Pair}
-                    stakedBalance={CurrencyAmount.fromRawAmount(v2Pair.liquidityToken, '0')}
-                  />
-                ))}
+              <div className="mb-1 mt-1" />
+              {loading ? (
+                <Empty>
+                  <Dots>{i18n._(t`Loading`)}</Dots>
+                </Empty>
+              ) : pairs?.length > 0 ? (
+                <>
+                  {pairs?.map((v2Pair) => (
+                    <FullPositionCard
+                      chainId={chainId}
+                      key={v2Pair.liquidityToken.address}
+                      pair={v2Pair}
+                      stakedBalance={CurrencyAmount.fromRawAmount(v2Pair.liquidityToken, '0')}
+                    />
+                  ))}
                 </>
               ) : (
                 <Empty className="flex text-lg text-center text-low-emphesis">
@@ -162,14 +177,14 @@ export default function Pool() {
                     variant="filled"
                     color="gradient"
                     className="grid items-center justify-center grid-flow-col gap-2 whitespace-nowrap"
-                    onClick={() => router.push(`/exchange/add/${currencyId(NATIVE[chainId])}/${ SOUL_ADDRESS[chainId] }`)}
+                    onClick={() => router.push(`/exchange/add/${currencyId(NATIVE[chainId])}/${SOUL_ADDRESS[chainId]}`)}
                   >
                     {i18n._(t`Add`)}
                   </Button>
-                  <Button 
+                  <Button
                     id="add-pool-button"
                     variant="filled"
-                    color="gradient" 
+                    color="gradient"
                     onClick={() => router.push(`/exchange/find`)}
                   >
                     {i18n._(t`Import`)}
