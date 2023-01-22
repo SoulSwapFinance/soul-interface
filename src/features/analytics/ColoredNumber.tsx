@@ -23,7 +23,7 @@ export default function ColoredNumber({
         { percent ? `${formatNumber(number, false, true)}%` 
           : scaleNumber ? formatNumber(number, false, true) 
             : usd ? formatNumber(number, true, true) 
-              : number
+              : formatNumber(number, false, true)
         }
         {/* {(number > 0 ? '+' : number < 0 ? '-' : '') +
           (percent
