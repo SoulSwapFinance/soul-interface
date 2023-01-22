@@ -27,7 +27,6 @@ import NftIcon from 'components/Icons/mobile/NftIcon'
 import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 import Web3Network from 'components/Web3Network'
-import Web3Status from 'components/Web3Status'
 
 interface BarProps {
     inputCurrency?: Currency
@@ -35,7 +34,7 @@ interface BarProps {
     allowedSlippage?: Percent
 }
 
-const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
+const DesktopBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
     const router = useRouter()
     const { asPath } = useRouter()
 
@@ -234,58 +233,15 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                         >
                             <More />
                         </div>
-
                         {/* NETWORK ICON */}
-                        {/* <div className={`flex rounded rounded-lg inline-block`}>
-                            <Web3Network />
-                        {/* WALLET ICON
-                        </div>
                         <div className={`flex mr-2 rounded rounded-lg inline-block`}>
-                            <Web3Status />
-                        </div> */}
-                        {/* <div className="flex items-center w-full space-x-2 justify-end"> */}
-                        {/* <div className={`w-auto grid gap-0.5 items-center rounded rounded-lg bg-dark-1000 border-[${getChainColor(chainId)}] border- whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`}> */}
-                        {/* MORE [...] ICON */}
-                        {/* <div className={showMenu ? `rounded rounded-md inline-block border border-2 border-[${getChainColor(chainId)}]` : `hidden`}>
-                                    <div className="inline-block justify-center my-0.5 ml-2 mr-2">
-                                        <More />
-                                    </div>
-                                </div>
-                                <div
-                                    className={
-                                        showMenu
-                                            ? `hidden`
-                                            : `grid grid-col items-center my-0.5 justify-center mx-1 w-12 h-8 bg-dark-1000 border border-2 border-[${getChainColor(chainId)}] rounded rounded-lg`
-                                    }>
-                                    <Image
-                                        alt={"bars arrow up icon"}
-                                        src={BarsArrowUpIcon}
-                                        height={20}
-                                        width={20}
-                                        onClick={() => setShowMenu(true)}
-                                    />
-                                </div>
-                                <div
-                                    className={
-                                        showMenu
-                                            ? `grid grid-col items-center my-0.5 justify-center mx-1 w-12 h-8 bg-dark-1000 border border-2 border-[${getChainColor(chainId)}] rounded rounded-lg`
-                                            : `hidden`
-                                    }>
-                                    <Image
-                                        alt={"bars arrow down icon"}
-                                        src={BarsArrowDownIcon}
-                                        height={20}
-                                        width={20}
-                                        onClick={() => setShowMenu(false)}
-                                    />
-                                </div>
-                            </div>
+                            <Web3Network />
+                        </div>
 
-                        </div> */}
                     </div>
                 </div>
             </div>
         </div>
     )
 }
-export default MobileBar
+export default DesktopBar

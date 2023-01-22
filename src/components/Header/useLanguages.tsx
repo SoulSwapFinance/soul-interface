@@ -13,7 +13,7 @@ import Link from 'next/link'
 
 export default function LanguageMenu() {
     const { chainId } = useActiveWeb3React()
-    const hybridStyle = `flex items-center justify-center px-3 py-2.5 rounded rounded-md p-2 bg-dark-1000 border border-dark-800 hover:bg-dark-800 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`
+    const hybridStyle = `flex items-center justify-center rounded rounded-2xl m-0.5 p-1.5 bg-dark-1000 hover:bg-dark-800 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`
     const { locale, locales, asPath } = useRouter()
 
     return (
@@ -22,7 +22,8 @@ export default function LanguageMenu() {
                 <>
                     <div>
                         <Popover.Button className={classNames(hybridStyle, ``)}>
-                            <Image src={Languages[locale].flag} alt={Languages[locale].language} width={20} height={20} />
+                            <Image src={Languages[locale].flag} alt={Languages[locale].language} width={32} height={32} />
+                            <span className="flex justify-center ml-3">{Languages[locale].language}</span>
                         </Popover.Button>
                     </div>
                     <Transition
@@ -37,7 +38,7 @@ export default function LanguageMenu() {
                     >
                         <Popover.Panel
                             static
-                            className="absolute z-50 w-screen max-w-xs mt-1 transform -translate-x-full bottom-12 left-72"
+                            className="absolute z-50 w-screen max-w-xs mt-1 transform -translate-x-full bottom-8 left-72"
                         >
                             <div className={classNames("overflow-hidden w-[40px] items-center justify-center rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 border", `border-[${getChainColor(chainId || 250)}]`)}>
                                 <div className="grid grid-cols-1 gap-0 py-1 bg-dark-1000">

@@ -27,7 +27,7 @@ function TokenStats(): JSX.Element | null {
 
   return (
     <div
-      className="flex items-center md:space-x-2 rounded bg-dark-1000 border border-dark-800 hover:bg-dark-800 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
+      className="flex items-center md:space-x-2 rounded rounded-2xl bg-dark-1000 hover:bg-dark-900 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
       onClick={() => toggleTokenStatsModal()}
     >
 

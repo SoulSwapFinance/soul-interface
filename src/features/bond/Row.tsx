@@ -102,6 +102,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   const walletBalance = Number(pairUserInfo.userBalance) / assetDivisor
   const _walletBalance = Number(pairUserInfo.userBalance) / assetDivisor * MULTIPLIER
 
+  const hasBalance = unstakedBal > 0
   // const parsedWalletBalance = tryParseAmount(walletBalance, assetToken)
   // const walletValue = walletBalance * lpPrice
   // const assetDecimals = Number(pairInfo.pairDecimals)
@@ -149,6 +150,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
 
   const percRemaining = 100 - Number(reached)
   const daysTilMaturity = percRemaining / dailyRoi
+  const isActive = dailyRoi > 0
 
   // const msTilMaturity = daysTilMaturity * 86_400_000 // ms
   // const nowTime = new Date().getTime()
@@ -156,7 +158,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   // const maturityDate = formatDate(new Date(maturityTimestamp))
 
   // opens dropdown panel
-  const handleShow = () => {
+  const handleShowOptions = () => {
     setShowing(!showing)
     if (!showing) {
       fetchApproval()
@@ -238,32 +240,34 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   }
 
   return (
-    <div className="grid  justify-center">
-        <BondContainer onClick={() => handleShow()}>
-          <div className={classNames("bg-dark-900 p-2 rounded rounded-2xl border hover:border-2 border-dark-1000 hover:border-ftmBlue", walletBalance > 0 ? `border-[#721ce0]` : '')}>
-          {/* <div className={classNames("bg-dark-900 p-3 m-1 mr-8 ml-8 border rounded rounded-2xl border-blue")}> */}
-            <div className={`grid grid-cols-4 w-full]`}>
-              <div className="items-center">
-                <BondItemBox className={`grid ${isUnderworldPair ? `grid-cols-2` : `grid-cols-2`}`}>
-                  {isUnderworldPair &&
-                    <CurrencyLogo currency={token0} size={50} />
-                  }
-                  {isUnderworldPair &&
-                    <CurrencyLogo currency={token1} size={25} />
-                  }
-                  {!isUnderworldPair &&
+    <div className="flex justify-center w-full">
+    <BondContainer>
+        <div className={classNames("bg-dark-900 p-3 m-1 border rounded rounded-2xl border-blue", !hasBalance && "border-dark-1000",
+            isUnderworldPair ? "hover:border-blue" 
+            // : !isActive ? "hover:border-pink"
+                : hasBalance && isUnderworldPair ? "hover:border-blue border-blue"
+                    : hasBalance && !isUnderworldPair ? "border-dark-600"
+                        : hasBalance && !isActive ? "hover:border-pink border-pink"
+                            : "hover:border-dark-600"
+        )}
+            onClick={() => handleShowOptions()}
+        >
+            <div className={`flex w-full]`}>
+                <div className="items-center">
+                    <div className={`grid grid-cols-2`}>
                     <CurrencyLogo currency={token0} size={40} />
-                  }
-                  {!isUnderworldPair &&
+                    {isUnderworldPair &&
+                    <CurrencyLogo currency={token1} size={20} />
+                    }
+                    {isSwapPair &&
                     <CurrencyLogo currency={token1} size={40} />
-                  }
-                  {/* {Number(allocPoint) != 220
-                      ? <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
-                      : <CurrencyLogo currency={token0} size={40} />
-                  } */}
-                </BondItemBox>
-              </div>
-
+                    }
+                        {/* {Number(allocPoint) != 220
+                            ? <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
+                            : <CurrencyLogo currency={token0} size={40} />
+                        } */}
+                    </div>
+                </div>
               {/* <HideOnMobile>
                 <BondItemBox>
                   <Text fontSize="1rem" color="#FFFFFF">
@@ -310,21 +314,27 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
               </HideOnSmall> */}
 
               <BondItemBox>
+                <BondItem>
                 <Text fontSize="1rem" color="#FFFFFF">
                   {_APR == 0 ? 0
                     : _APR.toString(2) == '0.00' ? '<0.00'
-                      : _APR < 1 && _APR.toString(4) ? _APR.toFixed(4)
-                        : _APR > 0 ? _APR.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                          : '-'
+                    : _APR < 1 && _APR.toString(4) ? _APR.toFixed(4)
+                    : _APR > 0 ? _APR.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                    : '-'
                   }%
                 </Text>
+                  </BondItem>
               </BondItemBox>
 
+              <HideOnMobile>
               <BondItemBox>
+                <BondItem>
                 <Text fontSize="1rem" color="#FFFFFF">
                   {formatPercent(reached)}
                 </Text>
+                </BondItem>
               </BondItemBox>
+              </HideOnMobile>
 
               <BondItemBox>
                 <Text fontSize="1rem">
@@ -336,13 +346,12 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
         </BondContainer>
 
       {showing && (
-        <Wrap padding="0" display="flex" justifyContent="center">
           <DetailsContainer>
             <DetailsWrapper>
               <Modal
                 isCustom={true}
                 isOpen={showing}
-                onDismiss={() => handleShow()}
+                onDismiss={() => handleShowOptions()}
               >
                 <FunctionBox>
                   {/* <Text className="flex justify-center text-2xl font-bold"> 
@@ -457,7 +466,6 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
               </Modal>
             </DetailsWrapper>
           </DetailsContainer>
-        </Wrap>
       )}
 
       { /* CONFIRMATION MODAL */}
