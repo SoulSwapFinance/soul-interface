@@ -21,7 +21,7 @@ import useTokenBalance from 'hooks/useTokenBalance'
 import { Button } from 'components/Button'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 // import listedTokens from 'features/aggregator/tokenList.json'
-import { e10 } from 'functions/math'
+// import { e10 } from 'functions/math'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 import { ArrowDownIcon, ArrowLeftIcon } from '@heroicons/react/24/solid'
 // import CurrencyInputPanel from 'components/CurrencyInputPanel'
@@ -43,7 +43,7 @@ import { featureEnabled } from 'functions/feature'
 import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
 import Image from 'next/image'
-import AGGREGATE_BANNER from 'assets/branding/aggregate-banner.png'
+import META_BANNER from 'assets/branding/meta-banner.png'
 import { VoteBanner } from 'components/Banner'
 
 /*
@@ -426,15 +426,21 @@ const Aggregator = ({ }) => {
 			<DoubleGlowShadowV2>
 				<SwapLayoutCard>
 					<VoteBanner />
-					<div className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}>
-						<div className={`flex justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}>
-							<Image src={`/favicon.ico`}
-								objectFit={`contain`}
-								height={72}
-								width={72}
-							/>
+					<div
+						className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}
+					>
+						<div className="flex justify-center">
+							<div
+								className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
+							>
+								<Image src={`/favicon.ico`}
+									objectFit={`contain`}
+									height={72}
+									width={72}
+								/>
+							</div>
 						</div>
-						<Image src={AGGREGATE_BANNER}
+						<Image src={META_BANNER}
 							height={180}
 							width={1080}
 						/>

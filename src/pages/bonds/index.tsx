@@ -13,7 +13,7 @@ import { useActiveWeb3React } from 'services/web3'
 import ExternalLink from 'components/ExternalLink'
 import { SubmitButton } from 'features/bond/Styles'
 import Image from 'next/image'
-import BONDS_BANNER from 'assets/branding/bonds-banner.png'
+import MINT_BANNER from 'assets/branding/mint-banner.png'
 
 const Bonds = () => {
   const { chainId } = useActiveWeb3React()
@@ -39,15 +39,21 @@ const Bonds = () => {
             </a>
           </ExternalLink>
         </SubmitButton>
-        <div className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}>
-          <div className={`flex justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}>
-            <Image src={`/favicon.ico`}
-              objectFit={`contain`}
-              height={72}
-              width={72}
+        <div 
+            className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}
+            >
+            <div className="flex justify-center">
+             <div 
+              className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
+                >
+              <Image src={`/favicon.ico`}
+                objectFit={`contain`}
+                height={72}
+                width={72}
               />
-          </div>
-            <Image src={BONDS_BANNER}
+            </div> 
+            </div>
+            <Image src={MINT_BANNER}
               height={180}
               width={1080}
             />

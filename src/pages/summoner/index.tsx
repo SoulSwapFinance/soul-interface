@@ -9,7 +9,7 @@ import { useTVL } from 'hooks/useV2Pairs'
 import { usePositions } from 'features/summoner/hooks'
 import { useSummonerContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
-import { formatNumberScale } from 'functions'
+import { classNames, formatNumberScale } from 'functions'
 import { Button } from 'components/Button'
 import { XCircleIcon } from '@heroicons/react/24/solid'
 import { ChainId, SOUL_ADDRESS } from 'sdk'
@@ -18,8 +18,6 @@ import { getChainColorCode } from 'constants/chains'
 import { useTokenInfo } from 'hooks/useAPI'
 import ExternalLink from 'components/ExternalLink'
 import { SubmitButton } from 'features/bond/Styles'
-import Image from 'next/image'
-import SUMMON_BANNER from 'assets/branding/summon-banner.png'
 
 // import { TwitterBanner } from 'components/Banner'
 // import { useRouter } from 'next/router'
@@ -129,38 +127,8 @@ const Summoner = () => {
       }
       <DoubleGlowShadowV2 opacity="0.6">
         <Container id="farm-page">
-          <div
-            className={chainId == ChainId.FANTOM ? 'mb-4' : 'hidden'}
-          >
-            <ExternalLink
-              href="https://archived.soulswap.finance/farms"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <SubmitButton
-                height="2rem"
-                primaryColor={"#6F1BD9"}
-                size="lg"
-              >
-                <a className="block text-md font-bold md:text-xl text-white font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                  <span> Archived Farms ↗</span>
-                </a>
-              </SubmitButton>
-            </ExternalLink>
-          </div>
-          <div className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple bg-dark-900`}>
-          <div className={`flex justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}>
-            <Image src={`/favicon.ico`}
-              objectFit={`contain`}
-              height={72}
-              width={72}
-              />
-          </div>
-            <Image src={SUMMON_BANNER}
-              height={180}
-              width={1080}
-            />
-          </div>
+
+          
           {/* <br /> */}
           <Head>
             <title>Farm | Soul</title>

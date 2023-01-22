@@ -8,11 +8,15 @@ import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
 import { useSummonerContract } from 'hooks/useContract'
-import ExternalLink from 'components/ExternalLink'
+// import ExternalLink from 'components/ExternalLink'
 import { classNames } from 'functions'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 // import { getChainColorCode } from 'constants/chains'
 // import { classNames } from 'functions'
+import Image from 'next/image'
+import FARM_BANNER from 'assets/branding/farm-banner.png'
+import ExternalLink from 'components/ExternalLink'
+import { SubmitButton } from 'features/bond/Styles'
 
 export const FarmList = () => {
   const { chainId } = useActiveWeb3React()
@@ -108,20 +112,66 @@ export const FarmList = () => {
   ))
 
   // harvests: all staked pools (for user)
-  const handleHarvestAll = async () => {
-    try {
-      let tx
-      tx = SummonerContract?.harvestAll()
-      await tx?.wait()
-    } catch (e) {
-      console.log(e)
-      return
-    }
-  }
+  // const handleHarvestAll = async () => {
+  //   try {
+  //     let tx
+  //     tx = SummonerContract?.harvestAll()
+  //     await tx?.wait()
+  //   } catch (e) {
+  //     console.log(e)
+  //     return
+  //   }
+  // }
 
   return (
-    <div className={`grid grid-cols-1 justify-center sm:m-8 sm:max-w-[90%] md:max-w-[100%] bg-dark-900 rounded rounded-2xl border border-[${getChainColor(chainId)}]`}>
-      <div className={`flex justify-center m-1 p-1`}>
+    <div className={`grid grid-cols-1 justify-center p-1 sm:m-8 sm:max-w-[90%] md:max-w-[100%] bg-dark-900 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}]`}>
+      <div
+            className={
+              classNames(chainId == ChainId.FANTOM 
+                  ? 'mb-4 rounded rounded-xl bg-purple' 
+                  : 'hidden')
+              }
+          >
+            <ExternalLink
+              href="https://archived.soulswap.finance/farms"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <SubmitButton
+                // height="2rem"
+                primaryColor={"#7G1BD9"}
+                size="xl"
+              >
+                <a 
+                  className="block text-md font-bold md:text-xl text-white font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300"
+                >
+                  <span> Archived Farms ↗</span>
+                </a>
+              </SubmitButton>
+            </ExternalLink>
+          </div>
+
+      
+      <div 
+            className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl bg-dark-900 border-purple`}
+            >
+            <div className="flex justify-center">
+             <div 
+              className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
+                >
+              <Image src={`/favicon.ico`}
+                objectFit={`contain`}
+                height={72}
+                width={72}
+              />
+            </div> 
+            </div>
+            <Image src={FARM_BANNER}
+              height={180}
+              width={1080}
+            />
+          </div>
+          <div className={`flex justify-center m-1 p-1`}>
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/dashboard'}>
             <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
@@ -146,11 +196,11 @@ export const FarmList = () => {
           </NavLink>
         </Button>
       </div>
-      <Typography className="text-2xl bg-dark-1000 mt-6 border border-dark-600 p-3 font-bold text-center">SoulSwap Pools</Typography>
+      <Typography className="text-2xl bg-dark-1000 mb-2 rounded rounded-2xl m-1 p-4 border border-purple font-bold text-center">SoulSwap Pools</Typography>
       <Active />
       <>{chainId == ChainId.FANTOM ? ftmList : avaxList}</>
       <div>
-        <Typography className="text-2xl bg-dark-1000 mt-6 border border-blue p-3 font-bold text-center">Lending Pools</Typography>
+      <Typography className="text-2xl bg-dark-1000 mb-2 rounded rounded-2xl m-1 p-4 border border-ftmBlue font-bold text-center">Lending Pools</Typography>
         <Underworld />
         {chainId == ChainId.FANTOM ? ftmLendList : avaxLendList}
         <Typography

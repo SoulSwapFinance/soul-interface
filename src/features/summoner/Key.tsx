@@ -54,9 +54,8 @@ export function Active() {
   return (
     <div className = "justify-center">
         <FarmContainer>
-          <div className = "grid grid-cols-1 bg-purple font-bold border border-dark-1000 hover:border-dark-600" >
+        <div className="grid grid-cols-1 lg:m-2 lg:ml-0 lg:mr-0 ml-2 mr-2 sm:ml-6 sm:mr-6 bg-purple rounded rounded-2xl font-bold border border-2 border-dark-1000 hover:border-purple" >
             <FarmContentWrapper>
-
               <FarmItemBox>
                 <Text fontSize=".8" color="#FFFFFF">
                   ASSET
@@ -108,7 +107,7 @@ export function Inactive() {
   return (
     <div className = "justify-center">
         <FarmContainer>
-          <div className = "grid grid-cols-1 bg-pink font-bold border border-dark-1000 hover:border-dark-600" >
+        <div className="grid grid-cols-1 lg:m-2 lg:ml-0 lg:mr-0 ml-2 mr-2 sm:ml-6 sm:mr-6 bg-pink rounded rounded-2xl font-bold border border-2 border-dark-1000 hover:border-purple" >
             <FarmContentWrapper>
               
               <FarmItemBox>
@@ -162,7 +161,7 @@ export function Underworld() {
   return (
     <div className="justify-center">
         <FarmContainer>
-          <div className="grid grid-cols-1 bg-blue font-bold border border-dark-1000 hover:border-dark-600">
+        <div className="grid grid-cols-1 lg:m-2 lg:ml-0 lg:mr-0 ml-2 mr-2 sm:ml-6 sm:mr-6 bg-ftmBlue rounded rounded-2xl font-bold border border-2 border-dark-1000 hover:border-purple" >
             <FarmContentWrapper>
 
               <FarmItemBox>
