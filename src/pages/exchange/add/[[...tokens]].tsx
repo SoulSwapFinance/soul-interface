@@ -54,7 +54,7 @@ import { SwapLayoutCard } from 'layouts/SwapLayout'
 import { VoteBanner } from 'components/Banner'
 
 import Image from 'next/image'
-import ADD_BANNER from 'assets/branding/add-liquidity-banner.png'
+import ADD_BANNER from 'assets/branding/add-banner.png'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
 
