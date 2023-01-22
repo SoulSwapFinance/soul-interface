@@ -13,13 +13,7 @@ export const stickyTokensList = [
   "weth",
   "usdc",
   "usdt",
-  "dai",
-  // "BOO",
-  // "SPIRIT",
-  // "BEETS",
-  // "SCREAM",
-  // "LQDR",
-  // "TAROT",
+  "dai"
 ];
 
 export const filterTokensWithBalance = (tokenList: ERC20Tokens) => {
