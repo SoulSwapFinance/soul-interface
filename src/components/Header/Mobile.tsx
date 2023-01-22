@@ -185,7 +185,7 @@ const Mobile: FC = () => {
                 onClick={swapRoute}
               >
               {/* {pageIcon} */}
-              <div className={`-mb-1.5`}>
+              <div className={`mt-1`}>
                       <Image
           src="/favicon.png"
           alt="SOUL"
