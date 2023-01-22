@@ -20,7 +20,8 @@ import NavLink from 'components/NavLink'
 import { useAutoStakeInfo, useTokenInfo, useUserAutoStakeInfo } from 'hooks/useAPI'
 import { SubmitButton } from 'features/autostake/Styles'
 import Image from 'next/image'
-import AUTOSTAKE_BANNER from 'assets/branding/autostake-banner.png'
+import STAKE_BANNER from 'assets/branding/stake-banner.png'
+import { getChainColor } from 'constants/chains'
 
 
 // import { useTransactionAdder } from 'state/transactions/hooks'
@@ -173,7 +174,7 @@ export default function AutoStake() {
   }
 
   return (
-    <Container id="autostake-page" className="py-4 md:py-8 lg:py-12">
+    <Container id="autostake-page" className={`md:py-8 lg:py-12 p-1 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}]`}>
       <Head>
         <title>AutoStake | Soul</title>
         <meta key="description" name="description" />
@@ -192,7 +193,7 @@ export default function AutoStake() {
             />
           </div>
         </div>
-        <Image src={AUTOSTAKE_BANNER}
+        <Image src={STAKE_BANNER}
           height={180}
           width={1080}
         />
