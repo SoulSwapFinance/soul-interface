@@ -193,10 +193,6 @@ export const FantomPools = [
     token0Address:  USDC_ADDRESS[ChainId.FANTOM],
     token1Address: DAI_ADDRESS[ChainId.FANTOM],
   },
-  
-]
-
-export const FantomLendingPools = [
   { // LENDING
     pid: 10,
     type: 'lend',
@@ -242,3 +238,7 @@ export const FantomLendingPools = [
     token1Address: DAI_ADDRESS[ChainId.FANTOM],
   },
 ]
+
+// export const FantomLendingPools = [
+  
+// ]

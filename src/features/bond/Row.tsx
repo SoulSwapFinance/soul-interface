@@ -6,7 +6,8 @@ import useApprove from 'hooks/useApprove'
 import { ChainId, LEND_MULTIPLIER, SOUL_ADDRESS, SOUL_BOND_ADDRESS, WNATIVE } from 'sdk'
 import {
   BondContainer,
-  BondContentWrapper,
+  BondItem,
+  // BondContentWrapper,
   BondItemBox,
   DetailsContainer,
   DetailsWrapper,
@@ -19,13 +20,14 @@ import Typography from '../../components/Typography'
 import ModalHeader from 'components/Modal/Header'
 import { useBondUserInfo, usePairInfo, useUserPairInfo, useSoulBondInfo, useTokenInfo } from 'hooks/useAPI'
 import { classNames, formatNumber, formatPercent, tryParseAmount } from 'functions'
-import { useSoulPrice } from 'hooks/getPrices'
 import { Token, NATIVE } from 'sdk'
 import { getChainColor, getChainColorCode } from 'constants/chains'
-import DoubleCurrencyLogo from 'components/DoubleLogo'
 import { useSoulBondContract } from 'hooks/useContract'
-import FarmInputPanel from 'features/summoner/Input'
 import { CurrencyLogo } from 'components/CurrencyLogo'
+
+// import { useSoulPrice } from 'hooks/getPrices'
+// import DoubleCurrencyLogo from 'components/DoubleLogo'
+// import FarmInputPanel from 'features/summoner/Input'
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
@@ -84,13 +86,13 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   // const liquidity = Number(soulBondUserInfo.tvl)
 
   // for display purposes only //
-  const _liquidity = Number(soulBondUserInfo.tvl )* MULTIPLIER
+  const _liquidity = Number(soulBondUserInfo.tvl) * MULTIPLIER
   const lpPrice = Number(soulBondUserInfo.pairPrice)
   // const stakedBal = Number(soulBondUserInfo.stakedBalance)
-    // for display purposes only //
-    const _stakedBalance = Number(soulBondUserInfo.stakedBalance) * MULTIPLIER
-    // for display purposes only //
-    const _stakedValue = _stakedBalance * lpPrice
+  // for display purposes only //
+  const _stakedBalance = Number(soulBondUserInfo.stakedBalance) * MULTIPLIER
+  // for display purposes only //
+  const _stakedValue = _stakedBalance * lpPrice
   const unstakedBal = Number(soulBondUserInfo.userBalance)
   const assetDecimals = Number(pairInfo.pairDecimals)
   const assetDivisor = 10 ** assetDecimals
@@ -201,25 +203,25 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   //     return e
   //   }
   // }
-    // // deposits: selected amount into the bonds
-    const handleDeposit = async (pid, amount) => {
-      let tx
-      try {
-          tx = await bondContract?.deposit(
-            pid, 
-            (Number(depositValue) / MULTIPLIER).toFixed(assetDecimals)
-            .toBigNumber(assetDecimals)
-          )
-          await tx.wait()
-      } catch (e) {
-          const smallerValue = Number(depositValue) - 0.000001
-          tx = await bondContract?.deposit(
-            pid, 
-            (Number(smallerValue) / MULTIPLIER).toFixed(assetDecimals)
-            .toBigNumber(assetDecimals))
-          await tx.wait()
-          console.log(e)
-      }
+  // // deposits: selected amount into the bonds
+  const handleDeposit = async (pid, amount) => {
+    let tx
+    try {
+      tx = await bondContract?.deposit(
+        pid,
+        (Number(depositValue) / MULTIPLIER).toFixed(assetDecimals)
+          .toBigNumber(assetDecimals)
+      )
+      await tx.wait()
+    } catch (e) {
+      const smallerValue = Number(depositValue) - 0.000001
+      tx = await bondContract?.deposit(
+        pid,
+        (Number(smallerValue) / MULTIPLIER).toFixed(assetDecimals)
+          .toBigNumber(assetDecimals))
+      await tx.wait()
+      console.log(e)
+    }
   }
 
 
@@ -236,24 +238,36 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   }
 
   return (
-    <>
+    <div className="flex justify-center w-full">
       <Wrap padding="0" display="flex" justifyContent="center">
         <BondContainer onClick={() => handleShow()}>
-          <div className={classNames("bg-dark-900 p-2 border border-dark-1000", walletBalance > 0 ? `border-[${getChainColor(chainId)}]` : '')}>
-            <BondContentWrapper>
+          <div className={classNames("bg-dark-900 p-2 rounded rounded-2xl border hover:border-2 border-dark-1000 hover:border-ftmBlue", walletBalance > 0 ? `border-[#721ce0]` : '')}>
+            <div className={`flex w-full]`}>
               <div className="items-center">
-                <BondItemBox>
-                  {!isUnderworldPair
-                    ? <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
-                    : <CurrencyLogo currency={token0} size={40} />
+                <BondItemBox className={`grid ${isUnderworldPair ? `grid-cols-2` : `grid-cols-2`}`}>
+                  {isUnderworldPair &&
+                    <CurrencyLogo currency={token0} size={50} />
                   }
+                  {isUnderworldPair &&
+                    <CurrencyLogo currency={token1} size={25} />
+                  }
+                  {!isUnderworldPair &&
+                    <CurrencyLogo currency={token0} size={40} />
+                  }
+                  {!isUnderworldPair &&
+                    <CurrencyLogo currency={token1} size={40} />
+                  }
+                  {/* {Number(allocPoint) != 220
+                      ? <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
+                      : <CurrencyLogo currency={token0} size={40} />
+                  } */}
                 </BondItemBox>
               </div>
 
-              <HideOnMobile>
+              {/* <HideOnMobile>
                 <BondItemBox>
                   <Text fontSize="1rem" color="#FFFFFF">
-                    {/* {`${formatNumber(stakedValue, true, true)}`} */}
+                    {/* {`${formatNumber(stakedValue, true, true)}`} //
                     ${_stakedValue == 0 ? 0
                       : _stakedValue.toString(2) == '0.00' ? '<0.00'
                         : _stakedValue < 1 && _stakedValue.toString(4) ? _stakedValue.toFixed(4)
@@ -262,15 +276,38 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                     }
                   </Text>
                 </BondItemBox>
-              </HideOnMobile>
+              </HideOnMobile> */}
 
-              <HideOnSmall>
+              {/* STAKED VALUE */}
+              {/* <HideOnMobile>
+              <BondItemBox>
+                  <BondItem>
+                    {Number(_APR).toString() === '0.00' ? (
+                      <Text padding="0" fontSize="1rem" color="#666">
+                        0
+                      </Text>
+                    ) : (
+                      <Text padding="0" fontSize="1rem" color="#FFFFFF">
+                        ${
+                          _stakedValue == 0 ? 0
+                            : _stakedValue.toString(2) == '0.00' ? '<0.00'
+                              : _stakedValue < 1 && _stakedValue.toString(4) ? _stakedValue.toFixed(4)
+                                : _stakedValue > 0 ? _stakedValue.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                                  : 0
+                        }
+                      </Text>
+                    )}
+                  </BondItem>
+                </BondItemBox>
+              </HideOnMobile> */}
+
+              {/* <HideOnSmall>
                 <BondItemBox>
                   <Text fontSize="1rem" color="#FFFFFF">
                     {percOfBond.toFixed(0)}%
                   </Text>
                 </BondItemBox>
-              </HideOnSmall>
+              </HideOnSmall> */}
 
               <BondItemBox>
                 <Text fontSize="1rem" color="#FFFFFF">
@@ -279,7 +316,8 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                       : _APR < 1 && _APR.toString(4) ? _APR.toFixed(4)
                         : _APR > 0 ? _APR.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                           : '-'
-                  }%                </Text>
+                  }%
+                </Text>
               </BondItemBox>
 
               <BondItemBox>
@@ -293,7 +331,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                   {formatNumber(_liquidity, true, true)}
                 </Text>
               </BondItemBox>
-            </BondContentWrapper>
+            </div>
           </div>
         </BondContainer>
       </Wrap>
@@ -314,18 +352,18 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                   {/* DEPOSIT: ASSET PANEL */}
                   {isStakeable && Number(walletBalance) != 0 &&
                     <BondInputPanel
-                    pid={bond.pid}
-                    onUserInput={(value) => setDepositValue(value)}
-                    onMax={() => setDepositValue(_walletBalance.toString())}
-                    value={depositValue}
-                    balance={_walletBalance.toString()}
-                    id={pid}
+                      pid={bond.pid}
+                      onUserInput={(value) => setDepositValue(value)}
+                      onMax={() => setDepositValue(_walletBalance.toString())}
+                      value={depositValue}
+                      balance={_walletBalance.toString()}
+                      id={pid}
                     />
                   }
-                   <Wrap padding="0" margin="0" display="flex">
+                  <Wrap padding="0" margin="0" display="flex">
                     {(approved && isStakeable && Number(unstakedBal) == 0 && depositable ?
                       (bond.token0Symbol == WNATIVE[chainId].symbol ? (
-                            <SubmitButton
+                        <SubmitButton
                           primaryColor={getChainColor(chainId)}
                         >
                           <TokenPairLink
@@ -347,10 +385,10 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                             rel="noopener"
                             color={"white"}
                             href=
-                            { isUnderworldPair ? `https://exchange.soulswap.finance/lend/${bond.lpAddress}`
+                            {isUnderworldPair ? `https://exchange.soulswap.finance/lend/${bond.lpAddress}`
                               : `https://exchange.soulswap.finance/add/${bond.token0Address}/${bond.token1Address}`}
                           >
-                            { isUnderworldPair ? `LEND ${bond.token0Symbol}` : `CREATE ${isUnderworldPair ? token0Symbol : bond.lpSymbol} PAIR`}
+                            {isUnderworldPair ? `LEND ${bond.token0Symbol}` : `CREATE ${isUnderworldPair ? token0Symbol : bond.lpSymbol} PAIR`}
                           </TokenPairLink>
                         </SubmitButton>
                       ) :
@@ -475,7 +513,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
           </SubmitButton>
         </div>
       </Modal>
-    </>
+    </div>
   )
 }
 

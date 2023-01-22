@@ -148,26 +148,26 @@ export const BondItem = styled.h2`
 `
 
 export const BondItemBox = styled.div`
-  width: ${({ width }) => (width ? `${width}` : `100px`)};
-  display: grid;
-  justify-content: center;
-  align-items: center;
-`
-
-export const BondContentWrapper = styled.div`
+  width: ${({ width }) => (width ? `${width}` : `8rem`)};
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 1rem 0 0;
-
-  &:last-child {
-    justify-content: space-between;
-  }
-
-  @media screen and (max-width: 720px) {
-    padding: 0;
-  }
 `
+
+// export const BondContentWrapper = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 0 1rem 0 0;
+
+//   &:last-child {
+//     justify-content: space-between;
+//   }
+
+//   @media screen and (max-width: 720px) {
+//     padding: 0;
+//   }
+// `
 
 export const BondContainer = styled.div`
   display: grid;
