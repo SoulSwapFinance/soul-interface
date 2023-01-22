@@ -141,7 +141,7 @@ export default function PoolFinder() {
                   className={`flex border border-[${getChainColor(chainId)}] p-3 rounded rounded-xl w-full justify-center text-xl bg-${getChainColorCode(chainId)}`}
                   onClick={() => handleLink('/pool')}
                 >
-                  <a className={`text-center text-bold`}>{i18n._(t`Manage Position`)}</a>
+                  <a className={`text-center font-bold`}>{i18n._(t`Manage Position`)}</a>
                 </Typography>
               </AutoRow>
             )}

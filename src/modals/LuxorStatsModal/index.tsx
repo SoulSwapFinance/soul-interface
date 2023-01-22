@@ -209,10 +209,10 @@ export default function LuxorStatsModal(): JSX.Element | null {
           </div>
           {/* </div> */}
           {/* <div className="flex flex-col justify-between">
-            <div className="flex items-center text-primary text-bold">
+            <div className="flex items-center text-primary font-bold">
                 <div className="text-primary text-base text-secondary text-2xl">{`${luxorPrice}`}</div>
                 <div className="text-primary text-base text-secondary text-2xl">{`${wrappedLumensPrice}`}</div> */}
-          {/* <div className="flex items-center text-primary text-bold">
+          {/* <div className="flex items-center text-primary font-bold">
               <div className="text-primary text-base text-secondary text-2xl">{`${luxorPrice}`}</div>
               </div>
                   <div className="text-primary text-base text-secondary text-2xl">{`${wrappedLumensPrice}`}</div> */}

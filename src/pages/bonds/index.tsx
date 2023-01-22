@@ -1,5 +1,5 @@
 import { Wrap } from 'components/ReusableStyles'
-import { BondsBanner } from 'components/Banner'
+// import { BondsBanner } from 'components/Banner'
 import Container from 'components/Container'
 import Head from 'next/head'
 import React from 'react'
@@ -12,6 +12,8 @@ import { ChainId } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 import ExternalLink from 'components/ExternalLink'
 import { SubmitButton } from 'features/bond/Styles'
+import Image from 'next/image'
+import BONDS_BANNER from 'assets/branding/bonds-banner.png'
 
 const Bonds = () => {
   const { chainId } = useActiveWeb3React()
@@ -32,45 +34,53 @@ const Bonds = () => {
           <ExternalLink
             href="https://soulswapfinance.medium.com/owning-our-liquidity-via-our-innovative-soul-bonds-podl-592c2849ceed" target="_blank" rel="noreferrer"
           >
-            <a className="block text-md font-bold md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <a className="block text-md font-bold md:text-xl text-white font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span> Learn More: Innovative Soul Bonds </span>
             </a>
           </ExternalLink>
         </SubmitButton>
+        <div className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}>
+          <div className={`flex justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}>
+            <Image src={`/favicon.ico`}
+              objectFit={`contain`}
+              height={72}
+              width={72}
+              />
+          </div>
+            <Image src={BONDS_BANNER}
+              height={180}
+              width={1080}
+            />
+          </div>
         <Head>
           <title>Bonds | All</title>
           <meta key="description" name="description" content="Mint SOUL" />
         </Head>
-        <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
-          <NavLink href={'/summoner'}>
-            <Button variant="filled" color="purple" size="lg">
-              <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                <span> Farm </span>
-              </a>
-            </Button>
+        <div className={`flex justify-center m-1 p-1`}>
+        <Button variant="filled" color="purple" size="lg">
+          <NavLink href={'/dashboard'}>
+            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              <span>SoulSwap Data </span>
+            </a>
           </NavLink>
-          <NavLink href={'/soul/dashboard'}>
-            <Button variant="filled" color="purple" size="lg" className={[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? '' : 'hidden'}>
-              <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                <span> Data </span>
-              </a>
-            </Button>
-          </NavLink>
-          <NavLink href={'/lend'}>
-            <Button variant="filled" color="purple" size="lg">
-              <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                <span> Lend </span>
-              </a>
-            </Button>
-          </NavLink>
+        </Button>
+      </div>
+        <div className="flex ml-2 mr-2 mb-4 mt-2 gap-1 items-center justify-center">
+        <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/autostake'}>
-            <Button variant="filled" color="purple" size="lg" className={[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? '' : 'hidden'}>
-              <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                <span> Vault </span>
-              </a>
-            </Button>
+            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              <span>Stake</span>
+            </a>
           </NavLink>
-        </div>
+        </Button>
+        <Button variant="filled" color="purple" size="lg">
+          <NavLink href={'/summoner'}>
+            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              <span>Summon</span>
+            </a>
+          </NavLink>
+        </Button>
+      </div>
         <BondList />
       </Container>
     </Wrap>

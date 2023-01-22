@@ -10,6 +10,7 @@ import { ChainId } from 'sdk'
 import { useSummonerContract } from 'hooks/useContract'
 import ExternalLink from 'components/ExternalLink'
 import { classNames } from 'functions'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 // import { getChainColorCode } from 'constants/chains'
 // import { classNames } from 'functions'
 
@@ -119,46 +120,31 @@ export const FarmList = () => {
   }
 
   return (
-    <div>
-      <div className="flex ml-2 mt-2 mr-2 mb-4 gap-1 items-center justify-center">
-        <NavLink href={'/soul/dashboard'}>
-          <Button variant="filled"
-            color={"purple"}
-            size="lg">
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> Data </span>
+    <div className={`grid grid-cols-1 justify-center sm:m-8 sm:max-w-[90%] md:max-w-[100%] bg-dark-900 rounded rounded-2xl border border-[${getChainColor(chainId)}]`}>
+      <div className={`flex justify-center m-1 p-1`}>
+        <Button variant="filled" color="purple" size="lg">
+          <NavLink href={'/dashboard'}>
+            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              <span>SoulSwap Data </span>
             </a>
-          </Button>
-        </NavLink>
-        <NavLink href={'/bonds'}>
-          <Button variant="filled"
-            color={"purple"}
-            size="lg">
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> Bond </span>
+          </NavLink>
+        </Button>
+      </div>
+      <div className="flex ml-2 mr-2 mb-4 mt-2 gap-1 items-center justify-center">
+        <Button variant="filled" color="purple" size="lg">
+          <NavLink href={'/autostake'}>
+            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              <span>Stake</span>
             </a>
-          </Button>
-        </NavLink>
-        <NavLink href={'/lend'}>
-          <Button variant="filled"
-            color={"purple"}
-            size="lg"
-          >
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> Lend </span>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="purple" size="lg">
+          <NavLink href={'/bonds'}>
+            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              <span>Mint</span>
             </a>
-          </Button>
-        </NavLink>
-        <NavLink href={'/autostake'}>
-          <Button variant="filled"
-            color={"purple"}
-            size="lg"
-          >
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> Vault </span>
-            </a>
-          </Button>
-        </NavLink>
+          </NavLink>
+        </Button>
       </div>
       <Typography className="text-2xl bg-dark-1000 mt-6 border border-dark-600 p-3 font-bold text-center">SoulSwap Pools</Typography>
       <Active />
@@ -169,11 +155,11 @@ export const FarmList = () => {
         {chainId == ChainId.FANTOM ? ftmLendList : avaxLendList}
         <Typography
           className={
-          classNames(
-          // chainId == ChainId.AVALANCHE ?
-            'hidden' 
-          // : `text-2xl bg-dark-1000 mt-6 border border-pink p-3 font-bold text-center`
-          )}
+            classNames(
+              // chainId == ChainId.AVALANCHE ?
+              'hidden'
+              // : `text-2xl bg-dark-1000 mt-6 border border-pink p-3 font-bold text-center`
+            )}
         >
           Retired Pools
         </Typography>
