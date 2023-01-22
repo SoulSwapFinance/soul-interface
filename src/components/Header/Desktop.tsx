@@ -1,8 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react'
-import BarsIcon from 'components/Icons/header/BarsIcon'
-import Image from 'next/image'
-import { ChainId, NATIVE } from 'sdk'
-import Web3Status from 'components/Web3Status'
+// import BarsIcon from 'components/Icons/header/BarsIcon'
+// import Image from 'next/image'
+// import { ChainId, NATIVE } from 'sdk'
+// import Web3Status from 'components/Web3Status'
 import { useActiveWeb3React } from 'services/web3'
 // import { useETHBalances } from 'state/wallet/hooks'
 import React, { FC, Fragment, useCallback, useState } from 'react'
@@ -19,7 +19,7 @@ import { classNames } from 'functions'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { useRouter } from 'next/router'
 import DesktopBar from './DesktopBar'
-import SwapIcon from 'components/Icons/exchange/SwapIcon'
+// import SwapIcon from 'components/Icons/exchange/SwapIcon'
 // import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
 // import WalletIcon from 'components/Icons/header/WalletIcon'
 // import DropletIcon from 'components/Icons/header/DropletIcon'
@@ -78,11 +78,11 @@ const Desktop: FC = () => {
   //     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
   //   />
 
-  const SWAP_ICON = <SwapIcon
-    fillPrimary={open ? WHITE : getChainColor(chainId)}
-    fillSecondary={open ? getChainColor(chainId) : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
-  />
+  // const SWAP_ICON = <SwapIcon
+  //   fillPrimary={open ? WHITE : getChainColor(chainId)}
+  //   fillSecondary={open ? getChainColor(chainId) : WHITE}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+  // />
 
   //   const SUN_ICON = <SunMoonIcon
   //     fillPrimary={open ? chainColor : WHITE}

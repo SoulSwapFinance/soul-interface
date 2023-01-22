@@ -54,6 +54,7 @@ export default function AutoStake() {
   const pricePerShare = Number(autoStakeInfo.pricePerShare)
   const userBalance = Number(userAutoStakeInfo.userBalance)
 
+
   const stakedBal = Number(userAutoStakeInfo.stakedBalance)
   // const stakedValue = pricePerShare * stakedBal
   const stakedValue = soulPrice * stakedBal
@@ -61,7 +62,6 @@ export default function AutoStake() {
   const userDelta = stakedBal - userBalance
   const totalDeduction = stakedBal + userDelta
   const earnedAmount = (pricePerShare * stakedBal) - totalDeduction
-
   const earnedValue = soulPrice * earnedAmount
 
   /**
@@ -285,18 +285,18 @@ export default function AutoStake() {
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-purple w-full space-y-1">
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Staked Balance`)}
+                    {i18n._(t`Staked`)}
                   </Typography>
                   <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
-                    {formatNumber(stakedBal, false, true)} SOUL ({formatNumber(stakedValue, true, true)})
+                    {formatNumber(stakedBal - earnedAmount, false, true)} SOUL ({formatNumber(stakedValue, true, true)})
                   </Typography>
                 </div>
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Pending Rewards`)}
+                    {i18n._(t`Rewards`)}
                   </Typography>
                   <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
-                    {earnedAmount.toFixed(0)} SOUL ({formatNumber(earnedValue, true, true)})
+                    {formatNumber(earnedAmount, false, true)} SOUL ({formatNumber(earnedValue, true, true)})
                   </Typography>
                 </div>
                 <div className="flex justify-between">
@@ -391,7 +391,7 @@ export default function AutoStake() {
                     {i18n._(t`Staked`)}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {formatNumber(stakedBal, false, true)} SOUL
+                    {formatNumber(stakedBal - earnedAmount, false, true)} SOUL
                   </Typography>
                 </div>
                 <div className="flex justify-between">

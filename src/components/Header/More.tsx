@@ -10,8 +10,8 @@ import { useLingui } from '@lingui/react'
 import NavLink from '../NavLink'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { useActiveWeb3React } from 'services/web3'
-import Web3Network from 'components/Web3Network'
-import Web3Status from 'components/Web3Status'
+// import Web3Network from 'components/Web3Network'
+// import Web3Status from 'components/Web3Status'
 import TokenStats from 'components/TokenStats'
 import LanguageMenu from './useLanguages'
 // import SquareEllipsisIcon from 'components/Icons/mobile/SquareEllipsisIcon'
@@ -55,7 +55,6 @@ export default function Menu() {
     <Popover className="relative ml-auto m-0">
       {({ open }) => (
         <>
-
           <Popover.Button
             className={classNames(
               open ? `text-${getChainColorCode(chainId)}` : 'text-secondary',
@@ -125,19 +124,19 @@ export default function Menu() {
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
+
             <Popover.Panel
               static
               className="absolute z-50 w-screen max-w-xs px-2 mt-3 transform -translate-x-full bottom-8 lg:top-12 left-full sm:px-0"
             >
-
               <div className={classNames(`overflow-hidden rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5 border border-2 border-[${getChainColor(chainId)}]`)}>
                 <div className="relative grid gap-6 px-5 py-6 bg-dark-1000 sm:gap-8 sm:p-8">
                   {solutions.map((item) =>
                     item.external ? (
                       <ExternalLink
-                      key={item.name}
-                      href={item.href}
-                      className="block p-1 -m-3 transition duration-150 ease-in-out text-center rounded-md hover:bg-dark-900"
+                        key={item.name}
+                        href={item.href}
+                        className="block p-1 -m-3 transition duration-150 ease-in-out text-center rounded-md hover:bg-dark-900"
                       >
                         <p className="text-base font-medium text-high-emphesis">{item.name}</p>
                         <p className="text-sm text-secondary">{item.description}</p>
@@ -150,11 +149,16 @@ export default function Menu() {
                         </a>
                       </NavLink>
                     )
-                    )}
+                  )}
                 </div>
-                 <div className={`grid border border-[${getChainColor(chainId)}] justify-center rounded rounded-md justify-end bg-dark-1000`}>
-                    <LanguageMenu />
-              </div>
+                <div className={`grid grid-cols-2 border border-[${getChainColor(chainId)}] justify-center rounded rounded-md justify-end bg-dark-1000`}>
+                <div className={`grid border border-[${getChainColor(chainId)}] justify-center rounded rounded-md justify-end bg-dark-1000`}>
+                  <TokenStats />
+                </div>
+                <div className={`grid border border-[${getChainColor(chainId)}] justify-center rounded rounded-md justify-end bg-dark-1000`}>
+                  <LanguageMenu />
+                </div>
+                </div>
               </div>
             </Popover.Panel>
           </Transition>
