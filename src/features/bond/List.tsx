@@ -119,9 +119,9 @@ export const BondList = () => {
           </NavLink>
         </Button>
         <Button variant="filled" color="purple" size="lg">
-          <NavLink href={'/bonds'}>
+          <NavLink href={'/summoner'}>
             <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span>Mint</span>
+              <span>Summon</span>
             </a>
           </NavLink>
         </Button>
@@ -130,8 +130,7 @@ export const BondList = () => {
       <BondKey />
           <>{chainId == ChainId.FANTOM ? ftmList : avaxList}</>
       <div>
-      <Typography className="text-2xl bg-dark-1000 mb-2 rounded rounded-2xl m-1 p-4 border border-ftmBlue font-bold text-center">Lending Pools</Typography>
-
+      {/* <Typography className="text-2xl bg-dark-1000 mb-2 rounded rounded-2xl m-1 p-4 border border-ftmBlue font-bold text-center">Lending Pools</Typography> */}
         {/* chainId == ChainId.FANTOM ? <Inactive /> : null */}
         {/* chainId == ChainId.FANTOM ? inactiveFtmList : inactiveAvaxList */}
       </div>
