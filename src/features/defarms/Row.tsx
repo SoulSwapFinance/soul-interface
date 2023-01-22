@@ -862,7 +862,7 @@ export const ActiveRow = ({ pid, farm }) => {
                                 handleZap(zapTokenAddress, depositAddress)
                             }
                         >
-                            ZAP INTO {symbol}
+                            ZAP INTO PAIR
                         </SubmitButton>
                     </Wrap>
                     {/* } */}
