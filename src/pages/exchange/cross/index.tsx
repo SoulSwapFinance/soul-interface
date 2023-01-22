@@ -44,7 +44,9 @@ import TokenSelect from "features/cross/components/TokenSelect";
 import NavLink from "components/NavLink";
 // import { SubmitButton } from "features/summoner/Styles";
 import { getChainColor, getChainColorCode } from "constants/chains";
+import { VoteBanner } from "components/Banner";
 // import { BalancePromiseToUnit } from "pages/bridge";
+import CROSSCHAIN_BANNER from 'assets/branding/crosschain-banner.png'
 
 export default function Exchange() {
   const { account, chainId } = useActiveWeb3React()
@@ -334,7 +336,14 @@ export default function Exchange() {
 
     <Container id="cross-page" maxWidth="2xl" className="space-y-4 mt-4">
       <DoubleGlowShadowV2>
-        <SwapLayoutCard>
+        <SwapLayoutCard>          
+          <VoteBanner />
+            <div className={`w-full p-6 border border-2 rounded rounded-2xl border-purple`}>
+              <Image src={CROSSCHAIN_BANNER}
+                height={180}
+                width={1080}
+              />
+            </div>
         {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
           <SwapDropdown />
             {/* <SwapHeader /> */}

@@ -40,6 +40,7 @@ import { useRouter } from 'next/router'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import Pair from 'pages/analytics/pairs/[id]'
 import { VoteBanner } from 'components/Banner'
+import EXCHANGE_BANNER from 'assets/branding/swap-banner.png'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -384,7 +385,6 @@ const Swap = () => {
         tokens={importTokensNotInDefault}
         onConfirm={handleConfirmTokenWarning}
       />
-      <VoteBanner />
       {![ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <div className="flex flex-col gap-3 mt-12 justify-center">
           <SwapHeader inputCurrency={currencyA} outputCurrency={currencyB} />
@@ -403,6 +403,13 @@ const Swap = () => {
 
       {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <SwapLayoutCard>
+                <VoteBanner />
+            <div className={`w-full p-6 border border-2 rounded rounded-2xl border-purple`}>
+              <Image src={EXCHANGE_BANNER}
+                height={180}
+                width={1080}
+              />
+            </div>
           {/* {!useLimit && */}
           <><SwapDropdown inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
             {/* {useSwap && */}

@@ -95,6 +95,8 @@ import { useCurrency } from "hooks/Tokens"
 // import SocialWidget from "components/Social"
 import SwapDropdown from "features/swap/SwapDropdown"
 import { getChainColor, getChainColorCode } from "constants/chains"
+import { VoteBanner } from "components/Banner"
+import LIMIT_BANNER from 'assets/branding/limit-banner.png'
 
 // const BodyWrapper = styled.div<{ margin?: string }>`
 // position: relative;
@@ -498,6 +500,13 @@ const Limit = () => {
     <Container id="cross-page" maxWidth="2xl" className="space-y-4">
       <DoubleGlowShadowV2>
         <SwapLayoutCard>
+        <VoteBanner />
+            <div className={`w-full p-6 border border-2 rounded rounded-2xl border-purple`}>
+              <Image src={LIMIT_BANNER}
+                height={180}
+                width={1080}
+              />
+            </div>
           <div className="p-0 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
             {showHeader &&
               <SwapDropdown
