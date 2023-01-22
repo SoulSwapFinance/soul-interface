@@ -238,11 +238,11 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   }
 
   return (
-    <div className="flex justify-center w-full">
-      <Wrap padding="0" display="flex" justifyContent="center">
+    <div className="grid  justify-center">
         <BondContainer onClick={() => handleShow()}>
           <div className={classNames("bg-dark-900 p-2 rounded rounded-2xl border hover:border-2 border-dark-1000 hover:border-ftmBlue", walletBalance > 0 ? `border-[#721ce0]` : '')}>
-            <div className={`flex w-full]`}>
+          {/* <div className={classNames("bg-dark-900 p-3 m-1 mr-8 ml-8 border rounded rounded-2xl border-blue")}> */}
+            <div className={`grid grid-cols-4 w-full]`}>
               <div className="items-center">
                 <BondItemBox className={`grid ${isUnderworldPair ? `grid-cols-2` : `grid-cols-2`}`}>
                   {isUnderworldPair &&
@@ -334,7 +334,6 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
             </div>
           </div>
         </BondContainer>
-      </Wrap>
 
       {showing && (
         <Wrap padding="0" display="flex" justifyContent="center">
