@@ -96,7 +96,9 @@ export default function PoolFinder() {
       <DoubleGlowShadowV2 opacity="0.6">
         <div className="p-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
           <SwapLayoutCard>
+          <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
             <SwapDropdown />
+          <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
             <AutoColumn gap={'md'}>
               <CurrencySelectPanel
                 currency={currency0}

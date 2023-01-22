@@ -19,7 +19,7 @@ import { ChainId, Currency, CurrencyAmount, DAI, DAI_ADDRESS, NATIVE, NATIVE_ADD
 import { addTransaction } from 'state/transactions/actions'
 import useTokenBalance from 'hooks/useTokenBalance'
 import { Button } from 'components/Button'
-import { getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 // import listedTokens from 'features/aggregator/tokenList.json'
 import { e10 } from 'functions/math'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
@@ -432,11 +432,13 @@ const Aggregator = ({ }) => {
 							width={1080}
 						/>
 					</div>
+					<div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
 					<SwapDropdown
 						inputCurrency={currencyA}
 						outputCurrency={currencyB}
 					// allowedSlippage={allowedSlippage}
 					/>
+					<div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
 					<div className="flex flex-col gap-3 space-y-3">
 						<SwapAssetPanel
 							spendFromWallet={true}

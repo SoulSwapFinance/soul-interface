@@ -508,14 +508,17 @@ const Limit = () => {
               />
             </div>
           <div className="p-0 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+          {showHeader && <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>}
+
             {showHeader &&
               <SwapDropdown
-                inputCurrency={currencyA}
-                outputCurrency={currencyB}
-                allowedSlippage={allowedSlippage}
+              inputCurrency={currencyA}
+              outputCurrency={currencyB}
+              allowedSlippage={allowedSlippage}
               />
             }
 
+            {showHeader && <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>}
             {/* <OrderHeader handleActiveTab={handleActiveTab} activeTab={activeTab} /> */}
             {/* <Wrapper id="limit-order-page"> */}
             <ConfirmSwapModal

@@ -411,7 +411,9 @@ const Swap = () => {
               />
             </div>
           {/* {!useLimit && */}
+          <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
           <><SwapDropdown inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+          <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
             {/* {useSwap && */}
             <SwapAssetPanel
               spendFromWallet={true}

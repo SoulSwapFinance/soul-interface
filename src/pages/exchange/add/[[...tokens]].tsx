@@ -54,7 +54,7 @@ import { SwapLayoutCard } from 'layouts/SwapLayout'
 import { VoteBanner } from 'components/Banner'
 
 import Image from 'next/image'
-import POOL_BANNER from 'assets/branding/pool-banner.png'
+import ADD_BANNER from 'assets/branding/add-liquidity-banner.png'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
 
@@ -368,18 +368,21 @@ export default function Add() {
       <Container id="add-liquidity-page" maxWidth="2xl" className="space-y-4 mt-4">
         <DoubleGlowShadowV2>
           <SwapLayoutCard>
-          <VoteBanner />
+            <VoteBanner />
             <div className={`w-full p-6 border border-2 rounded rounded-2xl border-purple`}>
-              <Image src={POOL_BANNER}
+              <Image src={ADD_BANNER}
                 height={180}
                 width={1080}
               />
             </div>
+            <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
             <SwapDropdown
               inputCurrency={currencies[Field.CURRENCY_A]}
               outputCurrency={currencies[Field.CURRENCY_B]}
             // allowedSlippage={allowedSlippage}
             />
+            <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
+
             <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
             <TransactionConfirmationModal
               isOpen={showConfirm}

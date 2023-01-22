@@ -345,8 +345,9 @@ export default function Exchange() {
               />
             </div>
         {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
-          <SwapDropdown />
-            {/* <SwapHeader /> */}
+        <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
+            <SwapDropdown />
+            <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>            {/* <SwapHeader /> */}
               {/*  [F] TOKEN SELECTOR */}
               {/*    [F] CHAIN LOGO   */}
               <div
