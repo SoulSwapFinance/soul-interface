@@ -20,7 +20,7 @@ import { SubmitButton } from 'features/bond/Styles'
 
 export const FarmList = () => {
   const { chainId } = useActiveWeb3React()
-  const SummonerContract = useSummonerContract()
+  // const SummonerContract = useSummonerContract()
   const ftmList = FantomPools.map((farm) => (
     <ActiveRow
       key={farm.pid}
