@@ -1,6 +1,5 @@
 import { ChainId, Percent } from '../../sdk'
 import React, { useCallback, useRef, useState } from 'react'
-import { CheckIcon, CogIcon } from '@heroicons/react/24/outline'
 import {
   // useCrossChainModeManager,
   // useUserArcherUseRelay,
@@ -23,6 +22,9 @@ import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import { useActiveWeb3React } from 'services/web3'
 import TransactionSettings from 'components/TransactionSettings'
 import ModalHeader from 'components/Modal/Header'
+import { getChainColor } from 'constants/chains'
+import { classNames } from 'functions'
+import CogIcon from 'components/Icons/exchange/CogIcon'
 
 export default function SettingsTab({ placeholderSlippage }: { placeholderSlippage?: Percent }) {
   const { i18n } = useLingui()
@@ -39,9 +41,15 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
   useOnClickOutside(node, open ? toggle : undefined)
 
   const [ttl, setTtl] = useUserTransactionTTL()
-
+  const WHITE = `#FFFFFF`
+  const chainColor = getChainColor(chainId)
   // const [userUseArcher, setUserUseArcher] = useUserArcherUseRelay()
-
+  const SWAP_ICON = <CogIcon
+    fillPrimary={open ? WHITE : getChainColor(chainId)}
+    fillSecondary={open ? getChainColor(chainId) : WHITE}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+  />
+  
   return (
     <div className="relative flex" ref={node}>
       <div
@@ -49,7 +57,8 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
         onClick={toggle}
         id="open-settings-dialog-button"
       >
-        <CogIcon className="w-[36px] h-[46px] transform rotate-90 hover:text-white" />
+        {SWAP_ICON}
+        {/* <CogIcon className="w-[36px] h-[46px] transform rotate-90 hover:text-white" /> */}
       </div>
       {open && (
         <div className="absolute top-14 right-0 z-50 -mr-2.5 min-w-20 md:m-w-22 md:-mr-5 bg-dark-900 border-2 border-dark-800 rounded w-80 shadow-lg">

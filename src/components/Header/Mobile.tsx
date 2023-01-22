@@ -267,7 +267,7 @@ const Mobile: FC = () => {
                 border border-[${getChainColor(chainId)}]
                 hover:border-2
                 `,
-              dropdown ? `relative top-0 right-6` : `relative top-0 right-0`)}
+              dropdown ? `relative top-0 right-4` : `relative top-0 right-0`)}
           // onClick={() => { setOpen(true) }}
           onClick={() =>
             dropdown ?
@@ -279,12 +279,9 @@ const Mobile: FC = () => {
         </div>
         {dropdown &&
           <div
-            className={dropdown ? `grid grid-cols-3` : `hidden`}>
+            className={dropdown ? `grid grid-cols-2` : `hidden`}>
 
-            {/* TOKEN STATS */}
-            <div className={`relative top-0 right-4 border border-[${getChainColor(chainId)}] hover:border-2 rounded rounded-2xl inline-block`}>
-              <TokenStats />
-            </div>
+
             {/* WALLET ICON */}
             <div
               className={`relative top-0 right-2 rounded rounded-2xl inline-block border border-[${getChainColor(chainId)}] hover:border-2`}
