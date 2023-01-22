@@ -386,7 +386,7 @@ export const AURA_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x07Df38A48dCab8fe52c57fBE5dEAe7f2C7613972',
+  [ChainId.FANTOM]: '0xec3F962238cC6D45aEc0f97D0f150e221Ef3C42C',
   [ChainId.AVALANCHE]: '0x268D3D63088821C17c59860D6B9476680a4843d2', // V2
   // [ChainId.AVALANCHE]: '0x385cC4Ce661a32891919153676efd4E208AAc3Bc', // SEP22
   [ChainId.MATIC]: '',

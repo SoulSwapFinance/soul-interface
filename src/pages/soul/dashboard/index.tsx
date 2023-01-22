@@ -15,7 +15,7 @@ import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { useSoulInfo, useBondInfo, usePriceUSD, useTokenInfo } from 'hooks/useAPI'
 import { ChainId, NATIVE, SOUL_ADDRESS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
-import { getChainInfo, getChainColorCode } from 'constants/chains'
+import { getChainInfo, getChainColorCode, getChainColor } from 'constants/chains'
 import Image from 'next/image'
 import DATA_BANNER from 'assets/branding/data-banner.png'
 
@@ -215,25 +215,14 @@ export default function Dashboard() {
 //  `;
 
   return (
-    <Container id="dashboard-page" className="py-4 space-y-4 md:py-8 max-w-min">
       <DoubleGlowShadowV2>
         <Head>
           <title>Dashboard | Soul</title>
           <meta key="description" name="description" />
         </Head>
-        <div className="grid grid-cols justify-center bg-dark-900">
-          {/* <HideOnMobile>
-            <div className="py-1 mb-1 mt-3 ml-3 mr-3 bg-dark-600" />
-            <div className="py-1 mb-1 ml-3 mr-3 bg-purple" />
-            <Typography variant="h1" className="text-center mt-4 mb-4 text-dark-600" component="h1">
-              SOULSWAP FINANCE
-            </Typography>
-            <div className="py-1 mt-1 ml-3 mr-3 bg-dark-600" />
-            <div className="py-1 mt-1 ml-3 mr-3 mb-3 bg-purple" />
-          </HideOnMobile> */}
-
+          <div className={`grid p-1 mt-2 rounded rounded-2xl border border-2 border-[${getChainColor(chainId)}] bg-dark-1000`} >
           <div 
-            className={`w-full grid grid-cols-2 bg-dark-900 p-4 border border-2 rounded rounded-2xl border-purple`}
+            className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl bg-dark-900 border-purple`}
             >
             <div className="flex justify-center">
              <div 
@@ -246,12 +235,12 @@ export default function Dashboard() {
               />
             </div> 
             </div>
-        <Image src={DATA_BANNER}
-          height={180}
-          width={1080}
-        />
-      </div>
-      {/* <div className={`flex justify-center m-1 p-1`}>
+            <Image src={DATA_BANNER}
+              height={180}
+              width={1080}
+            />
+          </div>
+          <div className={`flex justify-center m-1 p-1`}>
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/dashboard'}>
             <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
@@ -259,33 +248,30 @@ export default function Dashboard() {
             </a>
           </NavLink>
         </Button>
-      </div> */}
-      <div className={`flex ml-2 mr-2 mb-4 mt-2 gap-1 items-center justify-center`}>
+      </div>
+      <div className="flex ml-2 mr-2 mb-4 mt-2 gap-1 items-center justify-center">
         <Button variant="filled" color="purple" size="lg">
-          <NavLink href={'/bonds'}>
+          <NavLink href={'/farms'}>
             <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> Mint </span>
+              <span>Summon</span>
             </a>
           </NavLink>
         </Button>
         <Button variant="filled" color="purple" size="lg">
-          <NavLink href={'/summoner'}>
+          <NavLink href={'/bonds'}>
             <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> Summon </span>
+              <span>Mint</span>
             </a>
           </NavLink>
         </Button>
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/autostake'}>
             <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> Stake </span>
+              <span>Stake</span>
             </a>
           </NavLink>
         </Button>
       </div>
-          <div className="flex text-center items-center">
-          </div>
-          <div className="p-1 shadow-4 bg-[#A654DD] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
             <div className="bg-dark-1000 p-4">
               <Typography
                 className="text-2xl flex gap-1 justify-center items-center"
@@ -393,9 +379,8 @@ export default function Dashboard() {
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="p-1 shadow-4 bg-[#A654DD] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
+          {/* <div className="p-1 shadow-4 bg-[#A654DD] rounded-none sm:rounded-8 inline-block w-screen md:w-540"> */}
             <div className="bg-dark-1000 p-4">
               <Typography
                 className="text-2xl flex gap-1 justify-center items-center"
@@ -478,8 +463,6 @@ export default function Dashboard() {
             </div> */}
             </div>
           </div>
-        </div>
       </DoubleGlowShadowV2>
-    </Container>
   )
 }
