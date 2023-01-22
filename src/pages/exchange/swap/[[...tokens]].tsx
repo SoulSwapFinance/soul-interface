@@ -405,18 +405,18 @@ const Swap = () => {
         <SwapLayoutCard>
           <VoteBanner />
           <div className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}>
-          <div className={`flex justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}>
-            <Image src={`/favicon.ico`}
-              objectFit={`contain`}
-              height={72}
-              width={72}
+            <div className={`flex justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}>
+              <Image src={`/favicon.ico`}
+                objectFit={`contain`}
+                height={72}
+                width={72}
               />
-          </div>
+            </div>
             <Image src={EXCHANGE_BANNER}
               height={180}
               width={1080}
             />
-            </div>
+          </div>
           {/* {!useLimit && */}
           <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
           <><SwapDropdown inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
