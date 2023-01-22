@@ -387,9 +387,29 @@ export const BalancePromiseToUnit: React.FC<any> = ({ promise, decimals }) => {
       </Typo2>
     </Row>
   )
+
+
 }
 
 const Bridge: React.FC<any> = () => {
+
+  type BridgeToken = {
+    ContractAddress, name,
+    symbol, symbolTo, logoUrl, 
+    Decimals, decimals, DecimalsTo, 
+    balance,
+    MinimumSwap, MaximumSwap, MinimumSwapFee, MaximumSwapFee, SwapFeeRate, 
+    type,
+    ContractAddressTo,
+    router, 
+
+    DepositAddress, DepositAddressTo, 
+    BigValueThreshold,
+    toChainId, fromChainId, 
+    needApprove,
+    isNative, isNativeTo
+  }
+
   const { chainId, account, connector, deactivate, library } = useActiveWeb3React()
   const { setToChain: connectToChain } = useMultiChain()
   const { bridgeStableMethod, bridgeNativeMethod, bridgeMethod } = useBridge()
@@ -399,7 +419,7 @@ const Bridge: React.FC<any> = () => {
   const [tokenList, setTokenList] = useState(null)
   const [fromChain, setFromChain] = useState(chainId)
   const [toChain, setToChain] = useState(chainId == 250 ? 43114 : 250)
-  const [selectedToken, setSelectedToken] = useState(null)
+  const [selectedToken, setSelectedToken] = useState<BridgeToken>(null)
   const [isApproved, setIsApproved] = useState(true)
   const [amount, setAmount] = useState("")
   const [inputError, setInputError] = useState(null)
@@ -555,14 +575,16 @@ const Bridge: React.FC<any> = () => {
       <DoubleGlowShadowV2>
         <SwapLayoutCard>
         <VoteBanner />
-            <div className={`w-full p-6 border border-2 rounded rounded-2xl border-purple`}>
+            <div className={`w-full p-6 border border-2 rounded rounded-2xl border-purple mb-2`}>
               <Image src={BRIDGE_BANNER}
                 height={180}
                 width={1080}
               />
             </div>
           <div>
+            <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
             <SwapDropdown />
+            <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
             {/* </div> */}
             <FadeInOut>
               <div className={`flex border border-[${getChainColor(chainId)}] m-1 p-1 rounded rounded-2xl mt-4 bg-${getChainColorCode(chainId)}`}>
@@ -635,7 +657,7 @@ const Bridge: React.FC<any> = () => {
                       <div className={`flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-${getChainColorCode(chainId)} w-full space-y-1`}>
                         <div className="flex justify-between">
                           <Typography className="text-white" fontFamily={'medium'}>
-                            {i18n._(t`Bridgeable Range`)}
+                            {i18n._(t`Bridgeable`)}
                           </Typography>
                           <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                             {selectedToken
@@ -650,7 +672,7 @@ const Bridge: React.FC<any> = () => {
 
                         <div className="flex justify-between">
                           <Typography className="text-white" fontFamily={'medium'}>
-                            {i18n._(t`Minimum Amount`)}
+                            {i18n._(t`Minimum`)}
                           </Typography>
                           <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                             {selectedToken
@@ -661,7 +683,7 @@ const Bridge: React.FC<any> = () => {
 
                         <div className="flex justify-between">
                           <Typography className="text-white" fontFamily={'medium'}>
-                            {i18n._(t`Maximum Amount`)}
+                            {i18n._(t`Maximum`)}
                           </Typography>
                           <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                             {selectedToken
@@ -670,15 +692,50 @@ const Bridge: React.FC<any> = () => {
                           </Typography>
                         </div>
 
+                        <div>
+                          <div className={`border mt-1 mb-1`} />
+                          <Typography className={`text-lg font-bold text-center text-avaxRed`}>
+                            Fee Details
+                          </Typography>
+                          <div className={`border mt-1 mb-1`} />
+                        </div>
+
                         <div className="flex justify-between">
                           <Typography className="text-white" fontFamily={'medium'}>
-                            {i18n._(t`Fee (Minimum)`)}
+                            {i18n._(t`Fee Rate`)}
                           </Typography>
                           <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                             {'~'}
                             {selectedToken
                               ? `${formatSimpleValue(
+                                // selectedToken.MinimumSwapFee
+                                selectedToken.SwapFeeRate * 100
+                              )}%`
+                              : "-"}
+                          </Typography>
+                        </div>
+                        
+                        <div className="flex justify-between">
+                          <Typography className="text-white" fontFamily={'medium'}>
+                            {i18n._(t`Minimum`)}
+                          </Typography>
+                          <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                            {selectedToken
+                              ? `${formatSimpleValue(
                                 selectedToken.MinimumSwapFee
+                              )} ${selectedToken.symbol}`
+                              : "-"}
+                          </Typography>
+                        </div>
+                     
+                        <div className="flex justify-between">
+                          <Typography className="text-white" fontFamily={'medium'}>
+                            {i18n._(t`Maximum`)}
+                          </Typography>
+                          <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                            {selectedToken
+                              ? `${formatSimpleValue(
+                                selectedToken.MaximumSwapFee
                               )} ${selectedToken.symbol}`
                               : "-"}
                           </Typography>
