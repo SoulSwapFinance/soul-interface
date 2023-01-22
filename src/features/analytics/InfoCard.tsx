@@ -22,10 +22,11 @@ export default function InfoCard({ text, number, numberType = 'usd', percent }: 
 
   return (
     <div className="w-full px-6 py-4 border rounded bg-dark-1000 border-dark-700">
-      <div className="whitespace-nowrap">{text}</div>
-      <div className="flex items-center space-x-2">
-        <div className="text-2xl font-bold">{switchNumber()}</div>
-        <ColoredNumber number={percent} percent={true} />
+      <div className="flex flex-cols-2 gap-1 justify-center whitespace-nowrap">{`${text}`}
+     <ColoredNumber number={percent} percent={true} /></div>
+      <div className="flex justify-center space-x-2">
+        <div className="text-2xl justify-center font-bold">{switchNumber()}</div>
+        {/* <ColoredNumber number={percent} percent={true} /> */}
       </div>
     </div>
   )

@@ -27,7 +27,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
 import { CheckCircle, ExternalLink as LinkIcon } from 'react-feather'
-import { getChainColorCode, getChainInfo, getChainLogoURL } from 'constants/chains'
+import { getChainColor, getChainColorCode, getChainInfo, getChainLogoURL } from 'constants/chains'
 import { NextSeo } from 'next-seo'
 import { TridentHeader } from 'layouts/Trident'
 import Typography from 'components/Typography'
@@ -198,9 +198,11 @@ export default function Token() {
   <Container id="exchange-analytics-token-page" maxWidth="2xl" className="space-y-4 mt-4">
       <DoubleGlowShadowV2>
         <SwapLayoutCard>
+        <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
           <SwapDropdown 
           // inputCurrency={currency0} outputCurrency={currency1} 
           />
+        <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
           <AnalyticsContainer>
             <ExchangeAnalyticsHeader />
       <NextSeo title={`${token?.name} Analytics`} />

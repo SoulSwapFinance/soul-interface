@@ -19,7 +19,7 @@ import { ChainId, Currency, CurrencyAmount, DAI, DAI_ADDRESS, NATIVE, NATIVE_ADD
 import { addTransaction } from 'state/transactions/actions'
 import useTokenBalance from 'hooks/useTokenBalance'
 import { Button } from 'components/Button'
-import { getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 // import listedTokens from 'features/aggregator/tokenList.json'
 import { e10 } from 'functions/math'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
@@ -42,6 +42,9 @@ import { classNames } from 'functions/styling'
 import { featureEnabled } from 'functions/feature'
 import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
+import Image from 'next/image'
+import AGGREGATE_BANNER from 'assets/branding/aggregate-banner.png'
+import { VoteBanner } from 'components/Banner'
 
 /*
 Integrated:
@@ -419,24 +422,53 @@ const Aggregator = ({ }) => {
 		.sort((a, b) => b.netOut - a.netOut);
 
 	return (
-		<Container id="cross-page" maxWidth="2xl" className="space-y-4">
+		<Container id="aggregator-page" maxWidth="2xl" className="space-y-4 mt-4">
 			<DoubleGlowShadowV2>
-				{/* <div className={"grid grid-cols-1 gap-2"}> */}
 				<SwapLayoutCard>
-					<div className="p-0 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-						{/* {showHeader && */}
-						<SwapDropdown
-							inputCurrency={currencyA}
-							outputCurrency={currencyB}
-						// allowedSlippage={allowedSlippage}
+					<VoteBanner />
+					<div className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}>
+						<div className={`flex justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}>
+							<Image src={`/favicon.ico`}
+								objectFit={`contain`}
+								height={72}
+								width={72}
+							/>
+						</div>
+						<Image src={AGGREGATE_BANNER}
+							height={180}
+							width={1080}
 						/>
-						{/* } */}
-						{/* <Container  */}
-						{/* // showRoutes={inputToken && outputToken} */}
-						{/* > */}
-						{/* <FormHeader>Select Tokens</FormHeader> */}
-						{/* <TokenSelectDiv onClick={() => setShowTokenSelect(true)}> */}
-						<div className="flex flex-col gap-3 space-y-3">
+					</div>
+					<div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
+					<SwapDropdown
+						inputCurrency={currencyA}
+						outputCurrency={currencyB}
+					// allowedSlippage={allowedSlippage}
+					/>
+					<div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
+					<div className="flex flex-col gap-3 space-y-3">
+						<SwapAssetPanel
+							spendFromWallet={true}
+							chainId={chainId}
+							header={(props) => (
+								<SwapAssetPanel.Header
+									{...props}
+									label={
+										`Swap from:`
+									}
+								/>
+							)}
+							currency={fromToken}
+							value={amount}
+							onChange={handleTypeInput}
+							onSelect={handleInputSelect}
+						/>
+						<div>
+							<div className="flex justify-center -mt-8 -mb-4 z-0">
+								<div className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700`}>
+									<ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
+								</div>
+							</div>
 							<SwapAssetPanel
 								spendFromWallet={true}
 								chainId={chainId}
@@ -444,51 +476,29 @@ const Aggregator = ({ }) => {
 									<SwapAssetPanel.Header
 										{...props}
 										label={
-											`Swap from:`
+											`Swap to:`
 										}
 									/>
 								)}
-								currency={fromToken}
-								value={amount}
-								onChange={handleTypeInput}
-								onSelect={handleInputSelect}
+								currency={
+									toToken
+									// toToken
+									// [ChainId.AVALANCHE].includes(chainId)
+									// 	&& toToken.wrapped.address === SOUL_ADDRESS[chainId]
+									// 	? USDC[chainId]
+									// 	: toToken
+								}
+								value={(routes[0]?.price.amountReturned / (10 ** (outputToken?.wrapped.decimals)))?.toString() || '0'}
+								onChange={() => { }}
+								onSelect={handleOutputSelect}
 							/>
-							<div>
-								<div className="flex justify-center -mt-8 -mb-4 z-0">
-									<div className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700`}>
-										<ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
-									</div>
-								</div>
-								<SwapAssetPanel
-									spendFromWallet={true}
-									chainId={chainId}
-									header={(props) => (
-										<SwapAssetPanel.Header
-											{...props}
-											label={
-												`Swap to:`
-											}
-										/>
-									)}
-									currency={
-										toToken
-										// toToken
-										// [ChainId.AVALANCHE].includes(chainId)
-										// 	&& toToken.wrapped.address === SOUL_ADDRESS[chainId]
-										// 	? USDC[chainId]
-										// 	: toToken
-									}
-									value={(routes[0]?.price.amountReturned / (10 ** (outputToken?.wrapped.decimals)))?.toString() || '0'}
-									onChange={() => { }}
-									onSelect={handleOutputSelect}
-								/>
-							</div>
 						</div>
+					</div>
 
-						<div>
-							{/* <FormHeader>From Amount</FormHeader> */}
-							{/* <TokenInput setAmount={setAmount} amount={amount} onMaxClick={onMaxClick} /> */}
-							{/* <InputFooter className="bg-dark-1000 p-2 m-1 rounded rounded-xl">
+					<div>
+						{/* <FormHeader>From Amount</FormHeader> */}
+						{/* <TokenInput setAmount={setAmount} amount={amount} onMaxClick={onMaxClick} /> */}
+						{/* <InputFooter className="bg-dark-1000 p-2 m-1 rounded rounded-xl">
 								<div className="font-bold p-2" style={{ marginTop: 4, marginLeft: 4 }}>
 									<Input
 										value={slippage}
@@ -511,10 +521,10 @@ const Aggregator = ({ }) => {
 												maximumFractionDigits: 3
 											}) + ' Value'}
 											{/* Value: $ */}
-							{/* </> */}
-							{/* )} */}
-							{/* </div> */}
-							{/* {balance &&
+						{/* </> */}
+						{/* )} */}
+						{/* </div> */}
+						{/* {balance &&
 								<Balance onClick={onMaxClick}>
 									{
 									// fromToken?.isNative
@@ -523,27 +533,27 @@ const Aggregator = ({ }) => {
 								</Balance>
 							}
 							</InputFooter> */}
-						</div>
-						{/* <SwapWrapper> */}
-						{route && account && (
-							<Button
-								variant={'filled'}
-								color={getChainColorCode(chainId)}
-								isLoading={swapMutation.isLoading || isApproveLoading}
-								loadingText="Preparing Transaction"
-								colorScheme={'messenger'}
-								onClick={() => {
-									if (approve) approve();
+					</div>
+					{/* <SwapWrapper> */}
+					{route && account && (
+						<Button
+							variant={'filled'}
+							color={getChainColorCode(chainId)}
+							isLoading={swapMutation.isLoading || isApproveLoading}
+							loadingText="Preparing Transaction"
+							colorScheme={'messenger'}
+							onClick={() => {
+								if (approve) approve();
 
-									// if (+amount > +balance?.data?.formatted) return;
-									if (isApproved || fromToken.isNative) handleSwap();
+								// if (+amount > +balance?.data?.formatted) return;
+								if (isApproved || fromToken.isNative) handleSwap();
 
-								}}
-							>
-								{(isApproved || fromToken.isNative) ? 'Swap' : 'Approve'}
-							</Button>
-						)}
-						{/* route && account && !isApproved && ['Matcha/0x', '1inch'].includes(route?.name) ? (
+							}}
+						>
+							{(isApproved || fromToken.isNative) ? 'Swap' : 'Approve'}
+						</Button>
+					)}
+					{/* route && account && !isApproved && ['Matcha/0x', '1inch'].includes(route?.name) ? (
 							<Button
 								variant={'filled'}
 								color={getChainColorCode(chainId)}
@@ -557,37 +567,37 @@ const Aggregator = ({ }) => {
 								{'Approve Infinite'}
 							</Button>
 						) : null */}
-						{/* </SwapWrapper> */}
-						{/* </Container> */}
-						{/* </SwapLayoutCard> */}
+					{/* </SwapWrapper> */}
+					{/* </Container> */}
+					{/* </SwapLayoutCard> */}
 
-						{inputToken && outputToken && (
-							/* <SwapLayoutCard> */
-							// <Container>
-							// 	<div className={`m-2 border border-dark-800 hover:border-${getChainColorCode(chainId)} border-2 rounded rounded-xl`}>
-							<Routes>
-								<div className={`flex flex-col justify-center p-2 -ml-4 -mr-2 sm:-mr-4 border border-dark-800 hover:border-${getChainColorCode(chainId)} border-1 rounded rounded-xl`}>
-									{isLoading ? <Loader loaded={!isLoading} /> : null}
-									{normalizedRoutes.map((r, i) => (
-										<Route
-											{...r}
-											index={i}
-											selected={route?.name === r.name}
-											setRoute={() => setRoute(r.route)}
-											toToken={outputToken}
-											amountFrom={amountWithDecimals}
-											fromToken={inputToken}
-											selectedChain={selectedChain.label}
-											key={i}
-										/>
-									))}
-								</div>
-							</Routes>
-							// 	</div>
-							// </Container>
-							/* </SwapLayoutCard> */
-						)}
-					</div>
+					{inputToken && outputToken && (
+						/* <SwapLayoutCard> */
+						// <Container>
+						// 	<div className={`m-2 border border-dark-800 hover:border-${getChainColorCode(chainId)} border-2 rounded rounded-xl`}>
+						<Routes>
+							<div className={`flex flex-col justify-center p-2 -ml-4 -mr-2 sm:-mr-4 border border-dark-800 hover:border-${getChainColorCode(chainId)} border-1 rounded rounded-xl`}>
+								{isLoading ? <Loader loaded={!isLoading} /> : null}
+								{normalizedRoutes.map((r, i) => (
+									<Route
+										{...r}
+										index={i}
+										selected={route?.name === r.name}
+										setRoute={() => setRoute(r.route)}
+										toToken={outputToken}
+										amountFrom={amountWithDecimals}
+										fromToken={inputToken}
+										selectedChain={selectedChain.label}
+										key={i}
+									/>
+								))}
+							</div>
+						</Routes>
+						// 	</div>
+						// </Container>
+						/* </SwapLayoutCard> */
+					)}
+					{/* </div> */}
 					<div className={classNames(featureEnabled(Feature.AGGREGATE, chainId) ? "m-1 flex justify-between" : "hidden")}>
 						<Button variant="outlined"
 							color={'blue'}

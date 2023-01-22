@@ -25,17 +25,17 @@ const LendingPage: FC = () => {
         <div className="flex gap-3">
           {account && (
             <>
-              <Link href={`/account/lending?account=${account}`} passHref={true}>
+              {/* <Link href={`/account/lending?account=${account}`} passHref={true}> */}
                 <Button id="btn-create-new-pool" size="sm">
                   {i18n._(t`My Lending`)}
                 </Button>
-              </Link>
+              {/* </Link> */}
 
-              <Link href={`/account/borrowing?account=${account}`} passHref={true}>
+              {/* <Link href={`/account/borrowing?account=${account}`} passHref={true}> */}
                 <Button id="btn-create-new-pool" size="sm">
                   {i18n._(t`My Borrowing`)}
                 </Button>
-              </Link>
+              {/* </Link> */}
             </>
           )}
 

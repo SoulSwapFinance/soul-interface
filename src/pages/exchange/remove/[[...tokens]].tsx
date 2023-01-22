@@ -47,13 +47,14 @@ import { useWalletModalToggle } from 'state/application/hooks'
 // import SwapBanner from 'components/SwapBanner'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { classNames } from 'functions'
-import { getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import { SwapLayoutCard } from 'layouts/SwapLayout'
+import { VoteBanner } from 'components/Banner'
+import Image from 'next/image'
+import REMOVE_BANNER from 'assets/branding/remove-banner.png'
 
 const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(10, 1000) // 1%
-
-// const REMOVE_TIPS = {}
 
 export default function Remove() {
   const { i18n } = useLingui()
@@ -141,19 +142,6 @@ export default function Remove() {
     },
     [_onUserInput]
   )
-
-  // const onLiquidityInput = useCallback(
-  //   (typedValue: string): void => onUserInput(Field.LIQUIDITY, typedValue),
-  //   [onUserInput]
-  // )
-  // const onCurrencyAInput = useCallback(
-  //   (typedValue: string): void => onUserInput(Field.CURRENCY_A, typedValue),
-  //   [onUserInput]
-  // )
-  // const onCurrencyBInput = useCallback(
-  //   (typedValue: string): void => onUserInput(Field.CURRENCY_B, typedValue),
-  //   [onUserInput]
-  // )
 
   // tx sending
   const addTransaction = useTransactionAdder()
@@ -733,14 +721,29 @@ export default function Remove() {
         {/* <SwapBanner /> */}
         <DoubleGlowShadowV2>
           <SwapLayoutCard>
+          <VoteBanner />
+          <div className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}>
+          <div className={`flex justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}>
+            <Image src={`/favicon.ico`}
+              objectFit={`contain`}
+              height={72}
+              width={72}
+              />
+          </div>
+            <Image src={REMOVE_BANNER}
+              height={180}
+              width={1080}
+            />
+            </div>
             {/* <div className="p-0 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
               {/* <SwapHeader
               inputCurrency={currencyA}
               outputCurrency={currencyB}
               allowedSlippage={allowedSlippage}
             /> */}
-              <SwapDropdown />
-              {/* <Header input={currencyA} output={currencyB} allowedSlippage={allowedSlippage} /> */}
+            <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
+            <SwapDropdown />
+            <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>              {/* <Header input={currencyA} output={currencyB} allowedSlippage={allowedSlippage} /> */}
               <div>
                 <TransactionConfirmationModal
                   isOpen={showConfirm}

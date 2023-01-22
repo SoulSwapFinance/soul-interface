@@ -20,7 +20,7 @@ import React, { useMemo } from 'react'
 import { ExternalLink as LinkIcon } from 'react-feather'
 import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
-import { getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 import Typography from 'components/Typography'
 import { TridentHeader } from 'layouts/Trident'
 import { computePairAddress } from 'sdk/functions/computePairAddress'
@@ -164,7 +164,12 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
   <Container id="exchange-analytics-pair-page" maxWidth="2xl" className="space-y-4 mt-4">
       <DoubleGlowShadowV2>
         <SwapLayoutCard>
-          <SwapDropdown inputCurrency={currency0} outputCurrency={currency1} />
+        <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
+          <SwapDropdown
+            inputCurrency={currency0}
+            outputCurrency={currency1} 
+        />
+        <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
           <AnalyticsContainer>
             <ExchangeAnalyticsHeader />
             <TridentHeader className="sm:!flex-row justify-between items-center" pattern="bg-bubble">

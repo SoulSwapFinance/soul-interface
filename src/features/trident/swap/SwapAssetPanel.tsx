@@ -32,6 +32,7 @@ interface SwapAssetPanel {
   priceImpact?: Percent
   priceImpactCss?: string
   disabled?: boolean
+  hideBalance?: boolean
 }
 
 const SwapAssetPanel = ({
@@ -49,6 +50,7 @@ const SwapAssetPanel = ({
   disabled,
   chainId,
   currencies,
+  hideBalance,
 }: SwapAssetPanel) => {
   return (
     // hover:border-${getChainColorCode(chainId)}
@@ -81,7 +83,7 @@ const SwapAssetPanel = ({
             spendFromWallet,
           }}
         />
-        <BalancePanel {...{ disabled, currency, onChange, spendFromWallet }} />
+        { !hideBalance && <BalancePanel {...{ disabled, currency, onChange, spendFromWallet }} />}
       </div>
     </div>
   )

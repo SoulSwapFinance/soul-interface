@@ -1,5 +1,5 @@
 import Search from 'components/Search'
-import { getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 import AnalyticsContainer from 'features/analytics/AnalyticsContainer'
 import Background from 'features/analytics/Background'
 import useTokensAnalytics from 'features/analytics/hooks/useTokensAnalytics'
@@ -34,9 +34,11 @@ export default function Tokens() {
       <Container id="exchange-analytics-tokens-page" maxWidth="2xl" className="space-y-4 mt-4">
       <DoubleGlowShadowV2>
         <SwapLayoutCard>
+        <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
           <SwapDropdown 
           // inputCurrency={currency0} outputCurrency={currency1} 
           />
+        <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
           <AnalyticsContainer>
             <ExchangeAnalyticsHeader />
       <Background background="tokens">

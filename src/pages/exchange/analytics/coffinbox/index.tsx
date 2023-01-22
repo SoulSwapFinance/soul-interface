@@ -11,7 +11,7 @@ import { useCoffinBox, useNativePrice, useOneDayBlock, useOneWeekBlock, useToken
 import { useActiveWeb3React } from 'services/web3'
 import React, { useMemo } from 'react'
 import { useUnderworldTokens } from 'features/lending/hooks'
-import { getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 import Link from 'next/link'
 import { TridentBody, TridentHeader } from 'layouts/Trident'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
@@ -106,9 +106,10 @@ export default function CoffinBox(): JSX.Element {
     <Container id="exchange-analytics-dashboard-page" maxWidth="2xl" className="space-y-4 mt-4">
       <DoubleGlowShadowV2>
         <SwapLayoutCard>
+          <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
           <SwapDropdown />
-          <AnalyticsContainer>
-          <ExchangeAnalyticsHeader />
+          <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />          <AnalyticsContainer>
+            <ExchangeAnalyticsHeader />
             <TridentBody>
               <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-2">
                 <div>

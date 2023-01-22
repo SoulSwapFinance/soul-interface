@@ -24,7 +24,7 @@ import Link from 'next/link'
 // import CoffinBox from '../coffinbox'
 import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
-import { getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import Container from 'components/Container'
 import SwapDropdown from 'features/swap/SwapDropdown'
@@ -308,8 +308,9 @@ export default function Dashboard(): JSX.Element {
 	<Container id="exchange-analytics-coffinbox-page" maxWidth="2xl" className="space-y-4 mt-4">
       <DoubleGlowShadowV2>
         <SwapLayoutCard>
-          <SwapDropdown />
-          <AnalyticsContainer>
+        <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
+            <SwapDropdown />
+            <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>          <AnalyticsContainer>
             <ExchangeAnalyticsHeader />
             {/* <Background background="dashboard">
         <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-2">
