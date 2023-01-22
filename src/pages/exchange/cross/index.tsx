@@ -338,14 +338,20 @@ export default function Exchange() {
       <DoubleGlowShadowV2>
         <SwapLayoutCard>          
           <VoteBanner />
-          <div className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}>
-          <div className={`flex justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}>
-            <Image src={`/favicon.ico`}
-              objectFit={`contain`}
-              height={72}
-              width={72}
+          <div 
+            className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}
+            >
+            <div className="flex justify-center">
+             <div 
+              className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
+                >
+              <Image src={`/favicon.ico`}
+                objectFit={`contain`}
+                height={72}
+                width={72}
               />
-          </div>
+            </div> 
+            </div>
             <Image src={CROSS_BANNER}
               height={180}
               width={1080}

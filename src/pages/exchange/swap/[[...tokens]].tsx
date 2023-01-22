@@ -31,7 +31,7 @@ import { Field } from 'state/swap/actions'
 import { useDefaultsFromURLSearch, useDerivedSwapInfo, useSwapActionHandlers, useSwapState } from 'state/swap/hooks'
 import { useUserOpenMev, useUserSingleHopOnly } from 'state/user/hooks'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { getChainColor, getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode, getChainLogoURL } from 'constants/chains'
 import { classNames } from 'functions/styling'
 import NavLink from 'components/NavLink'
 import { featureEnabled } from 'functions/feature'
@@ -404,13 +404,19 @@ const Swap = () => {
       {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <SwapLayoutCard>
           <VoteBanner />
-          <div className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}>
-            <div className={`flex justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}>
+          <div 
+            className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}
+            >
+            <div className="flex justify-center">
+             <div 
+              className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
+                >
               <Image src={`/favicon.ico`}
                 objectFit={`contain`}
                 height={72}
                 width={72}
               />
+            </div> 
             </div>
             <Image src={EXCHANGE_BANNER}
               height={180}

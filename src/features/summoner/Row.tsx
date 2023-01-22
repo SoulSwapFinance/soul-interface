@@ -9,8 +9,8 @@ import { useTokenContract, useSummonerContract, useZapperContract } from 'hooks/
 import useApprove from 'hooks/useApprove'
 import { Tab } from '@headlessui/react'
 import {
-    FarmContentWrapper, FarmContainer, FarmItem, FarmItemBox, Text, SubmitButton, Wrap
-} from './Styles'
+    FarmContainer, FarmItem, FarmItemBox, Text, SubmitButton, Wrap
+} from './Styles' // FarmContentWrapper
 import { classNames, formatNumber, tryParseAmount } from 'functions'
 import { usePairInfo, useSummonerInfo, useSummonerPoolInfo, useSummonerUserInfo, useTokenInfo, useUserTokenInfo } from 'hooks/useAPI'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
@@ -326,7 +326,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
         <>
             <div className="flex justify-center w-full">
                 <FarmContainer>
-                    <div className={classNames("bg-dark-900 p-3 border border-blue", !hasBalance && "border-dark-1000",
+                    <div className={classNames("bg-dark-900 p-3 m-1 border rounded rounded-2xl border-blue", !hasBalance && "border-dark-1000",
                         isUnderworldPair ? "hover:border-blue" : !isActive ? "hover:border-pink"
                             : hasBalance && isUnderworldPair ? "hover:border-blue border-blue"
                                 : hasBalance && !isUnderworldPair ? "border-dark-600"
@@ -335,14 +335,18 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                     )}
                         onClick={() => handleShowOptions()}
                     >
-                        <FarmContentWrapper>
+                        <div className={`flex w-full]`}>
                             <div className="items-center">
-                                <FarmItemBox>
-                                    {Number(allocPoint) != 220
+                                <div className={`grid ${isUnderworldPair ? `grid-cols-1` : `grid-cols-2`}`}>
+                                <CurrencyLogo currency={token0} size={40} />
+                                {Number(allocPoint) != 220 &&
+                                <CurrencyLogo currency={token1} size={40} />
+                                }
+                                    {/* {Number(allocPoint) != 220
                                         ? <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
                                         : <CurrencyLogo currency={token0} size={40} />
-                                    }
-                                </FarmItemBox>
+                                    } */}
+                                </div>
                             </div>
 
                             {/* STAKED VALUE */}
@@ -440,7 +444,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 )}
                             </FarmItemBox>
 
-                        </FarmContentWrapper>
+                        </div>
                     </div>
                 </FarmContainer>
             </div>

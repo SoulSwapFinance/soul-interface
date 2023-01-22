@@ -80,20 +80,20 @@ export const FarmItemBox = styled.div`
   align-items: center;
 `
 
-export const FarmContentWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 0rem 0 0;
+// export const FarmContentWrapper = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 0 0 0 0;
 
-  &:last-child {
-    justify-content: space-between;
-  }
+//   &:last-child {
+//     justify-content: space-between;
+//   }
 
-  @media screen and (max-width: 720px) {
-    padding: 0 0rem 0 0;
-  }
-`
+//   @media screen and (max-width: 720px) {
+//     padding: 0 0rem 0 0;
+//   }
+// `
 
 export const FarmContainer = styled.div`
   display: grid;

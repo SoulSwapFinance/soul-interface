@@ -17,7 +17,7 @@ import { ChainId, NATIVE, SOUL_ADDRESS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 import { getChainInfo, getChainColorCode } from 'constants/chains'
 import Image from 'next/image'
-import DASHBOARD_BANNER from 'assets/branding/dashboard-banner.png'
+import DATA_BANNER from 'assets/branding/data-banner.png'
 
 
 export default function Dashboard() {
@@ -208,11 +208,11 @@ export default function Dashboard() {
   ]
 
 
-  const HideOnMobile = styled.div`
-  @media screen and (max-width: 900px) {
-    display: none;
-   }
- `;
+//   const HideOnMobile = styled.div`
+//   @media screen and (max-width: 900px) {
+//     display: none;
+//    }
+//  `;
 
   return (
     <Container id="dashboard-page" className="py-4 space-y-4 md:py-8 max-w-min">
@@ -222,7 +222,7 @@ export default function Dashboard() {
           <meta key="description" name="description" />
         </Head>
         <div className="grid grid-cols justify-center bg-dark-900">
-          <HideOnMobile>
+          {/* <HideOnMobile>
             <div className="py-1 mb-1 mt-3 ml-3 mr-3 bg-dark-600" />
             <div className="py-1 mb-1 ml-3 mr-3 bg-purple" />
             <Typography variant="h1" className="text-center mt-4 mb-4 text-dark-600" component="h1">
@@ -230,17 +230,23 @@ export default function Dashboard() {
             </Typography>
             <div className="py-1 mt-1 ml-3 mr-3 bg-dark-600" />
             <div className="py-1 mt-1 ml-3 mr-3 mb-3 bg-purple" />
-          </HideOnMobile>
+          </HideOnMobile> */}
 
-          <div className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple bg-dark-900`}>
-        <div className={`flex justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}>
-          <Image src={`/favicon.ico`}
-            objectFit={`contain`}
-            height={72}
-            width={72}
-          />
-        </div>
-        <Image src={DASHBOARD_BANNER}
+          <div 
+            className={`w-full grid grid-cols-2 bg-dark-900 p-4 border border-2 rounded rounded-2xl border-purple`}
+            >
+            <div className="flex justify-center">
+             <div 
+              className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
+                >
+              <Image src={`/favicon.ico`}
+                objectFit={`contain`}
+                height={72}
+                width={72}
+              />
+            </div> 
+            </div>
+        <Image src={DATA_BANNER}
           height={180}
           width={1080}
         />
