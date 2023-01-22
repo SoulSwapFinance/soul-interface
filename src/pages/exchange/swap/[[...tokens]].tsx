@@ -403,17 +403,24 @@ const Swap = () => {
 
       {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <SwapLayoutCard>
-                <VoteBanner />
-            <div className={`w-full p-6 border border-2 rounded rounded-2xl border-purple`}>
-              <Image src={EXCHANGE_BANNER}
-                height={180}
-                width={1080}
+          <VoteBanner />
+          <div className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}>
+          <div className={`flex justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}>
+            <Image src={`/favicon.ico`}
+              objectFit={`contain`}
+              height={72}
+              width={72}
               />
+          </div>
+            <Image src={EXCHANGE_BANNER}
+              height={180}
+              width={1080}
+            />
             </div>
           {/* {!useLimit && */}
-          <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
+          <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
           <><SwapDropdown inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
-          <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
+            <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
             {/* {useSwap && */}
             <SwapAssetPanel
               spendFromWallet={true}
@@ -467,7 +474,6 @@ const Swap = () => {
             </Button>
           </div>
           {/* } */}
-
           {/* TO ASSET PANEL */}
           {/* {useSwap && */}
           <SwapAssetPanel
@@ -604,7 +610,6 @@ const Swap = () => {
                           : i18n._(t`Swap`)}
                     </Button>
                   )}
-
           {
             // useSwap && 
             priceImpactSeverity > 2 && isValid &&
@@ -618,95 +623,14 @@ const Swap = () => {
               {'Use Aggregator'}
             </Button>
           }
-          {/* {useAggregator && !useLimit &&
-            <Aggregator />
-          } */}
-          {/* {useLimit && !useAggregator &&
-            <Limits />
-          } */}
           {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} show={false} /> : null}
-          {/* <div className="flex border-dark-900 mt-3 mb-0 gap-1 items-center justify-center">
-            <Button
-              variant="filled"
-              color={chainId == ChainId.AVALANCHE ? "avaxGradient" : "gradientPurpleBlue"}
-              size="lg"
-            >
-              <NavLink href={"/portfolio"}>
-                <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                  <span>View Portfolio</span>
-                </a>
-              </NavLink>
-            </Button>
-            <Button
-              variant="filled"
-              color={chainId == ChainId.AVALANCHE ? "avaxGradient" : "gradientBluePurple"}
-              size="lg"
-            >
-              <NavLink href={"/cross"}>
-                <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                  <span>{'Swap Crosschain'}</span>
-                </a>
-              </NavLink>
-            </Button>
-          </div> */}
           <div className={classNames(featureEnabled(Feature.AGGREGATE, chainId) ? "m-1 flex justify-between" : "hidden")}>
-            {/* <div className={classNames(useLimit ? `flex flex-cols-2 gap-3 text-white justify-end` : 'hidden')}>
-              <Toggle
-                id="toggle-button"
-                optionA="Limit"
-                optionB="Limit"
-                isActive={useLimit}
-                toggle={
-                  useLimit
-                    ? () => {
-                      setUseLimit(false)
-                    }
-                    : () => {
-                      setUseLimit(true)
-                    }
-                }
-              />
-            </div> */}
             <div className={classNames(
               // !useLimit && !useAggregator ? 
               `flex flex-cols-2 gap-3 text-white justify-end`
               // : 'hidden'
             )}>
-              {/* <Button
-                size={'xs'}
-                className={classNames(showChart ? `bg-${getChainColorCode(chainId)}` : ``,
-                  `rounded rounded-xl bg-dark-1000 border
-                  border-[${getChainColor(chainId)}]`)
-                }
-                onClick={() => setShowChart(!showChart)}
-              >
-                {i18n._(t`Show Chart`)}
-              </Button> */}
-              {/* <Button
-                size={'xs'}
-                className={classNames(showPortfolio ? `bg-${getChainColorCode(chainId)}` : ``,
-                  `rounded rounded-xl bg-dark-1000 border
-                  border-[${getChainColor(chainId)}]`)
-                }
-                onClick={() => setShowPortfolio(!showPortfolio)}
-              >
-                {i18n._(t`Portfolio`)}
-              </Button> */}
-              {/* <Toggle
-                id="toggle-button"
-                optionA="Aggregator"
-                optionB="Aggregator"
-                isActive={useAggregator}
-                toggle={
-                  useAggregator
-                    ? () => {
-                      setUseAggregator(false)
-                    }
-                    : () => {
-                      setUseAggregator(true)
-                    }
-                }
-              /> */}
+
             </div>
           </div>
           <div className={`flex flex-cols-${showChart && showPortfolio ? `hidden` : `1`}`}>
