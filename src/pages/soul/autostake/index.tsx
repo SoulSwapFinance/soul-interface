@@ -210,7 +210,7 @@ export default function AutoStake() {
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/bonds'}>
             <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span>Bond</span>
+              <span>Mint</span>
             </a>
           </NavLink>
         </Button>
