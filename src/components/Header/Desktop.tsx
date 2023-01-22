@@ -7,18 +7,19 @@ import { useActiveWeb3React } from 'services/web3'
 // import { useETHBalances } from 'state/wallet/hooks'
 import React, { FC, Fragment, useCallback, useState } from 'react'
 import { NavigationItem } from './NavigationItem'
-import { SidebarItem } from './SidebarItem'
+// import { SidebarItem } from './SidebarItem'
 import TokenStats from 'components/TokenStats'
-import More from './More'
-import Container from 'components/Container'
+// import More from './More'
+// import Container from 'components/Container'
 import useMenu from './useMenu'
 import useBar from './useBar'
 import { classNames } from 'functions'
-import Web3Network from 'components/Web3Network'
-import LanguageMenu from './useLanguages'
+// import Web3Network from 'components/Web3Network'
+// import LanguageMenu from './useLanguages'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { useRouter } from 'next/router'
-// import SwapIcon from 'components/Icons/exchange/SwapIcon'
+import DesktopBar from './DesktopBar'
+import SwapIcon from 'components/Icons/exchange/SwapIcon'
 // import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
 // import WalletIcon from 'components/Icons/header/WalletIcon'
 // import DropletIcon from 'components/Icons/header/DropletIcon'
@@ -59,65 +60,65 @@ const Desktop: FC = () => {
   //   width={'600px'}
   // />
 
-//   const DEFAULT_ICON = <BarsIcon
-//     fillPrimary={open ? WHITE : getChainColor(chainId)}
-//     fillSecondary={open ? getChainColor(chainId) : WHITE}
-//     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
-//   />
+  //   const DEFAULT_ICON = <BarsIcon
+  //     fillPrimary={open ? WHITE : getChainColor(chainId)}
+  //     fillSecondary={open ? getChainColor(chainId) : WHITE}
+  //     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+  //   />
 
-//   const HOME_ICON = <HomeIcon
-//     fillPrimary={open ? WHITE : chainColor}
-//     fillSecondary={open ? chainColor : WHITE}
-//     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
-//   />
+  //   const HOME_ICON = <HomeIcon
+  //     fillPrimary={open ? WHITE : chainColor}
+  //     fillSecondary={open ? chainColor : WHITE}
+  //     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+  //   />
 
-//   const DROPLET_ICON = <DropletIcon
-//     fillPrimary={WHITE}
-//     fillSecondary={chainColor}
-//     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
-//   />
+  //   const DROPLET_ICON = <DropletIcon
+  //     fillPrimary={WHITE}
+  //     fillSecondary={chainColor}
+  //     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+  //   />
 
-//   const SWAP_ICON = <SwapIcon
-//     fillPrimary={open ? WHITE : getChainColor(chainId)}
-//     fillSecondary={open ? getChainColor(chainId) : WHITE}
-//     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
-//   />
+  const SWAP_ICON = <SwapIcon
+    fillPrimary={open ? WHITE : getChainColor(chainId)}
+    fillSecondary={open ? getChainColor(chainId) : WHITE}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+  />
 
-//   const SUN_ICON = <SunMoonIcon
-//     fillPrimary={open ? chainColor : WHITE}
-//     fillSecondary={open ? WHITE : chainColor}
-//     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
-//   />
+  //   const SUN_ICON = <SunMoonIcon
+  //     fillPrimary={open ? chainColor : WHITE}
+  //     fillSecondary={open ? WHITE : chainColor}
+  //     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+  //   />
 
-//   const EARN_ICON = <SeedlingIcon
-//     fillPrimary={open ? WHITE : chainColor}
-//     fillSecondary={open ? chainColor : WHITE}
-//     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
-//   />
+  //   const EARN_ICON = <SeedlingIcon
+  //     fillPrimary={open ? WHITE : chainColor}
+  //     fillSecondary={open ? chainColor : WHITE}
+  //     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+  //   />
 
-//   const WALLET_ICON = <WalletIcon
-//     fillPrimary={open ? WHITE : chainColor}
-//     fillSecondary={open ? chainColor : WHITE}
-//     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
-//   />
+  //   const WALLET_ICON = <WalletIcon
+  //     fillPrimary={open ? WHITE : chainColor}
+  //     fillSecondary={open ? chainColor : WHITE}
+  //     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+  //   />
 
-//   const EXPLORE_ICON = <BinocularsIcon
-//     fillPrimary={open ? WHITE : chainColor}
-//     fillSecondary={open ? chainColor : WHITE}
-//     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
-//   />
+  //   const EXPLORE_ICON = <BinocularsIcon
+  //     fillPrimary={open ? WHITE : chainColor}
+  //     fillSecondary={open ? chainColor : WHITE}
+  //     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+  //   />
 
-//   const LEND_ICON = <LendSkullIcon
-//   fillPrimary={open ? chainColor : WHITE}
-//   fillSecondary={open ? WHITE : chainColor}
-//   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
-// />
+  //   const LEND_ICON = <LendSkullIcon
+  //   fillPrimary={open ? chainColor : WHITE}
+  //   fillSecondary={open ? WHITE : chainColor}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+  // />
 
-// const DOCS_ICON = <DocsIcon
-//   fillPrimary={open ? WHITE : chainColor}
-//   fillSecondary={open ? chainColor : WHITE}
-//   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
-// />
+  // const DOCS_ICON = <DocsIcon
+  //   fillPrimary={open ? WHITE : chainColor}
+  //   fillSecondary={open ? chainColor : WHITE}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+  // />
 
   // const removePage = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
   // const addPage = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
@@ -166,20 +167,16 @@ const Desktop: FC = () => {
           )
           }>
           <div className="flex justify-center bg-dark-1000 flex-grow">
-           {/*  <div
-              className={`grid grid-cols-2 gap-2`}
-            >
-              <div
-                className={`p-1 hover:bg-dark-900 mt-1 bg-dark-1000 rounded rounded-md border-[${getChainColor(chainId)}]`}
-                onClick={() => { setOpen(true) }}
-              > {pageIcon} 
-              </div>
-              <div
-                className={`p-1 hover:bg-dark-900 mt-1 bg-dark-1000 rounded rounded-md border-[${getChainColor(chainId)}]`}
-                onClick={swapRoute}
-              > {SOUL_ICON}
-              </div>
-            </div> */}
+            {/* <div
+            className={`hover:bg-dark-900 p-1.5 -mb-0.5 rounded rounded-2xl 
+                border border-[${getChainColor(chainId)}]
+                hover:border-2
+                `}
+            // onClick={() => { setOpen(true) }}
+            onClick={swapRoute}
+          >
+            {SWAP_ICON}
+          </div> */}
             <div
               className="flex rounded rounded-xl bg-dark-900 gap-1 mt-0.5 sm:gap-4 md:gap-18 justify-center items-center">
               {menu.map((node) => {
@@ -217,53 +214,17 @@ const Desktop: FC = () => {
                   leaveTo="translate-x-[-100%]"
                   unmount={false}
                 >
-                  <div className="max-w-sm">
-                    <div className={classNames("flex flex-col h-full py-1 overflow-x-hidden overflow-y-scroll shadow-xl",
-                      "bg-dark-1100")}>
-                      <nav
-                        className={classNames("flex-1 py-12 bg-dark-1000 pl-6")} aria-label="Sidebar"
-                      /* // className="flex-1 bg-dark-1000 pl-6" aria-label="Sidebar" */
-                      >
-                        {bar.map((node) => {
-                          return <SidebarItem node={node} key={node.key} />
-                        })}
-                      </nav>
-                      <div className="flex w-full justify-center inline-block rounded rounded-md bg-dark-1000">
-                        {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
-                          <TokenStats />
-                        }
-                        <div className="flex items-center justify-start">
-                          <LanguageMenu />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+
                 </Transition.Child>
               </div>
             </div>
           </Dialog>
         </Transition.Root>
-        {/* WALLET ICON */}
-        <div
-          className={`relative top-0 right-2 rounded rounded-md inline-block`}
-        >
-          <Web3Status />
+        {/* TOKEN STATS */}
+        <div className={`flex px-2 rounded rounded-lg inline-block`}>
+          <TokenStats />
         </div>
-        {/* NETWORK ICON */}
-        <div className={`relative top-0 right-0 rounded rounded-lg inline-block border border-1 p-1 border-[${getChainColor(chainId)}]`}>
-          <Web3Network />
-        </div>
-        <div className={`fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full rounded rounded-md xl:bg-transparent`}>
-          {/* xl:relative // moves to top */}
-          <div className="flex items-center w-full space-x-2 justify-end">
-            <div className={`w-auto grid gap-1.5 items-center rounded rounded-md bg-dark-1000  border-[${getChainColor(chainId)}] whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`}>
-              {/* MORE [...] ICON */}
-              <div className={`rounded rounded-md inline-block`}>
-                <More />
-              </div>
-            </div>
-          </div>
-        </div>
+        <DesktopBar />
       </header>
     </>
   )

@@ -27,6 +27,10 @@ import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
 import SoulIcon from 'components/Icons/header/SoulIcon'
 import DocsIcon from 'components/Icons/mobile/DocsIcon'
 import NftIcon from 'components/Icons/mobile/NftIcon'
+import { ArrowDownIcon } from '@heroicons/react/24/solid'
+import DoubleDownIcon from 'components/Icons/mobile/DoubleDownIcon'
+import DoubleLeftIcon from 'components/Icons/mobile/DoubleLeftIcon'
+import DoubleRightIcon from 'components/Icons/mobile/DoubleRightIcon'
 
 const Mobile: FC = () => {
   // const menu = useMenu()
@@ -38,9 +42,14 @@ const Mobile: FC = () => {
   const { chainId } = useActiveWeb3React()
   // const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const [open, setOpen] = useState(false)
+  const [dropdown, setShowDropdown] = useState(false)
 
   const swapRoute = useCallback(() => {
     router.push(`/exchange/swap`)
+  }, [])
+
+  const handleDropdown = useCallback(() => {
+    dropdown ? setShowDropdown(false) : setShowDropdown(true)
   }, [])
 
   const WHITE = `#FFFFFF`
@@ -78,6 +87,18 @@ const Mobile: FC = () => {
   // />
 
   const SWAP_ICON = <SwapIcon
+    fillPrimary={open ? WHITE : getChainColor(chainId)}
+    fillSecondary={open ? getChainColor(chainId) : WHITE}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  />
+
+  const LEFT_ICON = <DoubleLeftIcon
+    fillPrimary={open ? WHITE : getChainColor(chainId)}
+    fillSecondary={open ? getChainColor(chainId) : WHITE}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  />
+
+  const RIGHT_ICON = <DoubleRightIcon
     fillPrimary={open ? WHITE : getChainColor(chainId)}
     fillSecondary={open ? getChainColor(chainId) : WHITE}
     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
@@ -185,15 +206,6 @@ const Mobile: FC = () => {
             onClick={swapRoute}
           >
             {SWAP_ICON}
-            {/* <div className={`mt-1`}>
-                      <Image
-          src="/favicon.png"
-          alt="SOUL"
-          width={32}
-          height={32}
-          objectFit="cover"
-          className={`rounded-xl bg-dark-1000`}
-        /> */}
           </div>
         </div>
         {/* <div
@@ -249,26 +261,42 @@ const Mobile: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
-
-        {/* TOKEN STATS */}
-        <div className={`relative top-0 right-6 border border-[${getChainColor(chainId)}] hover:border-2 rounded rounded-2xl inline-block`}>
-          <TokenStats />
-        </div>
-
-        {/* NETWORK ICON */}
-        <div className={`relative top-0 right-4 p-1.5 border border-[${getChainColor(chainId)}] hover:border-2 rounded rounded-2xl inline-block`}>
-          <Web3Network />
-        </div>
-        {/* WALLET ICON */}
         <div
-          className={`relative top-0 right-2 rounded rounded-2xl inline-block border border-[${getChainColor(chainId)}] hover:border-2`}
+          className={
+            classNames(`hover:bg-dark-900 p-1.5 -mb-0.5 rounded rounded-2xl 
+                border border-[${getChainColor(chainId)}]
+                hover:border-2
+                `,
+              dropdown ? `relative top-0 right-6` : `relative top-0 right-0`)}
+          // onClick={() => { setOpen(true) }}
+          onClick={() =>
+            dropdown ?
+              setShowDropdown(false)
+              : setShowDropdown(true)
+          }
         >
-          <Web3Status />
+          {dropdown ? RIGHT_ICON : LEFT_ICON}
         </div>
-        {/* LANGUAGE SELECT */}
-        <div className={`relative top-0 right-0 inline-block rounded rounded-2xl bg-dark-1000 border border-[${getChainColor(chainId)}] hover:border-2 `}>
-          <LanguageMenu />
-        </div>
+        {dropdown &&
+          <div
+            className={dropdown ? `grid grid-cols-3` : `hidden`}>
+
+            {/* TOKEN STATS */}
+            <div className={`relative top-0 right-4 border border-[${getChainColor(chainId)}] hover:border-2 rounded rounded-2xl inline-block`}>
+              <TokenStats />
+            </div>
+            {/* WALLET ICON */}
+            <div
+              className={`relative top-0 right-2 rounded rounded-2xl inline-block border border-[${getChainColor(chainId)}] hover:border-2`}
+            >
+              <Web3Status />
+            </div>
+            {/* NETWORK ICON */}
+            <div className={`relative top-0 right-0 p-1.5 border border-[${getChainColor(chainId)}] hover:border-2 rounded rounded-2xl inline-block`}>
+              <Web3Network />
+            </div>
+          </div>
+        }
         <MobileBar />
       </header>
     </>
