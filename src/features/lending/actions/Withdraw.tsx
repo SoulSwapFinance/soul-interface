@@ -17,7 +17,7 @@ import WarningsView from '../components/WarningsList'
 // import LendAssetInput from 'components/LendAssetInput'
 import SmartNumberInput from '../components/SmartNumberInput'
 import { useUnderworldPairInfo } from 'hooks/useAPI'
-import { LEND_MULTIPLIER } from 'sdk'
+import { ChainId, LEND_MULTIPLIER } from 'sdk'
 
 export default function Withdraw({ pair }: any): JSX.Element {
   const { account, chainId } = useActiveWeb3React()
@@ -82,7 +82,8 @@ export default function Withdraw({ pair }: any): JSX.Element {
     .add(
       // pair.maxAssetAvailableFraction.lt(fraction),
       // Number(minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)) == 0,
-      pair.userAssetFraction.sub(pair.currentUserLentAmount.value).lte(0),
+      chainId == ChainId.FANTOM 
+      && pair.userAssetFraction.sub(pair.currentUserLentAmount.value).lte(0),
       i18n._(
         t`There isn't enough available to withdraw large amounts. Your options are as follows: (1) withdraw small amounts, (2) bond your supplied tokens, or (3) try later.
         If you (3) try later, you may farm SOUL while you wait.`
