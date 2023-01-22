@@ -51,7 +51,7 @@ export const FarmList = () => {
           <Button variant="filled"
             color={"purple"}
             size="lg">
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span> {i18n._(t`Data`)} </span>
             </a>
           </Button>
@@ -60,7 +60,7 @@ export const FarmList = () => {
           <Button variant="filled"
             color={"purple"}
             size="lg">
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span> {i18n._(t`Bond`)} </span>
             </a>
           </Button>
@@ -70,7 +70,7 @@ export const FarmList = () => {
             color={"purple"}
             size="lg"
           >
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span> {i18n._(t`Lend`)} </span>
             </a>
           </Button>
@@ -80,7 +80,7 @@ export const FarmList = () => {
             color={"purple"}
             size="lg"
           >
-            <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span> {i18n._(t`Vault`)} </span>
             </a>
           </Button>

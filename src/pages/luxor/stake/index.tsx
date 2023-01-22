@@ -195,21 +195,21 @@ export default function Stake() {
       <div className="flex ml-2 mr-2 mb-4 gap-1 items-center justify-center">
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/dashboard'}>
-            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <a className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span> Data </span>
             </a>
           </NavLink>
         </Button>
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/bonds'}>
-            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <a className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span> Bond </span>
             </a>
           </NavLink>
         </Button>
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/wrap'}>
-            <a className="block text-md md:text-xl text-black text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <a className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span> Wrap </span>
             </a>
           </NavLink>
@@ -241,7 +241,7 @@ export default function Stake() {
 
             <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-yellow w-full space-y-1">
               <div className="text-white">
-                <div className="block text-lg font-bold md:text-xl text-white text-center text-bold p-1 -m-4 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                <div className="block text-lg font-bold md:text-xl text-white text-center font-bold p-1 -m-4 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                   <span> {formatNumber(stakingAPY)}% APY</span>
                 </div>
               </div>
@@ -249,7 +249,7 @@ export default function Stake() {
 
             {/* <div className={classNames(dailyReward > 0 && "flex flex-col bg-dark-1000 mb-2 p-3 border border-yellow border-1 hover:border-yellow w-full space-y-1")}>
         <div className="text-white">
-          <div className="block text-md md:text-xl text-white text-center text-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+          <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span> DAILY YIELD: {formatNumber(dailyReward)} LUM ({formatNumber(dailyReward * luxorPrice)})</span>
             </div>
           </div>
@@ -286,7 +286,7 @@ export default function Stake() {
 
               {/* <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-yellow w-full space-y-1">
                 <div className="text-white">
-                    <div className="block text-md md:text-xl text-white text-center text-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                    <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                       <span> {formatNumber(stakingAPY)}% APY</span>
                     </div>
                 </div>
@@ -413,7 +413,7 @@ export default function Stake() {
               <div className="h-px my-2 bg-dark-1000" />
               {/* <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-yellow w-full space-y-1">
                 <div className="text-white">
-                    <div className="block text-md md:text-xl text-white text-center text-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                    <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                       <span> {formatNumber(stakingAPY)}% APY</span>
                     </div>
                 </div>

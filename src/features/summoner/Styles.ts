@@ -84,7 +84,7 @@ export const FarmContentWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 1rem 0 0;
+  padding: 0 0rem 0 0;
 
   &:last-child {
     justify-content: space-between;

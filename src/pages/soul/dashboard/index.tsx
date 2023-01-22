@@ -16,7 +16,9 @@ import { useSoulInfo, useBondInfo, usePriceUSD, useTokenInfo } from 'hooks/useAP
 import { ChainId, NATIVE, SOUL_ADDRESS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 import { getChainInfo, getChainColorCode } from 'constants/chains'
-import ExternalLink from 'components/ExternalLink'
+import Image from 'next/image'
+import DASHBOARD_BANNER from 'assets/branding/dashboard-banner.png'
+
 
 export default function Dashboard() {
   const { i18n } = useLingui()
@@ -219,7 +221,7 @@ export default function Dashboard() {
           <title>Dashboard | Soul</title>
           <meta key="description" name="description" />
         </Head>
-        <div className="grid grid-cols justify-center">
+        <div className="grid grid-cols justify-center bg-dark-900">
           <HideOnMobile>
             <div className="py-1 mb-1 mt-3 ml-3 mr-3 bg-dark-600" />
             <div className="py-1 mb-1 ml-3 mr-3 bg-purple" />
@@ -230,37 +232,51 @@ export default function Dashboard() {
             <div className="py-1 mt-1 ml-3 mr-3 mb-3 bg-purple" />
           </HideOnMobile>
 
-          <div className="flex ml-4 mr-4 mb-4 gap-1 items-center justify-center">
-            <NavLink href={'/summoner'}>
-              <Button variant="bordered" color={"purple"} size="lg">
-                <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                  <span> Farm </span>
-                </a>
-              </Button>
-            </NavLink>
-            <NavLink href={'/bonds'}>
-              <Button variant="bordered" color={"purple"} size="lg">
-                <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                  <span> Bond </span>
-                </a>
-              </Button>
-            </NavLink>
-            <NavLink href={'/lend'}>
-              <Button variant="bordered" color={"purple"} size="lg">
-                <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                  <span> Lend </span>
-                </a>
-              </Button>
-            </NavLink>
-            <NavLink href={'/autostake'}>
-              <Button variant="bordered" color={"purple"} size="lg">
-                <a className="block text-md md:text-xl text-white text-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                  <span> Vault </span>
-                </a>
-              </Button>
-            </NavLink>
-
-          </div>
+          <div className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple bg-dark-900`}>
+        <div className={`flex justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}>
+          <Image src={`/favicon.ico`}
+            objectFit={`contain`}
+            height={72}
+            width={72}
+          />
+        </div>
+        <Image src={DASHBOARD_BANNER}
+          height={180}
+          width={1080}
+        />
+      </div>
+      {/* <div className={`flex justify-center m-1 p-1`}>
+        <Button variant="filled" color="purple" size="lg">
+          <NavLink href={'/dashboard'}>
+            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              <span>SoulSwap Data </span>
+            </a>
+          </NavLink>
+        </Button>
+      </div> */}
+      <div className={`flex ml-2 mr-2 mb-4 mt-2 gap-1 items-center justify-center`}>
+        <Button variant="filled" color="purple" size="lg">
+          <NavLink href={'/bonds'}>
+            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              <span> Mint </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="purple" size="lg">
+          <NavLink href={'/summoner'}>
+            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              <span> Summon </span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="purple" size="lg">
+          <NavLink href={'/autostake'}>
+            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              <span> Stake </span>
+            </a>
+          </NavLink>
+        </Button>
+      </div>
           <div className="flex text-center items-center">
           </div>
           <div className="p-1 shadow-4 bg-[#A654DD] rounded-none sm:rounded-8 space-y-5 inline-block w-screen md:w-540 ml-3 mr-3 mb-6">
