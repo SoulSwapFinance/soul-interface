@@ -17,6 +17,7 @@ import Image from 'next/image'
 import MINT_BANNER from 'assets/branding/mint-banner.png'
 import ExternalLink from 'components/ExternalLink'
 import { SubmitButton } from 'features/bond/Styles'
+import { classNames } from 'functions/styling'
 
 export const BondList = () => {
   const { chainId } = useActiveWeb3React()
@@ -65,23 +66,30 @@ export const BondList = () => {
 
   return (
     <div className={`grid grid-cols-1 justify-center p-1 sm:m-8 sm:max-w-[90%] md:max-w-[100%] bg-dark-900 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}]`}>
-            <SubmitButton
-          height="2rem"
-          // variant="outlined" 
-          primaryColor={"#6F1BD9"}
-          // color={"purple"} 
-          // color={getChainColorCode(chainId)} 
-          size="lg"
-        // className={chainId == ChainId.AVALANCHE ? 'mb-4' : 'hidden'}
-        >
-          <ExternalLink
-            href="https://soulswapfinance.medium.com/owning-our-liquidity-via-our-innovative-soul-bonds-podl-592c2849ceed" target="_blank" rel="noreferrer"
+      <div
+            className={
+              classNames(chainId == ChainId.FANTOM 
+                  ? 'mb-4 rounded rounded-xl bg-purple' 
+                  : 'hidden')
+              }
           >
-            <a className="block text-md font-bold md:text-xl text-white font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> Learn More: Innovative Soul Bonds </span>
-            </a>
-          </ExternalLink>
-        </SubmitButton>
+            <ExternalLink
+              href="https://soulswapfinance.medium.com/owning-our-liquidity-via-our-innovative-soul-bonds-podl-592c2849ceed"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <SubmitButton
+                primaryColor={"#7G1BD9"}
+                size="xl"
+              >
+                <a 
+                  className="block text-md font-bold md:text-xl text-white font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300"
+                >
+                  <span> Read Before Bonding ↗</span>
+                </a>
+              </SubmitButton>
+            </ExternalLink>
+          </div>
       <div 
             className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl bg-dark-900 border-purple`}
             >
