@@ -65,7 +65,7 @@ export const BondList = () => {
   // }
 
   return (
-    <div className={`grid grid-cols-1 justify-center p-1 sm:m-8 sm:max-w-[90%] md:max-w-[100%] bg-dark-900 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}]`}>
+    <div className={`grid grid-cols-1 justify-center p-1 sm:m-8 sm:max-w-[90%] md:max-w-2xl bg-dark-900 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}]`}>
       <div
             className={
               classNames(chainId == ChainId.FANTOM 
