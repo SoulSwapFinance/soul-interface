@@ -151,15 +151,7 @@ export default function Menu() {
                     )
                   )}
                 </div>
-                <div className={`sm:hidden grid grid-cols-2 border border-[${getChainColor(chainId)}] justify-center rounded rounded-md justify-end bg-dark-1000`}>
                 <div className={`grid border border-[${getChainColor(chainId)}] justify-center rounded rounded-md justify-end bg-dark-1000`}>
-                  <TokenStats />
-                </div>
-                <div className={`grid border border-[${getChainColor(chainId)}] justify-center rounded rounded-md justify-end bg-dark-1000`}>
-                  <LanguageMenu />
-                </div>
-                </div>
-                <div className={`hidden sm:grid border border-[${getChainColor(chainId)}] justify-center rounded rounded-md justify-end bg-dark-1000`}>
                   <LanguageMenu />
                 </div>
               </div>

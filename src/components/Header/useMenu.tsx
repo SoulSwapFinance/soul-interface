@@ -1,5 +1,5 @@
 import React, { ReactNode, useMemo } from 'react'
-import { CurrencyDollarIcon, UserGroupIcon, MoonIcon, StarIcon, PlusCircleIcon, DocumentIcon } from '@heroicons/react/24/outline'
+// import { CurrencyDollarIcon, UserGroupIcon, MoonIcon, StarIcon } from '@heroicons/react/24/outline'
 import { ArrowsUpDownIcon } from '@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
@@ -7,7 +7,7 @@ import { ChainId, SOUL_ADDRESS } from 'sdk'
 import { Feature } from 'enums'
 import { classNames, featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
-import { BanknotesIcon, CircleStackIcon, MinusCircleIcon, PhotoIcon, PresentationChartLineIcon, SunIcon } from '@heroicons/react/24/solid'
+import { BanknotesIcon, BuildingLibraryIcon, CircleStackIcon, DocumentIcon,  MagnifyingGlassCircleIcon, MinusCircleIcon, PhotoIcon, PresentationChartLineIcon, PlusCircleIcon, SunIcon } from '@heroicons/react/24/solid'
 // import { useRouter } from 'next/router'
 
 // import { PoolIcon, RocketIcon, WalletIcon } from 'components/Icon'
@@ -83,19 +83,19 @@ const useMenu: UseMenu = () => {
       mainItems.push(farmItems)
     }
 
-    if (featureEnabled(Feature.LUXOR, chainId)) {
-      const farmItems = {
-        key: 'luxor',
-        title: i18n._(t`Luxor`),
-        icon: <SunIcon width={20} className={classNames(
-          `filter text-white`
-          // isFarm ? 'text-black' : `text-[${getChainColor(chainId)}]`
-          // isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`
-          )} />,
-        link: '/luxor'
-      }
-      mainItems.push(farmItems)
-    }
+    // if (featureEnabled(Feature.LUXOR, chainId)) {
+    //   const farmItems = {
+    //     key: 'luxor',
+    //     title: i18n._(t`Luxor`),
+    //     icon: <SunIcon width={20} className={classNames(
+    //       `filter text-white`
+    //       // isFarm ? 'text-black' : `text-[${getChainColor(chainId)}]`
+    //       // isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`
+    //       )} />,
+    //     link: '/luxor'
+    //   }
+    //   mainItems.push(farmItems)
+    // }
     
     // if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
     //   const farmItems = {
@@ -139,6 +139,17 @@ const useMenu: UseMenu = () => {
       mainItems.push(farmItems)
     }
 
+    // if (featureEnabled(Feature.UNDERWORLD, chainId)) {
+    //   mainItems.push({
+    //       key: 'vault',
+    //       title: i18n._(t`Stake`),
+    //       icon: <BuildingLibraryIcon width={20} className={classNames(
+    //         `filter text-white`
+    //         )} />,
+    //       link: '/autostake'
+    //   })
+    // }
+
     if (featureEnabled(Feature.UNDERWORLD, chainId)) {
       mainItems.push({
           key: 'lending',
@@ -147,6 +158,17 @@ const useMenu: UseMenu = () => {
             `filter text-white`
             )} />,
           link: '/lend'
+      })
+    }
+
+    if (featureEnabled(Feature.AMM, chainId)) {
+      mainItems.push({
+          key: 'explore',
+          title: i18n._(t`Paths`),
+          icon: <MagnifyingGlassCircleIcon width={20} className={classNames(
+            `filter text-white`
+          )} />,
+          link: '/explore'
       })
     }
 
@@ -182,16 +204,7 @@ const useMenu: UseMenu = () => {
           link: '/analytics'
       })
     }
-    // if (featureEnabled(Feature.AMM, chainId)) {
-    //   mainItems.push({
-    //       key: 'explore',
-    //       title: i18n._(t`Paths`),
-    //       icon: <ArrowsUpDownIcon width={20} className={classNames(
-    //         "rotate-90 filter", "text-white"
-    //       )} />,
-    //       link: '/explore'
-    //   })
-    // }
+
 
     return mainItems.filter((el) => Object.keys(el).length > 0)
   }, [chainId, i18n])
