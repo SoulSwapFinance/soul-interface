@@ -266,9 +266,9 @@ const Mobile: FC = () => {
         </Transition.Root>
         <div
           className={
-            classNames(`hover:bg-dark-900 p-1.5 -mb-0.5 rounded rounded-2xl 
+            classNames(`hover:bg-dark-900 p-1.5 rounded rounded-2xl mt-1.5
                 border border-[${getChainColor(chainId)}]
-                hover:border-2
+                border-2
                 `,
               dropdown ? `relative top-0 right-4` : `relative top-0 right-0`)}
           // onClick={() => { setOpen(true) }}
@@ -287,12 +287,12 @@ const Mobile: FC = () => {
 
             {/* WALLET ICON */}
             <div
-              className={`relative top-0 right-2 rounded rounded-2xl inline-block border border-[${getChainColor(chainId)}] hover:border-2`}
+              className={`relative top-0 right-2 p-0.5 mt-1.5 border border-[${getChainColor(chainId)}] border-2 rounded rounded-2xl inline-block`}
             >
               <Web3Status />
             </div>
             {/* NETWORK ICON */}
-            <div className={`relative top-0 right-0 p-1.5 border border-[${getChainColor(chainId)}] hover:border-2 rounded rounded-2xl inline-block`}>
+            <div className={`relative top-0 right-0 p-1.5 mt-1.5 border border-[${getChainColor(chainId)}] border-2 rounded rounded-2xl inline-block`}>
               <Web3Network />
             </div>
           </div>
