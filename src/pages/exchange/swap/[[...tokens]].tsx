@@ -41,6 +41,7 @@ import SwapDropdown from 'features/swap/SwapDropdown'
 import Pair from 'pages/analytics/pairs/[id]'
 import { VoteBanner } from 'components/Banner'
 import SWAP_BANNER from 'assets/branding/swap-banner.png'
+import UpDownArrowIcon from 'components/Icons/exchange/UpDownArrowIcon'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 
 const Swap = () => {
@@ -54,6 +55,8 @@ const Swap = () => {
     useCurrency(loadedUrlParams?.inputCurrencyId),
     useCurrency(loadedUrlParams?.outputCurrencyId),
   ]
+
+  const [switched, setSwitched] = useState(false)
 
   const DEFAULT_CURRENCY_A = NATIVE[chainId].symbol
   const DEFAULT_CURRENCY_B = [ChainId.ETHEREUM, ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId) ? SOUL_ADDRESS[chainId] : USDC_ADDRESS[chainId]
@@ -125,7 +128,7 @@ const Swap = () => {
 
   const isValid = !swapInputError
   const dependentField: Field = independentField === Field.INPUT ? Field.OUTPUT : Field.INPUT
-
+  const WHITE = '#FFFFFF'
 
   // modal and loading
   const [{ showConfirm, tradeToConfirm, swapErrorMessage, attemptingTxn, txHash }, setSwapState] = useState<{
@@ -316,8 +319,9 @@ const Swap = () => {
     (inputCurrency: Currency, outputCurrency: Currency) => {
       handleInputSelect(outputCurrency)
       handleOutputSelect(inputCurrency)
+      switched && setSwitched(false)
     },
-    [onCurrencySelection]
+    [onCurrencySelection, setSwitched]
   )
 
   const swapIsUnsupported = useIsSwapUnsupported(currencies?.INPUT, currencies?.OUTPUT)
@@ -364,6 +368,12 @@ const Swap = () => {
     },
     [onUserInput]
   )
+
+  const UP_DOWN_ICON = <UpDownArrowIcon
+  fillPrimary={switched ? WHITE : getChainColor(chainId)}
+  fillSecondary={switched ? getChainColor(chainId) : WHITE}
+  className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-2xl w-7 h-7` : `hidden`)}
+/>
 
   return (
     <>
@@ -453,30 +463,31 @@ const Swap = () => {
             </>
             {/* } */}
             {/* {useSwap && */}
-            <div className="flex -mt-6 -mb-6 z-0 justify-between">
+            <div className="flex -mt-4 -mb-4 z-0 justify-between">
               <Button
                 size={'xs'}
-                className={classNames(`mx-[42%] rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
+                className={classNames(`mx-[42%] rounded rounded-2xl bg-dark-1000 border border-2 border-[${getChainColor(chainId)}]`)}
                 onClick={() =>
                   handleSwitchTokens(currencies?.INPUT, currencies?.OUTPUT)
-                }                >
+                }
+              >
                 <Image
                   alt={"arrow rounded square"}
-                  width={'14px'}
-                  height={'14px'}
+                  width={18}
+                  height={18}
                   className={`rounded rounded-xl`}
                   src={ArrowRoundedSquare}
                 />
               </Button>
               <Button
                 size={'xs'}
-                className={classNames(`rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
+                className={classNames(`rounded rounded-xl bg-dark-1000 border border-2 border-[${getChainColor(chainId)}]`)}
                 onClick={handleLimitSwap}
               >
                 <Image
                   alt={"Chevron Up Down Icon"}
-                  width={'14px'}
-                  height={'14px'}
+                  width={18}
+                  height={18}
                   className={`rounded rounded-xl`}
                   src={ChevronUpDown}
                 />

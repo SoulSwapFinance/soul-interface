@@ -494,33 +494,35 @@ const Limit = () => {
 
   const handleApprove = useCallback(async () => {
     await approveCallback();
-  }, [approveCallback]);
+  }, [approveCallback])
 
   return (
-    <Container id="cross-page" maxWidth="2xl" className="space-y-4">
-      <DoubleGlowShadowV2>
-        <SwapLayoutCard>
-        <VoteBanner />
-        <div 
-            className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}
+    <DoubleGlowShadowV2>
+          <div className={`grid p-1 mt-4 space-y-2 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}] bg-dark-1000`}>
+            {/* <SwapLayoutCard> */}
+            <VoteBanner />
+            <div
+              className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >
-            <div className="flex justify-center">
-             <div 
-              className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
+              <div className={`flex justify-center`}>
+                <div
+                  className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
                 >
-              <Image src={`/favicon.ico`}
-                objectFit={`contain`}
-                height={72}
-                width={72}
+                  <Image src={`/favicon.ico`}
+                    objectFit={`contain`}
+                    height={72}
+                    width={72}
+                  />
+                </div>
+              </div>
+              <Image src={LIMIT_BANNER}
+                height={180}
+                width={1080}
               />
-            </div> 
             </div>
-            <Image src={LIMIT_BANNER}
-              height={180}
-              width={1080}
-            />
-            </div>
-          <div className="p-0 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
+            {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
+            <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
+            <div className="p-0 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
           {showHeader && <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>}
 
             {showHeader &&
@@ -861,11 +863,9 @@ const Limit = () => {
             <div className={classNames([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `flex flex-cols-2 gap-3 text-white justify-end` : `hidden`)}>
             </div>
           </div>
-        </SwapLayoutCard>
+          </div>
       </DoubleGlowShadowV2>
-    </Container>
-
-  );
+  )
 }
 
 export default Limit
