@@ -2,7 +2,7 @@ import { defaultAbiCoder } from '@ethersproject/abi'
 import { BigNumber } from '@ethersproject/bignumber'
 import { hexConcat, hexlify } from '@ethersproject/bytes'
 import { AddressZero } from '@ethersproject/constants'
-import { SOULSWAP_MULTISWAPPER_ADDRESS, WNATIVE } from 'sdk'
+import { NATIVE, SOULSWAP_MULTISWAPPER_ADDRESS, WNATIVE } from 'sdk'
 import { Button } from 'components/Button'
 import UnderworldCooker from 'entities/UnderworldCooker'
 import { TransactionReview } from 'entities/TransactionReview'
@@ -60,7 +60,7 @@ export default function Borrow({ pair }: BorrowProps) {
   const aDivisor = 10 ** aDecimals
   
   const collateralWalletBalance = underworldUserInfo.userCollateralBalance
-  const collateralWalletBalance_BN = collateralWalletBalance ? BigNumber.from(collateralWalletBalance) : ZERO
+  // const collateralWalletBalance_BN = collateralWalletBalance ? BigNumber.from(collateralWalletBalance) : ZERO
   // console.log('cBal:%s', collateralWalletBalance)
   // console.log('collateralWalletBalance:%s', collateralWalletBalance_BN)
   
@@ -245,15 +245,22 @@ export default function Borrow({ pair }: BorrowProps) {
   const collateralWarnings = new Warnings()
 
 
-  collateralWarnings.add(
-    // wallet balance < resultant sum - current collateral
-    collateralWalletBalance_BN?.lt(nextUserCollateralAmount.sub(userCollateralBalance.toString().toBigNumber(cDecimals))),
-    // collateralBalance.lt(nextUserCollateralAmount.sub(userCollateralBalance)),
-    //.toString().toBigNumber(cDecimals)),
-    `Ensure your ${useCoffinCollateral ? 'CoffinBox' : 'wallet'
-    } balance is sufficient to deposit and try again.`,
-    true
-  )
+  // collateralWarnings.add(
+  //   /* resultant sum - current collateral > wallet balance
+  //     // AKA: i am trying to add more collateral that i have in my wallet 
+  //   */
+  
+  //   // resultant collateral - currenct collateral (aka what is being added)
+  //   Number(nextUserCollateralAmount) - Number(userCollateralBalance) >
+  //   // collateral wallet balance
+  //   Number(collateralWalletBalance) && collateralSymbol != NATIVE[chainId]?.symbol,
+  //   // collateralWalletBalance_BN?.lt(nextUserCollateralAmount.sub(userCollateralBalance.toString().toBigNumber(cDecimals))),
+  //   // collateralBalance.lt(nextUserCollateralAmount.sub(userCollateralBalance)),
+  //   //.toString().toBigNumber(cDecimals)),
+  //   `Ensure your ${useCoffinCollateral ? 'CoffinBox' : 'wallet'
+  //   } balance is sufficient to deposit and try again.`,
+  //   true
+  // )
 
   const borrowWarnings = new Warnings()
     .add(
@@ -269,13 +276,13 @@ export default function Borrow({ pair }: BorrowProps) {
         true,
         new Warning(
           Number(borrowValue) > 0
-          && Number(userBorrowValue) < Number(nextMaxBorrowMinimum?.sub(pair.currentUserBorrowAmount.value)),
-          "You don't have enough collateral to borrow this amount.",
-          true,
+          && Number(userBorrowValue) <= (Number(nextMaxBorrowMinimum) - Number(pair.currentUserBorrowAmount.value)),
+          "Always ensure you have sufficient collateral prior to borrowing.",
+          false,
           new Warning(
             Number(borrowValue) > 0
             && Number(userBorrowBalance) < Number(nextMaxBorrowSafe),
-            'You will surpass your borrow limit and assets will be at a high risk of liquidation.',
+            'You may surpass your borrow limit and assets will be at a high risk of liquidation.',
             false
           )
         )

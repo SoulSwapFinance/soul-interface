@@ -156,7 +156,7 @@ const Desktop: FC = () => {
 
   return (
     <>
-      <header className="w-full flex items-center text-white bg-purple rounded rounded-2xl justify-center min-h-[48px] h-[48px] px-2">
+      <header className="w-full flex items-center text-white bg-purple justify-center min-h-[48px] h-[48px] px-2">
 
         <nav
           className={classNames(
@@ -166,7 +166,7 @@ const Desktop: FC = () => {
               before:absolute before:w-full before:h-full mx-4`
           )
           }>
-          <div className={`flex justify-center bg-dark-1000 flex-grow border border-[${getChainColor(chainId)}]  hover:border-2 rounded rounded-2xl`}>
+          <div className={`flex justify-center bg-dark-1000 flex-grow border border-4 border-ftmBlue rounded rounded-2xl p-1`}>
             {/* <div
             className={`hover:bg-dark-900 p-1.5 -mb-0.5 rounded rounded-2xl 
                 border border-[${getChainColor(chainId)}]
@@ -178,7 +178,7 @@ const Desktop: FC = () => {
             {SWAP_ICON}
           </div> */}
             <div
-              className="flex rounded rounded-2xl bg-dark-900 gap-1 mt-0.5 sm:gap-4 md:gap-18 justify-center items-center">
+              className="flex rounded rounded-2xl bg-dark-1000 gap-1 sm:gap-4 md:gap-18 justify-center items-center px-0.5 m-0.5">
               {menu.map((node) => {
                 return <NavigationItem node={node} key={node.key} />
               })}
@@ -221,7 +221,7 @@ const Desktop: FC = () => {
           </Dialog>
         </Transition.Root>
         {/* TOKEN STATS */}
-        <div className={`flex rounded rounded-2xl inline-block bg-purple border border-[${getChainColor(chainId)}] hover:border-2`}>
+        <div className={`flex rounded rounded-2xl inline-block mt-4 bg-ftmBlue border-4 border-ftmBlue hover:border-2`}>
           <TokenStats />
         </div>
         <DesktopBar />

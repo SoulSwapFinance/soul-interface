@@ -14,10 +14,14 @@ import { Button } from 'components/Button'
 import { XCircleIcon } from '@heroicons/react/24/solid'
 import { ChainId, SOUL_ADDRESS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
-import { getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 import { useTokenInfo } from 'hooks/useAPI'
-import ExternalLink from 'components/ExternalLink'
-import { SubmitButton } from 'features/bond/Styles'
+import Image from 'next/image'
+import FARM_BANNER from 'assets/branding/farm-banner.png'
+import NavLink from 'components/NavLink'
+
+// import ExternalLink from 'components/ExternalLink'
+// import { SubmitButton } from 'features/bond/Styles'
 
 // import { TwitterBanner } from 'components/Banner'
 // import { useRouter } from 'next/router'
@@ -69,74 +73,111 @@ const Summoner = () => {
   }
 
   return (
-    <Wrap padding='1rem 0 0 0' justifyContent="center">
-      {showBalances &&
-        <div className={`flex flex-row 
+    <div className={`grid grid-cols-1 justify-center p-1 mt-8 sm:m-8 sm:max-w-[90%] md:max-w-[100%] bg-dark-900 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}]`}>
+    <div 
+            className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl bg-dark-900 border-purple`}
+            >
+            <div className="flex justify-center">
+             <div 
+              className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
+                >
+              <Image src={`/favicon.ico`}
+                objectFit={`contain`}
+                height={72}
+                width={72}
+              />
+            </div> 
+            </div>
+            <Image src={FARM_BANNER}
+              height={180}
+              width={1080}
+            />
+          </div>
+          <div className={`flex justify-center m-1 p-1`}>
+        <Button variant="filled" color="purple" size="lg">
+          <NavLink href={'/dashboard'}>
+            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              <span>SoulSwap Data </span>
+            </a>
+          </NavLink>
+        </Button>
+      </div>
+      <div className="flex ml-2 mr-2 mb-4 mt-2 gap-1 items-center justify-center">
+        <Button variant="filled" color="purple" size="lg">
+          <NavLink href={'/autostake'}>
+            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              <span>Stake</span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="purple" size="lg">
+          <NavLink href={'/bonds'}>
+            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              <span>Mint</span>
+            </a>
+          </NavLink>
+        </Button>
+      </div>
+        {showBalances &&
+          <div className={`flex flex-row 
       text-white
       justify-end`}>
-          <XCircleIcon
-            height="24px"
-            id="toggle-button"
-            onClick={() => openShowBalances(false)}
-          />
-        </div>
-      }
-      {showBalances &&
-        // <TridentHeader className="sm:!flex-row justify-center items-center" pattern="bg-bubble">
-        // <div>
-        <div className="flex justify-center gap-2 mb-4">
-          <Button
-            color={getChainColorCode(chainId)}
-            className="text-emphasis"
-            variant="outlined"
-            size={"sm"}
-          >
-            {formatNumberScale(allStaked, true)} {' STAKED'}
-          </Button>
-          {positions.length > 0 && (
+            <XCircleIcon
+              height="24px"
+              id="toggle-button"
+              onClick={() => openShowBalances(false)}
+            />
+          </div>
+        }
+        {showBalances &&
+          // <TridentHeader className="sm:!flex-row justify-center items-center" pattern="bg-bubble">
+          // <div>
+          <div className="flex justify-center gap-2 mb-4">
             <Button
               color={getChainColorCode(chainId)}
               className="text-emphasis"
               variant="outlined"
               size={"sm"}
-              disabled={pendingTx}
-              onClick={async () => {
-                setPendingTx(true)
-                try {
-                  await handleHarvestAll()
-                } catch (error) {
-                  console.error(error)
-                }
-                setPendingTx(false)
-              }}
             >
-              {`CLAIM ALL ${pendingValue > 0 ? formatNumberScale(pendingValue, true) : ''}`}
+              {formatNumberScale(allStaked, true)} {' STAKED'}
             </Button>
-          )}
-          <Button
-            color={getChainColorCode(chainId)}
-            className="text-emphasis"
-            variant={'outlined'}
-            size={"sm"}
-          >
-            {formatNumberScale(summTvl, true)} {' '} TOTAL
-          </Button>
-        </div>
-        /* // </TridentHeader> */
-      }
-      <DoubleGlowShadowV2 opacity="0.6">
-        <Container id="farm-page">
-
-          
-          {/* <br /> */}
+            {positions.length > 0 && (
+              <Button
+                color={getChainColorCode(chainId)}
+                className="text-emphasis"
+                variant="outlined"
+                size={"sm"}
+                disabled={pendingTx}
+                onClick={async () => {
+                  setPendingTx(true)
+                  try {
+                    await handleHarvestAll()
+                  } catch (error) {
+                    console.error(error)
+                  }
+                  setPendingTx(false)
+                }}
+              >
+                {`CLAIM ALL ${pendingValue > 0 ? formatNumberScale(pendingValue, true) : ''}`}
+              </Button>
+            )}
+            <Button
+              color={getChainColorCode(chainId)}
+              className="text-emphasis"
+              variant={'outlined'}
+              size={"sm"}
+            >
+              {formatNumberScale(summTvl, true)} {' '} TOTAL
+            </Button>
+          </div>
+          /* // </TridentHeader> */
+        }
           <Head>
             <title>Farm | Soul</title>
             <meta key="description" name="description" content="Farm" />
           </Head>
           <FarmList />
-        </Container>
-      </DoubleGlowShadowV2>
-    </Wrap>
+        </div>
   )
 }
 
