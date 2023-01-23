@@ -538,8 +538,8 @@ const Bridge: React.FC<any> = () => {
   return (
     // <Container id="bridge-page" maxWidth="2xl" className={`space-y-4 mt-4`}>
       <DoubleGlowShadowV2>
-        <SwapLayoutCard>
-        <div className={`grid p-1 mt-4 space-y-2 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}] bg-dark-1000`}>
+        {/* <SwapLayoutCard> */}
+        <div className={`grid p-1 mt-8 space-y-2 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}] bg-dark-1000`}>
         <VoteBanner />
         <div 
             className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
@@ -762,7 +762,7 @@ const Bridge: React.FC<any> = () => {
             </FadeInOut>
           </div>
           </div>
-        </SwapLayoutCard>
+        {/* </SwapLayoutCard> */}
         {/* </div> */}
       </DoubleGlowShadowV2>
   )

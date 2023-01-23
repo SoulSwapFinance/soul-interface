@@ -40,7 +40,8 @@ import { useRouter } from 'next/router'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import Pair from 'pages/analytics/pairs/[id]'
 import { VoteBanner } from 'components/Banner'
-import EXCHANGE_BANNER from 'assets/branding/swap-banner.png'
+import SWAP_BANNER from 'assets/branding/swap-banner.png'
+import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -402,31 +403,87 @@ const Swap = () => {
         </div>}
 
       {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
-        <SwapLayoutCard>
-          <VoteBanner />
-          <div 
-            className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}
+        <DoubleGlowShadowV2>
+          <div className={`grid p-1 mt-4 space-y-2 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}] bg-dark-1000`}>
+            {/* <SwapLayoutCard> */}
+            <VoteBanner />
+            <div
+              className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >
-            <div className="flex justify-center">
-             <div 
-              className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
+              <div className={`flex justify-center`}>
+                <div
+                  className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
                 >
-              <Image src={`/favicon.ico`}
-                objectFit={`contain`}
-                height={72}
-                width={72}
+                  <Image src={`/favicon.ico`}
+                    objectFit={`contain`}
+                    height={72}
+                    width={72}
+                  />
+                </div>
+              </div>
+              <Image src={SWAP_BANNER}
+                height={180}
+                width={1080}
               />
-            </div> 
             </div>
-            <Image src={EXCHANGE_BANNER}
-              height={180}
-              width={1080}
-            />
-          </div>
-          {/* {!useLimit && */}
-          <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
-          <><SwapDropdown inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+            {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
             <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
+            <><SwapDropdown inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
+              <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
+              {/* {useSwap && */}
+              <SwapAssetPanel
+                spendFromWallet={true}
+                chainId={chainId}
+                header={(props) => (
+                  <SwapAssetPanel.Header
+                    {...props}
+                    label={
+                      independentField === Field.OUTPUT && !showWrap
+                        ? i18n._(t`Swap from:`)
+                        : i18n._(t`Swap from:`)
+                    }
+                  />
+                )}
+                currency={currencies[Field.INPUT]}
+                value={formattedAmounts[Field.INPUT]}
+                onChange={handleTypeInput}
+                onSelect={handleInputSelect}
+              />
+              {/* } */}
+            </>
+            {/* } */}
+            {/* {useSwap && */}
+            <div className="flex -mt-6 -mb-6 z-0 justify-between">
+              <Button
+                size={'xs'}
+                className={classNames(`mx-[42%] rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
+                onClick={() =>
+                  handleSwitchTokens(currencies?.INPUT, currencies?.OUTPUT)
+                }                >
+                <Image
+                  alt={"arrow rounded square"}
+                  width={'14px'}
+                  height={'14px'}
+                  className={`rounded rounded-xl`}
+                  src={ArrowRoundedSquare}
+                />
+              </Button>
+              <Button
+                size={'xs'}
+                className={classNames(`rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
+                onClick={handleLimitSwap}
+              >
+                <Image
+                  alt={"Chevron Up Down Icon"}
+                  width={'14px'}
+                  height={'14px'}
+                  className={`rounded rounded-xl`}
+                  src={ChevronUpDown}
+                />
+              </Button>
+            </div>
+            {/* } */}
+            {/* TO ASSET PANEL */}
             {/* {useSwap && */}
             <SwapAssetPanel
               spendFromWallet={true}
@@ -434,243 +491,191 @@ const Swap = () => {
               header={(props) => (
                 <SwapAssetPanel.Header
                   {...props}
-                  label={
-                    independentField === Field.OUTPUT && !showWrap
-                      ? i18n._(t`Swap from:`)
-                      : i18n._(t`Swap from:`)
-                  }
+                  label={independentField === Field.INPUT && !showWrap ? i18n._(t`Swap to:`) : i18n._(t`Swap to:`)}
                 />
               )}
-              currency={currencies[Field.INPUT]}
-              value={formattedAmounts[Field.INPUT]}
-              onChange={handleTypeInput}
-              onSelect={handleInputSelect}
+              currency={currencies[Field.OUTPUT]}
+              value={formattedAmounts[Field.OUTPUT]}
+              onChange={handleTypeOutput}
+              onSelect={
+                handleOutputSelect
+              }
+              priceImpact={priceImpact}
+              priceImpactCss={priceImpactCss}
             />
             {/* } */}
-          </>
-          {/* } */}
-          {/* {useSwap && */}
-          <div className="flex -mt-6 -mb-6 z-0 justify-between">
-            <Button
-              size={'xs'}
-              className={classNames(`mx-[42%] rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
-              onClick={() =>
-                handleSwitchTokens(currencies?.INPUT, currencies?.OUTPUT)
-              }                >
-              <Image
-                alt={"arrow rounded square"}
-                width={'14px'}
-                height={'14px'}
-                className={`rounded rounded-xl`}
-                src={ArrowRoundedSquare}
-              />
-            </Button>
-            <Button
-              size={'xs'}
-              className={classNames(`rounded rounded-xl bg-dark-1000 border border-[${getChainColor(chainId)}]`)}
-              onClick={handleLimitSwap}
-            >
-              <Image
-                alt={"Chevron Up Down Icon"}
-                width={'14px'}
-                height={'14px'}
-                className={`rounded rounded-xl`}
-                src={ChevronUpDown}
-              />
-            </Button>
-          </div>
-          {/* } */}
-          {/* TO ASSET PANEL */}
-          {/* {useSwap && */}
-          <SwapAssetPanel
-            spendFromWallet={true}
-            chainId={chainId}
-            header={(props) => (
-              <SwapAssetPanel.Header
-                {...props}
-                label={independentField === Field.INPUT && !showWrap ? i18n._(t`Swap to:`) : i18n._(t`Swap to:`)}
-              />
-            )}
-            currency={currencies[Field.OUTPUT]}
-            value={formattedAmounts[Field.OUTPUT]}
-            onChange={handleTypeOutput}
-            onSelect={
-              handleOutputSelect
-            }
-            priceImpact={priceImpact}
-            priceImpactCss={priceImpactCss}
-          />
-          {/* } */}
-          {Boolean(trade) && // useSwap &&
-            (
-              <SwapDetails
-                inputCurrency={currencies[Field.INPUT]}
-                outputCurrency={currencies[Field.OUTPUT]}
-                trade={trade}
-                recipient={recipient ?? undefined}
-              />
-            )}
-          {trade && routeNotFound && userHasSpecifiedInputOutput // && useSwap 
-            &&
-            (
-              <Typography variant="xs" className="text-center py-2">
-                {i18n._(t`Insufficient liquidity for this trade.`)}{' '}
-                {singleHopOnly && i18n._(t`Try enabling multi-hop trades`)}
-              </Typography>
-            )}
+            {Boolean(trade) && // useSwap &&
+              (
+                <SwapDetails
+                  inputCurrency={currencies[Field.INPUT]}
+                  outputCurrency={currencies[Field.OUTPUT]}
+                  trade={trade}
+                  recipient={recipient ?? undefined}
+                />
+              )}
+            {trade && routeNotFound && userHasSpecifiedInputOutput // && useSwap 
+              &&
+              (
+                <Typography variant="xs" className="text-center py-2">
+                  {i18n._(t`Insufficient liquidity for this trade.`)}{' '}
+                  {singleHopOnly && i18n._(t`Try enabling multi-hop trades`)}
+                </Typography>
+              )}
 
-          {swapIsUnsupported // && useSwap
-            ? (
-              <Button
-                color="red"
-                disabled
-                className="rounded-2xl w-full md:rounded">
-                {i18n._(t`Unsupported Asset`)}
-              </Button>
-            ) : !account // && useSwap 
+            {swapIsUnsupported // && useSwap
               ? (
-                <Web3Connect color="purple" variant="filled" className="rounded-2xl md:rounded" />
-              ) : showWrap // && useSwap 
+                <Button
+                  color="red"
+                  disabled
+                  className="rounded-2xl w-full md:rounded">
+                  {i18n._(t`Unsupported Asset`)}
+                </Button>
+              ) : !account // && useSwap 
                 ? (
-                  <Button
-                    color={`${getChainColorCode(chainId)}`}
-                    disabled={Boolean(wrapInputError)}
-                    onClick={onWrap}
-                    className="rounded-2xl w-full md:rounded"
-                  >
-                    {wrapInputError ??
-                      (wrapType === WrapType.WRAP
-                        ? i18n._(t`Wrap`)
-                        : wrapType === WrapType.UNWRAP
-                          ? i18n._(t`Unwrap`)
-                          : null)}
-                  </Button>
-                ) : showApproveFlow // && useSwap
+                  <Web3Connect color="purple" variant="filled" className="rounded-2xl md:rounded" />
+                ) : showWrap // && useSwap 
                   ? (
-                    <div>
-                      {approvalState !== ApprovalState.APPROVED &&
-                        (
-                          <Button
-                            color={`${getChainColorCode(chainId)}`}
-                            loading={approvalState === ApprovalState.PENDING}
-                            onClick={handleApprove}
-                            disabled={approvalState !== ApprovalState.NOT_APPROVED || approvalSubmitted}
-                            className="rounded-2xl w-full md:rounded"
-                          >
-                            {i18n._(t`Approve ${currencies[Field.INPUT]?.symbol}`)}
-                          </Button>
-                        )}
-                      {approvalState === ApprovalState.APPROVED
-                        // && useSwap 
-                        &&
-                        (
-                          <Button
-                            color={isValid && priceImpactSeverity > 2 ? 'red' : `${getChainColorCode(chainId)}`
-                            }
-                            onClick={() => {
-                              setSwapState({
-                                tradeToConfirm: trade,
-                                attemptingTxn: false,
-                                swapErrorMessage: undefined,
-                                showConfirm: true,
-                                txHash: undefined,
-                              })
-                            }
-                            }
-                            id="swap-button"
-                            disabled={
-                              !isValid || approvalState !== ApprovalState.APPROVED || (priceImpactSeverity > 3)
-                            }
-                            className="rounded-2xl w-full md:rounded"
-                          >
-                            {priceImpactSeverity > 3
-                              ? i18n._(t`Price Impact High`)
-                              : priceImpactSeverity > 2
-                                ? i18n._(t`Swap Anyway`)
-                                : i18n._(t`Swap`)}
-                          </Button>
-                        )}
-                    </div>
-                  ) : (
-                    // useSwap &&
                     <Button
-                      color={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'red' : `${getChainColorCode(chainId)}`}
-                      onClick={() => {
-                        setSwapState({
-                          tradeToConfirm: trade,
-                          attemptingTxn: false,
-                          swapErrorMessage: undefined,
-                          showConfirm: true,
-                          txHash: undefined,
-                        })
-                      }
-                      }
-                      id="swap-button"
-                      disabled={!isValid || (priceImpactSeverity > 3) || !!swapCallbackError}
-                      className={classNames(isValid && priceImpactSeverity > 2 ? 'hidden' : "rounded-2xl w-full md:rounded")}
+                      color={`${getChainColorCode(chainId)}`}
+                      disabled={Boolean(wrapInputError)}
+                      onClick={onWrap}
+                      className="rounded-2xl w-full md:rounded"
                     >
-                      {swapInputError
-                        ? swapInputError
-                        : priceImpactSeverity > 2
-                          ? i18n._(t`Swap Anyway`)
-                          : i18n._(t`Swap`)}
+                      {wrapInputError ??
+                        (wrapType === WrapType.WRAP
+                          ? i18n._(t`Wrap`)
+                          : wrapType === WrapType.UNWRAP
+                            ? i18n._(t`Unwrap`)
+                            : null)}
                     </Button>
-                  )}
-          {
-            // useSwap && 
-            priceImpactSeverity > 2 && isValid &&
-            <Button
-              color={`${getChainColorCode(chainId)}`}
-              onClick={handleAggregatorSwap}
-              id="use-aggregator-button"
-              // disabled={}
-              className="rounded-2xl w-full md:rounded"
-            >
-              {'Use Aggregator'}
-            </Button>
-          }
-          {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} show={false} /> : null}
-          <div className={classNames(featureEnabled(Feature.AGGREGATE, chainId) ? "m-1 flex justify-between" : "hidden")}>
-            <div className={classNames(
-              // !useLimit && !useAggregator ? 
-              `flex flex-cols-2 gap-3 text-white justify-end`
-              // : 'hidden'
-            )}>
+                  ) : showApproveFlow // && useSwap
+                    ? (
+                      <div>
+                        {approvalState !== ApprovalState.APPROVED &&
+                          (
+                            <Button
+                              color={`${getChainColorCode(chainId)}`}
+                              loading={approvalState === ApprovalState.PENDING}
+                              onClick={handleApprove}
+                              disabled={approvalState !== ApprovalState.NOT_APPROVED || approvalSubmitted}
+                              className="rounded-2xl w-full md:rounded"
+                            >
+                              {i18n._(t`Approve ${currencies[Field.INPUT]?.symbol}`)}
+                            </Button>
+                          )}
+                        {approvalState === ApprovalState.APPROVED
+                          // && useSwap 
+                          &&
+                          (
+                            <Button
+                              color={isValid && priceImpactSeverity > 2 ? 'red' : `${getChainColorCode(chainId)}`
+                              }
+                              onClick={() => {
+                                setSwapState({
+                                  tradeToConfirm: trade,
+                                  attemptingTxn: false,
+                                  swapErrorMessage: undefined,
+                                  showConfirm: true,
+                                  txHash: undefined,
+                                })
+                              }
+                              }
+                              id="swap-button"
+                              disabled={
+                                !isValid || approvalState !== ApprovalState.APPROVED || (priceImpactSeverity > 3)
+                              }
+                              className="rounded-2xl w-full md:rounded"
+                            >
+                              {priceImpactSeverity > 3
+                                ? i18n._(t`Price Impact High`)
+                                : priceImpactSeverity > 2
+                                  ? i18n._(t`Swap Anyway`)
+                                  : i18n._(t`Swap`)}
+                            </Button>
+                          )}
+                      </div>
+                    ) : (
+                      // useSwap &&
+                      <Button
+                        color={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'red' : `${getChainColorCode(chainId)}`}
+                        onClick={() => {
+                          setSwapState({
+                            tradeToConfirm: trade,
+                            attemptingTxn: false,
+                            swapErrorMessage: undefined,
+                            showConfirm: true,
+                            txHash: undefined,
+                          })
+                        }
+                        }
+                        id="swap-button"
+                        disabled={!isValid || (priceImpactSeverity > 3) || !!swapCallbackError}
+                        className={classNames(isValid && priceImpactSeverity > 2 ? 'hidden' : "rounded-2xl w-full md:rounded")}
+                      >
+                        {swapInputError
+                          ? swapInputError
+                          : priceImpactSeverity > 2
+                            ? i18n._(t`Swap Anyway`)
+                            : i18n._(t`Swap`)}
+                      </Button>
+                    )}
+            {
+              // useSwap && 
+              priceImpactSeverity > 2 && isValid &&
+              <Button
+                color={`${getChainColorCode(chainId)}`}
+                onClick={handleAggregatorSwap}
+                id="use-aggregator-button"
+                // disabled={}
+                className="rounded-2xl w-full md:rounded"
+              >
+                {'Use Aggregator'}
+              </Button>
+            }
+            {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} show={false} /> : null}
+            <div className={classNames(featureEnabled(Feature.AGGREGATE, chainId) ? "m-1 flex justify-between" : "hidden")}>
+              <div className={classNames(
+                // !useLimit && !useAggregator ? 
+                `flex flex-cols-2 gap-3 text-white justify-end`
+                // : 'hidden'
+              )}>
 
+              </div>
             </div>
-          </div>
-          <div className={`flex flex-cols-${showChart && showPortfolio ? `hidden` : `1`}`}>
-            {showChart && !showPortfolio &&
-              // useSwap && 
-              [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
-              <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
-                <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
-                  {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
-                  {!isWrapped && <Pair
-                    // isWrapped={isWrapped}
-                    inputCurrency={inputCurrency}
-                    outputCurrency={outputCurrency}
-                  />
-                  }
+            <div className={`flex flex-cols-${showChart && showPortfolio ? `hidden` : `1`}`}>
+              {showChart && !showPortfolio &&
+                // useSwap && 
+                [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+                <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
+                  <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
+                    {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
+                    {!isWrapped && <Pair
+                      // isWrapped={isWrapped}
+                      inputCurrency={inputCurrency}
+                      outputCurrency={outputCurrency}
+                    />
+                    }
+                  </div>
                 </div>
-              </div>
-            }
-            {showPortfolio &&
-              // useSwap && 
-              [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
-              <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
-                <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
-                  {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
-                  {/* <Pair inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
-                  <iframe src={`https://soulswap-portfolio.vercel.app/portfolio/${account}`} height={600} />
+              }
+              {showPortfolio &&
+                // useSwap && 
+                [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+                <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
+                  <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
+                    {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
+                    {/* <Pair inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
+                    <iframe src={`https://soulswap-portfolio.vercel.app/portfolio/${account}`} height={600} />
+                  </div>
                 </div>
-              </div>
-            }
-          </div>
-          {/* {(!showChart && !showChart) &&
+              }
+            </div>
+            {/* {(!showChart && !showChart) &&
             <SocialWidget />
           } */}
-        </SwapLayoutCard>
+            {/* </SwapLayoutCard> */}
+          </div>
+        </DoubleGlowShadowV2>
       }
     </>
   )
