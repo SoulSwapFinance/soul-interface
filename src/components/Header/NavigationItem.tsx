@@ -7,10 +7,10 @@ import { classNames } from 'functions'
 import useDesktopHeaderMediaQuery, { useTouchDeviceMediaQuery } from 'hooks/useDesktopHeaderMediaQuery'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { FC, Fragment, useCallback, useRef } from 'react'
+import React, { FC, Fragment, useCallback, useRef, useState } from 'react'
 import { useActiveWeb3React } from 'services/web3'
 import styled from 'styled-components'
-
+// import QuestionHelper from 'components/QuestionHelper/Helper'
 const HideOnMobile = styled.div`
 @media screen and (max-width: 600px) {
   display: none;
@@ -29,6 +29,11 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
   const touchDevice = useTouchDeviceMediaQuery()
   const { chainId } = useActiveWeb3React()
 
+  const [show, setShow] = useState<boolean>(false)
+
+  const reveal = useCallback(() => setShow(true), [setShow])
+  const conceal = useCallback(() => setShow(false), [setShow])
+
   const handleToggle = useCallback((open, type) => {
     if (!open && type === 'enter') {
       buttonRef?.current?.click()
@@ -45,14 +50,33 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
         weight={700}
         variant="sm"
         className={classNames(
-          router.asPath === link ? 
-          `border border-2 border-purple w-[72px] md:w-[120px] justify-center`
-          // `bg-${getChainColorCode(chainId)}` 
-          : `border-ftmBlue hover:border-2 hover:border-purple`, `font-bold py-3 px-2 rounded rounded-2xl h-[48px] border flex gap-0 hover:bg-dark-900`
+          router.asPath === link ?
+            // active link //
+            `border border-2 border-purple w-[72px] md:w-[120px] justify-center bg-dark-900`
+            // inactive links (only) //
+            : `hover:border-2 hover:border-purple px-4`,
+          // all links //
+          `font-bold rounded rounded h-[36px] flex gap-auto hover:bg-dark-900`
         )}
       >
         {/* {!isDesktop && node.icon} */}
-        {isDesktop && node.title}
+        <div
+          className={`flex items-center justify-center outline-none`}
+          onClick={reveal}
+          onMouseEnter={reveal}
+          onMouseLeave={conceal}
+        >
+          {isDesktop && show && node.title}
+        </div>
+        {/* <div className={`grid grid-cols-1 gap-8 justify-center ml-2`}> */}
+        <div
+          className="flex items-center justify-center outline-none"
+          onClick={reveal}
+          onMouseEnter={reveal}
+          onMouseLeave={conceal}
+        >
+          {isDesktop && !show && node.icon}
+        </div>
       </Typography>
     )
   }
@@ -106,7 +130,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
                             router.push(leaf.link).then(() => buttonRef?.current?.click())
                           }}
                           className={classNames("border relative px-3 text-center py-2 m-1 rounded-lg hover:cursor-pointer hover:text-white hover:bg-white/10",
-                          `border-${getChainColorCode(chainId)}`
+                            `border-${getChainColorCode(chainId)}`
                           )}
                         >
                           {leaf.title}

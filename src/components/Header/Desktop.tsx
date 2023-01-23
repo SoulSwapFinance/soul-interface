@@ -156,17 +156,17 @@ const Desktop: FC = () => {
 
   return (
     <>
-      <header className="w-full flex items-center text-white bg-purple justify-center min-h-[48px] h-[48px] px-2">
+      <header className={`w-full flex items-center text-white bg-purple border border-4 border-ftmBlue justify-center min-h-[48px] h-[48px] px-2`}>
 
         <nav
-          className={classNames(
-            `backdrop-blur-fallback w-full \
-              h-full before:backdrop-saturate-[1.2] \
-              before:backdrop-blur-[20px] before:z-[-1] \
-              before:absolute before:w-full before:h-full mx-4`
-          )
+          className={classNames(`flex mt-4 w-full mx-4`
+            )
+            // `backdrop-blur-fallback w-full \
+            //   h-full before:backdrop-saturate-[1.2] \
+            //   before:backdrop-blur-[20px] before:z-[-1] \
+            //   before:absolute before:w-full before:h-full mx-4`
           }>
-          <div className={`flex justify-center bg-dark-1000 flex-grow border border-4 border-ftmBlue rounded rounded-2xl p-1`}>
+          <div className={`flex justify-center bg-dark-900 flex-grow border border-4 border-ftmBlue rounded rounded-2xl`}>
             {/* <div
             className={`hover:bg-dark-900 p-1.5 -mb-0.5 rounded rounded-2xl 
                 border border-[${getChainColor(chainId)}]
@@ -178,7 +178,7 @@ const Desktop: FC = () => {
             {SWAP_ICON}
           </div> */}
             <div
-              className="flex rounded rounded-2xl bg-dark-1000 gap-1 sm:gap-4 md:gap-18 justify-center items-center px-0.5 m-0.5">
+              className={`flex rounded rounded-2xl bg-dark-1000 gap-1 sm:gap-6 md:gap-18 justify-center items-center`}>
               {menu.map((node) => {
                 return <NavigationItem node={node} key={node.key} />
               })}
