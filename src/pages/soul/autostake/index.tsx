@@ -174,7 +174,7 @@ export default function AutoStake() {
   }
 
   return (
-    <Container id="autostake-page" className={`md:py-8 lg:py-12 p-1 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}]`}>
+    <Container id="autostake-page" className={`md:py-8 lg:py-12 p-1 mt-4 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}]`}>
       <Head>
         <title>AutoStake | Soul</title>
         <meta key="description" name="description" />
