@@ -8,9 +8,9 @@ import InputError from "components/Input/Error"
 import { weiToUnit } from "../../utils/conversion"
 import { chainToNetworkInfoMap } from "../../utils/bridge"
 import BridgeTokenSelect from './BridgeTokenSelect'
-import CurrencyInputPanel from 'components/CurrencyInputPanel'
-import AssetInput from 'components/AssetInput'
-import { SOUL, Token, USDC, WNATIVE } from 'sdk'
+// import CurrencyInputPanel from 'components/CurrencyInputPanel'
+// import AssetInput from 'components/AssetInput'
+// import { SOUL, Token, USDC, WNATIVE } from 'sdk'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 
 const BridgeTokenList: React.FC<any> = ({
@@ -95,15 +95,15 @@ const BridgeTokenList: React.FC<any> = ({
                 variant="new"
               /> */}
               <SwapAssetPanel
+                chainId={chainId}
+                value={amount}
+                onChange={setAmount}
+                header={() => ''}
+                hideBalance={true}
                 // currencyAddress={token?.address}
                 // currencySymbol={token?.symbol}
                 // currencyDecimals={token?.decimals}
                 // currency={currency}
-                  chainId={chainId}
-                  value={amount}
-                  onChange={setAmount}
-                  header={() => ''}
-                  hideBalance={true}
                 //   showCurrencySelect={false}
                 //   onUserInput={setAmount}
                 //   fiatValue={fiatValueDesiredRate ?? undefined}
