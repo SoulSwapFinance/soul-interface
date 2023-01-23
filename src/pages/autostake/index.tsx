@@ -8,14 +8,13 @@ import { Feature } from 'enums'
 
 const Autostake = () => {
   return (
-      <Container id="farm-page">
-        <br/>
+    <div className={`mt-4`}>
         <Head>
           <title>Autostake | Soul</title>
           <meta key="description" name="description" content="Mint SOUL" />
         </Head>        
         <AutoStake />
-      </Container>
+    </div>
   )
 }
 

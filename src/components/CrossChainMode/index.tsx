@@ -1,11 +1,11 @@
 import { ChainId, Percent } from '../../sdk'
 import React, { useCallback, useRef, useState } from 'react'
-import { CheckIcon, CogIcon } from '@heroicons/react/24/outline'
+// import { CheckIcon, CogIcon } from '@heroicons/react/24/outline'
 import {
   useCrossChainModeManager,
   // useUserArcherUseRelay,
-  useUserSingleHopOnly,
-  useUserTransactionTTL,
+  // useUserSingleHopOnly,
+  // useUserTransactionTTL,
 } from '../../state/user/hooks'
 import  { ApplicationModal } from 'state/application/reducer'
 

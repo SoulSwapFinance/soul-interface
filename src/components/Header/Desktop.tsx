@@ -156,7 +156,7 @@ const Desktop: FC = () => {
 
   return (
     <>
-      <header className="w-full flex items-center text-white bg-dark-1000 justify-center min-h-[48px] h-[48px] px-2">
+      <header className="w-full flex items-center text-white bg-purple justify-center min-h-[48px] h-[48px] px-2">
 
         <nav
           className={classNames(
@@ -166,7 +166,7 @@ const Desktop: FC = () => {
               before:absolute before:w-full before:h-full mx-4`
           )
           }>
-          <div className="flex justify-center bg-dark-1000 flex-grow">
+          <div className={`flex justify-center bg-dark-1000 flex-grow border border-4 border-ftmBlue rounded rounded-2xl p-1`}>
             {/* <div
             className={`hover:bg-dark-900 p-1.5 -mb-0.5 rounded rounded-2xl 
                 border border-[${getChainColor(chainId)}]
@@ -178,7 +178,7 @@ const Desktop: FC = () => {
             {SWAP_ICON}
           </div> */}
             <div
-              className="flex rounded rounded-xl bg-dark-900 gap-1 mt-0.5 sm:gap-4 md:gap-18 justify-center items-center">
+              className="flex rounded rounded-2xl bg-dark-1000 gap-1 sm:gap-4 md:gap-18 justify-center items-center px-0.5 m-0.5">
               {menu.map((node) => {
                 return <NavigationItem node={node} key={node.key} />
               })}
@@ -189,7 +189,7 @@ const Desktop: FC = () => {
         <Transition.Root
           show={open}
           as={Fragment}>
-          <Dialog as="div" className={classNames("fixed inset-0 overflow-hidden z-20")} onClose={setOpen}>
+          <Dialog as="div" className={classNames(`fixed inset-0 overflow-hidden z-20`)} onClose={setOpen}>
             <div className="absolute inset-0 overflow-hidden">
               <Transition.Child
                 as={Fragment}
@@ -203,7 +203,7 @@ const Desktop: FC = () => {
                 <Dialog.Overlay className="absolute inset-0 transition-opacity bg-dark-1000 bg-opacity-80" />
               </Transition.Child>
 
-              <div className="fixed inset-y-0 left-0 pr-16 max-w-[260px] flex">
+              <div className={`fixed inset-y-0 left-0 pr-16 max-w-[260px] flex`}>
                 <Transition.Child
                   as={Fragment}
                   enter="transform transition ease-in-out duration-300"
@@ -221,7 +221,7 @@ const Desktop: FC = () => {
           </Dialog>
         </Transition.Root>
         {/* TOKEN STATS */}
-        <div className={`flex px-2 rounded rounded-lg inline-block`}>
+        <div className={`flex rounded rounded-2xl inline-block mt-4 bg-ftmBlue border-4 border-ftmBlue hover:border-2`}>
           <TokenStats />
         </div>
         <DesktopBar />
