@@ -20,7 +20,9 @@ export const SettingsOverlay: FC<SettingsOverlay> = ({ chainId }) => {
   return (
     <>
       <IconButton className="hover:animate-spin-slow" onClick={() => setOpen(true)}>
-        <CogIcon width={20} height={20} />
+        <CogIcon 
+          width={20} height={20} 
+        />
       </IconButton>
       <SlideIn>
         <SlideIn.FromLeft show={open} onClose={() => setOpen(false)}>
