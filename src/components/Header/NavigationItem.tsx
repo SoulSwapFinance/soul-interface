@@ -45,7 +45,10 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
         weight={700}
         variant="sm"
         className={classNames(
-          router.asPath === link ? `bg-${getChainColorCode(chainId)}` : '',
+          router.asPath === link ? 
+          `bg-purple`
+          // `bg-${getChainColorCode(chainId)}` 
+          : '',
           `hover:text-[${getChainColor(chainId)}]`, 'font-bold py-3 px-2 rounded flex gap-3'
         )}
       >
