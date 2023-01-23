@@ -14,8 +14,8 @@ import SwapIcon from 'components/Icons/exchange/SwapIcon'
 import { useRouter } from 'next/router'
 import DoubleLeftIcon from 'components/Icons/mobile/DoubleLeftIcon'
 import DoubleRightIcon from 'components/Icons/mobile/DoubleRightIcon'
+import TokenStats from 'components/TokenStats'
 
-// import TokenStats from 'components/TokenStats'
 // import Image from 'next/image'
 // import LanguageMenu from './useLanguages'
 // import BinocularsIcon from 'components/Icons/header/BinocularsIcon'
@@ -208,6 +208,9 @@ const Mobile: FC = () => {
             {SWAP_ICON}
           </div>
         </div>
+        <div className={`absolute left-16 top-1.5 border border-[${getChainColor(chainId)}] hover:border-2 rounded rounded-md justify-start bg-dark-1000`}>
+                    <TokenStats />
+                </div>
         {/* <div
                 className={`p-1 hover:bg-dark-900 mt-1 bg-dark-1000 rounded rounded-xl border-[${getChainColor(chainId)}]`}
                 onClick={swapRoute}
