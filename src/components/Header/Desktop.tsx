@@ -2,7 +2,7 @@ import { Dialog, Transition } from '@headlessui/react'
 // import BarsIcon from 'components/Icons/header/BarsIcon'
 // import Image from 'next/image'
 // import { ChainId, NATIVE } from 'sdk'
-// import Web3Status from 'components/Web3Status'
+import Web3Status from 'components/Web3Status'
 import { useActiveWeb3React } from 'services/web3'
 // import { useETHBalances } from 'state/wallet/hooks'
 import React, { FC, Fragment, useCallback, useState } from 'react'
@@ -160,7 +160,7 @@ const Desktop: FC = () => {
 
         <nav
           className={classNames(`flex mt-4 h-[64px] w-full mx-4`
-            )
+          )
             // `backdrop-blur-fallback w-full \
             //   h-full before:backdrop-saturate-[1.2] \
             //   before:backdrop-blur-[20px] before:z-[-1] \
@@ -210,9 +210,18 @@ const Desktop: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
-        {/* TOKEN STATS */}
-        <div className={`flex rounded rounded-2xl inline-block mt-4 bg-ftmBlue border-4 border-ftmBlue hover:border-2`}>
-          <TokenStats />
+        <div>
+
+          <div className={classNames(`grid`, account ? `grid-cols-2 bg-ftmBlue  p-1` : `flex p-1 border border`, ` border-ftmBlue gap-1 hover:border-2 rounded rounded-2xl inline-block mt-4 `)}>
+            {/* WALLET CONNECT */}
+            <div className={``}>
+            <Web3Status />
+            </div>
+            {/* TOKEN STATS */}
+            <div className={account ? `w-full` : `hidden`}>
+            <TokenStats />
+            </div>
+          </div>
         </div>
         <DesktopBar />
       </header>
