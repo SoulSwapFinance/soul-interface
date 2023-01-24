@@ -36,10 +36,10 @@ const Mobile: FC = () => {
   // const menu = useMenu()
   const bar = useBar()
   const router = useRouter()
-  const { asPath } = useRouter()
+  // const { asPath } = useRouter()
   // const isLuxor = router.asPath.startsWith('/luxor')
 
-  const { chainId } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   // const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const [open, setOpen] = useState(false)
   const [dropdown, setShowDropdown] = useState(false)
@@ -61,7 +61,7 @@ const Mobile: FC = () => {
   // const I = `#811FFF`
   // const V = `#EE82EE`
   // const CHAKRAS = [R, O, Y, G, B, I, V]
-  const chainColor = getChainColor(chainId)
+  // const chainColor = getChainColor(chainId)
 
   // const SOUL_ICON = <SoulIcon
   //   height={'600px'}
@@ -195,12 +195,13 @@ const Mobile: FC = () => {
 
   return (
     <>
-      <header className="w-full flex mt-2 items-center justify-between min-h-[36px] h-[36px] px-2">
+      <header className="w-full flex items-center justify-between border border-4 border-ftmBlue min-h-[42px] h-[42px] px-2 bg-purple">
         <div className="flex justify-between flex-grow">
           <div
-            className={`hover:bg-dark-900 p-1.5 -mb-0.5 rounded rounded-2xl 
+            className={`hover:bg-dark-900 p-1 bg-dark-1000 border border-4 rounded rounded-2xl 
                 border border-[${getChainColor(chainId)}]
-                hover:border-2
+                hover:border-purple
+                absolute left-2 top-2
                 `}
             // onClick={() => { setOpen(true) }}
             onClick={swapRoute}
@@ -208,16 +209,17 @@ const Mobile: FC = () => {
             {SWAP_ICON}
           </div>
         </div>
-        <div className={`absolute left-16 top-1.5 border border-[${getChainColor(chainId)}] hover:border-2 rounded rounded-md justify-start bg-dark-1000`}>
-                    <TokenStats />
-                </div>
+        <div className={`absolute left-12 top-1.5 border border-4 border-[${getChainColor(chainId)}] bg-dark-1000 hover:border-purple rounded rounded-2xl justify-start bg-dark-1000`}>
+          <TokenStats />
+        </div>
         {/* <div
                 className={`p-1 hover:bg-dark-900 mt-1 bg-dark-1000 rounded rounded-xl border-[${getChainColor(chainId)}]`}
                 onClick={swapRoute}
               > {SOUL_ICON}
-              </div>           */}
+              </div>          
+        */}
         {/* </div> */}
-        <Transition.Root show={open} as={Fragment}>
+        {/* <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 z-20 overflow-hidden" onClose={setOpen} unmount={false}>
             <div className="absolute inset-0 overflow-hidden">
               <Transition.Child
@@ -256,21 +258,24 @@ const Mobile: FC = () => {
                         <div className="flex items-center justify-start">
                           <LanguageMenu />
                         </div>
-                      </div> */}
+                      </div> //
                     </div>
                   </div>
                 </Transition.Child>
               </div>
             </div>
           </Dialog>
-        </Transition.Root>
+        </Transition.Root> */}
+        {account &&
         <div
           className={
-            classNames(`hover:bg-dark-900 p-1.5 rounded rounded-2xl mt-1.5
+            classNames(`hover:bg-dark-900 p-1.5 rounded rounded-2xl mt-0.5
                 border border-[${getChainColor(chainId)}]
-                border-2
+                border-4
+                bg-dark-1000
+                hover:border-purple
                 `,
-              dropdown ? `relative top-0 right-4` : `relative top-0 right-0`)}
+              dropdown ? `relative top-1.5 right-4` : `relative top-1.5 right-0`)}
           // onClick={() => { setOpen(true) }}
           onClick={() =>
             dropdown ?
@@ -280,19 +285,26 @@ const Mobile: FC = () => {
         >
           {dropdown ? RIGHT_ICON : LEFT_ICON}
         </div>
+        }
+        {!account &&
+          <div
+            className={`relative top-1.5 right-2 p-0.5 mt-0.5 bg-dark-1000 border border-[${getChainColor(chainId)}] border-4 rounded rounded-2xl inline-block`}
+          >
+            <Web3Status />
+          </div>
+
+        }
         {dropdown &&
           <div
             className={dropdown ? `grid grid-cols-2` : `hidden`}>
-
-
             {/* WALLET ICON */}
             <div
-              className={`relative top-0 right-2 p-0.5 mt-1.5 border border-[${getChainColor(chainId)}] border-2 rounded rounded-2xl inline-block`}
+              className={`relative top-1.5 right-2 p-0.5 bg-dark-1000 border border-[${getChainColor(chainId)}] border-4 hover:border-purple rounded rounded-2xl inline-block`}
             >
               <Web3Status />
             </div>
             {/* NETWORK ICON */}
-            <div className={`relative top-0 right-0 p-1.5 mt-1.5 border border-[${getChainColor(chainId)}] border-2 rounded rounded-2xl inline-block`}>
+            <div className={`relative top-1.5 right-0 p-1.5 bg-dark-1000 border border-[${getChainColor(chainId)}] border-4 hover:border-purple rounded rounded-2xl inline-block`}>
               <Web3Network />
             </div>
           </div>
