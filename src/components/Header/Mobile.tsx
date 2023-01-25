@@ -34,7 +34,7 @@ import TokenStats from 'components/TokenStats'
 
 const Mobile: FC = () => {
   // const menu = useMenu()
-  const bar = useBar()
+  // const bar = useBar()
   const router = useRouter()
   // const { asPath } = useRouter()
   // const isLuxor = router.asPath.startsWith('/luxor')

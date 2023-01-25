@@ -8,13 +8,21 @@ import { Feature } from 'enums'
 import { classNames, featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
 import { BanknotesIcon, BuildingLibraryIcon, CircleStackIcon, DocumentIcon,  MagnifyingGlassCircleIcon, MinusCircleIcon, PhotoIcon, PresentationChartLineIcon, PlusCircleIcon, SunIcon } from '@heroicons/react/24/solid'
+import SwapIcon from 'components/Icons/exchange/SwapIcon'
+import { getChainColor } from 'constants/chains'
+import DocsIcon from 'components/Icons/mobile/DocsIcon'
+import { useRouter } from 'next/router'
+import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
+import VaultIcon from 'components/Icons/mobile/VaultIcon'
+import DropletIcon from 'components/Icons/header/DropletIcon'
+import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
+import ChartIcon from 'components/Icons/exchange/ChartIcon'
 // import { useRouter } from 'next/router'
 
 // import { PoolIcon, RocketIcon, WalletIcon } from 'components/Icon'
 // import { getChainColor } from 'constants/chains'
 // import Twitter from 'assets/icons/twitter.png'
 // import { TwitterIcon } from 'components/Icon'
-
 export interface MenuItemLeaf {
   key: string
   title?: string
@@ -37,6 +45,9 @@ type UseMenu = () => Menu
 const useMenu: UseMenu = () => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
+  const { asPath } = useRouter()
+
+  const chainColor = getChainColor(chainId)
 
   // const router = useRouter()
   // const isActive = (activeLinks) => router.asPath.startsWith(activeLinks)
@@ -49,19 +60,154 @@ const useMenu: UseMenu = () => {
   // const isAnalytics =  router.asPath.startsWith('/analytics')
   // const isLending =  router.asPath.startsWith('/lend')
   
+  const WHITE = '#FFFFFF'
+
   return useMemo(() => {
     if (!chainId) return []
+
+  const removePage = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
+  const addPage = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
+  const poolPage = asPath.startsWith('/pool') || asPath.startsWith('/pools')
+  const swapPage = asPath.startsWith('/swap') || asPath.startsWith('/exchange/swap')
+  const crossPage = asPath.startsWith('/cross') || asPath.startsWith('/exchange/cross')
+  const bondPage = asPath.startsWith('/bonds')
+  const landingPage = asPath.startsWith('/landing')
+  const lendPage = asPath.startsWith('/lend') || asPath.startsWith('/borrow')
+  const nftPage = asPath.startsWith('/marketplace') || asPath.startsWith('/marketplace/collections')
+  const docsPage = asPath.startsWith('/learn')
+
+  const isFarm = asPath.startsWith('/farm') || asPath.startsWith('/summoner')
+  const isVault = asPath.startsWith('/autostake')
+  const isLuxor = asPath.startsWith('/luxor') || asPath.startsWith('/luxor/dashbord') || asPath.startsWith('/luxor/bonds') || asPath.startsWith('/luxor/stake')
+
+  const isLiquidity = removePage || addPage || poolPage
+  const isHome = landingPage
+  const isLend = lendPage
+  const isDocs = docsPage
+  const isNFT = nftPage
+  // const isExplore = explorePage
+  const isExplore = asPath.startsWith('/explore')
+  const isWallet = asPath.startsWith('/balances') || asPath.startsWith('/portfolio')
+  const isEarn = isFarm || bondPage || isVault
+  const isExchange = swapPage || crossPage
+  const iconStyle = `p-2 rounded bg-dark-900`
+
+    const SWAP_ICON = 
+    <div className={iconStyle}>
+      <SwapIcon
+    fillPrimary={open ? WHITE : getChainColor(chainId)}
+    fillSecondary={open ? getChainColor(chainId) : WHITE}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-6 h-6` : `hidden`)}
+    />
+    </div>
+
+  // const SUN_ICON = <SunMoonIcon
+  //   fillPrimary={open ? chainColor : WHITE}
+  //   fillSecondary={open ? WHITE : chainColor}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+  // />
+
+  const EARN_ICON = 
+  <div className={iconStyle}>
+    <SeedlingIcon
+    fillPrimary={open ? WHITE : chainColor}
+    fillSecondary={open ? chainColor : WHITE}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+  />
+  </div>
+
+  const POOL_ICON = 
+  <div className={iconStyle}>
+    <DropletIcon
+    fillPrimary={open ? WHITE : chainColor}
+    fillSecondary={open ? chainColor : WHITE}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? 
+      `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+  />
+  </div>
+
+  // const WALLET_ICON = <WalletIcon
+  //   fillPrimary={open ? WHITE : chainColor}
+  //   fillSecondary={open ? chainColor : WHITE}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+  // />
+
+  // const EXPLORE_ICON = <BinocularsIcon
+  // fillPrimary={open ? WHITE : chainColor}
+  // fillSecondary={open ? chainColor : WHITE}
+  // className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+  // />
+
+  const LEND_ICON = 
+  <div className={
+    iconStyle
+  }>
+    <LendSkullIcon
+    fillPrimary={open ? chainColor : WHITE}
+    fillSecondary={open ? WHITE : chainColor}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+  />
+  </div>
+
+  const DOCS_ICON = 
+  <div className={
+      iconStyle
+    }>
+    <DocsIcon
+    fillPrimary={open ? chainColor : WHITE}
+    fillSecondary={open ? WHITE : chainColor}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+    />
+    </div>
+
+const VAULT_ICON = 
+  <div className={
+      iconStyle
+    }>
+    <VaultIcon
+    fillPrimary={open ? WHITE : chainColor}
+    fillSecondary={open ? chainColor : WHITE}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+    />
+    </div>
+
+const CHART_ICON = 
+  <div className={
+      iconStyle
+    }>
+    <ChartIcon
+    fillPrimary={open ? WHITE : chainColor}
+    fillSecondary={open ? chainColor : WHITE}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+    />
+    </div>
+
+  // const NFT_ICON = <NftIcon
+  //   fillPrimary={open ? chainColor : WHITE}
+  //   fillSecondary={open ? WHITE : chainColor}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+  // />
+
+  // const SOUL_ICON = <SoulIcon
+  //   // fillPrimary={open ? chainColor : WHITE}
+  //   // fillSecondary={open ? WHITE : chainColor}
+  //   // className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+  //   height={'600px'}
+  //   width={'600px'}
+  // />
+  
 
     // By default show just a swap button
     let tradeMenu: MenuItem = {
       key: 'swap',
       title: i18n._(t`Swap`),
       link: '/swap',
-      icon: <ArrowsUpDownIcon width={20} 
-      className={
-        classNames('text-white'
-        )} 
-        />,
+      icon: SWAP_ICON,
+      // <ArrowsUpDownIcon width={20} 
+      // className={
+      //   classNames('text-white'
+      //   )} 
+      //   />,
     }
 
     const mainItems: Menu = [tradeMenu]
@@ -70,14 +216,15 @@ const useMenu: UseMenu = () => {
       const farmItems = {
         key: 'pool',
         title: i18n._(t`Pool`),
-        icon: <div className={`grid grid-cols-2`}> 
-            <PlusCircleIcon width={14} className={classNames(
-          `filter text-white mb-2`
-          )} />
-          <MinusCircleIcon width={14} className={classNames(
-          `filter text-white mt-2`
-            )} />
-            </div>,
+        icon: POOL_ICON,
+        // icon: <div className={`grid grid-cols-2`}> 
+        //     <PlusCircleIcon width={14} className={classNames(
+        //   `filter text-white mb-2`
+        //   )} />
+        //   <MinusCircleIcon width={14} className={classNames(
+        //   `filter text-white mt-2`
+        //     )} />
+        //     </div>,
         link: '/pool'
       }
       mainItems.push(farmItems)
@@ -129,11 +276,12 @@ const useMenu: UseMenu = () => {
       const farmItems = {
         key: 'farm',
         title: i18n._(t`Farm`),
-        icon: <CircleStackIcon width={20} className={classNames(
-          `filter text-white`
-          // isBond ? 'text-black' : `text-[${getChainColor(chainId)}]`
-          // isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`
-          )} />,
+        icon: EARN_ICON,
+        // icon: <CircleStackIcon width={20} className={classNames(
+        //   `filter text-white`
+        //   // isBond ? 'text-black' : `text-[${getChainColor(chainId)}]`
+        //   // isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`
+        //   )} />,
         link: '/farms'
       }
       mainItems.push(farmItems)
@@ -154,21 +302,34 @@ const useMenu: UseMenu = () => {
       mainItems.push({
           key: 'lending',
           title: i18n._(t`Lend`),
-          icon: <BanknotesIcon width={20} className={classNames(
-            `filter text-white`
-            )} />,
+          icon: LEND_ICON,
+          // icon: <BanknotesIcon width={20} className={classNames(
+          //   `filter text-white`
+          //   )} />,
           link: '/lend'
       })
     }
 
+    // if (featureEnabled(Feature.AMM, chainId)) {
+    //   mainItems.push({
+    //       key: 'explore',
+    //       title: i18n._(t`Paths`),
+    //       icon: <MagnifyingGlassCircleIcon width={20} className={classNames(
+    //         `filter text-white`
+    //       )} />,
+    //       link: '/explore'
+    //   })
+    // }
     if (featureEnabled(Feature.AMM, chainId)) {
       mainItems.push({
-          key: 'explore',
-          title: i18n._(t`Paths`),
-          icon: <MagnifyingGlassCircleIcon width={20} className={classNames(
-            `filter text-white`
-          )} />,
-          link: '/explore'
+          key: 'vault',
+          title: i18n._(t`Vault`),
+          icon:
+            VAULT_ICON,
+          // icon: <MagnifyingGlassCircleIcon width={20} className={classNames(
+          //   `filter text-white`
+          // )} />,
+          link: '/autostake'
       })
     }
 
@@ -176,9 +337,10 @@ const useMenu: UseMenu = () => {
       mainItems.push({
           key: 'whitepaper',
           title: i18n._(t`Docs`),
-          icon: <DocumentIcon width={20} className={classNames(
-            `filter text-white`
-            )} />,
+          icon: DOCS_ICON,
+          // icon: <DocumentIcon width={20} className={classNames(
+          //   `filter text-white`
+          //   )} />,
           link: '/learn'
       })
     }
@@ -198,9 +360,10 @@ const useMenu: UseMenu = () => {
       mainItems.push({
           key: 'data',
           title: i18n._(t`Data`),
-          icon: <PresentationChartLineIcon width={20} className={classNames(
-            `filter text-white`
-            )} />,
+          icon: CHART_ICON,
+          // icon: <PresentationChartLineIcon width={20} className={classNames(
+          //   `filter text-white`
+          //   )} />,
           link: '/analytics'
       })
     }
