@@ -35,6 +35,12 @@ export default function Menu() {
       href: 'https://twitter.com/SoulSwapFinance',
       external: true,
     },
+    {
+      name: i18n._(t`Luxor`),
+      description: i18n._(t`Discover Luxor Money`),
+      href: '/luxor',
+      external: false,
+    },
     // {
     //   name: i18n._(t`Analytics`),
     //   description: i18n._(t`View our Data.`),
