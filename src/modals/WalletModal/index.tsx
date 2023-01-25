@@ -16,10 +16,11 @@ import { useModalOpen, useWalletModalToggle } from 'state/application/hooks'
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import ReactGA from 'react-ga'
-
+import { ChainId } from 'sdk'
 import Option from './Option'
 import PendingView from './PendingView'
 import { useActiveWeb3React } from 'services/web3'
+import { getChainColorCode } from 'constants/chains'
 
 enum WALLET_VIEWS {
   OPTIONS,
@@ -192,7 +193,7 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
 
       // return rest of options
       return (
-        !isMobile &&
+        // !isMobile &&
         !option.mobileOnly && (
           <Option
             id={`connect-${key}`}
@@ -262,11 +263,16 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 overflow-y-auto">{options}</div>
           )}
-          <div className="flex justify-center">
+          <div className={[ChainId.ETHEREUM, ChainId.FANTOM].includes(chainId) ? `flex justify-center` : `hidden`}>
             <Typography variant="xs" className="text-secondary" component="span">
               {i18n._(t`New to Fantom?`)}{' '}
               <Typography variant="xs" className="text-blue" component="span">
-                <ExternalLink href="https://docs.fantom.foundation/tutorials/set-up-metamask/" color="blue">
+                <ExternalLink href={chainId == ChainId.FANTOM 
+                ? `https://docs.fantom.foundation/tutorials/set-up-metamask/`
+                : // ChainId.ETHEREUM ? 
+                `https://ethereum.org/wallets/`
+              } color={getChainColorCode(chainId)}
+              >
                   {i18n._(t`Learn About Wallets`)}
                 </ExternalLink>
               </Typography>

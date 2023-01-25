@@ -1,6 +1,7 @@
 import { Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import { MenuItem, MenuItemLeaf, MenuItemNode } from 'components/Header/useMenu'
+
 import Typography from 'components/Typography'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { classNames } from 'functions'
@@ -20,6 +21,7 @@ const HideOnMobile = styled.div`
 interface NavigationItem {
   node: MenuItem
 }
+
 
 export const NavigationItem: FC<NavigationItem> = ({ node }) => {
   const router = useRouter()
@@ -42,6 +44,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
     }
   }, [])
 
+
   if (node && node.hasOwnProperty('link')) {
     const { link } = node as MenuItemLeaf
     return (
@@ -52,7 +55,7 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
         className={classNames(
           router.asPath === link ?
             // active link //
-            `border border-2 border-purple w-[72px] md:w-[120px] justify-center bg-dark-900`
+            `border border-4 m-2 border-purple justify-center bg-dark-900`
             // inactive links (only) //
             : `hover:border-2 hover:border-purple px-4`,
           // all links //
