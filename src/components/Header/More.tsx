@@ -38,8 +38,8 @@ export default function Menu() {
     {
       name: i18n._(t`Luxor`),
       description: i18n._(t`Discover Luxor Money`),
-      href: '/luxor',
-      external: false,
+      href: 'https://soul.sh/luxor',
+      external: true,
     },
     // {
     //   name: i18n._(t`Analytics`),
