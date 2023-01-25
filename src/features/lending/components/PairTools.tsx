@@ -10,19 +10,22 @@ import { formatPercent } from 'functions'
 import { ZERO } from 'functions/math'
 import useUnderworldApproveCallback from 'hooks/useUnderworldApproveCallback'
 import { useMarketUpdater, useUnderworldPairContract } from 'hooks/useContract'
+import { getChainColor, getChainColorCode } from 'constants/chains'
+import { useActiveWeb3React } from 'hooks'
 
 export default function PairTools({ pair }) {
   const [, , , , onCook] = useUnderworldApproveCallback()
   const UnderworldPair = useUnderworldPairContract(pair.address)
   const MarketUpdater = useMarketUpdater()
-  
+  const { chainId } = useActiveWeb3React()
+
   // async function onUpdatePrice(cooker: UnderworldCooker): Promise<string> {
   //   cooker.updateExchangeRate(false, ZERO, ZERO)
   //   return `${i18n._(t`Update Price`)} ${pair.asset.tokenInfo.symbol}/${pair.collateral.tokenInfo.symbol}`
   // }
   async function onUpdatePrice() {
-        await MarketUpdater.updateAll()
-        return `${i18n._(t`Update Price`)} ${pair.asset.tokenInfo.symbol}/${pair.collateral.tokenInfo.symbol}`
+    await MarketUpdater.updateAll()
+    return `${i18n._(t`Update Price`)} ${pair.asset.tokenInfo.symbol}/${pair.collateral.tokenInfo.symbol}`
 
   }
   async function onAccrue(cooker: UnderworldCooker): Promise<string> {
@@ -40,32 +43,55 @@ export default function PairTools({ pair }) {
   }, [pair])
 
   return (
-    <div className="flex flex-row flex-shrink space-x-2">
-      <Button color="blue" variant="filled" size="xs" className="w-full" onClick={() => onCook(pair, onAccrue)}>
-        Accrue
-      </Button>
-      <QuestionHelper text={'Sync Market to Supply APR'} />
-      <Button
-        color="purple"
-        variant="filled"
-        size="xs"
-        className="w-full"
-        onClick={()=> onUpdatePrice()}
-        // onClick={() => onCook(pair, onUpdatePrice)}
-      >
-        Update Prices
-      </Button>
-      <QuestionHelper
-        text={
-          <div>
-            <div>Update Exchange Rate</div>
-            <div>Current Deviation: {formatPercent(priceChange)}</div>
-            {/* <div> Address: {pair.address}</div> */}
+    <div className="grid grid-row-2 gap-2 lg:gap-6">
 
+      {/* COLUMN [1]: ACCRUE */}
+      <div className={`grid grid-cols-1 border border-2 border-green rounded rounded-2xl p-1`}>
+        {/* BUTTON [1]: ACCRUE */}
+        <div className={`flex w-full`}>
+          <Button
+            variant="filled"
+            size="md"
+            className={`w-full font-bold`} onClick={() => onCook(pair, onAccrue)}>
+            Sync APR
+          </Button>
+          {/* QUESTION HELPER [1] */}
+          <div className={`absolute right-0 bottom-24 lg:top-60 lg:flex sm:bottom-24 mb-4 sm:mb-2 lg:mb-0 w-[1/4] justify-end`}>
+            <QuestionHelper text={'Sync Supply APR'} />
           </div>
-        }
-      />
 
+
+        </div>
+      </div>
+
+      {/* COLUMN [2]: UPDATE */}
+      <div className={`grid grid-cols-1 border border-2 border-purple rounded rounded-2xl p-1`}>
+        {/* BUTTON [2]: UPDATE PRICES */}
+        <div className={`flex w-full`}>
+          <Button
+            variant="filled"
+            size="md"
+            className={`w-full font-bold`}
+            onClick={() => onUpdatePrice()}
+          // onClick={() => onCook(pair, onUpdatePrice)}
+          >
+            Update Prices
+          </Button>
+          {/* QUESTION HELPER [2] */}
+          <div className={`absolute right-0 bottom-12 lg:top-60 lg:flex sm:bottom-24 mb-4 sm:mb-2 lg:mb-0 w-[1/4] justify-end`}>
+            <QuestionHelper
+              text={
+                <div>
+                  {/* <div>Update Exchange Rate</div> */}
+                  <div>Current Delta: {formatPercent(priceChange)}</div>
+
+                </div>
+              }
+            />
+          </div>
+
+        </div>
+      </div>
     </div>
   )
 }

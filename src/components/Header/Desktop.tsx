@@ -2,7 +2,7 @@ import { Dialog, Transition } from '@headlessui/react'
 // import BarsIcon from 'components/Icons/header/BarsIcon'
 // import Image from 'next/image'
 // import { ChainId, NATIVE } from 'sdk'
-// import Web3Status from 'components/Web3Status'
+import Web3Status from 'components/Web3Status'
 import { useActiveWeb3React } from 'services/web3'
 // import { useETHBalances } from 'state/wallet/hooks'
 import React, { FC, Fragment, useCallback, useState } from 'react'
@@ -156,29 +156,19 @@ const Desktop: FC = () => {
 
   return (
     <>
-      <header className="w-full flex items-center text-white bg-dark-1000 justify-center min-h-[48px] h-[48px] px-2">
+      <header className={`w-full flex items-center text-white bg-purple border border-4 border-ftmBlue justify-center min-h-[48px] h-[48px] px-2`}>
 
         <nav
-          className={classNames(
-            `backdrop-blur-fallback w-full \
-              h-full before:backdrop-saturate-[1.2] \
-              before:backdrop-blur-[20px] before:z-[-1] \
-              before:absolute before:w-full before:h-full mx-4`
+          className={classNames(`flex mt-4 h-[64px] w-full mx-4`
           )
+            // `backdrop-blur-fallback w-full \
+            //   h-full before:backdrop-saturate-[1.2] \
+            //   before:backdrop-blur-[20px] before:z-[-1] \
+            //   before:absolute before:w-full before:h-full mx-4`
           }>
-          <div className="flex justify-center bg-dark-1000 flex-grow">
-            {/* <div
-            className={`hover:bg-dark-900 p-1.5 -mb-0.5 rounded rounded-2xl 
-                border border-[${getChainColor(chainId)}]
-                hover:border-2
-                `}
-            // onClick={() => { setOpen(true) }}
-            onClick={swapRoute}
-          >
-            {SWAP_ICON}
-          </div> */}
+          <div className={`flex justify-center bg-dark-1000 flex-grow border border-4 border-ftmBlue rounded rounded-2xl`}>
             <div
-              className="flex rounded rounded-xl bg-dark-900 gap-1 mt-0.5 sm:gap-4 md:gap-18 justify-center items-center">
+              className={`flex rounded rounded-2xl bg-dark-1000 gap-1 sm:gap-6 md:gap-18 justify-center items-center`}>
               {menu.map((node) => {
                 return <NavigationItem node={node} key={node.key} />
               })}
@@ -189,7 +179,7 @@ const Desktop: FC = () => {
         <Transition.Root
           show={open}
           as={Fragment}>
-          <Dialog as="div" className={classNames("fixed inset-0 overflow-hidden z-20")} onClose={setOpen}>
+          <Dialog as="div" className={classNames(`fixed inset-0 overflow-hidden z-20`)} onClose={setOpen}>
             <div className="absolute inset-0 overflow-hidden">
               <Transition.Child
                 as={Fragment}
@@ -203,7 +193,7 @@ const Desktop: FC = () => {
                 <Dialog.Overlay className="absolute inset-0 transition-opacity bg-dark-1000 bg-opacity-80" />
               </Transition.Child>
 
-              <div className="fixed inset-y-0 left-0 pr-16 max-w-[260px] flex">
+              <div className={`fixed inset-y-0 left-0 pr-16 max-w-[260px] flex`}>
                 <Transition.Child
                   as={Fragment}
                   enter="transform transition ease-in-out duration-300"
@@ -220,9 +210,18 @@ const Desktop: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
-        {/* TOKEN STATS */}
-        <div className={`flex px-2 rounded rounded-lg inline-block`}>
-          <TokenStats />
+        <div>
+
+          <div className={classNames(`grid`, account ? `grid-cols-2 bg-ftmBlue  p-1` : `flex p-1 border border`, ` border-ftmBlue gap-1 hover:border-2 rounded rounded-2xl inline-block mt-4 `)}>
+            {/* WALLET CONNECT */}
+            <div className={``}>
+            <Web3Status />
+            </div>
+            {/* TOKEN STATS */}
+            <div className={account ? `w-full` : `hidden`}>
+            <TokenStats />
+            </div>
+          </div>
         </div>
         <DesktopBar />
       </header>

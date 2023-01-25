@@ -365,54 +365,85 @@ export default function Add() {
           content="Add liquidity to the Soul AMM to enable gas optimised and low slippage trades across countless networks"
         />
       </Head>
-      <Container id="add-liquidity-page" maxWidth="2xl" className="space-y-4 mt-4">
-        <DoubleGlowShadowV2>
-          <SwapLayoutCard>
-            <VoteBanner />
-            <div 
-            className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}
-            >
-            <div className="flex justify-center">
-             <div 
-              className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
-                >
-              <Image src={`/favicon.ico`}
-                objectFit={`contain`}
-                height={72}
-                width={72}
-              />
-            </div> 
-          </div>
+      <DoubleGlowShadowV2>
+        <div className={`grid p-1 mt-8 space-y-2 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}] bg-dark-1000`}>
+          {/* <SwapLayoutCard> */}
+          {/* <VoteBanner /> */}
+          <div
+            className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
+          >
+            <div className={`flex justify-center`}>
+              <div
+                className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
+              >
+                <Image src={`/favicon.ico`}
+                  objectFit={`contain`}
+                  height={72}
+                  width={72}
+                />
+              </div>
+            </div>
             <Image src={ADD_BANNER}
               height={180}
               width={1080}
             />
-            </div>
-            <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
-            <SwapDropdown
-              inputCurrency={currencies[Field.CURRENCY_A]}
-              outputCurrency={currencies[Field.CURRENCY_B]}
-            // allowedSlippage={allowedSlippage}
-            />
-            <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
+          </div>
+          {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
+          <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
+          <SwapDropdown
+            inputCurrency={currencies[Field.CURRENCY_A]}
+            outputCurrency={currencies[Field.CURRENCY_B]}
+          // allowedSlippage={allowedSlippage}
+          />
+          <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
 
-            <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
-            <TransactionConfirmationModal
-              isOpen={showConfirm}
-              onDismiss={handleDismissConfirmation}
-              attemptingTxn={attemptingTxn}
-              hash={txHash}
-              content={() => (
-                <ConfirmationModalContent
-                  title={noLiquidity ? i18n._(t`You are creating a pool`) : i18n._(t`Receive`)}
-                  onDismiss={handleDismissConfirmation}
-                  topContent={modalHeader}
-                  bottomContent={modalBottom}
+          <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
+          <TransactionConfirmationModal
+            isOpen={showConfirm}
+            onDismiss={handleDismissConfirmation}
+            attemptingTxn={attemptingTxn}
+            hash={txHash}
+            content={() => (
+              <ConfirmationModalContent
+                title={noLiquidity ? i18n._(t`You are creating a pool`) : i18n._(t`Receive`)}
+                onDismiss={handleDismissConfirmation}
+                topContent={modalHeader}
+                bottomContent={modalBottom}
+              />
+            )}
+            pendingText={pendingText}
+          />
+          <div className="flex flex-col gap-3 space-y-3">
+            <SwapAssetPanel
+              spendFromWallet={true}
+              chainId={chainId}
+              header={(props) => (
+                <SwapAssetPanel.Header
+                  {...props}
+                  label={
+                    independentField === Field.CURRENCY_A ? i18n._(t`Swap from:`) : i18n._(t`Swap from:`)
+                  }
                 />
               )}
-              pendingText={pendingText}
+              currency={currencies[Field.CURRENCY_A]}
+              value={formattedAmounts[Field.CURRENCY_A]}
+              onChange={onFieldAInput}
+              onSelect={handleCurrencyASelect}
             />
-            <div className="flex flex-col gap-3 space-y-3">
+            <div>
+              <div className="flex justify-center -mt-8 -mb-4 z-0">
+                <div
+                  role="button"
+                  className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`}
+                  onClick={() => {
+                    // setApprovalSubmitted(false) // reset 2 step UI for approvals
+                    // onSwitchTokens()
+                  }}
+                >
+                  {/* <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" /> */}
+                  <PlusIcon width={14} className="text-high-emphesis hover:text-white" />
+                </div>
+              </div>
               <SwapAssetPanel
                 spendFromWallet={true}
                 chainId={chainId}
@@ -420,171 +451,141 @@ export default function Add() {
                   <SwapAssetPanel.Header
                     {...props}
                     label={
-                      independentField === Field.CURRENCY_A ? i18n._(t`Swap from:`) : i18n._(t`Swap from:`)
+                      independentField === Field.CURRENCY_B ? i18n._(t`Swap from:`) : i18n._(t`Swap from:`)
                     }
                   />
                 )}
-                currency={currencies[Field.CURRENCY_A]}
-                value={formattedAmounts[Field.CURRENCY_A]}
-                onChange={onFieldAInput}
-                onSelect={handleCurrencyASelect}
+                currency={currencies[Field.CURRENCY_B]}
+                value={formattedAmounts[Field.CURRENCY_B]}
+                onChange={onFieldBInput}
+                onSelect={handleCurrencyBSelect}
               />
-              <div>
-                <div className="flex justify-center -mt-8 -mb-4 z-0">
-                  <div
-                    role="button"
-                    className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700 hover:border-${getChainColorCode(chainId)}`}
-                    onClick={() => {
-                      // setApprovalSubmitted(false) // reset 2 step UI for approvals
-                      // onSwitchTokens()
-                    }}
-                  >
-                    {/* <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" /> */}
-                    <PlusIcon width={14} className="text-high-emphesis hover:text-white" />
-                  </div>
-                </div>
-                <SwapAssetPanel
-                  spendFromWallet={true}
-                  chainId={chainId}
-                  header={(props) => (
-                    <SwapAssetPanel.Header
-                      {...props}
-                      label={
-                        independentField === Field.CURRENCY_B ? i18n._(t`Swap from:`) : i18n._(t`Swap from:`)
-                      }
-                    />
-                  )}
-                  currency={currencies[Field.CURRENCY_B]}
-                  value={formattedAmounts[Field.CURRENCY_B]}
-                  onChange={onFieldBInput}
-                  onSelect={handleCurrencyBSelect}
+            </div>
+
+            {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
+              <div className="p-1 rounded bg-dark-800">
+                <LiquidityPrice
+                  currencies={currencies}
+                  price={price}
+                  noLiquidity={noLiquidity}
+                  poolTokenPercentage={poolTokenPercentage}
+                  className="bg-dark-900"
                 />
               </div>
-
-              {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
-                <div className="p-1 rounded bg-dark-800">
-                  <LiquidityPrice
-                    currencies={currencies}
-                    price={price}
-                    noLiquidity={noLiquidity}
-                    poolTokenPercentage={poolTokenPercentage}
-                    className="bg-dark-900"
-                  />
-                </div>
-              )}
-
-              {addIsUnsupported ? (
-                <Button color="gradient" size="lg" disabled>
-                  {i18n._(t`Unsupported Asset`)}
-                </Button>
-              ) : !account ? (
-                <Web3Connect size="lg" color="gradient" className="w-full" />
-              ) : !isValid ? (
-                <Button size="lg" color="gray" className="w-full" disabled>
-                  {i18n._(t`Enter Amount`)}
-                </Button>
-              ) : (
-                (approvalA === ApprovalState.NOT_APPROVED ||
-                  approvalA === ApprovalState.PENDING ||
-                  approvalB === ApprovalState.NOT_APPROVED ||
-                  approvalB === ApprovalState.PENDING ||
-                  isValid) && (
-                  <AutoColumn gap={'md'}>
-                    {
-                      <RowBetween>
-                        {approvalA !== ApprovalState.APPROVED && (
-                          <Button
-                            color="gradient"
-                            size="lg"
-                            onClick={approveACallback}
-                            disabled={approvalA === ApprovalState.PENDING}
-                            style={{
-                              width: approvalB !== ApprovalState.APPROVED ? '48%' : '100%',
-                            }}
-                          >
-                            {approvalA === ApprovalState.PENDING ? (
-                              <Dots>{i18n._(t`Approving`)}</Dots>
-                            ) : (
-                              i18n._(t`Approve ${currencies[Field.CURRENCY_A]?.symbol}`)
-                            )}
-                          </Button>
-                        )}
-                        {approvalB !== ApprovalState.APPROVED && (
-                          <Button
-                            color="gradient"
-                            size="lg"
-                            onClick={approveBCallback}
-                            disabled={approvalB === ApprovalState.PENDING}
-                            style={{
-                              width: approvalA !== ApprovalState.APPROVED ? '48%' : '100%',
-                            }}
-                          >
-                            {approvalB === ApprovalState.PENDING ? (
-                              <Dots>{i18n._(t`Approving`)}</Dots>
-                            ) : (
-                              i18n._(t`Approve ${currencies[Field.CURRENCY_B]?.symbol}`)
-                            )}
-                          </Button>
-                        )}
-                      </RowBetween>
-                    }
-
-                    {approvalA === ApprovalState.APPROVED && approvalB === ApprovalState.APPROVED && (
-                      <ButtonError
-                        onClick={() => {
-                          setShowConfirm(true)
-                        }}
-                        disabled={
-                          !isValid || approvalA !== ApprovalState.APPROVED || approvalB !== ApprovalState.APPROVED
-                        }
-                        error={!isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B]}
-                      >
-                        {error ?? i18n._(t`Confirm Adding Liquidity`)}
-                      </ButtonError>
-                    )}
-                  </AutoColumn>
-                )
-              )}
-            </div>
-
-            {!addIsUnsupported ? (
-              pair && !noLiquidity && pairState !== PairState.INVALID ? (
-                <MinimalPositionCard chainId={chainId} showUnwrapped={oneCurrencyIsWETH} pair={pair} />
-              ) : null
-            ) : (
-              <UnsupportedCurrencyFooter
-                show={addIsUnsupported}
-                currencies={[currencies.CURRENCY_A, currencies.CURRENCY_B]}
-              />
             )}
-            {/* </div> */}
-            <div className={"grid grid-cols-2 gap-2 text-white justify-center m-2"}>
-              <NavLink href="/pool">
-                <Button
-                  variant={'filled'}
-                  color={`${getChainColorCode(chainId)}`}
-                  primaryColor={'black'}
-                >
-                  <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
-                    <span>{i18n._(t`View Positions`)}</span>
-                  </a>
-                </Button>
-              </NavLink>
-              <NavLink href="/analytics">
-                <Button
-                  variant={'filled'}
-                  color={`${getChainColorCode(chainId)}`}
-                  primaryColor={'black'}
-                >
-                  <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
-                    <span>{i18n._(t`View Analytics`)}</span>
-                  </a>
-                </Button>
-              </NavLink>
-            </div>
-          </SwapLayoutCard>
-        </DoubleGlowShadowV2>
-      </Container>
+
+            {addIsUnsupported ? (
+              <Button color="gradient" size="lg" disabled>
+                {i18n._(t`Unsupported Asset`)}
+              </Button>
+            ) : !account ? (
+              <Web3Connect size="lg" color="gradient" className="w-full" />
+            ) : !isValid ? (
+              <Button size="lg" color="gray" className="w-full" disabled>
+                {i18n._(t`Enter Amount`)}
+              </Button>
+            ) : (
+              (approvalA === ApprovalState.NOT_APPROVED ||
+                approvalA === ApprovalState.PENDING ||
+                approvalB === ApprovalState.NOT_APPROVED ||
+                approvalB === ApprovalState.PENDING ||
+                isValid) && (
+                <AutoColumn gap={'md'}>
+                  {
+                    <RowBetween>
+                      {approvalA !== ApprovalState.APPROVED && (
+                        <Button
+                          color="gradient"
+                          size="lg"
+                          onClick={approveACallback}
+                          disabled={approvalA === ApprovalState.PENDING}
+                          style={{
+                            width: approvalB !== ApprovalState.APPROVED ? '48%' : '100%',
+                          }}
+                        >
+                          {approvalA === ApprovalState.PENDING ? (
+                            <Dots>{i18n._(t`Approving`)}</Dots>
+                          ) : (
+                            i18n._(t`Approve ${currencies[Field.CURRENCY_A]?.symbol}`)
+                          )}
+                        </Button>
+                      )}
+                      {approvalB !== ApprovalState.APPROVED && (
+                        <Button
+                          color="gradient"
+                          size="lg"
+                          onClick={approveBCallback}
+                          disabled={approvalB === ApprovalState.PENDING}
+                          style={{
+                            width: approvalA !== ApprovalState.APPROVED ? '48%' : '100%',
+                          }}
+                        >
+                          {approvalB === ApprovalState.PENDING ? (
+                            <Dots>{i18n._(t`Approving`)}</Dots>
+                          ) : (
+                            i18n._(t`Approve ${currencies[Field.CURRENCY_B]?.symbol}`)
+                          )}
+                        </Button>
+                      )}
+                    </RowBetween>
+                  }
+
+                  {approvalA === ApprovalState.APPROVED && approvalB === ApprovalState.APPROVED && (
+                    <ButtonError
+                      onClick={() => {
+                        setShowConfirm(true)
+                      }}
+                      disabled={
+                        !isValid || approvalA !== ApprovalState.APPROVED || approvalB !== ApprovalState.APPROVED
+                      }
+                      error={!isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B]}
+                    >
+                      {error ?? i18n._(t`Confirm Adding Liquidity`)}
+                    </ButtonError>
+                  )}
+                </AutoColumn>
+              )
+            )}
+          </div>
+
+          {!addIsUnsupported ? (
+            pair && !noLiquidity && pairState !== PairState.INVALID ? (
+              <MinimalPositionCard chainId={chainId} showUnwrapped={oneCurrencyIsWETH} pair={pair} />
+            ) : null
+          ) : (
+            <UnsupportedCurrencyFooter
+              show={addIsUnsupported}
+              currencies={[currencies.CURRENCY_A, currencies.CURRENCY_B]}
+            />
+          )}
+          {/* </div> */}
+          <div className={"grid grid-cols-2 gap-2 text-white justify-center m-2"}>
+            <NavLink href="/pool">
+              <Button
+                variant={'filled'}
+                color={`${getChainColorCode(chainId)}`}
+                primaryColor={'black'}
+              >
+                <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
+                  <span>{i18n._(t`View Positions`)}</span>
+                </a>
+              </Button>
+            </NavLink>
+            <NavLink href="/analytics">
+              <Button
+                variant={'filled'}
+                color={`${getChainColorCode(chainId)}`}
+                primaryColor={'black'}
+              >
+                <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
+                  <span>{i18n._(t`View Analytics`)}</span>
+                </a>
+              </Button>
+            </NavLink>
+          </div>
+        </div>
+        {/* </SwapLayoutCard> */}
+      </DoubleGlowShadowV2>
     </>
   )
 }

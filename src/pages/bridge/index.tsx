@@ -168,8 +168,8 @@ const ChainSelection: React.FC<any> = ({
       <div className="grid grid-cols-">
       <div className={`border my-2 border-[${getChainColor(toChain)}]`} />
         <div className={`flex text-2xl justify-center font-bold text-high-emphesis`}>Destination</div>
-        <div className={`border my-2 border-[${getChainColor(toChain)}]`} />
-       <div className="w-full justify-center">
+         <div className={`border my-2 border-[${getChainColor(toChain)}]`} />
+       <div className="w-full justify-center mt-3 mb-3">
           <NetworkSelector
             chains={
               supportedChainsForBridge.filter(
@@ -186,8 +186,6 @@ const ChainSelection: React.FC<any> = ({
   )
 }
 
-
-
 const NetworkSelector: React.FC<any> = ({ chains, selected, selectChain }) => {
   const [onPresentSelectNetworkModal] = useModal(
     <BridgeNetworkSelectModal chains={chains} selectChain={selectChain} />,
@@ -195,63 +193,32 @@ const NetworkSelector: React.FC<any> = ({ chains, selected, selectChain }) => {
   )
 
   return (
-    <Column style={{ width: "100%", flex: 1 }}>
+    <div className={`flex w-full p-1 border border-2 border-[${getChainColor(selected)}] rounded rounded-2xl bg-dark-1000`}>
       <OverlayButton
         style={{ padding: 0 }}
+        className={`flex w-full justify-center text-center `}
         disabled={!chains || !chains.length}
         onClick={() => chains && chains.length && onPresentSelectNetworkModal()}
       >
-        <ContentBox
-          style={{
-            boxSizing: "border-box",
-            width: "100%",
-            backgroundColor: "black",
-            padding: "1rem",
-            height: "64px",
-          }}
-        >
-          <Row style={{ gap: "1rem", alignItems: "center" }}>
             {selected ? (
-              <>
+              <div className={`grid grid-cols-2 w-[2/3] justify-center p-1`}>
                 <Image
-                  alt="token logo"
-                  height="30px"
-                  width="30px"
+                  alt={`${chainToNetworkInfoMap[selected].name} network icon`}
+                  height={30}
+                  width={30}
                   src={chainToNetworkInfoMap[selected].image}
                 />
-                <Typo2 style={{ fontWeight: "bold" }}>{chainToNetworkInfoMap[selected].name}</Typo2>
-              </>
+                <div className={`flex text-2xl p-1 font-bold justify-center`}>{chainToNetworkInfoMap[selected].name}</div>
+              </div>
             ) : chains && chains.length ? (
               <Typo1>{i18n._(t`Select Network`)}</Typo1>
             ) : (
               <Loader />
             )}
-          </Row>
-        </ContentBox>
       </OverlayButton>
-    </Column>
+    </div>
   )
 }
-
-// function SelectNetworkModal(): JSX.Element | null {
-//   const { chainId } = useActiveWeb3React()
-//   const toggleNetworkModal = useNetworkModalToggle()
-
-//   if (!chainId) return null
-
-//   return (
-//     <div
-//     className="flex items-center rounded border-2 border-dark-800 hover:border-dark-700 bg-dark-1000 hover:bg-dark-900 whitespace-nowrap text-md justify-center font-bold cursor-pointer select-none pointer-events-auto"
-//     onClick={() => toggleNetworkModal()}
-//     >
-//       <div className="flex items-center grid-flow-col items-center justify-center bg-dark-1000 h-[36px] w-[36px] text-sm rounded pointer-events-auto auto-cols-max text-secondary">
-//         <Image src={NETWORK_ICON[chainId]} alt="Switch Network" className="rounded-md" width="22px" height="22px" />
-//       </div>
-//       <NetworkModal />
-//       { NETWORK_LABEL[chainId] }
-//     </div>
-//   )
-// }
 
 export const BridgeTokenSelectModal: React.FC<any> = ({
   tokens,
@@ -259,7 +226,7 @@ export const BridgeTokenSelectModal: React.FC<any> = ({
   onDismiss,
 }) => {
   return (
-    <Modal
+     <Modal
       style={{ padding: "2px 0.5px", maxHeight: "80vh" }}
       onDismiss={onDismiss}
     >
@@ -387,8 +354,6 @@ export const BalancePromiseToUnit: React.FC<any> = ({ promise, decimals }) => {
       </Typo2>
     </Row>
   )
-
-
 }
 
 const Bridge: React.FC<any> = () => {
@@ -571,12 +536,13 @@ const Bridge: React.FC<any> = () => {
   }, [bridgeTxHash])
 
   return (
-    <Container id="bridge-page" maxWidth="2xl" className="space-y-4 mt-4">
+    // <Container id="bridge-page" maxWidth="2xl" className={`space-y-4 mt-4`}>
       <DoubleGlowShadowV2>
-        <SwapLayoutCard>
-        <VoteBanner />
+        {/* <SwapLayoutCard> */}
+        <div className={`grid p-1 mt-8 space-y-2 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}] bg-dark-1000`}>
+        {/* <VoteBanner /> */}
         <div 
-            className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}
+            className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >
             <div className="flex justify-center">
              <div 
@@ -594,13 +560,14 @@ const Bridge: React.FC<any> = () => {
               width={1080}
             />
             </div>
-          <div>
+          <div className={`grid`}>
             <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
             <SwapDropdown />
             <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
             {/* </div> */}
             <FadeInOut>
-              <div className={`flex border border-[${getChainColor(chainId)}] m-1 p-1 rounded rounded-2xl mt-4 bg-${getChainColorCode(chainId)}`}>
+              <div className={`flex rounded rounded-2xl bg-dark-1000`}>
+              {/* START: TRANSACTION POP-UP */}
               {bridgeTxHash && (
                 <ContentBox
                   style={{
@@ -643,13 +610,10 @@ const Bridge: React.FC<any> = () => {
                   </Column>
                 </ContentBox>
               )}
-              <Row style={{ width: "100%", justifyContent: "center" }}>
-                <div className={classNames(`flex -4 border border-dark-900`,
-                  // hover:border-${getChainColorCode(chainId)} 
-                  `bg-dark-900 p-2 rounded w-full`)}
-                >
+              {/* END: TRANSACTION POP-UP */}
+
+
                   <Column style={{ width: "100%" }}>
-                    <div />
                     <>
                       <ChainSelection
                         setTokenList={setTokenList}
@@ -668,7 +632,7 @@ const Bridge: React.FC<any> = () => {
                         isBridgeTxCompleted={isBridgeTxCompleted} />
                       <div className="h-px my-6 bg-dark-1000"></div>
                       <div className={`flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-${getChainColorCode(chainId)} w-full space-y-1`}>
-                        <div className="flex justify-between">
+                        {/* <div className="flex justify-between">
                           <Typography className="text-white" fontFamily={'medium'}>
                             {i18n._(t`Bridgeable`)}
                           </Typography>
@@ -681,6 +645,14 @@ const Bridge: React.FC<any> = () => {
                               )} ${selectedToken.symbol}`
                               : "-"}
                           </Typography>
+                        </div> */}
+                        <div>
+                        <div className={`border border-green mt-1 mb-1`} />
+                          <Typography className={`text-lg font-bold text-center`}>
+                            {`Bridgeable Range`}
+                              
+                          </Typography>
+                          <div className={`border border-green mt-1 mb-1`} />
                         </div>
 
                         <div className="flex justify-between">
@@ -706,31 +678,23 @@ const Bridge: React.FC<any> = () => {
                         </div>
 
                         <div>
-                          <div className={`border mt-1 mb-1`} />
-                          <Typography className={`text-lg font-bold text-center text-avaxRed`}>
-                            Fee Details
-                          </Typography>
-                          <div className={`border mt-1 mb-1`} />
-                        </div>
-
-                        <div className="flex justify-between">
-                          <Typography className="text-white" fontFamily={'medium'}>
-                            {i18n._(t`Fee Rate`)}
-                          </Typography>
-                          <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                        <div className={`border border-avaxRed mt-1 mb-1`} />
+                          <Typography className={`text-lg font-bold text-center`}>
                             {'~'}
                             {selectedToken
                               ? `${formatSimpleValue(
                                 // selectedToken.MinimumSwapFee
                                 selectedToken.SwapFeeRate * 100
-                              )}%`
-                              : "-"}
+                                )}% Fee`
+                                : "Loading Fee..." }
+                              
                           </Typography>
+                          <div className={`border border-avaxRed mt-1 mb-1`} />
                         </div>
                         
                         <div className="flex justify-between">
                           <Typography className="text-white" fontFamily={'medium'}>
-                            {i18n._(t`Minimum`)}
+                            {i18n._(t`Min. Fee`)}
                           </Typography>
                           <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                             {selectedToken
@@ -743,7 +707,7 @@ const Bridge: React.FC<any> = () => {
                      
                         <div className="flex justify-between">
                           <Typography className="text-white" fontFamily={'medium'}>
-                            {i18n._(t`Maximum`)}
+                            {i18n._(t`Max. Fee`)}
                           </Typography>
                           <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                             {selectedToken
@@ -793,15 +757,14 @@ const Bridge: React.FC<any> = () => {
                       <div className="mt-4" />
                     </>
                   </Column>
-                </div>
-              </Row>
-              <div />
               </div>
+              <div />
             </FadeInOut>
           </div>
-        </SwapLayoutCard>
+          </div>
+        {/* </SwapLayoutCard> */}
+        {/* </div> */}
       </DoubleGlowShadowV2>
-    </Container>
   )
 }
 

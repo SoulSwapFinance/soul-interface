@@ -16,18 +16,13 @@ import { useActiveWeb3React } from 'services/web3'
 const Bonds = () => {
   const { chainId } = useActiveWeb3React()
   return (
-    <Wrap padding='1rem 0 0 0' justifyContent="center">
-      <Container id="farm-page">
-        {/* <BondsBanner /> */}
-        {/* <br/> */}
-
+    <div className={`mt-8`}>
         <Head>
           <title>Bonds | All</title>
           <meta key="description" name="description" content="Mint SOUL" />
         </Head>
         <BondList />
-      </Container>
-    </Wrap>
+    </div>
   )
 }
 

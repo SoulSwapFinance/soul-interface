@@ -54,7 +54,7 @@ function TokenStats(): JSX.Element | null {
           objectFit="contain"
           className="rounded-md"
         />
-          <div className="text-primary">{formatNumber(soulPrice, true, true)}</div>
+          <div className={`sm:hidden text-primary`}>{formatNumber(soulPrice, true, true)}</div>
       </div>
       <TokensStatsModal />
     </div>

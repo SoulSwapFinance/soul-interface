@@ -44,9 +44,9 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
   const WHITE = `#FFFFFF`
   const chainColor = getChainColor(chainId)
   // const [userUseArcher, setUserUseArcher] = useUserArcherUseRelay()
-  const SWAP_ICON = <CogIcon
-    fillPrimary={open ? WHITE : getChainColor(chainId)}
-    fillSecondary={open ? getChainColor(chainId) : WHITE}
+  const COG_ICON = <CogIcon
+    fillPrimary={open ? getChainColor(chainId) : WHITE}
+    fillSecondary={open ? WHITE : getChainColor(chainId)}
     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
   />
   
@@ -57,7 +57,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
         onClick={toggle}
         id="open-settings-dialog-button"
       >
-        {SWAP_ICON}
+        {COG_ICON}
         {/* <CogIcon className="w-[36px] h-[46px] transform rotate-90 hover:text-white" /> */}
       </div>
       {open && (
