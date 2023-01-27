@@ -67,13 +67,13 @@ export function BondKey() {
                 </Text>
               </FarmItemBox>
 
-            <HideOnMobile>
+            {/* <HideOnMobile> */}
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
                   YIELD
                 </Text>
               </FarmItemBox>
-            </HideOnMobile>
+            {/* </HideOnMobile> */}
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
