@@ -7,14 +7,16 @@ import { useActiveWeb3React } from 'services/web3'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import DropletIcon from 'components/Icons/header/DropletIcon'
 import SunMoonIcon from 'components/Icons/header/SunMoonIcon'
-import WalletIcon from 'components/Icons/header/WalletIcon'
-import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
-import HomeIcon from 'components/Icons/mobile/HomeIcon'
-import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
 import BinocularsIcon from 'components/Icons/header/BinocularsIcon'
 import DocsIcon from 'components/Icons/mobile/DocsIcon'
-import SwapIcon from 'components/Icons/exchange/SwapIcon'
 import NftIcon from 'components/Icons/mobile/NftIcon'
+import ChartIcon from 'components/Icons/exchange/ChartIcon'
+
+// import WalletIcon from 'components/Icons/header/WalletIcon'
+// import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
+// import HomeIcon from 'components/Icons/mobile/HomeIcon'
+// import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
+// import SwapIcon from 'components/Icons/exchange/SwapIcon'
 
 export interface BarItemLeaf {
   key: string
@@ -134,6 +136,19 @@ const useMenu: UseBar = () => {
     //   />,
     // })
 
+    // Analytics
+    mainItems.push({
+      key: 'data',
+      link: '/analytics',
+      title: i18n._(t`Chart`),
+      icon: <ChartIcon
+        className={classNames(`w-7 h-7 rounded rounded-md`
+        )}
+        fillPrimary={chainColor}
+        fillSecondary={WHITE}
+      />,
+    })
+    
     // Whitepaper
     mainItems.push({
       key: 'learn',

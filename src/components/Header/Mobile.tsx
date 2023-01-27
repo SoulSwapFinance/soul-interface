@@ -10,21 +10,22 @@ import useBar from './useBar'
 import { classNames } from 'functions/styling'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import MobileBar from './MobileBar'
-import SwapIcon from 'components/Icons/exchange/SwapIcon'
+// import SwapIcon from 'components/Icons/exchange/SwapIcon'
 import { useRouter } from 'next/router'
 import DoubleLeftIcon from 'components/Icons/mobile/DoubleLeftIcon'
 import DoubleRightIcon from 'components/Icons/mobile/DoubleRightIcon'
 import TokenStats from 'components/TokenStats'
 
 // import Image from 'next/image'
-// import LanguageMenu from './useLanguages'
+import LanguageMenu from './useLanguages'
 // import BinocularsIcon from 'components/Icons/header/BinocularsIcon'
 // import WalletIcon from 'components/Icons/header/WalletIcon'
 // import DropletIcon from 'components/Icons/header/DropletIcon'
 // import SunMoonIcon from 'components/Icons/header/SunMoonIcon'
 // import HomeIcon from 'components/Icons/mobile/HomeIcon'
 // import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
-// import BarsIcon from 'components/Icons/header/BarsIcon'
+import BarsIcon from 'components/Icons/header/BarsIcon'
+// import ChartIcon from 'components/Icons/exchange/ChartIcon'
 // import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
 // import SoulIcon from 'components/Icons/header/SoulIcon'
 // import DocsIcon from 'components/Icons/mobile/DocsIcon'
@@ -34,7 +35,7 @@ import TokenStats from 'components/TokenStats'
 
 const Mobile: FC = () => {
   // const menu = useMenu()
-  // const bar = useBar()
+  const bar = useBar()
   const router = useRouter()
   // const { asPath } = useRouter()
   // const isLuxor = router.asPath.startsWith('/luxor')
@@ -68,7 +69,13 @@ const Mobile: FC = () => {
   //   width={'600px'}
   // />
 
-  // const DEFAULT_ICON = <BarsIcon
+  const DEFAULT_ICON = <BarsIcon
+    fillPrimary={open ? WHITE : getChainColor(chainId)}
+    fillSecondary={open ? getChainColor(chainId) : WHITE}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  />
+
+  // const CHART_ICON = <ChartIcon
   //   fillPrimary={open ? WHITE : getChainColor(chainId)}
   //   fillSecondary={open ? getChainColor(chainId) : WHITE}
   //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
@@ -86,11 +93,11 @@ const Mobile: FC = () => {
   //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
   // />
 
-  const SWAP_ICON = <SwapIcon
-    fillPrimary={open ? WHITE : getChainColor(chainId)}
-    fillSecondary={open ? getChainColor(chainId) : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  />
+  // const SWAP_ICON = <SwapIcon
+  //   fillPrimary={open ? WHITE : getChainColor(chainId)}
+  //   fillSecondary={open ? getChainColor(chainId) : WHITE}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+  // />
 
   const LEFT_ICON = <DoubleLeftIcon
     fillPrimary={open ? WHITE : getChainColor(chainId)}
@@ -203,10 +210,10 @@ const Mobile: FC = () => {
                 hover:border-purple
                 absolute left-2 top-2
                 `}
-            // onClick={() => { setOpen(true) }}
-            onClick={swapRoute}
+            onClick={() => { setOpen(true) }}
+            // onClick={swapRoute}
           >
-            {SWAP_ICON}
+            {DEFAULT_ICON}
           </div>
         </div>
         <div className={`absolute left-12 top-1.5 border border-4 border-[${getChainColor(chainId)}] bg-dark-1000 hover:border-purple rounded rounded-2xl justify-start bg-dark-1000`}>
@@ -219,7 +226,7 @@ const Mobile: FC = () => {
               </div>          
         */}
         {/* </div> */}
-        {/* <Transition.Root show={open} as={Fragment}>
+        <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="fixed inset-0 z-20 overflow-hidden" onClose={setOpen} unmount={false}>
             <div className="absolute inset-0 overflow-hidden">
               <Transition.Child
@@ -251,21 +258,21 @@ const Mobile: FC = () => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
                       </nav>
-                      {/* <div className="flex w-full justify-center inline-block rounded rounded-xl bg-dark-1000">
+                      <div className="flex w-full justify-center inline-block rounded rounded-xl bg-dark-1000">
                         {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                           <TokenStats />
                         }
                         <div className="flex items-center justify-start">
                           <LanguageMenu />
                         </div>
-                      </div> //
+                      </div>
                     </div>
                   </div>
                 </Transition.Child>
               </div>
             </div>
           </Dialog>
-        </Transition.Root> */}
+        </Transition.Root>
         {account &&
         <div
           className={
