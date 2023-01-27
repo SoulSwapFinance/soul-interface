@@ -240,9 +240,8 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   }
 
   return (
-    <div className="flex justify-center w-full">
     <BondContainer>
-        <div className={classNames("bg-dark-900 p-3 m-1 border rounded rounded-2xl border-blue", !hasBalance && "border-dark-1000",
+        <div className={classNames("bg-dark-900 p-2 m-1 border rounded rounded-2xl border-blue", !hasBalance && "border-dark-1000",
             isUnderworldPair ? "hover:border-blue" 
             // : !isActive ? "hover:border-pink"
                 : hasBalance && isUnderworldPair ? "hover:border-blue border-blue"
@@ -326,7 +325,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                   </BondItem>
               </BondItemBox>
 
-              <HideOnMobile>
+              {/* <HideOnMobile> */}
               <BondItemBox>
                 <BondItem>
                 <Text fontSize="1rem" color="#FFFFFF">
@@ -334,7 +333,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                 </Text>
                 </BondItem>
               </BondItemBox>
-              </HideOnMobile>
+              {/* </HideOnMobile> */}
 
               <BondItemBox>
                 <Text fontSize="1rem">
@@ -343,7 +342,6 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
               </BondItemBox>
             </div>
           </div>
-        </BondContainer>
 
       {showing && (
           <DetailsContainer>
@@ -520,7 +518,8 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
           </SubmitButton>
         </div>
       </Modal>
-    </div>
+    </BondContainer>
+
   )
 }
 

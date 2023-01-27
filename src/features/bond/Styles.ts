@@ -148,8 +148,8 @@ export const BondItem = styled.h2`
 `
 
 export const BondItemBox = styled.div`
-  width: ${({ width }) => (width ? `${width}` : `8rem`)};
-  display: flex;
+  width: ${({ width }) => (width ? `${width}` : `100px`)};
+  display: grid;
   justify-content: center;
   align-items: center;
 `
