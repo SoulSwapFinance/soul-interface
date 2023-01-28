@@ -33,8 +33,8 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
 
   const [show, setShow] = useState<boolean>(false)
 
-  const reveal = useCallback(() => setShow(true), [setShow])
-  const conceal = useCallback(() => setShow(false), [setShow])
+  // const reveal = useCallback(() => setShow(true), [setShow])
+  // const conceal = useCallback(() => setShow(false), [setShow])
 
   const handleToggle = useCallback((open, type) => {
     if (!open && type === 'enter') {
@@ -65,18 +65,18 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
         {/* {!isDesktop && node.icon} */}
         <div
           className={`flex items-center justify-center outline-none`}
-          onClick={reveal}
-          onMouseEnter={reveal}
-          onMouseLeave={conceal}
+          // onClick={reveal}
+          // onMouseEnter={reveal}
+          // onMouseLeave={conceal}
         >
           {isDesktop && show && node.title}
         </div>
         {/* <div className={`grid grid-cols-1 gap-8 justify-center ml-2`}> */}
         <div
           className="flex items-center justify-center outline-none"
-          onClick={reveal}
-          onMouseEnter={reveal}
-          onMouseLeave={conceal}
+          // onClick={reveal}
+          // onMouseEnter={reveal}
+          // onMouseLeave={conceal}
         >
           {isDesktop && !show && node.icon}
         </div>

@@ -137,17 +137,17 @@ const useMenu: UseBar = () => {
     // })
 
     // Analytics
-    mainItems.push({
-      key: 'data',
-      link: '/analytics',
-      title: i18n._(t`Chart`),
-      icon: <ChartIcon
-        className={classNames(`w-7 h-7 rounded rounded-md`
-        )}
-        fillPrimary={chainColor}
-        fillSecondary={WHITE}
-      />,
-    })
+    // mainItems.push({
+    //   key: 'data',
+    //   link: '/analytics',
+    //   title: i18n._(t`Chart`),
+    //   icon: <ChartIcon
+    //     className={classNames(`w-7 h-7 rounded rounded-md`
+    //     )}
+    //     fillPrimary={chainColor}
+    //     fillSecondary={WHITE}
+    //   />,
+    // })
     
     // Whitepaper
     mainItems.push({

@@ -28,6 +28,9 @@ import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 import Web3Network from 'components/Web3Network'
 import Web3Status from 'components/Web3Status'
+import ChartIcon from 'components/Icons/exchange/ChartIcon'
+import SunMoonIcon from 'components/Icons/header/SunMoonIcon'
+import DocsIcon from 'components/Icons/mobile/DocsIcon'
 
 interface BarProps {
     inputCurrency?: Currency
@@ -48,9 +51,9 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
     const swapRoute = useCallback(() => {
         router.push(`/swap`)
     }, [])
-    // const homeRoute = useCallback(() => {
-    //     router.push(`/landing`)
-    // }, [])
+    const learnRoute = useCallback(() => {
+        router.push(`/learn`)
+    }, [])
     const walletRoute = useCallback(() => {
         router.push(`/portfolio`)
     }, [])
@@ -63,15 +66,24 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
     const nftRoute = useCallback(() => {
         router.push(`/marketplace`)
     }, [])
+    const dataRoute = useCallback(() => {
+        router.push(`/analytics`)
+    }, [])
+    const luxorRoute = useCallback(() => {
+        router.push(`/luxor`)
+    }, [])
 
     const swapPage = router.pathname.startsWith('/swap') || router.pathname.startsWith('/exchange/swap')
     const crossPage = router.pathname.startsWith('/cross') || router.pathname.startsWith('/exchange/cross')
-    const landingPage = router.pathname.startsWith('/landing')
+    // const landingPage = router.pathname.startsWith('/landing')
+    const learnPage = router.pathname.startsWith('/learn')
     const portfolioPage = router.pathname.startsWith('/portfolio')
     const nftPage = router.pathname.startsWith('/marketplace') || router.pathname.startsWith('/marketplace/collections')
     const farmPage = router.pathname.startsWith('/farm') || router.pathname.startsWith('/summoner')
     const bondPage = router.pathname.startsWith('/bond') || router.pathname.startsWith('/bonds')
     const lendPage = router.pathname.startsWith('/lend') || router.pathname.startsWith('/borrow')
+    const dataPage = router.pathname.startsWith('/analytics')
+    const luxorPage = router.pathname.startsWith('/luxor')
 
     // const isExchangeAnalytics
     //     = asPath.startsWith('/exchange/analytics')
@@ -94,9 +106,12 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
     const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
     const isPool = isRemove || isAdd
     const isNFT = nftPage
+    const isLuxor = luxorPage
     const isWallet = portfolioPage
     const isLend = lendPage
     const isEarn = farmPage || bondPage
+    const isLearn = learnPage
+    const isData = dataPage || dataPage
     const isExchange = swapPage || crossPage || isPool
 
     return (
@@ -201,6 +216,18 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                                 className={'w-7 h-7'}
                             />
                         </div>
+                        <div
+                            className={classNames(
+                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                isData && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
+                            onClick={dataRoute}
+                        >
+                            <ChartIcon
+                                fillPrimary={isData ? `${getChainColor(chainId)}` : `#FFFFFF`}
+                                fillSecondary={isData ? `#FFFFFF` : `${getChainColor(chainId)}`}
+                                className={'w-7 h-7'}
+                            />
+                        </div>
                         {featureEnabled(Feature.NFT, chainId) &&
                             <div
                                 className={classNames(
@@ -218,12 +245,36 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                         <div
                             className={classNames(
                                 `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                isLuxor && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
+                            onClick={luxorRoute}
+                        >
+                            <SunMoonIcon
+                                fillPrimary={isLuxor ? `${getChainColor(chainId)}` : `#FFFFFF`}
+                                fillSecondary={isLuxor ? `#FFFFFF` : `${getChainColor(chainId)}`}
+                                className={'w-7 h-7'}
+                            />
+                        </div>
+                        <div
+                            className={classNames(
+                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                isLearn && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
+                            onClick={learnRoute}
+                        >
+                            <DocsIcon
+                                fillPrimary={isLearn ? `#FFFFFF` : `${getChainColor(chainId)}`}
+                                fillSecondary={isLearn ? `${getChainColor(chainId)}` : `#FFFFFF`}
+                                className={'w-7 h-7'}
+                            />
+                        </div>
+                        <div
+                            className={classNames(
+                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
                                 isWallet && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                             onClick={walletRoute}
                         >
                             <WalletIcon
-                                fillPrimary={isWallet ? `${getChainColor(chainId)}` : `#FFFFFF`}
-                                fillSecondary={isWallet ? `#FFFFFF` : `${getChainColor(chainId)}`}
+                                fillPrimary={isWallet ? `#FFFFFF` : `${getChainColor(chainId)}`}
+                                fillSecondary={isWallet ? `${getChainColor(chainId)}` : `#FFFFFF`}
                                 className={'w-7 h-7'}
                             />
                         </div>
