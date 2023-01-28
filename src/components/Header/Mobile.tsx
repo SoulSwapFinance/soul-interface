@@ -15,7 +15,7 @@ import { useRouter } from 'next/router'
 import DoubleLeftIcon from 'components/Icons/mobile/DoubleLeftIcon'
 import DoubleRightIcon from 'components/Icons/mobile/DoubleRightIcon'
 import TokenStats from 'components/TokenStats'
-
+import Image from 'next/image'
 // import Image from 'next/image'
 import LanguageMenu from './useLanguages'
 // import BinocularsIcon from 'components/Icons/header/BinocularsIcon'
@@ -199,12 +199,23 @@ const Mobile: FC = () => {
   //                   : isDocs ? DOCS_ICON
   //                     : isNFT ? NFT_ICON
   //                       : DEFAULT_ICON
+  
+  const SOUL_ICON = <Image 
+    src={'/favicon.png'} height={32} width={32} 
+    // className={'hover:animate-spin'} 
+  />
 
   return (
     <>
       <header className="w-full flex items-center justify-between border border-4 border-ftmBlue min-h-[42px] h-[42px] px-2 bg-purple">
-        <div className="flex justify-between flex-grow">
-          <div
+        <div className={`flex justify-between flex-grow`}>
+      <div 
+        className={`absolute left-1 top-1.5 bg-dark-900 rounded border border-4 border-black hover:border-purple rounded-2xl p-1`}
+        onClick={() => swapRoute()}
+      >
+      {SOUL_ICON}
+      </div>
+          {/* <div
             className={`hover:bg-dark-900 p-1 bg-dark-1000 border border-4 rounded rounded-2xl 
                 border border-[${getChainColor(chainId)}]
                 hover:border-purple
@@ -213,10 +224,10 @@ const Mobile: FC = () => {
             onClick={() => { setOpen(true) }}
             // onClick={swapRoute}
           >
-            {DEFAULT_ICON}
-          </div>
+            // {DEFAULT_ICON}
+          </div> */}
         </div>
-        <div className={`absolute left-12 top-1.5 border border-4 border-[${getChainColor(chainId)}] bg-dark-1000 hover:border-purple rounded rounded-2xl justify-start bg-dark-1000`}>
+        <div className={`absolute left-14 top-1.5 border border-4 border-[${getChainColor(chainId)}] bg-dark-1000 hover:border-purple rounded rounded-2xl justify-start bg-dark-1000`}>
           <TokenStats />
         </div>
         {/* <div
