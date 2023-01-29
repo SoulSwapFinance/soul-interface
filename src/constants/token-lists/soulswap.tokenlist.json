@@ -466,6 +466,14 @@
     },
     {
       "chainId": 250,
+      "name": "Cult Token",
+      "address": "0x4Ed9C2aba77141433c462B8EE835B7fC39Ec449A",
+      "symbol": "CULT",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x4Ed9C2aba77141433c462B8EE835B7fC39Ec449A/logo.png"
+    },
+    {
+      "chainId": 250,
       "name": "Dai Stablecoin",
       "address": "0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E",
       "symbol": "DAI",
