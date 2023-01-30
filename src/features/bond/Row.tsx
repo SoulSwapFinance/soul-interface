@@ -240,34 +240,35 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   }
 
   return (
-    <BondContainer>
-        <div className={classNames("bg-dark-900 p-2 m-1 border rounded rounded-2xl border-blue", !hasBalance && "border-dark-1000",
-            isUnderworldPair ? "hover:border-blue" 
+    <div className="flex justify-center w-full">
+    <BondContainer className={``}>
+        <div className={classNames(`bg-dark-900 p-2 m-1 border rounded rounded-2xl border-blue`, !hasBalance && "border-dark-1000",
+          isUnderworldPair ? "hover:border-blue"
             // : !isActive ? "hover:border-pink"
-                : hasBalance && isUnderworldPair ? "hover:border-blue border-blue"
-                    : hasBalance && !isUnderworldPair ? "border-dark-600"
-                        : hasBalance && !isActive ? "hover:border-pink border-pink"
-                            : "hover:border-dark-600"
+            : hasBalance && isUnderworldPair ? "hover:border-blue border-blue"
+              : hasBalance && !isUnderworldPair ? "border-dark-600"
+                : hasBalance && !isActive ? "hover:border-pink border-pink"
+                  : "hover:border-dark-600"
         )}
-            onClick={() => handleShowOptions()}
+          onClick={() => handleShowOptions()}
         >
-            <div className={`flex w-full]`}>
-                <div className="items-center">
-                    <div className={`grid grid-cols-2`}>
-                    <CurrencyLogo currency={token0} size={40} />
-                    {isUnderworldPair &&
-                    <CurrencyLogo currency={token1} size={20} />
-                    }
-                    {isSwapPair &&
-                    <CurrencyLogo currency={token1} size={40} />
-                    }
-                        {/* {Number(allocPoint) != 220
+      <div className={`flex w-full]`}>
+          <div className="grid grid-cols-1  justify-center">
+              <div className={`grid ${isUnderworldPair ? `grid-cols-2` : `grid-cols-2`}`}>
+                <CurrencyLogo currency={token0} size={40} />
+                {isUnderworldPair &&
+                  <CurrencyLogo currency={token1} size={20} />
+                }
+                {isSwapPair &&
+                  <CurrencyLogo currency={token1} size={40} />
+                }
+                {/* {Number(allocPoint) != 220
                             ? <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
                             : <CurrencyLogo currency={token0} size={40} />
                         } */}
-                    </div>
-                </div>
-              {/* <HideOnMobile>
+              </div>
+            </div>
+            {/* <HideOnMobile>
                 <BondItemBox>
                   <Text fontSize="1rem" color="#FFFFFF">
                     {/* {`${formatNumber(stakedValue, true, true)}`} //
@@ -281,8 +282,8 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                 </BondItemBox>
               </HideOnMobile> */}
 
-              {/* STAKED VALUE */}
-              {/* <HideOnMobile>
+            {/* STAKED VALUE */}
+            <HideOnMobile>
               <BondItemBox>
                   <BondItem>
                     {Number(_APR).toString() === '0.00' ? (
@@ -302,9 +303,10 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                     )}
                   </BondItem>
                 </BondItemBox>
-              </HideOnMobile> */}
+              </HideOnMobile>
 
-              {/* <HideOnSmall>
+            {/* STAKED OWNERSHIP */}
+            {/* <HideOnSmall>
                 <BondItemBox>
                   <Text fontSize="1rem" color="#FFFFFF">
                     {percOfBond.toFixed(0)}%
@@ -312,38 +314,38 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                 </BondItemBox>
               </HideOnSmall> */}
 
-              <BondItemBox>
-                <BondItem>
+            <BondItemBox>
+              <BondItem>
                 <Text fontSize="1rem" color="#FFFFFF">
                   {_APR == 0 ? 0
                     : _APR.toString(2) == '0.00' ? '<0.00'
-                    : _APR < 1 && _APR.toString(4) ? _APR.toFixed(4)
-                    : _APR > 0 ? _APR.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                    : '-'
+                      : _APR < 1 && _APR.toString(4) ? _APR.toFixed(4)
+                        : _APR > 0 ? _APR.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                          : '-'
                   }%
                 </Text>
-                  </BondItem>
-              </BondItemBox>
+              </BondItem>
+            </BondItemBox>
 
-              {/* <HideOnMobile> */}
-              <BondItemBox>
-                <BondItem>
+            {/* <HideOnMobile> */}
+            <BondItemBox>
+              <BondItem>
                 <Text fontSize="1rem" color="#FFFFFF">
                   {formatPercent(reached)}
                 </Text>
-                </BondItem>
-              </BondItemBox>
-              {/* </HideOnMobile> */}
+              </BondItem>
+            </BondItemBox>
+            {/* </HideOnMobile> */}
 
-              <BondItemBox>
-                <Text fontSize="1rem">
-                  {formatNumber(_liquidity, true, true)}
-                </Text>
-              </BondItemBox>
-            </div>
+            <BondItemBox>
+              <Text fontSize="1rem">
+                {formatNumber(_liquidity, true, true)}
+              </Text>
+            </BondItemBox>
           </div>
+        </div>
 
-      {showing && (
+        {showing && (
           <DetailsContainer>
             <DetailsWrapper>
               <Modal
@@ -464,61 +466,62 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
               </Modal>
             </DetailsWrapper>
           </DetailsContainer>
-      )}
+        )}
 
-      { /* CONFIRMATION MODAL */}
+        { /* CONFIRMATION MODAL */}
 
-      <Modal isOpen={showMintConfirmation} onDismiss={
-        () => setShowMintConfirmation(false)}>
-        <div className="space-y-4">
-          <ModalHeader header={`Are you sure?`} onClose={() => setShowMintConfirmation(false)} />
-          <Typography variant="lg">
-            {`Minting exits your position and claims your rewards. You are responsible for your decision to mint and agree that you understand these terms. ${chainId == ChainId.FANTOM ? 'You must mint prior to depositing more.' : ''}`
-            }
-          </Typography>
-          <Typography variant="sm" className="font-medium">
-            QUESTIONS OR CONCERNS?
-            <a href="mailto:soulswapfinance@gmail.com">
-              {' '} SEND EMAIL.
-            </a>
-          </Typography>
-          <SubmitButton
-            primaryColor={getChainColor(chainId)}
-            height="2.5rem"
-            onClick={() => handleMint()}
-          >
-            {`UNDERSTOOD & AGREED`}
-          </SubmitButton>
-        </div>
-      </Modal>
+        <Modal isOpen={showMintConfirmation} onDismiss={
+          () => setShowMintConfirmation(false)}>
+          <div className="space-y-4">
+            <ModalHeader header={`Are you sure?`} onClose={() => setShowMintConfirmation(false)} />
+            <Typography variant="lg">
+              {`Minting exits your position and claims your rewards. You are responsible for your decision to mint and agree that you understand these terms. ${chainId == ChainId.FANTOM ? 'You must mint prior to depositing more.' : ''}`
+              }
+            </Typography>
+            <Typography variant="sm" className="font-medium">
+              QUESTIONS OR CONCERNS?
+              <a href="mailto:soulswapfinance@gmail.com">
+                {' '} SEND EMAIL.
+              </a>
+            </Typography>
+            <SubmitButton
+              primaryColor={getChainColor(chainId)}
+              height="2.5rem"
+              onClick={() => handleMint()}
+            >
+              {`UNDERSTOOD & AGREED`}
+            </SubmitButton>
+          </div>
+        </Modal>
 
-      { /* CONFIRMATION MODAL */}
-      <Modal isOpen={showDepositConfirmation} onDismiss={
-        () => setShowDepositConfirmation(false)}>
-        <div className="space-y-4">
-          <ModalHeader header={`Are you sure?`} onClose={() => setShowDepositConfirmation(false)} />
-          <Typography variant="lg">
-            {`Depositing adds to your position, but forfeits your pending rewards. You are responsible for your decision to deposit more and agree that you understand these terms. ${chainId == ChainId.FANTOM ? 'You must mint prior to depositing more.' : ''}`
-            }
-          </Typography>
-          <Typography variant="sm" className="font-medium">
-            QUESTIONS OR CONCERNS?
-            <a href="mailto:soulswapfinance@gmail.com">
-              {' '} SEND EMAIL.
-            </a>
-          </Typography>
-          <SubmitButton
-            primaryColor={getChainColor(chainId)}
-            height="2.5rem"
-            onClick={() =>
-              handleDeposit(pid, Number(depositValue) / MULTIPLIER)}
+        { /* CONFIRMATION MODAL */}
+        <Modal isOpen={showDepositConfirmation} onDismiss={
+          () => setShowDepositConfirmation(false)}>
+          <div className="space-y-4">
+            <ModalHeader header={`Are you sure?`} onClose={() => setShowDepositConfirmation(false)} />
+            <Typography variant="lg">
+              {`Depositing adds to your position, but forfeits your pending rewards. You are responsible for your decision to deposit more and agree that you understand these terms. ${chainId == ChainId.FANTOM ? 'You must mint prior to depositing more.' : ''}`
+              }
+            </Typography>
+            <Typography variant="sm" className="font-medium">
+              QUESTIONS OR CONCERNS?
+              <a href="mailto:soulswapfinance@gmail.com">
+                {' '} SEND EMAIL.
+              </a>
+            </Typography>
+            <SubmitButton
+              primaryColor={getChainColor(chainId)}
+              height="2.5rem"
+              onClick={() =>
+                handleDeposit(pid, Number(depositValue) / MULTIPLIER)}
 
-          >
-            {`UNDERSTOOD & AGREED`}
-          </SubmitButton>
-        </div>
-      </Modal>
-    </BondContainer>
+            >
+              {`UNDERSTOOD & AGREED`}
+            </SubmitButton>
+          </div>
+        </Modal>
+      </BondContainer>
+    </div>
 
   )
 }

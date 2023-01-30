@@ -140,8 +140,6 @@ export const DetailsWrapper = styled.div`
 `
 
 // Bond //
-
-
 export const BondItem = styled.h2`
   font-size: 1.5rem;
   color: white;
