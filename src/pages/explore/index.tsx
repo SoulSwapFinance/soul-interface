@@ -44,12 +44,12 @@ const SOUL = (i18n: I18n) => [
     description: 'Lend and Farm. Enter our Underworld Market.',
     href: './lend'
   },
-  {
-    id: 5,
-    name: 'BORROWER',
-    description: 'Collateralize and Borrow. Leverage your Position.',
-    href: './borrow'
-  },
+  // {
+  //   id: 5,
+  //   name: 'BORROWER',
+  //   description: 'Collateralize and Borrow. Leverage your Position.',
+  //   href: './borrow'
+  // },
 ]
 
 const LUXOR = (i18n: I18n) => [
