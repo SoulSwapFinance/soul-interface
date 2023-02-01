@@ -603,7 +603,7 @@ const Bridge: React.FC<any> = () => {
                   </Column>
                 </ContentBox>
               )}
-              {/* END: TRANSACTION POP-UP */}yar
+              {/* END: TRANSACTION POP-UP */}
                   <Column style={{ width: "100%" }}>
                     <>
                       <ChainSelection
