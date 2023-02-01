@@ -92,8 +92,8 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
     const { summonerUserInfo } = useSummonerUserInfo(pid)
     const stakedBalance = Number(summonerUserInfo.stakedBalance)
     const stakedValue = Number(summonerUserInfo.stakedValue)
-    const earnedAmount = summonerUserInfo.pendingSoul
-    const earnedValue = summonerUserInfo.pendingValue
+    // const earnedAmount = summonerUserInfo.pendingSoul
+    // const earnedValue = summonerUserInfo.pendingValue
     const lpPrice = Number(summonerUserInfo.lpPrice)
     const firstDepositTime = Number(summonerUserInfo.firstDepositTime)
     const currentRate = Number(summonerUserInfo.currentRate)
@@ -109,15 +109,15 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                     // not staked (to forewarn)
                     : 14)
             : currentRate
-    const feeAmount = withdrawFee * stakedBalance / 100
-    const withdrawable = stakedBalance - feeAmount
-    const feeValue = feeAmount * lpPrice
+    // const feeAmount = withdrawFee * stakedBalance / 100
+    // const withdrawable = stakedBalance - feeAmount
+    // const feeValue = feeAmount * lpPrice
     const isStaked = stakedBalance > 0
     const walletBalance = Number(summonerUserInfo.walletBalance)
     // const walletValue = Number(walletBalance) * lpPrice
     // const parsedBalance = tryParseAmount(walletBalance.toString(), farm.lpToken)
     // const userBalance = useCurrencyBalance(account, lpToken)
-    const hasBalance = Number(walletBalance) > 0
+    // const hasBalance = Number(walletBalance) > 0
     const isSwapPair = pairType == "farm"
     const isActive = pairStatus == "active"
     const assetToken = new Token(chainId, farm.lpAddress, assetDecimals)
@@ -377,7 +377,8 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                             </HideOnSmall>
 
                             <FarmItemBox className="flex">
-                                {Number(earnedAmount).toFixed(0).toString() === '0' ? (
+                                0
+                                {/* {Number(earnedAmount).toFixed(0).toString() === '0' ? (
                                     <Text padding="0" fontSize="1rem" color="#666">
                                         0
                                     </Text>
@@ -385,7 +386,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                     <Text padding="0" fontSize="1rem" color="#F36FFE">
                                         {formatNumber(Number(earnedAmount), false, true)} SOUL
                                     </Text>
-                                )}
+                                )} */}
                             </FarmItemBox>
                             <FarmItemBox className="flex" >
                                 {Number(liquidity) === 0 ? (
@@ -505,7 +506,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
 
                                 </Wrap>
                                 {/* EARNED */}
-                                {Number(earnedAmount) > 0 && (
+                                {/* {Number(earnedAmount) > 0 && (
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
@@ -519,7 +520,7 @@ export const ActiveRow = ({ pid, farm, lpToken, token0Symbol, token1Symbol, toke
                                             HARVEST SOUL
                                         </SubmitButton>
                                     </Wrap>
-                                )}
+                                )} */}
                             </Tab.Panel>
                         </Tab.Group>
                     </div>

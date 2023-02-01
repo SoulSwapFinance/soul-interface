@@ -315,16 +315,16 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: CRV_ADDRESS[ChainId.FANTOM],
   },
-  {
-    // 400
-    pid: 15,
-    token0Symbol: 'WETH',
-    token1Symbol: 'USDC',
-    lpSymbol: 'ETH-USDC',
-    lpAddress: '0x5b181BBc3Cc18C66B6f36f584866a1ff09865630',
-    token0Address: WETH_ADDRESS[ChainId.FANTOM],
-    token1Address: USDC_ADDRESS[ChainId.FANTOM],
-  },
+  // {
+  //   // 400
+  //   pid: 15,
+  //   token0Symbol: 'WETH',
+  //   token1Symbol: 'USDC',
+  //   lpSymbol: 'ETH-USDC',
+  //   lpAddress: '0x5b181BBc3Cc18C66B6f36f584866a1ff09865630',
+  //   token0Address: WETH_ADDRESS[ChainId.FANTOM],
+  //   token1Address: USDC_ADDRESS[ChainId.FANTOM],
+  // },
   {
     // 600
     pid: 8,
@@ -335,16 +335,16 @@ export const FantomPools = [
     token0Address: WETH_ADDRESS[ChainId.FANTOM],
     token1Address: WBTC_ADDRESS[ChainId.FANTOM],
   },
-  {
-    // 600
-    pid: 20,
-    token0Symbol: 'BTC',
-    token1Symbol: 'USDC',
-    lpSymbol: 'BTC-USDC',
-    lpAddress: '0xE2d39F7f0c8517Ca2058Fa97eB3D8d4928F7C6D6',
-    token0Address: WBTC_ADDRESS[ChainId.FANTOM],
-    token1Address: USDC_ADDRESS[ChainId.FANTOM],
-  },
+  // {
+  //   // 600
+  //   pid: 20,
+  //   token0Symbol: 'BTC',
+  //   token1Symbol: 'USDC',
+  //   lpSymbol: 'BTC-USDC',
+  //   lpAddress: '0xE2d39F7f0c8517Ca2058Fa97eB3D8d4928F7C6D6',
+  //   token0Address: WBTC_ADDRESS[ChainId.FANTOM],
+  //   token1Address: USDC_ADDRESS[ChainId.FANTOM],
+  // },
   {
     // 200
     pid: 50,

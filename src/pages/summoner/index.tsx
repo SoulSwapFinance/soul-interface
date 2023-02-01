@@ -156,7 +156,8 @@ const Summoner = () => {
               <Typography className="mb-2 text-white"> {`> > ${formatNumberScale(summTvl, true)} STAKED < <`}
               </Typography>
               <Typography className="font-bold">
-                {'MUST CLAIM BEFORE 2023'}
+                {/* {'MUST CLAIM BEFORE 2023'} */}
+                {`FARMS ARCHIVED. CLAIMS ENDED`}
               </Typography>
             </Button>
           </div>
