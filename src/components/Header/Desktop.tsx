@@ -8,7 +8,8 @@ import { useActiveWeb3React } from 'services/web3'
 import React, { FC, Fragment, useCallback, useState } from 'react'
 import { NavigationItem } from './NavigationItem'
 // import { SidebarItem } from './SidebarItem'
-import TokenStats from 'components/TokenStats'
+// import TokenStats from 'components/TokenStats'
+import Image from 'next/image'
 // import More from './More'
 // import Container from 'components/Container'
 import useMenu from './useMenu'
@@ -154,10 +155,21 @@ const Desktop: FC = () => {
   //                   : isDocs ? DOCS_ICON
   //                     : DEFAULT_ICON
 
+  const SOUL_ICON = <Image
+    src={'/favicon.png'} height={36} width={36}
+    objectFit="contain"
+  // className={'hover:animate-spin'} 
+  />
+
   return (
     <>
       <header className={`w-full flex items-center text-white bg-purple border border-4 border-ftmBlue justify-center min-h-[48px] h-[48px] px-2`}>
-
+        <div
+          className={`flex bg-dark-900 p-2 mt-6 rounded border border-4 border-ftmBlue hover:border-purple rounded-2xl`}
+          onClick={() => swapRoute()}
+        >
+          {SOUL_ICON}
+        </div>
         <nav
           className={classNames(`flex mt-4 h-[64px] w-full mx-4`
           )
@@ -212,14 +224,16 @@ const Desktop: FC = () => {
         </Transition.Root>
         <div>
 
-          <div className={classNames(`grid`, 
-          account ? 
+          <div className={classNames(`grid`,
+            account ?
             `grid-cols-1 bg-ftmBlue  p-1` : `flex p-1 border border`, 
-            `border-ftmBlue gap-1 hover:border-2 rounded rounded-2xl inline-block mt-4 `)
-            }>
+            `border-ftmBlue gap-1 rounded rounded-2xl inline-block mt-4 `)
+          }>
             {/* WALLET CONNECT */}
-            <div className={``}>
-            <Web3Status />
+            <div
+              className={`flex bg-dark-900 rounded rounded-2xl mr-3`}
+            >
+              <Web3Status />
             </div>
             {/* TOKEN STATS */}
             {/* <div className={account ? `w-full` : `hidden`}>

@@ -203,24 +203,24 @@ const CHART_ICON =
     </div>
 
     // By default show just a swap button
-    let tradeMenu: MenuItem = {
-      key: 'swap',
-      title: i18n._(t`Swap`),
-      link: '/swap',
-      icon: SOUL_ICON,
-      // <ArrowsUpDownIcon width={20} 
-      // className={
-      //   classNames('text-white'
-      //   )} 
-      //   />,
-    }
+    // let tradeMenu: MenuItem = {
+    //   key: 'swap',
+    //   title: i18n._(t`Swap`),
+    //   link: '/swap',
+    //   icon: SWAP_ICON,
+    //   // <ArrowsUpDownIcon width={20} 
+    //   // className={
+    //   //   classNames('text-white'
+    //   //   )} 
+    //   //   />,
+    // }
 
-    const mainItems: Menu = [tradeMenu]
+    const mainItems: Menu = [] // tradeMenu
 
     if (featureEnabled(Feature.AMM, chainId)) {
       const farmItems = {
         key: 'pool',
-        title: i18n._(t`Pool`),
+        title: i18n._(t`Liquidity`),
         icon: POOL_ICON,
         // icon: <div className={`grid grid-cols-2`}> 
         //     <PlusCircleIcon width={14} className={classNames(
@@ -360,7 +360,7 @@ const CHART_ICON =
     if (featureEnabled(Feature.ANALYTICS, chainId)) {
       mainItems.push({
           key: 'data',
-          title: i18n._(t`Data`),
+          title: i18n._(t`Analytics`),
           icon: CHART_ICON,
           // icon: <PresentationChartLineIcon width={20} className={classNames(
           //   `filter text-white`

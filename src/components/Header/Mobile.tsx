@@ -210,7 +210,7 @@ const Mobile: FC = () => {
       <header className="w-full flex items-center justify-between border border-4 border-ftmBlue min-h-[42px] h-[42px] px-2 bg-purple">
         <div className={`flex justify-between flex-grow`}>
       <div 
-        className={`absolute left-1 top-1.5 bg-dark-900 rounded border border-4 border-black hover:border-ftmBlue rounded-2xl p-1`}
+        className={`absolute left-1 top-1.5 bg-dark-900 rounded border border-4 border-ftmBlue hover:border-purple rounded-2xl p-1`}
         onClick={() => swapRoute()}
       >
       {SOUL_ICON}
