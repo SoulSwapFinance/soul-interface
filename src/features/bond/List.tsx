@@ -110,10 +110,10 @@ export const BondList = () => {
             />
           </div>
           <div className={`flex justify-center m-1 p-1`}>
-        <Button variant="filled" color="purple" size="lg">
+        <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/dashboard'}>
             <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span>SoulSwap Data </span>
+              <span>Soul Economy</span>
             </a>
           </NavLink>
         </Button>
