@@ -997,7 +997,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 handleZap(zapTokenAddress, lpAddress)
                             }
                         >
-                            {i18n._(t`ZAP INTO ${farm.lpSymbol}`)}
+                           {`ZAP INTO PAIR`}
                         </SubmitButton>
                     </Wrap>
                     <Typography className={`flex text-center mt-4 sm:mt-6 border border-[${getChainColor(chainId)}] p-2 rounded rounded-2xl`}>
