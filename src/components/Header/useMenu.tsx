@@ -194,11 +194,11 @@ const CHART_ICON =
   // />
 
   const SOUL_ICON = 
-  <div className={classNames(`p-0 rounded rounded-xl bg-dark-800`, `h-6 mb-4 mt-1`)}>
+  <div className={classNames(`p-0 rounded rounded-xl bg-dark-900`, `h-6 mb-4 mt-1`)}>
   <Image 
     src={'/favicon.png'} height={36} width={36} 
     objectFit={`contain`}
-    className={'bg-dark-800 rounded rounded-xl'} 
+    className={'bg-dark-900 rounded rounded-xl'} 
     />
     </div>
 
