@@ -4,11 +4,11 @@ import { ChainId, NATIVE } from 'sdk'
 import useMenu from 'components/Header/useMenu'
 import Web3Network from 'components/Web3Network'
 import Web3Status from 'components/Web3Status'
-import useIsCoinbaseWallet from 'hooks/useIsCoinbaseWallet'
+// import useIsCoinbaseWallet from 'hooks/useIsCoinbaseWallet'
 import { useActiveWeb3React } from 'services/web3'
 import { useETHBalances } from 'state/wallet/hooks'
-import Image from 'next/image'
-import Link from 'next/link'
+// import Image from 'next/image'
+// import Link from 'next/link'
 import React, { FC, Fragment, useState } from 'react'
 
 import { SidebarItem } from './SidebarItem'
@@ -21,7 +21,7 @@ import { useRouter } from 'next/router'
 import { classNames } from 'functions/styling'
 import { getChainColor } from 'constants/chains'
 import { NavigationItem } from './NavigationItem'
-import LanguageSwitch from 'components/LanguageSwitch'
+// import LanguageSwitch from 'components/LanguageSwitch'
 // const HEADER_HEIGHT=24
 
 const Mobile: FC = () => {
@@ -39,11 +39,11 @@ const Mobile: FC = () => {
     <>
       <header className="w-full flex mt-3 items-center justify-between min-h-[48px] h-[48px] px-4">
         <div className="flex justify-between flex-grow">
-          { [1, 250, 43114].includes(chainId) &&
+          {/* { [1, 250, 43114].includes(chainId) &&
             <div className="mt-5 rounded-full">
             <MenuAlt1Icon width={24} className={classNames(isLuxor ? "hover:text-yellow" : `hover:text-[${getChainColor(chainId)}]`, `text-[${getChainColor(chainId)}]`, "cursor-pointer hover:text-white")} onClick={() => setOpen(true)} />
           </div>
-          }
+          } */}
           <div
               className="flex gap-3 px-1 sm:gap-4 md:gap-18 justify-between items-center">
               {menu.map((node) => {

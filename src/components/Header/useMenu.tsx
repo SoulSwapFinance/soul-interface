@@ -89,13 +89,13 @@ const useMenu: UseMenu = () => {
       },
     ]
 
-    if (featureEnabled(Feature.MIGRATE, chainId)) {
-      poolMenu.push({
-        key: 'migrate',
-        title: i18n._(t`Migrate`),
-        link: '/migrate',
-      })
-    }
+    // if (featureEnabled(Feature.MIGRATE, chainId)) {
+    //   poolMenu.push({
+    //     key: 'migrate',
+    //     title: i18n._(t`Migrate`),
+    //     link: '/migrate',
+    //   })
+    // }
 
     const mainItems: Menu = [tradeMenu]
 
@@ -109,45 +109,45 @@ const useMenu: UseMenu = () => {
       mainItems.push(farmItems)
     }
 
-    if ([250, 43114].includes(chainId)) {
-      const mintItems = {
-        key: 'mint',
-        title: i18n._(t`Mint`),
-        icon: <MoonIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
-        link: '/bonds'
-      }
-      mainItems.push(mintItems)
-    }
+    // if ([250, 43114].includes(chainId)) {
+    //   const mintItems = {
+    //     key: 'mint',
+    //     title: i18n._(t`Mint`),
+    //     icon: <MoonIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+    //     link: '/bonds'
+    //   }
+    //   mainItems.push(mintItems)
+    // }
 
-    if ([250, 43114].includes(chainId)) {
-      const stakeItems = {
-        key: 'stake',
-        title: i18n._(t`Stake`),
-        icon: <StarIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
-        link: '/autostake'
-      }
-      mainItems.push(stakeItems)
-    }
+    // if ([250, 43114].includes(chainId)) {
+    //   const stakeItems = {
+    //     key: 'stake',
+    //     title: i18n._(t`Stake`),
+    //     icon: <StarIcon width={20} className={classNames("filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+    //     link: '/autostake'
+    //   }
+    //   mainItems.push(stakeItems)
+    // }
 
-    if ([250].includes(chainId)) {
-      const luxorItems = {
-        key: 'Luxor',
-        title: i18n._(t`Bond`),
-        icon: <SunIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
-        link: '/luxor/bonds'
-      }
-      mainItems.push(luxorItems)
-    }
+    // if ([250].includes(chainId)) {
+    //   const luxorItems = {
+    //     key: 'Luxor',
+    //     title: i18n._(t`Bond`),
+    //     icon: <SunIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+    //     link: '/luxor/bonds'
+    //   }
+    //   mainItems.push(luxorItems)
+    // }
 
-    if ([1, 250, 43114].includes(chainId)) {
-      const bridgeItem = {
-        key: 'bridge',
-        title: i18n._(t`Bridge`),
-        icon: <GlobeIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
-        link: '/bridge'
-      }
-      mainItems.push(bridgeItem)
-    }
+    // if ([1, 250, 43114].includes(chainId)) {
+    //   const bridgeItem = {
+    //     key: 'bridge',
+    //     title: i18n._(t`Bridge`),
+    //     icon: <GlobeIcon width={20} className={classNames("rotate-90 filter", isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+    //     link: '/bridge'
+    //   }
+    //   mainItems.push(bridgeItem)
+    // }
 
 
     if (featureEnabled(Feature.UNDERWORLD, chainId)) {
@@ -191,12 +191,12 @@ const useMenu: UseMenu = () => {
 
     }
 
-    if (featureEnabled(Feature.ANALYTICS, chainId)) {
-      let analyticsMenu: MenuItem = {
-        key: 'analytics',
-        title: i18n._(t`Data`),
-        icon: <TrendingUpIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
-        link: '/analytics'
+    // if (featureEnabled(Feature.ANALYTICS, chainId)) {
+    //   let analyticsMenu: MenuItem = {
+    //     key: 'analytics',
+    //     title: i18n._(t`Data`),
+    //     icon: <TrendingUpIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+    //     link: '/analytics'
         // link: '/info'
         // items: [
         //   {
@@ -220,9 +220,9 @@ const useMenu: UseMenu = () => {
         //     link: '/analytics/pairs',
         //   },
         // ],
-      }
-      mainItems.push(analyticsMenu)
-    }
+    //   }
+    //   mainItems.push(analyticsMenu)
+    // }
 
     if (featureEnabled(Feature.AMM, chainId)) {
       mainItems.push({

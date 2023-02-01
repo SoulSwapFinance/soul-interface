@@ -52,10 +52,10 @@ const Desktop: FC = () => {
     <>
       <header className="w-full flex items-center text-white justify-center border border-dark-1000 min-h-[64px] h-[64px] px-4">
         <div className="flex justify-between flex-grow">
-          <div className="p-1 bg-dark-900 rounded-full hover:bg-dark-800">
+          {/* <div className="p-1 bg-dark-900 rounded-full hover:bg-dark-800"> */}
             {/* <div className="flex p-2 justify-between"> */}
-            <MenuAlt1Icon width={24} className={classNames( [1, 250, 43114].includes(chainId) ? 'text-white cursor-pointer' : 'hidden' )} onClick={() => setOpen(true)} />
-          </div>
+            {/* <MenuAlt1Icon width={24} className={classNames( [1, 250, 43114].includes(chainId) ? 'text-white cursor-pointer' : 'hidden' )} onClick={() => setOpen(true)} /> */}
+          {/* </div> */}
           {/* <div className="flex w-6 mr-4 items-center">
                   <NavLink href="/landing">
                     <Image src="/logo.png" alt="Soul" width="48" height="48" />
