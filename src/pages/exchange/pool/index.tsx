@@ -19,6 +19,7 @@ import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
 import NavLink from 'components/NavLink'
 import { useV2PairsWithLiquidity } from 'features/trident/migrate/context/useV2PairsWithLiquidity'
 import POOL_BANNER from 'assets/branding/pool-banner.png'
+import TokenStats from 'components/TokenStats'
 
 // import Alert from '../../../components/Alert'
 // import { BIG_INT_ZERO } from '../../../constants'
@@ -125,25 +126,17 @@ export default function Pool() {
                   {i18n._(t`Liquidity Positions`)}
                 </Typography>
               </div> */}
-              <div
-                className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl border-purple`}
-              >
-                <div className="flex justify-center">
-                  <div
-                    className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
-                  >
-                    <Image src={`/favicon.ico`}
-                      objectFit={`contain`}
-                      height={72}
-                      width={72}
-                    />
-                  </div>
-                </div>
-                <Image src={POOL_BANNER}
-                  height={180}
-                  width={1080}
-                />
+            <div
+              className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
+            >
+              <div className={`w-full`}>
+              <TokenStats />
               </div>
+              <Image src={POOL_BANNER}
+                height={180}
+                width={1080}
+              />
+            </div>
             </div>
             <div className="flex mb-4 items-center justify-center">
               <Button variant="filled" color="purple" size="lg">

@@ -59,27 +59,31 @@ export const NavigationItem: FC<NavigationItem> = ({ node }) => {
             // inactive links (only) //
             : `hover:border-2 hover:border-purple px-4`,
           // all links //
-          `font-bold rounded rounded h-[36px] flex gap-auto hover:bg-dark-900`
+          `font-bold rounded rounded h-[56px] flex gap-auto hover:bg-dark-900`
         )}
       >
         {/* {!isDesktop && node.icon} */}
-        <div
+          <div
+            className={`hidden md:flex items-center justify-center outline-none rounded-xl m-1.5 ml-4`}>
+            {isDesktop && node.title}
+          </div>
+          {/* <div
           className={`flex items-center justify-center outline-none`}
           // onClick={reveal}
           // onMouseEnter={reveal}
           // onMouseLeave={conceal}
-        >
+          >
           {isDesktop && show && node.title}
-        </div>
-        {/* <div className={`grid grid-cols-1 gap-8 justify-center ml-2`}> */}
-        <div
-          className="flex items-center justify-center outline-none"
+        </div> */}
+          {/* <div className={`grid grid-cols-1 gap-8 justify-center ml-2`}> */}
+          <div
+            className="flex items-center justify-center outline-none"
           // onClick={reveal}
           // onMouseEnter={reveal}
           // onMouseLeave={conceal}
-        >
-          {isDesktop && !show && node.icon}
-        </div>
+          >
+            {isDesktop && !show && node.icon}
+          </div>
       </Typography>
     )
   }

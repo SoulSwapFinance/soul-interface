@@ -27,10 +27,18 @@ function TokenStats(): JSX.Element | null {
 
   return (
     <div
-      className="flex items-center md:space-x-2 rounded rounded-2xl bg-dark-1000 hover:bg-dark-900 p-0.5 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
+      className="flex items-center md:space-x-2 rounded rounded-2xl m-1 justify-center bg-dark-1000 hover:bg-dark-900 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
       onClick={() => toggleTokenStatsModal()}
     >
-
+      <div
+        className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
+      >
+        <Image src={`/favicon.ico`}
+          objectFit={`contain`}
+          height={72}
+          width={72}
+        />
+      </div>
       {/* <div className="grid items-center grid-flow-col px-1.5 py-1 space-x-2 text-sm rounded-lg pointer-events-auto auto-cols-max bg-dark-1000 text-secondary">
         <Image
           src="/images/tokens/seance.png"
@@ -45,7 +53,7 @@ function TokenStats(): JSX.Element | null {
         </HideOnMobile>
       </div>
       */}
-      <div className="grid items-center grid-flow-col px-1.5 py-1 space-x-2 text-sm rounded-lg pointer-events-auto auto-cols-max text-secondary">
+      {/* <div className="grid items-center grid-flow-col px-1.5 py-1 space-x-2 text-sm rounded-lg pointer-events-auto auto-cols-max text-secondary">
         <Image
           src="/favicon.png"
           alt="SOUL"
@@ -55,7 +63,7 @@ function TokenStats(): JSX.Element | null {
           className="rounded-md"
         />
           <div className={`sm:hidden text-primary`}>{formatNumber(soulPrice, true, true)}</div>
-      </div>
+      </div> */}
       <TokensStatsModal />
     </div>
   )

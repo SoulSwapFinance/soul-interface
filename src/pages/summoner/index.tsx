@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Wrap } from 'components/ReusableStyles'
-import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
-import Container from 'components/Container'
+// import { Wrap } from 'components/ReusableStyles'
+// import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
+// import Container from 'components/Container'
 import Head from 'next/head'
 import FarmList from 'features/summoner/List'
 import { POOLS } from 'constants/farms'
@@ -19,6 +19,7 @@ import { useTokenInfo } from 'hooks/useAPI'
 import Image from 'next/image'
 import FARM_BANNER from 'assets/branding/farm-banner.png'
 import NavLink from 'components/NavLink'
+import TokenStats from 'components/TokenStats'
 
 // import ExternalLink from 'components/ExternalLink'
 // import { SubmitButton } from 'features/bond/Styles'
@@ -74,25 +75,17 @@ const Summoner = () => {
 
   return (
     <div className={`grid grid-cols-1 justify-center p-1 mt-8 sm:m-8 sm:max-w-[90%] md:max-w-2xl bg-dark-900 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}]`}>
-    <div 
-            className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl bg-dark-900 border-purple`}
+            <div
+              className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >
-            <div className="flex justify-center">
-             <div 
-              className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
-                >
-              <Image src={`/favicon.ico`}
-                objectFit={`contain`}
-                height={72}
-                width={72}
+              <div className={`w-full`}>
+              <TokenStats />
+              </div>
+              <Image src={FARM_BANNER}
+                height={180}
+                width={1080}
               />
-            </div> 
             </div>
-            <Image src={FARM_BANNER}
-              height={180}
-              width={1080}
-            />
-          </div>
           <div className={`flex justify-center m-1 p-1`}>
           <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/dashboard'}>

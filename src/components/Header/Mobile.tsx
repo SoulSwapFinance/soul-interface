@@ -210,7 +210,7 @@ const Mobile: FC = () => {
       <header className="w-full flex items-center justify-between border border-4 border-ftmBlue min-h-[42px] h-[42px] px-2 bg-purple">
         <div className={`flex justify-between flex-grow`}>
       <div 
-        className={`absolute left-1 top-1.5 bg-dark-900 rounded border border-4 border-black hover:border-purple rounded-2xl p-1`}
+        className={`absolute left-1 top-1.5 bg-dark-900 rounded border border-4 border-ftmBlue hover:border-purple rounded-2xl p-1`}
         onClick={() => swapRoute()}
       >
       {SOUL_ICON}
@@ -227,9 +227,9 @@ const Mobile: FC = () => {
             // {DEFAULT_ICON}
           </div> */}
         </div>
-        <div className={`absolute left-14 top-1.5 border border-4 border-[${getChainColor(chainId)}] bg-dark-1000 hover:border-purple rounded rounded-2xl justify-start bg-dark-1000`}>
+        {/* <div className={`absolute left-14 top-1.5 border border-4 border-[${getChainColor(chainId)}] bg-dark-1000 hover:border-purple rounded rounded-2xl justify-start bg-dark-1000`}>
           <TokenStats />
-        </div>
+        </div> */}
         {/* <div
                 className={`p-1 hover:bg-dark-900 mt-1 bg-dark-1000 rounded rounded-xl border-[${getChainColor(chainId)}]`}
                 onClick={swapRoute}

@@ -1,14 +1,14 @@
 import React from 'react'
-import Container from 'components/Container'
+// import Container from 'components/Container'
 import Head from 'next/head'
 import Typography from 'components/Typography'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import styled from 'styled-components'
+// import styled from 'styled-components'
 import { classNames, formatNumber } from 'functions'
 import DashboardDonutChart from 'components/Dashboard/DonutChart'
 import DashboardChartLegend from 'components/Dashboard/ChartLegend'
-import { useSoulPrice } from 'hooks/getPrices'
+// import { useSoulPrice } from 'hooks/getPrices'
 import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
@@ -18,7 +18,7 @@ import { useActiveWeb3React } from 'services/web3'
 import { getChainInfo, getChainColorCode, getChainColor } from 'constants/chains'
 import Image from 'next/image'
 import DATA_BANNER from 'assets/branding/data-banner.png'
-
+import TokenStats from 'components/TokenStats'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
@@ -221,25 +221,17 @@ export default function Dashboard() {
           <meta key="description" name="description" />
         </Head>
           <div className={`grid p-1 mt-8 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}] bg-dark-1000`} >
-          <div 
-            className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl bg-dark-900 border-purple`}
+          <div
+              className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >
-            <div className="flex justify-center">
-             <div 
-              className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
-                >
-              <Image src={`/favicon.ico`}
-                objectFit={`contain`}
-                height={72}
-                width={72}
+              <div className={`w-full`}>
+              <TokenStats />
+              </div>
+              <Image src={DATA_BANNER}
+                height={180}
+                width={1080}
               />
-            </div> 
             </div>
-            <Image src={DATA_BANNER}
-              height={180}
-              width={1080}
-            />
-          </div>
           <div className={`flex justify-center m-1 p-1`}>
           <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/dashboard'}>
