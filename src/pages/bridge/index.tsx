@@ -53,6 +53,7 @@ import { VoteBanner } from "components/Banner";
 import BRIDGE_BANNER from 'assets/branding/bridge-banner.png'
 import BridgeTokenList from "features/bridge/BridgeTokenList";
 import { ContentBox, OverlayButton, Typo1, Typo2 } from "components";
+import TokenStats from "components/TokenStats";
 
 const ChainSelection: React.FC<any> = ({
   setTokenList,
@@ -541,24 +542,16 @@ const Bridge: React.FC<any> = () => {
         {/* <SwapLayoutCard> */}
         <div className={`grid p-1 mt-8 space-y-2 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}] bg-dark-1000`}>
         {/* <VoteBanner /> */}
-        <div 
-            className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
+        <div
+              className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >
-            <div className="flex justify-center">
-             <div 
-              className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
-                >
-              <Image src={`/favicon.ico`}
-                objectFit={`contain`}
-                height={72}
-                width={72}
+              <div className={`w-full`}>
+              <TokenStats />
+              </div>
+              <Image src={BRIDGE_BANNER}
+                height={180}
+                width={1080}
               />
-            </div> 
-            </div>
-            <Image src={BRIDGE_BANNER}
-              height={180}
-              width={1080}
-            />
             </div>
           <div className={`grid`}>
             <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>

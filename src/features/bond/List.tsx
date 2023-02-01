@@ -18,6 +18,7 @@ import MINT_BANNER from 'assets/branding/mint-banner.png'
 import ExternalLink from 'components/ExternalLink'
 import { SubmitButton } from 'features/bond/Styles'
 import { classNames } from 'functions/styling'
+import TokenStats from 'components/TokenStats'
 
 export const BondList = () => {
   const { chainId } = useActiveWeb3React()
@@ -90,25 +91,17 @@ export const BondList = () => {
               </SubmitButton>
             </ExternalLink>
           </div>
-      <div 
-            className={`w-full grid grid-cols-2 p-4 border border-2 rounded rounded-2xl bg-dark-900 border-purple`}
+          <div
+              className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >
-            <div className="flex justify-center">
-             <div 
-              className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
-                >
-              <Image src={`/favicon.ico`}
-                objectFit={`contain`}
-                height={72}
-                width={72}
+              <div className={`w-full`}>
+              <TokenStats />
+              </div>
+              <Image src={MINT_BANNER}
+                height={180}
+                width={1080}
               />
-            </div> 
             </div>
-            <Image src={MINT_BANNER}
-              height={180}
-              width={1080}
-            />
-          </div>
           <div className={`flex justify-center m-1 p-1`}>
         <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/dashboard'}>

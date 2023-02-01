@@ -43,6 +43,7 @@ import { VoteBanner } from 'components/Banner'
 import SWAP_BANNER from 'assets/branding/swap-banner.png'
 import UpDownArrowIcon from 'components/Icons/exchange/UpDownArrowIcon'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
+import TokenStats from 'components/TokenStats'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -420,16 +421,8 @@ const Swap = () => {
             <div
               className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >
-              <div className={`flex justify-center`}>
-                <div
-                  className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
-                >
-                  <Image src={`/favicon.ico`}
-                    objectFit={`contain`}
-                    height={72}
-                    width={72}
-                  />
-                </div>
+              <div className={`w-full`}>
+              <TokenStats />
               </div>
               <Image src={SWAP_BANNER}
                 height={180}

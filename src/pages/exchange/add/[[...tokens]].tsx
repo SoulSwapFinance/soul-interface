@@ -55,6 +55,7 @@ import { VoteBanner } from 'components/Banner'
 
 import Image from 'next/image'
 import ADD_BANNER from 'assets/branding/add-banner.png'
+import TokenStats from 'components/TokenStats'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
 
@@ -370,24 +371,16 @@ export default function Add() {
           {/* <SwapLayoutCard> */}
           {/* <VoteBanner /> */}
           <div
-            className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
-          >
-            <div className={`flex justify-center`}>
-              <div
-                className={`flex border border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded rounded-2xl w-5/6`}
-              >
-                <Image src={`/favicon.ico`}
-                  objectFit={`contain`}
-                  height={72}
-                  width={72}
-                />
+              className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
+            >
+              <div className={`w-full`}>
+              <TokenStats />
               </div>
+              <Image src={ADD_BANNER}
+                height={180}
+                width={1080}
+              />
             </div>
-            <Image src={ADD_BANNER}
-              height={180}
-              width={1080}
-            />
-          </div>
           {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
           <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
           <SwapDropdown

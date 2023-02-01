@@ -212,15 +212,19 @@ const Desktop: FC = () => {
         </Transition.Root>
         <div>
 
-          <div className={classNames(`grid`, account ? `grid-cols-2 bg-ftmBlue  p-1` : `flex p-1 border border`, ` border-ftmBlue gap-1 hover:border-2 rounded rounded-2xl inline-block mt-4 `)}>
+          <div className={classNames(`grid`, 
+          account ? 
+            `grid-cols-1 bg-ftmBlue  p-1` : `flex p-1 border border`, 
+            `border-ftmBlue gap-1 hover:border-2 rounded rounded-2xl inline-block mt-4 `)
+            }>
             {/* WALLET CONNECT */}
             <div className={``}>
             <Web3Status />
             </div>
             {/* TOKEN STATS */}
-            <div className={account ? `w-full` : `hidden`}>
+            {/* <div className={account ? `w-full` : `hidden`}>
             <TokenStats />
-            </div>
+            </div> */}
           </div>
         </div>
         <DesktopBar />
