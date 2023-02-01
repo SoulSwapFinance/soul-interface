@@ -252,8 +252,8 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
         )}
           onClick={() => handleShowOptions()}
         >
-      <div className={`flex w-full]`}>
-          <div className="grid grid-cols-1  justify-center">
+      <div className={`flex w-full`}>
+          <div className="grid grid-cols-1 md:mr-16 justify-center">
               <div className={`grid ${isUnderworldPair ? `grid-cols-2` : `grid-cols-2`}`}>
                 <CurrencyLogo currency={token0} size={40} />
                 {isUnderworldPair &&
@@ -285,7 +285,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
             {/* STAKED VALUE */}
             <HideOnMobile>
               <BondItemBox>
-                  <BondItem>
+                 <div className={`justify-center mt-2 md:mr-16`}>
                     {Number(_APR).toString() === '0.00' ? (
                       <Text padding="0" fontSize="1rem" color="#666">
                         0
@@ -301,7 +301,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                         }
                       </Text>
                     )}
-                  </BondItem>
+                  </div>
                 </BondItemBox>
               </HideOnMobile>
 
@@ -314,8 +314,9 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                 </BondItemBox>
               </HideOnSmall> */}
 
+            {/* APR */}
             <BondItemBox>
-              <BondItem>
+              <div className={`justify-center mt-2 md:mr-8`}>
                 <Text fontSize="1rem" color="#FFFFFF">
                   {_APR == 0 ? 0
                     : _APR.toString(2) == '0.00' ? '<0.00'
@@ -324,7 +325,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                           : '-'
                   }%
                 </Text>
-              </BondItem>
+              </div>
             </BondItemBox>
 
             {/* <HideOnMobile> */}

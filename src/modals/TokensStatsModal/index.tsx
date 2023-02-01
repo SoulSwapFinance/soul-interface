@@ -1,6 +1,6 @@
 import React from 'react'
 import { useModalOpen, useToggleModal, useToggleTokenStatsModal } from 'state/application/hooks'
-import  { ApplicationModal } from 'state/application/reducer'
+import { ApplicationModal } from 'state/application/reducer'
 import Image from 'next/image'
 import Typography from 'components/Typography'
 import { useBondInfo, useTokenInfo } from 'hooks/useAPI'
@@ -18,7 +18,7 @@ import { ChainId, SOUL } from 'sdk'
 import { useUserInfo } from 'hooks/useAPI'
 
 export default function TokenStatsModal(): JSX.Element | null {
-  
+
   const cache: { [key: string]: number } = {};
   function formatCurrency(c: number, precision = 0) {
     return new Intl.NumberFormat("en-US", {
@@ -32,7 +32,7 @@ export default function TokenStatsModal(): JSX.Element | null {
   const { chainId, library } = useActiveWeb3React()
   const soulStatsModalOpen = useModalOpen(ApplicationModal.SOUL_STATS)
   const toggleSoulStatsModal = useToggleTokenStatsModal()
-  
+
   const { userInfo } = useUserInfo()
   const votingPower = userInfo.votingPower
   const protocolOwnership = Number(userInfo.protocolOwnership).toFixed(2)
@@ -45,13 +45,13 @@ export default function TokenStatsModal(): JSX.Element | null {
   // console.log('bondTVL:%s', bondTVL)
   const tvlInfo = useTVL()
   const bondsInfo = useBondTVL()
-  const stakedTvl  = Number(soulPrice) * totalSeance
+  const stakedTvl = Number(soulPrice) * totalSeance
   const soulInfo = useSoulTVL()
 
   let bondTvl
-  = bondsInfo?.reduce((previousValue, currentValue) => {
-    return previousValue + currentValue?.tvl
-  }, 0)
+    = bondsInfo?.reduce((previousValue, currentValue) => {
+      return previousValue + currentValue?.tvl
+    }, 0)
 
   let soulTVL = soulInfo?.reduce((previousValue, currentValue) => {
     return previousValue + currentValue?.tvl
@@ -82,13 +82,13 @@ export default function TokenStatsModal(): JSX.Element | null {
   // if (!chainId) return null
 
   return (
-    <HeadlessUiModal.Controlled 
-    isOpen={soulStatsModalOpen}
-    chainId={chainId}
+    <HeadlessUiModal.Controlled
+      isOpen={soulStatsModalOpen}
+      chainId={chainId}
       onDismiss={toggleSoulStatsModal}
       maxWidth={'md'}
     >
-    <ModalHeader header={''} onClose={toggleSoulStatsModal} />
+      <ModalHeader header={''} onClose={toggleSoulStatsModal} />
       <div className="mt-2 space-y-8">
         <div className="space-y-4">
           <div className="flex justify-between gap-2 flex-col-2 w-full">
@@ -132,7 +132,7 @@ export default function TokenStatsModal(): JSX.Element | null {
                 className="rounded-md"
               />
             </div>
-           {/* <div
+            {/* <div
               className="rounded-md border border-purple cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
               onClick={() => {
                 const params: any = {
@@ -184,20 +184,20 @@ export default function TokenStatsModal(): JSX.Element | null {
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Voting Power`}
           </Typography>,
-        formatNumber(Number(votingPower), false, true)
-          + ` (${protocolOwnership}%)` 
+          formatNumber(Number(votingPower), false, true)
+          + ` (${protocolOwnership}%)`
         )}
 
-         {getSummaryLine(
+        {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Maximum Supply`}
           </Typography>,
           '250,000,000'
           // formatNumberScale(
           //   Number(250_000_000), false)
-            )
+        )
         }
-          {/* {getSummaryLine(
+        {/* {getSummaryLine(
             <div className="flex items-center">
             <Typography variant="sm" className="flex items-center py-0.5">
               {`Circulating Supply`}
@@ -252,7 +252,7 @@ export default function TokenStatsModal(): JSX.Element | null {
             - (Number(totalSoul) * 0.125)
             , false)
         )} */}
-         {/* {getSummaryLine(
+        {/* {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Circulating Supply`}
           </Typography>,
@@ -267,13 +267,13 @@ export default function TokenStatsModal(): JSX.Element | null {
             Number(totalSoul) * Number(soulPrice)
         ))} */}
         {getSummaryLine(
-        <Typography variant="sm" className="flex items-center py-0.5">
-          {`Market Cap`}
-        </Typography>,
-        formatNumberScale(
-          Number(250_000_000 * soulPrice), true
+          <Typography variant="sm" className="flex items-center py-0.5">
+            {`Market Cap`}
+          </Typography>,
+          formatNumberScale(
+            Number(250_000_000 * soulPrice), true
           ))}
-        { [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) && getSummaryLine(
+        {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) && getSummaryLine(
           <div className="flex items-center">
             <Typography variant="sm" className="flex items-center py-0.5">
               {`Total Value Locked`}
@@ -334,54 +334,54 @@ export default function TokenStatsModal(): JSX.Element | null {
           formatCurrency(
             Number(TVL), 0)
         )}
-        { [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) && getSummaryLine(
+        {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) && getSummaryLine(
           <div className="flex items-center gap-1">
             <Typography variant="sm" className="flex items-center py-0.5">
               {`DAO Liquidity`}
             </Typography>
-            
+
             <QuestionHelper
-                text={
-                  <div className="flex flex-col gap-2 py-1 px-3 w-full">
-                    <div className="flex items-center justify-between">
-                      <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                        Bonded
-                      </Typography>
-                      <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                        {formatNumberScale(bondTVL, true)}
-                      </Typography>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                        DAO
-                      </Typography>
-                      <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                        {formatNumberScale(daoTVL, true)}
-                      </Typography>
-                    </div>
-                    <hr></hr>
-                    <div />
-                    <div className="flex items-center justify-between">
-                      <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                        Total Value
-                      </Typography>
-                      <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                        {formatNumberScale(
-                          Number(bondTVL)
-                         + Number(soulTVL)
-                          , true)}
-                      </Typography>
-                    </div>
+              text={
+                <div className="flex flex-col gap-2 py-1 px-3 w-full">
+                  <div className="flex items-center justify-between">
+                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
+                      Bonded
+                    </Typography>
+                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
+                      {formatNumberScale(bondTVL, true)}
+                    </Typography>
                   </div>
-                }
-              />
+                  <div className="flex items-center justify-between">
+                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
+                      DAO
+                    </Typography>
+                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
+                      {formatNumberScale(daoTVL, true)}
+                    </Typography>
+                  </div>
+                  <hr></hr>
+                  <div />
+                  <div className="flex items-center justify-between">
+                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
+                      Total Value
+                    </Typography>
+                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
+                      {formatNumberScale(
+                        Number(bondTVL)
+                        + Number(soulTVL)
+                        , true)}
+                    </Typography>
+                  </div>
+                </div>
+              }
+            />
           </div>,
           concat(formatNumberScale(
             Number(bondTVL + soulTVL), true)
-            , 
+            ,
             ` (${((podl / tvl * 100).toFixed(0))}%)`
-            ))
-          }
+          ))
+        }
         {/* {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Percent PODL`}
@@ -403,28 +403,39 @@ export default function TokenStatsModal(): JSX.Element | null {
             Number(seancePrice), 3)
         ) */}
         <div className="flex mt-3" />
-        <Button
-          color='purple'
-          type='flexed'
-          size='xs'
-        >
-          <NavLink href={'/bonds'}>
+        <NavLink href={'/bonds'}>
+          <Button
+            color='purple'
+            variant='bordered'
+            size='xs'
+          >
             <a className="flex justify-center text-white text-xl transition rounded-md hover:pink">
-            <span>MINT SOUL</span>
+              <span>VIEW ECONOMY</span>
             </a>
-          </NavLink>
-        </Button>
-        <Button
-          color='purple'
-          type='flexed'
-          size='xs'
-        >
-          <NavLink href={'/autostake'}>
+          </Button>
+        </NavLink>
+        <NavLink href={'/dashboard'}>
+          <Button
+            color='purple'
+            variant='bordered'
+            size='xs'
+          >
             <a className="flex justify-center text-white text-xl transition rounded-md hover:pink">
-             <span>STAKE SOUL</span>
+              <span>MINT SOUL</span>
             </a>
-          </NavLink>
-        </Button>
+          </Button>
+        </NavLink>
+        <NavLink href={'/autostake'}>
+          <Button
+            color='purple'
+            variant='bordered'
+            size='xs'
+          >
+            <a className="flex justify-center text-white text-xl transition rounded-md hover:pink">
+              <span>STAKE SOUL</span>
+            </a>
+          </Button>
+        </NavLink>
       </div>
     </HeadlessUiModal.Controlled>
   )

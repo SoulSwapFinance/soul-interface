@@ -352,7 +352,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                             {/* STAKED VALUE */}
                             <HideOnMobile>
                                 <FarmItemBox>
-                                    <FarmItem>
+                                    <div className={`justify-center mt-2`}>
                                         {Number(_APR).toString() === '0.00' ? (
                                             <Text padding="0" fontSize="1rem" color="#666">
                                                 0
@@ -368,14 +368,14 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                                 }
                                             </Text>
                                         )}
-                                    </FarmItem>
+                                    </div>
                                 </FarmItemBox>
                             </HideOnMobile>
 
                             {/* STAKED OWNERSHIP */}
                             <HideOnSmall>
                                 <FarmItemBox>
-                                    <FarmItem>
+                                <div className={`justify-center mt-2`}>
                                         {_stakedValue.toFixed(0).toString() === '0' ? (
                                             <Text padding="0" fontSize="1rem" color="#666">
                                                 0%
@@ -385,13 +385,13 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                                 {(_stakedValue / Number(_liquidity) * 100).toFixed(0)}%
                                             </Text>
                                         )}
-                                    </FarmItem>
+                                    </div>
                                 </FarmItemBox>
                             </HideOnSmall>
 
                             {/* % APR */}
                             <FarmItemBox>
-                                <FarmItem>
+                                <div className={`justify-center mt-2`}>
                                     {Number(_APR).toString() === '0.00' ? (
                                         <Text padding="0" fontSize="1rem" color="#666">
                                             0
@@ -401,7 +401,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                             {Number(_APR).toFixed()}%
                                         </Text>
                                     )}
-                                </FarmItem>
+                                </div>
                             </FarmItemBox>
 
                             {/* REWARDS VALUE */}
