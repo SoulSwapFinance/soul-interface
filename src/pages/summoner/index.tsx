@@ -157,7 +157,7 @@ const Summoner = () => {
               </Typography>
               <Typography className="font-bold">
                 {/* {'MUST CLAIM BEFORE 2023'} */}
-                {`FARMS ARCHIVED. CLAIMS ENDED`}
+                {`ARCHIVED. CLAIMS EXPIRED.`}
               </Typography>
             </Button>
           </div>
