@@ -98,24 +98,26 @@ const useMenu: UseMenu = () => {
     const SWAP_ICON = 
     <div className={iconStyle}>
       <SwapIcon
-    fillPrimary={open ? WHITE : getChainColor(chainId)}
-    fillSecondary={open ? getChainColor(chainId) : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-6 h-6` : `hidden`)}
-    />
+      fillPrimary={open ? WHITE : getChainColor(chainId)}
+      fillSecondary={open ? getChainColor(chainId) : WHITE}
+      className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-8 h-6` : `hidden`)}
+      />
     </div>
 
-  const SUN_ICON = <SunMoonIcon
+  const SUN_ICON = 
+  <div className={iconStyle}>
+    <SunMoonIcon
     fillPrimary={open ? WHITE : chainColor }
     fillSecondary={open ? chainColor : WHITE }
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
-  />
-
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
+    />
+  </div>
   const EARN_ICON = 
   <div className={iconStyle}>
     <SeedlingIcon
     fillPrimary={open ? WHITE : chainColor }
     fillSecondary={open ? chainColor : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
   />
   </div>
 
@@ -125,20 +127,20 @@ const useMenu: UseMenu = () => {
     fillPrimary={open ? WHITE : chainColor }
     fillSecondary={open ? chainColor : WHITE}
     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? 
-      `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+      `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
   />
   </div>
 
   // const WALLET_ICON = <WalletIcon
   //   fillPrimary={open ? WHITE : chainColor }
   //   fillSecondary={open ? chainColor : WHITE}
-  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
   // />
 
   // const EXPLORE_ICON = <BinocularsIcon
   // fillPrimary={open ? WHITE : chainColor }
   // fillSecondary={open ? chainColor : WHITE}
-  // className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+  // className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
   // />
 
   // const LEND_ICON = 
@@ -148,7 +150,7 @@ const useMenu: UseMenu = () => {
   //   <LendSkullIcon
   //   fillPrimary={open ? chainColor : WHITE}
   //   fillSecondary={open ? WHITE : chainColor }
-  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
   // />
   // </div>
 
@@ -159,7 +161,7 @@ const useMenu: UseMenu = () => {
     <DocsIcon
     fillPrimary={open ? chainColor : WHITE}
     fillSecondary={open ? WHITE : chainColor }
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
     />
     </div>
 
@@ -170,7 +172,7 @@ const VAULT_ICON =
     <VaultIcon
     fillPrimary={open ? WHITE : chainColor }
     fillSecondary={open ? chainColor : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
     />
     </div>
 
@@ -181,20 +183,24 @@ const CHART_ICON =
     <ChartIcon
     fillPrimary={open ? WHITE : chainColor }
     fillSecondary={open ? chainColor : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
     />
     </div>
 
   // const NFT_ICON = <NftIcon
   //   fillPrimary={open ? chainColor : WHITE}
   //   fillSecondary={open ? WHITE : chainColor }
-  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-6 h-6` : `hidden`)}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
   // />
 
-  const SOUL_ICON = <Image 
-    src={'/favicon.png'} height={28} width={28} 
-    // className={'hover:animate-spin'} 
-  />
+  const SOUL_ICON = 
+  <div className={classNames(`p-0 rounded rounded-xl bg-dark-800`, `h-6 mb-4 mt-1`)}>
+  <Image 
+    src={'/favicon.png'} height={36} width={36} 
+    objectFit={`contain`}
+    className={'bg-dark-800 rounded rounded-xl'} 
+    />
+    </div>
 
     // By default show just a swap button
     let tradeMenu: MenuItem = {
@@ -315,18 +321,18 @@ const CHART_ICON =
     //       link: '/explore'
     //   })
     // }
-    if (featureEnabled(Feature.AMM, chainId)) {
-      mainItems.push({
-          key: 'vault',
-          title: i18n._(t`Vault`),
-          icon:
-            VAULT_ICON,
-          // icon: <MagnifyingGlassCircleIcon width={20} className={classNames(
-          //   `filter text-white`
-          // )} />,
-          link: '/autostake'
-      })
-    }
+    // if (featureEnabled(Feature.AMM, chainId)) {
+    //   mainItems.push({
+    //       key: 'vault',
+    //       title: i18n._(t`Vault`),
+    //       icon:
+    //         VAULT_ICON,
+    //       // icon: <MagnifyingGlassCircleIcon width={20} className={classNames(
+    //       //   `filter text-white`
+    //       // )} />,
+    //       link: '/autostake'
+    //   })
+    // }
 
     if (featureEnabled(Feature.AMM, chainId)) {
       mainItems.push({
