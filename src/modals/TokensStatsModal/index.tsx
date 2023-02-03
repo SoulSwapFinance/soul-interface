@@ -402,8 +402,9 @@ export default function TokenStatsModal(): JSX.Element | null {
           formatCurrency(
             Number(seancePrice), 3)
         ) */}
-        {/* <div className="flex mt-3" />
-        <NavLink href={'/bonds'}>
+        {/
+       <div className="flex mt-3" />
+        <NavLink href={'/dashboard'}>
           <Button
             color='purple'
             variant='bordered'
@@ -414,7 +415,7 @@ export default function TokenStatsModal(): JSX.Element | null {
             </a>
           </Button>
         </NavLink>
-        <NavLink href={'/dashboard'}>
+       {/* <NavLink href={'/bonds'}>
           <Button
             color='purple'
             variant='bordered'
