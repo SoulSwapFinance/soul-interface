@@ -6,6 +6,7 @@ export const FantomBonds = [
   // DAI BONDS //
   {
     pid: 24,
+    status: 'closed',
     bondAddress: '0x26155f6F5e5372dc063042A37C1391e04E71509e',
     assetName: 'DAI',
     assetAddress: DAI_ADDRESS[ChainId.FANTOM],
@@ -22,5 +23,4 @@ export const FantomBonds = [
     token1Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     term: '5D',
   },
-
 ]
