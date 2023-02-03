@@ -424,7 +424,7 @@ const Aggregator = ({ }) => {
 
 	return (
 		<DoubleGlowShadowV2>
-			<div className={`grid p-1 mt-8 space-y-2 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}] bg-dark-1000`}>
+          <div className={`grid p-1 mt-4 space-y-2 rounded rounded-2xl bg-dark-1000`}>
 				{/* <SwapLayoutCard> */}
 				<MainBanner />
 				<div
@@ -438,12 +438,14 @@ const Aggregator = ({ }) => {
                 width={1080}
               />
             </div>
-				<div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
+				{/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
+				<div className={`my-12`} />
 				<SwapDropdown
 					inputCurrency={currencyA}
 					outputCurrency={currencyB}
 				/>
-				<div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
+				{/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
+				<div className={`my-12`} />
 				<div className="flex flex-col gap-3 space-y-3">
 					<SwapAssetPanel
 						spendFromWallet={true}

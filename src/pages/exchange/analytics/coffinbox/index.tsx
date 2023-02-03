@@ -106,9 +106,12 @@ export default function CoffinBox(): JSX.Element {
     <Container id="exchange-analytics-dashboard-page" maxWidth="2xl" className="space-y-4 mt-4">
       <DoubleGlowShadowV2>
         <SwapLayoutCard>
-          <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
+          {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
+          <div className={`my-12`} />
           <SwapDropdown />
-          <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />          <AnalyticsContainer>
+          {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />          */}
+          <div className={`my-12`} />
+           <AnalyticsContainer>
             <ExchangeAnalyticsHeader />
             <TridentBody>
               <div className="grid items-center justify-between grid-cols-1 gap-x-4 gap-y-2">

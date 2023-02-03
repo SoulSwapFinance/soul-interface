@@ -719,7 +719,7 @@ export default function Remove() {
       </Head>
 
       <DoubleGlowShadowV2>
-        <div className={`grid p-1 mt-8 space-y-2 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}] bg-dark-1000`}>
+      <div className={`grid p-1 mt-4 space-y-2 rounded rounded-2xl bg-dark-1000`}>
           {/* <SwapLayoutCard> */}
           <MainBanner />
           <div
@@ -734,9 +734,12 @@ export default function Remove() {
               />
             </div>
           {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
-          <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
+          {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
+          <div className={`my-12`} />
           <SwapDropdown />
-          <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />              {/* <Header input={currencyA} output={currencyB} allowedSlippage={allowedSlippage} /> */}
+          {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
+          <div className={`my-12`} />
+          {/* <Header input={currencyA} output={currencyB} allowedSlippage={allowedSlippage} /> */}
           <div>
             <TransactionConfirmationModal
               isOpen={showConfirm}
