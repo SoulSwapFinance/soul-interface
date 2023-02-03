@@ -49,10 +49,17 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
         variant="sm"
         className={classNames(
           // isOpen ? `border rounded rounded-3xl mr-18 border-${getChainColorCode(chainId)}` : '',
-          'hover:text-white font-bold py-5 px-2 rounded flex gap-3'
+          'hover:text-white font-bold py-3 px-2 rounded flex gap-3'
         )}
       >
-        {node.icon}
+        <div className={`flex flex-cols-1 justify-center gap-4 border w-[124px] border-[${getChainColor(chainId)}] hover:border-2 rounded rounded-2xl bg-dark-900`}>
+          <div className={`m-1`}>
+            {node.icon}
+          </div>
+          <div className={`mt-2`}>
+            {node.title}
+          </div>
+        </div>
         {/* {isDesktop && node.title} */}
       </Typography>
     )
@@ -73,7 +80,7 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
               variant="sm"
               className={classNames(
                 // isLuxor && !isOpen ? 'text-yellow' : !isOpen && `text-[${getChainColor(chainId)}]`, 
-              'font-bold py-5 px-2 rounded flex gap-3 items-center')}
+                'font-bold py-5 px-2 rounded flex gap-3 items-center')}
             >
               {node.icon}
               {/* {node.title} */}
@@ -110,7 +117,7 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
                           }}
                           className="relative px-3 text-center py-2 m-1 rounded-lg hover:cursor-pointer hover:text-white hover:bg-white/10"
                         >
-                          { leaf.title }
+                          {leaf.title}
                         </Typography>
                       </a>
                     </Link>

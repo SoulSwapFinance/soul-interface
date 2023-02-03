@@ -53,8 +53,8 @@ const Desktop: FC = () => {
     router.push(`/exchange/swap`)
   }, [])
 
-  const WHITE = `#FFFFFF`
-  const chainColor = getChainColor(chainId)
+  // const WHITE = `#FFFFFF`
+  // const chainColor = getChainColor(chainId)
 
   // const SOUL_ICON = <SoulIcon
   //   height={'600px'}
@@ -167,6 +167,7 @@ const Desktop: FC = () => {
         <div
           className={`flex bg-dark-900 p-2 mt-6 rounded border border-4 border-ftmBlue hover:border-purple rounded-2xl`}
           onClick={() => swapRoute()}
+          // onClick={() => swapRoute()}
         >
           {SOUL_ICON}
         </div>

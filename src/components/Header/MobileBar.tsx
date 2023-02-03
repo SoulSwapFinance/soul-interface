@@ -26,8 +26,8 @@ import WalletIcon from 'components/Icons/header/WalletIcon'
 import NftIcon from 'components/Icons/mobile/NftIcon'
 import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
-import Web3Network from 'components/Web3Network'
-import Web3Status from 'components/Web3Status'
+// import Web3Network from 'components/Web3Network'
+// import Web3Status from 'components/Web3Status'
 import ChartIcon from 'components/Icons/exchange/ChartIcon'
 import SunMoonIcon from 'components/Icons/header/SunMoonIcon'
 import DocsIcon from 'components/Icons/mobile/DocsIcon'
@@ -216,7 +216,7 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                                 className={'w-7 h-7'}
                             />
                         </div>
-                        <div
+                        {/* <div
                             className={classNames(
                                 `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
                                 isData && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
@@ -227,7 +227,7 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                                 fillSecondary={isData ? `#FFFFFF` : `${getChainColor(chainId)}`}
                                 className={'w-7 h-7'}
                             />
-                        </div>
+                        </div> */}
                         {featureEnabled(Feature.NFT, chainId) &&
                             <div
                                 className={classNames(
@@ -242,7 +242,7 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                                 />
                             </div>
                         }
-                        <div
+                        {/* <div
                             className={classNames(
                                 `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
                                 isLuxor && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
@@ -253,8 +253,8 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                                 fillSecondary={isLuxor ? `#FFFFFF` : `${getChainColor(chainId)}`}
                                 className={'w-7 h-7'}
                             />
-                        </div>
-                        <div
+                        </div> */}
+                        {/* <div
                             className={classNames(
                                 `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
                                 isLearn && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
@@ -265,7 +265,7 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                                 fillSecondary={isLearn ? `${getChainColor(chainId)}` : `#FFFFFF`}
                                 className={'w-7 h-7'}
                             />
-                        </div>
+                        </div> */}
                         <div
                             className={classNames(
                                 `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
