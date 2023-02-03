@@ -402,7 +402,7 @@ export default function TokenStatsModal(): JSX.Element | null {
           formatCurrency(
             Number(seancePrice), 3)
         ) */}
-        <div className="flex mt-3" />
+        {/* <div className="flex mt-3" />
         <NavLink href={'/bonds'}>
           <Button
             color='purple'
@@ -435,7 +435,7 @@ export default function TokenStatsModal(): JSX.Element | null {
               <span>STAKE SOUL</span>
             </a>
           </Button>
-        </NavLink>
+        </NavLink> */}
       </div>
     </HeadlessUiModal.Controlled>
   )
