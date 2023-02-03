@@ -226,12 +226,12 @@ const Desktop: FC = () => {
 
           <div className={classNames(`grid`,
             account ?
-            `grid-cols-1 bg-ftmBlue  p-1` : `flex p-1 border border`, 
-            `border-ftmBlue gap-1 rounded rounded-2xl inline-block mt-4 `)
+            `grid-cols-1 bg-ftmBlue p-1` : `flex border border`, 
+            `border-ftmBlue border-4 gap-1 rounded rounded-2xl inline-block mt-4 `)
           }>
             {/* WALLET CONNECT */}
             <div
-              className={`flex bg-dark-900 rounded rounded-2xl mr-3`}
+              className={classNames(account ? `mr-4` : ``,`flex bg-dark-900 rounded rounded-2xl`)}
             >
               <Web3Status />
             </div>
