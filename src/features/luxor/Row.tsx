@@ -164,13 +164,13 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
 
     const swapRoute = useCallback(() => {
         // wrapped-only
-        bond.assetAddress == WFTM_ADDRESS[chainId] 
-        // implies: pair
-        || bond.token2Address
-        // use generic swap path.
-        ? router.push(`/exchange/swap`)
-        // else: use specified swap path.
-        : router.push(`/exchange/swap?inputCurrency=${NATIVE[250].symbol}&outputCurrency=${bond.assetAddress}`)
+        bond.assetAddress == WFTM_ADDRESS[chainId]
+            // implies: pair
+            || bond.token2Address
+            // use generic swap path.
+            ? router.push(`/exchange/swap`)
+            // else: use specified swap path.
+            : router.push(`/exchange/swap?inputCurrency=${NATIVE[250].symbol}&outputCurrency=${bond.assetAddress}`)
     }, [])
 
     // returns: discount & sets
@@ -275,20 +275,20 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     /**
      * Approves BondContractAddress to move lpTokens
      */
-  // approves bond to handle LP
-  const handleApprove = async () => {
-    if (!account) {
-    } else {
-      try {
-        const tx = await erc20Approve(LUX_HELPER_ADDRESS[chainId])
-        await tx?.wait().then(await fetchApproval())
-      } catch (e) {
-        // alert(e.message)
-        console.log(e)
-        return
-      }
+    // approves bond to handle LP
+    const handleApprove = async () => {
+        if (!account) {
+        } else {
+            try {
+                const tx = await erc20Approve(LUX_HELPER_ADDRESS[chainId])
+                await tx?.wait().then(await fetchApproval())
+            } catch (e) {
+                // alert(e.message)
+                console.log(e)
+                return
+            }
+        }
     }
-  }
 
 
     // harvest shares
@@ -307,7 +307,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     const handleDeposit = async (amount) => {
         try {
             const tx = await BondContract?.deposit(
-                parsedDepositValue?.quotient.toString(), 2, 
+                parsedDepositValue?.quotient.toString(), 2,
                 bondAddress)
             await tx.wait()
             await fetchPayout()
@@ -469,21 +469,22 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                         </Wrap> */}
                             {payout == 0 ? (
                                 <FunctionBox>
-                                    { unstakedBal > 0 &&
-                                    <AssetInput
-                                        chainId={250}
-                                        currencyLogo={false}
-                                        currency={assetToken}
-                                        currencyAddress={assetAddress}
-                                        value={depositValue}
-                                        // balance={tryParseAmount(account, assetToken)}
-                                        showBalance={true}
-                                        onChange={setDepositValue}
-                                        showMax={false}
-                                    />
-                                    }
                                     {unstakedBal > 0 &&
-                                    <Wrap padding="0" margin="0" display="flex" justifyContent="center">
+                                        <AssetInput
+                                            chainId={250}
+                                            currencyLogo={false}
+                                            currency={assetToken}
+                                            currencyAddress={assetAddress}
+                                            value={depositValue}
+                                            // balance={tryParseAmount(account, assetToken)}
+                                            showBalance={true}
+                                            onChange={setDepositValue}
+                                            showMax={false}
+                                        />
+                                    }
+
+                                    {unstakedBal > 0 &&
+                                        <Wrap padding="0" margin="0" display="flex" justifyContent="center">
                                             {(approved && available) ? (
                                                 <SubmitButton
                                                     primaryColor="#EDC100"
@@ -511,34 +512,43 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                                     APPROVE {assetName}
                                                 </SubmitButton>
                                             )}
-                                    </Wrap>
+                                        </Wrap>
                                     }
                                     <Wrap padding="0" margin="0" display="flex" justifyContent="center">
-                                         <SubmitButton
-                                                primaryColor="#61F561"
-                                                color="black"
-                                                height="2rem"
-                                                onClick={() => swapRoute()}
-                                            >
-                                                ACQUIRE {assetName}
-                                            </SubmitButton>
+                                        <SubmitButton
+                                            primaryColor="#61F561"
+                                            color="black"
+                                            height="2rem"
+                                            onClick={() => swapRoute()}
+                                        >
+                                            ACQUIRE {assetName}
+                                        </SubmitButton>
                                     </Wrap>
                                 </FunctionBox>
                             ) : (
                                 <FunctionBox>
                                     <Wrap padding="0" display="flex" justifyContent="space-between">
                                     </Wrap>
-                                    { 
-                                    <AssetInput
-                                        chainId={250}
-                                        currencyLogo={false}
-                                        currency={assetToken}
-                                        currencyAddress={assetAddress}
-                                        value={depositValue}
-                                        onChange={setDepositValue}
-                                        showMax={false}
-                                        showBalance={true}
-                                    />
+                                    {
+                                        <AssetInput
+                                            chainId={250}
+                                            currencyLogo={false}
+                                            currency={assetToken}
+                                            currencyAddress={assetAddress}
+                                            value={depositValue}
+                                            onChange={setDepositValue}
+                                            showMax={false}
+                                            showBalance={true}
+                                        />
+                                    }
+                                    {!approved &&
+                                        <SubmitButton
+                                            height="2rem"
+                                            primaryColor="#61F561"
+                                            color="black"
+                                            onClick={() => handleApprove()}>
+                                            APPROVE {assetName}
+                                        </SubmitButton>
                                     }
                                     {approved && available &&
                                         <Wrap padding="0" margin="0" display="flex">
