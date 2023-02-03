@@ -22,6 +22,7 @@ const FILLED = {
   yellow: 'bg-yellow bg-opacity-[0.35] text-yellow',
   blue: 'bg-blue bg-opacity-[0.35] text-blue',
   green: 'bg-green bg-opacity-[0.35] text-green',
+  neonGreen: 'bg-neonGreen bg-opacity-[0.35] text-neonGreen',
   pink: 'bg-pink bg-opacity-25 text-pink',
   red: 'bg-red bg-opacity-25 text-red',
 }

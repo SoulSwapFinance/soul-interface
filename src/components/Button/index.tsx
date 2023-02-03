@@ -30,6 +30,7 @@ const FLEXED = {
   gray: 'border rounded shadow-sm focus:ring-2 focus:ring-offset-2 bg-dark-700 bg-opacity-80 flex text-primary border-dark-800 hover:bg-opacity-100 focus:ring-offset-dark-700 focus:ring-dark-800 disabled:bg-opacity-80',
   greydient: 'bg-gradient-to-r from-purple to-opaque-blue to-purple flex text-center rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity-80',
   green: 'bg-green bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-160 disabled:bg-opacity-80',
+  neonGreen: 'bg-neonGreen bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-160 disabled:bg-opacity-80',
   'light-green': 'bg-yellow bg-opacity-80 flex rounded text-dark-900 hover:bg-opacity-100 disabled:bg-opacity-80',
   gradient:
     'flex text-high-emphesis transition duration-1000 ease-in-out text-high-emphesis bg-gradient-to-r from-light-purple via-dark-purple to-purple opacity-80 hover:opacity-100 disabled:bg-opacity-80',
@@ -52,6 +53,7 @@ const FILLED = {
   gold: 'bg-gold bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   gray: 'border rounded shadow-sm focus:ring-2 focus:ring-offset-2 bg-dark-700 bg-opacity-80 w-full text-primary border-dark-800 hover:bg-opacity-100 focus:ring-offset-dark-700 focus:ring-dark-800 disabled:bg-opacity-80',
   green: 'bg-green bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
+  neonGreen: 'bg-neonGreen bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   gradient:
     'w-full text-high-emphesis bg-gradient-to-r from-blue to-purple opacity-80 hover:opacity-100 disabled:bg-opacity-80',
   avaxGradient: 'w-full text-high-emphesis bg-gradient-to-r from-avaxRed to-purple opacity-80 hover:opacity-100 disabled:bg-opacity-80',
@@ -76,6 +78,7 @@ const OUTLINED = {
   yellow: 'bg-yellow bg-opacity-20 outline-purple rounded text-yellow hover:bg-opacity-40 disabled:bg-opacity-20',
   gray: 'bg-dark-700 bg-opacity-20 outline-gray rounded text-gray hover:bg-opacity-40 disabled:bg-opacity-20',
   green: 'bg-green bg-opacity-20 border border-green rounded text-green hover:bg-opacity-40 disabled:bg-opacity-20',
+  neonGreen: 'bg-neonGreen bg-opacity-20 border border-neonGreen rounded text-neonGreen hover:bg-opacity-40 disabled:bg-opacity-20',
   gradient:
     'border border-transparent border-gradient-r-blue-purple-dark-900 opacity-80 hover:opacity-100 disabled:bg-opacity-20',
 }
