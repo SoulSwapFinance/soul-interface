@@ -39,7 +39,7 @@ import { Feature } from 'enums/Feature'
 import { useRouter } from 'next/router'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import Pair from 'pages/analytics/pairs/[id]'
-import { VoteBanner } from 'components/Banner'
+import { MainBanner } from 'components/Banner'
 import SWAP_BANNER from 'assets/branding/swap-banner.png'
 import UpDownArrowIcon from 'components/Icons/exchange/UpDownArrowIcon'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
@@ -370,11 +370,11 @@ const Swap = () => {
     [onUserInput]
   )
 
-  const UP_DOWN_ICON = <UpDownArrowIcon
-  fillPrimary={switched ? WHITE : getChainColor(chainId)}
-  fillSecondary={switched ? getChainColor(chainId) : WHITE}
-  className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-2xl w-7 h-7` : `hidden`)}
-/>
+//   const UP_DOWN_ICON = <UpDownArrowIcon
+//   fillPrimary={switched ? WHITE : getChainColor(chainId)}
+//   fillSecondary={switched ? getChainColor(chainId) : WHITE}
+//   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-2xl w-7 h-7` : `hidden`)}
+// />
 
   return (
     <>
@@ -417,7 +417,7 @@ const Swap = () => {
         <DoubleGlowShadowV2>
           <div className={`grid p-1 mt-4 space-y-2 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}] bg-dark-1000`}>
             {/* <SwapLayoutCard> */}
-            {/* <VoteBanner /> */}
+            <MainBanner />
             <div
               className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >

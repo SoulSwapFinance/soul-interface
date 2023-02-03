@@ -322,7 +322,7 @@ const HideOnMobile = styled.div`
         <meta key="description" name="description" />
       </Head>
 
-      <div className="grid grid-cols ml-3 mr-3 justify-center">
+      <div className="grid grid-cols ml-3 mr-3 mt-4 justify-center">
     <HideOnMobile>
       <div className="py-1 mb-1 mt-3 ml-3 mr-3 bg-yellow" />
         <div className="py-1 mb-1 ml-3 mr-3 bg-gold" />
@@ -335,7 +335,7 @@ const HideOnMobile = styled.div`
       <div className="flex ml-4 mr-4 mb-4 gap-1 items-center justify-center">
         <Button variant="filled" color="gold" size="lg">
           <NavLink href={'/luxor/stake'}>
-            <a className="block text-lg md:text-xl text-black text-primary p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <a className="block text-lg md:text-xl text-black font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Stake </span>
             </a>
           </NavLink>
