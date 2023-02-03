@@ -499,7 +499,7 @@ const Limit = () => {
 
   return (
     <DoubleGlowShadowV2>
-          <div className={`grid p-1 mt-4 space-y-2 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}] bg-dark-1000`}>
+          <div className={`grid p-1 mt-4 space-y-2 rounded rounded-2xl bg-dark-1000`}>
             {/* <SwapLayoutCard> */}
             <MainBanner />
             <div
@@ -514,9 +514,12 @@ const Limit = () => {
               />
             </div>
             {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
-            <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} />
-            <div className="p-0 px-2 mt-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
-          {showHeader && <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>}
+            {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
+            <div className="p-0 mt-0 space-y-4 rounded bg-dark-1000" style={{ zIndex: 1 }}>
+          {showHeader && 
+            // <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
+            <div className={`mt-0`} />
+          }
 
             {showHeader &&
               <SwapDropdown
@@ -526,7 +529,10 @@ const Limit = () => {
               />
             }
 
-            {showHeader && <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>}
+            {showHeader && 
+              // <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
+              <div className={`mt-12`} />
+            }
             {/* <OrderHeader handleActiveTab={handleActiveTab} activeTab={activeTab} /> */}
             {/* <Wrapper id="limit-order-page"> */}
             <ConfirmSwapModal
