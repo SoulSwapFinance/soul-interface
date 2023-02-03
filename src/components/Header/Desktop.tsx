@@ -162,13 +162,22 @@ const Desktop: FC = () => {
   //                   : isDocs ? DOCS_ICON
   //                     : DEFAULT_ICON
 
-  const SOUL_ICON = <Image
-    // src={'/favicon.png'} 
-    src={`/title-logo.png`}
-    height={64} width={224}
-    objectFit="contain"
-  // className={'ml-4 mr-4'} 
-  />
+  const SOUL_ICON = 
+  <div className={`flex gap-2 mr-2 ml-2`}>
+    <Image
+      // src={'/favicon.png'} 
+      src={`/favicon.ico`}
+      height={72} width={72}
+      objectFit="contain"
+    />
+
+    <Image
+        // src={'/favicon.png'} 
+        src={`/SoulSwap-Finance-Banner.png`}
+        height={72} width={224}
+        objectFit="contain"
+    />
+  </div>
 
   return (
     <>

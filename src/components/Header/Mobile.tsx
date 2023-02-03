@@ -200,12 +200,22 @@ const Mobile: FC = () => {
   //                     : isNFT ? NFT_ICON
   //                       : DEFAULT_ICON
   
-  const SOUL_ICON = <Image
-    // src={'/favicon.png'} 
-    src={`/title-logo.png`}
-    height={36} width={196}
-    objectFit="contain"
-  />
+  const SOUL_ICON = 
+  <div className={`flex gap-2 mr-2 ml-2`}>
+    <Image
+      // src={'/favicon.png'} 
+      src={`/favicon.ico`}
+      height={36} width={36}
+      objectFit="contain"
+    />
+
+    <Image
+        // src={'/favicon.png'} 
+        src={`/SoulSwap-Banner.png`}
+        height={36} width={196}
+        objectFit="contain"
+    />
+  </div>
 
   return (
     <>
