@@ -7,7 +7,7 @@ import { useActiveWeb3React } from 'services/web3'
 // import { useETHBalances } from 'state/wallet/hooks'
 import React, { FC, Fragment, useCallback, useState } from 'react'
 import { NavigationItem } from './NavigationItem'
-// import { SidebarItem } from './SidebarItem'
+import { SidebarItem } from './SidebarItem'
 // import TokenStats from 'components/TokenStats'
 import Image from 'next/image'
 // import More from './More'
@@ -20,6 +20,11 @@ import { classNames } from 'functions'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { useRouter } from 'next/router'
 import DesktopBar from './DesktopBar'
+import LanguageMenu from './useLanguages'
+import Web3Network from 'components/Web3Network'
+import DoubleLeftIcon from 'components/Icons/mobile/DoubleLeftIcon'
+import DoubleRightIcon from 'components/Icons/mobile/DoubleRightIcon'
+import { ChainId } from 'sdk'
 // import SwapIcon from 'components/Icons/exchange/SwapIcon'
 // import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
 // import WalletIcon from 'components/Icons/header/WalletIcon'
@@ -48,12 +53,14 @@ const Desktop: FC = () => {
   const { account, chainId, library, connector } = useActiveWeb3React()
   // const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const [open, setOpen] = useState(false)
+  const [dropdown, setShowDropdown] = useState(false)
+
 
   const swapRoute = useCallback(() => {
     router.push(`/exchange/swap`)
   }, [])
 
-  // const WHITE = `#FFFFFF`
+  const WHITE = `#FFFFFF`
   // const chainColor = getChainColor(chainId)
 
   // const SOUL_ICON = <SoulIcon
@@ -161,32 +168,45 @@ const Desktop: FC = () => {
   // className={'hover:animate-spin'} 
   />
 
+  const LEFT_ICON = <DoubleLeftIcon
+  fillPrimary={open ? WHITE : getChainColor(chainId)}
+  fillSecondary={open ? getChainColor(chainId) : WHITE}
+  className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+/>
+
+const RIGHT_ICON = <DoubleRightIcon
+  fillPrimary={open ? WHITE : getChainColor(chainId)}
+  fillSecondary={open ? getChainColor(chainId) : WHITE}
+  className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
+/>
+
+
   return (
     <>
       <header className={`w-full flex items-center text-white bg-purple border border-4 border-ftmBlue justify-center min-h-[48px] h-[48px] px-2`}>
         <div
-          className={`flex bg-dark-900 p-2 mt-6 rounded border border-4 border-ftmBlue hover:border-purple rounded-2xl`}
-          onClick={() => swapRoute()}
+          className={`flex bg-dark-900 p-2 mt-4 rounded border border-4 border-ftmBlue hover:border-purple rounded-2xl`}
+          onClick={() => setOpen(true)}
           // onClick={() => swapRoute()}
         >
           {SOUL_ICON}
         </div>
         <nav
-          className={classNames(`flex mt-4 h-[64px] w-full mx-4`
+          className={classNames(`flex mt-6 w-full mx-4`
           )
             // `backdrop-blur-fallback w-full \
             //   h-full before:backdrop-saturate-[1.2] \
             //   before:backdrop-blur-[20px] before:z-[-1] \
             //   before:absolute before:w-full before:h-full mx-4`
           }>
-          <div className={`flex justify-center bg-dark-1000 flex-grow border border-4 border-ftmBlue rounded rounded-2xl`}>
+          {/* <div className={`flex justify-center bg-dark-1000 flex-grow border border-4 border-ftmBlue rounded rounded-2xl`}>
             <div
               className={`flex rounded rounded-2xl bg-dark-1000 gap-1 sm:gap-6 md:gap-18 justify-center items-center`}>
               {menu.map((node) => {
                 return <NavigationItem node={node} key={node.key} />
               })}
             </div>
-          </div>
+          </div> */}
         </nav>
 
         <Transition.Root
@@ -217,33 +237,38 @@ const Desktop: FC = () => {
                   leaveTo="translate-x-[-100%]"
                   unmount={false}
                 >
-
+                  <div className="max-w-sm">
+                    <div className={classNames("flex flex-col h-full py-2 overflow-x-hidden overflow-y-scroll shadow-xl", "bg-dark-1100")}>
+                      <nav className="flex-1 " aria-label="Sidebar">
+                        {bar.map((node) => {
+                          return <SidebarItem node={node} key={node.key} />
+                        })}
+                      </nav>
+                      <div className="flex items-center justify-start">
+                      <LanguageMenu />
+                      </div>
+                      {/* <div className="flex w-full justify-center inline-block rounded rounded-xl bg-dark-1000">
+                        {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+                          <TokenStats />
+                        }
+                        <div className="flex items-center justify-start">
+                          <LanguageMenu />
+                        </div>
+                      </div> */}
+                    </div>
+                  </div>
                 </Transition.Child>
               </div>
             </div>
           </Dialog>
         </Transition.Root>
-        <div>
-
-          <div className={classNames(`grid`,
-            account ?
-            `grid-cols-1 bg-ftmBlue p-1` : `flex border border`, 
-            `border-ftmBlue border-4 gap-1 rounded rounded-2xl inline-block mt-4 `)
-          }>
-            {/* WALLET CONNECT */}
-            <div
-              className={classNames(account ? `mr-4` : ``,`flex bg-dark-900 rounded rounded-2xl`)}
-            >
-              <Web3Status />
-            </div>
-            {/* TOKEN STATS */}
-            {/* <div className={account ? `w-full` : `hidden`}>
-            <TokenStats />
-            </div> */}
+          <div
+            className={`relative top-1.5 right-2 p-0.5 mt-1 bg-dark-1000 border border-[${getChainColor(chainId)}] border-4 hover:border-purple rounded rounded-2xl inline-block`}
+          >
+            <Web3Status />
           </div>
-        </div>
-        <DesktopBar />
       </header>
+      <DesktopBar />
     </>
   )
 }
