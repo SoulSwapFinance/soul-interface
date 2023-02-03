@@ -35,12 +35,6 @@ export default function Menu() {
       href: 'https://twitter.com/SoulSwapFinance',
       external: true,
     },
-    {
-      name: i18n._(t`Luxor`),
-      description: i18n._(t`Discover Luxor Money`),
-      href: 'https://soul.sh/luxor',
-      external: true,
-    },
     // {
     //   name: i18n._(t`Analytics`),
     //   description: i18n._(t`View our Data.`),
@@ -157,9 +151,9 @@ export default function Menu() {
                     )
                   )}
                 </div>
-                <div className={`grid border border-[${getChainColor(chainId)}] justify-center rounded rounded-md justify-end bg-dark-1000`}>
+                {/* <div className={`grid border border-[${getChainColor(chainId)}] justify-center rounded rounded-md justify-end bg-dark-1000`}>
                   <LanguageMenu />
-                </div>
+                </div> */}
               </div>
             </Popover.Panel>
           </Transition>

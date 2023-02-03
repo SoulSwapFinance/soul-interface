@@ -211,7 +211,8 @@ const Mobile: FC = () => {
         <div className={`flex justify-between flex-grow`}>
       <div 
         className={`absolute left-1 top-1.5 bg-dark-900 rounded border border-4 border-ftmBlue hover:border-purple rounded-2xl p-1`}
-        onClick={() => swapRoute()}
+        // onClick={() => swapRoute()}
+        onClick={() => { setOpen(true) }}
       >
       {SOUL_ICON}
       </div>
@@ -269,14 +270,17 @@ const Mobile: FC = () => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
                       </nav>
-                      <div className="flex w-full justify-center inline-block rounded rounded-xl bg-dark-1000">
+                      <div className="flex items-center justify-start">
+                      <LanguageMenu />
+                      </div>
+                      {/* <div className="flex w-full justify-center inline-block rounded rounded-xl bg-dark-1000">
                         {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                           <TokenStats />
                         }
                         <div className="flex items-center justify-start">
                           <LanguageMenu />
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </Transition.Child>

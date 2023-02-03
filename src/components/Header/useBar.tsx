@@ -13,10 +13,10 @@ import NftIcon from 'components/Icons/mobile/NftIcon'
 import ChartIcon from 'components/Icons/exchange/ChartIcon'
 
 // import WalletIcon from 'components/Icons/header/WalletIcon'
-// import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
+import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
 // import HomeIcon from 'components/Icons/mobile/HomeIcon'
-// import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
-// import SwapIcon from 'components/Icons/exchange/SwapIcon'
+import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
+import SwapIcon from 'components/Icons/exchange/SwapIcon'
 
 export interface BarItemLeaf {
   key: string
@@ -62,19 +62,19 @@ const useMenu: UseBar = () => {
     //   />,   
     // }
 
-    // let tradeMenu: BarItem = {
-    //   key: 'swap',
-    //   link: '/swap',
-    //   title: i18n._(t`Swap`),
-    //   icon: <SwapIcon
-    //     className={classNames(`w-7 h-7 rounded rounded-md`)}
-    //     // className={classNames(`w-7 h-7 rounded rounded-md`, isExchange ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}] p-0.5` : ``)}
-    //     fillPrimary={WHITE}
-    //     fillSecondary={chainColor}
-    //   />,
-    // }
+    let tradeMenu: BarItem = {
+      key: 'swap',
+      link: '/swap',
+      title: i18n._(t`Swap`),
+      icon: <SwapIcon
+        className={classNames(`w-7 h-7 rounded rounded-md`)}
+        // className={classNames(`w-7 h-7 rounded rounded-md`, isExchange ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}] p-0.5` : ``)}
+        fillPrimary={WHITE}
+        fillSecondary={chainColor}
+      />,
+    }
 
-    const mainItems: Bar = []
+    const mainItems: Bar = [tradeMenu]
 
     // Pools
     mainItems.push({
@@ -90,8 +90,24 @@ const useMenu: UseBar = () => {
       />,
     })
 
+    // Farm
+    if (featureEnabled(Feature.BONDS, chainId)) {
+      mainItems.push({
+        key: 'earn',
+        link: '/farms',
+        title: i18n._(t`Earn`),
+        icon: <SeedlingIcon
+          className={classNames(`w-7 h-7 rounded rounded-md`
+            // , isEarn ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
+          )}
+          fillPrimary={chainColor}
+          fillSecondary={WHITE}
+        />,
+      })
+    }
+
+    // Luxor
     if (featureEnabled(Feature.LUXOR, chainId)) {
-      // Bond
       mainItems.push({
         key: 'luxor',
         link: '/luxor/dashboard',
@@ -106,48 +122,32 @@ const useMenu: UseBar = () => {
       })
     }
 
-    // if (featureEnabled(Feature.BONDS, chainId)) {
-    //   // Bond
-    //   mainItems.push({
-    //     key: 'bond',
-    //     link: '/bonds',
-    //     title: i18n._(t`Bond`),
-    //     icon: <SeedlingIcon
-    //       className={classNames(`w-7 h-7 rounded rounded-md`
-    //         // , isEarn ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
-    //       )}
-    //       fillPrimary={chainColor}
-    //       fillSecondary={WHITE}
-    //     />,
-    //   })
-    // }
-
     // // Lend
-    // mainItems.push({
-    //   key: 'lend',
-    //   link: '/lend',
-    //   title: i18n._(t`Lend`),
-    //   icon: <LendSkullIcon
-    //     className={classNames(`w-7 h-7 rounded rounded-md`
-    //       // , isExplore ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
-    //     )}
-    //     fillPrimary={chainColor}
-    //     fillSecondary={WHITE}
-    //   />,
-    // })
+    mainItems.push({
+      key: 'lend',
+      link: '/lend',
+      title: i18n._(t`Lend`),
+      icon: <LendSkullIcon
+        className={classNames(`w-7 h-7 rounded rounded-md`
+          // , isExplore ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
+        )}
+        fillPrimary={chainColor}
+        fillSecondary={WHITE}
+      />,
+    })
 
     // Analytics
-    // mainItems.push({
-    //   key: 'data',
-    //   link: '/analytics',
-    //   title: i18n._(t`Chart`),
-    //   icon: <ChartIcon
-    //     className={classNames(`w-7 h-7 rounded rounded-md`
-    //     )}
-    //     fillPrimary={chainColor}
-    //     fillSecondary={WHITE}
-    //   />,
-    // })
+    mainItems.push({
+      key: 'data',
+      link: '/analytics',
+      title: i18n._(t`Data`),
+      icon: <ChartIcon
+        className={classNames(`w-7 h-7 rounded rounded-md`
+        )}
+        fillPrimary={chainColor}
+        fillSecondary={WHITE}
+      />,
+    })
     
     // Whitepaper
     mainItems.push({

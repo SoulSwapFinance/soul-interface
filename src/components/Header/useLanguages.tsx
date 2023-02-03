@@ -23,7 +23,10 @@ export default function LanguageMenu() {
                     <div>
                         <Popover.Button className={classNames(hybridStyle, ``)}>
                             <Image src={Languages[locale].flag} alt={Languages[locale].language} width={32} height={32} />
-                            <span className="flex justify-center ml-3">{Languages[locale].language}</span>
+                            <span className={
+                            classNames(
+                                // `hidden sm:flex`,
+                            `justify-center ml-3`)}>{Languages[locale].language}</span>
                         </Popover.Button>
                     </div>
                     <Transition
@@ -38,7 +41,7 @@ export default function LanguageMenu() {
                     >
                         <Popover.Panel
                             static
-                            className="absolute z-50 w-screen max-w-xs mt-1 transform -translate-x-full bottom-8 left-72"
+                            className="absolute z-50 w-screen max-w-xs mt-1 transform -translate-x-full bottom-12 left-72 ml-9 sm:ml-0 sm:bottom-8 sm:left-72"
                         >
                             <div className={classNames("overflow-hidden w-[40px] items-center justify-center rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 border", `border-[${getChainColor(chainId || 250)}]`)}>
                                 <div className="grid grid-cols-1 gap-0 py-1 bg-dark-1000">
