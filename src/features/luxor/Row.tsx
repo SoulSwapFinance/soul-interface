@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useFantomPrice, useLuxorPrice } from 'hooks/getPrices'
 import { usePairPrice } from 'hooks/usePairData'
 import { useActiveWeb3React } from 'services/web3'
-import { ChainId, LUX_DAI, LUX_NATIVE, LUX_SOR, NATIVE, SOR_NATIVE, Token } from 'sdk'
+import { ChainId, LUX_DAI, LUX_HELPER_ADDRESS, LUX_NATIVE, LUX_SOR, NATIVE, SOR_NATIVE, Token } from 'sdk'
 import AssetInput from 'components/AssetInput'
 import { useLuxorBondContract } from 'hooks/useContract'
 import useApprove from 'hooks/useApprove'
@@ -22,7 +22,7 @@ import {
 } from './Styles'
 import { Wrap, Text, ExternalLink } from '../../components/ReusableStyles'
 import { formatNumber, tryParseAmount } from 'functions'
-import { useApproveCallback } from 'hooks/useApproveCallback'
+// import { useApproveCallback } from 'hooks/useApproveCallback'
 import Modal from 'components/Modal/DefaultModal'
 import Typography from 'components/Typography'
 import ModalHeader from 'components/Modal/Header'
@@ -266,7 +266,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
         if (!account) {
         } else {
             // Checks if BondContractAddress can move tokens
-            const amount = await erc20Allowance(account, BondContractAddress)
+            const amount = await erc20Allowance(account, LUX_HELPER_ADDRESS[chainId])
             if (amount > 0) setApproved(true)
             return amount
         }
@@ -275,20 +275,21 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     /**
      * Approves BondContractAddress to move lpTokens
      */
-    const handleApprove = async () => {
-        if (!account) {
-            // alert('Connect Wallet')
-        } else {
-            try {
-                const tx = await erc20Approve(BondContractAddress)
-                await tx?.wait().then(await fetchApproval())
-            } catch (e) {
-                // alert(e.message)
-                console.log(e)
-                return
-            }
-        }
+  // approves bond to handle LP
+  const handleApprove = async () => {
+    if (!account) {
+    } else {
+      try {
+        const tx = await erc20Approve(LUX_HELPER_ADDRESS[chainId])
+        await tx?.wait().then(await fetchApproval())
+      } catch (e) {
+        // alert(e.message)
+        console.log(e)
+        return
+      }
     }
+  }
+
 
     // harvest shares
     const handleClaim = async () => {
@@ -305,7 +306,9 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     // handles deposit
     const handleDeposit = async (amount) => {
         try {
-            const tx = await BondContract?.deposit(parsedDepositValue?.quotient.toString(), 2, bondAddress)
+            const tx = await BondContract?.deposit(
+                parsedDepositValue?.quotient.toString(), 2, 
+                bondAddress)
             await tx.wait()
             await fetchPayout()
         } catch (e) {
@@ -479,16 +482,6 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                         showMax={false}
                                     />
                                     }
-                                    <Wrap padding="0" margin="0" display="flex" justifyContent="center">
-                                         <SubmitButton
-                                                primaryColor="#EDC100"
-                                                color="black"
-                                                height="2rem"
-                                                onClick={() => swapRoute()}
-                                            >
-                                                ACQUIRE {assetName}
-                                            </SubmitButton>
-                                    </Wrap>
                                     {unstakedBal > 0 &&
                                     <Wrap padding="0" margin="0" display="flex" justifyContent="center">
                                             {(approved && available) ? (
@@ -512,14 +505,24 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                             ) : (
                                                 <SubmitButton
                                                     height="2rem"
-                                                    primaryColor="#EDC100"
+                                                    primaryColor="#61F561"
                                                     color="black"
                                                     onClick={() => handleApprove()}>
-                                                    APPROVE
+                                                    APPROVE {assetName}
                                                 </SubmitButton>
                                             )}
                                     </Wrap>
                                     }
+                                    <Wrap padding="0" margin="0" display="flex" justifyContent="center">
+                                         <SubmitButton
+                                                primaryColor="#61F561"
+                                                color="black"
+                                                height="2rem"
+                                                onClick={() => swapRoute()}
+                                            >
+                                                ACQUIRE {assetName}
+                                            </SubmitButton>
+                                    </Wrap>
                                 </FunctionBox>
                             ) : (
                                 <FunctionBox>
