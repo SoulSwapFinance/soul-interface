@@ -200,24 +200,37 @@ const Mobile: FC = () => {
   //                     : isNFT ? NFT_ICON
   //                       : DEFAULT_ICON
   
-  const SOUL_ICON = <Image 
-    src={'/favicon.png'} height={32} width={32} 
-    // className={'hover:animate-spin'} 
-  />
+  const SOUL_ICON = 
+  <div className={`flex gap-2 mr-2 ml-2`}>
+    <Image
+      // src={'/favicon.png'} 
+      src={`/favicon.ico`}
+      height={36} width={36}
+      objectFit="contain"
+    />
+
+    <Image
+        // src={'/favicon.png'} 
+        src={`/SoulSwap-Banner.png`}
+        height={36} width={196}
+        objectFit="contain"
+    />
+  </div>
 
   return (
     <>
-      <header className="w-full flex items-center justify-between border border-4 border-ftmBlue min-h-[42px] h-[42px] px-2 bg-purple">
+      <header className="w-full flex items-center justify-between border border-2 border-ftmBlue min-h-[42px] h-[42px] px-2 bg-purple">
         <div className={`flex justify-between flex-grow`}>
       <div 
-        className={`absolute left-1 top-1.5 bg-dark-900 rounded border border-4 border-ftmBlue hover:border-purple rounded-2xl p-1`}
+        className={`flex bg-dark-900 mt-6 rounded border p-1.5 border-[${getChainColor(chainId)}] hover:border-2 hover:border-purple rounded-2xl`}
+        // className={`absolute left-1 top-1.5 bg-dark-900 rounded border border-2 border-ftmBlue hover:border-purple rounded-2xl p-1`}
         // onClick={() => swapRoute()}
         onClick={() => { setOpen(true) }}
       >
       {SOUL_ICON}
       </div>
           {/* <div
-            className={`hover:bg-dark-900 p-1 bg-dark-1000 border border-4 rounded rounded-2xl 
+            className={`hover:bg-dark-900 p-1 bg-dark-1000 border border-2 rounded rounded-2xl 
                 border border-[${getChainColor(chainId)}]
                 hover:border-purple
                 absolute left-2 top-2
@@ -228,7 +241,7 @@ const Mobile: FC = () => {
             // {DEFAULT_ICON}
           </div> */}
         </div>
-        {/* <div className={`absolute left-14 top-1.5 border border-4 border-[${getChainColor(chainId)}] bg-dark-1000 hover:border-purple rounded rounded-2xl justify-start bg-dark-1000`}>
+        {/* <div className={`absolute left-14 top-1.5 border border-2 border-[${getChainColor(chainId)}] bg-dark-1000 hover:border-purple rounded rounded-2xl justify-start bg-dark-1000`}>
           <TokenStats />
         </div> */}
         {/* <div
@@ -291,13 +304,13 @@ const Mobile: FC = () => {
         {account &&
         <div
           className={
-            classNames(`hover:bg-dark-900 p-1.5 rounded rounded-2xl mt-0.5
+            classNames(`hover:bg-dark-900 p-1.5 rounded rounded-2xl mt-1.5
                 border border-[${getChainColor(chainId)}]
-                border-4
+                border-2
                 bg-dark-1000
                 hover:border-purple
                 `,
-              dropdown ? `relative top-1.5 right-4` : `relative top-1.5 right-0`)}
+              dropdown ? `relative top-1.5 right-2` : `relative top-1.5 right-0`)}
           // onClick={() => { setOpen(true) }}
           onClick={() =>
             dropdown ?
@@ -310,7 +323,7 @@ const Mobile: FC = () => {
         }
         {!account &&
           <div
-            className={`relative top-1.5 right-2 p-0.5 mt-0.5 bg-dark-1000 border border-[${getChainColor(chainId)}] border-4 rounded rounded-2xl inline-block`}
+            className={`relative top-1.5 right-2 p-0.5 mt-0.5 bg-dark-1000 border border-[${getChainColor(chainId)}] border-2 hover:border-purple rounded rounded-2xl inline-block`}
           >
             <Web3Status />
           </div>
@@ -321,12 +334,12 @@ const Mobile: FC = () => {
             className={dropdown ? `grid grid-cols-2` : `hidden`}>
             {/* WALLET ICON */}
             <div
-              className={`relative top-1.5 right-2 p-0.5 bg-dark-1000 border border-[${getChainColor(chainId)}] border-4 hover:border-purple rounded rounded-2xl inline-block`}
+              className={`relative top-2 right-1 p-0.5 bg-dark-1000 border border-[${getChainColor(chainId)}] border-2 hover:border-purple rounded rounded-2xl inline-block`}
             >
               <Web3Status />
             </div>
             {/* NETWORK ICON */}
-            <div className={`relative top-1.5 right-0 p-1.5 bg-dark-1000 border border-[${getChainColor(chainId)}] border-4 hover:border-purple rounded rounded-2xl inline-block`}>
+            <div className={`relative top-2 right-0 p-1.5 bg-dark-1000 border border-[${getChainColor(chainId)}] border-2 hover:border-purple rounded rounded-2xl inline-block`}>
               <Web3Network />
             </div>
           </div>

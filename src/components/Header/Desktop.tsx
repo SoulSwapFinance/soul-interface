@@ -162,30 +162,33 @@ const Desktop: FC = () => {
   //                   : isDocs ? DOCS_ICON
   //                     : DEFAULT_ICON
 
-  const SOUL_ICON = <Image
-    src={'/favicon.png'} height={36} width={36}
-    objectFit="contain"
-  // className={'hover:animate-spin'} 
-  />
+  const SOUL_ICON = 
+  <div className={`flex gap-2 mr-2 ml-2`}>
+    <Image
+      // src={'/favicon.png'} 
+      src={`/favicon.ico`}
+      height={72} width={72}
+      objectFit="contain"
+    />
 
-  const LEFT_ICON = <DoubleLeftIcon
-  fillPrimary={open ? WHITE : getChainColor(chainId)}
-  fillSecondary={open ? getChainColor(chainId) : WHITE}
-  className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-/>
-
-const RIGHT_ICON = <DoubleRightIcon
-  fillPrimary={open ? WHITE : getChainColor(chainId)}
-  fillSecondary={open ? getChainColor(chainId) : WHITE}
-  className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-/>
-
+    <Image
+        // src={'/favicon.png'} 
+        src={`/SoulSwap-Finance-Banner.png`}
+        height={72} width={224}
+        objectFit="contain"
+    />
+  </div>
 
   return (
     <>
-      <header className={`w-full flex items-center text-white bg-purple border border-4 border-ftmBlue justify-center min-h-[48px] h-[48px] px-2`}>
+      <header className={`w-full flex items-center text-white justify-center min-h-[48px] h-[48px] px-2`}>
+        {/* <Image
+        src={`/title-logo.png`}
+        height={300}
+        width={300}
+        /> */}
         <div
-          className={`flex bg-dark-900 p-2 mt-4 rounded border border-4 border-ftmBlue hover:border-purple rounded-2xl`}
+          className={`flex bg-dark-900 mt-6 rounded border p-1.5 border-[${getChainColor(chainId)}] hover:border-2 hover:border-purple rounded-2xl`}
           onClick={() => setOpen(true)}
           // onClick={() => swapRoute()}
         >
@@ -263,7 +266,7 @@ const RIGHT_ICON = <DoubleRightIcon
           </Dialog>
         </Transition.Root>
           <div
-            className={`relative top-1.5 right-2 p-0.5 mt-1 bg-dark-1000 border border-[${getChainColor(chainId)}] border-4 hover:border-purple rounded rounded-2xl inline-block`}
+            className={`relative top-1.5 right-2 p-0.5 mt-1 bg-dark-1000 border border-[${getChainColor(chainId)}] hover:border-2 hover:border-purple rounded rounded-2xl inline-block`}
           >
             <Web3Status />
           </div>
