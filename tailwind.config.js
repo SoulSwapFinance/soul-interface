@@ -56,6 +56,7 @@ module.exports = {
         pink: '#f338c3',
         // green: '#4CBB17', // kellyGreen
         green: '#50C878', // emeraldGreen
+        neonGreen: '#4EFF4E', // bold green
         red: '#ff3838',
         // yellow: '#FFFF00',
         yellow: '#E6BD02',

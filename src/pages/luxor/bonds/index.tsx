@@ -8,12 +8,14 @@ import NavLink from 'components/NavLink'
 // import { useLuxorPrice } from 'hooks/getPrices'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
+import { LuxorBanner, MainBanner } from 'components/Banner'
 
 const Luxor = () => {
   // const luxorPrice = useLuxorPrice()
 
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
+      <LuxorBanner />
       <Container id="luxor-page">
         <Head>
           <title>Luxor | Soul</title>

@@ -30,6 +30,7 @@ import LuxorGlowShadow from 'components/LuxorGlowShadow'
 import { useTokenInfo, usePairInfo, useSorInfo, useLuxorInfo, useUserTokenInfo } from 'hooks/useAPI'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
+import { LuxorBanner } from 'components/Banner'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
@@ -321,7 +322,7 @@ const HideOnMobile = styled.div`
         <title>Dashboard | Luxor</title>
         <meta key="description" name="description" />
       </Head>
-
+      <LuxorBanner />
       <div className="grid grid-cols ml-3 mr-3 mt-4 justify-center">
     <HideOnMobile>
       <div className="py-1 mb-1 mt-3 ml-3 mr-3 bg-yellow" />

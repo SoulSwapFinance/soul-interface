@@ -81,6 +81,12 @@ Green.args = {
   label: 'Green Chip',
 }
 
+export const NeonGreen = Template.bind({})
+NeonGreen.args = {
+  color: 'neonGreen',
+  label: 'Green Chip',
+}
+
 export const Blue = Template.bind({})
 Blue.args = {
   color: 'blue',
