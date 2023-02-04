@@ -56,7 +56,7 @@ export default function PairTools({ pair }) {
             Sync APR
           </Button>
           {/* QUESTION HELPER [1] */}
-          <div className={`absolute right-0 bottom-24 lg:top-60 lg:flex sm:bottom-24 mb-4 sm:mb-2 lg:mb-0 w-[1/4] justify-end`}>
+          <div className={`absolute right-0 sm:right-4 xl:right-2 xl:top-52 bottom-24 lg:top-56 lg:flex sm:bottom-24 mb-4 sm:mb-8 lg:mt-4 w-[1/4] justify-end`}>
             <QuestionHelper text={'Sync Supply APR'} />
           </div>
 
@@ -78,7 +78,7 @@ export default function PairTools({ pair }) {
             Update Prices
           </Button>
           {/* QUESTION HELPER [2] */}
-          <div className={`absolute right-0 bottom-12 lg:top-60 lg:flex sm:bottom-24 mb-4 sm:mb-2 lg:mb-0 w-[1/4] justify-end`}>
+          <div className={`absolute right-0 sm:right-4 xl:right-2 xl:top-64 xl:mt-6 bottom-12 lg:top-72 lg:flex sm:bottom-18 mb-4 sm:mb-6 lg:mt-4 w-[1/4] justify-end`}>
             <QuestionHelper
               text={
                 <div>
