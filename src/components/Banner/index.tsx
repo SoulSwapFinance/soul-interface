@@ -141,7 +141,7 @@ export const LuxorBanner: FC = () => (
       <div className="text-center">
         <p className="font-medium text-center text-white">
         <NavLink href="/luxor/stake">
-            <Button variant="filled" color="neonGreen" size="sm">
+            <Button variant="filled" color="gold" size="sm">
               <span className="justify-center font-bold text-black">
                 {`Boosted Staking APY ↗`}
                 {/* Please vote in our LIVE proposals regarding withdrawal fees and governance. <span aria-hidden="true">&rarr;</span> */}

@@ -402,7 +402,7 @@ export default function TokenStatsModal(): JSX.Element | null {
           formatCurrency(
             Number(seancePrice), 3)
         ) */}
-        {/
+
        <div className="flex mt-3" />
         <NavLink href={'/dashboard'}>
           <Button
