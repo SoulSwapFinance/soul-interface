@@ -214,7 +214,7 @@ export const MainBanner: FC = () => (
             className="font-bold text-white text-lg"
           >
             <Button variant="filled" color="purple" size="sm">
-              <span className="justify-center font-bold text-black">
+              <span className="justify-center font-bold text-white">
                 {' '}
                 Discounted Bonds (Luxor) ↗
               </span>
