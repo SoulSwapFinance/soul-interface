@@ -213,7 +213,7 @@ export const MainBanner: FC = () => (
             href={`/luxor/bonds`}
             className="font-bold text-white text-lg"
           >
-            <Button variant="filled" color="gold" size="sm">
+            <Button variant="filled" color="purple" size="sm">
               <span className="justify-center font-bold text-black">
                 {' '}
                 Discounted Bonds (Luxor) ↗
