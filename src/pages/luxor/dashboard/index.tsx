@@ -464,13 +464,13 @@ const HideOnMobile = styled.div`
           </div>
             <div className="md:hidden h-px my-4 mb-3 bg-dark-1000" />
             <div>
-              <div className="md:hidden grid grid-cols-2 space-between-3">
+              {/* <div className="md:hidden grid grid-cols-2 space-between-3">
                 <Typography
                   className="flex gap-1 text-xl justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
                   Luxor Price
                 </Typography>
-                <Typography
+                {/* <Typography
                   className="md:hidden flex gap-1 text-lg justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
                   Backing Price
@@ -488,11 +488,16 @@ const HideOnMobile = styled.div`
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
                   {formatNumber(luxorFloorPrice?.toFixed(2), true, true)}
                 </Typography>
-              </div>
+              </div> */}
             </div>
           <div>
           <div className="md:hidden h-px my-4 bg-dark-1000" />
-            <div className="md:hidden grid grid-cols-2 space-between-3">
+            <div className="md:hidden grid grid-cols-3 space-between-3">
+            <Typography 
+              className="flex gap-1 text-lg justify-center items-center mb-3"
+              lineHeight={48} fontFamily={'medium'}>
+                Market Price
+            </Typography>
             <Typography 
               className="flex gap-1 text-lg justify-center items-center mb-3"
               lineHeight={48} fontFamily={'medium'}>
@@ -504,7 +509,12 @@ const HideOnMobile = styled.div`
                Emissions Rate
             </Typography>
             </div>
-            <div className="md:hidden grid grid-cols-2 space-between-3">
+            <div className="md:hidden grid grid-cols-3 space-between-3">
+            <Typography 
+            className={'flex justify-center items-baseline'}
+            variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                {formatNumber(luxorPrice?.toFixed(2), true, true)}
+            </Typography>
             <Typography 
             className={'flex justify-center items-baseline'}
             variant={'h1'} lineHeight={48} fontFamily={'medium'}>
@@ -521,17 +531,17 @@ const HideOnMobile = styled.div`
 
             <div className="h-px my-4 bg-dark-1000" />
             <div>
-              <div className="hidden md:grid md:grid-cols-4 space-between-3">
+              <div className="hidden md:grid md:grid-cols-3 space-between-3">
                 <Typography
                   className="flex gap-1 text-xl justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
                   Market Price
                 </Typography>
-                <Typography
+                {/* <Typography
                   className="flex gap-1 text-xl justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
                   Backing Price
-                </Typography>
+                </Typography> */}
                 <Typography
                   className="flex gap-1 text-lg justify-center items-center mb-3"
                   lineHeight={48} fontFamily={'medium'}>
@@ -545,17 +555,17 @@ const HideOnMobile = styled.div`
               </div>
             </div>
             <div>
-              <div className="hidden md:grid md:grid-cols-4 space-between-3">
+              <div className="hidden md:grid md:grid-cols-3 space-between-3">
               <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
                   {formatNumber(luxorPrice?.toFixed(2), true, true)}
                 </Typography>
-                <Typography
+                {/* <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
                   {formatNumber(luxorFloorPrice?.toFixed(2), true, true)}
-                </Typography>
+                </Typography> */}
                 <Typography
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
