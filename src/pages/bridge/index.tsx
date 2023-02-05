@@ -651,7 +651,7 @@ return (
                         ? i18n._(t`Approving`)
                         : isApproveCompleted
                           ? i18n._(t`Approve Successful`)
-                          : i18n._(t`Approve ${selectedToken && selectedToken?.symbol}`)}
+                          : i18n._(t`Approve ${selectedToken?.symbol}`)}
                     </ButtonComponent>
 
                     {isApproved && (
@@ -666,7 +666,7 @@ return (
                       >
                         {isBridgeTxPending
                           ? i18n._(t`Broadcasting Transaction`)
-                          : i18n._(t`Bridge ${selectedToken && selectedToken?.symbol}`)}
+                          : i18n._(t`Bridge ${selectedToken?.symbol}`)}
                       </ButtonComponent>
                     )}
 
