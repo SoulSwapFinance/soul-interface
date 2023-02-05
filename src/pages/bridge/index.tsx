@@ -21,7 +21,7 @@ import { AddressZero } from "@ethersproject/constants"
 import {
   formatSimpleValue,
   unitToWei,
-  weiToUnit,
+  // weiToUnit,
 } from "../../utils/conversion"
 import { formatAddress, loadERC20Contract } from "../../utils/wallet"
 import useBridge from "../../hooks/useBridge"
@@ -45,8 +45,8 @@ import Typography from "components/Typography"
 // import Web3Network from "components/Web3Network"
 import { getChainColor, getChainColorCode } from "constants/chains"
 import SwapDropdown from "features/swap/SwapDropdown"
-import { SwapLayoutCard } from "layouts/SwapLayout";
-import { classNames } from "functions/styling";
+// import { SwapLayoutCard } from "layouts/SwapLayout";
+// import { classNames } from "functions/styling";
 import { t } from "@lingui/macro";
 import { i18n } from "@lingui/core";
 import { MainBanner } from "components/Banner";
@@ -54,10 +54,12 @@ import BRIDGE_BANNER from 'assets/branding/bridge-banner.png'
 import BridgeTokenList from "features/bridge/BridgeTokenList";
 import { ContentBox, OverlayButton, Typo1, Typo2 } from "components";
 import TokenStats from "components/TokenStats";
+import { ArrowDownIcon } from "@heroicons/react/24/solid";
+import { classNames } from "functions/styling";
 
 const ChainSelection: React.FC<any> = ({
   setTokenList,
-  connectToChain,
+  // connectToChain,
   bridgeToChain,
 }) => {
   const { chainId, account, connector, deactivate, library } = useActiveWeb3React()
@@ -164,13 +166,17 @@ const ChainSelection: React.FC<any> = ({
   }
 
   return (
-    <Column>
-      {/* // TODO: RE-ENABLE // */}
-      <div className="grid grid-cols-1">
-      <div className={`border my-2 border-[${getChainColor(toChain)}]`} />
-        <div className={`flex text-2xl justify-center font-bold text-high-emphesis`}>Destination</div>
-         <div className={`border my-2 border-[${getChainColor(toChain)}]`} />
-       <div className="w-full justify-center mt-3 mb-3">
+    // <Column>
+      <div className="grid grid-cols-2 gap-2 justify-center text-center sm:mx-2 lg:mx-4">
+       <div className={`w-full justify-center mt-3 mb-3 font-bold text-${getChainColorCode(chainId)} border border-[${getChainColor(chainId)}] rounded rounded-2xl bg-dark-1000`}>
+        {`Current Chain`}
+          <NetworkSelector
+            selected={chainId}
+          />
+        </div>
+
+          <div className={`w-full justify-center mt-3 mb-3 font-bold text-${getChainColorCode(toChain)} border border-[${getChainColor(toChain)}] rounded rounded-2xl bg-dark-1000`}>
+          {`Destination Chain`}
           <NetworkSelector
             chains={
               supportedChainsForBridge.filter(
@@ -182,8 +188,6 @@ const ChainSelection: React.FC<any> = ({
           />
         </div>
       </div>
-      {/* </div> */}
-    </Column >
   )
 }
 
@@ -194,91 +198,31 @@ const NetworkSelector: React.FC<any> = ({ chains, selected, selectChain }) => {
   )
 
   return (
-    <div className={`flex w-full p-1 border border-2 border-[${getChainColor(selected)}] rounded rounded-2xl bg-dark-900`}>
-      <OverlayButton
-        style={{ padding: 0 }}
-        className={`flex w-full justify-center text-center `}
-        disabled={!chains || !chains.length}
-        onClick={() => chains && chains.length && onPresentSelectNetworkModal()}
-      >
+    <OverlayButton
+      style={{ padding: 0 }}
+      className={`flex w-full justify-center text-center `}
+      disabled={!chains || !chains.length}
+      onClick={() => chains && chains.length && onPresentSelectNetworkModal()}
+    >
+      <div className={`flex w-full p-1 justify-center border border-2 border-[${getChainColor(selected)}] rounded rounded-2xl hover:bg-dark-1000 bg-dark-900`}>
             {selected ? (
-              <div className={`grid grid-cols-2 w-[2/3] justify-center p-1`}>
+              <div className={`flex flex-cols-1 justify-center`}>
                 <Image
                   alt={`${chainToNetworkInfoMap[selected].name} network icon`}
-                  height={30}
-                  width={30}
+                  height={42}
+                  width={42}
                   src={chainToNetworkInfoMap[selected].image}
                 />
-                <div className={`flex text-2xl p-1 font-bold justify-center`}>{chainToNetworkInfoMap[selected].name}</div>
+                <div className={`flex text-md sm:text-2xl p-2 sm:m-1 font-bold justify-center`}>{chainToNetworkInfoMap[selected].name}</div>
               </div>
             ) : chains && chains.length ? (
               <Typo1>{i18n._(t`Select Network`)}</Typo1>
             ) : (
               <Loader />
             )}
-      </OverlayButton>
-    </div>
+      </div>
+    </OverlayButton>  
   )
-}
-
-export const BridgeTokenSelectModal: React.FC<any> = ({
-  tokens,
-  selectToken,
-  onDismiss,
-}) => {
-  return (
-    <Modal
-    style={{ padding: "2px 0.5px", maxHeight: "80vh" }}
-    onDismiss={onDismiss}
-  >
-    {/* <ModalTitle text="Select Token" /> */}
-    <div />
-    <ModalContent style={{ padding: "8px 0px" }}>
-      <Column>
-        <Scrollbar style={{ height: "60vh" }}>
-          <Column>
-            {tokens &&
-              tokens.map((token: any) => {
-                return (
-                  <StyledOverlayButton
-                    key={"token-select-" + token.name}
-                    onClick={() => {
-                      selectToken(token)
-                      onDismiss()
-                    }}
-                    style={{ padding: ".5rem" }}
-                  >
-                    <Row
-                      style={{
-                        width: "100%",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <Row style={{ gap: "1rem", alignItems: "center" }}>
-                        <Image
-                          alt="token logo"
-                          height="30px"
-                          width="30px"
-                          src={token.logoUrl}
-                        />
-                        <Typo2 style={{ fontWeight: "bold" }}>
-                          {token.symbol}
-                        </Typo2>
-                      </Row>
-                      <BalancePromiseToUnit
-                        promise={token.balance}
-                        decimals={token.Decimals}
-                      />
-                    </Row>
-                  </StyledOverlayButton>
-                )
-              })}
-          </Column>
-        </Scrollbar>
-      </Column>
-    </ModalContent>
-  </Modal>
-)
 }
 
 const BridgeNetworkSelectModal: React.FC<any> = ({
@@ -295,7 +239,6 @@ return (
     <div />
     <ModalContent style={{ padding: "8px 0px" }}>
       <Column>
-
         <Scrollbar style={{ height: "60vh" }}>
           <Column>
             {chains &&
@@ -335,25 +278,6 @@ return (
       </Column>
     </ModalContent>
   </Modal>
-)
-}
-
-export const BalancePromiseToUnit: React.FC<any> = ({ promise, decimals }) => {
-const [value, setValue] = useState(null)
-useEffect(() => {
-  promise.then((resolvedValue: any) => {
-    if (resolvedValue) {
-      setValue(resolvedValue)
-    }
-  })
-}, [promise])
-
-return (
-  <Row style={{ alignItems: "center" }}>
-    <Typo2 style={{ width: "12rem", textAlign: "end", paddingRight: "0rem" }}>
-      {value ? weiToUnit(value, decimals) : "..."}
-    </Typo2>
-  </Row>
 )
 }
 
