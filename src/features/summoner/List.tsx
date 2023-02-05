@@ -88,11 +88,9 @@ export const FarmList = () => {
         <Typography className="text-2xl bg-dark-1000 mb-2 rounded rounded-2xl m-1 p-4 border border-purple font-bold text-center">SoulSwap Pools</Typography>
             <Active />
           {chainId == ChainId.AVALANCHE ? avaxList : ftmList}
-          { [ChainId.FANTOM].includes(chainId) &&
           <Typography className="text-2xl bg-dark-1000 mb-2 rounded rounded-2xl m-1 p-4 border border-avaxRed font-bold text-center">Retired Pools</Typography>
           <Underworld />
           {chainId == ChainId.AVALANCHE ? inactiveAvaxList : inactiveFtmList}
-          }
       </div>
   )
 }
