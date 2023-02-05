@@ -230,6 +230,7 @@ export default function Dashboard() {
               <Image src={DATA_BANNER}
                 height={180}
                 width={1080}
+                alt={'economy data page banner'}
               />
             </div>
           <div className={`flex justify-center m-1 p-1`}>

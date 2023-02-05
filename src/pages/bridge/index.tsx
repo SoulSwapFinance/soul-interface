@@ -476,6 +476,7 @@ return (
             <Image src={BRIDGE_BANNER}
               height={180}
               width={1080}
+              alt={'bridge banner'}
             />
           </div>
         <div className={`grid`}>
