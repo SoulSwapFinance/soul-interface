@@ -28,7 +28,7 @@ import { useTokens } from 'hooks/Tokens'
 import { useCoffinStrategies, useClones } from 'services/graph'
 import { useActiveWeb3React, useQueryFilter } from 'services/web3'
 import { useSingleCallResult } from 'state/multicall/hooks'
-import { useUnderworldPairInfo } from 'hooks/useAPI'
+// import { useUnderworldPairInfo } from 'hooks/useAPI'
 import { useMemo } from 'react'
 import { DAI } from 'constants/tokens'
 import { ZERO_ADDRESS } from 'constants/index'
@@ -44,7 +44,7 @@ const BLACKLISTED_ORACLES = [
   '0x6b7D436583e5fE0874B7310b74D29A13af816860',
 ]
 
-const BLACKLISTED_PAIRS = ['0xF71e398B5CBb473a3378Bf4335256295A8eD713d']
+// const BLACKLISTED_PAIRS = ['0xF71e398B5CBb473a3378Bf4335256295A8eD713d']
 
 export function useUnderworldTokens(): { [address: string]: Token } {
   const { chainId } = useActiveWeb3React()

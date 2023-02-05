@@ -20,6 +20,8 @@ import Image from 'next/image'
 import FARM_BANNER from 'assets/branding/farm-banner.png'
 import NavLink from 'components/NavLink'
 import TokenStats from 'components/TokenStats'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums/Feature'
 
 // import ExternalLink from 'components/ExternalLink'
 // import { SubmitButton } from 'features/bond/Styles'
@@ -48,8 +50,8 @@ const Summoner = () => {
     return previousValue + (currentValue.pendingSoul / 1e18) * soulPrice
   }, 0)
 
-  const farmingPools = Object.keys(POOLS[chainId]).map((key) => {
-    return { ...POOLS[chainId][key], lpToken: key }
+  const farmingPools = Object?.keys(POOLS[chainId == ChainId.AVALANCHE ? ChainId.AVALANCHE : ChainId.FANTOM]).map((key) => {
+    return { ...POOLS[chainId == ChainId.AVALANCHE ? ChainId.AVALANCHE : ChainId.FANTOM][key], lpToken: key }
   })
 
   // const pendingRewards = (pendingValue / soulPrice).toFixed(0)
@@ -175,3 +177,5 @@ const Summoner = () => {
 }
 
 export default Summoner
+
+Summoner.Guard = NetworkGuard(Feature.LIQUIDITY_MINING)

@@ -397,23 +397,25 @@ const Swap = () => {
         tokens={importTokensNotInDefault}
         onConfirm={handleConfirmTokenWarning}
       />
-      {![ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+      {![ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.BSC, ChainId.FANTOM].includes(chainId) &&
         <div className="flex flex-col gap-3 mt-12 justify-center">
-          <SwapHeader inputCurrency={currencyA} outputCurrency={currencyB} />
-          <Button
-            variant="filled"
-            color={chainId == ChainId.AVALANCHE ? "avaxGradient" : "gradientBluePurple"}
+          <SwapDropdown inputCurrency={currencyA} outputCurrency={currencyB} />
+            <NavLink href={"/aggregator"}>
+            <Button
+            variant="outlined"
+            color={`purple`}
             size="lg"
-          >
-            <NavLink href={"/cross"}>
-              <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                <span>{'Swap Crosschain'}</span>
-              </a>
+          >              
+          <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <span>{'SoulSwap Exchange'}</span>
+            <br />
+            <span>{'Click Here to use our Meta-Aggregator'}</span>
+          </a>
+              </Button>
             </NavLink>
-          </Button>
         </div>}
 
-      {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+      {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.BSC, ChainId.FANTOM].includes(chainId) &&
         <DoubleGlowShadowV2>
           <div className={`grid p-1 mt-4 space-y-2 rounded rounded-2xl bg-dark-1000`}>
             {/* <SwapLayoutCard> */}

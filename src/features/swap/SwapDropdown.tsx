@@ -77,12 +77,13 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const poolStyle = isPool ? activeStyle : style
   const ecoStyle = isAggregator ? activeStyle : style
   const bridgeStyle = isBridge ? activeStyle : style
-  const chartStyle = isExchangeAnalytics ? activeStyle : style
+  // const chartStyle = isExchangeAnalytics ? activeStyle : style
   const crossStyle = isCross ? activeStyle : style
 
   return (
     <div className="flex items-center justify-between gap-2">
       <div className="flex gap-2 mx-1">
+      {/* {featureEnabled(Feature.LIQUIDITY, chainId) && */}
           <NavLink
             className={classNames(
               swapStyle
@@ -108,6 +109,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               />
         </div>
           </NavLink>
+      {/* } */}
 
         {featureEnabled(Feature.LIQUIDITY, chainId) &&
           <NavLink
