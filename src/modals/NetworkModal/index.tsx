@@ -137,11 +137,11 @@ export const SUPPORTED_NETWORKS: Record<
           {[
             ChainId.ETHEREUM,
             // ChainId.ARBITRUM,
-            ChainId.MATIC,
+            // ChainId.MATIC,
             ChainId.FANTOM,
             // ChainId.MOONRIVER,
             ChainId.AVALANCHE,
-            // ChainId.BSC,
+            ChainId.BSC,
             // ChainId.TELOS,
             // ChainId.OKEX,
             // ChainId.HECO,

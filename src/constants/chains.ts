@@ -76,6 +76,11 @@ export function getChainInfo(chainId: number, option: string) {
       : option == 'NAME' ? output = 'Polygon'
         : option == 'SYMBOL' ? output = 'MATIC'
           : output = ''
+    } else if (chainId == ChainId.MOONRIVER) {
+    option == 'NETWORK' ? output = 'Moonriver'
+      : option == 'NAME' ? output = 'Moonriver'
+        : option == 'SYMBOL' ? output = 'MOVR'
+          : output = ''
     }
 
   return output

@@ -4,9 +4,11 @@ const Ethereum = '/images/networks/ethereum.svg'
 const Telos = '/images/networks/telos.png'
 const Avalanche = '/images/networks/avalanche.svg'
 const Polygon = '/images/networks/polygon.svg'
-const Arbitrum = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/arbitrum/Arbitrum.png'
-// const Binance = '/images/networks/binance.svg'
-const Binance = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/network/bsc.svg'
+const Arbitrum = `/images/networks/arbitrum.svg`
+const Binance = '/images/networks/binance.svg'
+// const Binance = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/network/bsc.svg'
+// const Binance = 'https://cryptologos.cc/logos/bnb-bnb-logo.svg'
+
 const Fantom = '/images/networks/fantom-white.svg'
 const Moonriver = '/images/networks/moonriver.svg'
 

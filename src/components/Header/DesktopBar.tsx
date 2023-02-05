@@ -176,6 +176,7 @@ const DesktopBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                                 className={'w-7 h-7'}
                             />
                         </div>
+                        {featureEnabled(Feature.LIQUIDITY_MINING, chainId) &&
                         <div
                             className={classNames(
                                 `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
@@ -185,9 +186,11 @@ const DesktopBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                             <SeedlingIcon
                                 fillPrimary={isEarn ? `${getChainColor(chainId)}` : `#FFFFFF`}
                                 fillSecondary={isEarn ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                className={'w-7 h-7'}
+                                className={`w-7 h-7`}
                             />
                         </div>
+                        }
+                        {featureEnabled(Feature.UNDERWORLD, chainId) &&
                         <div
                             className={classNames(
                                 `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
@@ -200,6 +203,7 @@ const DesktopBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                                 className={'w-7 h-7'}
                             />
                         </div>
+                        }
                         {featureEnabled(Feature.NFT, chainId) &&
                             <div
                                 className={classNames(
