@@ -100,6 +100,7 @@ export const BondList = () => {
               <Image src={MINT_BANNER}
                 height={180}
                 width={1080}
+                alt={"mint aka bond page banner"}
               />
             </div>
           <div className={`flex justify-center m-1 p-1`}>
