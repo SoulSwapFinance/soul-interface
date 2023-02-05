@@ -21,11 +21,11 @@ const ModalHeader: FC<ModalHeaderProps> = ({ header, subheader, onBack, onClose 
         </Typography>
         {subheader && <Typography variant="sm">{subheader}</Typography>}
       </div>
-      {onClose && (
+      {/* {onClose && (
         <div className="flex items-center justify-center w-6 h-6 cursor-pointer" onClick={onClose}>
           <XCircleIcon width={24} height={24} className="text-high-emphesis" />
         </div>
-      )}
+      )} */}
     </div>
   )
 }
