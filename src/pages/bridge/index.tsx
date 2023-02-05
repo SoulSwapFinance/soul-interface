@@ -547,7 +547,7 @@ return (
                       inputError={inputError}
                       isBridgeTxCompleted={isBridgeTxCompleted} />
                     <div className="h-px my-6 bg-dark-1000"></div>
-                    <div className={`flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-${getChainColorCode(chainId)} w-full space-y-1`}>
+                    <div className={`flex flex-col bg-dark-1000 p-3 border border-4 rounded rounded-2xl border-${getChainColorCode(chainId)} w-full space-y-1 sm:p-2`}>
                       {/* <div className="flex justify-between">
                         <Typography className="text-white" fontFamily={'medium'}>
                           {i18n._(t`Bridgeable`)}
@@ -563,12 +563,12 @@ return (
                         </Typography>
                       </div> */}
                       <div>
-                      <div className={`border border-green mt-1 mb-1`} />
-                        <Typography className={`text-lg font-bold text-center`}>
+                      {/* <div className={`border border-green mt-1 mb-1`} /> */}
+                        <Typography className={`text-lg font-bold text-center border border-[${getChainColor(toChain)}] p-2 rounded rounded-xl`}>
                           {`Bridgeable Range`}
                             
                         </Typography>
-                        <div className={`border border-green mt-1 mb-1`} />
+                        {/* <div className={`border border-green mt-1 mb-1`} /> */}
                       </div>
 
                       <div className="flex justify-between">
@@ -594,8 +594,7 @@ return (
                       </div>
 
                       <div>
-                      <div className={`border border-avaxRed mt-1 mb-1`} />
-                        <Typography className={`text-lg font-bold text-center`}>
+                      <Typography className={`text-lg font-bold text-center border border-avaxRed p-2 rounded rounded-xl`}>
                           {'~'}
                           {selectedToken
                             ? `${formatSimpleValue(
@@ -605,12 +604,11 @@ return (
                               : "Loading Fee..." }
                             
                         </Typography>
-                        <div className={`border border-avaxRed mt-1 mb-1`} />
                       </div>
                       
                       <div className="flex justify-between">
                         <Typography className="text-white" fontFamily={'medium'}>
-                          {i18n._(t`Min. Fee`)}
+                          {i18n._(t`Minimum`)}
                         </Typography>
                         <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                           {selectedToken
@@ -623,7 +621,7 @@ return (
                    
                       <div className="flex justify-between">
                         <Typography className="text-white" fontFamily={'medium'}>
-                          {i18n._(t`Max. Fee`)}
+                          {i18n._(t`Maximum`)}
                         </Typography>
                         <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                           {selectedToken
@@ -651,7 +649,7 @@ return (
                         ? i18n._(t`Approving`)
                         : isApproveCompleted
                           ? i18n._(t`Approve Successful`)
-                          : i18n._(t`Approve Token`)}
+                          : i18n._(t`Approve ${selectedToken.symbol}`)}
                     </ButtonComponent>
 
                     {isApproved && (
@@ -666,7 +664,7 @@ return (
                       >
                         {isBridgeTxPending
                           ? i18n._(t`Broadcasting Transaction`)
-                          : i18n._(t`Bridge Token`)}
+                          : i18n._(t`Bridge ${selectedToken.symbol}`)}
                       </ButtonComponent>
                     )}
 
