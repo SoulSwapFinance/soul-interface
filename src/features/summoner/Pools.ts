@@ -120,6 +120,54 @@ export const AvalanchePools = [
     token0Address: WBTC_ADDRESS[ChainId.AVALANCHE],
     token1Address: USDC_ADDRESS[ChainId.AVALANCHE],
   },
+    {
+    // LENDING
+    pid: 8,
+    type: 'lend',
+    decimals: 18,
+    token0Symbol: 'AVAX', // EXEMPT //
+    token1Symbol: 'USDC',
+    lpSymbol: 'USDC-AVAX', // EXEMPT //
+    lpAddress: '0xa34fe600E6349d67fcd6989A9c4007b5ee5A494B',
+    token0Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+    token1Address: USDC_ADDRESS[ChainId.AVALANCHE],
+  },
+  {
+    // LENDING
+    pid: 9,
+    type: 'lend',
+    decimals: 6,
+    token0Symbol: 'USDC', // EXEMPT //
+    token1Symbol: 'AVAX',
+    lpSymbol: 'AVAX-USDC', // EXEMPT //
+    lpAddress: '0x7ef603f01Ffa9D21c9ee8159AF4adFbE78DC925B',
+    token0Address: USDC_ADDRESS[ChainId.AVALANCHE],
+    token1Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+  },
+  {
+    // LENDING
+    pid: 10,
+    type: 'lend',
+    decimals: 18,
+    token0Symbol: 'ETH', // EXEMPT //
+    token1Symbol: 'USDC',
+    lpSymbol: 'USDC-ETH', // EXEMPT //
+    lpAddress: '0xD981D3e065bA8E89Ac56DB994D86F22dA409cf20',
+    token0Address: WETH_ADDRESS[ChainId.AVALANCHE],
+    token1Address: USDC_ADDRESS[ChainId.AVALANCHE],
+  },
+  {
+    // LENDING
+    pid: 11,
+    type: 'lend',
+    decimals: 8,
+    token0Symbol: 'BTC', // EXEMPT //
+    token1Symbol: 'USDC',
+    lpSymbol: 'USDC-BTC', // EXEMPT //
+    lpAddress: '0x142c9eE960bB6AD872f22712C4b129783999c35E',
+    token0Address: WBTC_ADDRESS[ChainId.AVALANCHE],
+    token1Address: USDC_ADDRESS[ChainId.AVALANCHE],
+  },
 ]
 
 export const InactiveFantomPools = [
