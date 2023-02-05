@@ -1,15 +1,15 @@
 import React, { useMemo, useRef, useState } from 'react'
 import Container from 'components/Container'
 import Typography from 'components/Typography'
-import { useTokenInfo, useTotalSupply, useUnderworldPairInfo, } from 'hooks/useAPI'
+// import { useTokenInfo, useTotalSupply, useUnderworldPairInfo, } from 'hooks/useAPI'
 import { useUnderworldPairAPI } from 'hooks/useUnderworldAPI'
 import { useWeb3React } from '@web3-react/core'
 import { formatNumber, formatPercent } from 'functions/format'
-import { ChainId, SOUL_ADDRESS, UNDERWORLD_PAIRS } from 'sdk'
+import { ACTIVE_UNDERWORLD_PAIRS, ChainId, SOUL_ADDRESS, UNDERWORLD_PAIRS } from 'sdk'
 // import { getPrice } from 'hooks/useParaswap'
-import styled from 'styled-components'
-import { Button } from 'components/Button'
-import { getChainColorCode } from 'constants/chains'
+// import styled from 'styled-components'
+// import { Button } from 'components/Button'
+// import { getChainColorCode } from 'constants/chains'
 // import { useTokenBalances } from 'services/api/hooks'
 // import { ChainId } from 'sdk'
 // import capitalize from 'lodash/capitalize'
@@ -23,12 +23,12 @@ import { Columns, createData } from 'features/data/Columns'
 export default function Data() {
   const { chainId, account } = useWeb3React()
   // const { tokenInfo } = useTokenInfo(SOUL_ADDRESS[ChainId.FANTOM])
-  const addresses = UNDERWORLD_PAIRS[chainId || 250]
-  const name = (i) => useUnderworldPairAPI(addresses[i])[0]
-  const symbol = (i) => useUnderworldPairAPI(addresses[i])[1]
-  const decimals = (i) => useUnderworldPairAPI(addresses[i])[2]
+  const addresses = ACTIVE_UNDERWORLD_PAIRS[chainId || 250]
+  // const name = (i) => useUnderworldPairAPI(addresses[i])[0]
+  // const symbol = (i) => useUnderworldPairAPI(addresses[i])[1]
+  // const decimals = (i) => useUnderworldPairAPI(addresses[i])[2]
   const asset = (i) => useUnderworldPairAPI(addresses[i])[3]
-  const collateral = (i) => useUnderworldPairAPI(addresses[i])[4]
+  // const collateral = (i) => useUnderworldPairAPI(addresses[i])[4]
 
   const price = (i) => Number(useUnderworldPairAPI(addresses[i])[5] / 1E18)
   const utilization = (i) => formatPercent(useUnderworldPairAPI(addresses[i])[6] * 100 / 1E18)

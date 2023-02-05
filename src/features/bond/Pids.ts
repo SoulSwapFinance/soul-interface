@@ -94,18 +94,18 @@ export const FantomPools = [
     token0Address: SOUL_ADDRESS[ChainId.FANTOM],
     token1Address:  USDC_ADDRESS[ChainId.FANTOM],
   },
-  {
-    // 600
-    pid: 2,
-    type: 'swap',
-    // summonerPid: 10,
-    token0Symbol: 'WFTM',
-    token1Symbol: 'SEANCE',
-    lpSymbol: 'FTM-SEANCE',
-    lpAddress: '0x8542bEAC34282aFe5Bb6951Eb6DCE0B3783b7faB',
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: SEANCE_ADDRESS[ChainId.FANTOM],
-  },
+  // {
+  //   // 600
+  //   pid: 2,
+  //   type: 'swap',
+  //   // summonerPid: 10,
+  //   token0Symbol: 'WFTM',
+  //   token1Symbol: 'SEANCE',
+  //   lpSymbol: 'FTM-SEANCE',
+  //   lpAddress: '0x8542bEAC34282aFe5Bb6951Eb6DCE0B3783b7faB',
+  //   token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+  //   token1Address: SEANCE_ADDRESS[ChainId.FANTOM],
+  // },
   {
     // 600
     pid: 3,

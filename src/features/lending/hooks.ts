@@ -2,7 +2,7 @@ import { defaultAbiCoder } from '@ethersproject/abi'
 import { getAddress } from '@ethersproject/address'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Zero } from '@ethersproject/constants'
-import { ChainId, UNDERWORLD_ADDRESS, NATIVE, Token, USD, WNATIVE_ADDRESS, USDC, JSBI, ZERO, UNDERWORLD_PAIRS } from 'sdk'
+import { ChainId, UNDERWORLD_ADDRESS, NATIVE, Token, USD, WNATIVE_ADDRESS, USDC, JSBI, ZERO, ACTIVE_UNDERWORLD_PAIRS } from 'sdk'
 import { ChainlinkPriceFeedEntry, CHAINLINK_PRICE_FEED_MAP } from 'config/oracles/chainlink'
 import { Fraction } from 'entities'
 import { Feature } from 'enums'
@@ -427,7 +427,7 @@ export function useLendingTokens(): { [address: string]: Token } {
 export const useLendingMediumRiskLendingPositions = (account: string): LendingMediumRiskLendingPair[] => {
   // const addresses = useUnderworldPairAddresses()
   const { chainId } = useActiveWeb3React()
-  const addresses = UNDERWORLD_PAIRS[chainId]
+  const addresses = ACTIVE_UNDERWORLD_PAIRS[chainId]
   const markets = useLendingMediumRiskLendingPairs(account, addresses)
   return markets.filter((pair: LendingMediumRiskLendingPair) => JSBI.greaterThan(pair.userAssetFraction, ZERO))
 }
@@ -435,7 +435,7 @@ export const useLendingMediumRiskLendingPositions = (account: string): LendingMe
 export const useLendingMediumRiskBorrowingPositions = (account: string): LendingMediumRiskLendingPair[] => {
   // const addresses = useUnderworldPairAddresses()
   const { chainId } = useActiveWeb3React()
-  const addresses = UNDERWORLD_PAIRS[chainId]
+  const addresses = ACTIVE_UNDERWORLD_PAIRS[chainId]
 
   const markets = useLendingMediumRiskLendingPairs(account, addresses)
   return markets.filter(

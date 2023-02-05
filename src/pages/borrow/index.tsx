@@ -22,7 +22,7 @@ import { useUnderworldBorrowPositions } from 'features/portfolio/AssetBalances/u
 import { e10 } from 'functions/math'
 import router from 'next/router'
 import { useActiveWeb3React } from 'services/web3'
-import { ChainId, UNDERWORLD_PAIRS } from 'sdk'
+import { ChainId, ACTIVE_UNDERWORLD_PAIRS } from 'sdk'
 import { useUnderworldPairInfo, useUnderworldUserInfo } from 'hooks/useAPI'
 import { formatAddress } from 'utils/wallet'
 
@@ -32,7 +32,7 @@ export default function Borrow() {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   // const addresses = useUnderworldPairAddresses()
-  const addresses = UNDERWORLD_PAIRS[chainId]
+  const addresses = ACTIVE_UNDERWORLD_PAIRS[chainId]
   const pairs = useUnderworldPairs(addresses)
   const positions = useUnderworldBorrowPositions(pairs)
 

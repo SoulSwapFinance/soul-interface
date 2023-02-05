@@ -1,7 +1,7 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { WNATIVE } from 'sdk'
+import { NATIVE, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import { Button } from 'components/Button'
 import UnderworldCooker from 'entities/UnderworldCooker'
 import { Direction, TransactionReview } from 'entities/TransactionReview'
@@ -19,6 +19,8 @@ import SmartNumberInput from '../components/SmartNumberInput'
 import TransactionReviewList from '../components/TransactionReview'
 import WarningsList from '../components/WarningsList'
 import { useUnderworldPairInfo } from 'hooks/useAPI'
+import { SubmitButton, Wrap } from 'features/underworld/Styles'
+import NavLink from 'components/NavLink'
 // import AssetInput from 'components/AssetInput'
 // import Typography from 'components/Typography'
 
@@ -182,11 +184,32 @@ export default function Deposit({ pair }: any): JSX.Element {
               disabled={Number(value) <= 0 || warnings.broken}
               className="w-full"
             >
-              {i18n._(t`Deposit`)}
+              {i18n._(t`Deposit ${assetSymbol}`)}
             </Button>
           </TokenApproveButton>
         )}
       />
+
+    {/* const swapRoute = useCallback(() => {
+        // wrapped-only
+        bond.assetAddress == WFTM_ADDRESS[chainId]
+            // implies: pair
+            || bond.token2Address
+            // use generic swap path.
+            ? router.push(`/exchange/swap`)
+            // else: use specified swap path.
+            : router.push(`/exchange/swap?inputCurrency=${NATIVE[250].symbol}&outputCurrency=${bond.assetAddress}`)
+    }, []) */}
+        <NavLink
+            href={`/swap/?inputCurrency=${NATIVE[chainId].symbol}&outputCurrency=${pair.asset.address}`}
+        >
+          <Button variant="bordered" className={pair.asset.address == WNATIVE_ADDRESS[chainId] ? `hidden` : 'mt-2'} color={'blue'}>
+              <div className={`flex font-bold text-white justify-center`}>
+                {/* <ArrowLeftIcon className={'mt-1 mr-1'} width="1em" height="1em" /> */}
+                {`Acquire ${assetSymbol}`}
+              </div>
+          </Button>
+          </NavLink>
     </>
   )
 }
