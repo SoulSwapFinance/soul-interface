@@ -81,6 +81,7 @@ const BridgeTokenList: React.FC<any> = ({
               tokens={tokenList}
               selected={token}
               selectToken={handleSetToken}
+              toChain={toChain}
             />
             <div style={{ flex: 2 }} className="mt-1">
               {/* <InputCurrencyBox
