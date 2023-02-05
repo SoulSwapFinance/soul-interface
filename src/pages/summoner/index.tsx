@@ -86,6 +86,7 @@ const Summoner = () => {
               <Image src={FARM_BANNER}
                 height={180}
                 width={1080}
+                alt={'farm banner'}
               />
             </div>
           <div className={`flex justify-center m-1 p-1`}>

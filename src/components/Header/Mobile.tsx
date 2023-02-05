@@ -207,6 +207,7 @@ const Mobile: FC = () => {
       src={`/favicon.ico`}
       height={36} width={36}
       objectFit="contain"
+      alt={"soulswap logo icon"}
     />
 
     <Image
@@ -214,6 +215,7 @@ const Mobile: FC = () => {
         src={`/SoulSwap-Banner.png`}
         height={36} width={196}
         objectFit="contain"
+        alt={"soulswap banner"}
     />
   </div>
 

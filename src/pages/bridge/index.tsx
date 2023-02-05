@@ -13,7 +13,7 @@ import useBridgeApi from "../../hooks/useBridgeApi"
 import useMultiChain from "../../hooks/useMultiChain"
 import Modal from "components/Bridge/Modal"
 // import ModalTitle from "components/Bridge/ModalTitle"
-// import ModalContent from "components/Bridge/ModalContent"
+import ModalContent from "components/Bridge/ModalContent"
 import Scrollbar from "components/Scrollbar"
 import useModal from "../../hooks/useModal"
 // import InputCurrencyBox from "components/Bridge/InputCurrencyBox"
@@ -172,7 +172,6 @@ const ChainSelection: React.FC<any> = ({
         {`Current Chain`}
           <NetworkSelector
             selected={chainId}
-            chainId={chainId}
           />
         </div>
 
@@ -186,16 +185,15 @@ const ChainSelection: React.FC<any> = ({
               )}
             selected={toChain}
             selectChain={handleSetToChain}
-            chainId={chainId}
           />
         </div>
       </div>
   )
 }
 
-const NetworkSelector: React.FC<any> = ({ chains, selected, selectChain, chainId }) => {
+const NetworkSelector: React.FC<any> = ({ chains, selected, selectChain }) => {
   const [onPresentSelectNetworkModal] = useModal(
-    <BridgeNetworkSelectModal chains={chains} selectChain={selectChain} chainId={chainId} />,
+    <BridgeNetworkSelectModal chains={chains} selectChain={selectChain} />,
     "bridge-token-select-modal"
   )
 
@@ -206,6 +204,7 @@ const NetworkSelector: React.FC<any> = ({ chains, selected, selectChain, chainId
       disabled={!chains || !chains.length}
       onClick={() => chains && chains.length && onPresentSelectNetworkModal()}
     >
+                      <div className={`grid hover:bg-dark-900 my-1 mx-2 p-1 border border-dark-800 border-2 hover:border-${getChainColorCode(selectChain)} rounded rounded-2xl`}>
       <div className={`flex w-full p-1 justify-center border border-2 border-[${getChainColor(selected)}] rounded rounded-2xl hover:bg-dark-1000 bg-dark-900`}>
             {selected ? (
               <div className={`flex flex-cols-1 justify-center`}>
@@ -223,83 +222,30 @@ const NetworkSelector: React.FC<any> = ({ chains, selected, selectChain, chainId
               <Loader />
             )}
       </div>
+      </div>
     </OverlayButton>  
   )
 }
 
-{/* <Scrollbar className={`m-[12%] sm:max-w-[60%]`}>
-      <div>
-        <div className={`grid grid-cols-1 sm:p-3 bg-dark-1000 border-[${getChainColor(chainId)}] items-center border border-4 rounded rounded-2xl`}>
-          {/* <div> //
-          {tokens &&
-            tokens.map((token: any) => {
-              return (
-                <div
-                  className={`my-1 rounded rounded-xl hover:border hover:border-2 hover:border-${getChainColorCode(chainId)}`}
-                  key={"token-select-" + token.name}
-                  onClick={() => {
-                    selectToken(token)
-                    onDismiss()
-                  }}
-                // style={{ padding: ".5rem" }}
-                >
-                  <div className={`flex justify-between gap-4`}
-                  // style={{
-                  //   width: "100%",
-                  //   justifyContent: "space-between",
-                  // }}
-                  >
-                    <div
-                      className={`flex mx-6`}
-                    // style={{ gap: "1rem", alignItems: "center" }}
-                    >
-                      <Image
-                        alt="token logo"
-                        height={36}
-                        width={36}
-                        src={token.logoUrl}
-                      />
-                    </div>
-                    <div className={`flex font-bold mt-1 text-center`}>
-                      {`${token.symbol}`}
-                    </div>
-
-                    <div
-                      className={`flex mx-6`}
-                    >
-                      <BalancePromiseToUnit
-                        promise={token.balance}
-                        decimals={token.Decimals}
-                      />
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-        </div>
-      </div>
-    </Scrollbar> */}
-
 const BridgeNetworkSelectModal: React.FC<any> = ({
 chains,
 selectChain,
-onDismiss,
-chainId,
+onDismiss
 }) => {
 return (
-  // <Modal
-  //   style={{ padding: "2px 0.5px", maxHeight: "80vh" }}
-  //   onDismiss={onDismiss}
-  // >
-  //   <div />
-  //   <ModalContent style={{ padding: "8px 0px" }}>
-  //     <Column>
+   <Modal
+     style={{ padding: "2px 0.5px", maxHeight: "80vh" }}
+     onDismiss={onDismiss}
+   >
+     <div />
+     <ModalContent style={{ padding: "8px 0px" }}>
+       <Column>
+ 
   <Scrollbar className={`m-[12%] sm:max-w-[60%]`}>
-  <div className={`grid grid-cols-2 flex justify-center sm:p-3 bg-dark-1000 border-[${getChainColor(chainId)}] items-center border rounded rounded-2xl`}>
+  <div className={`grid grid-cols-2 flex justify-center sm:p-3 bg-dark-1000 border-[${getChainColor(selectChain)}] items-center border rounded rounded-2xl`}>
             {chains &&
               chains.map((chains: any) => {
                 return (
-                  <div className={`grid hover:bg-dark-900 my-1 mx-2 p-1 border border-dark-800 border-2 hover:border-${getChainColorCode(chainId)} rounded rounded-2xl`}>
                     <StyledOverlayButton
                       key={"network-select-" + chainToNetworkInfoMap[chains].name}
                       onClick={() => {
@@ -325,14 +271,15 @@ return (
                           </div>
                       </div>
                     </StyledOverlayButton>
-                  </div>
+                  
                 )
               })}
           </div>
         </Scrollbar>
-  //     </Column>
-  //   </ModalContent>
-  // </Modal>
+  
+     </Column>
+     </ModalContent>
+   </Modal>
 )
 }
 
@@ -530,6 +477,7 @@ return (
             <Image src={BRIDGE_BANNER}
               height={180}
               width={1080}
+              alt={'bridge banner'}
             />
           </div>
         <div className={`grid`}>
@@ -704,7 +652,7 @@ return (
                         ? i18n._(t`Approving`)
                         : isApproveCompleted
                           ? i18n._(t`Approve Successful`)
-                          : i18n._(t`Approve ${selectedToken && selectedToken?.symbol}`)}
+                          : i18n._(t`Approve ${selectedToken?.symbol}`)}
                     </ButtonComponent>
 
                     {isApproved && (
@@ -719,7 +667,7 @@ return (
                       >
                         {isBridgeTxPending
                           ? i18n._(t`Broadcasting Transaction`)
-                          : i18n._(t`Bridge ${selectedToken && selectedToken?.symbol}`)}
+                          : i18n._(t`Bridge ${selectedToken?.symbol}`)}
                       </ButtonComponent>
                     )}
 

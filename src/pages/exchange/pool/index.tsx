@@ -135,6 +135,7 @@ export default function Pool() {
               <Image src={POOL_BANNER}
                 height={180}
                 width={1080}
+                alt={'pool banner'}
               />
             </div>
             </div>

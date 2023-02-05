@@ -189,6 +189,7 @@ export default function AutoStake() {
               <Image src={STAKE_BANNER}
                 height={180}
                 width={1080}
+                alt={'stake banner'}
               />
             </div>
       <div className={`flex justify-center m-1 p-1`}>

@@ -348,6 +348,7 @@ export default function Exchange() {
               <Image src={CROSS_BANNER}
                 height={180}
                 width={1080}
+                alt={'crosschain swaps banner'}
               />
             </div>
             {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}

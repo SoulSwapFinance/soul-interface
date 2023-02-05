@@ -436,6 +436,7 @@ const Aggregator = ({ }) => {
               <Image src={META_BANNER}
                 height={180}
                 width={1080}
+               	alt={'meta banner'} 
               />
             </div>
 				{/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
