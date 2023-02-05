@@ -76,7 +76,7 @@ const Summoner = () => {
   }
 
   return (
-    <div className={`grid grid-cols-1 justify-center p-1 mt-8 sm:m-8 sm:max-w-[90%] md:max-w-2xl bg-dark-900 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}]`}>
+    <div className={`grid grid-cols-1 justify-center p-1 mt-8 sm:m-8 sm:max-w-[90%] md:max-w-2xl bg-dark-900 rounded rounded-2xl`}>
             <div
               className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >

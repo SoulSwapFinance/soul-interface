@@ -1,5 +1,5 @@
-import { Wrap } from '../../components/ReusableStyles'
-import Container from '../../components/Container'
+// import { Wrap } from '../../components/ReusableStyles'
+// import Container from '../../components/Container'
 import Head from 'next/head'
 import React from 'react'
 import AutoStake from 'pages/soul/autostake'
