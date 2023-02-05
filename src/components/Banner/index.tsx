@@ -231,13 +231,14 @@ export const MainBanner: FC = () => (
       <div className="text-center">
         <p className="font-medium text-center text-white">
           <NavLink
-            href={`/luxor/bonds`}
+            href={`/lend`}
             className="font-bold text-white text-lg"
           >
             <Button variant="filled" color="purple" size="sm">
               <span className="justify-center font-bold text-white">
                 {' '}
-                Discounted Bonds (Luxor) ↗
+                {/* Discounted Bonds (Luxor) ↗ */}
+                {`New Underworld Farms: Starting Monday!`}
               </span>
             </Button>
           </NavLink>
