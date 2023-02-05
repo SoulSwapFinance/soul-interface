@@ -204,6 +204,7 @@ const NetworkSelector: React.FC<any> = ({ chains, selected, selectChain }) => {
       disabled={!chains || !chains.length}
       onClick={() => chains && chains.length && onPresentSelectNetworkModal()}
     >
+                      <div className={`grid hover:bg-dark-900 my-1 mx-2 p-1 border border-dark-800 border-2 hover:border-${getChainColorCode(selectChain)} rounded rounded-2xl`}>
       <div className={`flex w-full p-1 justify-center border border-2 border-[${getChainColor(selected)}] rounded rounded-2xl hover:bg-dark-1000 bg-dark-900`}>
             {selected ? (
               <div className={`flex flex-cols-1 justify-center`}>
@@ -220,6 +221,7 @@ const NetworkSelector: React.FC<any> = ({ chains, selected, selectChain }) => {
             ) : (
               <Loader />
             )}
+      </div>
       </div>
     </OverlayButton>  
   )
