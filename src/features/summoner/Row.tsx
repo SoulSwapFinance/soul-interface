@@ -335,17 +335,16 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                     )}
                         onClick={() => handleShowOptions()}
                     >
-                        <div className={`flex w-full]`}>
-                            <div className="items-center">
-                                <div className={`grid ${isUnderworldPair ? `grid-cols-1` : `grid-cols-2`}`}>
+                    <div className={`flex w-full`}>
+                        <div className="grid grid-cols-1 md:mr-16 justify-center">
+                            <div className={`grid ${isUnderworldPair ? `grid-cols-2` : `grid-cols-2`}`}>
                                 <CurrencyLogo currency={token0} size={40} />
-                                {Number(allocPoint) != 220 &&
-                                <CurrencyLogo currency={token1} size={40} />
-                                }
-                                    {/* {Number(allocPoint) != 220
-                                        ? <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
-                                        : <CurrencyLogo currency={token0} size={40} />
-                                    } */}
+                                    {isUnderworldPair &&
+                                    <CurrencyLogo currency={token1} size={20} />
+                                    }
+                                    {isSwapPair &&
+                                    <CurrencyLogo currency={token1} size={40} />
+                                    }
                                 </div>
                             </div>
 
@@ -712,7 +711,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     </NavLink>
                                 )}
                                 {/* LEND ASSET */}
-                                {isUnderworldPair && (
+                                {isUnderworldPair && isActive && (
                                     <NavLink
                                         href=
                                         {`/lend/${lpAddress}`}
