@@ -221,7 +221,7 @@ onDismiss
 return (
     <Scrollbar className={`m-[12%] sm:max-w-[60%]`}>
       <div>
-        <div className={`grid grid-cols-1 sm:p-3 bg-dark-1000 border-[${getChainColor(chainId)}] items-center border border-4 rounded rounded-2xl`}>
+        <div className={`grid grid-cols-1 sm:p-3 bg-dark-1000 border-[${getChainColor(selectChain)}] items-center border border-4 rounded rounded-2xl`}>
             {chains &&
               chains.map((chains: any) => {
                 return (
