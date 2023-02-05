@@ -13,7 +13,7 @@ import useBridgeApi from "../../hooks/useBridgeApi"
 import useMultiChain from "../../hooks/useMultiChain"
 import Modal from "components/Bridge/Modal"
 // import ModalTitle from "components/Bridge/ModalTitle"
-// import ModalContent from "components/Bridge/ModalContent"
+import ModalContent from "components/Bridge/ModalContent"
 import Scrollbar from "components/Scrollbar"
 import useModal from "../../hooks/useModal"
 // import InputCurrencyBox from "components/Bridge/InputCurrencyBox"
@@ -172,7 +172,6 @@ const ChainSelection: React.FC<any> = ({
         {`Current Chain`}
           <NetworkSelector
             selected={chainId}
-            chainId={chainId}
           />
         </div>
 
@@ -186,16 +185,15 @@ const ChainSelection: React.FC<any> = ({
               )}
             selected={toChain}
             selectChain={handleSetToChain}
-            chainId={chainId}
           />
         </div>
       </div>
   )
 }
 
-const NetworkSelector: React.FC<any> = ({ chains, selected, selectChain, chainId }) => {
+const NetworkSelector: React.FC<any> = ({ chains, selected, selectChain }) => {
   const [onPresentSelectNetworkModal] = useModal(
-    <BridgeNetworkSelectModal chains={chains} selectChain={selectChain} chainId={chainId} />,
+    <BridgeNetworkSelectModal chains={chains} selectChain={selectChain} />,
     "bridge-token-select-modal"
   )
 
@@ -230,8 +228,7 @@ const NetworkSelector: React.FC<any> = ({ chains, selected, selectChain, chainId
 const BridgeNetworkSelectModal: React.FC<any> = ({
 chains,
 selectChain,
-onDismiss,
-chainId,
+onDismiss
 }) => {
 return (
    <Modal
@@ -243,11 +240,11 @@ return (
        <Column>
  
   <Scrollbar className={`m-[12%] sm:max-w-[60%]`}>
-  <div className={`grid grid-cols-2 flex justify-center sm:p-3 bg-dark-1000 border-[${getChainColor(chainId)}] items-center border rounded rounded-2xl`}>
+  <div className={`grid grid-cols-2 flex justify-center sm:p-3 bg-dark-1000 border-[${getChainColor(selectChain)}] items-center border rounded rounded-2xl`}>
             {chains &&
               chains.map((chains: any) => {
                 return (
-                  <div className={`grid hover:bg-dark-900 my-1 mx-2 p-1 border border-dark-800 border-2 hover:border-${getChainColorCode(chainId)} rounded rounded-2xl`}>
+                  <div className={`grid hover:bg-dark-900 my-1 mx-2 p-1 border border-dark-800 border-2 hover:border-${getChainColorCode(selectChain)} rounded rounded-2xl`}>
                     <StyledOverlayButton
                       key={"network-select-" + chainToNetworkInfoMap[chains].name}
                       onClick={() => {
