@@ -19,7 +19,7 @@ import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { RecoilRoot } from 'recoil'
 import { useUnderworldPairInfo, useUnderworldUserInfo } from 'hooks/useAPI'
-import { ChainId, LEND_MULTIPLIER, Token, UNDERWORLD_PAIRS } from 'sdk'
+import { ChainId, LEND_MULTIPLIER, Token, ACTIVE_UNDERWORLD_PAIRS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 import NavLink from 'components/NavLink'
 import Typography from 'components/Typography'
@@ -27,6 +27,7 @@ import { SubmitButton } from 'features/summoner/Styles'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { useUnderworldPairAPI } from 'hooks/useUnderworldAPI'
 import { classNames } from 'functions'
+import { UnderworldBanner } from 'components/Banner'
 
 // import Link from 'next/link'
 // import { e10 } from 'functions/math'
@@ -36,7 +37,7 @@ export default function Lend() {
   const { chainId } = useActiveWeb3React()
 
   // const addresses = useUnderworldPairAddresses()
-  const addresses = UNDERWORLD_PAIRS[chainId]
+  const addresses = ACTIVE_UNDERWORLD_PAIRS[chainId]
   // console.log('Underworld Addresses', addresses)
 
   const pairs = useUnderworldPairs(addresses)
@@ -74,6 +75,9 @@ export default function Lend() {
         />
       </Head>
       <Card className="h-full bg-dark-900" header={<MarketHeader type="Underworld Markets" lists={[pairs, positions]} />}>
+
+      <UnderworldBanner />
+
         {/* {positions.items && positions.items.length > 0 && (
           <div className="pb-4">
             <div>
@@ -139,7 +143,7 @@ export default function Lend() {
             </div>
           </div>
         )} */}
-        <div>
+        <div className={`mt-2`}>
           <div className="grid grid-flow-col grid-cols-4 gap-4 px-4 pb-4 text-sm sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 text-secondary">
             <ListHeaderWithSort className="justify-center" sort={data} sortKey="search">
               <span className="justify-center md:flex">{i18n._(t`MARKET`)}</span>
@@ -220,8 +224,8 @@ const LendEntry = ({ pair, userPosition = false }) => {
   const blockchain = chainId == ChainId.FANTOM ? 'fantom' : 'avalanche'
   const assetLogoURI = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${assetAddress}/logo.png`
   const collateralLogoURI = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${collateralAddress}/logo.png`
-  const userDepositedValue = suppliedAmount * assetPrice
-  const assetToken = new Token(chainId, assetAddress, assetDecimals)
+  // const userDepositedValue = suppliedAmount * assetPrice
+  // const assetToken = new Token(chainId, assetAddress, assetDecimals)
   // const collateralPrice = Number(underworldPairInfo.collateralPrice)
   // const assetBalance = Number(underworldUserInfo.userAssetBalance) // 10**assetDecimals
   // const borrowedAmount = Number(underworldUserInfo.userBorrowPart) / 10**assetDecimals

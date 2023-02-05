@@ -6,12 +6,12 @@ import React, { useMemo } from 'react'
 
 export type CellProps = { cell: { value: CurrencyAmount<Currency> } }
 
-export const useBasicTableConfig = (assets?: Assets[], balancesLoading?: boolean) => {
+export const useBasicTableConfig = (assets?: Assets[], balancesLoading?: boolean, isUnderworld?: boolean, otherAsset?: Currency) => {
   const AssetColumns = useMemo(
     () => [
       {
         id: 'asset',
-        Header: 'Deposited',
+        Header: 'Supplied',
         accessor: 'asset',
         minWidth: 100,
         className: 'text-left',

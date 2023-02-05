@@ -22,6 +22,8 @@ interface LayoutProps {
 const Layout: FC<LayoutProps> = ({ left, children, right }) => {
   const { chainId } = useActiveWeb3React()
   const router = useRouter()
+  const isLend = router.asPath == '/lend'
+
   return (
     <>
       <Main>
@@ -135,28 +137,29 @@ const Layout: FC<LayoutProps> = ({ left, children, right }) => {
           </div>
 
           <div className={'flex flex-cols-1 justify-between'}>
-              <div className="mt-4">
-          <NavLink
-              href='/lend'
-              >
-          <Button variant="outlined" color={'blue'}>
-              <div className={`flex text-sm font-bold text-${'blue'} justify-left`}>
-                <ArrowLeftIcon className={'mt-1 mr-1'} width="1em" height="1em" />
-                {`Underworld Markets`}
-              </div>
-          </Button>
-            </NavLink>
-              </div>
-              <div className="mt-4">
-          <NavLink
-              href='/balances'
-              >
-          <Button variant="outlined" color={'blue'}>
-              <div className={`flex text-sm font-bold text-${'blue'} justify-left`}>
-                {/* <ArrowLeftIcon className={'mt-1 mr-1'} width="1em" height="1em" /> */}
-                {`CoffinBox Balance`}
-              </div>
-          </Button>
+          <div className={isLend ? 'hidden' : 'mt-4'}>
+            <NavLink
+                href='/lend'
+            >
+              <Button variant="outlined" color={'blue'}>
+                  <div className={`flex text-sm font-bold text-${'blue'} justify-left`}>
+                    {/* <ArrowLeftIcon className={'mt-1 mr-1'} width="1em" height="1em" /> */}
+                    {`Underworld Markets`}
+                  </div>
+              </Button>
+              </NavLink>
+                </div>
+                <div className={'mt-4'}/>
+                <div className={'mt-4'}>
+            <NavLink
+                href='/balances'
+            >
+              <Button variant="outlined" color={'blue'}>
+                  <div className={`flex text-sm font-bold text-${'blue'} justify-left`}>
+                    {/* <ArrowLeftIcon className={'mt-1 mr-1'} width="1em" height="1em" /> */}
+                    {`CoffinBox Balance`}
+                  </div>
+              </Button>
             </NavLink>
               </div>
             </div>

@@ -79,7 +79,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   const token0Name = pairInfo.token0Name
   const isUnderworldPair = bond.type == "lend"
   const isSwapPair = !isUnderworldPair
-  const MULTIPLIER = isSwapPair ? 1 : LEND_MULTIPLIER(chainId, token0Symbol)
+  const MULTIPLIER = isSwapPair ? 1 : LEND_MULTIPLIER(chainId, assetAddress)
   // const APR = Number(soulBondInfo.apr)
   const _APR = Number(soulBondInfo.apr) / MULTIPLIER
   // const assetName = soulBondUserInfo.symbol

@@ -143,25 +143,28 @@ const collateralSymbol
           </Card.Header>
         }
       >
-        <div className="flex justify-between p-4 mb-8 xl:p-0">
+        <div className="flex justify-between p-4 mb-2 xl:p-0">
           <div>
-            <div className="text-center text-md sm:text-lg text-secondary">Deposited</div>
+            <div className="text-center text-md sm:text-lg text-secondary">{`Supplied`}</div>
             <div className="text-lg sm:text-2xl text-blue">
               {formatNumber(pair.userAssetFraction / 10**(assetDecimals) * MULTIPLIER)} {assetSymbol}
             </div>
-            <div className="text-center text-md sm:text-lg text-high-emphesis">{formatNumber(userDepositValue * MULTIPLIER, true)}</div>
+            {/* <div className="text-center text-md sm:text-lg text-high-emphesis">{formatNumber(userDepositValue * MULTIPLIER, true)}</div> */}
             </div>
           <div>
-            <div className="text-center text-md sm:text-lg text-secondary">{`Borrowed`}</div>
+          <div className="text-center text-md sm:text-lg text-secondary">{`Value`}</div>
+          <div className="text-center text-lg sm:text-2xl text-high-emphesis">{formatNumber(userDepositValue * MULTIPLIER, true)}
+          </div>
+            {/* <div className="text-center text-md sm:text-lg text-secondary">{`Borrowed`}</div>
             <div className="text-center text-lg sm:text-2xl text-high-emphesis">{
-              // formatPercent(utilization)
+              formatPercent(utilization)
               `${utilization.toFixed(2)}%`
-                // formatPercent(
-                //   ((pair?.userAssetFraction.div(e10(assetDecimals))) -
-                //     (pair?.userAssetFraction.sub(pair?.currentUserLentAmount.value).div(e10(assetDecimals))))
-                //   / (pair?.userAssetFraction.div(e10(assetDecimals))) * 100
-                // )
-              }</div>
+                formatPercent(
+                  ((pair?.userAssetFraction.div(e10(assetDecimals))) -
+                    (pair?.userAssetFraction.sub(pair?.currentUserLentAmount.value).div(e10(assetDecimals))))
+                  / (pair?.userAssetFraction.div(e10(assetDecimals))) * 100
+                )
+              }</div> */}
           </div>
           <div className="text-right">
             <div>

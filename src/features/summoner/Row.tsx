@@ -73,7 +73,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const isUnderworldPair = pairType == "lend"
     const isSwapPair = pairType == "swap"
     // multiplier (adjusts for lending pairs) //
-    const MULTIPLIER = isSwapPair ? 1 : LEND_MULTIPLIER(chainId, token0Symbol)
+    const MULTIPLIER = isSwapPair ? 1 : LEND_MULTIPLIER(chainId, farm.lpAddress)
     
     // for display purposes only //
     const _liquidity = Number(summonerPoolInfo.tvl )* MULTIPLIER

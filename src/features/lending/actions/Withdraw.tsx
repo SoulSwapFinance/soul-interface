@@ -52,7 +52,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
   const [pinMax, setPinMax] = useState(false)
 
   // const [underworldApprovalState, approveUnderworldFallback, underworldPermit, onApprove, onCook] = useUnderworldApproveCallback()
-  const MULTIPLIER = LEND_MULTIPLIER(chainId, pair?.asset.tokenInfo.symbol)
+  const MULTIPLIER = LEND_MULTIPLIER(chainId, pair?.address)
 
   // Calculated
   // const max = minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)
