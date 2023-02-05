@@ -242,7 +242,6 @@ return (
        <Column>
  
   <Scrollbar className={`m-[12%] sm:max-w-[60%]`}>
-  <div className={`grid grid-cols-2 flex justify-center sm:p-3 bg-dark-1000 border-[${getChainColor(selectChain)}] items-center border rounded rounded-2xl`}>
             {chains &&
               chains.map((chains: any) => {
                 return (
@@ -274,7 +273,6 @@ return (
                   
                 )
               })}
-          </div>
         </Scrollbar>
   
      </Column>
