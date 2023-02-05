@@ -175,7 +175,6 @@ export default function TokenStatsModal(): JSX.Element | null {
         </div>
       </div>
       <div className="space-y-0">
-
         <div className="flex mt-1" />
         <Typography className='flex justify-center text-2xl leading-[28px] bg-purple'>{`Tokenomics Overview`}</Typography>
       </div>
@@ -403,7 +402,7 @@ export default function TokenStatsModal(): JSX.Element | null {
             Number(seancePrice), 3)
         ) */}
 
-       <div className="flex mt-3" />
+       <div className="flex" />
         <NavLink href={'/dashboard'}>
           <Button
             color='purple'
