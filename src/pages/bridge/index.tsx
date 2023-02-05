@@ -92,21 +92,7 @@ const ChainSelection: React.FC<any> = ({
     getBridgeTokens(toChain, fromChain)?.then((tokenList) => {
       if (tokenList?.length) {
         const tokenOrder = [
-          "FTM",
-          "WFTM",
-          "USDC",
-          "USDT",
-          "fUSDT",
-          "DAI",
-          "BOO",
-          "MIM",
-          "ETH",
-          "WETH",
-          "BTC",
-          "WBTC",
-          "MATIC",
-          "AVAX",
-          "BNB",
+          "FTM", "WFTM", "SOUL", "USDC", "USDT", "fUSDT", "DAI", "BOO", "MIM", "ETH", "WETH", "BTC", "WBTC", "MATIC", "AVAX", "BNB",
         ];
         if (tokenList?.length && account) {
           const stickyTokens = tokenOrder
@@ -233,15 +219,9 @@ selectChain,
 onDismiss
 }) => {
 return (
-   <Modal
-     style={{ padding: "2px 0.5px", maxHeight: "80vh" }}
-     onDismiss={onDismiss}
-   >
-     <div />
-     <ModalContent style={{ padding: "8px 0px" }}>
-       <Column>
- 
-  <Scrollbar className={`m-[12%] sm:max-w-[60%]`}>
+    <Scrollbar className={`m-[12%] sm:max-w-[60%]`}>
+      <div>
+        <div className={`grid grid-cols-1 sm:p-3 bg-dark-1000 border-[${getChainColor(chainId)}] items-center border border-4 rounded rounded-2xl`}>
             {chains &&
               chains.map((chains: any) => {
                 return (
@@ -270,14 +250,11 @@ return (
                           </div>
                       </div>
                     </StyledOverlayButton>
-                  
                 )
               })}
+              </div>
+              </div>
         </Scrollbar>
-  
-     </Column>
-     </ModalContent>
-   </Modal>
 )
 }
 
