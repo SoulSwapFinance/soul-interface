@@ -711,7 +711,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     </NavLink>
                                 )}
                                 {/* LEND ASSET */}
-                                {isUnderworldPair && (
+                                {isUnderworldPair && isActive && (
                                     <NavLink
                                         href=
                                         {`/lend/${lpAddress}`}

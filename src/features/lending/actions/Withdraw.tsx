@@ -82,11 +82,24 @@ export default function Withdraw({ pair }: any): JSX.Element {
     .add(
       // pair.maxAssetAvailableFraction.lt(fraction),
       // Number(minimum(pair.maxAssetAvailable, pair.currentUserAssetAmount.value)) == 0,
-      chainId == ChainId.FANTOM 
-      && pair.userAssetFraction.sub(pair.currentUserLentAmount.value).lte(0),
+      // chainId == ChainId.FANTOM 
+      // && 
+      // INACTIVE //
+      (
+        pair.address == '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61'      // FTM-DAI
+        || 
+        pair.address == '0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd'     // DAI-FTM
+        || 
+        pair.address == '0x9fA5de19495331E13b443F787B90CdD22B32263d'     // DAI-ETH
+        || 
+        pair.address == '0xaf28730165634A56434ca7f0B302CC54F862046F'     // DAI-BTC
+        || 
+        pair.address == '0xbDa9204e6D596feCf9bd48108723F9BDAa2019f6'     // DAI-BNB
+      ),
+      // && pair.userAssetFraction.sub(pair.currentUserLentAmount.value).lte(0),
       i18n._(
-        t`There isn't enough available to withdraw large amounts. Your options are as follows: (1) withdraw small amounts, (2) bond your supplied tokens, or (3) try later.
-        If you (3) try later, you may farm SOUL while you wait.`
+        t`There isn't enough available to withdraw large amounts. 
+        Your options are as follows: (1) withdraw small amounts, (2) bond your supplied tokens, or (3) try later.`
       ),
       true
     )
