@@ -227,59 +227,6 @@ const NetworkSelector: React.FC<any> = ({ chains, selected, selectChain, chainId
   )
 }
 
-{/* <Scrollbar className={`m-[12%] sm:max-w-[60%]`}>
-      <div>
-        <div className={`grid grid-cols-1 sm:p-3 bg-dark-1000 border-[${getChainColor(chainId)}] items-center border border-4 rounded rounded-2xl`}>
-          {/* <div> //
-          {tokens &&
-            tokens.map((token: any) => {
-              return (
-                <div
-                  className={`my-1 rounded rounded-xl hover:border hover:border-2 hover:border-${getChainColorCode(chainId)}`}
-                  key={"token-select-" + token.name}
-                  onClick={() => {
-                    selectToken(token)
-                    onDismiss()
-                  }}
-                // style={{ padding: ".5rem" }}
-                >
-                  <div className={`flex justify-between gap-4`}
-                  // style={{
-                  //   width: "100%",
-                  //   justifyContent: "space-between",
-                  // }}
-                  >
-                    <div
-                      className={`flex mx-6`}
-                    // style={{ gap: "1rem", alignItems: "center" }}
-                    >
-                      <Image
-                        alt="token logo"
-                        height={36}
-                        width={36}
-                        src={token.logoUrl}
-                      />
-                    </div>
-                    <div className={`flex font-bold mt-1 text-center`}>
-                      {`${token.symbol}`}
-                    </div>
-
-                    <div
-                      className={`flex mx-6`}
-                    >
-                      <BalancePromiseToUnit
-                        promise={token.balance}
-                        decimals={token.Decimals}
-                      />
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-        </div>
-      </div>
-    </Scrollbar> */}
-
 const BridgeNetworkSelectModal: React.FC<any> = ({
 chains,
 selectChain,
@@ -287,13 +234,14 @@ onDismiss,
 chainId,
 }) => {
 return (
-  // <Modal
-  //   style={{ padding: "2px 0.5px", maxHeight: "80vh" }}
-  //   onDismiss={onDismiss}
-  // >
-  //   <div />
-  //   <ModalContent style={{ padding: "8px 0px" }}>
-  //     <Column>
+   <Modal
+     style={{ padding: "2px 0.5px", maxHeight: "80vh" }}
+     onDismiss={onDismiss}
+   >
+     <div />
+     <ModalContent style={{ padding: "8px 0px" }}>
+       <Column>
+ 
   <Scrollbar className={`m-[12%] sm:max-w-[60%]`}>
   <div className={`grid grid-cols-2 flex justify-center sm:p-3 bg-dark-1000 border-[${getChainColor(chainId)}] items-center border rounded rounded-2xl`}>
             {chains &&
@@ -330,9 +278,10 @@ return (
               })}
           </div>
         </Scrollbar>
-  //     </Column>
-  //   </ModalContent>
-  // </Modal>
+  
+     </Column>
+     </ModalContent>
+   </Modal>
 )
 }
 
