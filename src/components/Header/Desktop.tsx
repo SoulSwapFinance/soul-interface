@@ -169,6 +169,7 @@ const Desktop: FC = () => {
       src={`/favicon.ico`}
       height={72} width={72}
       objectFit="contain"
+      alt={"soulswap logo"}
     />
 
     <Image
@@ -176,6 +177,7 @@ const Desktop: FC = () => {
         src={`/SoulSwap-Finance-Banner.png`}
         height={72} width={224}
         objectFit="contain"
+        alt={"soulswap finance banner"}
     />
   </div>
 
@@ -186,6 +188,7 @@ const Desktop: FC = () => {
         src={`/title-logo.png`}
         height={300}
         width={300}
+        alt={"title logo"}
         /> */}
         <div
           className={`flex bg-dark-900 mt-6 rounded border p-1.5 border-[${getChainColor(chainId)}] hover:border-2 hover:border-purple rounded-2xl`}

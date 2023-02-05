@@ -244,7 +244,6 @@ return (
             {chains &&
               chains.map((chains: any) => {
                 return (
-                  <div className={`grid hover:bg-dark-900 my-1 mx-2 p-1 border border-dark-800 border-2 hover:border-${getChainColorCode(selectChain)} rounded rounded-2xl`}>
                     <StyledOverlayButton
                       key={"network-select-" + chainToNetworkInfoMap[chains].name}
                       onClick={() => {
@@ -270,7 +269,7 @@ return (
                           </div>
                       </div>
                     </StyledOverlayButton>
-                  </div>
+                  
                 )
               })}
           </div>

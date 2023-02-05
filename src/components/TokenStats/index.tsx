@@ -37,6 +37,7 @@ function TokenStats(): JSX.Element | null {
           objectFit={`contain`}
           height={72}
           width={72}
+          alt={"soulswap logo icon"}
         />
       </div>
       {/* <div className="grid items-center grid-flow-col px-1.5 py-1 space-x-2 text-sm rounded-lg pointer-events-auto auto-cols-max bg-dark-1000 text-secondary">

@@ -198,7 +198,8 @@ const CHART_ICON =
   <Image 
     src={'/favicon.png'} height={36} width={36} 
     objectFit={`contain`}
-    className={'bg-dark-900 rounded rounded-xl'} 
+    className={'bg-dark-900 rounded rounded-xl'}
+    alt={"soulswap logo icon"}
     />
     </div>
 
