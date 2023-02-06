@@ -1,4 +1,4 @@
-import { defaultAbiCoder } from '@ethersproject/abi'
+  import { defaultAbiCoder } from '@ethersproject/abi'
 import { BigNumber } from '@ethersproject/bignumber'
 import { hexConcat, hexlify } from '@ethersproject/bytes'
 import { AddressZero } from '@ethersproject/constants'
@@ -23,9 +23,9 @@ import { UnderworldApproveButton, TokenApproveButton } from '../components/Butto
 import { SwapCheckbox } from '../components/Checkbox'
 import SmartNumberInput from '../components/SmartNumberInput'
 import TradeReview from '../components/TradeReview'
-import TransactionReviewView from '../components/TransactionReview'
+// import TransactionReviewView from '../components/TransactionReview'
 import WarningsView from '../components/WarningsList'
-import usePriceApi from 'hooks/usePriceApi'
+// import usePriceApi from 'hooks/usePriceApi'
 import { useUnderworldPairInfo, useUnderworldUserInfo, useUserTokenInfo } from 'hooks/useAPI'
 
 
@@ -78,13 +78,15 @@ export default function Borrow({ pair }: BorrowProps) {
       : aTicker == 'WFTM' ? 'FTM'
       : aTicker == 'WETH.e' ? 'ETH'
         : aTicker == 'WBTC.e' ? 'BTC'
-          : aTicker
+          : aTicker == 'LINK.e' ? 'LINK'
+            : aTicker
   const collateralSymbol
     = bTicker == 'WAVAX' ? 'AVAX'
       : bTicker == 'WFTM' ? 'FTM'
       : bTicker == 'WETH.e' ? 'ETH'
         : bTicker == 'WBTC.e' ? 'BTC'
-          : bTicker
+          : bTicker == 'LINK.e' ? 'LINK'
+            : bTicker
 
   const assetToken = useCurrency(pair.asset.address) || undefined
   const collateralToken = useCurrency(pair.collateral.address) || undefined

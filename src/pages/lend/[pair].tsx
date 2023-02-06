@@ -6,7 +6,7 @@ import { Feature } from 'enums'
 import { Deposit, PairTools, Strategy, Withdraw } from 'features/lending'
 import { useUnderworldPairInfo } from 'hooks/useAPI'
 import { formatNumber, formatPercent } from 'functions/format'
-import { e10 } from 'functions/math'
+// import { e10 } from 'functions/math'
 import NetworkGuard from 'guards/Network'
 import { useRedirectOnChainId } from 'hooks/useRedirectOnChainId'
 import Layout from 'layouts/Underworld'
@@ -55,7 +55,7 @@ const available = 100 -
     / (pair?.totalAsset.base / 10**(assetDecimals)) * 100
 
   const util = 100 - available
-  const utilization = (util >= 100 || util <= 0) ? 98 : util
+  // const utilization = (util >= 100 || util <= 0) ? 98 : util
 
 // format tickers //
 const aTicker = underworldPairInfo.assetTicker
@@ -66,6 +66,7 @@ const assetSymbol
       : aTicker == 'WFTM' ? 'FTM'
         : aTicker == 'WETH.e' ? 'ETH'
         : aTicker == 'WBTC.e' ? 'BTC'
+        : aTicker == 'LINK.e' ? 'LINK'
         : aTicker
 
 const collateralSymbol 
@@ -73,6 +74,7 @@ const collateralSymbol
       : bTicker == 'WFTM' ? 'FTM'
         : bTicker == 'WETH.e' ? 'ETH'
         : bTicker == 'WBTC.e' ? 'BTC'
+        : bTicker == 'LINK.e' ? 'LINK'
         : bTicker
   // const assetSymbol = pair?.asset.tokenInfo.symbol
   // const collateralSymbol = pair?.collateral.tokenInfo.symbol
@@ -227,7 +229,7 @@ const PairLayout = ({ children }) => {
   
   const assetDecimals = pair?.asset.tokenInfo.decimals
   const aTicker = pair?.asset.tokenInfo.symbol
-  const cTicker = pair?.collateral.tokenInfo.symbol
+  // const cTicker = pair?.collateral.tokenInfo.symbol
 
   const avail = 100 -
   ((pair?.totalAsset.base / 10**(assetDecimals)) -
@@ -245,14 +247,16 @@ const PairLayout = ({ children }) => {
           : aTicker == 'WFTM' ? 'FTM'
           : aTicker == 'WETH.e' ? 'ETH'
           : aTicker == 'WBTC.e' ? 'BTC'
+          : aTicker == 'LINK.e' ? 'LINK'
           : aTicker
 
-  const collateralSymbol 
-      = cTicker == 'WAVAX' ? 'AVAX'
-          :cTicker == 'WFTM' ? 'FTM'
-          : cTicker == 'WETH.e' ? 'ETH'
-          : cTicker == 'WBTC.e' ? 'BTC'
-          : cTicker
+  // const collateralSymbol 
+  //     = cTicker == 'WAVAX' ? 'AVAX'
+  //         :cTicker == 'WFTM' ? 'FTM'
+  //         : cTicker == 'WETH.e' ? 'ETH'
+  //         : cTicker == 'WBTC.e' ? 'BTC'
+  //         : cTicker == 'LINK.e' ? 'LINK'
+  //         : cTicker
 
   // const interestPerYear = pair?.interestPerYear.string
   // console.log('interestPerYear:%s', interestPerYear)

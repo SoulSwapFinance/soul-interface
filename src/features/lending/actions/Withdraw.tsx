@@ -35,7 +35,9 @@ export default function Withdraw({ pair }: any): JSX.Element {
       : aTicker == 'WFTM' ? 'FTM'
       : aTicker == 'WETH.e' ? 'ETH'
         : aTicker == 'WBTC.e' ? 'BTC'
-          : aTicker
+          : aTicker == 'LINK.e' ? 'LINK'
+            : aTicker
+
   // const collateralSymbol
   //   = bTicker == 'WAVAX' ? 'AVAX'
   //     : bTicker == 'WFTM' ? 'FTM'
