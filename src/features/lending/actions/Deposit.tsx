@@ -184,7 +184,7 @@ export default function Deposit({ pair }: any): JSX.Element {
               disabled={Number(value) <= 0 || warnings.broken}
               className="w-full"
             >
-              {i18n._(t`Deposit ${assetSymbol}`)}
+                {`Deposit ${assetSymbol}`}
             </Button>
           </TokenApproveButton>
         )}
