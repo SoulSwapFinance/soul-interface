@@ -388,7 +388,7 @@ export const FantomPools = [
   { // 220
     pid: 20,
     type: 'lend',
-    decimals: 18,
+    decimals: 6,
     token0Symbol: 'USDC', // EXEMPT //
     token1Symbol: 'FTM',
     lpSymbol: 'FTM-USDC', // EXEMPT //
