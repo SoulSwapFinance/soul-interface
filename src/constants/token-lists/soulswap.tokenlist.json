@@ -698,6 +698,14 @@
     },
     {
       "chainId": 43114,
+      "address": "0x5947BB275c521040051D82396192181b413227A3",
+      "symbol": "LINK",
+      "name": "ChainLink",
+      "decimals": 18,
+      "logoURI": "https://cryptologos.cc/logos/chainlink-link-logo.svg"
+    },
+    {
+      "chainId": 43114,
       "address": "0x11d6DD25c1695764e64F439E32cc7746f3945543",
       "symbol": "SOUL",
       "name": "SoulPower",

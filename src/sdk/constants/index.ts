@@ -69,10 +69,9 @@ const FTM_DAI_MARKET = '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61'
 const DAI_ETH_MARKET = '0x9fA5de19495331E13b443F787B90CdD22B32263d'
 // const DAI_BTC_MARKET = '0xaf28730165634A56434ca7f0B302CC54F862046F'
 
-let defaultMultiplier = 1
 
 export const LEND_MULTIPLIER = (chainId: ChainId, pairAddress: string) => {
-  // let lentSymbol = lentAsset.wrapped.symbol
+  let defaultMultiplier = 1
   if (chainId == ChainId.FANTOM) {
     pairAddress == DAI_FTM_MARKET || pairAddress == DAI_BNB_MARKET || pairAddress == FTM_DAI_MARKET
           ? defaultMultiplier = 4
