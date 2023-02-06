@@ -74,9 +74,9 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const isSwapPair = pairType == "swap"
     // multiplier (adjusts for lending pairs) //
     const MULTIPLIER = isSwapPair ? 1 : LEND_MULTIPLIER(chainId, farm.lpAddress)
-    
+
     // for display purposes only //
-    const _liquidity = Number(summonerPoolInfo.tvl )* MULTIPLIER
+    const _liquidity = Number(summonerPoolInfo.tvl) * MULTIPLIER
     // for display purposes only //
     const _APR = Number(summonerPoolInfo.apr) / MULTIPLIER
 
@@ -112,11 +112,11 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const lpPrice = Number(summonerUserInfo.lpPrice)
     const withdrawFee = Number(summonerUserInfo.currentRate)
     const walletBalance = Number(summonerUserInfo.walletBalance)
-    
+
     // const feeAmount = withdrawFee * stakedBalance / 100
     // const withdrawable = stakedBalance - feeAmount
     // const feeValue = feeAmount * lpPrice
-    
+
     // for display purposes only //
     const _walletBalance = Number(summonerUserInfo.walletBalance) * MULTIPLIER
     // for display purposes only //
@@ -335,15 +335,15 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                     )}
                         onClick={() => handleShowOptions()}
                     >
-                    <div className={`flex w-full`}>
-                        <div className="grid grid-cols-1 md:mr-16 justify-center">
-                            <div className={`grid ${isUnderworldPair ? `grid-cols-2` : `grid-cols-2`}`}>
-                                <CurrencyLogo currency={token0} size={40} />
+                        <div className={`flex w-full`}>
+                            <div className="grid grid-cols-1 md:mr-16 justify-center">
+                                <div className={`grid ${isUnderworldPair ? `grid-cols-2` : `grid-cols-2`}`}>
+                                    <CurrencyLogo currency={token0} size={40} />
                                     {isUnderworldPair &&
-                                    <CurrencyLogo currency={token1} size={20} />
+                                        <CurrencyLogo currency={token1} size={20} />
                                     }
                                     {isSwapPair &&
-                                    <CurrencyLogo currency={token1} size={40} />
+                                        <CurrencyLogo currency={token1} size={40} />
                                     }
                                 </div>
                             </div>
@@ -374,7 +374,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                             {/* STAKED OWNERSHIP */}
                             <HideOnSmall>
                                 <FarmItemBox>
-                                <div className={`justify-center mt-2`}>
+                                    <div className={`justify-center mt-2`}>
                                         {_stakedValue.toFixed(0).toString() === '0' ? (
                                             <Text padding="0" fontSize="1rem" color="#666">
                                                 0%
@@ -568,7 +568,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
                                     <div className="flex justify-between">
                                         <Typography className="text-white" fontFamily={'medium'}>
-                                        {i18n._(t`Claimable Rewards`)}
+                                            {i18n._(t`Claimable Rewards`)}
                                         </Typography>
                                         <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                             {formatNumber(earnedAmount)} SOUL
@@ -576,7 +576,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     </div>
                                     <div className="flex justify-between">
                                         <Typography className="text-white" fontFamily={'medium'}>
-                                        {i18n._(t`Rewards (USD)`)}
+                                            {i18n._(t`Rewards (USD)`)}
                                         </Typography>
                                         <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
                                             {formatNumber(earnedValue, true, true)}
@@ -704,7 +704,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                                     <div className="flex text-lg gap-2">
                                                         <CircleStackIcon width={26} className={classNames(`text-white`)} />
                                                         CREATE {farm.lpSymbol} LP
-                                                    </div>                                            
+                                                    </div>
                                                 </TokenPairLink>
                                             </SubmitButton>
                                         </a>
@@ -996,7 +996,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 handleZap(zapTokenAddress, lpAddress)
                             }
                         >
-                           {`ZAP INTO PAIR`}
+                            {`ZAP INTO PAIR`}
                         </SubmitButton>
                     </Wrap>
                     <Typography className={`flex text-center mt-4 sm:mt-6 border border-[${getChainColor(chainId)}] p-2 rounded rounded-2xl`}>
