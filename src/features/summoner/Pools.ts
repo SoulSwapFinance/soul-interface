@@ -412,7 +412,7 @@ export const FantomPools = [
    { // 220
     pid: 22,
     type: 'lend',
-    decimals: 18,
+    decimals: 8,
     token0Symbol: 'BTC', // EXEMPT //
     token1Symbol: 'USDC',
     lpSymbol: 'USDC-BTC', // EXEMPT //
