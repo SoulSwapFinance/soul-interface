@@ -225,8 +225,12 @@ export const VoteBanner: FC = () => (
   </div>
 )
 
-export const MainBanner: FC = () => (
-  <div className="relative items-center w-full">
+interface IBanner {
+  chainId: number
+}
+
+export const MainBanner: FC<IBanner> = ({ chainId }) => (
+  <div className={classNames(chainId == ChainId.FANTOM ? "relative items-center w-full" : 'hidden')}>
     <div className="w-full">
       <div className="text-center">
         <p className="font-medium text-center text-white">
