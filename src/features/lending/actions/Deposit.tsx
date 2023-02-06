@@ -4,9 +4,9 @@ import { useLingui } from '@lingui/react'
 import { NATIVE, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import { Button } from 'components/Button'
 import UnderworldCooker from 'entities/UnderworldCooker'
-import { Direction, TransactionReview } from 'entities/TransactionReview'
+// import { Direction, TransactionReview } from 'entities/TransactionReview'
 import { Warnings } from 'entities/Warnings'
-import { formatNumber } from 'functions/format'
+// import { formatNumber } from 'functions/format'
 import { e10, ZERO } from 'functions/math'
 import { useCoffinBoxContract } from 'hooks'
 import { useCurrency } from 'hooks/Tokens'
@@ -16,10 +16,10 @@ import React, { useState } from 'react'
 
 import { UnderworldApproveButton, TokenApproveButton } from '../components/Button'
 import SmartNumberInput from '../components/SmartNumberInput'
-import TransactionReviewList from '../components/TransactionReview'
+// import TransactionReviewList from '../components/TransactionReview'
 import WarningsList from '../components/WarningsList'
 import { useUnderworldPairInfo } from 'hooks/useAPI'
-import { SubmitButton, Wrap } from 'features/underworld/Styles'
+// import { SubmitButton, Wrap } from 'features/underworld/Styles'
 import NavLink from 'components/NavLink'
 // import AssetInput from 'components/AssetInput'
 // import Typography from 'components/Typography'
@@ -30,24 +30,28 @@ export default function Deposit({ pair }: any): JSX.Element {
   const coffinBoxContract = useCoffinBoxContract()
   const { i18n } = useLingui()
   const { underworldPairInfo } = useUnderworldPairInfo(pair.address)
-  const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
-  const assetDecimals = Number(underworldPairInfo.assetDecimals)
+  // const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
+  // const assetDecimals = Number(underworldPairInfo.assetDecimals)
   // format tickers //
   const aTicker = underworldPairInfo.assetTicker
-  const bTicker = underworldPairInfo.collateralTicker
+  // const bTicker = underworldPairInfo.collateralTicker
 
   const assetSymbol
     = aTicker == 'WAVAX' ? 'AVAX'
       : aTicker == 'WFTM' ? 'FTM'
       : aTicker == 'WETH.e' ? 'ETH'
         : aTicker == 'WBTC.e' ? 'BTC'
-          : aTicker
-  const collateralSymbol
-    = bTicker == 'WAVAX' ? 'AVAX'
-      : bTicker == 'WFTM' ? 'FTM'
-      : bTicker == 'WETH.e' ? 'ETH'
-        : bTicker == 'WBTC.e' ? 'BTC'
-          : bTicker  // const assetDecimals = Number(underworldPairInfo.assetDecimals)
+          : aTicker == 'LINK.e' ? 'LINK'
+            : aTicker
+  // const collateralSymbol
+  //   = bTicker == 'WAVAX' ? 'AVAX'
+  //     : bTicker == 'WFTM' ? 'FTM'
+  //     : bTicker == 'WETH.e' ? 'ETH'
+  //       : bTicker == 'WBTC.e' ? 'BTC'
+  //         : bTicker == 'LINK.e' ? 'LINK'
+  //           : bTicker
+
+            // const assetDecimals = Number(underworldPairInfo.assetDecimals)
   // const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
   // const assetPrice = Number(underworldPairInfo.assetPrice)
   // const collateralPrice = Number(underworldPairInfo.collateralPrice)

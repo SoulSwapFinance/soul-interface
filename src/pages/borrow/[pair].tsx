@@ -59,13 +59,15 @@ export default function Pair() {
       : aTicker == 'WFTM' ? 'FTM'
       : aTicker == 'WETH.e' ? 'ETH'
         : aTicker == 'WBTC.e' ? 'BTC'
-          : aTicker
+          : aTicker == 'LINK.e' ? 'LINK'
+            : aTicker
   const collateralSymbol
     = bTicker == 'WAVAX' ? 'AVAX'
       : bTicker == 'WFTM' ? 'FTM'
       : bTicker == 'WETH.e' ? 'ETH'
         : bTicker == 'WBTC.e' ? 'BTC'
-          : bTicker
+          : bTicker == 'LINK.e' ? 'LINK'
+            : bTicker
 
   // const assetSymbol = pair?.asset.tokenInfo.symbol
   const assetAddress = pair?.asset.tokenInfo.address
@@ -215,18 +217,21 @@ const PairLayout = ({ children }) => {
   // const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
   // format tickers //
   const aTicker = underworldPairInfo.assetTicker
-  const bTicker = underworldPairInfo.collateralTicker
+  // const bTicker = underworldPairInfo.collateralTicker
 
   const assetSymbol
     = aTicker == 'WAVAX' ? 'AVAX'
       : aTicker == 'WETH.e' ? 'ETH'
         : aTicker == 'WBTC.e' ? 'BTC'
-          : aTicker
-  const collateralSymbol
-    = bTicker == 'WAVAX' ? 'AVAX'
-      : bTicker == 'WETH.e' ? 'ETH'
-        : bTicker == 'WBTC.e' ? 'BTC'
-          : bTicker
+          : aTicker == 'LINK.e' ? 'LINK'
+            : aTicker
+  
+  // const collateralSymbol
+  //   = bTicker == 'WAVAX' ? 'AVAX'
+  //     : bTicker == 'WETH.e' ? 'ETH'
+  //       : bTicker == 'WBTC.e' ? 'BTC'
+  //         : bTicker == 'LINK.e' ? 'LINK'
+  //           : bTicker
 
   // const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 

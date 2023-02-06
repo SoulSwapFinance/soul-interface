@@ -64,13 +64,15 @@ export default function Repay({ pair }: RepayProps) {
       : aTicker == 'WFTM' ? 'FTM'
       : aTicker == 'WETH.e' ? 'ETH'
         : aTicker == 'WBTC.e' ? 'BTC'
-          : aTicker
+          : aTicker == 'LINK.e' ? 'LINK'
+            : aTicker
   const collateralSymbol
     = bTicker == 'WAVAX' ? 'AVAX'
       : bTicker == 'WFTM' ? 'FTM'
       : bTicker == 'WETH.e' ? 'ETH'
         : bTicker == 'WBTC.e' ? 'BTC'
-          : bTicker
+          : bTicker == 'LINK.e' ? 'LINK'
+            : bTicker
 
   // Calculated
   const assetNative = WNATIVE[chainId || 250].address === pair.asset.address

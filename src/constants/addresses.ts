@@ -548,7 +548,7 @@ export const LINK_ADDRESS: AddressMap = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8', // LINK
-  [ChainId.AVALANCHE]: '',
+  [ChainId.AVALANCHE]: '0x5947BB275c521040051D82396192181b413227A3',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
   [ChainId.MOONRIVER]: '',

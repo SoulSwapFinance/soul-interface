@@ -47,6 +47,14 @@ const AVALANCHE_CHAINLINK_MAPPING = {
       fromDecimals: 18,
       toDecimals: 8,
     },
+    // LINK / USD
+    '0x49ccd9ca821EfEab2b98c60dC60F518E765EDe9a': {
+      from: '0x5947BB275c521040051D82396192181b413227A3', // LINK
+      to: '0x0000000000000000000000000000000000000001', // USD
+      decimals: 8,
+      fromDecimals: 18,
+      toDecimals: 8,
+    },
   }
   
   export default AVALANCHE_CHAINLINK_MAPPING

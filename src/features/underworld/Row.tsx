@@ -56,6 +56,7 @@ export const Row = ({ pair, assetAddress, lpToken }) => {
             : aTicker == 'WFTM' ? 'FTM'
             : aTicker == 'WETH.e' ? 'ETH'
             : aTicker == 'WBTC.e' ? 'BTC'
+            : aTicker == 'LINK.e' ? 'LINK'
             : aTicker
 
     const collateralSymbol 
@@ -63,6 +64,7 @@ export const Row = ({ pair, assetAddress, lpToken }) => {
             : bTicker == 'WFTM' ? 'FTM'
             : bTicker == 'WETH.e' ? 'ETH'
             : bTicker == 'WBTC.e' ? 'BTC'
+            : bTicker == 'LINK.e' ? 'LINK'
             : bTicker
    
     // const collateralAddress = Number(underworldPairInfo.collateralAddress)
