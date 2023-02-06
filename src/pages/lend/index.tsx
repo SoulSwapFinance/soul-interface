@@ -297,8 +297,8 @@ const LendEntry = ({ pair, userPosition = false }) => {
       <div className="hidden text-center lg:block">{pair.oracle.name}</div>
       {<><div>
           <div className="text-center">
-            {formatNumber(pair?.totalAsset.base / 10 ** (assetDecimals) * LEND_MULTIPLIER(chainId, pair?.asset.tokenInfo.symbol))} {pair?.asset.tokenInfo.symbol}
-            <div className="text-secondary">{formatNumber(totalDepositedValue * LEND_MULTIPLIER(chainId, pair?.asset.tokenInfo.symbol), true)}</div>
+            {formatNumber(pair?.totalAsset.base / 10 ** (assetDecimals) * LEND_MULTIPLIER(chainId, pair?.address))} {pair?.asset.tokenInfo.symbol}
+            <div className="text-secondary">{formatNumber(totalDepositedValue * LEND_MULTIPLIER(chainId, pair?.address), true)}</div>
           </div>
         </div><div className="text-center">
             {formatPercent(

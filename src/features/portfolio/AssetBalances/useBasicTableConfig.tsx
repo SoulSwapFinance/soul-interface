@@ -11,7 +11,7 @@ export const useBasicTableConfig = (assets?: Assets[], balancesLoading?: boolean
     () => [
       {
         id: 'asset',
-        Header: 'Supplied',
+        Header: 'Deposited',
         accessor: 'asset',
         minWidth: 100,
         className: 'text-left',

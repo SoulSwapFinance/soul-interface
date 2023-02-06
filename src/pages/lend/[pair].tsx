@@ -44,7 +44,7 @@ if (!pair) return <div />
 const assetDecimals = Number(underworldPairInfo.assetDecimals)
 // const collateralDecimals = Number(underworldPairInfo.collateralDecimals)
 const assetPrice = Number(underworldPairInfo.assetPrice)
-const MULTIPLIER = LEND_MULTIPLIER(chainId, pair?.asset.tokenInfo.symbol)
+const MULTIPLIER = LEND_MULTIPLIER(chainId, pair?.address)
 // const collateralPrice = Number(underworldPairInfo.collateralPrice)
 // const lpDecimals = Number(underworldPairInfo.decimals)
 // const assetAddress = underworldPairInfo.assetAddress
@@ -238,7 +238,7 @@ const PairLayout = ({ children }) => {
 
   // const util = 100 - available
   // const utilization = (util >= 100 || util <= 0) ? 100 : util
-  const MULTIPLIER = LEND_MULTIPLIER(chainId, pair?.asset.tokenInfo.symbol)
+  const MULTIPLIER = LEND_MULTIPLIER(chainId, pair?.address)
 
   const assetSymbol 
       = aTicker == 'WAVAX' ? 'AVAX'
