@@ -79,11 +79,11 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const _liquidity = Number(summonerPoolInfo.tvl) * MULTIPLIER
     // for display purposes only //
     const _APR = Number(summonerPoolInfo.apr) / MULTIPLIER
-
+    
     const allocPoint = summonerPoolInfo.allocPoint
     const lpAddress = summonerPoolInfo.lpAddress
     const pairStatus = summonerPoolInfo.status
-
+    
     // const { userInfo } = useUserInfo()
     const { pairInfo } = usePairInfo(lpAddress)
     // assumes 18, since only SOUL-LP farms are eligible for Zap   
@@ -611,7 +611,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
                                 {/* DEPOSIT: ASSET PANEL */}
 
-                                {Number(walletBalance) != 0 &&
+                                { hasBalance && isActive &&
                                     <FarmInputPanel
                                         pid={farm.pid}
                                         onUserInput={(value) => setDepositValue(value)}
@@ -635,7 +635,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     </SubmitButton>
                                 )}
                                 {/* APPROVED */}
-                                {approved && hasBalance && (
+                                {approved && hasBalance && isActive && (
                                     <SubmitButton
                                         height="2rem"
                                         primaryColor={buttonColor}

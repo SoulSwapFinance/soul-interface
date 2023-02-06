@@ -55,6 +55,14 @@ const FANTOM_CHAINLINK_MAPPING = {
     fromDecimals: 18, // CRV
     toDecimals: 8, // USD
   },
+  // LINK / USD
+'0x221C773d8647BC3034e91a0c47062e26D20d97B4': {
+    from: '0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8', // LINK
+    to: '0x0000000000000000000000000000000000000001', // USD
+    decimals: 8, // USD
+    fromDecimals: 18, // LINK
+    toDecimals: 8, // USD
+  },
 }  
 
 export default FANTOM_CHAINLINK_MAPPING

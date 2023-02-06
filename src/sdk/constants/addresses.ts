@@ -330,6 +330,7 @@ export const UNDERWORLD_PAIRS = {
     '0x0a55Eb040C5183c5784A03F34bCEb3963f52b5a0',   // USDC-ETH
     '0x91787338E8fF91D0B36E54Fa5A50046d6C797D5B',   // USDC-BTC
     '0x9e17f37d807B211306C7354605FAAa308c3683EB',   // USDC-BNB
+    '0x5C900Ac3c95D13adE54D28A9800636AE21Cb5F39',   // USDC-LINK
     
     // INACTIVE //
     '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61',     // FTM-DAI
@@ -355,6 +356,7 @@ export const ACTIVE_UNDERWORLD_PAIRS = {
     '0x0a55Eb040C5183c5784A03F34bCEb3963f52b5a0',   // USDC-ETH
     '0x91787338E8fF91D0B36E54Fa5A50046d6C797D5B',   // USDC-BTC
     '0x9e17f37d807B211306C7354605FAAa308c3683EB',   // USDC-BNB
+    '0x5C900Ac3c95D13adE54D28A9800636AE21Cb5F39',   // USDC-LINK
   ],
 
   [ChainId.AVALANCHE]: [
@@ -404,6 +406,17 @@ export const ENCHANT_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a',
+  [ChainId.AVALANCHE]: '',
+  [ChainId.MATIC]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
+
+export const LINK_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8',
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
