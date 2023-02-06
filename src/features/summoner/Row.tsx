@@ -129,7 +129,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const _withdrawValue = Number(withdrawValue) * MULTIPLIER
 
     const hasBalance = Number(walletBalance) > 0
-    const isActive = pairStatus == "active"
+    const isActive = Number(allocPoint) > 0 // pairStatus == "active"
     const assetToken = new Token(chainId, farm.lpAddress, decimals)
 
     const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
@@ -622,7 +622,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     />
                                 }
                                 {/* UN-APPROVED */}
-                                {!approved && hasBalance && (
+                                {!approved && (
                                     <SubmitButton
                                         height="2rem"
                                         primaryColor={buttonColor}
@@ -648,7 +648,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         <div className="flex text-lg gap-2">
                                             <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
                                             {i18n._(t`DEPOSIT`)} {
-                                                Number(allocPoint) == 220
+                                                isUnderworldPair
                                                     ? token0Symbol
                                                     : farm.lpSymbol
                                             }
