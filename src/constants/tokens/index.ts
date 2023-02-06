@@ -133,6 +133,10 @@ export const BNB: ChainTokenMap = {
 export const CRV: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x1E4F97b9f9F913c46F1632781732927B9019C68b', 18, 'CRV', 'Curve DAO'),
 }
+// LINK
+export const LINK: ChainTokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8', 18, 'LINK', 'ChainLink'),
+}
 
 // ANY
 export const ANY: ChainTokenMap = {

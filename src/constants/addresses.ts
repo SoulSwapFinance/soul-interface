@@ -543,6 +543,17 @@ export const CRV_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '',
 }
 
+export const LINK_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8', // LINK
+  [ChainId.AVALANCHE]: '',
+  [ChainId.MATIC]: '',
+  [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
+}
+
 export const UNIDX_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x95b3497bBcCcc46a8F45F5Cf54b0878b39f8D96C',
   [ChainId.TELOS]: '',
