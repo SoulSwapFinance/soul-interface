@@ -611,7 +611,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
                                 {/* DEPOSIT: ASSET PANEL */}
 
-                                { hasBalance &&
+                                { hasBalance && isActive &&
                                     <FarmInputPanel
                                         pid={farm.pid}
                                         onUserInput={(value) => setDepositValue(value)}
@@ -635,7 +635,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     </SubmitButton>
                                 )}
                                 {/* APPROVED */}
-                                {approved && hasBalance && (
+                                {approved && hasBalance && isActive && (
                                     <SubmitButton
                                         height="2rem"
                                         primaryColor={buttonColor}
