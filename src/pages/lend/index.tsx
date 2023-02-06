@@ -76,7 +76,7 @@ export default function Lend() {
       </Head>
       <Card className="h-full bg-dark-900" header={<MarketHeader type="Underworld Markets" lists={[pairs, positions]} />}>
 
-      <UnderworldBanner />
+      {[ChainId.FANTOM].includes(chainId) && <UnderworldBanner />}
 
         {/* {positions.items && positions.items.length > 0 && (
           <div className="pb-4">

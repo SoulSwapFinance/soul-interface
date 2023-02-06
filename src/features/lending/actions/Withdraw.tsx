@@ -98,8 +98,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
       ),
       // && pair.userAssetFraction.sub(pair.currentUserLentAmount.value).lte(0),
       i18n._(
-        t`There isn't enough available to withdraw large amounts. 
-        Your options are as follows: (1) withdraw small amounts, (2) bond your supplied tokens, or (3) try later.`
+        t`There isn't enough liquidity available to withdraw large amounts. You may: withdraw small amounts, bond your lent assets, or try later.`
       ),
       true
     )
