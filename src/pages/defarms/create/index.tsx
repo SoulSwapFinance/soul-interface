@@ -491,9 +491,6 @@ const CreateFarmLayout = ({ children }) => {
   )
 }
 
-
 CreateFarm.Guard = NetworkGuard(Feature.DEFARM)
 
-function erc20Allowance(account: string, manifestationAddress: string) {
-  throw new Error('Function not implemented.')
-}
+
