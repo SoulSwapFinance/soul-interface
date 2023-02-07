@@ -30,7 +30,7 @@ import Input from 'components/Input'
 import useApprove from 'hooks/useApprove'
 // import { formatNumber } from 'functions'
 
-export default function CreateFarm() {
+const CreateFarm = () => {
   const { account, chainId } = useActiveWeb3React()
   const manifesterContract = useManifesterContract()
   const addTransaction = useTransactionAdder()
@@ -490,6 +490,8 @@ const CreateFarmLayout = ({ children }) => {
     </Layout>
   )
 }
+
+export default CreateFarm
 
 CreateFarm.Guard = NetworkGuard(Feature.DEFARM)
 

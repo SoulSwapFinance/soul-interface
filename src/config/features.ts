@@ -21,7 +21,7 @@ const features: FeatureMap = {
   ],
 
   [ChainId.TELOS]: [
-    Feature.AMM, 
+    Feature.AMM,
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD
   ],
@@ -29,6 +29,7 @@ const features: FeatureMap = {
   [ChainId.MOONRIVER]: [
     Feature.AMM,
     Feature.BRIDGE,
+    Feature.DEFARM
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD
   ],

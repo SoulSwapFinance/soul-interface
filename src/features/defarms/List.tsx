@@ -9,6 +9,8 @@ import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
 import { t } from '@lingui/macro'
 import { i18n } from '@lingui/core'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums'
 
 export const FarmList = () => {
   const { chainId } = useActiveWeb3React()
@@ -103,3 +105,5 @@ export const FarmList = () => {
 }
 
 export default FarmList
+
+FarmList.Guard = NetworkGuard(Feature.LIQUIDITY_MINING)

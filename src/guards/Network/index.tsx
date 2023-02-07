@@ -32,7 +32,7 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
   const supportedNetworks = Object.entries(features).reduce<string[]>((acc, [k, v]) => {
     if (v.includes(feature)) {
       acc.push(k)
-    }
+    } else { return acc }
 
     return acc
   }, [])
