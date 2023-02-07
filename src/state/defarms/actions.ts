@@ -2,7 +2,9 @@ import { createAction } from '@reduxjs/toolkit'
 
 export enum Field {
   DEPOSIT = 'DEPOSIT',
-  REWARD = 'REWARD'
+  REWARD = 'REWARD',
+  DURATION = 'DURATION',
+  FEE = 'FEE',
 }
 
 export const selectCurrency = createAction<{

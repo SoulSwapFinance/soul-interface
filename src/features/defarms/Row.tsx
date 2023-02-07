@@ -13,9 +13,9 @@ import { classNames, formatDate, formatNumber, formatUnixTimestampToDay, tryPars
 import { usePairInfo, useDeFarmInfo, useDeFarmUserInfo, useTokenInfo, useUserTokenInfo, useDeFarmPoolInfo } from 'hooks/useAPI'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 import Modal from 'components/DefaultModal'
+import ModalHeader from 'components/Modal/Header'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
-import ModalHeader from 'components/Modal/Header'
 import NavLink from 'components/NavLink'
 import FarmInputPanel from './Input'
 import { CurrencyLogo } from 'components/CurrencyLogo'
@@ -28,7 +28,7 @@ import { CircleStackIcon, CurrencyDollarIcon, PlusCircleIcon } from '@heroicons/
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import { t } from '@lingui/macro'
 import { i18n } from '@lingui/core'
-import { Route } from 'react-router-dom'
+// import { Route } from 'react-router-dom'
 import { useRouter } from 'next/router'
 
 const HideOnSmall = styled.div`
@@ -105,8 +105,8 @@ export const ActiveRow = ({ pid, farm }) => {
     const rewardToken = new Token(chainId, rewardAddress, 18)
 
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(depositAddress)
-    const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
-    const parsedDepositValue = tryParseAmount(depositValue, assetToken)
+    // const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
+    // const parsedDepositValue = tryParseAmount(depositValue, assetToken)
     const parsedWithdrawValue = tryParseAmount(withdrawValue, assetToken)
 
     // COLOR //

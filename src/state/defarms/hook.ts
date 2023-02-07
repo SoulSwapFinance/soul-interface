@@ -83,8 +83,12 @@ export function useDerivedCreateFarmInfo(): {
   //   inputError = inputError ?? i18n._(t`Select Deposit`)
   // }
 
-  if (!currencies[Field.REWARD] || !currencies[Field.REWARD]) {
+  if (!currencies[Field.REWARD]) {
     inputError = inputError ?? i18n._(t`Select Reward`)
+  }
+
+  if (!Field.FEE) {
+    inputError = inputError ?? i18n._(t`Set Withdraw Fee`)
   }
 
   return {
