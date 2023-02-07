@@ -204,7 +204,7 @@ export const InactiveFantomPools = [
   //   token0Address: WETH_ADDRESS[ChainId.FANTOM],
   //   token1Address: DAI_ADDRESS[ChainId.FANTOM],
   // },
-  { // LENDING
+  /* { // LENDING
     pid: 18,
     type: 'lend',
     decimals: 8,
@@ -214,7 +214,7 @@ export const InactiveFantomPools = [
     lpAddress: '0xaf28730165634A56434ca7f0B302CC54F862046F',
     token0Address: WBTC_ADDRESS[ChainId.FANTOM],
     token1Address: DAI_ADDRESS[ChainId.FANTOM],
-  },
+  }, */
   { // LENDING √
     pid: 15,
     type: 'lend',
