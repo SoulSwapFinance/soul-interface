@@ -182,28 +182,28 @@ export const InactiveFantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: DAI_ADDRESS[ChainId.FANTOM],
   },
-  { // LENDING √
-    pid: 14,
-    type: 'lend',
-    decimals: 18,
-    token0Symbol: 'DAI',
-    token1Symbol: 'FTM', // EXEMPT //
-    lpSymbol: 'FTM-DAI',
-    lpAddress: '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61',
-    token0Address: DAI_ADDRESS[ChainId.FANTOM],
-    token1Address: WNATIVE_ADDRESS[ChainId.FANTOM], // EXEMPT //
-  },
-  { // LENDING √
-    pid: 17,
-    type: 'lend',
-    decimals: 18,
-    token0Symbol: 'ETH',
-    token1Symbol: 'DAI',
-    lpSymbol: 'DAI-ETH',
-    lpAddress: '0x9fA5de19495331E13b443F787B90CdD22B32263d',
-    token0Address: WETH_ADDRESS[ChainId.FANTOM],
-    token1Address: DAI_ADDRESS[ChainId.FANTOM],
-  },
+  // { // LENDING √
+  //   pid: 14,
+  //   type: 'lend',
+  //   decimals: 18,
+  //   token0Symbol: 'DAI',
+  //   token1Symbol: 'FTM', // EXEMPT //
+  //   lpSymbol: 'FTM-DAI',
+  //   lpAddress: '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61',
+  //   token0Address: DAI_ADDRESS[ChainId.FANTOM],
+  //   token1Address: WNATIVE_ADDRESS[ChainId.FANTOM], // EXEMPT //
+  // },
+  // { // LENDING √
+  //   pid: 17,
+  //   type: 'lend',
+  //   decimals: 18,
+  //   token0Symbol: 'ETH',
+  //   token1Symbol: 'DAI',
+  //   lpSymbol: 'DAI-ETH',
+  //   lpAddress: '0x9fA5de19495331E13b443F787B90CdD22B32263d',
+  //   token0Address: WETH_ADDRESS[ChainId.FANTOM],
+  //   token1Address: DAI_ADDRESS[ChainId.FANTOM],
+  // },
   { // LENDING
     pid: 18,
     type: 'lend',

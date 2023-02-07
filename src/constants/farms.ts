@@ -1,4 +1,4 @@
-import { ChainId, SOUL_ADDRESS, SOUL_NATIVE, SOUL_USDC, USDC_ADDRESS, WNATIVE_ADDRESS, USDC_NATIVE, BTC_NATIVE, ETH_NATIVE, DAI_USDC, WBTC_ADDRESS, WETH_ADDRESS, DAI_ADDRESS, BNB_NATIVE, BNB_ADDRESS } from '../sdk'
+import { ChainId, SOUL_ADDRESS, SOUL_NATIVE, SOUL_USDC, USDC_ADDRESS, WNATIVE_ADDRESS, USDC_NATIVE, BTC_NATIVE, ETH_NATIVE, DAI_USDC, WBTC_ADDRESS, WETH_ADDRESS, DAI_ADDRESS, BNB_NATIVE, BNB_ADDRESS, LINK_ADDRESS } from '../sdk'
 
 export type TokenInfo = {
   id: string
@@ -297,8 +297,8 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
       token1: {
-        id: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // WETH
-        name: 'Wrapped ETH',
+        id: WETH_ADDRESS[ChainId.FANTOM], // WETH
+        name: 'Wrapped Ethereum',
         symbol: 'WETH',
         decimals: 18,
       },
@@ -361,7 +361,7 @@ export const POOLS: AddressMap = {
         decimals: 8,
       },
       token1: { // WETH
-        id: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // WETH
+        id: WETH_ADDRESS[ChainId.FANTOM], // WETH
         name: 'Wrapped Ethereum',
         symbol: 'WETH',
         decimals: 18,
@@ -393,7 +393,7 @@ export const POOLS: AddressMap = {
         decimals: 6,
       },
       token1: { // WETH
-        id: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // WETH
+        id: WETH_ADDRESS[ChainId.FANTOM], // WETH
         name: 'Wrapped Ethereum',
         symbol: 'WETH',
         decimals: 18,
@@ -425,12 +425,12 @@ export const POOLS: AddressMap = {
         symbol: 'FTM',
         decimals: 18,
       },
-      token1: {
-        id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
-        name: 'Dai Stablecoin',
-        symbol: 'DAI',
-        decimals: 18,
-      },
+      // token1: {
+      //   id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
+      //   name: 'Dai Stablecoin',
+      //   symbol: 'DAI',
+      //   decimals: 18,
+      // },
     },
     '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61': {  // FTM-DAI [LEND]
       id: 14,
@@ -442,14 +442,14 @@ export const POOLS: AddressMap = {
         symbol: 'DAI',
         decimals: 18,
       },
-      token1: {
-        id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
-        name: 'Wrapped Fantom',
-        symbol: 'FTM',
-        decimals: 18,
-      },
+      // token1: {
+      //   id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+      //   name: 'Wrapped Fantom',
+      //   symbol: 'FTM',
+      //   decimals: 18,
+      // },
     },
-    '0xbDa9204e6D596feCf9bd48108723F9BDAa2019f6': {  // BNB/FTM [LEND]
+    '0xbDa9204e6D596feCf9bd48108723F9BDAa2019f6': {  // DAI-BNB [LEND]
       id: 15,
       address: '0xd67de0e0a0fd7b15dc8348bb9be742f3c5850454',
       type: 'underworld',
@@ -459,12 +459,12 @@ export const POOLS: AddressMap = {
         symbol: 'BNB',
         decimals: 18,
       },
-      token1: {
-        id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // DAI
-        name: 'Wrapped Fantom',
-        symbol: 'FTM',
-        decimals: 18,
-      },
+      // token1: {
+      //   id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // DAI
+      //   name: 'Wrapped Fantom',
+      //   symbol: 'FTM',
+      //   decimals: 18,
+      // },
     },
     '0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99': {  // FTM-WLUM
       id: 16,
@@ -482,22 +482,22 @@ export const POOLS: AddressMap = {
         decimals: 9,
       },
     },
-    '0x9fA5de19495331E13b443F787B90CdD22B32263d': {  // WETH-DAI
+    '0x9fA5de19495331E13b443F787B90CdD22B32263d': {  // DAI-ETH [LEND]
       id: 17, 
       address: '0x74b23882a30290451a17c44f4f05243b6b58c76d',
       type: 'underworld',
       token0: {
-        id: '0x74b23882a30290451A17c44f4F05243b6b58C76d', // WETH
+        id: WETH_ADDRESS[ChainId.FANTOM], // WETH
         name: 'Wrapped ETH',
         symbol: 'WETH',
         decimals: 18,
       },
-      token1: {
-        id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
-        name: 'Dai Stablecoin',
-        symbol: 'DAI',
-        decimals: 18,
-      },
+      // token1: {
+      //   id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
+      //   name: 'Dai Stablecoin',
+      //   symbol: 'DAI',
+      //   decimals: 18,
+      // },
     },
     '0xaf28730165634A56434ca7f0B302CC54F862046F': {  // BTC-DAI
       id: 18, 
@@ -509,12 +509,131 @@ export const POOLS: AddressMap = {
         symbol: 'WBTC',
         decimals: 8,
       },
-      token1: {
-        id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
-        name: 'Dai Stablecoin',
-        symbol: 'DAI',
+      // token1: {
+      //   id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // DAI
+      //   name: 'Dai Stablecoin',
+      //   symbol: 'DAI',
+      //   decimals: 18,
+      // },
+    },
+    '0x29a72C8d81815787B886E9fc9d763406C796DD73': {  // USDC-FTM
+      id: 19, 
+      address: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+      type: 'underworld',
+      token0: {
+        id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+        name: 'Wrapped Fantom',
+        symbol: 'FTM',
         decimals: 18,
       },
+      // token1: {
+      //   id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // USDC
+      //   name: 'USD Coin',
+      //   symbol: 'USDC',
+      //   decimals: 6,
+      // },
     },
+    '0xc5Ae8847C868898f68EF0227B6c4865dFcCe0D65': {  // FTM-USDC
+      id: 20, 
+      address: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // USDC
+      type: 'underworld',
+      token0: {
+        id: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', // USDC
+        name: 'USD Coin',
+        symbol: 'USDC',
+        decimals: 6,
+      },
+      // token1: {
+      //   id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+      //   name: 'Wrapped Fantom',
+      //   symbol: 'FTM',
+      //   decimals: 18,
+      // },
+    },
+    '0x0a55Eb040C5183c5784A03F34bCEb3963f52b5a0': {  // USDC-ETH √
+      id: 21, 
+      address: WETH_ADDRESS[ChainId.FANTOM], // ETH
+      type: 'underworld',
+      token0: {
+        id: WETH_ADDRESS[ChainId.FANTOM], // ETH
+        name: 'Wrapped Ethereum',
+        symbol: 'ETH',
+        decimals: 18,
+      },
+      // token1: {
+      //   id: USDC_ADDRESS[ChainId.FANTOM], // USDC
+      //   name: 'USD Coin',
+      //   symbol: 'USDC',
+      //   decimals: 6,
+      // },
+    },
+    '0x91787338E8fF91D0B36E54Fa5A50046d6C797D5B': {  // USDC-BTC √
+      id: 22, 
+      address: WBTC_ADDRESS[ChainId.FANTOM], // BTC
+      type: 'underworld',
+      token0: {
+        id: WBTC_ADDRESS[ChainId.FANTOM], // BTC
+        name: 'Wrapped Bitcoin',
+        symbol: 'WBTC',
+        decimals: 8,
+      },
+      // token1: {
+      //   id: USDC_ADDRESS[ChainId.FANTOM], // USDC
+      //   name: 'USD Coin',
+      //   symbol: 'USDC',
+      //   decimals: 6,
+      // },
+    },
+    '0x9e17f37d807B211306C7354605FAAa308c3683EB': {  // USDC-BNB √
+      id: 23, 
+      address: BNB_ADDRESS[ChainId.FANTOM], // BNB
+      type: 'underworld',
+      token0: {
+        id: BNB_ADDRESS[ChainId.FANTOM], // BNB
+        name: 'Binance',
+        symbol: 'BNB',
+        decimals: 18,
+      },
+      // token1: {
+      //   id: USDC_ADDRESS[ChainId.FANTOM], // USDC
+      //   name: 'USD Coin',
+      //   symbol: 'USDC',
+      //   decimals: 6,
+      // },
+    },
+    '0x5C900Ac3c95D13adE54D28A9800636AE21Cb5F39': {  // USDC-LINK √
+      id: 24, 
+      address: LINK_ADDRESS[ChainId.FANTOM], // LINK
+      type: 'underworld',
+      token0: {
+        id: LINK_ADDRESS[ChainId.FANTOM], // LINK
+        name: 'USD Coin',
+        symbol: 'USDC',
+        decimals: 18,
+      },
+      // token1: {
+      //   id: USDC_ADDRESS[ChainId.FANTOM], // USDC
+      //   name: 'USD Coin',
+      //   symbol: 'USDC',
+      //   decimals: 6,
+      // },
+    },
+
+    // '0x5796Bf89f6C7C47811E4E59Ecd7aCACC8A5B9dEF': {
+    //   id: 5,
+    //   address: ETH_NATIVE[ChainId.AVALANCHE],
+    //   token0: {
+    //     id: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+    //     name: 'Wrapped Avalanche',
+    //     symbol: 'WAVAX',
+    //     decimals: 18,
+    //   },
+    //   token1: {
+    //     id: WETH_ADDRESS[ChainId.AVALANCHE],
+    //     name: 'Wrapped Ethereum',
+    //     symbol: 'WETH',
+    //     decimals: 18,
+    //   },
+    // },
   }, 
 }

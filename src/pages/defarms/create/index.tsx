@@ -1,4 +1,5 @@
-import { defaultAbiCoder } from '@ethersproject/abi'
+// import { defaultAbiCoder } from '@ethersproject/abi'
+import { ethers } from 'ethers'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Button } from 'components/Button'
@@ -18,66 +19,160 @@ import { useRouter } from 'next/router'
 import React, { useCallback, useState } from 'react'
 import ExternalLink from 'components/ExternalLink'
 import { getChainColor, getChainColorCode } from 'constants/chains'
+import Typography from 'components/Typography'
+import Modal from 'components/DefaultModal'
+import ModalHeader from 'components/Modal/Header'
+import { i18n } from '@lingui/core'
+import { useDeFarmInfo, useUserTokenInfo } from 'hooks/useAPI'
+import { MANIFESTER_ADDRESS, MaxUint256, SOUL, SOUL_ADDRESS, Token } from 'sdk'
+import { formatNumber } from 'functions'
+import Input from 'components/Input'
+import useApprove from 'hooks/useApprove'
+// import { formatNumber } from 'functions'
 
-// import { AddressZero } from '@ethersproject/constants'
-// import { Currency, MANIFESTER_ADDRESS } from 'sdk'
-// import { CHAINLINK_PRICE_FEED_MAP } from 'config/oracles/chainlink'
-// import { e10 } from 'functions/math'
-
-export type ChainlinkToken = {
-  symbol: string
-  name: string
-  address: string
-  decimals: number
-}
-
-export default function CreateFarm() {
-  const { chainId } = useActiveWeb3React()
+const CreateFarm = () => {
+  const { account, chainId } = useActiveWeb3React()
   const manifesterContract = useManifesterContract()
   const addTransaction = useTransactionAdder()
   const router = useRouter()
-  const [rewardDays, setRewardDays] = useState(0)
-  const [feeDays, setFeeDays] = useState(0)
-  const [dailyReward, seDailyReward] = useState(0)
+
+  // KEY DATA INPUT //
+  const [rewardAsset, setRewardAsset] = useState<Token>()
+  const [assetSet, setAsset] = useState(false)
+  const [feeDays, setFeeDays] = useState(14)
+  const [feeSet, setFee] = useState(false)
+  const [dailyReward, setDailyReward] = useState(0)
+  const [rewardSet, setReward] = useState(false)
+  const [rewardDays, setRewardDays] = useState(30)
+  const [durationSet, setDuration] = useState(false)
+  const [depositCalculated, setDeposit] = useState(false)
+  // const [sacrifice, setSacrifice] = useState(0)
+  const [totalReward, setTotalReward] = useState(0)
+
+  const [approved, setApproved] = useState(false)
+  const [showConfirmation, setShowConfirmation] = useState(false)
 
   // const { independentField, typedValue } = useCreateState()
-  const { onSwitchTokens, onCurrencySelection, onUserInput } = useCreateFarmActionHandlers()
+  const { onCurrencySelection, onUserInput } = useCreateFarmActionHandlers()
 
   const { currencies, inputError } = useDerivedCreateFarmInfo()
+  const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(rewardAsset?.wrapped.address)
 
-  const handleDepositSelect = useCallback(
-    (depositCurrency) => {
-      onCurrencySelection(Field.DEPOSIT, depositCurrency)
-    },
-    [onCurrencySelection]
-  )
+  // DEFARM POOL INFO //
+  const { defarmInfo } = useDeFarmInfo()
+  const bloodSacrifice = Number(defarmInfo?.bloodSacrifice) / 1E18 / 100 // converts to %
+  const { userTokenInfo } = useUserTokenInfo(account, SOUL_ADDRESS[chainId])
+  const balance = Number(userTokenInfo?.balance) / 1E18
+
+  const campaignReady = Boolean(rewardSet && durationSet && feeSet)
+  const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
+
 
   const handleRewardSelect = useCallback(
-    (rewardCurrency) => {
+    (rewardCurrency: Token) => {
       onCurrencySelection(Field.REWARD, rewardCurrency)
+      setRewardAsset(rewardCurrency)
+      setAsset(true)
     },
-    [onCurrencySelection]
+    [onCurrencySelection, setRewardAsset, setAsset]
   )
 
-  const both = Boolean(currencies[Field.DEPOSIT] && currencies[Field.REWARD])
+  const handleDailyRewards = useCallback(
+    (dailyReward) => {
+      onUserInput(Field.REWARD, dailyReward.toString())
+      setDailyReward(dailyReward)
+      setReward(true)
+      console.log({ dailyReward })
+      console.log({ balance })
+    },
+    [onUserInput, setDailyReward, setReward]
+  )
+
+  const handleRewardDays = useCallback(
+    (rewardDays) => {
+      onUserInput(Field.DURATION, rewardDays.toString())
+      setRewardDays(rewardDays)
+      setDuration(true)
+      console.log({ rewardDays })
+    },
+    [onUserInput, setRewardDays, setDuration]
+  )
+
+  const handleWithdrawFee = useCallback(
+    (feeDays) => {
+      onUserInput(Field.FEE, feeDays.toString())
+      setFeeDays(Number(feeDays))
+      setFee(true)
+      console.log({ feeDays })
+    },
+    [onUserInput, setFeeDays]
+  )
+
+  // const calculateDeposit = useCallback(
+  //   () => {
+  //     setTotalReward(Number(dailyReward) * Number(rewardDays))
+  //     setSacrifice(Number(dailyReward) * Number(rewardDays) * Number(bloodSacrifice))
+  //     setDeposit(true)
+  //     console.log({ feeDays })
+  //   },
+  //   [setTotalReward, setSacrifice, setDeposit]
+  // )
+
+  // const handleCreateRewards = useCallback(
+  //   (dailyReward, rewardDays) => {
+  //     onUserInput(Field.REWARD, dailyReward.toString())
+  //     setDailyReward(dailyReward)
+  //     setRewardDays(rewardDays)
+  //     setSacrifice(bloodSacrifice * rewardDays * dailyReward / 100)
+  //     console.log({dailyReward})
+  //   },
+  //   [onUserInput, setDailyReward]
+  // )
+
+  const rewardSelected = Boolean(currencies[Field.REWARD])
+  // const feeSelected = Boolean(currencies[Field.FEE])
+  // const createReady = Boolean(rewardSelected && feeSelected)
+
+  // checks: approval for defarm to move tokens.
+  const fetchApproval = async () => {
+    if (!account) {
+      // alert('Connect Wallet')
+    } else {
+      // Checks if ManifestationContract can move tokens
+      const amount = await erc20Allowance(account, MANIFESTER_ADDRESS[chainId])
+      if (Number(amount) > 0) setApproved(true)
+      return amount
+    }
+  }
+  // approves DeFarm to move RewardToken
+  const handleApprove = async () => {
+    try {
+      let tx
+      tx = await erc20Approve(MANIFESTER_ADDRESS[chainId])
+      await tx?.wait().then(await fetchApproval())
+    } catch (e) {
+      console.log(e)
+      return
+    }
+  }
 
   const handleCreate = async () => {
     try {
-      if (!both) return
+      if (!rewardSelected) return
 
 
-      const defarmData = defaultAbiCoder.encode(
-        ['address', 'uint', 'uint', 'uint'],
-        [
-          currencies[Field.REWARD].wrapped.address, // rewardAddress
-          rewardDays,                               // duraDays
-          feeDays,                                  // feeDays
-          dailyReward                               // dailyReward
-        ]
-      )
+      // const defarmData = defaultAbiCoder.encode(
+      //   ['address', 'uint', 'uint', 'uint'],
+      //   [
+      //     currencies[Field.REWARD].wrapped.address, // rewardAddress
+      //     rewardDays,                               // duraDays
+      //     feeDays,                                  // feeDays
+      //     dailyReward                               // dailyReward
+      //   ]
+      // )
 
       // console.log([
-        currencies[Field.REWARD].wrapped.address,
+      currencies[Field.REWARD].wrapped.address,
         rewardDays,
         feeDays,
         dailyReward
@@ -85,11 +180,15 @@ export default function CreateFarm() {
 
       const tx = await manifesterContract?.createManifestation(
         // chainId && MANIFESTER_ADDRESS[chainId], 
-        defarmData
+        // defarmData
+        currencies[Field.REWARD].wrapped.address, // rewardAddress
+        rewardDays,                               // duraDays
+        feeDays,                                  // feeDays
+        dailyReward                               // dailyReward
       )
 
       addTransaction(tx, {
-        summary: `Create Farm ${currencies[Field.REWARD].symbol}/${currencies[Field.DEPOSIT].symbol} Chainlink`,
+        summary: `Create Farm ${currencies[Field.REWARD].symbol}/${currencies[Field.DEPOSIT].symbol}`,
       })
 
       router.push('/defarms')
@@ -107,42 +206,242 @@ export default function CreateFarm() {
       <Card
         className="h-full bg-dark-900"
         header={
-          <Card.Header className="bg-dark-800">
-            <div className="text-3xl text-high-emphesis leading-48px">Create Farm</div>
+          <Card.Header className="bg-dark-800 justify-center">
+            <div className="text-3xl text-high-emphesis font-bold justify-center">Create DeFarm Campaign</div>
           </Card.Header>
         }
       >
         <Container maxWidth="full" className="space-y-6">
+          {/* START: DAILY REWARD INPUT */}
+          <Typography
+            className={`font-bold text-xl text-center mb-4 border border-2 ${rewardSet && assetSet ? `border-purple` : `border-neonGreen`} m-2 p-2 rounded rounded-2xl`}
+          >
+            {`${!assetSet 
+                ? `Select Reward Asset` 
+                  : !rewardSet 
+                    ? `Set Daily Rewards` 
+                      : `Daily Reward`}`}
+          </Typography>
           <div className="grid grid-cols-1 grid-rows-1 gap-4 md:grid-rows-1 md:grid-cols-1">
             <CurrencyInputPanel
               chainId={chainId}
-              label="Reward"
+              label="Reward Asset"
               hideBalance={true}
-              hideInput={false}
-              currency={currencies[Field.DEPOSIT]}
-              onCurrencySelect={handleDepositSelect}
-              otherCurrency={currencies[Field.REWARD]}
+              // onMax={async () => await onMax(balance)}
+              value={dailyReward.toString()}
+              hideInput={false} // 
+              currency={currencies[Field.REWARD]}
+              onCurrencySelect={handleRewardSelect}
+              onUserInput={handleDailyRewards}
               showCommonBases={false}
               allowManageTokenList={false}
               showSearch={true}
               id="defarms-currency-reward"
             />
           </div>
+          {/* END: DAILY REWARD INPUT */}
 
-          <Button
-            color="gradient"
-            className="w-full px-4 py-3 text-base rounded text-high-emphesis"
-            onClick={() => handleCreate()}
-            disabled={!both}
+          {/* START: REWARD DURATION INPUT */}
+          <div className={
+            `flex flex-cols-2 border border-2 ${durationSet ? `border-purple` : `border-neonGreen`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
           >
-            {inputError || 'Create'}
+            <Typography className={`w-full text-sm md:text-lg font-bold`}>
+              {`${!durationSet ? `Set` : ``} Reward Duration`}
+            </Typography>
+            <Input.Numeric
+              value={rewardDays}
+              onUserInput={handleRewardDays}
+              className={`text-white bg-dark-1000 w-[1/5] mr-3 text-center`}
+            />
+            {`Days`}
+          </div>
+          {/* START: REWARD DURATION INPUT */}
+
+          <div className={
+            `flex flex-cols-2 border border-2 ${feeSet ? `border-purple` : `border-neonGreen`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
+          >
+            <Typography className={`w-full text-sm md:text-lg font-bold`}>
+              {`${!feeSet ? `Set` : ``} Withdraw Fee Duration`}
+            </Typography>
+            {/* END: REWARD DURATION INPUT */}
+
+            {/* START: WITHDRAW FEE INPUT */}
+            <Input.Numeric
+              value={feeDays}
+              onUserInput={handleWithdrawFee}
+              className={`text-white bg-dark-1000 w-[1/5] mr-3 text-center`}
+            />
+            {`Days`}
+          </div>
+          {/* END: WITHDRAW FEE INPUT */}
+
+          <div className={`flex flex-col bg-dark-1000 p-3 border border-1 
+            ${feeSet && rewardSet && assetSet ? `border-purple` : `border-dark-700`} 
+            w-full rounded rounded-2xl space-y-1`}
+          >
+            <div className="flex justify-between">
+              <Typography className="text-white" fontFamily={'medium'}>
+                {i18n._(t`Reward Asset`)}
+              </Typography>
+              <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
+                {rewardAsset?.wrapped.symbol}
+              </Typography>
+            </div>
+            <div className="flex justify-between">
+              <Typography className="text-white" fontFamily={'medium'}>
+                {i18n._(t`Daily Reward`)}
+              </Typography>
+              <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
+                {formatNumber(dailyReward, false, true)}
+              </Typography>
+            </div>
+            <div className="flex justify-between">
+              <Typography className="text-white" fontFamily={'medium'}>
+                {i18n._(t`Campaign Days`)}
+              </Typography>
+              <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
+                {`${rewardDays} Days`}
+              </Typography>
+            </div>
+            <div className="flex justify-between">
+              <Typography className="text-white" fontFamily={'medium'}>
+                {i18n._(t`Fee Duration`)}
+              </Typography>
+              <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
+                {`${feeDays} Days`}
+              </Typography>
+            </div>
+          </div>
+
+          {/* <Button
+            color={rewardSet && durationSet ? `neonGreen` : `avaxRed`}
+            variant={`outlined`}
+            className={`w-full px-4 py-3 text-base rounded text-high-emphesis text-white border 
+          ${rewardSet && durationSet ? `border-neonGreen` : `border-avaxRed`}`}
+            onClick={calculateDeposit}
+            disabled={!rewardSelected || !durationSet || !rewardSet}
+          >
+            <Typography
+            // className={`text-white font-bold`}
+            >
+              {!rewardSet ? `SETUP REWARDS`
+                : !durationSet ? `SETUP DURATION`
+                  : 'CALCULATE DEPOSIT'}
+            </Typography>
+          </Button> */}
+          <div className={`flex flex-col bg-dark-1000 p-3 border border-1 
+            ${rewardSet && assetSet && durationSet && feeSet ? `border-purple` : `border-dark-700`} 
+            w-full rounded rounded-2xl space-y-1`}
+          >            <div className="flex justify-between">
+              <Typography className="text-white" fontFamily={'medium'}>
+                {i18n._(t`Campaign Rewards`)}
+              </Typography>
+              <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
+                {`${formatNumber(dailyReward * rewardDays, false, true)} ${rewardAsset?.wrapped.symbol}`}
+              </Typography>
+            </div>
+            <div className="flex justify-between">
+              <Typography className="text-white" fontFamily={'medium'}>
+                {i18n._(t`Creation Fee (${bloodSacrifice * 100}%)`)}
+              </Typography>
+              <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
+                {`${formatNumber(dailyReward * rewardDays * bloodSacrifice, false, true)} ${rewardAsset?.wrapped.symbol}`}
+              </Typography>
+            </div>
+            <div className="flex justify-between">
+              <Typography className="text-white" fontFamily={'medium'}>
+                {i18n._(t`Creation Deposit`)}
+              </Typography>
+              <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
+                {`${formatNumber(
+                  // campaign rewards
+                  (dailyReward * rewardDays) +
+                  // creation fee
+                  (dailyReward * rewardDays * bloodSacrifice), false, true)} ${rewardAsset?.wrapped.symbol}`}
+              </Typography>
+            </div>
+          </div>
+          <Button
+            color={rewardSet && assetSet && durationSet && feeSet ? `neonGreen` : `avaxRed`}
+            variant={`outlined`}
+            className={`w-full px-4 py-3 text-base rounded text-high-emphesis font-bold border
+          ${rewardSet && assetSet && durationSet && feeSet ? `border-neonGreen` : `border-avaxRed`}`}
+            onClick={() => setShowConfirmation(true)}
+            disabled={!campaignReady}
+          >
+            <Typography
+            // className={`text-white font-bold`}
+            >        {rewardSet && assetSet && durationSet && feeSet ? `CREATE CAMPAIGN` : `MISSING CAMPAIGN SETUP`}
+            </Typography>
           </Button>
+
+          {showConfirmation && (
+            <Modal isOpen={showConfirmation} onDismiss={
+              () => setShowConfirmation(false)}>
+              <div className="space-y-4">
+                <ModalHeader header={`DeFarm Campaign Confirmation`} onClose={() => setShowConfirmation(false)} />
+                <Typography variant="sm">
+                  <div className="text-xl mt-4 mb-4 text-center border p-1.5 border-dark-600">
+                    {i18n._(t`Campaign Details`)}
+                  </div>
+                  • <b> {i18n._(t`Daily Reward`)}</b>: {`${formatNumber(dailyReward, false, true)} ${rewardAsset.wrapped.symbol} Daily`} <br />
+                  • <b> {i18n._(t`Campaign Duration`)}</b>: {`${rewardDays} Days`}<br />
+                  • <b> {i18n._(t`Early Withdraw Fee`)}</b>: {`${feeDays}% Day One, 1% less daily.`}<br />
+                  • <b> {i18n._(t`Total Deposit`)}</b>:ß {`${formatNumber(
+                    // campaign rewards
+                    (dailyReward * rewardDays) +
+                    // creation fee
+                    (dailyReward * rewardDays * bloodSacrifice), false, true)} ${rewardAsset?.wrapped.symbol}`}
+                  <br />
+
+                  {/* <div className="mt-6 text-center">
+                  <i><b> {i18n._(t`Update Logo? Submit PR (or just DM Buns)`)}</b></i>.
+              </div> */}
+
+                  {/* <b>100% of the fee</b> goes towards building our protocol-owned liquidity, which brings about long-term sustainability to our platform. */}
+                </Typography>
+                <Typography variant="sm" className="font-medium text-center">
+                  {i18n._(t`QUESTIONS OR CONCERNS?`)}
+                  <a href="mailto:soulswapfinance@gmail.com">
+                    {' '}  {i18n._(t`CONTACT US`)}
+                  </a>
+                </Typography>
+                {approved &&
+                  <Button
+                    color="neonGreen"
+                    variant={`outlined`}
+                    className="w-full px-4 py-3 text-base rounded text-high-emphesis"
+                    onClick={() => handleApprove()}
+                    disabled={!rewardSet || !assetSet || !durationSet || !feeSet}
+                  >
+                    {inputError || `Approve ${rewardAsset.wrapped.symbol}`}
+                  </Button>
+                }
+                {/* {approved && */}
+                  <Button
+                    color="purple"
+                    variant={`bordered`}
+                    className="w-full px-4 py-3 rounded text-white font-bold"
+                    onClick={() => handleCreate()}
+                    disabled={!rewardSet || !assetSet || !durationSet || !feeSet}
+                  >
+                    <Typography
+                      className={`text-white`}
+                    >
+                      {inputError || 'Confirm Creation'}
+                    </Typography>
+                  </Button>
+                {/* } */}
+              </div>
+            </Modal>
+          )}
         </Container>
       </Card>
     </CreateFarmLayout>
   )
 }
 
+// LAYOUT //
 const CreateFarmLayout = ({ children }) => {
   const { chainId } = useActiveWeb3React()
 
@@ -192,4 +491,8 @@ const CreateFarmLayout = ({ children }) => {
   )
 }
 
+export default CreateFarm
+
 CreateFarm.Guard = NetworkGuard(Feature.DEFARM)
+
+

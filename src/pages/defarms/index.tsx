@@ -5,6 +5,8 @@ import Container from 'components/Container'
 import Head from 'next/head'
 import FarmList from 'features/defarms/List'
 import Image from 'next/image'
+import { Feature } from 'enums'
+import NetworkGuard from 'guards/Network'
 
 const Defarms = () => {
   return (
@@ -28,3 +30,5 @@ const Defarms = () => {
 }
 
 export default Defarms
+
+Defarms.Guard = NetworkGuard(Feature.DEFARM)

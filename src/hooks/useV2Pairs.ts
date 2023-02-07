@@ -110,11 +110,11 @@ export function useVaultTVL(): TVLInfo[] {
     function isKnownToken(token: TokenInfo) {
       return (
         token.id.toLowerCase() == SOUL[chainId].address.toLowerCase() ||
-        token.symbol == 'SOUL' ||
+        token.symbol == 'SOUL' || token.symbol == 'SEANCE' ||
         token.symbol == 'WFTM' || token.symbol == 'FTM' ||
         token.symbol == 'WAVAX' || token.symbol == 'AVAX' ||
-        token.symbol == 'SEANCE' ||
-        token.symbol == 'USDC' || token.symbol == 'USDT'
+        token.symbol == 'BNB' ||  token.symbol == 'LINK' ||
+        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI'
       )
     }
 
@@ -233,8 +233,12 @@ export function useTVL(): TVLInfo[] {
     })
 
   const singlePools = farmingPools.filter((r) => !r.token1)
-  const singleAddresses = singlePools.map((r) => r.lpToken)
+  const lendingPools = farmingPools.filter((r) => r.type == 'underworld')
   const lpPools = farmingPools.filter((r) => !!r.token1)
+   
+  // const singleAddresses = singlePools.map((r) => r.lpToken)
+  const singleAddresses = singlePools.map((r) => r.lpToken)
+  const lendingAddresses = lendingPools.map((r) => r.lpToken)
   const pairAddresses = lpPools.map((r) => r.lpToken)
 
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
@@ -244,6 +248,9 @@ export function useTVL(): TVLInfo[] {
     SUMMONER_ADDRESS[chainId == ChainId.AVALANCHE ? ChainId.AVALANCHE : ChainId.FANTOM],
   ])
   const summonerBalanceSingle = useMultipleContractSingleData(singleAddresses, PAIR_INTERFACE, 'balanceOf', [
+    SUMMONER_ADDRESS[chainId == ChainId.AVALANCHE ? ChainId.AVALANCHE : ChainId.FANTOM],
+  ])
+  const summonerBalanceLending = useMultipleContractSingleData(lendingAddresses, PAIR_INTERFACE, 'balanceOf', [
     SUMMONER_ADDRESS[chainId == ChainId.AVALANCHE ? ChainId.AVALANCHE : ChainId.FANTOM],
   ])
 
@@ -264,7 +271,7 @@ export function useTVL(): TVLInfo[] {
         token.symbol == 'FUSDT' ||
         token.symbol == 'MIM' ||
         token.symbol == 'DAI' ||
-        token.symbol == 'WETH'
+        token.symbol == 'WETH' || token.symbol == 'ETH'
       )
     }
 
@@ -365,10 +372,33 @@ export function useTVL(): TVLInfo[] {
       }
     })
 
-    return concat(singleTVL, lpTVL)
+    const underworldTVL = summonerBalanceLending.map((result, i) => {
+      const { result: balance, loading } = result
+
+      let { token0, token1, lpToken } = lendingPools[i]
+
+      if (loading) return { lpToken, tvl: 0, lpPrice: 0 }
+      if (!balance) return { lpToken, tvl: 0, lpPrice: 0 }
+
+      const token0price = getPrice(token0)
+
+      const token0total = Number(Number(token0price * (Number(balance) / 10 ** token0?.decimals)).toString())
+
+      const lpPrice = token0price
+      const tvl = token0total
+
+      return {
+        lpToken,
+        tvl,
+        lpPrice,
+      }
+    })
+
+    return concat(singleTVL, lpTVL, underworldTVL)
   }, [
     results,
     summonerBalanceSingle,
+    summonerBalanceLending,
     chainId,
     soulPrice,
     ftmPrice,
@@ -377,6 +407,7 @@ export function useTVL(): TVLInfo[] {
     summonerBalance,
     lpPools,
     singlePools,
+    lendingPools,
   ])
 }
 export function useBondTVL(): TVLInfo[] {

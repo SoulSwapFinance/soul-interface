@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React from 'react'
 import Container from 'components/Container'
 import Head from 'next/head'
 import Typography from 'components/Typography'
@@ -16,13 +16,13 @@ import DashboardChartLegend from 'components/Dashboard/ChartLegend'
 import { useFantomPrice, useLuxorPrice, useWrappedLumPrice } from 'hooks/getPrices'
 import { usePairPrice } from 'hooks/usePairData'
 // import { useLuxTVL } from 'hooks/useV2Pairs'
-import { useSorContract, useLuxorContract, useWrappedLumensContract,  useLuxorStakingContract, useLuxorTreasuryContract, useSorMasterContract } from 'hooks/useContract'
+import { useWrappedLumensContract, useSorMasterContract } from 'hooks/useContract'
 // import { LUX_TREASURY_ADDRESS, WFTM_ADDRESS } from 'constants/addresses'
-import { DAI_ADDRESS, SOR_ADDRESS, LUM_ADDRESS, LUX_ADDRESS } from 'sdk'
+import { DAI_ADDRESS, SOR_ADDRESS, LUX_ADDRESS } from 'sdk'
 // import useApprove from 'hooks/useApprove'
 // import { LUX_ADDRESS } from 'constants/addresses'
 import { usePairContract, useTokenContract } from 'hooks/useTokenContract'
-import { LUXOR_WARMUP_ADDRESS, WFTM_ADDRESS } from 'constants/addresses'
+import { WFTM_ADDRESS } from 'constants/addresses'
 import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
 // import ExternalLink from 'components/ExternalLink'
@@ -43,11 +43,11 @@ export default function Dashboard() {
 
   // KEY CONTRACTS //
   // const LuxorStakingContract = useLuxorStakingContract()
-  const SorStakingContract = useSorMasterContract()
+  // const SorStakingContract = useSorMasterContract()
   // const LuxorTreasuryContract = useLuxorTreasuryContract()
-  const SorContract = useSorContract()
-  const LuxorContract = useLuxorContract()
-  const WrappedLumensContract = useWrappedLumensContract()
+  // const SorContract = useSorContract()
+  // const LuxorContract = useLuxorContract()
+  // const WrappedLumensContract = useWrappedLumensContract()
   // const LumensContract = useTokenContract(LUM_ADDRESS[250])
   // const DaiContract = useTokenContract(DAI_ADDRESS[250])
   const DaiLendFtmContract = useTokenContract('0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd')
@@ -56,8 +56,8 @@ export default function Dashboard() {
   // const LuxorStakingAddress = LuxorStakingContract?.address
   // const LuxorWarmupAddress = LUXOR_WARMUP_ADDRESS[250]
   // const DaiContractAddress = DaiContract?.address
-  const WrappedLumensAddress = WrappedLumensContract?.address
-  const SorStakingContractAddress = SorStakingContract?.address
+  // const WrappedLumensAddress = WrappedLumensContract?.address
+  // const SorStakingContractAddress = SorStakingContract?.address
   // const LuxorTreasuryAddress = LuxorTreasuryContract?.address
   const LuxorFtmAddress = LuxFtmContract.address
   const DaiLendFtmAddress = DaiLendFtmContract.address
@@ -119,11 +119,6 @@ export default function Dashboard() {
   const luxorPrice = useLuxorPrice()
   const ftmPrice = useFantomPrice()
   const wlumPrice = useWrappedLumPrice()
-  const sorBackingPrice = totalSorCollateral / totalSorSupply
-  const sorMarketCap
-    = sorMarketPrice >= sorBackingPrice
-    ? sorMarketPrice * totalSorSupply
-    : sorBackingPrice * totalSorSupply
 
   // GET RESERVE BALANCES //
   const FtmBalance = Number(useTokenInfo(WFTM_ADDRESS[250]).tokenInfo.luxorTreasuryBalance) / 1e18
@@ -184,7 +179,7 @@ export default function Dashboard() {
   const treasuryBalance = treasuryLiquidityBalance + treasuryReserveBalance + treasuryInvestmentBalance
 
   // calculate floor price
-  const luxorFloorPrice = treasuryReserveBalance / (luxorSupply - storedLuxor)
+  // const luxorFloorPrice = treasuryReserveBalance / (luxorSupply - storedLuxor)
 
     // const treasuryRevenueCollateralDark = [
     //     {
@@ -207,33 +202,6 @@ export default function Dashboard() {
     //         "percent": "8"
     //     }
     // ]
-
-    const sorCollateralData = [
-      {
-          "angle": sorStableCollateral,
-          "color": "#FFA300",
-          "label": "Stable (DAI) Collateral",
-          "percent": (sorStableCollateral / totalSorCollateral * 100).toFixed()
-      },
-      // {
-      //     "angle": sorLuxCollateral + sorWrappedLumensCollateral,
-      //     "color": "#FFC300",
-      //     "label": "Luxor Collateral",
-      //     "percent": ((sorLuxCollateral + sorWrappedLumensCollateral) / totalSorCollateral * 100).toFixed()
-      // },
-      {
-           "angle": sorFtmCollateral,
-           "color": "#FFE300",
-           "label": "Fantom (FTM) Collateral",
-           "percent": (sorFtmCollateral / totalSorCollateral * 100).toFixed()
-       },
-      /* {
-           "angle": sorWrappedLumensCollateral,
-           "color": "#FFA300",
-           "label": "WLUM Collateral",
-           "percent": (sorWrappedLumensCollateral / totalSorCollateral * 100).toFixed()
-       }, */
-  ]
 
   const treasuryBalanceData = [
     {
