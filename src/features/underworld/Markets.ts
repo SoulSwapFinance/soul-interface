@@ -1,4 +1,4 @@
-import { BNB_ADDRESS, ChainId, DAI_ADDRESS, JOE_ADDRESS, USDC_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
+import { BNB_ADDRESS, ChainId, DAI_ADDRESS, DAI_BNB_MARKET, DAI_BTC_MARKET, DAI_ETH_MARKET, DAI_NATIVE_MARKET, JOE_ADDRESS, NATIVE_DAI_MARKET, USDC_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
 
 export const FantomMarkets = [
   {
@@ -7,7 +7,7 @@ export const FantomMarkets = [
     asset: 'FTM',
     collateral: 'DAI',
     lpSymbol: 'DAI-FTM',
-    lpAddress: '0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd',
+    lpAddress: DAI_NATIVE_MARKET[ChainId.FANTOM],
     assetAddress: WNATIVE_ADDRESS[ChainId.FANTOM],
     collateralAddress: DAI_ADDRESS[ChainId.FANTOM],
   },
@@ -17,7 +17,7 @@ export const FantomMarkets = [
     asset: 'DAI',
     collateral: 'FTM',
     lpSymbol: 'FTM-DAI',
-    lpAddress: '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61',
+    lpAddress: NATIVE_DAI_MARKET[ChainId.FANTOM],
     assetAddress: DAI_ADDRESS[ChainId.FANTOM],
     collateralAddress: WNATIVE_ADDRESS[ChainId.FANTOM],
   },
@@ -27,7 +27,7 @@ export const FantomMarkets = [
     asset: 'WETH',
     collateral: 'DAI',
     lpSymbol: 'DAI-ETH',
-    lpAddress: '0x9fA5de19495331E13b443F787B90CdD22B32263d',
+    lpAddress: DAI_ETH_MARKET[ChainId.FANTOM],
     assetAddress: WETH_ADDRESS[ChainId.FANTOM],
     collateralAddress: DAI_ADDRESS[ChainId.FANTOM],
   },
@@ -37,7 +37,7 @@ export const FantomMarkets = [
     asset: 'BNB',
     collateral: 'DAI',
     lpSymbol: 'DAI-BNB',
-    lpAddress: '0xbDa9204e6D596feCf9bd48108723F9BDAa2019f6',
+    lpAddress: DAI_BNB_MARKET[ChainId.FANTOM],
     assetAddress: BNB_ADDRESS[ChainId.FANTOM],
     collateralAddress: DAI_ADDRESS[ChainId.FANTOM],
   },
@@ -87,7 +87,7 @@ export const FantomMarkets = [
     asset: 'BTC',
     collateral: 'DAI',
     lpSymbol: 'DAI-BTC',
-    lpAddress: '0xaf28730165634A56434ca7f0B302CC54F862046F',
+    lpAddress: DAI_BTC_MARKET[ChainId.FANTOM],
     assetAddress: WBTC_ADDRESS[ChainId.FANTOM],
     collateralAddress: DAI_ADDRESS[ChainId.FANTOM],
   },

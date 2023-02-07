@@ -790,4 +790,27 @@ export const AVAX_NATIVE: AddressMap = {
   [ChainId.FANTOM]: '0x5159Ba92FDC80b3a4B19De279711b1822de06c86',
 }
 
+
+// LENDING PAIRS //
+export const NATIVE_DAI_MARKET: AddressMap = {
+  [ChainId.FANTOM]: '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61',
+}
+
+export const DAI_ETH_MARKET: AddressMap = {
+  [ChainId.FANTOM]: '0x9fA5de19495331E13b443F787B90CdD22B32263d',
+}
+
+export const DAI_NATIVE_MARKET: AddressMap = {
+  [ChainId.FANTOM]: '0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd',
+}
+
+export const DAI_BTC_MARKET: AddressMap = {
+  [ChainId.FANTOM]: '0xaf28730165634A56434ca7f0B302CC54F862046F',
+}
+
+export const DAI_BNB_MARKET: AddressMap = {
+  [ChainId.FANTOM]: '0xbDa9204e6D596feCf9bd48108723F9BDAa2019f6',
+}
+
+
 export const NATIVE_ADDRESS = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";

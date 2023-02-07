@@ -1,4 +1,4 @@
-import { AVAX_ADDRESS, BNB_ADDRESS, ChainId, DAI_ADDRESS, SEANCE_ADDRESS, SOUL_ADDRESS, SOUL_USDC, USDC_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
+import { AVAX_ADDRESS, BNB_ADDRESS, ChainId, DAI_ADDRESS, DAI_BNB_MARKET, DAI_ETH_MARKET, DAI_NATIVE_MARKET, NATIVE_DAI_MARKET, SEANCE_ADDRESS, SOUL_ADDRESS, SOUL_USDC, USDC_ADDRESS, USDC_DAI_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
 
 export const AvalanchePools = [
   {
@@ -189,7 +189,7 @@ export const FantomPools = [
     token0Symbol: 'USDC',
     token1Symbol: 'DAI',
     lpSymbol: 'USDC-DAI',
-    lpAddress: '0x406de3a93f6b4179e3b21a3d81226b43e1918fd9',
+    lpAddress: USDC_DAI_ADDRESS[ChainId.FANTOM],
     token0Address:  USDC_ADDRESS[ChainId.FANTOM],
     token1Address: DAI_ADDRESS[ChainId.FANTOM],
   },
@@ -200,7 +200,7 @@ export const FantomPools = [
     token0Symbol: 'FTM', // EXEMPT //
     token1Symbol: 'DAI',
     lpSymbol: 'DAI-FTM', // EXEMPT //
-    lpAddress: '0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd',
+    lpAddress: DAI_NATIVE_MARKET[ChainId.FANTOM],
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: DAI_ADDRESS[ChainId.FANTOM],
   },
@@ -211,7 +211,7 @@ export const FantomPools = [
     token0Symbol: 'DAI',
     token1Symbol: 'FTM', // EXEMPT //
     lpSymbol: 'FTM-DAI',
-    lpAddress: '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61',
+    lpAddress: NATIVE_DAI_MARKET[ChainId.FANTOM],
     token0Address: DAI_ADDRESS[ChainId.FANTOM],
     token1Address: WNATIVE_ADDRESS[ChainId.FANTOM], // EXEMPT //
   },
@@ -222,7 +222,7 @@ export const FantomPools = [
     token0Symbol: 'ETH',
     token1Symbol: 'DAI',
     lpSymbol: 'DAI-ETH',
-    lpAddress: '0x9fA5de19495331E13b443F787B90CdD22B32263d',
+    lpAddress: DAI_ETH_MARKET[ChainId.FANTOM],
     token0Address: WETH_ADDRESS[ChainId.FANTOM],
     token1Address: DAI_ADDRESS[ChainId.FANTOM],
   },
@@ -233,12 +233,8 @@ export const FantomPools = [
     token0Symbol: 'BNB',
     token1Symbol: 'DAI',
     lpSymbol: 'DAI-BNB',
-    lpAddress: '0xbDa9204e6D596feCf9bd48108723F9BDAa2019f6',
+    lpAddress: DAI_BNB_MARKET[ChainId.FANTOM],
     token0Address: BNB_ADDRESS[ChainId.FANTOM],
     token1Address: DAI_ADDRESS[ChainId.FANTOM],
   },
 ]
-
-// export const FantomLendingPools = [
-  
-// ]

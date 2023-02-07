@@ -2,22 +2,23 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Button } from 'components/Button'
 import UnderworldCooker from 'entities/UnderworldCooker'
-// import { TransactionReview } from 'entities/TransactionReview'
 import { Warnings } from 'entities/Warnings'
-import { e10, minimum } from 'functions/math'
-// import useUnderworldApproveCallback from 'hooks/useUnderworldApproveCallback'
 import { useActiveWeb3React } from 'services/web3'
-// import { useUnderworldApprovalPending } from 'state/application/hooks'
 import React, { useState } from 'react'
 
 import { UnderworldApproveButton } from '../components/Button'
-// import TransactionReviewView from '../components/TransactionReview'
 import WarningsView from '../components/WarningsList'
-// import { useCurrency } from 'hooks/Tokens'
-// import LendAssetInput from 'components/LendAssetInput'
 import SmartNumberInput from '../components/SmartNumberInput'
 import { useUnderworldPairInfo } from 'hooks/useAPI'
-import { ChainId, LEND_MULTIPLIER } from 'sdk'
+import { ChainId, DAI_BNB_MARKET, DAI_BTC_MARKET, DAI_ETH_MARKET, DAI_NATIVE_MARKET, LEND_MULTIPLIER, NATIVE_DAI_MARKET } from 'sdk'
+
+// import { TransactionReview } from 'entities/TransactionReview'
+// import { e10, minimum } from 'functions/math'
+// import useUnderworldApproveCallback from 'hooks/useUnderworldApproveCallback'
+// import { useUnderworldApprovalPending } from 'state/application/hooks'
+// import TransactionReviewView from '../components/TransactionReview'
+// import { useCurrency } from 'hooks/Tokens'
+// import LendAssetInput from 'components/LendAssetInput'
 
 export default function Withdraw({ pair }: any): JSX.Element {
   const { account, chainId } = useActiveWeb3React()
@@ -88,15 +89,11 @@ export default function Withdraw({ pair }: any): JSX.Element {
       // && 
       // INACTIVE //
       (
-        pair.address == '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61'      // FTM-DAI
-        || 
-        pair.address == '0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd'     // DAI-FTM
-        || 
-        pair.address == '0x9fA5de19495331E13b443F787B90CdD22B32263d'     // DAI-ETH
-        || 
-        pair.address == '0xaf28730165634A56434ca7f0B302CC54F862046F'     // DAI-BTC
-        || 
-        pair.address == '0xbDa9204e6D596feCf9bd48108723F9BDAa2019f6'     // DAI-BNB
+        pair.address == NATIVE_DAI_MARKET[ChainId.FANTOM]
+        || pair.address == DAI_NATIVE_MARKET[ChainId.FANTOM]
+        || pair.address == DAI_ETH_MARKET[ChainId.FANTOM]
+        || pair.address == DAI_BTC_MARKET[ChainId.FANTOM]
+        || pair.address == DAI_BNB_MARKET[ChainId.FANTOM]
       ),
       // && pair.userAssetFraction.sub(pair.currentUserLentAmount.value).lte(0),
       i18n._(
