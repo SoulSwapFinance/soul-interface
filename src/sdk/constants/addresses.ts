@@ -714,6 +714,12 @@ export const SOUL_NATIVE: AddressMap = {
   [ChainId.AVALANCHE]: '0x6Da1AD717C7577AAB46C19aB6d3d9C31aff32A00' // SEP22
 }
 
+export const LINK_NATIVE: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0x8cE4baC1bD4399579C2F6f44653dC4B065f93193',
+  [ChainId.AVALANCHE]: ''
+}
+
 export const DAI_USDC: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.FANTOM]: '',
