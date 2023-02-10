@@ -27,7 +27,7 @@ import { ArrowDownIcon, ArrowLeftIcon } from '@heroicons/react/24/solid'
 // import CurrencyInputPanel from 'components/CurrencyInputPanel'
 // import Web3 from 'web3'
 import { useGasPrice } from 'hooks/useAPI'
-import { SwapLayoutCard } from 'layouts/SwapLayout'
+// import { SwapLayoutCard } from 'layouts/SwapLayout'
 // import SwapHeader from 'features/swap/SwapHeader'
 import Container from 'components/Container'
 import NetworkGuard from 'guards/Network'
@@ -44,7 +44,7 @@ import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
 import Image from 'next/image'
 import META_BANNER from 'assets/branding/meta-banner.png'
-import { MainBanner } from 'components/Banner'
+import { DonateBanner } from 'components/Banner'
 import TokenStats from 'components/TokenStats'
 
 /*
@@ -176,14 +176,14 @@ export const Routes = styled.div`
 // 	padding-left: 4px;
 // `
 
-const SwapWrapper = styled.div`
-	width: 100%;
-	display: flex;
-	& > button {
-		width: 100%;
-		margin-right: 4px;
-	}
-`
+// const SwapWrapper = styled.div`
+// 	width: 100%;
+// 	display: flex;
+// 	& > button {
+// 		width: 100%;
+// 		margin-right: 4px;
+// 	}
+// `
 
 export const InputFooter = styled.div`
 	display: flex;
@@ -226,7 +226,7 @@ const Aggregator = ({ }) => {
 	const [toDecimals, setToDecimals] = useState(outputToken?.wrapped.decimals)
 
 	const [useSwap, setUseSwap] = useState(false)
-	const [showRoutes, setShowRoutes] = useState(true)
+	// const [showRoutes, setShowRoutes] = useState(true)
 
 	const handleUseSwap = useCallback(
 		() => {
@@ -426,7 +426,7 @@ const Aggregator = ({ }) => {
 		<DoubleGlowShadowV2>
           <div className={`grid p-1 mt-4 space-y-2 rounded rounded-2xl bg-dark-1000`}>
 				{/* <SwapLayoutCard> */}
-				<MainBanner chainId={chainId} />
+				<DonateBanner chainId={chainId} />
 				<div
               className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >

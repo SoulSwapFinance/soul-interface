@@ -49,7 +49,7 @@ import SwapDropdown from "features/swap/SwapDropdown"
 // import { classNames } from "functions/styling";
 import { t } from "@lingui/macro";
 import { i18n } from "@lingui/core";
-import { MainBanner } from "components/Banner";
+import { DonateBanner } from "components/Banner";
 import BRIDGE_BANNER from 'assets/branding/bridge-banner.png'
 import BridgeTokenList from "features/bridge/BridgeTokenList";
 import { ContentBox, OverlayButton, Typo1, Typo2 } from "components";
@@ -449,7 +449,7 @@ const Bridge: React.FC<any> = () => {
     <DoubleGlowShadowV2>
       {/* <SwapLayoutCard> */}
       <div className={`grid p-1 mt-4 space-y-2 rounded rounded-2xl bg-dark-1000`}>
-        <MainBanner chainId={chainId} />
+        <DonateBanner chainId={chainId} />
         <div
           className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
         >

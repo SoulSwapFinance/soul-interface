@@ -88,6 +88,29 @@ export const NewFeature: FC<IFeature> = ({ chainId }) => (
   </div>
 )
 
+export const DonateBanner: FC<IFeature> = ({ chainId }) => (
+  <div className={classNames(featureEnabled(Features.AMM, chainId) ? "relative items-center w-full" : 'hidden')}>
+    <div className="w-full">
+      <div className="text-center">
+        <p className="font-medium mb-2 mt-2 text-center text-white">
+          <ExternalLink
+            href="https://www.linkedin.com/posts/avalancheavax_the-avalanche-foundation-has-donated-1m-activity-7028745194174857216-bG3J?utm_source=share&utm_medium=member_desktop" target="_blank" rel="noreferrer"
+            className="font-bold text-white text-lg"
+          >
+            <Button variant="filled" color={getChainColorCode(chainId)} size="sm">
+              <span className="justify-center font-bold">
+                {'Click Here: Donate to Turkey and Syria'}
+              </span>
+            </Button>
+          </ExternalLink>
+        </p>
+      </div>
+      <div className="absolute inset-y-0 right-0 flex items-start pt-1 pr-1 sm:pt-1 sm:pr-2 sm:items-start">
+      </div>
+    </div>
+  </div>
+)
+
 export const TwitterBanner: FC<IFeature> = ({ chainId }) => (
   <div className="relative items-center w-full">
     <div className="w-full">

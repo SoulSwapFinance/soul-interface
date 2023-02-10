@@ -39,11 +39,12 @@ import { Feature } from 'enums/Feature'
 import { useRouter } from 'next/router'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import Pair from 'pages/analytics/pairs/[id]'
-import { MainBanner } from 'components/Banner'
+import { DonateBanner } from 'components/Banner'
 import SWAP_BANNER from 'assets/branding/swap-banner.png'
-import UpDownArrowIcon from 'components/Icons/exchange/UpDownArrowIcon'
+// import UpDownArrowIcon from 'components/Icons/exchange/UpDownArrowIcon'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import TokenStats from 'components/TokenStats'
+import { currencyId } from 'functions'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -350,7 +351,7 @@ const Swap = () => {
 
   const handleAggregatorSwap = useCallback(
     () => {
-      router.push(`/exchange/aggregator/${currencyA.isToken ? currencyA.wrapped.address : WNATIVE_ADDRESS[chainId]}/${currencyB.isToken ? currencyB.wrapped.address : WNATIVE_ADDRESS[chainId]}`)
+      router.push(`/exchange/aggregator/${inputCurrency ? currencyId(inputCurrency) : NATIVE[chainId].symbol}/${outputCurrency ? currencyId(outputCurrency) : USDC_ADDRESS[chainId]}`)
     }, []
   )
 
@@ -419,7 +420,7 @@ const Swap = () => {
         <DoubleGlowShadowV2>
           <div className={`grid p-1 mt-4 space-y-2 rounded rounded-2xl bg-dark-1000`}>
             {/* <SwapLayoutCard> */}
-            <MainBanner chainId={chainId} />
+            <DonateBanner chainId={chainId} />
             <div
               className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >
