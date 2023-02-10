@@ -129,7 +129,7 @@ const BridgeTokenSelect: React.FC<any> = ({ tokens, selected, selectToken, chain
                   {selected.symbol}
                 </div>
               </div>
-            ) : tokens && tokens.length ? (
+            ) : tokens && tokens?.length ? (
               <Typo1>{i18n._(t`Select Token`)}</Typo1>
             ) : (
               <Loader />
