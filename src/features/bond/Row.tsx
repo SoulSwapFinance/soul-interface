@@ -241,7 +241,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
 
   return (
     <div className="flex justify-center w-full">
-    <BondContainer className={``}>
+      <BondContainer className={``}>
         <div className={classNames(`bg-dark-900 p-2 m-1 border rounded rounded-2xl border-blue`, !hasBalance && "border-dark-1000",
           isUnderworldPair ? "hover:border-blue"
             // : !isActive ? "hover:border-pink"
@@ -252,8 +252,8 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
         )}
           onClick={() => handleShowOptions()}
         >
-      <div className={`flex w-full`}>
-          <div className="grid grid-cols-1 md:mr-16 justify-center">
+          <div className={`flex w-full`}>
+            <div className="grid grid-cols-1 md:mr-16 justify-center">
               <div className={`grid ${isUnderworldPair ? `grid-cols-2` : `grid-cols-2`}`}>
                 <CurrencyLogo currency={token0} size={40} />
                 {isUnderworldPair &&
@@ -285,25 +285,25 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
             {/* STAKED VALUE */}
             <HideOnMobile>
               <BondItemBox>
-                 <div className={`justify-center mt-2 md:mr-16`}>
-                    {Number(_APR).toString() === '0.00' ? (
-                      <Text padding="0" fontSize="1rem" color="#666">
-                        0
-                      </Text>
-                    ) : (
-                      <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                        ${
-                          _stakedValue == 0 ? 0
-                            : _stakedValue.toString(2) == '0.00' ? '<0.00'
-                              : _stakedValue < 1 && _stakedValue.toString(4) ? _stakedValue.toFixed(4)
-                                : _stakedValue > 0 ? _stakedValue.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                                  : 0
-                        }
-                      </Text>
-                    )}
-                  </div>
-                </BondItemBox>
-              </HideOnMobile>
+                <div className={`justify-center mt-2 md:mr-16`}>
+                  {Number(_APR).toString() === '0.00' ? (
+                    <Text padding="0" fontSize="1rem" color="#666">
+                      0
+                    </Text>
+                  ) : (
+                    <Text padding="0" fontSize="1rem" color="#FFFFFF">
+                      ${
+                        _stakedValue == 0 ? 0
+                          : _stakedValue.toString(2) == '0.00' ? '<0.00'
+                            : _stakedValue < 1 && _stakedValue.toString(4) ? _stakedValue.toFixed(4)
+                              : _stakedValue > 0 ? _stakedValue.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                                : 0
+                      }
+                    </Text>
+                  )}
+                </div>
+              </BondItemBox>
+            </HideOnMobile>
 
             {/* STAKED OWNERSHIP */}
             {/* <HideOnSmall>
@@ -370,22 +370,8 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                     />
                   }
                   <Wrap padding="0" margin="0" display="flex">
-                    {(approved && isStakeable && Number(unstakedBal) == 0 && depositable ?
-                      (bond.token0Symbol == WNATIVE[chainId].symbol ? (
-                        <SubmitButton
-                          primaryColor={getChainColor(chainId)}
-                        >
-                          <TokenPairLink
-                            target="_blank"
-                            rel="noopener"
-                            color={'white'}
-                            href=
-                            {`https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token1Address}`}
-                          >
-                            CREATE {isUnderworldPair ? token0Symbol : bond.lpSymbol} PAIR
-                          </TokenPairLink>
-                        </SubmitButton>
-                      ) :
+                    {(approved && isStakeable && depositable && unstakedBal == 0 ?
+                      (
                         <SubmitButton
                           primaryColor={getChainColor(chainId)}
                         >
@@ -395,9 +381,11 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                             color={"white"}
                             href=
                             {isUnderworldPair ? `https://exchange.soulswap.finance/lend/${bond.lpAddress}`
-                              : `https://exchange.soulswap.finance/add/${bond.token0Address}/${bond.token1Address}`}
+                              : bond.token0Symbol == WNATIVE[chainId].symbol
+                                ? `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token1Address}`
+                                : `https://exchange.soulswap.finance/add/${bond.token0Address}/${bond.token1Address}`}
                           >
-                            {isUnderworldPair ? `LEND ${bond.token0Symbol}` : `CREATE ${isUnderworldPair ? token0Symbol : bond.lpSymbol} PAIR`}
+                            {isUnderworldPair ? `LEND ${bond.token0Symbol}` : `CREATE ${bond.lpSymbol} PAIR`}
                           </TokenPairLink>
                         </SubmitButton>
                       ) :
@@ -422,9 +410,23 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                             APPROVE LP
                           </SubmitButton>
                         )
-
                     )}
                   </Wrap>
+                  {isUnderworldPair &&
+                    <SubmitButton
+                      primaryColor={getChainColor(chainId)}
+                    >
+                      <TokenPairLink
+                        target="_blank"
+                        rel="noopener"
+                        color={"white"}
+                        href=
+                        {`https://exchange.soulswap.finance/lend/${bond.lpAddress}`}
+                      >
+                        {`LEND ${bond.token0Symbol}`}
+                      </TokenPairLink>
+                    </SubmitButton>
+                  }
                 </FunctionBox>
 
                 <Wrap padding="0.5rem" margin="0.25rem" display="flex" justifyContent="space-between">
