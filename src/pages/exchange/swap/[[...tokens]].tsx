@@ -41,9 +41,10 @@ import SwapDropdown from 'features/swap/SwapDropdown'
 import Pair from 'pages/analytics/pairs/[id]'
 import { DonateBanner } from 'components/Banner'
 import SWAP_BANNER from 'assets/branding/swap-banner.png'
-import UpDownArrowIcon from 'components/Icons/exchange/UpDownArrowIcon'
+// import UpDownArrowIcon from 'components/Icons/exchange/UpDownArrowIcon'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import TokenStats from 'components/TokenStats'
+import { currencyId } from 'functions'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -350,7 +351,7 @@ const Swap = () => {
 
   const handleAggregatorSwap = useCallback(
     () => {
-      router.push(`/exchange/aggregator/${currencyA.isToken ? currencyA.wrapped.address : WNATIVE_ADDRESS[chainId]}/${currencyB.isToken ? currencyB.wrapped.address : WNATIVE_ADDRESS[chainId]}`)
+      router.push(`/exchange/aggregator/${inputCurrency ? currencyId(inputCurrency) : NATIVE[chainId].symbol}/${outputCurrency ? currencyId(outputCurrency) : USDC_ADDRESS[chainId]}`)
     }, []
   )
 
