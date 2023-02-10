@@ -235,8 +235,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
         `flex sm:absolute`,
         `sm:right-4`,
         `sm:top-48`, 
-        `sm:mt-1 sm:gap-8`,
-        `gap-6 mr-4 justify-end rounded`)
+        `sm:mt-6 sm:gap-8`,
+        `gap-6 mr-2 justify-end rounded`)
       }>
         {useSettings && <Settings />}
       </div>
