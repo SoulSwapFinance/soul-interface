@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useCallback, useState } from 'react'
+import React, { FC, Fragment, useState } from 'react'
 import Web3Status from 'components/Web3Status'
 import { useActiveWeb3React } from 'services/web3'
 import { Dialog, Transition } from '@headlessui/react'
@@ -13,7 +13,6 @@ import LanguageMenu from './useLanguages'
 const HEADER_HEIGHT = 64
 
 const Desktop: FC = () => {
-  // const router = useRouter()
   const bar = useBar()
   const { chainId } = useActiveWeb3React()
   const [open, setOpen] = useState(false)
@@ -33,7 +32,7 @@ const Desktop: FC = () => {
         src={`/SoulSwap-Banner.png`}
         height={72} width={224}
         objectFit="contain"
-        alt={"soulswap finance banner"}
+        alt={"soulswap text banner"}
     />
   </div>
 
