@@ -1,14 +1,15 @@
 import { Popover, Transition } from '@headlessui/react'
-// import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import { BarItem, BarItemLeaf, BarItemNode } from 'components/Header/useBar'
 import Typography from 'components/Typography'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { classNames } from 'functions'
-import useDesktopHeaderMediaQuery, { useTouchDeviceMediaQuery } from 'hooks/useDesktopHeaderMediaQuery'
+import { useTouchDeviceMediaQuery } from 'hooks/useDesktopHeaderMediaQuery'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { FC, Fragment, useCallback, useRef } from 'react'
 import { useActiveWeb3React } from 'services/web3'
+
+// import { ChevronDownIcon } from '@heroicons/react/24/outline'
 // import styled from 'styled-components'
 
 // const HideOnMobile = styled.div`
@@ -25,10 +26,11 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
   const router = useRouter()
   const { chainId } = useActiveWeb3React()
   const buttonRef = useRef<HTMLButtonElement>(null)
-  // const isLuxor = router.asPath.startsWith('/luxor')
-  // const isDesktop = useDesktopHeaderMediaQuery()
   const touchDevice = useTouchDeviceMediaQuery()
   const { link } = node as BarItemLeaf
+  
+  // const isLuxor = router.asPath.startsWith('/luxor')
+  // const isDesktop = useDesktopHeaderMediaQuery()
   // const isOpen = router.asPath === link
 
   const handleToggle = useCallback((open, type) => {
@@ -49,10 +51,10 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
         variant="sm"
         className={classNames(
           // isOpen ? `border rounded rounded-3xl mr-18 border-${getChainColorCode(chainId)}` : '',
-          'hover:text-white font-bold py-3 px-2 rounded flex gap-3'
+          'hover:text-white font-bold py-2 px-2 rounded flex gap-3'
         )}
       >
-        <div className={`flex flex-cols-1 justify-center gap-4 border w-[124px] border-[${getChainColor(chainId)}] hover:border-2 rounded rounded-2xl bg-dark-900`}>
+        <div className={`flex flex-cols-1 justify-center gap-2 border w-[124px] border-[${getChainColor(chainId)}] hover:border-2 rounded rounded-2xl bg-dark-900`}>
           <div className={`m-1`}>
             {node.icon}
           </div>
