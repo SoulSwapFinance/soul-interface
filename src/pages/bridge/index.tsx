@@ -649,7 +649,8 @@ const Bridge: React.FC<any> = () => {
                     >
                       {isBridgeTxPending
                         ? i18n._(t`Broadcasting Transaction`)
-                        : i18n._(t`Bridge ${selectedToken?.symbol}`)}
+                        : `Bridge ${selectedToken?.symbol}`
+                      }
                     </ButtonComponent>
                   )}
 
