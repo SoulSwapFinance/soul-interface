@@ -2,35 +2,36 @@ import React from 'react'
 import Container from 'components/Container'
 import Head from 'next/head'
 import Typography from 'components/Typography'
-// import { ethers } from 'ethers'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { formatNumber } from 'functions'
 import styled from 'styled-components'
-// import DashboardLineGraph from 'components/Dashboard/LineGraph'
 import DashboardDonutChart from 'components/Dashboard/DonutChart'
 import DashboardChartLegend from 'components/Dashboard/ChartLegend'
-// import QuestionHelper from 'components/QuestionHelper/Helper'
-// import useLuxorDashboard from 'hooks/useLuxorDashboard'
-// import { AutoSizer } from 'react-virtualized'
 import { useFantomPrice, useLuxorPrice, useWrappedLumPrice } from 'hooks/getPrices'
 import { usePairPrice } from 'hooks/usePairData'
-// import { useLuxTVL } from 'hooks/useV2Pairs'
-import { useWrappedLumensContract, useSorMasterContract } from 'hooks/useContract'
-// import { LUX_TREASURY_ADDRESS, WFTM_ADDRESS } from 'constants/addresses'
 import { DAI_ADDRESS, SOR_ADDRESS, LUX_ADDRESS } from 'sdk'
-// import useApprove from 'hooks/useApprove'
-// import { LUX_ADDRESS } from 'constants/addresses'
 import { usePairContract, useTokenContract } from 'hooks/useTokenContract'
 import { WFTM_ADDRESS } from 'constants/addresses'
 import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
-// import ExternalLink from 'components/ExternalLink'
 import LuxorGlowShadow from 'components/LuxorGlowShadow'
-import { useTokenInfo, usePairInfo, useSorInfo, useLuxorInfo, useUserTokenInfo } from 'hooks/useAPI'
+import { useTokenInfo, usePairInfo, useLuxorInfo } from 'hooks/useAPI'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
 import { LuxorBanner } from 'components/Banner'
+
+// import { ethers } from 'ethers'
+// import DashboardLineGraph from 'components/Dashboard/LineGraph'
+// import QuestionHelper from 'components/QuestionHelper/Helper'
+// import useLuxorDashboard from 'hooks/useLuxorDashboard'
+// import { AutoSizer } from 'react-virtualized'
+// import { useLuxTVL } from 'hooks/useV2Pairs'
+// import { useWrappedLumensContract, useSorMasterContract } from 'hooks/useContract'
+// import { LUX_TREASURY_ADDRESS, WFTM_ADDRESS } from 'constants/addresses'
+// import useApprove from 'hooks/useApprove'
+// import { LUX_ADDRESS } from 'constants/addresses'
+// import ExternalLink from 'components/ExternalLink'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
@@ -89,24 +90,24 @@ export default function Dashboard() {
   const ftmDaiPrice = usePairPrice(FtmDaiAddress) 
     
   // GET SOR STATS
-  const { sorInfo } = useSorInfo()
-    const sorMarketPrice = Number(useTokenInfo('0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A').tokenInfo.price)
-  const { userTokenInfo } = useUserTokenInfo('0x000000000000000000000000000000000000dead', '0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A')
+  // const { sorInfo } = useSorInfo()
+    // const sorMarketPrice = Number(useTokenInfo('0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A').tokenInfo.price)
+  // const { userTokenInfo } = useUserTokenInfo('0x000000000000000000000000000000000000dead', '0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A')
   // console.log('burnt:%s', burntSupply)
    // const sorSorCollateralRaw = Number(sorInfo.sorCollateral)
   // console.log('sorSorCollateral:%s', sorSorCollateral)
-  const sorLuxCollateral = Number(sorInfo.luxorCollateralValue)
-  const sorWrappedLumensCollateral = Number(sorInfo.wlumCollateralValue)
-  const sorFtmCollateral = Number(sorInfo.sorFtmCollateralValue)
+  // const sorLuxCollateral = Number(sorInfo.luxorCollateralValue)
+  // const sorWrappedLumensCollateral = Number(sorInfo.wlumCollateralValue)
+  // const sorFtmCollateral = Number(sorInfo.sorFtmCollateralValue)
   // console.log('sorLuxCollateral:%s', sorLuxCollateral)
-  const sorDaiCollateral = Number(sorInfo.daiCollateral)
+  // const sorDaiCollateral = Number(sorInfo.daiCollateral)
   // dampens the value of SOR collateral
-  const sorSorCollateral = Number(sorInfo.sorCollateral) * sorMarketPrice
-  const sorStableCollateral = sorSorCollateral + sorDaiCollateral
-  const burntSupply = Number(userTokenInfo.balance) / 1e18 // √ ~100
-  const totalSorSupply = Number(sorInfo.supply) - burntSupply
+  // const sorSorCollateral = Number(sorInfo.sorCollateral) * sorMarketPrice
+  // const sorStableCollateral = sorSorCollateral + sorDaiCollateral
+  // const burntSupply = Number(userTokenInfo.balance) / 1e18 // √ ~100
+  // const totalSorSupply = Number(sorInfo.supply) - burntSupply
   // console.log('sorLuxCollateral:%s', sorLuxCollateral)
-  const totalSorCollateral = sorStableCollateral + sorLuxCollateral + sorWrappedLumensCollateral + sorFtmCollateral
+  // const totalSorCollateral = sorStableCollateral + sorLuxCollateral + sorWrappedLumensCollateral + sorFtmCollateral
   // console.log('totalSorCollateral:%s', totalSorCollateral)
 
   // const result = useCurrencyBalance(LUX_TREASURY_ADDRESS, LUX_FTM)
@@ -135,17 +136,17 @@ export default function Dashboard() {
   
   // console.log('staked', stakedLuxor)
   const lockedLuxor = Number(luxorInfo.warmupBalance)
-    const luxorCollateral = Number(sorInfo.luxorCollateral) 
-   const wrappedCollateral = Number(sorInfo.wlumCollateral) 
-   const stakedStored = wrappedCollateral * wrapIndex
-   const storedCollateral = luxorCollateral + stakedStored
-   const storedLuxor = storedCollateral
+    // const luxorCollateral = Number(sorInfo.luxorCollateral) 
+  //  const wrappedCollateral = Number(sorInfo.wlumCollateral) 
+  //  const stakedStored = wrappedCollateral * wrapIndex
+  //  const storedCollateral = luxorCollateral + stakedStored
+  //  const storedLuxor = storedCollateral
    
-   const stakedLuxor = Number(luxorInfo.stakingBalance) - stakedStored
+   const stakedLuxor = Number(luxorInfo.stakingBalance) // - stakedStored
   // console.log('lockedLuxor', lockedLuxor)
   // console.log('SorValue', SorValue)
 
-  const luxorCirculatingSupply = luxorSupply - stakedLuxor - lockedLuxor - storedLuxor
+  const luxorCirculatingSupply = luxorSupply - stakedLuxor - lockedLuxor // - storedLuxor
   // console.log('Ftm Bal:%s', FtmBalance)
   // console.log('Dai Bal:%s', DaiBalance)
   
