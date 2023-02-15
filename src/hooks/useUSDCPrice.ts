@@ -214,7 +214,7 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
 
     // handle weth
     if (currency?.wrapped.equals(weth)) {
-      return new Price(weth, weth, '1', Number(wethPrice).toFixed())
+      return new Price(weth, weth, '10', Number(wethPrice * 10).toFixed())
     }
 
     // handle wbtc
