@@ -48,8 +48,8 @@ const TokenPairLink = styled(ExternalLink)`
   padding-left: 10;
 `
 
-export const ActiveRow = ({ pid, farm }) => {
-    const { account, chainId, library } = useActiveWeb3React()
+export const ActiveRow = ({ pid }) => {
+    const { account, chainId } = useActiveWeb3React()
     const router = useRouter()
     const [approved, setApproved] = useState(false)
     const [approvedZap, setZapApproved] = useState(false)
@@ -61,7 +61,6 @@ export const ActiveRow = ({ pid, farm }) => {
 
     // const nowTime = new Date().getTime()
     const { defarmInfo } = useDeFarmInfo()
-    // const startRate = Number(defarmInfo.startRate)
 
     const [showOptions, setShowOptions] = useState(false)
     const [openDeposit, setOpenDeposit] = useState(false)
@@ -95,7 +94,7 @@ export const ActiveRow = ({ pid, farm }) => {
     const pairStatus = defarmPoolInfo.status
     const rewardAddress = defarmPoolInfo.rewardToken
     const depositAddress = defarmPoolInfo.lpAddress
-    // const startTime = Number(defarmPoolInfo.startTime)
+    const startTime = Number(defarmPoolInfo.startTime)
     const symbol = defarmPoolInfo.symbol
     const endTime = Number(defarmPoolInfo.endTime)
 
@@ -240,11 +239,7 @@ export const ActiveRow = ({ pid, farm }) => {
             console.log(e)
         }
     }
-
-    // handles: create deFarm
-    const handleCreate = useCallback(() => {
-        router.push(`/defarms/create`)
-    }, [])
+    
 
     // runs only on initial render/mount
     // useEffect(() => {
@@ -277,12 +272,6 @@ export const ActiveRow = ({ pid, farm }) => {
         <>
             <div className="flex justify-center w-full">
                 <FarmContainer>
-                    <Typography className={
-                        `flex mt-2 font-bold justify-center border border-2 border-[${getChainColor(chainId)}] rounded rounded-xl m-2 p-2`}
-                        onClick={handleCreate}
-                    >
-                        {i18n._(t`Create Farm`)}
-                    </Typography>
                     <div className={classNames("bg-dark-900 p-3 border border-blue", !hasBalance && "border-dark-1000",
                         !isActive ? "hover:border-pink"
                             : hasBalance ? "border-dark-600"

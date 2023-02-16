@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import Typography from 'components/Typography'
 import { Active, Inactive } from './Key'
 import { ActiveRow } from './Row'
@@ -11,14 +11,21 @@ import { t } from '@lingui/macro'
 import { i18n } from '@lingui/core'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
+import { useRouter } from 'next/router'
 
 export const FarmList = () => {
   const { chainId } = useActiveWeb3React()
+  const router = useRouter()
+
+  // handles: create deFarm
+  const handleCreate = useCallback(() => {
+    router.push(`/defarms/create`)
+  }, [])
+
   const ftmList = FantomPools.map((farm) => (
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
-      farm={farm}
     />
   ))
 
@@ -26,7 +33,6 @@ export const FarmList = () => {
     <ActiveRow
       key={farm.pid}
       pid={farm.pid}
-      farm={farm}
     />
   ))
 
@@ -88,6 +94,21 @@ export const FarmList = () => {
           </Button>
         </NavLink>
       </div>
+        <Button 
+            variant={'bordered'}
+            color={'purple'}
+            className={
+                `flex mt-2 font-bold justify-center border border-2 
+                rounded rounded-xl`
+              }
+            onClick={handleCreate}
+          >
+            <Typography
+              className={`text-white`}
+            >
+              {i18n._(t`Create Farm`)}
+            </Typography>
+          </Button>
       <Typography className="text-2xl bg-dark-1000 mt-6 border border-dark-600 p-3 font-bold text-center">Decentralized Farms</Typography>
       <Active />
       <>{chainId == ChainId.FANTOM ? ftmList : avaxList}</>
