@@ -75,13 +75,13 @@ const BNB_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(BNB[ChainId.AVALANCHE], 100_000e6)
 }
 
-const CRV_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(CRV[ChainId.FANTOM], 100_000e6)
-}
+// const CRV_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
+//   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(CRV[ChainId.FANTOM], 100_000e6)
+// }
 
-const GRIMEVO_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(GRIMEVO[ChainId.FANTOM], 100_000e6)
-}
+// const GRIMEVO_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
+//   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(GRIMEVO[ChainId.FANTOM], 100_000e6)
+// }
 
 const AVAX_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(AVAX[ChainId.FANTOM], 100_000e6),
@@ -102,8 +102,8 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const wLumensPrice = usePrice(WLUM_ADDRESS[250])
   const wftmPrice = usePrice(WFTM_ADDRESS[250])
   const fusdPrice = usePrice(FUSD_ADDRESS[250])
-  const crvPrice = usePrice(CRV_ADDRESS[250])
-  const grimEvoPrice = usePrice(GRIMEVO_ADDRESS[250])
+  // const crvPrice = usePrice(CRV_ADDRESS[250])
+  // const grimEvoPrice = usePrice(GRIMEVO_ADDRESS[250])
  
   const wethPrice = usePrice(WETH_ADDRESS[chainId])
   const wbtcPrice = usePrice(WBTC_ADDRESS[chainId])
@@ -116,8 +116,8 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const luxorAmountOut = chainId ? LUXOR_AMOUNT_OUT[250] : undefined
   const wlumAmountOut = chainId ? WLUM_AMOUNT_OUT[250] : undefined
   const wftmAmountOut = chainId ? WFTM_AMOUNT_OUT[250] : undefined
-  const crvAmountOut = chainId ? CRV_AMOUNT_OUT[250] : undefined
-  const grimEVOAmountOut = chainId ? GRIMEVO_AMOUNT_OUT[250] : undefined
+  // const crvAmountOut = chainId ? CRV_AMOUNT_OUT[250] : undefined
+  // const grimEVOAmountOut = chainId ? GRIMEVO_AMOUNT_OUT[250] : undefined
   
   const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId] : undefined
   const daiAmountOut = chainId ? DAI_AMOUNT_OUT[chainId] : undefined
@@ -142,8 +142,8 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const wftm = wftmAmountOut?.currency
   const wbtc = wbtcAmountOut?.currency
   const bnb = bnbAmountOut?.currency
-  const crv = crvAmountOut?.currency
-  const grimEVO = grimEVOAmountOut?.currency
+  // const crv = crvAmountOut?.currency
+  // const grimEVO = grimEVOAmountOut?.currency
   const avax = avaxAmountOut?.currency
 
   const WBTC_MULTIPLIER = chainId == ChainId.FANTOM ? 2 : ChainId.AVALANCHE ? 3.5 : 0
@@ -214,7 +214,7 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
 
     // handle weth
     if (currency?.wrapped.equals(weth)) {
-      return new Price(weth, weth, '10', Number(wethPrice * 10).toFixed())
+      return new Price(weth, weth, '100', Number(wethPrice * 100).toFixed())
     }
 
     // handle wbtc
@@ -228,14 +228,14 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
     }
 
     // handle crv
-    if (currency?.wrapped.equals(crv)) {
-      return new Price(crv, crv, '10', Number(crvPrice * 10).toFixed())
-    }
+    // if (currency?.wrapped.equals(crv)) {
+    //   return new Price(crv, crv, '10', Number(crvPrice * 10).toFixed())
+    // }
   
     // handle grimEVO
-    if (currency?.wrapped.equals(grimEVO)) {
-      return new Price(grimEVO, grimEVO, '10', Number(grimEvoPrice * 10).toFixed())
-    }
+    // if (currency?.wrapped.equals(grimEVO)) {
+    //   return new Price(grimEVO, grimEVO, '10', Number(grimEvoPrice * 10).toFixed())
+    // }
     
     // handle AVAX
     if (currency?.wrapped.equals(avax)) {

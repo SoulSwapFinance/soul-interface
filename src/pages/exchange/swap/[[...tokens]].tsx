@@ -634,7 +634,7 @@ const Swap = () => {
                     )}
             {
               // useSwap && 
-              priceImpactSeverity > 2 && isValid &&
+              priceImpactSeverity >= 3 && isValid &&
               <Button
                 color={`${getChainColorCode(chainId)}`}
                 onClick={handleAggregatorSwap}
