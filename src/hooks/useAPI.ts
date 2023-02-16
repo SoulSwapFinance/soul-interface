@@ -1140,46 +1140,46 @@ useEffect(() => {
 return { status, luxorUserInfo }
 }
 
-export function useSorInfo(): { status: string; sorInfo: T } {
-  const { chainId } = useActiveWeb3React()
-  const [status, setStatus] = useState<string>('idle')
-  const [sorInfo, setInfo] = useState<T>({
-      address: '',
-      supply: '0',
-      luxorTreasuryBalance: '0',
-      sorCollateral: '0',
-      sorFtmCollateral: '0',
-      daiCollateral: '0',
-      luxorCollateral: '0',
-      wlumCollateral: '0',
-      sorFtmCollateralValue: '0',
-      luxorCollateralValue: '0',
-      wlumCollateralValue: '0',
-      stableCollateral: '0',
-      collateralValue: '0',
-      collateralization: '0',
-      api: ''
-  })  
-  useEffect(() => {
-    const fetchData = async () => {
-      setStatus('fetching')
-      const response = await fetch(`${BASE_URL}/sor`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Referrer-Policy': 'no-referrer',
-        },
-      })
-      const json = await response.json()
-      setInfo(json as T)
-      setStatus('fetched')
-    }
-    if (chainId == ChainId.FANTOM) 
-    fetchData()
-  }, [])
+// export function useSorInfo(): { status: string; sorInfo: T } {
+//   const { chainId } = useActiveWeb3React()
+//   const [status, setStatus] = useState<string>('idle')
+//   const [sorInfo, setInfo] = useState<T>({
+//       address: '',
+//       supply: '0',
+//       luxorTreasuryBalance: '0',
+//       sorCollateral: '0',
+//       sorFtmCollateral: '0',
+//       daiCollateral: '0',
+//       luxorCollateral: '0',
+//       wlumCollateral: '0',
+//       sorFtmCollateralValue: '0',
+//       luxorCollateralValue: '0',
+//       wlumCollateralValue: '0',
+//       stableCollateral: '0',
+//       collateralValue: '0',
+//       collateralization: '0',
+//       api: ''
+//   })  
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       setStatus('fetching')
+//       const response = await fetch(`${BASE_URL}/sor`, {
+//         method: 'GET',
+//         headers: {
+//           'Content-Type': 'application/json',
+//           'Referrer-Policy': 'no-referrer',
+//         },
+//       })
+//       const json = await response.json()
+//       setInfo(json as T)
+//       setStatus('fetched')
+//     }
+//     if (chainId == ChainId.FANTOM) 
+//     fetchData()
+//   }, [])
 
-  return { status, sorInfo }
-}
+//   return { status, sorInfo }
+// }
 
 // COFFINBOX API //
 

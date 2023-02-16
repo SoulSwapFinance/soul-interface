@@ -1,24 +1,12 @@
 import React from 'react'
 import Typography from 'components/Typography'
-import { Active, Inactive, Underworld } from './Key'
+import { Active } from './Key'
 import { ActiveRow } from './Row'
 import { AvalanchePools, FantomPools, InactiveFantomPools, InactiveAvalanchePools } from './Pools'
-// import { Button } from 'components/Button'
-// import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
-// import { useSummonerContract } from 'hooks/useContract'
-// import ExternalLink from 'components/ExternalLink'
-import { classNames } from 'functions'
-// import { getChainColor, getChainColorCode } from 'constants/chains'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
-// import { getChainColorCode } from 'constants/chains'
-// import { classNames } from 'functions'
-// import Image from 'next/image'
-// import FARM_BANNER from 'assets/branding/farm-banner.png'
-// import ExternalLink from 'components/ExternalLink'
-// import { SubmitButton } from 'features/bond/Styles'
 
 export const FarmList = () => {
   const { chainId } = useActiveWeb3React()
@@ -88,9 +76,9 @@ export const FarmList = () => {
         <Typography className="text-2xl bg-dark-1000 mb-2 rounded rounded-2xl m-1 p-4 border border-purple font-bold text-center">SoulSwap Pools</Typography>
             <Active />
           {chainId == ChainId.AVALANCHE ? avaxList : ftmList}
-          {[ChainId.FANTOM].includes(chainId) &&  <Typography className="text-2xl bg-dark-1000 mb-2 rounded rounded-2xl m-1 p-4 border border-avaxRed font-bold text-center">Retired Pools</Typography>}
-            {[ChainId.FANTOM].includes(chainId) && <Active />}
-          {chainId == ChainId.AVALANCHE ? inactiveAvaxList : inactiveFtmList}
+          {/* {[ChainId.FANTOM].includes(chainId) &&  <Typography className="text-2xl bg-dark-1000 mb-2 rounded rounded-2xl m-1 p-4 border border-avaxRed font-bold text-center">Retired Pools</Typography>} */}
+            {/* {[ChainId.FANTOM].includes(chainId) && <Active />}
+          {chainId == ChainId.AVALANCHE ? inactiveAvaxList : inactiveFtmList} */}
       </div>
   )
 }
