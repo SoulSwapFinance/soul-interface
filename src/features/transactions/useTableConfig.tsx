@@ -1,10 +1,10 @@
-import { getChainColorCode } from 'constants/chains'
-import { getExplorerLink } from 'functions/explorer'
+// import { getChainColorCode } from 'constants/chains'
+// import { getExplorerLink } from 'functions/explorer'
 import React, { useMemo } from 'react'
 import { useActiveWeb3React } from 'services/web3'
 
-import ExternalLink from '../../components/ExternalLink'
-import { shortenAddress } from './table-utils'
+// import ExternalLink from '../../components/ExternalLink'
+// import { shortenAddress } from './table-utils'
 import { Transactions } from './types'
 
 export const useTableConfig = (transactions?: Transactions[]) => {
@@ -14,7 +14,7 @@ export const useTableConfig = (transactions?: Transactions[]) => {
       {
         Header: 'Action',
         accessor: 'type',
-        minWidth: 180,
+        minWidth: 200,
       },
       {
         Header: 'Value',
