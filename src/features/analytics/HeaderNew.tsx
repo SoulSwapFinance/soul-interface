@@ -32,9 +32,9 @@ const AnalyticsHeaderNew: FC<AnalyticsHeaderProps> = ({ input, output, allowedSl
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const router = useRouter()
-  const [animateWallet, setAnimateWallet] = useState(false)
-  const isRemove = router.asPath.startsWith('/remove')
-  const isLimitOrder = router.asPath.startsWith('/limit-order')
+  // const [animateWallet, setAnimateWallet] = useState(false)
+  // const isRemove = router.asPath.startsWith('/remove')
+  // const isLimitOrder = router.asPath.startsWith('/limit-order')
  
 
   return (

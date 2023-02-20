@@ -32,23 +32,24 @@ import SwapDropdown from 'features/swap/SwapDropdown'
 import { SwapLayoutCard } from 'layouts/SwapLayout'
 import ExchangeAnalyticsHeader from 'features/analytics/ExchangeAnalyticsHeader'
 
+const ONE_DAY = 86_400
 
 const chartTimespans = [
   {
-    text: '1W',
-    length: 604800,
+    text: '7 Days',
+    length: 604_800,
   },
   {
-    text: '1M',
+    text: '30 Days',
     length: 2629746,
   },
   {
-    text: '1Y',
-    length: 31556952,
+    text: '180 Days',
+    length: ONE_DAY * 180,
   },
   {
-    text: 'ALL',
-    length: Infinity,
+    text: '240 Days',
+    length: ONE_DAY * 240,
   },
 ]
 
@@ -204,7 +205,7 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
                   figure={chartData.liquidity}
                   change={chartData.liquidityChange}
                   chart={chartData.liquidityChart}
-                  defaultTimespan="1W"
+                  defaultTimespan="7 Days"
                   timespans={chartTimespans}
                 />
                 <ChartCard
@@ -213,7 +214,7 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
                   figure={chartData.volume1d}
                   change={chartData.volume1dChange}
                   chart={chartData.volumeChart}
-                  defaultTimespan="1W"
+                  defaultTimespan="7 Days"
                   timespans={chartTimespans}
                 />
               </div>
