@@ -31,7 +31,7 @@ export const LegacyTransactions: FC<{ pairs: string[] }> = ({ pairs }) => {
 // }
 
 const _Transactions: FC<TransactionFetcherState> = ({ transactions, error, loading }) => {
-  const { i18n } = useLingui()
+  // const { i18n } = useLingui()
   const { config } = useTableConfig(transactions)
 
   const {
