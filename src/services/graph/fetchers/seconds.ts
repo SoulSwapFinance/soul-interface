@@ -1,6 +1,4 @@
-// todo update all
-
-import { getUnixTime, startOfHour, startOfMinute, startOfSecond, subDays, subHours } from 'date-fns'
+import { getUnixTime, startOfHour, subDays, subHours } from 'date-fns'
 
 import { ChainId } from '../../../sdk'
 import { GRAPH_HOST } from '../constants'
@@ -10,10 +8,10 @@ import { request } from 'graphql-request'
 export const SECONDS = {
   [ChainId.ETHEREUM]: 'blocklytics/ethereum-blocks',
   [ChainId.FANTOM]: 'matthewlilley/fantom-blocks',
-  // [ChainId.XDAI]: 'matthewlilley/xdai-blocks',
   [ChainId.MATIC]: 'matthewlilley/polygon-blocks',
-  // [ChainId.HARMONY]: 'sushiswap/harmony-blocks',
   [ChainId.AVALANCHE]: 'matthewlilley/avalanche-blocks',
+  // [ChainId.XDAI]: 'matthewlilley/xdai-blocks',
+  // [ChainId.HARMONY]: 'sushiswap/harmony-blocks',
   // [ChainId.CELO]: 'sushiswap/celo-blocks',
 }
 

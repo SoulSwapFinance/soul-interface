@@ -18,26 +18,6 @@ export const userIdsQuery = gql`
     }
   }
 `
-export const uniswapUserQuery = gql`
-  query uniswapUserQuery($id: String!) {
-    uniswapUser: user(id: $id) {
-      id
-      liquidityPositions {
-        id
-        liquidityTokenBalance
-        # historicalSnapshots {
-        #   id
-        #   reserve0
-        #   reserve1
-        #   block
-        #   timestamp
-        #   liquidityTokenBalance
-        #   liquidityTokenTotalSupply
-        # }
-      }
-    }
-  }
-`
 
 export const bundleFields = gql`
   fragment bundleFields on Bundle {

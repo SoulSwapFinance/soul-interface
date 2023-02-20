@@ -42,7 +42,7 @@ export const legacyTransactionDataFormatter = (rawData: LegacyTransactions[]): T
     return {
       value: formatNumber(tx.amountUSD, true),
       address: tx.to,
-      time: formatDateAgo(new Date(Number(tx.timestamp) * 1000)),
+      time: formatDateAgo(new Date(Number(tx.timestamp) * 1_000)),
       ...props,
     }
   })
