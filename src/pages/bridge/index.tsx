@@ -31,22 +31,11 @@ import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2"
 import { BigNumber } from "@ethersproject/bignumber"
 import Loader from "../../components/Loader"
 import FadeInOut from "../../components/AnimationFade"
-// import { ContentBox, OverlayButton, Typo1, Typo2, Typo3 } from "components/index"
 import { useActiveWeb3React } from "services/web3"
-// import { ArrowDownIcon, ArrowRightIcon } from "@heroicons/react/24/solid"
 import Image from 'next/image'
 import Typography from "components/Typography"
-// import Container from "components/Container"
-// import SwapHeader from "features/swap/SwapHeader"
-// import NavLink from "components/NavLink"
-// import { NETWORK_ICON, NETWORK_LABEL } from "config/networks"
-// import NetworkModal from "modals/NetworkModal"
-// import { useNetworkModalToggle } from "state/application/hooks"
-// import Web3Network from "components/Web3Network"
 import { getChainColor, getChainColorCode } from "constants/chains"
 import SwapDropdown from "features/swap/SwapDropdown"
-// import { SwapLayoutCard } from "layouts/SwapLayout";
-// import { classNames } from "functions/styling";
 import { t } from "@lingui/macro";
 import { i18n } from "@lingui/core";
 import { DonateBanner } from "components/Banner";
@@ -54,8 +43,21 @@ import BRIDGE_BANNER from 'assets/branding/bridge-banner.png'
 import BridgeTokenList from "features/bridge/BridgeTokenList";
 import { ContentBox, OverlayButton, Typo1, Typo2 } from "components";
 import TokenStats from "components/TokenStats";
-import { ArrowDownIcon } from "@heroicons/react/24/solid";
-import { classNames } from "functions/styling";
+import { ChainId } from "sdk";
+
+// import { ContentBox, OverlayButton, Typo1, Typo2, Typo3 } from "components/index"
+// import { ArrowDownIcon, ArrowRightIcon } from "@heroicons/react/24/solid"
+// import Container from "components/Container"
+// import SwapHeader from "features/swap/SwapHeader"
+// import NavLink from "components/NavLink"
+// import { NETWORK_ICON, NETWORK_LABEL } from "config/networks"
+// import NetworkModal from "modals/NetworkModal"
+// import { useNetworkModalToggle } from "state/application/hooks"
+// import Web3Network from "components/Web3Network"
+// import { SwapLayoutCard } from "layouts/SwapLayout";
+// import { classNames } from "functions/styling";
+// import { ArrowDownIcon } from "@heroicons/react/24/solid";
+// import { classNames } from "functions/styling";
 
 const ChainSelection: React.FC<any> = ({
   setTokenList,
@@ -66,7 +68,7 @@ const ChainSelection: React.FC<any> = ({
 
   // const [fromChain, setFromChain] = useState(chainId)
   const fromChain = chainId
-  const [toChain, setToChain] = useState(chainId == 250 ? 43114 : 250)
+  const [toChain, setToChain] = useState(chainId == ChainId.FANTOM ? ChainId.AVALANCHE : ChainId.FANTOM)
   const { getBridgeTokens } = useBridgeApi()
   const { forceSwap, DEFAULT_PROVIDERS } = useMultiChain()
 
@@ -132,27 +134,10 @@ const ChainSelection: React.FC<any> = ({
   }, [fromChain, toChain, account])
 
   const handleSetToChain = (toChain: number) => {
-    // if (chainId !== 250) {
-    //   setFromChain(250)
-    // }
-    // if (chainId === fromChain) {
-    //   setFromChain(chainId === 250 ? 1 : 250)
-    // }
     setToChain(toChain)
-    // V2 (BELOW)
-    // setToChain(chainId == 250 ? 1 : chainId)
-
   }
-  // const handleSwap = () => {
-  //   const fromChainOld = fromChain;
-  //   const toChainOld = toChain;
-
-  //   // setFromChain(toChainOld)
-  //   setToChain(fromChainOld)
-  // }
 
   return (
-    // <Column>
     <div className="grid grid-cols-2 gap-2 justify-center text-center sm:mx-2 lg:mx-4">
 
       <div className={`grid grid-cols-1 w-full justify-center text-center mt-3 mb-3 font-bold border border-[${getChainColor(fromChain)}] rounded rounded-2xl bg-dark-1000`}>
@@ -386,8 +371,6 @@ const Bridge: React.FC<any> = () => {
     if (tx) {
       window.localStorage.setItem("BridgeTxHash", tx)
       setBridgeTxHash(tx)
-      // TODO announce is not a public api endpoint
-      // announceTransaction(tx, fromChainId, toChainId)
     }
   }
 
@@ -445,7 +428,6 @@ const Bridge: React.FC<any> = () => {
   }, [bridgeTxHash])
 
   return (
-    // <Container id="bridge-page" maxWidth="2xl" className={`space-y-4 mt-4`}>
     <DoubleGlowShadowV2>
       {/* <SwapLayoutCard> */}
       <div className={`grid p-1 mt-4 space-y-2 rounded rounded-2xl bg-dark-1000`}>
@@ -463,11 +445,8 @@ const Bridge: React.FC<any> = () => {
           />
         </div>
         <div className={`grid`}>
-          {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/> */}
           <div className={`my-1`} />
           <SwapDropdown />
-          {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/> */}
-          {/* </div> */}
           <FadeInOut>
             <div className={`flex rounded rounded-2xl bg-dark-1000 border border-${getChainColorCode(chainId)} border-4 mt-4 p-2`}>
               {/* START: TRANSACTION POP-UP */}
