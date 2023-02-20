@@ -171,6 +171,29 @@ export const AvalanchePools = [
 ]
 
 export const InactiveFantomPools = [
+  { // 600
+    pid: 8,
+    type: 'swap',
+    decimals: 18,
+    token0Symbol: 'WFTM',
+    token1Symbol: 'DAI',
+    lpSymbol: 'FTM-DAI',
+    lpAddress: DAI_NATIVE[ChainId.FANTOM],
+    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+    token1Address: DAI_ADDRESS[ChainId.FANTOM],
+  },
+    // LENDING MARKET //
+  {
+    pid: 24,
+    type: 'lend',
+    decimals: 18,
+    token0Symbol: 'LINK', // EXEMPT //
+    token1Symbol: 'USDC',
+    lpSymbol: 'USDC-LINK', // EXEMPT //
+    lpAddress: '0x5C900Ac3c95D13adE54D28A9800636AE21Cb5F39',
+    token0Address: LINK_ADDRESS[ChainId.FANTOM],
+    token1Address: USDC_ADDRESS[ChainId.FANTOM],
+  }
   // { // LENDING √
   //   pid: 13,
   //   type: 'lend',
@@ -317,17 +340,6 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: AVAX_ADDRESS[ChainId.FANTOM],
   },
-  { // 600
-    pid: 8,
-    type: 'swap',
-    decimals: 18,
-    token0Symbol: 'WFTM',
-    token1Symbol: 'DAI',
-    lpSymbol: 'FTM-DAI',
-    lpAddress: DAI_NATIVE[ChainId.FANTOM],
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: DAI_ADDRESS[ChainId.FANTOM],
-  },
   { // 300
     pid: 9,
     type: 'swap',
@@ -443,16 +455,4 @@ export const FantomPools = [
     token0Address: BNB_ADDRESS[ChainId.FANTOM],
     token1Address: USDC_ADDRESS[ChainId.FANTOM],
   },
-   // LENDING MARKET //
-  {
-    pid: 24,
-    type: 'lend',
-    decimals: 18,
-    token0Symbol: 'LINK', // EXEMPT //
-    token1Symbol: 'USDC',
-    lpSymbol: 'USDC-LINK', // EXEMPT //
-    lpAddress: '0x5C900Ac3c95D13adE54D28A9800636AE21Cb5F39',
-    token0Address: LINK_ADDRESS[ChainId.FANTOM],
-    token1Address: USDC_ADDRESS[ChainId.FANTOM],
-  }
 ]

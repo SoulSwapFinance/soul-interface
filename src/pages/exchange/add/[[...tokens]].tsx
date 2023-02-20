@@ -16,7 +16,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { ConfirmAddModalBottom } from 'features/liquidity/ConfirmAddModalBottom'
 import Dots from 'components/Dots'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
-import Container from 'components/Container'
+// import Container from 'components/Container'
 // import CurrencyAssetInput from 'components/AssetInput'
 // import CurrencyInputPanel from 'components/CurrencyInputPanel'
 // import SwapHeader from 'features/swap/SwapHeader'
@@ -367,7 +367,7 @@ export default function Add() {
         />
       </Head>
       <DoubleGlowShadowV2>
-      <div className={`grid p-1 mt-4 space-y-2 rounded rounded-2xl bg-dark-1000`}>
+      <div className={`grid p-1 mt-8 space-y-2 rounded rounded-2xl bg-dark-1000`}>
           {/* <SwapLayoutCard> */}
           <DonateBanner chainId={chainId} />
           <div

@@ -17,6 +17,7 @@ import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
 // import HomeIcon from 'components/Icons/mobile/HomeIcon'
 import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
 import SwapIcon from 'components/Icons/exchange/SwapIcon'
+import VaultIcon from 'components/Icons/mobile/VaultIcon'
 
 export interface BarItemLeaf {
   key: string
@@ -93,15 +94,31 @@ const useMenu: UseBar = () => {
     // Farm
     if (featureEnabled(Feature.BONDS, chainId)) {
       mainItems.push({
-        key: 'earn',
+        key: 'farm',
         link: '/farms',
-        title: i18n._(t`Earn`),
+        title: i18n._(t`Farm`),
         icon: <SeedlingIcon
           className={classNames(`w-7 h-7 rounded rounded-md`
             // , isEarn ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
           )}
           fillPrimary={chainColor}
           fillSecondary={WHITE}
+        />,
+      })
+    }
+
+    // Bond
+    if (featureEnabled(Feature.BONDS, chainId)) {
+      mainItems.push({
+        key: 'bond',
+        link: '/bond',
+        title: i18n._(t`Bond`),
+        icon: <VaultIcon
+          className={classNames(`w-7 h-7 rounded rounded-md`
+            // , isEarn ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
+          )}
+          fillPrimary={WHITE}
+          fillSecondary={chainColor}
         />,
       })
     }

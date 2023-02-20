@@ -5,9 +5,8 @@ import { useMemo } from 'react'
 import { useV2TradeExactOut } from './useV2Trades'
 
 import { tryParseAmount } from 'functions'
-import { BNB, CRV, LUXOR, MIM, AVAX, SEANCE, SOUL, FUSD, USDC, WBTC, WETH, WFTM, WLUM, GRIMEVO, DAI, SOR } from 'constants/tokens'
-import { AVAX_ADDRESS, BNB_ADDRESS, CRV_ADDRESS, FUSD_ADDRESS, 
-  GRIMEVO_ADDRESS, LUX_ADDRESS, SEANCE_ADDRESS, WFTM_ADDRESS, 
+import { BNB, LUXOR, MIM, AVAX, SEANCE, SOUL, FUSD, USDC, WBTC, WETH, WFTM, WLUM, GRIMEVO, DAI, SOR } from 'constants/tokens'
+import { AVAX_ADDRESS, BNB_ADDRESS, FUSD_ADDRESS, LUX_ADDRESS, SEANCE_ADDRESS, WFTM_ADDRESS, 
   SOUL_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS } 
   from 'constants/addresses'
 import { usePrice } from 'hooks/usePrice'

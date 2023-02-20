@@ -1,5 +1,5 @@
 import React, { useCallback, useState, Fragment, useEffect, useMemo } from "react"
-import { ChevronDoubleUpIcon } from '@heroicons/react/24/solid'
+// import { ChevronDoubleUpIcon } from '@heroicons/react/24/solid'
 import ChevronDoubleUp from 'assets/svg/icons/ChevronDoubleUp.svg'
 import ChevronDown from 'assets/svg/icons/ChevronDown.svg'
 import Multiply from 'assets/svg/icons/Multiply.svg'
@@ -69,35 +69,36 @@ import { TYPE } from "theme"
 import { ArrowWrapper, BottomGrouping, Dots, SwapCallbackError, Wrapper } from "components/Order/styleds"
 import ConfirmSwapModal from "components/Order/ConfirmSwapModal"
 import UnsupportedCurrencyFooter from "components/Order/UnsupportedCurrencyFooter"
-// import useGasOverhead from "hooks/gelato/useGasOverhead"
 import TradePrice from "components/Order/TradePrice"
-// import { AdvancedSwapDetails } from "components/Order/AdvancedSwapDetails"
 import CurrencyInputPanel from "components/CurrencyInputPanel"
-// import Input from "components/Input"
-// import OrderHeader from "components/Order/OrderHeader"
 import { classNames, formatNumber, formatPercent } from "functions"
 import { useActiveWeb3React } from "services/web3"
-// import SwapHeader from "features/swap/SwapHeader"
-import Container from "components/Container"
-// import CurrencyInputPanel from "components/Order/CurrencyInputPanel"
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2"
 import NetworkGuard from "guards/Network"
 import { Feature } from "enums/Feature"
-import { SwapLayout, SwapLayoutCard } from "layouts/SwapLayout"
+import { SwapLayout } from "layouts/SwapLayout"
 import Image from 'next/image'
 import { GelatoLimitOrdersHistoryPanel } from "soulswap-limit-orders-react"
 import { Toggle } from "components/Toggle"
 import SwapAssetPanel from "features/trident/swap/SwapAssetPanel"
-// import { maxAmountSpend } from "utils/currency/maxAmountSpend"
 import { currencyId } from "functions/currency"
 import { useRouter } from "next/router"
 import { useCurrency } from "hooks/Tokens"
-// import SocialWidget from "components/Social"
 import SwapDropdown from "features/swap/SwapDropdown"
-import { getChainColor, getChainColorCode } from "constants/chains"
+import { getChainColorCode } from "constants/chains"
 import { DonateBanner } from "components/Banner"
 import LIMIT_BANNER from 'assets/branding/limit-banner.png'
 import TokenStats from "components/TokenStats"
+
+// import SocialWidget from "components/Social"
+// import useGasOverhead from "hooks/gelato/useGasOverhead"
+// import { AdvancedSwapDetails } from "components/Order/AdvancedSwapDetails"
+// import Input from "components/Input"
+// import OrderHeader from "components/Order/OrderHeader"
+// import SwapHeader from "features/swap/SwapHeader"
+// import Container from "components/Container"
+// import CurrencyInputPanel from "components/Order/CurrencyInputPanel"
+// import { maxAmountSpend } from "utils/currency/maxAmountSpend"
 
 // const BodyWrapper = styled.div<{ margin?: string }>`
 // position: relative;

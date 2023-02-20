@@ -719,7 +719,7 @@ export default function Remove() {
       </Head>
 
       <DoubleGlowShadowV2>
-      <div className={`grid p-1 mt-4 space-y-2 rounded rounded-2xl bg-dark-1000`}>
+      <div className={`grid p-1 mt-8 space-y-2 rounded rounded-2xl bg-dark-1000`}>
           {/* <SwapLayoutCard> */}
           <DonateBanner chainId={chainId} />
           <div
