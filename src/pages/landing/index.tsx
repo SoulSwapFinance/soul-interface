@@ -12,7 +12,7 @@ const Landing = () => {
 
 	return (
       <iframe
-	  		className="mt-2 w-full"
+	  		className="mt-4 w-full"
 			frame-border={"none"}
     		title={"Landing"}
     		src="https://home.soulswap.finance"

@@ -394,50 +394,19 @@ export default function TokenStatsModal(): JSX.Element | null {
           formatCurrency(
             Number(soulPrice), 3)
         )}
-        {/* getSummaryLine(
-          <Typography variant="sm" className="flex items-center py-0.5">
-            {`Seance Market Price`}
-          </Typography>,
-          formatCurrency(
-            Number(seancePrice), 3)
-        ) */}
-
     <div className="flex" />
-        <NavLink href={'/dashboard'}>
+        <NavLink href={'/landing'}>
           <Button
             color='purple'
             variant='bordered'
             size='xs'
           >
             <a className="flex justify-center text-white text-xl transition rounded-md hover:pink">
-              <span>VIEW ECONOMY</span>
+              <span>LANDING PAGE</span>
             </a>
           </Button>
         </NavLink>
-   
-       {/* <NavLink href={'/bonds'}>
-          <Button
-            color='purple'
-            variant='bordered'
-            size='xs'
-          >
-            <a className="flex justify-center text-white text-xl transition rounded-md hover:pink">
-              <span>MINT SOUL</span>
-            </a>
-          </Button>
-        </NavLink>
-        <NavLink href={'/autostake'}>
-          <Button
-            color='purple'
-            variant='bordered'
-            size='xs'
-          >
-            <a className="flex justify-center text-white text-xl transition rounded-md hover:pink">
-              <span>STAKE SOUL</span>
-            </a>
-          </Button>
-        </NavLink> */}
-      </div>
+    </div>
     </HeadlessUiModal.Controlled>
   )
 }

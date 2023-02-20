@@ -18,6 +18,7 @@ import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
 import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
 import SwapIcon from 'components/Icons/exchange/SwapIcon'
 import VaultIcon from 'components/Icons/mobile/VaultIcon'
+import EarnIcon from 'components/Icons/mobile/EarnIcon'
 
 export interface BarItemLeaf {
   key: string
@@ -92,7 +93,7 @@ const useMenu: UseBar = () => {
     })
 
     // Farm
-    if (featureEnabled(Feature.BONDS, chainId)) {
+    if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
       mainItems.push({
         key: 'farm',
         link: '/farms',
@@ -113,6 +114,22 @@ const useMenu: UseBar = () => {
         key: 'bond',
         link: '/bond',
         title: i18n._(t`Bond`),
+        icon: <EarnIcon
+          className={classNames(`w-7 h-7 rounded rounded-md`
+            // , isEarn ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
+          )}
+          fillPrimary={WHITE}
+          fillSecondary={chainColor}
+        />,
+      })
+    }
+
+    // Vault
+    if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
+      mainItems.push({
+        key: 'vault',
+        link: '/autostake',
+        title: i18n._(t`Stake`),
         icon: <VaultIcon
           className={classNames(`w-7 h-7 rounded rounded-md`
             // , isEarn ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``

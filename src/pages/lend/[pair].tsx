@@ -29,7 +29,7 @@ export default function Pair() {
   const pair = useUnderworldPair(router.query.pair as string)
   const { underworldPairInfo } = useUnderworldPairInfo(router.query.pair)
   const pairAddress = router.query.pair as string
-  const _supplyAPR = Number(useUnderworldPairAPI(pairAddress)[7]) // * 100 / 1E18)
+  // const _supplyAPR = Number(useUnderworldPairAPI(pairAddress)[7]) // * 100 / 1E18)
 
   /*
   const { underworldPairInfo } = useUnderworldPairInfo(pair?.address)
@@ -94,7 +94,9 @@ const collateralSymbol
   const assetURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${assetAddress}/logo.png`
   //pair?.asset.tokenInfo.logoURI
   const collateralURL = `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${blockchain}/assets/${collateralAddress}/logo.png`
-  const supplyAPR = chainId == ChainId.AVALANCHE ? pair.currentSupplyAPR.stringWithStrategy :  _supplyAPR / 1E18 * 100
+  // const supplyAPR = chainId == ChainId.AVALANCHE ? pair.currentSupplyAPR.stringWithStrategy :  _supplyAPR / 1E18 * 100
+  const _APR = pair.currentSupplyAPR.stringWithStrategy
+  const supplyAPR = _APR >= 325 ? 325 : _APR == 0 ? 1 : _APR
 
   return (
     <PairLayout>
