@@ -8,7 +8,7 @@ import RPC from './rpc'
 const supportedChainIds = Object.values(ChainId) as number[]
 
 export const network = new NetworkConnector({
-  defaultChainId: 250,
+  defaultChainId: ChainId.FANTOM,
   urls: RPC,
 })
 
@@ -163,20 +163,20 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#315CF5',
     mobile: true,
   },
-  Binance: {
-    connector: async () => {
-      const BscConnector = (await import('@binance-chain/bsc-connector')).BscConnector
-      return new BscConnector({
-        supportedChainIds: [56],
-      })
-    },
-    name: 'Binance',
-    iconName: 'bsc.png',
-    description: 'Login using Binance hosted wallet',
-    href: null,
-    color: '#F0B90B',
-    mobile: true,
-  },
+  // Binance: {
+  //   connector: async () => {
+  //     const BscConnector = (await import('@binance-chain/bsc-connector')).BscConnector
+  //     return new BscConnector({
+  //       supportedChainIds: [56],
+  //     })
+  //   },
+  //   name: 'Binance',
+  //   iconName: 'bsc.png',
+  //   description: 'Login using Binance hosted wallet',
+  //   href: null,
+  //   color: '#F0B90B',
+  //   mobile: true,
+  // },
   Clover: {
     connector: async () => {
       const CloverConnector = (await import('@clover-network/clover-connector')).CloverConnector

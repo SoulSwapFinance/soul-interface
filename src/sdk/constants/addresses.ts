@@ -1,6 +1,6 @@
 import { AddressMap } from '../types'
 import { ChainId } from '../enums/ChainId'
-import { WNATIVE } from 'sdk'
+// import { WNATIVE } from 'sdk'
 
 export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '0x794d858b0b152fb68a5CE465451D729EFfA67f08', // FEB22
