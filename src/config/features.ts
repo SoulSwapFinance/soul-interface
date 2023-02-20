@@ -53,6 +53,7 @@ const features: FeatureMap = {
     Feature.ANALYTICS,
     Feature.AGGREGATE,
     Feature.BRIDGE,
+    Feature.LIQUIDITY,
     // Feature.UNDERWORLD
   ],
 
@@ -76,7 +77,7 @@ const features: FeatureMap = {
   [ChainId.FANTOM]: [
     Feature.AMM,
     // Feature.NFT,
-    // Feature.DEFARM,
+    Feature.DEFARM,
     Feature.BRIDGE,
     Feature.SWAP,
     Feature.SEANCE,

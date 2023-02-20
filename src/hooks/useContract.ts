@@ -512,10 +512,10 @@ export function useSpiritRouterContract(withSignerIfPossible?: boolean): Contrac
   return useContract(chainId && SPIRIT_ROUTER_ADDRESS[chainId], SPIRIT_ROUTER_ABI, withSignerIfPossible)
 }
 
-export function useEnchantmentContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && ENCHANT_ADDRESS[chainId], ENCHANT_ABI, withSignerIfPossible)
-}
+// export function useEnchantmentContract(withSignerIfPossible?: boolean): Contract | null {
+//   const { chainId } = useActiveWeb3React()
+//   return useContract(chainId && ENCHANT_ADDRESS[chainId], ENCHANT_ABI, withSignerIfPossible)
+// }
 
 export function useSorStakingContract(): Contract | null {
   const { chainId } = useActiveWeb3React()

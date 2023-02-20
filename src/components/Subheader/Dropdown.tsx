@@ -1,22 +1,23 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Bars3Icon } from '@heroicons/react/24/outline'
-import { ChainId, NATIVE } from 'sdk'
 import useDropdown from 'components/Subheader/useDropdown'
-import Web3Network from 'components/Web3Network'
-import Web3Status from 'components/Web3Status'
-import useIsCoinbaseWallet from 'hooks/useIsCoinbaseWallet'
 import { useActiveWeb3React } from 'services/web3'
 import { useETHBalances } from 'state/wallet/hooks'
-import Image from 'next/image'
-import Link from 'next/link'
 import React, { FC, Fragment, useState } from 'react'
 
 import { DropdownItem } from './DropdownItem'
-import TokenStats from 'components/TokenStats'
 import useBar from './useDropdown'
 import { useRouter } from 'next/router'
-import { classNames } from 'functions/styling'
-import { getChainColor } from 'constants/chains'
+
+// import { classNames } from 'functions/styling'
+// import { getChainColor } from 'constants/chains'
+// import TokenStats from 'components/TokenStats'
+// import { ChainId, NATIVE } from 'sdk'
+// import Web3Network from 'components/Web3Network'
+// import Web3Status from 'components/Web3Status'
+// import useIsCoinbaseWallet from 'hooks/useIsCoinbaseWallet'
+// import Image from 'next/image'
+// import Link from 'next/link'
 
 const Mobile: FC = () => {
   const menu = useDropdown()

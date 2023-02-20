@@ -22,8 +22,8 @@ import Lottie from 'lottie-react'
 
 import React, { createContext, FC, ReactNode, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { usePrice } from 'hooks/usePrice'
-import { FiatValue } from './FiatValue'
-import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
+// import { FiatValue } from './FiatValue'
+// import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import { useCurrency } from 'hooks/Tokens'
 import { usePairPrice } from 'hooks/usePairData'
 

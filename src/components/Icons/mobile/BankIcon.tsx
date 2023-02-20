@@ -5,8 +5,8 @@ export interface Props {
     fillSecondary: string
     className: string
 }
-
-const EarnIcon: FC<Props> = ({ fillPrimary, fillSecondary, className }) => {
+// TODO: update (currently seedling)
+const BankIcon: FC<Props> = ({ fillPrimary, fillSecondary, className }) => {
 
     return (
         <svg
@@ -31,4 +31,4 @@ const EarnIcon: FC<Props> = ({ fillPrimary, fillSecondary, className }) => {
             </svg>
     )
 }
-export default EarnIcon
+export default BankIcon
