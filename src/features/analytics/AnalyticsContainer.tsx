@@ -16,7 +16,7 @@ export default function AnalyticsContainer({ children }): JSX.Element {
       <Container
         id="analytics"
         maxWidth="full"
-        className="grid h-full grid-flow-col bg-dark-1000 grid-cols-10 mx-auto lg:px-4 gap- mt-4"
+        className="grid h-full grid-flow-col bg-dark-1000 grid-cols-10 mx-auto lg:px-4 gap- mt-4 sm:mt-6"
       >
         {/* <div className="sticky top-0 hidden lg:block md:col-span-2 3xl:col-start-1 3xl:col-span-2"> */}
         {/* <Sidebar
