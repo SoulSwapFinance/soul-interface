@@ -398,7 +398,7 @@ const Swap = () => {
         tokens={importTokensNotInDefault}
         onConfirm={handleConfirmTokenWarning}
       />
-      {![ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.BSC, ChainId.FANTOM].includes(chainId) &&
+      {![ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <div className="flex flex-col gap-3 mt-12 justify-center">
           <SwapDropdown inputCurrency={currencyA} outputCurrency={currencyB} />
             <NavLink href={"/aggregator"}>
@@ -416,7 +416,7 @@ const Swap = () => {
             </NavLink>
         </div>}
 
-      {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.BSC, ChainId.FANTOM].includes(chainId) &&
+      {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <DoubleGlowShadowV2>
           <div className={`grid p-1 mt-4 space-y-2 rounded rounded-2xl bg-dark-1000`}>
             {/* <SwapLayoutCard> */}
