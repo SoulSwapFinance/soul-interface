@@ -28,7 +28,6 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const { chainId } = useActiveWeb3React()
 
   // const [show, setShow] = useState(false)
-
   // const reveal = useCallback(() => setShow(true), [setShow])
   // const conceal = useCallback(() => setShow(false), [setShow])
 
@@ -81,7 +80,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
         >
           <div
             className={classNames(
-              `hover:border hover:border-2 hover:border-${getChainColorCode(chainId)} flex rounded p-0.5`,
+              `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
               isExchange && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
           // onClick={reveal}
           // onMouseEnter={reveal}
@@ -93,7 +92,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               className={`w-6 w-6`}
             /> */}
             <Typography
-              className={`font-bold sm:text-lg p-0 text-${getChainColorCode(chainId)}`}
+              className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
             >
               {`Swap`}
             </Typography>
@@ -114,7 +113,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           >
             <div
               className={classNames(
-                `hover:border hover:border-2 hover:border-${getChainColorCode(chainId)} flex rounded p-0.5`,
+                `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
                 isPool && `border border-2 border-[${getChainColor(chainId)}]`)
               }
             // onClick={reveal}
@@ -126,7 +125,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
                     fillSecondary={isPool ? `#FFFFFF` : `${getChainColor(chainId)}`}
                   /> */}
               <Typography
-                className={`font-bold sm:text-lg p-0 text-${getChainColorCode(chainId)}`}
+                className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
               >
                 {`+/-`}
               </Typography>
@@ -147,7 +146,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           >
             <div
               className={classNames(
-                `hover:border hover:border-2 hover:border-${getChainColorCode(chainId)} flex rounded p-0.5`,
+                `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
                 isAggregator && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
             // onClick={reveal}
             // onMouseEnter={reveal}
@@ -158,7 +157,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
                   fillSecondary={isAggregator ? `#FFFFFF` : `${getChainColor(chainId)}`}
                 /> */}
               <Typography
-                className={`font-bold sm:text-lg p-0 text-${getChainColorCode(chainId)}`}
+                className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
               >
                 {`Aggregate`}
               </Typography>
@@ -178,7 +177,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           >
             <div
               className={classNames(
-                `hover:border hover:border-2 hover:border-${getChainColorCode(chainId)} flex rounded p-0.5`,
+                `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
                 isCross && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
             // onClick={reveal}
             // onMouseEnter={reveal}
@@ -189,9 +188,9 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
                 fillSecondary={isCross ? `#FFFFFF` : `${getChainColor(chainId)}`}
               /> */}
               <Typography
-                className={`font-bold sm:text-lg p-0 text-${getChainColorCode(chainId)}`}
+                className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
               >
-                {`Cross`}
+                {`xChain`}
               </Typography>
 
             </div>
@@ -210,7 +209,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           >
             <div
               className={classNames(
-                `hover:border hover:border-2 hover:border-${getChainColorCode(chainId)} flex rounded p-0.5`,
+                `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
                 isBridge && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                 // onClick={reveal}
                 // onMouseEnter={reveal}
@@ -221,7 +220,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
                 fillSecondary={isBridge ? `#FFFFFF` : `${getChainColor(chainId)}`}
               /> */}
               <Typography
-                className={`font-bold sm:text-lg p-0 text-${getChainColorCode(chainId)}`}
+                className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
               >
                 {`Bridge`}
               </Typography>
@@ -232,13 +231,15 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
 
       </div>
       <div className={classNames(
-        `flex sm:absolute`,
+        `absolute right-4 top-50`,
         `sm:right-4`,
         `sm:top-48`, 
         `sm:mt-6 sm:gap-8`,
-        `gap-6 mr-2 justify-end rounded`)
+        `mr-1 justify-end rounded`)
       }>
-        {useSettings && <Settings />}
+        {/* {useSettings &&  */}
+        <Settings />
+        {/* } */}
       </div>
     </div>
   )

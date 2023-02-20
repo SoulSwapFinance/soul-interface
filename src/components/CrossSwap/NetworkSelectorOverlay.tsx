@@ -40,7 +40,7 @@ export const NetworkSelectorOverlay: FC<NetworkSelectorOverlay> = ({
     <SlideIn>
       <SlideIn.FromLeft show={open} onClose={onClose} afterEnter={() => !isSmallScreen && inputRef.current?.focus()}>
         <Overlay.Content className="bg-slate-800 !pb-0 !px-0">
-          <Overlay.Header onClose={onClose} title="Select Network" />
+          <Overlay.Header onClose={onClose} title={`Select Network`} />
           {networks.map((chainId) => (
             <Typography
               as="button"
