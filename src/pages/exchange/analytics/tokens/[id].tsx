@@ -42,23 +42,26 @@ import SwapDropdown from 'features/swap/SwapDropdown'
 import { SwapLayoutCard } from 'layouts/SwapLayout'
 import ExchangeAnalyticsHeader from 'features/analytics/ExchangeAnalyticsHeader'
 
+const ONE_DAY = 86_400
+
 const chartTimespans = [
   {
-    text: '1W',
+    text: '7 Days',
     length: 604_800,
   },
   {
-    text: '1M',
-    length: 2_629_746,
+    text: '30 Days',
+    length: 2629746,
   },
   {
-    text: '1Y',
-    length: 31_556_952,
+    text: '180 Days',
+    length: ONE_DAY * 180,
   },
   {
-    text: 'ALL',
-    length: Infinity,
+    text: '240 Days',
+    length: ONE_DAY * 240,
   },
+
 ]
 
 export default function Token() {
@@ -67,7 +70,7 @@ export default function Token() {
   const tokenAddress = id
 
   const { chainId, library } = useActiveWeb3React()
-  const [isCopied, setCopied] = useCopyClipboard()
+  // const [isCopied, setCopied] = useCopyClipboard()
 
   const [totalSupply, setTotalSupply] = useState(0)
   const [tokenDecimals, setTokenDecimals] = useState(18)
@@ -321,7 +324,7 @@ export default function Token() {
             figure={liquidityUSD}
             change={liquidityUSDChange}
             chart={chartData.liquidityChart}
-            defaultTimespan="1W"
+            defaultTimespan="7 Days"
             timespans={chartTimespans}
           />
           <ChartCard
@@ -330,7 +333,7 @@ export default function Token() {
             figure={volumeUSD1d}
             change={volumeUSD1dChange}
             chart={chartData.volumeChart}
-            defaultTimespan="1W"
+            defaultTimespan="7 Days"
             timespans={chartTimespans}
           />
         </div>
@@ -341,7 +344,7 @@ export default function Token() {
             figure={priceUSD1d}
             change={priceUSD1dChange}
             chart={chartData.priceChart}
-            defaultTimespan="1W"
+            defaultTimespan="7 Days"
             timespans={chartTimespans}
           />
         </div>
