@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 import Container from '../../components/Container'
 // import Sidebar from 'components/Sidebar'
-import AnalyticsHeaderNew from 'features/analytics/HeaderNew'
+// import AnalyticsHeaderNew from 'features/analytics/HeaderNew'
 
 // @ts-ignore TYPE NEEDS FIXING
 export default function AnalyticsContainer({ children }): JSX.Element {
@@ -16,7 +16,7 @@ export default function AnalyticsContainer({ children }): JSX.Element {
       <Container
         id="analytics"
         maxWidth="full"
-        className="grid h-full grid-flow-col bg-dark-1000 grid-cols-10 mx-auto lg:px-4 gap-9"
+        className="grid h-full grid-flow-col bg-dark-1000 grid-cols-10 mx-auto lg:px-4 gap- mt-4"
       >
         {/* <div className="sticky top-0 hidden lg:block md:col-span-2 3xl:col-start-1 3xl:col-span-2"> */}
         {/* <Sidebar

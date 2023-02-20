@@ -12,9 +12,9 @@ export const useTableConfig = (transactions?: Transactions[]) => {
   const TransactionColumns = useMemo(
     () => [
       {
-        Header: 'Type',
+        Header: 'Action',
         accessor: 'type',
-        minWidth: 200,
+        minWidth: 180,
       },
       {
         Header: 'Value',
@@ -22,26 +22,28 @@ export const useTableConfig = (transactions?: Transactions[]) => {
         maxWidth: 100,
       },
       {
-        Header: 'In',
+        Header: 'Incoming',
         accessor: 'incomingAmt',
+        minWidth: 40,
       },
       {
-        Header: 'Out',
+        Header: 'Outgoing',
         accessor: 'outgoingAmt',
+        minWidth: 40,
       },
-      {
-        Header: 'To',
-        accessor: 'address',
-        // @ts-ignore TYPE NEEDS FIXING
-        Cell: (props) => {
-          return (
-            <ExternalLink color={getChainColorCode(chainId)} href={getExplorerLink(chainId, props.cell.value, 'address')}>
-            {/* <ExternalLink color="blue" href={`https://ftmscan.com/address/${props.cell.value}`}> */}
-              {shortenAddress(props.cell.value)}
-            </ExternalLink>
-          )
-        },
-      },
+      // {
+      //   Header: 'To',
+      //   accessor: 'address',
+      //   // @ts-ignore TYPE NEEDS FIXING
+      //   Cell: (props) => {
+      //     return (
+      //       <ExternalLink color={getChainColorCode(chainId)} href={getExplorerLink(chainId, props.cell.value, 'address')}>
+      //       {/* <ExternalLink color="blue" href={`https://ftmscan.com/address/${props.cell.value}`}> */}
+      //         {shortenAddress(props.cell.value)}
+      //       </ExternalLink>
+      //     )
+      //   },
+      // },
       {
         Header: 'Time',
         accessor: 'time',
