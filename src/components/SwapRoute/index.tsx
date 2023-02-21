@@ -6,9 +6,9 @@ import { GasIcon } from 'components/Icons/GasIcon';
 // import { Head } from 'next/document';
 // import Image from 'next/image';
 import Badge from 'components/Badge';
-import { Currency, CurrencyAmount, NATIVE, NATIVE_ADDRESS, Token } from 'sdk';
+import { Currency, NATIVE, NATIVE_ADDRESS, Token } from 'sdk';
 import { useActiveWeb3React } from 'services/web3';
-import { useTokenInfo } from 'hooks/useAPI';
+// import { useTokenInfo } from 'hooks/useAPI';
 // import Logo from 'components/Logo';
 import { CurrencyLogo } from 'components/CurrencyLogo';
 import Container from 'components/Container';
@@ -51,12 +51,12 @@ const Route = ({
 	index,
 	gasUsd,
 	amountUsd,
-	airdrop,
+	// airdrop,
 	fromToken,
-	amountFrom
+	// amountFrom
 }: IRoute) => {
 	const { chainId } = useActiveWeb3React()
-	const tokenA = new Token(chainId, fromToken.wrapped.address, Number(fromToken.wrapped.decimals))
+	// const tokenA = new Token(chainId, fromToken.wrapped.address, Number(fromToken.wrapped.decimals))
 	// const isApproved = useTokenApprove(
 	// 	CurrencyAmount.fromRawAmount(tokenA, amountFrom),
 	// 	price?.tokenApprovalAddress as `0x${string}`,

@@ -802,6 +802,7 @@ export const NATIVE_DAI_MARKET: AddressMap = {
   [ChainId.FANTOM]: '0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61',
 }
 
+
 export const DAI_ETH_MARKET: AddressMap = {
   [ChainId.FANTOM]: '0x9fA5de19495331E13b443F787B90CdD22B32263d',
 }
@@ -817,6 +818,5 @@ export const DAI_BTC_MARKET: AddressMap = {
 export const DAI_BNB_MARKET: AddressMap = {
   [ChainId.FANTOM]: '0xbDa9204e6D596feCf9bd48108723F9BDAa2019f6',
 }
-
 
 export const NATIVE_ADDRESS = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";

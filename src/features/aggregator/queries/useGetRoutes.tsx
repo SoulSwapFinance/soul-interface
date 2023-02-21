@@ -52,7 +52,6 @@ async function getAdapterRoutes({ adapter, chain, from, to, amount, extra = {} }
 export default function useGetRoutes({ chain, from, to, amount, extra = {} }: IGetListRoutesProps) {
 	const res = useQueries({
 		queries: adapters
-        // @ts-ignore TODO
         .filter((adap) => adap.chainToId[chain] !== undefined)
         .map<UseQueryOptions<IRoute>>((adapter) => {
             return {

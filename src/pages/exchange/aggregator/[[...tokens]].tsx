@@ -29,7 +29,7 @@ import { ArrowDownIcon, ArrowLeftIcon } from '@heroicons/react/24/solid'
 import { useGasPrice } from 'hooks/useAPI'
 // import { SwapLayoutCard } from 'layouts/SwapLayout'
 // import SwapHeader from 'features/swap/SwapHeader'
-import Container from 'components/Container'
+// import Container from 'components/Container'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
 import { useRouter } from "next/router"
@@ -57,7 +57,6 @@ Integrated:
 - firebird (https://docs.firebird.finance/developer/api-specification)
 - https://openocean.finance/
 - airswap
-- https://app.unidex.exchange/trading
 - https://twitter.com/odosprotocol
 - yieldyak
 - https://defi.krystal.app/
@@ -84,51 +83,6 @@ non evm:
 - coinhall (terra)
 - https://twitter.com/tfm_com (terra)
 */
-
-const Body = styled.div<{ showRoutes: boolean }>`
-	display: grid;
-	grid-row-gap: 12px;
-	padding-bottom: 4px;
-
-	min-width: 30rem;
-	// max-width: 46rem;
-
-	padding: 8px;
-	border-radius: 16px;
-	text-align: left;
-	transition: all 0.66s ease-out;
-	animation: ${(props) =>
-		props.showRoutes === true ? 'slide-left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both' : 'none'};
-
-	@keyframes slide-left {
-		0% {
-			transform: translateX(180px);
-		}
-		100% {
-			transform: translateX(0);
-		}
-	}
-`;
-
-// const Wrapper = styled.div`
-// 	width: 100%;
-// 	text-align: center;
-// 	display: grid;
-// 	grid-row-gap: 36px;
-// 	margin: 10px auto 40px;
-
-// 	h1 {
-// 		font-weight: 500;
-// 	}
-// `;
-
-// const Balance = styled.div`
-// 	text-align: right;
-// 	padding-right: 4px;
-// 	// text-decoration: underline;
-// 	margin-top: 12px;
-// 	cursor: pointer;
-// `;
 
 export const Routes = styled.div`
 	padding: 16px;
@@ -168,22 +122,6 @@ export const Routes = styled.div`
 		}
 	}
 `
-
-// const FormHeader = styled.div`
-// 	font-weight: bold;
-// 	font-size: 16px;
-// 	margin-bottom: 4px;
-// 	padding-left: 4px;
-// `
-
-// const SwapWrapper = styled.div`
-// 	width: 100%;
-// 	display: flex;
-// 	& > button {
-// 		width: 100%;
-// 		margin-right: 4px;
-// 	}
-// `
 
 export const InputFooter = styled.div`
 	display: flex;
@@ -240,13 +178,13 @@ const Aggregator = ({ }) => {
 	// const [tokenToApprove, setTokenToApprove] = useState<Currency>()
 
 	const [slippage, setSlippage] = useState('1')
-	const [amount, setAmount] = useState('10');
+	const [amount, setAmount] = useState(10);
 	const [txModalOpen, setTxModalOpen] = useState(false);
 	const [txUrl, setTxUrl] = useState('');
 
 	const gasPrice = useGasPrice()?.gasPrice.fast
 
-	const amountWithDecimals = new BigNumber(amount)
+	const amountWithDecimals = new BigNumber(amount.toString())
 		.times(10 ** (fromToken?.wrapped.decimals || 18))
 		.toFixed(0);
 
@@ -339,7 +277,7 @@ const Aggregator = ({ }) => {
 	const tokenA = new Token(chainId, fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address || WNATIVE_ADDRESS[chainId], fromToken?.wrapped.decimals || 18)
 
 	const [approvalState, approve] = useTokenApprove(
-		CurrencyAmount.fromRawAmount(tokenA, amountWithDecimals),
+		CurrencyAmount?.fromRawAmount(tokenA, amountWithDecimals),
 		// fromToken?.address, 
 		route?.price?.tokenApprovalAddress,
 	);
@@ -403,7 +341,7 @@ const Aggregator = ({ }) => {
 
 	const handleTypeInput = useCallback(
 		(value: string) => {
-			setAmount(value)
+			setAmount(Number(value))
 		},
 		[setAmount]
 	)
@@ -460,7 +398,7 @@ const Aggregator = ({ }) => {
 							/>
 						)}
 						currency={fromToken}
-						value={amount}
+						value={amount.toString()}
 						onChange={handleTypeInput}
 						onSelect={handleInputSelect}
 					/>
