@@ -29,7 +29,7 @@ import { ArrowDownIcon, ArrowLeftIcon } from '@heroicons/react/24/solid'
 import { useGasPrice } from 'hooks/useAPI'
 // import { SwapLayoutCard } from 'layouts/SwapLayout'
 // import SwapHeader from 'features/swap/SwapHeader'
-import Container from 'components/Container'
+// import Container from 'components/Container'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
 import { useRouter } from "next/router"
