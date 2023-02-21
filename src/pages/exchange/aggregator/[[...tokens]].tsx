@@ -57,7 +57,6 @@ Integrated:
 - firebird (https://docs.firebird.finance/developer/api-specification)
 - https://openocean.finance/
 - airswap
-- https://app.unidex.exchange/trading
 - https://twitter.com/odosprotocol
 - yieldyak
 - https://defi.krystal.app/

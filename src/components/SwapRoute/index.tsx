@@ -51,12 +51,12 @@ const Route = ({
 	index,
 	gasUsd,
 	amountUsd,
-	airdrop,
+	// airdrop,
 	fromToken,
-	amountFrom
+	// amountFrom
 }: IRoute) => {
 	const { chainId } = useActiveWeb3React()
-	const tokenA = new Token(chainId, fromToken.wrapped.address, Number(fromToken.wrapped.decimals))
+	// const tokenA = new Token(chainId, fromToken.wrapped.address, Number(fromToken.wrapped.decimals))
 	// const isApproved = useTokenApprove(
 	// 	CurrencyAmount.fromRawAmount(tokenA, amountFrom),
 	// 	price?.tokenApprovalAddress as `0x${string}`,
