@@ -395,17 +395,17 @@ export default function TokenStatsModal(): JSX.Element | null {
             Number(soulPrice), 3)
         )}
     <div className="flex" />
-        <NavLink href={'/landing'}>
+       {/* <NavLink href={'/landing'}> */}
           <Button
             color='purple'
             variant='bordered'
             size='xs'
           >
             <a className="flex justify-center text-white text-xl transition rounded-md hover:pink">
-              <span>LANDING PAGE</span>
+              <span>SoulSwap Finance</span>
             </a>
           </Button>
-        </NavLink>
+        {/* </NavLink> */}
     </div>
     </HeadlessUiModal.Controlled>
   )
