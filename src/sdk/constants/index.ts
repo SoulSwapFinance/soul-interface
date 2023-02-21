@@ -1,5 +1,5 @@
 import { ChainId } from '../enums'
-import { Currency, DAI_BNB_MARKET, DAI_ETH_MARKET, DAI_NATIVE_MARKET, JSBI, NATIVE_DAI_MARKET } from 'sdk'
+import { DAI_BNB_MARKET, DAI_ETH_MARKET, DAI_NATIVE_MARKET, JSBI, NATIVE_DAI_MARKET } from 'sdk'
 
 export * from './addresses'
 export * from './underworld'
