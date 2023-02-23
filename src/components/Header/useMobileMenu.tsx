@@ -305,11 +305,11 @@ const useMobileMenu: UseMobileMenu = () => {
             title: i18n._(t`Borrow`),
             link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
           },
-          {
-            key: 'lux-docs',
-            title: i18n._(t`Bond`),
-            link: 'https://docs.luxor.money',
-          },
+          // {
+          //   key: 'lux-docs',
+          //   title: i18n._(t`Bond`),
+          //   link: 'https://luxor.soulswap.finance',
+          // },
         ],
       }
       mainItems.push(learnItems)
