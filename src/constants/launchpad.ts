@@ -84,8 +84,8 @@ export const LAUNCHPAD_PROJECTS: ProjectsMap = {
     startsOn: 'July 4th 2022, 12:00 UTC',
     endsOn: 'August 31st 2022, 12:00 UTC',
     readmore: 'https://soulswapfinance.medium.com',
-    docs: 'https://docs.luxor.money',
-    website: 'https://luxor.money/',
+    // docs: 'https://luxor.soulswap.finance',
+    // website: 'https://luxor.soulswap.finance',
     tokenContract: '0x6671e20b83ba463f270c8c75dae57e3cc246cb2b',
     launchpadContract: '0x739ff56D48A3aB7a29A3087E82EB985ee00895dF',
     highlights: [
@@ -115,14 +115,14 @@ export const LAUNCHPAD_PROJECTS: ProjectsMap = {
       },
     ],
     socials: [
-      { title: 'Project Website', link: 'https://luxor.money' },
+      { title: 'Project Website', link: 'https://luxor.soulswap.finance' },
       { title: 'Token Explorer', link: 'https://tinyurl.com/ftmscan' },
-      { title: 'DeFi Application', link: 'https://app.luxor.money' },
+      { title: 'DeFi Application', link: 'https://luxor.soulswap.finance' },
       { title: 'Twitter Profile', link: 'https://twitter.com/LuxorMoney' },
       { title: 'Official Telegram', link: 'https://t.me/SoulSwapDeFi' },
       { title: 'Official Discord', link: 'https://discord.gg/soulswap' },
       { title: 'Project Medium', link: 'https://soulswapfinance.medium.com/' },
-      { title: 'Project Documentation', link: 'https://docs.luxor.money' },
+      { title: 'Project Documentation', link: 'https://luxor.soulswap.finance' },
     ],
     details: [
       { title: 'Name', description: 'Luxor Money' },

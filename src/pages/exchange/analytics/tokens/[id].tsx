@@ -46,21 +46,21 @@ const ONE_DAY = 86_400
 
 const chartTimespans = [
   {
-    text: '7 Days',
+    text: 'WEEK',
     length: 604_800,
   },
   {
-    text: '30 Days',
+    text: 'MONTH',
     length: 2629746,
   },
   {
-    text: '180 Days',
-    length: ONE_DAY * 180,
+    text: 'YEAR',
+    length: ONE_DAY * 365,
   },
-  {
-    text: '240 Days',
-    length: ONE_DAY * 240,
-  },
+  // {
+  //   text: '240D',
+  //   length: ONE_DAY * 240,
+  // },
 
 ]
 
@@ -324,7 +324,7 @@ export default function Token() {
             figure={liquidityUSD}
             change={liquidityUSDChange}
             chart={chartData.liquidityChart}
-            defaultTimespan="7 Days"
+            defaultTimespan="WEEK"
             timespans={chartTimespans}
           />
           <ChartCard
@@ -333,7 +333,7 @@ export default function Token() {
             figure={volumeUSD1d}
             change={volumeUSD1dChange}
             chart={chartData.volumeChart}
-            defaultTimespan="7 Days"
+            defaultTimespan="WEEK"
             timespans={chartTimespans}
           />
         </div>
@@ -344,7 +344,7 @@ export default function Token() {
             figure={priceUSD1d}
             change={priceUSD1dChange}
             chart={chartData.priceChart}
-            defaultTimespan="7 Days"
+            defaultTimespan="WEEK"
             timespans={chartTimespans}
           />
         </div>
