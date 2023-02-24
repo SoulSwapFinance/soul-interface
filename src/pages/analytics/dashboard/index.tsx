@@ -30,21 +30,21 @@ const ONE_DAY = 86_400
 
 const chartTimespans = [
   {
-    text: '7 Days',
+    text: 'WEEK',
     length: 604_800,
   },
   {
-    text: '30 Days',
+    text: 'MONTH',
     length: 2629746,
   },
   {
-    text: '180 Days',
-    length: ONE_DAY * 180,
+    text: 'YEAR',
+    length: ONE_DAY * 365,
   },
-  {
-    text: '240 Days',
-    length: ONE_DAY * 240,
-  },
+  // {
+  //   text: '240D',
+  //   length: ONE_DAY * 240,
+  // },
   // {
   //   text: 'ALL',
   //   length: Infinity,
@@ -345,7 +345,7 @@ export default function Dashboard(): JSX.Element {
             figure={chartData.liquidity}
             change={chartData.liquidityChange}
             chart={chartData.liquidityChart}
-            defaultTimespan="7 Days"
+            defaultTimespan="WEEK"
             timespans={chartTimespans}
           />
           <ChartCard
@@ -354,7 +354,7 @@ export default function Dashboard(): JSX.Element {
             figure={chartData.volume1d}
             change={chartData.volume1dChange}
             chart={chartData.volumeChart}
-            defaultTimespan="7 Days"
+            defaultTimespan="WEEK"
             timespans={chartTimespans}
           />
         </div>
