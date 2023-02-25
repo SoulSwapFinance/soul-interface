@@ -1,10 +1,10 @@
 {
   "name": "SoulSwap Token List",
-  "timestamp": "2022-12-10T07:03:04.900Z",
+  "timestamp": "2023-02-25T07:03:04.900Z",
   "version": {
     "major": 5,
-    "minor": 0,
-    "patch": 9
+    "minor": 1,
+    "patch": 4
   },
   "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png",
   "tokens": [
@@ -457,6 +457,14 @@
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x841FAD6EAe12c286d1Fd18d1d525DFfA75C7EFFE/logo.png"
     },
     {
+        "chainId": 250,
+        "name": "ChillPill",
+        "address": "0xe47d957F83F8887063150AaF7187411351643392",
+        "symbol": "CHILL",
+        "decimals": 18,
+        "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xe47d957F83F8887063150AaF7187411351643392/logo.png"
+    },
+    {
       "chainId": 250,
       "name": "CurveDAO",
       "address": "0x1E4F97b9f9F913c46F1632781732927B9019C68b",
@@ -487,14 +495,6 @@
       "symbol": "ETH",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x74b23882a30290451A17c44f4F05243b6b58C76d/logo.png"
-    },
-    {
-      "chainId": 250,
-      "name": "Popsicle Finance",
-      "address": "0xf16e81dce15B08F326220742020379B855B87DF9",
-      "symbol": "ICE",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xf16e81dce15B08F326220742020379B855B87DF9/logo.png"
     },
     {
       "chainId": 250,
@@ -535,7 +535,7 @@
       "symbol": "OATH",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x21Ada0D2aC28C3A5Fa3cD2eE30882dA8812279B6/logo.png"
-    },
+    },  
     {
       "chainId": 250,
       "name": "Soul Power",
@@ -591,14 +591,6 @@
       "symbol": "WFTM",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83/logo.png"
-    },
-    {
-      "chainId": 250,
-      "name": "Wrapped Lumens",
-      "address": "0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208",
-      "symbol": "WLUM",
-      "decimals": 9,
-      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208/logo.png"
     },
     {
       "chainId": 250,
@@ -706,14 +698,6 @@
     },
     {
       "chainId": 43114,
-      "address": "0x5947BB275c521040051D82396192181b413227A3",
-      "symbol": "LINK",
-      "name": "ChainLink",
-      "decimals": 18,
-      "logoURI": "https://cryptologos.cc/logos/chainlink-link-logo.svg"
-    },
-    {
-      "chainId": 43114,
       "address": "0x11d6DD25c1695764e64F439E32cc7746f3945543",
       "symbol": "SOUL",
       "name": "SoulPower",
@@ -751,14 +735,6 @@
       "name": "Wrapped Ethereum",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/avalanche/assets/0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB/logo.png"
-    },
-    {
-      "chainId": 43114,
-      "address": "0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd",
-      "symbol": "JOE",
-      "name": "JoeToken",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/avalanche/assets/0x6e84a6216eA6dACC71eE8E6b0a5B7322EEbC0fDd/logo.png"
     }
   ]
 }
