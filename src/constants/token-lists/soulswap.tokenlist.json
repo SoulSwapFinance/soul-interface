@@ -498,6 +498,14 @@
     },
     {
       "chainId": 250,
+      "name": "Popsicle Finance",
+      "address": "0xf16e81dce15B08F326220742020379B855B87DF9",
+      "symbol": "ICE",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xf16e81dce15B08F326220742020379B855B87DF9/logo.png"
+    },
+    {
+      "chainId": 250,
       "name": "ChainLink",
       "address": "0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8",
       "symbol": "LINK",
@@ -591,6 +599,14 @@
       "symbol": "WFTM",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83/logo.png"
+    },
+    {
+      "chainId": 250,
+      "name": "Wrapped Lumens",
+      "address": "0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208",
+      "symbol": "WLUM",
+      "decimals": 9,
+      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208/logo.png"
     },
     {
       "chainId": 250,
@@ -695,6 +711,14 @@
       "name": "Frax",
       "decimals": 18,
       "logoURI": "https://cryptologos.cc/logos/frax-frax-logo.svg"
+    },
+    {
+      "chainId": 43114,
+      "address": "0x5947BB275c521040051D82396192181b413227A3",
+      "symbol": "LINK",
+      "name": "ChainLink",
+      "decimals": 18,
+      "logoURI": "https://cryptologos.cc/logos/chainlink-link-logo.svg"
     },
     {
       "chainId": 43114,
