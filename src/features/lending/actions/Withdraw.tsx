@@ -11,6 +11,7 @@ import WarningsView from '../components/WarningsList'
 import SmartNumberInput from '../components/SmartNumberInput'
 import { useUnderworldPairInfo } from 'hooks/useAPI'
 import { ChainId, DAI_BNB_MARKET, DAI_BTC_MARKET, DAI_ETH_MARKET, DAI_NATIVE_MARKET, LEND_MULTIPLIER, NATIVE_DAI_MARKET } from 'sdk'
+import NavLink from 'components/NavLink'
 
 // import { TransactionReview } from 'entities/TransactionReview'
 // import { e10, minimum } from 'functions/math'
@@ -31,13 +32,20 @@ export default function Withdraw({ pair }: any): JSX.Element {
   const aTicker = underworldPairInfo.assetTicker
   // const bTicker = underworldPairInfo.collateralTicker
 
+  const inactivePair =
+    pair.address == NATIVE_DAI_MARKET[ChainId.FANTOM]
+    || pair.address == DAI_NATIVE_MARKET[ChainId.FANTOM]
+    || pair.address == DAI_ETH_MARKET[ChainId.FANTOM]
+    || pair.address == DAI_BTC_MARKET[ChainId.FANTOM]
+    || pair.address == DAI_BNB_MARKET[ChainId.FANTOM]
+
   const assetSymbol
     = aTicker == 'WAVAX' ? 'AVAX'
       : aTicker == 'WFTM' ? 'FTM'
-      : aTicker == 'WETH.e' ? 'ETH'
-        : aTicker == 'WBTC.e' ? 'BTC'
-          : aTicker == 'LINK.e' ? 'LINK'
-            : aTicker
+        : aTicker == 'WETH.e' ? 'ETH'
+          : aTicker == 'WBTC.e' ? 'BTC'
+            : aTicker == 'LINK.e' ? 'LINK'
+              : aTicker
 
   // const collateralSymbol
   //   = bTicker == 'WAVAX' ? 'AVAX'
@@ -89,36 +97,33 @@ export default function Withdraw({ pair }: any): JSX.Element {
       // && 
       // INACTIVE //
       (
-        pair.address == NATIVE_DAI_MARKET[ChainId.FANTOM]
-        || pair.address == DAI_NATIVE_MARKET[ChainId.FANTOM]
-        || pair.address == DAI_ETH_MARKET[ChainId.FANTOM]
-        || pair.address == DAI_BTC_MARKET[ChainId.FANTOM]
-        || pair.address == DAI_BNB_MARKET[ChainId.FANTOM]
+        inactivePair
       ),
       // && pair.userAssetFraction.sub(pair.currentUserLentAmount.value).lte(0),
       i18n._(
-        t`There isn't enough liquidity available to withdraw large amounts. You may: withdraw small amounts, bond your lent assets, or try later.`
+        t`There isn't enough liquidity available to withdraw. Swap or bond to exit.`
       ),
       true
     )
 
+
   // const transactionReview = new TransactionReview()
   // if (displayValue && !warnings.broken) {
-    // const amount = displayValue.toBigNumber(assetDecimals)
-    // const newUserAssetAmount = pair.userAssetFraction.sub(amount).mul(MULTIPLIER)
-    // transactionReview.addTokenAmount(
-    //   i18n._(t`Balance`),
-    //   pair.userAssetFraction,
-    //   newUserAssetAmount,
-    //   pair.asset
-    // )
-    // transactionReview.addUSD(i18n._(t`Balance USD`),
-    //   pair.userAssetFraction.div(e10(12)),
-    //   newUserAssetAmount.div(e10(12)),
-    //   pair.asset)
+  // const amount = displayValue.toBigNumber(assetDecimals)
+  // const newUserAssetAmount = pair.userAssetFraction.sub(amount).mul(MULTIPLIER)
+  // transactionReview.addTokenAmount(
+  //   i18n._(t`Balance`),
+  //   pair.userAssetFraction,
+  //   newUserAssetAmount,
+  //   pair.asset
+  // )
+  // transactionReview.addUSD(i18n._(t`Balance USD`),
+  //   pair.userAssetFraction.div(e10(12)),
+  //   newUserAssetAmount.div(e10(12)),
+  //   pair.asset)
 
-    // const newUtilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.sub(amount))
-    // transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
+  // const newUtilization = e10(18).mulDiv(pair.currentBorrowAmount.value, pair.currentAllAssets.value.sub(amount))
+  // transactionReview.addPercentage(i18n._(t`Borrowed`), pair.utilization.value, newUtilization)
   // }
 
   // Handlers
@@ -129,7 +134,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
       : value
         .toBigNumber(assetDecimals)
         .div(MULTIPLIER)
-        // .mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
+    // .mulDiv(pair.currentTotalAsset.base, pair.currentAllAssets.value)
 
     cooker.removeAsset(fraction, useCoffin)
     return `${i18n._(t`Withdraw`)} ${assetSymbol}`
@@ -178,15 +183,39 @@ export default function Withdraw({ pair }: any): JSX.Element {
         content={(onCook: any) => (
           <Button
             onClick={() => onCook(pair, onExecute)}
-            disabled={displayValue.toBigNumber(assetDecimals).lte(0) 
-              // || warnings.broken
+            disabled={displayValue.toBigNumber(assetDecimals).lte(0)
+              || warnings.broken
             }
             className="w-full"
-            >
+          >
             {i18n._(t`Withdraw`)}
           </Button>
         )}
       />
+      {
+        inactivePair &&
+        <div
+          className={`mt-2 grid grid-cols-2 gap-2`}
+        >
+
+          <NavLink href="/lend/swap">
+            <Button variant="filled" color={`ftmBlue`} size="sm">
+              <span className="justify-center font-bold">
+                {'Redeem: Underlying Asset'}
+              </span>
+            </Button>
+          </NavLink>
+          <NavLink
+            href="/bond"
+          >
+            <Button variant="filled" color={`ftmBlue`} size="sm">
+              <span className="justify-center font-bold">
+                {'Bond: Retired Loan'}
+              </span>
+            </Button>
+          </NavLink>
+        </div>
+      }
     </>
   )
 }
