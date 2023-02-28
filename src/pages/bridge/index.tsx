@@ -1,5 +1,10 @@
-import React, { useEffect, useState } from "react";
-import Row from "../../components/Row";
+// import Row from "../../components/Row"
+// import DropDownButton from "../../components/DropDownButton"
+// import Modal from "components/Bridge/Modal"
+// import ModalTitle from "components/Bridge/ModalTitle"
+// import ModalContent from "components/Bridge/ModalContent"
+// import InputCurrencyBox from "components/Bridge/InputCurrencyBox"
+import React, { useEffect, useState } from "react"
 import { Button as ButtonComponent } from 'components/Button'
 import Column, { AutoColumn } from "../../components/Column"
 import styled from "styled-components"
@@ -8,15 +13,10 @@ import {
   supportedChainsForBridge,
   transactionStatusMapping,
 } from "../../utils/bridge"
-// import DropDownButton from "../../components/DropDownButton"
 import useBridgeApi from "../../hooks/useBridgeApi"
 import useMultiChain from "../../hooks/useMultiChain"
-import Modal from "components/Bridge/Modal"
-// import ModalTitle from "components/Bridge/ModalTitle"
-import ModalContent from "components/Bridge/ModalContent"
 import Scrollbar from "components/Scrollbar"
 import useModal from "../../hooks/useModal"
-// import InputCurrencyBox from "components/Bridge/InputCurrencyBox"
 import { AddressZero } from "@ethersproject/constants"
 import {
   formatSimpleValue,
@@ -36,28 +36,14 @@ import Image from 'next/image'
 import Typography from "components/Typography"
 import { getChainColor, getChainColorCode } from "constants/chains"
 import SwapDropdown from "features/swap/SwapDropdown"
-import { t } from "@lingui/macro";
-import { i18n } from "@lingui/core";
-import { DonateBanner } from "components/Banner";
+import { t } from "@lingui/macro"
+import { i18n } from "@lingui/core"
+import { DonateBanner } from "components/Banner"
 import BRIDGE_BANNER from 'assets/branding/bridge-banner.png'
-import BridgeTokenList from "features/bridge/BridgeTokenList";
-import { ContentBox, OverlayButton, Typo1, Typo2 } from "components";
-import TokenStats from "components/TokenStats";
-import { ChainId } from "sdk";
-
-// import { ContentBox, OverlayButton, Typo1, Typo2, Typo3 } from "components/index"
-// import { ArrowDownIcon, ArrowRightIcon } from "@heroicons/react/24/solid"
-// import Container from "components/Container"
-// import SwapHeader from "features/swap/SwapHeader"
-// import NavLink from "components/NavLink"
-// import { NETWORK_ICON, NETWORK_LABEL } from "config/networks"
-// import NetworkModal from "modals/NetworkModal"
-// import { useNetworkModalToggle } from "state/application/hooks"
-// import Web3Network from "components/Web3Network"
-// import { SwapLayoutCard } from "layouts/SwapLayout";
-// import { classNames } from "functions/styling";
-// import { ArrowDownIcon } from "@heroicons/react/24/solid";
-// import { classNames } from "functions/styling";
+import BridgeTokenList from "features/bridge/BridgeTokenList"
+import { ContentBox, OverlayButton, Typo1, Typo2 } from "components"
+import TokenStats from "components/TokenStats"
+import { ChainId } from "sdk"
 
 const ChainSelection: React.FC<any> = ({
   setTokenList,
