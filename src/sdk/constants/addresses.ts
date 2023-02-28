@@ -475,7 +475,7 @@ export const REFUNDER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x7A4f9E37890De02f215ab756Ef8636a78a9D240F', // FEB23
+  [ChainId.FANTOM]: '0x0346AE83d549Ff90f15036925bc817707644bFE2', // FEB23
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',

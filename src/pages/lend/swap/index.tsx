@@ -19,6 +19,7 @@ import { i18n } from '@lingui/core'
 import { formatNumber } from 'functions'
 import useSendTransaction from 'hooks/useSendTransaction'
 // import useSendTransaction from 'hooks/useSendTransaction'
+import { ethers } from 'ethers'
 
 export default function LendSwap() {
   const { account, chainId, library } = useActiveWeb3React()
@@ -36,10 +37,11 @@ export default function LendSwap() {
 //   const [inputError, setError] = useState('')
 
 const refunderContract = useRefunderContract()
-const addTransaction = useTransactionAdder()
-let UnderworldPair = new Token(chainId, pairAddress, 18, 'Underworld')
+// const addTransaction = useTransactionAdder()
+const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
 const PairContract = useTokenContract(pairAddress)
 
+// let UnderworldPair = new Token(chainId, pairAddress, 18, 'Underworld')
 
 // const { underworldUserInfo } = useUnderworldUserInfo(pairAddress)
 // const { userTokenInfo } = useUserTokenInfo(account, pairAddress)
@@ -82,7 +84,8 @@ const PairContract = useTokenContract(pairAddress)
             setPairAddress(pairAddress)
         }, [setAmount]
     )
-
+    
+    // [ √ ] updates: available amount
     const handleAvailable = useCallback(
         async (selectedCurrency: Token) => {
             let assetSymbol = selectedCurrency.wrapped.symbol
@@ -98,7 +101,8 @@ const PairContract = useTokenContract(pairAddress)
                 console.log({result})
         }, [setAvailable]
     )
-
+    
+    // [ √ ] updates: refundale amount
     const handleRefundable = useCallback(
         async (selectedCurrency: Token) => {
             let assetSymbol = selectedCurrency.wrapped.symbol
@@ -133,26 +137,16 @@ const PairContract = useTokenContract(pairAddress)
         }, [setPairAddress]
     )
 
-  const handleRefund = async () => {
-    try {
-        if (errored) return
-
-        const tx = await refunderContract?.refund(
-            id, 
-            amount
-        )
-
-      addTransaction(tx, {
-        summary: `Swapping for Underlying Asset`,
-      })
-
-    } catch (e) {
-      console.error(e)
-    }
-  }
+  const {
+    sendTx: handleRefund,
+    // isPending: isRefundPending,
+    // isCompleted: isRefundCompleted,
+  } = useSendTransaction(() =>
+  refunderContract.refund(id, amount)
+  );
 
   const {
-    sendTx: handleApproveToken,
+    sendTx: handleApprove,
     isPending: isApprovePending,
     isCompleted: isApproveCompleted,
   } = useSendTransaction(() =>
@@ -201,26 +195,24 @@ const PairContract = useTokenContract(pairAddress)
           </div>
 
             <Button 
-                color="gradient"
-                className="w-full px-4 py-3 text-base rounded text-high-emphesis"
-                onClick={handleApproveToken}
+                color="green"
+                variant={`outlined`}
+                className="w-full px-4 py-3 text-base font-bold rounded text-high-emphesis"
+                onClick={handleApprove}
             >
-                {isApprovePending
-                ? "Approving"
-                : isApproveCompleted
-                    ? "Approved"
-                    : "Approve"}
+                 {`Approve Market`}
             </Button>
 
             <Button
-                color="gradient"
-                className="w-full px-4 py-3 text-base rounded text-high-emphesis"
-                onClick={() => handleRefund()}
+                color="purple"
+                variant={`filled`}
+                className="w-full px-4 py-3 text-base font-bold rounded text-high-emphesis"
+                onClick={handleRefund}
                 disabled={id == 4}
                 >
                 {`${id == 4 ? `Invalid Asset Selected`
                     : amount == 0 ? `Enter Amount`
-                        : `Swap Pair (1:1) for ${currency.wrapped.symbol}`
+                        : `Redeem ${currency.wrapped.symbol}`
                 }`}
             </Button>
         </Container>
