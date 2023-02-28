@@ -31,6 +31,7 @@ export default function LendSwap() {
   const [pairSymbol, setPairSymbol] = useState('FTM Market')
   const [amount, setAmount] = useState(0)
   const [refundable, setRefundable] = useState(0)
+  const [isActive, setStatus] = useState(true)
   const [available, setAvailable] = useState(0)
 //   const [supplied, setSuppliedAmount] = useState(0)
 //   const [lentAmount, setLentAmount] = useState(0)
@@ -94,6 +95,8 @@ const PairContract = useTokenContract(pairAddress)
             let _available = await result?.toString()
             let available = Number(_available) / 1E18
                 setAvailable(available)
+            let isActive = await RefunderContract?.isActive()
+                setStatus(isActive)
                 console.log({result})
         }, [setAvailable]
     )
@@ -146,7 +149,7 @@ const PairContract = useTokenContract(pairAddress)
     isPending: isApprovePending,
     isCompleted: isApproveCompleted,
   } = useSendTransaction(() =>
-    PairContract.approve(REFUNDER_ADDRESS[chainId], (amount * 2 * 1E18).toString())
+    PairContract.approve(REFUNDER_ADDRESS[chainId], (amount * 4 * 1E18).toString())
   );
 
   return (
@@ -158,22 +161,31 @@ const PairContract = useTokenContract(pairAddress)
       <Card
         className="h-full bg-dark-900"
         header={
-          <Card.Header className="bg-dark-800 text-2xl font-bold"> Reclaim Underworld Asset
+          <Card.Header className="bg-dark-800 text-2xl font-bold justify-center"> 
+          {`Reclaim Underworld Asset`}
           </Card.Header>
         }
       >
         <Container maxWidth="full" className="space-y-6">
+            <div className={`flex justify-center border p-2 rounded rounded-2xl ${isActive ? `border-green` : `border-red`}`}>
             <div className={`grid grid-cols-2`}>
             <Typography
-                className={`font-bold text-2xl text-green text-center`}
+                className={`font-bold text-lg sm:text-2xl ${isActive ? `text-green` : `text-red`} text-center`}
                 >
-                {`Redeemable Assets`}
+                {isActive 
+                    ? `Redeemable Assets`
+                    : `Redemption Paused`
+                }
             </Typography>
             <Typography
-                className={`font-bold text-2xl text-green text-center`}
+                className={`font-bold text-lg sm:text-2xl ${isActive ? `text-green` : `text-red`} text-center`}
                 >
-                {currency ? `${formatNumber(available, false, true)} ${currency?.wrapped.symbol}` : 'Select Asset'}
+                {currency ? 
+                    `${formatNumber(available, false, true)} ${currency?.wrapped.symbol}` 
+                    : 'Select Asset'
+                }
             </Typography>
+            </div>
             </div>
           <div className="grid grid-cols-1">
             <CurrencyInputPanel
@@ -195,36 +207,38 @@ const PairContract = useTokenContract(pairAddress)
                 variant={`outlined`}
                 className="w-full px-4 py-3 text-base font-bold rounded text-high-emphesis"
                 onClick={handleApprove}
+                disabled={id == 4 || amount == 0}
             >
-                  {isApprovePending
+                {
+                  isApprovePending
                     ? "Approving Market..."
-                    : isApproveCompleted
-                      ? "Approved Market"
-                      : "Approve Market"}
+                    : isApproveCompleted ? "Approved Market"
+                    : amount == 0 ? `Enter Amount`
+                    : `Approve Market`
+                }
             </Button>
 
             <Button
-                color="purple"
+                color={isActive ? `purple` : `red`}
                 variant={`filled`}
                 className="w-full px-4 py-3 text-base font-bold rounded text-high-emphesis"
                 onClick={() => handleRefund()}
-                disabled={id == 4}
+                disabled={id == 4 || !isActive}
                 >
                 {`${id == 4 ? `Invalid Asset Selected`
                     : amount == 0 ? `Enter Amount`
-                        : isRefundPending 
-                        ? `Redeeming ${currency?.wrapped.symbol}`
-                        : isRefundCompleted
-                        ? `Redeemed ${currency?.wrapped.symbol}`
+                        : isRefundPending ? `Redeeming ${currency?.wrapped.symbol}`
+                        : isRefundCompleted ? `Redeemed ${currency?.wrapped.symbol}`
+                        : !isActive ? `Redemption Paused`
                         : `Redeem ${currency?.wrapped.symbol}`
                 }`}
             </Button>
         </Container>
 
-        <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-purple w-full space-y-1">
+        <div className="flex flex-col bg-dark-1000 mt-8 p-3 border border-1 border-dark-700 hover:border-purple w-full space-y-1">
             <div className="flex justify-between">
                 <Typography className="text-white" fontFamily={'medium'}>
-                {i18n._(t`Underworld Market`)}
+                {i18n._(t`Market`)}
                 </Typography>
                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                 {currency ? pairSymbol : 'Select Market'}
@@ -232,7 +246,7 @@ const PairContract = useTokenContract(pairAddress)
             </div>
             <div className="flex justify-between">
                 <Typography className="text-white" fontFamily={'medium'}>
-                {i18n._(t`Pair Balance`)}
+                {i18n._(t`Balance`)}
                 </Typography>
                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                 {`${formatNumber(refundable, false, true)} ${currency?.wrapped.symbol || ''}`}
@@ -241,18 +255,13 @@ const PairContract = useTokenContract(pairAddress)
 
             <div className="flex justify-between">
                 <Typography className="text-green" fontFamily={'medium'}>
-                {i18n._(t`Maximum Refundable`)}
+                {i18n._(t`Redeemable`)}
                 </Typography>
                 <Typography className="text-green" weight={600} fontFamily={'semi-bold'}>
                 {`${formatNumber(available >= refundable ? refundable : available, false, true)} ${currency?.wrapped.symbol || ''}`}
                 </Typography>
             </div>
         </div>
-            <div className="flex justify-between mt-4 text-center">
-                <Typography className="text-white" fontFamily={'medium'}>
-               {`1:1 redemption for lent assets for our retired markets at pre-flash loan amounts (minus interest).`}
-                </Typography>
-            </div>
       </Card>
     </LendSwapLayout>
   )
