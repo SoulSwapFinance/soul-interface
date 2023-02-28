@@ -254,10 +254,10 @@ const PairContract = useTokenContract(pairAddress)
             </div>
 
             <div className="flex justify-between">
-                <Typography className="text-green" fontFamily={'medium'}>
+                <Typography className={isActive ? `text-green` : `text-red`} fontFamily={'medium'}>
                 {i18n._(t`Redeemable`)}
                 </Typography>
-                <Typography className="text-green" weight={600} fontFamily={'semi-bold'}>
+                <Typography className={isActive ? `text-green` : `text-red`} weight={600} fontFamily={'semi-bold'}>
                 {`${formatNumber(available >= refundable ? refundable : available, false, true)} ${currency?.wrapped.symbol || ''}`}
                 </Typography>
             </div>
