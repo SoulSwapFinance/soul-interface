@@ -266,9 +266,9 @@ export function useSoulGuideContract(): Contract | null {
   return useContract(chainId && SOUL_GUIDE_ADDRESS[chainId], SOUL_GUIDE_ABI, false)
 }
 
-export function useRefunderContract(): Contract | null {
+export function useRefunderContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && REFUNDER_ADDRESS[chainId], REFUNDER_ABI, false)
+  return useContract(chainId && REFUNDER_ADDRESS[chainId], REFUNDER_ABI, withSignerIfPossible)
 }
 
 export function usePriceHelperContract(): Contract | null {

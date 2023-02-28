@@ -1,25 +1,26 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { DAI_BNB_MARKET, DAI_ETH_MARKET, REFUNDER_ADDRESS, DAI_NATIVE_MARKET, LEND_MULTIPLIER, NATIVE_DAI_MARKET, Token } from 'sdk'
+import { DAI_BNB_MARKET, DAI_ETH_MARKET, REFUNDER_ADDRESS, DAI_NATIVE_MARKET, NATIVE_DAI_MARKET, Token } from 'sdk'
 import { Button } from 'components/Button'
 import Card from 'components/Card'
 import Container from 'components/Container'
 import CurrencyInputPanel from 'components/CurrencyInputPanel'
 import { Feature } from 'enums'
 import NetworkGuard from 'guards/Network'
-import { useContract, useRefunderContract, useTokenContract } from 'hooks/useContract'
+import { useRefunderContract, useTokenContract } from 'hooks/useContract'
 import Layout from 'layouts/Underworld'
 import { useActiveWeb3React } from 'services/web3'
-import { useTransactionAdder } from 'state/transactions/hooks'
 import Head from 'next/head'
 import React, { useCallback, useState } from 'react'
-import { WFTM } from 'constants/index'
 import Typography from 'components/Typography'
 import { i18n } from '@lingui/core'
 import { formatNumber } from 'functions'
 import useSendTransaction from 'hooks/useSendTransaction'
+
+// import { useTransactionAdder } from 'state/transactions/hooks'
+// import { WFTM } from 'constants/index'
 // import useSendTransaction from 'hooks/useSendTransaction'
-import { ethers } from 'ethers'
+// import { ethers } from 'ethers'
 
 export default function LendSwap() {
   const { account, chainId, library } = useActiveWeb3React()
@@ -36,15 +37,10 @@ export default function LendSwap() {
   const [errored, setErrored] = useState(false)
 //   const [inputError, setError] = useState('')
 
-const refunderContract = useRefunderContract()
+const RefunderContract = useRefunderContract()
 // const addTransaction = useTransactionAdder()
-const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
+// const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
 const PairContract = useTokenContract(pairAddress)
-
-// let UnderworldPair = new Token(chainId, pairAddress, 18, 'Underworld')
-
-// const { underworldUserInfo } = useUnderworldUserInfo(pairAddress)
-// const { userTokenInfo } = useUserTokenInfo(account, pairAddress)
 
     // [ √ ] updates: id
     const handleAssetSelect = useCallback(
@@ -69,7 +65,7 @@ const PairContract = useTokenContract(pairAddress)
                 : id == 1 ? 'DAI Market'
                 : id == 2 ? 'ETH Market'
                 : id == 3 ? 'FTM Market'
-                : 'Invalid Selection'
+                : 'Invalid Market'
             setPairSymbol(pairSymbol)
 
             id == 4 ? setErrored(true) : setErrored(false)
@@ -85,15 +81,15 @@ const PairContract = useTokenContract(pairAddress)
         }, [setAmount]
     )
     
-    // [ √ ] updates: available amount
+    // [ √ ] updates: available amount.
     const handleAvailable = useCallback(
         async (selectedCurrency: Token) => {
             let assetSymbol = selectedCurrency.wrapped.symbol
             let result = 
-                assetSymbol == 'BNB' ? await refunderContract?.showAvailable(0)
-                : assetSymbol == 'DAI' ? await refunderContract?.showAvailable(1)
-                : assetSymbol == 'ETH' ? await refunderContract?.showAvailable(2)
-                : assetSymbol == 'WFTM' ? await refunderContract?.showAvailable(3)
+                assetSymbol == 'BNB' ? await RefunderContract?.showAvailable(0)
+                : assetSymbol == 'DAI' ? await RefunderContract?.showAvailable(1)
+                : assetSymbol == 'ETH' ? await RefunderContract?.showAvailable(2)
+                : assetSymbol == 'WFTM' ? await RefunderContract?.showAvailable(3)
                 : 0
             let _available = await result?.toString()
             let available = Number(_available) / 1E18
@@ -102,15 +98,15 @@ const PairContract = useTokenContract(pairAddress)
         }, [setAvailable]
     )
     
-    // [ √ ] updates: refundale amount
+    // [ √ ] updates: refundable amount.
     const handleRefundable = useCallback(
         async (selectedCurrency: Token) => {
             let assetSymbol = selectedCurrency.wrapped.symbol
             let result = 
-                assetSymbol == 'BNB' ? await refunderContract?.showRefundable(0, account)
-                : assetSymbol == 'DAI' ? await refunderContract?.showRefundable(1, account)
-                : assetSymbol == 'ETH' ? await refunderContract?.showRefundable(2, account)
-                : assetSymbol == 'WFTM' ? await refunderContract?.showRefundable(3, account)
+                assetSymbol == 'BNB' ? await RefunderContract?.showRefundable(0, account)
+                : assetSymbol == 'DAI' ? await RefunderContract?.showRefundable(1, account)
+                : assetSymbol == 'ETH' ? await RefunderContract?.showRefundable(2, account)
+                : assetSymbol == 'WFTM' ? await RefunderContract?.showRefundable(3, account)
                 : 0
             let _refundable = await result?.toString()
             let refundable = Number(_refundable) / 1E18
@@ -119,7 +115,7 @@ const PairContract = useTokenContract(pairAddress)
         }, [setRefundable]
     )
 
-    // [ √ ] updates: pairAddress
+    // [ √ ] updates: pairAddress.
     const handlePairSelect = useCallback(
         (selectedCurrency: Token) => {
             let assetSymbol = selectedCurrency.wrapped.symbol
@@ -139,10 +135,10 @@ const PairContract = useTokenContract(pairAddress)
 
   const {
     sendTx: handleRefund,
-    // isPending: isRefundPending,
-    // isCompleted: isRefundCompleted,
+    isPending: isRefundPending,
+    isCompleted: isRefundCompleted,
   } = useSendTransaction(() =>
-  refunderContract.refund(id, amount)
+    RefunderContract?.refund(id, (amount * 1E18)?.toString())
   );
 
   const {
@@ -157,12 +153,12 @@ const PairContract = useTokenContract(pairAddress)
     <LendSwapLayout>
       <Head>
         <title>Swap Asset | Underworld by Soul</title>
-        <meta key="description" name="description" content="Reclaim Retired Asset on Underworld by Soul" />
+        <meta key="description" name="description" content="Reclaim Retired Assets on Underworld by Soul" />
       </Head>
       <Card
         className="h-full bg-dark-900"
         header={
-          <Card.Header className="bg-dark-800 text-2xl font-bold"> Reclaim Retired Asset (1:1)
+          <Card.Header className="bg-dark-800 text-2xl font-bold"> Reclaim Underworld Asset
           </Card.Header>
         }
       >
@@ -176,7 +172,7 @@ const PairContract = useTokenContract(pairAddress)
             <Typography
                 className={`font-bold text-2xl text-green text-center`}
                 >
-                {`${formatNumber(available, false, true)} ${currency?.wrapped.symbol}`}
+                {currency ? `${formatNumber(available, false, true)} ${currency?.wrapped.symbol}` : 'Select Asset'}
             </Typography>
             </div>
           <div className="grid grid-cols-1">
@@ -200,19 +196,27 @@ const PairContract = useTokenContract(pairAddress)
                 className="w-full px-4 py-3 text-base font-bold rounded text-high-emphesis"
                 onClick={handleApprove}
             >
-                 {`Approve Market`}
+                  {isApprovePending
+                    ? "Approving Market..."
+                    : isApproveCompleted
+                      ? "Approved Market"
+                      : "Approve Market"}
             </Button>
 
             <Button
                 color="purple"
                 variant={`filled`}
                 className="w-full px-4 py-3 text-base font-bold rounded text-high-emphesis"
-                onClick={handleRefund}
+                onClick={() => handleRefund()}
                 disabled={id == 4}
                 >
                 {`${id == 4 ? `Invalid Asset Selected`
                     : amount == 0 ? `Enter Amount`
-                        : `Redeem ${currency.wrapped.symbol}`
+                        : isRefundPending 
+                        ? `Redeeming ${currency?.wrapped.symbol}`
+                        : isRefundCompleted
+                        ? `Redeemed ${currency?.wrapped.symbol}`
+                        : `Redeem ${currency?.wrapped.symbol}`
                 }`}
             </Button>
         </Container>
@@ -223,7 +227,7 @@ const PairContract = useTokenContract(pairAddress)
                 {i18n._(t`Underworld Market`)}
                 </Typography>
                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                {pairSymbol}
+                {currency ? pairSymbol : 'Select Market'}
                 </Typography>
             </div>
             <div className="flex justify-between">
@@ -231,7 +235,7 @@ const PairContract = useTokenContract(pairAddress)
                 {i18n._(t`Pair Balance`)}
                 </Typography>
                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                {`${formatNumber(refundable, false, true)} ${currency?.wrapped.symbol}`}
+                {`${formatNumber(refundable, false, true)} ${currency?.wrapped.symbol || ''}`}
                 </Typography>
             </div>
 
@@ -240,14 +244,13 @@ const PairContract = useTokenContract(pairAddress)
                 {i18n._(t`Maximum Refundable`)}
                 </Typography>
                 <Typography className="text-green" weight={600} fontFamily={'semi-bold'}>
-                {`${formatNumber(available >= refundable ? refundable : available, false, true)} ${currency?.wrapped.symbol}`}
+                {`${formatNumber(available >= refundable ? refundable : available, false, true)} ${currency?.wrapped.symbol || ''}`}
                 </Typography>
             </div>
         </div>
             <div className="flex justify-between mt-4 text-center">
                 <Typography className="text-white" fontFamily={'medium'}>
-               {`This exchange is designed to provide a 1:1 redemption for lent assets. The purpose of this swap is to enable those impacted by the flash loan attack of 2022
-               to redeem their underlying assets (minus interest).`}
+               {`1:1 redemption for lent assets for our retired markets at pre-flash loan amounts (minus interest).`}
                 </Typography>
             </div>
       </Card>
