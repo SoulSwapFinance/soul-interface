@@ -66,6 +66,7 @@ import {
   SOUL_X_SWAP_ADDRESS,
   MANIFESTER_ADDRESS,
   MARKET_UPDATER_ADDRESS,
+  REFUNDER_ADDRESS,
 } from 'sdk'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from 'constants/multicall'
 import SOUL_BOND_ABI from 'constants/abis/soulbond.json' 
@@ -102,6 +103,7 @@ import SOUL_SCARAB_ABI from 'constants/abis/soulswap/scarab.json'
 import SOUL_SAFE_ABI from 'constants/abis/soulswap/safe.json'
 import SOUL_X_SWAP_ABI from 'constants/abis/soulswap/soulxswap.json'
 import SOUL_GUIDE_ABI from 'constants/abis/soul-guide.json' // TODO: update abi
+import REFUNDER_ABI from 'constants/abis/refunder.json'
 import SUMMONER_ABI from 'constants/abis/soulswap/soulsummoner.json' // 28 JUL
 import SOUL_MANIFESTER_ABI from 'constants/abis/soulswap/soulmanifester.json' 
 import FARM_MANIFESTER_ABI from 'constants/abis/soulswap/manifester.json'
@@ -262,6 +264,11 @@ export function useOffchainAggregatorOracleContract(): Contract | null {
 export function useSoulGuideContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SOUL_GUIDE_ADDRESS[chainId], SOUL_GUIDE_ABI, false)
+}
+
+export function useRefunderContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && REFUNDER_ADDRESS[chainId], REFUNDER_ABI, withSignerIfPossible)
 }
 
 export function usePriceHelperContract(): Contract | null {

@@ -93,7 +93,8 @@ const features: FeatureMap = {
     Feature.EXPLORE,
     Feature.LUXOR,
     Feature.SOULSWAP,
-    Feature.UNDERWORLD
+    Feature.UNDERWORLD,
+    Feature.UNDERWORLD_SWAP,
   ],
 }
 

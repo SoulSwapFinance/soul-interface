@@ -21,7 +21,7 @@ import { useAutoStakeInfo, useTokenInfo, useUserAutoStakeInfo } from 'hooks/useA
 import { SubmitButton } from 'features/autostake/Styles'
 import Image from 'next/image'
 import STAKE_BANNER from 'assets/branding/stake-banner.png'
-import { getChainColor } from 'constants/chains'
+// import { getChainColor } from 'constants/chains'
 import TokenStats from 'components/TokenStats'
 
 

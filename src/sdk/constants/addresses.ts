@@ -471,6 +471,17 @@ export const SUMMONER_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
+export const REFUNDER_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x1A60F873E7Fb272726d39eE10927257658C65f86', // FEB23
+  [ChainId.AVALANCHE]: '',
+  [ChainId.MATIC]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
+
 export const SOUL_GUIDE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',

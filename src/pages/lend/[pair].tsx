@@ -28,7 +28,7 @@ export default function Pair() {
   const { chainId } = useActiveWeb3React()
   const pair = useUnderworldPair(router.query.pair as string)
   const { underworldPairInfo } = useUnderworldPairInfo(router.query.pair)
-  const pairAddress = router.query.pair as string
+  // const pairAddress = router.query.pair as string
   // const _supplyAPR = Number(useUnderworldPairAPI(pairAddress)[7]) // * 100 / 1E18)
 
   /*
@@ -49,12 +49,12 @@ const MULTIPLIER = LEND_MULTIPLIER(chainId, pair?.address)
 // const lpDecimals = Number(underworldPairInfo.decimals)
 // const assetAddress = underworldPairInfo.assetAddress
 
-const available = 100 -
-  ((pair?.totalAsset.base / 10**(assetDecimals)) -
-    (pair?.totalAsset.base.sub(pair?.totalBorrow.elastic) / 10**(assetDecimals)))
-    / (pair?.totalAsset.base / 10**(assetDecimals)) * 100
+// const available = 100 -
+//   ((pair?.totalAsset.base / 10**(assetDecimals)) -
+//     (pair?.totalAsset.base.sub(pair?.totalBorrow.elastic) / 10**(assetDecimals)))
+//     / (pair?.totalAsset.base / 10**(assetDecimals)) * 100
 
-  const util = 100 - available
+  // const util = 100 - available
   // const utilization = (util >= 100 || util <= 0) ? 98 : util
 
 // format tickers //

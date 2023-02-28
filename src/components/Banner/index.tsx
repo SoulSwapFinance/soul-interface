@@ -184,10 +184,10 @@ export const UnderworldBanner: FC = () => (
     <div className="w-full">
       <div className="text-center">
         <p className="font-medium text-center text-white">
-        <NavLink href="/portfolio">
+        <NavLink href="/lend/swap">
             <Button variant="bordered" color="purple" size="sm">
               <span className="justify-center font-bold text-white">
-                {`Retired Market Balances ↗`}
+                {`Swap Retired Assets ↗`}
                 {/* Please vote in our LIVE proposals regarding withdrawal fees and governance. <span aria-hidden="true">&rarr;</span> */}
               </span>
             </Button>
