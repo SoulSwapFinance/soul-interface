@@ -4,7 +4,7 @@
   "version": {
     "major": 5,
     "minor": 1,
-    "patch": 4
+    "patch": 5
   },
   "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png",
   "tokens": [
@@ -457,6 +457,14 @@
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x841FAD6EAe12c286d1Fd18d1d525DFfA75C7EFFE/logo.png"
     },
     {
+      "chainId": 250,
+      "name": "Candle Token",
+      "address": "0x208234F4f8B1bBEA59cfDc38666141654e851DCe",
+      "symbol": "CANDLE",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x208234F4f8B1bBEA59cfDc38666141654e851DCe/logo.png"
+    },
+    {
         "chainId": 250,
         "name": "ChillPill",
         "address": "0xe47d957F83F8887063150AaF7187411351643392",
@@ -607,6 +615,14 @@
       "symbol": "WLUM",
       "decimals": 9,
       "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208/logo.png"
+    },
+    {
+      "chainId": 250,
+      "name": "xCult Token",
+      "address": "0x718670c88F2daa222d44908C1c253253FF96aE21",
+      "symbol": "xCULT",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x718670c88F2daa222d44908C1c253253FF96aE21/logo.png"
     },
     {
       "chainId": 250,
