@@ -13,6 +13,7 @@ export enum Feature {
   BONDS = 'Bonds',
   COFFINBOX = 'CoffinBox',
   UNDERWORLD = 'Underworld',
+  UNDERWORLD_SWAP = 'Underworld Swap',
   MISO = 'MISO',
   ANALYTICS = 'Analytics',
   MIGRATE = 'Migrate',

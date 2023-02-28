@@ -167,10 +167,10 @@ const PairContract = useTokenContract(pairAddress)
         }
       >
         <Container maxWidth="full" className="space-y-6">
-            <div className={`flex justify-center border p-2 rounded rounded-2xl ${isActive ? `border-green` : `border-red`}`}>
+            <div className={`flex justify-center border p-2 rounded rounded-2xl ${currency && isActive ? `border-green` : `border-red`}`}>
             <div className={`grid grid-cols-2`}>
             <Typography
-                className={`font-bold text-lg sm:text-2xl ${isActive ? `text-green` : `text-red`} text-center`}
+                className={`font-bold text-lg sm:text-2xl ${currency && isActive ? `text-green` : `text-red`} text-center`}
                 >
                 {isActive 
                     ? `Redeemable Assets`
@@ -178,7 +178,7 @@ const PairContract = useTokenContract(pairAddress)
                 }
             </Typography>
             <Typography
-                className={`font-bold text-lg sm:text-2xl ${isActive ? `text-green` : `text-red`} text-center`}
+                className={`font-bold text-lg sm:text-2xl ${currency && isActive ? `text-green` : `text-red`} text-center`}
                 >
                 {currency ? 
                     `${formatNumber(available, false, true)} ${currency?.wrapped.symbol}` 
@@ -201,9 +201,9 @@ const PairContract = useTokenContract(pairAddress)
               id="underworld-currency-asset"
             />
           </div>
-
+        { currency && isActive &&
             <Button 
-                color="green"
+                color={`green`}
                 variant={`outlined`}
                 className="w-full px-4 py-3 text-base font-bold rounded text-high-emphesis"
                 onClick={handleApprove}
@@ -217,16 +217,17 @@ const PairContract = useTokenContract(pairAddress)
                     : `Approve Market`
                 }
             </Button>
-
+            }
             <Button
-                color={isActive ? `purple` : `red`}
+                color={currency && isActive ? `green` : `red`}
                 variant={`filled`}
                 className="w-full px-4 py-3 text-base font-bold rounded text-high-emphesis"
                 onClick={() => handleRefund()}
                 disabled={id == 4 || !isActive}
                 >
                 {`${id == 4 ? `Invalid Asset Selected`
-                    : amount == 0 ? `Enter Amount`
+                    : !currency ? `Select Asset`
+                    : amount == 0 && isActive ? `Enter Amount`
                         : isRefundPending ? `Redeeming ${currency?.wrapped.symbol}`
                         : isRefundCompleted ? `Redeemed ${currency?.wrapped.symbol}`
                         : !isActive ? `Redemption Paused`
@@ -288,4 +289,4 @@ const LendSwapLayout = ({ children }) => {
   )
 }
 
-LendSwap.Guard = NetworkGuard(Feature.UNDERWORLD)
+LendSwap.Guard = NetworkGuard(Feature.UNDERWORLD_SWAP)
