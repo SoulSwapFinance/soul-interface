@@ -22,7 +22,7 @@ import { useTokenInfo } from 'hooks/useAPI'
 // import { useTransactionAdder } from 'state/transactions/hooks'
 // import { WFTM } from 'constants/index'
 // import useSendTransaction from 'hooks/useSendTransaction'
-// import { ethers } from 'ethers'
+import { ethers } from 'ethers'
 
 export default function LendSwap() {
   const { account, chainId, library } = useActiveWeb3React()
@@ -43,7 +43,7 @@ export default function LendSwap() {
 
 const RefunderContract = useRefunderContract()
 // const addTransaction = useTransactionAdder()
-// const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
+const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
 const PairContract = useTokenContract(pairAddress)
 
 const bnbPrice = Number(useTokenInfo(BNB_ADDRESS[chainId])?.tokenInfo?.price)
@@ -168,7 +168,7 @@ const maxRedeemable = available >= refundable ? refundable : available
     isPending: isApprovePending,
     isCompleted: isApproveCompleted,
   } = useSendTransaction(() =>
-    PairContract.approve(REFUNDER_ADDRESS[chainId], (amount * 4 * 1E18).toString())
+    PairContract.approve(REFUNDER_ADDRESS[chainId], (maxUint).toString())
   );
 
   return (
