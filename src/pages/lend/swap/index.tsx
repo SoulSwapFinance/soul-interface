@@ -187,9 +187,9 @@ const maxRedeemable = available >= refundable ? refundable : available
       >
         <Container maxWidth="full" className="space-y-6">
             <div className={`flex justify-center border p-2 rounded rounded-2xl ${currency && isActive ? `border-green` : `border-red`}`}>
-            <div className={`grid grid-cols-2`}>
+            <div className={`grid grid-cols-2 gap-12`}>
             <Typography
-                className={`font-bold text-lg sm:text-2xl ${currency && isActive ? `text-green` : `text-red`} text-center`}
+                className={`font-bold text-sm sm:text-lg md:text-xl ${currency && isActive ? `text-green` : `text-red`} text-center`}
                 >
                 {isActive 
                     ? `Redeemable Assets`
@@ -197,10 +197,10 @@ const maxRedeemable = available >= refundable ? refundable : available
                 }
             </Typography>
             <Typography
-                className={`font-bold text-lg sm:text-2xl ${currency && isActive ? `text-green` : `text-red`} text-center`}
+                className={`font-bold text-sm sm:text-lg md:text-xl ${currency && isActive ? `text-green` : `text-red`} text-center`}
                 >
                 {currency ? 
-                    `${formatNumber(available, false, true)} ${currency?.wrapped.symbol}` 
+                    `${formatNumber(available, false, true)} ${currency?.wrapped.symbol} (${formatNumber(available * assetPrice, true, true) || 0})` 
                     : 'Select Asset'
                 }
             </Typography>
