@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { DAI_BNB_MARKET, DAI_ETH_MARKET, REFUNDER_ADDRESS, DAI_NATIVE_MARKET, NATIVE_DAI_MARKET, Token } from 'sdk'
+import { DAI_BNB_MARKET, DAI_ETH_MARKET, REFUNDER_ADDRESS, DAI_NATIVE_MARKET, NATIVE_DAI_MARKET, Token, WNATIVE_ADDRESS, WETH_ADDRESS, BNB_ADDRESS } from 'sdk'
 import { Button } from 'components/Button'
 import Card from 'components/Card'
 import Container from 'components/Container'
@@ -16,6 +16,8 @@ import Typography from 'components/Typography'
 import { i18n } from '@lingui/core'
 import { formatNumber } from 'functions'
 import useSendTransaction from 'hooks/useSendTransaction'
+import { useTokenPrice } from 'hooks/getPrices'
+import { useTokenInfo } from 'hooks/useAPI'
 
 // import { useTransactionAdder } from 'state/transactions/hooks'
 // import { WFTM } from 'constants/index'
@@ -27,6 +29,7 @@ export default function LendSwap() {
   const provider = library.provider
   const [id, setId] = useState(0)
   const [currency, setCurrency] = useState<Token>(null)
+  const [assetPrice, setAssetPrice] = useState(0)
   const [pairAddress, setPairAddress] = useState(DAI_NATIVE_MARKET[chainId])
   const [pairSymbol, setPairSymbol] = useState('FTM Market')
   const [amount, setAmount] = useState(0)
@@ -42,6 +45,14 @@ const RefunderContract = useRefunderContract()
 // const addTransaction = useTransactionAdder()
 // const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
 const PairContract = useTokenContract(pairAddress)
+
+const bnbPrice = Number(useTokenInfo(BNB_ADDRESS[chainId])?.tokenInfo?.price)
+const ethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId])?.tokenInfo?.price)
+const nativePrice = Number(useTokenInfo(WNATIVE_ADDRESS[chainId])?.tokenInfo?.price)
+
+console.log({ bnbPrice, ethPrice, nativePrice })
+
+const maxRedeemable = available >= refundable ? refundable : available
 
     // [ √ ] updates: id
     const handleAssetSelect = useCallback(
@@ -129,7 +140,15 @@ const PairContract = useTokenContract(pairAddress)
                 : assetSymbol == 'ETH' ? DAI_ETH_MARKET[chainId]
                 : assetSymbol == 'WFTM' ? DAI_NATIVE_MARKET[chainId]
                 : DAI_NATIVE_MARKET[chainId]
+            
+            let assetPrice =
+                assetSymbol == 'BNB' ? Number(bnbPrice)
+                : assetSymbol == 'DAI' ? 1
+                : assetSymbol == 'ETH' ? Number(ethPrice)
+                : assetSymbol == 'WFTM' ? nativePrice
+                : 0
 
+        setAssetPrice(assetPrice)
         setPairAddress(pairAddress)
         console.log({pairAddress})
 
@@ -250,7 +269,7 @@ const PairContract = useTokenContract(pairAddress)
                 {i18n._(t`Balance`)}
                 </Typography>
                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                {`${formatNumber(refundable, false, true)} ${currency?.wrapped.symbol || ''}`}
+                {`${formatNumber(refundable, false, true)} ${currency?.wrapped.symbol || ''} (${formatNumber(refundable * assetPrice, true, true) || 0})`}
                 </Typography>
             </div>
 
@@ -259,7 +278,7 @@ const PairContract = useTokenContract(pairAddress)
                 {i18n._(t`Redeemable`)}
                 </Typography>
                 <Typography className={isActive ? `text-green` : `text-red`} weight={600} fontFamily={'semi-bold'}>
-                {`${formatNumber(available >= refundable ? refundable : available, false, true)} ${currency?.wrapped.symbol || ''}`}
+                {`${formatNumber(maxRedeemable, false, true)} ${currency?.wrapped.symbol || ''} (${formatNumber(maxRedeemable * assetPrice, true, true) || 0})`}
                 </Typography>
             </div>
         </div>
