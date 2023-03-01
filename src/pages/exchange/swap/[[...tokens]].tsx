@@ -39,7 +39,7 @@ import { Feature } from 'enums/Feature'
 import { useRouter } from 'next/router'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import Pair from 'pages/analytics/pairs/[id]'
-import { DonateBanner } from 'components/Banner'
+import { DonateBanner, LuxorBanner } from 'components/Banner'
 import SWAP_BANNER from 'assets/branding/swap-banner.png'
 // import UpDownArrowIcon from 'components/Icons/exchange/UpDownArrowIcon'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
@@ -420,7 +420,8 @@ const Swap = () => {
         <DoubleGlowShadowV2>
           <div className={`grid p-1 mt-4 space-y-2 rounded rounded-2xl bg-dark-1000`}>
             {/* <SwapLayoutCard> */}
-            <DonateBanner chainId={chainId} />
+            {/* <DonateBanner chainId={chainId} /> */}
+            <LuxorBanner chainId={chainId} />
             <div
               className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >
@@ -573,7 +574,7 @@ const Swap = () => {
                               disabled={approvalState !== ApprovalState.NOT_APPROVED || approvalSubmitted}
                               className="rounded-2xl w-full md:rounded"
                             >
-                              {i18n._(t`Approve ${currencies[Field.INPUT]?.symbol}`)}
+                              { `Approve ${currencies[Field.INPUT]?.symbol}` }
                             </Button>
                           )}
                         {approvalState === ApprovalState.APPROVED

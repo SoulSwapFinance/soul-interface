@@ -20,6 +20,7 @@ import { useTokenInfo, usePairInfo, useLuxorInfo } from 'hooks/useAPI'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
 import { LuxorBanner } from 'components/Banner'
+import { useActiveWeb3React } from 'services/web3'
 
 // import { ethers } from 'ethers'
 // import DashboardLineGraph from 'components/Dashboard/LineGraph'
@@ -34,6 +35,7 @@ import { LuxorBanner } from 'components/Banner'
 // import ExternalLink from 'components/ExternalLink'
 
 export default function Dashboard() {
+  const { chainId } = useActiveWeb3React()
   const { i18n } = useLingui()
   // const { luxData } = useLuxorDashboard()
   const LuxFtmContract = usePairContract('0x951BBB838e49F7081072895947735b0892cCcbCD')
@@ -291,7 +293,7 @@ const HideOnMobile = styled.div`
         <title>Dashboard | Luxor</title>
         <meta key="description" name="description" />
       </Head>
-      <LuxorBanner />
+      <LuxorBanner chainId={chainId} />
       <div className="grid grid-cols ml-3 mr-3 mt-4 justify-center">
     <HideOnMobile>
       <div className="py-1 mb-1 mt-3 ml-3 mr-3 bg-yellow" />

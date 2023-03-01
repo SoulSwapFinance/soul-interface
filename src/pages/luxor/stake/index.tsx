@@ -193,7 +193,7 @@ export default function Stake() {
         <title>Staking | Luxor</title>
         <meta key="description" name="description" />
       </Head>
-      <LuxorBanner />
+      <LuxorBanner chainId={chainId} />
       <div className="flex ml-2 mr-2 mb-4 gap-1 mt-4 items-center justify-center">
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/dashboard'}>
