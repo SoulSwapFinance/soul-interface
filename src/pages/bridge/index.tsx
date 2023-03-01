@@ -547,10 +547,12 @@ const Bridge: React.FC<any> = () => {
                       <Typography className={`text-lg font-bold text-center bg-dark-900 border border-avaxRed p-2 rounded rounded-xl`}>
                         {'~'}
                         {selectedToken
-                          ? `${formatSimpleValue(
-                            // selectedToken.MinimumSwapFee
-                            selectedToken.SwapFeeRate * 100
-                          )}% Fee`
+                          ? 
+                          // `${formatSimpleValue(
+                          //   // selectedToken.MinimumSwapFee
+                          //   selectedToken.SwapFeeRate * 100
+                          // )}%
+                          `Fee Range`
                           : "Loading Fee..."}
 
                       </Typography>
