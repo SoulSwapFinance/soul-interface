@@ -298,7 +298,7 @@ const LendSwapLayout = ({ children }) => {
           backgroundImage="/images/underworld/deposit.png"
           title={i18n._(t`Reclaim Retired Underworld Assets`)}
           description={i18n._(
-            t`For those looking to reclaim their retired Underworld Assets (1:1).`
+            t`For those looking to redeem their retired lent assets.`
           )}
         />
       }

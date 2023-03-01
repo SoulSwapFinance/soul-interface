@@ -101,7 +101,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
       ),
       // && pair.userAssetFraction.sub(pair.currentUserLentAmount.value).lte(0),
       i18n._(
-        t`There isn't enough liquidity available to withdraw. Swap or bond to exit.`
+        t`Insufficient liquidity, please swap or bond to exit.`
       ),
       true
     )
@@ -201,7 +201,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
           <NavLink href="/lend/swap">
             <Button variant="filled" color={`ftmBlue`} size="sm">
               <span className="justify-center font-bold">
-                {'Redeem: Underlying Asset'}
+                {'Redeem Asset'}
               </span>
             </Button>
           </NavLink>
@@ -210,7 +210,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
           >
             <Button variant="filled" color={`ftmBlue`} size="sm">
               <span className="justify-center font-bold">
-                {'Bond: Retired Loan'}
+                {'Bond Asset'}
               </span>
             </Button>
           </NavLink>
