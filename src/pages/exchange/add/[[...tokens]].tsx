@@ -502,7 +502,7 @@ export default function Add() {
                           {approvalA === ApprovalState.PENDING ? (
                             <Dots>{i18n._(t`Approving`)}</Dots>
                           ) : (
-                            i18n._(t`Approve ${currencies[Field.CURRENCY_A]?.symbol}`)
+                            `Approve ${currencies[Field.CURRENCY_A]?.symbol}`
                           )}
                         </Button>
                       )}
@@ -519,7 +519,7 @@ export default function Add() {
                           {approvalB === ApprovalState.PENDING ? (
                             <Dots>{i18n._(t`Approving`)}</Dots>
                           ) : (
-                            i18n._(t`Approve ${currencies[Field.CURRENCY_B]?.symbol}`)
+                            `Approve ${currencies[Field.CURRENCY_B]?.symbol}`
                           )}
                         </Button>
                       )}

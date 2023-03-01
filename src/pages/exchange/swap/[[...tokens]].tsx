@@ -573,7 +573,7 @@ const Swap = () => {
                               disabled={approvalState !== ApprovalState.NOT_APPROVED || approvalSubmitted}
                               className="rounded-2xl w-full md:rounded"
                             >
-                              {i18n._(t`Approve ${currencies[Field.INPUT]?.symbol}`)}
+                              { `Approve ${currencies[Field.INPUT]?.symbol}` }
                             </Button>
                           )}
                         {approvalState === ApprovalState.APPROVED

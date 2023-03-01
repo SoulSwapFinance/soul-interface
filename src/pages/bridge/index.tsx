@@ -601,7 +601,8 @@ const Bridge: React.FC<any> = () => {
                       ? i18n._(t`Approving`)
                       : isApproveCompleted
                         ? i18n._(t`Approve Successful`)
-                        : i18n._(t`Approve ${selectedToken?.symbol}`)}
+                        : `Approve ${selectedToken?.symbol}`
+                    }
                   </ButtonComponent>
 
                   {isApproved && (

@@ -82,7 +82,7 @@ const TokenApproveButton: FC<TokenApproveButtonProps> = memo(
           color={getChainColorCode(chainId)}
           loading={approveState === ApprovalState.PENDING} 
           onClick={handleApprove}>
-          {i18n._(t`Approve ${inputAmount?.currency.symbol}`)}
+          { `Approve ${inputAmount?.currency.symbol}` }
         </Button>
       )
     }
