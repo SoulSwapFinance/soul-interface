@@ -158,8 +158,8 @@ export const BetaFeature: FC = () => (
   </div>
 )
 
-export const LuxorBanner: FC = () => (
-  <div className="relative items-center w-full mt-2">
+export const LuxorBanner: FC<IFeature> = ({ chainId }) => (
+  <div className={chainId == 250 ? `relative items-center w-full mt-2` : `hidden`}>
     <div className="w-full">
       <div className="text-center">
         <p className="font-medium text-center text-white">

@@ -88,7 +88,7 @@ export default function Stablecoin() {
           <title>Wrap | Luxor</title>
           <meta key="description" name="description" />
         </Head>
-        <LuxorBanner />
+        <LuxorBanner chainId={chainId} />
         <div className="flex ml-2 mr-2 mb-4 mt-4 gap-1 items-center justify-center">
           <Button variant="filled" color="yellow" size="lg">
             <NavLink href={'/luxor/dashboard'}>
