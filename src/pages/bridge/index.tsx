@@ -546,7 +546,7 @@ const Bridge: React.FC<any> = () => {
 
                     <div>
                       <Typography className={`text-lg font-bold text-center bg-dark-900 border border-avaxRed p-2 rounded rounded-xl`}>
-                        {'~'}
+                        
                         {selectedToken
                           ? 
                           // `${formatSimpleValue(
