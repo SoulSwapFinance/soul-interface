@@ -12972,7 +12972,7 @@ dedent@^0.7.0:
   resolved "https://registry.yarnpkg.com/dedent/-/dedent-0.7.0.tgz#2495ddbaf6eb874abb0e1be9df22d2e5a544326c"
   integrity sha512-Q6fKUPqnAHAyhiUgFU7BUzLiv0kd8saH9al7tnu5Q/okj6dnupxyTgFIBjVzJATdfIAm9NAsvXNzjaKa+bxVyA==
 
-deep-equal@^1.0.1, deep-equal@~1.1.1:
+deep-equal@^1.0.1, deep-equal@^1.1.0, deep-equal@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/deep-equal/-/deep-equal-1.1.1.tgz#b5c98c942ceffaf7cb051e24e1434a25a2e6076a"
   integrity sha512-yd9c5AdiqVcR+JjcwUQb9DkhJc8ngNr0MahEBGvDiJw8puWab2yZlh+nkasOnZP+EGTAP6rRp2JzJhJZzvNF8g==
@@ -14797,6 +14797,100 @@ etherspot@^1.35.2:
     subscriptions-transport-ws "0.9.18"
     validator "13.7.0"
 
+ethjs-abi@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/ethjs-abi/-/ethjs-abi-0.2.0.tgz#d3e2c221011520fc499b71682036c14fcc2f5b25"
+  integrity sha512-ELExSTNV7rm9WA22pA3kxNmaQz1o/peM8X1pZdWypEhuNzFjOR+hIV09Mcfw69Q0kbdd7JNGAFb5dyoL/bnItA==
+  dependencies:
+    bn.js "4.11.6"
+    js-sha3 "0.5.5"
+    number-to-bn "1.7.0"
+
+ethjs-abi@0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/ethjs-abi/-/ethjs-abi-0.2.1.tgz#e0a7a93a7e81163a94477bad56ede524ab6de533"
+  integrity sha512-g2AULSDYI6nEJyJaEVEXtTimRY2aPC2fi7ddSy0W+LXvEVL8Fe1y76o43ecbgdUKwZD+xsmEgX1yJr1Ia3r1IA==
+  dependencies:
+    bn.js "4.11.6"
+    js-sha3 "0.5.5"
+    number-to-bn "1.7.0"
+
+ethjs-contract@0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/ethjs-contract/-/ethjs-contract-0.2.2.tgz#2ed71254cbb4f2b6fafa1db0d4a83870c887b472"
+  integrity sha512-xxPqEjsULQ/QNWuvX6Ako0PGs5RxALA8N/H3+boLvnaXDFZVGpD7H63H1gBCRTZyYqCldPpVlVHuw/rD45vazw==
+  dependencies:
+    ethjs-abi "0.2.0"
+    ethjs-filter "0.1.8"
+    ethjs-util "0.1.3"
+    js-sha3 "0.5.5"
+
+ethjs-contract@^0.2.1:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/ethjs-contract/-/ethjs-contract-0.2.3.tgz#f113ced8ed1c9c635b0b7ec71901340b64e8cded"
+  integrity sha512-fKsHm57wxwHrZhVlD8AHU2lC2G3c1fmvoEz15BpqIkuGWiTbjuvrQo2Avc+3EQpSsTFWNdyxC0h1WKRcn5kkyQ==
+  dependencies:
+    babel-runtime "^6.26.0"
+    ethjs-abi "0.2.0"
+    ethjs-filter "0.1.8"
+    ethjs-util "0.1.3"
+    js-sha3 "0.5.5"
+
+ethjs-filter@0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/ethjs-filter/-/ethjs-filter-0.1.8.tgz#2b02726b820ed4dd3860614d185c0c0f7ed1747f"
+  integrity sha512-qTDPskDL2UadHwjvM8A+WG9HwM4/FoSY3p3rMJORkHltYcAuiQZd2otzOYKcL5w2Q3sbAkW/E3yt/FPFL/AVXA==
+
+ethjs-format@0.2.7:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/ethjs-format/-/ethjs-format-0.2.7.tgz#20c92f31c259a381588d069830d838b489774b86"
+  integrity sha512-uNYAi+r3/mvR3xYu2AfSXx5teP4ovy9z2FrRsblU+h2logsaIKZPi9V3bn3V7wuRcnG0HZ3QydgZuVaRo06C4Q==
+  dependencies:
+    bn.js "4.11.6"
+    ethjs-schema "0.2.1"
+    ethjs-util "0.1.3"
+    is-hex-prefixed "1.0.0"
+    number-to-bn "1.7.0"
+    strip-hex-prefix "1.0.0"
+
+ethjs-provider-http@0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/ethjs-provider-http/-/ethjs-provider-http-0.1.6.tgz#1ec5d9b4be257ef1d56a500b22a741985e889420"
+  integrity sha512-y054N5xyyx43KTQjgdkAEj2uEa/flwpENU5ldx/rmA0Q2yy0vyB2lsOIn/7V0uADMc4iRSHZfnFc9b9YS5Qkdw==
+  dependencies:
+    xhr2 "0.1.3"
+
+ethjs-query@0.3.7:
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/ethjs-query/-/ethjs-query-0.3.7.tgz#597884664e7769c5e314a8f2f7ac6b44aceaff5e"
+  integrity sha512-TZnKUwfkWjy0SowFdPLtmsytCorHi0i4vvkQn7Jg8rZt33cRzKhuzOwKr/G3vdigCc+ePXOhUGMcJSAPlOG44A==
+  dependencies:
+    ethjs-format "0.2.7"
+    ethjs-rpc "0.2.0"
+    promise-to-callback "^1.0.0"
+
+ethjs-query@^0.3.7:
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/ethjs-query/-/ethjs-query-0.3.8.tgz#aa5af02887bdd5f3c78b3256d0f22ffd5d357490"
+  integrity sha512-/J5JydqrOzU8O7VBOwZKUWXxHDGr46VqNjBCJgBVNNda+tv7Xc8Y2uJc6aMHHVbeN3YOQ7YRElgIc0q1CI02lQ==
+  dependencies:
+    babel-runtime "^6.26.0"
+    ethjs-format "0.2.7"
+    ethjs-rpc "0.2.0"
+    promise-to-callback "^1.0.0"
+
+ethjs-rpc@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/ethjs-rpc/-/ethjs-rpc-0.2.0.tgz#3d0011e32cfff156ed6147818c6fb8f801701b4c"
+  integrity sha512-RINulkNZTKnj4R/cjYYtYMnFFaBcVALzbtEJEONrrka8IeoarNB9Jbzn+2rT00Cv8y/CxAI+GgY1d0/i2iQeOg==
+  dependencies:
+    promise-to-callback "^1.0.0"
+
+ethjs-schema@0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/ethjs-schema/-/ethjs-schema-0.2.1.tgz#47e138920421453617069034684642e26bb310f4"
+  integrity sha512-DXd8lwNrhT9sjsh/Vd2Z+4pfyGxhc0POVnLBUfwk5udtdoBzADyq+sK39dcb48+ZU+2VgtwHxtGWnLnCfmfW5g==
+
 ethjs-unit@0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/ethjs-unit/-/ethjs-unit-0.1.6.tgz#c665921e476e87bce2a9d588a6fe0405b2c41699"
@@ -14805,6 +14899,14 @@ ethjs-unit@0.1.6:
     bn.js "4.11.6"
     number-to-bn "1.7.0"
 
+ethjs-util@0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/ethjs-util/-/ethjs-util-0.1.3.tgz#dfd5ea4a400dc5e421a889caf47e081ada78bb55"
+  integrity sha512-QqpX2dsEG2geSMG9dTMJVhfP1kGRdGMNjiHPiTjkju+X5cB0PQIwUzRr5k21pFkgF5zuLccqe83p7Gh5fFM5tQ==
+  dependencies:
+    is-hex-prefixed "1.0.0"
+    strip-hex-prefix "1.0.0"
+
 ethjs-util@0.1.6, ethjs-util@^0.1.3:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/ethjs-util/-/ethjs-util-0.1.6.tgz#f308b62f185f9fe6237132fb2a9818866a5cd536"
@@ -14812,6 +14914,22 @@ ethjs-util@0.1.6, ethjs-util@^0.1.3:
   dependencies:
     is-hex-prefixed "1.0.0"
     strip-hex-prefix "1.0.0"
+
+ethjs@^0.3.6:
+  version "0.3.9"
+  resolved "https://registry.yarnpkg.com/ethjs/-/ethjs-0.3.9.tgz#287e1fe75de8ee1fb73ae2cf6218395398e8f84c"
+  integrity sha512-gOQzA3tDUjoLpNONSOALJ/rUFtHi5tXl2mholHasF1cvXhoddqi06yU4OJFJu9AGd6n9v9ywzHlYeIKg1t1hdw==
+  dependencies:
+    bn.js "4.11.6"
+    ethjs-abi "0.2.1"
+    ethjs-contract "0.2.2"
+    ethjs-filter "0.1.8"
+    ethjs-provider-http "0.1.6"
+    ethjs-query "0.3.7"
+    ethjs-unit "0.1.6"
+    ethjs-util "0.1.3"
+    js-sha3 "0.5.5"
+    number-to-bn "1.7.0"
 
 event-target-shim@^5.0.0:
   version "5.0.1"
@@ -16755,6 +16873,11 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
+human-standard-token-abi@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/human-standard-token-abi/-/human-standard-token-abi-1.0.2.tgz#207d7846796ee5bb85fdd336e769cb38045b2ae0"
+  integrity sha512-kLnZeoeGvnI5ZNo1o6EnzEeWsPnHgP6uMT7U4S8mfHZztYSfamr2SM3SY+/IRBwnpAcPsIg+RVcUDx1DvWEPKg==
+
 humanize-ms@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/humanize-ms/-/humanize-ms-1.2.1.tgz#c46e3159a293f6b896da29316d8b6fe8bb79bbed"
@@ -17735,6 +17858,11 @@ js-cookie@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.2.1.tgz#69e106dc5d5806894562902aa5baec3744e9b2b8"
   integrity sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==
+
+js-sha3@0.5.5:
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/js-sha3/-/js-sha3-0.5.5.tgz#baf0c0e8c54ad5903447df96ade7a4a1bca79a4a"
+  integrity sha512-yLLwn44IVeunwjpDVTDZmQeVbB0h+dZpY2eO68B/Zik8hu6dH+rKeLxwua79GGIvW6xr8NBAcrtiUbYrTjEFTA==
 
 js-sha3@0.5.7, js-sha3@^0.5.7:
   version "0.5.7"
@@ -26527,6 +26655,19 @@ token-explorer-api@^1.0.2:
   resolved "https://registry.yarnpkg.com/token-explorer-api/-/token-explorer-api-1.0.2.tgz#d9d397ef1d45897c1ce9d5a23e5f103d0339003e"
   integrity sha512-CpbYRYhJkDJlF0DxrihQBq1gQZ1Gy00pr1G2aCe3ziiNn+rX5sCqwkCvqieIyyyYArnbEosry4VAM5S4xKToYQ==
 
+token-tracker@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/token-tracker/-/token-tracker-1.0.1.tgz#57812f88072b8a240e8ce3600a42b41d0009f912"
+  integrity sha512-YKCTP7yrneFR9aH6qyA1Kl1+PhmzR+tT1rvd4NnJ11hpNwmXd/7ynJ63CQczDIevkJbwYbSR45YCbxsfJWI62w==
+  dependencies:
+    "@metamask/safe-event-emitter" "^2.0.0"
+    deep-equal "^1.1.0"
+    eth-block-tracker "^5.0.1"
+    ethjs "^0.3.6"
+    ethjs-contract "^0.2.1"
+    ethjs-query "^0.3.7"
+    human-standard-token-abi "^1.0.2"
+
 toposort@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/toposort/-/toposort-2.0.2.tgz#ae21768175d1559d48bef35420b2f4962f09c330"
@@ -29143,6 +29284,11 @@ xhr2-cookies@1.1.0:
   integrity sha512-hjXUA6q+jl/bd8ADHcVfFsSPIf+tyLIjuO9TwJC9WI6JP2zKcS7C+p56I9kCLLsaCiNT035iYvEUUzdEFj/8+g==
   dependencies:
     cookiejar "^2.1.1"
+
+xhr2@0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/xhr2/-/xhr2-0.1.3.tgz#cbfc4759a69b4a888e78cf4f20b051038757bd11"
+  integrity sha512-6RmGK22QwC7yXB1CRwyLWuS2opPcKOlAu0ViAnyZjDlzrEmCKL4kLHkfvB8oMRWeztMsNoDGAjsMZY15w/4tTw==
 
 xhr@^2.0.1, xhr@^2.0.4, xhr@^2.2.0, xhr@^2.3.3:
   version "2.6.0"
