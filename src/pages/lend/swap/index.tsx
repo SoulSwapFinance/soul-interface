@@ -92,7 +92,7 @@ const maxRedeemable = available >= refundable ? refundable : available
             setPairAddress(pairAddress)
         }, [setAmount]
     )
-    
+
     // [ √ ] updates: available amount.
     const handleAvailable = useCallback(
         async (selectedCurrency: Token) => {
@@ -111,7 +111,7 @@ const maxRedeemable = available >= refundable ? refundable : available
                 console.log({result})
         }, [setAvailable]
     )
-    
+
     // [ √ ] updates: refundable amount.
     const handleRefundable = useCallback(
         async (selectedCurrency: Token) => {
@@ -140,7 +140,7 @@ const maxRedeemable = available >= refundable ? refundable : available
                 : assetSymbol == 'ETH' ? DAI_ETH_MARKET[chainId]
                 : assetSymbol == 'WFTM' ? DAI_NATIVE_MARKET[chainId]
                 : DAI_NATIVE_MARKET[chainId]
-            
+
             let assetPrice =
                 assetSymbol == 'BNB' ? Number(bnbPrice)
                 : assetSymbol == 'DAI' ? 1
@@ -161,7 +161,7 @@ const maxRedeemable = available >= refundable ? refundable : available
     isCompleted: isRefundCompleted,
   } = useSendTransaction(() =>
     RefunderContract?.refund(id, (amount * 1E18)?.toString())
-  );
+  ); 
 
   const {
     sendTx: handleApprove,
