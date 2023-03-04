@@ -278,6 +278,7 @@
     "tiny-invariant": "^1.1.0",
     "toformat": "^2.0.0",
     "token-explorer-api": "^1.0.2",
+    "token-tracker": "^1.0.1",
     "use-resize-observer": "^9.0.2",
     "video-extensions": "^1.2.0",
     "wagmi": "0.7.5",
