@@ -1,6 +1,37 @@
 [
     {
-        "inputs": [],
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_factoryAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_usdcAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_wnativeAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_nativeOracle",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_oracleDecimals",
+                "type": "uint256"
+            },
+            {
+                "internalType": "string",
+                "name": "_nativeSymbol",
+                "type": "string"
+            }
+        ],
         "stateMutability": "nonpayable",
         "type": "constructor"
     },
@@ -9,9 +40,34 @@
         "inputs": [
             {
                 "indexed": false,
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
                 "internalType": "address",
-                "name": "msgSender",
+                "name": "account",
                 "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "bool",
+                "name": "isActive",
+                "type": "bool"
+            }
+        ],
+        "name": "Enchanted",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "bool",
+                "name": "enabled",
+                "type": "bool"
             }
         ],
         "name": "Paused",
@@ -29,19 +85,25 @@
             {
                 "indexed": true,
                 "internalType": "address",
-                "name": "depositToken",
+                "name": "depositAddress",
                 "type": "address"
             },
             {
                 "indexed": false,
                 "internalType": "address",
-                "name": "rewardToken",
+                "name": "rewardAddress",
                 "type": "address"
             },
             {
                 "indexed": false,
                 "internalType": "address",
                 "name": "creatorAddress",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "enchanterAddress",
                 "type": "address"
             },
             {
@@ -60,7 +122,7 @@
             {
                 "indexed": false,
                 "internalType": "address",
-                "name": "msgSender",
+                "name": "dao",
                 "type": "address"
             }
         ],
@@ -72,9 +134,9 @@
         "inputs": [
             {
                 "indexed": false,
-                "internalType": "address",
-                "name": "msgSender",
-                "type": "address"
+                "internalType": "uint256",
+                "name": "sacrifice",
+                "type": "uint256"
             }
         ],
         "name": "UpdatedSacrifice",
@@ -107,6 +169,19 @@
         "type": "function"
     },
     {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_account",
+                "type": "address"
+            }
+        ],
+        "name": "addEnchanter",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "bloodSacrifice",
         "outputs": [
@@ -123,36 +198,23 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "rewardToken",
+                "name": "depositAddress",
                 "type": "address"
-            }
-        ],
-        "name": "createDepositToken",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
+            },
             {
                 "internalType": "address",
-                "name": "rewardToken",
+                "name": "rewardAddress",
                 "type": "address"
             },
             {
                 "internalType": "uint256",
-                "name": "duraDays",
+                "name": "enchanterId",
                 "type": "uint256"
             },
             {
-                "internalType": "uint256",
-                "name": "feeDays",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "dailyReward",
-                "type": "uint256"
+                "internalType": "bool",
+                "name": "isNative",
+                "type": "bool"
             }
         ],
         "name": "createManifestation",
@@ -169,6 +231,68 @@
             }
         ],
         "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "daos",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "eInfo",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            },
+            {
+                "internalType": "bool",
+                "name": "isActive",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "enchanted",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -206,6 +330,11 @@
                 "type": "address"
             },
             {
+                "internalType": "address",
+                "name": "daoAddress",
+                "type": "address"
+            },
+            {
                 "internalType": "string",
                 "name": "name",
                 "type": "string"
@@ -222,12 +351,12 @@
             },
             {
                 "internalType": "address",
-                "name": "rewardToken",
+                "name": "rewardAddress",
                 "type": "address"
             },
             {
                 "internalType": "address",
-                "name": "depositToken",
+                "name": "depositAddress",
                 "type": "address"
             },
             {
@@ -265,30 +394,6 @@
         "type": "function"
     },
     {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "name": "getManifestation",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "inputs": [],
         "name": "getNativePrice",
         "outputs": [
@@ -305,7 +410,7 @@
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "rewards",
+                "name": "_rewards",
                 "type": "uint256"
             }
         ],
@@ -318,6 +423,30 @@
             }
         ],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "sacrifice",
+                "type": "uint256"
+            }
+        ],
+        "name": "getSplit",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "toDAO",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "toEnchanter",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "pure",
         "type": "function"
     },
     {
@@ -399,6 +528,19 @@
         "type": "function"
     },
     {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            }
+        ],
+        "name": "initializeManifestation",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "isPaused",
         "outputs": [
@@ -406,6 +548,78 @@
                 "internalType": "bool",
                 "name": "",
                 "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "duraDays",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "dailyReward",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "feeDays",
+                "type": "uint256"
+            }
+        ],
+        "name": "launchManifestation",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "mInfo",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "mAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "assetAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "depositAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "rewardAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "creatorAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "enchanterAddress",
+                "type": "address"
             }
         ],
         "stateMutability": "view",
@@ -432,38 +646,12 @@
     },
     {
         "inputs": [],
-        "name": "nativeOracle",
-        "outputs": [
-            {
-                "internalType": "contract IOracle",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
         "name": "nativeSymbol",
         "outputs": [
             {
                 "internalType": "string",
                 "name": "",
                 "type": "string"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "oracleDecimals",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
             }
         ],
         "stateMutability": "view",
@@ -516,6 +704,19 @@
     },
     {
         "inputs": [],
+        "name": "totalEnchanters",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "totalManifestations",
         "outputs": [
             {
@@ -536,6 +737,24 @@
             }
         ],
         "name": "updateDAO",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            },
+            {
+                "internalType": "bool",
+                "name": "isActive",
+                "type": "bool"
+            }
+        ],
+        "name": "updateEnchanter",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -564,6 +783,19 @@
         "name": "updateSacrifice",
         "outputs": [],
         "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "usdcAddress",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
         "type": "function"
     },
     {

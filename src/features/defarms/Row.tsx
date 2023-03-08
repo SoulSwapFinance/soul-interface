@@ -301,10 +301,10 @@ export const ActiveRow = ({ pid }) => {
                                             <Text padding="0" fontSize="1rem" color="#FFFFFF">
                                                 ${
                                                     stakedValue == 0 ? 0
-                                                        : stakedValue.toString(2) == '0.00' ? '<0.00'
-                                                            : stakedValue < 1 && stakedValue.toString(4) ? stakedValue.toFixed(4)
-                                                                : stakedValue > 0 ? stakedValue.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                                                                    : 0
+                                                    : stakedValue.toString(2) == '0.00' ? '<0.00'
+                                                    : stakedValue < 1 && stakedValue.toString(4) ? stakedValue.toFixed(4)
+                                                    : stakedValue > 0 ? stakedValue.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                                                    : 0
                                                 }
                                             </Text>
                                         )}
