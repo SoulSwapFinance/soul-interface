@@ -340,6 +340,17 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: AVAX_ADDRESS[ChainId.FANTOM],
   },
+  { // 150
+    pid: 25,
+    type: 'swap',
+    decimals: 18,
+    token0Symbol: 'WFTM',
+    token1Symbol: 'LINK',
+    lpSymbol: 'FTM-LINK',
+    lpAddress: LINK_NATIVE[ChainId.FANTOM],
+    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+    token1Address: LINK_ADDRESS[ChainId.FANTOM],
+  },
   { // 300
     pid: 9,
     type: 'swap',
@@ -383,17 +394,6 @@ export const FantomPools = [
     lpAddress: BTC_USDC[ChainId.FANTOM],
     token0Address: WBTC_ADDRESS[ChainId.FANTOM],
     token1Address: USDC_ADDRESS[ChainId.FANTOM],
-  },
-  { // 150
-    pid: 25,
-    type: 'swap',
-    decimals: 18,
-    token0Symbol: 'WFTM',
-    token1Symbol: 'LINK',
-    lpSymbol: 'FTM-LINK',
-    lpAddress: LINK_NATIVE[ChainId.FANTOM],
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: LINK_ADDRESS[ChainId.FANTOM],
   },
   // LENDING MARKET //
   { // 220
