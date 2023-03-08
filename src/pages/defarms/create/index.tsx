@@ -24,7 +24,7 @@ import Modal from 'components/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
 import { i18n } from '@lingui/core'
 import { useDeFarmInfo, useUserTokenInfo } from 'hooks/useAPI'
-import { MANIFESTER_ADDRESS, SOUL_ADDRESS, Token } from 'sdk'
+import { computePairAddress, FACTORY_ADDRESS, MANIFESTER_ADDRESS, SOUL_ADDRESS, Token, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import { formatNumber } from 'functions'
 import Input from 'components/Input'
 import useApprove from 'hooks/useApprove'
@@ -42,10 +42,13 @@ const CreateFarm = () => {
   const [feeDays, setFeeDays] = useState(14)
   const [feeSet, setFee] = useState(false)
   const [dailyReward, setDailyReward] = useState(0)
+  const [enchanterId, setEnchanterId] = useState(0)
   const [rewardSet, setReward] = useState(false)
   const [rewardDays, setRewardDays] = useState(30)
   const [durationSet, setDuration] = useState(false)
+  const [campaignId, setCampaignId] = useState(0)
   const [depositCalculated, setDeposit] = useState(false)
+  const [isCreated, setCreated] = useState(false)
   // const [sacrifice, setSacrifice] = useState(0)
   const [totalReward, setTotalReward] = useState(0)
 
@@ -63,17 +66,24 @@ const CreateFarm = () => {
   const bloodSacrifice = Number(defarmInfo?.bloodSacrifice) / 1E18 / 100 // converts to %
   const { userTokenInfo } = useUserTokenInfo(account, SOUL_ADDRESS[chainId])
   const balance = Number(userTokenInfo?.balance) / 1E18
-
+  const campaignLength = Number(defarmInfo?.poolLength)
   const campaignReady = Boolean(rewardSet && durationSet && feeSet)
   const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
 
+  const pairAddress =
+    rewardAsset &&
+    computePairAddress({
+      factoryAddress: FACTORY_ADDRESS[chainId],
+      tokenA: rewardAsset.wrapped,
+      tokenB: WNATIVE[chainId]
+    })
 
   const handleRewardSelect = useCallback(
     (rewardCurrency: Token) => {
       onCurrencySelection(Field.REWARD, rewardCurrency)
       setRewardAsset(rewardCurrency)
       setAsset(true)
-    },
+      },
     [onCurrencySelection, setRewardAsset, setAsset]
   )
 
@@ -86,6 +96,16 @@ const CreateFarm = () => {
       console.log({ balance })
     },
     [onUserInput, setDailyReward, setReward]
+  )
+
+  const handleEnchanterId = useCallback(
+    (enchanterId) => {
+      onUserInput(Field.ENCHANTER, enchanterId.toString())
+      setEnchanterId(enchanterId)
+      setCampaignId(campaignLength)
+      console.log({ enchanterId })
+    },
+    [onUserInput, setRewardDays, setDuration]
   )
 
   const handleRewardDays = useCallback(
@@ -181,7 +201,39 @@ const CreateFarm = () => {
       const tx = await manifesterContract?.createManifestation(
         // chainId && MANIFESTER_ADDRESS[chainId], 
         // defarmData
-        currencies[Field.REWARD].wrapped.address, // rewardAddress
+        pairAddress,                                // depositAddress
+        currencies[Field.REWARD].wrapped.address,   // rewardAddress
+        enchanterId,                                //  enchanterId 
+        true,                                       // isNative
+        
+        // rewardDays,                               // duraDays
+        // feeDays,                                  // feeDays
+        // dailyReward                               // dailyReward
+      )
+
+      addTransaction(tx, {
+        summary: `Create Farm ${currencies[Field.REWARD].symbol}/${currencies[Field.DEPOSIT].symbol}`,
+      })
+      setCreated(true)
+      setCampaignId(campaignLength)
+      // router.push('/defarms')
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  const handleLaunch = async () => {
+    try {
+      if (!rewardSelected) return
+      // console.log([
+      currencies[Field.REWARD].wrapped.address,
+        rewardDays,
+        feeDays,
+        dailyReward
+      // ])
+
+      const tx = await manifesterContract?.launchManifestation(
+        // chainId && MANIFESTER_ADDRESS[chainId], 
         rewardDays,                               // duraDays
         feeDays,                                  // feeDays
         dailyReward                               // dailyReward
@@ -241,7 +293,23 @@ const CreateFarm = () => {
           </div>
           {/* END: DAILY REWARD INPUT */}
 
+          {/* START: REWARD ENCHANTER INPUT */}
+          <div className={
+            `flex flex-cols-2 border border-2 ${`border-purple`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
+          >
+            <Typography className={`w-full text-sm md:text-lg font-bold`}>
+              {`Referral Code`}
+            </Typography>
+            <Input.Numeric
+              value={enchanterId}
+              onUserInput={handleEnchanterId}
+              className={`text-white bg-dark-1000 w-[1/5] mr-3 text-center`}
+            />
+          </div>
+          {/* START: REWARD ENCHANTER INPUT */}
+
           {/* START: REWARD DURATION INPUT */}
+          {isCreated &&
           <div className={
             `flex flex-cols-2 border border-2 ${durationSet ? `border-purple` : `border-neonGreen`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
           >
@@ -255,8 +323,9 @@ const CreateFarm = () => {
             />
             {`Days`}
           </div>
+          }
           {/* START: REWARD DURATION INPUT */}
-
+          { isCreated &&
           <div className={
             `flex flex-cols-2 border border-2 ${feeSet ? `border-purple` : `border-neonGreen`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
           >
@@ -273,8 +342,10 @@ const CreateFarm = () => {
             />
             {`Days`}
           </div>
+          }
           {/* END: WITHDRAW FEE INPUT */}
-
+          
+        { isCreated &&
           <div className={`flex flex-col bg-dark-1000 p-3 border border-1 
             ${feeSet && rewardSet && assetSet ? `border-purple` : `border-dark-700`} 
             w-full rounded rounded-2xl space-y-1`}
@@ -312,6 +383,7 @@ const CreateFarm = () => {
               </Typography>
             </div>
           </div>
+        }
 
           {/* <Button
             color={rewardSet && durationSet ? `neonGreen` : `avaxRed`}
@@ -329,10 +401,12 @@ const CreateFarm = () => {
                   : 'CALCULATE DEPOSIT'}
             </Typography>
           </Button> */}
+        { isCreated &&  
           <div className={`flex flex-col bg-dark-1000 p-3 border border-1 
             ${rewardSet && assetSet && durationSet && feeSet ? `border-purple` : `border-dark-700`} 
             w-full rounded rounded-2xl space-y-1`}
-          >            <div className="flex justify-between">
+          >
+          <div className="flex justify-between">
               <Typography className="text-white" fontFamily={'medium'}>
                 {i18n._(t`Campaign Rewards`)}
               </Typography>
@@ -360,7 +434,28 @@ const CreateFarm = () => {
                   (dailyReward * rewardDays * bloodSacrifice), false, true)} ${rewardAsset?.wrapped.symbol}`}
               </Typography>
             </div>
-          </div>
+            </div>
+          }
+          <Button
+            color={assetSet ? `neonGreen` : `avaxRed`}
+            variant={`outlined`}
+            className={`w-full px-4 py-3 text-base rounded text-high-emphesis font-bold border
+            ${assetSet ? `border-neonGreen` : `border-avaxRed`}`}
+            onClick={() => handleCreate()}
+            disabled={!assetSet}
+          >
+            <Typography
+            // className={`text-white font-bold`}
+            >        
+                {assetSet ? `CREATE CAMPAIGN #${campaignId}` : `MISSING CAMPAIGN SETUP`}
+            </Typography>
+          </Button>
+            <Typography
+            className={`text-avaxRed text-center text-md font-bold`}
+            >        
+                {`Please take note of your campaign number: #${campaignId}. You will need this to launch your campaign.`}
+            </Typography>
+          { isCreated &&
           <Button
             color={rewardSet && assetSet && durationSet && feeSet ? `neonGreen` : `avaxRed`}
             variant={`outlined`}
@@ -371,9 +466,11 @@ const CreateFarm = () => {
           >
             <Typography
             // className={`text-white font-bold`}
-            >        {rewardSet && assetSet && durationSet && feeSet ? `CREATE CAMPAIGN` : `MISSING CAMPAIGN SETUP`}
+            >        
+                {rewardSet && assetSet && durationSet && feeSet ? `LAUNCH CAMPAIGN` : `MISSING CAMPAIGN SETUP`}
             </Typography>
           </Button>
+          }
 
           {showConfirmation && (
             <Modal isOpen={showConfirmation} onDismiss={
@@ -387,7 +484,7 @@ const CreateFarm = () => {
                   • <b> {i18n._(t`Daily Reward`)}</b>: {`${formatNumber(dailyReward, false, true)} ${rewardAsset.wrapped.symbol} Daily`} <br />
                   • <b> {i18n._(t`Campaign Duration`)}</b>: {`${rewardDays} Days`}<br />
                   • <b> {i18n._(t`Early Withdraw Fee`)}</b>: {`${feeDays}% Day One, 1% less daily.`}<br />
-                  • <b> {i18n._(t`Total Deposit`)}</b>:ß {`${formatNumber(
+                  • <b> {i18n._(t`Total Deposit`)}</b>: {`${formatNumber(
                     // campaign rewards
                     (dailyReward * rewardDays) +
                     // creation fee
@@ -422,7 +519,7 @@ const CreateFarm = () => {
                     color="purple"
                     variant={`bordered`}
                     className="w-full px-4 py-3 rounded text-white font-bold"
-                    onClick={() => handleCreate()}
+                    onClick={() => handleLaunch()}
                     disabled={!rewardSet || !assetSet || !durationSet || !feeSet}
                   >
                     <Typography

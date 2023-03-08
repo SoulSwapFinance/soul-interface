@@ -3,6 +3,7 @@ import { createAction } from '@reduxjs/toolkit'
 export enum Field {
   DEPOSIT = 'DEPOSIT',
   REWARD = 'REWARD',
+  ENCHANTER = 'ENCHANTER',
   DURATION = 'DURATION',
   FEE = 'FEE',
 }
