@@ -405,7 +405,7 @@ const CreateFarm = () => {
           <div className={`flex flex-col bg-dark-1000 p-3 border border-1 
             ${rewardSet && assetSet && durationSet && feeSet ? `border-purple` : `border-dark-700`} 
             w-full rounded rounded-2xl space-y-1`}
-          >            
+          >
           <div className="flex justify-between">
               <Typography className="text-white" fontFamily={'medium'}>
                 {i18n._(t`Campaign Rewards`)}
@@ -440,18 +440,20 @@ const CreateFarm = () => {
             color={assetSet ? `neonGreen` : `avaxRed`}
             variant={`outlined`}
             className={`w-full px-4 py-3 text-base rounded text-high-emphesis font-bold border
-          ${assetSet ? `border-neonGreen` : `border-avaxRed`}`}
+            ${assetSet ? `border-neonGreen` : `border-avaxRed`}`}
             onClick={() => handleCreate()}
             disabled={!assetSet}
           >
             <Typography
             // className={`text-white font-bold`}
-            >        {assetSet ? `CREATE CAMPAIGN #${campaignId}` : `MISSING CAMPAIGN SETUP`}
+            >        
+                {assetSet ? `CREATE CAMPAIGN #${campaignId}` : `MISSING CAMPAIGN SETUP`}
             </Typography>
           </Button>
             <Typography
             className={`text-avaxRed text-center text-md font-bold`}
-            >        {`Please take note of your campaign number: #${campaignId}. You will need this to launch your campaign.`}
+            >        
+                {`Please take note of your campaign number: #${campaignId}. You will need this to launch your campaign.`}
             </Typography>
           { isCreated &&
           <Button
@@ -464,7 +466,8 @@ const CreateFarm = () => {
           >
             <Typography
             // className={`text-white font-bold`}
-            >        {rewardSet && assetSet && durationSet && feeSet ? `LAUNCH CAMPAIGN` : `MISSING CAMPAIGN SETUP`}
+            >        
+                {rewardSet && assetSet && durationSet && feeSet ? `LAUNCH CAMPAIGN` : `MISSING CAMPAIGN SETUP`}
             </Typography>
           </Button>
           }
