@@ -792,7 +792,7 @@ export function useDeFarmInfo(): { status: string; defarmInfo: T } {
   const URL = chainId == 250 ? BASE_URL : `https://avax-api.soulswap.finance`
 
   const [defarmInfo, setInfo] = useState<T>({
-    address: "0x51cF7638869d3ecDCec3a144c3CCd227D1438c66",
+    address: "0x7605ed70c5bD956E20ea409E90f3409729482ee7",
     poolLength: "1",
     bloodSacrifice: "5000000000000000000"
   })  
