@@ -24,7 +24,7 @@ import Modal from 'components/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
 import { i18n } from '@lingui/core'
 import { useDeFarmInfo, useUserTokenInfo } from 'hooks/useAPI'
-import { MANIFESTER_ADDRESS, SOUL_ADDRESS, Token } from 'sdk'
+import { computePairAddress, FACTORY_ADDRESS, MANIFESTER_ADDRESS, SOUL_ADDRESS, Token, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import { formatNumber } from 'functions'
 import Input from 'components/Input'
 import useApprove from 'hooks/useApprove'
@@ -42,6 +42,7 @@ const CreateFarm = () => {
   const [feeDays, setFeeDays] = useState(14)
   const [feeSet, setFee] = useState(false)
   const [dailyReward, setDailyReward] = useState(0)
+  const [enchanterId, setEnchanterId] = useState(0)
   const [rewardSet, setReward] = useState(false)
   const [rewardDays, setRewardDays] = useState(30)
   const [durationSet, setDuration] = useState(false)
@@ -67,13 +68,20 @@ const CreateFarm = () => {
   const campaignReady = Boolean(rewardSet && durationSet && feeSet)
   const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
 
+  const pairAddress =
+    rewardAsset &&
+    computePairAddress({
+      factoryAddress: FACTORY_ADDRESS[chainId],
+      tokenA: rewardAsset.wrapped,
+      tokenB: WNATIVE[chainId]
+    })
 
   const handleRewardSelect = useCallback(
     (rewardCurrency: Token) => {
       onCurrencySelection(Field.REWARD, rewardCurrency)
       setRewardAsset(rewardCurrency)
       setAsset(true)
-    },
+      },
     [onCurrencySelection, setRewardAsset, setAsset]
   )
 
@@ -181,10 +189,14 @@ const CreateFarm = () => {
       const tx = await manifesterContract?.createManifestation(
         // chainId && MANIFESTER_ADDRESS[chainId], 
         // defarmData
-        currencies[Field.REWARD].wrapped.address, // rewardAddress
-        rewardDays,                               // duraDays
-        feeDays,                                  // feeDays
-        dailyReward                               // dailyReward
+        pairAddress,                                // depositAddress
+        currencies[Field.REWARD].wrapped.address,   // rewardAddress
+        enchanterId,                                //  enchanterId 
+        true,                                       // isNative
+        
+        // rewardDays,                               // duraDays
+        // feeDays,                                  // feeDays
+        // dailyReward                               // dailyReward
       )
 
       addTransaction(tx, {
@@ -387,7 +399,7 @@ const CreateFarm = () => {
                   • <b> {i18n._(t`Daily Reward`)}</b>: {`${formatNumber(dailyReward, false, true)} ${rewardAsset.wrapped.symbol} Daily`} <br />
                   • <b> {i18n._(t`Campaign Duration`)}</b>: {`${rewardDays} Days`}<br />
                   • <b> {i18n._(t`Early Withdraw Fee`)}</b>: {`${feeDays}% Day One, 1% less daily.`}<br />
-                  • <b> {i18n._(t`Total Deposit`)}</b>:ß {`${formatNumber(
+                  • <b> {i18n._(t`Total Deposit`)}</b>: {`${formatNumber(
                     // campaign rewards
                     (dailyReward * rewardDays) +
                     // creation fee
