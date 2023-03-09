@@ -83,7 +83,7 @@
                 "type": "uint256"
             },
             {
-                "indexed": true,
+                "indexed": false,
                 "internalType": "address",
                 "name": "depositAddress",
                 "type": "address"
@@ -198,6 +198,45 @@
         "inputs": [
             {
                 "internalType": "address",
+                "name": "rewardAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "enchanterId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "duraDays",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "dailyReward",
+                "type": "uint256"
+            }
+        ],
+        "name": "createManifestation",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "manifestation",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
                 "name": "depositAddress",
                 "type": "address"
             },
@@ -212,12 +251,17 @@
                 "type": "uint256"
             },
             {
-                "internalType": "bool",
-                "name": "isNative",
-                "type": "bool"
+                "internalType": "uint256",
+                "name": "duraDays",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "dailyReward",
+                "type": "uint256"
             }
         ],
-        "name": "createManifestation",
+        "name": "createManifestationOverride",
         "outputs": [
             {
                 "internalType": "address",
@@ -241,7 +285,7 @@
                 "type": "uint256"
             }
         ],
-        "name": "daos",
+        "name": "creators",
         "outputs": [
             {
                 "internalType": "address",
@@ -312,6 +356,30 @@
             }
         ],
         "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "depositAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            }
+        ],
+        "name": "generateManifestation",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "manifestation",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -544,34 +612,6 @@
         "inputs": [
             {
                 "internalType": "uint256",
-                "name": "id",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "duraDays",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "dailyReward",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "feeDays",
-                "type": "uint256"
-            }
-        ],
-        "name": "launchManifestation",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
                 "name": "",
                 "type": "uint256"
             }
@@ -581,11 +621,6 @@
             {
                 "internalType": "address",
                 "name": "mAddress",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "assetAddress",
                 "type": "address"
             },
             {
@@ -642,6 +677,19 @@
             }
         ],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_soulDAO",
+                "type": "address"
+            }
+        ],
+        "name": "setSoulDAO",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -713,19 +761,6 @@
             }
         ],
         "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "_soulDAO",
-                "type": "address"
-            }
-        ],
-        "name": "updateDAO",
-        "outputs": [],
-        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
