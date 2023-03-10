@@ -39,13 +39,14 @@ const CreateFarm = () => {
   // KEY DATA INPUT //
   const [rewardAsset, setRewardAsset] = useState<Token>()
   const [assetSet, setAsset] = useState(false)
-  // const [feeDays, setFeeDays] = useState(14)
-  // const [feeSet, setFee] = useState(false)
+  const [feeDays, setFeeDays] = useState(14)
+  const [feeSet, setFee] = useState(false)
   const [dailyReward, setDailyReward] = useState(0)
   const [enchanterId, setEnchanterId] = useState(0)
   const [rewardSet, setReward] = useState(false)
   const [rewardDays, setRewardDays] = useState(30)
   const [durationSet, setDuration] = useState(false)
+  // const [campaignId, setCampaignId] = useState(0)
   const [depositCalculated, setDeposit] = useState(false)
   // const [sacrifice, setSacrifice] = useState(0)
   const [totalReward, setTotalReward] = useState(0)
@@ -65,7 +66,7 @@ const CreateFarm = () => {
   const { userTokenInfo } = useUserTokenInfo(account, SOUL_ADDRESS[chainId])
   const balance = Number(userTokenInfo?.balance) / 1E18
   // const campaignLength = Number(defarmInfo?.poolLength)
-  const campaignReady = Boolean(rewardSet && durationSet)
+  const campaignReady = Boolean(rewardSet && durationSet && feeSet)
   // const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
 
   // const pairAddress =
@@ -115,15 +116,15 @@ const CreateFarm = () => {
     [onUserInput, setRewardDays, setDuration]
   )
 
-  // const handleWithdrawFee = useCallback(
-  //   (feeDays) => {
-  //     onUserInput(Field.FEE, feeDays.toString())
-  //     setFeeDays(Number(feeDays))
-  //     setFee(true)
-  //     console.log({ feeDays })
-  //   },
-  //   [onUserInput, setFeeDays]
-  // )
+  const handleWithdrawFee = useCallback(
+    (feeDays) => {
+      onUserInput(Field.FEE, feeDays.toString())
+      setFeeDays(Number(feeDays))
+      setFee(true)
+      console.log({ feeDays })
+    },
+    [onUserInput, setFeeDays]
+  )
 
   // const calculateDeposit = useCallback(
   //   () => {
@@ -203,7 +204,7 @@ const CreateFarm = () => {
         enchanterId,                                //  enchanterId 
         // true,                                    // isNative
         rewardDays,                                 // duraDays
-        // feeDays,                                 // feeDays
+        feeDays,                                    // feeDays
         dailyReward                                 // dailyReward
       )
 
@@ -260,7 +261,7 @@ const CreateFarm = () => {
           </div>
           {/* END: DAILY REWARD INPUT */}
 
-          {/* START: REWARD ENCHANTER INPUT */}
+          {/* START: ENCHANTER INPUT */}
           <div className={
             `flex flex-cols-2 border border-2 ${`border-purple`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
           >
@@ -273,7 +274,7 @@ const CreateFarm = () => {
               className={`text-white bg-dark-1000 w-[1/5] mr-3 text-center`}
             />
           </div>
-          {/* END: REWARD ENCHANTER INPUT */}
+          {/* END: ENCHANTER INPUT */}
 
           {/* START: REWARD DURATION INPUT */}
           <div className={
@@ -289,27 +290,23 @@ const CreateFarm = () => {
             />
             {`Days`}
           </div>
-          {/* END: REWARD DURATION INPUT */}
-    
           {/* START: WITHDRAW FEE INPUT */}
-          {/* <div className={
+          <div className={
             `flex flex-cols-2 border border-2 ${feeSet ? `border-purple` : `border-neonGreen`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
           >
             <Typography className={`w-full text-sm md:text-lg font-bold`}>
               {`${!feeSet ? `Set` : ``} Withdraw Fee Duration`}
             </Typography>
-
             <Input.Numeric
               value={feeDays}
               onUserInput={handleWithdrawFee}
               className={`text-white bg-dark-1000 w-[1/5] mr-3 text-center`}
             />
             {`Days`}
-          </div> */}
+          </div>
           {/* END: WITHDRAW FEE INPUT */}
-          
           <div className={`flex flex-col bg-dark-1000 p-3 border border-1 
-            ${rewardSet && assetSet ? `border-purple` : `border-dark-700`} 
+            ${feeSet && rewardSet && assetSet ? `border-purple` : `border-dark-700`} 
             w-full rounded rounded-2xl space-y-1`}
           >
             <div className="flex justify-between">
@@ -336,14 +333,14 @@ const CreateFarm = () => {
                 {`${rewardDays} Days`}
               </Typography>
             </div>
-            {/* <div className="flex justify-between">
+            <div className="flex justify-between">
               <Typography className="text-white" fontFamily={'medium'}>
                 {i18n._(t`Fee Duration`)}
               </Typography>
               <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
                 {`${feeDays} Days`}
               </Typography>
-            </div> */}
+            </div>
           </div>
 
           {/* <Button
@@ -363,7 +360,7 @@ const CreateFarm = () => {
             </Typography>
           </Button> */}
           <div className={`flex flex-col bg-dark-1000 p-3 border border-1 
-            ${rewardSet && assetSet && durationSet ? `border-purple` : `border-dark-700`} 
+            ${rewardSet && assetSet && durationSet && feeSet ? `border-purple` : `border-dark-700`} 
             w-full rounded rounded-2xl space-y-1`}
           >
           <div className="flex justify-between">
@@ -396,17 +393,17 @@ const CreateFarm = () => {
             </div>
             </div>
           <Button
-            color={rewardSet && assetSet && durationSet ? `neonGreen` : `avaxRed`}
+            color={rewardSet && assetSet && durationSet && feeSet ? `neonGreen` : `avaxRed`}
             variant={`outlined`}
             className={`w-full px-4 py-3 text-base rounded text-high-emphesis font-bold border
-          ${rewardSet && assetSet && durationSet ? `border-neonGreen` : `border-avaxRed`}`}
+          ${rewardSet && assetSet && durationSet && feeSet ? `border-neonGreen` : `border-avaxRed`}`}
             onClick={() => setShowConfirmation(true)}
             disabled={!campaignReady}
           >
             <Typography
             // className={`text-white font-bold`}
             >        
-                {rewardSet && assetSet && durationSet ? `LAUNCH CAMPAIGN` : `MISSING CAMPAIGN SETUP`}
+          {rewardSet && assetSet && durationSet && feeSet ? `LAUNCH CAMPAIGN` : `MISSING CAMPAIGN SETUP`}
             </Typography>
           </Button>
 
@@ -421,7 +418,7 @@ const CreateFarm = () => {
                   </div>
                   • <b> {i18n._(t`Daily Reward`)}</b>: {`${formatNumber(dailyReward, false, true)} ${rewardAsset.wrapped.symbol} Daily`} <br />
                   • <b> {i18n._(t`Campaign Duration`)}</b>: {`${rewardDays} Days`}<br />
-                  {/* • <b> {i18n._(t`Early Withdraw Fee`)}</b>: {`${feeDays}% Day One, 1% less daily.`}<br /> */}
+                  • <b> {i18n._(t`Early Withdraw Fee`)}</b>: {`${feeDays}% Day One, 1% less daily.`}<br />
                   • <b> {i18n._(t`Total Deposit`)}</b>: {`${formatNumber(
                     // campaign rewards
                     (dailyReward * rewardDays) +
@@ -441,31 +438,24 @@ const CreateFarm = () => {
                     {' '}  {i18n._(t`CONTACT US`)}
                   </a>
                 </Typography>
-                {/* {approved && */}
+                {approved &&
                   <Button
                     color="neonGreen"
                     variant={`outlined`}
                     className="w-full px-4 py-3 text-base rounded text-high-emphesis"
                     onClick={() => handleApprove()}
-                    disabled={!rewardSet || !assetSet || !durationSet}
+                    disabled={!rewardSet || !assetSet || !durationSet || !feeSet}
                   >
                     {inputError || `Approve ${rewardAsset.wrapped.symbol}`}
                   </Button>
-                {/* } */}
-                <Typography variant="sm" style={{fontStyle: 'italic'}} className="font-medium text-center">
-                  {`Must have ${formatNumber(
-                    // campaign rewards
-                    (dailyReward * rewardDays) +
-                    // creation fee
-                    (dailyReward * rewardDays * bloodSacrifice), false, true)} ${rewardAsset?.wrapped.symbol} to create DeFarm.`}
-                </Typography>
+                }
                 {/* {approved && */}
                   <Button
                     color="purple"
                     variant={`bordered`}
                     className="w-full px-4 py-3 rounded text-white font-bold"
                     onClick={() => handleCreate()}
-                    disabled={!rewardSet || !assetSet || !durationSet}
+                    disabled={!rewardSet || !assetSet || !durationSet || !feeSet}
                   >
                     <Typography
                       className={`text-white`}
