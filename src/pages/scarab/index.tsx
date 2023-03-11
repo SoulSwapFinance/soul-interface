@@ -1,31 +1,31 @@
 /* eslint-disable @next/next/link-passhref */
 import Head from 'next/head'
 import React, { useCallback, useEffect, useState } from 'react'
-import Search from '../../components/Search'
+// import Search from 'components/Search'
 import {
   ApprovalState,
   useApproveCallback,
-} from '../../hooks'
+} from 'hooks'
 
-import { classNames, isAddress, tryParseAmount } from '../../functions'
-import NavLink from '../../components/NavLink'
-import Link from 'next/link'
-import Card from '../../components/Card'
+import { classNames, isAddress, tryParseAmount } from 'functions'
+import NavLink from 'components/NavLink'
+// import Link from 'next/link'
+import Card from 'components/Card'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
-// import SoulLogo from '../../components/SoulLogo'
-import { useTransactionAdder } from '../../state/transactions/hooks'
-import { SCARAB_ADDRESS } from '../../constants'
-import useScarab from '../../features/scarab/useScarab'
+import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
+// import SoulLogo from 'components/SoulLogo'
+import { useTransactionAdder } from 'state/transactions/hooks'
+import { SCARAB_ADDRESS } from 'constants/index'
+import useScarab from 'features/scarab/useScarab'
 import { Disclosure } from '@headlessui/react'
 import moment from 'moment'
-import { useCurrency, useToken } from '../../hooks/Tokens'
-import { CurrencyAmount, SEANCE_ADDRESS, SOUL_ADDRESS } from '../../sdk'
-import { Button, ButtonConfirmed } from '../../components/Button'
+import { useCurrency, useToken } from 'hooks/Tokens'
+import { CurrencyAmount, SEANCE_ADDRESS, SOUL_ADDRESS } from 'sdk'
+import { Button, ButtonConfirmed } from 'components/Button'
 import { getAddress } from '@ethersproject/address'
-import { AutoRow } from '../../components/Row'
-import Loader from '../../components/Loader'
+import { AutoRow } from 'components/Row'
+import Loader from 'components/Loader'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
 
@@ -38,7 +38,7 @@ export default function Scarab(): JSX.Element {
   const addTransaction = useTransactionAdder()
   const [scarabs, setScarabs] = useState([])
 
-  const seance = useCurrency(SEANCE_ADDRESS[ChainId.FANTOM]) || undefined
+  const seance = useCurrency(SOUL_ADDRESS[ChainId.FANTOM]) || undefined
   const value = CurrencyAmount.fromRawAmount(seance, 1^28)
   const typedDepositValue = value
 

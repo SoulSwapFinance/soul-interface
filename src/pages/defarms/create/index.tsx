@@ -28,6 +28,7 @@ import { computePairAddress, FACTORY_ADDRESS, MANIFESTER_ADDRESS, SOUL_ADDRESS, 
 import { formatNumber } from 'functions'
 import Input from 'components/Input'
 import useApprove from 'hooks/useApprove'
+import Image from 'next/image'
 // import { formatNumber } from 'functions'
 
 const CreateFarm = () => {
@@ -41,7 +42,9 @@ const CreateFarm = () => {
   const [assetSet, setAsset] = useState(false)
   const [feeDays, setFeeDays] = useState(14)
   const [feeSet, setFee] = useState(false)
+  const [logoSet, setLogo] = useState(false)
   const [dailyReward, setDailyReward] = useState(0)
+  const [logoURI, setLogoURI] = useState('https://raw.githubusercontent.com/SoulSwapFinance/icons/prod/token/unknown.png')
   const [enchanterId, setEnchanterId] = useState(0)
   const [rewardSet, setReward] = useState(false)
   const [rewardDays, setRewardDays] = useState(30)
@@ -66,7 +69,7 @@ const CreateFarm = () => {
   const { userTokenInfo } = useUserTokenInfo(account, SOUL_ADDRESS[chainId])
   const balance = Number(userTokenInfo?.balance) / 1E18
   // const campaignLength = Number(defarmInfo?.poolLength)
-  const campaignReady = Boolean(rewardSet && durationSet && feeSet)
+  const campaignReady = Boolean(rewardSet && durationSet && feeSet && logoSet)
   // const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
 
   // const pairAddress =
@@ -103,7 +106,17 @@ const CreateFarm = () => {
       setEnchanterId(enchanterId)
       console.log({ enchanterId })
     },
-    [onUserInput, setRewardDays, setDuration]
+    [onUserInput, setEnchanterId]
+  )
+
+  const handleLogoURI = useCallback(
+    (logoURI) => {
+      onUserInput(Field.LOGO, logoURI.toString())
+      setLogoURI(logoURI)
+      setLogo(true)
+      console.log({ logoURI })
+    },
+    [onUserInput, setLogoURI, setLogo]
   )
 
   const handleRewardDays = useCallback(
@@ -205,7 +218,8 @@ const CreateFarm = () => {
         // true,                                    // isNative
         rewardDays,                                 // duraDays
         feeDays,                                    // feeDays
-        dailyReward                                 // dailyReward
+        dailyReward,                                // dailyReward
+        logoURI,                                // logoURI
       )
 
       addTransaction(tx, {
@@ -234,7 +248,7 @@ const CreateFarm = () => {
         <Container maxWidth="full" className="space-y-6">
           {/* START: DAILY REWARD INPUT */}
           <Typography
-            className={`font-bold text-xl text-center mb-4 border border-2 ${rewardSet && assetSet ? `border-purple` : `border-neonGreen`} m-2 p-2 rounded rounded-2xl`}
+            className={`font-bold blink text-xl text-center mb-4 border border-2 ${rewardSet && assetSet ? `border-purple` : `border-neonGreen`} m-2 p-2 rounded rounded-2xl`}
           >
             {`${!assetSet 
                 ? `Select Reward Asset` 
@@ -290,6 +304,7 @@ const CreateFarm = () => {
             />
             {`Days`}
           </div>
+
           {/* START: WITHDRAW FEE INPUT */}
           <div className={
             `flex flex-cols-2 border border-2 ${feeSet ? `border-purple` : `border-neonGreen`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
@@ -305,8 +320,24 @@ const CreateFarm = () => {
             {`Days`}
           </div>
           {/* END: WITHDRAW FEE INPUT */}
+
+          {/* START: LOGO URI INPUT */}
+          <div className={
+            `flex flex-cols-2 border border-2 ${logoSet ? `border-purple` : `border-neonGreen`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
+            >
+            <Typography className={`w-full text-sm md:text-lg font-bold`}>
+            {`${!logoSet ? `Set` : ``} Logo URL`}
+            </Typography>
+            <Input.Text
+              value={logoURI}
+              onUserInput={handleLogoURI}
+              className={`text-white bg-dark-1000 w-[1/5] mr-3 text-center`}
+            />
+          </div>
+          {/* END: LOGO URI INPUT */}
+
           <div className={`flex flex-col bg-dark-1000 p-3 border border-1 
-            ${feeSet && rewardSet && assetSet ? `border-purple` : `border-dark-700`} 
+            ${feeSet && rewardSet && assetSet && logoSet ? `border-purple` : `border-dark-700`} 
             w-full rounded rounded-2xl space-y-1`}
           >
             <div className="flex justify-between">
@@ -340,6 +371,16 @@ const CreateFarm = () => {
               <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
                 {`${feeDays} Days`}
               </Typography>
+            </div>
+            <div className="flex justify-between">
+              <Typography className="text-white" fontFamily={'medium'}>
+                {i18n._(t`Logo Preview`)}
+              </Typography>
+             <Image
+                src={logoURI}
+                height={24}
+                width={24}
+             />
             </div>
           </div>
 
