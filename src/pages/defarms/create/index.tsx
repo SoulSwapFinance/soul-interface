@@ -1,5 +1,5 @@
 // import { defaultAbiCoder } from '@ethersproject/abi'
-import { ethers } from 'ethers'
+// import { ethers } from 'ethers'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Button } from 'components/Button'
@@ -9,7 +9,7 @@ import CurrencyInputPanel from 'components/CurrencyInputPanel'
 import { Feature } from 'enums'
 import NetworkGuard from 'guards/Network'
 import { useManifesterContract } from 'hooks/useContract'
-import Layout from 'layouts/Underworld'
+import Layout from 'layouts/DeFarms'
 import { useActiveWeb3React } from 'services/web3'
 import { Field } from 'state/defarms/actions'
 import { useCreateFarmActionHandlers, useDerivedCreateFarmInfo } from 'state/defarms/hook'
@@ -438,15 +438,19 @@ const CreateFarm = () => {
                     {' '}  {i18n._(t`CONTACT US`)}
                   </a>
                 </Typography>
-                {approved &&
+                {!approved &&
                   <Button
-                    color="neonGreen"
-                    variant={`outlined`}
-                    className="w-full px-4 py-3 text-base rounded text-high-emphesis"
-                    onClick={() => handleApprove()}
+                  color="purple"
+                  variant={`bordered`}
+                  className="w-full px-4 py-3 rounded text-white font-bold"
+                  onClick={() => handleApprove()}
                     disabled={!rewardSet || !assetSet || !durationSet || !feeSet}
                   >
-                    {inputError || `Approve ${rewardAsset.wrapped.symbol}`}
+                  <Typography
+                      className={`text-white`}
+                    >
+                    {inputError || `Approve Creation`}
+                  </Typography>
                   </Button>
                 }
                 {/* {approved && */}
