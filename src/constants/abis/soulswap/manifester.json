@@ -213,6 +213,11 @@
             },
             {
                 "internalType": "uint256",
+                "name": "feeDays",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
                 "name": "dailyReward",
                 "type": "uint256"
             }
@@ -253,6 +258,11 @@
             {
                 "internalType": "uint256",
                 "name": "duraDays",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "feeDays",
                 "type": "uint256"
             },
             {
