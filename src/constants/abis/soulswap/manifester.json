@@ -111,6 +111,12 @@
                 "internalType": "address",
                 "name": "manifestation",
                 "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "logoURI",
+                "type": "string"
             }
         ],
         "name": "SummonedManifestation",
@@ -220,6 +226,11 @@
                 "internalType": "uint256",
                 "name": "dailyReward",
                 "type": "uint256"
+            },
+            {
+                "internalType": "string",
+                "name": "logoURI",
+                "type": "string"
             }
         ],
         "name": "createManifestation",
@@ -269,6 +280,11 @@
                 "internalType": "uint256",
                 "name": "dailyReward",
                 "type": "uint256"
+            },
+            {
+                "internalType": "string",
+                "name": "logoURI",
+                "type": "string"
             }
         ],
         "name": "createManifestationOverride",

@@ -161,7 +161,7 @@ export const SUMMONER_ADDRESS: { [chainId in ChainId]: string } = {
 }
 
 export const MANIFESTER_ADDRESS: AddressMap = {
-  [ChainId.FANTOM]: '0x08b8df07315d0d70AFa57684aD822Cc209104B7E',
+  [ChainId.FANTOM]: '0xa0FfF2Bcf8B1a29e68138ADaCa141Dc91f039A84',
   // [ChainId.AVALANCHE]: '',
 }
 
