@@ -414,7 +414,9 @@ const CreateFarm = () => {
             </div>
             <div className="flex justify-between">
               <Typography className="text-white" fontFamily={'medium'}>
-                {i18n._(t`Creation Fee (${bloodSacrifice * 100}%)`)}
+                {`Creation Fee (${
+                bloodSacrifice * 100
+                }%)`}
               </Typography>
               <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
                 {`${formatNumber(dailyReward * rewardDays * bloodSacrifice, false, true)} ${rewardAsset?.wrapped.symbol}`}
