@@ -80,6 +80,12 @@ const CreateFarm = () => {
   //     tokenB: WNATIVE[chainId]
   //   })
 
+  // handles: launch deFarm
+    const handleLaunch = useCallback(() => {
+      router.push(`/defarms/launch`)
+    }, [])
+  
+
   const handleRewardSelect = useCallback(
     (rewardCurrency: Token) => {
       onCurrencySelection(Field.REWARD, rewardCurrency)
@@ -118,6 +124,16 @@ const CreateFarm = () => {
     },
     [onUserInput, setLogoURI, setLogo]
   )
+
+  // const handleLaunchDelay = useCallback(
+  //   (logoURI) => {
+  //     onUserInput(Field.DELAY, logoURI.toString())
+  //     setLogoURI(logoURI)
+  //     setLogo(true)
+  //     console.log({ logoURI })
+  //   },
+  //   [onUserInput, setLogoURI, setLogo]
+  // )
 
   const handleRewardDays = useCallback(
     (rewardDays) => {
@@ -336,6 +352,21 @@ const CreateFarm = () => {
           </div>
           {/* END: LOGO URI INPUT */}
 
+          {/* START: LAUNCH DELAY INPUT */}
+          {/* <div className={
+            `flex flex-cols-2 border border-2 ${logoSet ? `border-purple` : `border-neonGreen`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
+            >
+            <Typography className={`w-full text-sm md:text-lg font-bold`}>
+            {`${!logoSet ? `Set` : ``} Launch Delay`}
+            </Typography>
+            <Input.Text
+              value={launchDelay}
+              onUserInput={handleLaunchDelay}
+              className={`text-white bg-dark-1000 w-[1/5] mr-3 text-center`}
+            />
+          </div> */}
+          {/* END: LAUNCH DELAY INPUT */}
+
           <div className={`flex flex-col bg-dark-1000 p-3 border border-1 
             ${feeSet && rewardSet && assetSet && logoSet ? `border-purple` : `border-dark-700`} 
             w-full rounded rounded-2xl space-y-1`}
@@ -345,7 +376,7 @@ const CreateFarm = () => {
                 {i18n._(t`Reward Asset`)}
               </Typography>
               <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
-                {rewardAsset?.wrapped.symbol}
+                {rewardAsset ? rewardAsset?.wrapped.symbol : ''}
               </Typography>
             </div>
             <div className="flex justify-between">
@@ -376,11 +407,12 @@ const CreateFarm = () => {
               <Typography className="text-white" fontFamily={'medium'}>
                 {i18n._(t`Logo Preview`)}
               </Typography>
-             <Image
-                src={logoURI}
-                height={24}
-                width={24}
-             />
+              <Image 
+                  src={logoURI}
+                  width={24}
+                  height={24}
+                  alt={`logo for defarm reward asset`}
+              />
             </div>
           </div>
 
@@ -409,8 +441,8 @@ const CreateFarm = () => {
                 {i18n._(t`Campaign Rewards`)}
               </Typography>
               <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
-                {`${formatNumber(dailyReward * rewardDays, false, true)} ${rewardAsset?.wrapped.symbol}`}
-              </Typography>
+                {`${formatNumber(dailyReward * rewardDays, false, true)} ${rewardAsset ? rewardAsset?.wrapped.symbol : ''}`}                
+                </Typography>
             </div>
             <div className="flex justify-between">
               <Typography className="text-white" fontFamily={'medium'}>
@@ -419,7 +451,7 @@ const CreateFarm = () => {
                 }%)`}
               </Typography>
               <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
-                {`${formatNumber(dailyReward * rewardDays * bloodSacrifice, false, true)} ${rewardAsset?.wrapped.symbol}`}
+                {`${formatNumber(dailyReward * rewardDays * bloodSacrifice, false, true)} ${rewardAsset ? rewardAsset?.wrapped.symbol : ''}`}
               </Typography>
             </div>
             <div className="flex justify-between">
@@ -431,7 +463,7 @@ const CreateFarm = () => {
                   // campaign rewards
                   (dailyReward * rewardDays) +
                   // creation fee
-                  (dailyReward * rewardDays * bloodSacrifice), false, true)} ${rewardAsset?.wrapped.symbol}`}
+                  (dailyReward * rewardDays * bloodSacrifice), false, true)} ${rewardAsset ? rewardAsset?.wrapped.symbol : ''}`}
               </Typography>
             </div>
             </div>
@@ -446,10 +478,24 @@ const CreateFarm = () => {
             <Typography
             // className={`text-white font-bold`}
             >        
-          {rewardSet && assetSet && durationSet && feeSet ? `LAUNCH CAMPAIGN` : `MISSING CAMPAIGN SETUP`}
+          {rewardSet && assetSet && durationSet && feeSet ? `CREATE CAMPAIGN` : `MISSING CAMPAIGN SETUP`}
             </Typography>
           </Button>
-
+          {rewardSet && assetSet && durationSet && feeSet &&
+            <Button
+              color={rewardSet && assetSet && durationSet && feeSet ? `neonGreen` : `avaxRed`}
+              variant={`outlined`}
+              className={`w-full px-4 py-3 text-base rounded text-high-emphesis font-bold border
+            ${rewardSet && assetSet && durationSet && feeSet ? `border-neonGreen` : `border-avaxRed`}`}
+              disabled={!campaignReady}
+              onClick={handleLaunch}
+              // onClick={handleLaunchCampaign(delayDays)}
+            >
+                <Typography>        
+              { `LAUNCH CAMPAIGN` }
+                </Typography>
+            </Button>
+          }
           {showConfirmation && (
             <Modal isOpen={showConfirmation} onDismiss={
               () => setShowConfirmation(false)}>

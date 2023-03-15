@@ -5,6 +5,7 @@ export enum Field {
   REWARD = 'REWARD',
   ENCHANTER = 'ENCHANTER',
   LOGO = 'LOGO',
+  DELAY = 'DELAY',
   DURATION = 'DURATION',
   FEE = 'FEE',
 }

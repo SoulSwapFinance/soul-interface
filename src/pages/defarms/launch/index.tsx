@@ -208,7 +208,12 @@ export default function Manifestations(): JSX.Element {
                                  {index}
                                 </div>
                               <div className="flex col-span items-center">
-                                 <Image className={'flex justify-center'} src={defarm.logoURI} height={36} width={36} />
+                                 <Image className={'flex justify-center'} 
+                                    src={defarm.logoURI}
+                                    width={36}
+                                    height={36}
+                                    alt={`logo for defarm reward asset`}
+                                  />
                               </div>
                                 <div className="flex flex-col justify-center">
                                     {defarm?.symbol}

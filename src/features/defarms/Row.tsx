@@ -287,7 +287,12 @@ export const ActiveRow = ({ pid }) => {
                             {/* DEPOSIT LOGO */}
                             <div className="items-center">
                                 <FarmItemBox>
-                                    <Image src={logoURI} width={40} height={40} />
+                                    <Image 
+                                        src={logoURI}
+                                        width={40}
+                                        height={40}
+                                        alt={`logo for defarm reward asset`}
+                                    />
                                     {/* <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} /> */}
                                 </FarmItemBox>
                                 { pid }

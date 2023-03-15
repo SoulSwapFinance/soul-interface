@@ -152,12 +152,12 @@ const Layout: FC<LayoutProps> = ({ left, children, right }) => {
                 <div className={'mt-4'}/>
                 <div className={'mt-4'}>
             <NavLink
-                href='/balances'
+                href='/defarms/launch'
             >
               <Button variant="outlined" color={'blue'}>
                   <div className={`flex text-sm font-bold text-${'blue'} justify-left`}>
                     {/* <ArrowLeftIcon className={'mt-1 mr-1'} width="1em" height="1em" /> */}
-                    {`CoffinBox Balance`}
+                    {`Launch Campaign`}
                   </div>
               </Button>
             </NavLink>
