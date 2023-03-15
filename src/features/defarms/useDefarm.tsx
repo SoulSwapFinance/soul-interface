@@ -10,7 +10,7 @@ export default function useDefarm() {
   const getDefarmByManifester = useCallback(
     async (manifester?: string) => {
       try {
-        const manifestationId = await contract?.getManifestationsByManifester(MANIFESTER_ADDRESS[chainId])
+        const manifestationId = await contract?.getManifestations()
         const result = []
         if (manifestationId.length > 0) {
           for (const id of manifestationId) {
