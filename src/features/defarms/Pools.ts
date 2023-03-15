@@ -15,10 +15,10 @@ export const FantomPools = [
   {
     pid: 0,
   },
-  {
-    pid: 1,
-  },
-  {
-    pid: 2,
-  },
+  // {
+  //   pid: 1,
+  // },
+  // {
+  //   pid: 2,
+  // },
 ]

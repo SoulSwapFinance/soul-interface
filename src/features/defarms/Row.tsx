@@ -76,7 +76,7 @@ export const ActiveRow = ({ pid }) => {
     const earnedAmount = Number(defarmUserInfo.pendingRewards)
     const earnedValue = Number(defarmUserInfo.pendingValue)
     const lpPrice = Number(defarmUserInfo.lpPrice)
-    const withdrawFee = Number(defarmUserInfo.currentRate)
+    const withdrawFee = Number(defarmUserInfo.currentRate) / 1E18
     const walletBalance = Number(defarmUserInfo.walletBalance)
     // const lastWithdrawTime = Number(defarmUserInfo.lastWithdrawTime)
     // const secondsRemaining = Number(defarmUserInfo.secondsRemaining)
@@ -116,8 +116,8 @@ export const ActiveRow = ({ pid }) => {
     const textColor = !isActive ? "text-pink" : "text-dark-600"
 
     // PAIR INFO //
-    const token0 = new Token(chainId, WNATIVE_ADDRESS[chainId], 18)
-    const token1 = new Token(chainId, rewardAddress, 18)
+    // const token0 = new Token(chainId, WNATIVE_ADDRESS[chainId], 18)
+    // const token1 = new Token(chainId, rewardAddress, 18)
 
     // CONTRACTS //
     const ManifesterContract = useManifesterContract()
@@ -287,15 +287,18 @@ export const ActiveRow = ({ pid }) => {
                             {/* DEPOSIT LOGO */}
                             <div className="items-center">
                                 <FarmItemBox>
+                                    <div
+                                        className={`flex justify-center`}
+                                    >
                                     <Image 
                                         src={logoURI}
                                         width={40}
                                         height={40}
                                         alt={`logo for defarm reward asset`}
-                                    />
+                                        />
+                                    </div>
                                     {/* <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} /> */}
                                 </FarmItemBox>
-                                { pid }
                             </div>
 
                             {/* STAKED VALUE */}
