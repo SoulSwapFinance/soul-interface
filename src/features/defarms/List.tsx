@@ -22,6 +22,11 @@ export const FarmList = () => {
     router.push(`/defarms/create`)
   }, [])
 
+  // handles: launch deFarm
+  const handleLaunch = useCallback(() => {
+    router.push(`/defarms/launch`)
+  }, [])
+
   const ftmList = FantomPools.map((farm) => (
     <ActiveRow
       key={farm.pid}
@@ -94,6 +99,7 @@ export const FarmList = () => {
           </Button>
         </NavLink>
       </div>
+      <div className={'grid grid-cols-2 gap-2'}>
         <Button 
             variant={'bordered'}
             color={'purple'}
@@ -109,6 +115,22 @@ export const FarmList = () => {
               {i18n._(t`Create Farm`)}
             </Typography>
           </Button>
+        <Button 
+            variant={'bordered'}
+            color={'purple'}
+            className={
+                `flex mt-2 font-bold justify-center border border-2 
+                rounded rounded-xl`
+              }
+            onClick={handleLaunch}
+          >
+            <Typography
+              className={`text-white`}
+            >
+              {i18n._(t`Launch Campaign`)}
+            </Typography>
+          </Button>
+        </div>
       <Typography className="text-2xl bg-dark-1000 mt-6 border border-dark-600 p-3 font-bold text-center">Decentralized Farms</Typography>
       <Active />
       <>{chainId == ChainId.FANTOM ? ftmList : avaxList}</>

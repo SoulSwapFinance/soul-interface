@@ -23,18 +23,8 @@
             },
             {
                 "internalType": "address",
-                "name": "_nativeOracle",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
                 "name": "_enchantress",
                 "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "_oracleDecimals",
-                "type": "uint256"
             },
             {
                 "internalType": "string",
@@ -347,25 +337,6 @@
                 "type": "uint256"
             }
         ],
-        "name": "creators",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
         "name": "eInfo",
         "outputs": [
             {
@@ -525,12 +496,31 @@
     },
     {
         "inputs": [],
-        "name": "getNativePrice",
+        "name": "getManifestations",
         "outputs": [
             {
-                "internalType": "int256",
+                "internalType": "uint256[]",
                 "name": "",
-                "type": "int256"
+                "type": "uint256[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_manifester",
+                "type": "address"
+            }
+        ],
+        "name": "getManifestationsByManifester",
+        "outputs": [
+            {
+                "internalType": "uint256[]",
+                "name": "",
+                "type": "uint256[]"
             }
         ],
         "stateMutability": "view",
@@ -729,6 +719,30 @@
         "type": "function"
     },
     {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "name": "manifestationsByManifester",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [],
         "name": "nativeSymbol",
         "outputs": [
@@ -739,6 +753,24 @@
             }
         ],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "delayDays",
+                "type": "uint256"
+            }
+        ],
+        "name": "setDelay",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {

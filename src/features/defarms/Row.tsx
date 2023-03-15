@@ -30,6 +30,7 @@ import { t } from '@lingui/macro'
 import { i18n } from '@lingui/core'
 // import { Route } from 'react-router-dom'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 
 const HideOnSmall = styled.div`
 @media screen and (max-width: 900px) {
@@ -80,17 +81,18 @@ export const ActiveRow = ({ pid }) => {
     // const lastWithdrawTime = Number(defarmUserInfo.lastWithdrawTime)
     // const secondsRemaining = Number(defarmUserInfo.secondsRemaining)
     // const currentRate = Number(defarmUserInfo.currentRate)
-
+    
     const feeAmount = withdrawFee * stakedBalance / 100
     const withdrawable = stakedBalance - feeAmount
     const feeValue = feeAmount * lpPrice
-
+    
     // DEFARM POOL INFO //
     const { defarmPoolInfo } = useDeFarmPoolInfo(pid)
     const mAddress = defarmPoolInfo.mAddress
     const rewardSymbol = defarmPoolInfo.rewardSymbol
     const liquidity = defarmPoolInfo.tvl
     const APR = defarmPoolInfo.apr
+    const logoURI = defarmPoolInfo.logoURI
     const pairStatus = defarmPoolInfo.status
     const rewardAddress = defarmPoolInfo.rewardToken
     const depositAddress = defarmPoolInfo.lpAddress
@@ -285,8 +287,10 @@ export const ActiveRow = ({ pid }) => {
                             {/* DEPOSIT LOGO */}
                             <div className="items-center">
                                 <FarmItemBox>
-                                    <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
+                                    <Image src={logoURI} width={40} height={40} />
+                                    {/* <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} /> */}
                                 </FarmItemBox>
+                                { pid }
                             </div>
 
                             {/* STAKED VALUE */}
