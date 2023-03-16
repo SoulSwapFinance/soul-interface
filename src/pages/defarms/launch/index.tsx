@@ -143,7 +143,7 @@ export default function Manifestations(): JSX.Element {
                   color={`ftmBlue`}
                 >
                 <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
-                  {i18n._(t`View Farms`)}
+                  {i18n._(t`View DeFarms`)}
                 </a>
                 </Button>
               </NavLink>
@@ -157,7 +157,7 @@ export default function Manifestations(): JSX.Element {
                   color={`ftmBlue`}
                 >
                 <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
-                  {i18n._(t`Create Farm`)}
+                  {i18n._(t`Create DeFarm`)}
                 </a>
                 </Button>
               </NavLink>
