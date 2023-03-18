@@ -583,34 +583,33 @@ export const ActiveRow = ({ pid }) => {
                                 {/* CREATE ASSET PAIR */}
                                 {isActive &&
                                     <NavLink
-                                        href={`/exchange/add/${NATIVE[chainId].symbol}/${rewardAddress}`}
-                                    >
-                                        <a>
-                                            <SubmitButton
-                                                height="2rem"
+                                    href={`/exchange/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`}
+                                    // /add/${NATIVE[chainId].symbol}/${assetToken?.wrapped.address}
+                                >
+                                    <a>
+                                        <SubmitButton
+                                            height="2rem"
+                                            primaryColor={buttonColor}
+                                            color={buttonTextColor}
+                                            margin=".5rem 0 0rem 0"
+                                        >
+                                            <TokenPairLink
+                                                target="_blank"
+                                                rel="noopener"
                                                 primaryColor={buttonColor}
                                                 color={buttonTextColor}
-                                                margin=".5rem 0 0rem 0"
+                                                href={`/exchange/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`}
+                                                // /add/${NATIVE[chainId].symbol}/${assetToken?.wrapped.address}
                                             >
-                                                <TokenPairLink
-                                                    target="_blank"
-                                                    rel="noopener"
-                                                    primaryColor={buttonColor}
-                                                    color={buttonTextColor}
-                                                    href=
-                                                    // [if] token0 is the native token, then only use the address of token1 [else] token0 address
-                                                    {`/exchange/add`}
-                                                    // /${NATIVE[chainId].symbol}/${rewardAddress}
-                                                >
-                                                    <div className="flex text-lg gap-2">
-                                                        <PlusCircleIcon width={26} className={classNames(`text-white`)} />
-                                                        {/* {symbol} */}
-                                                        CREATE {symbol} LP
-                                                    </div>
-                                                </TokenPairLink>
-                                            </SubmitButton>
-                                        </a>
-                                    </NavLink>
+                                                <div className="flex text-lg gap-2">
+                                                    <PlusCircleIcon width={26} className={classNames(`text-white`)} />
+                                                    {/* {farm.lpSymbol} */}
+                                                    CREATE {symbol} LP
+                                                </div>
+                                            </TokenPairLink>
+                                        </SubmitButton>
+                                    </a>
+                                </NavLink>
                                 }
 
                                 {/* EARNED */}
