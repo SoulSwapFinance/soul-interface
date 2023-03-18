@@ -389,6 +389,17 @@ export const SEANCE_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '',
 }
 
+export const SURV_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '', //
+  [ChainId.AVALANCHE]: '', //
+  [ChainId.MATIC]: '',
+  [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
+}
+
 export const ENCHANT_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
