@@ -24,7 +24,7 @@ import Modal from 'components/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
 import { i18n } from '@lingui/core'
 import { useDeFarmInfo, useUserTokenInfo } from 'hooks/useAPI'
-import { computePairAddress, FACTORY_ADDRESS, MANIFESTER_ADDRESS, SOUL_ADDRESS, Token, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
+import { computePairAddress, FACTORY_ADDRESS, MANIFESTER_ADDRESS, NATIVE, SOUL_ADDRESS, Token, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import { formatNumber } from 'functions'
 import Input from 'components/Input'
 import useApprove from 'hooks/useApprove'
@@ -478,7 +478,7 @@ const CreateFarm = () => {
             <Typography
             // className={`text-white font-bold`}
             >        
-          {rewardSet && assetSet && durationSet && feeSet ? `CREATE CAMPAIGN` : `MISSING CAMPAIGN SETUP`}
+          {rewardSet && assetSet && durationSet && feeSet ? `(1) CREATE CAMPAIGN` : `MISSING CAMPAIGN SETUP`}
             </Typography>
           </Button>
           {rewardSet && assetSet && durationSet && feeSet &&
@@ -492,7 +492,7 @@ const CreateFarm = () => {
               // onClick={handleLaunchCampaign(delayDays)}
             >
                 <Typography>        
-              { `LAUNCH CAMPAIGN` }
+              { `(2) LAUNCH CAMPAIGN` }
                 </Typography>
             </Button>
           }
@@ -514,12 +514,18 @@ const CreateFarm = () => {
                     // creation fee
                     (dailyReward * rewardDays * bloodSacrifice), false, true)} ${rewardAsset?.wrapped.symbol}`}
                   <br />
-
+              
                   {/* <div className="mt-6 text-center">
                   <i><b> {i18n._(t`Update Logo? Submit PR (or just DM Buns)`)}</b></i>.
               </div> */}
 
                   {/* <b>100% of the fee</b> goes towards building our protocol-owned liquidity, which brings about long-term sustainability to our platform. */}
+                </Typography>
+                <Typography variant="sm" className="text-center">
+                {`You're incentivizing ${rewardAsset.wrapped.symbol}-${NATIVE[chainId].symbol} deposits.`}
+                {
+                  // , please ensure you have created the pair before creating a Campaign.
+                }
                 </Typography>
                 <Typography variant="sm" className="font-medium text-center">
                   {i18n._(t`QUESTIONS OR CONCERNS?`)}
