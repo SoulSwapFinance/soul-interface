@@ -116,14 +116,21 @@ export const BondList = () => {
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/autostake'}>
             <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span>Stake</span>
+              <span>Vault</span>
             </a>
           </NavLink>
         </Button>
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/summoner'}>
             <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span>Summon</span>
+              <span>Farms</span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="purple" size="lg">
+          <NavLink href={'/defarms'}>
+            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              <span>DeFarms</span>
             </a>
           </NavLink>
         </Button>

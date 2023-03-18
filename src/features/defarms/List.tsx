@@ -60,46 +60,6 @@ export const FarmList = () => {
   return (
     <div>
       <div className="flex ml-2 mt-2 mr-2 mb-4 gap-1 items-center justify-center">
-        <NavLink href={'/soul/dashboard'}>
-          <Button variant="filled"
-            color={"purple"}
-            size="lg">
-            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> {i18n._(t`Data`)} </span>
-            </a>
-          </Button>
-        </NavLink>
-        <NavLink href={'/bonds'}>
-          <Button variant="filled"
-            color={"purple"}
-            size="lg">
-            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> {i18n._(t`Bond`)} </span>
-            </a>
-          </Button>
-        </NavLink>
-        <NavLink href={'/lend'}>
-          <Button variant="filled"
-            color={"purple"}
-            size="lg"
-          >
-            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> {i18n._(t`Lend`)} </span>
-            </a>
-          </Button>
-        </NavLink>
-        <NavLink href={'/autostake'}>
-          <Button variant="filled"
-            color={"purple"}
-            size="lg"
-          >
-            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> {i18n._(t`Vault`)} </span>
-            </a>
-          </Button>
-        </NavLink>
-      </div>
-      <div className={'grid grid-cols-2 gap-2'}>
         <Button 
             variant={'bordered'}
             color={'purple'}

@@ -203,16 +203,23 @@ export default function AutoStake() {
       </div>
       <div className="flex ml-2 mr-2 mb-4 mt-2 gap-1 items-center justify-center">
         <Button variant="filled" color="purple" size="lg">
-          <NavLink href={'/bonds'}>
+          <NavLink href={'/summoner'}>
             <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span>Mint</span>
+              <span>Farms</span>
             </a>
           </NavLink>
         </Button>
         <Button variant="filled" color="purple" size="lg">
-          <NavLink href={'/summoner'}>
+          <NavLink href={'/bonds'}>
             <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span>Summon</span>
+              <span>Bonds</span>
+            </a>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="purple" size="lg">
+          <NavLink href={'/defarms'}>
+            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              <span>DeFarms</span>
             </a>
           </NavLink>
         </Button>
