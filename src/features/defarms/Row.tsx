@@ -92,6 +92,13 @@ export const ActiveRow = ({ pid }) => {
     const rewardSymbol = defarmPoolInfo.rewardSymbol
     const liquidity = defarmPoolInfo.tvl
     const APR = defarmPoolInfo.apr
+    // const liquidity = Number(defarmPoolInfo.tvl)
+    // const depositedAssets = Number(defarmPoolInfo.lpBalance)
+    // const liquidity = depositedAssets * lpPrice
+    // const annualRewards = Number(defarmPoolInfo.annualRewards)
+    // const annualRewardsValue = annualRewards * lpPrice
+    // const APR = annualRewardsValue / liquidity
+    // const APR = defarmPoolInfo.apr
     const logoURI = defarmPoolInfo.logoURI
     const pairStatus = defarmPoolInfo.status
     const rewardAddress = defarmPoolInfo.rewardToken
@@ -232,16 +239,15 @@ export const ActiveRow = ({ pid }) => {
     const handleDeposit = async (amount) => {
         let tx
         try {
-            tx = await ManifestationContract?.deposit(Number(depositValue).toFixed(18).toBigNumber(18))
+            tx = await ManifestationContract?.deposit((Number(depositValue)).toFixed(18).toBigNumber(18))
             await tx.wait()
         } catch (e) {
             const smallerValue = Number(depositValue) - 0.000001
-            tx = await ManifestationContract?.deposit(Number(smallerValue).toFixed(18).toBigNumber(18))
+            tx = await ManifestationContract?.deposit((Number(smallerValue)).toFixed(18).toBigNumber(18))
             await tx.wait()
             console.log(e)
         }
     }
-    
 
     // runs only on initial render/mount
     // useEffect(() => {
@@ -273,7 +279,6 @@ export const ActiveRow = ({ pid }) => {
     return (
         <>
             <div className="flex justify-center w-full">
-                <FarmContainer>
                     <div className={classNames("bg-dark-900 p-3 border border-blue", !hasBalance && "border-dark-1000",
                         !isActive ? "hover:border-pink"
                             : hasBalance ? "border-dark-600"
@@ -285,11 +290,15 @@ export const ActiveRow = ({ pid }) => {
                         <FarmContentWrapper>
 
                             {/* DEPOSIT LOGO */}
-                            <div className="items-center">
+                            <div className="items-center -ml-6 sm:mr-24">
                                 <FarmItemBox>
                                     <div
                                         className={`flex justify-center`}
                                     >
+                                        {/* <CurrencyLogo
+                                            currency={rewardToken}
+                                            size={36}
+                                        /> */}
                                     <Image 
                                         src={logoURI}
                                         width={40}
@@ -304,7 +313,7 @@ export const ActiveRow = ({ pid }) => {
                             {/* STAKED VALUE */}
                             <HideOnMobile>
                                 <FarmItemBox>
-                                    <FarmItem>
+                                    <div className={'mr-16 sm:mr-36'}>
                                         {Number(APR).toString() === '0.00' ? (
                                             <Text padding="0" fontSize="1rem" color="#666">
                                                 0
@@ -320,27 +329,28 @@ export const ActiveRow = ({ pid }) => {
                                                 }
                                             </Text>
                                         )}
-                                    </FarmItem>
+                                    </div>
                                 </FarmItemBox>
                             </HideOnMobile>
 
                             {/* % APR */}
                             <FarmItemBox>
-                                <FarmItem>
+                                <div className={'sm:mr-12'}>
                                     {Number(APR).toString() === '0.00' ? (
                                         <Text padding="0" fontSize="1rem" color="#666">
                                             0
                                         </Text>
                                     ) : (
                                         <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                            {Number(APR).toFixed()}%
+                                            {formatNumber(APR, false, true)}%
                                         </Text>
                                     )}
-                                </FarmItem>
+                                </div>
                             </FarmItemBox>
 
                             {/* PENDING REWARDS */}
                             <FarmItemBox className="flex">
+                                <div className={'mr-2'}>
                                 {earnedAmount.toFixed(0).toString() === '0' ? (
                                     <div className="flex flex-cols-2 sm:ml-12 gap-1">
                                         {formatNumber(0, false, true)}<CurrencyLogo currency={rewardToken} size={24} />
@@ -350,6 +360,7 @@ export const ActiveRow = ({ pid }) => {
                                         {formatNumber(earnedAmount.toFixed(0), false, true)}<CurrencyLogo currency={rewardToken} size={24} />
                                     </div>
                                 )}
+                            </div>
                             </FarmItemBox>
 
                             {/* LIQUIDITY (TVL) */}
@@ -367,10 +378,8 @@ export const ActiveRow = ({ pid }) => {
                                     </div>
                                 )}
                             </FarmItemBox>
-
                         </FarmContentWrapper>
                     </div>
-                </FarmContainer>
             </div>
 
             {/*------ DROPDOWN OPTIONS PANEL ------*/}
@@ -534,11 +543,11 @@ export const ActiveRow = ({ pid }) => {
                                         value={depositValue}
                                         balance={walletBalance.toString()}
                                         id={pid}
-                                    />
+                                />
                                 }
 
                                 {/* UN-APPROVED */}
-                                {!approved && hasBalance && (
+                                {/* {!approved && hasBalance && ( */}
                                     <SubmitButton
                                         height="2rem"
                                         primaryColor={buttonColor}
@@ -549,7 +558,7 @@ export const ActiveRow = ({ pid }) => {
                                             {i18n._(t`APPROVE ASSET`)}
                                         </div>
                                     </SubmitButton>
-                                )}
+                                {/* )} */}
 
                                 {/* APPROVED */}
                                 {approved && hasBalance && (
@@ -564,7 +573,7 @@ export const ActiveRow = ({ pid }) => {
                                     >
                                         <div className="flex text-lg gap-2">
                                             <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                            {i18n._(t`DEPOSIT ${symbol}`)}
+                                            {i18n._(t`DEPOSIT `)} {`${symbol} LP`}
                                         </div>
                                     </SubmitButton>
                                 )}
@@ -588,7 +597,8 @@ export const ActiveRow = ({ pid }) => {
                                                     color={buttonTextColor}
                                                     href=
                                                     // [if] token0 is the native token, then only use the address of token1 [else] token0 address
-                                                    {`/exchange/add/${NATIVE[chainId].symbol}/${rewardAddress}`}
+                                                    {`/exchange/add`}
+                                                    // /${NATIVE[chainId].symbol}/${rewardAddress}
                                                 >
                                                     <div className="flex text-lg gap-2">
                                                         <PlusCircleIcon width={26} className={classNames(`text-white`)} />
