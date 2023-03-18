@@ -570,6 +570,14 @@
     },
     {
       "chainId": 250,
+      "name": "SurvToken",
+      "address": "0x5d9EaFC54567F34164A269Ba6C099068df6ef651",
+      "symbol": "SURV",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x5d9EaFC54567F34164A269Ba6C099068df6ef651/logo.png"
+    },
+    {
+      "chainId": 250,
       "name": "Sushi",
       "address": "0xae75A438b2E0cB8Bb01Ec1E1e376De11D44477CC",
       "symbol": "SUSHI",
