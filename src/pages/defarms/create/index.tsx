@@ -1,5 +1,5 @@
 // import { defaultAbiCoder } from '@ethersproject/abi'
-import { ethers } from 'ethers'
+// import { ethers } from 'ethers'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Button } from 'components/Button'
@@ -9,7 +9,7 @@ import CurrencyInputPanel from 'components/CurrencyInputPanel'
 import { Feature } from 'enums'
 import NetworkGuard from 'guards/Network'
 import { useManifesterContract } from 'hooks/useContract'
-import Layout from 'layouts/Underworld'
+import Layout from 'layouts/DeFarms'
 import { useActiveWeb3React } from 'services/web3'
 import { Field } from 'state/defarms/actions'
 import { useCreateFarmActionHandlers, useDerivedCreateFarmInfo } from 'state/defarms/hook'
@@ -28,6 +28,7 @@ import { computePairAddress, FACTORY_ADDRESS, MANIFESTER_ADDRESS, SOUL_ADDRESS, 
 import { formatNumber } from 'functions'
 import Input from 'components/Input'
 import useApprove from 'hooks/useApprove'
+import Image from 'next/image'
 // import { formatNumber } from 'functions'
 
 const CreateFarm = () => {
@@ -41,14 +42,15 @@ const CreateFarm = () => {
   const [assetSet, setAsset] = useState(false)
   const [feeDays, setFeeDays] = useState(14)
   const [feeSet, setFee] = useState(false)
+  const [logoSet, setLogo] = useState(false)
   const [dailyReward, setDailyReward] = useState(0)
+  const [logoURI, setLogoURI] = useState('https://raw.githubusercontent.com/SoulSwapFinance/icons/prod/token/unknown.png')
   const [enchanterId, setEnchanterId] = useState(0)
   const [rewardSet, setReward] = useState(false)
   const [rewardDays, setRewardDays] = useState(30)
   const [durationSet, setDuration] = useState(false)
-  const [campaignId, setCampaignId] = useState(0)
+  // const [campaignId, setCampaignId] = useState(0)
   const [depositCalculated, setDeposit] = useState(false)
-  const [isCreated, setCreated] = useState(false)
   // const [sacrifice, setSacrifice] = useState(0)
   const [totalReward, setTotalReward] = useState(0)
 
@@ -66,17 +68,23 @@ const CreateFarm = () => {
   const bloodSacrifice = Number(defarmInfo?.bloodSacrifice) / 1E18 / 100 // converts to %
   const { userTokenInfo } = useUserTokenInfo(account, SOUL_ADDRESS[chainId])
   const balance = Number(userTokenInfo?.balance) / 1E18
-  const campaignLength = Number(defarmInfo?.poolLength)
-  const campaignReady = Boolean(rewardSet && durationSet && feeSet)
-  const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
+  // const campaignLength = Number(defarmInfo?.poolLength)
+  const campaignReady = Boolean(rewardSet && durationSet && feeSet && logoSet)
+  // const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
 
-  const pairAddress =
-    rewardAsset &&
-    computePairAddress({
-      factoryAddress: FACTORY_ADDRESS[chainId],
-      tokenA: rewardAsset.wrapped,
-      tokenB: WNATIVE[chainId]
-    })
+  // const pairAddress =
+  //   rewardAsset &&
+  //   computePairAddress({
+  //     factoryAddress: FACTORY_ADDRESS[chainId],
+  //     tokenA: rewardAsset.wrapped,
+  //     tokenB: WNATIVE[chainId]
+  //   })
+
+  // handles: launch deFarm
+    const handleLaunch = useCallback(() => {
+      router.push(`/defarms/launch`)
+    }, [])
+  
 
   const handleRewardSelect = useCallback(
     (rewardCurrency: Token) => {
@@ -102,11 +110,30 @@ const CreateFarm = () => {
     (enchanterId) => {
       onUserInput(Field.ENCHANTER, enchanterId.toString())
       setEnchanterId(enchanterId)
-      setCampaignId(campaignLength)
       console.log({ enchanterId })
     },
-    [onUserInput, setRewardDays, setDuration]
+    [onUserInput, setEnchanterId]
   )
+
+  const handleLogoURI = useCallback(
+    (logoURI) => {
+      onUserInput(Field.LOGO, logoURI.toString())
+      setLogoURI(logoURI)
+      setLogo(true)
+      console.log({ logoURI })
+    },
+    [onUserInput, setLogoURI, setLogo]
+  )
+
+  // const handleLaunchDelay = useCallback(
+  //   (logoURI) => {
+  //     onUserInput(Field.DELAY, logoURI.toString())
+  //     setLogoURI(logoURI)
+  //     setLogo(true)
+  //     console.log({ logoURI })
+  //   },
+  //   [onUserInput, setLogoURI, setLogo]
+  // )
 
   const handleRewardDays = useCallback(
     (rewardDays) => {
@@ -180,7 +207,6 @@ const CreateFarm = () => {
     try {
       if (!rewardSelected) return
 
-
       // const defarmData = defaultAbiCoder.encode(
       //   ['address', 'uint', 'uint', 'uint'],
       //   [
@@ -193,57 +219,29 @@ const CreateFarm = () => {
 
       // console.log([
       currencies[Field.REWARD].wrapped.address,
+      enchanterId,
         rewardDays,
-        feeDays,
+        // feeDays,
         dailyReward
       // ])
 
       const tx = await manifesterContract?.createManifestation(
         // chainId && MANIFESTER_ADDRESS[chainId], 
         // defarmData
-        pairAddress,                                // depositAddress
+        // pairAddress,                             // depositAddress
         currencies[Field.REWARD].wrapped.address,   // rewardAddress
         enchanterId,                                //  enchanterId 
-        true,                                       // isNative
-        
-        // rewardDays,                               // duraDays
-        // feeDays,                                  // feeDays
-        // dailyReward                               // dailyReward
+        // true,                                    // isNative
+        rewardDays,                                 // duraDays
+        feeDays,                                    // feeDays
+        dailyReward,                                // dailyReward
+        logoURI,                                // logoURI
       )
 
       addTransaction(tx, {
-        summary: `Create Farm ${currencies[Field.REWARD].symbol}/${currencies[Field.DEPOSIT].symbol}`,
+        summary: `Create Farm ${currencies[Field.REWARD].symbol}`,
       })
-      setCreated(true)
-      setCampaignId(campaignLength)
       // router.push('/defarms')
-    } catch (e) {
-      console.error(e)
-    }
-  }
-
-  const handleLaunch = async () => {
-    try {
-      if (!rewardSelected) return
-      // console.log([
-      currencies[Field.REWARD].wrapped.address,
-        rewardDays,
-        feeDays,
-        dailyReward
-      // ])
-
-      const tx = await manifesterContract?.launchManifestation(
-        // chainId && MANIFESTER_ADDRESS[chainId], 
-        rewardDays,                               // duraDays
-        feeDays,                                  // feeDays
-        dailyReward                               // dailyReward
-      )
-
-      addTransaction(tx, {
-        summary: `Create Farm ${currencies[Field.REWARD].symbol}/${currencies[Field.DEPOSIT].symbol}`,
-      })
-
-      router.push('/defarms')
     } catch (e) {
       console.error(e)
     }
@@ -266,7 +264,7 @@ const CreateFarm = () => {
         <Container maxWidth="full" className="space-y-6">
           {/* START: DAILY REWARD INPUT */}
           <Typography
-            className={`font-bold text-xl text-center mb-4 border border-2 ${rewardSet && assetSet ? `border-purple` : `border-neonGreen`} m-2 p-2 rounded rounded-2xl`}
+            className={`font-bold blink text-xl text-center mb-4 border border-2 ${rewardSet && assetSet ? `border-purple` : `border-neonGreen`} m-2 p-2 rounded rounded-2xl`}
           >
             {`${!assetSet 
                 ? `Select Reward Asset` 
@@ -293,7 +291,7 @@ const CreateFarm = () => {
           </div>
           {/* END: DAILY REWARD INPUT */}
 
-          {/* START: REWARD ENCHANTER INPUT */}
+          {/* START: ENCHANTER INPUT */}
           <div className={
             `flex flex-cols-2 border border-2 ${`border-purple`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
           >
@@ -306,10 +304,9 @@ const CreateFarm = () => {
               className={`text-white bg-dark-1000 w-[1/5] mr-3 text-center`}
             />
           </div>
-          {/* START: REWARD ENCHANTER INPUT */}
+          {/* END: ENCHANTER INPUT */}
 
           {/* START: REWARD DURATION INPUT */}
-          {isCreated &&
           <div className={
             `flex flex-cols-2 border border-2 ${durationSet ? `border-purple` : `border-neonGreen`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
           >
@@ -323,18 +320,14 @@ const CreateFarm = () => {
             />
             {`Days`}
           </div>
-          }
-          {/* START: REWARD DURATION INPUT */}
-          { isCreated &&
+
+          {/* START: WITHDRAW FEE INPUT */}
           <div className={
             `flex flex-cols-2 border border-2 ${feeSet ? `border-purple` : `border-neonGreen`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
           >
             <Typography className={`w-full text-sm md:text-lg font-bold`}>
               {`${!feeSet ? `Set` : ``} Withdraw Fee Duration`}
             </Typography>
-            {/* END: REWARD DURATION INPUT */}
-
-            {/* START: WITHDRAW FEE INPUT */}
             <Input.Numeric
               value={feeDays}
               onUserInput={handleWithdrawFee}
@@ -342,12 +335,40 @@ const CreateFarm = () => {
             />
             {`Days`}
           </div>
-          }
           {/* END: WITHDRAW FEE INPUT */}
-          
-        { isCreated &&
+
+          {/* START: LOGO URI INPUT */}
+          <div className={
+            `flex flex-cols-2 border border-2 ${logoSet ? `border-purple` : `border-neonGreen`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
+            >
+            <Typography className={`w-full text-sm md:text-lg font-bold`}>
+            {`${!logoSet ? `Set` : ``} Logo URL`}
+            </Typography>
+            <Input.Text
+              value={logoURI}
+              onUserInput={handleLogoURI}
+              className={`text-white bg-dark-1000 w-[1/5] mr-3 text-center`}
+            />
+          </div>
+          {/* END: LOGO URI INPUT */}
+
+          {/* START: LAUNCH DELAY INPUT */}
+          {/* <div className={
+            `flex flex-cols-2 border border-2 ${logoSet ? `border-purple` : `border-neonGreen`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
+            >
+            <Typography className={`w-full text-sm md:text-lg font-bold`}>
+            {`${!logoSet ? `Set` : ``} Launch Delay`}
+            </Typography>
+            <Input.Text
+              value={launchDelay}
+              onUserInput={handleLaunchDelay}
+              className={`text-white bg-dark-1000 w-[1/5] mr-3 text-center`}
+            />
+          </div> */}
+          {/* END: LAUNCH DELAY INPUT */}
+
           <div className={`flex flex-col bg-dark-1000 p-3 border border-1 
-            ${feeSet && rewardSet && assetSet ? `border-purple` : `border-dark-700`} 
+            ${feeSet && rewardSet && assetSet && logoSet ? `border-purple` : `border-dark-700`} 
             w-full rounded rounded-2xl space-y-1`}
           >
             <div className="flex justify-between">
@@ -355,7 +376,7 @@ const CreateFarm = () => {
                 {i18n._(t`Reward Asset`)}
               </Typography>
               <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
-                {rewardAsset?.wrapped.symbol}
+                {rewardAsset ? rewardAsset?.wrapped.symbol : ''}
               </Typography>
             </div>
             <div className="flex justify-between">
@@ -382,8 +403,18 @@ const CreateFarm = () => {
                 {`${feeDays} Days`}
               </Typography>
             </div>
+            <div className="flex justify-between">
+              <Typography className="text-white" fontFamily={'medium'}>
+                {i18n._(t`Logo Preview`)}
+              </Typography>
+              <Image 
+                  src={logoURI}
+                  width={24}
+                  height={24}
+                  alt={`logo for defarm reward asset`}
+              />
+            </div>
           </div>
-        }
 
           {/* <Button
             color={rewardSet && durationSet ? `neonGreen` : `avaxRed`}
@@ -401,7 +432,6 @@ const CreateFarm = () => {
                   : 'CALCULATE DEPOSIT'}
             </Typography>
           </Button> */}
-        { isCreated &&  
           <div className={`flex flex-col bg-dark-1000 p-3 border border-1 
             ${rewardSet && assetSet && durationSet && feeSet ? `border-purple` : `border-dark-700`} 
             w-full rounded rounded-2xl space-y-1`}
@@ -411,15 +441,17 @@ const CreateFarm = () => {
                 {i18n._(t`Campaign Rewards`)}
               </Typography>
               <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
-                {`${formatNumber(dailyReward * rewardDays, false, true)} ${rewardAsset?.wrapped.symbol}`}
-              </Typography>
+                {`${formatNumber(dailyReward * rewardDays, false, true)} ${rewardAsset ? rewardAsset?.wrapped.symbol : ''}`}                
+                </Typography>
             </div>
             <div className="flex justify-between">
               <Typography className="text-white" fontFamily={'medium'}>
-                {i18n._(t`Creation Fee (${bloodSacrifice * 100}%)`)}
+                {`Creation Fee (${
+                bloodSacrifice * 100
+                }%)`}
               </Typography>
               <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
-                {`${formatNumber(dailyReward * rewardDays * bloodSacrifice, false, true)} ${rewardAsset?.wrapped.symbol}`}
+                {`${formatNumber(dailyReward * rewardDays * bloodSacrifice, false, true)} ${rewardAsset ? rewardAsset?.wrapped.symbol : ''}`}
               </Typography>
             </div>
             <div className="flex justify-between">
@@ -431,31 +463,10 @@ const CreateFarm = () => {
                   // campaign rewards
                   (dailyReward * rewardDays) +
                   // creation fee
-                  (dailyReward * rewardDays * bloodSacrifice), false, true)} ${rewardAsset?.wrapped.symbol}`}
+                  (dailyReward * rewardDays * bloodSacrifice), false, true)} ${rewardAsset ? rewardAsset?.wrapped.symbol : ''}`}
               </Typography>
             </div>
             </div>
-          }
-          <Button
-            color={assetSet ? `neonGreen` : `avaxRed`}
-            variant={`outlined`}
-            className={`w-full px-4 py-3 text-base rounded text-high-emphesis font-bold border
-            ${assetSet ? `border-neonGreen` : `border-avaxRed`}`}
-            onClick={() => handleCreate()}
-            disabled={!assetSet}
-          >
-            <Typography
-            // className={`text-white font-bold`}
-            >        
-                {assetSet ? `CREATE CAMPAIGN #${campaignId}` : `MISSING CAMPAIGN SETUP`}
-            </Typography>
-          </Button>
-            <Typography
-            className={`text-avaxRed text-center text-md font-bold`}
-            >        
-                {`Please take note of your campaign number: #${campaignId}. You will need this to launch your campaign.`}
-            </Typography>
-          { isCreated &&
           <Button
             color={rewardSet && assetSet && durationSet && feeSet ? `neonGreen` : `avaxRed`}
             variant={`outlined`}
@@ -467,11 +478,24 @@ const CreateFarm = () => {
             <Typography
             // className={`text-white font-bold`}
             >        
-                {rewardSet && assetSet && durationSet && feeSet ? `LAUNCH CAMPAIGN` : `MISSING CAMPAIGN SETUP`}
+          {rewardSet && assetSet && durationSet && feeSet ? `CREATE CAMPAIGN` : `MISSING CAMPAIGN SETUP`}
             </Typography>
           </Button>
+          {rewardSet && assetSet && durationSet && feeSet &&
+            <Button
+              color={rewardSet && assetSet && durationSet && feeSet ? `neonGreen` : `avaxRed`}
+              variant={`outlined`}
+              className={`w-full px-4 py-3 text-base rounded text-high-emphesis font-bold border
+            ${rewardSet && assetSet && durationSet && feeSet ? `border-neonGreen` : `border-avaxRed`}`}
+              disabled={!campaignReady}
+              onClick={handleLaunch}
+              // onClick={handleLaunchCampaign(delayDays)}
+            >
+                <Typography>        
+              { `LAUNCH CAMPAIGN` }
+                </Typography>
+            </Button>
           }
-
           {showConfirmation && (
             <Modal isOpen={showConfirmation} onDismiss={
               () => setShowConfirmation(false)}>
@@ -503,15 +527,19 @@ const CreateFarm = () => {
                     {' '}  {i18n._(t`CONTACT US`)}
                   </a>
                 </Typography>
-                {approved &&
+                {!approved &&
                   <Button
-                    color="neonGreen"
-                    variant={`outlined`}
-                    className="w-full px-4 py-3 text-base rounded text-high-emphesis"
-                    onClick={() => handleApprove()}
+                  color="purple"
+                  variant={`bordered`}
+                  className="w-full px-4 py-3 rounded text-white font-bold"
+                  onClick={() => handleApprove()}
                     disabled={!rewardSet || !assetSet || !durationSet || !feeSet}
                   >
-                    {inputError || `Approve ${rewardAsset.wrapped.symbol}`}
+                  <Typography
+                      className={`text-white`}
+                    >
+                    {inputError || `Approve Creation`}
+                  </Typography>
                   </Button>
                 }
                 {/* {approved && */}
@@ -519,7 +547,7 @@ const CreateFarm = () => {
                     color="purple"
                     variant={`bordered`}
                     className="w-full px-4 py-3 rounded text-white font-bold"
-                    onClick={() => handleLaunch()}
+                    onClick={() => handleCreate()}
                     disabled={!rewardSet || !assetSet || !durationSet || !feeSet}
                   >
                     <Typography

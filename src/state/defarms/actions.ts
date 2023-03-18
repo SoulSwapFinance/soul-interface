@@ -4,6 +4,8 @@ export enum Field {
   DEPOSIT = 'DEPOSIT',
   REWARD = 'REWARD',
   ENCHANTER = 'ENCHANTER',
+  LOGO = 'LOGO',
+  DELAY = 'DELAY',
   DURATION = 'DURATION',
   FEE = 'FEE',
 }

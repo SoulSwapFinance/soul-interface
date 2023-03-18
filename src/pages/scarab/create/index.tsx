@@ -9,7 +9,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { classNames, formatNumberScale, tryParseAmount } from '../../../functions'
 import { useRouter } from 'next/router'
 import NavLink from '../../../components/NavLink'
-import Link from 'next/link'
+// import Link from 'next/link'
 import Card from '../../../components/Card'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
@@ -25,19 +25,19 @@ import { useCurrency } from '../../../hooks/Tokens'
 import { useCurrencyBalance } from '../../../state/wallet/hooks'
 import Loader from '../../../components/Loader'
 import Web3Connect from '../../../components/Web3Connect'
-import Datetime from 'react-datetime'
+// import Datetime from 'react-datetime'
 import * as moment from 'moment'
 import useScarab from '../../../features/scarab/useScarab'
 import { ethers } from 'ethers'
 import { useAddPopup } from '../../../state/application/hooks'
-import { result } from 'lodash'
+// import { result } from 'lodash'
 import { BigNumber } from '@ethersproject/bignumber'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId, SOUL_ADDRESS } from 'sdk'
 
 export default function CreateScarab(): JSX.Element {
   const { i18n } = useLingui()
-  const router = useRouter()
+  // const router = useRouter()
   const { chainId, account, library } = useActiveWeb3React()
   const [tokenAddress, setTokenAddress] = useState(SOUL_ADDRESS[ChainId.FANTOM])
   const [recipient, setRecipient] = useState('')
