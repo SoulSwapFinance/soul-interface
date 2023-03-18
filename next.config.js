@@ -71,6 +71,11 @@ module.exports = withBundleAnalyzer(
           permanent: true,
         },
         {
+          source: '/defarm',
+          destination: '/defarms',
+          permanent: true,
+        },
+        {
           source: '/bond',
           destination: '/bonds',
           permanent: true,
