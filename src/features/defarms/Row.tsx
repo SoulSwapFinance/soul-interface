@@ -277,9 +277,8 @@ export const ActiveRow = ({ pid }) => {
     }
 
     return (
-        <>
-            <div className="flex justify-center w-full">
-                    <div className={classNames("bg-dark-900 p-3 border border-blue", !hasBalance && "border-dark-1000",
+        <div>
+            <div className={classNames(" mt-1 bg-dark-900 p-1 sm:p-4 rounded rounded-2xl border border-2 border-blue", !hasBalance && "border-dark-1000",
                         !isActive ? "hover:border-pink"
                             : hasBalance ? "border-dark-600"
                                 : hasBalance && !isActive ? "hover:border-pink border-pink"
@@ -290,21 +289,21 @@ export const ActiveRow = ({ pid }) => {
                         <FarmContentWrapper>
 
                             {/* DEPOSIT LOGO */}
-                            <div className="items-center -ml-6 sm:mr-24">
+                            <div className="items-center -ml-6 mr-4 sm:mr-24 md:mr-36">
                                 <FarmItemBox>
                                     <div
                                         className={`flex justify-center`}
                                     >
-                                        {/* <CurrencyLogo
-                                            currency={rewardToken}
-                                            size={36}
-                                        /> */}
-                                    <Image 
+                                    <CurrencyLogo
+                                        currency={rewardToken}
+                                        size={36}
+                                    />
+                                    {/* <Image 
                                         src={logoURI}
                                         width={40}
                                         height={40}
                                         alt={`logo for defarm reward asset`}
-                                        />
+                                        /> */}
                                     </div>
                                     {/* <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} /> */}
                                 </FarmItemBox>
@@ -313,7 +312,7 @@ export const ActiveRow = ({ pid }) => {
                             {/* STAKED VALUE */}
                             <HideOnMobile>
                                 <FarmItemBox>
-                                    <div className={'mr-16 sm:mr-36'}>
+                                    <div className={'mr-16 sm:mr-36 md:mr-48'}>
                                         {Number(APR).toString() === '0.00' ? (
                                             <Text padding="0" fontSize="1rem" color="#666">
                                                 0
@@ -335,7 +334,7 @@ export const ActiveRow = ({ pid }) => {
 
                             {/* % APR */}
                             <FarmItemBox>
-                                <div className={'sm:mr-12'}>
+                                <div className={'sm:mr-12 md:mr-32'}>
                                     {Number(APR).toString() === '0.00' ? (
                                         <Text padding="0" fontSize="1rem" color="#666">
                                             0
@@ -350,7 +349,7 @@ export const ActiveRow = ({ pid }) => {
 
                             {/* PENDING REWARDS */}
                             <FarmItemBox className="flex">
-                                <div className={'mr-2'}>
+                                <div className={'mr-2 md:mr-16'}>
                                 {earnedAmount.toFixed(0).toString() === '0' ? (
                                     <div className="flex flex-cols-2 sm:ml-12 gap-1">
                                         {formatNumber(0, false, true)}<CurrencyLogo currency={rewardToken} size={24} />
@@ -365,6 +364,9 @@ export const ActiveRow = ({ pid }) => {
 
                             {/* LIQUIDITY (TVL) */}
                             <FarmItemBox className="flex" >
+                                <div
+                                    className={'mr-4'}
+                                >
                                 {Number(liquidity) === 0 ? (
                                     <Text padding="0" fontSize="1rem" color="#666">
                                         $0
@@ -377,9 +379,9 @@ export const ActiveRow = ({ pid }) => {
                                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
                                     </div>
                                 )}
+                            </div>
                             </FarmItemBox>
                         </FarmContentWrapper>
-                    </div>
             </div>
 
             {/*------ DROPDOWN OPTIONS PANEL ------*/}
@@ -920,6 +922,6 @@ export const ActiveRow = ({ pid }) => {
                     </div>
                 </Modal>
             )}
-        </>
+            </div>
     )
 }
