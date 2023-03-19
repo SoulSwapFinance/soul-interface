@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
-import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, MANIFESTER_ADDRESS, Token, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
+import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, Token } from 'sdk'
+    // , MANIFESTER_ADDRESS, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import { useTokenContract, useZapperContract, useManifesterContract, useManifestationContract } from 'hooks/useContract'
 import useApprove from 'hooks/useApprove'
 import { Tab } from '@headlessui/react'
@@ -11,7 +12,7 @@ import {
 } from './Styles'
 import { classNames, formatDate, formatNumber, formatUnixTimestampToDay, tryParseAmount } from 'functions'
 import { usePairInfo, useDeFarmInfo, useDeFarmUserInfo, useTokenInfo, useUserTokenInfo, useDeFarmPoolInfo } from 'hooks/useAPI'
-import DoubleCurrencyLogo from 'components/DoubleLogo'
+// import DoubleCurrencyLogo from 'components/DoubleLogo'
 import Modal from 'components/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
 import { Button } from 'components/Button'
@@ -25,12 +26,12 @@ import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import { getChainColor } from 'constants/chains'
 import { ExternalLink } from 'components/ReusableStyles'
 import { CircleStackIcon, CurrencyDollarIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
-import { useCurrencyBalance } from 'state/wallet/hooks'
+// import { useCurrencyBalance } from 'state/wallet/hooks'
 import { t } from '@lingui/macro'
 import { i18n } from '@lingui/core'
 // import { Route } from 'react-router-dom'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
+// import Image from 'next/image'
 
 const HideOnSmall = styled.div`
 @media screen and (max-width: 900px) {
@@ -355,7 +356,7 @@ export const ActiveRow = ({ pid }) => {
                             <FarmItemBox className="flex">
                                 <div className={'mr-1 sm:mr-8 md:mr-16'}>
                                     {/* Here we wait for there to be at least $0.00 rewarded */}
-                                {earnedValue.toFixed(2).toString() === '0.00' ? (
+                                {earnedValue.toFixed(1).toString() === '0.0' ? (
                                     <div className="flex flex-cols-2 sm:ml-12 gap-3">
                                         {formatNumber(0, true, true)}<CurrencyLogo currency={rewardToken} size={24} />
                                     </div>
