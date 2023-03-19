@@ -258,18 +258,21 @@ export const ActiveRow = ({ pid }) => {
     // useEffect(() => {
     //     fetchApproval(mAddress)
 
-    // handles withdrawal
+        // // withdraws: selected amount 
     const handleWithdraw = async (amount) => {
+        let tx
         try {
-            const tx = await ManifesterContract?.withdraw(parsedWithdrawValue?.quotient.toString())
+            tx = await ManifestationContract?.withdraw(Number(withdrawValue).toFixed(18).toBigNumber(18))
             await tx.wait()
         } catch (e) {
-            const tx = await ManifesterContract?.withdraw(Number(withdrawValue).toFixed(18).toBigNumber(18))
+            const smallerValue = Number(withdrawValue) - 0.000001
+            tx = await ManifestationContract?.withdraw(Number(smallerValue).toFixed(18).toBigNumber(18))
             await tx.wait()
             console.log(e)
         }
     }
-
+    
+    
     // HANDLE ZAP //
     const handleZap = async (zapTokenAddress, depositAddress) => {
         try {
@@ -638,26 +641,7 @@ export const ActiveRow = ({ pid }) => {
                                         </SubmitButton>
                                     </Wrap>
                                 )}
-
-                                <Wrap padding="0" margin="0" display="flex">
-                                    <SubmitButton
-                                        height="2rem"
-                                        primaryColor={buttonColor}
-                                        color={buttonTextColor}
-                                        // className={'font-bold'}
-                                        margin=".5rem 0 0rem 0"
-                                        onClick={() =>
-                                            handleShowZap(pid)
-                                        }
-                                    >
-                                        <div className="flex text-lg gap-1">
-                                            {/* <Zap width={26} className={classNames(`text-white`)} /> */}
-                                            {i18n._(t`ZAP`)}
-                                            <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                            &rarr; {`${symbol}`}
-                                        </div>
-                                    </SubmitButton>
-                                </Wrap>
+  
                             </Tab.Panel>
 
                             {/*------ WITHDRAW TAB PANEL ------*/}
@@ -774,7 +758,7 @@ export const ActiveRow = ({ pid }) => {
                                         margin=".5rem 0 0rem 0"
                                         onClick={() => setShowConfirmation(true)}
                                     >
-                                        {i18n._(t`WITHDRAW ${symbol}`)}
+                                        {i18n._(t`WITHDRAW `)} {`${symbol}-${NATIVE[chainId].symbol} LP`}
                                     </SubmitButton>
 
                                 </Wrap>
@@ -900,7 +884,7 @@ export const ActiveRow = ({ pid }) => {
                                 {i18n._(t`Estimated Fee Outcomes`)}
                             </div>
                             • <b> {i18n._(t`Current Rate`)}</b>: {Number(withdrawFee).toFixed(0)}% <br />
-                            • <b> {i18n._(t`Fee Amount`)}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {symbol}<br />
+                            • <b> {i18n._(t`Fee Amount`)}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {"LP"}<br />
                             • <b> {i18n._(t`Fee Value`)}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) * Number(lpPrice) / 100, true, true)}
 
                             <div className="mt-6 text-center">
