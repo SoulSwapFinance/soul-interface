@@ -86,6 +86,11 @@ export const LUXOR: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b', 9, 'LUX', 'Luxor Money'),
 }
 
+// SURV
+export const SURV: ChainTokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x5d9EaFC54567F34164A269Ba6C099068df6ef651', 18, 'SURV', 'SurvToken'),
+}
+
 // MIM
 export const MIM: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x82f0B8B456c1A451378467398982d4834b6829c1', 18, 'MIM', 'Magic Internet Money'),

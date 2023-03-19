@@ -393,7 +393,7 @@ export const SURV_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '', //
+  [ChainId.FANTOM]: '0x5d9EaFC54567F34164A269Ba6C099068df6ef651', // MAR23
   [ChainId.AVALANCHE]: '', //
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
