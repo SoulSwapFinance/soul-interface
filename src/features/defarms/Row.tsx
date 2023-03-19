@@ -638,27 +638,7 @@ export const ActiveRow = ({ pid }) => {
                                         </SubmitButton>
                                     </Wrap>
                                 )}
-
-                               {/* <Wrap padding="0" margin="0" display="flex">
-                                    <SubmitButton
-                                        height="2rem"
-                                        primaryColor={buttonColor}
-                                        color={buttonTextColor}
-                                        // className={'font-bold'}
-                                        margin=".5rem 0 0rem 0"
-                                        onClick={() =>
-                                            handleShowZap(pid)
-                                        }
-                                    >
-                                        <div className="flex text-lg gap-1"> */}
-                                            {/* <Zap width={26} className={classNames(`text-white`)} /> */}
-                                            {/*
-                                            {i18n._(t`ZAP`)}
-                                            <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                            &rarr; {`${symbol}`}
-                                        </div>
-                                    </SubmitButton>
-                                </Wrap> /*}
+  
                             </Tab.Panel>
 
                             {/*------ WITHDRAW TAB PANEL ------*/}
