@@ -293,7 +293,7 @@ export const ActiveRow = ({ pid }) => {
                         <FarmContentWrapper>
 
                             {/* DEPOSIT LOGO */}
-                            <div className="items-center -ml-6 mr-4 sm:mr-24 md:mr-36">
+                            <div className="items-center -ml-2 mr-4 sm:mr-24 md:mr-36">
                                 <FarmItemBox>
                                     <div
                                         className={`flex justify-center`}
@@ -316,7 +316,7 @@ export const ActiveRow = ({ pid }) => {
                             {/* STAKED VALUE */}
                             <HideOnMobile>
                                 <FarmItemBox>
-                                    <div className={'mr-16 sm:mr-36 md:mr-48'}>
+                                    <div className={'sm:mr-36 md:mr-48'}>
                                         {Number(APR).toString() === '0.00' ? (
                                             <Text padding="0" fontSize="1rem" color="#666">
                                                 0
