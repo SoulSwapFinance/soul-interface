@@ -774,7 +774,7 @@ export const ActiveRow = ({ pid }) => {
                                         margin=".5rem 0 0rem 0"
                                         onClick={() => setShowConfirmation(true)}
                                     >
-                                        {i18n._(t`WITHDRAW ${symbol}`)}
+                                        {i18n._(t`WITHDRAW `)} {`${symbol}-${NATIVE[chainId].symbol} LP`}
                                     </SubmitButton>
 
                                 </Wrap>
