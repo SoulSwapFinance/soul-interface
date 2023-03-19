@@ -51,7 +51,7 @@ import { getChainColor, getChainColorCode } from 'constants/chains'
 // import { SwapLayoutCard } from 'layouts/SwapLayout'
 // import { SubmitButton } from 'features/summoner/Styles'
 // import SoulLogo from 'components/SoulLogo'
-import { DonateBanner, LuxorBanner } from 'components/Banner'
+import { DeFarmBanner, DonateBanner, LuxorBanner } from 'components/Banner'
 
 import Image from 'next/image'
 import ADD_BANNER from 'assets/branding/add-banner.png'
@@ -370,7 +370,7 @@ export default function Add() {
       <div className={`grid p-1 mt-8 space-y-2 rounded rounded-2xl bg-dark-1000`}>
           {/* <SwapLayoutCard> */}
           {/* <DonateBanner chainId={chainId} /> */}
-          <LuxorBanner chainId={chainId} />
+          <DeFarmBanner chainId={chainId} />
           <div
               className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >
