@@ -900,7 +900,7 @@ export const ActiveRow = ({ pid }) => {
                                 {i18n._(t`Estimated Fee Outcomes`)}
                             </div>
                             • <b> {i18n._(t`Current Rate`)}</b>: {Number(withdrawFee).toFixed(0)}% <br />
-                            • <b> {i18n._(t`Fee Amount`)}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {symbol}<br />
+                            • <b> {i18n._(t`Fee Amount`)}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {"LP"}<br />
                             • <b> {i18n._(t`Fee Value`)}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) * Number(lpPrice) / 100, true, true)}
 
                             <div className="mt-6 text-center">
