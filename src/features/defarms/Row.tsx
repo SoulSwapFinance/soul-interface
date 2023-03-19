@@ -639,7 +639,7 @@ export const ActiveRow = ({ pid }) => {
                                     </Wrap>
                                 )}
 
-                                <Wrap padding="0" margin="0" display="flex">
+                               {/* <Wrap padding="0" margin="0" display="flex">
                                     <SubmitButton
                                         height="2rem"
                                         primaryColor={buttonColor}
@@ -650,14 +650,15 @@ export const ActiveRow = ({ pid }) => {
                                             handleShowZap(pid)
                                         }
                                     >
-                                        <div className="flex text-lg gap-1">
+                                        <div className="flex text-lg gap-1"> */}
                                             {/* <Zap width={26} className={classNames(`text-white`)} /> */}
+                                            {/*
                                             {i18n._(t`ZAP`)}
                                             <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
                                             &rarr; {`${symbol}`}
                                         </div>
                                     </SubmitButton>
-                                </Wrap>
+                                </Wrap> /*}
                             </Tab.Panel>
 
                             {/*------ WITHDRAW TAB PANEL ------*/}
@@ -774,7 +775,7 @@ export const ActiveRow = ({ pid }) => {
                                         margin=".5rem 0 0rem 0"
                                         onClick={() => setShowConfirmation(true)}
                                     >
-                                        {i18n._(t`WITHDRAW ${symbol}`)}
+                                        {i18n._(t`WITHDRAW `)} {`${symbol}-${NATIVE[chainId].symbol} LP`}
                                     </SubmitButton>
 
                                 </Wrap>
@@ -900,7 +901,7 @@ export const ActiveRow = ({ pid }) => {
                                 {i18n._(t`Estimated Fee Outcomes`)}
                             </div>
                             • <b> {i18n._(t`Current Rate`)}</b>: {Number(withdrawFee).toFixed(0)}% <br />
-                            • <b> {i18n._(t`Fee Amount`)}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {symbol}<br />
+                            • <b> {i18n._(t`Fee Amount`)}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {"LP"}<br />
                             • <b> {i18n._(t`Fee Value`)}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) * Number(lpPrice) / 100, true, true)}
 
                             <div className="mt-6 text-center">
