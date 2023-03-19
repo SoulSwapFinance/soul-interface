@@ -10,7 +10,7 @@ import NetworkGuard from 'guards/Network'
 import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
 import TokenStats from 'components/TokenStats'
-import FARM_BANNER from 'assets/branding/farm-banner.png'
+import DEFARM_BANNER from 'assets/branding/farm-banner.png'
 import { getChainColor } from 'constants/chains'
 import { useActiveWeb3React } from 'services/web3'
 
@@ -33,7 +33,7 @@ const Defarms = () => {
               <div className={`w-full`}>
               <TokenStats />
               </div>
-              <Image src={FARM_BANNER}
+              <Image src={DEFARM_BANNER}
                 height={180}
                 width={1080}
                 alt={'economy data page banner'}

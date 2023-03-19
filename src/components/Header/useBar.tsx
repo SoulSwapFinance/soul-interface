@@ -16,9 +16,10 @@ import ChartIcon from 'components/Icons/exchange/ChartIcon'
 import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
 // import HomeIcon from 'components/Icons/mobile/HomeIcon'
 import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
+import EarnIcon from 'components/Icons/mobile/EarnIcon'
 import SwapIcon from 'components/Icons/exchange/SwapIcon'
 import VaultIcon from 'components/Icons/mobile/VaultIcon'
-import EarnIcon from 'components/Icons/mobile/EarnIcon'
+import CauldronIcon from 'components/Icons/mobile/CauldronIcon'
 
 export interface BarItemLeaf {
   key: string
@@ -99,6 +100,22 @@ const useMenu: UseBar = () => {
         link: '/farms',
         title: i18n._(t`Farm`),
         icon: <SeedlingIcon
+          className={classNames(`w-7 h-7 rounded rounded-md`
+            // , isEarn ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
+          )}
+          fillPrimary={chainColor}
+          fillSecondary={WHITE}
+        />,
+      })
+    }
+
+    // Farm
+    if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
+      mainItems.push({
+        key: 'farm',
+        link: '/defarms',
+        title: i18n._(t`DeFarm`),
+        icon: <CauldronIcon
           className={classNames(`w-7 h-7 rounded rounded-md`
             // , isEarn ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
           )}
