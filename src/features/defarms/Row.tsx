@@ -476,7 +476,7 @@ export const ActiveRow = ({ pid }) => {
                                                 {i18n._(t`Staked Balance`)}
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(stakedBalance, false, true)} {symbol}
+                                                {formatNumber(stakedBalance, false, true)} {`${symbol}-${NATIVE[chainId].symbol}`}
                                             </Typography>
                                         </div>
                                     )}
