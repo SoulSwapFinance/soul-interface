@@ -258,18 +258,21 @@ export const ActiveRow = ({ pid }) => {
     // useEffect(() => {
     //     fetchApproval(mAddress)
 
-    // handles withdrawal
+        // // withdraws: selected amount 
     const handleWithdraw = async (amount) => {
+        let tx
         try {
-            const tx = await ManifesterContract?.withdraw(parsedWithdrawValue?.quotient.toString())
+            tx = await ManifestationContract?.withdraw(Number(withdrawValue).toFixed(18).toBigNumber(18))
             await tx.wait()
         } catch (e) {
-            const tx = await ManifesterContract?.withdraw(Number(withdrawValue).toFixed(18).toBigNumber(18))
+            const smallerValue = Number(withdrawValue) - 0.000001
+            tx = await ManifestationContract?.withdraw(Number(smallerValue).toFixed(18).toBigNumber(18))
             await tx.wait()
             console.log(e)
         }
     }
-
+    
+    
     // HANDLE ZAP //
     const handleZap = async (zapTokenAddress, depositAddress) => {
         try {
