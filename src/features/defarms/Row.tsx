@@ -579,7 +579,7 @@ export const ActiveRow = ({ pid }) => {
                                     >
                                         <div className="flex text-lg gap-2">
                                             <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                            {i18n._(t`DEPOSIT `)} {`${symbol} LP`}
+                                            {i18n._(t`DEPOSIT `)} {`${symbol}-${NATIVE[250].symbol} LP`}
                                         </div>
                                     </SubmitButton>
                                 )}
@@ -607,8 +607,7 @@ export const ActiveRow = ({ pid }) => {
                                             >
                                                 <div className="flex text-lg gap-2">
                                                     <PlusCircleIcon width={26} className={classNames(`text-white`)} />
-                                                    {/* {farm.lpSymbol} */}
-                                                    CREATE {symbol} LP
+                                                   {`CREATE ${symbol}-${NATIVE[250].symbol} PAIR`}
                                                 </div>
                                             </TokenPairLink>
                                         </SubmitButton>
@@ -631,7 +630,7 @@ export const ActiveRow = ({ pid }) => {
                                         >
                                             <div className="flex text-lg gap-2">
                                                 <CircleStackIcon width={26} className={classNames(`text-white`)} />
-                                                {i18n._(t`HARVEST SOUL`)}
+                                                {i18n._(t`HARVEST ${symbol}`)}
                                             </div>
                                         </SubmitButton>
                                     </Wrap>
