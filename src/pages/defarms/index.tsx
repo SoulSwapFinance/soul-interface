@@ -70,13 +70,6 @@ const Defarms = () => {
             </a>
           </NavLink>
         </Button>
-        <Button variant="filled" color="purple" size="lg">
-          <NavLink href={'/defarms'}>
-            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span>DeFarms</span>
-            </a>
-          </NavLink>
-        </Button>
       </div> 
             <FarmList />
             <div className="grid grid-cols-2 mt-2">

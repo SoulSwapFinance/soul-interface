@@ -75,7 +75,7 @@ export const ActiveRow = ({ pid }) => {
     const stakedValue = Number(defarmUserInfo.stakedValue)
     const earnedAmount = Number(defarmUserInfo.pendingRewards)
     const earnedValue = Number(defarmUserInfo.pendingValue)
-    const lpPrice = Number(defarmUserInfo.lpPrice)
+    // const lpPrice = Number(defarmUserInfo.lpPrice)
     const withdrawFee = Number(defarmUserInfo.currentRate) / 1E18
     const walletBalance = Number(defarmUserInfo.walletBalance)
     // const lastWithdrawTime = Number(defarmUserInfo.lastWithdrawTime)
@@ -84,13 +84,15 @@ export const ActiveRow = ({ pid }) => {
     
     const feeAmount = withdrawFee * stakedBalance / 100
     const withdrawable = stakedBalance - feeAmount
-    const feeValue = feeAmount * lpPrice
+    // const feeValue = feeAmount * lpPrice
     
     // DEFARM POOL INFO //
     const { defarmPoolInfo } = useDeFarmPoolInfo(pid)
     const mAddress = defarmPoolInfo.mAddress
     const rewardSymbol = defarmPoolInfo.rewardSymbol
     const liquidity = defarmPoolInfo.tvl
+    const lpPrice = Number(defarmPoolInfo.lpPrice)
+    // const userShare = 
     const APR = defarmPoolInfo.apr
     // const liquidity = Number(defarmPoolInfo.tvl)
     // const depositedAssets = Number(defarmPoolInfo.lpBalance)
@@ -99,14 +101,16 @@ export const ActiveRow = ({ pid }) => {
     // const annualRewardsValue = annualRewards * lpPrice
     // const APR = annualRewardsValue / liquidity
     // const APR = defarmPoolInfo.apr
-    const logoURI = defarmPoolInfo.logoURI
+    // const logoURI = defarmPoolInfo.logoURI
     const pairStatus = defarmPoolInfo.status
     const rewardAddress = defarmPoolInfo.rewardToken
     const depositAddress = defarmPoolInfo.lpAddress
-    const startTime = Number(defarmPoolInfo.startTime)
+    // const stakedValue = stakedBalance * lpPrice
+    // const startTime = Number(defarmPoolInfo.startTime)
     const symbol = defarmPoolInfo.symbol
     const endTime = Number(defarmPoolInfo.endTime)
-
+    
+    const feeValue = feeAmount * lpPrice
     const hasBalance = Number(walletBalance) > 0
     const isActive = pairStatus == "active"
     const assetToken = new Token(chainId, depositAddress, 18)
