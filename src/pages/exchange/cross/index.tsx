@@ -44,7 +44,7 @@ import TokenSelect from "features/cross/components/TokenSelect";
 import NavLink from "components/NavLink";
 // import { SubmitButton } from "features/summoner/Styles";
 import { getChainColor, getChainColorCode } from "constants/chains";
-import { DonateBanner, DeFarmBanner } from "components/Banner";
+import { DonateBanner, LuxorBanner } from "components/Banner";
 // import { BalancePromiseToUnit } from "pages/bridge";
 import CROSS_BANNER from 'assets/branding/cross-banner.png'
 import TokenStats from "components/TokenStats";
@@ -339,7 +339,11 @@ export default function Exchange() {
       <div className={`grid p-1 mt-8 space-y-2 rounded rounded-2xl bg-dark-1000`}>
         {/* <SwapLayoutCard> */}
             {/* <DonateBanner chainId={chainId} /> */}
-            <DeFarmBanner chainId={chainId} />
+            <LuxorBanner 
+              chainId={chainId} 
+              textColor={'white'} 
+              color={'purple'} 
+            />
             <div
               className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >

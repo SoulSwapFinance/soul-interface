@@ -1,5 +1,17 @@
 import gql from 'graphql-tag'
 
+export const COFFINBOX = gql`
+  query GetCoffinBoxes {
+    coffinBoxes {
+      totalTokens
+      totalUnderworldPairs
+      totalUsers
+      block
+      timestamp
+    }
+  }
+`
+
 export const cloneFieldsQuery = gql`
   fragment cloneFields on Clone {
     id

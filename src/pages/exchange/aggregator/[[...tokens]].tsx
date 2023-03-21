@@ -44,7 +44,7 @@ import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
 import Image from 'next/image'
 import META_BANNER from 'assets/branding/meta-banner.png'
-import { DonateBanner, DeFarmBanner } from 'components/Banner'
+import { DonateBanner, LuxorBanner } from 'components/Banner'
 import TokenStats from 'components/TokenStats'
 
 /*
@@ -365,8 +365,11 @@ const Aggregator = ({ }) => {
           <div className={`grid p-1 mt-8 space-y-2 rounded rounded-2xl bg-dark-1000`}>
 				{/* <SwapLayoutCard> */}
 				{/* <DonateBanner chainId={chainId} /> */}
-				<DeFarmBanner chainId={chainId} />
-				<div
+				<LuxorBanner 
+				chainId={chainId} 
+				textColor={'white'} 
+				color={'purple'} 
+				/>				<div
               className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >
               <div className={`w-full`}>
