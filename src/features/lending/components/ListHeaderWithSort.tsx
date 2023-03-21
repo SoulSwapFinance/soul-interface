@@ -10,7 +10,7 @@ function ListHeaderWithSort({
 }: {
   className?: any
   sort: any
-  sortKey: any
+  sortKey?: any
   direction?: any
   children: any
 }) {
