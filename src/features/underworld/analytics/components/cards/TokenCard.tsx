@@ -1,7 +1,7 @@
-import classNames from "classnames";
-import { BigNumber } from "ethers";
-import numeral from "numeral";
-import { Token } from "../../types/Token";
+import classNames from "classnames"
+import { BigNumber } from "ethers"
+import numeral from "numeral"
+import { Token } from "../../types/Token"
 
 const TokenCard = ({
   containerClass = "",
@@ -9,10 +9,10 @@ const TokenCard = ({
   totalAsset = BigInt(0),
   totalBorrow = BigInt(0),
 }: {
-  containerClass?: string;
-  data?: Token;
-  totalAsset?: BigInt;
-  totalBorrow?: BigInt;
+  containerClass?: string
+  data?: Token
+  totalAsset?: BigInt
+  totalBorrow?: BigInt
 }) => {
   return (
     <div
@@ -48,7 +48,7 @@ const TokenCard = ({
           )}
         </div>
         <div>
-          <div className="font-medium">Borrow&nbsp;</div>
+          <div className="font-medium">Borrow&nbsp</div>
           {!data ? (
             <div className="inline-block rounded loading h-7 w-36"></div>
           ) : (
@@ -72,7 +72,7 @@ const TokenCard = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TokenCard;
+export default TokenCard

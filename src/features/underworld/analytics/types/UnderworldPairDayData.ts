@@ -24,7 +24,7 @@ export type UnderworldPairDayDataMap = {
   avgUtilization: BigInt
   avgInterestPerSecond: BigInt
   date: string
-  underworldPair: UnderworldPairDayData[]
+  underworldPairs: UnderworldPairDayData[]
 }
 
 export type UnderworldPairDayDataMapsCollateral = {
