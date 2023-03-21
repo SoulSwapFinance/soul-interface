@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, Token } from 'sdk'
-    // , MANIFESTER_ADDRESS, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import { useTokenContract, useZapperContract, useManifesterContract, useManifestationContract } from 'hooks/useContract'
 import useApprove from 'hooks/useApprove'
 import { Tab } from '@headlessui/react'
@@ -12,7 +11,6 @@ import {
 } from './Styles'
 import { classNames, formatDate, formatNumber, formatUnixTimestampToDay, tryParseAmount } from 'functions'
 import { usePairInfo, useDeFarmInfo, useDeFarmUserInfo, useTokenInfo, useUserTokenInfo, useDeFarmPoolInfo } from 'hooks/useAPI'
-// import DoubleCurrencyLogo from 'components/DoubleLogo'
 import Modal from 'components/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
 import { Button } from 'components/Button'
@@ -26,12 +24,13 @@ import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import { getChainColor } from 'constants/chains'
 import { ExternalLink } from 'components/ReusableStyles'
 import { CircleStackIcon, CurrencyDollarIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
-// import { useCurrencyBalance } from 'state/wallet/hooks'
 import { t } from '@lingui/macro'
 import { i18n } from '@lingui/core'
-// import { Route } from 'react-router-dom'
 import { useRouter } from 'next/router'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
+
+// import { useCurrencyBalance } from 'state/wallet/hooks'
+// import { Route } from 'react-router-dom'
 // import Image from 'next/image'
 
 const HideOnSmall = styled.div`
@@ -622,6 +621,26 @@ export const ActiveRow = ({ pid }) => {
                                     </a>
                                 </NavLink>
                                 }
+                                {/* ZAPPER FUNCTIONALITY */}
+                                    <Wrap padding="0" margin="0" display="flex">
+                                        <SubmitButton
+                                            height="2rem"
+                                            primaryColor={buttonColor}
+                                            color={buttonTextColor}
+                                            // className={'font-bold'}
+                                            margin=".5rem 0 0rem 0"
+                                            onClick={() =>
+                                                handleShowZap(pid)
+                                            }
+                                        >
+                                            <div className="flex text-lg gap-1">
+                                                {/* <Zap width={26} className={classNames(`text-white`)} /> */}
+                                                {i18n._(t`ZAP`)}
+                                                <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
+                                                &rarr; {`${symbol}-${NATIVE[chainId].symbol} LP`}
+                                            </div>
+                                        </SubmitButton>
+                                    </Wrap>
 
                                 {/* EARNED */}
                                 {earnedAmount > 0 && (
@@ -854,7 +873,7 @@ export const ActiveRow = ({ pid }) => {
                     </Wrap>
                     {/* } */}
 
-                    {/* { approvedZap && */}
+                    {/* {approvedZap &&  */}
                     <Wrap padding="0" margin="0" display="flex">
                         <SubmitButton
                             height="2rem"
@@ -870,7 +889,9 @@ export const ActiveRow = ({ pid }) => {
                         </SubmitButton>
                     </Wrap>
                     {/* } */}
-
+                    <Typography className={`flex text-center mt-4 sm:mt-6 border border-[${getChainColor(chainId)}] p-2 rounded rounded-2xl`}>
+                        {`Mind slippage and loses due to low liquidity. Avoid large amounts, if unsure.`}
+                    </Typography>
                 </Modal>
             }
 
