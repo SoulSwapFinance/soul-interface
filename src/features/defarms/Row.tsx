@@ -62,7 +62,7 @@ export const ActiveRow = ({ pid }) => {
     const [zapTokenAddress, setZapTokenAddress] = useState(SOUL_ADDRESS[chainId])
 
     // const nowTime = new Date().getTime()
-    const { defarmInfo } = useDeFarmInfo()
+    // const { defarmInfo } = useDeFarmInfo()
 
     const [showOptions, setShowOptions] = useState(false)
     const [openDeposit, setOpenDeposit] = useState(false)
