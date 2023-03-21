@@ -9,7 +9,7 @@ import { useTVL } from 'hooks/useV2Pairs'
 import { usePositions } from 'features/summoner/hooks'
 import { useSummonerContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
-import { formatNumberScale } from 'functions'
+import { featureEnabled, formatNumberScale } from 'functions'
 import { Button } from 'components/Button'
 import { XCircleIcon } from '@heroicons/react/24/solid'
 import { ChainId, SOUL_ADDRESS } from 'sdk'
@@ -113,6 +113,7 @@ const Summoner = () => {
             </a>
           </NavLink>
         </Button>
+        {featureEnabled(Feature.DEFARM, chainId) &&
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/defarms'}>
             <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
@@ -120,6 +121,7 @@ const Summoner = () => {
             </a>
           </NavLink>
         </Button>
+        }
       </div>
         {showBalances &&
           <div className={`flex flex-row 

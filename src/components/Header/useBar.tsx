@@ -110,7 +110,7 @@ const useMenu: UseBar = () => {
     }
 
     // Farm
-    if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
+    if (featureEnabled(Feature.DEFARM, chainId)) {
       mainItems.push({
         key: 'farm',
         link: '/defarms',

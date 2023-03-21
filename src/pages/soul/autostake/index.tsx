@@ -12,7 +12,7 @@ import { ApprovalState, useApproveCallback, useAutoStakeContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
 import { AUTO_STAKE_ADDRESS, max, Token, SOUL, ChainId } from 'sdk'
 import { SOUL_ADDRESS } from 'constants/addresses'
-import { tryParseAmount, formatNumber, classNames } from 'functions'
+import { tryParseAmount, formatNumber, classNames, featureEnabled } from 'functions'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import Dots from 'components/Dots'
 import { useActiveWeb3React } from 'services/web3/hooks'
@@ -23,6 +23,7 @@ import Image from 'next/image'
 import STAKE_BANNER from 'assets/branding/stake-banner.png'
 // import { getChainColor } from 'constants/chains'
 import TokenStats from 'components/TokenStats'
+import { Feature } from 'enums'
 
 
 // import { useTransactionAdder } from 'state/transactions/hooks'
@@ -216,6 +217,7 @@ export default function AutoStake() {
             </a>
           </NavLink>
         </Button>
+        {featureEnabled(Feature.DEFARM, chainId) &&
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/defarms'}>
             <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
@@ -223,6 +225,7 @@ export default function AutoStake() {
             </a>
           </NavLink>
         </Button>
+        }
       </div>
       <DoubleGlowShadowV2>
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">

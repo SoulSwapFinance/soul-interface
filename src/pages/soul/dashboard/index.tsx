@@ -5,7 +5,7 @@ import Typography from 'components/Typography'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 // import styled from 'styled-components'
-import { classNames, formatNumber } from 'functions'
+import { classNames, featureEnabled, formatNumber } from 'functions'
 import DashboardDonutChart from 'components/Dashboard/DonutChart'
 import DashboardChartLegend from 'components/Dashboard/ChartLegend'
 // import { useSoulPrice } from 'hooks/getPrices'
@@ -19,6 +19,7 @@ import { getChainInfo, getChainColorCode, getChainColor } from 'constants/chains
 import Image from 'next/image'
 import DATA_BANNER from 'assets/branding/data-banner.png'
 import TokenStats from 'components/TokenStats'
+import { Feature } from 'enums'
 
 export default function Dashboard() {
   const { i18n } = useLingui()
@@ -264,6 +265,7 @@ export default function Dashboard() {
             </a>
           </NavLink>
         </Button>
+        {featureEnabled(Feature.DEFARM, chainId) &&
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/defarms'}>
             <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
@@ -271,6 +273,7 @@ export default function Dashboard() {
             </a>
           </NavLink>
         </Button>
+        }
       </div>
             <div className="bg-dark-1000 p-4">
               <Typography

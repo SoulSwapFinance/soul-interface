@@ -19,6 +19,8 @@ import ExternalLink from 'components/ExternalLink'
 import { SubmitButton } from 'features/bond/Styles'
 import { classNames } from 'functions/styling'
 import TokenStats from 'components/TokenStats'
+import { featureEnabled } from 'functions/feature'
+import { Feature } from 'enums/Feature'
 
 export const BondList = () => {
   const { chainId } = useActiveWeb3React()
@@ -127,13 +129,15 @@ export const BondList = () => {
             </a>
           </NavLink>
         </Button>
-        <Button variant="filled" color="purple" size="lg">
+        {featureEnabled(Feature.DEFARM, chainId) &&
+          <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/defarms'}>
             <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span>DeFarms</span>
             </a>
           </NavLink>
         </Button>
+        }
       </div>
       <Typography className="text-2xl bg-dark-1000 mb-2 rounded rounded-2xl m-1 p-4 border border-purple font-bold text-center">SoulSwap Pools</Typography>
       <BondKey />
