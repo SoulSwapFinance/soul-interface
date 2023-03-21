@@ -12,7 +12,9 @@ import Web3ReactManager from 'components/Web3ReactManager'
 import getLibrary from 'functions/getLibrary'
 import { exception, GOOGLE_ANALYTICS_TRACKING_ID, pageview } from 'functions/gtag'
 import DefaultLayout from 'layouts/Default'
-import { FantomApiProvider } from "contexts/FantomApiProvider";
+import { FantomApiProvider } from "contexts/FantomApiProvider"
+import { ApolloContextProvider } from "contexts/ApolloContext"
+import { AppContextProvider } from "contexts/AppContext"
 
 import store, { persistor } from 'state'
 import ApplicationUpdater from 'state/application/updater'
@@ -35,20 +37,20 @@ import { ApiDataProvider } from 'contexts/ApiDataProvider'
 import ModalProvider from 'contexts/ModalProvider'
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client'
 import { RPC } from 'connectors'
-import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const link = createHttpLink({
   // uri: RPC[250],
   uri: 'https://xapi-nodee.fantom.network/',
   // headers: { authorization: token },  // The token in the auth header will be removed when the cookie approach is working)
-});
+})
 
 const client = new ApolloClient({
   cache: new InMemoryCache({ addTypename: true }),
   // uri: "/api",
   link,
   connectToDevTools: process.env.NODE_ENV === "development",
-});
+})
 
 
 const Web3ProviderNetwork = dynamic(() => import('components/Web3ProviderNetwork'), { ssr: false })
@@ -82,7 +84,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
     }
   }, [events])
 
-  const [queryClient] = React.useState(() => new QueryClient());
+  const [queryClient] = React.useState(() => new QueryClient())
   
   useEffect(() => {
     async function load(locale) {
@@ -147,12 +149,12 @@ function MyApp({ Component, pageProps, fallback, err }) {
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+            window.dataLayer = window.dataLayer || []
+            function gtag(){dataLayer.push(arguments)}
+            gtag('js', new Date())
             gtag('config', '${GOOGLE_ANALYTICS_TRACKING_ID}', {
               page_path: window.location.pathname,
-            });
+            })
           `,
         }}
       />
@@ -163,6 +165,8 @@ function MyApp({ Component, pageProps, fallback, err }) {
       <Hydrate state={pageProps.dehydratedState}>
         <ApiDataProvider>
           <ApolloProvider client={client}>
+          <ApolloContextProvider>
+          <AppContextProvider>
           {/*@ts-ignore TYPE NEEDS FIXING*/}
           <FantomApiProvider>
           <Web3ProviderNetwork getLibrary={getLibrary}>
@@ -200,6 +204,8 @@ function MyApp({ Component, pageProps, fallback, err }) {
             </Web3ReactManager>
           </Web3ProviderNetwork>
           </FantomApiProvider>
+          </AppContextProvider>
+          </ApolloContextProvider>
           </ApolloProvider>
           </ApiDataProvider>
           </Hydrate>

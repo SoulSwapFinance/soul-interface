@@ -111,7 +111,7 @@ export const TokenSelectorOverlay: FC<TokenSelectorOverlay> = ({
                 </div>
               </div>
               <Typography className="px-4 pb-1 text-slate-300" variant="xs">
-                {fundSource === FundSource.WALLET ? 'Wallet' : 'BentoBox'} Balances
+                {fundSource === FundSource.WALLET ? 'Wallet' : 'CoffinBox'} Balances
               </Typography>
               <div className="relative h-full pt-5">
                 <div className="w-full border-t border-slate-200/5" />

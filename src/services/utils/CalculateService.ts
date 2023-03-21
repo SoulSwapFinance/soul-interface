@@ -83,10 +83,11 @@ class CalculateService {
 
       if (underworldPair.asset) {
         totalAsset = BigNumber.from(pricesMap[underworldPair.asset.symbol])
-          .mul(BigNumber.from(underworldPair.totalAssetElastic))
+          // .mul(BigNumber.from(underworldPair.totalAssetElastic))
           .div(BigNumber.from("10").pow(Number(underworldPair.asset.decimals) + 6))
         totalBorrow = BigNumber.from(pricesMap[underworldPair.asset.symbol])
-          .mul(BigNumber.from(underworldPair.totalBorrowElastic))
+          // .mul(BigNumber.from(underworldPair.totalBorrowElastic))
+          // .mul(BigNumber.from(underworldPair.totalBorrow))
           .div(BigNumber.from("10").pow(Number(underworldPair.asset.decimals) + 6))
       }
       sumTotalAsset = sumTotalAsset.add(totalAsset)

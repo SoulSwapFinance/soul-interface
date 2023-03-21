@@ -6,7 +6,7 @@ export type CoffinBox = {
   id: string
   users?: User[]
   tokens?: Token[]
-  kashiPairs?: UnderworldPair[]
+  underworldPairs?: UnderworldPair[]
   totalTokens?: BigInt
   totalUnderworldPairs?: BigInt
   totalUsers?: BigInt

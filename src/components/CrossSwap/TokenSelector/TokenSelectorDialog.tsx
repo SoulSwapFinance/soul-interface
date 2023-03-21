@@ -120,7 +120,7 @@ export const TokenSelectorDialog: FC<TokenSelectorDialog> = ({
               </div>
               <div className="relative h-full -ml-6 -mr-6">
                 <Typography className="px-6 pb-1 text-left text-slate-400" variant="xs">
-                  {fundSource === FundSource.WALLET ? 'Wallet' : 'BentoBox'} Balances
+                  {fundSource === FundSource.WALLET ? 'Wallet' : 'CoffinBox'} Balances
                 </Typography>
                 <div className="w-full border-t border-slate-200/5" />
                 <div className="relative h-[calc(100%-32px)] pt-5">

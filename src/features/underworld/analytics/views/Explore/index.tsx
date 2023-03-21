@@ -5,19 +5,19 @@ import type { NextPage } from "next"
 import Head from "next/head"
 import { toast } from "react-toastify"
 import { useAppContext } from "contexts/AppContext"
-import { getUnderworldPairsQuery } from "services/graph/queries/explore"
+import { getUnderworldPairsExploreQuery } from "services/graph/queries/explore"
 import { UnderworldPairsByToken } from "features/underworld/analytics/types/UnderworldPair"
 import BaseLayout from "features/underworld/analytics/layout/BaseLayout"
-import Hero from "features/underworld/analytics/components/Hero"
-import Market from "../components/Market"
-import Total from "../components/Total"
+import Hero from "features/underworld/analytics/views/Explore/Hero"
+import Market from "./Market"
+import Total from "../../components/Total"
 
 const Home: NextPage = () => {
   const {
     loading: loadingToken,
     error,
     data: dataUnderworldPairs,
-  } = useQuery(getUnderworldPairsQuery)
+  } = useQuery(getUnderworldPairsExploreQuery)
   const [calculating, setCalculating] = useState(true)
   const [totalAsset, setTotalAsset] = useState(BigInt(0))
   const [totalBorrow, setTotalBorrow] = useState(BigInt(0))

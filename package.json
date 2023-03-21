@@ -133,7 +133,7 @@
     "serve": "^12.0.1",
     "styled-components": "^5.3.1",
     "swr": "^1.1.2",
-    "tailwindcss": "2.2.15",
+    "tailwindcss": "^3.2.7",
     "tailwindcss-border-gradient-radius": "^2.0.0",
     "typescript": "4.4.4",
     "wcag-contrast": "^3.0.0"
@@ -213,6 +213,8 @@
     "framer-motion": "^6.3.16",
     "graphql": "^15.5.3",
     "graphql-request": "^3.5.0",
+    "highcharts": "^10.3.3",
+    "highcharts-react-official": "3.1.0",
     "jotai": "^1.6.1",
     "kaktana-react-lightweight-charts": "2.0.0",
     "lifi-web": "^0.0.1",

@@ -25,7 +25,7 @@ const MarketTableHead = ({
   }
 
   return (
-    <tr className="text-sm border-t text-slate-400">
+    <tr className="text-sm border-t text-slate-400 bg-dark-1000">
       <td
         className="py-2 pl-8 pr-2 cursor-pointer"
         onClick={() => {
@@ -127,7 +127,7 @@ const MarketTableRow = ({
 
   return (
     <tr
-      onClick={() => goto(`/token/${data.token.id}`)}
+      onClick={() => goto(`/underworld/analytics/token/${data.token.id}`)}
       className="border-t border-l-2 border-transparent cursor-pointer border-t-gray-200 hover:border-l-primary1-400"
     >
       <td className="py-3 pl-8 pr-2">
@@ -279,8 +279,8 @@ const TokenMarketTable = ({
 
   return (
     <div className="overflow-x-auto bg-white border rounded shadow-md">
-      <h3 className="px-8 py-4 font-semibold">{title}</h3>
-      <div className="px-4 pb-2">
+      <h3 className="px-8 py-4 font-semibold bg-dark-1000">{title}</h3>
+      <div className="px-4 pb-2 bg-dark-1000">
         <input
           type="text"
           className="w-full p-2 border rounded focus:outline-primary1"
@@ -288,7 +288,7 @@ const TokenMarketTable = ({
           onChange={handleSearchChange}
         />
       </div>
-      <table className="w-full token-market-table">
+      <table className="w-full token-market-table bg-dark-1000">
         <thead>
           <MarketTableHead
             onSort={handleSort}

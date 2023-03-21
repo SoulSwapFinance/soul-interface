@@ -6,7 +6,7 @@ export type Token = {
     totalSupply?: BigInt
     totalSupplyElastic?: BigInt
     totalSupplyBase?: BigInt
-    price?: BigInt
+    price?: BigInt | number
     block?: BigInt
     timestamp?: BigInt
   }

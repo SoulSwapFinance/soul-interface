@@ -1,26 +1,26 @@
 import { gql } from "@apollo/client"
 
-export const getTokensQuery = gql`
+export const getTokensExploreQuery = gql`
   query GetTokens {
     tokens(
       first: 1000
-      orderBy: totalSupplyElastic
-      where: { totalSupplyElastic_gt: "0" }
+      orderBy: id
       orderDirection: desc
     ) {
       id
       name
       symbol
-      decimals
-      totalSupplyElastic
-      totalSupplyBase
-      block
-      timestamp
+      decimals    
+    rebase {
+        id
+        base
+        elastic
+      }
     }
   }
 `
 
-export const getUnderworldPairsQuery = gql`
+export const getUnderworldPairsExploreQuery = gql`
   query GetPairs {
     underworldPairs(first: 1000) {
       id
@@ -40,12 +40,9 @@ export const getUnderworldPairsQuery = gql`
       }
       exchangeRate
       utilization
-      interestPerSecond
-      totalAssetElastic
-      totalAssetBase
+      totalAsset
       supplyAPR
-      totalBorrowElastic
-      totalBorrowBase
+      totalBorrow
       borrowAPR
     }
   }

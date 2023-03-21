@@ -1,5 +1,5 @@
-import TokenMarketTable from "../components/tables/TokenMarketTable"
-import { UnderworldPairsByToken } from "../types/UnderworldPair"
+import TokenMarketTable from "../../components/tables/TokenMarketTable"
+import { UnderworldPairsByToken } from "../../types/UnderworldPair"
 
 const Market = ({
   loading,
