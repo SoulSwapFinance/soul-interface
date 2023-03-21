@@ -29,5 +29,5 @@ export type UnderworldPairDayDataMap = {
 
 export type UnderworldPairDayDataMapsCollateral = {
   collateral: Token
-  underworldPairMaps: UnderworldPairDayDataMap[]
+  underworldPairsMaps: UnderworldPairDayDataMap[]
 }
