@@ -522,7 +522,7 @@ const CreateFarm = () => {
                   {/* <b>100% of the fee</b> goes towards building our protocol-owned liquidity, which brings about long-term sustainability to our platform. */}
                 </Typography>
                 <Typography variant="sm" className="text-center">
-                {`You're incentivizing ${rewardAsset.wrapped.symbol}-${NATIVE[chainId].symbol} deposits.`}
+                {`You're incentivizing ${rewardAsset.wrapped.symbol}-${NATIVE[chainId].symbol} deposits and agree to the possibility of us imposing a minimum AURA balance (governance power) for deposits.`}
                 {
                   // , please ensure you have created the pair before creating a Campaign.
                 }
@@ -586,7 +586,7 @@ const CreateFarmLayout = ({ children }) => {
             // backgroundImage="/images/defarms/deposit.png"
             title={i18n._(t`Create New Farm`)}
             description={i18n._(
-              t`We provide protocols with the opportunity to incentivize their communities to provide liquidity.`
+              t`We provide protocols with the opportunity to incentivize their communities to provide liquidity. We reserve the right to: (1) add a requirement for a minimum AURA (governance power) to deposit, (2) update the logoURI, (3) pause the contract, (3) trigger emergency withdrawals, and (4) restrict the ability to update the DAO address.`
               // t`If you want to supply to a market that is not listed yet, you can use this tool to create a new pair.`
             )}
           />
@@ -602,7 +602,7 @@ const CreateFarmLayout = ({ children }) => {
             )}
           />
           <div className={`flex rounded text-center`}>
-            <ExternalLink className={`border border-[${getChainColor(chainId)}] rounded rounded-xl text-${getChainColorCode(chainId)} bg- flex-center font-bold text-center mt-2 mb-2 w-full p-2 m-4`} href="https://github.com/SoulSwapFinance/manifest-contracts">
+            <ExternalLink className={`border border-[${getChainColor(chainId)}] rounded rounded-xl text-${getChainColorCode(chainId)} bg- flex-center font-bold text-center mt-2 mb-2 w-full p-2 m-4`} href="https://github.com/SoulSwapFinance/defarms-contracts">
               {i18n._(t`Click Here to View Our Unit Tests`)}
             </ExternalLink>
           </div>
