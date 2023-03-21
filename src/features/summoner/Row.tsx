@@ -1000,7 +1000,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                         </SubmitButton>
                     </Wrap>
                     <Typography className={`flex text-center mt-4 sm:mt-6 border border-[${getChainColor(chainId)}] p-2 rounded rounded-2xl`}>
-                        {`Mind slippage when zapping to prevent loses due to low liquidity. If unsure, ask or avoid zaps above ~${[ChainId.FANTOM].includes(chainId) ? `$500` : `$300`}.`}
+                        {`Mind slippage and loses due to low liquidity. Avoid large amounts, if unsure.`}
                     </Typography>
 
                 </Modal>
