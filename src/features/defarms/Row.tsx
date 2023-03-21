@@ -31,6 +31,7 @@ import { t } from '@lingui/macro'
 import { i18n } from '@lingui/core'
 // import { Route } from 'react-router-dom'
 import { useRouter } from 'next/router'
+import DoubleCurrencyLogo from 'components/DoubleLogo'
 // import Image from 'next/image'
 
 const HideOnSmall = styled.div`
@@ -302,9 +303,10 @@ export const ActiveRow = ({ pid }) => {
                                     <div
                                         className={`flex justify-center`}
                                     >
-                                    <CurrencyLogo
-                                        currency={rewardToken}
-                                        size={36}
+                                    <DoubleCurrencyLogo 
+                                        currency0={rewardToken} 
+                                        currency1={NATIVE[chainId]} 
+                                        size={40} 
                                     />
                                     {/* <Image 
                                         src={logoURI}
@@ -559,7 +561,7 @@ export const ActiveRow = ({ pid }) => {
                                 }
 
                                 {/* UN-APPROVED */}
-                                {/* {!approved && hasBalance && ( */}
+                                {!approved && hasBalance && (
                                     <SubmitButton
                                         height="2rem"
                                         primaryColor={buttonColor}
@@ -570,7 +572,7 @@ export const ActiveRow = ({ pid }) => {
                                             {i18n._(t`APPROVE ASSET`)}
                                         </div>
                                     </SubmitButton>
-                                {/* )} */}
+                                )}
 
                                 {/* APPROVED */}
                                 {approved && hasBalance && (
