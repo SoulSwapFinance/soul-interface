@@ -8,7 +8,7 @@ import NavLink from 'components/NavLink'
 // import { useLuxorPrice } from 'hooks/getPrices'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
-import { DeFarmBanner, DonateBanner } from 'components/Banner'
+import { LuxorBanner, DonateBanner } from 'components/Banner'
 import { useActiveWeb3React } from 'services/web3'
 
 const Luxor = () => {
@@ -17,8 +17,12 @@ const Luxor = () => {
 
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
-      <DeFarmBanner chainId={chainId} />
-      <Container id="luxor-page">
+        <LuxorBanner 
+          chainId={chainId} 
+          textColor={'black'} 
+          color={'yellow'} 
+        />
+        <Container id="luxor-page">
         <Head>
           <title>Luxor | Soul</title>
           <meta key="description" name="description" content="Mint SOUL" />
