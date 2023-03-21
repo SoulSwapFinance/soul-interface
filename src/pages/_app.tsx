@@ -201,8 +201,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
               </ReduxProvider>
             </Web3ReactManager>
           </Web3ProviderNetwork>
-          </FantomApiProvider>
- 
+          </FantomApiProvider> 
           </ApolloProvider>
           </ApiDataProvider>
           </Hydrate>
