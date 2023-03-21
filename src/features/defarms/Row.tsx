@@ -556,6 +556,7 @@ export const ActiveRow = ({ pid }) => {
                                         value={depositValue}
                                         balance={walletBalance.toString()}
                                         id={pid}
+                                        defarm={true}
                                 />
                                 }
 
@@ -769,6 +770,7 @@ export const ActiveRow = ({ pid }) => {
                                     value={withdrawValue}
                                     balance={stakedBalance.toString()}
                                     id={pid}
+                                    defarm={true}
                                 />
                                 <Wrap padding="0" margin="0" display="flex">
 

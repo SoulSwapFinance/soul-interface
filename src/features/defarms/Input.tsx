@@ -3,7 +3,7 @@ import { Currency, Percent, Token } from 'sdk'
 import { classNames, formatNumber } from 'functions'
 import { Button } from 'components/Button'
 import Input from 'components/Input'
-import { useSummonerPoolInfo } from 'hooks/useAPI'
+import { useDeFarmPoolInfo, useSummonerPoolInfo } from 'hooks/useAPI'
 
 interface FarmInputPanelProps {
   pid: string
@@ -22,6 +22,7 @@ interface FarmInputPanelProps {
   locked?: boolean
   customBalanceText?: string
   showSearch?: boolean
+  defarm?: boolean
 }
 
 export default function FarmInputPanel({
@@ -32,9 +33,12 @@ export default function FarmInputPanel({
   onUserInput,
   onMax,
   id,
+  defarm,
 }: FarmInputPanelProps) {
   const { summonerPoolInfo } = useSummonerPoolInfo(pid)
-  const assetPrice = summonerPoolInfo.lpPrice
+  const { defarmPoolInfo } = useDeFarmPoolInfo(pid)
+  const farmAssetPrice = summonerPoolInfo.lpPrice
+  const defarmAssetPrice = defarmPoolInfo.lpPrice
 
   return (
     <div id={id} className={classNames('p-1 rounded bg-dark-1000')}>
@@ -54,9 +58,9 @@ export default function FarmInputPanel({
                   <div className="text-xs font-medium text-right cursor-pointer text-high-emphesis">
                     {formatNumber(balance, false, true) || 0} {' '} MAX
                   <br/>
-                  ≈${isNative 
-                    ? formatNumber(Number(value) * Number(assetPrice), false)
-                    : formatNumber(Number(value) * Number(assetPrice), false)
+                  ≈${!defarm 
+                    ? formatNumber(Number(value) * Number(farmAssetPrice), false)
+                    : formatNumber(Number(value) * Number(defarmAssetPrice), false)
                   }
                   </div>
                 </div>
