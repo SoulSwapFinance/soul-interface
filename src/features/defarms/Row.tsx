@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
-import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, Token } from 'sdk'
+import { ChainId, Currency, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, Token } from 'sdk'
 import { useTokenContract, useZapperContract, useManifesterContract, useManifestationContract } from 'hooks/useContract'
 import useApprove from 'hooks/useApprove'
 import { Tab } from '@headlessui/react'
@@ -33,11 +33,11 @@ import DoubleCurrencyLogo from 'components/DoubleLogo'
 // import { Route } from 'react-router-dom'
 // import Image from 'next/image'
 
-const HideOnSmall = styled.div`
-@media screen and (max-width: 900px) {
-  display: none;
-}
-`
+// const HideOnSmall = styled.div`
+// @media screen and (max-width: 900px) {
+//   display: none;
+// }
+// `
 
 const HideOnMobile = styled.div`
 @media screen and (max-width: 600px) {
@@ -59,7 +59,7 @@ export const ActiveRow = ({ pid }) => {
     const [depositValue, setDepositValue] = useState('0')
     const [zapValue, setZapValue] = useState('0')
     // const [farmAddress, setFarmAddress] = useState('0xe7A3d3a56b08358f6EB0120eE46b2DD7930c4C26')
-    const [zapTokenAddress, setZapTokenAddress] = useState(SOUL_ADDRESS[chainId])
+    const [zapToken, setZapToken] = useState<Token>()
 
     // const nowTime = new Date().getTime()
     // const { defarmInfo } = useDeFarmInfo()
@@ -138,15 +138,15 @@ export const ActiveRow = ({ pid }) => {
     const ZapContractAddress = ZapContract.address
 
     // ZAP ADD-ONS //
-    const tokenContract = useTokenContract(zapTokenAddress)
-    const zapTokenDecimals = Number(useTokenInfo(zapTokenAddress).tokenInfo.decimals)
-    const zapTokenSymbol = useTokenInfo(zapTokenAddress).tokenInfo.symbol
-    const zapTokenName = useTokenInfo(zapTokenAddress).tokenInfo.name
-    const zapToken = new Token(chainId, zapTokenAddress, zapTokenDecimals, zapTokenSymbol, zapTokenName)
+    const tokenContract = useTokenContract(zapToken?.wrapped.address)
+    const zapTokenDecimals = Number(useTokenInfo(zapToken?.wrapped.address).tokenInfo.decimals)
+    const zapTokenSymbol = useTokenInfo(zapToken?.wrapped.address).tokenInfo.symbol
+    const zapTokenName = useTokenInfo(zapToken?.wrapped.address).tokenInfo.name
+    // const zapToken = new Token(chainId, zapTokenAddress, zapTokenDecimals, zapTokenSymbol, zapTokenName)
     const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
 
     // USER INFO //
-    const { userTokenInfo } = useUserTokenInfo(account, zapTokenAddress)
+    const { userTokenInfo } = useUserTokenInfo(account, zapToken?.wrapped.address)
     const selectedTokenDecimals = zapTokenDecimals ? zapTokenDecimals : 18
     const selectedTokenBalance = Number(userTokenInfo.balance) / selectedTokenDecimals // TODO: try erc20BalanceOf(zapTokenAddress)
     const zapTokenBalance = tryParseAmount(selectedTokenBalance.toString(), zapToken)
@@ -827,7 +827,7 @@ export const ActiveRow = ({ pid }) => {
                         chainId={chainId}
                         open={modalOpen}
                         onDismiss={handleDismissSearch}
-                        onCurrencySelect={(value) => setZapTokenAddress(value.wrapped.address)}
+                        onCurrencySelect={(value) => setZapToken(value.wrapped)}
                         selectedCurrency={zapToken ?? undefined}
                         allowManageTokenList={false}
                         showSearch={true}
@@ -884,7 +884,7 @@ export const ActiveRow = ({ pid }) => {
                             className={'font-bold'}
                             margin=".5rem 0 0rem 0"
                             onClick={() =>
-                                handleZap(zapTokenAddress, depositAddress)
+                                handleZap(zapToken.wrapped.address, depositAddress)
                             }
                         >
                             ZAP INTO PAIR
