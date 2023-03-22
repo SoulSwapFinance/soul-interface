@@ -522,10 +522,8 @@ const CreateFarm = () => {
                   {/* <b>100% of the fee</b> goes towards building our protocol-owned liquidity, which brings about long-term sustainability to our platform. */}
                 </Typography>
                 <Typography variant="sm" className="text-center">
-                {`You're incentivizing ${rewardAsset.wrapped.symbol}-${NATIVE[chainId].symbol} deposits.`}
-                {
-                  // , please ensure you have created the pair before creating a Campaign.
-                }
+                {`You're incentivizing ${rewardAsset.wrapped.symbol}-${NATIVE[chainId].symbol} deposits and agree to the 
+                possibility of us imposing a minimum AURA balance (governance power) for deposits.`}
                 </Typography>
                 <Typography variant="sm" className="font-medium text-center">
                   {i18n._(t`QUESTIONS OR CONCERNS?`)}
@@ -586,9 +584,9 @@ const CreateFarmLayout = ({ children }) => {
             // backgroundImage="/images/defarms/deposit.png"
             title={i18n._(t`Create New Farm`)}
             description={i18n._(
-              t`We provide protocols with the opportunity to incentivize their communities to provide liquidity.`
-              // t`If you want to supply to a market that is not listed yet, you can use this tool to create a new pair.`
-            )}
+              t`We provide protocols with the opportunity to incentivize their communities to provide liquidity. 
+              We reserve the right to: (1) add a requirement for a minimum AURA (governance power) to deposit, (2) update the logoURI, 
+              (3) pause the contract, (3) trigger emergency withdrawals, and (4) restrict the ability to update the DAO address.`)}
           />
           <div className={`flex rounded m-1`} />
           <Card
