@@ -120,7 +120,7 @@ export const ActiveRow = ({ pid }) => {
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(depositAddress)
     // const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
     // const parsedDepositValue = tryParseAmount(depositValue, assetToken)
-    const parsedWithdrawValue = tryParseAmount(withdrawValue, assetToken)
+    // const parsedWithdrawValue = tryParseAmount(withdrawValue, assetToken)
 
     // COLOR //
     const buttonColor = getChainColor(chainId)
@@ -561,7 +561,7 @@ export const ActiveRow = ({ pid }) => {
                                 }
 
                                 {/* UN-APPROVED */}
-                                {!approved && hasBalance && (
+                                {/* {!approved && hasBalance && ( */}
                                     <SubmitButton
                                         height="2rem"
                                         primaryColor={buttonColor}
@@ -572,10 +572,10 @@ export const ActiveRow = ({ pid }) => {
                                             {i18n._(t`APPROVE ASSET`)}
                                         </div>
                                     </SubmitButton>
-                                )}
+                                {/* )} */}
 
                                 {/* APPROVED */}
-                                {approved && hasBalance && (
+                                {hasBalance && (
                                     <SubmitButton
                                         height="2rem"
                                         primaryColor={buttonColor}
