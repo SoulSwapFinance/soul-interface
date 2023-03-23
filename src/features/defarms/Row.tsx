@@ -77,7 +77,7 @@ export const ActiveRow = ({ pid }) => {
     const earnedAmount = Number(defarmUserInfo.pendingRewards)
     const earnedValue = Number(defarmUserInfo.pendingValue)
     // const lpPrice = Number(defarmUserInfo.lpPrice)
-    const withdrawFee = Number(defarmUserInfo.currentRate) / 1E18
+    const withdrawFee = Number(defarmUserInfo.currentRate)
     const walletBalance = Number(defarmUserInfo.walletBalance)
     // const lastWithdrawTime = Number(defarmUserInfo.lastWithdrawTime)
     // const secondsRemaining = Number(defarmUserInfo.secondsRemaining)
