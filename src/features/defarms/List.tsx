@@ -109,4 +109,4 @@ export const FarmList = () => {
 
 export default FarmList
 
-FarmList.Guard = NetworkGuard(Feature.LIQUIDITY_MINING)
+FarmList.Guard = NetworkGuard(Feature.DEFARM)
