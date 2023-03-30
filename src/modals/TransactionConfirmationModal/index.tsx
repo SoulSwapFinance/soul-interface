@@ -43,7 +43,7 @@ export const ConfirmationPendingContent: FC<ConfirmationPendingContentProps> = (
         <div className="text-xl font-bold text-high-emphesis">{i18n._(t`Waiting for Confirmation`)}</div>
         <div className="font-bold">{pendingText}</div>
         <div className="font-bold">{pendingText2}</div>
-        <div className="text-sm font-bold text-secondary">{i18n._(t`Confirm this transaction in your wallet`)}</div>
+        <div className="text-sm font-bold text-secondary">{i18n._(t`Confirm transaction in your wallet`)}</div>
       </div>
     </div>
   )
