@@ -163,23 +163,23 @@ export default function Dashboard() {
   // console.log('treasuryLiquidityBalance:%s', treasuryLiquidityBalance)
 
   // GET INVESTMENT BALANCES //
-  const FtmDaiBalance = Number(usePairInfo(FtmDaiAddress).pairInfo.luxorTreasuryBalance) / 1e18
-  const FtmWlumBalance = Number(usePairInfo(WrappedLumFantomAddress).pairInfo.luxorTreasuryBalance) / 1e18
-  const FtmLendDaiBalance = Number(usePairInfo(FtmLendDaiAddress).pairInfo.luxorTreasuryBalance) / 1e18
-  const DaiLendFtmBalance = Number(usePairInfo(DaiLendFtmAddress).pairInfo.luxorTreasuryBalance) / 1e18
-  const LuxDaiBalance = Number(usePairInfo(LuxorDaiAddress).pairInfo.luxorTreasuryBalance) / 1e18
-  const LuxDaiValue = LuxDaiBalance * luxDaiPrice
+  // const FtmDaiBalance = Number(usePairInfo(FtmDaiAddress).pairInfo.luxorTreasuryBalance) / 1e18
+  // const FtmWlumBalance = Number(usePairInfo(WrappedLumFantomAddress).pairInfo.luxorTreasuryBalance) / 1e18
+  // const FtmLendDaiBalance = Number(usePairInfo(FtmLendDaiAddress).pairInfo.luxorTreasuryBalance) / 1e18
+  // const DaiLendFtmBalance = Number(usePairInfo(DaiLendFtmAddress).pairInfo.luxorTreasuryBalance) / 1e18
+  // const LuxDaiBalance = Number(usePairInfo(LuxorDaiAddress).pairInfo.luxorTreasuryBalance) / 1e18
+  // const LuxDaiValue = LuxDaiBalance * luxDaiPrice
 
-  const FtmDaiValue = FtmDaiBalance * ftmDaiPrice
-  const FtmWlumValue = FtmWlumBalance * wLumFtmPrice
-  const FtmLendDaiValue = FtmLendDaiBalance * 1
-  const DaiLendFtmValue = DaiLendFtmBalance * ftmPrice
+  // const FtmDaiValue = FtmDaiBalance * ftmDaiPrice
+  // const FtmWlumValue = FtmWlumBalance * wLumFtmPrice
+  // const FtmLendDaiValue = FtmLendDaiBalance * 1
+  // const DaiLendFtmValue = DaiLendFtmBalance * ftmPrice
 
-  const treasuryInvestmentBalance = FtmDaiValue + LuxDaiValue + FtmWlumValue + FtmLendDaiValue + DaiLendFtmValue
+  // const treasuryInvestmentBalance = FtmDaiValue + LuxDaiValue + FtmWlumValue + FtmLendDaiValue + DaiLendFtmValue
   // console.log('treasuryInvestmentBalance:%s', treasuryInvestmentBalance)
     
   // calculate Treasury Balances
-  const treasuryBalance = treasuryLiquidityBalance + treasuryReserveBalance + treasuryInvestmentBalance
+  const treasuryBalance = treasuryLiquidityBalance + treasuryReserveBalance // + treasuryInvestmentBalance
 
   // calculate floor price
   // const luxorFloorPrice = treasuryReserveBalance / (luxorSupply - storedLuxor)
@@ -219,12 +219,12 @@ export default function Dashboard() {
       "color": "#FFC300",
       "percent": (((treasuryReserveBalance) / treasuryBalance) * 100).toFixed()
     },
-    {
-        "label": "INVESTMENTS",
-        "angle": treasuryInvestmentBalance,
-        "color": "#FFE300",
-        "percent": (((treasuryInvestmentBalance) / treasuryBalance) * 100).toFixed()
-    },
+    // {
+    //     "label": "INVESTMENTS",
+    //     "angle": treasuryInvestmentBalance,
+    //     "color": "#FFE300",
+    //     "percent": (((treasuryInvestmentBalance) / treasuryBalance) * 100).toFixed()
+    // },
     // {
     //     "label": "FTM",
     //     "angle": treasuryFtmBalance,
