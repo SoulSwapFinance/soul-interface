@@ -52,7 +52,7 @@ const TokenPairLink = styled(ExternalLink)`
 
 export const ActiveRow = ({ pid }) => {
     const { account, chainId } = useActiveWeb3React()
-    const router = useRouter()
+    // const router = useRouter()
     const [approved, setApproved] = useState(false)
     const [approvedZap, setZapApproved] = useState(false)
     const [withdrawValue, setWithdrawValue] = useState('0')
@@ -86,7 +86,7 @@ export const ActiveRow = ({ pid }) => {
     const feeAmount = withdrawFee * stakedBalance / 100
     const withdrawable = stakedBalance - feeAmount
     // const feeValue = feeAmount * lpPrice
-    
+
     // DEFARM POOL INFO //
     const { defarmPoolInfo } = useDeFarmPoolInfo(pid)
     const mAddress = defarmPoolInfo.mAddress
