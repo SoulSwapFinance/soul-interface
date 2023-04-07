@@ -14,7 +14,6 @@ const Marketplace = () => {
 	return (
       <iframe
         className="mt-2 w-full"
-			  frame-border={"none"}
     		title={"Marketplace"}
     		src="https://artion-client-v2-h110s2f6q-bunsdev.vercel.app"
     		height={screenHeight}

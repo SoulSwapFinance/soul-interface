@@ -13,7 +13,6 @@ const Pay = () => {
 	return (
       <iframe
 	  		className="mt-2 w-full"
-			frame-border={"none"}
     		title={"Pay"}
     		src="https://pay.soulswap.finance"
     		height={screenHeight}
