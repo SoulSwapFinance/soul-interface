@@ -840,7 +840,7 @@ export const ActiveRow = ({ pid }) => {
                         onChange={(value) => setZapValue(value)}
                         balance={zapTokenBalance}
                         showBalance={false}
-                        showMax={false}
+                        showMax={true}
                     />
                     <Wrap padding="0" margin="0" display="flex">
                         <SubmitButton

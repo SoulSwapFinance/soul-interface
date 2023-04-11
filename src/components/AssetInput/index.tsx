@@ -2,7 +2,7 @@ import { ExclamationCircleIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { AVAX_ADDRESS, ChainId, Currency, CurrencyAmount, Token, WNATIVE_ADDRESS } from 'sdk'
+import { AVAX_ADDRESS, ChainId, Currency, CurrencyAmount, Token, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import selectCoinAnimation from 'animation/select-coin.json'
 import { Button } from 'components/Button'
 import Chip from 'components/Chip'
@@ -24,6 +24,7 @@ import React, { createContext, FC, ReactNode, useContext, useEffect, useMemo, us
 import { useBinancePrice, useFantomPrice, useTokenPrice, useWrappedBtcPrice } from 'hooks/getPrices'
 import { usePairPrice } from 'hooks/usePairData'
 import { usePairInfo, usePriceUSD, useTokenInfo } from 'hooks/useAPI'
+import { useNativePrice } from 'services/graph'
 
 interface AssetInputProps {
   value?: string
@@ -210,6 +211,7 @@ const AssetInputPanel = ({
   // const pairPrice = usePairPrice(currencyAddress)
   const usdcValue = useUSDCValue(tryParseAmount(Number(value) === 0 ? '1' : value, currency))
   const tokenPrice = useTokenPrice(token0)
+  const nativePrice = useTokenPrice(WNATIVE_ADDRESS[chainId])
   const ftmPrice = useFantomPrice()
   // const nativePrice = Number(usePriceUSD(WNATIVE_ADDRESS[chainId]).price)
   const btcPrice = useWrappedBtcPrice()
@@ -271,7 +273,7 @@ const AssetInputPanel = ({
             <CurrencyLogo currency={currency} size={size === 'md' ? 48 : 40} className="!rounded-full" />
           </div>
         )}
-        <div className="flex flex-col flex-grow">
+        <div className="grid grid-cols-1 flex-grow">
           <Typography variant="h3" weight={700} className="relative flex flex-row items-baseline overflow-hidden">
             <NumericalInput
               disabled={disabled}
@@ -299,7 +301,7 @@ const AssetInputPanel = ({
               currency.symbol == 'DAI' ? formatNumber(1 * Number(value), true, true) :
               currency.symbol == 'BNB' ? formatNumber(bnbPrice * Number(value), true, true) :
               // TODO: FIX BELOW
-              currency.isNative ? formatNumber(ftmPrice * Number(value), true, true) :
+              currency.isNative ? formatNumber(nativePrice * Number(value), true, true) :
               // currency.isNative ? formatNumber(nativePrice * Number(value), true, true) :
               currency.symbol == 'FTM' ? formatNumber(ftmPrice * Number(value), true, true) :
               currency.symbol == 'WFTM' ? formatNumber(ftmPrice * Number(value), true, true) :
@@ -307,16 +309,16 @@ const AssetInputPanel = ({
               formatNumber(pairPrice * Number(value), true, true))            
             }
           </Typography>
-        </div>
+          </div>
         {error ? (
           <ExclamationCircleIcon className="w-8 h-8 mr-2 text-red" />
-        ) : (
-          showMax && (
-            <Button size="xs" variant="outlined" color="gray" className="!border" onClick={() => onMax()}>
+          ) : (
+            showMax && (
+              <Button size="xs" variant="outlined" color="gray" className="!border" onClick={() => onMax()}>
               MAX
             </Button>
           )
-        )}
+          )}
       </div>
     )
   }
