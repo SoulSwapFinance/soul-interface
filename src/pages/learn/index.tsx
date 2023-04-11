@@ -13,7 +13,6 @@ const Learn = () => {
 	return (
       <iframe
 	  		className="mt-2 w-full"
-			frame-border={"none"}
     		title={"Learn"}
     		src="https://protocol.soulswap.finance"
     		height={screenHeight}

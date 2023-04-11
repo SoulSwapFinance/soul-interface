@@ -13,7 +13,6 @@ const Explorer = () => {
 	return (
       <iframe
 	  		className="mt-2 w-full"
-			frame-border={"none"}
     		title={"Explorer"}
 			src="https://market-explorer.vercel.app/#/tokens/ethereum"
     		height={screenHeight}

@@ -13,7 +13,6 @@ const Landing = () => {
 	return (
       <iframe
 	  		className="mt-4 w-full"
-			frame-border={"none"}
     		title={"Landing"}
     		src="https://home.soulswap.finance"
     		height={screenHeight}

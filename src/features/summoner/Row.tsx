@@ -950,7 +950,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                         onChange={(value) => setZapValue(value)}
                         balance={zapTokenBalance}
                         showBalance={false}
-                        showMax={false}
+                        showMax={true}
                     />
                     <Wrap padding="0" margin="0" display="flex">
                         <SubmitButton
