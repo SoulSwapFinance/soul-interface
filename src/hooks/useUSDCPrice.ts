@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import { useV2TradeExactOut } from './useV2Trades'
 
 import { tryParseAmount } from 'functions'
-import { BNB, LUXOR, MIM, AVAX, SEANCE, SOUL, FUSD, USDC, WBTC, WETH, WFTM, WLUM, GRIMEVO, SURV, DAI, SOR } from 'constants/tokens'
+import { BNB, LUXOR, MIM, AVAX, SEANCE, SOUL, FUSD, USDC, WBTC, WETH, WFTM, WLUM, SURV, DAI, SOR } from 'constants/tokens'
 import { AVAX_ADDRESS, BNB_ADDRESS, FUSD_ADDRESS, LUX_ADDRESS, SEANCE_ADDRESS, WFTM_ADDRESS, 
   SOUL_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS, SURV_ADDRESS } 
   from 'constants/addresses'
@@ -59,15 +59,15 @@ const WLUM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WLUM[ChainId.FANTOM], 100_000e6)
 }
 
-const WETH_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WETH[ChainId.FANTOM], 100_000e6),
-  [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(WETH[ChainId.AVALANCHE], 100_000e6)
-}
+// const WETH_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
+//   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WETH[ChainId.FANTOM], 100_000e6),
+//   [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(WETH[ChainId.AVALANCHE], 100_000e6)
+// }
 
-const WBTC_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WBTC[ChainId.FANTOM], 100_000e6),
-  [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(WBTC[ChainId.AVALANCHE], 100_000e6)
-}
+// const WBTC_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
+//   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WBTC[ChainId.FANTOM], 100_000e6),
+//   [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(WBTC[ChainId.AVALANCHE], 100_000e6)
+// }
 
 const WFTM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WFTM[ChainId.FANTOM], 100_000e6)
@@ -109,8 +109,8 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   // const crvPrice = usePrice(CRV_ADDRESS[250])
   // const grimEvoPrice = usePrice(GRIMEVO_ADDRESS[250])
  
-  const wethPrice = usePrice(WETH_ADDRESS[chainId])
-  const wbtcPrice = usePrice(WBTC_ADDRESS[chainId])
+  // const wethPrice = usePrice(WETH_ADDRESS[chainId])
+  // const wbtcPrice = usePrice(WBTC_ADDRESS[chainId])
   const bnbPrice = usePrice(BNB_ADDRESS[chainId])
   const avaxPrice = usePrice(AVAX_ADDRESS[chainId])
   
@@ -128,8 +128,8 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const daiAmountOut = chainId ? DAI_AMOUNT_OUT[chainId] : undefined
   const soulAmountOut = chainId ? SOUL_AMOUNT_OUT[chainId] : undefined
   const seanceAmountOut = chainId ? SEANCE_AMOUNT_OUT[chainId] : undefined
-  const wethAmountOut = chainId ? WETH_AMOUNT_OUT[chainId] : undefined
-  const wbtcAmountOut = chainId ? WBTC_AMOUNT_OUT[chainId] : undefined
+  // const wethAmountOut = chainId ? WETH_AMOUNT_OUT[chainId] : undefined
+  // const wbtcAmountOut = chainId ? WBTC_AMOUNT_OUT[chainId] : undefined
   const bnbAmountOut = chainId ? BNB_AMOUNT_OUT[chainId] : undefined
   const avaxAmountOut = chainId ? AVAX_AMOUNT_OUT[chainId] : undefined
 
@@ -143,16 +143,17 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const seance = seanceAmountOut?.currency
   const luxor = luxorAmountOut?.currency
   const wlum = wlumAmountOut?.currency
-  const weth = wethAmountOut?.currency
   const wftm = wftmAmountOut?.currency
-  const wbtc = wbtcAmountOut?.currency
   const surv = survAmountOut?.currency
   const bnb = bnbAmountOut?.currency
-  // const crv = crvAmountOut?.currency
-  // const grimEVO = grimEVOAmountOut?.currency
   const avax = avaxAmountOut?.currency
 
-  const WBTC_MULTIPLIER = chainId == ChainId.FANTOM ? 2 : ChainId.AVALANCHE ? 3.5 : 0
+  // const weth = wethAmountOut?.currency
+  // const wbtc = wbtcAmountOut?.currency
+  // const crv = crvAmountOut?.currency
+  // const grimEVO = grimEVOAmountOut?.currency
+
+  // const WBTC_MULTIPLIER = chainId == ChainId.FANTOM ? 2 : ChainId.AVALANCHE ? 3.5 : 0
 
   // TODO(#2808): remove dependency on useBestV2Trade
   /* const v2USDCTrade = useBestV2Trade(TradeType.EXACT_OUTPUT, amountOut, currency, {
@@ -224,14 +225,14 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
     }
 
     // handle weth
-    if (currency?.wrapped.equals(weth)) {
-      return new Price(weth, weth, '1000', Number(wethPrice * 1000).toFixed())
-    }
+    // if (currency?.wrapped.equals(weth)) {
+    //   return new Price(weth, weth, '1000', Number(wethPrice * 1000).toFixed())
+    // }
 
-    // handle wbtc
-    if (currency?.wrapped.equals(wbtc)) {
-      return new Price(wbtc, wbtc, '1', Number(wbtcPrice * WBTC_MULTIPLIER).toFixed())
-    }
+    // // handle wbtc
+    // if (currency?.wrapped.equals(wbtc)) {
+    //   return new Price(wbtc, wbtc, '1', Number(wbtcPrice * WBTC_MULTIPLIER).toFixed())
+    // }
     
     // handle bnb
     if (currency?.wrapped.equals(bnb)) {
