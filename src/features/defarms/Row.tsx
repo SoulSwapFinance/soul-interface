@@ -94,7 +94,6 @@ export const ActiveRow = ({ pid }) => {
     const liquidity = defarmPoolInfo.tvl
     const lpPrice = Number(defarmPoolInfo.lpPrice)
     // const userShare = 
-    const APR = defarmPoolInfo.apr
     // const liquidity = Number(defarmPoolInfo.tvl)
     // const depositedAssets = Number(defarmPoolInfo.lpBalance)
     // const liquidity = depositedAssets * lpPrice
@@ -110,11 +109,13 @@ export const ActiveRow = ({ pid }) => {
     // const startTime = Number(defarmPoolInfo.startTime)
     const symbol = defarmPoolInfo.symbol
     const endTime = Number(defarmPoolInfo.endTime)
+    const hasEnded = endTime < Date.now() / 1_000 // ms -> secs
+    const APR = hasEnded ? 0 : defarmPoolInfo.apr
     
     const feeValue = feeAmount * lpPrice
     const hasBalance = Number(walletBalance) > 0
-    const isActive = pairStatus == "active"
-    const assetToken = new Token(chainId, depositAddress, 18)
+    const isActive = pairStatus == "active" && !hasEnded
+    // const assetToken = new Token(chainId, depositAddress, 18)
     const rewardToken = new Token(chainId, rewardAddress, 18)
 
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(depositAddress)
@@ -125,7 +126,7 @@ export const ActiveRow = ({ pid }) => {
     // COLOR //
     const buttonColor = getChainColor(chainId)
     const buttonTextColor = "white"
-    const textColor = !isActive ? "text-pink" : "text-dark-600"
+    const textColor = !isActive ? "text-avaxRed" : "text-dark-600"
 
     // PAIR INFO //
     // const token0 = new Token(chainId, WNATIVE_ADDRESS[chainId], 18)
@@ -286,10 +287,10 @@ export const ActiveRow = ({ pid }) => {
 
     return (
         <div>
-            <div className={classNames(" mt-1 bg-dark-900 p-1 sm:p-4 rounded rounded-2xl border border-2 border-blue", !hasBalance && "border-dark-1000",
-                        !isActive ? "hover:border-pink"
+            <div className={classNames(" mt-1 bg-dark-900 p-1 sm:p-4 rounded rounded-2xl border border-2", !isActive && 'border-avaxRed',  !hasBalance && "border-dark-1000",
+                        !isActive ? "hover:border-avaxRed"
                             : hasBalance ? "border-dark-600"
-                                : hasBalance && !isActive ? "hover:border-pink border-pink"
+                                : hasBalance && !isActive ? "hover:border-avaxRed border-avaxRed"
                                     : "hover:border-dark-600"
                     )}
                         onClick={() => handleShowOptions()}
@@ -402,11 +403,11 @@ export const ActiveRow = ({ pid }) => {
                     isOpen={showOptions}
                     onDismiss={() => handleShowOptions()}
                     borderColor={
-                        !isActive ? 'border-dark-900 hover:border-pink' : 'border-dark-900 hover:border-dark-420'
+                        !isActive ? 'border-dark-900 hover:border-avaxRed' : 'border-dark-900 hover:border-dark-420'
                     }
                     className={classNames("border",
                         isActive ? "hover:border-dark-600"
-                            : "hover:border-pink",
+                            : "hover:border-avaxRed",
                         "p-4 mt-3 mb-3 sm:p-0.5 w-full")}
                 >
                     <div className="p-3 space-y-6 bg-dark-900 rounded z-1 relative">
@@ -416,22 +417,22 @@ export const ActiveRow = ({ pid }) => {
                                     <Tab
                                         className={({ selected }) =>
                                             `${selected && isActive ? 'border-b-2 border-accent p-2 text-white border-dark-600'
-                                                : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-pink'
+                                                : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-avaxRed'
                                                     : 'bg-dark-900 text-white'
                                             }
                   flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 
-                  ${!isActive ? "hover:border-pink" : "hover:border-dark-600"}`}
+                  ${!isActive ? "hover:border-avaxRed" : "hover:border-dark-600"}`}
                                     >
                                         {i18n._(t`DEPOSIT`)}
                                     </Tab>
                                     <Tab
                                         className={({ selected }) =>
                                             `${selected && isActive ? 'border-b-2 border-accent p-2 text-white border-dark-600'
-                                                : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-pink'
+                                                : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-avaxRed'
                                                     : 'bg-dark-900 text-white'
                                             } 
                   flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1
-                  ${!isActive ? "hover:border-pink" : "hover:border-dark-600"}`
+                  ${!isActive ? "hover:border-avaxRed" : "hover:border-dark-600"}`
                                         }
                                     >
                                         {i18n._(t`WITHDRAW`)}
@@ -467,7 +468,7 @@ export const ActiveRow = ({ pid }) => {
                                 <div className=
                                     {classNames(
                                         "flex flex-col bg-dark-1000 mb-3 p-3 border border-2 border-dark-1000",
-                                        !isActive ? "hover:border-pink"
+                                        !isActive ? "hover:border-avaxRed"
                                             : "hover:border-dark-600",
 
                                         "w-full space-y-1")
@@ -685,7 +686,7 @@ export const ActiveRow = ({ pid }) => {
                                 <div className={
                                     classNames(
                                         "flex flex-col mb-3 bg-dark-1000 p-3 border border-2 border-dark-1000",
-                                        !isActive ? "hover:border-pink"
+                                        !isActive ? "hover:border-avaxRed"
                                             : "hover:border-dark-600",
                                         "w-full space-y-1")}>
 
@@ -814,11 +815,11 @@ export const ActiveRow = ({ pid }) => {
                     isOpen={openZap}
                     onDismiss={() => handleShowZap(pid)}
                     borderColor={
-                        !isActive ? 'border-dark-900 hover:border-pink' : 'border-dark-900 hover:border-dark-420'
+                        !isActive ? 'border-dark-900 hover:border-avaxRed' : 'border-dark-900 hover:border-dark-420'
                     }
                     className={classNames("border",
                         isActive ? "hover:border-dark-600"
-                            : "hover:border-pink",
+                            : "hover:border-avaxRed",
                         "p-4 mt-3 mb-3 sm:p-0.5 w-full")}
                 >
 

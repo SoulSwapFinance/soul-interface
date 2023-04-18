@@ -4,7 +4,7 @@ import { Active, Inactive } from './Key'
 import { ActiveRow } from './Row'
 import { AvalanchePools, FantomPools, InactiveFantomPools, InactiveAvalanchePools } from './Pools'
 import { Button } from 'components/Button'
-import NavLink from 'components/NavLink'
+// import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
 import { t } from '@lingui/macro'
@@ -12,6 +12,7 @@ import { i18n } from '@lingui/core'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 import { useRouter } from 'next/router'
+import { classNames } from 'functions'
 
 export const FarmList = () => {
   const { chainId } = useActiveWeb3React()
@@ -41,21 +42,19 @@ export const FarmList = () => {
     />
   ))
 
-  // const inactiveFtmList = InactiveFantomPools.map((farm) => (
-  //   <ActiveRow
-  //     key={farm.pid}
-  //     pid={farm.pid}
-  //     farm={farm}
-  //   />
-  // ))
+  const inactiveFtmList = InactiveFantomPools.map((farm) => (
+    <ActiveRow
+      key={farm.pid}
+      pid={farm.pid}
+    />
+  ))
 
-  // const inactiveAvaxList = InactiveAvalanchePools.map((farm) => (
-  //   <ActiveRow
-  //     key={farm.pid}
-  //     pid={farm.pid}
-  //     farm={farm}
-  //   />
-  // ))
+  const inactiveAvaxList = InactiveAvalanchePools.map((farm) => (
+    <ActiveRow
+      key={farm.pid}
+      pid={farm.pid}
+    />
+  ))
 
   return (
     <div>
@@ -91,18 +90,18 @@ export const FarmList = () => {
             </Typography>
           </Button>
         </div>
-      <Typography className="text-2xl bg-dark-1000 mt-6 border border-dark-600 p-3 font-bold text-center">Decentralized Farms</Typography>
+      <Typography className="text-2xl bg-dark-1000 mt-6 rounded rounded-2xl border border-2 border-dark-600 p-3 font-bold text-center mb-1">Active DeFarms</Typography>
       <Active />
       <>{chainId == ChainId.FANTOM ? ftmList : avaxList}</>
-      {/* <div>
+      <div>
         <Typography
-          className={classNames(chainId == ChainId.AVALANCHE ? 'hidden' : `text-2xl bg-dark-1000 mt-6 border border-pink p-3 font-bold text-center`)}
+          className={classNames(chainId == ChainId.AVALANCHE ? 'hidden' : `text-2xl bg-dark-1000 mt-6 rounded rounded-2xl border border-2 border-avaxRed p-3 font-bold text-center mb-1`)}
         >
-          Retired Pools
+          Retired DeFarms
         </Typography>
         {chainId == ChainId.FANTOM ? <Inactive /> : null}
         {chainId == ChainId.FANTOM ? inactiveFtmList : inactiveAvaxList}
-      </div> */}
+      </div>
     </div>
   )
 }

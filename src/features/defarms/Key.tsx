@@ -1,12 +1,12 @@
-import { classNames } from "functions";
-import React from "react";
-import styled from "styled-components";
+// import { classNames } from "functions"
+import React from "react"
+import styled from "styled-components"
 
-const HideOnSmall = styled.div`
-@media screen and (max-width: 900px) {
-  display: none;
-}
-`
+// const HideOnSmall = styled.div`
+// @media screen and (max-width: 900px) {
+//   display: none;
+// }
+// `
 
 const HideOnMobile = styled.div`
 @media screen and (max-width: 600px) {
@@ -56,7 +56,6 @@ export function Active() {
       <FarmContainer>
         <div className="grid grid-cols-1 bg-purple font-bold border border-dark-1000 hover:border-dark-600" >
           <FarmContentWrapper>
-
             <FarmItemBox>
               <Text fontSize=".8" color="#FFFFFF">
                 ASSET
@@ -100,9 +99,8 @@ export function Inactive() {
   return (
     <div className="justify-center">
       <FarmContainer>
-        <div className="grid grid-cols-1 bg-pink font-bold border border-dark-1000 hover:border-dark-600" >
+        <div className="grid grid-cols-1 bg-purple font-bold border border-dark-1000 hover:border-dark-600" >
           <FarmContentWrapper>
-
             <FarmItemBox>
               <Text fontSize=".8" color="#FFFFFF">
                 ASSET
@@ -129,13 +127,11 @@ export function Inactive() {
               </Text>
             </FarmItemBox>
 
-            <HideOnSmall>
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
                   TVL
                 </Text>
               </FarmItemBox>
-            </HideOnSmall>
 
           </FarmContentWrapper>
         </div>
