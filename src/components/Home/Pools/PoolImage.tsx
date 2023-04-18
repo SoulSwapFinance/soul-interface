@@ -15,9 +15,18 @@ export function PoolImage(props: ImageProps) {
         alignItems="center"
         justifyContent="center"
       >
-        <Image src={gradient} alt="Gradient" layout="fixed" />
+        <Image 
+            src={gradient}
+            alt="Gradient" 
+            layout="fixed" 
+        />
       </Flex>
-      <Image {...props} layout="fixed" width={IMAGE_SIZE} height={IMAGE_SIZE} />
+      <Image {...props} 
+        layout="fixed"
+        width={IMAGE_SIZE}
+        height={IMAGE_SIZE}
+        alt={""}
+      />
     </Flex>
   )
 }
