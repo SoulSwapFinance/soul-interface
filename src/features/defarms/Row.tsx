@@ -26,7 +26,7 @@ import { ExternalLink } from 'components/ReusableStyles'
 import { CircleStackIcon, CurrencyDollarIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { i18n } from '@lingui/core'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 
 // import { useCurrencyBalance } from 'state/wallet/hooks'
@@ -82,7 +82,7 @@ export const ActiveRow = ({ pid }) => {
     // const lastWithdrawTime = Number(defarmUserInfo.lastWithdrawTime)
     // const secondsRemaining = Number(defarmUserInfo.secondsRemaining)
     // const currentRate = Number(defarmUserInfo.currentRate)
-    
+
     const feeAmount = withdrawFee * stakedBalance / 100
     const withdrawable = stakedBalance - feeAmount
     // const feeValue = feeAmount * lpPrice
@@ -111,10 +111,11 @@ export const ActiveRow = ({ pid }) => {
     const endTime = Number(defarmPoolInfo.endTime)
     const hasEnded = endTime < Date.now() / 1_000 // ms -> secs
     const APR = hasEnded ? 0 : defarmPoolInfo.apr
-    
+
     const feeValue = feeAmount * lpPrice
     const hasBalance = Number(walletBalance) > 0
     const isActive = pairStatus == "active" && !hasEnded
+    const isEmergency = !isActive
     // const assetToken = new Token(chainId, depositAddress, 18)
     const rewardToken = new Token(chainId, rewardAddress, 18)
 
@@ -241,6 +242,17 @@ export const ActiveRow = ({ pid }) => {
         }
     }
 
+    // handles: harvest for given pid
+    const handleEmergency = async () => {
+        try {
+            let tx
+            tx = await ManifestationContract?.emergencyWithdraw()
+            await tx?.wait()
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     // // deposits: selected amount into the defarm
     const handleDeposit = async (amount) => {
         let tx
@@ -259,7 +271,7 @@ export const ActiveRow = ({ pid }) => {
     // useEffect(() => {
     //     fetchApproval(mAddress)
 
-        // // withdraws: selected amount 
+    // // withdraws: selected amount 
     const handleWithdraw = async (amount) => {
         let tx
         try {
@@ -272,8 +284,8 @@ export const ActiveRow = ({ pid }) => {
             console.log(e)
         }
     }
-    
-    
+
+
     // HANDLE ZAP //
     const handleZap = async (zapTokenAddress, depositAddress) => {
         try {
@@ -287,113 +299,113 @@ export const ActiveRow = ({ pid }) => {
 
     return (
         <div>
-            <div className={classNames(" mt-1 bg-dark-900 p-1 sm:p-4 rounded rounded-2xl border border-2", !isActive && 'border-avaxRed',  !hasBalance && "border-dark-1000",
-                        !isActive ? "hover:border-avaxRed"
-                            : hasBalance ? "border-dark-600"
-                                : hasBalance && !isActive ? "hover:border-avaxRed border-avaxRed"
-                                    : "hover:border-dark-600"
-                    )}
-                        onClick={() => handleShowOptions()}
-                    >
-                        <FarmContentWrapper>
+            <div className={classNames(" mt-1 bg-dark-900 p-1 sm:p-4 rounded rounded-2xl border border-2", !isActive && 'border-avaxRed', !hasBalance && "border-dark-1000",
+                !isActive ? "hover:border-avaxRed"
+                    : hasBalance ? "border-dark-600"
+                        : hasBalance && !isActive ? "hover:border-avaxRed border-avaxRed"
+                            : "hover:border-dark-600"
+            )}
+                onClick={() => handleShowOptions()}
+            >
+                <FarmContentWrapper>
 
-                            {/* DEPOSIT LOGO */}
-                            <div className="items-center -ml-2 mr-4 sm:mr-24 md:mr-36">
-                                <FarmItemBox>
-                                    <div
-                                        className={`flex justify-center`}
-                                    >
-                                    <DoubleCurrencyLogo 
-                                        currency0={rewardToken} 
-                                        currency1={NATIVE[chainId]} 
-                                        size={40} 
-                                    />
-                                    {/* <Image 
+                    {/* DEPOSIT LOGO */}
+                    <div className="items-center -ml-2 mr-4 sm:mr-24 md:mr-36">
+                        <FarmItemBox>
+                            <div
+                                className={`flex justify-center`}
+                            >
+                                <DoubleCurrencyLogo
+                                    currency0={rewardToken}
+                                    currency1={NATIVE[chainId]}
+                                    size={40}
+                                />
+                                {/* <Image 
                                         src={logoURI}
                                         width={40}
                                         height={40}
                                         alt={`logo for defarm reward asset`}
                                         /> */}
-                                    </div>
-                                    {/* <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} /> */}
-                                </FarmItemBox>
                             </div>
+                            {/* <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} /> */}
+                        </FarmItemBox>
+                    </div>
 
-                            {/* STAKED VALUE */}
-                            <HideOnMobile>
-                                <FarmItemBox>
-                                    <div className={'sm:mr-36 md:mr-48'}>
-                                        {Number(APR).toString() === '0.00' ? (
-                                            <Text padding="0" fontSize="1rem" color="#666">
-                                                0
-                                            </Text>
-                                        ) : (
-                                            <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                                ${
-                                                    stakedValue == 0 ? 0
-                                                    : stakedValue.toString(2) == '0.00' ? '<0.00'
-                                                    : stakedValue < 1 && stakedValue.toString(4) ? stakedValue.toFixed(4)
-                                                    : stakedValue > 0 ? stakedValue.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-                                                    : 0
-                                                }
-                                            </Text>
-                                        )}
-                                    </div>
-                                </FarmItemBox>
-                            </HideOnMobile>
-
-                            {/* % APR */}
-                            <FarmItemBox>
-                                <div className={'sm:mr-12 md:mr-32'}>
-                                    {Number(APR).toString() === '0.00' ? (
-                                        <Text padding="0" fontSize="1rem" color="#666">
-                                            0
-                                        </Text>
-                                    ) : (
-                                        <Text padding="0" fontSize="1rem" color="#FFFFFF">
-                                            {formatNumber(APR, false, true)}%
-                                        </Text>
-                                    )}
-                                </div>
-                            </FarmItemBox>
-
-                            {/* PENDING REWARDS */}
-                            <FarmItemBox className="flex">
-                                <div className={'mr-1 sm:mr-8 md:mr-16'}>
-                                    {/* Here we wait for there to be at least $0.00 rewarded */}
-                                {earnedValue.toFixed(1).toString() === '0.0' ? (
-                                    <div className="flex flex-cols-2 sm:ml-12 gap-3">
-                                        {formatNumber(0, true, true)}<CurrencyLogo currency={rewardToken} size={24} />
-                                    </div>
-                                ) : (
-                                    <div className="flex flex-cols-2 sm:ml-12 gap-2">
-                                        {/* We use value here to account for tokens with 1T+ supply (UI) */}
-                                        {formatNumber(earnedValue, true, true)}<CurrencyLogo currency={rewardToken} size={24} />
-                                    </div>
-                                )}
-                            </div>
-                            </FarmItemBox>
-
-                            {/* LIQUIDITY (TVL) */}
-                            <FarmItemBox className="flex" >
-                                <div
-                                    className={'mr-4'}
-                                >
-                                {Number(liquidity) === 0 ? (
+                    {/* STAKED VALUE */}
+                    <HideOnMobile>
+                        <FarmItemBox>
+                            <div className={'sm:mr-36 md:mr-48'}>
+                                {Number(APR).toString() === '0.00' ? (
                                     <Text padding="0" fontSize="1rem" color="#666">
-                                        $0
+                                        0
                                     </Text>
                                 ) : (
-                                    <div className="flex flex-cols-2 sm:ml-12 gap-1">
-                                        ${Number(liquidity)
-                                            .toFixed(0)
-                                            .toString()
-                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
-                                    </div>
+                                    <Text padding="0" fontSize="1rem" color="#FFFFFF">
+                                        ${
+                                            stakedValue == 0 ? 0
+                                                : stakedValue.toString(2) == '0.00' ? '<0.00'
+                                                    : stakedValue < 1 && stakedValue.toString(4) ? stakedValue.toFixed(4)
+                                                        : stakedValue > 0 ? stakedValue.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+                                                            : 0
+                                        }
+                                    </Text>
                                 )}
                             </div>
-                            </FarmItemBox>
-                        </FarmContentWrapper>
+                        </FarmItemBox>
+                    </HideOnMobile>
+
+                    {/* % APR */}
+                    <FarmItemBox>
+                        <div className={'sm:mr-12 md:mr-32'}>
+                            {Number(APR).toString() === '0.00' ? (
+                                <Text padding="0" fontSize="1rem" color="#666">
+                                    0
+                                </Text>
+                            ) : (
+                                <Text padding="0" fontSize="1rem" color="#FFFFFF">
+                                    {formatNumber(APR, false, true)}%
+                                </Text>
+                            )}
+                        </div>
+                    </FarmItemBox>
+
+                    {/* PENDING REWARDS */}
+                    <FarmItemBox className="flex">
+                        <div className={'mr-1 sm:mr-8 md:mr-16'}>
+                            {/* Here we wait for there to be at least $0.00 rewarded */}
+                            {earnedValue.toFixed(1).toString() === '0.0' ? (
+                                <div className="flex flex-cols-2 sm:ml-12 gap-3">
+                                    {formatNumber(0, true, true)}<CurrencyLogo currency={rewardToken} size={24} />
+                                </div>
+                            ) : (
+                                <div className="flex flex-cols-2 sm:ml-12 gap-2">
+                                    {/* We use value here to account for tokens with 1T+ supply (UI) */}
+                                    {formatNumber(earnedValue, true, true)}<CurrencyLogo currency={rewardToken} size={24} />
+                                </div>
+                            )}
+                        </div>
+                    </FarmItemBox>
+
+                    {/* LIQUIDITY (TVL) */}
+                    <FarmItemBox className="flex" >
+                        <div
+                            className={'mr-4'}
+                        >
+                            {Number(liquidity) === 0 ? (
+                                <Text padding="0" fontSize="1rem" color="#666">
+                                    $0
+                                </Text>
+                            ) : (
+                                <div className="flex flex-cols-2 sm:ml-12 gap-1">
+                                    ${Number(liquidity)
+                                        .toFixed(0)
+                                        .toString()
+                                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
+                                </div>
+                            )}
+                        </div>
+                    </FarmItemBox>
+                </FarmContentWrapper>
             </div>
 
             {/*------ DROPDOWN OPTIONS PANEL ------*/}
@@ -412,218 +424,221 @@ export const ActiveRow = ({ pid }) => {
                 >
                     <div className="p-3 space-y-6 bg-dark-900 rounded z-1 relative">
                         <Tab.Group>
-                            <Tab.List className="flex items-center justify-center mb-1 space-x-2 p-3px text-white">
-                                <div className="grid grid-cols-2 w-[95%] rounded-md p-2px bg-dark-900">
-                                    <Tab
-                                        className={({ selected }) =>
-                                            `${selected && isActive ? 'border-b-2 border-accent p-2 text-white border-dark-600'
-                                                : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-avaxRed'
-                                                    : 'bg-dark-900 text-white'
-                                            }
+                            {isActive &&
+                                <Tab.List className="flex items-center justify-center mb-1 space-x-2 p-3px text-white">
+                                    <div className={`grid ${isActive ? 'grid-cols-2' : 'grid-cols-1'} w-[95%] rounded-md p-2px bg-dark-900`}>
+                                        {isActive &&
+                                            <Tab
+                                                className={({ selected }) =>
+                                                    `${selected && isActive ? 'border-b-2 border-accent p-2 text-white border-dark-600'
+                                                        : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-avaxRed'
+                                                            : 'bg-dark-900 text-white'
+                                                    }
                   flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 
                   ${!isActive ? "hover:border-avaxRed" : "hover:border-dark-600"}`}
-                                    >
-                                        {i18n._(t`DEPOSIT`)}
-                                    </Tab>
-                                    <Tab
-                                        className={({ selected }) =>
-                                            `${selected && isActive ? 'border-b-2 border-accent p-2 text-white border-dark-600'
-                                                : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-avaxRed'
-                                                    : 'bg-dark-900 text-white'
-                                            } 
+                                            >
+                                                {i18n._(t`DEPOSIT`)}
+                                            </Tab>
+                                        }
+                                        <Tab
+                                            className={({ selected }) =>
+                                                `${selected && isActive ? 'border-b-2 border-accent p-2 text-white border-dark-600'
+                                                    : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-avaxRed'
+                                                        : 'bg-dark-900 text-white'
+                                                } 
                   flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1
                   ${!isActive ? "hover:border-avaxRed" : "hover:border-dark-600"}`
-                                        }
-                                    >
-                                        {i18n._(t`WITHDRAW`)}
-                                    </Tab>
-                                </div>
-                            </Tab.List>
-
+                                            }
+                                        >
+                                            {i18n._(t`WITHDRAW`)}
+                                        </Tab>
+                                    </div>
+                                </Tab.List>
+                            }
                             {/*------ DEPOSIT TAB PANEL ------*/}
-                            <Tab.Panel className={'outline-none'}>
-
-                                <Button variant={'link'} className="absolute top-0 right-0 flex justify-center max-h-[30px] max-w-[30px]">
-                                    <QuestionHelper
-                                        text={
-                                            <div className="flex flex-col space-y-1">
-                                                <div className="flex flex-col">
-                                                    {withdrawFee == 0 ? (
-                                                        <p>
-                                                            {`After creating liquidity or lending, navigate to the associated farm to deposit.`}
-                                                        </p>
-                                                    ) : (
-                                                        <p>
-                                                            {`After creating liquidity or lending, navigate to the associated farm to deposit.`}
-                                                            <br /> <br />
-                                                            {`The fee decreases by 1% each day and is NOT affected by depositing more.`}
-                                                        </p>
-                                                    )}
+                            {isActive &&
+                                <Tab.Panel className={`outline-none`}>
+                                    <Button variant={'link'} className="absolute top-0 right-0 flex justify-center max-h-[30px] max-w-[30px]">
+                                        <QuestionHelper
+                                            text={
+                                                <div className="flex flex-col space-y-1">
+                                                    <div className="flex flex-col">
+                                                        {withdrawFee == 0 ? (
+                                                            <p>
+                                                                {`After creating liquidity or lending, navigate to the associated farm to deposit.`}
+                                                            </p>
+                                                        ) : (
+                                                            <p>
+                                                                {`After creating liquidity or lending, navigate to the associated farm to deposit.`}
+                                                                <br /> <br />
+                                                                {`The fee decreases by 1% each day and is NOT affected by depositing more.`}
+                                                            </p>
+                                                        )}
+                                                    </div>
                                                 </div>
+                                            }
+                                        />
+                                    </Button>
+
+                                    <div className=
+                                        {classNames(
+                                            "flex flex-col bg-dark-1000 mb-3 p-3 border border-2 border-dark-1000",
+                                            !isActive ? "hover:border-avaxRed"
+                                                : "hover:border-dark-600",
+
+                                            "w-full space-y-1")
+
+                                        }>
+
+                                        {Number(stakedBalance) > 0 && (
+                                            <div className="flex justify-between">
+                                                <Typography className="text-white" fontFamily={'medium'}>
+                                                    {i18n._(t`Staked Balance`)}
+                                                </Typography>
+                                                <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                                                    {formatNumber(stakedBalance, false, true)} {`${symbol}-${NATIVE[chainId].symbol}`}
+                                                </Typography>
                                             </div>
-                                        }
-                                    />
-                                </Button>
+                                        )}
 
-                                <div className=
-                                    {classNames(
-                                        "flex flex-col bg-dark-1000 mb-3 p-3 border border-2 border-dark-1000",
-                                        !isActive ? "hover:border-avaxRed"
-                                            : "hover:border-dark-600",
+                                        {stakedValue > 0 && (
+                                            <div className="flex justify-between">
+                                                <Typography className="text-white" fontFamily={'medium'}>
+                                                    {i18n._(t`Staked (USD)`)}
+                                                </Typography>
+                                                <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
+                                                    {formatNumber(stakedValue, true, true)}
+                                                </Typography>
+                                            </div>
+                                        )}
 
-                                        "w-full space-y-1")
-
-                                    }>
-
-                                    {Number(stakedBalance) > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                                {i18n._(t`Staked Balance`)}
+                                                {i18n._(t`Claimable Rewards`)}
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(stakedBalance, false, true)} {`${symbol}-${NATIVE[chainId].symbol}`}
+                                                {earnedAmount.toFixed(2)} {rewardSymbol}
                                             </Typography>
                                         </div>
-                                    )}
-
-                                    {stakedValue > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                                {i18n._(t`Staked (USD)`)}
+                                                {i18n._(t`Rewards (USD)`)}
                                             </Typography>
                                             <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(stakedValue, true, true)}
+                                                {formatNumber(earnedValue, true, true)}
                                             </Typography>
                                         </div>
-                                    )}
+                                        <div className="flex justify-between">
+                                            <Typography className="text-white" fontFamily={'medium'}>
+                                                {i18n._(t`End Date`)}
+                                            </Typography>
+                                            <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
+                                                {formatUnixTimestampToDay(endTime)}
+                                            </Typography>
+                                        </div>
 
-                                    <div className="flex justify-between">
-                                        <Typography className="text-white" fontFamily={'medium'}>
-                                            {i18n._(t`Claimable Rewards`)}
-                                        </Typography>
-                                        <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                            {earnedAmount.toFixed(2)} {rewardSymbol}
-                                        </Typography>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <Typography className="text-white" fontFamily={'medium'}>
-                                            {i18n._(t`Rewards (USD)`)}
-                                        </Typography>
-                                        <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
-                                            {formatNumber(earnedValue, true, true)}
-                                        </Typography>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <Typography className="text-white" fontFamily={'medium'}>
-                                            {i18n._(t`End Date`)}
-                                        </Typography>
-                                        <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
-                                            {formatUnixTimestampToDay(endTime)}
-                                        </Typography>
+                                        <div className="h-px my-1 bg-dark-1000" />
+
+                                        {/* WITHDRAWAL FREE */}
+                                        {Number(withdrawFee) > 0 && (
+                                            <div className="flex flex-col bg-dark-1000 mb-2 p-3 border-1 hover:border-dark-600 w-full space-y-1">
+                                                <div className="text-white">
+                                                    <div className="block text-sm md:text-md text-white text-center font-bold p-1 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                                                        <span>
+                                                            {`Fee Duration: ${Number(withdrawFee).toFixed(0)} days`}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                        <div className="h-px my-6 bg-dark-1000" />
+                                        <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
+                                            <div className="text-white">
+                                                <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                                                    <span> {formatNumber(Number(APR), false, true)}% APR</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div className="h-px my-1 bg-dark-1000" />
+                                    {/* DEPOSIT: ASSET PANEL */}
+                                    {Number(walletBalance) != 0 && isActive &&
+                                        <FarmInputPanel
+                                            pid={pid}
+                                            onUserInput={(value) => setDepositValue(value)}
+                                            onMax={() => setDepositValue(walletBalance.toString())}
+                                            value={depositValue}
+                                            balance={walletBalance.toString()}
+                                            id={pid}
+                                            defarm={true}
+                                        />
+                                    }
 
-                                    {/* WITHDRAWAL FREE */}
-                                    {Number(withdrawFee) > 0 && (
-                                        <div className="flex flex-col bg-dark-1000 mb-2 p-3 border-1 hover:border-dark-600 w-full space-y-1">
-                                            <div className="text-white">
-                                                <div className="block text-sm md:text-md text-white text-center font-bold p-1 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                                                    <span>
-                                                        {`Fee Duration: ${Number(withdrawFee).toFixed(0)} days`}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
-                                    <div className="h-px my-6 bg-dark-1000" />
-                                    <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
-                                        <div className="text-white">
-                                            <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                                                <span> {formatNumber(Number(APR), false, true)}% APR</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="h-px my-1 bg-dark-1000" />
-
-                                {/* DEPOSIT: ASSET PANEL */}
-                                {Number(walletBalance) != 0 &&
-                                    <FarmInputPanel
-                                        pid={pid}
-                                        onUserInput={(value) => setDepositValue(value)}
-                                        onMax={() => setDepositValue(walletBalance.toString())}
-                                        value={depositValue}
-                                        balance={walletBalance.toString()}
-                                        id={pid}
-                                        defarm={true}
-                                />
-                                }
-
-                                {/* UN-APPROVED */}
-                                {/* {!approved && hasBalance && ( */}
-                                    <SubmitButton
-                                        height="2rem"
-                                        primaryColor={buttonColor}
-                                        color={buttonTextColor}
-                                        margin=".5rem 0 0rem 0"
-                                        onClick={() => handleApprove(mAddress)}>
-                                        <div className="flex text-lg gap-2">
-                                            {i18n._(t`APPROVE ASSET`)}
-                                        </div>
-                                    </SubmitButton>
-                                {/* )} */}
-
-                                {/* APPROVED */}
-                                {hasBalance && (
-                                    <SubmitButton
-                                        height="2rem"
-                                        primaryColor={buttonColor}
-                                        color={buttonTextColor}
-                                        margin=".5rem 0 0rem 0"
-                                        onClick={() =>
-                                            handleDeposit(depositValue)
-                                        }
-                                    >
-                                        <div className="flex text-lg gap-2">
-                                            <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                            {i18n._(t`DEPOSIT `)} {`${symbol}-${NATIVE[chainId].symbol} LP`}
-                                        </div>
-                                    </SubmitButton>
-                                )}
-
-                                {/* CREATE ASSET PAIR */}
-                                {isActive &&
-                                    <NavLink
-                                    href={`/exchange/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`}
-                                    // /add/${NATIVE[chainId].symbol}/${assetToken?.wrapped.address}
-                                >
-                                    <a>
+                                    {/* UN-APPROVED */}
+                                    {/* {!approved && hasBalance && ( */}
+                                    {isActive &&
                                         <SubmitButton
                                             height="2rem"
                                             primaryColor={buttonColor}
                                             color={buttonTextColor}
                                             margin=".5rem 0 0rem 0"
-                                        >
-                                            <TokenPairLink
-                                                target="_blank"
-                                                rel="noopener"
-                                                primaryColor={buttonColor}
-                                                color={buttonTextColor}
-                                                href={`/exchange/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`}
-                                                // /add/${NATIVE[chainId].symbol}/${assetToken?.wrapped.address}
-                                            >
-                                                <div className="flex text-lg gap-2">
-                                                    <PlusCircleIcon width={26} className={classNames(`text-white`)} />
-                                                   {`CREATE ${symbol}-${NATIVE[chainId].symbol} PAIR`}
-                                                </div>
-                                            </TokenPairLink>
+                                            onClick={() => handleApprove(mAddress)}>
+                                            <div className="flex text-lg gap-2">
+                                                {i18n._(t`APPROVE ASSET`)}
+                                            </div>
                                         </SubmitButton>
-                                    </a>
-                                </NavLink>
-                                }
-                                {/* ZAPPER FUNCTIONALITY */}
+                                    }
+
+                                    {/* APPROVED */}
+                                    {hasBalance && isActive && (
+                                        <SubmitButton
+                                            height="2rem"
+                                            primaryColor={buttonColor}
+                                            color={buttonTextColor}
+                                            margin=".5rem 0 0rem 0"
+                                            onClick={() =>
+                                                handleDeposit(depositValue)
+                                            }
+                                        >
+                                            <div className="flex text-lg gap-2">
+                                                <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
+                                                {i18n._(t`DEPOSIT `)} {`${symbol}-${NATIVE[chainId].symbol} LP`}
+                                            </div>
+                                        </SubmitButton>
+                                    )}
+
+                                    {/* CREATE ASSET PAIR */}
+                                    {isActive &&
+                                        <NavLink
+                                            href={`/exchange/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`}
+                                        // /add/${NATIVE[chainId].symbol}/${assetToken?.wrapped.address}
+                                        >
+                                            <a>
+                                                <SubmitButton
+                                                    height="2rem"
+                                                    primaryColor={buttonColor}
+                                                    color={buttonTextColor}
+                                                    margin=".5rem 0 0rem 0"
+                                                >
+                                                    <TokenPairLink
+                                                        target="_blank"
+                                                        rel="noopener"
+                                                        primaryColor={buttonColor}
+                                                        color={buttonTextColor}
+                                                        href={`/exchange/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`}
+                                                    // /add/${NATIVE[chainId].symbol}/${assetToken?.wrapped.address}
+                                                    >
+                                                        <div className="flex text-lg gap-2">
+                                                            <PlusCircleIcon width={26} className={classNames(`text-white`)} />
+                                                            {`CREATE ${symbol}-${NATIVE[chainId].symbol} PAIR`}
+                                                        </div>
+                                                    </TokenPairLink>
+                                                </SubmitButton>
+                                            </a>
+                                        </NavLink>
+                                    }
+                                    {/* ZAPPER FUNCTIONALITY */}
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
@@ -644,28 +659,47 @@ export const ActiveRow = ({ pid }) => {
                                         </SubmitButton>
                                     </Wrap>
 
-                                {/* EARNED */}
-                                {earnedAmount > 0 && (
-                                    <Wrap padding="0" margin="0" display="flex">
-                                        <SubmitButton
-                                            height="2rem"
-                                            primaryColor={buttonColor}
-                                            color={buttonTextColor}
-                                            // className={'font-bold'}
-                                            margin=".5rem 0 0rem 0"
-                                            onClick={() =>
-                                                handleHarvest()
+                                    {/* EARNED */}
+                                    {earnedAmount > 0 && (
+                                        <Wrap padding="0" margin="0" display="flex">
+                                            <SubmitButton
+                                                height="2rem"
+                                                primaryColor={buttonColor}
+                                                color={buttonTextColor}
+                                                // className={'font-bold'}
+                                                margin=".5rem 0 0rem 0"
+                                                onClick={() =>
+                                                    handleHarvest()
+                                                }
+                                            >
+                                                <div className="flex text-lg gap-2">
+                                                    <CircleStackIcon width={26} className={classNames(`text-white`)} />
+                                                    {i18n._(t`HARVEST `)} {symbol}
+                                                </div>
+                                            </SubmitButton>
+                                        </Wrap>
+                                    )}
+                                </Tab.Panel>
+                            }
+                            {!isActive &&
+                                <Tab.List className="flex items-center justify-center mb-1 space-x-2 p-3px text-white">
+                                    <div className={`grid ${'grid-cols-1'} w-[95%] rounded-md p-2px bg-dark-900`}>
+                                        <Tab
+                                            className={({ selected }) =>
+                                                `${selected && isActive ? 'border-b-2 border-accent p-2 text-white border-dark-600'
+                                                    : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-avaxRed'
+                                                        : 'bg-dark-900 text-white'
+                                                } 
+                  flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1
+                  ${!isActive ? "hover:border-avaxRed" : "hover:border-dark-600"}`
                                             }
                                         >
-                                            <div className="flex text-lg gap-2">
-                                                <CircleStackIcon width={26} className={classNames(`text-white`)} />
-                                                {i18n._(t`HARVEST `)} {symbol}
-                                            </div>
-                                        </SubmitButton>
-                                    </Wrap>
-                                )}
-  
-                            </Tab.Panel>
+                                            {i18n._(t`WITHDRAW BY APRIL 18TH`)}
+                                        </Tab>
+                                    {'Withdrawing after April 18th forfeits all pending rewards, please exit ASAP.'}
+                                    </div>
+                                </Tab.List>
+                            }
 
                             {/*------ WITHDRAW TAB PANEL ------*/}
                             <Tab.Panel className={'outline-none'}>
@@ -787,7 +821,7 @@ export const ActiveRow = ({ pid }) => {
 
                                 </Wrap>
                                 {/* EARNED */}
-                                {earnedAmount > 0 && (
+                                {earnedAmount > 0 && isActive && (
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
@@ -798,10 +832,26 @@ export const ActiveRow = ({ pid }) => {
                                                 handleHarvest()
                                             }
                                         >
-                                            {i18n._(t`HARVEST`)}
+                                            {i18n._(t`HARVEST`) + ` ${symbol}`}
                                         </SubmitButton>
                                     </Wrap>
                                 )}
+                                {/* EMERGENCY WITHDRAW */}
+                                {/* {earnedAmount > 0 && isEmergency && (
+                                    <Wrap padding="0" margin="0" display="flex">
+                                        <SubmitButton
+                                            height="2rem"
+                                            primaryColor={buttonColor}
+                                            color={buttonTextColor}
+                                            margin=".5rem 0 .5rem 0"
+                                            onClick={() =>
+                                                handleEmergency()
+                                            }
+                                        >
+                                            {i18n._(t`EMERGENCY WITHDRAW`)}
+                                        </SubmitButton>
+                                    </Wrap>
+                                )} */}
                             </Tab.Panel>
                         </Tab.Group>
                     </div>
@@ -937,6 +987,6 @@ export const ActiveRow = ({ pid }) => {
                     </div>
                 </Modal>
             )}
-            </div>
+        </div>
     )
 }
