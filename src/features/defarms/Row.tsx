@@ -2,15 +2,15 @@ import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
-import { ChainId, Currency, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, Token } from 'sdk'
+import { NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, Token } from 'sdk'
 import { useTokenContract, useZapperContract, useManifesterContract, useManifestationContract } from 'hooks/useContract'
 import useApprove from 'hooks/useApprove'
 import { Tab } from '@headlessui/react'
 import {
-    FarmContentWrapper, FarmContainer, FarmItem, FarmItemBox, Text, SubmitButton, Wrap
+    FarmContentWrapper, FarmItemBox, Text, SubmitButton, Wrap
 } from './Styles'
-import { classNames, formatDate, formatNumber, formatUnixTimestampToDay, tryParseAmount } from 'functions'
-import { usePairInfo, useDeFarmInfo, useDeFarmUserInfo, useTokenInfo, useUserTokenInfo, useDeFarmPoolInfo } from 'hooks/useAPI'
+import { classNames, formatNumber, formatUnixTimestampToDay, tryParseAmount } from 'functions'
+import { useDeFarmUserInfo, useTokenInfo, useUserTokenInfo, useDeFarmPoolInfo } from 'hooks/useAPI'
 import Modal from 'components/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
 import { Button } from 'components/Button'
@@ -26,9 +26,9 @@ import { ExternalLink } from 'components/ReusableStyles'
 import { CircleStackIcon, CurrencyDollarIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { i18n } from '@lingui/core'
-// import { useRouter } from 'next/router'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 
+// import { useRouter } from 'next/router'
 // import { useCurrencyBalance } from 'state/wallet/hooks'
 // import { Route } from 'react-router-dom'
 // import Image from 'next/image'
@@ -74,8 +74,6 @@ export const ActiveRow = ({ pid }) => {
     const { defarmUserInfo } = useDeFarmUserInfo(pid)
     const stakedBalance = Number(defarmUserInfo.stakedBalance)
     const stakedValue = Number(defarmUserInfo.stakedValue)
-    const earnedAmount = Number(defarmUserInfo.pendingRewards)
-    const earnedValue = Number(defarmUserInfo.pendingValue)
     // const lpPrice = Number(defarmUserInfo.lpPrice)
     const withdrawFee = Number(defarmUserInfo.currentRate)
     const walletBalance = Number(defarmUserInfo.walletBalance)
@@ -118,6 +116,9 @@ export const ActiveRow = ({ pid }) => {
     const isEmergency = !isActive
     // const assetToken = new Token(chainId, depositAddress, 18)
     const rewardToken = new Token(chainId, rewardAddress, 18)
+
+    const earnedAmount = isActive ? Number(defarmUserInfo.pendingRewards) : 0
+    const earnedValue = isActive ? Number(defarmUserInfo.pendingValue) : 0
 
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(depositAddress)
     // const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
@@ -299,10 +300,10 @@ export const ActiveRow = ({ pid }) => {
 
     return (
         <div>
-            <div className={classNames(" mt-1 bg-dark-900 p-1 sm:p-4 rounded rounded-2xl border border-2", !isActive && 'border-avaxRed', !hasBalance && "border-dark-1000",
+            <div className={classNames(" mt-1 bg-dark-900 p-1 sm:p-4 rounded rounded-2xl", stakedBalance > 0 && !isActive && 'border-avaxRed', !hasBalance && "border-dark-1000",
                 !isActive ? "hover:border-avaxRed"
                     : hasBalance ? "border-dark-600"
-                        : hasBalance && !isActive ? "hover:border-avaxRed border-avaxRed"
+                        : !isActive ? "hover:border-avaxRed"
                             : "hover:border-dark-600"
             )}
                 onClick={() => handleShowOptions()}
@@ -694,9 +695,9 @@ export const ActiveRow = ({ pid }) => {
                   ${!isActive ? "hover:border-avaxRed" : "hover:border-dark-600"}`
                                             }
                                         >
-                                            {i18n._(t`WITHDRAW BY APRIL 18TH`)}
+                                            {i18n._(t`EMERGENCY WITHDRAW`)}
                                         </Tab>
-                                    {'Withdrawing after April 18th forfeits all pending rewards, please exit ASAP.'}
+                                    {'Note: Forfeit All Pending Rewards.'}
                                     </div>
                                 </Tab.List>
                             }
@@ -798,17 +799,24 @@ export const ActiveRow = ({ pid }) => {
                                 </div>
 
                                 {/* WITHDRAW: ASSET PANEL */}
+                                {stakedBalance > 0 && !isEmergency &&
                                 <FarmInputPanel
-                                    pid={pid}
-                                    onUserInput={(value) => setWithdrawValue(value)}
-                                    onMax={() => setWithdrawValue(stakedBalance.toString())}
-                                    value={withdrawValue}
-                                    balance={stakedBalance.toString()}
-                                    id={pid}
-                                    defarm={true}
+                                pid={pid}
+                                onUserInput={(value) => setWithdrawValue(value)}
+                                onMax={() => setWithdrawValue(stakedBalance.toString())}
+                                value={withdrawValue}
+                                balance={stakedBalance.toString()}
+                                id={pid}
+                                defarm={true}
                                 />
-                                <Wrap padding="0" margin="0" display="flex">
+                            }
 
+                            {stakedBalance > 0 && !isEmergency &&
+                                <Wrap 
+                                    padding="0"
+                                    margin="0"
+                                    display="flex"
+                                    >
                                     <SubmitButton
                                         height="2rem"
                                         primaryColor={buttonColor}
@@ -818,8 +826,8 @@ export const ActiveRow = ({ pid }) => {
                                     >
                                         {i18n._(t`WITHDRAW `)} {`${symbol}-${NATIVE[chainId].symbol} LP`}
                                     </SubmitButton>
-
                                 </Wrap>
+                            }
                                 {/* EARNED */}
                                 {earnedAmount > 0 && isActive && (
                                     <Wrap padding="0" margin="0" display="flex">
@@ -837,7 +845,7 @@ export const ActiveRow = ({ pid }) => {
                                     </Wrap>
                                 )}
                                 {/* EMERGENCY WITHDRAW */}
-                                {/* {earnedAmount > 0 && isEmergency && (
+                                {stakedBalance > 0 && isEmergency && (
                                     <Wrap padding="0" margin="0" display="flex">
                                         <SubmitButton
                                             height="2rem"
@@ -851,7 +859,7 @@ export const ActiveRow = ({ pid }) => {
                                             {i18n._(t`EMERGENCY WITHDRAW`)}
                                         </SubmitButton>
                                     </Wrap>
-                                )} */}
+                                )}
                             </Tab.Panel>
                         </Tab.Group>
                     </div>
