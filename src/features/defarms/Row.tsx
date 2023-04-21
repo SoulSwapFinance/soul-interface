@@ -697,7 +697,7 @@ export const ActiveRow = ({ pid }) => {
                                         >
                                             {i18n._(t`EMERGENCY WITHDRAW`)}
                                         </Tab>
-                                    {'Note: Forfeit All Pending Rewards.'}
+                                    {'Forfeits pending rewards.'}
                                     </div>
                                 </Tab.List>
                             }
