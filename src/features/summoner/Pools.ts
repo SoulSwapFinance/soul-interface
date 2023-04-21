@@ -182,18 +182,18 @@ export const InactiveFantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: DAI_ADDRESS[ChainId.FANTOM],
   },
-    // LENDING MARKET //
-  {
-    pid: 24,
-    type: 'lend',
-    decimals: 18,
-    token0Symbol: 'LINK', // EXEMPT //
-    token1Symbol: 'USDC',
-    lpSymbol: 'USDC-LINK', // EXEMPT //
-    lpAddress: '0x5C900Ac3c95D13adE54D28A9800636AE21Cb5F39',
-    token0Address: LINK_ADDRESS[ChainId.FANTOM],
-    token1Address: USDC_ADDRESS[ChainId.FANTOM],
-  },
+  // LENDING MARKET //
+  // {
+  //   pid: 24,
+  //   type: 'lend',
+  //   decimals: 18,
+  //   token0Symbol: 'LINK', // EXEMPT //
+  //   token1Symbol: 'USDC',
+  //   lpSymbol: 'USDC-LINK', // EXEMPT //
+  //   lpAddress: '0x5C900Ac3c95D13adE54D28A9800636AE21Cb5F39',
+  //   token0Address: LINK_ADDRESS[ChainId.FANTOM],
+  //   token1Address: USDC_ADDRESS[ChainId.FANTOM],
+  // },
   { // 600
     pid: 6,
     type: 'swap',
