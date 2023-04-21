@@ -396,7 +396,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                             0
                                         </Text>
                                     ) : (
-                                        <Text padding="0" fontSize="1rem" color="#FFFFFF">
+                                        <Text padding="0" fontSize="1rem" color={Number(_APR) > 0 ? 'lightGreen' : 'white'}>
                                             {Number(_APR).toFixed()}%
                                         </Text>
                                     )}
