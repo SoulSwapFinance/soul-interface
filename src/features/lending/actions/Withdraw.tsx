@@ -101,7 +101,7 @@ export default function Withdraw({ pair }: any): JSX.Element {
       ),
       // && pair.userAssetFraction.sub(pair.currentUserLentAmount.value).lte(0),
       i18n._(
-        t`Insufficient liquidity, please swap or bond to exit.`
+        t`Insufficient liquidity, swap or bond to exit.`
       ),
       true
     )
