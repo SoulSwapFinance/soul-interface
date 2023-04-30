@@ -795,7 +795,7 @@ export function useDeFarmInfo(): { status: string; defarmInfo: T } {
     address: "0xed65Fec909D5cFDB2A23a26554A7133F8d0d885a",
     poolLength: "1",
     bloodSacrifice: "5000000000000000000"
-  })  
+  })
   useEffect(() => {
     const fetchData = async () => {
       setStatus('fetching')

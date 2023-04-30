@@ -5,11 +5,11 @@ import React, { useCallback, useEffect, useState } from 'react'
 import {
 //   ApprovalState,
 //   useApproveCallback,
-  useManifestationContract,
+  // useManifestationContract,
   useManifesterContract,
 } from 'hooks'
 
-import { classNames, isAddress, tryParseAmount } from 'functions'
+import { classNames } from 'functions'
 import NavLink from 'components/NavLink'
 import Card from 'components/Card'
 import { t } from '@lingui/macro'
@@ -18,10 +18,10 @@ import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { useTransactionAdder } from 'state/transactions/hooks'
 import { Disclosure } from '@headlessui/react'
 // import moment from 'moment'
-import { Button, ButtonConfirmed } from 'components/Button'
+import { Button } from 'components/Button'
 // import { useDeFarmPoolInfo } from 'hooks/useAPI'
 import useDefarm from 'features/defarms/useDefarm'
-import { MANIFESTER_ADDRESS } from 'sdk'
+// import { MANIFESTER_ADDRESS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 import Image from 'next/image'
 // import Logo from 'components/Logo'

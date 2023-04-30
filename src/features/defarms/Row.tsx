@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
 import { NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, Token } from 'sdk'
-import { useTokenContract, useZapperContract, useManifesterContract, useManifestationContract } from 'hooks/useContract'
+import { useTokenContract, useZapperContract, useManifestationContract } from 'hooks/useContract'
 import useApprove from 'hooks/useApprove'
 import { Tab } from '@headlessui/react'
 import {
@@ -135,7 +135,7 @@ export const ActiveRow = ({ pid }) => {
     // const token1 = new Token(chainId, rewardAddress, 18)
 
     // CONTRACTS //
-    const ManifesterContract = useManifesterContract()
+    // const ManifesterContract = useManifesterContract()
     const ManifestationContract = useManifestationContract(mAddress)
     const ZapContract = useZapperContract()
     const ZapContractAddress = ZapContract.address

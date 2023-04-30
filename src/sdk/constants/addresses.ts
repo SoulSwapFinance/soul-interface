@@ -165,6 +165,11 @@ export const MANIFESTER_ADDRESS: AddressMap = {
   // [ChainId.AVALANCHE]: '',
 }
 
+export const MANIFESTER_ADDRESS_V2: AddressMap = {
+  [ChainId.FANTOM]: '0xA791C1aC56b23729C1b02114076491E6eCAc7b22',
+  // [ChainId.AVALANCHE]: '',
+}
+
 export const MASTERCHEF_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
