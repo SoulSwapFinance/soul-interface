@@ -67,6 +67,7 @@ import {
   MANIFESTER_ADDRESS,
   MARKET_UPDATER_ADDRESS,
   REFUNDER_ADDRESS,
+  MANIFESTER_ADDRESS_V2,
 } from 'sdk'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from 'constants/multicall'
 import SOUL_BOND_ABI from 'constants/abis/soulbond.json' 
@@ -447,7 +448,7 @@ export function useSummonerContract(withSignerIfPossible?: boolean): Contract | 
 
 export function useManifesterContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && MANIFESTER_ADDRESS[chainId], FARM_MANIFESTER_ABI, withSignerIfPossible)
+  return useContract(chainId && MANIFESTER_ADDRESS_V2[chainId], FARM_MANIFESTER_ABI, withSignerIfPossible)
 }
 
 export function useManifestationContract(address: string, withSignerIfPossible?: boolean): Contract | null {

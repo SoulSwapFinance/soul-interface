@@ -1,11 +1,11 @@
 import { useManifesterContract, useTokenContract } from '../../hooks'
 import { useCallback } from 'react'
-import { MANIFESTER_ADDRESS } from 'sdk'
-import { useActiveWeb3React } from 'services/web3'
+// import { MANIFESTER_ADDRESS } from 'sdk'
+// import { useActiveWeb3React } from 'services/web3'
 
 export default function useDefarm() {
   const contract = useManifesterContract()
-  const { chainId } = useActiveWeb3React()
+  // const { chainId } = useActiveWeb3React()
 
   const getDefarmByManifester = useCallback(
     async (manifester?: string) => {

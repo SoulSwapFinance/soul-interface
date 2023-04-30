@@ -24,7 +24,7 @@ import Modal from 'components/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
 import { i18n } from '@lingui/core'
 import { useDeFarmInfo, useUserTokenInfo } from 'hooks/useAPI'
-import { computePairAddress, FACTORY_ADDRESS, MANIFESTER_ADDRESS, NATIVE, SOUL_ADDRESS, Token, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
+import { MANIFESTER_ADDRESS_V2, NATIVE, SOUL_ADDRESS, Token } from 'sdk'
 import { formatNumber } from 'functions'
 import Input from 'components/Input'
 import useApprove from 'hooks/useApprove'
@@ -186,7 +186,7 @@ const CreateFarm = () => {
       // alert('Connect Wallet')
     } else {
       // Checks if ManifestationContract can move tokens
-      const amount = await erc20Allowance(account, MANIFESTER_ADDRESS[chainId])
+      const amount = await erc20Allowance(account, MANIFESTER_ADDRESS_V2[chainId])
       if (Number(amount) > 0) setApproved(true)
       return amount
     }
@@ -195,7 +195,7 @@ const CreateFarm = () => {
   const handleApprove = async () => {
     try {
       let tx
-      tx = await erc20Approve(MANIFESTER_ADDRESS[chainId])
+      tx = await erc20Approve(MANIFESTER_ADDRESS_V2[chainId])
       await tx?.wait().then(await fetchApproval())
     } catch (e) {
       console.log(e)
