@@ -86,7 +86,7 @@ import { useRouter } from "next/router"
 import { useCurrency } from "hooks/Tokens"
 import SwapDropdown from "features/swap/SwapDropdown"
 import { getChainColorCode } from "constants/chains"
-import { DonateBanner, DeFarmBanner } from "components/Banner"
+import { LuxorBanner, DeFarmBanner } from "components/Banner"
 import LIMIT_BANNER from 'assets/branding/limit-banner.png'
 import TokenStats from "components/TokenStats"
 
@@ -503,8 +503,7 @@ const Limit = () => {
           <div className={`grid p-1 mt-4 space-y-2 rounded rounded-2xl bg-dark-1000`}>
             {/* <SwapLayoutCard> */}
             {/* <DonateBanner chainId={chainId} /> */}
-            <DeFarmBanner chainId={chainId} />
-            <div
+            <LuxorBanner color={'purple'} textColor={'white'} chainId={chainId} />            <div
               className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >
               <div className={`w-full`}>
