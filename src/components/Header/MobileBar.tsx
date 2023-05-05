@@ -31,6 +31,7 @@ import { Feature } from 'enums/Feature'
 import ChartIcon from 'components/Icons/exchange/ChartIcon'
 import SunMoonIcon from 'components/Icons/header/SunMoonIcon'
 import DocsIcon from 'components/Icons/mobile/DocsIcon'
+import { useUserInfo } from "hooks/useAPI"
 
 interface BarProps {
     inputCurrency?: Currency
@@ -274,7 +275,8 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                         >
                             <WalletIcon
                                 fillPrimary={isWallet ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                fillSecondary={isWallet ? `${getChainColor(chainId)}` : `#FFFFFF`}
+                                fillSecondary={isWallet ? `${
+                                getChainColor(chainId)}` : `#FFFFFF`}
                                 className={'w-7 h-7'}
                             />
                         </div>

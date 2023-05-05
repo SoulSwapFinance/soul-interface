@@ -1,5 +1,7 @@
 import React, { ReactNode, useMemo } from 'react'
-import { ArrowsUpDownIcon, LinkIcon, SparklesIcon, PresentationChartLineIcon, SunIcon, CurrencyDollarIcon, UserGroupIcon, ArrowsRightLeftIcon } from '@heroicons/react/24/outline'
+import { ArrowsUpDownIcon, 
+  // LinkIcon, SparklesIcon, PresentationChartLineIcon, SunIcon, CurrencyDollarIcon, UserGroupIcon, 
+  ArrowsRightLeftIcon } from '@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { Currency, NATIVE, SOUL_ADDRESS } from 'sdk'

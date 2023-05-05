@@ -27,6 +27,7 @@ import NftIcon from 'components/Icons/mobile/NftIcon'
 import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 import Web3Network from 'components/Web3Network'
+import { useUserInfo } from "hooks/useAPI"
 
 interface BarProps {
     inputCurrency?: Currency
@@ -41,6 +42,8 @@ const DesktopBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
     const { account, chainId, library } = useActiveWeb3React()
     const [open, setOpen] = useState(false)
     const bar = useBar()
+    
+    const { userInfo } = useUserInfo()
 
     // const typeStyle = `justify-center text-center w-full border border-[${getChainColor(chainId)}] rounded p-2`
 

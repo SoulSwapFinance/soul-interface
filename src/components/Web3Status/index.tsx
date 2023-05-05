@@ -1,24 +1,26 @@
-import Davatar from '@davatar/react'
-import { Web3Provider } from '@ethersproject/providers'
+// import Davatar from '@davatar/react'
+// import { Web3Provider } from '@ethersproject/providers'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { AbstractConnector } from '@web3-react/abstract-connector'
+// import { AbstractConnector } from '@web3-react/abstract-connector'
 import { useWeb3React } from '@web3-react/core'
-import { injected } from 'config/wallets'
+// import { injected } from 'config/wallets'
 import { NetworkContextName } from '../../constants'
-import { shortenAddress } from 'functions'
+// import { shortenAddress } from 'functions'
 import useENSName from 'hooks/useENSName'
 import WalletModal from 'modals/WalletModal'
 import { useWalletModalToggle } from 'state/application/hooks'
 import { isTransactionRecent, useAllTransactions } from 'state/transactions/hooks'
 import { TransactionDetails } from 'state/transactions/reducer'
-import Image from 'next/image'
+// import Image from 'next/image'
 import React, { useMemo } from 'react'
+import WalletIcon from 'components/Icons/header/WalletIcon'
 
 import Loader from '../Loader'
 import Web3Connect from '../Web3Connect'
-import { WalletIcon } from 'components/Icon'
+// import { WalletIcon } from 'components/Icon'
 import { getChainColor } from 'constants/chains'
+import { useUserInfo } from 'hooks/useAPI'
 
 // we want the latest one to come first, so return negative if a is after b
 function newTransactionsFirst(a: TransactionDetails, b: TransactionDetails) {
@@ -105,10 +107,30 @@ function Web3StatusInner() {
   }, [allTransactions])
 
   const pending = sortedRecentTransactions.filter((tx) => !tx.receipt).map((tx) => tx.hash)
-
   const hasPendingTransactions = !!pending.length
-
   const toggleWalletModal = useWalletModalToggle()
+  const { userInfo } = useUserInfo()
+
+  const votingPower = Number(userInfo?.votingPower)
+  // console.log(votingPower)
+  function getWalletColor() {
+    let walletColor = '#797470' // romanticGrey
+    votingPower >= 1_000_000
+      ? walletColor = "#806AEC" /// lightViolet (V)
+    : votingPower >= 500_000
+      ? walletColor = "#6E00FF" // brightIndigo (I)
+    : votingPower >= 250_000
+      ? walletColor = "#005AFF" // nokiaBlue (B)
+    : votingPower >= 100_000
+      ? walletColor = "#85FF00" // lime green (G)
+    : votingPower >= 25_000
+      ? walletColor = "#FF9E3D" // neonOrange (O)
+    : votingPower >= 1_000
+      ? walletColor = "#FF1A1A" // yelpRed (R)
+    : walletColor = "#797470" // romanticGrey
+
+    return walletColor
+  }
 
   if (account) {
     return (
@@ -136,7 +158,17 @@ function Web3StatusInner() {
           "grid items-center grid-flow-col items-center justify-center bg-dark-1000 h-[24px] w-[24px] text-sm pointer-events-auto auto-cols-max text-secondary"
           >
             {/* <div>{ENSName || shortenAddress(account)} </div> */}
-            <WalletIcon width={24} height={24} className={`text-[${getChainColor(chainId)}]`} />
+            {/* <WalletIcon 
+              width={24}
+              height={24}
+              color={getWalletColor()}
+              // className={`text-[${getWalletColor()}]`}
+            /> */}
+            <WalletIcon
+                fillPrimary={`${getWalletColor()}`}
+                fillSecondary={`#FFFFFF`}
+                className={'w-7 h-7 -mt-0.5 ml-1'}
+            />
             {/* <Davatar
               size={20}
               address={account}
