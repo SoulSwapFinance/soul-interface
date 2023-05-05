@@ -44,18 +44,6 @@ const DesktopBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
     const bar = useBar()
     
     const { userInfo } = useUserInfo()
-    const votingPower = Number(userInfo.votingPower)
-    
-    const walletColor 
-      = votingPower >= 2_500_000
-        ? "#806AEC" /// violet
-        : votingPower >= 500_000
-        ? "#3F0FB7" // indigoBlue
-        : votingPower >= 100_000
-        ? "#85FF00" // lime green
-        : votingPower >= 10_000
-        ? "#FF3F00" // red orange
-        : "#FFFFFF" // white
 
     // const typeStyle = `justify-center text-center w-full border border-[${getChainColor(chainId)}] rounded p-2`
 
@@ -240,8 +228,8 @@ const DesktopBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                             onClick={walletRoute}
                         >
                             <WalletIcon
-                                fillPrimary={isWallet ? `${walletColor}` : `#FFFFFF`}
-                                fillSecondary={isWallet ? `#FFFFFF` : `${walletColor}`}
+                                fillPrimary={isWallet ? `${getChainColor(chainId)}` : `#FFFFFF`}
+                                fillSecondary={isWallet ? `#FFFFFF` : `${getChainColor(chainId)}`}
                                 className={'w-7 h-7'}
                             />
                         </div>

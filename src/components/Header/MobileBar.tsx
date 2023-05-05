@@ -46,20 +46,7 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
     const { account, chainId, library } = useActiveWeb3React()
     const [open, setOpen] = useState(false)
     const bar = useBar()
-    const { userInfo } = useUserInfo()
-    const votingPower = Number(userInfo.votingPower)
-    
-    const walletColor 
-      = votingPower >= 2_500_000
-        ? "#806AEC" /// violet
-        : votingPower >= 500_000
-        ? "#3F0FB7" // indigoBlue
-        : votingPower >= 100_000
-        ? "#85FF00" // lime green
-        : votingPower >= 10_000
-        ? "#FF3F00" // red orange
-        : "#FFFFFF" // white
-        
+
     // const typeStyle = `justify-center text-center w-full border border-[${getChainColor(chainId)}] rounded p-2`
 
     const swapRoute = useCallback(() => {
@@ -287,9 +274,9 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                             onClick={walletRoute}
                         >
                             <WalletIcon
-                                fillPrimary={isWallet ? `#FFFFFF` : `${walletColor}`}
+                                fillPrimary={isWallet ? `#FFFFFF` : `${getChainColor(chainId)}`}
                                 fillSecondary={isWallet ? `${
-                                walletColor}` : `#FFFFFF`}
+                                getChainColor(chainId)}` : `#FFFFFF`}
                                 className={'w-7 h-7'}
                             />
                         </div>
