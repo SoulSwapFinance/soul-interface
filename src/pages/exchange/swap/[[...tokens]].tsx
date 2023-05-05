@@ -38,7 +38,8 @@ import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 import { useRouter } from 'next/router'
 import SwapDropdown from 'features/swap/SwapDropdown'
-import Pair from 'pages/analytics/pairs/[id]'
+// import Pair from 'pages/analytics/pairs/embedded/[id]'
+import TokenChart from 'pages/analytics/tokens/embedded/[id]'
 import { LuxorBanner, DeFarmBanner } from 'components/Banner'
 import SWAP_BANNER from 'assets/branding/swap-banner.png'
 // import UpDownArrowIcon from 'components/Icons/exchange/UpDownArrowIcon'
@@ -663,11 +664,15 @@ const Swap = () => {
                 <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
                   <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
                     {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
-                    {!isWrapped && <Pair
-                      // isWrapped={isWrapped}
-                      inputCurrency={inputCurrency}
+                    {!isWrapped && 
+                    <TokenChart
                       outputCurrency={outputCurrency}
                     />
+                    // <Pair
+                    //   // isWrapped={isWrapped}
+                    //   inputCurrency={inputCurrency}
+                    //   outputCurrency={outputCurrency}
+                    // />
                     }
                   </div>
                 </div>
