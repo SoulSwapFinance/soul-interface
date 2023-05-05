@@ -287,7 +287,7 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                             onClick={walletRoute}
                         >
                             <WalletIcon
-                                fillPrimary={isWallet ? `#FFFFFF` : `${getChainColor(chainId)}`}
+                                fillPrimary={isWallet ? `#FFFFFF` : `${walletColor}`}
                                 fillSecondary={isWallet ? `${
                                 walletColor}` : `#FFFFFF`}
                                 className={'w-7 h-7'}

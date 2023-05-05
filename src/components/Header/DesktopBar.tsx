@@ -241,7 +241,7 @@ const DesktopBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                         >
                             <WalletIcon
                                 fillPrimary={isWallet ? `${walletColor}` : `#FFFFFF`}
-                                fillSecondary={isWallet ? `#FFFFFF` : `${getChainColor(chainId)}`}
+                                fillSecondary={isWallet ? `#FFFFFF` : `${walletColor}`}
                                 className={'w-7 h-7'}
                             />
                         </div>
