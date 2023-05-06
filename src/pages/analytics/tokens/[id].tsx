@@ -147,6 +147,7 @@ export default function Token() {
   const volumeUSD2d = token1d?.volumeUSD - token2d?.volumeUSD
   const volumeUSD1dChange = (volumeUSD1d / volumeUSD2d) * 100 - 100
 
+  const priceUSD = token?.priceUSD
   const priceUSD1d = token?.priceUSD - token1d?.priceUSD
   const priceUSD2d = token1d?.priceUSD - token2d?.priceUSD
   const priceUSD1dChange = (priceUSD1d / priceUSD2d) * 100 - 100
@@ -339,7 +340,7 @@ export default function Token() {
           <ChartCard
             header="Price"
             subheader={token?.symbol}
-            figure={priceUSD1d}
+            figure={price}
             change={priceUSD1dChange}
             chart={chartData.priceChart}
             defaultTimespan="WEEK"
