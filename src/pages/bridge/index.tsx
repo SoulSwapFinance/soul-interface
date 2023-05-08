@@ -461,7 +461,7 @@ const Bridge: React.FC<any> = () => {
                     <Typo2>
                       {i18n._(t`Hash: `)}
                       <a
-                        href={`https://anyswap.net/explorer/tx?params=${bridgeTxHash}`}
+                        href={`https://scan.multichain.org/#/tx?params=${bridgeTxHash}`}
                         target="_blank"
                         rel="noreferrer"
                       >
