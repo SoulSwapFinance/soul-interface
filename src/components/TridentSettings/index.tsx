@@ -58,13 +58,13 @@ const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className }) =
                     <QuestionHelper text={i18n._(t`Restricts swaps to direct pairs only.`)} />
                   </div>
                   <Switch
+                    // color="gradient"
                     size="sm"
                     id="toggle-disable-multihop-button"
                     checked={singleHopOnly}
                     onChange={() => (singleHopOnly ? setSingleHopOnly(false) : setSingleHopOnly(true))}
                     checkedIcon={<CheckIcon className="text-dark-700" />}
                     uncheckedIcon={<CloseIcon />}
-                    color="gradient"
                   />
                 </div>
               {/* )} */}

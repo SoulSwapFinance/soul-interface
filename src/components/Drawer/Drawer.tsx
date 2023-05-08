@@ -16,7 +16,7 @@ import React, {
   useState,
 } from 'react'
 import ReactDOM from 'react-dom'
-import { ButtonComponent } from 'components/CrossSwap/Button'
+import { Button } from 'components/Button'
 
 interface DrawerContext {
   open: boolean
@@ -57,7 +57,7 @@ interface PanelProps {
   className?: string
 }
 
-export const DrawerButton: ButtonComponent = (props) => {
+export const DrawerButton = (props) => {
   const { setOpen } = useDrawer()
 
   const onClick = useCallback<MouseEventHandler<HTMLDivElement>>(
@@ -68,7 +68,7 @@ export const DrawerButton: ButtonComponent = (props) => {
     [props, setOpen]
   )
 
-  return <div className="flex items-center" onClick={onClick} {...props} />
+  return <Button className="flex items-center" onClick={onClick} {...props} />
 }
 
 export const Panel: FC<PanelProps> = ({ children, className }) => {

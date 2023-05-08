@@ -28,10 +28,10 @@ import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 // import Web3Network from 'components/Web3Network'
 // import Web3Status from 'components/Web3Status'
-import ChartIcon from 'components/Icons/exchange/ChartIcon'
-import SunMoonIcon from 'components/Icons/header/SunMoonIcon'
-import DocsIcon from 'components/Icons/mobile/DocsIcon'
-import { useUserInfo } from "hooks/useAPI"
+// import ChartIcon from 'components/Icons/exchange/ChartIcon'
+// import SunMoonIcon from 'components/Icons/header/SunMoonIcon'
+// import DocsIcon from 'components/Icons/mobile/DocsIcon'
+// import { useUserInfo } from "hooks/useAPI"
 
 interface BarProps {
     inputCurrency?: Currency

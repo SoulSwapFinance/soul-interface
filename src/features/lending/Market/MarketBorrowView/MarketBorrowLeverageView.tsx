@@ -81,12 +81,12 @@ export const MarketBorrowLeverageView: FC<MarketBorrowLeverageView> = ({
         <div className="flex items-center gap-2">
           <Switch
             size="sm"
+            // color="gradient"
             id="toggle-expert-mode-button"
             checked={enabled}
             onChange={onSwitch}
             checkedIcon={<CheckIcon className="text-dark-700" />}
             uncheckedIcon={<CloseIcon />}
-            color="gradient"
           />
           <SettingsTab />
         </div>

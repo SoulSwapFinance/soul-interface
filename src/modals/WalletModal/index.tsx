@@ -261,7 +261,7 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
             // tryActivation={tryActivation}
             />
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 overflow-y-auto">{options}</div>
+            <div className="grid grid-cols-1 gap-4 overflow-y-auto">{options}</div>
           )}
           <div className={[ChainId.ETHEREUM, ChainId.FANTOM].includes(chainId) ? `flex justify-center` : `hidden`}>
             <Typography variant="xs" className="text-secondary" component="span">
