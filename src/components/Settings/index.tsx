@@ -11,8 +11,8 @@ import { useModalOpen, useToggleSettingsMenu } from '../../state/application/hoo
 
 // import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline'
 import  { ApplicationModal } from 'state/application/reducer'
-import { Button } from 'components/Button'
-import Modal from 'components/DefaultModal'
+// import { Button } from 'components/Button'
+// import Modal from 'components/DefaultModal'
 import QuestionHelper from 'components/QuestionHelper'
 import { Toggle } from 'components/Toggle'
 import Typography from 'components/Typography'
@@ -21,7 +21,7 @@ import { useLingui } from '@lingui/react'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import { useActiveWeb3React } from 'services/web3'
 import TransactionSettings from 'components/TransactionSettings'
-import ModalHeader from 'components/Modal/Header'
+// import ModalHeader from 'components/Modal/Header'
 import { getChainColor } from 'constants/chains'
 import { classNames } from 'functions'
 import CogIcon from 'components/Icons/exchange/CogIcon'
@@ -42,7 +42,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
 
   const [ttl, setTtl] = useUserTransactionTTL()
   const WHITE = `#FFFFFF`
-  const chainColor = getChainColor(chainId)
+  // const chainColor = getChainColor(chainId)
   // const [userUseArcher, setUserUseArcher] = useUserArcherUseRelay()
   const COG_ICON = <CogIcon
     fillPrimary={open ? getChainColor(chainId) : WHITE}
@@ -53,7 +53,11 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
   return (
     <div className="relative flex" ref={node}>
       <div
-        className="flex items-center justify-center w-6 h-6 rounded cursor-pointer"
+        className={
+          `flex items-center justify-center 
+          w-6 h-6 rounded cursor-pointer sm:-mt-1.5
+          `
+        }
         onClick={toggle}
         id="open-settings-dialog-button"
       >
