@@ -7,7 +7,11 @@ import { ChainId, SOUL_ADDRESS } from 'sdk'
 import { Feature } from 'enums'
 import { classNames, featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
-import { BanknotesIcon, BuildingLibraryIcon, CircleStackIcon, DocumentIcon,  MagnifyingGlassCircleIcon, MinusCircleIcon, PhotoIcon, PresentationChartLineIcon, PlusCircleIcon, SunIcon } from '@heroicons/react/24/solid'
+import { 
+  // BanknotesIcon, BuildingLibraryIcon, CircleStackIcon, DocumentIcon,  MagnifyingGlassCircleIcon, MinusCircleIcon, 
+  PhotoIcon, 
+  // PresentationChartLineIcon, PlusCircleIcon, SunIcon 
+} from '@heroicons/react/24/solid'
 import SwapIcon from 'components/Icons/exchange/SwapIcon'
 import { getChainColor } from 'constants/chains'
 import DocsIcon from 'components/Icons/mobile/DocsIcon'
@@ -48,7 +52,7 @@ type UseMenu = () => Menu
 const useMenu: UseMenu = () => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
-  const { asPath } = useRouter()
+  // const { asPath } = useRouter()
 
   const chainColor = getChainColor(chainId)
 
@@ -68,16 +72,16 @@ const useMenu: UseMenu = () => {
   return useMemo(() => {
     if (!chainId) return []
 
-  const removePage = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
-  const addPage = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
-  const poolPage = asPath.startsWith('/pool') || asPath.startsWith('/pools')
-  const swapPage = asPath.startsWith('/swap') || asPath.startsWith('/exchange/swap')
-  const crossPage = asPath.startsWith('/cross') || asPath.startsWith('/exchange/cross')
-  const bondPage = asPath.startsWith('/bonds')
-  const landingPage = asPath.startsWith('/landing')
-  const lendPage = asPath.startsWith('/lend') || asPath.startsWith('/borrow')
-  const nftPage = asPath.startsWith('/marketplace') || asPath.startsWith('/marketplace/collections')
-  const docsPage = asPath.startsWith('/learn')
+  // const removePage = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
+  // const addPage = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
+  // const poolPage = asPath.startsWith('/pool') || asPath.startsWith('/pools')
+  // const swapPage = asPath.startsWith('/swap') || asPath.startsWith('/exchange/swap')
+  // const crossPage = asPath.startsWith('/cross') || asPath.startsWith('/exchange/cross')
+  // const bondPage = asPath.startsWith('/bonds')
+  // const landingPage = asPath.startsWith('/landing')
+  // const lendPage = asPath.startsWith('/lend') || asPath.startsWith('/borrow')
+  // const nftPage = asPath.startsWith('/marketplace') || asPath.startsWith('/marketplace/collections')
+  // const docsPage = asPath.startsWith('/learn')
 
   // const isFarm = asPath.startsWith('/farm') || asPath.startsWith('/summoner')
   // const isVault = asPath.startsWith('/autostake')
@@ -193,15 +197,15 @@ const CHART_ICON =
   //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
   // />
 
-  const SOUL_ICON = 
-  <div className={classNames(`p-0 rounded rounded-xl bg-dark-900`, `h-6 mb-4 mt-1`)}>
-  <Image 
-    src={'/favicon.png'} height={36} width={36} 
-    objectFit={`contain`}
-    className={'bg-dark-900 rounded rounded-xl'}
-    alt={"soulswap logo icon"}
-    />
-    </div>
+  // const SOUL_ICON = 
+  // <div className={classNames(`p-0 rounded rounded-xl bg-dark-900`, `h-6 mb-4 mt-1`)}>
+  // <Image 
+  //   src={'/favicon.png'} height={36} width={36} 
+  //   objectFit={`contain`}
+  //   className={'bg-dark-900 rounded rounded-xl'}
+  //   alt={"soulswap logo icon"}
+  //   />
+  //   </div>
 
     // By default show just a swap button
     // let tradeMenu: MenuItem = {

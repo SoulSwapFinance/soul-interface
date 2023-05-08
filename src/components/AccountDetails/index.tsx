@@ -65,8 +65,8 @@ const AccountDetails: FC<AccountDetailsProps> = ({
   return (
     <div className="space-y-3">
       <div className="space-y-3">
-        {/* <HeadlessUiModal.Header header={i18n._(t`Account`)} onClose={toggleWalletModal} /> */}
-        <HeadlessUiModal.BorderedContent className="flex flex-col gap-3">
+        <HeadlessUiModal.Header header={i18n._(t`Account`)} onClose={toggleWalletModal} />
+        {/* <HeadlessUiModal.BorderedContent className="flex flex-col gap-3"> */}
           <div className="flex items-center justify-between">
             {connectorName}
             <Button variant="outlined" color={getChainColorCode(chainId)} size="xs" onClick={deactivate}>
@@ -120,7 +120,7 @@ const AccountDetails: FC<AccountDetailsProps> = ({
               )}
             </div>
           </div>
-        </HeadlessUiModal.BorderedContent>
+        {/* </HeadlessUiModal.BorderedContent> */}
         <HeadlessUiModal.BorderedContent className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
             <Typography variant="xs" weight={700} className="text-secondary">
