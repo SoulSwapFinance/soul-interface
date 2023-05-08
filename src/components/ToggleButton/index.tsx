@@ -42,9 +42,9 @@ const ToggleButtonGroup: ToggleButtonGroup<Props> = ({
       {Children.map(children, (child) => {
         if (isValidElement(child)) {
           return cloneElement(child, {
-            variant,
-            size,
-            style: { width: `calc(100% / ${Children.toArray(children).length})` },
+            // variant,
+            // size,
+            // style: { width: `calc(100% / ${Children.toArray(children).length})` },
           })
         }
 
@@ -55,13 +55,13 @@ const ToggleButtonGroup: ToggleButtonGroup<Props> = ({
 }
 
 type ToggleButtonProps = ComponentProps<typeof HeadlessRadioGroup.Option>
-ToggleButtonGroup.Button = ({ value, children, size, style, className }: ToggleButtonProps) => {
+ToggleButtonGroup.Button = ({ value, children, style, className }: ToggleButtonProps) => {
   return (
     <HeadlessRadioGroup.Option value={value} as={Fragment}>
       {({ checked }) => (
         <Button
           style={style}
-          size={size}
+          // size={size}
           id={`radio-option-${value}`}
           variant={checked ? 'filled' : 'empty'}
           color={checked ? 'blue' : 'gray'}

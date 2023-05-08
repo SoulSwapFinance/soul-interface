@@ -160,7 +160,7 @@ const ListRow: FC<{ listUrl: string }> = memo(({ listUrl }) => {
           onChange={() => (isActive ? handleDisableList() : handleEnableList())}
           checkedIcon={<CheckIcon className="text-dark-700" />}
           uncheckedIcon={<CloseIcon />}
-          color="gradient"
+          // color="gradient"
         />
       </div>
     </div>
