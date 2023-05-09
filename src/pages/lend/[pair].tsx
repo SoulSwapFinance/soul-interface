@@ -200,10 +200,6 @@ const PairLayout = ({ children }) => {
 
   // const lpDecimals = Number(underworldPairInfo.decimals)
   // const assetAddress = underworldPairInfo.assetAddress
-  
-
-  
-
   // const oracle = underworldPairInfo.oracle
   // const interestPerSecond = underworldPairInfo.interestPerSecond
   // const interestPerYear = Number(interestPerSecond) * 86_400 * 365 / 1e18
@@ -220,11 +216,11 @@ const PairLayout = ({ children }) => {
           : aTicker == 'WBTC.e' ? 'BTC'
           : aTicker
 
-  const collateralSymbol 
-      = cTicker == 'WAVAX' ? 'AVAX'
-          : cTicker == 'WETH.e' ? 'ETH'
-          : cTicker == 'WBTC.e' ? 'BTC'
-          : cTicker
+  // const collateralSymbol 
+  //     = cTicker == 'WAVAX' ? 'AVAX'
+  //         : cTicker == 'WETH.e' ? 'ETH'
+  //         : cTicker == 'WBTC.e' ? 'BTC'
+  //         : cTicker
 
   const interestPerYear = pair?.interestPerYear.string
   console.log('interestPerYear:%s', interestPerYear)

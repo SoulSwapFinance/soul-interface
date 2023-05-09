@@ -162,7 +162,10 @@ export default function Withdraw({ pair }: any): JSX.Element {
         content={(onCook: any) => (
           <Button
             onClick={() => onCook(pair, onExecute)}
-            disabled={displayValue.toBigNumber(assetDecimals).lte(0) || warnings.broken}
+            // disabled={
+              // displayValue.toBigNumber(assetDecimals).lte(0) 
+              // || warnings.broken
+            // }
             className="w-full"
             >
             {i18n._(t`Withdraw`)}

@@ -244,16 +244,16 @@ export const FantomPools = [
   //   token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
   //   token1Address: FUSD_ADDRESS[ChainId.FANTOM], // FUSD
   // },
-  {
-    // 600
-    pid: 23,
-    token0Symbol: 'WFTM',
-    token1Symbol: 'DAI',
-    lpSymbol: 'FTM-DAI',
-    lpAddress: '0xF3d6E8Ecece8647B456d57375Ce0B51B8F0cD40b',
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: DAI_ADDRESS[ChainId.FANTOM],
-  },
+  // {
+  //   // 600
+  //   pid: 23,
+  //   token0Symbol: 'WFTM',
+  //   token1Symbol: 'DAI',
+  //   lpSymbol: 'FTM-DAI',
+  //   lpAddress: '0xF3d6E8Ecece8647B456d57375Ce0B51B8F0cD40b',
+  //   token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+  //   token1Address: DAI_ADDRESS[ChainId.FANTOM],
+  // },
   {
     // 600
     pid: 2,
@@ -275,16 +275,16 @@ export const FantomPools = [
     token1Address: AVAX_ADDRESS[ChainId.FANTOM],
   },
 */ 
-  {
-    // 600
-    pid: 18,
-    token0Symbol: 'WFTM',
-    token1Symbol: 'BNB',
-    lpSymbol: 'FTM-BNB',
-    lpAddress: '0x52966a12e3211c92909C28603ca3df8465c06c82',
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: BNB_ADDRESS[ChainId.FANTOM],
-  },
+  // {
+  //   // 600
+  //   pid: 18,
+  //   token0Symbol: 'WFTM',
+  //   token1Symbol: 'BNB',
+  //   lpSymbol: 'FTM-BNB',
+  //   lpAddress: '0x52966a12e3211c92909C28603ca3df8465c06c82',
+  //   token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+  //   token1Address: BNB_ADDRESS[ChainId.FANTOM],
+  // },
   {
     // 600
     pid: 4,
@@ -305,16 +305,16 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: WBTC_ADDRESS[ChainId.FANTOM],
   }, */
-  {
-    // 300
-    pid: 41,
-    token0Symbol: 'WFTM',
-    token1Symbol: 'CRV',
-    lpSymbol: 'FTM-CRV',
-    lpAddress: '0x1C9A342A615E8CAB4d21A2ACA7E40a48b2F8747F',
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: CRV_ADDRESS[ChainId.FANTOM],
-  },
+  // {
+  //   // 300
+  //   pid: 41,
+  //   token0Symbol: 'WFTM',
+  //   token1Symbol: 'CRV',
+  //   lpSymbol: 'FTM-CRV',
+  //   lpAddress: '0x1C9A342A615E8CAB4d21A2ACA7E40a48b2F8747F',
+  //   token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+  //   token1Address: CRV_ADDRESS[ChainId.FANTOM],
+  // },
   // {
   //   // 400
   //   pid: 15,
@@ -325,16 +325,16 @@ export const FantomPools = [
   //   token0Address: WETH_ADDRESS[ChainId.FANTOM],
   //   token1Address: USDC_ADDRESS[ChainId.FANTOM],
   // },
-  {
-    // 600
-    pid: 8,
-    token0Symbol: 'WETH',
-    token1Symbol: 'BTC',
-    lpSymbol: 'ETH-BTC',
-    lpAddress: '0x1fc954d3484bc21e0ce53a6648a35bbfc03dc9d0',
-    token0Address: WETH_ADDRESS[ChainId.FANTOM],
-    token1Address: WBTC_ADDRESS[ChainId.FANTOM],
-  },
+  // {
+  //   // 600
+  //   pid: 8,
+  //   token0Symbol: 'WETH',
+  //   token1Symbol: 'BTC',
+  //   lpSymbol: 'ETH-BTC',
+  //   lpAddress: '0x1FC954d3484bC21E0Ce53A6648a35BBfc03DC9D0',
+  //   token0Address: WETH_ADDRESS[ChainId.FANTOM],
+  //   token1Address: WBTC_ADDRESS[ChainId.FANTOM],
+  // },
   // {
   //   // 600
   //   pid: 20,
@@ -345,16 +345,16 @@ export const FantomPools = [
   //   token0Address: WBTC_ADDRESS[ChainId.FANTOM],
   //   token1Address: USDC_ADDRESS[ChainId.FANTOM],
   // },
-  {
-    // 200
-    pid: 50,
-    token0Symbol: 'WFTM',
-    token1Symbol: 'EVO',
-    lpSymbol: 'FTM-EVO',
-    lpAddress: '0x857107e8F42023F7623C7ca413811DB1853F7f4b',
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: GRIMEVO_ADDRESS[ChainId.FANTOM],
-  },
+  // {
+  //   // 200
+  //   pid: 50,
+  //   token0Symbol: 'WFTM',
+  //   token1Symbol: 'EVO',
+  //   lpSymbol: 'FTM-EVO',
+  //   lpAddress: '0x857107e8F42023F7623C7ca413811DB1853F7f4b',
+  //   token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+  //   token1Address: GRIMEVO_ADDRESS[ChainId.FANTOM],
+  // },
 ]
 
 export const FantomLendingPools = [

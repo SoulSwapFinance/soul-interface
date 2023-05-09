@@ -85,9 +85,6 @@ msgstr ""
 msgid "Accrue"
 msgstr ""
 
-msgid "Active"
-msgstr ""
-
 msgid "Add"
 msgstr ""
 
@@ -318,9 +315,6 @@ msgstr ""
 msgid "CoffinBox Balances"
 msgstr ""
 
-msgid "CoffinBox strategies can create yield for your liquidity while it is not lent out. This token does not yet have a strategy in the CoffinBox."
-msgstr ""
-
 msgid "Collateral"
 msgstr ""
 
@@ -438,6 +432,9 @@ msgstr ""
 msgid "Data"
 msgstr ""
 
+msgid "Deadline"
+msgstr ""
+
 msgid "Deposit"
 msgstr ""
 
@@ -519,9 +516,6 @@ msgstr ""
 msgid "Enter Recipient"
 msgstr ""
 
-msgid "Enter a valid slippage percentage"
-msgstr ""
-
 msgid "Epoch Remaining"
 msgstr ""
 
@@ -575,6 +569,9 @@ msgstr ""
 msgid "Failed"
 msgstr ""
 
+msgid "Failure Risk"
+msgstr ""
+
 msgid "Fantom Faucet"
 msgstr ""
 
@@ -618,6 +615,9 @@ msgid "Forfeit"
 msgstr ""
 
 msgid "French"
+msgstr ""
+
+msgid "Frontrun Risk"
 msgstr ""
 
 msgid "Gain exposure to tokens without reducing your assets. Leverage will enable you to take short positions against assets and earn from downside movements."
@@ -733,13 +733,13 @@ msgstr ""
 msgid "Interest"
 msgstr ""
 
-msgid "Interface Settings"
-msgstr ""
-
 msgid "Invalid Pool"
 msgstr ""
 
 msgid "Invalid Recipient"
+msgstr ""
+
+msgid "Invalid Slippage"
 msgstr ""
 
 msgid "Invalid pair"
@@ -987,9 +987,6 @@ msgstr ""
 msgid "Output is estimated. If the price changes by more than {0}% your transaction will revert."
 msgstr ""
 
-msgid "Output is estimated. You will receive at least"
-msgstr ""
-
 msgid "Overview"
 msgstr ""
 
@@ -1212,6 +1209,9 @@ msgstr ""
 msgid "SOUL TREASURY"
 msgstr ""
 
+msgid "SWITCH CHAIN"
+msgstr ""
+
 msgid "Sacrifice"
 msgstr ""
 
@@ -1254,6 +1254,9 @@ msgstr ""
 msgid "Send to:"
 msgstr ""
 
+msgid "Settings"
+msgstr ""
+
 msgid "Share of Pool"
 msgstr ""
 
@@ -1263,10 +1266,10 @@ msgstr ""
 msgid "Showing Results"
 msgstr ""
 
-msgid "Slippage Tolerance"
+msgid "Slippage"
 msgstr ""
 
-msgid "Slippage tolerance"
+msgid "Slippage Tolerance"
 msgstr ""
 
 msgid "Socials"
@@ -1290,9 +1293,6 @@ msgstr ""
 msgid "Stable"
 msgstr ""
 
-msgid "Stack Yields with SAAVE"
-msgstr ""
-
 msgid "Stake"
 msgstr ""
 
@@ -1306,11 +1306,6 @@ msgid "Stake SOUL to borrow SEANCE"
 msgstr ""
 
 msgid "Stake for Seance"
-msgstr ""
-
-msgid ""
-"Stake into SEANCE add collateral as aSEANCE on Aave all in\n"
-"one click"
 msgstr ""
 
 msgid "Staked"
@@ -1368,9 +1363,6 @@ msgid "Supply Distribution"
 msgstr ""
 
 msgid "Supplying {0} {1} and {2} {3}"
-msgstr ""
-
-msgid "Supported On"
 msgstr ""
 
 msgid "Swap"
@@ -1451,12 +1443,6 @@ msgstr ""
 msgid "Time Remaining"
 msgstr ""
 
-msgid "Toggle Expert Mode"
-msgstr ""
-
-msgid "Toggle expert mode"
-msgstr ""
-
 msgid "Token"
 msgstr ""
 
@@ -1501,10 +1487,16 @@ msgstr ""
 msgid "Transaction Submitted"
 msgstr ""
 
-msgid "Transaction deadline"
+msgid "Transaction reverts if pending past deadline."
 msgstr ""
 
 msgid "Transactions"
+msgstr ""
+
+msgid "Transactions revert if price changes unfavorably by more than this percentage."
+msgstr ""
+
+msgid "Transactions revert if there is a large, unfavorable price movement before it is confirmed."
 msgstr ""
 
 msgid "Treasury Distribution"
@@ -1526,9 +1518,6 @@ msgid "Tutorials"
 msgstr ""
 
 msgid "UNWRAP"
-msgstr ""
-
-msgid "Unavailable on {0}."
 msgstr ""
 
 msgid "Underworld Assets"
@@ -1711,6 +1700,9 @@ msgstr ""
 msgid "You need to first approve LP tokens and then migrate it"
 msgstr ""
 
+msgid "You will receive at least"
+msgstr ""
+
 msgid "You'll receive (at least):"
 msgstr ""
 
@@ -1747,21 +1739,6 @@ msgstr ""
 msgid "Your transaction got rejected"
 msgstr ""
 
-msgid "Your transaction may be frontrun"
-msgstr ""
-
-msgid "Your transaction may fail"
-msgstr ""
-
-msgid "Your transaction will revert if it is pending for more than this long."
-msgstr ""
-
-msgid "Your transaction will revert if the price changes unfavorably by more than this percentage."
-msgstr ""
-
-msgid "Your transaction will revert if there is a large, unfavorable price movement before it is confirmed."
-msgstr ""
-
 msgid "Your transactions will appear here..."
 msgstr ""
 
@@ -1795,9 +1772,6 @@ msgstr ""
 msgid "loading..."
 msgstr ""
 
-msgid "minutes"
-msgstr ""
-
 msgid "or the transaction will revert."
 msgstr ""
 
@@ -1813,16 +1787,10 @@ msgstr ""
 msgid "{0} Deposited"
 msgstr ""
 
-msgid "{0} Strategy"
-msgstr ""
-
 msgid "{0} tokens"
 msgstr ""
 
 msgid "{0}/{1} Burned"
-msgstr ""
-
-msgid "{link} or change network."
 msgstr ""
 
 msgid "{text}"
