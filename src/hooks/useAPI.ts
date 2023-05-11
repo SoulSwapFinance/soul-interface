@@ -137,6 +137,7 @@ export function useSoulInfo(): { status: string; soulInfo: T } {
         NativeBalance: '29700.997381034977',
         NativeValue: '6517.022546344076',
         SoulValue: '83117.17095503045',
+        SoulPairedBalance: '1250',
   
         NativeSoulValue: '52028.220989969974',
         SoulUsdcValue: '31843.071867637213',

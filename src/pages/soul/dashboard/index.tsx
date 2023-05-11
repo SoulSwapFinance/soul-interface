@@ -37,7 +37,9 @@ export default function Dashboard() {
   // GET SOUL ECONOMY BALANCES //
   const { soulInfo } = useSoulInfo()
   const stakedSoul = Number(soulInfo.stakedSoul)
-  const soulBalance = Number(soulInfo.SoulBalance)
+  const soulDaoPaired = Number(soulInfo.SoulPairedBalance)
+  const soulBalance = Number(soulInfo.SoulBalance) + soulDaoPaired
+  const daoSoulValue = Number(soulInfo.SoulBalance) * soulPrice
   const totalSupply = Number(soulInfo.supply)
   const circulatingSupply = Number(totalSupply - soulBalance - stakedSoul)
 
@@ -45,7 +47,7 @@ export default function Dashboard() {
   const daoLiquidityValue = Number(soulInfo.totalLiquidityValue)
 
   // GET RESERVES BALANCES //
-  const treasurySoulValue = soulBalance * soulPrice
+  const treasurySoulValue = daoSoulValue
   const treasuryNativeValue = Number(soulInfo.NativeValue)
   // const treasuryReserveValue = treasurySoulValue + treasuryNativeValue
 
