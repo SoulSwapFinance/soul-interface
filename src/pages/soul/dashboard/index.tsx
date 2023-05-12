@@ -12,10 +12,10 @@ import DashboardChartLegend from 'components/Dashboard/ChartLegend'
 import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
-import { useSoulInfo, useBondInfo, usePriceUSD, useTokenInfo } from 'hooks/useAPI'
-import { ChainId, NATIVE, SOUL_ADDRESS } from 'sdk'
+import { useSoulInfo, useBondInfo, useTokenInfo } from 'hooks/useAPI'
+import { ChainId, SOUL_ADDRESS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
-import { getChainInfo, getChainColorCode, getChainColor } from 'constants/chains'
+import { getChainInfo } from 'constants/chains'
 import Image from 'next/image'
 import DATA_BANNER from 'assets/branding/data-banner.png'
 import TokenStats from 'components/TokenStats'
@@ -38,6 +38,7 @@ export default function Dashboard() {
   const { soulInfo } = useSoulInfo()
   const stakedSoul = Number(soulInfo.stakedSoul)
   const soulBalance = Number(soulInfo.SoulBalance)
+  const daoSoulValue = Number(soulInfo.SoulBalance) * soulPrice
   const totalSupply = Number(soulInfo.supply)
   const circulatingSupply = Number(totalSupply - soulBalance - stakedSoul)
 
@@ -45,8 +46,8 @@ export default function Dashboard() {
   const daoLiquidityValue = Number(soulInfo.totalLiquidityValue)
 
   // GET RESERVES BALANCES //
-  const treasurySoulValue = soulBalance * soulPrice
-  const treasuryNativeValue = Number(soulInfo.NativeValue)
+  const treasurySoulValue = daoSoulValue
+  // const treasuryNativeValue = Number(soulInfo.NativeValue)
   // const treasuryReserveValue = treasurySoulValue + treasuryNativeValue
 
   // GET LIQUIDITY BALANCES //
@@ -55,133 +56,133 @@ export default function Dashboard() {
   // const bondedValue = Number(bondsTvl)
   const bondedValue = [ChainId.FANTOM].includes(chainId) ? Number(bondInfo.totalValue) : 0
 
-  const NativeSoulValue = Number(soulInfo.NativeSoulValue) + Number(bondInfo.NativeSoulValue)
-  const SoulUsdcValue = Number(soulInfo.SoulUsdcValue) + Number(bondInfo.SoulUsdcValue)
-  const NativeEthereumValue = Number(soulInfo.NativeEthereumValue) + Number(bondInfo.NativeEthereumValue)
-  const UsdcDaiValue = Number(soulInfo.UsdcDaiValue) + Number(bondInfo.UsdcDaiValue)
-  const NativeUsdcValue = Number(soulInfo.NativeUsdcValue) + Number(bondInfo.NativeUsdcValue)
-  const NativeBitcoinValueValue = Number(soulInfo.NativeBitcoinValueValue) + Number(bondInfo.NativeBitcoinValueValue)
-  const NativeDaiValue = Number(soulInfo.NativeDaiValue) + Number(bondInfo.NativeDaiValue)
-  const NativeBinanceValue = Number(soulInfo.NativeBinanceValue) + Number(bondInfo.NativeBinanceValue)
-  const NativeSeanceValue = Number(soulInfo.NativeSeanceValue) + Number(bondInfo.NativeSeanceValue)
+  // const NativeSoulValue = Number(soulInfo.NativeSoulValue) + Number(bondInfo.NativeSoulValue)
+  // const SoulUsdcValue = Number(soulInfo.SoulUsdcValue) + Number(bondInfo.SoulUsdcValue)
+  // const NativeEthereumValue = Number(soulInfo.NativeEthereumValue) + Number(bondInfo.NativeEthereumValue)
+  // const UsdcDaiValue = Number(soulInfo.UsdcDaiValue) + Number(bondInfo.UsdcDaiValue)
+  // const NativeUsdcValue = Number(soulInfo.NativeUsdcValue) + Number(bondInfo.NativeUsdcValue)
+  // const NativeBitcoinValueValue = Number(soulInfo.NativeBitcoinValueValue) + Number(bondInfo.NativeBitcoinValueValue)
+  // const NativeDaiValue = Number(soulInfo.NativeDaiValue) + Number(bondInfo.NativeDaiValue)
+  // const NativeBinanceValue = Number(soulInfo.NativeBinanceValue) + Number(bondInfo.NativeBinanceValue)
+  // const NativeSeanceValue = Number(soulInfo.NativeSeanceValue) + Number(bondInfo.NativeSeanceValue)
 
   // const OtherValue = NativeSeanceValue + NativeBinanceValue + SoulUsdcValue + NativeDaiValue
-  const NativePairsValue = NativeSoulValue + NativeBitcoinValueValue + NativeDaiValue + NativeBinanceValue + NativeSeanceValue + NativeEthereumValue
-  const SoulPairsValue = NativeSoulValue + SoulUsdcValue
-  const SeancePairsValue = NativeSeanceValue
-  const UsdcPairsValue = UsdcDaiValue + NativeUsdcValue + SoulUsdcValue
-  const DaiPairsValue = UsdcDaiValue + NativeDaiValue
-  const BitcoinPairsValue = NativeBitcoinValueValue
-  const BinancePairsValue = NativeBinanceValue
-  const EthereumPairsValue = NativeEthereumValue
+  // const NativePairsValue = NativeSoulValue + NativeBitcoinValueValue + NativeDaiValue + NativeBinanceValue + NativeSeanceValue + NativeEthereumValue
+  // const SoulPairsValue = NativeSoulValue + SoulUsdcValue
+  // const SeancePairsValue = NativeSeanceValue
+  // const UsdcPairsValue = UsdcDaiValue + NativeUsdcValue + SoulUsdcValue
+  // const DaiPairsValue = UsdcDaiValue + NativeDaiValue
+  // const BitcoinPairsValue = NativeBitcoinValueValue
+  // const BinancePairsValue = NativeBinanceValue
+  // const EthereumPairsValue = NativeEthereumValue
 
-  const SoulComposition = SoulPairsValue / 2
-  const NativeComposition = NativePairsValue / 2
-  const UsdcComposition = UsdcPairsValue / 2
-  const DaiComposition = DaiPairsValue / 2
-  const BitcoinComposition = BitcoinPairsValue / 2
-  const StableComposition = UsdcComposition + DaiComposition
-  const EthereumComposition = EthereumPairsValue / 2
-  const BinanceComposition = BinancePairsValue / 2
-  const SeanceComposition = SeancePairsValue / 2
+  // const SoulComposition = SoulPairsValue / 2
+  // const NativeComposition = NativePairsValue / 2
+  // const UsdcComposition = UsdcPairsValue / 2
+  // const DaiComposition = DaiPairsValue / 2
+  // const BitcoinComposition = BitcoinPairsValue / 2
+  // const StableComposition = UsdcComposition + DaiComposition
+  // const EthereumComposition = EthereumPairsValue / 2
+  // const BinanceComposition = BinancePairsValue / 2
+  // const SeanceComposition = SeancePairsValue / 2
   // const OtherComposition = BinanceComposition + SeanceComposition
 
   // calculate Treasury Balances
   // const treasuryValue = treasuryLiquidityValue + treasuryReserveValue
   const treasuryValue = Number(soulInfo.totalValue) + bondedValue
-  const liquidityValue = bondedValue + daoLiquidityValue
+  // const liquidityValue = bondedValue + daoLiquidityValue
 
-  const liquidityValueData = [
-    {
-      "label": "STABLECOINS",
-      "angle": StableComposition,
-      "color": "#B445FF",
-      "percent": ((StableComposition / liquidityValue) * 100).toFixed()
-    },
-    {
-      "label": "FANTOM",
-      "angle": NativeComposition,
-      "color": "#B485FF",
-      "percent": ((NativeComposition / liquidityValue) * 100).toFixed()
-    },
-    {
-      "label": "BTC, ETH, & BNB",
-      "angle": BitcoinComposition + EthereumComposition + BinanceComposition,
-      "color": "#B452FF",
-      "percent": (((BitcoinComposition + EthereumComposition + BinanceComposition) / liquidityValue) * 100).toFixed()
-    },
-    {
-      "label": "SOUL & SEANCE",
-      "angle": SoulComposition + SeanceComposition,
-      "color": "#B465FF",
-      "percent": (((SoulComposition + SeanceComposition) / liquidityValue) * 100).toFixed()
-    },
-    // {
-    //     "label": "ETHEREUM",
-    //     "angle": EthereumComposition,
-    //     "color": "#B445FF",
-    //     "percent": ((EthereumComposition / liquidityValue) * 100).toFixed()
-    // },
-    // {
-    //     "label": "OTHERS",
-    //     "angle": OtherComposition,
-    //     "color": "#B445FF",
-    //     "percent": ((OtherComposition / liquidityValue) * 100).toFixed()
-    // },
-    // {
-    //     "label": "BINANCE",
-    //     "angle": BinanceComposition,
-    //     "color": "#B445FF",
-    //     "percent": ((BinanceComposition / liquidityValue) * 100).toFixed()
-    // },
-  ]
+  // const liquidityValueData = [
+  //   {
+  //     "label": "STABLECOINS",
+  //     "angle": StableComposition,
+  //     "color": "#B445FF",
+  //     "percent": ((StableComposition / liquidityValue) * 100).toFixed()
+  //   },
+  //   {
+  //     "label": "FANTOM",
+  //     "angle": NativeComposition,
+  //     "color": "#B485FF",
+  //     "percent": ((NativeComposition / liquidityValue) * 100).toFixed()
+  //   },
+  //   {
+  //     "label": "BTC, ETH, & BNB",
+  //     "angle": BitcoinComposition + EthereumComposition + BinanceComposition,
+  //     "color": "#B452FF",
+  //     "percent": (((BitcoinComposition + EthereumComposition + BinanceComposition) / liquidityValue) * 100).toFixed()
+  //   },
+  //   {
+  //     "label": "SOUL & SEANCE",
+  //     "angle": SoulComposition + SeanceComposition,
+  //     "color": "#B465FF",
+  //     "percent": (((SoulComposition + SeanceComposition) / liquidityValue) * 100).toFixed()
+  //   },
+  //   // {
+  //   //     "label": "ETHEREUM",
+  //   //     "angle": EthereumComposition,
+  //   //     "color": "#B445FF",
+  //   //     "percent": ((EthereumComposition / liquidityValue) * 100).toFixed()
+  //   // },
+  //   // {
+  //   //     "label": "OTHERS",
+  //   //     "angle": OtherComposition,
+  //   //     "color": "#B445FF",
+  //   //     "percent": ((OtherComposition / liquidityValue) * 100).toFixed()
+  //   // },
+  //   // {
+  //   //     "label": "BINANCE",
+  //   //     "angle": BinanceComposition,
+  //   //     "color": "#B445FF",
+  //   //     "percent": ((BinanceComposition / liquidityValue) * 100).toFixed()
+  //   // },
+  // ]
   let treasuryValueData
   chainId == ChainId.FANTOM ?
     treasuryValueData = [
       {
-        "label": "BONDED (USD)",
+        "label": "BONDED",
         "angle": bondedValue,
         "color": "#B485FF",
         "percent": ((bondedValue / treasuryValue) * 100).toFixed()
       },
       {
-        "label": "LIQUIDITY (USD)",
+        "label": "LIQUIDITY",
         "angle": treasuryLiquidityValue,
         "color": "#B465FF",
         "percent": ((treasuryLiquidityValue / treasuryValue) * 100).toFixed()
       },
       {
-        "label": "SOUL (USD)",
+        "label": "SOUL",
         "angle": treasurySoulValue,
         "color": "#B445FF",
         "percent": ((treasurySoulValue / treasuryValue) * 100).toFixed()
       },
-      {
-        "label": `${NATIVE[chainId].symbol.toUpperCase()} (USD)`,
-        "angle": treasuryNativeValue,
-        "color": "#B425FF",
-        "percent": ((treasuryNativeValue / treasuryValue) * 100).toFixed()
-      },
+      // {
+      //   "label": `${NATIVE[chainId].symbol.toUpperCase()} (USD)`,
+      //   "angle": treasuryNativeValue,
+      //   "color": "#B425FF",
+      //   "percent": ((treasuryNativeValue / treasuryValue) * 100).toFixed()
+      // },
     ]
     : treasuryValueData = [
       {
-        "label": "LIQUIDITY (USD)",
+        "label": "LIQUIDITY",
         "angle": treasuryLiquidityValue,
         "color": "#B465FF",
         "percent": ((treasuryLiquidityValue / treasuryValue) * 100).toFixed()
       },
       {
-        "label": "SOUL (USD)",
+        "label": "SOUL",
         "angle": treasurySoulValue,
         "color": "#B445FF",
         "percent": ((treasurySoulValue / treasuryValue) * 100).toFixed()
       },
-      {
-        "label": `${NATIVE[chainId].symbol.toUpperCase()} (USD)`,
-        "angle": treasuryNativeValue,
-        "color": "#B425FF",
-        "percent": ((treasuryNativeValue / treasuryValue) * 100).toFixed()
-      },
+      // {
+      //   "label": `${NATIVE[chainId].symbol.toUpperCase()} (USD)`,
+      //   "angle": treasuryNativeValue,
+      //   "color": "#B425FF",
+      //   "percent": ((treasuryNativeValue / treasuryValue) * 100).toFixed()
+      // },
     ]
 
   const soulSupplyData = [
@@ -221,7 +222,9 @@ export default function Dashboard() {
           <title>Dashboard | Soul</title>
           <meta key="description" name="description" />
         </Head>
-          <div className={`grid p-1 mt-8 rounded rounded-2xl border border-4 border-[${getChainColor(chainId)}] bg-dark-1000`} >
+        {/* // border-[${getChainColor(chainId)}] bg-dark-1000`}  */}
+          <div className={`grid p-1 mt-8 rounded rounded-2xl`} 
+          >
           <div
               className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >
@@ -275,7 +278,9 @@ export default function Dashboard() {
         </Button>
         }
       </div>
-            <div className="bg-dark-1000 p-4">
+            <div 
+              className="bg-dark-900 p-4 rounded-2xl border border-4 border-dark-700"
+            >
               <Typography
                 className="text-2xl flex gap-1 justify-center items-center"
                 weight={600}
@@ -286,7 +291,7 @@ export default function Dashboard() {
                 {i18n._(t`SOUL ECONOMY`).toUpperCase()}
               </Typography>
               <div className="h-px my-4 bg-[#A654DD]" />
-              <div>
+              {/* <div>
                 <Typography
                   className={'flex text-xl justify-center items-baseline'}
                   fontFamily={'medium'} textColor={'text-white'}>
@@ -298,7 +303,7 @@ export default function Dashboard() {
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
                   {formatNumber(soulPrice * totalSupply, true, false, 0)}
                 </Typography>
-              </div>
+              </div> */}
               <div className="lg:hidden h-px my-4 mb-3 bg-dark-1000" />
               <div>
                 <div className="lg:hidden grid grid-cols-2 space-between-3">
@@ -357,7 +362,7 @@ export default function Dashboard() {
                   </Typography>
                 </div>
                 <div className="h-px my-4 bg-dark-1000" />
-                <div>
+                {/* <div>
                   <Typography
                     className="flex text-2xl justify-center gap-1 items-center"
                     fontFamily={'medium'}
@@ -366,7 +371,7 @@ export default function Dashboard() {
                     {i18n._(t`Supply Distribution`)}
                   </Typography>
                   <div className="h-px my-4 bg-dark-1000" />
-                </div>
+                </div> */}
 
                 {/* SOUL DISTRIBUTION CHART */}
 
@@ -384,7 +389,7 @@ export default function Dashboard() {
             </div>
 
           {/* <div className="p-1 shadow-4 bg-[#A654DD] rounded-none sm:rounded-8 inline-block w-screen md:w-540"> */}
-            <div className="bg-dark-1000 p-4">
+            <div className="bg-dark-900 p-4 mt-2 rounded-2xl border border-4 border-dark-700">
               <Typography
                 className="text-2xl flex gap-1 justify-center items-center"
                 weight={600}
@@ -396,31 +401,52 @@ export default function Dashboard() {
               </Typography>
               <div className="h-px my-4 bg-[#A654DD]" />
               <div>
-                <Typography
-                  className="flex text-2xl justify-center gap-1 items-center"
-                  fontFamily={'medium'}
-                  textColor={'text-white'}
-                >
-                  Protocol Balance
-                </Typography>
-                <div className="h-px my-2 bg-dark-1000" />
-                <Typography
-                  className="flex justify-center gap-1 items-center"
-                  variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                  {formatNumber(treasuryValue, true)}
-                </Typography>
+                <div className="lg:hidden grid grid-cols-2 space-between-3">
+                  <Typography
+                    className="flex gap-1 text-lg justify-center items-center mb-3"
+                    lineHeight={48} fontFamily={'medium'}>
+                    Owned Assets
+                  </Typography>
+                  <Typography
+                    className="flex gap-1 text-lg justify-center items-center mb-3"
+                    lineHeight={48} fontFamily={'medium'}>
+                    Owned Liquidity
+                  </Typography>
+                </div>
+                <div className="lg:hidden grid grid-cols-2 space-between-3">
+                  <Typography
+                    className={'flex justify-center items-baseline'}
+                    variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                    {formatNumber(daoLiquidityValue, true, false, 0)}
+                  </Typography>
+                  <Typography
+                    className={'flex justify-center items-baseline'}
+                    variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                    {formatNumber(treasurySoulValue + bondedValue, true, true, 0)}
+                  </Typography>
+                </div>
               </div>
               <div>
-                {/* <AutoSizer disableHeight>
-              {({ width }) => (
-                <DashboardLineGraph width={width} height={110} data={treasuryValueData} theme={'dark'} />
-              )}
-            </AutoSizer> */}
+              </div>
+              <div className="h-px my-4 bg-dark-1000" />
+              <div>
+                <div className="hidden lg:grid lg:grid-cols-2 space-between-3">
+                  <Typography
+                    className="flex gap-1 text-xl justify-center items-center mb-3"
+                    lineHeight={48} fontFamily={'medium'}>
+                    Owned Assets
+                  </Typography>
+                  <Typography
+                    className="flex gap-1 text-lg justify-center items-center mb-3"
+                    lineHeight={48} fontFamily={'medium'}>
+                    Owned Liquidity
+                  </Typography>
+                </div>
               </div>
 
               <div className="h-px my-4 bg-dark-1000" />
 
-              <div>
+              {/* <div>
                 <Typography
                   className="flex text-2xl justify-center gap-1 items-center"
                   fontFamily={'medium'}
@@ -429,7 +455,7 @@ export default function Dashboard() {
                   {i18n._(t`Treasury Distribution`)}
                 </Typography>
                 <div className="h-px my-4 bg-dark-1000" />
-              </div>
+              </div> */}
               <div className="flex justify-center flex-col gap-3 sm:flex-row">
                 <DashboardDonutChart width={200} data={treasuryValueData} />
                 <div className="flex justify-center flex-col gap-3 sm:flex-row">
