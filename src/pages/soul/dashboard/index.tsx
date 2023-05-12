@@ -417,12 +417,12 @@ export default function Dashboard() {
                   <Typography
                     className={'flex justify-center items-baseline'}
                     variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                    {formatNumber(daoLiquidityValue, true, false, 0)}
+                    {formatNumber(treasurySoulValue, true, false, 0)}
                   </Typography>
                   <Typography
                     className={'flex justify-center items-baseline'}
                     variant={'h1'} lineHeight={48} fontFamily={'medium'}>
-                    {formatNumber(treasurySoulValue + bondedValue, true, true, 0)}
+                    {formatNumber(daoLiquidityValue + bondedValue, true, true, 0)}
                   </Typography>
                 </div>
               </div>
