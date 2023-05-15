@@ -47,8 +47,8 @@ export default function Dashboard() {
 
   // GET RESERVES BALANCES //
   const treasurySoulValue = daoSoulValue
-  // const treasuryNativeValue = Number(soulInfo.NativeValue)
-  // const treasuryReserveValue = treasurySoulValue + treasuryNativeValue
+  const treasuryNativeValue = Number(soulInfo.NativeValue)
+  const treasuryReserveValue = treasurySoulValue + treasuryNativeValue
 
   // GET LIQUIDITY BALANCES //
   const { bondInfo } = useBondInfo()
@@ -152,7 +152,7 @@ export default function Dashboard() {
         "percent": ((treasuryLiquidityValue / treasuryValue) * 100).toFixed()
       },
       {
-        "label": "SOUL",
+        "label": "ASSETS",
         "angle": treasurySoulValue,
         "color": "#B445FF",
         "percent": ((treasurySoulValue / treasuryValue) * 100).toFixed()
@@ -173,9 +173,9 @@ export default function Dashboard() {
       },
       {
         "label": "SOUL",
-        "angle": treasurySoulValue,
+        "angle": treasuryReserveValue,
         "color": "#B445FF",
-        "percent": ((treasurySoulValue / treasuryValue) * 100).toFixed()
+        "percent": ((treasuryReserveValue / treasuryValue) * 100).toFixed()
       },
       // {
       //   "label": `${NATIVE[chainId].symbol.toUpperCase()} (USD)`,
