@@ -172,7 +172,7 @@ export default function Dashboard() {
         "percent": ((treasuryLiquidityValue / treasuryValue) * 100).toFixed()
       },
       {
-        "label": "SOUL",
+        "label": "ASSETS",
         "angle": treasuryReserveValue,
         "color": "#B445FF",
         "percent": ((treasuryReserveValue / treasuryValue) * 100).toFixed()
