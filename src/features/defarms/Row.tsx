@@ -107,7 +107,8 @@ export const ActiveRow = ({ pid }) => {
     // const startTime = Number(defarmPoolInfo.startTime)
     const symbol = defarmPoolInfo.symbol
     const endTime = Number(defarmPoolInfo.endTime)
-    const hasEnded = endTime < Date.now() / 1_000 // ms -> secs
+    // TODO: MANUAL OVERRIDE //
+    const hasEnded = false // endTime < Date.now() / 1_000 // ms -> secs
     const APR = hasEnded ? 0 : defarmPoolInfo.apr
 
     const feeValue = feeAmount * lpPrice
@@ -161,6 +162,7 @@ export const ActiveRow = ({ pid }) => {
     // runs only on initial render/mount
     useEffect(() => {
         fetchApproval(mAddress)
+        console.log(mAddress)
     }, [account])
 
     /**
