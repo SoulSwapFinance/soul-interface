@@ -425,6 +425,7 @@ export default function Dashboard() {
                     {formatNumber(daoLiquidityValue + bondedValue, true, true, 0)}
                   </Typography>
                 </div>
+                <div className="h-px my-4 bg-dark-1000" />
               </div>
               <div>
               </div>
@@ -443,6 +444,18 @@ export default function Dashboard() {
                   </Typography>
                 </div>
               </div>
+              <div className="hidden lg:grid lg:grid-cols-2 space-between-3">
+                  <Typography
+                    className={'flex justify-center items-baseline'}
+                    variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                    {formatNumber(treasurySoulValue, true, false, 0)}
+                  </Typography>
+                  <Typography
+                    className={'flex justify-center items-baseline'}
+                    variant={'h1'} lineHeight={48} fontFamily={'medium'}>
+                    {formatNumber(daoLiquidityValue + bondedValue, true, true, 0)}
+                  </Typography>
+                </div>
 
               <div className="h-px my-4 bg-dark-1000" />
 
