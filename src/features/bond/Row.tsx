@@ -360,7 +360,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                   {isUnderworldPair ? token0Symbol : bond.lpSymbol} 
                 </Text> */}
                   {/* DEPOSIT: ASSET PANEL */}
-                  {isStakeable && Number(walletBalance) != 0 &&
+                  {isStakeable && depositable && Number(walletBalance) != 0 &&
                     <BondInputPanel
                       pid={bond.pid}
                       onUserInput={(value) => setDepositValue(value)}
@@ -404,7 +404,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                             DEPOSIT {isUnderworldPair ? token0Symbol : `${bond.lpSymbol} LP`}
                           </SubmitButton>
                         ) :
-                        (!approved && isStakeable &&
+                        (!approved && isStakeable && depositable &&
                           <SubmitButton
                             primaryColor={getChainColor(chainId)}
                             height="2.5rem" onClick={() => handleApprove()}>
@@ -413,7 +413,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                         )
                     )}
                   </Wrap>
-                  {isUnderworldPair &&
+                  {/* isUnderworldPair &&
                     <SubmitButton
                       primaryColor={getChainColor(chainId)}
                     >
@@ -427,7 +427,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                         {`LEND ${bond.token0Symbol}`}
                       </TokenPairLink>
                     </SubmitButton>
-                  }
+                  */}
                 </FunctionBox>
 
                 <Wrap padding="0.5rem" margin="0.25rem" display="flex" justifyContent="space-between">
