@@ -3,7 +3,7 @@ import { Currency, Percent, Token } from 'sdk'
 import { classNames, formatNumber } from 'functions'
 import { Button } from 'components/Button'
 import Input from 'components/Input'
-import { useDeFarmPoolInfo, useSummonerPoolInfo } from 'hooks/useAPI'
+import { useManifestationInfo, useSummonerPoolInfo } from 'hooks/useAPI'
 
 interface FarmInputPanelProps {
   pid: string
@@ -36,9 +36,9 @@ export default function FarmInputPanel({
   defarm,
 }: FarmInputPanelProps) {
   const { summonerPoolInfo } = useSummonerPoolInfo(pid)
-  const { defarmPoolInfo } = useDeFarmPoolInfo(pid)
+  const { manifestationInfo } = useManifestationInfo(pid)
   const farmAssetPrice = summonerPoolInfo.lpPrice
-  const defarmAssetPrice = defarmPoolInfo.lpPrice
+  const defarmAssetPrice = manifestationInfo.lpPrice
 
   return (
     <div id={id} className={classNames('p-1 rounded bg-dark-1000')}>

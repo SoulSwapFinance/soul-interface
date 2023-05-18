@@ -1,6 +1,5 @@
-import { useManifesterContract, useTokenContract } from '../../hooks'
+import { useManifesterContract } from '../../hooks'
 import { useCallback } from 'react'
-// import { MANIFESTER_ADDRESS } from 'sdk'
 // import { useActiveWeb3React } from 'services/web3'
 
 export default function useDefarm() {

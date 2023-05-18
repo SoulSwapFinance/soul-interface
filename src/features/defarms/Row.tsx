@@ -10,7 +10,7 @@ import {
     FarmContentWrapper, FarmItemBox, Text, SubmitButton, Wrap
 } from './Styles'
 import { classNames, formatNumber, formatUnixTimestampToDay, tryParseAmount } from 'functions'
-import { useDeFarmUserInfo, useTokenInfo, useUserTokenInfo, useDeFarmPoolInfo } from 'hooks/useAPI'
+import { useManifestationUserInfo, useTokenInfo, useUserTokenInfo, useManifestationInfo } from 'hooks/useAPI'
 import Modal from 'components/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
 import { Button } from 'components/Button'
@@ -62,8 +62,6 @@ export const ActiveRow = ({ pid }) => {
     const [zapToken, setZapToken] = useState<Token>()
 
     // const nowTime = new Date().getTime()
-    // const { defarmInfo } = useDeFarmInfo()
-
     const [showOptions, setShowOptions] = useState(false)
     const [openDeposit, setOpenDeposit] = useState(false)
     const [showConfirmation, setShowConfirmation] = useState(false)
@@ -71,46 +69,46 @@ export const ActiveRow = ({ pid }) => {
     const [openZap, setOpenZap] = useState(false)
 
     // DEFARM USER INFO //
-    const { defarmUserInfo } = useDeFarmUserInfo(pid)
-    const stakedBalance = Number(defarmUserInfo.stakedBalance)
-    const stakedValue = Number(defarmUserInfo.stakedValue)
-    // const lpPrice = Number(defarmUserInfo.lpPrice)
-    const withdrawFee = Number(defarmUserInfo.currentRate)
-    const walletBalance = Number(defarmUserInfo.walletBalance)
-    // const lastWithdrawTime = Number(defarmUserInfo.lastWithdrawTime)
-    // const secondsRemaining = Number(defarmUserInfo.secondsRemaining)
-    // const currentRate = Number(defarmUserInfo.currentRate)
+    const { manifestationUserInfo } = useManifestationUserInfo(pid)
+    const stakedBalance = Number(manifestationUserInfo.stakedBalance)
+    const stakedValue = Number(manifestationUserInfo.stakedValue)
+    // const lpPrice = Number(manifestationUserInfo.lpPrice)
+    const withdrawFee = Number(manifestationUserInfo.currentRate)
+    const walletBalance = Number(manifestationUserInfo.walletBalance)
+    // const lastWithdrawTime = Number(manifestationUserInfo.lastWithdrawTime)
+    // const secondsRemaining = Number(manifestationUserInfo.secondsRemaining)
+    // const currentRate = Number(manifestationUserInfo.currentRate)
 
     const feeAmount = withdrawFee * stakedBalance / 100
     const withdrawable = stakedBalance - feeAmount
     // const feeValue = feeAmount * lpPrice
 
     // DEFARM POOL INFO //
-    const { defarmPoolInfo } = useDeFarmPoolInfo(pid)
-    const mAddress = defarmPoolInfo.mAddress
-    const rewardSymbol = defarmPoolInfo.rewardSymbol
-    const liquidity = defarmPoolInfo.tvl
-    const lpPrice = Number(defarmPoolInfo.lpPrice)
+    const { manifestationInfo } = useManifestationInfo(pid)
+    const mAddress = manifestationInfo.mAddress
+    const rewardSymbol = manifestationInfo.rewardSymbol
+    const liquidity = manifestationInfo.tvl
+    const lpPrice = Number(manifestationInfo.lpPrice)
     // const userShare = 
-    // const liquidity = Number(defarmPoolInfo.tvl)
-    // const depositedAssets = Number(defarmPoolInfo.lpBalance)
+    // const liquidity = Number(manifestationInfo.tvl)
+    // const depositedAssets = Number(manifestationInfo.lpBalance)
     // const liquidity = depositedAssets * lpPrice
-    // const annualRewards = Number(defarmPoolInfo.annualRewards)
+    // const annualRewards = Number(manifestationInfo.annualRewards)
     // const annualRewardsValue = annualRewards * lpPrice
     // const APR = annualRewardsValue / liquidity
-    // const APR = defarmPoolInfo.apr
-    // const logoURI = defarmPoolInfo.logoURI
-    const pairStatus = defarmPoolInfo.status
-    const rewardAddress = defarmPoolInfo.rewardToken
-    const depositAddress = defarmPoolInfo.lpAddress
+    // const APR = manifestationInfo.apr
+    // const logoURI = manifestationInfo.logoURI
+    const pairStatus = manifestationInfo.status
+    const rewardAddress = manifestationInfo.rewardToken
+    const depositAddress = manifestationInfo.lpAddress
     // const stakedValue = stakedBalance * lpPrice
-    // const startTime = Number(defarmPoolInfo.startTime)
-    const symbol = defarmPoolInfo.symbol
-    const endTime = Number(defarmPoolInfo.endTime)
+    // const startTime = Number(manifestationInfo.startTime)
+    const symbol = manifestationInfo.symbol
+    const endTime = Number(manifestationInfo.endTime)
     // TODO: MANUAL OVERRIDE //
     const hasEnded = false // endTime < Date.now() / 1_000 // ms -> secs
     // TODO: MANUAL OVERRIDE //
-    const APR = 0 // hasEnded ? 0 : Number(defarmPoolInfo.apr)
+    const APR = 0 // hasEnded ? 0 : Number(manifestationInfo.apr)
 
     const feeValue = feeAmount * lpPrice
     const hasBalance = Number(walletBalance) > 0
@@ -119,8 +117,8 @@ export const ActiveRow = ({ pid }) => {
     // const assetToken = new Token(chainId, depositAddress, 18)
     const rewardToken = new Token(chainId, rewardAddress, 18)
 
-    const earnedAmount = isActive ? Number(defarmUserInfo.pendingRewards) : 0
-    const earnedValue = isActive ? Number(defarmUserInfo.pendingValue) : 0
+    const earnedAmount = isActive ? Number(manifestationUserInfo.pendingRewards) : 0
+    const earnedValue = isActive ? Number(manifestationUserInfo.pendingValue) : 0
 
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(depositAddress)
     // const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
