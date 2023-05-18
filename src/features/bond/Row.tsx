@@ -122,7 +122,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
 
   const depositable
         = chainId == ChainId.FANTOM && pid == '2' ? false
-          : isUnderworldPair ? false
+          : Number(pid) >= 10 ? false
           : true
 
   // CALCULATIONS
