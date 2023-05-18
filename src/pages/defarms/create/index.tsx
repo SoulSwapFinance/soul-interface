@@ -23,8 +23,8 @@ import Typography from 'components/Typography'
 import Modal from 'components/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
 import { i18n } from '@lingui/core'
-import { useDeFarmInfo, useUserTokenInfo } from 'hooks/useAPI'
-import { MANIFESTER_ADDRESS_V2, NATIVE, SOUL_ADDRESS, Token } from 'sdk'
+import { useManifesterInfo, useUserTokenInfo } from 'hooks/useAPI'
+import { MANIFESTER_ADDRESS, NATIVE, SOUL_ADDRESS, Token } from 'sdk'
 import { formatNumber } from 'functions'
 import Input from 'components/Input'
 import useApprove from 'hooks/useApprove'
@@ -64,11 +64,11 @@ const CreateFarm = () => {
   const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(rewardAsset?.wrapped.address)
 
   // DEFARM POOL INFO //
-  const { defarmInfo } = useDeFarmInfo()
-  const bloodSacrifice = Number(defarmInfo?.bloodSacrifice) / 1E18 / 100 // converts to %
+  const { manifesterInfo } = useManifesterInfo()
+  const bloodSacrifice = Number(manifesterInfo?.bloodSacrifice) / 1E18 / 100 // converts to %
   const { userTokenInfo } = useUserTokenInfo(account, SOUL_ADDRESS[chainId])
   const balance = Number(userTokenInfo?.balance) / 1E18
-  // const campaignLength = Number(defarmInfo?.poolLength)
+  // const campaignLength = Number(manifesterInfo?.poolLength)
   const campaignReady = Boolean(rewardSet && durationSet && feeSet && logoSet)
   // const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
 
@@ -186,7 +186,7 @@ const CreateFarm = () => {
       // alert('Connect Wallet')
     } else {
       // Checks if ManifestationContract can move tokens
-      const amount = await erc20Allowance(account, MANIFESTER_ADDRESS_V2[chainId])
+      const amount = await erc20Allowance(account, MANIFESTER_ADDRESS[chainId])
       if (Number(amount) > 0) setApproved(true)
       return amount
     }
@@ -195,7 +195,7 @@ const CreateFarm = () => {
   const handleApprove = async () => {
     try {
       let tx
-      tx = await erc20Approve(MANIFESTER_ADDRESS_V2[chainId])
+      tx = await erc20Approve(MANIFESTER_ADDRESS[chainId])
       await tx?.wait().then(await fetchApproval())
     } catch (e) {
       console.log(e)

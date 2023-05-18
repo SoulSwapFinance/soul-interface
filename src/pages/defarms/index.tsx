@@ -24,20 +24,23 @@ const Defarms = () => {
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
       <DoubleGlowShadowV2 opacity="0.6">
-        <Container id="farm-page">
+        <Container id="defarm-page">
           <Head>
             <title>DeFarms | Soul</title>
             <meta key="description" name="description" content="Farm" />
             <Image src="https://giphy.com/embed/kPCDnjRGh7POYS4Z5P" width={480} height={480} alt={'egg gif with tokens'} />
           </Head>      
           <div className={`grid p-1 mt-8 rounded rounded-2xl bg-dark-1000`} >
-                      <div
+          <div
             className={
               classNames(chainId == ChainId.FANTOM 
-                  ? 'mb-4 rounded rounded-xl bg-purple' 
+                  ? 'grid grid-cols-1 mb-4 gap-2 rounded rounded-xl' 
                   : 'hidden')
               }
           >
+            {/* <div className={'grid grid-cols-2'}> */}
+
+            <div className={'grid grid-cols-1 gap-2 border bg-purple rounded rounded-lg'}>
             <ExternalLink
               href="https://soulswapfinance.medium.com/introducing-defarms-d6f6c9ac3fa6"
               target="_blank"
@@ -54,6 +57,8 @@ const Defarms = () => {
                 </a>
               </SubmitButton>
             </ExternalLink>
+            </div>
+            {/* </div> */}
           </div>
           <div
               className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}

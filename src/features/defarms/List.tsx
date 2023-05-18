@@ -13,6 +13,8 @@ import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 import { useRouter } from 'next/router'
 import { classNames } from 'functions'
+import ExternalLink from 'components/ExternalLink'
+import { SubmitButton } from './Styles'
 
 export const FarmList = () => {
   const { chainId } = useActiveWeb3React()
@@ -93,15 +95,33 @@ export const FarmList = () => {
       <Typography className="text-2xl bg-dark-1000 mt-6 rounded rounded-2xl border border-2 border-dark-600 p-3 font-bold text-center mb-1">Active DeFarms</Typography>
       <Active />
       <>{chainId == ChainId.FANTOM ? ftmList : avaxList}</>
-      <div>
-        <Typography
+      <div className={'grid grid-cols-1 mx-1 mt-6 mb-4 gap-2 border bg-avaxRed rounded rounded-lg'}>
+            <ExternalLink
+              href="https://defarms.soulswap.finance/defarms"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <SubmitButton
+                primaryColor={"#7G1BD9"}
+                size="xl"
+              >
+                <a 
+                  className="block text-md font-bold md:text-xl text-white font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300"
+                >
+                  <span> View Retired DeFarms ↗</span>
+                </a>
+              </SubmitButton>
+            </ExternalLink>
+            </div>
+      {/* <div> */}
+        {/* <Typography
           className={classNames(chainId == ChainId.AVALANCHE ? 'hidden' : `text-2xl bg-dark-1000 mt-6 rounded rounded-2xl border border-2 border-avaxRed p-3 font-bold text-center mb-1`)}
         >
           Retired DeFarms
-        </Typography>
-        {chainId == ChainId.FANTOM ? <Inactive /> : null}
-        {chainId == ChainId.FANTOM ? inactiveFtmList : inactiveAvaxList}
-      </div>
+        </Typography> */}
+        {/* {chainId == ChainId.FANTOM ? <Inactive /> : null} */}
+        {/* {chainId == ChainId.FANTOM ? inactiveFtmList : inactiveAvaxList} */}
+      {/* </div> */}
     </div>
   )
 }

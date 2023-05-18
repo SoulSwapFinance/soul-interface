@@ -19,9 +19,8 @@ import { useTransactionAdder } from 'state/transactions/hooks'
 import { Disclosure } from '@headlessui/react'
 // import moment from 'moment'
 import { Button } from 'components/Button'
-// import { useDeFarmPoolInfo } from 'hooks/useAPI'
+// import { useManifestationInfo } from 'hooks/useAPI'
 import useDefarm from 'features/defarms/useDefarm'
-// import { MANIFESTER_ADDRESS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 import Image from 'next/image'
 // import Logo from 'components/Logo'
@@ -54,7 +53,7 @@ export default function Manifestations(): JSX.Element {
   const manifesterContract = useDefarm()
 
 //   function getAddress(id) {
-//     const { defarmPoolInfo } = useDeFarmPoolInfo(id)
+//     const { defarmPoolInfo } = useManifestationInfo(id)
 //     const mAddress = defarmPoolInfo.mAddress
 //     return mAddress
 // }

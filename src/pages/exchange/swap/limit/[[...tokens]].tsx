@@ -86,7 +86,7 @@ import { useRouter } from "next/router"
 import { useCurrency } from "hooks/Tokens"
 import SwapDropdown from "features/swap/SwapDropdown"
 import { getChainColorCode } from "constants/chains"
-import { LuxorBanner, DeFarmBanner } from "components/Banner"
+import { LuxorBanner } from "components/Banner"
 import LIMIT_BANNER from 'assets/branding/limit-banner.png'
 import TokenStats from "components/TokenStats"
 

@@ -787,12 +787,12 @@ export function useSummonerUserInfo(pid): { status: string; summonerUserInfo: T 
   return { status, summonerUserInfo }
 }
 
-export function useDeFarmInfo(): { status: string; defarmInfo: T } {
+export function useManifesterInfo(): { status: string; manifesterInfo: T } {
   const { chainId } = useActiveWeb3React()
   const [status, setStatus] = useState<string>('idle')
   const URL = chainId == 250 ? BASE_URL : `https://avax-api.soulswap.finance`
 
-  const [defarmInfo, setInfo] = useState<T>({
+  const [manifesterInfo, setInfo] = useState<T>({
     address: "0xed65Fec909D5cFDB2A23a26554A7133F8d0d885a",
     poolLength: "1",
     bloodSacrifice: "5000000000000000000"
@@ -800,7 +800,7 @@ export function useDeFarmInfo(): { status: string; defarmInfo: T } {
   useEffect(() => {
     const fetchData = async () => {
       setStatus('fetching')
-      const response = await fetch(`${URL}/defarm`, {
+      const response = await fetch(`${URL}/manifester`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -815,16 +815,15 @@ export function useDeFarmInfo(): { status: string; defarmInfo: T } {
     fetchData()
   }, [])
 
-  return { status, defarmInfo }
+  return { status, manifesterInfo }
 }
 
-
-export function useDeFarmPoolInfo(pid): { status: string; defarmPoolInfo: T } {
+export function useManifestationInfo(pid): { status: string; manifestationInfo: T } {
   const { chainId } = useActiveWeb3React()
   const [status, setStatus] = useState<string>('idle')
   const URL = chainId == 250 ? BASE_URL : `https://avax-api.soulswap.finance`
 
-  const [defarmPoolInfo, setInfo] = useState<T>({
+  const [manifestationInfo, setInfo] = useState<T>({
     pid: '0',
     name: 'Manifest: RewardToken',
     symbol: 'TOKEN-FTM MP',
@@ -859,7 +858,7 @@ export function useDeFarmPoolInfo(pid): { status: string; defarmPoolInfo: T } {
   useEffect(() => {
     const fetchData = async () => {
       setStatus('fetching')
-      const response = await fetch(`${URL}/defarm/${pid}`, {
+      const response = await fetch(`${URL}/manifester/${pid}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -874,15 +873,15 @@ export function useDeFarmPoolInfo(pid): { status: string; defarmPoolInfo: T } {
     fetchData()
   }, [])
 
-  return { status, defarmPoolInfo }
+  return { status, manifestationInfo }
 }
 
-export function useDeFarmUserInfo(pid): { status: string; defarmUserInfo: T } {
+export function useManifestationUserInfo(pid): { status: string; manifestationUserInfo: T } {
   const { account, chainId } = useActiveWeb3React()
   const [status, setStatus] = useState<string>('idle')
   const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
 
-  const [defarmUserInfo, setInfo] = useState<T>({
+  const [manifestationUserInfo, setInfo] = useState<T>({
     userAddress: '0xFd63Bf84471Bc55DD9A83fdFA293CCBD27e1F4C8',
     name: 'Manifest: RewardToken',
     pairAddress:'0xA905afF2dFAd9d3925D30c782ccbaE6423345917',
@@ -905,7 +904,7 @@ export function useDeFarmUserInfo(pid): { status: string; defarmUserInfo: T } {
   useEffect(() => {
     const fetchData = async () => {
       setStatus('fetching')
-      const response = await fetch(`${URL}/defarm/users/${account}/${pid}`, {
+      const response = await fetch(`${URL}/manifester/users/${account}/${pid}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -920,7 +919,7 @@ export function useDeFarmUserInfo(pid): { status: string; defarmUserInfo: T } {
     fetchData()
   }, [])
 
-  return { status, defarmUserInfo }
+  return { status, manifestationUserInfo }
 }
 
 // LENDING API //
