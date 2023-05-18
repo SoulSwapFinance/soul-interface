@@ -121,8 +121,9 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
     || chainId == ChainId.AVALANCHE
 
   const depositable
-    = chainId == ChainId.FANTOM && pid == '2' ? false
-      : true
+        = chainId == ChainId.FANTOM && pid == '2' ? false
+          : isUnderworldPair ? false
+          : true
 
   // CALCULATIONS
   // const stakedValue = stakedBal * lpPrice
