@@ -186,11 +186,30 @@ export const DeFarmBanner: FC<IFeature> = ({ chainId }) => (
     <div className="w-full">
       <div className="text-center">
         <p className="font-medium text-center text-white">
-        <NavLink href="/defarms">
+        <ExternalLink href="https://defarms.soulswap.finance/defarms">
             <Button variant="filled" color="purple" size="sm">
               <span className="justify-center font-bold text-grey">
-                {`New DeFarm Campaign ↗`}
-                {/* Please vote in our LIVE proposals regarding withdrawal fees and governance. <span aria-hidden="true">&rarr;</span> */}
+                {`Retired DeFarm Campaigns ↗`}
+              </span>
+            </Button>
+        </ExternalLink>
+        </p>
+      </div>
+      <div className="absolute inset-y-0 right-0 flex items-start pt-1 pr-1 sm:pt-1 sm:pr-2 sm:items-start">
+      </div>
+    </div>
+  </div>
+)
+
+export const ManifestationBanner: FC<IFeature> = ({ chainId }) => (
+  <div className={chainId == 250 ? `relative items-center w-full mt-2` : `hidden`}>
+    <div className="w-full">
+      <div className="text-center">
+        <p className="font-medium text-center text-white">
+        <NavLink href="/manifestations">
+            <Button variant="filled" color="purple" size="sm">
+              <span className="justify-center font-bold text-grey">
+                {`New Manifestation ↗`}
               </span>
             </Button>
         </NavLink>

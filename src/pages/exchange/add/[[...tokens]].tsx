@@ -51,7 +51,7 @@ import { getChainColor, getChainColorCode } from 'constants/chains'
 // import { SwapLayoutCard } from 'layouts/SwapLayout'
 // import { SubmitButton } from 'features/summoner/Styles'
 // import SoulLogo from 'components/SoulLogo'
-import { DeFarmBanner, DonateBanner, LuxorBanner } from 'components/Banner'
+import { DonateBanner, LuxorBanner } from 'components/Banner'
 
 import Image from 'next/image'
 import ADD_BANNER from 'assets/branding/add-banner.png'
