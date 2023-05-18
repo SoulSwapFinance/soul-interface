@@ -59,6 +59,7 @@ const features: FeatureMap = {
   [ChainId.AVALANCHE]: [
     Feature.AMM,
     // Feature.DEFARM,
+    // Feature.MANIFESTATION,
     Feature.SWAP,
     Feature.BRIDGE,
     Feature.ANALYTICS,
@@ -72,11 +73,12 @@ const features: FeatureMap = {
     Feature.LIMIT,
     Feature.UNDERWORLD
   ],
-
+  
   [ChainId.FANTOM]: [
     Feature.AMM,
     // Feature.NFT,
     Feature.DEFARM,
+    Feature.MANIFESTATION,
     Feature.BRIDGE,
     Feature.SWAP,
     Feature.SEANCE,

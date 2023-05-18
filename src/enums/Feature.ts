@@ -3,6 +3,7 @@ export enum Feature {
   NFT = 'NFT',
   BRIDGE = 'Bridge',
   DEFARM = 'DeFarm',
+  MANIFESTATION = 'Manifestation',
   SWAP = 'Exchange',
   SEANCE = 'Seance',
   VAULT = 'AutoStake Vault',
