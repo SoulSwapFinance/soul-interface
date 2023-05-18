@@ -65,13 +65,14 @@ export const defaultProtocolFeeDenominator = FIVE
 export const LEND_MULTIPLIER = (chainId: ChainId, pairAddress: string) => {
   let defaultMultiplier = 1
   if (chainId == ChainId.FANTOM) {
-    pairAddress == DAI_NATIVE_MARKET[250]
-    ? defaultMultiplier = 6
+    /* pairAddress == DAI_NATIVE_MARKET[250]
+    ? defaultMultiplier = 7
       : pairAddress == DAI_BNB_MARKET[250] || pairAddress == NATIVE_DAI_MARKET[250]
-          ? defaultMultiplier = 5
+          ? defaultMultiplier = 6
             : pairAddress == DAI_ETH_MARKET[250]
-              ? defaultMultiplier = 2
-                : defaultMultiplier = 1
+              ? defaultMultiplier = 3
+                : */
+                defaultMultiplier = 1
     return defaultMultiplier
   } else return 1
 }
