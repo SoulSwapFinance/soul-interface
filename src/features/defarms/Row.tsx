@@ -107,10 +107,8 @@ export const ActiveRow = ({ pid }) => {
     // const startTime = Number(defarmPoolInfo.startTime)
     const symbol = defarmPoolInfo.symbol
     const endTime = Number(defarmPoolInfo.endTime)
-    // TODO: MANUAL OVERRIDE //
-    const hasEnded = false // endTime < Date.now() / 1_000 // ms -> secs
-    // TODO: MANUAL OVERRIDE //
-    const APR = 0 // hasEnded ? 0 : Number(defarmPoolInfo.apr)
+    const hasEnded = endTime < Date.now() / 1_000 // ms -> secs
+    const APR = hasEnded ? 0 : Number(defarmPoolInfo.apr)
 
     const feeValue = feeAmount * lpPrice
     const hasBalance = Number(walletBalance) > 0
