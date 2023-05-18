@@ -105,10 +105,8 @@ export const ActiveRow = ({ pid }) => {
     // const startTime = Number(manifestationInfo.startTime)
     const symbol = manifestationInfo.symbol
     const endTime = Number(manifestationInfo.endTime)
-    // TODO: MANUAL OVERRIDE //
-    const hasEnded = false // endTime < Date.now() / 1_000 // ms -> secs
-    // TODO: MANUAL OVERRIDE //
-    const APR = 0 // hasEnded ? 0 : Number(manifestationInfo.apr)
+    const hasEnded = endTime < Date.now() / 1_000 // ms -> secs
+    const APR = hasEnded ? 0 : Number(manifestationInfo.apr)
 
     const feeValue = feeAmount * lpPrice
     const hasBalance = Number(walletBalance) > 0
