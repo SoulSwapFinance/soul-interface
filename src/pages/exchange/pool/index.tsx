@@ -1,7 +1,7 @@
 import { ChainId, CurrencyAmount, JSBI, NATIVE, Pair, Currency, SOUL_ADDRESS } from '../../../sdk'
 import React, { useMemo } from 'react'
 import { classNames, currencyId } from '../../../functions'
-import { toV2LiquidityToken, useTrackedTokenPairs } from '../../../state/user/hooks'
+// import { toV2LiquidityToken, useTrackedTokenPairs } from '../../../state/user/hooks'
 
 import { Button } from '../../../components/Button'
 import Container from '../../../components/Container'
@@ -42,22 +42,22 @@ export default function Pool() {
   const { loading, pairs } = useV2PairsWithLiquidity(chainId)
 
   // fetch the user's balances of all tracked V2 LP tokens
-  const trackedTokenPairs = useTrackedTokenPairs()
+  // const trackedTokenPairs = useTrackedTokenPairs()
 
-  const tokenPairsWithLiquidityTokens = useMemo(() => {
-    if (!chainId) {
-      return []
-    }
-    return trackedTokenPairs.map((tokens) => ({
-      liquidityToken: toV2LiquidityToken(tokens),
-      tokens,
-    }))
-  }, [trackedTokenPairs, chainId])
+  // const tokenPairsWithLiquidityTokens = useMemo(() => {
+  //   if (!chainId) {
+  //     return []
+  //   }
+  //   return trackedTokenPairs.map((tokens) => ({
+  //     liquidityToken: toV2LiquidityToken(tokens),
+  //     tokens,
+  //   }))
+  // }, [trackedTokenPairs, chainId])
 
-  const liquidityTokens = useMemo(
-    () => tokenPairsWithLiquidityTokens.map((tpwlt) => tpwlt.liquidityToken),
-    [tokenPairsWithLiquidityTokens]
-  )
+  // const liquidityTokens = useMemo(
+  //   () => tokenPairsWithLiquidityTokens.map((tpwlt) => tpwlt.liquidityToken),
+  //   [tokenPairsWithLiquidityTokens]
+  // )
   // const [v2PairsBalances, fetchingV2PairBalances] = useTokenBalancesWithLoadingIndicator(
   // chainId,
   //   account ?? undefined,
