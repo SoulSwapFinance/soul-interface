@@ -9,17 +9,17 @@ import TridentLayout, { TridentBody, TridentHeader } from 'layouts/Trident'
 import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
 import React from 'react'
+import { useActiveWeb3React } from 'services/web3'
 
-const Portfolio = () => {
+const Accounts = () => {
   const { i18n } = useLingui()
+  const { account, chainId } = useActiveWeb3React()
 
-  const router = useRouter()
-
-  const account = router.query.account as string
-  const chainId = router.query.account ? Number(router.query.chainId) : undefined
+  // const router = useRouter()
+  // const account = router.query.account as string
+  // const chainId = router.query.account ? Number(router.query.chainId) : undefined
 
   const coffinBoxEnabled = featureEnabled(Feature.COFFINBOX, chainId)
-
   if (!account || !chainId) return null
 
   return (
@@ -45,6 +45,6 @@ const Portfolio = () => {
   )
 }
 
-Portfolio.Layout = TridentLayout
+Accounts.Layout = TridentLayout
 
-export default Portfolio
+export default Accounts
