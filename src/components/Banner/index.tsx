@@ -206,10 +206,10 @@ export const ManifestationBanner: FC<IFeature> = ({ chainId }) => (
     <div className="w-full">
       <div className="text-center">
         <p className="font-medium text-center text-white">
-        <NavLink href="/manifestations">
+        <NavLink href="/defarms">
             <Button variant="filled" color="purple" size="sm">
               <span className="justify-center font-bold text-grey">
-                {`New Manifestation ↗`}
+                {`New DeFarm Campaign ↗`}
               </span>
             </Button>
         </NavLink>

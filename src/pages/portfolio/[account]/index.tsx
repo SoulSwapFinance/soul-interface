@@ -2,6 +2,7 @@ import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import ActionsModal from 'features/portfolio/ActionsModal'
 import { CoffinBalances, WalletBalances } from 'features/portfolio/AssetBalances/coffinAndWallet'
+import { PoolBalances } from 'features/portfolio/AssetBalances/pools'
 import { UnderworldCollateral } from 'features/portfolio/AssetBalances/underworld/UnderworldCollateral'
 import { UnderworldLent } from 'features/portfolio/AssetBalances/underworld/UnderworldLent'
 import HeaderDropdown from 'features/portfolio/HeaderDropdown'
@@ -14,7 +15,6 @@ import { useActiveWeb3React } from 'services/web3'
 const Portfolio = () => {
   const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
-
   const account = useAccountInUrl('/portfolio')
   if (!account) return
 
@@ -31,11 +31,13 @@ const Portfolio = () => {
       <TridentHeader pattern="bg-chevron">
         <HeaderDropdown account={account} />
       </TridentHeader>
-      <TridentBody className="flex flex-col gap-10 lg:grid grid-cols-2 lg:gap-4">
-       <UnderworldLent />
+      {/* lg:grid grid-cols-2 lg:gap-4" */}
+      <TridentBody className="flex flex-col gap-10 grid-cols-2">
+        <UnderworldLent />
         <UnderworldCollateral />
         <WalletBalances chainId={chainId} account={account} />
         <CoffinBalances account={account} />
+        <PoolBalances account={account} />
       </TridentBody>
       <ActionsModal />
     </>
