@@ -12,8 +12,8 @@ import Web3ReactManager from 'components/Web3ReactManager'
 import getLibrary from 'functions/getLibrary'
 import { exception, GOOGLE_ANALYTICS_TRACKING_ID, pageview } from 'functions/gtag'
 import DefaultLayout from 'layouts/Default'
-import { FantomApiProvider } from "contexts/FantomApiProvider";
-
+import { FantomApiProvider } from "contexts/FantomApiProvider"
+import { Analytics } from '@vercel/analytics/react'
 import store, { persistor } from 'state'
 import ApplicationUpdater from 'state/application/updater'
 import ListsUpdater from 'state/lists/updater'
@@ -83,7 +83,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
   }, [events])
 
   const [queryClient] = React.useState(() => new QueryClient());
-  
+
   useEffect(() => {
     async function load(locale) {
       i18n.loadLocaleData(locale, { plurals: plurals[locale?.split('_')[0]] })
@@ -97,7 +97,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
 
         const messages = remoteLoader({ messages: remoteMessages, format: 'minimal' })
         i18n.load(locale, messages)
-      } catch(e) {
+      } catch (e) {
         console.log(e)
         // Load fallback messages
         // const { messages } = await import(`@lingui/loader!./../../locale/${locale}.json?raw-lingui`)
@@ -159,50 +159,49 @@ function MyApp({ Component, pageProps, fallback, err }) {
       {/*@ts-ignore TYPE NEEDS FIXING*/}
       <I18nProvider i18n={i18n} forceRenderOnLocaleChange={false}>
         <Web3ReactProvider getLibrary={getLibrary}>
-      <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <ApiDataProvider>
-          <ApolloProvider client={client}>
-          {/*@ts-ignore TYPE NEEDS FIXING*/}
-          <FantomApiProvider>
-          <Web3ProviderNetwork getLibrary={getLibrary}>
-            <Web3ReactManager>
-              <ReduxProvider store={store}>
-                <PersistGate loading={<Dots>loading</Dots>} persistor={persistor}>
-                  <>
-                    <ListsUpdater />
-                    <UserUpdater />
-                    <ApplicationUpdater />
-                    <MulticallUpdater />
-                  </>
+          <QueryClientProvider client={queryClient}>
+            <Hydrate state={pageProps.dehydratedState}>
+              <ApiDataProvider>
+                <ApolloProvider client={client}>
                   {/*@ts-ignore TYPE NEEDS FIXING*/}
-                  <RecoilRoot>
-                    <SyncWithRedux />
-                    <Provider>
-                    <ModalProvider>
-                      <Layout>
-                        <Guard>
-                          {/* TODO: Added alert Jan 25. Delete component after a few months. */}
-                          {/* <MultichainExploitAlertModal /> */}
-                          {/*@ts-ignore TYPE NEEDS FIXING*/}
-                          <Gelato>
-                            <Component {...pageProps} err={err} />
-                          </Gelato>
-                        </Guard>
-                        <Portals />
-                      </Layout>
-                      </ModalProvider>
-                    </Provider>
-                    <TransactionUpdater />
-                  </RecoilRoot>
-                </PersistGate>
-              </ReduxProvider>
-            </Web3ReactManager>
-          </Web3ProviderNetwork>
-          </FantomApiProvider>
-          </ApolloProvider>
-          </ApiDataProvider>
-          </Hydrate>
+                  <FantomApiProvider>
+                    <Web3ProviderNetwork getLibrary={getLibrary}>
+                      <Web3ReactManager>
+                        <ReduxProvider store={store}>
+                          <PersistGate loading={<Dots>loading</Dots>} persistor={persistor}>
+                            <>
+                              <ListsUpdater />
+                              <UserUpdater />
+                              <ApplicationUpdater />
+                              <MulticallUpdater />
+                            </>
+                            {/*@ts-ignore TYPE NEEDS FIXING*/}
+                            <RecoilRoot>
+                              <SyncWithRedux />
+                              <Provider>
+                                <ModalProvider>
+                                  <Layout>
+                                    <Guard>
+                                      {/*@ts-ignore TYPE NEEDS FIXING*/}
+                                      <Gelato>
+                                        <Component {...pageProps} err={err} />
+                                      </Gelato>
+                                    </Guard>
+                                    <Portals />
+                                    <Analytics />
+                                  </Layout>
+                                </ModalProvider>
+                              </Provider>
+                              <TransactionUpdater />
+                            </RecoilRoot>
+                          </PersistGate>
+                        </ReduxProvider>
+                      </Web3ReactManager>
+                    </Web3ProviderNetwork>
+                  </FantomApiProvider>
+                </ApolloProvider>
+              </ApiDataProvider>
+            </Hydrate>
           </QueryClientProvider>
         </Web3ReactProvider>
       </I18nProvider>
