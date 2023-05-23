@@ -13,7 +13,7 @@ import Link from 'next/link'
 
 export default function LanguageMenu() {
     const { chainId } = useActiveWeb3React()
-    const hybridStyle = `flex items-center justify-center rounded rounded-2xl m-0.5 p-1.5 bg-dark-1000 hover:bg-dark-800 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`
+    const hybridStyle = `flex items-center justify-center rounded rounded-2xl m-0.5 p-1.5 bg-dark-900 hover:bg-dark-800 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`
     const { locale, locales, asPath } = useRouter()
 
     return (
