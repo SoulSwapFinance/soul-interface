@@ -114,6 +114,44 @@ export function getWalletColor(votingPower) {
   return walletColor
 }
 
+export function getChakra(votingPower) {
+  let chakra = 'Root' // romanticGrey
+  votingPower >= 1_000_000
+    ? chakra = "Crown" /// lightViolet (V)
+  : votingPower >= 500_000
+    ? chakra = "Third Eye" // brightIndigo (I)
+  : votingPower >= 250_000
+    ? chakra = "Throat" // nokiaBlue (B)
+  : votingPower >= 100_000
+    ? chakra = "Heart" // lime green (G)
+  : votingPower >= 25_000
+    ? chakra = "Solar Plexus" // neonOrange (O)
+  : votingPower >= 1_000
+    ? chakra = "Sacral" // yelpRed (R)
+  : chakra = "Root" // romanticGrey
+
+  return chakra
+}
+
+export function getChakraColor(votingPower) {
+  let chakraColor = 'Grey' // romanticGrey
+  votingPower >= 1_000_000
+    ? chakraColor = "Violet" /// lightViolet (V)
+  : votingPower >= 500_000
+    ? chakraColor = "Indigo" // brightIndigo (I)
+  : votingPower >= 250_000
+    ? chakraColor = "Blue" // nokiaBlue (B)
+  : votingPower >= 100_000
+    ? chakraColor = "Green" // lime green (G)
+  : votingPower >= 25_000
+    ? chakraColor = "Yellow" // neonOrange (O)
+  : votingPower >= 1_000
+    ? chakraColor = "Orange" // yelpRed (R)
+  : chakraColor = "Grey" // romanticGrey
+
+  return chakraColor
+}
+
 function Web3StatusInner() {
   const { i18n } = useLingui()
   const { account, chainId, connector, library } = useWeb3React()
