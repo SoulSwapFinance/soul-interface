@@ -1,15 +1,15 @@
-import { CurrencyLogo } from 'components/CurrencyLogo'
+// import { CurrencyLogo } from 'components/CurrencyLogo'
 import AnalyticsContainer from 'features/analytics/AnalyticsContainer'
 // import Background from 'features/analytics/Background'
 import { Currency, Token as ERC20 } from 'sdk'
 import ChartCard from 'features/analytics/ChartCard'
-import ColoredNumber from 'features/analytics/ColoredNumber'
-import InfoCard from 'features/analytics/InfoCard'
-import PairList from 'features/analytics/Pairs/PairList'
-import { LegacyTransactions } from 'features/transactions/Transactions'
-import { getExplorerLink } from 'functions/explorer'
-import { formatNumber } from 'functions/format'
-import { useCurrency } from 'hooks/Tokens'
+// import ColoredNumber from 'features/analytics/ColoredNumber'
+// import InfoCard from 'features/analytics/InfoCard'
+// import PairList from 'features/analytics/Pairs/PairList'
+// import { LegacyTransactions } from 'features/transactions/Transactions'
+// import { getExplorerLink } from 'functions/explorer'
+// import { formatNumber } from 'functions/format'
+// import { useCurrency } from 'hooks/Tokens'
 import { useTokenContract } from 'hooks/useContract'
 import useCopyClipboard from 'hooks/useCopyClipboard'
 // import Image from 'next/image'
@@ -18,7 +18,7 @@ import {
   useOneDayBlock,
   useOneWeekBlock,
   useTokenDayData,
-  useTokenPairs,
+  // useTokenPairs,
   useTokens,
   useTwoDayBlock,
 } from 'services/graph'
@@ -26,15 +26,15 @@ import { useActiveWeb3React } from 'services/web3'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
-import { CheckCircle, ExternalLink as LinkIcon } from 'react-feather'
-import { getChainColorCode, getChainInfo, getChainLogoURL } from 'constants/chains'
+// import { CheckCircle, ExternalLink as LinkIcon } from 'react-feather'
+// import { getChainColorCode, getChainInfo, getChainLogoURL } from 'constants/chains'
 import { NextSeo } from 'next-seo'
-import { TridentHeader } from 'layouts/Trident'
-import Typography from 'components/Typography'
-import useAddTokenToMetaMask from 'hooks/useAddTokenToMetaMask'
+// import { TridentHeader } from 'layouts/Trident'
+// import Typography from 'components/Typography'
+// import useAddTokenToMetaMask from 'hooks/useAddTokenToMetaMask'
 import { Button } from 'components/Button'
-import { RowFixed } from 'components/Row'
-import { getAddress } from '@ethersproject/address'
+// import { RowFixed } from 'components/Row'
+// import { getAddress } from '@ethersproject/address'
 import NavLink from 'components/NavLink'
 
 const ONE_DAY = 86_400
@@ -55,14 +55,14 @@ const chartTimespans = [
 ]
 
 interface TokenProps {
-    // inputCurrency?: Currency | Token | undefined
-    outputCurrency?: Currency | ERC20 | undefined
-  }
+  // inputCurrency?: Currency | Token | undefined
+  outputCurrency?: Currency | ERC20 | undefined
+}
 
 export default function Token({ outputCurrency }: TokenProps) {
-    const router = useRouter()
+  const router = useRouter()
   const id = outputCurrency?.wrapped.address.toLowerCase()
-  const tokenAddress = id
+  // const tokenAddress = id
 
   const { chainId, library } = useActiveWeb3React()
   const [isCopied, setCopied] = useCopyClipboard()
@@ -83,7 +83,7 @@ export default function Token({ outputCurrency }: TokenProps) {
 
   const block1d = useOneDayBlock({ chainId })
   const block2d = useTwoDayBlock({ chainId })
-  const block1w = useOneWeekBlock({ chainId })
+  // const block1w = useOneWeekBlock({ chainId })
 
   // General data (volume, liquidity)
   const nativePrice = useNativePrice({ chainId })
@@ -102,13 +102,13 @@ export default function Token({ outputCurrency }: TokenProps) {
   })?.[0]
 
   // For the logo
-//   const currency = useCurrency(token?.id)
-//   const currency = outputCurrency
+  //   const currency = useCurrency(token?.id)
+  //   const currency = outputCurrency
 
   // For the Info Cards
   const price = token?.derivedETH * nativePrice
-//   const priceChange = ((token?.derivedETH * nativePrice) / (token1d?.derivedETH * nativePrice1d)) * 100 - 100
-//   const formattedSupply = totalSupply / 10 ** token?.decimals
+  //   const priceChange = ((token?.derivedETH * nativePrice) / (token1d?.derivedETH * nativePrice1d)) * 100 - 100
+  //   const formattedSupply = totalSupply / 10 ** token?.decimals
 
   const liquidityUSD = token?.liquidity * token?.derivedETH * nativePrice
   const liquidityUSDChange =
@@ -151,7 +151,7 @@ export default function Token({ outputCurrency }: TokenProps) {
   return (
     <AnalyticsContainer>
       <NextSeo title={`${token?.name} Analytics`} />
-      <div className="px-4 pt-4 space-y-2">
+      <div className="px-4 pt-4 space-y-4 mb-1">
         <div className="grid grid-cols-1 gap-2">
           <ChartCard
             header="Price"
@@ -183,13 +183,25 @@ export default function Token({ outputCurrency }: TokenProps) {
             timespans={chartTimespans}
           />
         </div>
+
+        <NavLink 
+          href={`/analytics/tokens/${id}`}
+          >
+          <Button 
+            variant="filled" color="purple" size="lg"
+            >
+            <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              View Token Analytics <span> ↗</span>
+            </a>
+          </Button>
+        </NavLink>
         {/* <div className="flex flex-row justify-between flex-grow space-x-4 overflow-x-auto">
           <InfoCard text="Liquidity (24H)" number={liquidityUSD} percent={liquidityUSDChange} />
           <InfoCard text="Volume (24H)" number={volumeUSD1d} percent={volumeUSD1dChange} />
           <InfoCard text="Fees (24H)" number={volumeUSD1d * 0.003} percent={volumeUSD1dChange} />
         </div> */}
         {/* <div className="text-2xl font-bold text-high-emphesis">Information</div> */}
-        <div className="px-4 text-sm leading-48px text-high-emphesis">
+        {/* <div className="px-4 text-sm leading-48px text-high-emphesis">
           <table className="w-full table-fixed">
             <thead className="border-b border-gray-900">
               <tr>
@@ -220,7 +232,7 @@ export default function Token({ outputCurrency }: TokenProps) {
               </tr>
             </tbody>
           </table>
-        </div>
+        </div> */}
         {/* <div>
           <PairList pairs={tokenPairsFormatted} type="all" />
         </div> */}
