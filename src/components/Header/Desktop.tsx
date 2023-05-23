@@ -11,7 +11,8 @@ import DesktopBar from './DesktopBar'
 import LanguageMenu from './useLanguages'
 import BarsIcon from 'components/Icons/header/BarsIcon'
 import Web3Network from 'components/Web3Network'
-import TokenStats from 'components/TokenStats'
+// import TokenStats from 'components/TokenStats'
+import { ChainId } from 'sdk'
 
 const HEADER_HEIGHT = 64
 
@@ -55,8 +56,8 @@ const Desktop = () => {
           
           {/* {SOUL_ICON} */}
           <BarsIcon
-              fillPrimary={open ? `${getChainColor(chainId)}` : `#FFFFFF`}
-              fillSecondary={open ? `#FFFFFF` : `${getChainColor(chainId)}`}
+              fillPrimary={open ? `#821FFF` : `#FFFFFF`} // purple
+              fillSecondary={open ? `#FFFFFF` : `#821FFF`} // purple
               className={'w-7 h-7'}
           />
         </div>
@@ -114,6 +115,9 @@ const Desktop = () => {
                         })}
                       </nav>
                       <div className={`grid mt-0.5 items-center justify-center bg-dark-900 rounded-2xl`}>
+                      {/* {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+                          <TokenStats />
+                        } */}
                       <LanguageMenu />
                       </div>
                       {/* <div className="flex w-full justify-center inline-block rounded rounded-xl bg-dark-1000">
@@ -135,23 +139,23 @@ const Desktop = () => {
             className={`relative top-1.5 right-2 p-0.5 mt-1 bg-dark-1000 border border-[${getChainColor(chainId)}] hover:border-2 hover:border-purple rounded rounded-2xl inline-block`}
           > */}
         <div
-          className={`grid grid-cols-3 gap-1 mt-6 bg-dark-1000 p-1.5 rounded-2xl`}
+          className={`grid grid-cols-2 gap-1 mt-6 p-1.5 rounded-2xl`}
           // onClick={() => setOpen(true)}
         >
             <div
-              className={`border-2 ${account ? `border-dark-800` : `border-avaxRed animate-pulse`} hover:border-purple rounded-2xl`}
+              className={`border-2 ${account ? `border-[${getChainColor(chainId)}]` : `border-avaxRed animate-pulse`} hover:border-purple rounded-2xl`}
             >
               <Web3Status />
             </div>
               {/* TOKEN STATS */}
-            <div
+            {/* <div
               className={`border-2 border-dark-800 hover:border-purple p-2 items-center rounded-2xl`}
             >
                 <TokenStats />
-            </div> 
+            </div>  */}
               {/* NETWORK ICON */}
             <div
-              className={`border-2 border-dark-800 hover:border-purple p-2 rounded-2xl`}
+              className={`border-2 ${chainId ? `border-[${getChainColor(chainId)}]` : `border-dark-800`} hover:border-purple p-2 rounded-2xl`}
             >
                 <Web3Network />
             </div> 

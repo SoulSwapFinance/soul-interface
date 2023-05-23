@@ -27,17 +27,16 @@ function TokenStats(): JSX.Element | null {
 
   return (
     <div
-      // className="flex items-center md:space-x-2 rounded-2xl m-1 justify-center bg-dark-1000 hover:bg-dark-900 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
+      className="flex items-center md:space-x-2 rounded-2xl m-1 justify-center bg-dark-1000 hover:bg-dark-900 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto"
       onClick={() => toggleTokenStatsModal()}
     >
       <div
-        // className={`flex border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded-2xl w-5/6`}
-        className = {`grid items-center grid-flow-col justify-center bg-dark-1000 h-[24px] w-[24px] text-sm pointer-events-auto auto-cols-max text-secondary`}
+        className={`flex border-2 sm:border-4 border-purple justify-center bg-dark-800 mr-2 ml-2 rounded-2xl w-5/6`}
       >
         <Image src={`/favicon.ico`}
           objectFit={`contain`}
-          height={36}
-          width={36}
+          height={72}
+          width={72}
           alt={"soulswap logo icon"}
         />
       </div>
