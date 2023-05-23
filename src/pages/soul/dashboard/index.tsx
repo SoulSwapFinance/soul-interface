@@ -222,18 +222,20 @@ export default function Dashboard() {
           <title>Dashboard | Soul</title>
           <meta key="description" name="description" />
         </Head>
-        {/* // border-[${getChainColor(chainId)}] bg-dark-1000`}  */}
-          <div className={`grid p-1 mt-8 rounded-2xl bg-dark-900`} 
+        <div className={`grid p-1 mt-8 rounded-2xl bg-dark-1000`} 
           >
           <div
-              className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
-          >
+              className={`w-full grid grid-cols-2 gap-6 bg-dark-1000 p-4 rounded-2xl border-2 border-purple`}
+            >
+              <div className={`w-full`}>
+              <TokenStats />
+              </div>
               <Image src={DATA_BANNER}
                 height={180}
-                width={720}
-                alt={'data banner'}
+                width={1080}
+                alt={'economy data page banner'}
               />
-          </div>
+            </div>
           <div className={`flex justify-center m-1 p-1`}>
           <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/dashboard'}>

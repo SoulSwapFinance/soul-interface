@@ -309,7 +309,7 @@ const Mobile = () => {
         </Transition.Root>
         <div
           // className={`grid grid-cols-2 gap-1 mt-6 bg-dark-1000 p-1.5 rounded-2xl`}
-          className={`grid grid-cols-3 gap-1 mt-6 bg-dark-1000 p-1.5 rounded-2xl`}
+          className={`grid grid-cols-2 gap-1 mt-6 bg-dark-1000 p-1.5 rounded-2xl`}
           // onClick={() => setOpen(true)}
         >
             <div
@@ -318,11 +318,11 @@ const Mobile = () => {
               <Web3Status />
             </div>
               {/* TOKEN STATS */}
-            <div
+            {/* <div
               className={`border-2 border-dark-800 hover:border-purple p-2 items-center rounded-2xl`}
             >
                 <TokenStats />
-            </div> 
+            </div>  */}
               {/* NETWORK ICON */}
             <div
               className={`border-2 border-dark-800 hover:border-purple p-2 rounded-2xl`}
