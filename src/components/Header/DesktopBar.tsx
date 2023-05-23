@@ -27,19 +27,20 @@ import NftIcon from 'components/Icons/mobile/NftIcon'
 import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 import Web3Network from 'components/Web3Network'
+import Typography from 'components/Typography'
 // import { useUserInfo } from "hooks/useAPI"
 
-interface BarProps {
-    inputCurrency?: Currency
-    outputCurrency?: Currency
-    allowedSlippage?: Percent
-}
+// interface BarProps {
+//     inputCurrency?: Currency
+//     outputCurrency?: Currency
+//     allowedSlippage?: Percent
+// }
 
-const DesktopBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
+const DesktopBar: FC = () => {
     const router = useRouter()
     const { asPath } = useRouter()
 
-    const { account, chainId, library } = useActiveWeb3React()
+    const { chainId } = useActiveWeb3React()
     const [open, setOpen] = useState(false)
     const bar = useBar()
     
@@ -62,15 +63,15 @@ const DesktopBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
     const farmRoute = useCallback(() => {
         router.push(`/farm`)
     }, [])
-    const nftRoute = useCallback(() => {
-        router.push(`/marketplace`)
-    }, [])
+    // const nftRoute = useCallback(() => {
+    //     router.push(`/marketplace`)
+    // }, [])
 
     const swapPage = router.pathname.startsWith('/swap') || router.pathname.startsWith('/exchange/swap')
     const crossPage = router.pathname.startsWith('/cross') || router.pathname.startsWith('/exchange/cross')
     // const landingPage = router.pathname.startsWith('/landing')
     const portfolioPage = router.pathname.startsWith('/portfolio')
-    const nftPage = router.pathname.startsWith('/marketplace') || router.pathname.startsWith('/marketplace/collections')
+    // const nftPage = router.pathname.startsWith('/marketplace') || router.pathname.startsWith('/marketplace/collections')
     const farmPage = router.pathname.startsWith('/farm') || router.pathname.startsWith('/summoner')
     const bondPage = router.pathname.startsWith('/bond') || router.pathname.startsWith('/bonds')
     const lendPage = router.pathname.startsWith('/lend') || router.pathname.startsWith('/borrow')
@@ -95,7 +96,7 @@ const DesktopBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
     const isRemove = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
     const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
     const isPool = isRemove || isAdd
-    const isNFT = nftPage
+    // const isNFT = nftPage
     const isWallet = portfolioPage
     const isLend = lendPage
     const isEarn = farmPage || bondPage
@@ -103,7 +104,7 @@ const DesktopBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
 
     return (
         <div>
-            <Transition.Root show={open} as={Fragment}>
+            {/* <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div" className="fixed inset-0 z-20 overflow-hidden" onClose={setOpen} unmount={false}>
                     <div className="absolute inset-0 overflow-hidden">
                         <Transition.Child
@@ -128,14 +129,14 @@ const DesktopBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                                 leaveTo="translate-x-[-100%]"
                                 unmount={false}
                             >
-                                <div className="ml-2 max-w-sm">
+                                {/* <div className="ml-2">
                                     <div className={classNames("flex flex-col h-full py-2 overflow-x-hidden overflow-y-scroll shadow-xl", "bg-dark-1100")}>
                                         <nav className="flex-1 " aria-label="Sidebar">
                                             {bar.map((node) => {
                                                 return <SidebarItem node={node} key={node.key} />
                                             })}
                                         </nav>
-                                        <div className="flex w-full justify-center inline-block rounded rounded-xl bg-dark-1000">
+                                        <div className="flex w-full justify-center rounded-xl bg-dark-1000">
                                             {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                                                 <TokenStats />
                                             }
@@ -144,20 +145,20 @@ const DesktopBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> //
                             </Transition.Child>
                         </div>
                     </div>
                 </Dialog>
-            </Transition.Root>
+            </Transition.Root> */}
 
-            <div className={`fixed bottom-0 left-auto z-10 flex flex-row items-center justify-center w-auto rounded rounded-xl`}>
+            <div className={`flex flex-row fixed bottom-0 left-auto z-10 items-center justify-center w-auto rounded-xl`}>
                 {/* xl:relative // moves to top */}
                 <div className="flex items-center w-full space-x-2 justify-end">
-                    <div className={`fixed bg-dark-1000 bottom-0 left-0 z-10 gap-1 flex justify-between items-center justify-center w-full`}>
+                    <div className={`fixed bg-dark-1000 border-2 border-dark-800 rounded-xl bottom-0 left-0 z-10 gap-1 flex items-center justify-center w-full`}>
                         {/* <div
                             className={classNames(
-                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                `hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
                                 isHome && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                             onClick={homeRoute}
                         >
@@ -167,83 +168,105 @@ const DesktopBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                                 className={'w-7 h-7'}
                             />
                         </div> */}
+                        <div className={`grid grid-cols-4 w-full items-center`}>
                         <div
                             className={classNames(
-                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                `grid grid-cols-2`,
+                                `hover:border-2 hover:border-[${getChainColor(chainId)}] w-full justify-center rounded p-0.5`,
                                 isExchange && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                             onClick={swapRoute}
                         >
                             <SwapIcon
                                 fillPrimary={isExchange ? `${getChainColor(chainId)}` : `#FFFFFF`}
                                 fillSecondary={isExchange ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                className={'w-7 h-7'}
+                                className={'w-7 h-7 ml-4 sm:ml-8'}
                             />
+                            <Typography className={`grid mt-1`}>
+                                { `Swap` }
+                            </Typography>
                         </div>
                         {featureEnabled(Feature.LIQUIDITY_MINING, chainId) &&
                         <div
                             className={classNames(
-                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                `grid grid-cols-2`,
+                                `hover:border-2 hover:border-[${getChainColor(chainId)}] w-full justify-center rounded p-0.5`,
                                 isEarn && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                             onClick={farmRoute}
                         >
                             <SeedlingIcon
                                 fillPrimary={isEarn ? `${getChainColor(chainId)}` : `#FFFFFF`}
                                 fillSecondary={isEarn ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                className={`w-7 h-7`}
+                                className={'w-7 h-7 ml-4 sm:ml-8'}
                             />
+                        <Typography className={`grid mt-1`}>
+                        { `Earn` }
+                        </Typography>
                         </div>
                         }
                         {featureEnabled(Feature.UNDERWORLD, chainId) &&
                         <div
                             className={classNames(
-                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                `grid grid-cols-2`,
+                                `hover:border-2 hover:border-[${getChainColor(chainId)}] w-full justify-center rounded p-0.5`,
                                 isLend && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                             onClick={lendRoute}
                         >
                             <LendSkullIcon
                                 fillPrimary={isLend ? `${getChainColor(chainId)}` : `#FFFFFF`}
                                 fillSecondary={isLend ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                className={'w-7 h-7'}
+                                className={'w-7 h-7 ml-4 sm:ml-8'}
                             />
+                            <Typography className={`grid mt-1`}>
+                            { `Lend` }
+                            </Typography>
                         </div>
                         }
-                        {featureEnabled(Feature.NFT, chainId) &&
+                        {/* {featureEnabled(Feature.NFT, chainId) &&
                             <div
                                 className={classNames(
-                                    `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                    `hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
                                     isNFT && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                                 onClick={nftRoute}
                             >
                                 <NftIcon
                                     fillPrimary={isNFT ? `${getChainColor(chainId)}` : `#FFFFFF`}
                                     fillSecondary={isNFT ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                    className={'w-7 h-7'}
+                                className={'w-7 h-7 ml-4 sm:ml-8'}
                                 />
+                                <Typography className={`grid mt-1`}>
+                                { `NFT` }
+                                </Typography>
                             </div>
-                        }
+                        } */}
                         <div
                             className={classNames(
-                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                `grid grid-cols-2`,
+                                `hover:border-2 hover:border-[${getChainColor(chainId)}] w-full justify-center rounded p-0.5`,
                                 isWallet && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                             onClick={walletRoute}
                         >
                             <WalletIcon
-                                fillPrimary={isWallet ? `${getChainColor(chainId)}` : `#FFFFFF`}
-                                fillSecondary={isWallet ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                className={'w-7 h-7'}
+                                fillPrimary={isWallet ? `#FFFFFF` : `${getChainColor(chainId)}`}
+                                fillSecondary={isWallet ? `${getChainColor(chainId)}` : `#FFFFFF`}
+                                className={'w-7 h-7 ml-4 sm:ml-8'}
                             />
+                            <Typography className={`grid mt-1 -ml-2 sm:-ml-2`}>
+                            { `Account` }
+                            </Typography>
                         </div>
-                        <div
+                    </div>
+
+                        {/* <div
                             className={classNames(
                                 `flex w-[36px] h-[36px] justify-center rounded p-0.5`,)}
                         // isLend && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                         >
                             <More />
-                        </div>
+                        </div> */}
                         {/* NETWORK ICON */}
-                        <div className={`flex mr-2 rounded rounded-lg inline-block`}>
+                        {/* <div className={`flex mr-2 rounded-lg`}>
                             <Web3Network />
-                        </div>
+                        </div> */}
 
                     </div>
                 </div>

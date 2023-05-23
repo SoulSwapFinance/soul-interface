@@ -283,12 +283,12 @@ const Mobile: FC = () => {
                 >
                   <div className="max-w-sm">
                     <div className={classNames("flex flex-col h-full py-2 overflow-x-hidden overflow-y-scroll shadow-xl", "bg-dark-1100")}>
-                      <nav className="flex-1 " aria-label="Sidebar">
+                      <nav className={`flex-1 bg-dark-900 rounded-2xl`} aria-label="Sidebar">
                         {bar.map((node) => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
                       </nav>
-                      <div className="flex items-center justify-start">
+                      <div className={`grid p-0 mt-0.5 items-center justify-center  bg-dark-900 rounded-2xl`}>
                       <LanguageMenu />
                       </div>
                       {/* <div className="flex w-full justify-center inline-block rounded rounded-xl bg-dark-1000">
