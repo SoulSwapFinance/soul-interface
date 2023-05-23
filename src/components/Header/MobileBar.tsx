@@ -11,7 +11,9 @@ import More from './More'
 // import Web3Network from 'components/Web3Network'
 // import LanguageMenu from './useLanguages'
 // import Web3Status from 'components/Web3Status'
-import { ChainId, Currency, NATIVE, Percent, SOUL_ADDRESS, USDC_ADDRESS } from 'sdk'
+import { ChainId, 
+    // Currency, NATIVE, Percent, SOUL_ADDRESS, USDC_ADDRESS 
+} from 'sdk'
 // import Typography from 'components/Typography'
 import { classNames } from 'functions/styling'
 import { SidebarItem } from './SidebarItem'
@@ -33,13 +35,14 @@ import { Feature } from 'enums/Feature'
 // import DocsIcon from 'components/Icons/mobile/DocsIcon'
 // import { useUserInfo } from "hooks/useAPI"
 
-interface BarProps {
-    inputCurrency?: Currency
-    outputCurrency?: Currency
-    allowedSlippage?: Percent
-}
+// interface BarProps {
+//     inputCurrency?: Currency
+//     outputCurrency?: Currency
+//     allowedSlippage?: Percent
+// }
 
-const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
+// const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
+const MobileBar = () => {
     const router = useRouter()
     const { asPath } = useRouter()
 
@@ -67,24 +70,24 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
     const nftRoute = useCallback(() => {
         router.push(`/marketplace`)
     }, [])
-    const dataRoute = useCallback(() => {
-        router.push(`/analytics`)
-    }, [])
-    const luxorRoute = useCallback(() => {
-        router.push(`/luxor`)
-    }, [])
+    // const dataRoute = useCallback(() => {
+    //     router.push(`/analytics`)
+    // }, [])
+    // const luxorRoute = useCallback(() => {
+    //     router.push(`/luxor`)
+    // }, [])
 
     const swapPage = router.pathname.startsWith('/swap') || router.pathname.startsWith('/exchange/swap')
     const crossPage = router.pathname.startsWith('/cross') || router.pathname.startsWith('/exchange/cross')
     // const landingPage = router.pathname.startsWith('/landing')
-    const learnPage = router.pathname.startsWith('/learn')
+    // const learnPage = router.pathname.startsWith('/learn')
     const portfolioPage = router.pathname.startsWith('/portfolio')
     const nftPage = router.pathname.startsWith('/marketplace') || router.pathname.startsWith('/marketplace/collections')
     const farmPage = router.pathname.startsWith('/farm') || router.pathname.startsWith('/summoner')
     const bondPage = router.pathname.startsWith('/bond') || router.pathname.startsWith('/bonds')
     const lendPage = router.pathname.startsWith('/lend') || router.pathname.startsWith('/borrow')
-    const dataPage = router.pathname.startsWith('/analytics')
-    const luxorPage = router.pathname.startsWith('/luxor')
+    // const dataPage = router.pathname.startsWith('/analytics')
+    // const luxorPage = router.pathname.startsWith('/luxor')
 
     // const isExchangeAnalytics
     //     = asPath.startsWith('/exchange/analytics')
@@ -107,12 +110,12 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
     const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
     const isPool = isRemove || isAdd
     const isNFT = nftPage
-    const isLuxor = luxorPage
+    // const isLuxor = luxorPage
     const isWallet = portfolioPage
     const isLend = lendPage
     const isEarn = farmPage || bondPage
-    const isLearn = learnPage
-    const isData = dataPage || dataPage
+    // const isLearn = learnPage
+    // const isData = dataPage || dataPage
     const isExchange = swapPage || crossPage || isPool
 
     return (

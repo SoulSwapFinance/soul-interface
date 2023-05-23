@@ -10,6 +10,7 @@ import { getChainColor } from 'constants/chains'
 import DesktopBar from './DesktopBar'
 import LanguageMenu from './useLanguages'
 import BarsIcon from 'components/Icons/header/BarsIcon'
+import Web3Network from 'components/Web3Network'
 
 const HEADER_HEIGHT = 64
 
@@ -47,7 +48,7 @@ const Desktop = () => {
         alt={"title logo"}
         /> */}
         <div
-          className={`flex bg-dark-1000 mt-6 rounded border p-1.5 border-[${getChainColor(chainId)}] hover:border-2 hover:border-purple rounded-2xl`}
+          className={`flex bg-dark-1000 mt-6 p-1.5 border-2 border-dark-800 hover:border-purple rounded-2xl`}
           onClick={() => setOpen(true)}
         >
           
@@ -133,11 +134,20 @@ const Desktop = () => {
             className={`relative top-1.5 right-2 p-0.5 mt-1 bg-dark-1000 border border-[${getChainColor(chainId)}] hover:border-2 hover:border-purple rounded rounded-2xl inline-block`}
           > */}
         <div
-          className={`flex bg-dark-1000 mt-6 rounded border p-1.5 border-[${getChainColor(chainId)}] hover:border-2 hover:border-purple rounded-2xl`}
-          onClick={() => setOpen(true)}
+          className={`grid grid-cols-2 gap-1 mt-6 bg-dark-1000 p-1.5 rounded-2xl`}
+          // onClick={() => setOpen(true)}
         >
-            <Web3Status 
-            />
+            <div
+              className={`border-2 border-dark-800 hover:border-purple rounded-2xl`}
+            >
+              <Web3Status />
+            </div>
+              {/* NETWORK ICON */}
+            <div
+              className={`border-2 border-dark-800 hover:border-purple p-2 rounded-2xl`}
+            >
+                <Web3Network />
+            </div> 
           </div> 
       </header>
       <DesktopBar />
