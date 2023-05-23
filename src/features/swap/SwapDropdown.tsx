@@ -62,8 +62,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const crossStyle = isCross ? activeStyle : style
 
   return (
-    <div className={`flex items-center justify-center gap-2 border border-${getChainColorCode(chainId)} rounded rounded-2xl p-1`}>
-      <div className="flex gap-2 mx-4">
+    <div className={`flex items-center justify-center gap-2 border border-${getChainColorCode(chainId)} rounded-2xl p-1`}>
+      <div className="flex gap-2 sm:gap-6 mx-4">
         {/* {featureEnabled(Feature.LIQUIDITY, chainId) && */}
         <NavLink
           className={classNames(
@@ -114,7 +114,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             <div
               className={classNames(
                 `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
-                isPool && `border border-2 border-[${getChainColor(chainId)}]`)
+                isPool && `border-2 border-[${getChainColor(chainId)}]`)
               }
             // onClick={reveal}
             // onMouseEnter={reveal}
@@ -127,7 +127,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               <Typography
                 className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
               >
-                {`+/-`}
+                {`Pool`}
               </Typography>
             </div>
           </NavLink>

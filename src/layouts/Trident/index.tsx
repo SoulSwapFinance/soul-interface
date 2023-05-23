@@ -59,7 +59,7 @@ const TridentLayout: FC<Props> = ({ children = [] }) => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <div className="flex flex-col items-center w-full flex flex-grow">
+      <div className="flex flex-col items-center w-full flex-grow">
         <div className="w-full flex-grow flex flex-col">{children}</div>
         <Popups />
       </div>

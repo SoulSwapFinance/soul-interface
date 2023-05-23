@@ -10,15 +10,15 @@ import { ChainId } from 'sdk'
 // import { useSummonerContract } from 'hooks/useContract'
 // import ExternalLink from 'components/ExternalLink'
 // import { classNames } from 'functions'
-import { getChainColor, getChainColorCode } from 'constants/chains'
+// import { getChainColor, getChainColorCode } from 'constants/chains'
 // import { getChainColorCode } from 'constants/chains'
 // import { classNames } from 'functions'
 import Image from 'next/image'
 import MINT_BANNER from 'assets/branding/mint-banner.png'
 import ExternalLink from 'components/ExternalLink'
-import { SubmitButton } from 'features/bond/Styles'
-import { classNames } from 'functions/styling'
-import TokenStats from 'components/TokenStats'
+// import { SubmitButton } from 'features/bond/Styles'
+// import { classNames } from 'functions/styling'
+// import TokenStats from 'components/TokenStats' 
 import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 
@@ -68,43 +68,42 @@ export const BondList = () => {
   // }
 
   return (
-    <div className={`grid grid-cols-1 justify-center p-1 mt-8 sm:m-8 sm:max-w-[90%] md:max-w-2xl bg-dark-900 rounded rounded-2xl`}>
-      <div
+    <div className={`grid grid-cols-1 justify-center p-1 mt-8 sm:m-8 sm:max-w-[90%] md:max-w-2xl bg-dark-900 rounded-2xl`}>
+      {/* <div
             className={
               classNames(chainId == ChainId.FANTOM 
-                  ? 'mb-4 rounded rounded-xl bg-purple' 
+                  ? 'rounded-xl bg-purple' 
                   : 'hidden')
               }
-          >
+          > */}
+              <Button
+                variant="filled"
+                // primaryColor={"#7G1BD9"}
+                className={`bg-purple rounded-xl p-4 mt-4 w-full animate-pulse`}
+                size="xl"
+                >
             <ExternalLink
               href="https://soulswapfinance.medium.com/owning-our-liquidity-via-our-innovative-soul-bonds-podl-592c2849ceed"
               target="_blank"
               rel="noreferrer"
-            >
-              <SubmitButton
-                primaryColor={"#7G1BD9"}
-                size="xl"
               >
                 <a 
-                  className="block text-md font-bold md:text-xl text-white font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300"
-                >
+                  className="block text-md font-bold md:text-xl text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300"
+                  >
                   <span> Read Before Bonding ↗</span>
                 </a>
-              </SubmitButton>
             </ExternalLink>
-          </div>
+            </Button>
+          {/* </div> */}
           <div
-              className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
+              className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
             >
-              <div className={`w-full`}>
-              <TokenStats />
-              </div>
               <Image src={MINT_BANNER}
                 height={180}
-                width={1080}
-                alt={"mint aka bond page banner"}
+                width={720}
+                alt={'mint banner'}
               />
-            </div>
+          </div>
           <div className={`flex justify-center m-1 p-1`}>
         <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/dashboard'}>

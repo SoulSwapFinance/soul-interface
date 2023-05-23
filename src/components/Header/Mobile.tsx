@@ -25,6 +25,7 @@ import LanguageMenu from './useLanguages'
 // import HomeIcon from 'components/Icons/mobile/HomeIcon'
 // import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
 import BarsIcon from 'components/Icons/header/BarsIcon'
+import TokenStats from 'components/TokenStats'
 // import ChartIcon from 'components/Icons/exchange/ChartIcon'
 // import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
 // import SoulIcon from 'components/Icons/header/SoulIcon'
@@ -33,17 +34,17 @@ import BarsIcon from 'components/Icons/header/BarsIcon'
 // import { ArrowDownIcon } from '@heroicons/react/24/solid'
 // import DoubleDownIcon from 'components/Icons/mobile/DoubleDownIcon'
 
-const Mobile: FC = () => {
+const Mobile = () => {
   // const menu = useMenu()
   const bar = useBar()
-  const router = useRouter()
+  // const router = useRouter()
   // const { asPath } = useRouter()
   // const isLuxor = router.asPath.startsWith('/luxor')
 
   const { account, chainId } = useActiveWeb3React()
   // const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const [open, setOpen] = useState(false)
-  const [dropdown, setShowDropdown] = useState(false)
+  // const [dropdown, setShowDropdown] = useState(false)
 
   // const swapRoute = useCallback(() => {
   //   router.push(`/exchange/swap`)
@@ -223,7 +224,6 @@ const Mobile: FC = () => {
     <>
       {/* <header className="w-full flex items-center justify-between border-2 border-ftmBlue min-h-[42px] h-[42px] px-2 bg-purple"> */}
       <header className={`w-full flex items-center text-white justify-between min-h-[36px] h-[36px] m-1`}>
-
         <div className={`flex justify-between flex-grow`}>
       <div 
           className={`flex bg-dark-1000 mt-6 p-1.5 border-2 border-dark-800 hover:border-purple rounded-2xl`}
@@ -289,7 +289,7 @@ const Mobile: FC = () => {
                           return <SidebarItem node={node} key={node.key} />
                         })}
                       </nav>
-                      <div className={`grid p-0 mt-0.5 items-center justify-center  bg-dark-900 rounded-2xl`}>
+                      <div className={`grid p-0 mt-0.5 items-center justify-center bg-dark-900 rounded-2xl`}>
                       <LanguageMenu />
                       </div>
                       {/* <div className="flex w-full justify-center inline-block rounded rounded-xl bg-dark-1000">
@@ -308,14 +308,21 @@ const Mobile: FC = () => {
           </Dialog>
         </Transition.Root>
         <div
-          className={`grid grid-cols-2 gap-1 mt-6 bg-dark-1000 p-1.5 rounded-2xl`}
+          // className={`grid grid-cols-2 gap-1 mt-6 bg-dark-1000 p-1.5 rounded-2xl`}
+          className={`grid grid-cols-3 gap-1 mt-6 bg-dark-1000 p-1.5 rounded-2xl`}
           // onClick={() => setOpen(true)}
         >
             <div
-              className={`border-2 border-dark-800 hover:border-purple rounded-2xl`}
+              className={`border-2 ${account ? `border-dark-800` : `border-avaxRed animate-pulse`} hover:border-purple rounded-2xl`}
             >
               <Web3Status />
             </div>
+              {/* TOKEN STATS */}
+            <div
+              className={`border-2 border-dark-800 hover:border-purple p-2 items-center rounded-2xl`}
+            >
+                <TokenStats />
+            </div> 
               {/* NETWORK ICON */}
             <div
               className={`border-2 border-dark-800 hover:border-purple p-2 rounded-2xl`}

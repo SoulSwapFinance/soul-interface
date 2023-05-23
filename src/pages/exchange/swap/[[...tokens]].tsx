@@ -429,17 +429,14 @@ const Swap = () => {
               chainId={chainId}
            /> */}
             <div
-              className={`w-full grid grid-cols-2 p-4 rounded-2xl border-2 border-purple`}
+              className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
             >
-              <div className={`w-full`}>
-              <TokenStats />
-              </div>
               <Image src={SWAP_BANNER}
                 height={180}
-                width={1080}
+                width={720}
                 alt={'swap banner'}
               />
-            </div>
+          </div>
             {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
             {/* <div className={`my-2 border-2 border-[${getChainColor(chainId)}]`} /> */}
             <>

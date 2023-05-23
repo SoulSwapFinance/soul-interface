@@ -11,14 +11,14 @@ import More from './More'
 // import Web3Network from 'components/Web3Network'
 // import LanguageMenu from './useLanguages'
 // import Web3Status from 'components/Web3Status'
-import { ChainId, 
+// import { ChainId, 
     // Currency, NATIVE, Percent, SOUL_ADDRESS, USDC_ADDRESS 
-} from 'sdk'
+// } from 'sdk'
 // import Typography from 'components/Typography'
 import { classNames } from 'functions/styling'
-import { SidebarItem } from './SidebarItem'
-import TokenStats from 'components/TokenStats'
-import LanguageMenu from './useLanguages'
+// import { SidebarItem } from './SidebarItem'
+// import TokenStats from 'components/TokenStats'
+// import LanguageMenu from './useLanguages'
 import useBar from './useBar'
 // import HomeIcon from 'components/Icons/mobile/HomeIcon'
 import SwapIcon from 'components/Icons/exchange/SwapIcon'
@@ -145,7 +145,7 @@ const MobileBar = () => {
                                 leaveTo="translate-x-[-100%]"
                                 unmount={false}
                             >
-                                <div className="ml-2 max-w-sm">
+                                {/* <div className="ml-2 max-w-sm">
                                     <div className={classNames("flex flex-col h-full py-2 overflow-x-hidden overflow-y-scroll shadow-xl", "bg-dark-1100")}>
                                         <nav className="flex-1 " aria-label="Sidebar">
                                             {bar.map((node) => {
@@ -161,7 +161,7 @@ const MobileBar = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                             </Transition.Child>
                         </div>
                     </div>

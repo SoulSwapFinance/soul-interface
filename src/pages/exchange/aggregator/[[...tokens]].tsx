@@ -362,23 +362,21 @@ const Aggregator = ({ }) => {
 
 	return (
 		<DoubleGlowShadowV2>
-          <div className={`grid p-1 mt-8 space-y-2 rounded rounded-2xl bg-dark-1000`}>
+          	<div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
 				{/* <SwapLayoutCard> */}
 				{/* <DonateBanner chainId={chainId} /> */}
 				<LuxorBanner 
-				chainId={chainId} 
-				textColor={'white'} 
-				color={'purple'} 
-				/>				<div
-              className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
+					chainId={chainId}
+					textColor={'white'}
+					color={'purple'}
+				/>
+			<div
+              className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
             >
-              <div className={`w-full`}>
-              <TokenStats />
-              </div>
               <Image src={META_BANNER}
                 height={180}
-                width={1080}
-               	alt={'meta banner'} 
+                width={720}
+                alt={'meta banner'}
               />
             </div>
 				{/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}

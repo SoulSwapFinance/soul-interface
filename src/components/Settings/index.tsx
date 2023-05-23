@@ -47,7 +47,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
   const COG_ICON = <CogIcon
     fillPrimary={open ? getChainColor(chainId) : WHITE}
     fillSecondary={open ? WHITE : getChainColor(chainId)}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded-md w-7 h-7` : `hidden`)}
   />
   
   return (
@@ -55,7 +55,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
       <div
         className={
           `flex items-center justify-center 
-          w-6 h-6 rounded cursor-pointer sm:-mt-1.5
+          w-6 h-6 sm:w-7 sm:h-7 rounded cursor-pointer sm:absolute sm:top-12 sm:mt-1 sm:right-1.5
           `
         }
         onClick={toggle}
