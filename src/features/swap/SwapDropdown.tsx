@@ -159,7 +159,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               <Typography
                 className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
               >
-                {`Aggregate`}
+                {`Meta`}
               </Typography>
             </div>
           </NavLink>
