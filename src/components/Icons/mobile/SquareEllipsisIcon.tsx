@@ -6,7 +6,7 @@ export interface Props {
     className: string
 }
 
-const SquareEllisisIcon: FC<Props> = ({ fillPrimary, fillSecondary, className }) => {
+const SquareEllipsisIcon: FC<Props> = ({ fillPrimary, fillSecondary, className }) => {
 
     return (
         <svg
@@ -31,4 +31,4 @@ const SquareEllisisIcon: FC<Props> = ({ fillPrimary, fillSecondary, className })
 
     )
 }
-export default SquareEllisisIcon
+export default SquareEllipsisIcon

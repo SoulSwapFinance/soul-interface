@@ -149,7 +149,7 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                                                 return <SidebarItem node={node} key={node.key} />
                                             })}
                                         </nav>
-                                        <div className="flex w-full justify-center inline-block rounded rounded-xl bg-dark-1000">
+                                        <div className="flex w-full justify-center rounded-xl bg-dark-1000">
                                             {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                                                 <TokenStats />
                                             }
@@ -165,25 +165,25 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                 </Dialog>
             </Transition.Root>
 
-            <div className={`fixed bottom-0 left-auto z-10 flex flex-row items-center justify-center w-auto rounded rounded-xl`}>
+            <div className={`fixed bottom-0 left-auto z-10 flex flex-row items-center justify-center w-auto rounded-xl`}>
                 {/* xl:relative // moves to top */}
                 <div className="flex items-center w-full space-x-2 justify-end">
-                    <div className={`fixed bg-dark-1000 bottom-0 left-0 z-10 gap-1 flex justify-between items-center justify-center w-full`}>
+                    <div className={`flex fixed bg-dark-1000 bottom-0 border-2 border-dark-800 rounded-xl left-0 z-10 gap-1 items-center justify-center w-full`}>
                         {/* <div
                             className={classNames(
                                 `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
                                 isHome && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
-                            onClick={homeRoute}
-                        >
-                            <HomeIcon
+                                onClick={homeRoute}
+                                >
+                                <HomeIcon
                                 fillPrimary={isHome ? `${getChainColor(chainId)}` : `#FFFFFF`}
                                 fillSecondary={isHome ? `#FFFFFF` : `${getChainColor(chainId)}`}
                                 className={'w-7 h-7'}
-                            />
-                        </div> */}
+                                />
+                            </div> */}
                         <div
                             className={classNames(
-                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                `hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
                                 isExchange && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                             onClick={swapRoute}
                         >
@@ -195,7 +195,7 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                         </div>
                         <div
                             className={classNames(
-                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                `hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
                                 isEarn && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                             onClick={farmRoute}
                         >
@@ -207,7 +207,7 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                         </div>
                         <div
                             className={classNames(
-                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                `hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
                                 isLend && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                             onClick={lendRoute}
                         >
@@ -232,7 +232,7 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                         {featureEnabled(Feature.NFT, chainId) &&
                             <div
                                 className={classNames(
-                                    `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                    `hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
                                     isNFT && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                                 onClick={nftRoute}
                             >
@@ -269,7 +269,7 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                         </div> */}
                         <div
                             className={classNames(
-                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
+                                `hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
                                 isWallet && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                             onClick={walletRoute}
                         >
@@ -280,13 +280,13 @@ const MobileBar: FC<BarProps> = ({ inputCurrency, outputCurrency }) => {
                                 className={'w-7 h-7'}
                             />
                         </div>
-                        <div
+                        {/* <div
                             className={classNames(
                                 `flex w-[36px] h-[36px] justify-center rounded p-0.5`,)}
                         // isLend && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                         >
                             <More />
-                        </div>
+                        </div> */}
 
                         {/* NETWORK ICON */}
                         {/* <div className={`flex rounded rounded-lg inline-block`}>
