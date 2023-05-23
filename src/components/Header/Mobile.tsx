@@ -14,8 +14,8 @@ import MobileBar from './MobileBar'
 import { useRouter } from 'next/router'
 import DoubleLeftIcon from 'components/Icons/mobile/DoubleLeftIcon'
 import DoubleRightIcon from 'components/Icons/mobile/DoubleRightIcon'
-import TokenStats from 'components/TokenStats'
-import Image from 'next/image'
+// import TokenStats from 'components/TokenStats'
+// import Image from 'next/image'
 // import Image from 'next/image'
 import LanguageMenu from './useLanguages'
 // import BinocularsIcon from 'components/Icons/header/BinocularsIcon'
@@ -45,13 +45,13 @@ const Mobile: FC = () => {
   const [open, setOpen] = useState(false)
   const [dropdown, setShowDropdown] = useState(false)
 
-  const swapRoute = useCallback(() => {
-    router.push(`/exchange/swap`)
-  }, [])
+  // const swapRoute = useCallback(() => {
+  //   router.push(`/exchange/swap`)
+  // }, [])
 
-  const handleDropdown = useCallback(() => {
-    dropdown ? setShowDropdown(false) : setShowDropdown(true)
-  }, [])
+  // const handleDropdown = useCallback(() => {
+  //   dropdown ? setShowDropdown(false) : setShowDropdown(true)
+  // }, [])
 
   const WHITE = `#FFFFFF`
   // const R = `#FF0000`
@@ -200,28 +200,30 @@ const Mobile: FC = () => {
   //                     : isNFT ? NFT_ICON
   //                       : DEFAULT_ICON
   
-  const SOUL_ICON = 
-  <div className={`flex gap-2 mr-2 ml-2`}>
-    <Image
-      // src={'/favicon.png'} 
-      src={`/favicon.ico`}
-      height={36} width={36}
-      objectFit="contain"
-      alt={"soulswap logo icon"}
-    />
+  // const SOUL_ICON = 
+  // <div className={`flex gap-2 mr-2 ml-2`}>
+  //   <Image
+  //     // src={'/favicon.png'} 
+  //     src={`/favicon.ico`}
+  //     height={36} width={36}
+  //     objectFit="contain"
+  //     alt={"soulswap logo icon"}
+  //   />
 
-    <Image
-        // src={'/favicon.png'} 
-        src={`/SoulSwap-Banner.png`}
-        height={36} width={196}
-        objectFit="contain"
-        alt={"soulswap banner"}
-    />
-  </div>
+  //   <Image
+  //       // src={'/favicon.png'} 
+  //       src={`/SoulSwap-Banner.png`}
+  //       height={36} width={196}
+  //       objectFit="contain"
+  //       alt={"soulswap banner"}
+  //   />
+  // </div>
 
   return (
     <>
-      <header className="w-full flex items-center justify-between border-2 border-ftmBlue min-h-[42px] h-[42px] px-2 bg-purple">
+      {/* <header className="w-full flex items-center justify-between border-2 border-ftmBlue min-h-[42px] h-[42px] px-2 bg-purple"> */}
+      <header className={`w-full flex items-center text-white justify-between min-h-[36px] h-[36px] m-1`}>
+
         <div className={`flex justify-between flex-grow`}>
       <div 
         className={`flex bg-dark-900 mt-6 rounded border p-1.5 border-[${getChainColor(chainId)}] hover:border-2 hover:border-purple rounded-2xl`}
