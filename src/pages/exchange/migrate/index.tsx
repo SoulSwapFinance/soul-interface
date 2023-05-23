@@ -330,7 +330,13 @@ export default function Migrate() {
       </div>
 
       {!account ? (
-        <Web3Connect className="w-full !bg-dark-900 bg-gradient-to-r from-pink/80 hover:from-pink to-purple/80 hover:to-purple text-white h-[38px]" />
+        // <Web3Connect className="w-full !bg-dark-900 bg-gradient-to-r from-pink/80 hover:from-pink to-purple/80 hover:to-purple text-white h-[38px]" />
+        <Button 
+        size="lg" color="avaxRed" className="w-full" 
+        disabled
+      >
+        { `Connect Wallet` }
+      </Button>
       ) : (
         <div className="p-4 space-y-4 rounded bg-dark-900">
           {state.loading ? (

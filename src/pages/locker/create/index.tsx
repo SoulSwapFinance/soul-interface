@@ -279,7 +279,13 @@ import { useActiveWeb3React } from 'services/web3'
                           </div>
                           <div className={'flex items-center w-full'}>
                             {!account ? (
-                              <Web3Connect size="lg" color="gradient" className="w-full" />
+                              // <Web3Connect size="lg" color="gradient" className="w-full" />
+                              <Button 
+                              size="lg" color="avaxRed" className="w-full" 
+                              disabled
+                            >
+                              { `Connect Wallet` }
+                            </Button>
                             ) : !allInfoSubmitted ? (
                               <ButtonError className="font-bold" style={{ width: '100%' }} disabled={!allInfoSubmitted}>
                                 {errorMessage}

@@ -827,7 +827,13 @@ export default function Remove() {
 
               <div style={{ position: 'relative', marginBottom: `12px` }}>
                 {!account ? (
-                  <Web3Connect size="lg" color="gradient" className="w-full" />
+                  // <Web3Connect size="lg" color="gradient" className="w-full" />
+                  <Button 
+                  size="lg" color="avaxRed" className="w-full" 
+                  disabled
+                >
+                  { `Connect Wallet` }
+                </Button>
                 ) : (
                   <div className="grid grid-cols-2 gap-4">
                     <ButtonConfirmed

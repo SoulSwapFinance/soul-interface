@@ -549,7 +549,13 @@ const Swap = () => {
                 </Button>
               ) : !account // && useSwap 
                 ? (
-                  <Web3Connect color="purple" variant="filled" className="rounded-2xl md:rounded" />
+                  // <Web3Connect color="purple" variant="filled" className="rounded-2xl md:rounded" />
+                  <Button 
+                  size="lg" color="avaxRed" className="w-full" 
+                  disabled
+                >
+                  { `Connect Wallet` }
+                </Button>
                 ) : showWrap // && useSwap 
                   ? (
                     <Button

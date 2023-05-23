@@ -474,11 +474,19 @@ export default function Add() {
               <Button color="gradient" size="lg" disabled>
                 {i18n._(t`Unsupported Asset`)}
               </Button>
-            ) : !account ? (
-              <Web3Connect size="lg" color="gradient" className="w-full" />
-            ) : !isValid ? (
+            ) : 
+            !account ? (
+            //   <Web3Connect size="lg" color="gradient" className="w-full" />
+              <Button 
+                size="lg" color="avaxRed" className="w-full" 
+                disabled
+              >
+                { `Connect Wallet` }
+              </Button>
+            ) :
+             !isValid ? (
               <Button size="lg" color="gray" className="w-full" disabled>
-                {i18n._(t`Enter Amount`)}
+                {!account ? `Connect Wallet` : i18n._(t`Enter Amount`)}
               </Button>
             ) : (
               (approvalA === ApprovalState.NOT_APPROVED ||

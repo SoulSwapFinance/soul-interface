@@ -54,8 +54,8 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
     <div className="relative flex" ref={node}>
       <div
         className={
-          `flex items-center justify-center 
-          w-6 h-6 sm:w-7 sm:h-7 rounded cursor-pointer sm:absolute sm:top-12 sm:mt-1 sm:right-1.5
+          `flex items-center justify-center mr-3
+          w-5 h-5 sm:w-6 sm:h-6 rounded cursor-pointer sm:absolute sm:top-12 sm:mt-0.5 sm:right-1.5
           `
         }
         onClick={toggle}
