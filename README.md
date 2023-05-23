@@ -1,4 +1,4 @@
-# 🕯 SOUL Interface
+# 🕯 SOUL Interface (Archived)
 
 Home repository for the SoulSwap Decentralized Finance Application.
 
