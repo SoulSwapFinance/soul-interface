@@ -226,7 +226,8 @@ const Mobile: FC = () => {
 
         <div className={`flex justify-between flex-grow`}>
       <div 
-        className={`flex bg-dark-900 mt-6 rounded border p-1.5 border-[${getChainColor(chainId)}] hover:border-2 hover:border-purple rounded-2xl`}
+          className={`flex bg-dark-1000 mt-6 p-1.5 border-2 border-dark-800 hover:border-purple rounded-2xl`}
+        // className={`flex bg-dark-900 mt-6 rounded border p-1.5 border-[${getChainColor(chainId)}] hover:border-2 hover:border-purple rounded-2xl`}
         // className={`absolute left-1 top-1.5 bg-dark-900 rounded border-2 border-ftmBlue hover:border-purple rounded-2xl p-1`}
         // onClick={() => swapRoute()}
         onClick={() => { setOpen(true) }}
@@ -306,7 +307,23 @@ const Mobile: FC = () => {
             </div>
           </Dialog>
         </Transition.Root>
-        {account &&
+        <div
+          className={`grid grid-cols-2 gap-1 mt-6 bg-dark-1000 p-1.5 rounded-2xl`}
+          // onClick={() => setOpen(true)}
+        >
+            <div
+              className={`border-2 border-dark-800 hover:border-purple rounded-2xl`}
+            >
+              <Web3Status />
+            </div>
+              {/* NETWORK ICON */}
+            <div
+              className={`border-2 border-dark-800 hover:border-purple p-2 rounded-2xl`}
+            >
+                <Web3Network />
+            </div> 
+          </div> 
+        { /* account &&
         <div
           className={
             classNames(`hover:bg-dark-900 p-1.5 rounded-2xl mt-1.5
@@ -337,18 +354,18 @@ const Mobile: FC = () => {
         {dropdown &&
           <div
             className={dropdown ? `grid grid-cols-2` : `hidden`}>
-            {/* WALLET ICON */}
+            {/* WALLET ICON  //
             <div
               className={`relative top-2 right-1 p-0.5 bg-dark-1000 border border-[${getChainColor(chainId)}] border-2 hover:border-purple rounded-2xl inline-block`}
             >
               <Web3Status />
             </div>
-            {/* NETWORK ICON */}
+            {/* NETWORK ICON // 
             <div className={`relative top-2 right-0 p-1.5 bg-dark-1000 border border-[${getChainColor(chainId)}] border-2 hover:border-purple rounded-2xl inline-block`}>
               <Web3Network />
             </div>
           </div>
-        }
+        } */}
         <MobileBar />
       </header>
     </>
