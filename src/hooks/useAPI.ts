@@ -133,7 +133,7 @@ export function useSoulInfo(): { status: string; soulInfo: T } {
         totalLiquidityValue: '126832.16187399688',
         totalValue: '346353.6601204894',
 
-        SoulBalance: '7233516.685019771',
+        SoulBalance: '43233516.685019771',
         NativeBalance: '29700.997381034977',
         NativeValue: '6517.022546344076',
         SoulValue: '83117.17095503045',

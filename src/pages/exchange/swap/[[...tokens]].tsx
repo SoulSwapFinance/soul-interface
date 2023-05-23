@@ -419,19 +419,17 @@ const Swap = () => {
 
       {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <DoubleGlowShadowV2>
-          <div className={`grid p-1 mt-4 space-y-2 rounded rounded-2xl bg-dark-1000`}>
+          <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
             {/* <SwapLayoutCard> */}
-            {/* 
             <LuxorBanner 
               color={'purple'} 
               textColor={'white'} 
               chainId={chainId} />
-            */} 
-           <ManifestationBanner
+           {/* <ManifestationBanner
               chainId={chainId}
-           />
+           /> */}
             <div
-              className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
+              className={`w-full grid grid-cols-2 p-4 rounded-2xl border-2 border-purple`}
             >
               <div className={`w-full`}>
               <TokenStats />
@@ -443,14 +441,14 @@ const Swap = () => {
               />
             </div>
             {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
-            {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
+            {/* <div className={`my-2 border-2 border-[${getChainColor(chainId)}]`} /> */}
             <>
             <div className={`my-12`} />
             <SwapDropdown 
               inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]}
               />
             <div className={`my-12`} />
-              {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
+              {/* <div className={`my-2 border-2 border-[${getChainColor(chainId)}]`} /> */}
               {/* {useSwap && */}
               <SwapAssetPanel
                 spendFromWallet={true}
@@ -477,7 +475,7 @@ const Swap = () => {
             <div className="flex -mt-4 -mb-4 z-0 justify-between">
               <Button
                 size={'xs'}
-                className={classNames(`mx-[42%] rounded rounded-2xl bg-dark-1000 border border-2 border-[${getChainColor(chainId)}]`)}
+                className={classNames(`mx-[42%] rounded-2xl bg-dark-1000 border-2 border-[${getChainColor(chainId)}]`)}
                 onClick={() =>
                   handleSwitchTokens(currencies?.INPUT, currencies?.OUTPUT)
                 }
@@ -486,20 +484,20 @@ const Swap = () => {
                   alt={"arrow rounded square"}
                   width={18}
                   height={18}
-                  className={`rounded rounded-xl`}
+                  className={`rounded-xl`}
                   src={ArrowRoundedSquare}
                 />
               </Button>
               <Button
                 size={'xs'}
-                className={classNames(`rounded rounded-xl bg-dark-1000 border border-2 border-[${getChainColor(chainId)}]`)}
+                className={classNames(`rounded-xl bg-dark-1000 border-2 border-[${getChainColor(chainId)}]`)}
                 onClick={handleLimitSwap}
               >
                 <Image
                   alt={"Chevron Up Down Icon"}
                   width={18}
                   height={18}
-                  className={`rounded rounded-xl`}
+                  className={`rounded-xl`}
                   src={ChevronUpDown}
                 />
               </Button>
@@ -669,7 +667,7 @@ const Swap = () => {
                 // useSwap && 
                 [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                 <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
-                  <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
+                  <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded-lg bg-light-glass`}>
                     {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
                     {!isWrapped && 
                     <TokenChart
@@ -688,7 +686,7 @@ const Swap = () => {
                 // useSwap && 
                 [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                 <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
-                  <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded rounded-lg bg-light-glass`}>
+                  <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded-lg bg-light-glass`}>
                     {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
                     {/* <Pair inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
                     <iframe src={`https://soulswap-portfolio.vercel.app/portfolio/${account}`} height={600} />

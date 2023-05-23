@@ -6,6 +6,7 @@
     "analyze": "ANALYZE=true yarn build && serve .next -n",
     "dev": "next dev",
     "bdev": "next build && next dev",
+    "deploy": "vercel deploy",
     "inspect": "NODE_OPTIONS='--inspect' next dev",
     "build": "yarn lingui && next build",
     "retry-limit": "rm -rf node_modules/soulswap-limit-orders-react && rm -rf node_modules/soulswap-limit-orders-lib && yarn add soulswap-limit-orders-react",
