@@ -11,12 +11,13 @@ import DesktopBar from './DesktopBar'
 import LanguageMenu from './useLanguages'
 import BarsIcon from 'components/Icons/header/BarsIcon'
 import Web3Network from 'components/Web3Network'
+import TokenStats from 'components/TokenStats'
 
 const HEADER_HEIGHT = 64
 
 const Desktop = () => {
   const bar = useBar()
-  const { chainId } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const [open, setOpen] = useState(false)
 
   // const SOUL_ICON = 
@@ -134,14 +135,20 @@ const Desktop = () => {
             className={`relative top-1.5 right-2 p-0.5 mt-1 bg-dark-1000 border border-[${getChainColor(chainId)}] hover:border-2 hover:border-purple rounded rounded-2xl inline-block`}
           > */}
         <div
-          className={`grid grid-cols-2 gap-1 mt-6 bg-dark-1000 p-1.5 rounded-2xl`}
+          className={`grid grid-cols-3 gap-1 mt-6 bg-dark-1000 p-1.5 rounded-2xl`}
           // onClick={() => setOpen(true)}
         >
             <div
-              className={`border-2 border-dark-800 hover:border-purple rounded-2xl`}
+              className={`border-2 ${account ? `border-dark-800` : `border-avaxRed animate-pulse`} hover:border-purple rounded-2xl`}
             >
               <Web3Status />
             </div>
+              {/* TOKEN STATS */}
+            <div
+              className={`border-2 border-dark-800 hover:border-purple p-2 items-center rounded-2xl`}
+            >
+                <TokenStats />
+            </div> 
               {/* NETWORK ICON */}
             <div
               className={`border-2 border-dark-800 hover:border-purple p-2 rounded-2xl`}

@@ -367,21 +367,21 @@ export default function Add() {
         />
       </Head>
       <DoubleGlowShadowV2>
-      <div className={`grid p-1 mt-8 space-y-2 rounded rounded-2xl bg-dark-1000`}>
+      <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
           {/* <SwapLayoutCard> */}
           <LuxorBanner color={'purple'} textColor={'white'} chainId={chainId} />
           <div
-              className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
+              className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
             >
-              <div className={`w-full`}>
+              {/* <div className={`w-full`}>
               <TokenStats />
-              </div>
+            </div> */}
               <Image src={ADD_BANNER}
                 height={180}
-                width={1080}
-                alt={'add liquidity banner'}
+                width={720}
+                alt={'add banner'}
               />
-            </div>
+          </div>
           {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
           {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
           <div className={`my-12`} />
@@ -474,11 +474,19 @@ export default function Add() {
               <Button color="gradient" size="lg" disabled>
                 {i18n._(t`Unsupported Asset`)}
               </Button>
-            ) : !account ? (
-              <Web3Connect size="lg" color="gradient" className="w-full" />
-            ) : !isValid ? (
+            ) : 
+            !account ? (
+            //   <Web3Connect size="lg" color="gradient" className="w-full" />
+              <Button 
+                size="lg" color="avaxRed" className="w-full" 
+                disabled
+              >
+                { `Connect Wallet` }
+              </Button>
+            ) :
+             !isValid ? (
               <Button size="lg" color="gray" className="w-full" disabled>
-                {i18n._(t`Enter Amount`)}
+                {!account ? `Connect Wallet` : i18n._(t`Enter Amount`)}
               </Button>
             ) : (
               (approvalA === ApprovalState.NOT_APPROVED ||

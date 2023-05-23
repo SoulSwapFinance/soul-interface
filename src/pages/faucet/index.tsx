@@ -2,7 +2,7 @@ import Head from 'next/head'
 import React, { useCallback, useState } from 'react'
 import { t } from '@lingui/macro'
 import { formatNumberScale } from '../../functions'
-import { ButtonError } from '../../components/Button'
+import { Button, ButtonError } from '../../components/Button'
 import { AutoColumn } from '../../components/Column'
 import { AutoRow } from '../../components/Row'
 import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
@@ -90,7 +90,7 @@ export default function Faucet(): JSX.Element {
             <div className="p-4 mb-3 space-y-1 text-center">
               <Typography component="h1" variant="base">
                 Faucet Balance:{' '}
-                {formatNumberScale(tokenBalance[FAUCET_ADDRESS[chainId | 250]]?.toSignificant(4, undefined, 2) ?? 0, false)} FTM
+                {formatNumberScale(tokenBalance[FAUCET_ADDRESS[chainId | 250]]?.toSignificant(2) ?? 0, false)} FTM
               </Typography>
               <Typography component="h1" variant="base">
                 Faucet Address: {FAUCET_ADDRESS}
@@ -100,7 +100,13 @@ export default function Faucet(): JSX.Element {
             <AutoColumn gap={'md'}>
               <div className={'flex items-center w-full'}>
                 {!account ? (
-                  <Web3Connect size="lg" color="gradient" className="w-full" />
+                  // <Web3Connect size="lg" color="gradient" className="w-full" />
+                  <Button 
+                  size="lg" color="avaxRed" className="w-full" 
+                  disabled
+                >
+                  { `Connect Wallet` }
+                </Button>
                 ) : (
                   <ButtonError
                     className="font-bold text-light"

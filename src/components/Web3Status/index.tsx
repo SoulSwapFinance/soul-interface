@@ -19,7 +19,7 @@ import WalletIcon from 'components/Icons/header/WalletIcon'
 import Loader from '../Loader'
 import Web3Connect from '../Web3Connect'
 // import { WalletIcon } from 'components/Icon'
-import { getChainColor } from 'constants/chains'
+// import { getChainColor } from 'constants/chains'
 import { useUserInfo } from 'hooks/useAPI'
 
 // we want the latest one to come first, so return negative if a is after b
@@ -95,10 +95,29 @@ function newTransactionsFirst(a: TransactionDetails, b: TransactionDetails) {
 //   return null
 // }
 
+export function getWalletColor(votingPower) {
+  let walletColor = '#797470' // romanticGrey
+  votingPower >= 1_000_000
+    ? walletColor = "#806AEC" /// lightViolet (V)
+  : votingPower >= 500_000
+    ? walletColor = "#6E00FF" // brightIndigo (I)
+  : votingPower >= 250_000
+    ? walletColor = "#005AFF" // nokiaBlue (B)
+  : votingPower >= 100_000
+    ? walletColor = "#85FF00" // lime green (G)
+  : votingPower >= 25_000
+    ? walletColor = "#FF9E3D" // neonOrange (O)
+  : votingPower >= 1_000
+    ? walletColor = "#FF1A1A" // yelpRed (R)
+  : walletColor = "#797470" // romanticGrey
+
+  return walletColor
+}
+
 function Web3StatusInner() {
   const { i18n } = useLingui()
   const { account, chainId, connector, library } = useWeb3React()
-  const { ENSName } = useENSName(account ?? undefined)
+  // const { ENSName } = useENSName(account ?? undefined)
   const allTransactions = useAllTransactions()
 
   const sortedRecentTransactions = useMemo(() => {
@@ -113,31 +132,13 @@ function Web3StatusInner() {
 
   const votingPower = Number(userInfo?.votingPower)
   // console.log(votingPower)
-  function getWalletColor() {
-    let walletColor = '#797470' // romanticGrey
-    votingPower >= 1_000_000
-      ? walletColor = "#806AEC" /// lightViolet (V)
-    : votingPower >= 500_000
-      ? walletColor = "#6E00FF" // brightIndigo (I)
-    : votingPower >= 250_000
-      ? walletColor = "#005AFF" // nokiaBlue (B)
-    : votingPower >= 100_000
-      ? walletColor = "#85FF00" // lime green (G)
-    : votingPower >= 25_000
-      ? walletColor = "#FF9E3D" // neonOrange (O)
-    : votingPower >= 1_000
-      ? walletColor = "#FF1A1A" // yelpRed (R)
-    : walletColor = "#797470" // romanticGrey
-
-    return walletColor
-  }
 
   if (account) {
     return (
       <div
         id="web3-status-connected"
         // className= {`flex items-center justify-center px-3 py-2.5 md:space-x-2 rounded bg-dark-1000 border border-dark-900 hover:bg-dark-800 whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`}
-        className={`flex items-center rounded-2xl  p-2 
+        className={`flex items-center rounded-2xl p-2 
         bg-dark-1000 hover:bg-dark-900 whitespace-nowrap text-md justify-center font-bold cursor-pointer select-none pointer-events-auto`}
         // border border-[${getChainColor(chainId)}] 
         // className="flex items-center gap-2 px-3 py-2 text-sm rounded-lg bg-dark-1000 text-primary"
@@ -154,8 +155,7 @@ function Web3StatusInner() {
           // <div className="flex items-center gap-2">
           <div className=
           // {`flex items-center rounded rounded-xl border border-[${getChainColor(chainId)}] bg-dark-1000 h-[24px] w-[24px] hover:bg-dark-900 whitespace-nowrap text-md justify-center font-bold cursor-pointer select-none pointer-events-auto`}
-
-          "grid items-center grid-flow-col justify-center bg-dark-1000 h-[24px] w-[24px] text-sm pointer-events-auto auto-cols-max text-secondary"
+          {`grid items-center grid-flow-col justify-center bg-dark-1000 h-[24px] w-[24px] text-sm pointer-events-auto auto-cols-max text-secondary`}
           >
             {/* <div>{ENSName || shortenAddress(account)} </div> */}
             {/* <WalletIcon 
@@ -165,7 +165,7 @@ function Web3StatusInner() {
               // className={`text-[${getWalletColor()}]`}
             /> */}
             <WalletIcon
-                fillPrimary={`${getWalletColor()}`}
+                fillPrimary={`${getWalletColor(votingPower ?? 0)}`}
                 fillSecondary={`#FFFFFF`}
                 className={'w-7 h-7 -mt-0.5 ml-1'}
             />
@@ -187,7 +187,7 @@ function Web3StatusInner() {
     )
   } else {
     return (
-      <Web3Connect className="!bg-dark-900 bg-gradient-to-r from-pink/80 hover:from-pink to-purple/80 hover:to-purple !text-white h-[38px]" />
+        <Web3Connect className="bg-avaxRed hover:to-purple !text-white h-[38px]" />
     )
   }
 }

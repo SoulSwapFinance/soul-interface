@@ -120,24 +120,24 @@ export default function Pool() {
         /> */}
 
           <div className="p-4 space-y-2 bg-dark-900 rounded bg-dark-1200">
-            <div className="p-4 mb-00 space-y-3">
+            {/* <div className="p-4 mb-00 space-y-3"> */}
               {/* <div className="text-center">
                 <Typography component="h1" variant="h2">
                   {i18n._(t`Liquidity Positions`)}
                 </Typography>
               </div> */}
             <div
-              className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
+              // className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >
-              <div className={`w-full`}>
-              <TokenStats />
-              </div>
-              <Image src={POOL_BANNER}
+          {/* <div
+              className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
+            > */}
+              {/* <Image src={POOL_BANNER}
                 height={180}
-                width={1080}
+                width={720}
                 alt={'pool banner'}
-              />
-            </div>
+              /> */}
+          {/* </div> */}
             </div>
             <div className="flex mb-4 items-center justify-center">
               <Button variant="filled" color="purple" size="lg">

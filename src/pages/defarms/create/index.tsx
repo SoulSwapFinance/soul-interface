@@ -264,7 +264,7 @@ const CreateFarm = () => {
         <Container maxWidth="full" className="space-y-6">
           {/* START: DAILY REWARD INPUT */}
           <Typography
-            className={`font-bold blink text-xl text-center mb-4 border border-2 ${rewardSet && assetSet ? `border-purple` : `border-neonGreen`} m-2 p-2 rounded rounded-2xl`}
+            className={`font-bold blink text-xl text-center mb-4 border-2 ${rewardSet && assetSet ? `border-purple` : `border-neonGreen`} m-2 p-2 rounded rounded-2xl`}
           >
             {`${!assetSet 
                 ? `Select Reward Asset` 

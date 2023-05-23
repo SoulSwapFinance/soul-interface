@@ -77,7 +77,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               }`}
           >
             <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-              {i18n._(t`+/-`)}
+              {i18n._(t`Pool`)}
             </Typography>
           </NavLink>
         }

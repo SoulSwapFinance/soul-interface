@@ -37,8 +37,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const isPool = isRemove || isAdd
   const isBridge = router.pathname.startsWith('/bridge')
 
-  const isLimit = router.pathname.startsWith('/limit')
-    || router.pathname.startsWith('/exchange/limit')
+  // const isLimit = router.pathname.startsWith('/limit')
+  //   || router.pathname.startsWith('/exchange/limit')
 
   const isAggregator = asPath.startsWith('/aggregator')
     || asPath.startsWith('/exchange/aggregator')
@@ -49,12 +49,12 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const isExchange = router.pathname.startsWith('/swap')
     || router.pathname.startsWith('/exchange/swap')
 
-  const useSettings = isExchange || isLimit || isPool
+  // const useSettings = isExchange || isLimit || isPool
 
   const soulEnabled = [ChainId.FANTOM, ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId)
 
   const activeStyle = `border border-[${getChainColor(chainId)}] rounded`
-  const style = `text-secondary bg-white rounded rounded-xl border border-[${getChainColor(chainId)}]`
+  const style = `text-secondary bg-white border border-[${getChainColor(chainId)}]`
   const swapStyle = isExchange ? activeStyle : style
   const poolStyle = isPool ? activeStyle : style
   const ecoStyle = isAggregator ? activeStyle : style
@@ -62,8 +62,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const crossStyle = isCross ? activeStyle : style
 
   return (
-    <div className={`flex items-center justify-center gap-2 border border-${getChainColorCode(chainId)} rounded rounded-2xl p-1`}>
-      <div className="flex gap-2 mx-4">
+    <div className={`flex items-center justify-center gap-4 border-2 border-dark-800 rounded-lg`}>
+      <div className="flex gap-4 sm:gap-6 mr-8 sm:mr-0">
         {/* {featureEnabled(Feature.LIQUIDITY, chainId) && */}
         <NavLink
           className={classNames(
@@ -114,7 +114,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             <div
               className={classNames(
                 `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
-                isPool && `border border-2 border-[${getChainColor(chainId)}]`)
+                isPool && `border-2 border-[${getChainColor(chainId)}]`)
               }
             // onClick={reveal}
             // onMouseEnter={reveal}
@@ -127,7 +127,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               <Typography
                 className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
               >
-                {`+/-`}
+                {`Pool`}
               </Typography>
             </div>
           </NavLink>

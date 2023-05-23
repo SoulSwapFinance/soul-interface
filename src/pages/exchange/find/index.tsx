@@ -29,6 +29,7 @@ import SwapDropdown from 'features/swap/SwapDropdown'
 import { SwapLayoutCard } from 'layouts/SwapLayout'
 import { useRouter } from 'next/router'
 import { getChainColor, getChainColorCode } from 'constants/chains'
+import { Button } from 'components/Button'
 // import SoulLogo from '../../../components/SoulLogo'
 
 enum Fields {
@@ -179,8 +180,15 @@ export default function PoolFinder() {
                 </div>
               ) : null
             ) : !account ? (
-              <Web3Connect className="w-full" size="lg" color="blue" />
-            ) : (
+              // <Web3Connect className="w-full" size="lg" color="blue" />
+              <Button 
+              size="lg" color="avaxRed" className="w-full" 
+              disabled
+            >
+              { `Connect Wallet` }
+            </Button>
+            ) : 
+            (
               prerequisiteMessage
             )}
           </SwapLayoutCard>

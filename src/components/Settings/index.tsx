@@ -47,15 +47,15 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
   const COG_ICON = <CogIcon
     fillPrimary={open ? getChainColor(chainId) : WHITE}
     fillSecondary={open ? WHITE : getChainColor(chainId)}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-7 h-7` : `hidden`)}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded-md w-7 h-7` : `hidden`)}
   />
   
   return (
     <div className="relative flex" ref={node}>
       <div
         className={
-          `flex items-center justify-center 
-          w-6 h-6 rounded cursor-pointer sm:-mt-1.5
+          `flex items-center justify-center mr-3
+          w-5 h-5 sm:w-6 sm:h-6 rounded cursor-pointer sm:absolute sm:top-12 sm:mt-0.5 sm:right-1.5
           `
         }
         onClick={toggle}

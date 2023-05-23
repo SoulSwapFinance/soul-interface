@@ -22,7 +22,7 @@ import { SubmitButton } from 'features/autostake/Styles'
 import Image from 'next/image'
 import STAKE_BANNER from 'assets/branding/stake-banner.png'
 // import { getChainColor } from 'constants/chains'
-import TokenStats from 'components/TokenStats'
+// import TokenStats from 'components/TokenStats'
 import { Feature } from 'enums'
 
 
@@ -176,23 +176,18 @@ export default function AutoStake() {
   }
 
   return (
-    <Container id="autostake-page" className={`md:py-8 lg:py-12 p-1 mt-4 rounded rounded-2xl`}>
+    <Container id="autostake-page" className={`p-0.5 mt-4 rounded-2xl bg-dark-900`}>
       <Head>
         <title>AutoStake | Soul</title>
         <meta key="description" name="description" />
       </Head>
-      <div
-              className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
-            >
-              <div className={`w-full`}>
-              <TokenStats />
-              </div>
+      <div className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`} >
               <Image src={STAKE_BANNER}
                 height={180}
-                width={1080}
-                alt={'stake banner'}
+                width={720}
+                alt={'autostake banner'}
               />
-            </div>
+          </div>
       <div className={`flex justify-center m-1 p-1`}>
       <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/dashboard'}>
@@ -376,7 +371,7 @@ export default function AutoStake() {
                   {i18n._(t`Until Salvation`)}
                 </Typography>
                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                  {remainingHours > 0 ? remainingHours.toFixed(0) : 0} hours
+                  {Number(remainingHours) > 0 ? remainingHours.toFixed(0) : 0} hours
                 </Typography>
               </div>
 

@@ -344,18 +344,15 @@ export default function Exchange() {
               textColor={'white'} 
               color={'purple'} 
             />
-            <div
-              className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
+          <div
+              className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
             >
-              <div className={`w-full`}>
-              <TokenStats />
-              </div>
               <Image src={CROSS_BANNER}
                 height={180}
-                width={1080}
-                alt={'crosschain swaps banner'}
+                width={720}
+                alt={'crosschain banner'}
               />
-            </div>
+          </div>
             {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
             {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
             <div className={`my-12`} />

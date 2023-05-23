@@ -6,7 +6,7 @@ import Card from '../../../components/Card'
 import Typography from '../../../components/Typography'
 import { classNames, formatNumber, formatPercent, tryParseAmount } from '../../../functions'
 import Image from '../../../components/Image'
-import { ButtonConfirmed, ButtonError } from '../../../components/Button'
+import { Button, ButtonConfirmed, ButtonError } from '../../../components/Button'
 import { LAUNCHPAD_PROJECTS, PROJECT_STATUS } from '../../../constants/launchpad'
 import Back from '../../../components/Back'
 import NumericalInput from '../../../components/NumericalInput'
@@ -262,7 +262,13 @@ const Pool = ({ project, poolInfo, launchpadInfo }) => {
               </div>
               <div className={'flex items-center w-full'}>
                 {!account ? (
-                  <Web3Connect size="lg" color="gradient" className="w-full" />
+                  // <Web3Connect size="lg" color="gradient" className="w-full" />
+                  <Button 
+                  size="lg" color="avaxRed" className="w-full" 
+                  disabled
+                >
+                  { `Connect Wallet` }
+                </Button>
                 ) : !allInfoSubmitted ? (
                   <ButtonError className="font-bold" style={{ width: '100%' }} disabled={!allInfoSubmitted}>
                     {errorMessage}
@@ -370,7 +376,13 @@ const Pool = ({ project, poolInfo, launchpadInfo }) => {
                 </div>
                 <div className={'flex items-center w-full'}>
                   {!account ? (
-                    <Web3Connect size="lg" color="gradient" className="w-full" />
+                    // <Web3Connect size="lg" color="gradient" className="w-full" />
+                    <Button 
+                    size="lg" color="avaxRed" className="w-full" 
+                    disabled
+                  >
+                    { `Connect Wallet` }
+                  </Button>
                   ) : !unstakeAllInfoSubmitted ? (
                     <ButtonError className="font-bold" style={{ width: '100%' }} disabled={!unstakeAllInfoSubmitted}>
                       {unstakeErrorMessage}
@@ -596,7 +608,13 @@ const UserInfo = ({ project, pools, launchpadInfo }) => {
         </Typography>
       </div>
       {!account ? (
-        <Web3Connect size="lg" color="gradient" className="w-full" />
+        // <Web3Connect size="lg" color="gradient" className="w-full" />
+        <Button 
+        size="lg" color="avaxRed" className="w-full" 
+        disabled
+      >
+        { `Connect Wallet` }
+      </Button>
       ) : (
         <>
           <div className={`flex flex-col  space-x-10 mb-4`}>
