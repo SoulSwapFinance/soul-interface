@@ -246,7 +246,7 @@ export const ManifestationBanner: FC<IFeature> = ({ chainId }) => (
 
 
 export const LendBanner: FC<IFeature> = ({ chainId }) => (
-  <div className={classNames(featureEnabled(Features.UNDERWORLD, chainId) ? 'relative items-center w-full mt-2' : `hidden`}>
+  <div className={featureEnabled(Features.UNDERWORLD, chainId) ? 'relative items-center w-full mt-2' : `hidden`}>
     <div className="w-full">
       <div className="text-center">
         <p className="font-medium text-center text-white">
