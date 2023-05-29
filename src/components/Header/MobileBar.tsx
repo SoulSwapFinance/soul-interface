@@ -25,8 +25,8 @@ import SwapIcon from 'components/Icons/exchange/SwapIcon'
 import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
 import WalletIcon from 'components/Icons/header/WalletIcon'
 // import NftIcon from 'components/Icons/mobile/NftIcon'
-// import { featureEnabled } from 'functions/feature'
-// import { Feature } from 'enums/Feature'
+import { featureEnabled } from 'functions/feature'
+import { Feature } from 'enums/Feature'
 import ChartIcon from 'components/Icons/exchange/ChartIcon'
 import SunMoonIcon from 'components/Icons/header/SunMoonIcon'
 // import Web3Network from 'components/Web3Network'
@@ -262,6 +262,7 @@ const MobileBar = () => {
                                 className={'w-7 h-7'}
                             />
                         </div> */}
+                        {featureEnabled(Feature.LUXOR, chainId) &&
                         <div
                             className={classNames(
                                 `hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
@@ -275,6 +276,7 @@ const MobileBar = () => {
                                 className={'w-7 h-7'}
                             />
                         </div>
+                        }
                         <div
                             className={classNames(
                                 `hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
