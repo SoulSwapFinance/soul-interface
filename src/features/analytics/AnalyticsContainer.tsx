@@ -8,10 +8,10 @@ import Container from '../../components/Container'
 export default function AnalyticsContainer({ children }): JSX.Element {
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>Soul Analytics | Soul</title>
         <meta name="description" content="SoulSwap Liquidity Analytics" />
-      </Head>
+      </Head> */}
       {/* <AnalyticsHeaderNew /> */}
       <Container
         id="analytics"

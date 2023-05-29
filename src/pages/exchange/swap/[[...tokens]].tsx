@@ -46,6 +46,7 @@ import SWAP_BANNER from 'assets/branding/swap-banner.png'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 // import TokenStats from 'components/TokenStats'
 import { currencyId } from 'functions'
+import { NextSeo } from 'next-seo'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -380,6 +381,7 @@ const Swap = () => {
 
   return (
     <>
+      <NextSeo title={`Swap | SoulSwap`} />
       <ConfirmSwapModal
         isOpen={showConfirm}
         trade={trade}

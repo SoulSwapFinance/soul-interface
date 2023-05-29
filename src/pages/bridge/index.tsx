@@ -44,6 +44,7 @@ import BridgeTokenList from "features/bridge/BridgeTokenList"
 import { ContentBox, OverlayButton, Typo1, Typo2 } from "components"
 import TokenStats from "components/TokenStats"
 import { ChainId } from "sdk"
+import { NextSeo } from "next-seo"
 
 const ChainSelection: React.FC<any> = ({
   setTokenList,
@@ -415,6 +416,7 @@ const Bridge: React.FC<any> = () => {
 
   return (
     <DoubleGlowShadowV2>
+      <NextSeo title={`Bridge | SoulSwap`} />
       {/* <SwapLayoutCard> */}
       <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
         {/* <DonateBanner chainId={chainId} /> */}

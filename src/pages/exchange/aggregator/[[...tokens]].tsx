@@ -33,6 +33,7 @@ import { t } from '@lingui/macro'
 import Image from 'next/image'
 import META_BANNER from 'assets/branding/meta-banner.png'
 import { DonateBanner, LuxorBanner } from 'components/Banner'
+import { NextSeo } from 'next-seo'
 
 // import { groupBy, mapValues, merge, uniqBy } from 'lodash'
 // import { useFeeData } from 'wagmi'
@@ -363,6 +364,7 @@ const Aggregator = ({ }) => {
 
 	return (
 		<DoubleGlowShadowV2>
+			<NextSeo title={`Meta | SoulSwap`} />
           	<div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
 				{/* <SwapLayoutCard> */}
 				{/* <DonateBanner chainId={chainId} /> */}

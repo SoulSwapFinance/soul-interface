@@ -23,11 +23,11 @@ import useBar from './useBar'
 // import HomeIcon from 'components/Icons/mobile/HomeIcon'
 import SwapIcon from 'components/Icons/exchange/SwapIcon'
 import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
-import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
 import WalletIcon from 'components/Icons/header/WalletIcon'
-import NftIcon from 'components/Icons/mobile/NftIcon'
-import { featureEnabled } from 'functions/feature'
-import { Feature } from 'enums/Feature'
+// import NftIcon from 'components/Icons/mobile/NftIcon'
+// import { featureEnabled } from 'functions/feature'
+// import { Feature } from 'enums/Feature'
+import ChartIcon from 'components/Icons/exchange/ChartIcon'
 // import Web3Network from 'components/Web3Network'
 // import Web3Status from 'components/Web3Status'
 // import ChartIcon from 'components/Icons/exchange/ChartIcon'
@@ -61,15 +61,15 @@ const MobileBar = () => {
     const walletRoute = useCallback(() => {
         router.push(`/portfolio`)
     }, [])
-    const lendRoute = useCallback(() => {
-        router.push(`/lend`)
+    const dataRoute = useCallback(() => {
+        router.push(`/analytics`)
     }, [])
     const farmRoute = useCallback(() => {
         router.push(`/farm`)
     }, [])
-    const nftRoute = useCallback(() => {
-        router.push(`/marketplace`)
-    }, [])
+    // const nftRoute = useCallback(() => {
+    //     router.push(`/marketplace`)
+    // }, [])
     // const dataRoute = useCallback(() => {
     //     router.push(`/analytics`)
     // }, [])
@@ -85,7 +85,7 @@ const MobileBar = () => {
     const nftPage = router.pathname.startsWith('/marketplace') || router.pathname.startsWith('/marketplace/collections')
     const farmPage = router.pathname.startsWith('/farm') || router.pathname.startsWith('/summoner')
     const bondPage = router.pathname.startsWith('/bond') || router.pathname.startsWith('/bonds')
-    const lendPage = router.pathname.startsWith('/lend') || router.pathname.startsWith('/borrow')
+    const dataPage = router.pathname.startsWith('/analytics')
     // const dataPage = router.pathname.startsWith('/analytics')
     // const luxorPage = router.pathname.startsWith('/luxor')
 
@@ -112,7 +112,7 @@ const MobileBar = () => {
     const isNFT = nftPage
     // const isLuxor = luxorPage
     const isWallet = portfolioPage
-    const isLend = lendPage
+    const isData = dataPage
     const isEarn = farmPage || bondPage
     // const isLearn = learnPage
     // const isData = dataPage || dataPage
@@ -211,12 +211,12 @@ const MobileBar = () => {
                         <div
                             className={classNames(
                                 `hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
-                                isLend && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
-                            onClick={lendRoute}
+                                isData && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
+                            onClick={dataRoute}
                         >
-                            <LendSkullIcon
-                                fillPrimary={isLend ? `${getChainColor(chainId)}` : `#FFFFFF`}
-                                fillSecondary={isLend ? `#FFFFFF` : `${getChainColor(chainId)}`}
+                            <ChartIcon
+                                fillPrimary={isData ? `${getChainColor(chainId)}` : `#FFFFFF`}
+                                fillSecondary={isData ? `#FFFFFF` : `${getChainColor(chainId)}`}
                                 className={'w-7 h-7'}
                             />
                         </div>
@@ -232,7 +232,7 @@ const MobileBar = () => {
                                 className={'w-7 h-7'}
                             />
                         </div> */}
-                        {featureEnabled(Feature.NFT, chainId) &&
+                        {/* {featureEnabled(Feature.NFT, chainId) &&
                             <div
                                 className={classNames(
                                     `hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
@@ -245,7 +245,7 @@ const MobileBar = () => {
                                     className={'w-7 h-7'}
                                 />
                             </div>
-                        }
+                        } */}
                         {/* <div
                             className={classNames(
                                 `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
@@ -286,7 +286,7 @@ const MobileBar = () => {
                         {/* <div
                             className={classNames(
                                 `flex w-[36px] h-[36px] justify-center rounded p-0.5`,)}
-                        // isLend && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
+                        // isData && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
                         >
                             <More />
                         </div> */}

@@ -138,7 +138,7 @@ export const BondList = () => {
         </Button>
         }
       </div>
-      <Typography className="text-2xl bg-dark-1000 mb-2 rounded rounded-2xl m-1 p-4 border border-purple font-bold text-center">SoulSwap Pools</Typography>
+      <Typography className="text-2xl bg-dark-1000 mb-2 rounded-2xl m-1 p-4 border border-purple font-bold text-center">SoulSwap Bonds</Typography>
       <BondKey />
           <>{chainId == ChainId.FANTOM ? ftmList : avaxList}</>
       <div>

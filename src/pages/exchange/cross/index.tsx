@@ -48,6 +48,7 @@ import { DonateBanner, LuxorBanner } from "components/Banner";
 // import { BalancePromiseToUnit } from "pages/bridge";
 import CROSS_BANNER from 'assets/branding/cross-banner.png'
 import TokenStats from "components/TokenStats";
+import { NextSeo } from "next-seo";
 
 export default function Exchange() {
   const { account, chainId } = useActiveWeb3React()
@@ -336,6 +337,7 @@ export default function Exchange() {
       }
 
       <DoubleGlowShadowV2>
+      <NextSeo title={`xChain | SoulSwap`} />
       <div className={`grid p-1 mt-8 space-y-2 rounded rounded-2xl bg-dark-1000`}>
         {/* <SwapLayoutCard> */}
             {/* <DonateBanner chainId={chainId} /> */}
