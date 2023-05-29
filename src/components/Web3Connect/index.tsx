@@ -36,7 +36,7 @@ export default function Web3Connect({ color = 'purple', size = 'sm', className =
     // isDesktop ?
     <div 
       onClick={toggleWalletModal}
-      className={`flex ml-2 mt-1.5`}
+      className={`flex ml-3 mt-2`}
     >
       <WalletIcon
         fillPrimary={`#E84142`} // avaxRed
