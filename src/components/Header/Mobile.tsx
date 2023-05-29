@@ -308,21 +308,15 @@ const Mobile = () => {
             >
               <Web3Status />
             </div>
-              {/* TOKEN STATS */}
-            {/* <div
-              className={`border-2 border-dark-800 hover:border-purple p-2 items-center rounded-2xl`}
-            >
-                <TokenStats />
-            </div>  */}
               {/* NETWORK ICON */}
             <div
-              className={`border-2 border-dark-800 hover:border-purple p-2 rounded-2xl`}
+              className={`border-2 ${chainId ? `border-[${getChainColor(chainId)}]` : `border-dark-800`} hover:border-purple p-2 rounded-2xl`}
             >
                 <Web3Network />
             </div>
             {/* TOKEN STATS */}
           <div
-            className={`border-2 ${chainId ? `border-[${getChainColor(chainId)}]` : `border-dark-800`} hover:border-purple rounded-2xl`}
+            className={`border-2 border-dark-800 hover:border-purple rounded-2xl`}
             >
             <TokenStats />
           </div>
