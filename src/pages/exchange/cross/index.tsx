@@ -23,12 +23,12 @@ import Typography from "components/Typography";
 import { formatNumber, formatPercent } from "functions/format";
 import { classNames } from "functions/styling";
 import InputCurrencyBox from "components/Bridge/InputCurrencyBox";
-import Container from "components/Container";
+// import Container from "components/Container";
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
 // import SwapHeader from "features/swap/SwapHeader";
 import SwapDropdown from "features/swap/SwapDropdown"
 
-import { SwapLayoutCard } from "layouts/SwapLayout";
+// import { SwapLayoutCard } from "layouts/SwapLayout";
 // import Modal from "components/DefaultModal";
 // import { useETHBalances } from "state/wallet/hooks";
 import NetworkModal from "modals/NetworkModal";
@@ -44,11 +44,12 @@ import TokenSelect from "features/cross/components/TokenSelect";
 import NavLink from "components/NavLink";
 // import { SubmitButton } from "features/summoner/Styles";
 import { getChainColor, getChainColorCode } from "constants/chains";
-import { DonateBanner, LuxorBanner } from "components/Banner";
+// import { DonateBanner, LuxorBanner } from "components/Banner";
 // import { BalancePromiseToUnit } from "pages/bridge";
-import CROSS_BANNER from 'assets/branding/cross-banner.png'
-import TokenStats from "components/TokenStats";
+// import CROSS_BANNER from 'assets/branding/cross-banner.png'
+// import TokenStats from "components/TokenStats";
 import { NextSeo } from "next-seo";
+import { LendBanner } from "components/Banner";
 
 export default function Exchange() {
   const { account, chainId } = useActiveWeb3React()
@@ -338,26 +339,14 @@ export default function Exchange() {
 
       <DoubleGlowShadowV2>
       <NextSeo title={`xChain | SoulSwap`} />
-      <div className={`grid p-1 mt-8 space-y-2 rounded rounded-2xl bg-dark-1000`}>
-        {/* <SwapLayoutCard> */}
-            {/* <DonateBanner chainId={chainId} /> */}
-            <LuxorBanner 
-              chainId={chainId} 
-              textColor={'white'} 
-              color={'purple'} 
-            />
-          <div
-              className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
-            >
-              <Image src={CROSS_BANNER}
-                height={180}
-                width={720}
-                alt={'crosschain banner'}
-              />
-          </div>
+      <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
+            <LendBanner 
+              // color={'purple'} 
+              // textColor={'white'} 
+              chainId={chainId} />
             {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
             {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
-            <div className={`my-12`} />
+            {/* <div className={`my-12`} /> */}
             <SwapDropdown />
             {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
             <div className={`my-12`} />

@@ -51,7 +51,7 @@ import { getChainColor, getChainColorCode } from 'constants/chains'
 // import { SwapLayoutCard } from 'layouts/SwapLayout'
 // import { SubmitButton } from 'features/summoner/Styles'
 // import SoulLogo from 'components/SoulLogo'
-import { DonateBanner, LuxorBanner } from 'components/Banner'
+import { DonateBanner, LendBanner, LuxorBanner } from 'components/Banner'
 
 import Image from 'next/image'
 import ADD_BANNER from 'assets/branding/add-banner.png'
@@ -368,23 +368,10 @@ export default function Add() {
       </Head>
       <DoubleGlowShadowV2>
       <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-          {/* <SwapLayoutCard> */}
-          <LuxorBanner color={'purple'} textColor={'white'} chainId={chainId} />
-          <div
-              className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
-            >
-              {/* <div className={`w-full`}>
-              <TokenStats />
-            </div> */}
-              <Image src={ADD_BANNER}
-                height={180}
-                width={720}
-                alt={'add banner'}
-              />
-          </div>
-          {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
-          {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
-          <div className={`my-12`} />
+        <LendBanner 
+            // color={'purple'} 
+            // textColor={'white'} 
+        chainId={chainId} />
           <SwapDropdown
             inputCurrency={currencies[Field.CURRENCY_A]}
             outputCurrency={currencies[Field.CURRENCY_B]}

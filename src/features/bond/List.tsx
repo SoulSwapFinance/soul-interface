@@ -14,7 +14,7 @@ import { ChainId } from 'sdk'
 // import { getChainColorCode } from 'constants/chains'
 // import { classNames } from 'functions'
 import Image from 'next/image'
-import MINT_BANNER from 'assets/branding/mint-banner.png'
+// import MINT_BANNER from 'assets/branding/mint-banner.png'
 import ExternalLink from 'components/ExternalLink'
 // import { SubmitButton } from 'features/bond/Styles'
 // import { classNames } from 'functions/styling'
@@ -95,7 +95,7 @@ export const BondList = () => {
             </ExternalLink>
             </Button>
           {/* </div> */}
-          <div
+          {/* <div
               className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
             >
               <Image src={MINT_BANNER}
@@ -103,7 +103,7 @@ export const BondList = () => {
                 width={720}
                 alt={'mint banner'}
               />
-          </div>
+          </div> */}
           <div className={`flex justify-center m-1 p-1`}>
         <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/dashboard'}>

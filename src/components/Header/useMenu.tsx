@@ -99,31 +99,31 @@ const useMenu: UseMenu = () => {
   // const isExchange = swapPage || crossPage
   const iconStyle = `p-2 rounded bg-dark-900`
 
-    const SWAP_ICON = 
-    <div className={iconStyle}>
-      <SwapIcon
-      fillPrimary={open ? WHITE : getChainColor(chainId)}
-      fillSecondary={open ? getChainColor(chainId) : WHITE}
-      className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-8 h-6` : `hidden`)}
-      />
-    </div>
+    // const SWAP_ICON = 
+    // <div className={iconStyle}>
+    //   <SwapIcon
+    //   fillPrimary={open ? WHITE : getChainColor(chainId)}
+    //   fillSecondary={open ? getChainColor(chainId) : WHITE}
+    //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-md w-8 h-6` : `hidden`)}
+    //   />
+    // </div>
 
-  const SUN_ICON = 
-  <div className={iconStyle}>
-    <SunMoonIcon
-    fillPrimary={open ? WHITE : chainColor }
-    fillSecondary={open ? chainColor : WHITE }
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
-    />
-  </div>
-  const EARN_ICON = 
-  <div className={iconStyle}>
-    <SeedlingIcon
-    fillPrimary={open ? WHITE : chainColor }
-    fillSecondary={open ? chainColor : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
-  />
-  </div>
+  // const SUN_ICON = 
+  // <div className={iconStyle}>
+  //   <SunMoonIcon
+  //   fillPrimary={open ? WHITE : chainColor }
+  //   fillSecondary={open ? chainColor : WHITE }
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
+  //   />
+  // </div>
+  // const EARN_ICON = 
+  // <div className={iconStyle}>
+  //   <SeedlingIcon
+  //   fillPrimary={open ? WHITE : chainColor }
+  //   fillSecondary={open ? chainColor : WHITE}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
+  // />
+  // </div>
 
   const POOL_ICON = 
   <div className={iconStyle}>
