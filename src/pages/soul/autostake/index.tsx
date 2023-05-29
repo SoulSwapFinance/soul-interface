@@ -176,15 +176,15 @@ export default function AutoStake() {
   }
 
   return (
-    <Container id="autostake-page" className={`p-0.5 mt-4 rounded-2xl bg-dark-900`}>
+    <Container id="autostake-page" className={`p-0.5 mt-6 sm:mt-12 rounded-2xl bg-dark-900`}>
       <Head>
         <title>AutoStake | Soul</title>
         <meta key="description" name="description" />
       </Head>
       <div className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`} >
               <Image src={STAKE_BANNER}
-                height={180}
-                width={720}
+                height={96}
+                width={480}
                 alt={'autostake banner'}
               />
           </div>
@@ -226,19 +226,19 @@ export default function AutoStake() {
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
           <Tab.Group>
             <Tab.List className="flex items-center justify-center mb-1 space-x-2 p-3px text-white">
-              <div className="grid grid-cols-2 w-[95%] rounded-md p-2px bg-dark-900">
+              <div className="grid grid-cols-2 w-[95%] p-2px border rounded-lg border-dark-800 bg-dark-800">
                 <Tab
                   className={({ selected }) =>
-                    `${selected ? 'border-b-2 border-accent p-2 border-[#b383ff] text-white' : 'bg-dark-900 text-white'
-                    } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-purple`
+                    `${selected ? 'border-2 border-accent rounded-lg p-2 bg-purple border-purple text-white' : 'bg-dark-800 text-white'
+                    } flex items-center justify-center rounded-lg px-3 py-1.5 semi-bold font-semibold hover:border-2 hover:border-purple`
                   }
                 >
                   {i18n._(t`Deposit`)}
                 </Tab>
                 <Tab
                   className={({ selected }) =>
-                    `${selected ? 'border-b-2 border-accent p-2 border-[#b383ff] text-white' : 'bg-dark-900 text-white'
-                    } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-purple`
+                  `${selected ? 'border-2 border-accent rounded-lg p-2 bg-purple border-purple text-white' : 'bg-dark-800 text-white'
+                } flex items-center justify-center rounded-lg px-3 py-1.5 semi-bold font-semibold hover:border-2 hover:border-purple`
                   }
                 >
                   {i18n._(t`Withdraw`)}

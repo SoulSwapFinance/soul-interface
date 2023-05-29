@@ -44,18 +44,18 @@ export const InactiveAvalanchePools = [
     token0Address: WETH_ADDRESS[ChainId.AVALANCHE],
     token1Address: USDC_ADDRESS[ChainId.AVALANCHE],
   },
-  {
-    // LENDING
-    pid: 11,
-    type: 'lend',
-    decimals: 8,
-    token0Symbol: 'BTC', // EXEMPT //
-    token1Symbol: 'USDC',
-    lpSymbol: 'USDC-BTC', // EXEMPT //
-    lpAddress: '0x142c9eE960bB6AD872f22712C4b129783999c35E',
-    token0Address: WBTC_ADDRESS[ChainId.AVALANCHE],
-    token1Address: USDC_ADDRESS[ChainId.AVALANCHE],
-  }
+  // {
+  //   // LENDING
+  //   pid: 11,
+  //   type: 'lend',
+  //   decimals: 8,
+  //   token0Symbol: 'BTC', // EXEMPT //
+  //   token1Symbol: 'USDC',
+  //   lpSymbol: 'USDC-BTC', // EXEMPT //
+  //   lpAddress: '0x142c9eE960bB6AD872f22712C4b129783999c35E',
+  //   token0Address: WBTC_ADDRESS[ChainId.AVALANCHE],
+  //   token1Address: USDC_ADDRESS[ChainId.AVALANCHE],
+  // }
 ]
 
 export const AvalanchePools = [
@@ -309,17 +309,17 @@ export const InactiveFantomPools = [
     token1Address: WNATIVE_ADDRESS[ChainId.FANTOM],
   },
   // LENDING MARKET //
-  { // 220
-    pid: 21,
-    type: 'lend',
-    decimals: 18,
-    token0Symbol: 'ETH', // EXEMPT //
-    token1Symbol: 'USDC',
-    lpSymbol: 'USDC-ETH', // EXEMPT //
-    lpAddress: '0x0a55Eb040C5183c5784A03F34bCEb3963f52b5a0',
-    token0Address: WETH_ADDRESS[ChainId.FANTOM],
-    token1Address: USDC_ADDRESS[ChainId.FANTOM],
-  },
+  // { // 220
+  //   pid: 21,
+  //   type: 'lend',
+  //   decimals: 18,
+  //   token0Symbol: 'ETH', // EXEMPT //
+  //   token1Symbol: 'USDC',
+  //   lpSymbol: 'USDC-ETH', // EXEMPT //
+  //   lpAddress: '0x0a55Eb040C5183c5784A03F34bCEb3963f52b5a0',
+  //   token0Address: WETH_ADDRESS[ChainId.FANTOM],
+  //   token1Address: USDC_ADDRESS[ChainId.FANTOM],
+  // },
    // LENDING MARKET //
    { // 220
     pid: 22,
@@ -333,21 +333,21 @@ export const InactiveFantomPools = [
     token1Address: USDC_ADDRESS[ChainId.FANTOM],
   },
    // LENDING MARKET //
-  {
-    pid: 23,
-    type: 'lend',
-    decimals: 18,
-    token0Symbol: 'BNB', // EXEMPT //
-    token1Symbol: 'USDC',
-    lpSymbol: 'USDC-BNB', // EXEMPT //
-    lpAddress: '0x9e17f37d807B211306C7354605FAAa308c3683EB',
-    token0Address: BNB_ADDRESS[ChainId.FANTOM],
-    token1Address: USDC_ADDRESS[ChainId.FANTOM],
-  },
+  // {
+  //   pid: 23,
+  //   type: 'lend',
+  //   decimals: 18,
+  //   token0Symbol: 'BNB', // EXEMPT //
+  //   token1Symbol: 'USDC',
+  //   lpSymbol: 'USDC-BNB', // EXEMPT //
+  //   lpAddress: '0x9e17f37d807B211306C7354605FAAa308c3683EB',
+  //   token0Address: BNB_ADDRESS[ChainId.FANTOM],
+  //   token1Address: USDC_ADDRESS[ChainId.FANTOM],
+  // },
 ]
 
 export const FantomPools = [
-  { // 1,200
+  { // 1,400
     pid: 1,
     type: 'swap',
     decimals: 18,
@@ -358,7 +358,7 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: SOUL_ADDRESS[ChainId.FANTOM],
   },
-  { // 800
+  { // 1,000
     pid: 2,
     type: 'swap',
     decimals: 18,
@@ -435,7 +435,7 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: GRIMEVO_ADDRESS[ChainId.FANTOM],
   }, */
-  { // 200
+  { // 300
     pid: 11,
     type: 'swap',
     decimals: 18,
@@ -446,7 +446,7 @@ export const FantomPools = [
     token0Address: WETH_ADDRESS[ChainId.FANTOM],
     token1Address: USDC_ADDRESS[ChainId.FANTOM],
   },
-  { // 200
+  { // 300
     pid: 12,
     type: 'swap',
     decimals: 18,

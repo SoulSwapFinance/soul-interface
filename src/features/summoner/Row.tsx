@@ -9,11 +9,11 @@ import { useTokenContract, useSummonerContract, useZapperContract } from 'hooks/
 import useApprove from 'hooks/useApprove'
 import { Tab } from '@headlessui/react'
 import {
-    FarmContainer, FarmItem, FarmItemBox, Text, SubmitButton, Wrap
+    FarmItemBox, Text, SubmitButton, Wrap
 } from './Styles' // FarmContentWrapper
 import { classNames, formatNumber, tryParseAmount } from 'functions'
-import { usePairInfo, useSummonerInfo, useSummonerPoolInfo, useSummonerUserInfo, useTokenInfo, useUserTokenInfo } from 'hooks/useAPI'
-import DoubleCurrencyLogo from 'components/DoubleLogo'
+import { usePairInfo, useSummonerPoolInfo, useSummonerUserInfo, useTokenInfo, useUserTokenInfo } from 'hooks/useAPI'
+// import DoubleCurrencyLogo from 'components/DoubleLogo'
 import Modal from 'components/DefaultModal'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
@@ -29,25 +29,25 @@ import { ExternalLink } from 'components/ReusableStyles'
 import { BriefcaseIcon, CircleStackIcon, CurrencyDollarIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 
-const HideOnSmall = styled.div`
-@media screen and (max-width: 900px) {
-  display: none;
-}
-`
+// const HideOnSmall = styled.div`
+// @media screen and (max-width: 900px) {
+//   display: none;
+// }
+// `
 
-const HideOnMobile = styled.div`
-@media screen and (max-width: 600px) {
-  display: none;
-}
-`
+// const HideOnMobile = styled.div`
+// @media screen and (max-width: 600px) {
+//   display: none;
+// }
+// `
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;
   padding-left: 10;
 `
 
-export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol, token1Symbol, token0Address, token1Address }) => {
-    const { account, chainId, library } = useActiveWeb3React()
+export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol, token0Address, token1Address }) => {
+    const { account, chainId } = useActiveWeb3React()
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
 
     const [approved, setApproved] = useState(false)
@@ -82,7 +82,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     
     const allocPoint = summonerPoolInfo.allocPoint
     const lpAddress = summonerPoolInfo.lpAddress
-    const pairStatus = summonerPoolInfo.status
+    // const pairStatus = summonerPoolInfo.status
     
     // const { userInfo } = useUserInfo()
     const { pairInfo } = usePairInfo(lpAddress)
@@ -323,9 +323,8 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     }
 
     return (
-        <>
-            <div className="grid grid-cols-1 justify-between w-full">
-                <FarmContainer>
+            <>
+                <div className="grid grid-cols-1 justify-center w-full">
                     <div className={classNames("bg-dark-900 p-3 m-1 border rounded-2xl border-blue", !hasBalance && "border-dark-1000",
                         isUnderworldPair ? "hover:border-blue" : !isActive ? "hover:border-pink"
                             : hasBalance && isUnderworldPair ? "hover:border-blue border-blue"
@@ -447,8 +446,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
                         </div>
                     </div>
-                </FarmContainer>
-            </div>
+                </div>
 
 
             {/*------ DROPDOWN OPTIONS PANEL ------*/}
