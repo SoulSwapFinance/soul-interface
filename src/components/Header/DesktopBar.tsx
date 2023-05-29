@@ -190,7 +190,7 @@ const DesktopBar: FC = () => {
                                 { `Swap` }
                             </Typography>
                         </div>
-                        {featureEnabled(Feature.LIQUIDITY_MINING, chainId) &&
+                        {/* {featureEnabled(Feature.LIQUIDITY_MINING, chainId) && */}
                         <div
                             className={classNames(
                                 `grid grid-cols-2`,
@@ -207,7 +207,7 @@ const DesktopBar: FC = () => {
                         { `Earn` }
                         </Typography>
                         </div>
-                        }
+                        {/* } */}
                         {/* {featureEnabled(Feature.ANALYTICS, chainId) && */}
                         <div
                             className={classNames(
