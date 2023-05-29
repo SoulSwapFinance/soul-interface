@@ -378,8 +378,7 @@ export default function Add() {
           // allowedSlippage={allowedSlippage}
           />
           {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
-          <div className={`my-12`} />
-
+          <div>
           <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
           <TransactionConfirmationModal
             isOpen={showConfirm}
@@ -574,6 +573,7 @@ export default function Add() {
               </Button>
             </NavLink>
           </div>
+        </div>
         </div>
         {/* </SwapLayoutCard> */}
       </DoubleGlowShadowV2>

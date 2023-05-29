@@ -31,7 +31,7 @@ import PercentInputPanel from 'components/PercentInputPanel'
 import ReactGA from 'react-ga'
 import { TransactionResponse } from '@ethersproject/providers'
 // import Web3Connect from 'components/Web3Connect'
-import { currencyId } from 'functions/currency'
+// import { currencyId } from 'functions/currency'
 import { t } from '@lingui/macro'
 import { useActiveWeb3React } from 'services/web3'
 import { useCurrency } from 'hooks/Tokens'
@@ -47,7 +47,7 @@ import { useWalletModalToggle } from 'state/application/hooks'
 // import SwapBanner from 'components/SwapBanner'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { classNames } from 'functions'
-import { getChainColor, getChainColorCode } from 'constants/chains'
+import { getChainColorCode } from 'constants/chains'
 import SwapDropdown from 'features/swap/SwapDropdown'
 // import { SwapLayoutCard } from 'layouts/SwapLayout'
 import { LendBanner } from 'components/Banner'
@@ -723,14 +723,15 @@ export default function Remove() {
         <LendBanner 
           // color={'purple'} 
           // textColor={'white'} 
-        chainId={chainId} />
+          chainId={chainId} 
+        />
           {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
           {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
-          <div className={`my-12`} />
-          <SwapDropdown />
+          {/* <div className={`my-12`} /> */}
           {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
-          <div className={`my-12`} />
+          {/* <div className={`my-12`} /> */}
           {/* <Header input={currencyA} output={currencyB} allowedSlippage={allowedSlippage} /> */}
+          <SwapDropdown />
           <div>
             <TransactionConfirmationModal
               isOpen={showConfirm}
@@ -747,16 +748,19 @@ export default function Remove() {
               )}
               pendingText={pendingText}
             />
-            <AutoColumn gap="md">
+            {/* <AutoColumn gap="md"> */}
+              <div
+                className={`mb-4`}
+              >
               <LiquidityHeader input={currencyA} output={currencyB} />
-              <div>
                 <PercentInputPanel
                   value={innerLiquidityPercentage}
                   onUserInput={setInnerLiquidityPercentage}
                   id="liquidity-percent"
+                  chainId={chainId}
                 />
-
-                <AutoColumn justify="space-between" className="py-2.5">
+                </div>
+                {/* <AutoColumn justify="space-between" className="py-2.5">
                   <AutoRow justify={'flex-start'} style={{ padding: '0 1rem' }}>
                     <button className="z-10 -mt-6 -mb-6 rounded-full cursor-default bg-dark-900 p-3px">
                       <div className="p-3 rounded-full bg-dark-800">
@@ -764,7 +768,7 @@ export default function Remove() {
                       </div>
                     </button>
                   </AutoRow>
-                </AutoColumn>
+                </AutoColumn> */}
 
                 <div id="remove-liquidity-output" className="p-5 rounded bg-dark-800">
                   <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
@@ -853,8 +857,8 @@ export default function Remove() {
                   </div>
                 )}
               </div>
-            </AutoColumn>
-          </div>
+            {/* </AutoColumn> */}
+          {/* </div> */}
 
           {pair &&
             <MinimalPositionCard
