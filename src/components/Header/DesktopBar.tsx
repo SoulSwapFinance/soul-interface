@@ -172,7 +172,8 @@ const DesktopBar: FC = () => {
                                 className={'w-7 h-7'}
                             />
                         </div> */}
-                        <div className={`grid grid-cols-5 w-full items-center`}>
+                        <div className={`grid ${featureEnabled(Feature.LIQUIDITY_MINING, chainId) ?
+                        'grid-cols-5' : 'grid-cols-4'} w-full items-center`}>
                         <div
                             className={classNames(
                                 `grid grid-cols-2`,
@@ -224,6 +225,7 @@ const DesktopBar: FC = () => {
                             { `Data` }
                             </Typography>
                         </div>
+                        {featureEnabled(Feature.LUXOR, chainId) &&
                         <div
                             className={classNames(
                                 `grid grid-cols-2`,
@@ -240,7 +242,7 @@ const DesktopBar: FC = () => {
                             { `Luxor` }
                             </Typography>
                         </div>
-                        {/* } */}
+                         }
                         {/* {featureEnabled(Feature.NFT, chainId) &&
                             <div
                                 className={classNames(
