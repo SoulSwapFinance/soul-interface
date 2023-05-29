@@ -54,7 +54,7 @@ export function Active() {
   return (
     <div className = "justify-center">
         <FarmContainer>
-        <div className="grid grid-cols-1  bg-dark-1000 rounded-md font-bold border-2 border-dark-800 hover:border-purple" >
+        <div className="grid grid-cols-1  bg-dark-1000 rounded-md font-bold border-2 border-dark-800" >
             <FarmContentWrapper>
               <FarmItemBox
                 className="sm:ml-6"
@@ -84,7 +84,7 @@ export function Active() {
                 className="sm:-ml-8 sm:mr-8"
                 >
                 <Text padding="0" fontSize=".9" color="#FFFFFF">
-                  APR
+                  % APR
                 </Text>
               </FarmItemBox>
 
