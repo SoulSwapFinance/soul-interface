@@ -46,7 +46,7 @@ const TokenPairLink = styled(ExternalLink)`
   padding-left: 10;
 `
 
-export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol, token0Address, token1Address }) => {
+export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol, token1Symbol, token0Address, token1Address }) => {
     const { account, chainId } = useActiveWeb3React()
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(lpToken)
 
