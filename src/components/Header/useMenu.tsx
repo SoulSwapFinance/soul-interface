@@ -158,38 +158,38 @@ const useMenu: UseMenu = () => {
   // />
   // </div>
 
-  const DOCS_ICON = 
-  <div className={
-      iconStyle
-    }>
-    <DocsIcon
-    fillPrimary={open ? chainColor : WHITE}
-    fillSecondary={open ? WHITE : chainColor }
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
-    />
-    </div>
+  // const DOCS_ICON = 
+  // <div className={
+  //     iconStyle
+  //   }>
+  //   <DocsIcon
+  //   fillPrimary={open ? chainColor : WHITE}
+  //   fillSecondary={open ? WHITE : chainColor }
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
+  //   />
+  //   </div>
 
-const VAULT_ICON = 
-  <div className={
-      iconStyle
-    }>
-    <VaultIcon
-    fillPrimary={open ? WHITE : chainColor }
-    fillSecondary={open ? chainColor : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
-    />
-    </div>
+// const VAULT_ICON = 
+//   <div className={
+//       iconStyle
+//     }>
+//     <VaultIcon
+//     fillPrimary={open ? WHITE : chainColor }
+//     fillSecondary={open ? chainColor : WHITE}
+//     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
+//     />
+//     </div>
 
-const CHART_ICON = 
-  <div className={
-      iconStyle
-    }>
-    <ChartIcon
-    fillPrimary={open ? WHITE : chainColor }
-    fillSecondary={open ? chainColor : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
-    />
-    </div>
+// const CHART_ICON = 
+//   <div className={
+//       iconStyle
+//     }>
+//     <ChartIcon
+//     fillPrimary={open ? WHITE : chainColor }
+//     fillSecondary={open ? chainColor : WHITE}
+//     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
+//     />
+//     </div>
 
   // const NFT_ICON = <NftIcon
   //   fillPrimary={open ? chainColor : WHITE}
@@ -225,7 +225,7 @@ const CHART_ICON =
     if (featureEnabled(Feature.AMM, chainId)) {
       const farmItems = {
         key: 'pool',
-        title: i18n._(t`Liquidity`),
+        title: i18n._(t`Pool`),
         // icon: POOL_ICON,
         // icon: <div className={`grid grid-cols-2`}> 
         //     <PlusCircleIcon width={14} className={classNames(
@@ -342,7 +342,7 @@ const CHART_ICON =
     if (featureEnabled(Feature.AMM, chainId)) {
       mainItems.push({
           key: 'whitepaper',
-          title: i18n._(t`Docs`),
+          title: i18n._(t`Learn`),
           // icon: DOCS_ICON,
           // icon: <DocumentIcon width={20} className={classNames(
           //   `filter text-white`
@@ -351,28 +351,28 @@ const CHART_ICON =
       })
     }
 
-    if (featureEnabled(Feature.NFT, chainId)) {
-      mainItems.push({
-          key: 'nft',
-          title: i18n._(t`Infinity`),
-          icon: <PhotoIcon width={20} className={classNames(
-            `filter text-white`
-            )} />,
-          link: '/marketplace'
-      })
-    }
+    // if (featureEnabled(Feature.NFT, chainId)) {
+    //   mainItems.push({
+    //       key: 'nft',
+    //       title: i18n._(t`Infinity`),
+    //       icon: <PhotoIcon width={20} className={classNames(
+    //         `filter text-white`
+    //         )} />,
+    //       link: '/marketplace'
+    //   })
+    // }
 
-    if (featureEnabled(Feature.ANALYTICS, chainId)) {
-      mainItems.push({
-          key: 'data',
-          title: i18n._(t`Analytics`),
-          // icon: CHART_ICON,
-          // icon: <PresentationChartLineIcon width={20} className={classNames(
-          //   `filter text-white`
-          //   )} />,
-          link: '/analytics'
-      })
-    }
+    // if (featureEnabled(Feature.ANALYTICS, chainId)) {
+    //   mainItems.push({
+    //       key: 'data',
+    //       title: i18n._(t`Analytics`),
+    //       // icon: CHART_ICON,
+    //       // icon: <PresentationChartLineIcon width={20} className={classNames(
+    //       //   `filter text-white`
+    //       //   )} />,
+    //       link: '/analytics'
+    //   })
+    // }
 
 
     return mainItems.filter((el) => Object.keys(el).length > 0)
