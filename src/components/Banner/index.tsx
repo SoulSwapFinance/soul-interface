@@ -244,6 +244,26 @@ export const ManifestationBanner: FC<IFeature> = ({ chainId }) => (
   </div>
 )
 
+export const UnderworldBanner: FC = () => (
+  <div className="relative items-center w-full mb-4">
+    <div className="w-full">
+      <div className="text-center">
+        <p className="font-medium text-center text-white">
+        <NavLink href="/lend/swap">
+            <Button variant="filled" color="ftmBlue" size="sm">
+              <span className="justify-center font-bold text-white">
+                {`Redeem Retired Assets ↗`}
+                {/* Please vote in our LIVE proposals regarding withdrawal fees and governance. <span aria-hidden="true">&rarr;</span> */}
+              </span>
+            </Button>
+        </NavLink>
+        </p>
+      </div>
+      <div className="absolute inset-y-0 right-0 flex items-start pt-1 pr-1 sm:pt-1 sm:pr-2 sm:items-start">
+      </div>
+    </div>
+  </div>
+)
 
 export const LendBanner: FC<IFeature> = ({ chainId }) => (
   <div className={featureEnabled(Features.UNDERWORLD, chainId) ? 'relative items-center w-full mt-2' : `hidden`}>
