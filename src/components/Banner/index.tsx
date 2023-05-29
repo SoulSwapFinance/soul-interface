@@ -116,7 +116,7 @@ export const DonateBanner: FC<IFeature> = ({ chainId }) => (
 export const LendBanner: FC<IFeature> = ({ chainId }) => (
   <div className={classNames(featureEnabled(Features.UNDERWORLD, chainId) ? "relative items-center w-full" : 'hidden')}>
     <div className="w-full">
-      <div className="text-center animate-pulse">
+      <div className="text-center">
         <p className="font-medium mb-2 mt-2 text-center text-white">
           <ExternalLink
             href="https://twitter.com/SoulSwapFinance/status/1662949759374757888?s=20" target="_blank" rel="noreferrer"

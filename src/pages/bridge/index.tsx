@@ -38,11 +38,11 @@ import { getChainColor, getChainColorCode } from "constants/chains"
 import SwapDropdown from "features/swap/SwapDropdown"
 import { t } from "@lingui/macro"
 import { i18n } from "@lingui/core"
-import { DonateBanner, LuxorBanner } from "components/Banner"
-import BRIDGE_BANNER from 'assets/branding/bridge-banner.png'
+import { DonateBanner, LendBanner, LuxorBanner } from "components/Banner"
+// import BRIDGE_BANNER from 'assets/branding/bridge-banner.png'
 import BridgeTokenList from "features/bridge/BridgeTokenList"
 import { ContentBox, OverlayButton, Typo1, Typo2 } from "components"
-import TokenStats from "components/TokenStats"
+// import TokenStats from "components/TokenStats"
 import { ChainId } from "sdk"
 import { NextSeo } from "next-seo"
 
@@ -418,22 +418,10 @@ const Bridge: React.FC<any> = () => {
     <DoubleGlowShadowV2>
       <NextSeo title={`Bridge | SoulSwap`} />
       {/* <SwapLayoutCard> */}
-      <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-        {/* <DonateBanner chainId={chainId} /> */}
-        <LuxorBanner 
-          chainId={chainId} 
-          textColor={'white'} 
-          color={'purple'} 
-        />
-          <div
-              className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
-            >
-              <Image src={BRIDGE_BANNER}
-                height={180}
-                width={720}
-                alt={'bridge banner'}
-              />
-          </div>
+      <div className={`grid p-1 mt-6 space-y-2 rounded-2xl bg-dark-1000`}>
+      <LendBanner
+        chainId={chainId}
+      />
         <div className={`grid`}>
           <div className={`my-1`} />
           <SwapDropdown />

@@ -430,7 +430,7 @@ const Swap = () => {
            {/* <ManifestationBanner
               chainId={chainId}
            /> */}
-            <div
+            {/* <div
               className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
             >
               <Image src={SWAP_BANNER}
@@ -438,11 +438,11 @@ const Swap = () => {
                 width={720}
                 alt={'swap banner'}
               />
-          </div>
+          </div> */}
             {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
             {/* <div className={`my-2 border-2 border-[${getChainColor(chainId)}]`} /> */}
             <>
-            <div className={`my-12`} />
+            {/* <div className={`my-12`} /> */}
             <SwapDropdown 
               inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]}
               />

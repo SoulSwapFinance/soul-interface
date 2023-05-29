@@ -30,8 +30,8 @@ import NavLink from 'components/NavLink'
 import PercentInputPanel from 'components/PercentInputPanel'
 import ReactGA from 'react-ga'
 import { TransactionResponse } from '@ethersproject/providers'
-import Web3Connect from 'components/Web3Connect'
-import { currencyId } from 'functions/currency'
+// import Web3Connect from 'components/Web3Connect'
+// import { currencyId } from 'functions/currency'
 import { t } from '@lingui/macro'
 import { useActiveWeb3React } from 'services/web3'
 import { useCurrency } from 'hooks/Tokens'
@@ -47,13 +47,13 @@ import { useWalletModalToggle } from 'state/application/hooks'
 // import SwapBanner from 'components/SwapBanner'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { classNames } from 'functions'
-import { getChainColor, getChainColorCode } from 'constants/chains'
+import { getChainColorCode } from 'constants/chains'
 import SwapDropdown from 'features/swap/SwapDropdown'
 // import { SwapLayoutCard } from 'layouts/SwapLayout'
-import { LuxorBanner } from 'components/Banner'
-import Image from 'next/image'
-import REMOVE_BANNER from 'assets/branding/remove-banner.png'
-import TokenStats from 'components/TokenStats'
+import { LendBanner } from 'components/Banner'
+// import Image from 'next/image'
+// import REMOVE_BANNER from 'assets/branding/remove-banner.png'
+// import TokenStats from 'components/TokenStats'
 
 const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(10, 1000) // 1%
 
@@ -675,27 +675,27 @@ export default function Remove() {
     chainId && WNATIVE[chainId] && (currencyA?.equals(WNATIVE[chainId]) || currencyB?.equals(WNATIVE[chainId]))
   )
 
-  const handleSelectCurrencyA = useCallback(
-    (currency: Currency) => {
-      if (currencyIdB && currencyId(currency) === currencyIdB) {
-        router.push(`/exchange/remove/${currencyId(currency)}/${currencyIdA}`)
-      } else {
-        router.push(`/exchange/remove/${currencyId(currency)}/${currencyIdB}`)
-      }
-    },
-    [currencyIdA, currencyIdB, router]
-  )
+  // const handleSelectCurrencyA = useCallback(
+  //   (currency: Currency) => {
+  //     if (currencyIdB && currencyId(currency) === currencyIdB) {
+  //       router.push(`/exchange/remove/${currencyId(currency)}/${currencyIdA}`)
+  //     } else {
+  //       router.push(`/exchange/remove/${currencyId(currency)}/${currencyIdB}`)
+  //     }
+  //   },
+  //   [currencyIdA, currencyIdB, router]
+  // )
 
-  const handleSelectCurrencyB = useCallback(
-    (currency: Currency) => {
-      if (currencyIdA && currencyId(currency) === currencyIdA) {
-        router.push(`/exchange/remove/${currencyIdB}/${currencyId(currency)}`)
-      } else {
-        router.push(`/exchange/remove/${currencyIdA}/${currencyId(currency)}`)
-      }
-    },
-    [currencyIdA, currencyIdB, router]
-  )
+  // const handleSelectCurrencyB = useCallback(
+  //   (currency: Currency) => {
+  //     if (currencyIdA && currencyId(currency) === currencyIdA) {
+  //       router.push(`/exchange/remove/${currencyIdB}/${currencyId(currency)}`)
+  //     } else {
+  //       router.push(`/exchange/remove/${currencyIdA}/${currencyId(currency)}`)
+  //     }
+  //   },
+  //   [currencyIdA, currencyIdB, router]
+  // )
 
   const handleDismissConfirmation = useCallback(() => {
     setShowConfirm(false)
@@ -720,25 +720,18 @@ export default function Remove() {
 
       <DoubleGlowShadowV2>
       <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-          {/* <SwapLayoutCard> */}
-          {/* <DonateBanner chainId={chainId} /> */}
-          <LuxorBanner color={'purple'} textColor={'white'} chainId={chainId} />
-          <div
-              className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
-            >
-              <Image src={REMOVE_BANNER}
-                height={180}
-                width={720}
-                alt={'remove banner'}
-              />
-          </div>
+        <LendBanner 
+          // color={'purple'} 
+          // textColor={'white'} 
+          chainId={chainId} 
+        />
           {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
           {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
-          <div className={`my-12`} />
-          <SwapDropdown />
+          {/* <div className={`my-12`} /> */}
           {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
-          <div className={`my-12`} />
+          {/* <div className={`my-12`} /> */}
           {/* <Header input={currencyA} output={currencyB} allowedSlippage={allowedSlippage} /> */}
+          <SwapDropdown />
           <div>
             <TransactionConfirmationModal
               isOpen={showConfirm}
@@ -755,16 +748,19 @@ export default function Remove() {
               )}
               pendingText={pendingText}
             />
-            <AutoColumn gap="md">
+            {/* <AutoColumn gap="md"> */}
+              <div
+                className={`mb-4`}
+              >
               <LiquidityHeader input={currencyA} output={currencyB} />
-              <div>
                 <PercentInputPanel
                   value={innerLiquidityPercentage}
                   onUserInput={setInnerLiquidityPercentage}
                   id="liquidity-percent"
+                  chainId={chainId}
                 />
-
-                <AutoColumn justify="space-between" className="py-2.5">
+                </div>
+                {/* <AutoColumn justify="space-between" className="py-2.5">
                   <AutoRow justify={'flex-start'} style={{ padding: '0 1rem' }}>
                     <button className="z-10 -mt-6 -mb-6 rounded-full cursor-default bg-dark-900 p-3px">
                       <div className="p-3 rounded-full bg-dark-800">
@@ -772,7 +768,7 @@ export default function Remove() {
                       </div>
                     </button>
                   </AutoRow>
-                </AutoColumn>
+                </AutoColumn> */}
 
                 <div id="remove-liquidity-output" className="p-5 rounded bg-dark-800">
                   <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
@@ -861,8 +857,8 @@ export default function Remove() {
                   </div>
                 )}
               </div>
-            </AutoColumn>
-          </div>
+            {/* </AutoColumn> */}
+          {/* </div> */}
 
           {pair &&
             <MinimalPositionCard
@@ -873,7 +869,7 @@ export default function Remove() {
           }
 
           {/* </div> */}
-          <div className={`grid grid-cols-1 gap-2 text-white justify-center m-2`}>
+          <div className={"grid grid-cols-2 gap-2 text-white justify-center m-2"}>
             <NavLink href="/pool">
               <Button
                 variant={'filled'}
@@ -881,7 +877,7 @@ export default function Remove() {
                 primaryColor={'black'}
               >
                 <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
-                  <span>{i18n._(t`View Positions ↗`)}</span>
+                  <span>{i18n._(t`View Positions`)}</span>
                 </a>
               </Button>
             </NavLink>
@@ -892,12 +888,11 @@ export default function Remove() {
                 primaryColor={'black'}
               >
                 <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
-                  <span>{i18n._(t`View Analytics ↗`)}</span>
+                  <span>{i18n._(t`View Analytics`)}</span>
                 </a>
               </Button>
             </NavLink>
           </div>
-          {/* </SwapLayoutCard> */}
         </div>
       </DoubleGlowShadowV2>
     </>

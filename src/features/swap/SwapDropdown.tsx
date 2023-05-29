@@ -62,7 +62,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const crossStyle = isCross ? activeStyle : style
 
   return (
-    <div className={`flex items-center justify-center gap-4 border-2 border-dark-800 rounded-lg`}>
+    <div className={`flex items-center justify-center gap-4 border-2 border-${getChainColorCode(chainId)} rounded-lg`}>
       <div className="flex gap-4 sm:gap-6 mr-8 sm:mr-0">
         {/* {featureEnabled(Feature.LIQUIDITY, chainId) && */}
         <NavLink
