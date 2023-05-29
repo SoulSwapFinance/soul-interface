@@ -270,10 +270,9 @@ const DesktopBar: FC = () => {
                             <WalletIcon
                                 fillPrimary={isWallet ? `#FFFFFF` : `${getChainColor(chainId)}`}
                                 fillSecondary={isWallet ? `${getChainColor(chainId)}` : `#FFFFFF`}
-                                className={'w-7 h-7 ml-2'}
+                                className={'w-7 h-7 md:ml-4'}
                             />
-                            <Typography className={`grid mt-1 
-                            -ml-3.5`}>
+                            <Typography className={`grid mt-1 -ml-4 md:-ml-0`}>
                             { `Account` }
                             </Typography>
                         </div>

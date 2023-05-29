@@ -19,7 +19,7 @@ import { useTokenInfo } from 'hooks/useAPI'
 import Image from 'next/image'
 import FARM_BANNER from 'assets/branding/farm-banner.png'
 import NavLink from 'components/NavLink'
-import TokenStats from 'components/TokenStats'
+// import TokenStats from 'components/TokenStats'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
 
@@ -76,7 +76,7 @@ const Summoner = () => {
   }
 
   return (
-    <div className={`grid grid-cols-1 justify-center p-1 mt-8 sm:m-8 sm:max-w-[90%] md:max-w-2xl bg-dark-900 rounded-2xl`}>
+    <div className={`grid grid-cols-1 w-full max-w-2xl justify-center p-1 mt-8 sm:m-8 bg-dark-900 rounded-2xl`}>
           <div className={`flex justify-center m-1 p-1`}>
           <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/dashboard'}>
