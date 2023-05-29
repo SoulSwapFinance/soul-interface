@@ -11,13 +11,16 @@ import DesktopBar from './DesktopBar'
 import LanguageMenu from './useLanguages'
 import BarsIcon from 'components/Icons/header/BarsIcon'
 import Web3Network from 'components/Web3Network'
-// import TokenStats from 'components/TokenStats'
 import { ChainId } from 'sdk'
+import { NavigationItem } from './NavigationItem'
+import useMenu from './useMenu'
+import TokenStats from 'components/TokenStats'
 
 const HEADER_HEIGHT = 64
 
 const Desktop = () => {
   const bar = useBar()
+  const menu = useMenu()
   const { account, chainId } = useActiveWeb3React()
   const [open, setOpen] = useState(false)
 
@@ -53,14 +56,22 @@ const Desktop = () => {
           className={`flex bg-dark-1000 mt-6 p-1.5 border-2 border-dark-800 hover:border-purple rounded-2xl`}
           onClick={() => setOpen(true)}
         >
-          
+
           {/* {SOUL_ICON} */}
           <BarsIcon
-              fillPrimary={open ? `#821FFF` : `#FFFFFF`} // purple
-              fillSecondary={open ? `#FFFFFF` : `#821FFF`} // purple
-              className={'w-7 h-7'}
+            fillPrimary={open ? `#821FFF` : `#FFFFFF`} // purple
+            fillSecondary={open ? `#FFFFFF` : `#821FFF`} // purple
+            className={'w-7 h-7'}
           />
         </div>
+        {/* <nav>
+        <div
+              className={`flex rounded-2xl bg-dark-1000 gap-1 sm:gap-6 md:gap-18 justify-center items-center`}>
+              {menu.map((node) => {
+                return <NavigationItem node={node} key={node.key} />
+              })}
+            </div>
+        </nav> */}
         {/* <nav
           className={classNames(`flex mt-6 w-full mx-4`
           )
@@ -115,19 +126,19 @@ const Desktop = () => {
                         })}
                       </nav>
                       <div className={`grid mt-0.5 items-center justify-center bg-dark-900 rounded-2xl`}>
-                      {/* {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+                        {/* {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                           <TokenStats />
                         } */}
-                      <LanguageMenu />
+                        <LanguageMenu />
                       </div>
-                      {/* <div className="flex w-full justify-center inline-block rounded rounded-xl bg-dark-1000">
+                      {/* <div className="flex w-full justify-center rounded-xl bg-dark-1000">
                         {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
                           <TokenStats />
                         }
                         <div className="flex items-center justify-start">
                           <LanguageMenu />
                         </div>
-                      </div> */}
+                      </div>  */}
                     </div>
                   </div>
                 </Transition.Child>
@@ -135,34 +146,35 @@ const Desktop = () => {
             </div>
           </Dialog>
         </Transition.Root>
-          {/* <div
+        {/* <div
             className={`relative top-1.5 right-2 p-0.5 mt-1 bg-dark-1000 border border-[${getChainColor(chainId)}] hover:border-2 hover:border-purple rounded rounded-2xl inline-block`}
           > */}
         <div
-          className={`grid grid-cols-2 gap-1 mt-6 p-1.5 rounded-2xl`}
-          // onClick={() => setOpen(true)}
+          className={`grid grid-cols-3 gap-1 mt-6 p-1.5 rounded-2xl`}
+        // onClick={() => setOpen(true)}
         >
-            <div
-              className={`border-2 ${account ? `border-[${getChainColor(chainId)}]` : `border-avaxRed animate-pulse`} hover:border-purple rounded-2xl`}
+          {/* WALLET ICON */}
+          <div
+            className={`border-2 ${account ? `border-[${getChainColor(chainId)}]` : `border-avaxRed animate-pulse`} hover:border-purple rounded-2xl`}
+          >
+            <Web3Status />
+          </div>
+          {/* NETWORK ICON */}
+          <div
+            className={`border-2 ${chainId ? `border-[${getChainColor(chainId)}]` : `border-dark-800`} hover:border-purple p-2 rounded-2xl`}
             >
-              <Web3Status />
-            </div>
-              {/* TOKEN STATS */}
-            {/* <div
-              className={`border-2 border-dark-800 hover:border-purple p-2 items-center rounded-2xl`}
+            <Web3Network />
+          </div>
+          {/* TOKEN STATS */}
+          <div
+            className={`border-2 ${chainId ? `border-[${getChainColor(chainId)}]` : `border-dark-800`} hover:border-purple rounded-2xl`}
             >
-                <TokenStats />
-            </div>  */}
-              {/* NETWORK ICON */}
-            <div
-              className={`border-2 ${chainId ? `border-[${getChainColor(chainId)}]` : `border-dark-800`} hover:border-purple p-2 rounded-2xl`}
-            >
-                <Web3Network />
-            </div> 
-          </div> 
+            <TokenStats />
+          </div>
+        </div>
       </header>
       <DesktopBar />
-      </div>
+    </div>
   )
 }
 <div style={{ height: HEADER_HEIGHT, minHeight: HEADER_HEIGHT }} />

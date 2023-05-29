@@ -132,45 +132,6 @@ export default function TokenStatsModal(): JSX.Element | null {
                 className="rounded-md"
               />
             </div>
-            {/* <div
-              className="rounded-md border border-purple cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
-              onClick={() => {
-                const params: any = {
-                  type: 'ERC20',
-                  options: {
-                    address: SEANCE_ADDRESS[chainId || 250],
-                    symbol: 'SEANCE',
-                    decimals: 18,
-                    image: 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x124B06C5ce47De7A6e9EFDA71a946717130079E6/logo.png',
-                  },
-                }
-                if (library && library.provider.isMetaMask && library.provider.request) {
-                  library.provider
-                    .request({
-                      method: 'wallet_watchAsset',
-                      params,
-                    })
-                    .then((success) => {
-                      if (success) {
-                        console.log('Successfully added SEANCE to MetaMask')
-                      } else {
-                        throw new Error('Something went wrong.')
-                      }
-                    })
-                    .catch(console.error)
-                }
-              }}
-            >
-              <Image
-                src="https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x124B06C5ce47De7A6e9EFDA71a946717130079E6/logo.png"
-                alt="SEANCE"
-                width="1600px"
-                height="1600px"
-                objectFit="contain"
-                className="rounded-md"
-              />
-            </div>
-            */}
           </div>
         </div>
       </div>
