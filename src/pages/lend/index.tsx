@@ -27,7 +27,7 @@ import { SubmitButton } from 'features/summoner/Styles'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { useUnderworldPairAPI } from 'hooks/useUnderworldAPI'
 import { classNames } from 'functions'
-import { LendBanner, UnderworldBanner } from 'components/Banner'
+import { LendTweetBanner, UnderworldBanner } from 'components/Banner'
 
 // import Link from 'next/link'
 // import { e10 } from 'functions/math'
@@ -74,7 +74,7 @@ export default function Lend() {
           content="Underworld is a lending and margin trading platform, built upon CoffinBox, which allows for anyone to create customized and gas-efficient markets for lending, borrowing, and collateralizing a variety of DeFi tokens, stable coins, and synthetic assets."
         />
       </Head>
-      <LendBanner chainId = {chainId} />
+      <LendTweetBanner chainId = {chainId} />
       <Card className="h-full bg-dark-900" header={<MarketHeader type="Underworld Markets" lists={[pairs, positions]} />}>
       {/* {[ChainId.FANTOM].includes(chainId) && <UnderworldBanner />} */}
         {/* {positions.items && positions.items.length > 0 && (
