@@ -34,8 +34,8 @@ function TokenStats(): JSX.Element | null {
         <Image
           src="/images/tokens/soul.png"
           alt="SOUL"
-          width="28px"
-          height="28px"
+          width={28}
+          height={28}
           objectFit="contain"
           className="rounded-md"
         />

@@ -174,7 +174,7 @@ const Desktop = () => {
           </div>
           {/* TOKEN STATS */}
           <div
-            className={`border-2 ${chainId ? `border-[${getChainColor(chainId)}]` : `border-dark-800`} hover:border-purple rounded-2xl`}
+            className={`border-2 border-dark-800 hover:border-purple rounded-2xl`}
             >
             <TokenStats />
           </div>
