@@ -7,11 +7,11 @@ import { useLingui } from '@lingui/react'
 import { ChainId, computePairAddress, Currency, FACTORY_ADDRESS, JSBI, NATIVE, SOUL, SOUL_ADDRESS, Token, Trade as V2Trade, TradeType, USDC_ADDRESS, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
-import Web3Connect from 'components/Web3Connect'
+// import Web3Connect from 'components/Web3Connect'
 import ConfirmSwapModal from 'features/swap/ConfirmSwapModal'
 import SwapDetails from 'features/swap/SwapDetails'
 import UnsupportedCurrencyFooter from 'features/swap/UnsupportedCurrencyFooter'
-import SwapHeader from 'features/swap/SwapHeader'
+// import SwapHeader from 'features/swap/SwapHeader'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 import ConfirmPriceImpactWithoutFee from 'functions/prices'
 import { warningSeverity } from 'functions/prices'
@@ -24,7 +24,7 @@ import { useIsSwapUnsupported } from 'hooks/useIsSwapUnsupported'
 import { useSwapCallback } from 'hooks/useSwapCallback'
 import { useUSDCValue } from 'hooks/useUSDCPrice'
 import useWrapCallback, { WrapType } from 'hooks/useWrapCallback'
-import { SwapLayout, SwapLayoutCard } from 'layouts/SwapLayout'
+import { SwapLayout } from 'layouts/SwapLayout'
 import TokenWarningModal from 'modals/TokenWarningModal'
 import { useActiveWeb3React } from 'services/web3'
 import { Field } from 'state/swap/actions'
@@ -40,11 +40,11 @@ import { useRouter } from 'next/router'
 import SwapDropdown from 'features/swap/SwapDropdown'
 // import Pair from 'pages/analytics/pairs/embedded/[id]'
 import TokenChart from 'pages/analytics/tokens/embedded/[id]'
-import { LuxorBanner, ManifestationBanner } from 'components/Banner'
+import { LendBanner, ManifestationBanner } from 'components/Banner'
 import SWAP_BANNER from 'assets/branding/swap-banner.png'
 // import UpDownArrowIcon from 'components/Icons/exchange/UpDownArrowIcon'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
-import TokenStats from 'components/TokenStats'
+// import TokenStats from 'components/TokenStats'
 import { currencyId } from 'functions'
 
 const Swap = () => {
@@ -421,9 +421,9 @@ const Swap = () => {
         <DoubleGlowShadowV2>
           <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
             {/* <SwapLayoutCard> */}
-            <LuxorBanner 
-              color={'purple'} 
-              textColor={'white'} 
+            <LendBanner 
+              // color={'purple'} 
+              // textColor={'white'} 
               chainId={chainId} />
            {/* <ManifestationBanner
               chainId={chainId}
