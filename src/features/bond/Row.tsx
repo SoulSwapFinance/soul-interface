@@ -318,7 +318,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
             {/* APR */}
             <BondItemBox>
               <div className={`justify-center md:mr-8`}>
-                <Text fontSize="1rem" color="#FFFFFF">
+                <Text fontSize="1rem" color="#4EFF4E"> {/* neonGreen */}
                   {_APR == 0 ? 0
                     : _APR.toString(2) == '0.00' ? '<0.00'
                       : _APR < 1 && _APR.toString(4) ? _APR.toFixed(4)

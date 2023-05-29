@@ -324,9 +324,9 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
     return (
         <>
-            <div className="flex justify-center w-full">
+            <div className="grid grid-cols-1 justify-between w-full">
                 <FarmContainer>
-                    <div className={classNames("bg-dark-900 p-3 m-1 border rounded rounded-2xl border-blue", !hasBalance && "border-dark-1000",
+                    <div className={classNames("bg-dark-900 p-3 m-1 border rounded-2xl border-blue", !hasBalance && "border-dark-1000",
                         isUnderworldPair ? "hover:border-blue" : !isActive ? "hover:border-pink"
                             : hasBalance && isUnderworldPair ? "hover:border-blue border-blue"
                                 : hasBalance && !isUnderworldPair ? "border-dark-600"
@@ -335,9 +335,9 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                     )}
                         onClick={() => handleShowOptions()}
                     >
-                        <div className={`flex w-full`}>
-                            <div className="grid grid-cols-1 md:mr-16 justify-center">
-                                <div className={`grid ${isUnderworldPair ? `grid-cols-2` : `grid-cols-2`}`}>
+                        <div className={`grid grid-cols-4 w-full`}>
+                            <div className="grid span-cols-1 mr-8 justify-center">
+                                <div className={`grid grid-cols-2`}>
                                     <CurrencyLogo currency={token0} size={40} />
                                     {isUnderworldPair &&
                                         <CurrencyLogo currency={token1} size={20} />
@@ -349,7 +349,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                             </div>
 
                             {/* STAKED VALUE */}
-                            <HideOnMobile>
+                            {/* <HideOnMobile>
                                 <FarmItemBox>
                                     <div className={`justify-center mt-2`}>
                                         {Number(_APR).toString() === '0.00' ? (
@@ -369,10 +369,10 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         )}
                                     </div>
                                 </FarmItemBox>
-                            </HideOnMobile>
+                            </HideOnMobile> */}
 
                             {/* STAKED OWNERSHIP */}
-                            <HideOnSmall>
+                            {/* <HideOnSmall>
                                 <FarmItemBox>
                                     <div className={`justify-center mt-2`}>
                                         {_stakedValue.toFixed(0).toString() === '0' ? (
@@ -386,17 +386,17 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         )}
                                     </div>
                                 </FarmItemBox>
-                            </HideOnSmall>
+                            </HideOnSmall> */}
 
                             {/* % APR */}
                             <FarmItemBox>
-                                <div className={`justify-center mt-2`}>
+                                <div className={`grid grid-cols-1 justify-center mt-1`}>
                                     {Number(_APR).toString() === '0.00' ? (
                                         <Text padding="0" fontSize="1rem" color="#666">
                                             0
                                         </Text>
                                     ) : (
-                                        <Text padding="0" fontSize="1rem" color={Number(_APR) > 0 ? 'lightGreen' : 'white'}>
+                                        <Text padding="0" fontSize="1rem" color={Number(_APR) > 0 ? '#4EFF4E' : 'white'}>
                                             {Number(_APR).toFixed()}%
                                         </Text>
                                     )}
@@ -428,7 +428,8 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     </Text>
                                 )}
                             </FarmItemBox>
-                            <FarmItemBox className="flex" >
+                            <FarmItemBox className="flex">
+                            <div className={`grid grid-cols-1 justify-center -mr-8 sm:ml-12`}>
                                 {Number(_liquidity) === 0 ? (
                                     <Text padding="0" fontSize="1rem" color="#666">
                                         $0
@@ -441,6 +442,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
                                     </Text>
                                 )}
+                                </div>
                             </FarmItemBox>
 
                         </div>
