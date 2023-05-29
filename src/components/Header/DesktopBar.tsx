@@ -172,7 +172,7 @@ const DesktopBar: FC = () => {
                                 className={'w-7 h-7'}
                             />
                         </div> */}
-                        <div className={`grid ${featureEnabled(Feature.LIQUIDITY_MINING, chainId) ?
+                        <div className={`grid ${featureEnabled(Feature.LUXOR, chainId) ?
                         'grid-cols-5' : 'grid-cols-4'} w-full items-center`}>
                         <div
                             className={classNames(
@@ -272,7 +272,8 @@ const DesktopBar: FC = () => {
                                 fillSecondary={isWallet ? `${getChainColor(chainId)}` : `#FFFFFF`}
                                 className={'w-7 h-7 ml-2'}
                             />
-                            <Typography className={`grid mt-1 -ml-3.5`}>
+                            <Typography className={`grid mt-1 
+                            -ml-3.5`}>
                             { `Account` }
                             </Typography>
                         </div>
