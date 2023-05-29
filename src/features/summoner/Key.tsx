@@ -54,44 +54,52 @@ export function Active() {
   return (
     <div className = "justify-center">
         <FarmContainer>
-        <div className="grid grid-cols-1 lg:m-2 lg:ml-0 lg:mr-0 ml-2 mr-2 sm:ml-6 sm:mr-6 bg-purple rounded rounded-2xl font-bold border border-2 border-dark-1000 hover:border-purple" >
+        <div className="grid grid-cols-1  bg-dark-1000 rounded-md font-bold border-2 border-dark-800 hover:border-purple" >
             <FarmContentWrapper>
-              <FarmItemBox>
-                <Text fontSize=".8" color="#FFFFFF">
+              <FarmItemBox
+                className="sm:ml-6"
+              >
+                <Text fontSize=".9" color="#FFFFFF">
                   ASSET
                 </Text>
               </FarmItemBox>
 
-            <HideOnMobile>
+            {/* <HideOnMobile>
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
                   STAKED
                 </Text>
               </FarmItemBox>
-            </HideOnMobile>
+            </HideOnMobile> */}
  
-            <HideOnSmall>
+            {/* <HideOnSmall>
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
                   SHARE
                 </Text>
               </FarmItemBox>
-            </HideOnSmall>
+            </HideOnSmall> */}
 
-              <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#FFFFFF">
-                  % APR
+              <FarmItemBox
+                className="sm:-ml-8 sm:mr-8"
+                >
+                <Text padding="0" fontSize=".9" color="#FFFFFF">
+                  APR
                 </Text>
               </FarmItemBox>
 
-              <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#FFFFFF">
+              <FarmItemBox
+                className="sm:-ml-12"
+              >
+                <Text padding="0" fontSize=".9" color="#FFFFFF">
                   YIELD
                 </Text>
               </FarmItemBox>
 
-              <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#FFFFFF">
+              <FarmItemBox
+                className="sm:mr-6"
+              >
+                <Text padding="0" fontSize=".9" color="#FFFFFF">
                   TVL
                 </Text>
               </FarmItemBox>
@@ -107,7 +115,7 @@ export function Inactive() {
   return (
     <div className = "justify-center">
         <FarmContainer>
-        <div className="grid grid-cols-1 lg:m-2 lg:ml-0 lg:mr-0 ml-2 mr-2 sm:ml-6 sm:mr-6 bg-pink rounded rounded-2xl font-bold border border-2 border-dark-1000 hover:border-purple" >
+        <div className="grid grid-cols-1  bg-avaxRed rounded-md font-bold border-2 border-dark-800" >
             <FarmContentWrapper>
               
               <FarmItemBox>
@@ -115,22 +123,6 @@ export function Inactive() {
                   ASSET
                   </Text>
               </FarmItemBox>
-
-            <HideOnMobile>
-              <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#FFFFFF">
-                STAKED
-                </Text>
-              </FarmItemBox>
-            </HideOnMobile>
- 
-            <HideOnSmall>
-              <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#FFFFFF">
-                SHARE
-                </Text>
-              </FarmItemBox>
-            </HideOnSmall>
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
@@ -161,7 +153,7 @@ export function Underworld() {
   return (
     <div className="justify-center">
         <FarmContainer>
-        <div className="grid grid-cols-1 lg:m-2 lg:ml-0 lg:mr-0 ml-2 mr-2 sm:ml-6 sm:mr-6 bg-ftmBlue rounded rounded-2xl font-bold border border-2 border-dark-1000 hover:border-purple" >
+        <div className="grid grid-cols-1  bg-ftmBlue rounded-md font-bold border-2 border-dark-800" >
             <FarmContentWrapper>
 
               <FarmItemBox>
@@ -169,22 +161,6 @@ export function Underworld() {
                   SUPPLY
                   </Text>
               </FarmItemBox>
-
-            <HideOnMobile>
-              <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#FFFFFF">
-                STAKED
-                </Text>
-              </FarmItemBox>
-            </HideOnMobile>
- 
-            <HideOnSmall>
-              <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#FFFFFF">
-                SHARE
-                </Text>
-              </FarmItemBox>
-            </HideOnSmall>
 
               <FarmItemBox>
                 <Text padding="0" fontSize=".8" color="#FFFFFF">
