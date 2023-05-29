@@ -204,8 +204,8 @@ const Mobile = () => {
   <div className={`flex gap-2 mr-2 ml-2`}>
     <Image
         // src={'/favicon.png'} 
-        src={`/SoulSwap-Finance-Banner.png`}
-        height={36} width={164}
+        src={`/SoulSwap-Banner.png`}
+        height={36} width={196}
         objectFit="contain"
         alt={"soulswap banner"}
     />
@@ -308,18 +308,18 @@ const Mobile = () => {
             >
               <Web3Status />
             </div>
+            {/* TOKEN STATS */}
+          <div
+            className={`border-2 border-purple rounded-2xl`}
+            >
+            <TokenStats />
+          </div>
               {/* NETWORK ICON */}
             <div
               className={`border-2 ${chainId ? `border-[${getChainColor(chainId)}]` : `border-dark-800`} hover:border-purple p-2 rounded-2xl`}
             >
                 <Web3Network />
             </div>
-            {/* TOKEN STATS */}
-          <div
-            className={`border-2 border-dark-800 hover:border-purple rounded-2xl`}
-            >
-            <TokenStats />
-          </div>
           </div> 
         { /* account &&
         <div
