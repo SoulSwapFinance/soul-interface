@@ -667,11 +667,11 @@ const Swap = () => {
 
               </div>
             </div>
-            <div className={`flex flex-cols-${showChart && showPortfolio ? `hidden` : `1`}`}>
+            {/* <div className={`flex flex-cols-${showChart ? `hidden` : `1`}`}> */}
               {showChart && !showPortfolio &&
                 // useSwap && 
                 [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
-                <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
+                // <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
                   <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded-lg bg-light-glass`}>
                     {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
                     {!isWrapped && 
@@ -685,24 +685,12 @@ const Swap = () => {
                     // />
                     }
                   </div>
-                </div>
+                // </div>
               }
-              {showPortfolio &&
-                // useSwap && 
-                [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
-                <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
-                  <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded-lg bg-light-glass`}>
-                    {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
-                    {/* <Pair inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
-                    <iframe src={`https://soulswap-portfolio.vercel.app/portfolio/${account}`} height={600} />
-                  </div>
-                </div>
-              }
-            </div>
             {/* {(!showChart && !showChart) &&
             <SocialWidget />
           } */}
-            {/* </SwapLayoutCard> */}
+          {/* </div> */}
           </div>
         </DoubleGlowShadowV2>
       }
