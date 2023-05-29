@@ -29,6 +29,7 @@ import { Feature } from 'enums/Feature'
 // import Web3Network from 'components/Web3Network'
 import Typography from 'components/Typography'
 import ChartIcon from 'components/Icons/exchange/ChartIcon'
+import SunMoonIcon from 'components/Icons/header/SunMoonIcon'
 // import { useUserInfo } from "hooks/useAPI"
 
 // interface BarProps {
@@ -64,9 +65,9 @@ const DesktopBar: FC = () => {
     const farmRoute = useCallback(() => {
         router.push(`/farm`)
     }, [])
-    // const nftRoute = useCallback(() => {
-    //     router.push(`/marketplace`)
-    // }, [])
+    const luxorRoute = useCallback(() => {
+        router.push(`/luxor`)
+    }, [])
 
     const swapPage = router.pathname.startsWith('/swap') || router.pathname.startsWith('/exchange/swap')
     const crossPage = router.pathname.startsWith('/cross') || router.pathname.startsWith('/exchange/cross')
@@ -76,6 +77,7 @@ const DesktopBar: FC = () => {
     const farmPage = router.pathname.startsWith('/farm') || router.pathname.startsWith('/summoner')
     const bondPage = router.pathname.startsWith('/bond') || router.pathname.startsWith('/bonds')
     const dataPage = router.pathname.startsWith('/analytics')
+    const luxorPage = router.pathname.startsWith('/luxor')
 
     // const isExchangeAnalytics
     //     = asPath.startsWith('/exchange/analytics')
@@ -100,6 +102,7 @@ const DesktopBar: FC = () => {
     // const isNFT = nftPage
     const isWallet = portfolioPage
     const isData = dataPage
+    const isLuxor = luxorPage
     const isEarn = farmPage || bondPage
     const isExchange = swapPage || crossPage || isPool
 
@@ -169,7 +172,7 @@ const DesktopBar: FC = () => {
                                 className={'w-7 h-7'}
                             />
                         </div> */}
-                        <div className={`grid grid-cols-4 w-full items-center`}>
+                        <div className={`grid grid-cols-5 w-full items-center`}>
                         <div
                             className={classNames(
                                 `grid grid-cols-2`,
@@ -221,6 +224,22 @@ const DesktopBar: FC = () => {
                             { `Data` }
                             </Typography>
                         </div>
+                        <div
+                            className={classNames(
+                                `grid grid-cols-2`,
+                                `hover:border-2 hover:border-[${getChainColor(chainId)}] w-full justify-center rounded p-0.5`,
+                                isLuxor && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
+                            onClick={dataRoute}
+                        >
+                            <SunMoonIcon
+                                fillPrimary={isLuxor ? `${getChainColor(chainId)}` : `#FFFFFF`}
+                                fillSecondary={isLuxor ? `#FFFFFF` : `${getChainColor(chainId)}`}
+                                className={'w-7 h-7 ml-4'}
+                            />
+                            <Typography className={`grid mt-1`}>
+                            { `Luxor` }
+                            </Typography>
+                        </div>
                         {/* } */}
                         {/* {featureEnabled(Feature.NFT, chainId) &&
                             <div
@@ -249,9 +268,9 @@ const DesktopBar: FC = () => {
                             <WalletIcon
                                 fillPrimary={isWallet ? `#FFFFFF` : `${getChainColor(chainId)}`}
                                 fillSecondary={isWallet ? `${getChainColor(chainId)}` : `#FFFFFF`}
-                                className={'w-7 h-7 ml-4 sm:ml-8'}
+                                className={'w-7 h-7 ml-2'}
                             />
-                            <Typography className={`grid mt-1 -ml-2 sm:-ml-2`}>
+                            <Typography className={`grid mt-1 -ml-3.5`}>
                             { `Account` }
                             </Typography>
                         </div>

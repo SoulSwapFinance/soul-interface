@@ -1,6 +1,6 @@
 
 import { Dialog, Transition } from '@headlessui/react'
-import { ChainId, NATIVE } from 'sdk'
+// import { ChainId, NATIVE } from 'sdk'
 import Web3Network from 'components/Web3Network'
 import Web3Status from 'components/Web3Status'
 import { useActiveWeb3React } from 'services/web3'
@@ -12,11 +12,10 @@ import { getChainColor, getChainColorCode } from 'constants/chains'
 import MobileBar from './MobileBar'
 // import SwapIcon from 'components/Icons/exchange/SwapIcon'
 import { useRouter } from 'next/router'
-import DoubleLeftIcon from 'components/Icons/mobile/DoubleLeftIcon'
-import DoubleRightIcon from 'components/Icons/mobile/DoubleRightIcon'
+// import DoubleLeftIcon from 'components/Icons/mobile/DoubleLeftIcon'
+// import DoubleRightIcon from 'components/Icons/mobile/DoubleRightIcon'
 // import TokenStats from 'components/TokenStats'
-// import Image from 'next/image'
-// import Image from 'next/image'
+import Image from 'next/image'
 import LanguageMenu from './useLanguages'
 // import BinocularsIcon from 'components/Icons/header/BinocularsIcon'
 // import WalletIcon from 'components/Icons/header/WalletIcon'
@@ -24,7 +23,7 @@ import LanguageMenu from './useLanguages'
 // import SunMoonIcon from 'components/Icons/header/SunMoonIcon'
 // import HomeIcon from 'components/Icons/mobile/HomeIcon'
 // import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
-import BarsIcon from 'components/Icons/header/BarsIcon'
+// import BarsIcon from 'components/Icons/header/BarsIcon'
 import TokenStats from 'components/TokenStats'
 // import ChartIcon from 'components/Icons/exchange/ChartIcon'
 // import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
@@ -37,7 +36,7 @@ import TokenStats from 'components/TokenStats'
 const Mobile = () => {
   // const menu = useMenu()
   const bar = useBar()
-  // const router = useRouter()
+  const router = useRouter()
   // const { asPath } = useRouter()
   // const isLuxor = router.asPath.startsWith('/luxor')
 
@@ -46,15 +45,15 @@ const Mobile = () => {
   const [open, setOpen] = useState(false)
   // const [dropdown, setShowDropdown] = useState(false)
 
-  // const swapRoute = useCallback(() => {
-  //   router.push(`/exchange/swap`)
-  // }, [])
+  const swapRoute = useCallback(() => {
+    router.push(`/exchange/swap`)
+  }, [])
 
   // const handleDropdown = useCallback(() => {
   //   dropdown ? setShowDropdown(false) : setShowDropdown(true)
   // }, [])
 
-  const WHITE = `#FFFFFF`
+  // const WHITE = `#FFFFFF`
   // const R = `#FF0000`
   // const O = `#FFA500`
   // const Y = `#FFFF00`
@@ -70,11 +69,11 @@ const Mobile = () => {
   //   width={'600px'}
   // />
 
-  const DEFAULT_ICON = <BarsIcon
-    fillPrimary={open ? WHITE : getChainColor(chainId)}
-    fillSecondary={open ? getChainColor(chainId) : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded-xl w-7 h-7` : `hidden`)}
-  />
+  // const DEFAULT_ICON = <BarsIcon
+  //   fillPrimary={open ? WHITE : getChainColor(chainId)}
+  //   fillSecondary={open ? getChainColor(chainId) : WHITE}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded-xl w-7 h-7` : `hidden`)}
+  // />
 
   // const CHART_ICON = <ChartIcon
   //   fillPrimary={open ? WHITE : getChainColor(chainId)}
@@ -100,17 +99,17 @@ const Mobile = () => {
   //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
   // />
 
-  const LEFT_ICON = <DoubleLeftIcon
-    fillPrimary={open ? WHITE : getChainColor(chainId)}
-    fillSecondary={open ? getChainColor(chainId) : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded-xl w-7 h-7` : `hidden`)}
-  />
+  // const LEFT_ICON = <DoubleLeftIcon
+  //   fillPrimary={open ? WHITE : getChainColor(chainId)}
+  //   fillSecondary={open ? getChainColor(chainId) : WHITE}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded-xl w-7 h-7` : `hidden`)}
+  // />
 
-  const RIGHT_ICON = <DoubleRightIcon
-    fillPrimary={open ? WHITE : getChainColor(chainId)}
-    fillSecondary={open ? getChainColor(chainId) : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded-xl w-7 h-7` : `hidden`)}
-  />
+  // const RIGHT_ICON = <DoubleRightIcon
+  //   fillPrimary={open ? WHITE : getChainColor(chainId)}
+  //   fillSecondary={open ? getChainColor(chainId) : WHITE}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded-xl w-7 h-7` : `hidden`)}
+  // />
 
   // const SUN_ICON = <SunMoonIcon
   //   fillPrimary={open ? chainColor : WHITE}
@@ -201,24 +200,16 @@ const Mobile = () => {
   //                     : isNFT ? NFT_ICON
   //                       : DEFAULT_ICON
   
-  // const SOUL_ICON = 
-  // <div className={`flex gap-2 mr-2 ml-2`}>
-  //   <Image
-  //     // src={'/favicon.png'} 
-  //     src={`/favicon.ico`}
-  //     height={36} width={36}
-  //     objectFit="contain"
-  //     alt={"soulswap logo icon"}
-  //   />
-
-  //   <Image
-  //       // src={'/favicon.png'} 
-  //       src={`/SoulSwap-Banner.png`}
-  //       height={36} width={196}
-  //       objectFit="contain"
-  //       alt={"soulswap banner"}
-  //   />
-  // </div>
+  const SOUL_ICON = 
+  <div className={`flex gap-2 mr-2 ml-2`}>
+    <Image
+        // src={'/favicon.png'} 
+        src={`/SoulSwap-Finance-Banner.png`}
+        height={36} width={164}
+        objectFit="contain"
+        alt={"soulswap banner"}
+    />
+  </div>
 
   return (
     <>
@@ -230,10 +221,10 @@ const Mobile = () => {
         // className={`flex bg-dark-900 mt-6 rounded border p-1.5 border-[${getChainColor(chainId)}] hover:border-2 hover:border-purple rounded-2xl`}
         // className={`absolute left-1 top-1.5 bg-dark-900 rounded border-2 border-ftmBlue hover:border-purple rounded-2xl p-1`}
         // onClick={() => swapRoute()}
-        onClick={() => { setOpen(true) }}
+        onClick={() => { swapRoute() }}
       >
-      {/* {SOUL_ICON} */}
-      {DEFAULT_ICON}
+      {SOUL_ICON}
+      {/* {DEFAULT_ICON} */}
       </div>
           {/* <div
             className={`hover:bg-dark-900 p-1 bg-dark-1000 border-2 rounded rounded-2xl 

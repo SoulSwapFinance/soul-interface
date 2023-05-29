@@ -1,9 +1,9 @@
-import React, { FC, Fragment, useState } from 'react'
+import React, { FC, Fragment, useCallback, useState } from 'react'
 import Web3Status from 'components/Web3Status'
 import { useActiveWeb3React } from 'services/web3'
 import { Dialog, Transition } from '@headlessui/react'
 import { SidebarItem } from './SidebarItem'
-// import Image from 'next/image'
+import Image from 'next/image'
 import useBar from './useBar'
 import { classNames } from 'functions'
 import { getChainColor } from 'constants/chains'
@@ -15,33 +15,38 @@ import { ChainId } from 'sdk'
 import { NavigationItem } from './NavigationItem'
 import useMenu from './useMenu'
 import TokenStats from 'components/TokenStats'
+import { useRouter } from 'next/router'
 
 const HEADER_HEIGHT = 64
 
 const Desktop = () => {
   const bar = useBar()
-  const menu = useMenu()
+  // const menu = useMenu()
   const { account, chainId } = useActiveWeb3React()
   const [open, setOpen] = useState(false)
+  const router = useRouter()
 
-  // const SOUL_ICON = 
-  // <div className={`flex gap-2 mr-2 ml-2`}>
-  //   <Image
-  //     // src={'/favicon.png'} 
-  //     src={`/favicon.ico`}
-  //     height={72} width={72}
-  //     objectFit="contain"
-  //     alt={"soulswap logo"}
-  //   />
+  const SOUL_ICON = 
+  <div className={`flex gap-2 mr-2 ml-2`}>
+    {/* <Image
+      // src={'/favicon.png'} 
+      src={`/favicon.ico`}
+      height={72} width={72}
+      objectFit="contain"
+      alt={"soulswap logo"}
+    /> */}
+    <Image
+        // src={'/favicon.png'} 
+        src={`/SoulSwap-Finance-Banner.png`}
+        height={48} width={224}
+        objectFit="contain"
+        alt={"soulswap text banner"}
+    />
+  </div>
 
-  //   <Image
-  //       // src={'/favicon.png'} 
-  //       src={`/SoulSwap-Banner.png`}
-  //       height={72} width={224}
-  //       objectFit="contain"
-  //       alt={"soulswap text banner"}
-  //   />
-  // </div>
+  const swapRoute = useCallback(() => {
+    router.push(`/swap`)
+}, [])
 
   return (
     <div className={`flex w-full`}>
@@ -54,15 +59,17 @@ const Desktop = () => {
         /> */}
         <div
           className={`flex bg-dark-1000 mt-6 p-1.5 border-2 border-dark-800 hover:border-purple rounded-2xl`}
-          onClick={() => setOpen(true)}
+          onClick={() => swapRoute()
+            // setOpen(true)
+          }
         >
 
-          {/* {SOUL_ICON} */}
-          <BarsIcon
+          {SOUL_ICON}
+          {/* <BarsIcon
             fillPrimary={open ? `#821FFF` : `#FFFFFF`} // purple
             fillSecondary={open ? `#FFFFFF` : `#821FFF`} // purple
             className={'w-7 h-7'}
-          />
+          /> */}
         </div>
         {/* <nav>
         <div
