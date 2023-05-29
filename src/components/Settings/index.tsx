@@ -36,11 +36,11 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
   const [singleHopOnly, setSingleHopOnly] = useUserSingleHopOnly()
 
   // show confirmation view before turning on
-  const [showConfirmation, setShowConfirmation] = useState(false)
+  // const [showConfirmation, setShowConfirmation] = useState(false)
 
   useOnClickOutside(node, open ? toggle : undefined)
 
-  const [ttl, setTtl] = useUserTransactionTTL()
+  // const [ttl, setTtl] = useUserTransactionTTL()
   const WHITE = `#FFFFFF`
   // const chainColor = getChainColor(chainId)
   // const [userUseArcher, setUserUseArcher] = useUserArcherUseRelay()
@@ -55,7 +55,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
       <div
         className={
           `flex items-center justify-center mr-3
-          w-5 h-5 sm:w-6 sm:h-6 rounded cursor-pointer sm:absolute sm:top-12 sm:mt-0.5 sm:right-1.5
+          w-5 h-5 sm:w-6 sm:h-6 rounded cursor-pointer sm:absolute sm:bottom-24 sm:mb-5 sm:right-1.5
           `
         }
         onClick={toggle}
