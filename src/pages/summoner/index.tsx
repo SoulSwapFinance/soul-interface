@@ -77,15 +77,6 @@ const Summoner = () => {
 
   return (
     <div className={`grid grid-cols-1 justify-center p-1 mt-8 sm:m-8 sm:max-w-[90%] md:max-w-2xl bg-dark-900 rounded-2xl`}>
-            <div
-              className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
-            >
-              <Image src={FARM_BANNER}
-                height={180}
-                width={720}
-                alt={'farm banner'}
-              />
-            </div>
           <div className={`flex justify-center m-1 p-1`}>
           <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/dashboard'}>
