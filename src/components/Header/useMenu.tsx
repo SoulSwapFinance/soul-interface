@@ -131,7 +131,7 @@ const useMenu: UseMenu = () => {
     fillPrimary={open ? WHITE : chainColor }
     fillSecondary={open ? chainColor : WHITE}
     className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? 
-      `cursor-pointer rounded rounded-xl w-8 h-6` : `hidden`)}
+      `cursor-pointer rounded-xl w-8 h-6` : `hidden`)}
   />
   </div>
 
@@ -226,7 +226,7 @@ const CHART_ICON =
       const farmItems = {
         key: 'pool',
         title: i18n._(t`Liquidity`),
-        icon: POOL_ICON,
+        // icon: POOL_ICON,
         // icon: <div className={`grid grid-cols-2`}> 
         //     <PlusCircleIcon width={14} className={classNames(
         //   `filter text-white mb-2`
@@ -244,7 +244,7 @@ const CHART_ICON =
       const luxorItem = {
         key: 'luxor',
         title: i18n._(t`Luxor`),
-        icon: SUN_ICON,
+        // icon: SUN_ICON,
         link: '/luxor'
       }
       mainItems.push(luxorItem)
@@ -343,7 +343,7 @@ const CHART_ICON =
       mainItems.push({
           key: 'whitepaper',
           title: i18n._(t`Docs`),
-          icon: DOCS_ICON,
+          // icon: DOCS_ICON,
           // icon: <DocumentIcon width={20} className={classNames(
           //   `filter text-white`
           //   )} />,
@@ -366,7 +366,7 @@ const CHART_ICON =
       mainItems.push({
           key: 'data',
           title: i18n._(t`Analytics`),
-          icon: CHART_ICON,
+          // icon: CHART_ICON,
           // icon: <PresentationChartLineIcon width={20} className={classNames(
           //   `filter text-white`
           //   )} />,

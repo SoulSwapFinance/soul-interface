@@ -359,7 +359,7 @@ export default function Add() {
   return (
     <>
       <Head>
-        <title>{i18n._(t`Add Liquidity`)} | Soul</title>
+        <title>{i18n._(t`Add Liquidity`)} | SoulSwap</title>
         <meta
           key="description"
           name="description"

@@ -150,7 +150,7 @@ export default function Token({ outputCurrency }: TokenProps) {
 
   return (
     <AnalyticsContainer>
-      <NextSeo title={`${token?.name} Analytics`} />
+      {/* <NextSeo title={`${token?.name} Analytics`} /> */}
       <div className="px-4 pt-4 space-y-4 mb-1">
         <div className="grid grid-cols-1 gap-2">
           <ChartCard

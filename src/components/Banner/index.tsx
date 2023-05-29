@@ -113,6 +113,29 @@ export const DonateBanner: FC<IFeature> = ({ chainId }) => (
   </div>
 )
 
+export const LendBanner: FC<IFeature> = ({ chainId }) => (
+  <div className={classNames(featureEnabled(Features.UNDERWORLD, chainId) ? "relative items-center w-full" : 'hidden')}>
+    <div className="w-full">
+      <div className="text-center animate-pulse">
+        <p className="font-medium mb-2 mt-2 text-center text-white">
+          <ExternalLink
+            href="https://twitter.com/SoulSwapFinance/status/1662949759374757888?s=20" target="_blank" rel="noreferrer"
+            className="font-bold text-white text-lg"
+          >
+            <Button variant="filled" color={`avaxRed`} size="sm">
+              <span className="justify-center font-bold">
+                {'Lending: Now Closed ↗'}
+              </span>
+            </Button>
+          </ExternalLink>
+        </p>
+      </div>
+      <div className="absolute inset-y-0 right-0 flex items-start pt-1 pr-1 sm:pt-1 sm:pr-2 sm:items-start">
+      </div>
+    </div>
+  </div>
+)
+
 export const TwitterBanner: FC<IFeature> = ({ chainId }) => (
   <div className="relative items-center w-full">
     <div className="w-full">

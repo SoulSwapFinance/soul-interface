@@ -714,7 +714,7 @@ export default function Remove() {
   return (
     <>
       <Head>
-        <title>{i18n._(t`Remove Liquidity`)} | Soul </title>
+        <title>{i18n._(t`Remove Liquidity`)} | SoulSwap </title>
         <meta key="description" name="description" content={i18n._(t`Remove liquidity of Soul`)} />
       </Head>
 

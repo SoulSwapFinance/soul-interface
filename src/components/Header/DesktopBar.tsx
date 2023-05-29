@@ -21,13 +21,14 @@ import useBar from './useBar'
 // import HomeIcon from 'components/Icons/mobile/HomeIcon'
 import SwapIcon from 'components/Icons/exchange/SwapIcon'
 import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
-import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
+// import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
 import WalletIcon from 'components/Icons/header/WalletIcon'
 // import NftIcon from 'components/Icons/mobile/NftIcon'
 import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 // import Web3Network from 'components/Web3Network'
 import Typography from 'components/Typography'
+import ChartIcon from 'components/Icons/exchange/ChartIcon'
 // import { useUserInfo } from "hooks/useAPI"
 
 // interface BarProps {
@@ -41,8 +42,8 @@ const DesktopBar: FC = () => {
     const { asPath } = useRouter()
 
     const { chainId } = useActiveWeb3React()
-    const [open, setOpen] = useState(false)
-    const bar = useBar()
+    // const [open, setOpen] = useState(false)
+    // const bar = useBar()
     
     // const { userInfo } = useUserInfo()
 
@@ -57,8 +58,8 @@ const DesktopBar: FC = () => {
     const walletRoute = useCallback(() => {
         router.push(`/portfolio`)
     }, [])
-    const lendRoute = useCallback(() => {
-        router.push(`/lend`)
+    const dataRoute = useCallback(() => {
+        router.push(`/analytics`)
     }, [])
     const farmRoute = useCallback(() => {
         router.push(`/farm`)
@@ -74,7 +75,7 @@ const DesktopBar: FC = () => {
     // const nftPage = router.pathname.startsWith('/marketplace') || router.pathname.startsWith('/marketplace/collections')
     const farmPage = router.pathname.startsWith('/farm') || router.pathname.startsWith('/summoner')
     const bondPage = router.pathname.startsWith('/bond') || router.pathname.startsWith('/bonds')
-    const lendPage = router.pathname.startsWith('/lend') || router.pathname.startsWith('/borrow')
+    const dataPage = router.pathname.startsWith('/analytics')
 
     // const isExchangeAnalytics
     //     = asPath.startsWith('/exchange/analytics')
@@ -98,7 +99,7 @@ const DesktopBar: FC = () => {
     const isPool = isRemove || isAdd
     // const isNFT = nftPage
     const isWallet = portfolioPage
-    const isLend = lendPage
+    const isData = dataPage
     const isEarn = farmPage || bondPage
     const isExchange = swapPage || crossPage || isPool
 
@@ -203,24 +204,24 @@ const DesktopBar: FC = () => {
                         </Typography>
                         </div>
                         }
-                        {featureEnabled(Feature.UNDERWORLD, chainId) &&
+                        {/* {featureEnabled(Feature.ANALYTICS, chainId) && */}
                         <div
                             className={classNames(
                                 `grid grid-cols-2`,
                                 `hover:border-2 hover:border-[${getChainColor(chainId)}] w-full justify-center rounded p-0.5`,
-                                isLend && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
-                            onClick={lendRoute}
+                                isData && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
+                            onClick={dataRoute}
                         >
-                            <LendSkullIcon
-                                fillPrimary={isLend ? `${getChainColor(chainId)}` : `#FFFFFF`}
-                                fillSecondary={isLend ? `#FFFFFF` : `${getChainColor(chainId)}`}
+                            <ChartIcon
+                                fillPrimary={isData ? `${getChainColor(chainId)}` : `#FFFFFF`}
+                                fillSecondary={isData ? `#FFFFFF` : `${getChainColor(chainId)}`}
                                 className={'w-7 h-7 ml-4 sm:ml-8'}
                             />
                             <Typography className={`grid mt-1`}>
-                            { `Lend` }
+                            { `Data` }
                             </Typography>
                         </div>
-                        }
+                        {/* } */}
                         {/* {featureEnabled(Feature.NFT, chainId) &&
                             <div
                                 className={classNames(
