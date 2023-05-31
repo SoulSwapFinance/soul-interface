@@ -231,7 +231,7 @@ const DesktopBar: FC = () => {
                                 `grid grid-cols-2`,
                                 `hover:border-2 hover:border-[${getChainColor(chainId)}] w-full justify-center rounded p-0.5`,
                                 isLuxor && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
-                            onClick={dataRoute}
+                            onClick={luxorRoute}
                         >
                             <SunMoonIcon
                                 fillPrimary={isLuxor ? `${getChainColor(chainId)}` : `#FFFFFF`}
