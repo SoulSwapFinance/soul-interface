@@ -304,7 +304,7 @@ const Mobile = () => {
           // onClick={() => setOpen(true)}
         >
             <div
-              className={`border-2 ${account ? `border-dark-800` : `border-avaxRed animate-pulse`} hover:border-purple rounded-2xl`}
+              className={`border-2 ${account ? `border-purple` : `border-avaxRed animate-pulse`} hover:border-purple rounded-2xl`}
             >
               <Web3Status />
             </div>
