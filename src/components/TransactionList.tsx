@@ -1,15 +1,15 @@
-import { ArrowUpRight, CheckCircle } from 'react-feather'
+// import { ArrowUpRight, CheckCircle } from 'react-feather'
 import Dots from '../components/Dots'
-import Image from '../components/Image'
+// import Image from '../components/Image'
 import React from 'react'
-import { getExplorerLink } from '../functions/explorer'
+// import { getExplorerLink } from '../functions/explorer'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { useActiveWeb3React } from 'services/web3'
+// import { useActiveWeb3React } from 'services/web3'
 
 export default function TransactionList({ transactions }) {
   const { i18n } = useLingui()
-  const { chainId } = useActiveWeb3React()
+  // const { chainId } = useActiveWeb3React()
   return transactions ? (
     <div className="space-y-3">
       {/* {transactions.map((transaction) => (
