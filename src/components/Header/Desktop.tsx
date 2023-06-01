@@ -1,5 +1,5 @@
 import React, { FC, Fragment, useCallback, useState } from 'react'
-import Web3Status from 'components/Web3Status'
+import Web3Status, { getChakraColor, getWalletColor } from 'components/Web3Status'
 import { useActiveWeb3React } from 'services/web3'
 import { Dialog, Transition } from '@headlessui/react'
 import { SidebarItem } from './SidebarItem'
@@ -9,13 +9,14 @@ import { classNames } from 'functions'
 import { getChainColor } from 'constants/chains'
 import DesktopBar from './DesktopBar'
 import LanguageMenu from './useLanguages'
-import BarsIcon from 'components/Icons/header/BarsIcon'
+// import BarsIcon from 'components/Icons/header/BarsIcon'
 import Web3Network from 'components/Web3Network'
-import { ChainId } from 'sdk'
-import { NavigationItem } from './NavigationItem'
-import useMenu from './useMenu'
+// import { ChainId } from 'sdk'
+// import { NavigationItem } from './NavigationItem'
+// import useMenu from './useMenu'
 import TokenStats from 'components/TokenStats'
 import { useRouter } from 'next/router'
+// import { useUserInfo } from 'hooks/useAPI'
 
 const HEADER_HEIGHT = 64
 
@@ -162,7 +163,7 @@ const Desktop = () => {
         >
           {/* WALLET ICON */}
           <div
-            className={`border-2 ${account ? `border-dark-800` : `border-avaxRed animate-pulse`} hover:border-purple rounded-2xl`}
+            className={`border-2 ${account ? `border-purple` : `border-avaxRed animate-pulse`} hover:border-purple rounded-2xl`}
           >
             <Web3Status />
           </div>
