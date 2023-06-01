@@ -30,7 +30,7 @@ import { PairState } from 'hooks/useV2Pairs'
 import ReactGA from 'react-ga'
 import { TransactionResponse } from '@ethersproject/providers'
 import UnsupportedCurrencyFooter from 'features/swap/UnsupportedCurrencyFooter'
-import Web3Connect from 'components/Web3Connect'
+// import Web3Connect from 'components/Web3Connect'
 import { t } from '@lingui/macro'
 import { useCurrency } from 'hooks/Tokens'
 import { useIsSwapUnsupported } from 'hooks/useIsSwapUnsupported'
@@ -48,14 +48,10 @@ import { useActiveWeb3React } from 'services/web3'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 import { ArrowDownIcon, PlusIcon } from '@heroicons/react/24/solid'
 import { getChainColor, getChainColorCode } from 'constants/chains'
-// import { SwapLayoutCard } from 'layouts/SwapLayout'
-// import { SubmitButton } from 'features/summoner/Styles'
-// import SoulLogo from 'components/SoulLogo'
-import { DonateBanner, LendBanner, LuxorBanner } from 'components/Banner'
 
-import Image from 'next/image'
-import ADD_BANNER from 'assets/branding/add-banner.png'
-import TokenStats from 'components/TokenStats'
+// import Image from 'next/image'
+// import ADD_BANNER from 'assets/branding/add-banner.png'
+// import TokenStats from 'components/TokenStats'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
 
@@ -368,10 +364,6 @@ export default function Add() {
       </Head>
       <DoubleGlowShadowV2>
       <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-        <LendBanner 
-            // color={'purple'} 
-            // textColor={'white'} 
-        chainId={chainId} />
           <SwapDropdown
             inputCurrency={currencies[Field.CURRENCY_A]}
             outputCurrency={currencies[Field.CURRENCY_B]}
@@ -540,7 +532,15 @@ export default function Add() {
 
           {!addIsUnsupported ? (
             pair && !noLiquidity && pairState !== PairState.INVALID ? (
-              <MinimalPositionCard chainId={chainId} showUnwrapped={oneCurrencyIsWETH} pair={pair} />
+              <div 
+                className={`border-2 rounded-2xl border-purple p-0.5 mb-4 mt-4`}
+              >
+              <MinimalPositionCard
+                chainId={chainId}
+                showUnwrapped={oneCurrencyIsWETH}
+                pair={pair}
+              />
+              </div>
             ) : null
           ) : (
             <UnsupportedCurrencyFooter

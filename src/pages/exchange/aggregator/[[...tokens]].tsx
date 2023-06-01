@@ -15,7 +15,7 @@ import { ChainId, Currency, CurrencyAmount, NATIVE, NATIVE_ADDRESS, SOUL_ADDRESS
 import { addTransaction } from 'state/transactions/actions'
 import useTokenBalance from 'hooks/useTokenBalance'
 import { Button } from 'components/Button'
-import { getChainColor, getChainColorCode } from 'constants/chains'
+import { getChainColorCode } from 'constants/chains'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 import { ArrowDownIcon, ArrowLeftIcon } from '@heroicons/react/24/solid'
 import { useGasPrice } from 'hooks/useAPI'
@@ -30,9 +30,8 @@ import { classNames } from 'functions/styling'
 import { featureEnabled } from 'functions/feature'
 import { i18n } from '@lingui/core'
 import { t } from '@lingui/macro'
-import Image from 'next/image'
-import META_BANNER from 'assets/branding/meta-banner.png'
-import { DonateBanner, LendBanner, LuxorBanner } from 'components/Banner'
+// import Image from 'next/image'
+// import META_BANNER from 'assets/branding/meta-banner.png'
 import { NextSeo } from 'next-seo'
 
 // import { groupBy, mapValues, merge, uniqBy } from 'lodash'
@@ -367,10 +366,6 @@ const Aggregator = ({ }) => {
 			<NextSeo title={`Meta | SoulSwap`} />
           	<div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
 				{/* <SwapLayoutCard> */}
-				<LendBanner 
-              // color={'purple'} 
-              // textColor={'white'} 
-              chainId={chainId} />
 			{/* <div
               className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
             >
