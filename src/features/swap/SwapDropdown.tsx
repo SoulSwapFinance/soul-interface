@@ -53,7 +53,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
 
   const soulEnabled = [ChainId.FANTOM, ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId)
 
-  const activeStyle = `border border-[${getChainColor(chainId)}] rounded`
+  const activeStyle = `rounded`
   const style = `text-secondary bg-white border border-[${getChainColor(chainId)}]`
   const swapStyle = isExchange ? activeStyle : style
   const poolStyle = isPool ? activeStyle : style
@@ -62,8 +62,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const crossStyle = isCross ? activeStyle : style
 
   return (
-    <div className={`flex items-center justify-center gap-4 border-2 border-${getChainColorCode(chainId)} rounded-lg`}>
-      <div className="flex gap-4 sm:gap-6 mr-8 sm:mr-0">
+    <div className={`flex mt-2 mb-2 items-center justify-center gap-4 border-2 border-dark-700 rounded-lg`}>
+      <div className={`flex gap-4 sm:gap-6 mr-8 sm:mr-0`}>
         {/* {featureEnabled(Feature.LIQUIDITY, chainId) && */}
         <NavLink
           className={classNames(
@@ -81,8 +81,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           <div
             className={classNames(
               `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
-              isExchange && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
-          // onClick={reveal}
+              isExchange && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
+              // onClick={reveal}
           // onMouseEnter={reveal}
           // onMouseLeave={conceal}
           >
@@ -114,8 +114,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             <div
               className={classNames(
                 `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
-                isPool && `border-2 border-[${getChainColor(chainId)}]`)
-              }
+                isPool && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
             // onClick={reveal}
             // onMouseEnter={reveal}
             // onMouseLeave={conceal}
@@ -147,8 +146,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             <div
               className={classNames(
                 `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
-                isAggregator && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
-            // onClick={reveal}
+                isAggregator && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
+                // onClick={reveal}
             // onMouseEnter={reveal}
             // onMouseLeave={conceal}
             >
@@ -178,8 +177,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             <div
               className={classNames(
                 `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
-                isCross && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
-            // onClick={reveal}
+                isCross && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
+                // onClick={reveal}
             // onMouseEnter={reveal}
             // onMouseLeave={conceal}
             >
@@ -210,7 +209,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             <div
               className={classNames(
                 `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
-                isBridge && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
+                isBridge && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
                 // onClick={reveal}
                 // onMouseEnter={reveal}
                 // onMouseLeave={conceal}
