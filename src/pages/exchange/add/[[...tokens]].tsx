@@ -536,7 +536,7 @@ export default function Add() {
           {!addIsUnsupported ? (
             pair && !noLiquidity && pairState !== PairState.INVALID ? (
               <div 
-                className={userPoolBalance > 0 ? `border-2 rounded-2xl border-purple p-0.5 mb-4 mt-4` : 'hidden'}
+                className={Number(userPoolBalance) > 0 ? `border-2 rounded-2xl border-purple p-0.5 mb-4 mt-4` : 'hidden'}
               >
               <MinimalPositionCard
                 chainId={chainId}
