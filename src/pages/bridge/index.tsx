@@ -38,11 +38,9 @@ import { getChainColor, getChainColorCode } from "constants/chains"
 import SwapDropdown from "features/swap/SwapDropdown"
 import { t } from "@lingui/macro"
 import { i18n } from "@lingui/core"
-import { DonateBanner, LendBanner, LuxorBanner } from "components/Banner"
 // import BRIDGE_BANNER from 'assets/branding/bridge-banner.png'
 import BridgeTokenList from "features/bridge/BridgeTokenList"
 import { ContentBox, OverlayButton, Typo1, Typo2 } from "components"
-// import TokenStats from "components/TokenStats"
 import { ChainId } from "sdk"
 import { NextSeo } from "next-seo"
 
@@ -419,9 +417,6 @@ const Bridge: React.FC<any> = () => {
       <NextSeo title={`Bridge | SoulSwap`} />
       {/* <SwapLayoutCard> */}
       <div className={`grid p-1 mt-6 space-y-2 rounded-2xl bg-dark-1000`}>
-      <LendBanner
-        chainId={chainId}
-      />
         <div className={`grid`}>
           <div className={`my-1`} />
           <SwapDropdown />

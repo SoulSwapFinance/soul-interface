@@ -50,7 +50,6 @@ import { classNames } from 'functions'
 import { getChainColorCode } from 'constants/chains'
 import SwapDropdown from 'features/swap/SwapDropdown'
 // import { SwapLayoutCard } from 'layouts/SwapLayout'
-import { LendBanner } from 'components/Banner'
 // import Image from 'next/image'
 // import REMOVE_BANNER from 'assets/branding/remove-banner.png'
 // import TokenStats from 'components/TokenStats'
@@ -720,11 +719,6 @@ export default function Remove() {
 
       <DoubleGlowShadowV2>
       <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-        <LendBanner 
-          // color={'purple'} 
-          // textColor={'white'} 
-          chainId={chainId} 
-        />
           {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
           {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
           {/* <div className={`my-12`} /> */}
@@ -751,7 +745,7 @@ export default function Remove() {
             {/* <AutoColumn gap="md"> */}
               <div
                 className={`mb-4`}
-              >
+                >
               <LiquidityHeader input={currencyA} output={currencyB} />
                 <PercentInputPanel
                   value={innerLiquidityPercentage}

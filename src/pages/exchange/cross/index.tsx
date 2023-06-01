@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState, FC } from "react";
-import Image from "next/image";
+import React, { useEffect, useMemo, useRef, useState, FC } from "react"
+import Image from "next/image"
 import SDK, {
   // BLOCKCHAIN_NAME,
   Configuration,
@@ -8,48 +8,47 @@ import SDK, {
   InsufficientFundsError,
   InsufficientLiquidityError,
   UserRejectError
-} from "rubic-sdk";
-import { sleep } from "utils/sleep";
+} from "rubic-sdk"
+import { sleep } from "utils/sleep"
 import { ArrowDownIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
-import { BigNumber as EthersBigNumber, ethers } from "ethers";
-import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, POLYGON, MOONRIVER, Token } from "features/cross/chains";
-import { ERC20_ABI } from "constants/abis/erc20";
-import { useActiveWeb3React } from "services/web3";
-// import { useUserInfo } from "hooks/useAPI";
-import { Button } from "components/Button";
-// import { useNetworkModalToggle } from "state/application/hooks";
-import { Input, OverlayButton } from "components/index";
-import Typography from "components/Typography";
-import { formatNumber, formatPercent } from "functions/format";
-import { classNames } from "functions/styling";
-import InputCurrencyBox from "components/Bridge/InputCurrencyBox";
-// import Container from "components/Container";
-import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
-// import SwapHeader from "features/swap/SwapHeader";
+import { BigNumber as EthersBigNumber, ethers } from "ethers"
+import { FANTOM, AVALANCHE, BINANCE, Chain, CHAINS, ETHEREUM, POLYGON, MOONRIVER, Token } from "features/cross/chains"
+import { ERC20_ABI } from "constants/abis/erc20"
+import { useActiveWeb3React } from "services/web3"
+// import { useUserInfo } from "hooks/useAPI"
+import { Button } from "components/Button"
+// import { useNetworkModalToggle } from "state/application/hooks"
+import { Input, OverlayButton } from "components/index"
+import Typography from "components/Typography"
+import { formatNumber, formatPercent } from "functions/format"
+import { classNames } from "functions/styling"
+import InputCurrencyBox from "components/Bridge/InputCurrencyBox"
+// import Container from "components/Container"
+import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2"
+// import SwapHeader from "features/swap/SwapHeader"
 import SwapDropdown from "features/swap/SwapDropdown"
 
-// import { SwapLayoutCard } from "layouts/SwapLayout";
-// import Modal from "components/DefaultModal";
-// import { useETHBalances } from "state/wallet/hooks";
-import NetworkModal from "modals/NetworkModal";
-import { AutoColumn } from "components/Column";
-import Row from "components/Row";
-// import ModalHeader from "components/Modal/Header";
-import { WrappedCrossChainTrade } from "rubic-sdk/lib/features/cross-chain/providers/common/models/wrapped-cross-chain-trade";
-import { useMulticallContract } from "hooks/useContract";
-import { getLastExchange, setLastExchange } from "utils/rubic/hooks";
-import { AVAX, CHAIN_BY_ID, FTM, NATIVE_ADDRESS, rubicConfiguration } from "utils/rubic/configuration";
-import { ChainId } from "sdk";
-import TokenSelect from "features/cross/components/TokenSelect";
-import NavLink from "components/NavLink";
-// import { SubmitButton } from "features/summoner/Styles";
-import { getChainColor, getChainColorCode } from "constants/chains";
-// import { DonateBanner, LuxorBanner } from "components/Banner";
-// import { BalancePromiseToUnit } from "pages/bridge";
+// import { SwapLayoutCard } from "layouts/SwapLayout"
+// import Modal from "components/DefaultModal"
+// import { useETHBalances } from "state/wallet/hooks"
+import NetworkModal from "modals/NetworkModal"
+import { AutoColumn } from "components/Column"
+import Row from "components/Row"
+// import ModalHeader from "components/Modal/Header"
+import { WrappedCrossChainTrade } from "rubic-sdk/lib/features/cross-chain/providers/common/models/wrapped-cross-chain-trade"
+import { useMulticallContract } from "hooks/useContract"
+import { getLastExchange, setLastExchange } from "utils/rubic/hooks"
+import { AVAX, CHAIN_BY_ID, FTM, NATIVE_ADDRESS, rubicConfiguration } from "utils/rubic/configuration"
+import { ChainId } from "sdk"
+import TokenSelect from "features/cross/components/TokenSelect"
+import NavLink from "components/NavLink"
+// import { SubmitButton } from "features/summoner/Styles"
+import { getChainColor, getChainColorCode } from "constants/chains"
+// import { DonateBanner, LuxorBanner } from "components/Banner"
+// import { BalancePromiseToUnit } from "pages/bridge"
 // import CROSS_BANNER from 'assets/branding/cross-banner.png'
-// import TokenStats from "components/TokenStats";
-import { NextSeo } from "next-seo";
-import { LendBanner } from "components/Banner";
+// import TokenStats from "components/TokenStats"
+import { NextSeo } from "next-seo"
 
 export default function Exchange() {
   const { account, chainId } = useActiveWeb3React()
@@ -340,10 +339,6 @@ export default function Exchange() {
       <DoubleGlowShadowV2>
       <NextSeo title={`xChain | SoulSwap`} />
       <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-            <LendBanner 
-              // color={'purple'} 
-              // textColor={'white'} 
-              chainId={chainId} />
             {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
             {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
             {/* <div className={`my-12`} /> */}
@@ -354,7 +349,7 @@ export default function Exchange() {
             {/*  [F] TOKEN SELECTOR */}
             {/*    [F] CHAIN LOGO   */}
             <div
-              className="grid grid-cols-1 rounded bg-dark-1000 border border-4 w-full"
+              className="grid grid-cols-1 rounded bg-dark-1000 border-4 w-full"
               style={{ borderColor: fromChain?.color }}
             >
               {wrongNetwork &&
@@ -391,7 +386,7 @@ export default function Exchange() {
                 </div>
               }
               <div
-                className={"flex w-full border border-4"}
+                className={"flex w-full border-4"}
                 style={{ borderColor: fromChain?.color }}
               />
               <Image
@@ -404,7 +399,7 @@ export default function Exchange() {
               >
               </Image>
               <div
-                className={"flex w-full border border-4"}
+                className={"flex w-full border-4"}
                 style={{ borderColor: fromChain?.color }}
               />
               <Button
@@ -507,11 +502,11 @@ export default function Exchange() {
             </Row>
 
             <div
-              className="grid grid-cols-1 rounded bg-dark-1000 border border-4 w-full"
+              className="grid grid-cols-1 rounded bg-dark-1000 border-4 w-full"
               style={{ borderColor: toChain?.color }}
             >
               <div
-                className={"flex w-full border border-4"}
+                className={"flex w-full border-4"}
                 style={{ borderColor: toChain?.color }}
               />
               <Image
@@ -523,7 +518,7 @@ export default function Exchange() {
                 onClick={() => setShowSelectTo(true)}
               />
               <div
-                className={"flex w-full border border-4"}
+                className={"flex w-full border-4"}
                 style={{ borderColor: toChain?.color }}
               />
               <Button
