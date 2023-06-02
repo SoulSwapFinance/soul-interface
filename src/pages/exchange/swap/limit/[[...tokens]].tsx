@@ -87,7 +87,7 @@ import { useCurrency } from "hooks/Tokens"
 import SwapDropdown from "features/swap/SwapDropdown"
 import { getChainColorCode } from "constants/chains"
 import { LuxorBanner } from "components/Banner"
-import LIMIT_BANNER from 'assets/branding/limit-banner.png'
+// import LIMIT_BANNER from 'assets/branding/limit-banner.png'
 import TokenStats from "components/TokenStats"
 
 // import SocialWidget from "components/Social"
@@ -503,8 +503,8 @@ const Limit = () => {
           <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
             {/* <SwapLayoutCard> */}
             {/* <DonateBanner chainId={chainId} /> */}
-            <LuxorBanner color={'purple'} textColor={'white'} chainId={chainId} />
-          <div
+            {/* <LuxorBanner color={'purple'} textColor={'white'} chainId={chainId} /> */}
+          {/* <div
               className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
             >
               <Image src={LIMIT_BANNER}
@@ -512,14 +512,14 @@ const Limit = () => {
                 width={720}
                 alt={'limit banner'}
               />
-          </div>
+          </div> */}
             {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
             {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
-            <div className="p-0 mt-0 space-y-4 rounded bg-dark-1000" style={{ zIndex: 1 }}>
+            {/* <div className="p-0 mt-0 space-y-4 rounded bg-dark-1000" style={{ zIndex: 1 }}>
           {showHeader && 
             // <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
             <div className={`mt-0`} />
-          }
+          } */}
 
             {showHeader &&
               <SwapDropdown
@@ -862,7 +862,7 @@ const Limit = () => {
             <div className={classNames([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `flex flex-cols-2 gap-3 text-white justify-end` : `hidden`)}>
             </div>
           </div>
-          </div>
+          {/* </div> */}
       </DoubleGlowShadowV2>
   )
 }

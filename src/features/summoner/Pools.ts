@@ -297,7 +297,7 @@ export const InactiveFantomPools = [
     token1Address: USDC_ADDRESS[ChainId.FANTOM],
   },
   // LENDING MARKET //
-  { // 220
+  /* { // 220
     pid: 20,
     type: 'lend',
     decimals: 6,
@@ -307,7 +307,7 @@ export const InactiveFantomPools = [
     lpAddress: '0xc5Ae8847C868898f68EF0227B6c4865dFcCe0D65',
     token0Address: USDC_ADDRESS[ChainId.FANTOM],
     token1Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-  },
+  }, */
   // LENDING MARKET //
   // { // 220
   //   pid: 21,

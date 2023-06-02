@@ -48,6 +48,7 @@ import { useActiveWeb3React } from 'services/web3'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 import { ArrowDownIcon, PlusIcon } from '@heroicons/react/24/solid'
 import { getChainColor, getChainColorCode } from 'constants/chains'
+// import { useTokenBalance } from 'state/wallet/hooks'
 
 // import Image from 'next/image'
 // import ADD_BANNER from 'assets/branding/add-banner.png'
@@ -151,6 +152,8 @@ export default function Add() {
   const [approvalB, approveBCallback] = useApproveCallback(parsedAmounts[Field.CURRENCY_B], routerContract?.address)
 
   const addTransaction = useTransactionAdder()
+  
+  // const userPoolBalance = useTokenBalance(chainId, account ?? undefined, pair.liquidityToken)
 
   async function onAdd() {
     if (!chainId || !library || !account || !routerContract) return
@@ -533,9 +536,9 @@ export default function Add() {
           {!addIsUnsupported ? (
             pair && !noLiquidity && pairState !== PairState.INVALID ? (
               <div 
-                className={`border-2 rounded-2xl border-purple p-0.5 mb-4 mt-4`}
               >
               <MinimalPositionCard
+                className={`border-2 rounded-2xl border-purple p-0.5 mb-4 mt-4`}
                 chainId={chainId}
                 showUnwrapped={oneCurrencyIsWETH}
                 pair={pair}

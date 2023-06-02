@@ -856,6 +856,7 @@ export default function Remove() {
 
           {pair &&
             <MinimalPositionCard
+              className={`border-2 rounded-2xl border-purple p-0.5 mb-4 mt-4`}
               chainId={chainId}
               showUnwrapped={oneCurrencyIsWETH}
               pair={pair}

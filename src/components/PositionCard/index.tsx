@@ -30,12 +30,13 @@ import { getChainColor, getChainColorCode } from 'constants/chains'
 interface PositionCardProps {
   pair: Pair
   chainId: ChainId
+  className?: string
   showUnwrapped?: boolean
   border?: string
   stakedBalance?: CurrencyAmount<Token> // optional balance to indicate that liquidity is deposited in mining pool
 }
 
-export function MinimalPositionCard({ pair, chainId, showUnwrapped = false, border }: PositionCardProps) {
+export function MinimalPositionCard({ pair, chainId, showUnwrapped = false, border, className }: PositionCardProps) {
   const { i18n } = useLingui()
   const { account } = useActiveWeb3React()
 
@@ -69,7 +70,9 @@ export function MinimalPositionCard({ pair, chainId, showUnwrapped = false, bord
   return (
     <>
       {userPoolBalance && JSBI.greaterThan(userPoolBalance.quotient, JSBI.BigInt(0)) ? (
-        <div className="p-5 rounded bg-dark-800 text-high-emphesis">
+        <div 
+          className={`p-5 rounded bg-dark-800 text-high-emphesis ${className}`}
+          >
           <AutoColumn gap={'md'}>
             <div className="text-lg">{i18n._(t`Your Position`)}</div>
             <div className="flex flex-col md:flex-row md:justify-between">
