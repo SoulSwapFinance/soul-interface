@@ -604,7 +604,8 @@ const Swap = () => {
                               }
                               id="swap-button"
                               disabled={
-                                !isValid || approvalState !== ApprovalState.APPROVED || (priceImpactSeverity > 3)
+                                !isValid || approvalState !== ApprovalState.APPROVED 
+                                // || (priceImpactSeverity > 3)
                               }
                               className="rounded-2xl w-full md:rounded"
                             >
