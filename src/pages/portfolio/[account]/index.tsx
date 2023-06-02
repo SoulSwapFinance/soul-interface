@@ -5,7 +5,7 @@ import { getChainColor } from 'constants/chains'
 import ActionsModal from 'features/portfolio/ActionsModal'
 import { CoffinBalances, WalletBalances } from 'features/portfolio/AssetBalances/coffinAndWallet'
 import { PoolBalances } from 'features/portfolio/AssetBalances/pools'
-import { UnderworldCollateral } from 'features/portfolio/AssetBalances/underworld/UnderworldCollateral'
+// import { UnderworldCollateral } from 'features/portfolio/AssetBalances/underworld/UnderworldCollateral'
 import { UnderworldLent } from 'features/portfolio/AssetBalances/underworld/UnderworldLent'
 // import HeaderDropdown from 'features/portfolio/HeaderDropdown'
 import { useAccountInUrl } from 'features/portfolio/useAccountInUrl'
@@ -48,7 +48,7 @@ const Portfolio = () => {
         </div>
       </div>
         <UnderworldLent />
-        <UnderworldCollateral />
+        {/* <UnderworldCollateral /> */}
         <WalletBalances chainId={chainId} account={account} />
         <CoffinBalances account={account} />
         <PoolBalances account={account} />
