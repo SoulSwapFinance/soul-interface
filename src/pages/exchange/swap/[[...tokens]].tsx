@@ -107,7 +107,7 @@ const Swap = () => {
     inputError: wrapInputError,
   } = useWrapCallback(currencies[Field.INPUT], currencies[Field.OUTPUT], typedValue)
   const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE
-  const { address: recipientAddress } = useENSAddress(recipient ? recipient : account)
+  // const { address: recipientAddress } = useENSAddress(recipient ? recipient : account)
 
   const trade = showWrap ? undefined : v2Trade
 
@@ -132,7 +132,7 @@ const Swap = () => {
 
   const isValid = !swapInputError
   const dependentField: Field = independentField === Field.INPUT ? Field.OUTPUT : Field.INPUT
-  const WHITE = '#FFFFFF'
+  // const WHITE = '#FFFFFF'
 
   // modal and loading
   const [{ showConfirm, tradeToConfirm, swapErrorMessage, attemptingTxn, txHash }, setSwapState] = useState<{
@@ -345,11 +345,11 @@ const Swap = () => {
   }, [priceImpactSeverity])
 
   // HANDLERS //
-  const handleLimitSwap = useCallback(
-    () => {
-      router.push(`/exchange/swap/limit/${currencyIdA}/${currencyIdB}`)
-    }, []
-  )
+  // const handleLimitSwap = useCallback(
+  //   () => {
+  //     router.push(`/exchange/swap/limit/${currencyIdA}/${currencyIdB}`)
+  //   }, []
+  // )
 
   const handleAggregatorSwap = useCallback(
     () => {
@@ -467,10 +467,11 @@ const Swap = () => {
             </>
             {/* } */}
             {/* {useSwap && */}
-            <div className="flex -mt-4 -mb-4 z-0 justify-between">
+            <div className="flex -mt-4 -mb-4 z-0 justify-center">
               <Button
                 size={'xs'}
-                className={classNames(`mx-[42%] rounded-2xl bg-dark-1000 border-2 border-[${getChainColor(chainId)}]`)}
+                // className={classNames(`mx-[42%] rounded-2xl bg-dark-1000 border-2 border-[${getChainColor(chainId)}]`)}
+                className={classNames(`-mb-4 -mt-4 rounded-2xl bg-dark-1000 border-2 border-[${getChainColor(chainId)}]`)}
                 onClick={() =>
                   handleSwitchTokens(currencies?.INPUT, currencies?.OUTPUT)
                 }
@@ -483,10 +484,10 @@ const Swap = () => {
                   src={ArrowRoundedSquare}
                 />
               </Button>
-              <Button
+              {/* <Button
                 size={'xs'}
                 className={classNames(`rounded-xl bg-dark-1000 border-2 border-[${getChainColor(chainId)}]`)}
-                onClick={handleLimitSwap}
+                // onClick={handleLimitSwap}
               >
                 <Image
                   alt={"Chevron Up Down Icon"}
@@ -495,7 +496,7 @@ const Swap = () => {
                   className={`rounded-xl`}
                   src={ChevronUpDown}
                 />
-              </Button>
+              </Button> */}
             </div>
             {/* } */}
             {/* TO ASSET PANEL */}
@@ -642,7 +643,7 @@ const Swap = () => {
                     )}
             {
               // useSwap && 
-              priceImpactSeverity >= 3 && isValid &&
+              // priceImpactSeverity >= 3 && isValid &&
               <Button
                 color={`${getChainColorCode(chainId)}`}
                 onClick={handleAggregatorSwap}

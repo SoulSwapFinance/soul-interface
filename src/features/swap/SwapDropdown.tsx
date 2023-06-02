@@ -37,8 +37,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const isPool = isRemove || isAdd
   const isBridge = router.pathname.startsWith('/bridge')
 
-  // const isLimit = router.pathname.startsWith('/limit')
-  //   || router.pathname.startsWith('/exchange/limit')
+  const isLimit = router.pathname.startsWith('/limit')
+    || router.pathname.startsWith('/exchange/swap/limit')
 
   const isAggregator = asPath.startsWith('/aggregator')
     || asPath.startsWith('/exchange/aggregator')
@@ -47,7 +47,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
     || router.pathname.startsWith('/exchange/cross')
 
   const isExchange = router.pathname.startsWith('/swap')
-    || router.pathname.startsWith('/exchange/swap')
+    || (router.pathname.startsWith('/exchange/swap') && !router.pathname.startsWith('/exchange/swap/limit'))
 
   // const useSettings = isExchange || isLimit || isPool
 
@@ -63,7 +63,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
 
   return (
     <div className={`flex mt-2 mb-2 items-center justify-center gap-4 border-2 border-dark-700 rounded-lg`}>
-      <div className={`flex gap-4 sm:gap-6 mr-8 sm:mr-0`}>
+      <div className={`flex gap-8 sm:gap-16 mr-8 sm:mr-0`}>
         {/* {featureEnabled(Feature.LIQUIDITY, chainId) && */}
         <NavLink
           className={classNames(
@@ -100,7 +100,31 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
         </NavLink>
         {/* } */}
 
-        {featureEnabled(Feature.LIQUIDITY, chainId) &&
+        {featureEnabled(Feature.LIMIT, chainId) &&
+          <NavLink
+            className={classNames(
+              ecoStyle
+            )}
+            activeClassName={classNames(
+              activeStyle
+            )}
+              href={`/exchange/swap/limit/${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)}`}
+            >
+            <div
+              className={classNames(
+                `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
+                isLimit && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
+              >
+              <Typography
+                className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
+              >
+                {`Limit`}
+              </Typography>
+            </div>
+          </NavLink>
+        }
+
+      {featureEnabled(Feature.LIQUIDITY, chainId) &&
           <NavLink
             className={classNames(
               poolStyle
@@ -158,7 +182,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               <Typography
                 className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
               >
-                {`Meta`}
+                {`Aggregate`}
               </Typography>
             </div>
           </NavLink>
