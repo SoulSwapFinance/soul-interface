@@ -82,7 +82,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             className={classNames(
               `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
               isExchange && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
-              // onClick={reveal}
+          // onClick={reveal}
           // onMouseEnter={reveal}
           // onMouseLeave={conceal}
           >
@@ -100,31 +100,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
         </NavLink>
         {/* } */}
 
-        {featureEnabled(Feature.LIMIT, chainId) &&
-          <NavLink
-            className={classNames(
-              ecoStyle
-            )}
-            activeClassName={classNames(
-              activeStyle
-            )}
-              href={`/exchange/swap/limit/${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)}`}
-            >
-            <div
-              className={classNames(
-                `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
-                isLimit && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
-              >
-              <Typography
-                className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
-              >
-                {`Limit`}
-              </Typography>
-            </div>
-          </NavLink>
-        }
-
-      {featureEnabled(Feature.LIQUIDITY, chainId) &&
+        {featureEnabled(Feature.LIQUIDITY, chainId) &&
           <NavLink
             className={classNames(
               poolStyle
@@ -156,6 +132,30 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           </NavLink>
         }
 
+        {featureEnabled(Feature.LIMIT, chainId) &&
+          <NavLink
+            className={classNames(
+              ecoStyle
+            )}
+            activeClassName={classNames(
+              activeStyle
+            )}
+            href={`/exchange/swap/limit/${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)}`}
+          >
+            <div
+              className={classNames(
+                `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
+                isLimit && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
+            >
+              <Typography
+                className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
+              >
+                {`Limit`}
+              </Typography>
+            </div>
+          </NavLink>
+        }
+
         {featureEnabled(Feature.AGGREGATE, chainId) &&
           <NavLink
             className={classNames(
@@ -171,7 +171,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               className={classNames(
                 `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
                 isAggregator && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
-                // onClick={reveal}
+            // onClick={reveal}
             // onMouseEnter={reveal}
             // onMouseLeave={conceal}
             >
@@ -202,7 +202,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               className={classNames(
                 `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
                 isCross && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
-                // onClick={reveal}
+            // onClick={reveal}
             // onMouseEnter={reveal}
             // onMouseLeave={conceal}
             >
@@ -234,9 +234,9 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               className={classNames(
                 `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
                 isBridge && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
-                // onClick={reveal}
-                // onMouseEnter={reveal}
-                // onMouseLeave={conceal}
+            // onClick={reveal}
+            // onMouseEnter={reveal}
+            // onMouseLeave={conceal}
             >
               {/* <BridgeIcon
                 fillPrimary={isBridge ? `${getChainColor(chainId)}` : `#FFFFFF`}
@@ -256,7 +256,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
       <div className={classNames(
         `absolute right-4 top-50`,
         `sm:right-4`,
-        `sm:top-48`, 
+        `sm:top-48`,
         `sm:mt-6 sm:gap-8`,
         `mr-1 justify-end rounded`)
       }>
