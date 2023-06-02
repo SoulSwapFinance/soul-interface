@@ -277,8 +277,8 @@ const Swap = () => {
     !swapInputError &&
     (approvalState === ApprovalState.NOT_APPROVED ||
       approvalState === ApprovalState.PENDING ||
-      (approvalSubmitted && approvalState === ApprovalState.APPROVED)) &&
-    !(priceImpactSeverity > 3)
+      (approvalSubmitted && approvalState === ApprovalState.APPROVED)) 
+      // && !(priceImpactSeverity > 3)
 
   const handleConfirmDismiss = useCallback(() => {
     setSwapState({
