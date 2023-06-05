@@ -8,7 +8,7 @@ import { ChainId, SOUL_ADDRESS, USDC_ADDRESS, LUX_ADDRESS, WLUM_ADDRESS, WNATIVE
 // take note of exemptions (usually in lending) //
 
 export const InactiveAvalanchePools = [
-  {
+  /* {
     // LENDING
     pid: 8,
     type: 'lend',
@@ -19,7 +19,7 @@ export const InactiveAvalanchePools = [
     lpAddress: '0xa34fe600E6349d67fcd6989A9c4007b5ee5A494B',
     token0Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
     token1Address: USDC_ADDRESS[ChainId.AVALANCHE],
-  },
+  }, */
   {
     // LENDING
     pid: 9,
@@ -32,7 +32,7 @@ export const InactiveAvalanchePools = [
     token0Address: USDC_ADDRESS[ChainId.AVALANCHE],
     token1Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
   },
-  {
+  /* {
     // LENDING
     pid: 10,
     type: 'lend',
@@ -43,7 +43,7 @@ export const InactiveAvalanchePools = [
     lpAddress: '0xD981D3e065bA8E89Ac56DB994D86F22dA409cf20',
     token0Address: WETH_ADDRESS[ChainId.AVALANCHE],
     token1Address: USDC_ADDRESS[ChainId.AVALANCHE],
-  },
+  }, */
   // {
   //   // LENDING
   //   pid: 11,
@@ -321,7 +321,7 @@ export const InactiveFantomPools = [
   //   token1Address: USDC_ADDRESS[ChainId.FANTOM],
   // },
    // LENDING MARKET //
-   { // 220
+  /* { // 220
     pid: 22,
     type: 'lend',
     decimals: 8,
@@ -331,7 +331,7 @@ export const InactiveFantomPools = [
     lpAddress: '0x91787338E8fF91D0B36E54Fa5A50046d6C797D5B',
     token0Address: WBTC_ADDRESS[ChainId.FANTOM],
     token1Address: USDC_ADDRESS[ChainId.FANTOM],
-  },
+  }, */
    // LENDING MARKET //
   // {
   //   pid: 23,
