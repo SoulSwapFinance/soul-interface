@@ -432,10 +432,10 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
 
                 <Wrap padding="0.5rem" margin="0.25rem" display="flex" justifyContent="space-between">
                   <Text fontSize=".9rem" padding="0" textAlign="left">
-                    ENDS BY:&nbsp;
+                    ENDS&nbsp;
                     {isUnderworldPair 
-                      ? 'Q2 2024'
-                      : 'Q1 2025'
+                      ? '~Q1 2024'
+                      : '~Q1 2025'
                      }
                     <br />
                     VALUE:&nbsp;{Number(_stakedValue) !== 0 ? `${formatNumber(_stakedValue, true, true)}` : '0'}
