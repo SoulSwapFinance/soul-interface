@@ -73,12 +73,12 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const isUnderworldPair = pairType == "lend"
     const isSwapPair = pairType == "swap"
     // multiplier (adjusts for lending pairs) //
-    const MULTIPLIER = isSwapPair ? 1 : LEND_MULTIPLIER(chainId, farm.lpAddress)
+    // const MULTIPLIER = isSwapPair ? 1 : LEND_MULTIPLIER(chainId, farm.lpAddress)
 
     // for display purposes only //
-    const _liquidity = Number(summonerPoolInfo.tvl) * MULTIPLIER
+    const _liquidity = Number(summonerPoolInfo.tvl)
     // for display purposes only //
-    const _APR = Number(summonerPoolInfo.apr) / MULTIPLIER
+    const _APR = Number(summonerPoolInfo.apr)
     
     const allocPoint = summonerPoolInfo.allocPoint
     const lpAddress = summonerPoolInfo.lpAddress
@@ -103,9 +103,9 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     // const stakedValue = Number(summonerUserInfo.stakedValue)
 
     // for display purposes only //
-    const _stakedBalance = Number(summonerUserInfo.stakedBalance) * MULTIPLIER
+    const _stakedBalance = Number(summonerUserInfo.stakedBalance)
     // for display purposes only //
-    const _stakedValue = Number(summonerUserInfo.stakedValue) * MULTIPLIER
+    const _stakedValue = Number(summonerUserInfo.stakedValue)
 
     const earnedAmount = Number(summonerUserInfo.pendingSoul)
     const earnedValue = Number(summonerUserInfo.pendingValue)
@@ -118,7 +118,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     // const feeValue = feeAmount * lpPrice
 
     // for display purposes only //
-    const _walletBalance = Number(summonerUserInfo.walletBalance) * MULTIPLIER
+    const _walletBalance = Number(summonerUserInfo.walletBalance)
     // for display purposes only //
     const _feeAmount = withdrawFee * _stakedBalance / 100
     // for display purposes only //
@@ -126,7 +126,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     // for display purposes only //
     const _feeValue = _feeAmount * lpPrice
     // for display purposes only //
-    const _withdrawValue = Number(withdrawValue) * MULTIPLIER
+    const _withdrawValue = Number(withdrawValue)
 
     const hasBalance = Number(walletBalance) > 0
     const isActive = Number(allocPoint) > 0 // pairStatus == "active"
@@ -134,8 +134,8 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
     const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
 
-    // const parsedDepositValue = tryParseAmount(depositValue, assetToken)
-    // const parsedWithdrawValue = tryParseAmount(withdrawValue.toString(), assetToken)
+    const parsedDepositValue = tryParseAmount(depositValue, assetToken)
+    const parsedWithdrawValue = tryParseAmount(withdrawValue, assetToken)
 
     // COLOR //
     const buttonColor = getChainColor(chainId)
@@ -268,11 +268,12 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const handleDeposit = async (pid, amount) => {
         let tx
         try {
-            tx = await SoulSummonerContract?.deposit(pid, (Number(depositValue) / MULTIPLIER).toFixed(assetDecimals).toBigNumber(assetDecimals))
+            const tx = await SoulSummonerContract?.deposit(pid, parsedDepositValue?.quotient.toString())
+            // tx = await SoulSummonerContract?.deposit(pid, (Number(depositValue)).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
         } catch (e) {
             const smallerValue = Number(depositValue) - 0.000001
-            tx = await SoulSummonerContract?.deposit(pid, (Number(smallerValue) / MULTIPLIER).toFixed(assetDecimals).toBigNumber(assetDecimals))
+            tx = await SoulSummonerContract?.deposit(pid, (Number(smallerValue)).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
             console.log(e)
         }
@@ -301,11 +302,12 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const handleWithdraw = async (pid, amount) => {
         let tx
         try {
-            tx = await SoulSummonerContract?.withdraw(pid, (Number(withdrawValue) / MULTIPLIER).toFixed(assetDecimals).toBigNumber(assetDecimals))
+            const tx = await SoulSummonerContract?.withdraw(pid, parsedWithdrawValue?.quotient.toString())
+            // tx = await SoulSummonerContract?.withdraw(pid, (Number(withdrawValue)).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
         } catch (e) {
             const smallerValue = Number(withdrawValue) - 0.000001
-            tx = await SoulSummonerContract?.withdraw(pid, (Number(smallerValue) / MULTIPLIER).toFixed(assetDecimals).toBigNumber(assetDecimals))
+            tx = await SoulSummonerContract?.withdraw(pid, (Number(smallerValue)).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
             console.log(e)
         }
@@ -421,9 +423,11 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         0
                                     </Text>
                                 ) : (
-                                    <Text padding="0" fontSize="1rem" color="#F36FFE">
-                                        {formatNumber(earnedAmount.toFixed(0), false, true)} SOUL
-                                        {/* {formatNumber(Number(earnedAmount), false, true)} SOUL */}
+                                    <Text padding="0" fontSize="1rem" color="#B383FF">
+                                        {Number(earnedAmount)
+                                            .toFixed(0)
+                                            .toString()
+                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' SOUL'}
                                     </Text>
                                 )}
                             </FarmItemBox>
@@ -642,7 +646,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         color={buttonTextColor}
                                         margin=".5rem 0 0rem 0"
                                         onClick={() =>
-                                            handleDeposit(pid, Number(depositValue) / MULTIPLIER)
+                                            handleDeposit(pid, Number(depositValue))
                                         }
                                     >
                                         <div className="flex text-lg gap-2">
@@ -1040,7 +1044,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                             height="2.5rem"
                             color="purple"
                             onClick={() =>
-                                handleWithdraw(pid, Number(withdrawValue) / MULTIPLIER)
+                                handleWithdraw(pid, Number(withdrawValue))
                             }
                         >
                             {i18n._(t`I UNDERSTAND THESE TERMS`)}
