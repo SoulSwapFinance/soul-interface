@@ -134,8 +134,8 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
     const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
 
-    // const parsedDepositValue = tryParseAmount(depositValue, assetToken)
-    // const parsedWithdrawValue = tryParseAmount(withdrawValue.toString(), assetToken)
+    const parsedDepositValue = tryParseAmount(depositValue, assetToken)
+    const parsedWithdrawValue = tryParseAmount(withdrawValue, assetToken)
 
     // COLOR //
     const buttonColor = getChainColor(chainId)
@@ -268,7 +268,8 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const handleDeposit = async (pid, amount) => {
         let tx
         try {
-            tx = await SoulSummonerContract?.deposit(pid, (Number(depositValue)).toFixed(assetDecimals).toBigNumber(assetDecimals))
+            const tx = await SoulSummonerContract?.deposit(pid, parsedDepositValue?.quotient.toString())
+            // tx = await SoulSummonerContract?.deposit(pid, (Number(depositValue)).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
         } catch (e) {
             const smallerValue = Number(depositValue) - 0.000001
@@ -301,7 +302,8 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const handleWithdraw = async (pid, amount) => {
         let tx
         try {
-            tx = await SoulSummonerContract?.withdraw(pid, (Number(withdrawValue)).toFixed(assetDecimals).toBigNumber(assetDecimals))
+            const tx = await SoulSummonerContract?.withdraw(pid, parsedWithdrawValue?.quotient.toString())
+            // tx = await SoulSummonerContract?.withdraw(pid, (Number(withdrawValue)).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
         } catch (e) {
             const smallerValue = Number(withdrawValue) - 0.000001
