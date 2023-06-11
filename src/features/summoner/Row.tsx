@@ -421,9 +421,11 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         0
                                     </Text>
                                 ) : (
-                                    <Text padding="0" fontSize="1rem" color="#F36FFE">
-                                        {formatNumber(earnedAmount.toFixed(0), false, true)} SOUL
-                                        {/* {formatNumber(Number(earnedAmount), false, true)} SOUL */}
+                                    <Text padding="0" fontSize="1rem" color="#B383FF">
+                                        {Number(earnedAmount)
+                                            .toFixed(0)
+                                            .toString()
+                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' SOUL'}
                                     </Text>
                                 )}
                             </FarmItemBox>
