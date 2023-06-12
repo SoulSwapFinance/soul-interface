@@ -268,7 +268,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const handleDeposit = async (pid, amount) => {
         let tx
         try {
-            const tx = await SoulSummonerContract?.deposit(pid, parsedDepositValue?.quotient.toString())
+           tx = await SoulSummonerContract?.deposit(pid, parsedDepositValue?.quotient.toString())
             // tx = await SoulSummonerContract?.deposit(pid, (Number(depositValue)).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
         } catch (e) {
@@ -302,8 +302,8 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const handleWithdraw = async (pid, amount) => {
         let tx
         try {
-            const tx = await SoulSummonerContract?.withdraw(pid, parsedWithdrawValue?.quotient.toString())
-            // tx = await SoulSummonerContract?.withdraw(pid, (Number(withdrawValue)).toFixed(assetDecimals).toBigNumber(assetDecimals))
+            // tx = await SoulSummonerContract?.withdraw(pid, parsedWithdrawValue?.quotient.toString())
+            tx = await SoulSummonerContract?.withdraw(pid, (Number(withdrawValue)).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
         } catch (e) {
             const smallerValue = Number(withdrawValue) - 0.000001
