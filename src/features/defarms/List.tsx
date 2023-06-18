@@ -95,7 +95,7 @@ export const FarmList = () => {
       <Typography className="text-2xl bg-dark-1000 mt-6 rounded rounded-2xl border border-2 border-dark-600 p-3 font-bold text-center mb-1">Active DeFarms</Typography>
       <Active />
       <>{chainId == ChainId.FANTOM ? ftmList : avaxList}</>
-      <div className={'grid grid-cols-1 mx-1 mt-6 mb-4 gap-2 border bg-avaxRed rounded rounded-lg'}>
+    {/*  <div className={'grid grid-cols-1 mx-1 mt-6 mb-4 gap-2 border bg-avaxRed rounded rounded-lg'}>
             <ExternalLink
               href="https://defarms.soulswap.finance/defarms"
               target="_blank"
@@ -112,7 +112,7 @@ export const FarmList = () => {
                 </a>
               </SubmitButton>
             </ExternalLink>
-            </div>
+            </div> */}
       {/* <div> */}
         {/* <Typography
           className={classNames(chainId == ChainId.AVALANCHE ? 'hidden' : `text-2xl bg-dark-1000 mt-6 rounded rounded-2xl border border-2 border-avaxRed p-3 font-bold text-center mb-1`)}
