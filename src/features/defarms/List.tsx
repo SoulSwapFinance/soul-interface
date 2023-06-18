@@ -95,8 +95,8 @@ export const FarmList = () => {
       <Typography className="text-2xl bg-dark-1000 mt-6 rounded rounded-2xl border border-2 border-dark-600 p-3 font-bold text-center mb-1">Active DeFarms</Typography>
       <Active />
       <>{chainId == ChainId.FANTOM ? ftmList : avaxList}</>
-    {/*  <div className={'grid grid-cols-1 mx-1 mt-6 mb-4 gap-2 border bg-avaxRed rounded rounded-lg'}>
-            <ExternalLink
+      {/* <div className={'grid grid-cols-1 mx-1 mt-6 mb-4 gap-2 border bg-avaxRed rounded rounded-lg'}> */}
+           {/* <ExternalLink
               href="https://defarms.soulswap.finance/defarms"
               target="_blank"
               rel="noreferrer"
@@ -114,14 +114,14 @@ export const FarmList = () => {
             </ExternalLink>
             </div> */}
       {/* <div> */}
-        {/* <Typography
+        <Typography
           className={classNames(chainId == ChainId.AVALANCHE ? 'hidden' : `text-2xl bg-dark-1000 mt-6 rounded rounded-2xl border border-2 border-avaxRed p-3 font-bold text-center mb-1`)}
         >
           Retired DeFarms
-        </Typography> */}
-        {/* {chainId == ChainId.FANTOM ? <Inactive /> : null} */}
-        {/* {chainId == ChainId.FANTOM ? inactiveFtmList : inactiveAvaxList} */}
-      {/* </div> */}
+        </Typography>
+        {chainId == ChainId.FANTOM ? <Inactive /> : null}
+        {chainId == ChainId.FANTOM ? inactiveFtmList : inactiveAvaxList}
+       {/* </div>  */}
     </div>
   )
 }
