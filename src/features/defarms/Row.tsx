@@ -105,18 +105,20 @@ export const ActiveRow = ({ pid }) => {
     // const startTime = Number(manifestationInfo.startTime)
     const symbol = manifestationInfo.symbol
     const endTime = Number(manifestationInfo.endTime)
-    const hasEnded = endTime < Date.now() / 1_000 // ms -> secs
+    // TODO: fix override //
+    const hasEnded = false // endTime < Date.now() / 1_000 // ms -> secs
     const APR = hasEnded ? 0 : Number(manifestationInfo.apr)
 
     const feeValue = feeAmount * lpPrice
     const hasBalance = Number(walletBalance) > 0
-    const isActive = pairStatus == "active" && !hasEnded
+    // TODO: fix override //
+    const isActive = true // pairStatus == "active" && !hasEnded
     const isEmergency = !isActive
     // const assetToken = new Token(chainId, depositAddress, 18)
     const rewardToken = new Token(chainId, rewardAddress, 18)
 
-    const earnedAmount = isActive ? Number(manifestationUserInfo.pendingRewards) : 0
-    const earnedValue = isActive ? Number(manifestationUserInfo.pendingValue) : 0
+    const earnedAmount = Number(manifestationUserInfo.pendingRewards)
+    const earnedValue = Number(manifestationUserInfo.pendingValue)
 
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(depositAddress)
     // const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
@@ -141,8 +143,8 @@ export const ActiveRow = ({ pid }) => {
     // ZAP ADD-ONS //
     const tokenContract = useTokenContract(zapToken?.wrapped.address)
     const zapTokenDecimals = Number(useTokenInfo(zapToken?.wrapped.address).tokenInfo.decimals)
-    const zapTokenSymbol = useTokenInfo(zapToken?.wrapped.address).tokenInfo.symbol
-    const zapTokenName = useTokenInfo(zapToken?.wrapped.address).tokenInfo.name
+    // const zapTokenSymbol = useTokenInfo(zapToken?.wrapped.address).tokenInfo.symbol
+    // const zapTokenName = useTokenInfo(zapToken?.wrapped.address).tokenInfo.name
     // const zapToken = new Token(chainId, zapTokenAddress, zapTokenDecimals, zapTokenSymbol, zapTokenName)
     const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
 
