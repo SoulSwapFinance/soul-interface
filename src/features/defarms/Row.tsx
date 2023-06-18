@@ -115,8 +115,8 @@ export const ActiveRow = ({ pid }) => {
     // const assetToken = new Token(chainId, depositAddress, 18)
     const rewardToken = new Token(chainId, rewardAddress, 18)
 
-    const earnedAmount = isActive ? Number(manifestationUserInfo.pendingRewards) : 0
-    const earnedValue = isActive ? Number(manifestationUserInfo.pendingValue) : 0
+    const earnedAmount = Number(manifestationUserInfo.pendingRewards)
+    const earnedValue = Number(manifestationUserInfo.pendingValue)
 
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(depositAddress)
     // const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
