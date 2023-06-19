@@ -20,7 +20,7 @@ export const InactiveFantomPools = [
 export const AvalanchePools = []
 
 export const FantomPools = [
-  // {
-  //   pid: 0,
-  // },
+  {
+    pid: 1,
+  },
 ]
