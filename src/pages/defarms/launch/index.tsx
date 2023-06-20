@@ -1,11 +1,7 @@
 /* eslint-disable @next/next/link-passhref */
 import Head from 'next/head'
 import React, { useCallback, useEffect, useState } from 'react'
-// import Search from 'components/Search'
 import {
-//   ApprovalState,
-//   useApproveCallback,
-  // useManifestationContract,
   useManifesterContract,
 } from 'hooks'
 
@@ -21,25 +17,15 @@ import { Disclosure } from '@headlessui/react'
 import { Button } from 'components/Button'
 // import { useManifestationInfo } from 'hooks/useAPI'
 import useDefarm from 'features/defarms/useDefarm'
-import { useActiveWeb3React } from 'services/web3'
-import Image from 'next/image'
-// import Logo from 'components/Logo'
-// import { CurrencyLogo } from 'components/CurrencyLogo'
-// import { Link } from 'components/Link'
-
-// import Link from 'next/link'
 // import { useActiveWeb3React } from 'services/web3'
-// import { useCurrency, useToken } from 'hooks/Tokens'
-// import { CurrencyAmount } from 'sdk'
-// import { getAddress } from '@ethersproject/address'
-// import { AutoRow } from 'components/Row'
-// import Loader from 'components/Loader'
-// import { ChainId } from 'sdk'
+import Image from 'next/image'
+import { Router, useRouter } from 'next/router'
 
 export default function Manifestations(): JSX.Element {
     const { i18n } = useLingui()
-    const { account, chainId } = useActiveWeb3React()
-    const [id, setID] = useState(0)
+    const router = useRouter()
+    // const { account, chainId } = useActiveWeb3React()
+    // const [id, setID] = useState(0)
     // const [idSelected, selectID] = useState(false)
     // const [delayDays, setDelayDays] = useState(0)
     // const [delayDaysSet, selectDelayDays] = useState(false)
@@ -83,7 +69,8 @@ export default function Manifestations(): JSX.Element {
       manifesterContract.getDefarmByManifester().then((r) => {
         if (r.length > 0) {
           // only shows those farms which have not yet been launched.
-          setDefarm(r.filter((x) => x.startTime == 0))
+          // setDefarm(r.filter((x) => x.startTime == 0))
+          setDefarm(r.filter((x) => x.startTime >= 0))
         }
         // console.log('defarm: %s', r)
       })
@@ -185,7 +172,7 @@ export default function Manifestations(): JSX.Element {
                     <div className="flex items-center ml-3">{i18n._(t`ID`)}</div>
                     <div className="flex items-center">{i18n._(t`Logo`)}</div>
                     <div className="flex items-center">{i18n._(t`Symbol`)}</div>
-                    <div className="flex items-center mr-3">{i18n._(t`Creator`)}</div>
+                    <div className="flex items-center mr-3">{i18n._(t`Address`)}</div>
                     <div className="items-center justify-end px-2 flex ">{i18n._(t``)}</div>
                   </div>
                 )}
@@ -204,7 +191,7 @@ export default function Manifestations(): JSX.Element {
                                 {/* <div className="flex col-span-2 items-center"> */}
                                 {/* </div> */}
                                 <div className="flex flex-col justify-center">
-                                 {index}
+                                 {index.toString()}
                                 </div>
                               <div className="flex col-span items-center">
                                  <Image className={'flex justify-center'} 
@@ -217,15 +204,19 @@ export default function Manifestations(): JSX.Element {
                                 <div className="flex flex-col justify-center">
                                     {defarm?.symbol}
                                 </div>
-                                <div className="flex flex-col justify-center">
-                                  { '-' + defarm?.daoAddress.substr(length - 5) }
+                                <div 
+                                  className="flex flex-col justify-center"
+                                  onClick={() => router.push('https://ftmscan.com/address/' + defarm.mAddress.toString())}
+                                >
+                                  { '-' + defarm?.mAddress.substr(length - 5) }
                                   </div>
                                 <div className="flex flex-col items-end justify-center">
                                   <div className="text-xs text-right md:text-base text-secondary">
                                     <Button
                                       variant="outlined"
-                                      color={"ftmBlue"}
+                                      color={ defarm?.startTime > 0 ? `avaxRed` : `ftmBlue` }
                                       style={{ width: '100%' }}
+                                      disabled={Number(defarm?.startTime) > 0}
                                       onClick={async () => await handleLaunch(index.toString())}
                                       // disabled={
                                       //   // NOTE: ensure delay days has been selected, otherwise it's start immediately //
@@ -235,7 +226,7 @@ export default function Manifestations(): JSX.Element {
                                       //   // || (account && getAddress(account) != getAddress(manifestation?.recipient))
                                       // }
                                     >
-                                      Launch
+                                      { defarm?.startTime > 0 ? `Launched` : `Launch` }
                                     </Button>
                                   </div>
                                 </div>
