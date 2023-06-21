@@ -78,9 +78,9 @@ export const FarmList = () => {
     <Typography className="text-2xl bg-dark-1000 mb-2 rounded-2xl m-1 p-4 border border-purple font-bold text-center">SoulSwap Farms</Typography>
         <Active />
       {chainId == ChainId.AVALANCHE ? avaxList : ftmList}
-      {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) && <Typography className="text-2xl bg-dark-1000 mb-2 rounded-2xl m-1 p-4 border border-avaxRed font-bold text-center">Retired Farms</Typography>}
+      {/* {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) && <Typography className="text-2xl bg-dark-1000 mb-2 rounded-2xl m-1 p-4 border border-avaxRed font-bold text-center">Retired Farms</Typography>}
         {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) && <Active />}
-      {chainId == ChainId.AVALANCHE ? inactiveAvaxList : inactiveFtmList}
+      {chainId == ChainId.AVALANCHE ? inactiveAvaxList : inactiveFtmList} */}
   </div>
 )
 }
