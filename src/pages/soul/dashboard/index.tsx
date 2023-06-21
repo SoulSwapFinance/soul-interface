@@ -293,7 +293,7 @@ export default function Dashboard() {
                   {formatNumber(soulPrice * totalSupply, true, false, 0)}
                 </Typography>
               </div> */}
-              <div className="lg:hidden h-px my-4 mb-3 bg-dark-1000" />
+              {/* <div className="lg:hidden h-px my-4 mb-3 bg-dark-1000" /> */}
               <div>
                 <div className="lg:hidden grid grid-cols-2 space-between-3">
                   <Typography
@@ -322,7 +322,7 @@ export default function Dashboard() {
               </div>
               <div>
               </div>
-              <div className="h-px my-4 bg-dark-1000" />
+              {/* <div className="h-px my-4 bg-dark-1000" /> */}
               <div>
                 <div className="hidden lg:grid lg:grid-cols-2 space-between-3">
                   <Typography
@@ -350,7 +350,7 @@ export default function Dashboard() {
                     {formatNumber(totalSupply, false, true)}
                   </Typography>
                 </div>
-                <div className="h-px my-4 bg-dark-1000" />
+                <div className="h-px my-4" />
                 {/* <div>
                   <Typography
                     className="flex text-2xl justify-center gap-1 items-center"
@@ -414,11 +414,11 @@ export default function Dashboard() {
                     {formatNumber(daoLiquidityValue + bondedValue, true, true, 0)}
                   </Typography>
                 </div>
-                <div className="h-px my-4 bg-dark-1000" />
+                {/* <div className="h-px my-4 bg-dark-1000" /> */}
               </div>
               <div>
               </div>
-              <div className="h-px my-4 bg-dark-1000" />
+              {/* <div className="h-px my-4 bg-dark-1000" /> */}
               <div>
                 <div className="hidden lg:grid lg:grid-cols-2 space-between-3">
                   <Typography
@@ -446,7 +446,7 @@ export default function Dashboard() {
                   </Typography>
                 </div>
 
-              <div className="h-px my-4 bg-dark-1000" />
+              <div className="h-px my-4" />
 
               {/* <div>
                 <Typography
