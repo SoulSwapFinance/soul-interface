@@ -1,7 +1,7 @@
 import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback'
 import { AutoRow, RowBetween } from 'components/Row'
 import { Button, ButtonError } from 'components/Button'
-import { Currency, CurrencyAmount, Percent, WNATIVE, NATIVE, currencyEquals } from 'sdk'
+import { Currency, CurrencyAmount, Percent, WNATIVE, NATIVE, currencyEquals, SOUL } from 'sdk'
 import { ZERO_PERCENT } from '../../../constants'
 import React, { useCallback, useState } from 'react'
 import TransactionConfirmationModal, { ConfirmationModalContent } from 'modals/TransactionConfirmationModal'
@@ -48,6 +48,8 @@ import { useActiveWeb3React } from 'services/web3'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 import { ArrowDownIcon, PlusIcon } from '@heroicons/react/24/solid'
 import { getChainColor, getChainColorCode } from 'constants/chains'
+import { PoolBalances } from 'features/portfolio/AssetBalances/pools'
+import PairChart from 'pages/analytics/pairs/embedded/[id]'
 // import { useTokenBalance } from 'state/wallet/hooks'
 
 // import Image from 'next/image'
@@ -552,7 +554,7 @@ export default function Add() {
             />
           )}
           {/* </div> */}
-          <div className={"grid grid-cols-2 gap-2 text-white justify-center m-2"}>
+          {/* <div className={"grid grid-cols-2 gap-2 text-white justify-center m-2"}>
             <NavLink href="/pool">
               <Button
                 variant={'filled'}
@@ -575,7 +577,12 @@ export default function Add() {
                 </a>
               </Button>
             </NavLink>
-          </div>
+          </div>  */}
+        <PairChart
+          inputCurrency={currencyA} 
+          outputCurrency={currencyB}
+        />
+        <PoolBalances account={account} />
         </div>
         </div>
         {/* </SwapLayoutCard> */}
