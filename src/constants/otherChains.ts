@@ -53,7 +53,8 @@ export const otherChains = [
     network: 'fantom',
     nativeCurrency: { name: 'Fantom', symbol: 'FTM', decimals: 18 },
     rpcUrls: {
-      default: 'https://rpcapi.fantom.network',
+      // default: 'https://rpcapi.fantom.network',
+      default: 'https://rpc.ankr.com/fantom',
     },
     blockExplorers: {
       etherscan: {
