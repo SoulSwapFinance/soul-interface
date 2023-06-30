@@ -134,8 +134,8 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
     const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
 
-    const parsedDepositValue = tryParseAmount(depositValue, assetToken)
-    const parsedWithdrawValue = tryParseAmount(withdrawValue, assetToken)
+    // const parsedDepositValue = tryParseAmount(depositValue, assetToken)
+    // const parsedWithdrawValue = tryParseAmount(withdrawValue, assetToken)
 
     // COLOR //
     const buttonColor = getChainColor(chainId)
@@ -626,7 +626,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     />
                                 }
                                 {/* UN-APPROVED */}
-                                {!approved && (
+                                {/* {!approved && ( */}
                                     <SubmitButton
                                         height="2rem"
                                         primaryColor={buttonColor}
@@ -637,9 +637,9 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                             {i18n._(t`APPROVE ASSET`)}
                                         </div>
                                     </SubmitButton>
-                                )}
+                                {/* )} */}
                                 {/* APPROVED */}
-                                {approved && hasBalance && isActive && (
+                                {/* {approved && hasBalance && isActive && ( */}
                                     <SubmitButton
                                         height="2rem"
                                         primaryColor={buttonColor}
@@ -658,7 +658,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                             }
                                         </div>
                                     </SubmitButton>
-                                )}
+                                {/* )} */}
                                 {/* CREATE ASSET PAIR */}
                                 {(nativeToken0 && !isUnderworldPair && isActive) ? (
                                     <NavLink
