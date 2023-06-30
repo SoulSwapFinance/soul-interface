@@ -625,8 +625,9 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         id={pid}
                                     />
                                 }
-                                {/* UN-APPROVED */}
+                                {/* UN-APPROVED // HAS BALANCE */}
                                 {/* {!approved && ( */}
+                                { hasBalance && isActive && (
                                     <SubmitButton
                                         height="2rem"
                                         primaryColor={buttonColor}
@@ -637,9 +638,10 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                             {i18n._(t`APPROVE ASSET`)}
                                         </div>
                                     </SubmitButton>
-                                {/* )} */}
+                                )}
                                 {/* APPROVED */}
                                 {/* {approved && hasBalance && isActive && ( */}
+                                { hasBalance && isActive && (
                                     <SubmitButton
                                         height="2rem"
                                         primaryColor={buttonColor}
@@ -658,7 +660,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                             }
                                         </div>
                                     </SubmitButton>
-                                {/* )} */}
+                                 )}
                                 {/* CREATE ASSET PAIR */}
                                 {(nativeToken0 && !isUnderworldPair && isActive) ? (
                                     <NavLink
