@@ -314,9 +314,6 @@ export default function Dashboard(): JSX.Element {
             Dashboard&nbsp;
           </div>
           <div className="text-xs font-medium text-secondary m-1">
-            <Link href="/analytics/coffinbox">CoffinBox</Link>&nbsp;
-          </div>
-          <div className="text-xs font-medium text-secondary m-1">
             <Link href="/analytics/pairs">Pairs</Link>&nbsp;
           </div>
           <div className="text-xs font-medium text-secondary m-1">

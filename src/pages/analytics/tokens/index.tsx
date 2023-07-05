@@ -34,9 +34,6 @@ export default function Tokens() {
             <Link href="/analytics">Dashboard</Link>&nbsp;
           </div>
           <div className="text-xs font-medium text-secondary m-1">
-            <Link href="/analytics/coffinbox">CoffinBox</Link>&nbsp;
-          </div>
-          <div className="text-xs font-medium text-secondary m-1">
             <Link href="/analytics/pairs">Pairs</Link>&nbsp;
           </div>
           <div className={`text-xs font-bold text-high-emphesis m-1 text-${getChainColorCode(chainId)}`}>

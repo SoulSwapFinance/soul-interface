@@ -97,9 +97,6 @@ export default function Pairs() {
           <div className="text-xs font-medium text-secondary m-1">
             <Link href="/analytics">Dashboard</Link>&nbsp;
           </div>
-          <div className="text-xs font-medium text-secondary m-1">
-            <Link href="/analytics/coffinbox">CoffinBox</Link>&nbsp;
-          </div>
           <div className={`text-xs font-bold text-high-emphesis m-1 text-${getChainColorCode(chainId)}`}>
             Pairs&nbsp;
           </div>
