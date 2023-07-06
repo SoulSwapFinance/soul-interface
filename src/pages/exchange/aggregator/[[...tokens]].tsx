@@ -33,6 +33,7 @@ import { t } from '@lingui/macro'
 // import Image from 'next/image'
 // import META_BANNER from 'assets/branding/meta-banner.png'
 import { NextSeo } from 'next-seo'
+import { MultichainBanner } from 'components/Banner'
 
 // import { groupBy, mapValues, merge, uniqBy } from 'lodash'
 // import { useFeeData } from 'wagmi'
@@ -365,6 +366,7 @@ const Aggregator = ({ }) => {
 		<DoubleGlowShadowV2>
 			<NextSeo title={`Meta | SoulSwap`} />
           	<div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
+			  <MultichainBanner />
 				{/* <SwapLayoutCard> */}
 			{/* <div
               className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}

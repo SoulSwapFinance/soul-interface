@@ -333,6 +333,30 @@ export const VoteBanner: FC = () => (
   </div>
 )
 
+export const MultichainBanner: FC = () => (
+  <div className="relative items-center w-full">
+    <div className="w-full">
+      <div className="text-center">
+        <p className="font-medium text-center text-white">
+          <ExternalLink
+            href="https://twitter.com/SoulSwapFinance/status/1677077600815005697?s=20" target="_blank" rel="noreferrer"
+            className="font-bold text-white text-lg"
+          >
+            <Button variant="filled" color="avaxRed" size="sm">
+              <span className="justify-center font-bold">
+                {' '}
+                Avoid Bridging SOUL: Click for Details ↗
+              </span>
+            </Button>
+          </ExternalLink>
+        </p>
+      </div>
+      <div className="absolute inset-y-0 right-0 flex items-start pt-1 pr-1 sm:pt-1 sm:pr-2 sm:items-start">
+      </div>
+    </div>
+  </div>
+)
+
 interface IBanner {
   chainId: number
 }
