@@ -1,24 +1,20 @@
 import ReactGA from 'react-ga'
 import Image from 'next/image'
-import ChevronUpDown from 'assets/svg/icons/ChevronUpDown.svg'
 import ArrowRoundedSquare from 'assets/svg/icons/ArrowRoundedSquare.svg'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
-import { ChainId, computePairAddress, Currency, FACTORY_ADDRESS, JSBI, NATIVE, SOUL, SOUL_ADDRESS, Token, Trade as V2Trade, TradeType, USDC_ADDRESS, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
+import { ChainId, Currency, JSBI, NATIVE, SOUL_ADDRESS, Token, Trade as V2Trade, TradeType, USDC_ADDRESS, WNATIVE } from 'sdk'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
-// import Web3Connect from 'components/Web3Connect'
 import ConfirmSwapModal from 'features/swap/ConfirmSwapModal'
 import SwapDetails from 'features/swap/SwapDetails'
 import UnsupportedCurrencyFooter from 'features/swap/UnsupportedCurrencyFooter'
-// import SwapHeader from 'features/swap/SwapHeader'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 import ConfirmPriceImpactWithoutFee from 'functions/prices'
 import { warningSeverity } from 'functions/prices'
 import { computeFiatValuePriceImpact } from 'functions/trade'
 import { useAllTokens, useCurrency } from 'hooks/Tokens'
 import { ApprovalState, useApproveCallbackFromTrade } from 'hooks/useApproveCallback'
-import useENSAddress from 'hooks/useENSAddress'
 import useIsArgentWallet from 'hooks/useIsArgentWallet'
 import { useIsSwapUnsupported } from 'hooks/useIsSwapUnsupported'
 import { useSwapCallback } from 'hooks/useSwapCallback'
@@ -38,15 +34,20 @@ import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 import { useRouter } from 'next/router'
 import SwapDropdown from 'features/swap/SwapDropdown'
-// import Pair from 'pages/analytics/pairs/embedded/[id]'
 import TokenChart from 'pages/analytics/tokens/embedded/[id]'
-// import { LendBanner, ManifestationBanner } from 'components/Banner'
-// import SWAP_BANNER from 'assets/branding/swap-banner.png'
-// import UpDownArrowIcon from 'components/Icons/exchange/UpDownArrowIcon'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
-// import TokenStats from 'components/TokenStats'
 import { currencyId } from 'functions'
 import { NextSeo } from 'next-seo'
+
+// import Web3Connect from 'components/Web3Connect'
+// import SwapHeader from 'features/swap/SwapHeader'
+// import TokenStats from 'components/TokenStats'
+import { MultichainBanner } from 'components/Banner'
+// import SWAP_BANNER from 'assets/branding/swap-banner.png'
+// import UpDownArrowIcon from 'components/Icons/exchange/UpDownArrowIcon'
+// import ChevronUpDown from 'assets/svg/icons/ChevronUpDown.svg'
+// import useENSAddress from 'hooks/useENSAddress'
+// import Pair from 'pages/analytics/pairs/embedded/[id]'
 
 const Swap = () => {
   const { i18n } = useLingui()
@@ -421,11 +422,11 @@ const Swap = () => {
 
       {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <DoubleGlowShadowV2>
+          
           <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
+          <MultichainBanner />
+
             {/* <SwapLayoutCard> */}
-           {/* <ManifestationBanner
-              chainId={chainId}
-           /> */}
             {/* <div
               className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
             >
