@@ -66,7 +66,7 @@ import Loader from "components/Loader"
 import { CurrencyLogo } from "components/CurrencyLogo"
 import { tryParseAmount } from "functions/parse"
 import { TYPE } from "theme"
-import { ArrowWrapper, BottomGrouping, Dots, SwapCallbackError, Wrapper } from "components/Order/styleds"
+import { BottomGrouping, Dots, SwapCallbackError, Wrapper } from "components/Order/styleds"
 import ConfirmSwapModal from "components/Order/ConfirmSwapModal"
 import UnsupportedCurrencyFooter from "components/Order/UnsupportedCurrencyFooter"
 import TradePrice from "components/Order/TradePrice"
@@ -86,9 +86,9 @@ import { useRouter } from "next/router"
 import { useCurrency } from "hooks/Tokens"
 import SwapDropdown from "features/swap/SwapDropdown"
 import { getChainColorCode } from "constants/chains"
-import { LuxorBanner, MultichainBanner } from "components/Banner"
+import { VoteBanner } from "components/Banner"
 // import LIMIT_BANNER from 'assets/branding/limit-banner.png'
-import TokenStats from "components/TokenStats"
+// import TokenStats from "components/TokenStats"
 
 // import SocialWidget from "components/Social"
 // import useGasOverhead from "hooks/gelato/useGasOverhead"
@@ -501,7 +501,7 @@ const Limit = () => {
   return (
     <DoubleGlowShadowV2>
           <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
-          <MultichainBanner />
+          <VoteBanner />
             {/* <SwapLayoutCard> */}
             {/* <DonateBanner chainId={chainId} /> */}
             {/* <LuxorBanner color={'purple'} textColor={'white'} chainId={chainId} /> */}
