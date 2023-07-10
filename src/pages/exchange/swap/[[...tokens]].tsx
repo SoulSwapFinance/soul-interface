@@ -42,7 +42,7 @@ import { NextSeo } from 'next-seo'
 // import Web3Connect from 'components/Web3Connect'
 // import SwapHeader from 'features/swap/SwapHeader'
 // import TokenStats from 'components/TokenStats'
-import { MultichainBanner } from 'components/Banner'
+import { VoteBanner } from 'components/Banner'
 // import SWAP_BANNER from 'assets/branding/swap-banner.png'
 // import UpDownArrowIcon from 'components/Icons/exchange/UpDownArrowIcon'
 // import ChevronUpDown from 'assets/svg/icons/ChevronUpDown.svg'
@@ -424,7 +424,7 @@ const Swap = () => {
         <DoubleGlowShadowV2>
           
           <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
-          <MultichainBanner />
+          <VoteBanner />
 
             {/* <SwapLayoutCard> */}
             {/* <div

@@ -315,13 +315,15 @@ export const VoteBanner: FC = () => (
       <div className="text-center">
         <p className="font-medium text-center text-white">
           <ExternalLink
-            href="https://enchant.soulswap.finance/#/proposal/0xce59b7c7486a3f70709c254df6c53730a7ebc930c7b802757d9ca3e435dba396" target="_blank" rel="noreferrer"
-            className="font-bold text-white text-lg"
+              href="https://forum.soulswap.finance/t/proposal-cease-incentives-for-multichain-asset-pools/265" 
+              target="_blank"
+              rel="noreferrer"
+              className="font-bold text-white text-lg"
           >
             <Button variant="filled" color="purple" size="sm">
               <span className="justify-center font-bold">
                 {' '}
-                Vote Today: Reduce Emissions ↗
+                Discuss Proposal: Multichain Incentives ↗
               </span>
             </Button>
           </ExternalLink>

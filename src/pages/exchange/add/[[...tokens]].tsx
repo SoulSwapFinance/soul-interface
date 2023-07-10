@@ -50,7 +50,7 @@ import { ArrowDownIcon, PlusIcon } from '@heroicons/react/24/solid'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { PoolBalances } from 'features/portfolio/AssetBalances/pools'
 import PairChart from 'pages/analytics/pairs/embedded/[id]'
-import { MultichainBanner } from 'components/Banner'
+import { VoteBanner } from 'components/Banner'
 // import { useTokenBalance } from 'state/wallet/hooks'
 
 // import Image from 'next/image'
@@ -370,7 +370,7 @@ export default function Add() {
       </Head>
       <DoubleGlowShadowV2>
       <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-      <MultichainBanner />
+      <VoteBanner />
           <SwapDropdown
             inputCurrency={currencies[Field.CURRENCY_A]}
             outputCurrency={currencies[Field.CURRENCY_B]}
