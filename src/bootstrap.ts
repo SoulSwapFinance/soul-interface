@@ -7,11 +7,12 @@ import React from 'react'
 import { Zero } from '@ethersproject/constants'
 import { parseUnits } from '@ethersproject/units'
 
-BigNumber.prototype.mulDiv = function (multiplier: BigNumberish, divisor: BigNumberish): BigNumber {
+BigNumber.prototype.mulDiv = function (multiplier: BigNumberish, divisor: BigNumberish): BigNumber | BigNumberish | any {
   return BigNumber.from(divisor).gt(0) ? BigNumber.from(this).mul(multiplier).div(divisor) : Zero
 }
 
-BigNumber.prototype.toFraction = function (decimals: BigNumberish = 18): Fraction {
+BigNumber.prototype.toFraction = function (decimals: any | BigNumber | BigNumberish = 18 ): Fraction | any {
+  // @ts-ignore
   return Fraction.from(this, decimals ? BigNumber.from(10).pow(decimals) : Zero)
 }
 

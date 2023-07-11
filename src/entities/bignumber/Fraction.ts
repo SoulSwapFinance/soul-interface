@@ -7,9 +7,9 @@ import { isEmptyValue } from 'functions/validate'
 
 export class Fraction {
   static BASE = BigNumber.from(10).pow(18)
-
-  static NAN = new Fraction(Zero, Zero)
-
+// @ts-ignore
+static NAN = new Fraction(Zero, Zero)
+// @ts-ignore
   static ZERO = new Fraction(Zero, One)
 
   static convert(sdk: SDKFraction): Fraction {
@@ -65,6 +65,7 @@ export class Fraction {
   }
 
   apply(value: BigNumberish): BigNumber {
+    // @ts-ignore
     return this.denominator.isZero() ? Zero : this.numerator.mul(value).div(this.denominator)
   }
 }
