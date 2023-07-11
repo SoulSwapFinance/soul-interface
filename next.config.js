@@ -1,5 +1,6 @@
 const withPWA = require('next-pwa')
 const runtimeCaching = require('next-pwa/cache')
+// const withTM = require('next-transpile-modules')(["@0xsquid/widget"]);
 
 const linguiConfig = require('./lingui.config.js')
 const defaultTheme = require('tailwindcss/defaultTheme')
@@ -191,7 +192,9 @@ module.exports = withBundleAnalyzer(
       breakpoints: screens,
     },
   })
-)
+  )
+  
+  // withTM(nextConfig) = withTM(nextConfig)
 
 // Don't delete this console log, useful to see the config in Vercel deployments
 console.log('next.config.s', JSON.stringify(module.exports, null, 2))
