@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/link-passhref */
 import { useActiveWeb3React } from 'services/web3'
 import Head from 'next/head'
 import React, { useCallback, useEffect, useState } from 'react'

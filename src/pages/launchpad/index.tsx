@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/link-passhref */
-
 import Head from 'next/head'
 import React from 'react'
 import { useRouter } from 'next/router'
