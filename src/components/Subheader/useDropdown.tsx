@@ -123,25 +123,6 @@ if (featureEnabled(Feature.LIQUIDITY, chainId)) {
   }
 }
 
-let multiMenu = {
-  key: 'multichain',
-  title: i18n._(t`Multichain`),
-  icon: <ArrowsRightLeftIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
-  // icon: <LinkIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
-  items: [
-    {
-      key: 'bridge',
-      title: i18n._(t`Bridge`),
-      link: '/bridge',
-    },
-    {
-      key: 'crosschain',
-      title: i18n._(t`Crosschain`),
-      link: '/cross',
-    },
-  ],
-}
-
 // let socialMenu = {
 //   key: 'socials',
 //   title: i18n._(t`Socials`),
@@ -203,7 +184,7 @@ let dataMenu = {
   ]
 }
 
-  const mainItems: Bar = [tradeMenu, poolMenu, multiMenu, dataMenu]
+  const mainItems: Bar = [tradeMenu, poolMenu, dataMenu]
 
     // Balances
     // mainItems.push({

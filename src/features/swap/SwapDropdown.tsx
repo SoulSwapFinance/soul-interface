@@ -29,7 +29,6 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const isRemove = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
   const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
   const isPool = isRemove || isAdd
-  const isBridge = router.pathname.startsWith('/bridge')
 
   const isLimit = router.pathname.startsWith('/limit')
     || router.pathname.startsWith('/exchange/swap/limit')
@@ -52,7 +51,6 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const swapStyle = isExchange ? activeStyle : style
   const poolStyle = isPool ? activeStyle : style
   const ecoStyle = isAggregator ? activeStyle : style
-  const bridgeStyle = isBridge ? activeStyle : style
   const crossStyle = isCross ? activeStyle : style
 
   return (
@@ -208,38 +206,6 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
                 className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
               >
                 {`xChain`}
-              </Typography>
-
-            </div>
-          </NavLink>
-        }
-
-        {featureEnabled(Feature.BRIDGE, chainId) &&
-          <NavLink
-            className={classNames(
-              bridgeStyle
-            )}
-            activeClassName={classNames(
-              activeStyle
-            )}
-            href={'/bridge'}
-          >
-            <div
-              className={classNames(
-                `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
-                isBridge && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
-            // onClick={reveal}
-            // onMouseEnter={reveal}
-            // onMouseLeave={conceal}
-            >
-              {/* <BridgeIcon
-                fillPrimary={isBridge ? `${getChainColor(chainId)}` : `#FFFFFF`}
-                fillSecondary={isBridge ? `#FFFFFF` : `${getChainColor(chainId)}`}
-              /> */}
-              <Typography
-                className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
-              >
-                {`Bridge`}
               </Typography>
 
             </div>

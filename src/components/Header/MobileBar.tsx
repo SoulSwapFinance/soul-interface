@@ -88,8 +88,6 @@ const MobileBar = () => {
     //     || asPath.startsWith('/exchange/analytics/pairs')
     //     || asPath.startsWith('/exchange/analytics/tokens')
 
-    // const isBridge = router.pathname.startsWith('/bridge')
-
     // const isLimit = router.pathname.startsWith('/limit')
     //   || router.pathname.startsWith('/exchange/limit')
 
