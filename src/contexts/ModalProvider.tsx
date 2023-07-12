@@ -59,7 +59,8 @@ const ModalProvider: React.FC<any> = ({ children }) => {
           />
           {React.isValidElement(content) &&
             React.cloneElement(content, {
-              onDismiss: handleDismiss,
+              // TODO: Fix this
+              // onDismiss: handleDismiss,
             })}
         </StyledModalWrapper>
       )}
