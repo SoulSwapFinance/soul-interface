@@ -9,7 +9,7 @@ module.exports = {
     purgeLayersByDefault: true,
     applyComplexClasses: true,
   },
-  purge: ['./src/**/*.{js,ts,jsx,tsx}'],
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
   // darkMode: false,
   theme: {
     extend: {
@@ -136,19 +136,19 @@ module.exports = {
       },
     },
   },
-  variants: {
-    linearBorderGradients: ['responsive', 'hover', 'dark'], // defaults to ['responsive']
-    extend: {
-      backgroundColor: ['checked', 'disabled'],
-      backgroundImage: ['hover', 'focus'],
-      borderColor: ['checked', 'disabled'],
-      cursor: ['disabled'],
-      opacity: ['hover', 'disabled'],
-      placeholderColor: ['hover', 'active'],
-      ringWidth: ['disabled'],
-      ringColor: ['disabled'],
-    },
-  },
+  // variants: {
+  //   linearBorderGradients: ['responsive', 'hover', 'dark'], // defaults to ['responsive']
+  //   extend: {
+  //     backgroundColor: ['checked', 'disabled'],
+  //     backgroundImage: ['hover', 'focus'],
+  //     borderColor: ['checked', 'disabled'],
+  //     cursor: ['disabled'],
+  //     opacity: ['hover', 'disabled'],
+  //     placeholderColor: ['hover', 'active'],
+  //     ringWidth: ['disabled'],
+  //     ringColor: ['disabled'],
+  //   },
+  // },
   plugins: [
     require('tailwindcss-border-gradient-radius'),
     plugin(function ({ addUtilities }) {

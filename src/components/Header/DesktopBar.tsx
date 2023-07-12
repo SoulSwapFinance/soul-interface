@@ -118,7 +118,7 @@ const DesktopBar: FC = () => {
                             leaveFrom="opacity-100"
                             leaveTo="opacity-0"
                         >
-                            <Dialog.Overlay className="absolute inset-0 transition-opacity bg-dark-1000 bg-opacity-80" />
+                            <Dialog.Overlay className="absolute inset-0 transition-opacity bg-dark-1000 bg-opacity/80" />
                         </Transition.Child>
                         <div className="fixed inset-y-0 left-0 pr-8 sm:pr-10 max-w-[260px] flex">
                             <Transition.Child

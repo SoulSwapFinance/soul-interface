@@ -7,7 +7,7 @@ const FarmBanner: FC = () => {
 
   if(!state) {
     return (
-        <div className="relative w-full bg-purple bg-opacity-05 rounded-lg tracking-wide">
+        <div className="relative w-full bg-purple bg-opacity/05 rounded-lg tracking-wide">
           <div className="px-3 py-3 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="pr-16 sm:text-center sm:px-16">
               <p className="font-medium text-white">

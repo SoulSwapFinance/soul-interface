@@ -1,12 +1,12 @@
-// import { t } from '@lingui/macro'
-// import { useLingui } from '@lingui/react'
+import React, { useEffect, useState } from 'react'
+import { t } from '@lingui/macro'
+import { useLingui } from '@lingui/react'
 import { useWeb3React } from '@web3-react/core'
 import { network } from 'config/wallets'
 import { NetworkContextName } from '../../constants'
 import useEagerConnect from 'hooks/useEagerConnect'
 import useInactiveListener from 'hooks/useInactiveListener'
 // import dynamic from 'next/dynamic'
-import React, { useEffect, useState } from 'react'
 
 import Loader from '../Loader'
 
@@ -15,7 +15,7 @@ import Loader from '../Loader'
 // })
 
 export default function Web3ReactManager({ children }: { children: JSX.Element }) {
-  // const { i18n } = useLingui()
+  const { i18n } = useLingui()
   const { active } = useWeb3React()
   const { active: networkActive, error: networkError, activate: activateNetwork } = useWeb3React(NetworkContextName)
 

@@ -104,7 +104,7 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
                   className={classNames(
                     'shadow-md shadow-black/40 border', `border-${getChainColorCode(chainId)}`, 'rounded overflow-hidden',
                     !touchDevice
-                      ? "backdrop-blur-fallback before:z-[-1] before:rounded before:absolute before:w-full before:h-full before:content-[''] before:backdrop-blur-[20px] bg-dark-900 bg-opacity-[0.02]"
+                      ? "backdrop-blur-fallback before:z-[-1] before:rounded before:absolute before:w-full before:h-full before:content-[''] before:backdrop-blur-[20px] bg-dark-900 bg-opacity/[0.02]"
                       : 'bg-dark-800 inset-0'
                   )}
                 >

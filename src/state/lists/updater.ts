@@ -9,7 +9,7 @@ import { useCallback, useEffect } from 'react'
 
 import { acceptListUpdate } from './actions'
 import { useActiveListUrls, useAllLists } from './hooks'
-import { ChainId } from 'sdk'
+// import { ChainId } from 'sdk'
 
 export default function Updater(): null {
   const { library, chainId } = useActiveWeb3React()
