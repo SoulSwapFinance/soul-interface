@@ -1,7 +1,5 @@
 import React, { FC, useCallback } from 'react'
 import useENS from 'hooks/useENS'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { getChainColorCode } from 'constants/chains'
 import { useActiveWeb3React } from 'services/web3'
 
@@ -13,7 +11,6 @@ interface AddressInputPanelProps {
 }
 
 const AddressInputPanel: FC<AddressInputPanelProps> = ({ id, value, onChange }) => {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const { address, loading } = useENS(value)
 
@@ -36,16 +33,16 @@ const AddressInputPanel: FC<AddressInputPanelProps> = ({ id, value, onChange }) 
       id={id}
     >
       <div className="flex justify-between w-full sm:w-2/5 px-5">
-        <span className="text-[18px] text-primary">{i18n._(t`Send to:`)}</span>
+        <span className="text-[18px] text-primary">{`Send to:`}</span>
         <span 
           className={`text-${getChainColorCode(chainId)} text-sm underline cursor-pointer`}
           onClick={() => onChange(null)}>
-          {i18n._(t`Remove`)}
+          {`Remove`}
         </span>
       </div>
       <div className="flex w-full h-full sm:w-3/5 border-2 border-dark-800 rounded-r">
         <input
-          className="p-3 w-full flex overflow-ellipsis font-bold recipient-address-input bg-dark-900 h-full w-full rounded placeholder-low-emphesis"
+          className="p-3 w-full h-full flex overflow-ellipsis font-bold recipient-address-input bg-dark-900 rounded placeholder-low-emphesis"
           type="text"
           autoComplete="off"
           autoCorrect="off"

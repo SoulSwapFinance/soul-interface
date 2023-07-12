@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Currency, Trade as V2Trade, TradeType } from 'sdk'
 import FormattedPriceImpact from 'components/FormattedPriceImpact'
 import QuestionHelper from 'components/QuestionHelper'
@@ -14,8 +12,6 @@ function TradeReview({
   trade: V2Trade<Currency, Currency, TradeType> | undefined
   allowedSlippage: any
 }) {
-  const { i18n } = useLingui()
-
   const showRoute = Boolean(trade && trade.route.path.length > 2)
 
   const { realizedLPFee, priceImpact } = useMemo(() => {
@@ -36,11 +32,10 @@ function TradeReview({
         <div className="py-4 mb-4">
           <div className="flex items-center justify-between">
             <div className="flex text-lg text-secondary">
-              {i18n._(t`Minimum received`)}
+              {`Minimum received`}
               <QuestionHelper
-                text={i18n._(
-                  t`Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.`
-                )}
+                text={`Your transaction will revert if there is a large, unfavorable price movement before it is confirmed.`
+                }
               />
             </div>
             <div className="text-lg">
@@ -50,9 +45,9 @@ function TradeReview({
           </div>
           <div className="flex items-center justify-between">
             <div className="flex text-lg text-secondary">
-              {i18n._(t`Price Impact`)}
+              {`Price Impact`}
               <QuestionHelper
-                text={i18n._(t`The difference between the market price and estimated price due to trade size.`)}
+                text={`The difference between the market price and estimated price due to trade size.`}
               />
             </div>
             <div className="text-lg">
@@ -63,7 +58,7 @@ function TradeReview({
             <div className="flex text-lg text-secondary">
               Liquidity Provider Fee
               <QuestionHelper
-                text={i18n._(t`A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive.`)}
+                text={`A portion of each trade (0.25%) goes to liquidity providers as a protocol incentive.`}
               />
             </div>
             <div className="text-lg">
@@ -73,9 +68,9 @@ function TradeReview({
           {showRoute && (
             <div className="flex items-center justify-between">
               <div className="flex text-lg text-secondary">
-                {i18n._(t`Route`)}
+                {`Route`}
                 <QuestionHelper
-                  text={i18n._(t`Routing through these tokens resulted in the best price for your trade.`)}
+                  text={`Routing through these tokens resulted in the best price for your trade.`}
                 />
               </div>
               <div className="text-lg">
@@ -85,7 +80,7 @@ function TradeReview({
           )}
         </div>
       ) : (
-        <div className="mb-4 text-lg text-secondary">{i18n._(t`No liquidity found to do swap`)}</div>
+        <div className="mb-4 text-lg text-secondary">{`No liquidity found to do swap`}</div>
       )}
     </>
   )

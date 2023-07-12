@@ -1,7 +1,5 @@
 // import Davatar from '@davatar/react'
 // import { Web3Provider } from '@ethersproject/providers'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 // import { AbstractConnector } from '@web3-react/abstract-connector'
 import { useWeb3React } from '@web3-react/core'
 // import { injected } from 'config/wallets'
@@ -153,7 +151,6 @@ export function getChakraColor(votingPower) {
 }
 
 function Web3StatusInner() {
-  const { i18n } = useLingui()
   const { account, chainId, connector, library } = useWeb3React()
   // const { ENSName } = useENSName(account ?? undefined)
   const allTransactions = useAllTransactions()
@@ -185,7 +182,7 @@ function Web3StatusInner() {
         {hasPendingTransactions ? (
           <div className="flex items-center justify-between gap-2">
             <div>
-              {pending?.length} {i18n._(t`Pending`)}
+              {pending?.length} {`Pending`}
             </div>{' '}
             <Loader stroke="white" />
           </div>

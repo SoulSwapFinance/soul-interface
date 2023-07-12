@@ -1,58 +1,54 @@
 import { Popover, Transition } from '@headlessui/react'
 import React, { Fragment } from 'react'
 import ExternalLink from './ExternalLink'
-import { I18n } from '@lingui/core'
 import Image from 'next/image'
 import { classNames } from '../functions/styling'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 
-const items = (i18n: I18n) => [
+const items = () => [
   {
-    name: i18n._(t`Farm`),
-    description: i18n._(t`Summon Souls with Liquidity.`),
+    name: 'Farm',
+    description: 'Summon Souls with Liquidity',
     href: '/summoner',
   },
   {
-    name: i18n._(t`Stake`),
-    description: i18n._(t`Autocompound your Soul Rewards.`),
+    name: 'Stake',
+    description: 'Autocompound your Soul Rewards.',
     href: '/autostake',
   },
   {
-    name: i18n._(t`Earn`),
-    description: i18n._(t`Exit from Enchant.`),
+    name: 'Earn',
+    description: 'Exit from Enchant.',
     href: '/enchant',
   },
   {
-    name: i18n._(t`Bridge`),
-    description: i18n._(t`Come on Over...`),
+    name: 'Bridge',
+    description: 'Come on Over...',
     href: '/cross',
   },
   {
-    name: i18n._(t`Dashboard`),
-    description: i18n._(t`View your Dashboard.`),
+    name: 'Dashboard',
+    description: 'View your Dashboard.',
     href: '/dashboard',
   },
   {
-    name: i18n._(t`Analytics`),
-    description: i18n._(t`View your Trades.`),
+    name: 'Analytics',
+    description: 'View your Trades.',
     href: '/charts',
   },
   {
-    name: i18n._(t`Links`),
-    description: i18n._(t`Our Resources.`),
+    name: 'Links',
+    description: 'Our Resources.',
     href: 'https://link.soul.sh',
   },
   // {
-  //   name: i18n._(t`Discord`),
-  //   description: i18n._(t`Join Us on Discord.`),
+  //   name: 'Discord',
+  //   description: Join Us on 'Discord.',
   //   href: 'https://discord.gg/DQjChB6Wa6', // 19 SEP
   // },
 ]
 
 export default function Menu() {
-  const { i18n } = useLingui()
-  const solutions = items(i18n)
+  const solutions = items()
 
   return (
     <Popover className="relative">

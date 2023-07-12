@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
@@ -36,7 +34,6 @@ interface WalletModal {
 
 const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactions, ENSName }) => {
   const { active, account, connector, activate, error, deactivate } = useWeb3React()
-  const { i18n } = useLingui()
   const [walletView, setWalletView] = useState(WALLET_VIEWS.ACCOUNT)
   const [pendingWallet, setPendingWallet] = useState<{ connector?: AbstractConnector; id: string }>()
   const [pendingError, setPendingError] = useState<boolean>()
@@ -222,17 +219,17 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
         <div className="flex flex-col gap-4">
           <HeadlessUiModal.Header
             onClose={toggleWalletModal}
-            header={error instanceof UnsupportedChainIdError ? i18n._(t`Wrong Network`) : i18n._(t`Error connecting`)}
+            header={error instanceof UnsupportedChainIdError ? `Wrong Network` : `Error connecting`}
           />
           <HeadlessUiModal.BorderedContent>
             <Typography variant="xs" weight={700}>
               {error instanceof UnsupportedChainIdError
-                ? i18n._(t`Please connect to the appropriate network.`)
-                : i18n._(t`Error connecting. Try refreshing the page.`)}
+                ? `Please connect to the appropriate network.`
+                : `Error connecting. Try refreshing the page.`}
             </Typography>
           </HeadlessUiModal.BorderedContent>
           <Button color="red" onClick={handleDeactivate}>
-            {i18n._(t`Disconnect`)}
+            {`Disconnect`}
           </Button>
         </div>
       ) : account && walletView === WALLET_VIEWS.ACCOUNT ? (
@@ -246,7 +243,7 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
       ) : (
         <div className="flex flex-col w-full space-y-4">
           <HeadlessUiModal.Header
-            header={i18n._(t`Select Wallet`)}
+            header={`Select Wallet`}
             onClose={toggleWalletModal}
             {...(walletView !== WALLET_VIEWS.ACCOUNT && { onBack: handleBack })}
           />
@@ -265,7 +262,7 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
           )}
           <div className={[ChainId.ETHEREUM, ChainId.FANTOM].includes(chainId) ? `flex justify-center` : `hidden`}>
             <Typography variant="xs" className="text-secondary" component="span">
-              {i18n._(t`New to Fantom?`)}{' '}
+              {`New to Fantom?`}{' '}
               <Typography variant="xs" className="text-blue" component="span">
                 <ExternalLink href={chainId == ChainId.FANTOM 
                 ? `https://docs.fantom.foundation/tutorials/set-up-metamask/`
@@ -273,7 +270,7 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
                 `https://ethereum.org/wallets/`
               } color={getChainColorCode(chainId)}
               >
-                  {i18n._(t`Learn About Wallets`)}
+                  {`Learn About Wallets`}
                 </ExternalLink>
               </Typography>
             </Typography>

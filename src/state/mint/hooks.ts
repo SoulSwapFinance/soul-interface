@@ -1,15 +1,13 @@
 import { AppDispatch, AppState } from '../index'
-import { ChainId, Currency, CurrencyAmount, JSBI, Pair, Percent, Price, Token } from '../../sdk'
+import { Currency, CurrencyAmount, JSBI, Pair, Percent, Price, Token } from '../../sdk'
 import { Field, typeInput } from './actions'
 import { PairState, useV2Pair } from '../../hooks/useV2Pairs'
 import { useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { t } from '@lingui/macro'
 import { tryParseAmount } from '../../functions/parse'
 import { useActiveWeb3React } from 'services/web3'
 import { useCurrencyBalances } from '../wallet/hooks'
-import { useLingui } from '@lingui/react'
 import { useTotalSupply } from '../../hooks/useTotalSupply'
 
 const ZERO = JSBI.BigInt(0)
@@ -72,7 +70,6 @@ export function useDerivedMintInfo(
   poolTokenPercentage?: Percent
   error?: string
 } {
-  const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
 
   const { independentField, typedValue, otherTypedValue } = useMintState()
@@ -192,25 +189,25 @@ export function useDerivedMintInfo(
 
   let error: string | undefined
   if (!account) {
-    error = i18n._(t`Connect Wallet`)
+    error = 'Connect Wallet'
   }
 
   if (pairState === PairState.INVALID) {
-    error = error ?? i18n._(t`Invalid pair`)
+    error = error ?? 'Invalid pair'
   }
 
   if (!parsedAmounts[Field.CURRENCY_A] || !parsedAmounts[Field.CURRENCY_B]) {
-    error = error ?? i18n._(t`Enter Amount`)
+    error = error ?? 'Enter Amount'
   }
 
   const { [Field.CURRENCY_A]: currencyAAmount, [Field.CURRENCY_B]: currencyBAmount } = parsedAmounts
 
   if (currencyAAmount && currencyBalances?.[Field.CURRENCY_A]?.lessThan(currencyAAmount)) {
-    error = i18n._(t`Insufficient ${currencies[Field.CURRENCY_A]?.symbol} balance`)
+    error = 'Insufficient ${currencies[Field.CURRENCY_A]?.symbol} balance'
   }
 
   if (currencyBAmount && currencyBalances?.[Field.CURRENCY_B]?.lessThan(currencyBAmount)) {
-    error = i18n._(t`Insufficient ${currencies[Field.CURRENCY_B]?.symbol} balance`)
+    error = 'Insufficient ${currencies[Field.CURRENCY_B]?.symbol} balance'
   }
 
   return {

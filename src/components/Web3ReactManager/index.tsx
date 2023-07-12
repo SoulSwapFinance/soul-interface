@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { useWeb3React } from '@web3-react/core'
 import { network } from 'config/wallets'
 import { NetworkContextName } from '../../constants'
@@ -15,7 +13,6 @@ import Loader from '../Loader'
 // })
 
 export default function Web3ReactManager({ children }: { children: JSX.Element }) {
-  const { i18n } = useLingui()
   const { active } = useWeb3React()
   const { active: networkActive, error: networkError, activate: activateNetwork } = useWeb3React(NetworkContextName)
 

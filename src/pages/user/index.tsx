@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import Back from 'components/Back'
 import { Button } from 'components/Button'
 import Container from 'components/Container'
@@ -27,7 +25,6 @@ function newTransactionsFirst(a: TransactionDetails, b: TransactionDetails) {
 }
 
 export default function Me() {
-  const { i18n } = useLingui()
   const { chainId, account } = useActiveWeb3React()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const dispatch = useAppDispatch()
@@ -56,8 +53,8 @@ export default function Me() {
         .then((j) => j.data)
   )
 
-  if (error) return <div>{i18n._(t`failed to load`)}</div>
-  if (!data) return <div>{i18n._(t`loading...`)}</div>
+  if (error) return <div>{`failed to load`}</div>
+  if (!data) return <div>{`loading...`}</div>
 
   return (
     <Container id="user-page" className="py-4 space-y-3 md:py-8 lg:py-12" maxWidth="2xl">
@@ -71,7 +68,7 @@ export default function Me() {
         <Back />
 
         <Typography component="h1" variant="h2" className=" text-high-emphesis">
-          {i18n._(t`SOUL`)}
+          {`SOUL`}
         </Typography>
       </div>
 
@@ -89,7 +86,7 @@ export default function Me() {
                     {userEthBalance ? (
                       <div>{userEthBalance?.toSignificant(4)} ETH</div>
                     ) : (
-                      <Dots>{i18n._(t`Loading`)}</Dots>
+                      <Dots>{`Loading`}</Dots>
                     )}
                   </>
                 )}
@@ -107,7 +104,7 @@ export default function Me() {
               {/* <div className="ml-1">View on Explorer</div> */}
               {chainId && account && (
                 <a href={getExplorerLink(chainId, account, 'address')}>
-                  <span style={{ marginLeft: '4px' }}>{i18n._(t`View on Explorer`)}</span>
+                  <span style={{ marginLeft: '4px' }}>{`View on Explorer`}</span>
                 </a>
               )}
             </div>
@@ -115,15 +112,15 @@ export default function Me() {
         </div>
       </div>
       {/* <Typography component="h2" variant="h3" className="p-4 text-primary">
-          {i18n._(t`Balance`)}
+          {`Balance`)}
         </Typography> */}
       <div className="w-full max-w-2xl p-4 rounded bg-dark-900">
         <div className="flex flex-col items-center justify-between mb-3 sm:flex-row">
           <Typography component="h2" variant="lg" className="font-medium text-high-emphesis">
-            {i18n._(t`Transaction History ${chainId && NETWORK_LABEL[chainId]}`)}
+            {`Transaction History ${chainId && NETWORK_LABEL[chainId]}`}
           </Typography>
           <Button variant="empty" color="blue" onClick={clearAllTransactionsCallback}>
-            <span className="text-sm">{i18n._(t`Clear History`)}</span>
+            <span className="text-sm">{`Clear History`}</span>
           </Button>
         </div>
         {/* TODO: KEEP THIS STYLE BUT FEED WITH AGNOSTIC TX DATA */}

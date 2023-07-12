@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Currency, NATIVE } from 'sdk'
 import { useCurrency } from 'hooks/Tokens'
 import { useActiveWeb3React } from 'services/web3'
@@ -54,7 +52,6 @@ export function useDerivedCreateFarmInfo(): {
   currencies: { [field in Field]?: Currency }
   inputError?: string
 } {
-  const { i18n } = useLingui()
   const { account } = useActiveWeb3React()
 
   const {
@@ -80,15 +77,15 @@ export function useDerivedCreateFarmInfo(): {
   }
 
   // if (!currencies[Field.DEPOSIT]) {
-  //   inputError = inputError ?? i18n._(t`Select Deposit`)
+  //   inputError = inputError ?? `Select Deposit`
   // }
 
   if (!currencies[Field.REWARD]) {
-    inputError = inputError ?? i18n._(t`Select Reward`)
+    inputError = inputError ?? `Select Reward`
   }
 
   if (!Field.FEE) {
-    inputError = inputError ?? i18n._(t`Set Withdraw Fee`)
+    inputError = inputError ?? `Set Withdraw Fee`
   }
 
   return {

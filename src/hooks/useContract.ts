@@ -99,7 +99,6 @@ import UNDERWORLD_ABI from 'constants/abis/underworldpair.json'
 import BALANCES_FETCHER_ABI from 'constants/abis/balancesfetcher.json'
 
 // soul
-import SOUL_SCARAB_ABI from 'constants/abis/soulswap/scarab.json'
 import SOUL_SAFE_ABI from 'constants/abis/soulswap/safe.json'
 import SOUL_X_SWAP_ABI from 'constants/abis/soulswap/soulxswap.json'
 import SOUL_GUIDE_ABI from 'constants/abis/soul-guide.json' // TODO: update abi
@@ -314,11 +313,6 @@ export function useSeanceContract(withSignerIfPossible = true): Contract | null 
 export function useETHPairContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && ETH_USD_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
-}
-
-export function useScarabContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SCARAB_ADDRESS[250], SOUL_SCARAB_ABI, withSignerIfPossible)
 }
 
 export function useSafeContract(withSignerIfPossible?: boolean): Contract | null {

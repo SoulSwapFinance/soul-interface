@@ -1,6 +1,4 @@
 import { ArrowDownIcon } from '@heroicons/react/24/outline'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { ChainId, TradeVersion } from 'sdk'
 import Chip from 'components/Chip'
 import Container from 'components/Container'
@@ -38,7 +36,6 @@ import React, { useCallback, useMemo, useState } from 'react'
 const Swap = () => {
   const { formattedAmounts, trade, priceImpact, isWrap, parsedAmounts, error } = _useSwapPage()
   const tradeVersion = getTradeVersion(trade)
-  const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
   const { currencies, setURLCurrency, switchCurrencies } = useCurrenciesFromURL(chainId)
   const dispatch = useAppDispatch()
@@ -98,7 +95,7 @@ const Swap = () => {
       <DoubleGlowShadowV2>
         <div className="shadow rounded-[20px] bg-dark-900 pb-3">
           <div className="flex items-center justify-between py-2 pl-4 pr-2">
-            <Typography weight={700}>{i18n._(t`Swap`)}</Typography>
+            <Typography weight={700}>{'Swap'}</Typography>
             <div className="flex items-center justify-end gap-3">
               {chainId === ChainId.ETHEREUM && (
                 <div className="items-center hidden h-full px-3 py-1 space-x-3 border border-transparent rounded cursor-pointer text-green md:flex hover:bg-dark-800 hover:border-dark-700">
@@ -131,7 +128,7 @@ const Swap = () => {
                 <SwapAssetPanel.Switch
                   {...props}
                   disabled={tradeVersion === TradeVersion.INSTANT}
-                  label={i18n._(t`Pay from`)}
+                  label={'Pay from'}
                   onChange={(spendFromWallet) => dispatch(setSpendFromWallet(spendFromWallet))}
                   id="chk-pay-from-wallet"
                 />
@@ -162,7 +159,7 @@ const Swap = () => {
                 <SwapAssetPanel.Switch
                   {...props}
                   disabled={tradeVersion === TradeVersion.INSTANT}
-                  label={i18n._(t`Receive to`)}
+                  label={'Receive to'}
                   onChange={(receiveToWallet) => dispatch(setReceiveToWallet(receiveToWallet))}
                   id="chk-receive-to-wallet"
                 />
@@ -196,7 +193,7 @@ const Swap = () => {
               {trade && (
                 <div className="flex flex-col px-3 mb-3 border divide-y rounded border-dark-800 lg:mb-0 divide-dark-800">
                   <div className="flex justify-between py-2">
-                    <Typography variant="sm">{i18n._(t`Version`)}</Typography>
+                    <Typography variant="sm">{`Version`}</Typography>
                     <Chip
                       id="trade-type"
                       label={tradeVersion === TradeVersion.INSTANT ? 'Legacy' : 'Trident'}

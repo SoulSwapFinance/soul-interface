@@ -22,4 +22,3 @@ public/workbox*.js.map
 .env.dev
 .env.production
 .env.local
-/locale/

@@ -1,18 +1,15 @@
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import Container from '../../components/Container'
 import Head from 'next/head'
-import { I18n } from '@lingui/core'
 import Link from 'next/link'
 import Typography from '../../components/Typography'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { useMemo } from 'react'
 
-const TOOLS = (i18n: I18n) => [
+const TOOLS = () => [
   {
     id: 1,
     name: 'SUMMON SOUL',
-    description: i18n._(t`Deposit your SOUL-LP to earn $SOUL rewards.`),
+    description: 'Deposit your SOUL-LP to earn $SOUL rewards',
     href: './farms',
   },
   {
@@ -36,8 +33,7 @@ const TOOLS = (i18n: I18n) => [
 ]
 
 export default function Tools() {
-  const { i18n } = useLingui()
-  const tools = useMemo(() => TOOLS(i18n), [i18n])
+  const tools = useMemo(() => TOOLS(), [])
 
   return (
     <Container id="tools-page" className="py-4 space-y-4 md:py-8 lg:py-12" maxWidth="xl">

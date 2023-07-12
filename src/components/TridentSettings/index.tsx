@@ -1,10 +1,7 @@
 import { CheckIcon, CogIcon } from '@heroicons/react/24/outline'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Percent } from 'sdk'
 import { Button } from 'components/Button'
 import CloseIcon from 'components/CloseIcon'
-import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
 import Popover from 'components/Popover'
 import QuestionHelper from 'components/QuestionHelper'
 import Switch from 'components/Switch'
@@ -24,7 +21,6 @@ interface SettingsTabProps {
 }
 
 const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className }) => {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
 
   const toggle = useToggleSettingsMenu()
@@ -40,22 +36,22 @@ const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className }) =
           <div className="flex flex-col gap-3 p-3 border rounded shadow-xl bg-dark-900 w-80 border-dark-700">
             <div className="flex flex-col gap-4 p-3 border rounded border-dark-800/60">
               <Typography variant="xxs" weight={700} className="text-secondary">
-                {i18n._(t`Transaction Settings`)}
+                {`Transaction Settings`}
               </Typography>
               <TransactionSettings placeholderSlippage={placeholderSlippage} 
               />
             </div>
             <div className="flex flex-col gap-3 p-3 border rounded border-dark-800/60">
               <Typography variant="xxs" weight={700} className="text-secondary">
-                {i18n._(t`Settings`)}
+                {`Settings`}
               </Typography>
               {/* {!trident && ( */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <Typography variant="xs" className="text-high-emphesis" weight={700}>
-                      {i18n._(t`Disable multihops`)}
+                      {`Disable multihops`}
                     </Typography>
-                    <QuestionHelper text={i18n._(t`Restricts swaps to direct pairs only.`)} />
+                    <QuestionHelper text={`Restricts swaps to direct pairs only.`} />
                   </div>
                   <Switch
                     // color="gradient"
@@ -72,9 +68,9 @@ const SettingsTab: FC<SettingsTabProps> = ({ placeholderSlippage, className }) =
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <Typography variant="xs" className="text-high-emphesis" weight={700}>
-                      {i18n._(t`OpenMEV Gas Refunder`)}
+                      {`OpenMEV Gas Refunder`}
                     </Typography>
-                    <QuestionHelper text={i18n._(t`OpenMEV refunds up to 95% of transaction costs in 35 blocks.`)} />
+                    <QuestionHelper text={`OpenMEV refunds up to 95% of transaction costs in 35 blocks.`} />
                   </div>
                   <Switch
                     size="sm"
