@@ -1,50 +1,38 @@
 import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback'
 import { Plus } from 'react-feather'
-import { AutoRow, RowBetween } from 'components/Row'
+import { RowBetween } from 'components/Row'
 import { ButtonConfirmed, ButtonError } from 'components/Button'
-import { Currency, NATIVE, Percent, WNATIVE } from 'sdk'
+import { NATIVE, Percent, WNATIVE } from 'sdk'
 import React, { useCallback, useMemo, useState } from 'react'
 import TransactionConfirmationModal, { ConfirmationModalContent } from 'modals/TransactionConfirmationModal'
 import { calculateGasMargin, calculateSlippageAmount } from 'functions/trade'
 import { useBurnActionHandlers, useBurnState, useDerivedBurnInfo } from 'state/burn/hooks'
 import { usePairContract, useRouterContract } from 'hooks/useContract'
 
-// import { AddRemoveTabs } from 'components/NavigationTabs'
-// import Alert from 'components/Alert'
-import { ArrowDownIcon } from '@heroicons/react/24/solid'
 import { AutoColumn } from 'components/Column'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Button } from 'components/Button'
-// import Container from 'components/Container'
 import { Contract } from '@ethersproject/contracts'
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import Dots from 'components/Dots'
 import { Field } from 'state/burn/actions'
 import Head from 'next/head'
 import Link from 'next/link'
-// import SwapHeader from 'features/swap/SwapHeader'
 import LiquidityHeader from 'features/liquidity/LiquidityHeader'
-// import LiquidityPrice from 'features/liquidity/LiquidityPrice'
 import { MinimalPositionCard } from 'components/PositionCard'
-import NavLink from 'components/NavLink'
 import PercentInputPanel from 'components/PercentInputPanel'
 import ReactGA from 'react-ga'
 import { TransactionResponse } from '@ethersproject/providers'
-// import Web3Connect from 'components/Web3Connect'
-// import { currencyId } from 'functions/currency'
-import { t } from '@lingui/macro'
 import { useActiveWeb3React } from 'services/web3'
 import { useCurrency } from 'hooks/Tokens'
 import useDebouncedChangeHandler from 'hooks/useDebouncedChangeHandler'
 import { useDerivedMintInfo } from 'state/mint/hooks'
-import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
 import { useTransactionAdder } from 'state/transactions/hooks'
 import useTransactionDeadline from 'hooks/useTransactionDeadline'
 import { useUserSlippageToleranceWithDefault } from 'state/user/hooks'
 import { useV2LiquidityTokenPermit } from 'hooks/useERC20Permit'
 import { useWalletModalToggle } from 'state/application/hooks'
-// import SwapBanner from 'components/SwapBanner'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { classNames } from 'functions'
 import { getChainColorCode } from 'constants/chains'
@@ -52,15 +40,10 @@ import SwapDropdown from 'features/swap/SwapDropdown'
 import { PoolBalances } from 'features/portfolio/AssetBalances/pools'
 import PairChart from 'pages/analytics/pairs/embedded/[id]'
 import { MultichainBanner } from 'components/Banner'
-// import { SwapLayoutCard } from 'layouts/SwapLayout'
-// import Image from 'next/image'
-// import REMOVE_BANNER from 'assets/branding/remove-banner.png'
-// import TokenStats from 'components/TokenStats'
 
 const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(10, 1000) // 1%
 
 export default function Remove() {
-  const { i18n } = useLingui()
   const router = useRouter()
   const tokens = router.query.tokens
   const [currencyIdA, currencyIdB] = tokens || [undefined, undefined]
@@ -279,7 +262,7 @@ export default function Remove() {
           setAttemptingTxn(false)
 
           addTransaction(response, {
-            summary: t`Remove ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${currencyA?.symbol
+            summary: `Remove ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${currencyA?.symbol
               } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencyB?.symbol}`,
           })
 
@@ -607,7 +590,7 @@ export default function Remove() {
           </div>
         </div>
         <div className="justify-start text-sm text-secondary">
-          {t`Output is estimated. If the price changes by more than ${allowedSlippage.toSignificant(
+          {`Output is estimated. If the price changes by more than ${allowedSlippage.toSignificant(
             4
           )}% your transaction will revert.`}
         </div>
@@ -622,7 +605,7 @@ export default function Remove() {
           <>
             <div className="grid gap-1">
               <div className="flex items-center justify-between">
-                <div className="text-sm text-high-emphesis">{i18n._(t`Rates`)}</div>
+                <div className="text-sm text-high-emphesis">{`Rates`}</div>
                 <div className="text-sm font-bold justify-center items-center flex right-align pl-1.5 text-high-emphesis">
                   {`1 ${currencyA?.symbol} = ${tokenA ? pair.priceOf(tokenA).toSignificant(6) : '-'} ${currencyB?.symbol
                     }`}
@@ -640,7 +623,7 @@ export default function Remove() {
         )}
         <div className="grid gap-1 pb-6">
           <div className="flex items-center justify-between">
-            <div className="text-sm text-secondary">{i18n._(t`${currencyA?.symbol}/${currencyB?.symbol} Burned`)}</div>
+            <div className="text-sm text-secondary">{`${currencyA?.symbol}/${currencyB?.symbol} Burned`}</div>
             <div className="text-sm font-bold justify-center items-center flex right-align pl-1.5 text-high-emphasis">
               {parsedAmounts[Field.LIQUIDITY]?.toSignificant(6)}
             </div>
@@ -652,17 +635,16 @@ export default function Remove() {
           disabled={!(approval === ApprovalState.APPROVED || signatureData !== null)}
           onClick={onRemove}
         >
-          {i18n._(t`Confirm`)}
+          {`Confirm`}
         </Button>
       </div>
     )
   }
 
-  const pendingText = i18n._(
-    t`Removing ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${currencyA?.symbol} and ${parsedAmounts[
+  const pendingText = 
+    `Removing ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${currencyA?.symbol} and ${parsedAmounts[
       Field.CURRENCY_B
     ]?.toSignificant(6)} ${currencyB?.symbol}`
-  )
 
   const liquidityPercentChangeCallback = useCallback(
     (value: string) => {
@@ -680,9 +662,9 @@ export default function Remove() {
   // const handleSelectCurrencyA = useCallback(
   //   (currency: Currency) => {
   //     if (currencyIdB && currencyId(currency) === currencyIdB) {
-  //       router.push(`/exchange/remove/${currencyId(currency)}/${currencyIdA}`)
+  //       router.push(`/exchange/remove/${currencyId(currency)}/${currencyIdA}`
   //     } else {
-  //       router.push(`/exchange/remove/${currencyId(currency)}/${currencyIdB}`)
+  //       router.push(`/exchange/remove/${currencyId(currency)}/${currencyIdB}`
   //     }
   //   },
   //   [currencyIdA, currencyIdB, router]
@@ -691,9 +673,9 @@ export default function Remove() {
   // const handleSelectCurrencyB = useCallback(
   //   (currency: Currency) => {
   //     if (currencyIdA && currencyId(currency) === currencyIdA) {
-  //       router.push(`/exchange/remove/${currencyIdB}/${currencyId(currency)}`)
+  //       router.push(`/exchange/remove/${currencyIdB}/${currencyId(currency)}`
   //     } else {
-  //       router.push(`/exchange/remove/${currencyIdA}/${currencyId(currency)}`)
+  //       router.push(`/exchange/remove/${currencyIdA}/${currencyId(currency)}`
   //     }
   //   },
   //   [currencyIdA, currencyIdB, router]
@@ -716,8 +698,8 @@ export default function Remove() {
   return (
     <>
       <Head>
-        <title>{i18n._(t`Remove Liquidity`)} | SoulSwap </title>
-        <meta key="description" name="description" content={i18n._(t`Remove liquidity of Soul`)} />
+        <title>{`Remove Liquidity`} | SoulSwap </title>
+        <meta key="description" name="description" content={`Remove liquidity of Soul`} />
       </Head>
 
       <DoubleGlowShadowV2>
@@ -738,7 +720,7 @@ export default function Remove() {
               hash={txHash ? txHash : ''}
               content={() => (
                 <ConfirmationModalContent
-                  title={i18n._(t`Receive`)}
+                  title={`Receive`}
                   onDismiss={handleDismissConfirmation}
                   topContent={modalHeader}
                   bottomContent={modalBottom}
@@ -772,7 +754,7 @@ export default function Remove() {
               <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
                 <div className="w-full text-white sm:w-2/5" style={{ margin: 'auto 0px' }}>
                   <AutoColumn>
-                    <div>{i18n._(t`Receive`)}</div>
+                  <div>{`Receive`}</div>
                     {chainId && (oneCurrencyIsWETH || oneCurrencyIsETH) ? (
                       <RowBetween className="text-sm">
                         {oneCurrencyIsETH ? (
@@ -781,7 +763,7 @@ export default function Remove() {
                               }`}
                           >
                             <a className={classNames("font-bold text-baseline opacity-80 hover:opacity-100 focus:opacity-100 whitespace-nowrap", `text-${getChainColorCode(chainId)}`)}>
-                              {i18n._(t`Receive`)} W{NATIVE[chainId].symbol}
+                              {`Receive`} W{NATIVE[chainId].symbol}
                             </a>
                           </Link>
                         ) : oneCurrencyIsWETH ? (
@@ -790,7 +772,7 @@ export default function Remove() {
                               }`}
                           >
                             <a className="text-baseline text-blue opacity-80 hover:opacity-100 whitespace-nowrap">
-                              {i18n._(t`Receive`)} {NATIVE[chainId].symbol}
+                              {`Receive`} {NATIVE[chainId].symbol}
                             </a>
                           </Link>
                         ) : null}
@@ -836,11 +818,11 @@ export default function Remove() {
                   disabled={approval !== ApprovalState.NOT_APPROVED || signatureData !== null}
                 >
                   {approval === ApprovalState.PENDING ? (
-                    <Dots>{i18n._(t`Approving`)}</Dots>
+                    <Dots>{`Approving`}</Dots>
                   ) : approval === ApprovalState.APPROVED || signatureData !== null ? (
-                    i18n._(t`Approved`)
+                    `Approved`
                   ) : (
-                    i18n._(t`Approve`)
+                    `Approve`
                   )}
                 </ButtonConfirmed>
                 <ButtonError
@@ -850,7 +832,7 @@ export default function Remove() {
                   disabled={!isValid || (signatureData === null && approval !== ApprovalState.APPROVED)}
                   error={!isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B]}
                 >
-                  {error || i18n._(t`Confirm Withdrawal`)}
+                  {error || `Confirm Withdrawal`}
                 </ButtonError>
               </div>
             )}
@@ -877,7 +859,7 @@ export default function Remove() {
                 primaryColor={'black'}
               >
                 <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
-                  <span>{i18n._(t`View Positions`)}</span>
+                  <span>{`View Positions`}</span>
                 </a>
               </Button>
             </NavLink>
@@ -888,7 +870,7 @@ export default function Remove() {
                 primaryColor={'black'}
               >
                 <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
-                  <span>{i18n._(t`View Analytics`)}</span>
+                  <span>{`View Analytics`}</span>
                 </a>
               </Button>
             </NavLink>

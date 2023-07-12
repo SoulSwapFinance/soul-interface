@@ -1,8 +1,6 @@
 import ReactGA from 'react-ga'
 import Image from 'next/image'
 import ArrowRoundedSquare from 'assets/svg/icons/ArrowRoundedSquare.svg'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { ChainId, Currency, JSBI, NATIVE, SOUL_ADDRESS, Token, Trade as V2Trade, TradeType, USDC_ADDRESS, WNATIVE } from 'sdk'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
@@ -39,20 +37,11 @@ import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { currencyId } from 'functions'
 import { NextSeo } from 'next-seo'
 
-// import Web3Connect from 'components/Web3Connect'
-// import SwapHeader from 'features/swap/SwapHeader'
-// import TokenStats from 'components/TokenStats'
 import { VoteBanner } from 'components/Banner'
-// import SWAP_BANNER from 'assets/branding/swap-banner.png'
-// import UpDownArrowIcon from 'components/Icons/exchange/UpDownArrowIcon'
-// import ChevronUpDown from 'assets/svg/icons/ChevronUpDown.svg'
-// import useENSAddress from 'hooks/useENSAddress'
-// import Pair from 'pages/analytics/pairs/embedded/[id]'
 
 const Swap = () => {
-  const { i18n } = useLingui()
   const loadedUrlParams = useDefaultsFromURLSearch()
-  const { account, chainId, library } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const defaultTokens = useAllTokens()
   const { independentField, typedValue, recipient } = useSwapState()
   const { v2Trade, parsedAmount, currencies, inputError: swapInputError, allowedSlippage, to } = useDerivedSwapInfo()
@@ -348,7 +337,7 @@ const Swap = () => {
   // HANDLERS //
   // const handleLimitSwap = useCallback(
   //   () => {
-  //     router.push(`/exchange/swap/limit/${currencyIdA}/${currencyIdB}`)
+  //     router.push(`/exchange/swap/limit/${currencyIdA}/${currencyIdB}`
   //   }, []
   // )
 
@@ -377,7 +366,7 @@ const Swap = () => {
 //   const UP_DOWN_ICON = <UpDownArrowIcon
 //   fillPrimary={switched ? WHITE : getChainColor(chainId)}
 //   fillSecondary={switched ? getChainColor(chainId) : WHITE}
-//   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-2xl w-7 h-7` : `hidden`)}
+//   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-2xl w-7 h-7` : `hidden`}
 // />
 
   return (
@@ -454,8 +443,8 @@ const Swap = () => {
                     {...props}
                     label={
                       independentField === Field.OUTPUT && !showWrap
-                        ? i18n._(t`Swap from:`)
-                        : i18n._(t`Swap from:`)
+                        ? `Swap from:`
+                        : `Swap from:`
                     }
                   />
                 )}
@@ -471,7 +460,7 @@ const Swap = () => {
             <div className="flex -mt-4 -mb-4 z-0 justify-center">
               <Button
                 size={'xs'}
-                // className={classNames(`mx-[42%] rounded-2xl bg-dark-1000 border-2 border-[${getChainColor(chainId)}]`)}
+                // className={classNames(`mx-[42%] rounded-2xl bg-dark-1000 border-2 border-[${getChainColor(chainId)}]`}
                 className={classNames(`-mb-4 -mt-4 rounded-2xl bg-dark-1000 border-2 border-[${getChainColor(chainId)}]`)}
                 onClick={() =>
                   handleSwitchTokens(currencies?.INPUT, currencies?.OUTPUT)
@@ -487,7 +476,7 @@ const Swap = () => {
               </Button>
               {/* <Button
                 size={'xs'}
-                className={classNames(`rounded-xl bg-dark-1000 border-2 border-[${getChainColor(chainId)}]`)}
+                className={classNames(`rounded-xl bg-dark-1000 border-2 border-[${getChainColor(chainId)}]`}
                 // onClick={handleLimitSwap}
               >
                 <Image
@@ -508,7 +497,7 @@ const Swap = () => {
               header={(props) => (
                 <SwapAssetPanel.Header
                   {...props}
-                  label={independentField === Field.INPUT && !showWrap ? i18n._(t`Swap to:`) : i18n._(t`Swap to:`)}
+                  label={independentField === Field.INPUT && !showWrap ? `Swap to:` : `Swap to:`}
                 />
               )}
               currency={currencies[Field.OUTPUT]}
@@ -534,8 +523,8 @@ const Swap = () => {
               &&
               (
                 <Typography variant="xs" className="text-center py-2">
-                  {i18n._(t`Insufficient liquidity for this trade.`)}{' '}
-                  {singleHopOnly && i18n._(t`Try enabling multi-hop trades`)}
+                  {`Insufficient liquidity for this trade.`}{' '}
+                  {singleHopOnly && `Try enabling multi-hop trades`}
                 </Typography>
               )}
 
@@ -545,7 +534,7 @@ const Swap = () => {
                   color="red"
                   disabled
                   className="rounded-2xl w-full md:rounded">
-                  {i18n._(t`Unsupported Asset`)}
+                  {`Unsupported Asset`}
                 </Button>
               ) : !account // && useSwap 
                 ? (
@@ -566,9 +555,9 @@ const Swap = () => {
                     >
                       {wrapInputError ??
                         (wrapType === WrapType.WRAP
-                          ? i18n._(t`Wrap`)
+                          ? `Wrap`
                           : wrapType === WrapType.UNWRAP
-                            ? i18n._(t`Unwrap`)
+                            ? `Unwrap`
                             : null)}
                     </Button>
                   ) : showApproveFlow // && useSwap
@@ -611,10 +600,10 @@ const Swap = () => {
                               className="rounded-2xl w-full md:rounded"
                             >
                               {priceImpactSeverity > 3
-                                ? i18n._(t`Price Impact High`)
+                                ? `Price Impact High`
                                 : priceImpactSeverity > 2
-                                  ? i18n._(t`Swap Anyway`)
-                                  : i18n._(t`Swap`)}
+                                  ? `Swap Anyway`
+                                  : `Swap`}
                             </Button>
                           )}
                       </div>
@@ -639,8 +628,8 @@ const Swap = () => {
                         {swapInputError
                           ? swapInputError
                           : priceImpactSeverity > 2
-                            ? i18n._(t`Swap Anyway`)
-                            : i18n._(t`Swap`)}
+                            ? `Swap Anyway`
+                            : `Swap`}
                       </Button>
                     )}
             {

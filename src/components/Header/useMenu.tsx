@@ -1,28 +1,14 @@
 import React, { ReactNode, useMemo } from 'react'
 // import { CurrencyDollarIcon, UserGroupIcon, MoonIcon, StarIcon } from '@heroicons/react/24/outline'
-import { ArrowsUpDownIcon } from '@heroicons/react/24/outline'
 import { t } from '@lingui/macro'
 import { useLingui } from '@lingui/react'
 import { ChainId, SOUL_ADDRESS } from 'sdk'
 import { Feature } from 'enums'
 import { classNames, featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
-import { 
-  // BanknotesIcon, BuildingLibraryIcon, CircleStackIcon, DocumentIcon,  MagnifyingGlassCircleIcon, MinusCircleIcon, 
-  PhotoIcon, 
-  // PresentationChartLineIcon, PlusCircleIcon, SunIcon 
-} from '@heroicons/react/24/solid'
-import SwapIcon from 'components/Icons/exchange/SwapIcon'
 import { getChainColor } from 'constants/chains'
-import DocsIcon from 'components/Icons/mobile/DocsIcon'
-import { useRouter } from 'next/router'
-import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
-import VaultIcon from 'components/Icons/mobile/VaultIcon'
 import DropletIcon from 'components/Icons/header/DropletIcon'
 // import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
-import Image from 'next/image'
-import ChartIcon from 'components/Icons/exchange/ChartIcon'
-import SunMoonIcon from 'components/Icons/header/SunMoonIcon'
 // import SoulIcon from 'components/Icons/header/SoulIcon'
 // import { useRouter } from 'next/router'
 
@@ -65,7 +51,6 @@ const useMenu: UseMenu = () => {
   // const isFarm =  router.asPath.startsWith('/farm')
   // const isStake =  router.asPath.startsWith('/autostake')
   // const isAnalytics =  router.asPath.startsWith('/analytics')
-  // const isLending =  router.asPath.startsWith('/lend')
   
   const WHITE = '#FFFFFF'
 
@@ -79,7 +64,6 @@ const useMenu: UseMenu = () => {
   // const crossPage = asPath.startsWith('/cross') || asPath.startsWith('/exchange/cross')
   // const bondPage = asPath.startsWith('/bonds')
   // const landingPage = asPath.startsWith('/landing')
-  // const lendPage = asPath.startsWith('/lend') || asPath.startsWith('/borrow')
   // const nftPage = asPath.startsWith('/marketplace') || asPath.startsWith('/marketplace/collections')
   // const docsPage = asPath.startsWith('/learn')
 
@@ -301,18 +285,6 @@ const useMenu: UseMenu = () => {
     //         `filter text-white`
     //         )} />,
     //       link: '/autostake'
-    //   })
-    // }
-
-    // if (featureEnabled(Feature.UNDERWORLD, chainId)) {
-    //   mainItems.push({
-    //       key: 'lending',
-    //       title: i18n._(t`Lend`),
-    //       icon: LEND_ICON,
-    //       // icon: <BanknotesIcon width={20} className={classNames(
-    //       //   `filter text-white`
-    //       //   )} />,
-    //       link: '/lend'
     //   })
     // }
 

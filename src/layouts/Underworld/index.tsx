@@ -20,7 +20,6 @@ interface LayoutProps {
 // const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 
 const Layout: FC<LayoutProps> = ({ left, children, right }) => {
-  const { chainId } = useActiveWeb3React()
   const router = useRouter()
   const isLend = router.asPath == '/lend'
 
@@ -46,34 +45,6 @@ const Layout: FC<LayoutProps> = ({ left, children, right }) => {
           <div className="flex items-end col-span-12 xl:col-span-9">
             <nav className="flex items-center justify-between w-full">
               <div className="flex">
-                {/* <Button color="blue" variant="outlined" size="small">
-                <NavLink href="/lend">
-                  <a
-                    className={
-                      'px-2 sm:px-4 flex items-center font-medium ' +
-                      (router.pathname.startsWith('/lend')
-                        ? 'text-high-emphesis text-white'
-                        : 'text-secondary text-blue hover:text-primary hover:text-blue')
-                    }
-                  >
-                    <div className="text-base whitespace-nowrap">Supply</div>
-                  </a>
-                </NavLink>
-              </Button>
-              <Button color="purple" variant="outlined" size="small">
-                <NavLink href="/borrow">
-                  <a
-                    className={
-                      'px-2 sm:px-4 flex items-center font-medium ' +
-                      (router.pathname.startsWith('/borrow')
-                        ? 'text-high-emphesis text-white'
-                        : 'text-secondary text-purple hover:text-primary hover:text-purple')
-                    }
-                  >
-                    <div className="text-base whitespace-nowrap">Borrow</div>
-                  </a>
-                </NavLink>
-              </Button> */}
                 {/* <NavLink href="/create">
                   <a
                     className={

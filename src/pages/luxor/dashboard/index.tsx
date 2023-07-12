@@ -2,8 +2,6 @@ import React from 'react'
 import Container from 'components/Container'
 import Head from 'next/head'
 import Typography from 'components/Typography'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { formatNumber } from 'functions'
 import styled from 'styled-components'
 import DashboardDonutChart from 'components/Dashboard/DonutChart'
@@ -21,27 +19,13 @@ import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
 import { LuxorBanner } from 'components/Banner'
 import { useActiveWeb3React } from 'services/web3'
-
-// import { ethers } from 'ethers'
-// import DashboardLineGraph from 'components/Dashboard/LineGraph'
-// import QuestionHelper from 'components/QuestionHelper/Helper'
-// import useLuxorDashboard from 'hooks/useLuxorDashboard'
-// import { AutoSizer } from 'react-virtualized'
-// import { useLuxTVL } from 'hooks/useV2Pairs'
-// import { useWrappedLumensContract, useSorMasterContract } from 'hooks/useContract'
-// import { LUX_TREASURY_ADDRESS, WFTM_ADDRESS } from 'constants/addresses'
-// import useApprove from 'hooks/useApprove'
-// import { LUX_ADDRESS } from 'constants/addresses'
-// import ExternalLink from 'components/ExternalLink'
-
 export default function Dashboard() {
   const { chainId } = useActiveWeb3React()
-  const { i18n } = useLingui()
   // const { luxData } = useLuxorDashboard()
   const LuxFtmContract = usePairContract('0x951BBB838e49F7081072895947735b0892cCcbCD')
-  const LuxDaiContract = usePairContract('0x46729c2AeeabE7774a0E710867df80a6E19Ef851')
-  const FtmDaiContract = usePairContract('0xf3d6e8ecece8647b456d57375ce0b51b8f0cd40b')
-  const WlumFtmContract = usePairContract('0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99')
+  // const LuxDaiContract = usePairContract('0x46729c2AeeabE7774a0E710867df80a6E19Ef851')
+  // const FtmDaiContract = usePairContract('0xf3d6e8ecece8647b456d57375ce0b51b8f0cd40b')
+  // const WlumFtmContract = usePairContract('0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99')
   const LuxSorContract = usePairContract('0x622E69B6785311800B0d55D72fF27D91F5518212')
 
   // KEY CONTRACTS //
@@ -53,8 +37,8 @@ export default function Dashboard() {
   // const WrappedLumensContract = useWrappedLumensContract()
   // const LumensContract = useTokenContract(LUM_ADDRESS[250])
   // const DaiContract = useTokenContract(DAI_ADDRESS[250])
-  const DaiLendFtmContract = useTokenContract('0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd')
-  const FtmLendDaiContract = useTokenContract('0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61')
+  // const DaiLendFtmContract = useTokenContract('0xF4Bfdd73FE65D1B46b9968A24443A77ab89908dd')
+  // const FtmLendDaiContract = useTokenContract('0xFD9BE6a83c7e9cFF48f6D9a3036bb6b20598ED61')
   // const FtmContract = useTokenContract(WFTM_ADDRESS[250])
   // const LuxorStakingAddress = LuxorStakingContract?.address
   // const LuxorWarmupAddress = LUXOR_WARMUP_ADDRESS[250]
@@ -63,13 +47,13 @@ export default function Dashboard() {
   // const SorStakingContractAddress = SorStakingContract?.address
   // const LuxorTreasuryAddress = LuxorTreasuryContract?.address
   const LuxorFtmAddress = LuxFtmContract.address
-  const DaiLendFtmAddress = DaiLendFtmContract.address
-  const FtmLendDaiAddress = FtmLendDaiContract.address
+  // const DaiLendFtmAddress = DaiLendFtmContract.address
+  // const FtmLendDaiAddress = FtmLendDaiContract.address
 
 // let luxorCirculatingSupply = 100
-  const LuxorDaiAddress = LuxDaiContract.address
-  const FtmDaiAddress = FtmDaiContract.address
-  const WrappedLumFantomAddress = WlumFtmContract.address
+  // const LuxorDaiAddress = LuxDaiContract.address
+  // const FtmDaiAddress = FtmDaiContract.address
+  // const WrappedLumFantomAddress = WlumFtmContract.address
   const LuxorAddress = LUX_ADDRESS[250]
   const LuxSorAddress = LuxSorContract.address
   const luxorSupply = Number(useTokenInfo(LuxorAddress).tokenInfo.supply) / 1e9
@@ -86,10 +70,10 @@ export default function Dashboard() {
   const luxFtmPrice = usePairPrice(LuxorFtmAddress) // ~190_000 // √
   // console.log('luxorVolume:%s', luxData?.result[1])
   // get the price of key treasury reserves
-  const luxDaiPrice = usePairPrice(LuxorDaiAddress) // ~160_000 // √
+  // const luxDaiPrice = usePairPrice(LuxorDaiAddress) // ~160_000 // √
   const luxSorPrice = usePairPrice(LuxSorAddress)
-  const wLumFtmPrice = usePairPrice(WrappedLumFantomAddress) // ~1_6M // √
-  const ftmDaiPrice = usePairPrice(FtmDaiAddress) 
+  // const wLumFtmPrice = usePairPrice(WrappedLumFantomAddress) // ~1_6M // √
+  // const ftmDaiPrice = usePairPrice(FtmDaiAddress) 
     
   // GET SOR STATS
   // const { sorInfo } = useSorInfo()
@@ -339,7 +323,7 @@ const HideOnMobile = styled.div`
             weight={600} lineHeight={28} textColor="text-accent" 
             fontFamily={'semi-bold'}
             >
-            {i18n._(t`SoulSwap Details`)}
+            {`SoulSwap Details`}
           </Typography>
           <div>
             <Typography
@@ -347,7 +331,7 @@ const HideOnMobile = styled.div`
               fontFamily={'medium'}
               textColor={'text-white'}
             >
-              {i18n._(t`Total Value Locked`)}
+              {`Total Value Locked`}
               <QuestionHelper
                 width={'small'}
                 text={<div className="flex flex-col space-y-2">The sum of all assets staked in Luxor protocol.</div>}
@@ -369,7 +353,7 @@ const HideOnMobile = styled.div`
               fontFamily={'medium'}
               textColor={'text-white'}
             >
-              {i18n._(t`24h Trading Volume`)}
+              {`24h Trading Volume`}
               <QuestionHelper
                 width={'small'}
                 text={
@@ -395,7 +379,7 @@ const HideOnMobile = styled.div`
               fontFamily={'medium'}
               textColor={'text-white'}
             >
-              {i18n._(t`Market Cap`)}
+              {`Market Cap`}
             </Typography>
             <Typography variant={'h1'} lineHeight={48} fontFamily={'medium'}>
                {formatNumber(luxorMarketCap, true)}
@@ -417,7 +401,7 @@ const HideOnMobile = styled.div`
             textColor="text-accent text-[#FFFFFF]"
             fontFamily={'semi-bold'}
           >
-            {i18n._(t`LUXOR ECONOMY`).toUpperCase()}
+            {`LUXOR ECONOMY`.toUpperCase()}
           </Typography>
           <div className="h-px my-4 bg-[#F5D100]" />
           <div>
@@ -495,7 +479,7 @@ const HideOnMobile = styled.div`
             className={'flex justify-center items-baseline'}
             variant={'h1'} lineHeight={48} fontFamily={'medium'}>
               { luxorPerDay.toFixed(0) }
-               <span className="text-xs leading-5 text-black-50 ml-1">{i18n._(t`/ DAY`).toUpperCase()}</span>
+               <span className="text-xs leading-5 text-black-50 ml-1">{`/ DAY`.toUpperCase()}</span>
             </Typography>
             </div>
             </div>
@@ -546,7 +530,7 @@ const HideOnMobile = styled.div`
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
                   { luxorPerDay.toFixed(0) }
-                  <span className="text-xs leading-5 text-black-50 ml-1">{i18n._(t`/ DAY`).toUpperCase()}</span>
+                  <span className="text-xs leading-5 text-black-50 ml-1">{`/ DAY`.toUpperCase()}</span>
                 </Typography>
               </div>
               <div className="h-px my-4 bg-dark-1000" />
@@ -556,7 +540,7 @@ const HideOnMobile = styled.div`
                   fontFamily={'medium'}
                   textColor={'text-white'}
                 >
-                  {i18n._(t`Supply Distribution`)}
+                  {`Supply Distribution`}
                 </Typography>
                 <div className="h-px my-4 bg-dark-1000" />
               </div>
@@ -586,7 +570,7 @@ const HideOnMobile = styled.div`
             textColor="text-accent text-[#FFFFFF]"
             fontFamily={'semi-bold'}
           >
-            {i18n._(t`LUXOR TREASURY`).toUpperCase()}
+            {`LUXOR TREASURY`.toUpperCase()}
           </Typography>
           <div className="h-px my-4 bg-[#F5D100]" />
           <div>
@@ -620,7 +604,7 @@ const HideOnMobile = styled.div`
               fontFamily={'medium'}
               textColor={'text-white'}
             >
-              {i18n._(t`Treasury Distribution`)}
+              {`Treasury Distribution`}
             </Typography>
             <div className="h-px my-4 bg-dark-1000" />
           </div>
@@ -648,7 +632,7 @@ const HideOnMobile = styled.div`
             textColor="text-accent"
             fontFamily={'semi-bold'}
           >
-            {i18n._(t`Protocol Revenue`)}
+            {`Protocol Revenue`}
           </Typography>
 
           <div>
@@ -657,7 +641,7 @@ const HideOnMobile = styled.div`
               fontFamily={'medium'}
               textColor={'text-white'}
             >
-              {i18n._(t`Total Revenue`)}
+              {`Total Revenue`}
               <QuestionHelper
                 width={'large'}
                 text={
@@ -688,7 +672,7 @@ const HideOnMobile = styled.div`
               fontFamily={'medium'}
               textColor={'text-white'}
             >
-              {i18n._(t`Predicted Daily Revenue`)}
+              {`Predicted Daily Revenue`}
             </Typography>
             <Typography variant={'h1'} lineHeight={48} fontFamily={'medium'}>
                {formatNumber(luxorPrice, false, false, 0)}
@@ -705,7 +689,7 @@ const HideOnMobile = styled.div`
             textColor="text-accent text-[#FFFFFF]"
             fontFamily={'semi-bold'}
           >
-            {i18n._(t`SOR STABLECOIN`).toUpperCase()}
+            {`SOR STABLECOIN`.toUpperCase()}
           </Typography>
           <div className="h-px my-4 bg-[#F5D100]" />
           <div>
@@ -832,7 +816,7 @@ const HideOnMobile = styled.div`
                   className={'flex justify-center items-baseline'}
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
                {formatNumber(totalSorSupply, false, true)}{' '}
-              <span className="text-sm leading-5 text-black-50 ml-2">{i18n._(t`SOR`).toUpperCase()}</span>
+              <span className="text-sm leading-5 text-black-50 ml-2">{`SOR`.toUpperCase()}</span>
             </Typography>
           </div> //
           <div className="h-px my-4 bg-dark-1000" />
@@ -842,7 +826,7 @@ const HideOnMobile = styled.div`
               fontFamily={'medium'}
               textColor={'text-white'}
             >
-              {i18n._(t`Collateral Distribution`)}
+              {`Collateral Distribution`}
             </Typography>
           </div>
           <div className="h-px my-4 bg-dark-1000" />
@@ -871,7 +855,7 @@ const HideOnMobile = styled.div`
             textColor="text-accent text-[#FFFFFF]"
             fontFamily={'semi-bold'}
           >
-            {i18n._(t`WRAPPED LUMENS`).toUpperCase()}
+            {`WRAPPED LUMENS`.toUpperCase()}
           </Typography>
           <div className="h-px my-4 bg-[#F5D100]" />
 
@@ -917,7 +901,7 @@ const HideOnMobile = styled.div`
                   variant={'h1'} lineHeight={48} fontFamily={'medium'}>
                {/* {formatNumber(wlumPrice / luxorPrice, false, false)} */}
                   { formatNumber(wrapIndex, false, true) }
-                <span className="text-xs leading-5 text-black-50 ml-1">{i18n._(t`/ WLUM`).toUpperCase()}</span>
+                <span className="text-xs leading-5 text-black-50 ml-1">{`/ WLUM`.toUpperCase()}</span>
                 </Typography>
           </div>
           {/* <div>
@@ -926,7 +910,7 @@ const HideOnMobile = styled.div`
               fontFamily={'medium'}
               textColor={'text-white'}
             >
-              {i18n._(t`Market Price`)}
+              {`Market Price`}
             </Typography>
             <div className="h-px my-1 bg-dark-1000" />
             <Typography 
@@ -942,7 +926,7 @@ const HideOnMobile = styled.div`
               fontFamily={'medium'}
               textColor={'text-white'}
             >
-              {i18n._(t`WLUM:LUX Ratio`)}
+              {`WLUM:LUX Ratio`}
             </Typography>
             <div className="h-px my-1 bg-dark-1000" />
             <Typography 

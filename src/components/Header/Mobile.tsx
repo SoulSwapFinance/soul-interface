@@ -1,6 +1,5 @@
 
 import { Dialog, Transition } from '@headlessui/react'
-// import { ChainId, NATIVE } from 'sdk'
 import Web3Network from 'components/Web3Network'
 import Web3Status from 'components/Web3Status'
 import { useActiveWeb3React } from 'services/web3'
@@ -10,28 +9,10 @@ import useBar from './useBar'
 import { classNames } from 'functions/styling'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import MobileBar from './MobileBar'
-// import SwapIcon from 'components/Icons/exchange/SwapIcon'
 import { useRouter } from 'next/router'
-// import DoubleLeftIcon from 'components/Icons/mobile/DoubleLeftIcon'
-// import DoubleRightIcon from 'components/Icons/mobile/DoubleRightIcon'
-// import TokenStats from 'components/TokenStats'
 import Image from 'next/image'
 import LanguageMenu from './useLanguages'
-// import BinocularsIcon from 'components/Icons/header/BinocularsIcon'
-// import WalletIcon from 'components/Icons/header/WalletIcon'
-// import DropletIcon from 'components/Icons/header/DropletIcon'
-// import SunMoonIcon from 'components/Icons/header/SunMoonIcon'
-// import HomeIcon from 'components/Icons/mobile/HomeIcon'
-// import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
-// import BarsIcon from 'components/Icons/header/BarsIcon'
 import TokenStats from 'components/TokenStats'
-// import ChartIcon from 'components/Icons/exchange/ChartIcon'
-// import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
-// import SoulIcon from 'components/Icons/header/SoulIcon'
-// import DocsIcon from 'components/Icons/mobile/DocsIcon'
-// import NftIcon from 'components/Icons/mobile/NftIcon'
-// import { ArrowDownIcon } from '@heroicons/react/24/solid'
-// import DoubleDownIcon from 'components/Icons/mobile/DoubleDownIcon'
 
 const Mobile = () => {
   // const menu = useMenu()
@@ -168,7 +149,6 @@ const Mobile = () => {
   // const crossPage = asPath.startsWith('/cross') || asPath.startsWith('/exchange/cross')
   // const bondPage = asPath.startsWith('/bonds')
   // const landingPage = asPath.startsWith('/landing')
-  // const lendPage = asPath.startsWith('/lend') || asPath.startsWith('/borrow')
   // const nftPage = asPath.startsWith('/marketplace') || asPath.startsWith('/marketplace/collections')
   // const docsPage = asPath.startsWith('/learn')
 

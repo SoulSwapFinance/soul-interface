@@ -12,24 +12,6 @@ const TOOLS = () => [
     description: 'Deposit your SOUL-LP to earn $SOUL rewards',
     href: './farms',
   },
-  {
-    id: 2,
-    name: 'LEND & EARN',
-    description: 'Lend assets, then farm to earn $SOUL rewards.',
-    href: './lend'
-  },
-  {
-    id: 3,
-    name: 'ENCHANTED BUYBACKS',
-    description: 'Deposit $SEANCE and earn protocol fee-shares.',
-    href: './enchant'
-  },
-  {
-    id: 4,
-    name: 'BRIDGE ASSETS',
-    description: 'Bridge from Binance, Ethereum, Huobi, and more.',
-    href: './cross'
-  },
 ]
 
 export default function Tools() {

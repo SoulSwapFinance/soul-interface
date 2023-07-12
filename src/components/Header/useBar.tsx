@@ -170,20 +170,6 @@ const useMenu: UseBar = () => {
       })
     }
 
-    // // Lend
-    // mainItems.push({
-    //   key: 'lend',
-    //   link: '/lend',
-    //   title: i18n._(t`Lend`),
-    //   icon: <LendSkullIcon
-    //     className={classNames(`w-7 h-7 rounded-md`
-    //       // , isExplore ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
-    //     )}
-    //     fillPrimary={chainColor}
-    //     fillSecondary={WHITE}
-    //   />,
-    // })
-
     // Analytics
     // mainItems.push({
     //   key: 'data',
