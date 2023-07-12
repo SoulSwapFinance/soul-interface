@@ -8,7 +8,7 @@
     "bdev": "next build && next dev",
     "deploy": "vercel deploy",
     "inspect": "NODE_OPTIONS='--inspect' next dev",
-    "build": "yarn lingui && next build",
+    "build": "next build",
     "retry-limit": "rm -rf node_modules/soulswap-limit-orders-react && rm -rf node_modules/soulswap-limit-orders-lib && yarn add soulswap-limit-orders-react",
     "clean-cache": "rm -rf .next && rm -rf node_modules",
     "lingui": "lingui extract --clean --overwrite && lingui compile",

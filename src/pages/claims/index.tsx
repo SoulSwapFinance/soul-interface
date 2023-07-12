@@ -87,11 +87,11 @@ export default function Claims() {
 
   // let vault = ''
   if (Number(unclaimedAmount?.toFixed(8)) > 0) {
-    <Image alt="vault" unoptimized width="300" height="300" src={vaultImg} />
+    <Image alt="vault" unoptimized width={300} height={300} src={vaultImg} />
   } else if (Number(unclaimedAmount?.toFixed(8)) <= 0) {
-    <Image alt="vault" unoptimized width="300" height="300" src={vaultImg} />
+    <Image alt="vault" unoptimized width={300} height={300} src={vaultImg} />
   } else {
-    <Image alt="vault" unoptimized width="300" height="300" src={vaultImg} />
+    <Image alt="vault" unoptimized width={300} height={300} src={vaultImg} />
   }
 
   return (
@@ -102,7 +102,7 @@ export default function Claims() {
       </Head>
       <div className="flex px-0 sm:px-4 md:flex-row md:space-x-10 lg:space-x-20 md:px-10">
         <div className="hidden space-y-10 md:block">
-          <Image unoptimized width="300" height="300" src={vaultImg} loader={cloudinaryLoader} alt="" />
+          <Image unoptimized width={300} height={300} src={vaultImg} loader={cloudinaryLoader} alt="" />
           <div className="relative w-full p-4 overflow-hidden rounded bg-dark-900">
             <div className="font-bold text-white">{i18n._(t`Harvest Redistribution`)}</div>
             <div

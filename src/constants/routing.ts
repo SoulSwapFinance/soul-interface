@@ -2,7 +2,8 @@ import {
   BSC,
   FANTOM,
   AVALANCHE,
-  TELOS
+  TELOS,
+  MOONRIVER,
 } from './tokens'
 // a list of tokens by chain
 import { ChainId, Token, WNATIVE } from '../sdk'
@@ -56,7 +57,7 @@ export const COMMON_BASES: ChainTokenList = {
     ...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM], 
   ],
   [ChainId.MOONRIVER]: [
-    ...WRAPPED_NATIVE_ONLY[ChainId.MOONRIVER], 
+    ...WRAPPED_NATIVE_ONLY[ChainId.MOONRIVER], MOONRIVER.USDC, MOONRIVER.WETH, 
   ],
   [ChainId.MATIC]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.MATIC], 
@@ -87,7 +88,6 @@ export const COMMON_BASES: ChainTokenList = {
   AVALANCHE.SOUL,
   AVALANCHE.WETH
   ],
-  [ChainId.MOONRIVER]: [...WRAPPED_NATIVE_ONLY[ChainId.AVALANCHE], AVALANCHE.USDC, AVALANCHE.WETH],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend

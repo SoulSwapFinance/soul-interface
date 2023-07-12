@@ -1,4 +1,4 @@
-import { Token } from "sdk";
+import { ChainId, Token } from "sdk";
 export { MATIC_BASES } from "./tokens.matic";
 export { FANTOM_BASES } from "./tokens.fantom";
 
@@ -105,13 +105,10 @@ export const MIR = new Token(
   "Wrapped MIR"
 );
 export const UNI: { [chainId: number]: Token } = {
-  [1]: new Token(1, UNI_ADDRESS[1], 18, "UNI", "Uniswap"),
-  [4]: new Token(4, UNI_ADDRESS[4], 18, "UNI", "Uniswap"),
-  [3]: new Token(3, UNI_ADDRESS[3], 18, "UNI", "Uniswap"),
-  [5]: new Token(5, UNI_ADDRESS[5], 18, "UNI", "Uniswap"),
-  [56]: new Token(56, UNI_ADDRESS[56], 18, "UNI", "Uniswap"),
-  [137]: new Token(42, UNI_ADDRESS[137], 18, "UNI", "Uniswap"),
-  [43114]: new Token(56, UNI_ADDRESS[43114], 18, "UNI.e", "Uniswap"),
+  [1]: new Token(ChainId.ETHEREUM, UNI_ADDRESS[1], 18, "UNI", "Uniswap"),
+  [56]: new Token(ChainId.BSC, UNI_ADDRESS[56], 18, "UNI", "Uniswap"),
+  [137]: new Token(ChainId.MATIC, UNI_ADDRESS[137], 18, "UNI", "Uniswap"),
+  [43114]: new Token(ChainId.AVALANCHE, UNI_ADDRESS[43114], 18, "UNI.e", "Uniswap"),
 };
 
 export const getBaseTokenLogoURLByTokenSymbol = (

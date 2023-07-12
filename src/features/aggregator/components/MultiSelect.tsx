@@ -9,8 +9,8 @@ const formatOptionLabel = ({ label, ...rest }) => {
 			<div style={{ marginLeft: '10px', color: '#ccc' }}>
 				<Image
 					src={rest.logoURI}
-                    height={'20px'}
-                    width={'20px'}
+                    height={20}
+                    width={20}
 					style={{
 						width: 20,
 						height: 20,

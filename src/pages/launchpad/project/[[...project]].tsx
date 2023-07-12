@@ -147,8 +147,8 @@ const Pool = ({ project, poolInfo, launchpadInfo }) => {
         <div className={`flex flex-row justify-center items-center rounded-t`}>
           <Image
             src={`${project.baseUrl}/${poolInfo.baseLimitInLP == 0 ? 'unlimited.png' : 'basic.png'}`}
-            width="1440"
-            height="788"
+            width={1440}
+            height={788}
             className="rounded-t"
             alt={project.name}
           />

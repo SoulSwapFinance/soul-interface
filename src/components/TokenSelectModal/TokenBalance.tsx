@@ -24,8 +24,8 @@ export const TokenBalance: React.FC<any> = ({ token }) => {
         <Spacer size={'xs'} />
         <Image
           alt=""
-          height={'32px'}
-          width={'32px'}
+          height={32}
+          width={32}
           // style={{ marginLeft: ".1rem" }}
           src={token.logoURL}
         />
@@ -38,8 +38,8 @@ export const TokenBalance: React.FC<any> = ({ token }) => {
         <Spacer size={'lg'} />
         <Image
           alt=""
-          height={'28px'}
-          width={'28px'}
+          height={28}
+          width={28}
           // style={{ marginLeft: ".1rem" }}
           src={token.logoURL}
         />

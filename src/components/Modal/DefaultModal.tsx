@@ -132,6 +132,7 @@ export default function Modal({
                   ? {
                       ...bind(),
                       style: {
+                        // @ts-ignore
                         transform: y.interpolate((y) => `translateY(${y > 0 ? y : 0}px)`),
                       },
                     }

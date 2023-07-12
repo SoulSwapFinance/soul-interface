@@ -578,7 +578,7 @@ export default function Exchange() {
                 className="flex text-white"
               >
 
-                <ArrowRightIcon className="m-2 border border-2 rounded" height="21px" />
+                <ArrowRightIcon className="m-2 border-2 rounded" height="21px" />
 
               </div>
 
