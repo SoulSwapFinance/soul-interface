@@ -1,14 +1,9 @@
 import { ANALYTICS_URL } from '../../constants'
-import { ChainId } from '../../sdk'
 import ExternalLink from '../ExternalLink'
-import Polling from '../Polling'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { useActiveWeb3React } from 'services/web3'
 
 const Footer = () => {
   const { chainId } = useActiveWeb3React()
-  const { i18n } = useLingui()
   return (
     // <footer className="absolute bottom-0 flex items-center justify-between w-screen h-20 p-4 mx-auto text-center text-low-emphesis">
     <footer className="flex-shrink-0 relative bottom-[50%] w-full">

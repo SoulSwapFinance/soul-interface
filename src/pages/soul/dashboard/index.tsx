@@ -2,8 +2,6 @@ import React from 'react'
 // import Container from 'components/Container'
 import Head from 'next/head'
 import Typography from 'components/Typography'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 // import styled from 'styled-components'
 import { classNames, featureEnabled, formatNumber } from 'functions'
 import DashboardDonutChart from 'components/Dashboard/DonutChart'
@@ -18,19 +16,11 @@ import { useActiveWeb3React } from 'services/web3'
 import { getChainInfo } from 'constants/chains'
 import Image from 'next/image'
 import DATA_BANNER from 'assets/branding/data-banner.png'
-import TokenStats from 'components/TokenStats'
 import { Feature } from 'enums'
 
 export default function Dashboard() {
-  const { i18n } = useLingui()
-  // const seancePrice = useSeancePrice()
   const { chainId } = useActiveWeb3React()
   const { tokenInfo } = useTokenInfo(SOUL_ADDRESS[chainId])
-  // const bondInfo = useBondTVL()
-
-  // let bondsTvl = bondInfo?.reduce((previousValue, currentValue) => {
-  //   return previousValue + currentValue?.tvl
-  // }, 0)
   // Prices //
   const soulPrice = Number(tokenInfo.price) // usePriceUSD(SOUL_ADDRESS[chainId])
 
@@ -277,7 +267,7 @@ export default function Dashboard() {
                 textColor="text-accent text-[#FFFFFF]"
                 fontFamily={'semi-bold'}
               >
-                {i18n._(t`SOUL ECONOMY`).toUpperCase()}
+                {(`SOUL ECONOMY`).toUpperCase()}
               </Typography>
               <div className="h-px my-4 bg-[#A654DD]" />
               {/* <div>
@@ -386,7 +376,7 @@ export default function Dashboard() {
                 textColor="text-accent text-[#FFFFFF]"
                 fontFamily={'semi-bold'}
               >
-                {i18n._(t`SOUL TREASURY`).toUpperCase()}
+                {(`SOUL TREASURY`).toUpperCase()}
               </Typography>
               <div className="h-px my-4 bg-[#A654DD]" />
               <div>

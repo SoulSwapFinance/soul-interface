@@ -1,6 +1,4 @@
 import { ArrowDownIcon } from '@heroicons/react/24/solid'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { ZERO } from 'sdk'
 import AssetInput from 'components/AssetInput'
 import { Button } from 'components/Button'
@@ -30,7 +28,6 @@ const DepositView: FC<DepositViewProps> = ({ onClose, onBack }) => {
   const { data: coffinBalance } = useCoffinBalanceV2(currency ? currency.wrapped.address : undefined)
   const { deposit } = useCoffinBox()
   const [value, setValue] = useState<string>()
-  const { i18n } = useLingui()
   const coffinboxContract = useCoffinBoxContract()
 
   const valueCA = currency ? tryParseAmount(value, currency) : undefined
@@ -50,18 +47,18 @@ const DepositView: FC<DepositViewProps> = ({ onClose, onBack }) => {
   }, [currency, deposit, onClose, value])
 
   const error = !account
-    ? i18n._(t`Connect Wallet`)
+    ? `Connect Wallet`
     : !valueCA?.greaterThan(ZERO)
-    ? i18n._(t`Enter Amount`)
+    ? `Enter Amount`
     : !walletBalance
-    ? i18n._(t`Loading balance`)
+    ? `Loading balance`
     : valueCA?.greaterThan(walletBalance)
-    ? i18n._(t`Insufficient ${valueCA.currency.symbol} balance`)
+    ? `Insufficient ${valueCA.currency.symbol} balance`
     : ''
 
   return (
     <div className="flex flex-col gap-4">
-      <HeadlessUiModal.Header header={i18n._(t`Deposit to CoffinBox`)} onClose={onClose} onBack={onBack} />
+      <HeadlessUiModal.Header header={`Deposit to CoffinBox`} onClose={onClose} onBack={onBack} />
       <AssetInput
         chainId={chainId}
         title={''}
@@ -72,7 +69,7 @@ const DepositView: FC<DepositViewProps> = ({ onClose, onBack }) => {
         showMax={false}
       />
       <div className="flex justify-center -mt-6 -mb-6 z-10">
-        <div className="p-1.5 rounded-full bg-dark-800 border border-dark-800 shadow-md border-dark-700">
+        <div className="p-1.5 rounded-full bg-dark-800 border border-dark-800 shadow-md">
           <ArrowDownIcon width={14} className="text-high-emphesis" />
         </div>
       </div>
@@ -85,14 +82,14 @@ const DepositView: FC<DepositViewProps> = ({ onClose, onBack }) => {
             {(valuePlusBalance || coffinBalance)?.toSignificant(6)}
           </Typography>
           <Typography variant="xxs" className="text-secondary">
-            {i18n._(t`Total in CoffinBox`)}
+            {`Total in CoffinBox`}
           </Typography>
         </div>
       </HeadlessUiModal.BorderedContent>
       <TridentApproveGate inputAmounts={[valueCA]} tokenApproveOn={coffinboxContract?.address}>
         {({ approved, loading }) => {
           const disabled = !!error || !approved || loading || attemptingTxn
-          const buttonText = error ? error : i18n._(t`Confirm Deposit`)
+          const buttonText = error ? error : `Confirm Deposit`
 
           return (
             <Button loading={attemptingTxn || loading} color={getChainColorCode(chainId)} disabled={disabled} onClick={execute}>

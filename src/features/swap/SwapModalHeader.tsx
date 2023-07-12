@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { ChainId, Percent, TradeType, ZERO } from 'sdk'
 import { Button } from 'components/Button'
 import { CurrencyLogo } from 'components/CurrencyLogo'
@@ -28,7 +26,6 @@ const SwapModalHeader: FC<SwapModalHeader> = ({
   showAcceptChanges,
   onAcceptChanges,
 }) => {
-  const { i18n } = useLingui()
   const fiatValueInput = useUSDCValue(trade?.inputAmount)
   const fiatValueOutput = useUSDCValue(trade?.outputAmount)
 
@@ -110,10 +107,10 @@ const SwapModalHeader: FC<SwapModalHeader> = ({
         <HeadlessUiModal.BorderedContent className="border !border-dark-800">
           <div className="flex items-center justify-between">
             <Typography variant="sm" weight={700}>
-              {i18n._(t`Price Updated`)}
+              {`Price Updated`}
             </Typography>
             <Button variant="outlined" size="xs" color="blue" onClick={onAcceptChanges}>
-              {i18n._(t`Accept`)}
+              {`Accept`}
             </Button>
           </div>
         </HeadlessUiModal.BorderedContent>
@@ -121,19 +118,19 @@ const SwapModalHeader: FC<SwapModalHeader> = ({
       <div className="justify-start text-sm text-center text-secondary py-2">
         {trade?.tradeType === TradeType.EXACT_INPUT ? (
           <Typography variant="xs" className="text-secondary">
-            {i18n._(t`You will receive at least`)}{' '}
+            {`You will receive at least`}{' '}
             <Typography variant="xs" className="text-high-emphesis" weight={700} component="span">
               {trade.minimumAmountOut(allowedSlippage).toSignificant(6)} {trade.outputAmount.currency.symbol}
             </Typography>{' '}
-            {i18n._(t`or the transaction will revert.`)}
+            {`or the transaction will revert.`}
           </Typography>
         ) : (
           <Typography variant="xs" className="text-secondary">
-            {i18n._(t`Input is estimated. You will sell at most`)}{' '}
+            {`Input is estimated. You will sell at most`}{' '}
             <Typography variant="xs" className="text-high-emphesis" weight={700} component="span">
               {trade?.maximumAmountIn(allowedSlippage).toSignificant(6)} {trade?.inputAmount.currency.symbol}
             </Typography>{' '}
-            {i18n._(t`or the transaction will revert.`)}
+            {`or the transaction will revert.`}
           </Typography>
         )}
       </div>

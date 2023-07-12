@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import Checkbox from 'components/Checkbox'
 import Typography from 'components/Typography'
 import { selectTridentAdd, setAddFixedRatio } from 'features/trident/add/addSlice'
@@ -16,7 +14,6 @@ interface FixedRatioHeaderProps {
 
 const FixedRatioHeader: FC<FixedRatioHeaderProps> = ({ margin = true }) => {
   const isDesktop = useDesktopMediaQuery()
-  const { i18n } = useLingui()
   const dispatch = useAppDispatch()
   const { fixedRatio, liquidityMode } = useAppSelector(selectTridentAdd)
 
@@ -30,7 +27,7 @@ const FixedRatioHeader: FC<FixedRatioHeaderProps> = ({ margin = true }) => {
       >
         <Checkbox id={`chk-fixed-ratio-deposit`} className="w-6 h-6" checked={fixedRatio} />
         <Typography variant="sm" weight={700} className={fixedRatio ? 'text-white' : ''}>
-          {i18n._(t`Deposit assets in equal amounts`)}
+          {`Deposit assets in equal amounts`}
         </Typography>
       </div>
 

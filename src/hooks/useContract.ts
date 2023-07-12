@@ -60,10 +60,8 @@ import {
   SOUL_BOND_ADDRESS,
   COFFIN_BOX_ADDRESS,
   SOULSWAP_SWAPPER_ADDRESS,
-  UNDERWORLD_ADDRESS,
   CHAINLINK_ORACLE_ADDRESS,
   MERKLE_DISTRIBUTOR_ADDRESS,
-  SOUL_X_SWAP_ADDRESS,
   MANIFESTER_ADDRESS,
   MARKET_UPDATER_ADDRESS,
   REFUNDER_ADDRESS,
@@ -100,7 +98,6 @@ import BALANCES_FETCHER_ABI from 'constants/abis/balancesfetcher.json'
 
 // soul
 import SOUL_SAFE_ABI from 'constants/abis/soulswap/safe.json'
-import SOUL_X_SWAP_ABI from 'constants/abis/soulswap/soulxswap.json'
 import SOUL_GUIDE_ABI from 'constants/abis/soul-guide.json' // TODO: update abi
 import REFUNDER_ABI from 'constants/abis/refunder.json'
 import SUMMONER_ABI from 'constants/abis/soulswap/soulsummoner.json' // 28 JUL
@@ -603,12 +600,6 @@ export function useZapperContract(withSignerIfPossible?: boolean): Contract | nu
 export function useMarketUpdater(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && MARKET_UPDATER_ADDRESS[chainId], UPDATER_ABI, withSignerIfPossible)
-}
-
-
-export function useSoulXSwapContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_X_SWAP_ADDRESS[chainId], SOUL_X_SWAP_ABI, withSignerIfPossible)
 }
 
 export function useSwapUnderlyingContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {

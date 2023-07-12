@@ -382,17 +382,6 @@ export const COFFIN_BOX_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const SOUL_X_SWAP_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x64f2e9dA58C3B521Ef2564FC68FBFA5E32A2a5df', // OCT22
-  [ChainId.AVALANCHE]: '0x4f1B22481E83D222969daE360B0C83C656900B11', // OCT22
-  [ChainId.MATIC]: '',
-  [ChainId.MOONRIVER]: '',
-  [ChainId.ARBITRUM]: '',
-}
-
 export const CHAINLINK_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '0x00632CFe43d8F9f8E6cD0d39Ffa3D4fa7ec73CFB',
   [ChainId.TELOS]: '',

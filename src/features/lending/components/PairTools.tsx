@@ -1,5 +1,3 @@
-import { i18n } from '@lingui/core'
-import { t } from '@lingui/macro'
 import { ACTION_ACCRUE } from 'sdk'
 import React, { useMemo } from 'react'
 
@@ -7,30 +5,21 @@ import { Button } from 'components/Button'
 import QuestionHelper from 'components/QuestionHelper'
 import { UnderworldCooker } from 'entities'
 import { formatPercent } from 'functions'
-import { ZERO } from 'functions/math'
 import useUnderworldApproveCallback from 'hooks/useUnderworldApproveCallback'
-import { useMarketUpdater, useUnderworldPairContract } from 'hooks/useContract'
-import { getChainColor, getChainColorCode } from 'constants/chains'
-import { useActiveWeb3React } from 'hooks'
+import { useMarketUpdater } from 'hooks/useContract'
 
 export default function PairTools({ pair }) {
   const [, , , , onCook] = useUnderworldApproveCallback()
-  const UnderworldPair = useUnderworldPairContract(pair.address)
   const MarketUpdater = useMarketUpdater()
-  const { chainId } = useActiveWeb3React()
 
-  // async function onUpdatePrice(cooker: UnderworldCooker): Promise<string> {
-  //   cooker.updateExchangeRate(false, ZERO, ZERO)
-  //   return `${i18n._(t`Update Price`)} ${pair.asset.tokenInfo.symbol}/${pair.collateral.tokenInfo.symbol}`
-  // }
   async function onUpdatePrice() {
     await MarketUpdater.updateAll()
-    return `${i18n._(t`Update Price`)} ${pair.asset.tokenInfo.symbol}/${pair.collateral.tokenInfo.symbol}`
+    return `${`Update Price`} ${pair.asset.tokenInfo.symbol}/${pair.collateral.tokenInfo.symbol}`
 
   }
   async function onAccrue(cooker: UnderworldCooker): Promise<string> {
     cooker.add(ACTION_ACCRUE, '0x00')
-    return `${i18n._(t`Accrue`)} ${pair.asset.tokenInfo.symbol}/${pair.collateral.tokenInfo.symbol}`
+    return `${`Accrue`} ${pair.asset.tokenInfo.symbol}/${pair.collateral.tokenInfo.symbol}`
   }
 
   const priceChange = useMemo(() => {

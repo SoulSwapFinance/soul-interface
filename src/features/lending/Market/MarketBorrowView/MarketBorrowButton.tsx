@@ -1,7 +1,5 @@
 import { Signature } from '@ethersproject/bytes'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
-import { CurrencyAmount, JSBI, UNDERWORLD_ADDRESS, Percent, ZERO, Token } from 'sdk'
+import { CurrencyAmount, JSBI, UNDERWORLD_ADDRESS, Percent, ZERO } from 'sdk'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
 import { Warning, Warnings } from 'entities/Warnings'
@@ -12,12 +10,10 @@ import {
   useMarket,
 } from 'features/lending/Market'
 import TridentApproveGate from 'features/trident/TridentApproveGate'
-import { unwrappedToken } from 'functions'
 import { useCoffinBoxContract } from 'hooks'
 import { useCoffinOrWalletBalance } from 'hooks/useCoffinOrWalletBalance'
 import { useActiveWeb3React } from 'services/web3'
 import React, { FC, ReactNode, useState } from 'react'
-import { useCurrency } from 'hooks/Tokens'
 
 export interface MarketBorrowButtonProps extends Omit<BorrowExecutePayload, 'permit' | 'trade'> {
   view: MarketView
@@ -40,7 +36,6 @@ export const MarketBorrowButton: FC<MarketBorrowButtonProps> = ({
   nextMaxBorrowPossible,
 }) => {
   const { account } = useActiveWeb3React()
-  const { i18n } = useLingui()
   const { market } = useMarket()
   const { chainId } = useActiveWeb3React()
   const balance = useCoffinOrWalletBalance(
@@ -60,25 +55,25 @@ export const MarketBorrowButton: FC<MarketBorrowButtonProps> = ({
     : undefined
 
   const error = !account
-    ? i18n._(t`Connect Wallet`)
+    ? `Connect Wallet`
     : !collateralAmount?.greaterThan(ZERO) && !borrowAmount?.greaterThan(ZERO)
-    ? i18n._(t`Enter an amount`)
+    ? `Enter an amount`
     : !balance
-    ? i18n._(t`Loading balance`)
+    ? `Loading balance`
     : collateralAmount?.greaterThan(balance)
-    ? i18n._(t`Insufficient balance`)
+    ? `Insufficient balance`
     : totalAvailableToBorrow && borrowAmount && borrowAmount.greaterThan(totalAvailableToBorrow)
-    ? i18n._(t`Not enough ${borrowAmount.currency.symbol} available`)
+    ? `Not enough ${borrowAmount.currency.symbol} available`
     : ''
 
   const buttonText = error
     ? error
     : borrowAmount?.greaterThan(ZERO) && collateralAmount?.greaterThan(ZERO)
-    ? i18n._(t`Deposit and Borrow`)
+    ? `Deposit and Borrow`
     : borrowAmount?.greaterThan(ZERO)
-    ? i18n._(t`Borrow Asset`)
+    ? `Borrow Asset`
     : collateralAmount?.greaterThan(ZERO)
-    ? i18n._(t`Deposit Collateral`)
+    ? `Deposit Collateral`
     : ''
 
   const borrowWarnings = new Warnings()
@@ -128,9 +123,7 @@ export const MarketBorrowButton: FC<MarketBorrowButtonProps> = ({
       }, [])}
       {permitError && (
         <Typography variant="sm" className="p-4 text-center border rounded border-yellow/40 text-yellow">
-          {i18n._(
-            t`Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve CoffinBox' again for approving using the fallback method`
-          )}
+          {`Something went wrong during signing of the approval. This is expected for hardware wallets, such as Trezor and Ledger. Click 'Approve CoffinBox' again for approving using the fallback method`}
         </Typography>
       )}
       <TridentApproveGate

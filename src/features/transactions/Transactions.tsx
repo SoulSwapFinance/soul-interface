@@ -14,25 +14,12 @@ import {
   TABLE_WRAPPER_DIV_CLASSNAME,
 } from 'features/trident/constants'
 
-// @ts-ignore TYPE NEEDS FIXING //
-// import { t } from '@lingui/macro'
-// import { useLingui } from '@linxgui/react'
-// import { LoadingSpinner } from 'components/LoadingSpinner'
-// import { useTridentTransactions } from 'services/graph/hooks/transactions/trident'
-// import Typography from '../../components/Typography'
-
 export const LegacyTransactions: FC<{ pairs: string[] }> = ({ pairs }) => {
   const { transactions, error, loading } = useLegacyTransactions(pairs)
   return <_Transactions transactions={transactions} error={error} loading={loading} />
 }
 
-// export const TridentTransactions: FC<{ poolAddress?: string }> = ({ poolAddress }) => {
-//   const { transactions, error, loading } = useTridentTransactions(poolAddress)
-//   return <_Transactions transactions={transactions} error={error} loading={loading} />
-// }
-
 const _Transactions: FC<TransactionFetcherState> = ({ transactions, error, loading }) => {
-  // const { i18n } = useLingui()
   const { config } = useTableConfig(transactions)
 
   const {

@@ -3,16 +3,14 @@ import Container from "components/Container"
 import Typography from "components/Typography"
 import { Button } from "components/Button";
 import Head from "next/head";
-import { i18n, I18n } from "@lingui/core";
-import { t } from "@lingui/macro";
 import { useActiveWeb3React } from "services/web3";
 
 
-const SOUL = (i18n: I18n) => [
+const SOUL = () => [
 	{
 	  id: 0,
 	  name: 'CHOOSE YOUR DESTINY...',
-	  description: i18n._(t`SELECT PATH`),
+	  description: `SELECT PATH`,
 	  href: '/explore',
 	},
   ]
@@ -25,7 +23,7 @@ const Markets = () => {
 	const [tokenSymbol, setTokenSymbol] = useState()
 	const [marketData, setMarketData] = useState(false)
 	const [ticker, setTicker] = useState('btc')
-	const soulFeature = useMemo(() => SOUL(i18n), [i18n])
+	const soulFeature = useMemo(() => SOUL(), [])
 
 	let currentSelectSide;
 	let tokenSelected: {

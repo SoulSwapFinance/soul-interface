@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Price } from 'sdk'
 import Typography from 'components/Typography'
 import { useDerivedTridentSwapContext } from 'features/trident/swap/DerivedTradeContext'
@@ -13,7 +11,6 @@ interface SwapRateProps {
 }
 
 const SwapRate: FC<SwapRateProps> = ({ className = 'text-low-emphesis' }) => {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const { currencies } = useCurrenciesFromURL(chainId)
   const [invert, setInvert] = useState(false)
@@ -33,7 +30,7 @@ const SwapRate: FC<SwapRateProps> = ({ className = 'text-low-emphesis' }) => {
   return (
     <div className="flex justify-between">
       <Typography variant="sm" className={className}>
-        {i18n._(t`Exchange Rate`)}
+        {`Exchange Rate`}
       </Typography>
       <div id="btn-exchange-rate" className="flex items-center gap-2 cursor-pointer" onClick={() => setInvert(!invert)}>
         <Typography variant="sm" className="text-high-emphesis" weight={700}>

@@ -1,13 +1,9 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
-// import Typography from 'components/Typography'
 import { getChainColor } from 'constants/chains'
 import ActionsModal from 'features/portfolio/ActionsModal'
 import { CoffinBalances, WalletBalances } from 'features/portfolio/AssetBalances/coffinAndWallet'
 import { PoolBalances } from 'features/portfolio/AssetBalances/pools'
 import { UnderworldCollateral } from 'features/portfolio/AssetBalances/underworld/UnderworldCollateral'
 import { UnderworldLent } from 'features/portfolio/AssetBalances/underworld/UnderworldLent'
-// import HeaderDropdown from 'features/portfolio/HeaderDropdown'
 import { useAccountInUrl } from 'features/portfolio/useAccountInUrl'
 import { shortenAddress } from 'functions'
 import TridentLayout, { TridentBody } from 'layouts/Trident'
@@ -16,7 +12,6 @@ import React, { useState } from 'react'
 import { useActiveWeb3React } from 'services/web3'
 
 const Portfolio = () => {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const account = useAccountInUrl('/portfolio')
   const [show, setShow] = useState(false)
@@ -30,7 +25,7 @@ const Portfolio = () => {
   return (
     <>
       <Head>
-        <title>{i18n._(t`Portfolio`)} | Soul</title>
+        <title>{`Portfolio`} | Soul</title>
         <meta
           key="description"
           name="description"

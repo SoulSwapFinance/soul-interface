@@ -1,7 +1,5 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import React, { FC, useMemo } from 'react'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 
 import { generateSummaryString } from './table-utils'
 
@@ -24,11 +22,10 @@ export const TablePageToggler: FC<PageTogglerProps> = ({
   canPreviousPage,
   loading,
 }) => {
-  const { i18n } = useLingui()
 
   const summaryString = useMemo(
-    () => generateSummaryString(pageIndex, pageSize, totalItems, i18n._(t`None`), loading, i18n._(t`Loading...`)),
-    [pageIndex, pageSize, totalItems, i18n, loading]
+    () => generateSummaryString(pageIndex, pageSize, totalItems, `None`, loading, `Loading...`),
+    [pageIndex, pageSize, totalItems, loading]
   )
 
   return (
@@ -53,7 +50,7 @@ export const TablePageToggler: FC<PageTogglerProps> = ({
       {/* Mobile */}
       <div className="select-none mb-16 lg:hidden">
         <div className="rounded-t overflow-hidden border border-dark-700 bg-dark-1000 flex justify-between p-3">
-          <span>{i18n._(t`Showing Results`)}</span>
+          <span>{`Showing Results`}</span>
           <span className="text-high-emphesis"> {summaryString}</span>{' '}
         </div>
         <div className="border-b rounded-b border-l border-r border-dark-700 bg-dark-1000 overflow-hidden flex justify-between">
@@ -63,7 +60,7 @@ export const TablePageToggler: FC<PageTogglerProps> = ({
               canPreviousPage ? 'text-high-emphesis cursor-pointer' : 'text-gray-500'
             }`}
           >
-            {i18n._(t`Previous`)}
+            {`Previous`}
           </div>
           <div
             onClick={() => gotoPage(pageIndex + 1)}
@@ -71,7 +68,7 @@ export const TablePageToggler: FC<PageTogglerProps> = ({
               canNextPage ? 'text-high-emphesis cursor-pointer' : 'text-gray-500'
             }`}
           >
-            {i18n._(t`Next`)}
+            {`Next`}
           </div>
         </div>
       </div>

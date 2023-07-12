@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import {
   ChainId,
   Currency,
@@ -27,11 +25,6 @@ import { useUserSingleHopOnly } from 'state/user/hooks'
 import { ParsedQs } from 'qs'
 import { useCallback, useEffect, useState } from 'react'
 
-// import {
-//   EstimatedSwapCall,
-//   SuccessfulCall,
-//   useSwapCallArguments,
-// } from "../../hooks/useSwapCallback";
 import { Field, 
   replaceSwapState, 
   selectCurrency, 
@@ -177,7 +170,6 @@ export function useDerivedSwapInfo(): {
   v2Trade: V2Trade<Currency, Currency, TradeType> | undefined
   allowedSlippage: Percent
 } {
-  const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
   const [singleHopOnly] = useUserSingleHopOnly()
   const {
@@ -231,23 +223,23 @@ export function useDerivedSwapInfo(): {
   }
 
   if (!parsedAmount) {
-    inputError = inputError ?? i18n._(t`Enter Amount`)
+    inputError = inputError ?? `Enter Amount`
   }
 
   if (!currencies[Field.INPUT] || !currencies[Field.OUTPUT]) {
-    inputError = inputError ?? i18n._(t`Select Token`)
+    inputError = inputError ?? `Select Token`
   }
 
   const formattedTo = isAddress(to)
   if (!to || !formattedTo) {
-    inputError = inputError ?? i18n._(t`Enter Recipient`)
+    inputError = inputError ?? `Enter Recipient`
   } else {
     if (
       BAD_RECIPIENT_ADDRESSES?.[chainId]?.[formattedTo] ||
       (bestTradeExactIn && involvesAddress(bestTradeExactIn, formattedTo)) ||
       (bestTradeExactOut && involvesAddress(bestTradeExactOut, formattedTo))
     ) {
-      inputError = inputError ?? i18n._(t`Invalid Recipient`)
+      inputError = inputError ?? `Invalid Recipient`
     }
   }
 
@@ -257,7 +249,7 @@ export function useDerivedSwapInfo(): {
   const [balanceIn, amountIn] = [currencyBalances[Field.INPUT], v2Trade?.maximumAmountIn(allowedSlippage)]
 
   if (balanceIn && amountIn && balanceIn.lessThan(amountIn)) {
-    inputError = i18n._(t`Insufficient Balance`)
+    inputError = `Insufficient Balance`
   }
 
   return {

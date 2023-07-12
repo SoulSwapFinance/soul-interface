@@ -115,12 +115,6 @@ export default function Pool() {
                   >
                     {`Import`}
                   </Button>
-
-                  {/* {migrationSupported && (
-                    <Button id="create-pool-button" color="gray" onClick={() => router.push(`/migrate`}>
-                      {`Migrate`}
-                    </Button>
-                  )} */}
                 </div>
               )}
             </div>

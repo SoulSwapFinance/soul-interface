@@ -1,11 +1,9 @@
-import { t } from '@lingui/macro'
-import { Trans, useLingui } from '@lingui/react'
 import { ChainId } from 'sdk'
 import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 import NavLink from 'components/NavLink'
 import Typography from 'components/Typography'
 import features from 'config/features'
-import { NETWORK_ICON, NETWORK_LABEL } from 'config/networks'
+import { NETWORK_ICON } from 'config/networks'
 import { Feature } from 'enums'
 import { SUPPORTED_NETWORKS } from 'modals/NetworkModal'
 import { useActiveWeb3React } from 'services/web3'
@@ -20,12 +18,11 @@ interface NetworkGuardProps {
 }
 
 const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
-  const { i18n } = useLingui()
   const { chainId, library, account } = useActiveWeb3React()
 
   const link = (
     <NavLink href="/swap">
-      <a className={`text-${getChainColorCode(chainId)} focus:outline-none`}>{i18n._(t`Return`)}</a>
+      <a className={`text-${getChainColorCode(chainId)} focus:outline-none`}>{`Return`}</a>
     </NavLink>
   )
 
@@ -47,7 +44,7 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
       >
         <div className="flex flex-col gap-2 justify-center p-4 mt-10 lg:mt-0">
           {/* <Typography className="max-w-2xl text-lg sm:text-2xl text-white text-center" weight={700}>            {
-          i18n._(t`Unavailable on ${NETWORK_LABEL[chainId]}.`)}
+          `Unavailable on ${NETWORK_LABEL[chainId]}.`}
           </Typography>
           <Typography className="text-center">
             <Trans
@@ -57,7 +54,7 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
             />
           </Typography> */}
           <Typography className="uppercase text-white text-center text-lg mb-4 tracking-[.2rem]" weight={700}>
-            {i18n._(t`SWITCH CHAIN`)}
+            {`SWITCH CHAIN`}
           </Typography>
           <div className="flex gap-5 md:gap-10 justify-center">
             {supportedNetworks.map((key: string, idx: number) => (

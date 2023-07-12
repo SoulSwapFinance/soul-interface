@@ -71,7 +71,7 @@ export const MarketDetailsContentView: FC<MarketDetailsView> = ({
       <div className="flex flex-col gap-1 pb-2">
         {(collateralAmount || borrowAmount) && (
           <div className="flex justify-between gap-4">
-            <Typography variant="xs">{i18n._(t`Position Health`)}</Typography>
+            <Typography variant="xs">{`Position Health`}</Typography>
             <div className="flex gap-1">
               <Typography variant="xs" className="text-right text-secondary">
                 {new Percent(market.health, 1e18).toSignificant(6)}%
@@ -88,21 +88,21 @@ export const MarketDetailsContentView: FC<MarketDetailsView> = ({
           </div>
         )}
         <div className="flex justify-between gap-4">
-          <Typography variant="xs">{i18n._(t`APR (annualized)`)}</Typography>
+          <Typography variant="xs">{`APR (annualized)`}</Typography>
           <Typography variant="xs" className="text-right">
             {new Percent(market.currentInterestPerYear, 1e18).toFixed(2)}%
           </Typography>
         </div>
 
         <div className="flex justify-between gap-4">
-          <Typography variant="xs">{i18n._(t`Loan to Value (LTV)`)}</Typography>
+          <Typography variant="xs">{`Loan to Value (LTV)`}</Typography>
           <Typography variant="xs" className="text-right">
             75%
           </Typography>
         </div>
         {priceImpact && (
           <div className="flex justify-between gap-4">
-            <Typography variant="xs">{i18n._(t`Price Impact`)}</Typography>
+            <Typography variant="xs">{`Price Impact`}</Typography>
             <Typography variant="xs" className="text-right">
               {priceImpact.toSignificant(2)}%
             </Typography>
@@ -110,7 +110,7 @@ export const MarketDetailsContentView: FC<MarketDetailsView> = ({
         )}
         <div className="flex justify-between gap-4">
           <Typography variant="xs" className="flex items-center">
-            {i18n._(t`CoffinBox strategy`)}
+            {`CoffinBox strategy`}
             <QuestionHelper
               text={
                 <div>
@@ -126,19 +126,19 @@ export const MarketDetailsContentView: FC<MarketDetailsView> = ({
               text={
                 <div className="flex flex-col">
                   <div className="flex justify-between gap-4">
-                    <Typography variant="xs">{i18n._(t`Strategy APY`)}</Typography>
+                    <Typography variant="xs">{`Strategy APY`}</Typography>
                     <Typography variant="xs" className="text-right">
                       {formatPercent(strategy.apy)}
                     </Typography>
                   </div>
                   {/* <div className="flex justify-between gap-4">
-                    <Typography variant="xs">{i18n._(t`Current Percentage`)}</Typography>
+                    <Typography variant="xs">{`Current Percentage`}</Typography>
                     <Typography variant="xs" className="text-right">
                       {formatPercent(strategy.utilization)}
                     </Typography>
                   </div> */}
                   <div className="flex justify-between gap-4">
-                    <Typography variant="xs">{i18n._(t`Target Percentage`)}</Typography>
+                    <Typography variant="xs">{`Target Percentage`}</Typography>
                     <Typography variant="xs" className="text-right">
                       {formatPercent(strategy.targetPercentage)}
                     </Typography>
@@ -147,12 +147,12 @@ export const MarketDetailsContentView: FC<MarketDetailsView> = ({
               }
             >
               <Typography variant="xs" className={classNames(strategy ? 'text-blue' : '', 'text-right')}>
-                {strategy ? i18n._(t`Active`) : i18n._(t`None`)}{' '}
+                {strategy ? `Active` : `None`}{' '}
               </Typography>
             </Tooltip>
           ) : (
             <Typography variant="xs" className={classNames(strategy ? 'text-blue' : '', 'text-right')}>
-              {strategy ? i18n._(t`Active`) : i18n._(t`None`)}{' '}
+              {strategy ? `Active` : `None`}{' '}
             </Typography>
           )}
         </div>
@@ -161,7 +161,7 @@ export const MarketDetailsContentView: FC<MarketDetailsView> = ({
         {collateralAmount && (
           <div className="flex justify-between gap-4">
             <Typography variant="xs" className="text-secondary">
-              {i18n._(t`Total collateral`)}
+              {`Total collateral`}
             </Typography>
             <div className="flex gap-1">
               <Typography variant="xs" className="text-right text-secondary">
@@ -177,7 +177,7 @@ export const MarketDetailsContentView: FC<MarketDetailsView> = ({
         {borrowAmount && (
           <div className="flex justify-between gap-4">
             <Typography variant="xs" className="text-secondary">
-              {i18n._(t`Total borrowed`)}
+              {`Total borrowed`}
             </Typography>
             <div className="flex gap-1">
               <Typography variant="xs" className="text-right text-secondary">
@@ -192,7 +192,7 @@ export const MarketDetailsContentView: FC<MarketDetailsView> = ({
         )}
         <div className="flex justify-between gap-4">
           <Typography variant="xs" className="text-secondary">
-            {i18n._(t`Oracle`)}
+            {`Oracle`}
           </Typography>
           <Typography variant="xs" className="text-right text-secondary">
             {market.oracle.name}
@@ -211,7 +211,6 @@ export const MarketDetailsView: FC<MarketDetailsView> = ({
   view,
   trade,
 }) => {
-  const { i18n } = useLingui()
   const [invert, setInvert] = useState(false)
 
   const liquidationPrice = useLiquidationPrice({
@@ -238,26 +237,22 @@ export const MarketDetailsView: FC<MarketDetailsView> = ({
                   text={
                     <div className="flex flex-col gap-2">
                       <Typography variant="xs" className="text-white">
-                        {i18n._(
-                          t`When the value of your collateral becomes less than the asset you borrow, your position gets liquidated.`
-                        )}
+                        {`When the value of your collateral becomes less than the asset you borrow, your position gets liquidated.`}
                       </Typography>
                       <Typography variant="xs" className="italic">
-                        {i18n._(
-                          t`When a non-leveraged positions gets liquidated, you lose the collateral but you can keep the borrowed assets`
-                        )}
+                        {`When a non-leveraged positions gets liquidated, you lose the collateral but you can keep the borrowed assets`}
                       </Typography>
                     </div>
                   }
                 />
-                {view === MarketView.BORROW ? i18n._(t`Liquidation Price`) : i18n._(t`New Liquidation Price`)}
+                {view === MarketView.BORROW ? `Liquidation Price` : `New Liquidation Price`}
               </Typography>
               {liquidationPrice && (
                 <Typography
                   onClick={() => setInvert((prev) => !prev)}
                   variant="xs"
                   weight={700}
-                  className="py-1 rounded rounded-full cursor-pointer hover:text-high-emphesis"
+                  className="py-1 rounded-full cursor-pointer hover:text-high-emphesis"
                 >
                   {liquidationPrice}
                 </Typography>

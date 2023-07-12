@@ -4,20 +4,16 @@ import {
   // useCrossChainModeManager,
   // useUserArcherUseRelay,
   useUserSingleHopOnly,
-  useUserTransactionTTL,
 } from '../../state/user/hooks'
 import { useModalOpen, useToggleSettingsMenu } from '../../state/application/hooks'
 // import Image from '../../components/Image'
 
-// import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline'
 import  { ApplicationModal } from 'state/application/reducer'
 // import { Button } from 'components/Button'
 // import Modal from 'components/DefaultModal'
 import QuestionHelper from 'components/QuestionHelper'
 import { Toggle } from 'components/Toggle'
 import Typography from 'components/Typography'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import { useActiveWeb3React } from 'services/web3'
 import TransactionSettings from 'components/TransactionSettings'
@@ -27,7 +23,6 @@ import { classNames } from 'functions'
 import CogIcon from 'components/Icons/exchange/CogIcon'
 
 export default function SettingsTab({ placeholderSlippage }: { placeholderSlippage?: Percent }) {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
 
   const node = useRef<HTMLDivElement>(null)
@@ -47,7 +42,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
   const COG_ICON = <CogIcon
     fillPrimary={open ? getChainColor(chainId) : WHITE}
     fillSecondary={open ? WHITE : getChainColor(chainId)}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded-md w-7 h-7` : `hidden`)}
+    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded-md w-7 h-7` : `hidden`}
   />
   
   return (
@@ -68,20 +63,20 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
         <div className="absolute top-14 right-0 z-50 -mr-2.5 min-w-20 md:m-w-22 md:-mr-5 bg-dark-900 border-2 border-dark-800 rounded w-80 shadow-lg">
           <div className="p-4 space-y-4">
             {/* <Typography weight={700} className="text-high-emphesis">
-              {i18n._(t`Transaction Settings`)}
+              {`Transaction Settings`}
             </Typography> */}
 
             <TransactionSettings placeholderSlippage={placeholderSlippage} />
 
             {/* <Typography className="text-high-emphesis" weight={700}>
-              {i18n._(t`Settings`)}
+              {`Settings`}
             </Typography> */}
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <Typography variant="sm" className="text-primary">
-                  {i18n._(t`Disable Multihops`)}
+                  {`Disable Multihops`}
                 </Typography>
-                <QuestionHelper text={i18n._(t`Restricts swaps to direct pairs only.`)} />
+                <QuestionHelper text={`Restricts swaps to direct pairs only.`} />
               </div>
               <Toggle
                 id="toggle-disable-multihop-button"
@@ -93,7 +88,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <Typography variant="sm" className="text-primary">
-                    {i18n._(t`MEV Shield by Archer DAO`)}
+                    {`MEV Shield by Archer DAO`}
                   </Typography>
                   <QuestionHelper
                     text={i18n._(

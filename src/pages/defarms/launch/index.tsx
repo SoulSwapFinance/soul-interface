@@ -7,8 +7,6 @@ import {
 import { classNames } from 'functions'
 import NavLink from 'components/NavLink'
 import Card from 'components/Card'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { useTransactionAdder } from 'state/transactions/hooks'
 import { Disclosure } from '@headlessui/react'
@@ -18,10 +16,9 @@ import { Button } from 'components/Button'
 import useDefarm from 'features/defarms/useDefarm'
 // import { useActiveWeb3React } from 'services/web3'
 import Image from 'next/image'
-import { Router, useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
 export default function Manifestations(): JSX.Element {
-    const { i18n } = useLingui()
     const router = useRouter()
     // const { account, chainId } = useActiveWeb3React()
     // const [id, setID] = useState(0)
@@ -93,14 +90,14 @@ export default function Manifestations(): JSX.Element {
         const tx = await ManifesterContract.setDelay(id, 0)
         // const tx = await ManifestationContract.setDelay(delayDays.toString())
         addTransaction(tx, {
-          summary: `${i18n._(t`Launched DeFarm ${id}`)}`,
+          summary: `${`Launched DeFarm ${id}`}`,
         })
       } catch (error) {
         console.error(error)
       }
       setPendingTx(false)
     },
-    [addTransaction, i18n, ManifesterContract]
+    [addTransaction, ManifesterContract]
   )
 
   return (
@@ -128,7 +125,7 @@ export default function Manifestations(): JSX.Element {
                   color={`ftmBlue`}
                 >
                 <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
-                  {i18n._(t`View DeFarms`)}
+                  {`View DeFarms`}
                 </a>
                 </Button>
               </NavLink>
@@ -142,7 +139,7 @@ export default function Manifestations(): JSX.Element {
                   color={`ftmBlue`}
                 >
                 <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
-                  {i18n._(t`Create DeFarm`)}
+                  {`Create DeFarm`}
                 </a>
                 </Button>
               </NavLink>
@@ -166,13 +163,13 @@ export default function Manifestations(): JSX.Element {
                 {defarms.length > 0 && (
                   <div className="grid grid-cols-5 text-base font-bold text-primary mt-10 mb-2">
                     {/* <div className="flex items-center col-span-2 px-2">
-                      <div className="hover:text-high-emphesis">{i18n._(t`Token`)}</div>
+                      <div className="hover:text-high-emphesis">{`Token`}</div>
                     </div> */}
-                    <div className="flex items-center ml-3">{i18n._(t`ID`)}</div>
-                    <div className="flex items-center">{i18n._(t`Logo`)}</div>
-                    <div className="flex items-center">{i18n._(t`Symbol`)}</div>
-                    <div className="flex items-center mr-3">{i18n._(t`Address`)}</div>
-                    <div className="items-center justify-end px-2 flex ">{i18n._(t``)}</div>
+                    <div className="flex items-center ml-3">{`ID`}</div>
+                    <div className="flex items-center">{`Logo`}</div>
+                    <div className="flex items-center">{`Symbol`}</div>
+                    <div className="flex items-center mr-3">{`Address`}</div>
+                    <div className="items-center justify-end px-2 flex ">{``}</div>
                   </div>
                 )}
                 <div className="flex-col">

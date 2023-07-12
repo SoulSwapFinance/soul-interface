@@ -1,5 +1,3 @@
-import { I18n } from '@lingui/core'
-import { t } from '@lingui/macro'
 import { Pool } from 'sdk'
 import Chip from 'components/Chip'
 import Typography from 'components/Typography'
@@ -10,19 +8,19 @@ import { POOL_TYPES } from '../constants'
 import { poolEntityMapper } from '../poolEntityMapper'
 import { chipPoolColorMapper } from '../types'
 
-const _PoolProperties: FC<{ pool: Pool; i18n: I18n }> = ({ pool, i18n }) => {
+const _PoolProperties: FC<{ pool: Pool }> = ({ pool }) => {
   const type = useMemo(() => poolEntityMapper(pool), [pool])
   return (
     <>
       <Chip label={POOL_TYPES[type].label_long} color={chipPoolColorMapper[type]} />
       <Typography weight={700} variant="sm">
-        {formatPercent(pool?.fee?.valueOf() / 100)} {i18n._(t`Fees`)}
+        {formatPercent(pool?.fee?.valueOf() / 100)} {`Fees`}
       </Typography>
     </>
   )
 }
 
-export const PoolProperties: FC<{ pool?: Pool; i18n: I18n }> = ({ pool, i18n }) => {
+export const PoolProperties: FC<{ pool?: Pool }> = ({ pool }) => {
   if (!pool) return <></>
-  return <_PoolProperties pool={pool} i18n={i18n} />
+  return <_PoolProperties pool={pool} />
 }

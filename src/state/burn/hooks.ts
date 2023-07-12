@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Currency, CurrencyAmount, JSBI, Pair, Percent, Token, ZERO } from 'sdk'
 import { tryParseAmount } from 'functions/parse'
 import { useTotalSupply } from 'hooks/useTotalSupply'
@@ -31,9 +29,6 @@ export function useDerivedBurnInfo(
   userLiquidity: CurrencyAmount<Token> | undefined
 } {
   const { account, chainId } = useActiveWeb3React()
-
-  const { i18n } = useLingui()
-
   const { independentField, typedValue } = useBurnState()
 
   // pair + totalsupply
@@ -135,15 +130,15 @@ export function useDerivedBurnInfo(
 
   let error: string | undefined
   if (!account) {
-    error = i18n._(t`Connect Wallet`)
+    error = `Connect Wallet`
   }
 
   if (!parsedAmounts[Field.LIQUIDITY] || !parsedAmounts[Field.CURRENCY_A] || !parsedAmounts[Field.CURRENCY_B]) {
-    error = error ?? i18n._(t`Enter Amount`)
+    error = error ?? `Enter Amount`
   }
 
   if (parsedAmounts[Field.CURRENCY_A]?.equalTo(ZERO) && parsedAmounts[Field.CURRENCY_B]?.equalTo(ZERO)) {
-    error = error ?? i18n._(t`Insufficient Balance`)
+    error = error ?? `Insufficient Balance`
   }
 
   return { pair, parsedAmounts, error, userLiquidity }

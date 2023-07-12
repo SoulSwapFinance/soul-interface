@@ -1,6 +1,4 @@
 import { ArrowLongLeftIcon, ArrowLongRightIcon, EllipsisHorizontalIcon } from '@heroicons/react/24/outline'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { classNames } from 'functions'
 import { FC, ReactNode, useCallback } from 'react'
 
@@ -41,7 +39,6 @@ const Pagination: FC<PaginationProps> = ({
   canNextPage,
   canPreviousPage,
 }) => {
-  const { i18n } = useLingui()
 
   const getPageNumbers = useCallback(() => {
     /**
@@ -139,7 +136,7 @@ const Pagination: FC<PaginationProps> = ({
             <span className="text-pink">
               <ArrowLongLeftIcon className="mr-3 h-5 w-5" aria-hidden="true" />
             </span>
-            {i18n._(t`Previous`)}
+            {`Previous`}
           </button>
         )}
       </div>
@@ -152,7 +149,7 @@ const Pagination: FC<PaginationProps> = ({
               'text-transparent bg-gradient-to-r from-pink to-pink-red bg-clip-text cursor-pointer inline-flex items-center text-sm font-bold'
             )}
           >
-            {i18n._(t`Next`)}
+            {`Next`}
             <span className="text-pink-red">
               <ArrowLongRightIcon className="ml-3 h-5 w-5" aria-hidden="true" />
             </span>

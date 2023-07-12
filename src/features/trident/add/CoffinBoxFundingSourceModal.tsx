@@ -1,8 +1,5 @@
 import { QuestionMarkCircleIcon } from '@heroicons/react/24/solid'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { CoffinboxIcon, WalletIcon } from 'components/Icon'
-import Image from 'components/Image'
 import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
 import Switch from 'components/Switch'
 import Typography from 'components/Typography'
@@ -10,7 +7,6 @@ import { classNames } from 'functions'
 import React, { FC, useState } from 'react'
 
 const CoffinBoxFundingSourceModal: FC = () => {
-  const { i18n } = useLingui()
   const [walletSelected, setWalletSelected] = useState(false)
 
   return (
@@ -24,17 +20,17 @@ const CoffinBoxFundingSourceModal: FC = () => {
 
       {({ setOpen }) => (
         <div className="flex flex-col gap-4">
-          <HeadlessUiModal.Header header={i18n._(t`About CoffinBox Funding`)} onClose={() => setOpen(false)} />
+          <HeadlessUiModal.Header header={`About CoffinBox Funding`} onClose={() => setOpen(false)} />
           <div className="flex justify-center gap-4">
             <div className="relative shadow-purple-glow">
               {/* <Image src="https://exchange.soulswap.finance/soul2lux.gif" width={160} height={120} alt="CoffinBox Logo" /> */}
             </div>
             <div className="flex flex-col gap-2">
               <Typography variant="lg" weight={700} className="text-center text-high-emphesis">
-                {i18n._(t`SoulSwap utilizes a token vault called CoffinBox that has balances separate from your wallet.`)}
+                {`SoulSwap utilizes a token vault called CoffinBox that has balances separate from your wallet.`}
               </Typography>
               <Typography variant="sm" className="text-center text-secondary">
-                {i18n._(t`You can think of this as having "account balances" for asset within SoulSwap.`)}
+                {`You can think of this as having "account balances" for asset within SoulSwap.`}
               </Typography>
             </div>
           </div>
@@ -50,7 +46,7 @@ const CoffinBoxFundingSourceModal: FC = () => {
                   >
                     <CoffinboxIcon width={48} />
                     <Typography variant="xs" className="text-secondary">
-                      {i18n._(t`CoffinBox`)}
+                      {`CoffinBox`}
                     </Typography>
                   </div>
                   <div
@@ -61,12 +57,12 @@ const CoffinBoxFundingSourceModal: FC = () => {
                   >
                     <WalletIcon width={48} />
                     <Typography variant="xs" className="text-secondary">
-                      {i18n._(t`Wallet`)}
+                      {`Wallet`}
                     </Typography>
                   </div>
                 </div>
                 <Typography weight={700} variant="sm" className="text-center text-high-emphesis">
-                  {i18n._(t`You’ll see these icons next to your balance in various input fields.`)}
+                  {`You’ll see these icons next to your balance in various input fields.`}
                 </Typography>
               </div>
               <div
@@ -83,7 +79,7 @@ const CoffinBoxFundingSourceModal: FC = () => {
                 <div className="flex flex-col items-center justify-center gap-2 p-3 px-8">
                   <Switch checked={walletSelected} onChange={setWalletSelected} />
                   <Typography weight={700} variant="sm" className="text-center text-high-emphesis">
-                    {i18n._(t`Use the toggle to switch between balances when interacting with our platform.`)}
+                    {`Use the toggle to switch between balances when interacting with our platform.`}
                   </Typography>
                 </div>
               </div>

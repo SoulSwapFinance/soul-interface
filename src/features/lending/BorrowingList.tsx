@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import SortIcon from 'components/SortIcon'
 import Typography from 'components/Typography'
 import { TABLE_TR_TH_CLASSNAME, TABLE_WRAPPER_DIV_CLASSNAME } from 'features/trident/constants'
@@ -14,7 +12,6 @@ import { useLendingMediumRiskBorrowingPositions } from './hooks'
 import LendingBorrowingListItem from './BorrowingListItem'
 
 export const LendingBorrowingList = () => {
-  const { i18n } = useLingui()
   const router = useRouter()
   const account = router.query.account as string
   const positions = useLendingMediumRiskBorrowingPositions(account)
@@ -29,28 +26,28 @@ export const LendingBorrowingList = () => {
         <div className="grid grid-cols-6 min-w-[768px]">
           <div className={classNames('flex gap-1 items-center cursor-pointer', TABLE_TR_TH_CLASSNAME(0, 6))}>
             <Typography variant="sm" weight={700}>
-              {i18n._(t`Asset / Collateral`)}
+              {`Asset / Collateral`}
             </Typography>
           </div>
           <div
             className={classNames('flex gap-1 items-center cursor-pointer justify-end', TABLE_TR_TH_CLASSNAME(1, 6))}
           >
             <Typography variant="sm" weight={700}>
-              {i18n._(t`Collateralized`)}
+              {`Collateralized`}
             </Typography>
           </div>
           <div
             className={classNames('flex gap-1 items-center cursor-pointer justify-end', TABLE_TR_TH_CLASSNAME(2, 6))}
           >
             <Typography variant="sm" weight={700}>
-              {i18n._(t`Liquidation Price`)}
+              {`Liquidation Price`}
             </Typography>
           </div>
           <div
             className={classNames('flex gap-1 items-center cursor-pointer justify-end', TABLE_TR_TH_CLASSNAME(3, 6))}
           >
             <Typography variant="sm" weight={700}>
-              {i18n._(t`Borrowed`)}
+              {`Borrowed`}
             </Typography>
           </div>
           <div
@@ -58,7 +55,7 @@ export const LendingBorrowingList = () => {
             onClick={() => requestSort('health')}
           >
             <Typography variant="sm" weight={700}>
-              {i18n._(t`Health`)}
+              {`Health`}
             </Typography>
             <SortIcon id={sortConfig.key} direction={sortConfig.direction} active={sortConfig.key === 'health'} />
           </div>
@@ -67,7 +64,7 @@ export const LendingBorrowingList = () => {
             onClick={() => requestSort('currentInterestPerYear')}
           >
             <Typography variant="sm" weight={700}>
-              {i18n._(t`Borrow APR`)}
+              {`Borrow APR`}
             </Typography>
             <SortIcon
               id={sortConfig.key}

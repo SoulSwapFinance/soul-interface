@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { CurrencyAmount, Percent } from '@sushiswap/core-sdk'
 import GradientDot from 'components/GradientDot'
 import QuestionHelper from 'components/QuestionHelper'
@@ -17,7 +15,6 @@ export const MarketCurrentPosition: FC<MarketCurrentPosition> = ({
   setCollateralAmount,
   setBorrowAmount,
 }) => {
-  const { i18n } = useLingui()
   const { market } = useMarket()
 
   const currentCollateral = CurrencyAmount.fromRawAmount(
@@ -30,7 +27,7 @@ export const MarketCurrentPosition: FC<MarketCurrentPosition> = ({
     <div className="grid grid-cols-3 px-3">
       <div className="flex flex-col items-baseline">
         <Typography variant="xs" className="text-secondary">
-          {i18n._(t`Collateralized`)}
+          {`Collateralized`}
         </Typography>
         <Typography
           weight={700}
@@ -47,7 +44,7 @@ export const MarketCurrentPosition: FC<MarketCurrentPosition> = ({
       </div>
       <div className="flex flex-col items-center">
         <Typography variant="xs" className="text-secondary">
-          {i18n._(t`Borrowed`)}
+          {`Borrowed`}
         </Typography>
         <Typography
           weight={700}
@@ -64,7 +61,7 @@ export const MarketCurrentPosition: FC<MarketCurrentPosition> = ({
       </div>
       <div className="flex flex-col items-end">
         <Typography variant="xs" className="text-right text-secondary">
-          {i18n._(t`Health`)}
+          {`Health`}
         </Typography>
         <Typography weight={700} variant="sm" className="flex items-center text-high-emphesis">
           {new Percent(market.health, 1e18).toSignificant(6)}%
@@ -74,12 +71,10 @@ export const MarketCurrentPosition: FC<MarketCurrentPosition> = ({
               text={
                 <div className="flex flex-col gap-2">
                   <Typography variant="xs" className="text-white">
-                    {i18n._(
-                      t`Health of your position defined as your current borrowed amount divided by the max borrow amount given current collateral.`
-                    )}
+                    { 'Health of your position defined as your current borrowed amount divided by the max borrow amount given current collateral.' }
                   </Typography>
                   <Typography variant="xs" className="italic">
-                    {i18n._(t`100% means you are at max borrow`)}
+                    {`100% means you are at max borrow`}
                   </Typography>
                 </div>
               }

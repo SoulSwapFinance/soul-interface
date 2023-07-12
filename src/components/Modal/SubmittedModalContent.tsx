@@ -1,6 +1,4 @@
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/outline'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import loadingCircle from 'animation/loading-circle.json'
 import { ModalActionProps } from 'components/Modal/Action'
 import { HeadlessUiModal } from 'components/Modal/index'
@@ -33,7 +31,6 @@ const SubmittedModalContent: FC<SubmittedModalContentProps> = ({
   onBack,
   actions,
 }) => {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const txStatus = useAppSelector(selectTxStatus(txHash))
 
@@ -49,7 +46,7 @@ const SubmittedModalContent: FC<SubmittedModalContentProps> = ({
         <div className="flex flex-col divide-y divide-dark-700">
           <div className="flex justify-between gap-2 py-2">
             <Typography variant="sm" className="text-secondary">
-              {i18n._(t`Transaction Hash`)}
+              {`Transaction Hash`}
             </Typography>
             {txHash && (
               <Typography variant="sm" weight={700} className="text-blue">
@@ -62,17 +59,17 @@ const SubmittedModalContent: FC<SubmittedModalContentProps> = ({
 
           <div className="flex justify-between gap-2 py-2">
             <Typography variant="sm" className="text-secondary">
-              {i18n._(t`Status`)}
+              {`Status`}
             </Typography>
             <Typography id={`div-tx-status`} variant="sm" weight={700} className="flex items-center gap-2 italic">
               {txStatus === 'PENDING'
-                ? i18n._(t`Processing`)
+                ? `Processing`
                 : txStatus === 'SUCCESS'
-                ? i18n._(t`Success`)
+                ? `Success`
                 : txStatus === 'CANCELLED'
-                ? i18n._(t`Cancelled`)
+                ? `Cancelled`
                 : txStatus === 'FAILED'
-                ? i18n._(t`Failed`)
+                ? `Failed`
                 : ''}
               {txStatus === 'PENDING' ? (
                 <div className="w-4 h-4">
@@ -92,7 +89,7 @@ const SubmittedModalContent: FC<SubmittedModalContentProps> = ({
       </HeadlessUiModal.Content>
       <HeadlessUiModal.Actions>
         <HeadlessUiModal.Action main={!actions} onClick={onDismiss}>
-          {i18n._(t`Close`)}
+          {`Close`}
         </HeadlessUiModal.Action>
         {actions}
       </HeadlessUiModal.Actions>
