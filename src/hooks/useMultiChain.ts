@@ -25,25 +25,18 @@ const useMultiChain = () => {
   // const signer = library.getSigner()
   const [toChain, setToChain] = useState(null);
 
-  const swapToChain = (chainId: number) => {
-    if (provider === "browser") {
-      // switchToChain(account, chainId);
-      // switchToChain(walletContext.activeWallet.provider, chainId);
-    }
-  };
-
   useEffect(() => {
     if (!toChain) return;
     if (!SUPPORTED_CHAINS.includes(toChain)) return;
     if (chainId === toChain) return;
-    swapToChain(toChain);
+    // swapToChain(toChain);
 
-    return () => swapToChain(parseInt(config.chainId));
+    // return () => swapToChain(parseInt(config.chainId));
   }, [toChain, account]);
 
   return {
     setToChain,
-    forceSwap: (chainId: number) => swapToChain(chainId),
+    // forceSwap: (chainId: number) => swapToChain(chainId),
     DEFAULT_PROVIDERS,
   };
 };

@@ -38,7 +38,6 @@ export const WETH9: TokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, WETH9_ADDRESS[ChainId.FANTOM], 18, 'WETH', 'Wrapped Ether'),
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, WETH9_ADDRESS[ChainId.AVALANCHE], 18, 'WETH', 'Wrapped Ether'),
   [ChainId.MOONRIVER]: new Token(ChainId.MOONRIVER, WETH9_ADDRESS[ChainId.MOONRIVER], 18, 'WETH', 'Wrapped Ether'),
-  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, WETH9_ADDRESS[ChainId.AVALANCHE], 18, 'WETH', 'Wrapped Ether'),
 }
 
 export const WNATIVE: TokenMap = {

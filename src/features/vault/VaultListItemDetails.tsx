@@ -116,7 +116,7 @@ const VaultListItem = ({ farm }) => {
               {account && (
                 <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
                   {i18n._(t`Wallet Balance`)}:{' '}
-                  {formatNumberScale(balance?.toSignificant(4, undefined, 2) ?? 0, false)}
+                  {formatNumber(balance, false, true)}
                   {farm.lpPrice && balance
                     ? ` (` + formatNumberScale(farm.lpPrice * Number(balance?.toFixed(18) ?? 0), true) + `)`
                     : ``}
