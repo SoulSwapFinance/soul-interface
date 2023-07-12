@@ -1,21 +1,21 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
+// import { t } from '@lingui/macro'
+// import { useLingui } from '@lingui/react'
 import { useWeb3React } from '@web3-react/core'
 import { network } from 'config/wallets'
 import { NetworkContextName } from '../../constants'
 import useEagerConnect from 'hooks/useEagerConnect'
 import useInactiveListener from 'hooks/useInactiveListener'
-import dynamic from 'next/dynamic'
+// import dynamic from 'next/dynamic'
 import React, { useEffect, useState } from 'react'
 
 import Loader from '../Loader'
 
-const GnosisManagerNoSSR = dynamic(() => import('./GnosisManager'), {
-  ssr: false,
-})
+// const GnosisManagerNoSSR = dynamic(() => import('./GnosisManager'), {
+//   ssr: false,
+// })
 
 export default function Web3ReactManager({ children }: { children: JSX.Element }) {
-  const { i18n } = useLingui()
+  // const { i18n } = useLingui()
   const { active } = useWeb3React()
   const { active: networkActive, error: networkError, activate: activateNetwork } = useWeb3React(NetworkContextName)
 
@@ -54,7 +54,7 @@ export default function Web3ReactManager({ children }: { children: JSX.Element }
     return (
       <div className="flex items-center justify-center h-80">
         <div className="text-secondary">
-          {i18n._(t`Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device`)}
+          {'Oops! An unknown error occurred. Please refresh the page, or visit from another browser or device'}
         </div>
       </div>
     )

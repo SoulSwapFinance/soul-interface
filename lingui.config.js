@@ -7,12 +7,15 @@ module.exports = {
     },
   ],
   compileNamespace: 'cjs',
-  extractBabelOptions: {},
   fallbackLocales: {},
-  format: 'po-gettext',
-  formatOptions: { origins: false, lineNumbers: false },
+  // format: 'po-gettext',
+  formatOptions: { 
+    origins: false,
+    lineNumbers: false
+  },
   sourceLocale: 'en',
-  locales: ['en', 'es', 'de', 'fr', 'it', 'tr'],
+  locales: 
+  ['en', 'es', 'de', 'fr', 'it', 'tr'],
   // ['de', 'en', 'es', 'es-AR', 'it', 'ro', 'ru', 'vi', 'zh-CN', 'zh-TW', 'ko', 'ja', 'fr', 'tr'],
   orderBy: 'messageId',
   pseudoLocale: '',

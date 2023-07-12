@@ -1,4 +1,5 @@
-import React, { FC, useCallback, useState } from 'react'
+import React, { FC
+} from 'react'
 import { ChainId, Currency, NATIVE, Percent, SOUL_ADDRESS, USDC_ADDRESS } from 'sdk'
 import NavLink from 'components/NavLink'
 import Settings from 'components/Settings'
@@ -9,12 +10,6 @@ import { Feature } from 'enums'
 
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import Typography from 'components/Typography'
-
-// import RepeatIcon from 'components/Icons/exchange/RepeatIcon'
-// import MergeIcon from 'components/Icons/exchange/MergeIcon'
-// import CrossIcon from 'components/Icons/exchange/CrossIcon'
-// import BridgeIcon from 'components/Icons/exchange/BridgeIcon'
-// import PlusMinusIcon from 'components/Icons/exchange/PlusMinusIcon'
 
 interface HeaderProps {
   inputCurrency?: Currency
@@ -30,7 +25,6 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   // const [show, setShow] = useState(false)
   // const reveal = useCallback(() => setShow(true), [setShow])
   // const conceal = useCallback(() => setShow(false), [setShow])
-
 
   const isRemove = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
   const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
