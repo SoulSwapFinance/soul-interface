@@ -20,5 +20,5 @@ module.exports = {
   orderBy: 'messageId',
   pseudoLocale: '',
   rootDir: 'src',
-  runtimeConfigModule: ['@lingui/core', 'i18n'],
+  // runtimeConfigModule: ['@lingui/core', 'i18n'],
 }

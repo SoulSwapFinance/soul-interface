@@ -1,12 +1,6 @@
 import { ChainId, Currency, NATIVE, Percent } from '../sdk'
 import React, { FC, useState } from 'react'
-import Image from 'next/image'
-import Gas from './Gas'
-import NavLink from './NavLink'
 import Settings from './Settings'
-import { currencyId } from '../functions'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
 import Typography from '../components/Typography'
 import { useActiveWeb3React } from 'services/web3'
@@ -29,7 +23,6 @@ interface ExchangeHeaderProps {
 }
 
 const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippage }) => {
-  const { i18n } = useLingui()
   const router = useRouter()
   const isRemove = router.asPath.startsWith('/exchange/remove')
   const isAdd = router.asPath.startsWith('/exchange/add')
@@ -39,7 +32,7 @@ const ExchangeHeader: FC<ExchangeHeaderProps> = ({ input, output, allowedSlippag
       <div className="flex justify-between mb-4 space-x-3 items-center">
         <div className="flex items-center">
           <Typography component="h1" variant="base">
-            {isAdd ? i18n._(t`Add Liquidity`) : isRemove ? i18n._(t`Remove Liquidity`) : i18n._(t`Remove Liquidity`)}
+            {isAdd ? `Add Liquidity` : isRemove ? `Remove Liquidity` : `Remove Liquidity`}
           </Typography>
         </div>
         <div className="flex items-center">

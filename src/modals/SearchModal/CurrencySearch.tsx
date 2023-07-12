@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import CHAINLINK_TOKENS from 'constants/chainlink/soulswap-chainlink.whitelist.json'
 import { ChainId, Currency, NATIVE, Token } from 'sdk'
 import { Button } from 'components/Button'
@@ -34,7 +32,6 @@ export function CurrencySearch({
   currencyList,
   allowManageTokenList = true,
 }: CurrencySearchProps) {
-  const { i18n } = useLingui()
   const router = useRouter()
   let allTokens = useAllTokens()
   const { chainId } = useActiveWeb3React()
@@ -139,12 +136,12 @@ export function CurrencySearch({
 
   return (
     <>
-      <HeadlessUiModal.Header onClose={onDismiss} header={i18n._(t`Select Token`)} />
+      <HeadlessUiModal.Header onClose={onDismiss} header={`Select Token`} />
       {!currencyList && showSearch && (
         <input
           type="text"
           id="token-search-input"
-          placeholder={i18n._(t`Search name or paste address`)}
+          placeholder={`Search name or paste address`}
           autoComplete="off"
           value={searchQuery}
           onChange={handleInput}
@@ -165,7 +162,7 @@ export function CurrencySearch({
           />
         ) : (
           <Typography weight={700} variant="xs" className="text-secondary flex h-full justify-center items-center">
-            {i18n._(t`No results found`)}
+            {`No results found`}
           </Typography>
         )}
       </div>
@@ -178,7 +175,7 @@ export function CurrencySearch({
             color="blue"
             variant="empty"
           >
-            {i18n._(t`Manage Token Lists`)}
+            {`Manage Token Lists`}
           </Button>
         </div>
       )}

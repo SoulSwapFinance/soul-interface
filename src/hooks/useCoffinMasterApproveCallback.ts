@@ -1,8 +1,6 @@
 import { Signature, splitSignature } from '@ethersproject/bytes'
 import { AddressZero, HashZero } from '@ethersproject/constants'
 import { Contract } from '@ethersproject/contracts'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { signMasterContractApproval } from 'entities/UnderworldCooker'
 import { useActiveWeb3React } from 'services/web3'
 import { USER_REJECTED_TX } from 'services/web3/WalletError'
@@ -71,7 +69,6 @@ const useCoffinMasterApproveCallback = (
   masterContract: string | undefined,
   { otherCoffinBoxContract, contractName, functionFragment }: CoffinMasterApproveCallbackOptions
 ): CoffinMasterApproveCallback => {
-  const { i18n } = useLingui()
   const { account, chainId, library } = useActiveWeb3React()
   const coffinBoxContract = useCoffinBoxContract()
   const addTransaction = useTransactionAdder()
@@ -161,11 +158,11 @@ const useCoffinMasterApproveCallback = (
 
       return addTransaction(tx, {
         summary: contractName
-          ? i18n._(t`Approving ${contractName} Master Contract`)
-          : i18n._(t`Approving Master Contract`),
+          ? `Approving ${contractName} Master Contract`
+          : `Approving Master Contract`,
       })
     } catch (e) {}
-  }, [account, addTransaction, coffinBoxContract, contractName, i18n, masterContract, otherCoffinBoxContract])
+  }, [account, addTransaction, coffinBoxContract, contractName, masterContract, otherCoffinBoxContract])
 
   return {
     approvalState,

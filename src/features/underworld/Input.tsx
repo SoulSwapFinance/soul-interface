@@ -1,13 +1,10 @@
 import React, { useCallback, useState } from 'react'
-import { useLingui } from '@lingui/react'
 import { Currency, Percent, Token } from 'sdk'
 import { classNames, formatNumber } from 'functions'
-import { useActiveWeb3React } from 'services/web3'
 import { Button } from 'components/Button'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 import Input from 'components/Input'
 import { useSummonerPoolInfo } from 'hooks/useAPI'
-// import { FiatValue } from './FiatValue'
 
 interface FarmInputPanelProps {
   pid: string
@@ -42,10 +39,9 @@ export default function FarmInputPanel({
 //   renderBalance,
 //   hideBalance = false,
 }: FarmInputPanelProps) {
-  const { i18n } = useLingui()
   const [modalOpen, setModalOpen] = useState(false)
 //   const [fiatValue, setFiatValue ] = useState('0')
-  const { account } = useActiveWeb3React()
+  // const { account } = useActiveWeb3React()
 
   const { summonerPoolInfo } = useSummonerPoolInfo(pid)
   const assetPrice = summonerPoolInfo.lpPrice

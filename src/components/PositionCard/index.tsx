@@ -12,9 +12,7 @@ import { Button } from '../Button'
 import { CurrencyLogo, CurrencyLogoArray } from '../CurrencyLogo'
 import Dots from '../Dots'
 import DoubleCurrencyLogo from '../DoubleLogo'
-import { t } from '@lingui/macro'
 import { useColor } from '../../hooks'
-import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { useTotalSupply } from '../../hooks/useTotalSupply'
@@ -37,7 +35,6 @@ interface PositionCardProps {
 }
 
 export function MinimalPositionCard({ pair, chainId, showUnwrapped = false, border, className }: PositionCardProps) {
-  const { i18n } = useLingui()
   const { account } = useActiveWeb3React()
 
   const currency0 = showUnwrapped ? pair.token0 : unwrappedToken(pair.token0)
@@ -74,7 +71,7 @@ export function MinimalPositionCard({ pair, chainId, showUnwrapped = false, bord
           className={`p-5 rounded bg-dark-800 text-high-emphesis ${className}`}
           >
           <AutoColumn gap={'md'}>
-            <div className="text-lg">{i18n._(t`Your Position`)}</div>
+            <div className="text-lg">{`Your Position`}</div>
             <div className="flex flex-col md:flex-row md:justify-between">
               <RowFixed className="flex items-center space-x-4">
                 <DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={40} />
@@ -84,12 +81,12 @@ export function MinimalPositionCard({ pair, chainId, showUnwrapped = false, bord
               </RowFixed>
               <RowFixed className="flex items-center mt-3 space-x-2 text-base md:mt-0">
                 <div>{userPoolBalance ? userPoolBalance.toSignificant(4) : '-'} </div>
-                <div className="text-secondary">{i18n._(t`Pool Tokens`)}</div>
+                <div className="text-secondary">{`Pool Tokens`}</div>
               </RowFixed>
             </div>
             <div className="flex flex-col w-full p-3 mt-3 space-y-1 text-sm rounded bg-dark-900 text-high-emphesis">
               <RowBetween>
-                <div>{i18n._(t`Your Share`)}</div>
+                <div>{`Your Share`}</div>
                 <div className="font-bold">{poolTokenPercentage ? poolTokenPercentage.toFixed(6) + '%' : '-'}</div>
               </RowBetween>
               <RowBetween>
@@ -247,7 +244,7 @@ export default function FullPositionCard({ chainId, pair, border, stakedBalance 
     //         </div>
     //         {/* {stakedBalance && (
     //           <div className="flex items-center justify-between">
-    //             <div>{i18n._(t`Pool tokens in rewards pool`)}:</div>
+    //             <div>{`Pool tokens in rewards pool`}:</div>
     //             <div className="font-semibold">{stakedBalance.toSignificant(4)}</div>
     //           </div>
     //         )} */}
@@ -303,7 +300,7 @@ export default function FullPositionCard({ chainId, pair, border, stakedBalance 
     //             color="blue"
     //             variant="filled"
     //             onClick={() => {
-    //               router.push(`/exchange/add/${currencyId(currency0)}/${currencyId(currency1)}`)
+    //               router.push(`/exchange/add/${currencyId(currency0)}/${currencyId(currency1)}`
     //             }}
     //           >
     //             <div className="flex justify-center"><PlusIcon height="16px" /></div>
@@ -312,7 +309,7 @@ export default function FullPositionCard({ chainId, pair, border, stakedBalance 
     //             color="blue"
     //             variant="filled"
     //             onClick={() => {
-    //               router.push(`/exchange/remove/${currencyId(currency0)}/${currencyId(currency1)}`)
+    //               router.push(`/exchange/remove/${currencyId(currency0)}/${currencyId(currency1)}`
     //             }}
     //           >
     //             <div className="flex justify-center"><MinusIcon height="16px" /></div>
@@ -375,7 +372,7 @@ export default function FullPositionCard({ chainId, pair, border, stakedBalance 
                   <div className="flex justify-between border-t border-dark-800 pt-3 mt-3">
                     <div className="flex items-center mb-1">
                       <Typography variant="sm" className="text-low-emphesis">
-                        {i18n._(t`Share:`)} {' '}
+                        {`Share:`} {' '}
                         {poolTokenPercentage
                           ? (poolTokenPercentage.toFixed(2) === '0.00' ? '<0.01' : poolTokenPercentage.toFixed(2)) + '%'
                           : '-'}
@@ -391,7 +388,7 @@ export default function FullPositionCard({ chainId, pair, border, stakedBalance 
                           router.push(`/remove/${currencyId(currency0)}/${currencyId(currency1)}`)
                         }}
                       >
-                        {/* {i18n._(t`Remove`)} */}
+                        {/* {`Remove`} */}
                         {`-`}
                       </Button>
                       <Button
@@ -403,7 +400,7 @@ export default function FullPositionCard({ chainId, pair, border, stakedBalance 
                           router.push(`/add/${currencyId(currency0)}/${currencyId(currency1)}`)
                         }}
                       >
-                        {/* {i18n._(t`Add`)} */}
+                        {/* {`Add`} */}
                         {`+`}
                       </Button>
                     </div>

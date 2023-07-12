@@ -9,8 +9,6 @@ import { useCurrency } from 'hooks/Tokens'
 import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import { SOUL } from 'constants/tokens'
 import { useActiveWeb3React } from 'services/web3'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import { isMobile } from 'react-device-detect'
 import YieldDetails from 'components/YieldDetails'
@@ -79,7 +77,6 @@ const VaultListItem = ({ farm, ...rest }) => {
   const roiPerMonth = roiPerDay * 30
   const roiPerYear = roiPerDay * 365
 
-  const { i18n } = useLingui()
 
   return (
     <React.Fragment>
@@ -130,7 +127,7 @@ const VaultListItem = ({ farm, ...rest }) => {
                   <div className="flex flex-col space-y-1">
                     {farm?.rewards?.map((reward, i) => (
                       <div key={i} className="text-xs md:text-sm whitespace-nowrap">
-                        {formatNumber(reward.rewardPerDay)} {reward.token} {i18n._(t`/ DAY`)}
+                        {formatNumber(reward.rewardPerDay)} {reward.token} {`/ DAY`}
                       </div>
                     ))}
                   </div>
@@ -148,7 +145,7 @@ const VaultListItem = ({ farm, ...rest }) => {
                     </IconWrapper>
                     {roiPerYear > 1000000 ? '100000000%+' : formatPercent(roiPerYear * 100)}
                   </div>
-                  <div className="text-xs text-right md:text-base text-secondary">{i18n._(t`annualized`)}</div>
+                  <div className="text-xs text-right md:text-base text-secondary">{`annualized`}</div>
                 </div>
               </div>
             </Disclosure.Button>

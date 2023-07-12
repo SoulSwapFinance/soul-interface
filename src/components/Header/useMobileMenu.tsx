@@ -1,7 +1,4 @@
 import React, { ReactNode, useMemo } from 'react'
-import { SparklesIcon, ArrowsUpDownIcon, ChartBarIcon } from'@heroicons/react/24/outline'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { ChainId, NATIVE, SOUL_ADDRESS } from 'sdk'
 // import { PoolIcon, RocketIcon, WalletIcon } from 'components/Icon'
 import { Feature } from 'enums'
@@ -27,7 +24,6 @@ export type MobileMenu = MenuItem[]
 
 type UseMobileMenu = () => MobileMenu
 const useMobileMenu: UseMobileMenu = () => {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
 
   return useMemo(() => {
@@ -273,7 +269,7 @@ const useMobileMenu: UseMobileMenu = () => {
       }
 
     return mainItems.filter((el) => Object.keys(el).length > 0)
-  }, [chainId, i18n])
+  }, [chainId])
 }
 
 export default useMobileMenu

@@ -1,5 +1,4 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
+
 import { CurrencyAmount } from 'sdk'
 import { Button } from 'components/Button'
 import ListPanel from 'components/ListPanel'
@@ -17,7 +16,6 @@ import DepositSubmittedModalContent from './DepositSubmittedModalContent'
 import { useActiveWeb3React } from 'services/web3'
 
 const TransactionReviewStandardModal: FC = () => {
-  const { i18n } = useLingui()
   const dispatch = useAppDispatch()
   const { currencies } = usePoolContext()
   const { attemptingTxn, showReview, txHash, spendFromWallet, coffinPermit } = useAppSelector(selectTridentAdd)
@@ -52,15 +50,15 @@ const TransactionReviewStandardModal: FC = () => {
       {!txHash ? (
         <div className="flex flex-col gap-4">
           <HeadlessUIModal.Header
-            header={i18n._(t`Confirm add liquidity`)}
+            header={`Confirm add liquidity`}
             onClose={() => dispatch(setAddShowReview(false))}
           />
           <Typography variant="sm">
-            {i18n._(t`Output is estimated. If the price changes by more than 0.5% your transaction will revert.`)}
+            {`Output is estimated. If the price changes by more than 0.5% your transaction will revert.`}
           </Typography>
           <HeadlessUIModal.BorderedContent className="flex flex-col gap-3 bg-dark-1000/40">
             <Typography weight={700} variant="sm" className="text-secondary">
-              {i18n._(t`You are depositing:`)}
+              {`You are depositing:`}
             </Typography>
             <ListPanel
               items={parsedAmounts.map((cur, index) => (
@@ -70,7 +68,7 @@ const TransactionReviewStandardModal: FC = () => {
           </HeadlessUIModal.BorderedContent>
           <HeadlessUIModal.BorderedContent className="flex flex-col gap-3 bg-dark-1000/40">
             <Typography weight={700} variant="sm" className="text-secondary">
-              {i18n._(t`You'll receive (at least):`)}
+              {`You'll receive (at least):`}
             </Typography>
             <Typography weight={700} variant="lg" className="text-high-emphesis">
               {liquidityMinted?.toSignificant(6)} SLP
@@ -78,7 +76,7 @@ const TransactionReviewStandardModal: FC = () => {
           </HeadlessUIModal.BorderedContent>
           <div className="flex justify-between px-2 py-1">
             <Typography variant="sm" className="text-secondary">
-              {i18n._(t`Share of Pool`)}
+              {`Share of Pool`}
             </Typography>
             <Typography variant="sm" weight={700} className="text-right text-high-emphesis">
               {poolShareBefore?.greaterThan(0) ? poolShareBefore?.toSignificant(6) : '0.000'}% →{' '}
@@ -86,7 +84,7 @@ const TransactionReviewStandardModal: FC = () => {
             </Typography>
           </div>
           <Button id={`btn-modal-confirm-deposit`} disabled={attemptingTxn} color="blue" onClick={_execute}>
-            {i18n._(t`Confirm Deposit`)}
+            {`Confirm Deposit`}
           </Button>
         </div>
       ) : (

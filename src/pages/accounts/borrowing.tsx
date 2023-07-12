@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import Typography from 'components/Typography'
 import { LendingBorrowingList } from 'features/lending/BorrowingList'
 import ActionsModal from 'features/portfolio/ActionsModal'
@@ -10,7 +8,6 @@ import { NextSeo } from 'next-seo'
 import React from 'react'
 
 const Lending = () => {
-  const { i18n } = useLingui()
   const router = useRouter()
 
   const account = router.query.account as string
@@ -30,7 +27,7 @@ const Lending = () => {
       </TridentHeader>
       <TridentBody>
         <Typography variant="lg" className="text-high-emphesis" weight={700}>
-          {i18n._(t`Underworld Borrowing Positions`)}
+          {`Underworld Borrowing Positions`}
         </Typography>
         {/* Need to pass down account and chainId */}
         <LendingBorrowingList />

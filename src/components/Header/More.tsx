@@ -1,55 +1,46 @@
 import { Popover, Transition } from '@headlessui/react'
 import React, { Fragment } from 'react'
-import { ChainId } from 'sdk'
 import ExternalLink from '../ExternalLink'
-import { I18n } from '@lingui/core'
 // import Image from 'next/image'
 import { classNames } from '../../functions/styling'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import NavLink from '../NavLink'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { useActiveWeb3React } from 'services/web3'
 // import Web3Network from 'components/Web3Network'
 // import Web3Status from 'components/Web3Status'
-import TokenStats from 'components/TokenStats'
-import LanguageMenu from './useLanguages'
 // import SquareEllipsisIcon from 'components/Icons/mobile/SquareEllipsisIcon'
 
 export default function Menu() {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
-  const blockchainPrefix = chainId
-    == ChainId.AVALANCHE ? 'https://avax-info' : 'https://info'
 
-  const items = (i18n: I18n) => [
+  const items = () => [
     {
-      name: i18n._(t`Documentation`),
-      description: i18n._(t`Read our Full Documentation`),
+      name: `Documentation`,
+      description: `Read our Full Documentation`,
       href: 'https://docs.soulswap.finance',
       external: true,
     },
     {
-      name: i18n._(t`Twitter`),
-      description: i18n._(t`Follow us on Twitter`),
+      name: `Twitter`,
+      description: `Follow us on Twitter`,
       href: 'https://twitter.com/SoulSwapFinance',
       external: true,
     },
     // {
-    //   name: i18n._(t`Analytics`),
-    //   description: i18n._(t`View our Data.`),
+    //   name: `Analytics`,
+    //   description: `View our Data.`,
     //   href: `${blockchainPrefix}.soulswap.finance`,
     //   external: true,
     // },
     {
-      name: i18n._(t`Resources`),
-      description: i18n._(t`Explore our Protocol Links`),
+      name: `Resources`,
+      description: `Explore our Protocol Links`,
       href: 'https://links.soul.sh',
       external: true,
     },
   ]
 
-  const solutions = items(i18n)
+  const solutions = items()
 
   return (
     <Popover className="relative ml-auto m-0">
@@ -129,7 +120,7 @@ export default function Menu() {
               static
               className="absolute z-50 w-screen max-w-xs px-2 mt-3 transform -translate-x-full bottom-8 left-full sm:px-0"
             >
-              <div className={classNames(`overflow-hidden rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5 border border-2 border-[${getChainColor(chainId)}]`)}>
+              <div className={classNames(`overflow-hidden rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5 border-2 border-[${getChainColor(chainId)}]`)}>
                 <div className="relative grid gap-6 px-5 py-6 bg-dark-1000 sm:gap-8 sm:p-8">
                   {solutions.map((item) =>
                     item.external ? (

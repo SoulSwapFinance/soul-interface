@@ -147,6 +147,7 @@
     ]
   },
   "dependencies": {
+    "@0x/utils": "^7.0.0",
     "@amplitude/analytics-browser": "^1.5.5",
     "@apollo/client": "3.5.7",
     "@babel/core": "^7.0.0",
@@ -264,6 +265,7 @@
     "recoil": "^0.7.7",
     "rubic-sdk": "2.15.0",
     "sass": "^1.63.6",
+    "sharp": "^0.32.2",
     "soulswap-currency": "^0.0.1",
     "soulswap-default-token-list": "^5.1.0",
     "soulswap-limit-orders-lib": "^1.1.0",

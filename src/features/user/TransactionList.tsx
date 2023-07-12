@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import Dots from 'components/Dots'
 import Image from 'components/Image'
 import { getExplorerLink } from 'functions/explorer'
@@ -11,7 +9,6 @@ import { ArrowUpRight, CheckCircle } from 'react-feather'
 const BASE_URL = 'https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/fantom/assets/0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208/logo.png'
 
 export default function TransactionList({ transactions }) {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   return transactions ? (
     <div className="space-y-3">
@@ -40,7 +37,7 @@ export default function TransactionList({ transactions }) {
     </div>
   ) : (
     <div className="px-4 text-center text-gray-500 border border-dark-800 rounded py-14">
-      <Dots>{i18n._(t`Loading`)}</Dots>
+      <Dots>{`Loading`}</Dots>
     </div>
   )
 }

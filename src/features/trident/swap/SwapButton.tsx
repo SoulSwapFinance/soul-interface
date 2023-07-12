@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Button } from 'components/Button'
 import Dots from 'components/Dots'
 import { useDerivedTridentSwapContext } from 'features/trident/swap/DerivedTradeContext'
@@ -18,7 +16,6 @@ interface SwapButton {
 }
 
 const SwapButton: FC<SwapButton> = ({ onClick }) => {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const dispatch = useAppDispatch()
   const tridentSwapState = useAppSelector(selectTridentSwap)
@@ -41,13 +38,13 @@ const SwapButton: FC<SwapButton> = ({ onClick }) => {
       {({ approved, loading }) => {
         const disabled = !!error || !approved || loading || attemptingTxn
         const buttonText = attemptingTxn ? (
-          <Dots>{i18n._(t`Swapping`)}</Dots>
+          <Dots>{`Swapping`}</Dots>
         ) : loading ? (
           ''
         ) : error ? (
           error
         ) : (
-          i18n._(t`Swap`)
+          `Swap`
         )
 
         return (

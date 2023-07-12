@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Currency, NATIVE } from 'sdk'
 import { useCurrency } from 'hooks/Tokens'
 import { useActiveWeb3React } from 'services/web3'
@@ -54,7 +52,6 @@ export function useDerivedCreateInfo(): {
   currencies: { [field in Field]?: Currency }
   inputError?: string
 } {
-  const { i18n } = useLingui()
 
   const { account } = useActiveWeb3React()
 
@@ -81,11 +78,11 @@ export function useDerivedCreateInfo(): {
   }
 
   if (!currencies[Field.COLLATERAL]) {
-    inputError = inputError ?? i18n._(t`Select Collateral`)
+    inputError = inputError ?? `Select Collateral`
   }
 
   if (!currencies[Field.ASSET] || !currencies[Field.ASSET]) {
-    inputError = inputError ?? i18n._(t`Select Asset`)
+    inputError = inputError ?? `Select Asset`
   }
 
   return {

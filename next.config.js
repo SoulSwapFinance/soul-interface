@@ -2,10 +2,10 @@ const withPWA = require('next-pwa')
 const runtimeCaching = require('next-pwa/cache')
 // const withTM = require('next-transpile-modules')(["@0xsquid/widget"]);
 
-const linguiConfig = require('./lingui.config.js')
+// const linguiConfig = require('./lingui.config.js')
 const defaultTheme = require('tailwindcss/defaultTheme')
 
-const { locales, sourceLocale } = linguiConfig
+// const { locales, sourceLocale } = linguiConfig
 const { screens } = defaultTheme
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
@@ -183,11 +183,11 @@ module.exports = withBundleAnalyzer(
         },
       ]
     },
-    i18n: {
-      // localeDetection: true,
-      locales,
-      defaultLocale: sourceLocale,
-    },
+    // i18n: {
+    //   // localeDetection: true,
+    //   locales,
+    //   defaultLocale: sourceLocale,
+    // },
     publicRuntimeConfig: {
       breakpoints: screens,
     },

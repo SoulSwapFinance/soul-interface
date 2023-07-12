@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Currency, CurrencyAmount } from 'sdk'
 import Typography from 'components/Typography'
 import { Fraction } from 'entities'
@@ -26,7 +24,6 @@ const useGetCollateralTableData = (): CollateralData[] =>
   }))
 
 export const UnderworldCollateral = () => {
-  const { i18n } = useLingui()
   const router = useRouter()
 
   const data = useGetCollateralTableData()
@@ -37,7 +34,7 @@ export const UnderworldCollateral = () => {
       <div className="flex justify-center items-center gap-2">
       <Button color="purple" >
 <Typography weight={700} variant="lg" className="text-high-emphesis">
-          {i18n._(t`Underworld Collateral`)}
+          {`Underworld Collateral`}
         </Typography>
         </Button>
         {/* <Typography weight={700} variant="sm" className="text-low-emphesis">

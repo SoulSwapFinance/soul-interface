@@ -1,7 +1,5 @@
 import { Disclosure, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { ChainId, Currency, Route, TradeVersion } from 'sdk'
 import Typography from 'components/Typography'
 import TradePrice from 'features/swap/TradePrice'
@@ -77,7 +75,6 @@ const SwapDetails: FC<SwapDetails> = ({ inputCurrency, outputCurrency, recipient
 }
 
 const SwapDetailsContent: FC<SwapDetails> = ({ trade, recipient }) => {
-  const { i18n } = useLingui()
   const allowedSlippage = useSwapSlippageTolerance(trade)
   const minReceived = trade?.minimumAmountOut(allowedSlippage)
   const realizedLpFeePercent = trade ? computeRealizedLPFeePercent(trade) : undefined
@@ -92,20 +89,20 @@ const SwapDetailsContent: FC<SwapDetails> = ({ trade, recipient }) => {
     <div className="flex flex-col divide-y divide-dark-850">
       <div className="flex flex-col gap-1 pb-2">
         <div className="flex justify-between gap-4">
-          <Typography variant="xs">{i18n._(t`Expected Output`)}</Typography>
+          <Typography variant="xs">{`Expected Output`}</Typography>
           <Typography weight={700} variant="xs" className="text-right">
             {trade?.outputAmount?.toSignificant(6)} {trade?.outputAmount?.currency.symbol}
           </Typography>
         </div>
         <div className="flex justify-between gap-4">
-          <Typography variant="xs">{i18n._(t`Price Impact`)}</Typography>
+          <Typography variant="xs">{`Price Impact`}</Typography>
           <Typography variant="xs" className="text-right">
             {trade?.priceImpact?.toFixed(2)}%
           </Typography>
         </div>
         {recipient && isAddress(recipient) && (
           <div className="flex justify-between gap-4">
-            <Typography variant="xs">{i18n._(t`Recipient`)}</Typography>
+            <Typography variant="xs">{`Recipient`}</Typography>
             <Typography variant="xs" className="text-right">
               {shortenAddress(recipient)}
             </Typography>
@@ -115,7 +112,7 @@ const SwapDetailsContent: FC<SwapDetails> = ({ trade, recipient }) => {
       <div className="flex flex-col gap-1 pt-2">
         <div className="flex justify-between gap-4">
           <Typography variant="xs" className="text-secondary">
-            {i18n._(t`Min. Recieved (after slippage)`)} ({allowedSlippage.toFixed(2)}%)
+            {`Min. Recieved (after slippage)`} ({allowedSlippage.toFixed(2)}%)
           </Typography>
           <Typography variant="xs" className="text-right text-secondary">
             {minReceived?.toSignificant(6)} {minReceived?.currency.symbol}
@@ -124,7 +121,7 @@ const SwapDetailsContent: FC<SwapDetails> = ({ trade, recipient }) => {
         {realizedLpFeePercent && (
           <div className="flex justify-between gap-4">
             <Typography variant="xs" className="text-secondary">
-              {i18n._(t`Liquidity Provider Fee`)}
+              {`Liquidity Provider Fee`}
             </Typography>
             <Typography variant="xs" className="text-right text-secondary">
               {realizedLpFeePercent.toFixed(2)}%
@@ -134,7 +131,7 @@ const SwapDetailsContent: FC<SwapDetails> = ({ trade, recipient }) => {
         {path && (
           <div className="grid grid-cols-2 gap-4">
             <Typography variant="xs" className="text-secondary">
-              {i18n._(t`Route`)}
+              {`Route`}
             </Typography>
             <Typography variant="xs" className="text-right text-secondary">
               {path.map((el) => el.symbol).join(' > ')}

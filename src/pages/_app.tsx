@@ -34,7 +34,7 @@ import { useActiveWeb3React } from 'services/web3'
 import { ApiDataProvider } from 'contexts/ApiDataProvider'
 import ModalProvider from 'contexts/ModalProvider'
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client'
-import { RPC } from 'connectors'
+// import { RPC } from 'connectors'
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const link = createHttpLink({
@@ -86,7 +86,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
 
   useEffect(() => {
     async function load(locale) {
-      i18n.loadLocaleData(locale, { plurals: plurals[locale?.split('_')[0]] })
+      // i18n.loadLocaleData(locale, { plurals: plurals[locale?.split('_')[0]] })
 
       try {
         // Load messages from AWS, use q session param to get latest version from cache
@@ -156,8 +156,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
           `,
         }}
       />
-      {/*@ts-ignore TYPE NEEDS FIXING*/}
-      <I18nProvider i18n={i18n} forceRenderOnLocaleChange={false}>
+      {/* <I18nProvider i18n={i18n}> */}
         <Web3ReactProvider getLibrary={getLibrary}>
           <QueryClientProvider client={queryClient}>
             <Hydrate state={pageProps.dehydratedState}>
@@ -204,7 +203,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
             </Hydrate>
           </QueryClientProvider>
         </Web3ReactProvider>
-      </I18nProvider>
+      {/* </I18nProvider> */}
     </>
   )
 }
