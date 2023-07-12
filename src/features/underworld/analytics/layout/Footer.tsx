@@ -26,8 +26,8 @@ const Footer = () => {
               <a className="flex items-center">
                 <Image
                   src="/logo.png"
-                  width="40px"
-                  height="40px"
+                  width={40}
+                  height={40}
                   alt="Underworld Market"
                 />
                 <span className="ml-2 sm:hidden">Underworld Market</span>

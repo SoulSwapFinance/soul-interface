@@ -126,8 +126,8 @@ export default function TokenStatsModal(): JSX.Element | null {
               <Image
                 src={`https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/${SOUL_ADDRESS[ChainId.FANTOM]}/logo.png`}
                 alt="SOUL"
-                width="1600px"
-                height="1600px"
+                width={1600}
+                height={1600}
                 objectFit="contain"
                 className="rounded-md"
               />

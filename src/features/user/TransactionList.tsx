@@ -18,8 +18,8 @@ export default function TransactionList({ transactions }) {
       {transactions.map((transaction) => (
         <div key={transaction.tx_hash} className="flex items-center justify-between px-3 py-1 rounded bg-dark-800">
           <div className="flex flex-row items-center pr-3 space-x-1">
-            <Image src={BASE_URL} alt={transaction.token_0?.symbol} width="24px" height="24px" />
-            <Image src={BASE_URL} alt={transaction.token_1?.symbol} width="24px" height="24px" />
+            <Image src={BASE_URL} alt={transaction.token_0?.symbol} width={24} height={24} />
+            <Image src={BASE_URL} alt={transaction.token_1?.symbol} width={24} height={24} />
           </div>
           {chainId && (
             <a

@@ -379,7 +379,7 @@ export default function Exchange() {
                     alt="Switch Network"
                     className="flex align-center justify-center"
                     // style={{ backgroundColor: fromChain.color }}
-                    width="42" height="42"
+                    width={42} height={42}
                   />
                   <NetworkModal switchNetwork={() => fromChain.chainId} />
                   {/* {NETWORK_LABEL[chainId]} */}
@@ -391,7 +391,7 @@ export default function Exchange() {
               />
               <Image
                 className="flex align-center justify-center"
-                width="36" height="36"
+                width={36} height={36}
                 style={{ backgroundColor: fromChain?.color }}
                 src={fromChain?.logo}
                 alt={fromChain?.name}
@@ -411,7 +411,7 @@ export default function Exchange() {
                 <div className="">
                   <Image className="block object-fit:contain object-position:center items-center"
                     src={from?.logo}
-                    width="48" height="48"
+                    width={48} height={48}
                     alt={from?.name}
                   />
                 </div>
@@ -511,7 +511,7 @@ export default function Exchange() {
               />
               <Image
                 className="flex align-center justify-center"
-                width="36" height="36"
+                width={36} height={36}
                 style={{ backgroundColor: toChain?.color }}
                 src={toChain?.logo}
                 alt={toChain?.name}
@@ -530,7 +530,7 @@ export default function Exchange() {
                 <div className="">
                   <Image
                     className="block object-fit:contain object-position:center items-center"
-                    src={to?.logo} width="48" height="48" alt={to?.name}
+                    src={to?.logo} width={48} height={48} alt={to?.name}
                   />
                 </div>
                 <div className="flex justify-center mt-2 font-bold text-2xl">

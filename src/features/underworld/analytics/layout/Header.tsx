@@ -37,8 +37,8 @@ const Header = () => {
                   <Link href="/">
                     <a>
                       <Image
-                        width="50px"
-                        height="50px"
+                        width={50}
+                        height={50}
                         className="w-auto"
                         src="/logo.png"
                         alt="Underworld Market"

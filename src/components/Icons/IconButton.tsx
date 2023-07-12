@@ -13,7 +13,7 @@ export type IconButtonProps<C extends React.ElementType> = PolymorphicComponentP
 export type IconButtonComponent = <C extends React.ElementType = 'button'>(
   props: IconButtonProps<C>
 ) => React.ReactElement | null
-
+// @ts-ignore
 export const IconButton: IconButtonComponent = React.forwardRef(
   <Tag extends React.ElementType = 'button'>(
     { as, children, className, ...rest }: IconButtonProps<Tag>,

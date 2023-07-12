@@ -1,6 +1,6 @@
 // import ms from 'ms.macro'
 import { Variables } from 'react-relay'
-import { Environment, Network, RecordSource, RequestParameters, Store } from 'relay-runtime'
+import { Environment as Evo, Network, RecordSource, RequestParameters, Store } from 'relay-runtime'
 import RelayQueryResponseCache from 'relay-runtime/lib/network/RelayQueryResponseCache'
 
 import fetchGraphQL from './fetchGraphQL'
@@ -37,7 +37,9 @@ const store = new Store(new RecordSource(), { gcReleaseBufferSize, queryCacheExp
 const network = Network.create(fetchQuery)
 
 // Export a singleton instance of Relay Environment configured with our network function:
-export default new Environment({
+const Environment = new Evo({
   network,
   store,
 })
+
+export default Environment
