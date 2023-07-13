@@ -39,7 +39,7 @@
     "@ethersproject/providers": "^5.4.0",
     "@fontsource/dm-sans": "^4.4.5",
     "@gnosis.pm/safe-apps-web3-react": "^0.6.3",
-    "@headlessui/react": "^1.7.14",
+    "@headlessui/react": "1.7.15",
     "@heroicons/react": "^2.0.13",
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
@@ -48,7 +48,7 @@
     "@next/bundle-analyzer": "^13.4.9",
     "@popperjs/core": "^2.10.1",
     "@ramp-network/ramp-instant-sdk": "^2.5.0",
-    "@reach/dialog": "^0.16.2",
+    "@reach/dialog": "0.18.0",
     "@reduxjs/toolkit": "1.7.1",
     "@soulswap/soul-data": "^1.0.0",
     "@soulswap/swap-core": "^0.0.3",
@@ -94,7 +94,7 @@
     "next": "^13.4.9",
     "next-pwa": "^5.6.0",
     "next-unused": "^0.0.6",
-    "node-vibrant": "^3.2.1-alpha.1",
+    "node-vibrant": "3.1.6",
     "numeral": "^2.0.6",
     "polished": "^4.2.2",
     "postcss": "^8.4.25",
@@ -268,6 +268,7 @@
     "wagmi": "1.3.8",
     "web3": "^1.7.0",
     "web3-eth-abi": "^1.7.0",
+    "webpack": "^5.88.1",
     "yup": "^1.2.0"
   }
 }
