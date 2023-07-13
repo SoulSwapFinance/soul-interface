@@ -1,6 +1,4 @@
 import { CheckIcon, MinusCircleIcon, ArrowPathIcon, LinkIcon } from '@heroicons/react/24/outline'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { TokenList } from '@uniswap/token-lists'
 import CloseIcon from 'components/CloseIcon'
 import ListLogo from 'components/ListLogo'
@@ -31,7 +29,6 @@ const listUrlRowHTMLId = (listUrl: string) => {
 }
 
 const ListRow: FC<{ listUrl: string }> = memo(({ listUrl }) => {
-  const { i18n } = useLingui()
   const listsByUrl = useSelector<AppState, AppState['lists']['byUrl']>((state) => state.lists.byUrl)
   const dispatch = useDispatch<AppDispatch>()
   const { current: list, pendingUpdate: pending } = listsByUrl[listUrl]
@@ -112,7 +109,7 @@ const ListRow: FC<{ listUrl: string }> = memo(({ listUrl }) => {
                 <div className="flex flex-col gap-1 border rounded shadow bg-dark-900 border-dark-700 p-3">
                   <a href={`https://tokenlists.org/token-list?url=${listUrl}`}>
                     <Typography variant="sm" weight={700} className="text-blue flex items-center gap-1">
-                      {i18n._(t`View list`)}
+                      {`View list`}
                       <LinkIcon width={16} />
                     </Typography>
                   </a>
@@ -124,7 +121,7 @@ const ListRow: FC<{ listUrl: string }> = memo(({ listUrl }) => {
                     disabled={Object.keys(listsByUrl).length === 1}
                     className="hover:text-white cursor-pointer disabled:cursor-default"
                   >
-                    {i18n._(t`Remove list`)}
+                    {`Remove list`}
                   </Typography>
                   <Typography
                     role="button"
@@ -133,7 +130,7 @@ const ListRow: FC<{ listUrl: string }> = memo(({ listUrl }) => {
                     onClick={handleAcceptListUpdate}
                     className="hover:text-white cursor-pointer disabled:cursor-default"
                   >
-                    {i18n._(t`Update list`)}
+                    {`Update list`}
                   </Typography>
                 </div>
               }
@@ -149,7 +146,7 @@ const ListRow: FC<{ listUrl: string }> = memo(({ listUrl }) => {
               onClick={handleAcceptListUpdate}
             />
             {/* <Typography variant="sm" className="text-white">
-              {i18n._(t`Tokens:`)} {list.tokens.length} 
+              {`Tokens:`} {list.tokens.length} 
             </Typography> */}
           </div>
         </div>
@@ -168,7 +165,6 @@ const ListRow: FC<{ listUrl: string }> = memo(({ listUrl }) => {
 })
 
 const ManageLists: FC = () => {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const { setView, setImportList, setListUrl } = useCurrencyModalContext()
   const [listUrlInput, setListUrlInput] = useState<string>('')
@@ -289,7 +285,7 @@ const ManageLists: FC = () => {
         >
           {isImported && (
             <Typography variant="xs" weight={700} className="text-green">
-              {i18n._(t`Already imported`)}
+              {`Already imported`}
             </Typography>
           )}
           <div className="flex justify-between">
@@ -308,7 +304,7 @@ const ManageLists: FC = () => {
                 </Typography>
                 <div className="flex gap-1 items-center">
                   <Typography variant="xs" className="text-white">
-                    {i18n._(t`${tempList?.tokens.length} tokens`)}
+                    {`${tempList?.tokens.length} tokens`}
                   </Typography>
                 </div>
               </div>

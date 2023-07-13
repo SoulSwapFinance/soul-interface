@@ -1,6 +1,5 @@
 import { Currency, CurrencyAmount, NATIVE, ZERO } from 'sdk'
 import Typography, { TypographyVariant } from 'components/Typography'
-import { reduceBalances } from 'features/portfolio/AssetBalances/underworld/hooks'
 import SumUSDCValues from 'features/trident/SumUSDCValues'
 import { currencyFormatter } from 'functions'
 import { useCoffinBalancesV2ForAccount } from 'state/coffinbox/hooks'
@@ -63,10 +62,9 @@ export const BalancesSum: FC<{ account: string }> = ({ account }) => {
 
   const allAssets = useMemo(() => {
     const combined = [...walletBalances, ...coffinBalances]
-    // const combined = [...walletBalances, ...coffinBalances]
     return {
       total: combined.length,
-      balances: reduceBalances(combined),
+      balances: combined,
     }
   }, [coffinBalances, walletBalances])
 

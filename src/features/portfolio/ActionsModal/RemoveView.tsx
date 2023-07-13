@@ -1,7 +1,5 @@
 import { parseUnits } from '@ethersproject/units'
 import { ArrowDownIcon } from '@heroicons/react/24/solid'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Rebase, JSBI, ZERO } from 'sdk'
 import AssetInput from 'components/AssetInput'
 import { Button } from 'components/Button'
@@ -31,7 +29,6 @@ const RemoveView: FC<RemoveViewProps> = ({ onClose, onBack }) => {
   const { withdraw } = useCoffinBox()
   const { rebases } = useCoffinRebases([currency?.wrapped])
   const [inputState, setInputState] = useState<{ value?: string; isMax: boolean }>({ value: undefined, isMax: false })
-  const { i18n } = useLingui()
 
   const valueCA = currency ? tryParseAmount(inputState.value, currency) : undefined
   let valuePlusBalance = valueCA?.wrapped
@@ -65,21 +62,21 @@ const RemoveView: FC<RemoveViewProps> = ({ onClose, onBack }) => {
   }, [currency, inputState.value, inputState.isMax, withdraw, rebases, onClose])
 
   const error = !account
-    ? i18n._(t`Connect Wallet`)
+    ? `Connect Wallet`
     : !valueCA?.greaterThan(ZERO)
-    ? i18n._(t`Enter Amount`)
+    ? `Enter Amount`
     : !coffinBalance
-    ? i18n._(t`Loading balance`)
+    ? `Loading balance`
     : valueCA?.greaterThan(coffinBalance)
-    ? i18n._(t`Insufficient ${valueCA.currency.symbol} balance`)
+    ? `Insufficient ${valueCA.currency.symbol} balance`
     : ''
 
   const disabled = !!error || attemptingTxn
-  const buttonText = error ? error : i18n._(t`Confirm Removal`)
+  const buttonText = error ? error : `Confirm Removal`
 
   return (
     <div className="flex flex-col gap-4">
-      <HeadlessUiModal.Header header={i18n._(t`Remove to Wallet`)} onClose={onClose} onBack={onBack} />
+      <HeadlessUiModal.Header header={`Remove to Wallet`} onClose={onClose} onBack={onBack} />
       <AssetInput
         chainId={chainId}
         title={''}
@@ -102,7 +99,7 @@ const RemoveView: FC<RemoveViewProps> = ({ onClose, onBack }) => {
             {(valuePlusBalance || walletBalance)?.toSignificant(6)}
           </Typography>
           <Typography variant="xxs" className="text-secondary">
-            {i18n._(t`In Wallet`)}
+            {`In Wallet`}
           </Typography>
         </div>
       </HeadlessUiModal.BorderedContent>

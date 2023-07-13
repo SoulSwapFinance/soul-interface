@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Button } from 'components/Button'
 import Checkbox from 'components/Checkbox'
 import ListLogo from 'components/ListLogo'
@@ -19,7 +17,6 @@ import CurrencyModalView from './CurrencyModalView'
 import { useActiveWeb3React } from 'services/web3'
 
 const ImportList: FC = () => {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const dispatch = useDispatch<AppDispatch>()
   const { setView, onDismiss, listUrl, importList } = useCurrencyModalContext()
@@ -58,7 +55,7 @@ const ImportList: FC = () => {
     <>
       <HeadlessUiModal.Header
         onClose={onDismiss}
-        header={i18n._(t`Import List`)}
+        header={`Import List`}
         onBack={() => setView(CurrencyModalView.manage)}
       />
       <HeadlessUiModal.BorderedContent className="bg-[rgba(0,0,0,0.2)]">
@@ -77,7 +74,7 @@ const ImportList: FC = () => {
             </Typography>
             <div className="flex gap-1 items-center">
               <Typography variant="xs" className="text-white">
-                {i18n._(t`${importList?.tokens.length} tokens`)}
+                {`${importList?.tokens.length} tokens`}
               </Typography>
             </div>
           </div>
@@ -85,15 +82,15 @@ const ImportList: FC = () => {
       </HeadlessUiModal.BorderedContent>
       <HeadlessUiModal.BorderedContent className="flex flex-col gap-4 !border-yellow/30">
         <Typography variant="xs" className="text-yellow" weight={700}>
-          {i18n._(t`Import at your own risk`)}
+          {`Import at your own risk`}
         </Typography>
         <Typography variant="sm" className="text-yellow" weight={700}>
-          {i18n._(t`By adding this list you are implicitly trusting that the data is correct. Anyone can create a list,
+          {`By adding this list you are implicitly trusting that the data is correct. Anyone can create a list,
               including creating fake versions of existing lists and lists that claim to represent projects that do not
-              have one.`)}
+              have one.`}
         </Typography>
         <Typography variant="sm" className="text-yellow" weight={700}>
-          {i18n._(t`If you purchase a token from this list, you may not be able to sell it back.`)}
+          {`If you purchase a token from this list, you may not be able to sell it back.`}
         </Typography>
         <div className="flex flex-row items-center gap-3 cursor-pointer" onClick={() => setConfirmed(!confirmed)}>
           <Checkbox
@@ -103,12 +100,12 @@ const ImportList: FC = () => {
             checked={confirmed}
             onChange={() => setConfirmed(!confirmed)}
           />
-          <Typography weight={700}>{i18n._(t`I understand`)}</Typography>
+          <Typography weight={700}>{`I understand`}</Typography>
         </div>
       </HeadlessUiModal.BorderedContent>
       <div className="flex flex-grow" />
       <Button color="blue" disabled={!confirmed} onClick={handleAddList}>
-        {i18n._(t`Import`)}
+        {`Import`}
       </Button>
       {addError ? (
         <Typography variant="sm" weight={700} className="overflow-hidden text-ellipsis text-red text-center">

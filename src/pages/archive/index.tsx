@@ -1,12 +1,9 @@
 import Head from 'next/head'
 import React from 'react'
-import { useLingui } from '@lingui/react'
-import { t } from '@lingui/macro'
 import Link from 'next/link'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 
 const QuickLinks = ({ route, text }) => {
-    const { i18n } = useLingui()
     return (
         <div className="p-4 my-4 bg-dark-900 rounded">
             <Link
@@ -15,7 +12,7 @@ const QuickLinks = ({ route, text }) => {
                 }}
             >
                 <a className="flex items-center justify-center px-4 text-lg font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-                    {i18n._(t`${text}`)}
+                    {`${text}`}
                 </a>
             </Link>
         </div>
@@ -23,11 +20,10 @@ const QuickLinks = ({ route, text }) => {
 };
 
 export default function Inactive() {
-    const { i18n } = useLingui()
     return (
         <>
             <Head>
-                <title>{i18n._(t`SoulSwap`)}</title>
+                <title>{`SoulSwap`}</title>
                 <meta
                     key="description"
                     name="description"

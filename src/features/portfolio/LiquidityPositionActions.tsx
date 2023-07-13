@@ -1,6 +1,4 @@
 import { ArrowsRightLeftIcon } from '@heroicons/react/24/solid'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { CoffinboxIcon } from 'components/Icon'
 import Typography from 'components/Typography'
 import ActionItem from 'features/portfolio/ActionsModal/ActionItem'
@@ -17,7 +15,6 @@ const WalletActions: FC = () => {
   const dispatch = useAppDispatch()
   const { chainId } = useActiveWeb3React()
   const currency = useBalancesSelectedCurrency()
-  const { i18n } = useLingui()
   const router = useRouter()
 
   const swapActionHandler = useCallback(async () => {
@@ -29,12 +26,12 @@ const WalletActions: FC = () => {
     <div className="flex flex-col bg-dark-900 p-5 pt-7 gap-5">
       <div className="flex flex-col gap-3">
         <Typography variant="lg" weight={700} className="text-high-emphesis">
-          {i18n._(t`Available Actions`)}
+          {`Available Actions`}
         </Typography>
-        <ActionItem svg={<ArrowsRightLeftIcon width={24} />} label={i18n._(t`Swap`)} onClick={swapActionHandler} />
+        <ActionItem svg={<ArrowsRightLeftIcon width={24} />} label={`Swap`} onClick={swapActionHandler} />
         <ActionItem
           svg={<CoffinboxIcon width={20} height={20} />}
-          label={i18n._(t`Deposit to CoffinBox`)}
+          label={`Deposit to CoffinBox`}
           onClick={() => dispatch(setBalancesActiveModal(ActiveModal.DEPOSIT))}
         />
         <Typography variant="sm" className="text-blue text-center mb-5 mt-2 cursor-pointer">

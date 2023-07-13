@@ -16,33 +16,22 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { ConfirmAddModalBottom } from 'features/liquidity/ConfirmAddModalBottom'
 import Dots from 'components/Dots'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
-// import Container from 'components/Container'
-// import CurrencyAssetInput from 'components/AssetInput'
-// import CurrencyInputPanel from 'components/CurrencyInputPanel'
-// import SwapHeader from 'features/swap/SwapHeader'
 import { Field } from 'state/mint/actions'
 import Head from 'next/head'
 import LiquidityPrice from 'features/liquidity/LiquidityPrice'
 import { MinimalPositionCard } from 'components/PositionCard'
-import NavLink from 'components/NavLink'
 import { PairState } from 'hooks/useV2Pairs'
-// import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'
 import { TransactionResponse } from '@ethersproject/providers'
 import UnsupportedCurrencyFooter from 'features/swap/UnsupportedCurrencyFooter'
-// import Web3Connect from 'components/Web3Connect'
-import { t } from '@lingui/macro'
 import { useCurrency } from 'hooks/Tokens'
 import { useIsSwapUnsupported } from 'hooks/useIsSwapUnsupported'
-import { useLingui } from '@lingui/react'
 import { useRouter } from 'next/router'
 import { useRouterContract } from 'hooks'
 import { useTransactionAdder } from 'state/transactions/hooks'
 import useTransactionDeadline from 'hooks/useTransactionDeadline'
-// import { useWalletModalToggle } from 'state/application/hooks'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { LiquidityHeader } from 'features/liquidity'
-// import SwapBanner from 'components/SwapBanner'
 import { useActiveWeb3React } from 'services/web3'
 // import AssetInput from 'components/AssetInput'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
@@ -51,16 +40,10 @@ import { getChainColor, getChainColorCode } from 'constants/chains'
 import { PoolBalances } from 'features/portfolio/AssetBalances/pools'
 import PairChart from 'pages/analytics/pairs/embedded/[id]'
 import { VoteBanner } from 'components/Banner'
-// import { useTokenBalance } from 'state/wallet/hooks'
-
-// import Image from 'next/image'
-// import ADD_BANNER from 'assets/branding/add-banner.png'
-// import TokenStats from 'components/TokenStats'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
 
 export default function Add() {
-  const { i18n } = useLingui()
   const { account, chainId, library } = useActiveWeb3React()
   const router = useRouter()
   const tokens = router.query.tokens
@@ -215,10 +198,9 @@ export default function Add() {
           setAttemptingTxn(false)
 
           addTransaction(response, {
-            summary: i18n._(
-              t`Add ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${currencies[Field.CURRENCY_A]?.symbol
+            summary: `Add ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${currencies[Field.CURRENCY_A]?.symbol
                 } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencies[Field.CURRENCY_B]?.symbol}`
-            ),
+            ,
           })
 
           setTxHash(response.hash)
@@ -240,10 +222,9 @@ export default function Add() {
             setAttemptingTxn(false)
 
             addTransaction(response, {
-              summary: i18n._(
-                t`Add ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${currencies[Field.CURRENCY_A]?.symbol
+              summary: `Add ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${currencies[Field.CURRENCY_A]?.symbol
                   } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(3)} ${currencies[Field.CURRENCY_B]?.symbol}`
-              ),
+              ,
             })
 
             setTxHash(response.hash)
@@ -290,13 +271,13 @@ export default function Add() {
         </div>
         <div className="text-lg font-medium md:text-2xl text-high-emphesis">
           {currencies[Field.CURRENCY_A]?.symbol}/{currencies[Field.CURRENCY_B]?.symbol}
-          &nbsp;{i18n._(t`Pool Tokens`)}
+          &nbsp;{`Pool Tokens`}
         </div>
         <div className="pt-3 text-xs italic text-secondary">
-          {i18n._(t`Output is estimated. If the price changes by more than ${allowedSlippage.toSignificant(
+          {`Output is estimated. If the price changes by more than ${allowedSlippage.toSignificant(
             4
           )}% your transaction
-            will revert.`)}
+            will revert.`}
         </div>
       </div>
     )
@@ -315,10 +296,8 @@ export default function Add() {
     )
   }
 
-  const pendingText = i18n._(
-    t`Supplying ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${currencies[Field.CURRENCY_A]?.symbol
+  const pendingText = `Supplying ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${currencies[Field.CURRENCY_A]?.symbol
       } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencies[Field.CURRENCY_B]?.symbol}`
-  )
 
   const handleCurrencyASelect = useCallback(
     (currencyA: Currency) => {
@@ -361,7 +340,7 @@ export default function Add() {
   return (
     <>
       <Head>
-        <title>{i18n._(t`Add Liquidity`)} | SoulSwap</title>
+        <title>{`Add Liquidity`} | SoulSwap</title>
         <meta
           key="description"
           name="description"
@@ -386,7 +365,7 @@ export default function Add() {
             hash={txHash}
             content={() => (
               <ConfirmationModalContent
-                title={noLiquidity ? i18n._(t`You are creating a pool`) : i18n._(t`Receive`)}
+                title={noLiquidity ? `You are creating a pool` : `Receive`}
                 onDismiss={handleDismissConfirmation}
                 topContent={modalHeader}
                 bottomContent={modalBottom}
@@ -402,7 +381,7 @@ export default function Add() {
                 <SwapAssetPanel.Header
                   {...props}
                   label={
-                    independentField === Field.CURRENCY_A ? i18n._(t`Swap from:`) : i18n._(t`Swap from:`)
+                    independentField === Field.CURRENCY_A ? `Swap from:` : `Swap from:`
                   }
                 />
               )}
@@ -432,7 +411,7 @@ export default function Add() {
                   <SwapAssetPanel.Header
                     {...props}
                     label={
-                      independentField === Field.CURRENCY_B ? i18n._(t`Swap from:`) : i18n._(t`Swap from:`)
+                      independentField === Field.CURRENCY_B ? `Swap from:` : `Swap from:`
                     }
                   />
                 )}
@@ -457,7 +436,7 @@ export default function Add() {
 
             {addIsUnsupported ? (
               <Button color="gradient" size="lg" disabled>
-                {i18n._(t`Unsupported Asset`)}
+                {`Unsupported Asset`}
               </Button>
             ) : 
             !account ? (
@@ -471,7 +450,7 @@ export default function Add() {
             ) :
              !isValid ? (
               <Button size="lg" color="gray" className="w-full" disabled>
-                {!account ? `Connect Wallet` : i18n._(t`Enter Amount`)}
+                {!account ? `Connect Wallet` : `Enter Amount`}
               </Button>
             ) : (
               (approvalA === ApprovalState.NOT_APPROVED ||
@@ -493,7 +472,7 @@ export default function Add() {
                           }}
                         >
                           {approvalA === ApprovalState.PENDING ? (
-                            <Dots>{i18n._(t`Approving`)}</Dots>
+                            <Dots>{`Approving`}</Dots>
                           ) : (
                             `Approve ${currencies[Field.CURRENCY_A]?.symbol}`
                           )}
@@ -510,7 +489,7 @@ export default function Add() {
                           }}
                         >
                           {approvalB === ApprovalState.PENDING ? (
-                            <Dots>{i18n._(t`Approving`)}</Dots>
+                            <Dots>{`Approving`}</Dots>
                           ) : (
                             `Approve ${currencies[Field.CURRENCY_B]?.symbol}`
                           )}
@@ -529,7 +508,7 @@ export default function Add() {
                       }
                       error={!isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B]}
                     >
-                      {error ?? i18n._(t`Confirm Adding Liquidity`)}
+                      {error ?? `Confirm Adding Liquidity`}
                     </ButtonError>
                   )}
                 </AutoColumn>
@@ -564,7 +543,7 @@ export default function Add() {
                 primaryColor={'black'}
               >
                 <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
-                  <span>{i18n._(t`View Positions`)}</span>
+                  <span>{`View Positions`}</span>
                 </a>
               </Button>
             </NavLink>
@@ -575,7 +554,7 @@ export default function Add() {
                 primaryColor={'black'}
               >
                 <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
-                  <span>{i18n._(t`View Analytics`)}</span>
+                  <span>{`View Analytics`}</span>
                 </a>
               </Button>
             </NavLink>

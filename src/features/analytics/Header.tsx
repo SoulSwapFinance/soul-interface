@@ -1,15 +1,7 @@
-import { Currency, NATIVE, Percent } from '../../sdk'
 import React, { FC, useState } from 'react'
-
-// import Gas from '../../components/Gas'
+import { Currency, NATIVE, Percent } from '../../sdk'
 import NavLink from '../../components/NavLink'
-// import Settings from '../../components/Settings'
-// import { currencyId } from '../../functions'
-import { t } from '@lingui/macro'
-// import { useActiveWeb3React } from 'services/web3'
-import { useLingui } from '@lingui/react'
 import { useActiveWeb3React } from 'services/web3'
-// import { useRouter } from 'next/router'
 
 const getQuery = (input, output) => {
   const { chainId } = useActiveWeb3React()
@@ -29,11 +21,6 @@ interface AnalyticsHeaderProps {
 }
 
 const AnalyticsHeader: FC<AnalyticsHeaderProps> = ({ input, output, allowedSlippage }) => {
-  const { i18n } = useLingui()
-  // const { chainId } = useActiveWeb3React()
-  // const router = useRouter()
-  // const [animateWallet, setAnimateWallet] = useState(false)
-  // const isRemove = router.asPath.startsWith('/remove')
 
   return (
     <div className="flex items-center justify-center mb-6 space-x-3">
@@ -46,7 +33,7 @@ const AnalyticsHeader: FC<AnalyticsHeaderProps> = ({ input, output, allowedSlipp
           }}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
-            {i18n._(t`ALL`)}
+            {`ALL`}
           </a>
         </NavLink>
         <NavLink
@@ -57,7 +44,7 @@ const AnalyticsHeader: FC<AnalyticsHeaderProps> = ({ input, output, allowedSlipp
         // }`}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`WALLET`)}
+            {`WALLET`}
           </a>
         </NavLink>
         <NavLink
@@ -66,7 +53,7 @@ const AnalyticsHeader: FC<AnalyticsHeaderProps> = ({ input, output, allowedSlipp
           // href={`${output ? `https://charts.soul.sh/token/${currencyId(output)}` : ''}`}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`TOKENS`)}
+            {`TOKENS`}
           </a>
         </NavLink>
         <NavLink
@@ -75,7 +62,7 @@ const AnalyticsHeader: FC<AnalyticsHeaderProps> = ({ input, output, allowedSlipp
           // href={`${output ? `https://charts.soul.sh/token/${currencyId(output)}` : ''}`}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`PAIRS`)}
+            {`PAIRS`}
           </a>
         </NavLink>
         {/* <NavLink
@@ -84,7 +71,7 @@ const AnalyticsHeader: FC<AnalyticsHeaderProps> = ({ input, output, allowedSlipp
           // href={`${output ? `https://charts.soul.sh/token/${currencyId(output)}` : ''}`}
         >
           <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {i18n._(t`Farm`)}
+            {`Farm`}
           </a>
         </NavLink> */}
       </div>

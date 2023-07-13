@@ -2,10 +2,8 @@ import { Currency, CurrencyAmount, Ether, JSBI, NATIVE, Token } from '../../../s
 import { PairState, useV2Pair } from '../../../hooks/useV2Pairs'
 import React, { useCallback, useEffect, useState } from 'react'
 
-import Alert from '../../../components/Alert'
 import { AutoColumn } from '../../../components/Column'
 import { AutoRow } from '../../../components/Row'
-import Back from '../../../components/Back'
 import Container from '../../../components/Container'
 import CurrencySelectPanel from '../../../components/CurrencySelectPanel'
 import Dots from '../../../components/Dots'
@@ -16,11 +14,8 @@ import Link from 'next/link'
 import { MinimalPositionCard } from '../../../components/PositionCard'
 import { Plus } from 'react-feather'
 import Typography from '../../../components/Typography'
-import Web3Connect from '../../../components/Web3Connect'
 import { currencyId } from '../../../functions/currency'
-import { t } from '@lingui/macro'
 import { useActiveWeb3React } from 'services/web3'
-import { useLingui } from '@lingui/react'
 import { usePairAdder } from '../../../state/user/hooks'
 import { useTokenBalance } from '../../../state/wallet/hooks'
 // import Image from 'next/image'
@@ -38,7 +33,6 @@ enum Fields {
 }
 
 export default function PoolFinder() {
-  const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
   const router = useRouter()
   const [activeField, setActiveField] = useState<number>(Fields.TOKEN1)
@@ -85,13 +79,13 @@ export default function PoolFinder() {
   )
 
   const prerequisiteMessage = (
-    <div className="p-5 text-center rounded bg-dark-800">{i18n._(t`Select Token to Import Position`)}</div>
+    <div className="p-5 text-center rounded bg-dark-800">{`Select Token to Import Position`}</div>
   )
 
   return (
     <Container maxWidth="2xl" className="space-y-6 mt-4">
       <Head>
-        <title>{i18n._(t`Find Pool`)} | Soul</title>
+        <title>{`Find Pool`} | Soul</title>
         <meta key="description" name="description" content="Find Pool" />
       </Head>
       <DoubleGlowShadowV2 opacity="0.6">
@@ -137,12 +131,12 @@ export default function PoolFinder() {
                 justify={'center'}
                 gap={'0 3px'}
               >
-                {/* {i18n._(t`Pool Found!`)} */}
+                {/* {`Pool Found!`} */}
                 <Typography
                   className={`flex border border-[${getChainColor(chainId)}] p-3 rounded rounded-xl w-full justify-center text-xl bg-${getChainColorCode(chainId)}`}
                   onClick={() => handleLink('/pool')}
                 >
-                  <a className={`text-center font-bold`}>{i18n._(t`Manage Position`)}</a>
+                  <a className={`text-center font-bold`}>{`Manage Position`}</a>
                 </Typography>
               </AutoRow>
             )}
@@ -154,10 +148,10 @@ export default function PoolFinder() {
                 ) : (
                   <div className="p-5 rounded bg-dark-800">
                     <AutoColumn gap="sm" justify="center">
-                      {i18n._(t`You don’t have liquidity in this pool yet`)}
+                      {`You don’t have liquidity in this pool yet`}
                       <Link href={`/exchange/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
                         <a className="text-center text-purple text-opacity-80 hover:text-opacity-100">
-                          {i18n._(t`Add Liquidity`)}
+                          {`Add Liquidity`}
                         </a>
                       </Link>
                     </AutoColumn>
@@ -166,17 +160,17 @@ export default function PoolFinder() {
               ) : validPairNoLiquidity ? (
                 <div className="p-5 rounded bg-dark-800">
                   <AutoColumn gap="sm" justify="center">
-                    {i18n._(t`No pool found`)}
+                    {`No pool found`}
                     <Link href={`/exchange/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
-                      <a className="text-center">{i18n._(t`Create Pool`)}</a>
+                      <a className="text-center">{`Create Pool`}</a>
                     </Link>
                   </AutoColumn>
                 </div>
               ) : pairState === PairState.INVALID ? (
-                <div className="p-5 text-center rounded bg-dark-800">{i18n._(t`Invalid pair`)}</div>
+                <div className="p-5 text-center rounded bg-dark-800">{`Invalid pair`}</div>
               ) : pairState === PairState.LOADING ? (
                 <div className="p-5 text-center rounded bg-dark-800">
-                  <Dots>{i18n._(t`Loading`)}</Dots>
+                  <Dots>{`Loading`}</Dots>
                 </div>
               ) : null
             ) : !account ? (
