@@ -8,7 +8,7 @@ import NavLink from 'components/NavLink'
 // import { useLuxorPrice } from 'hooks/getPrices'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
-import { LuxorBanner, DonateBanner } from 'components/Banner'
+import { LuxorBanner } from 'components/Banner'
 import { useActiveWeb3React } from 'services/web3'
 
 const Luxor = () => {
