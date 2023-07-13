@@ -34,13 +34,6 @@ const TokenPairLink = styled(ExternalLink)`
   padding-left: 10;
 `
 
-// const TokenLogo = styled(Image)`
-//   @media screen and (max-width: 400px) {
-//     font-size: 1rem;
-//     padding-right: 10px;
-//   }
-// `
-
 const HideOnSmall = styled.div`
 @media screen and (max-width: 900px) {
   display: none;

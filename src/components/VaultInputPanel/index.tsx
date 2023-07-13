@@ -157,7 +157,7 @@ export default function VaultInputPanel({
               />
               {!hideBalance && currency && selectedCurrencyBalance ? (
                 <div className="flex items-center flex-cols-1">
-                  <div onClick={onMax} className="text-xs text-center hover:text-purple font-medium text-center cursor-pointer text-low-emphesis">
+                  <div onClick={onMax} className="text-xs text-center hover:text-purple font-medium cursor-pointer text-low-emphesis">
                     {renderBalance ? (
                       renderBalance(selectedCurrencyBalance)
                     ) : (           

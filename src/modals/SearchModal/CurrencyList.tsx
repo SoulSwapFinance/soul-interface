@@ -70,7 +70,7 @@ interface CurrencyRow {
   style: CSSProperties
 }
 
-const CurrencyRow: FC<CurrencyRow> = ({ chainId, currency, style }) => {
+export const CurrencyRow: FC<CurrencyRow> = ({ chainId, currency, style }) => {
   const { account } = useActiveWeb3React()
   const { onSelect, currency: selectedCurrency } = useCurrencyModalContext()
   const key = currencyKey(currency)
@@ -107,6 +107,7 @@ const CurrencyRow: FC<CurrencyRow> = ({ chainId, currency, style }) => {
     </div>
   )
 }
+
 
 const BREAK_LINE = 'BREAK'
 type BreakLine = typeof BREAK_LINE
@@ -146,7 +147,6 @@ const CurrencyList: FC<CurrencyList> = ({ chainId, currencies, otherListTokens }
     }
     return currencies
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currencies.length, otherListTokens])
 
   const Row = ({ index, key, style }) => {
@@ -160,13 +160,13 @@ const CurrencyList: FC<CurrencyList> = ({ chainId, currencies, otherListTokens }
 
   return (
     <div id="all-currencies-list" className="flex flex-col flex-1 flex-grow h-full divide-y divide-dark-800">
-      <AutoSizer>
-        {({ height, width }) => (
-          <List height={height} width={width} itemCount={itemData.length} itemSize={56}>
+      {/* <AutoSizer> */}
+        {/* {({ height, width }) => ( */}
+          <List height={48} width={48} itemCount={itemData.length} itemSize={48}>
             {Row}
           </List>
-        )}
-      </AutoSizer>
+          {/* )} */}
+       {/* </AutoSizer> */}
     </div>
   )
 }

@@ -18,7 +18,7 @@ import {
   SwapShowAcceptChanges,
   DisclaimerText,
 } from "./styleds"
-import { AdvancedSwapDetails } from "./AdvancedSwapDetails"
+// import { AdvancedSwapDetails } from "./AdvancedSwapDetails"
 import LightCard from "../Card"
 import DarkGreyCard from "../Card"
 // import TradePrice from "../order/TradePrice"

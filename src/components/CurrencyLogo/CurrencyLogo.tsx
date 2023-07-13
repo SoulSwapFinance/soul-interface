@@ -22,12 +22,11 @@ export const getCurrencyLogoUrls = (currency): string[] => {
 
   // if (currency.chainId in BLOCKCHAIN) {
     urls.push(
-      // @ts-ignore TYPE NEEDS FIXING
       `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${BLOCKCHAIN[currency.chainId]}/assets/${
         currency.wrapped.address
     }/logo.png`
     )
-   // }
+  //  }
   return urls
 }
 

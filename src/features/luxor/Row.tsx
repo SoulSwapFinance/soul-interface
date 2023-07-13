@@ -359,8 +359,8 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                                 '/logo.png'
                                             }
                                             alt="LOGO"
-                                            width="76px"
-                                            height="44px"
+                                            width={76}
+                                            height={44}
                                             // objectFit="contain"
                                             className="rounded-full items-center justify-center text-center"
                                         />

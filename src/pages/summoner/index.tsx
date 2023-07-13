@@ -127,7 +127,7 @@ const Summoner = () => {
           <div className="flex justify-center gap-2 mb-4">
             <Button
               color={getChainColorCode(chainId)}
-              className="text-emphasis"
+              className="text-emphasis text-white"
               variant="outlined"
               size={"sm"}
             >
@@ -136,7 +136,7 @@ const Summoner = () => {
             {positions.length > 0 && (
               <Button
                 color={getChainColorCode(chainId)}
-                className="text-emphasis"
+                className="text-emphasis text-white"
                 variant="outlined"
                 size={"sm"}
                 disabled={pendingTx}
@@ -155,7 +155,7 @@ const Summoner = () => {
             )}
             <Button
               color={getChainColorCode(chainId)}
-              className="text-emphasis"
+              className="text-emphasis text-white"
               variant={'outlined'}
               size={"sm"}
             >

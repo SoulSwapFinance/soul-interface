@@ -15,7 +15,7 @@ export default function LiquidityHeader({ input = undefined, output = undefined 
         href={`/exchange/add/${currencyId(input)}/${currencyId(output)}`}
       >
         <Typography
-          className="flex text-white items-center justify-center px-1 py-1 text-base font-medium text-center rounded-md md:px-10 text-secondary hover:text-high-emphesis"
+          className="flex text-white items-center justify-center px-1 py-1 text-base font-medium text-center rounded-md md:px-10 hover:text-high-emphesis"
         >
           {`+`}  
        </Typography>
@@ -28,7 +28,7 @@ export default function LiquidityHeader({ input = undefined, output = undefined 
         href={`/exchange/remove/${currencyId(input)}/${currencyId(output)}`}
       >
         <Typography
-          className="flex text-white items-center justify-center px-1 py-1 text-base font-medium text-center rounded-md md:px-10 text-secondary hover:text-high-emphesis"
+          className="flex text-white items-center justify-center px-1 py-1 text-base font-medium text-center rounded-md md:px-10 hover:text-high-emphesis"
         >
           {`-`}  
        </Typography>

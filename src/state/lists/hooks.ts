@@ -53,7 +53,7 @@ export function useAllLists(): AppState['lists']['byUrl'] {
 
 function combineMaps(map1: TokenAddressMap, map2: TokenAddressMap): TokenAddressMap {
   return {
-    1: { ...map1[ChainId.ETHEREUM], ...map2[ChainId.ETHEREUM] }, // mainnet
+    1: { ...map1[ChainId.ETHEREUM], ...map2[ChainId.ETHEREUM] }, // ethereum
     40: { ...map1[ChainId.TELOS], ...map2[ChainId.TELOS] }, // telos
     56: { ...map1[ChainId.BSC], ...map2[ChainId.BSC] }, // bsc
     250: { ...map1[ChainId.FANTOM], ...map2[ChainId.FANTOM] }, // fantom

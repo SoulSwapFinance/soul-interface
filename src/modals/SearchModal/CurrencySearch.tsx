@@ -136,12 +136,14 @@ export function CurrencySearch({
 
   return (
     <>
-      <HeadlessUiModal.Header onClose={onDismiss} header={`Select Token`} />
+      <HeadlessUiModal.Header 
+        onClose={onDismiss} header={`Search Token`} 
+      />
       {!currencyList && showSearch && (
         <input
           type="text"
           id="token-search-input"
-          placeholder={`Search name or paste address`}
+          placeholder={`Search symbol or paste address`}
           autoComplete="off"
           value={searchQuery}
           onChange={handleInput}
@@ -149,11 +151,15 @@ export function CurrencySearch({
           className="w-full bg-[rgba(0,0,0,0.2)] border border-dark-800 focus:border-purple rounded placeholder-secondary font-bold text-base p-4 appearance-none"
         />
       )}
-      {showCommonBases && <CommonBases />}
+      {/* {showCommonBases && <CommonBases />} */}
 
       {searchToken && !searchTokenIsAdded && <ImportRow token={searchToken} onClick={handleImport} />}
-      <div className="h-full overflow-hidden overflow-y-auto border rounded border-dark-800 bg-[rgba(0,0,0,0.2)]">
-        {filteredSortedTokens?.length > 0 || filteredInactiveTokens?.length > 0 ? (
+      <div 
+        className="h-full overflow-hidden overflow-y-auto border rounded border-dark-800 bg-[rgba(0,0,0,0.2)]"
+      >
+       
+        {/* {filteredSortedTokens?.length > 0 || filteredInactiveTokens?.length > 0 ? (
+          // TODO: fails to show tokens
           <CurrencyList
             chainId={chainId}
             currencies={includeNative ? filteredSortedTokensWithETH : filteredSortedTokens}
@@ -164,7 +170,10 @@ export function CurrencySearch({
           <Typography weight={700} variant="xs" className="text-secondary flex h-full justify-center items-center">
             {`No results found`}
           </Typography>
-        )}
+        )} */}
+
+       <CommonBases />
+
       </div>
       {allowManageTokenList && (
         <div className="flex justify-center">
@@ -173,7 +182,7 @@ export function CurrencySearch({
             id="list-token-manage-button"
             onClick={() => setView(CurrencyModalView.manage)}
             color="blue"
-            variant="empty"
+            variant="filled"
           >
             {`Manage Token Lists`}
           </Button>
