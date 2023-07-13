@@ -151,11 +151,11 @@ export default function Claims() {
                     {userAllocation ? (
                       `Allocated: ${formatNumber(userAllocation)} SOUL`
                     ) : (
-                      <Dots>{`Claimable: Fetching Claimable Amount`}</Dots>
+                      <Dots>{`Claimable: Fetching Claimable Amoun`}</Dots>
                     )}
                   </div>
                 ) : (
-                  <div className="text-sm text-secondary">{`Total Locked: Connect Wallet`}</div>
+                  <div className="text-sm text-secondary">{`Total Locked: Connect Walle`}</div>
                 )}
               </div>
 
@@ -192,8 +192,8 @@ export default function Claims() {
                     <div className="flex flex-col gap-1">
                       <div className="font-bold text-white">{`Farm with SOUL-FTM`}</div>
                       <div className="text-sm text-secondary">
-                        {t`Pair your SOUL with FTM and add to Farms for more SOUL and an enhanced AURA.`}
-                        {/* {t`(COMING SOON) Stake into SEANCE add collateral as all in one click.`} */}
+                        {`Pair your SOUL with FTM and add to Farms for more SOUL and an enhanced AURA.`}
+                        {/* {`(COMING SOON) Stake into SEANCE add collateral as all in one click.`} */}
                       </div>
                     </div>
                     <div className="min-w-[32px]">
@@ -208,8 +208,8 @@ export default function Claims() {
                     <div className="flex flex-col gap-1">
                       <div className="font-bold text-white">{`Mint SOUL with Liquidity`}</div>
                       <div className="text-sm text-secondary">
-                        {t`Pair your SOUL and add to Bonds for more SOUL at record-high returns.`}
-                        {/* {t`(COMING SOON) Stake into SEANCE add collateral as all in one click.`} */}
+                        {`Pair your SOUL and add to Bonds for more SOUL at record-high returns.`}
+                        {/* {`(COMING SOON) Stake into SEANCE add collateral as all in one click.`} */}
                       </div>
                     </div>
                     <div className="min-w-[32px]">

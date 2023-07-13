@@ -2,8 +2,6 @@ import { getChainColor } from 'constants/chains'
 import ActionsModal from 'features/portfolio/ActionsModal'
 import { CoffinBalances, WalletBalances } from 'features/portfolio/AssetBalances/coffinAndWallet'
 import { PoolBalances } from 'features/portfolio/AssetBalances/pools'
-import { UnderworldCollateral } from 'features/portfolio/AssetBalances/underworld/UnderworldCollateral'
-import { UnderworldLent } from 'features/portfolio/AssetBalances/underworld/UnderworldLent'
 import { useAccountInUrl } from 'features/portfolio/useAccountInUrl'
 import { shortenAddress } from 'functions'
 import TridentLayout, { TridentBody } from 'layouts/Trident'
@@ -56,8 +54,6 @@ const Portfolio = () => {
           >
             {show ? `Hide Retired` : `Show Retired`}
         </div>
-        { show && <UnderworldCollateral /> }
-        { show &&  <UnderworldLent /> }
         { show && <CoffinBalances account={account} /> }
       </TridentBody>
       <ActionsModal />

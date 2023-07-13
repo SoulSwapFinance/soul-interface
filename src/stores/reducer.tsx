@@ -1,4 +1,3 @@
-import ChainLinkService from "../services/contracts/ChainLinkService"
 import { DataService } from "../services/data/DataTypes"
 import { ActionTypes, ActionValues, State } from "./types"
 
@@ -6,7 +5,6 @@ export const initialState = {
   loading: false,
   auth: null,
   dataService: {} as DataService,
-  chainLinkService: {} as ChainLinkService,
 }
 
 export const Reducer = (state: State, action: ActionValues): State => {
