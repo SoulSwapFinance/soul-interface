@@ -7,7 +7,6 @@ import SettingsTab from '../Settings'
 import { resetMintState } from '../../state/mint/actions'
 import styled from 'styled-components'
 import { useAppDispatch } from '../../state/hooks'
-import { useTranslation } from 'react-i18next'
 import NavLink from 'components/NavLink'
 
 const Tabs = styled.div`
@@ -73,18 +72,17 @@ export function AddRemoveTabs({
 }
 
 export function SwapPoolTabs({ active }: { active: 'swap' | 'pool' | 'bridge' }) {
-  const { t } = useTranslation('common')
 
   return (
     <Tabs style={{ marginBottom: '20px', display: 'none' }}>
       <NavLink id="swap-nav-link" to="/swap" isActive={active === 'swap'}>
-        {t('swap')}
+        {'swap'}
       </NavLink>
       <NavLink id="bridge-nav-link" to="/cross" isActive={active === 'bridge'}>
-        {t('bridge')}
+        {'bridge'}
       </NavLink>
       <NavLink id="pool-nav-link" to="/pools" isActive={active === 'pool'}>
-        {t('pool')}
+        {'pool'}
       </NavLink>
     </Tabs>
   )

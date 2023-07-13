@@ -47,20 +47,6 @@ const useMenu: UseBar = () => {
   return useMemo(() => {
     if (!chainId) return []
 
-    // default show just a home[0] and swap[1]
-    // let home: BarItem = {
-    //   key: 'home',
-    //   link: '/landing',
-    //   title: i18n._(t`Home`),
-    //   icon: <HomeIcon 
-    //   className={classNames(`w-7 h-7 rounded-md`
-    //   // , isHome ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
-    //   )}
-    //   fillPrimary={chainColor}
-    //   fillSecondary={WHITE}
-    //   />,   
-    // }
-
     let tradeMenu: BarItem = {
       key: 'swap',
       link: '/swap',
@@ -169,19 +155,6 @@ const useMenu: UseBar = () => {
       })
     }
 
-    // Analytics
-    // mainItems.push({
-    //   key: 'data',
-    //   link: '/analytics',
-    //   title: i18n._(t`Data`),
-    //   icon: <ChartIcon
-    //     className={classNames(`w-7 h-7 rounded-md`
-    //     )}
-    //     fillPrimary={chainColor}
-    //     fillSecondary={WHITE}
-    //   />,
-    // })
-    
     // Whitepaper
     mainItems.push({
       key: 'learn',
@@ -209,109 +182,6 @@ const useMenu: UseBar = () => {
         fillSecondary={WHITE}
       />,
     })
-    
-    // // Balances
-    // mainItems.push({
-    //   key: 'balances',
-    //   link: '/balances',
-    //   title: i18n._(t`Account`),
-    //   icon: <WalletIcon
-    //     className={classNames(`w-7 h-7 rounded-md`
-    //       // , isWallet ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
-    //     )}
-    //     fillPrimary={chainColor}
-    //     fillSecondary={WHITE}
-    //   />,
-    // })
-
-    // Pay
-    // mainItems.push({
-    //   key: 'pay',
-    //   link: 'https://pay.soulswap.finance',
-    //   title: i18n._(t`SoulPay`),
-    //   icon: <DollarBillIcon 
-    //   className={classNames(`w-8 h-8 rounded-md`)}
-    //   fillPrimary={chainColor}
-    //   fillSecondary={WHITE}
-    //   />,
-    // })
-
-    // Documentation
-    // mainItems.push({
-    //   key: 'docs',
-    //   link: 'https://docs.soulswap.finance',
-    //   title: i18n._(t`Tutorials`),
-    //   icon: <DocumentIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
-    // })
-
-    // Twitter
-    // mainItems.push({
-    //   key: 'twitter',
-    //   link: 'https://twitter.com/SoulSwapFinance',
-    //   title: i18n._(t`Twitter`),
-    //   icon: <TwitterIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
-    // })
-
-    // if (featureEnabled(Feature.AMM, chainId)) {
-    //   mainItems.push({
-    //     key: 'tools',
-    //     title: i18n._(t`Tools`),
-    //     icon: <SparklesIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
-    //     items: [
-    //       {
-    //         key: 'data',
-    //         title: i18n._(t`Data`),
-    //         link: '/analytics',
-    //         // link: '/info',
-    //       },
-    //       // {
-    //       //   key: 'bridge',
-    //       //   title: i18n._(t`Bridge`),
-    //       //   link: '/bridge',
-    //       // },
-    //       {
-    //         key: 'stream',
-    //         title: i18n._(t`Stream`),
-    //         link: 'https://pay.soulswap.finance',
-    //       },
-    //       {
-    //         key: 'vote',
-    //         title: i18n._(t`Vote`),
-    //         link: 'https://enchant.soulswap.finance',
-    //       },
-    //       {
-    //         key: 'request',
-    //         title: i18n._(t`Request`),
-    //         link: 'https://soulswap.nolt.io',
-    //       },
-    //     ]
-    //   })
-    // }
-
-    // // Discord
-    // mainItems.push({
-    //   key: 'discord',
-    //   title: i18n._(t`Discord`),
-    //   link: 'https://discord.gg/soulswap',
-    //   icon: <DiscordIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
-    // })
-
-    // // Telegram
-    // mainItems.push({
-    //   key: 'telegram',
-    //   title: i18n._(t`Telegram`),
-    //   link: 'https://t.me/SoulSwapDeFi',
-    //   icon: <TelegramIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
-    // })
-
-    // // Reddit
-    // mainItems.push({
-    //   key: 'reddit',
-    //   title: i18n._(t`Reddit`),
-    //   link: 'https://www.reddit.com/r/SoulSwapDeFi',
-    //   icon: <RedditIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
-    // })
-
 
     return mainItems.filter((el) => Object.keys(el).length > 0)
   }, [chainId])

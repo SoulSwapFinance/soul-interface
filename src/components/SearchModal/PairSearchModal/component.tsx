@@ -1,7 +1,6 @@
 import { Pair } from 'sdk'
 
 import React, { ChangeEvent, KeyboardEvent, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { FixedSizeList } from 'react-window'
 
 import { usePairAtAddress } from 'data/Reserves'
@@ -19,7 +18,6 @@ import { Wrapper } from './styles'
 import { PairSearchProps } from './types'
 
 export const PairSearch = ({ selectedPair, onPairSelect, onDismiss, isOpen, filterPairs }: PairSearchProps) => {
-  const { t } = useTranslation('common')
 
   const fixedList = useRef<FixedSizeList>()
   const [searchQuery, setSearchQuery] = useState<string>('')
@@ -98,7 +96,7 @@ export const PairSearch = ({ selectedPair, onPairSelect, onDismiss, isOpen, filt
           <SearchInput
             data-testid="search-pair"
             type="text"
-            placeholder={t('searchPlaceholder')}
+            placeholder={'searchPlaceholder'}
             value={searchQuery}
             ref={inputRef as RefObject<HTMLInputElement>}
             onChange={handleInput}
@@ -113,9 +111,7 @@ export const PairSearch = ({ selectedPair, onPairSelect, onDismiss, isOpen, filt
         </PaddedColumn>
         <Separator />
         <PairList pairs={[]}
-          onPairSelect={handlePairSelect}        // pairs={filteredSortedPairs} 
-        // onPairSelect={handlePairSelect} 
-        // selectedPair={selectedPair} 
+          onPairSelect={handlePairSelect}
         />
       </Column>
     </Wrapper>

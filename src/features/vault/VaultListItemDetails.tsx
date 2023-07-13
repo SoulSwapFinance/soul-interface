@@ -58,13 +58,6 @@ const VaultListItem = ({ farm }) => {
             header={`Confirm ${currentAction.action == 'deposit' ? 'Staking' : 'Harvesting'}`}
             onClose={() => setShowConfirmation(false)}
           />
-          {/* <Typography variant="lg" className="font-medium pt-4">
-            {i18n._(
-              t`${
-                currentAction.action == 'deposit' ? 'Staking on Soul Vault' : 'Harvesting'
-              } will lock your tokens for ${currentAction.lockup}.`
-            )}
-          </Typography> */}
           <Typography variant="sm" className="font-medium mt-2 pb-4">
             {`Everytime you stake or claim rewards your lock time renews.`}
           </Typography>
@@ -104,11 +97,6 @@ const VaultListItem = ({ farm }) => {
         <Disclosure.Panel className="flex flex-col w-full border-t-0 rounded rounded-t-none bg-dark-800" static>
           <div className="grid grid-cols-2 gap-4 p-4">
             <div className="col-span-2 text-center md:col-span-1">
-              {/* {farm.depositFeeBP && (
-                <div className="pr-4 mb-2 text-left cursor-pointer text-red">{`${i18n._(
-                  t`Deposit Fee`
-                )}: ${formatPercent(farm.depositFeeBP / 100)}`}</div>
-              )} */}
               {account && (
                 <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
                   {`Wallet Balance`}:{' '}

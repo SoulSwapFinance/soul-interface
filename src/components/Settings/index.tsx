@@ -84,25 +84,6 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
                 toggle={() => (singleHopOnly ? setSingleHopOnly(false) : setSingleHopOnly(true))}
               />
             </div>
-            {/* {chainId == ChainId.ETHEREUM && (
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <Typography variant="sm" className="text-primary">
-                    {`MEV Shield by Archer DAO`}
-                  </Typography>
-                  <QuestionHelper
-                    text={i18n._(
-                      t`Send transaction privately to avoid front-running and sandwich attacks. Requires a miner tip to incentivize miners`
-                    )}
-                  />
-                </div>
-                <Toggle
-                  id="toggle-use-archer"
-                  isActive={userUseArcher}
-                  toggle={() => setUserUseArcher(!userUseArcher)}
-                />
-              </div>
-            )} */}
           </div>
         </div>
       )}
