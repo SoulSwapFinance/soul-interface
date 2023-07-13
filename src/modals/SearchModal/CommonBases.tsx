@@ -1,7 +1,7 @@
 import { Currency, CurrencyAmount, NATIVE, ZERO } from 'sdk'
-import { Button } from 'components/Button'
+// import { Button } from 'components/Button'
 import { COMMON_BASES } from 'constants/routing'
-import { CurrencyLogo } from 'components/CurrencyLogo'
+// import { CurrencyLogo } from 'components/CurrencyLogo'
 // import QuestionHelper from 'components/QuestionHelper'
 import { classNames, currencyId, formatNumber } from 'functions'
 // import { useCurrencyBalance, useTokenBalance } from 'state/wallet/hooks'
@@ -53,7 +53,8 @@ const CommonBases: FC = () => {
             <CurrencyRow 
             chainId={chainId} 
             // currency={selectedCurrency} 
-            currency={currency} 
+            currency={currency}
+              key={currencyId(currency)}
             style={undefined}
           />
             // <Button
