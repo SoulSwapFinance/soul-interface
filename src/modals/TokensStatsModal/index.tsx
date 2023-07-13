@@ -128,7 +128,7 @@ export default function TokenStatsModal(): JSX.Element | null {
                 alt="SOUL"
                 width={1600}
                 height={1600}
-                objectFit="contain"
+                // objectFit="contain"
                 className="rounded-md"
               />
             </div>

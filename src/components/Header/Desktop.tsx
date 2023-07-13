@@ -33,14 +33,14 @@ const Desktop = () => {
       // src={'/favicon.png'} 
       src={`/favicon.ico`}
       height={72} width={72}
-      objectFit="contain"
+      // objectFit="contain"
       alt={"soulswap logo"}
     /> */}
     <Image
         // src={'/favicon.png'} 
         src={`/SoulSwap-Finance-Banner.png`}
         height={48} width={224}
-        objectFit="contain"
+        // objectFit="contain"
         alt={"soulswap text banner"}
     />
   </div>

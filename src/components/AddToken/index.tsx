@@ -51,7 +51,7 @@ const AddToken: FC = (tokenToAdd: Currency) => {
         alt={ `${SYMBOL}` }
         width={1600}
         height={1600}
-        objectFit="contain"
+        // objectFit="contain"
         className="rounded-md"
       />
     </div>

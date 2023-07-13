@@ -71,7 +71,7 @@ const Background: FC<Background> = ({ variant }) => {
     <Image
       alt="background image"
       src={IMAGE_URL[variant].url}
-      objectFit="cover"
+      // objectFit="cover"
       objectPosition="center"
       layout="fill"
       priority

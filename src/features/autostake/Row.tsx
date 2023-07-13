@@ -292,7 +292,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                 alt="LOGO"
                                 width="44px"
                                 height="44px"
-                                objectFit="contain"
+                                // objectFit="contain"
                                 className="rounded-full items-center justify-center text-center"
                             />
                             </Wrap>

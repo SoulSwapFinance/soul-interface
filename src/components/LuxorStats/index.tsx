@@ -36,7 +36,7 @@ function LuxorStats(): JSX.Element | null {
           alt="WLUM"
           width={28}
           height={28}
-          objectFit="contain"
+          // objectFit="contain"
           className="rounded-md"
         />
           <HideOnMobile>
@@ -50,7 +50,7 @@ function LuxorStats(): JSX.Element | null {
           alt="LUX"
           width={28}
           height={28}
-          objectFit="contain"
+          // objectFit="contain"
           className="rounded-md"
         />
           <HideOnMobile>

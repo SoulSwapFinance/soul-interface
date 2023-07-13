@@ -184,7 +184,7 @@ const Mobile = () => {
         // src={'/favicon.png'} 
         src={`/SoulSwap-Banner.png`}
         height={36} width={196}
-        objectFit="contain"
+        // objectFit="contain"
         alt={"soulswap banner"}
     />
   </div>

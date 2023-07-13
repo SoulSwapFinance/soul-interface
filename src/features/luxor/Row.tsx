@@ -335,7 +335,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                             alt="LOGO"
                                             width={38}
                                             height={38}
-                                            objectFit="contain"
+                                            // objectFit="contain"
                                             className="rounded-full items-center justify-center text-center"
                                         />
                                         <TokenLogo
@@ -347,7 +347,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                             alt="LOGO"
                                             width={38}
                                             height={38}
-                                            objectFit="contain"
+                                            // objectFit="contain"
                                             className="rounded-full items-center justify-center text-center"
                                         />
                                     </Wrap>}
@@ -361,7 +361,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                             alt="LOGO"
                                             width="76px"
                                             height="44px"
-                                            objectFit="contain"
+                                            // objectFit="contain"
                                             className="rounded-full items-center justify-center text-center"
                                         />
                                     </Wrap>}

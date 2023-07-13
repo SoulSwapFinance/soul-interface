@@ -157,7 +157,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
                 alt="LUX"
                 width={1600}
                 height={1600}
-                objectFit="contain"
+                // objectFit="contain"
                 className="rounded-md"
               />
             </div>
@@ -195,7 +195,7 @@ export default function LuxorStatsModal(): JSX.Element | null {
                 alt="WLUM"
                 width={1600}
                 height={1600}
-                objectFit="contain"
+                // objectFit="contain"
                 className="rounded-md"
               />
             </div>

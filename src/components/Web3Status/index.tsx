@@ -48,12 +48,6 @@ function newTransactionsFirst(a: TransactionDetails, b: TransactionDetails) {
 //         />
 //       </div>
 //     )
-//   } else if (connector.constructor.name === 'LatticeConnector') {
-//     return (
-//       <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
-//         <Image src="https://exchange.soulswap.finance/images/wallets/lattice.png" alt={'Lattice'} width="16px" height="16px" />
-//       </div>
-//     )
 //   } else if (connector.constructor.name === 'WalletLinkConnector') {
 //     return (
 //       <div className="flex flex-col items-center justify-center w-4 h-4 flex-nowrap">
