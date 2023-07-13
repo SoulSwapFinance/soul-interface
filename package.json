@@ -154,6 +154,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@fortawesome/vue-fontawesome": "^2.0.9",
     "@gnosis.pm/gp-v2-contracts": "1.1.2",
+    "@jest/types": "^29.6.1",
     "@mui/icons-material": "^5.6.0",
     "@mui/material": "^5.6.0",
     "@mui/x-data-grid": "^5.8.0",
