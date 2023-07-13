@@ -86,7 +86,7 @@ export default function ChartCard({
             key={i}
             className={classNames(
               t === timespan
-                ? 'text-purple bg-purple bg-opacity/30 rounded-xl font-bold border border-purple border-opacity-50'
+                ? 'text-white bg-purple bg-opacity/30 rounded-xl font-bold border border-purple border-opacity-50'
                 : 'text-secondary',
               'text-sm px-3 py-0.5'
             )}
