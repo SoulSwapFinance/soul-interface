@@ -1,9 +1,8 @@
-import { CheckIcon, MinusCircleIcon, ArrowPathIcon, LinkIcon } from '@heroicons/react/24/outline'
+import { CheckIcon, MinusCircleIcon, ArrowPathIcon } from '@heroicons/react/24/outline'
 import { TokenList } from '@uniswap/token-lists'
 import CloseIcon from 'components/CloseIcon'
 import ListLogo from 'components/ListLogo'
 import { HeadlessUiModal } from 'components/Modal'
-import Popover from 'components/Popover'
 import Switch from 'components/Switch'
 import Typography from 'components/Typography'
 import { UNSUPPORTED_LIST_URLS } from 'constants/token-lists'
@@ -90,7 +89,7 @@ const ListRow: FC<{ listUrl: string }> = memo(({ listUrl }) => {
       key={listUrl}
     >
       <div className="flex gap-3">
-        {list.logoURI && <ListLogo size="40px" logoURI={list.logoURI} alt={`${list.name} list logo`} />}
+        {list.logoURI && <ListLogo size={'40'} logoURI={list.logoURI} alt={`${list.name} list logo`} />}
         <div className="flex flex-col">
           <Typography
             weight={700}
@@ -291,7 +290,7 @@ const ManageLists: FC = () => {
           <div className="flex justify-between">
             <div className="flex gap-3">
               {tempList?.logoURI && (
-                <ListLogo size="40px" logoURI={tempList.logoURI} alt={`${tempList.name} list logo`} />
+                <ListLogo size={'40'} logoURI={tempList.logoURI} alt={`${tempList.name} list logo`} />
               )}
               <div className="flex flex-col">
                 <Typography weight={700} className={classNames('text-primary overflow-hidden overflow-ellipsis')}>

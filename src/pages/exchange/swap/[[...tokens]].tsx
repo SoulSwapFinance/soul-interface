@@ -39,7 +39,7 @@ import { NextSeo } from 'next-seo'
 
 import { VoteBanner } from 'components/Banner'
 
-const Swap = () => {
+const Exchange = () => {
   const loadedUrlParams = useDefaultsFromURLSearch()
   const { account, chainId } = useActiveWeb3React()
   const defaultTokens = useAllTokens()
@@ -686,5 +686,5 @@ const Swap = () => {
   )
 }
 
-Swap.Layout = SwapLayout('swap-page')
-export default Swap
+Exchange.Layout = SwapLayout('swap-page')
+export default Exchange

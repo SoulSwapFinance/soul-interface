@@ -39,7 +39,9 @@ const Desktop = () => {
     <Image
         // src={'/favicon.png'} 
         src={`/SoulSwap-Finance-Banner.png`}
-        height={48} width={224}
+        height={48}
+        width={224}
+        priority={true}
         // objectFit="contain"
         alt={"soulswap text banner"}
     />
