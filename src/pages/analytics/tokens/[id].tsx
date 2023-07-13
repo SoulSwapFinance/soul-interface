@@ -239,8 +239,8 @@ export default function Token() {
               }}
               className="w-auto mt-4">
               {!success ? (
-                <RowFixed className="mx-auto rounded rounded-xl space-x-2">
-                  <CurrencyLogo className="rounded-full bg-dark-1000 rounded rounded-xl p-1"
+                <RowFixed className="mx-auto rounded-xl space-x-2">
+                  <CurrencyLogo className="rounded-full bg-dark-1000 rounded-xl p-1"
                     currency={currency} size={60}
                   />
                   <div className="flex items-center space-x-4 md:space-x-8">

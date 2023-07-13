@@ -49,7 +49,7 @@ export default function CurrencySelectPanel({
           >
             <div className="flex">
               {currency ? (
-                <CurrencyLogo currency={currency} size={'54px'} />
+                <CurrencyLogo currency={currency} size={54} />
               ) : (
                 <div className="rounded bg-dark-700" style={{ maxWidth: 54, maxHeight: 54 }}>
                   <div style={{ width: 54, height: 54 }}>

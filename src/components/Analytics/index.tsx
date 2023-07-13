@@ -320,76 +320,7 @@ export default function Analytics({ inputCurrency, outputCurrency }: AnalyticsPr
           />
             
         }
-        {/* <div className={'flex flex-1 h-[300px]'}>
-        {isLoading ? (
-          <div className="w-24 h-[300px] pb-4 flex m-auto flex-col items-center justify-center">
-          <div className="text-xl font-black text-gray-200">Loading...</div>
-          </div>
-          ) : hasData ? (
-            <KChart options={options} autoWidth height={300} candlestickSeries={candlestickSeries} />
-            ) : (
-              <div className="h-[300px] pb-4 flex m-auto flex-col items-center justify-center">
-              <div className="text-sm font-black text-gray-200">
-              {`Unfortunately, this pair doesn't have enough data.`}
-              </div>
-              </div>
-            )} */}
       </div>
-      {/* <div className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2">
-      <div className="hidden sm:flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2">
-      <CurrencyLogo currency={outputCurrency} size={'30px'} className={'shadow'} />
-      <div className="text-lg font-medium text-h">/</div>
-      <CurrencyLogo currency={inputCurrency} size={'30px'} className={'shadow'} />
-      </div>
-      <a
-        href={`https://charts.soul.sh/pair/${pairAddress}`}
-        target="_blank"
-        rel="noreferrer"
-        className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2"
-      >
-        <div className="flex items-center space-x-2">
-        <div className="text-lg font-medium text-h">ANALYTICS</div>
-        </div>
-      </a> */}
-
-      {/* CREATE PAIR OPTION  */}
-
-      {/* {inputCurrency?.isNative ?
-        <a
-          href={`https://app.soulswap.finance/add/FTM/${outputCurrency.address}`}
-          target="_blank"
-          rel="noreferrer"
-          className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2"
-        >
-          <div className="flex items-center space-x-2">
-          <div className="text-lg font-medium text-h">CREATE PAIR</div>
-          </div>
-        </a>
-        : outputCurrency?.isNative ?
-          <a
-            href={`https://app.soulswap.finance/add/${inputCurrency.address}/FTM`}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2"
-          >
-            <div className="flex items-center space-x-2">
-            <div className="text-lg font-medium text-h">CREATE PAIR</div>
-            </div>
-          </a>
-          : inputCurrency?.isToken  && outputCurrency?.isToken ?
-          <a
-            href={`https://app.soulswap.finance/add/${inputCurrency.address}/${outputCurrency.address}`}
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center justify-center space-x-4 lg:mt-0 hover:text-gray-200 cursor-pointer rounded p-2 -ml-2"
-          >
-            <div className="flex items-center space-x-2">
-            <div className="text-lg font-medium text-h">CREATE PAIR</div>
-            </div>
-          </a>
-        :   'https://app.soulswap.finance/add/NATIVE[chainId]/SOUL_ADDRESS[chainId]'
-    } */}
-      {/* </div> */}
     </>
   )
 }

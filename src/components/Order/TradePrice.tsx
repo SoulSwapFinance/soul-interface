@@ -1,8 +1,8 @@
 import React, { useCallback } from "react";
 import { Price, Currency } from "sdk";
-import { Text } from "rebass";
 import styled from "styled-components";
 import useTheme from "../../hooks/useTheme";
+import Typography from "components/Typography";
 
 interface TradePriceProps {
   price: Price<Currency, Currency>;
@@ -63,13 +63,14 @@ export default function TradePrice({
       <div
         style={{ alignItems: "center", display: "flex", width: "fit-content" }}
       >
-        <Text
-          fontWeight={fontWeight ?? 500}
-          fontSize={fontSize ?? 14}
+        <Typography
+          // fontWeight={fontWeight ?? 500}
+          // fontSize={fontSize ?? 14}
+          size={fontSize ?? 14}
           color={theme.text1}
         >
           {text}
-        </Text>
+        </Typography>
       </div>
     </StyledPriceContainer>
   );

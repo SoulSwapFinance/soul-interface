@@ -136,7 +136,7 @@ export function CampaignCard({
           <Flex flexDirection="column">
             {isSingleSidedStakingCampaign ? (
               <CurrencyLogo 
-              size={'30px'} 
+              size={30}
             //   marginRight={14} 
             //   currency={token0} 
               />

@@ -17,7 +17,7 @@ export type LogoProps = {
 /**
  * Renders an image by sequentially trying a list of URIs, and then eventually a fallback triangle alert
  */
-const Logo: FC<LogoProps> = ({ srcs, width, height, alt = '', className, ...rest }) => {
+const Logo: FC<LogoProps> = ({ srcs, width = 24, height = 24, alt = '', className, ...rest }) => {
   const [, refresh] = useState<number>(0)
   const src = srcs.find((src) => !BAD_SRCS[src])
   return (

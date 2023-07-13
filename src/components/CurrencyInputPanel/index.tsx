@@ -94,7 +94,7 @@ export default function CurrencyInputPanel({
                 <DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={54} margin={true} />
               ) : currency ? (
                 <div className="flex items-center">
-                  <CurrencyLogo currency={currency} size={'54px'} />
+                  <CurrencyLogo currency={currency} size={54} />
                 </div>
               ) : (
                 <div className="rounded bg-dark-700" style={{ maxWidth: 54, maxHeight: 54 }}>

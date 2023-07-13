@@ -351,7 +351,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
           <DetailsContainer>
             <DetailsWrapper>
               <Modal
-                isCustom={true}
+                // isCustom={true}
                 isOpen={showing}
                 onDismiss={() => handleShowOptions()}
               >

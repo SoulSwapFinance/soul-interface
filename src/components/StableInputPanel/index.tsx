@@ -94,7 +94,7 @@ export default function StableInputPanel({
                 <DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={54} margin={true} />
               ) : currency && showLogo ? (
                 <div className="flex items-center bg-dark-1000">
-                  <CurrencyLogo currency={currency} size={'54px'} />
+                  <CurrencyLogo currency={currency} size={54} />
                 </div>
               ) : showLogo && (
                 <div className="rounded bg-dark-1000 max-w-[54px] max-h-[54px]">

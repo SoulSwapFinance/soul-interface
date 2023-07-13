@@ -754,7 +754,7 @@ const Limit = () => {
                               <span style={{ display: "flex", alignItems: "center" }}>
                                 <CurrencyLogo
                                   currency={currencyA}
-                                  size={"20px"}
+                                  size={20}
                                   style={{ marginRight: "8px", flexShrink: 0 }}
                                 />
                                 {/* we need to shorten this string on mobile */}

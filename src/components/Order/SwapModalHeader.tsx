@@ -1,34 +1,33 @@
-import React, { Dispatch, useState, useEffect } from "react";
-import { SetStateAction } from "react";
-import { Currency, TradeType } from "sdk";
-import { Trade } from "sdk";
-import { ArrowDown, AlertTriangle } from "react-feather";
-import { Text } from "rebass";
-import styled from "styled-components";
-// import { useUSDCValue } from "../../hooks/useUSDCPrice";
-import { TYPE } from "../../theme";
-import { ButtonPrimary } from "../Button";
-// import { isAddress, shortenAddress } from "../../utils";
-// import { computeFiatValuePriceImpact } from "../../utils/computeFiatValuePriceImpact";
-import { AutoColumn } from "../Column";
-// import { FiatValue } from "../CurrencyInputPanel/FiatValue";
-import { CurrencyLogo } from "../CurrencyLogo";
-import { RowBetween, RowFixed } from "../Row";
+import React, { Dispatch, useState, useEffect } from "react"
+import { SetStateAction } from "react"
+import { Currency, TradeType } from "sdk"
+import { Trade } from "sdk"
+import { ArrowDown, AlertTriangle } from "react-feather"
+import styled from "styled-components"
+// import { useUSDCValue } from "../../hooks/useUSDCPrice"
+import { TYPE } from "../../theme"
+import { ButtonPrimary } from "../Button"
+// import { isAddress, shortenAddress } from "../../utils"
+// import { computeFiatValuePriceImpact } from "../../utils/computeFiatValuePriceImpact"
+import { AutoColumn } from "../Column"
+// import { FiatValue } from "../CurrencyInputPanel/FiatValue"
+import { CurrencyLogo } from "../CurrencyLogo"
+import { RowBetween, RowFixed } from "../Row"
 import {
   TruncatedText,
   SwapShowAcceptChanges,
   DisclaimerText,
-} from "./styleds";
-import { AdvancedSwapDetails } from "./AdvancedSwapDetails";
-import LightCard from "../Card";
-import DarkGreyCard from "../Card";
-// import TradePrice from "../order/TradePrice";
-import useTheme from "../../hooks/useTheme";
-// import Toggle from "react-styled-toggle";
-import TradePrice from "features/swap/TradePrice";
-import useGelatoLimitOrders from "hooks/gelato/useGelatoLimitOrders";
-import { Toggle } from "components/Toggle";
-import Typography from "components/Typography";
+} from "./styleds"
+import { AdvancedSwapDetails } from "./AdvancedSwapDetails"
+import LightCard from "../Card"
+import DarkGreyCard from "../Card"
+// import TradePrice from "../order/TradePrice"
+import useTheme from "../../hooks/useTheme"
+// import Toggle from "react-styled-toggle"
+import TradePrice from "features/swap/TradePrice"
+import useGelatoLimitOrders from "hooks/gelato/useGelatoLimitOrders"
+import { Toggle } from "components/Toggle"
+import Typography from "components/Typography"
 
 export const AnimatedCard = styled(LightCard)<{ expand: boolean }>`
   padding: 0.75rem;
@@ -101,7 +100,7 @@ export default function SwapModalHeader({
             <RowFixed gap={"12px"}>
               <CurrencyLogo
                 currency={inputAmount.currency}
-                size={"36px"}
+                size={36}
                 style={{ marginRight: "12px" }}
               />
               <Typography className={"flex m-2 text-lg sm:text-xl font-bold"}>
@@ -137,7 +136,7 @@ export default function SwapModalHeader({
             <RowFixed gap={"12px"}>
               <CurrencyLogo
                 currency={outputAmount.currency}
-                size={"36px"}
+                size={36}
                 style={{ marginRight: "12px" }}
               />
               <Typography className={"flex m-2 text-lg sm:text-xl font-bold"}>
