@@ -61,7 +61,7 @@ const ImportList: FC = () => {
       <HeadlessUiModal.BorderedContent className="bg-[rgba(0,0,0,0.2)]">
         <div className="flex gap-3">
           {importList?.logoURI && (
-            <ListLogo size="40px" logoURI={importList.logoURI} alt={`${importList.name} list logo`} />
+            <ListLogo size={40} logoURI={importList.logoURI} alt={`${importList.name} list logo`} />
           )}
           <div className="flex flex-col">
             <Typography weight={700} className={classNames('text-primary overflow-hidden overflow-ellipsis')}>

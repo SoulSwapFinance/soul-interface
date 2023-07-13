@@ -22,7 +22,7 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
 
   const link = (
     <NavLink href="/swap">
-      <a className={`text-${getChainColorCode(chainId)} focus:outline-none`}>{`Return`}</a>
+      <Typography className={`text-${getChainColorCode(chainId)} focus:outline-none`}>{`Return`}</Typography>
     </NavLink>
   )
 

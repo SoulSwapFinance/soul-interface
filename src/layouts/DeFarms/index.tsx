@@ -29,19 +29,7 @@ const Layout: FC<LayoutProps> = ({ left, children, right }) => {
       <Main>
         <Container className="px-4 py-4 md:py-8 lg:py-12" maxWidth="7xl">
           <div className={`mb-2 grid grid-cols-12 gap-4`}>
-            {/* <div className="flex justify-center col-span-12 md:hidden">
-              <Link href="/defarms">
-                <a className="flex justify-center xl:justify-start xl:mx-8">
-                  <Image 
-                    src= { IMG }
-                    alt="defarms" 
-                    height={128} 
-                    width={400} 
-                    placeholder="empty" 
-                  />
-                </a>
-              </Link>
-            </div> */}
+            {/* {'DeFarms'} */}
           </div>
           <div className="flex items-end col-span-12 xl:col-span-9">
             <nav className="flex items-center justify-between w-full">

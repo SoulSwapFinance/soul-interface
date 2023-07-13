@@ -100,8 +100,14 @@ const ManageTokens: FC = () => {
           <Typography variant="xs" weight={700} className="text-secondary">
             {userAddedTokens?.length} Custom {userAddedTokens.length === 1 ? 'Token' : 'Tokens'}
           </Typography>
-          <Button variant="outlined" color="blue" size="xs" onClick={handleRemoveAll}>
-            {`Clear all`}
+          <Button 
+            variant="outlined"
+            color="blue" 
+            size="xs" 
+            onClick={handleRemoveAll}
+            className={'text-white'}
+          >
+            {`Clear`}
           </Button>
         </div>
         <div className="divide-y divide-dark-800">{tokenList}</div>

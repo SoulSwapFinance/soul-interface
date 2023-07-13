@@ -89,7 +89,7 @@ const ListRow: FC<{ listUrl: string }> = memo(({ listUrl }) => {
       key={listUrl}
     >
       <div className="flex gap-3">
-        {list.logoURI && <ListLogo size={'40'} logoURI={list.logoURI} alt={`${list.name} list logo`} />}
+        {list.logoURI && <ListLogo size={40} logoURI={list.logoURI} alt={`${list.name} list logo`} />}
         <div className="flex flex-col">
           <Typography
             weight={700}
@@ -101,41 +101,6 @@ const ListRow: FC<{ listUrl: string }> = memo(({ listUrl }) => {
             </Typography>
           </Typography>
           <div className="flex gap-1 items-center">
-
-            {/* <Popover
-              placement="bottom-start"
-              content={
-                <div className="flex flex-col gap-1 border rounded shadow bg-dark-900 border-dark-700 p-3">
-                  <a href={`https://tokenlists.org/token-list?url=${listUrl}`}>
-                    <Typography variant="sm" weight={700} className="text-blue flex items-center gap-1">
-                      {`View list`}
-                      <LinkIcon width={16} />
-                    </Typography>
-                  </a>
-                  <Typography
-                    role="button"
-                    variant="sm"
-                    weight={700}
-                    onClick={handleRemoveList}
-                    disabled={Object.keys(listsByUrl).length === 1}
-                    className="hover:text-white cursor-pointer disabled:cursor-default"
-                  >
-                    {`Remove list`}
-                  </Typography>
-                  <Typography
-                    role="button"
-                    variant="sm"
-                    weight={700}
-                    onClick={handleAcceptListUpdate}
-                    className="hover:text-white cursor-pointer disabled:cursor-default"
-                  >
-                    {`Update list`}
-                  </Typography>
-                </div>
-              }
-            >
-              <Settings size={12} className="text-high-emphesis cursor-pointer hover:text-white" />
-            </Popover> */}
             <MinusCircleIcon
               className={'w-4 mt-1 hover:border-ftmBlue border rounded'} 
               onClick={handleRemoveList}
@@ -290,7 +255,7 @@ const ManageLists: FC = () => {
           <div className="flex justify-between">
             <div className="flex gap-3">
               {tempList?.logoURI && (
-                <ListLogo size={'40'} logoURI={tempList.logoURI} alt={`${tempList.name} list logo`} />
+                <ListLogo size={40} logoURI={tempList.logoURI} alt={`${tempList.name} list logo`} />
               )}
               <div className="flex flex-col">
                 <Typography weight={700} className={classNames('text-primary overflow-hidden overflow-ellipsis')}>

@@ -51,64 +51,7 @@ export const PoolBalances = ({ account }: { account: string }) => {
             <div className="px-4 py-2">{`Add Liquidity & Earn Fees (0.25%)`}</div>
           </Empty>
         )}
-        {/* {account && (
-          <div className={classNames('grid gap-4', 'grid-cols-2')}>
-            <Button
-              id="add-pool-button"
-              variant="filled"
-              color="gradient"
-              className="grid items-center justify-center grid-flow-col gap-2 whitespace-nowrap"
-              onClick={() => router.push(`/exchange/add/${currencyId(NATIVE[chainId])}/${SOUL_ADDRESS[chainId]}`}
-            >
-              {`Add`}
-            </Button>
-            <Button
-              id="add-pool-button"
-              variant="filled"
-              color="gradient"
-              onClick={() => router.push(`/exchange/find`}
-            >
-              {`Import`}
-            </Button>
-
-          </div>
-        )}
-           */}
       </div>
     </div>
   )
 }
-
-  // const assets = balances.reduce<Assets[]>((acc, el) => {
-  //   if (el) acc.push({ asset: el })
-  //   return acc
-  // }, [])
-
-  // const handleRowClick = useCallback(
-  //   (row) => {
-  //     const { currency } = row.values.asset
-  //     dispatch(
-  //       setBalancesState({
-  //         currency: currency,
-  //         // currency.isNative ? NATIVE[chainId].symbol : row.values.asset.currency.address,
-  //         activeModal: ActiveModal.WITHDRAW,
-  //       })
-  //     )
-  //   },
-  //   [dispatch]
-  // )
-
-  // const { config } = useBasicTableConfig(assets, loading)
-
-  // return (
-  //   <div className="flex flex-col gap-3">
-  //     <Button color="blue" >
-  //     <Typography weight={700} variant="lg"
-  //       className="px-2 text-center text-high-emphesis">
-  //       {`Pool Balances`}
-  //     </Typography>
-  //     </Button>
-  //     <PoolBalances />
-  //     {/* <AssetBalances config={config} onSelect={handleRowClick} /> */}
-  //   </div>
-  // )

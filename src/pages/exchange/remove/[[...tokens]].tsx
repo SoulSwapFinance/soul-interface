@@ -759,6 +759,7 @@ export default function Remove() {
                       <RowBetween className="text-sm">
                         {oneCurrencyIsETH ? (
                           <Link
+                            legacyBehavior={true}
                             href={`/exchange/remove/${currencyA == NATIVE[chainId] ? WNATIVE[chainId].address : currencyIdA}/${currencyB == NATIVE[chainId] ? WNATIVE[chainId].address : currencyIdB
                               }`}
                           >
@@ -768,6 +769,7 @@ export default function Remove() {
                           </Link>
                         ) : oneCurrencyIsWETH ? (
                           <Link
+                            legacyBehavior={true}
                             href={`/exchange/remove/${currencyA?.equals(WNATIVE[chainId]) ? NATIVE[chainId].symbol : currencyIdA}/${currencyB?.equals(WNATIVE[chainId]) ? NATIVE[chainId].symbol : currencyIdB
                               }`}
                           >
@@ -783,14 +785,14 @@ export default function Remove() {
 
                 <div className="flex flex-col space-y-3 md:flex-row md:space-x-6 md:space-y-0">
                   <div className="flex flex-row items-center w-full p-3 pr-8 space-x-3 rounded bg-dark-900">
-                    <CurrencyLogo currency={currencyA} size="46px" />
+                    <CurrencyLogo currency={currencyA} size={46} />
                     <AutoColumn>
                       <div className="text-white">{formattedAmounts[Field.CURRENCY_A] || '-'}</div>
                       <div className="text-sm">{currencyA?.symbol}</div>
                     </AutoColumn>
                   </div>
                   <div className="flex flex-row items-center w-full p-3 pr-8 space-x-3 rounded bg-dark-900">
-                    <CurrencyLogo currency={currencyB} size="46px" />
+                    <CurrencyLogo currency={currencyB} size={46} />
                     <AutoColumn>
                       <div className="text-white">{formattedAmounts[Field.CURRENCY_B] || '-'}</div>
                       <div className="text-sm">{currencyB?.symbol}</div>
@@ -811,8 +813,9 @@ export default function Remove() {
                 {`Connect Wallet`}
               </Button>
             ) : (
-              <div className="grid grid-cols-2 gap-4">
+              <div className="text-white grid grid-cols-2 gap-4">
                 <ButtonConfirmed
+                  className={'text-white'}
                   onClick={onAttemptToApprove}
                   confirmed={approval === ApprovalState.APPROVED || signatureData !== null}
                   disabled={approval !== ApprovalState.NOT_APPROVED || signatureData !== null}
@@ -849,32 +852,6 @@ export default function Remove() {
             />
           }
           </div>
-
-          {/* </div> */}
-          {/* <div className={"grid grid-cols-2 gap-2 text-white justify-center m-2"}>
-            <NavLink href="/pool">
-              <Button
-                variant={'filled'}
-                color={`${getChainColorCode(chainId)}`}
-                primaryColor={'black'}
-              >
-                <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
-                  <span>{`View Positions`}</span>
-                </a>
-              </Button>
-            </NavLink>
-            <NavLink href="/analytics">
-              <Button
-                variant={'filled'}
-                color={`${getChainColorCode(chainId)}`}
-                primaryColor={'black'}
-              >
-                <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
-                  <span>{`View Analytics`}</span>
-                </a>
-              </Button>
-            </NavLink>
-          </div>  */}
           <PairChart
             inputCurrency={currencyA} 
             outputCurrency={currencyB}

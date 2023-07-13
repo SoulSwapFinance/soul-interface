@@ -290,21 +290,21 @@ const HideOnMobile = styled.div`
 </HideOnMobile>
       <div className="flex ml-4 mr-4 mb-4 gap-1 items-center justify-center">
         <Button variant="filled" color="gold" size="lg">
-          <NavLink href={'/luxor/stake'}>
+          <NavLink legacyBehavior={true} href={'/luxor/stake'}>
             <a className="block text-lg md:text-xl text-black font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Stake </span>
             </a>
           </NavLink>
         </Button>
         <Button variant="filled" color="gold" size="lg">
-          <NavLink href={'/luxor/bonds'}>
+          <NavLink legacyBehavior={true} href={'/luxor/bonds'}>
             <a className="block text-lg md:text-xl text-black font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Bond </span>
             </a>
           </NavLink>
         </Button>
         <Button variant="filled" color="gold" size="lg">
-          <NavLink href={'/luxor/wrap'}>
+          <NavLink legacyBehavior={true} href={'/luxor/wrap'}>
             <a className="block text-lg md:text-xl text-black font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Wrap </span>
             </a>

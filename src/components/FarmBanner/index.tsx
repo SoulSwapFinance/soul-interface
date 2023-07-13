@@ -15,11 +15,7 @@ const FarmBanner: FC = () => {
                 <span className="md:hidden text-center font-bold">WITHDRAW FEES NOW REMOVED</span>
                 <span className="hidden md:inline font-bold">We now have ZERO FEES for farming.</span>
                 <span className="block sm:ml-2 sm:inline-block">
-                  {/* <a href="https://twitter.com/SoulSwapFinance/status/1465633039262920707?s=20" target = "_blank" rel="noreferrer"
-      className="font-bold text-white underline">
-                    {' '}
-                    Read Full Details <span aria-hidden="true">&rarr;</span> */}
-                  {/* </a> */}
+                  {''}
                 </span>
               </p>
               <XCircleIcon className='h-5 w-5 text-gray-300 hover:text-white absolute right-3 top-3' onClick={toggle} />

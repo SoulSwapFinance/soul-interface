@@ -242,8 +242,11 @@ export default function FullPositionCard({ chainId, pair, border, stakedBalance 
                         }}
                       >
                         {/* {`Remove`} */}
-                        {`-`}
-                      </Button>
+                        <Typography
+                          className={`text-white`}
+                        >
+                        {`-`}  
+                        </Typography>                      </Button>
                       <Button
                         startIcon={<PlusIcon width={14} height={14} />}
                         size="sm"
@@ -254,7 +257,11 @@ export default function FullPositionCard({ chainId, pair, border, stakedBalance 
                         }}
                       >
                         {/* {`Add`} */}
-                        {`+`}
+                        <Typography
+                          className={`text-white`}
+                        >
+                        {`+`}  
+                        </Typography>
                       </Button>
                     </div>
                   </div>

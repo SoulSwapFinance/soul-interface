@@ -135,7 +135,10 @@ export default function Explore() {
           <li key={luxorFeature.id} className="relative border gap-4 border-gold hover:border-yellow w-full p-4 rounded bg-dark-900 hover:bg-dark-800">
             <div className="flex justify-between space-y-4 space-x-4">
               <div className="flex-1 min-w-0">
-                <Link href={luxorFeature.href}>
+                <Link
+                  legacyBehavior={true}
+                  href={luxorFeature.href}
+                >
                   <a className="flex items-center justify-between focus:outline-none">
                     <span className="absolute inset-0" aria-hidden="true" />
                     <div className="space-y-1">
@@ -160,7 +163,10 @@ export default function Explore() {
           <li key={infinityFeature.id} className="relative border gap-4 border-pink hover:border-ftmBlue w-full p-4 rounded bg-dark-900 hover:bg-dark-800">
             <div className="flex justify-between space-y-4 space-x-4">
               <div className="flex-1 min-w-0">
-                <Link href={infinityFeature.href}>
+                <Link
+                  legacyBehavior={true}
+                  href={infinityFeature.href}
+                >
                   <a className="flex items-center justify-between focus:outline-none">
                     <span className="absolute inset-0" aria-hidden="true" />
                     <div className="space-y-1">

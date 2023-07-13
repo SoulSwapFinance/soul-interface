@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react'
 import { Currency, NATIVE, Percent } from '../../sdk'
 import NavLink from '../../components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
+import Typography from 'components/Typography'
 
 const getQuery = (input, output) => {
   const { chainId } = useActiveWeb3React()
@@ -32,9 +33,9 @@ const AnalyticsHeader: FC<AnalyticsHeaderProps> = ({ input, output, allowedSlipp
             query: getQuery(input, output),
           }}
         >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
+          <Typography className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis ">
             {`ALL`}
-          </a>
+          </Typography>
         </NavLink>
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple"
@@ -43,36 +44,36 @@ const AnalyticsHeader: FC<AnalyticsHeaderProps> = ({ input, output, allowedSlipp
           //   output ? `/${currencyId(output)}` : ''
         // }`}
         >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
+          <Typography className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
             {`WALLET`}
-          </a>
+          </Typography>
         </NavLink>
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple"
           href={"/info/tokens"}
           // href={`${output ? `https://charts.soul.sh/token/${currencyId(output)}` : ''}`}
         >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
+          <Typography className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
             {`TOKENS`}
-          </a>
+          </Typography>
         </NavLink>
         <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple"
           href={"/info/pairs"}
           // href={`${output ? `https://charts.soul.sh/token/${currencyId(output)}` : ''}`}
         >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
+          <Typography className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
             {`PAIRS`}
-          </a>
+          </Typography>
         </NavLink>
         {/* <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple"
           href={"/farms"}
           // href={`${output ? `https://charts.soul.sh/token/${currencyId(output)}` : ''}`}
         >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
+          <Typography className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
             {`Farm`}
-          </a>
+          </Typography>
         </NavLink> */}
       </div>
     </div>

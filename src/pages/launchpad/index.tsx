@@ -98,6 +98,7 @@ export default function Launchpad(): JSX.Element {
                       </a>
                     </NavLink>
                     <NavLink
+                      legacyBehavior={true}
                       exact
                       href={'/launchpad?filter=upcoming'}
                       activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-purple-dark-900"
@@ -107,6 +108,7 @@ export default function Launchpad(): JSX.Element {
                       </a>
                     </NavLink>
                     <NavLink
+                      legacyBehavior={true}
                       exact
                       href={'/launchpad?filter=completed'}
                       activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-purple-dark-900"
