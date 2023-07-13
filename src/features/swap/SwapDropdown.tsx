@@ -1,5 +1,4 @@
-import React, { FC
-} from 'react'
+import React, { FC } from 'react'
 import { ChainId, Currency, NATIVE, Percent, SOUL_ADDRESS, USDC_ADDRESS } from 'sdk'
 import NavLink from 'components/NavLink'
 import Settings from 'components/Settings'
