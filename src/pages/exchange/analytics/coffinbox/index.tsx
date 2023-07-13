@@ -1,7 +1,6 @@
 import Search from 'components/Search'
 import { Feature } from 'enums'
 import AnalyticsContainer from 'features/analytics/AnalyticsContainer'
-import Background from 'features/analytics/Background'
 import InfoCard from 'features/analytics/Bar/InfoCard'
 import TokenList from 'features/analytics/Tokens/TokenList'
 import { featureEnabled } from 'functions/feature'
@@ -10,8 +9,6 @@ import useFuse from 'hooks/useFuse'
 import { useCoffinBox, useNativePrice, useOneDayBlock, useOneWeekBlock, useTokens } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
 import React, { useMemo } from 'react'
-import { useUnderworldTokens } from 'features/lending/hooks'
-import { getChainColor, getChainColorCode } from 'constants/chains'
 import Link from 'next/link'
 import { TridentBody, TridentHeader } from 'layouts/Trident'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
@@ -29,7 +26,6 @@ export default function CoffinBox(): JSX.Element {
   const nativePrice = useNativePrice({ chainId })
   const nativePrice1d = useNativePrice({ chainId, variables: { block: block1d }, shouldFetch: !!block1d })
   const nativePrice1w = useNativePrice({ chainId, variables: { block: block1w }, shouldFetch: !!block1w })
-  const allTokens = useUnderworldTokens()
 
   // Get exchange data
   const tokens = useTokens({ chainId })

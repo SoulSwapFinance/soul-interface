@@ -1,18 +1,14 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Feature } from 'enums'
 import ActionsModal from 'features/portfolio/ActionsModal'
 import { CoffinBalances, WalletBalances } from 'features/portfolio/AssetBalances/coffinAndWallet'
 import HeaderDropdown from 'features/portfolio/HeaderDropdown'
 import { classNames, featureEnabled } from 'functions'
 import TridentLayout, { TridentBody, TridentHeader } from 'layouts/Trident'
-import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
 import React from 'react'
 import { useActiveWeb3React } from 'services/web3'
 
 const Accounts = () => {
-  const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
 
   // const router = useRouter()
@@ -24,7 +20,7 @@ const Accounts = () => {
 
   return (
     <>
-      <NextSeo title={`${i18n._(t`Account`)} ${account}`} />
+      <NextSeo title={`${`Account`} ${account}`} />
       <TridentHeader pattern="bg-chevron">
         <HeaderDropdown account={account} 
         // chainId={chainId} 

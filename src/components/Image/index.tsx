@@ -44,6 +44,7 @@ const Image = ({ src, width = undefined, height = undefined, layout = undefined,
           layout={layout}
           placeholder="blur"
           blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(width, height))}`}
+          alt={''}
           {...rest}
         />
       ) : (
@@ -54,6 +55,7 @@ const Image = ({ src, width = undefined, height = undefined, layout = undefined,
           height={height}
           layout={layout}
           placeholder="empty"
+          alt={''}
           {...rest}
         />
       )}

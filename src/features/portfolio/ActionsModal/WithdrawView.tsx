@@ -1,7 +1,5 @@
 import { parseUnits } from '@ethersproject/units'
 import { ArrowDownIcon } from '@heroicons/react/24/solid'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Rebase, JSBI, ZERO } from 'sdk'
 import AssetInput from 'components/AssetInput'
 import { Button } from 'components/Button'
@@ -31,7 +29,6 @@ const WithdrawView: FC<WithdrawViewProps> = ({ onClose, onBack }) => {
   const { withdraw } = useCoffinBox()
   const { rebases } = useCoffinRebases([currency?.wrapped])
   const [inputState, setInputState] = useState<{ value?: string; isMax: boolean }>({ value: undefined, isMax: false })
-  const { i18n } = useLingui()
 
   const valueCA = currency ? tryParseAmount(inputState.value, currency) : undefined
   let valuePlusBalance = valueCA?.wrapped
@@ -65,21 +62,21 @@ const WithdrawView: FC<WithdrawViewProps> = ({ onClose, onBack }) => {
   }, [currency, inputState.value, inputState.isMax, withdraw, rebases, onClose])
 
   const error = !account
-    ? i18n._(t`Connect Wallet`)
+    ? `Connect Wallet`
     : !valueCA?.greaterThan(ZERO)
-    ? i18n._(t`Enter Amount`)
+    ? `Enter Amount`
     : !coffinBalance
-    ? i18n._(t`Loading balance`)
+    ? `Loading balance`
     : valueCA?.greaterThan(coffinBalance)
-    ? i18n._(t`Insufficient ${valueCA.currency.symbol} balance`)
+    ? `Insufficient ${valueCA.currency.symbol} balance`
     : ''
 
   const disabled = !!error || attemptingTxn
-  const buttonText = error ? error : i18n._(t`Confirm Withdrawal`)
+  const buttonText = error ? error : `Confirm Withdrawal`
 
   return (
     <div className="flex flex-col gap-4">
-      <HeadlessUiModal.Header header={i18n._(t`Withdraw to Wallet`)} onClose={onClose} onBack={onBack} />
+      <HeadlessUiModal.Header header={`Withdraw to Wallet`} onClose={onClose} onBack={onBack} />
       <AssetInput
         chainId={chainId}
         title={''}
@@ -90,7 +87,7 @@ const WithdrawView: FC<WithdrawViewProps> = ({ onClose, onBack }) => {
         showMax={false}
       />
       <div className="z-10 flex justify-center -mt-6 -mb-6">
-        <div className="p-1.5 rounded-full bg-dark-800 border border-dark-800 shadow-md border-dark-700">
+        <div className="p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700">
           <ArrowDownIcon width={14} className="text-high-emphesis" />
         </div>
       </div>
@@ -103,7 +100,7 @@ const WithdrawView: FC<WithdrawViewProps> = ({ onClose, onBack }) => {
             {(valuePlusBalance || walletBalance)?.toSignificant(6)}
           </Typography>
           <Typography variant="xxs" className="text-secondary">
-            {i18n._(t`In Wallet`)}
+            {`In Wallet`}
           </Typography>
         </div>
       </HeadlessUiModal.BorderedContent>

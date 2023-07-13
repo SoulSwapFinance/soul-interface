@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import Container from 'components/Container'
 import Head from 'next/head'
 import Typography from 'components/Typography'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Tab } from '@headlessui/react'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { Button } from 'components/Button'
@@ -21,17 +19,9 @@ import { useAutoStakeInfo, useTokenInfo, useUserAutoStakeInfo } from 'hooks/useA
 import { SubmitButton } from 'features/autostake/Styles'
 import Image from 'next/image'
 import STAKE_BANNER from 'assets/branding/stake-banner.png'
-// import { getChainColor } from 'constants/chains'
-// import TokenStats from 'components/TokenStats'
 import { Feature } from 'enums'
 
-
-// import { useTransactionAdder } from 'state/transactions/hooks'
-// import { useSoulPrice } from 'hooks/getPrices'
-// import ExternalLink from 'components/ExternalLink'
-
 export default function AutoStake() {
-  const { i18n } = useLingui()
   const [stakeValue, setStakeValue] = useState('0')
   const { account, chainId } = useActiveWeb3React()
   const [withdrawValue, setWithdrawValue] = useState('0')
@@ -233,7 +223,7 @@ export default function AutoStake() {
                     } flex items-center justify-center rounded-lg px-3 py-1.5 semi-bold font-semibold hover:border-2 hover:border-purple`
                   }
                 >
-                  {i18n._(t`Deposit`)}
+                  {`Deposit`}
                 </Tab>
                 <Tab
                   className={({ selected }) =>
@@ -241,7 +231,7 @@ export default function AutoStake() {
                 } flex items-center justify-center rounded-lg px-3 py-1.5 semi-bold font-semibold hover:border-2 hover:border-purple`
                   }
                 >
-                  {i18n._(t`Withdraw`)}
+                  {`Withdraw`}
                 </Tab>
               </div>
             </Tab.List>
@@ -265,7 +255,7 @@ export default function AutoStake() {
 
               <div className="flex justify-between">
                 <Typography className="text-white" fontFamily={'medium'}>
-                  {i18n._(t`Ritual (Fee) Duration`)}
+                  {`Ritual (Fee) Duration`}
                 </Typography>
                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                   {feeDays} days
@@ -284,7 +274,7 @@ export default function AutoStake() {
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-purple w-full space-y-1">
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Staked`)}
+                    {`Staked`}
                   </Typography>
                   <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
                     {formatNumber(stakedBal - earnedAmount, false, true)} SOUL ({formatNumber(stakedValue, true, true)})
@@ -292,7 +282,7 @@ export default function AutoStake() {
                 </div>
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Rewards`)}
+                    {`Rewards`}
                   </Typography>
                   <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
                     {formatNumber(earnedAmount, false, true)} SOUL ({formatNumber(earnedValue, true, true)})
@@ -300,7 +290,7 @@ export default function AutoStake() {
                 </div>
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Compound Bounty`)}
+                    {`Compound Bounty`}
                   </Typography>
                   <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
                     {formatNumber(bounty, false, true)} SOUL
@@ -321,9 +311,9 @@ export default function AutoStake() {
                   // style={{ width: '100%' }}
                   >
                     {stakeApprovalState === ApprovalState.PENDING ? (
-                      <Dots>{i18n._(t`Approving`)}</Dots>
+                      <Dots>{`Approving`}</Dots>
                     ) : (
-                      i18n._(t`APPROVE`)
+                      `APPROVE`
                     )}
                   </SubmitButton>
                 ) : (
@@ -368,7 +358,7 @@ export default function AutoStake() {
 
               <div className="flex justify-between">
                 <Typography className="text-white" fontFamily={'medium'}>
-                  {i18n._(t`Until Salvation`)}
+                  {`Until Salvation`}
                 </Typography>
                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                   {Number(remainingHours) > 0 ? remainingHours.toFixed(0) : 0} hours
@@ -387,7 +377,7 @@ export default function AutoStake() {
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-purple w-full space-y-1">
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Staked`)}
+                    {`Staked`}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     {formatNumber(stakedBal - earnedAmount, false, true)} SOUL
@@ -395,8 +385,8 @@ export default function AutoStake() {
                 </div>
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {/* {i18n._(t`Sacrifice`)} ({withdrawFeeRate.toFixed(2)}%) */}
-                    {i18n._(t`Sacrifice`)}
+                    {/* {`Sacrifice`} ({withdrawFeeRate.toFixed(2)}%) */}
+                    {`Sacrifice`}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     {formatNumber(feeAmount, false, true)} SOUL
@@ -404,7 +394,7 @@ export default function AutoStake() {
                 </div>
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Salvation`)}
+                    {`Salvation`}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     {unlockTime}

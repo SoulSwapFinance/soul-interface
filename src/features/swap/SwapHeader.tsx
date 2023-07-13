@@ -1,16 +1,11 @@
 import React, { FC, useState } from 'react'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { ChainId, Currency, NATIVE, Percent, SOUL_ADDRESS, USDC_ADDRESS } from 'sdk'
 import NavLink from 'components/NavLink'
 import Settings from 'components/Settings'
-// import CrossChainMode from 'components/CrossChainMode'
 import Typography from 'components/Typography'
 import { useRouter } from 'next/router'
 import { classNames, currencyId, featureEnabled } from '../../functions'
-// import ExternalLink from 'components/ExternalLink'
 import { useActiveWeb3React } from 'services/web3'
-// import { AVALANCHE, Chain, POLYGON, ETHEREUM, FANTOM, MOONRIVER } from 'features/cross/chains'
 import { Feature } from 'enums'
 
 const getQuery = (input?: Currency, output?: Currency) => {
@@ -30,7 +25,6 @@ interface HeaderProps {
 }
 
 const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
-  const { i18n } = useLingui()
   const { asPath } = useRouter()
   const { chainId } = useActiveWeb3React()
   const isRemove = asPath.startsWith('/remove')
@@ -64,7 +58,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             }}
           >
             <Typography weight={700} className={`text-secondary ml-3 hover:${hoverColor} p-1`}>
-              {i18n._(t`Swap`)}
+              {`Swap`}
             </Typography>
           </NavLink>
         }
@@ -78,7 +72,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               }`}
           >
             <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-              {i18n._(t`Pool`)}
+              {`Pool`}
             </Typography>
           </NavLink>
         }
@@ -88,7 +82,6 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               "border rounded bg-black",
               chainColor
             )}
-            // href=
 
             href={{
               pathname:`/exchange/limit/${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)}`,
@@ -97,7 +90,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             }}
           >
             <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-              {i18n._(t`Limit`)}
+              {`Limit`}
             </Typography>
           </NavLink>
         }
@@ -111,24 +104,9 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           }}
         >
           <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-            {i18n._(t`Cross`)}
+            {`Cross`}
           </Typography>
         </NavLink>
-        {/* { ![ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) && */}
-        <NavLink
-          activeClassName={classNames(
-            "border rounded bg-black",
-            chainColor
-          )}
-          href={{
-            pathname: '/bridge',
-          }}
-        >
-          <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-            {i18n._(t`Bridge`)}
-          </Typography>
-        </NavLink>
-        {/* } */}
         {/* <NavLink
           activeClassName={classNames(
             "border rounded bg-black",
@@ -139,7 +117,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           }}
         >
           <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-            {i18n._(t`Multi`)}
+            {`Multi`}
           </Typography>
         </NavLink> */}
         {/* {featureEnabled(Feature.AGGREGATE, chainId) &&
@@ -153,7 +131,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           }}
         >
           <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-            {i18n._(t`Eco`)}
+            {`Eco`}
           </Typography>
         </NavLink>
         } */}

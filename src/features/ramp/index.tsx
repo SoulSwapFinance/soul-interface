@@ -1,9 +1,7 @@
 import { ChainId } from '../../sdk'
 import { RampInstantSDK } from '@ramp-network/ramp-instant-sdk'
-import { t } from '@lingui/macro'
 import { useActiveWeb3React } from 'services/web3'
 import { useCallback } from 'react'
-import { useLingui } from '@lingui/react'
 
 const DEFAULT_NETWORK = {
   [ChainId.ETHEREUM]: 'ethereum'
@@ -15,7 +13,6 @@ const DEFAULT_CRYPTO_CURRENCY = {
 
 export default function Buy() {
   const { account, chainId } = useActiveWeb3React()
-  const { i18n } = useLingui()
   const onClick = useCallback(() => {
     if (!(chainId in DEFAULT_NETWORK)) {
       return
@@ -37,7 +34,7 @@ export default function Buy() {
       onClick={onClick}
       className="p-2 cursor-pointer text-baseline text-primary hover:text-high-emphesis focus:text-high-emphesis md:p-3 whitespace-nowrap"
     >
-      {i18n._(t`Buy`)}
+      {`Buy`}
     </a>
   )
 }

@@ -5,7 +5,6 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { Signature } from '@ethersproject/bytes'
 import { arrayify, DataOptions, hexlify, splitSignature } from '@ethersproject/bytes'
 import { AddressZero } from '@ethersproject/constants'
-import { t } from '@lingui/macro'
 import {
   Currency,
   ComplexPathParams,
@@ -499,28 +498,28 @@ export function swapErrorToUserReadableMessage(error: any): string {
 
   switch (reason) {
     case 'SoulSwapRouter: EXPIRED':
-      return t`The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low.`
+      return `The transaction could not be sent because the deadline has passed. Please check that your transaction deadline is not too low.`
     case 'SoulSwapRouter: INSUFFICIENT_OUTPUT_AMOUNT':
     case 'SoulSwapRouter: EXCESSIVE_INPUT_AMOUNT':
-      return t`This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance.`
+      return `This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance.`
     case 'TransferHelper: TRANSFER_FROM_FAILED':
-      return t`The input token cannot be transferred. There may be an issue with the input token.`
+      return `The input token cannot be transferred. There may be an issue with the input token.`
     case 'SoulSwapRouter: TRANSFER_FAILED':
-      return t`The output token cannot be transferred. There may be an issue with the output token.`
+      return `The output token cannot be transferred. There may be an issue with the output token.`
     case 'SoulSwapRouter: K':
-      return t`The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer.`
+      return `The Uniswap invariant x*y=k was not satisfied by the swap. This usually means one of the tokens you are swapping incorporates custom behavior on transfer.`
     case 'Too little received':
     case 'Too much requested':
     case 'STF':
-      return t`This transaction will not succeed due to price movement. Try increasing your slippage tolerance.`
+      return `This transaction will not succeed due to price movement. Try increasing your slippage tolerance.`
     case 'TF':
-      return t`The output token cannot be transferred. There may be an issue with the output token.`
+      return `The output token cannot be transferred. There may be an issue with the output token.`
     default:
       if (reason?.indexOf('undefined is not an object') !== -1) {
         console.error(error, reason)
-        return t`An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note fee on transfer and rebase tokens are incompatible with Uniswap V3.`
+        return `An error occurred when trying to execute this swap. You may need to increase your slippage tolerance. If that does not work, there may be an incompatibility with the token you are trading. Note fee on transfer and rebase tokens are incompatible with Uniswap V3.`
       }
-      return t`Unknown error${reason ? `: "${reason}"` : ''}. Try increasing your slippage tolerance.`
+      return `Unknown error${reason ? `: "${reason}"` : ''}. Try increasing your slippage tolerance.`
   }
 }
 

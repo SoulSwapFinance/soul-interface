@@ -1,20 +1,17 @@
 import { AlertTriangle, ArrowUpCircle, CheckCircle } from 'react-feather'
 import { ChainId, Currency } from 'sdk'
 import React, { FC } from 'react'
-import { Trans, t } from '@lingui/macro'
 
 import { Button } from 'components/Button'
 import CloseIcon from 'components/CloseIcon'
 import ExternalLink from 'components/ExternalLink'
 import Image from 'components/Image'
 import Lottie from 'lottie-react'
-import Modal from 'components/DefaultModal'
 import { RowFixed } from 'components/Row'
 import { getExplorerLink } from 'functions/explorer'
 import loadingRollingCircle from 'animation/loading-purple-rolling-circle.json'
 import { useActiveWeb3React } from 'services/web3'
 import useAddTokenToMetaMask from 'hooks/useAddTokenToMetaMask'
-import { useLingui } from '@lingui/react'
 import { HeadlessUiModal } from 'components/Modal'
 import ModalHeader from 'components/Modal/Header'
 import { getChainColorCode } from 'constants/chains'
@@ -30,7 +27,6 @@ export const ConfirmationPendingContent: FC<ConfirmationPendingContentProps> = (
   pendingText,
   pendingText2,
 }) => {
-  const { i18n } = useLingui()
   return (
     <div>
       <div className="flex justify-end">
@@ -40,10 +36,10 @@ export const ConfirmationPendingContent: FC<ConfirmationPendingContentProps> = (
         <Lottie animationData={loadingRollingCircle} autoplay loop />
       </div>
       <div className="flex flex-col items-center justify-center gap-3">
-        <div className="text-xl font-bold text-high-emphesis">{i18n._(t`Waiting for Confirmation`)}</div>
+        <div className="text-xl font-bold text-high-emphesis">{`Waiting for Confirmation`}</div>
         <div className="font-bold">{pendingText}</div>
         <div className="font-bold">{pendingText2}</div>
-        <div className="text-sm font-bold text-secondary">{i18n._(t`Confirm transaction in your wallet`)}</div>
+        <div className="text-sm font-bold text-secondary">{`Confirm transaction in your wallet`}</div>
       </div>
     </div>
   )
@@ -63,7 +59,6 @@ export const TransactionSubmittedContent: FC<TransactionSubmittedContentProps> =
   hash,
   currencyToAdd,
 }) => {
-  const { i18n } = useLingui()
   const { library } = useActiveWeb3React()
   const blockchain = chainId == 43114 ? "avalanche" : "fantom"
   const { addToken, success } = useAddTokenToMetaMask(currencyToAdd)
@@ -76,7 +71,7 @@ export const TransactionSubmittedContent: FC<TransactionSubmittedContentProps> =
         <ArrowUpCircle strokeWidth={0.5} size={90} className={`text-${getChainColorCode(chainId)}`} />
       </div>
       <div className="flex flex-col items-center justify-center gap-1">
-        <div className="text-xl font-bold">{i18n._(t`Transaction Submitted`)}</div>
+        <div className="text-xl font-bold">{`Transaction Submitted`}</div>
         {chainId && hash && (
           <ExternalLink href={getExplorerLink(chainId, hash, 'transaction')}>
             <div className={`font-bold text-${getChainColorCode(chainId)}`}>View on Explorer</div>
@@ -124,7 +119,7 @@ export const TransactionSubmittedContent: FC<TransactionSubmittedContentProps> =
               </RowFixed>
             ) : (
               <RowFixed>
-                {i18n._(t`Added`)} {currencyToAdd.symbol}
+                {`Added`} {currencyToAdd.symbol}
                 <CheckCircle className="ml-1.5 text-2xl text-green" size="16px" />
               </RowFixed>
             )}
@@ -166,13 +161,12 @@ interface TransactionErrorContentProps {
 }
 
 export const TransactionErrorContent: FC<TransactionErrorContentProps> = ({ message, onDismiss }) => {
-  const { i18n } = useLingui()
 
   return (
     <div className="grid gap-6">
       <div>
         <div className="flex justify-between">
-          <div className="text-lg font-medium text-high-emphesis">{i18n._(t`Error`)}</div>
+          <div className="text-lg font-medium text-high-emphesis">{`Error`}</div>
           <CloseIcon onClick={onDismiss} />
         </div>
         <div className="flex flex-col items-center justify-center gap-3">

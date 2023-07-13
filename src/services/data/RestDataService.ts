@@ -169,6 +169,7 @@ const RestDataService = (
     }
 
     if (headers) {
+      // @ts-ignore
       httpClient.defaults.headers = {
         ...httpClient.defaults.headers,
         ...headers,

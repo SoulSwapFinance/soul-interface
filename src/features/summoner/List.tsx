@@ -3,7 +3,7 @@ import Typography from 'components/Typography'
 import { Active } from './Key'
 import { ActiveRow } from './Row'
 import { AvalanchePools, FantomPools
- , InactiveFantomPools, InactiveAvalanchePools 
+//  , InactiveFantomPools, InactiveAvalanchePools 
 } from './Pools'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
@@ -43,35 +43,35 @@ export const FarmList = () => {
     />
   ))
 
-  const inactiveFtmList = InactiveFantomPools.map((farm) => (
-    <ActiveRow
-      key={farm.pid}
-      pid={farm.pid}
-      decimals={farm.decimals}
-      pairType={farm.type}
-      lpToken={farm.lpAddress}
-      token0Symbol={farm.token0Symbol}
-      token1Symbol={farm.token1Symbol}
-      token0Address={farm.token0Address}
-      token1Address={farm.token1Address}
-      farm={farm}
-    />
-  ))
+  // const inactiveFtmList = InactiveFantomPools.map((farm) => (
+  //   <ActiveRow
+  //     key={farm.pid}
+  //     pid={farm.pid}
+  //     decimals={farm.decimals}
+  //     pairType={farm.type}
+  //     lpToken={farm.lpAddress}
+  //     token0Symbol={farm.token0Symbol}
+  //     token1Symbol={farm.token1Symbol}
+  //     token0Address={farm.token0Address}
+  //     token1Address={farm.token1Address}
+  //     farm={farm}
+  //   />
+  // ))
 
-  const inactiveAvaxList = InactiveAvalanchePools.map((farm) => (
-    <ActiveRow
-      key={farm.pid}
-      pid={farm.pid}
-      decimals={farm.decimals}
-      pairType={farm.type}
-      lpToken={farm.lpAddress}
-      token0Symbol={farm.token0Symbol}
-      token1Symbol={farm.token1Symbol}
-      token0Address={farm.token0Address}
-      token1Address={farm.token1Address}
-      farm={farm}
-    />
-  ))
+  // const inactiveAvaxList = InactiveAvalanchePools.map((farm) => (
+  //   <ActiveRow
+  //     key={farm.pid}
+  //     pid={farm.pid}
+  //     decimals={farm.decimals}
+  //     pairType={farm.type}
+  //     lpToken={farm.lpAddress}
+  //     token0Symbol={farm.token0Symbol}
+  //     token1Symbol={farm.token1Symbol}
+  //     token0Address={farm.token0Address}
+  //     token1Address={farm.token1Address}
+  //     farm={farm}
+  //   />
+  // ))
 
   return (
     <div>

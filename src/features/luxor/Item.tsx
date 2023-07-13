@@ -1,15 +1,12 @@
 import React, { useState } from 'react'
 import { CurrencyAmount, Token, JSBI } from 'sdk'
 import Typography from '../../components/Typography'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Disclosure, Switch, Tab, Transition } from '@headlessui/react'
 import { CurrencyLogo } from '../../components/CurrencyLogo'
 import DoubleLogo from '../../components/DoubleLogo'
 import Badge from '../../components/Badge'
 import {
   classNames,
-  formatNumberScale,
   formatNumber,
   formatPercent,
   formatCurrencyAmount,
@@ -18,8 +15,6 @@ import {
 import Input from '../../components/Input'
 import { Button, ButtonError } from '../../components/Button'
 import Settings from '../../components/Settings'
-import ExternalLink from '../../components/ExternalLink'
-import CurrencyInputPanel from '../../components/CurrencyInputPanel'
 import QuestionHelper from '../../components/QuestionHelper'
 import { useCurrency } from '../../hooks/Tokens'
 import { useCurrencyBalance } from '../../state/wallet/hooks'
@@ -29,13 +24,12 @@ import { ApprovalState, useApproveCallback } from '../../hooks'
 import Dots from '../../components/Dots'
 import { BigNumber } from '@ethersproject/bignumber'
 import { usePendingAmount, useClaimableAmount, useBondContract, useRemainingVesting } from './hooks'
-// import { getExplorerLink } from '../../functions/explorer'
 import { useActiveWeb3React } from 'services/web3'
 import { LUX_ADDRESS } from 'constants/addresses'
 import { DAI } from 'constants/tokens'
+import CurrencyInputPanel from 'components/CurrencyInputPanel'
 
 const BondItem = ({ bond, ...rest }) => {
-  const { i18n } = useLingui()
   const [toggle, setToggle] = useState(false)
   const { account } = useActiveWeb3React()
   // const { deposit, claim, luxorDeposit } = useBondContract()
@@ -195,7 +189,7 @@ const BondItem = ({ bond, ...rest }) => {
                     // width={'small'}
                     text={
                       <div className="flex bg-dark-1000 flex-col space-y-2">
-                        {i18n._(t`Your net return over the total investment.`)}
+                        {`Your net return over the total investment.`}
                       </div>
                     }
                   />
@@ -219,9 +213,7 @@ const BondItem = ({ bond, ...rest }) => {
                     // width={'small'}
                     text={
                       <div className="flex flex-col space-y-2">
-                        {i18n._(
-                          t`The time remaining until the LUX bond fully matures and 100% of the vested LUX is claimable.  Vesting is linear, with a portion of vested tokens released every second.`
-                        )}
+                        {`The time remaining until the LUX bond fully matures and 100% of the vested LUX is claimable.  Vesting is linear, with a portion of vested tokens released every second.`}
                         <br />
                         <br />
                         <p>
@@ -295,7 +287,7 @@ const BondItem = ({ bond, ...rest }) => {
                               } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border-transparent border-1 rounded-8 hover:text-black dark:hover:text-white-10`
                             }
                           >
-                            {/* {i18n._(t`Bond`)} */}
+                            {/* {`Bond`} */}
                           </Tab>
 {/*                           
                               <Tab
@@ -305,7 +297,7 @@ const BondItem = ({ bond, ...rest }) => {
                               } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border-transparent border-1 rounded-8 hover:text-black dark:hover:text-white-10`
                               }
                               >
-                              {i18n._(t`Liquidity`)}
+                              {`Liquidity`}
                               </Tab>
                               */}
                         </div>
@@ -331,27 +323,27 @@ const BondItem = ({ bond, ...rest }) => {
                               href={250 && bond && getExplorerLink(250, bond.address, 'address')}
                               className="flex gap-2 no-underline cursor-pointer hover:no-underline focus:no-underline active:no-underline text-blue dark:text-accent"
                             >
-                              {i18n._(t`View Contract`)}
+                              {`View Contract`}
                             </ExternalLink>
                           </Button>
                           <Button variant={'link'} color={'gray'}>
                             <QuestionHelper
-                            //   title={i18n._(t`How it works`)}
+                            //   title={`How it works`}
                             //   width={'small'}
                               text={
                                 <div className="flex flex-col space-y-2">
                                   <div className="flex flex-col">
                                     <Typography variant="sm">
                                       <strong className="text-accent bold">1.&nbsp;</strong>
-                                      {i18n._(t`Bond your`)}{' '}
+                                      {`Bond your`}{' '}
                                       {bond?.isLp ? bond?.token0_symbol + ' - ' + bond?.token1_symbol : bond?.symbol}{' '}
-                                      {i18n._(t`tokens.`)}
+                                      {`tokens.`}
                                     </Typography>
                                   </div>
                                   <div className="flex flex-col">
                                     <Typography variant="sm">
                                       <strong className="text-accent bold">2.&nbsp;</strong>
-                                      {i18n._(t`Claim your LUX tokens during or after vesting period.`)}
+                                      {`Claim your LUX tokens during or after vesting period.`}
                                     </Typography>
                                   </div>
                                 </div>
@@ -393,7 +385,7 @@ const BondItem = ({ bond, ...rest }) => {
                                   disabled={!account}
                                   className={'text-accent'}
                                 >
-                                  {i18n._(t`MAX`)}
+                                  {`MAX`}
                                 </Button>
                               </div>
                               {isDepositValid &&
@@ -401,9 +393,9 @@ const BondItem = ({ bond, ...rest }) => {
                                 approvalState === ApprovalState.PENDING) ? (
                                 <Button onClick={approve} disabled={approvalState !== ApprovalState.NOT_APPROVED}>
                                   {approvalState === ApprovalState.PENDING ? (
-                                    <Dots>{i18n._(t`Approving`)}</Dots>
+                                    <Dots>{`Approving`}</Dots>
                                   ) : (
-                                    i18n._(t`Approve`)
+                                    `Approve`
                                   )}
                                 </Button>
                               ) : (
@@ -423,7 +415,7 @@ const BondItem = ({ bond, ...rest }) => {
                                   disabled={!isDepositValid || !account}
                                   error={!isDepositValid && !!parsedDepositValue}
                                 >
-                                  {depositError || i18n._(t`Bond`)}
+                                  {depositError || `Bond`}
                                 </ButtonError>
                               )}
                             </div>
@@ -445,9 +437,9 @@ const BondItem = ({ bond, ...rest }) => {
                                     disabled={luxorApprovalState !== ApprovalState.NOT_APPROVED}
                                   >
                                     {luxorApprovalState === ApprovalState.PENDING ? (
-                                      <Dots>{i18n._(t`Approving`)}</Dots>
+                                      <Dots>{`Approving`}</Dots>
                                     ) : (
-                                      i18n._(t`Approve`)
+                                      `Approve`
                                     )}
                                   </Button>
                                 ) : (
@@ -462,7 +454,7 @@ const BondItem = ({ bond, ...rest }) => {
                                       }
                                     }}
                                   >
-                                    {i18n._(t`DEPOSIT LUX`)}
+                                    {`DEPOSIT LUX`}
                                   </Button>
                                 )}
                               </div>
@@ -513,7 +505,7 @@ const BondItem = ({ bond, ...rest }) => {
                                 disabled={!account}
                                 className="flex-1"
                               >
-                                {i18n._(t`Claim`)}
+                                {`Claim`}
                               </Button>
                               <Button
                                 onClick={async () => {
@@ -529,7 +521,7 @@ const BondItem = ({ bond, ...rest }) => {
                                 disabled={!account}
                                 className="flex-1"
                               >
-                                {i18n._(t`Claim and Autostake`)}
+                                {`Claim and Autostake`}
                               </Button>
                               <QuestionHelper
                                 // width={'small'}
@@ -546,7 +538,7 @@ const BondItem = ({ bond, ...rest }) => {
                                 <Typography variant={'xxs'} lineHeight={14} 
                                 className={'text-accent'}
                                 >
-                                  {i18n._(t`Pending Rewards`)}
+                                  {`Pending Rewards`}
                                 </Typography>
                                 <Typography variant={'base'} lineHeight={24} fontFamily={'medium'}>
                                   {account ? formatCurrencyAmount(pendingAmount, 6) : '-'} LUX
@@ -612,7 +604,7 @@ const BondItem = ({ bond, ...rest }) => {
                                   </span>
                                 </Switch>
                                 <Switch.Label className="ml-3">
-                                  {!toggle ? i18n._(t`Add Liquidity`) : i18n._(t`Remove Liquidity`)}
+                                  {!toggle ? `Add Liquidity` : `Remove Liquidity`}
                                 </Switch.Label>
                               </div>
                             </Switch.Group>

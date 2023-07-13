@@ -26,7 +26,7 @@ const BottomSlideIn: FC<BottomSlideInProps> = ({ title, open, onClose, children,
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="absolute inset-0 bg-black bg-opacity-75 transition-opacity" />
+            <Dialog.Overlay className="absolute inset-0 bg-black bg-opacity/75 transition-opacity" />
           </Transition.Child>
 
           <div className="max-h-[fit-content] absolute bottom-0 fixed right-0 left-0 w-full flex">

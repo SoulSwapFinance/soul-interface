@@ -62,7 +62,13 @@ function Web3Network() {
     onClick={() => toggleNetworkModal()}
     >
       <div className={`grid items-center grid-flow-col justify-center h-[24px] w-[24px] text-sm rounded pointer-events-auto auto-cols-max text-secondary`}>
-        <Image src={NETWORK_ICON[chainId]} alt="Switch Network" className={``}width={24} height={24} />
+        <Image 
+          src={NETWORK_ICON[chainId]} 
+          alt="Switch Network" 
+          className={``}
+          width={24}
+          height={24} 
+        />
       <NetworkModel 
         switchNetwork={(targetChain) => {
           handleChainSwitch(targetChain)

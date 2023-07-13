@@ -1,11 +1,8 @@
 import { ArrowDownIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import Container from '../../components/Container'
 import Head from 'next/head'
-import { I18n } from '@lingui/core'
 import Link from 'next/link'
 import Typography from '../../components/Typography'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import React, { useMemo } from 'react'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
@@ -13,23 +10,23 @@ import { classNames, featureEnabled } from 'functions'
 import { ChainId } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 
-const SOUL = (i18n: I18n) => [
+const SOUL = () => [
   {
     id: 0,
     name: 'CHOOSE YOUR DESTINY...',
-    description: i18n._(t`SELECT PATH`),
+    description: `SELECT PATH`,
     href: '/explore',
   },
   {
     id: 1,
     name: 'SUMMONER',
-    description: i18n._(t`Deposit liquidity or lent assets. Earn SOUL.`),
+    description: `Deposit liquidity or lent assets. Earn SOUL.`,
     href: './farms',
   },
   {
     id: 2,
     name: 'BONDER',
-    description: i18n._(t`Deposit liquidity. Mint SOUL.`),
+    description: `Deposit liquidity. Mint SOUL.`,
     href: './bond',
   },
   {
@@ -38,21 +35,9 @@ const SOUL = (i18n: I18n) => [
     description: 'Deposit SOUL. Auto-compound SOUL.',
     href: './soul/autostake'
   },
-  {
-    id: 4,
-    name: 'LENDER',
-    description: 'Lend and Farm. Enter our Underworld Market.',
-    href: './lend'
-  },
-  // {
-  //   id: 5,
-  //   name: 'BORROWER',
-  //   description: 'Collateralize and Borrow. Leverage your Position.',
-  //   href: './borrow'
-  // },
 ]
 
-const LUXOR = (i18n: I18n) => [
+const LUXOR = () => [
   {
     id: 1,
     name: 'MINTER',
@@ -67,7 +52,7 @@ const LUXOR = (i18n: I18n) => [
   }
 ]
 
-const INFINITY = (i18n: I18n) => [
+const INFINITY = () => [
   {
     id: 1,
     name: 'EXPLORE',
@@ -83,11 +68,10 @@ const INFINITY = (i18n: I18n) => [
 ]
 
 export default function Explore() {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
-  const soulFeature = useMemo(() => SOUL(i18n), [i18n])
-  const luxorFeature = useMemo(() => LUXOR(i18n), [i18n])
-  const infinityFeature = useMemo(() => INFINITY(i18n), [i18n])
+  const soulFeature = useMemo(() => SOUL(), [])
+  const luxorFeature = useMemo(() => LUXOR(), [])
+  const infinityFeature = useMemo(() => INFINITY(), [])
 
   return (
     <Container id="features-page" className="py-4 space-y-5 md:py-8 lg:py-12" maxWidth="4xl">
@@ -151,7 +135,10 @@ export default function Explore() {
           <li key={luxorFeature.id} className="relative border gap-4 border-gold hover:border-yellow w-full p-4 rounded bg-dark-900 hover:bg-dark-800">
             <div className="flex justify-between space-y-4 space-x-4">
               <div className="flex-1 min-w-0">
-                <Link href={luxorFeature.href}>
+                <Link
+                  legacyBehavior={true}
+                  href={luxorFeature.href}
+                >
                   <a className="flex items-center justify-between focus:outline-none">
                     <span className="absolute inset-0" aria-hidden="true" />
                     <div className="space-y-1">
@@ -176,7 +163,10 @@ export default function Explore() {
           <li key={infinityFeature.id} className="relative border gap-4 border-pink hover:border-ftmBlue w-full p-4 rounded bg-dark-900 hover:bg-dark-800">
             <div className="flex justify-between space-y-4 space-x-4">
               <div className="flex-1 min-w-0">
-                <Link href={infinityFeature.href}>
+                <Link
+                  legacyBehavior={true}
+                  href={infinityFeature.href}
+                >
                   <a className="flex items-center justify-between focus:outline-none">
                     <span className="absolute inset-0" aria-hidden="true" />
                     <div className="space-y-1">

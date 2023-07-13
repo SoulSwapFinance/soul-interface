@@ -12,7 +12,6 @@ import { LuxorBanner, DonateBanner } from 'components/Banner'
 import { useActiveWeb3React } from 'services/web3'
 
 const Luxor = () => {
-  // const luxorPrice = useLuxorPrice()
   const { chainId } = useActiveWeb3React()
 
   return (
@@ -29,21 +28,21 @@ const Luxor = () => {
         </Head>
         <div className="flex ml-0 mr-0 mb-1 mt-4 gap-1 items-center justify-center">
         <Button variant="filled" color="yellow" size="lg">
-          <NavLink href={'/luxor/dashboard'}>
+          <NavLink legacyBehavior={true} href={'/luxor/dashboard'}>
             <a className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Data </span>
             </a>
           </NavLink>
         </Button>
         <Button variant="filled" color="yellow" size="lg">
-          <NavLink href={'/luxor/stake'}>
+          <NavLink legacyBehavior={true} href={'/luxor/stake'}>
             <a className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Stake </span>
             </a>
           </NavLink>
         </Button>
         <Button variant="filled" color="yellow" size="lg">
-          <NavLink href={'/luxor/wrap'}>
+          <NavLink legacyBehavior={true} href={'/luxor/wrap'}>
             <a className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
             <span> Wrap </span>
             </a>

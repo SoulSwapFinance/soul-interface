@@ -7,14 +7,10 @@ import { Button } from 'components/Button'
 // import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
-import { t } from '@lingui/macro'
-import { i18n } from '@lingui/core'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 import { useRouter } from 'next/router'
 import { classNames } from 'functions'
-import ExternalLink from 'components/ExternalLink'
-import { SubmitButton } from './Styles'
 
 export const FarmList = () => {
   const { chainId } = useActiveWeb3React()
@@ -65,34 +61,32 @@ export const FarmList = () => {
             variant={'bordered'}
             color={'purple'}
             className={
-                `flex mt-2 font-bold justify-center border border-2 
-                rounded rounded-xl`
+                `flex mt-2 font-bold justify-center  border-2 rounded-xl`
               }
             onClick={handleCreate}
           >
             <Typography
               className={`text-white`}
             >
-              {i18n._(t`Create Farm`)}
+              {`Create Farm`}
             </Typography>
           </Button>
         <Button 
             variant={'bordered'}
             color={'purple'}
             className={
-                `flex mt-2 font-bold justify-center border border-2 
-                rounded rounded-xl`
+                `flex mt-2 font-bold justify-center border-2 rounded-xl`
               }
             onClick={handleLaunch}
           >
             <Typography
               className={`text-white`}
             >
-              {i18n._(t`Launch Campaign`)}
+              {`Launch Campaign`}
             </Typography>
           </Button>
         </div>
-      <Typography className="text-2xl bg-dark-1000 mt-6 rounded rounded-2xl border border-2 border-dark-600 p-3 font-bold text-center mb-1">Active DeFarms</Typography>
+      <Typography className="text-2xl bg-dark-1000 mt-6 rounded-2xl border-2 border-dark-600 p-3 font-bold text-center mb-1">Active DeFarms</Typography>
       <Active />
       <>{chainId == ChainId.FANTOM ? ftmList : avaxList}</>
       {/* <div className={'grid grid-cols-1 mx-1 mt-6 mb-4 gap-2 border bg-avaxRed rounded rounded-lg'}> */}
@@ -115,7 +109,7 @@ export const FarmList = () => {
             </div> */}
       {/* <div> */}
         <Typography
-          className={classNames(chainId == ChainId.AVALANCHE ? 'hidden' : `text-2xl bg-dark-1000 mt-6 rounded rounded-2xl border border-2 border-avaxRed p-3 font-bold text-center mb-1`)}
+          className={classNames(chainId == ChainId.AVALANCHE ? 'hidden' : `text-2xl bg-dark-1000 mt-6 rounded-2xl border-2 border-avaxRed p-3 font-bold text-center mb-1`)}
         >
           Retired DeFarms
         </Typography>

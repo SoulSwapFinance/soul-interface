@@ -1,6 +1,4 @@
 import React, { FC, useState } from 'react'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { ChainId } from 'sdk'
 import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
 import Typography from 'components/Typography'
@@ -118,7 +116,6 @@ export const SUPPORTED_NETWORKS: Record<
 
 // const NetworkModal: FC<{ switchNetwork: (targetChain: number) => void }> = ({ switchNetwork }) => {
   const NetworkModal: FC<{ switchNetwork: (targetChain: number) => void }> = ({ switchNetwork }) => {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const networkModalOpen = useModalOpen(ApplicationModal.NETWORK)
   // const [isShowing, setShowing] = useState(false)
@@ -132,7 +129,7 @@ export const SUPPORTED_NETWORKS: Record<
     chainId={chainId}
     onDismiss={toggleNetworkModal}>      
     <div className="flex flex-col gap-4">
-        <HeadlessUiModal.Header header={i18n._(t`Select Network`)} onClose={toggleNetworkModal} />
+        <HeadlessUiModal.Header header={`Select Network`} onClose={toggleNetworkModal} />
         <div className="grid grid-flow-row-dense grid-cols-1 gap-4 overflow-y-auto">
           {[
             ChainId.ETHEREUM,
@@ -159,8 +156,8 @@ export const SUPPORTED_NETWORKS: Record<
                       src={NETWORK_ICON[key]}
                       alt="Switch Network"
                       className="rounded-full"
-                      width="32px"
-                      height="32px"
+                      width={32}
+                      height={32}
                     />
                     <Typography weight={700} className="text-high-emphesis">
                       {NETWORK_LABEL[key]}
@@ -180,8 +177,8 @@ export const SUPPORTED_NETWORKS: Record<
                     src={NETWORK_ICON[key]}
                     alt="Switch Network"
                     className={`rounded`}
-                    width="32px"
-                    height="32px"
+                    width={32}
+                    height={32}
                   />
                   <Typography weight={700} className={`text-high-emphesis`}>
                     {NETWORK_LABEL[key]}

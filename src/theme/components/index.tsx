@@ -1,5 +1,5 @@
-import styled, { css, keyframes } from "styled-components";
-import { darken } from "polished";
+import styled, { css, keyframes } from "styled-components"
+import { darken } from "polished"
 import { 
     ArrowLeft, 
     X, 

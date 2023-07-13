@@ -2,7 +2,8 @@ import {
   BSC,
   FANTOM,
   AVALANCHE,
-  TELOS
+  TELOS,
+  MOONRIVER,
 } from './tokens'
 // a list of tokens by chain
 import { ChainId, Token, WNATIVE } from '../sdk'
@@ -30,7 +31,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   // [ChainId.ETHEREUM]: [...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM], DAI, USDC, USDT, WBTC, RUNE, NFTX, STETH],
   [ChainId.TELOS]: [...WRAPPED_NATIVE_ONLY[ChainId.TELOS], TELOS.USDC, TELOS.USDT],
   [ChainId.FANTOM]: [
-    ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM], 
+    ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM],
     FANTOM.SOUL,
     FANTOM.DAI, 
     FANTOM.USDC, 
@@ -56,7 +57,7 @@ export const COMMON_BASES: ChainTokenList = {
     ...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM], 
   ],
   [ChainId.MOONRIVER]: [
-    ...WRAPPED_NATIVE_ONLY[ChainId.MOONRIVER], 
+    ...WRAPPED_NATIVE_ONLY[ChainId.MOONRIVER], MOONRIVER.USDC, MOONRIVER.WETH, 
   ],
   [ChainId.MATIC]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.MATIC], 
@@ -71,23 +72,33 @@ export const COMMON_BASES: ChainTokenList = {
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM],
     FANTOM.SOUL,
-    FANTOM.SEANCE,
     FANTOM.LUX,
-    FANTOM.WLUM,
     FANTOM.DAI,
+    FANTOM.SURV,
     FANTOM.USDC,
     FANTOM.WBTC,
     FANTOM.WETH,
+    FANTOM.AVAX,
+    FANTOM.BNB,
+    // FANTOM.LINK,
   ],
-  [ChainId.BSC]: [...WRAPPED_NATIVE_ONLY[ChainId.BSC], BSC.DAI, BSC.USD, BSC.USDC, BSC.USDT, BSC.BTCB, BSC.WETH],
+  [ChainId.BSC]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.BSC], 
+    BSC.DAI, 
+    BSC.USD, 
+    BSC.USDC, 
+    BSC.USDT, 
+    BSC.BTCB, 
+    BSC.WETH
+  ],
   [ChainId.AVALANCHE]: [
   ...WRAPPED_NATIVE_ONLY[ChainId.AVALANCHE], 
+  AVALANCHE.SOUL,
   AVALANCHE.USDC,
   AVALANCHE.WBTC,
-  AVALANCHE.SOUL,
-  AVALANCHE.WETH
+  AVALANCHE.WETH,
+  AVALANCHE.DAI,
   ],
-  [ChainId.MOONRIVER]: [...WRAPPED_NATIVE_ONLY[ChainId.AVALANCHE], AVALANCHE.USDC, AVALANCHE.WETH],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend

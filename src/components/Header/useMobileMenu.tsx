@@ -1,7 +1,4 @@
 import React, { ReactNode, useMemo } from 'react'
-import { SparklesIcon, ArrowsUpDownIcon, ChartBarIcon } from'@heroicons/react/24/outline'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { ChainId, NATIVE, SOUL_ADDRESS } from 'sdk'
 // import { PoolIcon, RocketIcon, WalletIcon } from 'components/Icon'
 import { Feature } from 'enums'
@@ -27,7 +24,6 @@ export type MobileMenu = MenuItem[]
 
 type UseMobileMenu = () => MobileMenu
 const useMobileMenu: UseMobileMenu = () => {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
 
   return useMemo(() => {
@@ -36,7 +32,7 @@ const useMobileMenu: UseMobileMenu = () => {
     // By default show just a swap button
     let tradeMenu: MenuItem = {
       key: 'swap',
-      title: i18n._(t`Exchange`),
+      title: `Exchange`,
       link: '/swap',
       // icon: <ArrowsUpDownIcon width={16} />,
     }
@@ -45,27 +41,27 @@ const useMobileMenu: UseMobileMenu = () => {
     if (featureEnabled(Feature.TRIDENT, chainId)) {
       tradeMenu = {
         key: 'trade',
-        title: i18n._(t`Swap`),
+        title: `Swap`,
         // icon: <ArrowsUpDownIcon width={16} />,
         items: [
           {
             key: 'swap',
-            title: i18n._(t`Exchange`),
+            title: `Exchange`,
             link: '/swap',
           },
           {
             key: 'pool',
-            title: i18n._(t`Pool`),
+            title: `Pool`,
             link: '/pool',
           },
           {
             key: 'bridge',
-            title: i18n._(t`Bridge`),
+            title: `Bridge`,
             link: '/cross',
           },
           {
             key: 'limit',
-            title: i18n._(t`Limit`),
+            title: `Limit`,
             link: '/limit',
           }
         ],
@@ -75,75 +71,58 @@ const useMobileMenu: UseMobileMenu = () => {
     const poolMenu = [
       {
         key: 'browse',
-        title: i18n._(t`Browse`),
+        title: `Browse`,
         link: '/pool',
       },
       {
         key: 'add-liquidity',
-        title: i18n._(t`Add`),
+        title: `Add`,
         link: `/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
       },
       {
         key: 'remove-liquidity',
-        title: i18n._(t`Remove`),
+        title: `Remove`,
       link: `/remove/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
       },
       {
         key: 'import',
-        title: i18n._(t`Import`),
+        title: `Import`,
         link: '/find',
       },
     ]
-
-    if (featureEnabled(Feature.MIGRATE, chainId)) {
-      poolMenu.push({
-        key: 'migrate',
-        title: i18n._(t`Migrate`),
-        link: '/migrate',
-      })
-    }
-
-    // const exploreMenu: MenuItemLeaf[] = []
-    // if (featureEnabled(Feature.VESTING, chainId)) {
-      // exploreMenu.push({
-      //   key: 'all',
-      //   title: i18n._(t`More`),
-      //   link: '/explore',
-      // })
-    // }
 
     const mainItems: MobileMenu = [tradeMenu]
 
     // if (poolMenu.length > 0)
     //   mainItems.push({
     //     key: 'pool',
-    //     title: i18n._(t`POOL`),
+    //     title: `POOL`,
     //     items: poolMenu,
     //   })
 
     if (featureEnabled(Feature.SEANCE, chainId)) {
       const farmItems = {
         key: 'Rewards',
-        title: i18n._(t`Rewards`),
+        title: `Rewards`,
         items: [
           {
             key: 'farm',
-            title: i18n._(t`Farm`),
+            title: `Farm`,
             link: '/summoner',
           },
           {
             key: 'vault',
-            title: i18n._(t`Vault`),
+            title: `Vault`,
             link: '/autostake',
           },
           {
             key: 'luxor',
-            title: i18n._(t`Luxor`),
+            title: `Luxor`,
             link: '/luxor/bonds',
           },
           {
             key: 'bonds',
-            title: i18n._(t`Bond`),
+            title: `Bond`,
             link: '/bonds',
           },
         ],
@@ -154,21 +133,21 @@ const useMobileMenu: UseMobileMenu = () => {
     if ([ChainId.AVALANCHE].includes(chainId)) {
       const farmItems = {
         key: 'Rewards',
-        title: i18n._(t`Rewards`),
+        title: `Rewards`,
         items: [
           {
             key: 'farm',
-            title: i18n._(t`Farm`),
+            title: `Farm`,
             link: '/summoner',
           },
           {
             key: 'vault',
-            title: i18n._(t`Vault`),
+            title: `Vault`,
             link: '/autostake',
           },
           {
             key: 'bonds',
-            title: i18n._(t`Bond`),
+            title: `Bond`,
             link: '/bonds',
           },
         ],
@@ -176,67 +155,41 @@ const useMobileMenu: UseMobileMenu = () => {
       mainItems.push(farmItems)
     }
 
-    if (featureEnabled(Feature.UNDERWORLD, chainId)) {
-      mainItems.push({
-        key: 'lending',
-        title: i18n._(t`Lend`),
-        // icon: <ArrowsUpDownIcon width={16} className="rotate-90 filter" />,
-        items: [
-          // {
-          //   key: 'markets',
-          //   title: i18n._(t`Markets`),
-          //   link: '/underworld',
-          //  },
-          {
-            key: 'lend',
-            title: i18n._(t`Lend`),
-            link: '/lend',
-           },
-          // {
-          //   key: 'borrow',
-          //   title: i18n._(t`Borrow`),
-          //   link: '/borrow',
-          //  },
-        ],
-      })
-
     if (featureEnabled(Feature.AMM, chainId))
      {
       mainItems.push({
         key: 'tools',
-        title: i18n._(t`Tools`),
-        // icon: <SparklesIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+        title: `Tools`,
+        // icon: <SparklesIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`} />,
         items: [
         {
           key: 'bridge',
-          title: i18n._(t`Bridge`),
+          title: `Bridge`,
           link: '/cross',
         },
         {
           key: 'stream',
-          title: i18n._(t`SoulPay`),
+          title: `SoulPay`,
           link: 'https://pay.soulswap.finance',
         },
       ]
     })
     }
       
-    }
-
     // if (featureEnabled(Feature.MISO, chainId)) {
     //   mainItems.push({
     //     key: 'launchpad',
-    //     title: i18n._(t`Launchpad`),
+    //     title: `Launchpad`,
     //     icon: <RocketIcon width={16} />,
     //     items: [
     //       {
     //         key: 'marketplace',
-    //         title: i18n._(t`Marketplace`),
+    //         title: `Marketplace`,
     //         link: '/market',
     //       },
     //       {
     //         key: 'factory',
-    //         title: i18n._(t`Factory`),
+    //         title: `Factory`,
     //         link: '/market/auction',
     //       },
     //     ],
@@ -245,7 +198,7 @@ const useMobileMenu: UseMobileMenu = () => {
 
     let analyticsMenu: MenuItem = {
       key: 'analytics',
-      title: i18n._(t`Data`),
+      title: `Data`,
       // icon: <ChartBarIcon width={16} />,
       items: [
         {
@@ -288,26 +241,21 @@ const useMobileMenu: UseMobileMenu = () => {
     if ([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId)) {
       const learnItems = {
         key: 'Learn',
-        title: i18n._(t`Learn`),
+        title: `Learn`,
         items: [
           {
             key: 'explore',
-            title: i18n._(t`Explore`),
+            title: `Explore`,
             link: '/explore',
           },
           {
             key: 'soul-docs',
-            title: i18n._(t`Swap`),
+            title: `Swap`,
             link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
-          },
-          {
-            key: 'borrow-docs',
-            title: i18n._(t`Borrow`),
-            link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
           },
           // {
           //   key: 'lux-docs',
-          //   title: i18n._(t`Bond`),
+          //   title: `Bond`,
           //   link: 'https://luxor.soulswap.finance',
           // },
         ],
@@ -316,7 +264,7 @@ const useMobileMenu: UseMobileMenu = () => {
       }
 
     return mainItems.filter((el) => Object.keys(el).length > 0)
-  }, [chainId, i18n])
+  }, [chainId])
 }
 
 export default useMobileMenu

@@ -4,7 +4,6 @@
 // `token0Symbol` && `token1Symbol`: always use "w" prefix
 // `depositSymbol`: never use "w" prefix
 // `depositSymbol`: always frontload native
-// take note of exemptions (usually in lending) //
 
 export const InactiveAvalanchePools = []
 

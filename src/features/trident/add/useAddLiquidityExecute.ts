@@ -2,8 +2,6 @@ import { defaultAbiCoder } from '@ethersproject/abi'
 import { Signature } from '@ethersproject/bytes'
 import { AddressZero } from '@ethersproject/constants'
 import { TransactionResponse } from '@ethersproject/providers'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Currency, CurrencyAmount, toHex, Token } from 'sdk'
 import { approveMasterContractAction, batchAction, getAsEncodedAction } from 'features/trident/actions'
 import { setAddAttemptingTxn, setAddCoffinPermit } from 'features/trident/add/addSlice'
@@ -28,7 +26,6 @@ type ExecutePayload = {
 type UseAddLiquidityExecute = () => (x: ExecutePayload) => Promise<TransactionResponse | undefined>
 
 export const useAddLiquidityExecute: UseAddLiquidityExecute = () => {
-  const { i18n } = useLingui()
   const { poolWithState, rebases } = usePoolContext()
   const { chainId, library, account } = useActiveWeb3React()
   const dispatch = useAppDispatch()
@@ -101,13 +98,12 @@ export const useAddLiquidityExecute: UseAddLiquidityExecute = () => {
         await tx.wait()
 
         addTransaction(tx, {
-          summary: i18n._(
-            t`Add ${parsedAmountA?.toSignificant(3)} ${
+          summary: `Add ${parsedAmountA?.toSignificant(3)} ${
               parsedAmountA?.currency.symbol
             } and ${parsedAmountB?.toSignificant(3)} ${parsedAmountB?.currency.symbol} into ${pool.token0.symbol}/${
               pool.token1.symbol
             }`
-          ),
+          ,
         })
 
         dispatch(setAddAttemptingTxn(false))
@@ -129,6 +125,6 @@ export const useAddLiquidityExecute: UseAddLiquidityExecute = () => {
         }
       }
     },
-    [poolWithState, chainId, library, account, router, rebases, dispatch, addTransaction, i18n]
+    [poolWithState, chainId, library, account, router, rebases, dispatch, addTransaction]
   )
 }

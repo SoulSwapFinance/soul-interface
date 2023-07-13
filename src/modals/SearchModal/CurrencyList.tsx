@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { ChainId, Currency, CurrencyAmount, ZERO } from 'sdk'
 import Chip from 'components/Chip'
 import { CurrencyLogo } from 'components/CurrencyLogo'
@@ -72,7 +70,7 @@ interface CurrencyRow {
   style: CSSProperties
 }
 
-const CurrencyRow: FC<CurrencyRow> = ({ chainId, currency, style }) => {
+export const CurrencyRow: FC<CurrencyRow> = ({ chainId, currency, style }) => {
   const { account } = useActiveWeb3React()
   const { onSelect, currency: selectedCurrency } = useCurrencyModalContext()
   const key = currencyKey(currency)
@@ -110,6 +108,7 @@ const CurrencyRow: FC<CurrencyRow> = ({ chainId, currency, style }) => {
   )
 }
 
+
 const BREAK_LINE = 'BREAK'
 type BreakLine = typeof BREAK_LINE
 function isBreakLine(x: unknown): x is BreakLine {
@@ -117,17 +116,16 @@ function isBreakLine(x: unknown): x is BreakLine {
 }
 
 const BreakLineComponent: FC<{ style: CSSProperties }> = ({ style }) => {
-  const { i18n } = useLingui()
 
   return (
     <div className="flex w-full px-4 border-t border-dark-800" style={style}>
       <div className="flex flex-col gap-0.5 justify-center">
         <Typography variant="xs" weight={700}>
-          {i18n._(t`Expanded results from inactive token lists`)}
+          {`Expanded results from inactive token lists`}
         </Typography>
         <Typography variant="xxs">
-          {i18n._(t`Tokens from inactive lists: import specific tokens below or
-            click manage to activate more lists.`)}
+          {`Tokens from inactive lists: import specific tokens below or
+            click manage to activate more lists.`}
         </Typography>
       </div>
     </div>
@@ -149,7 +147,6 @@ const CurrencyList: FC<CurrencyList> = ({ chainId, currencies, otherListTokens }
     }
     return currencies
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currencies.length, otherListTokens])
 
   const Row = ({ index, key, style }) => {
@@ -163,13 +160,13 @@ const CurrencyList: FC<CurrencyList> = ({ chainId, currencies, otherListTokens }
 
   return (
     <div id="all-currencies-list" className="flex flex-col flex-1 flex-grow h-full divide-y divide-dark-800">
-      <AutoSizer>
-        {({ height, width }) => (
-          <List height={height} width={width} itemCount={itemData.length} itemSize={56}>
+      {/* <AutoSizer> */}
+        {/* {({ height, width }) => ( */}
+          <List height={48} width={48} itemCount={itemData.length} itemSize={48}>
             {Row}
           </List>
-        )}
-      </AutoSizer>
+          {/* )} */}
+       {/* </AutoSizer> */}
     </div>
   )
 }

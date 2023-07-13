@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { i18n } from "@lingui/core"
-import { t } from "@lingui/macro"
 import { OverlayButton, Typo1, Typo2 } from "components"
-// import Column from "components/Column"
 import Loader from "components/Loader"
 import { getChainColor, getChainColorCode } from "constants/chains"
 import useModal from "hooks/useModal"
@@ -46,7 +43,7 @@ export const BridgeTokenSelectModal: React.FC<any> = ({
             tokens.map((token: any) => {
               return (
                 <div
-                  className={`my-1 rounded rounded-xl hover:border hover:border-2 hover:border-${getChainColorCode(chainId)}`}
+                  className={`my-1 rounded-xl hover:border-2 hover:border-${getChainColorCode(chainId)}`}
                   key={"token-select-" + token.name}
                   onClick={() => {
                     selectToken(token)
@@ -107,7 +104,7 @@ const BridgeTokenSelect: React.FC<any> = ({ tokens, selected, selectToken, chain
     >
       <div className={`grid grid-cols-1 w-full justify-center text-center mt-3 mb-3 font-bold text-${getChainColorCode(toChain)} border border-[${getChainColor(toChain)}] rounded rounded-2xl bg-dark-1000`}>
         {`Bridge Token`}
-        <div className={`flex w-full p-1 border border-2 border-[${getChainColor(toChain)}] rounded rounded-2xl bg-dark-800`}>
+        <div className={`flex w-full p-1 border-2 border-[${getChainColor(toChain)}] rounded rounded-2xl bg-dark-800`}>
           <div
             className={`grid grid-cols-1 w-full justify-center`}
           >
@@ -130,7 +127,7 @@ const BridgeTokenSelect: React.FC<any> = ({ tokens, selected, selectToken, chain
                 </div>
               </div>
             ) : tokens && tokens?.length ? (
-              <Typo1>{i18n._(t`Select Token`)}</Typo1>
+              <Typo1>{`Select Token`}</Typo1>
             ) : (
               <Loader />
             )}

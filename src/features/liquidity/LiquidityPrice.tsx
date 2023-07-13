@@ -5,8 +5,6 @@ import { ONE_BIPS } from '../../constants'
 import React from 'react'
 import Typography from '../../components/Typography'
 import { classNames } from '../../functions'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { useTokenInfo } from 'hooks/useAPI'
 
 export default function LiquidityPrice({
@@ -22,7 +20,6 @@ export default function LiquidityPrice({
   poolTokenPercentage?: Percent
   className?: string
 }): JSX.Element {
-  const { i18n } = useLingui()
   const TickerA = useTokenInfo(currencies[Field.CURRENCY_A].wrapped.address).tokenInfo.symbol 
   const TickerB = useTokenInfo(currencies[Field.CURRENCY_B].wrapped.address).tokenInfo.symbol 
   // console.log('tickerA:%s', TickerA)
@@ -47,7 +44,7 @@ export default function LiquidityPrice({
           %
         </Typography>
         <Typography variant="sm" className="select-none">
-          {i18n._(t`Share of Pool`)}
+          {`Share of Pool`}
         </Typography>
       </div>
     </div>

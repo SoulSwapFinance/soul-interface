@@ -1,6 +1,5 @@
 // import { CurrencyAmount, JSBI, Token } from '../sdk'
 
-// import { t } from '@lingui/macro'
 // import { tryParseAmount } from '../../functions'
 // import { useActiveWeb3React } from 'services/web3'
 

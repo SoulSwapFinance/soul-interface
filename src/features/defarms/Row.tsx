@@ -24,8 +24,6 @@ import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import { getChainColor } from 'constants/chains'
 import { ExternalLink } from 'components/ReusableStyles'
 import { CircleStackIcon, CurrencyDollarIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
-import { t } from '@lingui/macro'
-import { i18n } from '@lingui/core'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 
 // import { useRouter } from 'next/router'
@@ -301,7 +299,7 @@ export const ActiveRow = ({ pid }) => {
 
     return (
         <div>
-            <div className={classNames(" mt-1 bg-dark-900 p-1 sm:p-4 rounded rounded-2xl", stakedBalance > 0 && !isActive && 'border-avaxRed', !hasBalance && "border-dark-1000",
+            <div className={classNames(" mt-1 bg-dark-900 p-1 sm:p-4 rounded-2xl", stakedBalance > 0 && !isActive && 'border-avaxRed', !hasBalance && "border-dark-1000",
                 !isActive ? "hover:border-avaxRed"
                     : hasBalance ? "border-dark-600"
                         : !isActive ? "hover:border-avaxRed"
@@ -439,7 +437,7 @@ export const ActiveRow = ({ pid }) => {
                   flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 
                   ${!isActive ? "hover:border-avaxRed" : "hover:border-dark-600"}`}
                                             >
-                                                {i18n._(t`DEPOSIT`)}
+                                                {`DEPOSIT`}
                                             </Tab>
                                         }
                                         <Tab
@@ -452,7 +450,7 @@ export const ActiveRow = ({ pid }) => {
                   ${!isActive ? "hover:border-avaxRed" : "hover:border-dark-600"}`
                                             }
                                         >
-                                            {i18n._(t`WITHDRAW`)}
+                                            {`WITHDRAW`}
                                         </Tab>
                                     </div>
                                 </Tab.List>
@@ -467,11 +465,11 @@ export const ActiveRow = ({ pid }) => {
                                                     <div className="flex flex-col">
                                                         {withdrawFee == 0 ? (
                                                             <p>
-                                                                {`After creating liquidity or lending, navigate to the associated farm to deposit.`}
+                                                                {`After creating liquidity, navigate to the associated farm to deposit.`}
                                                             </p>
                                                         ) : (
                                                             <p>
-                                                                {`After creating liquidity or lending, navigate to the associated farm to deposit.`}
+                                                                {`After creating liquidity, navigate to the associated farm to deposit.`}
                                                                 <br /> <br />
                                                                 {`The fee decreases by 1% each day and is NOT affected by depositing more.`}
                                                             </p>
@@ -495,7 +493,7 @@ export const ActiveRow = ({ pid }) => {
                                         {Number(stakedBalance) > 0 && (
                                             <div className="flex justify-between">
                                                 <Typography className="text-white" fontFamily={'medium'}>
-                                                    {i18n._(t`Staked Balance`)}
+                                                    {`Staked Balance`}
                                                 </Typography>
                                                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                                     {formatNumber(stakedBalance, false, true)} {`${symbol}-${NATIVE[chainId].symbol}`}
@@ -506,7 +504,7 @@ export const ActiveRow = ({ pid }) => {
                                         {stakedValue > 0 && (
                                             <div className="flex justify-between">
                                                 <Typography className="text-white" fontFamily={'medium'}>
-                                                    {i18n._(t`Staked (USD)`)}
+                                                    {`Staked (USD)`}
                                                 </Typography>
                                                 <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
                                                     {formatNumber(stakedValue, true, true)}
@@ -516,7 +514,7 @@ export const ActiveRow = ({ pid }) => {
 
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                                {i18n._(t`Claimable Rewards`)}
+                                                {`Claimable Rewards`}
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                                 {earnedAmount.toFixed(2)} {rewardSymbol}
@@ -524,7 +522,7 @@ export const ActiveRow = ({ pid }) => {
                                         </div>
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                                {i18n._(t`Rewards (USD)`)}
+                                                {`Rewards (USD)`}
                                             </Typography>
                                             <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
                                                 {formatNumber(earnedValue, true, true)}
@@ -532,7 +530,7 @@ export const ActiveRow = ({ pid }) => {
                                         </div>
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                                {i18n._(t`End Date`)}
+                                                {`End Date`}
                                             </Typography>
                                             <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
                                                 {formatUnixTimestampToDay(endTime)}
@@ -587,7 +585,7 @@ export const ActiveRow = ({ pid }) => {
                                             margin=".5rem 0 0rem 0"
                                             onClick={() => handleApprove(mAddress)}>
                                             <div className="flex text-lg gap-2">
-                                                {i18n._(t`APPROVE ASSET`)}
+                                                {`APPROVE ASSET`}
                                             </div>
                                         </SubmitButton>
                                     }
@@ -605,7 +603,7 @@ export const ActiveRow = ({ pid }) => {
                                         >
                                             <div className="flex text-lg gap-2">
                                                 <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                                {i18n._(t`DEPOSIT `)} {`${symbol}-${NATIVE[chainId].symbol} LP`}
+                                                {`DEPOSIT `} {`${symbol}-${NATIVE[chainId].symbol} LP`}
                                             </div>
                                         </SubmitButton>
                                     )}
@@ -616,7 +614,6 @@ export const ActiveRow = ({ pid }) => {
                                             href={`/exchange/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`}
                                         // /add/${NATIVE[chainId].symbol}/${assetToken?.wrapped.address}
                                         >
-                                            <a>
                                                 <SubmitButton
                                                     height="2rem"
                                                     primaryColor={buttonColor}
@@ -637,7 +634,6 @@ export const ActiveRow = ({ pid }) => {
                                                         </div>
                                                     </TokenPairLink>
                                                 </SubmitButton>
-                                            </a>
                                         </NavLink>
                                     }
                                     {/* ZAPPER FUNCTIONALITY */}
@@ -653,8 +649,8 @@ export const ActiveRow = ({ pid }) => {
                                             }
                                         >
                                             <div className="flex text-lg gap-1">
-                                                {/* <Zap width={26} className={classNames(`text-white`)} /> */}
-                                                {i18n._(t`ZAP`)}
+                                                {/* <Zap width={26} className={classNames(`text-white`} /> */}
+                                                {`ZAP`}
                                                 <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
                                                 &rarr; {`${symbol}-${NATIVE[chainId].symbol} LP`}
                                             </div>
@@ -676,7 +672,7 @@ export const ActiveRow = ({ pid }) => {
                                             >
                                                 <div className="flex text-lg gap-2">
                                                     <CircleStackIcon width={26} className={classNames(`text-white`)} />
-                                                    {i18n._(t`HARVEST `)} {symbol}
+                                                    {`HARVEST `} {symbol}
                                                 </div>
                                             </SubmitButton>
                                         </Wrap>
@@ -696,7 +692,7 @@ export const ActiveRow = ({ pid }) => {
                   ${!isActive ? "hover:border-avaxRed" : "hover:border-dark-600"}`
                                             }
                                         >
-                                            {i18n._(t`EMERGENCY WITHDRAW`)}
+                                            {`EMERGENCY WITHDRAW`}
                                         </Tab>
                                     {'Forfeits pending rewards.'}
                                     </div>
@@ -711,8 +707,8 @@ export const ActiveRow = ({ pid }) => {
                                             <div className="flex flex-col space-y-1">
                                                 <div className="flex flex-col">
                                                     <p>
-                                                        {i18n._(t`Fees decrease by 1% daily, and only increase upon withdrawals.`)}
-                                                        <br /><br />{i18n._(t`Depositing more is free and does not change your fee.`)}
+                                                        {`Fees decrease by 1% daily, and only increase upon withdrawals.`}
+                                                        <br /><br />{`Depositing more is free and does not change your fee.`}
                                                     </p>
                                                 </div>
                                             </div>
@@ -729,7 +725,7 @@ export const ActiveRow = ({ pid }) => {
                                     {Number(stakedBalance) > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                                {i18n._(t`Staked Balance`)}
+                                                {`Staked Balance`}
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                                                 {formatNumber(stakedBalance, false, true)} {symbol}
@@ -740,7 +736,7 @@ export const ActiveRow = ({ pid }) => {
                                     {stakedValue > 0 && (
                                         <div className="flex justify-between">
                                             <Typography className="text-white" fontFamily={'medium'}>
-                                                {i18n._(t`Balance`)} (USD)
+                                                {`Balance`} (USD)
                                             </Typography>
                                             <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
                                                 {formatNumber(stakedValue, true, true)}
@@ -762,7 +758,7 @@ export const ActiveRow = ({ pid }) => {
 
                                     <div className="flex justify-between">
                                         <Typography className="text-white" fontFamily={'medium'}>
-                                            {i18n._(t`Fee`)} (USD)
+                                            {`Fee`} (USD)
                                         </Typography>
                                         <Typography className={textColor} weight={600} fontFamily={'semi-bold'}>
                                             {formatNumber(Number(feeValue), true, true)}
@@ -825,7 +821,7 @@ export const ActiveRow = ({ pid }) => {
                                         margin=".5rem 0 0rem 0"
                                         onClick={() => setShowConfirmation(true)}
                                     >
-                                        {i18n._(t`WITHDRAW `)} {`${symbol}-${NATIVE[chainId].symbol} LP`}
+                                        {`WITHDRAW `} {`${symbol}-${NATIVE[chainId].symbol} LP`}
                                     </SubmitButton>
                                 </Wrap>
                             }
@@ -841,7 +837,7 @@ export const ActiveRow = ({ pid }) => {
                                                 handleHarvest()
                                             }
                                         >
-                                            {i18n._(t`HARVEST`) + ` ${symbol}`}
+                                            {`HARVEST` + ` ${symbol}`}
                                         </SubmitButton>
                                     </Wrap>
                                 )}
@@ -857,7 +853,7 @@ export const ActiveRow = ({ pid }) => {
                                                 handleEmergency()
                                             }
                                         >
-                                            {i18n._(t`EMERGENCY WITHDRAW`)}
+                                            {`EMERGENCY WITHDRAW`}
                                         </SubmitButton>
                                     </Wrap>
                                 )}
@@ -963,25 +959,25 @@ export const ActiveRow = ({ pid }) => {
                     <div className="space-y-4">
                         <ModalHeader header={`FYI: Early Withdrawal Fee`} onClose={() => setShowConfirmation(false)} />
                         <Typography variant="sm">
-                            <br /><br /> {i18n._(t`The fee`)} <b> {i18n._(t`reduces by 1% daily`)}</b>,  {i18n._(t`so consider waiting prior to withdrawing to avoid fees.`)}
+                            <br /><br /> {`The fee`} <b> {`reduces by 1% daily`}</b>,  {`so consider waiting prior to withdrawing to avoid fees.`}
 
                             <div className="text-xl mt-4 mb-4 text-center border p-1.5 border-dark-600">
-                                {i18n._(t`Estimated Fee Outcomes`)}
+                                {`Estimated Fee Outcomes`}
                             </div>
-                            • <b> {i18n._(t`Current Rate`)}</b>: {Number(withdrawFee).toFixed(0)}% <br />
-                            • <b> {i18n._(t`Fee Amount`)}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {"LP"}<br />
-                            • <b> {i18n._(t`Fee Value`)}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) * Number(lpPrice) / 100, true, true)}
+                            • <b> {`Current Rate`}</b>: {Number(withdrawFee).toFixed(0)}% <br />
+                            • <b> {`Fee Amount`}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) / 100, false, true)} {"LP"}<br />
+                            • <b> {`Fee Value`}</b>: {formatNumber(Number(withdrawFee) * Number(withdrawValue) * Number(lpPrice) / 100, true, true)}
 
                             <div className="mt-6 text-center">
-                                <i><b> {i18n._(t`Please do not rely on our estimations`)}</b></i>.
+                                <i><b> {`Please do not rely on our estimations`}</b></i>.
                             </div>
 
                             {/* <b>100% of the fee</b> goes towards building our protocol-owned liquidity, which brings about long-term sustainability to our platform. */}
                         </Typography>
                         <Typography variant="sm" className="font-medium text-center">
-                            {i18n._(t`QUESTIONS OR CONCERNS?`)}
+                            {`QUESTIONS OR CONCERNS?`}
                             <a href="mailto:soulswapfinance@gmail.com">
-                                {' '}  {i18n._(t`CONTACT US`)}
+                                {' '}  {`CONTACT US`}
                             </a>
                         </Typography>
                         <Button
@@ -991,7 +987,7 @@ export const ActiveRow = ({ pid }) => {
                                 handleWithdraw(withdrawValue)
                             }
                         >
-                            {i18n._(t`I UNDERSTAND THESE TERMS`)}
+                            {`I UNDERSTAND THESE TERMS`}
                         </Button>
                     </div>
                 </Modal>

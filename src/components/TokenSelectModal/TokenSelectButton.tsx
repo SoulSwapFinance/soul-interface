@@ -40,10 +40,10 @@ const TokenSelectButton: React.FC<any> = ({
       /> */}
         <Image
           alt=""
-          width="36px"
-          height="36px"
+          width={36}
+          height={36}
           src={currentToken?.symbol === "FTM" ? ftmIcon : currentToken?.logoURL}
-          style={{ height: "36px", width: "36px" }}
+          style={{ height: 36, width: 36 }}
         />
         {/* <Spacer 
         size="xs" 

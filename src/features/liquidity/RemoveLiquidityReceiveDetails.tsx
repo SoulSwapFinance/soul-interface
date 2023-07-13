@@ -38,7 +38,7 @@ export default function RemoveLiquidityReceiveDetails({
             <RowBetween className="text-sm">
               {hasWETH ? (
                 <Link href={`/remove/${currencyId(currencyA)}/${currencyId(currencyB)}`}>
-                  <a>Receive {WNATIVE[chainId].symbol}</a>
+                  Receive {WNATIVE[chainId].symbol}
                 </Link>
               ) : hasETH ? (
                 <Link
@@ -52,7 +52,7 @@ export default function RemoveLiquidityReceiveDetails({
                       : currencyId(currencyB)
                   }`}
                 >
-                  <a>Receive {NATIVE[chainId].symbol}</a>
+                  Receive {NATIVE[chainId].symbol}
                 </Link>
               ) : null}
             </RowBetween>
@@ -61,14 +61,14 @@ export default function RemoveLiquidityReceiveDetails({
         {/* <RowBetween className="space-x-6"> */}
         <div className="flex flex-col space-y-3 md:flex-row md:space-x-6 md:space-y-0">
           <div className="flex flex-row items-center w-full p-3 space-x-4 rounded bg-dark-900">
-            <CurrencyLogo currency={currencyA} size="46px" className={'mr-12'} />
+            <CurrencyLogo currency={currencyA} size={46} className={'mr-12'} />
             <AutoColumn>
               <div className="text-white">{amountA}</div>
               <div className="text-sm">{currencyA?.symbol}</div>
             </AutoColumn>
           </div>
           <div className="flex flex-row items-center w-full p-3 space-x-4 rounded bg-dark-900">
-            <CurrencyLogo currency={currencyB} size="46px" className={'mr-12'} />
+            <CurrencyLogo currency={currencyB} size={46} className={'mr-12'} />
             <AutoColumn>
               <div className="text-white">{amountB}</div>
               <div className="text-sm">{currencyB?.symbol}</div>

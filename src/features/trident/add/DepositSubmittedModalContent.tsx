@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { HeadlessUiModal } from 'components/Modal'
 import React, { FC } from 'react'
 
@@ -9,13 +7,12 @@ interface DepositSubmittedModalContent {
 }
 
 const DepositSubmittedModalContent: FC<DepositSubmittedModalContent> = ({ txHash, onDismiss }) => {
-  const { i18n } = useLingui()
 
   return (
     <HeadlessUiModal.SubmittedModalContent
       txHash={txHash}
-      header={i18n._(t`Success!`)}
-      subheader={i18n._(t`Success! Deposit Submitted`)}
+      header={`Success!`}
+      subheader={`Success! Deposit Submitted`}
       onDismiss={onDismiss}
     />
   )

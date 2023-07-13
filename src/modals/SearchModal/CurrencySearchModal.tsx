@@ -9,7 +9,7 @@ import { CurrencySearch } from './CurrencySearch'
 import ImportList from './ImportList'
 import { ImportToken } from './ImportToken'
 import Manage from './Manage'
-import { useActiveWeb3React } from 'services/web3'
+// import { useActiveWeb3React } from 'services/web3'
 
 interface CurrencyModalContext {
   view: CurrencyModalView
@@ -113,7 +113,7 @@ const Component: FC<ComponentProps> = ({
         ]
       )}
     >
-      <div className="max-h-[92vh] h-[40rem] h-full flex flex-col gap-4">
+      <div className="max-h-[92vh] h-full flex flex-col gap-4">
         {view === CurrencyModalView.search ? (
           <CurrencySearch
             otherSelectedCurrency={otherSelectedCurrency}
@@ -169,7 +169,8 @@ const CurrencySearchModalControlled: FC<CurrencySearchModalControlledProps> = ({
   // const { chainId } = useActiveWeb3React()
 
   return (
-    <HeadlessUiModal.Controlled isOpen={open}
+    <HeadlessUiModal.Controlled 
+      isOpen={open}
       chainId={chainId}
       onDismiss={onDismiss}>
       <Component {...props} onDismiss={onDismiss} />

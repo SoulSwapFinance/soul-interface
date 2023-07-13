@@ -1,14 +1,9 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import Typography from 'components/Typography'
 import { useAddDetails } from 'features/trident/add/useAddDetails'
 import { usePoolContext } from 'features/trident/PoolContext'
 import { FC } from 'react'
 
-import TransactionDetailsExplanationModal from '../TransactionDetailsExplanationModal'
-
 const TransactionDetails: FC = () => {
-  const { i18n } = useLingui()
   const { poolWithState, poolBalance } = usePoolContext()
   const { price, poolShareBefore, liquidityMinted, poolShareAfter } = useAddDetails()
 
@@ -16,11 +11,11 @@ const TransactionDetails: FC = () => {
     <div className="flex flex-col gap-4 lg:gap-8">
       <div className="flex flex-row justify-between gap-2">
         <Typography weight={700} className="text-high-emphesis">
-          {i18n._(t`Transaction Details`)}
+          {`Transaction Details`}
         </Typography>
         {/* <TransactionDetailsExplanationModal>
           <Typography weight={700} variant="sm" className="text-right text-blue">
-            {i18n._(t`What do these mean?`)}
+            {`What do these mean?`}
           </Typography>
         </TransactionDetailsExplanationModal> */}
       </div>
@@ -47,7 +42,7 @@ const TransactionDetails: FC = () => {
         )}
         <div className="flex flex-row justify-between gap-2">
           <Typography variant="sm" className="text-secondary">
-            {i18n._(t`Minimum Received`)}
+            {`Minimum Received`}
           </Typography>
           <Typography id="text-liquidity-minted" weight={700} variant="sm" className="text-high-emphesis">
             {liquidityMinted?.toSignificant(6) || '0.000'} SLP
@@ -55,7 +50,7 @@ const TransactionDetails: FC = () => {
         </div>
         <div className="flex flex-row justify-between gap-2">
           <Typography variant="sm" className="text-secondary">
-            {i18n._(t`Your Pool Share`)}
+            {`Your Pool Share`}
           </Typography>
           <Typography weight={700} variant="sm" className="text-right text-high-emphesis">
             {poolShareBefore?.greaterThan(0) ? poolShareBefore?.toSignificant(6) : '0.000'}%
@@ -68,7 +63,7 @@ const TransactionDetails: FC = () => {
         </div>
         <div className="flex flex-row justify-between gap-2">
           <Typography variant="sm" className="text-secondary whitespace-nowrap">
-            {i18n._(t`Your Pool Tokens`)}
+            {`Your Pool Tokens`}
           </Typography>
           <Typography weight={700} variant="sm" className="text-right text-high-emphesis">
             {poolBalance?.greaterThan(0) ? poolBalance?.toSignificant(6) : '0.000'}

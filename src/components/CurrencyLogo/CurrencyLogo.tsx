@@ -22,12 +22,11 @@ export const getCurrencyLogoUrls = (currency): string[] => {
 
   // if (currency.chainId in BLOCKCHAIN) {
     urls.push(
-      // @ts-ignore TYPE NEEDS FIXING
       `https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/${BLOCKCHAIN[currency.chainId]}/assets/${
         currency.wrapped.address
     }/logo.png`
     )
-   // }
+  //  }
   return urls
 }
 
@@ -56,12 +55,12 @@ export const UNKNOWN_ICON = 'https://raw.githubusercontent.com/SoulSwapFinance/i
 
 export interface CurrencyLogoProps {
   currency?: Currency
-  size?: string | number
+  size?: number
   style?: React.CSSProperties
   className?: string
 }
 
-const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({ currency, size = '24px', className }) => {
+const CurrencyLogo: FunctionComponent<CurrencyLogoProps> = ({ currency, size = 24, className }) => {
   const { chainId } = useActiveWeb3React()
   const uriLocations = useHttpLocations(
     currency instanceof WrappedTokenInfo ? currency.logoURI || currency.tokenInfo.logoURI : undefined

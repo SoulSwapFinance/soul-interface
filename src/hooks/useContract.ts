@@ -11,7 +11,6 @@ import {
   SCARAB_ADDRESS,
   SAFE_ADDRESS,
   ATOMIC_SWAP_ADDRESS,
-  LOCKER_ADDRESS,
   SOUL_USDC_PAIR,
   LUX_ADDRESS,
   TEAM_WALLET_ADDRESS,
@@ -60,10 +59,8 @@ import {
   SOUL_BOND_ADDRESS,
   COFFIN_BOX_ADDRESS,
   SOULSWAP_SWAPPER_ADDRESS,
-  UNDERWORLD_ADDRESS,
   CHAINLINK_ORACLE_ADDRESS,
   MERKLE_DISTRIBUTOR_ADDRESS,
-  SOUL_X_SWAP_ADDRESS,
   MANIFESTER_ADDRESS,
   MARKET_UPDATER_ADDRESS,
   REFUNDER_ADDRESS,
@@ -99,9 +96,7 @@ import UNDERWORLD_ABI from 'constants/abis/underworldpair.json'
 import BALANCES_FETCHER_ABI from 'constants/abis/balancesfetcher.json'
 
 // soul
-import SOUL_SCARAB_ABI from 'constants/abis/soulswap/scarab.json'
 import SOUL_SAFE_ABI from 'constants/abis/soulswap/safe.json'
-import SOUL_X_SWAP_ABI from 'constants/abis/soulswap/soulxswap.json'
 import SOUL_GUIDE_ABI from 'constants/abis/soul-guide.json' // TODO: update abi
 import REFUNDER_ABI from 'constants/abis/refunder.json'
 import SUMMONER_ABI from 'constants/abis/soulswap/soulsummoner.json' // 28 JUL
@@ -146,8 +141,6 @@ import SAAVE_ABI from 'constants/abis/saave.json'
 import SOULSWAP_ABI from '@sushiswap/core/abi/SushiRoll.json'
 import SOULSWAP_TWAP_ORACLE_ABI from 'constants/abis/sushiswap-slp-oracle.json'
 import TIMELOCK_ABI from 'constants/abis/timelock.json'
-
-import LOCKER_ABI from 'constants/abis/locker.json'
 
 import WETH9_ABI from 'constants/abis/weth.json'
 import ZAPPER_ABI from 'constants/abis/zapper.json'
@@ -314,11 +307,6 @@ export function useSeanceContract(withSignerIfPossible = true): Contract | null 
 export function useETHPairContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && ETH_USD_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
-}
-
-export function useScarabContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SCARAB_ADDRESS[250], SOUL_SCARAB_ABI, withSignerIfPossible)
 }
 
 export function useSafeContract(withSignerIfPossible?: boolean): Contract | null {
@@ -490,11 +478,6 @@ export function useSummonerAssistantContract(withSignerIfPossible?: boolean): Co
   return useContract(chainId && SUMMONER_ASSISTANT_ADDRESS[chainId], SUMMONER_ASSISTANT_ABI, withSignerIfPossible)
 }
 
-export function useLockerContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && LOCKER_ADDRESS[chainId], LOCKER_ABI, withSignerIfPossible)
-}
-
 export function useLaunchpadContract(address?: string, withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && address !== undefined && address !== '' && address, LAUNCHPAD_ABI, withSignerIfPossible)
@@ -609,12 +592,6 @@ export function useZapperContract(withSignerIfPossible?: boolean): Contract | nu
 export function useMarketUpdater(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && MARKET_UPDATER_ADDRESS[chainId], UPDATER_ABI, withSignerIfPossible)
-}
-
-
-export function useSoulXSwapContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_X_SWAP_ADDRESS[chainId], SOUL_X_SWAP_ABI, withSignerIfPossible)
 }
 
 export function useSwapUnderlyingContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {

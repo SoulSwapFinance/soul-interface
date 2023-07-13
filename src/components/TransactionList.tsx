@@ -1,14 +1,7 @@
-// import { ArrowUpRight, CheckCircle } from 'react-feather'
 import Dots from '../components/Dots'
-// import Image from '../components/Image'
 import React from 'react'
-// import { getExplorerLink } from '../functions/explorer'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
-// import { useActiveWeb3React } from 'services/web3'
 
 export default function TransactionList({ transactions }) {
-  const { i18n } = useLingui()
   // const { chainId } = useActiveWeb3React()
   return transactions ? (
     <div className="space-y-3">
@@ -37,7 +30,7 @@ export default function TransactionList({ transactions }) {
     </div>
   ) : (
     <div className="px-4 text-center text-gray-500 border border-gray-800 rounded py-14">
-      <Dots>{i18n._(t`Loading`)}</Dots>
+      <Dots>{`Loading`}</Dots>
     </div>
   )
 }

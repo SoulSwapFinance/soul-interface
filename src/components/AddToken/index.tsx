@@ -49,9 +49,9 @@ const AddToken: FC = (tokenToAdd: Currency) => {
       <Image
         src={ LOGO_URL }
         alt={ `${SYMBOL}` }
-        width="1600px"
-        height="1600px"
-        objectFit="contain"
+        width={1600}
+        height={1600}
+        // objectFit="contain"
         className="rounded-md"
       />
     </div>

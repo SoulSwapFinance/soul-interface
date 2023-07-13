@@ -78,7 +78,7 @@ const Route = ({
 				{/* <div className="grid grid-cols-3 bg-dark-1000 p-1 rounded rounded-xl"> */}
 				<CurrencyLogo
 					currency={toToken}
-					size={'36px'}
+					size={36}
 					// src= {tokenURI(toToken.wrapped.address)}
 					// height={'42px'}
 					// width={'42px'}

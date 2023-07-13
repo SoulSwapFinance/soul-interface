@@ -1,6 +1,4 @@
 import { CheckCircleIcon, DocumentDuplicateIcon } from '@heroicons/react/24/outline'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { classNames } from 'functions'
 import useCopyClipboard from 'hooks/useCopyClipboard'
@@ -17,7 +15,6 @@ interface CopyHelperProps {
 
 const CopyHelper: FC<CopyHelperProps> = ({ className, toCopy, children }) => {
   const [isCopied, setCopied] = useCopyClipboard()
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
 
   return (
@@ -32,7 +29,7 @@ const CopyHelper: FC<CopyHelperProps> = ({ className, toCopy, children }) => {
         <div className="flex items-center space-x-1 whitespace-nowrap">
           <CheckCircleIcon width={16} height={16} />
           <Typography variant="xs" weight={700}>
-            {i18n._(t`Copied`)}
+            {`Copied`}
           </Typography>
         </div>
       )}

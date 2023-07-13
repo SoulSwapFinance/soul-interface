@@ -5,7 +5,6 @@ import { Bar, LinePath } from '@visx/shape'
 import { bisector } from 'd3-array'
 import { FC, MouseEvent, TouchEvent, useRef } from 'react'
 import { useCallback, useMemo } from 'react'
-// @ts-ignore TYPE NEEDS FIXING
 import AutoSizer from 'react-virtualized-auto-sizer'
 
 interface LineGraphProps {

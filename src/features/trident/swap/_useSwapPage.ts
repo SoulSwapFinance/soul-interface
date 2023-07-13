@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { JSBI, Percent, TradeType, TradeVersion, WNATIVE, ZERO } from 'sdk'
 import { selectTridentSwap, TypedField } from 'features/trident/swap/swapSlice'
 import useCurrenciesFromURL from 'features/trident/useCurrenciesFromURL'
@@ -18,7 +16,6 @@ import { useMemo } from 'react'
   If you need anything from this hook, use useDerivedTridentSwapContext() instead
  */
 export const _useSwapPage = () => {
-  const { i18n } = useLingui()
   const { value, typedField, spendFromWallet } = useAppSelector(selectTridentSwap)
   const { account, chainId } = useActiveWeb3React()
   const {
@@ -94,17 +91,17 @@ export const _useSwapPage = () => {
   let error = useMemo(
     () =>
       !account
-        ? i18n._(t`Connect Wallet`)
+        ? `Connect Wallet`
         : maxAmountSpend(balance)?.equalTo(ZERO)
-        ? i18n._(t`Insufficient balance to cover for fees`)
+        ? `Insufficient balance to cover for fees`
         : !trade?.inputAmount[0]?.greaterThan(ZERO) && !parsedAmounts[1]?.greaterThan(0)
-        ? i18n._(t`Enter Amount`)
+        ? `Enter Amount`
         : trade === undefined && !isWrap
-        ? i18n._(t`No Route Found`)
+        ? `No Route Found`
         : balance && trade && inputCurrencyAmount && maxAmountSpend(balance)?.lessThan(inputCurrencyAmount)
-        ? i18n._(t`Insufficient Balance`)
+        ? `Insufficient Balance`
         : '',
-    [account, balance, i18n, inputCurrencyAmount, isWrap, parsedAmounts, trade]
+    [account, balance, inputCurrencyAmount, isWrap, parsedAmounts, trade]
   )
 
   return useMemo(

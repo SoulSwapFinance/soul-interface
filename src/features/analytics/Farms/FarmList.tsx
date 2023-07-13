@@ -68,8 +68,8 @@ function Rewards({ rewards }: { rewards: Reward[] }): JSX.Element {
               {reward.icon && (
                 <Image
                   src={reward.icon}
-                  width="30px"
-                  height="30px"
+                  width={30}
+                  height={30}
                   className="rounded-full"
                   layout="fixed"
                   alt={reward.token}

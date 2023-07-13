@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { XCircleIcon } from '@heroicons/react/24/outline'
 
 const SwapBanner: FC = () => (
-  <div className="relative mt-4 w-full bg-purple bg-opacity-10">
+  <div className="relative mt-4 w-full bg-purple bg-opacity/10">
     <div className="px-3 py-3 mx-auto max-w-7xl sm:px-6 lg:px-8">
     <div className="pr-16 sm:text-center sm:px-16">
         <p className="font-medium text-white">

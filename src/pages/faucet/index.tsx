@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import React, { useCallback, useState } from 'react'
-import { t } from '@lingui/macro'
 import { formatNumberScale } from '../../functions'
 import { Button, ButtonError } from '../../components/Button'
 import { AutoColumn } from '../../components/Column'
@@ -9,11 +8,9 @@ import DoubleGlowShadowV2 from '../../components/DoubleGlowShadowV2'
 import SoulLogo from '../../components/SoulLogo'
 import Container from '../../components/Container'
 import Typography from '../../components/Typography'
-import { i18n } from '@lingui/core'
+import { Loader } from 'react-feather'
 import Image from '../../components/Image'
 import { useActiveWeb3React } from 'services/web3'
-import Web3Connect from '../../components/Web3Connect'
-import { Loader } from 'react-feather'
 import { useETHBalances } from '../../state/wallet/hooks'
 import axios from 'axios'
 import ReCAPTCHA from 'react-google-recaptcha'
@@ -77,7 +74,7 @@ export default function Faucet(): JSX.Element {
           <div className="p-4 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
             <div className="p-4 mb-3 space-y-3 text-center">
               <Typography component="h1" variant="h2">
-                {i18n._(t`Fantom Faucet`)}
+                {`Fantom Faucet`}
               </Typography>
               <Typography component="h1" variant="base">
                 A Faucet is a tool that provides a small amount of FTM for users that used the bridge to start using Soul Protocol without having to
@@ -123,7 +120,7 @@ export default function Faucet(): JSX.Element {
                         </AutoRow>
                       </div>
                     ) : (
-                      i18n._(t`Give me some FTM`)
+                      `Give me some FTM`
                     )}
                   </ButtonError>
                 )}

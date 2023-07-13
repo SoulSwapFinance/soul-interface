@@ -1,6 +1,4 @@
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Percent } from 'sdk'
 import { DEFAULT_DEADLINE_FROM_NOW } from '../../constants'
 import { classNames } from 'functions'
@@ -29,7 +27,6 @@ export interface TransactionSettingsProps {
 }
 
 const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage = V2_SWAP_DEFAULT_SLIPPAGE }) => {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const userSlippageTolerance = useUserSlippageTolerance()
   const setUserSlippageTolerance = useSetUserSlippageTolerance()
@@ -91,13 +88,11 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
       <div className="grid gap-2">
         <div className="flex items-center">
           <Typography variant="xs" weight={700} className="text-high-emphesis">
-            {i18n._(t`Slippage`)}
+            {`Slippage`}
           </Typography>
 
           <QuestionHelper
-            text={i18n._(
-              t`Transactions revert if price changes unfavorably by more than this percentage.`
-            )}
+            text={`Transactions revert if price changes unfavorably by more than this percentage.`}
           />
         </div>
         <div className="flex items-center space-x-2">
@@ -149,7 +144,7 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
             variant="outlined"
             onClick={() => parseSlippageInput('')}
           >
-            {i18n._(t`Auto`)}
+            {`Auto`}
           </Button>
         </div>
         {/* <div> */}
@@ -165,10 +160,10 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
           >
             <div>
               {slippageError === SlippageError.InvalidInput
-                ? i18n._(t`Invalid Slippage`)
+                ? `Invalid Slippage`
                 : slippageError === SlippageError.RiskyLow
-                  ? i18n._(t`Failure Risk`)
-                  : i18n._(t`Frontrun Risk`)}
+                  ? `Failure Risk`
+                  : `Frontrun Risk`}
             </div>
           </Typography>
         ) : null}
@@ -176,10 +171,10 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
       <div className="grid gap-2">
         <div className="flex items-center">
           <Typography variant="xs" weight={700} className="text-high-emphesis">
-            {i18n._(t`Deadline`)}
+            {`Deadline`}
           </Typography>
 
-          <QuestionHelper text={i18n._(t`Transaction reverts if pending past deadline.`)} />
+          <QuestionHelper text={`Transaction reverts if pending past deadline.`} />
         </div>
         <div className="flex items-center gap-2">
           <input
@@ -203,7 +198,7 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
             color={deadlineError ? 'red' : ''}
           />
           <Typography variant="sm" weight={700} className="text-secondary">
-            {/* {i18n._(t`minutes`)} */}
+            {/* {`minutes`)} */}
           </Typography>
         </div>
       </div>

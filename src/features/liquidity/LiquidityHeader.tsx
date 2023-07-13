@@ -4,6 +4,7 @@ import { currencyId } from '../../functions/currency'
 import { useActiveWeb3React } from 'services/web3'
 import { classNames } from 'functions'
 import { getChainColorCode } from 'constants/chains'
+import Typography from 'components/Typography'
 
 export default function LiquidityHeader({ input = undefined, output = undefined }: any): JSX.Element {
   const { chainId } = useActiveWeb3React()
@@ -13,9 +14,11 @@ export default function LiquidityHeader({ input = undefined, output = undefined 
         activeClassName={classNames("font-bold text-high-emphesis rounded-2xl", `bg-${getChainColorCode(chainId)}`)}
         href={`/exchange/add/${currencyId(input)}/${currencyId(output)}`}
       >
-        <a className="flex items-center justify-center px-1 py-1 text-base font-medium text-center rounded-md md:px-10 text-secondary hover:text-high-emphesis">
-          +
-        </a>
+        <Typography
+          className="flex text-white items-center justify-center px-1 py-1 text-base font-medium text-center rounded-md md:px-10 hover:text-high-emphesis"
+        >
+          {`+`}  
+       </Typography>
       </NavLink>
       <NavLink
         onClick={(event) => {
@@ -24,9 +27,11 @@ export default function LiquidityHeader({ input = undefined, output = undefined 
         activeClassName={classNames("text-high-emphesis font-bold rounded-2xl", `bg-${getChainColorCode(chainId)}`)}
         href={`/exchange/remove/${currencyId(input)}/${currencyId(output)}`}
       >
-        <a className="flex items-center justify-center px-1 py-1 text-base font-medium text-center rounded-md md:px-10 text-secondary hover:text-high-emphesis">
-          -
-        </a>
+        <Typography
+          className="flex text-white items-center justify-center px-1 py-1 text-base font-medium text-center rounded-md md:px-10 hover:text-high-emphesis"
+        >
+          {`-`}  
+       </Typography>
       </NavLink>
     </div>
   )

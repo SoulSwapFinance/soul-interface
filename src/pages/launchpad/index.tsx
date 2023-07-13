@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/link-passhref */
-
 import Head from 'next/head'
 import React from 'react'
 import { useRouter } from 'next/router'
@@ -100,6 +98,7 @@ export default function Launchpad(): JSX.Element {
                       </a>
                     </NavLink>
                     <NavLink
+                      legacyBehavior={true}
                       exact
                       href={'/launchpad?filter=upcoming'}
                       activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-purple-dark-900"
@@ -109,6 +108,7 @@ export default function Launchpad(): JSX.Element {
                       </a>
                     </NavLink>
                     <NavLink
+                      legacyBehavior={true}
                       exact
                       href={'/launchpad?filter=completed'}
                       activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-purple-dark-900"
@@ -162,8 +162,8 @@ export default function Launchpad(): JSX.Element {
                               <div className={`flex flex-row justify-center items-center`}>
                                 <Image
                                   src={p.logo}
-                                  width="60px"
-                                  height="60px"
+                                  width={60}
+                                  height={60}
                                   className="rounded-full bg-white"
                                   layout="fixed"
                                   alt={p.name}

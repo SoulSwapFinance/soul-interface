@@ -572,28 +572,28 @@ const Limit = () => {
                   {rateType === Rate.MUL ? (
                     <Button
                       size={'xs'}
-                      className={classNames(`mx-[45%] rounded rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
+                      className={classNames(`mx-[45%] rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
                       onClick={handleSetSwap}
                     >
                       <Image
                         width={14}
                         alt={"m{14}sign"}
-                        height={'14px'}
-                        className={`rounded rounded-xl`}
+                        height={14}
+                        className={`rounded-xl`}
                         src={Multiply}
                       />
                     </Button>
                   ) : (
                     <Button
                       size={'xs'}
-                      className={classNames(`mx-[45%] rounded rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
+                      className={classNames(`mx-[45%] rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
                       onClick={handleSetSwap}
                     >
                       <Image
                       alt={"divide icon"}
                         width={14}
                         height={14}
-                        className={`rounded rounded-xl`}
+                        className={`rounded-xl`}
                         src={Divide}
                       />
                     </Button>
@@ -635,27 +635,27 @@ const Limit = () => {
                 <div className="-mt-3 -mb-3 z-0">
                   <Button
                     size={'xs'}
-                    className={classNames(`mx-[45%] rounded rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
+                    className={classNames(`mx-[45%] rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
                   // onClick={handleSwitch(currencyA, currencyB)}
                   >
                     <Image
                     alt={"chevron down icon"}
                       width={14}
                       height={14}
-                      className={`rounded rounded-xl`}
+                      className={`rounded-xl`}
                       src={ChevronDown}
                     />
                   </Button>
                   <Button
                     size={'xs'}
-                    className={classNames(`-ml-8 sm:-ml-2 rounded rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
+                    className={classNames(`-ml-8 sm:-ml-2 rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
                     onClick={handleSetSwap}
                   >
                     <Image
                     alt={"Chevron double up icon"}
                       width={14}
                       height={14}
-                      className={`rounded rounded-xl`}
+                      className={`rounded-xl`}
                       src={ChevronDoubleUp}
                     />
                   </Button>
@@ -754,7 +754,7 @@ const Limit = () => {
                               <span style={{ display: "flex", alignItems: "center" }}>
                                 <CurrencyLogo
                                   currency={currencyA}
-                                  size={"20px"}
+                                  size={20}
                                   style={{ marginRight: "8px", flexShrink: 0 }}
                                 />
                                 {/* we need to shorten this string on mobile */}

@@ -34,9 +34,9 @@ function LuxorStats(): JSX.Element | null {
         <Image
           src="/images/tokens/wLUM.png"
           alt="WLUM"
-          width="28px"
-          height="28px"
-          objectFit="contain"
+          width={28}
+          height={28}
+          // objectFit="contain"
           className="rounded-md"
         />
           <HideOnMobile>
@@ -48,9 +48,9 @@ function LuxorStats(): JSX.Element | null {
         <Image
           src="/images/tokens/lux.png"
           alt="LUX"
-          width="28px"
-          height="28px"
-          objectFit="contain"
+          width={28}
+          height={28}
+          // objectFit="contain"
           className="rounded-md"
         />
           <HideOnMobile>

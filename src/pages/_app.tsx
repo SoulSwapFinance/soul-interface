@@ -1,9 +1,6 @@
 import '../bootstrap'
 import '../styles/index.css'
 
-import { i18n } from '@lingui/core'
-import { I18nProvider } from '@lingui/react'
-import { remoteLoader } from '@lingui/remote-loader'
 import { Web3ReactProvider } from '@web3-react/core'
 import Dots from 'components/Dots'
 import Portals from 'components/Portals'
@@ -20,7 +17,6 @@ import ListsUpdater from 'state/lists/updater'
 import MulticallUpdater from 'state/multicall/updater'
 import TransactionUpdater from 'state/transactions/updater'
 import UserUpdater from 'state/user/updater'
-import * as plurals from 'make-plural/plurals'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -35,7 +31,7 @@ import { ApiDataProvider } from 'contexts/ApiDataProvider'
 import ModalProvider from 'contexts/ModalProvider'
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client'
 import { RPC } from 'connectors'
-import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const link = createHttpLink({
   // uri: RPC[250],
@@ -84,34 +80,6 @@ function MyApp({ Component, pageProps, fallback, err }) {
 
   const [queryClient] = React.useState(() => new QueryClient());
 
-  useEffect(() => {
-    async function load(locale) {
-      i18n.loadLocaleData(locale, { plurals: plurals[locale?.split('_')[0]] })
-
-      try {
-        // Load messages from AWS, use q session param to get latest version from cache
-        const res = await fetch(
-          `https://raw.githubusercontent.com/soulswapfinance/translations/master/soulswap/${locale}.json`
-        )
-        const remoteMessages = await res.json()
-
-        const messages = remoteLoader({ messages: remoteMessages, format: 'minimal' })
-        i18n.load(locale, messages)
-      } catch (e) {
-        console.log(e)
-        // Load fallback messages
-        // const { messages } = await import(`@lingui/loader!./../../locale/${locale}.json?raw-lingui`)
-        // i18n.load(locale, messages)
-        // i18n.load(locale, messages)
-      }
-
-      i18n.activate(locale)
-    }
-
-    load(locale)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [locale])
-
   // Allows for conditionally setting a provider to be hoisted per page
   const Provider = Component.Provider || Fragment
 
@@ -156,15 +124,12 @@ function MyApp({ Component, pageProps, fallback, err }) {
           `,
         }}
       />
-      {/*@ts-ignore TYPE NEEDS FIXING*/}
-      <I18nProvider i18n={i18n} forceRenderOnLocaleChange={false}>
         <Web3ReactProvider getLibrary={getLibrary}>
           <QueryClientProvider client={queryClient}>
             <Hydrate state={pageProps.dehydratedState}>
               <ApiDataProvider>
                 <ApolloProvider client={client}>
-                  {/*@ts-ignore TYPE NEEDS FIXING*/}
-                  <FantomApiProvider>
+                  {/* <FantomApiProvider> */}
                     <Web3ProviderNetwork getLibrary={getLibrary}>
                       <Web3ReactManager>
                         <ReduxProvider store={store}>
@@ -198,13 +163,12 @@ function MyApp({ Component, pageProps, fallback, err }) {
                         </ReduxProvider>
                       </Web3ReactManager>
                     </Web3ProviderNetwork>
-                  </FantomApiProvider>
+                  {/* </FantomApiProvider> */}
                 </ApolloProvider>
               </ApiDataProvider>
             </Hydrate>
           </QueryClientProvider>
         </Web3ReactProvider>
-      </I18nProvider>
     </>
   )
 }

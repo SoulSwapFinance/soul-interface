@@ -1,15 +1,9 @@
 import Container from 'components/Container'
-import Image from 'components/Image'
 import Main from 'components/Main'
 import NavLink from 'components/NavLink'
 import Popups from 'components/Popups'
-import Link from 'next/link'
 import React, { FC } from 'react'
 import { useRouter } from 'next/router'
-import { Button } from 'components/Button'
-import { getChainColorCode } from 'constants/chains'
-import { useActiveWeb3React } from 'services/web3'
-import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 
 interface LayoutProps {
   children?: React.ReactChild
@@ -20,60 +14,17 @@ interface LayoutProps {
 // const BORROW_IMG = "https://media.giphy.com/media/GgyKe2YYi3UR8HltC6/giphy.gif"
 
 const Layout: FC<LayoutProps> = ({ left, children, right }) => {
-  const { chainId } = useActiveWeb3React()
   const router = useRouter()
-  const isLend = router.asPath == '/lend'
 
   return (
     <>
       <Main>
         <Container className="px-4 py-4 md:py-8 lg:py-12" maxWidth="7xl">
           <div className={`mb-2 grid grid-cols-12 gap-4`}>
-            {/* <div className="flex justify-center col-span-12 md:hidden">
-              <Link href="/borrow">
-                <a className="flex justify-center xl:justify-start xl:mx-8">
-                  <Image 
-                    src= { BORROW_IMG }
-                    alt="Underworld" 
-                    height={128} 
-                    width={400} 
-                    placeholder="empty" 
-                  />
-                </a>
-              </Link>
-            </div> */}
           </div>
           <div className="flex items-end col-span-12 xl:col-span-9">
             <nav className="flex items-center justify-between w-full">
               <div className="flex">
-                {/* <Button color="blue" variant="outlined" size="small">
-                <NavLink href="/lend">
-                  <a
-                    className={
-                      'px-2 sm:px-4 flex items-center font-medium ' +
-                      (router.pathname.startsWith('/lend')
-                        ? 'text-high-emphesis text-white'
-                        : 'text-secondary text-blue hover:text-primary hover:text-blue')
-                    }
-                  >
-                    <div className="text-base whitespace-nowrap">Supply</div>
-                  </a>
-                </NavLink>
-              </Button>
-              <Button color="purple" variant="outlined" size="small">
-                <NavLink href="/borrow">
-                  <a
-                    className={
-                      'px-2 sm:px-4 flex items-center font-medium ' +
-                      (router.pathname.startsWith('/borrow')
-                        ? 'text-high-emphesis text-white'
-                        : 'text-secondary text-purple hover:text-primary hover:text-purple')
-                    }
-                  >
-                    <div className="text-base whitespace-nowrap">Borrow</div>
-                  </a>
-                </NavLink>
-              </Button> */}
                 {/* <NavLink href="/create">
                   <a
                     className={
@@ -135,35 +86,6 @@ const Layout: FC<LayoutProps> = ({ left, children, right }) => {
               </div>
             )}
           </div>
-
-          <div className={'flex flex-cols-1 justify-between'}>
-          <div className={isLend ? 'hidden' : 'mt-4'}>
-            <NavLink
-                href='/lend'
-            >
-              <Button variant="outlined" color={'blue'}>
-                  <div className={`flex text-sm font-bold text-${'blue'} justify-left`}>
-                    {/* <ArrowLeftIcon className={'mt-1 mr-1'} width="1em" height="1em" /> */}
-                    {`Underworld Markets`}
-                  </div>
-              </Button>
-              </NavLink>
-                </div>
-                <div className={'mt-4'}/>
-                <div className={'mt-4'}>
-            <NavLink
-                href='/balances'
-            >
-              <Button variant="outlined" color={'blue'}>
-                  <div className={`flex text-sm font-bold text-${'blue'} justify-left`}>
-                    {/* <ArrowLeftIcon className={'mt-1 mr-1'} width="1em" height="1em" /> */}
-                    {`CoffinBox Balance`}
-                  </div>
-              </Button>
-            </NavLink>
-              </div>
-            </div>
-
         </Container>
       </Main>
       <Popups />

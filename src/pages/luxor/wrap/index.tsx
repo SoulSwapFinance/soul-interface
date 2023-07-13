@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Container from 'components/Container'
 import Head from 'next/head'
 import Typography from 'components/Typography'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { ArrowDownIcon } from '@heroicons/react/24/solid'
 // import Image from 'components/Image'
-import { Tab } from '@headlessui/react'
 // import { Popover, Tab, Transition } from '@headlessui/react'
+import { Tab } from '@headlessui/react'
 import LuxorGlowShadow from 'components/LuxorGlowShadow'
 import { Button, ButtonError } from 'components/Button'
 import StableInputPanel from 'components/StableInputPanel'
 import { AutoColumn } from 'components/Column'
-import { ApprovalState, useApproveCallback, useLumensContract, useWrappedLumensContract } from 'hooks'
+import { ApprovalState, useApproveCallback, useWrappedLumensContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
 import { Token, LUM_ADDRESS } from 'sdk'
 import { WLUM_ADDRESS } from 'constants/addresses'
@@ -22,17 +20,16 @@ import { useTransactionAdder } from 'state/transactions/hooks'
 import Dots from 'components/Dots'
 import { BigNumber } from '@ethersproject/bignumber'
 import { useActiveWeb3React } from 'services/web3/hooks'
-// import { useSingleCallResult } from 'state/multicall/hooks'
 import NavLink from 'components/NavLink'
 import { useLuxorPrice } from 'hooks/getPrices'
+// import { useSingleCallResult } from 'state/multicall/hooks'
 // import useStablecoin from 'hooks/useStablecoin'
 import { useLuxorInfo } from 'hooks/useAPI'
 import { LuxorBanner } from 'components/Banner'
 
 export default function Stablecoin() {
   const addTransaction = useTransactionAdder()
-  const { i18n } = useLingui()
-  // const { independentField } = useSwapState()
+
   const [wrapValue, setWrapValue] = useState('')
   const [unwrapValue, setUnwrapValue] = useState('')
 
@@ -122,7 +119,7 @@ export default function Stablecoin() {
                     } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-yellow`
                   }
                 >
-                  {i18n._(t`WRAP`)}
+                  {`WRAP`}
                 </Tab>
                 <Tab
                   className={({ selected }) =>
@@ -130,7 +127,7 @@ export default function Stablecoin() {
                     } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-yellow`
                   }
                 >
-                  {i18n._(t`UNWRAP`)}
+                  {`UNWRAP`}
                 </Tab>
               </div>
             </Tab.List>
@@ -173,7 +170,7 @@ export default function Stablecoin() {
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1">
                 <div className="flex justify-center">
                   {/* <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Wrap Rate`)}
+                    {`Wrap Rate`}
                   </Typography> */}
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     1 LUM = { (1 / Number(wrapIndex)).toFixed(4)} WLUM
@@ -181,7 +178,7 @@ export default function Stablecoin() {
                 </div>
                 {/* <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Receieve`)}
+                    {`Receieve`}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     {formatNumber((Number(wrapValue) / Number(wrapIndex)), false)} LUM
@@ -199,9 +196,9 @@ export default function Stablecoin() {
                     disabled={wrapApprovalState !== ApprovalState.NOT_APPROVED}
                   >
                     {wrapApprovalState === ApprovalState.PENDING ? (
-                      <Dots>{i18n._(t`Approving`)}</Dots>
+                      <Dots>{`Approving`}</Dots>
                     ) : (
-                      i18n._(t`Approve`)
+                      `Approve`
                     )}
                   </Button>
                 ) : (
@@ -221,7 +218,7 @@ export default function Stablecoin() {
                     disabled={!isWrapValid || !account}
                     error={!isWrapValid && !!parsedStakeValue}
                   >
-                    {wrapError || i18n._(t`Wrap LUM`)}
+                    {wrapError || `Wrap LUM`}
                   </ButtonError>
                 )}
               </div>
@@ -265,7 +262,7 @@ export default function Stablecoin() {
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1">
                 <div className="flex justify-center">
                   {/* <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Unwrap Rate`)}
+                    {`Unwrap Rate`}
                   </Typography> */}
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     1 WLUM = {Number(wrapIndex).toFixed(2)} LUM
@@ -283,9 +280,9 @@ export default function Stablecoin() {
                     disabled={wrapApprovalState !== ApprovalState.NOT_APPROVED}
                   >
                     {wrapApprovalState === ApprovalState.PENDING ? (
-                      <Dots>{i18n._(t`Approving`)}</Dots>
+                      <Dots>{`Approving`}</Dots>
                     ) : (
-                      i18n._(t`Approve`)
+                      `Approve`
                     )}
                   </Button>
                 ) : (
@@ -305,7 +302,7 @@ export default function Stablecoin() {
                     disabled={!isUnwrapValid || !account}
                     error={!isUnwrapValid && !!parsedUnwrapValue}
                   >
-                    {wrapError || i18n._(t`Unwrap WLUM`)}
+                    {wrapError || `Unwrap WLUM`}
                   </ButtonError>
                 )}
               </div>

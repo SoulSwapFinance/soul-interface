@@ -8,9 +8,7 @@ import Dots from '../../components/Dots'
 import { Input as NumericalInput } from '../../components/NumericalInput'
 import { formatNumber, formatNumberScale, formatPercent } from '../../functions'
 import { getAddress } from '@ethersproject/address'
-import { t } from '@lingui/macro'
 import { tryParseAmount } from '../../functions/parse'
-import { useLingui } from '@lingui/react'
 import useMasterChef from './useSummoner'
 import { useTokenBalance } from '../../state/wallet/hooks'
 import { useTransactionAdder } from '../../state/transactions/hooks'
@@ -21,7 +19,6 @@ import { useActiveWeb3React } from 'services/web3'
 import ModalHeader from 'components/Modal/Header'
 
 const VaultListItem = ({ farm }) => {
-  const { i18n } = useLingui()
 
   const { account, chainId } = useActiveWeb3React()
   const [pendingTx, setPendingTx] = useState(false)
@@ -58,18 +55,11 @@ const VaultListItem = ({ farm }) => {
       <Modal isOpen={showConfirmation} onDismiss={() => setShowConfirmation(false)}>
         <div className="space-y-4">
           <ModalHeader
-            header={i18n._(t`Confirm ${currentAction.action == 'deposit' ? 'Staking' : 'Harvesting'}`)}
+            header={`Confirm ${currentAction.action == 'deposit' ? 'Staking' : 'Harvesting'}`}
             onClose={() => setShowConfirmation(false)}
           />
-          {/* <Typography variant="lg" className="font-medium pt-4">
-            {i18n._(
-              t`${
-                currentAction.action == 'deposit' ? 'Staking on Soul Vault' : 'Harvesting'
-              } will lock your tokens for ${currentAction.lockup}.`
-            )}
-          </Typography> */}
           <Typography variant="sm" className="font-medium mt-2 pb-4">
-            {i18n._(t`Everytime you stake or claim rewards your lock time renews.`)}
+            {`Everytime you stake or claim rewards your lock time renews.`}
           </Typography>
           <Button
             color="red"
@@ -77,13 +67,12 @@ const VaultListItem = ({ farm }) => {
             onClick={() => {
               if (
                 window.prompt(
-                  i18n._(
-                    t`Please type the word "confirm" to ${
+                  `Please type the word "confirm" to ${
                       currentAction.action == 'deposit' ? 'stake' : 'harvest'
                     } and withdraw your tokens after 14 days or incur a fee`
                     // } and lock your tokens for ${currentAction.lockup}.`
                   )
-                ) === 'confirm'
+                 === 'confirm'
               ) {
                 currentAction.callback()
                 setShowConfirmation(false)
@@ -91,7 +80,7 @@ const VaultListItem = ({ farm }) => {
             }}
           >
             {/* <Typography variant="lg">
-              {i18n._(t`${currentAction.action == 'deposit' ? 'Stake' : 'Harvest'} & Lock for ${currentAction.lockup}`)}
+              {`${currentAction.action == 'deposit' ? 'Stake' : 'Harvest'} & Lock for ${currentAction.lockup}`}
             </Typography> */}
           </Button>
         </div>
@@ -108,17 +97,12 @@ const VaultListItem = ({ farm }) => {
         <Disclosure.Panel className="flex flex-col w-full border-t-0 rounded rounded-t-none bg-dark-800" static>
           <div className="grid grid-cols-2 gap-4 p-4">
             <div className="col-span-2 text-center md:col-span-1">
-              {/* {farm.depositFeeBP && (
-                <div className="pr-4 mb-2 text-left cursor-pointer text-red">{`${i18n._(
-                  t`Deposit Fee`
-                )}: ${formatPercent(farm.depositFeeBP / 100)}`}</div>
-              )} */}
               {account && (
                 <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
-                  {i18n._(t`Wallet Balance`)}:{' '}
-                  {formatNumberScale(balance?.toSignificant(4, undefined, 2) ?? 0, false)}
+                  {`Wallet Balance`}:{' '}
+                  {formatNumber(balance, false, true)}
                   {farm.lpPrice && balance
-                    ? ` (` + formatNumberScale(farm.lpPrice * Number(balance?.toFixed(18) ?? 0), true) + `)`
+                    ? ` (` + formatNumberScale(farm.lpPrice * Number(balance?.toFixed(18) ?? 0), true) + ``
                     : ``}
                 </div>
               )}
@@ -140,7 +124,7 @@ const VaultListItem = ({ farm }) => {
                     }}
                     className="absolute border-0 right-4 focus:ring focus:ring-light-purple"
                   >
-                    {i18n._(t`MAX`)}
+                    {`MAX`}
                   </Button>
                 )}
               </div>
@@ -153,7 +137,7 @@ const VaultListItem = ({ farm }) => {
                   disabled={approvalState === ApprovalState.PENDING}
                   onClick={approve}
                 >
-                  {approvalState === ApprovalState.PENDING ? <Dots>Approving </Dots> : i18n._(t`Approve`)}
+                  {approvalState === ApprovalState.PENDING ? <Dots>Approving </Dots> : `Approve`}
                 </Button>
               ) : (
                 <Button
@@ -172,7 +156,7 @@ const VaultListItem = ({ farm }) => {
                           // .toBigNumber(liquidityToken?.decimals))
 
                         addTransaction(tx, {
-                          summary: `${i18n._(t`Deposit`)} ${
+                          summary: `${`Deposit`} ${
                             farm.pair.token1
                               ? `${farm.pair.token0.symbol}/${farm.pair.token1.symbol}`
                               : farm.pair.token0.symbol
@@ -196,7 +180,7 @@ const VaultListItem = ({ farm }) => {
                     }
                   }}
                 >
-                  {i18n._(t`Stake`)}
+                  {`Stake`}
                 </Button>
               )}
             </div>
@@ -206,9 +190,9 @@ const VaultListItem = ({ farm }) => {
               )} */}
               {account && (
                 <div className="pr-4 mb-2 text-left cursor-pointer text-secondary">
-                  {i18n._(t`Your Staked`)}: {formatNumberScale(amount?.toSignificant(6)) ?? 0}
+                  {`Your Staked`}: {formatNumberScale(amount?.toSignificant(6)) ?? 0}
                   {farm.lpPrice && amount
-                    ? ` (` + formatNumberScale(farm.lpPrice * Number(amount?.toSignificant(18) ?? 0), true) + `)`
+                    ? ` (` + formatNumberScale(farm.lpPrice * Number(amount?.toSignificant(18) ?? 0), true) + ``
                     : ``}
                 </div>
               )}
@@ -230,7 +214,7 @@ const VaultListItem = ({ farm }) => {
                     }}
                     className="absolute border-0 right-4 focus:ring focus:ring-light-purple"
                   >
-                    {i18n._(t`MAX`)}
+                    {`MAX`}
                   </Button>
                 )}
               </div>
@@ -255,7 +239,7 @@ const VaultListItem = ({ farm }) => {
                       new BigNumber(withdrawValue, liquidityToken?.decimals.toString()))
                       // .toBigNumber(liquidityToken?.decimals))
                     addTransaction(tx, {
-                      summary: `${i18n._(t`Withdraw`)} ${
+                      summary: `${`Withdraw`} ${
                         farm.pair.token1
                           ? `${farm.pair.token0.symbol}/${farm.pair.token1.symbol}`
                           : farm.pair.token0.symbol
@@ -276,7 +260,7 @@ const VaultListItem = ({ farm }) => {
                       // .unix(userLockedUntil / 1000)
                       // .format()})`
                   // : 
-                  i18n._(t`Unstake`)}
+                  `Unstake`}
               </Button>
             </div>
           </div>
@@ -293,7 +277,7 @@ const VaultListItem = ({ farm }) => {
                     try {
                       const tx = await harvest(farm.id)
                       addTransaction(tx, {
-                        summary: `${i18n._(t`Harvest`)} ${
+                        summary: `${`Harvest`} ${
                           farm.pair.token1
                             ? `${farm.pair.token0.symbol}/${farm.pair.token1.symbol}`
                             : farm.pair.token0.symbol
@@ -317,7 +301,7 @@ const VaultListItem = ({ farm }) => {
                   }
                 }}
               >
-                {i18n._(t`Harvest ${formatNumber(pendingSoul.toFixed(18))} SOUL`)}
+                {`Harvest ${formatNumber(pendingSoul.toFixed(18))} SOUL`}
               </Button>
             </div>
           )}

@@ -1,6 +1,4 @@
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Currency, CurrencyAmount, Pair, Percent, Token } from 'sdk'
 import selectCoinAnimation from 'animation/select-coin.json'
 import { classNames } from 'functions'
@@ -67,7 +65,6 @@ export default function StableInputPanel({
   allowManageTokenList = true,
   showSearch = true,
 }: StableInputPanelProps) {
-  const { i18n } = useLingui()
   const [modalOpen, setModalOpen] = useState(false)
   const { account, chainId } = useActiveWeb3React()
   const selectedCurrencyBalance = useCurrencyBalance(chainId, account ?? undefined, currency ?? undefined)
@@ -97,7 +94,7 @@ export default function StableInputPanel({
                 <DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={54} margin={true} />
               ) : currency && showLogo ? (
                 <div className="flex items-center bg-dark-1000">
-                  <CurrencyLogo currency={currency} size={'54px'} />
+                  <CurrencyLogo currency={currency} size={54} />
                 </div>
               ) : showLogo && (
                 <div className="rounded bg-dark-1000 max-w-[54px] max-h-[54px]">
@@ -128,7 +125,7 @@ export default function StableInputPanel({
                         : currency?.symbol) 
                         || (
                         <div className="px-2 py-1 mt-1 text-xs font-medium bg-transparent border rounded-full hover:bg-primary border-low-emphesis text-secondary whitespace-nowrap ">
-                          {i18n._(t`Select Token`)}
+                          {`Select Token`}
                         </div>
                       )}
                     </div>

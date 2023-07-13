@@ -21,7 +21,6 @@ import useBar from './useBar'
 // import HomeIcon from 'components/Icons/mobile/HomeIcon'
 import SwapIcon from 'components/Icons/exchange/SwapIcon'
 import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
-// import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
 import WalletIcon from 'components/Icons/header/WalletIcon'
 // import NftIcon from 'components/Icons/mobile/NftIcon'
 import { featureEnabled } from 'functions/feature'
@@ -43,19 +42,9 @@ const DesktopBar: FC = () => {
     const { asPath } = useRouter()
 
     const { chainId } = useActiveWeb3React()
-    // const [open, setOpen] = useState(false)
-    // const bar = useBar()
-    
-    // const { userInfo } = useUserInfo()
-
-    // const typeStyle = `justify-center text-center w-full border border-[${getChainColor(chainId)}] rounded p-2`
-
     const swapRoute = useCallback(() => {
         router.push(`/swap`)
     }, [])
-    // const homeRoute = useCallback(() => {
-    //     router.push(`/landing`)
-    // }, [])
     const walletRoute = useCallback(() => {
         router.push(`/portfolio`)
     }, [])
@@ -71,9 +60,7 @@ const DesktopBar: FC = () => {
 
     const swapPage = router.pathname.startsWith('/swap') || router.pathname.startsWith('/exchange/swap')
     const crossPage = router.pathname.startsWith('/cross') || router.pathname.startsWith('/exchange/cross')
-    // const landingPage = router.pathname.startsWith('/landing')
     const portfolioPage = router.pathname.startsWith('/portfolio')
-    // const nftPage = router.pathname.startsWith('/marketplace') || router.pathname.startsWith('/marketplace/collections')
     const farmPage = router.pathname.startsWith('/farm') || router.pathname.startsWith('/summoner')
     const bondPage = router.pathname.startsWith('/bond') || router.pathname.startsWith('/bonds')
     const dataPage = router.pathname.startsWith('/analytics')
@@ -81,12 +68,9 @@ const DesktopBar: FC = () => {
 
     // const isExchangeAnalytics
     //     = asPath.startsWith('/exchange/analytics')
-    //     || asPath.startsWith('/exchange/analytics/coffinbox')
     //     || asPath.startsWith('/exchange/analytics/dashboard')
     //     || asPath.startsWith('/exchange/analytics/pairs')
     //     || asPath.startsWith('/exchange/analytics/tokens')
-
-    // const isBridge = router.pathname.startsWith('/bridge')
 
     // const isLimit = router.pathname.startsWith('/limit')
     //   || router.pathname.startsWith('/exchange/limit')
@@ -120,7 +104,7 @@ const DesktopBar: FC = () => {
                             leaveFrom="opacity-100"
                             leaveTo="opacity-0"
                         >
-                            <Dialog.Overlay className="absolute inset-0 transition-opacity bg-dark-1000 bg-opacity-80" />
+                            <Dialog.Overlay className="absolute inset-0 transition-opacity bg-dark-1000 bg-opacity/80" />
                         </Transition.Child>
                         <div className="fixed inset-y-0 left-0 pr-8 sm:pr-10 max-w-[260px] flex">
                             <Transition.Child

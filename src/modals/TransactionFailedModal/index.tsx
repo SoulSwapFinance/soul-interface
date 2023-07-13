@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
 import Typography from 'components/Typography'
 import React from 'react'
@@ -11,7 +9,6 @@ interface TransactionFailedModalProps {
 }
 
 export default function TransactionFailedModal({ isOpen, onDismiss }: TransactionFailedModalProps) {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
 
   return (
@@ -20,17 +17,17 @@ export default function TransactionFailedModal({ isOpen, onDismiss }: Transactio
       chainId={chainId}
       onDismiss={onDismiss} maxWidth="md">
       <div className="flex flex-col gap-4">
-        <HeadlessUiModal.Header header={i18n._(t`Transaction Rejected`)} onClose={onDismiss} />
+        <HeadlessUiModal.Header header={`Transaction Rejected`} onClose={onDismiss} />
         <HeadlessUiModal.BorderedContent className="flex flex-col gap-1 text-center">
           <Typography variant="lg" weight={700} className="text-pink-red" component="span">
-            {i18n._(t`Oops!`)}{' '}
+            {`Oops!`}{' '}
           </Typography>
           <Typography variant="sm" weight={700} className="text-primary" component="span">
-            {i18n._(t`Your transaction got rejected`)}
+            {`Your transaction got rejected`}
           </Typography>
         </HeadlessUiModal.BorderedContent>
         <Typography variant="xs" className="text-secondary text-center" component="span">
-          {i18n._(t`Please try again`)}
+          {`Please try again`}
         </Typography>
       </div>
     </HeadlessUiModal.Controlled>

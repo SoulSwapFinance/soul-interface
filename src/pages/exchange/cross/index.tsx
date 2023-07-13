@@ -37,7 +37,7 @@ import Row from "components/Row"
 // import ModalHeader from "components/Modal/Header"
 import { WrappedCrossChainTrade } from "rubic-sdk/lib/features/cross-chain/providers/common/models/wrapped-cross-chain-trade"
 import { useMulticallContract } from "hooks/useContract"
-import { getLastExchange, setLastExchange } from "utils/rubic/hooks"
+import { setLastExchange } from "utils/rubic/hooks"
 import { AVAX, CHAIN_BY_ID, FTM, NATIVE_ADDRESS, rubicConfiguration } from "utils/rubic/configuration"
 import { ChainId } from "sdk"
 import TokenSelect from "features/cross/components/TokenSelect"
@@ -45,7 +45,6 @@ import NavLink from "components/NavLink"
 // import { SubmitButton } from "features/summoner/Styles"
 import { getChainColor, getChainColorCode } from "constants/chains"
 // import { DonateBanner, LuxorBanner } from "components/Banner"
-// import { BalancePromiseToUnit } from "pages/bridge"
 // import CROSS_BANNER from 'assets/branding/cross-banner.png'
 // import TokenStats from "components/TokenStats"
 import { NextSeo } from "next-seo"
@@ -379,7 +378,7 @@ export default function Exchange() {
                     alt="Switch Network"
                     className="flex align-center justify-center"
                     // style={{ backgroundColor: fromChain.color }}
-                    width="42" height="42"
+                    width={42} height={42}
                   />
                   <NetworkModal switchNetwork={() => fromChain.chainId} />
                   {/* {NETWORK_LABEL[chainId]} */}
@@ -391,7 +390,7 @@ export default function Exchange() {
               />
               <Image
                 className="flex align-center justify-center"
-                width="36" height="36"
+                width={36} height={36}
                 style={{ backgroundColor: fromChain?.color }}
                 src={fromChain?.logo}
                 alt={fromChain?.name}
@@ -411,7 +410,7 @@ export default function Exchange() {
                 <div className="">
                   <Image className="block object-fit:contain object-position:center items-center"
                     src={from?.logo}
-                    width="48" height="48"
+                    width={48} height={48}
                     alt={from?.name}
                   />
                 </div>
@@ -511,7 +510,7 @@ export default function Exchange() {
               />
               <Image
                 className="flex align-center justify-center"
-                width="36" height="36"
+                width={36} height={36}
                 style={{ backgroundColor: toChain?.color }}
                 src={toChain?.logo}
                 alt={toChain?.name}
@@ -530,7 +529,7 @@ export default function Exchange() {
                 <div className="">
                   <Image
                     className="block object-fit:contain object-position:center items-center"
-                    src={to?.logo} width="48" height="48" alt={to?.name}
+                    src={to?.logo} width={48} height={48} alt={to?.name}
                   />
                 </div>
                 <div className="flex justify-center mt-2 font-bold text-2xl">
@@ -578,7 +577,7 @@ export default function Exchange() {
                 className="flex text-white"
               >
 
-                <ArrowRightIcon className="m-2 border border-2 rounded" height="21px" />
+                <ArrowRightIcon className="m-2 border-2 rounded" height="21px" />
 
               </div>
 

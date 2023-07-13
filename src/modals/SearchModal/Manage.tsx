@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { HeadlessUiModal } from 'components/Modal'
 import Typography from 'components/Typography'
 import { classNames } from 'functions'
@@ -11,19 +9,18 @@ import ManageLists from './ManageLists'
 import ManageTokens from './ManageTokens'
 
 const Manage: FC = () => {
-  const { i18n } = useLingui()
   const { setView, onDismiss } = useCurrencyModalContext()
   const [tabIndex, setTabIndex] = useState(0)
 
   return (
     <>
       <HeadlessUiModal.Header
-        header={i18n._(t`Manage`)}
+        header={`Manage`}
         onClose={onDismiss}
         onBack={() => setView(CurrencyModalView.search)}
       />
       <div className="flex rounded border border-dark-800 hover:border-dark-700">
-        {[i18n._(t`Lists`), i18n._(t`Tokens`)].map((title, i) => (
+        {[`Lists`, `Tokens`].map((title, i) => (
           <div
             key={i}
             className={classNames(

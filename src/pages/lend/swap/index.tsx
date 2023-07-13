@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { DAI_BNB_MARKET, DAI_ETH_MARKET, REFUNDER_ADDRESS, DAI_NATIVE_MARKET, NATIVE_DAI_MARKET, Token, WNATIVE_ADDRESS, WETH_ADDRESS, BNB_ADDRESS } from 'sdk'
 import { Button } from 'components/Button'
 import Card from 'components/Card'
@@ -13,23 +11,15 @@ import { useActiveWeb3React } from 'services/web3'
 import Head from 'next/head'
 import React, { useCallback, useState } from 'react'
 import Typography from 'components/Typography'
-import { i18n } from '@lingui/core'
 import { formatNumber } from 'functions'
 import useSendTransaction from 'hooks/useSendTransaction'
-import { useTokenPrice } from 'hooks/getPrices'
-import { useTokenInfo } from 'hooks/useAPI'
 
-// import { useTransactionAdder } from 'state/transactions/hooks'
-// import { WFTM } from 'constants/index'
-// import useSendTransaction from 'hooks/useSendTransaction'
 import { ethers } from 'ethers'
 
 export default function LendSwap() {
-  const { account, chainId, library } = useActiveWeb3React()
-  const provider = library.provider
+  const { account, chainId } = useActiveWeb3React()
   const [id, setId] = useState(0)
   const [currency, setCurrency] = useState<Token>(null)
-  const [assetPrice, setAssetPrice] = useState(0)
   const [pairAddress, setPairAddress] = useState(DAI_NATIVE_MARKET[chainId])
   const [pairSymbol, setPairSymbol] = useState('FTM Market')
   const [amount, setAmount] = useState(0)
@@ -46,11 +36,11 @@ const RefunderContract = useRefunderContract()
 const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
 const PairContract = useTokenContract(pairAddress)
 
-const bnbPrice = Number(useTokenInfo(BNB_ADDRESS[chainId])?.tokenInfo?.price)
-const ethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId])?.tokenInfo?.price)
-const nativePrice = Number(useTokenInfo(WNATIVE_ADDRESS[chainId])?.tokenInfo?.price)
+// const bnbPrice = Number(useTokenInfo(BNB_ADDRESS[chainId])?.tokenInfo?.price)
+// const ethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId])?.tokenInfo?.price)
+// const nativePrice = Number(useTokenInfo(WNATIVE_ADDRESS[chainId])?.tokenInfo?.price)
 
-console.log({ bnbPrice, ethPrice, nativePrice })
+// console.log({ bnbPrice, ethPrice, nativePrice })
 
 const maxRedeemable = available >= refundable ? refundable : available
 
@@ -141,14 +131,6 @@ const maxRedeemable = available >= refundable ? refundable : available
                 : assetSymbol == 'WFTM' ? DAI_NATIVE_MARKET[chainId]
                 : DAI_NATIVE_MARKET[chainId]
 
-            let assetPrice =
-                assetSymbol == 'BNB' ? Number(bnbPrice)
-                : assetSymbol == 'DAI' ? 1
-                : assetSymbol == 'ETH' ? Number(ethPrice)
-                : assetSymbol == 'WFTM' ? nativePrice
-                : 0
-
-        setAssetPrice(assetPrice)
         setPairAddress(pairAddress)
         console.log({pairAddress})
 
@@ -200,7 +182,7 @@ const maxRedeemable = available >= refundable ? refundable : available
                 className={`font-bold text-sm sm:text-lg md:text-xl ${currency && isActive ? `text-green` : `text-red`} text-center`}
                 >
                 {currency ? 
-                    `${formatNumber(available, false, true)} ${currency?.wrapped.symbol} (${formatNumber(available * assetPrice, true, true) || 0})` 
+                    `${formatNumber(available, false, true)} ${currency?.wrapped.symbol}` 
                     : 'Select Asset'
                 }
             </Typography>
@@ -258,7 +240,7 @@ const maxRedeemable = available >= refundable ? refundable : available
         <div className="flex flex-col bg-dark-1000 mt-8 p-3 border border-1 border-dark-700 hover:border-purple w-full space-y-1">
             <div className="flex justify-between">
                 <Typography className="text-white" fontFamily={'medium'}>
-                {i18n._(t`Market`)}
+                {`Market`}
                 </Typography>
                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                 {currency ? pairSymbol : 'Select Market'}
@@ -266,19 +248,19 @@ const maxRedeemable = available >= refundable ? refundable : available
             </div>
             <div className="flex justify-between">
                 <Typography className="text-white" fontFamily={'medium'}>
-                {i18n._(t`Balance`)}
+                {`Balance`}
                 </Typography>
                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                {`${formatNumber(refundable, false, true)} ${currency?.wrapped.symbol || ''} (${formatNumber(refundable * assetPrice, true, true) || 0})`}
+                {`${formatNumber(refundable, false, true)} ${currency?.wrapped.symbol || ''}`}
                 </Typography>
             </div>
 
             <div className="flex justify-between">
                 <Typography className={isActive ? `text-green` : `text-red`} fontFamily={'medium'}>
-                {i18n._(t`Redeemable`)}
+                {`Redeemable`}
                 </Typography>
                 <Typography className={isActive ? `text-green` : `text-red`} weight={600} fontFamily={'semi-bold'}>
-                {`${formatNumber(maxRedeemable, false, true)} ${currency?.wrapped.symbol || ''} (${formatNumber(maxRedeemable * assetPrice, true, true) || 0})`}
+                {`${formatNumber(maxRedeemable, false, true)} ${currency?.wrapped.symbol || ''}`}
                 </Typography>
             </div>
         </div>
@@ -288,18 +270,14 @@ const maxRedeemable = available >= refundable ? refundable : available
 }
 
 const LendSwapLayout = ({ children }) => {
-  const { i18n } = useLingui()
   return (
-  // @ts-ignore TYPE NEEDS FIXING
     <Layout
       left={
         <Card
           className="h-full bg-dark-900"
           backgroundImage="/images/underworld/deposit.png"
-          title={i18n._(t`Reclaim Retired Underworld Assets`)}
-          description={i18n._(
-            t`For those looking to redeem their retired lent assets.`
-          )}
+          title={`Reclaim Retired Underworld Assets`}
+          description={`For those looking to redeem their retired lent assets.`}
         />
       }
     >

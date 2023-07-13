@@ -28,8 +28,6 @@ import SwapDropdown from 'features/swap/SwapDropdown'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { classNames } from 'functions/styling'
 import { featureEnabled } from 'functions/feature'
-import { i18n } from '@lingui/core'
-import { t } from '@lingui/macro'
 // import Image from 'next/image'
 // import META_BANNER from 'assets/branding/meta-banner.png'
 import { NextSeo } from 'next-seo'
@@ -223,7 +221,7 @@ const Aggregator = ({ }) => {
 			const explorerUrl = getExplorerLink(chainId, data, "transaction") // chain.blockExplorers.default.url;
 			setTxModalOpen(true);
 
-			setTxUrl(`${explorerUrl}/tx/${data?.hash}`);
+			setTxUrl(`${explorerUrl}/tx/${data?.hash}`)
 		},
 		onError: (err: { reason: string; code: string }) => {
 			if (err.code !== 'ACTION_REJECTED') {
@@ -544,10 +542,10 @@ const Aggregator = ({ }) => {
 					>
 						<div className={`flex text-sm font-bold text-${'blue'} justify-left`}>
 							<ArrowLeftIcon className={'mt-1 mr-1'} width="1em" height="1em" />
-							{i18n._(t`Return to Swap`)}
+							{`Return to Swap`}
 						</div>
 					</Button>
-					{/* <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
+					{/* <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}
 							<Toggle
 								id="toggle-button"
 								optionA="Routes"
@@ -564,7 +562,7 @@ const Aggregator = ({ }) => {
 								}
 							/>
 						</div> */}
-					{/* <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}>
+					{/* <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}
 							<Toggle
 								id="toggle-button"
 								optionA="Aggregator"

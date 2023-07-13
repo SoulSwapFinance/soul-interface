@@ -249,34 +249,12 @@ export const UnderworldBanner: FC = () => (
     <div className="w-full">
       <div className="text-center">
         <p className="font-medium text-center text-white">
-        <NavLink href="/lend/swap">
             <Button variant="filled" color="ftmBlue" size="sm">
               <span className="justify-center font-bold text-white">
                 {`Redeem Retired Assets ↗`}
                 {/* Please vote in our LIVE proposals regarding withdrawal fees and governance. <span aria-hidden="true">&rarr;</span> */}
               </span>
             </Button>
-        </NavLink>
-        </p>
-      </div>
-      <div className="absolute inset-y-0 right-0 flex items-start pt-1 pr-1 sm:pt-1 sm:pr-2 sm:items-start">
-      </div>
-    </div>
-  </div>
-)
-
-export const LendBanner: FC<IFeature> = ({ chainId }) => (
-  <div className={featureEnabled(Features.UNDERWORLD, chainId) ? 'relative items-center w-full mt-2' : `hidden`}>
-    <div className="w-full">
-      <div className="text-center">
-        <p className="font-medium text-center text-white">
-        <NavLink href="/lend">
-            <Button variant="filled" color="purple" size="sm">
-              <span className="justify-center font-bold text-grey">
-                {`Please Exit Lending Positions`}
-              </span>
-            </Button>
-        </NavLink>
         </p>
       </div>
       <div className="absolute inset-y-0 right-0 flex items-start pt-1 pr-1 sm:pt-1 sm:pr-2 sm:items-start">
@@ -315,7 +293,7 @@ export const VoteBanner: FC = () => (
       <div className="text-center">
         <p className="font-medium text-center text-white">
           <ExternalLink
-              href="https://forum.soulswap.finance/t/proposal-cease-incentives-for-multichain-asset-pools/265" 
+              href="https://snapshot.org/#/soulswap.eth/proposal/0x1731ab37efccda5614da89f5fba2bfd13b14456e0e00628dd6366ad5fed598ef" 
               target="_blank"
               rel="noreferrer"
               className="font-bold text-white text-lg"
@@ -323,7 +301,7 @@ export const VoteBanner: FC = () => (
             <Button variant="filled" color="purple" size="sm">
               <span className="justify-center font-bold">
                 {' '}
-                Discuss Proposal: Multichain Incentives ↗
+                Vote Now: End Multichain Incentives ↗
               </span>
             </Button>
           </ExternalLink>

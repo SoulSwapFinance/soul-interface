@@ -333,9 +333,9 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                                 '/logo.png'
                                             }
                                             alt="LOGO"
-                                            width="38px"
-                                            height="38px"
-                                            objectFit="contain"
+                                            width={38}
+                                            height={38}
+                                            // objectFit="contain"
                                             className="rounded-full items-center justify-center text-center"
                                         />
                                         <TokenLogo
@@ -345,9 +345,9 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                                 '/logo.png'
                                             }
                                             alt="LOGO"
-                                            width="38px"
-                                            height="38px"
-                                            objectFit="contain"
+                                            width={38}
+                                            height={38}
+                                            // objectFit="contain"
                                             className="rounded-full items-center justify-center text-center"
                                         />
                                     </Wrap>}
@@ -359,9 +359,9 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
                                                 '/logo.png'
                                             }
                                             alt="LOGO"
-                                            width="76px"
-                                            height="44px"
-                                            objectFit="contain"
+                                            width={76}
+                                            height={44}
+                                            // objectFit="contain"
                                             className="rounded-full items-center justify-center text-center"
                                         />
                                     </Wrap>}

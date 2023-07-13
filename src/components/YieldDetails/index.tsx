@@ -1,17 +1,11 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Currency } from '../../sdk'
 import React from 'react'
 import { formatNumber, formatNumberScale, formatPercent } from '../../functions'
 import { useActiveWeb3React } from 'services/web3'
-import { useCurrency } from '../../hooks/Tokens'
-import { ApplicationModal } from '../../state/application/actions'
-import { useModalOpen } from '../../state/application/hooks'
-import { CurrencyLogo } from '../CurrencyLogo'
 import DoubleLogo from '../DoubleLogo'
-import Typography from '../Typography'
 import { HeadlessUiModal } from 'components/Modal'
 import ModalHeader from 'components/Modal/Header'
+import { CurrencyLogo } from 'components/CurrencyLogo'
 
 interface YieldDetailsProps {
   isOpen: boolean
@@ -41,7 +35,6 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
 }) => {
   const { chainId } = useActiveWeb3React()
 
-  const { i18n } = useLingui()
 
   const roiPerWeek: number = roiPerDay * 7
 
@@ -72,7 +65,7 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
   const getModalContent = () => (
     <div className="space-y-6">
       <div className="space-y-2">
-        <ModalHeader header={i18n._(t`Yield Details`)} onClose={onDismiss} />
+        <ModalHeader header={`Yield Details`} onClose={onDismiss} />
         <div className="grid grid-cols-2">
           <div className="flex flex-row w-full py-4 gap-2">
             <div className="flex col-span-1 space-x-4">
@@ -98,15 +91,15 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
       <div className="space-y-2 flex flex-col">
         <div className="flex flex-row flex-nowrap gap-1 font-bold">
           <div className="flex flex-row py-1 px-2 w-full">
-            <div className="flex items-center justify-between uppercase">{i18n._(t`TIMEFRAME`)}</div>
+            <div className="flex items-center justify-between uppercase">{`TIMEFRAME`}</div>
           </div>
 
           <div className="flex flex-row py-1 px-2 w-full">
-            <div className="flex items-center justify-between uppercase">{i18n._(t`RETURNS`)}</div>
+            <div className="flex items-center justify-between uppercase">{`RETURNS`}</div>
           </div>
 
           <div className="flex flex-row py-1 px-2 w-full">
-            <div className="flex items-center justify-between uppercase">{i18n._(t`SOUL / $1K`)}</div>
+            <div className="flex items-center justify-between uppercase">{`SOUL / $1K`}</div>
           </div>
         </div>
         {getRoiEntry('Hourly', roiPerHour, perHour)}
@@ -117,7 +110,7 @@ const YieldDetails: React.FC<YieldDetailsProps> = ({
       </div>
       <div className="space-y-2">
         <div className="text-s">
-          {i18n._(t`Calculated based on current rates. Rates are estimates for your convenience, they do not represent guaranteed returns.`)}
+          {`Calculated based on current rates. Rates are estimates for your convenience, they do not represent guaranteed returns.`}
         </div>
       </div>
     </div>

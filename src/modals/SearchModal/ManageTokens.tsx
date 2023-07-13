@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Button } from 'components/Button'
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import ExternalLink from 'components/ExternalLink'
@@ -18,7 +16,6 @@ import CurrencyModalView from './CurrencyModalView'
 import ImportRow from './ImportRow'
 
 const ManageTokens: FC = () => {
-  const { i18n } = useLingui()
   const { setView, setImportToken } = useCurrencyModalContext()
   const { chainId } = useActiveWeb3React()
   const [searchQuery, setSearchQuery] = useState<string>('')
@@ -103,15 +100,21 @@ const ManageTokens: FC = () => {
           <Typography variant="xs" weight={700} className="text-secondary">
             {userAddedTokens?.length} Custom {userAddedTokens.length === 1 ? 'Token' : 'Tokens'}
           </Typography>
-          <Button variant="outlined" color="blue" size="xs" onClick={handleRemoveAll}>
-            {i18n._(t`Clear all`)}
+          <Button 
+            variant="outlined"
+            color="blue" 
+            size="xs" 
+            onClick={handleRemoveAll}
+            className={'text-white'}
+          >
+            {`Clear`}
           </Button>
         </div>
         <div className="divide-y divide-dark-800">{tokenList}</div>
       </HeadlessUiModal.BorderedContent>
       <div className="flex flex-grow h-full" />
       <Typography variant="xs" weight={700} className="text-secondary text-center">
-        {i18n._(t`Custom tokens are stored locally in your browser`)}
+        {`Custom tokens are stored locally in your browser`}
       </Typography>
     </>
   )

@@ -387,7 +387,7 @@ const RouteRow = ({ route, chainId, backgroundColor }: RouteRowProps) => {
                     href={getExplorerLink(chainId, token?.address, 'token')}
                     target="_blank"
                   >
-                    <CurrencyLogo currency={token} size="16px" />
+                    <CurrencyLogo currency={token} size={16} />
                     <span>{token?.symbol}</span>
                   </StyledToken>
                   {Array.isArray(subRoute)
@@ -475,7 +475,7 @@ const Routing = ({ trade, currencies, formattedAmounts, maxHeight }: RoutingProp
     if (chainId && currency) {
       return (
         <StyledToken as="div" reverse={isOutput} style={{ border: 'none' }}>
-          <CurrencyLogo currency={currency} size="20px" />
+          <CurrencyLogo currency={currency} size={20} />
           <span>{`${currency && formattedAmounts[field] ? formattedAmounts[field] : '0.0'} ${currency.symbol}`}</span>
         </StyledToken>
       )

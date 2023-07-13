@@ -1,10 +1,7 @@
-// @ts-ignore
 import resolveConfig from "tailwindcss/resolveConfig";
-// @ts-ignore
-import { TailwindConfig } from "tailwindcss/tailwind-config";
+import type { TailwindConfig } from "tailwindcss/nesting";
 import config from "../../tailwind.config.js";
 
-// @ts-ignore
-const TailwindConfig = resolveConfig(config as TailwindConfig);
+const TailwindConfigs = resolveConfig(config as TailwindConfig);
 
-export default TailwindConfig
+export default TailwindConfigs

@@ -1,5 +1,5 @@
-import { WBTC_ADDRESS, WETH_ADDRESS } from 'constants/addresses'
-import { BNB_ADDRESS, ChainId, DAI_ADDRESS, Ether, LUX_ADDRESS, SEANCE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
+import { SURV_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, ETH_ADDRESS } from 'constants/addresses'
+import { BNB_ADDRESS, ChainId, DAI_ADDRESS, Ether, LINK_ADDRESS, LUX_ADDRESS, NATIVE, SEANCE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
 
 import { SupportedChainId } from '../chains'
 
@@ -18,8 +18,9 @@ export const TELOS: { [key: string]: Token } = {
   FTM: new Token(ChainId.TELOS, '0xC1Be9a4D5D45BeeACAE296a7BD5fADBfc14602C4', 18, 'FTM', 'Fantom Opera'),
   BNB: new Token(ChainId.TELOS, '0x2C78f1b70Ccf63CDEe49F9233e9fAa99D43AA07e', 18, 'BNB', 'Binance'),
 }
-  
+
 export const FANTOM: { [key: string]: Token } = {
+  // NATIVE: new Token(ChainId.FANTOM, ETH_ADDRESS, 18, NATIVE[ChainId.FANTOM].symbol, NATIVE[ChainId.FANTOM].name),
   SOUL: new Token(ChainId.FANTOM, SOUL_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'Soul Power'), // 27 AUG
   WFTM: new Token(ChainId.FANTOM, WNATIVE_ADDRESS[ChainId.FANTOM], 18, 'WFTM', 'Wrapped Fantom'), // 27 AUG
   SEANCE: new Token(ChainId.FANTOM, SEANCE_ADDRESS[ChainId.FANTOM], 18, 'SEANCE', 'Seance Circle'), // 27 AUG
@@ -27,9 +28,12 @@ export const FANTOM: { [key: string]: Token } = {
   WLUM: new Token(ChainId.FANTOM, '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208', 9, 'WLUM', 'Wrapped Lumens'),
   LUM: new Token(ChainId.FANTOM, '0x4290b33158F429F40C0eDc8f9b9e5d8C5288800c', 9, 'LUM', 'Lumens'),
   USDC: new Token(ChainId.FANTOM, USDC_ADDRESS[ChainId.FANTOM], 6, 'USDC', 'USD Coin'),
+  LINK: new Token(ChainId.FANTOM, LINK_ADDRESS[ChainId.FANTOM], 18, 'LINK', 'Chainlink'),
+  BNB: new Token(ChainId.FANTOM, BNB_ADDRESS[ChainId.FANTOM], 18, 'BNB', 'Binance'),
   WBTC: new Token(ChainId.FANTOM, '0x321162Cd933E2Be498Cd2267a90534A804051b11', 8, 'WBTC', 'Wrapped Bitcoin'),
   DAI: new Token(ChainId.FANTOM, '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', 18, 'DAI', 'Dai Stablecoin'),
   SOR: new Token(ChainId.FANTOM, '0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A', 18, 'SOR', 'SOR'),
+  SURV: new Token(ChainId.FANTOM, SURV_ADDRESS[ChainId.FANTOM], 18, 'SURV', 'SurveyorDAO'),
   GRIMEVO: new Token(ChainId.FANTOM, '0x0a77866C01429941BFC7854c0c0675dB1015218b', 18, 'GRIMEVO', 'Grim EVO'),
   USDT: new Token(ChainId.FANTOM, '0x049d68029688eAbF473097a2fC38ef61633A3C7A', 6, 'USDT', 'Frapped USDT'),
   FUSD: new Token(ChainId.FANTOM, '0xAd84341756Bf337f5a0164515b1f6F993D194E1f', 18, 'FUSD', 'Fantom USD'), // 27 AUG

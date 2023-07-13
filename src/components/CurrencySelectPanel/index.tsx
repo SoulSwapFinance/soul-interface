@@ -1,6 +1,4 @@
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Currency } from 'sdk'
 import selectCoinAnimation from 'animation/select-coin.json'
 import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
@@ -29,7 +27,6 @@ export default function CurrencySelectPanel({
   id,
   showCommonBases,
 }: CurrencySelectPanelProps) {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
 
   const [modalOpen, setModalOpen] = useState(false)
@@ -52,7 +49,7 @@ export default function CurrencySelectPanel({
           >
             <div className="flex">
               {currency ? (
-                <CurrencyLogo currency={currency} size={'54px'} />
+                <CurrencyLogo currency={currency} size={54} />
               ) : (
                 <div className="rounded bg-dark-700" style={{ maxWidth: 54, maxHeight: 54 }}>
                   <div style={{ width: 54, height: 54 }}>
@@ -70,7 +67,7 @@ export default function CurrencySelectPanel({
                         currency.symbol.slice(currency.symbol.length - 5, currency.symbol.length)
                       : currency?.symbol) || (
                       <div className="px-2 py-1 mt-1 text-xs font-medium bg-transparent border rounded-full hover:bg-primary border-low-emphesis text-secondary whitespace-nowrap">
-                        {i18n._(t`Select Token`)}
+                        {`Select Token`}
                       </div>
                     )}
                   </div>

@@ -1,6 +1,4 @@
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { ChainId, Currency, CurrencyAmount, Pair, Percent, Token } from 'sdk'
 import selectCoinAnimation from 'animation/select-coin.json'
 import { classNames } from 'functions'
@@ -10,7 +8,6 @@ import { useCurrencyBalance } from 'state/wallet/hooks'
 import Lottie from 'lottie-react'
 import React, { ReactNode, useCallback, useState } from 'react'
 
-import { Button } from '../Button'
 import { CurrencyLogo } from '../CurrencyLogo'
 import DoubleCurrencyLogo from '../DoubleLogo'
 import Input from '../Input'
@@ -67,7 +64,6 @@ export default function CurrencyInputPanel({
   allowManageTokenList = true,
   showSearch = true,
 }: CurrencyInputPanelProps) {
-  const { i18n } = useLingui()
   const [modalOpen, setModalOpen] = useState(false)
   const { account } = useActiveWeb3React()
   const selectedCurrencyBalance = useCurrencyBalance(chainId, account ?? undefined, currency ?? undefined)
@@ -98,7 +94,7 @@ export default function CurrencyInputPanel({
                 <DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={54} margin={true} />
               ) : currency ? (
                 <div className="flex items-center">
-                  <CurrencyLogo currency={currency} size={'54px'} />
+                  <CurrencyLogo currency={currency} size={54} />
                 </div>
               ) : (
                 <div className="rounded bg-dark-700" style={{ maxWidth: 54, maxHeight: 54 }}>
@@ -128,7 +124,7 @@ export default function CurrencyInputPanel({
                           currency.symbol.slice(currency.symbol.length - 5, currency.symbol.length)
                         : currency?.symbol) || (
                         <div className={classNames(disableCurrencySelect ? "hidden" : "px-2 py-1 mt-1 text-xs font-medium bg-transparent border rounded-full hover:bg-primary border-low-emphesis text-secondary whitespace-nowrap")}>
-                          {i18n._(t`Select Token`)}
+                          {`Select Token`}
                         </div>
                       )}
                     </div>
@@ -164,7 +160,7 @@ export default function CurrencyInputPanel({
                     ) : (           
 
                       <>
-                        {i18n._(t`50%`)} 
+                        {`50%`} 
                       </>
                     )}
                   </div> 

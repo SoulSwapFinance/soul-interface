@@ -2,8 +2,6 @@ import React from 'react'
 // import Container from 'components/Container'
 import Head from 'next/head'
 import Typography from 'components/Typography'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 // import styled from 'styled-components'
 import { classNames, featureEnabled, formatNumber } from 'functions'
 import DashboardDonutChart from 'components/Dashboard/DonutChart'
@@ -18,19 +16,11 @@ import { useActiveWeb3React } from 'services/web3'
 import { getChainInfo } from 'constants/chains'
 import Image from 'next/image'
 import DATA_BANNER from 'assets/branding/data-banner.png'
-import TokenStats from 'components/TokenStats'
 import { Feature } from 'enums'
 
 export default function Dashboard() {
-  const { i18n } = useLingui()
-  // const seancePrice = useSeancePrice()
   const { chainId } = useActiveWeb3React()
   const { tokenInfo } = useTokenInfo(SOUL_ADDRESS[chainId])
-  // const bondInfo = useBondTVL()
-
-  // let bondsTvl = bondInfo?.reduce((previousValue, currentValue) => {
-  //   return previousValue + currentValue?.tvl
-  // }, 0)
   // Prices //
   const soulPrice = Number(tokenInfo.price) // usePriceUSD(SOUL_ADDRESS[chainId])
 
@@ -277,7 +267,7 @@ export default function Dashboard() {
                 textColor="text-accent text-[#FFFFFF]"
                 fontFamily={'semi-bold'}
               >
-                {i18n._(t`SOUL ECONOMY`).toUpperCase()}
+                {(`SOUL ECONOMY`).toUpperCase()}
               </Typography>
               <div className="h-px my-4 bg-[#A654DD]" />
               {/* <div>
@@ -351,16 +341,6 @@ export default function Dashboard() {
                   </Typography>
                 </div>
                 <div className="h-px my-4" />
-                {/* <div>
-                  <Typography
-                    className="flex text-2xl justify-center gap-1 items-center"
-                    fontFamily={'medium'}
-                    textColor={'text-white'}
-                  >
-                    {i18n._(t`Supply Distribution`)}
-                  </Typography>
-                  <div className="h-px my-4 bg-dark-1000" />
-                </div> */}
 
                 {/* SOUL DISTRIBUTION CHART */}
 
@@ -386,7 +366,7 @@ export default function Dashboard() {
                 textColor="text-accent text-[#FFFFFF]"
                 fontFamily={'semi-bold'}
               >
-                {i18n._(t`SOUL TREASURY`).toUpperCase()}
+                {(`SOUL TREASURY`).toUpperCase()}
               </Typography>
               <div className="h-px my-4 bg-[#A654DD]" />
               <div>
@@ -447,17 +427,6 @@ export default function Dashboard() {
                 </div>
 
               <div className="h-px my-4" />
-
-              {/* <div>
-                <Typography
-                  className="flex text-2xl justify-center gap-1 items-center"
-                  fontFamily={'medium'}
-                  textColor={'text-white'}
-                >
-                  {i18n._(t`Treasury Distribution`)}
-                </Typography>
-                <div className="h-px my-4 bg-dark-1000" />
-              </div> */}
               <div className="flex justify-center flex-col gap-3 sm:flex-row">
                 <DashboardDonutChart width={200} data={treasuryValueData} />
                 <div className="flex justify-center flex-col gap-3 sm:flex-row">
@@ -470,28 +439,6 @@ export default function Dashboard() {
                   />
                 </div>
               </div>
-              {/* <div>
-            <Typography
-              className="flex mt-8 text-2xl justify-center gap-1 items-center"
-              fontFamily={'medium'}
-              textColor={'text-white'}
-            >
-              {i18n._(t`Liquidity Composition`)}
-            </Typography>
-            <div className="h-px my-4 bg-dark-1000" />
-          </div> */}
-              {/* <div className="flex justify-center flex-col gap-3 sm:flex-row">
-            <DashboardDonutChart width={200} data={liquidityValueData} />
-            <div className="flex justify-center flex-col gap-3 sm:flex-row">
-            <DashboardChartLegend
-              data={liquidityValueData}
-              hasInfo={false}
-              currency={'$'}
-              leadingCurrency={true}
-              theme={'dark'}
-            />
-              </div>
-            </div> */}
             </div>
           </div>
       </DoubleGlowShadowV2>

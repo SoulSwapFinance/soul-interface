@@ -1,5 +1,5 @@
-import Typography from '../../components/Typography'
-import styled from "styled-components";
+// import Typography from '../../components/Typography'
+// import styled from "styled-components";
 
 // export const ItemBox = styled.div`
 //   width: ${({ width }) => (width ? `${width}` : `100px`)};

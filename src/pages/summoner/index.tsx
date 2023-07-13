@@ -30,7 +30,6 @@ import { Feature } from 'enums/Feature'
 // import { useRouter } from 'next/router'
 // import { TridentHeader } from 'layouts/Trident'
 // import { addTransaction } from 'state/transactions/actions'
-// import { i18n } from '@lingui/core'
 
 const Summoner = () => {
   const { chainId } = useActiveWeb3React()
@@ -128,7 +127,7 @@ const Summoner = () => {
           <div className="flex justify-center gap-2 mb-4">
             <Button
               color={getChainColorCode(chainId)}
-              className="text-emphasis"
+              className="text-emphasis text-white"
               variant="outlined"
               size={"sm"}
             >
@@ -137,7 +136,7 @@ const Summoner = () => {
             {positions.length > 0 && (
               <Button
                 color={getChainColorCode(chainId)}
-                className="text-emphasis"
+                className="text-emphasis text-white"
                 variant="outlined"
                 size={"sm"}
                 disabled={pendingTx}
@@ -156,7 +155,7 @@ const Summoner = () => {
             )}
             <Button
               color={getChainColorCode(chainId)}
-              className="text-emphasis"
+              className="text-emphasis text-white"
               variant={'outlined'}
               size={"sm"}
             >

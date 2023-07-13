@@ -17,5 +17,6 @@ Home repository for the SoulSwap Decentralized Finance Application.
   - #### [find](./src/pages/exchange/find)
 - ### [Summoner](./src/pages/summoner)
 - ### [Launchpad](./src/pages/launchpad/index.tsx)
-- ### [Lend](./src/pages/lend)
-- ### [Borrow](./src/pages/borrow/index.tsx)
+
+### Notes
+- Running into issues with the next config? Try ensuring valid node version and Nextjs compatility on imports.

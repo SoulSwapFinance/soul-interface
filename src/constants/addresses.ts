@@ -123,17 +123,6 @@ export const TEAM_WALLET_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '',
 }
 
-export const LOCKER_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xd21fEDFC0AEf3c640B88FD0e3Ac87a31A8aC486B', // 29 NOV
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
-}
-
 export const CLAIM_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',

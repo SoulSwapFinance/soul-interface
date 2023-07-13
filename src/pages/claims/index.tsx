@@ -16,14 +16,11 @@ import QuestionHelper from 'components/QuestionHelper'
 import { cloudinaryLoader } from 'functions/cloudinary'
 import { formatNumber } from 'functions/format'
 import { isAddress } from 'ethers/lib/utils'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { useUserHasSubmittedClaim } from 'state/transactions/hooks'
 import { useActiveWeb3React } from 'services/web3'
 import { classNames } from 'functions'
 
 export default function Claims() {
-  const { i18n } = useLingui()
   const vaultImg = 'https://raw.githubusercontent.com/sushiswap/sushi-content/master/images/vesting-safe-closed.png'
 
   const isOpen = useModalOpen(ApplicationModal.SELF_CLAIM)
@@ -87,11 +84,11 @@ export default function Claims() {
 
   // let vault = ''
   if (Number(unclaimedAmount?.toFixed(8)) > 0) {
-    <Image alt="vault" unoptimized width="300" height="300" src={vaultImg} />
+    <Image alt="vault" unoptimized width={300} height={300} src={vaultImg} />
   } else if (Number(unclaimedAmount?.toFixed(8)) <= 0) {
-    <Image alt="vault" unoptimized width="300" height="300" src={vaultImg} />
+    <Image alt="vault" unoptimized width={300} height={300} src={vaultImg} />
   } else {
-    <Image alt="vault" unoptimized width="300" height="300" src={vaultImg} />
+    <Image alt="vault" unoptimized width={300} height={300} src={vaultImg} />
   }
 
   return (
@@ -102,9 +99,9 @@ export default function Claims() {
       </Head>
       <div className="flex px-0 sm:px-4 md:flex-row md:space-x-10 lg:space-x-20 md:px-10">
         <div className="hidden space-y-10 md:block">
-          <Image unoptimized width="300" height="300" src={vaultImg} loader={cloudinaryLoader} alt="" />
+          <Image unoptimized width={300} height={300} src={vaultImg} loader={cloudinaryLoader} alt="" />
           <div className="relative w-full p-4 overflow-hidden rounded bg-dark-900">
-            <div className="font-bold text-white">{i18n._(t`Harvest Redistribution`)}</div>
+            <div className="font-bold text-white">{`Harvest Redistribution`}</div>
             <div
               className="pt-2 text-sm font-bold text-gray-400"
               style={{
@@ -113,21 +110,21 @@ export default function Claims() {
               }}
             >
               <>
-                {i18n._(t`Claims are executed within the guidelines outlined in`)}{' '}
+                {`Claims are executed within the guidelines outlined in`}{' '}
                 <ExternalLink href="https://ftmscan.com/address/0xA121b64fd62a99869767650879C5bEc776415a45#code">
                   Smart Contract
                 </ExternalLink>
                 .
                 <br />
                 <br />
-                {i18n._(t`Please refer to the`)}{' '}
+                {`Please refer to the`}{' '}
                 <ExternalLink href="https://forum.soulswap.finance/t/farming-harvest-reward-solution/49/16">
-                  {i18n._(t`forum discussion`)}
+                  {`forum discussion`}
                 </ExternalLink>{' '}
-                {i18n._(t`for deliberations on additional points.`)}
+                {`for deliberations on additional points.`}
                 <br />
                 <br />
-                {i18n._(t`Additional records and merkle updates can be found on`)}{' '}
+                {`Additional records and merkle updates can be found on`}{' '}
                 <ExternalLink  href="https://github.com/SoulSwapFinance/soul-claims">Github</ExternalLink>
               </>
             </div>
@@ -137,7 +134,7 @@ export default function Claims() {
           <div className="relative w-full overflow-hidden rounded bg-dark-900">
             <div className="flex flex-col gap-3 p-4">
               <div className="flex flex-row justify-between">
-                <div className="font-bold text-white">{i18n._(t`Your Claimable SOUL`)}</div>
+                <div className="font-bold text-white">{`Your Claimable SOUL`}</div>
                 <QuestionHelper text="Your SOUL will be released upon your claim and are claimable until February 28th. Claiming forfeits your ability to pose a counter-claim." />
               </div>
               {/* <div style={{ display: 'flex', alignItems: 'baseline' }}> */}
@@ -152,13 +149,13 @@ export default function Claims() {
                 {account ? (
                   <div className="text-sm text-secondary">
                     {userAllocation ? (
-                      i18n._(t`Allocated: ${formatNumber(userAllocation)} SOUL`)
+                      `Allocated: ${formatNumber(userAllocation)} SOUL`
                     ) : (
-                      <Dots>{i18n._(t`Claimable: Fetching Claimable Amount`)}</Dots>
+                      <Dots>{`Claimable: Fetching Claimable Amoun`}</Dots>
                     )}
                   </div>
                 ) : (
-                  <div className="text-sm text-secondary">{i18n._(t`Total Locked: Connect Wallet`)}</div>
+                  <div className="text-sm text-secondary">{`Total Locked: Connect Walle`}</div>
                 )}
               </div>
 
@@ -174,7 +171,7 @@ export default function Claims() {
                 onClick={onClaim}
                 className="inline-flex items-center justify-center"
               >
-                {claimConfirmed ? i18n._(t`Claimed`) : i18n._(t`Claim SOUL`)}
+                {claimConfirmed ? `Claimed` : `Claim SOUL`}
                 {attempting && (
                   <Loader
                     stroke="white"
@@ -188,15 +185,15 @@ export default function Claims() {
           </div>
           <div className="relative w-full overflow-hidden rounded bg-dark-900">
             <div className="flex flex-col gap-3 p-4">
-              <div className={classNames([ChainId.FANTOM].includes(chainId) ? "font-bold text-white" : 'hidden')}>{i18n._(t`Things you may do with your SOUL`)}</div>
+              <div className={classNames([ChainId.FANTOM].includes(chainId) ? "font-bold text-white" : 'hidden')}>{`Things you may do with your SOUL`}</div>
               <div className="p-4 rounded bg-dark-800">
                 <Link href={`/summoner`}>
                   <a className="flex items-center justify-between gap-3">
                     <div className="flex flex-col gap-1">
-                      <div className="font-bold text-white">{i18n._(t`Farm with SOUL-FTM`)}</div>
+                      <div className="font-bold text-white">{`Farm with SOUL-FTM`}</div>
                       <div className="text-sm text-secondary">
-                        {t`Pair your SOUL with FTM and add to Farms for more SOUL and an enhanced AURA.`}
-                        {/* {t`(COMING SOON) Stake into SEANCE add collateral as all in one click.`} */}
+                        {`Pair your SOUL with FTM and add to Farms for more SOUL and an enhanced AURA.`}
+                        {/* {`(COMING SOON) Stake into SEANCE add collateral as all in one click.`} */}
                       </div>
                     </div>
                     <div className="min-w-[32px]">
@@ -209,10 +206,10 @@ export default function Claims() {
               <Link href={`/bond`}>
                   <a className="flex items-center justify-between gap-3">
                     <div className="flex flex-col gap-1">
-                      <div className="font-bold text-white">{i18n._(t`Mint SOUL with Liquidity`)}</div>
+                      <div className="font-bold text-white">{`Mint SOUL with Liquidity`}</div>
                       <div className="text-sm text-secondary">
-                        {t`Pair your SOUL and add to Bonds for more SOUL at record-high returns.`}
-                        {/* {t`(COMING SOON) Stake into SEANCE add collateral as all in one click.`} */}
+                        {`Pair your SOUL and add to Bonds for more SOUL at record-high returns.`}
+                        {/* {`(COMING SOON) Stake into SEANCE add collateral as all in one click.`} */}
                       </div>
                     </div>
                     <div className="min-w-[32px]">
@@ -221,14 +218,6 @@ export default function Claims() {
                   </a>
                 </Link>
                 </div>
-              {/* <div className="p-4 rounded bg-dark-800">
-                <div className="flex flex-col gap-1">
-                  <div className="font-bold text-white">{i18n._(t`Enter the Underworld`)}</div>
-                  <div className="text-sm text-secondary">
-                    {t`(COMING SOON) Accrue automatic yield through flash loans and SOUL strategies.`}
-                  </div>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>

@@ -1,5 +1,3 @@
-import { i18n } from '@lingui/core'
-import { t } from '@lingui/macro'
 import {
   ChainId,
   Currency,
@@ -146,7 +144,7 @@ export function queryParametersToSwapState(chainId: ChainId, parsedQs: ParsedQs)
     recipient: validatedRecipient(parsedQs.recipient),
     limitPrice: parseTokenAmountURLParameter(parsedQs.exactRate),
     fromCoffinBalance: parseBooleanFieldParameter(parsedQs.fromCoffin),
-    orderExpiration: { value: OrderExpiration.never, label: i18n._(t`Never`) },
+    orderExpiration: { value: OrderExpiration.never, label: `Never` }
   }
 }
 
@@ -276,19 +274,19 @@ export const useLimitOrderDerivedInputError: UseLimitOrderDerivedInputError = ({
     return !account
       ? 'Connect Wallet'
       : !trade?.inputAmount.greaterThan(ZERO) || !typedValue
-      ? i18n._(t`Enter Amount`)
+      ? `Enter Amount`
       : !inputCurrency || !outputCurrency
-      ? i18n._(t`Select Token`)
+      ? `Select Token`
       : !to || !isAddress(to)
-      ? i18n._(t`Enter Recipient`)
+      ? `Enter Recipient`
       : limitPrice !== LimitPrice.CURRENT && parsedRate?.equalTo(ZERO)
-      ? i18n._(t`Select Rate`)
+      ? `Select Rate`
       : !orderExpiration
-      ? i18n._(t`Select Order Expiration`)
+      ? `Select Order Expiration`
       : !balance
-      ? i18n._(t`Loading Balance`)
+      ? `Loading Balance`
       : balance && trade?.inputAmount && balance.lessThan(trade.inputAmount)
-      ? i18n._(t`Insufficient Balance`)
+      ? `Insufficient Balance`
       : ''
   }, [
     account,

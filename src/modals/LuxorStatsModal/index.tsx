@@ -155,9 +155,9 @@ export default function LuxorStatsModal(): JSX.Element | null {
               <Image
                 src="/images/tokens/LUX-transparent.png"
                 alt="LUX"
-                width="1600px"
-                height="1600px"
-                objectFit="contain"
+                width={1600}
+                height={1600}
+                // objectFit="contain"
                 className="rounded-md"
               />
             </div>
@@ -193,9 +193,9 @@ export default function LuxorStatsModal(): JSX.Element | null {
               <Image
                 src="/images/tokens/wlumens-transparent.png"
                 alt="WLUM"
-                width="1600px"
-                height="1600px"
-                objectFit="contain"
+                width={1600}
+                height={1600}
+                // objectFit="contain"
                 className="rounded-md"
               />
             </div>

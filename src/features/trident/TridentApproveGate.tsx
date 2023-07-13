@@ -1,6 +1,4 @@
 import { Signature } from '@ethersproject/bytes'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Currency, CurrencyAmount, ZERO } from 'sdk'
 import { Button } from 'components/Button'
 import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback'
@@ -21,7 +19,6 @@ interface TokenApproveButtonProps {
 
 const TokenApproveButton: FC<TokenApproveButtonProps> = memo(
   ({ inputAmount, onStateChange, tokenApproveOn, id, onSLPPermit }) => {
-    const { i18n } = useLingui()
     const { chainId } = useActiveWeb3React()
     const [approveState, approveCallback] = useApproveCallback(inputAmount?.wrapped, tokenApproveOn)
     const { gatherPermitSignature, signatureData } = useTridentLiquidityTokenPermit(
@@ -128,7 +125,6 @@ const TridentApproveGate = ({
   onPermitError,
 }: TridentApproveGateType) => {
   const { account } = useActiveWeb3React()
-  const { i18n } = useLingui()
   const toggleWalletModal = useWalletModalToggle()
   const [status, setStatus] = useState<Record<string, ApprovalState>>({})
   const [permitError, setPermitError] = useState(false)
@@ -168,7 +164,7 @@ const TridentApproveGate = ({
       {inputAmounts.every((el) => el?.greaterThan(ZERO)) &&
         [CoffinApprovalState.NOT_APPROVED, CoffinApprovalState.PENDING].includes(approvalState) && (
           <Button color="blue" loading={approvalState === CoffinApprovalState.PENDING} id={`btn-approve`} onClick={onClick}>
-            {i18n._(t`Approve CoffinBox`)}
+            {`Approve CoffinBox`}
           </Button>
         )}
 
@@ -190,7 +186,7 @@ const TridentApproveGate = ({
 
       {!account ? (
         <Button color="deepPurple" onClick={toggleWalletModal}>
-          {i18n._(t`Connect Wallet`)}
+          {`Connect Wallet`}
         </Button>
       ) : (
         children({ approved: approved || !!permitProp, loading, permit })

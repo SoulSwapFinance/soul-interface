@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import Typography from 'components/Typography'
 import {
   TABLE_TABLE_CLASSNAME,
@@ -18,7 +16,6 @@ interface AssetBalancesProps {
 }
 
 const AssetBalances: FC<AssetBalancesProps> = ({ config, onSelect }) => {
-  const { i18n } = useLingui()
 
   const {
     getTableProps,
@@ -76,7 +73,7 @@ const AssetBalances: FC<AssetBalancesProps> = ({ config, onSelect }) => {
               variant="xs"
               className="text-center text-low-emphesis h-[60px] flex items-center justify-center"
             >
-              {i18n._(t`No Balances`)}
+              {`No Balances`}
             </Typography>
           )}
         </tbody>

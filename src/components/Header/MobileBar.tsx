@@ -71,8 +71,6 @@ const MobileBar = () => {
 
     const swapPage = router.pathname.startsWith('/swap') || router.pathname.startsWith('/exchange/swap')
     const crossPage = router.pathname.startsWith('/cross') || router.pathname.startsWith('/exchange/cross')
-    // const landingPage = router.pathname.startsWith('/landing')
-    // const learnPage = router.pathname.startsWith('/learn')
     const portfolioPage = router.pathname.startsWith('/portfolio')
     const luxorPage = router.pathname.startsWith('/luxor')
     const farmPage = router.pathname.startsWith('/farm') || router.pathname.startsWith('/summoner')
@@ -83,12 +81,9 @@ const MobileBar = () => {
 
     // const isExchangeAnalytics
     //     = asPath.startsWith('/exchange/analytics')
-    //     || asPath.startsWith('/exchange/analytics/coffinbox')
     //     || asPath.startsWith('/exchange/analytics/dashboard')
     //     || asPath.startsWith('/exchange/analytics/pairs')
     //     || asPath.startsWith('/exchange/analytics/tokens')
-
-    // const isBridge = router.pathname.startsWith('/bridge')
 
     // const isLimit = router.pathname.startsWith('/limit')
     //   || router.pathname.startsWith('/exchange/limit')
@@ -124,7 +119,7 @@ const MobileBar = () => {
                             leaveFrom="opacity-100"
                             leaveTo="opacity-0"
                         >
-                            <Dialog.Overlay className="absolute inset-0 transition-opacity bg-dark-1000 bg-opacity-80" />
+                            <Dialog.Overlay className="absolute inset-0 transition-opacity bg-dark-1000 bg-opacity/80" />
                         </Transition.Child>
                         <div className="fixed inset-y-0 left-0 pr-8 sm:pr-10 max-w-[260px] flex">
                             <Transition.Child

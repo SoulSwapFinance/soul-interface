@@ -71,7 +71,7 @@ export default function UnsupportedCurrencyFooter({
                   <div className="border border-dark-700" key={token.address?.concat('not-supported')}>
                     <AutoColumn gap="10px">
                       <AutoRow gap="5px" align="center">
-                        <CurrencyLogo currency={token} size={'24px'} />
+                        <CurrencyLogo currency={token} size={24} />
                         <div className="font-medium">{token.symbol}</div>
                       </AutoRow>
                       {chainId && (

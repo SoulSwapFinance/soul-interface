@@ -5,11 +5,11 @@ import useHttpLocations from '../../hooks/useHttpLocations'
 export default function ListLogo({
   logoURI,
   style,
-  size = '24px',
+  size = 24,
   alt,
 }: {
   logoURI: string
-  size?: string
+  size?: number
   style?: React.CSSProperties
   alt?: string
 }) {

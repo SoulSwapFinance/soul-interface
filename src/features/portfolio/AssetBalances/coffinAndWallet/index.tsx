@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { ChainId, NATIVE, ZERO } from 'sdk'
 import Typography from 'components/Typography'
 import AssetBalances from 'features/portfolio/AssetBalances/AssetBalances'
@@ -16,8 +14,6 @@ import { useBasicTableConfig } from '../useBasicTableConfig'
 import { Button } from 'components/Button'
 
 export const CoffinBalances = ({ account }: { account: string }) => {
-  const { i18n } = useLingui()
-  // const { chainId } = useActiveWeb3React()
   const dispatch = useAppDispatch()
   const { data: balances, loading } = useCoffinBalancesV2ForAccount(account)
   const assets = balances.reduce<Assets[]>((acc, el) => {
@@ -46,7 +42,7 @@ export const CoffinBalances = ({ account }: { account: string }) => {
       <Button color="blue" >
       <Typography weight={700} variant="lg" 
         className="px-2 text-center text-high-emphesis">
-        {i18n._(t`CoffinBox Balances`)}
+        {`CoffinBox Balances`}
       </Typography>
       </Button>
       <AssetBalances config={config} onSelect={handleRowClick} />
@@ -55,7 +51,6 @@ export const CoffinBalances = ({ account }: { account: string }) => {
 }
 
 export const WalletBalances: FC<{ chainId: ChainId, account: string }> = ({ chainId, account }) => {
-  const { i18n } = useLingui()
   const dispatch = useAppDispatch()
   const { data: _balances, loading } = useAllTokenBalancesWithLoadingIndicator()
 
@@ -92,7 +87,7 @@ export const WalletBalances: FC<{ chainId: ChainId, account: string }> = ({ chai
     <div className="flex flex-col gap-3">
       <Button color="blue" >
       <Typography weight={700} variant="lg" className="px-2 text-center text-high-emphesis">
-        {i18n._(t`Wallet Balances`)}
+        {`Wallet Balances`}
       </Typography>
       </Button>
       <AssetBalances config={config} onSelect={handleRowClick} />

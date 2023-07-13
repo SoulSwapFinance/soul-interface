@@ -1,8 +1,6 @@
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
-import { Currency, SOUL_ADDRESS, Token } from 'sdk'
+import { Currency, Token } from 'sdk'
 import selectCoinAnimation from 'animation/select-coin.json'
 import { Button } from 'components/Button'
 import Chip from 'components/Chip'
@@ -22,8 +20,6 @@ import Lottie from 'lottie-react'
 
 import React, { createContext, FC, ReactNode, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { usePrice } from 'hooks/usePrice'
-// import { FiatValue } from './FiatValue'
-// import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 import { useCurrency } from 'hooks/Tokens'
 import { usePairPrice } from 'hooks/usePairData'
 
@@ -69,7 +65,6 @@ const AssetInput: AssetInput<AssetInputProps> = ({
   ...props
 }) => {
   const isDesktop = useDesktopMediaQuery()
-  const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
   const [open, setOpen] = useState(false)
 
@@ -93,7 +88,7 @@ const AssetInput: AssetInput<AssetInputProps> = ({
 
   let header = (
     <Typography variant="h3" weight={700} className="text-high-emphesis">
-      {props.title ? props.title : i18n._(t`Choose an Asset`)}
+      {props.title ? props.title : `Choose an Asset`}
     </Typography>
   )
 
@@ -188,7 +183,6 @@ const AssetInputPanel = ({
   const error = useAssetInputContextError()
   const { chainId } = useActiveWeb3React()
   const isDesktop = useDesktopMediaQuery()
-  const { i18n } = useLingui()
 
   let tokenA = useCurrency(token0)
   let tokenB = useCurrency(token1)
@@ -229,7 +223,7 @@ const AssetInputPanel = ({
                   className="!rounded-full"
                   endIcon={<ChevronDownIcon width={24} height={24} />}
                 >
-                  {i18n._(t`Select Token`)}
+                  {`Select Token`}
                 </Button>
               </div>
             }
@@ -332,7 +326,6 @@ const AssetInputPanelBalance: FC<AssetInputPanelBalanceProps> = ({
   balance, 
   onMaxClick, 
   spendFromWallet = true, id }) => {
-  const { i18n } = useLingui()
   const error = useAssetInputContextError()
 
   let icon = (
@@ -353,7 +346,7 @@ const AssetInputPanelBalance: FC<AssetInputPanelBalanceProps> = ({
       {/* <div className="flex items-center gap-2.5 mr-1">
         {icon}
         <Typography variant="sm" className={classNames(balance ? 'text-high-emphesis' : 'text-low-emphesis')}>
-          {i18n._(t`Balance:`)}
+          {`Balance:`}
         </Typography>
       </div> */}
       {/* <div className="flex items-center">
@@ -382,7 +375,6 @@ const AssetInputWalletSwitch: FC<AssetInputWalletSwitchProps> = ({ checked, onCh
   const error = useAssetInputContextError()
 
   const isDesktop = useDesktopMediaQuery()
-  const { i18n } = useLingui()
 
   const helper = <CoffinBoxFundingSourceModal />
 
@@ -396,14 +388,14 @@ const AssetInputWalletSwitch: FC<AssetInputWalletSwitchProps> = ({ checked, onCh
       <div className="flex items-center gap-3 lg:flex-col">
         <div className="flex flex-col order-1 lg:order-2">
           <Typography variant="xxs" weight={700} className="text-right text-secondary lg:text-center">
-            {/* {label || i18n._(t`Funding source:`)} */}
+            {/* {label || `Funding source:`} */}
           </Typography>
           <Typography
             variant="sm"
             weight={700}
             className="text-right text-high-emphesis lg:text-center lg:flex lg:gap-1 lg:items-center lg:justify-center"
           >
-            {checked ? i18n._(t`Wallet`) : i18n._(t`CoffinBox`)} {isDesktop && helper}
+            {checked ? `Wallet` : `CoffinBox`} {isDesktop && helper}
           </Typography>
         </div>
         <div className="order-2 lg:order-1">

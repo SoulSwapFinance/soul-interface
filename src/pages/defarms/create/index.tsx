@@ -1,7 +1,3 @@
-// import { defaultAbiCoder } from '@ethersproject/abi'
-// import { ethers } from 'ethers'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Button } from 'components/Button'
 import Card from 'components/Card'
 import Container from 'components/Container'
@@ -22,7 +18,6 @@ import { getChainColor, getChainColorCode } from 'constants/chains'
 import Typography from 'components/Typography'
 import Modal from 'components/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
-import { i18n } from '@lingui/core'
 import { useManifesterInfo, useUserTokenInfo } from 'hooks/useAPI'
 import { MANIFESTER_ADDRESS, NATIVE, SOUL_ADDRESS, Token } from 'sdk'
 import { formatNumber } from 'functions'
@@ -369,11 +364,11 @@ const CreateFarm = () => {
 
           <div className={`flex flex-col bg-dark-1000 p-3 border border-1 
             ${feeSet && rewardSet && assetSet && logoSet ? `border-purple` : `border-dark-700`} 
-            w-full rounded rounded-2xl space-y-1`}
+            w-full rounded-2xl space-y-1`}
           >
             <div className="flex justify-between">
               <Typography className="text-white" fontFamily={'medium'}>
-                {i18n._(t`Reward Asset`)}
+                {`Reward Asset`}
               </Typography>
               <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
                 {rewardAsset ? rewardAsset?.wrapped.symbol : ''}
@@ -381,7 +376,7 @@ const CreateFarm = () => {
             </div>
             <div className="flex justify-between">
               <Typography className="text-white" fontFamily={'medium'}>
-                {i18n._(t`Daily Reward`)}
+                {`Daily Reward`}
               </Typography>
               <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
                 {formatNumber(dailyReward, false, true)}
@@ -389,7 +384,7 @@ const CreateFarm = () => {
             </div>
             <div className="flex justify-between">
               <Typography className="text-white" fontFamily={'medium'}>
-                {i18n._(t`Campaign Days`)}
+                {`Campaign Days`}
               </Typography>
               <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
                 {`${rewardDays} Days`}
@@ -397,7 +392,7 @@ const CreateFarm = () => {
             </div>
             <div className="flex justify-between">
               <Typography className="text-white" fontFamily={'medium'}>
-                {i18n._(t`Fee Duration`)}
+                {`Fee Duration`}
               </Typography>
               <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
                 {`${feeDays} Days`}
@@ -405,7 +400,7 @@ const CreateFarm = () => {
             </div>
             <div className="flex justify-between">
               <Typography className="text-white" fontFamily={'medium'}>
-                {i18n._(t`Logo Preview`)}
+                {`Logo Preview`}
               </Typography>
               <Image 
                   src={logoURI}
@@ -438,7 +433,7 @@ const CreateFarm = () => {
           >
           <div className="flex justify-between">
               <Typography className="text-white" fontFamily={'medium'}>
-                {i18n._(t`Campaign Rewards`)}
+                {`Campaign Rewards`}
               </Typography>
               <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
                 {`${formatNumber(dailyReward * rewardDays, false, true)} ${rewardAsset ? rewardAsset?.wrapped.symbol : ''}`}                
@@ -456,7 +451,7 @@ const CreateFarm = () => {
             </div>
             <div className="flex justify-between">
               <Typography className="text-white" fontFamily={'medium'}>
-                {i18n._(t`Creation Deposit`)}
+                {`Creation Deposit`}
               </Typography>
               <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
                 {`${formatNumber(
@@ -503,12 +498,12 @@ const CreateFarm = () => {
                 <ModalHeader header={`DeFarm Campaign Confirmation`} onClose={() => setShowConfirmation(false)} />
                 <Typography variant="sm">
                   <div className="text-xl mt-4 mb-4 text-center border p-1.5 border-dark-600">
-                    {i18n._(t`Campaign Details`)}
+                    {`Campaign Details`}
                   </div>
-                  • <b> {i18n._(t`Daily Reward`)}</b>: {`${formatNumber(dailyReward, false, true)} ${rewardAsset.wrapped.symbol} Daily`} <br />
-                  • <b> {i18n._(t`Campaign Duration`)}</b>: {`${rewardDays} Days`}<br />
-                  • <b> {i18n._(t`Early Withdraw Fee`)}</b>: {`${feeDays}% Day One, 1% less daily.`}<br />
-                  • <b> {i18n._(t`Total Deposit`)}</b>: {`${formatNumber(
+                  • <b> {`Daily Reward`}</b>: {`${formatNumber(dailyReward, false, true)} ${rewardAsset.wrapped.symbol} Daily`} <br />
+                  • <b> {`Campaign Duration`}</b>: {`${rewardDays} Days`}<br />
+                  • <b> {`Early Withdraw Fee`}</b>: {`${feeDays}% Day One, 1% less daily.`}<br />
+                  • <b> {`Total Deposit`}</b>: {`${formatNumber(
                     // campaign rewards
                     (dailyReward * rewardDays) +
                     // creation fee
@@ -516,7 +511,7 @@ const CreateFarm = () => {
                   <br />
               
                   {/* <div className="mt-6 text-center">
-                  <i><b> {i18n._(t`Update Logo? Submit PR (or just DM Buns)`)}</b></i>.
+                  <i><b> {`Update Logo? Submit PR (or just DM Buns)`}</b></i>.
               </div> */}
 
                   {/* <b>100% of the fee</b> goes towards building our protocol-owned liquidity, which brings about long-term sustainability to our platform. */}
@@ -526,9 +521,9 @@ const CreateFarm = () => {
                 possibility of us imposing a minimum AURA balance (governance power) for deposits.`}
                 </Typography>
                 <Typography variant="sm" className="font-medium text-center">
-                  {i18n._(t`QUESTIONS OR CONCERNS?`)}
+                  {`QUESTIONS OR CONCERNS?`}
                   <a href="mailto:soulswapfinance@gmail.com">
-                    {' '}  {i18n._(t`CONTACT US`)}
+                    {' '}  {`CONTACT US`}
                   </a>
                 </Typography>
                 {!approved &&
@@ -574,7 +569,6 @@ const CreateFarm = () => {
 const CreateFarmLayout = ({ children }) => {
   const { chainId } = useActiveWeb3React()
 
-  const { i18n } = useLingui()
   return (
     <Layout
       left={
@@ -582,36 +576,33 @@ const CreateFarmLayout = ({ children }) => {
           <Card
             className="h-full bg-dark-900 text-center"
             // backgroundImage="/images/defarms/deposit.png"
-            title={i18n._(t`Create New Farm`)}
-            description={i18n._(
-              t`We provide protocols with the opportunity to incentivize their communities to provide liquidity. 
+            title={`Create New Farm`}
+            description={`We provide protocols with the opportunity to incentivize their communities to provide liquidity. 
               We reserve the right to: (1) add a requirement for a minimum AURA (governance power) to deposit, (2) update the logoURI, 
-              (3) pause the contract, (3) trigger emergency withdrawals, and (4) restrict the ability to update the DAO address.`)}
+              (3) pause the contract, (3) trigger emergency withdrawals, and (4) restrict the ability to update the DAO address.`}
           />
           <div className={`flex rounded m-1`} />
           <Card
             className="h-full bg-dark-900 text-center"
             // backgroundImage="/images/defarms/deposit.png"
-            title={i18n._(t`Why Trust Us?`)}
-            description={i18n._(
-              t`Don't trust; verify (below). We have a full-suite of unit tests that include edge cases testing for potential security exploits.`
+            title={`Why Trust Us?`}
+            description={`Don't trust; verify (below). We have a full-suite of unit tests that include edge cases testing for potential security exploits.`
               // `Don't just take our word for it, check out our open source repository.`
               // t`If you want to supply to a market that is not listed yet, you can use this tool to create a new pair.`
-            )}
+            }
           />
           <div className={`flex rounded text-center`}>
-            <ExternalLink className={`border border-[${getChainColor(chainId)}] rounded rounded-xl text-${getChainColorCode(chainId)} bg- flex-center font-bold text-center mt-2 mb-2 w-full p-2 m-4`} href="https://github.com/SoulSwapFinance/manifest-contracts">
-              {i18n._(t`Click Here to View Our Unit Tests`)}
+            <ExternalLink className={`border border-[${getChainColor(chainId)}] rounded-xl text-${getChainColorCode(chainId)} bg- flex-center font-bold text-center mt-2 mb-2 w-full p-2 m-4`} href="https://github.com/SoulSwapFinance/manifest-contracts">
+              {`Click Here to View Our Unit Tests`}
             </ExternalLink>
           </div>
           <Card
             className="h-full bg-dark-900 text-center"
             // backgroundImage="/images/defarms/deposit.png"
-            title={i18n._(t`Benefits & Features`)}
-            description={i18n._(
-              `Early Withraw Fee, Permisionless, Battle-Tested, Exchange Listing, Nominal Fee, Sleek UI, Co-Marketing`
+            title={`Benefits & Features`}
+            description={`Early Withraw Fee, Permisionless, Battle-Tested, Exchange Listing, Nominal Fee, Sleek UI, Co-Marketing`
               // t`If you want to supply to a market that is not listed yet, you can use this tool to create a new pair.`
-            )} />
+            } />
         </div>
       }
     >

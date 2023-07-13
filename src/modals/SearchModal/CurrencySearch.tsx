@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import CHAINLINK_TOKENS from 'constants/chainlink/soulswap-chainlink.whitelist.json'
 import { ChainId, Currency, NATIVE, Token } from 'sdk'
 import { Button } from 'components/Button'
@@ -34,7 +32,6 @@ export function CurrencySearch({
   currencyList,
   allowManageTokenList = true,
 }: CurrencySearchProps) {
-  const { i18n } = useLingui()
   const router = useRouter()
   let allTokens = useAllTokens()
   const { chainId } = useActiveWeb3React()
@@ -139,12 +136,14 @@ export function CurrencySearch({
 
   return (
     <>
-      <HeadlessUiModal.Header onClose={onDismiss} header={i18n._(t`Select Token`)} />
+      <HeadlessUiModal.Header 
+        onClose={onDismiss} header={`Search Token`} 
+      />
       {!currencyList && showSearch && (
         <input
           type="text"
           id="token-search-input"
-          placeholder={i18n._(t`Search name or paste address`)}
+          placeholder={`Search symbol or paste address`}
           autoComplete="off"
           value={searchQuery}
           onChange={handleInput}
@@ -152,11 +151,15 @@ export function CurrencySearch({
           className="w-full bg-[rgba(0,0,0,0.2)] border border-dark-800 focus:border-purple rounded placeholder-secondary font-bold text-base p-4 appearance-none"
         />
       )}
-      {showCommonBases && <CommonBases />}
+      {/* {showCommonBases && <CommonBases />} */}
 
       {searchToken && !searchTokenIsAdded && <ImportRow token={searchToken} onClick={handleImport} />}
-      <div className="h-full overflow-hidden overflow-y-auto border rounded border-dark-800 bg-[rgba(0,0,0,0.2)]">
-        {filteredSortedTokens?.length > 0 || filteredInactiveTokens?.length > 0 ? (
+      <div 
+        className="h-full overflow-hidden overflow-y-auto border rounded border-dark-800 bg-[rgba(0,0,0,0.2)]"
+      >
+       
+        {/* {filteredSortedTokens?.length > 0 || filteredInactiveTokens?.length > 0 ? (
+          // TODO: fails to show tokens
           <CurrencyList
             chainId={chainId}
             currencies={includeNative ? filteredSortedTokensWithETH : filteredSortedTokens}
@@ -165,9 +168,12 @@ export function CurrencySearch({
           />
         ) : (
           <Typography weight={700} variant="xs" className="text-secondary flex h-full justify-center items-center">
-            {i18n._(t`No results found`)}
+            {`No results found`}
           </Typography>
-        )}
+        )} */}
+
+       <CommonBases />
+
       </div>
       {allowManageTokenList && (
         <div className="flex justify-center">
@@ -176,9 +182,9 @@ export function CurrencySearch({
             id="list-token-manage-button"
             onClick={() => setView(CurrencyModalView.manage)}
             color="blue"
-            variant="empty"
+            variant="filled"
           >
-            {i18n._(t`Manage Token Lists`)}
+            {`Manage Token Lists`}
           </Button>
         </div>
       )}

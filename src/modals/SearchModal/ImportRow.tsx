@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Token } from 'sdk'
 import Chip from 'components/Chip'
 import { CurrencyLogo } from 'components/CurrencyLogo'
@@ -14,7 +12,6 @@ interface ImportRow {
 }
 
 const ImportRow: FC<ImportRow> = ({ token, onClick }) => {
-  const { i18n } = useLingui()
 
   return (
     <HeadlessUiModal.BorderedContent className="border hover:border-gray-700 cursor-pointer" onClick={onClick}>
@@ -32,8 +29,8 @@ const ImportRow: FC<ImportRow> = ({ token, onClick }) => {
                 </Typography>
               </Typography>
 
-              <Chip color="yellow" size="sm" label={i18n._(t`Unknown Source`)}>
-                {i18n._(t`Unknown Source`)}
+              <Chip color="yellow" size="sm" label={`Unknown Source`}>
+                {`Unknown Source`}
               </Chip>
             </div>
             <Typography variant="xxs" weight={700}>

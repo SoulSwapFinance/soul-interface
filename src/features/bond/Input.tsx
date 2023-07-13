@@ -1,5 +1,4 @@
 import React, { FC, ReactNode, useCallback, useState } from 'react'
-import { useLingui } from '@lingui/react'
 import { Currency, Percent, Token } from 'sdk'
 import { classNames, formatNumber } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
@@ -35,7 +34,6 @@ export default function BondInputPanel({
   onMax,
   id,
 }: BondInputPanelProps) {
-  const { i18n } = useLingui()
   const [modalOpen, setModalOpen] = useState(false)
   const { account } = useActiveWeb3React()
   const { soulBondUserInfo } = useBondUserInfo(pid, account)

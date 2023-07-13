@@ -1,9 +1,7 @@
-import React, { Fragment, useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from 'components/Container'
 import Head from 'next/head'
 import Typography from 'components/Typography'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Tab } from '@headlessui/react'
 import LuxorGlowShadow from 'components/LuxorGlowShadow'
 import { Button, ButtonError } from 'components/Button'
@@ -24,13 +22,11 @@ import { useTokenContract } from 'hooks/useTokenContract'
 import { useLuxorPrice } from 'hooks/getPrices'
 import { useLuxorInfo, useLuxorUserInfo } from 'hooks/useAPI'
 import useSendTransaction from 'hooks/useSendTransaction'
-import styled from 'styled-components'
 import { isMobile } from 'react-device-detect'
 import { LuxorBanner } from 'components/Banner'
 
 export default function Stake() {
   const addTransaction = useTransactionAdder()
-  const { i18n } = useLingui()
   const [stakeValue, setStakeValue] = useState('0')
   const [redeemValue, setRedeemValue] = useState('0')
   // const [epoch, setEpoch] = useState('0')
@@ -228,7 +224,7 @@ export default function Stake() {
                     } flex items-center justify-center px-3 py-1.5 rounded-2xl semi-bold font-semibold border border-dark-800 border-1 hover:border-yellow`
                   }
                 >
-                  {i18n._(t`Deposit`)}
+                  {`Deposit`}
                 </Tab>
                 <Tab
                   className={({ selected }) =>
@@ -236,7 +232,7 @@ export default function Stake() {
                     } flex items-center justify-center px-3 py-1.5 rounded-2xl semi-bold font-semibold border border-dark-800 border-1 hover:border-yellow`
                   }
                 >
-                  {i18n._(t`Withdraw`)}
+                  {`Withdraw`}
                 </Tab>
               </div>
             </Tab.List>
@@ -277,7 +273,7 @@ export default function Stake() {
 
               <div className="flex justify-between">
                 <Typography className="text-white text-lg" fontFamily={'medium'}>
-                  {i18n._(t`Epoch Remaining`)}
+                  {`Epoch Remaining`}
                 </Typography>
                 <Typography className="text-yellow text-lg" weight={600} fontFamily={'semi-bold'}>
                   {(remainingMinutes).toFixed()} mins
@@ -296,7 +292,7 @@ export default function Stake() {
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1">
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Luxor Balance`)}
+                    {`Luxor Balance`}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     {luxBalance.toFixed(2)} LUX
@@ -304,7 +300,7 @@ export default function Stake() {
                 </div>
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Deposited Amount`)}
+                    {`Deposited Amount`}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     {lumBalance.toFixed(2)} LUX
@@ -312,7 +308,7 @@ export default function Stake() {
                 </div>
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Warmup Period`)}
+                    {`Warmup Period`}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     {warmupHours} hours
@@ -333,9 +329,9 @@ export default function Stake() {
                     style={{ width: '100%' }}
                   >
                     {stakeApprovalState === ApprovalState.PENDING ? (
-                      <Dots>{i18n._(t`Approving`)}</Dots>
+                      <Dots>{`Approving`}</Dots>
                     ) : (
-                      i18n._(t`Approve`)
+                      `Approve`
                     )}
                   </Button>
                 ) :
@@ -359,7 +355,7 @@ export default function Stake() {
                       error={!isStakeValid && !!parsedStakeValue}
                       style={{ width: '100%' }}
                     >
-                      {stakeError || i18n._(t`Stake Luxor`)}
+                      {stakeError || `Stake Luxor`}
                     </ButtonError>
                   )}
               </div>
@@ -396,7 +392,7 @@ export default function Stake() {
 
               <div className={classNames("flex justify-between", "mb-4")}>
                 <Typography className="text-white text-lg" fontFamily={'medium'}>
-                  {i18n._(t`Epoch Remaining`)}
+                  {`Epoch Remaining`}
                 </Typography>
                 <Typography className="text-yellow text-lg" weight={600} fontFamily={'semi-bold'}>
                   {(remainingMinutes).toFixed()} mins
@@ -404,7 +400,7 @@ export default function Stake() {
               </div>
               {/* <div className="flex justify-between">
     <Typography className="text-white" fontFamily={'medium'}>
-      {i18n._(t`Daily Reward`)}
+      {`Daily Reward`}
     </Typography>
     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
     { dailyReward.toFixed(2) } LUX 
@@ -427,7 +423,7 @@ export default function Stake() {
                   <div className={classNames(lumBalance > 0 ? "flex text-xl mb-2 font-bold text-yellow" : 'hidden')}> Deposit Details </div>
                   <div className={classNames(lumBalance > 0 ? 'flex justify-between' : 'hidden')}>
                     <Typography className="text-white" fontFamily={'medium'}>
-                      {i18n._(t`Staked Balance`)}
+                      {`Staked Balance`}
                     </Typography>
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       {formatNumber(lumBalance, false, true)} LUX
@@ -435,7 +431,7 @@ export default function Stake() {
                   </div>
                   <div className={classNames(lumBalance > 0 && 'flex justify-between')}>
                     <Typography className="text-white" fontFamily={'medium'}>
-                      {i18n._(t`Next Rebase`)}
+                      {`Next Rebase`}
                     </Typography>
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       {formatNumber(nextStakedReward, false, true)} LUM
@@ -445,7 +441,7 @@ export default function Stake() {
                   {/*               
               <div className={classNames(lumBalance > 0 && warmupValue > 0 ? 'flex justify-between' : 'hidden')}>
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Next Rebase`)}
+                    {`Next Rebase`}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     { formatNumber(nextReward, false, true) } LUM
@@ -455,7 +451,7 @@ export default function Stake() {
 
                   {/* <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                  {i18n._(t`Current Epoch`)}
+                  {`Current Epoch`}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                   {epoch}
@@ -464,7 +460,7 @@ export default function Stake() {
 
                   {/* <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Epoch Duration`)}
+                    {`Epoch Duration`}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     { hoursPerEpoch } hours
@@ -472,7 +468,7 @@ export default function Stake() {
                 </div> */}
                   {/* <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {i18n._(t`Warmup Balance`)}
+                    {`Warmup Balance`}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     { warmupAmount }
@@ -486,7 +482,7 @@ export default function Stake() {
 
                   <div className={classNames(warmupValue > 0 && "flex justify-between")}>
                     <Typography className="text-white" fontFamily={'medium'}>
-                      {i18n._(t`Locked Balance`)}
+                      {`Locked Balance`}
                     </Typography>
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       {warmupValue.toFixed(2)} LUM
@@ -494,7 +490,7 @@ export default function Stake() {
                   </div>
                   <div className={classNames(warmupValue > 0 ? 'flex justify-between' : 'hidden')}>
                     <Typography className="text-white" fontFamily={'medium'}>
-                      {i18n._(t`Next Rebase`)}
+                      {`Next Rebase`}
                     </Typography>
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       {formatNumber(nextWarmupReward, false, true)} LUM
@@ -502,7 +498,7 @@ export default function Stake() {
                   </div>
                   <div className="flex justify-between mt-3">
                     <Typography className="text-white" fontFamily={'medium'}>
-                      {i18n._(t`Time Remaining`)}
+                      {`Time Remaining`}
                     </Typography>
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       {
@@ -545,7 +541,7 @@ export default function Stake() {
                     error={!isRedeemValid && !!parsedRedeemValue}
                     style={{ width: '100%' }}
                   >
-                    {redeemError || i18n._(t`Withdraw`)}
+                    {redeemError || `Withdraw`}
                   </ButtonError>
                     <Button
                       variant="filled"
@@ -564,7 +560,7 @@ export default function Stake() {
                       disabled={!account}
                       style={{ width: '100%' }}
                     >
-                      {i18n._(t`Forfeit`)}
+                      {`Forfeit`}
                     </Button></>
                 ) : Number(warmupExpiry) < Number(epoch) && Number(warmupValue) > 0 ? (
                   <><ButtonError
@@ -585,7 +581,7 @@ export default function Stake() {
                     error={!isRedeemValid && !!parsedRedeemValue}
                     style={{ width: '100%' }}
                   >
-                    {redeemError || i18n._(t`Withdraw`)}
+                    {redeemError || `Withdraw`}
                   </ButtonError>
                     <Button
                       variant="filled"
@@ -604,7 +600,7 @@ export default function Stake() {
                       disabled={!account}
                       style={{ width: '100%' }}
                     >
-                      {i18n._(t`Claim`)}
+                      {`Claim`}
                     </Button></>
                 ) : (<ButtonError
                   variant="filled"
@@ -624,7 +620,7 @@ export default function Stake() {
                   error={!isRedeemValid && !!parsedRedeemValue}
                   style={{ width: '100%' }}
                 >
-                  {redeemError || i18n._(t`Withdraw`)}
+                  {redeemError || `Withdraw`}
                 </ButtonError>
                 )}
               </div>

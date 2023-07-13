@@ -13,14 +13,14 @@ export const ProjectHero = ({ project, totalCommitted }) => {
   return (
     <div
       className={
-        'container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 flex justify-between md:p-6 md:p-0 flex-row mb-5 md:mb-10'
+        'container grid-cols-1 sm:grid-cols-2 md:grid-cols-5 justify-between md:p-6 flex-row mb-5 md:mb-10'
       }
     >
       <div className="md:col-start-1 md:col-end-3 mb-10 md:mb-0">
         <Image
           src={project.logo}
-          width="60px"
-          height="60px"
+          width={60}
+          height={60}
           className="rounded-full bg-white"
           layout="fixed"
           alt={project.name}

@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
 // import { classNames } from 'functions'
 import { useWalletModalToggle } from 'state/application/hooks'
@@ -13,7 +11,6 @@ import WalletIcon from 'components/Icons/header/WalletIcon'
 // import { getWalletColor } from 'components/Web3Status'
 
 export default function Web3Connect({ color = 'purple', size = 'sm', className = '', ...rest }: ButtonProps) {
-  const { i18n } = useLingui()
   const toggleWalletModal = useWalletModalToggle()
   const { error } = useWeb3React()
   // const isDesktop = useDesktopHeaderMediaQuery()
@@ -24,13 +21,13 @@ export default function Web3Connect({ color = 'purple', size = 'sm', className =
 
   return error ? (
     <div
-      className="flex items-center justify-center px-4 py-2 font-semibold text-white border rounded bg-opacity-80 border-red bg-red hover:bg-opacity-100"
+      className="flex items-center justify-center px-4 py-2 font-semibold text-white border rounded bg-opacity/80 border-red bg-red hover:bg-opacity/100"
       onClick={toggleWalletModal}
     >
       <div className="mr-1">
         <Activity className="w-4 h-4" />
       </div>
-      {error instanceof UnsupportedChainIdError ? i18n._(t`You are on the wrong network`) : i18n._(t`Error`)}
+      {error instanceof UnsupportedChainIdError ? `You are on the wrong network` : `Error`}
     </div>
   ) : ( 
     // isDesktop ?
@@ -53,8 +50,8 @@ export default function Web3Connect({ color = 'purple', size = 'sm', className =
     //   size={size}
     //   {...rest}
     // >
-    //   {/* {i18n._(t`Connect Wallet`)} */}
-    //   {i18n._(t`Connect`)}
+    //   {/* {`Connect Wallet`} */}
+    //   {`Connect`}
     // </Button>
   //  :
   //   <Button
@@ -66,7 +63,7 @@ export default function Web3Connect({ color = 'purple', size = 'sm', className =
   //   size={size}
   //   {...rest}
   // >
-  //   {i18n._(t`Connect`)}
+  //   {`Connect`}
   // </Button>
   )
 }

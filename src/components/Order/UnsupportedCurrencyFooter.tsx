@@ -79,7 +79,7 @@ export default function UnsupportedCurrencyFooter({
                   <OutlineCard key={token.address?.concat("not-supported")}>
                     <AutoColumn gap="10px">
                       <AutoRow gap="5px" align="center">
-                        <CurrencyLogo currency={token} size={"24px"} />
+                        <CurrencyLogo currency={token} size={24} />
                         <TYPE.Body fontWeight={500}>{token.symbol}</TYPE.Body>
                       </AutoRow>
                       {chainId && (

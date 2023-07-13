@@ -1,5 +1,4 @@
 import { BigNumber } from '@ethersproject/bignumber'
-// import InputCurrencyBox from 'components/Bridge/InputCurrencyBox'
 import Typography from 'components/Typography'
 import React, { useEffect, useState } from 'react'
 import { useActiveWeb3React } from "services/web3"

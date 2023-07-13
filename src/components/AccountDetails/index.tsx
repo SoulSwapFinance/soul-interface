@@ -1,6 +1,4 @@
 import Davatar from '@davatar/react'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { HeadlessUiModal } from 'components/Modal'
 import { injected, SUPPORTED_WALLETS } from 'config/wallets'
 import { getExplorerLink } from 'functions/explorer'
@@ -37,7 +35,6 @@ const AccountDetails: FC<AccountDetailsProps> = ({
   ENSName,
   openOptions,
 }) => {
-  const { i18n } = useLingui()
   const { chainId, account, connector, deactivate, library } = useActiveWeb3React()
   const dispatch = useAppDispatch()
   const { userInfo } = useUserInfo()
@@ -69,12 +66,12 @@ const AccountDetails: FC<AccountDetailsProps> = ({
   return (
     <div className="space-y-3">
       <div className="space-y-3">
-        <HeadlessUiModal.Header header={i18n._(t`Account`)} onClose={toggleWalletModal} />
+        <HeadlessUiModal.Header header={`Account`} onClose={toggleWalletModal} />
         {/* <HeadlessUiModal.BorderedContent className="flex flex-col gap-3"> */}
         <div className="flex items-center justify-between">
           {connectorName}
           <Button variant="outlined" color={getChainColorCode(chainId)} size="xs" onClick={deactivate}>
-            {i18n._(t`Disconnect`)}
+            {`Disconnect`}
           </Button>
         </div>
         <div id="web3-account-identifier-row" className="flex flex-col justify-center gap-4">
@@ -96,7 +93,7 @@ const AccountDetails: FC<AccountDetailsProps> = ({
             {account && (
               <Copy className={`text-[${getChainColor(chainId)}]`} toCopy={account}>
                 <Typography variant="xs" weight={700}>
-                  {i18n._(t`Copy`)}
+                  {`Copy`}
                 </Typography>
               </Copy>
             )}
@@ -107,7 +104,7 @@ const AccountDetails: FC<AccountDetailsProps> = ({
                 href={chainId && getExplorerLink(chainId, ENSName || account, 'address')}
               >
                 <Typography variant="xs" weight={700}>
-                  {i18n._(t`Explorer`)}
+                  {`Explorer`}
                 </Typography>
               </ExternalLink>
             )}
@@ -118,7 +115,7 @@ const AccountDetails: FC<AccountDetailsProps> = ({
                 href={'/balances'}
               >
                 <Typography variant="xs" weight={700}>
-                  {i18n._(t`Balances`)}
+                  {`Balances`}
                 </Typography>
               </ExternalLink>
             )}
@@ -128,7 +125,7 @@ const AccountDetails: FC<AccountDetailsProps> = ({
         <HeadlessUiModal.BorderedContent className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
             <Typography variant="xs" weight={700} className={`font-white`}>
-              {i18n._(t`Voting Power`)}
+              {`Voting Power`}
             </Typography>
             <ExternalLink
               href={'https://enchant.soulswap.finance'}
@@ -144,29 +141,29 @@ const AccountDetails: FC<AccountDetailsProps> = ({
                   variant="xs"
                   weight={700} className="text-secondary"
                   > */}
-                {i18n._(t`Vote`)}
+                {`Vote`}
                 {/* </Typography> */}
               </Button>
             </ExternalLink>
           </div>
           <div className="flex flex-col divide-y divide-dark-800">
             <Typography variant="xs" weight={700} className="text-secondary">
-              {account ? `Power: ${formatNumber(votingPower, false, true)} AURA` : i18n._(t`Connect Wallet to view voting power...`)}
+              {account ? `Power: ${formatNumber(votingPower, false, true)} AURA` : `Connect Wallet to view voting power...`}
             </Typography>
           </div>
           <div className="flex flex-col divide-y divide-dark-800">
             <Typography variant="xs" weight={700} className="text-secondary">
-              {account ? `Chakra: ${getChakra(votingPower)} (${getChakraColor(votingPower)})` : i18n._(t`Connect Wallet to view voting power...`)}
+              {account ? `Chakra: ${getChakra(votingPower)} (${getChakraColor(votingPower)})` : `Connect Wallet to view voting power...`}
             </Typography>
           </div>
         </HeadlessUiModal.BorderedContent>
         <HeadlessUiModal.BorderedContent className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
             <Typography variant="xs" weight={700} className="font-white">
-              {i18n._(t`Recent Transactions`)}
+              {`Recent Transactions`}
             </Typography>
             <Button variant="outlined" color={`${getChainColorCode(chainId)}`} size="xs" onClick={clearAllTransactionsCallback}>
-              {i18n._(t`Clear`)}
+              {`Clear`}
             </Button>
           </div>
           <div className="flex flex-col divide-y divide-dark-800">
@@ -181,7 +178,7 @@ const AccountDetails: FC<AccountDetailsProps> = ({
               </>
             ) : (
               <Typography variant="xs" weight={700} className="text-secondary">
-                {i18n._(t`Your transactions will appear here...`)}
+                {`Your transactions will appear here...`}
               </Typography>
             )}
           </div>

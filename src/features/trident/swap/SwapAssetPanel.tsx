@@ -1,6 +1,4 @@
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { ChainId, Currency, Percent, ZERO } from 'sdk'
 import { Button } from 'components/Button'
 import { CurrencyLogo } from 'components/CurrencyLogo'
@@ -96,7 +94,6 @@ const WalletSwitch: FC<
     id?: string
   }
 > = ({ label, onChange, id, spendFromWallet, disabled }) => {
-  const { i18n } = useLingui()
 
   const content = (
     <Typography
@@ -115,14 +112,14 @@ const WalletSwitch: FC<
         component="span"
         className="flex items-center gap-1 px-2 py-1 rounded-full cursor-pointer text-high-emphesis hover:text-white hover:shadow bg-dark-800 hover:bg-dark-700"
       >
-        {spendFromWallet ? i18n._(t`Wallet`) : i18n._(t`Coffin`)}
+        {spendFromWallet ? `Wallet` : `Coffin`}
       </Typography>
       <CoffinBoxFundingSourceModal />
     </Typography>
   )
 
   if (disabled) {
-    return <QuestionHelper text={i18n._(t`Not available for legacy route`)}>{content}</QuestionHelper>
+    return <QuestionHelper text={`Not available for legacy route`}>{content}</QuestionHelper>
   }
 
   return content
@@ -220,7 +217,6 @@ const SwapAssetPanelHeader: FC<
     'currency' | 'currencies' | 'onSelect' | 'walletToggle' | 'spendFromWallet' | 'disabled' | 'onChange' | 'value'
   > & { label: string; id?: string }
 > = ({ walletToggle, currency, onSelect, spendFromWallet, id, currencies }) => {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   const trigger = currency ? (
     <div
@@ -236,7 +232,7 @@ const SwapAssetPanelHeader: FC<
   ) : (
     <Button color={getChainColorCode(chainId)} variant="flexed" size="sm" id={id} className="!rounded-full !px-2 !py-0 !h-[32px] !pl-3">
       <div className="flex items-center mt-1">
-      {i18n._(t`Select Token`)}
+      {`Select Token`}
       <ChevronDownIcon width={18} />
     </div>
     </Button>

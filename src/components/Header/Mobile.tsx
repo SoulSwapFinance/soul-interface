@@ -1,6 +1,5 @@
 
 import { Dialog, Transition } from '@headlessui/react'
-// import { ChainId, NATIVE } from 'sdk'
 import Web3Network from 'components/Web3Network'
 import Web3Status from 'components/Web3Status'
 import { useActiveWeb3React } from 'services/web3'
@@ -10,28 +9,10 @@ import useBar from './useBar'
 import { classNames } from 'functions/styling'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import MobileBar from './MobileBar'
-// import SwapIcon from 'components/Icons/exchange/SwapIcon'
 import { useRouter } from 'next/router'
-// import DoubleLeftIcon from 'components/Icons/mobile/DoubleLeftIcon'
-// import DoubleRightIcon from 'components/Icons/mobile/DoubleRightIcon'
-// import TokenStats from 'components/TokenStats'
 import Image from 'next/image'
 import LanguageMenu from './useLanguages'
-// import BinocularsIcon from 'components/Icons/header/BinocularsIcon'
-// import WalletIcon from 'components/Icons/header/WalletIcon'
-// import DropletIcon from 'components/Icons/header/DropletIcon'
-// import SunMoonIcon from 'components/Icons/header/SunMoonIcon'
-// import HomeIcon from 'components/Icons/mobile/HomeIcon'
-// import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
-// import BarsIcon from 'components/Icons/header/BarsIcon'
 import TokenStats from 'components/TokenStats'
-// import ChartIcon from 'components/Icons/exchange/ChartIcon'
-// import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
-// import SoulIcon from 'components/Icons/header/SoulIcon'
-// import DocsIcon from 'components/Icons/mobile/DocsIcon'
-// import NftIcon from 'components/Icons/mobile/NftIcon'
-// import { ArrowDownIcon } from '@heroicons/react/24/solid'
-// import DoubleDownIcon from 'components/Icons/mobile/DoubleDownIcon'
 
 const Mobile = () => {
   // const menu = useMenu()
@@ -48,157 +29,6 @@ const Mobile = () => {
   const swapRoute = useCallback(() => {
     router.push(`/exchange/swap`)
   }, [])
-
-  // const handleDropdown = useCallback(() => {
-  //   dropdown ? setShowDropdown(false) : setShowDropdown(true)
-  // }, [])
-
-  // const WHITE = `#FFFFFF`
-  // const R = `#FF0000`
-  // const O = `#FFA500`
-  // const Y = `#FFFF00`
-  // const G = `#008000`
-  // const B = `#0000FF`
-  // const I = `#811FFF`
-  // const V = `#EE82EE`
-  // const CHAKRAS = [R, O, Y, G, B, I, V]
-  // const chainColor = getChainColor(chainId)
-
-  // const SOUL_ICON = <SoulIcon
-  //   height={'600px'}
-  //   width={'600px'}
-  // />
-
-  // const DEFAULT_ICON = <BarsIcon
-  //   fillPrimary={open ? WHITE : getChainColor(chainId)}
-  //   fillSecondary={open ? getChainColor(chainId) : WHITE}
-  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded-xl w-7 h-7` : `hidden`)}
-  // />
-
-  // const CHART_ICON = <ChartIcon
-  //   fillPrimary={open ? WHITE : getChainColor(chainId)}
-  //   fillSecondary={open ? getChainColor(chainId) : WHITE}
-  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  // />
-
-  // const HOME_ICON = <HomeIcon
-  //   fillPrimary={open ? WHITE : chainColor}
-  //   fillSecondary={open ? chainColor : WHITE}
-  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  // />
-
-  // const DROPLET_ICON = <DropletIcon
-  //   fillPrimary={WHITE}
-  //   fillSecondary={chainColor}
-  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  // />
-
-  // const SWAP_ICON = <SwapIcon
-  //   fillPrimary={open ? WHITE : getChainColor(chainId)}
-  //   fillSecondary={open ? getChainColor(chainId) : WHITE}
-  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  // />
-
-  // const LEFT_ICON = <DoubleLeftIcon
-  //   fillPrimary={open ? WHITE : getChainColor(chainId)}
-  //   fillSecondary={open ? getChainColor(chainId) : WHITE}
-  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded-xl w-7 h-7` : `hidden`)}
-  // />
-
-  // const RIGHT_ICON = <DoubleRightIcon
-  //   fillPrimary={open ? WHITE : getChainColor(chainId)}
-  //   fillSecondary={open ? getChainColor(chainId) : WHITE}
-  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded-xl w-7 h-7` : `hidden`)}
-  // />
-
-  // const SUN_ICON = <SunMoonIcon
-  //   fillPrimary={open ? chainColor : WHITE}
-  //   fillSecondary={open ? WHITE : chainColor}
-  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  // />
-
-  // const EARN_ICON = <SeedlingIcon
-  //   fillPrimary={open ? WHITE : chainColor}
-  //   fillSecondary={open ? chainColor : WHITE}
-  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  // />
-
-  // const WALLET_ICON = <WalletIcon
-  //   fillPrimary={open ? WHITE : chainColor}
-  //   fillSecondary={open ? chainColor : WHITE}
-  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  // />
-
-  // const EXPLORE_ICON = <BinocularsIcon
-  // fillPrimary={open ? WHITE : chainColor}
-  // fillSecondary={open ? chainColor : WHITE}
-  // className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  // />
-
-  // const LEND_ICON = <LendSkullIcon
-  //   fillPrimary={open ? chainColor : WHITE}
-  //   fillSecondary={open ? WHITE : chainColor}
-  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  // />
-
-  // const DOCS_ICON = <DocsIcon
-  //   fillPrimary={open ? WHITE : chainColor}
-  //   fillSecondary={open ? chainColor : WHITE}
-  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  // />
-
-  // const NFT_ICON = <NftIcon
-  //   fillPrimary={open ? chainColor : WHITE}
-  //   fillSecondary={open ? WHITE : chainColor}
-  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  // />
-
-  // const SOUL_ICON = <SoulIcon
-  //   // fillPrimary={open ? chainColor : WHITE}
-  //   // fillSecondary={open ? WHITE : chainColor}
-  //   // className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-xl w-7 h-7` : `hidden`)}
-  //   height={'600px'}
-  //   width={'600px'}
-  // />
-
-  // const removePage = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
-  // const addPage = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
-  // const poolPage = asPath.startsWith('/pool') || asPath.startsWith('/pools')
-  // const swapPage = asPath.startsWith('/swap') || asPath.startsWith('/exchange/swap')
-  // const crossPage = asPath.startsWith('/cross') || asPath.startsWith('/exchange/cross')
-  // const bondPage = asPath.startsWith('/bonds')
-  // const landingPage = asPath.startsWith('/landing')
-  // const lendPage = asPath.startsWith('/lend') || asPath.startsWith('/borrow')
-  // const nftPage = asPath.startsWith('/marketplace') || asPath.startsWith('/marketplace/collections')
-  // const docsPage = asPath.startsWith('/learn')
-
-  // const isFarm = asPath.startsWith('/farm') || asPath.startsWith('/summoner')
-  // const isVault = asPath.startsWith('/autostake')
-  // const isLuxor = asPath.startsWith('/luxor') || asPath.startsWith('/luxor/dashbord') || asPath.startsWith('/luxor/bonds') || asPath.startsWith('/luxor/stake')
-
-  // const isLiquidity = removePage || addPage || poolPage
-  // const isHome = landingPage
-  // const isLend = lendPage
-  // const isDocs = docsPage
-  // const isNFT = nftPage
-  // // const isExplore = explorePage
-  // const isExplore = asPath.startsWith('/explore')
-  // const isWallet = asPath.startsWith('/balances') || asPath.startsWith('/portfolio')
-  // const isEarn = isFarm || bondPage || isVault
-  // const isExchange = swapPage || crossPage
-
-  // const pageIcon =
-  //   isExchange ? SWAP_ICON
-  //     : isEarn ? EARN_ICON
-  //       : isWallet ? WALLET_ICON
-  //         : isHome ? HOME_ICON
-  //           : isLiquidity ? DROPLET_ICON
-  //             : isLuxor ? SUN_ICON
-  //               : isExplore ? EXPLORE_ICON
-  //                 : isLend ? LEND_ICON
-  //                   : isDocs ? DOCS_ICON
-  //                     : isNFT ? NFT_ICON
-  //                       : DEFAULT_ICON
   
   const SOUL_ICON = 
   <div className={`flex gap-2 mr-2 ml-2`}>
@@ -206,7 +36,7 @@ const Mobile = () => {
         // src={'/favicon.png'} 
         src={`/SoulSwap-Banner.png`}
         height={36} width={196}
-        objectFit="contain"
+        // objectFit="contain"
         alt={"soulswap banner"}
     />
   </div>
@@ -260,7 +90,7 @@ const Mobile = () => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <Dialog.Overlay className="absolute inset-0 transition-opacity bg-dark-1000 bg-opacity-80" />
+                <Dialog.Overlay className="absolute inset-0 transition-opacity bg-dark-1000 bg-opacity/80" />
               </Transition.Child>
               <div className="fixed inset-y-0 left-0 pr-8 sm:pr-10 max-w-[260px] flex">
                 <Transition.Child

@@ -105,7 +105,7 @@ const TokenChart: FC<any> = ({ showChart, activeTokens, refetchTimer, width }) =
               <Row>
                 <Image
                   alt={`${activeTokens[0]?.symbol} icon`}
-                  width="40px" height={"40px"}
+                  width={40} height={40}
                   style={{ height: "40px", width: "40px", zIndex: 2 }}
                   src={activeTokens[0]?.icon}
                 />
@@ -114,7 +114,7 @@ const TokenChart: FC<any> = ({ showChart, activeTokens, refetchTimer, width }) =
                 />
                 <Image
                   alt={`${activeTokens[1]?.symbol} icon`}
-                  width="40px" height={"40px"}
+                  width={40} height={40}
                   src={activeTokens[1]?.icon}
                   style={{ height: "40px", width: "40px", marginLeft: "-.5rem" }}
                 />
@@ -192,7 +192,7 @@ const SwapRoute: FC<any> = ({ route, tokenList, activeTokens }) => {
           <Row style={{ alignItems: "center" }}>
             <Image
               alt={`${token?.symbol} icon`}
-              width="36px" height={"36px"} style={{ height: "36px", width: "36px" }} src={token?.icon} />
+              width={36} height={36} style={{ height: "36px", width: "36px" }} src={token?.icon} />
             <Spacer
               size="lg"
             />
@@ -214,7 +214,7 @@ const SwapRoute: FC<any> = ({ route, tokenList, activeTokens }) => {
         <Row style={{ alignItems: "center" }}>
           <Image
             alt={`${activeTokens[0]?.symbol} logo`}
-            width="40px" height={"40px"}
+            width={40} height={40}
             style={{ height: "40px", width: "40px" }}
             src={activeTokens[0]?.icon}
           />
@@ -252,7 +252,7 @@ const SwapRoute: FC<any> = ({ route, tokenList, activeTokens }) => {
           />
           <Image
             alt={`${activeTokens[1]?.symbol} logo`}
-            width="40px" height={"40px"}
+            width={40} height={40}
             style={{ height: "40px", width: "40px" }}
             src={activeTokens[1]?.icon}
           />

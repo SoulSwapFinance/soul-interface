@@ -44,7 +44,7 @@ export default function useSendTransactionCallback() {
           : 'other'
 
         captureException(e, {
-          level: 'fatal',
+          // level: 'fatal',
           extra: estimateGasOption,
           tags: {
             type: tag,
@@ -87,7 +87,7 @@ export default function useSendTransactionCallback() {
             : 'other'
 
           captureException(e, {
-            level: 'error',
+            // level: 'error',
             extra: sendTransactionOption,
             tags: {
               type: tag,

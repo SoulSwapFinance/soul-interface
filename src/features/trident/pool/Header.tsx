@@ -1,33 +1,25 @@
-import { I18n } from '@lingui/core'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { ConstantProductPool, HybridPool } from 'sdk'
 import { CurrencyLogoArray } from 'components/CurrencyLogo'
 import Typography from 'components/Typography'
 import { usePoolContext } from 'features/trident/PoolContext'
-import { formatPercent } from 'functions'
 import useDesktopMediaQuery from 'hooks/useDesktopMediaQuery'
 // import { useRollingPoolStats } from 'services/graph/hooks/pools'
-import { useActiveWeb3React } from 'services/web3'
 import { FC } from 'react'
 
 import { PoolProperties } from './PoolProperties'
 
 const HeaderContainer = () => {
-  const { i18n } = useLingui()
   const { poolWithState } = usePoolContext()
 
-  return <Header i18n={i18n} pool={poolWithState?.pool} />
+  return <Header pool={poolWithState?.pool} />
 }
 
 interface HeaderProps {
   pool?: ConstantProductPool | HybridPool
-  i18n: I18n
 }
 
-export const Header: FC<HeaderProps> = ({ pool, i18n }) => {
+export const Header: FC<HeaderProps> = ({ pool }) => {
   const isDesktop = useDesktopMediaQuery()
-  const { chainId } = useActiveWeb3React()
   const poolId = `${pool?.assets.map((el) => el.symbol).join('-')}`
 
 //   const { data: stats } = useRollingPoolStats({
@@ -45,7 +37,7 @@ export const Header: FC<HeaderProps> = ({ pool, i18n }) => {
         <div className="lg:flex lg:flex-row lg:gap-3 lg:order-0 lg:items-center">
           <CurrencyLogoArray currencies={pool?.assets || []} size={64} dense />
           <div className="hidden lg:flex lg:flex-col lg:gap-2">
-            <PoolProperties pool={pool} i18n={i18n} />
+            <PoolProperties pool={pool} />
           </div>
         </div>
         <div className="flex flex-row items-center gap-2 lg:order-2">
@@ -68,32 +60,32 @@ export const Header: FC<HeaderProps> = ({ pool, i18n }) => {
                 />
               </svg>
               <Typography variant="sm" weight={700} className="text-blue">
-                {i18n._(t`Farm`)}
+                {`Farm`}
               </Typography>
             </>
           )}
         </div>
         <div className="flex flex-row items-center gap-2 lg:order-1 lg:hidden">
-          <PoolProperties pool={pool} i18n={i18n} />
+          <PoolProperties pool={pool} />
         </div>
       </div>
       <div className="flex flex-col gap-1 text-right mt-[-54px] lg:mt-0">
-        <Typography variant="sm">{i18n._(t`APY (Annualized)`)}</Typography>
+        <Typography variant="sm">{`APY (Annualized)`}</Typography>
         <div className="flex flex-col gap-2">
           <Typography variant="h3" className="text-high-emphesis" weight={700}>
             {/* {formatPercent(stats?.[0]?.apy)} */}
           </Typography>
           {isFarm ? (
             <div className="flex flex-row justify-end gap-2.5">
-              <Typography variant="xxs">{i18n._(t`Rewards:`)} XX%</Typography>
+              <Typography variant="xxs">{`Rewards:`} XX%</Typography>
               {pool && (
                 <Typography variant="xxs">
-                  {i18n._(t`Fees:`)} {pool.fee / 100}%
+                  {`Fees:`} {pool.fee / 100}%
                 </Typography>
               )}
             </div>
           ) : (
-            <Typography variant="xxs">{i18n._(t`Including fees`)}</Typography>
+            <Typography variant="xxs">{`Including fees`}</Typography>
           )}
         </div>
       </div>

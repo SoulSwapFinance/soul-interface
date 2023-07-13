@@ -126,9 +126,9 @@ export default function TokenStatsModal(): JSX.Element | null {
               <Image
                 src={`https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/${SOUL_ADDRESS[ChainId.FANTOM]}/logo.png`}
                 alt="SOUL"
-                width="1600px"
-                height="1600px"
-                objectFit="contain"
+                width={1600}
+                height={1600}
+                // objectFit="contain"
                 className="rounded-md"
               />
             </div>
@@ -153,79 +153,8 @@ export default function TokenStatsModal(): JSX.Element | null {
             {`Maximum Supply`}
           </Typography>,
           '250,000,000'
-          // formatNumberScale(
-          //   Number(250_000_000), false)
         )
         }
-        {/* {getSummaryLine(
-            <div className="flex items-center">
-            <Typography variant="sm" className="flex items-center py-0.5">
-              {`Circulating Supply`}
-            </Typography>
-            <QuestionHelper
-              text={
-                <div className="flex flex-col gap-2 py-1 px-3 w-full">
-                  <div className="flex items-center justify-between">
-                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      Total Supply
-                    </Typography>
-                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      {formatNumberScale(Number(totalSoul), false)}
-                    </Typography>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      - {' '} DAO Treasury
-                    </Typography>
-                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      {formatNumberScale(Number(totalSoul) * 0.125, false)}
-                    </Typography>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      - {' '} Total Staked
-                    </Typography>
-                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      {formatNumberScale(Number(totalSeance), false)}
-                    </Typography>
-                  </div>
-                  <hr></hr>
-                  <div className="flex items-center justify-between">
-                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      Circulating
-                    </Typography>
-                    <Typography variant="sm" className="flex items-center font-bold px-2 py-0.5">
-                      {formatNumberScale(
-                        Number(totalSoul)
-                        - Number(totalSeance)
-                        - (Number(totalSoul) * 0.125)
-                        , false)}
-                    </Typography>
-                  </div>
-                </div>
-              }
-            />
-          </div>,
-          formatNumberScale(
-            Number(totalSoul)
-            - Number(totalSeance)
-            - (Number(totalSoul) * 0.125)
-            , false)
-        )} */}
-        {/* {getSummaryLine(
-          <Typography variant="sm" className="flex items-center py-0.5">
-            {`Circulating Supply`}
-          </Typography>,
-          formatNumberScale(
-            Number(totalSoul), false
-            ))} */}
-        {/* {getSummaryLine(
-          <Typography variant="sm" className="flex items-center py-0.5">
-            {`Total Market Cap`}
-          </Typography>,
-          formatCurrency(
-            Number(totalSoul) * Number(soulPrice)
-        ))} */}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Market Cap`}
@@ -342,12 +271,6 @@ export default function TokenStatsModal(): JSX.Element | null {
             ` (${((podl / tvl * 100).toFixed(0))}%)`
           ))
         }
-        {/* {getSummaryLine(
-          <Typography variant="sm" className="flex items-center py-0.5">
-            {`Percent PODL`}
-          </Typography>,
-            percPodl
-        )} */}
         {getSummaryLine(
           <Typography variant="sm" className="flex items-center py-0.5">
             {`Soul Market Price`}
@@ -356,7 +279,6 @@ export default function TokenStatsModal(): JSX.Element | null {
             Number(soulPrice), 3)
         )}
     <div className="flex" />
-       {/* <NavLink href={'/landing'}> */}
           <Button
             color='purple'
             variant='bordered'
@@ -366,7 +288,6 @@ export default function TokenStatsModal(): JSX.Element | null {
               <span>SoulSwap Finance</span>
             </a>
           </Button>
-        {/* </NavLink> */}
     </div>
     </HeadlessUiModal.Controlled>
   )

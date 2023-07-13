@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Currency, CurrencyAmount, PoolState, ZERO } from 'sdk'
 import {
   selectAddNormalInput,
@@ -33,7 +31,6 @@ export const useAddLiquidityDerivedCurrencyAmounts: UseAddLiquidityDerivedCurren
 
 type UseAddLiquidityDerivedInputError = () => string
 export const useAddLiquidityDerivedInputError: UseAddLiquidityDerivedInputError = () => {
-  const { i18n } = useLingui()
   const { account, chainId } = useActiveWeb3React()
   const { poolWithState, currencies } = usePoolContext()
   const spendFromWallet = useSelector(selectAddSpendFromWallet)
@@ -49,13 +46,13 @@ export const useAddLiquidityDerivedInputError: UseAddLiquidityDerivedInputError 
   )
 
   return !account
-    ? i18n._(t`Connect Wallet`)
+    ? `Connect Wallet`
     : poolWithState?.state === PoolState.INVALID
-    ? i18n._(t`Invalid Pool`)
+    ? `Invalid Pool`
     : !parsedAmounts[0]?.greaterThan(ZERO) && !parsedAmounts[1]?.greaterThan(ZERO)
-    ? i18n._(t`Enter Amount`)
+    ? `Enter Amount`
     : insufficientBalance
-    ? i18n._(t`Insufficient Balance`)
+    ? `Insufficient Balance`
     : ''
 }
 

@@ -1,9 +1,7 @@
 import React, { ReactNode, useMemo } from 'react'
 import { ArrowsUpDownIcon, 
   // LinkIcon, SparklesIcon, PresentationChartLineIcon, SunIcon, CurrencyDollarIcon, UserGroupIcon, 
-  ArrowsRightLeftIcon } from '@heroicons/react/24/outline'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
+  } from '@heroicons/react/24/outline'
 import { Currency, NATIVE, SOUL_ADDRESS } from 'sdk'
 import { PoolIcon, WalletIcon } from 'components/Icon'
 import { Feature } from 'enums'
@@ -29,11 +27,6 @@ export interface DropdownItemNode {
 
 export type BarItem = DropdownItemLeaf | DropdownItemNode
 export type Bar = BarItem[]
-// interface HeaderProps {
-//   inputCurrency?: Currency
-//   outputCurrency?: Currency
-//   allowedSlippage?: Percent
-// }
 
 const getQuery = (input?: Currency, output?: Currency) => {
   const { chainId } = useActiveWeb3React()
@@ -47,7 +40,6 @@ const getQuery = (input?: Currency, output?: Currency) => {
 
 type UseDropdown = () => Bar
 const useMenu: UseDropdown = () => {
-  const { i18n } = useLingui()
   const { chainId } = useActiveWeb3React()
   // const router = useRouter()
   const { asPath } = useRouter()
@@ -63,14 +55,14 @@ return useMemo(() => {
     // By default show just a swap button
     let tradeMenu: BarItem = {
       key: 'swap',
-      title: i18n._(t`Swap`),
+      title: `Swap`,
       link: '/swap',
       icon: <ArrowsUpDownIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     }
    
    let poolMenu: BarItem = {
       key: 'pool',
-      title: i18n._(t`Liquidity`),
+      title: `Liquidity`,
       link: '/pool',
       icon: <PoolIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
    }
@@ -79,23 +71,23 @@ return useMemo(() => {
 if (featureEnabled(Feature.AMM, chainId)) {
   tradeMenu = {
     key: 'swap',
-    title: i18n._(t`Swap`),
+    title: `Swap`,
     icon: <ArrowsUpDownIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     link: `/exchange/swap/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
     // items: [
       // {
       //   key: 'exchange',
-      //   title: i18n._(t`Swap`),
+      //   title: `Swap`,
       //   link: `/swap/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
       // },
       // {
       //   key: 'aggregator',
-      //   title: i18n._(t`Aggregate`),
+      //   title: `Aggregate`,
       //   link: '/aggregator',
       // },
       // {
       //   key: 'limit',
-      //   title: i18n._(t`Limit`),
+      //   title: `Limit`,
       //   link: `/limit/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
       // }
     // ],
@@ -105,47 +97,28 @@ if (featureEnabled(Feature.AMM, chainId)) {
 if (featureEnabled(Feature.LIQUIDITY, chainId)) {
   poolMenu = {
     key: 'liquidity',
-    title: i18n._(t`Liquidity`),
+    title: `Liquidity`,
     icon: <PoolIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     link: `/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
     // items: [
     //   {
     //     key: 'pool',
-    //     title: i18n._(t`Pool`),
+    //     title: `Pool`,
     //     link: `/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
     //   },
     //   {
     //     key: 'import',
-    //     title: i18n._(t`Import`),
+    //     title: `Import`,
     //     link: '/find',
     //   },
     // ],
   }
 }
 
-let multiMenu = {
-  key: 'multichain',
-  title: i18n._(t`Multichain`),
-  icon: <ArrowsRightLeftIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
-  // icon: <LinkIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
-  items: [
-    {
-      key: 'bridge',
-      title: i18n._(t`Bridge`),
-      link: '/bridge',
-    },
-    {
-      key: 'crosschain',
-      title: i18n._(t`Crosschain`),
-      link: '/cross',
-    },
-  ],
-}
-
 // let socialMenu = {
 //   key: 'socials',
-//   title: i18n._(t`Socials`),
-//   icon: <UserGroupIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+//   title: `Socials`,
+//   icon: <UserGroupIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`} />,
 //   items: [
 //     {
 //       key: 'discord',
@@ -182,8 +155,8 @@ let multiMenu = {
 
 let dataMenu = {
   key: 'data',
-  title: i18n._(t`Data`),
-  icon: <WalletIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
+  title: `Data`,
+  icon: <WalletIcon width={20} className={classNames(`text-[${getChainColor(chainId)}])`)} />,
   items: [
     // {
     //   key: 'account',
@@ -203,26 +176,26 @@ let dataMenu = {
   ]
 }
 
-  const mainItems: Bar = [tradeMenu, poolMenu, multiMenu, dataMenu]
+  const mainItems: Bar = [tradeMenu, poolMenu, dataMenu]
 
     // Balances
     // mainItems.push({
     //   key: 'balances',
-    //   title: i18n._(t`Account`),
+    //   title: `Account`,
     //   link: '/balances',
       
     // })
 
     // let exploreMenu: BarItem = {
     //   key: 'explore',
-    //   title: i18n._(t`Explore`),
+    //   title: `Explore`,
     //   link: '/explore',
-    //   icon: <GlobeIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`)} />,
+    //   icon: <GlobeIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`} />,
     // }
     //   mainItems.push(exploreMenu)
 
     return mainItems.filter((el) => Object.keys(el).length > 0)
-  }, [chainId, i18n])
+  }, [chainId])
 }
 
 export default useMenu

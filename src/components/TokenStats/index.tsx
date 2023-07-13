@@ -36,7 +36,7 @@ function TokenStats(): JSX.Element | null {
           alt="SOUL"
           width={28}
           height={28}
-          objectFit="contain"
+          // objectFit="contain"
           className="rounded-md"
         />
           {/* <div className="text-primary">{ formatNumber(soulPrice, true, true) }</div> */}
