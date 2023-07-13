@@ -316,7 +316,7 @@ export default function Stake() {
                 </div>
               </div>
 
-              <div className="mt-6 flex items-center gap-2">
+              <div className="mt-6 flex text-black items-center gap-2">
                 {isStakeValid &&
                   (stakeApprovalState === ApprovalState.NOT_APPROVED ||
                     stakeApprovalState === ApprovalState.PENDING) ? (
@@ -331,7 +331,11 @@ export default function Stake() {
                     {stakeApprovalState === ApprovalState.PENDING ? (
                       <Dots>{`Approving`}</Dots>
                     ) : (
-                      `Approve`
+                      <Typography
+                        className={`text-black`}
+                      >
+                        {`Approve`}
+                      </Typography>
                     )}
                   </Button>
                 ) :
@@ -355,7 +359,11 @@ export default function Stake() {
                       error={!isStakeValid && !!parsedStakeValue}
                       style={{ width: '100%' }}
                     >
+                      <div
+                        className={`text-black`}
+                      >
                       {stakeError || `Stake Luxor`}
+                      </div>
                     </ButtonError>
                   )}
               </div>
@@ -369,7 +377,11 @@ export default function Stake() {
                     color="gold"
                     className="text-black font-bold"
                   >
-                    <a className="block"> Acquire Luxor Money </a>
+                    <div
+                        className={`text-black`}
+                      >
+                    Acquire Luxor Money
+                    </div>
                   </Button>
                 </NavLink>
               </div>
@@ -515,11 +527,13 @@ export default function Stake() {
                 <Button variant="outlined" color="yellow" onClick={handleApproveToken}
                   className="text-black text-md font-bold"
                 >
+                  <div className={`text-black`}>
                   {isApprovePending
                     ? "Approving"
                     : isApproveCompleted
-                      ? "Approved"
-                      : "Approve"}
+                    ? "Approved"
+                    : "Approve"}
+                    </div>
                 </Button>
 
                 {Number(warmupExpiry) - Number(epoch) > 0 ? (
@@ -581,7 +595,11 @@ export default function Stake() {
                     error={!isRedeemValid && !!parsedRedeemValue}
                     style={{ width: '100%' }}
                   >
-                    {redeemError || `Withdraw`}
+                    <div
+                        className={`text-black`}
+                      >
+                      {redeemError || `Withdraw`}
+                      </div>
                   </ButtonError>
                     <Button
                       variant="filled"
@@ -620,7 +638,12 @@ export default function Stake() {
                   error={!isRedeemValid && !!parsedRedeemValue}
                   style={{ width: '100%' }}
                 >
+                  <div
+                        className={`text-black`}
+                      >
+
                   {redeemError || `Withdraw`}
+                      </div>
                 </ButtonError>
                 )}
               </div>
