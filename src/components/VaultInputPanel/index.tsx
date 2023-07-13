@@ -1,6 +1,4 @@
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Currency, CurrencyAmount, Pair, Percent, Token } from 'sdk'
 import selectCoinAnimation from 'animation/select-coin.json'
 import { classNames } from 'functions'
@@ -66,7 +64,6 @@ export default function VaultInputPanel({
   allowManageTokenList = true,
   showSearch = true,
 }: VaultInputPanelProps) {
-  const { i18n } = useLingui()
   const [modalOpen, setModalOpen] = useState(false)
   const { account, chainId } = useActiveWeb3React()
   const selectedCurrencyBalance = useCurrencyBalance(chainId, account ?? undefined, currency ?? undefined)
@@ -127,7 +124,7 @@ export default function VaultInputPanel({
                         : currency?.symbol) 
                         || (
                         <div className="px-2 py-1 mt-1 text-xs font-medium bg-transparent border rounded-full hover:bg-primary border-low-emphesis text-secondary whitespace-nowrap ">
-                          {i18n._(t`Select Token`)}
+                          {`Select Token`}
                         </div>
                       )}
                     </div>

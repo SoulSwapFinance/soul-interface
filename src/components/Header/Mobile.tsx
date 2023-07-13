@@ -158,7 +158,6 @@ const Mobile = () => {
 
   // const isLiquidity = removePage || addPage || poolPage
   // const isHome = landingPage
-  // const isLend = lendPage
   // const isDocs = docsPage
   // const isNFT = nftPage
   // // const isExplore = explorePage
@@ -175,7 +174,6 @@ const Mobile = () => {
   //           : isLiquidity ? DROPLET_ICON
   //             : isLuxor ? SUN_ICON
   //               : isExplore ? EXPLORE_ICON
-  //                 : isLend ? LEND_ICON
   //                   : isDocs ? DOCS_ICON
   //                     : isNFT ? NFT_ICON
   //                       : DEFAULT_ICON

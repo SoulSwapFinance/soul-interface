@@ -70,8 +70,6 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     // pair types //
     const isUnderworldPair = pairType == "lend"
     const isSwapPair = pairType == "swap"
-    // multiplier (adjusts for lending pairs) //
-    // const MULTIPLIER = isSwapPair ? 1 : LEND_MULTIPLIER(chainId, farm.lpAddress)
 
     // for display purposes only //
     const _liquidity = Number(summonerPoolInfo.tvl)
@@ -516,11 +514,11 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                                 <div className="flex flex-col">
                                                     {withdrawFee == 0 ? (
                                                         <p>
-                                                            {`After creating liquidity or lending, navigate to the associated farm to deposit.`}
+                                                            {`After creating liquidity, navigate to the associated farm to deposit.`}
                                                         </p>
                                                     ) : (
                                                         <p>
-                                                            {`After creating liquidity or lending, navigate to the associated farm to deposit.`}
+                                                            {`After creating liquidity, navigate to the associated farm to deposit.`}
                                                             <br /> <br />
                                                             {`The fee decreases by 1% each day and is NOT affected by depositing more.`}
                                                         </p>
@@ -714,25 +712,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         </a>
                                     </NavLink>
                                 )}
-                                {/* LEND ASSET */}
-                                {isUnderworldPair && isActive && (
-                                    <NavLink
-                                        href=
-                                        {`/lend/${lpAddress}`}
-                                    >
-                                        <SubmitButton
-                                            margin=".5rem 0 0rem 0"
-                                            height="2rem"
-                                            primaryColor={buttonColor}
-                                            color={buttonTextColor}
-                                        >
-                                            <div className="flex text-lg gap-2">
-                                                <BriefcaseIcon width={26} className={classNames(`text-white`)} />
-                                                {`LEND ${token0Symbol}`}
-                                            </div>
-                                        </SubmitButton>
-                                    </NavLink>
-                                )}
+                                
 
 
                                 {/* EARNED */}

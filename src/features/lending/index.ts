@@ -1,6 +1,0 @@
-export { default as Borrow } from './actions/Borrow'
-export { default as Deposit } from './actions/Deposit'
-export { default as PairTools } from './components/PairTools'
-export { default as Repay } from './actions/Repay'
-export { default as Strategy } from './components/Strategy'
-export { default as Withdraw } from './actions/Withdraw'

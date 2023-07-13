@@ -253,11 +253,6 @@ const useMobileMenu: UseMobileMenu = () => {
             title: `Swap`,
             link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
           },
-          {
-            key: 'borrow-docs',
-            title: `Borrow`,
-            link: 'https://docs.soulswap.finance/docs/user-guides/our-underworld/borrowing-assets',
-          },
           // {
           //   key: 'lux-docs',
           //   title: `Bond`,

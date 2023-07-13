@@ -465,11 +465,11 @@ export const ActiveRow = ({ pid }) => {
                                                     <div className="flex flex-col">
                                                         {withdrawFee == 0 ? (
                                                             <p>
-                                                                {`After creating liquidity or lending, navigate to the associated farm to deposit.`}
+                                                                {`After creating liquidity, navigate to the associated farm to deposit.`}
                                                             </p>
                                                         ) : (
                                                             <p>
-                                                                {`After creating liquidity or lending, navigate to the associated farm to deposit.`}
+                                                                {`After creating liquidity, navigate to the associated farm to deposit.`}
                                                                 <br /> <br />
                                                                 {`The fee decreases by 1% each day and is NOT affected by depositing more.`}
                                                             </p>

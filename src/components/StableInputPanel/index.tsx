@@ -1,6 +1,4 @@
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Currency, CurrencyAmount, Pair, Percent, Token } from 'sdk'
 import selectCoinAnimation from 'animation/select-coin.json'
 import { classNames } from 'functions'
@@ -67,7 +65,6 @@ export default function StableInputPanel({
   allowManageTokenList = true,
   showSearch = true,
 }: StableInputPanelProps) {
-  const { i18n } = useLingui()
   const [modalOpen, setModalOpen] = useState(false)
   const { account, chainId } = useActiveWeb3React()
   const selectedCurrencyBalance = useCurrencyBalance(chainId, account ?? undefined, currency ?? undefined)

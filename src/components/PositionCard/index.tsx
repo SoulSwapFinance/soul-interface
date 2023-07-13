@@ -5,11 +5,10 @@ import { RowBetween, RowFixed } from '../Row'
 import { currencyId, unwrappedToken } from '../../functions/currency'
 import { useV2PairsWithPrice } from 'hooks/useV2Pairs'
 
-import Alert from '../Alert'
 import { AutoColumn } from '../Column'
 import { BIG_INT_ZERO } from '../../constants'
 import { Button } from '../Button'
-import { CurrencyLogo, CurrencyLogoArray } from '../CurrencyLogo'
+import { CurrencyLogoArray } from '../CurrencyLogo'
 import Dots from '../Dots'
 import DoubleCurrencyLogo from '../DoubleLogo'
 import { useColor } from '../../hooks'
@@ -21,8 +20,6 @@ import { Disclosure, Transition } from '@headlessui/react'
 import { useActiveWeb3React } from 'services/web3'
 import { useTokenInfo } from 'hooks/useAPI'
 import Typography from 'components/Typography'
-import { i18n } from '@lingui/core'
-import ListPanel from 'components/ListPanel'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 
 interface PositionCardProps {
@@ -121,7 +118,6 @@ export function MinimalPositionCard({ pair, chainId, showUnwrapped = false, bord
 
 
 export default function FullPositionCard({ chainId, pair, border, stakedBalance }: PositionCardProps) {
-  // const { i18n } = useLingui()
   const router = useRouter()
   const { account } = useActiveWeb3React()
 

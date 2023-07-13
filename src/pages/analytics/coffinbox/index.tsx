@@ -10,8 +10,6 @@ import useFuse from 'hooks/useFuse'
 import { useCoffinBox, useNativePrice, useOneDayBlock, useOneWeekBlock, useTokens } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
 import React, { useMemo } from 'react'
-import { useUnderworldTokens } from 'features/lending/hooks'
-import { getChainColorCode } from 'constants/chains'
 import Link from 'next/link'
 import { TridentBody, TridentHeader } from 'layouts/Trident'
 
@@ -24,7 +22,6 @@ export default function CoffinBox(): JSX.Element {
   const nativePrice = useNativePrice({ chainId })
   const nativePrice1d = useNativePrice({ chainId, variables: { block: block1d }, shouldFetch: !!block1d })
   const nativePrice1w = useNativePrice({ chainId, variables: { block: block1w }, shouldFetch: !!block1w })
-  const allTokens = useUnderworldTokens()
 
   // Get exchange data
   const tokens = useTokens({ chainId })

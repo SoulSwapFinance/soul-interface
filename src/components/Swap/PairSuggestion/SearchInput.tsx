@@ -1,4 +1,3 @@
-import { t } from '@lingui/macro'
 import React, { RefObject, forwardRef } from 'react'
 import { BrowserView, isMacOs, isMobile } from 'react-device-detect'
 import { Command, Search } from 'react-feather'
@@ -110,7 +109,7 @@ export default forwardRef<HTMLInputElement, Props>(function SearchComponent(
         hasBorder={hasBorder}
         onBlur={onBlurInput}
         onFocus={disabled ? undefined : showListViewWithTracking}
-        placeholder={t`Try typing "10 ETH to KNC"`}
+        placeholder={`Try typing "10 ETH to SOUL"`}
         value={value}
         onChange={onChange}
         autoComplete="off"

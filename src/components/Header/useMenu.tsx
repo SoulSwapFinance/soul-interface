@@ -8,14 +8,7 @@ import { classNames, featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
 import { getChainColor } from 'constants/chains'
 import DropletIcon from 'components/Icons/header/DropletIcon'
-// import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
-// import SoulIcon from 'components/Icons/header/SoulIcon'
-// import { useRouter } from 'next/router'
 
-// import { PoolIcon, RocketIcon, WalletIcon } from 'components/Icon'
-// import { getChainColor } from 'constants/chains'
-// import Twitter from 'assets/icons/twitter.png'
-// import { TwitterIcon } from 'components/Icon'
 export interface MenuItemLeaf {
   key: string
   title?: string

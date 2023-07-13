@@ -11,7 +11,6 @@ import DocsIcon from 'components/Icons/mobile/DocsIcon'
 // import ChartIcon from 'components/Icons/exchange/ChartIcon'
 
 // import WalletIcon from 'components/Icons/header/WalletIcon'
-// import LendSkullIcon from 'components/Icons/mobile/LendSkullIcon'
 // import HomeIcon from 'components/Icons/mobile/HomeIcon'
 import SeedlingIcon from 'components/Icons/mobile/SeedlingIcon'
 import EarnIcon from 'components/Icons/mobile/EarnIcon'

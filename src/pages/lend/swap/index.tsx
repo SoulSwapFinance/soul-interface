@@ -14,9 +14,6 @@ import Typography from 'components/Typography'
 import { formatNumber } from 'functions'
 import useSendTransaction from 'hooks/useSendTransaction'
 
-// import { useTransactionAdder } from 'state/transactions/hooks'
-// import { WFTM } from 'constants/index'
-// import useSendTransaction from 'hooks/useSendTransaction'
 import { ethers } from 'ethers'
 
 export default function LendSwap() {

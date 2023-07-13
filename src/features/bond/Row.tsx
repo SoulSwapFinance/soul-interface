@@ -381,12 +381,12 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                             rel="noopener"
                             color={"white"}
                             href=
-                            {isUnderworldPair ? `https://exchange.soulswap.finance/lend/${bond.lpAddress}`
-                              : bond.token0Symbol == WNATIVE[chainId].symbol
+                            {
+                              bond.token0Symbol == WNATIVE[chainId].symbol
                                 ? `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token1Address}`
                                 : `https://exchange.soulswap.finance/add/${bond.token0Address}/${bond.token1Address}`}
                           >
-                            {isUnderworldPair ? `LEND ${bond.token0Symbol}` : `CREATE ${bond.lpSymbol} PAIR`}
+                            { `CREATE ${bond.lpSymbol} PAIR` }
                           </TokenPairLink>
                         </SubmitButton>
                       ) :
@@ -413,21 +413,6 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                         )
                     )}
                   </Wrap>
-                  {/* isUnderworldPair &&
-                    <SubmitButton
-                      primaryColor={getChainColor(chainId)}
-                    >
-                      <TokenPairLink
-                        target="_blank"
-                        rel="noopener"
-                        color={"white"}
-                        href=
-                        {`https://exchange.soulswap.finance/lend/${bond.lpAddress}`}
-                      >
-                        {`LEND ${bond.token0Symbol}`}
-                      </TokenPairLink>
-                    </SubmitButton>
-                  */}
                 </FunctionBox>
 
                 <Wrap padding="0.5rem" margin="0.25rem" display="flex" justifyContent="space-between">

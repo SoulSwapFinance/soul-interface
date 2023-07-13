@@ -6,9 +6,7 @@ import { RowBetween } from '../Row'
 import SettingsTab from '../Settings'
 import { resetMintState } from '../../state/mint/actions'
 import styled from 'styled-components'
-import { t } from '@lingui/macro'
 import { useAppDispatch } from '../../state/hooks'
-import { useLingui } from '@lingui/react'
 import { useTranslation } from 'react-i18next'
 import NavLink from 'components/NavLink'
 
@@ -21,7 +19,6 @@ const Tabs = styled.div`
 `
 
 export function FindPoolTabs() {
-  const { i18n } = useLingui()
 
   return (
     <Tabs>
@@ -31,7 +28,7 @@ export function FindPoolTabs() {
             <ArrowLeftIcon width="1em" height="1em" />
           </a>
         </HistoryLink>
-        <div className="font-semibold">{i18n._(t`Import Pool`)}</div>
+        <div className="font-semibold">{`Import Pool`}</div>
       </RowBetween>
     </Tabs>
   )
@@ -46,7 +43,6 @@ export function AddRemoveTabs({
   creating: boolean
   defaultSlippage: Percent
 }) {
-  const { i18n } = useLingui()
 
   // reset states on back
   const dispatch = useAppDispatch()
@@ -68,7 +64,7 @@ export function AddRemoveTabs({
           </a>
         </HistoryLink>
         <div className="font-semibold">
-          {creating ? i18n._(t`Create Pair`) : adding ? i18n._(t`Add Liquidity`) : i18n._(t`Remove Liquidity`)}
+          {creating ? `Create Pair` : adding ? `Add Liquidity` : `Remove Liquidity`}
         </div>
         <SettingsTab placeholderSlippage={defaultSlippage} />
       </RowBetween>
