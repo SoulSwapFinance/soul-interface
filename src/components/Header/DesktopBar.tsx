@@ -42,19 +42,9 @@ const DesktopBar: FC = () => {
     const { asPath } = useRouter()
 
     const { chainId } = useActiveWeb3React()
-    // const [open, setOpen] = useState(false)
-    // const bar = useBar()
-    
-    // const { userInfo } = useUserInfo()
-
-    // const typeStyle = `justify-center text-center w-full border border-[${getChainColor(chainId)}] rounded p-2`
-
     const swapRoute = useCallback(() => {
         router.push(`/swap`)
     }, [])
-    // const homeRoute = useCallback(() => {
-    //     router.push(`/landing`)
-    // }, [])
     const walletRoute = useCallback(() => {
         router.push(`/portfolio`)
     }, [])
@@ -70,9 +60,7 @@ const DesktopBar: FC = () => {
 
     const swapPage = router.pathname.startsWith('/swap') || router.pathname.startsWith('/exchange/swap')
     const crossPage = router.pathname.startsWith('/cross') || router.pathname.startsWith('/exchange/cross')
-    // const landingPage = router.pathname.startsWith('/landing')
     const portfolioPage = router.pathname.startsWith('/portfolio')
-    // const nftPage = router.pathname.startsWith('/marketplace') || router.pathname.startsWith('/marketplace/collections')
     const farmPage = router.pathname.startsWith('/farm') || router.pathname.startsWith('/summoner')
     const bondPage = router.pathname.startsWith('/bond') || router.pathname.startsWith('/bonds')
     const dataPage = router.pathname.startsWith('/analytics')

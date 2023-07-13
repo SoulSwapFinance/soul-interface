@@ -71,8 +71,6 @@ const MobileBar = () => {
 
     const swapPage = router.pathname.startsWith('/swap') || router.pathname.startsWith('/exchange/swap')
     const crossPage = router.pathname.startsWith('/cross') || router.pathname.startsWith('/exchange/cross')
-    // const landingPage = router.pathname.startsWith('/landing')
-    // const learnPage = router.pathname.startsWith('/learn')
     const portfolioPage = router.pathname.startsWith('/portfolio')
     const luxorPage = router.pathname.startsWith('/luxor')
     const farmPage = router.pathname.startsWith('/farm') || router.pathname.startsWith('/summoner')

@@ -30,8 +30,8 @@ import { useActiveWeb3React } from 'services/web3'
 import { ApiDataProvider } from 'contexts/ApiDataProvider'
 import ModalProvider from 'contexts/ModalProvider'
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client'
-// import { RPC } from 'connectors'
-import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { RPC } from 'connectors'
+import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const link = createHttpLink({
   // uri: RPC[250],
@@ -129,8 +129,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
             <Hydrate state={pageProps.dehydratedState}>
               <ApiDataProvider>
                 <ApolloProvider client={client}>
-                  {/*@ts-ignore TYPE NEEDS FIXING*/}
-                  <FantomApiProvider>
+                  {/* <FantomApiProvider> */}
                     <Web3ProviderNetwork getLibrary={getLibrary}>
                       <Web3ReactManager>
                         <ReduxProvider store={store}>
@@ -164,7 +163,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
                         </ReduxProvider>
                       </Web3ReactManager>
                     </Web3ProviderNetwork>
-                  </FantomApiProvider>
+                  {/* </FantomApiProvider> */}
                 </ApolloProvider>
               </ApiDataProvider>
             </Hydrate>
