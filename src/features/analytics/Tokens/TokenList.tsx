@@ -1,5 +1,5 @@
 import { CurrencyLogo } from 'components/CurrencyLogo'
-import LineGraph from 'components/LineGraph'
+// import LineGraph from 'components/LineGraph'
 import Table, { Column } from 'components/Table'
 import { formatNumber, formatPercent } from 'functions'
 import { useCurrency } from 'hooks/Tokens'

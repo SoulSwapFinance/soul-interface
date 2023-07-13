@@ -293,7 +293,7 @@ export const VoteBanner: FC = () => (
       <div className="text-center">
         <p className="font-medium text-center text-white">
           <ExternalLink
-              href="https://forum.soulswap.finance/t/proposal-cease-incentives-for-multichain-asset-pools/265" 
+              href="https://snapshot.org/#/soulswap.eth/proposal/0x1731ab37efccda5614da89f5fba2bfd13b14456e0e00628dd6366ad5fed598ef" 
               target="_blank"
               rel="noreferrer"
               className="font-bold text-white text-lg"
@@ -301,7 +301,7 @@ export const VoteBanner: FC = () => (
             <Button variant="filled" color="purple" size="sm">
               <span className="justify-center font-bold">
                 {' '}
-                Discuss Proposal: Multichain Incentives ↗
+                Vote Now: End Multichain Incentives ↗
               </span>
             </Button>
           </ExternalLink>

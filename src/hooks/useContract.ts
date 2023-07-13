@@ -11,7 +11,6 @@ import {
   SCARAB_ADDRESS,
   SAFE_ADDRESS,
   ATOMIC_SWAP_ADDRESS,
-  LOCKER_ADDRESS,
   SOUL_USDC_PAIR,
   LUX_ADDRESS,
   TEAM_WALLET_ADDRESS,
@@ -142,8 +141,6 @@ import SAAVE_ABI from 'constants/abis/saave.json'
 import SOULSWAP_ABI from '@sushiswap/core/abi/SushiRoll.json'
 import SOULSWAP_TWAP_ORACLE_ABI from 'constants/abis/sushiswap-slp-oracle.json'
 import TIMELOCK_ABI from 'constants/abis/timelock.json'
-
-import LOCKER_ABI from 'constants/abis/locker.json'
 
 import WETH9_ABI from 'constants/abis/weth.json'
 import ZAPPER_ABI from 'constants/abis/zapper.json'
@@ -479,11 +476,6 @@ export function useHelperContract(withSignerIfPossible?: boolean): Contract | nu
 export function useSummonerAssistantContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SUMMONER_ASSISTANT_ADDRESS[chainId], SUMMONER_ASSISTANT_ABI, withSignerIfPossible)
-}
-
-export function useLockerContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && LOCKER_ADDRESS[chainId], LOCKER_ABI, withSignerIfPossible)
 }
 
 export function useLaunchpadContract(address?: string, withSignerIfPossible?: boolean): Contract | null {
