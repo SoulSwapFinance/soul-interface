@@ -57,14 +57,14 @@ return useMemo(() => {
       key: 'swap',
       title: `Swap`,
       link: '/swap',
-      icon: <ArrowsUpDownIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`} />,
+      icon: <ArrowsUpDownIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     }
    
    let poolMenu: BarItem = {
       key: 'pool',
       title: `Liquidity`,
       link: '/pool',
-      icon: <PoolIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`} />,
+      icon: <PoolIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
    }
 
  // If AMM is enabled, replace swap button with a submenu under trade
@@ -72,7 +72,7 @@ if (featureEnabled(Feature.AMM, chainId)) {
   tradeMenu = {
     key: 'swap',
     title: `Swap`,
-    icon: <ArrowsUpDownIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`} />,
+    icon: <ArrowsUpDownIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     link: `/exchange/swap/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
     // items: [
       // {
@@ -98,7 +98,7 @@ if (featureEnabled(Feature.LIQUIDITY, chainId)) {
   poolMenu = {
     key: 'liquidity',
     title: `Liquidity`,
-    icon: <PoolIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`} />,
+    icon: <PoolIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     link: `/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
     // items: [
     //   {
@@ -156,7 +156,7 @@ if (featureEnabled(Feature.LIQUIDITY, chainId)) {
 let dataMenu = {
   key: 'data',
   title: `Data`,
-  icon: <WalletIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`} />,
+  icon: <WalletIcon width={20} className={classNames(`text-[${getChainColor(chainId)}])`)} />,
   items: [
     // {
     //   key: 'account',
@@ -195,7 +195,7 @@ let dataMenu = {
     //   mainItems.push(exploreMenu)
 
     return mainItems.filter((el) => Object.keys(el).length > 0)
-  }, [chainId, i18n])
+  }, [chainId])
 }
 
 export default useMenu

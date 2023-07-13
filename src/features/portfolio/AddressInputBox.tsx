@@ -1,5 +1,3 @@
-import { t } from '@lingui/macro'
-import { useLingui } from '@lingui/react'
 import { Button } from 'components/Button'
 import { isAddress } from 'functions'
 import React, { FC, useState } from 'react'
@@ -9,7 +7,6 @@ interface AddressInputBoxProps {
 }
 
 export const AddressInputBox: FC<AddressInputBoxProps> = ({ onSubmit }) => {
-  const { i18n } = useLingui()
 
   const [input, setInput] = useState('')
   return (
@@ -22,7 +19,7 @@ export const AddressInputBox: FC<AddressInputBoxProps> = ({ onSubmit }) => {
         />
       </div>
       <Button size="sm" disabled={!isAddress(input)} onClick={() => onSubmit(input)}>
-        {i18n._(t`Submit`)}
+        {`Submit`}
       </Button>
     </div>
   )

@@ -30,7 +30,6 @@ import { Feature } from 'enums/Feature'
 // import { useRouter } from 'next/router'
 // import { TridentHeader } from 'layouts/Trident'
 // import { addTransaction } from 'state/transactions/actions'
-// import { i18n } from '@lingui/core'
 
 const Summoner = () => {
   const { chainId } = useActiveWeb3React()

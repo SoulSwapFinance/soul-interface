@@ -1,7 +1,6 @@
 import { ArrowDownIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import Container from '../../components/Container'
 import Head from 'next/head'
-import { I18n } from '@lingui/core'
 import Link from 'next/link'
 import Typography from '../../components/Typography'
 import React, { useMemo } from 'react'

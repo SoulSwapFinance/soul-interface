@@ -21,6 +21,7 @@ import { useActiveWeb3React } from 'services/web3'
 import { useTokenInfo } from 'hooks/useAPI'
 import Typography from 'components/Typography'
 import { getChainColor, getChainColorCode } from 'constants/chains'
+import ListPanel from 'components/ListPanel'
 
 interface PositionCardProps {
   pair: Pair

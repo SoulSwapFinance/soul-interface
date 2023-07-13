@@ -1,72 +1,71 @@
-import { t } from "@lingui/macro";
 
 const Languages: {
     [x: string]: { flag: string; language: string; abbr: string, dialect?: string }
   } = {
     en: {
       flag: '/images/flags/us-flag.png',
-      language: t`English`,
-      abbr: t`EN`,
+      language: `English`,
+      abbr: `EN`,
     },
     de: {
       flag: '/images/flags/de-flag.png',
-      language: t`German`,
-      abbr: t`DE`
+      language: `German`,
+      abbr: `DE`
     },
     es: {
       flag: '/images/flags/es-flag.png',
-      language: t`Spanish`,
-      abbr: t`ES`
+      language: `Spanish`,
+      abbr: `ES`
     },
     fr: {
       flag: '/images/flags/fr-flag.png',
-      language: t`French`,
-      abbr: t`FR`
+      language: `French`,
+      abbr: `FR`
     },
     it: {
       flag: '/images/flags/it-flag.png',
-      language: t`Italian`,
-      abbr: t`IT`
+      language: `Italian`,
+      abbr: `IT`
     },
     tr: {
       flag: '/images/flags/tr-flag.png',
-      language: t`Turkish`,
-      abbr: t`TR`
+      language: `Turkish`,
+      abbr: `TR`
     },
     // 'zh-CN': {
     //   flag: '/images/flags/ch-flag.png',
-    //   language: t`Chinese`,
+    //   language: `Chinese`,
     //   dialect: '简',
     // },
     // ru: {
     //   flag: '/images/flags/ru-flag.png',
-    //   language: t`Russian`,
+    //   language: `Russian`,
     // },
     // ro: {
     //   flag: '/images/flags/ro-flag.png',
-    //   language: t`Romanian`,
+    //   language: `Romanian`,
     // },
     // vi: {
     //   flag: '/images/flags/vi-flag.png',
-    //   language: t`Vietnamese`,
+    //   language: `Vietnamese`,
     // },
     // 'zh-TW': {
     //   flag: '/images/flags/ch-flag.png',
-    //   language: t`Chinese`,
+    //   language: `Chinese`,
     //   dialect: '繁',
     // },
     // 'es-AR': {
     //   flag: '/images/flags/es-flag.png',
-    //   language: t`Spanish`,
+    //   language: `Spanish`,
     //   dialect: 'AR',
     // },
     // ko: {
     //   flag: '/images/flags/ko-flag.png',
-    //   language: t`Korean`,
+    //   language: `Korean`,
     // },
     // ja: {
     //   flag: '/images/flags/ja-flag.png',
-    //   language: t`Japanese`,
+    //   language: `Japanese`,
     // },
   }
 

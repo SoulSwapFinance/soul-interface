@@ -1,6 +1,4 @@
 import { ChainId, Currency, CurrencyAmount } from 'sdk'
-import { t } from '@lingui/macro'
-import { JSBI } from 'sdk'
 import { useMemo } from 'react'
 
 // import { BAD_RECIPIENT_ADDRESSES } from 'constants/index'
@@ -125,26 +123,26 @@ const allowedSlippage = INITIAL_ALLOWED_SLIPPAGE
 
   let inputError: string | undefined
   if (!account) {
-    inputError = t`Connect Wallet`
+    inputError = `Connect Wallet`
   }
 
   if (!parsedAmount) {
-    if (typedValue) inputError = inputError ?? t`Invalid amount`
-    else inputError = inputError ?? t`Enter an amount`
+    if (typedValue) inputError = inputError ?? `Invalid amount`
+    else inputError = inputError ?? `Enter an amount`
   }
 
   if (!currencies[Field.INPUT] || !currencies[Field.OUTPUT]) {
-    inputError = inputError ?? t`Select a token`
+    inputError = inputError ?? `Select a token`
   }
 
   const formattedTo = isAddress(to)
   if (!to || !formattedTo) {
-    inputError = inputError ?? t`Enter Recipient`
+    inputError = inputError ?? `Enter Recipient`
   } else {
       // todo: verify below
     // if (BAD_RECIPIENT_ADDRESSES[chainId] == formattedTo) 
     {
-      inputError = inputError ?? t`Invalid Recipient`
+      inputError = inputError ?? `Invalid Recipient`
     }
   }
 
@@ -157,7 +155,7 @@ const allowedSlippage = INITIAL_ALLOWED_SLIPPAGE
   ]
 
   if (amountIn && ((balanceIn && balanceIn.lessThan(amountIn)) || !balanceIn)) {
-    inputError = t`Insufficient ${amountIn.currency.symbol} Balance`
+    inputError = `Insufficient ${amountIn.currency.symbol} Balance`
   }
 
   // inputCurrency/outputCurrency null is loading, undefined is not found, see useToken for detail

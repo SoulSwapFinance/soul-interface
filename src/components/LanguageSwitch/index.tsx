@@ -4,7 +4,6 @@ import { Fragment } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { classNames } from '../../functions'
-import { t } from '@lingui/macro'
 import { useRouter } from 'next/router'
 
 const LANGUAGES: {
@@ -12,62 +11,62 @@ const LANGUAGES: {
 } = {
   en: {
     flag: '/images/flags/us-flag.png',
-    language: t`English`,
+    language: `English`,
   },
   de: {
     flag: '/images/flags/de-flag.png',
-    language: t`German`,
+    language: `German`,
   },
   es: {
     flag: '/images/flags/es-flag.png',
-    language: t`Spanish`,
+    language: `Spanish`,
   },
   fr: {
     flag: '/images/flags/fr-flag.png',
-    language: t`French`,
+    language: `French`,
   },
   it: {
     flag: '/images/flags/it-flag.png',
-    language: t`Italian`,
+    language: `Italian`,
   },
   tr: {
     flag: '/images/flags/tr-flag.png',
-    language: t`Turkish`,
+    language: `Turkish`,
   },
   // 'zh-CN': {
   //   flag: '/images/flags/ch-flag.png',
-  //   language: t`Chinese`,
+  //   language: `Chinese`,
   //   dialect: '简',
   // },
   // ru: {
   //   flag: '/images/flags/ru-flag.png',
-  //   language: t`Russian`,
+  //   language: `Russian`,
   // },
   // ro: {
   //   flag: '/images/flags/ro-flag.png',
-  //   language: t`Romanian`,
+  //   language: `Romanian`,
   // },
   // vi: {
   //   flag: '/images/flags/vi-flag.png',
-  //   language: t`Vietnamese`,
+  //   language: `Vietnamese`,
   // },
   // 'zh-TW': {
   //   flag: '/images/flags/ch-flag.png',
-  //   language: t`Chinese`,
+  //   language: `Chinese`,
   //   dialect: '繁',
   // },
   // 'es-AR': {
   //   flag: '/images/flags/es-flag.png',
-  //   language: t`Spanish`,
+  //   language: `Spanish`,
   //   dialect: 'AR',
   // },
   // ko: {
   //   flag: '/images/flags/ko-flag.png',
-  //   language: t`Korean`,
+  //   language: `Korean`,
   // },
   // ja: {
   //   flag: '/images/flags/ja-flag.png',
-  //   language: t`Japanese`,
+  //   language: `Japanese`,
   // },
 }
 
