@@ -86,7 +86,6 @@ export const DropdownItem: FC<DropdownItem> = ({ node }) => {
                 >
                   {(node as MenuItemNode).items.map((leaf) => (
                     <Link key={leaf.key} href={leaf.link}>
-                      <a>
                         <Typography
                           variant="sm"
                           weight={700}
@@ -99,7 +98,6 @@ export const DropdownItem: FC<DropdownItem> = ({ node }) => {
                         >
                           {leaf.title}
                         </Typography>
-                      </a>
                     </Link>
                   ))}
                 </div>

@@ -38,7 +38,7 @@ export default function RemoveLiquidityReceiveDetails({
             <RowBetween className="text-sm">
               {hasWETH ? (
                 <Link href={`/remove/${currencyId(currencyA)}/${currencyId(currencyB)}`}>
-                  <a>Receive {WNATIVE[chainId].symbol}</a>
+                  Receive {WNATIVE[chainId].symbol}
                 </Link>
               ) : hasETH ? (
                 <Link
@@ -52,7 +52,7 @@ export default function RemoveLiquidityReceiveDetails({
                       : currencyId(currencyB)
                   }`}
                 >
-                  <a>Receive {NATIVE[chainId].symbol}</a>
+                  Receive {NATIVE[chainId].symbol}
                 </Link>
               ) : null}
             </RowBetween>

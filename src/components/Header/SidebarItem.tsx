@@ -110,7 +110,6 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
                 >
                   {(node as BarItemNode).items.map((leaf) => (
                     <Link key={leaf.key} href={leaf.link}>
-                      <a>
                         <Typography
                           variant="sm"
                           weight={700}
@@ -121,7 +120,6 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
                         >
                           {leaf.title}
                         </Typography>
-                      </a>
                     </Link>
                   ))}
                 </div>

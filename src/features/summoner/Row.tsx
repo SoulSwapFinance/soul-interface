@@ -662,8 +662,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     <NavLink
                                         href={`/exchange/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
                                     >
-                                        <a>
-                                            <SubmitButton
+                                                                                <SubmitButton
                                                 height="2rem"
                                                 primaryColor={buttonColor}
                                                 color={buttonTextColor}
@@ -685,13 +684,11 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                                     </div>
                                                 </TokenPairLink>
                                             </SubmitButton>
-                                        </a>
                                     </NavLink>
                                 ) : (!isUnderworldPair &&
                                     <NavLink
                                         href={`/exchange/add/${farm.token1Address}/${farm.token0Address}`}
                                     >
-                                        <a>
                                             <SubmitButton
                                                 height="2rem"
                                                 primaryColor={getChainColor(chainId)}
@@ -709,7 +706,6 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                                     </div>
                                                 </TokenPairLink>
                                             </SubmitButton>
-                                        </a>
                                     </NavLink>
                                 )}
                                 

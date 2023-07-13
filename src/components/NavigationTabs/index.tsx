@@ -23,9 +23,7 @@ export function FindPoolTabs() {
     <Tabs>
       <RowBetween className="items-center text-xl">
         <HistoryLink href="/pool">
-          <a>
             <ArrowLeftIcon width="1em" height="1em" />
-          </a>
         </HistoryLink>
         <div className="font-semibold">{`Import Pool`}</div>
       </RowBetween>

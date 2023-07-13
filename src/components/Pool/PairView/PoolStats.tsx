@@ -1,7 +1,6 @@
 import { Pair } from 'sdk'
 
 import React, { useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
 import { usePrevious } from 'react-use'
 import { Box, Flex, Text } from 'rebass'
 import styled from 'styled-components'
@@ -37,12 +36,6 @@ export function PoolStats({ pair }: PairViewProps) {
   const { navigate } = useRouter()
   const { chainId } = useActiveWeb3React()
   const previousChainId = usePrevious(chainId)
-  // todo: fix below
-  // const { volume24hUSD } = usePair24hVolumeUSD(pair?.liquidityToken.address)
-//   const { liquidityUSD } = usePairCampaignIndicatorAndLiquidityUSD(pair)
-  // const { bestAPY } = useBestAPY(pair)
-//   const switchingToCorrectChain = useIsSwitchingToCorrectChain()
-  const { t } = useTranslation()
 
   const statsLink = pair?.liquidityToken.address
     ? `https://dxstats.eth.limo/#/pair/${pair?.liquidityToken.address}?chainId=${chainId}`
@@ -60,17 +53,14 @@ export function PoolStats({ pair }: PairViewProps) {
     <DimBlurBgBox padding={'24px'}>
       <Flex flexDirection={['column', 'row']} alignItems="center" justifyContent="space-between">
         <Text fontSize="16px" mb="16px">
-          {t('poolStats')}
+          {'poolStats'}
         </Text>
         <Box>
-          <ButtonExternalLink link={statsLink}>{t('stats')}</ButtonExternalLink>
+          <ButtonExternalLink link={statsLink}>{'stats'}</ButtonExternalLink>
         </Box>
       </Flex>
       <Box marginTop={4}>
         <InfoGrid>
-          {/* <ValueWithLabel title={t('TVL')} value={`$${formatCurrencyAmount(liquidityUSD, 4)}`} /> */}
-         {/* <ValueWithLabel title={t('24hVolume')} value={`$${formatCurrencyAmount(volume24hUSD, 4)}`} /> */}
-          {/* <ValueWithLabel title={t('APY')} value={`${bestAPY?.toFixed(2) || 0}%`} big /> */}
         </InfoGrid>
       </Box>
     </DimBlurBgBox>

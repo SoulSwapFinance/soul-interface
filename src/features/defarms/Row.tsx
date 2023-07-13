@@ -614,7 +614,6 @@ export const ActiveRow = ({ pid }) => {
                                             href={`/exchange/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`}
                                         // /add/${NATIVE[chainId].symbol}/${assetToken?.wrapped.address}
                                         >
-                                            <a>
                                                 <SubmitButton
                                                     height="2rem"
                                                     primaryColor={buttonColor}
@@ -635,7 +634,6 @@ export const ActiveRow = ({ pid }) => {
                                                         </div>
                                                     </TokenPairLink>
                                                 </SubmitButton>
-                                            </a>
                                         </NavLink>
                                     }
                                     {/* ZAPPER FUNCTIONALITY */}
