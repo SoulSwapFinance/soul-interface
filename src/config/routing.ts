@@ -117,7 +117,6 @@ export const COMMON_BASES: ChainTokenList = {
     FANTOM.WETH,
     FANTOM.WBTC,
     FANTOM.SOUL,
-    FANTOM.SEANCE,
     FANTOM.USDC,
     FANTOM.LUX,
     FANTOM.WLUM,
@@ -148,6 +147,9 @@ export const COMMON_BASES: ChainTokenList = {
     AVALANCHE.SOUL,
     AVALANCHE.BNB,
     AVALANCHE.USDC,
+    // AVALANCHE.BUSD,
+    // AVALANCHE.FRAX,
+    // AVALANCHE.LINK,
 
   ],
   [ChainId.MATIC]: [

@@ -1,5 +1,5 @@
 import { SURV_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, ETH_ADDRESS } from 'constants/addresses'
-import { BNB_ADDRESS, ChainId, DAI_ADDRESS, Ether, LINK_ADDRESS, LUX_ADDRESS, NATIVE, SEANCE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
+import { BNB_ADDRESS, BUSD_ADDRESS, ChainId, DAI_ADDRESS, Ether, FRAX_ADDRESS, LINK_ADDRESS, LUX_ADDRESS, NATIVE, SEANCE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
 
 import { SupportedChainId } from '../chains'
 
@@ -49,8 +49,11 @@ export const AVALANCHE: { [key: string]: Token } = {
   SOUL: new Token(ChainId.AVALANCHE, SOUL_ADDRESS[ChainId.AVALANCHE], 18, 'SOUL', 'SoulPower'),
   USDC: new Token(ChainId.AVALANCHE, USDC_ADDRESS[ChainId.AVALANCHE], 6, 'USDC', 'USD Coin'),
   DAI: new Token(ChainId.AVALANCHE, '0xd586E7F844cEa2F87f50152665BCbc2C279D8d70', 18, 'DAI', 'Dai Stablecoin'),
-  WBTC: new Token(ChainId.AVALANCHE, '0x50b7545627a5162F82A992c33b87aDc75187B218', 8, 'WBTC', 'Wrapped Bitcoin'),
   WETH: new Token(ChainId.AVALANCHE, '0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB', 18, 'WETH', 'Wrapped Ether'),
+  WBTC: new Token(ChainId.AVALANCHE, '0x50b7545627a5162F82A992c33b87aDc75187B218', 8, 'WBTC', 'Wrapped Bitcoin'),
+  BUSD: new Token(ChainId.AVALANCHE, BUSD_ADDRESS[ChainId.AVALANCHE], 18, 'BUSD', 'Binance USD'),
+  FRAX: new Token(ChainId.AVALANCHE, FRAX_ADDRESS[ChainId.AVALANCHE], 18, 'FRAX', 'Frax'),
+  LINK: new Token(ChainId.AVALANCHE, LINK_ADDRESS[ChainId.AVALANCHE], 18, 'LINK', 'Chainlink'),
 }
 
 export const MOONRIVER: { [key: string]: Token } = {
