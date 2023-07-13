@@ -80,7 +80,6 @@ const DesktopBar: FC = () => {
 
     // const isExchangeAnalytics
     //     = asPath.startsWith('/exchange/analytics')
-    //     || asPath.startsWith('/exchange/analytics/coffinbox')
     //     || asPath.startsWith('/exchange/analytics/dashboard')
     //     || asPath.startsWith('/exchange/analytics/pairs')
     //     || asPath.startsWith('/exchange/analytics/tokens')
