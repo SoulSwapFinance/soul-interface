@@ -98,6 +98,9 @@ export const COMMON_BASES: ChainTokenList = {
   AVALANCHE.WBTC,
   AVALANCHE.WETH,
   AVALANCHE.DAI,
+  // AVALANCHE.BUSD,
+  // AVALANCHE.FRAX,
+  AVALANCHE.LINK,
   ],
 }
 

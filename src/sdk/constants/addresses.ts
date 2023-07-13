@@ -134,6 +134,17 @@ export const UNDERWORLD_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
+export const FRAX_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '',
+  [ChainId.AVALANCHE]: '0xD24C2Ad096400B6FBcd2ad8B24E7acBc21A1da64',
+  [ChainId.MATIC]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
+
 // TODO: specify merkle distributor for mainnet
 export const MERKLE_DISTRIBUTOR_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0xcBE6B83e77cdc011Cc18F6f0Df8444E5783ed982',
@@ -593,6 +604,16 @@ export const USDC_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
   [ChainId.AVALANCHE]: '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
   [ChainId.MOONRIVER]: '0xE3F5a90F9cb311505cd691a46596599aA1A0AD7D',
+}
+
+export const BUSD_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.FANTOM]: '',
+  [ChainId.BSC]: '',
+  [ChainId.MATIC]: '',
+  [ChainId.AVALANCHE]: '0x19860CCB0A68fd4213aB9D8266F7bBf05A8dDe98',
+  [ChainId.MOONRIVER]: '',
 }
 
 export const USDT_ADDRESS: AddressMap = {
