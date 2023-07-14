@@ -70,8 +70,17 @@ const AccountDetails: FC<AccountDetailsProps> = ({
         {/* <HeadlessUiModal.BorderedContent className="flex flex-col gap-3"> */}
         <div className="flex items-center justify-between">
           {connectorName}
-          <Button variant="outlined" color={getChainColorCode(chainId)} size="xs" onClick={deactivate}>
-            {`Disconnect`}
+          <Button 
+            variant="outlined" 
+            color={getChainColorCode(chainId)} 
+            size="xs" 
+            onClick={deactivate}
+          >
+            <Typography
+              className={`text-white text-xs`}
+            >
+              {`Disconnect`}
+            </Typography>
           </Button>
         </div>
         <div id="web3-account-identifier-row" className="flex flex-col justify-center gap-4">
@@ -137,12 +146,11 @@ const AccountDetails: FC<AccountDetailsProps> = ({
                 size="xs"
               // onClick={clearAllTransactionsCallback}
               >
-                {/* <Typography 
-                  variant="xs"
-                  weight={700} className="text-secondary"
-                  > */}
+              <Typography
+                className={`text-white text-xs`}
+              >
                 {`Vote`}
-                {/* </Typography> */}
+                </Typography>
               </Button>
             </ExternalLink>
           </div>
@@ -162,8 +170,17 @@ const AccountDetails: FC<AccountDetailsProps> = ({
             <Typography variant="xs" weight={700} className="font-white">
               {`Recent Transactions`}
             </Typography>
-            <Button variant="outlined" color={`${getChainColorCode(chainId)}`} size="xs" onClick={clearAllTransactionsCallback}>
+            <Button 
+              variant="outlined"
+              color={`${getChainColorCode(chainId)}`}
+              size="xs"
+              onClick={clearAllTransactionsCallback}
+            >
+            <Typography
+              className={`text-white text-xs`}
+            >
               {`Clear`}
+            </Typography>
             </Button>
           </div>
           <div className="flex flex-col divide-y divide-dark-800">

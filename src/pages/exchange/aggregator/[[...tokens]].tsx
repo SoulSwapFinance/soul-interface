@@ -32,6 +32,7 @@ import { featureEnabled } from 'functions/feature'
 // import META_BANNER from 'assets/branding/meta-banner.png'
 import { NextSeo } from 'next-seo'
 import { VoteBanner } from 'components/Banner'
+import Typography from 'components/Typography'
 
 // import { groupBy, mapValues, merge, uniqBy } from 'lodash'
 // import { useFeeData } from 'wagmi'
@@ -541,8 +542,16 @@ const Aggregator = ({ }) => {
 						onClick={handleUseSwap}
 					>
 						<div className={`flex text-sm font-bold text-${'blue'} justify-left`}>
-							<ArrowLeftIcon className={'mt-1 mr-1'} width="1em" height="1em" />
-							{`Return to Swap`}
+							<ArrowLeftIcon 
+								className={'mt-1 mr-1 bg-white rounded-full'}
+								 width={18}
+								height={18}
+							/>
+							<Typography
+              					className={`flex justify-end text-white ml-2 text-md font-bold text-center items-center`}
+            				>
+							{`Swap`}
+							</Typography>
 						</div>
 					</Button>
 					{/* <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}
