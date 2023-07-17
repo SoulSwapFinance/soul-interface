@@ -316,7 +316,7 @@ export const SOUL_USDC_PAIR: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '',
+  [ChainId.FANTOM]: '0x8317f1696612dAc15f4f22135Bf44db905E2d509',
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
