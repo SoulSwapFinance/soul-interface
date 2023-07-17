@@ -94,47 +94,6 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             </Typography>
           </NavLink>
         }
-        <NavLink
-          activeClassName={classNames(
-            "border rounded bg-black",
-            chainColor
-          )}
-          href={{
-            pathname: '/cross',
-          }}
-        >
-          <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-            {`Cross`}
-          </Typography>
-        </NavLink>
-        {/* <NavLink
-          activeClassName={classNames(
-            "border rounded bg-black",
-            chainColor
-          )}
-          href={{
-            pathname: '/aggregator',
-          }}
-        >
-          <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-            {`Multi`}
-          </Typography>
-        </NavLink> */}
-        {/* {featureEnabled(Feature.AGGREGATE, chainId) &&
-        <NavLink
-          activeClassName={classNames(
-            "border rounded bg-black",
-            chainColor
-          )}
-          href={{
-            pathname: '/aggregator',
-          }}
-        >
-          <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
-            {`Eco`}
-          </Typography>
-        </NavLink>
-        } */}
       </div>
         <div className={'flex flex-cols-2 sm:gap-8 gap-6 mr-4 justify-end rounded'}>
           {isSwap && <Settings />}

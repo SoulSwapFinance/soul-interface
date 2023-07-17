@@ -70,7 +70,6 @@ const MobileBar = () => {
     }, [])
 
     const swapPage = router.pathname.startsWith('/swap') || router.pathname.startsWith('/exchange/swap')
-    const crossPage = router.pathname.startsWith('/cross') || router.pathname.startsWith('/exchange/cross')
     const portfolioPage = router.pathname.startsWith('/portfolio')
     const luxorPage = router.pathname.startsWith('/luxor')
     const farmPage = router.pathname.startsWith('/farm') || router.pathname.startsWith('/summoner')
@@ -103,7 +102,7 @@ const MobileBar = () => {
     const isEarn = farmPage || bondPage
     // const isLearn = learnPage
     // const isData = dataPage || dataPage
-    const isExchange = swapPage || crossPage || isPool
+    const isExchange = swapPage || isPool
 
     return (
         <div>

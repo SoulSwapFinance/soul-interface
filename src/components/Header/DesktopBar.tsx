@@ -59,7 +59,6 @@ const DesktopBar: FC = () => {
     }, [])
 
     const swapPage = router.pathname.startsWith('/swap') || router.pathname.startsWith('/exchange/swap')
-    const crossPage = router.pathname.startsWith('/cross') || router.pathname.startsWith('/exchange/cross')
     const portfolioPage = router.pathname.startsWith('/portfolio')
     const farmPage = router.pathname.startsWith('/farm') || router.pathname.startsWith('/summoner')
     const bondPage = router.pathname.startsWith('/bond') || router.pathname.startsWith('/bonds')
@@ -88,7 +87,7 @@ const DesktopBar: FC = () => {
     const isData = dataPage
     const isLuxor = luxorPage
     const isEarn = farmPage || bondPage
-    const isExchange = swapPage || crossPage || isPool
+    const isExchange = swapPage || isPool
 
     return (
         <div>

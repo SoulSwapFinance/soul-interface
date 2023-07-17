@@ -21,11 +21,6 @@ const items = () => [
     href: '/enchant',
   },
   {
-    name: 'Bridge',
-    description: 'Come on Over...',
-    href: '/cross',
-  },
-  {
     name: 'Dashboard',
     description: 'View your Dashboard.',
     href: '/dashboard',

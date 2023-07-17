@@ -128,10 +128,6 @@ import COFFIN_BOX_ABI from 'constants/abis/soulswap/coffinbox.json'
 import SOR_MASTER_ABI from 'constants/abis/soulswap/sor-master.json'
 import SOR_MINTER_ABI from 'constants/abis/soulswap/sor-minter.json'
 
-// bridge
-import anyswapEthOperaBridge_ABI from 'constants/abis/soulswap/bridge/anyswapEthOperaBridge.json'
-import ROUTER_ACTION_ABI from 'constants/abis/soulswap/bridge/router-action.json'
-
 // unused
 import MERKLE_DISTRIBUTOR_ABI from 'constants/abis/merkle-distributor.json'
 import MULTICALL2_ABI from 'constants/abis/multicall2.json'
@@ -231,10 +227,6 @@ export function useBytes32TokenContract(tokenAddress?: string, withSignerIfPossi
   return useContract(tokenAddress, ERC20_BYTES32_ABI, withSignerIfPossible)
 }
 
-export function useBridgeContract(routerToken?:any, withSignerIfPossible?: boolean): Contract | null {
-  return useContract(routerToken ? routerToken : undefined, ROUTER_ACTION_ABI, withSignerIfPossible)
-}
-
 export function usePairContract(pairAddress?: string, withSignerIfPossible?: boolean): Contract | null {
   return useContract(pairAddress, ISoulSwapPairABI, withSignerIfPossible)
 }
@@ -242,11 +234,6 @@ export function usePairContract(pairAddress?: string, withSignerIfPossible?: boo
 export function useMerkleDistributorContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId ? MERKLE_DISTRIBUTOR_ADDRESS[chainId] : undefined, MERKLE_DISTRIBUTOR_ABI, true)
-}
-
-export function useAggregatorOracleContract(): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && ONCHAIN_AGGREGATOR_ORACLE[chainId], ONCHAIN_AGGREGATOR_ORACLE_ABI, false)
 }
 
 export function useOffchainAggregatorOracleContract(): Contract | null {
@@ -594,10 +581,6 @@ export function useMarketUpdater(withSignerIfPossible?: boolean): Contract | nul
   return useContract(chainId && MARKET_UPDATER_ADDRESS[chainId], UPDATER_ABI, withSignerIfPossible)
 }
 
-export function useSwapUnderlyingContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {
-  return useContract(tokenAddress, ROUTER_ACTION_ABI, withSignerIfPossible)
-}
-
 export function useComplexRewarderContract(address, withSignerIfPossible?: boolean): Contract | null {
   return useContract(address, COMPLEX_REWARDER_ABI, withSignerIfPossible)
 }
@@ -624,14 +607,6 @@ export function useSoulBondContract(withSignerIfPossible?: boolean): Contract | 
   return useContract(chainId && SOUL_BOND_ADDRESS[chainId], 
     chainId == 250 ? SOUL_BOND_ABI : SOUL_BOND_V2_ABI, withSignerIfPossible)
 }
-
-
-// ------- Bridge --------
-
-export function useAnyswapEthOperaBridge(withSignerIfPossible?: boolean): Contract | null {
-  return useContract('0x5cbe98480a790554403694b98bff71a525907f5d', anyswapEthOperaBridge_ABI, withSignerIfPossible)
-}
-
 
 // ------- Atomic Swap --------
 
