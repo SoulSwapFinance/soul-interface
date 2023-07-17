@@ -730,12 +730,12 @@ export const LUX_NATIVE: AddressMap = {
 export const SOUL_MUSDC: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.FANTOM]: '0xC0A301f1E5E0Fe37a31657e8F60a41b14d01B0Ef',
-  [ChainId.AVALANCHE]: '' // SEP22
+  [ChainId.AVALANCHE]: ''
 }
 
 export const SOUL_USDC: AddressMap = {
   [ChainId.ETHEREUM]: '',
-  [ChainId.FANTOM]: '',
+  [ChainId.FANTOM]: '0x8317f1696612dAc15f4f22135Bf44db905E2d509',
   [ChainId.AVALANCHE]: '0x922fcADa825Dc669798206A35D2D2B455f9A64E7' // SEP22
 }
 
@@ -759,8 +759,14 @@ export const DAI_USDC: AddressMap = {
 
 export const BTC_USDC: AddressMap = {
   [ChainId.ETHEREUM]: '',
-  [ChainId.FANTOM]: '0xE2d39F7f0c8517Ca2058Fa97eB3D8d4928F7C6D6',
+  [ChainId.FANTOM]: '',
   [ChainId.AVALANCHE]: '0xd413F437F998dE70413d9D9840825156bb32941c'
+}
+
+export const BTC_MUSDC: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0xE2d39F7f0c8517Ca2058Fa97eB3D8d4928F7C6D6',
+  [ChainId.AVALANCHE]: ''
 }
 
 export const ETH_USDC: AddressMap = {
@@ -777,8 +783,14 @@ export const ETH_NATIVE: AddressMap = {
 
 export const USDC_NATIVE: AddressMap = {
   [ChainId.ETHEREUM]: '',
-  [ChainId.FANTOM]: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556',
+  [ChainId.FANTOM]: '0x789b53f215F8b992da4Df7A342666Ed47a81Bc1e',   // JUL23
   [ChainId.AVALANCHE]: '0x864384a54ea644852603778c0C200eF2D6F2Ac2f' // SEP22
+}
+
+export const MUSDC_NATIVE: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556',
+  [ChainId.AVALANCHE]: ''
 }
 
 export const BTC_NATIVE: AddressMap = {
