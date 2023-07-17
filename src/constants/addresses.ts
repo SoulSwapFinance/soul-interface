@@ -349,7 +349,6 @@ export const FTM_MUSDC_PAIR: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  0x789b53f215F8b992da4Df7A342666Ed47a81Bc1e
   [ChainId.FANTOM]: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556', // 01 OCT
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
@@ -360,7 +359,7 @@ export const ETH_USD_PAIR: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556', // FTM-USDC
+  [ChainId.FANTOM]: '0x789b53f215F8b992da4Df7A342666Ed47a81Bc1e', // FTM-USDC
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
@@ -470,7 +469,7 @@ export const USDC_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x28a92dde19D9989F39A49905d7C9C2FAc7799bDf', // USDC
+  [ChainId.FANTOM]: '0x28a92dde19D9989F39A49905d7C9C2FAc7799bDf', // JUL23
   [ChainId.AVALANCHE]: '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',

@@ -121,7 +121,7 @@ export const AvalanchePools = [
 ]
 
 export const InactiveFantomPools = [
-  { // 1,000
+  { // 0
     pid: 2,
     type: 'swap',
     decimals: 18,
@@ -190,17 +190,28 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: SOUL_ADDRESS[ChainId.FANTOM],
   },
-  // { // 800
-    //   pid: 26,
-    //   type: 'swap',
-    //   decimals: 18,
-    // token0Symbol: 'SOUL',
-    // token1Symbol: 'USDC',
-    // lpSymbol: 'SOUL-USDC',
-    // lpAddress: SOUL_USDC[ChainId.FANTOM],
-    // token0Address: SOUL_ADDRESS[ChainId.FANTOM],
-    // token1Address: USDC_ADDRESS[ChainId.FANTOM],
-// },
+  /* { // 800
+      pid: 26,
+      type: 'swap',
+      decimals: 18,
+      token0Symbol: 'SOUL',
+      token1Symbol: 'USDC',
+      lpSymbol: 'SOUL-USDC',
+      lpAddress: SOUL_USDC[ChainId.FANTOM],
+      token0Address: SOUL_ADDRESS[ChainId.FANTOM],
+      token1Address: USDC_ADDRESS[ChainId.FANTOM],
+   }, 
+   { // 400
+    pid: 27,
+    type: 'swap',
+    decimals: 18,
+    token0Symbol: 'WFTM',
+    token1Symbol: 'USDC',
+    lpSymbol: 'FTM-USDC',
+    lpAddress: USDC_NATIVE[ChainId.FANTOM],
+    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+    token1Address: USDC_ADDRESS[ChainId.FANTOM],
+  }, */
   { // 100
     pid: 4,
     type: 'swap',
