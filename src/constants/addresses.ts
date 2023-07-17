@@ -338,7 +338,7 @@ export const SOUL_AXLUSDC_PAIR: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '', // 
+  [ChainId.FANTOM]: '0x5cED9D6B44a1F7C927AF31A8Af26dEF60C776712', // JUL23
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',

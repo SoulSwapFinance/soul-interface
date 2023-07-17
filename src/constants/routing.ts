@@ -57,9 +57,9 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
 export const COMMON_BASES: ChainTokenList = {
   [ChainId.ETHEREUM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM],
-    WFTM[ChainId.ETHEREUM],
-    SOUL[ChainId.ETHEREUM],
-    USDC[ChainId.ETHEREUM],
+    // WFTM[ChainId.ETHEREUM],
+    // SOUL[ChainId.ETHEREUM],
+    // USDC[ChainId.ETHEREUM],
   ],
   [ChainId.MOONRIVER]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.MOONRIVER], MOONRIVER.USDC, MOONRIVER.WETH, 
