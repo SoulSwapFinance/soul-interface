@@ -561,7 +561,7 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
       // token1: {
-      //   id: USDC_ADDRESS[ChainId.FANTOM], // USDC
+      //   id: MULTI_USDC_ADDRESS[ChainId.FANTOM], // USDC
       //   name: 'USD Coin',
       //   symbol: 'USDC',
       //   decimals: 6,
@@ -578,7 +578,7 @@ export const POOLS: AddressMap = {
         decimals: 8,
       },
       // token1: {
-      //   id: USDC_ADDRESS[ChainId.FANTOM], // USDC
+      //   id: MULTI_USDC_ADDRESS[ChainId.FANTOM], // USDC
       //   name: 'USD Coin',
       //   symbol: 'USDC',
       //   decimals: 6,
@@ -595,7 +595,7 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
       // token1: {
-      //   id: USDC_ADDRESS[ChainId.FANTOM], // USDC
+      //   id: MULTI_USDC_ADDRESS[ChainId.FANTOM], // USDC
       //   name: 'USD Coin',
       //   symbol: 'USDC',
       //   decimals: 6,
@@ -612,7 +612,7 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
       // token1: {
-      //   id: USDC_ADDRESS[ChainId.FANTOM], // USDC
+      //   id: MULTI_USDC_ADDRESS[ChainId.FANTOM], // USDC
       //   name: 'USD Coin',
       //   symbol: 'USDC',
       //   decimals: 6,

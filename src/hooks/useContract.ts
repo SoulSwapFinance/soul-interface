@@ -316,11 +316,6 @@ export function useBoringHelperContract(): Contract | null {
   return useContract(chainId && BORING_HELPER_ADDRESS[chainId], BORING_HELPER_ABI)
 }
 
-export function useSoulUsdcContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_USDC_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
-}
-
 export function useSeanceUsdcContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SEANCE_USDC_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)

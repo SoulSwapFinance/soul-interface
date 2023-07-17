@@ -1,4 +1,4 @@
-import { FTM_ADDRESS, USDC_ADDRESS, CHANT_ADDRESS, DAI_ADDRESS, WETH9_ADDRESS, WNATIVE_ADDRESS, SOUL_ADDRESS } from './addresses'
+import { FTM_ADDRESS, USDC_ADDRESS, CHANT_ADDRESS, DAI_ADDRESS, WETH9_ADDRESS, WNATIVE_ADDRESS, SOUL_ADDRESS, MULTI_USDC_ADDRESS } from './addresses'
 
 import { ChainId } from '../enums'
 import { Token } from '../entities/Token'
@@ -12,6 +12,10 @@ export const USDC: TokenMap = {
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, USDC_ADDRESS[ChainId.AVALANCHE], 6, 'USDC', 'USD Coin'),
   [ChainId.MOONRIVER]: new Token(ChainId.MOONRIVER, USDC_ADDRESS[ChainId.MOONRIVER], 6, 'USDC', 'USD Coin'),
   [ChainId.MATIC]: new Token(ChainId.MATIC, USDC_ADDRESS[ChainId.MATIC], 6, 'USDC', 'USD Coin')
+}
+
+export const MULTI_USDC: TokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, MULTI_USDC_ADDRESS[ChainId.FANTOM], 6, 'mUSDC', 'USDC (Multi)'),
 }
 
 export const DAI: TokenMap = {

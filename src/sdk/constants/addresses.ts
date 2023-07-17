@@ -727,9 +727,15 @@ export const LUX_NATIVE: AddressMap = {
   [ChainId.FANTOM]: '0x951BBB838e49F7081072895947735b0892cCcbCD',
 }
 
-export const SOUL_USDC: AddressMap = {
+export const SOUL_MUSDC: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.FANTOM]: '0xC0A301f1E5E0Fe37a31657e8F60a41b14d01B0Ef',
+  [ChainId.AVALANCHE]: '' // SEP22
+}
+
+export const SOUL_USDC: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '',
   [ChainId.AVALANCHE]: '0x922fcADa825Dc669798206A35D2D2B455f9A64E7' // SEP22
 }
 
