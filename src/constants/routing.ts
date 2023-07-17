@@ -34,8 +34,9 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM],
     FANTOM.SOUL,
     FANTOM.DAI, 
-    FANTOM.USDC, 
-    FANTOM.MUSDC, 
+    FANTOM.AXLUSDC,
+    FANTOM.LZUSDC, 
+    FANTOM.MUSDC,
     FANTOM.WBTC, 
     FANTOM.WETH
   ], // 27 AUG
@@ -55,7 +56,10 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
  */
 export const COMMON_BASES: ChainTokenList = {
   [ChainId.ETHEREUM]: [
-    ...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM], 
+    ...WRAPPED_NATIVE_ONLY[ChainId.ETHEREUM],
+    // WFTM[ChainId.ETHEREUM],
+    // SOUL[ChainId.ETHEREUM],
+    // USDC[ChainId.ETHEREUM],
   ],
   [ChainId.MOONRIVER]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.MOONRIVER], MOONRIVER.USDC, MOONRIVER.WETH, 
@@ -76,7 +80,8 @@ export const COMMON_BASES: ChainTokenList = {
     FANTOM.LUX,
     FANTOM.DAI,
     FANTOM.SURV,
-    FANTOM.USDC,
+    FANTOM.AXLUSDC,
+    FANTOM.LZUSDC, 
     FANTOM.MUSDC,
     FANTOM.WBTC,
     FANTOM.WETH,

@@ -249,9 +249,9 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
       token1: {
-        id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
-        name: 'USD Coin',
-        symbol: 'USDC',
+        id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // mUSDC
+        name: 'USDC (Multichain)',
+        symbol: 'mUSDC',
         decimals: 6,
       },
     },
@@ -260,8 +260,8 @@ export const POOLS: AddressMap = {
       address: '0x160653f02b6597e7db00ba8ca826cf43d2f39556',
       token0: {
         id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
-        name: 'USDC Coin',
-        symbol: 'USDC',
+        name: 'USDC (Multichain)',
+        symbol: 'mUSDC',
         decimals: 6,
       },
       token1: {

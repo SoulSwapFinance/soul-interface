@@ -1,5 +1,5 @@
 import { BNB_ADDRESS, SOUL_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from 'constants/addresses'
-import { ChainId, DAI_ADDRESS, MULTI_USDC_ADDRESS, SEANCE_ADDRESS, USDC_ADDRESS } from '../sdk'
+import { ChainId, DAI_ADDRESS, SEANCE_ADDRESS, USDC_ADDRESS, MULTI_USDC_ADDRESS } from '../sdk'
 
 export type TokenInfo = {
   id: string
