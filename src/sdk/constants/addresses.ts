@@ -777,8 +777,14 @@ export const ETH_NATIVE: AddressMap = {
 
 export const USDC_NATIVE: AddressMap = {
   [ChainId.ETHEREUM]: '',
-  [ChainId.FANTOM]: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556',
+  [ChainId.FANTOM]: '',
   [ChainId.AVALANCHE]: '0x864384a54ea644852603778c0C200eF2D6F2Ac2f' // SEP22
+}
+
+export const MUSDC_NATIVE: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556',
+  [ChainId.AVALANCHE]: '' // SEP22
 }
 
 export const BTC_NATIVE: AddressMap = {
