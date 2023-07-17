@@ -7736,8 +7736,8 @@ export const TOKENS = [
       decimals: 6,
       logoURI:
         "https://raw.githubusercontent.com/sushiswap/icons/master/token/usdc.jpg",
-      name: "USD Coin",
-      symbol: "USDC",
+      name: "USDC (Multi)",
+      symbol: "mUSDC",
     },
     {
       address: "0x321162Cd933E2Be498Cd2267a90534A804051b11",

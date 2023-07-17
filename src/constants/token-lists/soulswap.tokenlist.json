@@ -586,8 +586,16 @@
     },
     {
       "chainId": 250,
-      "name": "USD Coin",
+      "name": "USDC (Multi)",
       "address": "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75",
+      "symbol": "mUSDC",
+      "decimals": 6,
+      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x04068DA6C83AFCFA0e13ba15A6696662335D5B75/logo.png"
+    },
+    {
+      "chainId": 250,
+      "name": "USD Coin",
+      "address": "0x28a92dde19D9989F39A49905d7C9C2FAc7799bDf",
       "symbol": "USDC",
       "decimals": 6,
       "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x04068DA6C83AFCFA0e13ba15A6696662335D5B75/logo.png"

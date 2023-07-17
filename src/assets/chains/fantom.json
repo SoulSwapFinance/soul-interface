@@ -24,12 +24,20 @@
             "decimals": 18
         },
         {
-            "id": "usd-coin",
-            "name": "USD Coin",
+            "id": "usd-coin-multi",
+            "name": "USDC (Multi)",
             "rank": 56,
             "logo": "https://cryptologos.cc/logos/usd-coin-usdc-logo.svg",
-            "symbol": "USDC",
+            "symbol": "mUSDC",
             "address": "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75"
+        },
+        {
+            "id": "usd-coin",
+            "name": "USD Coin",
+            "rank": 4,
+            "logo": "https://cryptologos.cc/logos/usd-coin-usdc-logo.svg",
+            "symbol": "USDC",
+            "address": "0x28a92dde19D9989F39A49905d7C9C2FAc7799bDf"
         },
         {
             "id": "soulswap",

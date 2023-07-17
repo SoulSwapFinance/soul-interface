@@ -1,4 +1,4 @@
-import { ChainId, SOUL_ADDRESS, USDC_ADDRESS, WNATIVE_ADDRESS, SOUL_NATIVE, DAI_ADDRESS, BNB_ADDRESS, SOR_ADDRESS, WETH_ADDRESS, WBTC_ADDRESS, CRV_ADDRESS, GRIMEVO_ADDRESS, FUSD_ADDRESS, USDT_ADDRESS, SOUL_USDC, USDC_NATIVE, BTC_NATIVE, ETH_NATIVE, DAI_USDC, AVAX_ADDRESS, BNB_NATIVE, DAI_NATIVE, BTC_ETH, AVAX_NATIVE, ETH_USDC, BTC_USDC, LINK_ADDRESS, LINK_NATIVE } from 'sdk'
+import { ChainId, SOUL_ADDRESS, USDC_ADDRESS, WNATIVE_ADDRESS, SOUL_NATIVE, DAI_ADDRESS, BNB_ADDRESS, SOR_ADDRESS, WETH_ADDRESS, WBTC_ADDRESS, CRV_ADDRESS, GRIMEVO_ADDRESS, FUSD_ADDRESS, USDT_ADDRESS, SOUL_USDC, SOUL_MUSDC, USDC_NATIVE, BTC_NATIVE, ETH_NATIVE, DAI_USDC, AVAX_ADDRESS, BNB_NATIVE, DAI_NATIVE, BTC_ETH, AVAX_NATIVE, ETH_USDC, BTC_USDC, LINK_ADDRESS, LINK_NATIVE, MULTI_USDC_ADDRESS } from 'sdk'
 
 /*/ rules /*/
 // `token0Symbol` && `token1Symbol`: always use "w" prefix
@@ -141,7 +141,7 @@ export const InactiveFantomPools = [
     lpSymbol: 'ETH-USDC',
     lpAddress: ETH_USDC[ChainId.FANTOM],
     token0Address: WETH_ADDRESS[ChainId.FANTOM],
-    token1Address: USDC_ADDRESS[ChainId.FANTOM],
+    token1Address: MULTI_USDC_ADDRESS[ChainId.FANTOM],
   },
   { // 0
     pid: 12,
@@ -152,7 +152,7 @@ export const InactiveFantomPools = [
     lpSymbol: 'BTC-USDC',
     lpAddress: BTC_USDC[ChainId.FANTOM],
     token0Address: WBTC_ADDRESS[ChainId.FANTOM],
-    token1Address: USDC_ADDRESS[ChainId.FANTOM],
+    token1Address: MULTI_USDC_ADDRESS[ChainId.FANTOM],
   },
 ]
 
@@ -175,9 +175,9 @@ export const FantomPools = [
     token0Symbol: 'SOUL',
     token1Symbol: 'USDC',
     lpSymbol: 'SOUL-USDC',
-    lpAddress: SOUL_USDC[ChainId.FANTOM],
+    lpAddress: SOUL_MUSDC[ChainId.FANTOM],
     token0Address: SOUL_ADDRESS[ChainId.FANTOM],
-    token1Address: USDC_ADDRESS[ChainId.FANTOM],
+    token1Address: MULTI_USDC_ADDRESS[ChainId.FANTOM],
   },
   { // 100
     pid: 3,
@@ -188,7 +188,7 @@ export const FantomPools = [
     lpSymbol: 'FTM-USDC',
     lpAddress: USDC_NATIVE[ChainId.FANTOM],
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: USDC_ADDRESS[ChainId.FANTOM],
+    token1Address: MULTI_USDC_ADDRESS[ChainId.FANTOM],
   },
   { // 100
     pid: 4,

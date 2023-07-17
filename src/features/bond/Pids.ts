@@ -1,4 +1,4 @@
-import { AVAX_ADDRESS, BNB_ADDRESS, ChainId, DAI_ADDRESS, DAI_BNB_MARKET, DAI_ETH_MARKET, DAI_NATIVE_MARKET, NATIVE_DAI_MARKET, SEANCE_ADDRESS, SOUL_ADDRESS, SOUL_USDC, USDC_ADDRESS, USDC_DAI_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
+import { AVAX_ADDRESS, BNB_ADDRESS, ChainId, DAI_ADDRESS, DAI_BNB_MARKET, DAI_ETH_MARKET, DAI_NATIVE_MARKET, MULTI_USDC_ADDRESS, NATIVE_DAI_MARKET, SEANCE_ADDRESS, SOUL_ADDRESS, SOUL_USDC, SOUL_MUSDC, USDC_ADDRESS, USDC_DAI_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
 
 export const AvalanchePools = [
   {
@@ -90,9 +90,9 @@ export const FantomPools = [
     token0Symbol: 'SOUL',
     token1Symbol: 'USDC',
     lpSymbol: 'SOUL-USDC',
-    lpAddress: '0xC0A301f1E5E0Fe37a31657e8F60a41b14d01B0Ef',
+    lpAddress: SOUL_MUSDC[ChainId.FANTOM],
     token0Address: SOUL_ADDRESS[ChainId.FANTOM],
-    token1Address:  USDC_ADDRESS[ChainId.FANTOM],
+    token1Address:  MULTI_USDC_ADDRESS[ChainId.FANTOM],
   },
   // {
   //   // 600
@@ -116,7 +116,7 @@ export const FantomPools = [
     lpSymbol: 'FTM-USDC',
     lpAddress: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556',
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: USDC_ADDRESS[ChainId.FANTOM],
+    token1Address: MULTI_USDC_ADDRESS[ChainId.FANTOM],
   },
 
   {
@@ -190,7 +190,7 @@ export const FantomPools = [
     token1Symbol: 'DAI',
     lpSymbol: 'USDC-DAI',
     lpAddress: USDC_DAI_ADDRESS[ChainId.FANTOM],
-    token0Address:  USDC_ADDRESS[ChainId.FANTOM],
+    token0Address:  MULTI_USDC_ADDRESS[ChainId.FANTOM],
     token1Address: DAI_ADDRESS[ChainId.FANTOM],
   },
   { // LENDING
