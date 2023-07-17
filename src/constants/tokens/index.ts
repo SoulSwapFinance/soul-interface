@@ -27,7 +27,7 @@ export const FANTOM: { [key: string]: Token } = {
   LUX: new Token(ChainId.FANTOM, LUX_ADDRESS[ChainId.FANTOM], 9, 'LUX', 'Luxor Money'),
   WLUM: new Token(ChainId.FANTOM, '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208', 9, 'WLUM', 'Wrapped Lumens'),
   LUM: new Token(ChainId.FANTOM, '0x4290b33158F429F40C0eDc8f9b9e5d8C5288800c', 9, 'LUM', 'Lumens'),
-  LZUSDC: new Token(ChainId.FANTOM, '0x28a92dde19D9989F39A49905d7C9C2FAc7799bDf', 6, 'lzUSDC', 'USDC (LayerZero'),
+  LZUSDC: new Token(ChainId.FANTOM, '0x28a92dde19D9989F39A49905d7C9C2FAc7799bDf', 6, 'lzUSDC', 'USDC (LayerZero)'),
   MUSDC: new Token(ChainId.FANTOM, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'mUSDC', 'USDC (Multichain)'),
   LINK: new Token(ChainId.FANTOM, LINK_ADDRESS[ChainId.FANTOM], 18, 'LINK', 'Chainlink'),
   BNB: new Token(ChainId.FANTOM, BNB_ADDRESS[ChainId.FANTOM], 18, 'BNB', 'Binance'),
