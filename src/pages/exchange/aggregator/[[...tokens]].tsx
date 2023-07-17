@@ -31,7 +31,7 @@ import { featureEnabled } from 'functions/feature'
 // import Image from 'next/image'
 // import META_BANNER from 'assets/branding/meta-banner.png'
 import { NextSeo } from 'next-seo'
-import { VoteBanner } from 'components/Banner'
+import { FollowBanner } from 'components/Banner'
 import Typography from 'components/Typography'
 
 // import { groupBy, mapValues, merge, uniqBy } from 'lodash'
@@ -365,7 +365,7 @@ const Aggregator = ({ }) => {
 		<DoubleGlowShadowV2>
 			<NextSeo title={`Meta | SoulSwap`} />
           	<div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-			  <VoteBanner />
+			  <FollowBanner />
 				{/* <SwapLayoutCard> */}
 			{/* <div
               className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}

@@ -37,7 +37,7 @@ import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { currencyId } from 'functions'
 import { NextSeo } from 'next-seo'
 
-import { VoteBanner } from 'components/Banner'
+import { FollowBanner } from 'components/Banner'
 
 const Exchange = () => {
   const loadedUrlParams = useDefaultsFromURLSearch()
@@ -413,7 +413,7 @@ const Exchange = () => {
         <DoubleGlowShadowV2>
           
           <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
-          <VoteBanner />
+          <FollowBanner />
 
             {/* <SwapLayoutCard> */}
             {/* <div
@@ -648,9 +648,7 @@ const Exchange = () => {
             {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} show={false} /> : null}
             <div className={classNames(featureEnabled(Feature.AGGREGATE, chainId) ? "m-1 flex justify-between" : "hidden")}>
               <div className={classNames(
-                // !useLimit && !useAggregator ? 
                 `flex flex-cols-2 gap-3 text-white justify-end`
-                // : 'hidden'
               )}>
 
               </div>

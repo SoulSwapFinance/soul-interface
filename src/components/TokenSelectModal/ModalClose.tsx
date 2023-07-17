@@ -1,7 +1,5 @@
 import React from "react";
 import { OverlayButton } from "../index";
-import CrossSymbol from "assets/images/icon/Cross.svg";
-import Image from 'components/Image'
 
 const ModalClose: React.FC<any> = ({ onDismiss }) => {
   return (

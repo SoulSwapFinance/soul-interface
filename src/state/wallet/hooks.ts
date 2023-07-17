@@ -157,32 +157,3 @@ export function useAllTokenBalancesWithLoadingIndicator(chainId?: ChainId) {
   const allTokensArray = useMemo(() => Object.values(allTokens ?? {}), [allTokens])
   return useTokenBalancesWithLoadingIndicator(chainId, account ?? undefined, allTokensArray)
 }
-
-// TODO: Replace
-// get the total owned, unclaimed, and unharvested UNI for account
-// export function useAggregateUniBalance(): CurrencyAmount<Token> | undefined {
-//   const { account, chainId } = useActiveWeb3React();
-
-//   const uni = chainId ? UNI[chainId] : undefined;
-
-//   const uniBalance: CurrencyAmount<Token> | undefined = useTokenBalance(
-//     account ?? undefined,
-//     uni
-//   );
-//   const uniUnclaimed: CurrencyAmount<Token> | undefined =
-//     useUserUnclaimedAmount(account);
-//   const uniUnHarvested: CurrencyAmount<Token> | undefined = useTotalUniEarned();
-
-//   if (!uni) return undefined;
-
-//   return CurrencyAmount.fromRawAmount(
-//     uni,
-//     JSBI.add(
-//       JSBI.add(
-//         uniBalance?.quotient ?? JSBI.BigInt(0),
-//         uniUnclaimed?.quotient ?? JSBI.BigInt(0)
-//       ),
-//       uniUnHarvested?.quotient ?? JSBI.BigInt(0)
-//     )
-//   );
-// }

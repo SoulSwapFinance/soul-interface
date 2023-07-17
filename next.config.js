@@ -118,10 +118,6 @@
 //           destination: '/exchange/aggregator/:token*',
 //         },
 //         {
-//           source: '/cross',
-//           destination: '/exchange/cross',
-//         },
-//         {
 //           source: '/soul',
 //           destination: '/soul/dashboard',
 //         },
@@ -264,10 +260,6 @@ const nextConfig = {
         {
           source: '/aggregator/:token*',
           destination: '/exchange/aggregator/:token*',
-        },
-        {
-          source: '/cross',
-          destination: '/exchange/cross',
         },
         {
           source: '/soul',

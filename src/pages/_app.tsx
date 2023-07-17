@@ -9,7 +9,7 @@ import Web3ReactManager from 'components/Web3ReactManager'
 import getLibrary from 'functions/getLibrary'
 import { exception, GOOGLE_ANALYTICS_TRACKING_ID, pageview } from 'functions/gtag'
 import DefaultLayout from 'layouts/Default'
-import { FantomApiProvider } from "contexts/FantomApiProvider"
+// import { FantomApiProvider } from "contexts/FantomApiProvider"
 import { Analytics } from '@vercel/analytics/react'
 import store, { persistor } from 'state'
 import ApplicationUpdater from 'state/application/updater'
@@ -130,9 +130,11 @@ function MyApp({ Component, pageProps, fallback, err }) {
               <ApiDataProvider>
                 <ApolloProvider client={client}>
                   {/* <FantomApiProvider> */}
+                    {/* @ts-ignore */}
                     <Web3ProviderNetwork getLibrary={getLibrary}>
                       <Web3ReactManager>
                         <ReduxProvider store={store}>
+                          {/* @ts-ignore */}
                           <PersistGate loading={<Dots>loading</Dots>} persistor={persistor}>
                             <>
                               <ListsUpdater />

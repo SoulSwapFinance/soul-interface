@@ -86,7 +86,7 @@ import { useRouter } from "next/router"
 import { useCurrency } from "hooks/Tokens"
 import SwapDropdown from "features/swap/SwapDropdown"
 import { getChainColorCode } from "constants/chains"
-import { VoteBanner } from "components/Banner"
+import { FollowBanner } from "components/Banner"
 // import LIMIT_BANNER from 'assets/branding/limit-banner.png'
 // import TokenStats from "components/TokenStats"
 
@@ -501,7 +501,7 @@ const Limit = () => {
   return (
     <DoubleGlowShadowV2>
           <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
-          <VoteBanner />
+          <FollowBanner />
             {/* <SwapLayoutCard> */}
             {/* <DonateBanner chainId={chainId} /> */}
             {/* <LuxorBanner color={'purple'} textColor={'white'} chainId={chainId} /> */}

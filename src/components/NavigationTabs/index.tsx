@@ -76,9 +76,6 @@ export function SwapPoolTabs({ active }: { active: 'swap' | 'pool' | 'bridge' })
       <NavLink id="swap-nav-link" to="/swap" isActive={active === 'swap'}>
         {'swap'}
       </NavLink>
-      <NavLink id="bridge-nav-link" to="/cross" isActive={active === 'bridge'}>
-        {'bridge'}
-      </NavLink>
       <NavLink id="pool-nav-link" to="/pools" isActive={active === 'pool'}>
         {'pool'}
       </NavLink>
