@@ -448,6 +448,17 @@ export const USDC_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x28a92dde19D9989F39A49905d7C9C2FAc7799bDf', // USDC
+  [ChainId.AVALANCHE]: '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
+  [ChainId.MATIC]: '',
+  [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
+}
+
+export const MULTI_USDC_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
   [ChainId.AVALANCHE]: '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
   [ChainId.MATIC]: '',

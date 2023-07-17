@@ -40571,6 +40571,16 @@
             },
             {
                 "address": "0x04068da6c83afcfa0e13ba15a6696662335d5b75",
+                "symbol": "mUSDC",
+                "decimals": 6,
+                "chainId": 250,
+                "name": "USDC (Multi)",
+                "coinKey": "mUSDC",
+                "priceUSD": "1",
+                "logoURI": "https://static.debank.com/image/coin/logo_url/usdc/e87790bfe0b3f2ea855dc29069b38818.png"
+            },
+            {
+                "address": "0x28a92dde19D9989F39A49905d7C9C2FAc7799bDf",
                 "symbol": "USDC",
                 "decimals": 6,
                 "chainId": 250,
