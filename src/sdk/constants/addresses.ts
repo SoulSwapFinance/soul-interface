@@ -759,8 +759,14 @@ export const DAI_USDC: AddressMap = {
 
 export const BTC_USDC: AddressMap = {
   [ChainId.ETHEREUM]: '',
-  [ChainId.FANTOM]: '0xE2d39F7f0c8517Ca2058Fa97eB3D8d4928F7C6D6',
+  [ChainId.FANTOM]: '',
   [ChainId.AVALANCHE]: '0xd413F437F998dE70413d9D9840825156bb32941c'
+}
+
+export const MBTC_USDC: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0xE2d39F7f0c8517Ca2058Fa97eB3D8d4928F7C6D6',
+  [ChainId.AVALANCHE]: ''
 }
 
 export const ETH_USDC: AddressMap = {
