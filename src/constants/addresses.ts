@@ -312,6 +312,17 @@ export const SOUL_MUSDC_PAIR: AddressMap = {
   [ChainId.MOONRIVER]: '',
 }
 
+export const SOUL_LZUSDC_PAIR: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x8317f1696612dAc15f4f22135Bf44db905E2d509', // JUL23
+  [ChainId.AVALANCHE]: '',
+  [ChainId.MATIC]: '',
+  [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
+}
+
 export const SOUL_USDC_PAIR: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
@@ -482,7 +493,7 @@ export const USDC_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x28a92dde19D9989F39A49905d7C9C2FAc7799bDf', // JUL23
+  [ChainId.FANTOM]: '',
   [ChainId.AVALANCHE]: '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
