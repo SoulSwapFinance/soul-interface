@@ -120,7 +120,41 @@ export const AvalanchePools = [
   },
 ]
 
-export const InactiveFantomPools = []
+export const InactiveFantomPools = [
+  { // 0
+    pid: 9,
+    type: 'swap',
+    decimals: 18,
+    token0Symbol: 'WETH',
+    token1Symbol: 'BTC',
+    lpSymbol: 'ETH-BTC',
+    lpAddress: BTC_ETH[ChainId.FANTOM],
+    token0Address: WETH_ADDRESS[ChainId.FANTOM],
+    token1Address: WBTC_ADDRESS[ChainId.FANTOM],
+  },
+  { // 0
+    pid: 11,
+    type: 'swap',
+    decimals: 18,
+    token0Symbol: 'WETH',
+    token1Symbol: 'USDC',
+    lpSymbol: 'ETH-USDC',
+    lpAddress: ETH_USDC[ChainId.FANTOM],
+    token0Address: WETH_ADDRESS[ChainId.FANTOM],
+    token1Address: USDC_ADDRESS[ChainId.FANTOM],
+  },
+  { // 0
+    pid: 12,
+    type: 'swap',
+    decimals: 18,
+    token0Symbol: 'BTC',
+    token1Symbol: 'USDC',
+    lpSymbol: 'BTC-USDC',
+    lpAddress: BTC_USDC[ChainId.FANTOM],
+    token0Address: WBTC_ADDRESS[ChainId.FANTOM],
+    token1Address: USDC_ADDRESS[ChainId.FANTOM],
+  },
+]
 
 export const FantomPools = [
   { // 1,400
@@ -145,7 +179,7 @@ export const FantomPools = [
     token0Address: SOUL_ADDRESS[ChainId.FANTOM],
     token1Address: USDC_ADDRESS[ChainId.FANTOM],
   },
-  { // 600
+  { // 100
     pid: 3,
     type: 'swap',
     decimals: 18,
@@ -156,7 +190,7 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: USDC_ADDRESS[ChainId.FANTOM],
   },
-  { // 600
+  { // 100
     pid: 4,
     type: 'swap',
     decimals: 18,
@@ -167,7 +201,7 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: WBTC_ADDRESS[ChainId.FANTOM],
   },
-  { // 600
+  { // 100
     pid: 5,
     type: 'swap',
     decimals: 18,
@@ -178,7 +212,7 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: WETH_ADDRESS[ChainId.FANTOM],
   },
-  { // 600
+  { // 100
     pid: 7,
     type: 'swap',
     decimals: 18,
@@ -188,49 +222,5 @@ export const FantomPools = [
     lpAddress: AVAX_NATIVE[ChainId.FANTOM],
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: AVAX_ADDRESS[ChainId.FANTOM],
-  },
-  { // 300
-    pid: 9,
-    type: 'swap',
-    decimals: 18,
-    token0Symbol: 'WETH',
-    token1Symbol: 'BTC',
-    lpSymbol: 'ETH-BTC',
-    lpAddress: BTC_ETH[ChainId.FANTOM],
-    token0Address: WETH_ADDRESS[ChainId.FANTOM],
-    token1Address: WBTC_ADDRESS[ChainId.FANTOM],
-  },
-  /* { // 20
-    pid: 10,
-    type: 'swap',
-    decimals: 18,
-    token0Symbol: 'WFTM',
-    token1Symbol: 'EVO',
-    lpSymbol: 'FTM-EVO',
-    lpAddress: '0x857107e8F42023F7623C7ca413811DB1853F7f4b',
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: GRIMEVO_ADDRESS[ChainId.FANTOM],
-  }, */
-  { // 300
-    pid: 11,
-    type: 'swap',
-    decimals: 18,
-    token0Symbol: 'WETH',
-    token1Symbol: 'USDC',
-    lpSymbol: 'ETH-USDC',
-    lpAddress: ETH_USDC[ChainId.FANTOM],
-    token0Address: WETH_ADDRESS[ChainId.FANTOM],
-    token1Address: USDC_ADDRESS[ChainId.FANTOM],
-  },
-  { // 300
-    pid: 12,
-    type: 'swap',
-    decimals: 18,
-    token0Symbol: 'BTC',
-    token1Symbol: 'USDC',
-    lpSymbol: 'BTC-USDC',
-    lpAddress: BTC_USDC[ChainId.FANTOM],
-    token0Address: WBTC_ADDRESS[ChainId.FANTOM],
-    token1Address: USDC_ADDRESS[ChainId.FANTOM],
   },
 ]
