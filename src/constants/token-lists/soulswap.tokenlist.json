@@ -602,6 +602,14 @@
     },
     {
       "chainId": 250,
+      "name": "USDC (Axelar)",
+      "address": "0x1B6382DBDEa11d97f24495C9A90b7c88469134a4",
+      "symbol": "lzUSDC",
+      "decimals": 6,
+      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x1B6382DBDEa11d97f24495C9A90b7c88469134a4/logo.png"
+    },
+    {
+      "chainId": 250,
       "name": "Tether USD",
       "address": "0x049d68029688eAbF473097a2fC38ef61633A3C7A",
       "symbol": "USDT",

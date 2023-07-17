@@ -7,7 +7,7 @@ import { TokenMap } from '../types/TokenMap'
 export const USDC: TokenMap = {
   [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, USDC_ADDRESS[ChainId.ETHEREUM], 6, 'USDC', 'USD Coin'),
   [ChainId.TELOS]: new Token(ChainId.TELOS, USDC_ADDRESS[ChainId.ETHEREUM], 6, 'USDC', 'USD Coin'),
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, LZ_USDC_ADDRESS[ChainId.FANTOM], 6, 'lzUSDC', 'USDC (LayerZero)'),
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, AXL_USDC_ADDRESS[ChainId.FANTOM], 6, 'axlUSDC', 'axlUSDC (Axelar)'),
   [ChainId.BSC]: new Token(ChainId.BSC, USDC_ADDRESS[ChainId.BSC], 18, 'USDC', 'USD Coin'),
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, USDC_ADDRESS[ChainId.AVALANCHE], 6, 'USDC', 'USD Coin'),
   [ChainId.MOONRIVER]: new Token(ChainId.MOONRIVER, USDC_ADDRESS[ChainId.MOONRIVER], 6, 'USDC', 'USD Coin'),
@@ -20,6 +20,10 @@ export const MULTI_USDC: TokenMap = {
 
 export const LZ_USDC: TokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, LZ_USDC_ADDRESS[ChainId.FANTOM], 6, 'lzUSDC', 'USDC (LayerZero)'),
+}
+
+export const AXL_USDC: TokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, AXL_USDC_ADDRESS[ChainId.FANTOM], 6, 'axlUSDC', 'USDC (Axelar)'),
 }
 
 export const DAI: TokenMap = {

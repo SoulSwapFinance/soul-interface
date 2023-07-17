@@ -27,6 +27,7 @@ export const FANTOM: { [key: string]: Token } = {
   LUX: new Token(ChainId.FANTOM, LUX_ADDRESS[ChainId.FANTOM], 9, 'LUX', 'Luxor Money'),
   WLUM: new Token(ChainId.FANTOM, '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208', 9, 'WLUM', 'Wrapped Lumens'),
   LUM: new Token(ChainId.FANTOM, '0x4290b33158F429F40C0eDc8f9b9e5d8C5288800c', 9, 'LUM', 'Lumens'),
+  AXLUSDC: new Token(ChainId.FANTOM, '0x1B6382DBDEa11d97f24495C9A90b7c88469134a4', 6, 'axlUSDC', 'USDC (Axelar)'),
   LZUSDC: new Token(ChainId.FANTOM, '0x28a92dde19D9989F39A49905d7C9C2FAc7799bDf', 6, 'lzUSDC', 'USDC (LayerZero)'),
   MUSDC: new Token(ChainId.FANTOM, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'mUSDC', 'USDC (Multichain)'),
   LINK: new Token(ChainId.FANTOM, LINK_ADDRESS[ChainId.FANTOM], 18, 'LINK', 'Chainlink'),
@@ -84,7 +85,7 @@ export const SOUL: ChainTokenMap = {
 
 export const USDC = {
   [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD Coin'),
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x28a92dde19D9989F39A49905d7C9C2FAc7799bDf', 6, 'lzUSDC', 'USDC (LayerZero'),
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x1B6382DBDEa11d97f24495C9A90b7c88469134a4', 6, 'axlUSDC', 'USDC (Axelar'),
   // [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'USDC', 'USD Coin'),
   [ChainId.BSC]: new Token(ChainId.BSC, '0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d', 6, 'USDC', 'USD Coin'),
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E', 6, 'USDC', 'USD Coin'),
@@ -94,6 +95,11 @@ export const USDC = {
 export const LZUSDC: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x28a92dde19D9989F39A49905d7C9C2FAc7799bDf', 6, 'lzUSDC', 'USDC (LayerZero)'),
 } 
+
+// AXLUSDC
+export const AXLUSDC: ChainTokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x1B6382DBDEa11d97f24495C9A90b7c88469134a4', 6, 'axlUSDC', 'USDC (Axelar)'),
+}
 
 // MUSDC
 export const MUSDC: ChainTokenMap = {
