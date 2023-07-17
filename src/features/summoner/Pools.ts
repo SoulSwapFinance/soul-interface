@@ -121,6 +121,28 @@ export const AvalanchePools = [
 ]
 
 export const InactiveFantomPools = [
+  { // 1,000
+    pid: 2,
+    type: 'swap',
+    decimals: 18,
+    token0Symbol: 'SOUL',
+    token1Symbol: 'USDC',
+    lpSymbol: 'SOUL-USDC',
+    lpAddress: SOUL_MUSDC[ChainId.FANTOM],
+    token0Address: SOUL_ADDRESS[ChainId.FANTOM],
+    token1Address: MULTI_USDC_ADDRESS[ChainId.FANTOM],
+  },
+  { // 0
+    pid: 3,
+    type: 'swap',
+    decimals: 18,
+    token0Symbol: 'WFTM',
+    token1Symbol: 'USDC',
+    lpSymbol: 'FTM-USDC',
+    lpAddress: USDC_NATIVE[ChainId.FANTOM],
+    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+    token1Address: MULTI_USDC_ADDRESS[ChainId.FANTOM],
+  },
   { // 0
     pid: 9,
     type: 'swap',
@@ -167,28 +189,6 @@ export const FantomPools = [
     lpAddress: SOUL_NATIVE[ChainId.FANTOM],
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: SOUL_ADDRESS[ChainId.FANTOM],
-  },
-  { // 1,000
-    pid: 2,
-    type: 'swap',
-    decimals: 18,
-    token0Symbol: 'SOUL',
-    token1Symbol: 'USDC',
-    lpSymbol: 'SOUL-USDC',
-    lpAddress: SOUL_MUSDC[ChainId.FANTOM],
-    token0Address: SOUL_ADDRESS[ChainId.FANTOM],
-    token1Address: MULTI_USDC_ADDRESS[ChainId.FANTOM],
-  },
-  { // 100
-    pid: 3,
-    type: 'swap',
-    decimals: 18,
-    token0Symbol: 'WFTM',
-    token1Symbol: 'USDC',
-    lpSymbol: 'FTM-USDC',
-    lpAddress: USDC_NATIVE[ChainId.FANTOM],
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: MULTI_USDC_ADDRESS[ChainId.FANTOM],
   },
   { // 100
     pid: 4,
