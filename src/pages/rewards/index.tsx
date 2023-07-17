@@ -92,13 +92,13 @@ export default function Rewards() {
     setOpenPairsModal(false)
   }, [])
 
-  const handlePairSelect = useCallback(
-    (pair: Pair) => {
-      navigate(`/rewards/${pair.token0.address}/${pair.token1.address}`)
-      setFilterPair(pair)
-    },
-    [navigate]
-  )
+  // const handlePairSelect = useCallback(
+  //   (pair: Pair) => {
+  //     navigate(`/rewards/${pair.token0.address}/${pair.token1.address}`)
+  //     setFilterPair(pair)
+  //   },
+  //   [navigate]
+  // )
   const handleFilterTokenReset = useCallback(
     (e: React.MouseEvent<Element>) => {
       setAggregatedDataFilter(PairsFilterType.ALL)

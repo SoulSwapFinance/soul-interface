@@ -35,9 +35,6 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const isAggregator = asPath.startsWith('/aggregator')
     || asPath.startsWith('/exchange/aggregator')
 
-  const isCross = router.pathname.startsWith('/cross')
-    || router.pathname.startsWith('/exchange/cross')
-
   const isExchange = router.pathname.startsWith('/swap')
     || (router.pathname.startsWith('/exchange/swap') && !router.pathname.startsWith('/exchange/swap/limit'))
 
@@ -50,7 +47,6 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const swapStyle = isExchange ? activeStyle : style
   const poolStyle = isPool ? activeStyle : style
   const ecoStyle = isAggregator ? activeStyle : style
-  const crossStyle = isCross ? activeStyle : style
 
   return (
     <div className={`flex mt-2 mb-2 items-center justify-center gap-4 border-2 border-dark-700 rounded-lg`}>
@@ -179,40 +175,9 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           </NavLink>
         }
 
-        {featureEnabled(Feature.BRIDGE, chainId) &&
-          <NavLink
-            className={classNames(
-              crossStyle
-            )}
-            activeClassName={classNames(
-              activeStyle
-            )}
-            href={'/cross'}
-          >
-            <div
-              className={classNames(
-                `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
-                isCross && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
-            // onClick={reveal}
-            // onMouseEnter={reveal}
-            // onMouseLeave={conceal}
-            >
-              {/* <CrossIcon
-                fillPrimary={isCross ? `${getChainColor(chainId)}` : `#FFFFFF`}
-                fillSecondary={isCross ? `#FFFFFF` : `${getChainColor(chainId)}`}
-              /> */}
-              <Typography
-                className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
-              >
-                {`xChain`}
-              </Typography>
-
-            </div>
-          </NavLink>
-        }
-
       </div>
-      <div className={classNames(
+      <div className={
+        classNames(
         `absolute right-4 top-50`,
         `sm:right-4`,
         `sm:top-48`,

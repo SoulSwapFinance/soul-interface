@@ -55,11 +55,6 @@ const useMobileMenu: UseMobileMenu = () => {
             link: '/pool',
           },
           {
-            key: 'bridge',
-            title: `Bridge`,
-            link: '/cross',
-          },
-          {
             key: 'limit',
             title: `Limit`,
             link: '/limit',
@@ -162,11 +157,6 @@ const useMobileMenu: UseMobileMenu = () => {
         title: `Tools`,
         // icon: <SparklesIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`} />,
         items: [
-        {
-          key: 'bridge',
-          title: `Bridge`,
-          link: '/cross',
-        },
         {
           key: 'stream',
           title: `SoulPay`,
