@@ -294,7 +294,7 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
                     <div className="flex items-center w-11/12 space-x-1">
                       <Link href={`/analytics/tokens/${pair?.token0?.id}`} passHref>
                       <div className={`overflow-hidden cursor-pointer overflow-ellipsis whitespace-nowrap text-${getChainColorCode(chainId)}`}>
-                          {{token0Symbol}
+                          {token0Symbol}
                         </div>
                       </Link>
                       <a href={getExplorerLink(chainId, pair?.token0?.id, 'token')} target="_blank" rel="noreferrer">
