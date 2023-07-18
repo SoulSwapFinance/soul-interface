@@ -154,6 +154,7 @@ export function CurrencySearch({
       {/* {showCommonBases && <CommonBases />} */}
 
       {searchToken && !searchTokenIsAdded && <ImportRow token={searchToken} onClick={handleImport} />}
+      <CommonBases />
       <div 
         className="h-full overflow-hidden overflow-y-auto border rounded border-dark-800 bg-[rgba(0,0,0,0.2)]"
       >
@@ -172,7 +173,6 @@ export function CurrencySearch({
           </Typography>
         )} */}
 
-       <CommonBases />
 
       </div>
       {allowManageTokenList && (
