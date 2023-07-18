@@ -1,21 +1,23 @@
+import { Wrap } from 'components/ReusableStyles'
+import Container from 'components/Container'
 import Head from 'next/head'
 import React from 'react'
-import BondsList from 'features/bonds/List'
+import BondList from 'features/bond/List'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 
-const Bonds = () => {
+const Bond = () => {
   return (
     <div className={`mt-8`}>
         <Head>
-          <title>Bonds | All</title>
+          <title>Bond | All</title>
           <meta key="description" name="description" content="Mint SOUL" />
         </Head>
-        <BondsList />
+        <BondList />
     </div>
   )
 }
 
-export default Bonds
+export default Bond
 
-Bonds.Guard = NetworkGuard(Feature.BONDS)
+Bond.Guard = NetworkGuard(Feature.BOND)
