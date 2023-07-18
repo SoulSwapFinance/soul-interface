@@ -618,22 +618,37 @@ export const POOLS: AddressMap = {
       //   decimals: 6,
       // },
     },
-
-    // '0x5796Bf89f6C7C47811E4E59Ecd7aCACC8A5B9dEF': {
-    //   id: 5,
-    //   address: ETH_NATIVE[ChainId.AVALANCHE],
-    //   token0: {
-    //     id: WNATIVE_ADDRESS[ChainId.AVALANCHE],
-    //     name: 'Wrapped Avalanche',
-    //     symbol: 'WAVAX',
-    //     decimals: 18,
-    //   },
-    //   token1: {
-    //     id: WETH_ADDRESS[ChainId.AVALANCHE],
-    //     name: 'Wrapped Ethereum',
-    //     symbol: 'WETH',
-    //     decimals: 18,
-    //   },
-    // },
+    '0x5cED9D6B44a1F7C927AF31A8Af26dEF60C776712': { // SOUL-USDC √
+      id: 26,
+      address: SOUL_USDC[ChainId.FANTOM],
+      token0: {
+        id: USDC_ADDRESS[ChainId.FANTOM],
+        name: 'USD Coin',
+        symbol: 'USDC',
+        decimals: 6,
+      },
+      token1: {
+        id: SOUL_ADDRESS[ChainId.FANTOM], // SOUL
+        name: 'Soul Power',
+        symbol: 'SOUL',
+        decimals: 18,
+      },
+    },
+    '0xd1A432df5ee2Df3F891F835854ffeA072C273C65': { // USDC-NATIVE √
+      id: 27,
+      address: USDC_NATIVE[ChainId.FANTOM],
+      token0: {
+        id: USDC_ADDRESS[ChainId.FANTOM],
+        name: 'USD Coin',
+        symbol: 'USDC',
+        decimals: 6,
+      },
+      token1: {
+        id: WNATIVE_ADDRESS[ChainId.FANTOM], // WFTM
+        name: 'Wrapped Fantom',
+        symbol: 'WFTM',
+        decimals: 18,
+      },
+    },
   }, 
 }
