@@ -688,7 +688,7 @@ export const BNB_ADDRESS: AddressMap = {
 export const USD_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: USDC_ADDRESS[ChainId.ETHEREUM],
   [ChainId.TELOS]: USDC_ADDRESS[ChainId.TELOS],
-  [ChainId.FANTOM]: LZ_USDC_ADDRESS[ChainId.FANTOM],
+  [ChainId.FANTOM]: USDC_ADDRESS[ChainId.FANTOM],
   [ChainId.BSC]: USDC_ADDRESS[ChainId.BSC],
   [ChainId.AVALANCHE]: USDC_ADDRESS[ChainId.AVALANCHE],
   [ChainId.MOONRIVER]: USDC_ADDRESS[ChainId.MOONRIVER],
