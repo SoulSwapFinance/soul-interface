@@ -7,11 +7,9 @@ import {
   SOUL_SEANCE_PAIR,
   SOUL_FTM_PAIR,
   SEANCE_USDC_PAIR,
-  NATIVE_USDC_PAIR,
-  SCARAB_ADDRESS,
+  FTM_USDC_PAIR,
   SAFE_ADDRESS,
   ATOMIC_SWAP_ADDRESS,
-  SOUL_USDC_PAIR,
   LUX_ADDRESS,
   TEAM_WALLET_ADDRESS,
   WLUM_ADDRESS,
@@ -23,7 +21,6 @@ import {
   LUX_TREASURY_ADDRESS,
   SOR_STAKING_REWARDS_ADDRESS,
   SUMMONER_ASSISTANT_ADDRESS,
-  ONCHAIN_AGGREGATOR_ORACLE,
   OFFCHAIN_AGGREGATOR_ORACLE,
   SPOOKY_ROUTER_ADDRESS,
   SPIRIT_ROUTER_ADDRESS,
@@ -323,7 +320,7 @@ export function useSeanceUsdcContract(withSignerIfPossible?: boolean): Contract 
 
 export function useFtmUsdcContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && NATIVE_USDC_PAIR[250], ISoulSwapPairABI, withSignerIfPossible)
+  return useContract(chainId && FTM_USDC_PAIR[250], ISoulSwapPairABI, withSignerIfPossible)
 }
 
 export function useEnchantContract(withSignerIfPossible = true): Contract | null {

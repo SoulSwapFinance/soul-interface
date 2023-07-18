@@ -629,7 +629,7 @@ export const BUSD_ADDRESS: AddressMap = {
 }
 
 export const USDT_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
+  [ChainId.ETHEREUM]: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
   [ChainId.TELOS]: '',
   [ChainId.FANTOM]: '0x049d68029688eAbF473097a2fC38ef61633A3C7A',
   [ChainId.BSC]: '',
@@ -639,7 +639,7 @@ export const USDT_ADDRESS: AddressMap = {
 }
 
 export const WETH_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
+  [ChainId.ETHEREUM]: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
   [ChainId.TELOS]: '',
   [ChainId.FANTOM]: '0x74b23882a30290451A17c44f4F05243b6b58C76d',
   [ChainId.BSC]: '',
@@ -649,7 +649,7 @@ export const WETH_ADDRESS: AddressMap = {
 }
 
 export const WBTC_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
+  [ChainId.ETHEREUM]: '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599',
   [ChainId.TELOS]: '',
   [ChainId.FANTOM]: '0x321162Cd933E2Be498Cd2267a90534A804051b11',
   [ChainId.BSC]: '',

@@ -1,4 +1,4 @@
-import { FTM_ADDRESS, USDC_ADDRESS, CHANT_ADDRESS, DAI_ADDRESS, WETH9_ADDRESS, WNATIVE_ADDRESS, SOUL_ADDRESS, AXL_USDC_ADDRESS, LZ_USDC_ADDRESS, MULTI_USDC_ADDRESS, FRAX_ADDRESS, MULTI_DAI_ADDRESS, WBTC_ADDRESS, USDT_ADDRESS } from './addresses'
+import { FTM_ADDRESS, USDC_ADDRESS, CHANT_ADDRESS, DAI_ADDRESS, WETH9_ADDRESS, WNATIVE_ADDRESS, SOUL_ADDRESS, AXL_USDC_ADDRESS, LZ_USDC_ADDRESS, MULTI_USDC_ADDRESS, FRAX_ADDRESS, WBTC_ADDRESS, USDT_ADDRESS } from './addresses'
 
 import { ChainId } from '../enums'
 import { Token } from '../entities/Token'
@@ -23,7 +23,7 @@ export const MULTI_USDC: TokenMap = {
 }
 
 export const MULTI_DAI: TokenMap = {
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, MULTI_DAI_ADDRESS[ChainId.FANTOM], 18, 'DAI', 'Dai Stablecoin'),
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, DAI_ADDRESS[ChainId.FANTOM], 18, 'DAI', 'Dai Stablecoin'),
 }
 
 export const LZ_USDC: TokenMap = {
@@ -36,7 +36,7 @@ export const AXL_USDC: TokenMap = {
 
 export const FRAX: TokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, FRAX_ADDRESS[ChainId.FANTOM], 18, 'FRAX', 'Frax'),
-  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, FRAX_ADDRESS[ChainId.FANTOM], 18, 'FRAX', 'Frax'),
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, FRAX_ADDRESS[ChainId.AVALANCHE], 18, 'FRAX', 'Frax'),
 }
 
 export const DAI: TokenMap = {
@@ -54,12 +54,15 @@ export const FTM: TokenMap = {
 
 export const SOUL: TokenMap = {
   [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, SOUL_ADDRESS[ChainId.ETHEREUM], 18, 'SOUL', 'Soul Power'),
+  [ChainId.TELOS]: new Token(ChainId.TELOS, SOUL_ADDRESS[ChainId.TELOS], 18, 'SOUL', 'Soul Power'),
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, SOUL_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'Soul Power'),
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, SOUL_ADDRESS[ChainId.AVALANCHE], 18, 'SOUL', 'Soul Power'),
 }
 
 export const WBTC: TokenMap = {
   [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, WBTC_ADDRESS[ChainId.ETHEREUM], 8, 'WBTC', 'Wrapped BTC'),
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, WBTC_ADDRESS[ChainId.FANTOM], 8, 'WBTC', 'Wrapped BTC'),
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, WBTC_ADDRESS[ChainId.AVALANCHE], 8, 'WBTC', 'Wrapped BTC'),
 }
 
 export const USD: TokenMap = {
