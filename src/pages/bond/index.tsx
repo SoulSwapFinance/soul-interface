@@ -2,7 +2,7 @@ import { Wrap } from 'components/ReusableStyles'
 import Container from 'components/Container'
 import Head from 'next/head'
 import React from 'react'
-import BondList from 'features/bond/List'
+// import BondsList from 'features/bonds/List'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 
@@ -13,7 +13,7 @@ const Bond = () => {
           <title>Bond | All</title>
           <meta key="description" name="description" content="Mint SOUL" />
         </Head>
-        <BondList />
+        {/* <BondsList /> */}
     </div>
   )
 }

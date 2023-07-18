@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import React from 'react'
-import BondsList from 'features/bonds/List'
+import BondList from 'features/bond/List'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 
@@ -11,7 +11,7 @@ const Bonds = () => {
           <title>Bonds | All</title>
           <meta key="description" name="description" content="Mint SOUL" />
         </Head>
-        <BondsList />
+        <BondList />
     </div>
   )
 }
