@@ -312,33 +312,22 @@ export const SOUL_MUSDC_PAIR: AddressMap = {
   [ChainId.MOONRIVER]: '',
 }
 
-export const SOUL_LZUSDC_PAIR: AddressMap = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x8317f1696612dAc15f4f22135Bf44db905E2d509', // JUL23
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
-}
+// export const SOUL_LZUSDC_PAIR: AddressMap = {
+//   [ChainId.ETHEREUM]: '',
+//   [ChainId.TELOS]: '',
+//   [ChainId.BSC]: '',
+//   [ChainId.FANTOM]: '0x8317f1696612dAc15f4f22135Bf44db905E2d509', // JUL23
+//   [ChainId.AVALANCHE]: '',
+//   [ChainId.MATIC]: '',
+//   [ChainId.ARBITRUM]: '',
+//   [ChainId.MOONRIVER]: '',
+// }
 
 export const SOUL_USDC_PAIR: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '', // JUL23
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
-}
-
-export const SOUL_AXLUSDC_PAIR: AddressMap = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x5cED9D6B44a1F7C927AF31A8Af26dEF60C776712', // JUL23
+  [ChainId.FANTOM]: '0x5cED9D6B44a1F7C927AF31A8Af26dEF60C776712', // JUL23 (axlUSDC)
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
@@ -356,7 +345,7 @@ export const SEANCE_USDC_PAIR: AddressMap = {
   [ChainId.MOONRIVER]: '',
 }
 
-export const FTM_USDC_PAIR: AddressMap = {
+export const NATIVE_LZUSDC_PAIR: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -367,29 +356,7 @@ export const FTM_USDC_PAIR: AddressMap = {
   [ChainId.MOONRIVER]: '',
 }
 
-export const FTM_LZUSDC_PAIR: AddressMap = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x789b53f215F8b992da4Df7A342666Ed47a81Bc1e', // JUL23
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
-}
-
-export const FTM_AXLUSDC_PAIR: AddressMap = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '', // 
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
-}
-
-export const FTM_MUSDC_PAIR: AddressMap = {
+export const NATIVE_MUSDC_PAIR: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -404,7 +371,18 @@ export const ETH_USD_PAIR: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x789b53f215F8b992da4Df7A342666Ed47a81Bc1e', // FTM-lzUSDC
+  [ChainId.FANTOM]: '0xd1A432df5ee2Df3F891F835854ffeA072C273C65', // FTM-axlUSDC
+  [ChainId.AVALANCHE]: '',
+  [ChainId.MATIC]: '',
+  [ChainId.ARBITRUM]: '',
+  [ChainId.MOONRIVER]: '',
+}
+
+export const NATIVE_USDC_PAIR: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xd1A432df5ee2Df3F891F835854ffeA072C273C65', // FTM-axlUSDC
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
@@ -525,7 +503,7 @@ export const USDC_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '',
+  [ChainId.FANTOM]: '0x1B6382DBDEa11d97f24495C9A90b7c88469134a4', // JUL23 axlUSDC
   [ChainId.AVALANCHE]: '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',

@@ -90,6 +90,17 @@ export const CRV_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
+export const AXELAR_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x8b1f4432F943c465A973FeDC6d7aa50Fc96f1f65',
+  [ChainId.AVALANCHE]: '',
+  [ChainId.MATIC]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
+
 export const SOR_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
@@ -658,6 +669,14 @@ export const WBTC_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '',
 }
 
+export const FBTC_ADDRESS: AddressMap = {
+  [ChainId.FANTOM]: '0xe1146b9AC456fCbB60644c36Fd3F868A9072fc6E',
+}
+
+export const FETH_ADDRESS: AddressMap = {
+  [ChainId.FANTOM]: '0x658b0c7613e890EE50B8C4BC6A3f41ef411208aD',
+}
+
 export const DAI_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
   [ChainId.FANTOM]: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E',
@@ -665,6 +684,10 @@ export const DAI_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '0xd586E7F844cEa2F87f50152665BCbc2C279D8d70',
   [ChainId.MOONRIVER]: '0x80A16016cC4A2E6a2CACA8a4a498b1699fF0f844',
   [ChainId.MATIC]: '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063',
+}
+
+export const MULTI_DAI_ADDRESS: AddressMap = {
+  [ChainId.FANTOM]: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E',
 }
 
 export const GRIMEVO_ADDRESS: AddressMap = {
@@ -743,7 +766,7 @@ export const SOUL_MUSDC: AddressMap = {
 
 export const SOUL_USDC: AddressMap = {
   [ChainId.ETHEREUM]: '',
-  [ChainId.FANTOM]: '0x8317f1696612dAc15f4f22135Bf44db905E2d509',
+  [ChainId.FANTOM]: '0x5cED9D6B44a1F7C927AF31A8Af26dEF60C776712', // JUL23 SOUL-axlUSDC
   [ChainId.AVALANCHE]: '0x922fcADa825Dc669798206A35D2D2B455f9A64E7' // SEP22
 }
 
@@ -791,7 +814,7 @@ export const ETH_NATIVE: AddressMap = {
 
 export const USDC_NATIVE: AddressMap = {
   [ChainId.ETHEREUM]: '',
-  [ChainId.FANTOM]: '0x789b53f215F8b992da4Df7A342666Ed47a81Bc1e',   // JUL23
+  [ChainId.FANTOM]: '0xd1A432df5ee2Df3F891F835854ffeA072C273C65',   // JUL23 FTM-axlUSDC
   [ChainId.AVALANCHE]: '0x864384a54ea644852603778c0C200eF2D6F2Ac2f' // SEP22
 }
 

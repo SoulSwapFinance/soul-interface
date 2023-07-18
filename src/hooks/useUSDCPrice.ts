@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import { useV2TradeExactOut } from './useV2Trades'
 
 import { tryParseAmount } from 'functions'
-import { BNB, LUXOR, MIM, AVAX, SEANCE, SOUL, FUSD, USDC, LZUSDC, AXLUSDC, WBTC, WETH, WFTM, WLUM, SURV, DAI, SOR } from 'constants/tokens'
+import { BNB, LUXOR, MIM, AVAX, SEANCE, SOUL, FUSD, USDC, WBTC, WETH, WFTM, WLUM, SURV, DAI, SOR } from 'constants/tokens'
 import { AVAX_ADDRESS, BNB_ADDRESS, FUSD_ADDRESS, LUX_ADDRESS, SEANCE_ADDRESS, WFTM_ADDRESS, 
   SOUL_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS, SURV_ADDRESS } 
   from 'constants/addresses'
@@ -16,7 +16,7 @@ import { usePrice } from 'hooks/usePrice'
 
 const STABLECOIN_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.ETHEREUM]: CurrencyAmount.fromRawAmount(USDC[ChainId.ETHEREUM], 100_000e6),
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(LZUSDC[ChainId.FANTOM], 100_000e6),
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(USDC[ChainId.FANTOM], 100_000e6),
   [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(USDC[ChainId.AVALANCHE], 100_000e6),
 }
 
