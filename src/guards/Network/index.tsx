@@ -10,7 +10,8 @@ import { useActiveWeb3React } from 'services/web3'
 import cookie from 'cookie-cutter'
 import Image from 'next/image'
 import React, { FC } from 'react'
-import { getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
+import { ArrowLeft } from 'react-feather'
 
 interface NetworkGuardProps {
   children?: React.ReactChild
@@ -42,18 +43,15 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
         onDismiss={() => null}
         transparent={true}
       >
-        <div className="flex flex-col gap-2 justify-center p-4 mt-10 lg:mt-0">
-          {/* <Typography className="max-w-2xl text-lg sm:text-2xl text-white text-center" weight={700}>            {
-          `Unavailable on ${NETWORK_LABEL[chainId]}.`}
-          </Typography>
-          <Typography className="text-center">
-            <Trans
-              id="{link} or change network."
-              values={{ link }}
-              components={Fragment}
-            />
-          </Typography> */}
-          <Typography className="uppercase text-white text-center text-lg mb-4 tracking-[.2rem]" weight={700}>
+        <div 
+          className={
+            `flex flex-col bg-dark-800 rounded-2xl border border-[${getChainColor(chainId)}] gap-2 justify-center p-4 mt-10 lg:mt-0`
+          }
+        >
+          <Typography 
+            className={ `uppercase text-white bg-dark-900 p-3 rounded-2xl text-center text-lg mb-4 tracking-[.2rem]` } 
+            weight={700}
+          >
             {`SWITCH CHAIN`}
           </Typography>
           <div className="flex gap-5 md:gap-10 justify-center">
@@ -77,25 +75,40 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
                   }
                 }}
               >
-                <div className="w-[70px] h-[70px]">
+                <div className="flex flex-row w-full h-full justify-center">
                   <Image
                     src={NETWORK_ICON[key]}
                     alt="Switch Network"
-                    className={`rounded-sm filter drop-shadow-currencyLogo bg-${getChainColorCode(Number(key))}`}
-                    width={60}
-                    height={60}
+                    className={
+                        `rounded-2xl p-3 m-3 filter drop-shadow-currencyLogo
+                        border hover:border-${getChainColorCode(Number(key))}
+                        bg-${getChainColorCode(Number(key))}`
+                      }
+                    width={64}
+                    height={64}
                   />
                 </div>
-                <NavLink
-                  href='/swap'
-                >
-                  <div className={`flex mt-1 text-sm font-bold text-${getChainColorCode(Number(key))} justify-center`}>
-                    {`Return to Exchange`}
-                  </div>
-                </NavLink>
               </button>
             ))}
           </div>
+          <NavLink
+                  href='/swap'
+                >
+                  {/* <ArrowLeft /> */}
+                  <div 
+                    className={
+                      `flex  gap-4 p-2 rounded-2xl border hover:border-${getChainColorCode(chainId)} bg-${getChainColorCode(chainId)} text-white mt-1 text-sm font-bold justify-center`
+                    }>
+                      <div className={'flex justify-end'}>
+                    {`←`}
+                      </div>
+                    <div className={
+                      'flex justify-left'
+                    }>
+                    { `Return to Exchange` }
+                    </div>
+                  </div>
+                </NavLink>
         </div>
         {/* <Typography className="text-xl">{NETWORK_LABEL[key]}</Typography> */}
       </HeadlessUIModal.Controlled>
