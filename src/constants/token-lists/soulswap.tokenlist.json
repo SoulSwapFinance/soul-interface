@@ -602,11 +602,19 @@
     },
     {
       "chainId": 250,
-      "name": "USDC (Axelar)",
+      "name": "USD Coin (Axelar)",
       "address": "0x1B6382DBDEa11d97f24495C9A90b7c88469134a4",
-      "symbol": "lzUSDC",
+      "symbol": "USDC",
       "decimals": 6,
-      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x1B6382DBDEa11d97f24495C9A90b7c88469134a4/logo.png"
+      "logoURI": "https://cryptologos.cc/logos/usd-coin-usdc-logo.svg"
+    },
+    {
+      "chainId": 250,
+      "name": "Fuck Multi",
+      "address": "0x6CEbb8cD66Fca7E6aca65841Ae3A04B7884F4de8",
+      "symbol": "FMULTI",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x6CEbb8cD66Fca7E6aca65841Ae3A04B7884F4de8/logo.png"
     },
     {
       "chainId": 250,
