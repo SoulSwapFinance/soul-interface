@@ -193,6 +193,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/en/swap',
+        destination: '/swap',
+        permanent: true,
+      },
+      {
         source: '/autostake',
         destination: '/soul/autostake',
         permanent: true,

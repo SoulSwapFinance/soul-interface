@@ -138,7 +138,7 @@ export const FRAX_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '',
+  [ChainId.FANTOM]: '0xdc301622e621166BD8E82f2cA0A26c13Ad0BE355',
   [ChainId.AVALANCHE]: '0xD24C2Ad096400B6FBcd2ad8B24E7acBc21A1da64',
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
