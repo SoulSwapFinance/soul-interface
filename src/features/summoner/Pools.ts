@@ -177,6 +177,17 @@ export const InactiveFantomPools = [
     token0Address: WBTC_ADDRESS[ChainId.FANTOM],
     token1Address: MULTI_USDC_ADDRESS[ChainId.FANTOM],
   },
+  { // 0
+    pid: 7,
+    type: 'swap',
+    decimals: 18,
+    token0Symbol: 'WFTM',
+    token1Symbol: 'AVAX',
+    lpSymbol: 'FTM-AVAX',
+    lpAddress: AVAX_NATIVE[ChainId.FANTOM],
+    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+    token1Address: AVAX_ADDRESS[ChainId.FANTOM],
+  },
 ]
 
 export const FantomPools = [
@@ -191,28 +202,28 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: SOUL_ADDRESS[ChainId.FANTOM],
   },
-  /* { // 800
+   { // 800
       pid: 26,
       type: 'swap',
       decimals: 18,
       token0Symbol: 'SOUL',
-      token1Symbol: 'lzUSDC',
-      lpSymbol: 'SOUL-lzUSDC',
-      lpAddress: SOUL_LZUSDC[ChainId.FANTOM],
+      token1Symbol: 'USDC',
+      lpSymbol: 'SOUL-USDC',
+      lpAddress: SOUL_USDC[ChainId.FANTOM],
       token0Address: SOUL_ADDRESS[ChainId.FANTOM],
-      token1Address: LZ_USDC_ADDRESS[ChainId.FANTOM],
+      token1Address: USDC_ADDRESS[ChainId.FANTOM],
    }, 
-   { // 400
+  { // 400
     pid: 27,
     type: 'swap',
     decimals: 18,
     token0Symbol: 'WFTM',
-    token1Symbol: 'lzUSDC',
-    lpSymbol: 'FTM-lzUSDC',
-    lpAddress: LZUSDC_NATIVE[ChainId.FANTOM],
+    token1Symbol: 'USDC',
+    lpSymbol: 'FTM-USDC',
+    lpAddress: USDC_NATIVE[ChainId.FANTOM],
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: LZ_USDC_ADDRESS[ChainId.FANTOM],
-  }, */
+    token1Address: USDC_ADDRESS[ChainId.FANTOM],
+  },
   { // 100
     pid: 4,
     type: 'swap',
@@ -234,16 +245,5 @@ export const FantomPools = [
     lpAddress: ETH_NATIVE[ChainId.FANTOM],
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: WETH_ADDRESS[ChainId.FANTOM],
-  },
-  { // 100
-    pid: 7,
-    type: 'swap',
-    decimals: 18,
-    token0Symbol: 'WFTM',
-    token1Symbol: 'AVAX',
-    lpSymbol: 'FTM-AVAX',
-    lpAddress: AVAX_NATIVE[ChainId.FANTOM],
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: AVAX_ADDRESS[ChainId.FANTOM],
   },
 ]
