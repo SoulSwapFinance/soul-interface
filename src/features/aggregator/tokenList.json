@@ -40580,12 +40580,22 @@
                 "logoURI": "https://static.debank.com/image/coin/logo_url/usdc/e87790bfe0b3f2ea855dc29069b38818.png"
             },
             {
-                "address": "0x28a92dde19D9989F39A49905d7C9C2FAc7799bDf",
+                "address": "0x1B6382DBDEa11d97f24495C9A90b7c88469134a4",
                 "symbol": "USDC",
                 "decimals": 6,
                 "chainId": 250,
-                "name": "USD Coin",
+                "name": "USD Coin (Axelar)",
                 "coinKey": "USDC",
+                "priceUSD": "1",
+                "logoURI": "https://static.debank.com/image/coin/logo_url/usdc/e87790bfe0b3f2ea855dc29069b38818.png"
+            },
+            {
+                "address": "0x28a92dde19D9989F39A49905d7C9C2FAc7799bDf",
+                "symbol": "lzUSDC",
+                "decimals": 6,
+                "chainId": 250,
+                "name": "USD Coin (Layer Zero)",
+                "coinKey": "lzUSDC",
                 "priceUSD": "1",
                 "logoURI": "https://static.debank.com/image/coin/logo_url/usdc/e87790bfe0b3f2ea855dc29069b38818.png"
             },
