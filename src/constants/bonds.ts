@@ -1,5 +1,5 @@
 import { BNB_ADDRESS, SOUL_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from 'constants/addresses'
-import { ChainId, DAI_ADDRESS, SEANCE_ADDRESS, USDC_ADDRESS, MULTI_USDC_ADDRESS, MULTI_DAI_ADDRESS } from '../sdk'
+import { ChainId, DAI_ADDRESS, SEANCE_ADDRESS, USDC_ADDRESS, MULTI_USDC_ADDRESS } from '../sdk'
 
 export type TokenInfo = {
   id: string
@@ -189,7 +189,7 @@ export const BONDS: AddressMap = {
         decimals: 18,
       },
       token1: {
-        id: MULTI_DAI_ADDRESS[ChainId.FANTOM],
+        id: DAI_ADDRESS[ChainId.FANTOM],
         name: 'Dai Stablecoin',
         symbol: 'DAI',
         decimals: 18,
@@ -243,7 +243,7 @@ export const BONDS: AddressMap = {
     '0x406dE3A93f6B4179E3B21a3d81226B43e1918fd9': {  // DAI-USDC
       id: 8, // 200
       token0: {
-        id: MULTI_DAI_ADDRESS[ChainId.FANTOM],
+        id: DAI_ADDRESS[ChainId.FANTOM],
         name: 'Dai Stablecoin',
         symbol: 'DAI',
         decimals: 18,

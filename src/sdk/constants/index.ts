@@ -17,7 +17,8 @@ export const INIT_CODE_HASH: { [chainId: number]: string } = {
   [ChainId.FANTOM]: '0xf3dcc3c6c6e34d3981dd429ac942301b9ebdd05de1be17f646b55476c44dc951',
   [ChainId.BSC]: '0x2d2a1a6740caa0c2e9da78939c9ca5c8ff259bf16e2b9dcbbec714720587df90',
   [ChainId.AVALANCHE]: '0xab9f67104ee4239d49c6b434dc5d6d76f43412862be0f00a0607199ad505abc6',
-}
+
+ }
 
 export const MINIMUM_LIQUIDITY = JSBI.BigInt(1000)
 

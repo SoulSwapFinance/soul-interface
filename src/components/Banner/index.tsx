@@ -10,7 +10,6 @@ import { classNames } from 'functions/styling'
 import ExternalLink from 'components/ExternalLink'
 import { featureEnabled } from 'functions/feature'
 import { Feature as Features } from 'enums'
-import Typography from 'components/Typography'
 
 
 export const Global: FC = () => (
@@ -299,12 +298,12 @@ export const BondsBanner: FC = () => (
             href="https://soulswapfinance.medium.com/owning-our-liquidity-via-our-innovative-soul-bonds-podl-592c2849ceed" target="_blank" rel="noreferrer"
             className="font-bold text-white text-lg"
           >
-            <div className={`flex p-2 rounded-2xl bg-purple border hover:border-2 m-2 animate-pulse justify-center`}>
-              <Typography className="flex justify-center text-lg font-bold">
+            <Button variant="filled" color="purple" size="sm">
+              <span className="justify-center">
                 {' '}
-                Read Article Before Bonding ↗
-              </Typography>
-            </div>
+                Introducing: Soul Bonds ↗
+              </span>
+            </Button>
           </ExternalLink>
         </p>
       </div>
