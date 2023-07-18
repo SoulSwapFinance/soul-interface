@@ -1,9 +1,8 @@
 import { ChainId, Currency, Token, USDC_ADDRESS, WNATIVE } from 'sdk'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-import { DAI, USDC, USDT } from 'constants/index'
+import { DAI, USDC } from 'sdk'
 import { NETWORKS_INFO } from 'constants/networks'
-// import { STABLE_COINS_ADDRESS } from 'constants/tokens'
 import { useActiveWeb3React } from 'services/web3'
 import { Field } from 'state/swap/actions'
 
@@ -128,7 +127,7 @@ const isUSDToken = (chainId: ChainId | undefined, currency: Currency | undefined
     return false
   }
   const usdTokenAddresses = [
-    USDT[chainId].address.toLowerCase(),
+    // USDT[chainId].address.toLowerCase(),
     USDC[chainId].address.toLowerCase(),
     DAI[chainId].address.toLowerCase(),
     '0xe9e7cea3dedca5984780bafc599bd69add087d56', //BUSD
