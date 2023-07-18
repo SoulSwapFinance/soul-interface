@@ -11,6 +11,7 @@ export enum Feature {
   EXPLORE = 'Explore',
   LIQUIDITY = 'Liquidity',
   LIQUIDITY_MINING = 'Liquidity Mining',
+  BOND = 'Bond',
   BONDS = 'Bonds',
   COFFINBOX = 'CoffinBox',
   UNDERWORLD = 'Underworld',

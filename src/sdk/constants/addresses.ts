@@ -610,10 +610,6 @@ export const MULTI_USDC_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75',
 }
 
-export const AXL_USDC_ADDRESS: AddressMap = {
-  [ChainId.FANTOM]: '0x1B6382DBDEa11d97f24495C9A90b7c88469134a4',
-}
-
 export const LZ_USDC_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x28a92dde19D9989F39A49905d7C9C2FAc7799bDf',
 }
@@ -629,7 +625,7 @@ export const BUSD_ADDRESS: AddressMap = {
 }
 
 export const USDT_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
+  [ChainId.ETHEREUM]: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
   [ChainId.TELOS]: '',
   [ChainId.FANTOM]: '0x049d68029688eAbF473097a2fC38ef61633A3C7A',
   [ChainId.BSC]: '',
@@ -639,7 +635,7 @@ export const USDT_ADDRESS: AddressMap = {
 }
 
 export const WETH_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
+  [ChainId.ETHEREUM]: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
   [ChainId.TELOS]: '',
   [ChainId.FANTOM]: '0x74b23882a30290451A17c44f4F05243b6b58C76d',
   [ChainId.BSC]: '',
@@ -649,7 +645,7 @@ export const WETH_ADDRESS: AddressMap = {
 }
 
 export const WBTC_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
+  [ChainId.ETHEREUM]: '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599',
   [ChainId.TELOS]: '',
   [ChainId.FANTOM]: '0x321162Cd933E2Be498Cd2267a90534A804051b11',
   [ChainId.BSC]: '',
@@ -673,6 +669,10 @@ export const GRIMEVO_ADDRESS: AddressMap = {
 
 export const LUM_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x4290b33158F429F40C0eDc8f9b9e5d8C5288800c'
+}
+
+export const FMULTI_ADDRESS: AddressMap = {
+  [ChainId.FANTOM]: '0x6CEbb8cD66Fca7E6aca65841Ae3A04B7884F4de8'
 }
 
 export const AVAX_ADDRESS: AddressMap = {
@@ -743,7 +743,7 @@ export const SOUL_MUSDC: AddressMap = {
 
 export const SOUL_USDC: AddressMap = {
   [ChainId.ETHEREUM]: '',
-  [ChainId.FANTOM]: '0x8317f1696612dAc15f4f22135Bf44db905E2d509',
+  [ChainId.FANTOM]: '0x5cED9D6B44a1F7C927AF31A8Af26dEF60C776712', // JUL23 (axlUSDC)
   [ChainId.AVALANCHE]: '0x922fcADa825Dc669798206A35D2D2B455f9A64E7' // SEP22
 }
 
@@ -791,7 +791,7 @@ export const ETH_NATIVE: AddressMap = {
 
 export const USDC_NATIVE: AddressMap = {
   [ChainId.ETHEREUM]: '',
-  [ChainId.FANTOM]: '0x789b53f215F8b992da4Df7A342666Ed47a81Bc1e',   // JUL23
+  [ChainId.FANTOM]: '0xd1A432df5ee2Df3F891F835854ffeA072C273C65',   // JUL23 (axlUSDC)
   [ChainId.AVALANCHE]: '0x864384a54ea644852603778c0C200eF2D6F2Ac2f' // SEP22
 }
 

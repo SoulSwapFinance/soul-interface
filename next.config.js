@@ -219,11 +219,6 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/bond',
-        destination: '/bonds',
-        permanent: true,
-      },
-      {
         source: '/luxor',
         destination: '/luxor/bonds',
         permanent: true,
@@ -309,10 +304,6 @@ const nextConfig = {
         {
           source: '/dashboard',
           destination: '/soul/dashboard',
-        },
-        {
-          source: '/bond',
-          destination: '/bonds',
         },
         {
           source: '/me',

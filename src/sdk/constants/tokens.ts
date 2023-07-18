@@ -1,4 +1,4 @@
-import { FTM_ADDRESS, USDC_ADDRESS, CHANT_ADDRESS, DAI_ADDRESS, WETH9_ADDRESS, WNATIVE_ADDRESS, SOUL_ADDRESS, AXL_USDC_ADDRESS, LZ_USDC_ADDRESS, MULTI_USDC_ADDRESS, FRAX_ADDRESS } from './addresses'
+import { FTM_ADDRESS, USDC_ADDRESS, CHANT_ADDRESS, DAI_ADDRESS, WETH9_ADDRESS, WNATIVE_ADDRESS, SOUL_ADDRESS, LZ_USDC_ADDRESS, MULTI_USDC_ADDRESS, FRAX_ADDRESS, WBTC_ADDRESS, USDT_ADDRESS } from './addresses'
 
 import { ChainId } from '../enums'
 import { Token } from '../entities/Token'
@@ -7,28 +7,32 @@ import { TokenMap } from '../types/TokenMap'
 export const USDC: TokenMap = {
   [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, USDC_ADDRESS[ChainId.ETHEREUM], 6, 'USDC', 'USD Coin'),
   [ChainId.TELOS]: new Token(ChainId.TELOS, USDC_ADDRESS[ChainId.ETHEREUM], 6, 'USDC', 'USD Coin'),
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, AXL_USDC_ADDRESS[ChainId.FANTOM], 6, 'axlUSDC', 'axlUSDC (Axelar)'),
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, USDC_ADDRESS[ChainId.FANTOM], 6, 'USDC', 'USD Coin (Axelar)'),
   [ChainId.BSC]: new Token(ChainId.BSC, USDC_ADDRESS[ChainId.BSC], 18, 'USDC', 'USD Coin'),
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, USDC_ADDRESS[ChainId.AVALANCHE], 6, 'USDC', 'USD Coin'),
   [ChainId.MOONRIVER]: new Token(ChainId.MOONRIVER, USDC_ADDRESS[ChainId.MOONRIVER], 6, 'USDC', 'USD Coin'),
   [ChainId.MATIC]: new Token(ChainId.MATIC, USDC_ADDRESS[ChainId.MATIC], 6, 'USDC', 'USD Coin')
 }
 
+export const USDT: TokenMap = {
+  [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, USDT_ADDRESS[ChainId.ETHEREUM], 6, 'USDT', 'Tether USD'),
+}
+
 export const MULTI_USDC: TokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, MULTI_USDC_ADDRESS[ChainId.FANTOM], 6, 'mUSDC', 'USDC (Multichain)'),
+}
+
+export const MULTI_DAI: TokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, DAI_ADDRESS[ChainId.FANTOM], 18, 'DAI', 'Dai Stablecoin'),
 }
 
 export const LZ_USDC: TokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, LZ_USDC_ADDRESS[ChainId.FANTOM], 6, 'lzUSDC', 'USDC (LayerZero)'),
 }
 
-export const AXL_USDC: TokenMap = {
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, AXL_USDC_ADDRESS[ChainId.FANTOM], 6, 'axlUSDC', 'USDC (Axelar)'),
-}
-
 export const FRAX: TokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, FRAX_ADDRESS[ChainId.FANTOM], 18, 'FRAX', 'Frax'),
-  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, FRAX_ADDRESS[ChainId.FANTOM], 18, 'FRAX', 'Frax'),
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, FRAX_ADDRESS[ChainId.AVALANCHE], 18, 'FRAX', 'Frax'),
 }
 
 export const DAI: TokenMap = {
@@ -44,6 +48,19 @@ export const FTM: TokenMap = {
   [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, FTM_ADDRESS[ChainId.ETHEREUM], 18, 'FTM', 'Fantom'),
 }
 
+export const SOUL: TokenMap = {
+  [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, SOUL_ADDRESS[ChainId.ETHEREUM], 18, 'SOUL', 'Soul Power'),
+  [ChainId.TELOS]: new Token(ChainId.TELOS, SOUL_ADDRESS[ChainId.TELOS], 18, 'SOUL', 'Soul Power'),
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, SOUL_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'Soul Power'),
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, SOUL_ADDRESS[ChainId.AVALANCHE], 18, 'SOUL', 'Soul Power'),
+}
+
+export const WBTC: TokenMap = {
+  [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, WBTC_ADDRESS[ChainId.ETHEREUM], 8, 'WBTC', 'Wrapped BTC'),
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, WBTC_ADDRESS[ChainId.FANTOM], 8, 'WBTC', 'Wrapped BTC'),
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, WBTC_ADDRESS[ChainId.AVALANCHE], 8, 'WBTC', 'Wrapped BTC'),
+}
+
 export const USD: TokenMap = {
   ...USDC,
 }
@@ -56,7 +73,6 @@ export const WETH9: TokenMap = {
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, WETH9_ADDRESS[ChainId.AVALANCHE], 18, 'WETH', 'Wrapped Ether'),
   [ChainId.MOONRIVER]: new Token(ChainId.MOONRIVER, WETH9_ADDRESS[ChainId.MOONRIVER], 18, 'WETH', 'Wrapped Ether'),
 }
-
 export const WNATIVE: TokenMap = {
   [ChainId.ETHEREUM]: WETH9[ChainId.ETHEREUM],
   [ChainId.BSC]: new Token(ChainId.BSC, WNATIVE_ADDRESS[ChainId.BSC], 18, 'WBNB', 'Wrapped BNB'),
@@ -65,15 +81,4 @@ export const WNATIVE: TokenMap = {
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, WNATIVE_ADDRESS[ChainId.AVALANCHE], 18, 'WAVAX', 'Wrapped Avalanche'),
   [ChainId.MOONRIVER]: new Token(ChainId.MOONRIVER, WNATIVE_ADDRESS[ChainId.MOONRIVER], 18, 'WMOVR', 'Wrapped Moonriver'),
   [ChainId.MATIC]: new Token(ChainId.MATIC, WNATIVE_ADDRESS[ChainId.MATIC], 18, 'WMATIC', 'Wrapped Matic'),
-}
-
-export const SOUL: TokenMap = {
-  [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, SOUL_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'Soul Power'),
-  [ChainId.TELOS]: new Token(ChainId.TELOS, SOUL_ADDRESS[ChainId.TELOS], 18, 'SOUL', 'Soul Power'),
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, SOUL_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'Soul Power'),
-  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, SOUL_ADDRESS[ChainId.AVALANCHE], 18, 'SOUL', 'Soul Power'),
-}
-
-export const CHANT: TokenMap = {
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, CHANT_ADDRESS[ChainId.FANTOM], 18, 'CHANT', 'Enchanted Soul'),
 }

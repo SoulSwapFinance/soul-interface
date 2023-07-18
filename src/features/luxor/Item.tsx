@@ -26,7 +26,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { usePendingAmount, useClaimableAmount, useBondContract, useRemainingVesting } from './hooks'
 import { useActiveWeb3React } from 'services/web3'
 import { LUX_ADDRESS } from 'constants/addresses'
-import { DAI } from 'constants/tokens'
+import { DAI } from 'sdk'
 import CurrencyInputPanel from 'components/CurrencyInputPanel'
 
 const BondItem = ({ bond, ...rest }) => {

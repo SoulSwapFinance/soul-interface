@@ -8,10 +8,8 @@ import {
   SOUL_FTM_PAIR,
   SEANCE_USDC_PAIR,
   FTM_USDC_PAIR,
-  SCARAB_ADDRESS,
   SAFE_ADDRESS,
   ATOMIC_SWAP_ADDRESS,
-  SOUL_USDC_PAIR,
   LUX_ADDRESS,
   TEAM_WALLET_ADDRESS,
   WLUM_ADDRESS,
@@ -23,7 +21,6 @@ import {
   LUX_TREASURY_ADDRESS,
   SOR_STAKING_REWARDS_ADDRESS,
   SUMMONER_ASSISTANT_ADDRESS,
-  ONCHAIN_AGGREGATOR_ORACLE,
   OFFCHAIN_AGGREGATOR_ORACLE,
   SPOOKY_ROUTER_ADDRESS,
   SPIRIT_ROUTER_ADDRESS,
@@ -303,7 +300,7 @@ export function useSafeContract(withSignerIfPossible?: boolean): Contract | null
 
 export function useSoulSeanceContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_SEANCE_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
+  return useContract(chainId && SOUL_SEANCE_PAIR[250], ISoulSwapPairABI, withSignerIfPossible)
 }
 
 export function useSoulFtmContract(withSignerIfPossible?: boolean): Contract | null {
@@ -318,12 +315,12 @@ export function useBoringHelperContract(): Contract | null {
 
 export function useSeanceUsdcContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SEANCE_USDC_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
+  return useContract(chainId && SEANCE_USDC_PAIR[250], ISoulSwapPairABI, withSignerIfPossible)
 }
 
 export function useFtmUsdcContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && FTM_USDC_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
+  return useContract(chainId && FTM_USDC_PAIR[250], ISoulSwapPairABI, withSignerIfPossible)
 }
 
 export function useEnchantContract(withSignerIfPossible = true): Contract | null {
@@ -333,7 +330,7 @@ export function useEnchantContract(withSignerIfPossible = true): Contract | null
 
 export function useLuxorContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && LUX_ADDRESS[chainId], LUXOR_ABI, withSignerIfPossible)
+  return useContract(chainId && LUX_ADDRESS[250], LUXOR_ABI, withSignerIfPossible)
 }
 
 export function useTeamContract(withSignerIfPossible = true): Contract | null {
@@ -353,17 +350,17 @@ export function useLuxorStakingContract(withSignerIfPossible = true): Contract |
 
 export function useLuxorStakeHelperContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && LUXOR_STAKING_HELPER_ADDRESS[chainId], LUXOR_STAKING_HELPER_ABI, withSignerIfPossible)
+  return useContract(chainId && LUXOR_STAKING_HELPER_ADDRESS[250], LUXOR_STAKING_HELPER_ABI, withSignerIfPossible)
 }
 
 export function useWrappedLumensContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && WLUM_ADDRESS[chainId], WLUM_ABI, withSignerIfPossible)
+  return useContract(chainId && WLUM_ADDRESS[250], WLUM_ABI, withSignerIfPossible)
 }
 
 export function useLumensContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && LUM_ADDRESS[chainId], LUM_ABI, withSignerIfPossible)
+  return useContract(chainId && LUM_ADDRESS[250], LUM_ABI, withSignerIfPossible)
 }
 
 export function useEnchantHelperContract(withSignerIfPossible = true): Contract | null {
