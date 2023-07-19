@@ -23,7 +23,7 @@ import { useLuxorPrice } from 'hooks/getPrices'
 import { useLuxorInfo, useLuxorUserInfo } from 'hooks/useAPI'
 import useSendTransaction from 'hooks/useSendTransaction'
 import { isMobile } from 'react-device-detect'
-import { LuxorBanner } from 'components/Banner'
+import { SunsetBanner } from 'components/Banner'
 
 export default function Stake() {
   const addTransaction = useTransactionAdder()
@@ -189,7 +189,7 @@ export default function Stake() {
         <title>Staking | Luxor</title>
         <meta key="description" name="description" />
       </Head>
-      <LuxorBanner chainId={chainId} />
+      <SunsetBanner />
       <div className="flex ml-2 mr-2 mb-4 gap-1 mt-4 items-center justify-center">
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/dashboard'}>
