@@ -12,6 +12,7 @@ import Image from 'next/image'
 import React, { FC } from 'react'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { ArrowLeft } from 'react-feather'
+import { Button } from 'components/Button'
 
 interface NetworkGuardProps {
   children?: React.ReactChild
@@ -43,20 +44,20 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
         onDismiss={() => null}
         transparent={true}
       >
-        <div 
+        <div
           className={
             `flex flex-col bg-dark-800 rounded-2xl border border-[${getChainColor(chainId)}] gap-2 justify-center p-4 mt-10 lg:mt-0`
           }
         >
-          <Typography 
-            className={ `uppercase text-white bg-dark-900 p-3 rounded-2xl text-center text-lg mb-4 tracking-[.2rem]` } 
+          <Typography
+            className={`uppercase text-white bg-dark-900 p-3 rounded-2xl text-center text-lg mb-4 tracking-[.2rem]`}
             weight={700}
           >
             {`SWITCH CHAIN`}
           </Typography>
           <div className="flex gap-5 md:gap-10 justify-center">
             {supportedNetworks.map((key: string, idx: number) => (
-              <button
+              <Button
                 className={`text-primary hover:text-white flex items-center flex-col gap-2 justify-start`}
                 key={idx}
                 onClick={() => {
@@ -80,35 +81,35 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
                     src={NETWORK_ICON[key]}
                     alt="Switch Network"
                     className={
-                        `rounded-2xl p-3 m-3 filter drop-shadow-currencyLogo
+                      `rounded-2xl p-3 m-3 filter drop-shadow-currencyLogo
                         border hover:border-${getChainColorCode(Number(key))}
                         bg-${getChainColorCode(Number(key))}`
-                      }
+                    }
                     width={64}
                     height={64}
                   />
                 </div>
-              </button>
+              </Button>
             ))}
           </div>
           <NavLink
-                  href='/swap'
-                >
-                  {/* <ArrowLeft /> */}
-                  <div 
-                    className={
-                      `flex  gap-4 p-2 rounded-2xl border hover:border-${getChainColorCode(chainId)} bg-${getChainColorCode(chainId)} text-white mt-1 text-sm font-bold justify-center`
-                    }>
-                      <div className={'flex justify-end'}>
-                    {`←`}
-                      </div>
-                    <div className={
-                      'flex justify-left'
-                    }>
-                    { `Return to Exchange` }
-                    </div>
-                  </div>
-                </NavLink>
+            href='/swap'
+          >
+            {/* <ArrowLeft /> */}
+            <div
+              className={
+                `flex  gap-4 p-2 rounded-2xl border hover:border-${getChainColorCode(chainId)} bg-${getChainColorCode(chainId)} text-white mt-1 text-sm font-bold justify-center`
+              }>
+              <div className={'flex justify-end'}>
+                {`←`}
+              </div>
+              <div className={
+                'flex justify-left'
+              }>
+                {`Return to Exchange`}
+              </div>
+            </div>
+          </NavLink>
         </div>
         {/* <Typography className="text-xl">{NETWORK_LABEL[key]}</Typography> */}
       </HeadlessUIModal.Controlled>

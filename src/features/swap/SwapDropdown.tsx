@@ -34,6 +34,9 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
 
   const isAggregator = asPath.startsWith('/aggregator')
     || asPath.startsWith('/exchange/aggregator')
+  
+  const isCrosschain = asPath.startsWith('/crosschain')
+    || asPath.startsWith('/exchange/crosschain')
 
   const isExchange = router.pathname.startsWith('/swap')
     || (router.pathname.startsWith('/exchange/swap') && !router.pathname.startsWith('/exchange/swap/limit'))
@@ -50,7 +53,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
 
   return (
     <div className={`flex mt-2 mb-2 items-center justify-center gap-4 border-2 border-dark-700 rounded-lg`}>
-      <div className={`flex gap-8 sm:gap-16 mr-8 sm:mr-0`}>
+      <div className={`flex gap-6 sm:gap-8 mr-8 sm:mr-0`}>
         {/* {featureEnabled(Feature.LIQUIDITY, chainId) && */}
         <NavLink
           className={classNames(
@@ -170,6 +173,37 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
                 className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
               >
                 {`Aggregate`}
+              </Typography>
+            </div>
+          </NavLink>
+        }
+        
+        {featureEnabled(Feature.CROSSCHAIN, chainId) &&
+          <NavLink
+            className={classNames(
+              ecoStyle
+            )}
+            activeClassName={classNames(
+              activeStyle
+            )}
+            href={`/crosschain`}
+          >
+            <div
+              className={classNames(
+                `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
+                isCrosschain && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
+            // onClick={reveal}
+            // onMouseEnter={reveal}
+            // onMouseLeave={conceal}
+            >
+              {/* <MergeIcon
+                  fillPrimary={isAggregator ? `${getChainColor(chainId)}` : `#FFFFFF`}
+                  fillSecondary={isAggregator ? `#FFFFFF` : `${getChainColor(chainId)}`}
+                /> */}
+              <Typography
+                className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
+              >
+                {`xSwap`}
               </Typography>
             </div>
           </NavLink>
