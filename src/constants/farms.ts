@@ -634,14 +634,46 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
     },
-    '0xd1A432df5ee2Df3F891F835854ffeA072C273C65': { // USDC-NATIVE √
+    '0xd1A432df5ee2Df3F891F835854ffeA072C273C65': { // axlUSDC-NATIVE √
       id: 27,
-      address: USDC_NATIVE[ChainId.FANTOM],
+      address: USDC_NATIVE[ChainId.FANTOM].toLowerCase(),
       token0: {
         id: USDC_ADDRESS[ChainId.FANTOM],
         name: 'USD Coin',
         symbol: 'USDC',
         decimals: 6,
+      },
+      token1: {
+        id: WNATIVE_ADDRESS[ChainId.FANTOM], // WFTM
+        name: 'Wrapped Fantom',
+        symbol: 'WFTM',
+        decimals: 18,
+      },
+    },
+    '0x9827713159B666855BdfB53CE0F16aA7b0E30847': { // axlWETH-NATIVE √
+      id: 28,
+      address: ETH_NATIVE[ChainId.FANTOM].toLowerCase(),
+      token0: {
+        id: WETH_ADDRESS[ChainId.FANTOM],
+        name: 'Wrapped Ether',
+        symbol: 'WETH',
+        decimals: 18,
+      },
+      token1: {
+        id: WNATIVE_ADDRESS[ChainId.FANTOM], // WFTM
+        name: 'Wrapped Fantom',
+        symbol: 'WFTM',
+        decimals: 18,
+      },
+    },
+    '0x44DF3a3b162826D7354b4e2495AEF097B6862069': { // axlBTC-NATIVE √
+      id: 29,
+      address: BTC_NATIVE[ChainId.FANTOM].toLowerCase(),
+      token0: {
+        id: WBTC_ADDRESS[ChainId.FANTOM], // WBTC
+        name: 'Wrapped Bitcoin',
+        symbol: 'WETH',
+        decimals: 8,
       },
       token1: {
         id: WNATIVE_ADDRESS[ChainId.FANTOM], // WFTM
