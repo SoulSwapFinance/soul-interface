@@ -1,4 +1,4 @@
-import { ChainId, SOUL_ADDRESS, SOUL_NATIVE, SOUL_USDC, USDC_ADDRESS, WNATIVE_ADDRESS, USDC_NATIVE, MUSDC_NATIVE, BTC_NATIVE, ETH_NATIVE, DAI_USDC, WBTC_ADDRESS, WETH_ADDRESS, DAI_ADDRESS, BNB_NATIVE, BNB_ADDRESS, LINK_ADDRESS } from '../sdk'
+import { ChainId, SOUL_ADDRESS, SOUL_NATIVE, SOUL_USDC, USDC_ADDRESS, WNATIVE_ADDRESS, USDC_NATIVE, MUSDC_NATIVE, BTC_NATIVE, ETH_NATIVE, DAI_USDC, WBTC_ADDRESS, WETH_ADDRESS, DAI_ADDRESS, BNB_NATIVE, BNB_ADDRESS, LINK_ADDRESS, MULTI_WETH_ADDRESS } from '../sdk'
 
 export type TokenInfo = {
   id: string
@@ -287,9 +287,9 @@ export const POOLS: AddressMap = {
         decimals: 8,
       },
     },
-    '0xC615a5fd68265D9Ec6eF60805998fa5Bb71972Cb': { // FTM-ETH
+    '0xC615a5fd68265D9Ec6eF60805998fa5Bb71972Cb': { // FTM-mETH
       id: 5,
-      address: '0xc615a5fd68265d9ec6ef60805998fa5bb71972cb', // FTM-ETH
+      address: '0xc615a5fd68265d9ec6ef60805998fa5bb71972cb', // FTM-mETH
       token0: {
         id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
         name: 'Wrapped Fantom',
@@ -297,7 +297,7 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
       token1: {
-        id: WETH_ADDRESS[ChainId.FANTOM], // WETH
+        id: MULTI_WETH_ADDRESS[ChainId.FANTOM], // WETH
         name: 'Wrapped Ethereum',
         symbol: 'WETH',
         decimals: 18,
@@ -361,7 +361,7 @@ export const POOLS: AddressMap = {
         decimals: 8,
       },
       token1: { // WETH
-        id: WETH_ADDRESS[ChainId.FANTOM], // WETH
+        id: MULTI_WETH_ADDRESS[ChainId.FANTOM], // WETH
         name: 'Wrapped Ethereum',
         symbol: 'WETH',
         decimals: 18,
@@ -393,7 +393,7 @@ export const POOLS: AddressMap = {
         decimals: 6,
       },
       token1: { // WETH
-        id: WETH_ADDRESS[ChainId.FANTOM], // WETH
+        id: MULTI_WETH_ADDRESS[ChainId.FANTOM], // WETH
         name: 'Wrapped Ethereum',
         symbol: 'WETH',
         decimals: 18,
@@ -487,7 +487,7 @@ export const POOLS: AddressMap = {
       address: '0x74b23882a30290451a17c44f4f05243b6b58c76d',
       type: 'underworld',
       token0: {
-        id: WETH_ADDRESS[ChainId.FANTOM], // WETH
+        id: MULTI_WETH_ADDRESS[ChainId.FANTOM], // WETH
         name: 'Wrapped ETH',
         symbol: 'WETH',
         decimals: 18,
@@ -552,10 +552,10 @@ export const POOLS: AddressMap = {
     },
     '0x0a55Eb040C5183c5784A03F34bCEb3963f52b5a0': {  // USDC-ETH √
       id: 21, 
-      address: WETH_ADDRESS[ChainId.FANTOM], // ETH
+      address: MULTI_WETH_ADDRESS[ChainId.FANTOM], // ETH
       type: 'underworld',
       token0: {
-        id: WETH_ADDRESS[ChainId.FANTOM], // ETH
+        id: MULTI_WETH_ADDRESS[ChainId.FANTOM], // ETH
         name: 'Wrapped Ethereum',
         symbol: 'ETH',
         decimals: 18,

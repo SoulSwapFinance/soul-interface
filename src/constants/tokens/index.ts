@@ -1,5 +1,5 @@
-import { SURV_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, ETH_ADDRESS } from 'constants/addresses'
-import { BNB_ADDRESS, BUSD_ADDRESS, ChainId, DAI_ADDRESS, Ether, FMULTI_ADDRESS, FRAX_ADDRESS, LINK_ADDRESS, LUX_ADDRESS, NATIVE, SEANCE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
+import { SURV_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, ETH_ADDRESS, MULTI_WETH_ADDRESS } from 'constants/addresses'
+import { BNB_ADDRESS, BUSD_ADDRESS, ChainId, DAI_ADDRESS, Ether, FMULTI_ADDRESS, FRAX_ADDRESS, LINK_ADDRESS, LUX_ADDRESS, MULTI_WBTC_ADDRESS, NATIVE, SEANCE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
 
 import { SupportedChainId } from '../chains'
 
@@ -33,14 +33,16 @@ export const FANTOM: { [key: string]: Token } = {
   MUSDC: new Token(ChainId.FANTOM, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'mUSDC', 'USDC (Multichain)'),
   LINK: new Token(ChainId.FANTOM, LINK_ADDRESS[ChainId.FANTOM], 18, 'LINK', 'Chainlink'),
   BNB: new Token(ChainId.FANTOM, BNB_ADDRESS[ChainId.FANTOM], 18, 'BNB', 'Binance'),
-  WBTC: new Token(ChainId.FANTOM, '0x321162Cd933E2Be498Cd2267a90534A804051b11', 8, 'WBTC', 'Wrapped Bitcoin'),
+  MWBTC: new Token(ChainId.FANTOM, MULTI_WBTC_ADDRESS[ChainId.FANTOM], 8, 'mWBTC', 'Wrapped Bitcoin (Multichain)'),
+  WBTC: new Token(ChainId.FANTOM, WBTC_ADDRESS[ChainId.FANTOM], 8, 'WBTC', 'Wrapped Bitcoin (Axelar)'),
   DAI: new Token(ChainId.FANTOM, '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', 18, 'DAI', 'Dai Stablecoin'),
   SOR: new Token(ChainId.FANTOM, '0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A', 18, 'SOR', 'SOR'),
   SURV: new Token(ChainId.FANTOM, SURV_ADDRESS[ChainId.FANTOM], 18, 'SURV', 'SurveyorDAO'),
   GRIMEVO: new Token(ChainId.FANTOM, '0x0a77866C01429941BFC7854c0c0675dB1015218b', 18, 'GRIMEVO', 'Grim EVO'),
   USDT: new Token(ChainId.FANTOM, '0x049d68029688eAbF473097a2fC38ef61633A3C7A', 6, 'USDT', 'Frapped USDT'),
   FUSD: new Token(ChainId.FANTOM, '0xAd84341756Bf337f5a0164515b1f6F993D194E1f', 18, 'FUSD', 'Fantom USD'), // 27 AUG
-  WETH: new Token(ChainId.FANTOM, '0x74b23882a30290451A17c44f4F05243b6b58C76d', 18, 'WETH', 'Wrapped Ether'),
+  WETH: new Token(ChainId.FANTOM, WETH_ADDRESS[ChainId.FANTOM], 18, 'WETH', 'Wrapped Ether (Axelar)'),
+  MWETH: new Token(ChainId.FANTOM, MULTI_WETH_ADDRESS[ChainId.FANTOM], 18, 'mWETH', 'Wrapped Ether (Multichain)'),
   MIM: new Token(ChainId.FANTOM, '0x82f0B8B456c1A451378467398982d4834b6829c1', 18, 'MIM', 'Magic Internet Money'),
   AVAX: new Token(ChainId.FANTOM, '0x511D35c52a3C244E7b8bd92c0C297755FbD89212', 18, 'AVAX', 'Avalanche'),
   ENCHANT: new Token(ChainId.FANTOM, '0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a', 18, 'ENCHANT', 'Enchantment'),
@@ -140,8 +142,12 @@ export const SOR: ChainTokenMap = {
 // WETH
 export const WETH: ChainTokenMap = {
   [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, WNATIVE_ADDRESS[ChainId.ETHEREUM], 18, 'WETH', 'Wrapped ETH'),
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x74b23882a30290451A17c44f4F05243b6b58C76d', 18, 'WETH', 'Wrapped ETH'),
-  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, WETH_ADDRESS[ChainId.AVALANCHE], 18, 'WETH', 'Wrapped ETH'),
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0xfe7eDa5F2c56160d406869A8aA4B2F365d544C7B', 18, 'axlETH', 'Wrapped ETH (Axelar)'),
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, WETH_ADDRESS[ChainId.AVALANCHE], 18, 'mETH', 'Wrapped ETH'),
+}
+
+export const MWETH: ChainTokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x74b23882a30290451A17c44f4F05243b6b58C76d', 18, 'WETH', 'Wrapped ETH (Multichain)'),
 }
 
 // WBTC

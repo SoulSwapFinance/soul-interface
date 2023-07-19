@@ -1,5 +1,9 @@
-import { ChainId, SOUL_ADDRESS, USDC_ADDRESS, WNATIVE_ADDRESS, SOUL_NATIVE, DAI_ADDRESS, BNB_ADDRESS, SOR_ADDRESS, WETH_ADDRESS, WBTC_ADDRESS, CRV_ADDRESS, GRIMEVO_ADDRESS, FUSD_ADDRESS, USDT_ADDRESS, SOUL_USDC, SOUL_MUSDC, USDC_NATIVE, MUSDC_NATIVE, BTC_NATIVE, ETH_NATIVE, DAI_USDC, AVAX_ADDRESS, BNB_NATIVE, DAI_NATIVE, BTC_ETH, AVAX_NATIVE, ETH_USDC, BTC_USDC, BTC_MUSDC, LINK_ADDRESS, LINK_NATIVE,
-MULTI_USDC_ADDRESS } from 'sdk'
+import { ChainId, SOUL_ADDRESS, USDC_ADDRESS, WNATIVE_ADDRESS, SOUL_NATIVE, DAI_ADDRESS, BNB_ADDRESS, SOR_ADDRESS, WETH_ADDRESS, WBTC_ADDRESS, FUSD_ADDRESS, USDT_ADDRESS, SOUL_USDC, SOUL_MUSDC, USDC_NATIVE, MUSDC_NATIVE, BTC_NATIVE, ETH_NATIVE, DAI_USDC, AVAX_ADDRESS, BNB_NATIVE, DAI_NATIVE, MULTI_BTC_ETH, AVAX_NATIVE, ETH_USDC, BTC_USDC, BTC_MUSDC, LINK_ADDRESS, LINK_NATIVE,
+MULTI_USDC_ADDRESS, 
+MULTI_WETH_ADDRESS,
+MULTI_WBTC_ADDRESS,
+MBTC_NATIVE,
+METH_NATIVE} from 'sdk'
 
 /*/ rules /*/
 // `token0Symbol` && `token1Symbol`: always use "w" prefix
@@ -151,9 +155,9 @@ export const InactiveFantomPools = [
     token0Symbol: 'WETH',
     token1Symbol: 'BTC',
     lpSymbol: 'ETH-BTC',
-    lpAddress: BTC_ETH[ChainId.FANTOM],
-    token0Address: WETH_ADDRESS[ChainId.FANTOM],
-    token1Address: WBTC_ADDRESS[ChainId.FANTOM],
+    lpAddress: MULTI_BTC_ETH[ChainId.FANTOM],
+    token0Address: MULTI_WETH_ADDRESS[ChainId.FANTOM],
+    token1Address: MULTI_WBTC_ADDRESS[ChainId.FANTOM],
   },
   { // 0
     pid: 7,
@@ -165,6 +169,28 @@ export const InactiveFantomPools = [
     lpAddress: AVAX_NATIVE[ChainId.FANTOM],
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: AVAX_ADDRESS[ChainId.FANTOM],
+  },
+  { // 0
+    pid: 4,
+    type: 'swap',
+    decimals: 18,
+    token0Symbol: 'WFTM',
+    token1Symbol: 'BTC',
+    lpSymbol: 'FTM-BTC',
+    lpAddress: MBTC_NATIVE[ChainId.FANTOM],
+    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+    token1Address: MULTI_WBTC_ADDRESS[ChainId.FANTOM],
+  },
+  { // 0
+    pid: 5,
+    type: 'swap',
+    decimals: 18,
+    token0Symbol: 'WFTM',
+    token1Symbol: 'ETH',
+    lpSymbol: 'FTM-ETH',
+    lpAddress: METH_NATIVE[ChainId.FANTOM],
+    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+    token1Address: MULTI_WETH_ADDRESS[ChainId.FANTOM],
   },
 ]
 
@@ -202,19 +228,8 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: USDC_ADDRESS[ChainId.FANTOM],
   },
-  { // 100
-    pid: 4,
-    type: 'swap',
-    decimals: 18,
-    token0Symbol: 'WFTM',
-    token1Symbol: 'BTC',
-    lpSymbol: 'FTM-BTC',
-    lpAddress: BTC_NATIVE[ChainId.FANTOM],
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: WBTC_ADDRESS[ChainId.FANTOM],
-  },
-  { // 100
-    pid: 5,
+  { // 200
+    pid: 28,
     type: 'swap',
     decimals: 18,
     token0Symbol: 'WFTM',
@@ -223,5 +238,16 @@ export const FantomPools = [
     lpAddress: ETH_NATIVE[ChainId.FANTOM],
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: WETH_ADDRESS[ChainId.FANTOM],
+  },
+ { // 200
+    pid: 29,
+    type: 'swap',
+    decimals: 18,
+    token0Symbol: 'WFTM',
+    token1Symbol: 'BTC',
+    lpSymbol: 'FTM-BTC',
+    lpAddress: BTC_NATIVE[ChainId.FANTOM],
+    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+    token1Address: WBTC_ADDRESS[ChainId.FANTOM],
   },
 ]

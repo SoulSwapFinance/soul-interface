@@ -1,4 +1,4 @@
-import { AVAX_ADDRESS, BNB_ADDRESS, ChainId, DAI_ADDRESS, DAI_BNB_MARKET, DAI_ETH_MARKET, DAI_NATIVE_MARKET, MULTI_USDC_ADDRESS, NATIVE_DAI_MARKET, SEANCE_ADDRESS, SOUL_ADDRESS, SOUL_USDC, SOUL_MUSDC, USDC_ADDRESS, USDC_DAI_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
+import { AVAX_ADDRESS, BNB_ADDRESS, ChainId, DAI_ADDRESS, DAI_BNB_MARKET, DAI_ETH_MARKET, DAI_NATIVE_MARKET, MULTI_USDC_ADDRESS, NATIVE_DAI_MARKET, SEANCE_ADDRESS, SOUL_ADDRESS, SOUL_USDC, SOUL_MUSDC, USDC_ADDRESS, USDC_DAI_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS, MULTI_WETH_ADDRESS, MULTI_WBTC_ADDRESS, METH_NATIVE, MBTC_NATIVE } from 'sdk'
 
 export const AvalanchePools = [
   {
@@ -151,9 +151,9 @@ export const FantomPools = [
       token0Symbol: 'WFTM',
       token1Symbol: 'ETH',
       lpSymbol: 'FTM-ETH',
-      lpAddress: '0xC615a5fd68265D9Ec6eF60805998fa5Bb71972Cb',
+      lpAddress: METH_NATIVE[ChainId.FANTOM],
       token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-      token1Address: WETH_ADDRESS[ChainId.FANTOM],
+      token1Address: MULTI_WETH_ADDRESS[ChainId.FANTOM],
     },
     
     {
@@ -164,9 +164,9 @@ export const FantomPools = [
       token0Symbol: 'WFTM',
       token1Symbol: 'BTC',
       lpSymbol: 'FTM-BTC',
-      lpAddress: '0xecB41D6B5885E75a149EDA173e92267aa271D895',
+      lpAddress: MBTC_NATIVE[ChainId.FANTOM],
       token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-      token1Address: WBTC_ADDRESS[ChainId.FANTOM]
+      token1Address: MULTI_WBTC_ADDRESS[ChainId.FANTOM]
     },
 
     /* {
@@ -177,8 +177,8 @@ export const FantomPools = [
     token1: 'BTC',
     lpSymbol: 'ETH-BTC',
     lpAddress: '0x1fc954d3484bc21e0ce53a6648a35bbfc03dc9d0',
-    token0Address: WETH_ADDRESS[ChainId.FANTOM],
-    token1Address: WBTC_ADDRESS[ChainId.FANTOM]
+    token0Address: MULTI_WETH_ADDRESS[ChainId.FANTOM],
+    token1Address: MULTI_WBTC_ADDRESS[ChainId.FANTOM]
   }, */
  
   {
@@ -223,7 +223,7 @@ export const FantomPools = [
     token1Symbol: 'DAI',
     lpSymbol: 'DAI-ETH',
     lpAddress: DAI_ETH_MARKET[ChainId.FANTOM],
-    token0Address: WETH_ADDRESS[ChainId.FANTOM],
+    token0Address: MULTI_WETH_ADDRESS[ChainId.FANTOM],
     token1Address: DAI_ADDRESS[ChainId.FANTOM],
   },
   { // LENDING

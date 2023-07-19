@@ -25,7 +25,7 @@
         },
         {
             "id": "usd-coin-multi",
-            "name": "USDC (Multi)",
+            "name": "USDC (Multichain)",
             "rank": 56,
             "logo": "https://cryptologos.cc/logos/usd-coin-usdc-logo.svg",
             "symbol": "mUSDC",
@@ -33,10 +33,18 @@
         },
         {
             "id": "usd-coin",
-            "name": "USD Coin",
+            "name": "USD Coin (Axelar)",
             "rank": 4,
             "logo": "https://cryptologos.cc/logos/usd-coin-usdc-logo.svg",
             "symbol": "USDC",
+            "address": "0x1B6382DBDEa11d97f24495C9A90b7c88469134a4"
+        },
+        {
+            "id": "lz-usd-coin",
+            "name": "USD Coin (LayerZero)",
+            "rank": 5,
+            "logo": "https://cryptologos.cc/logos/usd-coin-usdc-logo.svg",
+            "symbol": "lzUSDC",
             "address": "0x28a92dde19D9989F39A49905d7C9C2FAc7799bDf"
         },
         {
@@ -66,11 +74,18 @@
         {
             "id": "ethereum",
             "name": "Ethereum",
-            "symbol": "ETH",
             "logo": "https://cryptologos.cc/logos/ethereum-eth-logo.svg",
             "rank": 2,
-            "address": "0x74b23882a30290451A17c44f4F05243b6b58C76d",
-            "decimals": 18
+            "symbol": "ETH",
+            "address": "0xfe7eDa5F2c56160d406869A8aA4B2F365d544C7B"
+        },
+        {
+            "id": "multi-ethereum",
+            "name": "Ethereum (Multichain)",
+            "logo": "https://cryptologos.cc/logos/ethereum-eth-logo.svg",
+            "rank": 3,
+            "symbol": "mETH",
+            "address": "0x74b23882a30290451A17c44f4F05243b6b58C76d"
         },
         {
             "id": "wrapped-avax",
@@ -82,10 +97,18 @@
         },
         {
             "id": "wrapped-bitcoin",
-            "name": "Wrapped Bitcoin",
+            "name": "Wrapped Bitcoin (Axelar)",
             "rank": 393,
             "logo": "https://cryptologos.cc/logos/wrapped-bitcoin-wbtc-logo.svg",
             "symbol": "WBTC",
+            "address": "0x448d59B4302aB5d2dadf9611bED9457491926c8e"
+        },
+        {
+            "id": "multi-wrapped-bitcoin",
+            "name": "Wrapped Bitcoin (Multichain)",
+            "rank": 394,
+            "logo": "https://cryptologos.cc/logos/wrapped-bitcoin-wbtc-logo.svg",
+            "symbol": "mWBTC",
             "address": "0x321162Cd933E2Be498Cd2267a90534A804051b11"
         },
         {
