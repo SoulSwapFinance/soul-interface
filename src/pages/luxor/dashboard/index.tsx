@@ -17,7 +17,7 @@ import LuxorGlowShadow from 'components/LuxorGlowShadow'
 import { useTokenInfo, usePairInfo, useLuxorInfo } from 'hooks/useAPI'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
-import { LuxorBanner } from 'components/Banner'
+import { SunsetBanner } from 'components/Banner'
 import { useActiveWeb3React } from 'services/web3'
 export default function Dashboard() {
   const { chainId } = useActiveWeb3React()
@@ -277,7 +277,7 @@ const HideOnMobile = styled.div`
         <title>Dashboard | Luxor</title>
         <meta key="description" name="description" />
       </Head>
-      <LuxorBanner chainId={chainId} />
+      <SunsetBanner />
       <div className="grid grid-cols ml-3 mr-3 mt-4 justify-center">
     <HideOnMobile>
       <div className="py-1 mb-1 mt-3 ml-3 mr-3 bg-yellow" />

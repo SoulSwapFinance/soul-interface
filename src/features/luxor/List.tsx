@@ -4,6 +4,7 @@ import LuxorRowRender from './Row'
 import { FantomBonds } from './Bonds'
 import { ChainId } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
+// import { SunsetBanner } from 'components/Banner'
 
 export const FtmList = () => {
   const { chainId } = useActiveWeb3React()
