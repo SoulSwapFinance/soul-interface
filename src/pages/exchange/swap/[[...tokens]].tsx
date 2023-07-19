@@ -37,7 +37,7 @@ import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { currencyId } from 'functions'
 import { NextSeo } from 'next-seo'
 
-import { FollowBanner } from 'components/Banner'
+// import { FollowBanner } from 'components/Banner'
 
 const Exchange = () => {
   const loadedUrlParams = useDefaultsFromURLSearch()
@@ -413,7 +413,7 @@ const Exchange = () => {
         <DoubleGlowShadowV2>
           
           <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
-          <FollowBanner />
+          {/* <FollowBanner /> */}
 
             {/* <SwapLayoutCard> */}
             {/* <div

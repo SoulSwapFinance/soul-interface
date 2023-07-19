@@ -6,21 +6,22 @@ import {
   useUserSingleHopOnly,
 } from '../../state/user/hooks'
 import { useModalOpen, useToggleSettingsMenu } from '../../state/application/hooks'
-// import Image from '../../components/Image'
 
 import  { ApplicationModal } from 'state/application/reducer'
-// import { Button } from 'components/Button'
-// import Modal from 'components/DefaultModal'
 import QuestionHelper from 'components/QuestionHelper'
 import { Toggle } from 'components/Toggle'
 import Typography from 'components/Typography'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import { useActiveWeb3React } from 'services/web3'
 import TransactionSettings from 'components/TransactionSettings'
-// import ModalHeader from 'components/Modal/Header'
 import { getChainColor } from 'constants/chains'
 import { classNames } from 'functions'
 import CogIcon from 'components/Icons/exchange/CogIcon'
+
+// import Image from '../../components/Image'
+// import { Button } from 'components/Button'
+// import Modal from 'components/DefaultModal'
+// import ModalHeader from 'components/Modal/Header'
 
 export default function SettingsTab({ placeholderSlippage }: { placeholderSlippage?: Percent }) {
   const { chainId } = useActiveWeb3React()
@@ -50,7 +51,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
       <div
         className={
           `flex items-center justify-center
-          w-5 h-5 sm:w-6 sm:h-6 rounded cursor-pointer sm:absolute sm:bottom-28 sm:mb-5 sm:right-1.5
+          w-5 h-5 sm:w-6 sm:h-6 rounded cursor-pointer sm:absolute sm:bottom-36 sm:mb-7 sm:right-1.5
           `
         }
         onClick={toggle}

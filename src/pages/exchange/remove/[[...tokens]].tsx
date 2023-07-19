@@ -39,7 +39,7 @@ import { getChainColorCode } from 'constants/chains'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import { PoolBalances } from 'features/portfolio/AssetBalances/pools'
 import PairChart from 'pages/analytics/pairs/embedded/[id]'
-import { MultichainBanner } from 'components/Banner'
+// import { MultichainBanner } from 'components/Banner'
 
 const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(10, 1000) // 1%
 
@@ -704,7 +704,7 @@ export default function Remove() {
 
       <DoubleGlowShadowV2>
         <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-      <MultichainBanner />
+      {/* <MultichainBanner /> */}
           {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
           {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
           {/* <div className={`my-12`} /> */}
