@@ -301,7 +301,7 @@ export const SunsetBanner: FC = () => (
             className="font-bold text-black text-lg"
           >
             <Button variant="filled" color="yellow" size="sm">
-              <span className="justify-center">
+              <span className="justify-center text-black">
                 {' '}
                 Luxor is Sunsetting ↗
               </span>
