@@ -1,4 +1,4 @@
-import { FTM_ADDRESS, USDC_ADDRESS, CHANT_ADDRESS, DAI_ADDRESS, WETH9_ADDRESS, WNATIVE_ADDRESS, SOUL_ADDRESS, LZ_USDC_ADDRESS, MULTI_USDC_ADDRESS, FRAX_ADDRESS, WBTC_ADDRESS, USDT_ADDRESS } from './addresses'
+import { FTM_ADDRESS, USDC_ADDRESS, CHANT_ADDRESS, DAI_ADDRESS, WETH9_ADDRESS, WNATIVE_ADDRESS, SOUL_ADDRESS, LZ_USDC_ADDRESS, MULTI_USDC_ADDRESS, FRAX_ADDRESS, WBTC_ADDRESS, USDT_ADDRESS, MULTI_WBTC_ADDRESS } from './addresses'
 
 import { ChainId } from '../enums'
 import { Token } from '../entities/Token'
@@ -59,6 +59,10 @@ export const WBTC: TokenMap = {
   [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, WBTC_ADDRESS[ChainId.ETHEREUM], 8, 'WBTC', 'Wrapped BTC'),
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, WBTC_ADDRESS[ChainId.FANTOM], 8, 'WBTC', 'Wrapped BTC'),
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, WBTC_ADDRESS[ChainId.AVALANCHE], 8, 'WBTC', 'Wrapped BTC'),
+}
+
+export const MULTI_WBTC: TokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, MULTI_WBTC_ADDRESS[ChainId.FANTOM], 8, 'WBTC', 'Wrapped BTC'),
 }
 
 export const USD: TokenMap = {

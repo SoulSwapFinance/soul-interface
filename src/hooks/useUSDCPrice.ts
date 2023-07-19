@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import { useV2TradeExactOut } from './useV2Trades'
 
 import { tryParseAmount } from 'functions'
-import { BNB, LUXOR, MIM, AVAX, SEANCE, SOUL, FUSD, USDC, LZUSDC, WBTC, WETH, WFTM, WLUM, SURV, DAI, SOR } from 'constants/tokens'
+import { BNB, LUXOR, MIM, AVAX, SOUL, FUSD, USDC, LZUSDC, WBTC, WETH, WFTM, WLUM, SURV, DAI, SOR } from 'constants/tokens'
 import { AVAX_ADDRESS, BNB_ADDRESS, FUSD_ADDRESS, LUX_ADDRESS, SEANCE_ADDRESS, WFTM_ADDRESS, 
   SOUL_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS, SURV_ADDRESS } 
   from 'constants/addresses'
@@ -40,11 +40,6 @@ const FUSD_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
 const SOUL_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(SOUL[ChainId.FANTOM], 100_000e6),
   [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(SOUL[ChainId.AVALANCHE], 100_000e6)
-}
-
-const SEANCE_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(SEANCE[ChainId.FANTOM], 100_000e6),
-  [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(SEANCE[ChainId.AVALANCHE], 100_000e6)
 }
 
 const LUXOR_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
@@ -127,7 +122,6 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId] : undefined
   const daiAmountOut = chainId ? DAI_AMOUNT_OUT[chainId] : undefined
   const soulAmountOut = chainId ? SOUL_AMOUNT_OUT[chainId] : undefined
-  const seanceAmountOut = chainId ? SEANCE_AMOUNT_OUT[chainId] : undefined
   // const wethAmountOut = chainId ? WETH_AMOUNT_OUT[chainId] : undefined
   // const wbtcAmountOut = chainId ? WBTC_AMOUNT_OUT[chainId] : undefined
   const bnbAmountOut = chainId ? BNB_AMOUNT_OUT[chainId] : undefined
@@ -140,7 +134,6 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const fusd = fusdAmountOut?.currency
   const mim = mimAmountOut?.currency
   const soul = soulAmountOut?.currency
-  const seance = seanceAmountOut?.currency
   const luxor = luxorAmountOut?.currency
   const wlum = wlumAmountOut?.currency
   const wftm = wftmAmountOut?.currency
@@ -197,11 +190,6 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
     // handle soul
     if (currency?.wrapped.equals(soul)) {
       return new Price(soul, soul, '100000', Number(soulPrice * 100_000).toFixed())
-    }
-
-    // handle seance
-    if (currency?.wrapped.equals(seance)) {
-      return new Price(seance, seance, '1000', Number(seancePrice * 1000).toFixed())
     }
 
     // handle luxor

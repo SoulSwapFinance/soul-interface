@@ -40574,7 +40574,7 @@
                 "symbol": "mUSDC",
                 "decimals": 6,
                 "chainId": 250,
-                "name": "USDC (Multi)",
+                "name": "USDC (Multichain)",
                 "coinKey": "mUSDC",
                 "priceUSD": "1",
                 "logoURI": "https://static.debank.com/image/coin/logo_url/usdc/e87790bfe0b3f2ea855dc29069b38818.png"

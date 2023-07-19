@@ -1,4 +1,4 @@
-import { AVAX_ADDRESS, ChainId, computePairAddress, Currency, CurrencyAmount, LUX_ADDRESS, Pair, SOUL, SOUL_ADDRESS, SUMMONER_ADDRESS, Token, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from '../sdk'
+import { AVAX_ADDRESS, ChainId, computePairAddress, Currency, CurrencyAmount, LUX_ADDRESS, MULTI_WBTC_ADDRESS, Pair, SOUL, SOUL_ADDRESS, SUMMONER_ADDRESS, Token, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from '../sdk'
 import ISoulSwapPair from '../constants/abis/soulswap/ISoulSwapPair.json'
 import { Interface } from '@ethersproject/abi'
 import { useMemo } from 'react'
@@ -263,14 +263,9 @@ export function useTVL(): TVLInfo[] {
         token.symbol == 'LUX' ||
         token.symbol == 'WAVAX' ||
         token.symbol == 'AVAX' ||
-        token.symbol == 'WBTC' ||
-        token.symbol == 'BTC' ||
-        token.symbol == 'SEANCE' ||
-        token.symbol == 'USDC' ||
-        token.symbol == 'USDT' ||
-        token.symbol == 'FUSDT' ||
-        token.symbol == 'MIM' ||
-        token.symbol == 'DAI' ||
+        token.symbol == 'WBTC' || token.symbol == 'BTC' ||
+        token.symbol == 'USDC' || token.symbol == 'USDT' ||
+        token.symbol == 'MIM' || token.symbol == 'DAI' ||
         token.symbol == 'WETH' || token.symbol == 'ETH'
       )
     }
@@ -288,17 +283,11 @@ export function useTVL(): TVLInfo[] {
       if (token.symbol == 'WBTC' || token.symbol == 'BTC') {
         return wbtcPrice
       }
-      if (token.symbol == 'SEANCE') {
-        return seancePrice
-      }
       if (token.symbol == 'LUX') {
         return luxPrice
       }
       if (token.symbol == 'WETH' || token.symbol == 'ETH') {
         return wethPrice
-      }
-      if (token.symbol == 'WBTC' || token.symbol == 'BTC') {
-        return wbtcPrice
       }
       if (
         token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI' ||

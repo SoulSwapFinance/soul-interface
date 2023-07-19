@@ -498,9 +498,17 @@
     },
     {
       "chainId": 250,
-      "name": "Ethereum",
-      "address": "0x74b23882a30290451A17c44f4F05243b6b58C76d",
+      "name": "Ethereum (Axelar)",
+      "address": "0xfe7eDa5F2c56160d406869A8aA4B2F365d544C7B",
       "symbol": "ETH",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xfe7eDa5F2c56160d406869A8aA4B2F365d544C7B/logo.png"
+    },
+    {
+      "chainId": 250,
+      "name": "Ethereum (Multichain)",
+      "address": "0x74b23882a30290451A17c44f4F05243b6b58C76d",
+      "symbol": "mETH",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x74b23882a30290451A17c44f4F05243b6b58C76d/logo.png"
     },
@@ -586,7 +594,7 @@
     },
     {
       "chainId": 250,
-      "name": "USDC (Multi)",
+      "name": "USDC (Multichain)",
       "address": "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75",
       "symbol": "mUSDC",
       "decimals": 6,
@@ -626,9 +634,17 @@
     },
     {
       "chainId": 250,
-      "name": "Wrapped Bitcoin",
-      "address": "0x321162Cd933E2Be498Cd2267a90534A804051b11",
+      "name": "Wrapped Bitcoin (Axelar)",
+      "address": "0x448d59B4302aB5d2dadf9611bED9457491926c8e",
       "symbol": "WBTC",
+      "decimals": 8,
+      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x448d59B4302aB5d2dadf9611bED9457491926c8e/logo.png"
+    },
+    {
+      "chainId": 250,
+      "name": "Wrapped Bitcoin (Multichain)",
+      "address": "0x321162Cd933E2Be498Cd2267a90534A804051b11",
+      "symbol": "mWBTC",
       "decimals": 8,
       "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x321162Cd933E2Be498Cd2267a90534A804051b11/logo.png"
     },

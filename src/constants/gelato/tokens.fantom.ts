@@ -30,7 +30,8 @@ export const SOUL_FANTOM = new Token(
 );
 export const WBTC_FANTOM = new Token(
   250,
-  "0x321162Cd933E2Be498Cd2267a90534A804051b11",
+  // "0x321162Cd933E2Be498Cd2267a90534A804051b11",
+  "0x448d59B4302aB5d2dadf9611bED9457491926c8e", // axlBTC
   8,
   "WBTC",
   "Wrapped BTC"

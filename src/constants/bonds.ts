@@ -1,5 +1,5 @@
 import { BNB_ADDRESS, SOUL_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from 'constants/addresses'
-import { ChainId, DAI_ADDRESS, SEANCE_ADDRESS, USDC_ADDRESS, MULTI_USDC_ADDRESS } from '../sdk'
+import { ChainId, DAI_ADDRESS, SEANCE_ADDRESS, USDC_ADDRESS, MULTI_USDC_ADDRESS, MULTI_WETH_ADDRESS, MULTI_WBTC_ADDRESS } from '../sdk'
 
 export type TokenInfo = {
   id: string
@@ -219,7 +219,7 @@ export const BONDS: AddressMap = {
         decimals: 18,
       },
       token1: {
-        id: WETH_ADDRESS[ChainId.FANTOM],
+        id: MULTI_WETH_ADDRESS[ChainId.FANTOM],
         name: 'Wrapped ETH',
         symbol: 'WETH',
         decimals: 18,
@@ -234,7 +234,7 @@ export const BONDS: AddressMap = {
         decimals: 18,
       },
       token1: {
-        id: WBTC_ADDRESS[ChainId.FANTOM],
+        id: MULTI_WBTC_ADDRESS[ChainId.FANTOM],
         name: 'Wrapped Bitcoin',
         symbol: 'WBTC',
         decimals: 8,
