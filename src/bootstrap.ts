@@ -7,11 +7,12 @@ import React from 'react'
 import { Zero } from '@ethersproject/constants'
 import { parseUnits } from '@ethersproject/units'
 
-BigNumber.prototype.mulDiv = function (multiplier: BigNumberish, divisor: BigNumberish): BigNumber | BigNumberish | any {
+BigNumber.prototype.mulDiv = function (multiplier: BigNumberish, divisor: BigNumberish): BigNumber {
+  // @ts-ignore
   return BigNumber.from(divisor).gt(0) ? BigNumber.from(this).mul(multiplier).div(divisor) : Zero
 }
 
-BigNumber.prototype.toFraction = function (decimals: any | BigNumber | BigNumberish = 18 ): Fraction | any {
+BigNumber.prototype.toFraction = function (decimals: BigNumberish = 18): Fraction {
   // @ts-ignore
   return Fraction.from(this, decimals ? BigNumber.from(10).pow(decimals) : Zero)
 }
@@ -21,7 +22,9 @@ BigNumber.prototype.toFixed = function (decimals: BigNumberish = 18, maxFraction
 }
 
 String.prototype.toBigNumber = function (decimals: BigNumberish): BigNumber {
+  // @ts-ignore
   try {
+    // @ts-ignore
     return parseUnits(this as string, decimals)
   } catch (error) {
     console.debug(`Failed to parse input amount: "${this}"`, error)
