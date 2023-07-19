@@ -292,8 +292,8 @@ export const UnderworldBanner: FC = () => (
 export const BondsBanner: FC = () => (
   <div className="relative items-center w-full">
     <div className="w-full">
-      <div className="text-center">
-        <p className="font-medium text-center text-white">
+      <div className="text-center m-2">
+        <p className="font-medium text-center text-white animate-pulse">
           <ExternalLink
             href="https://soulswapfinance.medium.com/owning-our-liquidity-via-our-innovative-soul-bonds-podl-592c2849ceed" target="_blank" rel="noreferrer"
             className="font-bold text-white text-lg"
@@ -301,7 +301,7 @@ export const BondsBanner: FC = () => (
             <Button variant="filled" color="purple" size="sm">
               <span className="justify-center">
                 {' '}
-                Introducing: Soul Bonds ↗
+                Read Before Bonding ↗
               </span>
             </Button>
           </ExternalLink>
