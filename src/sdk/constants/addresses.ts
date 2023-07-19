@@ -247,7 +247,7 @@ export const BTC_NATIVE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '',
+  [ChainId.FANTOM]: '0x44DF3a3b162826D7354b4e2495AEF097B6862069',   // axlWBTC
   [ChainId.AVALANCHE]: '0x8C162C3Bdd7354b5Cb1A0b18eDBB5725CFE762A3',
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
