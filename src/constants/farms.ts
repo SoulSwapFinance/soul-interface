@@ -672,7 +672,7 @@ export const POOLS: AddressMap = {
       token0: {
         id: WBTC_ADDRESS[ChainId.FANTOM], // WBTC
         name: 'Wrapped Bitcoin',
-        symbol: 'WETH',
+        symbol: 'WBTC',
         decimals: 8,
       },
       token1: {

@@ -9,7 +9,6 @@ import Dots from '../../../components/Dots'
 import Empty from '../../../components/Empty'
 import FullPositionCard from '../../../components/PositionCard'
 import Head from 'next/head'
-import { MigrationSupported } from '../../../features/migration'
 import { useActiveWeb3React } from 'services/web3'
 import { useRouter } from 'next/router'
 import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
@@ -21,7 +20,6 @@ export default function Pool() {
   const { account, chainId } = useActiveWeb3React()
   const { loading, pairs } = useV2PairsWithLiquidity(chainId)
 
-  const migrationSupported = chainId in MigrationSupported
   return (
     <>
       <Head>
@@ -97,7 +95,7 @@ export default function Pool() {
                 </Empty>
               )}
               {account && (
-                <div className={classNames('grid gap-4', migrationSupported ? 'grid-cols-3' : 'grid-cols-2')}>
+                <div className={classNames('grid gap-4', 'grid-cols-2')}>
                   <Button
                     id="add-pool-button"
                     variant="filled"

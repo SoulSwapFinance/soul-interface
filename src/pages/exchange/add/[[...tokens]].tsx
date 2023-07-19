@@ -39,7 +39,7 @@ import { PlusIcon } from '@heroicons/react/24/solid'
 import { getChainColorCode } from 'constants/chains'
 import { PoolBalances } from 'features/portfolio/AssetBalances/pools'
 import PairChart from 'pages/analytics/pairs/embedded/[id]'
-import { FollowBanner } from 'components/Banner'
+// import { FollowBanner } from 'components/Banner'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
 
@@ -349,7 +349,7 @@ export default function Add() {
       </Head>
       <DoubleGlowShadowV2>
       <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-        <FollowBanner />
+        {/* <FollowBanner /> */}
           <SwapDropdown
             inputCurrency={currencies[Field.CURRENCY_A]}
             outputCurrency={currencies[Field.CURRENCY_B]}

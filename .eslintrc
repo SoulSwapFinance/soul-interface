@@ -1,6 +1,6 @@
 {
   // "extends": ["next", "next/core-web-vitals"]
-  "extends": ["next"],
+  "extends": ["next", "next/core-web-vitals"],
   "rules": {
     "react/display-name": "off",
     "react-hooks/exhaustive-deps": "off",
