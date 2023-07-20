@@ -39,6 +39,8 @@ import { PlusIcon } from '@heroicons/react/24/solid'
 import { getChainColorCode } from 'constants/chains'
 import { PoolBalances } from 'features/portfolio/AssetBalances/pools'
 import PairChart from 'pages/analytics/pairs/embedded/[id]'
+import { featureEnabled } from 'functions'
+import { Feature } from 'enums'
 // import { FollowBanner } from 'components/Banner'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
@@ -559,10 +561,12 @@ export default function Add() {
               </Button>
             </NavLink>
           </div>  */}
-        <PairChart
-          inputCurrency={currencyA} 
-          outputCurrency={currencyB}
-        />
+        {featureEnabled(Feature.ANALYTICS, chainId) &&
+          <PairChart
+            inputCurrency={currencyA} 
+            outputCurrency={currencyB}
+          />
+        }
         <PoolBalances account={account} />
         </div>
         </div>

@@ -29,6 +29,7 @@ import { Feature } from 'enums/Feature'
 import Typography from 'components/Typography'
 import ChartIcon from 'components/Icons/exchange/ChartIcon'
 import SunMoonIcon from 'components/Icons/header/SunMoonIcon'
+import { ChainId } from 'sdk'
 // import { useUserInfo } from "hooks/useAPI"
 
 // interface BarProps {
@@ -155,8 +156,11 @@ const DesktopBar: FC = () => {
                                 className={'w-7 h-7'}
                             />
                         </div> */}
-                        <div className={`grid ${featureEnabled(Feature.LUXOR, chainId) ?
-                        'grid-cols-5' : 'grid-cols-4'} w-full items-center`}>
+                        <div className={`grid ${
+                            chainId == ChainId.FANTOM ? 'grid-cols-4' 
+                            : 'grid-cols-4'} w-full items-center`
+                            }
+                        >
                         <div
                             className={classNames(
                                 `grid grid-cols-2`,
@@ -191,7 +195,7 @@ const DesktopBar: FC = () => {
                         </Typography>
                         </div>
                         {/* } */}
-                        {/* {featureEnabled(Feature.ANALYTICS, chainId) && */}
+                        {featureEnabled(Feature.ANALYTICS, chainId) &&
                         <div
                             className={classNames(
                                 `grid grid-cols-2`,
@@ -208,6 +212,7 @@ const DesktopBar: FC = () => {
                             { `Data` }
                             </Typography>
                         </div>
+                        }
                         {featureEnabled(Feature.LUXOR, chainId) &&
                         <div
                             className={classNames(
