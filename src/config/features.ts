@@ -89,7 +89,7 @@ const features: FeatureMap = {
     Feature.VAULT,
     Feature.STAKING,
     Feature.LIQUIDITY,
-    Feature.ANALYTICS,
+    // Feature.ANALYTICS,
     Feature.LIQUIDITY_MINING,
     Feature.AGGREGATE,
     Feature.BONDS,
