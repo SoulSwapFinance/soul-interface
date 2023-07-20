@@ -629,7 +629,7 @@
       "name": "Tether USD",
       "address": "0x049d68029688eAbF473097a2fC38ef61633A3C7A",
       "symbol": "USDT",
-      "decimals": 18,
+      "decimals": 6,
       "logoURI": "https://cryptologos.cc/logos/tether-usdt-logo.svg"
     },
     {
