@@ -140,7 +140,7 @@ export const getBaseTokenLogoURLByTokenSymbol = (
       return "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0/logo.png";
     case "WBTC":
     case "BTC":
-      return "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x321162Cd933E2Be498Cd2267a90534A804051b11/logo.png";
+      return "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x448d59B4302aB5d2dadf9611bED9457491926c8e/logo.png";
     case "WBNB":
     case "BNB":
       return "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454/logo.png";
