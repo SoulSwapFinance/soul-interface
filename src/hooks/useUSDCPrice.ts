@@ -16,25 +16,13 @@ import { usePrice } from 'hooks/usePrice'
 
 const STABLECOIN_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.ETHEREUM]: CurrencyAmount.fromRawAmount(USDC[ChainId.ETHEREUM], 100_000e6),
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(LZUSDC[ChainId.FANTOM], 100_000e6),
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(USDC[ChainId.FANTOM], 100_000e6),
   [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(USDC[ChainId.AVALANCHE], 100_000e6),
 }
 
 const DAI_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(DAI[ChainId.FANTOM], 100_000e6),
   [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(DAI[ChainId.AVALANCHE], 100_000e6),
-}
-
-const SOR_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(SOR[ChainId.FANTOM], 100_000e6),
-}
-
-const MIM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(MIM[ChainId.FANTOM], 100_000e6),
-}
-
-const FUSD_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(FUSD[ChainId.FANTOM], 100_000e6),
 }
 
 const SOUL_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
@@ -73,14 +61,6 @@ const BNB_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(BNB[ChainId.AVALANCHE], 100_000e6)
 }
 
-// const CRV_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-//   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(CRV[ChainId.FANTOM], 100_000e6)
-// }
-
-// const GRIMEVO_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-//   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(GRIMEVO[ChainId.FANTOM], 100_000e6)
-// }
-
 const AVAX_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(AVAX[ChainId.FANTOM], 100_000e6),
   [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(AVAX[ChainId.AVALANCHE], 100_000e6)
@@ -100,7 +80,6 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const wLumensPrice = usePrice(WLUM_ADDRESS[250])
   const wftmPrice = usePrice(WFTM_ADDRESS[250])
   const survPrice = usePrice(SURV_ADDRESS[250])
-  const fusdPrice = usePrice(FUSD_ADDRESS[250])
   // const crvPrice = usePrice(CRV_ADDRESS[250])
   // const grimEvoPrice = usePrice(GRIMEVO_ADDRESS[250])
  
@@ -108,10 +87,7 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   // const wbtcPrice = usePrice(WBTC_ADDRESS[chainId])
   const bnbPrice = usePrice(BNB_ADDRESS[chainId])
   const avaxPrice = usePrice(AVAX_ADDRESS[chainId])
-  
-  const sorAmountOut = chainId ? SOR_AMOUNT_OUT[250] : undefined
-  const fusdAmountOut = chainId ? FUSD_AMOUNT_OUT[250] : undefined
-  const mimAmountOut = chainId ? MIM_AMOUNT_OUT[250] : undefined
+
   const luxorAmountOut = chainId ? LUXOR_AMOUNT_OUT[250] : undefined
   const survAmountOut = chainId ? SURV_AMOUNT_OUT[250] : undefined
   const wlumAmountOut = chainId ? WLUM_AMOUNT_OUT[250] : undefined
@@ -129,10 +105,7 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
 
   // TOKENS
   const stablecoin = amountOut?.currency
-  const sor = sorAmountOut?.currency
   const dai = daiAmountOut?.currency
-  const fusd = fusdAmountOut?.currency
-  const mim = mimAmountOut?.currency
   const soul = soulAmountOut?.currency
   const luxor = luxorAmountOut?.currency
   const wlum = wlumAmountOut?.currency
@@ -170,21 +143,6 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
     // handle dai
     if (currency?.wrapped.equals(dai)) {
       return new Price(dai, dai, '1', '1')
-    }
-
-    // handle sor
-    if (currency?.wrapped.equals(sor)) {
-      return new Price(sor, sor, '1', '1')
-    }
-
-    // handle mim
-    if (currency?.wrapped.equals(mim)) {
-      return new Price(mim, mim, '1', '1')
-    }
-
-    // handle fusd
-    if (currency?.wrapped.equals(fusd)) {
-      return new Price(fusd, fusd, '100', Number(fusdPrice * 100).toFixed())
     }
 
     // handle soul
@@ -226,16 +184,6 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
     if (currency?.wrapped.equals(bnb)) {
       return new Price(bnb, bnb, '10', Number(bnbPrice * 10).toFixed())
     }
-
-    // handle crv
-    // if (currency?.wrapped.equals(crv)) {
-    //   return new Price(crv, crv, '10', Number(crvPrice * 10).toFixed())
-    // }
-  
-    // handle grimEVO
-    // if (currency?.wrapped.equals(grimEVO)) {
-    //   return new Price(grimEVO, grimEVO, '10', Number(grimEvoPrice * 10).toFixed())
-    // }
     
     // handle AVAX
     if (currency?.wrapped.equals(avax)) {
