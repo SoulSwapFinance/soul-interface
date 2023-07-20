@@ -660,7 +660,8 @@ const Exchange = () => {
                 // <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
                   <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded-lg bg-light-glass`}>
                     {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
-                    {!isWrapped && 
+                  {featureEnabled(Feature.ANALYTICS, chainId) &&
+                    !isWrapped && 
                     <TokenChart
                       outputCurrency={outputCurrency}
                     />
@@ -669,7 +670,7 @@ const Exchange = () => {
                     //   inputCurrency={inputCurrency}
                     //   outputCurrency={outputCurrency}
                     // />
-                    }
+                  }
                   </div>
                 // </div>
               }
