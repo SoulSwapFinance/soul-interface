@@ -82,7 +82,6 @@ export const COMMON_BASES: ChainTokenList = {
     FANTOM.LZUSDC,
     FANTOM.WETH,
     FANTOM.WBTC,
-    FANTOM.LUX,
     FANTOM.SURV,
     FANTOM.DAI,
     FANTOM.AVAX,
