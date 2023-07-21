@@ -634,7 +634,7 @@
     },
     {
       "chainId": 250,
-      "name": "Wrapped Bitcoin (Axelar)",
+      "name": "Bitcoin (Axelar)",
       "address": "0x448d59B4302aB5d2dadf9611bED9457491926c8e",
       "symbol": "WBTC",
       "decimals": 8,
@@ -642,7 +642,7 @@
     },
     {
       "chainId": 250,
-      "name": "Wrapped Bitcoin (Multichain)",
+      "name": "Bitcoin (Multichain)",
       "address": "0x321162Cd933E2Be498Cd2267a90534A804051b11",
       "symbol": "mWBTC",
       "decimals": 8,
