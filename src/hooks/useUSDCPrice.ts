@@ -80,9 +80,6 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const wLumensPrice = usePrice(WLUM_ADDRESS[250])
   const wftmPrice = usePrice(WFTM_ADDRESS[250])
   const survPrice = usePrice(SURV_ADDRESS[250])
-  // const crvPrice = usePrice(CRV_ADDRESS[250])
-  // const grimEvoPrice = usePrice(GRIMEVO_ADDRESS[250])
- 
   // const wethPrice = usePrice(WETH_ADDRESS[chainId])
   // const wbtcPrice = usePrice(WBTC_ADDRESS[chainId])
   const bnbPrice = usePrice(BNB_ADDRESS[chainId])
@@ -92,9 +89,7 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const survAmountOut = chainId ? SURV_AMOUNT_OUT[250] : undefined
   const wlumAmountOut = chainId ? WLUM_AMOUNT_OUT[250] : undefined
   const wftmAmountOut = chainId ? WFTM_AMOUNT_OUT[250] : undefined
-  // const crvAmountOut = chainId ? CRV_AMOUNT_OUT[250] : undefined
-  // const grimEVOAmountOut = chainId ? GRIMEVO_AMOUNT_OUT[250] : undefined
-  
+
   const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId] : undefined
   const daiAmountOut = chainId ? DAI_AMOUNT_OUT[chainId] : undefined
   const soulAmountOut = chainId ? SOUL_AMOUNT_OUT[chainId] : undefined
