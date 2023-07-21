@@ -359,7 +359,10 @@ export default function Add() {
           />
           {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
           <div>
-          <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
+          <LiquidityHeader 
+            input={currencies[Field.CURRENCY_A]}
+            output={currencies[Field.CURRENCY_B]} 
+          />
           <TransactionConfirmationModal
             isOpen={showConfirm}
             onDismiss={handleDismissConfirmation}
