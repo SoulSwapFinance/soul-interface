@@ -1,8 +1,6 @@
 import { useNativePrice, useOneDayBlock, useOneWeekBlock, useTokens } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
 import { useEffect, useMemo, useState } from 'react'
-import { usePrice } from 'hooks/usePrice'
-import { ChainId, WNATIVE_ADDRESS } from 'sdk'
 
 export default function useTokensAnalytics() {
   const [loadState, setLoadState] = useState<'loading' | 'initial' | 'loaded'>('loading')
@@ -12,9 +10,7 @@ export default function useTokensAnalytics() {
   const block1d = useOneDayBlock({ chainId })
   const block1w = useOneWeekBlock({ chainId })
 
-  const nativePrice = 
-    chainId == ChainId.FANTOM ? usePrice(WNATIVE_ADDRESS[chainId])              
-    : useNativePrice({ chainId })
+  const nativePrice = useNativePrice({ chainId })
 
   const nativePrice1d = useNativePrice({ chainId, variables: { block: block1d }, shouldFetch: !!block1d })
   const nativePrice1w = useNativePrice({ chainId, variables: { block: block1w }, shouldFetch: !!block1w })
