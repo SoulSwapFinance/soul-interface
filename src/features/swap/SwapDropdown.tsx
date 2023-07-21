@@ -45,11 +45,13 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
 
   const soulEnabled = [ChainId.FANTOM, ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId)
 
-  const activeStyle = `rounded`
-  const style = `text-secondary bg-white border border-[${getChainColor(chainId)}]`
+  const activeStyle = `text-secondary bg-dark-900 rounded-lg`
+  const style = `mt-0.5 hover:border-[${getChainColor(chainId)}]`
   const swapStyle = isExchange ? activeStyle : style
   const poolStyle = isPool ? activeStyle : style
   const ecoStyle = isAggregator ? activeStyle : style
+  const limitStyle = isLimit ? activeStyle : style
+  const crossStyle = isCrosschain ? activeStyle : style
 
   return (
     <div className={`flex mt-2 mb-2 items-center justify-center gap-4 border-2 border-dark-700 rounded-lg`}>
@@ -125,12 +127,13 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
         {featureEnabled(Feature.LIMIT, chainId) &&
           <NavLink
             className={classNames(
-              ecoStyle
+              limitStyle
             )}
             activeClassName={classNames(
               activeStyle
             )}
             href={`/exchange/swap/limit/${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)}`}
+            // href={`/exchange/swap/limit/${inputCurrency ? `${currencyId(inputCurrency)}` : `${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)}`}
           >
             <div
               className={classNames(
@@ -155,6 +158,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               activeStyle
             )}
             href={`/exchange/aggregator/${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
+
+            // href={`/exchange/aggregator/${inputCurrency ? `${currencyId(inputCurrency)}` : `${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
               }`}
           >
             <div
@@ -181,7 +186,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
         {featureEnabled(Feature.CROSSCHAIN, chainId) &&
           <NavLink
             className={classNames(
-              ecoStyle
+              crossStyle
             )}
             activeClassName={classNames(
               activeStyle
