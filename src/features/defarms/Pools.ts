@@ -9,15 +9,15 @@ export const InactiveFantomPools = [
   {
     pid: 0,
   },
-  // {
-  //   pid: 1,
-  // },
+   {
+     pid: 1,
+   },
 ]
 
 export const AvalanchePools = []
 
 export const FantomPools = [
-  {
+  /* {
     pid: 1,
-  },
+  }, */
 ]
