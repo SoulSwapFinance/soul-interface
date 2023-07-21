@@ -124,9 +124,9 @@ export default function Manifestations(): JSX.Element {
                   variant={`outlined`}
                   color={`ftmBlue`}
                 >
-                <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
+                <div className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
                   {`View DeFarms`}
-                </a>
+                </div>
                 </Button>
               </NavLink>
               <NavLink
@@ -138,9 +138,9 @@ export default function Manifestations(): JSX.Element {
                   variant={`outlined`}
                   color={`ftmBlue`}
                 >
-                <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
+                <div className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
                   {`Create DeFarm`}
-                </a>
+                </div>
                 </Button>
               </NavLink>
             </div>

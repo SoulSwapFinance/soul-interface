@@ -228,31 +228,31 @@ export default function Dashboard() {
       <div className="flex ml-2 mr-2 mb-4 mt-2 gap-1 items-center justify-center">
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/farms'}>
-            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span>Farms</span>
-            </a>
+            </div>
           </NavLink>
         </Button>
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/bonds'}>
-            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span>Bonds</span>
-            </a>
+            </div>
           </NavLink>
         </Button>
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/autostake'}>
-            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span>Vault</span>
-            </a>
+            </div>
           </NavLink>
         </Button>
         {featureEnabled(Feature.DEFARM, chainId) &&
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/defarms'}>
-            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span>DeFarms</span>
-            </a>
+            </div>
           </NavLink>
         </Button>
         }

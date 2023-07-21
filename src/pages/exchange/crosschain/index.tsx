@@ -428,6 +428,7 @@ const CrosschainSwap = ({ }) => {
               currency={
                 toToken
               }
+              value={outputAmount?.toString()}
               // value={(routes[0]?.price.amountReturned / (10 ** (outputToken?.wrapped.decimals)))?.toString() || '0'}
               onChange={() => { }}
               onSelect={handleOutputSelect}

@@ -50,11 +50,11 @@ const Defarms = () => {
                 primaryColor={"#7G1BD9"}
                 size="xl"
               >
-                <a 
+                <div 
                   className="block text-md font-bold md:text-xl text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300"
                 >
                   <span> Learn About DeFarms ↗</span>
-                </a>
+                </div>
               </SubmitButton>
             </ExternalLink>
             </div>
@@ -72,32 +72,32 @@ const Defarms = () => {
           <div className={`flex justify-center m-1 p-1`}>
           <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/dashboard'}>
-            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span>Soul Economy</span>
-            </a>
+            </div>
           </NavLink>
         </Button>
       </div>
       <div className="flex ml-2 mr-2 mb-4 mt-2 gap-1 items-center justify-center">
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/farms'}>
-            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span>Farms</span>
-            </a>
+            </div>
           </NavLink>
         </Button>
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/bonds'}>
-            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span>Bonds</span>
-            </a>
+            </div>
           </NavLink>
         </Button>
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/autostake'}>
-            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span>Vault</span>
-            </a>
+            </div>
           </NavLink>
         </Button>
       </div> 

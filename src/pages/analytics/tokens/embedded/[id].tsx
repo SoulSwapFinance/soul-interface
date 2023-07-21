@@ -189,9 +189,9 @@ export default function Token({ outputCurrency }: TokenProps) {
           <Button 
             variant="filled" color="purple" size="lg"
             >
-            <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <div className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               View Token Analytics <span> ↗</span>
-            </a>
+            </div>
           </Button>
         </NavLink>
         {/* <div className="flex flex-row justify-between flex-grow space-x-4 overflow-x-auto">
@@ -218,7 +218,7 @@ export default function Token({ outputCurrency }: TokenProps) {
                   <div className="w-11/12 overflow-hidden cursor-pointer overflow-ellipsis whitespace-nowrap">{id}</div>
                 </td>
                 <td>
-                  <a
+                  <div
                     className={`flex flex-row items-center justify-end space-x-1 text-${getChainColorCode(chainId)}`}
                     href={getExplorerLink(chainId, id, 'token')}
                     target="_blank"
@@ -226,7 +226,7 @@ export default function Token({ outputCurrency }: TokenProps) {
                   >
                     <div>View</div>
                     <LinkIcon size={16} />
-                  </a>
+                  </div>
                 </td>
               </tr>
             </tbody>
