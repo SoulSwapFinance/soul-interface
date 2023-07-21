@@ -127,9 +127,6 @@ export function useVaultTVL(): TVLInfo[] {
       if (token.symbol == 'WAVAX' || token.symbol == 'AVAX') {
         return avaxPrice
       }
-      if (token.symbol == 'SEANCE') {
-        return seancePrice
-      }
       if (token.symbol == 'USDC' || token.symbol == 'USDT') {
         return 1
       }
@@ -208,7 +205,6 @@ export function useVaultTVL(): TVLInfo[] {
     chainId,
     soulPrice,
     ftmPrice,
-    seancePrice,
     totalSupply,
     summonerBalance,
     lpPools,
@@ -849,9 +845,6 @@ export function useV2PairsWithPrice(
       if (token.symbol == 'WBTC' || token.symbol == 'BTC') {
         return wbtcPrice
       }
-      if (token.symbol == 'SEANCE') {
-        return seancePrice
-      }
       if (token.symbol == 'LUX') {
         return luxPrice
       }
@@ -899,7 +892,7 @@ export function useV2PairsWithPrice(
         lpPrice,
       ]
     })
-  }, [results, chainId, soulPrice, ftmPrice, luxPrice, seancePrice, tokens, totalSupply, wethPrice])
+  }, [results, chainId, soulPrice, ftmPrice, luxPrice, tokens, totalSupply, wethPrice])
 }
 
 export function useV2Pair(tokenA?: Currency, tokenB?: Currency): [PairState, Pair | null] {
