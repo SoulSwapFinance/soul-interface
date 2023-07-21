@@ -31,6 +31,7 @@ interface SwapAssetPanel {
   priceImpactCss?: string
   disabled?: boolean
   hideBalance?: boolean
+  showInput?: boolean
 }
 
 const SwapAssetPanel = ({
@@ -49,6 +50,7 @@ const SwapAssetPanel = ({
   chainId,
   currencies,
   hideBalance,
+  showInput = true,
 }: SwapAssetPanel) => {
   return (
     // hover:border-${getChainColorCode(chainId)}
@@ -64,8 +66,9 @@ const SwapAssetPanel = ({
         onSelect,
         walletToggle,
         spendFromWallet,
+        showInput,
       })}
-      <div className="flex gap-1 justify-between items-baseline px-1.5">
+      <div className={showInput ? `flex gap-1 justify-between items-baseline px-1.5` : 'hidden'}>
         <InputPanel
           {...{
             selected,
