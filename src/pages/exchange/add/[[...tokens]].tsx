@@ -540,37 +540,26 @@ export default function Add() {
             />
           )}
           {/* </div> */}
-          {/* <div className={"grid grid-cols-2 gap-2 text-white justify-center m-2"}>
+          <div className={"grid grid-cols-1 text-white justify-center m-2"}>
             <NavLink href="/pool">
               <Button
                 variant={'filled'}
                 color={`${getChainColorCode(chainId)}`}
                 primaryColor={'black'}
               >
-                <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
-                  <span>{`View Positions`}</span>
-                </a>
+                <div className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
+                  {`View Positions`}
+                </div>
               </Button>
             </NavLink>
-            <NavLink href="/analytics">
-              <Button
-                variant={'filled'}
-                color={`${getChainColorCode(chainId)}`}
-                primaryColor={'black'}
-              >
-                <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
-                  <span>{`View Analytics`}</span>
-                </a>
-              </Button>
-            </NavLink>
-          </div>  */}
+          </div>
         {featureEnabled(Feature.ANALYTICS, chainId) &&
           <PairChart
             inputCurrency={currencyA} 
             outputCurrency={currencyB}
           />
         }
-        <PoolBalances account={account} />
+        {/* <PoolBalances account={account} /> */}
         </div>
         </div>
         {/* </SwapLayoutCard> */}
