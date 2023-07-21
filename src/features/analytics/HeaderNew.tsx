@@ -41,9 +41,9 @@ const AnalyticsHeaderNew: FC<AnalyticsHeaderProps> = ({ input, output, allowedSl
             query: getQuery(input, output),
           }}
         >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
+          <div className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
             {`ALL`}
-          </a>
+          </div>
         </NavLink>
         <NavLink
           activeClassName={`font-bold border rounded text-high-emphesis border-dark-800 bg-${getChainColorCode(chainId)} from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple`}
@@ -52,36 +52,36 @@ const AnalyticsHeaderNew: FC<AnalyticsHeaderProps> = ({ input, output, allowedSl
           //   output ? `/${currencyId(output)}` : ''
         // }`}
         >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
+          <div className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
             {`COFFIN`}
-          </a>
+          </div>
         </NavLink>
         <NavLink
           activeClassName={`font-bold border rounded text-high-emphesis border-dark-800 bg-${getChainColorCode(chainId)} from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple`}
           href={"/analytics/tokens"}
           // href={`${output ? `https://charts.soul.sh/token/${currencyId(output)}` : ''}`}
         >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
+          <div className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
             {`TOKENS`}
-          </a>
+          </div>
         </NavLink>
         <NavLink
           activeClassName={`font-bold border rounded text-high-emphesis border-dark-800 bg-${getChainColorCode(chainId)} from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple`}
           href={"/analytics/pairs"}
           // href={`${output ? `https://charts.soul.sh/token/${currencyId(output)}` : ''}`}
         >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
+          <div className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
             {`PAIRS`}
-          </a>
+          </div>
         </NavLink>
         {/* <NavLink
           activeClassName="font-bold border rounded text-high-emphesis border-dark-800 bg-gradient-to-r from-opaque-blue to-opaque-purple hover:from-blue hover:to-purple"
           href={"/farms"}
           // href={`${output ? `https://charts.soul.sh/token/${currencyId(output)}` : ''}`}
         >
-          <a className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
+          <div className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
             {`Farm`}
-          </a>
+          </div>
         </NavLink> */}
       </div>
 

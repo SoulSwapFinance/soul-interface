@@ -134,10 +134,10 @@ export default function Menu() {
                       </ExternalLink>
                     ) : (
                       <NavLink key={item.name} href={item.href}>
-                        <a className="block p-1 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
+                        <div className="block p-1 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-900">
                           <p className="text-base font-medium text-high-emphesis">{item.name}</p>
                           <p className="text-sm text-secondary">{item.description}</p>
-                        </a>
+                        </div>
                       </NavLink>
                     )
                   )}

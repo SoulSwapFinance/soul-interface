@@ -13,6 +13,7 @@ import { useBlockNumber } from 'state/application/hooks'
 import { useTimestampFromBlock } from 'hooks/useTimestampFromBlock'
 
 import { useFuse } from '../../hooks'
+import Link from 'next/link'
 
 export default function Launchpad(): JSX.Element {
   const router = useRouter()
@@ -72,7 +73,7 @@ export default function Launchpad(): JSX.Element {
                 <Typography variant="base" className={'max-w-xl text-gray-400'}>
                   Interested in launching with us?
                   <br />
-                  <a
+                  <Link
                     href="https://forms.gle/oDFKZAvC8jRbAfw29"
                     target="_blank"
                     rel="noreferrer"
@@ -81,7 +82,7 @@ export default function Launchpad(): JSX.Element {
                     }
                   >
                    {">> Click Here to Launch <<"}
-                  </a>
+                  </Link>
                 </Typography>
               </div>
 
@@ -93,9 +94,9 @@ export default function Launchpad(): JSX.Element {
                       href={'/launchpad'}
                       activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-purple-dark-900"
                     >
-                      <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
+                      <div className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
                         Live
-                      </a>
+                      </div>
                     </NavLink>
                     <NavLink
                       legacyBehavior={true}
@@ -103,9 +104,9 @@ export default function Launchpad(): JSX.Element {
                       href={'/launchpad?filter=upcoming'}
                       activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-purple-dark-900"
                     >
-                      <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
+                      <div className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
                         Upcoming
-                      </a>
+                      </div>
                     </NavLink>
                     <NavLink
                       legacyBehavior={true}
@@ -113,9 +114,9 @@ export default function Launchpad(): JSX.Element {
                       href={'/launchpad?filter=completed'}
                       activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-purple-dark-900"
                     >
-                      <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
+                      <div className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
                         Completed
-                      </a>
+                      </div>
                     </NavLink>
                   </div>
                   <div className={'flex flex-1 p-2 rounded flex bg-dark-700 flex-col md:flex-row md:space-x-2'}>
@@ -208,7 +209,7 @@ export default function Launchpad(): JSX.Element {
                               </Typography>
                             </div>
                             <div className="flex sm:flex-row space-x-3">
-                              <a
+                              <Link
                                 href={p.website}
                                 target="_blank"
                                 rel="noreferrer"
@@ -217,8 +218,8 @@ export default function Launchpad(): JSX.Element {
                                 }
                               >
                                 Website
-                              </a>
-                              <a
+                              </Link>
+                              <Link
                                 href={p.readmore}
                                 target="_blank"
                                 rel="noreferrer"
@@ -227,8 +228,8 @@ export default function Launchpad(): JSX.Element {
                                 }
                               >
                                 Announcement
-                              </a>
-                              <a
+                              </Link>
+                              <Link
                                 href={p.docs}
                                 target="_blank"
                                 rel="noreferrer"
@@ -237,7 +238,7 @@ export default function Launchpad(): JSX.Element {
                                 }
                               >
                                 Docs
-                              </a>
+                              </Link>
                             </div>
                           </div>
                         </div>

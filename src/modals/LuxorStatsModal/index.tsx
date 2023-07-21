@@ -328,9 +328,9 @@ export default function LuxorStatsModal(): JSX.Element | null {
           className="text-white"
         >
           <NavLink href={'/luxor/bonds'}>
-            <a className="flex justify-center text-black text-xl transition rounded-md hover:pink">
+            <div className="flex justify-center text-black text-xl transition rounded-md hover:pink">
               <span>MINT LUX</span>
-            </a>
+            </div>
           </NavLink>
         </Button>
         <Button
@@ -340,9 +340,9 @@ export default function LuxorStatsModal(): JSX.Element | null {
           className="text-white"
         >
           <NavLink href={'/luxor/stake'}>
-            <a className="flex justify-center text-black text-xl transition rounded-md hover:pink">
+            <div className="flex justify-center text-black text-xl transition rounded-md hover:pink">
               <span>STAKE LUX</span>
-            </a>
+            </div>
           </NavLink>
         </Button>
       </div>
