@@ -130,7 +130,7 @@ const Layout: FC<LayoutProps> = ({ left, children, right }) => {
                 href='/defarms'
             >
               <Button variant="outlined" color={'blue'}>
-                  <div className={`flex text-sm font-bold text-${'blue'} justify-left`}>
+                  <div className={`flex text-sm font-bold text-${'white'} justify-left`}>
                     {/* <ArrowLeftIcon className={'mt-1 mr-1'} width="1em" height="1em" /> */}
                     {`DeFarm Campaigns`}
                   </div>
@@ -143,7 +143,7 @@ const Layout: FC<LayoutProps> = ({ left, children, right }) => {
                 href='/defarms/launch'
             >
               <Button variant="outlined" color={'blue'}>
-                  <div className={`flex text-sm font-bold text-${'blue'} justify-left`}>
+                  <div className={`flex text-sm font-bold text-${'white'} justify-left`}>
                     {/* <ArrowLeftIcon className={'mt-1 mr-1'} width="1em" height="1em" /> */}
                     {`Launch Campaign`}
                   </div>
