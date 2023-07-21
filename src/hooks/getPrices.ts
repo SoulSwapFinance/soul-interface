@@ -153,20 +153,6 @@ export const getLuxorPrice = async (variables = {}) => {
   })
 }
 
-export const getWrappedLumPrice = async (variables = {}) => {
-  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: '0xa69557e01b0a6b86e5b29be66d730c0bfff68208',
-    ...variables,
-  })
-}
-
-export const getSeancePrice = async (variables = {}) => {
-  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: '0x124b06c5ce47de7a6e9efda71a946717130079e6',
-    ...variables,
-  })
-}
-
 export const getFantomPrice = async () => {
   return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
     id: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83',
@@ -280,16 +266,6 @@ export function usePairPrice(pairAddress: string, swrConfig: SWRConfiguration = 
   return data
 }
 
-export function useSeancePrice(swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR(['seancePrice'], () => getSeancePrice(), swrConfig)
-  return data
-}
-
-export function useWrappedLumPrice(swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR(['wLumPrice'], () => getWrappedLumPrice(), swrConfig)
-  return data
-}
-
 export function useLuxorPrice(swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(['luxorPrice'], () => getLuxorPrice(), swrConfig)
   return data
@@ -324,13 +300,5 @@ export function useWrappedBtcPrice(swrConfig: SWRConfiguration = undefined) {
 
 // export function usePairPrice(swrConfig: SWRConfiguration = undefined) {
 //   const { data } = useSWR(['pairPrice'], () => getPairsPrice(), swrConfig)
-//   return data
-// }
-
-// @ts-ignore TYPE NEEDS FIXING
-// export function useSeancePrice(swrConfig: SWRConfiguration = undefined) {
-//   const { chainId } = useActiveWeb3React()
-//   const { data } = useSWR(chainId && chainId === ChainId.FANTOM 
-//     ? ['seancePrice'] : null, () => getSeancePrice(), swrConfig)
 //   return data
 // }
