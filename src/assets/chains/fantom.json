@@ -97,7 +97,7 @@
         },
         {
             "id": "wrapped-bitcoin",
-            "name": "Wrapped Bitcoin (Axelar)",
+            "name": "Wrapped BTC (Axelar)",
             "rank": 393,
             "logo": "https://cryptologos.cc/logos/wrapped-bitcoin-wbtc-logo.svg",
             "symbol": "WBTC",
@@ -105,7 +105,7 @@
         },
         {
             "id": "multi-wrapped-bitcoin",
-            "name": "Wrapped Bitcoin (Multichain)",
+            "name": "Wrapped BTC (Multichain)",
             "rank": 394,
             "logo": "https://cryptologos.cc/logos/wrapped-bitcoin-wbtc-logo.svg",
             "symbol": "mWBTC",

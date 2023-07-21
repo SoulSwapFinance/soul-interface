@@ -154,12 +154,12 @@ export function CurrencySearch({
       {/* {showCommonBases && <CommonBases />} */}
 
       {searchToken && !searchTokenIsAdded && <ImportRow token={searchToken} onClick={handleImport} />}
-      <CommonBases />
+      {/* <CommonBases /> */}
       <div 
         className="h-full overflow-hidden overflow-y-auto border rounded border-dark-800 bg-[rgba(0,0,0,0.2)]"
       >
        
-        {/* {filteredSortedTokens?.length > 0 || filteredInactiveTokens?.length > 0 ? (
+        {filteredSortedTokens?.length > 0 || filteredInactiveTokens?.length > 0 ? (
           // TODO: fails to show tokens
           <CurrencyList
             chainId={chainId}
@@ -171,7 +171,7 @@ export function CurrencySearch({
           <Typography weight={700} variant="xs" className="text-secondary flex h-full justify-center items-center">
             {`No results found`}
           </Typography>
-        )} */}
+        )}
 
 
       </div>
