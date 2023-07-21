@@ -1,4 +1,5 @@
 import CHAINLINK_TOKENS from 'constants/chainlink/soulswap-chainlink.whitelist.json'
+import CROSSCHAIN_TOKENS from 'constants/crosschain/crosschain.tokens.json'
 import { ChainId, Currency, NATIVE, Token } from 'sdk'
 import { Button } from 'components/Button'
 import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
@@ -14,7 +15,7 @@ import { useRouter } from 'next/router'
 import React, { KeyboardEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import ReactGA from 'react-ga'
 
-import CommonBases from './CommonBases'
+// import CommonBases from './CommonBases'
 import CurrencyList from './CurrencyList'
 import ImportRow from './ImportRow'
 import { useTokenComparator } from './sorting'
@@ -24,6 +25,7 @@ interface CurrencySearchProps {
   showCommonBases?: boolean
   currencyList?: (string | undefined)[]
   allowManageTokenList?: boolean
+  // chainId: ChainId
 }
 
 export function CurrencySearch({
@@ -31,6 +33,7 @@ export function CurrencySearch({
   showCommonBases,
   currencyList,
   allowManageTokenList = true,
+  // chainId,
 }: CurrencySearchProps) {
   const router = useRouter()
   let allTokens = useAllTokens()
@@ -46,6 +49,13 @@ export function CurrencySearch({
   if (router.asPath.startsWith('/create') && chainId) {
     allTokens = Object.keys(allTokens).reduce((obj, key) => {
       if (CHAINLINK_TOKENS[chainId].find((address) => address === key)) obj[key] = allTokens[key]
+      return obj
+    }, {})
+  }
+
+  if (router.asPath.startsWith('/exchange/crosschain') && chainId) {
+    allTokens = Object.keys(allTokens).reduce((obj, key) => {
+      if (CROSSCHAIN_TOKENS[chainId].find((address) => address === key)) obj[key] = allTokens[key]
       return obj
     }, {})
   }
@@ -77,7 +87,6 @@ export function CurrencySearch({
 
   const filteredSortedTokens = useSortedTokensByQuery(sortedTokens, debouncedQuery)
   const ether = useMemo(() => chainId && NATIVE[chainId], [chainId])
-  // && ![ChainId.CELO].includes(chainId)
 
   const filteredSortedTokensWithETH: Currency[] = useMemo(() => {
     const s = debouncedQuery.toLowerCase().trim()
@@ -158,7 +167,6 @@ export function CurrencySearch({
       <div 
         className="h-full overflow-hidden overflow-y-auto border rounded border-dark-800 bg-[rgba(0,0,0,0.2)]"
       >
-       
         {filteredSortedTokens?.length > 0 || filteredInactiveTokens?.length > 0 ? (
           // TODO: fails to show tokens
           <CurrencyList
@@ -181,7 +189,7 @@ export function CurrencySearch({
             size="sm"
             id="list-token-manage-button"
             onClick={() => setView(CurrencyModalView.manage)}
-            color="blue"
+            color="purple"
             variant="filled"
           >
             {`Manage Token Lists`}

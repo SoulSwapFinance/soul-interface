@@ -192,24 +192,17 @@ export default function Stake() {
       <SunsetBanner />
       <div className="flex ml-2 mr-2 mb-4 gap-1 mt-4 items-center justify-center">
         <Button variant="filled" color="yellow" size="lg">
-          <NavLink href={'/luxor/dashboard'}>
-            <a className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> Data </span>
-            </a>
-          </NavLink>
-        </Button>
-        <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/bonds'}>
-            <a className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> Bond </span>
-            </a>
+            <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+             {'Bond'}
+            </div>
           </NavLink>
         </Button>
         <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/wrap'}>
-            <a className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span> Wrap </span>
-            </a>
+            <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              {'Unwrap'}
+            </div>
           </NavLink>
         </Button>
       </div>
@@ -217,15 +210,15 @@ export default function Stake() {
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
           <Tab.Group>
             <Tab.List className="flex items-center justify-center mb-1 space-x-2 p-3px text-white">
-              <div className="grid grid-cols-2 w-[95%] rounded-md p-2px gap-1.5 bg-dark-900">
-                <Tab
+              <div className="grid grid-cols-1 w-[95%] rounded-md p-2px gap-1.5 bg-dark-900">
+                {/* <Tab
                   className={({ selected }) =>
                     `${selected ? 'border-b-2 border-accent rounded-2xl p-2 text-lg border-yellow text-white' : 'bg-dark-900 text-lg text-white'
                     } flex items-center justify-center px-3 py-1.5 rounded-2xl semi-bold font-semibold border border-dark-800 border-1 hover:border-yellow`
                   }
                 >
                   {`Deposit`}
-                </Tab>
+                </Tab> */}
                 <Tab
                   className={({ selected }) =>
                     `${selected ? 'border-b-2 border-accent p-2 rounded-2xl text-lg border-yellow text-white' : 'bg-dark-900 text-lg text-white'
@@ -253,7 +246,7 @@ export default function Stake() {
           </div>
         </div>   */}
 
-            <Tab.Panel className={'outline-none'}>
+            {/* <Tab.Panel className={'outline-none'}>
 
               <StableInputPanel
                 value={stakeValue}
@@ -282,13 +275,6 @@ export default function Stake() {
 
               <div className="h-px my-2 bg-dark-1000" />
 
-              {/* <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-yellow w-full space-y-1">
-                <div className="text-white">
-                    <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                      <span> {formatNumber(stakingAPY)}% APY</span>
-                    </div>
-                </div>
-              </div> */}
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1">
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
@@ -386,7 +372,7 @@ export default function Stake() {
                 </NavLink>
               </div>
 
-            </Tab.Panel>
+            </Tab.Panel> */}
 
             <Tab.Panel className={'outline-none'}>
               <StableInputPanel
@@ -402,23 +388,14 @@ export default function Stake() {
               />
               <div className="h-px my-2 bg-dark-1000" />
 
-              <div className={classNames("flex justify-between", "mb-4")}>
+              {/* <div className={classNames("flex justify-between", "mb-4")}>
                 <Typography className="text-white text-lg" fontFamily={'medium'}>
                   {`Epoch Remaining`}
                 </Typography>
                 <Typography className="text-yellow text-lg" weight={600} fontFamily={'semi-bold'}>
                   {(remainingMinutes).toFixed()} mins
                 </Typography>
-              </div>
-              {/* <div className="flex justify-between">
-    <Typography className="text-white" fontFamily={'medium'}>
-      {`Daily Reward`}
-    </Typography>
-    <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-    { dailyReward.toFixed(2) } LUX 
-    </Typography>
-</div>            */}
-
+              </div> */}
 
               <div className="h-px my-2 bg-dark-1000" />
               {/* <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-yellow w-full space-y-1">
@@ -441,14 +418,14 @@ export default function Stake() {
                       {formatNumber(lumBalance, false, true)} LUX
                     </Typography>
                   </div>
-                  <div className={classNames(lumBalance > 0 && 'flex justify-between')}>
+                  {/* <div className={classNames(lumBalance > 0 && 'flex justify-between')}>
                     <Typography className="text-white" fontFamily={'medium'}>
                       {`Next Rebase`}
                     </Typography>
                     <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                       {formatNumber(nextStakedReward, false, true)} LUM
                     </Typography>
-                  </div>
+                  </div> */}
 
                   {/*               
               <div className={classNames(lumBalance > 0 && warmupValue > 0 ? 'flex justify-between' : 'hidden')}>

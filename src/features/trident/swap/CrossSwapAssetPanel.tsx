@@ -71,7 +71,6 @@ const CrossSwapAssetPanel = ({
       <div className={showInput ? `flex gap-1 justify-between items-baseline px-1.5` : 'hidden'}>
         <InputPanel
           {...{
-            chainId,
             selected,
             error,
             currency,
@@ -85,7 +84,7 @@ const CrossSwapAssetPanel = ({
             spendFromWallet,
           }}
         />
-        { !hideBalance && <BalancePanel {...{ chainId, disabled, currency, onChange, spendFromWallet }} />}
+        { !hideBalance && <BalancePanel {...{ disabled, currency, onChange, spendFromWallet }} />}
       </div>
     </div>
   )
@@ -130,8 +129,9 @@ const WalletSwitch: FC<
 }
 
 const InputPanel: FC<
-  Pick<CrossSwapAssetPanel, 'chainId' | 'currency' | 'value' | 'onChange' | 'disabled' | 'priceImpact'> & { priceImpactCss?: string }
-> = ({ chainId, currency, value, onChange, disabled, priceImpact, priceImpactCss }) => {
+  Pick<CrossSwapAssetPanel, 'currency' | 'value' | 'onChange' | 'disabled' | 'priceImpact'> & { priceImpactCss?: string }
+> = ({ currency, value, onChange, disabled, priceImpact, priceImpactCss }) => {
+  const { chainId } = useActiveWeb3React()
   const usdcValue = [ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? useUSDCValue(tryParseAmount(value, currency)) : tryParseAmount(value, currency)
   const span = useRef<HTMLSpanElement | null>(null)
   const [width, setWidth] = useState(0)
@@ -183,14 +183,13 @@ const InputPanel: FC<
   )
 }
 
-const BalancePanel: FC<Pick<CrossSwapAssetPanel, 'chainId' | 'disabled' | 'currency' | 'onChange' | 'spendFromWallet'>> = ({
-  chainId,
+const BalancePanel: FC<Pick<CrossSwapAssetPanel, 'disabled' | 'currency' | 'onChange' | 'spendFromWallet'>> = ({
   disabled,
   currency,
   onChange,
   spendFromWallet,
 }) => {
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const balance = useCoffinOrWalletBalance(chainId, account ? account : undefined, currency, spendFromWallet)
 
   const handleHalfClick = useCallback(() => {
@@ -218,9 +217,10 @@ const BalancePanel: FC<Pick<CrossSwapAssetPanel, 'chainId' | 'disabled' | 'curre
 const CrossSwapAssetPanelHeader: FC<
   Pick<
     CrossSwapAssetPanel,
-    'chainId' | 'currency' | 'currencies' | 'onSelect' | 'walletToggle' | 'spendFromWallet' | 'disabled' | 'onChange' | 'value'
+    'currency' | 'currencies' | 'onSelect' | 'walletToggle' | 'spendFromWallet' | 'disabled' | 'onChange' | 'value'
   > & { label: string; id?: string }
-> = ({ walletToggle, chainId, currency, onSelect, spendFromWallet, id, currencies }) => {
+> = ({ walletToggle, currency, onSelect, spendFromWallet, id, currencies }) => {
+  const { chainId } = useActiveWeb3React()
   const trigger = currency ? (
     <div
       id={id}

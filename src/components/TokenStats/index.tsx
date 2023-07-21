@@ -20,8 +20,7 @@ function TokenStats(): JSX.Element | null {
   const { chainId } = useActiveWeb3React()
   const toggleTokenStatsModal = useToggleTokenStatsModal()
   // const open = useModalOpen(ApplicationModal.SOUL_STATS)
-  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
-  // const seancePrice = useSeancePrice()
+  // const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
 
   if (!chainId) return null
 

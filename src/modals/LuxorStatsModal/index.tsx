@@ -4,7 +4,7 @@ import  { ApplicationModal } from 'state/application/reducer'
 import Image from 'next/image'
 import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
 import Typography from 'components/Typography'
-import ExternalLink from 'components/ExternalLink'
+// import ExternalLink from 'components/ExternalLink'
 import { useTokenInfo } from 'hooks/useTokenInfo'
 import { useWrappedLumensContract, useLuxorContract } from 'hooks'
 import { formatNumberScale } from 'functions'
@@ -16,7 +16,7 @@ import { useActiveWeb3React } from 'services/web3'
 // import QuestionHelper from 'components/QuestionHelper'
 import ModalHeader from 'components/Modal/Header'
 import { concat } from 'lodash'
-import { useLuxorPrice, useWrappedLumPrice } from 'hooks/getPrices'
+import { useLuxorPrice } from 'hooks/getPrices'
 import NavLink from 'components/NavLink'
 import { useLuxorInfo, usePairInfo, useSummonerInfo, useSummonerPoolInfo } from 'hooks/useAPI'
 import { usePairPrice } from 'hooks/usePairData'
@@ -41,7 +41,6 @@ export default function LuxorStatsModal(): JSX.Element | null {
   // let tokenInfo = useTokenInfo(useLuxorContract())
   let wrappedLumensInfo = useTokenInfo(useWrappedLumensContract())
   const luxorPrice = useLuxorPrice()
-  const wLumPrice = useWrappedLumPrice()
 
   const { luxorInfo } = useLuxorInfo()
 
@@ -308,12 +307,6 @@ export default function LuxorStatsModal(): JSX.Element | null {
           </Typography>,
           formatNumber(
             luxorPrice?.toFixed(2), true, true)
-        )}
-        {getSummaryLine(
-          <Typography variant="sm" className="flex items-center py-0.5">
-            {`wLumens Market Price`}
-          </Typography>,
-         `$${wLumPrice?.toFixed(0)}`
         )}
         <div className="flex mt-3" />
         {/* <div className="flex"> */}
