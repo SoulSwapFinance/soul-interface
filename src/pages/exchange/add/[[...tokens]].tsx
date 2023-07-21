@@ -10,7 +10,7 @@ import { currencyId, halfAmountSpend, maxAmountSpend } from 'functions/currency'
 import { useDerivedMintInfo, useMintActionHandlers, useMintState } from 'state/mint/hooks'
 import { useUserSlippageToleranceWithDefault } from 'state/user/hooks'
 import SwapDropdown from "features/swap/SwapDropdown"
-
+import NavLink from 'components/NavLink'
 import { AutoColumn } from 'components/Column'
 import { BigNumber } from '@ethersproject/bignumber'
 import { ConfirmAddModalBottom } from 'features/liquidity/ConfirmAddModalBottom'
