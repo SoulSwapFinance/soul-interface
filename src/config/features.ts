@@ -50,7 +50,7 @@ const features: FeatureMap = {
 
   [ChainId.BSC]: [
     Feature.AMM, 
-    Feature.ANALYTICS,
+    // Feature.ANALYTICS,
     Feature.AGGREGATE,
     // Feature.BRIDGE,
     Feature.CROSSCHAIN,

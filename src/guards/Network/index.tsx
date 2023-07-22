@@ -60,16 +60,18 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
               <Button
                 className={`text-primary hover:text-white flex items-center flex-col gap-2 justify-start`}
                 key={idx}
+                // onClick={() => switchNetwork(key)}
+
                 onClick={() => {
                   const params = SUPPORTED_NETWORKS[key]
                   cookie.set('chainId', key)
-                  if (key === ChainId.FANTOM.toString()) {
+                  if (key === '0xFA') {
                     library?.send('wallet_switchEthereumChain', [{ chainId: '0xFA' }, account])
-                  } else if (key === ChainId.TELOS.toString()) {
+                  } else if (key === '0x28') {
                     library?.send('wallet_switchEthereumChain', [{ chainId: '0x28' }, account])
-                  } else if (key === ChainId.AVALANCHE.toString()) {
-                    library?.send('wallet_switchEthereumChain', [{ chainId: 'A86A' }, account])
-                  } else if (key === ChainId.ETHEREUM.toString()) {
+                  } else if (key === '0xA86A') {
+                    library?.send('wallet_switchEthereumChain', [{ chainId: '0xA86A' }, account])
+                  } else if (key === '0x1') {
                     library?.send('wallet_switchEthereumChain', [{ chainId: '0x1' }, account])
                   } else {
                     library?.send('wallet_addEthereumChain', [params, account])

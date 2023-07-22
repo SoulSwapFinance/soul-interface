@@ -1,8 +1,11 @@
 import { useMemo } from "react"
-import { useFantomPrice, useSoulPrice } from "./getPrices"
+import { useTokenPrice, useSoulPrice } from "./getPrices"
+import { WNATIVE_ADDRESS } from "sdk"
+import { useActiveWeb3React } from "services/web3"
 
 export function usePricesApi() {
-    const ftmPrice = useFantomPrice()
+  const { chainId } = useActiveWeb3React()
+    const ftmPrice = useTokenPrice(WNATIVE_ADDRESS[chainId])
     const soulPrice = useSoulPrice()
     const usdcPrice = 1
 

@@ -7,7 +7,8 @@ export const otherChains = [
     network: 'avalanche',
     nativeCurrency: { name: 'Avalanche', symbol: 'AVAX', decimals: 18 },
     rpcUrls: {
-      default: 'https://api.avax.network/ext/bc/C/rpc',
+      // default: 'https://api.avax.network/ext/bc/C/rpc',
+      default: "https://rpc.ankr.com/avalanche",
     },
     blockExplorers: {
       etherscan: {
