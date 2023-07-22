@@ -6,7 +6,7 @@
     "longName": "Avalanche Mainnet",
     "color": "#E84142",
     "rpc": [
-        "https://api.avax.network/ext/bc/C/rpc"
+        "https://rpc.ankr.com/avalanche"
     ],
     "explorers": [
         "https://snowtrace.io/"

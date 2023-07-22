@@ -69,14 +69,16 @@ export const SUPPORTED_NETWORKS: Record<
     blockExplorerUrls: ['https://polygonscan.com'],
   },
   [ChainId.AVALANCHE]: {
-    chainId: '0xA86A',
+    chainId: '0xa86a',
     chainName: 'Avalanche Mainnet C-Chain',
     nativeCurrency: {
       name: 'Avalanche Token',
       symbol: 'AVAX',
       decimals: 18,
     },
-    rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
+    // rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
+    // rpcUrls: ['https://https://rpc.ankr.com/avalanche', 'https://mainnet-avalanche.wallet.brave.com/'],
+    rpcUrls: ['https://https://rpc.ankr.com/avalanche'],
     blockExplorerUrls: ['https://snowtrace.io'],
   },
   [ChainId.ARBITRUM]: {

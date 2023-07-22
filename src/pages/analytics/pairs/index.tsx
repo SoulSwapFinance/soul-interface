@@ -9,8 +9,10 @@ import { useActiveWeb3React } from 'services/web3'
 import React, { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { getChainColorCode } from 'constants/chains'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums'
 
-export default function Pairs() {
+function Pairs() {
   const [type, setType] = useState<'all' | 'gainers' | 'losers'>('all')
 
   const { chainId } = useActiveWeb3React()
@@ -121,3 +123,6 @@ export default function Pairs() {
     </AnalyticsContainer>
   )
 }
+
+export default Pairs
+Pairs.Guard = NetworkGuard(Feature.ANALYTICS)

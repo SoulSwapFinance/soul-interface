@@ -36,6 +36,8 @@ import { Button } from 'components/Button'
 import { RowFixed } from 'components/Row'
 import { getAddress } from '@ethersproject/address'
 import NavLink from 'components/NavLink'
+import { Feature } from 'enums'
+import NetworkGuard from 'guards/Network'
 
 const ONE_DAY = 86_400
 
@@ -54,7 +56,7 @@ const chartTimespans = [
   },
 ]
 
-export default function Token() {
+function Token() {
   const router = useRouter()
   const id = (router.query.id as string)?.toLowerCase()
   const tokenAddress = id
@@ -391,3 +393,6 @@ export default function Token() {
     </AnalyticsContainer>
   )
 }
+
+export default Token
+Token.Guard = NetworkGuard(Feature.ANALYTICS)

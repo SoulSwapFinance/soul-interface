@@ -25,6 +25,7 @@ import CoffinBox from '../coffinbox'
 import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 import { getChainColorCode } from 'constants/chains'
+import NetworkGuard from 'guards/Network'
 
 const ONE_DAY = 86_400
 
@@ -51,7 +52,7 @@ const chartTimespans = [
   // },
 ]
 
-export default function Dashboard(): JSX.Element {
+function Dashboard(): JSX.Element {
   const [type, setType]
     = useState<'coffin' | 'pairs' | 'tokens'>('pairs')
   // = useState<'pools' | 'pairs' | 'tokens'>('pools')
@@ -365,3 +366,6 @@ export default function Dashboard(): JSX.Element {
     </AnalyticsContainer>
   )
 }
+
+export default Dashboard
+Dashboard.Guard = NetworkGuard(Feature.ANALYTICS)
