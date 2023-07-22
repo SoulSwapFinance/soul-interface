@@ -1,30 +1,32 @@
 // import { DuplicateIcon } from '@heroicons/react/24/outline'
-import { CheckIcon } from '@heroicons/react/24/solid'
+// import { CheckIcon } from '@heroicons/react/24/solid'
 import { CurrencyLogo } from 'components/CurrencyLogo'
-import DoubleCurrencyLogo from 'components/DoubleLogo'
-import AnalyticsContainer from 'features/analytics/AnalyticsContainer'
-import Background from 'features/analytics/Background'
+// import DoubleCurrencyLogo from 'components/DoubleLogo'
+// import AnalyticsContainer from 'features/analytics/AnalyticsContainer'
+// import Background from 'features/analytics/Background'
 import ChartCard from 'features/analytics/ChartCard'
-import InfoCard from 'features/analytics/InfoCard'
-import { LegacyTransactions } from 'features/transactions/Transactions'
-import { getExplorerLink } from 'functions/explorer'
+// import InfoCard from 'features/analytics/InfoCard'
+// import { LegacyTransactions } from 'features/transactions/Transactions'
+// import { getExplorerLink } from 'functions/explorer'
 import { formatNumber, shortenAddress } from 'functions/format'
 import { useCurrency } from 'hooks/Tokens'
-import useCopyClipboard from 'hooks/useCopyClipboard'
+// import useCopyClipboard from 'hooks/useCopyClipboard'
 import { useNativePrice, useOneDayBlock, usePairDayData, useSoulPairs, useTwoDayBlock } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
 import { times } from 'lodash'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useMemo } from 'react'
-import { ExternalLink as LinkIcon } from 'react-feather'
+// import { ExternalLink as LinkIcon } from 'react-feather'
 import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
-import { getChainColor, getChainColorCode } from 'constants/chains'
-import Typography from 'components/Typography'
-import { TridentHeader } from 'layouts/Trident'
+// import { getChainColor, getChainColorCode } from 'constants/chains'
+// import Typography from 'components/Typography'
+// import { TridentHeader } from 'layouts/Trident'
 import { computePairAddress } from 'sdk/functions/computePairAddress'
 import { Currency, FACTORY_ADDRESS, NATIVE, Token, WNATIVE_ADDRESS } from 'sdk'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums'
 
 const ONE_DAY = 86_400
 
@@ -52,7 +54,7 @@ interface PairProps {
   outputCurrency?: Currency | Token | undefined
 }
 
-export default function PairChart({ inputCurrency, outputCurrency }: PairProps) {
+function PairChart({ inputCurrency, outputCurrency }: PairProps) {
   const { chainId } = useActiveWeb3React()
 
   const router = useRouter()
@@ -204,3 +206,6 @@ export default function PairChart({ inputCurrency, outputCurrency }: PairProps) 
       </div>
   )
 }
+
+export default PairChart
+PairChart.Guard = NetworkGuard(Feature.ANALYTICS)

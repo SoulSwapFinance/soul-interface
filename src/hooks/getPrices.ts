@@ -153,12 +153,6 @@ export const getLuxorPrice = async (variables = {}) => {
   })
 }
 
-export const getFantomPrice = async () => {
-  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83',
-  })
-}
-
 export const getBinancePrice = async () => {
   return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
     id: '0xd67de0e0a0fd7b15dc8348bb9be742f3c5850454',
@@ -273,11 +267,6 @@ export function useLuxorPrice(swrConfig: SWRConfiguration = undefined) {
 
 export function useEnchantPrice(swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(['enchantPrice'], () => getEnchantPrice(), swrConfig)
-  return data
-}
-
-export function useFantomPrice(swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR(['fantomPrice'], () => getFantomPrice(), swrConfig)
   return data
 }
 

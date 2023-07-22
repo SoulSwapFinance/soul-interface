@@ -10,7 +10,7 @@ import { VAULTS } from '../constants/vaults'
 import { useActiveWeb3React } from 'services/web3'
 import { SOUL_BOND_ADDRESS } from 'sdk'
 import { BONDS } from 'constants/bonds'
-import { useFantomPrice, useLuxorPrice, useSoulPrice, useWrappedEthPrice } from './getPrices'
+import { useTokenPrice, useLuxorPrice, useSoulPrice, useWrappedEthPrice } from './getPrices'
 import { useBondInfo, useTokenInfo } from './useAPI'
 
 const PAIR_INTERFACE = new Interface(ISoulSwapPair)
@@ -517,7 +517,7 @@ export function useBondTVL(): TVLInfo[] {
 
 export function useSoulTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
-  const ftmPrice = useFantomPrice()
+  const ftmPrice = useTokenPrice(WNATIVE_ADDRESS[chainId])
   const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
   const luxPrice = Number(useTokenInfo(LUX_ADDRESS[chainId]).tokenInfo.price)
   const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId]).tokenInfo.price)
@@ -652,7 +652,7 @@ export function useSoulTVL(): TVLInfo[] {
 
 export function useLuxTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
-  const ftmPrice = useFantomPrice()
+  const ftmPrice = useTokenPrice(WNATIVE_ADDRESS[chainId])
   const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
   const luxPrice = useLuxorPrice()
   const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId]).tokenInfo.price)

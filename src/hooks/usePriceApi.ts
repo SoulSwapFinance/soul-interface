@@ -1,8 +1,8 @@
 import { request } from 'graphql-request'
-import { ChainId } from 'sdk'
+import { ChainId, WNATIVE_ADDRESS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 import useSWR from 'swr'
-import { useFantomPrice } from './getPrices'
+import { useTokenPrice } from './getPrices'
 
 export function useFetcher() {
     const { chainId } = useActiveWeb3React()
@@ -22,7 +22,9 @@ export default function usePriceApi(tokenAddress: string) {
         }
     }`
   const { data } = useSWR(QUERY, useFetcher())
-  const fantomPrice = useFantomPrice()
+  const { chainId } = useActiveWeb3React()
+
+  const fantomPrice = useTokenPrice(WNATIVE_ADDRESS[chainId])
   const price = Number(data?.token?.derivedETH) * Number(fantomPrice)
   return parseFloat(price.toString())
 }

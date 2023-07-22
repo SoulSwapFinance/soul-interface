@@ -19,7 +19,7 @@ import { useActiveWeb3React } from 'services/web3'
 import Lottie from 'lottie-react'
 
 import React, { createContext, FC, ReactNode, useContext, useEffect, useMemo, useRef, useState } from 'react'
-import { useBinancePrice, useFantomPrice, useTokenPrice, useWrappedBtcPrice } from 'hooks/getPrices'
+import { useBinancePrice, useTokenPrice, useWrappedBtcPrice } from 'hooks/getPrices'
 import { usePairPrice } from 'hooks/usePairData'
 
 interface AssetInputProps {
@@ -206,7 +206,7 @@ const AssetInputPanel = ({
   const usdcValue = useUSDCValue(tryParseAmount(Number(value) === 0 ? '1' : value, currency))
   const tokenPrice = useTokenPrice(token0)
   const nativePrice = useTokenPrice(WNATIVE_ADDRESS[chainId])
-  const ftmPrice = useFantomPrice()
+  const ftmPrice = useTokenPrice(WNATIVE_ADDRESS[chainId])
   // const nativePrice = Number(usePriceUSD(WNATIVE_ADDRESS[chainId]).price)
   const btcPrice = useWrappedBtcPrice()
   const bnbPrice = useBinancePrice()

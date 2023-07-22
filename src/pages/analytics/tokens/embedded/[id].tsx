@@ -35,6 +35,8 @@ import { Button } from 'components/Button'
 // import { RowFixed } from 'components/Row'
 // import { getAddress } from '@ethersproject/address'
 import NavLink from 'components/NavLink'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums'
 
 const ONE_DAY = 86_400
 
@@ -58,7 +60,7 @@ interface TokenProps {
   outputCurrency?: Currency | ERC20 | undefined
 }
 
-export default function Token({ outputCurrency }: TokenProps) {
+function Token({ outputCurrency }: TokenProps) {
   const router = useRouter()
   const id = outputCurrency?.wrapped.address.toLowerCase()
   // const tokenAddress = id
@@ -240,3 +242,6 @@ export default function Token({ outputCurrency }: TokenProps) {
     </AnalyticsContainer>
   )
 }
+
+export default Token
+Token.Guard = NetworkGuard(Feature.ANALYTICS)
