@@ -277,7 +277,7 @@ export function useBalancesFetcherContract(): Contract | null {
 }
 
 export function useLuxorRefunderContract(): Contract | null {
-  return useContract(LUXOR_REEFUNDER_ADDRESS[ChainId.FANTOM], LUXOR_REFUNDER_ABI, false)
+  return useContract(LUXOR_REEFUNDER_ADDRESS[ChainId.FANTOM], LUXOR_REFUNDER_ABI, true)
 }
 
 export function useMulticall2Contract() {
