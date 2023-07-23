@@ -226,7 +226,7 @@ const nextConfig = {
       },
       {
         source: '/luxor',
-        destination: '/luxor/bonds',
+        destination: '/luxor/redeem',
         permanent: true,
       },
       {
@@ -273,7 +273,7 @@ const nextConfig = {
         },
         {
           source: '/luxor',
-          destination: '/luxor/bonds',
+          destination: '/luxor/redeem',
         },
         {
           source: '/pool',

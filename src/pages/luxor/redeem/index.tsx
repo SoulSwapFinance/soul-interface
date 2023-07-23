@@ -23,7 +23,7 @@ import { LUXOR, WFTM } from 'constants/tokens'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 
-export default function Refunder() {
+function Redeem() {
   const addTransaction = useTransactionAdder()
 
   const [inputAmount, setInputAmount] = useState('')
@@ -188,4 +188,6 @@ export default function Refunder() {
   )
 }
 
-Refunder.Guard = () => NetworkGuard(Feature.LUXOR)
+export default Redeem
+
+Redeem.Guard = NetworkGuard(Feature.LUXOR)
