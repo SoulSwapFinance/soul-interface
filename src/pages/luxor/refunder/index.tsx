@@ -20,6 +20,8 @@ import { useActiveWeb3React } from 'services/web3/hooks'
 import NavLink from 'components/NavLink'
 import { SunsetBanner } from 'components/Banner'
 import { LUXOR, WFTM } from 'constants/tokens'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums'
 
 export default function Refunder() {
   const addTransaction = useTransactionAdder()
@@ -27,10 +29,9 @@ export default function Refunder() {
   const [inputAmount, setInputAmount] = useState('')
 
   const { account, chainId } = useActiveWeb3React()
-  // const { data } = useRefunder()
   const luxorToken = new Token(chainId, getAddress(LUX_ADDRESS[chainId]), 9, 'LUX')
 
-  const luxorBalance = useCurrencyBalance(250, account, luxorToken)
+  const luxorBalance = useCurrencyBalance(ChainId.FANTOM, account, luxorToken)
   const LuxorRefunderContract = useLuxorRefunderContract()
 
   const parsedInputValue = tryParseAmount(inputAmount, LUXOR[ChainId.FANTOM])
@@ -55,20 +56,20 @@ export default function Refunder() {
     <Container id="stablecoin-page" className="py-4 md:py-8 lg:py-12">
       <LuxorGlowShadow>
         <Head>
-          <title>Wrap | Luxor</title>
+          <title>Redeem | Luxor</title>
           <meta key="description" name="description" />
         </Head>
         <SunsetBanner />
         <div className="flex ml-2 mr-2 mb-4 mt-4 gap-1 items-center justify-center">
           <Button variant="filled" color="yellow" size="lg">
-            <NavLink href={'/luxor/wrap'}>
+            <NavLink href={'/luxor/stake'}>
               <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                 {'Unstake'}
               </div>
             </NavLink>
           </Button>
           <Button variant="filled" color="yellow" size="lg">
-            <NavLink href={'/luxor/stake'}>
+            <NavLink href={'/luxor/wrap'}>
               <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                 {'Unwrap'}
               </div>
@@ -186,3 +187,5 @@ export default function Refunder() {
     </Container>
   )
 }
+
+Refunder.Guard = () => NetworkGuard(Feature.LUXOR)
