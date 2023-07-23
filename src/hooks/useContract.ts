@@ -76,8 +76,9 @@ import SPOOKY_FACTORY_ABI from 'constants/abis/spookyswap-factory.json'
 import SOUL_CIRCLE_ABI from 'constants/abis/soulswap/soulcircle.json' 
 import LUX_HELPER_ABI from 'constants/abis/lux-bond-helper.json' 
 import CHAINLINK_ORACLE_ABI from 'constants/abis/chainlink-oracle.json'
+import PRICE_ORACLE_ABI from 'constants/abis/price-oracle.json'
 import COMPLEX_REWARDER_ABI from 'constants/abis/complex-rewarder.json'
-import ONCHAIN_AGGREGATOR_ORACLE_ABI from 'constants/abis/onchain-oracle.json'
+// import ONCHAIN_AGGREGATOR_ORACLE_ABI from 'constants/abis/onchain-oracle.json'
 import OFFCHAIN_AGGREGATOR_ORACLE_ABI from 'constants/abis/offchain-oracle.json'
 import { Contract } from '@ethersproject/contracts'
 import DASHBOARD_ABI from 'constants/abis/dashboard.json'
@@ -514,6 +515,10 @@ export function useSoulSwapSwapper(): Contract | null {
 export function useChainlinkOracle(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(CHAINLINK_ORACLE_ADDRESS[chainId], CHAINLINK_ORACLE_ABI, false)
+}
+
+export function usePriceOracle(oracleAddress: string): Contract | null {
+  return useContract(oracleAddress, PRICE_ORACLE_ABI, false)
 }
 
 // experimental:

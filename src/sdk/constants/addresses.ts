@@ -404,6 +404,28 @@ export const CHAINLINK_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
+export const BTC_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '0xf4030086522a5beea4988f8ca5b36dbc97bee88c',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x8e94c22142f4a64b99022ccdd994f4e9ec86e4b4',
+  [ChainId.AVALANCHE]: '0x2779d32d5166baaa2b2b658333ba7e6ec0c65743',
+  [ChainId.MATIC]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
+
+export const ETH_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x11ddd3d147e5b83d01cee7070027092397d63658',
+  [ChainId.AVALANCHE]: '0x976b3d034e162d8bd72d6b9c989d545b839003b0',
+  [ChainId.MATIC]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
+
 export const ENCHANT_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
