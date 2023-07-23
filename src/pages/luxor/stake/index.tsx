@@ -553,7 +553,8 @@ export default function Stake() {
                     >
                       {`Forfeit`}
                     </Button></>
-                ) : Number(warmupExpiry) < Number(epoch) && Number(warmupValue) > 0 ? (
+                ) : // Number(warmupExpiry) < Number(epoch) && 
+                Number(warmupValue) > 0 ? (
                   <><ButtonError
                     variant="filled"
                     color="yellow"

@@ -1,4 +1,4 @@
-import { ChainId, Currency, CurrencyAmount, JSBI, Price, Token } from 'sdk'
+import { BTC_ORACLE_ADDRESS, ChainId, Currency, CurrencyAmount, ETH_ORACLE_ADDRESS, JSBI, Price, Token } from 'sdk'
 
 import { useActiveWeb3React } from 'services/web3'
 import { useMemo } from 'react'
@@ -10,6 +10,7 @@ import { AVAX_ADDRESS, BNB_ADDRESS, FUSD_ADDRESS, LUX_ADDRESS, SEANCE_ADDRESS, W
   SOUL_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS, SURV_ADDRESS } 
   from 'constants/addresses'
 import { usePrice } from 'hooks/usePrice'
+import { useOraclePrice } from './useOraclePrice'
 
 // AMOUNT_OUT = amounts used when calculating spot price for a given currency.
 // The amount is large enough to filter low liquidity pairs.
@@ -18,11 +19,6 @@ const STABLECOIN_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.ETHEREUM]: CurrencyAmount.fromRawAmount(USDC[ChainId.ETHEREUM], 100_000e6),
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(USDC[ChainId.FANTOM], 100_000e6),
   [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(USDC[ChainId.AVALANCHE], 100_000e6),
-}
-
-const DAI_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(DAI[ChainId.FANTOM], 100_000e6),
-  [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(DAI[ChainId.AVALANCHE], 100_000e6),
 }
 
 const SOUL_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
@@ -42,15 +38,15 @@ const WLUM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WLUM[ChainId.FANTOM], 100_000e6)
 }
 
-// const WETH_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-//   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WETH[ChainId.FANTOM], 100_000e6),
-//   [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(WETH[ChainId.AVALANCHE], 100_000e6)
-// }
+const WETH_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WETH[ChainId.FANTOM], 100_000e6),
+  [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(WETH[ChainId.AVALANCHE], 100_000e6)
+}
 
-// const WBTC_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-//   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WBTC[ChainId.FANTOM], 100_000e6),
-//   [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(WBTC[ChainId.AVALANCHE], 100_000e6)
-// }
+const WBTC_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
+  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WBTC[ChainId.FANTOM], 100_000e6),
+  [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(WBTC[ChainId.AVALANCHE], 100_000e6)
+}
 
 const WFTM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WFTM[ChainId.FANTOM], 100_000e6)
@@ -74,14 +70,14 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const chainId = currency?.chainId
 
   const soulPrice = usePrice(SOUL_ADDRESS[chainId])
-  const seancePrice = usePrice(SEANCE_ADDRESS[chainId])
 
   const luxorPrice = usePrice(LUX_ADDRESS[250])
   const wLumensPrice = usePrice(WLUM_ADDRESS[250])
   const wftmPrice = usePrice(WFTM_ADDRESS[250])
   const survPrice = usePrice(SURV_ADDRESS[250])
-  // const wethPrice = usePrice(WETH_ADDRESS[chainId])
-  // const wbtcPrice = usePrice(WBTC_ADDRESS[chainId])
+  // const wethPrice = usePriceUSD(WETH_ADDRESS[chainId])?.price
+  const wethPrice = useOraclePrice(ETH_ORACLE_ADDRESS[chainId])
+  const wbtcPrice = useOraclePrice(BTC_ORACLE_ADDRESS[chainId])
   const bnbPrice = usePrice(BNB_ADDRESS[chainId])
   const avaxPrice = usePrice(AVAX_ADDRESS[chainId])
 
@@ -91,16 +87,14 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const wftmAmountOut = chainId ? WFTM_AMOUNT_OUT[250] : undefined
 
   const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId] : undefined
-  const daiAmountOut = chainId ? DAI_AMOUNT_OUT[chainId] : undefined
   const soulAmountOut = chainId ? SOUL_AMOUNT_OUT[chainId] : undefined
-  // const wethAmountOut = chainId ? WETH_AMOUNT_OUT[chainId] : undefined
-  // const wbtcAmountOut = chainId ? WBTC_AMOUNT_OUT[chainId] : undefined
+  const wethAmountOut = chainId ? WETH_AMOUNT_OUT[chainId] : undefined
+  const wbtcAmountOut = chainId ? WBTC_AMOUNT_OUT[chainId] : undefined
   const bnbAmountOut = chainId ? BNB_AMOUNT_OUT[chainId] : undefined
   const avaxAmountOut = chainId ? AVAX_AMOUNT_OUT[chainId] : undefined
 
   // TOKENS
   const stablecoin = amountOut?.currency
-  const dai = daiAmountOut?.currency
   const soul = soulAmountOut?.currency
   const luxor = luxorAmountOut?.currency
   const wlum = wlumAmountOut?.currency
@@ -109,12 +103,8 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const bnb = bnbAmountOut?.currency
   const avax = avaxAmountOut?.currency
 
-  // const weth = wethAmountOut?.currency
-  // const wbtc = wbtcAmountOut?.currency
-  // const crv = crvAmountOut?.currency
-  // const grimEVO = grimEVOAmountOut?.currency
-
-  // const WBTC_MULTIPLIER = chainId == ChainId.FANTOM ? 2 : ChainId.AVALANCHE ? 3.5 : 0
+  const weth = wethAmountOut?.currency
+  const wbtc = wbtcAmountOut?.currency
 
   // TODO(#2808): remove dependency on useBestV2Trade
   /* const v2USDCTrade = useBestV2Trade(TradeType.EXACT_OUTPUT, amountOut, currency, {
@@ -133,11 +123,6 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
     // handle usdc
     if (currency?.wrapped.equals(stablecoin)) {
       return new Price(stablecoin, stablecoin, '1', '1')
-    }
-
-    // handle dai
-    if (currency?.wrapped.equals(dai)) {
-      return new Price(dai, dai, '1', '1')
     }
 
     // handle soul
@@ -166,14 +151,14 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
     }
 
     // handle weth
-    // if (currency?.wrapped.equals(weth)) {
-    //   return new Price(weth, weth, '1000', Number(wethPrice * 1000).toFixed())
-    // }
+    if (currency?.wrapped.equals(weth)) {
+      return new Price(weth, weth, '1000', Number(wethPrice * 1000).toFixed())
+    }
 
-    // // handle wbtc
-    // if (currency?.wrapped.equals(wbtc)) {
-    //   return new Price(wbtc, wbtc, '1', Number(wbtcPrice * WBTC_MULTIPLIER).toFixed())
-    // }
+    // handle wbtc
+    if (currency?.wrapped.equals(wbtc)) {
+      return new Price(wbtc, wbtc, '100000', Number(wbtcPrice * 100000).toFixed())
+    }
     
     // handle bnb
     if (currency?.wrapped.equals(bnb)) {

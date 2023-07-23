@@ -9,9 +9,18 @@ export function usePrice(tokenAddress: string | undefined | null) {
     const priceHelperContract = usePriceHelperContract()
     const rawPrice = useSingleCallResult(
         priceHelperContract,
-        'currentTokenUsdcPrice',
+        // 'currentTokenUsdcPrice',
+        'currentTokenNativePrice',
         [tokenAddress]
     ).result
+
+  //   let _nativePrice = useSingleCallResult(
+  //     priceHelperContract,
+  //     // 'currentTokenUsdcPrice',
+  //     'currentNativePriceInUsdc'
+  // ).result
+
+  // const nativePrice = _nativePrice ? Number(_nativePrice) / 1e18 : 0
 
     const price =  Number(rawPrice) / 1e18
   
