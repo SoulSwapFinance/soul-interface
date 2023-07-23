@@ -392,6 +392,7 @@ export function useTVL(): TVLInfo[] {
     lendingPools,
   ])
 }
+
 export function useBondTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[ChainId.FANTOM]).tokenInfo.price) // only on FTM and ETH
@@ -517,7 +518,7 @@ export function useBondTVL(): TVLInfo[] {
 
 export function useSoulTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
-  const ftmPrice = useTokenPrice(WNATIVE_ADDRESS[chainId])
+  const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[chainId]).tokenInfo.price)
   const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
   const luxPrice = Number(useTokenInfo(LUX_ADDRESS[chainId]).tokenInfo.price)
   const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId]).tokenInfo.price)
@@ -652,7 +653,7 @@ export function useSoulTVL(): TVLInfo[] {
 
 export function useLuxTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
-  const ftmPrice = useTokenPrice(WNATIVE_ADDRESS[chainId])
+  const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[chainId]).tokenInfo.price)
   const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
   const luxPrice = useLuxorPrice()
   const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId]).tokenInfo.price)
