@@ -88,6 +88,13 @@ export default function Stablecoin() {
         <SunsetBanner />
         <div className="flex ml-2 mr-2 mb-4 mt-4 gap-1 items-center justify-center">
           <Button variant="filled" color="yellow" size="lg">
+            <NavLink href={'/luxor/redeem'}>
+              <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                {'Redeem'}
+              </div>
+            </NavLink>
+          </Button>
+          <Button variant="filled" color="yellow" size="lg">
             <NavLink href={'/luxor/bonds'}>
               <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                 {'Bond'}
@@ -205,8 +212,8 @@ export default function Stablecoin() {
                 )}
               </div>
             </Tab.Panel> */}
-          
-          {/* UNWRAPPING TAB */}
+
+            {/* UNWRAPPING TAB */}
             <Tab.Panel className={'outline-none'}>
               <StableInputPanel
                 value={unwrapValue}

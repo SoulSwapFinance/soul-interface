@@ -23,7 +23,7 @@ import { LUXOR, WFTM } from 'constants/tokens'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 
-export default function Refunder() {
+function Redeem() {
   const addTransaction = useTransactionAdder()
 
   const [inputAmount, setInputAmount] = useState('')
@@ -61,6 +61,13 @@ export default function Refunder() {
         </Head>
         <SunsetBanner />
         <div className="flex ml-2 mr-2 mb-4 mt-4 gap-1 items-center justify-center">
+          <Button variant="filled" color="yellow" size="lg">
+            <NavLink href={'/luxor/bonds'}>
+              <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                {'Bond'}
+              </div>
+            </NavLink>
+          </Button>
           <Button variant="filled" color="yellow" size="lg">
             <NavLink href={'/luxor/stake'}>
               <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
@@ -160,6 +167,7 @@ export default function Refunder() {
                     onClick={async () => {
                       try {
                         const tx = await LuxorRefunderContract.refund(
+                          // inputAmount
                           BigNumber.from(parsedInputValue.quotient.toString())
                         )
                         addTransaction(tx, {
@@ -188,4 +196,6 @@ export default function Refunder() {
   )
 }
 
-Refunder.Guard = () => NetworkGuard(Feature.LUXOR)
+export default Redeem
+
+Redeem.Guard = NetworkGuard(Feature.LUXOR)

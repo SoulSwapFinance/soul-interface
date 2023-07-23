@@ -192,9 +192,16 @@ export default function Stake() {
       <SunsetBanner />
       <div className="flex ml-2 mr-2 mb-4 gap-1 mt-4 items-center justify-center">
         <Button variant="filled" color="yellow" size="lg">
+          <NavLink href={'/luxor/redeem'}>
+            <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              {'Redeem'}
+            </div>
+          </NavLink>
+        </Button>
+        <Button variant="filled" color="yellow" size="lg">
           <NavLink href={'/luxor/bonds'}>
             <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-             {'Bond'}
+              {'Bond'}
             </div>
           </NavLink>
         </Button>
@@ -505,12 +512,12 @@ export default function Stake() {
                   className="text-black text-md font-bold"
                 >
                   <div className={`text-black`}>
-                  {isApprovePending
-                    ? "Approving"
-                    : isApproveCompleted
-                    ? "Approved"
-                    : "Approve"}
-                    </div>
+                    {isApprovePending
+                      ? "Approving"
+                      : isApproveCompleted
+                        ? "Approved"
+                        : "Approve"}
+                  </div>
                 </Button>
 
                 {Number(warmupExpiry) - Number(epoch) > 0 ? (
@@ -554,8 +561,51 @@ export default function Stake() {
                       {`Forfeit`}
                     </Button></>
                 ) : // Number(warmupExpiry) < Number(epoch) && 
-                Number(warmupValue) > 0 ? (
-                  <><ButtonError
+                  Number(warmupValue) > 0 ? (
+                    <><ButtonError
+                      variant="filled"
+                      color="yellow"
+                      className="text-black text-md font-bold"
+                      onClick={async () => {
+                        try {
+                          const tx = await unstake(BigNumber.from(parsedRedeemValue?.quotient.toString()))
+                          addTransaction(tx, {
+                            summary: `Withdraw LUX`,
+                          })
+                        } catch (error) {
+                          console.error(error)
+                        }
+                      }}
+                      disabled={!isRedeemValid || !account}
+                      error={!isRedeemValid && !!parsedRedeemValue}
+                      style={{ width: '100%' }}
+                    >
+                      <div
+                        className={`text-black`}
+                      >
+                        {redeemError || `Withdraw`}
+                      </div>
+                    </ButtonError>
+                      <Button
+                        variant="filled"
+                        color="green"
+                        className="text-black"
+                        onClick={async () => {
+                          try {
+                            const tx = await claim()
+                            addTransaction(tx, {
+                              summary: `Claim LUX`,
+                            })
+                          } catch (error) {
+                            console.error(error)
+                          }
+                        }}
+                        disabled={!account}
+                        style={{ width: '100%' }}
+                      >
+                        {`Claim`}
+                      </Button></>
+                  ) : (<ButtonError
                     variant="filled"
                     color="yellow"
                     className="text-black text-md font-bold"
@@ -574,56 +624,13 @@ export default function Stake() {
                     style={{ width: '100%' }}
                   >
                     <div
-                        className={`text-black`}
-                      >
-                      {redeemError || `Withdraw`}
-                      </div>
-                  </ButtonError>
-                    <Button
-                      variant="filled"
-                      color="green"
-                      className="text-black"
-                      onClick={async () => {
-                        try {
-                          const tx = await claim()
-                          addTransaction(tx, {
-                            summary: `Claim LUX`,
-                          })
-                        } catch (error) {
-                          console.error(error)
-                        }
-                      }}
-                      disabled={!account}
-                      style={{ width: '100%' }}
+                      className={`text-black`}
                     >
-                      {`Claim`}
-                    </Button></>
-                ) : (<ButtonError
-                  variant="filled"
-                  color="yellow"
-                  className="text-black text-md font-bold"
-                  onClick={async () => {
-                    try {
-                      const tx = await unstake(BigNumber.from(parsedRedeemValue?.quotient.toString()))
-                      addTransaction(tx, {
-                        summary: `Withdraw LUX`,
-                      })
-                    } catch (error) {
-                      console.error(error)
-                    }
-                  }}
-                  disabled={!isRedeemValid || !account}
-                  error={!isRedeemValid && !!parsedRedeemValue}
-                  style={{ width: '100%' }}
-                >
-                  <div
-                        className={`text-black`}
-                      >
 
-                  {redeemError || `Withdraw`}
-                      </div>
-                </ButtonError>
-                )}
+                      {redeemError || `Withdraw`}
+                    </div>
+                  </ButtonError>
+                  )}
               </div>
             </Tab.Panel>
           </Tab.Group>
