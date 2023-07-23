@@ -61,6 +61,7 @@ import {
   MANIFESTER_ADDRESS,
   MARKET_UPDATER_ADDRESS,
   REFUNDER_ADDRESS,
+  LUXOR_REEFUNDER_ADDRESS,
 } from 'sdk'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from 'constants/multicall'
 import SOUL_BOND_ABI from 'constants/abis/soulbond.json' 
@@ -92,6 +93,7 @@ import ISoulSwapPairABI from 'constants/abis/soulswap/ISoulSwapPair.json'
 import AUTO_STAKE_ABI from 'constants/abis/soulswap/autostake.json'
 import UNDERWORLD_ABI from 'constants/abis/underworldpair.json'
 import BALANCES_FETCHER_ABI from 'constants/abis/balancesfetcher.json'
+import LUXOR_REFUNDER_ABI from 'constants/abis/luxor-refunder.json'
 
 // soul
 import SOUL_SAFE_ABI from 'constants/abis/soulswap/safe.json'
@@ -272,6 +274,10 @@ export function useMulticallContract(): Contract | null {
 export function useBalancesFetcherContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && BALANCES_FETCHER_ADDRESS[chainId], BALANCES_FETCHER_ABI, false)
+}
+
+export function useLuxorRefunderContract(): Contract | null {
+  return useContract(LUXOR_REEFUNDER_ADDRESS[ChainId.FANTOM], LUXOR_REFUNDER_ABI, false)
 }
 
 export function useMulticall2Contract() {
