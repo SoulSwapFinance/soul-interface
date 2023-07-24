@@ -13,7 +13,7 @@ import { useCombinedActiveList } from 'state/lists/hooks'
 import { WrappedTokenInfo } from 'state/lists/wrappedTokenInfo'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import React, { CSSProperties, FC, useMemo } from 'react'
-import AutoSizer from 'react-virtualized-auto-sizer'
+// import AutoSizer from 'react-virtualized-auto-sizer'
 import { FixedSizeList as List } from 'react-window'
 
 function currencyKey(currency: Currency): string {
