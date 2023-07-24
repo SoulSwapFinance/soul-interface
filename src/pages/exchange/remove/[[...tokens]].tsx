@@ -8,7 +8,7 @@ import TransactionConfirmationModal, { ConfirmationModalContent } from 'modals/T
 import { calculateGasMargin, calculateSlippageAmount } from 'functions/trade'
 import { useBurnActionHandlers, useBurnState, useDerivedBurnInfo } from 'state/burn/hooks'
 import { usePairContract, useRouterContract } from 'hooks/useContract'
-
+import NavLink from 'components/NavLink'
 import { AutoColumn } from 'components/Column'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Button } from 'components/Button'
@@ -859,7 +859,19 @@ export default function Remove() {
               outputCurrency={currencyB}
             />
           }
-          <PoolBalances account={account} />
+          <div className={"grid grid-cols-1 text-white justify-center m-2"}>
+            <NavLink href="/pool">
+              <Button
+                variant={'filled'}
+                color={`${getChainColorCode(chainId)}`}
+                primaryColor={'black'}
+              >
+                <div className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
+                  {`View Positions`}
+                </div>
+              </Button>
+            </NavLink>
+          </div>
         </div>
       </DoubleGlowShadowV2>
     </>
