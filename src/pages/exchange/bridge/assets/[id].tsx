@@ -84,7 +84,7 @@ import { useRouter } from 'next/router'
 //     fromToken: nativeToken,
 //     fromAmount: amount,
 //     toChain: polygonChainId,
-//     toToken: polygonUsdc,
+//     asset: polygonUsdc,
 //     slippage: 1,
 //     customContractCalls: [],
 //     // enableExpress: false, // default is true on all chains except Ethereum
@@ -158,7 +158,7 @@ const handleLoad = async () => {
 //     fromToken: WNATIVE_ADDRESS[250],
 //     fromAmount: "10000000000000000",
 //     toChain: 43114,
-//     toToken: USDC_ADDRESS[43114],
+//     asset: USDC_ADDRESS[43114],
 //     slippage: 1,
 //     customContractCalls: [],
 //     // enableExpress: false, // default is true on all chains except Ethereum
@@ -182,7 +182,7 @@ const CrosschainSwap = ({ }) => {
   // const NATIVE_ADDRESS = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
   const fromChain = chainId
   const toChain = chainId == ChainId.FANTOM ? ChainId.AVALANCHE : ChainId.FANTOM
-  const fromToken =
+  const asset =
     symbol == 'USDC' ? USDC[fromChain]
       : symbol == 'WETH' ? WETH[fromChain]
         : symbol == 'WBTC' ? WBTC[fromChain]
@@ -191,7 +191,6 @@ const CrosschainSwap = ({ }) => {
   // [.√.] using //
   // const [toChain, setToChain] = useState(chainId == ChainId.FANTOM ? ChainId.AVALANCHE : ChainId.FANTOM)
   // const [fromToken, setFromToken] = useState<Currency>(USDC[fromChain])
-  const [toToken, setToToken] = useState<Currency>(USDC[toChain])
   // const [inputToken, setInputToken] = useState<Currency>(NATIVE[chainId])
   // const [outputToken, setOutputToken] = useState<Currency>(USDC[chainId == ChainId.FANTOM ? ChainId.AVALANCHE : ChainId.FANTOM])
 
@@ -201,7 +200,7 @@ const CrosschainSwap = ({ }) => {
   const [amount, setAmount] = useState('1');
   const [outputAmount, setOutputAmount] = useState('0');
 
-  const invalidOutput = toToken.isNative
+  const invalidOutput = asset.isNative
 
   // instantiate the SDK
   const squid = new Squid({
@@ -233,7 +232,7 @@ const CrosschainSwap = ({ }) => {
 
     setOutputAmount(
       new BigNumber(route.estimate?.toAmount.toString() ?? '1')
-        .div(10 ** (toToken.isNative ? 18 : toToken?.wrapped.decimals ?? 18))
+        .div(10 ** (asset.isNative ? 18 : asset?.wrapped.decimals ?? 18))
         .toString()
     )
 
@@ -248,12 +247,12 @@ const CrosschainSwap = ({ }) => {
       toAddress: account, // signer.address,
       // todo: assumes fromChain is current chain
       fromChain: chainId,
-      fromToken: fromToken.wrapped.address,
+      fromToken: asset.wrapped.address,
       fromAmount: fromAmountWithDecimals, // "10000000",
       // todo: assumes Fantom || Avalanche
       toChain: toChain,
       // todo: assumes Fantom || Avalanche
-      toToken: toToken.wrapped.address,
+      toToken: asset.wrapped.address,
       slippage: 1,
     }
 
@@ -263,7 +262,7 @@ const CrosschainSwap = ({ }) => {
 
     setOutputAmount(
       new BigNumber(route.estimate?.toAmount.toString() ?? '1')
-        .div(10 ** (toToken.isNative ? 18 : toToken?.wrapped.decimals ?? 18))
+        .div(10 ** (asset.isNative ? 18 : asset?.wrapped.decimals ?? 18))
         .toString()
     )
 
@@ -281,7 +280,7 @@ const CrosschainSwap = ({ }) => {
   }
 
   const fromAmountWithDecimals = new BigNumber(amount.toString())
-    .times(10 ** (fromToken.isNative ? 18 : fromToken?.wrapped.decimals ?? 18))
+    .times(10 ** (asset.isNative ? 18 : asset?.wrapped.decimals ?? 18))
     .toString()
 
   const handleTypeInput = useCallback(
@@ -301,8 +300,8 @@ const CrosschainSwap = ({ }) => {
         // inputCurrency={currencyA}
         // outputCurrency={currencyB}
         />
-        <div className={`my-12`} />
         <AssetSelect />
+        {/* <div className={`my-12`} /> */}
         <div className="flex flex-col gap-3 space-y-3">
           <CrossSwapAssetPanel
             spendFromWallet={true}
@@ -315,7 +314,7 @@ const CrosschainSwap = ({ }) => {
                 }
               />
             )}
-            currency={fromToken}
+            currency={asset}
             value={amount.toString() ?? '1'}
             onChange={handleTypeInput}
             showSelect={false}
@@ -338,7 +337,7 @@ const CrosschainSwap = ({ }) => {
                   }
                 />
               )}
-              currency={toToken}
+              currency={asset}
               value={outputAmount.toString() ?? '1'}
               onChange={() => { }}
               showSelect={false}
@@ -372,6 +371,7 @@ const CrosschainSwap = ({ }) => {
         </div>
         <div>
         </div>
+
       </div>
     </DoubleGlowShadowV2>
   )

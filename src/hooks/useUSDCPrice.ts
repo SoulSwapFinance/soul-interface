@@ -6,7 +6,7 @@ import { useV2TradeExactOut } from './useV2Trades'
 
 import { tryParseAmount } from 'functions'
 import { BNB, LUXOR, MIM, AVAX, SOUL, FUSD, USDC, LZUSDC, WBTC, WETH, WFTM, WLUM, SURV, DAI, SOR } from 'constants/tokens'
-import { AVAX_ADDRESS, BNB_ADDRESS, FUSD_ADDRESS, LUX_ADDRESS, SEANCE_ADDRESS, WFTM_ADDRESS, 
+import { AVAX_ADDRESS, BNB_ADDRESS, LUX_ADDRESS, WFTM_ADDRESS, 
   SOUL_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS, SURV_ADDRESS } 
   from 'constants/addresses'
 import { usePrice } from 'hooks/usePrice'
@@ -75,7 +75,6 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const wLumensPrice = usePrice(WLUM_ADDRESS[250])
   const wftmPrice = usePrice(WFTM_ADDRESS[250])
   const survPrice = usePrice(SURV_ADDRESS[250])
-  // const wethPrice = usePriceUSD(WETH_ADDRESS[chainId])?.price
   const wethPrice = useOraclePrice(ETH_ORACLE_ADDRESS[chainId])
   const wbtcPrice = useOraclePrice(BTC_ORACLE_ADDRESS[chainId])
   const bnbPrice = usePrice(BNB_ADDRESS[chainId])
