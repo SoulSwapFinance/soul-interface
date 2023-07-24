@@ -250,45 +250,49 @@ const CrossSwapAssetPanelHeader: FC<
 
   return (
     <div>
-      <div className={showSelect ? `flex items-end justify-between gap-2` : `hidden`}>
-        <CurrencySearchModal
-          chainId={chainId}
-          selectedCurrency={currency}
-          onCurrencySelect={(currency) => onSelect && onSelect(currency)}
-          trigger={triggerA}
-          currencyList={currencies}
-        />
+
         <div
-          className={network ? `flex gap-2 border ${`border-${getChainColorCode(network)}`} rounded-[14px] bg-dark-900 p-2` : 'hidden'}
+          className={network ? `flex justify-center gap-8 mb-3 mt-3 border ${`border-${getChainColorCode(network)}`} rounded-[14px] bg-dark-900 p-2` : 'hidden'}
         >
-          <Image
-            src={getChainLogo(network)}
-            height={24}
-            width={24}
-            alt={'chain logo'}
-          />
-          <Typography variant="sm" className="!text-xl" weight={700}>
-            {getChainInfo(network, 'NAME')}
-          </Typography>
-        </div>
-      </div>
-      <div
-        className={showSelect ? `hidden` : `flex w-full items-end justify-end`}
-      >
-        <div
-          className={network ? `flex gap-4 border ${`border-${getChainColorCode(network)}`} rounded-[14px] bg-dark-900 p-2` : 'hidden'}
-          >
           <Image
             src={getChainLogo(network)}
             height={16}
             width={16}
             alt={'chain logo'}
           />
-          <Typography variant="sm" className="text-md" weight={700}>
-            {getChainInfo(network, 'NAME')}
+          <Typography variant="sm" className={'text-md sm:text-xl'} weight={700}>
+            {getChainInfo(network, 'NETWORK')}
           </Typography>
-        </div>
       </div>
+      <div className={`flex items-end justify-between gap-2`}>
+        { showSelect ? (
+        <CurrencySearchModal
+          chainId={chainId}
+          selectedCurrency={currency}
+          onCurrencySelect={(currency) => onSelect && onSelect(currency)}
+          trigger={triggerA}
+          currencyList={currencies}
+          showSearch={false}
+          // includeNativeCurrency={false}
+        />
+        ) : (
+          <div
+            className="flex items-center gap-2 px-2 py-1 rounded-full shadow-md cursor-pointer text-high-emphesis bg-dark-800 hover:bg-dark-700"
+          >
+          <CurrencyLogo currency={currency} className="!rounded-full overflow-hidden" size={20} />
+          <Typography variant="sm" className="!text-xl" weight={700}>
+            { currency.symbol }
+          </Typography>
+          {/* <ChevronDownIcon width={18} /> */}
+        </div>
+          // <div className={`flex p-2 bg-dark-800`}>
+          // <CurrencyLogo currency={currency} size={20} className="!rounded-full overflow-hidden" />
+          // <Typography variant="sm" className="!text-xl" weight={700}>
+          //   {`${currency.symbol}`}
+          // </Typography>
+          // </div>
+        )}
+        </div>
     </div>
   )
 }
