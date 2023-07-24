@@ -182,11 +182,11 @@ const CrosschainSwap = ({ }) => {
   // const NATIVE_ADDRESS = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
   const fromChain = chainId
   const toChain = chainId == ChainId.FANTOM ? ChainId.AVALANCHE : ChainId.FANTOM
-  const fromToken = 
+  const fromToken =
     symbol == 'USDC' ? USDC[fromChain]
-    : symbol == 'WETH' ? WETH[fromChain]
-    : symbol == 'WBTC' ? WBTC[fromChain]
-    : USDC[fromChain]
+      : symbol == 'WETH' ? WETH[fromChain]
+        : symbol == 'WBTC' ? WBTC[fromChain]
+          : USDC[fromChain]
 
   // [.√.] using //
   // const [toChain, setToChain] = useState(chainId == ChainId.FANTOM ? ChainId.AVALANCHE : ChainId.FANTOM)
@@ -194,7 +194,7 @@ const CrosschainSwap = ({ }) => {
   const [toToken, setToToken] = useState<Currency>(USDC[toChain])
   // const [inputToken, setInputToken] = useState<Currency>(NATIVE[chainId])
   // const [outputToken, setOutputToken] = useState<Currency>(USDC[chainId == ChainId.FANTOM ? ChainId.AVALANCHE : ChainId.FANTOM])
-  
+
   const [route, setRoute] = useState<RouteData>(null)
   // const nativePrice = usePrice(WNATIVE_ADDRESS[chainId])
   // √
@@ -210,7 +210,7 @@ const CrosschainSwap = ({ }) => {
   });
 
   // [√] SQUID ROUTE //
-  
+
   const generateRoute = async () => {
     await squid.init();
 
@@ -233,10 +233,10 @@ const CrosschainSwap = ({ }) => {
 
     setOutputAmount(
       new BigNumber(route.estimate?.toAmount.toString() ?? '1')
-      .div(10 ** (toToken.isNative ? 18 : toToken?.wrapped.decimals ?? 18))
-      .toString()
+        .div(10 ** (toToken.isNative ? 18 : toToken?.wrapped.decimals ?? 18))
+        .toString()
     )
-    
+
     setRoute(route)
   }
 
@@ -263,12 +263,12 @@ const CrosschainSwap = ({ }) => {
 
     setOutputAmount(
       new BigNumber(route.estimate?.toAmount.toString() ?? '1')
-      .div(10 ** (toToken.isNative ? 18 : toToken?.wrapped.decimals ?? 18))
-      .toString()
+        .div(10 ** (toToken.isNative ? 18 : toToken?.wrapped.decimals ?? 18))
+        .toString()
     )
 
     // await generateRoute()
-  
+
     const tx = await squid.executeRoute({
       // @ts-ignore
       signer,
@@ -289,17 +289,17 @@ const CrosschainSwap = ({ }) => {
       setAmount(value)
     },
     [setAmount]
-    )
+  )
 
   // generateRoute()
 
-    return (
+  return (
     <DoubleGlowShadowV2>
       <NextSeo title={`Meta | SoulSwap`} />
       <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
         <SwapDropdown
-          // inputCurrency={currencyA}
-          // outputCurrency={currencyB}
+        // inputCurrency={currencyA}
+        // outputCurrency={currencyB}
         />
         <div className={`my-12`} />
         <AssetSelect />
@@ -315,11 +315,11 @@ const CrosschainSwap = ({ }) => {
                 }
               />
             )}
-            currency={ fromToken }
+            currency={fromToken}
             value={amount.toString() ?? '1'}
             onChange={handleTypeInput}
             showSelect={false}
-            // onSelect={handleInputSelect}
+          // onSelect={handleInputSelect}
           />
           <div>
             <div className="flex justify-center -mt-8 -mb-4 z-0">
@@ -338,27 +338,27 @@ const CrosschainSwap = ({ }) => {
                   }
                 />
               )}
-              currency={ toToken }
+              currency={toToken}
               value={outputAmount.toString() ?? '1'}
               onChange={() => { }}
               showSelect={false}
-              // onSelect={handleOutputSelect}
+            // onSelect={handleOutputSelect}
             />
           </div>
         </div>
-          <div
-            className={`flex flex-col gap-3 mt-8 mb-4 w-full`}
+        <div
+          className={`flex flex-col gap-3 mt-8 mb-4 w-full`}
+        >
+          <Button variant="outlined"
+            color={invalidOutput ? 'red' : 'green'}
+            onClick={generateRoute}
+            disabled={invalidOutput}
           >
-            <Button variant="outlined"
-              color={invalidOutput ? 'red' : 'green'}
-              onClick={generateRoute}
-              disabled={invalidOutput}
-            >
-              <Typography size={14} className="font-bold text-white">
-                {invalidOutput ? 'Invalid Output Asset' : `Generate Route`}
-              </Typography>
-            </Button>
-            { route &&
+            <Typography size={14} className="font-bold text-white">
+              {invalidOutput ? 'Invalid Output Asset' : `Generate Route`}
+            </Typography>
+          </Button>
+          {route &&
             <Button variant="outlined"
               color={invalidOutput ? 'red' : 'blue'}
               onClick={handleSwap}
@@ -368,8 +368,8 @@ const CrosschainSwap = ({ }) => {
                 {invalidOutput ? 'Invalid Output Asset' : `Swap Me`}
               </Typography>
             </Button>
-            }
-          </div>
+          }
+        </div>
         <div>
         </div>
       </div>
