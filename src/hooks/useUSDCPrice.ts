@@ -75,10 +75,10 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const wLumensPrice = usePrice(WLUM_ADDRESS[250])
   const wftmPrice = usePrice(WFTM_ADDRESS[250])
   const survPrice = usePrice(SURV_ADDRESS[250])
-  const wethPrice = useOraclePrice(ETH_ORACLE_ADDRESS[chainId])
-  const wbtcPrice = useOraclePrice(BTC_ORACLE_ADDRESS[chainId])
+  const wethPrice = useOraclePrice(ETH_ORACLE_ADDRESS[250])
+  const wbtcPrice = useOraclePrice(BTC_ORACLE_ADDRESS[250])
   const bnbPrice = usePrice(BNB_ADDRESS[chainId])
-  const avaxPrice = usePrice(AVAX_ADDRESS[chainId])
+  const avaxPrice = usePrice(AVAX_ADDRESS[chainId ?? 43114])
 
   const luxorAmountOut = chainId ? LUXOR_AMOUNT_OUT[250] : undefined
   const survAmountOut = chainId ? SURV_AMOUNT_OUT[250] : undefined
