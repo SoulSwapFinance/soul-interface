@@ -70,8 +70,6 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
     }).toLowerCase() // pairAddress
     : (router.query.id as string).toLowerCase() // router string
 
-  // const id = pairAddress ?? (router.query.id as string).toLowerCase()
-
   const [isCopied, setCopied] = useCopyClipboard()
 
   const block1d = useOneDayBlock({ chainId, shouldFetch: !!chainId })
@@ -165,12 +163,12 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
   <Container id="exchange-analytics-pair-page" maxWidth="2xl" className="space-y-4 mt-4">
       <DoubleGlowShadowV2>
         <SwapLayoutCard>
-        <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
+        <div className={`my-2 border-2 border-[${getChainColor(chainId)}]`}/>
           <SwapDropdown
             inputCurrency={currency0}
             outputCurrency={currency1} 
         />
-        <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
+        <div className={`my-2 border-2 border-[${getChainColor(chainId)}]`}/>
           <AnalyticsContainer>
             <ExchangeAnalyticsHeader />
             <TridentHeader className="sm:!flex-row justify-between items-center" pattern="bg-bubble">

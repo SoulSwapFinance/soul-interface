@@ -5,7 +5,7 @@ import React, { useCallback, useState } from 'react'
 import { ethers } from 'ethers'
 import BigNumber from 'bignumber.js'
 // import { getAllChains, swap } from 'features/aggregator/router'
-import { ChainId, Currency, NATIVE, USDC, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
+import { ChainId, Currency, WETH, USDC, USDC_ADDRESS, WBTC, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import { ArrowDownIcon } from '@heroicons/react/24/solid'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import { NextSeo } from 'next-seo'
@@ -18,6 +18,8 @@ import CrossSwapAssetPanel from 'features/trident/swap/CrossSwapAssetPanel'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 import useGetPrice from 'features/aggregator/queries/useGetPrice'
+import AssetSelect from 'features/bridge/AssetSelect'
+import { useRouter } from 'next/router'
 // import { useTokenBalance } from 'state/wallet/hooks'
 // import { useTokenPrice } from 'hooks/getPrices'
 // import { usePrice } from 'hooks'
@@ -168,30 +170,28 @@ const handleLoad = async () => {
 
 const CrosschainSwap = ({ }) => {
   const { account, chainId, library } = useActiveWeb3React();
-  // const signer = library.getSigner()
-  // const provider = library?.provider
-  // const provider = new ethers.providers.JsonRpcProvider(RPC[chainId]);
+  const router = useRouter()
+  const id = router.query.id as string // router string
 
-  // const provider = new ethers.providers.Web3Provider(window.ethereum)
+  const symbol = id.toUpperCase()
+
   const provider = new ethers.providers.Web3Provider(window.ethereum)
 
-  // MetaMask requires requesting permission to connect users accounts
-  // await provider.send("eth_requestAccounts", []);
-
-  // The MetaMask plugin also allows signing transactions to
-  // send ether and pay to change state within the blockchain.
-  // For this, you need the account signer...
   const signer = provider.getSigner()
-  // const signer = new ethers.Wallet(PK, provider)
-  // const router = useRouter()
-  // const tokens = router.query.tokens
 
-  const NATIVE_ADDRESS = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+  // const NATIVE_ADDRESS = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+  const fromChain = chainId
+  const toChain = chainId == ChainId.FANTOM ? ChainId.AVALANCHE : ChainId.FANTOM
+  const fromToken = 
+    symbol == 'USDC' ? USDC[fromChain]
+    : symbol == 'WETH' ? WETH[fromChain]
+    : symbol == 'WBTC' ? WBTC[fromChain]
+    : USDC[fromChain]
 
   // [.√.] using //
-  const [toChain, setToChain] = useState(chainId == ChainId.FANTOM ? ChainId.AVALANCHE : ChainId.FANTOM)
-  const [fromToken, setFromToken] = useState<Currency>(NATIVE[chainId])
-  const [toToken, setToToken] = useState<Currency>(USDC[chainId == ChainId.FANTOM ? ChainId.AVALANCHE : ChainId.FANTOM])
+  // const [toChain, setToChain] = useState(chainId == ChainId.FANTOM ? ChainId.AVALANCHE : ChainId.FANTOM)
+  // const [fromToken, setFromToken] = useState<Currency>(USDC[fromChain])
+  const [toToken, setToToken] = useState<Currency>(USDC[toChain])
   // const [inputToken, setInputToken] = useState<Currency>(NATIVE[chainId])
   // const [outputToken, setOutputToken] = useState<Currency>(USDC[chainId == ChainId.FANTOM ? ChainId.AVALANCHE : ChainId.FANTOM])
   
@@ -201,11 +201,6 @@ const CrosschainSwap = ({ }) => {
   const [amount, setAmount] = useState('1');
   const [outputAmount, setOutputAmount] = useState('0');
 
-  // const [fromDecimals, setFromDecimals] = useState(inputToken?.wrapped.decimals)
-  const [toDecimals, setToDecimals] = useState(toToken?.wrapped.decimals)
-
-  // const [useSwap, setUseSwap] = useState(false)
-  // const [showRoutes, setShowRoutes] = useState(true)
   const invalidOutput = toToken.isNative
 
   // instantiate the SDK
@@ -223,12 +218,12 @@ const CrosschainSwap = ({ }) => {
       toAddress: account, // signer.address,
       // todo: assumes fromChain is current chain
       fromChain: chainId,
-      fromToken: fromToken.isNative ? NATIVE_ADDRESS : fromToken.wrapped.address, // USDC_ADDRESS[250],
+      fromToken: USDC_ADDRESS[fromChain],
       fromAmount: fromAmountWithDecimals?.toString(), // "10000000",
       // todo: assumes Fantom || Avalanche
       toChain: toChain,
       // todo: assumes Fantom || Avalanche
-      toToken: toToken.isNative ? NATIVE_ADDRESS : toToken.wrapped.address,
+      toToken: USDC_ADDRESS[toChain],
       slippage: 1,
     }
 
@@ -253,18 +248,18 @@ const CrosschainSwap = ({ }) => {
       toAddress: account, // signer.address,
       // todo: assumes fromChain is current chain
       fromChain: chainId,
-      fromToken: fromToken.isNative ? NATIVE_ADDRESS : fromToken.wrapped.address, // USDC_ADDRESS[250],
+      fromToken: fromToken.wrapped.address,
       fromAmount: fromAmountWithDecimals, // "10000000",
       // todo: assumes Fantom || Avalanche
       toChain: toChain,
       // todo: assumes Fantom || Avalanche
-      toToken: toToken.isNative ? NATIVE_ADDRESS : toToken.wrapped.address,
+      toToken: toToken.wrapped.address,
       slippage: 1,
     }
 
     const { route } = await squid.getRoute(params)
 
-    console.log(route.estimate.toAmount)
+    // console.log(route.estimate.toAmount)
 
     setOutputAmount(
       new BigNumber(route.estimate?.toAmount.toString() ?? '1')
@@ -289,31 +284,16 @@ const CrosschainSwap = ({ }) => {
     .times(10 ** (fromToken.isNative ? 18 : fromToken?.wrapped.decimals ?? 18))
     .toString()
 
-  const handleInputSelect = useCallback(
-    (inputCurrency: Currency) => {
-      setFromToken(inputCurrency)
-      // setInputToken(inputCurrency)
-    },
-    [setFromToken]
-  )
-
-  const handleOutputSelect = useCallback(
-    (outputCurrency: Currency) => {
-      setToToken(outputCurrency)
-    },
-    [setToToken]
-  )  
-  
-  generateRoute()
-
   const handleTypeInput = useCallback(
     async (value: string) => {
       setAmount(value)
     },
     [setAmount]
-  )
+    )
 
-  return (
+  // generateRoute()
+
+    return (
     <DoubleGlowShadowV2>
       <NextSeo title={`Meta | SoulSwap`} />
       <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
@@ -322,9 +302,11 @@ const CrosschainSwap = ({ }) => {
           // outputCurrency={currencyB}
         />
         <div className={`my-12`} />
+        <AssetSelect />
         <div className="flex flex-col gap-3 space-y-3">
           <CrossSwapAssetPanel
             spendFromWallet={true}
+            network={fromChain}
             header={(props) => (
               <CrossSwapAssetPanel.Header
                 {...props}
@@ -333,10 +315,11 @@ const CrosschainSwap = ({ }) => {
                 }
               />
             )}
-            currency={fromToken}
+            currency={ fromToken }
             value={amount.toString() ?? '1'}
             onChange={handleTypeInput}
-            onSelect={handleInputSelect}
+            showSelect={false}
+            // onSelect={handleInputSelect}
           />
           <div>
             <div className="flex justify-center -mt-8 -mb-4 z-0">
@@ -346,7 +329,7 @@ const CrosschainSwap = ({ }) => {
             </div>
             <CrossSwapAssetPanel
               spendFromWallet={true}
-              showNetwork={true}
+              network={toChain}
               header={(props) => (
                 <CrossSwapAssetPanel.Header
                   {...props}
@@ -358,14 +341,15 @@ const CrosschainSwap = ({ }) => {
               currency={ toToken }
               value={outputAmount.toString() ?? '1'}
               onChange={() => { }}
-              onSelect={handleOutputSelect}
+              showSelect={false}
+              // onSelect={handleOutputSelect}
             />
           </div>
         </div>
           <div
             className={`flex flex-col gap-3 mt-8 mb-4 w-full`}
           >
-            {/* <Button variant="outlined"
+            <Button variant="outlined"
               color={invalidOutput ? 'red' : 'green'}
               onClick={generateRoute}
               disabled={invalidOutput}
@@ -373,7 +357,7 @@ const CrosschainSwap = ({ }) => {
               <Typography size={14} className="font-bold text-white">
                 {invalidOutput ? 'Invalid Output Asset' : `Generate Route`}
               </Typography>
-            </Button> */}
+            </Button>
             { route &&
             <Button variant="outlined"
               color={invalidOutput ? 'red' : 'blue'}
