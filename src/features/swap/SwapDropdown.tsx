@@ -210,7 +210,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           </NavLink>
         } */}
        
-        {featureEnabled(Feature.CROSSCHAIN, chainId) &&
+        {featureEnabled(Feature.BRIDGE, chainId) &&
           <NavLink
             className={classNames(
               bridgeStyle

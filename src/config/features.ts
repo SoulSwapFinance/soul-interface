@@ -10,7 +10,7 @@ const features: FeatureMap = {
     // Feature.CROSSCHAIN,
     Feature.LIQUIDITY,
     Feature.AGGREGATE,
-    // Feature.BRIDGE,
+    Feature.BRIDGE,
     // Feature.DEFARM,
     // Feature.ANALYTICS,
     // Feature.LIQUIDITY_MINING,

@@ -48,7 +48,7 @@ import { useTokenBalance } from 'state/wallet/hooks'
 // import { featureEnabled } from 'functions/feature'
 // import Container from "components/Container";
 
-// const CrosschainSwap = () => {
+// const Bridge = () => {
 //   const { account, chainId } = useActiveWeb3React();
 //   const [route, setRoute] = useState(null);
 
@@ -170,7 +170,7 @@ const handleLoad = async () => {
 //   console.log(route.estimate.toAmount);
 // }
 
-const CrosschainSwap = ({ }) => {
+const Bridge = ({ }) => {
   const { account, chainId, library } = useActiveWeb3React();
   const router = useRouter()
   const id = router.query.id as string // router string
@@ -346,5 +346,5 @@ const CrosschainSwap = ({ }) => {
   )
 }
 
-export default CrosschainSwap
-CrosschainSwap.Guard = NetworkGuard(Feature.CROSSCHAIN)
+export default Bridge
+Bridge.Guard = NetworkGuard(Feature.BRIDGE)
