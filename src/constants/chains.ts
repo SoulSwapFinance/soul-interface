@@ -75,7 +75,7 @@ export function getChainInfo(chainId: number, option: string) {
         : option == 'SYMBOL' ? output = 'AVAX'
           : output = ''
    } else if (chainId == ChainId.ETHEREUM) {
-    option == 'NETWORK' ? output = 'Ethereum'
+    option == 'NETWORK' ? output = 'Ethereum Network'
       : option == 'NAME' ? output = 'Ethereum'
         : option == 'SYMBOL' ? output = 'ETH'
           : output = ''

@@ -252,7 +252,7 @@ const CrossSwapAssetPanelHeader: FC<
     <div>
 
         <div
-          className={network ? `flex justify-center gap-8 mb-3 mt-3 border ${`border-${getChainColorCode(network)}`} rounded-[14px] bg-dark-900 p-2` : 'hidden'}
+          className={network ? `flex justify-center gap-8 mb-3 mt-3 max-h-[36px] border ${`border-${getChainColorCode(network)}`} rounded-[14px] bg-dark-900 p-2` : 'hidden'}
         >
           <Image
             src={getChainLogo(network)}
@@ -260,7 +260,7 @@ const CrossSwapAssetPanelHeader: FC<
             width={16}
             alt={'chain logo'}
           />
-          <Typography variant="sm" className={'text-md sm:text-xl'} weight={700}>
+          <Typography variant="sm" className={'text-md -my-0.5 sm:-my-1 sm:text-xl'} weight={700}>
             {getChainInfo(network, 'NETWORK')}
           </Typography>
       </div>
