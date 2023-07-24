@@ -4,20 +4,23 @@
 import React, { useCallback, useState } from 'react'
 import { ethers } from 'ethers'
 import BigNumber from 'bignumber.js'
-import { getAllChains, swap } from 'features/aggregator/router'
-import { ChainId, Currency, NATIVE, USDC, WNATIVE } from 'sdk'
+// import { getAllChains, swap } from 'features/aggregator/router'
+import { ChainId, Currency, NATIVE, USDC, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import { ArrowDownIcon } from '@heroicons/react/24/solid'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import { NextSeo } from 'next-seo'
 import Typography from 'components/Typography'
 import { useActiveWeb3React } from "services/web3";
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
-import { Squid } from "@0xsquid/sdk";
+import { RouteData, Squid } from "@0xsquid/sdk";
 import { Button } from "components/Button";
 import CrossSwapAssetPanel from 'features/trident/swap/CrossSwapAssetPanel'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
-import { useTokenBalance } from 'state/wallet/hooks'
+import useGetPrice from 'features/aggregator/queries/useGetPrice'
+// import { useTokenBalance } from 'state/wallet/hooks'
+// import { useTokenPrice } from 'hooks/getPrices'
+// import { usePrice } from 'hooks'
 
 // import { useMutation } from '@tanstack/react-query'
 // import styled from 'styled-components'
@@ -163,10 +166,6 @@ const handleLoad = async () => {
 //   console.log(route.estimate.toAmount);
 // }
 
-
-
-export const chains = getAllChains()
-
 const CrosschainSwap = ({ }) => {
   const { account, chainId, library } = useActiveWeb3React();
   // const signer = library.getSigner()
@@ -193,16 +192,17 @@ const CrosschainSwap = ({ }) => {
   const [toChain, setToChain] = useState(chainId == ChainId.FANTOM ? ChainId.AVALANCHE : ChainId.FANTOM)
   const [fromToken, setFromToken] = useState<Currency>(NATIVE[chainId])
   const [toToken, setToToken] = useState<Currency>(USDC[chainId == ChainId.FANTOM ? ChainId.AVALANCHE : ChainId.FANTOM])
-  const [inputToken, setInputToken] = useState<Currency>(NATIVE[chainId])
-  const [outputToken, setOutputToken] = useState<Currency>(USDC[chainId == ChainId.FANTOM ? ChainId.AVALANCHE : ChainId.FANTOM])
+  // const [inputToken, setInputToken] = useState<Currency>(NATIVE[chainId])
+  // const [outputToken, setOutputToken] = useState<Currency>(USDC[chainId == ChainId.FANTOM ? ChainId.AVALANCHE : ChainId.FANTOM])
   
-  const [route, setRoute] = useState(null)
-
+  const [route, setRoute] = useState<RouteData>(null)
+  // const nativePrice = usePrice(WNATIVE_ADDRESS[chainId])
   // √
+  const [amount, setAmount] = useState('1');
   const [outputAmount, setOutputAmount] = useState('0');
 
   // const [fromDecimals, setFromDecimals] = useState(inputToken?.wrapped.decimals)
-  const [toDecimals, setToDecimals] = useState(outputToken?.wrapped.decimals)
+  const [toDecimals, setToDecimals] = useState(toToken?.wrapped.decimals)
 
   // const [useSwap, setUseSwap] = useState(false)
   // const [showRoutes, setShowRoutes] = useState(true)
@@ -215,7 +215,8 @@ const CrosschainSwap = ({ }) => {
   });
 
   // [√] SQUID ROUTE //
-  const generateQuote = async () => {
+  
+  const generateRoute = async () => {
     await squid.init();
 
     const params = {
@@ -223,17 +224,28 @@ const CrosschainSwap = ({ }) => {
       // todo: assumes fromChain is current chain
       fromChain: chainId,
       fromToken: fromToken.isNative ? NATIVE_ADDRESS : fromToken.wrapped.address, // USDC_ADDRESS[250],
-      fromAmount: fromAmountWithDecimals, // "10000000",
-      // todo: assumes only Fantom || Avalanche
+      fromAmount: fromAmountWithDecimals?.toString(), // "10000000",
+      // todo: assumes Fantom || Avalanche
       toChain: toChain,
-      // todo: assumes only Fantom || Avalanche
+      // todo: assumes Fantom || Avalanche
       toToken: toToken.isNative ? NATIVE_ADDRESS : toToken.wrapped.address,
       slippage: 1,
     }
-  
+
+    const { route } = await squid.getRoute(params)
+
+    // console.log(route.estimate.toAmount)
+
+    setOutputAmount(
+      new BigNumber(route.estimate?.toAmount.toString() ?? '1')
+      .div(10 ** (toToken.isNative ? 18 : toToken?.wrapped.decimals ?? 18))
+      .toString()
+    )
+    
+    setRoute(route)
   }
 
-  const generateRoute = async () => {
+  const handleSwap = async () => {
 
     await squid.init();
 
@@ -243,9 +255,9 @@ const CrosschainSwap = ({ }) => {
       fromChain: chainId,
       fromToken: fromToken.isNative ? NATIVE_ADDRESS : fromToken.wrapped.address, // USDC_ADDRESS[250],
       fromAmount: fromAmountWithDecimals, // "10000000",
-      // todo: assumes only Fantom || Avalanche
+      // todo: assumes Fantom || Avalanche
       toChain: toChain,
-      // todo: assumes only Fantom || Avalanche
+      // todo: assumes Fantom || Avalanche
       toToken: toToken.isNative ? NATIVE_ADDRESS : toToken.wrapped.address,
       slippage: 1,
     }
@@ -255,48 +267,12 @@ const CrosschainSwap = ({ }) => {
     console.log(route.estimate.toAmount)
 
     setOutputAmount(
-        new BigNumber(route.estimate?.toAmount.toString())
-        // .times(10 ** (toToken.isNative ? 18 : toToken?.wrapped.decimals))
-        .toString()
+      new BigNumber(route.estimate?.toAmount.toString() ?? '1')
+      .div(10 ** (toToken.isNative ? 18 : toToken?.wrapped.decimals ?? 18))
+      .toString()
     )
-    
-    setRoute(route)
-  }
 
-  const handleSwap = async () => {
-
-    // await squid.init();
-
-    // const params = {
-    //   toAddress: account, // signer.address,
-    //   // todo: assumes fromChain is current chain
-    //   fromChain: chainId,
-    //   fromToken: fromToken.isNative ? NATIVE_ADDRESS : fromToken.wrapped.address, // USDC_ADDRESS[250],
-    //   fromAmount: fromAmountWithDecimals, // "10000000",
-    //   // todo: assumes only Fantom || Avalanche
-    //   toChain: toChain,
-    //   // todo: assumes only Fantom || Avalanche
-    //   toToken: toToken.isNative ? NATIVE_ADDRESS : toToken.wrapped.address,
-    //   slippage: 1,
-    // }
-
-    // // const handleDestination = (amount) => {
-    // //   setOutputAmount(
-    // //     new BigNumber(route.estimate.toAmount.toString())
-    // //   .times(10 ** (toToken.isNative ? 18 : toToken?.wrapped.decimals))
-    // //   .toString()
-    // //   )}
-
-    // const { route } = await squid.getRoute(params)
-
-    // console.log(route.estimate.toAmount)
-
-    // setOutputAmount(
-    //     new BigNumber(route.estimate?.toAmount.toString())
-    //     .div(10 ** (toToken.isNative ? 18 : toToken?.wrapped.decimals))
-    //     .toString()
-    // )
-    await generateRoute()
+    // await generateRoute()
   
     const tx = await squid.executeRoute({
       // @ts-ignore
@@ -309,40 +285,14 @@ const CrosschainSwap = ({ }) => {
     console.log(txReceipt)
   }
 
-  const [amount, setAmount] = useState(1);
-
-  // const [slippage, setSlippage] = useState('1')
-  // const [txModalOpen, setTxModalOpen] = useState(false);
-  // const [txUrl, setTxUrl] = useState('');
-  // const gasPrice = useGasPrice()?.gasPrice.fast
-
   const fromAmountWithDecimals = new BigNumber(amount.toString())
-    .times(10 ** (fromToken.isNative ? 18 : fromToken?.wrapped.decimals))
+    .times(10 ** (fromToken.isNative ? 18 : fromToken?.wrapped.decimals ?? 18))
     .toString()
-
-  const toAmountWithDecimals = new BigNumber(outputAmount.toString())
-    .div(10 ** (toToken.isNative ? 18 : toToken?.wrapped.decimals))
-    .toString()
-
-  // const balance =
-  //   useTokenBalance(
-  //     chainId,
-  //     // fromToken?.isNative ? NATIVE_ADDRESS : 
-  //     fromToken?.wrapped.address,
-  //     // addressOrName: address,
-  //     // watch: true
-  //   );
-
-  // const { data: tokenPrices } = useGetPrice({
-  //   chain: selectedChain.value,
-  //   toToken: toToken?.wrapped.address,
-  //   fromToken: fromToken?.wrapped.address
-  // });
 
   const handleInputSelect = useCallback(
     (inputCurrency: Currency) => {
       setFromToken(inputCurrency)
-      setInputToken(inputCurrency)
+      // setInputToken(inputCurrency)
     },
     [setFromToken]
   )
@@ -350,15 +300,15 @@ const CrosschainSwap = ({ }) => {
   const handleOutputSelect = useCallback(
     (outputCurrency: Currency) => {
       setToToken(outputCurrency)
-      setOutputToken(outputCurrency)
-      setToDecimals(outputCurrency?.wrapped.decimals)
     },
     [setToToken]
-  )
+  )  
+  
+  generateRoute()
 
   const handleTypeInput = useCallback(
     async (value: string) => {
-      setAmount(Number(value))
+      setAmount(value)
     },
     [setAmount]
   )
@@ -384,7 +334,7 @@ const CrosschainSwap = ({ }) => {
               />
             )}
             currency={fromToken}
-            value={amount.toString()}
+            value={amount.toString() ?? '1'}
             onChange={handleTypeInput}
             onSelect={handleInputSelect}
           />
@@ -405,12 +355,8 @@ const CrosschainSwap = ({ }) => {
                   }
                 />
               )}
-              currency={
-                toToken
-              }
-              // value={outputAmount?.toString()}
-              value={toAmountWithDecimals}
-              // value={(routes[0]?.price.amountReturned / (10 ** (outputToken?.wrapped.decimals)))?.toString() || '0'}
+              currency={ toToken }
+              value={outputAmount.toString() ?? '1'}
               onChange={() => { }}
               onSelect={handleOutputSelect}
             />
@@ -419,7 +365,7 @@ const CrosschainSwap = ({ }) => {
           <div
             className={`flex flex-col gap-3 mt-8 mb-4 w-full`}
           >
-            <Button variant="outlined"
+            {/* <Button variant="outlined"
               color={invalidOutput ? 'red' : 'green'}
               onClick={generateRoute}
               disabled={invalidOutput}
@@ -427,7 +373,7 @@ const CrosschainSwap = ({ }) => {
               <Typography size={14} className="font-bold text-white">
                 {invalidOutput ? 'Invalid Output Asset' : `Generate Route`}
               </Typography>
-            </Button>
+            </Button> */}
             { route &&
             <Button variant="outlined"
               color={invalidOutput ? 'red' : 'blue'}
