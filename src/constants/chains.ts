@@ -49,6 +49,19 @@ export function getChainLogoURL(chainId: number) {
   return logoURL
 }
 
+export function getChainLogo(chainId: number) {
+  let logoURL = '/images/networks/fantom-white.svg'
+  chainId == ChainId.FANTOM ? logoURL = '/images/networks/fantom-white.svg'
+    : chainId == ChainId.AVALANCHE ? logoURL = '/images/networks/avalanche.svg'
+      : chainId == ChainId.ETHEREUM ? logoURL = '/images/networks/ethereum.svg'
+        : chainId == ChainId.BSC ? logoURL = '/images/networks/binance.svg'
+          : chainId == ChainId.MATIC ? logoURL = '/images/networks/polygon.svg'
+            : chainId == ChainId.MOONRIVER ? logoURL = '/images/networks/moonriver.svg'
+              : '/images/networks/fantom-white.svg'
+
+  return logoURL
+}
+
 export function getChainInfo(chainId: number, option: string) {
   let output = ''
   if (chainId == ChainId.FANTOM) {
@@ -57,12 +70,12 @@ export function getChainInfo(chainId: number, option: string) {
         : option == 'SYMBOL' ? output = 'FTM'
           : output = ''
   } else if (chainId == ChainId.AVALANCHE) {
-    option == 'NETWORK' ? output = 'Avalanche'
+    option == 'NETWORK' ? output = 'Avalanche Network'
       : option == 'NAME' ? output = 'Avalanche'
         : option == 'SYMBOL' ? output = 'AVAX'
           : output = ''
    } else if (chainId == ChainId.ETHEREUM) {
-    option == 'NETWORK' ? output = 'Ethereum'
+    option == 'NETWORK' ? output = 'Ethereum Network'
       : option == 'NAME' ? output = 'Ethereum'
         : option == 'SYMBOL' ? output = 'ETH'
           : output = ''

@@ -158,6 +158,7 @@ export const MWBTC: ChainTokenMap = {
 
 // WBTC
 export const WBTC: ChainTokenMap = {
+  [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, WBTC_ADDRESS[ChainId.ETHEREUM], 8, 'WBTC', 'Wrapped BTC'),
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, WBTC_ADDRESS[ChainId.FANTOM], 8, 'WBTC', 'Wrapped BTC'),
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, WBTC_ADDRESS[ChainId.AVALANCHE], 8, 'WBTC', 'Wrapped BTC'),
 }
@@ -212,6 +213,7 @@ export const DAI: ChainTokenMap = {
 
 // AVAX
 export const AVAX: ChainTokenMap = {
+  [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7', 18, 'AVAX', 'Avalanche'),
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x511D35c52a3C244E7b8bd92c0C297755FbD89212', 18, 'AVAX', 'Avalanche'),
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7', 18, 'WAVAX', 'Wrapped Avalanche')
 }

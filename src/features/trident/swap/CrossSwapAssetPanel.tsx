@@ -12,13 +12,13 @@ import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import { useActiveWeb3React } from 'services/web3'
 import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-import CoffinBoxFundingSourceModal from '../add/CoffinBoxFundingSourceModal'
-import { getChainColorCode } from 'constants/chains'
+// import CoffinBoxFundingSourceModal from '../add/CoffinBoxFundingSourceModal'
+import { getChainColorCode, getChainInfo, getChainLogo } from 'constants/chains'
+import Image from 'next/image'
 
 interface CrossSwapAssetPanel {
   error?: boolean
   header: (x) => React.ReactNode
-  chainId: number
   walletToggle?: (x) => React.ReactNode
   currency?: Currency
   currencies?: string[]
@@ -32,6 +32,8 @@ interface CrossSwapAssetPanel {
   disabled?: boolean
   hideBalance?: boolean
   showInput?: boolean
+  network?: ChainId
+  showSelect?: boolean
 }
 
 const CrossSwapAssetPanel = ({
@@ -47,10 +49,11 @@ const CrossSwapAssetPanel = ({
   priceImpact,
   priceImpactCss,
   disabled,
-  chainId,
   currencies,
   hideBalance,
   showInput = true,
+  network,
+  showSelect = true,
 }: CrossSwapAssetPanel) => {
   return (
     // hover:border-${getChainColorCode(chainId)}
@@ -67,6 +70,8 @@ const CrossSwapAssetPanel = ({
         walletToggle,
         spendFromWallet,
         showInput,
+        network,
+        showSelect,
       })}
       <div className={showInput ? `flex gap-1 justify-between items-baseline px-1.5` : 'hidden'}>
         <InputPanel
@@ -82,9 +87,11 @@ const CrossSwapAssetPanel = ({
             priceImpact,
             priceImpactCss,
             spendFromWallet,
+            network,
+            showSelect,
           }}
         />
-        { !hideBalance && <BalancePanel {...{ disabled, currency, onChange, spendFromWallet }} />}
+        {!hideBalance && <BalancePanel {...{ disabled, currency, onChange, spendFromWallet }} />}
       </div>
     </div>
   )
@@ -105,9 +112,9 @@ const WalletSwitch: FC<
       component="span"
       className={classNames(disabled ? 'pointer-events-none opacity-40' : '', 'flex items-center gap-2')}
     >
-      { label }
+      {label}
       <Typography
-        id={ id }
+        id={id}
         role="button"
         onClick={() => onChange(!spendFromWallet)}
         variant="sm"
@@ -117,7 +124,7 @@ const WalletSwitch: FC<
       >
         {spendFromWallet ? `Wallet` : `Coffin`}
       </Typography>
-      <CoffinBoxFundingSourceModal />
+      {/* <CoffinBoxFundingSourceModal /> */}
     </Typography>
   )
 
@@ -204,24 +211,24 @@ const BalancePanel: FC<Pick<CrossSwapAssetPanel, 'disabled' | 'currency' | 'onCh
 
   return (
     <>
-    <Typography role="button" onClick={handleHalfClick} variant="sm" className="flex text-secondary whitespace-nowrap">
-        { balance ? '50%' : '0' }
+      <Typography role="button" onClick={handleHalfClick} variant="sm" className="flex text-secondary whitespace-nowrap">
+        {balance ? '50%' : '0'}
       </Typography>
-    <Typography role="button" onClick={handleMaxClick} variant="sm" className="flex text-primary whitespace-nowrap">
-      { balance ? balance.toSignificant(6) : '0.00' }
-     </Typography>
-      </>
+      <Typography role="button" onClick={handleMaxClick} variant="sm" className="flex text-primary whitespace-nowrap">
+        {balance ? balance.toSignificant(6) : '0.00'}
+      </Typography>
+    </>
   )
 }
 
 const CrossSwapAssetPanelHeader: FC<
   Pick<
     CrossSwapAssetPanel,
-    'currency' | 'currencies' | 'onSelect' | 'walletToggle' | 'spendFromWallet' | 'disabled' | 'onChange' | 'value'
+    'currency' | 'network' | 'showSelect' | 'currencies' | 'onSelect' | 'walletToggle' | 'spendFromWallet' | 'disabled' | 'onChange' | 'value'
   > & { label: string; id?: string }
-> = ({ walletToggle, currency, onSelect, spendFromWallet, id, currencies }) => {
+> = ({ walletToggle, network, showSelect, currency, onSelect, spendFromWallet, id, currencies }) => {
   const { chainId } = useActiveWeb3React()
-  const trigger = currency ? (
+  const triggerA = currency && showSelect ? (
     <div
       id={id}
       className="flex items-center gap-2 px-2 py-1 rounded-full shadow-md cursor-pointer text-high-emphesis bg-dark-800 hover:bg-dark-700"
@@ -232,28 +239,64 @@ const CrossSwapAssetPanelHeader: FC<
       </Typography>
       <ChevronDownIcon width={18} />
     </div>
-  ) : (
+  ) : showSelect && (
     <Button color={getChainColorCode(chainId)} variant="flexed" size="sm" id={id} className="!rounded-full !px-2 !py-0 !h-[32px] !pl-3">
       <div className="flex items-center mt-1">
-      {`Select Token`}
-      <ChevronDownIcon width={18} />
-    </div>
+        {`Select Token`}
+        <ChevronDownIcon width={18} />
+      </div>
     </Button>
   )
 
   return (
-    <div className="flex items-end justify-between gap-2">
-      <CurrencySearchModal
-        chainId={chainId}
-        selectedCurrency={currency}
-        onCurrencySelect={(currency) => onSelect && onSelect(currency)}
-        trigger={trigger}
-        currencyList={currencies}
-      />
-      {walletToggle && walletToggle({ spendFromWallet })}
+    <div>
+
+        <div
+          className={network ? `flex justify-center gap-8 mb-3 mt-3 max-h-[36px] border ${`border-${getChainColorCode(network)}`} rounded-[14px] bg-dark-900 p-2` : 'hidden'}
+        >
+          <Image
+            src={getChainLogo(network)}
+            height={16}
+            width={16}
+            alt={'chain logo'}
+          />
+          <Typography variant="sm" className={'text-md -my-0.5 sm:-my-1 sm:text-xl'} weight={700}>
+            {getChainInfo(network, 'NETWORK')}
+          </Typography>
+      </div>
+      <div className={`flex items-end justify-between gap-2`}>
+        { showSelect ? (
+        <CurrencySearchModal
+          chainId={chainId}
+          selectedCurrency={currency}
+          onCurrencySelect={(currency) => onSelect && onSelect(currency)}
+          trigger={triggerA}
+          currencyList={currencies}
+          showSearch={false}
+          // includeNativeCurrency={false}
+        />
+        ) : (
+          <div
+            className="flex items-center gap-2 px-2 py-1 rounded-full shadow-md cursor-pointer text-high-emphesis bg-dark-800 hover:bg-dark-700"
+          >
+          <CurrencyLogo currency={currency} className="!rounded-full overflow-hidden" size={20} />
+          <Typography variant="sm" className="!text-xl" weight={700}>
+            { currency.symbol }
+          </Typography>
+          {/* <ChevronDownIcon width={18} /> */}
+        </div>
+          // <div className={`flex p-2 bg-dark-800`}>
+          // <CurrencyLogo currency={currency} size={20} className="!rounded-full overflow-hidden" />
+          // <Typography variant="sm" className="!text-xl" weight={700}>
+          //   {`${currency.symbol}`}
+          // </Typography>
+          // </div>
+        )}
+        </div>
     </div>
   )
 }
+
 
 CrossSwapAssetPanel.Header = CrossSwapAssetPanelHeader
 CrossSwapAssetPanel.Switch = WalletSwitch

@@ -95,7 +95,7 @@ export default function Explore() {
                   <div className="flex items-center justify-between focus:outline-none">
                     <span className="absolute inset-0" aria-hidden="true" />
                       <p className="text-xl font-bold truncate text-primary">{soulFeature.name}</p>
-                      <p className="text-sm truncate text-dark-600 text-secondary">{soulFeature.description}</p>
+                      <p className="text-sm truncate text-dark-600">{soulFeature.description}</p>
                   </div>
               </div>
             </div>
@@ -105,7 +105,7 @@ export default function Explore() {
               <div className="flex-1 min-w-0">
 
                 <Link href={soulFeature.href}>
-                  <a className="flex items-center justify-between focus:outline-none">
+                  <div className="flex items-center justify-between focus:outline-none">
                     <span className="absolute inset-0" aria-hidden="true" />
                     <div className="space-y-1">
                       <p className="text-xl font-bold truncate text-primary">{soulFeature.name}</p>
@@ -117,7 +117,7 @@ export default function Explore() {
                           ? <ArrowDownIcon width={24} height={24}  className="text-high-emphesis"/>
                           : <ArrowRightIcon width={24} height={24} className="text-high-emphesis" />
                     } */}
-                  </a>
+                  </div>
                 </Link>
               </div>
             </div>
@@ -139,14 +139,14 @@ export default function Explore() {
                   legacyBehavior={true}
                   href={luxorFeature.href}
                 >
-                  <a className="flex items-center justify-between focus:outline-none">
+                  <div className="flex items-center justify-between focus:outline-none">
                     <span className="absolute inset-0" aria-hidden="true" />
                     <div className="space-y-1">
                       <p className="text-xl font-bold truncate text-primary">{luxorFeature.name}</p>
                       <p className="text-sm truncate text-secondary">{luxorFeature.description}</p>
                     </div>
                     <ArrowRightIcon width={24} height={24} className="text-high-emphesis" />
-                  </a>
+                  </div>
                 </Link>
               </div>
             </div>
@@ -167,14 +167,14 @@ export default function Explore() {
                   legacyBehavior={true}
                   href={infinityFeature.href}
                 >
-                  <a className="flex items-center justify-between focus:outline-none">
+                  <div className="flex items-center justify-between focus:outline-none">
                     <span className="absolute inset-0" aria-hidden="true" />
                     <div className="space-y-1">
                       <p className="text-xl font-bold truncate text-primary">{infinityFeature.name}</p>
                       <p className="text-sm truncate text-secondary">{infinityFeature.description}</p>
                     </div>
                     <ArrowRightIcon width={24} height={24} className="text-high-emphesis" />
-                  </a>
+                  </div>
                 </Link>
               </div>
             </div>

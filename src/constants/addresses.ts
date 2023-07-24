@@ -511,7 +511,7 @@ export const GRIMEVO_ADDRESS: AddressMap = {
 }
 
 export const AVAX_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
+  [ChainId.ETHEREUM]: '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x511D35c52a3C244E7b8bd92c0C297755FbD89212', // AVAX
