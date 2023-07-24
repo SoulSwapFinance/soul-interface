@@ -57,8 +57,8 @@ export default function AssetSelect() {
                     </div>
                 </div>
             </div>
-            <ul className="space-y-4 divide-y-0">
                 {asset.map((asset) => (
+                <ul className="space-y-4 divide-y-0">
                     <li key={asset.id} className={`relative border gap-4 ${asPath.startsWith(asset.href) ? `border-purple hover:border-dark-600` : ''} w-full p-4 rounded bg-dark-900 hover:bg-dark-800`}>
                         <div className="flex justify-between space-y-4 space-x-4">
                             <div className="flex-1 min-w-0">
@@ -75,8 +75,8 @@ export default function AssetSelect() {
                             </div>
                         </div>
                     </li>
+                </ul>
                 ))}
-            </ul>
         </Container>
     )
 }
