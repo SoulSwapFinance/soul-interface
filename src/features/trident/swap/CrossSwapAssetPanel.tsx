@@ -14,11 +14,11 @@ import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 're
 
 import CoffinBoxFundingSourceModal from '../add/CoffinBoxFundingSourceModal'
 import { getChainColorCode } from 'constants/chains'
+import Image from 'next/image'
 
 interface CrossSwapAssetPanel {
   error?: boolean
   header: (x) => React.ReactNode
-  chainId: number
   walletToggle?: (x) => React.ReactNode
   currency?: Currency
   currencies?: string[]
@@ -32,6 +32,7 @@ interface CrossSwapAssetPanel {
   disabled?: boolean
   hideBalance?: boolean
   showInput?: boolean
+  showNetwork?: boolean
 }
 
 const CrossSwapAssetPanel = ({
@@ -47,10 +48,10 @@ const CrossSwapAssetPanel = ({
   priceImpact,
   priceImpactCss,
   disabled,
-  chainId,
   currencies,
   hideBalance,
   showInput = true,
+  showNetwork = false,
 }: CrossSwapAssetPanel) => {
   return (
     // hover:border-${getChainColorCode(chainId)}
@@ -67,6 +68,7 @@ const CrossSwapAssetPanel = ({
         walletToggle,
         spendFromWallet,
         showInput,
+        showNetwork,
       })}
       <div className={showInput ? `flex gap-1 justify-between items-baseline px-1.5` : 'hidden'}>
         <InputPanel
@@ -82,6 +84,7 @@ const CrossSwapAssetPanel = ({
             priceImpact,
             priceImpactCss,
             spendFromWallet,
+            showNetwork,
           }}
         />
         { !hideBalance && <BalancePanel {...{ disabled, currency, onChange, spendFromWallet }} />}
@@ -117,7 +120,7 @@ const WalletSwitch: FC<
       >
         {spendFromWallet ? `Wallet` : `Coffin`}
       </Typography>
-      <CoffinBoxFundingSourceModal />
+      {/* <CoffinBoxFundingSourceModal /> */}
     </Typography>
   )
 
@@ -215,6 +218,60 @@ const BalancePanel: FC<Pick<CrossSwapAssetPanel, 'disabled' | 'currency' | 'onCh
 }
 
 const CrossSwapAssetPanelHeader: FC<
+  Pick<
+    CrossSwapAssetPanel,
+    'currency' | 'showNetwork' | 'currencies' | 'onSelect' | 'walletToggle' | 'spendFromWallet' | 'disabled' | 'onChange' | 'value'
+  > & { label: string; id?: string }
+> = ({ walletToggle, showNetwork, currency, onSelect, spendFromWallet, id, currencies }) => {
+  const { chainId } = useActiveWeb3React()
+  const triggerA = currency ? (
+    <div
+      id={id}
+      className="flex items-center gap-2 px-2 py-1 rounded-full shadow-md cursor-pointer text-high-emphesis bg-dark-800 hover:bg-dark-700"
+    >
+      <CurrencyLogo currency={currency} className="!rounded-full overflow-hidden" size={20} />
+      <Typography variant="sm" className="!text-xl" weight={700}>
+        {!spendFromWallet ? currency.wrapped.symbol : currency.symbol}
+      </Typography>
+      <ChevronDownIcon width={18} />
+    </div>
+  ) : (
+    <Button color={getChainColorCode(chainId)} variant="flexed" size="sm" id={id} className="!rounded-full !px-2 !py-0 !h-[32px] !pl-3">
+      <div className="flex items-center mt-1">
+      {`Select Token`}
+      <ChevronDownIcon width={18} />
+    </div>
+    </Button>
+  )
+
+  return (
+    <div className="flex items-end justify-between gap-2">
+      <CurrencySearchModal
+        chainId={chainId}
+        selectedCurrency={currency}
+        onCurrencySelect={(currency) => onSelect && onSelect(currency)}
+        trigger={triggerA}
+        currencyList={currencies}
+      />
+      <div
+        className={showNetwork ? `flex gap-4 border ${chainId == ChainId.FANTOM ? 'border-avaxRed' : 'border-ftmBlue'} rounded-[14px] bg-dark-900 p-2` : 'hidden'}
+      >
+        <Image
+          src={chainId == ChainId.FANTOM ? "/images/networks/avalanche.svg" : "/images/networks/fantom.svg"}
+          height={24}
+          width={24}
+          alt={'chain logo'}
+        />
+        <Typography variant="sm" className="!text-xl" weight={700}>
+          {`${chainId == ChainId.FANTOM ? 'Avalanche' : 'Fantom'}`}
+        </Typography>
+      </div>
+    </div>
+
+  )
+}
+
+const CrossSwapPanelHeader: FC<
   Pick<
     CrossSwapAssetPanel,
     'currency' | 'currencies' | 'onSelect' | 'walletToggle' | 'spendFromWallet' | 'disabled' | 'onChange' | 'value'
