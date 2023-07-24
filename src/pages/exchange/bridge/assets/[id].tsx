@@ -21,6 +21,7 @@ import useGetPrice from 'features/aggregator/queries/useGetPrice'
 import AssetSelect from 'features/bridge/AssetSelect'
 import { useRouter } from 'next/router'
 import { getChainInfo } from 'constants/chains'
+import { useTokenBalance } from 'state/wallet/hooks'
 // import { useTokenBalance } from 'state/wallet/hooks'
 // import { useTokenPrice } from 'hooks/getPrices'
 // import { usePrice } from 'hooks'
@@ -183,8 +184,9 @@ const CrosschainSwap = ({ }) => {
   // const NATIVE_ADDRESS = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
   const fromChain = chainId
   const toChain = 
-    chainId == ChainId.ETHEREUM ? ChainId.FANTOM 
+    chainId == ChainId.ETHEREUM ? ChainId.FANTOM
       : (symbol == 'USDC' && chainId == ChainId.AVALANCHE) ? ChainId.FANTOM
+      : (symbol == 'USDC' && chainId == ChainId.FANTOM) ? ChainId.AVALANCHE
       : ChainId.ETHEREUM
     // (symbol == 'USDC' && chainId == ChainId.FANTOM) ? ChainId.AVALANCHE
     // : symbol != 'USDC' && (chainId == ChainId.FANTOM || chainId == ChainId.AVALANCHE) ? ChainId.ETHEREUM
@@ -207,8 +209,8 @@ const CrosschainSwap = ({ }) => {
   // √
   const [amount, setAmount] = useState('1');
   // const [outputAmount, setOutputAmount] = useState('0');
-
-  const invalidOutput = fromAsset.isNative
+  const _balance = useTokenBalance(chainId, account, fromAsset)
+  const balance = _balance ? _balance.toSignificant(18) : '0'
 
   // instantiate the SDK
   const squid = new Squid({
@@ -270,6 +272,8 @@ const CrosschainSwap = ({ }) => {
 
   // generateRoute()
 
+  const insufficientFunds = Number(amount) > Number(balance)
+
   return (
     <DoubleGlowShadowV2>
       <NextSeo title={`Bridge | SoulSwap`} />
@@ -325,12 +329,12 @@ const CrosschainSwap = ({ }) => {
           className={`flex flex-col gap-3 mt-8 mb-4 w-full`}
         >
             <Button variant="outlined"
-              color={invalidOutput ? 'red' : 'blue'}
+              color={insufficientFunds ? 'red' : 'blue'}
               onClick={handleSwap}
-              disabled={invalidOutput}
+              disabled={insufficientFunds}
             >
               <Typography size={14} className="font-bold text-white">
-                {invalidOutput ? 'Invalid Output Asset' : `Bridge ${fromAsset.symbol} to ${getChainInfo(toChain, "NETWORK")}`}
+                {insufficientFunds ? 'Insufficient Funds' : `Bridge ${fromAsset.symbol} to ${getChainInfo(toChain, "NETWORK")}`}
               </Typography>
             </Button>
         </div>
