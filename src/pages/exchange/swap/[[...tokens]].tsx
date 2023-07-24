@@ -36,6 +36,7 @@ import TokenChart from 'pages/analytics/tokens/embedded/[id]'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { currencyId } from 'functions'
 import { NextSeo } from 'next-seo'
+import Link from 'next/link'
 
 // import { FollowBanner } from 'components/Banner'
 
@@ -267,8 +268,8 @@ const Exchange = () => {
     !swapInputError &&
     (approvalState === ApprovalState.NOT_APPROVED ||
       approvalState === ApprovalState.PENDING ||
-      (approvalSubmitted && approvalState === ApprovalState.APPROVED)) 
-      // && !(priceImpactSeverity > 3)
+      (approvalSubmitted && approvalState === ApprovalState.APPROVED))
+  // && !(priceImpactSeverity > 3)
 
   const handleConfirmDismiss = useCallback(() => {
     setSwapState({
@@ -363,11 +364,11 @@ const Exchange = () => {
     [onUserInput]
   )
 
-//   const UP_DOWN_ICON = <UpDownArrowIcon
-//   fillPrimary={switched ? WHITE : getChainColor(chainId)}
-//   fillSecondary={switched ? getChainColor(chainId) : WHITE}
-//   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-2xl w-7 h-7` : `hidden`}
-// />
+  //   const UP_DOWN_ICON = <UpDownArrowIcon
+  //   fillPrimary={switched ? WHITE : getChainColor(chainId)}
+  //   fillSecondary={switched ? getChainColor(chainId) : WHITE}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `cursor-pointer rounded rounded-2xl w-7 h-7` : `hidden`}
+  // />
 
   return (
     <>
@@ -394,26 +395,26 @@ const Exchange = () => {
       {![ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <div className="flex flex-col gap-3 mt-12 justify-center">
           <SwapDropdown inputCurrency={currencyA} outputCurrency={currencyB} />
-            <NavLink href={"/aggregator"}>
+          <NavLink href={"/aggregator"}>
             <Button
-            variant="outlined"
-            color={`purple`}
-            size="lg"
-          >
-          <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span>{'SoulSwap Exchange'}</span>
-            <br />
-            <span>{'Click Here to use our Meta-Aggregator'}</span>
-          </a>
-              </Button>
-            </NavLink>
+              variant="outlined"
+              color={`purple`}
+              size="lg"
+            >
+              <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                <span>{'SoulSwap Exchange'}</span>
+                <br />
+                <span>{'Click Here to use our Meta-Aggregator'}</span>
+              </a>
+            </Button>
+          </NavLink>
         </div>}
 
       {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <DoubleGlowShadowV2>
-          
+
           <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
-          {/* <FollowBanner /> */}
+            {/* <FollowBanner /> */}
 
             {/* <SwapLayoutCard> */}
             {/* <div
@@ -428,11 +429,11 @@ const Exchange = () => {
             {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
             {/* <div className={`my-2 border-2 border-[${getChainColor(chainId)}]`} /> */}
             <>
-            {/* <div className={`my-12`} /> */}
-            <SwapDropdown 
-              inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]}
+              {/* <div className={`my-12`} /> */}
+              <SwapDropdown
+                inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]}
               />
-            <div className={`my-12`} />
+              <div className={`my-12`} />
               {/* <div className={`my-2 border-2 border-[${getChainColor(chainId)}]`} /> */}
               {/* {useSwap && */}
               <SwapAssetPanel
@@ -539,12 +540,12 @@ const Exchange = () => {
               ) : !account // && useSwap 
                 ? (
                   // <Web3Connect color="purple" variant="filled" className="rounded-2xl md:rounded" />
-                  <Button 
-                  size="lg" color="avaxRed" className="w-full" 
-                  disabled
-                >
-                  { `Connect Wallet` }
-                </Button>
+                  <Button
+                    size="lg" color="avaxRed" className="w-full"
+                    disabled
+                  >
+                    {`Connect Wallet`}
+                  </Button>
                 ) : showWrap // && useSwap 
                   ? (
                     <Button
@@ -572,7 +573,7 @@ const Exchange = () => {
                               disabled={approvalState !== ApprovalState.NOT_APPROVED || approvalSubmitted}
                               className="rounded-2xl w-full md:rounded"
                             >
-                              { `Approve ${currencies[Field.INPUT]?.symbol}` }
+                              {`Approve ${currencies[Field.INPUT]?.symbol}`}
                             </Button>
                           )}
                         {approvalState === ApprovalState.APPROVED
@@ -594,7 +595,7 @@ const Exchange = () => {
                               }
                               id="swap-button"
                               disabled={
-                                !isValid || approvalState !== ApprovalState.APPROVED 
+                                !isValid || approvalState !== ApprovalState.APPROVED
                                 // || (priceImpactSeverity > 3)
                               }
                               className="rounded-2xl w-full md:rounded"
@@ -654,30 +655,48 @@ const Exchange = () => {
               </div>
             </div>
             {/* <div className={`flex flex-cols-${showChart ? `hidden` : `1`}`}> */}
-              {showChart && !showPortfolio &&
-                // useSwap && 
-                [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
-                // <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
-                  <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded-lg bg-light-glass`}>
-                    {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
-                  {featureEnabled(Feature.ANALYTICS, chainId) &&
-                    !isWrapped && 
-                    <TokenChart
-                      outputCurrency={outputCurrency}
-                    />
-                    // <Pair
-                    //   // isWrapped={isWrapped}
-                    //   inputCurrency={inputCurrency}
-                    //   outputCurrency={outputCurrency}
-                    // />
-                  }
-                  </div>
-                // </div>
-              }
+            {showChart && !showPortfolio &&
+              // useSwap && 
+              [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
+              // <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
+              <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded-lg bg-light-glass`}>
+                {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
+                {featureEnabled(Feature.ANALYTICS, chainId) &&
+                  !isWrapped &&
+                  <TokenChart
+                    outputCurrency={outputCurrency}
+                  />
+                  // <Pair
+                  //   // isWrapped={isWrapped}
+                  //   inputCurrency={inputCurrency}
+                  //   outputCurrency={outputCurrency}
+                  // />
+                }
+              </div>
+              // </div>
+            }
             {/* {(!showChart && !showChart) &&
             <SocialWidget />
           } */}
-          {/* </div> */}
+            {/* </div> */}
+            <div className={"grid grid-cols-1 text-white justify-center"}>
+              <NavLink href="/crosschain">
+              {/* <Link
+                href={'https://widget-integrations-squid.vercel.app/'}
+                target={'_blank'}
+              > */}
+                <Button
+                  variant={'filled'}
+                  color={`purple`}
+                  primaryColor={'black'}
+                >
+                  <div className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
+                    {`Crosschain Swap`}
+                  </div>
+                </Button>
+              {/* </Link> */}
+              </NavLink>
+            </div>
           </div>
         </DoubleGlowShadowV2>
       }
