@@ -32,6 +32,7 @@ function TokenStats(): JSX.Element | null {
       <div className="grid items-center grid-flow-col px-1.5 py-1 space-x-2 text-sm rounded-lg pointer-events-auto auto-cols-max bg-dark-1000 text-secondary">
         <Image
           src="/favicon.png"
+          // src={'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png'}
           alt="SOUL"
           width={28}
           height={28}

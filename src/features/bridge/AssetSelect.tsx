@@ -37,7 +37,7 @@ export default function AssetSelect() {
             className={`mt-2`}
         >
             <div
-                className={startPage ? 'relative border-4 border-purple hover:border-dark-600 w-full p-4 rounded bg-dark-900 hover:bg-dark-800 mb-4' : 'hidden'}
+                className={startPage ? 'relative border-4 border-purple w-full p-4 rounded bg-dark-900 hover:bg-dark-800 mb-4' : 'hidden'}
             >
                 <div className="flex justify-between space-y-4 space-x-4">
                     <div className="flex-1 min-w-0">
@@ -54,7 +54,7 @@ export default function AssetSelect() {
             // className="space-y-4 divide-y-0"
             >
                 {asset.map((asset) => (
-                    <li key={asset.id} className={`relative border border-dark-700 gap-4 ${asPath.startsWith(asset.href) ? `bg-${asset.color} text-black hover:border-white` : ''} w-full p-4 rounded-2xl hover:text-white hover:border-dark-800`}>
+                    <li key={asset.id} className={`relative border border-dark-700 gap-4 ${asPath.startsWith(asset.href) ? `bg-${asset.color} text-black hover:border-white` : ''} w-full p-4 rounded-2xl hover:text-white hover:border-purple`}>
                         <div className="flex justify-between space-y-4 space-x-4">
                             <div className="flex-1 min-w-0">
                                 <Link href={asset.href}>

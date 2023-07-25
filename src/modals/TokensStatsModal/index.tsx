@@ -43,14 +43,14 @@ export default function TokenStatsModal(): JSX.Element | null {
   const { bondInfo } = useBondInfo()
   const bondTVL = Number(bondInfo.totalValue)
   const tvlInfo = useTVL()
-  const bondsInfo = useBondTVL()
+  // const bondsInfo = useBondTVL()
   // const stakedTvl = Number(soulPrice) * totalSeance
   const soulInfo = useSoulTVL()
 
-  let bondTvl
-    = bondsInfo?.reduce((previousValue, currentValue) => {
-      return previousValue + currentValue?.tvl
-    }, 0)
+  // let bondTvl
+  //   = bondsInfo?.reduce((previousValue, currentValue) => {
+  //     return previousValue + currentValue?.tvl
+  //   }, 0)
 
   let soulTVL = soulInfo?.reduce((previousValue, currentValue) => {
     return previousValue + currentValue?.tvl
