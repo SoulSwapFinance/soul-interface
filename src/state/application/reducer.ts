@@ -30,7 +30,6 @@ export enum ApplicationModal {
   DELEGATE,
   VOTE,
   SOUL_STATS,
-  LUXOR_STATS,
   LANGUAGE,
   NETWORK,
 }

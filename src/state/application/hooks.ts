@@ -91,10 +91,6 @@ export function useToggleTokenStatsModal(): () => void {
   return useToggleModal(ApplicationModal.SOUL_STATS) 
 }
 
-export function useToggleLuxorStatsModal(): () => void {
-  return useToggleModal(ApplicationModal.LUXOR_STATS) 
-}
-
 // returns a function that allows adding a popup
 export function useAddPopup(): (content: PopupContent, key?: string, removeAfterMs?: number) => void {
   const dispatch = useAppDispatch()

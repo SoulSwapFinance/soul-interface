@@ -16,7 +16,7 @@ import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 're
 import { getChainColorCode, getChainInfo, getChainLogo } from 'constants/chains'
 import Image from 'next/image'
 
-interface CrossSwapAssetPanel {
+interface BridgeAssetPanel {
   error?: boolean
   header: (x) => React.ReactNode
   walletToggle?: (x) => React.ReactNode
@@ -36,7 +36,7 @@ interface CrossSwapAssetPanel {
   showSelect?: boolean
 }
 
-const CrossSwapAssetPanel = ({
+const BridgeAssetPanel = ({
   error,
   header,
   walletToggle,
@@ -54,7 +54,7 @@ const CrossSwapAssetPanel = ({
   showInput = true,
   network,
   showSelect = true,
-}: CrossSwapAssetPanel) => {
+}: BridgeAssetPanel) => {
   return (
     // hover:border-${getChainColorCode(chainId)}
     <div className={`rounded-[14px] border border-dark-700
@@ -98,7 +98,7 @@ const CrossSwapAssetPanel = ({
 }
 
 const WalletSwitch: FC<
-  Pick<CrossSwapAssetPanel, 'spendFromWallet' | 'disabled'> & {
+  Pick<BridgeAssetPanel, 'spendFromWallet' | 'disabled'> & {
     label: string
     onChange(x: boolean): void
     id?: string
@@ -136,7 +136,7 @@ const WalletSwitch: FC<
 }
 
 const InputPanel: FC<
-  Pick<CrossSwapAssetPanel, 'currency' | 'value' | 'onChange' | 'disabled' | 'priceImpact'> & { priceImpactCss?: string }
+  Pick<BridgeAssetPanel, 'currency' | 'value' | 'onChange' | 'disabled' | 'priceImpact'> & { priceImpactCss?: string }
 > = ({ currency, value, onChange, disabled, priceImpact, priceImpactCss }) => {
   const { chainId } = useActiveWeb3React()
   const usdcValue = [ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? useUSDCValue(tryParseAmount(value, currency)) : tryParseAmount(value, currency)
@@ -190,7 +190,7 @@ const InputPanel: FC<
   )
 }
 
-const BalancePanel: FC<Pick<CrossSwapAssetPanel, 'disabled' | 'currency' | 'onChange' | 'spendFromWallet'>> = ({
+const BalancePanel: FC<Pick<BridgeAssetPanel, 'disabled' | 'currency' | 'onChange' | 'spendFromWallet'>> = ({
   disabled,
   currency,
   onChange,
@@ -221,9 +221,9 @@ const BalancePanel: FC<Pick<CrossSwapAssetPanel, 'disabled' | 'currency' | 'onCh
   )
 }
 
-const CrossSwapAssetPanelHeader: FC<
+const BridgeAssetPanelHeader: FC<
   Pick<
-    CrossSwapAssetPanel,
+    BridgeAssetPanel,
     'currency' | 'network' | 'showSelect' | 'currencies' | 'onSelect' | 'walletToggle' | 'spendFromWallet' | 'disabled' | 'onChange' | 'value'
   > & { label: string; id?: string }
 > = ({ walletToggle, network, showSelect, currency, onSelect, spendFromWallet, id, currencies }) => {
@@ -298,7 +298,7 @@ const CrossSwapAssetPanelHeader: FC<
 }
 
 
-CrossSwapAssetPanel.Header = CrossSwapAssetPanelHeader
-CrossSwapAssetPanel.Switch = WalletSwitch
+BridgeAssetPanel.Header = BridgeAssetPanelHeader
+BridgeAssetPanel.Switch = WalletSwitch
 
-export default CrossSwapAssetPanel
+export default BridgeAssetPanel

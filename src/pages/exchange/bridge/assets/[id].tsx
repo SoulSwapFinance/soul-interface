@@ -14,7 +14,7 @@ import { useActiveWeb3React } from "services/web3";
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
 import { RouteData, Squid } from "@0xsquid/sdk";
 import { Button } from "components/Button";
-import CrossSwapAssetPanel from 'features/trident/swap/CrossSwapAssetPanel'
+import BridgeAssetPanel from 'features/trident/swap/BridgeAssetPanel'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 import useGetPrice from 'features/aggregator/queries/useGetPrice'
@@ -282,11 +282,11 @@ const Bridge = ({ }) => {
         <AssetSelect />
         {/* <div className={`my-12`} /> */}
         <div className="flex flex-col gap-3 space-y-3">
-          <CrossSwapAssetPanel
+          <BridgeAssetPanel
             spendFromWallet={true}
             network={fromChain}
             header={(props) => (
-              <CrossSwapAssetPanel.Header
+              <BridgeAssetPanel.Header
                 {...props}
                 label={
                   `Swap from:`
@@ -305,11 +305,11 @@ const Bridge = ({ }) => {
                 <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
               </div>
             </div>
-            <CrossSwapAssetPanel
+            <BridgeAssetPanel
               spendFromWallet={true}
               network={toChain}
               header={(props) => (
-                <CrossSwapAssetPanel.Header
+                <BridgeAssetPanel.Header
                   {...props}
                   label={
                     `Swap to:`

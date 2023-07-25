@@ -35,7 +35,6 @@ export enum ApplicationModal {
   NETWORK,
   YIELD_DETAILS,
   SOUL_STATS,
-  LUXOR_STATS,
   STAKE,
   LUXOR_BONDS,
   WRAP,
