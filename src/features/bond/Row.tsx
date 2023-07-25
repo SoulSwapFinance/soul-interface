@@ -412,7 +412,8 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                   <Text fontSize=".9rem" padding="0" textAlign="left">
                     {isUnderworldPair 
                       ? 'ENDS: AUG 2023'
-                      : 'ENDS: AUG 2023'
+                      : chainId == ChainId.FANTOM ? 'ENDS: AUG 2023'
+                      : 'ENDS: Q1 2025'
                      }
                     <br />
                     VALUE:&nbsp;{Number(_stakedValue) !== 0 ? `${formatNumber(_stakedValue, true, true)}` : '0'}
