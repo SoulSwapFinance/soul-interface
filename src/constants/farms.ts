@@ -1,4 +1,4 @@
-import { ChainId, SOUL_ADDRESS, SOUL_NATIVE, SOUL_USDC, USDC_ADDRESS, WNATIVE_ADDRESS, USDC_NATIVE, MUSDC_NATIVE, BTC_NATIVE, ETH_NATIVE, DAI_USDC, WBTC_ADDRESS, WETH_ADDRESS, DAI_ADDRESS, BNB_NATIVE, BNB_ADDRESS, LINK_ADDRESS, MULTI_WETH_ADDRESS } from '../sdk'
+import { ChainId, SOUL_ADDRESS, SOUL_NATIVE, SOUL_USDC, USDC_ADDRESS, WNATIVE_ADDRESS, USDC_NATIVE, MUSDC_NATIVE, BTC_NATIVE, ETH_NATIVE, DAI_USDC, WBTC_ADDRESS, FMULTI_ADDRESS, WETH_ADDRESS, DAI_ADDRESS, BNB_NATIVE, BNB_ADDRESS, LINK_ADDRESS, MULTI_WETH_ADDRESS } from '../sdk'
 
 export type TokenInfo = {
   id: string
@@ -682,5 +682,22 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
     },
+    '0xe5fCD208C453b72F476967C174d4530E21aAE14C': { // FMULTI-NATIVE √
+      id: 31, // note: 30 is errored
+      address: '0xe5fcd208c453b72f476967c174d4530e21aae14c',
+      token0: {
+        id: FMULTI_ADDRESS[ChainId.FANTOM], // FMULTI
+        name: 'Fuck Multi',
+        symbol: 'FMULTI',
+        decimals: 18,
+      },
+      token1: {
+        id: WNATIVE_ADDRESS[ChainId.FANTOM], // WFTM
+        name: 'Wrapped Fantom',
+        symbol: 'WFTM',
+        decimals: 18,
+      },
+    },
+    
   }, 
 }
