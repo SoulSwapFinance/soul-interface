@@ -58,7 +58,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
 
   return (
     <div className={`flex mt-2 mb-2 items-center justify-center gap-4 border-2 border-dark-700 rounded-lg`}>
-      <div className={`flex gap-6 sm:gap-8 mr-8 sm:mr-0`}>
+      <div className={`flex gap-2 sm:gap-8 mr-8 sm:mr-0`}>
         {/* {featureEnabled(Feature.LIQUIDITY, chainId) && */}
         <NavLink
           className={classNames(
