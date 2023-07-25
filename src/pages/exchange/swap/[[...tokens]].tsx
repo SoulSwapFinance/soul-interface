@@ -1,5 +1,6 @@
 import ReactGA from 'react-ga'
 import Image from 'next/image'
+import { CreditCardIcon } from '@heroicons/react/24/solid'
 import ArrowRoundedSquare from 'assets/svg/icons/ArrowRoundedSquare.svg'
 import { ChainId, Currency, JSBI, NATIVE, SOUL_ADDRESS, Token, Trade as V2Trade, TradeType, USDC_ADDRESS, WNATIVE } from 'sdk'
 import { Button } from 'components/Button'
@@ -36,7 +37,7 @@ import TokenChart from 'pages/analytics/tokens/embedded/[id]'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { currencyId } from 'functions'
 import { NextSeo } from 'next-seo'
-import Link from 'next/link'
+// import Link from 'next/link'
 
 // import { FollowBanner } from 'components/Banner'
 
@@ -50,6 +51,7 @@ const Exchange = () => {
     useCurrency(loadedUrlParams?.inputCurrencyId),
     useCurrency(loadedUrlParams?.outputCurrencyId),
   ]
+  const [buyWithFiat, setBuyWithFiat] = useState(false)
 
   const [switched, setSwitched] = useState(false)
 
@@ -675,11 +677,26 @@ const Exchange = () => {
               </div>
               // </div>
             }
-            {/* {(!showChart && !showChart) &&
-            <SocialWidget />
-          } */}
-            {/* </div> */}
+            <div
+              className={`flex justify-end h-[40px]`}
+            >
+              <CreditCardIcon 
+                className={`flex border-2 ${buyWithFiat ? 'border-green' : 'border-red'} hover:border-white bg-${getChainColorCode(chainId)} h-[40px] w-[80px] rounded-2xl`}
+                onClick={() => setBuyWithFiat(!buyWithFiat)}
+                />
+                </div>
           </div>
+          {buyWithFiat &&
+          <div
+            className={`flex justify-center border-4 border-${'green'} m-1 p-1 bg-dark-900 rounded-2xl`}
+          >
+            <iframe
+              src={`https://fluidmoney.xyz/`}
+              height={'692px'}
+              width={'100%'}
+              />
+            </div>
+          }
         </DoubleGlowShadowV2>
       }
     </>
