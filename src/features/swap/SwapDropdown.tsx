@@ -34,7 +34,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
 
   const isAggregator = asPath.startsWith('/aggregator')
     || asPath.startsWith('/exchange/aggregator')
-  
+
   const isCrosschain = asPath.startsWith('/crosschain')
     || asPath.startsWith('/exchange/crosschain')
 
@@ -121,7 +121,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               <Typography
                 className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
               >
-                {`Pool`}
+                {`+/-`}
               </Typography>
             </div>
           </NavLink>
@@ -136,7 +136,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               activeStyle
             )}
             href={`/exchange/swap/limit/${inputCurrency ? `${currencyId(inputCurrency)}` : `${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)}`}
-            // href={`/exchange/swap/limit/${inputCurrency ? `${currencyId(inputCurrency)}` : `${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)}`}
+          // href={`/exchange/swap/limit/${inputCurrency ? `${currencyId(inputCurrency)}` : `${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)}`}
           >
             <div
               className={classNames(
@@ -162,7 +162,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             )}
             href={`/exchange/aggregator/${inputCurrency ? `${currencyId(inputCurrency)}` : `${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
 
-            // href={`/exchange/aggregator/${inputCurrency ? `${currencyId(inputCurrency)}` : `${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
+              // href={`/exchange/aggregator/${inputCurrency ? `${currencyId(inputCurrency)}` : `${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
               }`}
           >
             <div
@@ -180,36 +180,14 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               <Typography
                 className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
               >
-                {`Aggregate`}
+                {`Meta`}
               </Typography>
             </div>
           </NavLink>
         }
-        
-        {/* {featureEnabled(Feature.CROSSCHAIN, chainId) &&
-          <NavLink
-            className={classNames(
-              crossStyle
-            )}
-            activeClassName={classNames(
-              activeStyle
-            )}
-            href={`/exchange/crosschain`}
-          >
-            <div
-              className={classNames(
-                `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
-                isCrosschain && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
-              >
-              <Typography
-                className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
-              >
-                {`xSwap`}
-              </Typography>
-            </div>
-          </NavLink>
-        } */}
-       
+
+
+
         {featureEnabled(Feature.BRIDGE, chainId) &&
           <NavLink
             className={classNames(
@@ -224,7 +202,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               className={classNames(
                 `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
                 isBridge && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
-              >
+            >
               <Typography
                 className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
               >
@@ -234,14 +212,37 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           </NavLink>
         }
 
+        {featureEnabled(Feature.CROSSCHAIN, chainId) &&
+          <NavLink
+            className={classNames(
+              crossStyle
+            )}
+            activeClassName={classNames(
+              activeStyle
+            )}
+            href={`/crosschain`}
+          >
+            <div
+              className={classNames(
+                `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
+                isCrosschain && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
+            >
+              <Typography
+                className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
+              >
+                {`xSwap`}
+              </Typography>
+            </div>
+          </NavLink>
+        }
       </div>
       <div className={
         classNames(
-        `absolute right-4 top-50`,
-        `sm:right-4`,
-        `sm:top-48`,
-        `sm:mt-6 sm:gap-8`,
-        `mr-1 justify-end rounded`)
+          `absolute right-4 top-50`,
+          `sm:right-4`,
+          `sm:top-48`,
+          `sm:mt-6 sm:gap-8`,
+          `mr-1 justify-end rounded`)
       }>
         {/* {useSettings &&  */}
         <Settings />

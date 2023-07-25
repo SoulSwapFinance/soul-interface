@@ -679,24 +679,6 @@ const Exchange = () => {
             <SocialWidget />
           } */}
             {/* </div> */}
-            <div className={"grid grid-cols-1 text-white justify-center"}>
-              <NavLink href="/crosschain">
-              {/* <Link
-                href={'https://widget-integrations-squid.vercel.app/'}
-                target={'_blank'}
-              > */}
-                <Button
-                  variant={'filled'}
-                  color={`purple`}
-                  primaryColor={'black'}
-                >
-                  <div className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
-                    {`Crosschain Swap`}
-                  </div>
-                </Button>
-              {/* </Link> */}
-              </NavLink>
-            </div>
           </div>
         </DoubleGlowShadowV2>
       }
