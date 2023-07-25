@@ -9,8 +9,8 @@ export function usePrice(tokenAddress: string | undefined | null) {
     const priceHelperContract = usePriceHelperContract()
     const rawPrice = useSingleCallResult(
         priceHelperContract,
-        // 'currentTokenUsdcPrice',
-        'currentTokenNativePrice',
+        'currentTokenUsdcPrice',
+        // 'currentTokenNativePrice',
         [tokenAddress]
     ).result
 
