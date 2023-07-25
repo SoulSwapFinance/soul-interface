@@ -251,7 +251,7 @@ export const FantomPools = [
     token1Address: WBTC_ADDRESS[ChainId.FANTOM],
   },
   { // 20
-    pid: 30,
+    pid: 31,
     type: 'swap',
     decimals: 18,
     token0Symbol: 'WFTM',
