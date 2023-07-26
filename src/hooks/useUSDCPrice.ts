@@ -1,4 +1,4 @@
-import { BTC_ORACLE_ADDRESS, ChainId, Currency, CurrencyAmount, ETH_ORACLE_ADDRESS, JSBI, Price, Token } from 'sdk'
+import { AVAX_ORACLE_ADDRESS, BTC_ORACLE_ADDRESS, ChainId, Currency, CurrencyAmount, ETH_ORACLE_ADDRESS, JSBI, Price, Token } from 'sdk'
 
 import { useActiveWeb3React } from 'services/web3'
 import { useMemo } from 'react'
@@ -77,8 +77,7 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const survPrice = usePrice(SURV_ADDRESS[250])
   const wethPrice = useOraclePrice(ETH_ORACLE_ADDRESS[250])
   const wbtcPrice = useOraclePrice(BTC_ORACLE_ADDRESS[250])
-  const bnbPrice = usePrice(BNB_ADDRESS[chainId])
-  const avaxPrice = usePrice(AVAX_ADDRESS[chainId ?? 43114])
+  const avaxPrice = usePrice(AVAX_ORACLE_ADDRESS[43114])
 
   const luxorAmountOut = chainId ? LUXOR_AMOUNT_OUT[250] : undefined
   const survAmountOut = chainId ? SURV_AMOUNT_OUT[250] : undefined
@@ -89,7 +88,6 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const soulAmountOut = chainId ? SOUL_AMOUNT_OUT[chainId] : undefined
   const wethAmountOut = chainId ? WETH_AMOUNT_OUT[chainId] : undefined
   const wbtcAmountOut = chainId ? WBTC_AMOUNT_OUT[chainId] : undefined
-  const bnbAmountOut = chainId ? BNB_AMOUNT_OUT[chainId] : undefined
   const avaxAmountOut = chainId ? AVAX_AMOUNT_OUT[chainId] : undefined
 
   // TOKENS
@@ -99,7 +97,6 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const wlum = wlumAmountOut?.currency
   const wftm = wftmAmountOut?.currency
   const surv = survAmountOut?.currency
-  const bnb = bnbAmountOut?.currency
   const avax = avaxAmountOut?.currency
 
   const weth = wethAmountOut?.currency
@@ -157,11 +154,6 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
     // handle wbtc
     if (currency?.wrapped.equals(wbtc)) {
       return new Price(wbtc, wbtc, '100000', Number(wbtcPrice * 100000).toFixed())
-    }
-    
-    // handle bnb
-    if (currency?.wrapped.equals(bnb)) {
-      return new Price(bnb, bnb, '10', Number(bnbPrice * 10).toFixed())
     }
     
     // handle AVAX

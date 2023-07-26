@@ -415,6 +415,17 @@ export const BTC_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
+export const AVAX_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '',
+  [ChainId.AVALANCHE]: '0x0a77230d17318075983913bc2145db16c7366156',
+  [ChainId.MATIC]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
+
 export const ETH_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419',
   [ChainId.TELOS]: '',

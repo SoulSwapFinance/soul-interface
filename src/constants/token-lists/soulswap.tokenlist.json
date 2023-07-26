@@ -434,11 +434,19 @@
     },
     {
       "chainId": 250,
-      "name": "Avalanche",
+      "name": "Avalanche (Multichain)",
       "address": "0x511D35c52a3C244E7b8bd92c0C297755FbD89212",
       "symbol": "AVAX",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x511D35c52a3C244E7b8bd92c0C297755FbD89212/logo.png"
+    },
+    {
+      "chainId": 250,
+      "name": "Avalanche (Axelar)",
+      "address": "0x879e73005C36d9a549fFb9846851fe5d1d91b681",
+      "symbol": "AVAX",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x879e73005C36d9a549fFb9846851fe5d1d91b681/logo.png"
     },
     {
       "chainId": 250,

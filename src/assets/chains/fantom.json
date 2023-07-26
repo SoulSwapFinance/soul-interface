@@ -82,17 +82,25 @@
         {
             "id": "multi-ethereum",
             "name": "Ethereum (Multichain)",
-            "logo": "https://cryptologos.cc/logos/ethereum-eth-logo.svg",
+            "logo": "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/fantom/assets/0x74b23882a30290451A17c44f4F05243b6b58C76d/logo.png",
             "rank": 3,
             "symbol": "mETH",
             "address": "0x74b23882a30290451A17c44f4F05243b6b58C76d"
         },
         {
             "id": "wrapped-avax",
-            "name": "Wrapped Avalanche",
+            "name": "Wrapped Avalanche (Axelar)",
+            "rank": 6,
+            "logo": "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/fantom/assets/0x879e73005C36d9a549fFb9846851fe5d1d91b681/logo.png",
+            "symbol": "AVAX",
+            "address": "0x879e73005C36d9a549fFb9846851fe5d1d91b681"
+        },
+        {
+            "id": "multi-wrapped-avax",
+            "name": "Wrapped Avalanche (Multichain)",
             "rank": 911,
-            "logo": "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/avalanche/Avalanche.svg",
-            "symbol": "WAVAX",
+            "logo": "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/fantom/assets/0x511D35c52a3C244E7b8bd92c0C297755FbD89212/logo.png",
+            "symbol": "mAVAX",
             "address": "0x511D35c52a3C244E7b8bd92c0C297755FbD89212"
         },
         {

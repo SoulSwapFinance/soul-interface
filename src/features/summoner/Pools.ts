@@ -3,7 +3,8 @@ MULTI_USDC_ADDRESS,
 MULTI_WETH_ADDRESS,
 MULTI_WBTC_ADDRESS,
 MBTC_NATIVE,
-METH_NATIVE} from 'sdk'
+METH_NATIVE,
+MULTI_AVAX_ADDRESS} from 'sdk'
 
 /*/ rules /*/
 // `token0Symbol` && `token1Symbol`: always use "w" prefix
@@ -168,7 +169,7 @@ export const InactiveFantomPools = [
     lpSymbol: 'FTM-AVAX',
     lpAddress: AVAX_NATIVE[ChainId.FANTOM],
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: AVAX_ADDRESS[ChainId.FANTOM],
+    token1Address: MULTI_AVAX_ADDRESS[ChainId.FANTOM],
   },
   { // 0
     pid: 4,
@@ -251,7 +252,7 @@ export const FantomPools = [
     token1Address: WBTC_ADDRESS[ChainId.FANTOM],
   },
   { // 20
-    pid: 31,
+    pid: 31, // pid: 30 <-- misstake
     type: 'swap',
     decimals: 18,
     token0Symbol: 'WFTM',
