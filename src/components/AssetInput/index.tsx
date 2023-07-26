@@ -1,6 +1,6 @@
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
-import { AVAX_ADDRESS, ChainId, Currency, CurrencyAmount, Token, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
+import { ChainId, Currency, CurrencyAmount, Token, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import selectCoinAnimation from 'animation/select-coin.json'
 import { Button } from 'components/Button'
 import Chip from 'components/Chip'

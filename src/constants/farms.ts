@@ -1,4 +1,4 @@
-import { ChainId, SOUL_ADDRESS, SOUL_NATIVE, SOUL_USDC, USDC_ADDRESS, WNATIVE_ADDRESS, USDC_NATIVE, MUSDC_NATIVE, BTC_NATIVE, ETH_NATIVE, DAI_USDC, WBTC_ADDRESS, FMULTI_ADDRESS, WETH_ADDRESS, DAI_ADDRESS, BNB_NATIVE, BNB_ADDRESS, LINK_ADDRESS, MULTI_WETH_ADDRESS } from '../sdk'
+import { ChainId, SOUL_ADDRESS, SOUL_NATIVE, SOUL_USDC, USDC_ADDRESS, WNATIVE_ADDRESS, USDC_NATIVE, MUSDC_NATIVE, BTC_NATIVE, ETH_NATIVE, DAI_USDC, WBTC_ADDRESS, FMULTI_ADDRESS, WETH_ADDRESS, DAI_ADDRESS, BNB_NATIVE, BNB_ADDRESS, LINK_ADDRESS, MULTI_WETH_ADDRESS, MULTI_USDC_ADDRESS, MULTI_AVAX_ADDRESS, MULTI_WBTC_ADDRESS } from '../sdk'
 
 export type TokenInfo = {
   id: string
@@ -215,9 +215,9 @@ export const POOLS: AddressMap = {
   [ChainId.FANTOM]: {
     '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07': {
       id: 0,
-      address: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07',
+      address: SOUL_ADDRESS[ChainId.FANTOM],
       token0: {
-        id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
+        id: SOUL_ADDRESS[ChainId.FANTOM], // SOUL
         name: 'Soul Power',
         symbol: 'SOUL',
         decimals: 18,
@@ -233,7 +233,7 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
       token1: {
-        id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
+        id: SOUL_ADDRESS[ChainId.FANTOM], // SOUL
         name: 'Soul Power',
         symbol: 'SOUL',
         decimals: 18,
@@ -243,13 +243,13 @@ export const POOLS: AddressMap = {
       id: 2,
       address: '0xc0a301f1e5e0fe37a31657e8f60a41b14d01b0ef',
       token0: {
-        id: '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07', // SOUL
+        id: SOUL_ADDRESS[ChainId.FANTOM], // SOUL
         name: 'Soul Power',
         symbol: 'SOUL',
         decimals: 18,
       },
       token1: {
-        id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // mUSDC
+        id: MULTI_USDC_ADDRESS[ChainId.FANTOM], // mUSDC
         name: 'USDC (Multichain)',
         symbol: 'mUSDC',
         decimals: 6,
@@ -259,7 +259,7 @@ export const POOLS: AddressMap = {
       id: 3,
       address: '0x160653f02b6597e7db00ba8ca826cf43d2f39556',
       token0: {
-        id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
+        id: MULTI_USDC_ADDRESS[ChainId.FANTOM], // USDC
         name: 'USDC (Multichain)',
         symbol: 'mUSDC',
         decimals: 6,
@@ -323,7 +323,7 @@ export const POOLS: AddressMap = {
       id: 7,
       address: '0x5159Ba92FDC80b3a4B19De279711b1822de06c86',
       token0: {
-        id: '0x511D35c52a3C244E7b8bd92c0C297755FbD89212', // AVAX
+        id: MULTI_AVAX_ADDRESS[ChainId.FANTOM], // AVAX
         name: 'Avalanche',
         symbol: 'AVAX',
         decimals: 18,
@@ -355,7 +355,7 @@ export const POOLS: AddressMap = {
       id: 9,
       address: '0x1fc954d3484bc21e0ce53a6648a35bbfc03dc9d0',
       token0: { // WBTC
-        id: '0x321162Cd933E2Be498Cd2267a90534A804051b11', // WBTC
+        id: MULTI_WBTC_ADDRESS[ChainId.FANTOM], // WBTC
         name: 'Wrapped Bitcoin',
         symbol: 'WBTC',
         decimals: 8,
@@ -387,7 +387,7 @@ export const POOLS: AddressMap = {
       id: 11 ,
       address: '0x5b181bbc3cc18c66b6f36f584866a1ff09865630',
       token0: {
-        id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
+        id: MULTI_USDC_ADDRESS[ChainId.FANTOM], // USDC
         name: 'USDC Coin',
         symbol: 'USDC',
         decimals: 6,
@@ -409,7 +409,7 @@ export const POOLS: AddressMap = {
         decimals: 8,
       },
       token1: { // USDC
-        id: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', // USDC
+        id: MULTI_USDC_ADDRESS[ChainId.FANTOM], // USDC
         name: 'USDC Coin',
         symbol: 'USDC',
         decimals: 6,

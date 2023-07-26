@@ -47,17 +47,6 @@ const AnalyticsHeaderNew: FC<AnalyticsHeaderProps> = ({ input, output, allowedSl
         </NavLink>
         <NavLink
           activeClassName={`font-bold border rounded text-high-emphesis border-dark-800 bg-${getChainColorCode(chainId)} from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple`}
-          href={"/analytics/coffinbox"}
-          // href={`/${!isRemove ? 'add' : 'remove'}${input ? `/${currencyId(input)}` : ''}${
-          //   output ? `/${currencyId(output)}` : ''
-        // }`}
-        >
-          <div className="flex items-center justify-center px-4 text-base font-medium text-center rounded-md text-secondary hover:text-high-emphesis">
-            {`COFFIN`}
-          </div>
-        </NavLink>
-        <NavLink
-          activeClassName={`font-bold border rounded text-high-emphesis border-dark-800 bg-${getChainColorCode(chainId)} from-opaque-purple to-opaque-purple hover:from-blue hover:to-purple`}
           href={"/analytics/tokens"}
           // href={`${output ? `https://charts.soul.sh/token/${currencyId(output)}` : ''}`}
         >

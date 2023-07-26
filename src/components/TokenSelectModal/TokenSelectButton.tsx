@@ -4,7 +4,7 @@ import useModal from "../../hooks/useModal";
 import TokenSelectModal from "./TokenSelectModal";
 // import Row from "../Row";
 import ftmIcon from "assets/networks/fantom.svg";
-import Spacer from "../Spacer";
+// import Spacer from "../Spacer";
 // import vShape from "../../assets/img/shapes/vShape.png";
 import Image from 'next/image'
 import { SubmitButton } from "features/summoner/Styles";

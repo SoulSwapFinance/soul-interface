@@ -1,5 +1,5 @@
 import { SURV_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, ETH_ADDRESS, MULTI_WETH_ADDRESS } from 'constants/addresses'
-import { BNB_ADDRESS, BUSD_ADDRESS, ChainId, DAI_ADDRESS, Ether, FMULTI_ADDRESS, FRAX_ADDRESS, LINK_ADDRESS, LUX_ADDRESS, MULTI_WBTC_ADDRESS, NATIVE, SEANCE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
+import { AVAX_ADDRESS, BNB_ADDRESS, BUSD_ADDRESS, ChainId, DAI_ADDRESS, Ether, FMULTI_ADDRESS, FRAX_ADDRESS, LINK_ADDRESS, LUX_ADDRESS, MPX_ADDRESS, MULTI_AVAX_ADDRESS, MULTI_DAI_ADDRESS, MULTI_WBTC_ADDRESS, NATIVE, SEANCE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
 
 import { SupportedChainId } from '../chains'
 
@@ -24,6 +24,7 @@ export const FANTOM: { [key: string]: Token } = {
   SOUL: new Token(ChainId.FANTOM, SOUL_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'Soul Power'), // 27 AUG
   WFTM: new Token(ChainId.FANTOM, WNATIVE_ADDRESS[ChainId.FANTOM], 18, 'WFTM', 'Wrapped Fantom'), // 27 AUG
   FMULTI: new Token(ChainId.FANTOM, FMULTI_ADDRESS[ChainId.FANTOM], 18, 'FMULTI', 'Fuck Multi'),
+  MPX: new Token(ChainId.FANTOM, MPX_ADDRESS[ChainId.FANTOM], 18, 'MPX', 'Morphex'),
   SEANCE: new Token(ChainId.FANTOM, SEANCE_ADDRESS[ChainId.FANTOM], 18, 'SEANCE', 'Seance Circle'), // 27 AUG
   LUX: new Token(ChainId.FANTOM, LUX_ADDRESS[ChainId.FANTOM], 9, 'LUX', 'Luxor Money'),
   WLUM: new Token(ChainId.FANTOM, '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208', 9, 'WLUM', 'Wrapped Lumens'),
@@ -35,7 +36,8 @@ export const FANTOM: { [key: string]: Token } = {
   BNB: new Token(ChainId.FANTOM, BNB_ADDRESS[ChainId.FANTOM], 18, 'BNB', 'Binance'),
   MWBTC: new Token(ChainId.FANTOM, MULTI_WBTC_ADDRESS[ChainId.FANTOM], 8, 'mWBTC', 'Wrapped Bitcoin (Multichain)'),
   WBTC: new Token(ChainId.FANTOM, WBTC_ADDRESS[ChainId.FANTOM], 8, 'WBTC', 'Wrapped Bitcoin (Axelar)'),
-  DAI: new Token(ChainId.FANTOM, '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', 18, 'DAI', 'Dai Stablecoin'),
+  DAI: new Token(ChainId.FANTOM, DAI_ADDRESS[ChainId.FANTOM], 18, 'DAI', 'Dai Stablecoin (Axelar)'),
+  MDAI: new Token(ChainId.FANTOM, MULTI_DAI_ADDRESS[ChainId.FANTOM], 18, 'mDAI', 'DAI (Multichain)'),
   SOR: new Token(ChainId.FANTOM, '0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A', 18, 'SOR', 'SOR'),
   SURV: new Token(ChainId.FANTOM, SURV_ADDRESS[ChainId.FANTOM], 18, 'SURV', 'SurveyorDAO'),
   GRIMEVO: new Token(ChainId.FANTOM, '0x0a77866C01429941BFC7854c0c0675dB1015218b', 18, 'GRIMEVO', 'Grim EVO'),
@@ -44,7 +46,8 @@ export const FANTOM: { [key: string]: Token } = {
   WETH: new Token(ChainId.FANTOM, WETH_ADDRESS[ChainId.FANTOM], 18, 'WETH', 'Wrapped Ether (Axelar)'),
   MWETH: new Token(ChainId.FANTOM, MULTI_WETH_ADDRESS[ChainId.FANTOM], 18, 'mWETH', 'Wrapped Ether (Multichain)'),
   MIM: new Token(ChainId.FANTOM, '0x82f0B8B456c1A451378467398982d4834b6829c1', 18, 'MIM', 'Magic Internet Money'),
-  AVAX: new Token(ChainId.FANTOM, '0x511D35c52a3C244E7b8bd92c0C297755FbD89212', 18, 'AVAX', 'Avalanche'),
+  MAVAX: new Token(ChainId.FANTOM, MULTI_AVAX_ADDRESS[ChainId.FANTOM], 18, 'mAVAX', 'Avalanche (Multichain)'),
+  AVAX: new Token(ChainId.FANTOM, AVAX_ADDRESS[ChainId.FANTOM], 18, 'AVAX', 'Avalanche (Axelar)'),
   ENCHANT: new Token(ChainId.FANTOM, '0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a', 18, 'ENCHANT', 'Enchantment'),
   SPELL: new Token(ChainId.FANTOM, '0x468003B688943977e6130F4F68F23aad939a1040', 18, 'SPELL', 'Spell Token'),
 }
@@ -214,8 +217,13 @@ export const DAI: ChainTokenMap = {
 // AVAX
 export const AVAX: ChainTokenMap = {
   [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7', 18, 'AVAX', 'Avalanche'),
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x511D35c52a3C244E7b8bd92c0C297755FbD89212', 18, 'AVAX', 'Avalanche'),
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, AVAX_ADDRESS[ChainId.FANTOM], 18, 'AVAX', 'Avalanche (Axelar)'),
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7', 18, 'WAVAX', 'Wrapped Avalanche')
+}
+
+// mAVAX
+export const MAVAX: ChainTokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, MULTI_AVAX_ADDRESS[ChainId.FANTOM], 18, 'mAVAX', 'Avalanche (Multichain)'),
 }
 
 // SEANCE
