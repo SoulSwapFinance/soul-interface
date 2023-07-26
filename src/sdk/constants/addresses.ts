@@ -711,9 +711,27 @@ export const WBTC_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '',
 }
 
+export const MULTI_DAI_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E',
+  [ChainId.BSC]: '',
+  [ChainId.AVALANCHE]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.MATIC]: '',
+}
+
+export const AXL_DAI_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0xD5d5350F42CB484036A1C1aF5F2DF77eAFadcAFF',
+  [ChainId.BSC]: '',
+  [ChainId.AVALANCHE]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.MATIC]: '',
+}
+
 export const DAI_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
-  [ChainId.FANTOM]: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E',
+  [ChainId.FANTOM]: AXL_DAI_ADDRESS[ChainId.FANTOM],
   [ChainId.BSC]: '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3',
   [ChainId.AVALANCHE]: '0xd586E7F844cEa2F87f50152665BCbc2C279D8d70',
   [ChainId.MOONRIVER]: '0x80A16016cC4A2E6a2CACA8a4a498b1699fF0f844',
@@ -728,8 +746,15 @@ export const FMULTI_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x6CEbb8cD66Fca7E6aca65841Ae3A04B7884F4de8'
 }
 
-export const AVAX_ADDRESS: AddressMap = {
+export const AXL_AVAX_ADDRESS: AddressMap = {
+  [ChainId.FANTOM]: '0x879e73005C36d9a549fFb9846851fe5d1d91b681',
+}
+export const MULTI_AVAX_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x511D35c52a3C244E7b8bd92c0C297755FbD89212',
+}
+
+export const AVAX_ADDRESS: AddressMap = {
+  [ChainId.FANTOM]: AXL_AVAX_ADDRESS[ChainId.FANTOM],
   [ChainId.AVALANCHE]: '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
 }
 

@@ -1,4 +1,4 @@
-import { AVAX_ADDRESS, BNB_ADDRESS, ChainId, DAI_ADDRESS, DAI_BNB_MARKET, DAI_ETH_MARKET, DAI_NATIVE_MARKET, MULTI_USDC_ADDRESS, NATIVE_DAI_MARKET, SEANCE_ADDRESS, SOUL_ADDRESS, SOUL_USDC, SOUL_MUSDC, USDC_ADDRESS, USDC_DAI_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS, MULTI_WETH_ADDRESS, MULTI_WBTC_ADDRESS, METH_NATIVE, MBTC_NATIVE } from 'sdk'
+import { AVAX_ADDRESS, BNB_ADDRESS, ChainId, DAI_ADDRESS, DAI_BNB_MARKET, DAI_ETH_MARKET, DAI_NATIVE_MARKET, MULTI_USDC_ADDRESS, NATIVE_DAI_MARKET, SEANCE_ADDRESS, SOUL_ADDRESS, SOUL_USDC, SOUL_MUSDC, USDC_ADDRESS, USDC_DAI_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS, MULTI_WETH_ADDRESS, MULTI_WBTC_ADDRESS, METH_NATIVE, MBTC_NATIVE, MULTI_DAI_ADDRESS } from 'sdk'
 
 export const AvalanchePools = [
   {
@@ -129,7 +129,7 @@ export const FantomPools = [
     lpSymbol: 'FTM-DAI',
     lpAddress: '0xF3d6E8Ecece8647B456d57375Ce0B51B8F0cD40b',
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: DAI_ADDRESS[ChainId.FANTOM],
+    token1Address: MULTI_DAI_ADDRESS[ChainId.FANTOM],
   },
   {
       // 600
@@ -191,7 +191,7 @@ export const FantomPools = [
     lpSymbol: 'USDC-DAI',
     lpAddress: USDC_DAI_ADDRESS[ChainId.FANTOM],
     token0Address:  MULTI_USDC_ADDRESS[ChainId.FANTOM],
-    token1Address: DAI_ADDRESS[ChainId.FANTOM],
+    token1Address: MULTI_DAI_ADDRESS[ChainId.FANTOM],
   },
   { // LENDING
     pid: 10,
@@ -202,7 +202,7 @@ export const FantomPools = [
     lpSymbol: 'DAI-FTM', // EXEMPT //
     lpAddress: DAI_NATIVE_MARKET[ChainId.FANTOM],
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: DAI_ADDRESS[ChainId.FANTOM],
+    token1Address: MULTI_DAI_ADDRESS[ChainId.FANTOM],
   },
   { // LENDING
     pid: 11,
@@ -212,7 +212,7 @@ export const FantomPools = [
     token1Symbol: 'FTM', // EXEMPT //
     lpSymbol: 'FTM-DAI',
     lpAddress: NATIVE_DAI_MARKET[ChainId.FANTOM],
-    token0Address: DAI_ADDRESS[ChainId.FANTOM],
+    token0Address: MULTI_DAI_ADDRESS[ChainId.FANTOM],
     token1Address: WNATIVE_ADDRESS[ChainId.FANTOM], // EXEMPT //
   },
   { // LENDING
@@ -224,7 +224,7 @@ export const FantomPools = [
     lpSymbol: 'DAI-ETH',
     lpAddress: DAI_ETH_MARKET[ChainId.FANTOM],
     token0Address: MULTI_WETH_ADDRESS[ChainId.FANTOM],
-    token1Address: DAI_ADDRESS[ChainId.FANTOM],
+    token1Address: MULTI_DAI_ADDRESS[ChainId.FANTOM],
   },
   { // LENDING
     pid: 13,
@@ -235,6 +235,6 @@ export const FantomPools = [
     lpSymbol: 'DAI-BNB',
     lpAddress: DAI_BNB_MARKET[ChainId.FANTOM],
     token0Address: BNB_ADDRESS[ChainId.FANTOM],
-    token1Address: DAI_ADDRESS[ChainId.FANTOM],
+    token1Address: MULTI_DAI_ADDRESS[ChainId.FANTOM],
   },
 ]

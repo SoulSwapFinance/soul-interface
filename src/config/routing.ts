@@ -38,7 +38,8 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM],
     FANTOM.SOUL,
-    FANTOM.DAI,
+    // FANTOM.DAI,
+    FANTOM.MDAI,
     FANTOM.USDC,
     FANTOM.WBTC,
     FANTOM.WETH,
@@ -119,6 +120,7 @@ export const COMMON_BASES: ChainTokenList = {
     FANTOM.WETH,
     FANTOM.WBTC,
     FANTOM.DAI,
+    FANTOM.MDAI,
     FANTOM.MUSDC,
     FANTOM.MWETH,
     FANTOM.MWBTC,
@@ -175,7 +177,8 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ],
   [ChainId.FANTOM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.FANTOM],
-    FANTOM.DAI,
+    // FANTOM.DAI,
+    FANTOM.MDAI,
     FANTOM.SOUL,
     FANTOM.USDC,
     FANTOM.WETH,

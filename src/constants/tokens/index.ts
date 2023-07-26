@@ -1,5 +1,5 @@
 import { SURV_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, ETH_ADDRESS, MULTI_WETH_ADDRESS } from 'constants/addresses'
-import { BNB_ADDRESS, BUSD_ADDRESS, ChainId, DAI_ADDRESS, Ether, FMULTI_ADDRESS, FRAX_ADDRESS, LINK_ADDRESS, LUX_ADDRESS, MULTI_WBTC_ADDRESS, NATIVE, SEANCE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
+import { BNB_ADDRESS, BUSD_ADDRESS, ChainId, DAI_ADDRESS, Ether, FMULTI_ADDRESS, FRAX_ADDRESS, LINK_ADDRESS, LUX_ADDRESS, MULTI_DAI_ADDRESS, MULTI_WBTC_ADDRESS, NATIVE, SEANCE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
 
 import { SupportedChainId } from '../chains'
 
@@ -35,7 +35,8 @@ export const FANTOM: { [key: string]: Token } = {
   BNB: new Token(ChainId.FANTOM, BNB_ADDRESS[ChainId.FANTOM], 18, 'BNB', 'Binance'),
   MWBTC: new Token(ChainId.FANTOM, MULTI_WBTC_ADDRESS[ChainId.FANTOM], 8, 'mWBTC', 'Wrapped Bitcoin (Multichain)'),
   WBTC: new Token(ChainId.FANTOM, WBTC_ADDRESS[ChainId.FANTOM], 8, 'WBTC', 'Wrapped Bitcoin (Axelar)'),
-  DAI: new Token(ChainId.FANTOM, '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E', 18, 'DAI', 'Dai Stablecoin'),
+  DAI: new Token(ChainId.FANTOM, DAI_ADDRESS[ChainId.FANTOM], 18, 'DAI', 'Dai Stablecoin (Axelar)'),
+  MDAI: new Token(ChainId.FANTOM, MULTI_DAI_ADDRESS[ChainId.FANTOM], 18, 'mDAI', 'DAI (Multichain)'),
   SOR: new Token(ChainId.FANTOM, '0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A', 18, 'SOR', 'SOR'),
   SURV: new Token(ChainId.FANTOM, SURV_ADDRESS[ChainId.FANTOM], 18, 'SURV', 'SurveyorDAO'),
   GRIMEVO: new Token(ChainId.FANTOM, '0x0a77866C01429941BFC7854c0c0675dB1015218b', 18, 'GRIMEVO', 'Grim EVO'),
