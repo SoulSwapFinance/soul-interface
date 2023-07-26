@@ -26,7 +26,7 @@ const ASSET = () => [
     },
 ]
 
-export default function AssetSelect() {
+export default function BridgeAssetSelect() {
     // const { chainId } = useActiveWeb3React()
     const asset = useMemo(() => ASSET(), [])
     const { asPath } = useRouter()
@@ -54,7 +54,7 @@ export default function AssetSelect() {
             // className="space-y-4 divide-y-0"
             >
                 {asset.map((asset) => (
-                    <li key={asset.id} className={`relative border border-dark-700 gap-4 ${asPath.startsWith(asset.href) ? `bg-${asset.color} text-black hover:border-white` : ''} w-full p-4 rounded-2xl hover:text-white hover:border-purple`}>
+                    <li key={asset.id} className={`relative border border-dark-700 gap-4 ${asPath.startsWith(asset.href) ? `bg-purple text-black hover:border-white` : ''} w-full p-4 rounded-2xl hover:text-white hover:border-purple`}>
                         <div className="flex justify-between space-y-4 space-x-4">
                             <div className="flex-1 min-w-0">
                                 <Link href={asset.href}>

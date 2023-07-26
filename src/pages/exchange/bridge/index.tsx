@@ -4,7 +4,7 @@ import { NextSeo } from 'next-seo'
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
-import AssetSelect from 'features/bridge/AssetSelect'
+import BridgeAssetSelect from 'features/bridge/BridgeAssetSelect'
 
 const Bridge = ({ }) => {
     return (
@@ -16,7 +16,7 @@ const Bridge = ({ }) => {
           // outputCurrency={currencyB}
         />
         <div className={`my-12`} />
-        <AssetSelect />
+        <BridgeAssetSelect />
       </div>
     </DoubleGlowShadowV2>
   )

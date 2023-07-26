@@ -53,7 +53,7 @@ export function getChainLogo(chainId: number) {
   let logoURL = '/images/networks/fantom-white.svg'
   chainId == ChainId.FANTOM ? logoURL = '/images/networks/fantom-white.svg'
     : chainId == ChainId.AVALANCHE ? logoURL = '/images/networks/avalanche.svg'
-      : chainId == ChainId.ETHEREUM ? logoURL = '/images/networks/ethereum.svg'
+      : chainId == ChainId.ETHEREUM ? logoURL = '/images/networks/ethereum-white.svg'
         : chainId == ChainId.BSC ? logoURL = '/images/networks/binance.svg'
           : chainId == ChainId.MATIC ? logoURL = '/images/networks/polygon.svg'
             : chainId == ChainId.MOONRIVER ? logoURL = '/images/networks/moonriver.svg'

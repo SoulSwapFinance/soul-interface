@@ -753,6 +753,10 @@ export const LUM_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x4290b33158F429F40C0eDc8f9b9e5d8C5288800c'
 }
 
+export const MPX_ADDRESS: AddressMap = {
+  [ChainId.FANTOM]: '0x66eEd5FF1701E6ed8470DC391F05e27B1d0657eb'
+}
+
 export const FMULTI_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x6CEbb8cD66Fca7E6aca65841Ae3A04B7884F4de8'
 }
