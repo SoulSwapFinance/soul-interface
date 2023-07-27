@@ -20,7 +20,7 @@ export function useClones({ chainId, shouldFetch = true, swrConfig = undefined }
 }
 
 export function useUnderworldPairs({
-  chainId = ChainId.FANTOM,
+  chainId,
   variables,
   shouldFetch = true,
   swrConfig = undefined,
@@ -33,7 +33,7 @@ export function useUnderworldPairs({
   return data
 }
 
-export function useCoffinBox({ chainId = ChainId.FANTOM, variables, shouldFetch = true, swrConfig }: GraphProps) {
+export function useCoffinBox({ chainId, variables, shouldFetch = true, swrConfig }: GraphProps) {
   const { data } = useSWR(
     shouldFetch ? ['coffinBox', chainId, stringify(variables)] : null,
     () => getCoffinBox(chainId, variables),
@@ -45,7 +45,7 @@ export function useCoffinBox({ chainId = ChainId.FANTOM, variables, shouldFetch 
 
 // subset of tokens, not strategies
 export function useCoffinStrategies({
-  chainId = ChainId.FANTOM,
+  chainId,
   variables,
   shouldFetch = featureEnabled(Feature.COFFINBOX, chainId),
   swrConfig = undefined,

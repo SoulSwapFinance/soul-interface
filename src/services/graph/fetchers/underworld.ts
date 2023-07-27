@@ -9,15 +9,15 @@ import { pager } from './pager'
 
 export const UNDERWORLD = {
   [ChainId.FANTOM]: 'soulswapfinance/fantom-underworld',
-//   [ChainId.AVALANCHE]: 'soulswapfinance/avalanche-underworld',
+  [ChainId.AVALANCHE]: 'soulswapfinance/avalanche-underworld',
 }
 
 // @ts-ignore TYPE NEEDS FIXING
-const fetcher = async (chainId = ChainId.ETHEREUM, query, variables = undefined) =>
+const fetcher = async (chainId = ChainId.FANTOM, query, variables = undefined) =>
   // @ts-ignore TYPE NEEDS FIXING
   pager(`${GRAPH_HOST[chainId]}/subgraphs/name/${UNDERWORLD[chainId]}`, query, variables)
 
-export const getUnderworldPairs = async (chainId = ChainId.ETHEREUM, variables = undefined) => {
+export const getUnderworldPairs = async (chainId = ChainId.FANTOM, variables = undefined) => {
   const { underworldPairs } = await fetcher(chainId, underworldPairsQuery, variables)
 
   const tokenAddresses = Array.from(
