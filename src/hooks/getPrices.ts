@@ -25,10 +25,10 @@ import stringify from 'fast-json-stable-stringify'
 import { useActiveWeb3React } from 'services/web3'
 
 export const EXCHANGE = {
-  [ChainId.ETHEREUM]: 'soulswapfinance/fantom-exchange',
-  [ChainId.FANTOM]: 'soulswapfinance/fantom-exchange',
-  [ChainId.AVALANCHE]: 'soulswapfinance/avalanche-exchange',
-  [ChainId.BSC]: 'soulswapfinance/fantom-exchange',
+  [ChainId.ETHEREUM]: 'soulswapfinance/fantom-swap',
+  [ChainId.FANTOM]: 'soulswapfinance/fantom-swap',
+  [ChainId.AVALANCHE]: 'soulswapfinance/avalanche-swap',
+  [ChainId.BSC]: 'soulswapfinance/fantom-swap',
 }
 
 export const exchange = async (chainId = ChainId.FANTOM, query, variables = {}) =>

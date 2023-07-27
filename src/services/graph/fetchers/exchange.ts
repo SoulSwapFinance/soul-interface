@@ -22,15 +22,15 @@ import { useActiveWeb3React } from 'services/web3'
 
 export const EXCHANGE = {
   // [ChainId.ETHEREUM]: 'sushiswap/exchange',
-  [ChainId.ETHEREUM]: 'soulswapfinance/fantom-exchange',
-  [ChainId.FANTOM]: 'soulswapfinance/fantom-exchange',
-  [ChainId.AVALANCHE]: 'soulswapfinance/avalanche-exchange',
-  [ChainId.BSC]: 'soulswapfinance/fantom-exchange',
+  [ChainId.ETHEREUM]: 'soulswapfinance/fantom-swap',
+  [ChainId.FANTOM]: 'soulswapfinance/fantom-swap',
+  [ChainId.AVALANCHE]: 'soulswapfinance/avalanche-swap',
+  [ChainId.BSC]: 'soulswapfinance/fantom-swap',
   // [ChainId.BSC]: 'sushiswap/bsc-exchange',
 }
 
 
-export const exchange = async (chainId = ChainId.AVALANCHE, query, variables = {}) =>
+export const exchange = async (chainId = ChainId.FANTOM, query, variables = {}) =>
   pager(`https://api.thegraph.com/subgraphs/name/${EXCHANGE[chainId]}`, query, variables)
 
 export const getPairs = async (chainId, variables = undefined, query = pairsQuery) => {
