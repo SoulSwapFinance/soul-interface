@@ -271,7 +271,7 @@ const Exchange = () => {
     (approvalState === ApprovalState.NOT_APPROVED ||
       approvalState === ApprovalState.PENDING ||
       (approvalSubmitted && approvalState === ApprovalState.APPROVED))
-  // && !(priceImpactSeverity > 3)
+  // && !(priceImpactSeverity > 4)
 
   const handleConfirmDismiss = useCallback(() => {
     setSwapState({
@@ -345,8 +345,8 @@ const Exchange = () => {
   // )
 
   const handleAggregatorSwap = useCallback(
-    () => {
-      router.push(`/exchange/aggregator/${inputCurrency ? currencyId(inputCurrency) : NATIVE[chainId].symbol}/${outputCurrency ? currencyId(outputCurrency) : USDC_ADDRESS[chainId]}`)
+    (input: Currency, output: Currency) => {
+      router.push(`/exchange/aggregator/${input ? currencyId(input) : NATIVE[chainId].symbol}/${output ? currencyId(output) : USDC_ADDRESS[chainId]}`)
     }, []
   )
 
@@ -598,11 +598,11 @@ const Exchange = () => {
                               id="swap-button"
                               disabled={
                                 !isValid || approvalState !== ApprovalState.APPROVED
-                                // || (priceImpactSeverity > 3)
+                                // || (priceImpactSeverity > 4)
                               }
                               className="rounded-2xl w-full md:rounded"
                             >
-                              {priceImpactSeverity > 3
+                              {priceImpactSeverity > 4
                                 ? `Price Impact High`
                                 : priceImpactSeverity > 2
                                   ? `Swap Anyway`
@@ -625,8 +625,8 @@ const Exchange = () => {
                         }
                         }
                         id="swap-button"
-                        disabled={!isValid || (priceImpactSeverity > 3) || !!swapCallbackError}
-                        className={classNames(isValid && priceImpactSeverity > 2 ? 'hidden' : "rounded-2xl w-full md:rounded")}
+                        disabled={!isValid || (priceImpactSeverity > 4) || !!swapCallbackError}
+                        className={classNames(isValid && priceImpactSeverity > 4 ? 'hidden' : "rounded-2xl w-full md:rounded")}
                       >
                         {swapInputError
                           ? swapInputError
@@ -637,10 +637,10 @@ const Exchange = () => {
                     )}
             {
               // useSwap && 
-              priceImpactSeverity >= 3 && isValid &&
+              priceImpactSeverity >= 4 && isValid &&
               <Button
                 color={`${getChainColorCode(chainId)}`}
-                onClick={handleAggregatorSwap}
+                onClick={() => handleAggregatorSwap(currencies[Field.INPUT], currencies[Field.OUTPUT])}
                 id="use-aggregator-button"
                 // disabled={}
                 className="rounded-2xl w-full md:rounded"
