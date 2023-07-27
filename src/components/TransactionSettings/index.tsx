@@ -144,7 +144,9 @@ const TransactionSettings: FC<TransactionSettingsProps> = ({ placeholderSlippage
             variant="outlined"
             onClick={() => parseSlippageInput('')}
           >
+            <Typography variant="sm" className={'text-white'} weight={700}>
             {`Auto`}
+            </Typography>
           </Button>
         </div>
         {/* <div> */}
