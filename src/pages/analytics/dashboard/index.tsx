@@ -54,7 +54,8 @@ const chartTimespans = [
 
 function Dashboard(): JSX.Element {
   const [type, setType]
-    = useState<'coffin' | 'pairs' | 'tokens'>('pairs')
+  = useState('pairs')
+    // = useState<'coffin' | 'pairs' | 'tokens'>('pairs')
   // = useState<'pools' | 'pairs' | 'tokens'>('pools')
 
   const { chainId } = useActiveWeb3React()
@@ -68,25 +69,22 @@ function Dashboard(): JSX.Element {
   const exchange1d = useFactory({ chainId, variables: { block: block1d } })
   const exchange2d = useFactory({ chainId, variables: { block: block2d } })
 
-  const dayData = useDayData({ chainId })
+  const dayData = useDayData({ chainId, shouldFetch: !!chainId })
 
   const chartData = useMemo(
     () => ({
+      // chainId,
       liquidity: exchange?.liquidityUSD,
       liquidityChange: (exchange1d?.liquidityUSD / exchange2d?.liquidityUSD) * 100 - 100,
       liquidityChart: dayData
-        // @ts-ignore TYPE NEEDS FIXING
         ?.sort((a, b) => a.date - b.date)
-        // @ts-ignore TYPE NEEDS FIXING
         .map((day) => ({ x: new Date(day.date * 1000), y: Number(day.liquidityUSD) })),
 
       volume1d: exchange?.volumeUSD - exchange1d?.volumeUSD,
       volume1dChange:
         ((exchange?.volumeUSD - exchange1d?.volumeUSD) / (exchange1d?.volumeUSD - exchange2d?.volumeUSD)) * 100 - 100,
       volumeChart: dayData
-        // @ts-ignore TYPE NEEDS FIXING
         ?.sort((a, b) => a.date - b.date)
-        // @ts-ignore TYPE NEEDS FIXING
         .map((day) => ({ x: new Date(day.date * 1000), y: Number(day.volumeUSD) })),
     }),
     [exchange, exchange1d, exchange2d, dayData]
@@ -99,11 +97,8 @@ function Dashboard(): JSX.Element {
 
   const pairsFormatted = useMemo(
     () =>
-      // @ts-ignore TYPE NEEDS FIXING
       pairs?.map((pair) => {
-        // @ts-ignore TYPE NEEDS FIXING
         const pair1d = pairs1d?.find((p) => pair.id === p.id) ?? pair
-        // @ts-ignore TYPE NEEDS FIXING
         const pair1w = pairs1w?.find((p) => pair.id === p.id) ?? pair1d
 
         return {
@@ -150,18 +145,16 @@ function Dashboard(): JSX.Element {
   const nativePrice1d = useNativePrice({ chainId, variables: { block: block1d } })
   const nativePrice1w = useNativePrice({ chainId, variables: { block: block1w } })
 
-  const tokens = useTokens({ chainId })
+  const tokens = useTokens({ chainId, shouldFetch: !!chainId })
   const tokens1d = useTokens({ chainId, variables: { block: block1d }, shouldFetch: !!block1d })
   const tokens1w = useTokens({ chainId, variables: { block: block1w }, shouldFetch: !!block1w })
 
   const tokensFormatted = useMemo(
     () =>
       tokens && tokens1d && tokens1w && nativePrice1d && nativePrice1d && nativePrice1w
-        ? // @ts-ignore TYPE NEEDS FIXING
+        ? 
         tokens.map((token) => {
-          // @ts-ignore TYPE NEEDS FIXING
           const token1d = tokens1d.find((p) => token.id === p.id) ?? token
-          // @ts-ignore TYPE NEEDS FIXING
           const token1w = tokens1w.find((p) => token.id === p.id) ?? token
 
           return {
@@ -191,16 +184,16 @@ function Dashboard(): JSX.Element {
   const nativePrice = useNativePrice({ chainId })
 
   const tokenIdToPrice = useMemo<
-    Map<string, { derivedETH: number; volumeUSD: number; dayData: Array<{ priceUSD: number }> }>
+    Map<string, { chainId, derivedETH: number; volumeUSD: number; dayData: Array<{ priceUSD: number }> }>
   >(() => {
     return new Map(tokens?.map((token) => [token.id, token]))
   }, [tokens])
 
-  const token1dIdToPrice = useMemo<Map<string, { derivedETH: number; volumeUSD: number }>>(() => {
+  const token1dIdToPrice = useMemo<Map<string, { chainId, derivedETH: number; volumeUSD: number }>>(() => {
     return new Map(tokens1d?.map((token) => [token.id, token]))
   }, [tokens1d])
 
-  const token1wIdToPrice = useMemo<Map<string, { derivedETH: number; volumeUSD: number }>>(() => {
+  const token1wIdToPrice = useMemo<Map<string, { chainId, derivedETH: number; volumeUSD: number }>>(() => {
     return new Map(tokens1w?.map((token) => [token.id, token]))
   }, [tokens1w])
 

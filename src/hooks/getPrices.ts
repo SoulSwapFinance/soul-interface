@@ -1,4 +1,4 @@
-import { ChainId, SOUL_ADDRESS, WBTC_ADDRESS } from 'sdk'
+import { ChainId, SOUL_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS } from 'sdk'
 import { GRAPH_HOST } from 'services/graph/constants'
 import { pager } from 'services/graph/fetchers/pager'
 import { GraphProps } from 'services/graph/interfaces'
@@ -39,46 +39,46 @@ export const getPairs = async (chainId = ChainId.FANTOM, variables = undefined, 
   return pairs
 }
 
-export const getPairDayData = async (chainId = ChainId.FANTOM, variables) => {
+export const getPairDayData = async (chainId, variables) => {
   // console.log('getTokens')
   const { pairDayDatas } = await exchange(chainId, pairDayDatasQuery, variables)
   return pairDayDatas
 }
 
-export const getTokenSubset = async (chainId = ChainId.FANTOM, variables) => {
+export const getTokenSubset = async (chainId, variables) => {
   // console.log('getTokenSubset')
   const { tokens } = await exchange(chainId, tokenSubsetQuery, variables)
   return tokens
 }
 
-export const getTokens = async (chainId = ChainId.FANTOM, variables) => {
+export const getTokens = async (chainId, variables) => {
   // console.log('getTokens')
   const { tokens } = await exchange(chainId, tokensQuery, variables)
   return tokens
 }
 
 // @ts-ignore TYPE NEEDS FIXING
-export const getToken = async (chainId = ChainId.FANTOM, query = tokenQuery, variables) => {
+export const getToken = async (chainId, query = tokenQuery, variables) => {
   // console.log('getTokens')
   const { token } = await exchange(chainId, query, variables)
   return token
 }
 
-export const getPair = async (chainId = ChainId.FANTOM, query = pairQuery, variables) => {
+export const getPair = async (chainId, query = pairQuery, variables) => {
   // console.log('getTokens')
   const { pair } = await exchange(chainId, query, variables)
   return pair
 }
 
 // @ts-ignore TYPE NEEDS FIXING
-export const getTokenDayData = async (chainId = ChainId.FANTOM, variables) => {
+export const getTokenDayData = async (chainId, variables) => {
   // console.log('getTokens')
   const { tokenDayDatas } = await exchange(chainId, tokenDayDatasQuery, variables)
   return tokenDayDatas
 }
 
 // @ts-ignore TYPE NEEDS FIXING
-export const getTokenPrices = async (chainId = ChainId.FANTOM, variables) => {
+export const getTokenPrices = async (chainId, variables) => {
   // console.log('getTokenPrice')
   const { tokens } = await exchange(chainId, tokensQuery, variables)
   // @ts-ignore TYPE NEEDS FIXING
@@ -86,7 +86,7 @@ export const getTokenPrices = async (chainId = ChainId.FANTOM, variables) => {
 }
 
 // @ts-ignore TYPE NEEDS FIXING
-export const getTokenPrice = async (chainId = ChainId.FANTOM, query, variables) => {
+export const getTokenPrice = async (chainId, query, variables) => {
   // console.log('getTokenPrice')
   const nativePrice = await getNativePrice(chainId)
 
@@ -94,7 +94,7 @@ export const getTokenPrice = async (chainId = ChainId.FANTOM, query, variables) 
   return token?.derivedETH * nativePrice
 }
 
-export const getPairPrice = async (chainId = ChainId.FANTOM, query, variables) => {
+export const getPairPrice = async (chainId, query, variables) => {
   const { pair } = await exchange(chainId, query, variables)
   return pair?.reserveUSD
 }
@@ -108,7 +108,7 @@ export const getPairPrice = async (chainId = ChainId.FANTOM, query, variables) =
 //   return pair?.reserveETH * nativePrice
 // }
 
-export const getNativePrice = async (chainId = ChainId.FANTOM, variables = undefined) => {
+export const getNativePrice = async (chainId, variables = undefined) => {
   const data = await getBundle(chainId, undefined, variables)
   return data?.bundles[0]?.ethPrice
 }
@@ -160,8 +160,8 @@ export const getBinancePrice = async () => {
 }
 
 export const getWrappedEthPrice = async () => {
-  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: '0x74b23882a30290451a17c44f4f05243b6b58c76d',
+  return getTokenPrice(ChainId.AVALANCHE, tokenPriceQuery, {
+    id: WETH_ADDRESS[ChainId.AVALANCHE].toLowerCase(),
   })
 }
 
