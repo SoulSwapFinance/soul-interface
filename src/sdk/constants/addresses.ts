@@ -876,6 +876,12 @@ export const ETH_USDC: AddressMap = {
   [ChainId.AVALANCHE]: '0x351C6327F9639664C7962B94570D1A19F47b3f44'
 }
 
+export const USDC_USDC: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0xBBdA07f2121274ecb1a08077F37A60F7E0D36629', // axlUSDC-lzUSDC
+  [ChainId.AVALANCHE]: ''
+}
+
 export const MULTI_ETH_USDC: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.FANTOM]: '0x5b181BBc3Cc18C66B6f36f584866a1ff09865630',

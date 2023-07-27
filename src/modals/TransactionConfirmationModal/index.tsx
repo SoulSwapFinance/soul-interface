@@ -114,7 +114,7 @@ export const TransactionSubmittedContent: FC<TransactionSubmittedContentProps> =
                   alt={`Add ${currencyToAdd.symbol} to MetaMask`}
                   width={24}
                   height={24}
-                  className="ml-1"
+                  // className="ml-1"
                 />
               </RowFixed>
             ) : (
