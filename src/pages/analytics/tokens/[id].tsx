@@ -12,7 +12,7 @@ import { formatNumber } from 'functions/format'
 import { useCurrency } from 'hooks/Tokens'
 import { useTokenContract } from 'hooks/useContract'
 import useCopyClipboard from 'hooks/useCopyClipboard'
-import Image from 'next/image'
+// import Image from 'next/image'
 import {
   useNativePrice,
   useOneDayBlock,
@@ -71,7 +71,6 @@ function Token() {
 
   useEffect(() => {
     const fetch = async () => {
-      /* @ts-ignore TYPE NEEDS FIXING */
       setTotalSupply(await tokenContract.totalSupply())
       setTokenDecimals(await tokenContract.decimals())
     }
@@ -145,6 +144,7 @@ function Token() {
   const liquidityUSDChange =
     ((token?.liquidity * price) / (token1d?.liquidity * token1d?.derivedETH * nativePrice1d)) * 100 - 100
 
+  const volumeUSD = token1d?.volumeUSD
   const volumeUSD1d = token?.volumeUSD - token1d?.volumeUSD
   const volumeUSD2d = token1d?.volumeUSD - token2d?.volumeUSD
   const volumeUSD1dChange = (volumeUSD1d / volumeUSD2d) * 100 - 100
@@ -340,7 +340,7 @@ function Token() {
             header="Price"
             subheader={token?.symbol}
             figure={price}
-            change={priceUSD1dChange}
+            change={priceUSD}
             chart={chartData.priceChart}
             defaultTimespan="WEEK"
             timespans={chartTimespans}

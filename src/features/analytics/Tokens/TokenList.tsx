@@ -6,8 +6,10 @@ import { useCurrency } from 'hooks/Tokens'
 import React from 'react'
 
 import ColoredNumber from '../ColoredNumber'
+import { useActiveWeb3React } from 'services/web3'
+import LineGraph from 'components/LineGraph'
 
-type TokenListColumnType = 'name' | 'price' | 'liquidity' | 'priceChange' | 'volumeChange' // | 'lastWeekGraph'
+type TokenListColumnType = 'name' | 'price' | 'liquidity' | 'volumeChange' | 'lastWeekGraph' // | 'priceChange' 
 
 interface Token {
   token: {
@@ -35,6 +37,7 @@ interface TokenListNameProps {
 }
 
 function TokenListName({ token }: TokenListNameProps): JSX.Element {
+  const { chainId } = useActiveWeb3React()
   const currency = useCurrency(token.id)
 
   return (
@@ -71,36 +74,36 @@ const TokenListColumns: Record<TokenListColumnType, Column> = {
   name: {
     Header: 'Name',
     accessor: 'token',
-    Cell: (props) => <TokenListName token={props.value} />,
+    Cell: (row) => <TokenListName token={row.value} />,
     disableSortBy: true,
     align: 'left',
   },
   price: {
     Header: 'Price',
     accessor: 'price',
-    Cell: (props) => formatNumber(props.value, true, undefined),
+    Cell: (row) => formatNumber(row.value, true, undefined),
     align: 'right',
   },
   liquidity: {
     Header: 'Liquidity',
     accessor: 'liquidity',
-    Cell: (props) => formatNumber(props.value, true, false),
+    Cell: (row) => formatNumber(row.value, true, false),
     align: 'right',
   },
-  priceChange: {
-    Header: '% Change',
-    accessor: (row) => (
-      <div>
-        <ColoredNumber className="font-medium" number={row.change1d} percent={true} />
-        <div className="font-normal">
-          {row.change1w > 0 && '+'}
-          {formatPercent(row.change1w)}
-        </div>
-      </div>
-    ),
-    align: 'right',
-    sortType: (a, b) => a.original.change1d - b.original.change1d,
-  },
+  // priceChange: {
+  //   Header: '% Change',
+  //   accessor: (row) => (
+  //     <div>
+  //       <ColoredNumber className="font-medium" number={row.change1d} percent={true} />
+  //       <div className="font-normal">
+  //         {row.change1w > 0 && '+'}
+  //         {formatPercent(row.change1w)}
+  //       </div>
+  //     </div>
+  //   ),
+  //   align: 'right',
+  //   sortType: (a, b) => a.original.change1d - b.original.change1d,
+  // },
   volumeChange: {
     Header: 'Volume',
     accessor: (row) => (
@@ -111,20 +114,20 @@ const TokenListColumns: Record<TokenListColumnType, Column> = {
     ),
     align: 'right',
   },
-  // lastWeekGraph: {
-  //   Header: 'Last Week',
-  //   accessor: 'graph',
-  //   Cell: (props) => (
-  //     <div className="flex justify-end w-full h-full py-2 pr-2">
-  //       { props.row.original.volume1d >= 0.25 ?
-  //       <div className="w-32 h-10">
-  //         <LineGraph data={props.value} stroke={{ solid: props.row.original.change1w >= 0 ? '#00ff4f' : '#ff3838' }} />
-  //       </div>
-  //         : undefined
-  //       }
-  //     </div>
-  //   ),
-  //   disableSortBy: true,
-  //   align: 'right',
-  // },
+  lastWeekGraph: {
+    Header: 'Last Week',
+    accessor: 'graph',
+    Cell: (props) => (
+      <div className="flex justify-end w-full h-full py-2 pr-2">
+        { props.row.original.volume1d >= 0 ?
+        <div className="w-32 h-10">
+          <LineGraph data={props.value} stroke={{ solid: props.row.original.change1w >= 0 ? '#00ff4f' : '#ff3838' }} />
+        </div>
+          : undefined
+        }
+      </div>
+    ),
+    disableSortBy: true,
+    align: 'right',
+  },
 }

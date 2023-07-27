@@ -127,7 +127,7 @@ export const pairIdsQuery = gql`
 
 export const pairCountQuery = gql`
   query pairCountQuery {
-    uniswapFactories {
+    factories {
       pairCount
     }
   }

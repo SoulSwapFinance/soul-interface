@@ -27,7 +27,6 @@ export function useFactory({
 }: GraphProps) {
   const { data } = useSWR(
     shouldFetch ? ['factory', chainId, stringify(variables)] : null,
-    // @ts-ignore TYPE NEEDS FIXING
     () => getFactory(chainId, variables),
     swrConfig
   )
@@ -42,7 +41,6 @@ export function useNativePrice({
 }: GraphProps) {
   const { data } = useSWR(
     shouldFetch ? ['nativePrice', chainId, stringify(variables)] : null,
-    // @ts-ignore TYPE NEEDS FIXING
     () => getNativePrice(chainId, variables),
     swrConfig
   )
@@ -50,7 +48,6 @@ export function useNativePrice({
   return data
 }
 
-// @ts-ignore TYPE NEEDS FIXING
 export function useEthPrice(variables = undefined, swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(['ethPrice'], () => getNativePrice(variables), swrConfig)
   return data

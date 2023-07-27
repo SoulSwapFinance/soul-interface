@@ -17,7 +17,8 @@ import {
 } from 'services/graph/queries'
 import { pager } from './pager'
 import { useActiveWeb3React } from 'services/web3'
-import { use } from 'react'
+// import { useActiveWeb3React } from 'services/web3'
+// import { use } from 'react'
 
 export const EXCHANGE = {
   // [ChainId.ETHEREUM]: 'sushiswap/exchange',
@@ -28,9 +29,10 @@ export const EXCHANGE = {
   // [ChainId.BSC]: 'sushiswap/bsc-exchange',
 }
 
-export const exchange = async (chainId = ChainId.AVALANCHE, query, variables = {}) => {
-  return pager(`${GRAPH_HOST[chainId]}/subgraphs/name/${EXCHANGE[chainId]}`, query, variables)
-}
+
+export const exchange = async (chainId = ChainId.AVALANCHE, query, variables = {}) =>
+  pager(`https://api.thegraph.com/subgraphs/name/${EXCHANGE[chainId]}`, query, variables)
+
 export const getPairs = async (chainId, variables = undefined, query = pairsQuery) => {
   
   const { pairs } = await exchange(chainId, query, variables)
@@ -87,13 +89,12 @@ export const getTokenPrice = async (chainId, query, variables) => {
 }
 
 export const getNativePrice = async (chainId, variables = undefined) => {
-  // console.log('getEthPrice')
   const data = await getBundle(chainId, undefined, variables)
   return data?.bundles[0]?.ethPrice
 }
 
 export const getEthPrice = async (variables = undefined) => {
-  return getNativePrice(ChainId.ETHEREUM, variables)
+  return getNativePrice(ChainId.FANTOM, variables)
 }
 
 // export const getPrice = (tokenAddress: string) => async (variables = {}) => {
