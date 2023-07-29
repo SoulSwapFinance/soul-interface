@@ -36,8 +36,8 @@ import { Button } from 'components/Button'
 import { RowFixed } from 'components/Row'
 import { getAddress } from '@ethersproject/address'
 import NavLink from 'components/NavLink'
-import { Feature } from 'enums'
 import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums'
 
 const ONE_DAY = 86_400
 
@@ -71,6 +71,7 @@ function Token() {
 
   useEffect(() => {
     const fetch = async () => {
+      /* @ts-ignore TYPE NEEDS FIXING */
       setTotalSupply(await tokenContract.totalSupply())
       setTokenDecimals(await tokenContract.decimals())
     }
@@ -145,6 +146,7 @@ function Token() {
     ((token?.liquidity * price) / (token1d?.liquidity * token1d?.derivedETH * nativePrice1d)) * 100 - 100
 
   const volumeUSD = token1d?.volumeUSD
+
   const volumeUSD1d = token?.volumeUSD - token1d?.volumeUSD
   const volumeUSD2d = token1d?.volumeUSD - token2d?.volumeUSD
   const volumeUSD1dChange = (volumeUSD1d / volumeUSD2d) * 100 - 100
@@ -242,7 +244,7 @@ function Token() {
               className="w-auto mt-4">
               {!success ? (
                 <RowFixed className="mx-auto rounded-xl space-x-2">
-                  <CurrencyLogo className="rounded-full bg-dark-1000 rounded-xl p-1"
+                  <CurrencyLogo className="bg-dark-1000 rounded-xl p-1"
                     currency={currency} size={60}
                   />
                   <div className="flex items-center space-x-4 md:space-x-8">
@@ -340,7 +342,7 @@ function Token() {
             header="Price"
             subheader={token?.symbol}
             figure={price}
-            change={priceUSD}
+            change={priceUSD1dChange}
             chart={chartData.priceChart}
             defaultTimespan="WEEK"
             timespans={chartTimespans}
@@ -393,6 +395,5 @@ function Token() {
     </AnalyticsContainer>
   )
 }
-
 export default Token
 Token.Guard = NetworkGuard(Feature.ANALYTICS)

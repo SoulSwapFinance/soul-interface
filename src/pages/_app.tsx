@@ -9,7 +9,7 @@ import Web3ReactManager from 'components/Web3ReactManager'
 import getLibrary from 'functions/getLibrary'
 import { exception, GOOGLE_ANALYTICS_TRACKING_ID, pageview } from 'functions/gtag'
 import DefaultLayout from 'layouts/Default'
-// import { FantomApiProvider } from "contexts/FantomApiProvider"
+import { FantomApiProvider } from "contexts/FantomApiProvider"
 import { Analytics } from '@vercel/analytics/react'
 import store, { persistor } from 'state'
 import ApplicationUpdater from 'state/application/updater'
@@ -17,6 +17,7 @@ import ListsUpdater from 'state/lists/updater'
 import MulticallUpdater from 'state/multicall/updater'
 import TransactionUpdater from 'state/transactions/updater'
 import UserUpdater from 'state/user/updater'
+import * as plurals from 'make-plural/plurals'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -31,7 +32,7 @@ import { ApiDataProvider } from 'contexts/ApiDataProvider'
 import ModalProvider from 'contexts/ModalProvider'
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client'
 import { RPC } from 'connectors'
-import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const link = createHttpLink({
   // uri: RPC[250],
@@ -129,12 +130,11 @@ function MyApp({ Component, pageProps, fallback, err }) {
             <Hydrate state={pageProps.dehydratedState}>
               <ApiDataProvider>
                 <ApolloProvider client={client}>
-                  {/* <FantomApiProvider> */}
-                    {/* @ts-ignore */}
+                  {/*@ts-ignore TYPE NEEDS FIXING*/}
+                  <FantomApiProvider>
                     <Web3ProviderNetwork getLibrary={getLibrary}>
                       <Web3ReactManager>
                         <ReduxProvider store={store}>
-                          {/* @ts-ignore */}
                           <PersistGate loading={<Dots>loading</Dots>} persistor={persistor}>
                             <>
                               <ListsUpdater />
@@ -165,7 +165,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
                         </ReduxProvider>
                       </Web3ReactManager>
                     </Web3ProviderNetwork>
-                  {/* </FantomApiProvider> */}
+                  </FantomApiProvider>
                 </ApolloProvider>
               </ApiDataProvider>
             </Hydrate>

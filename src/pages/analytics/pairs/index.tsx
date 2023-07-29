@@ -12,6 +12,7 @@ import { getChainColorCode } from 'constants/chains'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 
+
 function Pairs() {
   const [type, setType] = useState<'all' | 'gainers' | 'losers'>('all')
 
@@ -123,6 +124,5 @@ function Pairs() {
     </AnalyticsContainer>
   )
 }
-
 export default Pairs
 Pairs.Guard = NetworkGuard(Feature.ANALYTICS)

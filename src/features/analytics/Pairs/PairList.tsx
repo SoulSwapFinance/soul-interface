@@ -5,7 +5,6 @@ import ColoredNumber from 'features/analytics/ColoredNumber'
 import { formatNumber, formatNumberScale, formatPercent } from 'functions'
 import { aprToApy } from 'functions/convert/apyApr'
 import { useCurrency } from 'hooks/Tokens'
-import { useActiveWeb3React } from 'services/web3'
 
 interface PairListProps {
   pairs: {
@@ -41,7 +40,6 @@ interface PairListNameProps {
 }
 
 function PairListName({ pair }: PairListNameProps): JSX.Element {
-  const { chainId } = useActiveWeb3React()
   const token0 = useCurrency(pair?.token0?.id)
   const token1 = useCurrency(pair?.token1?.id)
 
@@ -66,8 +64,6 @@ function PairListName({ pair }: PairListNameProps): JSX.Element {
 }
 
 const getApy = (volume, liquidity) => {
-  // const { chainId } = useActiveWeb3React()
-
   const apy = aprToApy((((volume / 7) * 365 * 0.0025) / liquidity) * 100, 3650)
   if (apy > 1000) return '>10,000%'
   return formatPercent(apy)
@@ -136,19 +132,19 @@ const gainersColumns = [
     align: 'right',
     sortType: (a, b) => a.original.liquidityChangeNumber1d - b.original.liquidityChangeNumber1d,
   },
-  // {
-  //   Header: '% Change',
-  //   accessor: (row) => (
-  //     <div className="inline-flex">
-  //       <div>
-  //         <div className="font-medium text-high-emphesis">{formatPercent(row.liquidityChangePercent1d)}</div>
-  //         <div>{formatPercent(row.liquidityChangePercent1w)}</div>
-  //       </div>
-  //     </div>
-  //   ),
-  //   align: 'right',
-  //   sortType: (a, b) => a.original.liquidityChangePercent1d - b.original.liquidityChangePercent1d,
-  // },
+  {
+    Header: '% Change',
+    accessor: (row) => (
+      <div className="inline-flex">
+        <div>
+          <div className="font-medium text-high-emphesis">{formatPercent(row.liquidityChangePercent1d)}</div>
+          <div>{formatPercent(row.liquidityChangePercent1w)}</div>
+        </div>
+      </div>
+    ),
+    align: 'right',
+    sortType: (a, b) => a.original.liquidityChangePercent1d - b.original.liquidityChangePercent1d,
+  },
   {
     Header: 'Volume',
     accessor: (row) => (
@@ -162,31 +158,30 @@ const gainersColumns = [
     align: 'right',
     sortType: (a, b) => a.original.volumeChangeNumber1d - b.original.volumeChangeNumber1d,
   },
-  // {
-  //   Header: ' % Change',
-  //   accessor: (row) => (
-  //     <div className="inline-flex">
-  //       <div>
-  //         <div className="font-medium text-high-emphesis">{formatPercent(row.volumeChangePercent1d)}</div>
-  //         <div>{formatPercent(row.volumeChangePercent1w)}</div>
-  //       </div>
-  //     </div>
-  //   ),
-  //   align: 'right',
-  //   sortType: (a, b) => a.original.volumeChangePercent1d - b.original.volumeChangePercent1d,
-  // },
+  {
+    Header: ' % Change',
+    accessor: (row) => (
+      <div className="inline-flex">
+        <div>
+          <div className="font-medium text-high-emphesis">{formatPercent(row.volumeChangePercent1d)}</div>
+          <div>{formatPercent(row.volumeChangePercent1w)}</div>
+        </div>
+      </div>
+    ),
+    align: 'right',
+    sortType: (a, b) => a.original.volumeChangePercent1d - b.original.volumeChangePercent1d,
+  },
 ]
 
 export default function PairList({ pairs, type }: PairListProps): JSX.Element {
-  const { chainId } = useActiveWeb3React()
   const defaultSortBy = React.useMemo(() => {
     switch (type) {
       case 'all':
-        return { chainId, id: 'liquidity', desc: true }
+        return { id: 'liquidity', desc: true }
       case 'gainers':
-        return { chainId, id: 'liquidity', desc: true }
+        return { id: 'liquidity', desc: true }
       case 'losers':
-        return { chainId, id: 'liquidity', desc: false }
+        return { id: 'liquidity', desc: false }
     }
   }, [type])
 

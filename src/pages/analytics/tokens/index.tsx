@@ -58,6 +58,5 @@ function Tokens() {
     </AnalyticsContainer>
   )
 }
-
 export default Tokens
 Tokens.Guard = NetworkGuard(Feature.ANALYTICS)

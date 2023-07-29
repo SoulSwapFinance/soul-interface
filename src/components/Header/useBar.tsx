@@ -111,7 +111,7 @@ const useMenu: UseBar = () => {
     if (featureEnabled(Feature.BONDS, chainId)) {
       mainItems.push({
         key: 'bond',
-        link: '/bond',
+        link: '/bonds',
         title: 'Bond',
         icon: <EarnIcon
           className={classNames(`w-7 h-7 rounded-md`
