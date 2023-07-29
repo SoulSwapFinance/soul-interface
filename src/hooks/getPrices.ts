@@ -27,7 +27,7 @@ import { useActiveWeb3React } from 'services/web3'
 export const EXCHANGE = {
   [ChainId.ETHEREUM]: 'soulswapfinance/fantom-swap',
   [ChainId.FANTOM]: 'soulswapfinance/fantom-swap',
-  [ChainId.AVALANCHE]: 'soulswapfinance/avalanche-swap',
+  [ChainId.AVALANCHE]: 'soulswapfinance/avalanche-exchange',
   [ChainId.BSC]: 'soulswapfinance/fantom-swap',
 }
 
@@ -39,46 +39,46 @@ export const getPairs = async (chainId = ChainId.FANTOM, variables = undefined, 
   return pairs
 }
 
-export const getPairDayData = async (chainId, variables) => {
+export const getPairDayData = async (chainId = ChainId.FANTOM, variables) => {
   // console.log('getTokens')
   const { pairDayDatas } = await exchange(chainId, pairDayDatasQuery, variables)
   return pairDayDatas
 }
 
-export const getTokenSubset = async (chainId, variables) => {
+export const getTokenSubset = async (chainId = ChainId.FANTOM, variables) => {
   // console.log('getTokenSubset')
   const { tokens } = await exchange(chainId, tokenSubsetQuery, variables)
   return tokens
 }
 
-export const getTokens = async (chainId, variables) => {
+export const getTokens = async (chainId = ChainId.FANTOM, variables) => {
   // console.log('getTokens')
   const { tokens } = await exchange(chainId, tokensQuery, variables)
   return tokens
 }
 
 // @ts-ignore TYPE NEEDS FIXING
-export const getToken = async (chainId, query = tokenQuery, variables) => {
+export const getToken = async (chainId = ChainId.FANTOM, query = tokenQuery, variables) => {
   // console.log('getTokens')
   const { token } = await exchange(chainId, query, variables)
   return token
 }
 
-export const getPair = async (chainId, query = pairQuery, variables) => {
+export const getPair = async (chainId = ChainId.FANTOM, query = pairQuery, variables) => {
   // console.log('getTokens')
   const { pair } = await exchange(chainId, query, variables)
   return pair
 }
 
 // @ts-ignore TYPE NEEDS FIXING
-export const getTokenDayData = async (chainId, variables) => {
+export const getTokenDayData = async (chainId = ChainId.FANTOM, variables) => {
   // console.log('getTokens')
   const { tokenDayDatas } = await exchange(chainId, tokenDayDatasQuery, variables)
   return tokenDayDatas
 }
 
 // @ts-ignore TYPE NEEDS FIXING
-export const getTokenPrices = async (chainId, variables) => {
+export const getTokenPrices = async (chainId = ChainId.FANTOM, variables) => {
   // console.log('getTokenPrice')
   const { tokens } = await exchange(chainId, tokensQuery, variables)
   // @ts-ignore TYPE NEEDS FIXING
@@ -86,7 +86,7 @@ export const getTokenPrices = async (chainId, variables) => {
 }
 
 // @ts-ignore TYPE NEEDS FIXING
-export const getTokenPrice = async (chainId, query, variables) => {
+export const getTokenPrice = async (chainId = ChainId.FANTOM, query, variables) => {
   // console.log('getTokenPrice')
   const nativePrice = await getNativePrice(chainId)
 
@@ -94,7 +94,7 @@ export const getTokenPrice = async (chainId, query, variables) => {
   return token?.derivedETH * nativePrice
 }
 
-export const getPairPrice = async (chainId, query, variables) => {
+export const getPairPrice = async (chainId = ChainId.FANTOM, query, variables) => {
   const { pair } = await exchange(chainId, query, variables)
   return pair?.reserveUSD
 }
@@ -108,7 +108,7 @@ export const getPairPrice = async (chainId, query, variables) => {
 //   return pair?.reserveETH * nativePrice
 // }
 
-export const getNativePrice = async (chainId, variables = undefined) => {
+export const getNativePrice = async (chainId = ChainId.FANTOM, variables = undefined) => {
   const data = await getBundle(chainId, undefined, variables)
   return data?.bundles[0]?.ethPrice
 }
@@ -153,6 +153,26 @@ export const getLuxorPrice = async (variables = {}) => {
   })
 }
 
+export const getWrappedLumPrice = async (variables = {}) => {
+  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
+    id: '0xa69557e01b0a6b86e5b29be66d730c0bfff68208',
+    ...variables,
+  })
+}
+
+export const getSeancePrice = async (variables = {}) => {
+  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
+    id: '0x124b06c5ce47de7a6e9efda71a946717130079e6',
+    ...variables,
+  })
+}
+
+export const getFantomPrice = async () => {
+  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
+    id: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83',
+  })
+}
+
 export const getBinancePrice = async () => {
   return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
     id: '0xd67de0e0a0fd7b15dc8348bb9be742f3c5850454',
@@ -160,8 +180,8 @@ export const getBinancePrice = async () => {
 }
 
 export const getWrappedEthPrice = async () => {
-  return getTokenPrice(ChainId.AVALANCHE, tokenPriceQuery, {
-    id: WETH_ADDRESS[ChainId.AVALANCHE].toLowerCase(),
+  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
+    id: WETH_ADDRESS[ChainId.FANTOM].toLowerCase(),
   })
 }
 
@@ -260,6 +280,16 @@ export function usePairPrice(pairAddress: string, swrConfig: SWRConfiguration = 
   return data
 }
 
+export function useSeancePrice(swrConfig: SWRConfiguration = undefined) {
+  const { data } = useSWR(['seancePrice'], () => getSeancePrice(), swrConfig)
+  return data
+}
+
+export function useWrappedLumPrice(swrConfig: SWRConfiguration = undefined) {
+  const { data } = useSWR(['wLumPrice'], () => getWrappedLumPrice(), swrConfig)
+  return data
+}
+
 export function useLuxorPrice(swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(['luxorPrice'], () => getLuxorPrice(), swrConfig)
   return data
@@ -267,6 +297,11 @@ export function useLuxorPrice(swrConfig: SWRConfiguration = undefined) {
 
 export function useEnchantPrice(swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(['enchantPrice'], () => getEnchantPrice(), swrConfig)
+  return data
+}
+
+export function useFantomPrice(swrConfig: SWRConfiguration = undefined) {
+  const { data } = useSWR(['fantomPrice'], () => getFantomPrice(), swrConfig)
   return data
 }
 
@@ -289,5 +324,13 @@ export function useWrappedBtcPrice(swrConfig: SWRConfiguration = undefined) {
 
 // export function usePairPrice(swrConfig: SWRConfiguration = undefined) {
 //   const { data } = useSWR(['pairPrice'], () => getPairsPrice(), swrConfig)
+//   return data
+// }
+
+// @ts-ignore TYPE NEEDS FIXING
+// export function useSeancePrice(swrConfig: SWRConfiguration = undefined) {
+//   const { chainId } = useActiveWeb3React()
+//   const { data } = useSWR(chainId && chainId === ChainId.FANTOM 
+//     ? ['seancePrice'] : null, () => getSeancePrice(), swrConfig)
 //   return data
 // }

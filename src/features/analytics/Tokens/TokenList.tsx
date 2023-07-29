@@ -4,12 +4,12 @@ import Table, { Column } from 'components/Table'
 import { formatNumber, formatPercent } from 'functions'
 import { useCurrency } from 'hooks/Tokens'
 import React from 'react'
-
-import ColoredNumber from '../ColoredNumber'
 import { useActiveWeb3React } from 'services/web3'
 import LineGraph from 'components/LineGraph'
 
-type TokenListColumnType = 'name' | 'price' | 'liquidity' | 'volumeChange' | 'lastWeekGraph' // | 'priceChange' 
+import ColoredNumber from '../ColoredNumber'
+
+type TokenListColumnType = 'name' | 'price' | 'liquidity' | 'priceChange' | 'volumeChange' | 'lastWeekGraph'
 
 interface Token {
   token: {
@@ -37,7 +37,6 @@ interface TokenListNameProps {
 }
 
 function TokenListName({ token }: TokenListNameProps): JSX.Element {
-  const { chainId } = useActiveWeb3React()
   const currency = useCurrency(token.id)
 
   return (
@@ -74,36 +73,36 @@ const TokenListColumns: Record<TokenListColumnType, Column> = {
   name: {
     Header: 'Name',
     accessor: 'token',
-    Cell: (row) => <TokenListName token={row.value} />,
+    Cell: (props) => <TokenListName token={props.value} />,
     disableSortBy: true,
     align: 'left',
   },
   price: {
     Header: 'Price',
     accessor: 'price',
-    Cell: (row) => formatNumber(row.value, true, undefined),
+    Cell: (props) => formatNumber(props.value, true, undefined),
     align: 'right',
   },
   liquidity: {
     Header: 'Liquidity',
     accessor: 'liquidity',
-    Cell: (row) => formatNumber(row.value, true, false),
+    Cell: (props) => formatNumber(props.value, true, false),
     align: 'right',
   },
-  // priceChange: {
-  //   Header: '% Change',
-  //   accessor: (row) => (
-  //     <div>
-  //       <ColoredNumber className="font-medium" number={row.change1d} percent={true} />
-  //       <div className="font-normal">
-  //         {row.change1w > 0 && '+'}
-  //         {formatPercent(row.change1w)}
-  //       </div>
-  //     </div>
-  //   ),
-  //   align: 'right',
-  //   sortType: (a, b) => a.original.change1d - b.original.change1d,
-  // },
+  priceChange: {
+    Header: '% Change',
+    accessor: (row) => (
+      <div>
+        <ColoredNumber className="font-medium" number={row.change1d} percent={true} />
+        <div className="font-normal">
+          {row.change1w > 0 && '+'}
+          {formatPercent(row.change1w)}
+        </div>
+      </div>
+    ),
+    align: 'right',
+    sortType: (a, b) => a.original.change1d - b.original.change1d,
+  },
   volumeChange: {
     Header: 'Volume',
     accessor: (row) => (

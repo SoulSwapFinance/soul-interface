@@ -1,9 +1,6 @@
-import Search from 'components/Search'
 import AnalyticsContainer from 'features/analytics/AnalyticsContainer'
-import Background from 'features/analytics/Background'
 import ChartCard from 'features/analytics/ChartCard'
 import DashboardTabs from 'features/analytics/Dashboard/DashboardTabs'
-// import PoolList from 'features/analytics/Farms/FarmList'
 import PairList from 'features/analytics/Pairs/PairList'
 import TokenList from 'features/analytics/Tokens/TokenList'
 import useFuse from 'hooks/useFuse'
@@ -21,11 +18,12 @@ import {
 import { useActiveWeb3React } from 'services/web3'
 import React, { useMemo, useState } from 'react'
 import Link from 'next/link'
-import CoffinBox from '../coffinbox'
 import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 import { getChainColorCode } from 'constants/chains'
 import NetworkGuard from 'guards/Network'
+
+
 
 const ONE_DAY = 86_400
 
@@ -54,8 +52,7 @@ const chartTimespans = [
 
 function Dashboard(): JSX.Element {
   const [type, setType]
-  = useState('pairs')
-    // = useState<'coffin' | 'pairs' | 'tokens'>('pairs')
+    = useState<'pairs'>('pairs')
   // = useState<'pools' | 'pairs' | 'tokens'>('pools')
 
   const { chainId } = useActiveWeb3React()
@@ -69,22 +66,25 @@ function Dashboard(): JSX.Element {
   const exchange1d = useFactory({ chainId, variables: { block: block1d } })
   const exchange2d = useFactory({ chainId, variables: { block: block2d } })
 
-  const dayData = useDayData({ chainId, shouldFetch: !!chainId })
+  const dayData = useDayData({ chainId })
 
   const chartData = useMemo(
     () => ({
-      // chainId,
       liquidity: exchange?.liquidityUSD,
       liquidityChange: (exchange1d?.liquidityUSD / exchange2d?.liquidityUSD) * 100 - 100,
       liquidityChart: dayData
+        // @ts-ignore TYPE NEEDS FIXING
         ?.sort((a, b) => a.date - b.date)
+        // @ts-ignore TYPE NEEDS FIXING
         .map((day) => ({ x: new Date(day.date * 1000), y: Number(day.liquidityUSD) })),
 
       volume1d: exchange?.volumeUSD - exchange1d?.volumeUSD,
       volume1dChange:
         ((exchange?.volumeUSD - exchange1d?.volumeUSD) / (exchange1d?.volumeUSD - exchange2d?.volumeUSD)) * 100 - 100,
       volumeChart: dayData
+        // @ts-ignore TYPE NEEDS FIXING
         ?.sort((a, b) => a.date - b.date)
+        // @ts-ignore TYPE NEEDS FIXING
         .map((day) => ({ x: new Date(day.date * 1000), y: Number(day.volumeUSD) })),
     }),
     [exchange, exchange1d, exchange2d, dayData]
@@ -145,16 +145,18 @@ function Dashboard(): JSX.Element {
   const nativePrice1d = useNativePrice({ chainId, variables: { block: block1d } })
   const nativePrice1w = useNativePrice({ chainId, variables: { block: block1w } })
 
-  const tokens = useTokens({ chainId, shouldFetch: !!chainId })
+  const tokens = useTokens({ chainId })
   const tokens1d = useTokens({ chainId, variables: { block: block1d }, shouldFetch: !!block1d })
   const tokens1w = useTokens({ chainId, variables: { block: block1w }, shouldFetch: !!block1w })
 
   const tokensFormatted = useMemo(
     () =>
       tokens && tokens1d && tokens1w && nativePrice1d && nativePrice1d && nativePrice1w
-        ? 
+        ? // @ts-ignore TYPE NEEDS FIXING
         tokens.map((token) => {
+          // @ts-ignore TYPE NEEDS FIXING
           const token1d = tokens1d.find((p) => token.id === p.id) ?? token
+          // @ts-ignore TYPE NEEDS FIXING
           const token1w = tokens1w.find((p) => token.id === p.id) ?? token
 
           return {
@@ -189,7 +191,7 @@ function Dashboard(): JSX.Element {
     return new Map(tokens?.map((token) => [token.id, token]))
   }, [tokens])
 
-  const token1dIdToPrice = useMemo<Map<string, { chainId, derivedETH: number; volumeUSD: number }>>(() => {
+  const token1dIdToPrice = useMemo<Map<string, {chainId, derivedETH: number; volumeUSD: number }>>(() => {
     return new Map(tokens1d?.map((token) => [token.id, token]))
   }, [tokens1d])
 
@@ -238,21 +240,6 @@ function Dashboard(): JSX.Element {
 
   const { options, data } = useMemo(() => {
     switch (type) {
-      // case 'pools':
-      //   return {
-      //       options: {
-      //         keys: [
-      //           'pair.token0.id',
-      //           'pair.token0.symbol',
-      //           'pair.token0.name',
-      //           'pair.token1.id',
-      //           'pair.token1.symbol',
-      //           'pair.token1.name',
-      //         ],
-      //         threshold: 0.4,
-      //       },
-      //       data: farmsFormatted,
-      // }
 
       case 'pairs':
         return {
@@ -270,23 +257,23 @@ function Dashboard(): JSX.Element {
           data: pairsFormatted,
         }
 
-      case 'tokens':
-        return {
-          options: {
-            keys: ['token.id', 'token.symbol', 'token.name'],
-            threshold: 0.4,
-          },
-          data: tokensFormatted,
-        }
+      // case 'tokens':
+      //   return {
+      //     options: {
+      //       keys: ['token.id', 'token.symbol', 'token.name'],
+      //       threshold: 0.4,
+      //     },
+      //     data: tokensFormatted,
+      //   }
 
-      case 'coffin':
-        return {
-          options: {
-            keys: ['coffin.token.id', 'coffin.token.symbol', 'coffin.token.name'],
-            threshold: 0.4,
-          },
-          data: coffinBoxTokensFormatted,
-        }
+      // case 'coffin':
+      //   return {
+      //     options: {
+      //       keys: ['coffin.token.id', 'coffin.token.symbol', 'coffin.token.name'],
+      //       threshold: 0.4,
+      //     },
+      //     data: coffinBoxTokensFormatted,
+      //   }
     }
   }, [type, pairsFormatted, tokensFormatted])
 
@@ -342,9 +329,9 @@ function Dashboard(): JSX.Element {
           <ChartCard
             header="Volume"
             subheader="SOUL AMM"
-            figure={chartData.volume1d}
-            change={chartData.volume1dChange}
-            chart={chartData.volumeChart}
+            figure={chartData?.volume1d}
+            change={chartData?.volume1dChange}
+            chart={chartData?.volumeChart}
             defaultTimespan="WEEK"
             timespans={chartTimespans}
           />
@@ -353,8 +340,8 @@ function Dashboard(): JSX.Element {
       <DashboardTabs currentType={type} setType={setType} />
       <div className="px-4 pt-4 lg:px-14">
         {type === 'pairs' && <PairList pairs={searched} type={'all'} />}
-        {type === 'tokens' && <TokenList tokens={searched} />}
-        {type === 'coffin' && <TokenList tokens={searched} />}
+        {/* {type === 'tokens' && <TokenList tokens={searched} />}
+        {type === 'coffin' && <TokenList tokens={searched} />} */}
       </div>
     </AnalyticsContainer>
   )

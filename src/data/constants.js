@@ -11,7 +11,7 @@ module.exports = {
 	},
 	graphWSEndpoints: {
 		circle: 'wss://api.thegraph.com/subgraphs/name/soulswap/soul-circle',
-		exchange: 'wss://api.thegraph.com/subgraphs/name/soulswapfinance/fantom-exchange',
+		exchange: 'wss://api.thegraph.com/subgraphs/name/soulswapfinance/fantom-swap',
 		blocklytics: 'wss://api.thegraph.com/subgraphs/name/blocklytics/ethereum-blocks',
 	},
 	circleAddress: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', //

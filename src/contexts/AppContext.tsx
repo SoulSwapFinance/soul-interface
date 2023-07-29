@@ -3,6 +3,7 @@ import React, { createContext, ReactNode, useContext, useReducer } from "react"
 import CoinGeckoService from "services/data/CoinGeckoService"
 import { DataService } from "services/data/DataTypes"
 import RestDataService from "services/data/RestDataService"
+// import CalculateService from "services/utils/CalculateService"
 import TokenUtilService from "services/utils/TokenUtilService"
 import Reducer, { initialState } from "stores/reducer"
 import { ActionValues, State } from "stores/types"
@@ -18,6 +19,7 @@ interface AppContextProps {
   dataService: DataService
   handleLogoError: (event: React.SyntheticEvent) => void
   coinGeckoService: CoinGeckoService
+  // calculateService: CalculateService
   tokenUtilService: TokenUtilService
 }
 const AppContext = createContext<AppContextProps>({} as AppContextProps)
@@ -26,6 +28,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(Reducer, initialState)
   const dataService = RestDataService(API_URL)
   const coinGeckoService = CoinGeckoService.getInstance()
+  // const calculateService = CalculateService.getInstance()
   const tokenUtilService = TokenUtilService.getInstance()
 
   return (
@@ -34,6 +37,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
         store: [state, dispatch],
         dataService,
         coinGeckoService,
+        // calculateService,
         tokenUtilService,
         handleLogoError,
       }}
@@ -61,6 +65,11 @@ export const useCoingeckoService = () => {
   const { coinGeckoService } = useAppContext()
   return coinGeckoService
 }
+
+// export const useCalculateService = () => {
+//   const { calculateService } = useAppContext()
+//   return calculateService
+// }
 
 export const useTokenUtilService = () => {
   const { tokenUtilService } = useAppContext()

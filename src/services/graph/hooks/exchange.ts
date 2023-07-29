@@ -7,6 +7,7 @@ import {
   getBundle,
   getDayData,
   getFactory,
+  getFantomPrice,
   getLiquidityPositions,
   getNativePrice,
   getPairDayData,
@@ -53,15 +54,21 @@ export function useEthPrice(variables = undefined, swrConfig: SWRConfiguration =
   return data
 }
 
-export function useSoulPrice(swrConfig: SWRConfiguration = undefined) {
+export function useFantomPrice(swrConfig: SWRConfiguration = undefined) {
   const { chainId } = useActiveWeb3React()
-  const { data } = useSWR(['soulPrice'], () => getSoulPrice(chainId), swrConfig)
+  const shouldFetch = chainId && chainId === ChainId.FANTOM
+  const { data } = useSWR(shouldFetch ? 'fantomPrice' : null, () => getFantomPrice(), swrConfig)
+  return data
+}
+
+export function useSoulPrice(swrConfig: SWRConfiguration = undefined) {
+  const { data } = useSWR(['soulPrice'], () => getSoulPrice(), swrConfig)
   return data
 }
 
 export function useBundle(variables = undefined, swrConfig: SWRConfiguration = undefined) {
   const { chainId } = useActiveWeb3React()
-  const { data } = useSWR(chainId ? [chainId, ethPriceQuery, stringify(variables)] : null, () => getBundle(chainId), swrConfig)
+  const { data } = useSWR(chainId ? [chainId, ethPriceQuery, stringify(variables)] : null, () => getBundle(), swrConfig)
   return data
 }
 

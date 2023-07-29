@@ -13,11 +13,10 @@ export const UNDERWORLD = {
 }
 
 // @ts-ignore TYPE NEEDS FIXING
-const fetcher = async (chainId = ChainId.FANTOM, query, variables = undefined) =>
-  // @ts-ignore TYPE NEEDS FIXING
+const fetcher = async (chainId = ChainId.ETHEREUM, query, variables = undefined) =>
   pager(`${GRAPH_HOST[chainId]}/subgraphs/name/${UNDERWORLD[chainId]}`, query, variables)
 
-export const getUnderworldPairs = async (chainId = ChainId.FANTOM, variables = undefined) => {
+export const getUnderworldPairs = async (chainId = ChainId.ETHEREUM, variables = undefined) => {
   const { underworldPairs } = await fetcher(chainId, underworldPairsQuery, variables)
 
   const tokenAddresses = Array.from(

@@ -3,6 +3,7 @@ import AnalyticsContainer from 'features/analytics/AnalyticsContainer'
 // import Background from 'features/analytics/Background'
 import { Currency, Token as ERC20 } from 'sdk'
 import ChartCard from 'features/analytics/ChartCard'
+// import ColoredNumber from 'features/analytics/ColoredNumber'
 // import InfoCard from 'features/analytics/InfoCard'
 // import PairList from 'features/analytics/Pairs/PairList'
 // import { LegacyTransactions } from 'features/transactions/Transactions'
@@ -15,19 +16,19 @@ import useCopyClipboard from 'hooks/useCopyClipboard'
 import {
   useNativePrice,
   useOneDayBlock,
-  useOneWeekBlock,
+  // useOneWeekBlock,
   useTokenDayData,
   // useTokenPairs,
   useTokens,
   useTwoDayBlock,
 } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
-import Link from 'next/link'
+// import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
 // import { CheckCircle, ExternalLink as LinkIcon } from 'react-feather'
 // import { getChainColorCode, getChainInfo, getChainLogoURL } from 'constants/chains'
-import { NextSeo } from 'next-seo'
+// import { NextSeo } from 'next-seo'
 // import { TridentHeader } from 'layouts/Trident'
 // import Typography from 'components/Typography'
 // import useAddTokenToMetaMask from 'hooks/useAddTokenToMetaMask'
@@ -66,7 +67,7 @@ function Token({ outputCurrency }: TokenProps) {
   // const tokenAddress = id
 
   const { chainId, library } = useActiveWeb3React()
-  const [isCopied, setCopied] = useCopyClipboard()
+  // const [isCopied, setCopied] = useCopyClipboard()
 
   const [totalSupply, setTotalSupply] = useState(0)
   const [tokenDecimals, setTokenDecimals] = useState(18)
@@ -242,6 +243,5 @@ function Token({ outputCurrency }: TokenProps) {
     </AnalyticsContainer>
   )
 }
-
 export default Token
 Token.Guard = NetworkGuard(Feature.ANALYTICS)

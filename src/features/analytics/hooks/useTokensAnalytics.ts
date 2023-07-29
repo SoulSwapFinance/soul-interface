@@ -11,7 +11,6 @@ export default function useTokensAnalytics() {
   const block1w = useOneWeekBlock({ chainId })
 
   const nativePrice = useNativePrice({ chainId })
-
   const nativePrice1d = useNativePrice({ chainId, variables: { block: block1d }, shouldFetch: !!block1d })
   const nativePrice1w = useNativePrice({ chainId, variables: { block: block1w }, shouldFetch: !!block1w })
 
