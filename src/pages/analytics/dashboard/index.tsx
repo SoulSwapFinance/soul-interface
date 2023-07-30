@@ -2,7 +2,7 @@ import AnalyticsContainer from 'features/analytics/AnalyticsContainer'
 import ChartCard from 'features/analytics/ChartCard'
 import DashboardTabs from 'features/analytics/Dashboard/DashboardTabs'
 import PairList from 'features/analytics/Pairs/PairList'
-import TokenList from 'features/analytics/Tokens/TokenList'
+// import TokenList from 'features/analytics/Tokens/TokenList'
 import useFuse from 'hooks/useFuse'
 import {
   useCoffinBox,

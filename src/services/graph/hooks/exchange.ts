@@ -18,14 +18,15 @@ import {
   getTokens,
 } from '../fetchers'
 import { GraphProps } from '../interfaces'
-import { ethPriceQuery } from '../queries'
+import { ethPriceQuery, tokensQuery } from '../queries'
 
 export function useFactory({
-  chainId = ChainId.FANTOM,
   variables,
   shouldFetch = true,
   swrConfig = undefined,
 }: GraphProps) {
+  const { chainId } = useActiveWeb3React()
+
   const { data } = useSWR(
     shouldFetch ? ['factory', chainId, stringify(variables)] : null,
     () => getFactory(chainId, variables),
@@ -35,11 +36,12 @@ export function useFactory({
 }
 
 export function useNativePrice({
-  chainId = ChainId.FANTOM,
   variables,
   shouldFetch = true,
   swrConfig = undefined,
 }: GraphProps) {
+  const { chainId } = useActiveWeb3React()
+
   const { data } = useSWR(
     shouldFetch ? ['nativePrice', chainId, stringify(variables)] : null,
     () => getNativePrice(chainId, variables),
@@ -50,7 +52,9 @@ export function useNativePrice({
 }
 
 export function useEthPrice(variables = undefined, swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR(['ethPrice'], () => getNativePrice(variables), swrConfig)
+  const { chainId } = useActiveWeb3React()
+
+  const { data } = useSWR(['ethPrice'], () => getNativePrice(chainId, variables), swrConfig)
   return data
 }
 
@@ -67,17 +71,20 @@ export function useSoulPrice(swrConfig: SWRConfiguration = undefined) {
 }
 
 export function useBundle(variables = undefined, swrConfig: SWRConfiguration = undefined) {
-  const { chainId } = useActiveWeb3React()
-  const { data } = useSWR(chainId ? [chainId, ethPriceQuery, stringify(variables)] : null, () => getBundle(), swrConfig)
+  const chainId = useActiveWeb3React()
+  const { data } = useSWR(chainId ? [chainId, ethPriceQuery, stringify(variables)] : null, () => getBundle(
+    chainId,
+  ), swrConfig)
   return data
 }
 
 export function useLiquidityPositions({
-  chainId = ChainId.FANTOM,
   variables,
   shouldFetch = true,
   swrConfig = undefined,
 }: GraphProps) {
+  const { chainId } = useActiveWeb3React()
+
   const { data } = useSWR(
     shouldFetch ? ['liquidityPositions', chainId, stringify(variables)] : null,
     (_, chainId) => getLiquidityPositions(chainId, variables),
@@ -87,11 +94,11 @@ export function useLiquidityPositions({
 }
 
 export function useSoulPairs({
-  chainId = ChainId.FANTOM,
   variables,
   shouldFetch = true,
   swrConfig = undefined,
 }: GraphProps) {
+  const { chainId } = useActiveWeb3React()
   const { data } = useSWR(
     shouldFetch ? ['soulPairs', chainId, stringify(variables)] : null,
     (_, chainId) => getPairs(chainId, variables),
@@ -101,25 +108,33 @@ export function useSoulPairs({
 }
 
 export function useTokens({
-  chainId = ChainId.FANTOM,
+  // chainId,
   variables,
   shouldFetch = true,
   swrConfig = undefined,
 }: GraphProps) {
-  const { data } = useSWR(
-    shouldFetch ? ['tokens', chainId, stringify(variables)] : null,
-    (_, chainId) => getTokens(chainId, variables),
-    swrConfig
-  )
+  const { chainId } = useActiveWeb3React()
+  const { data } = useSWR(chainId ? [chainId, tokensQuery, stringify(variables)] : null, () => getTokens(
+    chainId,
+    variables
+  ), swrConfig)
   return data
+
+  // const { data } = useSWR(
+  //   shouldFetch ? ['tokens', chainId, stringify(variables)] : null,
+  //   (_, chainId) => getTokens(chainId, variables),
+  //   swrConfig
+  // )
+  // return data
 }
 
 export function usePairDayData({
-  chainId = ChainId.FANTOM,
   variables,
   shouldFetch = true,
   swrConfig = undefined,
 }: GraphProps) {
+  const { chainId } = useActiveWeb3React()
+
   const { data } = useSWR(
     shouldFetch && !!chainId ? ['pairDayData', chainId, stringify(variables)] : null,
     (_, chainId) => getPairDayData(chainId, variables),
@@ -129,9 +144,11 @@ export function usePairDayData({
 }
 
 export function useTokenDayData(
-  { chainId, variables, shouldFetch = true }: GraphProps,
+  { variables, shouldFetch = true }: GraphProps,
   swrConfig: SWRConfiguration = undefined
 ) {
+  const { chainId } = useActiveWeb3React()
+
   const { data } = useSWR(
     shouldFetch && !!chainId ? ['tokenDayData', chainId, stringify(variables)] : null,
     (_, chainId) => getTokenDayData(chainId, variables),
@@ -140,7 +157,9 @@ export function useTokenDayData(
   return data
 }
 
-export function useDayData({ chainId, variables, shouldFetch = true, swrConfig = undefined }: GraphProps) {
+export function useDayData({ variables, shouldFetch = true, swrConfig = undefined }: GraphProps) {
+  const { chainId } = useActiveWeb3React()
+
   const { data } = useSWR(
     shouldFetch && !!chainId ? ['dayData', chainId, stringify(variables)] : null,
     (_, chainId) => getDayData(chainId, variables),
@@ -150,11 +169,12 @@ export function useDayData({ chainId, variables, shouldFetch = true, swrConfig =
 }
 
 export function useTokenPairs({
-  chainId = ChainId.FANTOM,
   variables,
   shouldFetch = true,
   swrConfig = undefined,
 }: GraphProps) {
+  const { chainId } = useActiveWeb3React()
+
   const { data } = useSWR(
     shouldFetch ? ['tokenPairs', chainId, stringify(variables)] : null,
     (_, chainId) => getTokenPairs(chainId, variables),

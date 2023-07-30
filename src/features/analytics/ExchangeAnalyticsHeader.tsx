@@ -1,5 +1,5 @@
 import { getChainColorCode } from "constants/chains";
-import { useActiveWeb3React } from "hooks";
+import { useActiveWeb3React } from "services/web3";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
