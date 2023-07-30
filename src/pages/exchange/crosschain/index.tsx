@@ -20,7 +20,6 @@ import { Feature } from 'enums'
 import { useTokenBalance } from 'state/wallet/hooks'
 // import {SquidWidget} from '@0xsquid/widget'
 // import { useTokenBalance } from 'state/wallet/hooks'
-// import { useTokenPrice } from 'hooks/getPrices'
 // import { usePrice } from 'hooks'
 
 // import styled from 'styled-components'

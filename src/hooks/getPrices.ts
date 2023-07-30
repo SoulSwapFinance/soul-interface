@@ -67,7 +67,7 @@ export const getTokenSubset = async (chainId, variables) => {
   return tokens
 }
 
-export const getTokens = async (chainId = ChainId.FANTOM, variables) => {
+export const getTokens = async (chainId, variables) => {
   // console.log('getTokens')
   const { tokens } = await exchange(chainId, tokensQuery, variables)
   return tokens
@@ -102,7 +102,7 @@ export const getTokenPrices = async (chainId, variables) => {
 
 // √ reports chainId
 export const getTokenPrice = async (chainId, query, variables) => {
-  console.log('getTokenPrice')
+  console.log('hooks: getTokenPrice')
   console.log('chain', chainId)
   const nativePrice = await getNativePrice(chainId)
 
@@ -189,25 +189,6 @@ export const getFantomPrice = async () => {
   })
 }
 
-export const getBinancePrice = async () => {
-  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: '0xd67de0e0a0fd7b15dc8348bb9be742f3c5850454',
-  })
-}
-
-export const getWrappedEthPrice = async () => {
-  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: WETH_ADDRESS[ChainId.FANTOM].toLowerCase(),
-  })
-}
-
-export const getWrappedBtcPrice = async () => {
-  const { chainId } = useActiveWeb3React()
-  return getTokenPrice(chainId, tokenPriceQuery, {
-    id: WBTC_ADDRESS[chainId].toLowerCase(),
-  })
-}
-
 export function getTokensPrice(chainId, address: string) {
   // const { chainId } = useActiveWeb3React()
   return getTokenPrice(chainId, tokenPriceQuery, {
@@ -238,13 +219,15 @@ export const getBundle = async (
   return exchange(chainId, query, variables)
 }
 
-// @ts-ignore TYPE NEEDS FIXING
 export const getLiquidityPositions = async (chainId, variables) => {
   const { liquidityPositions } = await exchange(chainId, liquidityPositionsQuery, variables)
   return liquidityPositions
 }
 
+// √ works
 export const getDayData = async (chainId, variables = undefined) => {
+  // console.log('getDayData')
+  // console.log('chain', chainId)
   const { dayDatas } = await exchange(chainId, dayDatasQuery, variables)
   return dayDatas
 }
@@ -294,6 +277,21 @@ export function useTokenPrice(tokenAddress: string, swrConfig: SWRConfiguration 
   return data
 }
 
+// export function useTokenPrice({
+//   // chainId,
+//   variables,
+//   shouldFetch = true,
+//   swrConfig = undefined,
+// }: GraphProps) {
+//   const { chainId } = useActiveWeb3React()
+//   const { data } = useSWR(chainId ? [chainId, tokenPriceQuery, stringify(variables)] : null, () => getTokenPrice(
+//     chainId,
+//     tokenPriceQuery,
+//     variables
+//   ), swrConfig)
+//   return data
+// }
+
 // reserveUSD
 export function usePairPrice(chainId, pairAddress: string, swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(['pairPrice'], () => getPairsPrice(chainId, pairAddress), swrConfig)
@@ -322,21 +320,6 @@ export function useEnchantPrice(swrConfig: SWRConfiguration = undefined) {
 
 export function useFantomPrice(swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(['fantomPrice'], () => getFantomPrice(), swrConfig)
-  return data
-}
-
-export function useBinancePrice(swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR(['binancePrice'], () => getBinancePrice(), swrConfig)
-  return data
-}
-
-export function useWrappedEthPrice(swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR(['wethPrice'], () => getWrappedEthPrice(), swrConfig)
-  return data
-}
-
-export function useWrappedBtcPrice(swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR(['btcPrice'], () => getWrappedBtcPrice(), swrConfig)
   return data
 }
 

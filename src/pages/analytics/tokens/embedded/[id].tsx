@@ -11,7 +11,7 @@ import ChartCard from 'features/analytics/ChartCard'
 // import { formatNumber } from 'functions/format'
 // import { useCurrency } from 'hooks/Tokens'
 import { useTokenContract } from 'hooks/useContract'
-import useCopyClipboard from 'hooks/useCopyClipboard'
+// import useCopyClipboard from 'hooks/useCopyClipboard'
 // import Image from 'next/image'
 import {
   useNativePrice,

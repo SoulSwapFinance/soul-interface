@@ -158,7 +158,7 @@ const DesktopBar: FC = () => {
                         </div> */}
                         <div className={`grid ${
                             chainId == ChainId.FANTOM ? 'grid-cols-5' 
-                            : 'grid-cols-3'} w-full items-center`
+                            : 'grid-cols-4'} w-full items-center`
                             }
                         >
                         <div

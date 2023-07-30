@@ -10,7 +10,7 @@ import { VAULTS } from '../constants/vaults'
 import { useActiveWeb3React } from 'services/web3'
 import { SOUL_BOND_ADDRESS } from 'sdk'
 import { BONDS } from 'constants/bonds'
-import { useTokenPrice, useLuxorPrice, useSoulPrice, useWrappedEthPrice } from './getPrices'
+import { useLuxorPrice } from './getPrices'
 import { useBondInfo, useTokenInfo } from './useAPI'
 
 const PAIR_INTERFACE = new Interface(ISoulSwapPair)

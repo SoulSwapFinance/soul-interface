@@ -1,6 +1,6 @@
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
-import { ChainId, Currency, CurrencyAmount, Token, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
+import { BNB_ADDRESS, ChainId, Currency, CurrencyAmount, Token, WBTC_ADDRESS, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import selectCoinAnimation from 'animation/select-coin.json'
 import { Button } from 'components/Button'
 import Chip from 'components/Chip'
@@ -19,7 +19,7 @@ import { useActiveWeb3React } from 'services/web3'
 import Lottie from 'lottie-react'
 
 import React, { createContext, FC, ReactNode, useContext, useEffect, useMemo, useRef, useState } from 'react'
-import { useBinancePrice, useTokenPrice, useWrappedBtcPrice } from 'hooks/getPrices'
+import { useTokenPrice } from 'hooks/getPrices'
 import { usePairPrice } from 'hooks/usePairData'
 
 interface AssetInputProps {
@@ -208,8 +208,8 @@ const AssetInputPanel = ({
   const nativePrice = useTokenPrice(WNATIVE_ADDRESS[chainId])
   const ftmPrice = useTokenPrice(WNATIVE_ADDRESS[chainId])
   // const nativePrice = Number(usePriceUSD(WNATIVE_ADDRESS[chainId]).price)
-  const btcPrice = useWrappedBtcPrice()
-  const bnbPrice = useBinancePrice()
+  const btcPrice = useTokenPrice(WBTC_ADDRESS[chainId])
+  const bnbPrice = useTokenPrice(BNB_ADDRESS[chainId])
  
   // const usdValue = usePrice(currency.toString())
   const span = useRef<HTMLSpanElement | null>(null)

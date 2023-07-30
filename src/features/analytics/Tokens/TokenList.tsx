@@ -4,12 +4,15 @@ import Table, { Column } from 'components/Table'
 import { formatNumber, formatPercent } from 'functions'
 import { useCurrency } from 'hooks/Tokens'
 import React from 'react'
-import { useActiveWeb3React } from 'services/web3'
+// import { useActiveWeb3React } from 'services/web3'
 import LineGraph from 'components/LineGraph'
 
 import ColoredNumber from '../ColoredNumber'
+import { useActiveWeb3React } from 'services/web3'
+import { ChainId } from 'sdk'
 
-type TokenListColumnType = 'name' | 'price' | 'liquidity' | 'priceChange' | 'volumeChange' | 'lastWeekGraph'
+type TokenListColumnType = 'name' | 'price' | 'liquidity' | 'volumeChange' | 'lastWeekGraph' // priceChange
+type SomeTokenListColumnType = 'name' | 'price' | 'liquidity' | 'lastWeekGraph'
 
 interface Token {
   token: {
@@ -27,6 +30,7 @@ interface Token {
 interface TokenListProps {
   tokens: Token[]
   enabledColumns?: TokenListColumnType[]
+  someEnabledColumns?: TokenListColumnType[]
 }
 
 interface TokenListNameProps {
@@ -52,14 +56,19 @@ function TokenListName({ token }: TokenListNameProps): JSX.Element {
 export default function TokenList({
   tokens,
   enabledColumns = Object.keys(TokenListColumns) as TokenListColumnType[],
+  someEnabledColumns = Object.keys(SomeTokenListColumns) as SomeTokenListColumnType[],
 }: TokenListProps): JSX.Element {
   const columns = React.useMemo<Column[]>(() => enabledColumns.map((col) => TokenListColumns[col]), [enabledColumns])
+  const someColumns = React.useMemo<Column[]>(() => someEnabledColumns.map((col) => SomeTokenListColumns[col]), [someEnabledColumns])
+  const {chainId} = useActiveWeb3React()
 
   return (
     <>
       {tokens && (
         <Table<Token>
-          columns={columns}
+          columns={
+            chainId == ChainId.FANTOM ? columns : someColumns
+          }
           data={tokens}
           defaultSortBy={{ id: 'liquidity', desc: true }}
           link={{ href: '/analytics/tokens/', id: 'token.id' }}
@@ -70,6 +79,7 @@ export default function TokenList({
 }
 
 const TokenListColumns: Record<TokenListColumnType, Column> = {
+
   name: {
     Header: 'Name',
     accessor: 'token',
@@ -89,20 +99,20 @@ const TokenListColumns: Record<TokenListColumnType, Column> = {
     Cell: (props) => formatNumber(props.value, true, false),
     align: 'right',
   },
-  priceChange: {
-    Header: '% Change',
-    accessor: (row) => (
-      <div>
-        <ColoredNumber className="font-medium" number={row.change1d} percent={true} />
-        <div className="font-normal">
-          {row.change1w > 0 && '+'}
-          {formatPercent(row.change1w)}
-        </div>
-      </div>
-    ),
-    align: 'right',
-    sortType: (a, b) => a.original.change1d - b.original.change1d,
-  },
+  // priceChange: {
+  //   Header: '% Change',
+  //   accessor: (row) => (
+  //     <div>
+  //       <ColoredNumber className="font-medium" number={row.change1d} percent={true} />
+  //       <div className="font-normal">
+  //         {row.change1w > 0 && '+'}
+  //         {formatPercent(row.change1w)}
+  //       </div>
+  //     </div>
+  //   ),
+  //   align: 'right',
+  //   sortType: (a, b) => a.original.change1d - b.original.change1d,
+  // },
   volumeChange: {
     Header: 'Volume',
     accessor: (row) => (
@@ -111,6 +121,45 @@ const TokenListColumns: Record<TokenListColumnType, Column> = {
         <div className="font-normal text-primary">{formatNumber(row.volume1w, true, false)}</div>
       </div>
     ),
+    align: 'right',
+  },
+  lastWeekGraph: {
+    Header: 'Last Week',
+    accessor: 'graph',
+    Cell: (props) => (
+      <div className="flex justify-end w-full h-full py-2 pr-2">
+        { props.row.original.volume1d >= 0 ?
+        <div className="w-32 h-10">
+          <LineGraph data={props.value} stroke={{ solid: props.row.original.change1w >= 0 ? '#00ff4f' : '#ff3838' }} />
+        </div>
+          : undefined
+        }
+      </div>
+    ),
+    disableSortBy: true,
+    align: 'right',
+  },
+}
+
+const SomeTokenListColumns: Record<SomeTokenListColumnType, Column> = {
+
+  name: {
+    Header: 'Name',
+    accessor: 'token',
+    Cell: (props) => <TokenListName token={props.value} />,
+    disableSortBy: true,
+    align: 'left',
+  },
+  price: {
+    Header: 'Price',
+    accessor: 'price',
+    Cell: (props) => formatNumber(props.value, true, undefined),
+    align: 'right',
+  },
+  liquidity: {
+    Header: 'Liquidity',
+    accessor: 'liquidity',
+    Cell: (props) => formatNumber(props.value, true, false),
     align: 'right',
   },
   lastWeekGraph: {

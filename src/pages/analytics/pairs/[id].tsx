@@ -11,7 +11,7 @@ import { getExplorerLink } from 'functions/explorer'
 import { formatNumber, shortenAddress } from 'functions/format'
 import { useCurrency } from 'hooks/Tokens'
 // import useCopyClipboard from 'hooks/useCopyClipboard'
-import { useNativePrice, useOneDayBlock, usePairDayData, useSoulPairs, useTwoDayBlock } from 'services/graph'
+import { useNativePrice, useOneDayBlock, usePairDayData, usePairs, useTwoDayBlock } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
 import { times } from 'lodash'
 import Link from 'next/link'
@@ -75,13 +75,13 @@ function Pair({ inputCurrency, outputCurrency, pairAddress }: PairProps) {
   const block1d = useOneDayBlock({ chainId, shouldFetch: !!chainId })
   const block2d = useTwoDayBlock({ chainId, shouldFetch: !!chainId })
 
-  const pair = useSoulPairs({ chainId, variables: { where: { id } }, shouldFetch: !!chainId })?.[0]
-  const pair1d = useSoulPairs({
+  const pair = usePairs({ chainId, variables: { where: { id } }, shouldFetch: !!chainId })?.[0]
+  const pair1d = usePairs({
     chainId,
     variables: { block: block1d, where: { id } },
     shouldFetch: !!chainId && !!block1d,
   })?.[0]
-  const pair2d = useSoulPairs({
+  const pair2d = usePairs({
     chainId,
     variables: { block: block2d, where: { id } },
     shouldFetch: !!chainId && !!block2d,
