@@ -139,8 +139,7 @@ function CoffinBox(): JSX.Element {
       </div>
       <div className="py-6 space-y-4 text-2xl font-bold text-high-emphesis lg:px-14">Tokens</div>
       <div className="pt-4 lg:px-14">
-        <TokenList tokens={searched} enabledColumns={['name', 'liquidity', 'price', 'priceChange'
-        ]} 
+        <TokenList tokens={searched} enabledColumns={['name', 'liquidity', 'price']} 
         />
       </div>
     </AnalyticsContainer>

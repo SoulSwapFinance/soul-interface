@@ -11,7 +11,7 @@ import ChartCard from 'features/analytics/ChartCard'
 // import { formatNumber } from 'functions/format'
 // import { useCurrency } from 'hooks/Tokens'
 import { useTokenContract } from 'hooks/useContract'
-import useCopyClipboard from 'hooks/useCopyClipboard'
+// import useCopyClipboard from 'hooks/useCopyClipboard'
 // import Image from 'next/image'
 import {
   useNativePrice,
@@ -76,29 +76,28 @@ function Token({ outputCurrency }: TokenProps) {
 
   useEffect(() => {
     const fetch = async () => {
-      /* @ts-ignore TYPE NEEDS FIXING */
       setTotalSupply(await tokenContract?.totalSupply())
       setTokenDecimals(await tokenContract?.decimals())
     }
     fetch()
   }, [tokenContract, tokenDecimals])
 
-  const block1d = useOneDayBlock({ chainId })
-  const block2d = useTwoDayBlock({ chainId })
+  const block1d = useOneDayBlock({ chainId: chainId })
+  const block2d = useTwoDayBlock({ chainId: chainId })
   // const block1w = useOneWeekBlock({ chainId })
 
   // General data (volume, liquidity)
-  const nativePrice = useNativePrice({ chainId })
+  const nativePrice = useNativePrice({ chainId: chainId })
   const nativePrice1d = useNativePrice({ chainId, variables: { block: block1d }, shouldFetch: !!block1d })
 
-  const token = useTokens({ chainId, variables: { where: { id } }, shouldFetch: !!id })?.[0]
+  const token = useTokens({ chainId: chainId, variables: { where: { id } }, shouldFetch: !!id })?.[0]
   const token1d = useTokens({
-    chainId,
+    chainId: chainId,
     variables: { block: block1d, where: { id } },
     shouldFetch: !!id && !!block1d,
   })?.[0]
   const token2d = useTokens({
-    chainId,
+    chainId: chainId,
     variables: { block: block2d, where: { id } },
     shouldFetch: !!id && !!block2d,
   })?.[0]

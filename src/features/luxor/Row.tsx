@@ -54,7 +54,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(stakeToken)
     const [showing, setShowing] = useState(false)
     const BondContract = useLuxorBondContract()
-    const BondContractAddress = bondAddress
+    // const BondContractAddress = bondAddress
     const [approved, setApproved] = useState(false)
     const [depositValue, setDepositValue] = useState('')
     const assetToken = new Token(ChainId.FANTOM, assetAddress, 18, assetName)
@@ -68,7 +68,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     // const [available, setAvailabile] = useState(false)
     // const { deposit, withdraw } = useBondContract()
     const luxPrice = useLuxorPrice()
-    const wftmPrice = useTokenPrice(WNATIVE_ADDRESS[chainId])
+    const wftmPrice = useTokenPrice(WNATIVE_ADDRESS[ChainId.FANTOM])
     const luxDaiPrice = usePairPrice(LUX_DAI[ChainId.FANTOM]) // √
     // console.log('luxDaiPrice:%s', Number(luxDaiPrice))
     const luxFtmPrice = usePairPrice(LUX_NATIVE[ChainId.FANTOM]) // √

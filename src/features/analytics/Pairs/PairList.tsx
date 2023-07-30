@@ -5,6 +5,8 @@ import ColoredNumber from 'features/analytics/ColoredNumber'
 import { formatNumber, formatNumberScale, formatPercent } from 'functions'
 import { aprToApy } from 'functions/convert/apyApr'
 import { useCurrency } from 'hooks/Tokens'
+import { useActiveWeb3React } from 'services/web3'
+import { ChainId } from 'sdk'
 
 interface PairListProps {
   pairs: {
@@ -73,20 +75,20 @@ const allColumns = [
   {
     Header: 'Pair',
     accessor: 'pair',
-    Cell: (props) => <PairListName pair={props.value} />,
+    Cell: (pairs) => <PairListName pair={pairs.value} />,
     align: 'left',
   },
   {
     Header: 'TVL',
     accessor: 'liquidity',
-    Cell: (props) => formatNumberScale(props.value, true),
+    Cell: (pairs) => formatNumberScale(pairs.value, true),
     align: 'right',
   },
   {
     Header: 'APY',
     accessor: (row) => <div className="text-high-emphesis">{getApy(row.volume1w, row.liquidity)}</div>,
     align: 'right',
-    sortType: (a, b) => a.original.volume1w / a.original.liquidity - b.original.volume1w / b.original.liquidity,
+    sortType: (a, b) => a.original.volume1w / a.original.liquidity - b.original.volume1w / b.original.liquidity
   },
   {
     Header: 'Volume',
@@ -108,6 +110,21 @@ const allColumns = [
     ),
     align: 'right',
   },
+]
+
+const someColumns = [
+  {
+    Header: 'Pair',
+    accessor: 'pair',
+    Cell: (pairs) => <PairListName pair={pairs.value} />,
+    align: 'left',
+  },
+  {
+    Header: 'TVL',
+    accessor: 'liquidity',
+    Cell: (pairs) => formatNumberScale(pairs.value, true),
+    align: 'right',
+  }
 ]
 
 const gainersColumns = [
@@ -174,6 +191,8 @@ const gainersColumns = [
 ]
 
 export default function PairList({ pairs, type }: PairListProps): JSX.Element {
+  const { chainId } = useActiveWeb3React()
+
   const defaultSortBy = React.useMemo(() => {
     switch (type) {
       case 'all':
@@ -188,7 +207,7 @@ export default function PairList({ pairs, type }: PairListProps): JSX.Element {
   const columns = React.useMemo(() => {
     switch (type) {
       case 'all':
-        return allColumns
+        return chainId == ChainId.FANTOM ? allColumns : someColumns
       case 'gainers':
         return gainersColumns
       case 'losers':

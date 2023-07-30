@@ -65,7 +65,7 @@ const features: FeatureMap = {
     Feature.SWAP,
     Feature.BRIDGE,
     Feature.CROSSCHAIN,
-    // Feature.ANALYTICS,
+    Feature.ANALYTICS,
     Feature.LIQUIDITY,
     Feature.LIQUIDITY_MINING,
     Feature.BONDS,
