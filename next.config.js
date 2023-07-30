@@ -215,8 +215,8 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/bonds',
-        destination: '/bond',
+        source: '/bond',
+        destination: '/bonds',
         permanent: true,
       },
       {
@@ -280,8 +280,8 @@ const nextConfig = {
           destination: '/exchange/pool',
         },
         {
-          source: '/bonds',
-          destination: '/bond',
+          source: '/bond',
+          destination: '/bonds',
         },
         {
           source: '/user',
