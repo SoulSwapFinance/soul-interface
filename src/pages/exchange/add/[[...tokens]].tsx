@@ -541,7 +541,10 @@ export default function Add() {
           )}
           {/* </div> */}
           <div className={"grid grid-cols-1 text-white justify-center m-2"}>
-            <NavLink href="/pool">
+            <NavLink 
+              legacyBehavior={true}
+              href="/pool"
+            >
               <Button
                 variant={'filled'}
                 color={`${getChainColorCode(chainId)}`}
