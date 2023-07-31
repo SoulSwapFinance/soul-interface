@@ -26,29 +26,37 @@ export const ImportToken: FC<ImportProps> = ({ tokens, onBack }) => {
   return (
     <div className="flex flex-col gap-4">
       <HeadlessUiModal.Header header={`Import token`} onClose={onDismiss} onBack={onBack} />
-      <HeadlessUiModal.BorderedContent className="flex flex-col gap-4 divide-y divide-gray-700 !border-yellow/40">
-        <Typography variant="sm" weight={700} className="text-yellow">
-          {`This token doesn't appear on the active token list(s). Make sure this is the token that you want to trade.`}
+      <HeadlessUiModal.BorderedContent className="flex flex-col gap-4 divide-y divide-gray-700 !border-avaxRed">
+        <Typography variant="sm" weight={700} className="text-avaxRed justify-center text-center">
+          {`This token doesn't appear on your token list(s). Ensure this is the intended token.`}
         </Typography>
         {tokens.map((token) => {
           return (
             <div key={'import' + token.address} className=".token-warning-container flex flex-col gap-4 pt-4">
-              <div className="flex items-center gap-3">
+              <div className="flex justify-center items-center gap-4">
                 <CurrencyLogo currency={token} size={48} className="!rounded-full overflow-hidden" />
                 <div className="flex flex-col">
                   <div className="flex gap-2 items-center">
+                    <div
+                      className={'flex border hover:border-2 border-ftmBlue justify-center items-center rounded-full px-2 py-1 text-xs text-white'}
+                    >
                     <Typography variant="lg" weight={700}>
                       <ExternalLink href={getExplorerLink(chainId, token.address, 'address')} color="blue">
                         {shortenAddress(token.address)}
                       </ExternalLink>
                     </Typography>
-                    {importList !== undefined ? (
+                    </div>
+                    {/* {importList !== undefined ? (
                       <Chip icon={importList.logoURI} color="green" size="sm" label={importList.name} />
                     ) : (
-                      <Chip color="yellow" size="sm" label={`Unknown Source`}>
+                      <Chip 
+                        color="blue" size="sm" 
+                        className={'text-white'}
+                        label={`Unknown Source`}
+                      >
                         {`Unknown Source`}
                       </Chip>
-                    )}
+                    )} */}
                   </div>
                   <Typography variant="xs" weight={700} component="span">
                     {token.symbol}{' '}
@@ -69,7 +77,7 @@ export const ImportToken: FC<ImportProps> = ({ tokens, onBack }) => {
           tokens.map((token) => addToken(token))
           onSelect && onSelect(tokens[0])
         }}
-        className=".token-dismiss-button"
+        className=".token-dismiss-button text-sm text-white"
       >
         {`Import`}
       </Button>

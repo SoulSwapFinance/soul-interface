@@ -43,7 +43,7 @@ export const SUPPORTED_NETWORKS: Record<
       symbol: 'FTM',
       decimals: 18,
     },
-    rpcUrls: ['https://rpc.ankr.com/fantom', 'https://rpcapi.fantom.network'],
+    rpcUrls: ['https://rpc.ftm.tools', 'https://rpc.ankr.com/fantom', 'https://rpcapi.fantom.network'],
     blockExplorerUrls: ['https://ftmscan.com'],
   },
   [ChainId.BSC]: {
@@ -69,14 +69,16 @@ export const SUPPORTED_NETWORKS: Record<
     blockExplorerUrls: ['https://polygonscan.com'],
   },
   [ChainId.AVALANCHE]: {
-    chainId: '0xA86A',
+    chainId: '0xa86a',
     chainName: 'Avalanche Mainnet C-Chain',
     nativeCurrency: {
       name: 'Avalanche Token',
       symbol: 'AVAX',
       decimals: 18,
     },
-    rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
+    // rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
+    // rpcUrls: ['https://https://rpc.ankr.com/avalanche', 'https://mainnet-avalanche.wallet.brave.com/'],
+    rpcUrls: ['https://https://rpc.ankr.com/avalanche'],
     blockExplorerUrls: ['https://snowtrace.io'],
   },
   [ChainId.ARBITRUM]: {
@@ -115,7 +117,7 @@ export const SUPPORTED_NETWORKS: Record<
 }
 
 // const NetworkModal: FC<{ switchNetwork: (targetChain: number) => void }> = ({ switchNetwork }) => {
-  const NetworkModal: FC<{ switchNetwork: (targetChain: number) => void }> = ({ switchNetwork }) => {
+const NetworkModal: FC<{ switchNetwork: (targetChain: number) => void }> = ({ switchNetwork }) => {
   const { chainId } = useActiveWeb3React()
   const networkModalOpen = useModalOpen(ApplicationModal.NETWORK)
   // const [isShowing, setShowing] = useState(false)
@@ -124,11 +126,11 @@ export const SUPPORTED_NETWORKS: Record<
   if (!chainId) return null
 
   return (
-    <HeadlessUiModal.Controlled 
-    isOpen={networkModalOpen}
-    chainId={chainId}
-    onDismiss={toggleNetworkModal}>      
-    <div className="flex flex-col gap-4">
+    <HeadlessUiModal.Controlled
+      isOpen={networkModalOpen}
+      chainId={chainId}
+      onDismiss={toggleNetworkModal}>
+      <div className="flex flex-col gap-4">
         <HeadlessUiModal.Header header={`Select Network`} onClose={toggleNetworkModal} />
         <div className="grid grid-flow-row-dense grid-cols-1 gap-4 overflow-y-auto">
           {[
@@ -138,11 +140,6 @@ export const SUPPORTED_NETWORKS: Record<
             ChainId.FANTOM,
             // ChainId.MOONRIVER,
             ChainId.AVALANCHE,
-            // ChainId.BSC,
-            // ChainId.TELOS,
-            // ChainId.OKEX,
-            // ChainId.HECO,
-            // ChainId.PALM,
           ]
             // .sort((key) => (chainId === key ? -1 : 0))
             .map((key: number, i: number) => {
@@ -155,9 +152,9 @@ export const SUPPORTED_NETWORKS: Record<
                     <Image
                       src={NETWORK_ICON[key]}
                       alt="Switch Network"
-                      className="rounded-full"
-                      width={32}
-                      height={32}
+                      className="h-[36px] w-[36px]"
+                      width={36}
+                      height={36}
                     />
                     <Typography weight={700} className="text-high-emphesis">
                       {NETWORK_LABEL[key]}

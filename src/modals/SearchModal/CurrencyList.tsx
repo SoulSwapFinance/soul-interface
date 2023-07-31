@@ -13,7 +13,7 @@ import { useCombinedActiveList } from 'state/lists/hooks'
 import { WrappedTokenInfo } from 'state/lists/wrappedTokenInfo'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import React, { CSSProperties, FC, useMemo } from 'react'
-import AutoSizer from 'react-virtualized-auto-sizer'
+// import AutoSizer from 'react-virtualized-auto-sizer'
 import { FixedSizeList as List } from 'react-window'
 
 function currencyKey(currency: Currency): string {
@@ -115,6 +115,12 @@ function isBreakLine(x: unknown): x is BreakLine {
   return x === BREAK_LINE
 }
 
+// const widthSize = 
+//   Number(screen.width) <= 320 ? 230
+//   : Number(screen.width) <= 348 ? 248
+//   : Number(screen.width) <= 375 ? 286
+//   : 360
+
 const BreakLineComponent: FC<{ style: CSSProperties }> = ({ style }) => {
 
   return (
@@ -159,10 +165,18 @@ const CurrencyList: FC<CurrencyList> = ({ chainId, currencies, otherListTokens }
   }
 
   return (
-    <div id="all-currencies-list" className="flex flex-col flex-1 flex-grow h-full divide-y divide-dark-800">
+    <div 
+      id="all-currencies-list" 
+      // className="flex flex-col flex-1 flex-grow h-full divide-y divide-dark-800"
+      className="flex flex-col w-full"
+      >
       {/* <AutoSizer> */}
         {/* {({ height, width }) => ( */}
-          <List height={48} width={48} itemCount={itemData.length} itemSize={48}>
+          <List 
+            className={'flex sm:w-full'}
+            height={324}
+            // width={324} 
+            itemCount={itemData.length} itemSize={48}>
             {Row}
           </List>
           {/* )} */}

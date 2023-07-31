@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
-import { useFantomPrice, useLuxorPrice } from 'hooks/getPrices'
+import { useTokenPrice, useLuxorPrice } from 'hooks/getPrices'
 import { usePairPrice } from 'hooks/usePairData'
 import { useActiveWeb3React } from 'services/web3'
-import { ChainId, LUX_DAI, LUX_HELPER_ADDRESS, LUX_NATIVE, LUX_SOR, NATIVE, SOR_NATIVE, Token } from 'sdk'
+import { ChainId, LUX_DAI, LUX_HELPER_ADDRESS, LUX_NATIVE, LUX_SOR, NATIVE, SOR_NATIVE, Token, WNATIVE_ADDRESS } from 'sdk'
 import AssetInput from 'components/AssetInput'
 import { useLuxorBondContract } from 'hooks/useContract'
 import useApprove from 'hooks/useApprove'
@@ -54,7 +54,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     const { erc20Allowance, erc20Approve, erc20BalanceOf } = useApprove(stakeToken)
     const [showing, setShowing] = useState(false)
     const BondContract = useLuxorBondContract()
-    const BondContractAddress = bondAddress
+    // const BondContractAddress = bondAddress
     const [approved, setApproved] = useState(false)
     const [depositValue, setDepositValue] = useState('')
     const assetToken = new Token(ChainId.FANTOM, assetAddress, 18, assetName)
@@ -68,7 +68,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
     // const [available, setAvailabile] = useState(false)
     // const { deposit, withdraw } = useBondContract()
     const luxPrice = useLuxorPrice()
-    const wftmPrice = useFantomPrice()
+    const wftmPrice = useTokenPrice(WNATIVE_ADDRESS[ChainId.FANTOM])
     const luxDaiPrice = usePairPrice(LUX_DAI[ChainId.FANTOM]) // √
     // console.log('luxDaiPrice:%s', Number(luxDaiPrice))
     const luxFtmPrice = usePairPrice(LUX_NATIVE[ChainId.FANTOM]) // √

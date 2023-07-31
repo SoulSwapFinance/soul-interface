@@ -61,6 +61,7 @@ import {
   MANIFESTER_ADDRESS,
   MARKET_UPDATER_ADDRESS,
   REFUNDER_ADDRESS,
+  LUXOR_REEFUNDER_ADDRESS,
 } from 'sdk'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from 'constants/multicall'
 import SOUL_BOND_ABI from 'constants/abis/soulbond.json' 
@@ -76,8 +77,9 @@ import SPOOKY_FACTORY_ABI from 'constants/abis/spookyswap-factory.json'
 import SOUL_CIRCLE_ABI from 'constants/abis/soulswap/soulcircle.json' 
 import LUX_HELPER_ABI from 'constants/abis/lux-bond-helper.json' 
 import CHAINLINK_ORACLE_ABI from 'constants/abis/chainlink-oracle.json'
+import PRICE_ORACLE_ABI from 'constants/abis/price-oracle.json'
 import COMPLEX_REWARDER_ABI from 'constants/abis/complex-rewarder.json'
-import ONCHAIN_AGGREGATOR_ORACLE_ABI from 'constants/abis/onchain-oracle.json'
+// import ONCHAIN_AGGREGATOR_ORACLE_ABI from 'constants/abis/onchain-oracle.json'
 import OFFCHAIN_AGGREGATOR_ORACLE_ABI from 'constants/abis/offchain-oracle.json'
 import { Contract } from '@ethersproject/contracts'
 import DASHBOARD_ABI from 'constants/abis/dashboard.json'
@@ -91,6 +93,7 @@ import ISoulSwapPairABI from 'constants/abis/soulswap/ISoulSwapPair.json'
 import AUTO_STAKE_ABI from 'constants/abis/soulswap/autostake.json'
 import UNDERWORLD_ABI from 'constants/abis/underworldpair.json'
 import BALANCES_FETCHER_ABI from 'constants/abis/balancesfetcher.json'
+import LUXOR_REFUNDER_ABI from 'constants/abis/luxor-refunder.json'
 
 // soul
 import SOUL_SAFE_ABI from 'constants/abis/soulswap/safe.json'
@@ -271,6 +274,10 @@ export function useMulticallContract(): Contract | null {
 export function useBalancesFetcherContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && BALANCES_FETCHER_ADDRESS[chainId], BALANCES_FETCHER_ABI, false)
+}
+
+export function useLuxorRefunderContract(): Contract | null {
+  return useContract(LUXOR_REEFUNDER_ADDRESS[ChainId.FANTOM], LUXOR_REFUNDER_ABI, true)
 }
 
 export function useMulticall2Contract() {
@@ -514,6 +521,10 @@ export function useSoulSwapSwapper(): Contract | null {
 export function useChainlinkOracle(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(CHAINLINK_ORACLE_ADDRESS[chainId], CHAINLINK_ORACLE_ABI, false)
+}
+
+export function usePriceOracle(oracleAddress: string): Contract | null {
+  return useContract(oracleAddress, PRICE_ORACLE_ABI, false)
 }
 
 // experimental:

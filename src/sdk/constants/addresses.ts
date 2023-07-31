@@ -247,7 +247,7 @@ export const BTC_NATIVE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '',
+  [ChainId.FANTOM]: '0x44DF3a3b162826D7354b4e2495AEF097B6862069',   // axlWBTC
   [ChainId.AVALANCHE]: '0x8C162C3Bdd7354b5Cb1A0b18eDBB5725CFE762A3',
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
@@ -258,7 +258,7 @@ export const ETH_NATIVE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: undefined,
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '',
+  [ChainId.FANTOM]: '0x9827713159B666855BdfB53CE0F16aA7b0E30847', // axlETH
   [ChainId.AVALANCHE]: '0x5796Bf89f6C7C47811E4E59Ecd7aCACC8A5B9dEF',
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
@@ -404,6 +404,39 @@ export const CHAINLINK_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
+export const BTC_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '0xf4030086522a5beea4988f8ca5b36dbc97bee88c',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x8e94c22142f4a64b99022ccdd994f4e9ec86e4b4',
+  [ChainId.AVALANCHE]: '0x2779d32d5166baaa2b2b658333ba7e6ec0c65743',
+  [ChainId.MATIC]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
+
+export const AVAX_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '',
+  [ChainId.AVALANCHE]: '0x0a77230d17318075983913bc2145db16c7366156',
+  [ChainId.MATIC]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
+
+export const ETH_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0x11ddd3d147e5b83d01cee7070027092397d63658',
+  [ChainId.AVALANCHE]: '0x976b3d034e162d8bd72d6b9c989d545b839003b0',
+  [ChainId.MATIC]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
+
 export const ENCHANT_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
@@ -505,15 +538,19 @@ export const BALANCES_FETCHER_ADDRESS: { [chainId in ChainId]: string } = {
 }
   
 export const DEFAULT_RECEIVER_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '0xf4943f2dEc7E4914067CdF4120E8A322bc8f5a36',
+  [ChainId.FANTOM]: '0x612D3c387c2A483084D68061c753Ce1AD4e88bb6', // FEB22
   //   [ChainId.AVALANCHE]: '0x042c99C84b00f11A08a07AA9752E083261083A57',
-    [ChainId.FANTOM]: '0x612D3c387c2A483084D68061c753Ce1AD4e88bb6', // FEB22
-    [ChainId.ETHEREUM]: '0xf4943f2dEc7E4914067CdF4120E8A322bc8f5a36',
   }
   
 export const ADVANCED_RECEIVER_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '0xA32e906C31093aDbe581B913e549f70fD2fD7969',
+  [ChainId.FANTOM]: '0xd6AF3AAe2Aef4f1Acff9dD66f542ea863fBe9ae7', // FEB22
   //   [ChainId.AVALANCHE]: '0x50995361A1104B2E34d81771B2cf19BA55051C7c',
-    [ChainId.FANTOM]: '0xd6AF3AAe2Aef4f1Acff9dD66f542ea863fBe9ae7', // FEB22
-    [ChainId.ETHEREUM]: '0xA32e906C31093aDbe581B913e549f70fD2fD7969',
+  }
+
+  export const LUXOR_REEFUNDER_ADDRESS: AddressMap = {
+    [ChainId.FANTOM]: '0x1943c2Ff78c51230B3579E14B5c66562c4bb6640',
   }
   
 export const ROUND_UP_RECEIVER_ADDRESS: AddressMap = {
@@ -578,7 +615,8 @@ export const PRICE_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x51445B73852952128bFCAE65fdd889881D8d87Bd',
+  [ChainId.FANTOM]: '0x3bAAE1079Ca4e8a17E550C13F2b5cd7d80aa80D7',
+  // '0x51445B73852952128bFCAE65fdd889881D8d87Bd',
   [ChainId.AVALANCHE]: '0xbc83454171005a8eFd6aad89b637dDeB18473497',
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
@@ -637,46 +675,101 @@ export const USDT_ADDRESS: AddressMap = {
 export const WETH_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
   [ChainId.TELOS]: '',
-  [ChainId.FANTOM]: '0x74b23882a30290451A17c44f4F05243b6b58C76d',
+  [ChainId.FANTOM]: '0xfe7eDa5F2c56160d406869A8aA4B2F365d544C7B', //  axlETH
   [ChainId.BSC]: '',
   [ChainId.MATIC]: '',
   [ChainId.AVALANCHE]: '0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB',
   [ChainId.MOONRIVER]: '',
 }
 
+export const MULTI_WETH_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.FANTOM]: '0x74b23882a30290451A17c44f4F05243b6b58C76d',
+  [ChainId.BSC]: '',
+  [ChainId.MATIC]: '',
+  [ChainId.AVALANCHE]: '',
+  [ChainId.MOONRIVER]: '',
+}
+
+export const MULTI_WBTC_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.FANTOM]: '0x321162Cd933E2Be498Cd2267a90534A804051b11', // multiWBTC
+  [ChainId.BSC]: '',
+  [ChainId.MATIC]: '',
+  [ChainId.AVALANCHE]: '',
+  [ChainId.MOONRIVER]: '',
+}
+
+export const AXL_WBTC_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.TELOS]: '',
+  [ChainId.FANTOM]: '0x448d59B4302aB5d2dadf9611bED9457491926c8e', // axlWBTC
+  [ChainId.BSC]: '',
+  [ChainId.MATIC]: '',
+  [ChainId.AVALANCHE]: '',
+  [ChainId.MOONRIVER]: '',
+}
+
 export const WBTC_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599',
   [ChainId.TELOS]: '',
-  [ChainId.FANTOM]: '0x321162Cd933E2Be498Cd2267a90534A804051b11',
+  [ChainId.FANTOM]: AXL_WBTC_ADDRESS[ChainId.FANTOM], // 0x448d59B4302aB5d2dadf9611bED9457491926c8e // axlWBTC
   [ChainId.BSC]: '',
   [ChainId.MATIC]: '',
   [ChainId.AVALANCHE]: '0x50b7545627a5162F82A992c33b87aDc75187B218',
   [ChainId.MOONRIVER]: '',
 }
 
+export const MULTI_DAI_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E',
+  [ChainId.BSC]: '',
+  [ChainId.AVALANCHE]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.MATIC]: '',
+}
+
+export const AXL_DAI_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0xD5d5350F42CB484036A1C1aF5F2DF77eAFadcAFF',
+  [ChainId.BSC]: '',
+  [ChainId.AVALANCHE]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.MATIC]: '',
+}
+
 export const DAI_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
-  [ChainId.FANTOM]: '0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E',
+  [ChainId.FANTOM]: AXL_DAI_ADDRESS[ChainId.FANTOM],
   [ChainId.BSC]: '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3',
   [ChainId.AVALANCHE]: '0xd586E7F844cEa2F87f50152665BCbc2C279D8d70',
   [ChainId.MOONRIVER]: '0x80A16016cC4A2E6a2CACA8a4a498b1699fF0f844',
   [ChainId.MATIC]: '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063',
 }
 
-export const GRIMEVO_ADDRESS: AddressMap = {
-  [ChainId.FANTOM]: '0x0a77866C01429941BFC7854c0c0675dB1015218b'
-}
-
 export const LUM_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x4290b33158F429F40C0eDc8f9b9e5d8C5288800c'
+}
+
+export const MPX_ADDRESS: AddressMap = {
+  [ChainId.FANTOM]: '0x66eEd5FF1701E6ed8470DC391F05e27B1d0657eb'
 }
 
 export const FMULTI_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x6CEbb8cD66Fca7E6aca65841Ae3A04B7884F4de8'
 }
 
-export const AVAX_ADDRESS: AddressMap = {
+export const AXL_AVAX_ADDRESS: AddressMap = {
+  [ChainId.FANTOM]: '0x879e73005C36d9a549fFb9846851fe5d1d91b681',
+}
+export const MULTI_AVAX_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x511D35c52a3C244E7b8bd92c0C297755FbD89212',
+}
+
+export const AVAX_ADDRESS: AddressMap = {
+  [ChainId.FANTOM]: AXL_AVAX_ADDRESS[ChainId.FANTOM],
   [ChainId.AVALANCHE]: '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
 }
 
@@ -779,14 +872,32 @@ export const BTC_MUSDC: AddressMap = {
 
 export const ETH_USDC: AddressMap = {
   [ChainId.ETHEREUM]: '',
-  [ChainId.FANTOM]: '0x5b181BBc3Cc18C66B6f36f584866a1ff09865630',
+  [ChainId.FANTOM]: '',
   [ChainId.AVALANCHE]: '0x351C6327F9639664C7962B94570D1A19F47b3f44'
+}
+
+export const USDC_USDC: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0xBBdA07f2121274ecb1a08077F37A60F7E0D36629', // axlUSDC-lzUSDC
+  [ChainId.AVALANCHE]: ''
+}
+
+export const MULTI_ETH_USDC: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0x5b181BBc3Cc18C66B6f36f584866a1ff09865630',
+  [ChainId.AVALANCHE]: ''
 }
 
 export const ETH_NATIVE: AddressMap = {
   [ChainId.ETHEREUM]: '',
-  [ChainId.FANTOM]: '0xC615a5fd68265D9Ec6eF60805998fa5Bb71972Cb',
+  [ChainId.FANTOM]: '0x9827713159B666855BdfB53CE0F16aA7b0E30847', // axlETH
   [ChainId.AVALANCHE]: '0x5796Bf89f6C7C47811E4E59Ecd7aCACC8A5B9dEF' // SEP22
+}
+
+export const METH_NATIVE: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0xC615a5fd68265D9Ec6eF60805998fa5Bb71972Cb',
+  [ChainId.AVALANCHE]: ''
 }
 
 export const USDC_NATIVE: AddressMap = {
@@ -802,6 +913,12 @@ export const MUSDC_NATIVE: AddressMap = {
 }
 
 export const BTC_NATIVE: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0x44DF3a3b162826D7354b4e2495AEF097B6862069',   // axlWBTC
+  [ChainId.AVALANCHE]: '0x8C162C3Bdd7354b5Cb1A0b18eDBB5725CFE762A3' // SEP22
+}
+
+export const MBTC_NATIVE: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.FANTOM]: '0xecB41D6B5885E75a149EDA173e92267aa271D895',
   [ChainId.AVALANCHE]: '0x8C162C3Bdd7354b5Cb1A0b18eDBB5725CFE762A3' // SEP22
@@ -840,7 +957,7 @@ export const SOR_FTM: AddressMap = {
 export const SOR_NATIVE: AddressMap = {
   [ChainId.FANTOM]: '0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A',
 }
-export const BTC_ETH: AddressMap = {
+export const MULTI_BTC_ETH: AddressMap = {
   [ChainId.FANTOM]: '0x1FC954d3484bC21E0Ce53A6648a35BBfc03DC9D0',
 }
 export const AVAX_NATIVE: AddressMap = {

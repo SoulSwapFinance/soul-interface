@@ -21,6 +21,7 @@ import ExternalLink from 'components/ExternalLink'
 // import TokenStats from 'components/TokenStats' 
 import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
+import { BondsBanner } from 'components/Banner'
 
 export const BondList = () => {
   const { chainId } = useActiveWeb3React()
@@ -76,24 +77,7 @@ export const BondList = () => {
                   : 'hidden')
               }
           > */}
-              <Button
-                variant="filled"
-                // primaryColor={"#7G1BD9"}
-                className={`bg-purple rounded-xl p-4 mt-4 w-full animate-pulse`}
-                size="xl"
-                >
-            <ExternalLink
-              href="https://soulswapfinance.medium.com/owning-our-liquidity-via-our-innovative-soul-bonds-podl-592c2849ceed"
-              target="_blank"
-              rel="noreferrer"
-              >
-                <a 
-                  className="block text-md font-bold md:text-xl text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300"
-                  >
-                  <span> Read Before Bonding ↗</span>
-                </a>
-            </ExternalLink>
-            </Button>
+           <BondsBanner />
           {/* </div> */}
           {/* <div
               className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
@@ -107,33 +91,33 @@ export const BondList = () => {
           <div className={`flex justify-center m-1 p-1`}>
         <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/dashboard'}>
-            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span>Soul Economy</span>
-            </a>
+            </div>
           </NavLink>
         </Button>
       </div>
       <div className="flex ml-2 mr-2 mb-4 mt-2 gap-1 items-center justify-center">
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/autostake'}>
-            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span>Vault</span>
-            </a>
+            </div>
           </NavLink>
         </Button>
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/summoner'}>
-            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span>Farms</span>
-            </a>
+            </div>
           </NavLink>
         </Button>
         {featureEnabled(Feature.DEFARM, chainId) &&
           <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/defarms'}>
-            <a className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span>DeFarms</span>
-            </a>
+            </div>
           </NavLink>
         </Button>
         }

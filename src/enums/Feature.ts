@@ -6,6 +6,8 @@ export enum Feature {
   MANIFESTATION = 'Manifestation',
   SWAP = 'Exchange',
   SEANCE = 'Seance',
+  CROSSCHAIN = 'Crosschain',
+  XSWAP = 'xSwap',
   VAULT = 'AutoStake Vault',
   AMM_V2 = 'AMM V2',
   EXPLORE = 'Explore',

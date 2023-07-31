@@ -12,7 +12,7 @@ import { formatNumber } from 'functions/format'
 import { useCurrency } from 'hooks/Tokens'
 import { useTokenContract } from 'hooks/useContract'
 import useCopyClipboard from 'hooks/useCopyClipboard'
-import Image from 'next/image'
+// import Image from 'next/image'
 import {
   useNativePrice,
   useOneDayBlock,
@@ -36,6 +36,8 @@ import { Button } from 'components/Button'
 import { RowFixed } from 'components/Row'
 import { getAddress } from '@ethersproject/address'
 import NavLink from 'components/NavLink'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums'
 
 const ONE_DAY = 86_400
 
@@ -54,7 +56,7 @@ const chartTimespans = [
   },
 ]
 
-export default function Token() {
+function Token() {
   const router = useRouter()
   const id = (router.query.id as string)?.toLowerCase()
   const tokenAddress = id
@@ -142,6 +144,8 @@ export default function Token() {
   const liquidityUSD = token?.liquidity * token?.derivedETH * nativePrice
   const liquidityUSDChange =
     ((token?.liquidity * price) / (token1d?.liquidity * token1d?.derivedETH * nativePrice1d)) * 100 - 100
+
+  const volumeUSD = token1d?.volumeUSD
 
   const volumeUSD1d = token?.volumeUSD - token1d?.volumeUSD
   const volumeUSD2d = token1d?.volumeUSD - token2d?.volumeUSD
@@ -240,7 +244,7 @@ export default function Token() {
               className="w-auto mt-4">
               {!success ? (
                 <RowFixed className="mx-auto rounded-xl space-x-2">
-                  <CurrencyLogo className="rounded-full bg-dark-1000 rounded-xl p-1"
+                  <CurrencyLogo className="bg-dark-1000 rounded-xl p-1"
                     currency={currency} size={60}
                   />
                   <div className="flex items-center space-x-4 md:space-x-8">
@@ -391,3 +395,5 @@ export default function Token() {
     </AnalyticsContainer>
   )
 }
+export default Token
+Token.Guard = NetworkGuard(Feature.ANALYTICS)

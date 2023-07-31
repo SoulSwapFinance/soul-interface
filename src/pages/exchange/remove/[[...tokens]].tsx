@@ -8,7 +8,7 @@ import TransactionConfirmationModal, { ConfirmationModalContent } from 'modals/T
 import { calculateGasMargin, calculateSlippageAmount } from 'functions/trade'
 import { useBurnActionHandlers, useBurnState, useDerivedBurnInfo } from 'state/burn/hooks'
 import { usePairContract, useRouterContract } from 'hooks/useContract'
-
+import NavLink from 'components/NavLink'
 import { AutoColumn } from 'components/Column'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Button } from 'components/Button'
@@ -34,12 +34,13 @@ import { useUserSlippageToleranceWithDefault } from 'state/user/hooks'
 import { useV2LiquidityTokenPermit } from 'hooks/useERC20Permit'
 import { useWalletModalToggle } from 'state/application/hooks'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
-import { classNames } from 'functions'
+import { classNames, featureEnabled } from 'functions'
 import { getChainColorCode } from 'constants/chains'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import { PoolBalances } from 'features/portfolio/AssetBalances/pools'
+import { Feature } from 'enums'
 import PairChart from 'pages/analytics/pairs/embedded/[id]'
-import { MultichainBanner } from 'components/Banner'
+// import { MultichainBanner } from 'components/Banner'
 
 const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(10, 1000) // 1%
 
@@ -704,7 +705,7 @@ export default function Remove() {
 
       <DoubleGlowShadowV2>
         <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-      <MultichainBanner />
+      {/* <MultichainBanner /> */}
           {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
           {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
           {/* <div className={`my-12`} /> */}
@@ -852,11 +853,25 @@ export default function Remove() {
             />
           }
           </div>
-          <PairChart
-            inputCurrency={currencyA} 
-            outputCurrency={currencyB}
-          />
-          <PoolBalances account={account} />
+          {featureEnabled(Feature.ANALYTICS, chainId) &&
+            <PairChart
+              inputCurrency={currencyA} 
+              outputCurrency={currencyB}
+            />
+          }
+          <div className={"grid grid-cols-1 text-white justify-center m-2"}>
+            <NavLink href="/pool">
+              <Button
+                variant={'filled'}
+                color={`${getChainColorCode(chainId)}`}
+                primaryColor={'black'}
+              >
+                <div className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
+                  {`View Positions`}
+                </div>
+              </Button>
+            </NavLink>
+          </div>
         </div>
       </DoubleGlowShadowV2>
     </>

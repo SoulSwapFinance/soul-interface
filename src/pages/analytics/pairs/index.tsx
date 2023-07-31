@@ -4,13 +4,16 @@ import Background from 'features/analytics/Background'
 import PairList from 'features/analytics/Pairs/PairList'
 import PairTabs from 'features/analytics/Pairs/PairTabs'
 import useFuse from 'hooks/useFuse'
-import { useOneDayBlock, useOneWeekBlock, useSoulPairs, useTwoDayBlock, useTwoWeekBlock } from 'services/graph'
+import { useOneDayBlock, useOneWeekBlock, usePairs, useTwoDayBlock, useTwoWeekBlock } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
 import React, { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { getChainColorCode } from 'constants/chains'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums'
 
-export default function Pairs() {
+
+function Pairs() {
   const [type, setType] = useState<'all' | 'gainers' | 'losers'>('all')
 
   const { chainId } = useActiveWeb3React()
@@ -20,11 +23,11 @@ export default function Pairs() {
   const block1w = useOneWeekBlock({ chainId, shouldFetch: !!chainId })
   const block2w = useTwoWeekBlock({ chainId, shouldFetch: !!chainId })
 
-  const pairs = useSoulPairs({ chainId })
-  const pairs1d = useSoulPairs({ variables: { block: block1d }, shouldFetch: !!block1d, chainId })
-  const pairs2d = useSoulPairs({ variables: { block: block2d }, shouldFetch: !!block2d && type !== 'all', chainId }) // No need to fetch if we don't need the data
-  const pairs1w = useSoulPairs({ variables: { block: block1w }, shouldFetch: !!block1w, chainId })
-  const pairs2w = useSoulPairs({ variables: { block: block2w }, shouldFetch: !!block2w && type !== 'all', chainId })
+  const pairs = usePairs({ chainId })
+  const pairs1d = usePairs({ variables: { block: block1d }, shouldFetch: !!block1d, chainId })
+  const pairs2d = usePairs({ variables: { block: block2d }, shouldFetch: !!block2d && type !== 'all', chainId }) // No need to fetch if we don't need the data
+  const pairs1w = usePairs({ variables: { block: block1w }, shouldFetch: !!block1w, chainId })
+  const pairs2w = usePairs({ variables: { block: block2w }, shouldFetch: !!block2w && type !== 'all', chainId })
 
   const pairsFormatted = useMemo(() => {
     return type === 'all'
@@ -121,3 +124,5 @@ export default function Pairs() {
     </AnalyticsContainer>
   )
 }
+export default Pairs
+Pairs.Guard = NetworkGuard(Feature.ANALYTICS)

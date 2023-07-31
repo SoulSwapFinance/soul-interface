@@ -3,6 +3,7 @@ import AnalyticsContainer from 'features/analytics/AnalyticsContainer'
 // import Background from 'features/analytics/Background'
 import { Currency, Token as ERC20 } from 'sdk'
 import ChartCard from 'features/analytics/ChartCard'
+// import ColoredNumber from 'features/analytics/ColoredNumber'
 // import InfoCard from 'features/analytics/InfoCard'
 // import PairList from 'features/analytics/Pairs/PairList'
 // import { LegacyTransactions } from 'features/transactions/Transactions'
@@ -10,24 +11,24 @@ import ChartCard from 'features/analytics/ChartCard'
 // import { formatNumber } from 'functions/format'
 // import { useCurrency } from 'hooks/Tokens'
 import { useTokenContract } from 'hooks/useContract'
-import useCopyClipboard from 'hooks/useCopyClipboard'
+// import useCopyClipboard from 'hooks/useCopyClipboard'
 // import Image from 'next/image'
 import {
   useNativePrice,
   useOneDayBlock,
-  useOneWeekBlock,
+  // useOneWeekBlock,
   useTokenDayData,
   // useTokenPairs,
   useTokens,
   useTwoDayBlock,
 } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
-import Link from 'next/link'
+// import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
 // import { CheckCircle, ExternalLink as LinkIcon } from 'react-feather'
 // import { getChainColorCode, getChainInfo, getChainLogoURL } from 'constants/chains'
-import { NextSeo } from 'next-seo'
+// import { NextSeo } from 'next-seo'
 // import { TridentHeader } from 'layouts/Trident'
 // import Typography from 'components/Typography'
 // import useAddTokenToMetaMask from 'hooks/useAddTokenToMetaMask'
@@ -35,6 +36,8 @@ import { Button } from 'components/Button'
 // import { RowFixed } from 'components/Row'
 // import { getAddress } from '@ethersproject/address'
 import NavLink from 'components/NavLink'
+import NetworkGuard from 'guards/Network'
+import { Feature } from 'enums'
 
 const ONE_DAY = 86_400
 
@@ -58,13 +61,13 @@ interface TokenProps {
   outputCurrency?: Currency | ERC20 | undefined
 }
 
-export default function Token({ outputCurrency }: TokenProps) {
+function Token({ outputCurrency }: TokenProps) {
   const router = useRouter()
   const id = outputCurrency?.wrapped.address.toLowerCase()
   // const tokenAddress = id
 
   const { chainId, library } = useActiveWeb3React()
-  const [isCopied, setCopied] = useCopyClipboard()
+  // const [isCopied, setCopied] = useCopyClipboard()
 
   const [totalSupply, setTotalSupply] = useState(0)
   const [tokenDecimals, setTokenDecimals] = useState(18)
@@ -73,29 +76,28 @@ export default function Token({ outputCurrency }: TokenProps) {
 
   useEffect(() => {
     const fetch = async () => {
-      /* @ts-ignore TYPE NEEDS FIXING */
       setTotalSupply(await tokenContract?.totalSupply())
       setTokenDecimals(await tokenContract?.decimals())
     }
     fetch()
   }, [tokenContract, tokenDecimals])
 
-  const block1d = useOneDayBlock({ chainId })
-  const block2d = useTwoDayBlock({ chainId })
+  const block1d = useOneDayBlock({ chainId: chainId })
+  const block2d = useTwoDayBlock({ chainId: chainId })
   // const block1w = useOneWeekBlock({ chainId })
 
   // General data (volume, liquidity)
-  const nativePrice = useNativePrice({ chainId })
+  const nativePrice = useNativePrice({ chainId: chainId })
   const nativePrice1d = useNativePrice({ chainId, variables: { block: block1d }, shouldFetch: !!block1d })
 
-  const token = useTokens({ chainId, variables: { where: { id } }, shouldFetch: !!id })?.[0]
+  const token = useTokens({ chainId: chainId, variables: { where: { id } }, shouldFetch: !!id })?.[0]
   const token1d = useTokens({
-    chainId,
+    chainId: chainId,
     variables: { block: block1d, where: { id } },
     shouldFetch: !!id && !!block1d,
   })?.[0]
   const token2d = useTokens({
-    chainId,
+    chainId: chainId,
     variables: { block: block2d, where: { id } },
     shouldFetch: !!id && !!block2d,
   })?.[0]
@@ -189,9 +191,9 @@ export default function Token({ outputCurrency }: TokenProps) {
           <Button 
             variant="filled" color="purple" size="lg"
             >
-            <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            <div className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               View Token Analytics <span> ↗</span>
-            </a>
+            </div>
           </Button>
         </NavLink>
         {/* <div className="flex flex-row justify-between flex-grow space-x-4 overflow-x-auto">
@@ -218,7 +220,7 @@ export default function Token({ outputCurrency }: TokenProps) {
                   <div className="w-11/12 overflow-hidden cursor-pointer overflow-ellipsis whitespace-nowrap">{id}</div>
                 </td>
                 <td>
-                  <a
+                  <div
                     className={`flex flex-row items-center justify-end space-x-1 text-${getChainColorCode(chainId)}`}
                     href={getExplorerLink(chainId, id, 'token')}
                     target="_blank"
@@ -226,7 +228,7 @@ export default function Token({ outputCurrency }: TokenProps) {
                   >
                     <div>View</div>
                     <LinkIcon size={16} />
-                  </a>
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -240,3 +242,5 @@ export default function Token({ outputCurrency }: TokenProps) {
     </AnalyticsContainer>
   )
 }
+export default Token
+Token.Guard = NetworkGuard(Feature.ANALYTICS)

@@ -10,10 +10,12 @@ export const RPC = {
   [ChainId.ETHEREUM]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
   [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
   // [ChainId.FANTOM]: 'https://rpcapi.fantom.network',
-  [ChainId.FANTOM]: 'https://rpc.ankr.com/fantom',
+  // [ChainId.FANTOM]: 'https://rpc.ankr.com/fantom',
+  [ChainId.FANTOM]: 'https://rpc.ftm.tools',
   [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com',
   [ChainId.MOONRIVER]: 'https://rpc.ankr.com/moonbeam',
-  [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc',
+  // [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc',
+  [ChainId.AVALANCHE]: 'https://rpc.ankr.com/avalanche',
   [ChainId.ARBITRUM]: 'https://arb1.arbitrum.io/rpc',
   // [ChainId.FANTOM]: 'https://rpc.ftm.tools/',
   // [ChainId.MATIC]: 'https://apis.ankr.com/e22bfa5f5a124b9aa1f911b742f6adfe/c06bb163c3c2a10a4028959f4d82836d/polygon/full/main',
@@ -60,18 +62,6 @@ export const MERKLE_ROOT =
   // 'https://raw.githubusercontent.com/sushiswap/sushi-vesting/master/merkle/week-14/merkle-10959148-11596364.json'
   'https://raw.githubusercontent.com/SoulSwapFinance/soul-claims/main/scripts/results/prod.json'
 
-// /**
-//  * Some tokens can only be swapped via certain pairs, so we override the list of bases that are considered for these
-//  * tokens.
-//  */
-// export const CUSTOM_BASES: {
-//     [chainId in ChainId]?: { [tokenAddress: string]: Token[] }
-// } = {
-//     [ChainId.ETHEREUM]: {
-//         [AMPL.address]: [DAI, WETH[ChainId.ETHEREUM]],
-//         [XSUSHI_CALL.address]: [XSUSHI, WETH[ChainId.ETHEREUM]],
-//     },
-// }
 
 export interface WalletInfo {
   connector?: (() => Promise<AbstractConnector>) | AbstractConnector

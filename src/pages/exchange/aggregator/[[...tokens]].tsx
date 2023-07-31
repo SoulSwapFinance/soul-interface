@@ -13,11 +13,11 @@ import { useActiveWeb3React } from 'services/web3'
 import { getExplorerLink } from 'functions/explorer'
 import { ChainId, Currency, CurrencyAmount, NATIVE, NATIVE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
 import { addTransaction } from 'state/transactions/actions'
-import useTokenBalance from 'hooks/useTokenBalance'
+// import useTokenBalance from 'hooks/useTokenBalance'
 import { Button } from 'components/Button'
 import { getChainColorCode } from 'constants/chains'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
-import { ArrowDownIcon, ArrowLeftIcon } from '@heroicons/react/24/solid'
+import { ArrowDownIcon } from '@heroicons/react/24/solid'
 import { useGasPrice } from 'hooks/useAPI'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
@@ -26,13 +26,13 @@ import { useCurrency } from "hooks/Tokens"
 import { currencyId } from 'functions/currency/currencyId'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
-import { classNames } from 'functions/styling'
-import { featureEnabled } from 'functions/feature'
+// import { classNames } from 'functions/styling'
+// import { featureEnabled } from 'functions/feature'
 // import Image from 'next/image'
 // import META_BANNER from 'assets/branding/meta-banner.png'
 import { NextSeo } from 'next-seo'
-import { FollowBanner } from 'components/Banner'
-import Typography from 'components/Typography'
+// import { FollowBanner } from 'components/Banner'
+// import Typography from 'components/Typography'
 
 // import { groupBy, mapValues, merge, uniqBy } from 'lodash'
 // import { useFeeData } from 'wagmi'
@@ -164,15 +164,8 @@ const Aggregator = ({ }) => {
 	// const [fromDecimals, setFromDecimals] = useState(inputToken?.wrapped.decimals)
 	const [toDecimals, setToDecimals] = useState(outputToken?.wrapped.decimals)
 
-	const [useSwap, setUseSwap] = useState(false)
+	// const [useSwap, setUseSwap] = useState(false)
 	// const [showRoutes, setShowRoutes] = useState(true)
-
-	const handleUseSwap = useCallback(
-		() => {
-			// setShowHeader(false)
-			router.push(`/exchange/swap/${currencyIdA}/${currencyIdB}`)
-		}, [useSwap]
-	)
 
 	// const [fromAddress, setFromAddress] = useState(fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address)
 	// const [toAddress, setToAddress] = useState(toToken?.isNative ? NATIVE_ADDRESS : toToken?.wrapped.address)
@@ -189,14 +182,14 @@ const Aggregator = ({ }) => {
 		.times(10 ** (fromToken?.wrapped.decimals || 18))
 		.toFixed(0);
 
-	const balance =
-		useTokenBalance(
-			chainId,
-			// fromToken?.isNative ? NATIVE_ADDRESS : 
-			fromToken?.wrapped.address,
-			// addressOrName: address,
-			// watch: true
-		);
+	// const balance =
+	// 	useTokenBalance(
+	// 		chainId,
+	// 		// fromToken?.isNative ? NATIVE_ADDRESS : 
+	// 		fromToken?.wrapped.address,
+	// 		// addressOrName: address,
+	// 		// watch: true
+	// 	);
 
 	const [route, setRoute] = useState(null);
 
@@ -364,25 +357,12 @@ const Aggregator = ({ }) => {
 	return (
 		<DoubleGlowShadowV2>
 			<NextSeo title={`Meta | SoulSwap`} />
-          	<div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-			  <FollowBanner />
-				{/* <SwapLayoutCard> */}
-			{/* <div
-              className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
-            >
-              <Image src={META_BANNER}
-                height={180}
-                width={720}
-                alt={'meta banner'}
-              />
-            </div> */}
-				{/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
-				{/* <div className={`my-12`} /> */}
+			<div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
+
 				<SwapDropdown
 					inputCurrency={currencyA}
 					outputCurrency={currencyB}
 				/>
-				{/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
 				<div className={`my-12`} />
 				<div className="flex flex-col gap-3 space-y-3">
 					<SwapAssetPanel
@@ -408,6 +388,7 @@ const Aggregator = ({ }) => {
 							</div>
 						</div>
 						<SwapAssetPanel
+							showInput={false}
 							spendFromWallet={true}
 							chainId={chainId}
 							header={(props) => (
@@ -426,53 +407,14 @@ const Aggregator = ({ }) => {
 								// 	? USDC[chainId]
 								// 	: toToken
 							}
-							value={(routes[0]?.price.amountReturned / (10 ** (outputToken?.wrapped.decimals)))?.toString() || '0'}
+							// value={(routes[0]?.price.amountReturned / (10 ** (outputToken?.wrapped.decimals))).toString() ?? '1'}
 							onChange={() => { }}
 							onSelect={handleOutputSelect}
 						/>
 					</div>
 				</div>
-
 				<div>
-					{/* <FormHeader>From Amount</FormHeader> */}
-					{/* <TokenInput setAmount={setAmount} amount={amount} onMaxClick={onMaxClick} /> */}
-					{/* <InputFooter className="bg-dark-1000 p-2 m-1 rounded rounded-xl">
-								<div className="font-bold p-2" style={{ marginTop: 4, marginLeft: 4 }}>
-									<Input
-										value={slippage}
-										type="number"
-										style={{
-											width: 48,
-											height: 30,
-											display: 'inline',
-											appearance: 'textfield'
-										}}
-										onChange={(val) => {
-											if (+val.target.value < 50) setSlippage(val.target.value);
-										}}
-									/>{' % Slippage'}
-								</div>
-								<div className="flex mt-2 font-bold p-2">
-									{fromTokenPrice > 0 && (
-										<>
-											${(+fromTokenPrice * +amount).toLocaleString(undefined, {
-												maximumFractionDigits: 3
-											}) + ' Value'}
-											{/* Value: $ */}
-					{/* </> */}
-					{/* )} */}
-					{/* </div> */}
-					{/* {balance &&
-								<Balance onClick={onMaxClick}>
-									{
-									// fromToken?.isNative
-										// ? `Balance: ${(balance.value?.div(e10(18))).toString()} ${fromToken?.symbol}`
-									`Balance: ${(balance.value?.div(e10(fromToken?.wrapped.decimals ?? 18))).toString()} ${fromToken?.symbol}`}
-								</Balance>
-							}
-							</InputFooter> */}
 				</div>
-				{/* <SwapWrapper> */}
 				{route && account && (
 					<Button
 						variant={'filled'}
@@ -491,28 +433,7 @@ const Aggregator = ({ }) => {
 						{(isApproved || fromToken.isNative) ? 'Swap' : 'Approve'}
 					</Button>
 				)}
-				{/* route && account && !isApproved && ['Matcha/0x', '1inch'].includes(route?.name) ? (
-							<Button
-								variant={'filled'}
-								color={getChainColorCode(chainId)}
-								colorScheme={'messenger'}
-								loadingText="Preparing Transaction"
-								isLoading={isApproveLoading}
-								onClick={() => {
-									if (approve) handleApprove();
-								}}
-							>
-								{'Approve Infinite'}
-							</Button>
-						) : null */}
-				{/* </SwapWrapper> */}
-				{/* </Container> */}
-				{/* </SwapLayoutCard> */}
-
 				{inputToken && outputToken && (
-					/* <SwapLayoutCard> */
-					// <Container>
-					// 	<div className={`m-2 border border-dark-800 hover:border-${getChainColorCode(chainId)} border-2 rounded rounded-xl`}>
 					<Routes>
 						<div className={`flex flex-col justify-center p-2 -ml-4 -mr-2 sm:-mr-4 border border-dark-800 hover:border-${getChainColorCode(chainId)} border-1 rounded rounded-xl`}>
 							{isLoading ? <Loader loaded={!isLoading} /> : null}
@@ -531,64 +452,7 @@ const Aggregator = ({ }) => {
 							))}
 						</div>
 					</Routes>
-					// 	</div>
-					// </Container>
-					/* </SwapLayoutCard> */
 				)}
-				{/* </div> */}
-				<div className={classNames(featureEnabled(Feature.AGGREGATE, chainId) ? "m-1 flex justify-between" : "hidden")}>
-					<Button variant="outlined"
-						color={'blue'}
-						onClick={handleUseSwap}
-					>
-						<div className={`flex text-sm font-bold text-${'blue'} justify-left`}>
-							<ArrowLeftIcon 
-								className={'mt-1 mr-1 bg-white rounded-full'}
-								 width={18}
-								height={18}
-							/>
-							<Typography
-              					className={`flex justify-end text-white ml-2 text-md font-bold text-center items-center`}
-            				>
-							{`Swap`}
-							</Typography>
-						</div>
-					</Button>
-					{/* <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}
-							<Toggle
-								id="toggle-button"
-								optionA="Routes"
-								optionB="Routes"
-								isActive={showRoutes}
-								toggle={
-									useSwap
-										? () => {
-											setShowRoutes(false)
-										}
-										: () => {
-											setShowRoutes(true)
-										}
-								}
-							/>
-						</div> */}
-					{/* <div className={classNames(`flex flex-cols-2 gap-3 text-white justify-end`)}
-							<Toggle
-								id="toggle-button"
-								optionA="Aggregator"
-								optionB="Aggregator"
-								isActive={useSwap}
-								toggle={
-									useSwap
-										? () => {
-											setUseSwap(false)
-										}
-										: () => {
-											setUseSwap(true)
-										}
-								}
-							/>
-						</div> */}
-				</div>
 			</div>
 		</DoubleGlowShadowV2>
 	)

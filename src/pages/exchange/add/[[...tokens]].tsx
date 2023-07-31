@@ -10,7 +10,7 @@ import { currencyId, halfAmountSpend, maxAmountSpend } from 'functions/currency'
 import { useDerivedMintInfo, useMintActionHandlers, useMintState } from 'state/mint/hooks'
 import { useUserSlippageToleranceWithDefault } from 'state/user/hooks'
 import SwapDropdown from "features/swap/SwapDropdown"
-
+import NavLink from 'components/NavLink'
 import { AutoColumn } from 'components/Column'
 import { BigNumber } from '@ethersproject/bignumber'
 import { ConfirmAddModalBottom } from 'features/liquidity/ConfirmAddModalBottom'
@@ -39,7 +39,9 @@ import { PlusIcon } from '@heroicons/react/24/solid'
 import { getChainColorCode } from 'constants/chains'
 import { PoolBalances } from 'features/portfolio/AssetBalances/pools'
 import PairChart from 'pages/analytics/pairs/embedded/[id]'
-import { FollowBanner } from 'components/Banner'
+import { featureEnabled } from 'functions'
+import { Feature } from 'enums'
+// import { FollowBanner } from 'components/Banner'
 
 const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
 
@@ -349,7 +351,7 @@ export default function Add() {
       </Head>
       <DoubleGlowShadowV2>
       <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-        <FollowBanner />
+        {/* <FollowBanner /> */}
           <SwapDropdown
             inputCurrency={currencies[Field.CURRENCY_A]}
             outputCurrency={currencies[Field.CURRENCY_B]}
@@ -357,7 +359,10 @@ export default function Add() {
           />
           {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
           <div>
-          <LiquidityHeader input={currencies[Field.CURRENCY_A]} output={currencies[Field.CURRENCY_B]} />
+          <LiquidityHeader 
+            input={currencies[Field.CURRENCY_A]}
+            output={currencies[Field.CURRENCY_B]} 
+          />
           <TransactionConfirmationModal
             isOpen={showConfirm}
             onDismiss={handleDismissConfirmation}
@@ -535,35 +540,26 @@ export default function Add() {
             />
           )}
           {/* </div> */}
-          {/* <div className={"grid grid-cols-2 gap-2 text-white justify-center m-2"}>
+          <div className={"grid grid-cols-1 text-white justify-center m-2"}>
             <NavLink href="/pool">
               <Button
                 variant={'filled'}
                 color={`${getChainColorCode(chainId)}`}
                 primaryColor={'black'}
               >
-                <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
-                  <span>{`View Positions`}</span>
-                </a>
+                <div className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
+                  {`View Positions`}
+                </div>
               </Button>
             </NavLink>
-            <NavLink href="/analytics">
-              <Button
-                variant={'filled'}
-                color={`${getChainColorCode(chainId)}`}
-                primaryColor={'black'}
-              >
-                <a className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
-                  <span>{`View Analytics`}</span>
-                </a>
-              </Button>
-            </NavLink>
-          </div>  */}
-        <PairChart
-          inputCurrency={currencyA} 
-          outputCurrency={currencyB}
-        />
-        <PoolBalances account={account} />
+          </div>
+        {featureEnabled(Feature.ANALYTICS, chainId) &&
+          <PairChart
+            inputCurrency={currencyA} 
+            outputCurrency={currencyB}
+          />
+        }
+        {/* <PoolBalances account={account} /> */}
         </div>
         </div>
         {/* </SwapLayoutCard> */}

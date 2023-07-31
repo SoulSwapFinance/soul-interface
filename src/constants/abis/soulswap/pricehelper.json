@@ -40,7 +40,7 @@
     },
     {
         "inputs": [],
-        "name": "WFTM_ADDRESS",
+        "name": "WNATIVE_ADDRESS",
         "outputs": [
             {
                 "internalType": "address",
@@ -88,7 +88,7 @@
                 "type": "address[]"
             }
         ],
-        "name": "contractFtmTokensSum",
+        "name": "contractNativeTokensSum",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -125,7 +125,7 @@
     },
     {
         "inputs": [],
-        "name": "currentFtmPriceInUsdc",
+        "name": "currentNativePriceInUsdc",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -144,7 +144,7 @@
                 "type": "address"
             }
         ],
-        "name": "currentTokenFtmPrice",
+        "name": "currentTokenNativePrice",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -199,95 +199,6 @@
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "ftmBnb",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "ftmBtc",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "ftmDai",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "ftmEth",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address[]",
-                "name": "_tokens",
-                "type": "address[]"
-            },
-            {
-                "internalType": "uint256[]",
-                "name": "_balances",
-                "type": "uint256[]"
-            }
-        ],
-        "name": "ftmTokensSum",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "ftmUsdc",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "inputs": [
             {
                 "internalType": "address",
@@ -331,75 +242,23 @@
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "seanceFtm",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "soulFtm",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "soulUsdc",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "usdcDai",
-        "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
         "inputs": [
             {
-                "internalType": "uint256",
-                "name": "pid",
-                "type": "uint256"
+                "internalType": "address[]",
+                "name": "_tokens",
+                "type": "address[]"
             },
             {
-                "internalType": "address",
-                "name": "lpAddress",
-                "type": "address"
+                "internalType": "uint256[]",
+                "name": "_balances",
+                "type": "uint256[]"
             }
         ],
-        "name": "usdcPrice",
+        "name": "nativeTokensSum",
         "outputs": [
             {
                 "internalType": "uint256",
-                "name": "dollarValue",
+                "name": "",
                 "type": "uint256"
             }
         ],
@@ -424,30 +283,6 @@
             {
                 "internalType": "uint256",
                 "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "pid",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "lpAddress",
-                "type": "address"
-            }
-        ],
-        "name": "usdcValue",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "dollarValue",
                 "type": "uint256"
             }
         ],

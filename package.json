@@ -141,6 +141,7 @@
   },
   "dependencies": {
     "@0x/utils": "^7.0.0",
+    "@0xsquid/sdk": "^1.7.4",
     "@amplitude/analytics-browser": "^1.5.5",
     "@apollo/client": "3.5.7",
     "@babel/core": "^7.0.0",

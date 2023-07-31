@@ -1,15 +1,17 @@
 import Search from 'components/Search'
 import { getChainColorCode } from 'constants/chains'
+import { Feature } from 'enums'
 import AnalyticsContainer from 'features/analytics/AnalyticsContainer'
 import Background from 'features/analytics/Background'
 import useTokensAnalytics from 'features/analytics/hooks/useTokensAnalytics'
 import TokenList from 'features/analytics/Tokens/TokenList'
+import NetworkGuard from 'guards/Network'
 import useFuse from 'hooks/useFuse'
 import Link from 'next/link'
 import React from 'react'
 import { useActiveWeb3React } from 'services/web3'
 
-export default function Tokens() {
+function Tokens() {
   const tokens = useTokensAnalytics()
   const { chainId } = useActiveWeb3React()
 
@@ -56,3 +58,5 @@ export default function Tokens() {
     </AnalyticsContainer>
   )
 }
+export default Tokens
+Tokens.Guard = NetworkGuard(Feature.ANALYTICS)

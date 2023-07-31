@@ -8,7 +8,7 @@ import NavLink from 'components/NavLink'
 // import { useLuxorPrice } from 'hooks/getPrices'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
-import { LuxorBanner } from 'components/Banner'
+import { SunsetBanner } from 'components/Banner'
 import { useActiveWeb3React } from 'services/web3'
 
 const Luxor = () => {
@@ -16,11 +16,7 @@ const Luxor = () => {
 
   return (
     <Wrap padding='1rem 0 0 0' justifyContent="center">
-        <LuxorBanner 
-          chainId={chainId} 
-          textColor={'black'} 
-          color={'yellow'} 
-        />
+        <SunsetBanner />
         <Container id="luxor-page">
         <Head>
           <title>Luxor | Soul</title>
@@ -28,24 +24,24 @@ const Luxor = () => {
         </Head>
         <div className="flex ml-0 mr-0 mb-1 mt-4 gap-1 items-center justify-center">
         <Button variant="filled" color="yellow" size="lg">
-          <NavLink legacyBehavior={true} href={'/luxor/dashboard'}>
-            <a className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Data </span>
-            </a>
+          <NavLink href={'/luxor/redeem'}>
+            <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            {'Redeem'}
+            </div>
           </NavLink>
         </Button>
         <Button variant="filled" color="yellow" size="lg">
-          <NavLink legacyBehavior={true} href={'/luxor/stake'}>
-            <a className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Stake </span>
-            </a>
+          <NavLink href={'/luxor/stake'}>
+            <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            {'Unstake'}
+            </div>
           </NavLink>
         </Button>
         <Button variant="filled" color="yellow" size="lg">
-          <NavLink legacyBehavior={true} href={'/luxor/wrap'}>
-            <a className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-            <span> Wrap </span>
-            </a>
+          <NavLink href={'/luxor/wrap'}>
+            <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+            {'Unwrap'}
+            </div>
           </NavLink>
         </Button>
       </div>

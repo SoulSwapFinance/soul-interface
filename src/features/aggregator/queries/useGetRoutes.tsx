@@ -55,7 +55,6 @@ export default function useGetRoutes({ chain, from, to, amount, extra = {} }: IG
         .filter((adap) => adap.chainToId[chain] !== undefined)
         .map<UseQueryOptions<IRoute>>((adapter) => {
             return {
-                    // @ts-ignore TODO
 					queryKey: ['routes', adapter.name, chain, from, to, amount, JSON.stringify(extra)],
 					queryFn: () => getAdapterRoutes({ adapter, chain, from, to, amount, extra }),
 					refetchInterval: 20_000

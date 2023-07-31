@@ -1,4 +1,4 @@
-import { FTM_ADDRESS, USDC_ADDRESS, CHANT_ADDRESS, DAI_ADDRESS, WETH9_ADDRESS, WNATIVE_ADDRESS, SOUL_ADDRESS, LZ_USDC_ADDRESS, MULTI_USDC_ADDRESS, FRAX_ADDRESS, WBTC_ADDRESS, USDT_ADDRESS } from './addresses'
+import { FTM_ADDRESS, USDC_ADDRESS, CHANT_ADDRESS, DAI_ADDRESS, WETH9_ADDRESS, WNATIVE_ADDRESS, SOUL_ADDRESS, LZ_USDC_ADDRESS, MULTI_USDC_ADDRESS, FRAX_ADDRESS, WBTC_ADDRESS, USDT_ADDRESS, MULTI_WBTC_ADDRESS, WETH_ADDRESS, MULTI_DAI_ADDRESS, MPX_ADDRESS } from './addresses'
 
 import { ChainId } from '../enums'
 import { Token } from '../entities/Token'
@@ -23,7 +23,7 @@ export const MULTI_USDC: TokenMap = {
 }
 
 export const MULTI_DAI: TokenMap = {
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, DAI_ADDRESS[ChainId.FANTOM], 18, 'DAI', 'Dai Stablecoin'),
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, MULTI_DAI_ADDRESS[ChainId.FANTOM], 18, 'DAI', 'Dai Stablecoin'),
 }
 
 export const LZ_USDC: TokenMap = {
@@ -44,6 +44,10 @@ export const DAI: TokenMap = {
   [ChainId.MATIC]: new Token(ChainId.MATIC, DAI_ADDRESS[ChainId.MATIC], 18, 'DAI', 'Dai Stablecoin'),
 }
 
+export const MDAI: TokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, MULTI_DAI_ADDRESS[ChainId.FANTOM], 18, 'mDAI', 'DAI (Multichain)'),
+}
+
 export const FTM: TokenMap = {
   [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, FTM_ADDRESS[ChainId.ETHEREUM], 18, 'FTM', 'Fantom'),
 }
@@ -59,6 +63,20 @@ export const WBTC: TokenMap = {
   [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, WBTC_ADDRESS[ChainId.ETHEREUM], 8, 'WBTC', 'Wrapped BTC'),
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, WBTC_ADDRESS[ChainId.FANTOM], 8, 'WBTC', 'Wrapped BTC'),
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, WBTC_ADDRESS[ChainId.AVALANCHE], 8, 'WBTC', 'Wrapped BTC'),
+}
+
+export const WETH: TokenMap = {
+  [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, WETH_ADDRESS[ChainId.ETHEREUM], 18, 'WETH', 'Wrapped ETH'),
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, WETH_ADDRESS[ChainId.FANTOM], 18, 'WETH', 'Wrapped ETH'),
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, WETH_ADDRESS[ChainId.AVALANCHE], 18, 'WETH', 'Wrapped ETH'),
+}
+
+export const MULTI_WBTC: TokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, MULTI_WBTC_ADDRESS[ChainId.FANTOM], 8, 'WBTC', 'Wrapped BTC'),
+}
+
+export const MPX: TokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, MPX_ADDRESS[ChainId.FANTOM], 8, 'MPX', 'Morphex'),
 }
 
 export const USD: TokenMap = {

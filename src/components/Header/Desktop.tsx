@@ -28,17 +28,20 @@ const Desktop = () => {
   const router = useRouter()
 
   const SOUL_ICON = 
-  <div className={`flex gap-2 mr-2 ml-2`}>
+  <div className={`flex gap-2 mr-2 ml-2 h-full justify-center`}>
     {/* <Image
       // src={'/favicon.png'} 
-      src={`/favicon.ico`}
-      height={72} width={72}
+      src={`https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07/logo.png`}
+      height={48}
+      width={48}
+      className={`rounded-2xl p-0.5 mr-2`}
       // objectFit="contain"
       alt={"soulswap logo"}
     /> */}
     <Image
         // src={'/favicon.png'} 
-        src={`/SoulSwap-Finance-Banner.png`}
+        // src={`/soulswap-finance-text.png`}
+        src={`/SoulSwap-Banner.png`}
         height={48}
         width={224}
         priority={true}

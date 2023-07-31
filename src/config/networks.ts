@@ -1,8 +1,8 @@
 import { ChainId } from '../sdk'
 
-const Ethereum = '/images/networks/ethereum.svg'
+const Ethereum = '/images/networks/ethereum-white.svg'
 const Telos = '/images/networks/telos.png'
-const Avalanche = '/images/networks/avalanche.svg'
+const Avalanche = '/images/networks/avalanche-white.svg'
 const Polygon = '/images/networks/polygon.svg'
 const Arbitrum = `/images/networks/arbitrum.svg`
 const Binance = '/images/networks/binance.svg'

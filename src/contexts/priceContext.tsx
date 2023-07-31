@@ -5,7 +5,6 @@ import { usePricesApi } from 'hooks/usePricesApi'
 export const PriceContext = React.createContext({
   ftm: 0,
   soul: 0,
-  seance: 0,
 })
 
 export function PriceProvider({ children }) {

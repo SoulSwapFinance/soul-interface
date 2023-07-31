@@ -25,6 +25,7 @@ static NAN = new Fraction(Zero, Zero)
       ? Fraction.NAN
       : isEmptyValue(value)
       ? Fraction.ZERO
+          // @ts-ignore
       : new Fraction(parseBalance(value, 18), Fraction.BASE)
   }
 

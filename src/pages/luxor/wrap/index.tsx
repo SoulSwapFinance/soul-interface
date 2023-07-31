@@ -25,7 +25,7 @@ import { useLuxorPrice } from 'hooks/getPrices'
 // import { useSingleCallResult } from 'state/multicall/hooks'
 // import useStablecoin from 'hooks/useStablecoin'
 import { useLuxorInfo } from 'hooks/useAPI'
-import { LuxorBanner } from 'components/Banner'
+import { SunsetBanner } from 'components/Banner'
 
 export default function Stablecoin() {
   const addTransaction = useTransactionAdder()
@@ -85,46 +85,46 @@ export default function Stablecoin() {
           <title>Wrap | Luxor</title>
           <meta key="description" name="description" />
         </Head>
-        <LuxorBanner chainId={chainId} />
+        <SunsetBanner />
         <div className="flex ml-2 mr-2 mb-4 mt-4 gap-1 items-center justify-center">
           <Button variant="filled" color="yellow" size="lg">
-            <NavLink href={'/luxor/dashboard'}>
-              <a className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                <span> Data </span>
-              </a>
+            <NavLink href={'/luxor/redeem'}>
+              <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                {'Redeem'}
+              </div>
             </NavLink>
           </Button>
           <Button variant="filled" color="yellow" size="lg">
             <NavLink href={'/luxor/bonds'}>
-              <a className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                <span> Bond </span>
-              </a>
+              <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                {'Bond'}
+              </div>
             </NavLink>
           </Button>
           <Button variant="filled" color="yellow" size="lg">
             <NavLink href={'/luxor/stake'}>
-              <a className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                <span> Stake </span>
-              </a>
+              <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                {'Unstake'}
+              </div>
             </NavLink>
           </Button>
         </div>
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
           <Tab.Group>
             <Tab.List className="flex items-center justify-center mb-1 space-x-2 p-3px text-white">
-              <div className="grid grid-cols-2 w-[95%] rounded-md p-2px bg-dark-900">
-                <Tab
+              <div className="grid grid-cols-1 w-[95%] rounded-md p-2px bg-dark-900">
+                {/* <Tab
                   className={({ selected }) =>
                     `${selected ? 'border-b-2 border-accent p-2 border-yellow text-white' : 'bg-dark-900 text-white'
                     } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-yellow`
                   }
                 >
                   {`WRAP`}
-                </Tab>
+                </Tab> */}
                 <Tab
                   className={({ selected }) =>
                     `${selected ? 'border-b-2 border-accent p-2 border-yellow text-white' : 'bg-dark-900 text-white'
-                    } flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-yellow`
+                    } flex items-center justify-center px-3 rounded-2xl py-1.5 semi-bold font-semibold border border-dark-800 border-1 hover:border-yellow`
                   }
                 >
                   {`UNWRAP`}
@@ -133,7 +133,7 @@ export default function Stablecoin() {
             </Tab.List>
 
             {/* WRAPPING TAB */}
-            <Tab.Panel className={'outline-none'}>
+            {/* <Tab.Panel className={'outline-none'}>
               <StableInputPanel
                 value={wrapValue}
                 showLogo={true}
@@ -169,21 +169,10 @@ export default function Stablecoin() {
               <div className="h-px my-6 bg-dark-1000"></div>
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1">
                 <div className="flex justify-center">
-                  {/* <Typography className="text-white" fontFamily={'medium'}>
-                    {`Wrap Rate`}
-                  </Typography> */}
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     1 LUM = { (1 / Number(wrapIndex)).toFixed(4)} WLUM
                   </Typography>
                 </div>
-                {/* <div className="flex justify-between">
-                  <Typography className="text-white" fontFamily={'medium'}>
-                    {`Receieve`}
-                  </Typography>
-                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {formatNumber((Number(wrapValue) / Number(wrapIndex)), false)} LUM
-                  </Typography>
-                </div> */}
               </div>
               <div className="mt-6 flex items-center gap-2">
                 {isWrapValid &&
@@ -222,9 +211,9 @@ export default function Stablecoin() {
                   </ButtonError>
                 )}
               </div>
-            </Tab.Panel>
-          
-          {/* UNWRAPPING TAB */}
+            </Tab.Panel> */}
+
+            {/* UNWRAPPING TAB */}
             <Tab.Panel className={'outline-none'}>
               <StableInputPanel
                 value={unwrapValue}
@@ -261,9 +250,6 @@ export default function Stablecoin() {
               <div className="h-px my-6 bg-dark-1000"></div>
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-yellow w-full space-y-1">
                 <div className="flex justify-center">
-                  {/* <Typography className="text-white" fontFamily={'medium'}>
-                    {`Unwrap Rate`}
-                  </Typography> */}
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     1 WLUM = {Number(wrapIndex).toFixed(2)} LUM
                   </Typography>
@@ -302,7 +288,11 @@ export default function Stablecoin() {
                     disabled={!isUnwrapValid || !account}
                     error={!isUnwrapValid && !!parsedUnwrapValue}
                   >
-                    {wrapError || `Unwrap WLUM`}
+                    <Typography
+                      className="text-black"
+                    >
+                      {wrapError || `Unwrap WLUM`}
+                    </Typography>
                   </ButtonError>
                 )}
               </div>

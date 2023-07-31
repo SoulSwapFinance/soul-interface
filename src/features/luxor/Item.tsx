@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { CurrencyAmount, Token, JSBI } from 'sdk'
+import { CurrencyAmount, Token, JSBI, MDAI } from 'sdk'
 import Typography from '../../components/Typography'
 import { Disclosure, Switch, Tab, Transition } from '@headlessui/react'
 import { CurrencyLogo } from '../../components/CurrencyLogo'
@@ -26,7 +26,7 @@ import { BigNumber } from '@ethersproject/bignumber'
 import { usePendingAmount, useClaimableAmount, useBondContract, useRemainingVesting } from './hooks'
 import { useActiveWeb3React } from 'services/web3'
 import { LUX_ADDRESS } from 'constants/addresses'
-import { DAI } from 'sdk'
+import { ChainId } from 'sdk'
 import CurrencyInputPanel from 'components/CurrencyInputPanel'
 
 const BondItem = ({ bond, ...rest }) => {
@@ -38,8 +38,8 @@ const BondItem = ({ bond, ...rest }) => {
   const addTransaction = useTransactionAdder()
 
   const remainingVesting = bond ? useRemainingVesting() : ''
-  const principalToken = DAI[250]
-  const luxorToken = new Token(250, getAddress(LUX_ADDRESS[250]), 18, 'LUX')
+  const principalToken = MDAI[ChainId.FANTOM]
+  const luxorToken = new Token(ChainId.FANTOM, getAddress(LUX_ADDRESS[ChainId.FANTOM]), 18, 'LUX')
 
   const [depositValue, setDepositValue] = useState('')
   const parsedDepositValue = tryParseAmount(depositValue, principalToken)
@@ -109,7 +109,7 @@ const BondItem = ({ bond, ...rest }) => {
                     size={44}
                   />
                 ) : (
-                  <CurrencyLogo currency={ DAI[250] } size={44} />
+                  <CurrencyLogo currency={ MDAI[ChainId.FANTOM] } size={44} />
                 )}
                 <div className="flex flex-col bg-dark-1000 justify-center">
                   <Typography variant="base" weight={600} lineHeight={24} fontFamily={'semi-bold'}>
@@ -320,7 +320,7 @@ const BondItem = ({ bond, ...rest }) => {
                                   <path d="M15.8333 15.8333H4.16667V4.16667H10V2.5H4.16667C3.24167 2.5 2.5 3.25 2.5 4.16667V15.8333C2.5 16.75 3.24167 17.5 4.16667 17.5H15.8333C16.75 17.5 17.5 16.75 17.5 15.8333V10H15.8333V15.8333ZM11.6667 2.5V4.16667H14.6583L6.46667 12.3583L7.64167 13.5333L15.8333 5.34167V8.33333H17.5V2.5H11.6667Z" />
                                 </svg>
                               }
-                              href={250 && bond && getExplorerLink(250, bond.address, 'address')}
+                              href={ChainId.FANTOM && bond && getExplorerLink(ChainId.FANTOM, bond.address, 'address')}
                               className="flex gap-2 no-underline cursor-pointer hover:no-underline focus:no-underline active:no-underline text-blue dark:text-accent"
                             >
                               {`View Contract`}
@@ -615,7 +615,7 @@ const BondItem = ({ bond, ...rest }) => {
                               <div className="flex flex-col md:flex-row gap-3">
                                 <div className="flex-1">
                                   <CurrencyInputPanel
-                                    chainId={250}
+                                    chainId={ChainId.FANTOM}
                                     label={''}
                                     onUserInput={() => {}}
                                     onMax={() => {}}
@@ -624,7 +624,7 @@ const BondItem = ({ bond, ...rest }) => {
                                 </div>
                                 <div className="flex-1">
                                   <CurrencyInputPanel
-                                    chainId={250}
+                                    chainId={ChainId.FANTOM}
                                     label={''}
                                     onUserInput={() => {}}
                                     onMax={() => {}}

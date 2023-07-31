@@ -3,15 +3,15 @@ import { CheckIcon } from '@heroicons/react/24/solid'
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 import AnalyticsContainer from 'features/analytics/AnalyticsContainer'
-import Background from 'features/analytics/Background'
+// import Background from 'features/analytics/Background'
 import ChartCard from 'features/analytics/ChartCard'
 import InfoCard from 'features/analytics/InfoCard'
 import { LegacyTransactions } from 'features/transactions/Transactions'
 import { getExplorerLink } from 'functions/explorer'
 import { formatNumber, shortenAddress } from 'functions/format'
 import { useCurrency } from 'hooks/Tokens'
-import useCopyClipboard from 'hooks/useCopyClipboard'
-import { useNativePrice, useOneDayBlock, usePairDayData, useSoulPairs, useTwoDayBlock } from 'services/graph'
+// import useCopyClipboard from 'hooks/useCopyClipboard'
+import { useNativePrice, useOneDayBlock, usePairDayData, usePairs, useTwoDayBlock } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
 import { times } from 'lodash'
 import Link from 'next/link'
@@ -25,6 +25,9 @@ import Typography from 'components/Typography'
 import { TridentHeader } from 'layouts/Trident'
 import { computePairAddress } from 'sdk/functions/computePairAddress'
 import { Currency, FACTORY_ADDRESS, NATIVE, Token, WNATIVE_ADDRESS } from 'sdk'
+import { Feature } from 'enums'
+import NetworkGuard from 'guards/Network'
+
 
 const ONE_DAY = 86_400
 
@@ -50,34 +53,35 @@ const chartTimespans = [
 interface PairProps {
   inputCurrency?: Currency | Token | undefined
   outputCurrency?: Currency | Token | undefined
+  pairAddress?: string | undefined
 }
 
-export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
+function Pair({ inputCurrency, outputCurrency, pairAddress }: PairProps) {
   const { chainId } = useActiveWeb3React()
 
   const router = useRouter()
-  const id = (inputCurrency && outputCurrency)
-    ? inputCurrency && outputCurrency && computePairAddress({
-      factoryAddress: FACTORY_ADDRESS[chainId],
-      tokenA: inputCurrency?.isToken ? inputCurrency : inputCurrency?.wrapped,
-      tokenB: outputCurrency?.isToken ? outputCurrency : outputCurrency?.wrapped,
-    }).toLowerCase() // pairAddress
-    : (router.query.id as string)?.toLowerCase() // router string
+  // const id = (inputCurrency && outputCurrency)
+  //   ? inputCurrency && outputCurrency && computePairAddress({
+  //     factoryAddress: FACTORY_ADDRESS[chainId],
+  //     tokenA: inputCurrency?.isToken ? inputCurrency : inputCurrency?.wrapped,
+  //     tokenB: outputCurrency?.isToken ? outputCurrency : outputCurrency?.wrapped,
+  //   }).toLowerCase() // pairAddress
+  //   : (router.query.id as string)?.toLowerCase() // router string
 
-  // const id = pairAddress ?? (router.query.id as string).toLowerCase()
+  const id = pairAddress ?? (router.query.id as string).toLowerCase()
 
   // const [isCopied, setCopied] = useCopyClipboard()
 
   const block1d = useOneDayBlock({ chainId, shouldFetch: !!chainId })
   const block2d = useTwoDayBlock({ chainId, shouldFetch: !!chainId })
 
-  const pair = useSoulPairs({ chainId, variables: { where: { id } }, shouldFetch: !!chainId })?.[0]
-  const pair1d = useSoulPairs({
+  const pair = usePairs({ chainId, variables: { where: { id } }, shouldFetch: !!chainId })?.[0]
+  const pair1d = usePairs({
     chainId,
     variables: { block: block1d, where: { id } },
     shouldFetch: !!chainId && !!block1d,
   })?.[0]
-  const pair2d = useSoulPairs({
+  const pair2d = usePairs({
     chainId,
     variables: { block: block2d, where: { id } },
     shouldFetch: !!chainId && !!block2d,
@@ -118,8 +122,8 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
   const currency1 = useCurrency(pair?.token1?.id)
 
   // for links
-  const token0Address = currency0?.isToken ? currency0.address : currency0?.wrapped.address
-  const token1Address = currency1?.isToken ? currency1.address : currency1?.wrapped.address
+  const token0Address = currency0?.isToken ? currency0.wrapped.address : currency0?.wrapped.address
+  const token1Address = currency1?.isToken ? currency1.wrapped.address : currency1?.wrapped.address
   
   const zeroIsETH = currency0?.wrapped.address == WNATIVE_ADDRESS[chainId]
   const oneIsETH = currency1?.wrapped.address == WNATIVE_ADDRESS[chainId]
@@ -269,49 +273,50 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
               <thead className="border-b border-gray-900">
                 <tr>
                   <td>
-                     {token0Symbol}-{token1Symbol}
+                    {/* {token0Symbol}-{token1Symbol}  */}
+                    Pair Address
                   </td>
-                  <td>{token0Symbol}</td>
-                  <td>{token1Symbol}</td>
+                  <td>{token0Symbol} Address</td>
+                  <td>{token1Symbol} Address</td>
                 </tr>
               </thead>
               <tbody className="border-b border-gray-900 ">
                 <tr>
                   <td>
-                    <div className="flex items-center justify-center w-11/12 space-x-1">
+                  <div className="flex items-center w-full justify-center space-x-1">
                       {/* <div className="overflow-hidden overflow-ellipsis whitespace-nowrap">{pair?.id}</div> */}
-                      <Link href={`/analytics/pairs/${pair?.id}`} passHref>
+                      <Link href={`/analytics/pairs/${id.toLowerCase()}`} passHref>
                       <div className={`overflow-hidden cursor-pointer overflow-ellipsis whitespace-nowrap text-${getChainColorCode(chainId)}`}>
-                          {token0Symbol}-{token1Symbol}
+                          {shortenAddress(id)}
                         </div>
                       </Link>
-                      <a href={getExplorerLink(chainId, pair?.id, 'token')} target="_blank" rel="noreferrer">
+                      <a href={getExplorerLink(chainId, id, 'token')} target="_blank" rel="noreferrer">
                         <LinkIcon size={16} />
                       </a>
                     </div>
                   </td>
                   <td>
-                    <div className="flex items-center w-11/12 space-x-1">
-                      <Link href={`/analytics/tokens/${pair?.token0?.id}`} passHref>
+                  <div className="flex items-center w-full justify-center space-x-1">
+                      <Link href={`/analytics/tokens/${token0Address}`} passHref>
                       <div className={`overflow-hidden cursor-pointer overflow-ellipsis whitespace-nowrap text-${getChainColorCode(chainId)}`}>
-                          {token0Symbol}
+                          {shortenAddress(token0Address ?? WNATIVE_ADDRESS[chainId])}
                         </div>
                       </Link>
-                      <a href={getExplorerLink(chainId, pair?.token0?.id, 'token')} target="_blank" rel="noreferrer">
+                      <a href={getExplorerLink(chainId, token0Address, 'token')} target="_blank" rel="noreferrer">
                         <LinkIcon size={16} />
                       </a>
                     </div>
                   </td>
                   <td>
-                    <div className="flex items-center w-11/12 space-x-1">
-                      <Link href={`/analytics/tokens/${pair?.token1?.id}`} passHref>
+                    <div className="flex items-center w-full justify-center space-x-1">
+                      <Link href={`/analytics/tokens/${token1Address}`} passHref>
                         <div className={`overflow-hidden cursor-pointer overflow-ellipsis whitespace-nowrap text-${getChainColorCode(chainId)}`}>
-                          {token1Symbol}
+                          {shortenAddress(token1Address ?? WNATIVE_ADDRESS[chainId])}
                         </div>
                       </Link>
-                      <a href={getExplorerLink(chainId, pair?.token1?.id, 'token')} target="_blank" rel="noreferrer">
+                      <Link href={getExplorerLink(chainId, token1Address, 'token')} target="_blank" rel="noreferrer">
                         <LinkIcon size={16} />
-                      </a>
+                      </Link>
                     </div>
                   </td>
                 </tr>
@@ -324,3 +329,7 @@ export default function Pair({ inputCurrency, outputCurrency }: PairProps) {
     </AnalyticsContainer>
   )
 }
+
+
+export default Pair
+Pair.Guard = NetworkGuard(Feature.ANALYTICS)

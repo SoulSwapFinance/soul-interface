@@ -289,11 +289,37 @@ export const UnderworldBanner: FC = () => (
   </div>
 )
 
+export const SunsetBanner: FC = () => (
+  <div className="relative items-center w-full">
+    <div className="w-full">
+      <div className="text-center m-2">
+        <p className="font-medium text-center text-black animate-pulse">
+          <ExternalLink
+            href="https://twitter.com/LuxorMoney/status/1681777424009244672?s=20" 
+            target="_blank"
+            rel="noreferrer"
+            className="font-bold text-black text-lg"
+          >
+            <Button variant="filled" color="yellow" size="sm">
+              <span className="justify-center text-black">
+                {' '}
+                Luxor is Sunsetting ↗
+              </span>
+            </Button>
+          </ExternalLink>
+        </p>
+      </div>
+      <div className="absolute inset-y-0 right-0 flex items-start pt-1 pr-1 sm:pt-1 sm:pr-2 sm:items-start">
+      </div>
+    </div>
+  </div>
+)
+
 export const BondsBanner: FC = () => (
   <div className="relative items-center w-full">
     <div className="w-full">
-      <div className="text-center">
-        <p className="font-medium text-center text-white">
+      <div className="text-center m-2">
+        <p className="font-medium text-center text-white animate-pulse">
           <ExternalLink
             href="https://soulswapfinance.medium.com/owning-our-liquidity-via-our-innovative-soul-bonds-podl-592c2849ceed" target="_blank" rel="noreferrer"
             className="font-bold text-white text-lg"
@@ -301,7 +327,7 @@ export const BondsBanner: FC = () => (
             <Button variant="filled" color="purple" size="sm">
               <span className="justify-center">
                 {' '}
-                Introducing: Soul Bonds ↗
+                Read Before Bonding ↗
               </span>
             </Button>
           </ExternalLink>

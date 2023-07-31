@@ -22,7 +22,7 @@ const NavLink = ({ children, exact = false, activeClassName = 'text-high-emphesi
 
   return (
     <Link
-      legacyBehavior={true}
+      // legacyBehavior={true}
       href={props.href} {...props}
     >
       {React.cloneElement(child, {

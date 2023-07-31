@@ -30,6 +30,7 @@ module.exports = {
           'dark-900': '#161522',
           'dark-800': '#360069',
           'dark-pink-red': '#4e3034',
+          'orange': '#627EEA'
         },
         border: {
           1: '1px',
@@ -53,6 +54,9 @@ module.exports = {
         moonriverGold: '#F2B706',
         moonriverTeal: '#41A2A1',
         maticPurple: '#8247E5',
+        usdcBlue: '#2775CA',
+        btcOrange: '#F2A900',
+        orange: '#F2A900',
         pink: '#f338c3',
         // green: '#4CBB17', // kellyGreen
         green: '#50C878', // emeraldGreen

@@ -1,4 +1,4 @@
-import { ChainId, SOUL_ADDRESS, WBTC_ADDRESS } from 'sdk'
+import { ChainId, SOUL_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS } from 'sdk'
 import { GRAPH_HOST } from 'services/graph/constants'
 import { pager } from 'services/graph/fetchers/pager'
 import { GraphProps } from 'services/graph/interfaces'
@@ -24,83 +24,99 @@ import useSWR, { SWRConfiguration } from 'swr'
 import stringify from 'fast-json-stable-stringify'
 import { useActiveWeb3React } from 'services/web3'
 
+
 export const EXCHANGE = {
-  [ChainId.ETHEREUM]: 'soulswapfinance/fantom-exchange',
-  [ChainId.FANTOM]: 'soulswapfinance/fantom-exchange',
+  [ChainId.ETHEREUM]: 'soulswapfinance/fantom-swap',
+  [ChainId.FANTOM]: 'soulswapfinance/fantom-swap',
   [ChainId.AVALANCHE]: 'soulswapfinance/avalanche-exchange',
-  [ChainId.BSC]: 'soulswapfinance/fantom-exchange',
+  [ChainId.BSC]: 'soulswapfinance/fantom-swap',
 }
 
-export const exchange = async (chainId = ChainId.FANTOM, query, variables = {}) =>
-  pager(`${GRAPH_HOST[chainId]}/subgraphs/name/${EXCHANGE[chainId]}`, query, variables)
+// const getExchange = () => {
+//   const { chainId } = useActiveWeb3React()
+//   let exchange = EXCHANGE[chainId]
+//   console.log(exchange)
+//   return exchange
+// }
 
-export const getPairs = async (chainId = ChainId.FANTOM, variables = undefined, query = pairsQuery) => {
+export const exchange = async (chainId, query, variables = {}) => {
+  // const URL = EXCHANGE_URL()
+  // console.log(URL)
+  // console.log(chainId)
+  let URL
+  chainId == ChainId.AVALANCHE ? URL = 'soulswapfinance/avalanche-swap' : URL = 'soulswapfinance/fantom-swap'
+  console.log('exchange URL: %s', URL)
+  return pager(`https://api.thegraph.com/subgraphs/name/${URL}`, query, variables)
+}
+
+export const getPairs = async (chainId, variables = undefined, query = pairsQuery) => {
+  // const { chainId } = useActiveWeb3React()
   const { pairs } = await exchange(chainId, query, variables)
   return pairs
 }
 
-export const getPairDayData = async (chainId = ChainId.FANTOM, variables) => {
+export const getPairDayData = async (chainId, variables) => {
   // console.log('getTokens')
   const { pairDayDatas } = await exchange(chainId, pairDayDatasQuery, variables)
   return pairDayDatas
 }
 
-export const getTokenSubset = async (chainId = ChainId.FANTOM, variables) => {
+export const getTokenSubset = async (chainId, variables) => {
   // console.log('getTokenSubset')
   const { tokens } = await exchange(chainId, tokenSubsetQuery, variables)
   return tokens
 }
 
-export const getTokens = async (chainId = ChainId.FANTOM, variables) => {
+export const getTokens = async (chainId, variables) => {
   // console.log('getTokens')
   const { tokens } = await exchange(chainId, tokensQuery, variables)
   return tokens
 }
 
 // @ts-ignore TYPE NEEDS FIXING
-export const getToken = async (chainId = ChainId.FANTOM, query = tokenQuery, variables) => {
+export const getToken = async (chainId, query = tokenQuery, variables) => {
   // console.log('getTokens')
   const { token } = await exchange(chainId, query, variables)
   return token
 }
 
-export const getPair = async (chainId = ChainId.FANTOM, query = pairQuery, variables) => {
+export const getPair = async (chainId, query = pairQuery, variables) => {
   // console.log('getTokens')
   const { pair } = await exchange(chainId, query, variables)
   return pair
 }
 
 // @ts-ignore TYPE NEEDS FIXING
-export const getTokenDayData = async (chainId = ChainId.FANTOM, variables) => {
+export const getTokenDayData = async (chainId, variables) => {
   // console.log('getTokens')
   const { tokenDayDatas } = await exchange(chainId, tokenDayDatasQuery, variables)
   return tokenDayDatas
 }
 
-// @ts-ignore TYPE NEEDS FIXING
-export const getTokenPrices = async (chainId = ChainId.FANTOM, variables) => {
-  // console.log('getTokenPrice')
+export const getTokenPrices = async (chainId, variables) => {
+  console.log('getTokenPrices')
   const { tokens } = await exchange(chainId, tokensQuery, variables)
   // @ts-ignore TYPE NEEDS FIXING
   return tokens.map((token) => token?.derivedETH)
 }
 
-// @ts-ignore TYPE NEEDS FIXING
-export const getTokenPrice = async (chainId = ChainId.FANTOM, query, variables) => {
-  // console.log('getTokenPrice')
+// √ reports chainId
+export const getTokenPrice = async (chainId, query, variables) => {
+  console.log('hooks: getTokenPrice')
+  console.log('chain', chainId)
   const nativePrice = await getNativePrice(chainId)
 
   const { token } = await exchange(chainId, query, variables)
   return token?.derivedETH * nativePrice
 }
 
-export const getPairPrice = async (chainId = ChainId.FANTOM, query, variables) => {
+export const getPairPrice = async (chainId, query, variables) => {
   const { pair } = await exchange(chainId, query, variables)
   return pair?.reserveUSD
 }
 
 // @ts-ignore TYPE NEEDS FIXING
-// export const getPairPrice = async (chainId = ChainId.FANTOM, query, variables) => {
+// export const getPairPrice = async (chainId, query, variables) => {
 //   // console.log('getPairPrice')
 //   const nativePrice = await getNativePrice(chainId)
 
@@ -108,7 +124,7 @@ export const getPairPrice = async (chainId = ChainId.FANTOM, query, variables) =
 //   return pair?.reserveETH * nativePrice
 // }
 
-export const getNativePrice = async (chainId = ChainId.FANTOM, variables = undefined) => {
+export const getNativePrice = async (chainId, variables = undefined) => {
   const data = await getBundle(chainId, undefined, variables)
   return data?.bundles[0]?.ethPrice
 }
@@ -173,34 +189,15 @@ export const getFantomPrice = async () => {
   })
 }
 
-export const getBinancePrice = async () => {
-  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: '0xd67de0e0a0fd7b15dc8348bb9be742f3c5850454',
-  })
-}
-
-export const getWrappedEthPrice = async () => {
-  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: '0x74b23882a30290451a17c44f4f05243b6b58c76d',
-  })
-}
-
-export const getWrappedBtcPrice = async () => {
-  const { chainId } = useActiveWeb3React()
-  return getTokenPrice(chainId, tokenPriceQuery, {
-    id: WBTC_ADDRESS[chainId].toLowerCase(),
-  })
-}
-
-export function getTokensPrice(address: string) {
-  const { chainId } = useActiveWeb3React()
+export function getTokensPrice(chainId, address: string) {
+  // const { chainId } = useActiveWeb3React()
   return getTokenPrice(chainId, tokenPriceQuery, {
     id: address,
   })
 }
 
-export function getPairsPrice(address: string) {
-  const { chainId } = useActiveWeb3React()
+export function getPairsPrice(chainId, address: string) {
+  // const { chainId } = useActiveWeb3React()
   return getPairPrice(chainId, pairReserveQuery, {
     id: address,
   })
@@ -213,7 +210,7 @@ export function getPairsPrice(address: string) {
 // }
 
 export const getBundle = async (
-  chainId = ChainId.FANTOM,
+  chainId,
   query = ethPriceQuery,
   variables = {
     id: 1,
@@ -222,28 +219,31 @@ export const getBundle = async (
   return exchange(chainId, query, variables)
 }
 
-// @ts-ignore TYPE NEEDS FIXING
-export const getLiquidityPositions = async (chainId = ChainId.FANTOM, variables) => {
+export const getLiquidityPositions = async (chainId, variables) => {
   const { liquidityPositions } = await exchange(chainId, liquidityPositionsQuery, variables)
   return liquidityPositions
 }
 
-export const getDayData = async (chainId = ChainId.FANTOM, variables = undefined) => {
+// √ works
+export const getDayData = async (chainId, variables = undefined) => {
+  // console.log('getDayData')
+  // console.log('chain', chainId)
   const { dayDatas } = await exchange(chainId, dayDatasQuery, variables)
   return dayDatas
 }
 
-export const getFactory = async (chainId = ChainId.FANTOM, variables = undefined) => {
+export const getFactory = async (chainId, variables = undefined) => {
   const { factories } = await exchange(chainId, factoryQuery, variables)
   return factories[0]
 }
 
-export const getTransactions = async (chainId = ChainId.FANTOM, variables = undefined) => {
+export const getTransactions = async (chainId, variables = undefined) => {
   const { swaps } = await exchange(chainId, transactionsQuery, variables)
   return swaps
 }
 
-export const getTokenPairs = async (chainId = ChainId.FANTOM, variables = undefined) => {
+export const getTokenPairs = async (variables = undefined) => {
+  const { chainId } = useActiveWeb3React()
   const { pairs0, pairs1 } = await exchange(chainId, tokenPairsQuery, variables)
   return pairs0 || pairs1 ? [...(pairs0 ? pairs0 : []), ...(pairs1 ? pairs1 : [])] : undefined
 }
@@ -251,11 +251,12 @@ export const getTokenPairs = async (chainId = ChainId.FANTOM, variables = undefi
 // USE HOOKS
 
 export function useLiquidityPositions({
-  chainId = ChainId.FANTOM,
   variables,
   shouldFetch = true,
   swrConfig = undefined,
 }: GraphProps) {
+  const { chainId } = useActiveWeb3React()
+
   const { data } = useSWR(
     shouldFetch ? ['liquidityPositions', chainId, stringify(variables)] : null,
     (_, chainId) => getLiquidityPositions(chainId, variables),
@@ -270,13 +271,30 @@ export function useSoulPrice(swrConfig: SWRConfiguration = undefined) {
 }
 
 export function useTokenPrice(tokenAddress: string, swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR(['tokenPrice'], () => getTokensPrice(tokenAddress), swrConfig)
+  const { chainId } = useActiveWeb3React()
+
+  const { data } = useSWR(['tokenPrice'], () => getTokensPrice(chainId, tokenAddress), swrConfig)
   return data
 }
 
+// export function useTokenPrice({
+//   // chainId,
+//   variables,
+//   shouldFetch = true,
+//   swrConfig = undefined,
+// }: GraphProps) {
+//   const { chainId } = useActiveWeb3React()
+//   const { data } = useSWR(chainId ? [chainId, tokenPriceQuery, stringify(variables)] : null, () => getTokenPrice(
+//     chainId,
+//     tokenPriceQuery,
+//     variables
+//   ), swrConfig)
+//   return data
+// }
+
 // reserveUSD
-export function usePairPrice(pairAddress: string, swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR(['pairPrice'], () => getPairsPrice(pairAddress), swrConfig)
+export function usePairPrice(chainId, pairAddress: string, swrConfig: SWRConfiguration = undefined) {
+  const { data } = useSWR(['pairPrice'], () => getPairsPrice(chainId, pairAddress), swrConfig)
   return data
 }
 
@@ -302,21 +320,6 @@ export function useEnchantPrice(swrConfig: SWRConfiguration = undefined) {
 
 export function useFantomPrice(swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(['fantomPrice'], () => getFantomPrice(), swrConfig)
-  return data
-}
-
-export function useBinancePrice(swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR(['binancePrice'], () => getBinancePrice(), swrConfig)
-  return data
-}
-
-export function useWrappedEthPrice(swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR(['wethPrice'], () => getWrappedEthPrice(), swrConfig)
-  return data
-}
-
-export function useWrappedBtcPrice(swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR(['btcPrice'], () => getWrappedBtcPrice(), swrConfig)
   return data
 }
 

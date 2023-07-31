@@ -35,7 +35,7 @@ import {
 import { Text } from "rebass"
 // import styled from "styled-components"
 // import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
-import { useModalOpen, useWalletModalToggle } from 'state/application/hooks'
+import { useWalletModalToggle } from 'state/application/hooks'
 
 import {
   Button,
@@ -86,7 +86,7 @@ import { useRouter } from "next/router"
 import { useCurrency } from "hooks/Tokens"
 import SwapDropdown from "features/swap/SwapDropdown"
 import { getChainColorCode } from "constants/chains"
-import { FollowBanner } from "components/Banner"
+// import { FollowBanner } from "components/Banner"
 // import LIMIT_BANNER from 'assets/branding/limit-banner.png'
 // import TokenStats from "components/TokenStats"
 
@@ -158,13 +158,6 @@ const Limit = () => {
     MUL = "MUL",
   }
 
-  const handleSetSwap = useCallback(
-    () => {
-      // setShowHeader(false)
-      router.push(`/exchange/swap/${currencyIdA}/${currencyIdB}`)
-    }, [useSwap]
-  )
-
   // const handleShowHeader = useCallback(
   //   () => {
   //     setShowHeader(true)
@@ -202,20 +195,20 @@ const Limit = () => {
   const {
     handlers: {
       handleInput,
-      handleRateType,
+      // handleRateType,
       handleCurrencySelection,
-      handleSwitchTokens,
+      // handleSwitchTokens,
       handleLimitOrderSubmission,
     },
     derivedOrderInfo: {
       parsedAmounts,
-      currencies,
-      currencyBalances,
+      // currencies,
+      // currencyBalances,
       trade,
       formattedAmounts,
       inputError,
       rawAmounts,
-      price,
+      // price,
     },
     orderState: { independentField, rateType },
   } = useGelatoLimitOrders();
@@ -466,15 +459,15 @@ const Limit = () => {
     [handleCurrencySelection]
   );
 
-  const handleSwitch = useCallback(
-    (inputCurrency, outputCurrency) => {
-      // handleCurrencyASelect(inputCurrency)
-      // handleCurrencySelection(Field.OUTPUT, inputCurrency)
-      // handleCurrencySelection(Field.INPUT, outputCurrency)
-      // handleOutputSelect(inputCurrency)
-    },
-    [handleCurrencySelection]
-  );
+  // const handleSwitch = useCallback(
+  //   (inputCurrency, outputCurrency) => {
+  //     // handleCurrencyASelect(inputCurrency)
+  //     // handleCurrencySelection(Field.OUTPUT, inputCurrency)
+  //     // handleCurrencySelection(Field.INPUT, outputCurrency)
+  //     // handleOutputSelect(inputCurrency)
+  //   },
+  //   [handleCurrencySelection]
+  // );
 
 
   const swapIsUnsupported = useIsSwapUnsupported(
@@ -501,27 +494,6 @@ const Limit = () => {
   return (
     <DoubleGlowShadowV2>
           <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
-          <FollowBanner />
-            {/* <SwapLayoutCard> */}
-            {/* <DonateBanner chainId={chainId} /> */}
-            {/* <LuxorBanner color={'purple'} textColor={'white'} chainId={chainId} /> */}
-          {/* <div
-              className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
-            >
-              <Image src={LIMIT_BANNER}
-                height={180}
-                width={720}
-                alt={'limit banner'}
-              />
-          </div> */}
-            {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
-            {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
-            {/* <div className="p-0 mt-0 space-y-4 rounded bg-dark-1000" style={{ zIndex: 1 }}>
-          {showHeader && 
-            // <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
-            <div className={`mt-0`} />
-          } */}
-
             {showHeader &&
               <SwapDropdown
               inputCurrency={currencyA}
@@ -530,12 +502,7 @@ const Limit = () => {
               />
             }
 
-            {showHeader && 
-              // <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
-              <div className={`mt-12`} />
-            }
-            {/* <OrderHeader handleActiveTab={handleActiveTab} activeTab={activeTab} /> */}
-            {/* <Wrapper id="limit-order-page"> */}
+            { showHeader && <div className={`mt-12`} /> }
             <ConfirmSwapModal
               isOpen={showConfirm}
               trade={trade}
@@ -551,7 +518,6 @@ const Limit = () => {
               inputAmount={parsedAmounts.input}
               outputAmount={parsedAmounts.output}
             />
-
             <AutoColumn gap={"md"}>
               <div style={{ display: "relative" }}>
                 <SwapAssetPanel
@@ -568,12 +534,13 @@ const Limit = () => {
                   onChange={handleTypeInput}
                   onSelect={handleInputSelect}
                 />
-                <div className="flex -mt-3 -mb-3 z-0 justify-between">
+              {/* <div className={ 'my-2' } /> */}
+                <div className="flex -mt-2 -mb-2 z-0 justify-between">
                   {rateType === Rate.MUL ? (
                     <Button
                       size={'xs'}
                       className={classNames(`mx-[45%] rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
-                      onClick={handleSetSwap}
+                      // onClick={handleSetSwap}
                     >
                       <Image
                         width={14}
@@ -581,13 +548,13 @@ const Limit = () => {
                         height={14}
                         className={`rounded-xl`}
                         src={Multiply}
-                      />
+                        />
                     </Button>
                   ) : (
                     <Button
                       size={'xs'}
                       className={classNames(`mx-[45%] rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
-                      onClick={handleSetSwap}
+                      // onClick={handleSetSwap}
                     >
                       <Image
                       alt={"divide icon"}
@@ -632,7 +599,7 @@ const Limit = () => {
                     color={getChainColor(chainId)}
                   />
                   </div> */}
-                <div className="-mt-3 -mb-3 z-0">
+                <div className="flex -mt-2 -mb-2 z-0 justify-between">
                   <Button
                     size={'xs'}
                     className={classNames(`mx-[45%] rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
@@ -644,19 +611,6 @@ const Limit = () => {
                       height={14}
                       className={`rounded-xl`}
                       src={ChevronDown}
-                    />
-                  </Button>
-                  <Button
-                    size={'xs'}
-                    className={classNames(`-ml-8 sm:-ml-2 rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
-                    onClick={handleSetSwap}
-                  >
-                    <Image
-                    alt={"Chevron double up icon"}
-                      width={14}
-                      height={14}
-                      className={`rounded-xl`}
-                      src={ChevronDoubleUp}
                     />
                   </Button>
                 </div>

@@ -1,9 +1,7 @@
 import Head from 'next/head'
 import React, { useCallback, useEffect, useState } from 'react'
-import {
-  useManifesterContract,
-} from 'hooks'
-
+import { useManifesterContract } from 'hooks'
+import Typography from 'components/Typography'
 import { classNames } from 'functions'
 import NavLink from 'components/NavLink'
 import Card from 'components/Card'
@@ -124,9 +122,9 @@ export default function Manifestations(): JSX.Element {
                   variant={`outlined`}
                   color={`ftmBlue`}
                 >
-                <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
+                <div className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent text-white rounded cursor-pointer">
                   {`View DeFarms`}
-                </a>
+                </div>
                 </Button>
               </NavLink>
               <NavLink
@@ -138,9 +136,9 @@ export default function Manifestations(): JSX.Element {
                   variant={`outlined`}
                   color={`ftmBlue`}
                 >
-                <a className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent rounded cursor-pointer">
+                <div className="flex items-center justify-between px-6 py-2 text-base font-bold border border-transparent text-white rounded cursor-pointer">
                   {`Create DeFarm`}
-                </a>
+                </div>
                 </Button>
               </NavLink>
             </div>
@@ -222,7 +220,11 @@ export default function Manifestations(): JSX.Element {
                                       //   // || (account && getAddress(account) != getAddress(manifestation?.recipient))
                                       // }
                                     >
+                                    <Typography
+                                      className={`text-white`}
+                                    >
                                       { defarm?.startTime > 0 ? `Launched` : `Launch` }
+                                    </Typography> 
                                     </Button>
                                   </div>
                                 </div>

@@ -12,8 +12,9 @@ import { useActiveWeb3React } from 'services/web3'
 import React, { useMemo } from 'react'
 import Link from 'next/link'
 import { TridentBody, TridentHeader } from 'layouts/Trident'
+import NetworkGuard from 'guards/Network'
 
-export default function CoffinBox(): JSX.Element {
+function CoffinBox(): JSX.Element {
   const { chainId } = useActiveWeb3React()
 
   const block1d = useOneDayBlock({ chainId, shouldFetch: !!chainId })
@@ -138,8 +139,12 @@ export default function CoffinBox(): JSX.Element {
       </div>
       <div className="py-6 space-y-4 text-2xl font-bold text-high-emphesis lg:px-14">Tokens</div>
       <div className="pt-4 lg:px-14">
-        <TokenList tokens={searched} enabledColumns={['name', 'liquidity', 'price', 'priceChange']} />
+        <TokenList tokens={searched} enabledColumns={['name', 'liquidity', 'price']} 
+        />
       </div>
     </AnalyticsContainer>
   )
 }
+
+export default CoffinBox
+CoffinBox.Guard = NetworkGuard(Feature.ANALYTICS)

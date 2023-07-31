@@ -1,6 +1,5 @@
 // const withPWA = require('next-pwa')
 // const runtimeCaching = require('next-pwa/cache')
-// // const withTM = require('next-transpile-modules')(["@0xsquid/widget"]);
 
 // const defaultTheme = require('tailwindcss/defaultTheme')
 
@@ -182,9 +181,11 @@
 // // Don't delete this console log, useful to see the config in Vercel deployments
 // console.log('next.config.s', JSON.stringify(module.exports, null, 2))
 
+// const withTM = require('next-transpile-modules')(["@0xsquid/widget"]);
 
 const nextConfig = {
   reactStrictMode: true,
+  // swcMinify: true,
   async redirects() {
     return [
       {
@@ -214,8 +215,8 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/bonds',
-        destination: '/bond',
+        source: '/bond',
+        destination: '/bonds',
         permanent: true,
       },
       {
@@ -225,7 +226,7 @@ const nextConfig = {
       },
       {
         source: '/luxor',
-        destination: '/luxor/bonds',
+        destination: '/luxor/redeem',
         permanent: true,
       },
       {
@@ -272,15 +273,15 @@ const nextConfig = {
         },
         {
           source: '/luxor',
-          destination: '/luxor/bonds',
+          destination: '/luxor/redeem',
         },
         {
           source: '/pool',
           destination: '/exchange/pool',
         },
         {
-          source: '/bonds',
-          destination: '/bond',
+          source: '/bond',
+          destination: '/bonds',
         },
         {
           source: '/user',
@@ -345,6 +346,9 @@ const nextConfig = {
           deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
         },
 }
+
+// Please declare withTM as your last plugin (the outermost one)
+// module.exports = withTM(nextConfig)
 module.exports = nextConfig
 
 // Don't delete this console log, useful to see the config in Vercel deployments
