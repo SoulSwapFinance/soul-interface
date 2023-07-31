@@ -70,8 +70,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   const { pairUserInfo } = useUserPairInfo(account, assetAddress)
   const { pairInfo } = usePairInfo(assetAddress)
   const token0Name = pairInfo.token0Name
-  const isUnderworldPair = bond.type == "lend"
-  const isSwapPair = !isUnderworldPair
+  const isSwapPair = true
   // const APR = Number(soulBondInfo.apr)
   const _APR = Number(soulBondInfo.apr)
   // const assetName = soulBondUserInfo.symbol
@@ -107,21 +106,22 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   const token0 = new Token(chainId, bond.token0Address, token0Decimals, token0Symbol, token0Name)
   const token1 = new Token(chainId, bond.token1Address, token1Decimals, token1Symbol, token1Name)
 
-  // stakeble if either not yet staked and on Fantom Opera or not on Fantom Opera.
-  const isStakeable = chainId
-    == ChainId.FANTOM && _stakedBalance == 0
-    || chainId == ChainId.AVALANCHE
+  // stakeble always meow.
+  const isStakeable = true
+  // chainId
+  //   == ChainId.FANTOM && _stakedBalance == 0
+  //   || chainId == ChainId.AVALANCHE
 
-  const depositable
-        = chainId == ChainId.FANTOM && pid == '2' ? false
-          : Number(pid) >= 10 ? false
-          : true
+  const depositable = true
+        // = chainId == ChainId.FANTOM && pid == '2' ? false
+        //   : Number(pid) >= 10 ? false
+        //   : true
 
   // CALCULATIONS
   // const stakedValue = stakedBal * lpPrice
   // const availableValue = unstakedBal * lpPrice
   const pendingValue = pending * soulPrice
-  const percOfBond = 100 * _stakedValue / _liquidity
+  // const percOfBond = 100 * _stakedValue / _liquidity
 
   // initial render/mount & reruns every 2 seconds
   // useEffect(() => {
@@ -236,10 +236,8 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
     <div className="flex justify-center w-full">
       <BondContainer className={``}>
         <div className={classNames(`bg-dark-900 p-2 m-1 border rounded-2xl border-blue`, !hasBalance && "border-dark-1000",
-          isUnderworldPair ? "hover:border-blue"
             // : !isActive ? "hover:border-pink"
-            : hasBalance && isUnderworldPair ? "hover:border-blue border-blue"
-              : hasBalance && !isUnderworldPair ? "border-dark-600"
+              hasBalance && isActive ? "border-dark-600"
                 : hasBalance && !isActive ? "hover:border-pink border-pink"
                   : "hover:border-dark-600"
         )}
@@ -247,18 +245,9 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
         >
           <div className={`flex w-full`}>
             <div className="grid grid-cols-1 md:mr-16 justify-center">
-              <div className={`grid ${isUnderworldPair ? `grid-cols-2` : `grid-cols-2`}`}>
+              <div className={`grid grid-cols-2`}>
                 <CurrencyLogo currency={token0} size={40} />
-                {isUnderworldPair &&
-                  <CurrencyLogo currency={token1} size={20} />
-                }
-                {isSwapPair &&
-                  <CurrencyLogo currency={token1} size={40} />
-                }
-                {/* {Number(allocPoint) != 220
-                            ? <DoubleCurrencyLogo currency0={token0} currency1={token1} size={40} />
-                            : <CurrencyLogo currency={token0} size={40} />
-                        } */}
+                <CurrencyLogo currency={token1} size={40} />
               </div>
             </div>
             {/* <HideOnMobile>
@@ -393,7 +382,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                                 : setShowDepositConfirmation(true)
                             }
                           >
-                            DEPOSIT {isUnderworldPair ? token0Symbol : `${bond.lpSymbol} LP`}
+                            DEPOSIT {`${bond.lpSymbol} LP`}
                           </SubmitButton>
                         ) :
                         (!approved && isStakeable && depositable &&
@@ -409,11 +398,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
 
                 <Wrap padding="0.5rem" margin="0.25rem" display="flex" justifyContent="space-between">
                   <Text fontSize=".9rem" padding="0" textAlign="left">
-                    {isUnderworldPair 
-                      ? 'ENDS: AUG 2023'
-                      : chainId == ChainId.FANTOM ? 'ENDS: AUG 2023'
-                      : 'ENDS: Q1 2025'
-                     }
+                    {'ENDS: Q1 2025'}
                     <br />
                     VALUE:&nbsp;{Number(_stakedValue) !== 0 ? `${formatNumber(_stakedValue, true, true)}` : '0'}
                   </Text>
