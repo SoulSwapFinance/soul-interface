@@ -118,7 +118,6 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: MULTI_USDC_ADDRESS[ChainId.FANTOM],
   },
-
   {
     // 600
     pid: 4,
