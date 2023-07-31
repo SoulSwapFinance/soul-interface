@@ -5035,44 +5035,53 @@ export const TOKENS = [
       decimals: 18,
       logoURI:
         "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/fantom/assets/0xdef1fac7Bf08f173D286BbBDcBeeADe695129840/logo.png",
-      name: "Cerby Token",
-      symbol: "CERBY",
-    },
-    {
-      address: "0xB01E8419d842beebf1b70A7b5f7142abbaf7159D",
-      chainId: 250,
-      decimals: 18,
-      logoURI:
+        name: "Cerby Token",
+        symbol: "CERBY",
+      },
+      {
+        address: "0xB01E8419d842beebf1b70A7b5f7142abbaf7159D",
+        chainId: 250,
+        decimals: 18,
+        logoURI:
         "https://raw.githubusercontent.com/sushiswap/icons/master/token/cover.jpg",
-      name: "Cover",
-      symbol: "COVER",
-    },
-    {
-      address: "0x657A1861c15A3deD9AF0B6799a195a249ebdCbc6",
-      chainId: 250,
-      decimals: 18,
-      logoURI:
+        name: "Cover",
+        symbol: "COVER",
+      },
+      {
+        address: "0x657A1861c15A3deD9AF0B6799a195a249ebdCbc6",
+        chainId: 250,
+        decimals: 18,
+        logoURI:
         "https://raw.githubusercontent.com/sushiswap/icons/master/token/cream.jpg",
-      name: "Cream",
-      symbol: "CREAM",
-    },
-    {
-      address: "0x1E4F97b9f9F913c46F1632781732927B9019C68b",
-      chainId: 250,
-      decimals: 18,
-      logoURI:
+        name: "Cream",
+        symbol: "CREAM",
+      },
+      {
+        address: "0x1E4F97b9f9F913c46F1632781732927B9019C68b",
+        chainId: 250,
+        decimals: 18,
+        logoURI:
         "https://raw.githubusercontent.com/sushiswap/icons/master/token/crv.jpg",
-      name: "Curve DAO",
-      symbol: "CRV",
-    },
-    {
-      address: "0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E",
-      chainId: 250,
-      decimals: 18,
-      logoURI:
-        "https://raw.githubusercontent.com/sushiswap/icons/master/token/dai.jpg",
-      name: "Dai Stablecoin",
+        name: "Curve DAO",
+        symbol: "CRV",
+      },
+      {
+        address: "0xD5d5350F42CB484036A1C1aF5F2DF77eAFadcAFF",
+        chainId: 250,
+        decimals: 18,
+        logoURI:
+        "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/fantom/assets/0xD5d5350F42CB484036A1C1aF5F2DF77eAFadcAFF/logo.png",
+      name: "DAI (Axelar)",
       symbol: "DAI",
+    },
+      {
+        address: "0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E",
+        chainId: 250,
+        decimals: 18,
+        logoURI:
+        "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/fantom/assets/0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E/logo.png",
+      name: "DAI (Multichain)",
+      symbol: "mDAI",
     },
     {
       address: "0x078EEF5A2fb533e1a4d487ef64b27DF113d12C32",
