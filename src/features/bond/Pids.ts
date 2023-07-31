@@ -1,4 +1,4 @@
-import { ChainId, DAI_ADDRESS, SOUL_ADDRESS, SOUL_USDC, USDC_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS, BTC_NATIVE, ETH_NATIVE, USDC_NATIVE, SOUL_NATIVE, BTC_USDC, USDC_USDC, LZ_USDC_ADDRESS } from 'sdk'
+import { ChainId, DAI_ADDRESS, SOUL_ADDRESS, SOUL_USDC, USDC_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS, BTC_NATIVE, ETH_NATIVE, USDC_NATIVE, SOUL_NATIVE, BTC_USDC, USDC_USDC, LZ_USDC_ADDRESS, ETH_USDC } from 'sdk'
 
 export const AvalanchePools = [
   {
@@ -143,7 +143,7 @@ export const FantomPools = [
     token0Symbol: 'ETH',
     token1Symbol: 'USDC',
     lpSymbol: 'ETH-USDC',
-    lpAddress: ETH_NATIVE[ChainId.FANTOM],
+    lpAddress: ETH_USDC[ChainId.FANTOM],
     token0Address: WETH_ADDRESS[ChainId.FANTOM],
     token1Address: USDC_ADDRESS[ChainId.FANTOM],
   },
