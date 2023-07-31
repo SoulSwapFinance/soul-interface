@@ -9,7 +9,7 @@ import LineGraph from 'components/LineGraph'
 
 import ColoredNumber from '../ColoredNumber'
 import { useActiveWeb3React } from 'services/web3'
-import { ChainId } from 'sdk'
+import { ChainId, LZ_USDC_ADDRESS, MULTI_AVAX_ADDRESS, MULTI_BNB_ADDRESS, MULTI_DAI_ADDRESS, MULTI_USDC_ADDRESS, MULTI_WBTC_ADDRESS, MULTI_WETH_ADDRESS } from 'sdk'
 
 type TokenListColumnType = 'name' | 'price' | 'liquidity' | 'volumeChange' | 'lastWeekGraph' // priceChange
 type SomeTokenListColumnType = 'name' | 'price' | 'liquidity' | 'lastWeekGraph'
@@ -41,11 +41,30 @@ interface TokenListNameProps {
 }
 
 function TokenListName({ token }: TokenListNameProps): JSX.Element {
+  const { chainId } = useActiveWeb3React()
   const currency = useCurrency(token.id)
-  const tokenSymbol = token?.symbol.startsWith('axl') 
+  let tokenSymbol = token?.symbol.startsWith('axl') 
     ? (token?.symbol).slice(3,) 
       : token?.symbol == 'FUCKMULTI' ? 'FMULTI' 
         : token?.symbol
+
+if(chainId == ChainId.FANTOM) {
+  token?.id == MULTI_BNB_ADDRESS[ChainId.FANTOM].toLowerCase() 
+    ? tokenSymbol = 'mBNB'
+      : token?.id == MULTI_WETH_ADDRESS[ChainId.FANTOM].toLowerCase() 
+      ? tokenSymbol = 'mWETH'
+        : token?.id == MULTI_WBTC_ADDRESS[ChainId.FANTOM].toLowerCase() 
+        ? tokenSymbol = 'mWBTC'
+          : token?.id == MULTI_DAI_ADDRESS[ChainId.FANTOM].toLowerCase() 
+          ? tokenSymbol = 'mDAI'
+            : token?.id == MULTI_USDC_ADDRESS[ChainId.FANTOM].toLowerCase() 
+            ? tokenSymbol = 'mUSDC'
+              : token?.id == MULTI_AVAX_ADDRESS[ChainId.FANTOM].toLowerCase() 
+              ? tokenSymbol = 'mAVAX'
+                : token?.id == LZ_USDC_ADDRESS[ChainId.FANTOM].toLowerCase() 
+                ? tokenSymbol = 'lzUSDC'
+    : tokenSymbol
+}
 
   return (
     <>
