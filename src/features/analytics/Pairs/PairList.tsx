@@ -45,19 +45,23 @@ function PairListName({ pair }: PairListNameProps): JSX.Element {
   const token0 = useCurrency(pair?.token0?.id)
   const token1 = useCurrency(pair?.token1?.id)
 
+  const token0Symbol = pair?.token0?.symbol.startsWith('axl') ? (pair.token0.symbol).slice(3,) : pair?.token0?.symbol
+  const token1Symbol = pair?.token1?.symbol.startsWith('axl') 
+    ? (pair.token1.symbol).slice(3,) 
+      : pair.token1.symbol == 'FUCKMULTI' ? 'FMULTI' 
+        : pair?.token1?.symbol
+
   return (
     <>
       <div className="flex items-center">
         <DoubleCurrencyLogo
-        //   className="-space-x-3"
-        //   logoClassName="rounded-full"
           currency0={token0}
           currency1={token1}
           size={40}
         />
         <div className="flex flex-col ml-3 whitespace-nowrap">
           <div className="font-bold text-high-emphesis">
-            {pair?.token0?.symbol}-{pair?.token1?.symbol}
+            {token0Symbol}-{token1Symbol}
           </div>
         </div>
       </div>
