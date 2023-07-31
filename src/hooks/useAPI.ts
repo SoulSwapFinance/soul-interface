@@ -181,17 +181,20 @@ export function useBondInfo(): { status: string; bondInfo: T } {
     const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
 
     const [bondInfo, setInfo] = useState<T>({
-        NativeSoulValue: '19800',
-        SoulUsdcValue: '24383',
-        NativeEthereumValue: '70575',
-        UsdcDaiValue: '167461',
-        NativeUsdcValue: '2446',
-        NativeBitcoinValueValue: '23295',
-        NativeDaiValue: '74995',
-        NativeBinanceValue: '62984',
-        NativeSeanceValue: '35920',
-        totalLiquidityValue: '308017',
-        totalValue: '308017',
+        NativeSoulValue: '0',
+        SoulUsdcValue: '0',
+        NativeEthereumValue: '0',
+        UsdcEthereumValue: '0',
+        UsdcBitcoinValue: '0',
+        UsdcUsdcValue: '0',
+        UsdcDaiValue: '0',
+        NativeUsdcValue: '0',
+        NativeBitcoinValueValue: '0',
+        NativeDaiValue: '0',
+        NativeBinanceValue: '0',
+        NativeSeanceValue: '0',
+        totalLiquidityValue: '0',
+        totalValue: '0',
         api: 'https://api.soulswap.finance/bonds'
       })  
     useEffect(() => {

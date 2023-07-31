@@ -158,5 +158,4 @@ export const FantomPools = [
     token0Address: USDC_ADDRESS[ChainId.FANTOM],
     token1Address: LZ_USDC_ADDRESS[ChainId.FANTOM],
   },
-    
 ]
