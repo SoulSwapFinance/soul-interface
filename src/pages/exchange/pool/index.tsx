@@ -12,8 +12,11 @@ import Head from 'next/head'
 import { useActiveWeb3React } from 'services/web3'
 import { useRouter } from 'next/router'
 import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
-import NavLink from 'components/NavLink'
+// import NavLink from 'components/NavLink'
 import { useV2PairsWithLiquidity } from 'features/trident/migrate/context/useV2PairsWithLiquidity'
+// import Typography from 'components/Typography'
+import Image from 'next/image'
+import POOL_BANNER from 'assets/branding/pool-banner.png'
 
 export default function Pool() {
   const router = useRouter()
@@ -45,33 +48,38 @@ export default function Pool() {
 
           <div className="p-4 space-y-2 bg-dark-900 rounded bg-dark-1200">
             {/* <div className="p-4 mb-00 space-y-3"> */}
-              {/* <div className="text-center">
+            {/* <div className="text-center">
                 <Typography component="h1" variant="h2">
                   {`Liquidity Positions`}
                 </Typography>
               </div> */}
             <div
-              // className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
+            // className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
             >
-          {/* <div
-              className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
-            > */}
-              {/* <Image src={POOL_BANNER}
-                height={180}
-                width={720}
-                alt={'pool banner'}
-              /> */}
-          {/* </div> */}
+              <div
+                className={`flex border-4 h-[120px] sm:h-[162px] p-4 border-dark-800 rounded-2xl`}
+              >
+                <Image
+                  src={POOL_BANNER}
+                  height={180}
+                  width={720}
+                  alt={'pool banner'}
+                />
+              </div>
             </div>
-            <div className="flex mb-4 items-center justify-center">
+            {/*  <div className="flex mb-4 items-center justify-center">
               <Button variant="filled" color="purple" size="lg">
                 <NavLink href={'/info/dashboard'}>
-                  <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                    View Account Analytics <span> ↗</span>
-                  </a>
+                  <div className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                    <Typography
+                      className={'text-white'}
+                    >
+                      {`View Account Analytics ↗`}
+                    </Typography>
+                  </div>
                 </NavLink>
               </Button>
-            </div>
+            </div> */}
             <div className="grid grid-flow-row gap-3">
               <div className="mb-1 mt-1" />
               {loading ? (

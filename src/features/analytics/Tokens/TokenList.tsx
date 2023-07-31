@@ -42,12 +42,16 @@ interface TokenListNameProps {
 
 function TokenListName({ token }: TokenListNameProps): JSX.Element {
   const currency = useCurrency(token.id)
+  const tokenSymbol = token?.symbol.startsWith('axl') 
+    ? (token?.symbol).slice(3,) 
+      : token?.symbol == 'FUCKMULTI' ? 'FMULTI' 
+        : token?.symbol
 
   return (
     <>
       <div className="flex items-center">
         <CurrencyLogo className="rounded-full" currency={currency} size={40} />
-        <div className="ml-4 text-lg font-bold text-high-emphesis">{token.symbol}</div>
+        <div className="ml-4 text-lg font-bold text-high-emphesis">{tokenSymbol}</div>
       </div>
     </>
   )
