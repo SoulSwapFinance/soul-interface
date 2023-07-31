@@ -1,4 +1,4 @@
-import { AVAX_ADDRESS, BNB_ADDRESS, ChainId, DAI_ADDRESS, DAI_BNB_MARKET, DAI_ETH_MARKET, DAI_NATIVE_MARKET, MULTI_USDC_ADDRESS, NATIVE_DAI_MARKET, SEANCE_ADDRESS, SOUL_ADDRESS, SOUL_USDC, SOUL_MUSDC, USDC_ADDRESS, USDC_DAI_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS, MULTI_WETH_ADDRESS, MULTI_WBTC_ADDRESS, METH_NATIVE, MBTC_NATIVE, MULTI_DAI_ADDRESS } from 'sdk'
+import { ChainId, DAI_ADDRESS, SOUL_ADDRESS, SOUL_USDC, USDC_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS, BTC_NATIVE, ETH_NATIVE, USDC_NATIVE, SOUL_NATIVE, BTC_USDC, USDC_USDC, LZ_USDC_ADDRESS } from 'sdk'
 
 export const AvalanchePools = [
   {
@@ -71,169 +71,92 @@ export const AvalanchePools = [
 
 export const FantomPools = [
   {
-    // 1000
+    // 400
     pid: 0,
     type: 'swap',
-    // summonerPid: 1,
     token0Symbol: 'WFTM',
     token1Symbol: 'SOUL',
     lpSymbol: 'FTM-SOUL',
-    lpAddress: '0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57',
+    lpAddress: SOUL_NATIVE[ChainId.FANTOM],
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: SOUL_ADDRESS[ChainId.FANTOM],
   },
   {
-    // 600
+    // 200
     pid: 1,
     type: 'swap',
-    // summonerPid: 22,
     token0Symbol: 'SOUL',
     token1Symbol: 'USDC',
     lpSymbol: 'SOUL-USDC',
-    lpAddress: SOUL_MUSDC[ChainId.FANTOM],
+    lpAddress: SOUL_USDC[ChainId.FANTOM],
     token0Address: SOUL_ADDRESS[ChainId.FANTOM],
-    token1Address:  MULTI_USDC_ADDRESS[ChainId.FANTOM],
+    token1Address: USDC_ADDRESS[ChainId.FANTOM],
   },
-  // {
-  //   // 600
-  //   pid: 2,
-  //   type: 'swap',
-  //   // summonerPid: 10,
-  //   token0Symbol: 'WFTM',
-  //   token1Symbol: 'SEANCE',
-  //   lpSymbol: 'FTM-SEANCE',
-  //   lpAddress: '0x8542bEAC34282aFe5Bb6951Eb6DCE0B3783b7faB',
-  //   token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-  //   token1Address: SEANCE_ADDRESS[ChainId.FANTOM],
-  // },
   {
-    // 600
-    pid: 3,
+    // 200
+    pid: 2,
     type: 'swap',
-    // summonerPid: 2,
     token0Symbol: 'WFTM',
     token1Symbol: 'USDC',
     lpSymbol: 'FTM-USDC',
-    lpAddress: '0x160653F02b6597E7Db00BA8cA826cf43D2f39556',
+    lpAddress: USDC_NATIVE[ChainId.FANTOM],
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: MULTI_USDC_ADDRESS[ChainId.FANTOM],
+    token1Address: USDC_ADDRESS[ChainId.FANTOM],
   },
   {
-    // 600
+    // 200
+    pid: 3,
+    type: 'swap',
+    token0Symbol: 'WFTM',
+    token1Symbol: 'BTC',
+    lpSymbol: 'FTM-BTC',
+    lpAddress: BTC_NATIVE[ChainId.FANTOM],
+    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+    token1Address: WBTC_ADDRESS[ChainId.FANTOM]
+  },
+  {
+    // 200
     pid: 4,
     type: 'swap',
-    // summonerPid: 23,
+    token0Symbol: 'BTC',
+    token1Symbol: 'USDC',
+    lpSymbol: 'BTC-USDC',
+    lpAddress: BTC_USDC[ChainId.FANTOM],
+    token0Address: WBTC_ADDRESS[ChainId.FANTOM],
+    token1Address: USDC_ADDRESS[ChainId.FANTOM]
+  },
+  {
+    // 200
+    pid: 5,
+    type: 'swap',
     token0Symbol: 'WFTM',
-    token1Symbol: 'DAI',
-    lpSymbol: 'FTM-DAI',
-    lpAddress: '0xF3d6E8Ecece8647B456d57375Ce0B51B8F0cD40b',
+    token1Symbol: 'ETH',
+    lpSymbol: 'FTM-ETH',
+    lpAddress: ETH_NATIVE[ChainId.FANTOM],
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: MULTI_DAI_ADDRESS[ChainId.FANTOM],
+    token1Address: WETH_ADDRESS[ChainId.FANTOM],
   },
   {
-      // 600
-      pid: 5,
-      type: 'swap',
-      // summonerPid: 18,
-      token0Symbol: 'WFTM',
-      token1Symbol: 'BNB',
-      lpSymbol: 'FTM-BNB',
-      lpAddress: '0x52966a12e3211c92909C28603ca3df8465c06c82',
-      token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-      token1Address: BNB_ADDRESS[ChainId.FANTOM],
-    },
-    {
-      // 600
-      pid: 6,
-      type: 'swap',
-      // summonerPid: 4,
-      token0Symbol: 'WFTM',
-      token1Symbol: 'ETH',
-      lpSymbol: 'FTM-ETH',
-      lpAddress: METH_NATIVE[ChainId.FANTOM],
-      token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-      token1Address: MULTI_WETH_ADDRESS[ChainId.FANTOM],
-    },
-    
-    {
-      // 600
-      pid: 7,
-      type: 'swap',
-      // summonerPid: 13,
-      token0Symbol: 'WFTM',
-      token1Symbol: 'BTC',
-      lpSymbol: 'FTM-BTC',
-      lpAddress: MBTC_NATIVE[ChainId.FANTOM],
-      token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-      token1Address: MULTI_WBTC_ADDRESS[ChainId.FANTOM]
-    },
-
-    /* {
-    // 600
-    pid: 8,
+    // 200
+    pid: 6,
     type: 'swap',
-    token0Symbol: 'WETH',
-    token1: 'BTC',
-    lpSymbol: 'ETH-BTC',
-    lpAddress: '0x1fc954d3484bc21e0ce53a6648a35bbfc03dc9d0',
-    token0Address: MULTI_WETH_ADDRESS[ChainId.FANTOM],
-    token1Address: MULTI_WBTC_ADDRESS[ChainId.FANTOM]
-  }, */
- 
-  {
-    // 600
-    pid: 9,
-    type: 'swap',
-    // summonerPid: 21,
-    token0Symbol: 'USDC',
-    token1Symbol: 'DAI',
-    lpSymbol: 'USDC-DAI',
-    lpAddress: USDC_DAI_ADDRESS[ChainId.FANTOM],
-    token0Address:  MULTI_USDC_ADDRESS[ChainId.FANTOM],
-    token1Address: MULTI_DAI_ADDRESS[ChainId.FANTOM],
-  },
-  { // LENDING
-    pid: 10,
-    type: 'lend',
-    decimals: 18,
-    token0Symbol: 'FTM', // EXEMPT //
-    token1Symbol: 'DAI',
-    lpSymbol: 'DAI-FTM', // EXEMPT //
-    lpAddress: DAI_NATIVE_MARKET[ChainId.FANTOM],
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: MULTI_DAI_ADDRESS[ChainId.FANTOM],
-  },
-  { // LENDING
-    pid: 11,
-    type: 'lend',
-    decimals: 18,
-    token0Symbol: 'DAI',
-    token1Symbol: 'FTM', // EXEMPT //
-    lpSymbol: 'FTM-DAI',
-    lpAddress: NATIVE_DAI_MARKET[ChainId.FANTOM],
-    token0Address: MULTI_DAI_ADDRESS[ChainId.FANTOM],
-    token1Address: WNATIVE_ADDRESS[ChainId.FANTOM], // EXEMPT //
-  },
-  { // LENDING
-    pid: 12,
-    type: 'lend',
-    decimals: 18,
     token0Symbol: 'ETH',
-    token1Symbol: 'DAI',
-    lpSymbol: 'DAI-ETH',
-    lpAddress: DAI_ETH_MARKET[ChainId.FANTOM],
-    token0Address: MULTI_WETH_ADDRESS[ChainId.FANTOM],
-    token1Address: MULTI_DAI_ADDRESS[ChainId.FANTOM],
+    token1Symbol: 'USDC',
+    lpSymbol: 'ETH-USDC',
+    lpAddress: ETH_NATIVE[ChainId.FANTOM],
+    token0Address: WETH_ADDRESS[ChainId.FANTOM],
+    token1Address: USDC_ADDRESS[ChainId.FANTOM],
   },
-  { // LENDING
-    pid: 13,
-    type: 'lend',
-    decimals: 18,
-    token0Symbol: 'BNB',
-    token1Symbol: 'DAI',
-    lpSymbol: 'DAI-BNB',
-    lpAddress: DAI_BNB_MARKET[ChainId.FANTOM],
-    token0Address: BNB_ADDRESS[ChainId.FANTOM],
-    token1Address: MULTI_DAI_ADDRESS[ChainId.FANTOM],
+  {
+    // 200
+    pid: 7,
+    type: 'swap',
+    token0Symbol: 'USDC',
+    token1Symbol: 'USDC',
+    lpSymbol: 'USDC-USDC',
+    lpAddress: USDC_USDC[ChainId.FANTOM],
+    token0Address: USDC_ADDRESS[ChainId.FANTOM],
+    token1Address: LZ_USDC_ADDRESS[ChainId.FANTOM],
   },
+    
 ]

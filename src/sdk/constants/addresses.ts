@@ -313,7 +313,8 @@ export const SOUL_BOND_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xEdaECfc744F3BDeAF6556AEEbfcDedd79437a01F',
+  // [ChainId.FANTOM]: '0xEdaECfc744F3BDeAF6556AEEbfcDedd79437a01F',
+  [ChainId.FANTOM]: '0x45D674014Ba240Fc5B8e2605b36DF6A8e470e78f', // V2
   [ChainId.AVALANCHE]: '0x6385BFD7A981021fF07845b2e7fDdD02901E25ea', // V2
   // [ChainId.AVALANCHE]: '0x4161A44D71F68852d6b013a9C6BF968d3b08D9b7',
   [ChainId.MATIC]: '',
