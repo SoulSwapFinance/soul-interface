@@ -7,7 +7,7 @@ const features: FeatureMap = {
   [ChainId.ETHEREUM]: [
     Feature.AMM,
     Feature.SWAP,
-    // Feature.CROSSCHAIN,
+    Feature.CROSSCHAIN,
     Feature.LIQUIDITY,
     Feature.AGGREGATE,
     Feature.BRIDGE,
@@ -38,6 +38,7 @@ const features: FeatureMap = {
     Feature.AMM,
     Feature.AGGREGATE,
     Feature.BRIDGE,
+    Feature.CROSSCHAIN,
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD
   ],
@@ -53,7 +54,7 @@ const features: FeatureMap = {
     // Feature.ANALYTICS,
     Feature.AGGREGATE,
     // Feature.BRIDGE,
-    // Feature.CROSSCHAIN,
+    Feature.CROSSCHAIN,
     Feature.LIQUIDITY,
     // Feature.UNDERWORLD
   ],
