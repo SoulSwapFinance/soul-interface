@@ -19,7 +19,7 @@ import Modal from 'components/DefaultModal'
 import Typography from '../../components/Typography'
 import ModalHeader from 'components/Modal/Header'
 import { useBondUserInfo, usePairInfo, useUserPairInfo, useSoulBondInfo, useTokenInfo } from 'hooks/useAPI'
-import { classNames, formatNumber, formatPercent, tryParseAmount } from 'functions'
+import { classNames, formatNumber, formatPercent } from 'functions'
 import { Token, NATIVE } from 'sdk'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { useSoulBondContract } from 'hooks/useContract'
@@ -72,18 +72,17 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   const token0Name = pairInfo.token0Name
   const isUnderworldPair = bond.type == "lend"
   const isSwapPair = !isUnderworldPair
-  const MULTIPLIER = isSwapPair ? 1 : LEND_MULTIPLIER(chainId, assetAddress)
   // const APR = Number(soulBondInfo.apr)
-  const _APR = Number(soulBondInfo.apr) / MULTIPLIER
+  const _APR = Number(soulBondInfo.apr)
   // const assetName = soulBondUserInfo.symbol
   // const liquidity = Number(soulBondUserInfo.tvl)
 
   // for display purposes only //
-  const _liquidity = Number(soulBondUserInfo.tvl) * MULTIPLIER
+  const _liquidity = Number(soulBondUserInfo.tvl)
   const lpPrice = Number(soulBondUserInfo.pairPrice)
   // const stakedBal = Number(soulBondUserInfo.stakedBalance)
   // for display purposes only //
-  const _stakedBalance = Number(soulBondUserInfo.stakedBalance) * MULTIPLIER
+  const _stakedBalance = Number(soulBondUserInfo.stakedBalance)
   // for display purposes only //
   const _stakedValue = _stakedBalance * lpPrice
   const unstakedBal = Number(soulBondUserInfo.userBalance)
@@ -93,7 +92,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   // const assetToken = new Token(chainId, assetAddress, assetDecimals, assetName)
   // const parsedDepositValue = tryParseAmount(depositValue, assetToken)
   const walletBalance = Number(pairUserInfo.userBalance) / assetDivisor
-  const _walletBalance = Number(pairUserInfo.userBalance) / assetDivisor * MULTIPLIER
+  const _walletBalance = Number(pairUserInfo.userBalance) / assetDivisor
 
   const hasBalance = unstakedBal > 0
   // const parsedWalletBalance = tryParseAmount(walletBalance, assetToken)
@@ -205,7 +204,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
     try {
       tx = await bondContract?.deposit(
         pid,
-        (Number(depositValue) / MULTIPLIER).toFixed(assetDecimals)
+        (Number(depositValue)).toFixed(assetDecimals)
           .toBigNumber(assetDecimals)
       )
       await tx.wait()
@@ -213,7 +212,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
       const smallerValue = Number(depositValue) - 0.000001
       tx = await bondContract?.deposit(
         pid,
-        (Number(smallerValue) / MULTIPLIER).toFixed(assetDecimals)
+        (Number(smallerValue)).toFixed(assetDecimals)
           .toBigNumber(assetDecimals))
       await tx.wait()
       console.log(e)
@@ -236,7 +235,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   return (
     <div className="flex justify-center w-full">
       <BondContainer className={``}>
-        <div className={classNames(`bg-dark-900 p-2 m-1 border rounded rounded-2xl border-blue`, !hasBalance && "border-dark-1000",
+        <div className={classNames(`bg-dark-900 p-2 m-1 border rounded-2xl border-blue`, !hasBalance && "border-dark-1000",
           isUnderworldPair ? "hover:border-blue"
             // : !isActive ? "hover:border-pink"
             : hasBalance && isUnderworldPair ? "hover:border-blue border-blue"
@@ -493,7 +492,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
               primaryColor={getChainColor(chainId)}
               height="2.5rem"
               onClick={() =>
-                handleDeposit(pid, Number(depositValue) / MULTIPLIER)}
+                handleDeposit(pid, Number(depositValue))}
 
             >
               {`UNDERSTOOD & AGREED`}

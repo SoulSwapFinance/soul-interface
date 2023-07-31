@@ -315,6 +315,30 @@ export const SunsetBanner: FC = () => (
   </div>
 )
 
+export const ArchivedBondsBanner: FC<IBanner> = ({ chainId }) => (
+  <div className={classNames(chainId == ChainId.FANTOM ? "relative items-center w-full" : 'hidden')}>
+    <div className="w-full">
+      <div className="text-center m-2">
+        <p className="font-medium text-center text-white animate-pulse">
+          <ExternalLink
+            href="https://archived.soulswap.finance/bonds" target="_blank" rel="noreferrer"
+            className="font-bold text-white text-lg"
+          >
+            <Button variant="filled" color="red" size="sm">
+              <span className="justify-center">
+                {' '}
+                Retired Bonds ↗
+              </span>
+            </Button>
+          </ExternalLink>
+        </p>
+      </div>
+      <div className="absolute inset-y-0 right-0 flex items-start pt-1 pr-1 sm:pt-1 sm:pr-2 sm:items-start">
+      </div>
+    </div>
+  </div>
+)
+
 export const BondsBanner: FC = () => (
   <div className="relative items-center w-full">
     <div className="w-full">

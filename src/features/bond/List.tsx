@@ -22,6 +22,7 @@ import ExternalLink from 'components/ExternalLink'
 import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 import { BondsBanner } from 'components/Banner'
+import { ArchivedBondsBanner } from 'components/Banner'
 
 export const BondList = () => {
   const { chainId } = useActiveWeb3React()
@@ -77,6 +78,9 @@ export const BondList = () => {
                   : 'hidden')
               }
           > */}
+           <ArchivedBondsBanner 
+              chainId={chainId}
+           />
            <BondsBanner />
           {/* </div> */}
           {/* <div

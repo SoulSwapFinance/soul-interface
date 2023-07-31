@@ -607,8 +607,7 @@ export function useLimitOrderHelperContract(withSignerIfPossible?: boolean): Con
 
 export function useSoulBondContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_BOND_ADDRESS[chainId], 
-    chainId == 250 ? SOUL_BOND_ABI : SOUL_BOND_V2_ABI, withSignerIfPossible)
+  return useContract(chainId && SOUL_BOND_ADDRESS[chainId], SOUL_BOND_V2_ABI, withSignerIfPossible)
 }
 
 // ------- Atomic Swap --------
