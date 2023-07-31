@@ -11,7 +11,7 @@ type T = Record<string, string>
 //   URL = 'https://api.soulswap.finance' : URL = 'https://avax-api.soulswap.finance'
 // }
 
-const BASE_URL = 'https://api.soulswap.finance'
+const BASE_URL = 'https://archived-api.soulswap.finance'
 const BASE_GAS_URL = `https://ethapi.openocean.finance/v2` 
 
 export function useGasPrice(): { status: string; gasPrice: T } {
