@@ -773,10 +773,15 @@ export const AVAX_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
 }
 
-export const BNB_ADDRESS: AddressMap = {
+export const MULTI_BNB_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454',
+}
+
+export const BNB_ADDRESS: AddressMap = {
+  [ChainId.FANTOM]: MULTI_BNB_ADDRESS[ChainId.FANTOM],
   [ChainId.AVALANCHE]: '0x264c1383EA520f73dd837F915ef3a732e204a493',
 }
+
 
 export const USD_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: USDC_ADDRESS[ChainId.ETHEREUM],
@@ -988,3 +993,18 @@ export const DAI_BNB_MARKET: AddressMap = {
 }
 
 export const NATIVE_ADDRESS = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";
+
+// MULTICHAIN ASSETS //
+
+export const MULTICHAIN_TOKENS = {
+  [ChainId.FANTOM]: [
+    // ACTIVE //
+    MULTI_USDC_ADDRESS[ChainId.FANTOM],
+    MULTI_WBTC_ADDRESS[ChainId.FANTOM],
+    MULTI_DAI_ADDRESS[ChainId.FANTOM],
+    MULTI_WETH_ADDRESS[ChainId.FANTOM],
+    MULTI_AVAX_ADDRESS[ChainId.FANTOM],
+    MULTI_BNB_ADDRESS[ChainId.FANTOM],
+  ],
+  [ChainId.AVALANCHE]: [],
+}
