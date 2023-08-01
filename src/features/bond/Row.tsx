@@ -439,7 +439,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
           <div className="space-y-4">
             <ModalHeader header={`Are you sure?`} onClose={() => setShowMintConfirmation(false)} />
             <Typography variant="lg">
-              {`Minting exits your position and claims your rewards. You are responsible for your decision to mint and agree that you understand these terms. : ''}`
+              {`Minting exits your position and claims your rewards. You are responsible for your decision to mint and agree that you understand these terms.`
               }
             </Typography>
             <Typography variant="sm" className="font-medium">
