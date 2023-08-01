@@ -237,9 +237,9 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
       <BondContainer className={``}>
         <div className={classNames(`bg-dark-900 p-2 m-1 border rounded-2xl border-blue`, !hasBalance && "border-dark-1000",
             // : !isActive ? "hover:border-pink"
-              hasBalance && isActive ? "border-dark-600"
+              hasBalance && isActive ? "border-purple"
                 : hasBalance && !isActive ? "hover:border-pink border-pink"
-                  : "hover:border-dark-600"
+                  : "hover:border-purple"
         )}
           onClick={() => handleShowOptions()}
         >
@@ -439,7 +439,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
           <div className="space-y-4">
             <ModalHeader header={`Are you sure?`} onClose={() => setShowMintConfirmation(false)} />
             <Typography variant="lg">
-              {`Minting exits your position and claims your rewards. You are responsible for your decision to mint and agree that you understand these terms. ${chainId == ChainId.FANTOM ? 'You must mint prior to depositing more.' : ''}`
+              {`Minting exits your position and claims your rewards. You are responsible for your decision to mint and agree that you understand these terms. : ''}`
               }
             </Typography>
             <Typography variant="sm" className="font-medium">
