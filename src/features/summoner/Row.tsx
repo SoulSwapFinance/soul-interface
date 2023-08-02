@@ -128,7 +128,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
     const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
 
-    // const parsedDepositValue = tryParseAmount(depositValue, assetToken)
+    const parsedDepositValue = tryParseAmount(depositValue, assetToken)
     // const parsedWithdrawValue = tryParseAmount(withdrawValue, assetToken)
 
     // COLOR //
@@ -268,8 +268,8 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const handleDeposit = async (pid, amount) => {
         let tx
         try {
-           // tx = await SoulSummonerContract?.deposit(pid, parsedDepositValue?.quotient.toString())
-            tx = await SoulSummonerContract?.deposit(pid, (Number(depositValue)).toFixed(assetDecimals).toBigNumber(assetDecimals))
+           tx = await SoulSummonerContract?.deposit(pid, parsedDepositValue?.quotient.toString())
+            // tx = await SoulSummonerContract?.deposit(pid, (Number(depositValue)).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
         } catch (e) {
             const smallerValue = Number(depositValue) - 0.000001
@@ -619,9 +619,9 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     <FarmInputPanel
                                         pid={farm.pid}
                                         onUserInput={(value) => setDepositValue(value)}
-                                        onMax={() => setDepositValue(walletBalance.toString())}
+                                        onMax={() => setDepositValue(balance.toString())}
                                         value={depositValue}
-                                        balance={walletBalance.toString()}
+                                        balance={balance.toString()}
                                         id={pid}
                                     />
                                 }
