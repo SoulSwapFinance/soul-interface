@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import BondInputPanel from './Input'
 import { useActiveWeb3React } from 'services/web3'
 import useApprove from 'hooks/useApprove'
-import { ChainId, LEND_MULTIPLIER, SOUL_ADDRESS, SOUL_BOND_ADDRESS, WNATIVE } from 'sdk'
+import { ChainId, LEND_MULTIPLIER, ROUTER_ADDRESS, SOUL_ADDRESS, SOUL_BOND_ADDRESS, WNATIVE } from 'sdk'
+import { ethers } from 'ethers'
+
 import {
   BondContainer,
   BondItem,
@@ -18,12 +20,15 @@ import { Wrap, Text, ExternalLink } from 'components/ReusableStyles'
 import Modal from 'components/DefaultModal'
 import Typography from '../../components/Typography'
 import ModalHeader from 'components/Modal/Header'
-import { useBondUserInfo, usePairInfo, useUserPairInfo, useSoulBondInfo, useTokenInfo } from 'hooks/useAPI'
-import { classNames, formatNumber, formatPercent } from 'functions'
+import { useBondUserInfo, usePairInfo, useUserPairInfo, useSoulBondInfo, useTokenInfo, useUserTokenInfo } from 'hooks/useAPI'
+import { classNames, formatNumber, formatPercent, tryParseAmount } from 'functions'
 import { Token, NATIVE } from 'sdk'
 import { getChainColor, getChainColorCode } from 'constants/chains'
-import { useSoulBondContract } from 'hooks/useContract'
+import { useSoulBondContract, useTokenContract, useZapperContract } from 'hooks/useContract'
 import { CurrencyLogo } from 'components/CurrencyLogo'
+import { CurrencyDollarIcon } from '@heroicons/react/24/solid'
+import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
+import AssetInput from 'components/AssetInput'
 
 // import { useSoulPrice } from 'hooks/getPrices'
 // import DoubleCurrencyLogo from 'components/DoubleLogo'
@@ -113,9 +118,9 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   //   || chainId == ChainId.AVALANCHE
 
   const depositable = true
-        // = chainId == ChainId.FANTOM && pid == '2' ? false
-        //   : Number(pid) >= 10 ? false
-        //   : true
+  // = chainId == ChainId.FANTOM && pid == '2' ? false
+  //   : Number(pid) >= 10 ? false
+  //   : true
 
   // CALCULATIONS
   // const stakedValue = stakedBal * lpPrice
@@ -184,6 +189,82 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
     }
   }
 
+{/* ZAP SETTINGS */}
+const [approvedZap, setZapApproved] = useState(false)
+const [zapValue, setZapValue] = useState('0')
+const [zapTokenAddress, setZapTokenAddress] = useState(SOUL_ADDRESS[chainId])
+const [openZap, setOpenZap] = useState(false)
+
+const ZapContract = useZapperContract()
+const ZapContractAddress = ZapContract.address
+
+
+
+    // ZAP ADD-ONS //
+    const tokenContract = useTokenContract(zapTokenAddress)
+    const zapTokenDecimals = Number(useTokenInfo(zapTokenAddress).tokenInfo.decimals)
+    const zapTokenSymbol = useTokenInfo(zapTokenAddress).tokenInfo.symbol
+    const zapTokenName = useTokenInfo(zapTokenAddress).tokenInfo.name
+    const zapToken = new Token(chainId, zapTokenAddress, zapTokenDecimals, zapTokenSymbol, zapTokenName)
+    const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
+
+    // USER INFO //
+    const { userTokenInfo } = useUserTokenInfo(account, zapTokenAddress)
+    const selectedTokenDecimals = zapTokenDecimals ? zapTokenDecimals : 18
+    const selectedTokenBalance = Number(userTokenInfo.balance) / selectedTokenDecimals // TODO: try erc20BalanceOf(zapTokenAddress)
+    const zapTokenBalance = tryParseAmount(selectedTokenBalance.toString(), zapToken)
+    const [modalOpen, setModalOpen] = useState(true)
+
+
+  const handleShowZap = (pid) => {
+    setOpenZap(!openZap)
+  }
+
+  // checks: user's approval for ZapContractAddress to move tokens.
+  const fetchZapApproval = async () => {
+    if (!account) {
+        // alert('Connect Wallet')
+    } else {
+        // Checks if ZapContract can move tokens
+        // const amount = await erc20Allowance(account, ZapContractAddress)
+        const amount = tokenContract?.allowance(account, ZapContractAddress)
+        if (amount > 0) setZapApproved(true)
+        return amount
+    }
+  }
+
+  // approves ZapContractAddress to move selectedToken
+  const handleZapApprove = async (tokenContract) => {
+      try {
+          let tx
+          tx = tokenContract?.approve(ZapContractAddress, maxUint)
+          await tx?.wait().then(await fetchZapApproval())
+      } catch (e) {
+          console.log(e)
+          return
+      }
+  }
+
+  // HANDLE ZAP //
+    const handleZap = async (zapTokenAddress, lpAddress) => {
+      try {
+          let tx
+          tx = await ZapContract?.zapInToken(zapTokenAddress, Number(zapValue).toFixed(zapTokenDecimals).toBigNumber(zapTokenDecimals), lpAddress, ROUTER_ADDRESS[chainId], account)
+          await tx?.wait()
+      } catch (e) {
+          console.log(e)
+      }
+  }
+
+  const handleDismissSearch = useCallback(() => {
+    setModalOpen(false)
+  }, [setModalOpen])
+  // runs only on initial render/mount
+  useEffect(() => {
+    fetchApproval()
+  }, [account])
+
+  
   // // // Deposit
   // const handleDeposit = async (pid, amount) => {
   //   try {
@@ -236,10 +317,10 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
     <div className="flex justify-center w-full">
       <BondContainer className={``}>
         <div className={classNames(`bg-dark-900 p-2 m-1 border rounded-2xl border-blue`, !hasBalance && "border-dark-1000",
-            // : !isActive ? "hover:border-pink"
-              hasBalance && isActive ? "border-purple"
-                : hasBalance && !isActive ? "hover:border-pink border-pink"
-                  : "hover:border-purple"
+          // : !isActive ? "hover:border-pink"
+          hasBalance && isActive ? "border-purple"
+            : hasBalance && !isActive ? "hover:border-pink border-pink"
+              : "hover:border-purple"
         )}
           onClick={() => handleShowOptions()}
         >
@@ -352,8 +433,8 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                     />
                   }
                   <Wrap padding="0" margin="0" display="flex">
-                    {(approved && isStakeable && depositable && unstakedBal == 0 ?
-                      (
+                    {isStakeable && depositable && unstakedBal == 0 &&
+                    <div>
                         <SubmitButton
                           primaryColor={getChainColor(chainId)}
                         >
@@ -367,32 +448,49 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                                 ? `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token1Address}`
                                 : `https://exchange.soulswap.finance/add/${bond.token0Address}/${bond.token1Address}`}
                           >
-                            { `CREATE ${bond.lpSymbol} PAIR` }
+                            {`CREATE ${bond.lpSymbol} PAIR`}
                           </TokenPairLink>
                         </SubmitButton>
-                      ) :
-                      (approved && isStakeable && depositable) ?
-                        (
                           <SubmitButton
-                            height="2.5rem"
-                            primaryColor={getChainColor(chainId)}
-                            onClick={() =>
-                              _stakedBalance == 0
-                                ? handleDeposit(pid, depositValue)
-                                : setShowDepositConfirmation(true)
-                            }
+                              height="2rem"
+                              primaryColor={getChainColor(chainId)}
+                              // color={}
+                              // className={'font-bold'}
+                              margin=".5rem 0 0rem 0"
+                              onClick={() =>
+                                  handleShowZap(pid)
+                              }
                           >
-                            DEPOSIT {`${bond.lpSymbol} LP`}
+                              <div className="flex text-lg gap-1">
+                                  {/* <Zap width={26} className={classNames(`text-white`} /> */}
+                                  {`ZAP`}
+                                  <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
+                                  &rarr; {`${bond.lpSymbol}`}
+                              </div>
                           </SubmitButton>
-                        ) :
-                        (!approved && isStakeable && depositable &&
-                          <SubmitButton
-                            primaryColor={getChainColor(chainId)}
-                            height="2.5rem" onClick={() => handleApprove()}>
-                            APPROVE LP
-                          </SubmitButton>
-                        )
-                    )}
+                      </div>
+                    }
+
+                    { isStakeable && depositable &&
+                      <div>
+                        <SubmitButton
+                          primaryColor={getChainColor(chainId)}
+                          height="2.5rem" onClick={() => handleApprove()}>
+                          APPROVE LP
+                        </SubmitButton>
+                        <SubmitButton
+                          height="2.5rem"
+                          primaryColor={getChainColor(chainId)}
+                          onClick={() =>
+                            _stakedBalance == 0
+                              ? handleDeposit(pid, depositValue)
+                              : setShowDepositConfirmation(true)
+                          }
+                        >
+                          DEPOSIT {`${bond.lpSymbol} LP`}
+                        </SubmitButton>
+                      </div>
+                    }
                   </Wrap>
                 </FunctionBox>
 
@@ -457,6 +555,90 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
             </SubmitButton>
           </div>
         </Modal>
+  
+        {/*------ ZAP OPTIONS PANEL ------*/}
+        {openZap &&
+          <Modal
+              isCustom={true}
+              isOpen={openZap}
+              onDismiss={() => handleShowZap(pid)}
+              borderColor={'border-dark-900 hover:border-dark-420'}
+              className={classNames("border", "hover:border-dark-600",
+                  "p-4 mt-3 mb-3 sm:p-0.5 w-full")}
+          >
+    
+              {/* ZAP: NATIVE --> LP */}
+              <CurrencySearchModal.Controlled
+                  chainId={chainId}
+                  open={modalOpen}
+                  onDismiss={handleDismissSearch}
+                  onCurrencySelect={(value) => setZapTokenAddress(value.wrapped.address)}
+                  selectedCurrency={zapToken ?? undefined}
+                  allowManageTokenList={false}
+                  showSearch={true}
+              />
+              <AssetInput
+                  chainId={chainId}
+                  currencyLogo={true}
+                  currency={zapToken}
+                  value={zapValue}
+                  onChange={(value) => setZapValue(value)}
+                  balance={zapTokenBalance}
+                  showBalance={false}
+                  showMax={true}
+              />
+              <Wrap padding="0" margin="0" display="flex">
+                  <SubmitButton
+                      height="2rem"
+                      primaryColor={getChainColorCode(chainId)}
+                      // color={"#FFFFFF"}
+                      className={'font-bold'}
+                      margin=".5rem 0 0rem 0"
+                      onClick={() =>
+                          setModalOpen(true)
+                      }
+                  >
+                      {`SELECT TOKEN`}
+                  </SubmitButton>
+              </Wrap>
+              <div className="my-2 mx-8 mt-3 border border-[#FFFFFF]" />
+              {/* { !approvedZap && */}
+              <Wrap padding="0" margin="0" display="flex">
+                  <SubmitButton
+                      height="2rem"
+                      primaryColor={getChainColorCode(chainId)}
+                      color={'#FFFFFF'}
+                      className={'font-bold'}
+                      margin=".5rem 0 0rem 0"
+                      onClick={() =>
+                          handleZapApprove(tokenContract)
+                      }
+                  >
+                      {`APPROVE ZAP`}
+                      {/* {token.symbol} */}
+                  </SubmitButton>
+              </Wrap>
+    
+              <Wrap padding="0" margin="0" display="flex">
+                  <SubmitButton
+                      height="2rem"
+                      primaryColor={getChainColorCode(chainId)}
+                      color={"#FFFFFF"}
+                      className={'font-bold'}
+                      margin=".5rem 0 0rem 0"
+                      onClick={() =>
+                          handleZap(zapTokenAddress, bond.lpAddress)
+                      }
+                  >
+                      {`ZAP INTO PAIR`}
+                  </SubmitButton>
+              </Wrap>
+              <Typography className={`flex text-center mt-4 sm:mt-6 border border-[${getChainColor(chainId)}] p-2 rounded rounded-2xl`}>
+                  {`Mind slippage and loses due to low liquidity. Avoid large amounts, if unsure.`}
+              </Typography>
+    
+          </Modal>
+      }
 
         { /* CONFIRMATION MODAL */}
         <Modal isOpen={showDepositConfirmation} onDismiss={
@@ -486,6 +668,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
         </Modal>
       </BondContainer>
     </div>
+
 
   )
 }
