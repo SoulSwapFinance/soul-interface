@@ -86,6 +86,8 @@ import { useRouter } from "next/router"
 import { useCurrency } from "hooks/Tokens"
 import SwapDropdown from "features/swap/SwapDropdown"
 import { getChainColorCode } from "constants/chains"
+import LimitHeader from "features/limit/LimitHeader"
+import { CustomBanner } from "components/Banner"
 // import { FollowBanner } from "components/Banner"
 // import LIMIT_BANNER from 'assets/branding/limit-banner.png'
 // import TokenStats from "components/TokenStats"
@@ -157,12 +159,6 @@ const Limit = () => {
     DIV = "DIV",
     MUL = "MUL",
   }
-
-  // const handleShowHeader = useCallback(
-  //   () => {
-  //     setShowHeader(true)
-  //   }, [setShowHeader]
-  // )
 
   const handleCurrencyASelect = useCallback(
     (currencyA: Currency) => {
@@ -493,276 +489,274 @@ const Limit = () => {
 
   return (
     <DoubleGlowShadowV2>
-          <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
-            {showHeader &&
-              <SwapDropdown
-              inputCurrency={currencyA}
-              outputCurrency={currencyB}
-              allowedSlippage={allowedSlippage}
-              />
-            }
-
-            { showHeader && <div className={`mt-12`} /> }
-            <ConfirmSwapModal
-              isOpen={showConfirm}
-              trade={trade}
-              originalTrade={tradeToConfirm}
-              onAcceptChanges={handleAcceptChanges}
-              attemptingTxn={attemptingTxn}
-              txHash={txHash}
-              recipient={account}
-              allowedSlippage={allowedSlippage}
-              onConfirm={handleSwap}
-              swapErrorMessage={swapErrorMessage}
-              onDismiss={handleConfirmDismiss}
-              inputAmount={parsedAmounts.input}
-              outputAmount={parsedAmounts.output}
+      <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
+        {showHeader &&
+          <SwapDropdown
+            inputCurrency={currencyA}
+            outputCurrency={currencyB}
+            allowedSlippage={allowedSlippage}
+          />
+        }
+        <CustomBanner
+          chains={[ChainId.FANTOM]}
+          link={'/bonds'}
+          text={'New Bonds Available ↗'}
+          textColor={'white'}
+          color={'ftmBlue'}
+          className={`animate-pulse border-4 border-dark-800 rounded-2xl`}
+        />
+        <LimitHeader
+          input={currencyA}
+          output={currencyB}
+        />
+        {showHeader && <div className={`mt-12`} />}
+        <ConfirmSwapModal
+          isOpen={showConfirm}
+          trade={trade}
+          originalTrade={tradeToConfirm}
+          onAcceptChanges={handleAcceptChanges}
+          attemptingTxn={attemptingTxn}
+          txHash={txHash}
+          recipient={account}
+          allowedSlippage={allowedSlippage}
+          onConfirm={handleSwap}
+          swapErrorMessage={swapErrorMessage}
+          onDismiss={handleConfirmDismiss}
+          inputAmount={parsedAmounts.input}
+          outputAmount={parsedAmounts.output}
+        />
+        <AutoColumn gap={"md"}>
+          <div style={{ display: "relative" }}>
+            <SwapAssetPanel
+              spendFromWallet={true}
+              chainId={chainId}
+              header={(props) => (
+                <SwapAssetPanel.Header
+                  {...props}
+                  label={''}
+                />
+              )}
+              currency={currencyA}
+              value={formattedAmounts.input}
+              onChange={handleTypeInput}
+              onSelect={handleInputSelect}
             />
-            <AutoColumn gap={"md"}>
-              <div style={{ display: "relative" }}>
-                <SwapAssetPanel
-                  spendFromWallet={true}
-                  chainId={chainId}
-                  header={(props) => (
-                    <SwapAssetPanel.Header
-                      {...props}
-                      label={''}
-                    />
-                  )}
-                  currency={currencyA}
-                  value={formattedAmounts.input}
-                  onChange={handleTypeInput}
-                  onSelect={handleInputSelect}
-                />
-              {/* <div className={ 'my-2' } /> */}
-                <div className="flex -mt-2 -mb-2 z-0 justify-between">
-                  {rateType === Rate.MUL ? (
-                    <Button
-                      size={'xs'}
-                      className={classNames(`mx-[45%] rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
-                      // onClick={handleSetSwap}
-                    >
-                      <Image
-                        width={14}
-                        alt={"m{14}sign"}
-                        height={14}
-                        className={`rounded-xl`}
-                        src={Multiply}
-                        />
-                    </Button>
-                  ) : (
-                    <Button
-                      size={'xs'}
-                      className={classNames(`mx-[45%] rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
-                      // onClick={handleSetSwap}
-                    >
-                      <Image
-                      alt={"divide icon"}
-                        width={14}
-                        height={14}
-                        className={`rounded-xl`}
-                        src={Divide}
-                      />
-                    </Button>
-                  )}
-                </div>
-                {/* </ArrowWrapper> */}
-                <CurrencyInputPanel
-                  chainId={chainId}
-                  value={formattedAmounts.price}
-                  showCurrencySelect={false}
-                  // currency={currencyA}
-                  onUserInput={handleTypeDesiredRate}
-                  fiatValue={fiatValueDesiredRate ?? undefined}
-                  onCurrencySelect={handleInputSelect}
-                  // otherCurrency={currencyB}
-                  showCommonBases={false}
-                  id="limit-order-currency-rate"
-                  disableCurrencySelect={true}
-                  hideBalance={true}
-                  label={
-                    trade &&
-                    // trade && rateType === Rate.MUL ? `≈ ${formatNumber(formattedAmounts.price, false, true)} (${currencyB.symbol})`
-                    // : trade && rateType === Rate.MUL ? `≈ ${formatNumber(formattedAmounts.price, false, true)} (${currencyA.symbol})`
-                    // : 
-                    `1 ${currencyA?.symbol} ≈ ${formatNumber(formattedAmounts.price)} ${currencyB?.symbol}`
-                    // ? `${currencyA.symbol} ≈ ${Number(formattedAmounts.price).toFixed(2)} ${currencyB.symbol}`
-                    // ? `≈ ${(1 / Number(formattedAmounts.price)).toFixed(4)} (${currencyB.symbol})`
-                    // : `≈ ${(1 / Number(formattedAmounts.price)).toFixed(4)} (${currencyA.symbol})`
-                    // : `${currencyB.symbol} : ${currencyA.symbol}`
-
-                  }
-                />
-                {/* <div className="flex justify-end">
-                  <X
-                    size="14"
-                    color={getChainColor(chainId)}
+            {/* <div className={ 'my-2' } /> */}
+            <div className="flex -mt-2 -mb-2 z-0 justify-between">
+              {rateType === Rate.MUL ? (
+                <Button
+                  size={'xs'}
+                  className={classNames(`mx-[45%] rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
+                // onClick={handleSetSwap}
+                >
+                  <Image
+                    width={14}
+                    alt={"m{14}sign"}
+                    height={14}
+                    className={`rounded-xl`}
+                    src={Multiply}
                   />
-                  </div> */}
-                <div className="flex -mt-2 -mb-2 z-0 justify-between">
-                  <Button
-                    size={'xs'}
-                    className={classNames(`mx-[45%] rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
-                  // onClick={handleSwitch(currencyA, currencyB)}
-                  >
-                    <Image
-                    alt={"chevron down icon"}
-                      width={14}
-                      height={14}
-                      className={`rounded-xl`}
-                      src={ChevronDown}
-                    />
-                  </Button>
-                </div>
-                {/* </ArrowWrapper> */}
+                </Button>
+              ) : (
+                <Button
+                  size={'xs'}
+                  className={classNames(`mx-[45%] rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
+                // onClick={handleSetSwap}
+                >
+                  <Image
+                    alt={"divide icon"}
+                    width={14}
+                    height={14}
+                    className={`rounded-xl`}
+                    src={Divide}
+                  />
+                </Button>
+              )}
+            </div>
+            {/* </ArrowWrapper> */}
+            <CurrencyInputPanel
+              chainId={chainId}
+              value={formattedAmounts.price}
+              showCurrencySelect={false}
+              // currency={currencyA}
+              onUserInput={handleTypeDesiredRate}
+              fiatValue={fiatValueDesiredRate ?? undefined}
+              onCurrencySelect={handleInputSelect}
+              // otherCurrency={currencyB}
+              showCommonBases={false}
+              id="limit-order-currency-rate"
+              disableCurrencySelect={true}
+              hideBalance={true}
+              label={
+                trade &&
+                // trade && rateType === Rate.MUL ? `≈ ${formatNumber(formattedAmounts.price, false, true)} (${currencyB.symbol})`
+                // : trade && rateType === Rate.MUL ? `≈ ${formatNumber(formattedAmounts.price, false, true)} (${currencyA.symbol})`
+                // : 
+                `1 ${currencyA?.symbol} ≈ ${formatNumber(formattedAmounts.price)} ${currencyB?.symbol}`
+                // ? `${currencyA.symbol} ≈ ${Number(formattedAmounts.price).toFixed(2)} ${currencyB.symbol}`
+                // ? `≈ ${(1 / Number(formattedAmounts.price)).toFixed(4)} (${currencyB.symbol})`
+                // : `≈ ${(1 / Number(formattedAmounts.price)).toFixed(4)} (${currencyA.symbol})`
+                // : `${currencyB.symbol} : ${currencyA.symbol}`
 
-                <SwapAssetPanel
-                  spendFromWallet={true}
-                  chainId={chainId}
-                  header={
-                    (props) => (
-                      <SwapAssetPanel.Header
-                        {...props}
-                        label={''}
-                      />
-                    )
-                  }
-                  currency={currencyB}
-                  value={formattedAmounts.output}
-                  onChange={handleTypeOutput}
-                  onSelect={handleOutputSelect}
-                />
-              </div>
-
-              {trade &&
-                <div>
-                  <div className={classNames(!trade ? "hidden" : "flex justify-between")}>
-                    <div className={'flex mx-2'}>
-                      Current Market Rate
-                    </div>
-                    <div className={'flex mx-2'}>
-                      <TradePrice
-                        price={trade?.executionPrice}
-                        showInverted={showInverted}
-                        setShowInverted={setShowInverted}
-                      />
-                    </div>
-                  </div>
-                  <div className={classNames(!trade ? "hidden" : "flex justify-between")}>
-                    <div className={'flex mx-2'}>
-                      Price {`${trade && rateType === Rate.MUL ? `Premium` : `Discount`}`}
-                    </div>
-                    <div className={classNames(isProfitable ? `text-green` : `text-red`, 'flex mx-2')}>
-                      {/* { `${formattedAmounts.price} vs. ${trade?.executionPrice.toSignificant(4)}` } */}
-                      {/* { `${Number(formattedAmounts.price) - Number(trade?.executionPrice.toSignificant(4))}` } */}
-                      {rawPriceDelta > 0 ? formatNumber(rawPriceDelta, false, true) : `${formatNumber(priceDelta, false, true)} below Market.`}
-                    </div>
-                  </div>
-                  <div className={classNames(!trade ? "hidden" : "flex justify-between")}>
-                    <div className={'flex mx-2'}>
-                      Percent {`${trade && rateType === Rate.MUL ? `Premium` : `Discount`}`}
-                    </div>
-                    <div className={classNames(isProfitable ? `text-green` : `text-red`, 'flex mx-2')}>
-                      {/* { `${formattedAmounts.price} vs. ${trade?.executionPrice.toSignificant(4)}` } */}
-                      {/* { `${Number(formattedAmounts.price) - Number(trade?.executionPrice.toSignificant(4))}` } */}
-                      {`${rawPercentDelta > 0 ? formatPercent(rawPercentDelta) : `${formatPercent(percentDelta)} below Market.`}`}
-                    </div>
-                  </div>
-                </div>
               }
+            />
+            {/* <div className="flex justify-end">
+              <Button
+                size={'xs'}
+                className={classNames(`-ml-8 -mt-2 sm:-ml-2 rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
+                onClick={handleSetSwap(currencyA, currencyB)}
+              >
+                <Image
+                  alt={"Chevron double up icon"}
+                  width={14}
+                  height={14}
+                  className={`rounded-xl`}
+                  src={ChevronDoubleUp}
+                />
+              </Button>
+            </div> */}
+            {/* <div className={`my-1`} /> */}
+            <div className="flex -mt-2 -mb-2 z-0 justify-between">
+              <Button
+                size={'xs'}
+                className={classNames(`mx-[45%] rounded-xl bg-dark-1000 border border-${getChainColorCode(chainId)}`)}
+              // onClick={handleSwitch(currencyA, currencyB)}
+              >
+                <Image
+                  alt={"chevron down icon"}
+                  width={14}
+                  height={14}
+                  className={`rounded-xl`}
+                  src={ChevronDown}
+                />
+              </Button>
+            </div>
+            {/* </ArrowWrapper> */}
 
-              <BottomGrouping>
-                {swapIsUnsupported ? (
-                  <ButtonPrimary disabled={true}>
-                    <TYPE.Main mb="4px">Unsupported Asset</TYPE.Main>
-                  </ButtonPrimary>
-                ) :
-                  !account ? (
-                    <ButtonLight onClick={useWalletModalToggle}>
-                      Connect Wallet
-                    </ButtonLight>
-                  ) :
-                    routeNotFound && isLoadingRoute ? (
-                      <PurpleCard style={{ textAlign: "center" }}>
-                        <TYPE.Main mb="4px">
-                          <Dots>Loading</Dots>
-                        </TYPE.Main>
-                      </PurpleCard>
-                    ) : showApproveFlow ? (
-                      <AutoRow style={{ flexWrap: "nowrap", width: "100%" }}>
-                        <AutoColumn style={{ width: "100%" }} gap="12px">
-                          <ButtonConfirmed
-                            onClick={handleApprove}
-                            disabled={
-                              approvalState !== ApprovalState.NOT_APPROVED ||
-                              approvalSubmitted
-                            }
-                            width="100%"
-                            altDisabledStyle={approvalState === ApprovalState.PENDING} // show solid button while waiting
-                            confirmed={approvalState === ApprovalState.APPROVED}
-                          >
-                            <AutoRow
-                              justify="space-between"
-                              style={{ flexWrap: "nowrap" }}
-                            >
-                              <span style={{ display: "flex", alignItems: "center" }}>
-                                <CurrencyLogo
-                                  currency={currencyA}
-                                  size={20}
-                                  style={{ marginRight: "8px", flexShrink: 0 }}
-                                />
-                                {/* we need to shorten this string on mobile */}
-                                {approvalState === ApprovalState.APPROVED
-                                  ? `${currencyA?.symbol} Allowed.`
-                                  : `Approve
+            <SwapAssetPanel
+              spendFromWallet={true}
+              chainId={chainId}
+              header={
+                (props) => (
+                  <SwapAssetPanel.Header
+                    {...props}
+                    label={''}
+                  />
+                )
+              }
+              currency={currencyB}
+              value={formattedAmounts.output}
+              onChange={handleTypeOutput}
+              onSelect={handleOutputSelect}
+            />
+          </div>
+
+          {trade &&
+            <div>
+              <div className={classNames(!trade ? "hidden" : "flex justify-between")}>
+                <div className={'flex mx-2'}>
+                  Current Market Rate
+                </div>
+                <div className={'flex mx-2'}>
+                  <TradePrice
+                    price={trade?.executionPrice}
+                    showInverted={showInverted}
+                    setShowInverted={setShowInverted}
+                  />
+                </div>
+              </div>
+              <div className={classNames(!trade ? "hidden" : "flex justify-between")}>
+                <div className={'flex mx-2'}>
+                  Price {`${trade && rateType === Rate.MUL ? `Premium` : `Discount`}`}
+                </div>
+                <div className={classNames(isProfitable ? `text-green` : `text-red`, 'flex mx-2')}>
+                  {/* { `${formattedAmounts.price} vs. ${trade?.executionPrice.toSignificant(4)}` } */}
+                  {/* { `${Number(formattedAmounts.price) - Number(trade?.executionPrice.toSignificant(4))}` } */}
+                  {rawPriceDelta > 0 ? formatNumber(rawPriceDelta, false, true) : `${formatNumber(priceDelta, false, true)} below Market.`}
+                </div>
+              </div>
+              <div className={classNames(!trade ? "hidden" : "flex justify-between")}>
+                <div className={'flex mx-2'}>
+                  Percent {`${trade && rateType === Rate.MUL ? `Premium` : `Discount`}`}
+                </div>
+                <div className={classNames(isProfitable ? `text-green` : `text-red`, 'flex mx-2')}>
+                  {/* { `${formattedAmounts.price} vs. ${trade?.executionPrice.toSignificant(4)}` } */}
+                  {/* { `${Number(formattedAmounts.price) - Number(trade?.executionPrice.toSignificant(4))}` } */}
+                  {`${rawPercentDelta > 0 ? formatPercent(rawPercentDelta) : `${formatPercent(percentDelta)} below Market.`}`}
+                </div>
+              </div>
+            </div>
+          }
+
+          <BottomGrouping>
+            {swapIsUnsupported ? (
+              <ButtonPrimary disabled={true}>
+                <TYPE.Main mb="4px">Unsupported Asset</TYPE.Main>
+              </ButtonPrimary>
+            ) :
+              !account ? (
+                <ButtonLight onClick={useWalletModalToggle}>
+                  Connect Wallet
+                </ButtonLight>
+              ) :
+                routeNotFound && isLoadingRoute ? (
+                  <PurpleCard style={{ textAlign: "center" }}>
+                    <TYPE.Main mb="4px">
+                      <Dots>Loading</Dots>
+                    </TYPE.Main>
+                  </PurpleCard>
+                ) : showApproveFlow ? (
+                  <AutoRow style={{ flexWrap: "nowrap", width: "100%" }}>
+                    <AutoColumn style={{ width: "100%" }} gap="12px">
+                      <ButtonConfirmed
+                        onClick={handleApprove}
+                        disabled={
+                          approvalState !== ApprovalState.NOT_APPROVED ||
+                          approvalSubmitted
+                        }
+                        width="100%"
+                        altDisabledStyle={approvalState === ApprovalState.PENDING} // show solid button while waiting
+                        confirmed={approvalState === ApprovalState.APPROVED}
+                      >
+                        <AutoRow
+                          justify="space-between"
+                          style={{ flexWrap: "nowrap" }}
+                        >
+                          <span style={{ display: "flex", alignItems: "center" }}>
+                            <CurrencyLogo
+                              currency={currencyA}
+                              size={20}
+                              style={{ marginRight: "8px", flexShrink: 0 }}
+                            />
+                            {/* we need to shorten this string on mobile */}
+                            {approvalState === ApprovalState.APPROVED
+                              ? `${currencyA?.symbol} Allowed.`
+                              : `Approve
                               ${currencyA?.symbol}.`}
-                              </span>
-                              {approvalState === ApprovalState.PENDING ||
-                                (approvalSubmitted &&
-                                  approvalState === ApprovalState.NOT_APPROVED) ? (
-                                <Loader stroke="white" />
-                              ) : approvalSubmitted &&
-                                approvalState === ApprovalState.APPROVED ? (
-                                <CheckCircle size="20" color={theme.green1} />
-                              ) : (
-                                <MouseoverTooltip
-                                  text={`You must give the Limit Orders smart contracts
+                          </span>
+                          {approvalState === ApprovalState.PENDING ||
+                            (approvalSubmitted &&
+                              approvalState === ApprovalState.NOT_APPROVED) ? (
+                            <Loader stroke="white" />
+                          ) : approvalSubmitted &&
+                            approvalState === ApprovalState.APPROVED ? (
+                            <CheckCircle size="20" color={theme.green1} />
+                          ) : (
+                            <MouseoverTooltip
+                              text={`You must give the Limit Orders smart contracts
                                 permission to use your 
                                 ${currencyA?.symbol}. You only have to do
                                 this once per token.`}
-                                >
-                                  <HelpCircle
-                                    size="20"
-                                    color={"white"}
-                                    style={{ marginLeft: "8px" }}
-                                  />
-                                </MouseoverTooltip>
-                              )}
-                            </AutoRow>
-                          </ButtonConfirmed>
-                          <ButtonError
-                            onClick={() => {
-                              setSwapState({
-                                tradeToConfirm: trade,
-                                attemptingTxn: false,
-                                swapErrorMessage: undefined,
-                                showConfirm: true,
-                                txHash: undefined,
-                              });
-                            }}
-                            id="limit-order-button"
-                            disabled={
-                              !isValid || approvalState !== ApprovalState.APPROVED
-                            }
-                            error={false}
-                          >
-                            <Text fontSize={20} fontWeight={500}>
-                              {inputError ? inputError : `Place Order`}
-                            </Text>
-                          </ButtonError>
-                        </AutoColumn>
-                      </AutoRow>
-                    ) : (
+                            >
+                              <HelpCircle
+                                size="20"
+                                color={"white"}
+                                style={{ marginLeft: "8px" }}
+                              />
+                            </MouseoverTooltip>
+                          )}
+                        </AutoRow>
+                      </ButtonConfirmed>
                       <ButtonError
                         onClick={() => {
                           setSwapState({
@@ -774,51 +768,74 @@ const Limit = () => {
                           });
                         }}
                         id="limit-order-button"
-                        disabled={!isValid}
+                        disabled={
+                          !isValid || approvalState !== ApprovalState.APPROVED
+                        }
                         error={false}
                       >
                         <Text fontSize={20} fontWeight={500}>
                           {inputError ? inputError : `Place Order`}
                         </Text>
                       </ButtonError>
-                    )}
-                {swapErrorMessage && isValid ? (
-                  <SwapCallbackError error={swapErrorMessage} />
-                ) : null}
-              </BottomGrouping>
-            </AutoColumn>
-            {/* </Wrapper> */}
-            <div className={classNames(account ? `flex flex-cols-2 gap-3 text-white justify-end` : `hidden`)}>
-              <Toggle
-                id="toggle-button"
-                optionA="Orders"
-                optionB="Orders"
-                isActive={showOrders}
-                toggle={
-                  showOrders
-                    ? () => {
-                      setShowOrders(false)
-                    }
-                    : () => {
-                      setShowOrders(true)
-                    }
+                    </AutoColumn>
+                  </AutoRow>
+                ) : (
+                  <ButtonError
+                    onClick={() => {
+                      setSwapState({
+                        tradeToConfirm: trade,
+                        attemptingTxn: false,
+                        swapErrorMessage: undefined,
+                        showConfirm: true,
+                        txHash: undefined,
+                      });
+                    }}
+                    id="limit-order-button"
+                    disabled={!isValid}
+                    error={false}
+                  >
+                    <Text fontSize={20} fontWeight={500}>
+                      {inputError ? inputError : `Place Order`}
+                    </Text>
+                  </ButtonError>
+                )}
+            {swapErrorMessage && isValid ? (
+              <SwapCallbackError error={swapErrorMessage} />
+            ) : null}
+          </BottomGrouping>
+        </AutoColumn>
+        {/* </Wrapper> */}
+        <div className={classNames(account ? `flex flex-cols-2 gap-3 text-white justify-end` : `hidden`)}>
+          <Toggle
+            id="toggle-button"
+            optionA="Orders"
+            optionB="Orders"
+            isActive={showOrders}
+            toggle={
+              showOrders
+                ? () => {
+                  setShowOrders(false)
                 }
-              />
-            </div>
-            {showOrders && account && 
-            <GelatoLimitOrdersHistoryPanel />
+                : () => {
+                  setShowOrders(true)
+                }
             }
-            {!swapIsUnsupported ? null : (
-              <UnsupportedCurrencyFooter
-                show={swapIsUnsupported}
-                currencies={[currencyA, currencyB]}
-              />
-            )}
-            <div className={classNames([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `flex flex-cols-2 gap-3 text-white justify-end` : `hidden`)}>
-            </div>
-          </div>
-          {/* </div> */}
-      </DoubleGlowShadowV2>
+          />
+        </div>
+        {showOrders && account &&
+          <GelatoLimitOrdersHistoryPanel />
+        }
+        {!swapIsUnsupported ? null : (
+          <UnsupportedCurrencyFooter
+            show={swapIsUnsupported}
+            currencies={[currencyA, currencyB]}
+          />
+        )}
+        <div className={classNames([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `flex flex-cols-2 gap-3 text-white justify-end` : `hidden`)}>
+        </div>
+      </div>
+      {/* </div> */}
+    </DoubleGlowShadowV2>
   )
 }
 

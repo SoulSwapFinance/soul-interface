@@ -31,6 +31,7 @@ import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 // import Image from 'next/image'
 // import META_BANNER from 'assets/branding/meta-banner.png'
 import { NextSeo } from 'next-seo'
+import { CustomBanner } from 'components/Banner'
 // import { FollowBanner } from 'components/Banner'
 // import Typography from 'components/Typography'
 
@@ -358,10 +359,17 @@ const Aggregator = ({ }) => {
 		<DoubleGlowShadowV2>
 			<NextSeo title={`Meta | SoulSwap`} />
 			<div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-
 				<SwapDropdown
 					inputCurrency={currencyA}
 					outputCurrency={currencyB}
+				/>
+				<CustomBanner
+					chains={[ChainId.FANTOM]}
+					link={'/bonds'}
+					text={'New Bonds Available ↗'}
+					textColor={'white'}
+					color={'ftmBlue'}
+					className={`animate-pulse border-4 border-dark-800 rounded-2xl`}
 				/>
 				<div className={`my-12`} />
 				<div className="flex flex-col gap-3 space-y-3">

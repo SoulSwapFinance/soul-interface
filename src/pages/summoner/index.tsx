@@ -22,6 +22,7 @@ import NavLink from 'components/NavLink'
 // import TokenStats from 'components/TokenStats'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
+import { CustomBanner } from 'components/Banner'
 
 // import ExternalLink from 'components/ExternalLink'
 // import { SubmitButton } from 'features/bond/Styles'
@@ -76,6 +77,14 @@ const Summoner = () => {
 
   return (
     <div className={`grid grid-cols-1 w-full max-w-2xl justify-center p-1 mt-8 sm:m-8 bg-dark-900 rounded-2xl`}>
+          <CustomBanner
+            chains={[ChainId.FANTOM]}
+            link={'/bonds'}
+            text={'New Bonds Available ↗'}
+            textColor={'white'}
+            color={'ftmBlue'}
+            className={`animate-pulse border-4 border-dark-800 rounded-2xl`}
+          />
           <div className={`flex justify-center m-1 p-1`}>
           <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/dashboard'}>

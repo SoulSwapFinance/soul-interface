@@ -78,10 +78,10 @@ export const BondList = () => {
                   : 'hidden')
               }
           > */}
-           <ArchivedBondsBanner 
+           <BondsBanner />
+          <ArchivedBondsBanner 
               chainId={chainId}
            />
-           <BondsBanner />
           {/* </div> */}
           {/* <div
               className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}

@@ -29,8 +29,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
   const isPool = isRemove || isAdd
 
-  const isLimit = router.pathname.startsWith('/limit')
-    || router.pathname.startsWith('/exchange/swap/limit')
+  // const isLimit = router.pathname.startsWith('/limit')
+  //   || router.pathname.startsWith('/exchange/swap/limit')
 
   const isAggregator = asPath.startsWith('/aggregator')
     || asPath.startsWith('/exchange/aggregator')
@@ -52,13 +52,13 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const swapStyle = isExchange ? activeStyle : style
   const poolStyle = isPool ? activeStyle : style
   const ecoStyle = isAggregator ? activeStyle : style
-  const limitStyle = isLimit ? activeStyle : style
+  // const limitStyle = isLimit ? activeStyle : style
   const crossStyle = isCrosschain ? activeStyle : style
   const bridgeStyle = isBridge ? activeStyle : style
 
   return (
     <div className={`flex mt-2 mb-2 items-center justify-center gap-4 border-2 border-dark-700 rounded-lg`}>
-      <div className={`flex gap-4 sm:gap-8 mr-8 sm:mr-0`}>
+      <div className={`flex gap-6 sm:gap-8 mr-8 sm:mr-0`}>
         {/* {featureEnabled(Feature.LIQUIDITY, chainId) && */}
         <NavLink
           className={classNames(
@@ -127,7 +127,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           </NavLink>
         }
 
-        {featureEnabled(Feature.LIMIT, chainId) &&
+        {/* {featureEnabled(Feature.LIMIT, chainId) &&
           <NavLink
             className={classNames(
               limitStyle
@@ -150,7 +150,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               </Typography>
             </div>
           </NavLink>
-        }
+        } */}
 
         {featureEnabled(Feature.AGGREGATE, chainId) &&
           <NavLink
@@ -180,7 +180,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               <Typography
                 className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
               >
-                {`Meta`}
+                {`Aggregate`}
               </Typography>
             </div>
           </NavLink>
