@@ -35,7 +35,7 @@ import AssetInput from 'components/AssetInput'
 // import FarmInputPanel from 'features/summoner/Input'
 
 const TokenPairLink = styled(ExternalLink)`
-  font-size: .9rem;
+  font-size: 1rem;
   padding-left: 10;
 `
 
