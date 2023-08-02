@@ -183,6 +183,12 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const handleShowZap = (pid) => {
         setOpenZap(!openZap)
     }
+    
+    const handleMaxDeposit = (pid) => {
+        const token = new Token(chainId, farm.lpAddress, 18)
+        const tokenBalance = useCurrencyBalance(chainId, account, token)
+        setDepositValue(tokenBalance.toString())
+    }
 
     // checks: approval for summoner to move tokens.
     const fetchApproval = async () => {
@@ -291,7 +297,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     //         await tx.wait()
     //         // alert(e.message)
     //         console.log(e)
-    //     }171
+    //     }
     // }
 
     // // withdraws: selected amount into the summoner
@@ -615,7 +621,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     <FarmInputPanel
                                         pid={farm.pid}
                                         onUserInput={(value) => setDepositValue(value)}
-                                        onMax={() => setDepositValue(_walletBalance.toString())}
+                                        onMax={() => handleMaxDeposit}
                                         value={depositValue}
                                         balance={_walletBalance.toString()}
                                         id={pid}
