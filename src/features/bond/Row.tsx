@@ -435,7 +435,9 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                     {isStakeable && depositable && unstakedBal <= 1 &&
                       <Wrap padding="0" margin="0" display="flex">
                       <SubmitButton
+                          height="2rem"
                           primaryColor={getChainColor(chainId)}
+                          margin=".5rem 0 0rem 0"
                         >
                           <TokenPairLink
                             target="_blank"
@@ -452,8 +454,9 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                         </SubmitButton>
                         </Wrap>
                       }
+
                     {isStakeable && depositable &&
-                        <Wrap padding="0" margin="0" display="flex">
+                      <Wrap padding="0" margin="0" display="flex">
                         <SubmitButton
                           height="2rem"
                           primaryColor={getChainColor(chainId)}
@@ -469,7 +472,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                             {`ZAP `}
                             {/* <CurrencyDollarIcon width={26} className={classNames(`text-white`)} /> */}
                             &rarr; 
-                            {`${bond.lpSymbol}`}
+                            {` ${bond.lpSymbol}`}
                           </div>
                         </SubmitButton>
                       </Wrap>
@@ -477,15 +480,18 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
 
                       <Wrap padding="0" margin="0" display="flex">
                         <SubmitButton
+                          height="2rem"
                           primaryColor={getChainColor(chainId)}
-                          height="2.5rem" onClick={() => handleApprove()}>
-                          APPROVE LP
+                          margin=".5rem 0 0rem 0"
+                          onClick={() => handleApprove()}>
+                          {`APPROVE LP`}
                         </SubmitButton>
                         </Wrap>
                         {isStakeable && depositable &&
                       <Wrap padding="0" margin="0" display="flex">
                         <SubmitButton
-                          height="2.5rem"
+                          height="2rem"
+                          margin=".5rem 0 0rem 0"
                           primaryColor={getChainColor(chainId)}
                           onClick={() =>
                             _stakedBalance == 0
