@@ -75,11 +75,11 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const _liquidity = Number(summonerPoolInfo.tvl)
     // for display purposes only //
     const _APR = Number(summonerPoolInfo.apr)
-    
+
     const allocPoint = summonerPoolInfo.allocPoint
     const lpAddress = summonerPoolInfo.lpAddress
     // const pairStatus = summonerPoolInfo.status
-    
+
     // const { userInfo } = useUserInfo()
     const { pairInfo } = usePairInfo(lpAddress)
     // assumes 18, since only SOUL-LP farms are eligible for Zap   
@@ -181,7 +181,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const handleShowZap = (pid) => {
         setOpenZap(!openZap)
     }
-    
+
     // const handleMaxDeposit = (pid) => {
     //     const token = new Token(chainId, farm.lpAddress, 18)
     //     const tokenBalance = useCurrencyBalance(chainId, account, token)
@@ -268,7 +268,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const handleDeposit = async (pid, amount) => {
         let tx
         try {
-           tx = await SoulSummonerContract?.deposit(pid, parsedDepositValue?.quotient.toString())
+            tx = await SoulSummonerContract?.deposit(pid, parsedDepositValue?.quotient.toString())
             // tx = await SoulSummonerContract?.deposit(pid, (Number(depositValue)).toFixed(assetDecimals).toBigNumber(assetDecimals))
             await tx.wait()
         } catch (e) {
@@ -325,32 +325,32 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     }
 
     return (
-            <>
-                <div className="grid grid-cols-1 justify-center w-full">
-                    <div className={classNames("bg-dark-900 p-3 m-1 border rounded-2xl border-blue", !hasBalance && "border-dark-1000",
-                        isUnderworldPair ? "hover:border-blue" : !isActive ? "hover:border-pink"
-                            : hasBalance && isUnderworldPair ? "hover:border-blue border-blue"
-                                : hasBalance && !isUnderworldPair ? "border-dark-600"
-                                    : hasBalance && !isActive ? "hover:border-pink border-pink"
-                                        : "hover:border-dark-600"
-                    )}
-                        onClick={() => handleShowOptions()}
-                    >
-                        <div className={`grid grid-cols-4 w-full`}>
-                            <div className="grid span-cols-1 mr-8 justify-center">
-                                <div className={`grid grid-cols-2`}>
-                                    <CurrencyLogo currency={token0} size={40} />
-                                    {isUnderworldPair &&
-                                        <CurrencyLogo currency={token1} size={20} />
-                                    }
-                                    {isSwapPair &&
-                                        <CurrencyLogo currency={token1} size={40} />
-                                    }
-                                </div>
+        <>
+            <div className="grid grid-cols-1 justify-center w-full">
+                <div className={classNames("bg-dark-900 p-3 m-1 border rounded-2xl border-blue", !hasBalance && "border-dark-1000",
+                    isUnderworldPair ? "hover:border-blue" : !isActive ? "hover:border-pink"
+                        : hasBalance && isUnderworldPair ? "hover:border-blue border-blue"
+                            : hasBalance && !isUnderworldPair ? "border-dark-600"
+                                : hasBalance && !isActive ? "hover:border-pink border-pink"
+                                    : "hover:border-dark-600"
+                )}
+                    onClick={() => handleShowOptions()}
+                >
+                    <div className={`grid grid-cols-4 w-full`}>
+                        <div className="grid span-cols-1 mr-8 justify-center">
+                            <div className={`grid grid-cols-2`}>
+                                <CurrencyLogo currency={token0} size={40} />
+                                {isUnderworldPair &&
+                                    <CurrencyLogo currency={token1} size={20} />
+                                }
+                                {isSwapPair &&
+                                    <CurrencyLogo currency={token1} size={40} />
+                                }
                             </div>
+                        </div>
 
-                            {/* STAKED VALUE */}
-                            {/* <HideOnMobile>
+                        {/* STAKED VALUE */}
+                        {/* <HideOnMobile>
                                 <FarmItemBox>
                                     <div className={`justify-center mt-2`}>
                                         {Number(_APR).toString() === '0.00' ? (
@@ -372,8 +372,8 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 </FarmItemBox>
                             </HideOnMobile> */}
 
-                            {/* STAKED OWNERSHIP */}
-                            {/* <HideOnSmall>
+                        {/* STAKED OWNERSHIP */}
+                        {/* <HideOnSmall>
                                 <FarmItemBox>
                                     <div className={`justify-center mt-2`}>
                                         {_stakedValue.toFixed(0).toString() === '0' ? (
@@ -389,23 +389,23 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 </FarmItemBox>
                             </HideOnSmall> */}
 
-                            {/* % APR */}
-                            <FarmItemBox>
-                                <div className={`grid grid-cols-1 justify-center mt-1`}>
-                                    {Number(_APR).toString() === '0.00' ? (
-                                        <Text padding="0" fontSize="1rem" color="#666">
-                                            0
-                                        </Text>
-                                    ) : (
-                                        <Text padding="0" fontSize="1rem" color={Number(_APR) > 0 ? '#4EFF4E' : 'white'}>
-                                            {Number(_APR).toFixed()}%
-                                        </Text>
-                                    )}
-                                </div>
-                            </FarmItemBox>
+                        {/* % APR */}
+                        <FarmItemBox>
+                            <div className={`grid grid-cols-1 justify-center mt-1`}>
+                                {Number(_APR).toString() === '0.00' ? (
+                                    <Text padding="0" fontSize="1rem" color="#666">
+                                        0
+                                    </Text>
+                                ) : (
+                                    <Text padding="0" fontSize="1rem" color={Number(_APR) > 0 ? '#4EFF4E' : 'white'}>
+                                        {Number(_APR).toFixed()}%
+                                    </Text>
+                                )}
+                            </div>
+                        </FarmItemBox>
 
-                            {/* REWARDS VALUE */}
-                            {/* <FarmItemBox className="flex">
+                        {/* REWARDS VALUE */}
+                        {/* <FarmItemBox className="flex">
                                 {earnedValue.toFixed(0).toString() === '0' ? (
                                     <Text padding="0" fontSize="1rem" color="#666">
                                         0
@@ -417,21 +417,21 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 )}
                             </FarmItemBox> */}
 
-                            <FarmItemBox className="flex">
-                                {earnedAmount.toFixed(0).toString() === '0' ? (
-                                    <Text padding="0" fontSize="1rem" color="#666">
-                                        0
-                                    </Text>
-                                ) : (
-                                    <Text padding="0" fontSize="1rem" color="#B383FF">
-                                        {Number(earnedAmount)
-                                            .toFixed(0)
-                                            .toString()
-                                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' SOUL'}
-                                    </Text>
-                                )}
-                            </FarmItemBox>
-                            <FarmItemBox className="flex">
+                        <FarmItemBox className="flex">
+                            {earnedAmount.toFixed(0).toString() === '0' ? (
+                                <Text padding="0" fontSize="1rem" color="#666">
+                                    0
+                                </Text>
+                            ) : (
+                                <Text padding="0" fontSize="1rem" color="#B383FF">
+                                    {Number(earnedAmount)
+                                        .toFixed(0)
+                                        .toString()
+                                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' SOUL'}
+                                </Text>
+                            )}
+                        </FarmItemBox>
+                        <FarmItemBox className="flex">
                             <div className={`grid grid-cols-1 justify-center -mr-8 sm:ml-12`}>
                                 {Number(_liquidity) === 0 ? (
                                     <Text padding="0" fontSize="1rem" color="#666">
@@ -445,12 +445,12 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
                                     </Text>
                                 )}
-                                </div>
-                            </FarmItemBox>
+                            </div>
+                        </FarmItemBox>
 
-                        </div>
                     </div>
                 </div>
+            </div>
 
 
             {/*------ DROPDOWN OPTIONS PANEL ------*/}
@@ -615,19 +615,19 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
                                 {/* DEPOSIT: ASSET PANEL */}
 
-                                { hasBalance && isActive &&
+                                {hasBalance && isActive &&
                                     <FarmInputPanel
                                         pid={farm.pid}
                                         onUserInput={(value) => setDepositValue(value)}
-                                        onMax={() => setDepositValue(balance.toString())}
+                                        onMax={() => setDepositValue(balance.toExact())}
                                         value={depositValue}
-                                        balance={balance.toString()}
+                                        balance={balance.toExact()}
                                         id={pid}
                                     />
                                 }
                                 {/* UN-APPROVED // HAS BALANCE */}
                                 {/* {!approved && ( */}
-                                { hasBalance && isActive && (
+                                {hasBalance && isActive && (
                                     <SubmitButton
                                         height="2rem"
                                         primaryColor={buttonColor}
@@ -641,7 +641,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 )}
                                 {/* APPROVED */}
                                 {/* {approved && hasBalance && isActive && ( */}
-                                { hasBalance && isActive && (
+                                {hasBalance && isActive && (
                                     <SubmitButton
                                         height="2rem"
                                         primaryColor={buttonColor}
@@ -660,59 +660,59 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                             }
                                         </div>
                                     </SubmitButton>
-                                 )}
+                                )}
                                 {/* CREATE ASSET PAIR */}
                                 {(nativeToken0 && !isUnderworldPair && isActive) ? (
                                     <NavLink
                                         href={`/exchange/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
                                     >
-                                                                                <SubmitButton
-                                                height="2rem"
+                                        <SubmitButton
+                                            height="2rem"
+                                            primaryColor={buttonColor}
+                                            color={buttonTextColor}
+                                            margin=".5rem 0 0rem 0"
+                                        >
+                                            <TokenPairLink
+                                                target="_blank"
+                                                rel="noopener"
                                                 primaryColor={buttonColor}
                                                 color={buttonTextColor}
-                                                margin=".5rem 0 0rem 0"
+                                                href=
+                                                // [if] token0 is the native token, then only use the address of token1 [else] token0 address
+                                                {`/exchange/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
                                             >
-                                                <TokenPairLink
-                                                    target="_blank"
-                                                    rel="noopener"
-                                                    primaryColor={buttonColor}
-                                                    color={buttonTextColor}
-                                                    href=
-                                                    // [if] token0 is the native token, then only use the address of token1 [else] token0 address
-                                                    {`/exchange/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
-                                                >
-                                                    <div className="flex text-lg gap-2">
-                                                        <PlusCircleIcon width={26} className={classNames(`text-white`)} />
-                                                        {/* {farm.lpSymbol} */}
-                                                        CREATE {farm.lpSymbol} LP
-                                                    </div>
-                                                </TokenPairLink>
-                                            </SubmitButton>
+                                                <div className="flex text-lg gap-2">
+                                                    <PlusCircleIcon width={26} className={classNames(`text-white`)} />
+                                                    {/* {farm.lpSymbol} */}
+                                                    CREATE {farm.lpSymbol} LP
+                                                </div>
+                                            </TokenPairLink>
+                                        </SubmitButton>
                                     </NavLink>
                                 ) : (!isUnderworldPair &&
                                     <NavLink
                                         href={`/exchange/add/${farm.token1Address}/${farm.token0Address}`}
                                     >
-                                            <SubmitButton
-                                                height="2rem"
-                                                primaryColor={getChainColor(chainId)}
-                                                margin=".5rem 0 0rem 0"
+                                        <SubmitButton
+                                            height="2rem"
+                                            primaryColor={getChainColor(chainId)}
+                                            margin=".5rem 0 0rem 0"
+                                        >
+                                            <TokenPairLink
+                                                target="_blank"
+                                                rel="noopener"
+                                                href=
+                                                {`/exchange/add/${farm.token0Address}/${farm.token1Address}`}
                                             >
-                                                <TokenPairLink
-                                                    target="_blank"
-                                                    rel="noopener"
-                                                    href=
-                                                    {`/exchange/add/${farm.token0Address}/${farm.token1Address}`}
-                                                >
-                                                    <div className="flex text-lg gap-2">
-                                                        <CircleStackIcon width={26} className={classNames(`text-white`)} />
-                                                        CREATE {farm.lpSymbol} LP
-                                                    </div>
-                                                </TokenPairLink>
-                                            </SubmitButton>
+                                                <div className="flex text-lg gap-2">
+                                                    <CircleStackIcon width={26} className={classNames(`text-white`)} />
+                                                    CREATE {farm.lpSymbol} LP
+                                                </div>
+                                            </TokenPairLink>
+                                        </SubmitButton>
                                     </NavLink>
                                 )}
-                                
+
 
 
                                 {/* EARNED */}
