@@ -7,22 +7,23 @@ import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
+import { featureEnabled } from 'functions/feature'
+import { Feature } from 'enums/Feature'
+import { BondsBanner } from 'components/Banner'
+import { ArchivedBondsBanner } from 'components/Banner'
+
 // import { useSummonerContract } from 'hooks/useContract'
 // import ExternalLink from 'components/ExternalLink'
 // import { classNames } from 'functions'
 // import { getChainColor, getChainColorCode } from 'constants/chains'
 // import { getChainColorCode } from 'constants/chains'
 // import { classNames } from 'functions'
-import Image from 'next/image'
+// import Image from 'next/image'
 // import MINT_BANNER from 'assets/branding/mint-banner.png'
-import ExternalLink from 'components/ExternalLink'
+// import ExternalLink from 'components/ExternalLink'
 // import { SubmitButton } from 'features/bond/Styles'
 // import { classNames } from 'functions/styling'
 // import TokenStats from 'components/TokenStats' 
-import { featureEnabled } from 'functions/feature'
-import { Feature } from 'enums/Feature'
-import { BondsBanner } from 'components/Banner'
-import { ArchivedBondsBanner } from 'components/Banner'
 
 export const BondList = () => {
   const { chainId } = useActiveWeb3React()
@@ -77,7 +78,7 @@ export const BondList = () => {
                   ? 'rounded-xl bg-purple' 
                   : 'hidden')
               }
-          > */}
+        > */}
       <BondsBanner />
       <ArchivedBondsBanner
         chainId={chainId}
@@ -85,13 +86,13 @@ export const BondList = () => {
       {/* </div> */}
       {/* <div
               className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
-            >
-              <Image src={MINT_BANNER}
-                height={180}
-                width={720}
-                alt={'mint banner'}
-              />
-          </div> */}
+          >
+          <Image src={MINT_BANNER}
+            height={180}
+            width={720}
+            alt={'mint banner'}
+          />
+      </div> */}
       <div className={`flex justify-center m-1 p-1`}>
         <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/dashboard'}>
@@ -121,6 +122,15 @@ export const BondList = () => {
             <NavLink href={'/defarms'}>
               <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                 <span>DeFarms</span>
+              </div>
+            </NavLink>
+          </Button>
+        }
+        {featureEnabled(Feature.LUXOR, chainId) &&
+          <Button variant="filled" color="purple" size="lg">
+            <NavLink href={'/luxor'}>
+              <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                <span>Luxor</span>
               </div>
             </NavLink>
           </Button>

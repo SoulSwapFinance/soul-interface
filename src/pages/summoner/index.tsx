@@ -118,6 +118,15 @@ const Summoner = () => {
           </NavLink>
         </Button>
         }
+        {featureEnabled(Feature.LUXOR, chainId) &&
+        <Button variant="filled" color="purple" size="lg">
+          <NavLink href={'/luxor'}>
+            <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              <span>Luxor</span>
+            </div>
+          </NavLink>
+        </Button>
+        }
       </div>
         {showBalances &&
           <div className={`flex flex-row 
