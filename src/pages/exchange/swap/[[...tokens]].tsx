@@ -449,8 +449,8 @@ const Exchange = () => {
                 className={`animate-pulse border-4 border-dark-800 rounded-2xl`}
               />
               <LimitHeader
-                input={inputCurrency}
-                output={outputCurrency}
+                inputCurrency={currencies[Field.INPUT]}
+                outputCurrency={currencies[Field.OUTPUT]}
               />
               <div className={`my-12`} />
               {/* <div className={`my-2 border-2 border-[${getChainColor(chainId)}]`} /> */}

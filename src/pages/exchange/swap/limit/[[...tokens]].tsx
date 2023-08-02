@@ -506,8 +506,8 @@ const Limit = () => {
           className={`animate-pulse border-4 border-dark-800 rounded-2xl`}
         />
         <LimitHeader
-          input={currencyA}
-          output={currencyB}
+          inputCurrency={currencyA}
+          outputCurrency={currencyB}
         />
         {showHeader && <div className={`mt-12`} />}
         <ConfirmSwapModal

@@ -29,7 +29,7 @@ export const BondList = () => {
   // const SummonerContract = useSummonerContract()
   const ftmList = FantomPools.map((bond) => (
     <BondRowRender
-      key={bond.pid} 
+      key={bond.pid}
       pid={bond.pid}
       type={bond.type}
       lpSymbol={bond.lpSymbol}
@@ -44,7 +44,7 @@ export const BondList = () => {
 
   const avaxList = AvalanchePools.map((bond) => (
     <BondRowRender
-      key={bond.pid} 
+      key={bond.pid}
       pid={bond.pid}
       type={bond.type}
       lpSymbol={bond.lpSymbol}
@@ -78,12 +78,12 @@ export const BondList = () => {
                   : 'hidden')
               }
           > */}
-           <BondsBanner />
-          <ArchivedBondsBanner 
-              chainId={chainId}
-           />
-          {/* </div> */}
-          {/* <div
+      <BondsBanner />
+      <ArchivedBondsBanner
+        chainId={chainId}
+      />
+      {/* </div> */}
+      {/* <div
               className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
             >
               <Image src={MINT_BANNER}
@@ -92,7 +92,7 @@ export const BondList = () => {
                 alt={'mint banner'}
               />
           </div> */}
-          <div className={`flex justify-center m-1 p-1`}>
+      <div className={`flex justify-center m-1 p-1`}>
         <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/dashboard'}>
             <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
@@ -118,24 +118,24 @@ export const BondList = () => {
         </Button>
         {featureEnabled(Feature.DEFARM, chainId) &&
           <Button variant="filled" color="purple" size="lg">
-          <NavLink href={'/defarms'}>
-            <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span>DeFarms</span>
-            </div>
-          </NavLink>
-        </Button>
+            <NavLink href={'/defarms'}>
+              <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                <span>DeFarms</span>
+              </div>
+            </NavLink>
+          </Button>
         }
       </div>
       <Typography className="text-2xl bg-dark-1000 mb-2 rounded-2xl m-1 p-4 border border-purple font-bold text-center">SoulSwap Bonds</Typography>
       <BondKey />
-          <>{chainId == ChainId.FANTOM ? ftmList : avaxList}</>
+      <>{chainId == ChainId.FANTOM ? ftmList : avaxList}</>
       <div>
-      {/* <Typography className="text-2xl bg-dark-1000 mb-2 rounded rounded-2xl m-1 p-4 border border-ftmBlue font-bold text-center">Lending Pools</Typography> */}
+        {/* <Typography className="text-2xl bg-dark-1000 mb-2 rounded rounded-2xl m-1 p-4 border border-ftmBlue font-bold text-center">Lending Pools</Typography> */}
         {/* chainId == ChainId.FANTOM ? <Inactive /> : null */}
         {/* chainId == ChainId.FANTOM ? inactiveFtmList : inactiveAvaxList */}
       </div>
     </div>
-    
+
   )
 }
 
