@@ -15,11 +15,11 @@ const Crosschain = () => {
   return (
     <DoubleGlowShadowV2>
           
-    <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
-      <SwapDropdown />
+    <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
     <Container
       className={'grid grid-cols-1 items-center justify-center'}
     >
+      <SwapDropdown />
       {/* <div
         className={`flex justify-center border-4 border-${getChainColorCode(chainId ?? 250)} rounded-2xl m-2 p-2`}
       >

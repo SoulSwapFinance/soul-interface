@@ -2,7 +2,7 @@ import ReactGA from 'react-ga'
 import Image from 'next/image'
 import { CreditCardIcon } from '@heroicons/react/24/solid'
 import ArrowRoundedSquare from 'assets/svg/icons/ArrowRoundedSquare.svg'
-import { ChainId, Currency, JSBI, NATIVE, SOUL_ADDRESS, Token, Trade as V2Trade, TradeType, USDC_ADDRESS, WNATIVE } from 'sdk'
+import { ChainId, Currency, JSBI, NATIVE, SOUL_ADDRESS, Token, Trade as V2Trade, TradeType, USDC_ADDRESS, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
 import ConfirmSwapModal from 'features/swap/ConfirmSwapModal'
@@ -37,7 +37,11 @@ import TokenChart from 'pages/analytics/tokens/embedded/[id]'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { currencyId } from 'functions'
 import { NextSeo } from 'next-seo'
+import { CustomBanner } from 'components/Banner'
+import ChevronDoubleDownIcon from '@heroicons/react/24/solid'
 // import Link from 'next/link'
+import ChevronDoubleUp from 'assets/svg/icons/ChevronDoubleUp.svg'
+import LimitHeader from 'features/limit/LimitHeader'
 
 // import { FollowBanner } from 'components/Banner'
 
@@ -394,6 +398,7 @@ const Exchange = () => {
         tokens={importTokensNotInDefault}
         onConfirm={handleConfirmTokenWarning}
       />
+
       {![ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) &&
         <div className="flex flex-col gap-3 mt-12 justify-center">
           <SwapDropdown inputCurrency={currencyA} outputCurrency={currencyB} />
@@ -435,6 +440,18 @@ const Exchange = () => {
               <SwapDropdown
                 inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]}
               />
+              <CustomBanner
+                chains={[ChainId.FANTOM]}
+                link={'/bonds'}
+                text={'New Bonds Available ↗'}
+                textColor={'white'}
+                color={'ftmBlue'}
+                className={`animate-pulse border-4 border-dark-800 rounded-2xl`}
+              />
+              <LimitHeader
+                input={inputCurrency}
+                output={outputCurrency}
+              />
               <div className={`my-12`} />
               {/* <div className={`my-2 border-2 border-[${getChainColor(chainId)}]`} /> */}
               {/* {useSwap && */}
@@ -460,7 +477,7 @@ const Exchange = () => {
             </>
             {/* } */}
             {/* {useSwap && */}
-            <div className="flex -mt-4 -mb-4 z-0 justify-center">
+            <div className={`flex -mt-4 -mb-4 z-0 justify-center`}>
               <Button
                 size={'xs'}
                 // className={classNames(`mx-[42%] rounded-2xl bg-dark-1000 border-2 border-[${getChainColor(chainId)}]`}
@@ -477,19 +494,6 @@ const Exchange = () => {
                   src={ArrowRoundedSquare}
                 />
               </Button>
-              {/* <Button
-                size={'xs'}
-                className={classNames(`rounded-xl bg-dark-1000 border-2 border-[${getChainColor(chainId)}]`}
-                // onClick={handleLimitSwap}
-              >
-                <Image
-                  alt={"Chevron Up Down Icon"}
-                  width={18}
-                  height={18}
-                  className={`rounded-xl`}
-                  src={ChevronUpDown}
-                />
-              </Button> */}
             </div>
             {/* } */}
             {/* TO ASSET PANEL */}
@@ -680,20 +684,20 @@ const Exchange = () => {
             <div
               className={`flex justify-end h-[40px]`}
             >
-              <CreditCardIcon 
+              <CreditCardIcon
                 className={`flex border-2 ${buyWithFiat ? 'border-green' : 'border-red'} hover:border-white bg-${getChainColorCode(chainId)} h-[40px] w-[80px] rounded-2xl`}
                 onClick={() => setBuyWithFiat(!buyWithFiat)}
-                />
-                </div>
+              />
+            </div>
           </div>
           {buyWithFiat &&
-          <div
-            className={`flex justify-center border-4 border-${'green'} m-1 p-1 bg-dark-900 rounded-2xl`}
-          >
-            <iframe
-              src={`https://fluidmoney.xyz/`}
-              height={'692px'}
-              width={'100%'}
+            <div
+              className={`flex justify-center border-4 border-${'green'} m-1 p-1 bg-dark-900 rounded-2xl`}
+            >
+              <iframe
+                src={`https://fluidmoney.xyz/`}
+                height={'692px'}
+                width={'100%'}
               />
             </div>
           }

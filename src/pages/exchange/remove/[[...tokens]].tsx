@@ -2,7 +2,7 @@ import { ApprovalState, useApproveCallback } from 'hooks/useApproveCallback'
 import { Plus } from 'react-feather'
 import { RowBetween } from 'components/Row'
 import { ButtonConfirmed, ButtonError } from 'components/Button'
-import { NATIVE, Percent, WNATIVE } from 'sdk'
+import { ChainId, NATIVE, Percent, WNATIVE } from 'sdk'
 import React, { useCallback, useMemo, useState } from 'react'
 import TransactionConfirmationModal, { ConfirmationModalContent } from 'modals/TransactionConfirmationModal'
 import { calculateGasMargin, calculateSlippageAmount } from 'functions/trade'
@@ -40,6 +40,7 @@ import SwapDropdown from 'features/swap/SwapDropdown'
 import { PoolBalances } from 'features/portfolio/AssetBalances/pools'
 import { Feature } from 'enums'
 import PairChart from 'pages/analytics/pairs/embedded/[id]'
+import { CustomBanner } from 'components/Banner'
 // import { MultichainBanner } from 'components/Banner'
 
 const DEFAULT_REMOVE_LIQUIDITY_SLIPPAGE_TOLERANCE = new Percent(10, 1000) // 1%
@@ -642,7 +643,7 @@ export default function Remove() {
     )
   }
 
-  const pendingText = 
+  const pendingText =
     `Removing ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${currencyA?.symbol} and ${parsedAmounts[
       Field.CURRENCY_B
     ]?.toSignificant(6)} ${currencyB?.symbol}`
@@ -705,7 +706,7 @@ export default function Remove() {
 
       <DoubleGlowShadowV2>
         <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-      {/* <MultichainBanner /> */}
+          {/* <MultichainBanner /> */}
           {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
           {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
           {/* <div className={`my-12`} /> */}
@@ -713,6 +714,14 @@ export default function Remove() {
           {/* <div className={`my-12`} /> */}
           {/* <Header input={currencyA} output={currencyB} allowedSlippage={allowedSlippage} /> */}
           <SwapDropdown />
+          <CustomBanner
+            chains={[ChainId.FANTOM]}
+            link={'/bonds'}
+            text={'New Bonds Available ↗'}
+            textColor={'white'}
+            color={'ftmBlue'}
+            className={`animate-pulse border-4 border-dark-800 rounded-2xl`}
+          />
           <div>
             <TransactionConfirmationModal
               isOpen={showConfirm}
@@ -755,7 +764,7 @@ export default function Remove() {
               <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
                 <div className="w-full text-white sm:w-2/5" style={{ margin: 'auto 0px' }}>
                   <AutoColumn>
-                  <div>{`Receive`}</div>
+                    <div>{`Receive`}</div>
                     {chainId && (oneCurrencyIsWETH || oneCurrencyIsETH) ? (
                       <RowBetween className="text-sm">
                         {oneCurrencyIsETH ? (
@@ -844,23 +853,23 @@ export default function Remove() {
           {/* </AutoColumn> */}
           {/* </div> */}
           <div className={``}>
-          {pair &&
-            <MinimalPositionCard
-              className={`border-2 rounded-2xl border-purple p-0.5 mb-4 mt-4`}
-              chainId={chainId}
-              showUnwrapped={oneCurrencyIsWETH}
-              pair={pair}
-            />
-          }
+            {pair &&
+              <MinimalPositionCard
+                className={`border-2 rounded-2xl border-purple p-0.5 mb-4 mt-4`}
+                chainId={chainId}
+                showUnwrapped={oneCurrencyIsWETH}
+                pair={pair}
+              />
+            }
           </div>
           {featureEnabled(Feature.ANALYTICS, chainId) &&
             <PairChart
-              inputCurrency={currencyA} 
+              inputCurrency={currencyA}
               outputCurrency={currencyB}
             />
           }
           <div className={"grid grid-cols-1 text-white justify-center m-2"}>
-            <NavLink 
+            <NavLink
               legacyBehavior={true}
               href="/pool"
             >
