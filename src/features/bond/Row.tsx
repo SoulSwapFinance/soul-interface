@@ -432,77 +432,81 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                       id={pid}
                     />
                   }
-                    {isStakeable && depositable && unstakedBal <= 1 &&
-                      <Wrap padding="0" margin="0" display="flex">
+                  {/* CREATE BUTTON */}
+                  {isStakeable && depositable && unstakedBal <= 1 &&
+                    <Wrap padding="0" margin="0" display="flex">
                       <SubmitButton
-                          height="2rem"
-                          primaryColor={getChainColor(chainId)}
-                          margin=".5rem 0 0rem 0"
+                        height="2rem"
+                        primaryColor={getChainColor(chainId)}
+                        margin=".5rem 0 0rem 0"
+                      >
+                        <TokenPairLink
+                          target="_blank"
+                          rel="noopener"
+                          color={"white"}
+                          href=
+                          {
+                            bond.token0Symbol == WNATIVE[chainId].symbol
+                              ? `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token1Address}`
+                              : `https://exchange.soulswap.finance/add/${bond.token0Address}/${bond.token1Address}`}
                         >
-                          <TokenPairLink
-                            target="_blank"
-                            rel="noopener"
-                            color={"white"}
-                            href=
-                            {
-                              bond.token0Symbol == WNATIVE[chainId].symbol
-                                ? `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token1Address}`
-                                : `https://exchange.soulswap.finance/add/${bond.token0Address}/${bond.token1Address}`}
-                          >
-                            {`CREATE ${bond.lpSymbol} PAIR`}
-                          </TokenPairLink>
-                        </SubmitButton>
-                        </Wrap>
-                      }
-
-                    {isStakeable && depositable &&
-                      <Wrap padding="0" margin="0" display="flex">
-                        <SubmitButton
-                          height="2rem"
-                          primaryColor={getChainColor(chainId)}
-                          // color={}
-                          // className={'font-bold'}
-                          margin=".5rem 0 0rem 0"
-                          onClick={() =>
-                            handleShowZap(pid)
-                          }
-                        >
-                          <div className="flex text-lg gap-1">
-                            {/* <Zap width={26} className={classNames(`text-white`} /> */}
-                            {`ZAP `}
-                            {/* <CurrencyDollarIcon width={26} className={classNames(`text-white`)} /> */}
-                            &rarr; 
-                            {` ${bond.lpSymbol}`}
-                          </div>
-                        </SubmitButton>
-                      </Wrap>
-                    }
-
-                      <Wrap padding="0" margin="0" display="flex">
-                        <SubmitButton
-                          height="2rem"
-                          primaryColor={getChainColor(chainId)}
-                          margin=".5rem 0 0rem 0"
-                          onClick={() => handleApprove()}>
-                          {`APPROVE LP`}
-                        </SubmitButton>
-                        </Wrap>
-                        {isStakeable && depositable &&
-                      <Wrap padding="0" margin="0" display="flex">
-                        <SubmitButton
-                          height="2rem"
-                          margin=".5rem 0 0rem 0"
-                          primaryColor={getChainColor(chainId)}
-                          onClick={() =>
-                            _stakedBalance == 0
-                              ? handleDeposit(pid, depositValue)
-                              : setShowDepositConfirmation(true)
-                          }
-                        >
-                          DEPOSIT {`${bond.lpSymbol} LP`}
-                        </SubmitButton>
-                      </Wrap>
-                      }
+                          {`CREATE ${bond.lpSymbol} PAIR`}
+                        </TokenPairLink>
+                      </SubmitButton>
+                    </Wrap>
+                  }
+                  {/* APPROVE BUTTON */}
+                  {!approved && isStakeable && depositable && unstakedBal > 0 &&
+                    <Wrap padding="0" margin="0" display="flex">
+                      <SubmitButton
+                        height="2rem"
+                        primaryColor={getChainColor(chainId)}
+                        margin=".5rem 0 0rem 0"
+                        onClick={() => handleApprove()}>
+                        {`APPROVE LP`}
+                      </SubmitButton>
+                    </Wrap>
+                  }
+                  {/* DEPOSIT BUTTON */}
+                  {approved && isStakeable && depositable && unstakedBal > 0 &&
+                    <Wrap padding="0" margin="0" display="flex">
+                      <SubmitButton
+                        height="2rem"
+                        margin=".5rem 0 0rem 0"
+                        primaryColor={getChainColor(chainId)}
+                        onClick={() =>
+                          _stakedBalance == 0
+                            ? handleDeposit(pid, depositValue)
+                            : setShowDepositConfirmation(true)
+                        }
+                      >
+                        DEPOSIT {`${bond.lpSymbol} LP`}
+                      </SubmitButton>
+                    </Wrap>
+                  }
+                  {/* ZAP BUTTON */}
+                  {isStakeable && depositable &&
+                    <Wrap padding="0" margin="0" display="flex">
+                      <SubmitButton
+                        height="2rem"
+                        primaryColor={getChainColor(chainId)}
+                        // color={}
+                        // className={'font-bold'}
+                        margin=".5rem 0 0rem 0"
+                        onClick={() =>
+                          handleShowZap(pid)
+                        }
+                      >
+                        <div className="flex text-lg gap-1">
+                          {/* <Zap width={26} className={classNames(`text-white`} /> */}
+                          {`ZAP INTO `}
+                          {/* <CurrencyDollarIcon width={26} className={classNames(`text-white`)} /> */}
+                          {/* &rarr;  */}
+                          {`${bond.lpSymbol}`}
+                        </div>
+                      </SubmitButton>
+                    </Wrap>
+                  }
                 </FunctionBox>
 
                 <Wrap padding="0.5rem" margin="0.25rem" display="flex" justifyContent="space-between">
