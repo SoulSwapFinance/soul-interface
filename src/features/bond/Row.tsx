@@ -432,7 +432,6 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                       id={pid}
                     />
                   }
-                  <Wrap padding="0" margin="0" display="flex">
                     {isStakeable && depositable && unstakedBal <= 1 &&
                       <Wrap padding="0" margin="0" display="flex">
                       <SubmitButton
@@ -498,7 +497,6 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                         </SubmitButton>
                       </Wrap>
                       }
-                  </Wrap>
                 </FunctionBox>
 
                 <Wrap padding="0.5rem" margin="0.25rem" display="flex" justifyContent="space-between">

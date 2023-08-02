@@ -88,6 +88,7 @@ import SwapDropdown from "features/swap/SwapDropdown"
 import { getChainColorCode } from "constants/chains"
 import LimitHeader from "features/limit/LimitHeader"
 import { CustomBanner } from "components/Banner"
+import Typography from "components/Typography"
 // import { FollowBanner } from "components/Banner"
 // import LIMIT_BANNER from 'assets/branding/limit-banner.png'
 // import TokenStats from "components/TokenStats"
@@ -695,9 +696,18 @@ const Limit = () => {
               </ButtonPrimary>
             ) :
               !account ? (
-                <ButtonLight onClick={useWalletModalToggle}>
-                  Connect Wallet
-                </ButtonLight>
+                <div className={`flex justify-center w-full`}>
+                  <Button 
+                    variant={'filled'} 
+                    color={'avaxRed'}
+                    disabled={true}
+                  // onClick={useWalletModalToggle}
+                  >
+                    <Typography className={`text-bold text-white`}>
+                      {`Connect Wallet`}
+                    </Typography>
+                  </Button>
+                </div>
               ) :
                 routeNotFound && isLoadingRoute ? (
                   <PurpleCard style={{ textAlign: "center" }}>
