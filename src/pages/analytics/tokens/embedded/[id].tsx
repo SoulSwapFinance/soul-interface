@@ -152,7 +152,7 @@ function Token({ outputCurrency }: TokenProps) {
   return (
     <AnalyticsContainer>
       {/* <NextSeo title={`${token?.name} Analytics`} /> */}
-      <div className="px-4 pt-4 space-y-4 mb-1">
+      <div className="px-4 space-y-4 mb-1">
         <div className="grid grid-cols-1 gap-2">
           <ChartCard
             header="Price"
@@ -185,11 +185,12 @@ function Token({ outputCurrency }: TokenProps) {
           />
         </div>
 
-        <NavLink 
+        <NavLink
           href={`/analytics/tokens/${id}`}
           >
           <Button 
             variant="filled" color="purple" size="lg"
+            className={`mt-4 mb-2`}
             >
             <div className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               View Token Analytics <span> ↗</span>
