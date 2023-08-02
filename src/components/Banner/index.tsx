@@ -319,7 +319,7 @@ export const ArchivedBondsBanner: FC<IBanner> = ({ chainId }) => (
   <div className={classNames(chainId == ChainId.FANTOM ? "relative items-center w-full" : 'hidden')}>
     <div className="w-full">
       <div className="text-center m-2">
-        <p className="font-medium text-center text-white animate-pulse">
+        <p className="font-medium text-center text-white">
           <ExternalLink
             href="https://archived.soulswap.finance/bonds" target="_blank" rel="noreferrer"
             className="font-bold text-white text-lg"

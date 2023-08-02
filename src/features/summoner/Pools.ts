@@ -172,17 +172,6 @@ export const InactiveFantomPools = [
     token1Address: MULTI_AVAX_ADDRESS[ChainId.FANTOM],
   },
   { // 0
-    pid: 4,
-    type: 'swap',
-    decimals: 18,
-    token0Symbol: 'WFTM',
-    token1Symbol: 'BTC',
-    lpSymbol: 'FTM-BTC',
-    lpAddress: MBTC_NATIVE[ChainId.FANTOM],
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: MULTI_WBTC_ADDRESS[ChainId.FANTOM],
-  },
-  { // 0
     pid: 5,
     type: 'swap',
     decimals: 18,
