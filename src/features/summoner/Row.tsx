@@ -114,8 +114,6 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     // const feeValue = feeAmount * lpPrice
 
     // for display purposes only //
-    const _walletBalance = Number(summonerUserInfo.walletBalance)
-    // for display purposes only //
     const _feeAmount = withdrawFee * _stakedBalance / 100
     // for display purposes only //
     const _withdrawable = _stakedBalance - _feeAmount
@@ -184,11 +182,11 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
         setOpenZap(!openZap)
     }
     
-    const handleMaxDeposit = (pid) => {
-        const token = new Token(chainId, farm.lpAddress, 18)
-        const tokenBalance = useCurrencyBalance(chainId, account, token)
-        setDepositValue(tokenBalance.toString())
-    }
+    // const handleMaxDeposit = (pid) => {
+    //     const token = new Token(chainId, farm.lpAddress, 18)
+    //     const tokenBalance = useCurrencyBalance(chainId, account, token)
+    //     setDepositValue(tokenBalance.toString())
+    // }
 
     // checks: approval for summoner to move tokens.
     const fetchApproval = async () => {
@@ -621,9 +619,9 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     <FarmInputPanel
                                         pid={farm.pid}
                                         onUserInput={(value) => setDepositValue(value)}
-                                        onMax={() => handleMaxDeposit}
+                                        onMax={() => setDepositValue(walletBalance.toString())}
                                         value={depositValue}
-                                        balance={_walletBalance.toString()}
+                                        balance={walletBalance.toString()}
                                         id={pid}
                                     />
                                 }
