@@ -20,7 +20,7 @@ export default function ColoredNumber({
   return (
     <>
       <div className={classNames(number > 0 ? 'text-green' : number < 0 && 'text-red', 'font-normal', className)}>
-        { percent ? `${formatNumber(number, false, true)}%` 
+        { percent ? `${Number(formatNumber(number, false, true)).toFixed(2)}%` 
           : scaleNumber ? formatNumber(number, false, true) 
             : usd ? formatNumber(number, true, true) 
               : formatNumber(number, false, true)

@@ -45,7 +45,7 @@ export const exchange = async (chainId, query, variables = {}) => {
   // console.log(chainId)
   let URL
   chainId == ChainId.AVALANCHE ? URL = 'soulswapfinance/avalanche-swap' : URL = 'soulswapfinance/fantom-swap'
-  console.log('exchange URL: %s', URL)
+  // console.log('exchange URL: %s', URL)
   return pager(`https://api.thegraph.com/subgraphs/name/${URL}`, query, variables)
 }
 
