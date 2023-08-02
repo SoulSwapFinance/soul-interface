@@ -466,9 +466,9 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                         >
                           <div className="flex text-lg gap-1">
                             {/* <Zap width={26} className={classNames(`text-white`} /> */}
-                            {`ZAP`}
+                            {`ZAP `}
                             {/* <CurrencyDollarIcon width={26} className={classNames(`text-white`)} /> */}
-                            {/* &rarr;  */}
+                            &rarr; 
                             {`${bond.lpSymbol}`}
                           </div>
                         </SubmitButton>
