@@ -189,12 +189,14 @@ function Token() {
   const SYMBOL = tokenToAdd.symbol
   const DECIMALS = tokenToAdd.decimals
   const TOKEN_NAME = tokenToAdd.name
-  const NAME = TOKEN_NAME == "USD Coin" ? "USD Stablecoin" : TOKEN_NAME
+
+  const tokenSymbol = currency.symbol
+  const tokenName = currency.name
 
   return (
 
     <AnalyticsContainer>
-      <NextSeo title={`${token?.name} Analytics`} />
+      <NextSeo title={`${token?.symbol} Analytics`} />
       <div className="relative h-8 mt-4">
         <div className="absolute w-full h-full bg-gradient-to-r from-blue to-purple opacity-5" />
         <div className="absolute flex items-center w-full p-2 lg:pl-14">
@@ -241,7 +243,7 @@ function Token() {
                     .catch(console.error)
                 }
               }}
-              className="w-auto mt-4">
+              className="w-auto sm:mt-8 sm:mb-8">
               {!success ? (
                 <RowFixed className="mx-auto rounded-xl space-x-2">
                   <CurrencyLogo className="bg-dark-1000 rounded-xl p-1"
@@ -249,9 +251,14 @@ function Token() {
                   />
                   <div className="flex items-center space-x-4 md:space-x-8">
                     <Typography variant="h2" className="text-high-emphesis" weight={700}>
-                      {NAME}
+                      {tokenName}
                     </Typography>
                   </div>
+                  {/* <div className="flex items-center space-x-4 md:space-x-8">
+                    <Typography variant="h2" className="text-high-emphesis" weight={700}>
+                      ({tokenSymbol})
+                    </Typography>
+                  </div> */}
                 </RowFixed>
               ) : (
                 <RowFixed>
@@ -266,44 +273,47 @@ function Token() {
             Analytics for {token?.name}.
           </Typography> */}
         {/* </div> */}
-        <div className="grid grid-cols-2 space-x-4">
-          <div className="flex flex-col">
-            <div className="text-center mb-1 text-white font-bold">Market Price</div>
+        <div className="grid grid-cols-1 justify-center space-y-1 space-x-4">
+          {/* <div className="flex flex-col"> */}
+            <div className="text-center mb-1 text-white text-xl font-bold">Market Price</div>
             <NavLink
               href={`/swap?inputCurrency=&outputCurrency=${tokenAddress}`}
             >
-              <Button
-                size="xs"
-                variant="filled"
-                color={"ftmBlue"}
-                >
+              <div
+                className={`flex bg-dark-800 rounded-2xl justify-center hover:bg-dark-700 mb-4`}
+              // size="xs"
+              // variant="filled"
+              // color={"ftmBlue"}
+              >
 
                 <div className="flex justify-center items-center space-x-1">
                   <div className="text-xl items-center font-medium text-high-emphesis">{formatNumber(price ?? 0, true)}</div>
                   <ColoredNumber number={priceChange} percent={true} />
                 </div>
-              </Button>
+              </div>
             </NavLink>
-          </div>
-          <div className="flex flex-col">
-
-            <div className="text-center mb-1 text-white font-bold">Total Market</div>
+          {/* </div> */}
+          {/* <div className="flex flex-col"> */}
+            <div className="text-center mb-1 text-white text-xl font-bold">Total Market</div>
             <NavLink
               href={`/swap?inputCurrency=&outputCurrency=${tokenAddress}`}
             >
-              <Button
+              {/* <Button
                 size="xs"
                 variant="filled"
                 color={'black'}
+              > */}
+              <div
+                className={`flex bg-dark-800 rounded-2xl justify-center hover:bg-dark-700`}
               >
 
                 <div className="flex justify-center items-center space-x-1">
                   <div className="text-xl items-center font-medium text-high-emphesis"> {formatNumber(price * formattedSupply ?? 0, true, false)}</div>
                   <ColoredNumber number={priceChange} percent={true} />
                 </div>
-              </Button>
+              </div>
             </NavLink>
-          </div>
+          {/* </div> */}
           {/* <div className="flex flex-col">
           <div className="text-center mb-1 text-secondary">Total Market</div>
             <div className="flex items-center space-x-1">
