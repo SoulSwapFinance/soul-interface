@@ -10,7 +10,7 @@ import StableInputPanel from 'components/StableInputPanel'
 import { AutoColumn } from 'components/Column'
 import { ApprovalState, useApproveCallback, useLuxorRefunderContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
-import { Token, LUX_ADDRESS, ChainId, LUXOR_REEFUNDER_ADDRESS } from 'sdk'
+import { Token, LUX_ADDRESS, ChainId, LUXOR_REEFUNDER_ADDRESS, REFUNDER_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
 import { formatNumber, tryParseAmount } from 'functions'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import { useTransactionAdder } from 'state/transactions/hooks'
@@ -22,6 +22,7 @@ import { SunsetBanner } from 'components/Banner'
 import { LUXOR, WFTM } from 'constants/tokens'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
+import { useUserTokenInfo } from 'hooks/useAPI'
 
 function Redeem() {
   const addTransaction = useTransactionAdder()
@@ -51,6 +52,8 @@ function Redeem() {
   const isRefundValid = !refunderError
 
   const CONVERSION_RATE = 0.12
+  const { userTokenInfo } = useUserTokenInfo(REFUNDER_ADDRESS[ChainId.FANTOM], WNATIVE_ADDRESS[ChainId.FANTOM])
+  const remainingFunds = formatNumber(Number(userTokenInfo?.balance) / 1E18, false, true)
 
   return (
     <Container id="stablecoin-page" className="py-4 md:py-8 lg:py-12">
@@ -131,10 +134,17 @@ function Redeem() {
                 id="stablecoin-currency-output"
               />
               <div className="h-px my-6 bg-dark-1000"></div>
-              <div className="flex flex-col bg-dark-1000 p-3 border border-1 rounded-2xl border-dark-700 hover:border-yellow w-full space-y-1">
+              <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-yellow rounded-2xl border-dark-700 hover:border-yellow w-full space-y-1">
                 <div className="flex justify-center">
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     {`1 LUX = ${CONVERSION_RATE} WFTM`}
+                  </Typography>
+                </div>
+              </div>
+              <div className="flex flex-col bg-dark-1000 mt-4 p-3 border border-1 border-green rounded-2xl border-dark-700 hover:border-yellow w-full space-y-1">
+                <div className="flex justify-center">
+                  <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
+                    {`Max Redeemable: ${remainingFunds?.toString()} WFTM`}
                   </Typography>
                 </div>
               </div>
