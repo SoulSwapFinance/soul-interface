@@ -157,8 +157,8 @@ const DesktopBar: FC = () => {
                             />
                         </div> */}
                         <div className={`grid ${
-                            chainId == ChainId.FANTOM ? 'grid-cols-5' 
-                            : 'grid-cols-4'} w-full items-center`
+                            // chainId == ChainId.FANTOM ? 'grid-cols-5' :
+                            'grid-cols-4'} w-full items-center`
                             }
                         >
                         <div
@@ -213,7 +213,7 @@ const DesktopBar: FC = () => {
                             </Typography>
                         </div>
                         }
-                        {featureEnabled(Feature.LUXOR, chainId) &&
+                        {/* {featureEnabled(Feature.LUXOR, chainId) &&
                         <div
                             className={classNames(
                                 `grid grid-cols-2`,
@@ -230,7 +230,7 @@ const DesktopBar: FC = () => {
                             { `Luxor` }
                             </Typography>
                         </div>
-                         }
+                         } */}
                         {/* {featureEnabled(Feature.NFT, chainId) &&
                             <div
                                 className={classNames(

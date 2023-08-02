@@ -14,7 +14,7 @@ import TokenStats from 'components/TokenStats'
 import DEFARM_BANNER from 'assets/branding/farm-banner.png'
 // import { getChainColor } from 'constants/chains'
 import { useActiveWeb3React } from 'services/web3'
-import { classNames } from 'functions'
+import { classNames, featureEnabled } from 'functions'
 import ExternalLink from 'components/ExternalLink'
 import { SubmitButton } from 'features/bond/Styles'
 
@@ -82,14 +82,14 @@ const Defarms = () => {
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/farms'}>
             <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span>Farms</span>
+              <span>Farm</span>
             </div>
           </NavLink>
         </Button>
         <Button variant="filled" color="purple" size="lg">
           <NavLink href={'/bonds'}>
             <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span>Bonds</span>
+              <span>Bond</span>
             </div>
           </NavLink>
         </Button>
@@ -100,6 +100,15 @@ const Defarms = () => {
             </div>
           </NavLink>
         </Button>
+        {featureEnabled(Feature.LUXOR, chainId) &&
+        <Button variant="filled" color="purple" size="lg">
+          <NavLink href={'/luxor'}>
+            <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+              <span>Luxor</span>
+            </div>
+          </NavLink>
+        </Button>
+        }
       </div> 
             <FarmList />
             <div className="grid grid-cols-2 mt-2">
