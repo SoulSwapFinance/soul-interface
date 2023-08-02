@@ -598,9 +598,10 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
               currency={zapToken}
               value={zapValue}
               onChange={(value) => setZapValue(value)}
+              // onMax={() => setZapValue(zapValue)}
               balance={zapTokenBalance}
               showBalance={false}
-              showMax={true}
+              showMax={false}
             />
             <Wrap padding="0" margin="0" display="flex">
               <SubmitButton
