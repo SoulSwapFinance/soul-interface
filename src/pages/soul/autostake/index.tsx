@@ -85,8 +85,8 @@ export default function AutoStake() {
   const bounty = autoStakeInfo.bounty
 
   // AUTOSTAKE DATA //
-  const tvl = Number(autoStakeInfo.tvl)
-  const apy = Number(autoStakeInfo.apy)
+  // const tvl = Number(autoStakeInfo.tvl)
+  const apy = Number(autoStakeInfo.apy) * 3 // since re-invests every 8H
   // const stakingAPY = (Math.pow(1 + 3, 365 * 3) - 1) * 100
 
 
@@ -113,25 +113,26 @@ export default function AutoStake() {
     AUTO_STAKE_ADDRESS[chainId]
   )
 
-  const stakeError = !parsedStakeValue
-    ? 'Enter Amount'
-    : soulBal?.lessThan(parsedStakeValue)
-      ? 'Insufficient Balance'
-      : undefined
+  const stakeError =
+    !account ? 'Connect Wallet'
+      : !parsedStakeValue ? 'Enter Amount'
+        : soulBal?.lessThan(parsedStakeValue)
+          ? 'Insufficient Balance'
+          : undefined
 
   const isStakeValid = !stakeError
 
   // HANDLE HARVEST //
-  const handleHarvest = async () => {
-    try {
-      let tx
-      tx = await AutoStakeContract?.harvest()
-      await tx?.wait()
-    } catch (e) {
-      // alert(e.message)
-      console.log(e)
-    }
-  }
+  // const handleHarvest = async () => {
+  //   try {
+  //     let tx
+  //     tx = await AutoStakeContract?.harvest()
+  //     await tx?.wait()
+  //   } catch (e) {
+  //     // alert(e.message)
+  //     console.log(e)
+  //   }
+  // }
 
   // HANDLE DEPOSIT //
   const handleDeposit = async (amount) => {
@@ -145,14 +146,14 @@ export default function AutoStake() {
   }
 
   // HANDLE WITHDRAW //
-  const handleWithdraw = async (amount) => {
-    try {
-      const tx = await AutoStakeContract?.withdraw(parsedWithdrawValue?.quotient.toString())
-      await tx?.wait()
-    } catch (e) {
-      console.log(e)
-    }
-  }
+  // const handleWithdraw = async (amount) => {
+  //   try {
+  //     const tx = await AutoStakeContract?.withdraw(parsedWithdrawValue?.quotient.toString())
+  //     await tx?.wait()
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // }
 
   const handleWithdrawAll = async () => {
     try {
@@ -172,14 +173,14 @@ export default function AutoStake() {
         <meta key="description" name="description" />
       </Head>
       <div className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`} >
-              <Image src={STAKE_BANNER}
-                height={96}
-                width={480}
-                alt={'autostake banner'}
-              />
-          </div>
+        <Image src={STAKE_BANNER}
+          height={96}
+          width={480}
+          alt={'autostake banner'}
+        />
+      </div>
       <div className={`flex justify-center m-1 p-1`}>
-      <Button variant="bordered" color="purple" size="lg">
+        <Button variant="bordered" color="purple" size="lg">
           <NavLink href={'/dashboard'}>
             <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
               <span>Soul Economy</span>
@@ -203,22 +204,22 @@ export default function AutoStake() {
           </NavLink>
         </Button>
         {featureEnabled(Feature.DEFARM, chainId) &&
-        <Button variant="filled" color="purple" size="lg">
-          <NavLink href={'/defarms'}>
-            <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span>DeFarms</span>
-            </div>
-          </NavLink>
-        </Button>
+          <Button variant="filled" color="purple" size="lg">
+            <NavLink href={'/defarms'}>
+              <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                <span>DeFarms</span>
+              </div>
+            </NavLink>
+          </Button>
         }
         {featureEnabled(Feature.LUXOR, chainId) &&
-        <Button variant="filled" color="purple" size="lg">
-          <NavLink href={'/luxor'}>
-            <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span>Luxor</span>
-            </div>
-          </NavLink>
-        </Button>
+          <Button variant="filled" color="purple" size="lg">
+            <NavLink href={'/luxor'}>
+              <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                <span>Luxor</span>
+              </div>
+            </NavLink>
+          </Button>
         }
       </div>
       <DoubleGlowShadowV2>
@@ -236,8 +237,8 @@ export default function AutoStake() {
                 </Tab>
                 <Tab
                   className={({ selected }) =>
-                  `${selected ? 'border-2 border-accent rounded-lg p-2 bg-purple border-purple text-white' : 'bg-dark-800 text-white'
-                } flex items-center justify-center rounded-lg px-3 py-1.5 semi-bold font-semibold hover:border-2 hover:border-purple`
+                    `${selected ? 'border-2 border-accent rounded-lg p-2 bg-purple border-purple text-white' : 'bg-dark-800 text-white'
+                    } flex items-center justify-center rounded-lg px-3 py-1.5 semi-bold font-semibold hover:border-2 hover:border-purple`
                   }
                 >
                   {`Withdraw`}
@@ -246,6 +247,13 @@ export default function AutoStake() {
             </Tab.List>
 
             <Tab.Panel className={'outline-none'}>
+              <div
+                className={`flex border-2 border-dark-800 justify-center rounded-2xl p-2 mb-4`}
+              >
+                <Typography className={'flex text-md text-center justify-center text-purple animate-pulse'}>
+                  {`Our vault now auto-magically reinvests 3x DAILY.`}
+                </Typography>
+              </div>
               <VaultInputPanel
                 value={stakeValue}
                 showLogo={true}
@@ -273,14 +281,14 @@ export default function AutoStake() {
 
               <div className="h-px my-2 bg-dark-1000" />
 
-              <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-dark-600 border-1 hover:border-purple w-full space-y-1">
+              <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-dark-600 border-2 hover:border-purple w-full space-y-1 rounded-2xl">
                 <div className="text-white">
                   <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                     <span> {formatNumber(apy, false, true)}% APY</span>
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-purple w-full space-y-1">
+              <div className="flex flex-col bg-dark-1000 p-3 border border-2 border-dark-700 hover:border-purple w-full space-y-1 rounded-2xl">
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
                     {`Staked`}
@@ -309,44 +317,44 @@ export default function AutoStake() {
               <div className="mt-6 flex items-center gap-2">
                 {isStakeValid &&
                   (stakeApprovalState === ApprovalState.NOT_APPROVED ||
-                    stakeApprovalState === ApprovalState.PENDING) ? (
-                  <SubmitButton
-                    height="2rem"
-                    color="white"
-                    primaryColor="#821FFF"
-                    onClick={stakeApprove}
-                    disabled={stakeApprovalState !== ApprovalState.NOT_APPROVED}
-                    margin=".5rem 0 .5rem 0"
-                  // style={{ width: '100%' }}
-                  >
-                    {stakeApprovalState === ApprovalState.PENDING ? (
-                      <Dots>{`Approving`}</Dots>
-                    ) : (
-                      `APPROVE`
-                    )}
-                  </SubmitButton>
-                ) : (
-                  <SubmitButton
-                    height="2rem"
-                    primaryColor="#821FFF"
-                    color="white"
-                    margin=".5rem 0 .5rem 0"
-                    onClick={() =>
-                      handleDeposit(stakeValue)}
-                  >
-                    DEPOSIT
-                  </SubmitButton>
-                )}
+                    stakeApprovalState === ApprovalState.PENDING) && (
+                    <SubmitButton
+                      height="2rem"
+                      color="white"
+                      primaryColor="#821FFF"
+                      onClick={stakeApprove}
+                      disabled={stakeApprovalState !== ApprovalState.NOT_APPROVED}
+                      margin=".5rem 0 .5rem 0"
+                    // style={{ width: '100%' }}
+                    >
+                      {stakeApprovalState === ApprovalState.PENDING ? (
+                        <Dots>{`Approving`}</Dots>
+                      ) : (
+                        `APPROVE`
+                      )}
+                    </SubmitButton>
+                  )}
                 <SubmitButton
+                  height="2rem"
+                  primaryColor="#821FFF"
+                  color="white"
+                  margin=".5rem 0 .5rem 0"
+                  disabled={!isStakeValid}
+                  onClick={() =>
+                    handleDeposit(stakeValue)}
+                >
+                  {isStakeValid ? `Submit Deposit` : stakeError}
+                </SubmitButton>
+                {/* <SubmitButton
                   height="2rem"
                   primaryColor="#821FFF"
                   color="white"
                   margin=".5rem 0 .5rem 0"
                   onClick={() =>
                     handleHarvest()}
-                >
-                  COMPOUND
-                </SubmitButton>
+                    >
+                    COMPOUND
+                  </SubmitButton> */}
               </div>
             </Tab.Panel>
 
@@ -376,14 +384,14 @@ export default function AutoStake() {
 
               <div className="h-px my-2 bg-dark-1000" />
 
-              <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-dark-600 border-1 hover:border-purple w-full space-y-1">
+              <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-dark-600 border-2 hover:border-purple w-full space-y-1 rounded-2xl">
                 <div className="text-white">
                   <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                     <span> {formatNumber(apy, false, true)}% APY</span>
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-dark-700 hover:border-purple w-full space-y-1">
+              <div className="flex flex-col bg-dark-1000 p-3 border border-2 border-dark-700 hover:border-purple w-full space-y-1 rounded-2xl">
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
                     {`Staked`}
@@ -410,20 +418,22 @@ export default function AutoStake() {
                   </Typography>
                 </div>
               </div>
-              <div className="mt-6 flex items-center gap-2">
-                <SubmitButton
-                  height="2rem"
-                  primaryColor="#821FFF"
-                  color="white"
-                  margin=".5rem 0 .5rem 0"
-                  onClick={() =>
-                    // handleWithdraw(withdrawValue)
-                    handleWithdrawAll()
-                  }
-                >
-                  WITHDRAW ALL
-                </SubmitButton>
-              </div>
+              {stakedBal > 0 &&
+                <div className="mt-6 flex items-center gap-2">
+                  <SubmitButton
+                    height="2rem"
+                    primaryColor="#821FFF"
+                    color="white"
+                    margin=".5rem 0 .5rem 0"
+                    onClick={() =>
+                      // handleWithdraw(withdrawValue)
+                      handleWithdrawAll()
+                    }
+                  >
+                    WITHDRAW ALL
+                  </SubmitButton>
+                </div>
+              }
             </Tab.Panel>
           </Tab.Group>
         </div>
