@@ -251,7 +251,7 @@ export default function AutoStake() {
                 className={`flex border-2 border-dark-800 justify-center rounded-2xl p-2 mb-4`}
               >
                 <Typography className={'flex text-md text-center justify-center text-purple animate-pulse'}>
-                  {`Our vault now auto-magically reinvests 3x DAILY.`}
+                  {`Vault auto-magically reinvests 3x DAILY.`}
                 </Typography>
               </div>
               <VaultInputPanel
