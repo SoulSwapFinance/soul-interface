@@ -38,11 +38,7 @@ export default function BondInputPanel({
   const { account } = useActiveWeb3React()
   const { soulBondUserInfo } = useBondUserInfo(pid, account)
   const assetAddress = soulBondUserInfo.address
-  const temporaryBoost = pid == '4'
-  const assetPrice 
-  = temporaryBoost 
-    ? Number(soulBondUserInfo.pairPrice) * 4 
-    : Number(soulBondUserInfo.pairPrice) 
+  const assetPrice = Number(soulBondUserInfo.pairPrice)
   // const assetPrice = Number(usePairInfo(assetAddress).pairInfo.lpPrice)
 
   const handleDismissSearch = useCallback(() => {
