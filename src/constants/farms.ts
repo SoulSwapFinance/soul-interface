@@ -1,4 +1,4 @@
-import { ChainId, SOUL_ADDRESS, SOUL_NATIVE, SOUL_USDC, USDC_ADDRESS, WNATIVE_ADDRESS, USDC_NATIVE, MUSDC_NATIVE, BTC_NATIVE, ETH_NATIVE, DAI_USDC, WBTC_ADDRESS, FMULTI_ADDRESS, WETH_ADDRESS, DAI_ADDRESS, BNB_NATIVE, BNB_ADDRESS, LINK_ADDRESS, MULTI_WETH_ADDRESS, MULTI_USDC_ADDRESS, MULTI_AVAX_ADDRESS, MULTI_WBTC_ADDRESS } from '../sdk'
+import { ChainId, SOUL_ADDRESS, SOUL_NATIVE, SOUL_USDC, USDC_ADDRESS, WNATIVE_ADDRESS, USDC_NATIVE, MUSDC_NATIVE, BTC_NATIVE, ETH_NATIVE, DAI_USDC, WBTC_ADDRESS, FMULTI_ADDRESS, WETH_ADDRESS, DAI_ADDRESS, BNB_NATIVE, BNB_ADDRESS, LINK_ADDRESS, MULTI_WETH_ADDRESS, MULTI_USDC_ADDRESS, MULTI_AVAX_ADDRESS, MULTI_WBTC_ADDRESS, DAI_NATIVE, ETH_USDC, BTC_USDC } from '../sdk'
 
 export type TokenInfo = {
   id: string
@@ -27,7 +27,7 @@ export const POOLS: AddressMap = {
   [ChainId.AVALANCHE]: {
     '0x11d6DD25c1695764e64F439E32cc7746f3945543': {
       id: 0,
-      address: SOUL_ADDRESS[ChainId.AVALANCHE],
+      address: SOUL_ADDRESS[ChainId.AVALANCHE].toLowerCase(),
       token0: {
         id: SOUL_ADDRESS[ChainId.AVALANCHE], // SOUL
         name: 'Soul Power',
@@ -37,7 +37,7 @@ export const POOLS: AddressMap = {
     },
     '0x6Da1AD717C7577AAB46C19aB6d3d9C31aff32A00': {
       id: 1,
-      address: SOUL_NATIVE[ChainId.AVALANCHE],
+      address: SOUL_NATIVE[ChainId.AVALANCHE].toLowerCase(),
       token0: {
         id: WNATIVE_ADDRESS[ChainId.AVALANCHE],
         name: 'Wrapped Avalanche',
@@ -53,7 +53,7 @@ export const POOLS: AddressMap = {
     },
     '0x922fcADa825Dc669798206A35D2D2B455f9A64E7': {
       id: 2,
-      address: SOUL_USDC[ChainId.AVALANCHE],
+      address: SOUL_USDC[ChainId.AVALANCHE].toLowerCase(),
       token0: {
         id: SOUL_ADDRESS[ChainId.AVALANCHE],
         name: 'Soul Power',
@@ -69,7 +69,7 @@ export const POOLS: AddressMap = {
     },
     '0x864384a54ea644852603778c0C200eF2D6F2Ac2f': {
       id: 3,
-      address: USDC_NATIVE[ChainId.AVALANCHE],
+      address: USDC_NATIVE[ChainId.AVALANCHE].toLowerCase(),
       token0: {
         id: WNATIVE_ADDRESS[ChainId.AVALANCHE],
         name: 'Wrapped Avalanche',
@@ -85,7 +85,7 @@ export const POOLS: AddressMap = {
     },
     '0x8C162C3Bdd7354b5Cb1A0b18eDBB5725CFE762A3': {
       id: 4,
-      address: BTC_NATIVE[ChainId.AVALANCHE],
+      address: BTC_NATIVE[ChainId.AVALANCHE].toLowerCase(),
       token0: {
         id: WNATIVE_ADDRESS[ChainId.AVALANCHE],
         name: 'Wrapped Avalanche',
@@ -101,7 +101,7 @@ export const POOLS: AddressMap = {
     },
     '0x5796Bf89f6C7C47811E4E59Ecd7aCACC8A5B9dEF': {
       id: 5,
-      address: ETH_NATIVE[ChainId.AVALANCHE],
+      address: ETH_NATIVE[ChainId.AVALANCHE].toLowerCase(),
       token0: {
         id: WNATIVE_ADDRESS[ChainId.AVALANCHE],
         name: 'Wrapped Avalanche',
@@ -115,9 +115,10 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
     },
+
     '0xB3074D8b7f22439F337E2E2830864be9c8236866': {
       id: 6,
-      address: BNB_NATIVE[ChainId.AVALANCHE],
+      address: BNB_NATIVE[ChainId.AVALANCHE].toLowerCase(),
       token0: {
         id: WNATIVE_ADDRESS[ChainId.AVALANCHE],
         name: 'Wrapped Avalanche',
@@ -133,7 +134,7 @@ export const POOLS: AddressMap = {
     },
     '0xE9807645aDA66F2f3d4f2d2A79223701F3cC0903': {
       id: 7,
-      address: DAI_USDC[ChainId.AVALANCHE],
+      address: DAI_USDC[ChainId.AVALANCHE].toLowerCase(),
       token0: {
         id: DAI_ADDRESS[ChainId.AVALANCHE],
         name: 'Dai Stablecoin',
@@ -146,42 +147,26 @@ export const POOLS: AddressMap = {
         symbol: 'USDC',
         decimals: 6,
       },
-    },      
-    '0xa34fe600E6349d67fcd6989A9c4007b5ee5A494B': {
-      id: 8,
-      address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+    },  
+    '0xEF1D48b24E87F8ccfF97f7C295B31B92E30F372B': {
+      id: 12,
+      address: DAI_NATIVE[ChainId.AVALANCHE].toLowerCase(),
       token0: {
         id: WNATIVE_ADDRESS[ChainId.AVALANCHE],
-        name: 'Avalanche',
-        symbol: 'AVAX',
+        name: 'Wrapped Avalanche',
+        symbol: 'WAVAX',
         decimals: 18,
       },
       token1: {
-        id: USDC_ADDRESS[ChainId.AVALANCHE],
-        name: 'USD Coin',
-        symbol: 'USDC',
-        decimals: 6,
-      },
-    },
-    '0x7ef603f01Ffa9D21c9ee8159AF4adFbE78DC925B': {
-      id: 9,
-      address: USDC_ADDRESS[ChainId.AVALANCHE],
-      token0: {
-        id: USDC_ADDRESS[ChainId.AVALANCHE],
-        name: 'USD Coin',
-        symbol: 'USDC',
-        decimals: 6,
-      },
-      token1: {
-        id: WNATIVE_ADDRESS[ChainId.AVALANCHE],
-        name: 'Avalanche',
-        symbol: 'AVAX',
+        id: DAI_ADDRESS[ChainId.AVALANCHE],
+        name: 'Dai Stablecoin',
+        symbol: 'DAI',
         decimals: 18,
       },
-    }, 
-    '0xD981D3e065bA8E89Ac56DB994D86F22dA409cf20': {
-      id: 10,
-      address: WETH_ADDRESS[ChainId.AVALANCHE],
+    },  
+    '0x351C6327F9639664C7962B94570D1A19F47b3f44': {
+      id: 13,
+      address: ETH_USDC[ChainId.AVALANCHE].toLowerCase(),
       token0: {
         id: WETH_ADDRESS[ChainId.AVALANCHE],
         name: 'Wrapped Ethereum',
@@ -194,10 +179,10 @@ export const POOLS: AddressMap = {
         symbol: 'USDC',
         decimals: 6,
       },
-    },
-    '0x142c9eE960bB6AD872f22712C4b129783999c35E': {
-      id: 11,
-      address: WBTC_ADDRESS[ChainId.AVALANCHE],
+    },  
+    '0xd413F437F998dE70413d9D9840825156bb32941c': {
+      id: 14,
+      address: BTC_USDC[ChainId.AVALANCHE].toLowerCase(),
       token0: {
         id: WBTC_ADDRESS[ChainId.AVALANCHE],
         name: 'Wrapped Bitcoin',
@@ -215,7 +200,7 @@ export const POOLS: AddressMap = {
   [ChainId.FANTOM]: {
     '0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07': {
       id: 0,
-      address: SOUL_ADDRESS[ChainId.FANTOM],
+      address: SOUL_ADDRESS[ChainId.FANTOM].toLowerCase(),
       token0: {
         id: SOUL_ADDRESS[ChainId.FANTOM], // SOUL
         name: 'Soul Power',
