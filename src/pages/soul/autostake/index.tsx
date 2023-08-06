@@ -248,9 +248,9 @@ export default function AutoStake() {
 
             <Tab.Panel className={'outline-none'}>
               <div
-                className={`flex border-2 border-dark-800 justify-center rounded-2xl p-2 mb-4`}
+                className={`flex border-2 border-green justify-center rounded-2xl p-2 mb-4`}
               >
-                <Typography className={'flex text-md text-center justify-center text-purple animate-pulse'}>
+                <Typography className={'flex text-md text-center justify-center text-green'}>
                   {`Vault auto-magically reinvests 3x DAILY.`}
                 </Typography>
               </div>
@@ -305,14 +305,14 @@ export default function AutoStake() {
                     {formatNumber(earnedAmount, false, true)} SOUL ({formatNumber(earnedValue, true, true)})
                   </Typography>
                 </div>
-                <div className="flex justify-between">
+                {/* <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
                     {`Compound Bounty`}
                   </Typography>
                   <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
                     {formatNumber(bounty, false, true)} SOUL
                   </Typography>
-                </div>
+                </div> */}
               </div>
               <div className="mt-6 flex items-center gap-2">
                 {isStakeValid &&
