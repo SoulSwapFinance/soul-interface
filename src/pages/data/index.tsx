@@ -1,7 +1,7 @@
 import React, { useMemo, useRef, useState } from 'react'
 import Container from 'components/Container'
 import Typography from 'components/Typography'
-// import { useTokenInfo, useTotalSupply, useUnderworldPairInfo, } from 'hooks/useAPI'
+// import { useTokenInfo, useTotalSupply, } from 'hooks/useAPI'
 import { useUnderworldPairAPI } from 'hooks/useUnderworldAPI'
 import { useWeb3React } from '@web3-react/core'
 import { formatNumber, formatPercent } from 'functions/format'

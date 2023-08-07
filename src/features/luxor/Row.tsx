@@ -36,10 +36,10 @@ import { useRouter } from 'next/router'
 // import { useCurrencyBalance, useTokenBalance } from 'state/wallet/hooks'
 // import { Button } from 'components/Button'
 
-const TokenPairLink = styled(ExternalLink)`
-  font-size: .9rem;
-  padding-left: 10;
-`
+// const TokenPairLink = styled(ExternalLink)`
+//   font-size: .9rem;
+//   padding-left: 10;
+// `
 
 const TokenLogo = styled(Image)`
   @media screen and (max-width: 400px) {

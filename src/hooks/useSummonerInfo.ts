@@ -8,7 +8,7 @@ export function useSoulSummonerInfo(contract) {
     return useMemo(() => ({ soulPerSecond, totalAllocPoint }), [soulPerSecond, totalAllocPoint])
   }
   
-  export function useSummonerInfo() {
-    return useSoulSummonerInfo(useSummonerContract())
-  }
+  // export function useSummonerInfo() {
+  //   return useSoulSummonerInfo(useSummonerContract())
+  // }
   
