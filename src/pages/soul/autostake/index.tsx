@@ -247,13 +247,7 @@ export default function AutoStake() {
             </Tab.List>
 
             <Tab.Panel className={'outline-none'}>
-              <div
-                className={`flex border-2 border-green justify-center rounded-2xl p-2 mb-4`}
-              >
-                <Typography className={'flex text-md text-center justify-center text-green'}>
-                  {`Vault auto-magically reinvests 3x DAILY.`}
-                </Typography>
-              </div>
+
               <VaultInputPanel
                 value={stakeValue}
                 showLogo={true}
@@ -270,24 +264,16 @@ export default function AutoStake() {
 
               <div className="h-px my-2 bg-dark-1000" />
 
-              <div className="flex justify-between">
-                <Typography className="text-white" fontFamily={'medium'}>
+              <div className={`flex justify-between m-3`}>
+                <Typography className={`text-white`} fontFamily={'medium'}>
                   {`Ritual (Fee) Duration`}
                 </Typography>
                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                   {feeDays} days
                 </Typography>
               </div>
-
               <div className="h-px my-2 bg-dark-1000" />
 
-              <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-dark-600 border-2 hover:border-purple w-full space-y-1 rounded-2xl">
-                <div className="text-white">
-                  <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                    <span> {formatNumber(apy, false, true)}% APY</span>
-                  </div>
-                </div>
-              </div>
               <div className="flex flex-col bg-dark-1000 p-3 border border-2 border-dark-700 hover:border-purple w-full space-y-1 rounded-2xl">
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
@@ -305,6 +291,7 @@ export default function AutoStake() {
                     {formatNumber(earnedAmount, false, true)} SOUL ({formatNumber(earnedValue, true, true)})
                   </Typography>
                 </div>
+                
                 {/* <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
                     {`Compound Bounty`}
@@ -313,6 +300,22 @@ export default function AutoStake() {
                     {formatNumber(bounty, false, true)} SOUL
                   </Typography>
                 </div> */}
+              </div>
+              <div className="flex flex-col bg-dark-1000 mb-2 mt-4 lp-3 border border-green border-2 hover:border-purple w-full space-y-1 rounded-2xl">
+                {/* <div
+                className={`flex justify-center rounded-2xl p-2 mb-4`}
+              > */}
+                <Typography
+                  className={'flex text-md text-center justify-center text-green mb-2'}>
+                  {`Vault auto-magically reinvests (up to 3x daily).`}
+                </Typography>
+                {/* </div> */}
+                <div className={`border border-green`} />
+                <div className={`text-white`}>
+                  <div className={`block mt-1 mb-0.5 text-md md:text-xl text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300`}>
+                    <span> {formatNumber(apy, false, true)}% APY</span>
+                  </div>
+                </div>
               </div>
               <div className="mt-6 flex items-center gap-2">
                 {isStakeValid &&

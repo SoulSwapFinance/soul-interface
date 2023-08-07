@@ -60,7 +60,6 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const ZapContractAddress = ZapContract.address
 
     // const nowTime = new Date().getTime()
-    // const { summonerInfo } = useSummonerInfo()
     // const startRate = Number(summonerInfo.startRate)
 
     // const APR = Number(summonerPoolInfo.apr)
