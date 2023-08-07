@@ -306,7 +306,7 @@ export default function AutoStake() {
                 className={`flex justify-center rounded-2xl p-2 mb-4`}
               > */}
                 <Typography
-                  className={'flex text-md text-center justify-center text-green mb-2'}>
+                  className={'flex text-md text-center justify-center text-green mt-2 mb-2'}>
                   {`Vault auto-magically reinvests (up to 3x daily).`}
                 </Typography>
                 {/* </div> */}
