@@ -45,13 +45,13 @@ function Dashboard() {
       {
         "label": "LIQUIDITY",
         "angle": treasuryLiquidityValue,
-        "color": "#B465FF",
+        "color": "#A485FF",
         "percent": ((treasuryLiquidityValue / treasuryValue) * 100).toFixed()
       },
       {
         "label": "ASSETS",
         "angle": treasuryReserveValue,
-        "color": "#A425FF",
+        "color": "#A445FF",
         "percent": ((treasuryReserveValue / treasuryValue) * 100).toFixed()
       },
     ]
@@ -59,21 +59,21 @@ function Dashboard() {
   const soulSupplyData = [
     {
       angle: circulatingSupply,
-      color: '#B485FF',
+      color: '#A485FF',
       label: 'CIRCULATING SUPPLY',
       percent: ((circulatingSupply / totalSupply) * 100).toFixed(),
       text: 'The combined number of SOUL being traded or in public wallets.',
     },
     {
       angle: stakedSoul,
-      color: '#B465FF',
+      color: '#A465FF',
       label: 'STAKED SOUL',
       percent: ((stakedSoul / totalSupply) * 100).toFixed(),
       text: 'The portion of supply that is not in circulation as it is currently staking.',
     },
     {
       angle: soulBalance,
-      color: '#B445FF',
+      color: '#A445FF',
       label: 'PROTOCOL OWNED',
       percent: ((soulBalance / totalSupply) * 100).toFixed(),
       text: 'The portion of supply that is not in circulation as it is currently in our reserves.',
