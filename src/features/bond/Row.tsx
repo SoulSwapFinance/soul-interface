@@ -26,7 +26,7 @@ import { Token, NATIVE } from 'sdk'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { useSoulBondContract, useTokenContract, useZapperContract } from 'hooks/useContract'
 import { CurrencyLogo } from 'components/CurrencyLogo'
-import { CurrencyDollarIcon } from '@heroicons/react/24/solid'
+// import { CurrencyDollarIcon } from '@heroicons/react/24/solid'
 import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import AssetInput from 'components/AssetInput'
 
