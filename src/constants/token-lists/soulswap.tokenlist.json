@@ -434,27 +434,11 @@
     },
     {
       "chainId": 250,
-      "name": "Avalanche (Multichain)",
-      "address": "0x511D35c52a3C244E7b8bd92c0C297755FbD89212",
-      "symbol": "AVAX",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x511D35c52a3C244E7b8bd92c0C297755FbD89212/logo.png"
-    },
-    {
-      "chainId": 250,
       "name": "Avalanche (Axelar)",
       "address": "0x879e73005C36d9a549fFb9846851fe5d1d91b681",
-      "symbol": "AVAX",
+      "symbol": "axlAVAX",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x879e73005C36d9a549fFb9846851fe5d1d91b681/logo.png"
-    },
-    {
-      "chainId": 250,
-      "name": "Binance (Multichain)",
-      "address": "0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454",
-      "symbol": "mBNB",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454/logo.png"
     },
     {
       "chainId": 250,
@@ -500,33 +484,25 @@
       "chainId": 250,
       "name": "DAI (Axelar)",
       "address": "0xD5d5350F42CB484036A1C1aF5F2DF77eAFadcAFF",
-      "symbol": "DAI",
+      "symbol": "axlDAI",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0xD5d5350F42CB484036A1C1aF5F2DF77eAFadcAFF/logo.png"
     },
     {
       "chainId": 250,
-      "name": "DAI (Multichain)",
-      "address": "0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E",
-      "symbol": "mDAI",
-      "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E/logo.png"
-    },
-    {
-      "chainId": 250,
       "name": "Ethereum (Axelar)",
       "address": "0xfe7eDa5F2c56160d406869A8aA4B2F365d544C7B",
-      "symbol": "ETH",
+      "symbol": "axlETH",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xfe7eDa5F2c56160d406869A8aA4B2F365d544C7B/logo.png"
     },
     {
       "chainId": 250,
-      "name": "Ethereum (Multichain)",
-      "address": "0x74b23882a30290451A17c44f4F05243b6b58C76d",
-      "symbol": "mETH",
+      "name": "Ethereum (LayerZero)",
+      "address": "0x695921034f0387eAc4e11620EE91b1b15A6A09fE",
+      "symbol": "lzETH",
       "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x74b23882a30290451A17c44f4F05243b6b58C76d/logo.png"
+      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x695921034f0387eAc4e11620EE91b1b15A6A09fE/logo.png"
     },
     {
       "chainId": 250,
@@ -551,14 +527,6 @@
       "symbol": "LQDR",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x10b620b2dbAC4Faa7D7FFD71Da486f5D44cd86f9/logo.png"
-    },
-    {
-      "chainId": 250,
-      "name": "Luxor Money",
-      "address": "0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b",
-      "symbol": "LUX",
-      "decimals": 9,
-      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b/logo.png"
     },
     {
       "chainId": 250,
@@ -602,14 +570,6 @@
     },
     {
       "chainId": 250,
-      "name": "USDC (Multichain)",
-      "address": "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75",
-      "symbol": "mUSDC",
-      "decimals": 6,
-      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x04068DA6C83AFCFA0e13ba15A6696662335D5B75/logo.png"
-    },
-    {
-      "chainId": 250,
       "name": "USDC (LayerZero)",
       "address": "0x28a92dde19D9989F39A49905d7C9C2FAc7799bDf",
       "symbol": "lzUSDC",
@@ -620,7 +580,7 @@
       "chainId": 250,
       "name": "USD Coin (Axelar)",
       "address": "0x1B6382DBDEa11d97f24495C9A90b7c88469134a4",
-      "symbol": "USDC",
+      "symbol": "axlUSDC",
       "decimals": 6,
       "logoURI": "https://cryptologos.cc/logos/usd-coin-usdc-logo.svg"
     },
@@ -642,27 +602,19 @@
     },
     {
       "chainId": 250,
-      "name": "Tether USD",
-      "address": "0x049d68029688eAbF473097a2fC38ef61633A3C7A",
-      "symbol": "USDT",
-      "decimals": 6,
-      "logoURI": "https://cryptologos.cc/logos/tether-usdt-logo.svg"
-    },
-    {
-      "chainId": 250,
       "name": "Bitcoin (Axelar)",
       "address": "0x448d59B4302aB5d2dadf9611bED9457491926c8e",
-      "symbol": "WBTC",
+      "symbol": "axlBTC",
       "decimals": 8,
       "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x448d59B4302aB5d2dadf9611bED9457491926c8e/logo.png"
     },
     {
       "chainId": 250,
-      "name": "Bitcoin (Multichain)",
-      "address": "0x321162Cd933E2Be498Cd2267a90534A804051b11",
-      "symbol": "mWBTC",
+      "name": "Bitcoin (LayerZero)",
+      "address": "0xf1648C50d2863f780c57849D812b4B7686031A3D",
+      "symbol": "lzBTC",
       "decimals": 8,
-      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x321162Cd933E2Be498Cd2267a90534A804051b11/logo.png"
+      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xf1648C50d2863f780c57849D812b4B7686031A3D/logo.png"
     },
     {
       "chainId": 250,
@@ -671,14 +623,6 @@
       "symbol": "WFTM",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83/logo.png"
-    },
-    {
-      "chainId": 250,
-      "name": "Wrapped Lumens",
-      "address": "0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208",
-      "symbol": "WLUM",
-      "decimals": 9,
-      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208/logo.png"
     },
     {
       "chainId": 250,
