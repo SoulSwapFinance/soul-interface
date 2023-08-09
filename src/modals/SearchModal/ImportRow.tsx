@@ -29,8 +29,8 @@ const ImportRow: FC<ImportRow> = ({ token, onClick }) => {
                 </Typography>
               </Typography>
 
-              <Chip color="yellow" size="sm" label={`Unknown Source`}>
-                {`Unknown Source`}
+              <Chip color="yellow" size="sm" label={`Unknown`}>
+                  {`Unknown`}
               </Chip>
             </div>
             <Typography variant="xxs" weight={700}>

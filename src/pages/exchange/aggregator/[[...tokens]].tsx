@@ -275,8 +275,10 @@ const Aggregator = ({ }) => {
 		CurrencyAmount?.fromRawAmount(tokenA, amountWithDecimals),
 		// fromToken?.address, 
 		route?.price?.tokenApprovalAddress,
+		// route?.price?.tokenApprovalAddress ?? fromToken?.wrapped.address, 
 	);
 
+	// const isApproved = approvalState === (fromToken.isNative ? true : ApprovalState.APPROVED)
 	const isApproved = approvalState === ApprovalState.APPROVED
 	const isApproveLoading = approvalState === ApprovalState.PENDING
 

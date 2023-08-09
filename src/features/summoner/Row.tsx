@@ -775,7 +775,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 </Button>
                                 <div className={
                                     classNames(
-                                        "flex flex-col mb-3 bg-dark-1000 p-3 border border-2 border-dark-1000",
+                                        "flex flex-col mb-3 bg-dark-1000 p-3 border-2 border-dark-1000",
                                         isUnderworldPair ? "hover:border-blue"
                                             : !isActive ? "hover:border-pink"
                                                 : "hover:border-dark-600",
