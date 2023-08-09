@@ -256,7 +256,7 @@ export const FantomPools = [
     token0Address: AXL_WBTC_ADDRESS[ChainId.FANTOM],
     token1Address: LZ_WBTC_ADDRESS[ChainId.FANTOM],
   },
-  { // 10
+  {/* // 10
     pid: 34,
     type: 'swap',
     decimals: 18,
@@ -266,5 +266,5 @@ export const FantomPools = [
     lpAddress: "0x80ccC7651dcce2DaE0717Ff2A0B1c40C8D03AEBA", // ETH_ETH[ChainId.FANTOM],
     token0Address: AXL_WETH_ADDRESS[ChainId.FANTOM],
     token1Address: LZ_WETH_ADDRESS[ChainId.FANTOM],
-  },
+  */},
 ]
