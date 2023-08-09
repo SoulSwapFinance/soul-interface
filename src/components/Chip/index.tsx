@@ -21,7 +21,7 @@ const FILLED = {
   binanceGold: 'bg-binanceGold bg-opacity/25 text-binanceGold',
   moonriverTeal: 'bg-moonriverTeal bg-opacity/25 text-moonriverTeal',
   maticPurple: 'bg-maticPurple bg-opacity/25 text-maticPurple',
-  yellow: 'bg-yellow bg-opacity/[0.35] text-yellow',
+  yellow: 'bg-yellow bg-opacity/[0.35] text-white',
   blue: 'bg-blue bg-opacity/[0.35] text-blue',
   green: 'bg-green bg-opacity/[0.35] text-green',
   neonGreen: 'bg-neonGreen bg-opacity/[0.35] text-neonGreen',
