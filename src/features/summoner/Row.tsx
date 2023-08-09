@@ -104,7 +104,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
     const earnedAmount = Number(summonerUserInfo.pendingSoul)
     const earnedValue = Number(summonerUserInfo.pendingValue)
-    const lpPrice = Number(summonerUserInfo.lpPrice)
+    const lpPrice = Number(summonerUserInfo.lpPrice) ?? 0
     const withdrawFee = Number(summonerUserInfo.currentRate)
     const walletBalance = Number(summonerUserInfo.walletBalance)
 
