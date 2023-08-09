@@ -104,7 +104,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
     const earnedAmount = Number(summonerUserInfo.pendingSoul)
     const earnedValue = Number(summonerUserInfo.pendingValue)
-    const lpPrice = Number(summonerUserInfo.lpPrice) ?? 0
+    const lpPrice = Number(summonerUserInfo.lpPrice)
     const withdrawFee = Number(summonerUserInfo.currentRate)
     const walletBalance = Number(summonerUserInfo.walletBalance)
 
@@ -123,7 +123,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
     const hasBalance = Number(walletBalance) > 0
     const isActive = Number(allocPoint) > 0 // pairStatus == "active"
-    const assetToken = new Token(chainId, farm.lpAddress, decimals)
+    const assetToken = new Token(chainId, farm.lpAddress, 18)
 
     const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
 
