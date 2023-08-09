@@ -263,7 +263,7 @@ export const FantomPools = [
     token0Symbol: 'ETH',
     token1Symbol: 'ETH',
     lpSymbol: 'ETH-ETH',
-    lpAddress: ETH_ETH[ChainId.FANTOM],
+    lpAddress: "0x80ccC7651dcce2DaE0717Ff2A0B1c40C8D03AEBA", // ETH_ETH[ChainId.FANTOM],
     token0Address: AXL_WETH_ADDRESS[ChainId.FANTOM],
     token1Address: LZ_WETH_ADDRESS[ChainId.FANTOM],
   },
