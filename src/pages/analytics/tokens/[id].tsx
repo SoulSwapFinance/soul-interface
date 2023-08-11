@@ -57,14 +57,13 @@ const chartTimespans = [
 ]
 
 interface TokenProps {
-  // currency?: Currency | Token | undefined
-  tokenAddress?: string | undefined
+  // inputCurrency?: Currency | Token | undefined
+  tokenCurrency?: Currency | ERC20 | undefined
 }
 
-function Token({ tokenAddress }: TokenProps) {
+function Token({ tokenCurrency }: TokenProps) {
   const router = useRouter()
-  
-  const id = tokenAddress ?? (router.query.id as string).toLowerCase()
+  const id = tokenCurrency?.wrapped.address.toLowerCase()
 
   // const id = (router.query.id as string)?.toLowerCase()
   // const tokenAddress = id
