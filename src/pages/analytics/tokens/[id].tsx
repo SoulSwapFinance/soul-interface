@@ -190,8 +190,8 @@ function Token() {
   const DECIMALS = tokenToAdd.decimals
   const TOKEN_NAME = tokenToAdd.name
 
-  const tokenSymbol = currency.symbol
-  const tokenName = currency.name
+  const tokenSymbol = currency.wrapped.symbol
+  const tokenName = currency.wrapped.name
 
   return (
 
