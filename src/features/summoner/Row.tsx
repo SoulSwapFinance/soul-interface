@@ -96,11 +96,9 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     // SUMMONER USER INFO //
     const { summonerUserInfo } = useSummonerUserInfo(pid)
     // const stakedBalance = Number(summonerUserInfo.stakedBalance)
-    // const stakedValue = Number(summonerUserInfo.stakedValue)
 
     // for display purposes only //
     const _stakedBalance = Number(summonerUserInfo.stakedBalance)
-    // for display purposes only //
     const _stakedValue = Number(summonerUserInfo.stakedValue)
 
     const earnedAmount = Number(summonerUserInfo.pendingSoul)

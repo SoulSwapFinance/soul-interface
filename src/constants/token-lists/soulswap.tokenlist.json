@@ -169,90 +169,90 @@
       "logoURI": "https://github.com/sushiswap/list/blob/master/logos/token-logos/network/telos/0xD102cE6A4dB07D247fcc28F366A623Df0938CA9E.jpg"
     },
     {
+      "chainId": 56,
       "address": "0x3EE2200Efb3400fAbB9AacF31297cBdD1d435D47",
       "name": "Cardano",
       "symbol": "ADA",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/ada.jpg"
     },
     {
+      "chainId": 56,
       "address": "0x0Eb3a705fc54725037CC9e008bDede697f62F335",
       "name": "Cosmos",
       "symbol": "ATOM",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://bscscan.com/token/images/cosmos_32.png"
     },
     {
+      "chainId": 56,
       "symbol": "BAKE",
       "name": "Bakery Token",
       "address": "0xE02dF9e3e622DeBdD69fb838bB799E3F168902c5",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://bscscan.com/token/images/bakeryswap_32.png"
     },
     {
+      "chainId": 56,
       "address": "0xAD6cAEb32CD2c308980a548bD0Bc5AA4306c6c18",
       "name": "Band Protocol",
       "symbol": "BAND",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/band.jpg"
     },
     {
+      "chainId": 56,
       "address": "0x8fF795a6F4D97E7887C79beA79aba5cc76444aDf",
       "name": "Bitcoin Cash",
       "symbol": "BCH",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/bch.jpg"
     },
     {
+      "chainId": 56,
       "symbol": "BUSD",
       "name": "Binance USD",
       "address": "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/busd.jpg"
     },
     {
+      "chainId": 56,
       "address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
       "name": "PancakeSwap Token",
       "symbol": "CAKE",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/cake.jpg"
     },
     {
+      "chainId": 56,
       "address": "0xd4CB328A82bDf5f03eB737f37Fa6B370aef3e888",
       "name": "Cream",
       "symbol": "CREAM",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/cream.jpg"
     },
     {
+      "chainId": 56,
       "address": "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3",
       "name": "Dai Stablecoin",
       "symbol": "DAI",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/dai.jpg"
     },
     {
+      "chainId": 56,
       "address": "0x7083609fCE4d1d8Dc0C979AAb8c869Ea2C873402",
       "name": "Polkadot",
       "symbol": "DOT",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/dot.jpg"
     },
     {
+      "chainId": 56,
       "symbol": "ETH",
       "name": "Ethereum",
       "address": "0x2170Ed0880ac9A755fd29B2688956BD959F933F8",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/eth.jpg"
     },
@@ -265,18 +265,18 @@
       "logoURI": "https://cryptologos.cc/logos/fantom-ftm-logo.svg"
     },
     {
+      "chainId": 56,
       "address": "0xF8A0BF9cF54Bb92F17374d9e9A321E6a111a51bD",
       "name": "ChainLink Token",
       "symbol": "LINK",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/link.jpg"
     },
     {
+      "chainId": 56,
       "address": "0x4338665CBB7B2485A8855A139b75D5e34AB0DB94",
       "name": "Litecoin",
       "symbol": "LTC",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/ltc.jpg"
     },
@@ -297,10 +297,10 @@
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/ont.jpg"
     },
     {
+      "chainId": 56,
       "address": "0x947950BcC74888a40Ffa2593C5798F11Fc9124C4",
       "name": "SushiToken",
       "symbol": "SUSHI",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/sushi.jpg"
     },
@@ -313,18 +313,18 @@
       "logoURI": "https://cryptologos.cc/logos/trueusd-tusd-logo.svg"
     },
     {
+      "chainId": 56,
       "address": "0x4B0F1812e5Df2A09796481Ff14017e6005508003",
       "name": "Trust Wallet",
       "symbol": "TWT",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://bscscan.com/token/images/trust_32.png"
     },
     {
+      "chainId": 56,
       "address": "0xBf5140A22578168FD562DCcF235E5D43A02ce9B1",
       "name": "Uniswap",
       "symbol": "UNI",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/uni.jpg"
     },
@@ -337,42 +337,42 @@
       "logoURI": "https://cryptologos.cc/logos/usd-coin-usdc-logo.svg"
     },
     {
+      "chainId": 56,
       "address": "0x55d398326f99059fF775485246999027B3197955",
       "name": "Tether USD",
       "symbol": "USDT",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/usdt.jpg"
     },
     {
+      "chainId": 56,
       "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
       "name": "WBNB Token",
       "symbol": "WBNB",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/bnb.jpg"
     },
     {
+      "chainId": 56,
       "address": "0x1D2F0da169ceB9fC7B3144628dB156f3F6c60dBE",
       "name": "XRP Token",
       "symbol": "XRP",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/xrp.jpg"
     },
     {
+      "chainId": 56,
       "address": "0x16939ef78684453bfDFb47825F8a5F714f12623a",
       "name": "Tezos",
       "symbol": "XTZ",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/xtz.jpg"
     },
     {
+      "chainId": 56,
       "address": "0x88f1A5ae2A3BF98AEAF342D26B30a79438c9142e",
       "name": "yearn.finance",
       "symbol": "YFI",
-      "chainId": 56,
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/yfi.jpg"
     },

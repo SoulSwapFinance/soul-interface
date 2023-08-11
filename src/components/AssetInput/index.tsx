@@ -1,6 +1,6 @@
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
-import { BNB_ADDRESS, ChainId, Currency, CurrencyAmount, Token, WBTC_ADDRESS, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
+import { BNB_ADDRESS, ChainId, Currency, CurrencyAmount, Token, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import selectCoinAnimation from 'animation/select-coin.json'
 import { Button } from 'components/Button'
 import Chip from 'components/Chip'
@@ -209,6 +209,8 @@ const AssetInputPanel = ({
   const ftmPrice = useTokenPrice(WNATIVE_ADDRESS[chainId])
   // const nativePrice = Number(usePriceUSD(WNATIVE_ADDRESS[chainId]).price)
   const btcPrice = useTokenPrice(WBTC_ADDRESS[chainId])
+  const ethPrice = useTokenPrice(WETH_ADDRESS[chainId])
+  // console.log('ethPrice: :%s', ethPrice)
   const bnbPrice = useTokenPrice(BNB_ADDRESS[chainId])
  
   // const usdValue = usePrice(currency.toString())
@@ -291,7 +293,7 @@ const AssetInputPanel = ({
           >
             ≈{usdcValue ? usdcValue?.toSignificant(4) : ( 
               currency.symbol == 'SOUL' ? formatNumber(tokenPrice * Number(value), true, true) :
-              currency.symbol == 'WETH' ? formatNumber(tokenPrice * Number(value), true, true) :
+              (currency.symbol == 'axlETH' || currency.symbol == 'lzETH' || currency.symbol == 'ETH' || currency.symbol == 'WETH') ? formatNumber(ethPrice * Number(value), true, true) :
               currency.symbol == 'DAI' ? formatNumber(1 * Number(value), true, true) :
               currency.symbol == 'BNB' ? formatNumber(bnbPrice * Number(value), true, true) :
               // TODO: FIX BELOW
@@ -299,7 +301,7 @@ const AssetInputPanel = ({
               // currency.isNative ? formatNumber(nativePrice * Number(value), true, true) :
               currency.symbol == 'FTM' ? formatNumber(ftmPrice * Number(value), true, true) :
               currency.symbol == 'WFTM' ? formatNumber(ftmPrice * Number(value), true, true) :
-              currency.symbol == 'WBTC' ? formatNumber(btcPrice * Number(value), true, true) :
+              (currency.symbol == 'axlBTC' || currency.symbol == 'lzBTC' || currency.symbol == 'BTC' || currency.symbol == 'WBTC') ? formatNumber(btcPrice * Number(value), true, true) :
               formatNumber(pairPrice * Number(value), true, true))            
             }
           </Typography>

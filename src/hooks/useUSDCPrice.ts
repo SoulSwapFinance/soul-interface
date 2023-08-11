@@ -1,4 +1,4 @@
-import { AVAX_ORACLE_ADDRESS, BTC_ORACLE_ADDRESS, ChainId, Currency, CurrencyAmount, ETH_ORACLE_ADDRESS, JSBI, Price, Token } from 'sdk'
+import { AVAX_ORACLE_ADDRESS, BTC_ORACLE_ADDRESS, ChainId, Currency, CurrencyAmount, ETH_ORACLE_ADDRESS, JSBI, LZ_WETH_ADDRESS, Price, Token } from 'sdk'
 
 import { useActiveWeb3React } from 'services/web3'
 import { useMemo } from 'react'
@@ -52,10 +52,10 @@ const WFTM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WFTM[ChainId.FANTOM], 100_000e6)
 }
 
-const BNB_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(BNB[ChainId.FANTOM], 100_000e6),
-  [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(BNB[ChainId.AVALANCHE], 100_000e6)
-}
+// const BNB_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
+//   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(BNB[ChainId.FANTOM], 100_000e6),
+//   [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(BNB[ChainId.AVALANCHE], 100_000e6)
+// }
 
 const AVAX_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(AVAX[ChainId.FANTOM], 100_000e6),

@@ -1,5 +1,5 @@
 import { SURV_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, ETH_ADDRESS, MULTI_WETH_ADDRESS } from 'constants/addresses'
-import { AVAX_ADDRESS, BNB_ADDRESS, BUSD_ADDRESS, ChainId, DAI_ADDRESS, Ether, FMULTI_ADDRESS, FRAX_ADDRESS, LINK_ADDRESS, LUX_ADDRESS, MPX_ADDRESS, MULTI_AVAX_ADDRESS, MULTI_DAI_ADDRESS, MULTI_WBTC_ADDRESS, NATIVE, SEANCE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
+import { AVAX_ADDRESS, BNB_ADDRESS, BUSD_ADDRESS, ChainId, DAI_ADDRESS, Ether, FMULTI_ADDRESS, FRAX_ADDRESS, LINK_ADDRESS, LUX_ADDRESS, LZ_WBTC_ADDRESS, LZ_WETH_ADDRESS, MPX_ADDRESS, MULTI_AVAX_ADDRESS, MULTI_DAI_ADDRESS, MULTI_WBTC_ADDRESS, NATIVE, SEANCE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
 
 import { SupportedChainId } from '../chains'
 
@@ -146,7 +146,15 @@ export const SOR: ChainTokenMap = {
 export const WETH: ChainTokenMap = {
   [ChainId.ETHEREUM]: new Token(ChainId.ETHEREUM, WNATIVE_ADDRESS[ChainId.ETHEREUM], 18, 'WETH', 'Wrapped ETH'),
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0xfe7eDa5F2c56160d406869A8aA4B2F365d544C7B', 18, 'axlETH', 'Wrapped ETH (Axelar)'),
-  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, WETH_ADDRESS[ChainId.AVALANCHE], 18, 'mETH', 'Wrapped ETH'),
+  [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, WETH_ADDRESS[ChainId.AVALANCHE], 18, 'WETH', 'Wrapped ETH'),
+}
+
+export const LZETH: ChainTokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, LZ_WETH_ADDRESS[ChainId.FANTOM], 18, 'lzETH', 'Wrapped ETH (LayerZero)'),
+}
+
+export const LZBTC: ChainTokenMap = {
+  [ChainId.FANTOM]: new Token(ChainId.FANTOM, LZ_WBTC_ADDRESS[ChainId.FANTOM], 18, 'lzBTC', 'Wrapped BTC (LayerZero)'),
 }
 
 export const MWETH: ChainTokenMap = {
