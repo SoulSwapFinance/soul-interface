@@ -116,7 +116,7 @@ const HeadlessUiModalControlled: FC<ControlledModalProps> = ({
   return (
     <Transition appear show={isOpen} as={Fragment} afterLeave={afterLeave} unmount={unmount}>
       <Dialog as="div" className="fixed z-50 inset-0" onClose={onDismiss} unmount={unmount}>
-        <div className="relative flex items-center justify-center block min-h-screen text-center">
+        <div className="relative flex items-center justify-center min-h-screen text-center">
           <Transition.Child
             unmount={false}
             as={Fragment}
@@ -154,7 +154,7 @@ const HeadlessUiModalControlled: FC<ControlledModalProps> = ({
               className={classNames(
                 transparent ? '' : `bg-black border border-${getChainColorCode(chainId)}`,
                 isDesktop ? MAX_WIDTH_CLASS_MAPPING[maxWidth] : '',
-                isDesktop ? `w-full` : 'w-[85vw] max-w-[45vh]  max-h-[85vh] overflow-y-auto mx-auto',
+                isDesktop ? `w-full` : 'w-[124vw] max-w-[124vh]  max-h-[124vh] overflow-y-auto mx-auto',
                 // isDesktop ? `w-full` : 'w-[85vw] max-h-[85vh] overflow-y-auto mx-auto',
                 'inline-block align-bottom rounded-xl text-left overflow-hidden transform p-4'
               )}
