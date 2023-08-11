@@ -65,9 +65,9 @@ export function MinimalPositionCard({ pair, chainId, showUnwrapped = false, bord
   return (
     <>
       {userPoolBalance && JSBI.greaterThan(userPoolBalance.quotient, JSBI.BigInt(0)) ? (
-        <div 
+        <div
           className={`p-5 rounded bg-dark-800 text-high-emphesis ${className}`}
-          >
+        >
           <AutoColumn gap={'md'}>
             <div className="text-lg">{`Your Position`}</div>
             <div className="flex flex-col md:flex-row md:justify-between">
@@ -153,10 +153,10 @@ export default function FullPositionCard({ chainId, pair, border, stakedBalance 
       ]
       : [undefined, undefined]
 
-  const backgroundColor = useColor(pair?.token0)
+  // const backgroundColor = useColor(pair?.token0)
 
-  const [depositValue, setDepositValue] = useState('')
-  const [withdrawValue, setWithdrawValue] = useState('')
+  // const [depositValue, setDepositValue] = useState('')
+  // const [withdrawValue, setWithdrawValue] = useState('')
   const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
 
   const balance = userPoolBalance
@@ -245,8 +245,9 @@ export default function FullPositionCard({ chainId, pair, border, stakedBalance 
                         <Typography
                           className={`text-white`}
                         >
-                        {`-`}  
-                        </Typography>                      </Button>
+                          {`-`}
+                        </Typography>
+                      </Button>
                       <Button
                         startIcon={<PlusIcon width={14} height={14} />}
                         size="sm"
@@ -260,7 +261,7 @@ export default function FullPositionCard({ chainId, pair, border, stakedBalance 
                         <Typography
                           className={`text-white`}
                         >
-                        {`+`}  
+                          {`+`}
                         </Typography>
                       </Button>
                     </div>

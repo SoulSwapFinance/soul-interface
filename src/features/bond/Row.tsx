@@ -5,7 +5,7 @@ import { useActiveWeb3React } from 'services/web3'
 import useApprove from 'hooks/useApprove'
 import { ChainId, LEND_MULTIPLIER, ROUTER_ADDRESS, SOUL_ADDRESS, SOUL_BOND_ADDRESS, WNATIVE } from 'sdk'
 import { ethers } from 'ethers'
-
+import Link from 'next/link'
 import {
   BondContainer,
   BondItem,
@@ -557,9 +557,11 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
             </Typography>
             <Typography variant="sm" className="font-medium">
               QUESTIONS OR CONCERNS?
-              <a href="mailto:soulswapfinance@gmail.com">
+              <ExternalLink 
+                src="mailto:soulswapfinance@gmail.com"
+              >
                 {' '} SEND EMAIL.
-              </a>
+              </ExternalLink>
             </Typography>
             <SubmitButton
               primaryColor={getChainColor(chainId)}
