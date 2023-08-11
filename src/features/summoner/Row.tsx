@@ -12,7 +12,7 @@ import {
 import { classNames, formatNumber, tryParseAmount } from 'functions'
 import { usePairInfo, useSummonerPoolInfo, useSummonerUserInfo, useTokenInfo, useUserTokenInfo } from 'hooks/useAPI'
 // import DoubleCurrencyLogo from 'components/DoubleLogo'
-import Modal from 'components/DefaultModal'
+import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
 import ModalHeader from 'components/Modal/Header'
@@ -26,6 +26,7 @@ import { getChainColor } from 'constants/chains'
 import { ExternalLink } from 'components/ReusableStyles'
 import { CircleStackIcon, CurrencyDollarIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
 import { useCurrencyBalance } from 'state/wallet/hooks'
+import Modal from 'components/DefaultModal'
 
 // const HideOnSmall = styled.div`
 // @media screen and (max-width: 900px) {
@@ -454,19 +455,20 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
             {/*------ DROPDOWN OPTIONS PANEL ------*/}
             {showOptions && (
-                <Modal
-                    isCustom={true}
+                <HeadlessUIModal.Controlled
+                    // isCustom={true}
+                    chainId={chainId}
                     isOpen={showOptions}
                     onDismiss={() => handleShowOptions()}
-                    borderColor={
-                        isUnderworldPair ? 'border-dark-900 hover:border-blue'
-                            : !isActive ? 'border-dark-900 hover:border-pink' : 'border-dark-900 hover:border-dark-420'
-                    }
-                    className={classNames("border",
-                        isActive && isSwapPair ? "hover:border-dark-600"
-                            : isUnderworldPair ? "hover:border-blue"
-                                : "hover:border-pink",
-                        "p-4 mt-3 mb-3 sm:p-0.5 w-full")}
+                    // borderColor={
+                    //     isUnderworldPair ? 'border-dark-900 hover:border-blue'
+                    //         : !isActive ? 'border-dark-900 hover:border-pink' : 'border-dark-900 hover:border-dark-420'
+                    // }
+                    // className={classNames("border",
+                    //     isActive && isSwapPair ? "hover:border-dark-600"
+                    //         : isUnderworldPair ? "hover:border-blue"
+                    //             : "hover:border-pink",
+                    //     "p-4 mt-3 mb-3 sm:p-0.5 w-full")}
                 >
                     <div className="p-3 space-y-6 bg-dark-900 rounded z-1 relative">
                         <Tab.Group>
@@ -640,7 +642,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 )}
                                 {/* APPROVED */}
                                 {/* {approved && hasBalance && isActive && ( */}
-                                {hasBalance && isActive && (
+                                {/* {hasBalance && isActive && ( */}
                                     <SubmitButton
                                         height="2rem"
                                         primaryColor={buttonColor}
@@ -652,16 +654,13 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     >
                                         <div className="flex text-lg gap-2">
                                             <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                            {`DEPOSIT`} {
-                                                isUnderworldPair
-                                                    ? token0Symbol
-                                                    : farm.lpSymbol
+                                            {`DEPOSIT ${farm.lpSymbol}`
                                             }
                                         </div>
                                     </SubmitButton>
-                                )}
+                                {/* )} */}
                                 {/* CREATE ASSET PAIR */}
-                                {(nativeToken0 && !isUnderworldPair && isActive) ? (
+                                {(nativeToken0 && isActive) ? (
                                     <NavLink
                                         href={`/exchange/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
                                     >
@@ -688,7 +687,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                             </TokenPairLink>
                                         </SubmitButton>
                                     </NavLink>
-                                ) : (!isUnderworldPair &&
+                                ) : (
                                     <NavLink
                                         href={`/exchange/add/${farm.token1Address}/${farm.token0Address}`}
                                     >
@@ -895,24 +894,25 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                             </Tab.Panel>
                         </Tab.Group>
                     </div>
-                </Modal>
+                </HeadlessUIModal.Controlled>
             )}
 
             {/*------ ZAP OPTIONS PANEL ------*/}
             {openZap &&
-                <Modal
-                    isCustom={true}
+                <HeadlessUIModal.Controlled
+                    // isCustom={true}
+                    chainId={chainId}
                     isOpen={openZap}
                     onDismiss={() => handleShowZap(pid)}
-                    borderColor={
-                        isUnderworldPair ? 'border-dark-900 hover:border-blue'
-                            : !isActive ? 'border-dark-900 hover:border-pink' : 'border-dark-900 hover:border-dark-420'
-                    }
-                    className={classNames("border",
-                        isActive && isSwapPair ? "hover:border-dark-600"
-                            : isUnderworldPair ? "hover:border-blue"
-                                : "hover:border-pink",
-                        "p-4 mt-3 mb-3 sm:p-0.5 w-full")}
+                    // borderColor={
+                    //     isUnderworldPair ? 'border-dark-900 hover:border-blue'
+                    //         : !isActive ? 'border-dark-900 hover:border-pink' : 'border-dark-900 hover:border-dark-420'
+                    // }
+                    // className={classNames("border",
+                    //     isActive && isSwapPair ? "hover:border-dark-600"
+                    //         : isUnderworldPair ? "hover:border-blue"
+                    //             : "hover:border-pink",
+                    //     "p-4 mt-3 mb-3 sm:p-0.5 w-full")}
                 >
 
                     {/* ZAP: NATIVE --> LP */}
@@ -986,14 +986,16 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                         {`Mind slippage and loses due to low liquidity. Avoid large amounts, if unsure.`}
                     </Typography>
 
-                </Modal>
+                </HeadlessUIModal.Controlled>
             }
 
             {showConfirmation && (
-                <Modal isOpen={showConfirmation} onDismiss={
+                <Modal 
+                    isOpen={showConfirmation} 
+                    onDismiss={
                     () => setShowConfirmation(false)}>
                     <div className="space-y-4">
-                        <ModalHeader header={`FYI: Early Withdrawal Fee`} onClose={() => setShowConfirmation(false)} />
+                        {/* <HeadlessUIModalHeader header={`FYI: Early Withdrawal Fee`} onClose={() => setShowConfirmation(false)} /> */}
                         <Typography variant="sm">
                             {`Since the community proposal passed, an Early Withdrawal Fee is now live (select pairs)`} <b><a href="https://enchant.soulswap.finance/#/proposal/0xb2ede0a82c5efc57f9c097f11db653fb1155cd313dfedd6c87142a42f68465a6">{`details here`}</a></b>.
                             {/* <br/><br/>This means you may withdraw for 0% fees after 14 Days have elapsed.  */}
