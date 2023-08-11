@@ -15,7 +15,7 @@ import { usePairInfo, useSummonerPoolInfo, useSummonerUserInfo, useTokenInfo, us
 import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
-import ModalHeader from 'components/Modal/Header'
+// import ModalHeader from 'components/Modal/Header'
 import NavLink from 'components/NavLink'
 import FarmInputPanel from './Input'
 import { CurrencyLogo } from 'components/CurrencyLogo'
