@@ -101,7 +101,7 @@ export default function TokenList({
           }
           data={tokens}
           defaultSortBy={{ id: 'liquidity', desc: true }}
-          link={{ href: '/analytics/tokens/', id: 'token?.id' }}
+          link={{ href: '/analytics/tokens/embed/', id: 'token.id' }}
         />
       )}
     </>
