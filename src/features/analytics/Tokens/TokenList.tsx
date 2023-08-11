@@ -95,13 +95,13 @@ export default function TokenList({
   return (
     <>
       {tokens && (
-        <Table<Token>
+        <Table
           columns={
             chainId == ChainId.FANTOM ? columns : someColumns
           }
           data={tokens}
           defaultSortBy={{ id: 'liquidity', desc: true }}
-          link={{ href: '/analytics/tokens/embedded/', id: 'token.id' }}
+          link={{ href: '/analytics/tokens/', id: 'token.id' }}
         />
       )}
     </>
