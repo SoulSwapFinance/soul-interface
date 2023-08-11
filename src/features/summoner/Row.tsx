@@ -177,10 +177,14 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
         }
     }
 
-    const handleShowZap = (pid) => {
+    const handleShowOptions = (pid) => {
         setOpenZap(!openZap)
     }
 
+    const handleShowConfirmation = (show) => {
+      setShowConfirmation(show) 
+    }
+ 
     // const handleMaxDeposit = (pid) => {
     //     const token = new Token(chainId, farm.lpAddress, 18)
     //     const tokenBalance = useCurrencyBalance(chainId, account, token)
@@ -453,7 +457,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
 
             {/*------ DROPDOWN OPTIONS PANEL ------*/}
-            {showOptions && (
+            {showOptions && !showConfirmation && !openZap && (
                 <HeadlessUIModal.Controlled
                     // isCustom={true}
                     chainId={chainId}
@@ -992,10 +996,12 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
             }
 
             {showConfirmation && (
-                <Modal 
-                    isOpen={showConfirmation} 
-                    onDismiss={
-                    () => setShowConfirmation(false)}>
+                <HeadlessUIModal.Controlled
+                    // isCustom={true}
+                    chainId={chainId}
+                    isOpen={showConfirmation}
+                    onDismiss={() => handleShowConfirmation(false)}
+                > 
                     <div className="space-y-4">
                         {/* <HeadlessUIModalHeader header={`FYI: Early Withdrawal Fee`} onClose={() => setShowConfirmation(false)} /> */}
                         <Typography variant="sm">
@@ -1033,7 +1039,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                             {`I UNDERSTAND THESE TERMS`}
                         </Button>
                     </div>
-                </Modal>
+                </HeadlessUIModal.Controlled>
             )}
         </>
     )
