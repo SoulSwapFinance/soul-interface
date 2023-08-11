@@ -177,7 +177,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
         }
     }
 
-    const handleShowOptions = (pid) => {
+    const handleShowZap = (pid) => {
         setOpenZap(!openZap)
     }
 
