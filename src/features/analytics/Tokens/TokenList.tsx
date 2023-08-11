@@ -47,6 +47,8 @@ function TokenListName({ token }: TokenListNameProps): JSX.Element {
     ? (token?.symbol).slice(3,) 
       : token?.symbol == 'FUCKMULTI' ? 'FMULTI' 
         : token?.symbol
+        
+  const tokenAddress = token?.id.toLowerCase()
 
 if(chainId == ChainId.FANTOM) {
   token?.id == MULTI_BNB_ADDRESS[ChainId.FANTOM].toLowerCase() 
@@ -94,7 +96,7 @@ export default function TokenList({
           }
           data={tokens}
           defaultSortBy={{ id: 'liquidity', desc: true }}
-          link={{ href: '/analytics/tokens/', id: 'token.id' }}
+          link={{ href: '/analytics/tokens/', id: 'tokenAddress' }}
         />
       )}
     </>
