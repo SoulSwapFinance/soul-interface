@@ -61,9 +61,10 @@ interface TokenProps {
   tokenCurrency?: Currency | ERC20 | undefined
 }
 
-function Token({ tokenCurrency }: TokenProps) {
+function Token() {
   const router = useRouter()
-  const id = tokenCurrency?.wrapped.address.toLowerCase()
+  // const id = tokenCurrency?.wrapped.address.toLowerCase()
+  const id = (router.query.id as string)?.toLowerCase()
 
   // const id = (router.query.id as string)?.toLowerCase()
   // const tokenAddress = id
@@ -85,13 +86,13 @@ function Token({ tokenCurrency }: TokenProps) {
     fetch()
   }, [tokenContract, tokenDecimals])
 
-  const block1d = useOneDayBlock({ chainId })
-  const block2d = useTwoDayBlock({ chainId })
-  const block1w = useOneWeekBlock({ chainId })
+  const block1d = useOneDayBlock({ chainId: chainId })
+  const block2d = useTwoDayBlock({ chainId: chainId })
+  const block1w = useOneWeekBlock({ chainId: chainId })
 
   // General data (volume, liquidity)
-  const nativePrice = useNativePrice({ chainId })
-  const nativePrice1d = useNativePrice({ chainId, variables: { block: block1d }, shouldFetch: !!block1d })
+  const nativePrice = useNativePrice({ chainId: chainId })
+  const nativePrice1d = useNativePrice({ chainId: chainId, variables: { block: block1d }, shouldFetch: !!block1d })
 
   const token = useTokens({ chainId: chainId, variables: { where: { id } }, shouldFetch: !!id })?.[0]
   const token1d = useTokens({
