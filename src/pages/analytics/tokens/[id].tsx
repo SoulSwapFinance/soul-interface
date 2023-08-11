@@ -56,10 +56,18 @@ const chartTimespans = [
   },
 ]
 
-function Token() {
+interface TokenProps {
+  // currency?: Currency | Token | undefined
+  tokenAddress?: string | undefined
+}
+
+function Token({ tokenAddress }: TokenProps) {
   const router = useRouter()
-  const id = (router.query.id as string)?.toLowerCase()
-  const tokenAddress = id
+  
+  const id = tokenAddress ?? (router.query.id as string).toLowerCase()
+
+  // const id = (router.query.id as string)?.toLowerCase()
+  // const tokenAddress = id
 
   const { chainId, library } = useActiveWeb3React()
   const [isCopied, setCopied] = useCopyClipboard()
@@ -86,22 +94,22 @@ function Token() {
   const nativePrice = useNativePrice({ chainId })
   const nativePrice1d = useNativePrice({ chainId, variables: { block: block1d }, shouldFetch: !!block1d })
 
-  const token = useTokens({ chainId, variables: { where: { id } }, shouldFetch: !!id })?.[0]
+  const token = useTokens({ chainId: chainId, variables: { where: { id } }, shouldFetch: !!id })?.[0]
   const token1d = useTokens({
-    chainId,
+    chainId: chainId,
     variables: { block: block1d, where: { id } },
     shouldFetch: !!id && !!block1d,
   })?.[0]
   const token2d = useTokens({
-    chainId,
+    chainId: chainId,
     variables: { block: block2d, where: { id } },
     shouldFetch: !!id && !!block2d,
   })?.[0]
 
   // Token Pairs
-  const tokenPairs = useTokenPairs({ chainId, variables: { id } })
+  const tokenPairs = useTokenPairs({ chainId: chainId, variables: { id } })
   const tokenPairs1d = useTokenPairs({
-    chainId,
+    chainId: chainId,
     variables: { id, block: block1d },
     shouldFetch: !!id && !!block1d,
   })
@@ -134,7 +142,7 @@ function Token() {
 
   // For the logo
   const currency = useCurrency(token?.id)
-  const tokenToAdd = new ERC20(chainId, tokenAddress, tokenDecimals, token?.symbol, token?.name)
+  const tokenToAdd = new ERC20(chainId, id, tokenDecimals, token?.symbol, token?.name)
 
   // For the Info Cards
   const price = token?.derivedETH * nativePrice
@@ -190,8 +198,8 @@ function Token() {
   const DECIMALS = tokenToAdd.decimals
   const TOKEN_NAME = tokenToAdd.name
 
-  const tokenSymbol = currency.symbol
-  const tokenName = currency.name
+  const tokenSymbol = currency.wrapped.symbol
+  const tokenName = currency.wrapped.name
 
   return (
 
@@ -277,7 +285,7 @@ function Token() {
           {/* <div className="flex flex-col"> */}
             <div className="text-center mb-1 text-white text-xl font-bold">Market Price</div>
             <NavLink
-              href={`/swap?inputCurrency=&outputCurrency=${tokenAddress}`}
+              href={`/swap?inputCurrency=&outputCurrency=${id}`}
             >
               <div
                 className={`flex bg-dark-800 rounded-2xl justify-center hover:bg-dark-700 mb-4`}
@@ -296,7 +304,7 @@ function Token() {
           {/* <div className="flex flex-col"> */}
             <div className="text-center mb-1 text-white text-xl font-bold">Total Market</div>
             <NavLink
-              href={`/swap?inputCurrency=&outputCurrency=${tokenAddress}`}
+              href={`/swap?inputCurrency=&outputCurrency=${id}`}
             >
               {/* <Button
                 size="xs"

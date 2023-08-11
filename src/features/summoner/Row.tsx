@@ -25,6 +25,7 @@ import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import { getChainColor } from 'constants/chains'
 import { ExternalLink } from 'components/ReusableStyles'
 import { CircleStackIcon, CurrencyDollarIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
+import PairChart from 'pages/analytics/pairs/embedded/[id]'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import Modal from 'components/DefaultModal'
 
@@ -180,6 +181,10 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
         setOpenZap(!openZap)
     }
 
+    const handleShowConfirmation = (show) => {
+      setShowConfirmation(show) 
+    }
+ 
     // const handleMaxDeposit = (pid) => {
     //     const token = new Token(chainId, farm.lpAddress, 18)
     //     const tokenBalance = useCurrencyBalance(chainId, account, token)
@@ -452,7 +457,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
 
             {/*------ DROPDOWN OPTIONS PANEL ------*/}
-            {showOptions && (
+            {showOptions && !showConfirmation && !openZap && (
                 <HeadlessUIModal.Controlled
                     // isCustom={true}
                     chainId={chainId}
@@ -753,6 +758,10 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         </SubmitButton>
                                     </Wrap>
                                 }
+                                  <PairChart
+                                    inputCurrency={token0}
+                                    outputCurrency={token1}
+                                  />
                             </Tab.Panel>
                             {/*------ WITHDRAW TAB PANEL ------*/}
                             <Tab.Panel className={'outline-none'}>
@@ -871,7 +880,6 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     >
                                         {`WITHDRAW`} {isUnderworldPair ? token0Symbol : farm.lpSymbol}
                                     </SubmitButton>
-
                                 </Wrap>
                                 {/* EARNED */}
                                 {earnedAmount > 0 && (
@@ -988,10 +996,12 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
             }
 
             {showConfirmation && (
-                <Modal 
-                    isOpen={showConfirmation} 
-                    onDismiss={
-                    () => setShowConfirmation(false)}>
+                <HeadlessUIModal.Controlled
+                    // isCustom={true}
+                    chainId={chainId}
+                    isOpen={showConfirmation}
+                    onDismiss={() => handleShowConfirmation(false)}
+                > 
                     <div className="space-y-4">
                         {/* <HeadlessUIModalHeader header={`FYI: Early Withdrawal Fee`} onClose={() => setShowConfirmation(false)} /> */}
                         <Typography variant="sm">
@@ -1029,7 +1039,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                             {`I UNDERSTAND THESE TERMS`}
                         </Button>
                     </div>
-                </Modal>
+                </HeadlessUIModal.Controlled>
             )}
         </>
     )

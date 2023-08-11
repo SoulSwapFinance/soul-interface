@@ -28,9 +28,9 @@ interface Token {
 }
 
 interface TokenListProps {
-  tokens: Token[]
+  tokens: Token[] // | Currency[]
   enabledColumns?: TokenListColumnType[]
-  someEnabledColumns?: TokenListColumnType[]
+  someEnabledColumns?: SomeTokenListColumnType[]
 }
 
 interface TokenListNameProps {
@@ -84,7 +84,14 @@ export default function TokenList({
   const columns = React.useMemo<Column[]>(() => enabledColumns.map((col) => TokenListColumns[col]), [enabledColumns])
   const someColumns = React.useMemo<Column[]>(() => someEnabledColumns.map((col) => SomeTokenListColumns[col]), [someEnabledColumns])
   const {chainId} = useActiveWeb3React()
+  
+  // const currency = useCurrency(token?.id)
 
+  // for links
+  // const tokenAddress = currency?.isToken ? currency.address : currency?.wrapped.address
+        
+  // const tokenAddress = token?.id.toLowerCase()
+  
   return (
     <>
       {tokens && (
@@ -94,7 +101,7 @@ export default function TokenList({
           }
           data={tokens}
           defaultSortBy={{ id: 'liquidity', desc: true }}
-          link={{ href: '/analytics/tokens/', id: 'token.id' }}
+          link={{ href: '/analytics/tokens/embed/', id: 'token.id' }}
         />
       )}
     </>

@@ -203,6 +203,7 @@ function PairChart({ inputCurrency, outputCurrency }: PairProps) {
             </div>
           ))}
         </div>
+
       </div>
   )
 }
