@@ -1,7 +1,7 @@
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import AnalyticsContainer from 'features/analytics/AnalyticsContainer'
 // import Background from 'features/analytics/Background'
-import { Token as ERC20 } from 'sdk'
+import { Currency, Token as ERC20 } from 'sdk'
 import ChartCard from 'features/analytics/ChartCard'
 import ColoredNumber from 'features/analytics/ColoredNumber'
 import InfoCard from 'features/analytics/InfoCard'
