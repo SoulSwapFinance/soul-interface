@@ -195,7 +195,7 @@ export default function Rewards() {
                     data-testid="create-campaign"
                   >
                     <Text fontWeight={700} fontSize={12} lineHeight="15px">
-                      CREATE CAMPAIGN
+                      Create Campaign
                     </Text>
                   </ResponsiveButtonSecondary>
                 )}

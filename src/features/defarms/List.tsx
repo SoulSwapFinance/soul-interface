@@ -56,7 +56,7 @@ export const FarmList = () => {
 
   return (
     <div>
-      <div className={`hidden flex ml-2 mt-2 mr-2 mb-4 gap-1 items-center justify-center`}>
+      <div className={`flex ml-2 mt-2 mr-2 mb-4 gap-1 items-center justify-center`}>
         <Button 
             variant={'bordered'}
             color={'purple'}
