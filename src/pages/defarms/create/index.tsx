@@ -76,17 +76,17 @@ const CreateFarm = () => {
   //   })
 
   // handles: launch deFarm
-    const handleLaunch = useCallback(() => {
-      router.push(`/defarms/launch`)
-    }, [])
-  
+  const handleLaunch = useCallback(() => {
+    router.push(`/defarms/launch`)
+  }, [])
+
 
   const handleRewardSelect = useCallback(
     (rewardCurrency: Token) => {
       onCurrencySelection(Field.REWARD, rewardCurrency)
       setRewardAsset(rewardCurrency)
       setAsset(true)
-      },
+    },
     [onCurrencySelection, setRewardAsset, setAsset]
   )
 
@@ -214,7 +214,7 @@ const CreateFarm = () => {
 
       // console.log([
       currencies[Field.REWARD].wrapped.address,
-      enchanterId,
+        enchanterId,
         rewardDays,
         // feeDays,
         dailyReward
@@ -259,13 +259,13 @@ const CreateFarm = () => {
         <Container maxWidth="full" className="space-y-6">
           {/* START: DAILY REWARD INPUT */}
           <Typography
-            className={`font-bold blink text-xl text-center mb-4 border-2 ${rewardSet && assetSet ? `border-purple` : `border-neonGreen`} m-2 p-2 rounded rounded-2xl`}
+            className={`font-bold blink text-xl text-center mb-4 border-2 ${rewardSet && assetSet ? `border-purple` : `border-neonGreen`} m-2 p-2 rounded-2xl`}
           >
-            {`${!assetSet 
-                ? `Select Reward Asset` 
-                  : !rewardSet 
-                    ? `Set Daily Rewards` 
-                      : `Daily Reward`}`}
+            {`${!assetSet
+              ? `Select Reward Asset`
+              : !rewardSet
+                ? `Set Daily Rewards`
+                : `Daily Reward`}`}
           </Typography>
           <div className="grid grid-cols-1 grid-rows-1 gap-4 md:grid-rows-1 md:grid-cols-1">
             <CurrencyInputPanel
@@ -288,7 +288,7 @@ const CreateFarm = () => {
 
           {/* START: ENCHANTER INPUT */}
           <div className={
-            `flex flex-cols-2 border border-2 ${`border-purple`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
+            `flex flex-cols-2 border-2 ${`border-purple`} rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
           >
             <Typography className={`w-full text-sm md:text-lg font-bold`}>
               {`Referral Code`}
@@ -303,7 +303,7 @@ const CreateFarm = () => {
 
           {/* START: REWARD DURATION INPUT */}
           <div className={
-            `flex flex-cols-2 border border-2 ${durationSet ? `border-purple` : `border-neonGreen`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
+            `flex flex-cols-2 border-2 ${durationSet ? `border-purple` : `border-neonGreen`} rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
           >
             <Typography className={`w-full text-sm md:text-lg font-bold`}>
               {`${!durationSet ? `Set` : ``} Reward Duration`}
@@ -318,7 +318,7 @@ const CreateFarm = () => {
 
           {/* START: WITHDRAW FEE INPUT */}
           <div className={
-            `flex flex-cols-2 border border-2 ${feeSet ? `border-purple` : `border-neonGreen`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
+            `flex flex-cols-2 border-2 ${feeSet ? `border-purple` : `border-neonGreen`} rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
           >
             <Typography className={`w-full text-sm md:text-lg font-bold`}>
               {`${!feeSet ? `Set` : ``} Withdraw Fee Duration`}
@@ -334,10 +334,10 @@ const CreateFarm = () => {
 
           {/* START: LOGO URI INPUT */}
           <div className={
-            `flex flex-cols-2 border border-2 ${logoSet ? `border-purple` : `border-neonGreen`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
-            >
+            `flex flex-cols-2 border-2 ${logoSet ? `border-purple` : `border-neonGreen`} rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
+          >
             <Typography className={`w-full text-sm md:text-lg font-bold`}>
-            {`${!logoSet ? `Set` : ``} Logo URL`}
+              {`${!logoSet ? `Set` : ``} Logo URL`}
             </Typography>
             <Input.Text
               value={logoURI}
@@ -349,7 +349,7 @@ const CreateFarm = () => {
 
           {/* START: LAUNCH DELAY INPUT */}
           {/* <div className={
-            `flex flex-cols-2 border border-2 ${logoSet ? `border-purple` : `border-neonGreen`} rounded rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
+            `flex flex-cols-2 border-2 ${logoSet ? `border-purple` : `border-neonGreen`} rounded-2xl p-2 m-2 justify-center text-center font-bold text-sm md:text-lg`}
             >
             <Typography className={`w-full text-sm md:text-lg font-bold`}>
             {`${!logoSet ? `Set` : ``} Launch Delay`}
@@ -402,11 +402,11 @@ const CreateFarm = () => {
               <Typography className="text-white" fontFamily={'medium'}>
                 {`Logo Preview`}
               </Typography>
-              <Image 
-                  src={logoURI}
-                  width={24}
-                  height={24}
-                  alt={`logo for defarm reward asset`}
+              <Image
+                src={logoURI}
+                width={24}
+                height={24}
+                alt={`logo for defarm reward asset`}
               />
             </div>
           </div>
@@ -429,21 +429,20 @@ const CreateFarm = () => {
           </Button> */}
           <div className={`flex flex-col bg-dark-1000 p-3 border border-1 
             ${rewardSet && assetSet && durationSet && feeSet ? `border-purple` : `border-dark-700`} 
-            w-full rounded rounded-2xl space-y-1`}
+            w-full rounded-2xl space-y-1`}
           >
-          <div className="flex justify-between">
+            <div className="flex justify-between">
               <Typography className="text-white" fontFamily={'medium'}>
                 {`Campaign Rewards`}
               </Typography>
               <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
-                {`${formatNumber(dailyReward * rewardDays, false, true)} ${rewardAsset ? rewardAsset?.wrapped.symbol : ''}`}                
-                </Typography>
+                {`${formatNumber(dailyReward * rewardDays, false, true)} ${rewardAsset ? rewardAsset?.wrapped.symbol : ''}`}
+              </Typography>
             </div>
             <div className="flex justify-between">
               <Typography className="text-white" fontFamily={'medium'}>
-                {`Creation Fee (${
-                bloodSacrifice * 100
-                }%)`}
+                {`Creation Fee (${bloodSacrifice * 100
+                  }%)`}
               </Typography>
               <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
                 {`${formatNumber(dailyReward * rewardDays * bloodSacrifice, false, true)} ${rewardAsset ? rewardAsset?.wrapped.symbol : ''}`}
@@ -461,34 +460,34 @@ const CreateFarm = () => {
                   (dailyReward * rewardDays * bloodSacrifice), false, true)} ${rewardAsset ? rewardAsset?.wrapped.symbol : ''}`}
               </Typography>
             </div>
-            </div>
+          </div>
           <Button
-            color={rewardSet && assetSet && durationSet && feeSet ? `neonGreen` : `avaxRed`}
+            color={rewardSet && assetSet && durationSet && feeSet ? `dark-900` : `avaxRed`}
             variant={`outlined`}
-            className={`w-full px-4 py-3 text-base rounded text-high-emphesis font-bold border
+            className={`w-full px-4 py-3 text-base rounded text-white font-bold border
           ${rewardSet && assetSet && durationSet && feeSet ? `border-neonGreen` : `border-avaxRed`}`}
             onClick={() => setShowConfirmation(true)}
             disabled={!campaignReady}
           >
             <Typography
             // className={`text-white font-bold`}
-            >        
-          {rewardSet && assetSet && durationSet && feeSet ? `(1) CREATE CAMPAIGN` : `MISSING CAMPAIGN SETUP`}
+            >
+              {rewardSet && assetSet && durationSet && feeSet ? `(1) Create Campaign` : `Missing Setup Details`}
             </Typography>
           </Button>
           {rewardSet && assetSet && durationSet && feeSet &&
             <Button
-              color={rewardSet && assetSet && durationSet && feeSet ? `neonGreen` : `avaxRed`}
+              color={rewardSet && assetSet && durationSet && feeSet ? `dark-900` : `avaxRed`}
               variant={`outlined`}
-              className={`w-full px-4 py-3 text-base rounded text-high-emphesis font-bold border
+              className={`w-full px-4 py-3 text-base rounded text-white font-bold border
             ${rewardSet && assetSet && durationSet && feeSet ? `border-neonGreen` : `border-avaxRed`}`}
               disabled={!campaignReady}
               onClick={handleLaunch}
-              // onClick={handleLaunchCampaign(delayDays)}
+            // onClick={handleLaunchCampaign(delayDays)}
             >
-                <Typography>        
-              { `(2) LAUNCH CAMPAIGN` }
-                </Typography>
+              <Typography>
+                {`(2) Launch Campaign`}
+              </Typography>
             </Button>
           }
           {showConfirmation && (
@@ -509,7 +508,7 @@ const CreateFarm = () => {
                     // creation fee
                     (dailyReward * rewardDays * bloodSacrifice), false, true)} ${rewardAsset?.wrapped.symbol}`}
                   <br />
-              
+
                   {/* <div className="mt-6 text-center">
                   <i><b> {`Update Logo? Submit PR (or just DM Buns)`}</b></i>.
               </div> */}
@@ -517,7 +516,7 @@ const CreateFarm = () => {
                   {/* <b>100% of the fee</b> goes towards building our protocol-owned liquidity, which brings about long-term sustainability to our platform. */}
                 </Typography>
                 <Typography variant="sm" className="text-center">
-                {`You're incentivizing ${rewardAsset.wrapped.symbol}-${NATIVE[chainId].symbol} deposits and agree to the 
+                  {`You're incentivizing ${rewardAsset.wrapped.symbol}-${NATIVE[chainId].symbol} deposits and agree to the 
                 possibility of us imposing a minimum AURA balance (governance power) for deposits.`}
                 </Typography>
                 <Typography variant="sm" className="font-medium text-center">
@@ -528,33 +527,33 @@ const CreateFarm = () => {
                 </Typography>
                 {!approved &&
                   <Button
-                  color="purple"
-                  variant={`bordered`}
-                  className="w-full px-4 py-3 rounded text-white font-bold"
-                  onClick={() => handleApprove()}
-                    disabled={!rewardSet || !assetSet || !durationSet || !feeSet}
-                  >
-                  <Typography
-                      className={`text-white`}
-                    >
-                    {inputError || `Approve Creation`}
-                  </Typography>
-                  </Button>
-                }
-                {/* {approved && */}
-                  <Button
                     color="purple"
                     variant={`bordered`}
                     className="w-full px-4 py-3 rounded text-white font-bold"
-                    onClick={() => handleCreate()}
+                    onClick={() => handleApprove()}
                     disabled={!rewardSet || !assetSet || !durationSet || !feeSet}
                   >
                     <Typography
                       className={`text-white`}
                     >
-                      {inputError || 'Confirm Creation'}
+                      {inputError || `Approve Creation`}
                     </Typography>
                   </Button>
+                }
+                {/* {approved && */}
+                <Button
+                  color="purple"
+                  variant={`bordered`}
+                  className="w-full px-4 py-3 rounded text-white font-bold"
+                  onClick={() => handleCreate()}
+                  disabled={!rewardSet || !assetSet || !durationSet || !feeSet}
+                >
+                  <Typography
+                    className={`text-white`}
+                  >
+                    {inputError || 'Confirm Creation'}
+                  </Typography>
+                </Button>
                 {/* } */}
               </div>
             </Modal>

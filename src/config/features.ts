@@ -61,7 +61,7 @@ const features: FeatureMap = {
 
   [ChainId.AVALANCHE]: [
     Feature.AMM,
-    // Feature.DEFARM,
+    Feature.DEFARM,
     // Feature.MANIFESTATION,
     Feature.SWAP,
     Feature.BRIDGE,

@@ -10,7 +10,7 @@ import { ChainId } from 'sdk'
 import NetworkGuard from 'guards/Network'
 import NavLink from 'components/NavLink'
 import { Button } from 'components/Button'
-import TokenStats from 'components/TokenStats'
+// import TokenStats from 'components/TokenStats'
 import DEFARM_BANNER from 'assets/branding/farm-banner.png'
 // import { getChainColor } from 'constants/chains'
 import { useActiveWeb3React } from 'services/web3'
@@ -28,7 +28,7 @@ const Defarms = () => {
           <Head>
             <title>DeFarms | Soul</title>
             <meta key="description" name="description" content="Farm" />
-            <Image src="https://giphy.com/embed/kPCDnjRGh7POYS4Z5P" width={480} height={480} alt={'egg gif with tokens'} />
+            {/* <Image src="https://giphy.com/embed/kPCDnjRGh7POYS4Z5P" width={480} height={480} alt={'egg gif with tokens'} /> */}
           </Head>      
           <div className={`grid p-1 mt-8 rounded-2xl bg-dark-1000`} >
           <div

@@ -102,8 +102,8 @@ export const getTokenPrices = async (chainId, variables) => {
 
 // √ reports chainId
 export const getTokenPrice = async (chainId, query, variables) => {
-  console.log('hooks: getTokenPrice')
-  console.log('chain', chainId)
+  // console.log('hooks: getTokenPrice')
+  // console.log('chain', chainId)
   const nativePrice = await getNativePrice(chainId)
 
   const { token } = await exchange(chainId, query, variables)

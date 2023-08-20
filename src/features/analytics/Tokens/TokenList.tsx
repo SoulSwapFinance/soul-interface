@@ -81,9 +81,12 @@ export default function TokenList({
   enabledColumns = Object.keys(TokenListColumns) as TokenListColumnType[],
   someEnabledColumns = Object.keys(SomeTokenListColumns) as SomeTokenListColumnType[],
 }: TokenListProps): JSX.Element {
+  
   const columns = React.useMemo<Column[]>(() => enabledColumns.map((col) => TokenListColumns[col]), [enabledColumns])
+  
   const someColumns = React.useMemo<Column[]>(() => someEnabledColumns.map((col) => SomeTokenListColumns[col]), [someEnabledColumns])
-  const {chainId} = useActiveWeb3React()
+  
+  const { chainId } = useActiveWeb3React()
   
   // const currency = useCurrency(token?.id)
 
@@ -95,13 +98,13 @@ export default function TokenList({
   return (
     <>
       {tokens && (
-        <Table<Token>
+        <Table
           columns={
             chainId == ChainId.FANTOM ? columns : someColumns
           }
           data={tokens}
           defaultSortBy={{ id: 'liquidity', desc: true }}
-          link={{ href: '/analytics/tokens/embed/', id: 'token.id' }}
+          link={{ href: '/analytics/tokens/', id: 'token.id' }}
         />
       )}
     </>

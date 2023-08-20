@@ -1,7 +1,7 @@
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import AnalyticsContainer from 'features/analytics/AnalyticsContainer'
 // import Background from 'features/analytics/Background'
-import { Token as ERC20 } from 'sdk'
+import { Currency, Token as ERC20 } from 'sdk'
 import ChartCard from 'features/analytics/ChartCard'
 import ColoredNumber from 'features/analytics/ColoredNumber'
 import InfoCard from 'features/analytics/InfoCard'
@@ -57,14 +57,14 @@ const chartTimespans = [
 ]
 
 interface TokenProps {
-  // currency?: Currency | Token | undefined
-  tokenAddress?: string | undefined
+  // inputCurrency?: Currency | Token | undefined
+  tokenCurrency?: Currency | ERC20 | undefined
 }
 
-function Token({ tokenAddress }: TokenProps) {
+function Token() {
   const router = useRouter()
-  
-  const id = tokenAddress ?? (router.query.id as string).toLowerCase()
+  // const id = tokenCurrency?.wrapped.address.toLowerCase()
+  const id = (router.query.id as string)?.toLowerCase()
 
   // const id = (router.query.id as string)?.toLowerCase()
   // const tokenAddress = id
@@ -86,13 +86,13 @@ function Token({ tokenAddress }: TokenProps) {
     fetch()
   }, [tokenContract, tokenDecimals])
 
-  const block1d = useOneDayBlock({ chainId })
-  const block2d = useTwoDayBlock({ chainId })
-  const block1w = useOneWeekBlock({ chainId })
+  const block1d = useOneDayBlock({ chainId: chainId })
+  const block2d = useTwoDayBlock({ chainId: chainId })
+  const block1w = useOneWeekBlock({ chainId: chainId })
 
   // General data (volume, liquidity)
-  const nativePrice = useNativePrice({ chainId })
-  const nativePrice1d = useNativePrice({ chainId, variables: { block: block1d }, shouldFetch: !!block1d })
+  const nativePrice = useNativePrice({ chainId: chainId })
+  const nativePrice1d = useNativePrice({ chainId: chainId, variables: { block: block1d }, shouldFetch: !!block1d })
 
   const token = useTokens({ chainId: chainId, variables: { where: { id } }, shouldFetch: !!id })?.[0]
   const token1d = useTokens({
