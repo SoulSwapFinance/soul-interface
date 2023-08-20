@@ -754,6 +754,14 @@
     },
     {
       "chainId": 43114,
+      "name": "SurvToken",
+      "address": "0x2B6A85CD35D15691357eea61d88cB3f401A92FC3",
+      "symbol": "SURV",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/assets/0x2B6A85CD35D15691357eea61d88cB3f401A92FC3/logo.png"
+    },
+    {
+      "chainId": 43114,
       "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
       "symbol": "USDC",
       "name": "USD Coin",
