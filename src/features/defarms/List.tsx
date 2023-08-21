@@ -86,12 +86,12 @@ export const FarmList = () => {
             </Typography>
           </Button>
         </div>
-      {/* <Typography 
+      <Typography 
       className="text-2xl bg-dark-1000 mt-6 rounded-2xl border-2 border-dark-600 p-3 font-bold text-center mb-1"
       >Active DeFarms
       </Typography>
       <Active />
-      <>{chainId == ChainId.FANTOM ? ftmList : avaxList}</> */}
+      <>{chainId == ChainId.FANTOM ? ftmList : avaxList}</>
      {/* <div className={'grid grid-cols-1 mx-1 mt-6 mb-4 gap-2 border bg-avaxRed rounded rounded-lg'}> */}
            {/* <ExternalLink
               href="https://defarms.soulswap.finance/defarms"
