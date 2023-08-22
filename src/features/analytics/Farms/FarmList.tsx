@@ -71,7 +71,7 @@ function Rewards({ rewards }: { rewards: Reward[] }): JSX.Element {
                   width={30}
                   height={30}
                   className="rounded-full"
-                  layout="fixed"
+                  // layout="fixed"
                   alt={reward.token}
                 />
               )}

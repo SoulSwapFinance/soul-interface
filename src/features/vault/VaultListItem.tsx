@@ -118,7 +118,7 @@ const VaultListItem = ({ farm, ...rest }) => {
                           width={50}
                           height={50}
                           className="rounded-md"
-                          layout="fixed"
+                          // layout="fixed"
                           alt={reward.token}
                         />
                       </div>

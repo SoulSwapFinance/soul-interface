@@ -22,7 +22,7 @@ export const ProjectHero = ({ project, totalCommitted }) => {
           width={60}
           height={60}
           className="rounded-full bg-white"
-          layout="fixed"
+          // layout="fixed"
           alt={project.name}
         />
         <Typography variant="hero" className={'font-bold sm:mt-2 text-white'}>
