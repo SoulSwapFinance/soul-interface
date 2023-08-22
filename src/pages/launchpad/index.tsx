@@ -166,7 +166,7 @@ export default function Launchpad(): JSX.Element {
                                   width={60}
                                   height={60}
                                   className="rounded-full bg-white"
-                                  layout="fixed"
+                                  // layout="fixed"
                                   alt={p.name}
                                 />
                               </div>

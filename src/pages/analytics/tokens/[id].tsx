@@ -198,8 +198,8 @@ function Token() {
   const DECIMALS = tokenToAdd.decimals
   const TOKEN_NAME = tokenToAdd.name
 
-  const tokenSymbol = currency.wrapped.symbol
-  const tokenName = currency.wrapped.name
+  // const tokenSymbol = currency.wrapped.symbol
+  // const tokenName = currency.wrapped.name
 
   return (
 
@@ -259,7 +259,7 @@ function Token() {
                   />
                   <div className="flex items-center space-x-4 md:space-x-8">
                     <Typography variant="h2" className="text-high-emphesis" weight={700}>
-                      {tokenName}
+                      {SYMBOL}
                     </Typography>
                   </div>
                   {/* <div className="flex items-center space-x-4 md:space-x-8">

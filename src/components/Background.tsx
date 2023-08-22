@@ -73,7 +73,7 @@ const Background: FC<Background> = ({ variant }) => {
       src={IMAGE_URL[variant].url}
       // objectFit="cover"
       objectPosition="center"
-      layout="fill"
+      // layout="fill"
       priority
     />
   )
