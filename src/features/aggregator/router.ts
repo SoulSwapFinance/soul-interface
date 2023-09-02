@@ -1,7 +1,7 @@
 import * as matcha from './adapters/0x'
 import * as inch from './adapters/1inch'
 import * as kyberswap from './adapters/kyberswap'
-// import * as openocean from './adapters/openocean'
+import * as openocean from './adapters/openocean'
 import * as paraswap from './adapters/paraswap'
 import * as firebird from './adapters/firebird'
 import * as lifi from './adapters/lifi'
@@ -11,8 +11,7 @@ import { capitalizeFirstLetter } from './utils'
 import { allChains } from './chains'
 import { chainNamesReplaced, chainsMap } from './constants'
 
-export const adapters = [matcha, inch, kyberswap, paraswap, firebird, lifi, rango]
-// openocean
+export const adapters = [matcha, openocean, inch, kyberswap, paraswap, firebird, lifi, rango]
 
 // const adaptersMap = adapters.reduce((acc, adapter) => ({ ...acc, [adapter.name]: adapter }), {}) as Record<
 // 	string,

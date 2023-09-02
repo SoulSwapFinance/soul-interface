@@ -39,7 +39,7 @@ export async function getQuote(chain: string, from: string, to: string, amount: 
 	)
   // const nativeAddress = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
   const nativeAddress = '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
-  const zeroAddress = '0x0000000000000000000000000000000000000000'
+//   const zeroAddress = '0x0000000000000000000000000000000000000000'
   const fromToken = from.toLowerCase() === nativeAddress ? ethers.constants.AddressZero : from
   const toToken  = to.toLowerCase() === nativeAddress ? ethers.constants.AddressZero : to
   const URL = `https://ethapi.openocean.finance/v2/${
