@@ -148,7 +148,7 @@ const Limit = () => {
   // const [ouputCurrency, setOutputCurrency] = useState(SOUL[chainId])
   const theme = useTheme();
   const [showOrders, setShowOrders] = useState(false)
-  const [useSwap, setUseSwap] = useState(false)
+  // const [useSwap, setUseSwap] = useState(false)
   const [showHeader, setShowHeader] = useState(true)
   const DEFAULT_CURRENCY_B = [ChainId.ETHEREUM, ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId) ? SOUL_ADDRESS[chainId] : USDC_ADDRESS[chainId]
   const router = useRouter()

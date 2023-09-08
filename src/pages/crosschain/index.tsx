@@ -1,25 +1,46 @@
 // import { SquidWidget } from "@0xsquid/widget";
 // import { AppConfig } from "@0xsquid/widget/widget/core/types/config";
 
-import Container from "components/Container";
-import Link from "next/link";
-import Typography from "components/Typography";
-import { getChainColorCode } from "constants/chains";
+// import Container from "components/Container";
+// import Link from "next/link";
+// import Typography from "components/Typography";
+// import { getChainColorCode } from "constants/chains";
+// import NavLink from "components/NavLink";
 import { useActiveWeb3React } from "services/web3";
-import NavLink from "components/NavLink";
 import SwapDropdown from "features/swap/SwapDropdown";
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
+import LimitHeader from "features/limit/LimitHeader";
+import { CustomBanner } from "components/Banner";
+import { ChainId } from "sdk";
 
 const Crosschain = () => {
   const { chainId } = useActiveWeb3React();
   return (
-    <DoubleGlowShadowV2>
+    // <DoubleGlowShadowV2>
           
-    <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-    <Container
-      className={'grid grid-cols-1 items-center justify-center'}
-    >
-      <SwapDropdown />
+    // <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
+    // <Container
+    //   className={'grid grid-cols-1 items-center justify-center'}
+    // >
+      <DoubleGlowShadowV2>
+      <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
+          <SwapDropdown
+            inputCurrency={null}
+            outputCurrency={null}
+            allowedSlippage={null}
+          />
+        <CustomBanner
+          chains={[ChainId.FANTOM]}
+          link={'/bonds'}
+          text={'New Bonds Available ↗'}
+          textColor={'white'}
+          color={'ftmBlue'}
+          className={`animate-pulse border-4 border-dark-800 rounded-2xl`}
+        />
+      <LimitHeader
+        inputCurrency={null}
+        outputCurrency={null}
+      />
       {/* <div
         className={`flex justify-center border-4 border-${getChainColorCode(chainId ?? 250)} rounded-2xl m-2 p-2`}
       >
@@ -28,7 +49,7 @@ const Crosschain = () => {
         </Typography>
       </div> */}
       <div
-        className={`grid grid-cols-1 rounded-2xl justify-center items-center`
+        className={`flex rounded-2xl justify-center items-center p-4 m-4`
           // `flex flex-col justify-center items-center w-full h-full p-4 sm:p-8 text-white bg-dark-900`
         }
       >
@@ -36,9 +57,13 @@ const Crosschain = () => {
           width={'100%'}
           height={'720px'}
           src={`https://widget-integrations-squid.vercel.app/`}
+          // style={{
+          //    height: '100vh',
+          //     width: '100vw',
+          // }}
         >
         </iframe>
-        <Link
+        {/* <Link
           href={'https://widget-integrations-squid.vercel.app/'}
           target={'_blank'}
         >
@@ -47,7 +72,7 @@ const Crosschain = () => {
         >
             {'Visit Crosschain Page ↗'}
         </div>
-          </Link>
+          </Link> */}
         {/* <NavLink
           href='/swap'
         >
@@ -66,7 +91,7 @@ const Crosschain = () => {
           </div>
         </NavLink> */}
       </div>
-    </Container>
+    {/* </Container> */}
     </div>
     </DoubleGlowShadowV2>
 

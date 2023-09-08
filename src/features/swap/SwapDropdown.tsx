@@ -90,7 +90,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             <Typography
               className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
             >
-              {`Exchange`}
+              {`Swap`}
             </Typography>
           </div>
         </NavLink>
@@ -122,7 +122,8 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               <Typography
                 className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
               >
-                {`+/-`}
+                {/* {`+/-`} */}
+                {`Pool`}
               </Typography>
             </div>
           </NavLink>
@@ -187,9 +188,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           </NavLink>
         }
 
-
-
-        {/* {featureEnabled(Feature.BRIDGE, chainId) &&
+        {featureEnabled(Feature.BRIDGE, chainId) &&
           <NavLink
             className={classNames(
               bridgeStyle
@@ -211,9 +210,9 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               </Typography>
             </div>
           </NavLink>
-        } */}
+        }
 
-        {featureEnabled(Feature.CROSSCHAIN, chainId) &&
+        {/* {featureEnabled(Feature.CROSSCHAIN, chainId) &&
           <ExternalLink
             className={classNames(
               crossStyle
@@ -232,11 +231,11 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               <Typography
                 className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
               >
-                {`Crosschain`}
+                {`xSwap`}
               </Typography>
             </div>
           </ExternalLink>
-        }
+        } */}
       </div>
       <div className={
         classNames(
