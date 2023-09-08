@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Ether, JSBI, NATIVE, Token } from '../../../sdk'
+import { ChainId, Currency, CurrencyAmount, Ether, JSBI, NATIVE, Token } from '../../../sdk'
 import { PairState, useV2Pair } from '../../../hooks/useV2Pairs'
 import React, { useCallback, useEffect, useState } from 'react'
 
@@ -37,7 +37,7 @@ export default function PoolFinder() {
   const router = useRouter()
   const [activeField, setActiveField] = useState<number>(Fields.TOKEN1)
 
-  const [currency0, setCurrency0] = useState<Currency | null>(() => (chainId ? NATIVE[chainId] : null))
+  const [currency0, setCurrency0] = useState<Currency | null>(() => (chainId ? NATIVE[chainId ?? ChainId.FANTOM] : null))
   const [currency1, setCurrency1] = useState<Currency | null>(null)
 
   const [pairState, pair] = useV2Pair(currency0 ?? undefined, currency1 ?? undefined)

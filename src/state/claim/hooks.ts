@@ -86,7 +86,7 @@ export function useUserUnclaimedAmount(): CurrencyAmount<Currency> | undefined {
   const userClaimData = useUserClaimData()
   const canClaim = useUserHasAvailableClaim()
 
-  const soul = SOUL[chainId]
+  const soul = SOUL[chainId ?? ChainId.FANTOM]
 
   console.log('claimStats:', {
     canClaim: canClaim,

@@ -1,7 +1,7 @@
 import { getAddress } from '@ethersproject/address'
 import { BigNumber } from '@ethersproject/bignumber'
 import { AddressZero } from '@ethersproject/constants'
-import { JSBI, WNATIVE_ADDRESS } from 'sdk'
+import { ChainId, JSBI, WNATIVE_ADDRESS } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 import { useTransactionAdder } from 'state/transactions/hooks'
 import { useCallback } from 'react'
@@ -19,7 +19,7 @@ function useCoffinBox() {
       if (value && chainId) {
         try {
           const tokenAddressChecksum = getAddress(tokenAddress)
-          if (tokenAddressChecksum === WNATIVE_ADDRESS[chainId]) {
+          if (tokenAddressChecksum === WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM]) {
             const tx = await coffinBoxContract?.deposit(AddressZero, account, account, value, 0, {
               value,
             })
@@ -43,7 +43,7 @@ function useCoffinBox() {
         try {
           const tokenAddressChecksum = getAddress(tokenAddress)
           const tx = await coffinBoxContract?.withdraw(
-            tokenAddressChecksum === WNATIVE_ADDRESS[chainId]
+            tokenAddressChecksum === WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM]
               ? '0x0000000000000000000000000000000000000000'
               : tokenAddressChecksum,
             account,

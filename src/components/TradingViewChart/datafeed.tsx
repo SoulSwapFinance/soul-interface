@@ -119,7 +119,7 @@ const isNativeToken = (chainId: ChainId | undefined, currency: Currency | undefi
   if (!currency || !chainId) {
     return false
   }
-  return currency.isNative || WNATIVE[chainId].address.toLowerCase() === currency?.wrapped.address.toLowerCase()
+  return currency.isNative || WNATIVE[chainId ?? ChainId.FANTOM].address.toLowerCase() === currency?.wrapped.address.toLowerCase()
 }
 
 const isUSDToken = (chainId: ChainId | undefined, currency: Currency | undefined) => {
@@ -127,16 +127,16 @@ const isUSDToken = (chainId: ChainId | undefined, currency: Currency | undefined
     return false
   }
   const usdTokenAddresses = [
-    // USDT[chainId].address.toLowerCase(),
-    USDC[chainId].address.toLowerCase(),
-    DAI[chainId].address.toLowerCase(),
+    // USDT[chainId ?? ChainId.FANTOM].address.toLowerCase(),
+    USDC[chainId ?? ChainId.FANTOM].address.toLowerCase(),
+    DAI[chainId ?? ChainId.FANTOM].address.toLowerCase(),
     '0xe9e7cea3dedca5984780bafc599bd69add087d56', //BUSD
     '0xcd7509b76281223f5b7d3ad5d47f8d7aa5c2b9bf', //USDV Velas
     '0xdb28719f7f938507dbfe4f0eae55668903d34a15', //USDT_t BTTC
     '0xe887512ab8bc60bcc9224e1c3b5be68e26048b8b', //USDT_e BTTC
     '0x19860ccb0a68fd4213ab9d8266f7bbf05a8dde98', //BUSD.e
     '0x4fbf0429599460d327bd5f55625e30e4fc066095', //TDS on AVAX
-    ...USDC_ADDRESS[chainId].toLowerCase(), //.map(a => a.toLowerCase()),
+    ...USDC_ADDRESS[chainId ?? ChainId.FANTOM].toLowerCase(), //.map(a => a.toLowerCase()),
   ]
 
   if (currency?.wrapped.address && usdTokenAddresses.includes(currency.wrapped.address.toLowerCase())) {

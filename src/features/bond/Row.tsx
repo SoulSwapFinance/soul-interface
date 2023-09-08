@@ -67,7 +67,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   // const [showOptions, setShowOptions] = useState(false)
 
   const assetAddress = bond.lpAddress
-  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   // const chain = chainId == ChainId.AVALANCHE ? 'avalanche' : 'fantom'
   // API DATA //
   const { soulBondInfo } = useSoulBondInfo(pid)
@@ -168,7 +168,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
     if (!account) {
     } else {
       // Checks if SoulBond can move tokens
-      const amount = await erc20Allowance(account, SOUL_BOND_ADDRESS[chainId])
+      const amount = await erc20Allowance(account, SOUL_BOND_ADDRESS[chainId ?? ChainId.FANTOM])
       if (amount > 0) setApproved(true)
       return amount
     }
@@ -179,7 +179,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
     if (!account) {
     } else {
       try {
-        const tx = await erc20Approve(SOUL_BOND_ADDRESS[chainId])
+        const tx = await erc20Approve(SOUL_BOND_ADDRESS[chainId ?? ChainId.FANTOM])
         await tx?.wait().then(await fetchApproval())
       } catch (e) {
         // alert(e.message)
@@ -192,7 +192,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   {/* ZAP SETTINGS */ }
   const [approvedZap, setZapApproved] = useState(false)
   const [zapValue, setZapValue] = useState('0')
-  const [zapTokenAddress, setZapTokenAddress] = useState(SOUL_ADDRESS[chainId])
+  const [zapTokenAddress, setZapTokenAddress] = useState(SOUL_ADDRESS[chainId ?? ChainId.FANTOM])
   const [openZap, setOpenZap] = useState(false)
 
   const ZapContract = useZapperContract()
@@ -249,7 +249,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   const handleZap = async (zapTokenAddress, lpAddress) => {
     try {
       let tx
-      tx = await ZapContract?.zapInToken(zapTokenAddress, Number(zapValue).toFixed(zapTokenDecimals).toBigNumber(zapTokenDecimals), lpAddress, ROUTER_ADDRESS[chainId], account)
+      tx = await ZapContract?.zapInToken(zapTokenAddress, Number(zapValue).toFixed(zapTokenDecimals).toBigNumber(zapTokenDecimals), lpAddress, ROUTER_ADDRESS[chainId ?? ChainId.FANTOM], account)
       await tx?.wait()
     } catch (e) {
       console.log(e)
@@ -446,8 +446,8 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                           color={"white"}
                           href=
                           {
-                            bond.token0Symbol == WNATIVE[chainId].symbol
-                              ? `https://exchange.soulswap.finance/add/${NATIVE[chainId].symbol}/${bond.token1Address}`
+                            bond.token0Symbol == WNATIVE[chainId ?? ChainId.FANTOM].symbol
+                              ? `https://exchange.soulswap.finance/add/${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${bond.token1Address}`
                               : `https://exchange.soulswap.finance/add/${bond.token0Address}/${bond.token1Address}`}
                         >
                           {`CREATE ${bond.lpSymbol} PAIR`}

@@ -40,7 +40,7 @@ export default function useWrapCallback(
     if (!wethContract || !chainId || !inputCurrency || !outputCurrency)
       // || chainId === ChainId.CELO)
       return NOT_APPLICABLE
-    const weth = WNATIVE[chainId]
+    const weth = WNATIVE[chainId ?? ChainId.FANTOM]
     if (!weth) return NOT_APPLICABLE
 
     const hasInputAmount = Boolean(inputAmount?.greaterThan('0'))
@@ -58,8 +58,8 @@ export default function useWrapCallback(
                   })
                   addTransaction(txReceipt, {
                     // @ts-ignore TYPE NEEDS FIXING
-                    summary: `Wrap ${inputAmount.toSignificant(6)} ${NATIVE[chainId].symbol} to ${
-                      WNATIVE[chainId].symbol
+                    summary: `Wrap ${inputAmount.toSignificant(6)} ${NATIVE[chainId ?? ChainId.FANTOM].symbol} to ${
+                      WNATIVE[chainId ?? ChainId.FANTOM].symbol
                     }`,
                   })
                 } catch (error) {
@@ -70,8 +70,8 @@ export default function useWrapCallback(
         inputError: sufficientBalance
           ? undefined
           : hasInputAmount
-          ? `Insufficient ${NATIVE[chainId].symbol} balance`
-          : `Enter ${NATIVE[chainId].symbol} amount`,
+          ? `Insufficient ${NATIVE[chainId ?? ChainId.FANTOM].symbol} balance`
+          : `Enter ${NATIVE[chainId ?? ChainId.FANTOM].symbol} amount`,
       }
     } else if (weth.equals(inputCurrency) && outputCurrency.isNative) {
       return {
@@ -82,9 +82,9 @@ export default function useWrapCallback(
                 try {
                   const txReceipt = await wethContract.withdraw(`0x${inputAmount.quotient.toString(16)}`)
                   addTransaction(txReceipt, {
-                    summary: `Unwrap ${inputAmount.toSignificant(6)} ${WNATIVE[chainId].symbol} to ${
+                    summary: `Unwrap ${inputAmount.toSignificant(6)} ${WNATIVE[chainId ?? ChainId.FANTOM].symbol} to ${
                       // @ts-ignore TYPE NEEDS FIXING
-                      NATIVE[chainId].symbol
+                      NATIVE[chainId ?? ChainId.FANTOM].symbol
                     }`,
                   })
                 } catch (error) {
@@ -95,8 +95,8 @@ export default function useWrapCallback(
         inputError: sufficientBalance
           ? undefined
           : hasInputAmount
-          ? `Insufficient ${WNATIVE[chainId].symbol} balance`
-          : `Enter ${WNATIVE[chainId].symbol} amount`,
+          ? `Insufficient ${WNATIVE[chainId ?? ChainId.FANTOM].symbol} balance`
+          : `Enter ${WNATIVE[chainId ?? ChainId.FANTOM].symbol} amount`,
       }
     } else {
       return NOT_APPLICABLE

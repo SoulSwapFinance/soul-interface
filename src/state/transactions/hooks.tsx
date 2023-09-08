@@ -5,6 +5,7 @@ import { useCallback, useMemo } from 'react'
 
 import { addTransaction } from './actions'
 import { TransactionDetails, TransactionState } from './reducer'
+import { ChainId } from 'sdk'
 
 export interface TransactionResponseLight {
   hash: string
@@ -73,7 +74,7 @@ export function useAllTransactions(): { [txHash: string]: TransactionDetails } {
 
   const state: TransactionState = useAppSelector(selectTransactions)
 
-  return chainId ? state[chainId] ?? {} : {}
+  return chainId ? state[chainId ?? ChainId.FANTOM] ?? {} : {}
 }
 
 export function useIsTransactionPending(transactionHash?: string): boolean {

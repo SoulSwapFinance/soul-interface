@@ -1,4 +1,4 @@
-import { CurrencyAmount, NATIVE, SOUL_ADDRESS } from '../../../sdk'
+import { ChainId, CurrencyAmount, NATIVE, SOUL_ADDRESS } from '../../../sdk'
 import React, { useMemo } from 'react'
 import { classNames, currencyId } from '../../../functions'
 // import { toV2LiquidityToken, useTrackedTokenPairs } from '../../../state/user/hooks'
@@ -109,7 +109,7 @@ export default function Pool() {
                     variant="filled"
                     color="gradient"
                     className="grid items-center justify-center grid-flow-col gap-2 whitespace-nowrap"
-                    onClick={() => router.push(`/exchange/add/${currencyId(NATIVE[chainId])}/${SOUL_ADDRESS[chainId]}`)}
+                    onClick={() => router.push(`/exchange/add/${currencyId(NATIVE[chainId ?? ChainId.FANTOM])}/${SOUL_ADDRESS[chainId ?? ChainId.FANTOM]}`)}
                   >
                     {`Add`}
                   </Button>

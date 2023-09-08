@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Pair } from 'sdk'
+import { ChainId, Pair } from 'sdk'
 
 import { ChevronDown } from 'react-feather'
 import { Link, Navigate, useParams } from 'react-router-dom'
@@ -75,7 +75,7 @@ export default function Rewards() {
   useEffect(() => {
     if (filterPair) return
     if (wrappedPair[0] === PairState.NOT_EXISTS || wrappedPair[0] === PairState.LOADING) setFilterPair(null)
-    else if (wrappedPair[0] === PairState.EXISTS && !filterPair) setFilterPair(wrappedPair[1][chainId])
+    else if (wrappedPair[0] === PairState.EXISTS && !filterPair) setFilterPair(wrappedPair[1][chainId ?? ChainId.FANTOM])
   }, [wrappedPair, filterPair])
 
   const handleAllClick = useCallback(() => {
@@ -158,7 +158,7 @@ export default function Rewards() {
                   <Box mr="4px">
                     <Text fontWeight="600" fontSize="16px" lineHeight="20px" data-testid="all-pairs">
                       {filterPair
-                        ? `${filterPair.token0[chainId].symbol}/${(filterPair.token1[chainId])?.symbol}`
+                        ? `${filterPair.token0[chainId ?? ChainId.FANTOM].symbol}/${(filterPair.token1[chainId ?? ChainId.FANTOM])?.symbol}`
                         : wrappedPair[0] === PairState.LOADING
                         ? 'LOADING'
                         : aggregatedDataFilter === PairsFilterType.MY

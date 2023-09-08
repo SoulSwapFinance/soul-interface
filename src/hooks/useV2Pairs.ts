@@ -82,8 +82,8 @@ export interface TVLInfo {
 export function useVaultTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[ChainId.FANTOM]).tokenInfo.price) // only on FTM and ETH
-  const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId]).tokenInfo.price)
-  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
+  const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
 
   // console.log('soulP:%s', soulPrice)
 
@@ -108,7 +108,7 @@ export function useVaultTVL(): TVLInfo[] {
   return useMemo(() => {
     function isKnownToken(token: TokenInfo) {
       return (
-        token.id.toLowerCase() == SOUL[chainId].address.toLowerCase() ||
+        token.id.toLowerCase() == SOUL[chainId ?? ChainId.FANTOM].address.toLowerCase() ||
         token.symbol == 'SOUL' || token.symbol == 'SEANCE' ||
         token.symbol == 'WFTM' || token.symbol == 'FTM' ||
         token.symbol == 'WAVAX' || token.symbol == 'AVAX' ||
@@ -118,7 +118,7 @@ export function useVaultTVL(): TVLInfo[] {
     }
 
     function getPrice(token: TokenInfo) {
-      if (token.id.toLowerCase() == SOUL[chainId].address.toLowerCase()) {
+      if (token.id.toLowerCase() == SOUL[chainId ?? ChainId.FANTOM].address.toLowerCase()) {
         return soulPrice
       }
       if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
@@ -215,11 +215,11 @@ export function useVaultTVL(): TVLInfo[] {
 export function useTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[ChainId.FANTOM]).tokenInfo.price) // only on FTM and ETH
-  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId == ChainId.AVALANCHE ? ChainId.AVALANCHE : ChainId.FANTOM]).tokenInfo.price)
   const luxPrice = useLuxorPrice()
-  const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId]).tokenInfo.price)
-  const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId]).tokenInfo.price)
+  const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
+  const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
 
   const farmingPools = 
       Object?.keys(POOLS[chainId == ChainId.AVALANCHE ? ChainId.AVALANCHE : ChainId.FANTOM]).map((key) => {
@@ -396,11 +396,11 @@ export function useTVL(): TVLInfo[] {
 export function useBondTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[ChainId.FANTOM]).tokenInfo.price) // only on FTM and ETH
-  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const luxPrice = useLuxorPrice()
-  const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId]).tokenInfo.price)
-  const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId]).tokenInfo.price)
-  const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId]).tokenInfo.price)
+  const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
+  const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
+  const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
 
   const bondingPools = Object.keys(BONDS[chainId == ChainId.AVALANCHE ? ChainId.AVALANCHE : ChainId.FANTOM]).map((key) => {
     return { ...BONDS[chainId == ChainId.AVALANCHE ? ChainId.AVALANCHE : ChainId.FANTOM][key], lpToken: key }
@@ -418,7 +418,7 @@ export function useBondTVL(): TVLInfo[] {
   return useMemo(() => {
     function isKnownToken(token: TokenInfo) {
       return (
-        token.id.toLowerCase() == SOUL[chainId].address.toLowerCase() ||
+        token.id.toLowerCase() == SOUL[chainId ?? ChainId.FANTOM].address.toLowerCase() ||
         token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' ||
         token.symbol == 'FTM' ||
@@ -518,12 +518,12 @@ export function useBondTVL(): TVLInfo[] {
 
 export function useSoulTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
-  const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[chainId]).tokenInfo.price)
-  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
-  const luxPrice = Number(useTokenInfo(LUX_ADDRESS[chainId]).tokenInfo.price)
-  const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId]).tokenInfo.price)
-  const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId]).tokenInfo.price)
-  const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId]).tokenInfo.price)
+  const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
+  const luxPrice = Number(useTokenInfo(LUX_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
+  const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
+  const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
+  const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
 
   const liquidityPools = Object.keys(POOLS[chainId == ChainId.AVALANCHE ? ChainId.AVALANCHE : ChainId.FANTOM]).map((key) => {
     return { ...POOLS[chainId == ChainId.AVALANCHE ? ChainId.AVALANCHE : ChainId.FANTOM][key], lpToken: key }
@@ -546,7 +546,7 @@ export function useSoulTVL(): TVLInfo[] {
   return useMemo(() => {
     function isKnownToken(token: TokenInfo) {
       return (
-        token.id.toLowerCase() == SOUL[chainId].address.toLowerCase() ||
+        token.id.toLowerCase() == SOUL[chainId ?? ChainId.FANTOM].address.toLowerCase() ||
         token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' ||
         token.symbol == 'FTM' ||
@@ -653,11 +653,11 @@ export function useSoulTVL(): TVLInfo[] {
 
 export function useLuxTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
-  const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[chainId]).tokenInfo.price)
-  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
+  const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const luxPrice = useLuxorPrice()
-  const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId]).tokenInfo.price)
-  const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId]).tokenInfo.price)
+  const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
+  const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
 
   const liquidityPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
     return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
@@ -680,7 +680,7 @@ export function useLuxTVL(): TVLInfo[] {
   return useMemo(() => {
     function isKnownToken(token: TokenInfo) {
       return (
-        token.id.toLowerCase() == SOUL[chainId].address.toLowerCase() ||
+        token.id.toLowerCase() == SOUL[chainId ?? ChainId.FANTOM].address.toLowerCase() ||
         token.symbol == 'SOUL' ||
         token.symbol == 'WFTM' ||
         token.symbol == 'FTM' ||
@@ -784,11 +784,11 @@ export function useV2PairsWithPrice(
 ): [PairState, Pair | null, number][] {
   const { chainId } = useActiveWeb3React()
   const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[ChainId.FANTOM]).tokenInfo.price) // only on FTM and ETH
-  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const luxPrice = useLuxorPrice()
-  const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId]).tokenInfo.price)
-  const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId]).tokenInfo.price)
-  const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId]).tokenInfo.price)
+  const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
+  const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
+  const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
 
   const tokens = useMemo(
     () => currencies.map(([currencyA, currencyB]) => [currencyA?.wrapped, currencyB?.wrapped]),

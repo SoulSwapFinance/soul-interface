@@ -1,4 +1,4 @@
-import { JSBI, Percent, TradeType, TradeVersion, WNATIVE, ZERO } from 'sdk'
+import { ChainId, JSBI, Percent, TradeType, TradeVersion, WNATIVE, ZERO } from 'sdk'
 import { selectTridentSwap, TypedField } from 'features/trident/swap/swapSlice'
 import useCurrenciesFromURL from 'features/trident/useCurrenciesFromURL'
 import { maxAmountSpend, toAmountCurrencyAmount } from 'functions'
@@ -32,8 +32,8 @@ export const _useSwapPage = () => {
       currencyA &&
       currencyB &&
       chainId &&
-      ((currencyA?.isNative && WNATIVE[chainId].address === currencyB?.wrapped.address) ||
-        (currencyB?.isNative && WNATIVE[chainId].address === currencyA?.wrapped.address)),
+      ((currencyA?.isNative && WNATIVE[chainId ?? ChainId.FANTOM].address === currencyB?.wrapped.address) ||
+        (currencyB?.isNative && WNATIVE[chainId ?? ChainId.FANTOM].address === currencyA?.wrapped.address)),
     [chainId, currencyA, currencyB]
   )
 

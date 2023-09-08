@@ -48,14 +48,14 @@ export function CurrencySearch({
 
   if (router.asPath.startsWith('/create') && chainId) {
     allTokens = Object.keys(allTokens).reduce((obj, key) => {
-      if (CHAINLINK_TOKENS[chainId].find((address) => address === key)) obj[key] = allTokens[key]
+      if (CHAINLINK_TOKENS[chainId ?? ChainId.FANTOM].find((address) => address === key)) obj[key] = allTokens[key]
       return obj
     }, {})
   }
 
   if (router.asPath.startsWith('/exchange/crosschain') && chainId) {
     allTokens = Object.keys(allTokens).reduce((obj, key) => {
-      if (CROSSCHAIN_TOKENS[chainId].find((address) => address === key)) obj[key] = allTokens[key]
+      if (CROSSCHAIN_TOKENS[chainId ?? ChainId.FANTOM].find((address) => address === key)) obj[key] = allTokens[key]
       return obj
     }, {})
   }
@@ -86,7 +86,7 @@ export function CurrencySearch({
   }, [filteredTokens, tokenComparator])
 
   const filteredSortedTokens = useSortedTokensByQuery(sortedTokens, debouncedQuery)
-  const ether = useMemo(() => chainId && NATIVE[chainId], [chainId])
+  const ether = useMemo(() => chainId && NATIVE[chainId ?? ChainId.FANTOM], [chainId ?? ChainId.FANTOM])
 
   const filteredSortedTokensWithETH: Currency[] = useMemo(() => {
     const s = debouncedQuery.toLowerCase().trim()

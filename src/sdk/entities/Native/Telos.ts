@@ -3,6 +3,7 @@ import { NativeCurrency } from '../NativeCurrency'
 import { Token } from '../Token'
 import { WNATIVE } from '../../constants/tokens'
 import invariant from 'tiny-invariant'
+import { ChainId } from 'sdk'
 
 export class Telos extends NativeCurrency {
   protected constructor(chainId: number) {
@@ -18,7 +19,7 @@ export class Telos extends NativeCurrency {
   private static _cache: { [chainId: number]: Telos } = {}
 
   public static onChain(chainId: number): Telos {
-    return this._cache[chainId] ?? (this._cache[chainId] = new Telos(chainId))
+    return this._cache[chainId ?? ChainId.FANTOM] ?? (this._cache[chainId ?? ChainId.FANTOM] = new Telos(chainId))
   }
 
   public equals(other: Currency): boolean {

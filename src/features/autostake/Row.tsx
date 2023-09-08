@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { ethers } from 'ethers'
 import { useSoulPrice } from 'hooks/getPrices'
 import { useActiveWeb3React } from 'services/web3'
-import { SOUL } from 'sdk'
+import { ChainId, SOUL } from 'sdk'
 import { AUTO_STAKE_ADDRESS, SUMMONER_ADDRESS } from 'sdk'
 import { aprToApy } from 'functions/convert'
 import AssetInput from 'components/AssetInput'
@@ -54,8 +54,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     const [showing, setShowing] = useState(false)
     const AutoStakeContract = useAutoStakeContract()
     const SoulSummonerContract = useSummonerContract()
-    const SoulSummonerAddress = SUMMONER_ADDRESS[chainId]
-    const AutoStakeAddress = AUTO_STAKE_ADDRESS[chainId]
+    const SoulSummonerAddress = SUMMONER_ADDRESS[chainId ?? ChainId.FANTOM]
+    const AutoStakeAddress = AUTO_STAKE_ADDRESS[chainId ?? ChainId.FANTOM]
     const [approved, setApproved] = useState(false)
     const [withdrawValue, setWithdrawValue] = useState('')
     const [showWithdrawConfirmation, setShowWithdrawConfirmation] = useState(false)
@@ -63,8 +63,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     const [depositValue, setDepositValue] = useState('')
     //   const [confirmed, setConfirmed] = useState(false)
     //   const [receiving, setReceiving] = useState(0)
-    const parsedDepositValue = tryParseAmount(depositValue, SOUL[chainId])
-    const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[chainId])
+    const parsedDepositValue = tryParseAmount(depositValue, SOUL[chainId ?? ChainId.FANTOM])
+    const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[chainId ?? ChainId.FANTOM])
 
     const [stakedBal, setStakedBal] = useState(0)
     const [earnedAmount, setEarnedAmount] = useState(0)
@@ -84,7 +84,7 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
     // show confirmation view before minting SOUL
     const [apy, setApy] = useState(0)
     // const { deposit, withdraw } = useStakeContract()
-    // const balance = useCurrencyBalance(account, SOUL[chainId])
+    // const balance = useCurrencyBalance(account, SOUL[chainId ?? ChainId.FANTOM])
     // const stakedBalance = AutoStakeContract?.balanceOf(account)
 
     // runs: on initial render/mount
@@ -376,8 +376,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                             <AssetInput
                             chainId={chainId}
                             currencyLogo={true}
-                                currency={SOUL[chainId]}
-                                currencyAddress={SOUL[chainId].address}
+                                currency={SOUL[chainId ?? ChainId.FANTOM]}
+                                currencyAddress={SOUL[chainId ?? ChainId.FANTOM].address}
                                 value={depositValue}
                                 onChange={setDepositValue}
                                 showMax={false}
@@ -422,8 +422,8 @@ const StakeRowRender = ({ pid, stakeToken, pool }) => {
                                     <AssetInput
                                         chainId={chainId}
                                         currencyLogo={false}
-                                        currency={SOUL[chainId]}
-                                        currencyAddress={SOUL[chainId].address}
+                                        currency={SOUL[chainId ?? ChainId.FANTOM]}
+                                        currencyAddress={SOUL[chainId ?? ChainId.FANTOM].address}
                                         value={depositValue}
                                         onChange={setDepositValue}
                                         showMax={false}

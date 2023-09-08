@@ -22,7 +22,7 @@ export default function Buy() {
       userAddress: account,
       hostAppName: 'SOUL',
       hostLogoUrl: 'http://soulswap-interface.vercel.app/_next/image?url=%2Flogo.png&w=32&q=75',
-      defaultAsset: DEFAULT_CRYPTO_CURRENCY[chainId],
+      defaultAsset: DEFAULT_CRYPTO_CURRENCY[chainId ?? ChainId.FANTOM],
     })
 
     widget.show()

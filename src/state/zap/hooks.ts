@@ -184,7 +184,7 @@ export function useDerivedZapInfo(
   // Using a slim abi to improve performance of this call
   const routerIface = new ethers.utils.Interface(ROUTER_ABI_SLIM)
   // const pct = basisPointsToPercent(allowedSlippage);
-  const zapperAddress = ZAPPER_ADDRESS[chainId]
+  const zapperAddress = ZAPPER_ADDRESS[chainId ?? ChainId.FANTOM]
 
   const encodeSwapData = () => {
     if (!!currencyZeroTrade && !!currencyOneTrade && parsedAmount !== undefined) {

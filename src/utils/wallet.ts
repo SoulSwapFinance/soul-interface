@@ -36,24 +36,24 @@ export const loadContracts = async (signer: Signer, chainId: number) => {
   }
 
 //   return new Map([
-//     ["sfc", new Contract(addresses[chainId]["sfc"], abis.sfc, signer)],
+//     ["sfc", new Contract(addresses[chainId ?? ChainId.FANTOM]["sfc"], abis.sfc, signer)],
 //     [
 //       "stakeTokenizer",
 //       new Contract(
-//         addresses[chainId]["stakeTokenizer"],
+//         addresses[chainId ?? ChainId.FANTOM]["stakeTokenizer"],
 //         abis.stakeTokenizer,
 //         signer
 //       ),
 //     ],
-//     ["gov", new Contract(addresses[chainId]["gov"], abis.gov, signer)],
+//     ["gov", new Contract(addresses[chainId ?? ChainId.FANTOM]["gov"], abis.gov, signer)],
 //     [
 //       "govProposal",
-//       new Contract(addresses[chainId]["govProposal"], abis.govProposal, signer),
+//       new Contract(addresses[chainId ?? ChainId.FANTOM]["govProposal"], abis.govProposal, signer),
 //     ],
 //     [
 //       "govProposalPlaintext",
 //       new Contract(
-//         addresses[chainId]["govProposalPlaintext"],
+//         addresses[chainId ?? ChainId.FANTOM]["govProposalPlaintext"],
 //         abis.govProposalPlaintext,
 //         signer
 //       ),

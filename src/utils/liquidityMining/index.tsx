@@ -5,7 +5,8 @@ import {
   CurrencyAmount,
   Token,
   LiquidityMiningCampaign,
-  SingleSidedLiquidityMiningCampaign
+  SingleSidedLiquidityMiningCampaign,
+  ChainId
 } from 'sdk'
 import { getAddress, parseUnits } from 'ethers/lib/utils'
 
@@ -21,17 +22,17 @@ export function getRemainingRewardsUSD(
   const { chainId } = useActiveWeb3React()
   const remainingRewards = campaign.remainingRewards
   let remainingRewardsUSD
-  // ZERO_USD[chainId]
+  // ZERO_USD[chainId ?? ChainId.FANTOM]
   for (let i = 0; i < remainingRewards.length; i++) {
     remainingRewardsUSD = remainingRewardsUSD.add(
       CurrencyAmount
       // .usd
       .fromRawAmount(
-        USD[chainId],
+        USD[chainId ?? ChainId.FANTOM],
         parseUnits(
-          (Number(remainingRewards[i]) * nativeCurrencyUSDPrice).toFixed(USD[chainId].decimals),
-          // remainingRewards[i].nativeCurrencyAmount.multiply(nativeCurrencyUSDPrice).toFixed(USD[chainId].decimals),
-          USD[chainId].decimals
+          (Number(remainingRewards[i]) * nativeCurrencyUSDPrice).toFixed(USD[chainId ?? ChainId.FANTOM].decimals),
+          // remainingRewards[i].nativeCurrencyAmount.multiply(nativeCurrencyUSDPrice).toFixed(USD[chainId ?? ChainId.FANTOM].decimals),
+          USD[chainId ?? ChainId.FANTOM].decimals
         ).toString()
       )
     )
@@ -44,7 +45,7 @@ export function getRemainingRewardsUSD(
 //   if (pair.liquidityMiningCampaigns.length === 0) return ZERO_USD
 //   return pair.liquidityMiningCampaigns.reduce((accumulator: CurrencyAmount, campaign) => {
 //     return accumulator.add(getRemainingRewardsUSD(campaign, nativeCurrencyUSDPrice))
-//   }, ZERO_USD[chainId])
+//   }, ZERO_USD[chainId ?? ChainId.FANTOM])
 // }
 
 // export function tokenToPricedTokenAmount(
@@ -74,7 +75,7 @@ export function getRemainingRewardsUSD(
 //   )
 //   return 
 //   // new PricedTokenAmount(
-//   //   pricedRewardToken[chainId],
+//   //   pricedRewardToken[chainId ?? ChainId.FANTOM],
 //   //   parseUnits(new Decimal(amount).toFixed(token.decimals), token.decimals).toString()
 //   // )
 // }
@@ -115,7 +116,7 @@ export function toSingleSidedStakeCampaign(
     )
     return Number(reward.amount)
     // new PricedTokenAmount(
-    //   pricedRewardToken[chainId],
+    //   pricedRewardToken[chainId ?? ChainId.FANTOM],
     //   parseUnits(new Decimal(reward.amount).toFixed(rewardToken.decimals), rewardToken.decimals).toString()
     // )
   })
@@ -149,16 +150,16 @@ export function toSingleSidedStakeCampaign(
   return new SingleSidedLiquidityMiningCampaign(
     campaign.startsAt,
     campaign.endsAt,
-    stakeToken[chainId],
+    stakeToken[chainId ?? ChainId.FANTOM],
     rewards,
     staked,
     campaign.locked,
     10,
     // new TokenAmount(
-    //   stakeToken[chainId],
+    //   stakeToken[chainId ?? ChainId.FANTOM],
     //   campaign.stakingCap
     //   parseUnits(campaign.stakingCap, 
-    //     stakeToken[chainId].decimals)
+    //     stakeToken[chainId ?? ChainId.FANTOM].decimals)
     //     .toString()
     //   ),
     getAddress(campaign.id)
@@ -201,11 +202,11 @@ export function toLiquidityMiningCampaign(
     // )
     return reward.amount 
     // new PricedTokenAmount(
-    //   pricedRewardToken[chainId],
+    //   pricedRewardToken[chainId ?? ChainId.FANTOM],
     //   parseUnits(new Decimal(reward.amount).toFixed(rewardToken.decimals), rewardToken.decimals).toString()
     // )
   })
-  const lpTokenPriceNativeCurrency = usePairPrice(targetedPair[chainId])
+  const lpTokenPriceNativeCurrency = usePairPrice(targetedPair[chainId ?? ChainId.FANTOM])
   // getLpTokenPrice(
   //   targetedPair,
   //   nativeCurrency,
@@ -223,13 +224,13 @@ export function toLiquidityMiningCampaign(
   // )
   const staked = campaign.stakedAmount
   //  new PricedTokenAmount(
-  //   stakedPricedToken[chainId],
+  //   stakedPricedToken[chainId ?? ChainId.FANTOM],
   //   parseUnits(campaign.stakedAmount, stakedPricedToken.decimals).toString()
   // )
   return new LiquidityMiningCampaign({
     startsAt: Number(campaign.startsAt),
     endsAt: Number(campaign.endsAt),
-    targetedPair: targetedPair[chainId],
+    targetedPair: targetedPair[chainId ?? ChainId.FANTOM],
     rewards: [Number(rewards)],
     staked: Number(staked),
     locked: campaign.locked,
@@ -244,7 +245,7 @@ export function toLiquidityMiningCampaign(
 
 export function getStakedAmountUSD(campaign: number, nativeCurrencyUSDPrice: number): number {
   return Number(parseUnits((campaign * Number(nativeCurrencyUSDPrice)).toString()))
-  // .toFixed(USD[chainId].decimals), Number(USD[chainId].decimals))
+  // .toFixed(USD[chainId ?? ChainId.FANTOM].decimals), Number(USD[chainId ?? ChainId.FANTOM].decimals))
   // .toString()
 }
 
@@ -280,7 +281,7 @@ export const getTokenAmount = ({ token, tokensInCurrentChain, chainId, reserve }
     tokensInCurrentChain && tokensInCurrentChain[tokenChecksummedAddress]?.token
       ? tokensInCurrentChain[tokenChecksummedAddress].token
       : new Token(chainId, tokenChecksummedAddress, parseInt(token.decimals, 10), token.symbol, token.name)
-  // return new TokenAmount(tokenA[chainId], parseUnits(reserve, token.decimals).toString())
+  // return new TokenAmount(tokenA[chainId ?? ChainId.FANTOM], parseUnits(reserve, token.decimals).toString())
   return reserve
 }
 

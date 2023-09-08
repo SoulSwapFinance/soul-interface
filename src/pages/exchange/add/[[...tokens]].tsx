@@ -56,8 +56,8 @@ export default function Add() {
 
   const oneCurrencyIsWETH = Boolean(
     chainId &&
-    ((currencyA && currencyEquals(currencyA, WNATIVE[chainId])) ||
-      (currencyB && currencyEquals(currencyB, WNATIVE[chainId])))
+    ((currencyA && currencyEquals(currencyA, WNATIVE[chainId ?? ChainId.FANTOM])) ||
+      (currencyB && currencyEquals(currencyB, WNATIVE[chainId ?? ChainId.FANTOM])))
   )
 
   // const toggleWalletModal = useWalletModalToggle() // toggle wallet when disconnected
@@ -322,7 +322,7 @@ export default function Add() {
           router.push(`/exchange/add/${newCurrencyIdB}`)
         }
       } else {
-        router.push(`/exchange/add/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
+        router.push(`/exchange/add/${currencyIdA ? currencyIdA : NATIVE[chainId ?? ChainId.FANTOM].symbol}/${newCurrencyIdB}`)
       }
     },
     [currencyIdA, router, currencyIdB]

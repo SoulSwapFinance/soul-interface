@@ -36,7 +36,7 @@ function useTokenBalance(chainId: ChainId, tokenAddress: string): BalanceProps {
         if (account && chainId 
           && 
           (
-            contract?.address === WNATIVE_ADDRESS[chainId]
+            contract?.address === WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM]
             || contract?.isNative)
           )
         {

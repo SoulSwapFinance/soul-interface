@@ -7,7 +7,7 @@ import { Button } from "../index"
 import { Token } from 'utils/account/types'
 import FtmLogo from "assets/networks/fantom.svg";
 import AvaxLogo from "assets/networks/avalanche.svg";
-import { NATIVE } from "sdk"
+import { ChainId, NATIVE } from "sdk"
 import { useActiveWeb3React } from "services/web3"
 
 export const FANTOM_NATIVE: Token = {
@@ -60,7 +60,7 @@ const InputCurrencyBox: React.FC<any> = ({
         max={max}
         handleValue={setValue}
         handleError={setError}
-        token={NATIVE[chainId]}
+        token={NATIVE[chainId ?? ChainId.FANTOM]}
         chainId={chainId}
       />
       <Row style={{ alignItems: "center" }}>

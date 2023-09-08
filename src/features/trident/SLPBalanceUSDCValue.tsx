@@ -42,7 +42,7 @@ const SLPBalanceUSDCValue: FC<SLPBalanceUSDCValueProps> = ({ chainId, pool, chil
 
   return (
     <_SLPBalance
-      sum={CurrencyAmount.fromRawAmount(USDC[chainId], '0')}
+      sum={CurrencyAmount.fromRawAmount(USDC[chainId ?? ChainId.FANTOM], '0')}
       amounts={liquidityValues}
       index={liquidityValues.length}
     >

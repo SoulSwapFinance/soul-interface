@@ -69,7 +69,7 @@ const AVAX_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
 export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Price<Currency, Token> | undefined {
   const chainId = currency?.chainId
 
-  const soulPrice = usePrice(SOUL_ADDRESS[chainId])
+  const soulPrice = usePrice(SOUL_ADDRESS[chainId ?? ChainId.FANTOM])
 
   const luxorPrice = usePrice(LUX_ADDRESS[250])
   const wLumensPrice = usePrice(WLUM_ADDRESS[250])
@@ -84,11 +84,11 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   const wlumAmountOut = chainId ? WLUM_AMOUNT_OUT[250] : undefined
   const wftmAmountOut = chainId ? WFTM_AMOUNT_OUT[250] : undefined
 
-  const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId] : undefined
-  const soulAmountOut = chainId ? SOUL_AMOUNT_OUT[chainId] : undefined
-  const wethAmountOut = chainId ? WETH_AMOUNT_OUT[chainId] : undefined
-  const wbtcAmountOut = chainId ? WBTC_AMOUNT_OUT[chainId] : undefined
-  const avaxAmountOut = chainId ? AVAX_AMOUNT_OUT[chainId] : undefined
+  const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId ?? ChainId.FANTOM] : undefined
+  const soulAmountOut = chainId ? SOUL_AMOUNT_OUT[chainId ?? ChainId.FANTOM] : undefined
+  const wethAmountOut = chainId ? WETH_AMOUNT_OUT[chainId ?? ChainId.FANTOM] : undefined
+  const wbtcAmountOut = chainId ? WBTC_AMOUNT_OUT[chainId ?? ChainId.FANTOM] : undefined
+  const avaxAmountOut = chainId ? AVAX_AMOUNT_OUT[chainId ?? ChainId.FANTOM] : undefined
 
   // TOKENS
   const stablecoin = amountOut?.currency

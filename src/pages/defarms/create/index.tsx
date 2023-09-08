@@ -19,7 +19,7 @@ import Typography from 'components/Typography'
 import Modal from 'components/DefaultModal'
 import ModalHeader from 'components/Modal/Header'
 import { useManifesterInfo, useUserTokenInfo } from 'hooks/useAPI'
-import { MANIFESTER_ADDRESS, NATIVE, SOUL_ADDRESS, Token } from 'sdk'
+import { ChainId, MANIFESTER_ADDRESS, NATIVE, SOUL_ADDRESS, Token } from 'sdk'
 import { formatNumber } from 'functions'
 import Input from 'components/Input'
 import useApprove from 'hooks/useApprove'
@@ -61,7 +61,7 @@ const CreateFarm = () => {
   // DEFARM POOL INFO //
   const { manifesterInfo } = useManifesterInfo()
   const bloodSacrifice = Number(manifesterInfo?.bloodSacrifice) / 1E18 / 100 // converts to %
-  const { userTokenInfo } = useUserTokenInfo(account, SOUL_ADDRESS[chainId])
+  const { userTokenInfo } = useUserTokenInfo(account, SOUL_ADDRESS[chainId ?? ChainId.FANTOM])
   const balance = Number(userTokenInfo?.balance) / 1E18
   // const campaignLength = Number(manifesterInfo?.poolLength)
   const campaignReady = Boolean(rewardSet && durationSet && feeSet && logoSet)
@@ -70,9 +70,9 @@ const CreateFarm = () => {
   // const pairAddress =
   //   rewardAsset &&
   //   computePairAddress({
-  //     factoryAddress: FACTORY_ADDRESS[chainId],
+  //     factoryAddress: FACTORY_ADDRESS[chainId ?? ChainId.FANTOM],
   //     tokenA: rewardAsset.wrapped,
-  //     tokenB: WNATIVE[chainId]
+  //     tokenB: WNATIVE[chainId ?? ChainId.FANTOM]
   //   })
 
   // handles: launch deFarm
@@ -181,7 +181,7 @@ const CreateFarm = () => {
       // alert('Connect Wallet')
     } else {
       // Checks if ManifestationContract can move tokens
-      const amount = await erc20Allowance(account, MANIFESTER_ADDRESS[chainId])
+      const amount = await erc20Allowance(account, MANIFESTER_ADDRESS[chainId ?? ChainId.FANTOM])
       if (Number(amount) > 0) setApproved(true)
       return amount
     }
@@ -190,7 +190,7 @@ const CreateFarm = () => {
   const handleApprove = async () => {
     try {
       let tx
-      tx = await erc20Approve(MANIFESTER_ADDRESS[chainId])
+      tx = await erc20Approve(MANIFESTER_ADDRESS[chainId ?? ChainId.FANTOM])
       await tx?.wait().then(await fetchApproval())
     } catch (e) {
       console.log(e)
@@ -221,7 +221,7 @@ const CreateFarm = () => {
       // ])
 
       const tx = await manifesterContract?.createManifestation(
-        // chainId && MANIFESTER_ADDRESS[chainId], 
+        // chainId && MANIFESTER_ADDRESS[chainId ?? ChainId.FANTOM], 
         // defarmData
         // pairAddress,                             // depositAddress
         currencies[Field.REWARD].wrapped.address,   // rewardAddress
@@ -516,7 +516,7 @@ const CreateFarm = () => {
                   {/* <b>100% of the fee</b> goes towards building our protocol-owned liquidity, which brings about long-term sustainability to our platform. */}
                 </Typography>
                 <Typography variant="sm" className="text-center">
-                  {`You're incentivizing ${rewardAsset.wrapped.symbol}-${NATIVE[chainId].symbol} deposits and agree to the 
+                  {`You're incentivizing ${rewardAsset.wrapped.symbol}-${NATIVE[chainId ?? ChainId.FANTOM].symbol} deposits and agree to the 
                 possibility of us imposing a minimum AURA balance (governance power) for deposits.`}
                 </Typography>
                 <Typography variant="sm" className="font-medium text-center">

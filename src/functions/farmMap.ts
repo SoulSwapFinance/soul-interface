@@ -6,7 +6,7 @@ export const farmMap = (summonerInfo: any, soulPrice: number, chainId: ChainId) 
   pool.owner = 'SoulSwap'
   pool.balance = 0
 
-  const pair = POOLS[chainId][pool.lpToken]
+  const pair = POOLS[chainId ?? ChainId.FANTOM][pool.lpToken]
 
 //   const secondsPerHour = 60 * 60
 

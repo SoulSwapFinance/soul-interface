@@ -28,23 +28,23 @@ import { useActiveWeb3React } from 'services/web3'
 export const EXCHANGE = {
   [ChainId.ETHEREUM]: 'soulswapfinance/fantom-swap',
   [ChainId.FANTOM]: 'soulswapfinance/fantom-swap',
-  [ChainId.AVALANCHE]: 'soulswapfinance/avalanche-exchange',
+  [ChainId.AVALANCHE]: 'soulswapfinance/avalanche-swap',
   [ChainId.BSC]: 'soulswapfinance/fantom-swap',
 }
 
 // const getExchange = () => {
 //   const { chainId } = useActiveWeb3React()
-//   let exchange = EXCHANGE[chainId]
+//   let exchange = EXCHANGE[chainId ?? ChainId.FANTOM]
 //   console.log(exchange)
 //   return exchange
 // }
 
-export const exchange = async (chainId, query, variables = {}) => {
+export const exchange = async (chainId = ChainId.FANTOM, query, variables = {}) => {
   // const URL = EXCHANGE_URL()
   // console.log(URL)
   // console.log(chainId)
   let URL
-  chainId == ChainId.AVALANCHE ? URL = 'soulswapfinance/avalanche-swap' : URL = 'soulswapfinance/fantom-swap'
+  chainId == ChainId.AVALANCHE ? URL = 'soulswapfinance/avalanche-swap' : URL = 'soulswapfinance/fantom-swap' ?? 'soulswapfinance/fantom-swap'
   // console.log('exchange URL: %s', URL)
   return pager(`https://api.thegraph.com/subgraphs/name/${URL}`, query, variables)
 }
@@ -150,7 +150,7 @@ export const getNativePrice = async (chainId, variables = undefined) => {
 export const getSoulPrice = async (variables = {}) => {
   const { chainId } = useActiveWeb3React()
   return getTokenPrice(chainId, tokenPriceQuery, {
-    id: SOUL_ADDRESS[chainId].toLowerCase(),
+    id: SOUL_ADDRESS[chainId ?? ChainId.FANTOM].toLowerCase(),
     ...variables,
   })
 }

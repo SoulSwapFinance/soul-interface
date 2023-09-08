@@ -153,8 +153,8 @@ const Aggregator = ({ }) => {
 	const router = useRouter()
 	const tokens = router.query.tokens
 
-	const DEFAULT_CURRENCY_B = [ChainId.FANTOM].includes(chainId) ? SOUL_ADDRESS[chainId] : USDC_ADDRESS[chainId]
-	const [currencyIdA, currencyIdB] = (tokens as string[]) || [NATIVE[chainId].symbol, DEFAULT_CURRENCY_B]
+	const DEFAULT_CURRENCY_B = [ChainId.FANTOM].includes(chainId) ? SOUL_ADDRESS[chainId ?? ChainId.FANTOM] : USDC_ADDRESS[chainId ?? ChainId.FANTOM]
+	const [currencyIdA, currencyIdB] = (tokens as string[]) || [NATIVE[chainId ?? ChainId.FANTOM].symbol, DEFAULT_CURRENCY_B]
 	const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
 
 	const [fromToken, setFromToken] = useState<Currency>(currencyA)
@@ -269,7 +269,7 @@ const Aggregator = ({ }) => {
 	// 	setTxUrl('');
 	// };
 
-	const tokenA = new Token(chainId, fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address || WNATIVE_ADDRESS[chainId], fromToken?.wrapped.decimals || 18)
+	const tokenA = new Token(chainId, fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address || WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM], fromToken?.wrapped.decimals || 18)
 
 	const [approvalState, approve] = useTokenApprove(
 		CurrencyAmount?.fromRawAmount(tokenA, amountWithDecimals),
@@ -301,7 +301,7 @@ const Aggregator = ({ }) => {
 	const handleCurrencyBSelect = useCallback(
 		(currencyB: Currency) => {
 			const newCurrencyIdB = currencyId(currencyB)
-			// if ([ChainId.AVALANCHE].includes(chainId) && currencyB.wrapped.address == SOUL_ADDRESS[chainId]) { newCurrencyIdB = currencyId(USDC[chainId]) }
+			// if ([ChainId.AVALANCHE].includes(chainId) && currencyB.wrapped.address == SOUL_ADDRESS[chainId ?? ChainId.FANTOM]) { newCurrencyIdB = currencyId(USDC[chainId ?? ChainId.FANTOM]) }
 			if (currencyIdA === newCurrencyIdB) {
 				if (currencyIdB) {
 					router.push(`/exchange/aggregator/${currencyIdB}/${newCurrencyIdB}`)
@@ -309,7 +309,7 @@ const Aggregator = ({ }) => {
 					router.push(`/exchange/aggregator/${newCurrencyIdB}`)
 				}
 			} else {
-				router.push(`/exchange/aggregator/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
+				router.push(`/exchange/aggregator/${currencyIdA ? currencyIdA : NATIVE[chainId ?? ChainId.FANTOM].symbol}/${newCurrencyIdB}`)
 			}
 		},
 		[currencyIdA, router, currencyIdB]
@@ -413,8 +413,8 @@ const Aggregator = ({ }) => {
 								toToken
 								// toToken
 								// [ChainId.AVALANCHE].includes(chainId)
-								// 	&& toToken.wrapped.address === SOUL_ADDRESS[chainId]
-								// 	? USDC[chainId]
+								// 	&& toToken.wrapped.address === SOUL_ADDRESS[chainId ?? ChainId.FANTOM]
+								// 	? USDC[chainId ?? ChainId.FANTOM]
 								// 	: toToken
 							}
 							// value={(routes[0]?.price.amountReturned / (10 ** (outputToken?.wrapped.decimals))).toString() ?? '1'}

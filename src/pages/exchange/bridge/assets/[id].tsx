@@ -205,7 +205,7 @@ const Bridge = ({ }) => {
           : USDC[toChain]
 
   // const [route, setRoute] = useState<RouteData>(null)
-  // const nativePrice = usePrice(WNATIVE_ADDRESS[chainId])
+  // const nativePrice = usePrice(WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM])
   // √
   const [amount, setAmount] = useState('1');
   // const [outputAmount, setOutputAmount] = useState('0');

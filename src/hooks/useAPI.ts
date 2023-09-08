@@ -123,7 +123,7 @@ export function useSoulInfo(): { status: string; soulInfo: T } {
     const URL = chainId == ChainId.FANTOM ? BASE_URL : `https://avax-api.soulswap.finance`
     
     const [soulInfo, setInfo] = useState<T>({
-        address: SOUL_ADDRESS[chainId],
+        address: SOUL_ADDRESS[chainId ?? ChainId.FANTOM],
         name: 'Soul Power',
         mcap: '0',
         symbol: 'SOUL',
@@ -314,7 +314,7 @@ export function useTotalSupply(tokenAddress): { status: string; supply: T } {
     const { chainId } = useActiveWeb3React()
     const [status, setStatus] = useState<string>('idle')
     const [supply, setSupply] = useState<T>()
-    const URL = chainId == 250 ? BASE_URL : `${NATIVE[chainId].symbol.toLowerCase()}-api.soulswap.finance`
+    const URL = chainId == 250 ? BASE_URL : `${NATIVE[chainId ?? ChainId.FANTOM].symbol.toLowerCase()}-api.soulswap.finance`
   
     useEffect(() => {
       const fetchData = async () => {

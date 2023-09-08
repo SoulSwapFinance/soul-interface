@@ -1,4 +1,5 @@
 import {
+  ChainId,
   Currency,
   NATIVE,
 } from 'sdk'
@@ -25,7 +26,7 @@ export function useCurrencyConvertedToNative(currency?: Currency): Currency | un
   const { chainId } = useActiveWeb3React()
   return useMemo(() => {
     if (!!currency && !!chainId) {
-      return currency.isNative ? NATIVE[chainId] : currency
+      return currency.isNative ? NATIVE[chainId ?? ChainId.FANTOM] : currency
     }
     return undefined
   }, [chainId, currency])

@@ -1,4 +1,4 @@
-import { DAI_BNB_MARKET, DAI_ETH_MARKET, REFUNDER_ADDRESS, DAI_NATIVE_MARKET, NATIVE_DAI_MARKET, Token, WNATIVE_ADDRESS, WETH_ADDRESS, BNB_ADDRESS } from 'sdk'
+import { DAI_BNB_MARKET, DAI_ETH_MARKET, REFUNDER_ADDRESS, DAI_NATIVE_MARKET, NATIVE_DAI_MARKET, Token, WNATIVE_ADDRESS, WETH_ADDRESS, BNB_ADDRESS, ChainId } from 'sdk'
 import { Button } from 'components/Button'
 import Card from 'components/Card'
 import Container from 'components/Container'
@@ -20,7 +20,7 @@ export default function LendSwap() {
   const { account, chainId } = useActiveWeb3React()
   const [id, setId] = useState(0)
   const [currency, setCurrency] = useState<Token>(null)
-  const [pairAddress, setPairAddress] = useState(DAI_NATIVE_MARKET[chainId])
+  const [pairAddress, setPairAddress] = useState(DAI_NATIVE_MARKET[chainId ?? ChainId.FANTOM])
   const [pairSymbol, setPairSymbol] = useState('FTM Market')
   const [amount, setAmount] = useState(0)
   const [refundable, setRefundable] = useState(0)
@@ -36,9 +36,9 @@ const RefunderContract = useRefunderContract()
 const maxUint = ethers.BigNumber.from(2).pow(ethers.BigNumber.from(255)).sub(ethers.BigNumber.from(1))
 const PairContract = useTokenContract(pairAddress)
 
-// const bnbPrice = Number(useTokenInfo(BNB_ADDRESS[chainId])?.tokenInfo?.price)
-// const ethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId])?.tokenInfo?.price)
-// const nativePrice = Number(useTokenInfo(WNATIVE_ADDRESS[chainId])?.tokenInfo?.price)
+// const bnbPrice = Number(useTokenInfo(BNB_ADDRESS[chainId ?? ChainId.FANTOM])?.tokenInfo?.price)
+// const ethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId ?? ChainId.FANTOM])?.tokenInfo?.price)
+// const nativePrice = Number(useTokenInfo(WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM])?.tokenInfo?.price)
 
 // console.log({ bnbPrice, ethPrice, nativePrice })
 
@@ -125,11 +125,11 @@ const maxRedeemable = available >= refundable ? refundable : available
             let assetSymbol = selectedCurrency.wrapped.symbol
 
             let pairAddress = 
-                assetSymbol == 'BNB' ? DAI_BNB_MARKET[chainId]
-                : assetSymbol == 'DAI' ? NATIVE_DAI_MARKET[chainId]
-                : assetSymbol == 'ETH' ? DAI_ETH_MARKET[chainId]
-                : assetSymbol == 'WFTM' ? DAI_NATIVE_MARKET[chainId]
-                : DAI_NATIVE_MARKET[chainId]
+                assetSymbol == 'BNB' ? DAI_BNB_MARKET[chainId ?? ChainId.FANTOM]
+                : assetSymbol == 'DAI' ? NATIVE_DAI_MARKET[chainId ?? ChainId.FANTOM]
+                : assetSymbol == 'ETH' ? DAI_ETH_MARKET[chainId ?? ChainId.FANTOM]
+                : assetSymbol == 'WFTM' ? DAI_NATIVE_MARKET[chainId ?? ChainId.FANTOM]
+                : DAI_NATIVE_MARKET[chainId ?? ChainId.FANTOM]
 
         setPairAddress(pairAddress)
         console.log({pairAddress})
@@ -150,7 +150,7 @@ const maxRedeemable = available >= refundable ? refundable : available
     isPending: isApprovePending,
     isCompleted: isApproveCompleted,
   } = useSendTransaction(() =>
-    PairContract.approve(REFUNDER_ADDRESS[chainId], (maxUint).toString())
+    PairContract.approve(REFUNDER_ADDRESS[chainId ?? ChainId.FANTOM], (maxUint).toString())
   );
 
   return (

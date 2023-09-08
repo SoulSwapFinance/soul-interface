@@ -4,7 +4,7 @@ import { request } from 'graphql-request'
 
 export const status = async (chainId = ChainId.ETHEREUM, subgraphName) =>
   request(
-    `${GRAPH_HOST[chainId]}/index-node/graphql`,
+    `${GRAPH_HOST[chainId ?? ChainId.FANTOM]}/index-node/graphql`,
     `
         indexingStatusForCurrentVersion(subgraphName: "${subgraphName}") {
             synced

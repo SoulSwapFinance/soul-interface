@@ -7,7 +7,7 @@ export function useFetcher() {
     const { chainId } = useActiveWeb3React()
     const prefix = chainId == ChainId.FANTOM ? 'fantom' : 'avalanche'
     const fetcher = (query) => request(
-    `https://api.thegraph.com/subgraphs/name/soulswapfinance/${prefix}-underworld`,
+    `https://api.thegraph.com/subgraphs/name/soulswapfinance/${prefix ?? 'fantom'}-underworld`,
     query
     )
     return fetcher

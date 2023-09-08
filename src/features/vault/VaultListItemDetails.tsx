@@ -1,5 +1,5 @@
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
-import { SUMMONER_ADDRESS, Token, ZERO } from '../../sdk'
+import { ChainId, SUMMONER_ADDRESS, Token, ZERO } from '../../sdk'
 import { Disclosure, Transition } from '@headlessui/react'
 import React, { useState } from 'react'
 import { usePendingSoul, useUserInfo } from './hooks'
@@ -47,7 +47,7 @@ const VaultListItem = ({ farm }) => {
 
   const typedDepositValue = tryParseAmount(depositValue, liquidityToken)
   const typedWithdrawValue = tryParseAmount(withdrawValue, liquidityToken)
-  const [approvalState, approve] = useApproveCallback(typedDepositValue, SUMMONER_ADDRESS[chainId])
+  const [approvalState, approve] = useApproveCallback(typedDepositValue, SUMMONER_ADDRESS[chainId ?? ChainId.FANTOM])
   const { deposit, withdraw, harvest } = useMasterChef()
 
   return (

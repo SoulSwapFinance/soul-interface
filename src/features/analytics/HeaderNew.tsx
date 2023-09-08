@@ -11,7 +11,7 @@ const getQuery = (input, output) => {
   if (!input && !output) return
 
   if (input && !output) {
-    return { inputCurrency: input.address || NATIVE[chainId].symbol }
+    return { inputCurrency: input.address || NATIVE[chainId ?? ChainId.FANTOM].symbol }
   } else if (input && output) {
     return { inputCurrency: input.address, outputCurrency: output.address }
   }

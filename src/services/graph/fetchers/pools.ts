@@ -13,7 +13,7 @@ import {
 import { pager } from './pager'
 
 export const fetcher = async (chainId = ChainId.ETHEREUM, query, variables = undefined) =>
-  pager(`${GRAPH_HOST[chainId]}/subgraphs/name/${GRAPH_HOST[chainId]}`, query, variables)
+  pager(`${GRAPH_HOST[chainId ?? ChainId.FANTOM]}/subgraphs/name/${GRAPH_HOST[chainId ?? ChainId.FANTOM]}`, query, variables)
 
 const gqlPoolTypeMap: Record<string, PoolType> = {
   concentratedLiquidityPools: PoolType.ConcentratedLiquidity,

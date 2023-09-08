@@ -1,4 +1,4 @@
-import { ROUTER_ADDRESS } from '../sdk'
+import { ChainId, ROUTER_ADDRESS } from '../sdk'
 import { Currency, CurrencyAmount, Percent, TradeType, Trade as V2Trade } from 'sdk'
 import { useCallback, useMemo } from 'react'
 import { useHasPendingApproval, useTransactionAdder } from '../state/transactions/hooks'
@@ -119,8 +119,8 @@ export function useApproveCallbackFromTrade(
     chainId
       ? trade instanceof V2Trade
         ? !doArcher
-          ? ROUTER_ADDRESS[chainId]
-          : ARCHER_ROUTER_ADDRESS[chainId]
+          ? ROUTER_ADDRESS[chainId ?? ChainId.FANTOM]
+          : ARCHER_ROUTER_ADDRESS[chainId ?? ChainId.FANTOM]
           // : doJoe
           // ? JOE_ROUTER_ADDRESS[ChainId.AVALANCHE]
         : undefined

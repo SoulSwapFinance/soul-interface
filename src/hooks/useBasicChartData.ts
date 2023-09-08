@@ -198,7 +198,7 @@ export default function useBasicChartData(tokens: (Token | null | undefined)[], 
 
   const { data: liveKyberData } = useSWR(
     !isKyberDataNotValid && kyberData && chainId
-      ? liveDataApi[chainId] + `?ids=${tokenAddresses[0]},${tokenAddresses[1]}`
+      ? liveDataApi[chainId ?? ChainId.FANTOM] + `?ids=${tokenAddresses[0]},${tokenAddresses[1]}`
       : null,
     fetchSoulDataSWRWithHeader,
     {

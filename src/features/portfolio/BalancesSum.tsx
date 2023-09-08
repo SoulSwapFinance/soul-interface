@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, NATIVE, ZERO } from 'sdk'
+import { ChainId, Currency, CurrencyAmount, NATIVE, ZERO } from 'sdk'
 import Typography, { TypographyVariant } from 'components/Typography'
 import SumUSDCValues from 'features/trident/SumUSDCValues'
 import { currencyFormatter } from 'functions'
@@ -41,7 +41,7 @@ export const LiquidityPositionsBalancesSum = () => {
 const useWalletBalances = (account: string) => {
   const { chainId } = useActiveWeb3React()
   const { data: tokenBalances, loading } = useAllTokenBalancesWithLoadingIndicator()
-  const ethBalance = useCurrencyBalance(chainId, account ? account : undefined, chainId ? NATIVE[chainId] : undefined)
+  const ethBalance = useCurrencyBalance(chainId, account ? account : undefined, chainId ? NATIVE[chainId ?? ChainId.FANTOM] : undefined)
   return useMemo(() => {
     const res: CurrencyAmount<Currency>[] = Object.values(tokenBalances).filter((cur) => cur.greaterThan(ZERO))
 

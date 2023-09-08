@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
-import { NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, Token } from 'sdk'
+import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, Token } from 'sdk'
 import { useTokenContract, useZapperContract, useManifestationContract } from 'hooks/useContract'
 import useApprove from 'hooks/useApprove'
 import { Tab } from '@headlessui/react'
@@ -129,7 +129,7 @@ export const ActiveRow = ({ pid }) => {
     const textColor = !isActive ? "text-avaxRed" : "text-dark-600"
 
     // PAIR INFO //
-    // const token0 = new Token(chainId, WNATIVE_ADDRESS[chainId], 18)
+    // const token0 = new Token(chainId, WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM], 18)
     // const token1 = new Token(chainId, rewardAddress, 18)
 
     // CONTRACTS //
@@ -290,7 +290,7 @@ export const ActiveRow = ({ pid }) => {
     const handleZap = async (zapTokenAddress, depositAddress) => {
         try {
             let tx
-            tx = await ZapContract?.zapInToken(zapTokenAddress, Number(zapValue).toFixed(zapTokenDecimals).toBigNumber(zapTokenDecimals), depositAddress, ROUTER_ADDRESS[chainId], account)
+            tx = await ZapContract?.zapInToken(zapTokenAddress, Number(zapValue).toFixed(zapTokenDecimals).toBigNumber(zapTokenDecimals), depositAddress, ROUTER_ADDRESS[chainId ?? ChainId.FANTOM], account)
             await tx?.wait()
         } catch (e) {
             console.log(e)
@@ -317,7 +317,7 @@ export const ActiveRow = ({ pid }) => {
                             >
                                 <DoubleCurrencyLogo
                                     currency0={rewardToken}
-                                    currency1={NATIVE[chainId]}
+                                    currency1={NATIVE[chainId ?? ChainId.FANTOM]}
                                     size={40}
                                 />
                                 {/* <Image 
@@ -496,7 +496,7 @@ export const ActiveRow = ({ pid }) => {
                                                     {`Staked Balance`}
                                                 </Typography>
                                                 <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                                    {formatNumber(stakedBalance, false, true)} {`${symbol}-${NATIVE[chainId].symbol}`}
+                                                    {formatNumber(stakedBalance, false, true)} {`${symbol}-${NATIVE[chainId ?? ChainId.FANTOM].symbol}`}
                                                 </Typography>
                                             </div>
                                         )}
@@ -603,7 +603,7 @@ export const ActiveRow = ({ pid }) => {
                                         >
                                             <div className="flex text-lg gap-2">
                                                 <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                                {`DEPOSIT `} {`${symbol}-${NATIVE[chainId].symbol} LP`}
+                                                {`DEPOSIT `} {`${symbol}-${NATIVE[chainId ?? ChainId.FANTOM].symbol} LP`}
                                             </div>
                                         </SubmitButton>
                                     )}
@@ -611,8 +611,8 @@ export const ActiveRow = ({ pid }) => {
                                     {/* CREATE ASSET PAIR */}
                                     {isActive &&
                                         <NavLink
-                                            href={`/exchange/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`}
-                                        // /add/${NATIVE[chainId].symbol}/${assetToken?.wrapped.address}
+                                            href={`/exchange/add/${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${SOUL_ADDRESS[chainId ?? ChainId.FANTOM]}`}
+                                        // /add/${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${assetToken?.wrapped.address}
                                         >
                                                 <SubmitButton
                                                     height="2rem"
@@ -625,12 +625,12 @@ export const ActiveRow = ({ pid }) => {
                                                         rel="noopener"
                                                         primaryColor={buttonColor}
                                                         color={buttonTextColor}
-                                                        href={`/exchange/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`}
-                                                    // /add/${NATIVE[chainId].symbol}/${assetToken?.wrapped.address}
+                                                        href={`/exchange/add/${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${SOUL_ADDRESS[chainId ?? ChainId.FANTOM]}`}
+                                                    // /add/${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${assetToken?.wrapped.address}
                                                     >
                                                         <div className="flex text-lg gap-2">
                                                             <PlusCircleIcon width={26} className={classNames(`text-white`)} />
-                                                            {`CREATE ${symbol}-${NATIVE[chainId].symbol} PAIR`}
+                                                            {`CREATE ${symbol}-${NATIVE[chainId ?? ChainId.FANTOM].symbol} PAIR`}
                                                         </div>
                                                     </TokenPairLink>
                                                 </SubmitButton>
@@ -652,7 +652,7 @@ export const ActiveRow = ({ pid }) => {
                                                 {/* <Zap width={26} className={classNames(`text-white`} /> */}
                                                 {`ZAP`}
                                                 <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                                &rarr; {`${symbol}-${NATIVE[chainId].symbol} LP`}
+                                                &rarr; {`${symbol}-${NATIVE[chainId ?? ChainId.FANTOM].symbol} LP`}
                                             </div>
                                         </SubmitButton>
                                     </Wrap>
@@ -821,7 +821,7 @@ export const ActiveRow = ({ pid }) => {
                                         margin=".5rem 0 0rem 0"
                                         onClick={() => setShowConfirmation(true)}
                                     >
-                                        {`WITHDRAW `} {`${symbol}-${NATIVE[chainId].symbol} LP`}
+                                        {`WITHDRAW `} {`${symbol}-${NATIVE[chainId ?? ChainId.FANTOM].symbol} LP`}
                                     </SubmitButton>
                                 </Wrap>
                             }

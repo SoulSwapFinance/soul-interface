@@ -1,5 +1,5 @@
 import { ArrowsRightLeftIcon, ArrowTrendingUpIcon } from '@heroicons/react/24/solid'
-import { NATIVE } from 'sdk'
+import { ChainId, NATIVE } from 'sdk'
 import { CoffinboxIcon, WalletIcon } from 'components/Icon'
 import HeadlessUiModal from 'components/Modal/HeadlessUIModal'
 import { Feature } from 'enums/Feature'
@@ -38,7 +38,7 @@ const ActionView: FC<ActionViewProps> = ({ onClose }) => {
       <HeadlessUiModal.Header header={`Available Actions`} onClose={onClose} />
       <ActionItem
         svg={<ArrowsRightLeftIcon width={24} />}
-        label={`Swap ${currency?.isNative ? NATIVE[chainId].symbol : currency?.symbol}`}
+        label={`Swap ${currency?.isNative ? NATIVE[chainId ?? ChainId.FANTOM].symbol : currency?.symbol}`}
         onClick={swapActionHandler}
       />
       {featureEnabled(Feature.ANALYTICS, chainId) && (
@@ -58,7 +58,7 @@ const ActionView: FC<ActionViewProps> = ({ onClose }) => {
           />
           <ActionItem
             svg={<WalletIcon width={20} height={20} />}
-            label={`Withdraw ${currency?.isNative ? NATIVE[chainId].symbol : currency?.wrapped.symbol} to Wallet`}
+            label={`Withdraw ${currency?.isNative ? NATIVE[chainId ?? ChainId.FANTOM].symbol : currency?.wrapped.symbol} to Wallet`}
             onClick={() => dispatch(setBalancesActiveModal(ActiveModal.WITHDRAW))}
           />
         </>

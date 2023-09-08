@@ -18,7 +18,7 @@ export const USD_CURRENCY: { [chainId in ChainId]?: Currency } = {
 
 export function getCurrency(chainId: ChainId): Currency {
   return (
-    USD_CURRENCY[chainId] || {
+    USD_CURRENCY[chainId ?? ChainId.FANTOM] || {
       address: AddressZero,
       decimals: 18,
     }

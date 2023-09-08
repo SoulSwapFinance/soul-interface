@@ -34,10 +34,10 @@ export const initialState: TransactionState = {}
 export default createReducer(initialState, (builder) =>
   builder
     .addCase(addTransaction, (transactions, { payload: { chainId, from, hash, type, approval, summary, claim, arbitrary } }) => {
-      if (transactions[chainId]?.[hash]) {
+      if (transactions[chainId ?? ChainId.FANTOM]?.[hash]) {
         throw Error('Attempted to add existing transaction.')
       }
-      const txs = transactions[chainId] ?? {}
+      const txs = transactions[chainId ?? ChainId.FANTOM] ?? {}
       txs[hash] = {
         type,
         hash,
@@ -48,14 +48,14 @@ export default createReducer(initialState, (builder) =>
         from,
         addedTime: now(),
       }
-      transactions[chainId] = txs
+      transactions[chainId ?? ChainId.FANTOM] = txs
     })
     .addCase(clearAllTransactions, (transactions, { payload: { chainId } }) => {
-      if (!transactions[chainId]) return
-      transactions[chainId] = {}
+      if (!transactions[chainId ?? ChainId.FANTOM]) return
+      transactions[chainId ?? ChainId.FANTOM] = {}
     })
     .addCase(checkedTransaction, (transactions, { payload: { chainId, hash, blockNumber } }) => {
-      const tx = transactions[chainId]?.[hash]
+      const tx = transactions[chainId ?? ChainId.FANTOM]?.[hash]
       if (!tx) {
         return
       }
@@ -66,7 +66,7 @@ export default createReducer(initialState, (builder) =>
       }
     })
     .addCase(finalizeTransaction, (transactions, { payload: { hash, chainId, receipt } }) => {
-      const tx = transactions[chainId]?.[hash]
+      const tx = transactions[chainId ?? ChainId.FANTOM]?.[hash]
       if (!tx) {
         return
       }

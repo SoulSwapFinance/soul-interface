@@ -12,7 +12,7 @@ const getQuery = (input?: Currency, output?: Currency) => {
   const { chainId } = useActiveWeb3React()
   if (!input && !output) return
   if (input && !output) {
-    return { inputCurrency: input || NATIVE[chainId].symbol }
+    return { inputCurrency: input || NATIVE[chainId ?? ChainId.FANTOM].symbol }
   } else if (input && output) {
     return { inputCurrency: input, outputCurrency: output }
   }
@@ -68,7 +68,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               "border rounded bg-black",
               chainColor
             )}
-            href={`/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)
+            href={`/${!isRemove ? 'add' : 'remove'}${inputCurrency ? `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId ?? ChainId.FANTOM].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId ?? ChainId.FANTOM]}` : `/${USDC_ADDRESS[chainId ?? ChainId.FANTOM]}`)
               }`}
           >
             <Typography weight={700} className={`text-secondary hover:${hoverColor} p-1`}>
@@ -84,7 +84,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             )}
 
             href={{
-              pathname:`/exchange/limit/${inputCurrency ? `${currencyId(inputCurrency)}` : `${NATIVE[chainId].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId]}` : `/${USDC_ADDRESS[chainId]}`)}`,
+              pathname:`/exchange/limit/${inputCurrency ? `${currencyId(inputCurrency)}` : `${NATIVE[chainId ?? ChainId.FANTOM].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId ?? ChainId.FANTOM]}` : `/${USDC_ADDRESS[chainId ?? ChainId.FANTOM]}`)}`,
               // pathname: '/exchange/limit',
               // query: getQuery(inputCurrency, outputCurrency),
             }}

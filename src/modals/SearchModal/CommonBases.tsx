@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, NATIVE, ZERO } from 'sdk'
+import { ChainId, Currency, CurrencyAmount, NATIVE, ZERO } from 'sdk'
 // import { Button } from 'components/Button'
 import { COMMON_BASES } from 'constants/routing'
 // import { CurrencyLogo } from 'components/CurrencyLogo'
@@ -21,7 +21,7 @@ const CommonBases: FC = () => {
   const { currency: selectedCurrency, onSelect } = useCurrencyModalContext()
 
   // const tokenBalance = useCurrencyBalance(chainId, account, selectedCurrency)
-  const bases = typeof chainId !== 'undefined' ? COMMON_BASES[chainId] ?? [] : []
+  const bases = typeof chainId !== 'undefined' ? COMMON_BASES[chainId ?? ChainId.FANTOM] ?? [] : []
   // const balance = useCurrencyBalance(chainId, account ?? undefined, selectedCurrency)
   if (bases.length === 0) return <></>
 
@@ -36,7 +36,7 @@ const CommonBases: FC = () => {
         <CurrencyRow 
           chainId={chainId} 
           // currency={selectedCurrency} 
-          currency={NATIVE[chainId]} 
+          currency={NATIVE[chainId ?? ChainId.FANTOM]} 
           style={undefined}
         />
       </div>

@@ -12,7 +12,7 @@ export const SOUL_SUMMONER = {
 }
 
 export const soulSummoner = async (query, chainId = ChainId.FANTOM) =>
-  request(`${GRAPH_HOST[chainId]}/subgraphs/name/${SOUL_SUMMONER[chainId]}`, query)
+  request(`${GRAPH_HOST[chainId ?? ChainId.FANTOM]}/subgraphs/name/${SOUL_SUMMONER[chainId ?? ChainId.FANTOM]}`, query)
 
 export const getSoulSummonerPairAddreses = async () => {
   const { pools } = await soulSummoner(soulSummonerPairAddressesQuery)

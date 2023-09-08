@@ -8,7 +8,7 @@ import { ActiveModal } from 'features/trident/types'
 import { useAppDispatch } from 'state/hooks'
 import { useRouter } from 'next/router'
 import React, { FC, useCallback } from 'react'
-import { NATIVE } from 'sdk'
+import { ChainId, NATIVE } from 'sdk'
 import { useActiveWeb3React } from 'services/web3'
 
 const WalletActions: FC = () => {
@@ -19,7 +19,7 @@ const WalletActions: FC = () => {
 
   const swapActionHandler = useCallback(async () => {
     if (currency?.isNative) return router.push('/exchange/swap')
-    return router.push(`/exchange/swap?inputCurrency=${NATIVE[chainId].symbol}&tokens=${currency?.wrapped.address}`)
+    return router.push(`/exchange/swap?inputCurrency=${NATIVE[chainId ?? ChainId.FANTOM].symbol}&tokens=${currency?.wrapped.address}`)
   }, [currency?.isNative, currency?.wrapped.address, router])
 
   return (

@@ -8,13 +8,13 @@ import { IOracle } from 'interfaces'
 import { e10 } from './math'
 
 export function getOracle(chainId: ChainId, address: string, data: string): IOracle {
-  if (address.toLowerCase() === CHAINLINK_ORACLE_ADDRESS[chainId].toLowerCase()) {
+  if (address.toLowerCase() === CHAINLINK_ORACLE_ADDRESS[chainId ?? ChainId.FANTOM].toLowerCase()) {
     return new ChainlinkOracle(chainId, address, data)
   }
 }
 
 export function validateChainlinkOracleData(chainId = ChainId.ETHEREUM, collateral, asset, data) {
-  const mapping = CHAINLINK_PRICE_FEED_MAP[chainId]
+  const mapping = CHAINLINK_PRICE_FEED_MAP[chainId ?? ChainId.FANTOM]
   if (!mapping) {
     return false
   }

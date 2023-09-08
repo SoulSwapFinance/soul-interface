@@ -47,7 +47,7 @@ export default function Updater(): null {
   const dispatch = useAppDispatch()
   const state = useAppSelector((state) => state.transactions)
 
-  const transactions = useMemo(() => (chainId ? state[chainId] ?? {} : {}), [chainId, state])
+  const transactions = useMemo(() => (chainId ? state[chainId ?? ChainId.FANTOM] ?? {} : {}), [chainId, state])
 
   // show popup on confirm
   const addPopup = useAddPopup()
@@ -55,7 +55,7 @@ export default function Updater(): null {
   const getReceipt = useCallback(
     (hash: string) => {
       if (!library || !chainId) throw new Error('No library or chainId')
-      const retryOptions = RETRY_OPTIONS_BY_CHAIN_ID[chainId] ?? DEFAULT_RETRY_OPTIONS
+      const retryOptions = RETRY_OPTIONS_BY_CHAIN_ID[chainId ?? ChainId.FANTOM] ?? DEFAULT_RETRY_OPTIONS
       return retry(
         () =>
           library.getTransactionReceipt(hash).then((receipt) => {

@@ -157,7 +157,7 @@ export default function FullPositionCard({ chainId, pair, border, stakedBalance 
 
   // const [depositValue, setDepositValue] = useState('')
   // const [withdrawValue, setWithdrawValue] = useState('')
-  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
 
   const balance = userPoolBalance
   // const stakedAmount = useUserInfo(farm, liquidityToken)

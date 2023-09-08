@@ -30,7 +30,7 @@ export function getRouterAddress(chainId?: ChainId) {
   if (!chainId) {
     throw Error(`Undefined 'chainId' parameter '${chainId}'.`)
   }
-  return ROUTER_ADDRESS[chainId]
+  return ROUTER_ADDRESS[chainId ?? ChainId.FANTOM]
 }
 
 export function getJoeRouterAddress() {

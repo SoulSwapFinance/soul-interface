@@ -8,6 +8,7 @@ import { useEffect, useMemo } from 'react'
 
 import { addMulticallListeners, ListenerOptions, removeMulticallListeners } from './actions'
 import { Call, parseCallKey, toCallKey } from './utils'
+import { ChainId } from 'sdk'
 
 export interface Result extends ReadonlyArray<any> {
   readonly [key: string]: any
@@ -91,7 +92,7 @@ function useCallsData(
       calls.map<CallResult>((call) => {
         if (!chainId || !call) return INVALID_RESULT
 
-        const result = callResults[chainId]?.[toCallKey(call)]
+        const result = callResults[chainId ?? ChainId.FANTOM]?.[toCallKey(call)]
         let data
         if (result?.data && result?.data !== '0x') {
           data = result.data

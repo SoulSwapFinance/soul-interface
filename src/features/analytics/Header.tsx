@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { Currency, NATIVE, Percent } from '../../sdk'
+import { ChainId, Currency, NATIVE, Percent } from '../../sdk'
 import NavLink from '../../components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
 import Typography from 'components/Typography'
@@ -9,7 +9,7 @@ const getQuery = (input, output) => {
   if (!input && !output) return
 
   if (input && !output) {
-    return { inputCurrency: input.address || NATIVE[chainId].symbol }
+    return { inputCurrency: input.address || NATIVE[chainId ?? ChainId.FANTOM].symbol }
   } else if (input && output) {
     return { inputCurrency: input.address, outputCurrency: output.address }
   }

@@ -1,4 +1,4 @@
-import { Currency, NATIVE } from 'sdk'
+import { ChainId, Currency, NATIVE } from 'sdk'
 import { useCurrency } from 'hooks/Tokens'
 import { useActiveWeb3React } from 'services/web3'
 import { AppState } from 'state'
@@ -23,7 +23,7 @@ export function useCreateActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency.isToken ? currency.address : currency.isNative ? `${NATIVE[chainId].symbol}` : '',
+          currencyId: currency.isToken ? currency.address : currency.isNative ? `${NATIVE[chainId ?? ChainId.FANTOM].symbol}` : '',
         })
       )
     },

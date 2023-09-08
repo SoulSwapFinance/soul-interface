@@ -166,7 +166,7 @@ const Crosschain = ({ }) => {
     const [toAsset, setToAsset] = useState(USDC[toChain])
     const [tokenData, setTokenData] = useState<TokenData[]>([])
     // const [route, setRoute] = useState<RouteData>(null)
-    // const nativePrice = usePrice(WNATIVE_ADDRESS[chainId])
+    // const nativePrice = usePrice(WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM])
     // √
     const [fromAmount, setFromAmount] = useState('1');
     const [toAmount, setToAmount] = useState('1');

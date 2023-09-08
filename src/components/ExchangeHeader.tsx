@@ -3,18 +3,18 @@ import React, { FC, useState } from 'react'
 import Settings from './Settings'
 import { useRouter } from 'next/router'
 import Typography from '../components/Typography'
-import { useActiveWeb3React } from 'services/web3'
+// import { useActiveWeb3React } from 'services/web3'
 
-const getQuery = (input, output) => {
-  const { chainId } = useActiveWeb3React()
-  if (!input && !output) return
+// const getQuery = (input, output) => {
+//   const { chainId } = useActiveWeb3React()
+//   if (!input && !output) return
 
-  if (input && !output) {
-    return { inputCurrency: input.address || NATIVE[chainId].symbol }
-  } else if (input && output) {
-    return { inputCurrency: input.address, outputCurrency: output.address }
-  }
-}
+//   if (input && !output) {
+//     return { inputCurrency: input.address || NATIVE[chainId ?? ChainId.FANTOM].symbol }
+//   } else if (input && output) {
+//     return { inputCurrency: input.address, outputCurrency: output.address }
+//   }
+// }
 
 interface ExchangeHeaderProps {
   input?: Currency

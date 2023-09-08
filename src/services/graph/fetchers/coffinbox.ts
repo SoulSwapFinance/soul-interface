@@ -19,7 +19,7 @@ export const COFFINBOX = {
   [ChainId.AVALANCHE]: 'soulswapfinance/coffinbox-avalanche'
 }
 const fetcher = async (chainId = ChainId.FANTOM, query, variables = undefined) =>
-  pager(`${GRAPH_HOST[chainId]}/subgraphs/name/${COFFINBOX[chainId]}`, query, variables)
+  pager(`${GRAPH_HOST[chainId ?? ChainId.FANTOM]}/subgraphs/name/${COFFINBOX[chainId ?? ChainId.FANTOM]}`, query, variables)
 
 export const getClones = async (chainId = ChainId.FANTOM) => {
   const { clones } = await fetcher(chainId, clonesQuery)

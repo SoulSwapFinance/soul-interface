@@ -1,6 +1,7 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit'
 import { TokenList } from '@uniswap/token-lists'
 import { DEFAULT_TXN_DISMISS_MS } from 'constants/index'
+import { ChainId } from 'sdk'
 
 export type PopupContent =
   | {
@@ -73,18 +74,18 @@ const applicationSlice = createSlice({
     },
     updateBlockTimestamp(state, action) {
       const { chainId, blockTimestamp } = action.payload
-      if (typeof state.blockTimestamp[chainId] !== 'number') {
-        state.blockTimestamp[chainId] = blockTimestamp
+      if (typeof state.blockTimestamp[chainId ?? ChainId.FANTOM] !== 'number') {
+        state.blockTimestamp[chainId ?? ChainId.FANTOM] = blockTimestamp
       } else {
-        state.blockTimestamp[chainId] = Math.max(blockTimestamp, state.blockTimestamp[chainId])
+        state.blockTimestamp[chainId ?? ChainId.FANTOM] = Math.max(blockTimestamp, state.blockTimestamp[chainId ?? ChainId.FANTOM])
       }
     },
     updateBlockNumber(state, action) {
       const { chainId, blockNumber } = action.payload
-      if (typeof state.blockNumber[chainId] !== 'number') {
-        state.blockNumber[chainId] = blockNumber
+      if (typeof state.blockNumber[chainId ?? ChainId.FANTOM] !== 'number') {
+        state.blockNumber[chainId ?? ChainId.FANTOM] = blockNumber
       } else {
-        state.blockNumber[chainId] = Math.max(blockNumber, state.blockNumber[chainId])
+        state.blockNumber[chainId ?? ChainId.FANTOM] = Math.max(blockNumber, state.blockNumber[chainId ?? ChainId.FANTOM])
       }
     },
     setChainConnectivityWarning(state, action) {

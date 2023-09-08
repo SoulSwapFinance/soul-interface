@@ -109,8 +109,8 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
   const [candlestickSeries, setCandlestickSeries] = useState<{ data: NumericalCandlestickDatum[] }[]>([{ data: [] }])
 
   const MAJOR_HIERARCHY = [
-    WNATIVE_ADDRESS[chainId].toLowerCase(), // WFTM
-    USDC_ADDRESS[chainId].toLowerCase(), // USDC
+    WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM].toLowerCase(), // WFTM
+    USDC_ADDRESS[chainId ?? ChainId.FANTOM].toLowerCase(), // USDC
   ]
 
   const inputAddress = inputCurrency?.isToken
@@ -270,7 +270,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
   const blockchainPrefix = chainId 
     == ChainId.AVALANCHE ? 'avax-info' : 'info' 
 
-  const weth = WNATIVE[chainId]
+  const weth = WNATIVE[chainId ?? ChainId.FANTOM]
   const isWrapped = (inputCurrency?.isNative && weth.equals(outputCurrency)) || (outputCurrency?.isNative && weth.equals(inputCurrency))
   const inputWrapped = inputCurrency?.isNative
 
@@ -279,7 +279,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
     outputCurrency &&
     !isWrapped &&
     computePairAddress({
-      factoryAddress: FACTORY_ADDRESS[chainId],
+      factoryAddress: FACTORY_ADDRESS[chainId ?? ChainId.FANTOM],
       tokenA: inputCurrency?.isToken ? inputCurrency : inputCurrency?.wrapped,
       tokenB: outputCurrency?.isToken ? outputCurrency : outputCurrency?.wrapped,
     })
@@ -387,7 +387,7 @@ export default function Chart({ inputCurrency, outputCurrency }: ChartProps) {
             <div className="text-lg font-medium text-h">CREATE PAIR</div>
             </div>
           </a>
-        :   'https://app.soulswap.finance/add/NATIVE[chainId]/SOUL_ADDRESS[chainId]'
+        :   'https://app.soulswap.finance/add/NATIVE[chainId ?? ChainId.FANTOM]/SOUL_ADDRESS[chainId ?? ChainId.FANTOM]'
     } */}
       {/* </div> */}
     </>

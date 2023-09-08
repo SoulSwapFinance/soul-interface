@@ -164,7 +164,7 @@ function Token({ outputCurrency }: TokenProps) {
             timespans={chartTimespans}
           />
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <ChartCard
             header="Liquidity"
             subheader={token?.symbol}
@@ -183,7 +183,7 @@ function Token({ outputCurrency }: TokenProps) {
             defaultTimespan="WEEK"
             timespans={chartTimespans}
           />
-        </div>
+        </div> */}
 
         <NavLink
           href={`/analytics/tokens/${id}`}
@@ -197,48 +197,6 @@ function Token({ outputCurrency }: TokenProps) {
             </div>
           </Button>
         </NavLink>
-        {/* <div className="flex flex-row justify-between flex-grow space-x-4 overflow-x-auto">
-          <InfoCard text="Liquidity (24H)" number={liquidityUSD} percent={liquidityUSDChange} />
-          <InfoCard text="Volume (24H)" number={volumeUSD1d} percent={volumeUSD1dChange} />
-          <InfoCard text="Fees (24H)" number={volumeUSD1d * 0.003} percent={volumeUSD1dChange} />
-        </div> */}
-        {/* <div className="text-2xl font-bold text-high-emphesis">Information</div> */}
-        {/* <div className="px-4 text-sm leading-48px text-high-emphesis">
-          <table className="w-full table-fixed">
-            <thead className="border-b border-gray-900">
-              <tr>
-                <td>Name</td>
-                <td>Symbol</td>
-                <td>Address</td>
-                <td className="flex justify-end w-full">Explorer</td>
-              </tr>
-            </thead>
-            <tbody className="border-b border-gray-900">
-              <tr>
-                <td>{token?.name}</td>
-                <td>{token?.symbol}</td>
-                <td>
-                  <div className="w-11/12 overflow-hidden cursor-pointer overflow-ellipsis whitespace-nowrap">{id}</div>
-                </td>
-                <td>
-                  <div
-                    className={`flex flex-row items-center justify-end space-x-1 text-${getChainColorCode(chainId)}`}
-                    href={getExplorerLink(chainId, id, 'token')}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <div>View</div>
-                    <LinkIcon size={16} />
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div> */}
-        {/* <div>
-          <PairList pairs={tokenPairsFormatted} type="all" />
-        </div> */}
-        {/* <LegacyTransactions pairs={tokenPairs ? tokenPairs.map((pair) => pair.id) : []} /> */}
       </div>
     </AnalyticsContainer>
   )

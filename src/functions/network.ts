@@ -1,5 +1,6 @@
 import { ExternalProvider } from '@ethersproject/providers'
 import { SUPPORTED_NETWORKS } from 'modals/NetworkModal'
+import { ChainId } from 'sdk'
 
 interface SwitchNetworkArguments {
   provider: ExternalProvider
@@ -11,7 +12,7 @@ export const switchToNetwork = async ({ provider, chainId }: SwitchNetworkArgume
     return
   }
   console.log(`Switching to chain ${chainId}`)
-  const params = SUPPORTED_NETWORKS[chainId]
+  const params = SUPPORTED_NETWORKS[chainId ?? ChainId.FANTOM]
   try {
     await provider.request({
       method: 'wallet_switchEthereumChain',

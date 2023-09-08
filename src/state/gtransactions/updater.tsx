@@ -4,6 +4,7 @@ import { useActiveWeb3React } from "services/web3";
 import { useBlockNumber } from "state/application/hooks";
 import { AppDispatch, AppState } from "../index";
 import { checkedTransaction, finalizeTransaction } from "./actions";
+import { ChainId } from "sdk";
 
 interface TxInterface {
   addedTime: number;
@@ -39,7 +40,7 @@ export default function Updater(): null {
     (state) => state.gtransactions
   );
 
-  const transactions = useMemo(() => (chainId ? state[chainId] ?? {} : {}), [
+  const transactions = useMemo(() => (chainId ? state[chainId ?? ChainId.FANTOM] ?? {} : {}), [
     chainId,
     state,
   ]);

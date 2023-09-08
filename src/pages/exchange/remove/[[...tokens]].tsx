@@ -150,8 +150,8 @@ export default function Remove() {
     const liquidityAmount = parsedAmounts[Field.LIQUIDITY]
     if (!liquidityAmount) throw new Error('missing liquidity amount')
 
-    const currencyBIsETH = currencyB == NATIVE[chainId] // isNative
-    const oneCurrencyIsETH = currencyA == NATIVE[chainId] || currencyBIsETH
+    const currencyBIsETH = currencyB == NATIVE[chainId ?? ChainId.FANTOM] // isNative
+    const oneCurrencyIsETH = currencyA == NATIVE[chainId ?? ChainId.FANTOM] || currencyBIsETH
 
     if (!tokenA || !tokenB) throw new Error('could not wrap')
 
@@ -655,10 +655,10 @@ export default function Remove() {
     [onUserInput]
   )
 
-  const oneCurrencyIsETH = currencyA == NATIVE[chainId] || currencyB == NATIVE[chainId]
+  const oneCurrencyIsETH = currencyA == NATIVE[chainId ?? ChainId.FANTOM] || currencyB == NATIVE[chainId ?? ChainId.FANTOM]
 
   const oneCurrencyIsWETH = Boolean(
-    chainId && WNATIVE[chainId] && (currencyA?.equals(WNATIVE[chainId]) || currencyB?.equals(WNATIVE[chainId]))
+    chainId && WNATIVE[chainId ?? ChainId.FANTOM] && (currencyA?.equals(WNATIVE[chainId ?? ChainId.FANTOM]) || currencyB?.equals(WNATIVE[chainId ?? ChainId.FANTOM]))
   )
 
   // const handleSelectCurrencyA = useCallback(
@@ -770,21 +770,21 @@ export default function Remove() {
                         {oneCurrencyIsETH ? (
                           <Link
                             legacyBehavior={true}
-                            href={`/exchange/remove/${currencyA == NATIVE[chainId] ? WNATIVE[chainId].address : currencyIdA}/${currencyB == NATIVE[chainId] ? WNATIVE[chainId].address : currencyIdB
+                            href={`/exchange/remove/${currencyA == NATIVE[chainId ?? ChainId.FANTOM] ? WNATIVE[chainId ?? ChainId.FANTOM].address : currencyIdA}/${currencyB == NATIVE[chainId ?? ChainId.FANTOM] ? WNATIVE[chainId ?? ChainId.FANTOM].address : currencyIdB
                               }`}
                           >
                             <a className={classNames("font-bold text-baseline opacity-80 hover:opacity-100 focus:opacity-100 whitespace-nowrap", `text-${getChainColorCode(chainId)}`)}>
-                              {`Receive`} W{NATIVE[chainId].symbol}
+                              {`Receive`} W{NATIVE[chainId ?? ChainId.FANTOM].symbol}
                             </a>
                           </Link>
                         ) : oneCurrencyIsWETH ? (
                           <Link
                             legacyBehavior={true}
-                            href={`/exchange/remove/${currencyA?.equals(WNATIVE[chainId]) ? NATIVE[chainId].symbol : currencyIdA}/${currencyB?.equals(WNATIVE[chainId]) ? NATIVE[chainId].symbol : currencyIdB
+                            href={`/exchange/remove/${currencyA?.equals(WNATIVE[chainId ?? ChainId.FANTOM]) ? NATIVE[chainId ?? ChainId.FANTOM].symbol : currencyIdA}/${currencyB?.equals(WNATIVE[chainId ?? ChainId.FANTOM]) ? NATIVE[chainId ?? ChainId.FANTOM].symbol : currencyIdB
                               }`}
                           >
                             <a className="text-baseline text-blue opacity-80 hover:opacity-100 whitespace-nowrap">
-                              {`Receive`} {NATIVE[chainId].symbol}
+                              {`Receive`} {NATIVE[chainId ?? ChainId.FANTOM].symbol}
                             </a>
                           </Link>
                         ) : null}

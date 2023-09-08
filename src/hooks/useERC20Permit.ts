@@ -153,7 +153,7 @@ export function useERC20Permit(
   const tokenNonceState = useSingleCallResult(eip2612Contract, 'nonces', nonceInputs)
 
   const permitInfo =
-    overridePermitInfo ?? (chainId && tokenAddress ? PERMITTABLE_TOKENS[chainId]?.[tokenAddress] : undefined)
+    overridePermitInfo ?? (chainId && tokenAddress ? PERMITTABLE_TOKENS[chainId ?? ChainId.FANTOM]?.[tokenAddress] : undefined)
 
   const [signatureData, setSignatureData] = useState<SignatureData | null>(null)
 
