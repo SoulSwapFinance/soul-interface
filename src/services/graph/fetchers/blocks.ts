@@ -19,7 +19,7 @@ export const BLOCKS = {
 // @ts-ignore TYPE NEEDS FIXING
 const fetcher = async (chainId = ChainId.FANTOM, query, variables = undefined) => {
   // @ts-ignore TYPE NEEDS FIXING
-  return request(`${GRAPH_HOST[chainId]}/subgraphs/name/${BLOCKS[chainId]}`, query, variables)
+  return request(`${GRAPH_HOST[chainId ?? ChainId.FANTOM]}/subgraphs/name/${BLOCKS[chainId ?? ChainId.FANTOM]}`, query, variables)
 }
 
 // @ts-ignore TYPE NEEDS FIXING

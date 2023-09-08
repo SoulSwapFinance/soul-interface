@@ -1,4 +1,4 @@
-import { Pair } from 'sdk'
+import { ChainId, Pair } from 'sdk'
 
 import { CSSProperties, useCallback } from 'react'
 import { Plus, X } from 'react-feather'
@@ -36,13 +36,13 @@ function pairKey(index: number, data: Pair[]) {
 const PairRow = ({ pair, onSelect, isSelected, style }: PairRowProps) => {
   const { chainId } = useActiveWeb3React()
   const { pairs: allPairs } = useAllPairs()
-  const isOnSelectedList = isPairOnList(allPairs, pair[chainId])
-  const customAdded = useIsUserAddedPair(pair[chainId])
+  const isOnSelectedList = isPairOnList(allPairs, pair[chainId ?? ChainId.FANTOM])
+  const customAdded = useIsUserAddedPair(pair[chainId ?? ChainId.FANTOM])
 
   const removePair = usePairRemover()
   const addPair = usePairAdder()
 
-  const pairText = `${pair.token0[chainId]?.symbol || ''}/${pair.token1[chainId]?.symbol || ''}`
+  const pairText = `${pair.token0[chainId ?? ChainId.FANTOM]?.symbol || ''}/${pair.token1[chainId ?? ChainId.FANTOM]?.symbol || ''}`
 
   // only show add or remove buttons if not on selected list
   return (

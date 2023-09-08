@@ -7,6 +7,7 @@ import { AppDispatch, AppState } from "../index";
 import { addTransaction, TransactionType } from "./actions";
 import { TransactionDetails } from "./reducer";
 import { useActiveWeb3React } from "services/web3";
+import { ChainId } from "sdk";
 
 // helper that can take a ethers library transaction response and add it to the list of transactions
 export function useTransactionAdder(): (
@@ -68,7 +69,7 @@ export function useAllTransactions(): { [txHash: string]: TransactionDetails } {
     (state) => state.gtransactions
   );
 
-  return chainId ? state[chainId] ?? {} : {};
+  return chainId ? state[chainId ?? ChainId.FANTOM] ?? {} : {};
 }
 
 export function useIsTransactionPending(transactionHash?: string): boolean {

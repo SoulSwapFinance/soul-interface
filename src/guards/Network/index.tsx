@@ -39,7 +39,7 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
   return (
     <>
       <HeadlessUIModal.Controlled
-        isOpen={!!account && !features[chainId].includes(feature)}
+        isOpen={!!account && !features[chainId ?? ChainId.FANTOM].includes(feature)}
         chainId={chainId}
         onDismiss={() => null}
         transparent={true}

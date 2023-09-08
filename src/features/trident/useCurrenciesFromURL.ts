@@ -15,7 +15,7 @@ const useCurrenciesFromURL = (chainId: ChainId): {
 } => {
   // const { chainId } = useActiveWeb3React()
   const router = useRouter()
-  const currencyA = useCurrency(router.query.tokens?.[0]) || (chainId && NATIVE[chainId]) || undefined
+  const currencyA = useCurrency(router.query.tokens?.[0]) || (chainId && NATIVE[chainId ?? ChainId.FANTOM]) || undefined
   const currencyB = useCurrency(router.query.tokens?.[1]) || (chainId && SOUL[250]) || undefined
 
   const fee = Number(router.query.fee ?? Fee.DEFAULT)
@@ -24,7 +24,7 @@ const useCurrenciesFromURL = (chainId: ChainId): {
   const switchCurrencies = useCallback(async () => {
     if (!chainId) return
 
-    const nativeSymbol = NATIVE[chainId].symbol
+    const nativeSymbol = NATIVE[chainId ?? ChainId.FANTOM].symbol
     let tokens: string[] = []
     if (router.query && router.query.tokens) {
       tokens = [router.query.tokens?.[1], router.query.tokens?.[0]]
@@ -60,7 +60,7 @@ const useCurrenciesFromURL = (chainId: ChainId): {
     async (cur: Currency, index: number) => {
       if (!chainId) return
 
-      const nativeSymbol = NATIVE[chainId].symbol
+      const nativeSymbol = NATIVE[chainId ?? ChainId.FANTOM].symbol
       let tokens: string[] = [
         currencyA?.isNative ? nativeSymbol : currencyA?.wrapped.address,
         currencyB?.isNative ? nativeSymbol : currencyB?.wrapped.address,
@@ -74,7 +74,7 @@ const useCurrenciesFromURL = (chainId: ChainId): {
           return switchCurrencies()
         }
 
-        const newToken = cur.isNative ? NATIVE[chainId].symbol : cur.wrapped.address
+        const newToken = cur.isNative ? NATIVE[chainId ?? ChainId.FANTOM].symbol : cur.wrapped.address
         if (tokens.includes(newToken)) return // return if token already selected
         tokens[index] = newToken
       }

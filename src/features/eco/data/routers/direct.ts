@@ -15,7 +15,7 @@ async function getQuote(chainId, fromAddress: string, toAddress, inputAmount) {
     // const { chainId, library } = useActiveWeb3React()
     // const provider = library.provider
 
-    // let web3 = new Web3(RPC[chainId])
+    // let web3 = new Web3(RPC[chainId ?? ChainId.FANTOM])
     // No quote
 
     const none = {
@@ -26,7 +26,7 @@ async function getQuote(chainId, fromAddress: string, toAddress, inputAmount) {
 
     // Check swap parameters
 
-    const routers = swapRouters[chainId]
+    const routers = swapRouters[chainId ?? ChainId.FANTOM]
     // if (!Object.keys(routers).length) return none
 
     try {
@@ -52,7 +52,7 @@ async function getQuote(chainId, fromAddress: string, toAddress, inputAmount) {
 // Get swap
 
 async function getSwap(chainId, routerId, fromAddress, toAddress, inputAmount, account) {
-    let routers = swapRouters[chainId]
+    let routers = swapRouters[chainId ?? ChainId.FANTOM]
 
     // initial state swap
     const none = {
@@ -63,7 +63,7 @@ async function getSwap(chainId, routerId, fromAddress, toAddress, inputAmount, a
 
     // checks: swap parameters
     if (!routers[routerId].enabled) return none
-    routers = swapRouters[chainId]
+    routers = swapRouters[chainId ?? ChainId.FANTOM]
     if (!Object.keys(routers).length) return none
 
     try {
@@ -165,11 +165,11 @@ async function getBestRouterQuote(chainId: ChainId, routers, fromAddress: string
 function getPaths(chainId, tokenIn, tokenOut) {
     // Generate all paths with chain route tokens
 
-    const addressIn = tokenIn === "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" ? WNATIVE[chainId] : tokenIn
-    const addressOut = tokenOut === "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" ? WNATIVE[chainId] : tokenOut
+    const addressIn = tokenIn === "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" ? WNATIVE[chainId ?? ChainId.FANTOM] : tokenIn
+    const addressOut = tokenOut === "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE" ? WNATIVE[chainId ?? ChainId.FANTOM] : tokenOut
     const paths = [[addressIn, addressOut]]
 
-    for (const token of routeTokens[chainId]) {
+    for (const token of routeTokens[chainId ?? ChainId.FANTOM]) {
         if (token !== addressIn && token !== addressOut) {
             paths.push([addressIn, token, addressOut])
         }

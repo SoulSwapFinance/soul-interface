@@ -48,7 +48,7 @@ export function useLimitOrderActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency.isToken ? currency.address : currency.isNative ? NATIVE[chainId].symbol : '',
+          currencyId: currency.isToken ? currency.address : currency.isNative ? NATIVE[chainId ?? ChainId.FANTOM].symbol : '',
         })
       )
     },
@@ -91,7 +91,7 @@ function parseCurrencyFromURLParameter(urlParam: any): string {
   if (typeof urlParam === 'string') {
     const valid = isAddress(urlParam)
     if (valid) return valid
-    if (urlParam.toUpperCase() === NATIVE[chainId].symbol) return NATIVE[chainId].symbol
+    if (urlParam.toUpperCase() === NATIVE[chainId ?? ChainId.FANTOM].symbol) return NATIVE[chainId ?? ChainId.FANTOM].symbol
   }
   return ''
 }
@@ -125,8 +125,8 @@ function validatedRecipient(recipient: any): string | undefined {
 export function queryParametersToSwapState(chainId: ChainId, parsedQs: ParsedQs) {
   let inputCurrency = parseCurrencyFromURLParameter(parsedQs.inputCurrency)
   let outputCurrency = parseCurrencyFromURLParameter(parsedQs.outputCurrency)
-  const eth = NATIVE[chainId].symbol
-  const soul = SOUL[chainId].address
+  const eth = NATIVE[chainId ?? ChainId.FANTOM].symbol
+  const soul = SOUL[chainId ?? ChainId.FANTOM].address
   if (inputCurrency === '' && outputCurrency === '') {
     inputCurrency = eth
     outputCurrency = soul
@@ -187,9 +187,9 @@ export const useLimitOrderDerivedCurrencies: UseLimitOrderDerivedCurrencies = ()
   const { chainId } = useActiveWeb3React()
   const { inputCurrencyId, outputCurrencyId } = useLimitOrderState()
   const inputCurrency =
-    useCurrency(inputCurrencyId === 'SOUL' ? SOUL[chainId].address : inputCurrencyId) ?? undefined
+    useCurrency(inputCurrencyId === 'SOUL' ? SOUL[chainId ?? ChainId.FANTOM].address : inputCurrencyId) ?? undefined
   const outputCurrency =
-    useCurrency(outputCurrencyId === 'SOUL' ? SOUL[chainId].address : outputCurrencyId) ?? undefined
+    useCurrency(outputCurrencyId === 'SOUL' ? SOUL[chainId ?? ChainId.FANTOM].address : outputCurrencyId) ?? undefined
 
   return useMemo(() => {
     return {

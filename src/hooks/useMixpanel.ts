@@ -164,7 +164,7 @@ export default function useMixpanel(trade?: Aggregator | undefined, currencies?:
     outputCurrency && outputCurrency.isNative
       ? NETWORKS_INFO[(chainId as ChainId) || ChainId.ETHEREUM].nativeToken.name
       : outputCurrency?.symbol
-  const ethPrice = useTokenInfo(WNATIVE_ADDRESS[chainId]).tokenInfo.price
+  const ethPrice = useTokenInfo(WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price
   const dispatch = useDispatch<AppDispatch>()
   const apolloClient = NETWORKS_INFO[(chainId as ChainId) || (ChainId.ETHEREUM as ChainId)].classicClient
 //   const selectedCampaign = useSelector((state: AppState) => state.campaigns.selectedCampaign)
@@ -976,7 +976,7 @@ export const useGlobalMixpanelEvents = () => {
       mixpanel.register({ network: chainId && NETWORKS_INFO[chainId as ChainId].name })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chainId])
+  }, [chainId ?? ChainId.FANTOM])
 
   useEffect(() => {
     if (pathName) {

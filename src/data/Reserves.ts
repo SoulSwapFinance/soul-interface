@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { Interface } from '@ethersproject/abi'
-import { Currency, Pair } from 'sdk'
+import { ChainId, Currency, Pair } from 'sdk'
 import PAIR_ABI from 'constants/abis/soulswap/ISoulSwapPair.json'
 import { BigNumber } from 'ethers'
 
@@ -28,8 +28,8 @@ export function usePairs(
   const tokens = useMemo(
     () =>
       currencies.map(([currencyA, currencyB]) => [
-        currencyA[chainId], chainId,
-        currencyB[chainId], chainId,
+        currencyA[chainId ?? ChainId.FANTOM], chainId,
+        currencyB[chainId ?? ChainId.FANTOM], chainId,
       ]),
     [chainId, currencies]
   )
@@ -48,8 +48,8 @@ export function usePairs(
           // platform.supportsChain(tokenB.chainId)
           // ? 
           Pair.getAddress(
-              tokenA[chainId], 
-              tokenB[chainId], 
+              tokenA[chainId ?? ChainId.FANTOM], 
+              tokenB[chainId ?? ChainId.FANTOM], 
             //   platform
             )
           // : undefined
@@ -73,8 +73,8 @@ export function usePairs(
       const { reserve0, reserve1 } = reserves
       const [token0, token1] = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA]
       const swapFee = swapFees?.[Pair.getAddress(
-          token0[chainId], 
-          token1[chainId]
+          token0[chainId ?? ChainId.FANTOM], 
+          token1[chainId ?? ChainId.FANTOM]
         // , platform
         )
     ]?.fee
@@ -83,7 +83,7 @@ export function usePairs(
       return [
         PairState.EXISTS,
         new Pair(
-            token0[chainId], reserve0 // TEMP VALUES
+            token0[chainId ?? ChainId.FANTOM], reserve0 // TEMP VALUES
         //   new TokenAmount(token0, reserve0.toString()),
         //   new TokenAmount(token1, reserve1.toString()),
         //   swapFee || platform.defaultSwapFee,
@@ -113,7 +113,7 @@ export function usePairLiquidityTokenTotalSupply(pair?: Pair): BigNumber | null 
     const supply = totalSupplyResult.result[0] as BigNumber
     return supply
     // CurrencyAmount(
-    //     pair.liquidityToken[chainId], 
+    //     pair.liquidityToken[chainId ?? ChainId.FANTOM], 
     //     supply.toString()
     //     )
   }, [pair, totalSupplyResult.result])

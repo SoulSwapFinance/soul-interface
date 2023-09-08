@@ -11,10 +11,10 @@ interface Props extends React.ComponentProps<'svg'> {
 export const NetworkIcon: FC<Props> = ({ type = 'circle', chainId, ...props }) => {
   const Icon = useMemo(() => {
     if (type === 'naked') {
-      return NETWORK_NAKED_ICON[chainId]
+      return NETWORK_NAKED_ICON[chainId ?? ChainId.FANTOM]
     }
 
-    return NETWORK_CIRCLE_ICON[chainId]
+    return NETWORK_CIRCLE_ICON[chainId ?? ChainId.FANTOM]
   }, [chainId, type])
 
   if (Icon) return <Icon {...props} />

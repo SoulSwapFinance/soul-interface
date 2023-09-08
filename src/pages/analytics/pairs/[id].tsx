@@ -24,7 +24,7 @@ import { getChainColor, getChainColorCode } from 'constants/chains'
 import Typography from 'components/Typography'
 import { TridentHeader } from 'layouts/Trident'
 import { computePairAddress } from 'sdk/functions/computePairAddress'
-import { Currency, FACTORY_ADDRESS, NATIVE, Token, WNATIVE_ADDRESS } from 'sdk'
+import { ChainId, Currency, FACTORY_ADDRESS, NATIVE, Token, WNATIVE_ADDRESS } from 'sdk'
 import { Feature } from 'enums'
 import NetworkGuard from 'guards/Network'
 
@@ -62,7 +62,7 @@ function Pair({ inputCurrency, outputCurrency, pairAddress }: PairProps) {
   const router = useRouter()
   // const id = (inputCurrency && outputCurrency)
   //   ? inputCurrency && outputCurrency && computePairAddress({
-  //     factoryAddress: FACTORY_ADDRESS[chainId],
+  //     factoryAddress: FACTORY_ADDRESS[chainId ?? ChainId.FANTOM],
   //     tokenA: inputCurrency?.isToken ? inputCurrency : inputCurrency?.wrapped,
   //     tokenB: outputCurrency?.isToken ? outputCurrency : outputCurrency?.wrapped,
   //   }).toLowerCase() // pairAddress
@@ -125,19 +125,19 @@ function Pair({ inputCurrency, outputCurrency, pairAddress }: PairProps) {
   const token0Address = currency0?.isToken ? currency0.wrapped.address : currency0?.wrapped.address
   const token1Address = currency1?.isToken ? currency1.wrapped.address : currency1?.wrapped.address
   
-  const zeroIsETH = currency0?.wrapped.address == WNATIVE_ADDRESS[chainId]
-  const oneIsETH = currency1?.wrapped.address == WNATIVE_ADDRESS[chainId]
+  const zeroIsETH = currency0?.wrapped.address == WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM]
+  const oneIsETH = currency1?.wrapped.address == WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM]
   
-  const token0Symbol = zeroIsETH ? NATIVE[chainId].symbol : currency0?.wrapped.symbol
-  const token1Symbol = oneIsETH ? NATIVE[chainId].symbol : currency1?.wrapped.symbol
+  const token0Symbol = zeroIsETH ? NATIVE[chainId ?? ChainId.FANTOM].symbol : currency0?.wrapped.symbol
+  const token1Symbol = oneIsETH ? NATIVE[chainId ?? ChainId.FANTOM].symbol : currency1?.wrapped.symbol
 
   const containsETH = zeroIsETH || oneIsETH
 
   const PAIR_URL =
     containsETH && zeroIsETH
-      ? `${NATIVE[chainId].symbol}/${token1Address}`
+      ? `${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${token1Address}`
       : containsETH && oneIsETH
-        ? `${NATIVE[chainId].symbol}/${token0Address}`
+        ? `${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${token0Address}`
         : `${token0Address}/${token1Address}`
 
   // for info cards
@@ -299,7 +299,7 @@ function Pair({ inputCurrency, outputCurrency, pairAddress }: PairProps) {
                   <div className="flex items-center w-full justify-center space-x-1">
                       <Link href={`/analytics/tokens/${token0Address}`} passHref>
                       <div className={`overflow-hidden cursor-pointer overflow-ellipsis whitespace-nowrap text-${getChainColorCode(chainId)}`}>
-                          {shortenAddress(token0Address ?? WNATIVE_ADDRESS[chainId])}
+                          {shortenAddress(token0Address ?? WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM])}
                         </div>
                       </Link>
                       <a href={getExplorerLink(chainId, token0Address, 'token')} target="_blank" rel="noreferrer">
@@ -311,7 +311,7 @@ function Pair({ inputCurrency, outputCurrency, pairAddress }: PairProps) {
                     <div className="flex items-center w-full justify-center space-x-1">
                       <Link href={`/analytics/tokens/${token1Address}`} passHref>
                         <div className={`overflow-hidden cursor-pointer overflow-ellipsis whitespace-nowrap text-${getChainColorCode(chainId)}`}>
-                          {shortenAddress(token1Address ?? WNATIVE_ADDRESS[chainId])}
+                          {shortenAddress(token1Address ?? WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM])}
                         </div>
                       </Link>
                       <Link href={getExplorerLink(chainId, token1Address, 'token')} target="_blank" rel="noreferrer">

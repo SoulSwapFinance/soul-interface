@@ -36,7 +36,7 @@ const Summoner = () => {
   const { chainId } = useActiveWeb3React()
   const [pendingTx, setPendingTx] = useState(false)
   const [showBalances, openShowBalances] = useState(true)
-  const { tokenInfo } = useTokenInfo(SOUL_ADDRESS[chainId])
+  const { tokenInfo } = useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM])
   const soulPrice = Number(tokenInfo.price)
   const SummonerContract = useSummonerContract()
   const positions = usePositions()

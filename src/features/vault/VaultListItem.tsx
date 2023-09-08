@@ -13,7 +13,7 @@ import { CurrencyLogo } from 'components/CurrencyLogo'
 import { isMobile } from 'react-device-detect'
 import YieldDetails from 'components/YieldDetails'
 import IconWrapper from 'components/IconWrapper'
-import { WNATIVE_ADDRESS } from 'sdk'
+import { ChainId, WNATIVE_ADDRESS } from 'sdk'
 import { Info } from 'react-feather'
 import { usePriceHelperContract } from 'hooks/useContract'
 import { useSingleCallResult } from 'state/multicall/hooks'
@@ -50,10 +50,10 @@ const VaultListItem = ({ farm, ...rest }) => {
   function getTvl() {
     let lpPrice = 0
     let decimals = 18
-    if (farm.lpToken.toLowerCase() == SOUL[chainId].address.toLowerCase()) {
+    if (farm.lpToken.toLowerCase() == SOUL[chainId ?? ChainId.FANTOM].address.toLowerCase()) {
       lpPrice = Number(soulPrice)
       decimals = farm.pair.token0?.decimals
-    } else if (farm.lpToken.toLowerCase() == WNATIVE_ADDRESS[chainId].toLowerCase()) {
+    } else if (farm.lpToken.toLowerCase() == WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM].toLowerCase()) {
       lpPrice = Number(ftmPrice)
     } else {
       lpPrice = pairPrice

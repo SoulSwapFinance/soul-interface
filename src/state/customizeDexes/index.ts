@@ -18,11 +18,11 @@ const slice = createSlice({
   reducers: {
     updateAllDexes(state, { payload: { chainId, dexes } }: { payload: { chainId: ChainId; dexes: Dex[] } }) {
       if (!state.allDexes) state.allDexes = {}
-      state.allDexes[chainId] = dexes
+      state.allDexes[chainId ?? ChainId.FANTOM] = dexes
     },
     updateExcludeDex(state, { payload: { chainId, dexes } }: { payload: { chainId: ChainId; dexes: string[] } }) {
       if (!state.excludeDexes) state.excludeDexes = {}
-      state.excludeDexes[chainId] = dexes
+      state.excludeDexes[chainId ?? ChainId.FANTOM] = dexes
     },
   },
 })

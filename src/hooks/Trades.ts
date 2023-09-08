@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Pair, Token, Trade, TradeType } from 'sdk'
+import { ChainId, Currency, CurrencyAmount, Pair, Token, Trade, TradeType } from 'sdk'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
 
@@ -119,8 +119,8 @@ export function useTradeExactInV2(
   const debounceCurrencyAmountIn = useDebounce(currencyAmountIn, 300)
 
   const routerApi = useMemo((): string => {
-    return (chainId && NETWORKS_INFO[chainId].routerUri) || ''
-  }, [chainId])
+    return (chainId && NETWORKS_INFO[chainId ?? ChainId.FANTOM].routerUri) || ''
+  }, [chainId ?? ChainId.FANTOM])
 
   const ttl = useSelector<AppState, number>(state => state.user.userDeadline)
 

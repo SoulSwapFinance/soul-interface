@@ -27,7 +27,7 @@ export const CoffinBalances = ({ account }: { account: string }) => {
       dispatch(
         setBalancesState({
           currency: currency,
-          // currency.isNative ? NATIVE[chainId].symbol : row.values.asset.currency.address,
+          // currency.isNative ? NATIVE[chainId ?? ChainId.FANTOM].symbol : row.values.asset.currency.address,
           activeModal: ActiveModal.WITHDRAW,
         })
       )
@@ -54,7 +54,7 @@ export const WalletBalances: FC<{ chainId: ChainId, account: string }> = ({ chai
   const dispatch = useAppDispatch()
   const { data: _balances, loading } = useAllTokenBalancesWithLoadingIndicator()
 
-  const ethBalance = useCurrencyBalance(chainId, account ? account : undefined, chainId ? NATIVE[chainId] : undefined)
+  const ethBalance = useCurrencyBalance(chainId, account ? account : undefined, chainId ? NATIVE[chainId ?? ChainId.FANTOM] : undefined)
 
   const balances = useMemo(() => {
     const res = Object.values(_balances).reduce<Assets[]>((acc, cur) => {
@@ -75,7 +75,7 @@ export const WalletBalances: FC<{ chainId: ChainId, account: string }> = ({ chai
       const { currency } = row.values.asset
       dispatch(
         setBalancesState({
-          currency: currency, // currency.isNative ? NATIVE[chainId].symbol : row.values.asset.currency.address,
+          currency: currency, // currency.isNative ? NATIVE[chainId ?? ChainId.FANTOM].symbol : row.values.asset.currency.address,
           activeModal: ActiveModal.DEPOSIT,
         })
       )

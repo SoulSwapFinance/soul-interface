@@ -1,4 +1,4 @@
-import { Currency, Token } from 'sdk'
+import { ChainId, Currency, Token } from 'sdk'
 import { useMemo } from 'react'
 
 import { BASES_TO_CHECK_TRADES_AGAINST } from '../constants'
@@ -19,7 +19,7 @@ export function useAllCurrencyCombinations(currencyA?: Currency, currencyB?: Cur
   return useMemo(() => {
     const tokenA = currencyA?.wrapped
     const tokenB = currencyB?.wrapped
-    const bases: Token[] = chainId ? BASES_TO_CHECK_TRADES_AGAINST[chainId] : []
+    const bases: Token[] = chainId ? BASES_TO_CHECK_TRADES_AGAINST[chainId ?? ChainId.FANTOM] : []
 
     const basePairs: [Token, Token][] = []
     for (let i = 0; i < bases.length - 1; i++) {
@@ -61,7 +61,7 @@ export function useAllCurrencyCombinations(currencyA?: Currency, currencyB?: Cur
           .filter(([t0, t1]) => t0.address !== t1.address)
           .filter(([tokenA, tokenB]) => {
             if (!chainId) return true
-            const customBases = CUSTOM_BASES[chainId]
+            const customBases = CUSTOM_BASES[chainId ?? ChainId.FANTOM]
             if (!customBases) return true
 
             const customBasesA: Token[] | undefined = customBases[tokenA.address]

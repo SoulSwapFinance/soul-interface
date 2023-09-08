@@ -24,7 +24,7 @@ import { Button } from 'components/Button'
 // import Typography from 'components/Typography'
 // import { TridentHeader } from 'layouts/Trident'
 import { computePairAddress } from 'sdk/functions/computePairAddress'
-import { Currency, FACTORY_ADDRESS, NATIVE, Token, WNATIVE_ADDRESS } from 'sdk'
+import { ChainId, Currency, FACTORY_ADDRESS, NATIVE, Token, WNATIVE_ADDRESS } from 'sdk'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 
@@ -60,7 +60,7 @@ function PairChart({ inputCurrency, outputCurrency }: PairProps) {
   const router = useRouter()
   const id = (inputCurrency && outputCurrency)
     ? inputCurrency && outputCurrency && computePairAddress({
-      factoryAddress: FACTORY_ADDRESS[chainId],
+      factoryAddress: FACTORY_ADDRESS[chainId ?? ChainId.FANTOM],
       tokenA: inputCurrency?.isToken ? inputCurrency : inputCurrency?.wrapped,
       tokenB: outputCurrency?.isToken ? outputCurrency : outputCurrency?.wrapped,
     }).toLowerCase() // pairAddress
@@ -123,19 +123,19 @@ function PairChart({ inputCurrency, outputCurrency }: PairProps) {
   const token0Address = currency0?.isToken ? currency0.address : currency0?.wrapped.address
   const token1Address = currency1?.isToken ? currency1.address : currency1?.wrapped.address
   
-  const zeroIsETH = currency0?.wrapped.address == WNATIVE_ADDRESS[chainId]
-  const oneIsETH = currency1?.wrapped.address == WNATIVE_ADDRESS[chainId]
+  const zeroIsETH = currency0?.wrapped.address == WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM]
+  const oneIsETH = currency1?.wrapped.address == WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM]
   
-  const token0Symbol = zeroIsETH ? NATIVE[chainId].symbol : currency0?.wrapped.symbol
-  const token1Symbol = oneIsETH ? NATIVE[chainId].symbol : currency1?.wrapped.symbol
+  const token0Symbol = zeroIsETH ? NATIVE[chainId ?? ChainId.FANTOM].symbol : currency0?.wrapped.symbol
+  const token1Symbol = oneIsETH ? NATIVE[chainId ?? ChainId.FANTOM].symbol : currency1?.wrapped.symbol
 
   const containsETH = zeroIsETH || oneIsETH
 
   const PAIR_URL =
     containsETH && zeroIsETH
-      ? `${NATIVE[chainId].symbol}/${token1Address}`
+      ? `${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${token1Address}`
       : containsETH && oneIsETH
-        ? `${NATIVE[chainId].symbol}/${token0Address}`
+        ? `${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${token0Address}`
         : `${token0Address}/${token1Address}`
 
   // for info cards

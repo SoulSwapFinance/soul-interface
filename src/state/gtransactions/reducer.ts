@@ -13,6 +13,7 @@ import {
   SerializableTransactionReceipt,
   TransactionType,
 } from "./actions";
+import { ChainId } from "sdk";
 
 const now = () => new Date().getTime();
 
@@ -45,10 +46,10 @@ export default createReducer(initialState, (builder) =>
         transactions,
         { payload: { chainId, from, hash, summary, approval, type, order } }
       ) => {
-        if (transactions[chainId]?.[hash]) {
+        if (transactions[chainId ?? ChainId.FANTOM]?.[hash]) {
           throw Error("Attempted to add existing transaction.");
         }
-        const txs = transactions[chainId] ?? {};
+        const txs = transactions[chainId ?? ChainId.FANTOM] ?? {};
         txs[hash] = {
           hash,
           summary,
@@ -59,18 +60,18 @@ export default createReducer(initialState, (builder) =>
           addedTime: now(),
         };
 
-        transactions[chainId] = txs;
+        transactions[chainId ?? ChainId.FANTOM] = txs;
         if (order) saveOrder(chainId, from, order, true);
       }
     )
     .addCase(clearAllTransactions, (transactions, { payload: { chainId } }) => {
-      if (!transactions[chainId]) return;
-      transactions[chainId] = {};
+      if (!transactions[chainId ?? ChainId.FANTOM]) return;
+      transactions[chainId ?? ChainId.FANTOM] = {};
     })
     .addCase(
       checkedTransaction,
       (transactions, { payload: { chainId, hash, blockNumber } }) => {
-        const tx = transactions[chainId]?.[hash];
+        const tx = transactions[chainId ?? ChainId.FANTOM]?.[hash];
         if (!tx) {
           return;
         }
@@ -87,21 +88,21 @@ export default createReducer(initialState, (builder) =>
     .addCase(
       finalizeTransaction,
       (transactions, { payload: { hash, chainId, receipt } }) => {
-        const tx = transactions[chainId]?.[hash];
+        const tx = transactions[chainId ?? ChainId.FANTOM]?.[hash];
         if (!tx) {
           return;
         }
         tx.receipt = receipt;
         tx.confirmedTime = now();
 
-        if (transactions[chainId]?.[hash].type === "submission") {
+        if (transactions[chainId ?? ChainId.FANTOM]?.[hash].type === "submission") {
           confirmOrderSubmission(
             chainId,
             receipt.from,
             hash,
             receipt.status === 0 ? false : true
           );
-        } else if (transactions[chainId]?.[hash].type === "cancellation") {
+        } else if (transactions[chainId ?? ChainId.FANTOM]?.[hash].type === "cancellation") {
           confirmOrderCancellation(
             chainId,
             receipt.from,

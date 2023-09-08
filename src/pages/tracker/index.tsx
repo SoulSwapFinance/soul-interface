@@ -3,7 +3,7 @@ import { useActiveWeb3React } from 'services/web3'
 import Typography from 'components/Typography'
 import TokenTracker from 'token-tracker'
 // import { RPC } from 'connectors'
-import { SOUL_ADDRESS, USDC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
+import { ChainId, SOUL_ADDRESS, USDC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
 // import Eth from 'ethjs'
 import { Button } from 'components/Button'
 // import { TridentHeader } from 'layouts/Trident'
@@ -24,10 +24,10 @@ const Tracker = () => {
     // Tell it about the tokens to track:
     tokens: [
       {
-        address: SOUL_ADDRESS[chainId], // tokenAddress
+        address: SOUL_ADDRESS[chainId ?? ChainId.FANTOM], // tokenAddress
       },
       {
-        address: USDC_ADDRESS[chainId], // tokenAddress
+        address: USDC_ADDRESS[chainId ?? ChainId.FANTOM], // tokenAddress
       }
     ],
   })

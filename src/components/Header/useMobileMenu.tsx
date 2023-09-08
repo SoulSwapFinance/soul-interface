@@ -72,12 +72,12 @@ const useMobileMenu: UseMobileMenu = () => {
       {
         key: 'add-liquidity',
         title: `Add`,
-        link: `/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
+        link: `/add/${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${SOUL_ADDRESS[chainId ?? ChainId.FANTOM]}`,
       },
       {
         key: 'remove-liquidity',
         title: `Remove`,
-      link: `/remove/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
+      link: `/remove/${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${SOUL_ADDRESS[chainId ?? ChainId.FANTOM]}`,
       },
       {
         key: 'import',
@@ -254,7 +254,7 @@ const useMobileMenu: UseMobileMenu = () => {
       }
 
     return mainItems.filter((el) => Object.keys(el).length > 0)
-  }, [chainId])
+  }, [chainId ?? ChainId.FANTOM])
 }
 
 export default useMobileMenu

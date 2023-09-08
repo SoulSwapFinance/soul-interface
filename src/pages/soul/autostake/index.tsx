@@ -25,12 +25,12 @@ export default function AutoStake() {
   const [stakeValue, setStakeValue] = useState('0')
   const { account, chainId } = useActiveWeb3React()
   const [withdrawValue, setWithdrawValue] = useState('0')
-  const parsedDepositValue = tryParseAmount(stakeValue, SOUL[chainId])
-  const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[chainId])
-  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId]).tokenInfo.price)
+  const parsedDepositValue = tryParseAmount(stakeValue, SOUL[chainId ?? ChainId.FANTOM])
+  const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[chainId ?? ChainId.FANTOM])
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const AutoStakeContract = useAutoStakeContract()
 
-  const soulToken = new Token(chainId, getAddress(SOUL_ADDRESS[chainId]), 18, 'SOUL')
+  const soulToken = new Token(chainId, getAddress(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]), 18, 'SOUL')
   const soulBal = useCurrencyBalance(chainId, account, soulToken)
   // const enchantedBal = useCurrencyBalance(account, enchantedToken)
 
@@ -110,7 +110,7 @@ export default function AutoStake() {
 
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
     parsedStakeValue,
-    AUTO_STAKE_ADDRESS[chainId]
+    AUTO_STAKE_ADDRESS[chainId ?? ChainId.FANTOM]
   )
 
   const stakeError =

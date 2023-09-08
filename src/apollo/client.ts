@@ -12,7 +12,7 @@ export type SWPRSupportedChains = Exclude<ChainId, SWPRUnsupportedChains>
 
 export const chainSupportsSWPR = (chainId?: ChainId) => {
   if (!chainId) return false
-  return !!SOUL[chainId]
+  return !!SOUL[chainId ?? ChainId.FANTOM]
 }
 
 export const subgraphClientsUris: { [chainId: number]: string } = {

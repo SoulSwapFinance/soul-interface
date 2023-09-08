@@ -17,6 +17,7 @@ import EarnIcon from 'components/Icons/mobile/EarnIcon'
 import SwapIcon from 'components/Icons/exchange/SwapIcon'
 import VaultIcon from 'components/Icons/mobile/VaultIcon'
 import CauldronIcon from 'components/Icons/mobile/CauldronIcon'
+import { ChainId } from 'sdk'
 
 export interface BarItemLeaf {
   key: string
@@ -184,7 +185,7 @@ const useMenu: UseBar = () => {
     })
 
     return mainItems.filter((el) => Object.keys(el).length > 0)
-  }, [chainId])
+  }, [chainId ?? ChainId.FANTOM])
 }
 
 export default useMenu

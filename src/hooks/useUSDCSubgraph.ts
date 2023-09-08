@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, Price, Token, USD } from 'sdk'
+import { ChainId, Currency, CurrencyAmount, Price, Token, USD } from 'sdk'
 import { useNativePrice, useTokens } from 'services/graph' // useTridentTokens
 import { useActiveWeb3React } from 'services/web3'
 import { useMemo } from 'react'
@@ -14,7 +14,7 @@ export function useUSDCPricesSubgraph(
 ): { [address: string]: Price<Currency, Token> } | undefined {
   const { chainId } = useActiveWeb3React()
 
-  const stablecoin = chainId && USD[chainId] ? CurrencyAmount.fromRawAmount(USD[chainId], 0).currency : undefined
+  const stablecoin = chainId && USD[chainId ?? ChainId.FANTOM] ? CurrencyAmount.fromRawAmount(USD[chainId ?? ChainId.FANTOM], 0).currency : undefined
 
   const ethPrice = useNativePrice({ chainId })
   const tokensLegacy = useTokens({

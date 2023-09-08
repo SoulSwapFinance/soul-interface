@@ -3,7 +3,7 @@ import { ERC20_ABI } from "constants/abis/erc20"
 import { getContract } from "functions/contract"
 import { useActiveWeb3React } from "services/web3"
 import { useMemo } from "react"
-import { WNATIVE } from "sdk"
+import { ChainId, WNATIVE } from "sdk"
 import ERC20_BYTES32_ABI from 'constants/abis/erc20_bytes32.json'
 import PAIR_ABI from '../constants/abis/pair.json'
 import WETH9_ABI from '../constants/abis/weth.json'
@@ -30,7 +30,7 @@ export function useContract(address: string | undefined, ABI: any, withSignerIfP
   
   export function useWETH9Contract(withSignerIfPossible?: boolean): Contract | null {
     const { chainId } = useActiveWeb3React()
-    return useContract(chainId ? WNATIVE[chainId].address : undefined, WETH9_ABI, withSignerIfPossible)
+    return useContract(chainId ? WNATIVE[chainId ?? ChainId.FANTOM].address : undefined, WETH9_ABI, withSignerIfPossible)
   }
   
   export function useBytes32TokenContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {

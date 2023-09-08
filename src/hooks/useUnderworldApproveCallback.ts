@@ -1,6 +1,6 @@
 import { splitSignature } from '@ethersproject/bytes'
 import { AddressZero, HashZero } from '@ethersproject/constants'
-import { UNDERWORLD_ADDRESS } from 'sdk'
+import { ChainId, UNDERWORLD_ADDRESS } from 'sdk'
 import UnderworldCooker, { signMasterContractApproval } from 'entities/UnderworldCooker'
 import { useActiveWeb3React } from 'services/web3'
 import { USER_REJECTED_TX } from 'services/web3/WalletError'
@@ -58,7 +58,7 @@ function useUnderworldApproveCallback(): [
     setUnderworldPermit(undefined)
   }, [account, chainId])
 
-  const masterContract = chainId && UNDERWORLD_ADDRESS[chainId]
+  const masterContract = chainId && UNDERWORLD_ADDRESS[chainId ?? ChainId.FANTOM]
 
   const pendingApproval = useUnderworldApprovalPending()
   const currentAllowed = useCoffinMasterContractAllowed(masterContract, account || AddressZero)

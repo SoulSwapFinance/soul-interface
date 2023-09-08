@@ -3,6 +3,7 @@ import { NativeCurrency } from '../NativeCurrency'
 import { Token } from '../Token'
 import { WNATIVE } from '../../constants/tokens'
 import invariant from 'tiny-invariant'
+import { ChainId } from 'sdk'
 
 export class Avalanche extends NativeCurrency {
   protected constructor(chainId: number) {
@@ -18,7 +19,7 @@ export class Avalanche extends NativeCurrency {
   private static _cache: { [chainId: number]: Avalanche } = {}
 
   public static onChain(chainId: number): Avalanche {
-    return this._cache[chainId] ?? (this._cache[chainId] = new Avalanche(chainId))
+    return this._cache[chainId ?? ChainId.FANTOM] ?? (this._cache[chainId ?? ChainId.FANTOM] = new Avalanche(chainId))
   }
 
   public equals(other: Currency): boolean {

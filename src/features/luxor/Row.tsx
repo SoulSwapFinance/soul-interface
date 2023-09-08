@@ -164,7 +164,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
 
     const swapRoute = useCallback(() => {
         // wrapped-only
-        bond.assetAddress == WFTM_ADDRESS[chainId]
+        bond.assetAddress == WFTM_ADDRESS[chainId ?? ChainId.FANTOM]
             // implies: pair
             || bond.token2Address
             // use generic swap path.
@@ -266,7 +266,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
         if (!account) {
         } else {
             // Checks if BondContractAddress can move tokens
-            const amount = await erc20Allowance(account, LUX_HELPER_ADDRESS[chainId])
+            const amount = await erc20Allowance(account, LUX_HELPER_ADDRESS[chainId ?? ChainId.FANTOM])
             if (amount > 0) setApproved(true)
             return amount
         }
@@ -280,7 +280,7 @@ const LuxorRowRender = ({ pid, stakeToken, assetAddress, assetName, term, bondAd
         if (!account) {
         } else {
             try {
-                const tx = await erc20Approve(LUX_HELPER_ADDRESS[chainId])
+                const tx = await erc20Approve(LUX_HELPER_ADDRESS[chainId ?? ChainId.FANTOM])
                 await tx?.wait().then(await fetchApproval())
             } catch (e) {
                 // alert(e.message)

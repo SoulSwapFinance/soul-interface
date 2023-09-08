@@ -104,8 +104,8 @@ function pairKey(token0Address: string, token1Address: string) {
 }
 
 export const getFavoriteTokenDefault = (chainId: ChainId) => ({
-  addresses: COMMON_BASES[chainId].map(e => e.address),
-  // addresses: SUGGESTED_BASES[chainId].map(e => e.address),
+  addresses: COMMON_BASES[chainId ?? ChainId.FANTOM].map(e => e.address),
+  // addresses: SUGGESTED_BASES[chainId ?? ChainId.FANTOM].map(e => e.address),
   includeNativeToken: true,
 })
 
@@ -155,8 +155,8 @@ export default createReducer(initialState, (builder) =>
       state.timestamp = currentTimestamp()
     })
     .addCase(removeSerializedToken, (state, { payload: { address, chainId } }) => {
-      state.tokens[chainId] = state.tokens[chainId] || {}
-      delete state.tokens[chainId][address]
+      state.tokens[chainId ?? ChainId.FANTOM] = state.tokens[chainId ?? ChainId.FANTOM] || {}
+      delete state.tokens[chainId ?? ChainId.FANTOM][address]
       state.timestamp = currentTimestamp()
     })
     .addCase(addSerializedPair, (state, { payload: { serializedPair } }) => {
@@ -165,8 +165,8 @@ export default createReducer(initialState, (builder) =>
         serializedPair.token0.address !== serializedPair.token1.address
       ) {
         const chainId = serializedPair.token0.chainId
-        state.pairs[chainId] = state.pairs[chainId] || {}
-        state.pairs[chainId][pairKey(serializedPair.token0.address, serializedPair.token1.address)] = serializedPair
+        state.pairs[chainId ?? ChainId.FANTOM] = state.pairs[chainId ?? ChainId.FANTOM] || {}
+        state.pairs[chainId ?? ChainId.FANTOM][pairKey(serializedPair.token0.address, serializedPair.token1.address)] = serializedPair
       }
       state.timestamp = currentTimestamp()
     })
@@ -174,9 +174,9 @@ export default createReducer(initialState, (builder) =>
       { payload: { serializedPair }}
      ) => {
       const chainId = serializedPair.token0.chainId
-      if (state.pairs[chainId]) {
+      if (state.pairs[chainId ?? ChainId.FANTOM]) {
         // just delete both keys if either exists
-        delete state.pairs[chainId][pairKey(serializedPair.token0.address, serializedPair.token1.address)]
+        delete state.pairs[chainId ?? ChainId.FANTOM][pairKey(serializedPair.token0.address, serializedPair.token1.address)]
       }
       state.timestamp = currentTimestamp()
     })
@@ -187,10 +187,10 @@ export default createReducer(initialState, (builder) =>
       state.userUseOpenMev = action.payload.userUseOpenMev
     })
     .addCase(toggleLiveChart, (state, { payload: { chainId } }) => {
-      if (typeof state.showLiveCharts?.[chainId] !== 'boolean') {
+      if (typeof state.showLiveCharts?.[chainId ?? ChainId.FANTOM] !== 'boolean') {
         state.showLiveCharts = { ...defaultShowLiveCharts }
       }
-      state.showLiveCharts[chainId] = !state.showLiveCharts[chainId]
+      state.showLiveCharts[chainId ?? ChainId.FANTOM] = !state.showLiveCharts[chainId ?? ChainId.FANTOM]
     })
     .addCase(toggleProLiveChart, state => {
       state.showProLiveChart = !state.showProLiveChart

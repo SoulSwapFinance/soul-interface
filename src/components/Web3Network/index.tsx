@@ -10,7 +10,8 @@ import { useRouter } from 'next/router'
 // import useIsWindowVisible from 'hooks/useIsWindowVisible'
 // import usePrevious from 'hooks/usePrevious'
 import { ApplicationModal } from 'state/application/reducer'
-import { getChainColor, getChainColorCode } from 'constants/chains'
+// import { getChainColor, getChainColorCode } from 'constants/chains'
+import { ChainId } from 'sdk'
 
 function Web3Network() {
   const { chainId, library } = useActiveWeb3React()
@@ -63,7 +64,7 @@ function Web3Network() {
     >
       <div className={`grid items-center grid-flow-col justify-center h-[24px] w-[24px] text-sm rounded pointer-events-auto auto-cols-max text-secondary`}>
         <Image 
-          src={NETWORK_ICON[chainId]} 
+          src={NETWORK_ICON[chainId ?? ChainId.FANTOM]} 
           alt="Switch Network" 
           className={``}
           width={24}
@@ -75,7 +76,7 @@ function Web3Network() {
         }}
       />
       </div>
-      {/* { NETWORK_LABEL[chainId] } */}
+      {/* { NETWORK_LABEL[chainId ?? ChainId.FANTOM] } */}
     </div>
   )
 }

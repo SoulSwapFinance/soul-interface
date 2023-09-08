@@ -2,7 +2,7 @@ import React, { ReactNode, useMemo } from 'react'
 import { ArrowsUpDownIcon, 
   // LinkIcon, SparklesIcon, PresentationChartLineIcon, SunIcon, CurrencyDollarIcon, UserGroupIcon, 
   } from '@heroicons/react/24/outline'
-import { Currency, NATIVE, SOUL_ADDRESS } from 'sdk'
+import { ChainId, Currency, NATIVE, SOUL_ADDRESS } from 'sdk'
 import { PoolIcon, WalletIcon } from 'components/Icon'
 import { Feature } from 'enums'
 import { classNames, featureEnabled } from 'functions'
@@ -32,7 +32,7 @@ const getQuery = (input?: Currency, output?: Currency) => {
   const { chainId } = useActiveWeb3React()
   if (!input && !output) return
   if (input && !output) {
-    return { inputCurrency: input || NATIVE[chainId].symbol }
+    return { inputCurrency: input || NATIVE[chainId ?? ChainId.FANTOM].symbol }
   } else if (input && output) {
     return { inputCurrency: input, outputCurrency: output }
   }
@@ -73,12 +73,12 @@ if (featureEnabled(Feature.AMM, chainId)) {
     key: 'swap',
     title: `Swap`,
     icon: <ArrowsUpDownIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
-    link: `/exchange/swap/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
+    link: `/exchange/swap/${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${SOUL_ADDRESS[chainId ?? ChainId.FANTOM]}`,
     // items: [
       // {
       //   key: 'exchange',
       //   title: `Swap`,
-      //   link: `/swap/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
+      //   link: `/swap/${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${SOUL_ADDRESS[chainId ?? ChainId.FANTOM]}`,
       // },
       // {
       //   key: 'aggregator',
@@ -88,7 +88,7 @@ if (featureEnabled(Feature.AMM, chainId)) {
       // {
       //   key: 'limit',
       //   title: `Limit`,
-      //   link: `/limit/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
+      //   link: `/limit/${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${SOUL_ADDRESS[chainId ?? ChainId.FANTOM]}`,
       // }
     // ],
   }
@@ -99,12 +99,12 @@ if (featureEnabled(Feature.LIQUIDITY, chainId)) {
     key: 'liquidity',
     title: `Liquidity`,
     icon: <PoolIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
-    link: `/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
+    link: `/add/${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${SOUL_ADDRESS[chainId ?? ChainId.FANTOM]}`,
     // items: [
     //   {
     //     key: 'pool',
     //     title: `Pool`,
-    //     link: `/add/${NATIVE[chainId].symbol}/${SOUL_ADDRESS[chainId]}`,
+    //     link: `/add/${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${SOUL_ADDRESS[chainId ?? ChainId.FANTOM]}`,
     //   },
     //   {
     //     key: 'import',
@@ -195,7 +195,7 @@ let dataMenu = {
     //   mainItems.push(exploreMenu)
 
     return mainItems.filter((el) => Object.keys(el).length > 0)
-  }, [chainId])
+  }, [chainId ?? ChainId.FANTOM])
 }
 
 export default useMenu

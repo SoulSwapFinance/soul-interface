@@ -12,7 +12,7 @@ import StableInputPanel from 'components/StableInputPanel'
 import { AutoColumn } from 'components/Column'
 import { ApprovalState, useApproveCallback, useWrappedLumensContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
-import { Token, LUM_ADDRESS } from 'sdk'
+import { Token, LUM_ADDRESS, ChainId } from 'sdk'
 import { WLUM_ADDRESS } from 'constants/addresses'
 import { tryParseAmount } from 'functions'
 import { useCurrencyBalance } from 'state/wallet/hooks'
@@ -36,8 +36,8 @@ export default function Stablecoin() {
   const { account, chainId } = useActiveWeb3React()
   // const { data } = useStablecoin()
 
-  const lumensToken = new Token(chainId, getAddress(LUM_ADDRESS[chainId]), 9, 'LUM')
-  const wlumToken = new Token(chainId, getAddress(WLUM_ADDRESS[chainId]), 9, 'WLUM')
+  const lumensToken = new Token(chainId, getAddress(LUM_ADDRESS[chainId ?? ChainId.FANTOM]), 9, 'LUM')
+  const wlumToken = new Token(chainId, getAddress(WLUM_ADDRESS[chainId ?? ChainId.FANTOM]), 9, 'WLUM')
   // const redeemClaimAmount = useRedeemClaimAmount(wlumToken)
 
   // const LumensContract = useLumensContract()
@@ -54,11 +54,11 @@ export default function Stablecoin() {
 
   const [wrapApprovalState, wrapApprove] = useApproveCallback(
     parsedStakeValue,
-    WLUM_ADDRESS[chainId]
+    WLUM_ADDRESS[chainId ?? ChainId.FANTOM]
   )
   const [unwrapApprovalState, unwrapApprove] = useApproveCallback(
     parsedUnwrapValue,
-    WLUM_ADDRESS[chainId]
+    WLUM_ADDRESS[chainId ?? ChainId.FANTOM]
   )
 
   const wrapError = !parsedStakeValue

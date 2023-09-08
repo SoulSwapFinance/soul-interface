@@ -3,6 +3,7 @@ import { NativeCurrency } from '../NativeCurrency'
 import { Token } from '../Token'
 import { WNATIVE } from '../../constants/tokens'
 import invariant from 'tiny-invariant'
+import { ChainId } from 'sdk'
 
 export class Polygon extends NativeCurrency {
   protected constructor(chainId: number) {
@@ -18,7 +19,7 @@ export class Polygon extends NativeCurrency {
   private static _cache: { [chainId: number]: Polygon } = {}
 
   public static onChain(chainId: number): Polygon {
-    return this._cache[chainId] ?? (this._cache[chainId] = new Polygon(chainId))
+    return this._cache[chainId ?? ChainId.FANTOM] ?? (this._cache[chainId ?? ChainId.FANTOM] = new Polygon(chainId))
   }
 
   public equals(other: Currency): boolean {

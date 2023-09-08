@@ -1,4 +1,4 @@
-import { Currency, NATIVE, WNATIVE, currencyEquals } from '../../sdk'
+import { ChainId, Currency, NATIVE, WNATIVE, currencyEquals } from '../../sdk'
 
 import { AutoColumn } from '../../components/Column'
 import { CurrencyLogo } from '../../components/CurrencyLogo'
@@ -38,21 +38,21 @@ export default function RemoveLiquidityReceiveDetails({
             <RowBetween className="text-sm">
               {hasWETH ? (
                 <Link href={`/remove/${currencyId(currencyA)}/${currencyId(currencyB)}`}>
-                  Receive {WNATIVE[chainId].symbol}
+                  Receive {WNATIVE[chainId ?? ChainId.FANTOM].symbol}
                 </Link>
               ) : hasETH ? (
                 <Link
                   href={`/remove/${
-                    currencyA && currencyEquals(currencyA, WNATIVE[chainId])
-                      ? NATIVE[chainId].symbol
+                    currencyA && currencyEquals(currencyA, WNATIVE[chainId ?? ChainId.FANTOM])
+                      ? NATIVE[chainId ?? ChainId.FANTOM].symbol
                       : currencyId(currencyA)
                   }/${
-                    currencyB && currencyEquals(currencyB, WNATIVE[chainId])
-                      ? NATIVE[chainId].symbol
+                    currencyB && currencyEquals(currencyB, WNATIVE[chainId ?? ChainId.FANTOM])
+                      ? NATIVE[chainId ?? ChainId.FANTOM].symbol
                       : currencyId(currencyB)
                   }`}
                 >
-                  Receive {NATIVE[chainId].symbol}
+                  Receive {NATIVE[chainId ?? ChainId.FANTOM].symbol}
                 </Link>
               ) : null}
             </RowBetween>

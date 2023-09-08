@@ -6,6 +6,7 @@ import { AppState } from 'state'
 import { useAppDispatch } from 'state/hooks'
 
 import { updateExcludeDex } from '.'
+import { ChainId } from 'sdk'
 
 export const useAllDexes = () => {
   const { chainId } = useActiveWeb3React()
@@ -13,7 +14,7 @@ export const useAllDexes = () => {
 
   return useMemo(() => {
     if (!chainId) return []
-    return dexes[chainId]
+    return dexes[chainId ?? ChainId.FANTOM]
   }, [chainId, dexes])
 }
 
@@ -26,7 +27,7 @@ export const useExcludeDexes = (): [string[], (value: string[]) => void] => {
 
   const excludeDexesByChainId: string[] = useMemo(() => {
     if (!chainId) return []
-    return excludeDexes?.[chainId] || []
+    return excludeDexes?.[chainId ?? ChainId.FANTOM] || []
   }, [chainId, excludeDexes])
 
   const setExcludeDexes = useCallback(

@@ -3,6 +3,7 @@ import { NativeCurrency } from '../NativeCurrency'
 import { Token } from '../Token'
 import { WETH9 } from '../../constants/tokens'
 import invariant from 'tiny-invariant'
+import { ChainId } from 'sdk'
 
 /**
  * Ether is the main usage of a 'native' currency, i.e. for Ethereum mainnet and all testnets
@@ -21,7 +22,7 @@ export class Ether extends NativeCurrency {
   private static _etherCache: { [chainId: number]: Ether } = {}
 
   public static onChain(chainId: number): Ether {
-    return this._etherCache[chainId] ?? (this._etherCache[chainId] = new Ether(chainId))
+    return this._etherCache[chainId ?? ChainId.FANTOM] ?? (this._etherCache[chainId ?? ChainId.FANTOM] = new Ether(chainId))
   }
 
   public equals(other: Currency): boolean {

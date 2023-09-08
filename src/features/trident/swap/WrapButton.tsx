@@ -1,4 +1,4 @@
-import { NATIVE, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
+import { ChainId, NATIVE, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import { Button } from 'components/Button'
 import Dots from 'components/Dots'
 import { useDerivedTridentSwapContext } from 'features/trident/swap/DerivedTradeContext'
@@ -33,17 +33,17 @@ const WrapButton: FC = () => {
 
       return addTransaction(txReceipt, {
         summary: parsedAmounts?.[0]?.currency.isNative
-          ? `Wrap ${parsedAmounts?.[0].toSignificant(6)} ${NATIVE[chainId].symbol} to ${WNATIVE[chainId].symbol}`
-          : `Unwrap ${parsedAmounts?.[0].toSignificant(6)} ${WNATIVE[chainId].symbol} to ${NATIVE[chainId].symbol}`,
+          ? `Wrap ${parsedAmounts?.[0].toSignificant(6)} ${NATIVE[chainId ?? ChainId.FANTOM].symbol} to ${WNATIVE[chainId ?? ChainId.FANTOM].symbol}`
+          : `Unwrap ${parsedAmounts?.[0].toSignificant(6)} ${WNATIVE[chainId ?? ChainId.FANTOM].symbol} to ${NATIVE[chainId ?? ChainId.FANTOM].symbol}`,
       })
     }
 
     if (!spendFromWallet && receiveToWallet) {
-      return await withdraw(WNATIVE_ADDRESS[chainId], parsedAmounts?.[0]?.quotient.toString().toBigNumber(0))
+      return await withdraw(WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM], parsedAmounts?.[0]?.quotient.toString().toBigNumber(0))
     }
 
     if (spendFromWallet && !receiveToWallet) {
-      return await deposit(WNATIVE_ADDRESS[chainId], parsedAmounts?.[0]?.quotient.toString().toBigNumber(0))
+      return await deposit(WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM], parsedAmounts?.[0]?.quotient.toString().toBigNumber(0))
     }
   }
 

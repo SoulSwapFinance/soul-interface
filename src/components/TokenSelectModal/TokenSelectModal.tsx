@@ -33,7 +33,7 @@ const TokenSelectModal: React.FC<any> = ({
   // const { color } = useContext(ThemeContext);
   const allAssets = includeNative
   ? [{ ...FANTOM_NATIVE, balanceOf: ftmBalance }, ...assets]
-    // ? [{ ...NATIVE[chainId], balanceOf: ftmBalance }, ...assets]
+    // ? [{ ...NATIVE[chainId ?? ChainId.FANTOM], balanceOf: ftmBalance }, ...assets]
     : assets;
   const erc20Assets = allAssets?.filter((asset: any) => {
     return asset?.decimals > 0;

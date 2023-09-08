@@ -12,6 +12,7 @@ import { useEffect, useMemo, useRef } from 'react'
 // import { constants, default as chunkCalls } from '../../functions/calls'
 import { errorFetchingMulticallResults, fetchingMulticallResults, updateMulticallResults } from './actions'
 import { Call, parseCallKey } from './utils'
+import { ChainId } from 'sdk'
 
 const DEFAULT_GAS_REQUIRED = 1_000_000
 
@@ -72,7 +73,7 @@ export function activeListeningKeys(
   chainId?: number
 ): { [callKey: string]: number } {
   if (!allListeners || !chainId) return {}
-  const listeners = allListeners[chainId]
+  const listeners = allListeners[chainId ?? ChainId.FANTOM]
   if (!listeners) return {}
 
   return Object.keys(listeners).reduce<{ [callKey: string]: number }>((memo, callKey) => {
@@ -105,14 +106,14 @@ export function outdatedListeningKeys(
   latestBlockNumber: number | undefined
 ): string[] {
   if (!chainId || !latestBlockNumber) return []
-  const results = callResults[chainId]
+  const results = callResults[chainId ?? ChainId.FANTOM]
   // no results at all, load everything
   if (!results) return Object.keys(listeningKeys)
 
   return Object.keys(listeningKeys).filter((callKey) => {
     const blocksPerFetch = listeningKeys[callKey]
 
-    const data = callResults[chainId][callKey]
+    const data = callResults[chainId ?? ChainId.FANTOM][callKey]
     // no data, must fetch
     if (!data) return true
 

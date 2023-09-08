@@ -140,7 +140,7 @@ const allowedSlippage = INITIAL_ALLOWED_SLIPPAGE
     inputError = inputError ?? `Enter Recipient`
   } else {
       // todo: verify below
-    // if (BAD_RECIPIENT_ADDRESSES[chainId] == formattedTo) 
+    // if (BAD_RECIPIENT_ADDRESSES[chainId ?? ChainId.FANTOM] == formattedTo) 
     {
       inputError = inputError ?? `Invalid Recipient`
     }

@@ -1,4 +1,4 @@
-import { CurrencyAmount, Pair, SOUL, SOUL_ADDRESS, Token } from 'sdk'
+import { ChainId, CurrencyAmount, Pair, SOUL, SOUL_ADDRESS, Token } from 'sdk'
 
 import { useMemo } from 'react' // useCallback
 
@@ -65,7 +65,7 @@ export function useAllMiningCampaigns(pair?: Pair, dataFilter?: PairsFilterType)
       // singleSidedLoading ||
       !chainId ||
       // campaignLoading ||
-      !SOUL[chainId]
+      !SOUL[chainId ?? ChainId.FANTOM]
       // || singleSidedCampaignsError ||
       // campaignError ||
       // !singleSidedCampaigns ||
@@ -143,8 +143,8 @@ export function useAllMiningCampaigns(pair?: Pair, dataFilter?: PairsFilterType)
 
       if (
         dataFilter !== PairsFilterType.SOULSWAP ||
-        SOUL_ADDRESS[chainId].toLowerCase() === token0.address ||
-        SOUL_ADDRESS[chainId].toLowerCase() === token1.address
+        SOUL_ADDRESS[chainId ?? ChainId.FANTOM].toLowerCase() === token0.address ||
+        SOUL_ADDRESS[chainId ?? ChainId.FANTOM].toLowerCase() === token1.address
       ) {
         if (isActive) {
             // TODO: UPDATE BELOW //
@@ -215,7 +215,7 @@ export function useAllMiningCampaigns(pair?: Pair, dataFilter?: PairsFilterType)
       const isExpired = false
       // parseInt(campaign.endsAt) < timestamp || parseInt(campaign.endsAt) > memoizedLowerTimeLimit
 
-      if (dataFilter !== PairsFilterType.SOULSWAP || SOUL[chainId].equals(stakeToken)) {
+      if (dataFilter !== PairsFilterType.SOULSWAP || SOUL[chainId ?? ChainId.FANTOM].equals(stakeToken)) {
         if (hasStake || singleSidedStakeCampaign.currentlyActive 
             // TODO: UPDATE BELOW //
             // || isUpcoming(singleSidedStakeCampaign.startsAt)

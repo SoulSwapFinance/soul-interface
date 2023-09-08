@@ -51,7 +51,7 @@ export class Token extends AbstractCurrency {
   }
 
   public static getNativeWrapper(chainId: ChainId): Token {
-    return WNATIVE[chainId].wrapped
+    return WNATIVE[chainId ?? ChainId.FANTOM].wrapped
   }
 
   public static isNativeWrapper(token: Token): boolean {

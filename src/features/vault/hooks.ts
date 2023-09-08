@@ -1,4 +1,4 @@
-import { CurrencyAmount, JSBI } from '../../sdk'
+import { ChainId, CurrencyAmount, JSBI } from '../../sdk'
 import { Chef } from './enum'
 import { SOUL } from '../../constants'
 import { NEVER_RELOAD, useSingleCallResult, useSingleContractMultipleData } from '../../state/multicall/hooks'
@@ -64,7 +64,7 @@ export function usePendingSoul(farm) {
 
   const amount = value ? JSBI.BigInt(value.toString()) : undefined
 
-  return amount ? CurrencyAmount.fromRawAmount(SOUL[chainId], amount) : undefined
+  return amount ? CurrencyAmount.fromRawAmount(SOUL[chainId ?? ChainId.FANTOM], amount) : undefined
 }
 
 export function usePendingToken(farm, contract) {

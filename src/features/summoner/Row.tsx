@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { ethers } from 'ethers'
 import { useActiveWeb3React } from 'services/web3'
-import { NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, SUMMONER_ADDRESS, Token, WNATIVE } from 'sdk'
+import { ChainId, NATIVE, ROUTER_ADDRESS, SOUL_ADDRESS, SUMMONER_ADDRESS, Token, WNATIVE } from 'sdk'
 import { useTokenContract, useSummonerContract, useZapperContract } from 'hooks/useContract'
 import useApprove from 'hooks/useApprove'
 import { Tab } from '@headlessui/react'
@@ -55,7 +55,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const [withdrawValue, setWithdrawValue] = useState('0')
     const [depositValue, setDepositValue] = useState('0')
     const [zapValue, setZapValue] = useState('0')
-    const [zapTokenAddress, setZapTokenAddress] = useState(SOUL_ADDRESS[chainId])
+    const [zapTokenAddress, setZapTokenAddress] = useState(SOUL_ADDRESS[chainId ?? ChainId.FANTOM])
 
     const SoulSummonerContract = useSummonerContract()
     const ZapContract = useZapperContract()
@@ -140,7 +140,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const token0 = new Token(chainId, token0Address, token0Decimals)
     const token1 = new Token(chainId, token1Address, token1Decimals)
 
-    const nativeToken0 = farm.token0Symbol == WNATIVE[chainId].symbol
+    const nativeToken0 = farm.token0Symbol == WNATIVE[chainId ?? ChainId.FANTOM].symbol
 
     // ZAP ADD-ONS //
     const tokenContract = useTokenContract(zapTokenAddress)
@@ -197,7 +197,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
             // alert('Connect Wallet')
         } else {
             // Checks if SoulSummonerContract can move tokens
-            const amount = await erc20Allowance(account, SUMMONER_ADDRESS[chainId])
+            const amount = await erc20Allowance(account, SUMMONER_ADDRESS[chainId ?? ChainId.FANTOM])
             if (amount > 0) setApproved(true)
             return amount
         }
@@ -222,7 +222,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
             // alert('Connect Wallet')
         } else {
             try {
-                const tx = await erc20Approve(SUMMONER_ADDRESS[chainId])
+                const tx = await erc20Approve(SUMMONER_ADDRESS[chainId ?? ChainId.FANTOM])
                 await tx?.wait().then(await fetchApproval())
             } catch (e) {
                 // alert(e.message)
@@ -320,7 +320,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const handleZap = async (zapTokenAddress, lpAddress) => {
         try {
             let tx
-            tx = await ZapContract?.zapInToken(zapTokenAddress, Number(zapValue).toFixed(zapTokenDecimals).toBigNumber(zapTokenDecimals), lpAddress, ROUTER_ADDRESS[chainId], account)
+            tx = await ZapContract?.zapInToken(zapTokenAddress, Number(zapValue).toFixed(zapTokenDecimals).toBigNumber(zapTokenDecimals), lpAddress, ROUTER_ADDRESS[chainId ?? ChainId.FANTOM], account)
             await tx?.wait()
         } catch (e) {
             console.log(e)
@@ -665,7 +665,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 {/* CREATE ASSET PAIR */}
                                 {(nativeToken0 && isActive) ? (
                                     <NavLink
-                                        href={`/exchange/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
+                                        href={`/exchange/add/${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${farm.token1Address}`}
                                     >
                                         <SubmitButton
                                             height="2rem"
@@ -680,7 +680,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                                 color={buttonTextColor}
                                                 href=
                                                 // [if] token0 is the native token, then only use the address of token1 [else] token0 address
-                                                {`/exchange/add/${NATIVE[chainId].symbol}/${farm.token1Address}`}
+                                                {`/exchange/add/${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${farm.token1Address}`}
                                             >
                                                 <div className="flex text-lg gap-2">
                                                     <PlusCircleIcon width={26} className={classNames(`text-white`)} />

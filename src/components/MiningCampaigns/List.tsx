@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { LiquidityMiningCampaign, SingleSidedLiquidityMiningCampaign } from 'sdk'
+import { ChainId, LiquidityMiningCampaign, SingleSidedLiquidityMiningCampaign } from 'sdk'
 
 import { Box, Flex, Text } from 'rebass'
 import styled from 'styled-components'
@@ -56,8 +56,8 @@ export default function List({ loading, items = [], loadingItems }: LiquidityMin
   const [responsiveItemsPerPage, setResponsiveItemsPerPage] = useState(9)
   const itemsPage = usePage(items, responsiveItemsPerPage, page, 0)
   const { chainId } = useActiveWeb3React()
-  const { loading: loadingNativeCurrencyUsdPrice, nativeCurrencyUSDPrice } = useNativePrice[chainId]
-  const CURRENCY_AMOUNT = CurrencyAmount.fromRawAmount(USDC[chainId], 100_000e6)
+  const { loading: loadingNativeCurrencyUsdPrice, nativeCurrencyUSDPrice } = useNativePrice[chainId ?? ChainId.FANTOM]
+  const CURRENCY_AMOUNT = CurrencyAmount.fromRawAmount(USDC[chainId ?? ChainId.FANTOM], 100_000e6)
 
   useEffect(() => {
     if (!width) return

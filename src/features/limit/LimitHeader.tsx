@@ -26,11 +26,11 @@ export default function LimitHeader({ inputCurrency, outputCurrency }): JSX.Elem
       <NavLink
         className={isExchange ? classNames("font-bold text-high-emphesis", `bg-${getChainColorCode(chainId)} rounded-2xl`) : ''}
         // activeClassName={classNames("font-bold text-high-emphesis rounded-2xl", `bg-${getChainColorCode(chainId)}`)}
-        // href={`/exchange/swap?inputCurrency=${input ? currencyId(input) : NATIVE[chainId].symbol}&outputCurrency=${output ? currencyId(output) : SOUL_ADDRESS[chainId]}`}
+        // href={`/exchange/swap?inputCurrency=${input ? currencyId(input) : NATIVE[chainId ?? ChainId.FANTOM].symbol}&outputCurrency=${output ? currencyId(output) : SOUL_ADDRESS[chainId ?? ChainId.FANTOM]}`}
         href={
           inputCurrency && outputCurrency ?
             `/exchange/swap?inputCurrency=${currencyId(inputCurrency)}&outputCurrency=${currencyId(outputCurrency)}`
-            : `/exchange/swap?inputCurrency=${NATIVE[chainId].symbol}&outputCurrency=${soulEnabled ? SOUL_ADDRESS[chainId] : USDC_ADDRESS[chainId]}`
+            : `/exchange/swap?inputCurrency=${NATIVE[chainId ?? ChainId.FANTOM].symbol}&outputCurrency=${soulEnabled ? SOUL_ADDRESS[chainId ?? ChainId.FANTOM] : USDC_ADDRESS[chainId ?? ChainId.FANTOM]}`
         }
         // href={`/exchange/swap?inputCurrency=${currencyId(input)}&outputCurrency=${currencyId(output)}`)}
       >
@@ -49,7 +49,7 @@ export default function LimitHeader({ inputCurrency, outputCurrency }): JSX.Elem
         href={
           inputCurrency && outputCurrency ?
           `/exchange/swap/limit/${currencyId(inputCurrency)}/${currencyId(outputCurrency)}`
-          : `/exchange/swap/limit/${NATIVE[chainId].symbol}/${soulEnabled ? SOUL_ADDRESS[chainId] : USDC_ADDRESS[chainId]}`
+          : `/exchange/swap/limit/${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${soulEnabled ? SOUL_ADDRESS[chainId ?? ChainId.FANTOM] : USDC_ADDRESS[chainId ?? ChainId.FANTOM]}`
       }
       >
         <Typography

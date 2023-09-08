@@ -25,7 +25,7 @@ export const usePrices = ({
     'queryKey' | 'queryFn' | 'initialData'
   >
 }) => {
-  const queryKey = useMemo(() => [`https://token-price.sushi.com/v0/${chainId}`], [chainId])
+  const queryKey = useMemo(() => [`https://token-price.sushi.com/v0/${chainId}`], [chainId ?? ChainId.FANTOM])
   // const {
   //   data: pricesMap,
   //   isError,

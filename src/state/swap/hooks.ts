@@ -235,7 +235,7 @@ export function useDerivedSwapInfo(): {
     inputError = inputError ?? `Enter Recipient`
   } else {
     if (
-      BAD_RECIPIENT_ADDRESSES?.[chainId]?.[formattedTo] ||
+      BAD_RECIPIENT_ADDRESSES?.[chainId ?? ChainId.FANTOM]?.[formattedTo] ||
       (bestTradeExactIn && involvesAddress(bestTradeExactIn, formattedTo)) ||
       (bestTradeExactOut && involvesAddress(bestTradeExactOut, formattedTo))
     ) {
@@ -267,7 +267,7 @@ export function parseCurrencyFromURLParameter(urlParam: any, chainId: ChainId): 
   if (typeof urlParam === 'string') {
     const valid = isAddress(urlParam)
     if (valid) return valid
-    if (urlParam.toUpperCase() === NATIVE[chainId].symbol) return NATIVE[chainId].symbol
+    if (urlParam.toUpperCase() === NATIVE[chainId ?? ChainId.FANTOM].symbol) return NATIVE[chainId ?? ChainId.FANTOM].symbol
   }
   return ''
 }
@@ -296,7 +296,7 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId)
   // let recipient = validatedRecipient(parsedQs.recipient)
   let toChain = chainId
 
-  const input = NATIVE[chainId].symbol
+  const input = NATIVE[chainId ?? ChainId.FANTOM].symbol
   const output = chainId == ChainId.FANTOM 
           ? SOUL[ChainId.FANTOM].address
          : chainId == ChainId.ETHEREUM
@@ -305,7 +305,7 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId)
           ? SOUL[ChainId.AVALANCHE].address
          : chainId == ChainId.BSC
           ? USDC[ChainId.BSC].address
-         : DAI[chainId].address
+         : DAI[chainId ?? ChainId.FANTOM].address
   // if(recipient == '') { recipient = recipientAddress}      
   if (inputCurrency === '' && outputCurrency === '') {
     inputCurrency = input

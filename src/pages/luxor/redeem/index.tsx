@@ -30,7 +30,7 @@ function Redeem() {
   const [inputAmount, setInputAmount] = useState('')
 
   const { account, chainId } = useActiveWeb3React()
-  const luxorToken = new Token(chainId, getAddress(LUX_ADDRESS[chainId]), 9, 'LUX')
+  const luxorToken = new Token(chainId, getAddress(LUX_ADDRESS[chainId ?? ChainId.FANTOM]), 9, 'LUX')
 
   const luxorBalance = useCurrencyBalance(ChainId.FANTOM, account, luxorToken)
   const LuxorRefunderContract = useLuxorRefunderContract()
@@ -40,7 +40,7 @@ function Redeem() {
 
   const [approvalState, setApproval] = useApproveCallback(
     parsedInputValue,
-    LUXOR_REEFUNDER_ADDRESS[chainId]
+    LUXOR_REEFUNDER_ADDRESS[chainId ?? ChainId.FANTOM]
   )
 
   const refunderError = !parsedInputValue

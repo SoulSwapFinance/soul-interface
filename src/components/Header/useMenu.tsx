@@ -194,7 +194,7 @@ const useMenu: UseMenu = () => {
 
 
     return mainItems.filter((el) => Object.keys(el).length > 0)
-  }, [chainId])
+  }, [chainId ?? ChainId.FANTOM])
 }
 
 export default useMenu

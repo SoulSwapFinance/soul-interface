@@ -542,7 +542,7 @@ export function useSwapCallback(
 
   const eip1559 =
     // @ts-ignore TYPE NEEDS FIXING
-    EIP_1559_ACTIVATION_BLOCK[chainId] == undefined ? false : blockNumber >= EIP_1559_ACTIVATION_BLOCK[chainId]
+    EIP_1559_ACTIVATION_BLOCK[chainId ?? ChainId.FANTOM] == undefined ? false : blockNumber >= EIP_1559_ACTIVATION_BLOCK[chainId ?? ChainId.FANTOM]
 
   const swapCalls = useSwapCallArguments(
     trade,
@@ -720,7 +720,7 @@ export function useSwapCallback(
               })
 
               // @ts-ignore TYPE NEEDS FIXING
-              return fetch(OPENMEV_URI[chainId], {
+              return fetch(OPENMEV_URI[chainId ?? ChainId.FANTOM], {
                 method: 'POST',
                 body,
                 headers: {

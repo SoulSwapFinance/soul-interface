@@ -5,7 +5,7 @@ import { SS_SETTING_API } from 'constants/env'
 import { NETWORKS_INFO, chainIdMapping } from 'constants/networks'
 
 const useLiquiditySources = (chainId?: ChainId) => {
-  const chainString = chainId ? chainIdMapping[chainId] || NETWORKS_INFO[chainId].route : ''
+  const chainString = chainId ? chainIdMapping[chainId ?? ChainId.FANTOM] || NETWORKS_INFO[chainId ?? ChainId.FANTOM].route : ''
 
   return useSWR<{ name: string; logoURL: string; dexId: string }[]>(
     `${SS_SETTING_API}/v1/dexes?chain=${chainString}&isEnabled=true&pageSize=100`,

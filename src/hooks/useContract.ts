@@ -166,7 +166,7 @@ const MULTICALL_ADDRESS = {
 
 export function useInterfaceMulticall(): Contract | null | undefined {
   const { chainId } = useActiveWeb3React()
-  return useContract(MULTICALL_ADDRESS[chainId], MULTICALL_ABI, false)
+  return useContract(MULTICALL_ADDRESS[chainId ?? ChainId.FANTOM], MULTICALL_ABI, false)
 }
 
 // returns null on errors
@@ -194,7 +194,7 @@ export function useAnyswapTokenContract(tokenAddress?: string, withSignerIfPossi
 
 export function useWETH9Contract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId ? WNATIVE[chainId].address : undefined, WETH9_ABI, withSignerIfPossible)
+  return useContract(chainId ? WNATIVE[chainId ?? ChainId.FANTOM].address : undefined, WETH9_ABI, withSignerIfPossible)
 }
 
 export function useArgentWalletDetectorContract(): Contract | null {
@@ -233,47 +233,47 @@ export function usePairContract(pairAddress?: string, withSignerIfPossible?: boo
 
 export function useMerkleDistributorContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId ? MERKLE_DISTRIBUTOR_ADDRESS[chainId] : undefined, MERKLE_DISTRIBUTOR_ABI, true)
+  return useContract(chainId ? MERKLE_DISTRIBUTOR_ADDRESS[chainId ?? ChainId.FANTOM] : undefined, MERKLE_DISTRIBUTOR_ABI, true)
 }
 
 export function useOffchainAggregatorOracleContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && OFFCHAIN_AGGREGATOR_ORACLE[chainId], OFFCHAIN_AGGREGATOR_ORACLE_ABI, false)
+  return useContract(chainId && OFFCHAIN_AGGREGATOR_ORACLE[chainId ?? ChainId.FANTOM], OFFCHAIN_AGGREGATOR_ORACLE_ABI, false)
 }
 
 export function useSoulGuideContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_GUIDE_ADDRESS[chainId], SOUL_GUIDE_ABI, false)
+  return useContract(chainId && SOUL_GUIDE_ADDRESS[chainId ?? ChainId.FANTOM], SOUL_GUIDE_ABI, false)
 }
 
 export function useRefunderContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && REFUNDER_ADDRESS[chainId], REFUNDER_ABI, withSignerIfPossible)
+  return useContract(chainId && REFUNDER_ADDRESS[chainId ?? ChainId.FANTOM], REFUNDER_ABI, withSignerIfPossible)
 }
 
 export function usePriceHelperContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && PRICE_HELPER_ADDRESS[chainId], PRICE_HELPER_ABI, false)
+  return useContract(chainId && PRICE_HELPER_ADDRESS[chainId ?? ChainId.FANTOM], PRICE_HELPER_ABI, false)
 }
 
 export function useSorContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOR_ADDRESS[chainId], ERC20_ABI, false)
+  return useContract(chainId && SOR_ADDRESS[chainId ?? ChainId.FANTOM], ERC20_ABI, false)
 }
 
 export function useHarvestHelperContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && HARVEST_HELPER_ADDRESS[chainId], HARVEST_HELPER_ABI, false)
+  return useContract(chainId && HARVEST_HELPER_ADDRESS[chainId ?? ChainId.FANTOM], HARVEST_HELPER_ABI, false)
 }
 
 export function useMulticallContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && MULTICALL_NETWORKS[chainId], MULTICALL_ABI, false)
+  return useContract(chainId && MULTICALL_NETWORKS[chainId ?? ChainId.FANTOM], MULTICALL_ABI, false)
 }
 
 export function useBalancesFetcherContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && BALANCES_FETCHER_ADDRESS[chainId], BALANCES_FETCHER_ABI, false)
+  return useContract(chainId && BALANCES_FETCHER_ADDRESS[chainId ?? ChainId.FANTOM], BALANCES_FETCHER_ABI, false)
 }
 
 export function useLuxorRefunderContract(): Contract | null {
@@ -282,27 +282,27 @@ export function useLuxorRefunderContract(): Contract | null {
 
 export function useMulticall2Contract() {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && MULTICALL2_ADDRESS[chainId], MULTICALL2_ABI, false)
+  return useContract(chainId && MULTICALL2_ADDRESS[chainId ?? ChainId.FANTOM], MULTICALL2_ABI, false)
 }
 
 export function useSoulContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_ADDRESS[chainId], SOUL_ABI, withSignerIfPossible)
+  return useContract(chainId && SOUL_ADDRESS[chainId ?? ChainId.FANTOM], SOUL_ABI, withSignerIfPossible)
 }
 
 export function useSeanceContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SEANCE_ADDRESS[chainId], SEANCE_ABI, withSignerIfPossible)
+  return useContract(chainId && SEANCE_ADDRESS[chainId ?? ChainId.FANTOM], SEANCE_ABI, withSignerIfPossible)
 }
 
 export function useETHPairContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && ETH_USD_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
+  return useContract(chainId && ETH_USD_PAIR[chainId ?? ChainId.FANTOM], ISoulSwapPairABI, withSignerIfPossible)
 }
 
 export function useSafeContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SAFE_ADDRESS[chainId], SOUL_SAFE_ABI, withSignerIfPossible)
+  return useContract(chainId && SAFE_ADDRESS[chainId ?? ChainId.FANTOM], SOUL_SAFE_ABI, withSignerIfPossible)
 }
 
 export function useSoulSeanceContract(withSignerIfPossible?: boolean): Contract | null {
@@ -312,12 +312,12 @@ export function useSoulSeanceContract(withSignerIfPossible?: boolean): Contract 
 
 export function useSoulFtmContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_FTM_PAIR[chainId], ISoulSwapPairABI, withSignerIfPossible)
+  return useContract(chainId && SOUL_FTM_PAIR[chainId ?? ChainId.FANTOM], ISoulSwapPairABI, withSignerIfPossible)
 }
 
 export function useBoringHelperContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && BORING_HELPER_ADDRESS[chainId], BORING_HELPER_ABI)
+  return useContract(chainId && BORING_HELPER_ADDRESS[chainId ?? ChainId.FANTOM], BORING_HELPER_ABI)
 }
 
 export function useSeanceUsdcContract(withSignerIfPossible?: boolean): Contract | null {
@@ -332,7 +332,7 @@ export function useFtmUsdcContract(withSignerIfPossible?: boolean): Contract | n
 
 export function useEnchantContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && ENCHANT_ADDRESS[chainId], ENCHANT_ABI, withSignerIfPossible)
+  return useContract(chainId && ENCHANT_ADDRESS[chainId ?? ChainId.FANTOM], ENCHANT_ABI, withSignerIfPossible)
 }
 
 export function useLuxorContract(withSignerIfPossible = true): Contract | null {
@@ -342,17 +342,17 @@ export function useLuxorContract(withSignerIfPossible = true): Contract | null {
 
 export function useTeamContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && TEAM_WALLET_ADDRESS[chainId], TEAM_WALLET_ABI, withSignerIfPossible)
+  return useContract(chainId && TEAM_WALLET_ADDRESS[chainId ?? ChainId.FANTOM], TEAM_WALLET_ABI, withSignerIfPossible)
 }
 
 export function useLuxorTreasuryContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && LUX_TREASURY_ADDRESS[chainId], LUXOR_TREASURY_ABI, withSignerIfPossible)
+  return useContract(chainId && LUX_TREASURY_ADDRESS[chainId ?? ChainId.FANTOM], LUXOR_TREASURY_ABI, withSignerIfPossible)
 }
 
 export function useLuxorStakingContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && LUXOR_STAKING_ADDRESS[chainId], LUXOR_STAKING_ABI, withSignerIfPossible)
+  return useContract(chainId && LUXOR_STAKING_ADDRESS[chainId ?? ChainId.FANTOM], LUXOR_STAKING_ABI, withSignerIfPossible)
 }
 
 export function useLuxorStakeHelperContract(withSignerIfPossible = true): Contract | null {
@@ -372,56 +372,56 @@ export function useLumensContract(withSignerIfPossible = true): Contract | null 
 
 export function useEnchantHelperContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && ENCHANT_HELPER_ADDRESS[chainId], ENCHANT_HELPER_ABI, withSignerIfPossible)
+  return useContract(chainId && ENCHANT_HELPER_ADDRESS[chainId ?? ChainId.FANTOM], ENCHANT_HELPER_ABI, withSignerIfPossible)
 }
 
 export function useTridentRouterContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   // @ts-ignore TYPE NEEDS FIXING
-  return useContract(chainId && TRIDENT[chainId], FACTORY_ABI, withSignerIfPossible)
-  // const router = TRIDENT[chainId]?.[CHAIN_KEY[chainId]]?.contracts.TridentRouter
+  return useContract(chainId && TRIDENT[chainId ?? ChainId.FANTOM], FACTORY_ABI, withSignerIfPossible)
+  // const router = TRIDENT[chainId ?? ChainId.FANTOM]?.[CHAIN_KEY[chainId ?? ChainId.FANTOM]]?.contracts.TridentRouter
   // return useContract(router?.address, router?.abi, withSignerIfPossible)
 }
 
 export function useMasterChefContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SUMMONER_ADDRESS[chainId], 
+  return useContract(chainId && SUMMONER_ADDRESS[chainId ?? ChainId.FANTOM], 
     chainId == ChainId.FANTOM ? SUMMONER_ABI : SOUL_MANIFESTER_ABI,
     withSignerIfPossible)
 }
 
 export function useCircleStakingContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_CIRCLE_ADDRESS[chainId], SOUL_CIRCLE_ABI, withSignerIfPossible)
+  return useContract(chainId && SOUL_CIRCLE_ADDRESS[chainId ?? ChainId.FANTOM], SOUL_CIRCLE_ABI, withSignerIfPossible)
 }
 
 export function useConstantProductPoolFactory(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && TRIDENT[chainId], FACTORY_ABI, withSignerIfPossible)
-  // const factory = TRIDENT[chainId]?.[CHAIN_KEY[chainId]]?.contracts.ConstantProductPoolFactory
+  return useContract(chainId && TRIDENT[chainId ?? ChainId.FANTOM], FACTORY_ABI, withSignerIfPossible)
+  // const factory = TRIDENT[chainId ?? ChainId.FANTOM]?.[CHAIN_KEY[chainId ?? ChainId.FANTOM]]?.contracts.ConstantProductPoolFactory
   // return useContract(factory?.address, factory?.abi, withSignerIfPossible)
 }
 
 export function useStablePoolFactory(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && TRIDENT[chainId], FACTORY_ABI, withSignerIfPossible)
-  // const factory = TRIDENT[chainId]?.[CHAIN_KEY[chainId]]?.contracts.HybridPoolFactory
+  return useContract(chainId && TRIDENT[chainId ?? ChainId.FANTOM], FACTORY_ABI, withSignerIfPossible)
+  // const factory = TRIDENT[chainId ?? ChainId.FANTOM]?.[CHAIN_KEY[chainId ?? ChainId.FANTOM]]?.contracts.HybridPoolFactory
   // return useContract(factory?.address, factory?.abi, withSignerIfPossible)
 }
 
 export function useLotteryContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && LOTTERY_ADDRESS[chainId], LOTTERY_ABI, withSignerIfPossible)
+  return useContract(chainId && LOTTERY_ADDRESS[chainId ?? ChainId.FANTOM], LOTTERY_ABI, withSignerIfPossible)
 }
 
 export function useSummonerContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SUMMONER_ADDRESS[chainId], SOUL_MANIFESTER_ABI, withSignerIfPossible)
+  return useContract(chainId && SUMMONER_ADDRESS[chainId ?? ChainId.FANTOM], SOUL_MANIFESTER_ABI, withSignerIfPossible)
 }
 
 export function useManifesterContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && MANIFESTER_ADDRESS[chainId], FARM_MANIFESTER_ABI, withSignerIfPossible)
+  return useContract(chainId && MANIFESTER_ADDRESS[chainId ?? ChainId.FANTOM], FARM_MANIFESTER_ABI, withSignerIfPossible)
 }
 
 export function useManifestationContract(address: string, withSignerIfPossible?: boolean): Contract | null {
@@ -431,27 +431,27 @@ export function useManifestationContract(address: string, withSignerIfPossible?:
 
 export function useAutoStakeContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && AUTO_STAKE_ADDRESS[chainId], AUTO_STAKE_ABI, withSignerIfPossible)
+  return useContract(chainId && AUTO_STAKE_ADDRESS[chainId ?? ChainId.FANTOM], AUTO_STAKE_ABI, withSignerIfPossible)
 }
 
 export function useLuxorBondContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && LUX_HELPER_ADDRESS[chainId], LUX_HELPER_ABI, withSignerIfPossible)
+  return useContract(chainId && LUX_HELPER_ADDRESS[chainId ?? ChainId.FANTOM], LUX_HELPER_ABI, withSignerIfPossible)
 }
 
 export function useSorMasterContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOR_MASTER_ADDRESS[chainId], SOR_MASTER_ABI, withSignerIfPossible)
+  return useContract(chainId && SOR_MASTER_ADDRESS[chainId ?? ChainId.FANTOM], SOR_MASTER_ABI, withSignerIfPossible)
 }
 
 export function useSorMinterContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOR_MINTER_ADDRESS[chainId], SOR_MINTER_ABI, withSignerIfPossible)
+  return useContract(chainId && SOR_MINTER_ADDRESS[chainId ?? ChainId.FANTOM], SOR_MINTER_ABI, withSignerIfPossible)
 }
 
 export function useFactoryContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && FACTORY_ADDRESS[chainId], FACTORY_ABI, false)
+  return useContract(chainId && FACTORY_ADDRESS[chainId ?? ChainId.FANTOM], FACTORY_ABI, false)
 }
 
 export function useHelperContract(withSignerIfPossible?: boolean): Contract | null {
@@ -461,7 +461,7 @@ export function useHelperContract(withSignerIfPossible?: boolean): Contract | nu
 
 export function useSummonerAssistantContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SUMMONER_ASSISTANT_ADDRESS[chainId], SUMMONER_ASSISTANT_ABI, withSignerIfPossible)
+  return useContract(chainId && SUMMONER_ASSISTANT_ADDRESS[chainId ?? ChainId.FANTOM], SUMMONER_ASSISTANT_ABI, withSignerIfPossible)
 }
 
 export function useLaunchpadContract(address?: string, withSignerIfPossible?: boolean): Contract | null {
@@ -472,7 +472,7 @@ export function useLaunchpadContract(address?: string, withSignerIfPossible?: bo
 export function useRouterContract(useArcher = false, withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
 
-  const address = useArcher ? ARCHER_ROUTER_ADDRESS[chainId] : ROUTER_ADDRESS[chainId]
+  const address = useArcher ? ARCHER_ROUTER_ADDRESS[chainId ?? ChainId.FANTOM] : ROUTER_ADDRESS[chainId ?? ChainId.FANTOM]
   const abi = useArcher ? ARCHER_ROUTER_ABI : ROUTER_ABI
 
   return useContract(address, abi, withSignerIfPossible)
@@ -480,47 +480,47 @@ export function useRouterContract(useArcher = false, withSignerIfPossible?: bool
 
 export function useSpookyRouterContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SPOOKY_ROUTER_ADDRESS[chainId], SPOOKY_ROUTER_ABI, withSignerIfPossible)
+  return useContract(chainId && SPOOKY_ROUTER_ADDRESS[chainId ?? ChainId.FANTOM], SPOOKY_ROUTER_ABI, withSignerIfPossible)
 }
 
 export function useSpiritRouterContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SPIRIT_ROUTER_ADDRESS[chainId], SPIRIT_ROUTER_ABI, withSignerIfPossible)
+  return useContract(chainId && SPIRIT_ROUTER_ADDRESS[chainId ?? ChainId.FANTOM], SPIRIT_ROUTER_ABI, withSignerIfPossible)
 }
 
 // export function useEnchantmentContract(withSignerIfPossible?: boolean): Contract | null {
 //   const { chainId } = useActiveWeb3React()
-//   return useContract(chainId && ENCHANT_ADDRESS[chainId], ENCHANT_ABI, withSignerIfPossible)
+//   return useContract(chainId && ENCHANT_ADDRESS[chainId ?? ChainId.FANTOM], ENCHANT_ABI, withSignerIfPossible)
 // }
 
 export function useSorStakingContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOR_STAKING_REWARDS_ADDRESS[chainId], SOR_STAKING_ABI, false)
+  return useContract(chainId && SOR_STAKING_REWARDS_ADDRESS[chainId ?? ChainId.FANTOM], SOR_STAKING_ABI, false)
 }
 
 export function useTimelockContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && TIMELOCK_ADDRESS[chainId], TIMELOCK_ABI, false)
+  return useContract(chainId && TIMELOCK_ADDRESS[chainId ?? ChainId.FANTOM], TIMELOCK_ABI, false)
 }
 
 export function useCoffinBoxContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && COFFIN_BOX_ADDRESS[chainId], COFFIN_BOX_ABI, withSignerIfPossible)
+  return useContract(chainId && COFFIN_BOX_ADDRESS[chainId ?? ChainId.FANTOM], COFFIN_BOX_ABI, withSignerIfPossible)
 }
 
 export function useUnderworldPairContract(PAIR_ADDRESS: string, withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && PAIR_ADDRESS[chainId], UNDERWORLD_ABI, withSignerIfPossible)
+  return useContract(chainId && PAIR_ADDRESS[chainId ?? ChainId.FANTOM], UNDERWORLD_ABI, withSignerIfPossible)
 }
 
 export function useSoulSwapSwapper(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOULSWAP_SWAPPER_ADDRESS[chainId], BASE_SWAPPER_ABI, false)
+  return useContract(chainId && SOULSWAP_SWAPPER_ADDRESS[chainId ?? ChainId.FANTOM], BASE_SWAPPER_ABI, false)
 }
 
 export function useChainlinkOracle(): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(CHAINLINK_ORACLE_ADDRESS[chainId], CHAINLINK_ORACLE_ABI, false)
+  return useContract(CHAINLINK_ORACLE_ADDRESS[chainId ?? ChainId.FANTOM], CHAINLINK_ORACLE_ABI, false)
 }
 
 export function usePriceOracle(oracleAddress: string): Contract | null {
@@ -564,11 +564,11 @@ export function useDashboardContract(): Contract | null {
 
 export function useSoulSwapTWAPContract(address?: string): Contract | null {
   const { chainId } = useActiveWeb3React()
-  const TWAP_0 = useContract(SOULSWAP_TWAP_0_ORACLE_ADDRESS[chainId], SOULSWAP_TWAP_ORACLE_ABI)
-  const TWAP_1 = useContract(SOULSWAP_TWAP_1_ORACLE_ADDRESS[chainId], SOULSWAP_TWAP_ORACLE_ABI)
-  if (address === SOULSWAP_TWAP_0_ORACLE_ADDRESS[chainId]) {
+  const TWAP_0 = useContract(SOULSWAP_TWAP_0_ORACLE_ADDRESS[chainId ?? ChainId.FANTOM], SOULSWAP_TWAP_ORACLE_ABI)
+  const TWAP_1 = useContract(SOULSWAP_TWAP_1_ORACLE_ADDRESS[chainId ?? ChainId.FANTOM], SOULSWAP_TWAP_ORACLE_ABI)
+  if (address === SOULSWAP_TWAP_0_ORACLE_ADDRESS[chainId ?? ChainId.FANTOM]) {
     return TWAP_0
-  } else if (address === SOULSWAP_TWAP_1_ORACLE_ADDRESS[chainId]) {
+  } else if (address === SOULSWAP_TWAP_1_ORACLE_ADDRESS[chainId ?? ChainId.FANTOM]) {
     return TWAP_1
   }
   return undefined
@@ -576,12 +576,12 @@ export function useSoulSwapTWAPContract(address?: string): Contract | null {
 
 export function useZapperContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && ZAPPER_ADDRESS[chainId], ZAPPER_ABI, withSignerIfPossible)
+  return useContract(chainId && ZAPPER_ADDRESS[chainId ?? ChainId.FANTOM], ZAPPER_ABI, withSignerIfPossible)
 }
 
 export function useMarketUpdater(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && MARKET_UPDATER_ADDRESS[chainId], UPDATER_ABI, withSignerIfPossible)
+  return useContract(chainId && MARKET_UPDATER_ADDRESS[chainId ?? ChainId.FANTOM], UPDATER_ABI, withSignerIfPossible)
 }
 
 export function useComplexRewarderContract(address, withSignerIfPossible?: boolean): Contract | null {
@@ -598,7 +598,7 @@ export function useCloneRewarderContract(address, withSignerIfPossibe?: boolean)
 
 export function useLimitOrderContract(withSignerIfPossibe?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(STOP_LIMIT_ORDER_ADDRESS[chainId], LIMIT_ORDER_ABI, withSignerIfPossibe)
+  return useContract(STOP_LIMIT_ORDER_ADDRESS[chainId ?? ChainId.FANTOM], LIMIT_ORDER_ABI, withSignerIfPossibe)
 }
 
 export function useLimitOrderHelperContract(withSignerIfPossible?: boolean): Contract | null {
@@ -607,14 +607,14 @@ export function useLimitOrderHelperContract(withSignerIfPossible?: boolean): Con
 
 export function useSoulBondContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOUL_BOND_ADDRESS[chainId], SOUL_BOND_V2_ABI, withSignerIfPossible)
+  return useContract(chainId && SOUL_BOND_ADDRESS[chainId ?? ChainId.FANTOM], SOUL_BOND_V2_ABI, withSignerIfPossible)
 }
 
 // ------- Atomic Swap --------
 
 export function useAtomicSwapContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(ATOMIC_SWAP_ADDRESS[chainId], ATOMIC_SWAP_ABI, withSignerIfPossible)
+  return useContract(ATOMIC_SWAP_ADDRESS[chainId ?? ChainId.FANTOM], ATOMIC_SWAP_ABI, withSignerIfPossible)
 }
 
 // SoulSwap 

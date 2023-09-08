@@ -21,10 +21,10 @@ function useTokensFromMap(tokenMap: TokenAddressMap, includeUserAdded: boolean):
     if (!chainId) return {}
 
     // reduce to just tokens
-    const mapWithoutUrls = Object.keys(tokenMap[chainId]).reduce<{
+    const mapWithoutUrls = Object.keys(tokenMap[chainId ?? ChainId.FANTOM]).reduce<{
       [address: string]: Token
     }>((newMap, address) => {
-      newMap[address] = tokenMap[chainId][address].token
+      newMap[address] = tokenMap[chainId ?? ChainId.FANTOM][address].token
       return newMap
     }, {})
 
@@ -202,17 +202,17 @@ export function useCurrency(currencyId: string | undefined): Currency | null | u
   const useNative = isETH // && !isDual
 
   // if (isETH && isDual) {
-  //   currencyId = WNATIVE_ADDRESS[chainId]
+  //   currencyId = WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM]
   // }
 
   const token = useToken(useNative ? undefined : currencyId)
 
   const { native, wnative } = useMemo(
     () => ({
-      native: chainId && chainId in NATIVE ? NATIVE[chainId] : undefined,
-      wnative: chainId && chainId in WNATIVE ? WNATIVE[chainId] : undefined,
+      native: chainId && chainId in NATIVE ? NATIVE[chainId ?? ChainId.FANTOM] : undefined,
+      wnative: chainId && chainId in WNATIVE ? WNATIVE[chainId ?? ChainId.FANTOM] : undefined,
     }),
-    [chainId]
+    [chainId ?? ChainId.FANTOM]
   )
 
   if (wnative?.address?.toLowerCase() === currencyId?.toLowerCase()) return wnative

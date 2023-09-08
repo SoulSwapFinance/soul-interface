@@ -1,4 +1,4 @@
-import { Currency, NATIVE } from 'sdk'
+import { ChainId, Currency, NATIVE } from 'sdk'
 import { selectBalancesCurrency } from 'features/portfolio/portfolioSlice'
 import { useCurrency } from 'hooks/Tokens'
 import { useSelector } from 'react-redux'
@@ -9,6 +9,6 @@ export const useBalancesSelectedCurrency: UseBalancesSelectedCurrency = () => {
   const currency = useSelector(selectBalancesCurrency)
   const { chainId } = useActiveWeb3React()
  
-  return currency.isToken ? useCurrency(currency.wrapped.address) : NATIVE[chainId]
+  return currency.isToken ? useCurrency(currency.wrapped.address) : NATIVE[chainId ?? ChainId.FANTOM]
 
  }

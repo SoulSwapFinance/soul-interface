@@ -126,8 +126,8 @@ export class RoutablePlatform {
   public supportsChain(chainId: ChainId): boolean {
     return (
       // this.chainIds.includes(chainId) &&
-      this.factoryAddress[chainId] !== AddressZero &&
-      this.routerAddress[chainId] !== AddressZero
+      this.factoryAddress[chainId ?? ChainId.FANTOM] !== AddressZero &&
+      this.routerAddress[chainId ?? ChainId.FANTOM] !== AddressZero
     )
   }
 }

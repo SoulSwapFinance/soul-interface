@@ -144,16 +144,16 @@ import Typography from "components/Typography"
 
 const Limit = () => {
   const { account, chainId } = useActiveWeb3React();
-  // const [inputCurrency, setInputCurrency] = useState(NATIVE[chainId])
-  // const [ouputCurrency, setOutputCurrency] = useState(SOUL[chainId])
+  // const [inputCurrency, setInputCurrency] = useState(NATIVE[chainId ?? ChainId.FANTOM])
+  // const [ouputCurrency, setOutputCurrency] = useState(SOUL[chainId ?? ChainId.FANTOM])
   const theme = useTheme();
   const [showOrders, setShowOrders] = useState(false)
   // const [useSwap, setUseSwap] = useState(false)
   const [showHeader, setShowHeader] = useState(true)
-  const DEFAULT_CURRENCY_B = [ChainId.ETHEREUM, ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId) ? SOUL_ADDRESS[chainId] : USDC_ADDRESS[chainId]
+  const DEFAULT_CURRENCY_B = [ChainId.ETHEREUM, ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId) ? SOUL_ADDRESS[chainId ?? ChainId.FANTOM] : USDC_ADDRESS[chainId ?? ChainId.FANTOM]
   const router = useRouter()
   const tokens = router.query.tokens
-  const [currencyIdA, currencyIdB] = (tokens as string[]) || [NATIVE[chainId].symbol, DEFAULT_CURRENCY_B]
+  const [currencyIdA, currencyIdB] = (tokens as string[]) || [NATIVE[chainId ?? ChainId.FANTOM].symbol, DEFAULT_CURRENCY_B]
   const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
 
   enum Rate {
@@ -183,7 +183,7 @@ const Limit = () => {
           router.push(`/exchange/swap/limit/${newCurrencyIdB}`)
         }
       } else {
-        router.push(`/exchange/swap/limit/${currencyIdA ? currencyIdA : NATIVE[chainId].symbol}/${newCurrencyIdB}`)
+        router.push(`/exchange/swap/limit/${currencyIdA ? currencyIdA : NATIVE[chainId ?? ChainId.FANTOM].symbol}/${newCurrencyIdB}`)
       }
     },
     [currencyIdA, router, currencyIdB]

@@ -251,7 +251,7 @@ export function getExplorerLink(
   data: string,
   type: 'transaction' | 'token' | 'address' | 'block'
 ): string {
-  const chain = chains[chainId]
+  const chain = chains[chainId ?? ChainId.FANTOM]
   return chain.builder
   (
     // chain.chainName, 

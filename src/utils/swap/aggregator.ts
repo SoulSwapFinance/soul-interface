@@ -161,8 +161,8 @@ import {
       const amountIn = currencyAmountIn
       const tokenOut = currencyOut.wrapped
   
-      const tokenInAddress = currencyAmountIn.currency.isNative ? NATIVE[chainId].address : amountIn.currency.wrapped.address
-      const tokenOutAddress = currencyOut.isNative ? NATIVE[chainId].address : tokenOut.address
+      const tokenInAddress = currencyAmountIn.currency.isNative ? NATIVE[chainId ?? ChainId.FANTOM].address : amountIn.currency.wrapped.address
+      const tokenOutAddress = currencyOut.isNative ? NATIVE[chainId ?? ChainId.FANTOM].address : tokenOut.address
       if (tokenInAddress && tokenOutAddress) {
         const search = new URLSearchParams({
           // Trade config
@@ -277,9 +277,9 @@ import {
       const amountIn = currencyAmountIn
       const tokenOut = currencyOut.wrapped
   
-      const tokenInAddress = currencyAmountIn.currency.isNative ? NATIVE[chainId].address : amountIn.currency.wrapped.address
-      const tokenOutAddress = currencyOut.isNative ? NATIVE[chainId].address : tokenOut.address
-      const comparedDex = DEX_TO_COMPARE[chainId]
+      const tokenInAddress = currencyAmountIn.currency.isNative ? NATIVE[chainId ?? ChainId.FANTOM].address : amountIn.currency.wrapped.address
+      const tokenOutAddress = currencyOut.isNative ? NATIVE[chainId ?? ChainId.FANTOM].address : tokenOut.address
+      const comparedDex = DEX_TO_COMPARE[chainId ?? ChainId.FANTOM]
   
       if (tokenInAddress && tokenOutAddress && comparedDex) {
         const search = new URLSearchParams({
