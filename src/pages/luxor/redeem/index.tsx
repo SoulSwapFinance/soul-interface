@@ -134,20 +134,21 @@ function Redeem() {
                 id="stablecoin-currency-output"
               />
               <div className="h-px my-6 bg-dark-1000"></div>
-              <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-yellow rounded-2xl border-dark-700 hover:border-yellow w-full space-y-1">
+              <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-yellow rounded-2xl hover:border-yellow w-full space-y-1">
                 <div className="flex justify-center">
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     {`1 LUX = ${CONVERSION_RATE} WFTM`}
                   </Typography>
                 </div>
               </div>
-              {/* <div className="flex flex-col bg-dark-1000 mt-4 p-3 border border-1 border-green rounded-2xl border-dark-700 hover:border-yellow w-full space-y-1">
+              <div className="flex flex-col bg-dark-1000 mt-4 p-3 border border-1 border-avaxRed rounded-2xl hover:border-yellow w-full space-y-1">
                 <div className="flex justify-center">
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {`Max Redeemable: ${remainingFunds?.toString()} WFTM`}
+                    {/* {`Max Redeemable: ${remainingFunds?.toString()} WFTM`} */}
+                    {`Redemption Ends On September 30th, 2023`}
                   </Typography>
                 </div>
-              </div> */}
+              </div>
               <div className="mt-6 flex items-center gap-2">
                 {isRefundValid &&
                   (approvalState === ApprovalState.NOT_APPROVED ||
