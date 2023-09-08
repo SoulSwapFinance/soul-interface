@@ -105,7 +105,7 @@ function Pair({ inputCurrency, outputCurrency, pairAddress }: PairProps) {
         ?.sort((a, b) => a.date - b.date)
         // @ts-ignore TYPE NEEDS FIXING
         .map((day) => ({ x: new Date(day.date * 1000), y: Number(day.reserveUSD) })),
-
+      // volume: pair?.volumeUSD,
       volume1d: pair?.volumeUSD - pair1d?.volumeUSD,
       volume1dChange: ((pair?.volumeUSD - pair1d?.volumeUSD) / (pair1d?.volumeUSD - pair2d?.volumeUSD)) * 100 - 100,
       volumeChart: pairDayData
@@ -158,6 +158,7 @@ function Pair({ inputCurrency, outputCurrency, pairAddress }: PairProps) {
   const utilisation1d = (volumeUSD1d / pair?.reserveUSD) * 100
   const utilisation2d = (volumeUSD2d / pair1d?.reserveUSD) * 100
   const utilisation1dChange = (utilisation1d / utilisation2d) * 100 - 100
+  const show = [ChainId.FANTOM].includes(chainId)
 
   return (
     <AnalyticsContainer>
@@ -210,7 +211,7 @@ function Pair({ inputCurrency, outputCurrency, pairAddress }: PairProps) {
           <ChartCard
             header="Volume"
             subheader={`${token0Symbol}-${token1Symbol}`}
-            figure={chartData.volume1d}
+            figure={chartData?.volume1d}
             change={chartData.volume1dChange}
             chart={chartData.volumeChart}
             defaultTimespan="WEEK"
@@ -241,16 +242,15 @@ function Pair({ inputCurrency, outputCurrency, pairAddress }: PairProps) {
             </div>
           ))}
         </div>
-        <div className={`border my-2 border-[${getChainColor(chainId)}]`} />
-        <div className={`flex text-2xl justify-center font-bold text-high-emphesis`}>Activity Today</div>
-        <div className={`border my-2 border-[${getChainColor(chainId)}]`} />
-        <div className="flex flex-row justify-between flex-grow space-x-4 overflow-x-auto">
-
+        <div className={show ? `border my-2 border-[${getChainColor(chainId)}]` : `hidden`} />
+        <div className={show ? `flex text-2xl justify-center font-bold text-high-emphesis` : `hidden`}>Activity Today</div>
+        <div className={show ? `border my-2 border-[${getChainColor(chainId)}]` : 'hidden'} />
+        <div className={show ? `flex flex-row justify-between flex-grow space-x-4 overflow-x-auto` : `hidden`}>
           {/* <InfoCard text="Liquidity" number={pair?.reserveUSD} percent={liquidityUSDChange} /> */}
           <InfoCard text="Volume" number={volumeUSD1d} percent={volumeUSD1dChange} />
           <InfoCard text="Fees" number={volumeUSD1d * 0.003} percent={volumeUSD1dChange} />
         </div>
-        <div className="flex flex-row justify-between flex-grow space-x-4 overflow-x-auto">
+        <div className={show ? `flex flex-row justify-between flex-grow space-x-4 overflow-x-auto` : `hidden`}>
           {/* <InfoCard text="Transactions" number={!isNaN(tx1d) ? tx1d : ''} numberType="text" percent={tx1dChange} /> */}
           <InfoCard text="Average" number={avgTrade1d} percent={avgTrade1dChange} />
           <InfoCard text="Usage" number={utilisation1d} numberType="percent" percent={utilisation1dChange} />
@@ -258,8 +258,9 @@ function Pair({ inputCurrency, outputCurrency, pairAddress }: PairProps) {
         {/* <div className="text-3xl font-bold text-high-emphesis">Information</div> */}
         <NavLink
           href={`/add/${PAIR_URL}`}
-        >
+          >
           <Button
+            className={show ? `` : `mt-4`}
             size="xs"
             variant="filled"
             color={getChainColorCode(chainId)}

@@ -128,7 +128,17 @@ const someColumns = [
     accessor: 'liquidity',
     Cell: (pairs) => formatNumberScale(pairs.value, true),
     align: 'right',
-  }
+  },
+  // {
+  //   Header: 'Volume',
+  //   accessor: (row) => (
+  //     <div>
+  //       <div className="font-medium text-high-emphesis">{formatNumber(row.volume1d, true, false)}</div>
+  //       <div className="font-normal text-primary">{formatNumber(row.volume1w, true, false)}</div>
+  //     </div>
+  //   ),
+  //   align: 'right',
+  // },
 ]
 
 const gainersColumns = [
@@ -171,9 +181,9 @@ const gainersColumns = [
     accessor: (row) => (
       <div className="inline-flex flex-col">
         <div className="font-medium text-high-emphesis">
-          <ColoredNumber number={row.volumeChangeNumber1d} scaleNumber={false} />
+          <ColoredNumber number={row?.volumeChangeNumber1d} scaleNumber={false} />
         </div>
-        <div>{formatNumber(row.volumeChangeNumber1w, true, false)}</div>
+        <div>{formatNumber(row?.volumeChangeNumber1w, true, false)}</div>
       </div>
     ),
     align: 'right',
