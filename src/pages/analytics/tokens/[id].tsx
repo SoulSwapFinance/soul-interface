@@ -1,7 +1,7 @@
 import { CurrencyLogo } from 'components/CurrencyLogo'
 import AnalyticsContainer from 'features/analytics/AnalyticsContainer'
 // import Background from 'features/analytics/Background'
-import { Currency, Token as ERC20 } from 'sdk'
+import { ChainId, Currency, Token as ERC20 } from 'sdk'
 import ChartCard from 'features/analytics/ChartCard'
 import ColoredNumber from 'features/analytics/ColoredNumber'
 import InfoCard from 'features/analytics/InfoCard'
@@ -163,6 +163,7 @@ function Token() {
   const priceUSD1d = token?.priceUSD - token1d?.priceUSD
   const priceUSD2d = token1d?.priceUSD - token2d?.priceUSD
   const priceUSD1dChange = (priceUSD1d / priceUSD2d) * 100 - 100
+  const show = [ChainId.FANTOM].includes(chainId)
 
   // The Chart
   const tokenDayData = useTokenDayData({
@@ -366,12 +367,13 @@ function Token() {
             timespans={chartTimespans}
           />
         </div>
-        <div className="flex flex-row justify-between flex-grow space-x-4 overflow-x-auto">
+        <div className={show ? `flex flex-row justify-between flex-grow space-x-4 overflow-x-auto` : `hidden`}>
           <InfoCard text="Liquidity (24H)" number={liquidityUSD} percent={liquidityUSDChange} />
           <InfoCard text="Volume (24H)" number={volumeUSD1d} percent={volumeUSD1dChange} />
           <InfoCard text="Fees (24H)" number={volumeUSD1d * 0.003} percent={volumeUSD1dChange} />
         </div>
-        <div className="text-2xl font-bold text-high-emphesis">Information</div>
+        <div className={show ? `text-2xl font-bold text-high-emphesis` : `hidden`}>Information</div>
+        { show &&
         <div className="px-4 text-sm leading-48px text-high-emphesis">
           <table className="w-full table-fixed">
             <thead className="border-b border-gray-900">
@@ -404,11 +406,16 @@ function Token() {
             </tbody>
           </table>
         </div>
+      }
         <div>
           {/* <div className="text-2xl font-bold text-high-emphesis">Top Pairs</div> */}
+          { show &&
           <PairList pairs={tokenPairsFormatted} type="all" />
+          }
         </div>
+        { show &&
         <LegacyTransactions pairs={tokenPairs ? tokenPairs.map((pair) => pair.id) : []} />
+        }
       </div>
     </AnalyticsContainer>
   )
