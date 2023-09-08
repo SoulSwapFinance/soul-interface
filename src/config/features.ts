@@ -29,7 +29,7 @@ const features: FeatureMap = {
 
   [ChainId.MOONRIVER]: [
     Feature.AMM,
-    Feature.BRIDGE,
+    // Feature.BRIDGE,
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD
   ],
@@ -37,7 +37,7 @@ const features: FeatureMap = {
   [ChainId.MATIC]: [
     Feature.AMM,
     Feature.AGGREGATE,
-    Feature.BRIDGE,
+    // Feature.BRIDGE,
     Feature.CROSSCHAIN,
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD
