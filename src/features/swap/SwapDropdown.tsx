@@ -9,6 +9,7 @@ import { Feature } from 'enums'
 
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import Typography from 'components/Typography'
+import ExternalLink from 'components/ExternalLink'
 
 interface HeaderProps {
   inputCurrency?: Currency
@@ -89,7 +90,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             <Typography
               className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
             >
-              {`Swap`}
+              {`Exchange`}
             </Typography>
           </div>
         </NavLink>
@@ -188,7 +189,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
 
 
 
-        {featureEnabled(Feature.BRIDGE, chainId) &&
+        {/* {featureEnabled(Feature.BRIDGE, chainId) &&
           <NavLink
             className={classNames(
               bridgeStyle
@@ -210,17 +211,18 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               </Typography>
             </div>
           </NavLink>
-        }
+        } */}
 
         {featureEnabled(Feature.CROSSCHAIN, chainId) &&
-          <NavLink
+          <ExternalLink
             className={classNames(
               crossStyle
             )}
-            activeClassName={classNames(
-              activeStyle
-            )}
-            href={`/crosschain`}
+            // activeClassName={classNames(
+            //   activeStyle
+            // )}
+            // href={`/crosschain`}
+            href={`https://widget-integrations-squid.vercel.app/`}
           >
             <div
               className={classNames(
@@ -230,10 +232,10 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               <Typography
                 className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
               >
-                {`xSwap`}
+                {`Crosschain`}
               </Typography>
             </div>
-          </NavLink>
+          </ExternalLink>
         }
       </div>
       <div className={
