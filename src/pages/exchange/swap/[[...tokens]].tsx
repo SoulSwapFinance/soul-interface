@@ -681,16 +681,16 @@ const Exchange = () => {
               </div>
               // </div>
             }
-            <div
+            {/* <div
               className={`flex justify-end h-[40px]`}
             >
               <CreditCardIcon
                 className={`flex border-2 ${buyWithFiat ? 'border-green' : 'border-red'} hover:border-white bg-${getChainColorCode(chainId)} h-[40px] w-[80px] rounded-2xl`}
                 onClick={() => setBuyWithFiat(!buyWithFiat)}
               />
-            </div>
+            </div> */}
           </div>
-          {buyWithFiat &&
+          {/* {buyWithFiat &&
             <div
               className={`flex justify-center border-4 border-${'green'} m-1 p-1 bg-dark-900 rounded-2xl`}
             >
@@ -700,7 +700,7 @@ const Exchange = () => {
                 width={'100%'}
               />
             </div>
-          }
+          } */}
         </DoubleGlowShadowV2>
       }
     </>
