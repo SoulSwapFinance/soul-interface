@@ -393,7 +393,7 @@ const Exchange = () => {
         onConfirm={handleConfirmTokenWarning}
       />
 
-      {![ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId ?? ChainId.FANTOM) &&
+      {/* {![ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId ?? ChainId.FANTOM) &&
         <div className="flex flex-col gap-3 mt-12 justify-center">
           <SwapDropdown inputCurrency={currencyA} outputCurrency={currencyB} />
           <NavLink href={"/aggregator"}>
@@ -409,11 +409,10 @@ const Exchange = () => {
               </a>
             </Button>
           </NavLink>
-        </div>}
+        </div>} */}
 
-      {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId ?? ChainId.FANTOM) &&
+      {/* {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId ?? ChainId.FANTOM) && */}
         <DoubleGlowShadowV2>
-
           <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
             {/* <FollowBanner /> */}
 
@@ -696,7 +695,7 @@ const Exchange = () => {
             </div>
           } */}
         </DoubleGlowShadowV2>
-      }
+      {/* } */}
     </>
   )
 }
