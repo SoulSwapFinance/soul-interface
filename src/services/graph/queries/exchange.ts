@@ -75,6 +75,8 @@ export const pairFieldsQuery = gql`
     reserveETH
     volumeUSD
     untrackedVolumeUSD
+    volumeToken0
+    volumeToken1
     trackedReserveETH
     token0 {
       ...PairToken
@@ -96,6 +98,7 @@ export const pairFieldsQuery = gql`
     symbol
     totalSupply
     derivedETH
+    volumeUSD
   }
 `
 
@@ -142,9 +145,11 @@ export const pairDayDatasQuery = gql`
       }
       token0 {
         derivedETH
+        volumeUSD
       }
       token1 {
         derivedETH
+        volumeUSD
       }
       reserveUSD
       volumeToken0
@@ -176,7 +181,7 @@ export const pairsQuery = gql`
     $first: Int = 1000
     $where: Pair_filter
     $block: Block_height
-    $orderBy: Pair_orderBy = "trackedReserveETH"
+    # $orderBy: Pair_orderBy = "trackedReserveETH"
     $orderDirection: OrderDirection = "desc"
   ) {
     pairs(

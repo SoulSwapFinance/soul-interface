@@ -40,8 +40,10 @@ function Pairs() {
             token0: pair.token0,
             token1: pair.token1,
             id: pair.id,
+            // volume: pair.volumeUSD,
           },
           liquidity: pair.reserveUSD,
+          // volume: pair.volumeUSD,
           volume1d: pair.volumeUSD - pair1d.volumeUSD,
           volume1w: pair.volumeUSD - pair1w.volumeUSD,
         }
@@ -55,6 +57,7 @@ function Pairs() {
 
           return {
             pair: {
+              // reserveUSD: pair.reserveUSD,
               token0: pair.token0,
               token1: pair.token1,
               id: pair.id,
@@ -64,7 +67,7 @@ function Pairs() {
             liquidityChangeNumber1w: pair.reserveUSD - pair1w.reserveUSD,
             liquidityChangePercent1w: (pair.reserveUSD / pair1w.reserveUSD) * 100 - 100,
 
-            volumeChangeNumber1d: pair.volumeUSD - pair1d.volumeUSD - (pair1d.volumeUSD - pair2d.volumeUSD),
+            volumeChangeNumber1d: pair?.volumeUSD - pair1d?.volumeUSD - (pair1d?.volumeUSD - pair2d?.volumeUSD),
             volumeChangePercent1d:
               ((pair.volumeUSD - pair1d.volumeUSD) / (pair1d.volumeUSD - pair2d.volumeUSD)) * 100 - 100,
             volumeChangeNumber1w: pair.volumeUSD - pair1w.volumeUSD - (pair1w.volumeUSD - pair2w.volumeUSD),
