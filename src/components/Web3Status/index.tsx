@@ -245,13 +245,13 @@ export default function Web3Status() {
   return (
     <>
       <Web3StatusInner />
-      { account && chainId &&
+      {/* { account && chainId && */}
         <WalletModal 
           ENSName={ENSName ?? undefined} 
           pendingTransactions={pending} 
           confirmedTransactions={confirmed} 
         />
-      }
+      {/* } */}
     </>
   )
 }
