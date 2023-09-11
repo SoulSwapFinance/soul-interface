@@ -110,7 +110,13 @@ const SwapModalHeader: FC<SwapModalHeader> = ({
               {`Price Updated`}
             </Typography>
             <Button variant="outlined" size="xs" color="blue" onClick={onAcceptChanges}>
+              <Typography 
+                variant="sm" 
+                weight={700}
+                className={'text-white'}
+              >
               {`Accept`}
+              </Typography>
             </Button>
           </div>
         </HeadlessUiModal.BorderedContent>

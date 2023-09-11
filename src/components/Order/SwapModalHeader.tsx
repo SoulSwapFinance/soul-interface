@@ -29,7 +29,7 @@ import useGelatoLimitOrders from "hooks/gelato/useGelatoLimitOrders"
 import { Toggle } from "components/Toggle"
 import Typography from "components/Typography"
 
-export const AnimatedCard = styled(LightCard)<{ expand: boolean }>`
+export const AnimatedCard = styled(LightCard) <{ expand: boolean }>`
   padding: 0.75rem;
   margin-top: 0.5rem;
 `;
@@ -92,7 +92,7 @@ export default function SwapModalHeader({
 
   return (
     <AutoColumn gap={"4px"} style={{ marginTop: "0rem" }}>
-      <DarkGreyCard 
+      <DarkGreyCard
       // padding="0.75rem 1rem"
       >
         <AutoColumn gap={"12px"}>
@@ -113,7 +113,7 @@ export default function SwapModalHeader({
                 fontWeight={500}
                 color={
                   showAcceptChanges &&
-                  trade?.tradeType === TradeType.EXACT_OUTPUT
+                    trade?.tradeType === TradeType.EXACT_OUTPUT
                     ? theme.primary7
                     : ""
                 }
@@ -127,10 +127,10 @@ export default function SwapModalHeader({
       <ArrowWrapper>
         <ArrowDown size="16" color={theme.text2} />
       </ArrowWrapper>
-      <DarkGreyCard 
+      <DarkGreyCard
         // padding="0.75rem 1rem" 
         style={{ marginBottom: "0.25rem" }}
-        >
+      >
         <AutoColumn gap={"12px"}>
           <RowBetween align="flex-end">
             <RowFixed gap={"12px"}>
@@ -160,13 +160,13 @@ export default function SwapModalHeader({
           showInverted={showInverted}
           setShowInverted={setShowInverted}
         />
-      {/* </RowBetween> */}
+        {/* </RowBetween> */}
 
-      {/* <LightCard style={{ padding: ".75rem", marginTop: "0.5rem" }}>
+        {/* <LightCard style={{ padding: ".75rem", marginTop: "0.5rem" }}>
         <AdvancedSwapDetails />
       </LightCard> */}
 
-      {/* {showDisclaimer && (
+        {/* {showDisclaimer && (
         <AnimatedCard
           style={{ padding: ".75rem", marginTop: "0.5rem" }}
           expand={showDisclaimer}
@@ -175,7 +175,7 @@ export default function SwapModalHeader({
         </AnimatedCard>
       )} */}
 
-      {/* <RowBetween style={{ marginTop: "0.25rem", padding: "0 1rem" }}> */}
+        {/* <RowBetween style={{ marginTop: "0.25rem", padding: "0 1rem" }}> */}
         {/* <TYPE.Link
           color={theme.purple}
           fontWeight={500}
@@ -185,20 +185,20 @@ export default function SwapModalHeader({
         >
           {!showDisclaimer ? "Show" : "Hide"}
         </TYPE.Link> */}
-        <Toggle 
+        <Toggle
           isActive={disclaimer}
           toggle={() => handleDisclaimer(!disclaimer)}
-          // name={"disclaimer"}
-          // disabled={false}
-          // checked={disclaimer}
-          // value={""}
-          // labelLeft={"Accept"}
-          // labelRight={""}
-          // height={24}
-          // sliderHeight={16}
-          // width={44}
-          // sliderWidth={16}
-          // translate={22}
+        // name={"disclaimer"}
+        // disabled={false}
+        // checked={disclaimer}
+        // value={""}
+        // labelLeft={"Accept"}
+        // labelRight={""}
+        // height={24}
+        // sliderHeight={16}
+        // width={44}
+        // sliderWidth={16}
+        // translate={22}
         />
       </RowBetween>
 
@@ -221,7 +221,13 @@ export default function SwapModalHeader({
               }}
               onClick={onAcceptChanges}
             >
-              Accept
+              <Typography
+                variant="sm"
+                weight={700}
+                className={'text-white'}
+              >
+                {`Accept`}
+              </Typography>
             </ButtonPrimary>
           </RowBetween>
         </SwapShowAcceptChanges>
