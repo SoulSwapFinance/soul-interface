@@ -1,4 +1,4 @@
-import { ChainId, WNATIVE_ADDRESS } from '../sdk'
+import { ChainId, ChainType, WNATIVE_ADDRESS, getChainType } from '../sdk'
 import { NetworkInfo } from './type'
 import {
   arbitrum,
@@ -140,4 +140,14 @@ export const SUPPORTED_NETWORKS = Object.keys(NETWORKS_INFO).map(Number) as Chai
 
 export const chainIdMapping: Partial<Record<ChainId, string>> = {
   [ChainId.BSC]: 'bsc',
+}
+
+export const EVM_NETWORKS = SUPPORTED_NETWORKS.filter(chainId => getChainType(chainId) === ChainType.EVM)
+
+export type EVM_NETWORK = typeof EVM_NETWORKS[number]
+
+export function isEVM(chainId?: ChainId): chainId is EVM_NETWORK {
+  if (!chainId) return false
+  const chainType = getChainType(chainId)
+  return chainType === ChainType.EVM
 }

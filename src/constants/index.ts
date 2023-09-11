@@ -5,6 +5,7 @@ import { v4 as uuid } from 'uuid'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { BigNumber } from 'ethers'
 import { CurrencyAmount } from 'sdk'
+import { SUPPORTED_NETWORKS } from './networks'
 
 export const RPC = {
   [ChainId.ETHEREUM]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
@@ -259,7 +260,35 @@ export const EIP_1559_ACTIVATION_BLOCK: { [chainId in ChainId]?: number } = {
 export const DEFAULT_TXN_DISMISS_MS = 25000
 export const IS_IN_IFRAME = typeof window !== 'undefined' && window.parent !== window
 
+export const CHAINS_SUPPORT_FEE_CONFIGS = [
+  // ChainId.AURORA, ChainId.CRONOS
+]
+export const CHAINS_SUPPORT_CROSS_CHAIN = [
+        ChainId.ETHEREUM,
+        ChainId.BSC,
+        ChainId.MATIC,
+        ChainId.AVALANCHE,
+        ChainId.ARBITRUM,
+        // ChainId.OPTIMISM,
+        ChainId.FANTOM,
+        // ChainId.LINEA,
+        // ChainId.BASE,
+      ]
+    // : SUPPORTED_NETWORKS
+
+export const TYPE_AND_SWAP_NOT_SUPPORTED_CHAINS: ChainId[] = [
+  // ChainId.ZKSYNC,
+  // ChainId.LINEA,
+  // ChainId.ZKEVM,
+  // ChainId.BASE,
+]
+
+export const SWAP_FEE_RECEIVER_ADDRESS = '0xFd63Bf84471Bc55DD9A83fdFA293CCBD27e1F4C8'
+
+export const SECONDS_PER_YEAR = 86_000 * 365
+
 export * from './routing'
 export * from './addresses'
 export * from './networks'
 export * from './tokens'
+
