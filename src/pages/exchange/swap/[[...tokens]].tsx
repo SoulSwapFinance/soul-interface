@@ -70,13 +70,14 @@ const Exchange = () => {
 
   const [switched, setSwitched] = useState(false)
 
-  const DEFAULT_CURRENCY_A = NATIVE[chainId ?? ChainId.FANTOM].symbol
-  const DEFAULT_CURRENCY_B = [ChainId.ETHEREUM, ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId ?? ChainId.FANTOM) ? SOUL_ADDRESS[chainId ?? ChainId.FANTOM] : USDC_ADDRESS[chainId ?? ChainId.FANTOM]
+  // const DEFAULT_CURRENCY_A = NATIVE[chainId ?? ChainId.FANTOM].symbol
+  // const DEFAULT_CURRENCY_B = [ChainId.ETHEREUM, ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId ?? ChainId.FANTOM) ? SOUL_ADDRESS[chainId ?? ChainId.FANTOM] : USDC_ADDRESS[chainId ?? ChainId.FANTOM]
   const router = useRouter()
-  const tokens = router.query.tokens
-  const [currencyIdA, currencyIdB] = (tokens as string[]) || [DEFAULT_CURRENCY_A, DEFAULT_CURRENCY_B]
+  // const tokens = router.query.tokens
+  // const [currencyIdA, currencyIdB] = (tokens as string[]) || [DEFAULT_CURRENCY_A, DEFAULT_CURRENCY_B]
+  const showNotice = router?.asPath == ('/swap')
   // const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
-  const [showConnect, setShowConnect] = useState(true)
+  const [showConnect, setShowConnect] = useState(showNotice)
   // const contextNetwork = useWeb3React(NetworkContextName)
   // const toggleWalletModal = useWalletModalToggle()
 
