@@ -151,3 +151,21 @@ export function isEVM(chainId?: ChainId): chainId is EVM_NETWORK {
   const chainType = getChainType(chainId)
   return chainType === ChainType.EVM
 }
+
+export const MAINNET_NETWORKS = [
+  ChainId.ETHEREUM,
+  ChainId.ARBITRUM,
+  // ChainId.OPTIMISM,
+  // ChainId.LINEA,
+  ChainId.MATIC,
+  // ChainId.ZKEVM,
+  // ChainId.ZKSYNC,
+  // ChainId.BASE,
+  ChainId.BSC,
+  ChainId.AVALANCHE,
+  // ChainId.SOLANA,
+  ChainId.FANTOM,
+  // ChainId.BTTC,
+  // ChainId.CRONOS,
+  // ChainId.AURORA,
+] as const
