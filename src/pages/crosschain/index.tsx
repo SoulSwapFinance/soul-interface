@@ -34,7 +34,7 @@ export default function Crosschain() {
 
   return (
     <DoubleGlowShadowV2>
-      <div className={`grid grid-cols-1 p-8 sm:p-16 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
+      <div className={`grid grid-cols-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
         <SwapDropdown
           inputCurrency={null}
           outputCurrency={null}
@@ -53,19 +53,16 @@ export default function Crosschain() {
           outputCurrency={null}
         />
         <div
-          // className={styles.container}
+          className={`grid border-2 rounded-2xl border-dark-800 justify-center`}
           style={{
-            display: "grid",
+            // display: "grid",
             // background: "#110E1A",
             background: "#0D0415",
             alignItems: "center",
             justifyContent: "center",
-            // scale: "100%",
+            scale: "100%",
             width: "100%",
-            height: "100%",
-            // border: "1px solid #821fff",
-            border: "1px solid #2E3347",
-            borderRadius: "12px",
+            height: "100%"
           }}
         >
           <SquidWidget

@@ -81,7 +81,6 @@ const Exchange = () => {
   // const contextNetwork = useWeb3React(NetworkContextName)
   // const toggleWalletModal = useWalletModalToggle()
 
-
   const [dismissTokenWarning, setDismissTokenWarning] = useState<boolean>(false)
   const urlLoadedTokens: Token[] = useMemo(
     () => [loadedInputCurrency, loadedOutputCurrency]?.filter((c): c is Token => c?.isToken ?? false) ?? [],
