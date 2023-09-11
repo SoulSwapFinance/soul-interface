@@ -23,7 +23,6 @@ const Mobile = () => {
   // const isLuxor = router.asPath.startsWith('/luxor')
 
   const { account, chainId } = useActiveWeb3React()
-  // const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const [open, setOpen] = useState(false)
   // const [dropdown, setShowDropdown] = useState(false)
 

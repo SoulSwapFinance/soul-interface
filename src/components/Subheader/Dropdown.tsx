@@ -2,7 +2,6 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import useDropdown from 'components/Subheader/useDropdown'
 import { useActiveWeb3React } from 'services/web3'
-import { useETHBalances } from 'state/wallet/hooks'
 import React, { FC, Fragment, useState } from 'react'
 
 import { DropdownItem } from './DropdownItem'
@@ -26,7 +25,6 @@ const Mobile: FC = () => {
   const isLuxor = router.asPath.startsWith('/luxor')
 
   const { account, chainId, library } = useActiveWeb3React()
-  const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const [open, setOpen] = useState(false)
   // const isCoinbaseWallet = useIsCoinbaseWallet()
 

@@ -1,9 +1,13 @@
+import { Currency, Token } from 'sdk';
 import { AbstractCurrency } from './AbstractCurrency'
 
 /**
- * Represents the native currency of the chain on which it resides, e.g.
+ * Represents the native currency of the chain on which it resides
  */
-export abstract class NativeCurrency extends AbstractCurrency {
-  public readonly isNative: true = true
-  public readonly isToken: false = false
+export declare class NativeCurrency extends AbstractCurrency {
+  readonly isNative: true;
+  readonly isToken: false;
+  constructor(chainId: number, decimals: number, symbol?: string, name?: string);
+  get wrapped(): Token;
+  equals(other: Currency): boolean;
 }

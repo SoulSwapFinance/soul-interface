@@ -5,7 +5,9 @@ import Image from '../Image'
 import { classNames } from 'functions'
 import { cloudinaryLoader } from 'functions/cloudinary'
 import { NETWORKS_INFO } from 'constants/networks'
-import { ChainId } from 'sdk'
+import { ChainId, Currency } from 'sdk'
+import { WrappedTokenInfo } from 'state/lists/wrappedTokenInfo'
+import { useGetNativeTokenLogo } from 'components/CurrencyLogo'
 
 const BAD_SRCS: { [tokenAddress: string]: true } = {}
 
@@ -52,6 +54,44 @@ export function NetworkLogo({ chainId, style = {} }: { chainId: ChainId; style?:
     alt="Switch Network" 
     style={style} 
   />
+}
+
+export function TokenLogoWithChain(data: { tokenLogo: string; chainId: ChainId; size: number | string }): JSX.Element
+export function TokenLogoWithChain(data: { size: number | string; currency: Currency | WrappedTokenInfo }): JSX.Element
+export function TokenLogoWithChain(data: any) {
+  const { tokenLogo: tokenLogoParam, chainId: chainParam, size, currency } = data
+
+  const chainId: ChainId = currency?.chainId || chainParam
+  const nativeLogo = useGetNativeTokenLogo(chainId)
+  const tokenLogo = (currency?.isNative ? nativeLogo : currency?.logoURI) || tokenLogoParam
+  const ratio = 0.7
+  const networkSize = ratio * parseInt(size + '')
+
+  return (
+    <div style={{ position: 'relative', height: size }}>
+      <Logo
+        srcs={[tokenLogo ?? '']}
+        style={{
+          width: size,
+          height: size,
+          borderRadius: '4px',
+        }}
+        height={size}
+        width={size}
+      />
+      <NetworkLogo
+        chainId={chainId}
+        style={{
+          position: 'absolute',
+          width: networkSize,
+          height: networkSize,
+          top: -8 * ratio,
+          right: -8 * ratio,
+          zIndex: 1,
+        }}
+      />
+    </div>
+  )
 }
 
 

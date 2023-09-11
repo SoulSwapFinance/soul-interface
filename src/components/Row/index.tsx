@@ -53,6 +53,10 @@ export const RowCenter = styled.div`
   justify-content: center;
 `
 
+export const RowFit = styled(Row)`
+  width: fit-content;
+`
+
 export const AutoRow = styled(Row)<{ gap?: string; justify?: string }>`
   flex-wrap: wrap;
   margin: ${({ gap }) => gap && `-${gap}`};

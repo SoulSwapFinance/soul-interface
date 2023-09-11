@@ -16,6 +16,7 @@ const arbitrumInfo: NetworkInfo = {
   chainId: ChainId.ARBITRUM,
   route: 'arbitrum',
   name: 'Arbitrum',
+  priceRoute: 'arbitrum',
   aggregatorRoute: 'arbitrum',
   icon: ARBITRUM,
   classicClient: createClient(

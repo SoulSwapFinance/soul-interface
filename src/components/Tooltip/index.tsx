@@ -1,5 +1,6 @@
 import { classNames } from 'functions'
 import React, { ReactNode, useCallback, useState } from 'react'
+import styled from 'styled-components'
 
 import Popover, { PopoverProps } from '../Popover'
 
@@ -11,6 +12,16 @@ interface TooltipProps extends Omit<PopoverProps, 'content'> {
 interface TooltipContentProps extends Omit<PopoverProps, 'content'> {
   content: ReactNode
 }
+
+export const TextDashed = styled(Text)<{ color?: string; underlineColor?: string }>`
+  width: fit-content;
+  border-bottom: 1px dotted ${({ theme, underlineColor }) => underlineColor || theme.border};
+`
+
+export const TextDotted = styled(Text)<{ $underlineColor?: string }>`
+  width: fit-content;
+  border-bottom: 1px dotted ${({ theme, $underlineColor }) => $underlineColor || theme.border};
+`
 
 export default function Tooltip({ text, children, className, ...rest }: TooltipProps) {
   return (

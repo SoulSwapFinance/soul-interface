@@ -1,7 +1,9 @@
 import { SURV_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, ETH_ADDRESS, MULTI_WETH_ADDRESS } from 'constants/addresses'
-import { AVAX_ADDRESS, BNB_ADDRESS, BUSD_ADDRESS, ChainId, DAI_ADDRESS, Ether, FMULTI_ADDRESS, FRAX_ADDRESS, LINK_ADDRESS, LUX_ADDRESS, LZ_WBTC_ADDRESS, LZ_WETH_ADDRESS, MPX_ADDRESS, MULTI_AVAX_ADDRESS, MULTI_DAI_ADDRESS, MULTI_WBTC_ADDRESS, NATIVE, SEANCE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
+import { AVAX_ADDRESS, BNB_ADDRESS, BUSD_ADDRESS, ChainId, DAI_ADDRESS, Ether, FMULTI_ADDRESS, FRAX_ADDRESS, LINK_ADDRESS, LUX_ADDRESS, LZ_WBTC_ADDRESS, LZ_WETH_ADDRESS, MPX_ADDRESS, MULTI_AVAX_ADDRESS, MULTI_DAI_ADDRESS, MULTI_WBTC_ADDRESS, NATIVE, NativeCurrency, SEANCE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
 
 import { SupportedChainId } from '../chains'
+import { NETWORKS_INFO, SUPPORTED_NETWORKS } from 'constants/networks'
+import { CHAINS_SUPPORT_FEE_CONFIGS, ETHER_ADDRESS } from 'constants/index'
 
 export const BSC: { [key: string]: Token } = {
   DAI: new Token(ChainId.BSC, '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3', 18, 'DAI', 'Dai Stablecoin'),
@@ -279,7 +281,7 @@ export const WETH9_EXTENDED: { [chainId: number]: Token } = {
 
 export class ExtendedEther extends Ether {
   public get wrapped(): Token {
-    if (this.chainId in WNATIVE) return WNATIVE[this.chainId]
+    if (this.wrapped.chainId in WNATIVE) return WNATIVE[this.wrapped.chainId]
     // if (this.chainId in WETH9_EXTENDED) return WETH9_EXTENDED[this.chainId]
 
     throw new Error('Unsupported Chain ID')
@@ -289,3 +291,68 @@ export class ExtendedEther extends Ether {
     return new ExtendedEther(chainId)
   }
 }
+
+const NativeCurrenciesLocal: { [chainId in ChainId]: NativeCurrency } = SUPPORTED_NETWORKS.reduce(
+  (acc, chainId) => ({
+    ...acc,
+    [chainId]: new NativeCurrency(
+      chainId,
+      NETWORKS_INFO[chainId].nativeToken.decimal,
+      NETWORKS_INFO[chainId].nativeToken.symbol,
+      NETWORKS_INFO[chainId].nativeToken.name,
+    ),
+  }),
+  {},
+) as { [chainId in ChainId]: NativeCurrency }
+
+//this Proxy helps fallback undefined ChainId by Ethereum info
+export const NativeCurrencies = new Proxy(NativeCurrenciesLocal, {
+  get(target, p) {
+    const prop = p as any as ChainId
+    if (p && target[prop]) return target[prop]
+    return target[ChainId.ETHEREUM]
+  },
+})
+
+export const DEFAULT_SWAP_FEE_STABLE_PAIRS = 4
+export const DEFAULT_SWAP_FEE_NOT_STABLE_PAIRS = 10
+
+// This list is intentionally different from the list above
+// Was requested from product team, to implement Swap fee config
+export const STABLE_COIN_ADDRESSES_TO_TAKE_FEE: Record<ChainId, string[]> = {
+  // [ChainId.AURORA]: [
+  //   '0xB12BFcA5A55806AaF64E99521918A4bf0fC40802', // usdc
+  //   '0x4988a896b1227218e4A686fdE5EabdcAbd91571f', // usdt
+  //   '0xe3520349F477A5F6EB06107066048508498A291b', // Dai
+  // ],
+  // [ChainId.CRONOS]: [
+  //   '0xc21223249CA28397B4B6541dfFaEcC539BfF0c59', // usdc
+  //   '0xF2001B145b43032AAF5Ee2884e456CCd805F677D', // dai
+  //   '0x66e428c3f67a68878562e79A0234c1F83c208770', // usdt
+  //   '0xC74D59A548ecf7fc1754bb7810D716E9Ac3e3AE5', // busd
+  //   '0x2Ae35c8E3D4bD57e8898FF7cd2bBff87166EF8cb', // MAI
+  // ],
+  [ChainId.MATIC]: [],
+  // [ChainId.OPTIMISM]: [],
+  [ChainId.ETHEREUM]: [],
+  [ChainId.AVALANCHE]: [],
+  [ChainId.FANTOM]: [],
+  [ChainId.TELOS]: [],
+  [ChainId.BSC]: [],
+  [ChainId.MOONRIVER]: [],
+  [ChainId.ARBITRUM]: [],
+  // [ChainId.ZKEVM]: [],
+  // [ChainId.LINEA]: [],
+  // [ChainId.BASE]: [],
+}
+
+// This is basically the same as STABLE_COIN_ADDRESSES_TO_TAKE_FEE,
+// but with native token address and wrapped native token address
+export const TOKENS_WITH_FEE_TIER_1: Record<ChainId, string[]> = CHAINS_SUPPORT_FEE_CONFIGS.reduce((acc, chainId) => {
+  if (STABLE_COIN_ADDRESSES_TO_TAKE_FEE[chainId].length) {
+    acc[chainId] = [...STABLE_COIN_ADDRESSES_TO_TAKE_FEE[chainId], ETHER_ADDRESS, WETH[chainId].address]
+  } else {
+    acc[chainId] = []
+  }
+  return acc
+}, {} as Record<ChainId, string[]>)

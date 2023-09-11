@@ -13,7 +13,7 @@ import { useAppDispatch } from 'state/hooks'
 import { clearAllTransactions } from 'state/transactions/actions'
 import { isTransactionRecent, useAllTransactions } from 'state/transactions/hooks'
 import { TransactionDetails } from 'state/transactions/reducer'
-import { useETHBalances } from 'state/wallet/hooks'
+import { useCurrencyBalances } from 'state/wallet/hooks'
 import Head from 'next/head'
 import React, { useCallback, useMemo } from 'react'
 import { ExternalLink, User } from 'react-feather'
@@ -27,7 +27,7 @@ function newTransactionsFirst(a: TransactionDetails, b: TransactionDetails) {
 
 export default function Me() {
   const { chainId, account } = useActiveWeb3React()
-  const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
+  const userEthBalance = useCurrencyBalances(chainId, account)?.[account ?? '']
   const dispatch = useAppDispatch()
 
   const { ENSName } = useENSName(account ?? undefined)

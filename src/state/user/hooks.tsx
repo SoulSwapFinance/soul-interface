@@ -26,7 +26,7 @@ import flatMap from 'lodash/flatMap'
 import { useCallback, useMemo } from 'react'
 import ReactGA from 'react-ga'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
-import { defaultShowLiveCharts, getFavoriteTokenDefault } from 'state/user/reducer'
+import { CROSS_CHAIN_SETTING_DEFAULT, CrossChainSetting, defaultShowLiveCharts, getFavoriteTokenDefault } from 'state/user/reducer'
 
 import {
   addSerializedPair,
@@ -44,8 +44,13 @@ import {
   updateUserUseOpenMev,
   updateUserDarkMode,
   toggleProLiveChart,
+  setCrossChainSetting,
+  updateUserSlippageToleranceCrosschain,
+  pinSlippageControl,
 } from './actions'
 import { PairState, usePairs } from 'data/Reserves'
+import { isTokenNative } from 'utils/tokenInfo'
+import { NativeCurrencies } from 'constants/tokens'
 
 function serializeToken(token: Token): SerializedToken {
   return {
@@ -564,3 +569,79 @@ export function useDarkModeManager(): [boolean, () => void] {
   return [darkMode, toggleSetDarkMode]
 }
 
+export function useCurrencyConvertedToNative(currency?: Currency): Currency | undefined {
+  return useMemo(() => {
+    if (!!currency) {
+      return isTokenNative(currency, currency.chainId) ? NativeCurrencies[currency.chainId] : currency
+    }
+    return undefined
+  }, [currency])
+}
+
+export const useCrossChainSetting = () => {
+  const dispatch = useAppDispatch()
+  const setting = useAppSelector(state => state.user.crossChain) || CROSS_CHAIN_SETTING_DEFAULT
+  const setSetting = useCallback(
+    (data: CrossChainSetting) => {
+      dispatch(setCrossChainSetting(data))
+    },
+    [dispatch],
+  )
+  const setExpressExecutionMode = useCallback(
+    (enableExpressExecution: boolean) => {
+      setSetting({ ...setting, enableExpressExecution })
+    },
+    [setSetting, setting],
+  )
+
+  const setRawSlippage = useCallback(
+    (slippageTolerance: number) => {
+      setSetting({ ...setting, slippageTolerance })
+    },
+    [setSetting, setting],
+  )
+
+  const toggleSlippageControlPinned = useCallback(() => {
+    setSetting({ ...setting, isSlippageControlPinned: !setting.isSlippageControlPinned })
+  }, [setSetting, setting])
+
+  return { setting, setExpressExecutionMode, setRawSlippage, toggleSlippageControlPinned }
+}
+
+export const useSlippageSettingByPage = (isCrossChain = false) => {
+  const dispatch = useDispatch()
+  const isPinSlippageSwap = useAppSelector(state => state.user.isSlippageControlPinned)
+  const [rawSlippageSwap, setRawSlippageSwap] = useUserSlippageToleranceCrosschain()
+  const togglePinSlippageSwap = () => {
+    dispatch(pinSlippageControl(!isSlippageControlPinned))
+  }
+
+  const {
+    setting: { slippageTolerance: rawSlippageSwapCrossChain, isSlippageControlPinned: isPinSlippageCrossChain },
+    setRawSlippage: setRawSlippageCrossChain,
+    toggleSlippageControlPinned: togglePinnedSlippageCrossChain,
+  } = useCrossChainSetting()
+
+  const isSlippageControlPinned = isCrossChain ? isPinSlippageCrossChain : isPinSlippageSwap
+  const rawSlippage = isCrossChain ? rawSlippageSwapCrossChain : rawSlippageSwap
+  const setRawSlippage = isCrossChain ? setRawSlippageCrossChain : setRawSlippageSwap
+  const togglePinSlippage = isCrossChain ? togglePinnedSlippageCrossChain : togglePinSlippageSwap
+
+  return { setRawSlippage, rawSlippage, isSlippageControlPinned, togglePinSlippage }
+}
+
+export function useUserSlippageToleranceCrosschain(): [number, (slippage: number) => void] {
+  const dispatch = useDispatch<AppDispatch>()
+  const userSlippageToleranceCrosschain = useSelector<AppState, AppState['user']['userSlippageToleranceCrosschain']>(state => {
+    return state.user.userSlippageToleranceCrosschain
+  })
+
+  const setUserSlippageToleranceCrosschain = useCallback(
+    (userSlippageToleranceCrosschain: number) => {
+      dispatch(updateUserSlippageToleranceCrosschain({ userSlippageToleranceCrosschain }))
+    },
+    [dispatch],
+  )
+
+  return [userSlippageToleranceCrosschain, setUserSlippageToleranceCrosschain]
+}

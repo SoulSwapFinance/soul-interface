@@ -1,6 +1,6 @@
-import { Token } from 'sdk'
-import { TokenInfo } from '@uniswap/token-lists'
+import { ChainId, Token } from 'sdk'
 import { isAddress } from 'functions/validate'
+import { TokenInfo } from 'state/lists/wrappedTokenInfo'
 
 const alwaysTrue = () => true
 
@@ -8,8 +8,8 @@ const alwaysTrue = () => true
  * Create a filter function to apply to a token for whether it matches a particular search query
  * @param search the search query to apply to the token
  */
-export function createTokenFilterFunction<T extends Token | TokenInfo>(search: string): (tokens: T) => boolean {
-  const searchingAddress = isAddress(search)
+export function createTokenFilterFunction<T extends Token | TokenInfo>(chainId: ChainId, search: string): (tokens: T) => boolean {
+  const searchingAddress = isAddress(chainId, search)
 
   if (searchingAddress) {
     const lower = searchingAddress.toLowerCase()
@@ -35,13 +35,17 @@ export function createTokenFilterFunction<T extends Token | TokenInfo>(search: s
   return ({ name, symbol }: T): boolean => Boolean((symbol && matchesSearch(symbol)) || (name && matchesSearch(name)))
 }
 
-export function filterTokens<T extends Token | TokenInfo>(tokens: T[], search: string): T[] {
-  return tokens.filter(createTokenFilterFunction(search))
+export function filterTokens<T extends Token | TokenInfo>(tokens: T[], chainId: ChainId, search: string): T[] {
+  return tokens.filter(createTokenFilterFunction(chainId, search))
 }
 
-export function filterTokensWithExactKeyword<T extends Token | TokenInfo>(tokens: T[], search: string): T[] {
-  const result = filterTokens(tokens, search)
-  if (isAddress(search)) return result
+export function filterTokensWithExactKeyword<T extends Token | TokenInfo>(tokens: T[], chainId: ChainId, search: string): T[] {
+  const result = filterTokens(tokens, chainId, search)
+  if (isAddress(chainId, search)) return result
   const filterExact = result.filter(e => (e.symbol ? e.symbol.toLowerCase() === search.toLowerCase() : true)) // Exact Keyword
   return filterExact.length ? filterExact : result
+}
+
+export const filterTruthy = <T>(array: (T | undefined | null | false)[]): T[] => {
+  return array.filter(Boolean) as T[]
 }

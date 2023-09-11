@@ -10,7 +10,7 @@ import { CurrencyLogo } from 'components/CurrencyLogo'
 import { AutoRow } from 'components/Row'
 import useTheme from 'hooks/useTheme'
 
-// import { getDisplayTokenInfo } from './CurrencyList'
+import { getDisplayTokenInfo } from './CurrencyList'
 
 const HEIGHT_THRESHOLD = 400
 const BaseWrapper = styled.div`
@@ -76,8 +76,7 @@ export default function CommonBases({
       <AutoRow gap="4px">
         {(tokens as Token[]).map((token: Token) => {
           const selected = selectedCurrency instanceof Token && selectedCurrency.address === token.address
-          const symbol = 'SYMBOL' // getDisplayTokenInfo(token)
-          // const { symbol } = getDisplayTokenInfo(token)
+          const { symbol } = getDisplayTokenInfo(token)
           return (
             <BaseWrapper
               data-testid="favorite-token"

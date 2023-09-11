@@ -19,6 +19,7 @@ export type PopupContent =
     }
 
 export enum ApplicationModal {
+  SWAP_APPROVAL,
   WALLET,
   SETTINGS,
   CROSSCHAIN,

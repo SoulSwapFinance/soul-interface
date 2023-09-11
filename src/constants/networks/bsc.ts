@@ -13,6 +13,7 @@ const bnbInfo: NetworkInfo = {
   route: 'bnb',
   name: 'BNB Chain',
   aggregatorRoute: 'bsc',
+  priceRoute: 'bsc',
   icon: BSC,
   classicClient: createClient('https://api.thegraph.com/subgraphs/name/kybernetwork/kyberswap-exchange-bsc'),
   elasticClient: createClient('https://api.thegraph.com/subgraphs/name/kybernetwork/kyberswap-elastic-bsc'),

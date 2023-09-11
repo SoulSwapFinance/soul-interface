@@ -1,7 +1,8 @@
 import { BigNumber } from "@ethersproject/bignumber";
-import { Tags, TokenInfo, Version } from "@uniswap/token-lists";
+import { Tags, Version } from "@uniswap/token-lists";
 import { BIPS_BASE } from "constants/index";
 import { JSBI, Percent } from "sdk";
+import { TokenInfo } from "state/lists/wrappedTokenInfo";
 
 export const ALLOWED_PRICE_IMPACT_LOW: Percent = new Percent(
     JSBI.BigInt(100),

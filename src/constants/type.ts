@@ -7,6 +7,7 @@ export type NetworkInfo = {
   // route can be used to detect which chain is favored in query param, check out useActiveNetwork.ts
   readonly route: string
   readonly name: string
+  readonly priceRoute: string
   readonly icon?: string
   readonly iconDark?: string
   readonly classicClient: ApolloClient<NormalizedCacheObject>

@@ -1,101 +1,95 @@
-// import { SquidWidget } from "@0xsquid/widget";
-// import { AppConfig } from "@0xsquid/widget/widget/core/types/config";
+import { Squid } from '@0xsquid/sdk'
+import { memo, useEffect, useRef } from 'react'
+// import { Navigate } from 'react-router-dom'
+import { Flex, Text } from 'rebass'
 
-// import Container from "components/Container";
-// import Link from "next/link";
-// import Typography from "components/Typography";
-// import { getChainColorCode } from "constants/chains";
-// import NavLink from "components/NavLink";
-import { useActiveWeb3React } from "services/web3";
-import SwapDropdown from "features/swap/SwapDropdown";
-import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
-import LimitHeader from "features/limit/LimitHeader";
-import { CustomBanner } from "components/Banner";
-import { ChainId } from "sdk";
+// import WarningIcon from 'components/Icons/WarningIcon'
+import { CROSS_CHAIN_CONFIG } from 'constants/env'
+import { SUPPORTED_NETWORKS } from 'constants/networks'
+import { NativeCurrencies } from 'constants/tokens'
+import { useActiveWeb3React } from 'hooks'
+import useTheme from 'hooks/useTheme'
+import { useCrossChainHandlers, useCrossChainState } from 'state/crossChain/hooks'
+import { TokenInfo, WrappedTokenInfo } from 'state/lists/wrappedTokenInfo'
 
-const Crosschain = () => {
-  const { chainId } = useActiveWeb3React();
-  return (
-    // <DoubleGlowShadowV2>
-          
-    // <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-    // <Container
-    //   className={'grid grid-cols-1 items-center justify-center'}
-    // >
-      <DoubleGlowShadowV2>
-      <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
-          <SwapDropdown
-            inputCurrency={null}
-            outputCurrency={null}
-            allowedSlippage={null}
-          />
-        <CustomBanner
-          chains={[ChainId.FANTOM]}
-          link={'/bonds'}
-          text={'New Bonds Available ↗'}
-          textColor={'white'}
-          color={'ftmBlue'}
-          className={`animate-pulse border-4 border-dark-800 rounded-2xl`}
-        />
-      <LimitHeader
-        inputCurrency={null}
-        outputCurrency={null}
-      />
-      {/* <div
-        className={`flex justify-center border-4 border-${getChainColorCode(chainId ?? 250)} rounded-2xl m-2 p-2`}
-      >
-        <Typography variant="h1" className="text-center">
-          {'Crosschain'}
-        </Typography>
-      </div> */}
-      <div
-        className={`flex rounded-2xl justify-center items-center p-4 m-4`
-          // `flex flex-col justify-center items-center w-full h-full p-4 sm:p-8 text-white bg-dark-900`
+// import { DisclaimerCrossChain } from '../Bridge/Disclaimer'
+import SwapForm from 'features/crosschain/SwapForm'
+
+export const getAxelarScanUrl = (srcTxHash: string) => `${CROSS_CHAIN_CONFIG.AXELAR_SCAN_URL}${srcTxHash}`
+
+function CrossChain({ visible }: { visible: boolean }) {
+  const theme = useTheme()
+  const { chainId } = useActiveWeb3React()
+  const [{ squidInstance, chainIdOut, listChainOut }, setCrossChainState] = useCrossChainState()
+
+  const curChainId = useRef(chainId)
+
+  curChainId.current = chainId
+  const loading = useRef(false)
+  const { selectCurrencyIn, selectDestChain, selectCurrencyOut } = useCrossChainHandlers()
+
+  useEffect(() => {
+    selectCurrencyIn(NativeCurrencies[chainId])
+  }, [chainId, selectCurrencyIn])
+
+  useEffect(() => {
+    chainIdOut && selectCurrencyOut(NativeCurrencies[chainIdOut])
+  }, [selectCurrencyOut, chainIdOut])
+
+  useEffect(() => {
+    if (chainId === chainIdOut || !chainIdOut) selectDestChain(listChainOut[0])
+  }, [chainId, listChainOut, chainIdOut, selectDestChain])
+
+  useEffect(() => {
+    ;(async () => {
+      try {
+        let squid = squidInstance
+        if (loading.current) return
+        loading.current = true
+        const config = { baseUrl: CROSS_CHAIN_CONFIG.API_DOMAIN, integratorId: CROSS_CHAIN_CONFIG.INTEGRATOR_ID }
+        if (!squid) {
+          squid = new Squid(config)
+        } else {
+          squid.setConfig(config)
         }
-      >
-        <iframe
-          width={'100%'}
-          height={'720px'}
-          src={`https://widget-integrations-squid.vercel.app/`}
-          // style={{
-          //    height: '100vh',
-          //     width: '100vw',
-          // }}
-        >
-        </iframe>
-        {/* <Link
-          href={'https://widget-integrations-squid.vercel.app/'}
-          target={'_blank'}
-        >
-        <div
-          className={'flex sm:hidden justify-center text-center border-4 border-dark-800 rounded-2xl m-2 p-2 bg-dark-700 hover:bg-dark-800'}
-        >
-            {'Visit Crosschain Page ↗'}
-        </div>
-          </Link> */}
-        {/* <NavLink
-          href='/swap'
-        >
-          <div
-            className={
-              `flex  gap-4 p-2 rounded-2xl border hover:border-${getChainColorCode(chainId)} bg-${getChainColorCode(chainId)} text-white mt-1 text-sm font-bold justify-center`
-            }>
-            <div className={'flex justify-end'}>
-              {`←`}
-            </div>
-            <div className={
-              'flex justify-left'
-            }>
-              {`Return to Exchange`}
-            </div>
-          </div>
-        </NavLink> */}
-      </div>
-    {/* </Container> */}
-    </div>
-    </DoubleGlowShadowV2>
+        await squid.init()
+        const { chains = [], tokens = [] } = squid
+        const chainSupports = chains.map(e => Number(e.chainId)).filter(id => SUPPORTED_NETWORKS.includes(id))
+        const formattedTokens: WrappedTokenInfo[] = []
+        tokens.forEach(token => {
+          if (typeof token.chainId === 'string' || !chainSupports.includes(token.chainId)) return
+          formattedTokens.push(new WrappedTokenInfo(token as unknown as TokenInfo))
+        })
+        setCrossChainState({
+          chains: chainSupports,
+          tokens: formattedTokens,
+          loadingToken: false,
+          squidInstance: squid,
+        })
+      } catch (error) {
+      } finally {
+        loading.current = false
+      }
+    })()
+  }, [squidInstance, setCrossChainState])
 
-  );
+  if (!visible) return null
+  // if (isSolana) return <Navigate to="/" />
+  if (String(squidInstance?.isInMaintenanceMode) === 'true')
+    return (
+      <Flex style={{ gap: '8px' }} alignItems={'center'}>
+        {/* <WarningIcon color={theme.warning} size={40} /> */}
+        <Text color={theme.warning} fontSize={14}>
+            {`Service is not available because of maintenance activities. Please try again after a few minutes.`}
+        </Text>
+      </Flex>
+    )
+  return (
+    <>
+      {/* <DisclaimerCrossChain /> */}
+      <SwapForm />
+    </>
+  )
 }
-
-export default Crosschain
+// export default memo(CrossChain)
+export default CrossChain

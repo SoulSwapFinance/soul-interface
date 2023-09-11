@@ -14,6 +14,7 @@ const ethereumInfo: NetworkInfo = {
   route: 'ethereum',
   name: 'Ethereum',
   aggregatorRoute: 'ethereum',
+  priceRoute: 'ethereum',
   icon: ETH,
   classicClient: createClient('https://api.thegraph.com/subgraphs/name/kybernetwork/kyberswap-exchange-ethereum'),
   elasticClient: createClient('https://api.thegraph.com/subgraphs/name/kybernetwork/kyberswap-elastic-mainnet'),

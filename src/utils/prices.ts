@@ -132,3 +132,20 @@ export function sortTradesByExecutionPrice(trades: (Trade<Currency, Currency, Tr
     }
   })
 }
+
+// priceImpact is invalid if it's not finite (NaN, Infinity)
+// priceImpact is undefined or null means it's not provided
+export const checkPriceImpact = (
+  priceImpact: number | undefined | null,
+): {
+  isInvalid: boolean
+  isHigh: boolean
+  isVeryHigh: boolean
+} => {
+  return {
+    // priceImpact < 0 is still VALID. That's when you swap $10, but receive back $12
+    isInvalid: typeof priceImpact === 'number' && !Number.isFinite(priceImpact),
+    isHigh: !!priceImpact && priceImpact > 2,
+    isVeryHigh: !!priceImpact && priceImpact > 10,
+  }
+}

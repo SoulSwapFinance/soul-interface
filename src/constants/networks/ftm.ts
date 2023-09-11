@@ -14,6 +14,7 @@ const fantomInfo: NetworkInfo = {
   route: 'fantom',
   name: 'Fantom',
   aggregatorRoute: 'fantom',
+  priceRoute: 'fantom',
   icon: FTM,
   classicClient: createClient('https://api.thegraph.com/subgraphs/name/kybernetwork/kyberswap-exchange-fantom'),
   elasticClient: createClient('https://api.thegraph.com/subgraphs/name/kybernetwork/kyberswap-elastic-fantom'),

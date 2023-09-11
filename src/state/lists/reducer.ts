@@ -6,9 +6,12 @@ import { TokenList } from '@uniswap/token-lists/dist/types'
 import { DEFAULT_ACTIVE_LIST_URLS, DEFAULT_LIST_OF_LISTS } from 'config/token-lists'
 import { updateVersion } from '../global/actions'
 import { acceptListUpdate, addList, disableList, enableList, fetchTokenList, removeList } from './actions'
+import { ChainId } from 'sdk'
+import { WrappedTokenInfo } from './wrappedTokenInfo'
 
 export interface ListsState {
-  readonly byUrl: {
+  readonly mapWhitelistTokens?: TokenAddressMap
+  readonly byUrl?: {
     readonly [url: string]: {
       readonly current: TokenList | null
       readonly pendingUpdate: TokenList | null
@@ -188,3 +191,7 @@ export default createReducer(initialState, (builder) =>
       }
     })
 )
+
+export type TokenAddressMap = {
+  [chainId in ChainId | number]: { [tokenAddress: string]: WrappedTokenInfo }
+}

@@ -1,9 +1,9 @@
 import { BigNumber } from "@ethersproject/bignumber";
-import { Currency, JSBI, Percent } from "sdk";
+import { ChainId, Currency, JSBI, Percent } from "sdk";
 import Notify from 'bnc-notify'
 import { ethers } from 'ethers'
 import { Pair, Token } from "sdk";
-import { TokenAddressMap } from "state/lists/hooks";
+// import { TokenAddressMap } from "state/lists/hooks";
 export * from './tools/axios'
 export * from './tools/getPrice'
 export * from './tools/rate'
@@ -189,11 +189,11 @@ export function prettyDisplayNumber(number: BigNumber): string {
   }
 }
 
-export function isTokenOnList(defaultTokens: TokenAddressMap, currency: Currency): boolean {
-  let veri = true
-  currency.isNative ? veri = true : veri = Boolean(currency instanceof Token && defaultTokens[currency.chainId]?.[currency.address])
-  return veri
-}
+// export function isTokenOnList(defaultTokens: TokenAddressMap, currency: Currency): boolean {
+//   let veri = true
+//   currency.isNative ? veri = true : veri = Boolean(currency instanceof Token && defaultTokens[currency.chainId]?.[currency.address])
+//   return veri
+// }
 
 export function isPairOnList(pairs: Pair[], pair?: Pair): boolean {
   if (!pair) return false
@@ -202,4 +202,12 @@ export function isPairOnList(pairs: Pair[], pair?: Pair): boolean {
       = pair
       // )
     )
+}
+
+export function isAddressString(chainId: ChainId, value: any): string {
+  try {
+    return new Token(chainId, value, 0).address
+  } catch {
+    return ''
+  }
 }

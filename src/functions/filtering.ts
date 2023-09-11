@@ -1,5 +1,5 @@
-import { Token } from '../sdk'
-import { TokenInfo } from '@uniswap/token-lists'
+import { TokenInfo } from 'state/lists/wrappedTokenInfo'
+import { ChainId, Token } from '../sdk'
 import { isAddress } from './validate'
 import { useMemo } from 'react'
 
@@ -9,8 +9,8 @@ const alwaysTrue = () => true
  * Create a filter function to apply to a token for whether it matches a particular search query
  * @param search the search query to apply to the token
  */
-export function createTokenFilterFunction<T extends Token | TokenInfo>(search: string): (tokens: T) => boolean {
-  const searchingAddress = isAddress(search)
+export function createTokenFilterFunction<T extends Token | TokenInfo>(chainId: ChainId, search: string): (tokens: T) => boolean {
+  const searchingAddress = isAddress(chainId, search)
 
   if (searchingAddress) {
     const lower = searchingAddress.toLowerCase()
@@ -36,8 +36,8 @@ export function createTokenFilterFunction<T extends Token | TokenInfo>(search: s
   return ({ name, symbol }: T): boolean => Boolean((symbol && matchesSearch(symbol)) || (name && matchesSearch(name)))
 }
 
-export function filterTokens<T extends Token | TokenInfo>(tokens: T[], search: string): T[] {
-  return tokens.filter(createTokenFilterFunction(search))
+export function filterTokens<T extends Token | TokenInfo>(tokens: T[], chainId: ChainId, search: string): T[] {
+  return tokens.filter(createTokenFilterFunction(chainId, search))
 }
 
 export function useSortedTokensByQuery(tokens: Token[] | undefined, searchQuery: string): Token[] {

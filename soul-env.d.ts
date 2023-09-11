@@ -13,6 +13,9 @@ declare global {
     ethereum?: {
       isCoinbaseWallet?: true
       isMetaMask?: true
+      isTrustWallet?: true
+      isTrust?: true
+      isRabby?: true
       isBraveWallet?: true
       on?: (...args: any[]) => void
       removeListener?: (...args: any[]) => void

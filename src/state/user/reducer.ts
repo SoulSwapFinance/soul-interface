@@ -9,6 +9,7 @@ import {
   removeSerializedToken,
   SerializedPair,
   SerializedToken,
+  setCrossChainSetting,
   toggleURLWarning,
   updateMatchesDarkMode,
   updateUserCrossChainMode,
@@ -16,6 +17,7 @@ import {
   updateUserDeadline,
   updateUserSingleHopOnly,
   updateUserSlippageTolerance,
+  updateUserSlippageToleranceCrosschain,
   updateUserUseOpenMev,
   toggleLiveChart,
   toggleProLiveChart,
@@ -25,6 +27,13 @@ import {
 import { ChainId } from 'sdk'
 // getFavoriteTokenDefault
 const currentTimestamp = () => new Date().getTime()
+
+export type CrossChainSetting = {
+  isSlippageControlPinned: boolean
+  slippageTolerance: number
+  enableExpressExecution: boolean
+}
+
 
 export interface UserState {
   showProLiveChart: boolean
@@ -39,6 +48,7 @@ export interface UserState {
 
   // user defined slippage tolerance in bips, used in all txns
   userSlippageTolerance: number | 'auto'
+  userSlippageToleranceCrosschain: number
 
   // deadline set by user in minutes, used in all txns
   userDeadline: number
@@ -67,6 +77,9 @@ export interface UserState {
   matchesDarkMode: boolean // whether the dark mode media query matches
 
   URLWarningVisible: boolean
+  chainId: ChainId
+  crossChain: CrossChainSetting
+  isSlippageControlPinned: boolean
 }
 
 export const defaultShowLiveCharts: { [chainId in ChainId]: boolean } = {
@@ -80,10 +93,17 @@ export const defaultShowLiveCharts: { [chainId in ChainId]: boolean } = {
   [ChainId.ARBITRUM]: false
 }
 
+export const CROSS_CHAIN_SETTING_DEFAULT = {
+  isSlippageControlPinned: true,
+  slippageTolerance: INITIAL_ALLOWED_SLIPPAGE,
+  enableExpressExecution: false,
+}
+
 export const initialState: UserState = {
   userCrossChainMode: false,
   userSingleHopOnly: false,
   userSlippageTolerance: INITIAL_ALLOWED_SLIPPAGE,
+  userSlippageToleranceCrosschain: INITIAL_ALLOWED_SLIPPAGE,
   userDeadline: DEFAULT_DEADLINE_FROM_NOW,
   tokens: {},
   pairs: {},
@@ -96,7 +116,10 @@ export const initialState: UserState = {
   showTokenInfo: false,
   showProLiveChart: false,
   showTradeRoutes: false,
-  showTopTrendingSoonTokens: false
+  showTopTrendingSoonTokens: false,
+  chainId: ChainId.FANTOM,
+  isSlippageControlPinned: true,
+  crossChain: CROSS_CHAIN_SETTING_DEFAULT,
 }
 
 function pairKey(token0Address: string, token1Address: string) {
@@ -117,11 +140,18 @@ export default createReducer(initialState, (builder) =>
       if (typeof state.userSlippageTolerance !== 'number') {
         state.userSlippageTolerance = INITIAL_ALLOWED_SLIPPAGE
       }
+      if (typeof state.userSlippageToleranceCrosschain !== 'number') {
+        state.userSlippageToleranceCrosschain = INITIAL_ALLOWED_SLIPPAGE
+      }
 
       // deadline isnt being tracked in local storage, reset to default
       // noinspection SuspiciousTypeOfGuard
       if (typeof state.userDeadline !== 'number') {
         state.userDeadline = DEFAULT_DEADLINE_FROM_NOW
+      }
+
+      if (typeof state.isSlippageControlPinned !== 'boolean') {
+        state.isSlippageControlPinned = initialState.isSlippageControlPinned
       }
 
       state.lastUpdateVersionTimestamp = currentTimestamp()
@@ -140,6 +170,10 @@ export default createReducer(initialState, (builder) =>
     })
     .addCase(updateUserSlippageTolerance, (state, action) => {
       state.userSlippageTolerance = action.payload.userSlippageTolerance
+      state.timestamp = currentTimestamp()
+    })
+    .addCase(updateUserSlippageToleranceCrosschain, (state, action) => {
+      state.userSlippageTolerance = action.payload.userSlippageToleranceCrosschain
       state.timestamp = currentTimestamp()
     })
     .addCase(updateUserDeadline, (state, action) => {
@@ -194,6 +228,10 @@ export default createReducer(initialState, (builder) =>
     })
     .addCase(toggleProLiveChart, state => {
       state.showProLiveChart = !state.showProLiveChart
+    })
+    .addCase(setCrossChainSetting, (state, { payload }) => {
+      const setting = state.crossChain || CROSS_CHAIN_SETTING_DEFAULT
+      state.crossChain = { ...setting, ...payload }
     })
     .addCase(toggleTokenInfo, state => {
       state.showTokenInfo = !state.showTokenInfo

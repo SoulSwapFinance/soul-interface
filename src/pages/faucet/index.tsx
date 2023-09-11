@@ -11,15 +11,15 @@ import Typography from '../../components/Typography'
 import { Loader } from 'react-feather'
 import Image from '../../components/Image'
 import { useActiveWeb3React } from 'services/web3'
-import { useETHBalances } from '../../state/wallet/hooks'
 import axios from 'axios'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { FAUCET_ADDRESS } from '../../constants'
+import { useCurrencyBalances } from 'state/wallet/hooks'
 
 export default function Faucet(): JSX.Element {
   const { chainId, account, library } = useActiveWeb3React()
   // const [token, setToken] = useState('')
-  const tokenBalance = useETHBalances([FAUCET_ADDRESS[chainId | 250]])
+  const tokenBalance = useCurrencyBalances(chainId, FAUCET_ADDRESS[chainId | 250])
   const [pendingTx, setPendingTx] = useState(false)
   const [requested, setRequested] = useState(false)
   const [faucetResult, setFaucetResult] = useState({ status: 200, message: null })

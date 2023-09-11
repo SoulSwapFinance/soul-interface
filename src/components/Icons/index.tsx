@@ -113,4 +113,4 @@ export default Icons;
 
 
 export { default as MoneyFill } from './MoneyFill'
-
+export { default as GasStation } from './GasStation'

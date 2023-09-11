@@ -1,4 +1,5 @@
 import { createAction } from '@reduxjs/toolkit'
+import { CrossChainSetting } from './reducer'
 
 export interface SerializedToken {
   chainId: number
@@ -21,6 +22,9 @@ export const updateUserSingleHopOnly = createAction<{
 export const updateUserSlippageTolerance = createAction<{
   userSlippageTolerance: number | 'auto'
 }>('user/updateUserSlippageTolerance')
+export const updateUserSlippageToleranceCrosschain = createAction<{ 
+  userSlippageToleranceCrosschain: number 
+}>('user/updateUserSlippageToleranceCrosschain')
 export const updateUserDeadline = createAction<{ userDeadline: number }>('user/updateUserDeadline')
 export const addSerializedToken = createAction<{
   serializedToken: SerializedToken
@@ -38,7 +42,10 @@ export const toggleTokenInfo = createAction<void>('user/toggleTokenInfo')
 export const toggleLiveChart = createAction<{ chainId: number }>('user/toggleLiveChart')
 export const toggleTopTrendingTokens = createAction<void>('user/toggleTopTrendingTokens')
 export const toggleProLiveChart = createAction<void>('user/toggleProLiveChart')
+export const pinSlippageControl = createAction<boolean>('user/pinSlippageControl')
 
 export const updateUserUseOpenMev = createAction<{
   userUseOpenMev: boolean
 }>('user/updateUserUseOpenMev')
+
+export const setCrossChainSetting = createAction<CrossChainSetting>('user/setCrossChainSetting')

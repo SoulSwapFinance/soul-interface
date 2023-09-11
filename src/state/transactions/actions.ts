@@ -1,5 +1,6 @@
 import { ChainId } from '../../sdk'
 import { createAction } from '@reduxjs/toolkit'
+import { TransactionPayload } from './type'
 
 export interface SerializableTransactionReceipt {
   to: string
@@ -28,6 +29,7 @@ export const addTransaction = createAction<{
     ethTip: string
   }
 }>('transactions/addTransaction')
+export const addSwapTransaction = createAction<TransactionPayload>('transactions/addSwapTransaction')
 export const clearAllTransactions = createAction<{ chainId: ChainId }>('transactions/clearAllTransactions')
 export const finalizeTransaction = createAction<{
   chainId: ChainId

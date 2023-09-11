@@ -1,11 +1,16 @@
-import { DEFAULT_TXN_DISMISS_MS } from 'constants/index'
+import { ApolloClient, NormalizedCacheObject } from '@apollo/client'
+import { DEFAULT_TXN_DISMISS_MS, NETWORKS_INFO } from 'constants/index'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { AppJsonRpcProvider, KyberSwapConfig, KyberSwapConfigResponse } from 'services/kyberswap/ksSetting'
 
 import { AppState } from '..'
 import { addPopup, ApplicationModal, PopupContent, removePopup, setOpenModal } from './reducer'
 import { useActiveWeb3React } from 'services/web3'
+import { ChainId } from 'sdk'
+import ethereumInfo from 'constants/networks/eth'
+import { createClient } from 'utils/client'
 
 export function useBlockNumber(): number | undefined {
   const { chainId } = useActiveWeb3React()
@@ -53,6 +58,10 @@ export function useCloseModals(): () => void {
 
 export function useWalletModalToggle(): () => void {
   return useToggleModal(ApplicationModal.WALLET)
+}
+
+export function useSwapApprovalModalToggle(): () => void {
+  return useToggleModal(ApplicationModal.SWAP_APPROVAL)
 }
 
 export function useNetworkModalToggle(): () => void {
@@ -122,4 +131,88 @@ export function useActivePopups(): AppState['application']['popupList'] {
 
 export function useUnderworldApprovalPending(): string {
   return useSelector((state: AppState) => state.application.underworldApprovalPending)
+}
+
+const cacheConfig: {
+  rpc: { [rpc: string]: AppJsonRpcProvider }
+  client: { [subgraphLink: string]: ApolloClient<NormalizedCacheObject> }
+} = {
+  rpc: {},
+  client: {},
+}
+
+const cacheCalc: <T extends keyof typeof cacheConfig, U extends typeof cacheConfig[T][string]>(
+  type: T,
+  value: string,
+  fallback: (value: string) => U,
+) => U = <T extends keyof typeof cacheConfig, U extends typeof cacheConfig[T][string]>(
+  type: T,
+  value: string,
+  fallback: (value: string) => U,
+) => {
+  if (!cacheConfig[type][value]) {
+    cacheConfig[type][value] = fallback(value)
+  }
+  return cacheConfig[type][value] as U
+}
+
+function getDefaultConfig(chainId: ChainId): KyberSwapConfigResponse {
+  const evm = chainId
+  return {
+    rpc: NETWORKS_INFO[chainId].rpcUrl,
+    prochart: false,
+    isEnableBlockService: false,
+    blockSubgraph: (evm ? NETWORKS_INFO[chainId] : ethereumInfo).defaultBlockSubgraph,
+    elasticSubgraph: (evm ? NETWORKS_INFO[chainId] : ethereumInfo).elastic.defaultSubgraph,
+    classicSubgraph: (evm ? NETWORKS_INFO[chainId] : ethereumInfo).classic.defaultSubgraph,
+    commonTokens: undefined,
+  }
+}
+
+export const useKyberSwapConfig = (customChainId?: ChainId): KyberSwapConfig => {
+  const storeChainId = useAppSelector(state => state.user.chainId) || ChainId.ETHEREUM
+  const chainId = customChainId || storeChainId
+
+  const config = useAppSelector(state => state.application.config[chainId] || getDefaultConfig(chainId))
+
+  const readProvider = useMemo(() => {
+    return cacheCalc('rpc', config.rpc, rpc => new AppJsonRpcProvider(rpc, chainId))
+  }, [config.rpc, chainId])
+  const blockClient = useMemo(
+    () => cacheCalc('client', config.blockSubgraph, subgraph => createClient(subgraph)),
+    [config.blockSubgraph],
+  )
+  const classicClient = useMemo(
+    () => cacheCalc('client', config.classicSubgraph, subgraph => createClient(subgraph)),
+    [config.classicSubgraph],
+  )
+  const elasticClient = useMemo(
+    () => cacheCalc('client', config.elasticSubgraph, subgraph => createClient(subgraph)),
+    [config.elasticSubgraph],
+  )
+
+  return useMemo(() => {
+    return {
+      rpc: config.rpc,
+      isEnableBlockService: config.isEnableBlockService,
+      readProvider,
+      prochart: config.prochart,
+      blockClient,
+      elasticClient,
+      classicClient,
+      connection: undefined,
+      commonTokens: config.commonTokens,
+    }
+  }, [
+    config.rpc,
+    config.isEnableBlockService,
+    config.prochart,
+    config.commonTokens,
+    readProvider,
+    blockClient,
+    elasticClient,
+    classicClient,
+    chainId,
+  ])
+
 }

@@ -13,6 +13,7 @@ const avaxInfo: NetworkInfo = {
   route: 'avalanche',
   name: 'Avalanche',
   aggregatorRoute: 'avalanche',
+  priceRoute: 'avalanche',
   icon: "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/avalanche/Avalanche.svg",
   classicClient: createClient('https://api.thegraph.com/subgraphs/name/kybernetwork/kyberswap-exchange-avalanche'),
   elasticClient: createClient('https://api.thegraph.com/subgraphs/name/kybernetwork/kyberswap-elastic-avalanche'),

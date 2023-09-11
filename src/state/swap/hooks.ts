@@ -230,7 +230,7 @@ export function useDerivedSwapInfo(): {
     inputError = inputError ?? `Select Token`
   }
 
-  const formattedTo = isAddress(to)
+  const formattedTo = isAddress(chainId, to)
   if (!to || !formattedTo) {
     inputError = inputError ?? `Enter Recipient`
   } else {
@@ -265,7 +265,7 @@ export function useDerivedSwapInfo(): {
 
 export function parseCurrencyFromURLParameter(urlParam: any, chainId: ChainId): string {
   if (typeof urlParam === 'string') {
-    const valid = isAddress(urlParam)
+    const valid = isAddress(chainId, urlParam)
     if (valid) return valid
     if (urlParam.toUpperCase() === NATIVE[chainId ?? ChainId.FANTOM].symbol) return NATIVE[chainId ?? ChainId.FANTOM].symbol
   }
@@ -282,9 +282,9 @@ function parseIndependentFieldURLParameter(urlParam: any): Field {
 
 const ENS_NAME_REGEX = /^[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&/=]*)?$/
 const ADDRESS_REGEX = /^0x[a-fA-F0-9]{40}$/
-function validatedRecipient(recipient: any): string | undefined {
+function validatedRecipient(chainId: ChainId, recipient: any): string | undefined {
   if (typeof recipient !== 'string') return undefined
-  const address = isAddress(recipient)
+  const address = isAddress(chainId, recipient)
   if (address) return address
   if (ENS_NAME_REGEX.test(recipient)) return recipient
   if (ADDRESS_REGEX.test(recipient)) return recipient
@@ -316,10 +316,10 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId)
     outputCurrency = inputCurrency === input ? output : input
   }
 
-  const recipient = validatedRecipient(parsedQs.recipient)
+  const recipient = validatedRecipient(chainId, parsedQs.recipient)
   const feePercent = parseInt(parsedQs?.['fee_bip']?.toString() || '0')
   const feeConfig: FeeConfig | undefined =
-    parsedQs.referral && isAddress(parsedQs.referral) && parsedQs['fee_bip'] && !isNaN(feePercent)
+    parsedQs.referral && isAddress(chainId, parsedQs.referral) && parsedQs['fee_bip'] && !isNaN(feePercent)
       ? {
           chargeFeeBy: 'currency_in',
           feeReceiver: parsedQs.referral.toString(),

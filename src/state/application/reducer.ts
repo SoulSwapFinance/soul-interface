@@ -2,6 +2,7 @@ import { createSlice, nanoid } from '@reduxjs/toolkit'
 import { TokenList } from '@uniswap/token-lists'
 import { DEFAULT_TXN_DISMISS_MS } from 'constants/index'
 import { ChainId } from 'sdk'
+import { KyberSwapConfigResponse } from 'services/kyberswap/ksSetting'
 
 export type PopupContent =
   | {
@@ -21,6 +22,7 @@ export type PopupContent =
     }
 
 export enum ApplicationModal {
+  SWAP_APPROVAL,
   WALLET,
   SETTINGS,
   SELF_CLAIM,
@@ -51,6 +53,9 @@ export interface ApplicationState {
   readonly popupList: PopupList
   readonly openModal: ApplicationModal | null
   readonly underworldApprovalPending: string
+  readonly config: {
+    [chainId in ChainId]?: KyberSwapConfigResponse
+  }
 }
 
 const initialState: ApplicationState = {
@@ -62,6 +67,7 @@ const initialState: ApplicationState = {
   popupList: [],
   openModal: null,
   underworldApprovalPending: '',
+  config: {},
 }
 
 const applicationSlice = createSlice({

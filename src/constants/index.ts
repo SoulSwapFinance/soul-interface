@@ -42,6 +42,16 @@ export const TOKEN_SCORE_TTL = 86_400
 export const INPUT_DEBOUNCE_TIME = 300
 export const RESERVE_USD_DECIMALS = 100
 export const DEFAULT_SIGNIFICANT = 6
+// denominated in seconds
+export const TIME_TO_REFRESH_SWAP_RATE = 10
+
+
+// https://www.nasdaq.com/glossary/b/bip
+export const MAX_NORMAL_SLIPPAGE_IN_BIPS = 1_999
+export const MAX_DEGEN_SLIPPAGE_IN_BIPS = 5_000
+export const ENABLE_CLICK_TO_REFRESH_GET_ROUTE = false
+export const DEFAULT_GAS_LIMIT_MARGIN = 20_000
+
 
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
 export const AVERAGE_BLOCK_TIME_IN_SECS = 1
@@ -317,6 +327,7 @@ export const BAD_RECIPIENT_ADDRESSES: string[] = [
 
 export const ETHER_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
 
+export const PRICE_API = 'https://price.kyberswap.com'
 
 export * from './routing'
 export * from './addresses'

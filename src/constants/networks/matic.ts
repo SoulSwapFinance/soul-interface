@@ -15,6 +15,7 @@ const maticInfo: NetworkInfo = {
   route: 'polygon',
   name: 'Polygon',
   aggregatorRoute: 'polygon',
+  priceRoute: 'polygon',
   icon: MATIC,
   classicClient: createClient('https://api.thegraph.com/subgraphs/name/kybernetwork/kyberswap-exchange-polygon'),
   elasticClient: createClient('https://api.thegraph.com/subgraphs/name/kybernetwork/kyberswap-elastic-matic'),

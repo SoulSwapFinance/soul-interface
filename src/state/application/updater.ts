@@ -10,9 +10,14 @@ import { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { updateBlockNumber, updateBlockTimestamp, updateChainId } from './actions'
+import { useGetKyberswapConfigurationQuery } from 'services/kyberswap/ksSetting'
+import { useKyberSwapConfig } from './hooks'
+import { chain } from 'lodash'
 
 export default function Updater(): null {
   const { library, chainId, account } = useActiveWeb3React()
+  const { readProvider } = useKyberSwapConfig()
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -60,6 +65,25 @@ export default function Updater(): null {
     blockTimestamp: null,
   })
 
+  useGetKyberswapConfigurationQuery(chainId)
+
+  const blockNumberCallback = useCallback(
+    (block: Block) => {
+      setState(state => {
+        if (chainId === state.chainId) {
+          if (typeof state.blockNumber !== 'number' && typeof state.blockTimestamp !== 'number')
+          return { chainId, blockNumber: block.number, blockTimestamp: state.blockTimestamp }
+        }
+        return {
+          chainId,
+          blockNumber: Math.max(block.number, state.blockNumber),
+          blockTimestamp: Math.max(block.timestamp, state.blockTimestamp),
+        }
+      })
+    },
+    [chainId, setState],
+  )
+
   const blockCallback = useCallback(
     (block: Block) => {
       setState((state) => {
@@ -91,6 +115,10 @@ export default function Updater(): null {
     if (!library || !chainId || !windowVisible) return undefined
 
     setState({ chainId, blockNumber: null, blockTimestamp: null })
+    readProvider
+      .getBlockNumber()
+      // .then(blockNumberCallback)
+      .catch((error: any) => console.error(`Failed to get block number for chainId: ${chainId}`, error))
 
     library
       .getBlock('latest')

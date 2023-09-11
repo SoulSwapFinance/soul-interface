@@ -1,10 +1,11 @@
 // CONVENTION isFoo -> boolean
 
-import { Token } from '../sdk'
+import { TokenAddressMap } from 'state/lists/reducer'
+import { ChainId, Token } from '../sdk'
 
 import { BigNumber } from '@ethersproject/bignumber'
-import { TokenAddressMap } from '../state/lists/hooks'
-import { getAddress } from '@ethersproject/address'
+// import { TokenAddressMap } from '../state/lists/hooks'
+// import { getAddress } from '@ethersproject/address'
 
 /**
  * Returns true if the string value is zero in hex
@@ -20,11 +21,29 @@ export const isEmptyValue = (text: string) =>
     : text === '' || text.replace(/0/g, '').replace(/\./, '') === ''
 
 // returns the checksummed address if the address is valid, otherwise returns false
-export function isAddress(value: any): string | false {
+export function isAddress(chainId: ChainId, value: any): string | false {
   try {
-    return getAddress(value)
+    // return getAddress(value)
+    return new Token(chainId, value, 0).address
   } catch {
     return false
+  }
+}
+
+// // returns the checksummed address if the address is valid, otherwise returns false
+// export function isAddress_CrossChain(chainId: ChainId, value: any): string | false {
+//   try {
+//     return new Token(chainId, value, 0).address
+//   } catch {
+//     return false
+//   }
+// }
+
+export function isAddressString_CrossChain(chainId: ChainId, value: any): string {
+  try {
+    return new Token(chainId, value, 0).address
+  } catch {
+    return ''
   }
 }
 

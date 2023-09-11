@@ -3,6 +3,7 @@ import portfolio from 'features/portfolio/portfolioSlice'
 import tridentAdd from '../features/trident/add/addSlice'
 import tridentSwap from '../features/trident/swap/swapSlice'
 import application from './application/reducer'
+import auth from './auth/reducer'
 import burn from './burn/reducer'
 import tokens from './tokens/slice'
 import create from './create/reducer'
@@ -15,9 +16,11 @@ import multicall from './multicall/reducer'
 import fees from './fees/reducer'
 import slippage from './slippage/slippageSlice'
 import swap from './swap/reducer'
+import tokenPrices from './tokenPrices'
 import transactions from './transactions/reducer'
 import user from './user/reducer'
 import order from './order/reducer'
+import crossChain from './crossChain/reducer'
 import gtransactions from './gtransactions/reducer'
 import zap from './zap/reducer'
 import { gelatoReducers } from 'soulswap-limit-orders-react'
@@ -25,7 +28,9 @@ import customizeDexes from './customizeDexes'
 
 const reducer = combineReducers({
   application,
+  auth,
   user,
+  crossChain,
   defarms,
   customizeDexes,
   transactions,
@@ -42,6 +47,7 @@ const reducer = combineReducers({
   slippage,
   gtransactions,
   tokens,
+  tokenPrices,
   tridentSwap,
   tridentAdd,
   web3Context,

@@ -1,11 +1,16 @@
+import { useCallback, useEffect, useMemo, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useActiveWeb3React } from 'services/web3'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 import { selectTransactions } from 'state/transactions/selectors'
-import { useCallback, useMemo } from 'react'
 
-import { addTransaction } from './actions'
+import { addSwapTransaction, addTransaction } from './actions'
 import { TransactionDetails, TransactionState } from './reducer'
 import { ChainId } from 'sdk'
+import { TransactionHistory } from './type'
+import { useBlockNumber, useKyberSwapConfig } from 'state/application/hooks'
+import { TransactionResponse } from '@ethersproject/abstract-provider'
+import { AppDispatch } from 'state'
 
 export interface TransactionResponseLight {
   hash: string
@@ -20,7 +25,6 @@ export function useTransactionAdder(): (
     approval?: { tokenAddress: string; spender: string }
     claim?: { recipient: string }
     arbitrary?: any
-
   }
 ) => void {
   const { chainId, account } = useActiveWeb3React()
@@ -65,6 +69,48 @@ export function useTransactionAdder(): (
       )
     },
     [dispatch, chainId, account]
+  )
+}
+
+// helper that can take a ethers library transaction response and add it to the list of transactions
+export function useSwapTransactionAdder(): (tx: TransactionHistory) => void {
+  const { chainId, account } = useActiveWeb3React()
+  const { readProvider } = useKyberSwapConfig(chainId)
+  const { library } = useActiveWeb3React()
+  const dispatch = useDispatch<AppDispatch>()
+  const blockNumber = useBlockNumber()
+
+  const blockNumberRef = useRef(blockNumber)
+  useEffect(() => {
+    blockNumberRef.current = blockNumber
+  }, [blockNumber])
+
+  return useCallback(
+    async ({ hash, desiredChainId, type, firstTxHash, extraInfo }: TransactionHistory) => {
+      if (!account) return
+
+      let tx: TransactionResponse | undefined
+        try {
+          tx = await library?.getTransaction(hash)
+          if (!tx) tx = await readProvider?.getTransaction(hash)
+        } catch (error) {}
+
+      dispatch(
+        addSwapTransaction({
+          hash,
+          from: account,
+          to: tx?.to,
+          nonce: tx?.nonce,
+          data: tx?.data,
+          sentAtBlock: blockNumberRef.current,
+          chainId: desiredChainId ?? chainId,
+          type,
+          firstTxHash,
+          extraInfo,
+        }),
+      )
+    },
+    [account, chainId, dispatch, readProvider, library],
   )
 }
 
