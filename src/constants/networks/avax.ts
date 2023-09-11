@@ -12,6 +12,7 @@ const avaxInfo: NetworkInfo = {
   chainId: ChainId.AVALANCHE,
   route: 'avalanche',
   name: 'Avalanche',
+  aggregatorRoute: 'avalanche',
   icon: "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/avalanche/Avalanche.svg",
   classicClient: createClient('https://api.thegraph.com/subgraphs/name/kybernetwork/kyberswap-exchange-avalanche'),
   elasticClient: createClient('https://api.thegraph.com/subgraphs/name/kybernetwork/kyberswap-elastic-avalanche'),
@@ -19,6 +20,7 @@ const avaxInfo: NetworkInfo = {
   etherscanUrl: 'https://snowtrace.io',
   etherscanName: 'Snowtrace',
   tokenListUrl: `${SS_SETTING_API}/v1/tokens?chainIds=${ChainId.AVALANCHE}&isWhitelisted=${true}`,
+  defaultBlockSubgraph: 'https://api.thegraph.com/subgraphs/name/ducquangkstn/avalache-blocks',
   bridgeURL: 'https://bridge.avax.network',
   nativeToken: {
     symbol: 'AVAX',
@@ -31,6 +33,7 @@ const avaxInfo: NetworkInfo = {
   rpcUrl: 'https://rpc.ankr.com/avalanche',
   routerUri: `${process.env.REACT_APP_AGGREGATOR_API}/avalanche/route/encode`,
   classic: {
+    defaultSubgraph: 'https://api.thegraph.com/subgraphs/name/kybernetwork/kyberswap-exchange-avalanche',
     static: {
       zap: '0x2abE8750e4a65584d7452316356128C936273e0D',
       router: '0x5649B4DD00780e99Bab7Abb4A3d581Ea1aEB23D0',
@@ -57,6 +60,7 @@ const avaxInfo: NetworkInfo = {
     ],
   },
   elastic: {
+    defaultSubgraph: 'https://api.thegraph.com/subgraphs/name/kybernetwork/kyberswap-elastic-avalanche',
     coreFactory: '0x5F1dddbf348aC2fbe22a163e30F99F9ECE3DD50a',
     nonfungiblePositionManager: '0x2B1c7b41f6A8F2b2bc45C3233a5d5FB3cD6dC9A8',
     tickReader: '0x165c68077ac06c83800d19200e6E2B08D02dE75D',
