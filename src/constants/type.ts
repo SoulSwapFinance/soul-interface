@@ -16,6 +16,8 @@ export type NetworkInfo = {
   readonly etherscanName: string
   readonly tokenListUrl: string
   readonly bridgeURL: string
+  readonly defaultBlockSubgraph: string
+  readonly aggregatorRoute: string
   readonly nativeToken: {
     readonly symbol: string
     readonly name: string
@@ -26,6 +28,7 @@ export type NetworkInfo = {
   readonly rpcUrl: string
   readonly routerUri: string
   readonly classic: {
+    readonly defaultSubgraph: string
     readonly static: {
       readonly zap: string
       readonly router: string
@@ -52,6 +55,7 @@ export type NetworkInfo = {
     readonly initCodeHash: string
     readonly quoter: string
     readonly routers: string
+    readonly defaultSubgraph: string
   }
   // token: {
   //   DAI: Token

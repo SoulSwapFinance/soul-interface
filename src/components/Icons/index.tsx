@@ -110,3 +110,7 @@ const Icons = (props) => {
 };
 
 export default Icons;
+
+
+export { default as MoneyFill } from './MoneyFill'
+

@@ -5,6 +5,15 @@ import { v4 as uuid } from 'uuid'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { BigNumber } from 'ethers'
 import { CurrencyAmount } from 'sdk'
+import { NETWORKS_INFO, SUPPORTED_NETWORKS } from './networks'
+
+export const EMPTY_OBJECT: any = {}
+export const EMPTY_ARRAY: any[] = []
+export const EMPTY_FUNCTION = () => {
+  // empty
+}
+// export const SOULWAP_SOURCE = '{"source":"kyberswap"}'
+export const SOULWAP_SOURCE = '{"source":"soulswap"}'
 
 export const RPC = {
   [ChainId.ETHEREUM]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
@@ -29,6 +38,10 @@ export const SOUL_COINGECKO_ID = 'soul-swap'
 export const POOL_DENY = []
 export const SOULSWAP_SOURCE = '{"source":"soulswap"}'
 export const sentryRequestId = uuid()
+export const TOKEN_SCORE_TTL = 86_400
+export const INPUT_DEBOUNCE_TIME = 300
+export const RESERVE_USD_DECIMALS = 100
+export const DEFAULT_SIGNIFICANT = 6
 
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
 export const AVERAGE_BLOCK_TIME_IN_SECS = 1
@@ -49,6 +62,11 @@ export const AVERAGE_BLOCK_TIME = {
 export const SOULSWAP_URI: { [chainId in ChainId]?: string } = {
   [ChainId.FANTOM]: 'https://api.soulswap.finance',
   [ChainId.AVALANCHE]: 'https://avax-api.soulswap.finance',
+}
+
+export const AGGREGATOR_API_PATHS = {
+  BUILD_ROUTE: '/api/v1/route/build',
+  GET_ROUTE: '/api/v1/routes',
 }
 
 // export const COMMON_CONTRACT_NAMES: { [address: string]: string } = {
@@ -229,6 +247,10 @@ export const BETTER_TRADE_LESS_HOPS_THRESHOLD = new Percent(JSBI.BigInt(50), JSB
 
 export const ZERO_PERCENT = new Percent('0')
 export const ONE_HUNDRED_PERCENT = new Percent('1')
+export const DEFAULT_SLIPPAGES = [5, 10, 50, 100]
+
+export const DEFAULT_SLIPPAGE = 50
+export const DEFAULT_SLIPPAGE_STABLE_PAIR_SWAP = 5
 
 // SDN OFAC addresses
 export const BLOCKED_ADDRESSES: string[] = [
@@ -259,7 +281,45 @@ export const EIP_1559_ACTIVATION_BLOCK: { [chainId in ChainId]?: number } = {
 export const DEFAULT_TXN_DISMISS_MS = 25000
 export const IS_IN_IFRAME = typeof window !== 'undefined' && window.parent !== window
 
+export const CHAINS_SUPPORT_FEE_CONFIGS = [
+  // ChainId.AURORA, ChainId.CRONOS
+]
+export const CHAINS_SUPPORT_CROSS_CHAIN = [
+        ChainId.ETHEREUM,
+        ChainId.BSC,
+        ChainId.MATIC,
+        ChainId.AVALANCHE,
+        ChainId.ARBITRUM,
+        // ChainId.OPTIMISM,
+        ChainId.FANTOM,
+        // ChainId.LINEA,
+        // ChainId.BASE,
+      ]
+    // : SUPPORTED_NETWORKS
+
+export const TYPE_AND_SWAP_NOT_SUPPORTED_CHAINS: ChainId[] = [
+  // ChainId.ZKSYNC,
+  // ChainId.LINEA,
+  // ChainId.ZKEVM,
+  // ChainId.BASE,
+]
+
+export const SWAP_FEE_RECEIVER_ADDRESS = '0xFd63Bf84471Bc55DD9A83fdFA293CCBD27e1F4C8'
+
+export const SECONDS_PER_YEAR = 86_000 * 365
+
+export const BAD_RECIPIENT_ADDRESSES: string[] = [
+  NETWORKS_INFO[ChainId.ETHEREUM].classic.static.factory,
+  NETWORKS_INFO[ChainId.ETHEREUM].classic.static.router,
+  NETWORKS_INFO[ChainId.ETHEREUM].classic.static.factory,
+  NETWORKS_INFO[ChainId.ETHEREUM].classic.static.router,
+]
+
+export const ETHER_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
+
+
 export * from './routing'
 export * from './addresses'
 export * from './networks'
 export * from './tokens'
+
