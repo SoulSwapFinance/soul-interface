@@ -1,6 +1,13 @@
+import { ChainId } from 'sdk'
 import { Currency } from './Currency'
 import { Token } from './Token'
 import invariant from 'tiny-invariant'
+
+export declare function getChainType(chainId: ChainId): ChainType;
+export declare enum ChainType {
+    EVM = "EVM",
+    SOLANA = "SOLANA"
+}
 
 /**
  * A currency is any fungible financial instrument, including Ether, all ERC20 tokens, and other chain-native currencies
