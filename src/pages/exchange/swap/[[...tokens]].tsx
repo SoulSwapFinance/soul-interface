@@ -21,14 +21,14 @@ import { useUSDCValue } from 'hooks/useUSDCPrice'
 import useWrapCallback, { WrapType } from 'hooks/useWrapCallback'
 import { SwapLayout } from 'layouts/SwapLayout'
 import TokenWarningModal from 'modals/TokenWarningModal'
-import { useActiveWeb3React } from 'services/web3'
+// import { useActiveWeb3React } from 'services/web3'
 import { Field } from 'state/swap/actions'
 import { useDefaultsFromURLSearch, useDerivedSwapInfo, useSwapActionHandlers, useSwapState } from 'state/swap/hooks'
 import { useUserOpenMev, useUserSingleHopOnly } from 'state/user/hooks'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { getChainColor, getChainColorCode, getChainLogoURL } from 'constants/chains'
 import { classNames } from 'functions/styling'
-import NavLink from 'components/NavLink'
+// import NavLink from 'components/NavLink'
 import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 import { useRouter } from 'next/router'
@@ -38,16 +38,27 @@ import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { currencyId } from 'functions'
 import { NextSeo } from 'next-seo'
 import { CustomBanner } from 'components/Banner'
-import ChevronDoubleDownIcon from '@heroicons/react/24/solid'
+// import ChevronDoubleDownIcon from '@heroicons/react/24/solid'
 // import Link from 'next/link'
 // import ChevronDoubleUp from 'assets/svg/icons/ChevronDoubleUp.svg'
 import LimitHeader from 'features/limit/LimitHeader'
+import { useWeb3React } from '@web3-react/core'
+import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
+import { useWalletModalToggle } from 'state/application/hooks'
+import { NetworkContextName } from 'constants/index'
+// import { NetworkContextName } from 'constants/index'
+// import Modal from 'components/DefaultModal'
+// import ModalHeader from 'components/Modal/Header'
+// import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 
 // import { FollowBanner } from 'components/Banner'
 
 const Exchange = () => {
   const loadedUrlParams = useDefaultsFromURLSearch()
-  const { account, chainId } = useActiveWeb3React()
+  const { active, account, chainId } = useWeb3React()
+  // const contextNetwork = useWeb3React(NetworkContextName)
+  // NOTE: this sets "showConnect" when account is not active.
+  // const [ showConnect, setShowConnect ] = useState(true)
   const defaultTokens = useAllTokens()
   const { independentField, typedValue, recipient } = useSwapState()
   const { v2Trade, parsedAmount, currencies, inputError: swapInputError, allowedSlippage, to } = useDerivedSwapInfo()
@@ -64,7 +75,11 @@ const Exchange = () => {
   const router = useRouter()
   const tokens = router.query.tokens
   const [currencyIdA, currencyIdB] = (tokens as string[]) || [DEFAULT_CURRENCY_A, DEFAULT_CURRENCY_B]
-  const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
+  // const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
+  const [showConnect, setShowConnect] = useState(true)
+  // const contextNetwork = useWeb3React(NetworkContextName)
+  // const toggleWalletModal = useWalletModalToggle()
+
 
   const [dismissTokenWarning, setDismissTokenWarning] = useState<boolean>(false)
   const urlLoadedTokens: Token[] = useMemo(
@@ -75,8 +90,6 @@ const Exchange = () => {
     setDismissTokenWarning(true)
   }, [])
 
-  const [showChart, setShowChart] = useState(true)
-  const [showPortfolio, setShowPortfolio] = useState(false)
   const inputWrapped = currencies[Field.INPUT] == WNATIVE[chainId ?? ChainId.FANTOM]
   const inputNative = currencies[Field.INPUT] == NATIVE[chainId ?? ChainId.FANTOM]
   const outputWrapped = currencies[Field.OUTPUT] == WNATIVE[chainId ?? ChainId.FANTOM]
@@ -191,6 +204,12 @@ const Exchange = () => {
   )
 
   const [singleHopOnly] = useUserSingleHopOnly()
+
+  const handleConnect = () => {
+    // toggleWalletModal
+    setShowConnect(false)
+    
+}
 
   const handleSwap = useCallback(() => {
     if (!swapCallback) {
@@ -371,28 +390,31 @@ const Exchange = () => {
   )
 
   return (
-    <>
+    <div>
       <NextSeo title={`Swap | SoulSwap`} />
+      {account && chainId &&
       <ConfirmSwapModal
-        isOpen={showConfirm}
-        trade={trade}
-        originalTrade={tradeToConfirm}
-        onAcceptChanges={handleAcceptChanges}
-        attemptingTxn={attemptingTxn}
-        txHash={txHash}
-        recipient={recipient}
-        toChain={chainId ?? ChainId.FANTOM}
-        allowedSlippage={allowedSlippage}
-        onConfirm={handleSwap}
-        swapErrorMessage={swapErrorMessage}
-        onDismiss={handleConfirmDismiss}
+      isOpen={showConfirm}
+      trade={trade}
+      originalTrade={tradeToConfirm}
+      onAcceptChanges={handleAcceptChanges}
+      attemptingTxn={attemptingTxn}
+      txHash={txHash}
+      recipient={recipient}
+      toChain={chainId ?? ChainId.FANTOM}
+      allowedSlippage={allowedSlippage}
+      onConfirm={handleSwap}
+      swapErrorMessage={swapErrorMessage}
+      onDismiss={handleConfirmDismiss}
       />
+      }
+      {account && chainId &&
       <TokenWarningModal
         isOpen={importTokensNotInDefault.length > 0 && !dismissTokenWarning}
         tokens={importTokensNotInDefault}
         onConfirm={handleConfirmTokenWarning}
       />
-
+      }
       {/* {![ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId ?? ChainId.FANTOM) &&
         <div className="flex flex-col gap-3 mt-12 justify-center">
           <SwapDropdown inputCurrency={currencyA} outputCurrency={currencyB} />
@@ -654,49 +676,64 @@ const Exchange = () => {
               </div>
             </div>
             {/* <div className={`flex flex-cols-${showChart ? `hidden` : `1`}`}> */}
-            {showChart && !showPortfolio &&
+            {account && chainId &&
               // useSwap && 
               [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId ?? ChainId.FANTOM) &&
-              // <div className={`xl:max-w-7xl mt-0 w-full lg:grid-cols-1 order-last space-y-0 lg:space-x-4 lg:space-y-0 bg-dark-900`}>
               <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded-lg bg-light-glass`}>
-                {/* <Analytics inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} /> */}
                 {featureEnabled(Feature.ANALYTICS, chainId ?? ChainId.FANTOM) &&
                   !isWrapped &&
                   <TokenChart
                     outputCurrency={outputCurrency}
                   />
-                  // <Pair
-                  //   // isWrapped={isWrapped}
-                  //   inputCurrency={inputCurrency}
-                  //   outputCurrency={outputCurrency}
-                  // />
                 }
               </div>
               // </div>
             }
-            {/* <div
-              className={`flex justify-end h-[40px]`}
-            >
-              <CreditCardIcon
-                className={`flex border-2 ${buyWithFiat ? 'border-green' : 'border-red'} hover:border-white bg-${getChainColorCode(chainId ?? ChainId.FANTOM)} h-[40px] w-[80px] rounded-2xl`}
-                onClick={() => setBuyWithFiat(!buyWithFiat)}
-              />
-            </div> */}
           </div>
-          {/* {buyWithFiat &&
-            <div
-              className={`flex justify-center border-4 border-${'green'} m-1 p-1 bg-dark-900 rounded-2xl`}
-            >
-              <iframe
-                src={`https://fluidmoney.xyz/`}
-                height={'692px'}
-                width={'100%'}
-              />
+        {
+          showConnect &&
+          <HeadlessUIModal.Controlled
+            chainId={chainId ?? ChainId.FANTOM}
+            isOpen={showConnect}
+            onDismiss={
+                () => setShowConnect(false)}
+        >
+            <div className="space-y-4">
+                {/* <ModalHeader header={`FYI: Early Withdrawal Fee`} onClose={() => setShowConnect(false)} /> */}
+                <Typography variant="sm">
+                    <div className="text-xl mt-4 mb-4 text-center border p-1.5 border-purple rounded-2xl">
+                        {`Our Terms and Conditions`}
+                    </div>
+                    <div className="grid grid-cols-2 mt-6 text-center text-purple gap-3 justify-center">
+                        <a href={"https://docs.soulswap.finance/faq/user-agreement"}
+                            target="_blank"
+                            rel={'noreferrer noopener'}
+                            className={'border rounded-2xl p-2 bg-dark-900 m-2 border-dark-800 hover:border-purple'}
+                        >
+                            <i><b> {`User Agreement`}</b></i>
+                        </a>
+                        <a
+                            href={"https://docs.soulswap.finance/faq/privacy-policy"}
+                            target="_blank"
+                            rel={'noreferrer noopener'}
+                            className={'border rounded-2xl p-2 bg-dark-900 m-2 border-dark-800 hover:border-purple'}
+                        >
+                            <i><b> {`Privacy Policy`}</b></i>
+                        </a>
+                    </div>
+                </Typography>
+                <Button
+                    height="2.5rem"
+                    color="purple"
+                    onClick={handleConnect}
+                >
+                    {`Agree and Continue`}
+                </Button>
             </div>
-          } */}
+        </HeadlessUIModal.Controlled>
+        }
         </DoubleGlowShadowV2>
-      {/* } */}
-    </>
+     </div>
   )
 }
 

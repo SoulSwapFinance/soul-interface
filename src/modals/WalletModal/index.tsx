@@ -212,9 +212,11 @@ const WalletModal: FC<WalletModal> = ({ pendingTransactions, confirmedTransactio
   }, [connector, tryActivation])
 
   return (
-    <HeadlessUiModal.Controlled isOpen={walletModalOpen}
+    <HeadlessUiModal.Controlled 
+      isOpen={walletModalOpen}
       chainId={chainId}
-      onDismiss={toggleWalletModal} maxWidth="md">
+      onDismiss={toggleWalletModal} maxWidth="md"
+      >
       {error ? (
         <div className="flex flex-col gap-4">
           <HeadlessUiModal.Header
