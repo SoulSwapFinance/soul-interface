@@ -27,7 +27,8 @@ const avaxInfo: NetworkInfo = {
     logo: "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/avalanche/Avalanche.svg",
     decimal: 18,
   },
-  rpcUrl: 'https://avalanche.kyberengineering.io',
+  // rpcUrl: 'https://avalanche.kyberengineering.io',
+  rpcUrl: 'https://rpc.ankr.com/avalanche',
   routerUri: `${process.env.REACT_APP_AGGREGATOR_API}/avalanche/route/encode`,
   classic: {
     static: {

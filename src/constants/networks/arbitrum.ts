@@ -33,7 +33,8 @@ const arbitrumInfo: NetworkInfo = {
     logo: ETH,
     decimal: 18,
   },
-  rpcUrl: 'https://arbitrum.kyberengineering.io',
+  // rpcUrl: 'https://arbitrum.kyberengineering.io',
+  rpcUrl: 'https://rpc.ankr.com/arbitrum',
   routerUri: `${process.env.REACT_APP_AGGREGATOR_API}/arbitrum/route/encode`,
   classic: {
     static: {

@@ -28,7 +28,8 @@ const ethereumInfo: NetworkInfo = {
     logo: ETH,
     decimal: 18,
   },
-  rpcUrl: 'https://ethereum.kyberengineering.io',
+  // rpcUrl: 'https://ethereum.kyberengineering.io',
+  rpcUrl: 'https://rpc.ankr.com/eth',
   routerUri: `${process.env.REACT_APP_AGGREGATOR_API}/ethereum/route/encode`,
   classic: {
     static: {

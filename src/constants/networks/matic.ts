@@ -29,7 +29,8 @@ const maticInfo: NetworkInfo = {
     logo: MATIC,
     decimal: 18,
   },
-  rpcUrl: 'https://polygon.kyberengineering.io',
+  // rpcUrl: 'https://polygon.kyberengineering.io',
+  rpcUrl: 'https://rpc.ankr.com/polygon',
   routerUri: `${process.env.REACT_APP_AGGREGATOR_API}/polygon/route/encode`,
   classic: {
     static: {
