@@ -42,13 +42,16 @@ const AccountDetails: FC<AccountDetailsProps> = ({
 
   const connectorName = useMemo(() => {
     const { ethereum } = window
+    // const isBrave = !!(ethereum && ethereum.isBraveWallet)
     const isMetaMask = !!(ethereum && ethereum.isMetaMask)
+
     const name = Object.keys(SUPPORTED_WALLETS)
       .filter(
         (k) =>
           SUPPORTED_WALLETS[k].connector === connector && (
             connector !== injected
             || isMetaMask === (k === 'METAMASK')
+            // || isBrave === (k === 'BRAVE')
           )
       )
       .map((k) => SUPPORTED_WALLETS[k].name)[0]
