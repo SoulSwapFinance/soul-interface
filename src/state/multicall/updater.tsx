@@ -22,7 +22,7 @@ const DEFAULT_GAS_REQUIRED = 1_000_000
  * @param chunk chunk of calls to make
  * @param minBlockNumber minimum block number of the result set
  */
-async function fetchChunk(
+export async function fetchChunk(
   multicall: Contract,
   chunk: Call[],
   blockNumber: number

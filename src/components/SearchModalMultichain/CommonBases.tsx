@@ -10,7 +10,7 @@ import { CurrencyLogo } from 'components/CurrencyLogo'
 import { AutoRow } from 'components/Row'
 import useTheme from 'hooks/useTheme'
 
-import { getDisplayTokenInfo } from './CurrencyList'
+// import { getDisplayTokenInfo } from './CurrencyList'
 
 const HEIGHT_THRESHOLD = 400
 const BaseWrapper = styled.div`
@@ -65,7 +65,7 @@ export default function CommonBases({
   selectedCurrency?: Currency | null
   tokens: Currency[]
   onSelect: (currency: Currency) => void
-  handleToggleFavorite: (e: React.MouseEvent, currency: Currency) => void
+  handleToggleFavorite?: (e: React.MouseEvent, currency: Currency) => void
 }) {
   const theme = useTheme()
   const [isEditMode, setEditMode] = useState(false)
@@ -76,7 +76,8 @@ export default function CommonBases({
       <AutoRow gap="4px">
         {(tokens as Token[]).map((token: Token) => {
           const selected = selectedCurrency instanceof Token && selectedCurrency.address === token.address
-          const { symbol } = getDisplayTokenInfo(token)
+          const symbol = 'SYMBOL' // getDisplayTokenInfo(token)
+          // const { symbol } = getDisplayTokenInfo(token)
           return (
             <BaseWrapper
               data-testid="favorite-token"

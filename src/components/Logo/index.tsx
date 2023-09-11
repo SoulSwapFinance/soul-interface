@@ -1,9 +1,11 @@
 import { IconProps } from 'react-feather'
-import React, { FC, useState } from 'react'
+import React, { CSSProperties, FC, useState } from 'react'
 
 import Image from '../Image'
 import { classNames } from 'functions'
 import { cloudinaryLoader } from 'functions/cloudinary'
+import { NETWORKS_INFO } from 'constants/networks'
+import { ChainId } from 'sdk'
 
 const BAD_SRCS: { [tokenAddress: string]: true } = {}
 
@@ -40,5 +42,17 @@ const Logo: FC<LogoProps> = ({ srcs, width = 24, height = 24, alt = '', classNam
     </div>
   )
 }
+
+export function NetworkLogo({ chainId, style = {} }: { chainId: ChainId; style?: CSSProperties }) {
+  const { iconDark } = NETWORKS_INFO[chainId]
+  const iconSrc = iconDark
+  if (!iconSrc) return null
+  return <img 
+    src={iconSrc} 
+    alt="Switch Network" 
+    style={style} 
+  />
+}
+
 
 export default Logo
