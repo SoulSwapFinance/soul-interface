@@ -207,7 +207,6 @@ const nextConfig = {
         source: '/farms',
         destination: '/summoner',
         permanent: true,
-        
       },
       {
         source: '/farm',

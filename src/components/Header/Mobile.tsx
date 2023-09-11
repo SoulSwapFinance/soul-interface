@@ -13,6 +13,7 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 import LanguageMenu from './useLanguages'
 import TokenStats from 'components/TokenStats'
+import { ChainId } from 'sdk'
 
 const Mobile = () => {
   // const menu = useMenu()
@@ -134,11 +135,11 @@ const Mobile = () => {
           className={`grid grid-cols-3 gap-1 mt-6 bg-dark-1000 p-1.5 rounded-2xl`}
           // onClick={() => setOpen(true)}
         >
-            <div
-              className={`border-2 ${account ? `border-purple` : `border-avaxRed animate-pulse`} hover:border-purple rounded-2xl`}
-            >
-              <Web3Status />
-            </div>
+          <div
+            className={`border-2 ${account ? `border-purple` : `border-avaxRed animate-pulse`} hover:border-purple rounded-2xl`}
+          >
+            <Web3Status />
+          </div>
             {/* TOKEN STATS */}
           <div
             className={`border-2 border-purple rounded-2xl`}
@@ -147,7 +148,7 @@ const Mobile = () => {
           </div>
               {/* NETWORK ICON */}
             <div
-              className={`border-2 ${chainId ? `border-[${getChainColor(chainId)}]` : `border-dark-800`} hover:border-purple p-2 rounded-2xl`}
+              className={`border-2 ${chainId ? `border-[${getChainColor(chainId ?? ChainId.FANTOM)}]` : `border-dark-800`} hover:border-purple p-2 rounded-2xl`}
             >
                 <Web3Network />
             </div>

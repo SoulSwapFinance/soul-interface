@@ -167,6 +167,7 @@ const Desktop = () => {
         // onClick={() => setOpen(true)}
         >
           {/* WALLET ICON */}
+          {/* { account && */}
           <div
             className={`border-2 ${account ? `border-purple` : `border-avaxRed animate-pulse`} hover:border-purple rounded-2xl`}
           >

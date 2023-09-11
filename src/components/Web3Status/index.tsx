@@ -19,6 +19,7 @@ import Web3Connect from '../Web3Connect'
 // import { WalletIcon } from 'components/Icon'
 // import { getChainColor } from 'constants/chains'
 import { useUserInfo } from 'hooks/useAPI'
+import { classNames } from 'functions/styling'
 
 // we want the latest one to come first, so return negative if a is after b
 function newTransactionsFirst(a: TransactionDetails, b: TransactionDetails) {
@@ -216,13 +217,13 @@ function Web3StatusInner() {
     )
   } else {
     return (
-        <Web3Connect className="bg-avaxRed hover:to-purple !text-white h-[38px]" />
+        <Web3Connect className={classNames(`!text-white h-[44px]`)} />
     )
   }
 }
 
 export default function Web3Status() {
-  const { active, account } = useWeb3React()
+  const { active, account, chainId } = useWeb3React()
   const contextNetwork = useWeb3React(NetworkContextName)
 
   const { ENSName } = useENSName(account ?? undefined)
@@ -244,7 +245,13 @@ export default function Web3Status() {
   return (
     <>
       <Web3StatusInner />
-      <WalletModal ENSName={ENSName ?? undefined} pendingTransactions={pending} confirmedTransactions={confirmed} />
+      { account && chainId &&
+        <WalletModal 
+          ENSName={ENSName ?? undefined} 
+          pendingTransactions={pending} 
+          confirmedTransactions={confirmed} 
+        />
+      }
     </>
   )
 }

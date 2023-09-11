@@ -16,7 +16,7 @@ import { RowBetween, RowFixed } from "../Row"
 import {
   TruncatedText,
   SwapShowAcceptChanges,
-  DisclaimerText,
+  // DisclaimerText,
 } from "./styleds"
 // import { AdvancedSwapDetails } from "./AdvancedSwapDetails"
 import LightCard from "../Card"
@@ -28,6 +28,7 @@ import TradePrice from "features/swap/TradePrice"
 import useGelatoLimitOrders from "hooks/gelato/useGelatoLimitOrders"
 import { Toggle } from "components/Toggle"
 import Typography from "components/Typography"
+// import { useActiveWeb3React } from "services/web3"
 
 export const AnimatedCard = styled(LightCard) <{ expand: boolean }>`
   padding: 0.75rem;
@@ -64,7 +65,7 @@ export default function SwapModalHeader({
   onDisclaimerChange: Dispatch<SetStateAction<boolean>>;
 }) {
   const theme = useTheme();
-
+  // const { account, chainId } = useActiveWeb3React()
   const [showInverted, setShowInverted] = useState<boolean>(false);
   const [showDisclaimer, setShowDisclaimer] = useState<boolean>(true);
   const [disclaimer, setDisclaimer] = useState<boolean>(true);
@@ -188,17 +189,7 @@ export default function SwapModalHeader({
         <Toggle
           isActive={disclaimer}
           toggle={() => handleDisclaimer(!disclaimer)}
-        // name={"disclaimer"}
-        // disabled={false}
-        // checked={disclaimer}
-        // value={""}
-        // labelLeft={"Accept"}
-        // labelRight={""}
-        // height={24}
-        // sliderHeight={16}
-        // width={44}
-        // sliderWidth={16}
-        // translate={22}
+
         />
       </RowBetween>
 
