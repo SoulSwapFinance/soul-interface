@@ -155,7 +155,7 @@ export default function Claims() {
                     )}
                   </div>
                 ) : (
-                  <div className="text-sm text-secondary">{`Total Locked: Connect Walle`}</div>
+                  <div className="text-sm text-secondary">{`Total Locked: Connect Wallet`}</div>
                 )}
               </div>
 

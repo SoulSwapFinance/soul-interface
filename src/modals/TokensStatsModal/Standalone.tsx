@@ -318,7 +318,7 @@ export default function TokenStatsStandalone({
           </HeaderRow>
         ) : (
           <HeaderRow>
-            <HoverText>Connect to a wallet</HoverText>
+            <HoverText>Connect Wallet</HoverText>
           </HeaderRow>
         )}
         <ContentWrapper>

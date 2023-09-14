@@ -461,7 +461,7 @@ const ClaimItem = ({ project, launchpadInfo, releaseBlock, releaseTime, k }) => 
       {!account || !claimEnabled || !userPoolId ? (
         <div className="flex justify-end px-6">
           <Typography variant="base" className="text-emphesis text-center">
-            {!claimEnabled ? 'Locked' : !userPoolId ? 'Not eligible' : 'Connect wallet'}
+            {!claimEnabled ? 'Locked' : !userPoolId ? 'Not eligible' : 'Connect Wallet'}
           </Typography>
         </div>
       ) : (
