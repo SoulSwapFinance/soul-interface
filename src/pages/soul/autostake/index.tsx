@@ -24,9 +24,9 @@ import { Feature } from 'enums'
 export default function AutoStake() {
   const [stakeValue, setStakeValue] = useState('0')
   const { account, chainId } = useActiveWeb3React()
-  const [withdrawValue, setWithdrawValue] = useState('0')
+  // const [withdrawValue, setWithdrawValue] = useState('0')
   const parsedDepositValue = tryParseAmount(stakeValue, SOUL[chainId ?? ChainId.FANTOM])
-  const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[chainId ?? ChainId.FANTOM])
+  // const parsedWithdrawValue = tryParseAmount(withdrawValue, SOUL[chainId ?? ChainId.FANTOM])
   const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const AutoStakeContract = useAutoStakeContract()
 
@@ -49,13 +49,10 @@ export default function AutoStake() {
 
   const stakedBal = Number(userAutoStakeInfo.stakedBalance)
   // const stakedValue = pricePerShare * stakedBal
-  const stakedValue = soulPrice * stakedBal
-
+  
   const userDelta = stakedBal - userBalance
   const totalDeduction = stakedBal + userDelta
-  const earnedAmount = (pricePerShare * stakedBal) - totalDeduction
-  const earnedValue = soulPrice * earnedAmount
-
+  
   /**
   * Gets the earned amount of the user for each pool
   */
@@ -82,7 +79,7 @@ export default function AutoStake() {
   // const performanceFee = autoStakeInfo.performanceFee
   // const available = autoStakeInfo.available
   // const callFeeRate = autoStakeInfo.callFee
-  const bounty = autoStakeInfo.bounty
+  // const bounty = autoStakeInfo.bounty
 
   // AUTOSTAKE DATA //
   // const tvl = Number(autoStakeInfo.tvl)
@@ -107,6 +104,14 @@ export default function AutoStake() {
   const remainingMinutes = max(Number(remainingHours) * 60, 0)
 
   const feeAmount = remainingMinutes == 0 ? 0 : withdrawFeeRate * stakedBal / 100 // * Number(withdrawValue)
+
+  // complete stake data (user)
+  const earnedAmount = (pricePerShare * stakedBal) - totalDeduction
+  const earnedAmountDisplay = feeAmount > 0 ? 0 : (pricePerShare * stakedBal) - totalDeduction
+  const earnedValue = feeAmount > 0 ? 0 : soulPrice * earnedAmountDisplay
+
+  const stakedAmount = stakedBal - earnedAmountDisplay
+  const stakedValue = soulPrice * stakedAmount
 
   const [stakeApprovalState, stakeApprove] = useApproveCallback(
     parsedStakeValue,
@@ -274,13 +279,13 @@ export default function AutoStake() {
               </div>
               <div className="h-px my-2 bg-dark-1000" />
 
-              <div className="flex flex-col bg-dark-1000 p-3 border border-2 border-dark-700 hover:border-purple w-full space-y-1 rounded-2xl">
+              <div className="flex flex-col bg-dark-1000 p-3 border border-dark-700 hover:border-purple w-full space-y-1 rounded-2xl">
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
                     {`Staked`}
                   </Typography>
                   <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
-                    {formatNumber(stakedBal - earnedAmount, false, true)} SOUL ({formatNumber(stakedValue, true, true)})
+                    {formatNumber(stakedAmount, false, true)} SOUL ({formatNumber(stakedValue, true, true)})
                   </Typography>
                 </div>
                 <div className="flex justify-between">
@@ -288,10 +293,10 @@ export default function AutoStake() {
                     {`Rewards`}
                   </Typography>
                   <Typography className="text-white" weight={400} fontFamily={'semi-bold'}>
-                    {formatNumber(earnedAmount, false, true)} SOUL ({formatNumber(earnedValue, true, true)})
+                    {formatNumber(earnedAmountDisplay, false, true)} SOUL ({formatNumber(earnedValue, true, true)})
                   </Typography>
                 </div>
-                
+
                 {/* <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
                     {`Compound Bounty`}
@@ -301,7 +306,7 @@ export default function AutoStake() {
                   </Typography>
                 </div> */}
               </div>
-              <div className="flex flex-col bg-dark-1000 mb-2 mt-4 lp-3 border border-green border-2 hover:border-purple w-full space-y-1 rounded-2xl">
+              <div className="flex flex-col bg-dark-1000 mb-2 mt-4 lp-3 border border-green hover:border-purple w-full space-y-1 rounded-2xl">
                 {/* <div
                 className={`flex justify-center rounded-2xl p-2 mb-4`}
               > */}
@@ -387,20 +392,20 @@ export default function AutoStake() {
 
               <div className="h-px my-2 bg-dark-1000" />
 
-              <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-dark-600 border-2 hover:border-purple w-full space-y-1 rounded-2xl">
+              <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-dark-600 hover:border-purple w-full space-y-1 rounded-2xl">
                 <div className="text-white">
                   <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                     <span> {formatNumber(apy, false, true)}% APY</span>
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col bg-dark-1000 p-3 border border-2 border-dark-700 hover:border-purple w-full space-y-1 rounded-2xl">
+              <div className="flex flex-col bg-dark-1000 p-3 border border-dark-700 hover:border-purple w-full space-y-1 rounded-2xl">
                 <div className="flex justify-between">
                   <Typography className="text-white" fontFamily={'medium'}>
-                    {`Staked`}
+                    {`Amount`}
                   </Typography>
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {formatNumber(stakedBal - earnedAmount, false, true)} SOUL
+                    {formatNumber(stakedBal, false, true)} SOUL
                   </Typography>
                 </div>
                 <div className="flex justify-between">
