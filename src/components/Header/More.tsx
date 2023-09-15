@@ -26,12 +26,6 @@ export default function Menu() {
       href: 'https://twitter.com/SoulSwapFinance',
       external: true,
     },
-    // {
-    //   name: `Analytics`,
-    //   description: `View our Data.`,
-    //   href: `${blockchainPrefix}.soulswap.finance`,
-    //   external: true,
-    // },
     {
       name: `Resources`,
       description: `Explore our Protocol Links`,

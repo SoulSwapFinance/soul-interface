@@ -5,7 +5,6 @@ import { Button } from "components/Button";
 import Head from "next/head";
 import { useActiveWeb3React } from "services/web3";
 
-
 const SOUL = () => [
 	{
 	  id: 0,
@@ -30,25 +29,25 @@ const Markets = () => {
 		logoURI
 	}
 
-	async function getMarketData(ticker: string) {
-		if(marketData) { return console.log("Getting Tokens..."); } 
+	// async function getMarketData(ticker: string) {
+	// 	if(marketData) { return console.log("Getting Tokens..."); } 
 		
-		// Fetch Market Data
-		if(!marketData) {
-		await setMarketData(true)
-		let data = await fetch(`https://data.messari.io/api/v1/assets/${ticker}/metrics/market-data`);
-		let marketData = await data.json();
-		let priceUSD = await marketData.data.market_data.price_usd
-		let symbol = await marketData.data.Asset.symbol
-		let name = await marketData.data.Asset.name
-		console.log("Price JSON: ", priceUSD);
-		console.log("Token Symbol: ", symbol);
-		console.log("Token Name: ", name);
-		setTokenPrice(priceUSD)
-		setTokenSymbol(symbol)
-		}
-		return marketData
-	  }
+	// 	// Fetch Market Data
+	// 	if(!marketData) {
+	// 	await setMarketData(true)
+	// 	let data = await fetch(`https://data.messari.io/api/v1/assets/${ticker}/metrics/market-data`);
+	// 	let marketData = await data.json();
+	// 	let priceUSD = await marketData.data.market_data.price_usd
+	// 	let symbol = await marketData.data.Asset.symbol
+	// 	let name = await marketData.data.Asset.name
+	// 	console.log("Price JSON: ", priceUSD);
+	// 	console.log("Token Symbol: ", symbol);
+	// 	console.log("Token Name: ", name);
+	// 	setTokenPrice(priceUSD)
+	// 	setTokenSymbol(symbol)
+	// 	}
+	// 	return marketData
+	//   }
 
 //   function openModal(side) {
 //     currentSelectSide = side;
@@ -114,7 +113,7 @@ const Markets = () => {
       <div className="py-1 bg-dark-600" />
         <div className="py-1 bg-purple" />
       <ul className="space-y-4 divide-y-0">
-        { getMarketData(ticker) && soulFeature.map((soulFeature) => (
+        {/* { getMarketData(ticker) && soulFeature.map((soulFeature) => (
           <li key={soulFeature.id} className="relative border gap-4 border-purple hover:border-dark-600 w-full p-4 rounded bg-dark-900 hover:bg-dark-800">
           {soulFeature.id  == 0 &&
             <div className="flex justify-between space-y-4 space-x-4">
@@ -129,12 +128,12 @@ const Markets = () => {
 			}
 			</li>
 			)
-			)}
+			)} */}
 		</ul>
 	
 	{ !marketData &&
 	<Button
-	onClick={async () => await getMarketData(ticker) }
+	// onClick={async () => await getMarketData(ticker) }
 	>
 		REFRESH
 

@@ -169,17 +169,6 @@ const useMenu: UseMenu = () => {
       })
     }
 
-    // if (featureEnabled(Feature.NFT, chainId)) {
-    //   mainItems.push({
-    //       key: 'nft',
-    //       title: `Infinity`,
-    //       icon: <PhotoIcon width={20} className={classNames(
-    //         `filter text-white`
-    //         )} />,
-    //       link: '/marketplace'
-    //   })
-    // }
-
     // if (featureEnabled(Feature.ANALYTICS, chainId)) {
     //   mainItems.push({
     //       key: 'data',

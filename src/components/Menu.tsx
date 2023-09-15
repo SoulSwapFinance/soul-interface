@@ -28,7 +28,7 @@ const items = () => [
   {
     name: 'Analytics',
     description: 'View your Trades.',
-    href: '/charts',
+    href: '/analytics',
   },
   {
     name: 'Links',
