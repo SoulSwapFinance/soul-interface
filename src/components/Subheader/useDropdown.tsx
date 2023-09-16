@@ -56,7 +56,7 @@ return useMemo(() => {
     let tradeMenu: BarItem = {
       key: 'swap',
       title: `Swap`,
-      link: '/swap',
+      link: '/exchange/swap',
       icon: <ArrowsUpDownIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`)} />,
     }
    
@@ -78,7 +78,7 @@ if (featureEnabled(Feature.AMM, chainId)) {
       // {
       //   key: 'exchange',
       //   title: `Swap`,
-      //   link: `/swap/${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${SOUL_ADDRESS[chainId ?? ChainId.FANTOM]}`,
+      //   link: `/exchange/swap/${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${SOUL_ADDRESS[chainId ?? ChainId.FANTOM]}`,
       // },
       // {
       //   key: 'aggregator',

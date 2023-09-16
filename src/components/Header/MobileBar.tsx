@@ -54,11 +54,11 @@ const MobileBar = () => {
     // const typeStyle = `justify-center text-center w-full border border-[${getChainColor(chainId)}] rounded p-2`
 
     const swapRoute = useCallback(() => {
-        router.push(`/swap`)
+        router.push(`/exchange/swap`)
     }, [])
-    const luxorRoute = useCallback(() => {
-        router.push(`/luxor`)
-    }, [])
+    // const luxorRoute = useCallback(() => {
+    //     router.push(`/luxor`)
+    // }, [])
     const walletRoute = useCallback(() => {
         router.push(`/portfolio`)
     }, [])
@@ -95,7 +95,7 @@ const MobileBar = () => {
     const isRemove = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
     const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
     const isPool = isRemove || isAdd
-    const isLuxor = luxorPage
+    // const isLuxor = luxorPage
     // const isLuxor = luxorPage
     const isWallet = portfolioPage
     const isData = dataPage
@@ -234,18 +234,6 @@ const MobileBar = () => {
                                 />
                             </div>
                         } */}
-                        {/* <div
-                            className={classNames(
-                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
-                                isLuxor && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
-                            onClick={luxorRoute}
-                        >
-                            <SunMoonIcon
-                                fillPrimary={isLuxor ? `${getChainColor(chainId)}` : `#FFFFFF`}
-                                fillSecondary={isLuxor ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                className={'w-7 h-7'}
-                            />
-                        </div> */}
                         {/* <div
                             className={classNames(
                                 `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,

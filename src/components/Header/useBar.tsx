@@ -50,7 +50,7 @@ const useMenu: UseBar = () => {
 
     let tradeMenu: BarItem = {
       key: 'swap',
-      link: '/swap',
+      link: '/exchange/swap',
       title: 'Swap',
       icon: <SwapIcon
         className={classNames(`w-7 h-7 rounded-md`)}

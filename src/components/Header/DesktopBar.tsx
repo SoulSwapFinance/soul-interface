@@ -44,7 +44,7 @@ const DesktopBar: FC = () => {
 
     const { chainId } = useActiveWeb3React()
     const swapRoute = useCallback(() => {
-        router.push(`/swap`)
+        router.push(`/exchange/swap`)
     }, [])
     const walletRoute = useCallback(() => {
         router.push(`/portfolio`)

@@ -51,7 +51,7 @@ const Desktop = () => {
   </div>
 
   const swapRoute = useCallback(() => {
-    router.push(`/swap`)
+    router.push(`/exchange/swap`)
 }, [])
 
   return (
