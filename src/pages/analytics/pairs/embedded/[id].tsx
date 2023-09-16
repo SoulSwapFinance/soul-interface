@@ -129,37 +129,37 @@ function PairChart({ inputCurrency, outputCurrency }: PairProps) {
   const token0Symbol = zeroIsETH ? NATIVE[chainId ?? ChainId.FANTOM].symbol : currency0?.wrapped.symbol
   const token1Symbol = oneIsETH ? NATIVE[chainId ?? ChainId.FANTOM].symbol : currency1?.wrapped.symbol
 
-  const containsETH = zeroIsETH || oneIsETH
+  // const containsETH = zeroIsETH || oneIsETH
 
-  const PAIR_URL =
-    containsETH && zeroIsETH
-      ? `${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${token1Address}`
-      : containsETH && oneIsETH
-        ? `${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${token0Address}`
-        : `${token0Address}/${token1Address}`
+  // const PAIR_URL =
+  //   containsETH && zeroIsETH
+  //     ? `${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${token1Address}`
+  //     : containsETH && oneIsETH
+  //       ? `${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${token0Address}`
+  //       : `${token0Address}/${token1Address}`
 
   // for info cards
   // const liquidityUSDChange = pair?.reserveUSD / pair1d?.reserveUSD
 
   const volumeUSD1d = pair?.volumeUSD - pair1d?.volumeUSD
   const volumeUSD2d = pair1d?.volumeUSD - pair2d?.volumeUSD
-  const volumeUSD1dChange = (volumeUSD1d / volumeUSD2d) * 100 - 100
+  // const volumeUSD1dChange = (volumeUSD1d / volumeUSD2d) * 100 - 100
 
   const tx1d = pair?.txCount - pair1d?.txCount
   const tx2d = pair1d?.txCount - pair2d?.txCount
-  const tx1dChange = (tx1d / tx2d) * 100 - 100
+  // const tx1dChange = (tx1d / tx2d) * 100 - 100
 
   const avgTrade1d = volumeUSD1d / tx1d
   const avgTrade2d = volumeUSD2d / tx2d
-  const avgTrade1dChange = (avgTrade1d / avgTrade2d) * 100 - 100
+  // const avgTrade1dChange = (avgTrade1d / avgTrade2d) * 100 - 100
 
   const utilisation1d = (volumeUSD1d / pair?.reserveUSD) * 100
   const utilisation2d = (volumeUSD2d / pair1d?.reserveUSD) * 100
-  const utilisation1dChange = (utilisation1d / utilisation2d) * 100 - 100
+  // const utilisation1dChange = (utilisation1d / utilisation2d) * 100 - 100
 
   return (
       <div className="px-4 pt-4 space-y-4 lg:px-14 mb-8">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className={`grid grid-cols-1 gap-4 sm:grid-cols-sm:grid-cols-${chainId && chainId == ChainId.FANTOM ? '2' : '1'}`}>
           <ChartCard
             header="Liquidity"
             subheader={`${token0Symbol}-${token1Symbol}`}
@@ -169,7 +169,8 @@ function PairChart({ inputCurrency, outputCurrency }: PairProps) {
             defaultTimespan="WEEK"
             timespans={chartTimespans}
           />
-          <ChartCard
+          { chainId && chainId == ChainId.FANTOM &&
+            <ChartCard
             header="Volume"
             subheader={`${token0Symbol}-${token1Symbol}`}
             figure={chartData.volume1d}
@@ -178,8 +179,9 @@ function PairChart({ inputCurrency, outputCurrency }: PairProps) {
             defaultTimespan="WEEK"
             timespans={chartTimespans}
           />
+          }
         </div>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className={`grid grid-cols-1 gap-4 sm:grid-cols-${chainId && chainId == ChainId.FANTOM ? '2' : '1'}`}>
           {times(2).map((i) => (
             <div key={i} className="w-full p-6 space-y-2 border rounded bg-dark-1000 border-dark-700">
               <NavLink href={`/analytics/tokens/${[token0Address, token1Address][i]}`}>
