@@ -33,7 +33,7 @@ import { CustomBanner } from 'components/Banner'
 // import { addTransaction } from 'state/transactions/actions'
 
 const Summoner = () => {
-  const { chainId } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
   const [pendingTx, setPendingTx] = useState(false)
   const [showBalances, openShowBalances] = useState(true)
   const { tokenInfo } = useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM])
@@ -139,13 +139,13 @@ const Summoner = () => {
             />
           </div>
         }
-        {showBalances &&
+        {showBalances && account &&
           // <TridentHeader className="sm:!flex-row justify-center items-center" pattern="bg-bubble">
           // <div>
           <div className="flex justify-center gap-2 mb-4">
             <Button
               color={getChainColorCode(chainId)}
-              className="text-emphasis text-white"
+              className={account ? `text-emphasis text-white` : `hidden`}
               variant="outlined"
               size={"sm"}
             >
@@ -171,14 +171,14 @@ const Summoner = () => {
                 {`CLAIM ALL ${pendingValue > 0 ? formatNumberScale(pendingValue, true) : ''}`}
               </Button>
             )}
-            <Button
+            {/* <Button
               color={getChainColorCode(chainId)}
               className="text-emphasis text-white"
               variant={'outlined'}
               size={"sm"}
             >
               {formatNumberScale(summTvl, true)} {' '} TOTAL
-            </Button>
+            </Button> */}
           </div>
           /* // </TridentHeader> */
         }

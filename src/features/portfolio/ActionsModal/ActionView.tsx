@@ -24,9 +24,9 @@ const ActionView: FC<ActionViewProps> = ({ onClose }) => {
   const router = useRouter()
 
   const swapActionHandler = useCallback(async () => {
-    if (currency?.isNative) return router.push('/swap')
+    if (currency?.isNative) return router.push('/exchange/swap')
 
-    return router.push(`/swap?inputCurrency=${currency?.wrapped.address}`)
+    return router.push(`/exchange/swap?inputCurrency=${currency?.wrapped.address}`)
   }, [chainId, currency?.isNative, currency?.wrapped.address, router])
 
   const analyticsActionHandler = useCallback(async () => {

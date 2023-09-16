@@ -44,6 +44,7 @@ const AccountDetails: FC<AccountDetailsProps> = ({
     const { ethereum } = window
     // const isBrave = !!(ethereum && ethereum.isBraveWallet)
     const isMetaMask = !!(ethereum && ethereum.isMetaMask)
+    const isBrave = !!(ethereum && ethereum.isBraveWallet)
 
     const name = Object.keys(SUPPORTED_WALLETS)
       .filter(
@@ -51,7 +52,7 @@ const AccountDetails: FC<AccountDetailsProps> = ({
           SUPPORTED_WALLETS[k].connector === connector && (
             connector !== injected
             || isMetaMask === (k === 'METAMASK')
-            // || isBrave === (k === 'BRAVE')
+            || isBrave === (k === 'SOUL')
           )
       )
       .map((k) => SUPPORTED_WALLETS[k].name)[0]

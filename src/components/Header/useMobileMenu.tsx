@@ -33,7 +33,7 @@ const useMobileMenu: UseMobileMenu = () => {
     let tradeMenu: MenuItem = {
       key: 'swap',
       title: `Exchange`,
-      link: '/swap',
+      link: '/exchange/swap',
       // icon: <ArrowsUpDownIcon width={16} />,
     }
 
@@ -47,7 +47,7 @@ const useMobileMenu: UseMobileMenu = () => {
           {
             key: 'swap',
             title: `Exchange`,
-            link: '/swap',
+            link: '/exchange/swap',
           },
           {
             key: 'pool',

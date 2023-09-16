@@ -38,6 +38,15 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#010101',
     primary: true,
   },
+  SOUL: {
+    connector: injected,
+    name: 'Soul Wallet',
+    iconName: 'soul.png',
+    description: 'Injected web3 provider or Soul Wallet iOS.',
+    href: null,
+    color: '#010101',
+    primary: true,
+  },
   METAMASK: {
     connector: injected,
     name: 'MetaMask',

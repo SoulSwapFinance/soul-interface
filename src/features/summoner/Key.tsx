@@ -57,7 +57,7 @@ export function Active() {
         <div className="grid grid-cols-1  bg-dark-1000 rounded-md font-bold border-2 border-dark-800" >
             <FarmContentWrapper>
               <FarmItemBox
-                className="sm:ml-6"
+                className="sm:ml-16 ml-8"
               >
                 <Text fontSize=".9" color="#FFFFFF">
                   ASSET
@@ -71,39 +71,23 @@ export function Active() {
                 </Text>
               </FarmItemBox>
             </HideOnMobile> */}
- 
-            {/* <HideOnSmall>
-              <FarmItemBox>
-                <Text padding="0" fontSize=".8" color="#FFFFFF">
-                  SHARE
-                </Text>
-              </FarmItemBox>
-            </HideOnSmall> */}
 
               <FarmItemBox
-                className="sm:-ml-8 sm:mr-8"
+                // className="sm:-ml-12"
+                className="sm:-ml-24"
+              >
+                <Text padding="0" fontSize=".9" color="#FFFFFF">
+                  EARNED
+                </Text>
+              </FarmItemBox>
+
+              <FarmItemBox
+                className="sm:-ml-4 sm:mr-8"
                 >
                 <Text padding="0" fontSize=".9" color="#FFFFFF">
                   % APR
                 </Text>
               </FarmItemBox>
-
-              <FarmItemBox
-                className="sm:-ml-12"
-              >
-                <Text padding="0" fontSize=".9" color="#FFFFFF">
-                  YIELD
-                </Text>
-              </FarmItemBox>
-
-              <FarmItemBox
-                className="sm:mr-6"
-              >
-                <Text padding="0" fontSize=".9" color="#FFFFFF">
-                  TVL
-                </Text>
-              </FarmItemBox>
-
             </FarmContentWrapper>
             </div>
         </FarmContainer>
