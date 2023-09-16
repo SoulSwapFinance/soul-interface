@@ -333,7 +333,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
             <div className="grid grid-cols-1 justify-center w-full">
                 <div className={classNames("bg-dark-900 p-3 m-1 border rounded-2xl", !hasBalance && "border-dark-1000",
                     !isActive ? "hover:border-red"
-                        : hasBalance && isActive ? "border-purple animate-bounce"
+                        : hasBalance && isActive ? "border-purple animate-pulse"
                             : hasBalance && !isActive ? "hover:border-red border-red"
                                 : "hover:border-purple"
                 )}
