@@ -10,7 +10,7 @@
   "orientation": "portrait",
   "scope": "/",
   "start_url": "/",
-  "splash_pages": null,
+  "splash_pages": "https://soul.sh/images/soulswap-cover.png",
   "prefer_related_applications": false,
   "iconPath": "favicon-72x72.png",
   "icons": [
