@@ -28,6 +28,7 @@ import { CircleStackIcon, CurrencyDollarIcon, PlusCircleIcon } from '@heroicons/
 import PairChart from 'pages/analytics/pairs/embedded/[id]'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import Modal from 'components/DefaultModal'
+import DoubleCurrencyLogo from 'components/DoubleLogo'
 
 // const HideOnSmall = styled.div`
 // @media screen and (max-width: 900px) {
@@ -133,7 +134,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     // COLOR //
     const buttonColor = getChainColor(chainId)
     const buttonTextColor = isSwapPair && isActive ? "white" : "white"
-    const textColor = isUnderworldPair ? "text-blue" : !isActive ? "text-pink" : "text-dark-600"
+    const textColor = isUnderworldPair ? "text-blue" : !isActive ? "text-pink" : "text-purple"
     // const tokenSymbol = isUnderworldPair ? token0Symbol : "LP"
 
     // (de)Constructs Tokens //
@@ -182,9 +183,9 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     }
 
     const handleShowConfirmation = (show) => {
-      setShowConfirmation(show) 
+        setShowConfirmation(show)
     }
- 
+
     // const handleMaxDeposit = (pid) => {
     //     const token = new Token(chainId, farm.lpAddress, 18)
     //     const tokenBalance = useCurrencyBalance(chainId, account, token)
@@ -330,25 +331,20 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     return (
         <>
             <div className="grid grid-cols-1 justify-center w-full">
-                <div className={classNames("bg-dark-900 p-3 m-1 border rounded-2xl border-blue", !hasBalance && "border-dark-1000",
-                    isUnderworldPair ? "hover:border-blue" : !isActive ? "hover:border-pink"
-                        : hasBalance && isUnderworldPair ? "hover:border-blue border-blue"
-                            : hasBalance && !isUnderworldPair ? "border-dark-600"
-                                : hasBalance && !isActive ? "hover:border-pink border-pink"
-                                    : "hover:border-dark-600"
+                <div className={classNames("bg-dark-900 p-3 m-1 border rounded-2xl", !hasBalance && "border-dark-1000",
+                    !isActive ? "hover:border-red"
+                        : hasBalance && isActive ? "border-purple animate-bounce"
+                            : hasBalance && !isActive ? "hover:border-red border-red"
+                                : "hover:border-purple"
                 )}
                     onClick={() => handleShowOptions()}
                 >
-                    <div className={`grid grid-cols-4 w-full`}>
+                    <div className={`grid grid-cols-3 w-full`}>
                         <div className="grid span-cols-1 mr-8 justify-center">
-                            <div className={`grid grid-cols-2`}>
-                                <CurrencyLogo currency={token0} size={40} />
-                                {isUnderworldPair &&
-                                    <CurrencyLogo currency={token1} size={20} />
-                                }
-                                {isSwapPair &&
-                                    <CurrencyLogo currency={token1} size={40} />
-                                }
+                            <div className={`grid grid-cols-1`}>
+                                <DoubleCurrencyLogo currency0={token0} currency1={token1} size={42} />
+                                {/* <CurrencyLogo currency={token0} size={40} />
+                                    <CurrencyLogo currency={token1} size={40} /> */}
                             </div>
                         </div>
 
@@ -392,20 +388,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 </FarmItemBox>
                             </HideOnSmall> */}
 
-                        {/* % APR */}
-                        <FarmItemBox>
-                            <div className={`grid grid-cols-1 justify-center mt-1`}>
-                                {Number(_APR).toString() === '0.00' ? (
-                                    <Text padding="0" fontSize="1rem" color="#666">
-                                        0
-                                    </Text>
-                                ) : (
-                                    <Text padding="0" fontSize="1rem" color={Number(_APR) > 0 ? '#4EFF4E' : 'white'}>
-                                        {Number(_APR).toFixed()}%
-                                    </Text>
-                                )}
-                            </div>
-                        </FarmItemBox>
+
 
                         {/* REWARDS VALUE */}
                         {/* <FarmItemBox className="flex">
@@ -420,7 +403,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 )}
                             </FarmItemBox> */}
 
-                        <FarmItemBox className="flex">
+                        <FarmItemBox className="grid grid-cols-1 ml-8 sm:ml-21">
                             {earnedAmount.toFixed(0).toString() === '0' ? (
                                 <Text padding="0" fontSize="1rem" color="#666">
                                     0
@@ -434,7 +417,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 </Text>
                             )}
                         </FarmItemBox>
-                        <FarmItemBox className="flex">
+                        {/* <FarmItemBox className="flex">
                             <div className={`grid grid-cols-1 justify-center -mr-8 sm:ml-12`}>
                                 {Number(_liquidity) === 0 ? (
                                     <Text padding="0" fontSize="1rem" color="#666">
@@ -446,6 +429,20 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                             .toFixed(0)
                                             .toString()
                                             .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}{' '}
+                                    </Text>
+                                )}
+                            </div>
+                        </FarmItemBox> */}
+                        {/* % APR */}
+                        <FarmItemBox>
+                            <div className={`grid grid-cols-1 justify-center ml-32 sm:ml-48 mr-12 mt-1`}>
+                                {Number(_APR).toString() === '0.00' ? (
+                                    <Text padding="0" fontSize="1rem" color="#666">
+                                        0
+                                    </Text>
+                                ) : (
+                                    <Text padding="0" fontSize="1rem" color={Number(_APR) > 0 ? '#4EFF4E' : 'white'}>
+                                        {Number(_APR).toFixed()}%
                                     </Text>
                                 )}
                             </div>
@@ -463,31 +460,29 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                     chainId={chainId}
                     isOpen={showOptions}
                     onDismiss={() => handleShowOptions()}
-                    // borderColor={
-                    //     isUnderworldPair ? 'border-dark-900 hover:border-blue'
-                    //         : !isActive ? 'border-dark-900 hover:border-pink' : 'border-dark-900 hover:border-dark-420'
-                    // }
-                    // className={classNames("border",
-                    //     isActive && isSwapPair ? "hover:border-dark-600"
-                    //         : isUnderworldPair ? "hover:border-blue"
-                    //             : "hover:border-pink",
-                    //     "p-4 mt-3 mb-3 sm:p-0.5 w-full")}
+                // borderColor={
+                //     isUnderworldPair ? 'border-dark-900 hover:border-blue'
+                //         : !isActive ? 'border-dark-900 hover:border-red' : 'border-dark-900 hover:border-dark-420'
+                // }
+                // className={classNames("border",
+                //     isActive && isSwapPair ? "hover:border-purple"
+                //         : isUnderworldPair ? "hover:border-blue"
+                //             : "hover:border-red",
+                //     "p-4 mt-3 mb-3 sm:p-0.5 w-full")}
                 >
                     <div className="p-3 space-y-6 bg-dark-900 rounded z-1 relative">
                         <Tab.Group>
                             <Tab.List className="flex items-center justify-center mb-1 space-x-2 p-3px text-white">
-                                <div className="grid grid-cols-2 w-[95%] rounded-md p-2px bg-dark-900">
+                                <div className="grid grid-cols-2 w-[95%] p-2px bg-dark-900 rounded-2xl">
                                     <Tab
                                         className={({ selected }) =>
-                                            `${selected && !isUnderworldPair && isActive ? 'border-b-2 border-accent p-2 text-white border-dark-600'
-                                                : selected && isUnderworldPair ? 'border-b-2 border-accent p-2 text-white border-[#0993EC]'
-                                                    : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-pink'
-                                                        : 'bg-dark-900 text-white'
+                                            `${selected && isActive ? 'border-b-2 border-accent p-2 text-white border-purple rounded-2xl'
+                                                : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-red rounded-2xl'
+                                                    : 'bg-dark-900 text-white'
                                             }
-                  flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1 
-                  ${isUnderworldPair ? "hover:border-blue"
-                                                : !isActive ? "hover:border-pink"
-                                                    : "hover:border-dark-600"
+                  flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border-dark-800 border-2 rounded-2xl
+                                        ${!isActive ? "hover:border-red"
+                                                : "hover:border-purple"
                                             }`
                                         }
                                     >
@@ -495,15 +490,13 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     </Tab>
                                     <Tab
                                         className={({ selected }) =>
-                                            `${selected && !isUnderworldPair && isActive ? 'border-b-2 border-accent p-2 text-white border-dark-600'
-                                                : selected && isUnderworldPair ? 'border-b-2 border-accent p-2 text-white border-[#0993EC]'
-                                                    : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-pink'
-                                                        : 'bg-dark-900 text-white'
+                                            `${selected && isActive ? 'border-b-2 border-accent p-2 text-white border-purple rounded-2xl'
+                                                : selected && !isActive ? 'border-b-2 border-accent p-2 text-white border-red rounded-2xl'
+                                                    : 'bg-dark-900 text-white rounded-2xl'
                                             } 
-                  flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border border-dark-800 border-1
-                  ${isUnderworldPair ? "hover:border-blue"
-                                                : !isActive ? "hover:border-pink"
-                                                    : "hover:border-dark-600"
+                  flex items-center justify-center px-3 py-1.5 semi-bold font-semibold border-dark-800 border-2 border-rounded-2xl
+                                                ${!isActive ? "hover:border-red animate-bounce"
+                                                : "hover:border-purple"
                                             }`
                                         }
                                     >
@@ -539,10 +532,9 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
                                 <div className=
                                     {classNames(
-                                        "flex flex-col bg-dark-1000 mb-3 p-3 border border-2 border-dark-1000",
-                                        isUnderworldPair ? "hover:border-blue"
-                                            : !isActive ? "hover:border-pink"
-                                                : "hover:border-dark-600",
+                                        "flex flex-col bg-dark-1000 mb-3 p-3 border-2 border-dark-1000",
+                                        !isActive ? "hover:border-red"
+                                            : "hover:border-purple",
 
                                         "w-full space-y-1")
 
@@ -554,7 +546,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                                 {`Staked Balance`}
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(_stakedBalance, false, true)} {isUnderworldPair ? token0Symbol : farm.lpSymbol}
+                                                {formatNumber(_stakedBalance, false, true)} {farm?.lpSymbol}
                                             </Typography>
                                         </div>
                                     )}
@@ -595,7 +587,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
                                     {/* WITHDRAWAL FREE */}
                                     {Number(withdrawFee) > 0 && (
-                                        <div className="flex flex-col bg-dark-1000 mb-2 p-3 border-1 hover:border-dark-600 w-full space-y-1">
+                                        <div className="flex flex-col bg-dark-1000 mb-2 p-3 border-1 hover:border-purple w-full space-y-1">
                                             <div className="text-white">
                                                 <div className="block text-sm md:text-md text-white text-center font-bold p-1 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                                                     <span>
@@ -606,7 +598,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         </div>
                                     )}
                                     <div className="h-px my-6 bg-dark-1000" />
-                                    <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
+                                    <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-purple w-full space-y-1">
                                         <div className="text-white">
                                             <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                                                 <span> {formatNumber(Number(_APR), false, true)}% APR</span>
@@ -646,21 +638,21 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 {/* APPROVED */}
                                 {/* {approved && hasBalance && isActive && ( */}
                                 {/* {hasBalance && isActive && ( */}
-                                    <SubmitButton
-                                        height="2rem"
-                                        primaryColor={buttonColor}
-                                        color={buttonTextColor}
-                                        margin=".5rem 0 0rem 0"
-                                        onClick={() =>
-                                            handleDeposit(pid, Number(depositValue))
+                                <SubmitButton
+                                    height="2rem"
+                                    primaryColor={buttonColor}
+                                    color={buttonTextColor}
+                                    margin=".5rem 0 0rem 0"
+                                    onClick={() =>
+                                        handleDeposit(pid, Number(depositValue))
+                                    }
+                                >
+                                    <div className="flex text-lg gap-2">
+                                        <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
+                                        {`DEPOSIT ${farm.lpSymbol}`
                                         }
-                                    >
-                                        <div className="flex text-lg gap-2">
-                                            <CurrencyDollarIcon width={26} className={classNames(`text-white`)} />
-                                            {`DEPOSIT ${farm.lpSymbol}`
-                                            }
-                                        </div>
-                                    </SubmitButton>
+                                    </div>
+                                </SubmitButton>
                                 {/* )} */}
                                 {/* CREATE ASSET PAIR */}
                                 {(nativeToken0 && isActive) ? (
@@ -758,10 +750,10 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         </SubmitButton>
                                     </Wrap>
                                 }
-                                  <PairChart
+                                <PairChart
                                     inputCurrency={token0}
                                     outputCurrency={token1}
-                                  />
+                                />
                             </Tab.Panel>
                             {/*------ WITHDRAW TAB PANEL ------*/}
                             <Tab.Panel className={'outline-none'}>
@@ -782,9 +774,8 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                 <div className={
                                     classNames(
                                         "flex flex-col mb-3 bg-dark-1000 p-3 border-2 border-dark-1000",
-                                        isUnderworldPair ? "hover:border-blue"
-                                            : !isActive ? "hover:border-pink"
-                                                : "hover:border-dark-600",
+                                        !isActive ? "hover:border-red"
+                                            : "hover:border-purple",
                                         "w-full space-y-1")}>
 
                                     {Number(_stakedBalance) > 0 && (
@@ -793,7 +784,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                                 {`Staked Balance`}
                                             </Typography>
                                             <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                                                {formatNumber(_stakedBalance, false, true)} {isUnderworldPair ? token0Symbol : farm.lpSymbol}
+                                                {formatNumber(_stakedBalance, false, true)} {farm?.lpSymbol}
                                             </Typography>
                                         </div>
                                     )}
@@ -834,7 +825,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                     <div className="h-px my-6 bg-dark-1000" />
                                     {/* FEE BOX (COLOR-CODED) */}
                                     {Number(withdrawFee) > 0 && (
-                                        <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-red border-1 hover:border-dark-600 w-full space-y-1">
+                                        <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-red border-1 hover:border-purple w-full space-y-1">
                                             <div className="text-white">
                                                 <div className={classNames("block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md",
                                                     "hover:bg-dark-300")}>
@@ -848,7 +839,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
 
                                     {/* WITHDRAWAL FREE */}
                                     {Number(withdrawFee) == 0 && (
-                                        <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-dark-600 w-full space-y-1">
+                                        <div className="flex flex-col bg-dark-1000 mb-2 p-3 border border-green border-1 hover:border-purple w-full space-y-1">
                                             <div className="text-white">
                                                 <div className="block text-md md:text-xl text-white text-center font-bold p-1 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
                                                     <span>
@@ -910,15 +901,15 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                     chainId={chainId}
                     isOpen={openZap}
                     onDismiss={() => handleShowZap(pid)}
-                    // borderColor={
-                    //     isUnderworldPair ? 'border-dark-900 hover:border-blue'
-                    //         : !isActive ? 'border-dark-900 hover:border-pink' : 'border-dark-900 hover:border-dark-420'
-                    // }
-                    // className={classNames("border",
-                    //     isActive && isSwapPair ? "hover:border-dark-600"
-                    //         : isUnderworldPair ? "hover:border-blue"
-                    //             : "hover:border-pink",
-                    //     "p-4 mt-3 mb-3 sm:p-0.5 w-full")}
+                // borderColor={
+                //     isUnderworldPair ? 'border-dark-900 hover:border-blue'
+                //         : !isActive ? 'border-dark-900 hover:border-red' : 'border-dark-900 hover:border-dark-420'
+                // }
+                // className={classNames("border",
+                //     isActive && isSwapPair ? "hover:border-purple"
+                //         : isUnderworldPair ? "hover:border-blue"
+                //             : "hover:border-red",
+                //     "p-4 mt-3 mb-3 sm:p-0.5 w-full")}
                 >
 
                     {/* ZAP: NATIVE --> LP */}
@@ -1001,7 +992,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                     chainId={chainId}
                     isOpen={showConfirmation}
                     onDismiss={() => handleShowConfirmation(false)}
-                > 
+                >
                     <div className="space-y-4">
                         {/* <HeadlessUIModalHeader header={`FYI: Early Withdrawal Fee`} onClose={() => setShowConfirmation(false)} /> */}
                         <Typography variant="sm">
@@ -1009,7 +1000,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                             {/* <br/><br/>This means you may withdraw for 0% fees after 14 Days have elapsed.  */}
                             <br /><br />{`This`} <b>{`reduces by 1% daily`}</b>, {`so waiting out the early withdrawal period will enable you to avoid fees.`}
 
-                            <div className="text-xl mt-4 mb-4 text-center border p-1.5 border-dark-600">
+                            <div className="text-xl mt-4 mb-4 text-center border p-1.5 border-purple">
                                 {`Estimated Fee Outcomes`}
                             </div>
                             • <b>{`Withdrawal Value`}</b>: {formatNumber(Number(_withdrawValue) * Number(lpPrice), true, true)} <br />

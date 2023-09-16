@@ -1,11 +1,13 @@
-import { ChainId, SOUL_ADDRESS, USDC_ADDRESS, WNATIVE_ADDRESS, SOUL_NATIVE, DAI_ADDRESS, BNB_ADDRESS, WETH_ADDRESS, WBTC_ADDRESS, SOUL_USDC, USDC_NATIVE, BTC_NATIVE, ETH_NATIVE, DAI_USDC, AVAX_ADDRESS, BNB_NATIVE, DAI_NATIVE, ETH_USDC, BTC_USDC, FMULTI_ADDRESS, USDC_USDC, AXL_USDC_ADDRESS, LZ_USDC_ADDRESS, AXL_WBTC_ADDRESS, LZ_WBTC_ADDRESS, BTC_BTC, AXL_WETH_ADDRESS, LZ_WETH_ADDRESS, ETH_ETH} from 'sdk'
+import { ChainId, SOUL_ADDRESS, USDC_ADDRESS, WNATIVE_ADDRESS, SOUL_NATIVE, DAI_ADDRESS, BNB_ADDRESS, WETH_ADDRESS, WBTC_ADDRESS, SOUL_USDC, USDC_NATIVE, BTC_NATIVE, ETH_NATIVE, DAI_USDC, AVAX_ADDRESS, BNB_NATIVE, DAI_NATIVE, ETH_USDC, BTC_USDC, FMULTI_ADDRESS, USDC_USDC, AXL_USDC_ADDRESS, LZ_USDC_ADDRESS, AXL_WBTC_ADDRESS, LZ_WBTC_ADDRESS, BTC_BTC, AXL_WETH_ADDRESS, LZ_WETH_ADDRESS, ETH_ETH } from 'sdk'
 
 /*/ rules /*/
 // `token0Symbol` && `token1Symbol`: always use "w" prefix
 // `lpSymbol`: never use "w" prefix
 // `lpSymbol`: always frontload native
 
-export const InactiveAvalanchePools = []
+export const InactiveAvalanchePools = [
+
+]
 
 export const AvalanchePools = [
   {
@@ -121,50 +123,17 @@ export const AvalanchePools = [
 ]
 
 export const InactiveFantomPools = [
-  // { // 0
-  //   pid: 2,
-  //   type: 'swap',
-  //   decimals: 18,
-  //   token0Symbol: 'SOUL',
-  //   token1Symbol: 'USDC',
-  //   lpSymbol: 'SOUL-USDC',
-  //   lpAddress: SOUL_MUSDC[ChainId.FANTOM],
-  //   token0Address: SOUL_ADDRESS[ChainId.FANTOM],
-  //   token1Address: MULTI_USDC_ADDRESS[ChainId.FANTOM],
-  // },
-  // { // 0
-  //   pid: 3,
-  //   type: 'swap',
-  //   decimals: 18,
-  //   token0Symbol: 'WFTM',
-  //   token1Symbol: 'USDC',
-  //   lpSymbol: 'FTM-USDC',
-  //   lpAddress: MUSDC_NATIVE[ChainId.FANTOM],
-  //   token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-  //   token1Address: MULTI_USDC_ADDRESS[ChainId.FANTOM],
-  // },
-  // { // 0
-  //   pid: 7,
-  //   type: 'swap',
-  //   decimals: 18,
-  //   token0Symbol: 'WFTM',
-  //   token1Symbol: 'AVAX',
-  //   lpSymbol: 'FTM-AVAX',
-  //   lpAddress: AVAX_NATIVE[ChainId.FANTOM],
-  //   token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-  //   token1Address: MULTI_AVAX_ADDRESS[ChainId.FANTOM],
-  // },
-  // { // 0
-  //   pid: 5,
-  //   type: 'swap',
-  //   decimals: 18,
-  //   token0Symbol: 'WFTM',
-  //   token1Symbol: 'ETH',
-  //   lpSymbol: 'FTM-ETH',
-  //   lpAddress: METH_NATIVE[ChainId.FANTOM],
-  //   token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-  //   token1Address: MULTI_WETH_ADDRESS[ChainId.FANTOM],
-  // },
+  { // 20
+    pid: 31, // pid: 30 <-- mistake
+    type: 'swap',
+    decimals: 18,
+    token0Symbol: 'WFTM',
+    token1Symbol: 'FMULTI',
+    lpSymbol: 'FTM-FMULTI',
+    lpAddress: "0xe5fCD208C453b72F476967C174d4530E21aAE14C",
+    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+    token1Address: FMULTI_ADDRESS[ChainId.FANTOM],
+  },
 ]
 
 export const FantomPools = [
@@ -179,17 +148,17 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: SOUL_ADDRESS[ChainId.FANTOM],
   },
-   { // 800
-      pid: 26,
-      type: 'swap',
-      decimals: 18,
-      token0Symbol: 'SOUL',
-      token1Symbol: 'USDC',
-      lpSymbol: 'SOUL-USDC',
-      lpAddress: SOUL_USDC[ChainId.FANTOM],
-      token0Address: SOUL_ADDRESS[ChainId.FANTOM],
-      token1Address: USDC_ADDRESS[ChainId.FANTOM],
-   }, 
+  { // 800
+    pid: 26,
+    type: 'swap',
+    decimals: 18,
+    token0Symbol: 'SOUL',
+    token1Symbol: 'USDC',
+    lpSymbol: 'SOUL-USDC',
+    lpAddress: SOUL_USDC[ChainId.FANTOM],
+    token0Address: SOUL_ADDRESS[ChainId.FANTOM],
+    token1Address: USDC_ADDRESS[ChainId.FANTOM],
+  },
   { // 400
     pid: 27,
     type: 'swap',
@@ -212,7 +181,7 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: WETH_ADDRESS[ChainId.FANTOM],
   },
- { // 200
+  { // 200
     pid: 29,
     type: 'swap',
     decimals: 18,
@@ -223,17 +192,7 @@ export const FantomPools = [
     token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
     token1Address: WBTC_ADDRESS[ChainId.FANTOM],
   },
-  { // 20
-    pid: 31, // pid: 30 <-- misstake
-    type: 'swap',
-    decimals: 18,
-    token0Symbol: 'WFTM',
-    token1Symbol: 'FMULTI',
-    lpSymbol: 'FTM-FMULTI',
-    lpAddress: "0xe5fCD208C453b72F476967C174d4530E21aAE14C",
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: FMULTI_ADDRESS[ChainId.FANTOM],
-  },
+
   { // 10
     pid: 32,
     type: 'swap',

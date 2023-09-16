@@ -4,7 +4,7 @@ import { Active } from './Key'
 import { ActiveRow } from './Row'
 import {
   AvalanchePools, FantomPools
-  // , InactiveFantomPools, InactiveAvalanchePools
+  , InactiveFantomPools, InactiveAvalanchePools
 } from './Pools'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
@@ -13,6 +13,7 @@ import { Feature } from 'enums'
 
 export const FarmList = () => {
   const { chainId } = useActiveWeb3React()
+  const retiredEnabled = chainId == ChainId.FANTOM ? true : false
   // const SummonerContract = useSummonerContract()
   const ftmList = FantomPools.map((farm) => (
     <ActiveRow
@@ -44,44 +45,43 @@ export const FarmList = () => {
     />
   ))
 
-  // const inactiveFtmList = InactiveFantomPools.map((farm) => (
-  //   <ActiveRow
-  //     key={farm.pid}
-  //     pid={farm.pid}
-  //     decimals={farm.decimals}
-  //     pairType={farm.type}
-  //     lpToken={farm.lpAddress}
-  //     token0Symbol={farm.token0Symbol}
-  //     token1Symbol={farm.token1Symbol}
-  //     token0Address={farm.token0Address}
-  //     token1Address={farm.token1Address}
-  //     farm={farm}
-  //   />
-  // ))
+  const inactiveFtmList = InactiveFantomPools.map((farm) => (
+    <ActiveRow
+      key={farm.pid}
+      pid={farm.pid}
+      decimals={farm.decimals}
+      pairType={farm.type}
+      lpToken={farm.lpAddress}
+      token0Symbol={farm.token0Symbol}
+      token1Symbol={farm.token1Symbol}
+      token0Address={farm.token0Address}
+      token1Address={farm.token1Address}
+      farm={farm}
+    />
+  ))
 
-  // const inactiveAvaxList = InactiveAvalanchePools.map((farm) => (
-  //   <ActiveRow
-  //     key={farm.pid}
-  //     pid={farm.pid}
-  //     decimals={farm.decimals}
-  //     pairType={farm.type}
-  //     lpToken={farm.lpAddress}
-  //     token0Symbol={farm.token0Symbol}
-  //     token1Symbol={farm.token1Symbol}
-  //     token0Address={farm.token0Address}
-  //     token1Address={farm.token1Address}
-  //     farm={farm}
-  //   />
-  // ))
+  const inactiveAvaxList = InactiveAvalanchePools.map((farm) => (
+    <ActiveRow
+      key={farm.pid}
+      pid={farm.pid}
+      decimals={farm.decimals}
+      pairType={farm.type}
+      lpToken={farm.lpAddress}
+      token0Symbol={farm.token0Symbol}
+      token1Symbol={farm.token1Symbol}
+      token0Address={farm.token0Address}
+      token1Address={farm.token1Address}
+      farm={farm}
+    />
+  ))
 
   return (
     <div>
       <Typography className="text-2xl bg-dark-1000 mb-2 rounded-2xl m-1 p-4 border border-purple font-bold text-center">SoulSwap Farms</Typography>
       <Active />
       {chainId == ChainId.AVALANCHE ? avaxList : ftmList}
-      {/* {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) && <Typography className="text-2xl bg-dark-1000 mb-2 rounded-2xl m-1 p-4 border border-avaxRed font-bold text-center">Retired Farms</Typography>} */}
-      {/* {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) && <Active />} */}
-      {/* {chainId == ChainId.AVALANCHE ? inactiveAvaxList : inactiveFtmList} */}
+      {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) && retiredEnabled && <Typography className="text-2xl bg-dark-1000 mb-2 rounded-2xl m-1 p-4 border border-avaxRed font-bold text-center">Retired Farms</Typography>}
+      {retiredEnabled && (chainId == ChainId.AVALANCHE ? inactiveAvaxList : inactiveFtmList)}
     </div>
   )
 }
