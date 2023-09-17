@@ -245,8 +245,18 @@ const CreateFarm = () => {
   return (
     <CreateFarmLayout>
       <Head>
-        <title>Create Farm | DeFarms by Soul</title>
-        <meta key="description" name="description" content="Create Permissionless Farms with Soul" />
+        <Head>
+        <title>Create DeFarm | SoulSwap</title>
+          <meta name="description" content="Create a decentralized farm using Soul Protocol's novel solution designed to make it easy for anyone to launch on SoulSwap." />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta name="twitter:site" content="@SoulSwapFinance" />
+          <meta id="og:image" property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta id="og:image:type" property="og:image:type" content="image/png" />
+          <meta id="og:image:type" property="og:image:type" content="630" />
+          <meta id="og:image:width" property="og:image:width" content="1200" />
+          <meta id="og:description" property="og:description" content="Create a decentralized farm using Soul Protocol's novel solution designed to make it easy for anyone to launch on SoulSwap." />
+      </Head>
       </Head>
       <Card
         className="h-full bg-dark-900"

@@ -98,12 +98,13 @@ function MyApp({ Component, pageProps, fallback, err }) {
       </GelatoProvider>
     )
   }
+
+
   return (
     <>
       <Head>
-        {/* <title>SoulSwap</title> */}
-          {/* <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." /> */}
-          {/* <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." /> */}
+        <title>SoulSwap</title>
+          <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
           <meta name="twitter:site" content="@SoulSwapFinance" />

@@ -25,11 +25,18 @@ const Defarms = () => {
     <Wrap padding='1rem 0 0 0' justifyContent="center">
       <DoubleGlowShadowV2 opacity="0.6">
         <Container id="defarm-page">
-          <Head>
-            <title>DeFarms | Soul</title>
-            <meta key="description" name="description" content="Farm" />
-            {/* <Image src="https://giphy.com/embed/kPCDnjRGh7POYS4Z5P" width={480} height={480} alt={'egg gif with tokens'} /> */}
-          </Head>      
+      <Head>
+        <title>DeFarms | SoulSwap</title>
+          <meta name="description" content="Providing protocols with the opportunity to incentivize their communities to provide liquidity." />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta name="twitter:site" content="@SoulSwapFinance" />
+          <meta id="og:image" property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta id="og:image:type" property="og:image:type" content="image/png" />
+          <meta id="og:image:type" property="og:image:type" content="630" />
+          <meta id="og:image:width" property="og:image:width" content="1200" />
+          <meta id="og:description" property="og:description" content="Providing protocols with the opportunity to incentivize their communities to provide liquidity." />
+      </Head>
           <div className={`grid p-1 mt-8 rounded-2xl bg-dark-1000`} >
           <div
             className={
