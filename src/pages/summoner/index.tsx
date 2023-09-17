@@ -77,6 +77,19 @@ const Summoner = () => {
 
   return (
     <div className={`grid grid-cols-1 w-full max-w-2xl justify-center p-1 mt-8 sm:m-8 bg-dark-900 rounded-2xl`}>
+        <Head>
+          <title>Farm | SoulSwap</title>
+          <meta name="description" content="Deposit liquidity pool (LP) tokens to earn SOUL rewards over time as an incentive to help enable trades on our decentralized SoulSwap exchange." />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta name="twitter:site" content="@SoulSwapFinance" />
+          <meta id="og:image" property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta id="og:image:type" property="og:image:type" content="image/png" />
+          <meta id="og:image:type" property="og:image:type" content="630" />
+          <meta id="og:image:width" property="og:image:width" content="1200" />
+          <meta id="og:description" property="og:description" content="Deposit liquidity pool (LP) tokens to earn SOUL rewards over time as an incentive to help enable trades on our decentralized SoulSwap exchange." />
+        </Head>
+
           <CustomBanner
             chains={[ChainId.FANTOM]}
             link={'/bonds'}

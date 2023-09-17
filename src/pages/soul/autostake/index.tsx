@@ -173,10 +173,19 @@ export default function AutoStake() {
 
   return (
     <Container id="autostake-page" className={`p-0.5 mt-6 sm:mt-12 rounded-2xl bg-dark-900`}>
-      <Head>
-        <title>AutoStake | Soul</title>
-        <meta key="description" name="description" />
-      </Head>
+         <Head>
+          <title>Vault | SoulSwap</title>
+          <meta name="description" content="Stake SOUL in our autocompounding vault and earn more SOUL over time." />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta name="twitter:site" content="@SoulSwapFinance" />
+          <meta id="og:image" property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta id="og:image:type" property="og:image:type" content="image/png" />
+          <meta id="og:image:type" property="og:image:type" content="630" />
+          <meta id="og:image:width" property="og:image:width" content="1200" />
+          <meta id="og:description" property="og:description" content="Stake SOUL in our autocompounding vault and earn more SOUL over time." />
+        </Head>
+
       <div className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`} >
         <Image src={STAKE_BANNER}
           height={96}

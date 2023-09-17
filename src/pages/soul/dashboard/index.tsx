@@ -90,9 +90,18 @@ function Dashboard() {
   return (
       <DoubleGlowShadowV2>
         <Head>
-          <title>Dashboard | Soul</title>
-          <meta key="description" name="description" />
+          <title>Dashboard | SoulSwap</title>
+          <meta name="description" content="View the SoulSwap economy metrics, such as the circulation and our protocol-owned assets and liquidity." />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta name="twitter:site" content="@SoulSwapFinance" />
+          <meta id="og:image" property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta id="og:image:type" property="og:image:type" content="image/png" />
+          <meta id="og:image:type" property="og:image:type" content="630" />
+          <meta id="og:image:width" property="og:image:width" content="1200" />
+          <meta id="og:description" property="og:description" content="View the SoulSwap economy metrics, such as the circulation and our protocol-owned assets and liquidity." />
         </Head>
+
         <div className={`grid p-1 mt-8 rounded-2xl bg-dark-1000`} 
           >
           <div
