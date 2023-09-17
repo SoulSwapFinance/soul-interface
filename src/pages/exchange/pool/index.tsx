@@ -26,12 +26,22 @@ export default function Pool() {
   return (
     <>
       <Head>
-        <title>{`Pool`} | Soul</title>
         <meta
           key="description"
           name="description"
-          content="Soul liquidity pools are markets for trades between the two tokens, you can provide these tokens and become a liquidity provider to earn 0.25% of fees from trades."
+          content=""
         />
+        <title>Pool | SoulSwap</title>
+        {/* <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." /> */}
+        <meta name="description" content="Soul liquidity pools are markets for trades between the two tokens, you can provide these tokens and become a liquidity provider to earn 0.25% of fees from trades." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+        <meta name="twitter:site" content="@SoulSwapFinance" />
+        <meta property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:description" content="Soul liquidity pools are markets for trades between the two tokens, you can provide these tokens and become a liquidity provider to earn 0.25% of fees from trades." />
       </Head>
 
       {/* <SoulLogo /> */}

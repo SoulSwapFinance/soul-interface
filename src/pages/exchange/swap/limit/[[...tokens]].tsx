@@ -89,6 +89,7 @@ import { getChainColorCode } from "constants/chains"
 import LimitHeader from "features/limit/LimitHeader"
 import { CustomBanner } from "components/Banner"
 import Typography from "components/Typography"
+import Head from "next/head"
 // import { FollowBanner } from "components/Banner"
 // import LIMIT_BANNER from 'assets/branding/limit-banner.png'
 // import TokenStats from "components/TokenStats"
@@ -490,6 +491,19 @@ const Limit = () => {
 
   return (
     <DoubleGlowShadowV2>
+      <Head>
+        <title>Limit | SoulSwap</title>
+          {/* <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." /> */}
+          <meta name="description" content="Create limit orders on SoulSwap. Set a price and select your desired assets to execute an order, view open orders, and more." />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta name="twitter:site" content="@SoulSwapFinance" />
+          <meta property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta property="og:image:type" content="image/png" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:description" content="Create limit orders on SoulSwap. Set a price and select your desired assets to execute an order, view open orders, and more." />
+        </Head>
       <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
         {showHeader &&
           <SwapDropdown

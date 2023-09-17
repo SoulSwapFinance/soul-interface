@@ -85,15 +85,24 @@ export default function PoolFinder() {
   return (
     <Container maxWidth="2xl" className="space-y-6 mt-4">
       <Head>
-        <title>{`Find Pool`} | Soul</title>
-        <meta key="description" name="description" content="Find Pool" />
+        <title>Find | SoulSwap</title>
+          {/* <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." /> */}
+          <meta name="description" content="Find and import your liquidity pools on SoulSwap." />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta name="twitter:site" content="@SoulSwapFinance" />
+          <meta id="og:image" property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta id="og:image:type" property="og:image:type" content="image/png" />
+          <meta id="og:image:type" property="og:image:type" content="630" />
+          <meta id="og:image:width" property="og:image:width" content="1200" />
+          <meta id="og:description" property="og:description" content="Find and import your liquidity pools on SoulSwap." />
       </Head>
       <DoubleGlowShadowV2 opacity="0.6">
         <div className="p-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
           <SwapLayoutCard>
-          <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
+          <div className={`my-2 border-2 border-[${getChainColor(chainId)}]`}/>
             <SwapDropdown />
-          <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`}/>
+          <div className={`my-2 border-2 border-[${getChainColor(chainId)}]`}/>
             <AutoColumn gap={'md'}>
               <CurrencySelectPanel
                 currency={currency0}

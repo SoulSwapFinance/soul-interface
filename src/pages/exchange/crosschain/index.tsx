@@ -18,6 +18,7 @@ import { Feature } from 'enums'
 // import { useRouter } from 'next/router'
 // import { getChainInfo } from 'constants/chains'
 import { useTokenBalance } from 'state/wallet/hooks'
+import Head from 'next/head'
 // import {SquidWidget} from '@0xsquid/widget'
 // import { useTokenBalance } from 'state/wallet/hooks'
 // import { usePrice } from 'hooks'
@@ -297,8 +298,20 @@ const Crosschain = ({ }) => {
 
     return (
         <DoubleGlowShadowV2>
-            <NextSeo title={`Crosschain | SoulSwap`} />
-            <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
+      <Head>
+        <title>CrossChain | SoulSwap</title>
+          {/* <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." /> */}
+          <meta name="description" content="Swap crosschain via the Squid Router on SoulSwap." />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta name="twitter:site" content="@SoulSwapFinance" />
+          <meta id="og:image" property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta id="og:image:type" property="og:image:type" content="image/png" />
+          <meta id="og:image:type" property="og:image:type" content="630" />
+          <meta id="og:image:width" property="og:image:width" content="1200" />
+          <meta id="og:description" property="og:description" content="Swap crosschain via the Squid Router on SoulSwap." />
+      </Head>            
+      <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
                 <SwapDropdown />
                 {/* <div className={`my-12`} /> */}
                 <div className="flex flex-col gap-3 space-y-3">
