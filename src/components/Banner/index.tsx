@@ -45,24 +45,38 @@ interface ICustom {
   textColor: string
   color: string
   className?: string
+  external?: boolean
 }
 
-export const CustomBanner: FC<ICustom> = ({ chains, text, textColor, color, link, className }) => {
+export const CustomBanner: FC<ICustom> = ({ chains, text, textColor, color, link, className, external }) => {
   const { chainId } = useActiveWeb3React()
-  const isAllowed = chains.includes(chainId)
+  const isAllowed = chains.includes(chainId ?? ChainId.FANTOM)
   
   return (
   <div className={isAllowed ? `relative items-center w-full mt-2` : `hidden`}>
     <div className="w-full">
       <div className="text-center">
         <p className={classNames(`font-medium text-center text-${textColor}`, className)}>
-        <Link href={link}>
+        {external ? 
+          <ExternalLink 
+            href={link}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Button variant="filled" color={color} size="sm">
+              <div className={`justify-center font-bold text-${textColor}`}>
+                {text}
+              </div>
+            </Button>
+          </ExternalLink>
+        : <Link href={link}>
             <Button variant="filled" color={color} size="sm">
               <div className={`justify-center font-bold text-${textColor}`}>
                 {text}
               </div>
             </Button>
         </Link>
+        }
         </p>
       </div>
       <div className="absolute inset-y-0 right-0 flex items-start pt-1 pr-1 sm:pt-1 sm:pr-2 sm:items-start">
