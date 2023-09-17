@@ -483,9 +483,10 @@ const Exchange = () => {
                 inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]}
               />
               <CustomBanner
-                chains={[ChainId.FANTOM]}
-                link={'/bonds'}
-                text={'New Bonds Available ↗'}
+                external={true}
+                chains={[ChainId.FANTOM, ChainId.AVALANCHE]}
+                link={'https://docs.soulswap.finance/docs/user-guides/our-utility/ios-mobile-premium'}
+                text={'Our (Beta) Mobile App (iOS) ↗'}
                 textColor={'white'}
                 color={'ftmBlue'}
                 className={`animate-pulse border-4 border-dark-800 rounded-2xl`}
