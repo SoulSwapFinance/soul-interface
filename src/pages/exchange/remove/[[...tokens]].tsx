@@ -700,8 +700,17 @@ export default function Remove() {
   return (
     <>
       <Head>
-        <title>{`Remove Liquidity`} | SoulSwap </title>
-        <meta key="description" name="description" content={`Remove liquidity of Soul`} />
+        <title>Remove LP | SoulSwap</title>
+          {/* <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." /> */}
+          <meta name="description" content="Remove liquidity from the SoulSwap exchange." />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta name="twitter:site" content="@SoulSwapFinance" />
+          <meta property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta property="og:image:type" content="image/png" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:description" content="Remove liquidity from the SoulSwap exchange." />
       </Head>
 
       <DoubleGlowShadowV2>

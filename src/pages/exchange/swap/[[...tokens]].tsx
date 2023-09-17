@@ -46,6 +46,8 @@ import { useWeb3React } from '@web3-react/core'
 import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 import { useWalletModalToggle } from 'state/application/hooks'
 import { NetworkContextName } from 'constants/index'
+import { name } from 'sdk/types'
+import Head from 'next/head'
 // import { NetworkContextName } from 'constants/index'
 // import Modal from 'components/DefaultModal'
 // import ModalHeader from 'components/Modal/Header'
@@ -391,7 +393,32 @@ const Exchange = () => {
 
   return (
     <div>
-      <NextSeo title={`Swap | SoulSwap`} />
+      {/* <NextSeo 
+        title={`Swap | SoulSwap`}
+        defaultTitle='SoulSwap'
+        description='SoulSwap is a decentralized exchange, part of Soul Protocol, which offers a full suite of DeFi tools.'
+        twitter={{
+          handle: '@soulswapfinance',
+          site: '@soulswapfinance',
+          cardType: 'summary_large_image',
+        }}
+        additionalMetaTags={[
+          
+          // ={'https://soulswap.finance/images/soulswap.png'}
+        ]}
+        /> */}
+      <Head>
+        <title>Swap | SoulSwap</title>
+        <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+        <meta name="twitter:site" content="@SoulSwapFinance" />
+        <meta property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." />
+      </Head>
       {account && chainId &&
       <ConfirmSwapModal
       isOpen={showConfirm}

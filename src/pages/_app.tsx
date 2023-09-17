@@ -100,11 +100,19 @@ function MyApp({ Component, pageProps, fallback, err }) {
   }
   return (
     <>
-      <Head>Soul</Head>
-      <meta
-        name="viewport"
-        content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
-      />
+      <Head>
+        {/* <title>SoulSwap</title> */}
+          {/* <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." /> */}
+          {/* <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." /> */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta name="twitter:site" content="@SoulSwapFinance" />
+          <meta id="og:image" property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+          <meta id="og:image:type" property="og:image:type" content="image/png" />
+          <meta id="og:image:type" property="og:image:type" content="630" />
+          <meta id="og:image:width" property="og:image:width" content="1200" />
+          {/* <meta id="og:description" property="og:description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." /> */}
+      </Head>
 
       {/* Global Site Tag (gtag.js) - Google Analytics */}
       <Script
@@ -125,52 +133,52 @@ function MyApp({ Component, pageProps, fallback, err }) {
           `,
         }}
       />
-        <Web3ReactProvider getLibrary={getLibrary}>
-          <QueryClientProvider client={queryClient}>
-            <Hydrate state={pageProps.dehydratedState}>
-              <ApiDataProvider>
-                <ApolloProvider client={client}>
-                  {/*@ts-ignore TYPE NEEDS FIXING*/}
-                  <FantomApiProvider>
-                    <Web3ProviderNetwork getLibrary={getLibrary}>
-                      <Web3ReactManager>
-                        <ReduxProvider store={store}>
-                          <PersistGate loading={<Dots>loading</Dots>} persistor={persistor}>
-                            <>
-                              <ListsUpdater />
-                              <UserUpdater />
-                              <ApplicationUpdater />
-                              <MulticallUpdater />
-                            </>
-                            {/*@ts-ignore TYPE NEEDS FIXING*/}
-                            <RecoilRoot>
-                              <SyncWithRedux />
-                              <Provider>
-                                <ModalProvider>
-                                  <Layout>
-                                    <Guard>
-                                      {/*@ts-ignore TYPE NEEDS FIXING*/}
-                                      <Gelato>
-                                        <Component {...pageProps} err={err} />
-                                      </Gelato>
-                                    </Guard>
-                                    <Portals />
-                                    <Analytics />
-                                  </Layout>
-                                </ModalProvider>
-                              </Provider>
-                              <TransactionUpdater />
-                            </RecoilRoot>
-                          </PersistGate>
-                        </ReduxProvider>
-                      </Web3ReactManager>
-                    </Web3ProviderNetwork>
-                  </FantomApiProvider>
-                </ApolloProvider>
-              </ApiDataProvider>
-            </Hydrate>
-          </QueryClientProvider>
-        </Web3ReactProvider>
+      <Web3ReactProvider getLibrary={getLibrary}>
+        <QueryClientProvider client={queryClient}>
+          <Hydrate state={pageProps.dehydratedState}>
+            <ApiDataProvider>
+              <ApolloProvider client={client}>
+                {/*@ts-ignore TYPE NEEDS FIXING*/}
+                <FantomApiProvider>
+                  <Web3ProviderNetwork getLibrary={getLibrary}>
+                    <Web3ReactManager>
+                      <ReduxProvider store={store}>
+                        <PersistGate loading={<Dots>loading</Dots>} persistor={persistor}>
+                          <>
+                            <ListsUpdater />
+                            <UserUpdater />
+                            <ApplicationUpdater />
+                            <MulticallUpdater />
+                          </>
+                          {/*@ts-ignore TYPE NEEDS FIXING*/}
+                          <RecoilRoot>
+                            <SyncWithRedux />
+                            <Provider>
+                              <ModalProvider>
+                                <Layout>
+                                  <Guard>
+                                    {/*@ts-ignore TYPE NEEDS FIXING*/}
+                                    <Gelato>
+                                      <Component {...pageProps} err={err} />
+                                    </Gelato>
+                                  </Guard>
+                                  <Portals />
+                                  <Analytics />
+                                </Layout>
+                              </ModalProvider>
+                            </Provider>
+                            <TransactionUpdater />
+                          </RecoilRoot>
+                        </PersistGate>
+                      </ReduxProvider>
+                    </Web3ReactManager>
+                  </Web3ProviderNetwork>
+                </FantomApiProvider>
+              </ApolloProvider>
+            </ApiDataProvider>
+          </Hydrate>
+        </QueryClientProvider>
+      </Web3ReactProvider>
     </>
   )
 }
