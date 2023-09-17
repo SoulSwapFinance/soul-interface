@@ -139,7 +139,7 @@ const Summoner = () => {
             />
           </div>
         }
-        {showBalances && account &&
+        {showBalances && account && pendingValue > 0 &&
           // <TridentHeader className="sm:!flex-row justify-center items-center" pattern="bg-bubble">
           // <div>
           <div className="flex justify-center gap-2 mb-4">
