@@ -66,7 +66,7 @@ import Loader from "components/Loader"
 import { CurrencyLogo } from "components/CurrencyLogo"
 import { tryParseAmount } from "functions/parse"
 import { TYPE } from "theme"
-import { BottomGrouping, Dots, SwapCallbackError, Wrapper } from "components/Order/styleds"
+import { BottomGrouping, Dots, SwapCallbackError } from "components/Order/styleds"
 import ConfirmSwapModal from "components/Order/ConfirmSwapModal"
 import UnsupportedCurrencyFooter from "components/Order/UnsupportedCurrencyFooter"
 import TradePrice from "components/Order/TradePrice"
@@ -90,58 +90,6 @@ import LimitHeader from "features/limit/LimitHeader"
 import { CustomBanner } from "components/Banner"
 import Typography from "components/Typography"
 import Head from "next/head"
-// import { FollowBanner } from "components/Banner"
-// import LIMIT_BANNER from 'assets/branding/limit-banner.png'
-// import TokenStats from "components/TokenStats"
-
-// import SocialWidget from "components/Social"
-// import useGasOverhead from "hooks/gelato/useGasOverhead"
-// import { AdvancedSwapDetails } from "components/Order/AdvancedSwapDetails"
-// import Input from "components/Input"
-// import OrderHeader from "components/Order/OrderHeader"
-// import SwapHeader from "features/swap/SwapHeader"
-// import Container from "components/Container"
-// import CurrencyInputPanel from "components/Order/CurrencyInputPanel"
-// import { maxAmountSpend } from "utils/currency/maxAmountSpend"
-
-// const BodyWrapper = styled.div<{ margin?: string }>`
-// position: relative;
-// margin-top: ${({ margin }) => margin ?? "0px"};
-// max-width: 1080px;
-//   width: 100%;
-//   background: ${({ theme }) => theme.bg7};
-//   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01), 0px 4px 8px rgba(0, 0, 0, 0.04),
-//     0px 16px 24px rgba(0, 0, 0, 0.04), 0px 24px 32px rgba(0, 0, 0, 0.01);
-//   border-radius: 24px;
-//   margin-top: 1rem;
-// `;
-
-/**
- * The styled container element that wraps the content of most pages and the tabs.
- */
-// function AppBody({
-//   children,
-//   ...rest
-// }: {
-//   children: React.ReactNode;
-// }) {
-//   return <BodyWrapper {...rest}>{children}</BodyWrapper>;
-// }
-
-// const StyledInfo = styled(Info)`
-//   opacity: 0.4;
-//   color: ${({ theme }) => theme.text1};
-//   height: 16px;
-//   width: 16px;
-//   :hover {
-//     opacity: 0.8;
-//   }
-// `;
-
-
-// interface GelatoLimitOrderProps {
-//   showCommonBases?: boolean;
-// }
 
 const Limit = () => {
   const { account, chainId } = useActiveWeb3React();
@@ -220,17 +168,6 @@ const Limit = () => {
 
   const fiatValueDesiredRate = useUSDCValue(desiredRateInCurrencyAmount);
 
-  // const currentMarketRate = trade?.executionPrice ?? undefined;
-
-  // const pct =
-  //   currentMarketRate && price
-  //     ? price.subtract(currentMarketRate).divide(currentMarketRate)
-  //     : undefined;
-
-  // const percentageRateDifference = pct
-  //   ? new Percent(pct.numerator, pct.denominator)
-  //   : undefined;
-
   const isValid = !inputError;
   const rawPriceDelta = Number(formattedAmounts.price) - Number(trade?.executionPrice.toSignificant(4))
   const rawPercentDelta = 100 * (rawPriceDelta) / Number(trade?.executionPrice.toSignificant(8))
@@ -240,36 +177,29 @@ const Limit = () => {
   const isBuy = trade && rateType === Rate.DIV
   const isProfitable = isSell && rawPriceDelta > 0 || isBuy && rawPriceDelta < 0
 
-  // const currencyA = currencyA
-
-  // const [activeTab, setActiveTab] = useState<"sell" | "buy">("sell");
-  // const handleActiveTab = (tab: "sell" | "buy") => {
-  //   if (activeTab === tab) return;
-
-  //   handleRateType(rateType, price);
-  //   setActiveTab(tab);
-  // };
   const handleTypeInput = useCallback(
-    (value: string) => {
-      handleInput(Field.INPUT, value);
-      handleCurrencySelection(Field.INPUT, currencyA)
-      handleCurrencySelection(Field.OUTPUT, currencyB)
-    },
-    [handleInput, handleCurrencySelection]
+      (value: string) => {
+        handleInput(Field.INPUT, value);
+        handleCurrencySelection(Field.INPUT, currencyA)
+        handleCurrencySelection(Field.OUTPUT, currencyB)
+      },
+      [handleInput, handleCurrencySelection]
   );
+
   const handleTypeOutput = useCallback(
-    (value: string) => {
-      handleInput(Field.OUTPUT, value);
-      handleCurrencySelection(Field.INPUT, currencyA)
-      handleCurrencySelection(Field.OUTPUT, currencyB)
-    },
-    [handleInput, handleCurrencySelection]
+      (value: string) => {
+        handleInput(Field.OUTPUT, value);
+        handleCurrencySelection(Field.INPUT, currencyA)
+        handleCurrencySelection(Field.OUTPUT, currencyB)
+      },
+      [handleInput, handleCurrencySelection]
   );
+
   const handleTypeDesiredRate = useCallback(
-    (value: string) => {
-      handleInput(Field.PRICE, value);
-    },
-    [handleInput]
+      (value: string) => {
+        handleInput(Field.PRICE, value);
+      },
+      [handleInput]
   );
 
   // modal and loading
@@ -314,14 +244,6 @@ const Limit = () => {
     userHasSpecifiedInputOutput &&
     ((parsedAmounts.input && !parsedAmounts.output) ||
       (!parsedAmounts.input && parsedAmounts.output));
-
-  // const maxInputAmount: CurrencyAmount<Currency> | undefined = maxAmountSpend(
-  //   currencyBalances.input
-  // );
-  // const showMaxButton = Boolean(
-  //   maxInputAmount?.greaterThan(0) &&
-  //   !parsedAmounts.input?.equalTo(maxInputAmount)
-  // );
 
   const handleSwap = useCallback(() => {
     if (!handleLimitOrderSubmission) {
@@ -466,7 +388,6 @@ const Limit = () => {
   //   },
   //   [handleCurrencySelection]
   // );
-
 
   const swapIsUnsupported = useIsSwapUnsupported(
     currencyA,
@@ -859,7 +780,6 @@ const Limit = () => {
         <div className={classNames([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `flex flex-cols-2 gap-3 text-white justify-end` : `hidden`)}>
         </div>
       </div>
-      {/* </div> */}
     </DoubleGlowShadowV2>
   )
 }

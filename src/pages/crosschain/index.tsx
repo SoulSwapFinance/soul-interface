@@ -4,6 +4,7 @@ import { CustomBanner } from "components/Banner";
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
 import LimitHeader from "features/limit/LimitHeader";
 import SwapDropdown from "features/swap/SwapDropdown";
+import Head from "next/head";
 import { ChainId } from "sdk";
 
 // import styles from "../styles/Home.module.css";
@@ -34,6 +35,18 @@ export default function Crosschain() {
 
   return (
     <DoubleGlowShadowV2>
+      <Head>
+        <title>CrossChain | SoulSwap</title>
+        <meta name="description" content="Swap crosschain via the Squid Router on SoulSwap." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+        <meta name="twitter:site" content="@SoulSwapFinance" />
+        <meta id="og:image" property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+        <meta id="og:image:type" property="og:image:type" content="image/png" />
+        <meta id="og:image:type" property="og:image:type" content="630" />
+        <meta id="og:image:width" property="og:image:width" content="1200" />
+        <meta id="og:description" property="og:description" content="Swap crosschain via the Squid Router on SoulSwap." />
+      </Head>
       <div className={`grid grid-cols-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
         <SwapDropdown
           inputCurrency={null}
@@ -69,7 +82,6 @@ export default function Crosschain() {
           <SquidWidget
             config={config}
           />
-
         </div>
       </div>
     </DoubleGlowShadowV2>

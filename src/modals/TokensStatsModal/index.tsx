@@ -99,7 +99,7 @@ export default function TokenStatsModal(): JSX.Element | null {
                 const params: any = {
                   type: 'ERC20',
                   options: {
-                    address: SOUL_ADDRESS[chainId || 250],
+                    address: SOUL_ADDRESS[chainId ?? ChainId.FANTOM],
                     symbol: 'SOUL',
                     decimals: 18,
                     image: `https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/${SOUL_ADDRESS[ChainId.FANTOM]}/logo.png`,

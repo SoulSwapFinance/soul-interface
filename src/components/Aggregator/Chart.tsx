@@ -75,7 +75,7 @@ const Chart: React.FC<any> = ({ data, handleCrossHairData }) => {
       <div ref={chartRef} />
       {chart && !data && (
         <Heading3 style={{ textAlign: "center", marginTop: "-180px" }}>
-          No data available!
+          No data available...
         </Heading3>
       )}
     </>
