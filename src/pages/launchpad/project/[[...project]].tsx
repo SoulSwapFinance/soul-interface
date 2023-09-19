@@ -740,7 +740,7 @@ export default function LaunchpadProject(): JSX.Element {
         <div className="relative w-full">
           <div className={`grid grid-cols-1 md:grid-cols-12 gap-2 min-h-1/2`}>
             <div className="block mb-10">
-              <Back />
+              <Back href={'/launchpad'} />
             </div>
             <div className={`col-span-1 md:col-span-12`}>
               <ProjectHero project={project} totalCommitted={totalCommitted} />

@@ -1,11 +1,19 @@
 import { useRouter } from 'next/router'
+import { FC } from 'react'
 
-const Back = () => {
+const Back: FC<{ href?: string }> = ({ href }) => {
   const router = useRouter()
+  const action = () => {
+    href ? router.push(href) : router.back()
+  }
+    // back: () => router.back(),
+    // forward: () => router.back(),
+    // push: (href: string) => router.push(href),
+    // replace: (href: string) => router.replace(href),
   return (
     <div>
       <a
-        onClick={router.back}
+        onClick={action}
         className="flex items-center space-x-2 text-base text-center cursor-pointer font text-secondary hover:text-high-emphesis"
       >
         <svg
