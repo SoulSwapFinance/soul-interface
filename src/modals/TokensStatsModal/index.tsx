@@ -94,7 +94,7 @@ export default function TokenStatsModal(): JSX.Element | null {
             {/* <div className="block"> */}
             {/* <QuestionHelper text={`Add to MetaMask`}/> */}
             <div
-              className="rounded-md border border-purple cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5"
+              className="rounded-md border border-purple cursor-pointer sm:inline-flex bg-dark-900 hover:bg-dark-800 p-0.5 max-h-[720px]"
               onClick={() => {
                 const params: any = {
                   type: 'ERC20',
@@ -125,8 +125,8 @@ export default function TokenStatsModal(): JSX.Element | null {
               <Image
                 src={`https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/${SOUL_ADDRESS[ChainId.FANTOM]}/logo.png`}
                 alt="SOUL"
-                width={1600}
-                height={1600}
+                width={1200}
+                height={1200}
                 // objectFit="contain"
                 className="rounded-md"
               />

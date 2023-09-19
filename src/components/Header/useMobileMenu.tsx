@@ -197,11 +197,6 @@ const useMobileMenu: UseMobileMenu = () => {
           link: '/balances',
         },
         {
-          key: 'wallet',
-          title: 'Wallet',
-          link: '/info/dashboard',
-        },
-        {
           key: 'luxor-dashboard',
           title: 'Luxor',
           link: '/luxor/dashboard',

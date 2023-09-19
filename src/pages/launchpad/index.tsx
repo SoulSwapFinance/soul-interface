@@ -99,7 +99,7 @@ export default function Launchpad(): JSX.Element {
                       </div>
                     </NavLink>
                     <NavLink
-                      legacyBehavior={true}
+                      // legacyBehavior={true}
                       exact
                       href={'/launchpad?filter=upcoming'}
                       activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-purple-dark-900"
@@ -109,7 +109,7 @@ export default function Launchpad(): JSX.Element {
                       </div>
                     </NavLink>
                     <NavLink
-                      legacyBehavior={true}
+                      // legacyBehavior={true}
                       exact
                       href={'/launchpad?filter=completed'}
                       activeClassName="font-bold bg-transparent border rounded text-high-emphesis border-transparent border-gradient-r-purple-dark-900"
@@ -119,7 +119,7 @@ export default function Launchpad(): JSX.Element {
                       </div>
                     </NavLink>
                   </div>
-                  <div className={'flex flex-1 p-2 rounded flex bg-dark-700 flex-col md:flex-row md:space-x-2'}>
+                  <div className={'flex flex-1 p-2 rounded bg-dark-700 flex-col md:flex-row md:space-x-2'}>
                     <Search
                       className={'bg-dark-700 rounded'}
                       placeholder={'Search by name, symbol or address'}

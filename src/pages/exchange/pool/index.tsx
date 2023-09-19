@@ -77,19 +77,6 @@ export default function Pool() {
                 />
               </div>
             </div>
-            {/*  <div className="flex mb-4 items-center justify-center">
-              <Button variant="filled" color="purple" size="lg">
-                <NavLink href={'/info/dashboard'}>
-                  <div className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                    <Typography
-                      className={'text-white'}
-                    >
-                      {`View Account Analytics ↗`}
-                    </Typography>
-                  </div>
-                </NavLink>
-              </Button>
-            </div> */}
             <div className="grid grid-flow-row gap-3">
               <div className="mb-1 mt-1" />
               {loading ? (

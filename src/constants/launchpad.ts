@@ -68,7 +68,7 @@ export const LAUNCHPAD_PROJECTS: ProjectsMap = {
   0: {
     name: 'Luxor Money',
     symbol: '$LUX',
-    status: PROJECT_STATUS.UPCOMING,
+    status: PROJECT_STATUS.COMPLETED,
     raise: 100000,
     price: 300,
     pairPrice: 205,
