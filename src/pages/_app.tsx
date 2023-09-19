@@ -9,7 +9,7 @@ import Web3ReactManager from 'components/Web3ReactManager'
 import getLibrary from 'functions/getLibrary'
 import { exception, GOOGLE_ANALYTICS_TRACKING_ID, pageview } from 'functions/gtag'
 import DefaultLayout from 'layouts/Default'
-import { FantomApiProvider } from "contexts/FantomApiProvider"
+// import { FantomApiProvider } from "contexts/FantomApiProvider"
 import { Analytics } from '@vercel/analytics/react'
 import store, { persistor } from 'state'
 import ApplicationUpdater from 'state/application/updater'
@@ -140,8 +140,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
               <Hydrate state={pageProps.dehydratedState}>
                 <ApiDataProvider>
                   <ApolloProvider client={client}>
-                    {/*@ts-ignore TYPE NEEDS FIXING*/}
-                    <FantomApiProvider>
+                    {/* <FantomApiProvider> */}
                       <ReduxProvider store={store}>
                         <PersistGate loading={<Dots>loading</Dots>} persistor={persistor}>
                           <>
@@ -150,14 +149,12 @@ function MyApp({ Component, pageProps, fallback, err }) {
                             <ApplicationUpdater />
                             <MulticallUpdater />
                           </>
-                          {/*@ts-ignore TYPE NEEDS FIXING*/}
                           <RecoilRoot>
                             <SyncWithRedux />
                             <Provider>
                               <ModalProvider>
                                 <Layout>
                                   <Guard>
-                                    {/*@ts-ignore TYPE NEEDS FIXING*/}
                                     <Gelato>
                                       <Component {...pageProps} err={err} />
                                     </Gelato>
@@ -171,7 +168,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
                           </RecoilRoot>
                         </PersistGate>
                       </ReduxProvider>
-                    </FantomApiProvider>
+                    {/* </FantomApiProvider> */}
                   </ApolloProvider>
                 </ApiDataProvider>
               </Hydrate>

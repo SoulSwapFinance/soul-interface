@@ -32,7 +32,7 @@ import { useTimestampFromBlock } from 'hooks/useTimestampFromBlock'
 const Menu = ({ children }) => {
   return (
     <div className="border border-b-1 border-t-0 border-r-0 border-l-0 border-dark-500 ">
-      <div className={`pt-1 flex md:flex-row flex-col md:space-x-10 space-y-4 md:space-x-8 md:space-y-0 px-5`}>
+      <div className={`pt-1 flex md:flex-row flex-col md:space-x-10 space-y-4 md:space-y-0 px-5`}>
         {children}
       </div>
     </div>
@@ -562,7 +562,7 @@ const UserInfo = ({ project, pools, launchpadInfo }) => {
   const committed = !userPoolId ? 0 : (userPoolId?.amount / 1e18) * launchpadInfo.pairPrice
   const participation = !userPoolId ? 0 : userPoolId?.allocation / 1e12
 
-  console.log(userPoolId)
+  // console.log(userPoolId)
 
   return (
     <div className={`bg-light-glass px-6 py-4 rounded`}>
