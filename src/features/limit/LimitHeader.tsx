@@ -19,7 +19,7 @@ export default function LimitHeader({ inputCurrency, outputCurrency }): JSX.Elem
   
   const isLimit = router.pathname.startsWith('/exchange/swap/limit')
   
-    const isCrosschain = router.pathname.startsWith('/exchange/crosschain')
+    const isAggregator = router.pathname.startsWith('/exchange/aggregator')
 
   return (
     <div className="grid grid-cols-3 rounded-2xl m-4 bg-dark-900">
@@ -62,15 +62,17 @@ export default function LimitHeader({ inputCurrency, outputCurrency }): JSX.Elem
         onClick={(event) => {
           if (!outputCurrency) event.preventDefault()
         }}
-        className={isCrosschain ? classNames("font-bold text-high-emphesis", `bg-${getChainColorCode(chainId)} rounded-2xl`) : ''}
+        className={isAggregator ? classNames("font-bold text-high-emphesis", `bg-${getChainColorCode(chainId)} rounded-2xl`) : ''}
         activeClassName={classNames("text-high-emphesis font-bold rounded-2xl", `bg-${getChainColorCode(chainId)} rounded-2xl`)}
-        href={'/crosschain'}
-        // href={'https://widget-integrations-squid.vercel.app'}
-      >
+        href={
+          inputCurrency && outputCurrency ?
+          `/exchange/aggregator/${currencyId(inputCurrency)}/${currencyId(outputCurrency)}`
+          : `/exchange/aggregator/${NATIVE[chainId ?? ChainId.FANTOM].symbol}/${soulEnabled ? SOUL_ADDRESS[chainId ?? ChainId.FANTOM] : USDC_ADDRESS[chainId ?? ChainId.FANTOM]}`
+      }      >
         <Typography
           className="flex text-white items-center justify-center px-1 py-1 text-base font-medium text-center rounded-md md:px-10 hover:text-high-emphesis"
         >
-          {`Cross-Chain`}  
+          {`Aggregator`}
        </Typography>
       </NavLink>
     </div>

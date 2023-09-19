@@ -5389,10 +5389,10 @@
     truffle-flattener "^1.5.0"
     web3 "^1.4.0"
 
-"@soulswapfinance/cross-chain-widget@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@soulswapfinance/cross-chain-widget/-/cross-chain-widget-0.0.7.tgz#cba5920bf0a21dffe0a60876ac49e5d733ce1af8"
-  integrity sha512-Vp9ntvLJ3WQ7KE0NUSkWnVlN2TSfEKWGTEawzs22tJ3JRhct+gM7QimEvLHCYxSQm/nV8msZ3NJWWKW99/xdIw==
+"@soulswapfinance/cross-chain-widget@0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@soulswapfinance/cross-chain-widget/-/cross-chain-widget-0.1.7.tgz#e0ff2de8ee932e329769e47690d1d2197e21322e"
+  integrity sha512-5Bs/QYddCP1Q5L6BB7nxAetPeKmtaPfe+26Qiauqbid5Kxva7H7q8h6Dki9uCChoQZ/7bWberDRioy4rHmX9lA==
   dependencies:
     "@0xsquid/sdk" "1.12.1"
     "@cosmjs/stargate" "^0.29.2"

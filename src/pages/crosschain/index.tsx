@@ -62,10 +62,10 @@ export default function Crosschain() {
           color={'ftmBlue'}
           className={`animate-pulse border-4 border-dark-800 rounded-2xl`}
         />
-        <LimitHeader
+        {/* <LimitHeader
           inputCurrency={null}
           outputCurrency={null}
-        />
+        /> */}
         <div
           className={`grid border-2 rounded-2xl border-dark-800 justify-center`}
           style={{

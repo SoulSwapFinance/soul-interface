@@ -44,24 +44,24 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   const isExchange = router.pathname.startsWith('/swap')
     || router.pathname.startsWith('/exchange/swap')
     // && !router.pathname.startsWith('/exchange/swap/limit'))
-    || router.pathname.startsWith('/crosschain')
+    // || router.pathname.startsWith('/crosschain')
 
   // const useSettings = isExchange || isLimit || isPool
 
   const soulEnabled = [ChainId.FANTOM, ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId)
 
   const activeStyle = `text-secondary bg-dark-900 rounded-lg`
-  const style = `mt-0.5 hover:border-[${getChainColor(chainId)}]`
+  const style = `hover:border-[${getChainColor(chainId)}]`
   const swapStyle = isExchange ? activeStyle : style
   const poolStyle = isPool ? activeStyle : style
-  const ecoStyle = isAggregator ? activeStyle : style
+  // const ecoStyle = isAggregator ? activeStyle : style
   // const limitStyle = isLimit ? activeStyle : style
   const crossStyle = isCrosschain ? activeStyle : style
   const bridgeStyle = isBridge ? activeStyle : style
 
   return (
     <div className={`flex mt-2 mb-2 items-center justify-center gap-4 border-2 border-dark-700 rounded-lg`}>
-      <div className={`flex gap-6 sm:gap-8 mr-8 sm:mr-0`}>
+      <div className={`flex gap-0 sm:gap-0 mr-12 sm:mr-0`}>
         {/* {featureEnabled(Feature.LIQUIDITY, chainId) && */}
         <NavLink
           className={classNames(
@@ -90,9 +90,9 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               className={`w-6 w-6`}
             /> */}
             <Typography
-              className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
+              className={`font-bold sm:text-lg sm:mx-2 pl-4 pr-4 sm:pl-10 sm:pr-10 text-${getChainColorCode(chainId)}`}
             >
-              {`Swap`}
+              {`Exchange`}
             </Typography>
           </div>
         </NavLink>
@@ -122,83 +122,24 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
                     fillSecondary={isPool ? `#FFFFFF` : `${getChainColor(chainId)}`}
                   /> */}
               <Typography
-                className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
+                className={`font-bold sm:text-lg sm:mx-2 pl-4 pr-4 sm:pl-10 sm:pr-10 text-${getChainColorCode(chainId)}`}
               >
                 {/* {`+/-`} */}
-                {`Pool`}
+                {`Pool (+/-)`}
               </Typography>
             </div>
           </NavLink>
         }
 
-        {featureEnabled(Feature.AGGREGATE, chainId) &&
+        {featureEnabled(Feature.CROSSCHAIN, chainId) &&
           <NavLink
-            className={classNames(
-              ecoStyle
-            )}
-            activeClassName={classNames(
-              activeStyle
-            )}
-            href={`/exchange/aggregator/${inputCurrency ? `${currencyId(inputCurrency)}` : `${NATIVE[chainId ?? ChainId.FANTOM].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId ?? ChainId.FANTOM]}` : `/${USDC_ADDRESS[chainId ?? ChainId.FANTOM]}`)
-
-              // href={`/exchange/aggregator/${inputCurrency ? `${currencyId(inputCurrency)}` : `${NATIVE[chainId ?? ChainId.FANTOM].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId ?? ChainId.FANTOM]}` : `/${USDC_ADDRESS[chainId ?? ChainId.FANTOM]}`)
-              }`}
-          >
-            <div
-              className={classNames(
-                `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
-                isAggregator && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
-            // onClick={reveal}
-            // onMouseEnter={reveal}
-            // onMouseLeave={conceal}
-            >
-              {/* <MergeIcon
-                  fillPrimary={isAggregator ? `${getChainColor(chainId)}` : `#FFFFFF`}
-                  fillSecondary={isAggregator ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                /> */}
-              <Typography
-                className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
-              >
-                {`Aggregate`}
-              </Typography>
-            </div>
-          </NavLink>
-        }
-
-        {featureEnabled(Feature.BRIDGE, chainId) &&
-          <NavLink
-            className={classNames(
-              bridgeStyle
-            )}
-            activeClassName={classNames(
-              activeStyle
-            )}
-            href={`/exchange/bridge`}
-          >
-            <div
-              className={classNames(
-                `hover:border-2 hover:border-${getChainColorCode(chainId)} hover:bg-dark-900 flex rounded p-0.5`,
-                isBridge && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
-            >
-              <Typography
-                className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
-              >
-                {`Bridge`}
-              </Typography>
-            </div>
-          </NavLink>
-        }
-
-        {/* {featureEnabled(Feature.CROSSCHAIN, chainId) &&
-          <ExternalLink
             className={classNames(
               crossStyle
             )}
-            // activeClassName={classNames(
-            //   activeStyle
-            // )}
-            // href={`/crosschain`}
-            href={`https://widget-integrations-squid.vercel.app/`}
+            activeClassName={classNames(
+              activeStyle
+            )}
+            href={`/crosschain`}
           >
             <div
               className={classNames(
@@ -206,17 +147,17 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
                 isCrosschain && `bg-dark-800 border-2 border-[${getChainColor(chainId)}]`)}
             >
               <Typography
-                className={`font-bold sm:text-lg sm:mx-2 text-${getChainColorCode(chainId)}`}
+                className={`font-bold sm:text-lg sm:mx-2 pl-4 pr-4 sm:pl-10 sm:pr-10 text-${getChainColorCode(chainId)}`}
               >
-                {`xSwap`}
+                {`Cross-Chain`}
               </Typography>
             </div>
-          </ExternalLink>
-        } */}
+          </NavLink>
+        }
       </div>
       <div className={
         classNames(`flex sm:absolute`,
-        `sm:right-4 sm:top-48 sm:mt-5 sm:mb-1 sm:gap-8`,
+        `sm:right-0.5 sm:top-48 sm:mt-6 sm:mb-1 sm:gap-8`,
         `mr-1 justify-end rounded`
           // `absolute right-4 top-50`,
           // `sm:right-4`,
@@ -226,7 +167,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           )
       }>
         {/* {useSettings &&  */}
-        <Settings />
+        { !isCrosschain && <Settings /> }
         {/* } */}
       </div>
     </div>

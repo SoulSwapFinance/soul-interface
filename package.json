@@ -164,7 +164,7 @@
     "@sentry/browser": "^7.57.0",
     "@sentry/nextjs": "^7.58.0",
     "@sentry/tracing": "^7.58.0",
-    "@soulswapfinance/cross-chain-widget": "^0.0.7",
+    "@soulswapfinance/cross-chain-widget": "0.1.7",
     "@storybook/react": "^7.0.27",
     "@sushiswap/core-sdk": "1.0.0-canary.63",
     "@sushiswap/sdk": "^5.0.0-canary.116",
