@@ -33,6 +33,7 @@ import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { NextSeo } from 'next-seo'
 import { CustomBanner } from 'components/Banner'
 import Head from 'next/head'
+import LimitHeader from 'features/limit/LimitHeader'
 // import { FollowBanner } from 'components/Banner'
 // import Typography from 'components/Typography'
 
@@ -360,33 +361,37 @@ const Aggregator = ({ }) => {
 
 	return (
 		<DoubleGlowShadowV2>
-		<Head>
-        	<title>Meta | SoulSwap</title>
-          {/* <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." /> */}
-          <meta name="description" content="Find the best prices on the network by leveraging our novel Meta-Aggregator, which operates as the aggregator of aggregators." />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
-          <meta name="twitter:site" content="@SoulSwapFinance" />
-          <meta id="og:image" property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
-          <meta id="og:image:type" property="og:image:type" content="image/png" />
-          <meta id="og:image:type" property="og:image:type" content="630" />
-          <meta id="og:image:width" property="og:image:width" content="1200" />
-          <meta id="og:description" property="og:description" content="Find the best prices on the network by leveraging our novel Meta-Aggregator, which operates as the aggregator of aggregators." />
-		</Head>
+			<Head>
+				<title>Meta | SoulSwap</title>
+				{/* <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." /> */}
+				<meta name="description" content="Find the best prices on the network by leveraging our novel Meta-Aggregator, which operates as the aggregator of aggregators." />
+				<meta name="twitter:card" content="summary_large_image" />
+				<meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+				<meta name="twitter:site" content="@SoulSwapFinance" />
+				<meta id="og:image" property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+				<meta id="og:image:type" property="og:image:type" content="image/png" />
+				<meta id="og:image:type" property="og:image:type" content="630" />
+				<meta id="og:image:width" property="og:image:width" content="1200" />
+				<meta id="og:description" property="og:description" content="Find the best prices on the network by leveraging our novel Meta-Aggregator, which operates as the aggregator of aggregators." />
+			</Head>
 			<div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
 				<SwapDropdown
 					inputCurrency={currencyA}
 					outputCurrency={currencyB}
 				/>
-              <CustomBanner
-                external={true}
-                chains={[ChainId.FANTOM, ChainId.AVALANCHE]}
-                link={'https://docs.soulswap.finance/docs/user-guides/our-utility/ios-mobile-premium'}
-                text={'Our (Beta) Mobile App (iOS) ↗'}
-                textColor={'white'}
-                color={'ftmBlue'}
-                className={`animate-pulse border-4 border-dark-800 rounded-2xl`}
-              />
+				<CustomBanner
+					external={true}
+					chains={[ChainId.FANTOM, ChainId.AVALANCHE]}
+					link={'https://docs.soulswap.finance/docs/user-guides/our-utility/ios-mobile-premium'}
+					text={'Our (Beta) Mobile App (iOS) ↗'}
+					textColor={'white'}
+					color={'ftmBlue'}
+					className={`animate-pulse border-4 border-dark-800 rounded-2xl`}
+				/>
+				<LimitHeader
+					inputCurrency={null}
+					outputCurrency={null}
+				/>
 				<div className={`my-12`} />
 				<div className="flex flex-col gap-3 space-y-3">
 					<SwapAssetPanel
