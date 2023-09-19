@@ -147,100 +147,100 @@ export default function Analytics({ inputCurrency, outputCurrency }: AnalyticsPr
     TimeWithSeconds = 4,
   }
 
-  const options = {
-    alignLabels: true,
-    layout: {
-      backgroundColor: `transparent`,
-      lineColor: '#000000',
-      textColor: `#909090`,
-    },
-    priceFormat: {
-      type: 'custom',
-      minMove: 1 / Math.pow(10, 10),
-      formatter: (price: any) => {
-        if (price < 0) return 0
-        else if (price < 0.001) return parseFloat(price).toFixed(10)
-        else if (price >= 0.001 && price < 1) return parseFloat(price).toFixed(6)
-        else return parseFloat(price).toFixed(3)
-      },
-    },
-    priceScale: {
-      position: 'left',
-      autoScale: true,
-      borderColor: `#909090`,
-    },
-    crosshair: {
-      vertLine: {
-        width: 1.5,
-        color: `#ffc000`,
-        style: 2,
-      },
-      horzLine: {
-        width: 1.5,
-        color: `#ffc000`,
-        style: 2,
-      },
-      mode: 0, // 0 = normal mode, 1 = magnet mode
-    },
-    grid: {
-      vertLines: {
-        visible: false,
-      },
-      horzLines: {
-        visible: false,
-      },
-    },
-    handleScale: {
-      mouseWheel: true,
-      pinch: true,
-    },
-    timeScale: {
-      visible: true,
-      timeVisible: true,
-      borderColor: `#909090`,
-      tickMarkFormatter: (time: any, tickMarkType: TickMarkType) => {
-        const date = new Date(time * 1000)
-        const year = date.getFullYear()
-        const month = monthNames[date.getMonth()]
-        const day = date.getDate()
-        const hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours().toString()
-        const minute = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes().toString()
-        const second = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds().toString()
-        if (tickMarkType === TickMarkType.Year) {
-          return year
-        } else if (tickMarkType === TickMarkType.Month) {
-          return month
-        } else if (tickMarkType === TickMarkType.DayOfMonth) {
-          return day
-        } else if (tickMarkType === TickMarkType.Time) {
-          return `${hour}:${minute}`
-        } else {
-          return `${hour}:${minute}:${second}`
-        }
-      },
-    },
-    localization: {
-      timeFormatter: (time: any) => {
-        const date = new Date(time * 1000)
-        const hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours().toString()
-        const minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes().toString()
-        return hours + ':' + minutes
-      },
-      priceFormatter: (price: any) => {
-        if (price < 0) return 0
-        else if (price < 0.001) return parseFloat(price).toFixed(10)
-        else if (price >= 0.001 && price < 0.01) return parseFloat(price).toFixed(8)
-        else if (price >= 0.01 && price < 1) return parseFloat(price).toFixed(6)
-        else return parseFloat(price).toFixed(3)
-      },
-    },
-    upColor: `#7cff6b`,
-    borderUpColor: `#7cff6b`,
-    wickUpColor: `#7cff6b`,
-    downColor: `#ff3838`,
-    borderDownColor: `#ff3838`,
-    wickDOwnColor: `#ff3838`,
-  }
+  // const options = {
+  //   alignLabels: true,
+  //   layout: {
+  //     backgroundColor: `transparent`,
+  //     lineColor: '#000000',
+  //     textColor: `#909090`,
+  //   },
+  //   priceFormat: {
+  //     type: 'custom',
+  //     minMove: 1 / Math.pow(10, 10),
+  //     formatter: (price: any) => {
+  //       if (price < 0) return 0
+  //       else if (price < 0.001) return parseFloat(price).toFixed(10)
+  //       else if (price >= 0.001 && price < 1) return parseFloat(price).toFixed(6)
+  //       else return parseFloat(price).toFixed(3)
+  //     },
+  //   },
+  //   priceScale: {
+  //     position: 'left',
+  //     autoScale: true,
+  //     borderColor: `#909090`,
+  //   },
+  //   crosshair: {
+  //     vertLine: {
+  //       width: 1.5,
+  //       color: `#ffc000`,
+  //       style: 2,
+  //     },
+  //     horzLine: {
+  //       width: 1.5,
+  //       color: `#ffc000`,
+  //       style: 2,
+  //     },
+  //     mode: 0, // 0 = normal mode, 1 = magnet mode
+  //   },
+  //   grid: {
+  //     vertLines: {
+  //       visible: false,
+  //     },
+  //     horzLines: {
+  //       visible: false,
+  //     },
+  //   },
+  //   handleScale: {
+  //     mouseWheel: true,
+  //     pinch: true,
+  //   },
+  //   timeScale: {
+  //     visible: true,
+  //     timeVisible: true,
+  //     borderColor: `#909090`,
+  //     tickMarkFormatter: (time: any, tickMarkType: TickMarkType) => {
+  //       const date = new Date(time * 1000)
+  //       const year = date.getFullYear()
+  //       const month = monthNames[date.getMonth()]
+  //       const day = date.getDate()
+  //       const hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours().toString()
+  //       const minute = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes().toString()
+  //       const second = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds().toString()
+  //       if (tickMarkType === TickMarkType.Year) {
+  //         return year
+  //       } else if (tickMarkType === TickMarkType.Month) {
+  //         return month
+  //       } else if (tickMarkType === TickMarkType.DayOfMonth) {
+  //         return day
+  //       } else if (tickMarkType === TickMarkType.Time) {
+  //         return `${hour}:${minute}`
+  //       } else {
+  //         return `${hour}:${minute}:${second}`
+  //       }
+  //     },
+  //   },
+  //   localization: {
+  //     timeFormatter: (time: any) => {
+  //       const date = new Date(time * 1000)
+  //       const hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours().toString()
+  //       const minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes().toString()
+  //       return hours + ':' + minutes
+  //     },
+  //     priceFormatter: (price: any) => {
+  //       if (price < 0) return 0
+  //       else if (price < 0.001) return parseFloat(price).toFixed(10)
+  //       else if (price >= 0.001 && price < 0.01) return parseFloat(price).toFixed(8)
+  //       else if (price >= 0.01 && price < 1) return parseFloat(price).toFixed(6)
+  //       else return parseFloat(price).toFixed(3)
+  //     },
+  //   },
+  //   upColor: `#7cff6b`,
+  //   borderUpColor: `#7cff6b`,
+  //   wickUpColor: `#7cff6b`,
+  //   downColor: `#ff3838`,
+  //   borderDownColor: `#ff3838`,
+  //   wickDOwnColor: `#ff3838`,
+  // }
 
   // useEffect(() => {
   //   let formattedCandleData: NumericalCandlestickDatum[] = fillCandlestickGaps(candleData, candlePeriod)

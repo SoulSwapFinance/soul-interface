@@ -27,7 +27,7 @@ export async function fetchChunk(
   chunk: Call[],
   blockNumber: number
 ): Promise<{ success: boolean; returnData: string }[]> {
-  console.debug('Fetching chunk', chunk, blockNumber)
+  // console.debug('Fetching chunk', chunk, blockNumber)
   try {
     const { returnData } = await multicall.callStatic.tryBlockAndAggregate(
       false,
@@ -215,16 +215,16 @@ export default function Updater(): null {
               )
 
             // dispatch any errored calls
-            if (erroredCalls.length > 0) {
-              console.debug('Calls errored in fetch', erroredCalls)
-              dispatch(
-                errorFetchingMulticallResults({
-                  calls: erroredCalls,
-                  chainId,
-                  fetchingBlockNumber: latestBlockNumber,
-                })
-              )
-            }
+            // if (erroredCalls.length > 0) {
+            //   console.debug('Calls errored in fetch', erroredCalls)
+            //   dispatch(
+            //     errorFetchingMulticallResults({
+            //       calls: erroredCalls,
+            //       chainId,
+            //       fetchingBlockNumber: latestBlockNumber,
+            //     })
+            //   )
+            // }
           })
           .catch((error: any) => {
           //   if (error.isCancelledError) {

@@ -17,7 +17,7 @@ import ListsUpdater from 'state/lists/updater'
 import MulticallUpdater from 'state/multicall/updater'
 import TransactionUpdater from 'state/transactions/updater'
 import UserUpdater from 'state/user/updater'
-import * as plurals from 'make-plural/plurals'
+// import * as plurals from 'make-plural/plurals'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -31,7 +31,7 @@ import { useActiveWeb3React } from 'services/web3'
 import { ApiDataProvider } from 'contexts/ApiDataProvider'
 import ModalProvider from 'contexts/ModalProvider'
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client'
-import { RPC } from 'connectors'
+// import { RPC } from 'connectors'
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const link = createHttpLink({
@@ -99,20 +99,19 @@ function MyApp({ Component, pageProps, fallback, err }) {
     )
   }
 
-
   return (
     <>
       <Head>
         <title>SoulSwap</title>
-          <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
-          <meta name="twitter:site" content="@SoulSwapFinance" />
-          <meta id="og:image" property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
-          <meta id="og:image:type" property="og:image:type" content="image/png" />
-          <meta id="og:image:type" property="og:image:type" content="630" />
-          <meta id="og:image:width" property="og:image:width" content="1200" />
-          {/* <meta id="og:description" property="og:description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." /> */}
+        <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+        <meta name="twitter:site" content="@SoulSwapFinance" />
+        <meta id="og:image" property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+        <meta id="og:image:type" property="og:image:type" content="image/png" />
+        <meta id="og:image:type" property="og:image:type" content="630" />
+        <meta id="og:image:width" property="og:image:width" content="1200" />
+        {/* <meta id="og:description" property="og:description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." /> */}
       </Head>
 
       {/* Global Site Tag (gtag.js) - Google Analytics */}
@@ -135,14 +134,14 @@ function MyApp({ Component, pageProps, fallback, err }) {
         }}
       />
       <Web3ReactProvider getLibrary={getLibrary}>
-        <QueryClientProvider client={queryClient}>
-          <Hydrate state={pageProps.dehydratedState}>
-            <ApiDataProvider>
-              <ApolloProvider client={client}>
-                {/*@ts-ignore TYPE NEEDS FIXING*/}
-                <FantomApiProvider>
-                  <Web3ProviderNetwork getLibrary={getLibrary}>
-                    <Web3ReactManager>
+        <Web3ProviderNetwork getLibrary={getLibrary}>
+          <Web3ReactManager>
+            <QueryClientProvider client={queryClient}>
+              <Hydrate state={pageProps.dehydratedState}>
+                <ApiDataProvider>
+                  <ApolloProvider client={client}>
+                    {/*@ts-ignore TYPE NEEDS FIXING*/}
+                    <FantomApiProvider>
                       <ReduxProvider store={store}>
                         <PersistGate loading={<Dots>loading</Dots>} persistor={persistor}>
                           <>
@@ -172,13 +171,13 @@ function MyApp({ Component, pageProps, fallback, err }) {
                           </RecoilRoot>
                         </PersistGate>
                       </ReduxProvider>
-                    </Web3ReactManager>
-                  </Web3ProviderNetwork>
-                </FantomApiProvider>
-              </ApolloProvider>
-            </ApiDataProvider>
-          </Hydrate>
-        </QueryClientProvider>
+                    </FantomApiProvider>
+                  </ApolloProvider>
+                </ApiDataProvider>
+              </Hydrate>
+            </QueryClientProvider>
+          </Web3ReactManager>
+        </Web3ProviderNetwork>
       </Web3ReactProvider>
     </>
   )
