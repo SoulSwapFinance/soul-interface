@@ -125,7 +125,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
                 className={`font-bold sm:text-lg sm:mx-2 pl-4 pr-4 sm:pl-10 sm:pr-10 text-${getChainColorCode(chainId)}`}
               >
                 {/* {`+/-`} */}
-                {`Pool (+/-)`}
+                {`Pool`}
               </Typography>
             </div>
           </NavLink>
