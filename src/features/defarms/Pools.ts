@@ -3,7 +3,11 @@
 // `depositSymbol`: never use "w" prefix
 // `depositSymbol`: always frontload native
 
-export const InactiveAvalanchePools = []
+export const InactiveAvalanchePools = [
+  {
+    pid: 0,
+  },
+]
 
 export const InactiveFantomPools = [
   {
@@ -15,8 +19,8 @@ export const InactiveFantomPools = [
 ]
 
 export const AvalanchePools = [
-    {
-    pid: 0,
+  {
+    pid: 1,
   },
 ]
 

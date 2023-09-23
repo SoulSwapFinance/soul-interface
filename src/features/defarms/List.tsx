@@ -112,11 +112,11 @@ export const FarmList = () => {
             </div> */}
       {/* <div> */}
         <Typography
-          className={classNames(chainId == ChainId.AVALANCHE ? 'hidden' : `text-2xl bg-dark-1000 mt-6 rounded-2xl border-2 border-avaxRed p-3 font-bold text-center mb-1`)}
+          className={classNames(`text-2xl bg-dark-1000 mt-6 rounded-2xl border-2 border-avaxRed p-3 font-bold text-center mb-1`)}
         >
           Retired DeFarms
         </Typography>
-        {chainId == ChainId.FANTOM ? <Inactive /> : null}
+        {<Inactive />}
         {chainId == ChainId.FANTOM ? inactiveFtmList : inactiveAvaxList}
        {/* </div>  */}
     </div>
