@@ -90,8 +90,6 @@ const MobileBar = () => {
     const isRemove = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
     const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
     const isPool = isRemove || isAdd
-    // const isLuxor = luxorPage
-    // const isLuxor = luxorPage
     const isWallet = portfolioPage
     const isData = dataPage
     const isEarn = farmPage || bondPage
@@ -241,21 +239,6 @@ const MobileBar = () => {
                                 className={'w-7 h-7'}
                             />
                         </div> */}
-                        {/* {featureEnabled(Feature.LUXOR, chainId) &&
-                        <div
-                            className={classNames(
-                                `hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
-                                isLuxor && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
-                            onClick={luxorRoute}
-                        >
-                            <SunMoonIcon
-                                fillPrimary={isLuxor ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                fillSecondary={isLuxor ? `${
-                                getChainColor(chainId)}` : `#FFFFFF`}
-                                className={'w-7 h-7'}
-                            />
-                        </div>
-                        } */}
                         <div
                             className={classNames(
                                 `hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,

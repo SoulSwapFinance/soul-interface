@@ -79,7 +79,6 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
               weight={700}
               variant="sm"
               className={classNames(
-                // isLuxor && !isOpen ? 'text-yellow' : !isOpen && `text-[${getChainColor(chainId)}]`, 
                 'font-bold py-5 px-2 rounded flex gap-3 items-center')}
             >
               {node.icon}
