@@ -168,7 +168,7 @@ const maxRedeemable = available >= refundable ? refundable : available
         }
       >
         <Container maxWidth="full" className="space-y-6">
-            <div className={`flex justify-center border p-2 rounded rounded-2xl ${currency && isActive ? `border-green` : `border-red`}`}>
+            <div className={`flex justify-center border p-2 rounded-2xl ${currency && isActive ? `border-green` : `border-red`}`}>
             <div className={`grid grid-cols-2 gap-12`}>
             <Typography
                 className={`font-bold text-sm sm:text-lg md:text-xl ${currency && isActive ? `text-green` : `text-red`} text-center`}

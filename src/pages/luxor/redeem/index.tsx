@@ -137,7 +137,7 @@ function Redeem() {
               <div className="flex flex-col bg-dark-1000 p-3 border border-1 border-yellow rounded-2xl hover:border-yellow w-full space-y-1">
                 <div className="flex justify-center">
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
-                    {`1 LUX = ${CONVERSION_RATE} WFTM`}
+                    {`1 LUX = ${0} WFTM`}
                   </Typography>
                 </div>
               </div>
@@ -145,7 +145,7 @@ function Redeem() {
                 <div className="flex justify-center">
                   <Typography className="text-white" weight={600} fontFamily={'semi-bold'}>
                     {/* {`Max Redeemable: ${remainingFunds?.toString()} WFTM`} */}
-                    {`Redemption Ends On September 30th, 2023`}
+                    {`Redemption has Ended.`}
                   </Typography>
                 </div>
               </div>
