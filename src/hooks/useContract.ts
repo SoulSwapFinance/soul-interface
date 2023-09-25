@@ -10,16 +10,9 @@ import {
   FTM_USDC_PAIR,
   SAFE_ADDRESS,
   ATOMIC_SWAP_ADDRESS,
-  LUX_ADDRESS,
   TEAM_WALLET_ADDRESS,
-  WLUM_ADDRESS,
-  SOR_MASTER_ADDRESS,
-  SOR_MINTER_ADDRESS,
   STOP_LIMIT_ORDER_ADDRESS,
   LOTTERY_ADDRESS,
-  SOR_ADDRESS,
-  LUX_TREASURY_ADDRESS,
-  SOR_STAKING_REWARDS_ADDRESS,
   SUMMONER_ASSISTANT_ADDRESS,
   OFFCHAIN_AGGREGATOR_ORACLE,
   SPOOKY_ROUTER_ADDRESS,
@@ -47,12 +40,8 @@ import {
   TIMELOCK_ADDRESS,
   WNATIVE,
   SOUL_CIRCLE_ADDRESS,
-  LUX_HELPER_ADDRESS,
-  LUXOR_STAKING_ADDRESS,
-  LUXOR_STAKING_HELPER_ADDRESS,
   SOULSWAP_TWAP_0_ORACLE_ADDRESS,
   SOULSWAP_TWAP_1_ORACLE_ADDRESS,
-  LUM_ADDRESS,
   SOUL_BOND_ADDRESS,
   COFFIN_BOX_ADDRESS,
   SOULSWAP_SWAPPER_ADDRESS,
@@ -61,7 +50,6 @@ import {
   MANIFESTER_ADDRESS,
   MARKET_UPDATER_ADDRESS,
   REFUNDER_ADDRESS,
-  LUXOR_REEFUNDER_ADDRESS,
 } from 'sdk'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from 'constants/multicall'
 import SOUL_BOND_ABI from 'constants/abis/soulbond.json' 
@@ -75,7 +63,6 @@ import UPDATER_ABI from 'constants/abis/market-updater.json'
 import ANYSWAP_ERC20_ABI from 'constants/abis/anyswap_erc20.json'
 import SPOOKY_FACTORY_ABI from 'constants/abis/spookyswap-factory.json'
 import SOUL_CIRCLE_ABI from 'constants/abis/soulswap/soulcircle.json' 
-import LUX_HELPER_ABI from 'constants/abis/lux-bond-helper.json' 
 import CHAINLINK_ORACLE_ABI from 'constants/abis/chainlink-oracle.json'
 import PRICE_ORACLE_ABI from 'constants/abis/price-oracle.json'
 import COMPLEX_REWARDER_ABI from 'constants/abis/complex-rewarder.json'
@@ -93,7 +80,6 @@ import ISoulSwapPairABI from 'constants/abis/soulswap/ISoulSwapPair.json'
 import AUTO_STAKE_ABI from 'constants/abis/soulswap/autostake.json'
 import UNDERWORLD_ABI from 'constants/abis/underworldpair.json'
 import BALANCES_FETCHER_ABI from 'constants/abis/balancesfetcher.json'
-import LUXOR_REFUNDER_ABI from 'constants/abis/luxor-refunder.json'
 
 // soul
 import SOUL_SAFE_ABI from 'constants/abis/soulswap/safe.json'
@@ -104,15 +90,8 @@ import SOUL_MANIFESTER_ABI from 'constants/abis/soulswap/soulmanifester.json'
 import FARM_MANIFESTER_ABI from 'constants/abis/soulswap/manifester.json'
 import MANIFESTATION_ABI from 'constants/abis/soulswap/manifestation.json'
 import LOTTERY_ABI from 'constants/abis/soulswap/lottery.json' // 28 JUL
-import LUXOR_ABI from 'constants/abis/soulswap/luxor.json'
-import LUXOR_TREASURY_ABI from 'constants/abis/soulswap/luxor-treasury.json'
 import TEAM_WALLET_ABI from 'constants/abis/soulswap/team-wallet.json'
 import SPOOKY_ROUTER_ABI from 'constants/abis/soulswap/spooky-router.json'
-import SOR_STAKING_ABI from 'constants/abis/soulswap/sor-staking.json'
-import LUXOR_STAKING_ABI from 'constants/abis/soulswap/luxor-staking.json'
-import LUXOR_STAKING_HELPER_ABI from 'constants/abis/soulswap/luxor-staking-helper.json'
-import WLUM_ABI from 'constants/abis/soulswap/wlumens.json'
-import LUM_ABI from 'constants/abis/soulswap/lumens.json'
 import ENCHANT_ABI from 'constants/abis/soulswap/enchant.json' // 30 OCT
 import ENCHANT_HELPER_ABI from 'constants/abis/soulswap/enchant-helper.json' // 30 OCT
 import SOUL_ABI from 'constants/abis/soulswap/soulpower.json' // 28 JUL
@@ -125,8 +104,6 @@ import PRICE_HELPER_ABI from 'constants/abis/soulswap/pricehelper.json'
 import BORING_HELPER_ABI from 'constants/abis/soulswap/boring-helper.json'
 import HARVEST_HELPER_ABI from 'constants/abis/soulswap/harvest-helper.json'
 import COFFIN_BOX_ABI from 'constants/abis/soulswap/coffinbox.json'
-import SOR_MASTER_ABI from 'constants/abis/soulswap/sor-master.json'
-import SOR_MINTER_ABI from 'constants/abis/soulswap/sor-minter.json'
 
 // unused
 import MERKLE_DISTRIBUTOR_ABI from 'constants/abis/merkle-distributor.json'
@@ -256,11 +233,6 @@ export function usePriceHelperContract(): Contract | null {
   return useContract(chainId && PRICE_HELPER_ADDRESS[chainId ?? ChainId.FANTOM], PRICE_HELPER_ABI, false)
 }
 
-export function useSorContract(): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOR_ADDRESS[chainId ?? ChainId.FANTOM], ERC20_ABI, false)
-}
-
 export function useHarvestHelperContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && HARVEST_HELPER_ADDRESS[chainId ?? ChainId.FANTOM], HARVEST_HELPER_ABI, false)
@@ -274,10 +246,6 @@ export function useMulticallContract(): Contract | null {
 export function useBalancesFetcherContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && BALANCES_FETCHER_ADDRESS[chainId ?? ChainId.FANTOM], BALANCES_FETCHER_ABI, false)
-}
-
-export function useLuxorRefunderContract(): Contract | null {
-  return useContract(LUXOR_REEFUNDER_ADDRESS[ChainId.FANTOM], LUXOR_REFUNDER_ABI, true)
 }
 
 export function useMulticall2Contract() {
@@ -335,39 +303,9 @@ export function useEnchantContract(withSignerIfPossible = true): Contract | null
   return useContract(chainId && ENCHANT_ADDRESS[chainId ?? ChainId.FANTOM], ENCHANT_ABI, withSignerIfPossible)
 }
 
-export function useLuxorContract(withSignerIfPossible = true): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && LUX_ADDRESS[250], LUXOR_ABI, withSignerIfPossible)
-}
-
 export function useTeamContract(withSignerIfPossible = true): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && TEAM_WALLET_ADDRESS[chainId ?? ChainId.FANTOM], TEAM_WALLET_ABI, withSignerIfPossible)
-}
-
-export function useLuxorTreasuryContract(withSignerIfPossible = true): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && LUX_TREASURY_ADDRESS[chainId ?? ChainId.FANTOM], LUXOR_TREASURY_ABI, withSignerIfPossible)
-}
-
-export function useLuxorStakingContract(withSignerIfPossible = true): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && LUXOR_STAKING_ADDRESS[chainId ?? ChainId.FANTOM], LUXOR_STAKING_ABI, withSignerIfPossible)
-}
-
-export function useLuxorStakeHelperContract(withSignerIfPossible = true): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && LUXOR_STAKING_HELPER_ADDRESS[250], LUXOR_STAKING_HELPER_ABI, withSignerIfPossible)
-}
-
-export function useWrappedLumensContract(withSignerIfPossible = true): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && WLUM_ADDRESS[250], WLUM_ABI, withSignerIfPossible)
-}
-
-export function useLumensContract(withSignerIfPossible = true): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && LUM_ADDRESS[250], LUM_ABI, withSignerIfPossible)
 }
 
 export function useEnchantHelperContract(withSignerIfPossible = true): Contract | null {
@@ -434,21 +372,6 @@ export function useAutoStakeContract(withSignerIfPossible?: boolean): Contract |
   return useContract(chainId && AUTO_STAKE_ADDRESS[chainId ?? ChainId.FANTOM], AUTO_STAKE_ABI, withSignerIfPossible)
 }
 
-export function useLuxorBondContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && LUX_HELPER_ADDRESS[chainId ?? ChainId.FANTOM], LUX_HELPER_ABI, withSignerIfPossible)
-}
-
-export function useSorMasterContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOR_MASTER_ADDRESS[chainId ?? ChainId.FANTOM], SOR_MASTER_ABI, withSignerIfPossible)
-}
-
-export function useSorMinterContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOR_MINTER_ADDRESS[chainId ?? ChainId.FANTOM], SOR_MINTER_ABI, withSignerIfPossible)
-}
-
 export function useFactoryContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && FACTORY_ADDRESS[chainId ?? ChainId.FANTOM], FACTORY_ABI, false)
@@ -486,16 +409,6 @@ export function useSpookyRouterContract(withSignerIfPossible?: boolean): Contrac
 export function useSpiritRouterContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && SPIRIT_ROUTER_ADDRESS[chainId ?? ChainId.FANTOM], SPIRIT_ROUTER_ABI, withSignerIfPossible)
-}
-
-// export function useEnchantmentContract(withSignerIfPossible?: boolean): Contract | null {
-//   const { chainId } = useActiveWeb3React()
-//   return useContract(chainId && ENCHANT_ADDRESS[chainId ?? ChainId.FANTOM], ENCHANT_ABI, withSignerIfPossible)
-// }
-
-export function useSorStakingContract(): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SOR_STAKING_REWARDS_ADDRESS[chainId ?? ChainId.FANTOM], SOR_STAKING_ABI, false)
 }
 
 export function useTimelockContract(): Contract | null {

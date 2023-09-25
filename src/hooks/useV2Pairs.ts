@@ -1,17 +1,16 @@
-import { AVAX_ADDRESS, ChainId, computePairAddress, Currency, CurrencyAmount, LUX_ADDRESS, MULTI_WBTC_ADDRESS, Pair, SOUL, SOUL_ADDRESS, SUMMONER_ADDRESS, Token, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from '../sdk'
+import { AVAX_ADDRESS, ChainId, computePairAddress, Currency, CurrencyAmount, MULTI_WBTC_ADDRESS, Pair, SOUL, SOUL_ADDRESS, SUMMONER_ADDRESS, Token, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from '../sdk'
 import ISoulSwapPair from '../constants/abis/soulswap/ISoulSwapPair.json'
 import { Interface } from '@ethersproject/abi'
 import { useMemo } from 'react'
 import { useMultipleContractSingleData } from '../state/multicall/hooks'
-import { FACTORY_ADDRESS, SOUL_DAO_ADDRESS, LUX_TREASURY_ADDRESS } from '../constants'
+import { FACTORY_ADDRESS, SOUL_DAO_ADDRESS } from '../constants'
 import { POOLS, TokenInfo } from '../constants/farms'
 import { concat } from 'lodash'
 import { VAULTS } from '../constants/vaults'
 import { useActiveWeb3React } from 'services/web3'
 import { SOUL_BOND_ADDRESS } from 'sdk'
 import { BONDS } from 'constants/bonds'
-import { useLuxorPrice } from './getPrices'
-import { useBondInfo, useTokenInfo } from './useAPI'
+import { useTokenInfo } from './useAPI'
 
 const PAIR_INTERFACE = new Interface(ISoulSwapPair)
 
@@ -215,9 +214,8 @@ export function useVaultTVL(): TVLInfo[] {
 export function useTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[ChainId.FANTOM]).tokenInfo.price) // only on FTM and ETH
-  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
-  const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId == ChainId.AVALANCHE ? ChainId.AVALANCHE : ChainId.FANTOM]).tokenInfo.price)
-  const luxPrice = useLuxorPrice()
+  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[ChainId.FANTOM]).tokenInfo.price)
+  const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[ChainId.AVALANCHE]).tokenInfo.price)
   const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
 
@@ -252,15 +250,11 @@ export function useTVL(): TVLInfo[] {
     function isKnownToken(token: TokenInfo) {
       return (
         token.symbol == 'SOUL' ||
-        token.symbol == 'WFTM' ||
-        token.symbol == 'FTM' ||
-        token.symbol == 'LUX' ||
-        token.symbol == 'WAVAX' ||
-        token.symbol == 'AVAX' ||
+        token.symbol == 'WFTM' || token.symbol == 'FTM' ||
+        token.symbol == 'WAVAX' || token.symbol == 'AVAX' ||
         token.symbol == 'WBTC' || token.symbol == 'BTC' ||
-        token.symbol == 'USDC' || token.symbol == 'USDT' ||
-        token.symbol == 'MIM' || token.symbol == 'DAI' ||
-        token.symbol == 'WETH' || token.symbol == 'ETH'
+        token.symbol == 'WETH' || token.symbol == 'ETH' ||
+        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI'
       )
     }
 
@@ -277,15 +271,11 @@ export function useTVL(): TVLInfo[] {
       if (token.symbol == 'WBTC' || token.symbol == 'BTC') {
         return wbtcPrice
       }
-      if (token.symbol == 'LUX') {
-        return luxPrice
-      }
       if (token.symbol == 'WETH' || token.symbol == 'ETH') {
         return wethPrice
       }
       if (
-        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI' ||
-        token.symbol == 'FUSDT' || token.symbol == 'USDT' || token.symbol == 'MIM'
+        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI'
       ) {
         return 1
       }
@@ -397,7 +387,6 @@ export function useBondTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[ChainId.FANTOM]).tokenInfo.price) // only on FTM and ETH
   const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
-  const luxPrice = useLuxorPrice()
   const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
@@ -420,15 +409,11 @@ export function useBondTVL(): TVLInfo[] {
       return (
         token.id.toLowerCase() == SOUL[chainId ?? ChainId.FANTOM].address.toLowerCase() ||
         token.symbol == 'SOUL' ||
-        token.symbol == 'WFTM' ||
-        token.symbol == 'FTM' ||
+        token.symbol == 'WFTM' || token.symbol == 'FTM' ||
         token.symbol == 'AVAX' || token.symbol == 'WAVAX' ||
-        token.symbol == 'LUX' ||
-        token.symbol == 'USDC' ||  token.symbol == 'USDT' ||
-        token.symbol == 'FUSDT' || token.symbol == 'MIM' ||
-        token.symbol == 'DAI' ||
         token.symbol == 'WETH' || token.symbol == 'ETH' ||
-        token.symbol == 'WBTC' || token.symbol == 'BTC'
+        token.symbol == 'WBTC' || token.symbol == 'BTC' ||
+        token.symbol == 'USDC' ||  token.symbol == 'USDT' || token.symbol == 'DAI'
       )
     }
 
@@ -442,9 +427,6 @@ export function useBondTVL(): TVLInfo[] {
       if (token.symbol == 'WAVAX' || token.symbol == 'AVAX') {
         return avaxPrice
       }
-      if (token.symbol == 'LUX') {
-        return luxPrice
-      }
       if (token.symbol == 'WETH' || token.symbol == 'ETH') {
         return wethPrice
       }
@@ -452,8 +434,7 @@ export function useBondTVL(): TVLInfo[] {
         return wbtcPrice
       }
       if (
-        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI' ||
-        token.symbol == 'FUSDT' || token.symbol == 'USDT' || token.symbol == 'MIM'
+        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI'
       ) {
         return 1
       }
@@ -520,7 +501,6 @@ export function useSoulTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
-  const luxPrice = Number(useTokenInfo(LUX_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
@@ -552,12 +532,7 @@ export function useSoulTVL(): TVLInfo[] {
         token.symbol == 'FTM' ||
         token.symbol == 'AVAX' ||
         token.symbol == 'WAVAX' ||
-        token.symbol == 'LUX' ||
-        token.symbol == 'USDC' ||
-        token.symbol == 'USDT' ||
-        token.symbol == 'FUSDT' ||
-        token.symbol == 'MIM' ||
-        token.symbol == 'DAI' ||
+        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI' ||
         token.symbol == 'WETH' || token.symbol == 'ETH' ||
         token.symbol == 'WBTC' || token.symbol == 'BTC'
 
@@ -574,9 +549,6 @@ export function useSoulTVL(): TVLInfo[] {
       }
       if (token.symbol == 'WAVAX' || token.symbol == 'AVAX') {
         return avaxPrice
-      }
-      if (token.symbol == 'LUX') {
-        return luxPrice
       }
       if (token.symbol == 'WETH' || token.symbol == "ETH") {
         return wethPrice
@@ -641,137 +613,8 @@ export function useSoulTVL(): TVLInfo[] {
     chainId,
     soulPrice,
     ftmPrice,
-    luxPrice,
     wethPrice,
     wbtcPrice,
-    totalSupply,
-    daoBalanceSingle,
-    lpPools,
-    singlePools,
-  ])
-}
-
-export function useLuxTVL(): TVLInfo[] {
-  const { chainId } = useActiveWeb3React()
-  const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
-  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
-  const luxPrice = useLuxorPrice()
-  const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
-  const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
-
-  const liquidityPools = Object.keys(POOLS[ChainId.FANTOM]).map((key) => {
-    return { ...POOLS[ChainId.FANTOM][key], lpToken: key }
-  })
-
-  const singlePools = liquidityPools.filter((r) => !r.token1)
-  const singleAddresses = singlePools.map((r) => r.lpToken)
-  const lpPools = liquidityPools.filter((r) => !!r.token1)
-  const pairAddresses = lpPools.map((r) => r.lpToken)
-
-  const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
-  const totalSupply = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'totalSupply')
-  const daoBalance = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'balanceOf', [
-    LUX_TREASURY_ADDRESS[ChainId.FANTOM],
-  ])
-  const daoBalanceSingle = useMultipleContractSingleData(singleAddresses, PAIR_INTERFACE, 'balanceOf', [
-    LUX_TREASURY_ADDRESS[ChainId.FANTOM],
-  ])
-
-  return useMemo(() => {
-    function isKnownToken(token: TokenInfo) {
-      return (
-        token.id.toLowerCase() == SOUL[chainId ?? ChainId.FANTOM].address.toLowerCase() ||
-        token.symbol == 'SOUL' ||
-        token.symbol == 'WFTM' ||
-        token.symbol == 'FTM' ||
-        token.symbol == 'WAVAX' ||
-        token.symbol == 'AVAX' ||
-        token.symbol == 'LUX' ||
-        token.symbol == 'SEANCE' ||
-        token.symbol == 'USDC' ||
-        token.symbol == 'USDT' ||
-        token.symbol == 'FUSDT' ||
-        token.symbol == 'MIM' ||
-        token.symbol == 'DAI' ||
-        token.symbol == 'WETH' 
-      )
-    }
-
-    function getPrice(token: TokenInfo) {
-      if (token.symbol == 'SOUL') {
-        return soulPrice
-      }
-      if (token.symbol == 'WFTM' || token.symbol == 'FTM') {
-        return ftmPrice
-      }
-      if (token.symbol == 'WAVAX' || token.symbol == 'AVAX') {
-        return avaxPrice
-      }
-      if (token.symbol == 'LUX') {
-        return luxPrice
-      }
-      if (token.symbol == 'WETH') {
-        return wethPrice
-      }
-      if (
-        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI' ||
-        token.symbol == 'FUSDT' || token.symbol == 'USDT' || token.symbol == 'MIM'
-      ) {
-        return 1
-      }
-      return 0
-    }
-
-    const lpTVL = results.map((result, i) => {
-      const { result: reserves, loading } = result
-
-      let { token0, token1, lpToken } = lpPools[i]
-
-      token0 = token0.id.toLowerCase() < token1.id.toLowerCase() ? token0 : token1
-      token1 = token0.id.toLowerCase() < token1.id.toLowerCase() ? token1 : token0
-
-      if (loading) return { lpToken, tvl: 0, lpPrice: 0 }
-      if (!reserves) return { lpToken, tvl: 0, lpPrice: 0 }
-
-      const { reserve0, reserve1 } = reserves
-
-      const lpTotalSupply = totalSupply[i]?.result?.[0]
-
-      const summonerRatio = daoBalance[i]?.result?.[0] / lpTotalSupply
-
-      const token0price = getPrice(token0)
-      const token1price = getPrice(token1)
-
-      const token0total = Number(Number(token0price * (Number(reserve0) / 10 ** token0?.decimals)).toString())
-      const token1total = Number(Number(token1price * (Number(reserve1) / 10 ** token1?.decimals)).toString())
-
-      let lpTotalPrice = Number(token0total + token1total)
-
-      if (isKnownToken(token0)) {
-        lpTotalPrice = token0total * 2
-      } else if (isKnownToken(token1)) {
-        lpTotalPrice = token1total * 2
-      }
-
-      const lpPrice = lpTotalPrice / (lpTotalSupply / 10 ** 18)
-      const tvl = lpTotalPrice * summonerRatio
-
-      return {
-        lpToken,
-        tvl,
-        lpPrice,
-      }
-    })
-
-    return concat(lpTVL)
-  }, [
-    results,
-    daoBalanceSingle,
-    chainId,
-    soulPrice,
-    ftmPrice,
-    luxPrice,
-    wethPrice,
     totalSupply,
     daoBalanceSingle,
     lpPools,
@@ -785,7 +628,6 @@ export function useV2PairsWithPrice(
   const { chainId } = useActiveWeb3React()
   const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[ChainId.FANTOM]).tokenInfo.price) // only on FTM and ETH
   const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
-  const luxPrice = useLuxorPrice()
   const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
@@ -824,9 +666,7 @@ export function useV2PairsWithPrice(
         token.symbol == 'WAVAX' || token.symbol == 'AVAX' || 
         token.symbol == 'WETH' || token.symbol == 'ETH' ||
         token.symbol == 'WBTC' || token.symbol == 'BTC' ||
-        token.symbol == 'USDC' || token.symbol == 'USDT' || 
-        token.symbol == 'DAI' || token.symbol == 'LUX' 
-        || token.symbol == 'WLUM' 
+        token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI'
       )
     }
 
@@ -845,9 +685,6 @@ export function useV2PairsWithPrice(
       }
       if (token.symbol == 'WBTC' || token.symbol == 'BTC') {
         return wbtcPrice
-      }
-      if (token.symbol == 'LUX') {
-        return luxPrice
       }
       if (token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI') {
         return 1
@@ -893,7 +730,7 @@ export function useV2PairsWithPrice(
         lpPrice,
       ]
     })
-  }, [results, chainId, soulPrice, ftmPrice, luxPrice, tokens, totalSupply, wethPrice])
+  }, [results, chainId, soulPrice, ftmPrice, tokens, totalSupply, wethPrice])
 }
 
 export function useV2Pair(tokenA?: Currency, tokenB?: Currency): [PairState, Pair | null] {

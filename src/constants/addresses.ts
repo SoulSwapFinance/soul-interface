@@ -42,24 +42,6 @@ export const SPIRIT_ROUTER_ADDRESS = {
   [ChainId.FANTOM]: "0x16327E3FbDaCA3bcF7E38F5Af2599D2DDc33aE52" 
 }
 
-export const SOR_ADDRESS = {
-  [ChainId.FANTOM]: "0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A" 
-}
-
-export const SOR_MASTER_ADDRESS = {
-  [ChainId.FANTOM]: 
-  // "0xfF1157CaCB174c012f68CDb0B7700597aae3D5A8" 
-  "0x104b191008e56a0B79f25a828Ee18873AdD36C6c"
-}
-
-export const SOR_MINTER_ADDRESS = {
-  [ChainId.FANTOM]: "0x046050f879E2fa5f60dd472da61d542B443B0603" 
-}
-
-export const LUX_MINTER_ADDRESS = {
-  [ChainId.FANTOM]: "0xCc801658bD51Fe42Ac07078572112630a868c1eb" 
-}
-
 export const SOULSWAPEX_ADDRESSES = {
   [ChainId.ETHEREUM]: '0x36049D479A97CdE1fC6E2a5D2caE30B666Ebf92B',
 }
@@ -173,28 +155,6 @@ export const SOUL_DAO_ADDRESS: AddressMap = {
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x1C63C726926197BD3CB75d86bCFB1DaeBcD87250',
   [ChainId.AVALANCHE]: '0xf551D88fE8fae7a97292d28876A0cdD49dC373fa',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
-}
-
-export const LUX_TREASURY_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xDF2A28Cc2878422354A93fEb05B41Bd57d71DB24',
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
-}
-
-export const LUXOR_WARMUP_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x2B6Fe815F3D0b8C13E8F908A2501cdDC23D4Ed48',
-  [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.ARBITRUM]: '',
   [ChainId.MOONRIVER]: '',
@@ -488,28 +448,6 @@ export const ENCHANT_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '',
 }
 
-export const LUX_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b', // LUX
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
-}
-
-export const WLUM_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208', // WLUM
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
-}
-
 export const GRIMEVO_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
@@ -698,21 +636,6 @@ export const STOP_LIMIT_ORDER_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '',
 }
 
-
-
-
-export const SOR_STAKING_REWARDS_ADDRESS: {
-  [chainId in ChainId]: string
-} = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xb2b22549F6586Cd81054677C6b9413Cea9587fd7', // FEB22
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
-}
 export const PEGGED_ORACLE_ADDRESS = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',

@@ -50,20 +50,12 @@ export const WFTM_FANTOM = new Token(
   "WFTM",
   "Wrapped Fantom"
 );
-export const LUX_FANTOM = new Token(
-  250,
-  "0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b",
-  9,
-  "LUX",
-  "Luxor Money"
-);
 
 export const FANTOM_BASES = [
   USDC_FANTOM,
   DAI_FANTOM,
   WETH_FANTOM,
   SOUL_FANTOM,
-  LUX_FANTOM,
   WBNB_FANTOM,
   WBTC_FANTOM,
   WFTM_FANTOM,

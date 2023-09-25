@@ -41,11 +41,6 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/luxor',
-        destination: '/luxor/redeem',
-        permanent: true,
-      },
-      {
         source: '/soul',
         destination: '/soul/dashboard',
         permanent: true,
@@ -86,10 +81,6 @@ const nextConfig = {
         {
           source: '/soul',
           destination: '/soul/dashboard',
-        },
-        {
-          source: '/luxor',
-          destination: '/luxor/redeem',
         },
         {
           source: '/pool',

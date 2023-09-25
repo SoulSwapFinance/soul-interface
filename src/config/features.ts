@@ -99,7 +99,6 @@ const features: FeatureMap = {
     Feature.COFFINBOX,
     Feature.LIMIT,
     Feature.EXPLORE,
-    Feature.LUXOR,
     Feature.SOULSWAP,
     Feature.UNDERWORLD,
     Feature.UNDERWORLD_SWAP,

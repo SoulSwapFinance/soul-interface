@@ -435,8 +435,7 @@ export const MainBanner: FC<IBanner> = ({ chainId }) => (
             <Button variant="filled" color="purple" size="sm">
               <span className="justify-center font-bold text-white">
                 {' '}
-                {/* Discounted Bonds (Luxor) ↗ */}
-                {`Click Here: New Underworld Farms ↗`}
+                {`Click Here: New Farms ↗`}
               </span>
             </Button>
           </NavLink>

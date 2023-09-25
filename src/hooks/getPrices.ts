@@ -162,20 +162,6 @@ export const getEnchantPrice = async (variables = {}) => {
   })
 }
 
-export const getLuxorPrice = async (variables = {}) => {
-  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: '0x6671e20b83ba463f270c8c75dae57e3cc246cb2b',
-    ...variables,
-  })
-}
-
-export const getWrappedLumPrice = async (variables = {}) => {
-  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: '0xa69557e01b0a6b86e5b29be66d730c0bfff68208',
-    ...variables,
-  })
-}
-
 export const getSeancePrice = async (variables = {}) => {
   return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
     id: '0x124b06c5ce47de7a6e9efda71a946717130079e6',
@@ -300,16 +286,6 @@ export function usePairPrice(chainId, pairAddress: string, swrConfig: SWRConfigu
 
 export function useSeancePrice(swrConfig: SWRConfiguration = undefined) {
   const { data } = useSWR(['seancePrice'], () => getSeancePrice(), swrConfig)
-  return data
-}
-
-export function useWrappedLumPrice(swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR(['wLumPrice'], () => getWrappedLumPrice(), swrConfig)
-  return data
-}
-
-export function useLuxorPrice(swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR(['luxorPrice'], () => getLuxorPrice(), swrConfig)
   return data
 }
 

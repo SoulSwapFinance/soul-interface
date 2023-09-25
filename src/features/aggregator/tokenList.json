@@ -41415,16 +41415,6 @@
                 "logoURI": "https://raw.githubusercontent.com/sushiswap/list/master/logos/token-logos/token/fwtioil.jpg"
             },
             {
-                "address": "0xeffd4874aca3acd19a24df3281b5cdadd823801a",
-                "chainId": 250,
-                "symbol": "SOR",
-                "decimals": 18,
-                "name": "SOR",
-                "priceUSD": "0.9457989903102854",
-                "coinKey": "SOR",
-                "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A/logo.png"
-            },
-            {
                 "address": "0x91f1430833879272643658f8ed07d60257ddf321",
                 "chainId": 250,
                 "symbol": "GRO",
@@ -41621,16 +41611,6 @@
                 "name": "Wrapped sHUMP",
                 "priceUSD": "0",
                 "coinKey": "wsHUMP"
-            },
-            {
-                "address": "0x6671e20b83ba463f270c8c75dae57e3cc246cb2b",
-                "chainId": 250,
-                "symbol": "LUX",
-                "decimals": 9,
-                "name": "Luxor Money",
-                "priceUSD": "0.07590468922993956",
-                "logoURI": "https://static.debank.com/image/ftm_token/logo_url/0x6671e20b83ba463f270c8c75dae57e3cc246cb2b/779f41574bceaaf584e6cbbf1923122c.png",
-                "coinKey": "LUX"
             },
             {
                 "address": "0xfbfae0dd49882e503982f8eb4b8b1e464eca0b91",
@@ -42761,16 +42741,6 @@
                 "priceUSD": "73.57",
                 "logoURI": "https://static.debank.com/image/ftm_token/logo_url/0x2a5062d22adcfaafbd5c541d4da82e4b450d4212/6f3421ffb16d4c688eab96902e79a3e2.png",
                 "coinKey": "KP3R"
-            },
-            {
-                "address": "0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208",
-                "chainId": 250,
-                "symbol": "WLUM",
-                "decimals": 9,
-                "name": "Wrapped Lumens",
-                "priceUSD": "69.0946270573019",
-                "coinKey": "WLUM",
-                "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/analytics/blockchains/fantom/assets/0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208/logo.png"
             },
             {
                 "address": "0x666a3776b3e82f171cb1dff7428b6808d2cd7d02",
