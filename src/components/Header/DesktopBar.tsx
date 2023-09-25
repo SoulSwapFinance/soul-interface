@@ -55,16 +55,12 @@ const DesktopBar: FC = () => {
     const farmRoute = useCallback(() => {
         router.push(`/farm`)
     }, [])
-    const luxorRoute = useCallback(() => {
-        router.push(`/luxor`)
-    }, [])
 
     const swapPage = router.pathname.startsWith('/swap') || router.pathname.startsWith('/exchange/swap')
     const portfolioPage = router.pathname.startsWith('/portfolio')
     const farmPage = router.pathname.startsWith('/farm') || router.pathname.startsWith('/summoner')
     const bondPage = router.pathname.startsWith('/bond') || router.pathname.startsWith('/bonds')
     const dataPage = router.pathname.startsWith('/analytics')
-    const luxorPage = router.pathname.startsWith('/luxor')
 
     // const isExchangeAnalytics
     //     = asPath.startsWith('/exchange/analytics')
@@ -86,7 +82,6 @@ const DesktopBar: FC = () => {
     // const isNFT = nftPage
     const isWallet = portfolioPage
     const isData = dataPage
-    const isLuxor = luxorPage
     const isEarn = farmPage || bondPage
     const isExchange = swapPage || isPool
 

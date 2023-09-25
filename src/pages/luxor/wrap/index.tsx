@@ -25,7 +25,6 @@ import { useLuxorPrice } from 'hooks/getPrices'
 // import { useSingleCallResult } from 'state/multicall/hooks'
 // import useStablecoin from 'hooks/useStablecoin'
 import { useLuxorInfo } from 'hooks/useAPI'
-import { SunsetBanner } from 'components/Banner'
 
 export default function Stablecoin() {
   const addTransaction = useTransactionAdder()
@@ -85,30 +84,6 @@ export default function Stablecoin() {
           <title>Wrap | Luxor</title>
           <meta key="description" name="description" />
         </Head>
-        <SunsetBanner />
-        <div className="flex ml-2 mr-2 mb-4 mt-4 gap-1 items-center justify-center">
-          <Button variant="filled" color="yellow" size="lg">
-            <NavLink href={'/luxor/redeem'}>
-              <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                {'Redeem'}
-              </div>
-            </NavLink>
-          </Button>
-          {/* <Button variant="filled" color="yellow" size="lg">
-            <NavLink href={'/luxor/bonds'}>
-              <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                {'Bond'}
-              </div>
-            </NavLink>
-          </Button> */}
-          <Button variant="filled" color="yellow" size="lg">
-            <NavLink href={'/luxor/stake'}>
-              <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                {'Unstake'}
-              </div>
-            </NavLink>
-          </Button>
-        </div>
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
           <Tab.Group>
             <Tab.List className="flex items-center justify-center mb-1 space-x-2 p-3px text-white">

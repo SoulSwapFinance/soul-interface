@@ -25,7 +25,6 @@ interface NavigationItem {
 
 export const NavigationItem: FC<NavigationItem> = ({ node }) => {
   const router = useRouter()
-  // const isLuxor = router.asPath.startsWith('/luxor')
   const buttonRef = useRef<HTMLButtonElement>(null)
   const isDesktop = useDesktopHeaderMediaQuery()
   const touchDevice = useTouchDeviceMediaQuery()

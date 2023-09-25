@@ -43,8 +43,6 @@ const useMenu: UseBar = () => {
   const WHITE = `#FFFFFF`
   const chainColor = getChainColor(chainId)
 
-  // const isLuxor = router.asPath.startsWith('/luxor')
-
   return useMemo(() => {
     if (!chainId) return []
 
@@ -133,22 +131,6 @@ const useMenu: UseBar = () => {
         icon: <VaultIcon
           className={classNames(`w-7 h-7 rounded-md`
             // , isEarn ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
-          )}
-          fillPrimary={WHITE}
-          fillSecondary={chainColor}
-        />,
-      })
-    }
-
-    // Luxor
-    if (featureEnabled(Feature.LUXOR, chainId)) {
-      mainItems.push({
-        key: 'luxor',
-        link: '/luxor/dashboard',
-        title: 'Luxor',
-        icon: <SunMoonIcon
-          className={classNames(`w-7 h-7 rounded-md`
-            // , isLuxor ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
           )}
           fillPrimary={WHITE}
           fillSecondary={chainColor}

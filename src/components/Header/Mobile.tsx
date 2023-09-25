@@ -20,7 +20,6 @@ const Mobile = () => {
   const bar = useBar()
   const router = useRouter()
   // const { asPath } = useRouter()
-  // const isLuxor = router.asPath.startsWith('/luxor')
 
   const { account, chainId } = useActiveWeb3React()
   // const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']

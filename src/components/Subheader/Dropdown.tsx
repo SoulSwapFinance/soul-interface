@@ -23,7 +23,6 @@ const Mobile: FC = () => {
   const menu = useDropdown()
   const bar = useBar()
   const router = useRouter()
-  const isLuxor = router.asPath.startsWith('/luxor')
 
   const { account, chainId, library } = useActiveWeb3React()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']

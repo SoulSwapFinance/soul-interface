@@ -56,9 +56,6 @@ const MobileBar = () => {
     const swapRoute = useCallback(() => {
         router.push(`/exchange/swap`)
     }, [])
-    // const luxorRoute = useCallback(() => {
-    //     router.push(`/luxor`)
-    // }, [])
     const walletRoute = useCallback(() => {
         router.push(`/portfolio`)
     }, [])
@@ -71,12 +68,10 @@ const MobileBar = () => {
 
     const swapPage = router.pathname.startsWith('/swap') || router.pathname.startsWith('/exchange/swap')
     const portfolioPage = router.pathname.startsWith('/portfolio')
-    const luxorPage = router.pathname.startsWith('/luxor')
     const farmPage = router.pathname.startsWith('/farm') || router.pathname.startsWith('/summoner')
     const bondPage = router.pathname.startsWith('/bond') || router.pathname.startsWith('/bonds')
     const dataPage = router.pathname.startsWith('/analytics')
     // const dataPage = router.pathname.startsWith('/analytics')
-    // const luxorPage = router.pathname.startsWith('/luxor')
 
     // const isExchangeAnalytics
     //     = asPath.startsWith('/exchange/analytics')

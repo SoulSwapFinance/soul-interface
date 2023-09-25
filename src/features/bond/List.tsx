@@ -126,15 +126,6 @@ export const BondList = () => {
             </NavLink>
           </Button>
         }
-        {featureEnabled(Feature.LUXOR, chainId) &&
-          <Button variant="filled" color="purple" size="lg">
-            <NavLink href={'/luxor'}>
-              <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                <span>Luxor</span>
-              </div>
-            </NavLink>
-          </Button>
-        }
       </div>
       <Typography className="text-2xl bg-dark-1000 mb-2 rounded-2xl m-1 p-4 border border-purple font-bold text-center">SoulSwap Bonds</Typography>
       <BondKey />

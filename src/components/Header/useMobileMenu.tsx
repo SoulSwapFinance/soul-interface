@@ -111,11 +111,6 @@ const useMobileMenu: UseMobileMenu = () => {
             link: '/autostake',
           },
           {
-            key: 'luxor',
-            title: `Luxor`,
-            link: '/luxor/bonds',
-          },
-          {
             key: 'bonds',
             title: `Bond`,
             link: '/bonds',
@@ -197,11 +192,6 @@ const useMobileMenu: UseMobileMenu = () => {
           link: '/balances',
         },
         {
-          key: 'luxor-dashboard',
-          title: 'Luxor',
-          link: '/luxor/dashboard',
-        },
-        {
           key: 'dashboard',
           title: 'Review',
           link: '/analytics/dashboard',
@@ -238,11 +228,6 @@ const useMobileMenu: UseMobileMenu = () => {
             title: `Swap`,
             link: 'https://docs.soulswap.finance/docs/user-guides/exchange/swapping-tokens',
           },
-          // {
-          //   key: 'lux-docs',
-          //   title: `Bond`,
-          //   link: 'https://luxor.soulswap.finance',
-          // },
         ],
       }
       mainItems.push(learnItems)

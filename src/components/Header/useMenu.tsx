@@ -69,16 +69,6 @@ const useMenu: UseMenu = () => {
       }
       mainItems.push(farmItems)
     }
-
-    if (featureEnabled(Feature.LUXOR, chainId)) {
-      const luxorItem = {
-        key: 'luxor',
-        title: `Luxor`,
-        // icon: SUN_ICON,
-        link: '/luxor'
-      }
-      mainItems.push(luxorItem)
-    }
     
     // if (featureEnabled(Feature.LIQUIDITY_MINING, chainId)) {
     //   const farmItems = {

@@ -9,7 +9,6 @@ import { Button, ButtonError } from 'components/Button'
 import StableInputPanel from 'components/StableInputPanel'
 import { AutoColumn } from 'components/Column'
 import { ApprovalState, useApproveCallback, useLuxorRefunderContract } from 'hooks'
-import { getAddress } from '@ethersproject/address'
 import { Token, LUX_ADDRESS, ChainId, LUXOR_REEFUNDER_ADDRESS, REFUNDER_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
 import { formatNumber, tryParseAmount } from 'functions'
 import { useCurrencyBalance } from 'state/wallet/hooks'
@@ -17,12 +16,12 @@ import { useTransactionAdder } from 'state/transactions/hooks'
 import Dots from 'components/Dots'
 import { BigNumber } from '@ethersproject/bignumber'
 import { useActiveWeb3React } from 'services/web3/hooks'
-import NavLink from 'components/NavLink'
-import { SunsetBanner } from 'components/Banner'
+// import NavLink from 'components/NavLink'
 import { LUXOR, WFTM } from 'constants/tokens'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 import { useUserTokenInfo } from 'hooks/useAPI'
+import { getAddress } from '@ethersproject/address'
 
 function Redeem() {
   const addTransaction = useTransactionAdder()
@@ -53,7 +52,7 @@ function Redeem() {
 
   const CONVERSION_RATE = 0.12
   const { userTokenInfo } = useUserTokenInfo(REFUNDER_ADDRESS[ChainId.FANTOM], WNATIVE_ADDRESS[ChainId.FANTOM])
-  const remainingFunds = formatNumber(Number(userTokenInfo?.balance) / 1E18, false, true)
+  // const remainingFunds = formatNumber(Number(userTokenInfo?.balance) / 1E18, false, true)
 
   return (
     <Container id="stablecoin-page" className="py-4 md:py-8 lg:py-12">
@@ -62,30 +61,6 @@ function Redeem() {
           <title>Redeem | Luxor</title>
           <meta key="description" name="description" />
         </Head>
-        <SunsetBanner />
-        <div className="flex ml-2 mr-2 mb-4 mt-4 gap-1 items-center justify-center">
-          {/* <Button variant="filled" color="yellow" size="lg">
-            <NavLink href={'/luxor/bonds'}>
-              <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                {'Bond'}
-              </div>
-            </NavLink>
-          </Button> */}
-          <Button variant="filled" color="yellow" size="lg">
-            <NavLink href={'/luxor/stake'}>
-              <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                {'Unstake'}
-              </div>
-            </NavLink>
-          </Button>
-          <Button variant="filled" color="yellow" size="lg">
-            <NavLink href={'/luxor/wrap'}>
-              <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                {'Unwrap'}
-              </div>
-            </NavLink>
-          </Button>
-        </div>
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
           <Tab.Group>
             <Tab.List className="flex items-center justify-center mb-1 space-x-2 p-3px text-white">
