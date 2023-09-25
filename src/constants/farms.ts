@@ -1,4 +1,5 @@
-import { ChainId, SOUL_ADDRESS, SOUL_NATIVE, SOUL_USDC, USDC_ADDRESS, WNATIVE_ADDRESS, USDC_NATIVE, MUSDC_NATIVE, BTC_NATIVE, ETH_NATIVE, DAI_USDC, WBTC_ADDRESS, FMULTI_ADDRESS, WETH_ADDRESS, DAI_ADDRESS, BNB_NATIVE, BNB_ADDRESS, LINK_ADDRESS, MULTI_WETH_ADDRESS, MULTI_USDC_ADDRESS, MULTI_AVAX_ADDRESS, MULTI_WBTC_ADDRESS, DAI_NATIVE, ETH_USDC, BTC_USDC } from '../sdk'
+import { ChainId, SOUL_ADDRESS, SOUL_NATIVE, SOUL_USDC, USDC_ADDRESS, WNATIVE_ADDRESS, USDC_NATIVE, MUSDC_NATIVE, BTC_NATIVE, ETH_NATIVE, DAI_USDC, WBTC_ADDRESS, FMULTI_ADDRESS, WETH_ADDRESS, DAI_ADDRESS, BNB_NATIVE, BNB_ADDRESS, LINK_ADDRESS, MULTI_WETH_ADDRESS, MULTI_USDC_ADDRESS, MULTI_AVAX_ADDRESS, MULTI_WBTC_ADDRESS, DAI_NATIVE, ETH_USDC, BTC_USDC, AXL_WBTC_ADDRESS, LZ_WBTC_ADDRESS, LZ_WETH_ADDRESS, AXL_WETH_ADDRESS } from '../sdk'
+import { LZ_USDC_ADDRESS } from './addresses'
 
 export type TokenInfo = {
   id: string
@@ -451,22 +452,22 @@ export const POOLS: AddressMap = {
       //   decimals: 18,
       // },
     },
-    '0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99': {  // FTM-WLUM
-      id: 16,
-      address: '0xa670c1e02c7ae8b3d575293bfa1f7eba90f81c99',
-      token0: {
-        id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
-        name: 'Wrapped Fantom',
-        symbol: 'FTM',
-        decimals: 18,
-      },
-      token1: {
-        id: '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208', // WLUM
-        name: 'Wrapped Lumens',
-        symbol: 'wLUM',
-        decimals: 9,
-      },
-    },
+    // '0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99': {  // FTM-WLUM
+    //   id: 16,
+    //   address: '0xa670c1e02c7ae8b3d575293bfa1f7eba90f81c99',
+    //   token0: {
+    //     id: '0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83', // WFTM
+    //     name: 'Wrapped Fantom',
+    //     symbol: 'FTM',
+    //     decimals: 18,
+    //   },
+    //   token1: {
+    //     id: '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208', // WLUM
+    //     name: 'Wrapped Lumens',
+    //     symbol: 'wLUM',
+    //     decimals: 9,
+    //   },
+    // },
     '0x9fA5de19495331E13b443F787B90CdD22B32263d': {  // DAI-ETH [LEND]
       id: 17, 
       address: '0x74b23882a30290451a17c44f4f05243b6b58c76d',
@@ -680,6 +681,54 @@ export const POOLS: AddressMap = {
         id: WNATIVE_ADDRESS[ChainId.FANTOM], // WFTM
         name: 'Wrapped Fantom',
         symbol: 'WFTM',
+        decimals: 18,
+      },
+    },
+    '0xBBdA07f2121274ecb1a08077F37A60F7E0D36629': { // USDC-USDC √
+      id: 32,
+      address: '0xbbda07f2121274ecb1a08077f37a60f7e0d36629',
+      token0: {
+        id: LZ_USDC_ADDRESS[ChainId.FANTOM], // LZUSDC
+        name: 'USD Coin (LayerZero)',
+        symbol: 'lzUSDC',
+        decimals: 6,
+      },
+      token1: {
+        id: USDC_ADDRESS[ChainId.FANTOM], // AXLUSDC
+        name: 'USD Coin (Axelar)',
+        symbol: 'axlUSDC',
+        decimals: 6,
+      },
+    },
+    '0xf4AadfC5bDccE978f0aD40FFcf908e0B653D2742': { // BTC-BTC √
+      id: 33,
+      address: '0xf4aadfc5bdcce978f0ad40ffcf908e0b653d2742',
+      token0: {
+        id: LZ_WBTC_ADDRESS[ChainId.FANTOM], // lzBTC
+        name: 'Bitcoin (LayerZero)',
+        symbol: 'lzBTC',
+        decimals: 8,
+      },
+      token1: {
+        id: AXL_WBTC_ADDRESS[ChainId.FANTOM], // axlBTC
+        name: 'Bitcoin (Axelar)',
+        symbol: 'axlBTC',
+        decimals: 8,
+      },
+    },
+    '0x80ccC7651dcce2DaE0717Ff2A0B1c40C8D03AEBA': { // ETH-ETH √
+      id: 34,
+      address: '0x80ccc7651dcce2dae0717ff2a0b1c40c8d03aeba',
+      token0: {
+        id: LZ_WETH_ADDRESS[ChainId.FANTOM], // lzETH
+        name: 'Ethereum (LayerZero)',
+        symbol: 'lzETH',
+        decimals: 18,
+      },
+      token1: {
+        id: AXL_WETH_ADDRESS[ChainId.FANTOM], // axlETH
+        name: 'Ethereum (Axelar)',
+        symbol: 'axlETH',
         decimals: 18,
       },
     },
