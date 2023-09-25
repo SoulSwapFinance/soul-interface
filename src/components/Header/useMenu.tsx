@@ -77,7 +77,6 @@ const useMenu: UseMenu = () => {
     //     icon: <CurrencyDollarIcon width={20} className={classNames(
     //       "filter", "text-white"
     //       // isFarm ? 'text-black' : `text-[${getChainColor(chainId)}]`
-    //       // isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`
     //       )} />,
     //     link: '/farm'
     //   }
@@ -91,7 +90,6 @@ const useMenu: UseMenu = () => {
     //     icon: <MoonIcon width={20} className={classNames(
     //       "filter", "text-white"
     //       // isBond ? 'text-black' : `text-[${getChainColor(chainId)}]`
-    //       // isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`
     //       )} />,
     //     link: '/bonds'
     //   }
@@ -106,7 +104,6 @@ const useMenu: UseMenu = () => {
     //     // icon: <CircleStackIcon width={20} className={classNames(
     //     //   `filter text-white`
     //     //   // isBond ? 'text-black' : `text-[${getChainColor(chainId)}]`
-    //     //   // isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`
     //     //   )} />,
     //     link: '/farms'
     //   }

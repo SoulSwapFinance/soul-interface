@@ -118,7 +118,7 @@ if (featureEnabled(Feature.LIQUIDITY, chainId)) {
 // let socialMenu = {
 //   key: 'socials',
 //   title: `Socials`,
-//   icon: <UserGroupIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`} />,
+//   icon: <UserGroupIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`} />,
 //   items: [
 //     {
 //       key: 'discord',
@@ -133,7 +133,7 @@ if (featureEnabled(Feature.LIQUIDITY, chainId)) {
 //     {
 //       key: 'twitter',
 //       title: 'Twitter',
-//       link: `https://twitter.com/${ isLuxor ? 'LuxorMoney' : 'SoulSwapFinance' }`,
+//       link: `https://twitter.com/${ 'SoulSwapFinance' }`,
 //     },
 //     {
 //       key: 'forum',
@@ -190,7 +190,7 @@ let dataMenu = {
     //   key: 'explore',
     //   title: `Explore`,
     //   link: '/explore',
-    //   icon: <GlobeIcon width={20} className={classNames(isLuxor ? "text-yellow" : `text-[${getChainColor(chainId)}]`} />,
+    //   icon: <GlobeIcon width={20} className={classNames(`text-[${getChainColor(chainId)}]`} />,
     // }
     //   mainItems.push(exploreMenu)
 

@@ -208,24 +208,6 @@ const DesktopBar: FC = () => {
                             </Typography>
                         </div>
                         }
-                        {/* {featureEnabled(Feature.LUXOR, chainId) &&
-                        <div
-                            className={classNames(
-                                `grid grid-cols-2`,
-                                `hover:border-2 hover:border-[${getChainColor(chainId)}] w-full justify-center rounded p-0.5`,
-                                isLuxor && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
-                            onClick={luxorRoute}
-                        >
-                            <SunMoonIcon
-                                fillPrimary={isLuxor ? `${getChainColor(chainId)}` : `#FFFFFF`}
-                                fillSecondary={isLuxor ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                className={'w-7 h-7 ml-4'}
-                            />
-                            <Typography className={`grid mt-1`}>
-                            { `Luxor` }
-                            </Typography>
-                        </div>
-                         } */}
                         {/* {featureEnabled(Feature.NFT, chainId) &&
                             <div
                                 className={classNames(

@@ -35,7 +35,7 @@ const Mobile: FC = () => {
         <div className="flex justify-between flex-grow">
           {/* { [1, 250, 43114].includes(chainId) &&
             <div className="mt-5 rounded-full">
-            <Bars3Icon width={24} className={classNames(isLuxor ? "hover:text-yellow" : `hover:text-[${getChainColor(chainId)}]`, `text-[${getChainColor(chainId)}]`, "cursor-pointer hover:text-white")} 
+            <Bars3Icon width={24} className={classNames(`hover:text-[${getChainColor(chainId)}]`, `text-[${getChainColor(chainId)}]`, "cursor-pointer hover:text-white")} 
               onClick={() => setOpen(true)} />
           </div>
           } */}
