@@ -41623,16 +41623,6 @@
                 "coinKey": "wsHUMP"
             },
             {
-                "address": "0x6671e20b83ba463f270c8c75dae57e3cc246cb2b",
-                "chainId": 250,
-                "symbol": "LUX",
-                "decimals": 9,
-                "name": "Luxor Money",
-                "priceUSD": "0.07590468922993956",
-                "logoURI": "https://static.debank.com/image/ftm_token/logo_url/0x6671e20b83ba463f270c8c75dae57e3cc246cb2b/779f41574bceaaf584e6cbbf1923122c.png",
-                "coinKey": "LUX"
-            },
-            {
                 "address": "0xfbfae0dd49882e503982f8eb4b8b1e464eca0b91",
                 "chainId": 250,
                 "symbol": "TCS",
