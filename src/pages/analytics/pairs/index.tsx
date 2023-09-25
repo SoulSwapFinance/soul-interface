@@ -40,10 +40,10 @@ function Pairs() {
             token0: pair.token0,
             token1: pair.token1,
             id: pair.id,
-            // volume: pair.volumeUSD,
+            volume: pair.volumeUSD,
           },
           liquidity: pair.reserveUSD,
-          // volume: pair.volumeUSD,
+          volume: pair.volumeUSD,
           volume1d: pair.volumeUSD - pair1d.volumeUSD,
           volume1w: pair.volumeUSD - pair1w.volumeUSD,
         }
@@ -57,7 +57,7 @@ function Pairs() {
 
           return {
             pair: {
-              // reserveUSD: pair.reserveUSD,
+              reserveUSD: pair.reserveUSD,
               token0: pair.token0,
               token1: pair.token1,
               id: pair.id,
@@ -104,7 +104,7 @@ function Pairs() {
             <Link href="/analytics">Dashboard</Link>&nbsp;
           </div>
           <div className={`text-xs font-bold text-high-emphesis m-1 text-${getChainColorCode(chainId)}`}>
-            Pairs&nbsp;
+            <Link href="/analytics/pairs">Pairs</Link>&nbsp;
           </div>
           <div className="text-xs font-medium text-secondary m-1">
             <Link href="/analytics/tokens">Tokens</Link>&nbsp;

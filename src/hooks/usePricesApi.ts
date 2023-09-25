@@ -5,7 +5,7 @@ import { useActiveWeb3React } from "services/web3"
 
 export function usePricesApi() {
   const { chainId } = useActiveWeb3React()
-    const ftmPrice = useTokenPrice(WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM])
+    const ftmPrice = useTokenPrice(WNATIVE_ADDRESS[chainId ? chainId : ChainId.FANTOM])
     const soulPrice = useSoulPrice()
     const usdcPrice = 1
 

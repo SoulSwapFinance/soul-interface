@@ -1,13 +1,15 @@
 import { ChainId } from 'sdk'
 import { getBlockDaysAgo, getDayData, getFactory } from 'services/graph'
+import { useActiveWeb3React } from 'services/web3'
 
 // export type AnalyticsDashboard = Awaited<ReturnType<typeof getAnalyticsDashboard>>
 
-interface getAnalyticsDashboardProps {
-  chainId: ChainId
-}
+// interface getAnalyticsDashboardProps {
+//   chainId: ChainId
+// }
 
-export default async function getAnalyticsDashboard({ chainId }: getAnalyticsDashboardProps) {
+export default async function getAnalyticsDashboard() {
+  const { chainId } = useActiveWeb3React()
   const [block1d, block2d] = await Promise.all([getBlockDaysAgo(chainId, 1), getBlockDaysAgo(chainId, 2)])
 
   const [exchange, exchange1d, exchange2d, dayData] = await Promise.all([

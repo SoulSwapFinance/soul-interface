@@ -90,7 +90,7 @@ const allColumns = [
   },
   {
     Header: 'APY',
-    accessor: (row) => <div className="text-high-emphesis">{getApy(row.volume1w, row.liquidity)}</div>,
+    accessor: (row) => <div className="text-high-emphesis">{getApy(row?.volume1w, row?.liquidity)}</div>,
     align: 'right',
     sortType: (a, b) => a.original.volume1w / a.original.liquidity - b.original.volume1w / b.original.liquidity
   },
@@ -98,8 +98,8 @@ const allColumns = [
     Header: 'Volume',
     accessor: (row) => (
       <div>
-        <div className="font-medium text-high-emphesis">{formatNumber(row.volume1d, true, false)}</div>
-        <div className="font-normal text-primary">{formatNumber(row.volume1w, true, false)}</div>
+        <div className="font-medium text-high-emphesis">{formatNumber(row?.volume1d, true, false)}</div>
+        <div className="font-normal text-primary">{formatNumber(row?.volume1w, true, false)}</div>
       </div>
     ),
     align: 'right',

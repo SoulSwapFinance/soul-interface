@@ -14,7 +14,7 @@ import { useCurrency } from 'hooks/Tokens'
 import { useNativePrice, useOneDayBlock, usePairDayData, usePairs, useTwoDayBlock } from 'services/graph'
 import { useActiveWeb3React } from 'services/web3'
 import { times } from 'lodash'
-import Link from 'next/link'
+// import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useMemo } from 'react'
 // import { ExternalLink as LinkIcon } from 'react-feather'
@@ -60,7 +60,7 @@ function PairChart({ inputCurrency, outputCurrency }: PairProps) {
   const router = useRouter()
   const id = (inputCurrency && outputCurrency)
     ? inputCurrency && outputCurrency && computePairAddress({
-      factoryAddress: FACTORY_ADDRESS[chainId ?? ChainId.FANTOM],
+      factoryAddress: FACTORY_ADDRESS[chainId ? chainId : ChainId.FANTOM],
       tokenA: inputCurrency?.isToken ? inputCurrency : inputCurrency?.wrapped,
       tokenB: outputCurrency?.isToken ? outputCurrency : outputCurrency?.wrapped,
     }).toLowerCase() // pairAddress

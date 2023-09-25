@@ -39,7 +39,7 @@ function Tokens() {
             <Link href="/analytics/pairs">Pairs</Link>&nbsp;
           </div>
           <div className={`text-xs font-bold text-high-emphesis m-1 text-${getChainColorCode(chainId)}`}>
-            Tokens&nbsp;
+            <Link href="/analytics/tokens">Tokens</Link>&nbsp;
           </div>
         </div>
       </div>
