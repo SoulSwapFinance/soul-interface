@@ -210,39 +210,6 @@ export const AUTO_STAKE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const LUX_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xdC7Bd8bA29ba99A250da6F0820ad9A1a285fE82a',
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.MOONRIVER]: '',
-  [ChainId.ARBITRUM]: '',
-}
-
-export const LUXOR_STAKING_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xf3F0BCFd430085e198466cdCA4Db8C2Af47f0802',
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.MOONRIVER]: '',
-  [ChainId.ARBITRUM]: '',
-}
-
-export const LUXOR_STAKING_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x2Dd0D30f525e65641962904470660507e80940e4',
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.MOONRIVER]: '',
-  [ChainId.ARBITRUM]: '',
-}
-
 export const BTC_NATIVE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
@@ -281,17 +248,6 @@ export const WLUM_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208',
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.MOONRIVER]: '',
-  [ChainId.ARBITRUM]: '',
-}
-
-export const LUX_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b',
   [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
@@ -548,10 +504,6 @@ export const ADVANCED_RECEIVER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0xA32e906C31093aDbe581B913e549f70fD2fD7969',
   [ChainId.FANTOM]: '0xd6AF3AAe2Aef4f1Acff9dD66f542ea863fBe9ae7', // FEB22
   //   [ChainId.AVALANCHE]: '0x50995361A1104B2E34d81771B2cf19BA55051C7c',
-  }
-
-  export const LUXOR_REEFUNDER_ADDRESS: AddressMap = {
-    [ChainId.FANTOM]: '0x1943c2Ff78c51230B3579E14B5c66562c4bb6640',
   }
   
 export const ROUND_UP_RECEIVER_ADDRESS: AddressMap = {
@@ -851,11 +803,6 @@ export const OPEN_OCEAN_EXCHANGE_ADDRESS: AddressMap = {
 }
 // LP TOKEN ADDRESS //
 
-export const LUX_NATIVE: AddressMap = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.FANTOM]: '0x951BBB838e49F7081072895947735b0892cCcbCD',
-}
-
 export const SOUL_MUSDC: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.FANTOM]: '0xC0A301f1E5E0Fe37a31657e8F60a41b14d01B0Ef',
@@ -968,19 +915,10 @@ export const MBTC_NATIVE: AddressMap = {
   [ChainId.AVALANCHE]: '0x8C162C3Bdd7354b5Cb1A0b18eDBB5725CFE762A3' // SEP22
 }
 
-export const LUX_DAI: AddressMap = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.FANTOM]: '0x46729c2AeeabE7774a0E710867df80a6E19Ef851',
-}
-
 export const BNB_NATIVE: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.FANTOM]: '0x52966a12e3211c92909C28603ca3df8465c06c82',
   [ChainId.AVALANCHE]: '0xB3074D8b7f22439F337E2E2830864be9c8236866', // SEP22
-}
-
-export const LUX_SOR: AddressMap = {
-  [ChainId.FANTOM]: '0x622E69B6785311800B0d55D72fF27D91F5518212',
 }
 
 export const FUSD_NATIVE: AddressMap = {

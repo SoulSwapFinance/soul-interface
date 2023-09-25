@@ -80,10 +80,6 @@ export const getPrice = (coin:string) => {
       url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=anyswap'
     } else if (coin === 'SOUL') {
       url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=soul-swap'
-    } else if (coin === 'SEANCE') {
-      url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=seancecircle'
-    } else if (coin === 'LUX') {
-      url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=luxor'
     } else if (coin === 'HERO') {
       url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=hero'
     } else if (coin === 'PLAY') {

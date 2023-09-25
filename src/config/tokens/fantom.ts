@@ -17,9 +17,7 @@ export const BNB = new Token(ChainId.FANTOM, '0xD67de0e0a0Fd7b15dC8348Bb9BE742F3
 export const ENCHANT = new Token(ChainId.FANTOM, '0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a', 18, 'ENCHANT', 'Enchantment')
 export const MPX = new Token(ChainId.FANTOM, '0x66eEd5FF1701E6ed8470DC391F05e27B1d0657eb', 18, 'MPX', 'Morphex')
 
-export const LUX = new Token(ChainId.FANTOM, '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b', 9, 'LUX', 'Luxor Money')
 export const FUSD = new Token(ChainId.FANTOM, '0xAd84341756Bf337f5a0164515b1f6F993D194E1f', 18, 'FUSD', 'Fantom USD')
-export const WLUM = new Token(ChainId.FANTOM, '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208', 9, 'WLUM', 'Wrapped Lumens')
 export const GRIMEVO = new Token(ChainId.FANTOM, '0x0a77866C01429941BFC7854c0c0675dB1015218b', 18, 'EVO', 'Grim EVO')
 export const MAVAX = new Token(ChainId.FANTOM, MULTI_AVAX_ADDRESS[ChainId.FANTOM], 18, 'mAVAX', 'Avalanche (Multichain)')
 export const AVAX = new Token(ChainId.FANTOM, AVAX_ADDRESS[ChainId.FANTOM], 18, 'AVAX', 'Avalanche (Axelar)')

@@ -41,7 +41,6 @@ import {
   TIMELOCK_ADDRESS,
   WNATIVE,
   SOUL_CIRCLE_ADDRESS,
-  LUX_HELPER_ADDRESS,
   SOULSWAP_TWAP_0_ORACLE_ADDRESS,
   SOULSWAP_TWAP_1_ORACLE_ADDRESS,
   SOUL_BOND_ADDRESS,
@@ -65,7 +64,6 @@ import UPDATER_ABI from 'constants/abis/market-updater.json'
 import ANYSWAP_ERC20_ABI from 'constants/abis/anyswap_erc20.json'
 import SPOOKY_FACTORY_ABI from 'constants/abis/spookyswap-factory.json'
 import SOUL_CIRCLE_ABI from 'constants/abis/soulswap/soulcircle.json' 
-import LUX_HELPER_ABI from 'constants/abis/lux-bond-helper.json' 
 import CHAINLINK_ORACLE_ABI from 'constants/abis/chainlink-oracle.json'
 import PRICE_ORACLE_ABI from 'constants/abis/price-oracle.json'
 import COMPLEX_REWARDER_ABI from 'constants/abis/complex-rewarder.json'

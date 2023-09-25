@@ -26,7 +26,6 @@ export enum Feature {
   LIMIT_ORDERS = 'LimitOrders',
   LIMIT = 'Limit',
   SOULSWAP = 'SoulSwap',
-  LUXOR = 'Luxor',
   INARI = 'Inari',
   AGGREGATE = 'Aggregate',
   VESTING = 'Vesting'

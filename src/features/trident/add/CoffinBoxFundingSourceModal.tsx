@@ -23,7 +23,6 @@ const CoffinBoxFundingSourceModal: FC = () => {
           <HeadlessUiModal.Header header={`About CoffinBox Funding`} onClose={() => setOpen(false)} />
           <div className="flex justify-center gap-4">
             <div className="relative shadow-purple-glow">
-              {/* <Image src="https://exchange.soulswap.finance/soul2lux.gif" width={160} height={120} alt="CoffinBox Logo" /> */}
             </div>
             <div className="flex flex-col gap-2">
               <Typography variant="lg" weight={700} className="text-center text-high-emphesis">

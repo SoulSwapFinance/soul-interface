@@ -1,5 +1,5 @@
 import { SURV_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, ETH_ADDRESS, MULTI_WETH_ADDRESS } from 'constants/addresses'
-import { AVAX_ADDRESS, BNB_ADDRESS, BUSD_ADDRESS, ChainId, DAI_ADDRESS, Ether, FMULTI_ADDRESS, FRAX_ADDRESS, LINK_ADDRESS, LUX_ADDRESS, LZ_WBTC_ADDRESS, LZ_WETH_ADDRESS, MPX_ADDRESS, MULTI_AVAX_ADDRESS, MULTI_DAI_ADDRESS, MULTI_WBTC_ADDRESS, NATIVE, SEANCE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
+import { AVAX_ADDRESS, BNB_ADDRESS, BUSD_ADDRESS, ChainId, DAI_ADDRESS, Ether, FMULTI_ADDRESS, FRAX_ADDRESS, LINK_ADDRESS, LZ_WBTC_ADDRESS, LZ_WETH_ADDRESS, MPX_ADDRESS, MULTI_AVAX_ADDRESS, MULTI_DAI_ADDRESS, MULTI_WBTC_ADDRESS, NATIVE, SEANCE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WETH9, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
 
 import { SupportedChainId } from '../chains'
 
@@ -26,7 +26,6 @@ export const FANTOM: { [key: string]: Token } = {
   FMULTI: new Token(ChainId.FANTOM, FMULTI_ADDRESS[ChainId.FANTOM], 18, 'FMULTI', 'Fuck Multi'),
   MPX: new Token(ChainId.FANTOM, MPX_ADDRESS[ChainId.FANTOM], 18, 'MPX', 'Morphex'),
   SEANCE: new Token(ChainId.FANTOM, SEANCE_ADDRESS[ChainId.FANTOM], 18, 'SEANCE', 'Seance Circle'), // 27 AUG
-  LUX: new Token(ChainId.FANTOM, LUX_ADDRESS[ChainId.FANTOM], 9, 'LUX', 'Luxor Money'),
   WLUM: new Token(ChainId.FANTOM, '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208', 9, 'WLUM', 'Wrapped Lumens'),
   LUM: new Token(ChainId.FANTOM, '0x4290b33158F429F40C0eDc8f9b9e5d8C5288800c', 9, 'LUM', 'Lumens'),
   USDC: new Token(ChainId.FANTOM, USDC_ADDRESS[ChainId.FANTOM], 6, 'USDC', 'USD Coin (Axelar)'),
@@ -38,7 +37,6 @@ export const FANTOM: { [key: string]: Token } = {
   WBTC: new Token(ChainId.FANTOM, WBTC_ADDRESS[ChainId.FANTOM], 8, 'WBTC', 'Wrapped Bitcoin (Axelar)'),
   DAI: new Token(ChainId.FANTOM, DAI_ADDRESS[ChainId.FANTOM], 18, 'DAI', 'DAI (Axelar)'),
   MDAI: new Token(ChainId.FANTOM, MULTI_DAI_ADDRESS[ChainId.FANTOM], 18, 'mDAI', 'DAI (Multichain)'),
-  SOR: new Token(ChainId.FANTOM, '0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A', 18, 'SOR', 'SOR'),
   SURV: new Token(ChainId.FANTOM, SURV_ADDRESS[ChainId.FANTOM], 18, 'SURV', 'SurveyorDAO'),
   GRIMEVO: new Token(ChainId.FANTOM, '0x0a77866C01429941BFC7854c0c0675dB1015218b', 18, 'GRIMEVO', 'Grim EVO'),
   USDT: new Token(ChainId.FANTOM, '0x049d68029688eAbF473097a2fC38ef61633A3C7A', 6, 'USDT', 'Frapped USDT'),
@@ -105,11 +103,6 @@ export const LZUSDC: ChainTokenMap = {
 // MUSDC
 export const MUSDC: ChainTokenMap = {
   [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'mUSDC', 'USDC (Multichain)'),
-} 
-
-// LUXOR
-export const LUXOR: ChainTokenMap = {
-  [ChainId.FANTOM]: new Token(ChainId.FANTOM, '0x6671E20b83Ba463F270c8c75dAe57e3Cc246cB2b', 9, 'LUX', 'Luxor Money'),
 }
 
 // SURV

@@ -5,9 +5,9 @@ import { useMemo } from 'react'
 import { useV2TradeExactOut } from './useV2Trades'
 
 import { tryParseAmount } from 'functions'
-import { BNB, LUXOR, MIM, AVAX, SOUL, FUSD, USDC, LZUSDC, WBTC, WETH, WFTM, WLUM, SURV, DAI, SOR } from 'constants/tokens'
-import { AVAX_ADDRESS, BNB_ADDRESS, LUX_ADDRESS, WFTM_ADDRESS, 
-  SOUL_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WLUM_ADDRESS, SURV_ADDRESS } 
+import { BNB, MIM, AVAX, SOUL, FUSD, USDC, LZUSDC, WBTC, WETH, WFTM, WLUM, SURV, DAI } from 'constants/tokens'
+import { AVAX_ADDRESS, BNB_ADDRESS, WFTM_ADDRESS, 
+  SOUL_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, SURV_ADDRESS } 
   from 'constants/addresses'
 import { usePrice } from 'hooks/usePrice'
 import { useOraclePrice } from './useOraclePrice'
@@ -24,10 +24,6 @@ const STABLECOIN_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
 const SOUL_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(SOUL[ChainId.FANTOM], 100_000e6),
   [ChainId.AVALANCHE]: CurrencyAmount.fromRawAmount(SOUL[ChainId.AVALANCHE], 100_000e6)
-}
-
-const LUXOR_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(LUXOR[ChainId.FANTOM], 100_000e6)
 }
 
 const SURV_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
@@ -71,17 +67,13 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
 
   const soulPrice = usePrice(SOUL_ADDRESS[chainId ?? ChainId.FANTOM])
 
-  const luxorPrice = usePrice(LUX_ADDRESS[250])
-  const wLumensPrice = usePrice(WLUM_ADDRESS[250])
   const wftmPrice = usePrice(WFTM_ADDRESS[250])
   const survPrice = usePrice(SURV_ADDRESS[250])
   const wethPrice = useOraclePrice(ETH_ORACLE_ADDRESS[250])
   const wbtcPrice = useOraclePrice(BTC_ORACLE_ADDRESS[250])
   const avaxPrice = usePrice(AVAX_ORACLE_ADDRESS[43114])
 
-  const luxorAmountOut = chainId ? LUXOR_AMOUNT_OUT[250] : undefined
   const survAmountOut = chainId ? SURV_AMOUNT_OUT[250] : undefined
-  const wlumAmountOut = chainId ? WLUM_AMOUNT_OUT[250] : undefined
   const wftmAmountOut = chainId ? WFTM_AMOUNT_OUT[250] : undefined
 
   const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId ?? ChainId.FANTOM] : undefined
@@ -93,8 +85,6 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
   // TOKENS
   const stablecoin = amountOut?.currency
   const soul = soulAmountOut?.currency
-  const luxor = luxorAmountOut?.currency
-  const wlum = wlumAmountOut?.currency
   const wftm = wftmAmountOut?.currency
   const surv = survAmountOut?.currency
   const avax = avaxAmountOut?.currency
@@ -124,16 +114,6 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
     // handle soul
     if (currency?.wrapped.equals(soul)) {
       return new Price(soul, soul, '100000', Number(soulPrice * 100_000).toFixed())
-    }
-
-    // handle luxor
-    if (currency?.wrapped.equals(luxor)) {
-      return new Price(luxor, luxor, '100', Number(luxorPrice * 100).toFixed())
-    }
-
-    // handle wlum
-    if (currency?.wrapped.equals(wlum)) {
-      return new Price(wlum, wlum, '100', Number(wLumensPrice * 100).toFixed())
     }
     
     // handle wftm
