@@ -6,24 +6,21 @@ import { Tab } from '@headlessui/react'
 import LuxorGlowShadow from 'components/LuxorGlowShadow'
 import { Button, ButtonError } from 'components/Button'
 import StableInputPanel from 'components/StableInputPanel'
-import { ApprovalState, useApproveCallback, useLuxorStakeHelperContract, useLuxorStakingContract } from 'hooks'
+import { useApproveCallback, useLuxorStakeHelperContract, useLuxorStakingContract } from 'hooks'
 import { getAddress } from '@ethersproject/address'
 import { LUM_ADDRESS, LUXOR_STAKING_ADDRESS, LUXOR_STAKING_HELPER_ADDRESS, max, Token } from 'sdk'
 import { LUX_ADDRESS } from 'constants/addresses'
 import { tryParseAmount, formatNumber, classNames } from 'functions'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import { useTransactionAdder } from 'state/transactions/hooks'
-import Dots from 'components/Dots'
-import { BigNumber } from '@ethersproject/bignumber'
-import { useStakeContract, useWarmupValue } from 'features/luxor/stake/hooks'
+import { useStakeContract } from 'features/luxor/stake/hooks'
 import { useActiveWeb3React } from 'services/web3/hooks'
-import NavLink from 'components/NavLink'
 import { useTokenContract } from 'hooks/useTokenContract'
 import { useLuxorPrice } from 'hooks/getPrices'
 import { useLuxorInfo, useLuxorUserInfo } from 'hooks/useAPI'
 import useSendTransaction from 'hooks/useSendTransaction'
 import { isMobile } from 'react-device-detect'
-import { SunsetBanner } from 'components/Banner'
+import { BigNumber } from '@ethersproject/bignumber'
 
 export default function Stake() {
   const addTransaction = useTransactionAdder()
@@ -189,30 +186,6 @@ export default function Stake() {
         <title>Staking | Luxor</title>
         <meta key="description" name="description" />
       </Head>
-      <SunsetBanner />
-      <div className="flex ml-2 mr-2 mb-4 gap-1 mt-4 items-center justify-center">
-        <Button variant="filled" color="yellow" size="lg">
-          <NavLink href={'/luxor/redeem'}>
-            <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              {'Redeem'}
-            </div>
-          </NavLink>
-        </Button>
-        {/* <Button variant="filled" color="yellow" size="lg">
-          <NavLink href={'/luxor/bonds'}>
-            <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              {'Bond'}
-            </div>
-          </NavLink>
-        </Button> */}
-        <Button variant="filled" color="yellow" size="lg">
-          <NavLink href={'/luxor/wrap'}>
-            <div className="block text-md md:text-xl text-black font-bold p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              {'Unwrap'}
-            </div>
-          </NavLink>
-        </Button>
-      </div>
       <LuxorGlowShadow>
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
           <Tab.Group>

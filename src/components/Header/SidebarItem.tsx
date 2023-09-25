@@ -28,8 +28,6 @@ export const SidebarItem: FC<SidebarItem> = ({ node }) => {
   const buttonRef = useRef<HTMLButtonElement>(null)
   const touchDevice = useTouchDeviceMediaQuery()
   const { link } = node as BarItemLeaf
-  
-  // const isLuxor = router.asPath.startsWith('/luxor')
   // const isDesktop = useDesktopHeaderMediaQuery()
   // const isOpen = router.asPath === link
 
