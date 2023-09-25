@@ -90,17 +90,6 @@ export const CRV_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const SOR_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A',
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.MOONRIVER]: '',
-  [ChainId.ARBITRUM]: '',
-}
-
 export const FUSD_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
@@ -238,17 +227,6 @@ export const USDC_DAI_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '',
   [ChainId.AVALANCHE]: '0xE9807645aDA66F2f3d4f2d2A79223701F3cC0903',
-  [ChainId.MATIC]: '',
-  [ChainId.MOONRIVER]: '',
-  [ChainId.ARBITRUM]: '',
-}
-
-export const WLUM_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208',
-  [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
@@ -724,10 +702,6 @@ export const DAI_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063',
 }
 
-export const LUM_ADDRESS: AddressMap = {
-  [ChainId.FANTOM]: '0x4290b33158F429F40C0eDc8f9b9e5d8C5288800c'
-}
-
 export const MPX_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x66eEd5FF1701E6ed8470DC391F05e27B1d0657eb'
 }
@@ -930,15 +904,6 @@ export const DAI_NATIVE: AddressMap = {
   [ChainId.AVALANCHE]: '0xEF1D48b24E87F8ccfF97f7C295B31B92E30F372B',
 }
 
-export const WLUM_NATIVE: AddressMap = {
-  [ChainId.FANTOM]: '0xa670C1E02c7AE8B3D575293bfA1F7eBa90F81C99',
-}
-export const SOR_FTM: AddressMap = {
-  [ChainId.FANTOM]: '0xdfB2218b48627794711E6cFd72e26c541E456F6F',
-}
-export const SOR_NATIVE: AddressMap = {
-  [ChainId.FANTOM]: '0xEFFd4874AcA3Acd19a24dF3281b5cdAdD823801A',
-}
 export const MULTI_BTC_ETH: AddressMap = {
   [ChainId.FANTOM]: '0x1FC954d3484bC21E0Ce53A6648a35BBfc03DC9D0',
 }

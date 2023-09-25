@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import { useV2TradeExactOut } from './useV2Trades'
 
 import { tryParseAmount } from 'functions'
-import { BNB, MIM, AVAX, SOUL, FUSD, USDC, LZUSDC, WBTC, WETH, WFTM, WLUM, SURV, DAI } from 'constants/tokens'
+import { BNB, MIM, AVAX, SOUL, FUSD, USDC, LZUSDC, WBTC, WETH, WFTM, SURV, DAI } from 'constants/tokens'
 import { AVAX_ADDRESS, BNB_ADDRESS, WFTM_ADDRESS, 
   SOUL_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, SURV_ADDRESS } 
   from 'constants/addresses'
@@ -28,10 +28,6 @@ const SOUL_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
 
 const SURV_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
   [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(SURV[ChainId.FANTOM], 100_000e6)
-}
-
-const WLUM_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {
-  [ChainId.FANTOM]: CurrencyAmount.fromRawAmount(WLUM[ChainId.FANTOM], 100_000e6)
 }
 
 const WETH_AMOUNT_OUT: { [chainId: number]: CurrencyAmount<Token> } = {

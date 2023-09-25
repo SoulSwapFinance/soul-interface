@@ -448,17 +448,6 @@ export const ENCHANT_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '',
 }
 
-export const WLUM_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xa69557e01B0a6b86E5b29BE66d730c0Bfff68208', // WLUM
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
-}
-
 export const GRIMEVO_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
@@ -647,21 +636,6 @@ export const STOP_LIMIT_ORDER_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '',
 }
 
-
-
-
-export const SOR_STAKING_REWARDS_ADDRESS: {
-  [chainId in ChainId]: string
-} = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
-  [ChainId.FANTOM]: '0xb2b22549F6586Cd81054677C6b9413Cea9587fd7', // FEB22
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
-}
 export const PEGGED_ORACLE_ADDRESS = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',

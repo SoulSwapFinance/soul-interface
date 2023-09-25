@@ -667,7 +667,6 @@ export function useV2PairsWithPrice(
         token.symbol == 'WETH' || token.symbol == 'ETH' ||
         token.symbol == 'WBTC' || token.symbol == 'BTC' ||
         token.symbol == 'USDC' || token.symbol == 'USDT' || token.symbol == 'DAI'
-        || token.symbol == 'WLUM' 
       )
     }
 
