@@ -1,7 +1,7 @@
 import { CurrencyLogo } from 'components/CurrencyLogo'
 // import LineGraph from 'components/LineGraph'
 import Table, { Column } from 'components/Table'
-import { formatNumber, formatPercent } from 'functions'
+import { formatNumber } from 'functions'
 import { useCurrency } from 'hooks/Tokens'
 import React from 'react'
 // import { useActiveWeb3React } from 'services/web3'
@@ -99,7 +99,7 @@ export default function TokenList({
       {tokens && (
         <Table
           columns={
-            chainId == ChainId.FANTOM ? columns : someColumns
+            chainId == ChainId.AVALANCHE ? someColumns : columns
           }
           data={tokens}
           defaultSortBy={{ id: 'liquidity', desc: true }}
