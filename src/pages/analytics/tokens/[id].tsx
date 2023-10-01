@@ -79,7 +79,6 @@ function Token() {
 
   useEffect(() => {
     const fetch = async () => {
-      /* @ts-ignore TYPE NEEDS FIXING */
       setTotalSupply(await tokenContract.totalSupply())
       setTokenDecimals(await tokenContract.decimals())
     }
@@ -216,7 +215,7 @@ function Token() {
             <Link href="/analytics/pairs">Pairs</Link>&nbsp;
           </div>
           <div className={`text-xs font-bold text-high-emphesis m-1 text-${getChainColorCode(chainId)}`}>
-            Tokens&nbsp;
+            <Link href="/analytics/tokens">Tokens</Link>&nbsp;
           </div>
         </div>
       </div>

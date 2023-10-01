@@ -1,13 +1,13 @@
 import { CurrencyLogo } from 'components/CurrencyLogo'
 // import LineGraph from 'components/LineGraph'
 import Table, { Column } from 'components/Table'
-import { formatNumber, formatPercent } from 'functions'
+import { formatNumber } from 'functions'
 import { useCurrency } from 'hooks/Tokens'
 import React from 'react'
 // import { useActiveWeb3React } from 'services/web3'
 import LineGraph from 'components/LineGraph'
 
-import ColoredNumber from '../ColoredNumber'
+// import ColoredNumber from '../ColoredNumber'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId, LZ_USDC_ADDRESS, MULTI_AVAX_ADDRESS, MULTI_BNB_ADDRESS, MULTI_DAI_ADDRESS, MULTI_USDC_ADDRESS, MULTI_WBTC_ADDRESS, MULTI_WETH_ADDRESS } from 'sdk'
 
@@ -81,18 +81,17 @@ export default function TokenList({
   enabledColumns = Object.keys(TokenListColumns) as TokenListColumnType[],
   someEnabledColumns = Object.keys(SomeTokenListColumns) as SomeTokenListColumnType[],
 }: TokenListProps): JSX.Element {
+  const { chainId } = useActiveWeb3React()
   
   const columns = React.useMemo<Column[]>(() => enabledColumns.map((col) => TokenListColumns[col]), [enabledColumns])
   
   const someColumns = React.useMemo<Column[]>(() => someEnabledColumns.map((col) => SomeTokenListColumns[col]), [someEnabledColumns])
   
-  const { chainId } = useActiveWeb3React()
   
   // const currency = useCurrency(token?.id)
 
   // for links
-  // const tokenAddress = currency?.isToken ? currency.address : currency?.wrapped.address
-        
+  // const tokenAddress = currency?.isToken ? currency.address : currency?.wrapped.address  
   // const tokenAddress = token?.id.toLowerCase()
   
   return (
@@ -100,7 +99,7 @@ export default function TokenList({
       {tokens && (
         <Table
           columns={
-            chainId == ChainId.FANTOM ? columns : someColumns
+            chainId == ChainId.AVALANCHE ? someColumns : columns
           }
           data={tokens}
           defaultSortBy={{ id: 'liquidity', desc: true }}

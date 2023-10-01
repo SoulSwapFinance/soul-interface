@@ -6,7 +6,17 @@ import { ChainId, SOUL_ADDRESS, USDC_ADDRESS, WNATIVE_ADDRESS, SOUL_NATIVE, DAI_
 // `lpSymbol`: always frontload native
 
 export const InactiveAvalanchePools = [
-
+    {
+    pid: 6,
+    type: 'swap',
+    decimals: 18,
+    token0Symbol: 'WAVAX',
+    token1Symbol: 'BNB',
+    lpSymbol: 'AVAX-BNB',
+    lpAddress: BNB_NATIVE[ChainId.AVALANCHE],
+    token0Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
+    token1Address: BNB_ADDRESS[ChainId.AVALANCHE],
+  },
 ]
 
 export const AvalanchePools = [
@@ -64,17 +74,6 @@ export const AvalanchePools = [
     lpAddress: ETH_NATIVE[ChainId.AVALANCHE],
     token0Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
     token1Address: WETH_ADDRESS[ChainId.AVALANCHE],
-  },
-  {
-    pid: 6,
-    type: 'swap',
-    decimals: 18,
-    token0Symbol: 'WAVAX',
-    token1Symbol: 'BNB',
-    lpSymbol: 'AVAX-BNB',
-    lpAddress: BNB_NATIVE[ChainId.AVALANCHE],
-    token0Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
-    token1Address: BNB_ADDRESS[ChainId.AVALANCHE],
   },
   {
     pid: 7,

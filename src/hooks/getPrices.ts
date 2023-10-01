@@ -25,12 +25,12 @@ import stringify from 'fast-json-stable-stringify'
 import { useActiveWeb3React } from 'services/web3'
 
 
-export const EXCHANGE = {
-  [ChainId.ETHEREUM]: 'soulswapfinance/fantom-swap',
-  [ChainId.FANTOM]: 'soulswapfinance/fantom-swap',
-  [ChainId.AVALANCHE]: 'soulswapfinance/avalanche-swap',
-  [ChainId.BSC]: 'soulswapfinance/fantom-swap',
-}
+// export const EXCHANGE = {
+//   [ChainId.ETHEREUM]: 'soulswapfinance/fantom-swap',
+//   [ChainId.FANTOM]: 'soulswapfinance/fantom-swap',
+//   [ChainId.AVALANCHE]: 'soulswapfinance/avalanche-swap',
+//   [ChainId.BSC]: 'soulswapfinance/fantom-swap',
+// }
 
 // const getExchange = () => {
 //   const { chainId } = useActiveWeb3React()
@@ -39,71 +39,61 @@ export const EXCHANGE = {
 //   return exchange
 // }
 
-export const exchange = async (chainId = ChainId.FANTOM, query, variables = {}) => {
-  // const URL = EXCHANGE_URL()
-  // console.log(URL)
-  // console.log(chainId)
-  let URL
-  chainId == ChainId.AVALANCHE ? URL = 'soulswapfinance/avalanche-swap' : URL = 'soulswapfinance/fantom-swap' ?? 'soulswapfinance/fantom-swap'
-  // console.log('exchange URL: %s', URL)
-  return pager(`https://api.thegraph.com/subgraphs/name/${URL}`, query, variables)
-}
+export const exchange = async (chainId, query, variables = {}) =>
+pager(`https://api.thegraph.com/subgraphs/name/soulswapfinance/${chainId == ChainId.AVALANCHE ? 'avalanche' : 'fantom'}-swap`, query, variables)
 
 export const getPairs = async (chainId, variables = undefined, query = pairsQuery) => {
-  // const { chainId } = useActiveWeb3React()
+  console.log(`getPairs(g): [${chainId}]`)
   const { pairs } = await exchange(chainId, query, variables)
   return pairs
 }
 
 export const getPairDayData = async (chainId, variables) => {
-  // console.log('getTokens')
+  console.log(`getPairDayData(g): [${chainId}]`)
   const { pairDayDatas } = await exchange(chainId, pairDayDatasQuery, variables)
   return pairDayDatas
 }
 
 export const getTokenSubset = async (chainId, variables) => {
-  // console.log('getTokenSubset')
+  console.log(`getTokenSubset(g): [${chainId}]`)
   const { tokens } = await exchange(chainId, tokenSubsetQuery, variables)
   return tokens
 }
 
 export const getTokens = async (chainId, variables) => {
-  // console.log('getTokens')
+  console.log(`getTokens(g): [${chainId}]`)
   const { tokens } = await exchange(chainId, tokensQuery, variables)
   return tokens
 }
 
 // @ts-ignore TYPE NEEDS FIXING
 export const getToken = async (chainId, query = tokenQuery, variables) => {
-  // console.log('getTokens')
+  console.log(`getToken(g): [${chainId}]`)
   const { token } = await exchange(chainId, query, variables)
   return token
 }
 
-export const getPair = async (chainId, query = pairQuery, variables) => {
-  // console.log('getTokens')
-  const { pair } = await exchange(chainId, query, variables)
+export const getPair = async (chainId, variables) => {
+  console.log(`getPair(g): [${chainId}]`)
+  const { pair } = await exchange(chainId, pairQuery, variables)
   return pair
 }
 
-// @ts-ignore TYPE NEEDS FIXING
 export const getTokenDayData = async (chainId, variables) => {
-  // console.log('getTokens')
+  console.log(`getTokenDayData(g): [${chainId}]`)
   const { tokenDayDatas } = await exchange(chainId, tokenDayDatasQuery, variables)
   return tokenDayDatas
 }
 
 export const getTokenPrices = async (chainId, variables) => {
-  console.log('getTokenPrices')
+  console.log(`getTokenPrices(g): [${chainId}]`)
   const { tokens } = await exchange(chainId, tokensQuery, variables)
-  // @ts-ignore TYPE NEEDS FIXING
   return tokens.map((token) => token?.derivedETH)
 }
 
 // √ reports chainId
 export const getTokenPrice = async (chainId, query, variables) => {
-  // console.log('hooks: getTokenPrice')
-  // console.log('chain', chainId)
+  console.log(`getTokenPrice(g): [${chainId}]`)
   const nativePrice = await getNativePrice(chainId)
 
   const { token } = await exchange(chainId, query, variables)
@@ -111,6 +101,7 @@ export const getTokenPrice = async (chainId, query, variables) => {
 }
 
 export const getPairPrice = async (chainId, query, variables) => {
+  console.log(`getPairPrice(g): [${chainId}]`)
   const { pair } = await exchange(chainId, query, variables)
   return pair?.reserveUSD
 }
@@ -125,6 +116,7 @@ export const getPairPrice = async (chainId, query, variables) => {
 // }
 
 export const getNativePrice = async (chainId, variables = undefined) => {
+  console.log(`getNativePrice(g): [${chainId}]`)
   const data = await getBundle(chainId, undefined, variables)
   return data?.bundles[0]?.ethPrice
 }
@@ -155,28 +147,8 @@ export const getSoulPrice = async (variables = {}) => {
   })
 }
 
-export const getEnchantPrice = async (variables = {}) => {
-  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: '0x6a1a8368d607c7a808f7bba4f7aed1d9ebde147a',
-    ...variables,
-  })
-}
-
-export const getSeancePrice = async (variables = {}) => {
-  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: '0x124b06c5ce47de7a6e9efda71a946717130079e6',
-    ...variables,
-  })
-}
-
-export const getFantomPrice = async () => {
-  return getTokenPrice(ChainId.FANTOM, tokenPriceQuery, {
-    id: '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83',
-  })
-}
-
 export function getTokensPrice(chainId, address: string) {
-  // const { chainId } = useActiveWeb3React()
+  console.log(`getTokensPrice(p): [${chainId}]`)
   return getTokenPrice(chainId, tokenPriceQuery, {
     id: address,
   })
@@ -206,30 +178,32 @@ export const getBundle = async (
 }
 
 export const getLiquidityPositions = async (chainId, variables) => {
+  console.log(`getLiquidityPositions(g): [${chainId}]`)
   const { liquidityPositions } = await exchange(chainId, liquidityPositionsQuery, variables)
   return liquidityPositions
 }
 
 // √ works
 export const getDayData = async (chainId, variables = undefined) => {
-  // console.log('getDayData')
-  // console.log('chain', chainId)
+  console.log(`getDayData(g): [${chainId}]`)
   const { dayDatas } = await exchange(chainId, dayDatasQuery, variables)
   return dayDatas
 }
 
 export const getFactory = async (chainId, variables = undefined) => {
+  console.log(`getFactory(g): [${chainId}]`)
   const { factories } = await exchange(chainId, factoryQuery, variables)
   return factories[0]
 }
 
 export const getTransactions = async (chainId, variables = undefined) => {
+  console.log(`getTransactions(g): [${chainId}]`)
   const { swaps } = await exchange(chainId, transactionsQuery, variables)
   return swaps
 }
 
-export const getTokenPairs = async (variables = undefined) => {
-  const { chainId } = useActiveWeb3React()
+export const getTokenPairs = async (chainId, variables = undefined) => {
+  console.log(`getTokenPairs(g): [${chainId}]`)
   const { pairs0, pairs1 } = await exchange(chainId, tokenPairsQuery, variables)
   return pairs0 || pairs1 ? [...(pairs0 ? pairs0 : []), ...(pairs1 ? pairs1 : [])] : undefined
 }
@@ -258,6 +232,7 @@ export function useSoulPrice(swrConfig: SWRConfiguration = undefined) {
 
 export function useTokenPrice(tokenAddress: string, swrConfig: SWRConfiguration = undefined) {
   const { chainId } = useActiveWeb3React()
+  console.log(`useTokenPrice(g): [${chainId}]`)
 
   const { data } = useSWR(['tokenPrice'], () => getTokensPrice(chainId, tokenAddress), swrConfig)
   return data
@@ -284,32 +259,9 @@ export function usePairPrice(chainId, pairAddress: string, swrConfig: SWRConfigu
   return data
 }
 
-export function useSeancePrice(swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR(['seancePrice'], () => getSeancePrice(), swrConfig)
-  return data
-}
-
-export function useEnchantPrice(swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR(['enchantPrice'], () => getEnchantPrice(), swrConfig)
-  return data
-}
-
-export function useFantomPrice(swrConfig: SWRConfiguration = undefined) {
-  const { data } = useSWR(['fantomPrice'], () => getFantomPrice(), swrConfig)
-  return data
-}
-
 // PAIR PRICES //
 
 // export function usePairPrice(swrConfig: SWRConfiguration = undefined) {
 //   const { data } = useSWR(['pairPrice'], () => getPairsPrice(), swrConfig)
-//   return data
-// }
-
-// @ts-ignore TYPE NEEDS FIXING
-// export function useSeancePrice(swrConfig: SWRConfiguration = undefined) {
-//   const { chainId } = useActiveWeb3React()
-//   const { data } = useSWR(chainId && chainId === ChainId.FANTOM 
-//     ? ['seancePrice'] : null, () => getSeancePrice(), swrConfig)
 //   return data
 // }

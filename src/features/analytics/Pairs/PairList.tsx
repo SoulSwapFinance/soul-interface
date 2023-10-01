@@ -90,7 +90,7 @@ const allColumns = [
   },
   {
     Header: 'APY',
-    accessor: (row) => <div className="text-high-emphesis">{getApy(row.volume1w, row.liquidity)}</div>,
+    accessor: (row) => <div className="text-high-emphesis">{getApy(row?.volume1w, row?.liquidity)}</div>,
     align: 'right',
     sortType: (a, b) => a.original.volume1w / a.original.liquidity - b.original.volume1w / b.original.liquidity
   },
@@ -98,8 +98,8 @@ const allColumns = [
     Header: 'Volume',
     accessor: (row) => (
       <div>
-        <div className="font-medium text-high-emphesis">{formatNumber(row.volume1d, true, false)}</div>
-        <div className="font-normal text-primary">{formatNumber(row.volume1w, true, false)}</div>
+        <div className="font-medium text-high-emphesis">{formatNumber(row?.volume1d, true, false)}</div>
+        <div className="font-normal text-primary">{formatNumber(row?.volume1w, true, false)}</div>
       </div>
     ),
     align: 'right',
@@ -129,16 +129,12 @@ const someColumns = [
     Cell: (pairs) => formatNumberScale(pairs.value, true),
     align: 'right',
   },
-  // {
-  //   Header: 'Volume',
-  //   accessor: (row) => (
-  //     <div>
-  //       <div className="font-medium text-high-emphesis">{formatNumber(row.volume1d, true, false)}</div>
-  //       <div className="font-normal text-primary">{formatNumber(row.volume1w, true, false)}</div>
-  //     </div>
-  //   ),
-  //   align: 'right',
-  // },
+  {
+    Header: 'Volume',
+    accessor: 'volume',
+    Cell: (pairs) => formatNumberScale(pairs?.value, true),
+    align: 'right',
+  },
 ]
 
 const gainersColumns = [
@@ -210,7 +206,7 @@ export default function PairList({ pairs, type }: PairListProps): JSX.Element {
   const defaultSortBy = React.useMemo(() => {
     switch (type) {
       case 'all':
-        return { id: 'liquidity', desc: true }
+        return { id: 'liquidity', desc: true, chainId: chainId }
       case 'gainers':
         return { id: 'liquidity', desc: true }
       case 'losers':
@@ -221,7 +217,7 @@ export default function PairList({ pairs, type }: PairListProps): JSX.Element {
   const columns = React.useMemo(() => {
     switch (type) {
       case 'all':
-        return chainId == ChainId.FANTOM ? allColumns : someColumns
+        return chainId == ChainId.AVALANCHE ? someColumns : allColumns
       case 'gainers':
         return gainersColumns
       case 'losers':
