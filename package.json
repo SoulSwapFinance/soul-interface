@@ -142,7 +142,7 @@
     "@0x/utils": "^7.0.0",
     "@0xsquid/sdk": "^1.7.4",
     "@amplitude/analytics-browser": "^1.5.5",
-    "@apollo/client": "3.5.7",
+    "@apollo/client": "3.8.6",
     "@babel/core": "^7.0.0",
     "@babel/preset-react": "7.16.7",
     "@chakra-ui/icons": "2.0.12",
