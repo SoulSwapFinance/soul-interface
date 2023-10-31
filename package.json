@@ -28,7 +28,6 @@
     "*.{md,css}": "prettier --write"
   },
   "devDependencies": {
-    "@binance-chain/bsc-connector": "^1.0.0",
     "@ethereumjs/common": "^2.4.0",
     "@ethereumjs/tx": "^3.3.0",
     "@ethersproject/abi": "^5.4.0",

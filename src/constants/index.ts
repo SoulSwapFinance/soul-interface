@@ -1,5 +1,5 @@
 import { ChainId, JSBI, Percent, USD } from '../sdk'
-import { binance, clover, injected, walletconnect } from '../connectors'
+import { clover, injected, walletconnect } from '../connectors'
 import { v4 as uuid } from 'uuid'
 
 import { AbstractConnector } from '@web3-react/abstract-connector'
