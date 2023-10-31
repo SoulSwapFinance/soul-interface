@@ -13,7 +13,7 @@ import { Feature } from 'enums'
 
 export const FarmList = () => {
   const { chainId } = useActiveWeb3React()
-  const retiredEnabled = [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? true : false
+  const retiredEnabled = [ChainId.FANTOM].includes(chainId) ? true : false
   // const SummonerContract = useSummonerContract()
   const ftmList = FantomPools.map((farm) => (
     <ActiveRow
