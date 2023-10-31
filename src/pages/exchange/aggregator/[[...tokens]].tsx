@@ -382,8 +382,8 @@ const Aggregator = ({ }) => {
 				<CustomBanner
 					external={true}
 					chains={[ChainId.FANTOM, ChainId.AVALANCHE]}
-					link={'https://docs.soulswap.finance/docs/user-guides/our-utility/ios-mobile-premium'}
-					text={'Our (Beta) Mobile App (iOS) ↗'}
+					link={'https://links.soulswap.finance'}
+					text={'View Our Ecosystem ↗'}
 					textColor={'white'}
 					color={'ftmBlue'}
 					className={`animate-pulse border-4 border-dark-800 rounded-2xl`}
