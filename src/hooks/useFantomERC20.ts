@@ -1,17 +1,13 @@
-import { MaxUint256 } from "@ethersproject/constants";
-import { send } from "utils/transactions";
-import { loadERC20Contract } from "utils/wallet";
-import { useActiveWeb3React } from "services/web3";
-import { getSigner } from "sdk";
-import { useAppDispatch } from "state/hooks";
-// import { useUserTokenInfo } from "./useAPI";
-// import { BigNumber } from "@ethersproject/bignumber";
+import { MaxUint256 } from "@ethersproject/constants"
+import { send } from "utils/transactions"
+import { loadERC20Contract } from "utils/wallet"
+import { useActiveWeb3React } from "services/web3"
+import { getSigner } from "sdk"
+import { useAppDispatch } from "state/hooks"
 
 const useFantomERC20 = () => {
   const dispatch = useAppDispatch()
   const { account, chainId, library } = useActiveWeb3React()
-  // const tokenBalance = useUserTokenInfo(account, tokenAddress).userTokenInfo.balance
-  // const tokenDecimals = useUserTokenInfo(account, tokenAddress).userTokenInfo.decimals
   const provider = library.provider
   const signer = library.getSigner()
 

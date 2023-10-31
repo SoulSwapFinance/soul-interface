@@ -1,4 +1,3 @@
-import { BscConnector } from '@binance-chain/bsc-connector'
 import { ChainId } from 'sdk'
 import { FortmaticConnector } from 'entities/connectors/FortmaticConnector'
 import { InjectedConnector } from '@web3-react/injected-connector'
@@ -60,14 +59,13 @@ const supportedChainIds = [
   1285, // moonriver
 ]
 
-
 export const injected = new InjectedConnector({
   supportedChainIds,
 })
 
 // mainnet only
 export const walletconnect = new WalletConnectConnector({
-  rpc: RPC,
+  rpc: RPC[ChainId.FANTOM],
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   supportedChainIds,
@@ -98,8 +96,5 @@ export const walletlink = new WalletLinkConnector({
 export const torus = new TorusConnector({
   chainId: 1,
 })
-
-// binance only
-export const binance = new BscConnector({ supportedChainIds: [56] })
 
 export const clover = new CloverConnector({ supportedChainIds: [1, 250] })

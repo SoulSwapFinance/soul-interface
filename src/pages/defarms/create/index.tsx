@@ -45,9 +45,9 @@ const CreateFarm = () => {
   const [rewardDays, setRewardDays] = useState(30)
   const [durationSet, setDuration] = useState(false)
   // const [campaignId, setCampaignId] = useState(0)
-  const [depositCalculated, setDeposit] = useState(false)
+  // const [depositCalculated, setDeposit] = useState(false)
   // const [sacrifice, setSacrifice] = useState(0)
-  const [totalReward, setTotalReward] = useState(0)
+  // const [totalReward, setTotalReward] = useState(0)
 
   const [approved, setApproved] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false)

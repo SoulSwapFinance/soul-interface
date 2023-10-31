@@ -498,7 +498,9 @@ const Exchange = () => {
               <div className={`my-12`} />
               {/* <div className={`my-2 border-2 border-[${getChainColor(chainId ?? ChainId.FANTOM)}]`} /> */}
               {/* {useSwap && */}
-              <SwapAssetPanel
+              
+              { chainId &&
+                <SwapAssetPanel
                 spendFromWallet={true}
                 chainId={chainId ?? ChainId.FANTOM}
                 header={(props) => (
@@ -516,10 +518,11 @@ const Exchange = () => {
                 onChange={handleTypeInput}
                 onSelect={handleInputSelect}
               />
+                }
               {/* } */}
             </>
             {/* } */}
-            {/* {useSwap && */}
+            { chainId && // useSwap &&
             <div className={`flex -mt-4 -mb-4 z-0 justify-center`}>
               <Button
                 size={'xs'}
@@ -538,9 +541,10 @@ const Exchange = () => {
                 />
               </Button>
             </div>
-            {/* } */}
+                }
             {/* TO ASSET PANEL */}
             {/* {useSwap && */}
+            { chainId &&
             <SwapAssetPanel
               spendFromWallet={true}
               chainId={chainId ?? ChainId.FANTOM}
@@ -559,6 +563,7 @@ const Exchange = () => {
               priceImpact={priceImpact}
               priceImpactCss={priceImpactCss}
             />
+            }
             {/* } */}
             {Boolean(trade) && // useSwap &&
               (
@@ -616,7 +621,7 @@ const Exchange = () => {
                         {approvalState !== ApprovalState.APPROVED &&
                           (
                             <Button
-                              color={`${getChainColorCode(chainId ?? ChainId.FANTOM)}`}
+                              color={`gradientPurple`}
                               loading={approvalState === ApprovalState.PENDING}
                               onClick={handleApprove}
                               disabled={approvalState !== ApprovalState.NOT_APPROVED || approvalSubmitted}
@@ -630,7 +635,7 @@ const Exchange = () => {
                           &&
                           (
                             <Button
-                              color={isValid && priceImpactSeverity > 2 ? 'red' : `${getChainColorCode(chainId ?? ChainId.FANTOM)}`
+                              color={isValid && priceImpactSeverity > 2 ? 'red' : `gradientPurple`
                               }
                               onClick={() => {
                                 setSwapState({
@@ -660,7 +665,7 @@ const Exchange = () => {
                     ) : (
                       // useSwap &&
                       <Button
-                        color={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'red' : `${getChainColorCode(chainId ?? ChainId.FANTOM)}`}
+                        color={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'red' : `gradientPurple`}
                         onClick={() => {
                           setSwapState({
                             tradeToConfirm: trade,
@@ -686,7 +691,7 @@ const Exchange = () => {
               // useSwap && 
               priceImpactSeverity >= 4 && isValid &&
               <Button
-                color={`${getChainColorCode(chainId ?? ChainId.FANTOM)}`}
+                color={`gradientPurple`}
                 onClick={() => handleAggregatorSwap(currencies[Field.INPUT], currencies[Field.OUTPUT])}
                 id="use-aggregator-button"
                 // disabled={}
@@ -696,7 +701,7 @@ const Exchange = () => {
               </Button>
             }
             {swapIsUnsupported ? <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} show={false} /> : null}
-            <div className={classNames(featureEnabled(Feature.AGGREGATE, chainId ?? ChainId.FANTOM) ? "m-1 flex justify-between" : "hidden")}>
+            <div className={classNames("m-1 flex justify-between")}>
               <div className={classNames(
                 `flex flex-cols-2 gap-3 text-white justify-end`
               )}>
@@ -704,12 +709,10 @@ const Exchange = () => {
               </div>
             </div>
             {/* <div className={`flex flex-cols-${showChart ? `hidden` : `1`}`}> */}
-            {account && chainId &&
+            {account &&
               // useSwap && 
-              [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId ?? ChainId.FANTOM) &&
               <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded-lg bg-light-glass`}>
-                {featureEnabled(Feature.ANALYTICS, chainId ?? ChainId.FANTOM) &&
-                  !isWrapped &&
+                {!isWrapped &&
                   <TokenChart
                     outputCurrency={outputCurrency}
                   />
@@ -719,7 +722,7 @@ const Exchange = () => {
             }
           </div>
         {
-          showConnect &&
+          showConnect && chainId &&
           <HeadlessUIModal.Controlled
             chainId={chainId ?? ChainId.FANTOM}
             isOpen={showConnect}
