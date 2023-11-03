@@ -364,11 +364,22 @@ export const BTC_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
 }
 
 export const AVAX_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
+  [ChainId.ETHEREUM]: '0xff3eeb22b5e3de6e705b44749c2559d704923fd7',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '',
   [ChainId.AVALANCHE]: '0x0a77230d17318075983913bc2145db16c7366156',
+  [ChainId.MATIC]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
+
+export const LINK_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '0x2c1d072e956AFFC0D435Cb7AC38EF18d24d9127c',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '',
+  [ChainId.AVALANCHE]: '0x49ccd9ca821efeab2b98c60dc60f518e765ede9a',
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
@@ -380,6 +391,17 @@ export const ETH_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.BSC]: '',
   [ChainId.FANTOM]: '0x11ddd3d147e5b83d01cee7070027092397d63658',
   [ChainId.AVALANCHE]: '0x976b3d034e162d8bd72d6b9c989d545b839003b0',
+  [ChainId.MATIC]: '',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
+
+export const FTM_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '0x2de7e4a9488488e0058b95854cc2f7955b35dc9b',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xf4766552d15ae4d256ad41b6cf2933482b0680dc',
+  [ChainId.AVALANCHE]: '',
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',

@@ -23,6 +23,7 @@ import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 import Head from 'next/head'
 import { getChainInfo } from 'constants/chains'
 import { getInputList, getOutputList } from 'constants/crosschain/getTokenList'
+import { formatNumber } from 'functions'
 
 // // addresses and IDs
 // const avalancheId = 43114;
@@ -572,8 +573,8 @@ const Crosschain = ({ }) => {
 
         const { route } = await squid.getRoute(params)
 
-        console.log('inputAmount: %s', route.estimate.fromAmount)
-        console.log('outputAmount: %s', route.estimate.toAmount)
+        // console.log('inputAmount: %s', route.estimate.fromAmount)
+        // console.log('outputAmount: %s', route.estimate.toAmount)
 
         await setOutputAmount(
             new BigNumber(route.estimate?.toAmount.toString() ?? '1')
@@ -604,8 +605,8 @@ const Crosschain = ({ }) => {
 
         const { route } = await squid.getRoute(params)
 
-        console.log('inputAmount: %s', route.estimate.fromAmount)
-        console.log('outputAmount: %s', route.estimate.toAmount)
+        // console.log('inputAmount: %s', route.estimate.fromAmount)
+        // console.log('outputAmount: %s', route.estimate.toAmount)
 
         await setOutputAmount(
             new BigNumber(route.estimate?.toAmount.toString() ?? '1')
@@ -638,12 +639,9 @@ const Crosschain = ({ }) => {
     const handleSetFromAsset = useCallback((token, amount) => {
         setFromAsset(token)
         setFromToken(
-            token.address == NATIVE_ADDRESS ?
-                NATIVE[fromChain.chainId] :
-                new Token(
-                    fromChain.chainId == 43114
-                        ? ChainId.AVALANCHE
-                        : ChainId.FANTOM,
+            token.address == NATIVE_ADDRESS ? NATIVE[fromChain?.chainId]
+             : new Token(
+                    CHAIN_TO_CHAIN_ID[fromChain?.chainId],
                     token.address,
                     token.decimals,
                     token.symbol,
@@ -658,9 +656,7 @@ const Crosschain = ({ }) => {
             token.address == NATIVE_ADDRESS ?
                 NATIVE[toChain.chainId] :
                 new Token(
-                    toChain.chainId == 43114
-                        ? ChainId.AVALANCHE
-                        : ChainId.FANTOM,
+                    CHAIN_TO_CHAIN_ID[toChain.chainId],
                     token.address,
                     token.decimals,
                     token.symbol,
@@ -904,8 +900,8 @@ const Crosschain = ({ }) => {
 
     const handleTypeInput = useCallback(
         async (value: string) => {
-            await setFromAmount(value)
-            await getRoute(value)
+            await setFromAmount(value ?? '0')
+            await getRoute(value ?? '0')
         },
         [setFromAmount, getRoute]
     )
@@ -946,7 +942,7 @@ const Crosschain = ({ }) => {
                         {/* <InputAmount isFrom={true} /> */}
                     </div>
                     <div
-                        className={`border-4 p-2 border-[${buttonColor(fromChain.chainId)}] rounded-xl`}
+                        className={!account ? 'hidden' : `border-4 p-2 border-[${buttonColor(fromChain.chainId)}] rounded-xl`}
                     >
                         <CrossChainAssetPanel
                             spendFromWallet={true}
@@ -989,6 +985,26 @@ const Crosschain = ({ }) => {
                         // onSelect={handleOutputSelect}
                         />
                     </div>
+                    <div
+                        className={`flex flex-cols gap-8 justify-center sm:gap-18 mb-4 w-full border-2`}    
+                    >
+                        <div>
+                        {`${inputAmount ?? 0} ${fromAsset.symbol == 'Ethereum' ? 'ETH' : fromAsset.symbol}`}
+                        </div>
+                        <div>
+                        {`~$${route?.estimate.fromAmountUSD?.toString() ?? 0}`}
+                        </div>
+                    </div>
+                    <div
+                        className={`flex flex-cols gap-8 justify-center sm:gap-18 mb-4 w-full border-2`}    
+                    >
+                        <div>
+                        {`${Number(outputAmount).toFixed(2) ?? 0} ${toAsset.symbol}`}
+                        </div>
+                        <div>
+                        {`~$${route?.estimate.toAmountUSD?.toString() ?? 0}`}
+                        </div>
+                    </div>
                 </div>
                 {/* <div
                     className={`flex flex-col gap-3 mt-8 mb-4 w-full`}
@@ -1006,14 +1022,15 @@ const Crosschain = ({ }) => {
                     className={`flex flex-col mb-4 p-1 w-full`}
                 >
                     <Button variant="outlined"
-                        color={'blue'}
+                        color={!account ? 'avaxRed' : 'ftmBlue'}
                         onClick={() => handleSwap(fromAmount)}
                         className={'mt-8'}
-                    // disabled={insufficientFunds}
+                        disabled={!account}
                     >
                         <Typography size={14} className="font-bold text-white">
                             {/* {insufficientFunds ? 'Insufficient Funds' : `Swap for ${toAsset.symbol} on ${getChainInfo(toChain, "NAME")}`} */}
-                            {`Swap for ${toAsset.symbol} on ${getChainInfo(Number(toChain.chainId), "NAME")}`}
+                            {!account ? `Connect Wallet` 
+                                : `Swap for ${toAsset.symbol} on ${getChainInfo(Number(toChain.chainId), "NAME")}`}
                         </Typography>
                     </Button>
                 </div>
