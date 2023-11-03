@@ -12,9 +12,10 @@ import { useActiveWeb3React } from "services/web3";
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
 import { RouteData, Squid, TokenData } from "@0xsquid/sdk";
 import { Button } from "components/Button";
-import CrossChainAssetPanel from 'features/trident/swap/CrossChainAssetPanel'
+// import CrossChainAssetPanel from 'features/trident/swap/CrossChainAssetPanel'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
+import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 // import useGetPrice from 'features/aggregator/queries/useGetPrice'
 // import { useRouter } from 'next/router'
 // import { getChainInfo } from 'constants/chains'
@@ -213,9 +214,9 @@ const Crosschain = ({ }) => {
     const avaxTokens: TokenData[] = [
         {
             "chainId": 43114,
-            "address": AXL_USDC_ADDRESS[43114],
-            "name": 'Axelar USDC',
-            "symbol": 'axlUSDC',
+            "address": USDC_ADDRESS[43114],
+            "name": 'USD Coin',
+            "symbol": 'USDC',
             "decimals": 6,
             "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/usdc.svg",
             "coingeckoId": 'usdc',
@@ -261,8 +262,17 @@ const Crosschain = ({ }) => {
         return chainId == ChainId.AVALANCHE ? avaxTokens : ftmTokens ?? ftmTokens
     }
 
-    const [fromChain, setFromChain] = useState(chains[0])
-    const [toChain, setToChain] = useState(chains[1])
+    const chainIndex = (chainId) => {
+        return chainId == ChainId.AVALANCHE ? 1 :
+            chainId == ChainId.ETHEREUM ? 2 : 0
+    }
+
+    const [fromChain, setFromChain] = useState([ChainId.AVALANCHE, ChainId.FANTOM, ChainId.ETHEREUM].includes(chainId) ? chains[chainIndex(chainId)] : chains[0])
+    const [toChain, setToChain] = useState(
+        [ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId)
+            ? chains[0]
+            : chains[1]
+    )
     const [showToChains, setShowToChains] = useState(false)
     const [showFromChains, setShowFromChains] = useState(false)
 
@@ -284,7 +294,9 @@ const Crosschain = ({ }) => {
     const [showToTokens, setShowToTokens] = useState(false)
 
     const buttonColor = (chainId) => {
-        return chainId == 43114 ? 'avaxRed' : 'ftmBlue'
+        return chainId == 43114 ? '#E84142'  // avaxRed
+            : chainId == 1 ? '#627EEA' // ethBlue
+                : '#1969FF' // ftmBlue
     }
 
     // const config = {
@@ -387,7 +399,7 @@ const Crosschain = ({ }) => {
 
     // TOGGLES //
     const toggleShowChains = (isFrom) => {
-        isFrom ? setShowFromChains(!showFromChains) : setShowToChains(!showToChains)
+        !isFrom && setShowToChains(!showToChains)
     }
 
     const toggleShowTokens = (isFrom) => {
@@ -398,6 +410,7 @@ const Crosschain = ({ }) => {
     const ChainSelector = ({ isFrom }) => {
         return (
             <div>
+
                 {(!showFromChains || !showToChains) &&
                     // <Button
                     //     onClick={() => toggleShowChains(isFrom)}
@@ -405,8 +418,8 @@ const Crosschain = ({ }) => {
                     //     color={buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}
                     // >
                     <div
-                        className={`flex justify-center border-4 border-${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)} rounded-xl
-                            bg-dark-900 hover:bg-dark-800
+                        className={`flex justify-center border-4 border-[${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
+                            ${isFrom ? `bg-dark-900` : `bg-dark-900 hover:bg-dark-800`}
                         `}
                         onClick={() => toggleShowChains(isFrom)}
                         style={{
@@ -423,12 +436,19 @@ const Crosschain = ({ }) => {
                     </div>
                     // </Button>
                 }
-                {showFromChains && isFrom &&
-                    <div>
+                {/* {showFromChains && isFrom &&
+                     <HeadlessUIModal.Controlled
+                        // isCustom={true}
+                        chainId={chainId}
+                        isOpen={showFromChains}
+                        onDismiss={() => toggleShowChains(isFrom)}
+                    >
                         {chains.map((chain) => {
                             return (
                                 <div
-                                    className={'grid grid-cols-2 mt-2 mb-2 justify-center items-center align-center gap-24'}
+                                    className={`grid grid-cols-2 mt-2 mb-2 justify-center items-center align-center gap-24
+                                    bg-dark-900 hover:bg-dark-800 p-3 rounded-xl
+                                    `}
                                 >
                                     <div
                                         onClick={() => {
@@ -437,8 +457,8 @@ const Crosschain = ({ }) => {
                                         }}
                                     >
                                         <Image
-                                            height={24}
-                                            width={24}
+                                            height={48}
+                                            width={48}
                                             src={chain.logoURI}
                                             alt={'token logo'}
                                         />
@@ -455,32 +475,30 @@ const Crosschain = ({ }) => {
                             )
                         }
                         )}
-                    </div>
-                }
+                    </HeadlessUIModal.Controlled>
+                } */}
                 {showToChains && !isFrom &&
-                    <div>
+                    <HeadlessUIModal.Controlled
+                        // isCustom={true}
+                        chainId={chainId}
+                        isOpen={showToChains}
+                        onDismiss={() => toggleShowChains(isFrom)}
+                    >
                         {chains.map((chain) => {
                             return (
                                 <div
-                                    className={'grid grid-cols-2 mt-2 mb-2 justify-center items-center align-center gap-24'}
+                                    className={`flex mt-2 mx-24 mb-2 justify-center items-center align-center gap-24
+                                    bg-dark-900 hover:bg-dark-800 p-3 rounded-xl border-2 border-[${buttonColor(chain.chainId)}]
+                                    ${chain.chainId == fromChain.chainId ? 'hidden' : 'visible'}
+                                    `}
+                                    onClick={() => {
+                                        setToChain(chain)
+                                        toggleShowChains(isFrom)
+                                    }}
                                 >
-                                    <div
-                                        onClick={() => {
-                                            setToChain(chain)
-                                            toggleShowChains(isFrom)
-                                        }}
-                                    >
-                                        <Image
-                                            height={24}
-                                            width={24}
-                                            src={chain.logoURI}
-                                            alt={'chain logo'}
-                                        />
-                                    </div>
                                     <div>
                                         <Typography
-                                            size={12}
-                                            className={'font-bold text-white'}
+                                            className={'font-bold text-white text-xl'}
                                         >
                                             {`${chain.name}`}
                                         </Typography>
@@ -489,7 +507,7 @@ const Crosschain = ({ }) => {
                             )
                         }
                         )}
-                    </div>
+                    </HeadlessUIModal.Controlled>
                 }
             </div>
         )
@@ -512,7 +530,7 @@ const Crosschain = ({ }) => {
                     //     // color={buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}
                     // >
                     <div
-                        className={`ml-2 flex flex-cols-2 gap-6 sm:gap-24 border-4 border-${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)} rounded-xl
+                        className={`ml-2 flex flex-cols-2 gap-6 sm:gap-24 border-4 border-[${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
                             bg-dark-900 hover:bg-dark-800
                         `}
                         style={{
