@@ -131,7 +131,9 @@ const NetworkModal: FC<{ switchNetwork: (targetChain: number) => void }> = ({ sw
       chainId={chainId}
       onDismiss={toggleNetworkModal}>
       <div className="flex flex-col gap-4">
-        <HeadlessUiModal.Header header={`Select Network`} onClose={toggleNetworkModal} />
+        <HeadlessUiModal.Header 
+          header={`Select Network`} onClose={toggleNetworkModal} 
+        />
         <div className="grid grid-flow-row-dense grid-cols-1 gap-4 overflow-y-auto">
           {[
             ChainId.ETHEREUM,
@@ -152,11 +154,11 @@ const NetworkModal: FC<{ switchNetwork: (targetChain: number) => void }> = ({ sw
                     <Image
                       src={NETWORK_ICON[key]}
                       alt="Switch Network"
-                      className="h-[36px] w-[36px]"
-                      width={36}
-                      height={36}
+                      className="max-h-[32px] max-w-[32px]"
+                      width={32}
+                      height={32}
                     />
-                    <Typography weight={700} className="text-high-emphesis">
+                    <Typography weight={700} className="text-high-emphesis text-lg">
                       {NETWORK_LABEL[key]}
                     </Typography>
                   </div>
@@ -167,17 +169,17 @@ const NetworkModal: FC<{ switchNetwork: (targetChain: number) => void }> = ({ sw
                   key={i}
                   onClick={() => switchNetwork(key)}
                   className={classNames(
-                    `bg-[rgba(0,0,0,0.2)]  focus:outline-none flex items-center gap-4 w-full px-4 py-3 rounded border hover:border-${getChainColorCode(key)}`
+                    `bg-[rgba(0,0,0,0.2)] focus:outline-none flex items-center gap-4 w-full px-4 py-3 rounded border hover:border-${getChainColorCode(key)}`
                   )}
                 >
                   <Image
                     src={NETWORK_ICON[key]}
                     alt="Switch Network"
-                    className={`rounded`}
+                    className={`max-h-[32px] max-w-[32px]`}
                     width={32}
                     height={32}
                   />
-                  <Typography weight={700} className={`text-high-emphesis`}>
+                  <Typography weight={700} className={`text-high-emphesis text-lg`}>
                     {NETWORK_LABEL[key]}
                   </Typography>
                 </button>
