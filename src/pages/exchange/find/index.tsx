@@ -20,7 +20,7 @@ import { usePairAdder } from '../../../state/user/hooks'
 import { useTokenBalance } from '../../../state/wallet/hooks'
 // import Image from 'next/image'
 import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
-import SwapDropdown from 'features/swap/SwapDropdown'
+// import SwapDropdown from 'features/swap/SwapDropdown'
 import { SwapLayoutCard } from 'layouts/SwapLayout'
 import { useRouter } from 'next/router'
 import { getChainColor, getChainColorCode } from 'constants/chains'
@@ -74,35 +74,32 @@ export default function PoolFinder() {
 
   const handleLink = useCallback(
     (url: string) => {
-        router.push(url)
-      },[]
+      router.push(url)
+    }, []
   )
 
   const prerequisiteMessage = (
-    <div className="p-5 text-center rounded bg-dark-800">{`Select Token to Import Position`}</div>
+    <div className="p-5 text-center rounded bg-dark-800 border-2 border-ftmBlue">{`Select Token to Import Position`}</div>
   )
 
   return (
     <Container maxWidth="2xl" className="space-y-6 mt-4">
       <Head>
         <title>Find | SoulSwap</title>
-          {/* <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." /> */}
-          <meta name="description" content="Find and import your liquidity pools on SoulSwap." />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
-          <meta name="twitter:site" content="@SoulSwapFinance" />
-          <meta id="og:image" property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
-          <meta id="og:image:type" property="og:image:type" content="image/png" />
-          <meta id="og:image:type" property="og:image:type" content="630" />
-          <meta id="og:image:width" property="og:image:width" content="1200" />
-          <meta id="og:description" property="og:description" content="Find and import your liquidity pools on SoulSwap." />
+        {/* <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." /> */}
+        <meta name="description" content="Find and import your liquidity pools on SoulSwap." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+        <meta name="twitter:site" content="@SoulSwapFinance" />
+        <meta id="og:image" property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+        <meta id="og:image:type" property="og:image:type" content="image/png" />
+        <meta id="og:image:type" property="og:image:type" content="630" />
+        <meta id="og:image:width" property="og:image:width" content="1200" />
+        <meta id="og:description" property="og:description" content="Find and import your liquidity pools on SoulSwap." />
       </Head>
       <DoubleGlowShadowV2 opacity="0.6">
         <div className="p-0 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}>
           <SwapLayoutCard>
-          <div className={`my-2 border-2 border-[${getChainColor(chainId)}]`}/>
-            <SwapDropdown />
-          <div className={`my-2 border-2 border-[${getChainColor(chainId)}]`}/>
             <AutoColumn gap={'md'}>
               <CurrencySelectPanel
                 currency={currency0}
@@ -156,22 +153,40 @@ export default function PoolFinder() {
                   <MinimalPositionCard chainId={chainId} pair={pair} border="1px solid #CED0D9" />
                 ) : (
                   <div className="p-5 rounded bg-dark-800">
-                    <AutoColumn gap="sm" justify="center">
+                    <AutoColumn gap="sm" justify="center"
+                      className={'p-5 rounded bg-dark-800 border-2 border-green'}
+                    >
                       {`You don’t have liquidity in this pool yet`}
-                      <Link href={`/exchange/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
-                        <a className="text-center text-purple text-opacity-80 hover:text-opacity-100">
-                          {`Add Liquidity`}
-                        </a>
+                      <Link
+                        legacyBehavior={true}
+                        href={`/exchange/add/${currencyId(currency0)}/${currencyId(currency1)}`}
+                      >
+                        <div
+                          className={'p-2 w-full rounded bg-dark-900 hover:bg-dark-800 border-2 border-green'}
+                        >
+                          <Typography className="text-center text-green text-opacity-80 hover:text-opacity-100">
+                            {`Add Liquidity`}
+                          </Typography>
+                        </div>
                       </Link>
                     </AutoColumn>
                   </div>
                 )
               ) : validPairNoLiquidity ? (
                 <div className="p-5 rounded bg-dark-800">
-                  <AutoColumn gap="sm" justify="center">
+                  <AutoColumn gap="sm" justify="center"
+                    className={'p-5 rounded bg-dark-800 border-2 border-green'}
+                  >
                     {`No pool found`}
-                    <Link href={`/exchange/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
-                      <a className="text-center">{`Create Pool`}</a>
+                    <Link
+                      legacyBehavior={true}
+                      href={`/exchange/add/${currencyId(currency0)}/${currencyId(currency1)}`}
+                    >
+                      <div
+                        className={'p-2 w-full rounded bg-dark-900 hover:bg-dark-800 border-2 border-green'}
+                      >
+                        <Typography className="text-center text-green">{`Create Pool`}</Typography>
+                      </div>
                     </Link>
                   </AutoColumn>
                 </div>
@@ -184,16 +199,16 @@ export default function PoolFinder() {
               ) : null
             ) : !account ? (
               // <Web3Connect className="w-full" size="lg" color="blue" />
-              <Button 
-              size="lg" color="avaxRed" className="w-full" 
-              disabled
-            >
-              { `Connect Wallet` }
-            </Button>
-            ) : 
-            (
-              prerequisiteMessage
-            )}
+              <Button
+                size="lg" color="avaxRed" className="w-full"
+                disabled
+              >
+                {`Connect Wallet`}
+              </Button>
+            ) :
+              (
+                prerequisiteMessage
+              )}
           </SwapLayoutCard>
         </div>
       </DoubleGlowShadowV2>

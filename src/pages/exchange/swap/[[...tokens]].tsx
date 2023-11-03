@@ -504,7 +504,7 @@ const Exchange = () => {
               external={true}
               chains={[ChainId.FANTOM, ChainId.AVALANCHE]}
               link={'https://links.soulswap.finance'}
-              text={'View Our Ecosystem ↗'}
+              text={'View Ecosystem ↗'}
               textColor={'white'}
               color={'ftmBlue'}
               className={`animate-pulse border-4 border-dark-800 rounded-2xl`}

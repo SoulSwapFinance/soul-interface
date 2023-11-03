@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js'
 // import { getAllChains, swap } from 'features/aggregator/router'
 import { ChainId, Currency, WETH, USDC, USDC_ADDRESS, WBTC, WNATIVE, WNATIVE_ADDRESS, AXL_USDC_ADDRESS, Token, NATIVE, AXL_WBTC_ADDRESS, MPX_ADDRESS, MIM_ADDRESS, SPELL_ADDRESS, CRV_ADDRESS, EQUAL_ADDRESS, WETH_ADDRESS, LINK_ADDRESS, BNB_ADDRESS } from 'sdk'
 import { ArrowDownIcon } from '@heroicons/react/24/solid'
-import SwapDropdown from 'features/swap/SwapDropdown'
+// import SwapDropdown from 'features/swap/SwapDropdown'
 // import { NextSeo } from 'next-seo'
 import Typography from 'components/Typography'
 import Image from 'next/image'
@@ -24,6 +24,8 @@ import Head from 'next/head'
 import { getChainInfo } from 'constants/chains'
 import { getInputList, getOutputList } from 'constants/crosschain/getTokenList'
 import { formatNumber } from 'functions'
+import { CustomBanner } from 'components/Banner'
+import LimitHeader from 'features/limit/LimitHeader'
 
 // // addresses and IDs
 // const avalancheId = 43114;
@@ -687,7 +689,7 @@ const Crosschain = ({ }) => {
         return (
             <div>
                     <div
-                        className={`flex justify-center bg-dark-900 mb-4 border-4 border-[${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
+                        className={`flex justify-center bg-dark-900 mb-4 border-2 border-[${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
                             ${isFrom ? `` : `hover:bg-dark-800`}
                         `}
                         onClick={() => toggleShowChains(isFrom)}
@@ -747,7 +749,7 @@ const Crosschain = ({ }) => {
             <div>
                 {(!showFromTokens || !showToTokens) &&
                     <div
-                        className={`ml-2 flex flex-cols-2 gap-8 sm:gap-24 border-4 border-[${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
+                        className={`ml-2 flex flex-cols-2 gap-8 sm:gap-24 border-2 border-[${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
                             bg-dark-900 hover:bg-dark-800 
                         `}
                         style={{
@@ -935,18 +937,32 @@ const Crosschain = ({ }) => {
                 <meta id="og:description" property="og:description" content="Swap crosschain on SoulSwap." />
             </Head>
             <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-                <SwapDropdown />
+                {/* <SwapDropdown /> */}
                 {/* <div className={`my-12`} /> */}
-                <div className="flex flex-col gap-3 space-y-1">
+        <CustomBanner
+            external={true}
+            chains={[ChainId.FANTOM, ChainId.AVALANCHE]}
+            link={'https://links.soulswap.finance'}
+            text={'View Ecosystem ↗'}
+            textColor={'white'}
+            color={'ftmBlue'}
+            className={`animate-pulse border-4 border-dark-800 rounded-2xl`}
+        />
+            <LimitHeader 
+                inputCurrency={undefined} 
+                outputCurrency={undefined}  
+            />
+            <div className={'py-1'} />
+                <div className="flex flex-col gap-3 space-y-2 bg-dark-900 p-2 rounded-2xl">
                     <div
-                        className="grid grid-cols-2"
+                        className="grid grid-cols-2 mt-2"
                     >
                         <ChainSelector isFrom={true} />
                         <TokenSelector isFrom={true} />
                         {/* <InputAmount isFrom={true} /> */}
                     </div>
                     <div
-                        className={!account ? 'hidden' : `grid border-4 p-2 border-[${buttonColor(fromChain.chainId)}] rounded-xl`}
+                        className={!account ? 'hidden' : `grid border-2 p-2 border-[${buttonColor(fromChain.chainId)}] rounded-xl`}
                     >
                         <div className={'mt-2'}>
                         <CrossChainAssetPanel
@@ -981,7 +997,7 @@ const Crosschain = ({ }) => {
                     </div>
 
                     <div
-                        className={`border-4 p-2 border-[${buttonColor(toChain.chainId)}] rounded-xl`}
+                        className={`border-2 p-2 border-[${buttonColor(toChain.chainId)}] rounded-xl`}
                     >
                         <div className={'mt-2'}>
                         <CrossChainAssetPanel
@@ -999,7 +1015,6 @@ const Crosschain = ({ }) => {
                         </div>
                         {`~$${route?.estimate.toAmountUSD?.toString() ?? 0}`}
                     </div>
-                </div>
                 {/* <div
                     className={`flex flex-col gap-3 mt-8 mb-4 w-full`}
                 >
@@ -1028,9 +1043,9 @@ const Crosschain = ({ }) => {
                         </Typography>
                     </Button>
                 </div>
+                </div>
                 <div>
                 </div>
-
             </div>
         </DoubleGlowShadowV2>
     )

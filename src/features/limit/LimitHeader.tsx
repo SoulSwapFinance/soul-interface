@@ -66,9 +66,9 @@ export default function LimitHeader({ inputCurrency, outputCurrency }): JSX.Elem
       </NavLink>
       }
       <NavLink
-        onClick={(event) => {
-          if (!outputCurrency) event.preventDefault()
-        }}
+        // onClick={(event) => {
+        //   if (!outputCurrency) event.preventDefault()
+        // }}
         className={isAggregator ? classNames("font-bold text-high-emphesis", `bg-${getChainColorCode(chainId)} rounded-2xl`) : ''}
         activeClassName={classNames("text-high-emphesis font-bold rounded-2xl", `bg-${getChainColorCode(chainId)} rounded-2xl`)}
         href={
