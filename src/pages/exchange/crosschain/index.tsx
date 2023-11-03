@@ -21,29 +21,6 @@ import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 // import { getChainInfo } from 'constants/chains'
 // import { useTokenBalance } from 'state/wallet/hooks'
 import Head from 'next/head'
-// import {SquidWidget} from '@0xsquid/widget'
-// import { useTokenBalance } from 'state/wallet/hooks'
-// import { usePrice } from 'hooks'
-// import getTokensForChain from '@0xsquid/sdk'
-// import styled from 'styled-components'
-// import Loader from 'features/aggregator/components/Loader'
-// import { ApprovalState, useTokenApprove } from 'hooks/useTokenApprove'
-// import useGetRoutes from 'features/aggregator/queries/useGetRoutes'
-// import useGetPrice from 'features/aggregator/queries/useGetPrice'
-// import { getExplorerLink } from 'functions/explorer'
-// import { addTransaction } from 'state/transactions/actions'
-// import useTokenBalance from 'hooks/useTokenBalance'
-// import { getChainColorCode } from 'constants/chains'
-// import SwapAssetPanel from 'features/trident/swap/xSwapAssetPanel'
-// import { useGasPrice } from 'hooks/useAPI'
-// import NetworkGuard from 'guards/Network'
-// import { Feature } from 'enums/Feature'
-// import { useRouter } from "next/router"
-// import { useCurrency } from "hooks/Tokens"
-// import { currencyId } from 'functions/currency/currencyId'
-// import { classNames } from 'functions/styling'
-// import { featureEnabled } from 'functions/feature'
-// import Container from "components/Container";
 
 
 // // addresses and IDs
@@ -522,29 +499,33 @@ const Crosschain = ({ }) => {
                     // </Button>
                 }
                 {showFromTokens && isFrom &&
-                    <div>
-                        {fromAssetList.map((token) => {
+                    <HeadlessUIModal.Controlled
+                        // isCustom={true}
+                        chainId={chainId}
+                        isOpen={showFromTokens}
+                        onDismiss={() => toggleShowTokens(isFrom)}
+                    >   
+                    {fromAssetList.map((token) => {
                             return (
                                 <div
-                                    className={'grid grid-cols-2 mt-2 mb-2 justify-center items-center align-center gap-24'}
+                                className={`flex mt-2 mx-24 mb-2 justify-center items-center align-center gap-24
+                                    bg-dark-900 hover:bg-dark-800 p-3 rounded-xl border-2 border-[${buttonColor(fromChain.chainId)}]
+                                    ${token.symbol == fromAsset.symbol ? 'hidden' : 'visible'}
+                                `}
+                                onClick={() => {
+                                        setFromAsset(token)
+                                        toggleShowTokens(isFrom)
+                                    }}
                                 >
-                                    <div
-                                        onClick={() => {
-                                            setFromAsset(token)
-                                            toggleShowTokens(isFrom)
-                                        }}
-                                    >
                                         <Image
-                                            height={24}
-                                            width={24}
+                                            height={36}
+                                            width={36}
                                             src={token.logoURI}
                                             alt={'token logo'}
                                         />
-                                    </div>
                                     <div>
                                         <Typography
-                                            size={12}
-                                            className={'font-bold text-white'}
+                                            className={'font-bold text-white text-lg'}
                                         >
                                             {`${token.name} (${token.symbol})`}
                                         </Typography>
@@ -553,32 +534,37 @@ const Crosschain = ({ }) => {
                             )
                         }
                         )}
-                    </div>
+                    </HeadlessUIModal.Controlled>
                 }
-                {showToTokens &&
-                    <div>
-                        {toAssetList.map((token) => {
+                {showToTokens && !isFrom &&
+                    <HeadlessUIModal.Controlled
+                      // isCustom={true}
+                        chainId={chainId}
+                        isOpen={showToTokens}
+                        onDismiss={() => toggleShowTokens(isFrom)}
+                    >
+                    {toAssetList.map((token) => {
                             return (
                                 <div
-                                    className={'grid grid-cols-2 mt-2 mb-2 justify-center items-center align-center gap-24'}
+                                className={`flex mt-2 mx-24 mb-2 justify-center items-center align-center gap-24
+                                    bg-dark-900 hover:bg-dark-800 p-3 rounded-xl border-2 border-[${buttonColor(toChain.chainId)}]
+                                    ${token.symbol == toAsset.symbol ? 'hidden' : 'visible'}
+                                `}
+                                onClick={() => {
+                                        setToAsset(token)
+                                        toggleShowTokens(isFrom)
+                                    }}
                                 >
-                                    <div
-                                        onClick={() => {
-                                            setToAsset(token)
-                                            toggleShowTokens(isFrom)
-                                        }}
-                                    >
+                                    
                                         <Image
-                                            height={24}
-                                            width={24}
+                                            height={36}
+                                            width={36}
                                             src={token.logoURI}
                                             alt={'token logo'}
                                         />
-                                    </div>
                                     <div>
                                         <Typography
-                                            size={12}
-                                            className={'font-bold text-white'}
+                                            className={'font-bold text-white text-lg'}
                                         >
                                             {`${token.name} (${token.symbol})`}
                                         </Typography>
@@ -587,7 +573,7 @@ const Crosschain = ({ }) => {
                             )
                         }
                         )}
-                    </div>
+                    </HeadlessUIModal.Controlled>
                 }
             </div>
         )
