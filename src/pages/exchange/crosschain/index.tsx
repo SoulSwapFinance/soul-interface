@@ -2,10 +2,10 @@ import React, { useCallback, useState } from 'react'
 import { ethers } from 'ethers'
 import BigNumber from 'bignumber.js'
 // import { getAllChains, swap } from 'features/aggregator/router'
-import { ChainId, Currency, WETH, USDC, USDC_ADDRESS, WBTC, WNATIVE, WNATIVE_ADDRESS, AXL_USDC_ADDRESS, Token, NATIVE, AXL_WBTC_ADDRESS, MPX_ADDRESS, MIM_ADDRESS, SPELL_ADDRESS } from 'sdk'
+import { ChainId, Currency, WETH, USDC, USDC_ADDRESS, WBTC, WNATIVE, WNATIVE_ADDRESS, AXL_USDC_ADDRESS, Token, NATIVE, AXL_WBTC_ADDRESS, MPX_ADDRESS, MIM_ADDRESS, SPELL_ADDRESS, CRV_ADDRESS, EQUAL_ADDRESS, WETH_ADDRESS, LINK_ADDRESS, BNB_ADDRESS } from 'sdk'
 import { ArrowDownIcon } from '@heroicons/react/24/solid'
 import SwapDropdown from 'features/swap/SwapDropdown'
-import { NextSeo } from 'next-seo'
+// import { NextSeo } from 'next-seo'
 import Typography from 'components/Typography'
 import Image from 'next/image'
 import { useActiveWeb3React } from "services/web3";
@@ -22,7 +22,6 @@ import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 // import { useTokenBalance } from 'state/wallet/hooks'
 import Head from 'next/head'
 import { getChainInfo } from 'constants/chains'
-
 
 // // addresses and IDs
 // const avalancheId = 43114;
@@ -130,7 +129,7 @@ const Crosschain = ({ }) => {
     //   const id = router.query.id as string // router string
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const signer = provider.getSigner()
-
+    
     const NATIVE_ADDRESS = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
     // const fromChain = ChainId.FANTOM
     // const toChain = ChainId.AVALANCHE
@@ -213,7 +212,25 @@ const Crosschain = ({ }) => {
             "symbol": 'SPELL',
             "decimals": 18,
             "logoURI": "https://assets.coingecko.com/coins/images/15861/standard/abracadabra-3.png?1696515477",
-            "coingeckoId": 'mpx',
+            "coingeckoId": 'spell-token',
+        },
+        {
+            "chainId": 250,
+            "address": CRV_ADDRESS[250],
+            "name": 'Curve DAO',
+            "symbol": 'CRV',
+            "decimals": 18,
+            "logoURI": "https://assets.coingecko.com/coins/images/12124/standard/Curve.png?1696511967",
+            "coingeckoId": 'curve-dao-token',
+        },
+        {
+            "chainId": 250,
+            "address": EQUAL_ADDRESS[250],
+            "name": 'Equalizer',
+            "symbol": 'EQUAL',
+            "decimals": 18,
+            "logoURI": "https://assets.coingecko.com/coins/images/28231/standard/hq_png_icon_file.png?1696527232",
+            "coingeckoId": 'equalizer-dex',
         },
         // {
         //     "chainId": 250,
@@ -253,7 +270,43 @@ const Crosschain = ({ }) => {
             "decimals": 18,
             "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/mpx.svg",
             "coingeckoId": 'mpx',
-        }
+        },
+        {
+            "chainId": 250,
+            "address": EQUAL_ADDRESS[250],
+            "name": 'Equalizer',
+            "symbol": 'EQUAL',
+            "decimals": 18,
+            "logoURI": "https://assets.coingecko.com/coins/images/28231/standard/hq_png_icon_file.png?1696527232",
+            "coingeckoId": 'equalizer-dex',
+        },
+        {
+            "chainId": 250,
+            "address": CRV_ADDRESS[250],
+            "name": 'Curve DAO',
+            "symbol": 'CRV',
+            "decimals": 18,
+            "logoURI": "https://assets.coingecko.com/coins/images/12124/standard/Curve.png?1696511967",
+            "coingeckoId": 'curve-dao-token',
+        },
+        {
+            "chainId": 250,
+            "address": SPELL_ADDRESS[250],
+            "name": 'Spell Token',
+            "symbol": 'SPELL',
+            "decimals": 18,
+            "logoURI": "https://assets.coingecko.com/coins/images/15861/standard/abracadabra-3.png?1696515477",
+            "coingeckoId": 'spell-token',
+        },
+        {
+            "chainId": 250,
+            "address": MIM_ADDRESS[250],
+            "name": 'Magic Internet Money',
+            "symbol": 'MIM',
+            "decimals": 18,
+            "logoURI": "https://assets.coingecko.com/coins/images/16786/standard/mimlogopng.png?1696516358",
+            "coingeckoId": 'magic-internet-money',
+        },
     ]
 
     const avaxTokens_from: TokenData[] = [
@@ -277,6 +330,15 @@ const Crosschain = ({ }) => {
         },
         {
             "chainId": 43114,
+            "address": WETH_ADDRESS[43114],
+            "name": 'Wrapped Ether',
+            "symbol": 'WETH.e',
+            "decimals": 18,
+            "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/eth.svg",
+            "coingeckoId": 'ethereum',
+        },
+        {
+            "chainId": 43114,
             "address": USDC_ADDRESS[43114],
             "name": 'USD Coin',
             "symbol": 'USDC',
@@ -286,9 +348,18 @@ const Crosschain = ({ }) => {
         },
         {
             "chainId": 43114,
-            "address": AXL_USDC_ADDRESS[43114],
-            "name": 'Axelar USDC',
-            "symbol": 'axlUSDC',
+            "address": LINK_ADDRESS[43114],
+            "name": 'Chainlink Token',
+            "symbol": 'LINK.e',
+            "decimals": 18,
+            "logoURI": "https://assets.coingecko.com/coins/images/877/standard/chainlink-new-logo.png?1696502009",
+            "coingeckoId": 'chainlink',
+        },
+        {
+            "chainId": 43114,
+            "address": '0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664', // USDC.e
+            "name": 'USD Coin',
+            "symbol": 'USDC.e',
             "decimals": 6,
             "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/usdc.svg",
             "coingeckoId": 'usdc',
@@ -301,6 +372,15 @@ const Crosschain = ({ }) => {
             "decimals": 18,
             "logoURI": "https://assets.coingecko.com/coins/images/16786/standard/mimlogopng.png?1696516358",
             "coingeckoId": 'magic-internet-money',
+        },
+        {
+            "chainId": 43114,
+            "address": AXL_USDC_ADDRESS[43114],
+            "name": 'Axelar USDC',
+            "symbol": 'axlUSDC',
+            "decimals": 6,
+            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/usdc.svg",
+            "coingeckoId": 'usdc',
         },
     ]
     
@@ -574,6 +654,23 @@ const Crosschain = ({ }) => {
                 ))
         setInputAmount(amount)
     }, [setFromAsset, setFromToken, setInputAmount])
+    
+    const handleSetToAsset = useCallback((token) => {
+        setToAsset(token)
+        setToToken(
+            token.address == NATIVE_ADDRESS ?
+                NATIVE[toChain.chainId] :
+                new Token(
+                    toChain.chainId == 43114
+                        ? ChainId.AVALANCHE
+                        : ChainId.FANTOM,
+                    token.address,
+                    token.decimals,
+                    token.symbol,
+                    token.name
+                ))
+        // setInputAmount(amount)
+    }, [setToAsset, setToToken])
 
     // shows: Chains
     const ChainSelector = ({ isFrom }) => {
@@ -653,8 +750,8 @@ const Crosschain = ({ }) => {
                     //     // color={buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}
                     // >
                     <div
-                        className={`ml-2 flex flex-cols-2 gap-12 sm:gap-24 border-4 border-[${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
-                            bg-dark-900 hover:bg-dark-800
+                        className={`ml-2 flex flex-cols-2 gap-8 sm:gap-24 border-4 border-[${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
+                            bg-dark-900 hover:bg-dark-800 
                         `}
                         style={{
                             // padding: 4,
@@ -663,16 +760,16 @@ const Crosschain = ({ }) => {
                         onClick={() => toggleShowTokens(isFrom)}
                     >
                         <Image
+                            
                             height={36}
                             width={36}
                             src={isFrom ? fromAsset.logoURI : toAsset.logoURI}
                             alt={'token logo'}
                             className={
-                                'ml-4'
+                                'ml-4 max-w-[36px] max-h-[36px] mt-2 sm:mt-3'
                             }
                         />
                         <Typography
-                            weight={600}
                             className={'flex items-center font-bold text-white justify-center text-lg sm:text-xl'}
                         >
                             {`${isFrom ? fromAsset.symbol : toAsset.symbol}`}
@@ -681,18 +778,19 @@ const Crosschain = ({ }) => {
                     // </Button>
                 }
                 {showFromTokens && isFrom &&
-                    <HeadlessUIModal.Controlled
-                        // isCustom={true}
-                        chainId={chainId}
-                        isOpen={showFromTokens}
-                        onDismiss={() => toggleShowTokens(isFrom)}
-                    >
+                <HeadlessUIModal.Controlled
+                    // isCustom={true}
+                    chainId={fromChain.chainId == 43114 ? ChainId.AVALANCHE : ChainId.FANTOM}
+                    isOpen={showFromTokens}
+                    onDismiss={() => toggleShowTokens(isFrom)}
+                >
                         {fromAssetList.map((token) => {
                             return (
                                 <div
-                                    className={`flex mt-2 sm:mx-24 mb-2 justify-center items-center align-center gap-12 sm:gap-24
+                                    className={`grid grid-cols-2 mt-2 sm:mx-24 mb-2 justify-center items-center align-center gap-12 sm:gap-24
                                     bg-dark-900 hover:bg-dark-800 p-1 sm:p-3 rounded-xl border-2 border-[${buttonColor(fromChain.chainId)}]
                                     ${token.symbol == fromAsset.symbol ? 'hidden' : 'visible'}
+                                    overflow-y:auto
                                 `}
                                     onClick={() => {
                                         handleSetFromAsset(token, inputAmount)
@@ -701,74 +799,72 @@ const Crosschain = ({ }) => {
                                     }}
                                 >
                                     <Image
-                                        height={36}
-                                        width={36}
+                                        height={32}
+                                        width={32}
                                         src={token.logoURI}
                                         alt={'token logo'}
+                                        className={'flex ml-12 justify-center items-center'}
                                     />
-                                    <div>
-                                        <Typography
-                                            className={'font-bold text-white text-lg'}
+                                        {/* <Typography
+                                            className={'font-bold text-white text-sm sm:text-lg'}
                                         >
-                                            {`${token.name} (${token.symbol})`}
+                                            {`${token.name}`}
+                                        </Typography> */}
+                                        <Typography
+                                            className={'font-bold text-white text-sm sm:text-lg mr-4'}
+                                        >
+                                            {token.symbol}
                                         </Typography>
-                                    </div>
                                 </div>
                             )
                         }
                         )}
-                    </HeadlessUIModal.Controlled>
+                        </HeadlessUIModal.Controlled>
                 }
+               
                 {showToTokens && !isFrom &&
                     <HeadlessUIModal.Controlled
                         // isCustom={true}
-                        chainId={chainId}
+                        chainId={toChain.chainId == 43114 ? ChainId.AVALANCHE : ChainId.FANTOM}
                         isOpen={showToTokens}
                         onDismiss={() => toggleShowTokens(isFrom)}
                     >
                         {toAssetList.map((token) => {
                             return (
                                 <div
-                                    className={`flex mt-2 sm:mx-24 mb-2 justify-center items-center align-center gap-12 sm:gap-24
+                                    className={`grid grid-cols-2 mt-2 sm:mx-24 mb-2 justify-center items-center align-center gap-12 sm:gap-24
                                     bg-dark-900 hover:bg-dark-800 p-1 sm:p-3 rounded-xl border-2 border-[${buttonColor(toChain.chainId)}]
                                     ${token.symbol == toAsset.symbol ? 'hidden' : 'visible'}
+                                    overflow-y:auto
                                 `}
                                     onClick={() => {
-                                        setToAsset(token)
-                                        setToToken(
-                                            token.address == NATIVE_ADDRESS ?
-                                                NATIVE[toChain.chainId] :
-                                                new Token(
-                                                    toChain.chainId == 43114
-                                                        ? ChainId.AVALANCHE
-                                                        : ChainId.FANTOM,
-                                                    token.address,
-                                                    token.decimals,
-                                                    token.symbol,
-                                                    token.name
-                                                ))
+                                        handleSetToAsset(token)
                                         toggleShowTokens(isFrom)
                                     }}
                                 >
-
                                     <Image
-                                        height={36}
-                                        width={36}
+                                        height={32}
+                                        width={32}
                                         src={token.logoURI}
                                         alt={'token logo'}
+                                        className={'flex ml-12 justify-center items-center'}
                                     />
-                                    <div>
-                                        <Typography
-                                            className={'font-bold text-white text-lg'}
+                                        {/* <Typography
+                                            className={'font-bold text-white text-sm sm:text-lg'}
                                         >
-                                            {`${token.name} (${token.symbol})`}
+                                            {`${token.name}`}
+                                        </Typography> */}
+                                        <Typography
+                                            className={'font-bold text-white text-sm sm:text-lg mr-4'}
+                                        >
+                                            {token.symbol}
                                         </Typography>
-                                    </div>
                                 </div>
+
                             )
                         }
                         )}
-                    </HeadlessUIModal.Controlled>
+                        </HeadlessUIModal.Controlled>
                 }
             </div>
         )
