@@ -942,8 +942,9 @@ const Crosschain = ({ }) => {
                         {/* <InputAmount isFrom={true} /> */}
                     </div>
                     <div
-                        className={!account ? 'hidden' : `border-4 p-2 border-[${buttonColor(fromChain.chainId)}] rounded-xl`}
+                        className={!account ? 'hidden' : `grid border-4 p-2 border-[${buttonColor(fromChain.chainId)}] rounded-xl`}
                     >
+                        <div className={'mt-2'}>
                         <CrossChainAssetPanel
                             spendFromWallet={true}
                             network={fromChain.chainId}
@@ -955,8 +956,14 @@ const Crosschain = ({ }) => {
                             showSelect={false}
                         // onSelect={handleInputSelect}
                         />
+                        </div>
+                    {`~$${route?.estimate.fromAmountUSD?.toString() ?? 0}`}
+                    {/* </div> */}
+                    {/* <div
+                        className={`flex justify-end w-[98%] text-sm max-h-[1px] p-1 mb-4`}    
+                    > */}
+                    {/* </div> */}
                     </div>
-
                     <div className="flex justify-center -mt-8 -mb-4 z-0">
                         <div className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700`}>
                             <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
@@ -972,6 +979,7 @@ const Crosschain = ({ }) => {
                     <div
                         className={`border-4 p-2 border-[${buttonColor(toChain.chainId)}] rounded-xl`}
                     >
+                        <div className={'mt-2'}>
                         <CrossChainAssetPanel
                             spendFromWallet={true}
                             network={toChain.chainId}
@@ -984,26 +992,8 @@ const Crosschain = ({ }) => {
                         // showBalance={false}
                         // onSelect={handleOutputSelect}
                         />
-                    </div>
-                    <div
-                        className={`flex flex-cols gap-8 justify-center sm:gap-18 mb-4 w-full border-2`}    
-                    >
-                        <div>
-                        {`${inputAmount ?? 0} ${fromAsset.symbol == 'Ethereum' ? 'ETH' : fromAsset.symbol}`}
                         </div>
-                        <div>
-                        {`~$${route?.estimate.fromAmountUSD?.toString() ?? 0}`}
-                        </div>
-                    </div>
-                    <div
-                        className={`flex flex-cols gap-8 justify-center sm:gap-18 mb-4 w-full border-2`}    
-                    >
-                        <div>
-                        {`${Number(outputAmount).toFixed(2) ?? 0} ${toAsset.symbol}`}
-                        </div>
-                        <div>
                         {`~$${route?.estimate.toAmountUSD?.toString() ?? 0}`}
-                        </div>
                     </div>
                 </div>
                 {/* <div
