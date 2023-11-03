@@ -54,7 +54,7 @@ export default function Remove() {
   const [tokenA, tokenB] = useMemo(() => [currencyA?.wrapped, currencyB?.wrapped], [currencyA, currencyB])
 
   // toggle wallet when disconnected
-  const toggleWalletModal = useWalletModalToggle()
+  // const toggleWalletModal = useWalletModalToggle()
 
   const { price } = useDerivedMintInfo(currencyA ?? undefined, currencyB ?? undefined)
 
