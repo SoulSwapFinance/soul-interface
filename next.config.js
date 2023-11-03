@@ -18,7 +18,7 @@ const nextConfig = {
       },
       {
         source: '/crosschain',
-        destination: '/exchange/swap',
+        destination: '/exchange/crosschain',
         permanent: true,
       },
       {
