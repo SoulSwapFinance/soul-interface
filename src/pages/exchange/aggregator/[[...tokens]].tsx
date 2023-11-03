@@ -233,6 +233,7 @@ const Aggregator = ({ }) => {
 			from: fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address,
 			to: toToken?.isNative ? NATIVE_ADDRESS : toToken?.wrapped.address,
 			amount: amountWithDecimals,
+			// @ts-ignore
 			signer,
 			slippage,
 			adapter: route.name,

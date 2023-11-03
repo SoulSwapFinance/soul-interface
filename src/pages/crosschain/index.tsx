@@ -1,9 +1,9 @@
-import { SquidWidget } from "@soulswapfinance/cross-chain-widget"
-import { AppConfig } from "@soulswapfinance/cross-chain-widget/widget/core/types/config"
-import { CustomBanner } from "components/Banner";
-import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
-import LimitHeader from "features/limit/LimitHeader";
-import SwapDropdown from "features/swap/SwapDropdown";
+import { SquidWidget } from "@soulswap/cross-chain-widget"
+import { AppConfig } from "@soulswap/cross-chain-widget/widget/core/types/config"
+import { CustomBanner } from "components/Banner"
+import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2"
+// import LimitHeader from "features/limit/LimitHeader"
+import SwapDropdown from "features/swap/SwapDropdown"
 import Head from "next/head";
 import { ChainId } from "sdk";
 

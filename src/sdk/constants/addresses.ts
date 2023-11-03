@@ -580,6 +580,7 @@ export const MULTI_USDC_ADDRESS: AddressMap = {
 }
 
 export const AXL_USDC_ADDRESS: AddressMap = {
+  [ChainId.AVALANCHE]: '0xfaB550568C688d5D8A52C7d794cb93Edc26eC0eC',
   [ChainId.FANTOM]: '0x1B6382DBDEa11d97f24495C9A90b7c88469134a4',
 }
 

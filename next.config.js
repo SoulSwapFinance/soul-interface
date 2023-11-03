@@ -1,8 +1,9 @@
-const withTM = require('next-transpile-modules')(["@soulswapfinance/cross-chain-widget"]);
+// const withTM = require('next-transpile-modules')(["@soulswap/cross-chain-widget"]);
 
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  transpilePackages: ["@soulswap/cross-chain-widget"],
   async redirects() {
     return [
       {
@@ -156,7 +157,7 @@ const nextConfig = {
 
 // Please declare withTM as your last plugin (the outermost one)
 // module.exports = withTM(nextConfig)
-module.exports = withTM(nextConfig)
+module.exports = nextConfig
 
 // Don't delete this console log, useful to see the config in Vercel deployments
 console.log('next.config.s', JSON.stringify(module.exports, null, 2))
