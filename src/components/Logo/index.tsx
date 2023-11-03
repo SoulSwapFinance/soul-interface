@@ -47,7 +47,9 @@ export function NetworkLogo({ chainId, style = {} }: { chainId: ChainId; style?:
   const { iconDark } = NETWORKS_INFO[chainId]
   const iconSrc = iconDark
   if (!iconSrc) return null
-  return <img 
+  return <Image 
+    unoptimized
+    legacyStyles={true}
     src={iconSrc} 
     alt="Switch Network" 
     style={style} 
