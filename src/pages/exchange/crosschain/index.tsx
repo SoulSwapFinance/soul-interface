@@ -784,9 +784,10 @@ const Crosschain = ({ }) => {
                     isOpen={showFromTokens}
                     onDismiss={() => toggleShowTokens(isFrom)}
                 >
-                        {fromAssetList.map((token) => {
+                        {fromAssetList.map((token, i) => {
                             return (
                                 <div
+                                    key={i}
                                     className={`grid grid-cols-2 mt-2 sm:mx-24 mb-2 justify-center items-center align-center gap-12 sm:gap-24
                                     bg-dark-900 hover:bg-dark-800 p-1 sm:p-3 rounded-xl border-2 border-[${buttonColor(fromChain.chainId)}]
                                     ${token.symbol == fromAsset.symbol ? 'hidden' : 'visible'}
@@ -829,9 +830,10 @@ const Crosschain = ({ }) => {
                         isOpen={showToTokens}
                         onDismiss={() => toggleShowTokens(isFrom)}
                     >
-                        {toAssetList.map((token) => {
+                        {toAssetList.map((token, i) => {
                             return (
                                 <div
+                                    key={i}
                                     className={`grid grid-cols-2 mt-2 sm:mx-24 mb-2 justify-center items-center align-center gap-12 sm:gap-24
                                     bg-dark-900 hover:bg-dark-800 p-1 sm:p-3 rounded-xl border-2 border-[${buttonColor(toChain.chainId)}]
                                     ${token.symbol == toAsset.symbol ? 'hidden' : 'visible'}
