@@ -172,28 +172,34 @@ const Crosschain = ({ }) => {
     const chains: Chains[] = [
         {
             "chainId": 250,
-            "name": "Fantom",
-            "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83/logo.png",
-        }, 
+            "name": "Fantom Opera",
+            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/fantom.svg",
+        },
         {
             "chainId": 43114,
-            "name": "Avalanche",
+            "name": "Avalanche Network",
             "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/avalanche.svg"
-        
+
+        },
+        {
+            "chainId": 1,
+            "name": "Ethereum Mainnet",
+            "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/eth.svg"
+
         }
     ]
 
     const ftmTokens: TokenData[] = [
-        { 
+        {
             "chainId": 250,
             "address": WNATIVE[250].address,
             "name": WNATIVE[250].name,
             "symbol": WNATIVE[250].symbol,
             "decimals": WNATIVE[250].decimals,
-            "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83/logo.png",
+            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/fantom.svg",
             "coingeckoId": 'fantom',
         },
-        { 
+        {
             "chainId": 250,
             "address": AXL_USDC_ADDRESS[250],
             "name": 'Axelar USDC',
@@ -205,7 +211,7 @@ const Crosschain = ({ }) => {
     ]
 
     const avaxTokens: TokenData[] = [
-        { 
+        {
             "chainId": 43114,
             "address": AXL_USDC_ADDRESS[43114],
             "name": 'Axelar USDC',
@@ -213,6 +219,15 @@ const Crosschain = ({ }) => {
             "decimals": 6,
             "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/usdc.svg",
             "coingeckoId": 'usdc',
+        },
+        {
+            "chainId": 43114,
+            "address": WNATIVE_ADDRESS[43114],
+            "name": 'Wrapped Avalanche',
+            "symbol": 'WAVAX',
+            "decimals": 18,
+            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/avalanche.svg",
+            "coingeckoId": 'avalanche-2',
         }
         // chainId: number | string;
         // address: string;
@@ -241,7 +256,7 @@ const Crosschain = ({ }) => {
     // }), [fromTokens, toTokens]);
     // const updatedDestinationAddress = swapRoute === null || swapRoute === void 0 ? void 0 : swapRoute.destinationAddress;
     // const { connectedAddress: destinationUserAddress } = (0, useMultiChain_1.useMultiChain)(toChain, toToken);
-    
+
     const getTokensForChain = (chainId) => {
         return chainId == ChainId.AVALANCHE ? avaxTokens : ftmTokens ?? ftmTokens
     }
@@ -268,6 +283,9 @@ const Crosschain = ({ }) => {
     const [showFromTokens, setShowFromTokens] = useState(false)
     const [showToTokens, setShowToTokens] = useState(false)
 
+    const buttonColor = (chainId) => {
+        return chainId == 43114 ? 'avaxRed' : 'ftmBlue'
+    }
 
     // const config = {
     //     companyName: "Test Widget",
@@ -367,198 +385,227 @@ const Crosschain = ({ }) => {
         console.log(txReceipt)
     }
 
+    // TOGGLES //
+    const toggleShowChains = (isFrom) => {
+        isFrom ? setShowFromChains(!showFromChains) : setShowToChains(!showToChains)
+    }
+
+    const toggleShowTokens = (isFrom) => {
+        isFrom ? setShowFromTokens(!showFromTokens) : setShowToTokens(!showToTokens)
+    }
+
     // shows: Chains
-    const ChainSelector = ({isFrom}) => {
+    const ChainSelector = ({ isFrom }) => {
         return (
             <div>
-            { (!showFromChains || !showToChains) &&
-                <Button
-                    onClick={() => isFrom ? setShowFromChains(true) : setShowToChains(true)}
-                    variant={'filled'}
-                    color={'purple'}
-                >
-                        <div
-                            className={'grid grid-cols-2'}
+                {(!showFromChains || !showToChains) &&
+                    // <Button
+                    //     onClick={() => toggleShowChains(isFrom)}
+                    //     variant={'filled'}
+                    //     color={buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}
+                    // >
+                    <div
+                        className={`flex justify-center border-4 border-${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)} rounded-xl
+                            bg-dark-900 hover:bg-dark-800
+                        `}
+                        onClick={() => toggleShowChains(isFrom)}
+                        style={{
+                            // padding: 4,
+                            height: '100%',
+                        }}
+                    >
+                        <Typography
+                            weight={600}
+                            className={'font-bold text-white mt-4 text-xl'}
                         >
-                            <Image
-                                height={24}
-                                width={24}
-                                src={isFrom ? fromChain.logoURI : toChain.logoURI}
-                                alt={'chain logo'}
-                            />
-                            {`${isFrom ? fromChain.name : toChain.name} (${isFrom ? fromChain.chainId : toChain.chainId})`}
-                        </div>
-                </Button>
-            }   
-            { showFromChains && isFrom &&
-                <div>
-                    {chains.map((chain) => {
-                        return (
-                            <div
-                                className={'grid grid-cols-2 mt-2 mb-2 justify-center items-center align-center gap-24'}
-                            >
+                            {`${isFrom ? fromChain.name : toChain.name}`}
+                        </Typography>
+                    </div>
+                    // </Button>
+                }
+                {showFromChains && isFrom &&
+                    <div>
+                        {chains.map((chain) => {
+                            return (
                                 <div
-                                    onClick={() => {
-                                        setFromChain(chain)
-                                        setShowFromChains(false)
-                                    }}
+                                    className={'grid grid-cols-2 mt-2 mb-2 justify-center items-center align-center gap-24'}
                                 >
-                                <Image
-                                    height={24}
-                                    width={24}
-                                    src={chain.logoURI}
-                                    alt={'token logo'}
-                                />
-                                </div>
-                                <div>
-                                    <Typography
-                                        size={12}
-                                        className={'font-bold text-white'}
+                                    <div
+                                        onClick={() => {
+                                            setFromChain(chain)
+                                            toggleShowChains(isFrom)
+                                        }}
                                     >
-                                    {`${chain.name}`}
-                                    </Typography>
+                                        <Image
+                                            height={24}
+                                            width={24}
+                                            src={chain.logoURI}
+                                            alt={'token logo'}
+                                        />
+                                    </div>
+                                    <div>
+                                        <Typography
+                                            size={12}
+                                            className={'font-bold text-white'}
+                                        >
+                                            {`${chain.name}`}
+                                        </Typography>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    }
-                    )}
-                </div>
-            }
-            { showToChains &&
-                <div>
-                    {chains.map((chain) => {
-                        return (
-                            <div
-                                className={'grid grid-cols-2 mt-2 mb-2 justify-center items-center align-center gap-24'}
-                            >
+                            )
+                        }
+                        )}
+                    </div>
+                }
+                {showToChains && !isFrom &&
+                    <div>
+                        {chains.map((chain) => {
+                            return (
                                 <div
-                                    onClick={() => {
-                                        setToChain(chain)
-                                        setShowToChains(false)
-                                    }}
+                                    className={'grid grid-cols-2 mt-2 mb-2 justify-center items-center align-center gap-24'}
                                 >
-                                <Image
-                                    height={24}
-                                    width={24}
-                                    src={chain.logoURI}
-                                    alt={'chain logo'}
-                                />
-                                </div>
-                                <div>
-                                    <Typography
-                                        size={12}
-                                        className={'font-bold text-white'}
+                                    <div
+                                        onClick={() => {
+                                            setToChain(chain)
+                                            toggleShowChains(isFrom)
+                                        }}
                                     >
-                                    {`${chain.name}`}
-                                    </Typography>
+                                        <Image
+                                            height={24}
+                                            width={24}
+                                            src={chain.logoURI}
+                                            alt={'chain logo'}
+                                        />
+                                    </div>
+                                    <div>
+                                        <Typography
+                                            size={12}
+                                            className={'font-bold text-white'}
+                                        >
+                                            {`${chain.name}`}
+                                        </Typography>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    }
-                    )}
-                </div>
-            }
+                            )
+                        }
+                        )}
+                    </div>
+                }
             </div>
         )
     }
-    
+
     // shows: Tokens for a given chain.
-    const TokenSelector = ({isFrom}) => {
+    const TokenSelector = ({ isFrom }) => {
 
         return (
             <div>
-            {/* <div
+                {/* <div
                 onClick={() => setShowTokens(true)}
             >
                 Select Token
             </div> */}
-            { (!showFromTokens || !showToTokens) &&
-                <Button
-                    onClick={() => isFrom ? setShowFromTokens(true) : setShowToTokens(true)}
-                    variant={'filled'}
-                    color={'purple'}
-                >
-                        <div
-                            className={'grid grid-cols-2'}
+                {(!showFromTokens || !showToTokens) &&
+                    // <Button
+                    //     onClick={() => isFrom ? setShowFromTokens(true) : setShowToTokens(true)}
+                    //     // variant={'filled'}
+                    //     // color={buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}
+                    // >
+                    <div
+                        className={`ml-2 flex flex-cols-2 gap-6 sm:gap-24 border-4 border-${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)} rounded-xl
+                            bg-dark-900 hover:bg-dark-800
+                        `}
+                        style={{
+                            // padding: 4,
+                            height: '100%'
+                        }}
+                    >
+                        <Image
+                            height={36}
+                            width={36}
+                            src={isFrom ? fromAsset.logoURI : toAsset.logoURI}
+                            alt={'token logo'}
+                            className={
+                                'ml-4 mt-2 mb-2'
+                            }
+                        />
+                        <Typography
+                            weight={600}
+                            className={'flex items-center font-bold text-white justify-center text-xl'}
                         >
-                            <Image
-                                height={24}
-                                width={24}
-                                src={isFrom ? fromAsset.logoURI : toAsset.logoURI}
-                                alt={'token logo'}
-                            />
-                            {`${isFrom ? fromAsset.name : toAsset.name} (${isFrom ? fromChain.chainId : toChain.chainId})`}
-                        </div>
-                </Button>
-            }   
-            { showFromTokens && isFrom &&
-                <div>
-                    {tokenData.map((token) => {
-                        return (
-                            <div
-                                className={'grid grid-cols-2 mt-2 mb-2 justify-center items-center align-center gap-24'}
-                            >
+                            {`${isFrom ? fromAsset.symbol : toAsset.symbol}`}
+                        </Typography>
+                    </div>
+                    // </Button>
+                }
+                {showFromTokens && isFrom &&
+                    <div>
+                        {tokenData.map((token) => {
+                            return (
                                 <div
-                                    onClick={() => {
-                                        setFromAsset(token)
-                                        setShowFromTokens(false)
-                                    }}
+                                    className={'grid grid-cols-2 mt-2 mb-2 justify-center items-center align-center gap-24'}
                                 >
-                                <Image
-                                    height={24}
-                                    width={24}
-                                    src={token.logoURI}
-                                    alt={'token logo'}
-                                />
-                                </div>
-                                <div>
-                                    <Typography
-                                        size={12}
-                                        className={'font-bold text-white'}
+                                    <div
+                                        onClick={() => {
+                                            setFromAsset(token)
+                                            toggleShowTokens(isFrom)
+                                        }}
                                     >
-                                    {`${token.name} (${token.symbol})`}
-                                    </Typography>
+                                        <Image
+                                            height={24}
+                                            width={24}
+                                            src={token.logoURI}
+                                            alt={'token logo'}
+                                        />
+                                    </div>
+                                    <div>
+                                        <Typography
+                                            size={12}
+                                            className={'font-bold text-white'}
+                                        >
+                                            {`${token.name} (${token.symbol})`}
+                                        </Typography>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    }
-                    )}
-                </div>
-            }
-            { showToTokens &&
-                <div>
-                    {tokenData.map((token) => {
-                        return (
-                            <div
-                                className={'grid grid-cols-2 mt-2 mb-2 justify-center items-center align-center gap-24'}
-                            >
+                            )
+                        }
+                        )}
+                    </div>
+                }
+                {showToTokens &&
+                    <div>
+                        {tokenData.map((token) => {
+                            return (
                                 <div
-                                    onClick={() => {
-                                        setToAsset(token)
-                                        setShowToTokens(false)
-                                    }}
+                                    className={'grid grid-cols-2 mt-2 mb-2 justify-center items-center align-center gap-24'}
                                 >
-                                <Image
-                                    height={24}
-                                    width={24}
-                                    src={token.logoURI}
-                                    alt={'token logo'}
-                                />
-                                </div>
-                                <div>
-                                    <Typography
-                                        size={12}
-                                        className={'font-bold text-white'}
+                                    <div
+                                        onClick={() => {
+                                            setToAsset(token)
+                                            toggleShowTokens(isFrom)
+                                        }}
                                     >
-                                    {`${token.name} (${token.symbol})`}
-                                    </Typography>
+                                        <Image
+                                            height={24}
+                                            width={24}
+                                            src={token.logoURI}
+                                            alt={'token logo'}
+                                        />
+                                    </div>
+                                    <div>
+                                        <Typography
+                                            size={12}
+                                            className={'font-bold text-white'}
+                                        >
+                                            {`${token.name} (${token.symbol})`}
+                                        </Typography>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    }
-                    )}
-                </div>
-            }
+                            )
+                        }
+                        )}
+                    </div>
+                }
             </div>
         )
     }
@@ -589,25 +636,29 @@ const Crosschain = ({ }) => {
 
     return (
         <DoubleGlowShadowV2>
-      <Head>
-        <title>CrossChain | SoulSwap</title>
-          {/* <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." /> */}
-          <meta name="description" content="Swap crosschain via the Squid Router on SoulSwap." />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
-          <meta name="twitter:site" content="@SoulSwapFinance" />
-          <meta id="og:image" property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
-          <meta id="og:image:type" property="og:image:type" content="image/png" />
-          <meta id="og:image:type" property="og:image:type" content="630" />
-          <meta id="og:image:width" property="og:image:width" content="1200" />
-          <meta id="og:description" property="og:description" content="Swap crosschain via the Squid Router on SoulSwap." />
-      </Head>            
-      <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
+            <Head>
+                <title>CrossChain | SoulSwap</title>
+                {/* <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." /> */}
+                <meta name="description" content="Swap crosschain via the Squid Router on SoulSwap." />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+                <meta name="twitter:site" content="@SoulSwapFinance" />
+                <meta id="og:image" property="og:image" content="https://soulswap.finance/images/soulswap-cover.png" />
+                <meta id="og:image:type" property="og:image:type" content="image/png" />
+                <meta id="og:image:type" property="og:image:type" content="630" />
+                <meta id="og:image:width" property="og:image:width" content="1200" />
+                <meta id="og:description" property="og:description" content="Swap crosschain via the Squid Router on SoulSwap." />
+            </Head>
+            <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
                 <SwapDropdown />
                 {/* <div className={`my-12`} /> */}
                 <div className="flex flex-col gap-3 space-y-3">
-                <ChainSelector isFrom={true} />
-                <TokenSelector isFrom={true} />
+                    <div
+                        className="grid grid-cols-2"
+                    >
+                        <ChainSelector isFrom={true} />
+                        <TokenSelector isFrom={true} />
+                    </div>
                     {/* <CrossChainAssetPanel
                         spendFromWallet={true}
                         network={fromChain}
@@ -626,15 +677,19 @@ const Crosschain = ({ }) => {
                     // onSelect={handleInputSelect}
                     /> */}
 
-                <div className="flex justify-center -mt-8 -mb-4 z-0">
-                    <div className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700`}>
-                        <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
+                    <div className="flex justify-center -mt-8 -mb-4 z-0">
+                        <div className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700`}>
+                            <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
+                        </div>
                     </div>
-                </div>
-                <ChainSelector isFrom={false} />
-                <TokenSelector isFrom={false} />
+                    <div
+                        className="grid grid-cols-2"
+                    >
+                        <ChainSelector isFrom={false} />
+                        <TokenSelector isFrom={false} />
+                    </div>
 
-                {/* <CrossChainAssetPanel
+                    {/* <CrossChainAssetPanel
                             spendFromWallet={true}
                             network={toChain}
                             header={(props) => (
@@ -658,7 +713,7 @@ const Crosschain = ({ }) => {
                 >
                     <Button variant="filled"
                         color={'gradientPurple'}
-                        // onClick={generateTokenData}
+                    // onClick={generateTokenData}
                     >
                         <Typography size={14} className="font-bold text-white">
                             {`Submit`}
