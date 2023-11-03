@@ -17,7 +17,7 @@ import Image from 'next/image'
 
 interface CrossChainAssetPanel {
   error?: boolean
-  header: (x) => React.ReactNode
+  // header: (x) => React.ReactNode
   walletToggle?: (x) => React.ReactNode
   currency?: Currency
   currencies?: string[]
@@ -31,13 +31,13 @@ interface CrossChainAssetPanel {
   disabled?: boolean
   hideBalance?: boolean
   showInput?: boolean
-  network?: ChainId
+  network?: ChainId | string | number
   showSelect?: boolean
 }
 
 const CrossChainAssetPanel = ({
   error,
-  header,
+  // header,
   walletToggle,
   currency,
   value,
@@ -55,23 +55,6 @@ const CrossChainAssetPanel = ({
   showSelect = true,
 }: CrossChainAssetPanel) => {
   return (
-    // hover:border-${getChainColorCode(chainId)}
-    <div className={`rounded-[14px] border border-dark-700
-    bg-dark-900 
-    p-3 flex flex-col gap-4`}>
-      {header({
-        disabled,
-        onChange,
-        value,
-        currency,
-        currencies,
-        onSelect,
-        walletToggle,
-        spendFromWallet,
-        showInput,
-        network,
-        showSelect,
-      })}
       <div className={showInput ? `flex gap-1 justify-between items-baseline px-1.5` : 'hidden'}>
         <InputPanel
           {...{
@@ -92,7 +75,6 @@ const CrossChainAssetPanel = ({
         />
         {!hideBalance && <BalancePanel {...{ disabled, currency, onChange, spendFromWallet }} />}
       </div>
-    </div>
   )
 }
 
@@ -220,84 +202,84 @@ const BalancePanel: FC<Pick<CrossChainAssetPanel, 'disabled' | 'currency' | 'onC
   )
 }
 
-const BridgeAssetPanelHeader: FC<
-  Pick<
-    CrossChainAssetPanel,
-    'currency' | 'network' | 'showSelect' | 'currencies' | 'onSelect' | 'walletToggle' | 'spendFromWallet' | 'disabled' | 'onChange' | 'value'
-  > & { label: string; id?: string }
-> = ({ walletToggle, network, showSelect, currency, onSelect, spendFromWallet, id, currencies }) => {
-  const { chainId } = useActiveWeb3React()
-  const triggerA = currency && showSelect ? (
-    <div
-      id={id}
-      className="flex items-center gap-2 px-2 py-1 rounded-full shadow-md cursor-pointer text-high-emphesis bg-dark-800 hover:bg-dark-700"
-    >
-      <CurrencyLogo currency={currency} className="!rounded-full overflow-hidden" size={20} />
-      <Typography variant="sm" className="!text-xl" weight={700}>
-        {!spendFromWallet ? currency.wrapped.symbol : currency.symbol}
-      </Typography>
-      <ChevronDownIcon width={18} />
-    </div>
-  ) : showSelect && (
-    <Button color={getChainColorCode(chainId)} variant="flexed" size="sm" id={id} className="!rounded-full !px-2 !py-0 !h-[32px] !pl-3">
-      <div className="flex items-center mt-1">
-        {`Select Token`}
-        <ChevronDownIcon width={18} />
-      </div>
-    </Button>
-  )
+// const BridgeAssetPanelHeader: FC<
+//   Pick<
+//     CrossChainAssetPanel,
+//     'currency' | 'network' | 'showSelect' | 'currencies' | 'onSelect' | 'walletToggle' | 'spendFromWallet' | 'disabled' | 'onChange' | 'value'
+//   > & { label: string; id?: string }
+// > = ({ walletToggle, network, showSelect, currency, onSelect, spendFromWallet, id, currencies }) => {
+//   const { chainId } = useActiveWeb3React()
+//   const triggerA = currency && showSelect ? (
+//     <div
+//       id={id}
+//       className="flex items-center gap-2 px-2 py-1 rounded-full shadow-md cursor-pointer text-high-emphesis bg-dark-800 hover:bg-dark-700"
+//     >
+//       <CurrencyLogo currency={currency} className="!rounded-full overflow-hidden" size={20} />
+//       <Typography variant="sm" className="!text-xl" weight={700}>
+//         {!spendFromWallet ? currency.wrapped.symbol : currency.symbol}
+//       </Typography>
+//       <ChevronDownIcon width={18} />
+//     </div>
+//   ) : showSelect && (
+//     <Button color={getChainColorCode(chainId)} variant="flexed" size="sm" id={id} className="!rounded-full !px-2 !py-0 !h-[32px] !pl-3">
+//       <div className="flex items-center mt-1">
+//         {`Select Token`}
+//         <ChevronDownIcon width={18} />
+//       </div>
+//     </Button>
+//   )
 
-  return (
-    <div>
+//   return (
+//     <div>
 
-        <div
-          className={network ? `flex justify-center gap-8 mb-3 mt-3 max-h-[36px] border ${`border-${getChainColorCode(network)}`} rounded-[14px] bg-dark-900 p-2` : 'hidden'}
-        >
-          <Image
-            src={getChainLogo(network)}
-            height={16}
-            width={16}
-            alt={'chain logo'}
-          />
-          <Typography variant="sm" className={'text-md -my-0.5 sm:-my-1 sm:text-xl'} weight={700}>
-            {getChainInfo(network, 'NETWORK')}
-          </Typography>
-      </div>
-      <div className={`flex items-end justify-between gap-2`}>
-        { showSelect ? (
-        <CurrencySearchModal
-          chainId={chainId}
-          selectedCurrency={currency}
-          onCurrencySelect={(currency) => onSelect && onSelect(currency)}
-          trigger={triggerA}
-          currencyList={currencies}
-          showSearch={false}
-          // includeNativeCurrency={false}
-        />
-        ) : (
-          <div
-            className="flex items-center gap-2 px-2 py-1 rounded-full shadow-md cursor-pointer text-high-emphesis bg-dark-800 hover:bg-dark-700"
-          >
-          <CurrencyLogo currency={currency} className="!rounded-full overflow-hidden" size={20} />
-          <Typography variant="sm" className="!text-xl" weight={700}>
-            { currency.symbol }
-          </Typography>
-          {/* <ChevronDownIcon width={18} /> */}
-        </div>
-          // <div className={`flex p-2 bg-dark-800`}>
-          // <CurrencyLogo currency={currency} size={20} className="!rounded-full overflow-hidden" />
-          // <Typography variant="sm" className="!text-xl" weight={700}>
-          //   {`${currency.symbol}`}
-          // </Typography>
-          // </div>
-        )}
-        </div>
-    </div>
-  )
-}
+//         <div
+//           className={network ? `flex justify-center gap-8 mb-3 mt-3 max-h-[36px] border ${`border-${getChainColorCode(Number(network))}`} rounded-[14px] bg-dark-900 p-2` : 'hidden'}
+//         >
+//           <Image
+//             src={getChainLogo(Number(network))}
+//             height={16}
+//             width={16}
+//             alt={'chain logo'}
+//           />
+//           <Typography variant="sm" className={'text-md -my-0.5 sm:-my-1 sm:text-xl'} weight={700}>
+//             {getChainInfo(Number(network), 'NETWORK')}
+//           </Typography>
+//       </div>
+//       <div className={`flex items-end justify-between gap-2`}>
+//         { showSelect ? (
+//         <CurrencySearchModal
+//           chainId={chainId}
+//           selectedCurrency={currency}
+//           onCurrencySelect={(currency) => onSelect && onSelect(currency)}
+//           trigger={triggerA}
+//           currencyList={currencies}
+//           showSearch={false}
+//           // includeNativeCurrency={false}
+//         />
+//         ) : (
+//           <div
+//             className="flex items-center gap-2 px-2 py-1 rounded-full shadow-md cursor-pointer text-high-emphesis bg-dark-800 hover:bg-dark-700"
+//           >
+//           <CurrencyLogo currency={currency} className="!rounded-full overflow-hidden" size={20} />
+//           <Typography variant="sm" className="!text-xl" weight={700}>
+//             { currency.symbol }
+//           </Typography>
+//           {/* <ChevronDownIcon width={18} /> */}
+//         </div>
+//           // <div className={`flex p-2 bg-dark-800`}>
+//           // <CurrencyLogo currency={currency} size={20} className="!rounded-full overflow-hidden" />
+//           // <Typography variant="sm" className="!text-xl" weight={700}>
+//           //   {`${currency.symbol}`}
+//           // </Typography>
+//           // </div>
+//         )}
+//         </div>
+//     </div>
+//   )
+// }
 
 
-CrossChainAssetPanel.Header = BridgeAssetPanelHeader
+// CrossChainAssetPanel.Header = BridgeAssetPanelHeader
 CrossChainAssetPanel.Switch = WalletSwitch
 
 export default CrossChainAssetPanel

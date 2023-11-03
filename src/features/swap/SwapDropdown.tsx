@@ -139,7 +139,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             activeClassName={classNames(
               activeStyle
             )}
-            href={`/crosschain`}
+            href={`/exchange/crosschain`}
           >
             <div
               className={classNames(

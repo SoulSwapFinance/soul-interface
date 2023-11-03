@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { ethers } from 'ethers'
 import BigNumber from 'bignumber.js'
 // import { getAllChains, swap } from 'features/aggregator/router'
-import { ChainId, Currency, WETH, USDC, USDC_ADDRESS, WBTC, WNATIVE, WNATIVE_ADDRESS, AXL_USDC_ADDRESS } from 'sdk'
+import { ChainId, Currency, WETH, USDC, USDC_ADDRESS, WBTC, WNATIVE, WNATIVE_ADDRESS, AXL_USDC_ADDRESS, Token, NATIVE } from 'sdk'
 import { ArrowDownIcon } from '@heroicons/react/24/solid'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import { NextSeo } from 'next-seo'
@@ -12,7 +12,7 @@ import { useActiveWeb3React } from "services/web3";
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
 import { RouteData, Squid, TokenData } from "@0xsquid/sdk";
 import { Button } from "components/Button";
-// import CrossChainAssetPanel from 'features/trident/swap/CrossChainAssetPanel'
+import CrossChainAssetPanel from 'features/trident/swap/CrossChainAssetPanel'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
@@ -64,7 +64,7 @@ import Head from 'next/head'
 //     // receiveGasOnDestination: true,
 //   });
 //   setRoute(route)
-//   console.log(route.estimate.toAmount);
+//   console.log(route.estimate.inutAmount);
 
 //   const tx = (await squid.executeRoute({
 //     // @ts-ignore
@@ -120,7 +120,7 @@ import Head from 'next/head'
 //     // receiveGasOnDestination: true,
 //   });
 //   setRoute(route)
-//   console.log(route.estimate.toAmount);
+//   console.log(route.estimate.inutAmount);
 // }
 
 const Crosschain = ({ }) => {
@@ -130,7 +130,7 @@ const Crosschain = ({ }) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const signer = provider.getSigner()
 
-    // const NATIVE_ADDRESS = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+    const NATIVE_ADDRESS = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
     // const fromChain = ChainId.FANTOM
     // const toChain = ChainId.AVALANCHE
     // chainId == ChainId.ETHEREUM ? ChainId.FANTOM
@@ -159,21 +159,21 @@ const Crosschain = ({ }) => {
             "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/avalanche.svg"
 
         },
-        {
-            "chainId": 1,
-            "name": "Ethereum Mainnet",
-            "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/eth.svg"
+        // {
+        //     "chainId": 1,
+        //     "name": "Ethereum Mainnet",
+        //     "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/eth.svg"
 
-        }
+        // }
     ]
 
     const ftmTokens: TokenData[] = [
         {
             "chainId": 250,
-            "address": WNATIVE[250].address,
-            "name": WNATIVE[250].name,
-            "symbol": WNATIVE[250].symbol,
-            "decimals": WNATIVE[250].decimals,
+            "address": NATIVE_ADDRESS,
+            "name": 'Fantom',
+            "symbol": 'FTM',
+            "decimals": 18,
             "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/fantom.svg",
             "coingeckoId": 'fantom',
         },
@@ -189,6 +189,15 @@ const Crosschain = ({ }) => {
     ]
 
     const avaxTokens: TokenData[] = [
+        {
+            "chainId": 43114,
+            "address": NATIVE_ADDRESS,
+            "name": 'Avalanche',
+            "symbol": 'AVAX',
+            "decimals": 18,
+            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/avalanche.svg",
+            "coingeckoId": 'avalanche-2',
+        },
         {
             "chainId": 43114,
             "address": USDC_ADDRESS[43114],
@@ -230,22 +239,6 @@ const Crosschain = ({ }) => {
     //     }
     // ]
 
-    // // Source
-    // const fromChain = chains.find((c) => c.chainId === (swapRoute === null || swapRoute === void 0 ? void 0 : swapRoute.fromChainId));
-
-    // const fromToken = fromTokens.find((t) => t.address === (swapRoute === null || swapRoute === void 0 ? void 0 : swapRoute.fromTokenAddress));
-    // // Destination
-    // const toChain = chains.find((c) => c.chainId === (swapRoute === null || swapRoute === void 0 ? void 0 : swapRoute.toChainId));
-    // const toTokensForChain = (0, configService_1.getTokensForChain)((_b = squid === null || squid === void 0 ? void 0 : squid.tokens) !== null && _b !== void 0 ? _b : [], toChainId);
-    // const toToken = toTokensForChain.find((t) => t.address === (swapRoute === null || swapRoute === void 0 ? void 0 : swapRoute.toTokenAddress));
-    // const toTokens = (0, configService_1.filterTokensForDestination)(toTokensForChain, toChain, fromToken);
-    // const tokenItems = (0, react_1.useMemo)(() => ({
-    //     from: fromTokens,
-    //     to: toTokens,
-    // }), [fromTokens, toTokens]);
-    // const updatedDestinationAddress = swapRoute === null || swapRoute === void 0 ? void 0 : swapRoute.destinationAddress;
-    // const { connectedAddress: destinationUserAddress } = (0, useMultiChain_1.useMultiChain)(toChain, toToken);
-
     const getTokensForChain = (chainId) => {
         return chainId == ChainId.AVALANCHE ? avaxTokens
             // : chainId == ChainId.ETHEREUM ? ethTokens
@@ -257,7 +250,7 @@ const Crosschain = ({ }) => {
             // chainId == ChainId.ETHEREUM ? 2 : 0
     }
 
-    const fromChain = [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? chains[chainIndex(chainId)] : chains[0]
+    const fromChain = chainId == ChainId.AVALANCHE ? chains[1] : chains[0]
     const [toChain, setToChain] = useState(chainId == 43114 ? chains[0] : chains[1])
     const [showToChains, setShowToChains] = useState(false)
     // const [showFromChains, setShowFromChains] = useState(false)
@@ -267,19 +260,37 @@ const Crosschain = ({ }) => {
     const [fromAssetList, setFromAssetList] = useState<TokenData[]> (getTokensForChain(fromChain.chainId))
     const [toAssetList, setToAssetList] = useState<TokenData[]> (getTokensForChain(toChain.chainId))
     const [fromAsset, setFromAsset] = useState(fromAssetList[chainIndex(fromChain?.chainId)])
+    const [fromToken, setFromToken] = useState<Token>(new Token(
+        fromChain.chainId == 43114 
+            ? ChainId.AVALANCHE 
+            : ChainId.FANTOM, fromAsset.address, 
+            fromAsset.decimals, 
+            fromAsset.symbol, 
+            fromAsset.name
+        )
+    )
     const [toAsset, setToAsset] = useState(toAssetList[chainIndex(toChain?.chainId)])
+    const [toToken, setToToken] = useState<Token>(new Token(
+        toChain.chainId == 43114 
+            ? ChainId.AVALANCHE 
+            : ChainId.FANTOM, toAsset.address, 
+            toAsset.decimals, 
+            toAsset.symbol, 
+            toAsset.name
+        )
+    )
     // const [fromTokenData, setFromTokenData] = useState<TokenData[]>(fromTokens)
     // const [tokenData, setTokenData] = useState<TokenData[]>(fromTokens)
-    // const [route, setRoute] = useState<RouteData>(null)
+    const [route, setRoute] = useState<RouteData>(null)
     // const nativePrice = usePrice(WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM])
     // √
     const [fromAmount, setFromAmount] = useState('1');
-    const [toAmount, setToAmount] = useState('1');
+    const [inputAmount, setInputAmount] = useState('1');
     // const _balance = useTokenBalance(chainId, account, fromAsset)
     // const balance = _balance ? _balance.toSignificant(18) : '0'
     const [showFromTokens, setShowFromTokens] = useState(false)
     const [showToTokens, setShowToTokens] = useState(false)
-
+    const [outputAmount, setOutputAmount] = useState('1')
     const buttonColor = (chainId) => {
         return chainId == 43114 ? '#E84142'  // avaxRed
             : chainId == 1 ? '#627EEA' // ethBlue
@@ -344,7 +355,7 @@ const Crosschain = ({ }) => {
     });
 
     // [√] SQUID ROUTE //
-    const handleSwap = async () => {
+    const getRoute = async (_fromAmount) => {
 
         await squid.init();
 
@@ -353,7 +364,7 @@ const Crosschain = ({ }) => {
             // todo: assumes fromChain is current chain
             fromChain: chainId,
             fromToken: fromAsset.address,
-            fromAmount: fromAmountWithDecimals, // "10000000",
+            fromAmount: fromAmountWithDecimals(_fromAmount), // "10000000",
             // todo: assumes Fantom || Avalanche
             toChain: toChain.chainId,
             // todo: assumes Fantom || Avalanche
@@ -363,13 +374,45 @@ const Crosschain = ({ }) => {
 
         const { route } = await squid.getRoute(params)
 
-        // console.log(route.estimate.toAmount)
+        // console.log(route.estimate.inutAmount)
 
-        // setOutputAmount(
-        //   new BigNumber(route.estimate?.toAmount.toString() ?? '1')
-        //     .div(10 ** (toAsset.isNative ? 18 : toAsset?.wrapped.decimals ?? 18))
-        //     .toString()
-        // )
+        await setOutputAmount(
+          new BigNumber(route.estimate?.toAmount.toString() ?? '1')
+            .div(10 ** (toAsset.address == NATIVE_ADDRESS ? 18 : toAsset?.decimals ?? 18))
+            .toString()
+        )
+
+        setRoute(route)
+
+    }
+
+    const handleSwap = async () => {
+
+        await squid.init();
+
+        const params = {
+            toAddress: account, // signer.address,
+            // todo: assumes fromChain is current chain
+            fromChain: chainId,
+            fromToken: fromAsset.address,
+            fromAmount: fromAmountWithDecimals(inputAmount), // "10000000",
+            // todo: assumes Fantom || Avalanche
+            toChain: toChain.chainId,
+            // todo: assumes Fantom || Avalanche
+            toToken: toAsset.address,
+            slippage: 1,
+        }
+
+        const { route } = await squid.getRoute(params)
+
+        console.log('inputAmount: %s', route.estimate.fromAmount)
+        console.log('outputAmount: %s', route.estimate.toAmount)
+
+        setOutputAmount(
+          new BigNumber(route.estimate?.fromAmount.toString() ?? '1')
+            .div(10 ** (toAsset.address == NATIVE_ADDRESS ? 18 : toAsset?.decimals ?? 18))
+            .toString()
+        )
 
         // await generateRoute()
 
@@ -579,19 +622,45 @@ const Crosschain = ({ }) => {
         )
     }
 
-    const fromAmountWithDecimals = new BigNumber(fromAmount.toString())
-        .times(10 ** (fromAsset.decimals ?? 18))
-        .toString()
+    // const InputAmount = ({ isFrom }) => {
+    //     return (
+    //         <div
+    //             className={`flex flex-col gap-3 mt-8 mb-4 w-full`}
+    //         >
+    //             <div
+    //                 className={`flex flex-col gap-3 mt-8 mb-4 w-full`}
+    //             >
+    //                 <input
+    //                     className={`flex flex-col gap-3 mt-8 mb-4 w-full`}
+    //                     type="number"
+    //                     placeholder="1"
+    //                     value={isFrom ? fromAmount : inutAmount}
+    //                     onChange={(e) => setFromAmount(e.target.value)}
+    //                 />
+    //             </div>
+    //         </div>
+    //     )
+    // }
 
-    // const toAmountWithDecimals = new BigNumber(toAmount.toString())
-    //     .times(10 ** (toAsset.isNative ? 18 : toAsset?.wrapped.decimals ?? 18))
+    const fromAmountWithDecimals = (_fromAmount) => {
+        return new BigNumber(_fromAmount.toString())
+            .times(10 ** (fromAsset.address == NATIVE_ADDRESS ? 18 : fromAsset.decimals ?? 18))
+            .toString()
+    }
+
+    // const fromAmountWithDecimals = new BigNumber(inputAmount.toString())
+    //     .times(10 ** (fromAsset.address == NATIVE_ADDRESS ? 18 
+    //             : fromAsset?.decimals 
+    //             ?? 18)
+    //     )
     //     .toString()
 
     const handleTypeInput = useCallback(
         async (value: string) => {
-            setFromAmount(value)
+            await setFromAmount(value)
+            await getRoute(value)
         },
-        [setFromAmount]
+        [setFromAmount, getRoute]
     )
 
     // generateRoute()
@@ -627,24 +696,19 @@ const Crosschain = ({ }) => {
                     >
                         <ChainSelector isFrom={true} />
                         <TokenSelector isFrom={true} />
+                        {/* <InputAmount isFrom={true} /> */}
                     </div>
-                    {/* <CrossChainAssetPanel
+                    <CrossChainAssetPanel
                         spendFromWallet={true}
-                        network={fromChain}
-                        header={(props) => (
-                            <CrossChainAssetPanel.Header
-                                {...props}
-                                label={
-                                    `Swap from:`
-                                }
-                            />
-                        )}
-                        currency={fromAsset}
+                        network={fromChain.chainId}
+                        currency={fromAsset.address == NATIVE_ADDRESS ? 
+                            NATIVE[chainId] : fromToken
+                        }
                         value={fromAmount.toString() ?? '1'}
                         onChange={handleTypeInput}
                         showSelect={false}
                     // onSelect={handleInputSelect}
-                    /> */}
+                    />
 
                     <div className="flex justify-center -mt-8 -mb-4 z-0">
                         <div className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700`}>
@@ -658,24 +722,21 @@ const Crosschain = ({ }) => {
                         <TokenSelector isFrom={false} />
                     </div>
 
-                    {/* <CrossChainAssetPanel
+                    <CrossChainAssetPanel
                             spendFromWallet={true}
-                            network={toChain}
-                            header={(props) => (
-                                <CrossChainAssetPanel.Header
-                                    {...props}
-                                    label={
-                                        `Swap to:`
-                                    }
-                                />
-                            )}
-                            currency={toAsset}
-                            value={toAmount.toString() ?? '1'}
+                            network={toChain.chainId}
+                            currency={toAsset.address == NATIVE_ADDRESS ?
+                            NATIVE[toChain.chainId] : toToken
+                        }
+                            value={outputAmount.toString() ?? '1'}
                             onChange={() => { }}
                             showSelect={false}
                         // showBalance={false}
                         // onSelect={handleOutputSelect}
-                        /> */}
+                        />
+                        <Typography className={''}>
+                            {outputAmount.toString()}
+                        </Typography>
                 </div>
                 <div
                     className={`flex flex-col gap-3 mt-8 mb-4 w-full`}
@@ -685,7 +746,7 @@ const Crosschain = ({ }) => {
                     // onClick={generateTokenData}
                     >
                         <Typography size={14} className="font-bold text-white">
-                            {`Submit`}
+                            {`Swap Crosschain`}
                         </Typography>
                     </Button>
                 </div>
