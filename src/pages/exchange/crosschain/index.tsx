@@ -21,6 +21,7 @@ import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 // import { getChainInfo } from 'constants/chains'
 // import { useTokenBalance } from 'state/wallet/hooks'
 import Head from 'next/head'
+import { getChainInfo } from 'constants/chains'
 
 
 // // addresses and IDs
@@ -240,44 +241,46 @@ const Crosschain = ({ }) => {
     // ]
 
     const getTokensForChain = (chainId) => {
-        return chainId == ChainId.AVALANCHE ? avaxTokens
+        return chainId == 43114 ? avaxTokens
             // : chainId == ChainId.ETHEREUM ? ethTokens
-                : ftmTokens ?? ftmTokens
+            : ftmTokens ?? ftmTokens
     }
 
     const chainIndex = (chainId) => {
-        return chainId == ChainId.AVALANCHE ? 1 : 0
-            // chainId == ChainId.ETHEREUM ? 2 : 0
+        return chainId == 43114 ? 1 : 0
+        // chainId == ChainId.ETHEREUM ? 2 : 0
     }
 
-    const fromChain = chainId == ChainId.AVALANCHE ? chains[1] : chains[0]
-    const [toChain, setToChain] = useState(chainId == 43114 ? chains[0] : chains[1])
+    const fromChain = chainId == 43114 ? chains[1] : chains[0]
+    const toChain = chainId == 43114 ? chains[0] : chains[1]
+    // const [toChain, setToChain] = useState(chainId == 43114 ? chains[0] : chains[1])
     const [showToChains, setShowToChains] = useState(false)
     // const [showFromChains, setShowFromChains] = useState(false)
 
     // const fromTokens: TokenData[] = 
     // const toTokens: TokenData[] = getTokensForChain(toChain)
-    const [fromAssetList, setFromAssetList] = useState<TokenData[]> (getTokensForChain(fromChain.chainId))
-    const [toAssetList, setToAssetList] = useState<TokenData[]> (getTokensForChain(toChain.chainId))
-    const [fromAsset, setFromAsset] = useState(fromAssetList[chainIndex(fromChain?.chainId)])
+    const [fromAssetList, setFromAssetList] = useState<TokenData[]>(getTokensForChain(fromChain?.chainId))
+    const [toAssetList, setToAssetList] = useState<TokenData[]>(getTokensForChain(toChain?.chainId))
+    const [fromAsset, setFromAsset] = useState(fromAssetList[0])
     const [fromToken, setFromToken] = useState<Token>(new Token(
-        fromChain.chainId == 43114 
-            ? ChainId.AVALANCHE 
-            : ChainId.FANTOM, fromAsset.address, 
-            fromAsset.decimals, 
-            fromAsset.symbol, 
-            fromAsset.name
-        )
+        fromChain.chainId == 43114
+            ? ChainId.AVALANCHE
+            : ChainId.FANTOM, 
+        fromAsset?.address,
+        fromAsset?.decimals,
+        fromAsset?.symbol,
+        fromAsset?.name
     )
-    const [toAsset, setToAsset] = useState(toAssetList[chainIndex(toChain?.chainId)])
+    )
+    const [toAsset, setToAsset] = useState(toAssetList[0])
     const [toToken, setToToken] = useState<Token>(new Token(
-        toChain.chainId == 43114 
-            ? ChainId.AVALANCHE 
-            : ChainId.FANTOM, toAsset.address, 
-            toAsset.decimals, 
-            toAsset.symbol, 
-            toAsset.name
-        )
+        toChain.chainId == 43114
+            ? ChainId.AVALANCHE
+            : ChainId.FANTOM, toAsset.address,
+        toAsset.decimals,
+        toAsset.symbol,
+        toAsset.name
+    )
     )
     // const [fromTokenData, setFromTokenData] = useState<TokenData[]>(fromTokens)
     // const [tokenData, setTokenData] = useState<TokenData[]>(fromTokens)
@@ -290,7 +293,7 @@ const Crosschain = ({ }) => {
     // const balance = _balance ? _balance.toSignificant(18) : '0'
     const [showFromTokens, setShowFromTokens] = useState(false)
     const [showToTokens, setShowToTokens] = useState(false)
-    const [outputAmount, setOutputAmount] = useState('1')
+    const [outputAmount, setOutputAmount] = useState('0')
     const buttonColor = (chainId) => {
         return chainId == 43114 ? '#E84142'  // avaxRed
             : chainId == 1 ? '#627EEA' // ethBlue
@@ -329,24 +332,24 @@ const Crosschain = ({ }) => {
     // const toToken = toTokensForChain.find((t) => t.address === (swapRoute === null || swapRoute === void 0 ? void 0 : swapRoute.toTokenAddress));
     // const toTokens = filterTokensForDestination(toTokensForChain, toChain, fromToken);
 
-    const handleLoad = async () => {
-        (async () => {
-            // instantiate the SDK
-            const squid = new Squid({
-                baseUrl: "https://api.0xsquid.com",
-                integratorId: "soulswap-___"
-            });
+    // const handleLoad = async () => {
+    //     (async () => {
+    //         // instantiate the SDK
+    //         const squid = new Squid({
+    //             baseUrl: "https://api.0xsquid.com",
+    //             integratorId: "soulswap-___"
+    //         });
 
-            squid.setConfig({
-                baseUrl: "https://api.0xsquid.com",
-                integratorId: "soulswap-___"
-            });
+    //         squid.setConfig({
+    //             baseUrl: "https://api.0xsquid.com",
+    //             integratorId: "soulswap-___"
+    //         });
 
-            // init the SDK
-            await squid.init();
-            console.log("Squid inited");
-        })();
-    }
+    //         // init the SDK
+    //         await squid.init();
+    //         console.log("Squid inited");
+    //     })();
+    // }
 
     // instantiate the SDK
     const squid = new Squid({
@@ -374,19 +377,20 @@ const Crosschain = ({ }) => {
 
         const { route } = await squid.getRoute(params)
 
-        // console.log(route.estimate.inutAmount)
-
+        console.log('inputAmount: %s', route.estimate.fromAmount)
+        console.log('outputAmount: %s', route.estimate.toAmount)
+    
         await setOutputAmount(
-          new BigNumber(route.estimate?.toAmount.toString() ?? '1')
-            .div(10 ** (toAsset.address == NATIVE_ADDRESS ? 18 : toAsset?.decimals ?? 18))
-            .toString()
+            new BigNumber(route.estimate?.toAmount.toString() ?? '1')
+                .div(10 ** (toAsset.address == NATIVE_ADDRESS ? 18 : toAsset?.decimals ?? 18))
+                .toString()
         )
 
         setRoute(route)
 
     }
 
-    const handleSwap = async () => {
+    const handleSwap = async (_fromAmount) => {
 
         await squid.init();
 
@@ -395,7 +399,7 @@ const Crosschain = ({ }) => {
             // todo: assumes fromChain is current chain
             fromChain: chainId,
             fromToken: fromAsset.address,
-            fromAmount: fromAmountWithDecimals(inputAmount), // "10000000",
+            fromAmount: fromAmountWithDecimals(_fromAmount), // "10000000",
             // todo: assumes Fantom || Avalanche
             toChain: toChain.chainId,
             // todo: assumes Fantom || Avalanche
@@ -408,13 +412,13 @@ const Crosschain = ({ }) => {
         console.log('inputAmount: %s', route.estimate.fromAmount)
         console.log('outputAmount: %s', route.estimate.toAmount)
 
-        setOutputAmount(
-          new BigNumber(route.estimate?.fromAmount.toString() ?? '1')
-            .div(10 ** (toAsset.address == NATIVE_ADDRESS ? 18 : toAsset?.decimals ?? 18))
-            .toString()
+        await setOutputAmount(
+            new BigNumber(route.estimate?.toAmount.toString() ?? '1')
+                .div(10 ** (toAsset.address == NATIVE_ADDRESS ? 18 : toAsset?.decimals ?? 18))
+                .toString()
         )
 
-        // await generateRoute()
+        await setRoute(route)
 
         const tx = await squid.executeRoute({
             // @ts-ignore
@@ -435,6 +439,23 @@ const Crosschain = ({ }) => {
     const toggleShowTokens = (isFrom) => {
         isFrom ? setShowFromTokens(!showFromTokens) : setShowToTokens(!showToTokens)
     }
+    
+    const handleSetFromAsset = useCallback((token, amount) => {
+        setFromAsset(token)
+        setFromToken(
+            token.address == NATIVE_ADDRESS ?
+            NATIVE[fromChain.chainId] :
+            new Token(
+            fromChain.chainId == 43114
+                ? ChainId.AVALANCHE
+                : ChainId.FANTOM,
+            token.address,
+            token.decimals,
+            token.symbol,
+            token.name
+        ))
+        setInputAmount(amount)
+    }, [setFromAsset, setFromToken, setInputAmount])
 
     // shows: Chains
     const ChainSelector = ({ isFrom }) => {
@@ -449,17 +470,17 @@ const Crosschain = ({ }) => {
                     // ${isFrom ? `bg-dark-900` : `bg-dark-900 hover:bg-dark-800`}
                     <div
                         className={`flex justify-center border-4 border-[${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
-                            bg-dark-900
+                            bg-dark-900 mb-4
                         `}
                         // onClick={() => toggleShowChains(toChain)}
                         style={{
-                            // padding: 4,
+                            // padding: -2,
                             height: '100%',
                         }}
                     >
                         <Typography
                             weight={600}
-                            className={'font-bold text-white mt-4 text-xl'}
+                            className={'font-bold text-white mt-4 text-lg sm:text-xl'}
                         >
                             {`${isFrom ? fromChain.name : toChain.name}`}
                         </Typography>
@@ -514,7 +535,7 @@ const Crosschain = ({ }) => {
                     //     // color={buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}
                     // >
                     <div
-                        className={`ml-2 flex flex-cols-2 gap-6 sm:gap-24 border-4 border-[${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
+                        className={`ml-2 flex flex-cols-2 gap-12 sm:gap-24 border-4 border-[${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
                             bg-dark-900 hover:bg-dark-800
                         `}
                         style={{
@@ -529,12 +550,12 @@ const Crosschain = ({ }) => {
                             src={isFrom ? fromAsset.logoURI : toAsset.logoURI}
                             alt={'token logo'}
                             className={
-                                'ml-4 mt-2 mb-2'
+                                'ml-4'
                             }
                         />
                         <Typography
                             weight={600}
-                            className={'flex items-center font-bold text-white justify-center text-xl'}
+                            className={'flex items-center font-bold text-white justify-center text-lg sm:text-xl'}
                         >
                             {`${isFrom ? fromAsset.symbol : toAsset.symbol}`}
                         </Typography>
@@ -547,25 +568,26 @@ const Crosschain = ({ }) => {
                         chainId={chainId}
                         isOpen={showFromTokens}
                         onDismiss={() => toggleShowTokens(isFrom)}
-                    >   
-                    {fromAssetList.map((token) => {
+                    >
+                        {fromAssetList.map((token) => {
                             return (
                                 <div
-                                className={`flex mt-2 mx-24 mb-2 justify-center items-center align-center gap-24
-                                    bg-dark-900 hover:bg-dark-800 p-3 rounded-xl border-2 border-[${buttonColor(fromChain.chainId)}]
+                                    className={`flex mt-2 sm:mx-24 mb-2 justify-center items-center align-center gap-12 sm:gap-24
+                                    bg-dark-900 hover:bg-dark-800 p-1 sm:p-3 rounded-xl border-2 border-[${buttonColor(fromChain.chainId)}]
                                     ${token.symbol == fromAsset.symbol ? 'hidden' : 'visible'}
                                 `}
-                                onClick={() => {
-                                        setFromAsset(token)
+                                    onClick={() => {
+                                        handleSetFromAsset(token, inputAmount)
+                                        
                                         toggleShowTokens(isFrom)
                                     }}
                                 >
-                                        <Image
-                                            height={36}
-                                            width={36}
-                                            src={token.logoURI}
-                                            alt={'token logo'}
-                                        />
+                                    <Image
+                                        height={36}
+                                        width={36}
+                                        src={token.logoURI}
+                                        alt={'token logo'}
+                                    />
                                     <div>
                                         <Typography
                                             className={'font-bold text-white text-lg'}
@@ -581,30 +603,42 @@ const Crosschain = ({ }) => {
                 }
                 {showToTokens && !isFrom &&
                     <HeadlessUIModal.Controlled
-                      // isCustom={true}
+                        // isCustom={true}
                         chainId={chainId}
                         isOpen={showToTokens}
                         onDismiss={() => toggleShowTokens(isFrom)}
                     >
-                    {toAssetList.map((token) => {
+                        {toAssetList.map((token) => {
                             return (
                                 <div
-                                className={`flex mt-2 mx-24 mb-2 justify-center items-center align-center gap-24
-                                    bg-dark-900 hover:bg-dark-800 p-3 rounded-xl border-2 border-[${buttonColor(toChain.chainId)}]
+                                    className={`flex mt-2 sm:mx-24 mb-2 justify-center items-center align-center gap-12 sm:gap-24
+                                    bg-dark-900 hover:bg-dark-800 p-1 sm:p-3 rounded-xl border-2 border-[${buttonColor(toChain.chainId)}]
                                     ${token.symbol == toAsset.symbol ? 'hidden' : 'visible'}
                                 `}
-                                onClick={() => {
+                                    onClick={() => {
                                         setToAsset(token)
+                                        setToToken(
+                                            token.address == NATIVE_ADDRESS ?
+                                            NATIVE[toChain.chainId] :
+                                            new Token(
+                                            toChain.chainId == 43114
+                                                ? ChainId.AVALANCHE
+                                                : ChainId.FANTOM,
+                                            token.address,
+                                            token.decimals,
+                                            token.symbol,
+                                            token.name
+                                        ))
                                         toggleShowTokens(isFrom)
                                     }}
                                 >
-                                    
-                                        <Image
-                                            height={36}
-                                            width={36}
-                                            src={token.logoURI}
-                                            alt={'token logo'}
-                                        />
+
+                                    <Image
+                                        height={36}
+                                        width={36}
+                                        src={token.logoURI}
+                                        alt={'token logo'}
+                                    />
                                     <div>
                                         <Typography
                                             className={'font-bold text-white text-lg'}
@@ -690,7 +724,7 @@ const Crosschain = ({ }) => {
             <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
                 <SwapDropdown />
                 {/* <div className={`my-12`} /> */}
-                <div className="flex flex-col gap-3 space-y-3">
+                <div className="flex flex-col gap-3 space-y-1">
                     <div
                         className="grid grid-cols-2"
                     >
@@ -698,17 +732,21 @@ const Crosschain = ({ }) => {
                         <TokenSelector isFrom={true} />
                         {/* <InputAmount isFrom={true} /> */}
                     </div>
-                    <CrossChainAssetPanel
-                        spendFromWallet={true}
-                        network={fromChain.chainId}
-                        currency={fromAsset.address == NATIVE_ADDRESS ? 
-                            NATIVE[chainId] : fromToken
-                        }
-                        value={fromAmount.toString() ?? '1'}
-                        onChange={handleTypeInput}
-                        showSelect={false}
-                    // onSelect={handleInputSelect}
-                    />
+                    <div
+                        className={`border-4 p-2 border-[${buttonColor(fromChain.chainId)}] rounded-xl`}
+                    >
+                        <CrossChainAssetPanel
+                            spendFromWallet={true}
+                            network={fromChain.chainId}
+                            currency={fromAsset.address == NATIVE_ADDRESS ?
+                                NATIVE[chainId] : fromToken
+                            }
+                            value={fromAmount.toString() ?? '1'}
+                            onChange={handleTypeInput}
+                            showSelect={false}
+                        // onSelect={handleInputSelect}
+                        />
+                    </div>
 
                     <div className="flex justify-center -mt-8 -mb-4 z-0">
                         <div className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700`}>
@@ -722,23 +760,24 @@ const Crosschain = ({ }) => {
                         <TokenSelector isFrom={false} />
                     </div>
 
-                    <CrossChainAssetPanel
+                    <div
+                        className={`border-4 p-2 border-[${buttonColor(toChain.chainId)}] rounded-xl`}
+                    >
+                        <CrossChainAssetPanel
                             spendFromWallet={true}
                             network={toChain.chainId}
                             currency={toAsset.address == NATIVE_ADDRESS ?
-                            NATIVE[toChain.chainId] : toToken
-                        }
+                                NATIVE[toChain.chainId] : toToken
+                            }
                             value={outputAmount.toString() ?? '1'}
                             onChange={() => { }}
                             showSelect={false}
                         // showBalance={false}
                         // onSelect={handleOutputSelect}
                         />
-                        <Typography className={''}>
-                            {outputAmount.toString()}
-                        </Typography>
+                    </div>
                 </div>
-                <div
+                {/* <div
                     className={`flex flex-col gap-3 mt-8 mb-4 w-full`}
                 >
                     <Button variant="filled"
@@ -749,20 +788,22 @@ const Crosschain = ({ }) => {
                             {`Swap Crosschain`}
                         </Typography>
                     </Button>
-                </div>
-                {/* <div
-                    className={`flex flex-col gap-3 mt-8 mb-4 w-full`}
+                </div> */}
+                <div
+                    className={`flex flex-col mb-4 p-1 w-full`}
                 >
                     <Button variant="outlined"
-                        color={insufficientFunds ? 'red' : 'blue'}
-                        onClick={handleSwap}
-                        disabled={insufficientFunds}
+                        color={'blue'}
+                        onClick={() => handleSwap(fromAmount)}
+                        className={'mt-8'}
+                    // disabled={insufficientFunds}
                     >
                         <Typography size={14} className="font-bold text-white">
-                            {insufficientFunds ? 'Insufficient Funds' : `Swap for ${toAsset.symbol} on ${getChainInfo(toChain, "NAME")}`}
+                            {/* {insufficientFunds ? 'Insufficient Funds' : `Swap for ${toAsset.symbol} on ${getChainInfo(toChain, "NAME")}`} */}
+                            {`Swap for ${toAsset.symbol} on ${getChainInfo(Number(toChain.chainId), "NAME")}`}
                         </Typography>
                     </Button>
-                </div> */}
+                </div>
                 <div>
                 </div>
 
