@@ -53,6 +53,7 @@ export const LIMIT_ORDER_HELPER_ADDRESS: AddressMap = {
 }
 
 export const MIM_ADDRESS: AddressMap = {
+  [ChainId.AVALANCHE]: '0x130966628846BFd36ff31a822705796e8cb8C18D',
   [ChainId.FANTOM]: '0x82f0B8B456c1A451378467398982d4834b6829c1',
 }
 
@@ -705,6 +706,11 @@ export const DAI_ADDRESS: AddressMap = {
 
 export const MPX_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x66eEd5FF1701E6ed8470DC391F05e27B1d0657eb'
+}
+
+export const SPELL_ADDRESS: AddressMap = {
+  [ChainId.AVALANCHE]: '0xce1bffbd5374dac86a2893119683f4911a2f7814',
+  [ChainId.FANTOM]: '0x468003b688943977e6130f4f68f23aad939a1040'
 }
 
 export const FMULTI_ADDRESS: AddressMap = {

@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { ethers } from 'ethers'
 import BigNumber from 'bignumber.js'
 // import { getAllChains, swap } from 'features/aggregator/router'
-import { ChainId, Currency, WETH, USDC, USDC_ADDRESS, WBTC, WNATIVE, WNATIVE_ADDRESS, AXL_USDC_ADDRESS, Token, NATIVE } from 'sdk'
+import { ChainId, Currency, WETH, USDC, USDC_ADDRESS, WBTC, WNATIVE, WNATIVE_ADDRESS, AXL_USDC_ADDRESS, Token, NATIVE, AXL_WBTC_ADDRESS, MPX_ADDRESS, MIM_ADDRESS, SPELL_ADDRESS } from 'sdk'
 import { ArrowDownIcon } from '@heroicons/react/24/solid'
 import SwapDropdown from 'features/swap/SwapDropdown'
 import { NextSeo } from 'next-seo'
@@ -151,12 +151,12 @@ const Crosschain = ({ }) => {
     const chains: Chains[] = [
         {
             "chainId": 250,
-            "name": "Fantom Opera",
+            "name": "Fantom",
             "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/fantom.svg",
         },
         {
             "chainId": 43114,
-            "name": "Avalanche Network",
+            "name": "Avalanche",
             "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/avalanche.svg"
 
         },
@@ -168,7 +168,17 @@ const Crosschain = ({ }) => {
         // }
     ]
 
-    const ftmTokens: TokenData[] = [
+    const getFromAssets = useCallback((fromChain) => {
+        return fromChain == 43114 ? avaxTokens_from
+           : ftmTokens_from ?? ftmTokens_from
+    }, [])
+    
+    const getToAssets = useCallback((destChain) => {
+        return destChain == 43114 ? avaxTokens_to
+           : ftmTokens_to ?? ftmTokens_to
+    }, [])
+
+    const ftmTokens_from: TokenData[] = [
         {
             "chainId": 250,
             "address": NATIVE_ADDRESS,
@@ -186,10 +196,115 @@ const Crosschain = ({ }) => {
             "decimals": 6,
             "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/usdc.svg",
             "coingeckoId": 'usdc',
+        },
+        {
+            "chainId": 250,
+            "address": MPX_ADDRESS[250],
+            "name": 'Morphex',
+            "symbol": 'MPX',
+            "decimals": 18,
+            "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/mpx.svg",
+            "coingeckoId": 'mpx',
+        },
+        {
+            "chainId": 250,
+            "address": SPELL_ADDRESS[250],
+            "name": 'Spell Token',
+            "symbol": 'SPELL',
+            "decimals": 18,
+            "logoURI": "https://assets.coingecko.com/coins/images/15861/standard/abracadabra-3.png?1696515477",
+            "coingeckoId": 'mpx',
+        },
+        // {
+        //     "chainId": 250,
+        //     "address": AXL_WBTC_ADDRESS[250],
+        //     "name": 'Axelar BTC',
+        //     "symbol": 'axlBTC',
+        //     "decimals": 8,
+        //     "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599/logo.png",
+        //     "coingeckoId": 'bitcoin',
+        // }
+    ]
+    
+    const ftmTokens_to: TokenData[] = [
+        {
+            "chainId": 250,
+            "address": NATIVE_ADDRESS,
+            "name": 'Fantom',
+            "symbol": 'FTM',
+            "decimals": 18,
+            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/fantom.svg",
+            "coingeckoId": 'fantom',
+        },
+        {
+            "chainId": 250,
+            "address": AXL_USDC_ADDRESS[250],
+            "name": 'Axelar USDC',
+            "symbol": 'axlUSDC',
+            "decimals": 6,
+            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/usdc.svg",
+            "coingeckoId": 'usdc',
+        },
+        {
+            "chainId": 250,
+            "address": MPX_ADDRESS[250],
+            "name": 'Morphex',
+            "symbol": 'MPX',
+            "decimals": 18,
+            "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/mpx.svg",
+            "coingeckoId": 'mpx',
         }
     ]
 
-    const avaxTokens: TokenData[] = [
+    const avaxTokens_from: TokenData[] = [
+        {
+            "chainId": 43114,
+            "address": NATIVE_ADDRESS,
+            "name": 'Avalanche',
+            "symbol": 'AVAX',
+            "decimals": 18,
+            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/avalanche.svg",
+            "coingeckoId": 'avalanche-2',
+        },
+        {
+            "chainId": 43114,
+            "address": WNATIVE_ADDRESS[43114],
+            "name": 'Wrapped Avalanche',
+            "symbol": 'WAVAX',
+            "decimals": 18,
+            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/avalanche.svg",
+            "coingeckoId": 'avalanche-2',
+        },
+        {
+            "chainId": 43114,
+            "address": USDC_ADDRESS[43114],
+            "name": 'USD Coin',
+            "symbol": 'USDC',
+            "decimals": 6,
+            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/usdc.svg",
+            "coingeckoId": 'usdc',
+        },
+        {
+            "chainId": 43114,
+            "address": AXL_USDC_ADDRESS[43114],
+            "name": 'Axelar USDC',
+            "symbol": 'axlUSDC',
+            "decimals": 6,
+            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/usdc.svg",
+            "coingeckoId": 'usdc',
+        },
+        {
+            "chainId": 43114,
+            "address": MIM_ADDRESS[43114],
+            "name": 'Magic Internet Money',
+            "symbol": 'MIM',
+            "decimals": 18,
+            "logoURI": "https://assets.coingecko.com/coins/images/16786/standard/mimlogopng.png?1696516358",
+            "coingeckoId": 'magic-internet-money',
+        },
+    ]
+    
+    const avaxTokens_to: TokenData[] = [
         {
             "chainId": 43114,
             "address": NATIVE_ADDRESS,
@@ -240,16 +355,19 @@ const Crosschain = ({ }) => {
     //     }
     // ]
 
-    const getTokensForChain = (chainId) => {
-        return chainId == 43114 ? avaxTokens
+    const getTokensForChain = (chainId, isFrom) => {
+        return isFrom ? (
+                chainId == 43114 ? getFromAssets(43114) : getFromAssets(250)
+            ) : !isFrom ? 
+                chainId == 43114 ? getToAssets(43114) : getToAssets(250)
             // : chainId == ChainId.ETHEREUM ? ethTokens
-            : ftmTokens ?? ftmTokens
+            : getToAssets(250)
     }
 
-    const chainIndex = (chainId) => {
-        return chainId == 43114 ? 1 : 0
-        // chainId == ChainId.ETHEREUM ? 2 : 0
-    }
+    // const chainIndex = (chainId) => {
+    //     return chainId == 43114 ? 1 : 0
+    //     // chainId == ChainId.ETHEREUM ? 2 : 0
+    // }
 
     const fromChain = chainId == 43114 ? chains[1] : chains[0]
     const toChain = chainId == 43114 ? chains[0] : chains[1]
@@ -259,13 +377,13 @@ const Crosschain = ({ }) => {
 
     // const fromTokens: TokenData[] = 
     // const toTokens: TokenData[] = getTokensForChain(toChain)
-    const [fromAssetList, setFromAssetList] = useState<TokenData[]>(getTokensForChain(fromChain?.chainId))
-    const [toAssetList, setToAssetList] = useState<TokenData[]>(getTokensForChain(toChain?.chainId))
+    const [fromAssetList, setFromAssetList] = useState<TokenData[]>(getTokensForChain(fromChain?.chainId, true))
+    const [toAssetList, setToAssetList] = useState<TokenData[]>(getTokensForChain(toChain?.chainId, false))
     const [fromAsset, setFromAsset] = useState(fromAssetList[0])
     const [fromToken, setFromToken] = useState<Token>(new Token(
         fromChain.chainId == 43114
             ? ChainId.AVALANCHE
-            : ChainId.FANTOM, 
+            : ChainId.FANTOM,
         fromAsset?.address,
         fromAsset?.decimals,
         fromAsset?.symbol,
@@ -379,7 +497,7 @@ const Crosschain = ({ }) => {
 
         console.log('inputAmount: %s', route.estimate.fromAmount)
         console.log('outputAmount: %s', route.estimate.toAmount)
-    
+
         await setOutputAmount(
             new BigNumber(route.estimate?.toAmount.toString() ?? '1')
                 .div(10 ** (toAsset.address == NATIVE_ADDRESS ? 18 : toAsset?.decimals ?? 18))
@@ -439,21 +557,21 @@ const Crosschain = ({ }) => {
     const toggleShowTokens = (isFrom) => {
         isFrom ? setShowFromTokens(!showFromTokens) : setShowToTokens(!showToTokens)
     }
-    
+
     const handleSetFromAsset = useCallback((token, amount) => {
         setFromAsset(token)
         setFromToken(
             token.address == NATIVE_ADDRESS ?
-            NATIVE[fromChain.chainId] :
-            new Token(
-            fromChain.chainId == 43114
-                ? ChainId.AVALANCHE
-                : ChainId.FANTOM,
-            token.address,
-            token.decimals,
-            token.symbol,
-            token.name
-        ))
+                NATIVE[fromChain.chainId] :
+                new Token(
+                    fromChain.chainId == 43114
+                        ? ChainId.AVALANCHE
+                        : ChainId.FANTOM,
+                    token.address,
+                    token.decimals,
+                    token.symbol,
+                    token.name
+                ))
         setInputAmount(amount)
     }, [setFromAsset, setFromToken, setInputAmount])
 
@@ -578,7 +696,7 @@ const Crosschain = ({ }) => {
                                 `}
                                     onClick={() => {
                                         handleSetFromAsset(token, inputAmount)
-                                        
+
                                         toggleShowTokens(isFrom)
                                     }}
                                 >
@@ -619,16 +737,16 @@ const Crosschain = ({ }) => {
                                         setToAsset(token)
                                         setToToken(
                                             token.address == NATIVE_ADDRESS ?
-                                            NATIVE[toChain.chainId] :
-                                            new Token(
-                                            toChain.chainId == 43114
-                                                ? ChainId.AVALANCHE
-                                                : ChainId.FANTOM,
-                                            token.address,
-                                            token.decimals,
-                                            token.symbol,
-                                            token.name
-                                        ))
+                                                NATIVE[toChain.chainId] :
+                                                new Token(
+                                                    toChain.chainId == 43114
+                                                        ? ChainId.AVALANCHE
+                                                        : ChainId.FANTOM,
+                                                    token.address,
+                                                    token.decimals,
+                                                    token.symbol,
+                                                    token.name
+                                                ))
                                         toggleShowTokens(isFrom)
                                     }}
                                 >
