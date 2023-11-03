@@ -710,9 +710,10 @@ const Crosschain = ({ }) => {
                         isOpen={showToChains}
                         onDismiss={() => toggleShowChains(isFrom)}
                     >
-                        {chains.map((chain) => {
+                        {chains.map((chain, i) => {
                             return (
                                 <div
+                                    key={i}
                                     className={`flex mt-2 mx-24 mb-2 justify-center items-center align-center gap-24
                                     bg-dark-900 hover:bg-dark-800 p-3 rounded-xl border-2 border-[${buttonColor(chain.chainId)}]
                                     ${[fromChain.chainId, toChain.chainId].includes(chain.chainId) ? 'hidden' : 'visible'}
