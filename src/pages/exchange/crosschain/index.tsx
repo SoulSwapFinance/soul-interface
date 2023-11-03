@@ -153,8 +153,8 @@ const Crosschain = ({ }) => {
     const signer = provider.getSigner()
 
     // const NATIVE_ADDRESS = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
-    const fromChain = ChainId.FANTOM
-    const toChain = ChainId.AVALANCHE
+    // const fromChain = ChainId.FANTOM
+    // const toChain = ChainId.AVALANCHE
     // chainId == ChainId.ETHEREUM ? ChainId.FANTOM
     //   : (symbol == 'USDC' && chainId == ChainId.AVALANCHE) ? ChainId.FANTOM
     //   : (symbol == 'USDC' && chainId == ChainId.FANTOM) ? ChainId.AVALANCHE
@@ -162,6 +162,26 @@ const Crosschain = ({ }) => {
     // (symbol == 'USDC' && chainId == ChainId.FANTOM) ? ChainId.AVALANCHE
     // : symbol != 'USDC' && (chainId == ChainId.FANTOM || chainId == ChainId.AVALANCHE) ? ChainId.ETHEREUM
     //  : ChainId.FANTOM
+
+    type Chains = {
+        chainId: string | number
+        name: string;
+        logoURI: string;
+    };
+
+    const chains: Chains[] = [
+        {
+            "chainId": 250,
+            "name": "Fantom",
+            "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83/logo.png",
+        }, 
+        {
+            "chainId": 43114,
+            "name": "Avalanche",
+            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/avalanche.svg"
+        
+        }
+    ]
 
     const ftmTokens: TokenData[] = [
         { 
@@ -208,11 +228,7 @@ const Crosschain = ({ }) => {
 
     // // Source
     // const fromChain = chains.find((c) => c.chainId === (swapRoute === null || swapRoute === void 0 ? void 0 : swapRoute.fromChainId));
-    const getTokensForChain = (chainId) => {
-        return chainId == ChainId.AVALANCHE ? avaxTokens : ftmTokens ?? ftmTokens
-    };
-    const fromTokens: TokenData[] = getTokensForChain(fromChain)
-    const toTokens: TokenData[] = getTokensForChain(toChain)
+
     // const fromToken = fromTokens.find((t) => t.address === (swapRoute === null || swapRoute === void 0 ? void 0 : swapRoute.fromTokenAddress));
     // // Destination
     // const toChain = chains.find((c) => c.chainId === (swapRoute === null || swapRoute === void 0 ? void 0 : swapRoute.toChainId));
@@ -226,8 +242,21 @@ const Crosschain = ({ }) => {
     // const updatedDestinationAddress = swapRoute === null || swapRoute === void 0 ? void 0 : swapRoute.destinationAddress;
     // const { connectedAddress: destinationUserAddress } = (0, useMultiChain_1.useMultiChain)(toChain, toToken);
     
+    const getTokensForChain = (chainId) => {
+        return chainId == ChainId.AVALANCHE ? avaxTokens : ftmTokens ?? ftmTokens
+    }
+
+    const [fromChain, setFromChain] = useState(chains[0])
+    const [toChain, setToChain] = useState(chains[1])
+    const [showToChains, setShowToChains] = useState(false)
+    const [showFromChains, setShowFromChains] = useState(false)
+
+
+    const fromTokens: TokenData[] = getTokensForChain(fromChain)
+    const toTokens: TokenData[] = getTokensForChain(toChain)
+
     const [fromAsset, setFromAsset] = useState(fromTokens[0])
-    const [toAsset, setToAsset] = useState(toTokens[0])
+    const [toAsset, setToAsset] = useState(toTokens[1])
     const [tokenData, setTokenData] = useState<TokenData[]>(fromTokens)
     // const [route, setRoute] = useState<RouteData>(null)
     // const nativePrice = usePrice(WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM])
@@ -309,7 +338,7 @@ const Crosschain = ({ }) => {
             fromToken: fromAsset.address,
             fromAmount: fromAmountWithDecimals, // "10000000",
             // todo: assumes Fantom || Avalanche
-            toChain: toChain,
+            toChain: toChain.chainId,
             // todo: assumes Fantom || Avalanche
             toToken: toAsset.address,
             slippage: 1,
@@ -338,6 +367,102 @@ const Crosschain = ({ }) => {
         console.log(txReceipt)
     }
 
+    // shows: Chains
+    const ChainSelector = ({isFrom}) => {
+        return (
+            <div>
+            { (!showFromChains || !showToChains) &&
+                <Button
+                    onClick={() => isFrom ? setShowFromChains(true) : setShowToChains(true)}
+                    variant={'filled'}
+                    color={'purple'}
+                >
+                        <div
+                            className={'grid grid-cols-2'}
+                        >
+                            <Image
+                                height={24}
+                                width={24}
+                                src={isFrom ? fromChain.logoURI : toChain.logoURI}
+                                alt={'chain logo'}
+                            />
+                            {`${isFrom ? fromChain.name : toChain.name} (${isFrom ? fromChain.chainId : toChain.chainId})`}
+                        </div>
+                </Button>
+            }   
+            { showFromChains && isFrom &&
+                <div>
+                    {chains.map((chain) => {
+                        return (
+                            <div
+                                className={'grid grid-cols-2 mt-2 mb-2 justify-center items-center align-center gap-24'}
+                            >
+                                <div
+                                    onClick={() => {
+                                        setFromChain(chain)
+                                        setShowFromChains(false)
+                                    }}
+                                >
+                                <Image
+                                    height={24}
+                                    width={24}
+                                    src={chain.logoURI}
+                                    alt={'token logo'}
+                                />
+                                </div>
+                                <div>
+                                    <Typography
+                                        size={12}
+                                        className={'font-bold text-white'}
+                                    >
+                                    {`${chain.name}`}
+                                    </Typography>
+                                </div>
+                            </div>
+                        )
+                    }
+                    )}
+                </div>
+            }
+            { showToChains &&
+                <div>
+                    {chains.map((chain) => {
+                        return (
+                            <div
+                                className={'grid grid-cols-2 mt-2 mb-2 justify-center items-center align-center gap-24'}
+                            >
+                                <div
+                                    onClick={() => {
+                                        setToChain(chain)
+                                        setShowToChains(false)
+                                    }}
+                                >
+                                <Image
+                                    height={24}
+                                    width={24}
+                                    src={chain.logoURI}
+                                    alt={'chain logo'}
+                                />
+                                </div>
+                                <div>
+                                    <Typography
+                                        size={12}
+                                        className={'font-bold text-white'}
+                                    >
+                                    {`${chain.name}`}
+                                    </Typography>
+                                </div>
+                            </div>
+                        )
+                    }
+                    )}
+                </div>
+            }
+            </div>
+        )
+    }
+    
+    // shows: Tokens for a given chain.
     const TokenSelector = ({isFrom}) => {
 
         return (
@@ -362,7 +487,7 @@ const Crosschain = ({ }) => {
                                 src={isFrom ? fromAsset.logoURI : toAsset.logoURI}
                                 alt={'token logo'}
                             />
-                            {`${isFrom ? fromAsset.name : toAsset.name} (${isFrom ? fromChain : toChain})`}
+                            {`${isFrom ? fromAsset.name : toAsset.name} (${isFrom ? fromChain.chainId : toChain.chainId})`}
                         </div>
                 </Button>
             }   
@@ -455,10 +580,10 @@ const Crosschain = ({ }) => {
 
     // generateRoute()
 
-    const generateTokenData = () => {
-        console.log(tokenData.values())
-        // let fromData = TokenData.fromChainData(fromAsset)
-    }
+    // const generateTokenData = () => {
+    //     console.log(tokenData.values())
+    //     // let fromData = TokenData.fromChainData(fromAsset)
+    // }
 
     // const insufficientFunds = Number(fromAmount) > Number(balance)
 
@@ -481,6 +606,7 @@ const Crosschain = ({ }) => {
                 <SwapDropdown />
                 {/* <div className={`my-12`} /> */}
                 <div className="flex flex-col gap-3 space-y-3">
+                <ChainSelector isFrom={true} />
                 <TokenSelector isFrom={true} />
                     {/* <CrossChainAssetPanel
                         spendFromWallet={true}
@@ -505,6 +631,7 @@ const Crosschain = ({ }) => {
                         <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
                     </div>
                 </div>
+                <ChainSelector isFrom={false} />
                 <TokenSelector isFrom={false} />
 
                 {/* <CrossChainAssetPanel
