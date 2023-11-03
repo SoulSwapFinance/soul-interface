@@ -17,6 +17,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/crosschain',
+        destination: '/exchange/swap',
+        permanent: true,
+      },
+      {
         source: '/autostake',
         destination: '/soul/autostake',
         permanent: true,
@@ -78,6 +83,10 @@ const nextConfig = {
         {
           source: '/aggregator/:token*',
           destination: '/exchange/aggregator/:token*',
+        },
+        {
+          source: '/crosschain',
+          destination: '/exchange/crosschain',
         },
         {
           source: '/soul',
