@@ -84,7 +84,6 @@ import SwapAssetPanel from "features/trident/swap/SwapAssetPanel"
 import { currencyId } from "functions/currency"
 import { useRouter } from "next/router"
 import { useCurrency } from "hooks/Tokens"
-import SwapDropdown from "features/swap/SwapDropdown"
 import { getChainColorCode } from "constants/chains"
 import LimitHeader from "features/limit/LimitHeader"
 import { CustomBanner } from "components/Banner"
@@ -426,18 +425,11 @@ const Limit = () => {
           <meta property="og:description" content="Create limit orders on SoulSwap. Set a price and select your desired assets to execute an order, view open orders, and more." />
         </Head>
       <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
-        {showHeader &&
-          <SwapDropdown
-            inputCurrency={currencyA}
-            outputCurrency={currencyB}
-            allowedSlippage={allowedSlippage}
-          />
-        }
         <CustomBanner
           external={true}
           chains={[ChainId.FANTOM, ChainId.AVALANCHE]}
           link={'https://links.soulswap.finance'}
-          text={'View Our Ecosystem ↗'}
+          text={'View Ecosystem ↗'}
           textColor={'white'}
           color={'ftmBlue'}
           className={`animate-pulse border-4 border-dark-800 rounded-2xl`}

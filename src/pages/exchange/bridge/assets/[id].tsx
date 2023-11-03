@@ -7,7 +7,7 @@ import BigNumber from 'bignumber.js'
 // import { getAllChains, swap } from 'features/aggregator/router'
 import { ChainId, Currency, WETH, USDC, USDC_ADDRESS, WBTC, WNATIVE, WNATIVE_ADDRESS } from 'sdk'
 import { ArrowDownIcon } from '@heroicons/react/24/solid'
-import SwapDropdown from 'features/swap/SwapDropdown'
+// import SwapDropdown from 'features/swap/SwapDropdown'
 import { NextSeo } from 'next-seo'
 import Typography from 'components/Typography'
 import { useActiveWeb3React } from "services/web3";
@@ -278,7 +278,7 @@ const Bridge = ({ }) => {
     <DoubleGlowShadowV2>
       <NextSeo title={`Bridge | SoulSwap`} />
       <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-        <SwapDropdown />
+        {/* <SwapDropdown /> */}
         <AssetSelect />
         {/* <div className={`my-12`} /> */}
         <div className="flex flex-col gap-3 space-y-3">

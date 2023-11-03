@@ -24,7 +24,7 @@ import { Feature } from 'enums/Feature'
 import { useRouter } from "next/router"
 import { useCurrency } from "hooks/Tokens"
 import { currencyId } from 'functions/currency/currencyId'
-import SwapDropdown from 'features/swap/SwapDropdown'
+// import SwapDropdown from 'features/swap/SwapDropdown'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 // import { classNames } from 'functions/styling'
 // import { featureEnabled } from 'functions/feature'
@@ -376,15 +376,11 @@ const Aggregator = ({ }) => {
 				<meta id="og:description" property="og:description" content="Find the best prices on the network by leveraging our novel Meta-Aggregator, which operates as the aggregator of aggregators." />
 			</Head>
 			<div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-				<SwapDropdown
-					inputCurrency={currencyA}
-					outputCurrency={currencyB}
-				/>
 				<CustomBanner
 					external={true}
 					chains={[ChainId.FANTOM, ChainId.AVALANCHE]}
 					link={'https://links.soulswap.finance'}
-					text={'View Our Ecosystem ↗'}
+					text={'View Ecosystem ↗'}
 					textColor={'white'}
 					color={'ftmBlue'}
 					className={`animate-pulse border-4 border-dark-800 rounded-2xl`}

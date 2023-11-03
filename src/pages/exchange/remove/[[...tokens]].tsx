@@ -36,8 +36,8 @@ import { useWalletModalToggle } from 'state/application/hooks'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { classNames, featureEnabled } from 'functions'
 import { getChainColorCode } from 'constants/chains'
-import SwapDropdown from 'features/swap/SwapDropdown'
-import { PoolBalances } from 'features/portfolio/AssetBalances/pools'
+// import SwapDropdown from 'features/swap/SwapDropdown'
+// import { PoolBalances } from 'features/portfolio/AssetBalances/pools'
 import { Feature } from 'enums'
 import PairChart from 'pages/analytics/pairs/embedded/[id]'
 import { CustomBanner } from 'components/Banner'
@@ -54,7 +54,7 @@ export default function Remove() {
   const [tokenA, tokenB] = useMemo(() => [currencyA?.wrapped, currencyB?.wrapped], [currencyA, currencyB])
 
   // toggle wallet when disconnected
-  const toggleWalletModal = useWalletModalToggle()
+  // const toggleWalletModal = useWalletModalToggle()
 
   const { price } = useDerivedMintInfo(currencyA ?? undefined, currencyB ?? undefined)
 
@@ -722,12 +722,12 @@ export default function Remove() {
           {/* <div className={`my-2 border border-2 border-[${getChainColor(chainId)}]`} /> */}
           {/* <div className={`my-12`} /> */}
           {/* <Header input={currencyA} output={currencyB} allowedSlippage={allowedSlippage} /> */}
-          <SwapDropdown />
+          {/* <SwapDropdown /> */}
           <CustomBanner
                 external={true}
                 chains={[ChainId.FANTOM, ChainId.AVALANCHE]}
                 link={'https://links.soulswap.finance'}
-                text={'View Our Ecosystem ↗'}
+                text={'View Ecosystem ↗'}
                 textColor={'white'}
                 color={'ftmBlue'}
                 className={`animate-pulse border-4 border-dark-800 rounded-2xl`}

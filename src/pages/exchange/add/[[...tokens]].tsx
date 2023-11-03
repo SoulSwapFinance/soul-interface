@@ -9,7 +9,7 @@ import { calculateGasMargin, calculateSlippageAmount } from 'functions/trade'
 import { currencyId, halfAmountSpend, maxAmountSpend } from 'functions/currency'
 import { useDerivedMintInfo, useMintActionHandlers, useMintState } from 'state/mint/hooks'
 import { useUserSlippageToleranceWithDefault } from 'state/user/hooks'
-import SwapDropdown from "features/swap/SwapDropdown"
+// import SwapDropdown from "features/swap/SwapDropdown"
 import NavLink from 'components/NavLink'
 import { AutoColumn } from 'components/Column'
 import { BigNumber } from '@ethersproject/bignumber'
@@ -357,16 +357,16 @@ export default function Add() {
       <DoubleGlowShadowV2>
         <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
           {/* <FollowBanner /> */}
-          <SwapDropdown
+          {/* <SwapDropdown
             inputCurrency={currencies[Field.CURRENCY_A]}
             outputCurrency={currencies[Field.CURRENCY_B]}
           // allowedSlippage={allowedSlippage}
-          />
+          /> */}
           <CustomBanner
             external={true}
             chains={[ChainId.FANTOM, ChainId.AVALANCHE]}
             link={'https://links.soulswap.finance'}
-            text={'View Our Ecosystem ↗'}
+            text={'View Ecosystem ↗'}
             textColor={'white'}
             color={'ftmBlue'}
             className={`animate-pulse border-4 border-dark-800 rounded-2xl`}

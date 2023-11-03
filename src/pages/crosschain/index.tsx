@@ -2,6 +2,7 @@ import { SquidWidget } from "@soulswap/cross-chain-widget"
 import { AppConfig } from "@soulswap/cross-chain-widget/widget/core/types/config"
 import { CustomBanner } from "components/Banner"
 import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2"
+import LimitHeader from "features/limit/LimitHeader"
 // import LimitHeader from "features/limit/LimitHeader"
 import SwapDropdown from "features/swap/SwapDropdown"
 import Head from "next/head";
@@ -48,24 +49,24 @@ export default function Crosschain() {
         <meta id="og:description" property="og:description" content="Swap crosschain via the Squid Router on SoulSwap." />
       </Head>
       <div className={`grid grid-cols-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
-        <SwapDropdown
+        {/* <SwapDropdown
           inputCurrency={null}
           outputCurrency={null}
           allowedSlippage={null}
-        />
+        /> */}
         <CustomBanner
           external={true}
           chains={[ChainId.FANTOM, ChainId.AVALANCHE]}
           link={'https://links.soulswap.finance'}
-          text={'View Our Ecosystem ↗'}
+          text={'View Ecosystem ↗'}
           textColor={'white'}
           color={'ftmBlue'}
           className={`animate-pulse border-4 border-dark-800 rounded-2xl`}
         />
-        {/* <LimitHeader
+        <LimitHeader
           inputCurrency={null}
           outputCurrency={null}
-        /> */}
+        />
         <div
           className={`grid border-2 rounded-2xl border-dark-800 justify-center`}
           style={{

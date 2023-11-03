@@ -61,7 +61,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
         {/* <CogIcon className="w-[36px] h-[46px] transform rotate-90 hover:text-white" /> */}
       </div>
       {open && (
-        <div className="absolute top-14 right-0 z-50 -mr-2.5 min-w-20 md:m-w-22 md:-mr-5 bg-dark-900 border-2 border-dark-800 rounded w-80 shadow-lg">
+        <div className="absolute top-4 sm:-top-40 right-0 sm:right-2 z-50 -mr-2.5 min-w-20 md:m-w-22 md:-mr-5 bg-dark-900 border-2 border-dark-800 rounded w-80 shadow-lg">
           <div className="p-4 space-y-4">
             {/* <Typography weight={700} className="text-high-emphesis">
               {`Transaction Settings`}

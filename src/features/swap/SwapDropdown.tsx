@@ -130,7 +130,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             </div>
           </NavLink>
         }
-
+{/* 
         {featureEnabled(Feature.CROSSCHAIN, chainId) &&
           <NavLink
             className={classNames(
@@ -153,7 +153,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
               </Typography>
             </div>
           </NavLink>
-        }
+        } */}
       </div>
       <div className={
         classNames(`flex sm:absolute`,
