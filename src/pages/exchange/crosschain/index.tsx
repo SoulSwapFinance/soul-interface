@@ -22,6 +22,8 @@ import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 // import { useTokenBalance } from 'state/wallet/hooks'
 import Head from 'next/head'
 import { getChainInfo } from 'constants/chains'
+import { getInputList, getOutputList } from 'constants/crosschain/getTokenList'
+import { formatNumber } from 'functions'
 
 // // addresses and IDs
 // const avalancheId = 43114;
@@ -159,23 +161,22 @@ const Crosschain = ({ }) => {
             "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/avalanche.svg"
 
         },
-        // {
-        //     "chainId": 1,
-        //     "name": "Ethereum Mainnet",
-        //     "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/eth.svg"
-
-        // }
+        {
+            "chainId": 1,
+            "name": "Ethereum",
+            "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/eth.svg"
+        }
     ]
 
-    const getFromAssets = useCallback((fromChain) => {
-        return fromChain == 43114 ? avaxTokens_from
-           : ftmTokens_from ?? ftmTokens_from
-    }, [])
+    // const getFromAssets = useCallback((fromChain) => {
+    //     return fromChain == 43114 ? avaxTokens_from
+    //        : ftmTokens_from ?? ftmTokens_from
+    // }, [])
     
-    const getToAssets = useCallback((destChain) => {
-        return destChain == 43114 ? avaxTokens_to
-           : ftmTokens_to ?? ftmTokens_to
-    }, [])
+    // const getToAssets = useCallback((destChain) => {
+    //     return destChain == 43114 ? avaxTokens_to
+    //        : ftmTokens_to ?? ftmTokens_to
+    // }, [])
 
     const ftmTokens_from: TokenData[] = [
         {
@@ -414,56 +415,60 @@ const Crosschain = ({ }) => {
         }
     ]
 
-    // const ethTokens: TokenData[] = [
-    //     {
-    //         "chainId": 1,
-    //         "address": USDC_ADDRESS[1],
-    //         "name": 'USD Coin',
-    //         "symbol": 'USDC',
-    //         "decimals": 6,
-    //         "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/usdc.svg",
-    //         "coingeckoId": 'usdc',
-    //     },
-    //     {
-    //         "chainId": 1,
-    //         "address": WNATIVE_ADDRESS[1],
-    //         "name": 'Wrapped Ether',
-    //         "symbol": 'WETH',
-    //         "decimals": 18,
-    //         "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/eth.svg",
-    //         "coingeckoId": 'ethereum',
-    //     }
-    // ]
+ 
 
-    const getTokensForChain = (chainId, isFrom) => {
-        return isFrom ? (
-                chainId == 43114 ? getFromAssets(43114) : getFromAssets(250)
-            ) : !isFrom ? 
-                chainId == 43114 ? getToAssets(43114) : getToAssets(250)
-            // : chainId == ChainId.ETHEREUM ? ethTokens
-            : getToAssets(250)
-    }
+    // const getTokensForChain = (chainId, isFrom) => {
+    //     return isFrom ? (
+    //             chainId == 43114 ? getFromAssets(43114) : getFromAssets(250)
+    //         ) : !isFrom ? 
+    //             chainId == 43114 ? getToAssets(43114) : getToAssets(250)
+    //         // : chainId == ChainId.ETHEREUM ? ethTokens
+    //         : getToAssets(250)
+    // }
 
     // const chainIndex = (chainId) => {
     //     return chainId == 43114 ? 1 : 0
     //     // chainId == ChainId.ETHEREUM ? 2 : 0
     // }
 
-    const fromChain = chainId == 43114 ? chains[1] : chains[0]
-    const toChain = chainId == 43114 ? chains[0] : chains[1]
-    // const [toChain, setToChain] = useState(chainId == 43114 ? chains[0] : chains[1])
+    const CHAIN_TO_CHAIN_ID = {
+        [chains[0].chainId]: ChainId.FANTOM,
+        [chains[1].chainId]: ChainId.AVALANCHE,
+        [chains[2].chainId]: ChainId.ETHEREUM,
+    }
+    
+    const CHAIN_ID_TO_CHAIN = {
+        [ChainId.FANTOM]: chains[0],
+        [ChainId.AVALANCHE]: chains[1],
+        [ChainId.ETHEREUM]: chains[2],
+    }
+
+    const DEFAULT_FROM_CHAIN_MAP = {
+        [ChainId.FANTOM]: chains[0],
+        [ChainId.AVALANCHE]: chains[1],
+        [ChainId.ETHEREUM]: chains[2],
+    }
+    
+    const DEFAULT_TO_CHAIN_MAP = {
+        [ChainId.FANTOM]: chains[1],
+        [ChainId.AVALANCHE]: chains[0],
+        [ChainId.ETHEREUM]: chains[1],
+    }
+
+    const [fromChain, setFromChain] = useState(DEFAULT_FROM_CHAIN_MAP[chainId])
+    const [toChain, setToChain] = useState(DEFAULT_TO_CHAIN_MAP[chainId])
     const [showToChains, setShowToChains] = useState(false)
     // const [showFromChains, setShowFromChains] = useState(false)
 
     // const fromTokens: TokenData[] = 
     // const toTokens: TokenData[] = getTokensForChain(toChain)
-    const [fromAssetList, setFromAssetList] = useState<TokenData[]>(getTokensForChain(fromChain?.chainId, true))
-    const [toAssetList, setToAssetList] = useState<TokenData[]>(getTokensForChain(toChain?.chainId, false))
+    // const [fromAssetList, setFromAssetList] = useState<TokenData[]>(getTokensForChain(fromChain?.chainId, true))
+    const [fromAssetList, setFromAssetList] = useState<TokenData[]>(getInputList(fromChain?.chainId, toChain?.chainId))
+    const [toAssetList, setToAssetList] = useState<TokenData[]>(getOutputList(fromChain?.chainId, toChain?.chainId))
+    // const [toAssetList, setToAssetList] = useState<TokenData[]>(getTokensForChain(toChain?.chainId, false))
     const [fromAsset, setFromAsset] = useState(fromAssetList[0])
     const [fromToken, setFromToken] = useState<Token>(new Token(
-        fromChain.chainId == 43114
-            ? ChainId.AVALANCHE
-            : ChainId.FANTOM,
+        CHAIN_TO_CHAIN_ID[fromChain?.chainId],
         fromAsset?.address,
         fromAsset?.decimals,
         fromAsset?.symbol,
@@ -472,9 +477,8 @@ const Crosschain = ({ }) => {
     )
     const [toAsset, setToAsset] = useState(toAssetList[0])
     const [toToken, setToToken] = useState<Token>(new Token(
-        toChain.chainId == 43114
-            ? ChainId.AVALANCHE
-            : ChainId.FANTOM, toAsset.address,
+        CHAIN_TO_CHAIN_ID[toChain?.chainId],
+        toAsset.address,
         toAsset.decimals,
         toAsset.symbol,
         toAsset.name
@@ -485,8 +489,8 @@ const Crosschain = ({ }) => {
     const [route, setRoute] = useState<RouteData>(null)
     // const nativePrice = usePrice(WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM])
     // √
-    const [fromAmount, setFromAmount] = useState('1');
-    const [inputAmount, setInputAmount] = useState('1');
+    const [fromAmount, setFromAmount] = useState('0');
+    const [inputAmount, setInputAmount] = useState('0');
     // const _balance = useTokenBalance(chainId, account, fromAsset)
     // const balance = _balance ? _balance.toSignificant(18) : '0'
     const [showFromTokens, setShowFromTokens] = useState(false)
@@ -565,7 +569,7 @@ const Crosschain = ({ }) => {
             // todo: assumes fromChain is current chain
             fromChain: chainId,
             fromToken: fromAsset.address,
-            fromAmount: fromAmountWithDecimals(_fromAmount), // "10000000",
+            fromAmount: fromAmountWithDecimals(_fromAmount ?? '0'), // "10000000",
             // todo: assumes Fantom || Avalanche
             toChain: toChain.chainId,
             // todo: assumes Fantom || Avalanche
@@ -575,8 +579,8 @@ const Crosschain = ({ }) => {
 
         const { route } = await squid.getRoute(params)
 
-        console.log('inputAmount: %s', route.estimate.fromAmount)
-        console.log('outputAmount: %s', route.estimate.toAmount)
+        // console.log('inputAmount: %s', route.estimate.fromAmount)
+        // console.log('outputAmount: %s', route.estimate.toAmount)
 
         await setOutputAmount(
             new BigNumber(route.estimate?.toAmount.toString() ?? '1')
@@ -597,7 +601,7 @@ const Crosschain = ({ }) => {
             // todo: assumes fromChain is current chain
             fromChain: chainId,
             fromToken: fromAsset.address,
-            fromAmount: fromAmountWithDecimals(_fromAmount), // "10000000",
+            fromAmount: fromAmountWithDecimals(_fromAmount ?? '0'), // "10000000",
             // todo: assumes Fantom || Avalanche
             toChain: toChain.chainId,
             // todo: assumes Fantom || Avalanche
@@ -607,8 +611,8 @@ const Crosschain = ({ }) => {
 
         const { route } = await squid.getRoute(params)
 
-        console.log('inputAmount: %s', route.estimate.fromAmount)
-        console.log('outputAmount: %s', route.estimate.toAmount)
+        // console.log('inputAmount: %s', route.estimate.fromAmount)
+        // console.log('outputAmount: %s', route.estimate.toAmount)
 
         await setOutputAmount(
             new BigNumber(route.estimate?.toAmount.toString() ?? '1')
@@ -630,9 +634,9 @@ const Crosschain = ({ }) => {
     }
 
     // TOGGLES //
-    // const toggleShowChains = (chain) => {
-    //     setToChain(chain)
-    // }
+    const toggleShowChains = (isFrom) => {
+        !isFrom && setShowToChains(!showToTokens)
+    }
 
     const toggleShowTokens = (isFrom) => {
         isFrom ? setShowFromTokens(!showFromTokens) : setShowToTokens(!showToTokens)
@@ -641,18 +645,15 @@ const Crosschain = ({ }) => {
     const handleSetFromAsset = useCallback((token, amount) => {
         setFromAsset(token)
         setFromToken(
-            token.address == NATIVE_ADDRESS ?
-                NATIVE[fromChain.chainId] :
-                new Token(
-                    fromChain.chainId == 43114
-                        ? ChainId.AVALANCHE
-                        : ChainId.FANTOM,
+            token.address == NATIVE_ADDRESS ? NATIVE[fromChain?.chainId]
+             : new Token(
+                    CHAIN_TO_CHAIN_ID[fromChain?.chainId],
                     token.address,
                     token.decimals,
                     token.symbol,
                     token.name
                 ))
-        setInputAmount(amount)
+        setInputAmount(amount ?? '0')
     }, [setFromAsset, setFromToken, setInputAmount])
     
     const handleSetToAsset = useCallback((token) => {
@@ -661,9 +662,7 @@ const Crosschain = ({ }) => {
             token.address == NATIVE_ADDRESS ?
                 NATIVE[toChain.chainId] :
                 new Token(
-                    toChain.chainId == 43114
-                        ? ChainId.AVALANCHE
-                        : ChainId.FANTOM,
+                    CHAIN_TO_CHAIN_ID[toChain.chainId],
                     token.address,
                     token.decimals,
                     token.symbol,
@@ -672,22 +671,26 @@ const Crosschain = ({ }) => {
         // setInputAmount(amount)
     }, [setToAsset, setToToken])
 
+    const handleSetToChain = useCallback((chain) => {
+        setFromChain(CHAIN_ID_TO_CHAIN[chainId])
+        setToChain(chain)
+
+        setToAssetList(getOutputList(fromChain?.chainId, chain.chainId))
+        handleSetToAsset(getOutputList(fromChain?.chainId, chain.chainId)[0])
+        // setToAsset(toAssetList[0])
+        // setToToken(NATIVE[chain.chainId])
+        setShowToChains(false)
+    }, [setToChain, setToAssetList, setToAsset, setToToken, setShowToChains])
+
     // shows: Chains
     const ChainSelector = ({ isFrom }) => {
         return (
             <div>
-                {!showToChains &&
-                    // <Button
-                    //     onClick={() => toggleShowChains(isFrom)}
-                    //     variant={'filled'}
-                    //     color={buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}
-                    // >
-                    // ${isFrom ? `bg-dark-900` : `bg-dark-900 hover:bg-dark-800`}
                     <div
-                        className={`flex justify-center border-4 border-[${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
-                            bg-dark-900 mb-4
+                        className={`flex justify-center bg-dark-900 mb-4 border-4 border-[${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
+                            ${isFrom ? `` : `hover:bg-dark-800`}
                         `}
-                        // onClick={() => toggleShowChains(toChain)}
+                        onClick={() => toggleShowChains(isFrom)}
                         style={{
                             // padding: -2,
                             height: '100%',
@@ -700,25 +703,23 @@ const Crosschain = ({ }) => {
                             {`${isFrom ? fromChain.name : toChain.name}`}
                         </Typography>
                     </div>
-                    // </Button>
-                }
-                {/* {showToChains && !isFrom &&
+                {showToChains && !isFrom &&
                     <HeadlessUIModal.Controlled
                         // isCustom={true}
-                        chainId={chainId}
+                        chainId={CHAIN_TO_CHAIN_ID[toChain?.chainId]}
                         isOpen={showToChains}
-                        onDismiss={() => toggleShowChains(toChain)}
+                        onDismiss={() => toggleShowChains(isFrom)}
                     >
                         {chains.map((chain) => {
                             return (
                                 <div
                                     className={`flex mt-2 mx-24 mb-2 justify-center items-center align-center gap-24
                                     bg-dark-900 hover:bg-dark-800 p-3 rounded-xl border-2 border-[${buttonColor(chain.chainId)}]
-                                    ${chain.chainId == fromChain.chainId ? 'hidden' : 'visible'}
+                                    ${[fromChain.chainId, toChain.chainId].includes(chain.chainId) ? 'hidden' : 'visible'}
                                     `}
                                     onClick={() => {
-                                        toggleShowChains(chain)
-                                        // setToAssetList(getTokensForChain(chain.chainId))
+                                        handleSetToChain(chain)
+
                                     }}
                                 >
                                     <div>
@@ -733,7 +734,7 @@ const Crosschain = ({ }) => {
                         }
                         )}
                     </HeadlessUIModal.Controlled>
-                } */}
+                }
             </div>
         )
     }
@@ -744,11 +745,6 @@ const Crosschain = ({ }) => {
         return (
             <div>
                 {(!showFromTokens || !showToTokens) &&
-                    // <Button
-                    //     onClick={() => isFrom ? setShowFromTokens(true) : setShowToTokens(true)}
-                    //     // variant={'filled'}
-                    //     // color={buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}
-                    // >
                     <div
                         className={`ml-2 flex flex-cols-2 gap-8 sm:gap-24 border-4 border-[${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
                             bg-dark-900 hover:bg-dark-800 
@@ -779,7 +775,6 @@ const Crosschain = ({ }) => {
                 }
                 {showFromTokens && isFrom &&
                 <HeadlessUIModal.Controlled
-                    // isCustom={true}
                     chainId={fromChain.chainId == 43114 ? ChainId.AVALANCHE : ChainId.FANTOM}
                     isOpen={showFromTokens}
                     onDismiss={() => toggleShowTokens(isFrom)}
@@ -907,8 +902,9 @@ const Crosschain = ({ }) => {
 
     const handleTypeInput = useCallback(
         async (value: string) => {
-            await setFromAmount(value)
-            await getRoute(value)
+            if(!value) return
+            await setFromAmount(value ?? '0')
+            if(value && Number(value) > 0.000001 ) await getRoute(value ?? '0')
         },
         [setFromAmount, getRoute]
     )
@@ -927,7 +923,7 @@ const Crosschain = ({ }) => {
             <Head>
                 <title>CrossChain | SoulSwap</title>
                 {/* <meta name="description" content="SoulSwap is an AMM exchange, part of Soul Protocol, which offers a full suite of DeFi tools." /> */}
-                <meta name="description" content="Swap crosschain via the Squid Router on SoulSwap." />
+                <meta name="description" content="Swap crosschain on SoulSwap." />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:image" content="https://soulswap.finance/images/soulswap-cover.png" />
                 <meta name="twitter:site" content="@SoulSwapFinance" />
@@ -935,7 +931,7 @@ const Crosschain = ({ }) => {
                 <meta id="og:image:type" property="og:image:type" content="image/png" />
                 <meta id="og:image:type" property="og:image:type" content="630" />
                 <meta id="og:image:width" property="og:image:width" content="1200" />
-                <meta id="og:description" property="og:description" content="Swap crosschain via the Squid Router on SoulSwap." />
+                <meta id="og:description" property="og:description" content="Swap crosschain on SoulSwap." />
             </Head>
             <div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
                 <SwapDropdown />
@@ -949,21 +945,28 @@ const Crosschain = ({ }) => {
                         {/* <InputAmount isFrom={true} /> */}
                     </div>
                     <div
-                        className={`border-4 p-2 border-[${buttonColor(fromChain.chainId)}] rounded-xl`}
+                        className={!account ? 'hidden' : `grid border-4 p-2 border-[${buttonColor(fromChain.chainId)}] rounded-xl`}
                     >
+                        <div className={'mt-2'}>
                         <CrossChainAssetPanel
                             spendFromWallet={true}
                             network={fromChain.chainId}
                             currency={fromAsset.address == NATIVE_ADDRESS ?
                                 NATIVE[chainId] : fromToken
                             }
-                            value={fromAmount.toString() ?? '1'}
+                            value={fromAmount.toString() ?? '0'}
                             onChange={handleTypeInput}
                             showSelect={false}
                         // onSelect={handleInputSelect}
                         />
+                        </div>
+                    {`~$${route?.estimate.fromAmountUSD?.toString() ?? 0}`}
+                    {/* </div> */}
+                    {/* <div
+                        className={`flex justify-end w-[98%] text-sm max-h-[1px] p-1 mb-4`}    
+                    > */}
+                    {/* </div> */}
                     </div>
-
                     <div className="flex justify-center -mt-8 -mb-4 z-0">
                         <div className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700`}>
                             <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
@@ -979,6 +982,7 @@ const Crosschain = ({ }) => {
                     <div
                         className={`border-4 p-2 border-[${buttonColor(toChain.chainId)}] rounded-xl`}
                     >
+                        <div className={'mt-2'}>
                         <CrossChainAssetPanel
                             spendFromWallet={true}
                             network={toChain.chainId}
@@ -991,6 +995,8 @@ const Crosschain = ({ }) => {
                         // showBalance={false}
                         // onSelect={handleOutputSelect}
                         />
+                        </div>
+                        {`~$${route?.estimate.toAmountUSD?.toString() ?? 0}`}
                     </div>
                 </div>
                 {/* <div
@@ -1009,14 +1015,15 @@ const Crosschain = ({ }) => {
                     className={`flex flex-col mb-4 p-1 w-full`}
                 >
                     <Button variant="outlined"
-                        color={'blue'}
+                        color={!account ? 'avaxRed' : 'ftmBlue'}
                         onClick={() => handleSwap(fromAmount)}
                         className={'mt-8'}
-                    // disabled={insufficientFunds}
+                        disabled={!account}
                     >
                         <Typography size={14} className="font-bold text-white">
                             {/* {insufficientFunds ? 'Insufficient Funds' : `Swap for ${toAsset.symbol} on ${getChainInfo(toChain, "NAME")}`} */}
-                            {`Swap for ${toAsset.symbol} on ${getChainInfo(Number(toChain.chainId), "NAME")}`}
+                            {!account ? `Connect Wallet` 
+                                : `Swap for ${toAsset.symbol} on ${getChainInfo(Number(toChain.chainId), "NAME")}`}
                         </Typography>
                     </Button>
                 </div>

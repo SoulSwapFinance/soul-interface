@@ -225,7 +225,7 @@ const Aggregator = ({ }) => {
 				console.log('Transaction Rejected: %s', err.reason)
 			}
 		}
-	});
+	})
 
 	const handleSwap = () => {
 		swapMutation.mutate({
@@ -239,8 +239,8 @@ const Aggregator = ({ }) => {
 			adapter: route.name,
 			rawQuote: route?.price?.rawQuote,
 			tokens: { fromToken, toToken }
-		});
-	};
+		})
+	}
 
 	const { data: routes = [], isLoading } = useGetRoutes({
 		chain: selectedChain.value,
@@ -266,11 +266,11 @@ const Aggregator = ({ }) => {
 	const { gasTokenPrice = 0, toTokenPrice = 0, fromTokenPrice = 0 } = tokenPrices || {};
 
 	// const cleanState = () => {
-	// 	setFromToken(null);
-	// 	setToToken(null);
-	// 	setRoute(null);
-	// 	setTxUrl('');
-	// };
+	// 	setFromToken(null)
+	// 	setToToken(null)
+	// 	setRoute(null)
+	// 	setTxUrl('')
+	// }
 
 	const tokenA = new Token(chainId, fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address || WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM], fromToken?.wrapped.decimals || 18)
 
