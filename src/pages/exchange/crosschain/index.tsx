@@ -230,17 +230,28 @@ const Crosschain = ({ }) => {
             "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/avalanche.svg",
             "coingeckoId": 'avalanche-2',
         }
-        // chainId: number | string;
-        // address: string;
-        // name: string;
-        // symbol: string;
-        // decimals: number;
-        // logoURI: string;
-        // coingeckoId: string;
-        // commonKey?: string;
-        // bridgeOnly?: boolean;
-        // ibcDenom?: string;
     ]
+
+    // const ethTokens: TokenData[] = [
+    //     {
+    //         "chainId": 1,
+    //         "address": USDC_ADDRESS[1],
+    //         "name": 'USD Coin',
+    //         "symbol": 'USDC',
+    //         "decimals": 6,
+    //         "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/usdc.svg",
+    //         "coingeckoId": 'usdc',
+    //     },
+    //     {
+    //         "chainId": 1,
+    //         "address": WNATIVE_ADDRESS[1],
+    //         "name": 'Wrapped Ether',
+    //         "symbol": 'WETH',
+    //         "decimals": 18,
+    //         "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/eth.svg",
+    //         "coingeckoId": 'ethereum',
+    //     }
+    // ]
 
     // // Source
     // const fromChain = chains.find((c) => c.chainId === (swapRoute === null || swapRoute === void 0 ? void 0 : swapRoute.fromChainId));
@@ -259,30 +270,29 @@ const Crosschain = ({ }) => {
     // const { connectedAddress: destinationUserAddress } = (0, useMultiChain_1.useMultiChain)(toChain, toToken);
 
     const getTokensForChain = (chainId) => {
-        return chainId == ChainId.AVALANCHE ? avaxTokens : ftmTokens ?? ftmTokens
+        return chainId == ChainId.AVALANCHE ? avaxTokens
+            // : chainId == ChainId.ETHEREUM ? ethTokens
+                : ftmTokens ?? ftmTokens
     }
 
     const chainIndex = (chainId) => {
-        return chainId == ChainId.AVALANCHE ? 1 :
-            chainId == ChainId.ETHEREUM ? 2 : 0
+        return chainId == ChainId.AVALANCHE ? 1 : 0
+            // chainId == ChainId.ETHEREUM ? 2 : 0
     }
 
-    const [fromChain, setFromChain] = useState([ChainId.AVALANCHE, ChainId.FANTOM, ChainId.ETHEREUM].includes(chainId) ? chains[chainIndex(chainId)] : chains[0])
-    const [toChain, setToChain] = useState(
-        [ChainId.AVALANCHE, ChainId.ETHEREUM].includes(chainId)
-            ? chains[0]
-            : chains[1]
-    )
+    const fromChain = [ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? chains[chainIndex(chainId)] : chains[0]
+    const [toChain, setToChain] = useState(chainId == 43114 ? chains[0] : chains[1])
     const [showToChains, setShowToChains] = useState(false)
-    const [showFromChains, setShowFromChains] = useState(false)
+    // const [showFromChains, setShowFromChains] = useState(false)
 
-
-    const fromTokens: TokenData[] = getTokensForChain(fromChain)
-    const toTokens: TokenData[] = getTokensForChain(toChain)
-
-    const [fromAsset, setFromAsset] = useState(fromTokens[0])
-    const [toAsset, setToAsset] = useState(toTokens[1])
-    const [tokenData, setTokenData] = useState<TokenData[]>(fromTokens)
+    // const fromTokens: TokenData[] = 
+    // const toTokens: TokenData[] = getTokensForChain(toChain)
+    const [fromAssetList, setFromAssetList] = useState<TokenData[]> (getTokensForChain(fromChain.chainId))
+    const [toAssetList, setToAssetList] = useState<TokenData[]> (getTokensForChain(toChain.chainId))
+    const [fromAsset, setFromAsset] = useState(fromAssetList[chainIndex(fromChain?.chainId)])
+    const [toAsset, setToAsset] = useState(toAssetList[chainIndex(toChain?.chainId)])
+    // const [fromTokenData, setFromTokenData] = useState<TokenData[]>(fromTokens)
+    // const [tokenData, setTokenData] = useState<TokenData[]>(fromTokens)
     // const [route, setRoute] = useState<RouteData>(null)
     // const nativePrice = usePrice(WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM])
     // √
@@ -398,9 +408,9 @@ const Crosschain = ({ }) => {
     }
 
     // TOGGLES //
-    const toggleShowChains = (isFrom) => {
-        !isFrom && setShowToChains(!showToChains)
-    }
+    // const toggleShowChains = (chain) => {
+    //     setToChain(chain)
+    // }
 
     const toggleShowTokens = (isFrom) => {
         isFrom ? setShowFromTokens(!showFromTokens) : setShowToTokens(!showToTokens)
@@ -410,18 +420,18 @@ const Crosschain = ({ }) => {
     const ChainSelector = ({ isFrom }) => {
         return (
             <div>
-
-                {(!showFromChains || !showToChains) &&
+                {!showToChains &&
                     // <Button
                     //     onClick={() => toggleShowChains(isFrom)}
                     //     variant={'filled'}
                     //     color={buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}
                     // >
+                    // ${isFrom ? `bg-dark-900` : `bg-dark-900 hover:bg-dark-800`}
                     <div
                         className={`flex justify-center border-4 border-[${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
-                            ${isFrom ? `bg-dark-900` : `bg-dark-900 hover:bg-dark-800`}
+                            bg-dark-900
                         `}
-                        onClick={() => toggleShowChains(isFrom)}
+                        // onClick={() => toggleShowChains(toChain)}
                         style={{
                             // padding: 4,
                             height: '100%',
@@ -436,53 +446,12 @@ const Crosschain = ({ }) => {
                     </div>
                     // </Button>
                 }
-                {/* {showFromChains && isFrom &&
-                     <HeadlessUIModal.Controlled
-                        // isCustom={true}
-                        chainId={chainId}
-                        isOpen={showFromChains}
-                        onDismiss={() => toggleShowChains(isFrom)}
-                    >
-                        {chains.map((chain) => {
-                            return (
-                                <div
-                                    className={`grid grid-cols-2 mt-2 mb-2 justify-center items-center align-center gap-24
-                                    bg-dark-900 hover:bg-dark-800 p-3 rounded-xl
-                                    `}
-                                >
-                                    <div
-                                        onClick={() => {
-                                            setFromChain(chain)
-                                            toggleShowChains(isFrom)
-                                        }}
-                                    >
-                                        <Image
-                                            height={48}
-                                            width={48}
-                                            src={chain.logoURI}
-                                            alt={'token logo'}
-                                        />
-                                    </div>
-                                    <div>
-                                        <Typography
-                                            size={12}
-                                            className={'font-bold text-white'}
-                                        >
-                                            {`${chain.name}`}
-                                        </Typography>
-                                    </div>
-                                </div>
-                            )
-                        }
-                        )}
-                    </HeadlessUIModal.Controlled>
-                } */}
-                {showToChains && !isFrom &&
+                {/* {showToChains && !isFrom &&
                     <HeadlessUIModal.Controlled
                         // isCustom={true}
                         chainId={chainId}
                         isOpen={showToChains}
-                        onDismiss={() => toggleShowChains(isFrom)}
+                        onDismiss={() => toggleShowChains(toChain)}
                     >
                         {chains.map((chain) => {
                             return (
@@ -492,8 +461,8 @@ const Crosschain = ({ }) => {
                                     ${chain.chainId == fromChain.chainId ? 'hidden' : 'visible'}
                                     `}
                                     onClick={() => {
-                                        setToChain(chain)
-                                        toggleShowChains(isFrom)
+                                        toggleShowChains(chain)
+                                        // setToAssetList(getTokensForChain(chain.chainId))
                                     }}
                                 >
                                     <div>
@@ -508,7 +477,7 @@ const Crosschain = ({ }) => {
                         }
                         )}
                     </HeadlessUIModal.Controlled>
-                }
+                } */}
             </div>
         )
     }
@@ -518,11 +487,6 @@ const Crosschain = ({ }) => {
 
         return (
             <div>
-                {/* <div
-                onClick={() => setShowTokens(true)}
-            >
-                Select Token
-            </div> */}
                 {(!showFromTokens || !showToTokens) &&
                     // <Button
                     //     onClick={() => isFrom ? setShowFromTokens(true) : setShowToTokens(true)}
@@ -537,6 +501,7 @@ const Crosschain = ({ }) => {
                             // padding: 4,
                             height: '100%'
                         }}
+                        onClick={() => toggleShowTokens(isFrom)}
                     >
                         <Image
                             height={36}
@@ -558,7 +523,7 @@ const Crosschain = ({ }) => {
                 }
                 {showFromTokens && isFrom &&
                     <div>
-                        {tokenData.map((token) => {
+                        {fromAssetList.map((token) => {
                             return (
                                 <div
                                     className={'grid grid-cols-2 mt-2 mb-2 justify-center items-center align-center gap-24'}
@@ -592,7 +557,7 @@ const Crosschain = ({ }) => {
                 }
                 {showToTokens &&
                     <div>
-                        {tokenData.map((token) => {
+                        {toAssetList.map((token) => {
                             return (
                                 <div
                                     className={'grid grid-cols-2 mt-2 mb-2 justify-center items-center align-center gap-24'}
