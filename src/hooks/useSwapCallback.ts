@@ -655,14 +655,14 @@ export function useSwapCallback(
           call: { address, calldata, value },
         } = bestCallOption
 
-        console.log('gasEstimate' in bestCallOption ? { gasLimit: calculateGasMargin(bestCallOption.gasEstimate) } : {})
+        // console.log('gasEstimate' in bestCallOption ? { gasLimit: calculateGasMargin(bestCallOption.gasEstimate) } : {})
 
         const txParams: TransactionRequest = {
           from: account,
           to: address,
           data: calldata,
           // let the wallet try if we can't estimate the gas
-          ...('gasEstimate' in bestCallOption ? { gasLimit: calculateGasMargin(bestCallOption.gasEstimate) } : {}),
+          ...('gasEstimate' in bestCallOption ? { gasLimit: calculateGasMargin(bestCallOption.gasEstimate).toString() } : {}),
           // gasPrice: !eip1559 && chainId === ChainId.HARMONY ? BigNumber.from('2000000000') : undefined,
           ...(value && !isZero(value) ? { value } : {}),
         }

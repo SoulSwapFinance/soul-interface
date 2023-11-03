@@ -60,7 +60,8 @@ export default function useSendTransactionCallback() {
         from: account,
         to: contractAddress,
         data: encodedData,
-        gasLimit: calculateGasMargin(gasEstimate),
+        // allows conversion to bignumberish
+        gasLimit: calculateGasMargin(gasEstimate).toString(),
         ...(value.eq('0') ? {} : { value }),
       }
 
