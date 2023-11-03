@@ -712,7 +712,7 @@ const Exchange = () => {
             {account &&
               // useSwap && 
               <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded-lg bg-light-glass`}>
-                {!isWrapped &&
+                {!isWrapped && featureEnabled(Feature.ANALYTICS, chainId) &&
                   <TokenChart
                     outputCurrency={outputCurrency}
                   />

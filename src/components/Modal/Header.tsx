@@ -11,9 +11,9 @@ export interface ModalHeaderProps {
 
 const ModalHeader: FC<ModalHeaderProps> = ({ header, subheader, onBack, onClose }) => {
   return (
-    <div className="flex items-start justify-between">
-      <div className="flex flex-col gap-1 justify-center">
-        <Typography weight={700} className="flex gap-3 text-high-emphesis items-center">
+    <div className={`flex items-start justify-${onBack ? 'between' : 'center'}`}>
+      <div className={`flex flex-col gap-1 justify-center ${!onBack && 'border-1 p-4 w-full bg-dark-900 rounded-2xl'}`}>
+        <Typography weight={700} className={`flex gap-3 text-high-emphesis ${!onBack && 'justify-center'} items-center ${!onBack && "text-xl"}`}>
           {onBack && (
             <ArrowLeftIcon onClick={onBack} width={24} height={24} className="cursor-pointer text-high-emphesis" />
           )}

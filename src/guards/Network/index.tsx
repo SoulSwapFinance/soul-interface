@@ -85,7 +85,7 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
                     className={
                       `rounded-2xl p-3 m-3 filter drop-shadow-currencyLogo
                         border hover:border-${getChainColorCode(Number(key))}
-                        bg-${getChainColorCode(Number(key))}`
+                        bg-${getChainColorCode(Number(key))} max-h-[64px] max-w-[64px]`
                     }
                     width={64}
                     height={64}
