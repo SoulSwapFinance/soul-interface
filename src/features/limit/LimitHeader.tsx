@@ -79,7 +79,7 @@ export default function LimitHeader({ inputCurrency, outputCurrency }): JSX.Elem
         <Typography
           className="flex text-white items-center justify-center px-1 py-1 text-base font-medium text-center rounded-md md:px-10 hover:text-high-emphesis"
         >
-          {`Aggregate`}
+          {`Meta`}
        </Typography>
       </NavLink>
       {featureEnabled(Feature.XSWAP, chainId) &&
