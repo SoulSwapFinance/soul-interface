@@ -429,6 +429,17 @@ export const LINK_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
+export const SUSHI_ADDRESS: { [chainId in ChainId]: string } = {
+  [ChainId.ETHEREUM]: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
+  [ChainId.TELOS]: '',
+  [ChainId.BSC]: '',
+  [ChainId.FANTOM]: '0xae75a438b2e0cb8bb01ec1e1e376de11d44477cc',
+  [ChainId.AVALANCHE]: '0x37b608519f91f70f2eeb0e5ed9af4061722e4f76',
+  [ChainId.MATIC]: '0x0b3f868e0be5597d5db7feb59e1cadbb0fdda50a',
+  [ChainId.MOONRIVER]: '',
+  [ChainId.ARBITRUM]: '',
+}
+
 export const ENCHANT_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
@@ -634,7 +645,7 @@ export const LZ_USDC_ADDRESS: AddressMap = {
 }
 
 export const BUSD_ADDRESS: AddressMap = {
-  [ChainId.ETHEREUM]: '',
+  [ChainId.ETHEREUM]: '0x4fabb145d64652a948d72533023f6e7a623c7c53',
   [ChainId.TELOS]: '',
   [ChainId.FANTOM]: '',
   [ChainId.BSC]: '',

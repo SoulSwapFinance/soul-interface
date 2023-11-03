@@ -92,7 +92,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
             <Typography
               className={`font-bold sm:text-lg sm:mx-2 pl-4 pr-4 sm:pl-10 sm:pr-10 text-${getChainColorCode(chainId)}`}
             >
-              {`Exchange`}
+              {`Swap`}
             </Typography>
           </div>
         </NavLink>
