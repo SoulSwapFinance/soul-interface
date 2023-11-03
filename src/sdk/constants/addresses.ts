@@ -53,6 +53,7 @@ export const LIMIT_ORDER_HELPER_ADDRESS: AddressMap = {
 }
 
 export const MIM_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '0x99d8a9c45b2eca8864373a26d1459e3dff1e17f3',
   [ChainId.AVALANCHE]: '0x130966628846BFd36ff31a822705796e8cb8C18D',
   [ChainId.FANTOM]: '0x82f0B8B456c1A451378467398982d4834b6829c1',
 }
@@ -587,6 +588,16 @@ export const USDC_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '0xE3F5a90F9cb311505cd691a46596599aA1A0AD7D',
 }
 
+export const AXL_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: '0x467719ad09025fcc6cf6f8311755809d45a5e5f3',
+  [ChainId.TELOS]: '',
+  [ChainId.FANTOM]: '0x8b1f4432f943c465a973fedc6d7aa50fc96f1f65',
+  [ChainId.BSC]: '0x8b1f4432f943c465a973fedc6d7aa50fc96f1f65',
+  [ChainId.MATIC]: '0x6e4e624106cb12e168e6533f8ec7c82263358940',
+  [ChainId.AVALANCHE]: '0x44c784266cf024a60e8acf2427b9857ace194c5d',
+  [ChainId.MOONRIVER]: '',
+}
+
 export const MULTI_USDC_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75',
 }
@@ -616,7 +627,7 @@ export const USDT_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x049d68029688eAbF473097a2fC38ef61633A3C7A',
   [ChainId.BSC]: '',
   [ChainId.MATIC]: '',
-  [ChainId.AVALANCHE]: '',
+  [ChainId.AVALANCHE]: '0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7',
   [ChainId.MOONRIVER]: '',
 }
 

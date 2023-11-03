@@ -22,6 +22,7 @@ import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 // import { useTokenBalance } from 'state/wallet/hooks'
 import Head from 'next/head'
 import { getChainInfo } from 'constants/chains'
+import { getInputList, getOutputList } from 'constants/crosschain/getTokenList'
 
 // // addresses and IDs
 // const avalancheId = 43114;
@@ -159,12 +160,11 @@ const Crosschain = ({ }) => {
             "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/avalanche.svg"
 
         },
-        // {
-        //     "chainId": 1,
-        //     "name": "Ethereum Mainnet",
-        //     "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/eth.svg"
-
-        // }
+        {
+            "chainId": 1,
+            "name": "Ethereum Mainnet",
+            "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/eth.svg"
+        }
     ]
 
     const getFromAssets = useCallback((fromChain) => {
@@ -414,56 +414,54 @@ const Crosschain = ({ }) => {
         }
     ]
 
-    // const ethTokens: TokenData[] = [
-    //     {
-    //         "chainId": 1,
-    //         "address": USDC_ADDRESS[1],
-    //         "name": 'USD Coin',
-    //         "symbol": 'USDC',
-    //         "decimals": 6,
-    //         "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/usdc.svg",
-    //         "coingeckoId": 'usdc',
-    //     },
-    //     {
-    //         "chainId": 1,
-    //         "address": WNATIVE_ADDRESS[1],
-    //         "name": 'Wrapped Ether',
-    //         "symbol": 'WETH',
-    //         "decimals": 18,
-    //         "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/eth.svg",
-    //         "coingeckoId": 'ethereum',
-    //     }
-    // ]
+ 
 
-    const getTokensForChain = (chainId, isFrom) => {
-        return isFrom ? (
-                chainId == 43114 ? getFromAssets(43114) : getFromAssets(250)
-            ) : !isFrom ? 
-                chainId == 43114 ? getToAssets(43114) : getToAssets(250)
-            // : chainId == ChainId.ETHEREUM ? ethTokens
-            : getToAssets(250)
-    }
+    // const getTokensForChain = (chainId, isFrom) => {
+    //     return isFrom ? (
+    //             chainId == 43114 ? getFromAssets(43114) : getFromAssets(250)
+    //         ) : !isFrom ? 
+    //             chainId == 43114 ? getToAssets(43114) : getToAssets(250)
+    //         // : chainId == ChainId.ETHEREUM ? ethTokens
+    //         : getToAssets(250)
+    // }
 
     // const chainIndex = (chainId) => {
     //     return chainId == 43114 ? 1 : 0
     //     // chainId == ChainId.ETHEREUM ? 2 : 0
     // }
 
-    const fromChain = chainId == 43114 ? chains[1] : chains[0]
-    const toChain = chainId == 43114 ? chains[0] : chains[1]
-    // const [toChain, setToChain] = useState(chainId == 43114 ? chains[0] : chains[1])
+    const CHAIN_TO_CHAIN_ID = {
+        [chains[0].chainId]: ChainId.FANTOM,
+        [chains[1].chainId]: ChainId.AVALANCHE,
+        [chains[2].chainId]: ChainId.ETHEREUM,
+    }
+
+    const DEFAULT_FROM_CHAIN_MAP = {
+        [ChainId.FANTOM]: chains[0],
+        [ChainId.AVALANCHE]: chains[1],
+        [ChainId.ETHEREUM]: chains[2],
+    }
+    
+    const DEFAULT_TO_CHAIN_MAP = {
+        [ChainId.FANTOM]: chains[1],
+        [ChainId.AVALANCHE]: chains[0],
+        [ChainId.ETHEREUM]: chains[1],
+    }
+
+    const [fromChain, setFromChain] = useState(DEFAULT_FROM_CHAIN_MAP[chainId])
+    const [toChain, setToChain] = useState(DEFAULT_TO_CHAIN_MAP[chainId])
     const [showToChains, setShowToChains] = useState(false)
     // const [showFromChains, setShowFromChains] = useState(false)
 
     // const fromTokens: TokenData[] = 
     // const toTokens: TokenData[] = getTokensForChain(toChain)
-    const [fromAssetList, setFromAssetList] = useState<TokenData[]>(getTokensForChain(fromChain?.chainId, true))
-    const [toAssetList, setToAssetList] = useState<TokenData[]>(getTokensForChain(toChain?.chainId, false))
+    // const [fromAssetList, setFromAssetList] = useState<TokenData[]>(getTokensForChain(fromChain?.chainId, true))
+    const [fromAssetList, setFromAssetList] = useState<TokenData[]>(getInputList(fromChain?.chainId, toChain?.chainId))
+    const [toAssetList, setToAssetList] = useState<TokenData[]>(getOutputList(fromChain?.chainId, toChain?.chainId))
+    // const [toAssetList, setToAssetList] = useState<TokenData[]>(getTokensForChain(toChain?.chainId, false))
     const [fromAsset, setFromAsset] = useState(fromAssetList[0])
     const [fromToken, setFromToken] = useState<Token>(new Token(
-        fromChain.chainId == 43114
-            ? ChainId.AVALANCHE
-            : ChainId.FANTOM,
+        CHAIN_TO_CHAIN_ID[fromChain?.chainId],
         fromAsset?.address,
         fromAsset?.decimals,
         fromAsset?.symbol,
@@ -472,9 +470,8 @@ const Crosschain = ({ }) => {
     )
     const [toAsset, setToAsset] = useState(toAssetList[0])
     const [toToken, setToToken] = useState<Token>(new Token(
-        toChain.chainId == 43114
-            ? ChainId.AVALANCHE
-            : ChainId.FANTOM, toAsset.address,
+        CHAIN_TO_CHAIN_ID[toChain?.chainId],
+        toAsset.address,
         toAsset.decimals,
         toAsset.symbol,
         toAsset.name
