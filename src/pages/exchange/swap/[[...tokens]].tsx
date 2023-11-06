@@ -517,7 +517,12 @@ const Exchange = () => {
             <div className={"flex w-[86%] sm:w-full text-white justify-center border-2 border-ftmBlue hover:border-purple rounded-2xl"}>
               <NavLink
                 legacyBehavior={true}
-                href="/pool"
+                // href={``}
+                href={`/exchange/add${inputCurrency 
+                    ? inputCurrency.wrapped.address == WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM]
+                   ? `/${NATIVE[chainId ?? ChainId.FANTOM].symbol}` : `/${currencyId(inputCurrency)}` : `/${NATIVE[chainId ?? ChainId.FANTOM].symbol}`}${outputCurrency ? `/${currencyId(outputCurrency)}` 
+                : ([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? `/${SOUL_ADDRESS[chainId ?? ChainId.FANTOM]}` : `/${USDC_ADDRESS[chainId ?? ChainId.FANTOM]}`)}`}
+                // href="/pool"
                 className={'mt-4'}
               >
                 <Button
@@ -528,7 +533,7 @@ const Exchange = () => {
                   className={`w-full rounded-2xl bg-dark-900 hover:bg-dark-800`}
                 >
                   <div className={`text-white flex justify-center items-center font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
-                    {`View Positions`}
+                    {`View Position`}
                   </div>
                 </Button>
               </NavLink>
