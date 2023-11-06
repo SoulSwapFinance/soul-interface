@@ -554,14 +554,28 @@ export default function Add() {
               />
             )}
             {/* </div> */}
-            <div className={"grid grid-cols-1 text-white justify-center m-2"}>
+            <div className={"grid grid-cols-2 text-white justify-center m-2 gap-2"}>
+              <NavLink
+                legacyBehavior={true}
+                href="/exchange/swap"
+              >
+                <Button
+                  variant={'filled'}
+                  color={`purple`}
+                  primaryColor={'black'}
+                >
+                  <div className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
+                    {`Return to Swap`}
+                  </div>
+                </Button>
+              </NavLink>
               <NavLink
                 legacyBehavior={true}
                 href="/pool"
               >
                 <Button
                   variant={'filled'}
-                  color={`${getChainColorCode(chainId)}`}
+                  color={`${getChainColorCode(chainId ?? 250)}`}
                   primaryColor={'black'}
                 >
                   <div className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
