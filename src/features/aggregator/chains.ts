@@ -101,7 +101,7 @@ const polygon = {
     default: { name: 'PolygonScan', url: 'https://polygonscan.com/' },
   },
   testnet: false,
-};
+}
 
 const arbitrum = {
   id: 42161,
@@ -117,7 +117,7 @@ const arbitrum = {
   rpcUrls: {
     default: 'https://rpc.ankr.com/arbitrum',
   },
-};
+}
 
 const ethereum = {
   id: 1,

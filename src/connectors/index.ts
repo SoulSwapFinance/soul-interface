@@ -16,7 +16,7 @@ export const RPC = {
   [ChainId.FANTOM]: 'https://rpc.ftm.tools',
   // [ChainId.FANTOM]: 'https://rpcapi.fantom.network',
   // [ChainId.FANTOM]: 'https://rpc.ankr.com/fantom',
-  [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com',
+  [ChainId.MATIC]: 'https://rpc.ankr.com/polygon', // 'https://rpc-mainnet.maticvigil.com',
   // [ChainId.MATIC]: 'https://apis.ankr.com/e22bfa5f5a124b9aa1f911b742f6adfe/c06bb163c3c2a10a4028959f4d82836d/polygon/full/main',
   // [ChainId.MATIC_TESTNET]: 'https://rpc-mumbai.matic.today',
   // [ChainId.BSC_TESTNET]: 'https://data-seed-prebsc-2-s3.binance.org:8545',
@@ -26,7 +26,7 @@ export const RPC = {
   //[ChainId.MOONRIVER]: 'https://rpc.moonriver.moonbeam.network',
   [ChainId.MOONRIVER]: 'https://rpc.ankr.com/moonbeam', 
   // [ChainId.AVALANCHE_TESTNET]: 'https://api.avax-test.network/ext/bc/C/rpc',
-  [ChainId.ARBITRUM]: 'https://arb1.arbitrum.io/rpc',
+  [ChainId.ARBITRUM]: 'https://rpc.ankr.com/arbitrum', // 'https://arb1.arbitrum.io/rpc',
 }
 
 export function getNetwork(defaultChainId, urls = RPC) {
