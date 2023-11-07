@@ -24,10 +24,11 @@ export default function LimitHeader({ inputCurrency, outputCurrency }): JSX.Elem
   const isLimit = router.pathname.startsWith('/exchange/swap/limit')
   
   const isAggregator = router.pathname.startsWith('/exchange/aggregator')
-  const totalCols = [ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId) ? 4 : 3
+  const totalCols = [ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId) ? 4 : [ChainId.ETHEREUM].includes(chainId) ? 3 : 1
 
   return (
     <div className={`grid grid-cols-${totalCols} rounded-2xl m-4 bg-dark-900`}>
+      {featureEnabled(Feature.AMM, chainId) &&
       <NavLink
         className={isExchange ? classNames("font-bold text-high-emphesis", `bg-${getChainColorCode(chainId)} rounded-2xl`) : ''}
         // activeClassName={classNames("font-bold text-high-emphesis rounded-2xl", `bg-${getChainColorCode(chainId)}`)}
@@ -45,6 +46,7 @@ export default function LimitHeader({ inputCurrency, outputCurrency }): JSX.Elem
           {`Market`}  
        </Typography>
       </NavLink>
+      }
       {featureEnabled(Feature.LIMIT, chainId) &&
       <NavLink
         // onClick={(event) => {
@@ -65,6 +67,7 @@ export default function LimitHeader({ inputCurrency, outputCurrency }): JSX.Elem
        </Typography>
       </NavLink>
       }
+    {featureEnabled(Feature.AMM, chainId) &&
       <NavLink
         // onClick={(event) => {
         //   if (!outputCurrency) event.preventDefault()
@@ -82,6 +85,7 @@ export default function LimitHeader({ inputCurrency, outputCurrency }): JSX.Elem
           {`Meta`}
        </Typography>
       </NavLink>
+      }
       {featureEnabled(Feature.XSWAP, chainId) &&
       <NavLink
         // onClick={(event) => {

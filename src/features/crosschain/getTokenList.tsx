@@ -1,150 +1,105 @@
 import { TokenData } from "@0xsquid/sdk"
+// import { Chains } from "pages/exchange/crosschain"
 // import { useCallback, useState } from "react"
-import { AXL_ADDRESS, AXL_USDC_ADDRESS, AXL_WBTC_ADDRESS, AXL_WETH_ADDRESS, CRV_ADDRESS, DAI_ADDRESS, EQUAL_ADDRESS, FTM_ADDRESS, LINK_ADDRESS, MIM_ADDRESS, MPX_ADDRESS, NATIVE_ADDRESS, SPELL_ADDRESS, SUSHI_ADDRESS, USDC_ADDRESS, USDT_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from "sdk"
+import { AXL_USDC_ADDRESS, CRV_ADDRESS, EQUAL_ADDRESS, MPX_ADDRESS } from "sdk"
+import { AXL_TOKEN, CRV_TOKEN, DAI_TOKEN, ETH_TOKEN, FTM_TOKEN, LINK_TOKEN, MATIC_TOKEN, MIM_TOKEN, NATIVE_TOKEN, SPELL_TOKEN, SUSHI_TOKEN, USDC_TOKEN, USDT_TOKEN, WBTC_TOKEN, WNATIVE_TOKEN, btcLogo, crvLogo, equalLogo, linkLogo, mimLogo, mpxLogo, spellLogo, sushiLogo, usdcLogo, usdtId, usdtLogo } from "./tokens"
 
-const ethLogo = "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/eth.svg"
-const wethLogo = "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/weth.svg"
-const avaxLogo = "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/avalanche.svg"
-const ftmLogo = "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/fantom.svg"
-const wftmLogo = "https://seeklogo.com/images/F/fantom-ftm-logo-3566C53917-seeklogo.com.png"
-const usdcLogo = "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/usdc.svg"
-const linkLogo = "https://assets.coingecko.com/coins/images/877/standard/chainlink-new-logo.png?1696502009"
-const btcLogo = "https://assets.coingecko.com/coins/images/1/standard/bitcoin.png?1696501400"
-const axlLogo = "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/axl.svg"
-const equalLogo = "https://assets.coingecko.com/coins/images/28231/standard/hq_png_icon_file.png?1696527232"
-const spellLogo = "https://assets.coingecko.com/coins/images/15861/standard/abracadabra-3.png?1696515477"
-const mpxLogo = "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/mpx.svg"
-const crvLogo = "https://assets.coingecko.com/coins/images/12124/standard/Curve.png?1696511967"
-const mimLogo = "https://assets.coingecko.com/coins/images/16786/standard/mimlogopng.png?1696516358"
-const usdtLogo = "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/usdt.svg"
-const daiLogo = "https://assets.coingecko.com/coins/images/9956/standard/Badge_Dai.png?1696509996"
-const sushiLogo = "https://assets.coingecko.com/coins/images/12271/standard/512x512_Logo_no_chop.png?1696512101"
-// const oathLogo = "https://s2.coinmarketcap.com/static/img/coins/64x64/18520.png"
+///////////////////////////////
+    /*/ ETHEREUM (FROM) /*/
+///////////////////////////////
+
+export const from_eth_to_matic: TokenData[] = [
+    NATIVE_TOKEN[1],
+    WNATIVE_TOKEN[1],
+    USDC_TOKEN[1],
+    WBTC_TOKEN[1],
+    FTM_TOKEN[1],
+    AXL_TOKEN[1],
+    USDT_TOKEN[1],
+    DAI_TOKEN[1],
+    LINK_TOKEN[1],
+    SUSHI_TOKEN[1],
+    CRV_TOKEN[1],
+]
+
+export const from_eth_to_ftm: TokenData[] = [
+    NATIVE_TOKEN[1],
+    WNATIVE_TOKEN[1],
+    USDC_TOKEN[1],
+    WBTC_TOKEN[1],
+    FTM_TOKEN[1],
+    AXL_TOKEN[1],
+    USDT_TOKEN[1],
+    DAI_TOKEN[1],
+    LINK_TOKEN[1],
+    SUSHI_TOKEN[1],
+]
+
+export const from_eth_to_avax: TokenData[] = [
+    NATIVE_TOKEN[1],
+    WNATIVE_TOKEN[1],
+    USDC_TOKEN[1],
+    USDT_TOKEN[1],
+    WBTC_TOKEN[1],
+    FTM_TOKEN[1],
+    DAI_TOKEN[1],
+    LINK_TOKEN[1],
+    AXL_TOKEN[1],
+    SUSHI_TOKEN[1],
+]
+
+/////////////////////////////
+    /*/ ETHEREUM (TO) /*/
+/////////////////////////////
+
+export const to_eth_from_matic: TokenData[] = [
+    NATIVE_TOKEN[1],
+    WNATIVE_TOKEN[1],
+    USDC_TOKEN[1],
+    WBTC_TOKEN[1],
+    FTM_TOKEN[1],
+    AXL_TOKEN[1],
+    USDT_TOKEN[1],
+    LINK_TOKEN[1],
+]
+
+export const to_eth_from_avax: TokenData[] = [
+    NATIVE_TOKEN[1],
+    WNATIVE_TOKEN[1],
+    USDC_TOKEN[1],
+    WBTC_TOKEN[1],
+    FTM_TOKEN[1],
+    AXL_TOKEN[1],
+    USDT_TOKEN[1],
+    LINK_TOKEN[1],
+]
+
+export const to_eth_from_ftm: TokenData[] = [
+    NATIVE_TOKEN[1],
+    WNATIVE_TOKEN[1],
+    USDC_TOKEN[1],
+    WBTC_TOKEN[1],
+    FTM_TOKEN[1],
+    AXL_TOKEN[1],
+    USDT_TOKEN[1],
+    MATIC_TOKEN[1],
+    CRV_TOKEN[1],
+    LINK_TOKEN[1],
+]
+
 
 ////////////////////////////////
     /*/ AVALANCHE (FROM) /*/
 ////////////////////////////////
-export const from_avax_to_ftm: TokenData[] = [
-    {
-        "chainId": 43114,
-        "address": NATIVE_ADDRESS,
-        "name": 'Avalanche',
-        "symbol": 'AVAX',
-        "decimals": 18,
-        "logoURI": avaxLogo,
-        "coingeckoId": 'avalanche-2',
-    },
-    {
-        "chainId": 43114,
-        "address": WNATIVE_ADDRESS[43114],
-        "name": 'Wrapped Avalanche',
-        "symbol": 'WAVAX',
-        "decimals": 18,
-        "logoURI": avaxLogo,
-        "coingeckoId": 'avalanche-2',
-    },
-    {
-        "chainId": 43114,
-        "address": WETH_ADDRESS[43114],
-        "name": 'Wrapped Ether',
-        "symbol": 'WETH.e',
-        "decimals": 18,
-        "logoURI": ethLogo,
-        "coingeckoId": 'ethereum',
-    },
-    {
-        "chainId": 43114,
-        "address": USDC_ADDRESS[43114],
-        "name": 'USD Coin',
-        "symbol": 'USDC',
-        "decimals": 6,
-        "logoURI": usdcLogo,
-        "coingeckoId": 'usdc',
-    },
-    {
-        "chainId": 43114,
-        "address": LINK_ADDRESS[43114],
-        "name": 'Chainlink Token',
-        "symbol": 'LINK.e',
-        "decimals": 18,
-        "logoURI": linkLogo,
-        "coingeckoId": 'chainlink',
-    },
-    {
-        "chainId": 43114,
-        "address": '0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664', // USDC.e
-        "name": 'USD Coin',
-        "symbol": 'USDC.e',
-        "decimals": 6,
-        "logoURI": usdcLogo,
-        "coingeckoId": 'usdc',
-    },
-    {
-        "chainId": 43114,
-        "address": MIM_ADDRESS[43114],
-        "name": 'Magic Internet Money',
-        "symbol": 'MIM',
-        "decimals": 18,
-        "logoURI": mimLogo,
-        "coingeckoId": 'magic-internet-money',
-    },
-    {
-        "chainId": 43114,
-        "address": AXL_USDC_ADDRESS[43114],
-        "name": 'Axelar USDC',
-        "symbol": 'axlUSDC',
-        "decimals": 6,
-        "logoURI": usdcLogo,
-        "coingeckoId": 'usdc',
-    },
-]
 
 export const from_avax_to_eth: TokenData[] = [
-    {
-        "chainId": 43114,
-        "address": NATIVE_ADDRESS,
-        "name": 'Avalanche',
-        "symbol": 'AVAX',
-        "decimals": 18,
-        "logoURI": avaxLogo,
-        "coingeckoId": 'avalanche-2',
-    },
-    {
-        "chainId": 43114,
-        "address": WNATIVE_ADDRESS[43114],
-        "name": 'Wrapped Avalanche',
-        "symbol": 'WAVAX',
-        "decimals": 18,
-        "logoURI": avaxLogo,
-        "coingeckoId": 'avalanche-2',
-    },
-    {
-        "chainId": 43114,
-        "address": WETH_ADDRESS[43114],
-        "name": 'Wrapped Ether',
-        "symbol": 'WETH.e',
-        "decimals": 18,
-        "logoURI": ethLogo,
-        "coingeckoId": 'ethereum',
-    },
-    {
-        "chainId": 43114,
-        "address": USDC_ADDRESS[43114],
-        "name": 'USD Coin',
-        "symbol": 'USDC',
-        "decimals": 6,
-        "logoURI": usdcLogo,
-        "coingeckoId": 'usdc',
-    },
-    {
-        "chainId": 43114,
-        "address": LINK_ADDRESS[43114],
-        "name": 'Chainlink Token',
-        "symbol": 'LINK.e',
-        "decimals": 18,
-        "logoURI": linkLogo,
-        "coingeckoId": 'chainlink',
-    },
+    NATIVE_TOKEN[43114],
+    WNATIVE_TOKEN[43114],
+    ETH_TOKEN[43114],
+    LINK_TOKEN[43114],
+    AXL_TOKEN[43114],
+    MIM_TOKEN[43114],
+    USDC_TOKEN[43114],
     {
         "chainId": 43114,
         "address": '0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664', // USDC.e
@@ -154,33 +109,7 @@ export const from_avax_to_eth: TokenData[] = [
         "logoURI": usdcLogo,
         "coingeckoId": 'usdc',
     },
-    {
-        "chainId": 43114,
-        "address": MIM_ADDRESS[43114],
-        "name": 'Magic Internet Money',
-        "symbol": 'MIM',
-        "decimals": 18,
-        "logoURI": mimLogo,
-        "coingeckoId": 'magic-internet-money',
-    },
-    {
-        "chainId": 43114,
-        "address": AXL_USDC_ADDRESS[43114],
-        "name": 'Axelar USDC',
-        "symbol": 'axlUSDC',
-        "decimals": 6,
-        "logoURI": usdcLogo,
-        "coingeckoId": 'usdc',
-    },
-    {
-        "chainId": 43114,
-        "address": AXL_ADDRESS[43114],
-        "name": 'Axelar',
-        "symbol": 'AXL',
-        "decimals": 6,
-        "logoURI": axlLogo,
-        "coingeckoId": 'axelar',
-    },
+    WBTC_TOKEN[43114], // WBTC.e
     {
         "chainId": 43114,
         "address": '0x152b9d0fdc40c096757f570a51e494bd4b943e50', // BTC.b
@@ -191,6 +120,66 @@ export const from_avax_to_eth: TokenData[] = [
         "coingeckoId": 'bitcoin-avalanche-bridged-btc-b',
     },
 
+]
+
+export const from_avax_to_matic: TokenData[] = [
+    NATIVE_TOKEN[43114],
+    WNATIVE_TOKEN[43114],
+    ETH_TOKEN[43114],  // WETH.e
+    WBTC_TOKEN[43114],  // WBTC.e
+    {
+        "chainId": 43114,
+        "address": '0x152b9d0fdc40c096757f570a51e494bd4b943e50', // BTC.b
+        "name": 'Bitcoin',
+        "symbol": 'BTC.b',
+        "decimals": 8,
+        "logoURI": btcLogo,
+        "coingeckoId": 'bitcoin-avalanche-bridged-btc-b',
+    },
+    USDC_TOKEN[43114],  // USDC
+    USDT_TOKEN[43114],  // USDt
+    // {
+    //     "chainId": 43114,
+    //     "address": '0xF976ba91b6bb3468C91E4f02E68B37bc64a57e66', // axlUSDT
+    //     "name": 'Axelar USDT',
+    //     "symbol": 'axlUSDT',
+    //     "decimals": 6,
+    //     "logoURI": usdtLogo,
+    //     "coingeckoId": usdtId,
+    // },
+    LINK_TOKEN[43114],
+    CRV_TOKEN[43114],
+    AXL_TOKEN[43114],
+    DAI_TOKEN[43114],
+    MIM_TOKEN[43114],
+
+]
+
+export const from_avax_to_ftm: TokenData[] = [
+   NATIVE_TOKEN[43114],
+   WNATIVE_TOKEN[43114],
+   ETH_TOKEN[43114],
+   LINK_TOKEN[43114],
+   USDC_TOKEN[43114],
+{
+    "chainId": 43114,
+    "address": '0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664', // USDC.e
+    "name": 'USD Coin',
+    "symbol": 'USDC.e',
+    "decimals": 6,
+    "logoURI": usdcLogo,
+    "coingeckoId": 'usdc',
+},
+{
+    "chainId": 43114,
+    "address": AXL_USDC_ADDRESS[43114],
+    "name": 'Axelar USDC',
+    "symbol": 'axlUSDC',
+    "decimals": 6,
+    "logoURI": usdcLogo,
+    "coingeckoId": 'usdc',
+},
+    MIM_TOKEN[43114],
 ]
 
 //////////////////////////////
@@ -198,51 +187,22 @@ export const from_avax_to_eth: TokenData[] = [
 //////////////////////////////
 
 export const to_avax_from_eth: TokenData[] = [
-    {
-        "chainId": 43114,
-        "address": NATIVE_ADDRESS,
-        "name": 'Avalanche',
-        "symbol": 'AVAX',
-        "decimals": 18,
-        "logoURI": avaxLogo,
-        "coingeckoId": 'avalanche-2',
-    },
-    {
-        "chainId": 43114,
-        "address": WNATIVE_ADDRESS[43114],
-        "name": 'Wrapped Avalanche',
-        "symbol": 'WAVAX',
-        "decimals": 18,
-        "logoURI": avaxLogo,
-        "coingeckoId": 'avalanche-2',
-    },
-    {
-        "chainId": 43114,
-        "address": WETH_ADDRESS[43114],
-        "name": 'Wrapped Ether',
-        "symbol": 'WETH.e',
-        "decimals": 18,
-        "logoURI": wethLogo,
-        "coingeckoId": 'ethereum',
-    },
-    {
-        "chainId": 43114,
-        "address": USDC_ADDRESS[43114],
-        "name": 'USD Coin',
-        "symbol": 'USDC',
-        "decimals": 6,
-        "logoURI": usdcLogo,
-        "coingeckoId": 'usdc',
-    },
-    {
-        "chainId": 43114,
-        "address": LINK_ADDRESS[43114],
-        "name": 'Chainlink Token',
-        "symbol": 'LINK.e',
-        "decimals": 18,
-        "logoURI": linkLogo,
-        "coingeckoId": 'chainlink',
-    },
+   NATIVE_TOKEN[43114],
+   WNATIVE_TOKEN[43114],
+   ETH_TOKEN[43114],
+   LINK_TOKEN[43114],
+   WBTC_TOKEN[43114],
+   {
+       "chainId": 43114,
+       "address": '0x152b9d0fdc40c096757f570a51e494bd4b943e50', // BTC.b
+       "name": 'Bitcoin',
+       "symbol": 'BTC.b',
+       "decimals": 8,
+       "logoURI": btcLogo,
+       "coingeckoId": 'bitcoin-avalanche-bridged-btc-b',
+   },
+   MIM_TOKEN[43114],
+   USDC_TOKEN[43114], // USDC
     {
         "chainId": 43114,
         "address": '0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664', // USDC.e
@@ -254,40 +214,42 @@ export const to_avax_from_eth: TokenData[] = [
     },
     {
         "chainId": 43114,
-        "address": '0x50b7545627a5162F82A992c33b87aDc75187B218', // BTC.e
-        "name": 'Bitcoin',
-        "symbol": 'WBTC.e',
-        "decimals": 8,
-        "logoURI": btcLogo,
-        "coingeckoId": 'bitcoin-avalanche-bridged-btc-b',
-    },
-    {
-        "chainId": 43114,
-        "address": MIM_ADDRESS[43114],
-        "name": 'Magic Internet Money',
-        "symbol": 'MIM',
-        "decimals": 18,
-        "logoURI": mimLogo,
-        "coingeckoId": 'magic-internet-money',
-    },
-    {
-        "chainId": 43114,
-        "address": AXL_USDC_ADDRESS[43114],
+        "address": AXL_USDC_ADDRESS[43114], // axlUSDC
         "name": 'Axelar USDC',
         "symbol": 'axlUSDC',
         "decimals": 6,
         "logoURI": usdcLogo,
         "coingeckoId": 'usdc',
     },
+    AXL_TOKEN[43114],
+]
+
+export const to_avax_from_matic: TokenData[] = [
+    NATIVE_TOKEN[43114],
+    WNATIVE_TOKEN[43114],
+    USDC_TOKEN[43114],
     {
         "chainId": 43114,
-        "address": AXL_ADDRESS[43114],
-        "name": 'Axelar',
-        "symbol": 'AXL',
+        "address": '0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664', // USDC.e
+        "name": 'USD Coin',
+        "symbol": 'USDC.e',
         "decimals": 6,
-        "logoURI": axlLogo,
-        "coingeckoId": 'axelar',
+        "logoURI": usdcLogo,
+        "coingeckoId": 'usdc',
     },
+    {
+        "chainId": 43114,
+        "address": AXL_USDC_ADDRESS[43114], // axlUSDC
+        "name": 'Axelar USDC',
+        "symbol": 'axlUSDC',
+        "decimals": 6,
+        "logoURI": usdcLogo,
+        "coingeckoId": 'usdc',
+    },
+    USDT_TOKEN[43114],
+    DAI_TOKEN[43114],
+    MIM_TOKEN[43114],
+    WBTC_TOKEN[43114],  // BTC.e
     {
         "chainId": 43114,
         "address": '0x152b9d0fdc40c096757f570a51e494bd4b943e50', // BTC.b
@@ -297,54 +259,30 @@ export const to_avax_from_eth: TokenData[] = [
         "logoURI": btcLogo,
         "coingeckoId": 'bitcoin-avalanche-bridged-btc-b',
     },
+    ETH_TOKEN[43114],   // WETH.e
+    LINK_TOKEN[43114],  // LINK.e
+
 ]
 
 export const to_avax_from_ftm: TokenData[] = [
+    NATIVE_TOKEN[43114],
+    WNATIVE_TOKEN[43114],
+    WBTC_TOKEN[43114],  // WBTC.e
+    ETH_TOKEN[43114],   // WETH.e
+    USDC_TOKEN[43114],
     {
         "chainId": 43114,
-        "address": NATIVE_ADDRESS,
-        "name": 'Avalanche',
-        "symbol": 'AVAX',
-        "decimals": 18,
-        "logoURI": avaxLogo,
-        "coingeckoId": 'avalanche-2',
-    },
-    {
-        "chainId": 43114,
-        "address": WNATIVE_ADDRESS[43114],
-        "name": 'Wrapped Avalanche',
-        "symbol": 'WAVAX',
-        "decimals": 18,
-        "logoURI": avaxLogo,
-        "coingeckoId": 'avalanche-2',
-    },
-    {
-        "chainId": 43114,
-        "address": USDC_ADDRESS[43114],
-        "name": 'USD Coin',
-        "symbol": 'USDC',
-        "decimals": 6,
-        "logoURI": usdcLogo,
-        "coingeckoId": 'usdc',
-    },
-    {
-        "chainId": 43114,
-        "address": AXL_USDC_ADDRESS[43114],
+        "address": AXL_USDC_ADDRESS[43114], // axlUSDC
         "name": 'Axelar USDC',
         "symbol": 'axlUSDC',
         "decimals": 6,
         "logoURI": usdcLogo,
         "coingeckoId": 'usdc',
     },
-    {
-        "chainId": 43114,
-        "address": USDT_ADDRESS[43114], // USDt
-        "name": 'Tether USD',
-        "symbol": 'USDt',
-        "decimals": 6,
-        "logoURI": usdtLogo,
-        "coingeckoId": 'tether',
-    },
+    USDT_TOKEN[43114],
+    DAI_TOKEN[43114], // DAI.e
+    AXL_TOKEN[43114],
+    USDT_TOKEN[43114], // USDt
     {
         "chainId": 43114,
         "address": '0xc7198437980c041c805A1EDcbA50c1Ce5db95118', // USDT.e
@@ -354,331 +292,21 @@ export const to_avax_from_ftm: TokenData[] = [
         "logoURI": usdtLogo,
         "coingeckoId": 'tether',
     },
+    MIM_TOKEN[43114],
+    LINK_TOKEN[43114],
+    CRV_TOKEN[43114],
 ]
 
-
-///////////////////////////////
-    /*/ ETHEREUM (FROM) /*/
-///////////////////////////////
-
-export const from_eth_to_avax: TokenData[] = [
-    {
-        "chainId": 1,
-        "address": NATIVE_ADDRESS,
-        "name": 'Ethereum',
-        "symbol": 'ETH',
-        "decimals": 18,
-        "logoURI": ethLogo,
-        "coingeckoId": 'ethereum',
-    },
-    {
-        "chainId": 1,
-        "address": WNATIVE_ADDRESS[1],
-        "name": 'Wrapped Ether',
-        "symbol": 'WETH',
-        "decimals": 18,
-        "logoURI": ethLogo,
-        "coingeckoId": 'ethereum',
-    },
-    {
-        "chainId": 1,
-        "address": USDC_ADDRESS[1],
-        "name": 'USD Coin',
-        "symbol": 'USDC',
-        "decimals": 6,
-        "logoURI": usdcLogo,
-        "coingeckoId": 'usdc',
-    },
-    {
-        "chainId": 1,
-        "address": USDT_ADDRESS[1],
-        "name": 'Tether USD',
-        "symbol": 'USDT',
-        "decimals": 6,
-        "logoURI": usdtLogo,
-        "coingeckoId": 'tether',
-    },
-    {
-        "chainId": 1,
-        "address": WBTC_ADDRESS[1],
-        "name": 'Wrapped BTC',
-        "symbol": 'WBTC',
-        "decimals": 8,
-        "logoURI": btcLogo,
-        "coingeckoId": 'bitcoin',
-    },
-    {
-        "chainId": 1,
-        "address": FTM_ADDRESS[1],
-        "name": 'Fantom',
-        "symbol": 'FTM',
-        "decimals": 18,
-        "logoURI": ftmLogo,
-        "coingeckoId": 'fantom',
-    },
-    {
-        "chainId": 1,
-        "address": DAI_ADDRESS[1],
-        "name": 'Dai Stablecoin',
-        "symbol": 'DAI',
-        "decimals": 18,
-        "logoURI": daiLogo,
-        "coingeckoId": 'dai',
-    },
-    {
-        "chainId": 1,
-        "address": LINK_ADDRESS[1],
-        "name": 'ChainLink Token',
-        "symbol": 'LINK',
-        "decimals": 18,
-        "logoURI": linkLogo,
-        "coingeckoId": 'chainlink',
-    },
-    {
-        "chainId": 1,
-        "address": SUSHI_ADDRESS[1],
-        "name": 'Sushi',
-        "symbol": 'SUSHI',
-        "decimals": 18,
-        "logoURI": sushiLogo,
-        "coingeckoId": 'sushi',
-    },
-    {
-        "chainId": 1,
-        "address": AXL_ADDRESS[1],
-        "name": 'Axelar',
-        "symbol": 'AXL',
-        "decimals": 6,
-        "logoURI": axlLogo,
-        "coingeckoId": 'axelar',
-    },
-]
-
-export const from_eth_to_ftm: TokenData[] = [
-    {
-        "chainId": 1,
-        "address": NATIVE_ADDRESS,
-        "name": 'Ethereum',
-        "symbol": 'ETH',
-        "decimals": 18,
-        "logoURI": ethLogo,
-        "coingeckoId": 'ethereum',
-    },
-    {
-        "chainId": 1,
-        "address": WNATIVE_ADDRESS[1],
-        "name": 'Wrapped Ether',
-        "symbol": 'WETH',
-        "decimals": 18,
-        "logoURI": wethLogo,
-        "coingeckoId": 'ethereum',
-    },
-    {
-        "chainId": 1,
-        "address": USDC_ADDRESS[1],
-        "name": 'USD Coin',
-        "symbol": 'USDC',
-        "decimals": 6,
-        "logoURI": usdcLogo,
-        "coingeckoId": 'usdc',
-    },
-    {
-        "chainId": 1,
-        "address": USDT_ADDRESS[1],
-        "name": 'Tether USD',
-        "symbol": 'USDT',
-        "decimals": 6,
-        "logoURI": usdtLogo,
-        "coingeckoId": 'tether',
-    },
-    {
-        "chainId": 1,
-        "address": WBTC_ADDRESS[1],
-        "name": 'Wrapped BTC',
-        "symbol": 'WBTC',
-        "decimals": 8,
-        "logoURI": btcLogo,
-        "coingeckoId": 'bitcoin',
-    },
-    {
-        "chainId": 1,
-        "address": FTM_ADDRESS[1],
-        "name": 'Fantom',
-        "symbol": 'FTM',
-        "decimals": 18,
-        "logoURI": ftmLogo,
-        "coingeckoId": 'fantom',
-    },
-    {
-        "chainId": 1,
-        "address": DAI_ADDRESS[1],
-        "name": 'Dai Stablecoin',
-        "symbol": 'DAI',
-        "decimals": 18,
-        "logoURI": daiLogo,
-        "coingeckoId": 'dai',
-    },
-    {
-        "chainId": 1,
-        "address": LINK_ADDRESS[1],
-        "name": 'ChainLink Token',
-        "symbol": 'LINK',
-        "decimals": 18,
-        "logoURI": linkLogo,
-        "coingeckoId": 'chainlink',
-    },
-    {
-        "chainId": 1,
-        "address": SUSHI_ADDRESS[1],
-        "name": 'Sushi',
-        "symbol": 'SUSHI',
-        "decimals": 18,
-        "logoURI": sushiLogo,
-        "coingeckoId": 'sushi',
-    },
-    {
-        "chainId": 1,
-        "address": AXL_ADDRESS[1],
-        "name": 'Axelar',
-        "symbol": 'AXL',
-        "decimals": 6,
-        "logoURI": axlLogo,
-        "coingeckoId": 'axelar',
-    },
-]
-
-/////////////////////////////
-    /*/ ETHEREUM (TO) /*/
-/////////////////////////////
-
-export const to_eth_from_avax: TokenData[] = [
-    {
-        "chainId": 1,
-        "address": NATIVE_ADDRESS,
-        "name": 'Ethereum',
-        "symbol": 'ETH',
-        "decimals": 18,
-        "logoURI": ethLogo,
-        "coingeckoId": 'ethereum',
-    },
-    {
-        "chainId": 1,
-        "address": WNATIVE_ADDRESS[1],
-        "name": 'Wrapped ETH',
-        "symbol": 'WETH',
-        "decimals": 18,
-        "logoURI": ethLogo,
-        "coingeckoId": 'ethereum',
-    },
-    {
-        "chainId": 1,
-        "address": USDT_ADDRESS[1],
-        "name": 'Tether USD',
-        "symbol": 'USDT',
-        "decimals": 6,
-        "logoURI": usdtLogo,
-        "coingeckoId": 'tether',
-    },
-    {
-        "chainId": 1,
-        "address": WBTC_ADDRESS[1],
-        "name": 'Wrapped BTC',
-        "symbol": 'WBTC',
-        "decimals": 8,
-        "logoURI": btcLogo,
-        "coingeckoId": 'bitcoin',
-    },
-    {
-        "chainId": 1,
-        "address": LINK_ADDRESS[1],
-        "name": 'ChainLink Token',
-        "symbol": 'LINK',
-        "decimals": 18,
-        "logoURI": linkLogo,
-        "coingeckoId": 'chainlink',
-    },
-    
-]
-
-export const to_eth_from_ftm: TokenData[] = [
-    {
-        "chainId": 1,
-        "address": NATIVE_ADDRESS,
-        "name": 'Ethereum',
-        "symbol": 'ETH',
-        "decimals": 18,
-        "logoURI": ethLogo,
-        "coingeckoId": 'ethereum',
-    },
-    {
-        "chainId": 1,
-        "address": WNATIVE_ADDRESS[1],
-        "name": 'Wrapped ETH',
-        "symbol": 'WETH',
-        "decimals": 18,
-        "logoURI": ethLogo,
-        "coingeckoId": 'ethereum',
-    },
-    {
-        "chainId": 1,
-        "address": USDT_ADDRESS[1],
-        "name": 'Tether USD',
-        "symbol": 'USDT',
-        "decimals": 6,
-        "logoURI": usdtLogo,
-        "coingeckoId": 'tether',
-    },
-    {
-        "chainId": 1,
-        "address": WBTC_ADDRESS[1],
-        "name": 'Wrapped BTC',
-        "symbol": 'WBTC',
-        "decimals": 8,
-        "logoURI": btcLogo,
-        "coingeckoId": 'bitcoin',
-    },
-    {
-        "chainId": 1,
-        "address": LINK_ADDRESS[1],
-        "name": 'ChainLink Token',
-        "symbol": 'LINK',
-        "decimals": 18,
-        "logoURI": linkLogo,
-        "coingeckoId": 'chainlink',
-    },
-]
 
 /////////////////////////////
     /*/ FANTOM (FROM) /*/
 /////////////////////////////
 export const from_ftm_to_avax: TokenData[] = [
-    {
-        "chainId": 250,
-        "address": NATIVE_ADDRESS,
-        "name": 'Fantom',
-        "symbol": 'FTM',
-        "decimals": 18,
-        "logoURI": ftmLogo,
-        "coingeckoId": 'fantom',
-    },
-    {
-        "chainId": 250,
-        "address": WNATIVE_ADDRESS[250],
-        "name": 'Wrapped FTM',
-        "symbol": 'WFTM',
-        "decimals": 18,
-        "logoURI": wftmLogo,
-        "coingeckoId": 'fantom',
-    },
-    {
-        "chainId": 250,
-        "address": AXL_USDC_ADDRESS[250],
-        "name": 'Axelar USDC',
-        "symbol": 'axlUSDC',
-        "decimals": 6,
-        "logoURI": usdcLogo,
-        "coingeckoId": 'usdc',
-    },
+    NATIVE_TOKEN[250],
+    WNATIVE_TOKEN[250],
+    USDC_TOKEN[250],    // axlUSDC
+    WBTC_TOKEN[250],    // axlBTC
+    ETH_TOKEN[250],    // axlETH
     {
         "chainId": 250,
         "address": MPX_ADDRESS[250],
@@ -688,24 +316,12 @@ export const from_ftm_to_avax: TokenData[] = [
         "logoURI": mpxLogo,
         "coingeckoId": 'mpx',
     },
-    {
-        "chainId": 250,
-        "address": SPELL_ADDRESS[250],
-        "name": 'Spell Token',
-        "symbol": 'SPELL',
-        "decimals": 18,
-        "logoURI": spellLogo,
-        "coingeckoId": 'spell-token',
-    },
-    {
-        "chainId": 250,
-        "address": CRV_ADDRESS[250],
-        "name": 'Curve DAO',
-        "symbol": 'CRV',
-        "decimals": 18,
-        "logoURI": crvLogo,
-        "coingeckoId": 'curve-dao-token',
-    },
+    SPELL_TOKEN[250],
+    CRV_TOKEN[250],
+    AXL_TOKEN[250],
+    SUSHI_TOKEN[250],
+    LINK_TOKEN[250],
+    MIM_TOKEN[250],
     {
         "chainId": 250,
         "address": EQUAL_ADDRESS[250],
@@ -715,54 +331,13 @@ export const from_ftm_to_avax: TokenData[] = [
         "logoURI": equalLogo,
         "coingeckoId": 'equalizer-dex',
     },
-    // {
-    //     "chainId": 250,
-    //     "address": AXL_WBTC_ADDRESS[250],
-    //     "name": 'Axelar BTC',
-    //     "symbol": 'axlBTC',
-    //     "decimals": 8,
-    //     "logoURI": btcLogo,
-    //     "coingeckoId": 'bitcoin',
-    // }
 ]
 
 export const from_ftm_to_eth: TokenData[] = [
-    {
-        "chainId": 250,
-        "address": NATIVE_ADDRESS,
-        "name": 'Fantom',
-        "symbol": 'FTM',
-        "decimals": 18,
-        "logoURI": ftmLogo,
-        "coingeckoId": 'fantom',
-    },
-    {
-        "chainId": 250,
-        "address": NATIVE_ADDRESS,
-        "name": 'Fantom',
-        "symbol": 'FTM',
-        "decimals": 18,
-        "logoURI": ftmLogo,
-        "coingeckoId": 'fantom',
-    },
-    {
-        "chainId": 250,
-        "address": AXL_USDC_ADDRESS[250],
-        "name": 'Axelar USDC',
-        "symbol": 'axlUSDC',
-        "decimals": 6,
-        "logoURI": usdcLogo,
-        "coingeckoId": 'usdc',
-    },
-    {
-        "chainId": 250,
-        "address": AXL_WBTC_ADDRESS[250],
-        "name": 'Axelar WBTC',
-        "symbol": 'axlWBTC',
-        "decimals": 8,
-        "logoURI": btcLogo,
-        "coingeckoId": 'bitcoin',
-    },
+    NATIVE_TOKEN[250],
+    WNATIVE_TOKEN[250],
+    USDC_TOKEN[250],
+    WBTC_TOKEN[250],
     {
         "chainId": 250,
         "address": MPX_ADDRESS[250],
@@ -772,15 +347,7 @@ export const from_ftm_to_eth: TokenData[] = [
         "logoURI": mpxLogo,
         "coingeckoId": 'mpx',
     },
-    {
-        "chainId": 250,
-        "address": SPELL_ADDRESS[250],
-        "name": 'Spell Token',
-        "symbol": 'SPELL',
-        "decimals": 18,
-        "logoURI": spellLogo,
-        "coingeckoId": 'spell-token',
-    },
+    SPELL_TOKEN[250],
     {
         "chainId": 250,
         "address": CRV_ADDRESS[250],
@@ -799,6 +366,18 @@ export const from_ftm_to_eth: TokenData[] = [
         "logoURI": equalLogo,
         "coingeckoId": 'equalizer-dex',
     },
+]
+
+export const from_ftm_to_matic: TokenData[] = [
+    NATIVE_TOKEN[250],
+    WNATIVE_TOKEN[250],
+    USDC_TOKEN[250],    // axlUSDC
+    WBTC_TOKEN[250],    // axlBTC
+    ETH_TOKEN[250],     // axlETH
+    LINK_TOKEN[250],
+    AXL_TOKEN[250],
+    MIM_TOKEN[250],
+    SUSHI_TOKEN[250],
 ]
 
 ///////////////////////////
@@ -806,33 +385,12 @@ export const from_ftm_to_eth: TokenData[] = [
 ///////////////////////////
 
 export const to_ftm_from_eth: TokenData[] = [
-    {
-        "chainId": 250,
-        "address": NATIVE_ADDRESS,
-        "name": 'Fantom',
-        "symbol": 'FTM',
-        "decimals": 18,
-        "logoURI": ftmLogo,
-        "coingeckoId": 'fantom',
-    },
-    {
-        "chainId": 250,
-        "address": WNATIVE_ADDRESS[250],
-        "name": 'Wrapped FTM',
-        "symbol": 'WFTM',
-        "decimals": 18,
-        "logoURI": ftmLogo,
-        "coingeckoId": 'fantom',
-    },
-    {
-        "chainId": 250,
-        "address": AXL_USDC_ADDRESS[250],
-        "name": 'Axelar USDC',
-        "symbol": 'axlUSDC',
-        "decimals": 6,
-        "logoURI": usdcLogo,
-        "coingeckoId": 'usdc',
-    },
+    NATIVE_TOKEN[250],
+    WNATIVE_TOKEN[250],
+    USDC_TOKEN[250],
+    ETH_TOKEN[250],
+    MIM_TOKEN[250],
+
     {
         "chainId": 250,
         "address": MPX_ADDRESS[250],
@@ -844,12 +402,29 @@ export const to_ftm_from_eth: TokenData[] = [
     },
     {
         "chainId": 250,
-        "address": AXL_WETH_ADDRESS[250],
-        "name": 'Axelar ETH',
-        "symbol": 'axlETH',
+        "address": EQUAL_ADDRESS[250],
+        "name": 'Equalizer',
+        "symbol": 'EQUAL',
         "decimals": 18,
-        "logoURI": ethLogo,
-        "coingeckoId": 'ethereum',
+        "logoURI": equalLogo,
+        "coingeckoId": 'equalizer-dex',
+    },
+    CRV_TOKEN[250],
+    SPELL_TOKEN[250],
+]
+
+export const to_ftm_from_matic: TokenData[] = [
+    NATIVE_TOKEN[250],
+    WNATIVE_TOKEN[250],
+    USDC_TOKEN[250],
+    {
+        "chainId": 250,
+        "address": MPX_ADDRESS[250],
+        "name": 'Morphex',
+        "symbol": 'MPX',
+        "decimals": 18,
+        "logoURI": mpxLogo,
+        "coingeckoId": 'mpx',
     },
     {
         "chainId": 250,
@@ -860,54 +435,16 @@ export const to_ftm_from_eth: TokenData[] = [
         "logoURI": equalLogo,
         "coingeckoId": 'equalizer-dex',
     },
-    {
-        "chainId": 250,
-        "address": CRV_ADDRESS[250],
-        "name": 'Curve DAO',
-        "symbol": 'CRV',
-        "decimals": 18,
-        "logoURI": crvLogo,
-        "coingeckoId": 'curve-dao-token',
-    },
-    {
-        "chainId": 250,
-        "address": SPELL_ADDRESS[250],
-        "name": 'Spell Token',
-        "symbol": 'SPELL',
-        "decimals": 18,
-        "logoURI": spellLogo,
-        "coingeckoId": 'spell-token',
-    },
-    {
-        "chainId": 250,
-        "address": MIM_ADDRESS[250],
-        "name": 'Magic Internet Money',
-        "symbol": 'MIM',
-        "decimals": 18,
-        "logoURI": mimLogo,
-        "coingeckoId": 'magic-internet-money',
-    },
+    CRV_TOKEN[250],
+    LINK_TOKEN[250],
+    SPELL_TOKEN[250],
+    MIM_TOKEN[250]
 ]
 
 export const to_ftm_from_avax: TokenData[] = [
-    {
-        "chainId": 250,
-        "address": NATIVE_ADDRESS,
-        "name": 'Fantom',
-        "symbol": 'FTM',
-        "decimals": 18,
-        "logoURI": ftmLogo,
-        "coingeckoId": 'fantom',
-    },
-    {
-        "chainId": 250,
-        "address": AXL_USDC_ADDRESS[250],
-        "name": 'Axelar USDC',
-        "symbol": 'axlUSDC',
-        "decimals": 6,
-        "logoURI": usdcLogo,
-        "coingeckoId": 'usdc',
-    },
+    NATIVE_TOKEN[250],
+    WNATIVE_TOKEN[250],
+    USDC_TOKEN[250],
     {
         "chainId": 250,
         "address": MPX_ADDRESS[250],
@@ -926,68 +463,159 @@ export const to_ftm_from_avax: TokenData[] = [
         "logoURI": equalLogo,
         "coingeckoId": 'equalizer-dex',
     },
-    {
-        "chainId": 250,
-        "address": CRV_ADDRESS[250],
-        "name": 'Curve DAO',
-        "symbol": 'CRV',
-        "decimals": 18,
-        "logoURI": crvLogo,
-        "coingeckoId": 'curve-dao-token',
-    },
-    {
-        "chainId": 250,
-        "address": SPELL_ADDRESS[250],
-        "name": 'Spell Token',
-        "symbol": 'SPELL',
-        "decimals": 18,
-        "logoURI": spellLogo,
-        "coingeckoId": 'spell-token',
-    },
-    {
-        "chainId": 250,
-        "address": MIM_ADDRESS[250],
-        "name": 'Magic Internet Money',
-        "symbol": 'MIM',
-        "decimals": 18,
-        "logoURI": mimLogo,
-        "coingeckoId": 'magic-internet-money',
-    },
+    CRV_TOKEN[250],
+    LINK_TOKEN[250],
+    SPELL_TOKEN[250],
+    MIM_TOKEN[250],
+]
+
+///////////////////////////
+    /*/ MATIC (FROM) /*/
+///////////////////////////
+
+export const from_matic_to_eth: TokenData[] = [
+    NATIVE_TOKEN[137],
+    WNATIVE_TOKEN[137],
+    USDC_TOKEN[137],
+    ETH_TOKEN[137],
+    WBTC_TOKEN[137],
+    LINK_TOKEN[137],
+]
+
+export const from_matic_to_ftm: TokenData[] = [
+    NATIVE_TOKEN[137],
+    WNATIVE_TOKEN[137],
+    ETH_TOKEN[137],
+    WBTC_TOKEN[137],
+    USDC_TOKEN[137],
+    USDT_TOKEN[137],
+    DAI_TOKEN[137],
+    LINK_TOKEN[137],
+    AXL_TOKEN[137],
+]
+
+export const from_matic_to_avax: TokenData[] = [
+    NATIVE_TOKEN[137],
+    WNATIVE_TOKEN[137],
+    ETH_TOKEN[137],
+    WBTC_TOKEN[137],
+    USDC_TOKEN[137],
+    USDT_TOKEN[137],
+    DAI_TOKEN[137],
+    LINK_TOKEN[137],
+    AXL_TOKEN[137],
+]
+
+/////////////////////////
+    /*/ MATIC (TO) /*/
+/////////////////////////
+
+export const to_matic_from_eth: TokenData[] = [
+    NATIVE_TOKEN[137],
+    WNATIVE_TOKEN[137],
+    ETH_TOKEN[137],
+    WBTC_TOKEN[137],
+    USDC_TOKEN[137],
+    USDT_TOKEN[137],
+    DAI_TOKEN[137],
+    LINK_TOKEN[137],
+]
+
+export const to_matic_from_ftm: TokenData[] = [
+    NATIVE_TOKEN[137],
+    WNATIVE_TOKEN[137],
+    ETH_TOKEN[137],
+    WBTC_TOKEN[137],
+    USDC_TOKEN[137],
+    USDT_TOKEN[137],
+    DAI_TOKEN[137],
+    LINK_TOKEN[137],
+]
+
+export const to_matic_from_avax: TokenData[] = [
+    NATIVE_TOKEN[137],
+    WNATIVE_TOKEN[137],
+    ETH_TOKEN[137],
+    WBTC_TOKEN[137],
+    USDC_TOKEN[137],
+    USDT_TOKEN[137],
+    DAI_TOKEN[137],
+    LINK_TOKEN[137],
 ]
 
 
+const fromLists = {
+    [1]: {
+        137: from_eth_to_matic,
+        250: from_eth_to_ftm,
+        43114: from_eth_to_avax,
+    },
+    [250]: {
+        1: from_ftm_to_eth,
+        137: from_ftm_to_matic,
+        43114: from_ftm_to_avax,
+    },
+    [137]: {
+        1: from_matic_to_eth,
+        250: from_matic_to_ftm,
+        43114: from_matic_to_avax,
+    },
+    [43114]: {
+        1: from_avax_to_eth,
+        137: from_avax_to_matic,
+        250: from_avax_to_ftm,
+    },
+}
 
+const toLists = {
+    [1]: {
+        137: to_eth_from_matic,
+        250: to_eth_from_ftm,
+        43114: to_eth_from_avax,
+    },
+    [250]: {
+        1: to_ftm_from_eth,
+        137: to_ftm_from_matic,
+        43114: to_ftm_from_avax,
+    },
+    [137]: {
+        1: to_matic_from_eth,
+        250: to_matic_from_ftm,
+        43114: to_matic_from_avax,
+    },
+    [43114]: {
+        1: to_avax_from_eth,
+        137: to_avax_from_matic,
+        250: to_eth_from_ftm,
+    },
+}
 
+// interface TokenListInputs {
+//     fromChain: Chains[],
+//     toChain: Chains[]
+// }
 const fromTokenList = (fromChain, toChain) => {
-    let inputList
-    // setInputList(
-        fromChain == 43114 ? ( 
-            toChain == 250 ? inputList = from_avax_to_ftm : inputList = from_avax_to_eth
-        ) : fromChain == 1 ? (
-            toChain == 43114 ? inputList = from_eth_to_avax : inputList = from_eth_to_ftm
-        ) : fromChain == 250 ? (
-            toChain == 43114 ? inputList = from_ftm_to_avax : inputList = from_ftm_to_eth
-        ) : inputList = from_ftm_to_avax
- return inputList
+    let inputList = from_ftm_to_avax
+    inputList = [1, 137, 250, 43114].includes(fromChain) 
+        ? fromLists[fromChain][toChain] 
+        : inputList = from_ftm_to_avax
+
+    return inputList
+
 }
 
 const toTokenList = (fromChain, toChain) => {
-    let outputList
-    // setInputList(
-        toChain == 43114 ? ( 
-            fromChain == 250 ? outputList = to_avax_from_ftm : outputList = to_avax_from_eth
-        ) : toChain == 1 ? (
-            fromChain == 43114 ? outputList = to_eth_from_avax : outputList = to_eth_from_ftm
-        ) : toChain == 250 ? (
-            fromChain == 43114 ? outputList = to_ftm_from_avax : outputList = to_ftm_from_eth
-        ) : outputList = to_avax_from_ftm
- return outputList
+    let outputList = from_ftm_to_avax
+    outputList = [1, 137, 250, 43114].includes(fromChain) 
+        ? toLists[toChain][fromChain] 
+        : outputList = from_ftm_to_avax
+
+    return outputList
+
 }
 
 export const getInputList = (fromChain, toChain) => {
-const inputList = fromTokenList(fromChain, toChain)
-// console.log('inputList: %s', inputList)
-
+    const inputList = fromTokenList(fromChain, toChain)
     return inputList
 }
 

@@ -120,7 +120,8 @@ const InputPanel: FC<
   Pick<CrossChainAssetPanel, 'currency' | 'value' | 'onChange' | 'disabled' | 'priceImpact'> & { priceImpactCss?: string }
 > = ({ currency, value, onChange, disabled, priceImpact, priceImpactCss }) => {
   const { chainId } = useActiveWeb3React()
-  const usdcValue = [ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? useUSDCValue(tryParseAmount(value, currency)) : tryParseAmount(value, currency)
+  const usdcValue = [ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? useUSDCValue(tryParseAmount(value, currency)) : null
+    // : tryParseAmount(value, currency) 
   const span = useRef<HTMLSpanElement | null>(null)
   const [width, setWidth] = useState(0)
 

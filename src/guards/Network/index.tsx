@@ -13,6 +13,7 @@ import React, { FC } from 'react'
 import { getChainColor, getChainColorCode } from 'constants/chains'
 import { ArrowLeft } from 'react-feather'
 import { Button } from 'components/Button'
+import { featureEnabled } from 'functions'
 
 interface NetworkGuardProps {
   children?: React.ReactChild
@@ -94,24 +95,35 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
               </Button>
             ))}
           </div>
-          <NavLink
-            href='/swap'
-          >
-            {/* <ArrowLeft /> */}
-            <div
-              className={
-                `flex  gap-4 p-2 rounded-2xl border hover:border-${getChainColorCode(chainId)} bg-${getChainColorCode(chainId)} text-white mt-1 text-sm font-bold justify-center`
-              }>
-              <div className={'flex justify-end'}>
-                {`←`}
+          {[ChainId.ETHEREUM, ChainId.MATIC, ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId) &&
+            <NavLink
+              href={
+                featureEnabled(Feature.AMM, chainId) ? `/swap`
+                  : `/exchange/crosschain`
+              }
+            >
+              {/* <ArrowLeft /> */}
+              <div
+                className={
+                  `flex gap-4 p-3 rounded-2xl border hover:border-${getChainColorCode(chainId)} bg-${getChainColorCode(chainId)} text-white mt-1 text-sm font-bold justify-center`
+                }>
+                <div className={'flex justify-end text-lg'}>
+                  {`←`}
+                </div>
+                <div className={
+                  'flex justify-left text-lg'
+                }>
+                  {
+                    featureEnabled(Feature.AMM, chainId)
+                      ? `Return to Exchange`
+                      // : featureEnabled(Feature.XSWAP, chainId)  
+                      : `Return to xSwap`
+                    // : ``
+                  }
+                </div>
               </div>
-              <div className={
-                'flex justify-left'
-              }>
-                {`Return to Exchange`}
-              </div>
-            </div>
-          </NavLink>
+            </NavLink>
+          }
         </div>
         {/* <Typography className="text-xl">{NETWORK_LABEL[key]}</Typography> */}
       </HeadlessUIModal.Controlled>
