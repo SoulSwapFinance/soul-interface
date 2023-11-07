@@ -6,6 +6,7 @@ const ethLogo = "https://raw.githubusercontent.com/0xsquid/assets/main/images/to
 const wethLogo = "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/weth.svg"
 const avaxLogo = "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/avalanche.svg"
 const ftmLogo = "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/fantom.svg"
+const wftmLogo = "https://seeklogo.com/images/F/fantom-ftm-logo-3566C53917-seeklogo.com.png"
 const usdcLogo = "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/usdc.svg"
 const linkLogo = "https://assets.coingecko.com/coins/images/877/standard/chainlink-new-logo.png?1696502009"
 const btcLogo = "https://assets.coingecko.com/coins/images/1/standard/bitcoin.png?1696501400"
@@ -371,21 +372,21 @@ export const from_eth_to_avax: TokenData[] = [
     },
     {
         "chainId": 1,
-        "address": USDC_ADDRESS[1],
-        "name": 'USD Coin',
-        "symbol": 'USDC',
-        "decimals": 6,
-        "logoURI": usdcLogo,
-        "coingeckoId": 'usdc',
-    },
-    {
-        "chainId": 1,
         "address": WNATIVE_ADDRESS[1],
         "name": 'Wrapped Ether',
         "symbol": 'WETH',
         "decimals": 18,
         "logoURI": ethLogo,
         "coingeckoId": 'ethereum',
+    },
+    {
+        "chainId": 1,
+        "address": USDC_ADDRESS[1],
+        "name": 'USD Coin',
+        "symbol": 'USDC',
+        "decimals": 6,
+        "logoURI": usdcLogo,
+        "coingeckoId": 'usdc',
     },
     {
         "chainId": 1,
@@ -464,21 +465,21 @@ export const from_eth_to_ftm: TokenData[] = [
     },
     {
         "chainId": 1,
-        "address": USDC_ADDRESS[1],
-        "name": 'USD Coin',
-        "symbol": 'USDC',
-        "decimals": 6,
-        "logoURI": usdcLogo,
-        "coingeckoId": 'usdc',
-    },
-    {
-        "chainId": 1,
         "address": WNATIVE_ADDRESS[1],
         "name": 'Wrapped Ether',
         "symbol": 'WETH',
         "decimals": 18,
         "logoURI": wethLogo,
         "coingeckoId": 'ethereum',
+    },
+    {
+        "chainId": 1,
+        "address": USDC_ADDRESS[1],
+        "name": 'USD Coin',
+        "symbol": 'USDC',
+        "decimals": 6,
+        "logoURI": usdcLogo,
+        "coingeckoId": 'usdc',
     },
     {
         "chainId": 1,
@@ -561,21 +562,21 @@ export const to_eth_from_avax: TokenData[] = [
     },
     {
         "chainId": 1,
-        "address": USDT_ADDRESS[1],
-        "name": 'Tether USD',
-        "symbol": 'USDT',
-        "decimals": 6,
-        "logoURI": usdtLogo,
-        "coingeckoId": 'tether',
-    },
-    {
-        "chainId": 1,
         "address": WNATIVE_ADDRESS[1],
         "name": 'Wrapped ETH',
         "symbol": 'WETH',
         "decimals": 18,
         "logoURI": ethLogo,
         "coingeckoId": 'ethereum',
+    },
+    {
+        "chainId": 1,
+        "address": USDT_ADDRESS[1],
+        "name": 'Tether USD',
+        "symbol": 'USDT',
+        "decimals": 6,
+        "logoURI": usdtLogo,
+        "coingeckoId": 'tether',
     },
     {
         "chainId": 1,
@@ -610,21 +611,21 @@ export const to_eth_from_ftm: TokenData[] = [
     },
     {
         "chainId": 1,
-        "address": USDT_ADDRESS[1],
-        "name": 'Tether USD',
-        "symbol": 'USDT',
-        "decimals": 6,
-        "logoURI": usdtLogo,
-        "coingeckoId": 'tether',
-    },
-    {
-        "chainId": 1,
         "address": WNATIVE_ADDRESS[1],
         "name": 'Wrapped ETH',
         "symbol": 'WETH',
         "decimals": 18,
         "logoURI": ethLogo,
         "coingeckoId": 'ethereum',
+    },
+    {
+        "chainId": 1,
+        "address": USDT_ADDRESS[1],
+        "name": 'Tether USD',
+        "symbol": 'USDT',
+        "decimals": 6,
+        "logoURI": usdtLogo,
+        "coingeckoId": 'tether',
     },
     {
         "chainId": 1,
@@ -657,6 +658,15 @@ export const from_ftm_to_avax: TokenData[] = [
         "symbol": 'FTM',
         "decimals": 18,
         "logoURI": ftmLogo,
+        "coingeckoId": 'fantom',
+    },
+    {
+        "chainId": 250,
+        "address": WNATIVE_ADDRESS[250],
+        "name": 'Wrapped FTM',
+        "symbol": 'WFTM',
+        "decimals": 18,
+        "logoURI": wftmLogo,
         "coingeckoId": 'fantom',
     },
     {
@@ -724,7 +734,70 @@ export const from_ftm_to_eth: TokenData[] = [
         "decimals": 18,
         "logoURI": ftmLogo,
         "coingeckoId": 'fantom',
-    }
+    },
+    {
+        "chainId": 250,
+        "address": NATIVE_ADDRESS,
+        "name": 'Fantom',
+        "symbol": 'FTM',
+        "decimals": 18,
+        "logoURI": ftmLogo,
+        "coingeckoId": 'fantom',
+    },
+    {
+        "chainId": 250,
+        "address": AXL_USDC_ADDRESS[250],
+        "name": 'Axelar USDC',
+        "symbol": 'axlUSDC',
+        "decimals": 6,
+        "logoURI": usdcLogo,
+        "coingeckoId": 'usdc',
+    },
+    {
+        "chainId": 250,
+        "address": AXL_WBTC_ADDRESS[250],
+        "name": 'Axelar WBTC',
+        "symbol": 'axlWBTC',
+        "decimals": 8,
+        "logoURI": btcLogo,
+        "coingeckoId": 'bitcoin',
+    },
+    {
+        "chainId": 250,
+        "address": MPX_ADDRESS[250],
+        "name": 'Morphex',
+        "symbol": 'MPX',
+        "decimals": 18,
+        "logoURI": mpxLogo,
+        "coingeckoId": 'mpx',
+    },
+    {
+        "chainId": 250,
+        "address": SPELL_ADDRESS[250],
+        "name": 'Spell Token',
+        "symbol": 'SPELL',
+        "decimals": 18,
+        "logoURI": spellLogo,
+        "coingeckoId": 'spell-token',
+    },
+    {
+        "chainId": 250,
+        "address": CRV_ADDRESS[250],
+        "name": 'Curve DAO',
+        "symbol": 'CRV',
+        "decimals": 18,
+        "logoURI": crvLogo,
+        "coingeckoId": 'curve-dao-token',
+    },
+    {
+        "chainId": 250,
+        "address": EQUAL_ADDRESS[250],
+        "name": 'Equalizer',
+        "symbol": 'EQUAL',
+        "decimals": 18,
+        "logoURI": equalLogo,
+        "coingeckoId": 'equalizer-dex',
+    },
 ]
 
 ///////////////////////////
@@ -912,14 +985,14 @@ const toTokenList = (fromChain, toChain) => {
 
 export const getInputList = (fromChain, toChain) => {
 const inputList = fromTokenList(fromChain, toChain)
-console.log('inputList: %s', inputList)
+// console.log('inputList: %s', inputList)
 
     return inputList
 }
 
 export const getOutputList = (fromChain, toChain) => {
     const outputList = toTokenList(fromChain, toChain)
-    console.log('outputList: %s', outputList)
+    // console.log('outputList: %s', outputList)
 
     return outputList
 }

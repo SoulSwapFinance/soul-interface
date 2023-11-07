@@ -140,6 +140,7 @@ const nextConfig = {
 
   images: {
           domains: [
+            'raw.githubusercontent.com',
             'ftmscan.com',
             'snowtrace.io',
             'www.shutterstock.com',
@@ -150,10 +151,10 @@ const nextConfig = {
             'media.giphy.com',
             'app.soulswap.finance',
             'exchange.soulswap.finance',
+            'seeklogo.com',
             'assets.sushi.com',
             'res.cloudinary.com',
             'cloudstorage.openocean.finance',
-            'raw.githubusercontent.com',
             'avatars.githubusercontent.com',
             'logos.covalenthq.com',
             'pbs.twimg.com',
