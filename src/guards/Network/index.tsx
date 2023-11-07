@@ -47,16 +47,16 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
       >
         <div
           className={
-            `flex flex-col bg-dark-800 rounded-2xl border border-[${getChainColor(chainId)}] gap-2 justify-center p-4 mt-10 lg:mt-0`
+            `flex flex-col bg-dark-800 rounded-2xl border border-[${getChainColor(chainId)}] sm:gap-2 justify-center p-4 mt-10 lg:mt-0`
           }
         >
           <Typography
             className={`uppercase text-white bg-dark-900 p-3 rounded-2xl text-center text-lg mb-4 tracking-[.2rem]`}
             weight={700}
           >
-            {`SWITCH CHAIN`}
+            {`Switch Chain`}
           </Typography>
-          <div className="flex gap-5 md:gap-10 justify-center">
+          <div className="grid grid-cols-5 sm:flex sm:gap-5 md:gap-10 justify-center">
             {supportedNetworks.map((key: string, idx: number) => (
               <Button
                 className={`text-primary hover:text-white flex items-center flex-col gap-2 justify-start`}
@@ -72,6 +72,8 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
                     library?.send('wallet_switchEthereumChain', [{ chainId: '0x28' }, account])
                   } else if (key === '0xA86A') {
                     library?.send('wallet_switchEthereumChain', [{ chainId: '0xA86A' }, account])
+                  } else if (key === '0xA4B1') {
+                    library?.send('wallet_switchEthereumChain', [{ chainId: '0xA4B1' }, account])
                   } else if (key === '0x1') {
                     library?.send('wallet_switchEthereumChain', [{ chainId: '0x1' }, account])
                   } else {
@@ -84,9 +86,9 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
                     src={NETWORK_ICON[key]}
                     alt="Switch Network"
                     className={
-                      `rounded-2xl p-3 m-3 filter drop-shadow-currencyLogo
+                      `rounded-2xl p-2 filter drop-shadow-currencyLogo
                         border hover:border-${getChainColorCode(Number(key))}
-                        bg-${getChainColorCode(Number(key))} max-h-[64px] max-w-[64px]`
+                        bg-${getChainColorCode(Number(key))} max-h-[48px] sm:max-h-[64px] max-w-[48px] sm:max-w-[64px]`
                     }
                     width={64}
                     height={64}
@@ -95,7 +97,7 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
               </Button>
             ))}
           </div>
-          {[ChainId.ETHEREUM, ChainId.MATIC, ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId) &&
+          {[ChainId.ETHEREUM, ChainId.MATIC, ChainId.FANTOM, ChainId.ARBITRUM, ChainId.AVALANCHE].includes(chainId) &&
             <NavLink
               href={
                 featureEnabled(Feature.AMM, chainId) ? `/swap`
