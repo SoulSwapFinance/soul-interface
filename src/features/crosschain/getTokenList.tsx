@@ -1,6 +1,6 @@
 import { TokenData } from "@0xsquid/sdk"
-import { useCallback, useState } from "react"
-import { AXL_ADDRESS, AXL_USDC_ADDRESS, AXL_WBTC_ADDRESS, AXL_WETH_ADDRESS, BUSD_ADDRESS, CRV_ADDRESS, DAI_ADDRESS, EQUAL_ADDRESS, FTM_ADDRESS, LINK_ADDRESS, MIM_ADDRESS, MPX_ADDRESS, NATIVE_ADDRESS, SPELL_ADDRESS, SUSHI_ADDRESS, USDC_ADDRESS, USDT_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from "sdk"
+// import { useCallback, useState } from "react"
+import { AXL_ADDRESS, AXL_USDC_ADDRESS, AXL_WBTC_ADDRESS, AXL_WETH_ADDRESS, CRV_ADDRESS, DAI_ADDRESS, EQUAL_ADDRESS, FTM_ADDRESS, LINK_ADDRESS, MIM_ADDRESS, MPX_ADDRESS, NATIVE_ADDRESS, SPELL_ADDRESS, SUSHI_ADDRESS, USDC_ADDRESS, USDT_ADDRESS, WBTC_ADDRESS, WETH_ADDRESS, WNATIVE_ADDRESS } from "sdk"
 
 const ethLogo = "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/eth.svg"
 const wethLogo = "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/weth.svg"
@@ -19,6 +19,7 @@ const mimLogo = "https://assets.coingecko.com/coins/images/16786/standard/mimlog
 const usdtLogo = "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/usdt.svg"
 const daiLogo = "https://assets.coingecko.com/coins/images/9956/standard/Badge_Dai.png?1696509996"
 const sushiLogo = "https://assets.coingecko.com/coins/images/12271/standard/512x512_Logo_no_chop.png?1696512101"
+// const oathLogo = "https://s2.coinmarketcap.com/static/img/coins/64x64/18520.png"
 
 ////////////////////////////////
     /*/ AVALANCHE (FROM) /*/
