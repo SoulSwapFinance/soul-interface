@@ -119,8 +119,8 @@ const WalletSwitch: FC<
 const InputPanel: FC<
   Pick<CrossChainAssetPanel, 'currency' | 'value' | 'onChange' | 'disabled' | 'priceImpact'> & { priceImpactCss?: string }
 > = ({ currency, value, onChange, disabled, priceImpact, priceImpactCss }) => {
-  const { chainId } = useActiveWeb3React()
-  const usdcValue = [ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? useUSDCValue(tryParseAmount(value, currency)) : null
+  // const { chainId } = useActiveWeb3React()
+  // const usdcValue = [ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? useUSDCValue(tryParseAmount(value, currency)) : null
     // : tryParseAmount(value, currency) 
   const span = useRef<HTMLSpanElement | null>(null)
   const [width, setWidth] = useState(0)
@@ -157,7 +157,7 @@ const InputPanel: FC<
         component="span"
         style={{ left: width }}
       >
-        {usdcValue?.greaterThan(ZERO) && <>~{formatNumber(usdcValue?.toFixed(), true, true, 2)} </>}
+        {/* {usdcValue?.greaterThan(ZERO) && <>~{formatNumber(usdcValue?.toFixed(), true, true, 2)} </>} */}
         {priceImpact && (
           <span className={priceImpactCss || priceImpactClassName}>({priceImpact?.toSignificant(2)}%)</span>
         )}
