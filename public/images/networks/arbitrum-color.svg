@@ -7,15 +7,15 @@
         }
 
         .st1 {
-            fill: #000000;
+            fill: #213147;
         }
 
         .st2 {
-            fill: #FFFFFF;
+            fill: #12AAFF;
         }
 
         .st3 {
-            fill: #FFFFFF;
+            fill: #9DCCED;
         }
 
         .st4 {

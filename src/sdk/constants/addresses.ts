@@ -431,7 +431,7 @@ export const LINK_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.AVALANCHE]: '0x5947BB275c521040051D82396192181b413227A3', // LINK.e
   [ChainId.MATIC]: '0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39',
   [ChainId.MOONRIVER]: '',
-  [ChainId.ARBITRUM]: '',
+  [ChainId.ARBITRUM]: '0xf97f4df75117a78c1a5a0dbb814af92458539fb4',
 }
 
 export const SUSHI_ADDRESS: { [chainId in ChainId]: string } = {
@@ -636,6 +636,7 @@ export const AXL_ADDRESS: AddressMap = {
   [ChainId.BSC]: '0x8b1f4432f943c465a973fedc6d7aa50fc96f1f65',
   [ChainId.MATIC]: '0x6e4e624106cb12e168e6533f8ec7c82263358940',
   [ChainId.AVALANCHE]: '0x44c784266cf024a60e8acf2427b9857ace194c5d',
+  [ChainId.ARBITRUM]: '0x23ee2343b892b1bb63503a4fabc840e0e2c6810f',
   [ChainId.MOONRIVER]: '',
 }
 
@@ -670,7 +671,7 @@ export const USDT_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '0xc2132d05d31c914a87c6611c10748aeb04b58e8f',
   [ChainId.AVALANCHE]: '0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7', // USDt
   [ChainId.MOONRIVER]: '0xb44a9b6905af7c801311e8f4e76932ee959c663c',
-  // [ChainId.ARBITRUM]: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
+  [ChainId.ARBITRUM]: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
   // [ChainId.OPTIMISM]: '0x94b008aa00579c1307b0ef2c499ad98a8ce58e58',
 }
 
@@ -742,7 +743,7 @@ export const WBTC_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6',
   [ChainId.AVALANCHE]: '0x50b7545627a5162F82A992c33b87aDc75187B218', // BTC.e
   [ChainId.MOONRIVER]: '0x6ab6d61428fde76768d7b45d8bfeec19c6ef91a8',
-  // [ChainId.ARBITRUM]: '0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f',
+  [ChainId.ARBITRUM]: '0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f',
   // [ChainId.OPTIMISM]: '0x68f180fcce6836688e9084f035309e29bf0a2095',
 }
 
@@ -771,6 +772,8 @@ export const DAI_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '0xd586E7F844cEa2F87f50152665BCbc2C279D8d70',  // DAI.e
   [ChainId.MOONRIVER]: '0x80A16016cC4A2E6a2CACA8a4a498b1699fF0f844',
   [ChainId.MATIC]: '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063',
+  [ChainId.ARBITRUM]: '0xda10009cbd5d07dd0cecc66161fc93d7c9000da1',
+  // [ChainId.BASE]: '0xda10009cbd5d07dd0cecc66161fc93d7c9000da1',
 }
 
 export const MPX_ADDRESS: AddressMap = {

@@ -83,14 +83,17 @@ export const SUPPORTED_NETWORKS: Record<
     blockExplorerUrls: ['https://snowtrace.io'],
   },
   [ChainId.ARBITRUM]: {
-    chainId: '0xA4B1',
+    chainId: '0xa4b1',
     chainName: 'Arbitrum',
     nativeCurrency: {
       name: 'Ethereum',
       symbol: 'ETH',
       decimals: 18,
     },
-    rpcUrls: ['https://arb1.arbitrum.io/rpc'],
+    rpcUrls: [
+      'https://rpc.ankr.com/arbitrum',
+      // 'https://arb1.arbitrum.io/rpc'
+    ],
     blockExplorerUrls: ['https://arbiscan.io'],
   },
   [ChainId.MOONRIVER]: {
@@ -138,7 +141,7 @@ const NetworkModal: FC<{ switchNetwork: (targetChain: number) => void }> = ({ sw
         <div className="grid grid-flow-row-dense grid-cols-1 gap-4 overflow-y-auto">
           {[
             ChainId.ETHEREUM,
-            // ChainId.ARBITRUM,
+            ChainId.ARBITRUM,
             ChainId.MATIC,
             ChainId.FANTOM,
             // ChainId.MOONRIVER,
