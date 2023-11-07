@@ -12,6 +12,7 @@ const COLOR = {
   btcOrange: 'text-btcOrange opacity-100 hover:opacity-100 focus:opacity-100',
   usdcBlue: 'text-usdcBlue opacity-100 hover:opacity-100 focus:opacity-100',
   avaxRed: 'text-avaxRed opacity-100 hover:opacity-100 focus:opacity-100',
+  arbitrumBlue: 'text-arbitrumBlue opacity-100 hover:opacity-100 focus:opacity-100',
   binanceGold: 'text-binanceGold opacity-100 hover:opacity-100 focus:opacity-100',
   moonriverTeal: 'text-moonriverTeal opacity-100 hover:opacity-100 focus:opacity-100',
   maticPurple: 'text-maticPurple opacity-100 hover:opacity-100 focus:opacity-100',

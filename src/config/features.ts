@@ -47,6 +47,7 @@ const features: FeatureMap = {
 
   [ChainId.ARBITRUM]: [
     Feature.XSWAP,
+    Feature.CROSSCHAIN,
     // Feature.AMM,
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD

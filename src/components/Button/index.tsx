@@ -25,6 +25,7 @@ const FLEXED = {
   binanceGold: 'bg-binanceGold bg-opacity/80 flex rounded text-high-emphesis hover:bg-opacity/100 disabled:bg-opacity/80',
   moonriverTeal: 'bg-moonriverTeal bg-opacity/80 flex rounded text-high-emphesis hover:bg-opacity/100 disabled:bg-opacity/80',
   maticPurple: 'bg-maticPurple bg-opacity/80 flex rounded text-high-emphesis hover:bg-opacity/100 disabled:bg-opacity/80',
+  arbitrumBlue: 'bg-arbitrumBlue bg-opacity/80 flex rounded text-high-emphesis hover:bg-opacity/100 disabled:bg-opacity/80',
   pink: 'bg-gradient-to-r from-pink to-opaque-pink flex rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity/80',
   purple: 'bg-gradient-to-r from-purple to-opaque-purple flex rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity/80',
   deepPurple: 'bg-gradient-to-r from-deepPurple to-opaque-purple flex rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity/80',
@@ -50,6 +51,7 @@ const FILLED = {
   binanceGold: 'bg-binanceGold bg-opacity/80 w-full rounded text-high-emphesis hover:bg-opacity/100 disabled:bg-opacity/80',
   moonriverTeal: 'bg-moonriverTeal bg-opacity/80 w-full rounded text-high-emphesis hover:bg-opacity/100 disabled:bg-opacity/80',
   maticPurple: 'bg-maticPurple bg-opacity/80 w-full rounded text-high-emphesis hover:bg-opacity/100 disabled:bg-opacity/80',
+  arbitrumBlue: 'bg-arbitrumBlue bg-opacity/80 w-full rounded text-high-emphesis hover:bg-opacity/100 disabled:bg-opacity/80',
   pink: 'bg-pink bg-opacity/80 w-full rounded text-high-emphesis hover:bg-opacity/100 disabled:bg-opacity/80',
   purple: 'bg-purple bg-opacity/80 w-full rounded text-high-emphesis hover:bg-opacity/100 disabled:bg-opacity/80',
   deepPurple: 'bg-deepPurple bg-opacity/80 w-full rounded text-high-emphesis hover:bg-opacity/100 disabled:bg-opacity/80',
@@ -78,6 +80,7 @@ const OUTLINED = {
   avaxRed: 'bg-avaxRed bg-opacity/20 outline-avaxRed rounded text-avaxRed hover:bg-opacity/40 disabled:bg-opacity/20',
   binanceGold: 'bg-binanceGold bg-opacity/20 outline-binanceGold rounded text-binanceGold hover:bg-opacity/40 disabled:bg-opacity/20',
   moonriverTeal: 'bg-moonriverTeal bg-opacity/20 outline-moonriverTeal rounded text-moonriverTeal hover:bg-opacity/40 disabled:bg-opacity/20',
+  arbitrumBlue: 'bg-arbitrumBlue bg-opacity/20 outline-arbitrumBlue rounded text-arbitrumBlue hover:bg-opacity/40 disabled:bg-opacity/20',
   maticPurple: 'bg-maticPurple bg-opacity/20 outline-maticPurple rounded text-maticPurple hover:bg-opacity/40 disabled:bg-opacity/20',
   pink: 'bg-pink bg-opacity/20 outline-pink rounded text-pink hover:bg-opacity/40 disabled:bg-opacity/20',
   purple: 'bg-purple bg-opacity/20 outline-purple rounded text-purple hover:bg-opacity/40 disabled:bg-opacity/20',
@@ -101,6 +104,7 @@ const BORDERED = {
   avaxRed: 'border w-full border-transparent hover:border-avaxRed bg-avaxRed bg-opacity/40 outline-avaxRed rounded text-avaxRed hover:bg-opacity/40 disabled:bg-opacity/20',
   binanceGold: 'border w-full border-transparent hover:border-binanceGold bg-avaxRed bg-opacity/40 outline-binanceGold rounded text-binanceGold hover:bg-opacity/40 disabled:bg-opacity/20',
   moonriverTeal: 'border w-full border-transparent hover:border-moonriverTeal bg-moonriverTeal bg-opacity/40 outline-moonriverTeal rounded text-moonriverTeal hover:bg-opacity/40 disabled:bg-opacity/20',
+  arbitrumBlue: 'border w-full border-transparent hover:border-arbitrumBlue bg-arbitrumBlue bg-opacity/40 outline-arbitrumBlue rounded text-arbitrumBlue hover:bg-opacity/40 disabled:bg-opacity/20',
   maticPurple: 'border w-full border-transparent hover:border-maticPurple bg-maticPurple bg-opacity/40 outline-maticPurple rounded text-maticPurple hover:bg-opacity/40 disabled:bg-opacity/20',
   deepPurple: 'border w-full border-transparent hover:border-deepPurple bg-deepPurple bg-opacity/40 outline-deepPurple rounded text-deepPurple hover:bg-opacity/40 disabled:bg-opacity/20',
   purple: 'border w-full border-transparent hover:border-purple bg-purple bg-opacity/40 outline-purple rounded text-purple hover:bg-opacity/40 disabled:bg-opacity/20',
@@ -120,6 +124,7 @@ const LINK = {
   usdcBlue: 'text-usdcBlue text-opacity-80 hover:text-opacity-100 focus:text-opacity-100 whitespace-nowrap focus:ring-0',
   ftmBlue: 'text-ftmBlue text-opacity-80 hover:text-opacity-100 focus:text-opacity-100 whitespace-nowrap focus:ring-0',
   avaxRed: 'text-avaxRed text-opacity-80 hover:text-opacity-100 focus:text-opacity-100 whitespace-nowrap focus:ring-0',
+  arbitrumBlue: 'text-arbitrumBlue text-opacity-80 hover:text-opacity-100 focus:text-opacity-100 whitespace-nowrap focus:ring-0',
   binanceGold: 'text-binanceGold text-opacity-80 hover:text-opacity-100 focus:text-opacity-100 whitespace-nowrap focus:ring-0',
   maticPurple: 'text-maticPurple text-opacity-80 hover:text-opacity-100 focus:text-opacity-100 whitespace-nowrap focus:ring-0',
 }
@@ -133,7 +138,7 @@ const VARIANT = {
   flexed: FLEXED,
 }
 
-export type ButtonColor = 'blue' | 'ftmBlue' | 'avaxRed' | 'ethBlue' | 'btcOrange' | 'usdcBlue' | 'binanceGold' | 'moonriverTeal' | 'maticPurple' | 'pink' | 'purple' | 'gradient' | 'gray' | 'default' | 'red' | 'green' | 'yellow'
+export type ButtonColor = 'blue' | 'ftmBlue' | 'avaxRed' | 'ethBlue' | 'btcOrange' | 'usdcBlue' | 'binanceGold' | 'moonriverTeal' | 'maticPurple' | 'arbitrumBlue' | 'pink' | 'purple' | 'gradient' | 'gray' | 'default' | 'red' | 'green' | 'yellow'
 
 export type ButtonSize = 'xs' | 'sm' | 'lg' | 'default' | 'none' | 'nobase'
 

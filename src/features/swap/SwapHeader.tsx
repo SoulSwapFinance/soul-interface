@@ -40,8 +40,9 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
         : chainId == ChainId.ETHEREUM ? `border-[#627EEA] text-[#627EEA]`
           : chainId == ChainId.BSC ? `border-[#F0B90B] text-[#F0B90B]`
             : chainId == ChainId.MATIC ? `border-[#8247E5] text-[#8247E5]`
-              : chainId == ChainId.MOONRIVER ? `border-[#53CBC9] text-[#53CBC9]`
-                : `border-[#1969FF] text-[#1969FF]`
+              : chainId == ChainId.ARBITRUM ? `border-[#627EEA] text-[#627EEA]`
+                : chainId == ChainId.MOONRIVER ? `border-[#53CBC9] text-[#53CBC9]`
+                  : `border-[#1969FF] text-[#1969FF]`
   const hoverColor = `${chainColor} hover:text-white`
   return (
     <div className="flex items-center justify-between gap-2">
