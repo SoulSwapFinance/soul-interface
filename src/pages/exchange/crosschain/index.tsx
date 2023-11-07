@@ -28,34 +28,6 @@ import { CustomBanner } from 'components/Banner'
 import LimitHeader from 'features/limit/LimitHeader'
 import { RPC } from 'connectors'
 
-// // addresses and IDs
-// const avalancheId = 43114;
-// const polygonChainId = 137;
-// const nativeToken = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE";
-// // amount of AVAX to send (currently 0.01 AVAX (~$0.10))
-// const amount = "10000000000000000";
-
-// const getSDK = () => {
-//   const squid = new Squid({
-//     baseUrl: "https://api.squidrouter.com",
-//   });
-//   return squid;
-// };
-
-// (async () => {
-//   // set up your RPC provider and signer
-//   const { account, chainId, library } = useActiveWeb3React()
-//   // const provider = library?.provider
-//   const signer = library.getSigner()
-//   // const provider = new ethers.providers.JsonRpcProvider(avaxRpcEndpoint);
-//   //  const signer = new ethers.Wallet(privateKey, provider);
-
-//   // instantiate the SDK
-//   const squid = getSDK();
-//   // init the SDK
-//   await squid.init();
-//   console.log("Squid inited");
-
 //   const { route } = await squid.getRoute({
 //     toAddress: account, // signer.address,
 //     fromChain: avalancheId,
@@ -537,11 +509,14 @@ const Crosschain = ({ }) => {
                     isOpen={showFromTokens}
                     onDismiss={() => toggleShowTokens(isFrom)}
                 >
+                    <div
+                        className={'grid grid-cols-2 sm:grid-cols-1 gap-1.5'} 
+                    >
                         {fromAssetList.map((token, i) => {
                             return (
                                 <div
                                     key={i}
-                                    className={`grid grid-cols-2 mt-2 sm:mx-24 mb-2 justify-center items-center align-center gap-12 sm:gap-24
+                                    className={`grid grid-cols-2 mt-2 sm:mx-24 mb-2 justify-center items-center align-center gap-6 sm:gap-24
                                     bg-dark-900 hover:bg-dark-800 p-1 sm:p-3 rounded-xl border-2 border-[${getChainColor(fromChain.chainId)}]
                                     ${token.symbol == fromAsset.symbol ? 'hidden' : 'visible'}
                                     overflow-y:auto
@@ -573,6 +548,7 @@ const Crosschain = ({ }) => {
                             )
                         }
                         )}
+                    </div>
                         </HeadlessUIModal.Controlled>
                 }
                
@@ -583,11 +559,14 @@ const Crosschain = ({ }) => {
                         isOpen={showToTokens}
                         onDismiss={() => toggleShowTokens(isFrom)}
                     >
+                        <div
+                            className={'grid grid-cols-2 sm:grid-cols-1 gap-1.5'} 
+                        >
                         {toAssetList.map((token, i) => {
                             return (
                                 <div
                                     key={i}
-                                    className={`grid grid-cols-2 mt-2 sm:mx-24 mb-2 justify-center items-center align-center gap-12 sm:gap-24
+                                    className={`grid grid-cols-2 mt-2 sm:mx-24 mb-2 justify-center items-center align-center gap-6 sm:gap-24
                                     bg-dark-900 hover:bg-dark-800 p-1 sm:p-3 rounded-xl border-2 border-[${getChainColor(toChain.chainId)}]
                                     ${token.symbol == toAsset.symbol ? 'hidden' : 'visible'}
                                     overflow-y:auto
@@ -619,6 +598,7 @@ const Crosschain = ({ }) => {
                             )
                         }
                         )}
+                        </div>
                         </HeadlessUIModal.Controlled>
                 }
             </div>
