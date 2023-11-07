@@ -65,7 +65,8 @@ export const SUPPORTED_NETWORKS: Record<
       symbol: 'MATIC',
       decimals: 18,
     },
-    rpcUrls: ['https://polygon-rpc.com'], // ['https://matic-mainnet.chainstacklabs.com/'],
+    rpcUrls: ['https://rpc.ankr.com/polygon'],
+      // 'https://polygon-rpc.com'], // ['https://matic-mainnet.chainstacklabs.com/'],
     blockExplorerUrls: ['https://polygonscan.com'],
   },
   [ChainId.AVALANCHE]: {
@@ -138,7 +139,7 @@ const NetworkModal: FC<{ switchNetwork: (targetChain: number) => void }> = ({ sw
           {[
             ChainId.ETHEREUM,
             // ChainId.ARBITRUM,
-            // ChainId.MATIC,
+            ChainId.MATIC,
             ChainId.FANTOM,
             // ChainId.MOONRIVER,
             ChainId.AVALANCHE,

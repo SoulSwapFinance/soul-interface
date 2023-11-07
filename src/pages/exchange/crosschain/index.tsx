@@ -128,31 +128,21 @@ import { RPC } from 'connectors'
 //   console.log(route.estimate.inutAmount);
 // }
 
+export type Chains = {
+    chainId: string | number
+    name: string;
+    logoURI: string;
+}
+
 const Crosschain = ({ }) => {
-    const { account, chainId, library } = useActiveWeb3React();
-    //   const router = useRouter()
-    //   const id = router.query.id as string // router string
+    const { account, chainId } = useActiveWeb3React()
+
     const provider = chainId && account
         ? new ethers.providers.Web3Provider(window.ethereum) 
         : new ethers.providers.JsonRpcProvider(RPC[ChainId.FANTOM])
     const signer = provider.getSigner()
     
     const NATIVE_ADDRESS = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
-    // const fromChain = ChainId.FANTOM
-    // const toChain = ChainId.AVALANCHE
-    // chainId == ChainId.ETHEREUM ? ChainId.FANTOM
-    //   : (symbol == 'USDC' && chainId == ChainId.AVALANCHE) ? ChainId.FANTOM
-    //   : (symbol == 'USDC' && chainId == ChainId.FANTOM) ? ChainId.AVALANCHE
-    //   : ChainId.ETHEREUM
-    // (symbol == 'USDC' && chainId == ChainId.FANTOM) ? ChainId.AVALANCHE
-    // : symbol != 'USDC' && (chainId == ChainId.FANTOM || chainId == ChainId.AVALANCHE) ? ChainId.ETHEREUM
-    //  : ChainId.FANTOM
-
-    type Chains = {
-        chainId: string | number
-        name: string;
-        logoURI: string;
-    };
 
     const chains: Chains[] = [
         {
@@ -170,257 +160,13 @@ const Crosschain = ({ }) => {
             "chainId": 1,
             "name": "Ethereum",
             "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/eth.svg"
+        },
+        {
+            "chainId": 137,
+            "name": "Polygon",
+            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/polygon.svg"
         }
-    ]
-
-    // const getFromAssets = useCallback((fromChain) => {
-    //     return fromChain == 43114 ? avaxTokens_from
-    //        : ftmTokens_from ?? ftmTokens_from
-    // }, [])
-    
-    // const getToAssets = useCallback((destChain) => {
-    //     return destChain == 43114 ? avaxTokens_to
-    //        : ftmTokens_to ?? ftmTokens_to
-    // }, [])
-
-    const ftmTokens_from: TokenData[] = [
-        {
-            "chainId": 250,
-            "address": NATIVE_ADDRESS,
-            "name": 'Fantom',
-            "symbol": 'FTM',
-            "decimals": 18,
-            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/fantom.svg",
-            "coingeckoId": 'fantom',
-        },
-        {
-            "chainId": 250,
-            "address": AXL_USDC_ADDRESS[250],
-            "name": 'Axelar USDC',
-            "symbol": 'axlUSDC',
-            "decimals": 6,
-            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/usdc.svg",
-            "coingeckoId": 'usdc',
-        },
-        {
-            "chainId": 250,
-            "address": MPX_ADDRESS[250],
-            "name": 'Morphex',
-            "symbol": 'MPX',
-            "decimals": 18,
-            "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/mpx.svg",
-            "coingeckoId": 'mpx',
-        },
-        {
-            "chainId": 250,
-            "address": SPELL_ADDRESS[250],
-            "name": 'Spell Token',
-            "symbol": 'SPELL',
-            "decimals": 18,
-            "logoURI": "https://assets.coingecko.com/coins/images/15861/standard/abracadabra-3.png?1696515477",
-            "coingeckoId": 'spell-token',
-        },
-        {
-            "chainId": 250,
-            "address": CRV_ADDRESS[250],
-            "name": 'Curve DAO',
-            "symbol": 'CRV',
-            "decimals": 18,
-            "logoURI": "https://assets.coingecko.com/coins/images/12124/standard/Curve.png?1696511967",
-            "coingeckoId": 'curve-dao-token',
-        },
-        {
-            "chainId": 250,
-            "address": EQUAL_ADDRESS[250],
-            "name": 'Equalizer',
-            "symbol": 'EQUAL',
-            "decimals": 18,
-            "logoURI": "https://assets.coingecko.com/coins/images/28231/standard/hq_png_icon_file.png?1696527232",
-            "coingeckoId": 'equalizer-dex',
-        },
-        // {
-        //     "chainId": 250,
-        //     "address": AXL_WBTC_ADDRESS[250],
-        //     "name": 'Axelar BTC',
-        //     "symbol": 'axlBTC',
-        //     "decimals": 8,
-        //     "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599/logo.png",
-        //     "coingeckoId": 'bitcoin',
-        // }
-    ]
-    
-    const ftmTokens_to: TokenData[] = [
-        {
-            "chainId": 250,
-            "address": NATIVE_ADDRESS,
-            "name": 'Fantom',
-            "symbol": 'FTM',
-            "decimals": 18,
-            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/fantom.svg",
-            "coingeckoId": 'fantom',
-        },
-        {
-            "chainId": 250,
-            "address": AXL_USDC_ADDRESS[250],
-            "name": 'Axelar USDC',
-            "symbol": 'axlUSDC',
-            "decimals": 6,
-            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/usdc.svg",
-            "coingeckoId": 'usdc',
-        },
-        {
-            "chainId": 250,
-            "address": MPX_ADDRESS[250],
-            "name": 'Morphex',
-            "symbol": 'MPX',
-            "decimals": 18,
-            "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/mpx.svg",
-            "coingeckoId": 'mpx',
-        },
-        {
-            "chainId": 250,
-            "address": EQUAL_ADDRESS[250],
-            "name": 'Equalizer',
-            "symbol": 'EQUAL',
-            "decimals": 18,
-            "logoURI": "https://assets.coingecko.com/coins/images/28231/standard/hq_png_icon_file.png?1696527232",
-            "coingeckoId": 'equalizer-dex',
-        },
-        {
-            "chainId": 250,
-            "address": CRV_ADDRESS[250],
-            "name": 'Curve DAO',
-            "symbol": 'CRV',
-            "decimals": 18,
-            "logoURI": "https://assets.coingecko.com/coins/images/12124/standard/Curve.png?1696511967",
-            "coingeckoId": 'curve-dao-token',
-        },
-        {
-            "chainId": 250,
-            "address": SPELL_ADDRESS[250],
-            "name": 'Spell Token',
-            "symbol": 'SPELL',
-            "decimals": 18,
-            "logoURI": "https://assets.coingecko.com/coins/images/15861/standard/abracadabra-3.png?1696515477",
-            "coingeckoId": 'spell-token',
-        },
-        {
-            "chainId": 250,
-            "address": MIM_ADDRESS[250],
-            "name": 'Magic Internet Money',
-            "symbol": 'MIM',
-            "decimals": 18,
-            "logoURI": "https://assets.coingecko.com/coins/images/16786/standard/mimlogopng.png?1696516358",
-            "coingeckoId": 'magic-internet-money',
-        },
-    ]
-
-    const avaxTokens_from: TokenData[] = [
-        {
-            "chainId": 43114,
-            "address": NATIVE_ADDRESS,
-            "name": 'Avalanche',
-            "symbol": 'AVAX',
-            "decimals": 18,
-            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/avalanche.svg",
-            "coingeckoId": 'avalanche-2',
-        },
-        {
-            "chainId": 43114,
-            "address": WNATIVE_ADDRESS[43114],
-            "name": 'Wrapped Avalanche',
-            "symbol": 'WAVAX',
-            "decimals": 18,
-            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/avalanche.svg",
-            "coingeckoId": 'avalanche-2',
-        },
-        {
-            "chainId": 43114,
-            "address": WETH_ADDRESS[43114],
-            "name": 'Wrapped Ether',
-            "symbol": 'WETH.e',
-            "decimals": 18,
-            "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/eth.svg",
-            "coingeckoId": 'ethereum',
-        },
-        {
-            "chainId": 43114,
-            "address": USDC_ADDRESS[43114],
-            "name": 'USD Coin',
-            "symbol": 'USDC',
-            "decimals": 6,
-            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/usdc.svg",
-            "coingeckoId": 'usdc',
-        },
-        {
-            "chainId": 43114,
-            "address": LINK_ADDRESS[43114],
-            "name": 'Chainlink Token',
-            "symbol": 'LINK.e',
-            "decimals": 18,
-            "logoURI": "https://assets.coingecko.com/coins/images/877/standard/chainlink-new-logo.png?1696502009",
-            "coingeckoId": 'chainlink',
-        },
-        {
-            "chainId": 43114,
-            "address": '0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664', // USDC.e
-            "name": 'USD Coin',
-            "symbol": 'USDC.e',
-            "decimals": 6,
-            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/usdc.svg",
-            "coingeckoId": 'usdc',
-        },
-        {
-            "chainId": 43114,
-            "address": MIM_ADDRESS[43114],
-            "name": 'Magic Internet Money',
-            "symbol": 'MIM',
-            "decimals": 18,
-            "logoURI": "https://assets.coingecko.com/coins/images/16786/standard/mimlogopng.png?1696516358",
-            "coingeckoId": 'magic-internet-money',
-        },
-        {
-            "chainId": 43114,
-            "address": AXL_USDC_ADDRESS[43114],
-            "name": 'Axelar USDC',
-            "symbol": 'axlUSDC',
-            "decimals": 6,
-            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/usdc.svg",
-            "coingeckoId": 'usdc',
-        },
-    ]
-    
-    const avaxTokens_to: TokenData[] = [
-        {
-            "chainId": 43114,
-            "address": NATIVE_ADDRESS,
-            "name": 'Avalanche',
-            "symbol": 'AVAX',
-            "decimals": 18,
-            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/avalanche.svg",
-            "coingeckoId": 'avalanche-2',
-        },
-        {
-            "chainId": 43114,
-            "address": USDC_ADDRESS[43114],
-            "name": 'USD Coin',
-            "symbol": 'USDC',
-            "decimals": 6,
-            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/assets/usdc.svg",
-            "coingeckoId": 'usdc',
-        },
-        {
-            "chainId": 43114,
-            "address": WNATIVE_ADDRESS[43114],
-            "name": 'Wrapped Avalanche',
-            "symbol": 'WAVAX',
-            "decimals": 18,
-            "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/avalanche.svg",
-            "coingeckoId": 'avalanche-2',
-        }
-    ]
-
- 
+    ] 
 
     // const getTokensForChain = (chainId, isFrom) => {
     //     return isFrom ? (
@@ -440,24 +186,28 @@ const Crosschain = ({ }) => {
         [chains[0].chainId]: ChainId.FANTOM,
         [chains[1].chainId]: ChainId.AVALANCHE,
         [chains[2].chainId]: ChainId.ETHEREUM,
+        [chains[3].chainId]: ChainId.MATIC,
     }
     
     const CHAIN_ID_TO_CHAIN = {
         [ChainId.FANTOM]: chains[0],
         [ChainId.AVALANCHE]: chains[1],
         [ChainId.ETHEREUM]: chains[2],
+        [ChainId.MATIC]: chains[3],
     }
 
     const DEFAULT_FROM_CHAIN_MAP = {
         [ChainId.FANTOM]: chains[0],
         [ChainId.AVALANCHE]: chains[1],
         [ChainId.ETHEREUM]: chains[2],
+        [ChainId.MATIC]: chains[3],
     }
     
     const DEFAULT_TO_CHAIN_MAP = {
-        [ChainId.FANTOM]: chains[1],
-        [ChainId.AVALANCHE]: chains[0],
-        [ChainId.ETHEREUM]: chains[1],
+        [ChainId.FANTOM]: chains[1],    // ftm to avax
+        [ChainId.AVALANCHE]: chains[0], // avax to ftm
+        [ChainId.ETHEREUM]: chains[0],  // eth to ftm
+        [ChainId.MATIC]: chains[0],     // matic to ftm
     }
 
     const [fromChain, setFromChain] = useState(DEFAULT_FROM_CHAIN_MAP[chainId])
@@ -657,7 +407,7 @@ const Crosschain = ({ }) => {
                     token.decimals,
                     token.symbol,
                     token.name
-                ))
+        ))
         setInputAmount(amount ?? '0')
     }, [setFromAsset, setFromToken, setInputAmount])
     

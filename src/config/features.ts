@@ -40,6 +40,7 @@ const features: FeatureMap = {
     Feature.AGGREGATE,
     // Feature.BRIDGE,
     Feature.CROSSCHAIN,
+    Feature.XSWAP,
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD
   ],
