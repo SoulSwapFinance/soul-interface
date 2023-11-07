@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { ethers } from 'ethers'
 import BigNumber from 'bignumber.js'
 // import { getAllChains, swap } from 'features/aggregator/router'
-import { ChainId, Currency, WETH, USDC, USDC_ADDRESS, WBTC, WNATIVE, WNATIVE_ADDRESS, AXL_USDC_ADDRESS, Token, NATIVE, AXL_WBTC_ADDRESS, MPX_ADDRESS, MIM_ADDRESS, SPELL_ADDRESS, CRV_ADDRESS, EQUAL_ADDRESS, WETH_ADDRESS, LINK_ADDRESS, BNB_ADDRESS } from 'sdk'
+import { ChainId, Token, NATIVE } from 'sdk'
 import { ArrowDownIcon } from '@heroicons/react/24/solid'
 // import SwapDropdown from 'features/swap/SwapDropdown'
 // import { NextSeo } from 'next-seo'
@@ -21,7 +21,7 @@ import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 // import { getChainInfo } from 'constants/chains'
 // import { useTokenBalance } from 'state/wallet/hooks'
 import Head from 'next/head'
-import { getChainInfo } from 'constants/chains'
+import { getChainColor, getChainInfo } from 'constants/chains'
 import { getInputList, getOutputList } from 'features/crosschain/getTokenList'
 // import { formatNumber } from 'functions'
 import { CustomBanner } from 'components/Banner'
@@ -251,11 +251,11 @@ const Crosschain = ({ }) => {
     const [showFromTokens, setShowFromTokens] = useState(false)
     const [showToTokens, setShowToTokens] = useState(false)
     const [outputAmount, setOutputAmount] = useState('0')
-    const buttonColor = (chainId) => {
-        return chainId == 43114 ? '#E84142'  // avaxRed
-            : chainId == 1 ? '#627EEA' // ethBlue
-                : '#1969FF' // ftmBlue
-    }
+    // const buttonColor = (chainId) => {
+    //     return chainId == 43114 ? '#E84142'  // avaxRed
+    //         : chainId == 1 ? '#627EEA' // ethBlue
+    //             : '#1969FF' // ftmBlue
+    // }
 
     // const config = {
     //     companyName: "Test Widget",
@@ -444,7 +444,7 @@ const Crosschain = ({ }) => {
                 // className={`bg-dark-900`}
             >
                     <div
-                        className={`flex justify-center bg-dark-900 mb-4 border-2 border-[${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
+                        className={`flex justify-center bg-dark-900 mb-4 border-2 border-[${getChainColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
                             ${isFrom ? `` : `hover:bg-dark-800`}
                         `}
                         onClick={() => toggleShowChains(isFrom)}
@@ -472,7 +472,7 @@ const Crosschain = ({ }) => {
                                 <div
                                     key={i}
                                     className={`flex mt-2 mx-24 mb-2 justify-center items-center align-center gap-24
-                                    bg-dark-900 hover:bg-dark-800 p-3 rounded-xl border-2 border-[${buttonColor(chain.chainId)}]
+                                    bg-dark-900 hover:bg-dark-800 p-3 rounded-xl border-2 border-[${getChainColor(Number(chain.chainId))}]
                                     ${[fromChain.chainId, toChain.chainId].includes(chain.chainId) ? 'hidden' : 'visible'}
                                     `}
                                     onClick={() => {
@@ -504,7 +504,7 @@ const Crosschain = ({ }) => {
             <div>
                 {(!showFromTokens || !showToTokens) &&
                     <div
-                        className={`ml-2 flex flex-cols-2 gap-8 sm:gap-24 border-2 border-[${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
+                        className={`ml-2 flex flex-cols-2 gap-8 sm:gap-24 border-2 border-[${getChainColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
                             bg-dark-900 hover:bg-dark-800 
                         `}
                         style={{
@@ -533,7 +533,7 @@ const Crosschain = ({ }) => {
                 }
                 {showFromTokens && isFrom &&
                 <HeadlessUIModal.Controlled
-                    chainId={fromChain.chainId == 43114 ? ChainId.AVALANCHE : ChainId.FANTOM}
+                    chainId={CHAIN_TO_CHAIN_ID[fromChain?.chainId]}
                     isOpen={showFromTokens}
                     onDismiss={() => toggleShowTokens(isFrom)}
                 >
@@ -542,7 +542,7 @@ const Crosschain = ({ }) => {
                                 <div
                                     key={i}
                                     className={`grid grid-cols-2 mt-2 sm:mx-24 mb-2 justify-center items-center align-center gap-12 sm:gap-24
-                                    bg-dark-900 hover:bg-dark-800 p-1 sm:p-3 rounded-xl border-2 border-[${buttonColor(fromChain.chainId)}]
+                                    bg-dark-900 hover:bg-dark-800 p-1 sm:p-3 rounded-xl border-2 border-[${getChainColor(fromChain.chainId)}]
                                     ${token.symbol == fromAsset.symbol ? 'hidden' : 'visible'}
                                     overflow-y:auto
                                 `}
@@ -579,7 +579,7 @@ const Crosschain = ({ }) => {
                 {showToTokens && !isFrom &&
                     <HeadlessUIModal.Controlled
                         // isCustom={true}
-                        chainId={toChain.chainId == 43114 ? ChainId.AVALANCHE : ChainId.FANTOM}
+                        chainId={CHAIN_TO_CHAIN_ID[toChain?.chainId]}
                         isOpen={showToTokens}
                         onDismiss={() => toggleShowTokens(isFrom)}
                     >
@@ -588,7 +588,7 @@ const Crosschain = ({ }) => {
                                 <div
                                     key={i}
                                     className={`grid grid-cols-2 mt-2 sm:mx-24 mb-2 justify-center items-center align-center gap-12 sm:gap-24
-                                    bg-dark-900 hover:bg-dark-800 p-1 sm:p-3 rounded-xl border-2 border-[${buttonColor(toChain.chainId)}]
+                                    bg-dark-900 hover:bg-dark-800 p-1 sm:p-3 rounded-xl border-2 border-[${getChainColor(toChain.chainId)}]
                                     ${token.symbol == toAsset.symbol ? 'hidden' : 'visible'}
                                     overflow-y:auto
                                 `}

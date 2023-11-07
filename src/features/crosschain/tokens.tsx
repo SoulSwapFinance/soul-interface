@@ -613,7 +613,7 @@ export const SPELL_TOKEN: TokenMap = {
     }
 }
 
-// [...]
+// [.√.]
 export const CRV_TOKEN: TokenMap = {
     [ChainId.ETHEREUM]: {
         chainId: 1,
@@ -624,8 +624,24 @@ export const CRV_TOKEN: TokenMap = {
         logoURI: crvLogo,
         coingeckoId: crvId
     },
-    [ChainId.MATIC]: undefined,
-    [ChainId.FANTOM]: undefined,
+    [ChainId.MATIC]: {
+        chainId: 137,
+        address: CRV_ADDRESS[137],
+        name: "Curve DAO Token",
+        symbol: "CRV",
+        decimals: 18,
+        logoURI: crvLogo,
+        coingeckoId: crvId,
+    },
+    [ChainId.FANTOM]: {
+        chainId: 250,
+        address: CRV_ADDRESS[250],
+        name: "Curve DAO Token",
+        symbol: "CRV",
+        decimals: 18,
+        logoURI: crvLogo,
+        coingeckoId: crvId
+    },
     [ChainId.AVALANCHE]: undefined,
 }
 // // [...]
