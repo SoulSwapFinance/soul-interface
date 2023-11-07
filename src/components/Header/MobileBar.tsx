@@ -175,6 +175,7 @@ const MobileBar = () => {
                                 className={'w-7 h-7'}
                             />
                         </div>
+                        {featureEnabled(Feature.LIQUIDITY_MINING, chainId) &&
                         <div
                             className={classNames(
                                 `hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
@@ -187,6 +188,7 @@ const MobileBar = () => {
                                 className={'w-7 h-7'}
                             />
                         </div>
+                        }
                         {featureEnabled(Feature.ANALYTICS, chainId) &&
                         <div
                             className={classNames(
@@ -239,6 +241,7 @@ const MobileBar = () => {
                                 className={'w-7 h-7'}
                             />
                         </div> */}
+                    {featureEnabled(Feature.ANALYTICS, chainId) &&
                         <div
                             className={classNames(
                                 `hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
@@ -252,6 +255,7 @@ const MobileBar = () => {
                                 className={'w-7 h-7'}
                             />
                         </div>
+                    }
                         {/* <div
                             className={classNames(
                                 `flex w-[36px] h-[36px] justify-center rounded p-0.5`,)}

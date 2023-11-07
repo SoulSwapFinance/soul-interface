@@ -195,7 +195,9 @@ const Mobile = () => {
             </div>
           </div>
         } */}
+        { [ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId ?? ChainId.FANTOM) &&
         <MobileBar />
+        }
       </header>
     </>
   )

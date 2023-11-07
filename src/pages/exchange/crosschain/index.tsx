@@ -709,6 +709,7 @@ const Crosschain = ({ }) => {
                             value={fromAmount.toString() ?? '0'}
                             onChange={handleTypeInput}
                             showSelect={false}
+                            hideBalance={[ChainId.ETHEREUM, ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId ?? ChainId.FANTOM) ? false : true}
                         // onSelect={handleInputSelect}
                         />
                     {`~$${route?.estimate.fromAmountUSD?.toString() ?? 0}`}

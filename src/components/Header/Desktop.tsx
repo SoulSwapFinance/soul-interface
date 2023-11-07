@@ -16,6 +16,7 @@ import Web3Network from 'components/Web3Network'
 // import useMenu from './useMenu'
 import TokenStats from 'components/TokenStats'
 import { useRouter } from 'next/router'
+import { ChainId } from 'sdk'
 // import { useUserInfo } from 'hooks/useAPI'
 
 const HEADER_HEIGHT = 64
@@ -187,7 +188,9 @@ const Desktop = () => {
           </div>
         </div>
       </header>
+      { [ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId ?? ChainId.FANTOM) &&
       <DesktopBar />
+      }
     </div>
   )
 }
