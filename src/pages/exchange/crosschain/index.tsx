@@ -22,8 +22,8 @@ import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 // import { useTokenBalance } from 'state/wallet/hooks'
 import Head from 'next/head'
 import { getChainInfo } from 'constants/chains'
-import { getInputList, getOutputList } from 'constants/crosschain/getTokenList'
-import { formatNumber } from 'functions'
+import { getInputList, getOutputList } from 'features/crosschain/getTokenList'
+// import { formatNumber } from 'functions'
 import { CustomBanner } from 'components/Banner'
 import LimitHeader from 'features/limit/LimitHeader'
 
@@ -1009,7 +1009,7 @@ const Crosschain = ({ }) => {
                             value={outputAmount.toString() ?? '1'}
                             onChange={() => { }}
                             showSelect={false}
-                        // showBalance={false}
+                            hideBalance={true}
                         // onSelect={handleOutputSelect}
                         />
                         </div>
