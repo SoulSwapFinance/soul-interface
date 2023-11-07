@@ -51,6 +51,7 @@ import Head from 'next/head'
 // import ToggleButton from 'components/ToggleButton'
 import NavLink from 'components/NavLink'
 import Settings from 'components/Settings'
+import NetworkGuard from 'guards/Network'
 // import { NetworkContextName } from 'constants/index'
 // import Modal from 'components/DefaultModal'
 // import ModalHeader from 'components/Modal/Header'
@@ -858,3 +859,4 @@ const Exchange = () => {
 
 Exchange.Layout = SwapLayout('swap-page')
 export default Exchange
+Exchange.Guard = NetworkGuard(Feature.AMM)

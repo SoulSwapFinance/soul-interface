@@ -23,20 +23,20 @@ const features: FeatureMap = {
   ],
 
   [ChainId.TELOS]: [
-    Feature.AMM,
+    // Feature.AMM,
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD
   ],
 
   [ChainId.MOONRIVER]: [
-    Feature.AMM,
+    // Feature.AMM,
     // Feature.BRIDGE,
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD
   ],
 
   [ChainId.MATIC]: [
-    Feature.AMM,
+    // Feature.AMM,
     Feature.AGGREGATE,
     // Feature.BRIDGE,
     Feature.CROSSCHAIN,
@@ -46,13 +46,13 @@ const features: FeatureMap = {
   ],
 
   [ChainId.ARBITRUM]: [
-    Feature.AMM,
+    // Feature.AMM,
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD
   ],
 
   [ChainId.BSC]: [
-    Feature.AMM, 
+    // Feature.AMM, 
     // Feature.ANALYTICS,
     Feature.AGGREGATE,
     // Feature.BRIDGE,
