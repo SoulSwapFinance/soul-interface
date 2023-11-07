@@ -687,7 +687,9 @@ const Crosschain = ({ }) => {
     // shows: Chains
     const ChainSelector = ({ isFrom }) => {
         return (
-            <div>
+            <div 
+                // className={`bg-dark-900`}
+            >
                     <div
                         className={`flex justify-center bg-dark-900 mb-4 border-2 border-[${buttonColor(isFrom ? fromChain.chainId : toChain.chainId)}] rounded-xl
                             ${isFrom ? `` : `hover:bg-dark-800`}
@@ -953,7 +955,7 @@ const Crosschain = ({ }) => {
                 outputCurrency={undefined}  
             />
             <div className={'py-1'} />
-                <div className="flex flex-col gap-3 space-y-2 bg-dark-900 p-2 rounded-2xl">
+                <div className="flex flex-col gap-3 space-y-2 bg-dark-1000 p-2 rounded-2xl">
                     <div
                         className="grid grid-cols-2 mt-2"
                     >
@@ -962,9 +964,9 @@ const Crosschain = ({ }) => {
                         {/* <InputAmount isFrom={true} /> */}
                     </div>
                     <div
-                        className={!account ? 'hidden' : `grid border-2 p-2 border-[${buttonColor(fromChain.chainId)}] rounded-xl`}
+                        className={!account ? 'hidden' : `grid`}
                     >
-                        <div className={'mt-2'}>
+                        <div className={'mt-2 bg-dark-900 rounded-2xl p-2 border-2 border-dark-800'}>
                         <CrossChainAssetPanel
                             spendFromWallet={true}
                             network={fromChain.chainId}
@@ -976,8 +978,8 @@ const Crosschain = ({ }) => {
                             showSelect={false}
                         // onSelect={handleInputSelect}
                         />
-                        </div>
                     {`~$${route?.estimate.fromAmountUSD?.toString() ?? 0}`}
+                        </div>
                     {/* </div> */}
                     {/* <div
                         className={`flex justify-end w-[98%] text-sm max-h-[1px] p-1 mb-4`}    
@@ -985,7 +987,7 @@ const Crosschain = ({ }) => {
                     {/* </div> */}
                     </div>
                     <div className="flex justify-center -mt-8 -mb-4 z-0">
-                        <div className={`p-1.5 rounded-full bg-dark-800 border shadow-md border-dark-700`}>
+                        <div className={`p-1.5 rounded-full bg-dark-800 -mt-2 -mb-2 border shadow-md border-dark-700`}>
                             <ArrowDownIcon width={14} className="text-high-emphesis hover:text-white" />
                         </div>
                     </div>
@@ -997,9 +999,9 @@ const Crosschain = ({ }) => {
                     </div>
 
                     <div
-                        className={`border-2 p-2 border-[${buttonColor(toChain.chainId)}] rounded-xl`}
+                        className={!account ? 'hidden' : `grid`}
                     >
-                        <div className={'mt-2'}>
+                        <div className={'mt-2 bg-dark-900 rounded-2xl p-2 border-2 border-dark-800'}>
                         <CrossChainAssetPanel
                             spendFromWallet={true}
                             network={toChain.chainId}
@@ -1012,8 +1014,8 @@ const Crosschain = ({ }) => {
                             hideBalance={true}
                         // onSelect={handleOutputSelect}
                         />
-                        </div>
                         {`~$${route?.estimate.toAmountUSD?.toString() ?? 0}`}
+                        </div>
                     </div>
                 {/* <div
                     className={`flex flex-col gap-3 mt-8 mb-4 w-full`}
