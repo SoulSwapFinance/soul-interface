@@ -795,7 +795,6 @@ const Exchange = () => {
             <div className={classNames(
               `flex flex-cols-2 gap-3 text-white justify-end`
             )}>
-
             </div>
           </div>
           {/* <div className={`flex flex-cols-${showChart ? `hidden` : `1`}`}> */}
