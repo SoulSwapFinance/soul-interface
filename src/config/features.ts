@@ -37,7 +37,7 @@ const features: FeatureMap = {
 
   [ChainId.MATIC]: [
     // Feature.AMM,
-    Feature.AGGREGATE,
+    // Feature.AGGREGATE,
     // Feature.BRIDGE,
     Feature.CROSSCHAIN,
     Feature.XSWAP,
