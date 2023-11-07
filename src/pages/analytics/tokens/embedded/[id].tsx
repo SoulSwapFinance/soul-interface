@@ -1,7 +1,7 @@
 // import { CurrencyLogo } from 'components/CurrencyLogo'
 import AnalyticsContainer from 'features/analytics/AnalyticsContainer'
 // import Background from 'features/analytics/Background'
-import { Currency, Token as ERC20 } from 'sdk'
+import { ChainId, Currency, Token as ERC20 } from 'sdk'
 import ChartCard from 'features/analytics/ChartCard'
 // import ColoredNumber from 'features/analytics/ColoredNumber'
 // import InfoCard from 'features/analytics/InfoCard'
@@ -65,7 +65,7 @@ function Token({ outputCurrency }: TokenProps) {
   const router = useRouter()
   const id = outputCurrency?.wrapped.address.toLowerCase()
   // const tokenAddress = id
-
+  const [showPro, setShowPro] = useState(false)
   const { chainId, library } = useActiveWeb3React()
   // const [isCopied, setCopied] = useCopyClipboard()
 
@@ -149,20 +149,61 @@ function Token({ outputCurrency }: TokenProps) {
     [tokenDayData]
   )
 
+  const chain = chainId == ChainId.ETHEREUM ? 'ethereum' : chainId == ChainId.AVALANCHE ? 'avalanche' : 'fantom'
+  const address = outputCurrency?.wrapped.address.toLowerCase()
+  const _height = window.outerHeight / 2
+
   return (
     <AnalyticsContainer>
       {/* <NextSeo title={`${token?.name} Analytics`} /> */}
+      <div
+        className={`flex justify-end`}
+      >
+        <div
+          className={`grid grid-cols-2 max-w-[228px] bg-dark-900 mb-2 -mt-6 border-2 border-dark-900 rounded-2xl`}
+        >
+          <div
+            // variant="filled" 
+            // color="purple" 
+            // size="lg"
+            className={`flex border-2 ${!showPro ? 'border-purple' : 'border-dark-900'} justify-center rounded-2xl`}
+            onClick={() => setShowPro(false)}
+          >
+            <div className="block ml-2 mr-2 text-white p-1 text-md transition duration-150 ease-in-out hover:bg-dark-300">
+              {`Simple`}
+            </div>
+          </div>
+          <div
+            className={`flex border-2 ${showPro ? 'border-purple' : 'border-dark-900'} justify-center rounded-2xl`}
+            onClick={() => setShowPro(true)}
+          >
+            <div className="block ml-2 mr-2 text-white p-1 text-md transition duration-150 ease-in-out hover:bg-dark-300">
+              {`Advanced`}
+            </div>
+          </div>
+        </div>
+      </div>
+      {showPro &&
+        <iframe
+          className={`grid w-full max-h-[524px]`}
+          height={_height}
+          width={'100%'}
+          src={`https://dexscreener.com/${chain}/${address}?embed=1&theme=dark&trades=0&info=0`}
+        />
+      }
       <div className="px-4 space-y-4 mb-1">
-        <div className="grid grid-cols-1 gap-2">
-          <ChartCard
-            header="Price"
-            subheader={token?.symbol}
-            figure={price}
-            change={priceUSD1dChange}
-            chart={chartData.priceChart}
-            defaultTimespan="WEEK"
-            timespans={chartTimespans}
-          />
+        <div className={`grid grid-cols-1 gap-2`}>
+          {!showPro &&
+            <ChartCard
+              header="Price"
+              subheader={token?.symbol}
+              figure={price}
+              change={priceUSD1dChange}
+              chart={chartData.priceChart}
+              defaultTimespan="WEEK"
+              timespans={chartTimespans}
+            />
+          }
         </div>
         {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <ChartCard
@@ -184,19 +225,22 @@ function Token({ outputCurrency }: TokenProps) {
             timespans={chartTimespans}
           />
         </div> */}
-
-        <NavLink
-          href={`/analytics/tokens/${id}`}
+        <div
+          className={`grid grid-cols-1`}
+        >
+          <NavLink
+            href={`/analytics/tokens/${id}`}
           >
-          <Button 
-            variant="filled" color="purple" size="lg"
-            className={`mt-4 mb-2`}
+            <Button
+              variant="filled" color="purple" size="lg"
+              className={`mt-4 mb-2`}
             >
-            <div className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              View Token Analytics <span> ↗</span>
-            </div>
-          </Button>
-        </NavLink>
+              <div className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
+                View Token Analytics <span> ↗</span>
+              </div>
+            </Button>
+          </NavLink>
+        </div>
       </div>
     </AnalyticsContainer>
   )
