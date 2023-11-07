@@ -26,6 +26,7 @@ import { getInputList, getOutputList } from 'features/crosschain/getTokenList'
 // import { formatNumber } from 'functions'
 import { CustomBanner } from 'components/Banner'
 import LimitHeader from 'features/limit/LimitHeader'
+import { RPC } from 'connectors'
 
 // // addresses and IDs
 // const avalancheId = 43114;
@@ -131,7 +132,9 @@ const Crosschain = ({ }) => {
     const { account, chainId, library } = useActiveWeb3React();
     //   const router = useRouter()
     //   const id = router.query.id as string // router string
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    const provider = chainId && account
+        ? new ethers.providers.Web3Provider(window.ethereum) 
+        : new ethers.providers.JsonRpcProvider(RPC[ChainId.FANTOM])
     const signer = provider.getSigner()
     
     const NATIVE_ADDRESS = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
