@@ -137,6 +137,11 @@ const Crosschain = ({ }) => {
             "chainId": 137,
             "name": "Polygon",
             "logoURI": "https://raw.githubusercontent.com/axelarnetwork/axelar-docs/main/public/images/chains/polygon.svg"
+        },
+        {
+            "chainId": 42161,
+            "name": "Arbitrum",
+            "logoURI": "https://assets.coingecko.com/coins/images/16547/standard/photo_2023-03-29_21.47.00.jpeg?1696516109"
         }
     ] 
 
@@ -159,6 +164,7 @@ const Crosschain = ({ }) => {
         [chains[1].chainId]: ChainId.AVALANCHE,
         [chains[2].chainId]: ChainId.ETHEREUM,
         [chains[3].chainId]: ChainId.MATIC,
+        [chains[4].chainId]: ChainId.ARBITRUM,
     }
     
     const CHAIN_ID_TO_CHAIN = {
@@ -166,6 +172,7 @@ const Crosschain = ({ }) => {
         [ChainId.AVALANCHE]: chains[1],
         [ChainId.ETHEREUM]: chains[2],
         [ChainId.MATIC]: chains[3],
+        [ChainId.ARBITRUM]: chains[4],
     }
 
     const DEFAULT_FROM_CHAIN_MAP = {
@@ -173,6 +180,7 @@ const Crosschain = ({ }) => {
         [ChainId.AVALANCHE]: chains[1],
         [ChainId.ETHEREUM]: chains[2],
         [ChainId.MATIC]: chains[3],
+        [ChainId.ARBITRUM]: chains[4],
     }
     
     const DEFAULT_TO_CHAIN_MAP = {
@@ -180,6 +188,7 @@ const Crosschain = ({ }) => {
         [ChainId.AVALANCHE]: chains[0], // avax to ftm
         [ChainId.ETHEREUM]: chains[0],  // eth to ftm
         [ChainId.MATIC]: chains[0],     // matic to ftm
+        [ChainId.ARBITRUM]: chains[2],  // arbitrum to eth
     }
 
     const [fromChain, setFromChain] = useState(DEFAULT_FROM_CHAIN_MAP[chainId])
@@ -216,13 +225,13 @@ const Crosschain = ({ }) => {
     const [route, setRoute] = useState<RouteData>(null)
     // const nativePrice = usePrice(WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM])
     // √
-    const [fromAmount, setFromAmount] = useState('0');
-    const [inputAmount, setInputAmount] = useState('0');
+    const [fromAmount, setFromAmount] = useState('');
+    const [inputAmount, setInputAmount] = useState('');
     // const _balance = useTokenBalance(chainId, account, fromAsset)
     // const balance = _balance ? _balance.toSignificant(18) : '0'
     const [showFromTokens, setShowFromTokens] = useState(false)
     const [showToTokens, setShowToTokens] = useState(false)
-    const [outputAmount, setOutputAmount] = useState('0')
+    const [outputAmount, setOutputAmount] = useState('')
     // const buttonColor = (chainId) => {
     //     return chainId == 43114 ? '#E84142'  // avaxRed
     //         : chainId == 1 ? '#627EEA' // ethBlue
