@@ -176,7 +176,6 @@ export const from_avax_to_matic: TokenData[] = [
     //     "coingeckoId": usdtId,
     // },
     LINK_TOKEN[43114],
-    CRV_TOKEN[43114],
     AXL_TOKEN[43114],
     DAI_TOKEN[43114],
     MIM_TOKEN[43114],
@@ -349,7 +348,6 @@ export const to_avax_from_arbitrum: TokenData[] = [
     },
     MIM_TOKEN[43114],
     LINK_TOKEN[43114],
-    CRV_TOKEN[43114],
 ]
 
 export const to_avax_from_ftm: TokenData[] = [
@@ -382,7 +380,6 @@ export const to_avax_from_ftm: TokenData[] = [
     },
     MIM_TOKEN[43114],
     LINK_TOKEN[43114],
-    CRV_TOKEN[43114],
 ]
 
 
