@@ -1,11 +1,12 @@
 import { ChainId } from 'sdk'
-import { useActiveWeb3React } from 'services/web3'
+// import { useActiveWeb3React } from 'services/web3'
 export enum SupportedChainId {
   ETHEREUM = ChainId.ETHEREUM,
   TELOS = ChainId.TELOS,
   BSC = ChainId.BSC,
   FANTOM = ChainId.FANTOM,
   AVALANCHE = ChainId.AVALANCHE,
+  ARBITRUM = ChainId.ARBITRUM,
   MOONRIVER = ChainId.MOONRIVER,
   MATIC = ChainId.MATIC
 }
@@ -17,8 +18,9 @@ export function getChainColor(chainId: number) {
       : chainId == ChainId.ETHEREUM ? color = `#627EEA`
         : chainId == ChainId.BSC ? color = `#F0B90B`
           : chainId == ChainId.MATIC ? color = `#8247E5`
-            : chainId == ChainId.MOONRIVER ? color = `#53CBC9`
-              : `#1969FF`
+            : chainId == ChainId.ARBITRUM ? color = `#4698FA`
+              : chainId == ChainId.MOONRIVER ? color = `#53CBC9`
+                : `#1969FF`
 
   return color
 }
@@ -30,8 +32,9 @@ export function getChainColorCode(chainId: number) {
       : chainId == ChainId.ETHEREUM ? colorCode = `ethBlue`
         : chainId == ChainId.BSC ? colorCode = `binanceGold`
           : chainId == ChainId.MATIC ? colorCode = `maticPurple`
-            : chainId == ChainId.MOONRIVER ? colorCode = `moonriverTeal`
-              : `ftmBlue`
+            : chainId == ChainId.ARBITRUM ? colorCode = `arbitrumBlue`
+              : chainId == ChainId.MOONRIVER ? colorCode = `moonriverTeal`
+                : `ftmBlue`
 
   return colorCode
 }
@@ -43,8 +46,9 @@ export function getChainLogoURL(chainId: number) {
       : chainId == ChainId.ETHEREUM ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/ethereum/assets'
         : chainId == ChainId.BSC ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/binance/assets'
           : chainId == ChainId.MATIC ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/polygon/assets'
-            : chainId == ChainId.MOONRIVER ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/moonriver/assets'
-              : 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets'
+            : chainId == ChainId.ARBITRUM ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/arbitrum/assets'
+              : chainId == ChainId.MOONRIVER ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/moonriver/assets'
+                : 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets'
 
   return logoURL
 }
@@ -56,8 +60,9 @@ export function getChainLogo(chainId: number) {
       : chainId == ChainId.ETHEREUM ? logoURL = '/images/networks/ethereum-white.svg'
         : chainId == ChainId.BSC ? logoURL = '/images/networks/binance.svg'
           : chainId == ChainId.MATIC ? logoURL = '/images/networks/polygon.svg'
-            : chainId == ChainId.MOONRIVER ? logoURL = '/images/networks/moonriver.svg'
-              : '/images/networks/fantom-white.svg'
+            : chainId == ChainId.ARBITRUM ? logoURL = '/images/networks/arbitrum.svg'
+              : chainId == ChainId.MOONRIVER ? logoURL = '/images/networks/moonriver.svg'
+                : '/images/networks/fantom-white.svg'
 
   return logoURL
 }
@@ -88,6 +93,11 @@ export function getChainInfo(chainId: number, option: string) {
     option == 'NETWORK' ? output = 'Polygon (Matic)'
       : option == 'NAME' ? output = 'Polygon'
         : option == 'SYMBOL' ? output = 'MATIC'
+          : output = ''
+    } else if (chainId == ChainId.ARBITRUM) {
+    option == 'NETWORK' ? output = 'Arbitrum One'
+      : option == 'NAME' ? output = 'Arbitrum'
+        : option == 'SYMBOL' ? output = 'ARB'
           : output = ''
     } else if (chainId == ChainId.MOONRIVER) {
     option == 'NETWORK' ? output = 'Moonriver'

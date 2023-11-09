@@ -4,22 +4,17 @@ import BigNumber from 'bignumber.js'
 // import { getAllChains, swap } from 'features/aggregator/router'
 import { ChainId, Token, NATIVE } from 'sdk'
 import { ArrowDownIcon } from '@heroicons/react/24/solid'
-// import SwapDropdown from 'features/swap/SwapDropdown'
-// import { NextSeo } from 'next-seo'
+
 import Typography from 'components/Typography'
 import Image from 'next/image'
-import { useActiveWeb3React } from "services/web3";
-import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2";
-import { RouteData, Squid, TokenData } from "@0xsquid/sdk";
-import { Button } from "components/Button";
+import { useActiveWeb3React } from "services/web3"
+import DoubleGlowShadowV2 from "components/DoubleGlowShadowV2"
+import { RouteData, Squid, TokenData } from "@0xsquid/sdk"
+import { Button } from "components/Button"
 import CrossChainAssetPanel from 'features/trident/swap/CrossChainAssetPanel'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
-// import useGetPrice from 'features/aggregator/queries/useGetPrice'
-// import { useRouter } from 'next/router'
-// import { getChainInfo } from 'constants/chains'
-// import { useTokenBalance } from 'state/wallet/hooks'
 import Head from 'next/head'
 import { getChainColor, getChainInfo } from 'constants/chains'
 import { getInputList, getOutputList } from 'features/crosschain/getTokenList'
