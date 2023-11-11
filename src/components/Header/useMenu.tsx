@@ -3,8 +3,8 @@ import { ChainId, SOUL_ADDRESS } from 'sdk'
 import { Feature } from 'enums'
 import { classNames, featureEnabled } from 'functions'
 import { useActiveWeb3React } from 'services/web3'
-import { getChainColor } from 'constants/chains'
-import DropletIcon from 'components/Icons/header/DropletIcon'
+// import { getChainColor } from 'constants/chains'
+// import DropletIcon from 'components/Icons/header/DropletIcon'
 
 export interface MenuItemLeaf {
   key: string
@@ -29,25 +29,25 @@ const useMenu: UseMenu = () => {
   const { chainId } = useActiveWeb3React()
   // const { asPath } = useRouter()
 
-  const chainColor = getChainColor(chainId)
+  // const chainColor = getChainColor(chainId)
 
-  const WHITE = '#FFFFFF'
+  // const WHITE = '#FFFFFF'
 
   return useMemo(() => {
     if (!chainId) return []
 
-  const iconStyle = `p-2 rounded bg-dark-900`
+  // const iconStyle = `p-2 rounded bg-dark-900`
 
 
-  const POOL_ICON = 
-  <div className={iconStyle}>
-    <DropletIcon
-    fillPrimary={open ? WHITE : chainColor }
-    fillSecondary={open ? chainColor : WHITE}
-    className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? 
-      `cursor-pointer rounded-xl w-8 h-6` : `hidden`)}
-  />
-  </div>
+  // const POOL_ICON = 
+  // <div className={iconStyle}>
+  //   <DropletIcon
+  //   fillPrimary={open ? WHITE : chainColor }
+  //   fillSecondary={open ? chainColor : WHITE}
+  //   className={classNames([ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) ? 
+  //     `cursor-pointer rounded-xl w-8 h-6` : `hidden`)}
+  // />
+  // </div>
 
 
     const mainItems: Menu = [] // tradeMenu
