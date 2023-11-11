@@ -95,17 +95,18 @@ export const CRV_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MATIC]: '0x172370d5cd63279efa6d502dab29171933a610af',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '0x11cdb42b0eb46d95f990bedd4695a6e3fa034978',
+  // [ChainId.OPTIMISM]: '0x0994206dfe8de6ec6920ff4d779b0d950605fb53',
 }
 
 export const EQUAL_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
+  [ChainId.ETHEREUM]: undefined,
+  [ChainId.TELOS]: undefined,
+  [ChainId.BSC]: undefined,
   [ChainId.FANTOM]: '0x3fd3a0c85b70754efc07ac9ac0cbbdce664865a6',
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.MOONRIVER]: '',
-  [ChainId.ARBITRUM]: '',
+  [ChainId.AVALANCHE]: undefined,
+  [ChainId.MATIC]: undefined,
+  [ChainId.MOONRIVER]: undefined,
+  [ChainId.ARBITRUM]: undefined,
 }
 
 export const FUSD_ADDRESS: { [chainId in ChainId]: string } = {
@@ -777,6 +778,7 @@ export const DAI_ADDRESS: AddressMap = {
 }
 
 export const MPX_ADDRESS: AddressMap = {
+  [ChainId.BSC]: '0x94c6b279b5df54b335ae51866d6e2a56bf5ef9b7',
   [ChainId.FANTOM]: '0x66eEd5FF1701E6ed8470DC391F05e27B1d0657eb'
 }
 
