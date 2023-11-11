@@ -32,7 +32,8 @@ const DesktopV2 = () => {
 
   const SOUL_ICON = 
   <div className={`flex gap-2 mr-2 ml-2 h-full justify-center`}>
-    {/* <Image
+    { ![ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId ?? ChainId.FANTOM) &&
+    <Image
         // src={'/favicon.png'} 
         // src={`/soulswap-finance-text.png`}
         src={`/SoulSwap-Banner.png`}
@@ -41,12 +42,15 @@ const DesktopV2 = () => {
         priority={true}
         // objectFit="contain"
         alt={"soulswap text banner"}
-    /> */}
+    />
+    }
+    { [ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId ?? ChainId.FANTOM) &&
     <BarsIcon
       fillPrimary={open ? `#821FFF` : `#FFFFFF`} // purple
       fillSecondary={open ? `#FFFFFF` : `#821FFF`} // purple
       className={'w-7 h-7'}
     />
+    }
   </div>
 
   const swapRoute = useCallback(() => {
@@ -65,11 +69,13 @@ const DesktopV2 = () => {
         <div
           className={`flex bg-dark-1000 mt-6 p-1.5 border-2 border-dark-800 hover:border-purple rounded-2xl`}
           // onClick={() => swapRoute()}
-          onClick={() => setOpen(true)}
+          onClick={() =>
+            { [ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId ?? ChainId.FANTOM) ?
+            setOpen(true) : swapRoute()
+            }
+          }
         >
-
           {SOUL_ICON}
-          
         </div>
         {/* <nav>
         <div
