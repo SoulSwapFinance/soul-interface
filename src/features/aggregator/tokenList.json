@@ -45015,7 +45015,7 @@
                 "logoURI": "https://static.debank.com/image/arb_token/logo_url/0xda10009cbd5d07dd0cecc66161fc93d7c9000da1/549c4205dbb199f1b8b03af783f35e71.png"
             },
             {
-                "address": "0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f",
+                "address": "0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f",
                 "symbol": "WBTC",
                 "decimals": 8,
                 "chainId": 42161,
