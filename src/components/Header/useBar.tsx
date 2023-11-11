@@ -141,7 +141,7 @@ const useMenu: UseBar = () => {
     // Whitepaper
     mainItems.push({
       key: 'learn',
-      link: '/learn',
+      link: 'https://docs.soulswap.finance',
       title: 'Learn',
       icon: <DocsIcon
         className={classNames(`w-7 h-7 rounded-md`

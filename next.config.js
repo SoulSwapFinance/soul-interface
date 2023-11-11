@@ -141,6 +141,7 @@ const nextConfig = {
   images: {
           domains: [
             'raw.githubusercontent.com',
+            'soulswap.finance',
             'ftmscan.com',
             'snowtrace.io',
             'www.shutterstock.com',

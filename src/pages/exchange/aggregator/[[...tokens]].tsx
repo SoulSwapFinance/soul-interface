@@ -13,7 +13,6 @@ import { useActiveWeb3React } from 'services/web3'
 import { getExplorerLink } from 'functions/explorer'
 import { ChainId, Currency, CurrencyAmount, NATIVE, NATIVE_ADDRESS, SOUL_ADDRESS, Token, USDC_ADDRESS, WNATIVE_ADDRESS } from 'sdk'
 import { addTransaction } from 'state/transactions/actions'
-// import useTokenBalance from 'hooks/useTokenBalance'
 import { Button } from 'components/Button'
 import { getChainColorCode } from 'constants/chains'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
@@ -26,67 +25,10 @@ import { useCurrency } from "hooks/Tokens"
 import { currencyId } from 'functions/currency/currencyId'
 // import SwapDropdown from 'features/swap/SwapDropdown'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
-// import { classNames } from 'functions/styling'
-// import { featureEnabled } from 'functions/feature'
-// import Image from 'next/image'
-// import META_BANNER from 'assets/branding/meta-banner.png'
-import { NextSeo } from 'next-seo'
+// import { NextSeo } from 'next-seo'
 import { CustomBanner } from 'components/Banner'
 import Head from 'next/head'
 import LimitHeader from 'features/limit/LimitHeader'
-// import { FollowBanner } from 'components/Banner'
-// import Typography from 'components/Typography'
-
-// import { groupBy, mapValues, merge, uniqBy } from 'lodash'
-// import { useFeeData } from 'wagmi'
-// import { Input, TokenInput } from 'features/aggregator/components/TokenInput'
-// import { CrossIcon } from 'features/aggregator/components/Icons'
-// import listedTokens from 'features/aggregator/tokenList.json'
-// import { e10 } from 'functions/math'
-// import CurrencyInputPanel from 'components/CurrencyInputPanel'
-// import Web3 from 'web3'
-// import { SwapLayoutCard } from 'layouts/SwapLayout'
-// import SwapHeader from 'features/swap/SwapHeader'
-// import Container from 'components/Container'
-// import { Toggle } from 'components/Toggle'
-// import TokenStats from 'components/TokenStats'
-
-/*
-Integrated:
-- paraswap
-- 0x
-- 1inch
-- cowswap
-- kyberswap
-- firebird (https://docs.firebird.finance/developer/api-specification)
-- https://openocean.finance/
-- airswap
-- https://twitter.com/odosprotocol
-- yieldyak
-- https://defi.krystal.app/
-
-- rook
-- https://rubic.exchange/ - aggregates aggregators
-- https://twitter.com/RangoExchange - api key requested, bridge aggregator, aggregates aggregators on same chain
-- thorswap - aggregates aggregators that we already have
-- lifi
-- https://twitter.com/ChainHopDEX - only has 1inch
-- https://twitter.com/MayanFinance
-
-no api:
-- https://twitter.com/HeraAggregator (no api)
-- slingshot (no api)
-- orion protocol
-- autofarm.network/swap/
-- https://swapr.eth.limo/#/swap?chainId=1 - aggregates aggregators + swapr
-
-non evm:
-- jupiter (solana)
-- openocean (solana)
-- https://twitter.com/prism_ag (solana)
-- coinhall (terra)
-- https://twitter.com/tfm_com (terra)
-*/
 
 export const Routes = styled.div`
 	padding: 16px;
