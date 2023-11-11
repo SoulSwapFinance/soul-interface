@@ -434,7 +434,7 @@ export const LINK_TOKEN: TokenMap = {
     [ChainId.ETHEREUM]: {
         chainId: 1,
         address: LINK_ADDRESS[1],
-        name: 'ChainLink Token',
+        name: 'Chainlink Token',
         symbol: 'LINK',
         decimals: 18,
         logoURI: linkLogo,
@@ -443,7 +443,7 @@ export const LINK_TOKEN: TokenMap = {
     [ChainId.MATIC]: {
         chainId: 137,
         address: LINK_ADDRESS[137],
-        name: 'ChainLink Token',
+        name: 'Chainlink Token',
         symbol: 'LINK',
         decimals: 18,
         logoURI: linkLogo,
@@ -452,7 +452,7 @@ export const LINK_TOKEN: TokenMap = {
     [ChainId.FANTOM]: {
         chainId: 250,
         address: LINK_ADDRESS[250],
-        name: 'ChainLink Token',
+        name: 'Chainlink Token',
         symbol: 'LINK',
         decimals: 18,
         logoURI: linkLogo,
@@ -461,7 +461,7 @@ export const LINK_TOKEN: TokenMap = {
     [ChainId.ARBITRUM]: {
         chainId: 42161,
         address: LINK_ADDRESS[42161],
-        name: 'ChainLink Token',
+        name: 'Chainlink Token',
         symbol: 'LINK',
         decimals: 18,
         logoURI: linkLogo,
@@ -470,7 +470,7 @@ export const LINK_TOKEN: TokenMap = {
     [ChainId.AVALANCHE]: {
         chainId: 43114,
         address: LINK_ADDRESS[43114],
-        name: 'ChainLink Token',
+        name: 'Chainlink Token',
         symbol: 'LINK.e',
         decimals: 18,
         logoURI: linkLogo,

@@ -92,7 +92,7 @@
             "id": "chainlink",
             "name": "Chainlink",
             "rank": 9,
-            "logo": "https://cryptologos.cc/logos/chainlink-link-logo.svg",
+            "logo": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/assets/0x5947BB275c521040051D82396192181b413227A3/logo.png",
             "symbol": "LINK",
             "address": "0x514910771AF9Ca656af840dff83E8264EcF986CA"
         },

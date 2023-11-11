@@ -229,7 +229,7 @@ const MAINNET_CHAINLINK_TOKENS = [
   },
   {
     symbol: 'LINK',
-    name: 'ChainLink Token',
+    name: 'Chainlink Token',
     address: '0x514910771AF9Ca656af840dff83E8264EcF986CA',
     decimals: 18,
   },

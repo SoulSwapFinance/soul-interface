@@ -267,7 +267,7 @@
     {
       "chainId": 56,
       "address": "0xF8A0BF9cF54Bb92F17374d9e9A321E6a111a51bD",
-      "name": "ChainLink Token",
+      "name": "Chainlink Token",
       "symbol": "LINK",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/icons/master/token/link.jpg"
@@ -514,7 +514,7 @@
     },
     {
       "chainId": 250,
-      "name": "ChainLink",
+      "name": "Chainlink",
       "address": "0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8",
       "symbol": "LINK",
       "decimals": 18,
@@ -740,9 +740,9 @@
       "chainId": 43114,
       "address": "0x5947BB275c521040051D82396192181b413227A3",
       "symbol": "LINK",
-      "name": "ChainLink",
+      "name": "Chainlink",
       "decimals": 18,
-      "logoURI": "https://cryptologos.cc/logos/chainlink-link-logo.svg"
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/assets/0x5947BB275c521040051D82396192181b413227A3/logo.png"
     },
     {
       "chainId": 43114,
