@@ -46,6 +46,7 @@ export const DAI: TokenMap = {
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, DAI_ADDRESS[ChainId.AVALANCHE], 18, 'DAI', 'Dai Stablecoin'),
   [ChainId.MOONRIVER]: new Token(ChainId.MOONRIVER, DAI_ADDRESS[ChainId.MOONRIVER], 18, 'DAI', 'Dai Stablecoin'),
   [ChainId.MATIC]: new Token(ChainId.MATIC, DAI_ADDRESS[ChainId.MATIC], 18, 'DAI', 'Dai Stablecoin'),
+  [ChainId.ARBITRUM]: new Token(ChainId.ARBITRUM, DAI_ADDRESS[ChainId.ARBITRUM], 18, 'DAI', 'Dai Stablecoin'),
 }
 
 export const MDAI: TokenMap = {
