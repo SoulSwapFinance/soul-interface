@@ -137,6 +137,11 @@ const Crosschain = ({ }) => {
             "chainId": 42161,
             "name": "Arbitrum",
             "logoURI": "https://assets.coingecko.com/coins/images/16547/standard/photo_2023-03-29_21.47.00.jpeg?1696516109"
+        },
+        {
+            "chainId": 56,
+            "name": "Binance",
+            "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/bnb.svg"
         }
     ] 
 
@@ -160,6 +165,7 @@ const Crosschain = ({ }) => {
         [chains[2].chainId]: ChainId.ETHEREUM,
         [chains[3].chainId]: ChainId.MATIC,
         [chains[4].chainId]: ChainId.ARBITRUM,
+        [chains[5].chainId]: ChainId.BSC,
     }
     
     const CHAIN_ID_TO_CHAIN = {
@@ -168,6 +174,7 @@ const Crosschain = ({ }) => {
         [ChainId.ETHEREUM]: chains[2],
         [ChainId.MATIC]: chains[3],
         [ChainId.ARBITRUM]: chains[4],
+        [ChainId.BSC]: chains[5],
     }
 
     const DEFAULT_FROM_CHAIN_MAP = {
@@ -176,6 +183,7 @@ const Crosschain = ({ }) => {
         [ChainId.ETHEREUM]: chains[2],
         [ChainId.MATIC]: chains[3],
         [ChainId.ARBITRUM]: chains[4],
+        [ChainId.BSC]: chains[5],
     }
     
     const DEFAULT_TO_CHAIN_MAP = {
@@ -184,6 +192,7 @@ const Crosschain = ({ }) => {
         [ChainId.ETHEREUM]: chains[0],  // eth to ftm
         [ChainId.MATIC]: chains[0],     // matic to ftm
         [ChainId.ARBITRUM]: chains[2],  // arbitrum to eth
+        [ChainId.BSC]: chains[2],  // bsc to eth
     }
 
     const [fromChain, setFromChain] = useState(DEFAULT_FROM_CHAIN_MAP[chainId])
