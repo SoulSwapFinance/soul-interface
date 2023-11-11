@@ -1,5 +1,6 @@
 import {
   Ether,
+  Arbitrum,
   Binance,
   Telos,
   Fantom,
@@ -17,5 +18,6 @@ export const NATIVE = {
   [ChainId.FANTOM]: Fantom.onChain(ChainId.FANTOM),
   [ChainId.AVALANCHE]: Avalanche.onChain(ChainId.AVALANCHE),
   [ChainId.MOONRIVER]: Moonriver.onChain(ChainId.MOONRIVER),
+  [ChainId.ARBITRUM]: Arbitrum.onChain(ChainId.ARBITRUM),
   [ChainId.MATIC]: Polygon.onChain(ChainId.MATIC),
 }

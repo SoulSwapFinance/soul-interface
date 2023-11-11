@@ -24,7 +24,7 @@ const MAX_WIDTH_CLASS_MAPPING = {
 }
 
 import useDesktopMediaQuery from '../../hooks/useDesktopMediaQuery'
-import { getChainColorCode } from 'constants/chains'
+import { getChainColor, getChainColorCode } from 'constants/chains'
 import { useActiveWeb3React } from 'services/web3'
 
 interface TriggerProps {
@@ -152,7 +152,7 @@ const HeadlessUiModalControlled: FC<ControlledModalProps> = ({
           >
             <div
               className={classNames(
-                transparent ? '' : `bg-black border border-${getChainColorCode(chainId)}`,
+                transparent ? '' : `bg-black border border-[${getChainColor(chainId)}]`,
                 isDesktop ? MAX_WIDTH_CLASS_MAPPING[maxWidth] : '',
                 isDesktop ? `w-full` : 'w-[124vw] max-w-[72vh]  max-h-[85vh] overflow-y-auto mx-auto',
                 // isDesktop ? `w-full` : 'w-[85vw] max-h-[85vh] overflow-y-auto mx-auto',
