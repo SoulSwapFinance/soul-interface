@@ -7788,7 +7788,7 @@
                 "symbol": "LINK",
                 "decimals": 18,
                 "chainId": 1,
-                "name": "ChainLink Token",
+                "name": "Chainlink Token",
                 "coinKey": "LINK",
                 "priceUSD": "6.041304162712232",
                 "logoURI": "https://static.debank.com/image/eth_token/logo_url/0x514910771af9ca656af840dff83e8264ecf986ca/69425617db0ef93a7c21c4f9b81c7ca5.png"
@@ -15385,7 +15385,7 @@
                 "symbol": "LINK",
                 "decimals": 18,
                 "chainId": 10,
-                "name": "ChainLink Token",
+                "name": "Chainlink Token",
                 "coinKey": "LINK",
                 "priceUSD": "6.105442429573332",
                 "logoURI": "https://static.debank.com/image/op_token/logo_url/0x350a791bfc2c21f9ed5d10980dad2e2638ffa7f6/1566b9c9b1c7177c0a853e4d2e8e1ab2.png"
@@ -26134,7 +26134,7 @@
                 "chainId": 56,
                 "symbol": "LINK",
                 "decimals": 18,
-                "name": "Binance-Peg ChainLink Token",
+                "name": "Binance-Peg Chainlink Token",
                 "priceUSD": "5.980693528433395",
                 "logoURI": "https://static.debank.com/image/bsc_token/logo_url/0xf8a0bf9cf54bb92f17374d9e9a321e6a111a51bd/69425617db0ef93a7c21c4f9b81c7ca5.png",
                 "coinKey": "LINK"
@@ -31386,7 +31386,7 @@
                 "chainId": 100,
                 "symbol": "LINK(ERC677)",
                 "decimals": 18,
-                "name": "ChainLink Token on xDai",
+                "name": "Chainlink Token on xDai",
                 "priceUSD": "5.980693528433395",
                 "logoURI": "https://static.debank.com/image/xdai_token/logo_url/0xe2e73a1c69ecf83f464efce6a5be353a37ca09b2/69425617db0ef93a7c21c4f9b81c7ca5.png",
                 "coinKey": "LINK"
@@ -31719,7 +31719,7 @@
                 "chainId": 122,
                 "symbol": "LINK",
                 "decimals": 18,
-                "name": "ChainLink Token on Fuse",
+                "name": "Chainlink Token on Fuse",
                 "priceUSD": "0",
                 "coinKey": "LINK",
                 "logoURI": "https://raw.githubusercontent.com/voltfinance/token-logos/main/logos/0x0972F26e8943679b043de23df2fD3852177A7c48/logo.png"
@@ -36055,7 +36055,7 @@
                 "symbol": "LINK",
                 "decimals": 18,
                 "chainId": 137,
-                "name": "ChainLink Token",
+                "name": "Chainlink Token",
                 "coinKey": "LINK",
                 "priceUSD": "6.041304162712232",
                 "logoURI": "https://static.debank.com/image/matic_token/logo_url/0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39/69425617db0ef93a7c21c4f9b81c7ca5.png"
@@ -42400,7 +42400,7 @@
                 "chainId": 250,
                 "symbol": "LINK",
                 "decimals": 18,
-                "name": "ChainLink",
+                "name": "Chainlink",
                 "priceUSD": "5.980693528433395",
                 "logoURI": "https://static.debank.com/image/ftm_token/logo_url/0xb3654dc3d10ea7645f8319668e8f54d2574fbdc8/69425617db0ef93a7c21c4f9b81c7ca5.png",
                 "coinKey": "LINK"
@@ -46347,7 +46347,7 @@
                 "symbol": "LINK",
                 "decimals": 18,
                 "chainId": 42161,
-                "name": "ChainLink Token",
+                "name": "Chainlink Token",
                 "coinKey": "LINK",
                 "priceUSD": "6.105442429573332",
                 "logoURI": "https://static.debank.com/image/arb_token/logo_url/0xf97f4df75117a78c1a5a0dbb814af92458539fb4/ec9f53931b5e0ae59925b2cb3e593df5.png"
@@ -51704,7 +51704,7 @@
                 "chainId": 1313161554,
                 "symbol": "LINK",
                 "decimals": 18,
-                "name": "ChainLink Token",
+                "name": "Chainlink Token",
                 "priceUSD": "0",
                 "coinKey": "LINK",
                 "logoURI": "https://raw.githubusercontent.com/trisolaris-labs/tokens/master/assets/0x94190d8EF039C670c6d6B9990142e0CE2A1E3178/logo.svg"

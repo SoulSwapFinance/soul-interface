@@ -534,7 +534,7 @@ const Exchange = () => {
                   className={`w-full rounded-2xl bg-dark-900 hover:bg-dark-800`}
                 >
                   <div className={`text-white flex justify-center items-center font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
-                    {`View Position`}
+                    {`Manage Position`}
                   </div>
                 </Button>
               </NavLink>

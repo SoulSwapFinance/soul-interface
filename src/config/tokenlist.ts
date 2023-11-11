@@ -4560,7 +4560,7 @@ export const TOKENS = [
       decimals: 18,
       logoURI:
         "https://raw.githubusercontent.com/sushiswap/icons/master/token/link.jpg",
-      name: "ChainLink Token",
+      name: "Chainlink",
       symbol: "LINK",
     },
     {
@@ -5296,7 +5296,7 @@ export const TOKENS = [
       decimals: 18,
       logoURI:
         "https://raw.githubusercontent.com/sushiswap/icons/master/token/link.jpg",
-      name: "ChainLink",
+      name: "Chainlink",
       symbol: "LINK",
     },
     {
@@ -5663,7 +5663,7 @@ export const TOKENS = [
       decimals: 18,
       logoURI:
         "https://raw.githubusercontent.com/sushiswap/icons/master/token/link.jpg",
-      name: "ChainLink Token - AnySwap",
+      name: "Chainlink Token - AnySwap",
       symbol: "LINK",
     },
     {
@@ -6243,7 +6243,7 @@ export const TOKENS = [
       decimals: 18,
       logoURI:
         "https://raw.githubusercontent.com/sushiswap/icons/master/token/link.jpg",
-      name: "ChainLink Token",
+      name: "Chainlink Token",
       symbol: "LINK",
     },
     {
@@ -6970,7 +6970,7 @@ export const TOKENS = [
       decimals: 18,
       logoURI:
         "https://raw.githubusercontent.com/sushiswap/logos/main/network/avalanche/0x5947BB275c521040051D82396192181b413227A3.jpg",
-      name: "ChainLink Token",
+      name: "Chainlink Token",
       symbol: "LINK",
     },
     {
@@ -7409,7 +7409,7 @@ export const TOKENS = [
       decimals: 18,
       logoURI:
         "https://raw.githubusercontent.com/sushiswap/icons/master/token/link.jpg",
-      name: "ChainLink Token",
+      name: "Chainlink Token",
       symbol: "LINK",
     },
     {
