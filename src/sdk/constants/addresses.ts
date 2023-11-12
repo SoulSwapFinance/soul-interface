@@ -95,17 +95,18 @@ export const CRV_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MATIC]: '0x172370d5cd63279efa6d502dab29171933a610af',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '0x11cdb42b0eb46d95f990bedd4695a6e3fa034978',
+  // [ChainId.OPTIMISM]: '0x0994206dfe8de6ec6920ff4d779b0d950605fb53',
 }
 
 export const EQUAL_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
+  [ChainId.ETHEREUM]: undefined,
+  [ChainId.TELOS]: undefined,
+  [ChainId.BSC]: undefined,
   [ChainId.FANTOM]: '0x3fd3a0c85b70754efc07ac9ac0cbbdce664865a6',
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.MOONRIVER]: '',
-  [ChainId.ARBITRUM]: '',
+  [ChainId.AVALANCHE]: undefined,
+  [ChainId.MATIC]: undefined,
+  [ChainId.MOONRIVER]: undefined,
+  [ChainId.ARBITRUM]: undefined,
 }
 
 export const FUSD_ADDRESS: { [chainId in ChainId]: string } = {
@@ -624,8 +625,8 @@ export const USDC_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
   [ChainId.AVALANCHE]: '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
   [ChainId.MOONRIVER]: '0xE3F5a90F9cb311505cd691a46596599aA1A0AD7D',
-  [ChainId.ARBITRUM]: '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913',
-  // [ChainId.BASE]: '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913',
+  [ChainId.ARBITRUM]: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
+  // [ChainId.BASE]: '',
   // [ChainId.OPTIMISM]: '0x0b2c639c533813f4aa9d7837caf62653d097ff85'
 }
 
@@ -691,7 +692,7 @@ export const WETH_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '0x7ceb23fd6bc0add59e62ac25578270cff1b9f619', // WETH
   [ChainId.AVALANCHE]: '0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB', // WETH.e
   [ChainId.MOONRIVER]: '',
-  [ChainId.ARBITRUM]: '0x82af49447d8a07e3bd95bd0d56f35241523fbab1', // WETH
+  [ChainId.ARBITRUM]: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', // WETH
   // [ChainId.BASE]: '0x4200000000000000000000000000000000000006',
 }
 
@@ -743,7 +744,7 @@ export const WBTC_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '0x1bfd67037b42cf73acf2047067bd4f2c47d9bfd6',
   [ChainId.AVALANCHE]: '0x50b7545627a5162F82A992c33b87aDc75187B218', // BTC.e
   [ChainId.MOONRIVER]: '0x6ab6d61428fde76768d7b45d8bfeec19c6ef91a8',
-  [ChainId.ARBITRUM]: '0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f',
+  [ChainId.ARBITRUM]: '0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f',
   // [ChainId.OPTIMISM]: '0x68f180fcce6836688e9084f035309e29bf0a2095',
 }
 
@@ -772,11 +773,12 @@ export const DAI_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '0xd586E7F844cEa2F87f50152665BCbc2C279D8d70',  // DAI.e
   [ChainId.MOONRIVER]: '0x80A16016cC4A2E6a2CACA8a4a498b1699fF0f844',
   [ChainId.MATIC]: '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063',
-  [ChainId.ARBITRUM]: '0xda10009cbd5d07dd0cecc66161fc93d7c9000da1',
-  // [ChainId.BASE]: '0xda10009cbd5d07dd0cecc66161fc93d7c9000da1',
+  [ChainId.ARBITRUM]: '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1',
+  // [ChainId.BASE]: '0x50c5725949a6f0c72e6c4a641f24049a917db0cb',
 }
 
 export const MPX_ADDRESS: AddressMap = {
+  [ChainId.BSC]: '0x94c6b279b5df54b335ae51866d6e2a56bf5ef9b7',
   [ChainId.FANTOM]: '0x66eEd5FF1701E6ed8470DC391F05e27B1d0657eb'
 }
 
@@ -839,7 +841,7 @@ export const WETH9_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB', // WETH
   [ChainId.MATIC]: '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619', // WETH
   [ChainId.MOONRIVER]: '0x639A647fbe20b6c8ac19E48E2de44ea792c62c5C',
-  [ChainId.ARBITRUM]: '0x82af49447d8a07e3bd95bd0d56f35241523fbab1', // WETH
+  [ChainId.ARBITRUM]: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', // WETH
   // [ChainId.BASE]: '0x4200000000000000000000000000000000000006', // WETH
 }
 
@@ -851,7 +853,7 @@ export const WNATIVE_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7',
   [ChainId.MOONRIVER]: '0x98878B06940aE243284CA214f92Bb71a2b032B8A',
   [ChainId.MATIC]: '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
-  [ChainId.ARBITRUM]: '0x82af49447d8a07e3bd95bd0d56f35241523fbab1', // WETH
+  [ChainId.ARBITRUM]: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', // WETH
 }
 
 export const FTM_ADDRESS: AddressMap = {

@@ -54,7 +54,10 @@ export const SUPPORTED_NETWORKS: Record<
       symbol: 'BNB',
       decimals: 18,
     },
-    rpcUrls: ['https://bsc-dataseed.binance.org'],
+    rpcUrls: [
+      'https://rpc.ankr.com/bsc',
+      // 'https://bsc-dataseed.binance.org'
+    ],
     blockExplorerUrls: ['https://bscscan.com'],
   },
   [ChainId.MATIC]: {
@@ -143,6 +146,7 @@ const NetworkModal: FC<{ switchNetwork: (targetChain: number) => void }> = ({ sw
             ChainId.ETHEREUM,
             ChainId.ARBITRUM,
             ChainId.MATIC,
+            ChainId.BSC,
             ChainId.FANTOM,
             // ChainId.MOONRIVER,
             ChainId.AVALANCHE,
