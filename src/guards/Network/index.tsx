@@ -97,7 +97,7 @@ const Component: FC<NetworkGuardProps> = ({ children, feature }) => {
               </Button>
             ))}
           </div>
-          {[ChainId.ETHEREUM, ChainId.MATIC, ChainId.FANTOM, ChainId.ARBITRUM, ChainId.AVALANCHE].includes(chainId) &&
+          {featureEnabled(Feature.XSWAP, chainId) &&
             <NavLink
               href={
                 featureEnabled(Feature.AMM, chainId) ? `/swap`
