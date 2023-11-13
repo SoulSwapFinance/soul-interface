@@ -37,6 +37,7 @@ const BinanceLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/mas
 const AvalancheLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/avalanche/Avalanche.svg'
 const TelosLogo = '/images/natives/telos.png'
 const PolygonLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/polygon/Polygon.svg'
+const BaseLogo = 'https://exchange.soulswap.finance/images/networks/base.svg'
 const ArbitrumLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/arbitrum/Arbitrum.png'
 const MoonriverLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/moonriver/Moonriver.svg'
 
@@ -49,6 +50,7 @@ const LOGO: Record<ChainId, string> = {
   [ChainId.MATIC]: PolygonLogo,
   [ChainId.ARBITRUM]: ArbitrumLogo,
   [ChainId.MOONRIVER]: MoonriverLogo,
+  [ChainId.BASE]: BaseLogo,
 }
 
 export const UNKNOWN_ICON = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/prod/token/unknown.png'
