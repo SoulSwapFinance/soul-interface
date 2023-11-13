@@ -1,7 +1,7 @@
 import { ChainId } from '../sdk'
 import { ethers } from 'ethers'
 
-type AddressMap = { [chainId in ChainId]: string }
+type AddressMap = { [chainId in ChainId]?: string }
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
@@ -17,13 +17,14 @@ export const TIMELOCK_ADDRESS = '0x1a9C8182C09F50C8318d769245beA52c32BE35BC'
 
 export const ARCHER_ROUTER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x9917C083FF9FbD29Df1367FBF7F2388A9a202431',
-  40: undefined,
-  56: undefined,
-  250: undefined,
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.ARBITRUM]: '',
-  [ChainId.MOONRIVER]: '',
+  [ChainId.TELOS]: undefined,
+  [ChainId.BSC]: undefined,
+  [ChainId.FANTOM]: undefined,
+  [ChainId.AVALANCHE]: undefined,
+  [ChainId.MATIC]: undefined,
+  [ChainId.ARBITRUM]: undefined,
+  [ChainId.MOONRIVER]: undefined,
+  [ChainId.BASE]: undefined,
 }
 
 export const LOTTERY_ADDRESS = {
@@ -417,8 +418,8 @@ export const SOUL_ADDRESS: AddressMap = {
 
 export const SEANCE_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
+  [ChainId.TELOS]: undefined,
+  [ChainId.BSC]: undefined,
   [ChainId.FANTOM]: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', // SEANCE
   [ChainId.AVALANCHE]: '0x97Ee3C9Cf4E5DE384f95e595a8F327e65265cC4E', // SEP22
   [ChainId.MATIC]: '',

@@ -59,7 +59,7 @@ export const NETWORK_ICON = {
   // [ChainId.CELO]: Celo,
 }
 
-export const NETWORK_LABEL: { [chainId in ChainId]?: string } = {
+export const NETWORK_LABEL: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: 'Ethereum',
   [ChainId.TELOS]: 'Telos',
   [ChainId.BSC]: 'Binance',
@@ -67,6 +67,8 @@ export const NETWORK_LABEL: { [chainId in ChainId]?: string } = {
   [ChainId.AVALANCHE]: 'Avalanche',
   [ChainId.MOONRIVER]: 'Moonriver',
   [ChainId.MATIC]: 'Polygon',
+  [ChainId.ARBITRUM]: 'Arbitrum',
+  [ChainId.BASE]: 'Base',
   // [ChainId.RINKEBY]: 'Rinkeby',
   // [ChainId.ROPSTEN]: 'Ropsten',
   // [ChainId.GÖRLI]: 'Görli',
@@ -102,6 +104,7 @@ export const NATIVE_WRAPPED_TOKEN_ADDRESS = {
   [ChainId.FANTOM]: WNATIVE_ADDRESS[250],
   [ChainId.AVALANCHE]: WNATIVE_ADDRESS[43114],
   [ChainId.MOONRIVER]: WNATIVE_ADDRESS[1285],
+  [ChainId.BASE]: WNATIVE_ADDRESS[ChainId.BASE],
 }
 
 //todo move this to NETWORKS_INFO
@@ -125,6 +128,8 @@ export const NETWORKS_INFO_CONFIG: { [chain in ChainId]: NetworkInfo } = {
   [ChainId.ARBITRUM]: arbitrum,
   // todo: fix below
   [ChainId.MOONRIVER]: arbitrum,
+  // todo: fix below
+  [ChainId.BASE]: arbitrum,
 }
 
 //this Proxy helps fallback undefined ChainId by Ethereum info
@@ -149,21 +154,3 @@ export type EVM_NETWORK = typeof EVM_NETWORKS[number]
 export function isEVM(chainId?: ChainId): chainId is EVM_NETWORK {
   return true
 }
-
-export const MAINNET_NETWORKS = [
-  ChainId.ETHEREUM,
-  ChainId.ARBITRUM,
-  // ChainId.OPTIMISM,
-  // ChainId.LINEA,
-  ChainId.MATIC,
-  // ChainId.ZKEVM,
-  // ChainId.ZKSYNC,
-  // ChainId.BASE,
-  ChainId.BSC,
-  ChainId.AVALANCHE,
-  // ChainId.SOLANA,
-  ChainId.FANTOM,
-  // ChainId.BTTC,
-  // ChainId.CRONOS,
-  // ChainId.AURORA,
-] as const
