@@ -1,7 +1,7 @@
 import { ChainId } from 'sdk'
 import { Feature } from 'enums'
 
-type FeatureMap = { readonly [chainId in ChainId]?: Feature[] }
+type FeatureMap = { readonly [chainId in ChainId]: Feature[] }
 
 const features: FeatureMap = {
   [ChainId.ETHEREUM]: [
@@ -21,20 +21,17 @@ const features: FeatureMap = {
     // Feature.STAKING,
     // Feature.VESTING,
   ],
-
   [ChainId.TELOS]: [
     // Feature.AMM,
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD
   ],
-
   [ChainId.MOONRIVER]: [
     // Feature.AMM,
     // Feature.BRIDGE,
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD
   ],
-
   [ChainId.MATIC]: [
     // Feature.AMM,
     // Feature.AGGREGATE,
@@ -44,7 +41,6 @@ const features: FeatureMap = {
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD
   ],
-
   [ChainId.ARBITRUM]: [
     Feature.XSWAP,
     Feature.CROSSCHAIN,
@@ -52,7 +48,13 @@ const features: FeatureMap = {
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD
   ],
-
+  [ChainId.BASE]: [
+    Feature.XSWAP,
+    Feature.CROSSCHAIN,
+    // Feature.AMM,
+    // Feature.ANALYTICS,
+    // Feature.UNDERWORLD
+  ],
   [ChainId.BSC]: [
     // Feature.AMM, 
     // Feature.ANALYTICS,
@@ -63,7 +65,6 @@ const features: FeatureMap = {
     Feature.LIQUIDITY,
     // Feature.UNDERWORLD
   ],
-
   [ChainId.AVALANCHE]: [
     Feature.AMM,
     Feature.DEFARM,
@@ -83,7 +84,6 @@ const features: FeatureMap = {
     Feature.LIMIT,
     Feature.UNDERWORLD
   ],
-  
   [ChainId.FANTOM]: [
     Feature.AMM,
     // Feature.NFT,

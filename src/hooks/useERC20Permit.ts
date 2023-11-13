@@ -43,35 +43,38 @@ const PERMITTABLE_TOKENS: {
     [checksummedTokenAddress: string]: PermitInfo
   }
 } = {
-  [1]: {
+  [ChainId.ETHEREUM]: {
       [USDC.address]: { type: PermitType.AMOUNT, name: 'USD Coin', version: '2' },
       [DAI.address]: {
         type: PermitType.ALLOWED,
         name: 'Dai Stablecoin',
         version: '1',
       },
-      [SOUL_ADDRESS[1]]: { type: PermitType.AMOUNT, name: 'Soul Power' },
+      [SOUL_ADDRESS[ChainId.ETHEREUM]]: { type: PermitType.AMOUNT, name: 'Soul Power' },
     },
-  [40]: {
-    [SOUL_ADDRESS[40]]: { type: PermitType.AMOUNT, name: 'Soul Power' },
+  [ChainId.TELOS]: {
+    [SOUL_ADDRESS[ChainId.TELOS]]: { type: PermitType.AMOUNT, name: 'Soul Power' },
   },
-  [56]: {
-    [SOUL_ADDRESS[56]]: { type: PermitType.AMOUNT, name: 'Soul Power' },
+  [ChainId.BSC]: {
+    [SOUL_ADDRESS[ChainId.BSC]]: { type: PermitType.AMOUNT, name: 'Soul Power' },
   },
-  [250]: {
-    [SOUL_ADDRESS[250]]: { type: PermitType.AMOUNT, name: 'Soul Power' },
+  [ChainId.FANTOM]: {
+    [SOUL_ADDRESS[ChainId.FANTOM]]: { type: PermitType.AMOUNT, name: 'Soul Power' },
   },
-  [43114]: {
-    [DAI_ADDRESS[43114]]: { type: PermitType.AMOUNT, name: 'Dai Stablecoin' },
+  [ChainId.AVALANCHE]: {
+    [DAI_ADDRESS[ChainId.AVALANCHE]]: { type: PermitType.AMOUNT, name: 'Dai Stablecoin' },
   },
-  [137]: {
-    // [USDC_ADDRESS[137]]: { type: PermitType.AMOUNT, name: 'USD Coin' },
+  [ChainId.MATIC]: {
+    // [USDC_ADDRESS[ChainId.MATIC]]: { type: PermitType.AMOUNT, name: 'USD Coin' },
   },
-  [42161]: {
-    // [USDC_ADDRESS[42161]]: { type: PermitType.AMOUNT, name: 'USD Coin' },
+  [ChainId.ARBITRUM]: {
+    // [USDC_ADDRESS[ChainId.ARBITRUM]]: { type: PermitType.AMOUNT, name: 'USD Coin' },
   },
-  [1285]: {
-    [DAI_ADDRESS[1285]]: { type: PermitType.AMOUNT, name: 'Dai Stablecoin' },
+  [ChainId.BASE]: {
+    // [USDC_ADDRESS[ChainId.BASE]]: { type: PermitType.AMOUNT, name: 'USD Coin' },
+  },
+  [ChainId.MOONRIVER]: {
+    [DAI_ADDRESS[ChainId.MOONRIVER]]: { type: PermitType.AMOUNT, name: 'Dai Stablecoin' },
   },
 }
 

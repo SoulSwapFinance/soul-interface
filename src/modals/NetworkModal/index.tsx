@@ -99,6 +99,19 @@ export const SUPPORTED_NETWORKS: Record<
     ],
     blockExplorerUrls: ['https://arbiscan.io'],
   },
+  [ChainId.BASE]: {
+    chainId: '0x2105',
+    chainName: 'Base',
+    nativeCurrency: {
+      name: 'Ethereum',
+      symbol: 'ETH',
+      decimals: 18,
+    },
+    rpcUrls: [
+      'https://rpc.ankr.com/basd',
+    ],
+    blockExplorerUrls: ['https://basescan.org'],
+  },
   [ChainId.MOONRIVER]: {
     chainId: '0x505',
     chainName: 'Moonriver',
@@ -148,7 +161,7 @@ const NetworkModal: FC<{ switchNetwork: (targetChain: number) => void }> = ({ sw
             ChainId.MATIC,
             ChainId.BSC,
             ChainId.FANTOM,
-            // ChainId.MOONRIVER,
+            // ChainId.BASE,
             ChainId.AVALANCHE,
           ]
             // .sort((key) => (chainId === key ? -1 : 0))

@@ -194,7 +194,7 @@ export function useUSDCValueWithLoadingIndicator(currencyAmount: CurrencyAmount<
  */
 export function useStablecoinAmountFromFiatValue(fiatValue: string | null | undefined) {
   const { chainId } = useActiveWeb3React()
-  const stablecoin = chainId ? STABLECOIN_AMOUNT_OUT[chainId | 250]?.currency : undefined
+  const stablecoin = chainId ? STABLECOIN_AMOUNT_OUT[chainId | ChainId.FANTOM]?.currency : undefined
 
   if (fiatValue === null || fiatValue === undefined || !chainId || !stablecoin) {
     return undefined

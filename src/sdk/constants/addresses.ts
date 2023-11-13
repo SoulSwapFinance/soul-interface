@@ -2,7 +2,7 @@ import { AddressMap } from '../types'
 import { ChainId } from '../enums/ChainId'
 // import { WNATIVE } from 'sdk'
 
-export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
+export const FACTORY_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x794d858b0b152fb68a5CE465451D729EFfA67f08', // FEB22
   [ChainId.TELOS]: '0x81582F803A17a4a454A80600e9185B42E32e0fcF',
   [ChainId.BSC]: '0xa9EC396a1b709689e98DaB9eAf4f18A913775d39',
@@ -12,7 +12,7 @@ export const FACTORY_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',}
 
-export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
+export const ROUTER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x2a8B48a8B8a8a8E4a184280333c418BcdcE72dE9', // FEB22
   [ChainId.TELOS]: '0xf9D9b96F213aCC6434f16fff5D932FA85cD179f3',
   [ChainId.BSC]: '0x1b4df4D7E63B125f3a01fd5598E8E8458e519255',
@@ -23,7 +23,7 @@ export const ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const JOE_ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
+export const JOE_ROUTER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -34,7 +34,7 @@ export const JOE_ROUTER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const BORING_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
+export const BORING_HELPER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -75,7 +75,7 @@ export const STOP_LIMIT_ORDER_ADDRESS: AddressMap = {
   [ChainId.FANTOM]: '0x6AaC28444cB227EC5D5cebe696882DeCcD50ee83', // FEB22
 }
 
-export const SOUL_ADDRESS: { [chainId in ChainId]: string } = {
+export const SOUL_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x34862060EFF6DA2AF04D382C209a433279377d16', // SEP22
   [ChainId.TELOS]: '0xef9777827a3581b64f5c7CB8954ccaE3cc2c46C0',
   [ChainId.BSC]: '',
@@ -86,7 +86,7 @@ export const SOUL_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const CRV_ADDRESS: { [chainId in ChainId]: string } = {
+export const CRV_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0xd533a949740bb3306d119cc777fa900ba034cd52',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -98,7 +98,7 @@ export const CRV_ADDRESS: { [chainId in ChainId]: string } = {
   // [ChainId.OPTIMISM]: '0x0994206dfe8de6ec6920ff4d779b0d950605fb53',
 }
 
-export const EQUAL_ADDRESS: { [chainId in ChainId]: string } = {
+export const EQUAL_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: undefined,
   [ChainId.TELOS]: undefined,
   [ChainId.BSC]: undefined,
@@ -109,7 +109,7 @@ export const EQUAL_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: undefined,
 }
 
-export const FUSD_ADDRESS: { [chainId in ChainId]: string } = {
+export const FUSD_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -120,7 +120,7 @@ export const FUSD_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const SEANCE_ADDRESS: { [chainId in ChainId]: string } = {
+export const SEANCE_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -131,7 +131,7 @@ export const SEANCE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const UNDERWORLD_ADDRESS: { [chainId in ChainId]: string } = {
+export const UNDERWORLD_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -142,7 +142,7 @@ export const UNDERWORLD_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const FRAX_ADDRESS: { [chainId in ChainId]: string } = {
+export const FRAX_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -166,7 +166,7 @@ export const MERKLE_DISTRIBUTOR_ADDRESS: AddressMap = {
   4002: undefined
 }
 
-export const SUMMONER_ADDRESS: { [chainId in ChainId]: string } = {
+export const SUMMONER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -184,7 +184,7 @@ export const MANIFESTER_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '0x8BC948C47205bC2293b1E191CdF47E2Dfe9bAf66',  // V1 DeFarms
 }
 
-export const MASTERCHEF_ADDRESS: { [chainId in ChainId]: string } = {
+export const MASTERCHEF_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -195,7 +195,7 @@ export const MASTERCHEF_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const SOUL_CIRCLE_ADDRESS: { [chainId in ChainId]: string } = {
+export const SOUL_CIRCLE_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -206,7 +206,7 @@ export const SOUL_CIRCLE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const AUTO_STAKE_ADDRESS: { [chainId in ChainId]: string } = {
+export const AUTO_STAKE_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -218,7 +218,7 @@ export const AUTO_STAKE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const BTC_NATIVE_ADDRESS: { [chainId in ChainId]: string } = {
+export const BTC_NATIVE_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -229,7 +229,7 @@ export const BTC_NATIVE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const ETH_NATIVE_ADDRESS: { [chainId in ChainId]: string } = {
+export const ETH_NATIVE_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: undefined,
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -240,7 +240,7 @@ export const ETH_NATIVE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const USDC_DAI_ADDRESS: { [chainId in ChainId]: string } = {
+export const USDC_DAI_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -251,7 +251,7 @@ export const USDC_DAI_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const CHANT_ADDRESS: { [chainId in ChainId]: string } = {
+export const CHANT_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -262,7 +262,7 @@ export const CHANT_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const SOUL_BOND_ADDRESS: { [chainId in ChainId]: string } = {
+export const SOUL_BOND_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -275,7 +275,7 @@ export const SOUL_BOND_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const MULTICALL_ADDRESS: { [chainId in ChainId]: string } = {
+export const MULTICALL_ADDRESS: AddressMap = {
   // [ChainId.ETHEREUM]: '0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696',
   [ChainId.ETHEREUM]: '0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441',
   [ChainId.TELOS]: '',
@@ -336,7 +336,7 @@ export const ACTIVE_UNDERWORLD_PAIRS = {
   ]
 }
 
-export const COFFIN_BOX_ADDRESS: { [chainId in ChainId]: string } = {
+export const COFFIN_BOX_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0xBC321C2e7A7FA48DcF0C09E088950C8172c2Ecc9',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -347,7 +347,7 @@ export const COFFIN_BOX_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const CHAINLINK_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
+export const CHAINLINK_ORACLE_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x00632CFe43d8F9f8E6cD0d39Ffa3D4fa7ec73CFB',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -358,7 +358,7 @@ export const CHAINLINK_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const BTC_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
+export const BTC_ORACLE_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0xf4030086522a5beea4988f8ca5b36dbc97bee88c',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -369,7 +369,7 @@ export const BTC_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const AVAX_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
+export const AVAX_ORACLE_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0xff3eeb22b5e3de6e705b44749c2559d704923fd7',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -380,7 +380,7 @@ export const AVAX_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const LINK_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
+export const LINK_ORACLE_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x2c1d072e956AFFC0D435Cb7AC38EF18d24d9127c',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -391,7 +391,7 @@ export const LINK_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const ETH_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
+export const ETH_ORACLE_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -402,7 +402,7 @@ export const ETH_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const FTM_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
+export const FTM_ORACLE_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x2de7e4a9488488e0058b95854cc2f7955b35dc9b',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -413,7 +413,7 @@ export const FTM_ORACLE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const ENCHANT_ADDRESS: { [chainId in ChainId]: string } = {
+export const ENCHANT_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -424,7 +424,7 @@ export const ENCHANT_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const LINK_ADDRESS: { [chainId in ChainId]: string } = {
+export const LINK_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x514910771af9ca656af840dff83e8264ecf986ca',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '0xf8a0bf9cf54bb92f17374d9e9a321e6a111a51bd',
@@ -435,7 +435,7 @@ export const LINK_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '0xf97f4df75117a78c1a5a0dbb814af92458539fb4',
 }
 
-export const SUSHI_ADDRESS: { [chainId in ChainId]: string } = {
+export const SUSHI_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '0x947950bcc74888a40ffa2593c5798f11fc9124c4',
@@ -446,7 +446,7 @@ export const SUSHI_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '0xd4d42f0b6def4ce0383636770ef773390d85c61a',
 }
 
-export const ENCHANT_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
+export const ENCHANT_HELPER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -457,7 +457,7 @@ export const ENCHANT_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const AURA_ADDRESS: { [chainId in ChainId]: string } = {
+export const AURA_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -469,7 +469,7 @@ export const AURA_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const TIMELOCK_ADDRESS: { [chainId in ChainId]: string } = {
+export const TIMELOCK_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -480,7 +480,7 @@ export const TIMELOCK_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const SUMMONER_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
+export const SUMMONER_HELPER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -491,7 +491,7 @@ export const SUMMONER_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const REFUNDER_ADDRESS: { [chainId in ChainId]: string } = {
+export const REFUNDER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -502,7 +502,7 @@ export const REFUNDER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const SOUL_GUIDE_ADDRESS: { [chainId in ChainId]: string } = {
+export const SOUL_GUIDE_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -513,7 +513,7 @@ export const SOUL_GUIDE_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const BALANCES_FETCHER_ADDRESS: { [chainId in ChainId]: string } = {
+export const BALANCES_FETCHER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x386a4B75578C7843A6082EFe181D5d629236C047', // todo
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '0x9d6c13Bc5269E553C4697767b4c267FB33Dd8d1A', // todo
@@ -583,7 +583,7 @@ export const SOULSWAP_TWAP_1_ORACLE_ADDRESS = {
   [ChainId.AVALANCHE]: '0xc6CE6E4163ca4a42c67b0ac4ae70A75A0cAe898e', // OCT22
 }
 
-export const BOND_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
+export const BOND_HELPER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.TELOS]: '',
   [ChainId.BSC]: '',
@@ -594,27 +594,29 @@ export const BOND_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
   [ChainId.ARBITRUM]: '',
 }
 
-export const PRICE_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
+export const PRICE_HELPER_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: undefined,
+  [ChainId.TELOS]: undefined,
+  [ChainId.BSC]: undefined,
   [ChainId.FANTOM]: '0x3bAAE1079Ca4e8a17E550C13F2b5cd7d80aa80D7',
   // '0x51445B73852952128bFCAE65fdd889881D8d87Bd',
   [ChainId.AVALANCHE]: '0xbc83454171005a8eFd6aad89b637dDeB18473497',
-  [ChainId.MATIC]: '',
-  [ChainId.MOONRIVER]: '',
-  [ChainId.ARBITRUM]: '',
+  [ChainId.MATIC]: undefined,
+  [ChainId.MOONRIVER]: undefined,
+  [ChainId.ARBITRUM]: undefined,
+  [ChainId.BASE]: undefined,
 }
 
-export const HARVEST_HELPER_ADDRESS: { [chainId in ChainId]: string } = {
-  [ChainId.ETHEREUM]: '',
-  [ChainId.TELOS]: '',
-  [ChainId.BSC]: '',
+export const HARVEST_HELPER_ADDRESS: AddressMap = {
+  [ChainId.ETHEREUM]: undefined,
+  [ChainId.TELOS]: undefined,
+  [ChainId.BSC]: undefined,
   [ChainId.FANTOM]: '0xb9e5f6152b797280c8C3427947780ce5c4a55b08',
-  [ChainId.AVALANCHE]: '',
-  [ChainId.MATIC]: '',
-  [ChainId.MOONRIVER]: '',
-  [ChainId.ARBITRUM]: '',
+  [ChainId.AVALANCHE]: undefined,
+  [ChainId.MATIC]: undefined,
+  [ChainId.MOONRIVER]: undefined,
+  [ChainId.ARBITRUM]: undefined,
+  [ChainId.BASE]: undefined,
 }
 
 export const USDC_ADDRESS: AddressMap = {
@@ -626,7 +628,7 @@ export const USDC_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E',
   [ChainId.MOONRIVER]: '0xE3F5a90F9cb311505cd691a46596599aA1A0AD7D',
   [ChainId.ARBITRUM]: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
-  // [ChainId.BASE]: '',
+  [ChainId.BASE]: '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913', // USDC
   // [ChainId.OPTIMISM]: '0x0b2c639c533813f4aa9d7837caf62653d097ff85'
 }
 
@@ -674,6 +676,8 @@ export const USDT_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '0xb44a9b6905af7c801311e8f4e76932ee959c663c',
   [ChainId.ARBITRUM]: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
   // [ChainId.OPTIMISM]: '0x94b008aa00579c1307b0ef2c499ad98a8ce58e58',
+  // [ChainId.SYSCOIN]: '0x922d641a426dcffaef11680e5358f34d97d112e1',
+  // [ChainId.ASTAR]: '0x3795c36e7d12a8c252a20c5a7b455f7c57b60283',
 }
 
 export const AXL_WETH_ADDRESS: AddressMap = {
@@ -693,7 +697,7 @@ export const WETH_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB', // WETH.e
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', // WETH
-  // [ChainId.BASE]: '0x4200000000000000000000000000000000000006',
+  [ChainId.BASE]: '0x4200000000000000000000000000000000000006', // WETH
 }
 
 export const MULTI_WETH_ADDRESS: AddressMap = {
@@ -724,6 +728,7 @@ export const AXL_WBTC_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.AVALANCHE]: '',
   [ChainId.MOONRIVER]: '',
+  [ChainId.BASE]: '0x1a35ee4640b0a3b87705b0a4b45d227ba60ca2ad',
 }
 
 export const LZ_WBTC_ADDRESS: AddressMap = {
@@ -774,7 +779,7 @@ export const DAI_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '0x80A16016cC4A2E6a2CACA8a4a498b1699fF0f844',
   [ChainId.MATIC]: '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063',
   [ChainId.ARBITRUM]: '0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1',
-  // [ChainId.BASE]: '0x50c5725949a6f0c72e6c4a641f24049a917db0cb',
+  [ChainId.BASE]: '0x50c5725949a6f0c72e6c4a641f24049a917db0cb',
 }
 
 export const MPX_ADDRESS: AddressMap = {
@@ -842,7 +847,7 @@ export const WETH9_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619', // WETH
   [ChainId.MOONRIVER]: '0x639A647fbe20b6c8ac19E48E2de44ea792c62c5C',
   [ChainId.ARBITRUM]: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', // WETH
-  // [ChainId.BASE]: '0x4200000000000000000000000000000000000006', // WETH
+  [ChainId.BASE]: '0x4200000000000000000000000000000000000006', // WETH
 }
 
 export const WNATIVE_ADDRESS: AddressMap = {
@@ -854,6 +859,7 @@ export const WNATIVE_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '0x98878B06940aE243284CA214f92Bb71a2b032B8A',
   [ChainId.MATIC]: '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
   [ChainId.ARBITRUM]: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', // WETH
+  [ChainId.BASE]: '0x4200000000000000000000000000000000000006', // WETH
 }
 
 export const FTM_ADDRESS: AddressMap = {

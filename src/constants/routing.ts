@@ -23,6 +23,7 @@ const WRAPPED_NATIVE_ONLY: ChainTokenList = {
   [ChainId.MATIC]: [WNATIVE[ChainId.MATIC]],
   [ChainId.ARBITRUM]: [WNATIVE[ChainId.ARBITRUM]],
   [ChainId.MOONRIVER]: [WNATIVE[ChainId.MOONRIVER]],
+  [ChainId.BASE]: [WNATIVE[ChainId.BASE]],
 }
 
 // used to construct intermediary pairs for trading
@@ -68,6 +69,9 @@ export const COMMON_BASES: ChainTokenList = {
   ],
   [ChainId.MATIC]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.MATIC], 
+  ],
+  [ChainId.BASE]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.BASE], 
   ],
   [ChainId.ARBITRUM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.ARBITRUM], 

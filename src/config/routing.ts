@@ -6,6 +6,7 @@ import * as ETHEREUM from './tokens/ethereum'
 import * as TELOS from './tokens/telos'
 import * as FANTOM from './tokens/fantom'
 import * as AVALANCHE from './tokens/avalanche'
+// import * as BASE from './tokens/base'
 
 type ChainTokenList = {
   readonly [chainId in ChainId]: Token[]
@@ -20,6 +21,7 @@ const WRAPPED_NATIVE_ONLY: ChainTokenList = {
   [ChainId.MATIC]: [WNATIVE[ChainId.MATIC]],
   [ChainId.ARBITRUM]: [WNATIVE[ChainId.ARBITRUM]],
   [ChainId.MOONRIVER]: [WNATIVE[ChainId.MOONRIVER]],
+  [ChainId.BASE]: [WNATIVE[ChainId.BASE]],
 }
 
 // used to construct intermediary pairs for trading
@@ -161,6 +163,9 @@ export const COMMON_BASES: ChainTokenList = {
   ],
   [ChainId.ARBITRUM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.ARBITRUM]
+  ],
+  [ChainId.BASE]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.BASE]
   ],
 }
 
