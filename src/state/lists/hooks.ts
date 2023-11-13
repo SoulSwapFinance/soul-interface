@@ -60,6 +60,7 @@ function combineMaps(map1: TokenAddressMap, map2: TokenAddressMap): TokenAddress
     43114: { ...map1[ChainId.AVALANCHE], ...map2[ChainId.AVALANCHE] }, // avalanche
     137: { ...map1[ChainId.MATIC], ...map2[ChainId.MATIC] }, // matic
     42161: { ...map1[ChainId.ARBITRUM], ...map2[ChainId.ARBITRUM] }, // arbitrum
+    8453: { ...map1[ChainId.BASE], ...map2[ChainId.BASE] }, // base
     1285: { ...map1[ChainId.MOONRIVER], ...map2[ChainId.MOONRIVER] } // moonriver
   }
 }

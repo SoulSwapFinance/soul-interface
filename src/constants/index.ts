@@ -26,6 +26,7 @@ export const RPC = {
   // [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc',
   [ChainId.AVALANCHE]: 'https://rpc.ankr.com/avalanche',
   [ChainId.ARBITRUM]: 'https://arb1.arbitrum.io/rpc',
+  [ChainId.BASE]: 'https://rpc.ankr.com/base',
   // [ChainId.FANTOM]: 'https://rpc.ftm.tools/',
   // [ChainId.MATIC]: 'https://apis.ankr.com/e22bfa5f5a124b9aa1f911b742f6adfe/c06bb163c3c2a10a4028959f4d82836d/polygon/full/main',
   // [ChainId.MOONRIVER]: 'https://moonriver-api.bwarelabs.com/0e63ad82-4f98-46f9-8496-f75657e3a8e', //'https://moonriver.api.onfinality.io/public',

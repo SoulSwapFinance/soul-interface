@@ -161,7 +161,7 @@ const NetworkModal: FC<{ switchNetwork: (targetChain: number) => void }> = ({ sw
             ChainId.MATIC,
             ChainId.BSC,
             ChainId.FANTOM,
-            // ChainId.BASE,
+            ChainId.BASE,
             ChainId.AVALANCHE,
           ]
             // .sort((key) => (chainId === key ? -1 : 0))

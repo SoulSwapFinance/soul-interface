@@ -17,6 +17,7 @@ export enum SupportedChains {
     FANTOM = 250,
     AVALANCHE = 43114,
     // TELOS = 40,
+    BASE = ChainId.BASE,
     ARBITRUM = 42161,
     // MOONRIVER = 1285,
   }
@@ -103,7 +104,24 @@ export const NATIVE_TOKEN: TokenMap = {
         logoURI: ftmLogo,
         coingeckoId: ftmId
     },
-    [ChainId.ARBITRUM]: undefined,
+    [ChainId.BASE]: {
+        chainId: 8453,
+        address: NATIVE_ADDRESS,
+        name: 'Ether',
+        symbol: 'ETH',
+        decimals: 18,
+        logoURI: ethLogo,
+        coingeckoId: ethId
+    },
+    [ChainId.ARBITRUM]: {
+        chainId: 42161,
+        address: NATIVE_ADDRESS,
+        name: 'Ether',
+        symbol: 'ETH',
+        decimals: 18,
+        logoURI: ethLogo,
+        coingeckoId: ethId
+    },
     [ChainId.AVALANCHE]: {
         chainId: 43114,
         address: NATIVE_ADDRESS,
@@ -154,6 +172,7 @@ export const WNATIVE_TOKEN: TokenMap = {
         coingeckoId: ftmId
     },
     [ChainId.ARBITRUM]: undefined,
+    [ChainId.BASE]: undefined,
     [ChainId.AVALANCHE]: {
         chainId: 43114,
         address: WNATIVE_ADDRESS[43114],
@@ -199,6 +218,15 @@ export const ETH_TOKEN: TokenMap = {
         address: AXL_WETH_ADDRESS[250],
         name: 'Axelar WETH',
         symbol: 'axlWETH',
+        decimals: 18,
+        logoURI: wethLogo,
+        coingeckoId: ethId
+    },
+    [ChainId.BASE]: {
+        chainId: 8453,
+        address: WETH_ADDRESS[8453],
+        name: 'Wrapped ETH',
+        symbol: 'WETH',
         decimals: 18,
         logoURI: wethLogo,
         coingeckoId: ethId
@@ -253,6 +281,7 @@ export const FTM_TOKEN: TokenMap = {
         logoURI: ftmLogo,
         coingeckoId: ftmId
     },
+    [ChainId.BASE]: undefined,
     [ChainId.ARBITRUM]: undefined,
     [ChainId.AVALANCHE]: undefined
 }
@@ -279,6 +308,7 @@ export const AVAX_TOKEN: TokenMap = {
         logoURI: avaxLogo,
         coingeckoId: avaxId
     },
+    [ChainId.BASE]: undefined,
     [ChainId.ARBITRUM]: undefined,
     [ChainId.AVALANCHE]: {
         chainId: 43114,
@@ -329,6 +359,7 @@ export const MATIC_TOKEN: TokenMap = {
         logoURI: maticLogo,
         coingeckoId: maticId
     },
+    [ChainId.BASE]: undefined,
     [ChainId.ARBITRUM]: undefined,
     [ChainId.AVALANCHE]: undefined,
 }
@@ -366,6 +397,15 @@ export const USDC_TOKEN: TokenMap = {
         address: AXL_USDC_ADDRESS[250],
         name: 'Axelar USDC',
         symbol: 'axlUSDC',
+        decimals: 6,
+        logoURI: usdcLogo,
+        coingeckoId: usdcId
+    },
+    [ChainId.BASE]: {
+        chainId: 8453,
+        address: USDC_ADDRESS[8453],
+        name: 'USD Coin',
+        symbol: 'USDC',
         decimals: 6,
         logoURI: usdcLogo,
         coingeckoId: usdcId
@@ -422,6 +462,15 @@ export const AXL_TOKEN: TokenMap = {
     [ChainId.FANTOM]: {
         chainId: 250,
         address: AXL_ADDRESS[250],
+        name: 'Axelar',
+        symbol: 'AXL',
+        decimals: 6,
+        logoURI: axlLogo,
+        coingeckoId: axlId
+    },
+    [ChainId.BASE]: {
+        chainId: 8453,
+        address: AXL_ADDRESS[8453],
         name: 'Axelar',
         symbol: 'AXL',
         decimals: 6,
@@ -486,6 +535,7 @@ export const WBTC_TOKEN: TokenMap = {
         logoURI: btcLogo,
         coingeckoId: wbtcId
     },
+    [ChainId.BASE]: undefined,
     [ChainId.ARBITRUM]: {
         chainId: 42161,
         address: WBTC_ADDRESS[42161],
@@ -545,6 +595,7 @@ export const LINK_TOKEN: TokenMap = {
         logoURI: linkLogo,
         coingeckoId: linkId
     },
+    [ChainId.BASE]: undefined,
     [ChainId.ARBITRUM]: {
         chainId: 42161,
         address: LINK_ADDRESS[42161],
@@ -595,6 +646,7 @@ export const MIM_TOKEN: TokenMap = {
         logoURI: mimLogo,
         coingeckoId: mimId
     },
+    [ChainId.BASE]: undefined,
     [ChainId.ARBITRUM]: {
         chainId: 42161,
         address: MIM_ADDRESS[42161],
@@ -645,6 +697,15 @@ export const USDT_TOKEN: TokenMap = {
         coingeckoId: usdtId
     },
     [ChainId.FANTOM]: undefined,
+    [ChainId.BASE]: {
+        chainId: 8453,
+        address: USDT_ADDRESS[8453],
+        name: 'USD Tether',
+        symbol: 'USDT',
+        decimals: 6,
+        logoURI: usdtLogo,
+        coingeckoId: usdtId,
+    },
     [ChainId.ARBITRUM]: {
         chainId: 42161,
         address: USDT_ADDRESS[42161],
@@ -687,6 +748,7 @@ export const DAI_TOKEN: TokenMap = {
         coingeckoId: daiId
     },
     [ChainId.FANTOM]: undefined,
+    [ChainId.BASE]: undefined,
     [ChainId.ARBITRUM]: {
         chainId: 42161,
         address: DAI_ADDRESS[42161],
@@ -737,6 +799,7 @@ export const SUSHI_TOKEN: TokenMap = {
         logoURI: sushiLogo,
         coingeckoId: sushiId
     },
+    [ChainId.BASE]: undefined,
     [ChainId.ARBITRUM]: {
         chainId: 42161,
         address: SUSHI_ADDRESS[42161],
@@ -779,6 +842,7 @@ export const SPELL_TOKEN: TokenMap = {
         logoURI: spellLogo,
         coingeckoId: spellId
     },
+    [ChainId.BASE]: undefined,
     [ChainId.ARBITRUM]: {
         chainId: 42161,
         address: SPELL_ADDRESS[42161],
@@ -829,6 +893,7 @@ export const CRV_TOKEN: TokenMap = {
         logoURI: crvLogo,
         coingeckoId: crvId
     },
+    [ChainId.BASE]: undefined,
     [ChainId.ARBITRUM]: {
         chainId: 42161,
         address: CRV_ADDRESS[42161],
@@ -862,6 +927,7 @@ export const MPX_TOKEN: TokenMap = {
         logoURI: mpxLogo,
         coingeckoId: mpxId
     },
+    [ChainId.BASE]: undefined,
     [ChainId.AVALANCHE]: undefined,
     [ChainId.ARBITRUM]: undefined,
 }
@@ -880,6 +946,7 @@ export const EQUAL_TOKEN: TokenMap = {
         logoURI: equalLogo,
         coingeckoId: equalId
     },
+    [ChainId.BASE]: undefined,
     [ChainId.AVALANCHE]: undefined,
     [ChainId.ARBITRUM]: undefined,
 }

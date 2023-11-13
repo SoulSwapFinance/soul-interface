@@ -142,6 +142,11 @@ const Crosschain = ({ }) => {
             "chainId": 56,
             "name": "Binance",
             "logoURI": "https://raw.githubusercontent.com/0xsquid/assets/main/images/tokens/bnb.svg"
+        },
+        {
+            "chainId": 8453,
+            "name": "Base",
+            "logoURI": "https://exchange.soulswap.finance/images/networks/base.svg"
         }
     ] 
 
@@ -166,6 +171,7 @@ const Crosschain = ({ }) => {
         [chains[3].chainId]: ChainId.MATIC,
         [chains[4].chainId]: ChainId.ARBITRUM,
         [chains[5].chainId]: ChainId.BSC,
+        [chains[6].chainId]: ChainId.BASE,
     }
     
     const CHAIN_ID_TO_CHAIN = {
@@ -175,6 +181,7 @@ const Crosschain = ({ }) => {
         [ChainId.MATIC]: chains[3],
         [ChainId.ARBITRUM]: chains[4],
         [ChainId.BSC]: chains[5],
+        [ChainId.BASE]: chains[6],
     }
 
     const DEFAULT_FROM_CHAIN_MAP = {
@@ -184,6 +191,7 @@ const Crosschain = ({ }) => {
         [ChainId.MATIC]: chains[3],
         [ChainId.ARBITRUM]: chains[4],
         [ChainId.BSC]: chains[5],
+        [ChainId.BASE]: chains[6],
     }
     
     const DEFAULT_TO_CHAIN_MAP = {
@@ -192,7 +200,8 @@ const Crosschain = ({ }) => {
         [ChainId.ETHEREUM]: chains[0],  // eth to ftm
         [ChainId.MATIC]: chains[0],     // matic to ftm
         [ChainId.ARBITRUM]: chains[2],  // arbitrum to eth
-        [ChainId.BSC]: chains[2],  // bsc to eth
+        [ChainId.BSC]: chains[2],       // bsc to eth
+        [ChainId.BASE]: chains[2],      // base to eth
     }
 
     const [fromChain, setFromChain] = useState(DEFAULT_FROM_CHAIN_MAP[chainId])
@@ -207,22 +216,24 @@ const Crosschain = ({ }) => {
     const [toAssetList, setToAssetList] = useState<TokenData[]>(getOutputList(fromChain?.chainId, toChain?.chainId))
     // const [toAssetList, setToAssetList] = useState<TokenData[]>(getTokensForChain(toChain?.chainId, false))
     const [fromAsset, setFromAsset] = useState(fromAssetList[0])
-    const [fromToken, setFromToken] = useState<Token>(new Token(
-        CHAIN_TO_CHAIN_ID[fromChain?.chainId],
-        fromAsset?.address,
-        fromAsset?.decimals,
-        fromAsset?.symbol,
-        fromAsset?.name
-    )
+    const [fromToken, setFromToken] = useState<Token>(
+        new Token(
+            CHAIN_TO_CHAIN_ID[fromChain?.chainId],
+            fromAsset?.address,
+            fromAsset?.decimals,
+            fromAsset?.symbol,
+            fromAsset?.name
+        )
     )
     const [toAsset, setToAsset] = useState(toAssetList[0])
-    const [toToken, setToToken] = useState<Token>(new Token(
-        CHAIN_TO_CHAIN_ID[toChain?.chainId],
-        toAsset.address,
-        toAsset.decimals,
-        toAsset.symbol,
-        toAsset.name
-    )
+    const [toToken, setToToken] = useState<Token>(
+        new Token(
+            CHAIN_TO_CHAIN_ID[toChain?.chainId],
+            toAsset.address,
+            toAsset.decimals,
+            toAsset.symbol,
+            toAsset.name
+        )
     )
     // const [fromTokenData, setFromTokenData] = useState<TokenData[]>(fromTokens)
     // const [tokenData, setTokenData] = useState<TokenData[]>(fromTokens)

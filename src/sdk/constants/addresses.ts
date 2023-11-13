@@ -641,6 +641,7 @@ export const AXL_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '0x44c784266cf024a60e8acf2427b9857ace194c5d',
   [ChainId.ARBITRUM]: '0x23ee2343b892b1bb63503a4fabc840e0e2c6810f',
   [ChainId.MOONRIVER]: '',
+  [ChainId.BASE]: '0x23ee2343b892b1bb63503a4fabc840e0e2c6810f',
 }
 
 export const MULTI_USDC_ADDRESS: AddressMap = {

@@ -305,7 +305,7 @@ export function queryParametersToSwapState(parsedQs: ParsedQs, chainId: ChainId)
           ? SOUL[ChainId.AVALANCHE].address
          : chainId == ChainId.BSC
           ? USDC[ChainId.BSC].address
-         : DAI[chainId ?? ChainId.FANTOM].address
+         : DAI[chainId ?? ChainId.FANTOM].wrapped.address
   // if(recipient == '') { recipient = recipientAddress}      
   if (inputCurrency === '' && outputCurrency === '') {
     inputCurrency = input
