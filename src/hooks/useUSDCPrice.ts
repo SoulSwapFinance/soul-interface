@@ -1,4 +1,4 @@
-import { AVAX_ORACLE_ADDRESS, BTC_ORACLE_ADDRESS, ChainId, Currency, CurrencyAmount, ETH_ORACLE_ADDRESS, JSBI, LZ_WETH_ADDRESS, Price, Token } from 'sdk'
+import { AVAX_ORACLE_ADDRESS, BTC_ORACLE_ADDRESS, ChainId, Currency, CurrencyAmount, ETH_ORACLE_ADDRESS, FTM_ORACLE_ADDRESS, JSBI, LZ_WETH_ADDRESS, Price, Token } from 'sdk'
 
 import { useActiveWeb3React } from 'services/web3'
 import { useMemo } from 'react'
@@ -63,14 +63,14 @@ export default function useUSDCPrice(currency?: Currency, toChain?: ChainId): Pr
 
   const soulPrice = usePrice(SOUL_ADDRESS[chainId ?? ChainId.FANTOM])
 
-  const wftmPrice = usePrice(WFTM_ADDRESS[250])
-  const survPrice = usePrice(SURV_ADDRESS[250])
-  const wethPrice = useOraclePrice(ETH_ORACLE_ADDRESS[250])
-  const wbtcPrice = useOraclePrice(BTC_ORACLE_ADDRESS[250])
-  const avaxPrice = usePrice(AVAX_ORACLE_ADDRESS[43114])
+  const wftmPrice = useOraclePrice(FTM_ORACLE_ADDRESS[chainId ?? ChainId.FANTOM])
+  const survPrice = usePrice(SURV_ADDRESS[chainId ?? ChainId.FANTOM])
+  const wethPrice = useOraclePrice(ETH_ORACLE_ADDRESS[chainId ?? ChainId.FANTOM])
+  const wbtcPrice = useOraclePrice(BTC_ORACLE_ADDRESS[chainId ?? ChainId.FANTOM])
+  const avaxPrice = useOraclePrice(AVAX_ORACLE_ADDRESS[chainId ?? ChainId.FANTOM])
 
-  const survAmountOut = chainId ? SURV_AMOUNT_OUT[250] : undefined
-  const wftmAmountOut = chainId ? WFTM_AMOUNT_OUT[250] : undefined
+  const survAmountOut = chainId ? SURV_AMOUNT_OUT[chainId ?? ChainId.FANTOM] : undefined
+  const wftmAmountOut = chainId ? WFTM_AMOUNT_OUT[chainId ?? ChainId.FANTOM] : undefined
 
   const amountOut = chainId ? STABLECOIN_AMOUNT_OUT[chainId ?? ChainId.FANTOM] : undefined
   const soulAmountOut = chainId ? SOUL_AMOUNT_OUT[chainId ?? ChainId.FANTOM] : undefined

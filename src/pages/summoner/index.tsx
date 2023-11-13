@@ -42,9 +42,9 @@ const Summoner = () => {
   const positions = usePositions()
   const tvl = useTVL()
 
-  let summTvl = tvl.reduce((previousValue, currentValue) => {
-    return previousValue + currentValue.tvl
-  }, 0)
+  // let summTvl = tvl.reduce((previousValue, currentValue) => {
+  //   return previousValue + currentValue.tvl
+  // }, 0)
 
   const pendingValue = positions.reduce((previousValue, currentValue) => {
     // console.log('previousValue: %s', currentValue.pendingSoul / 1e18)
