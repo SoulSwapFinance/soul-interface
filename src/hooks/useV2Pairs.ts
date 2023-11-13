@@ -11,6 +11,7 @@ import { useActiveWeb3React } from 'services/web3'
 import { SOUL_BOND_ADDRESS } from 'sdk'
 import { BONDS } from 'constants/bonds'
 import { useTokenInfo } from './useAPI'
+import { usePrice } from './usePrice'
 
 const PAIR_INTERFACE = new Interface(ISoulSwapPair)
 
@@ -82,7 +83,7 @@ export function useVaultTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[ChainId.FANTOM]).tokenInfo.price) // only on FTM and ETH
   const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
-  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
+  const soulPrice = usePrice(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]) // Number(useTokenInfo(SOUL_ADDRESS[ChainId.FANTOM]).tokenInfo.price)
 
   // console.log('soulP:%s', soulPrice)
 
@@ -214,8 +215,11 @@ export function useVaultTVL(): TVLInfo[] {
 export function useTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[ChainId.FANTOM]).tokenInfo.price) // only on FTM and ETH
-  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[ChainId.FANTOM]).tokenInfo.price)
+  // console.log('ftmPrice V2: %s', ftmPrice)
+  const soulPrice = usePrice(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]) // Number(useTokenInfo(SOUL_ADDRESS[ChainId.FANTOM]).tokenInfo.price)
+  // console.log('soulPrice V2: %s', soulPrice)
   const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[ChainId.AVALANCHE]).tokenInfo.price)
+  // console.log('avaxPrice V2: %s', avaxPrice)
   const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
 
@@ -386,7 +390,7 @@ export function useTVL(): TVLInfo[] {
 export function useBondTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[ChainId.FANTOM]).tokenInfo.price) // only on FTM and ETH
-  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
+  const soulPrice = usePrice(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]) // Number(useTokenInfo(SOUL_ADDRESS[ChainId.FANTOM]).tokenInfo.price)
   const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
@@ -500,9 +504,10 @@ export function useBondTVL(): TVLInfo[] {
 export function useSoulTVL(): TVLInfo[] {
   const { chainId } = useActiveWeb3React()
   const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
-  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
+  const soulPrice = usePrice(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]) // Number(useTokenInfo(SOUL_ADDRESS[ChainId.FANTOM]).tokenInfo.price)
   const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
+  // console.log('avaxPrice V2: %s', avaxPrice)
   const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
 
   const liquidityPools = Object.keys(POOLS[chainId == ChainId.AVALANCHE ? ChainId.AVALANCHE : ChainId.FANTOM]).map((key) => {
@@ -627,7 +632,7 @@ export function useV2PairsWithPrice(
 ): [PairState, Pair | null, number][] {
   const { chainId } = useActiveWeb3React()
   const ftmPrice = Number(useTokenInfo(WNATIVE_ADDRESS[ChainId.FANTOM]).tokenInfo.price) // only on FTM and ETH
-  const soulPrice = Number(useTokenInfo(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
+  const soulPrice = usePrice(SOUL_ADDRESS[chainId ?? ChainId.FANTOM]) // Number(useTokenInfo(SOUL_ADDRESS[ChainId.FANTOM]).tokenInfo.price)
   const wethPrice = Number(useTokenInfo(WETH_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const avaxPrice = Number(useTokenInfo(AVAX_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)
   const wbtcPrice = Number(useTokenInfo(WBTC_ADDRESS[chainId ?? ChainId.FANTOM]).tokenInfo.price)

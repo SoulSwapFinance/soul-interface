@@ -47,7 +47,9 @@ const Summoner = () => {
   }, 0)
 
   const pendingValue = positions.reduce((previousValue, currentValue) => {
+    // console.log('previousValue: %s', currentValue.pendingSoul / 1e18)
     return previousValue + (currentValue.pendingSoul / 1e18) * soulPrice
+
   }, 0)
 
   const farmingPools = Object?.keys(POOLS[chainId == ChainId.AVALANCHE ? ChainId.AVALANCHE : ChainId.FANTOM]).map((key) => {
@@ -58,8 +60,9 @@ const Summoner = () => {
 
   const allStaked = positions.reduce((previousValue, currentValue) => {
     const pool = farmingPools.find((r) => parseInt(r.id.toString()) == parseInt(currentValue.id))
+    // console.log('pool: %s', pool?.lpToken)
     const poolTvl = tvl.find((r) => getAddress(r.lpToken) == pool?.lpToken)
-    // console.log('lpToken:%s', poolTvl?.lpPrice)
+    // console.log('lpToken[%s]: %s', pool.id, poolTvl?.lpPrice)
     return !poolTvl ? previousValue + 0 : previousValue + ((currentValue.amount / 1e18) * poolTvl?.lpPrice)
   }, 0)
 
