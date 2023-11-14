@@ -93,6 +93,11 @@ export function getChainInfo(chainId: number, option: string) {
     option == 'NETWORK' ? output = 'Polygon (Matic)'
       : option == 'NAME' ? output = 'Polygon'
         : option == 'SYMBOL' ? output = 'MATIC'
+          : output = '' 
+    } else if (chainId == ChainId.BASE) {
+    option == 'NETWORK' ? output = 'Base'
+      : option == 'NAME' ? output = 'Base'
+        : option == 'SYMBOL' ? output = 'BASE'
           : output = ''
     } else if (chainId == ChainId.ARBITRUM) {
     option == 'NETWORK' ? output = 'Arbitrum One'

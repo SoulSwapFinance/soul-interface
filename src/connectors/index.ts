@@ -16,6 +16,7 @@ export const RPC = {
   [ChainId.FANTOM]: 'https://rpc.ftm.tools',
   // [ChainId.FANTOM]: 'https://rpcapi.fantom.network',
   // [ChainId.FANTOM]: 'https://rpc.ankr.com/fantom',
+  [ChainId.BASE]: 'https://rpc.ankr.com/base',
   [ChainId.MATIC]: 'https://rpc.ankr.com/polygon', // 'https://rpc-mainnet.maticvigil.com',
   // [ChainId.MATIC]: 'https://apis.ankr.com/e22bfa5f5a124b9aa1f911b742f6adfe/c06bb163c3c2a10a4028959f4d82836d/polygon/full/main',
   // [ChainId.MATIC_TESTNET]: 'https://rpc-mumbai.matic.today',
@@ -55,6 +56,7 @@ const supportedChainIds = [
   137, // matic
   43114, // avalanche
   // 43113, // fuji
+  8453, // base
   42161, // arbitrum
   1285, // moonriver
 ]

@@ -46,6 +46,18 @@ export const from_eth_to_ftm: TokenData[] = [
     LINK_TOKEN[1],
     SUSHI_TOKEN[1],
 ]
+export const from_eth_to_base: TokenData[] = [
+    NATIVE_TOKEN[1],
+    WNATIVE_TOKEN[1],
+    USDC_TOKEN[1],
+    WBTC_TOKEN[1],
+    FTM_TOKEN[1],
+    AXL_TOKEN[1],
+    USDT_TOKEN[1],
+    DAI_TOKEN[1],
+    LINK_TOKEN[1],
+    SUSHI_TOKEN[1],
+]
 export const from_eth_to_avax: TokenData[] = [
     NATIVE_TOKEN[1],
     WNATIVE_TOKEN[1],
@@ -108,6 +120,19 @@ export const to_eth_from_ftm: TokenData[] = [
     CRV_TOKEN[1],
     LINK_TOKEN[1],
 ]
+export const to_eth_from_base: TokenData[] = [
+    NATIVE_TOKEN[1],
+    WNATIVE_TOKEN[1],
+    USDC_TOKEN[1],
+    USDT_TOKEN[1],
+    WBTC_TOKEN[1],
+    FTM_TOKEN[1],
+    DAI_TOKEN[1],
+    CRV_TOKEN[1],
+    LINK_TOKEN[1],
+    AXL_TOKEN[1],
+    SUSHI_TOKEN[1],
+]
 export const to_eth_from_arbitrum: TokenData[] = [
     NATIVE_TOKEN[1],
     WNATIVE_TOKEN[1],
@@ -159,6 +184,17 @@ export const from_bsc_to_ftm: TokenData[] = [
     AXL_TOKEN[56],
 ]
 export const from_bsc_to_matic: TokenData[] = [
+    NATIVE_TOKEN[56],
+    WNATIVE_TOKEN[56],
+    ETH_TOKEN[56],
+    WBTC_TOKEN[56],
+    LINK_TOKEN[56],
+    MATIC_TOKEN[56],
+    USDC_TOKEN[56],
+    USDT_TOKEN[56],
+    AXL_TOKEN[56],
+]
+export const from_bsc_to_base: TokenData[] = [
     NATIVE_TOKEN[56],
     WNATIVE_TOKEN[56],
     ETH_TOKEN[56],
@@ -222,7 +258,18 @@ export const to_bsc_from_matic: TokenData[] = [
     NATIVE_TOKEN[56],
     WNATIVE_TOKEN[56],
     ETH_TOKEN[56],
-    WBTC_TOKEN[56],
+    WBTC_TOKEN[56], // BTCB
+    LINK_TOKEN[56],
+    MATIC_TOKEN[56],
+    USDC_TOKEN[56],
+    USDT_TOKEN[56],
+    AXL_TOKEN[56],
+]
+export const to_bsc_from_base: TokenData[] = [
+    NATIVE_TOKEN[56],
+    WNATIVE_TOKEN[56],
+    ETH_TOKEN[56],
+    WBTC_TOKEN[56], // BTCB
     LINK_TOKEN[56],
     MATIC_TOKEN[56],
     USDC_TOKEN[56],
@@ -233,7 +280,7 @@ export const to_bsc_from_arbitrum: TokenData[] = [
     NATIVE_TOKEN[56],
     WNATIVE_TOKEN[56],
     ETH_TOKEN[56],
-    WBTC_TOKEN[56],
+    WBTC_TOKEN[56], // BTCB
     LINK_TOKEN[56],
     MATIC_TOKEN[56],
     USDC_TOKEN[56],
@@ -347,7 +394,6 @@ export const from_avax_to_matic: TokenData[] = [
     MIM_TOKEN[43114],
 
 ]
-
 export const from_avax_to_ftm: TokenData[] = [
    NATIVE_TOKEN[43114],
    WNATIVE_TOKEN[43114],
@@ -374,7 +420,33 @@ export const from_avax_to_ftm: TokenData[] = [
 },
     MIM_TOKEN[43114],
 ]
-
+export const from_avax_to_base: TokenData[] = [
+   NATIVE_TOKEN[43114],
+   WNATIVE_TOKEN[43114],
+   ETH_TOKEN[43114],
+   LINK_TOKEN[43114],
+   USDC_TOKEN[43114],
+{
+    "chainId": 43114,
+    "address": '0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664', // USDC.e
+    "name": 'USD Coin',
+    "symbol": 'USDC.e',
+    "decimals": 6,
+    "logoURI": usdcLogo,
+    "coingeckoId": 'usdc',
+},
+{
+    "chainId": 43114,
+    "address": AXL_USDC_ADDRESS[43114],
+    "name": 'Axelar USDC',
+    "symbol": 'axlUSDC',
+    "decimals": 6,
+    "logoURI": usdcLogo,
+    "coingeckoId": 'usdc',
+},
+    DAI_TOKEN[43114],    
+    MIM_TOKEN[43114],
+]
 export const from_avax_to_arbitrum: TokenData[] = [
    NATIVE_TOKEN[43114],
    WNATIVE_TOKEN[43114],
@@ -444,7 +516,6 @@ export const to_avax_from_eth: TokenData[] = [
     },
     AXL_TOKEN[43114],
 ]
-
 export const to_avax_from_bsc: TokenData[] = [
     NATIVE_TOKEN[43114],
     WNATIVE_TOKEN[43114],
@@ -472,7 +543,6 @@ export const to_avax_from_bsc: TokenData[] = [
         "coingeckoId": 'bitcoin-avalanche-bridged-btc-b',
     },
 ]
-
 export const to_avax_from_matic: TokenData[] = [
     NATIVE_TOKEN[43114],
     WNATIVE_TOKEN[43114],
@@ -512,38 +582,6 @@ export const to_avax_from_matic: TokenData[] = [
     LINK_TOKEN[43114],  // LINK.e
 
 ]
-
-export const to_avax_from_arbitrum: TokenData[] = [
-    NATIVE_TOKEN[43114],
-    WNATIVE_TOKEN[43114],
-    WBTC_TOKEN[43114],  // WBTC.e
-    ETH_TOKEN[43114],   // WETH.e
-    USDC_TOKEN[43114],
-    {
-        "chainId": 43114,
-        "address": AXL_USDC_ADDRESS[43114], // axlUSDC
-        "name": 'Axelar USDC',
-        "symbol": 'axlUSDC',
-        "decimals": 6,
-        "logoURI": usdcLogo,
-        "coingeckoId": 'usdc',
-    },
-    USDT_TOKEN[43114],
-    DAI_TOKEN[43114], // DAI.e
-    USDT_TOKEN[43114], // USDt
-    {
-        "chainId": 43114,
-        "address": '0xc7198437980c041c805A1EDcbA50c1Ce5db95118', // USDT.e
-        "name": 'Tether USD',
-        "symbol": 'USDT.e',
-        "decimals": 6,
-        "logoURI": usdtLogo,
-        "coingeckoId": 'tether',
-    },
-    MIM_TOKEN[43114],
-    LINK_TOKEN[43114],
-]
-
 export const to_avax_from_ftm: TokenData[] = [
     NATIVE_TOKEN[43114],
     WNATIVE_TOKEN[43114],
@@ -575,7 +613,66 @@ export const to_avax_from_ftm: TokenData[] = [
     MIM_TOKEN[43114],
     LINK_TOKEN[43114],
 ]
-
+export const to_avax_from_base: TokenData[] = [
+    NATIVE_TOKEN[43114],
+    WNATIVE_TOKEN[43114],
+    WBTC_TOKEN[43114],  // WBTC.e
+    ETH_TOKEN[43114],   // WETH.e
+    USDC_TOKEN[43114],
+    {
+        "chainId": 43114,
+        "address": AXL_USDC_ADDRESS[43114], // axlUSDC
+        "name": 'Axelar USDC',
+        "symbol": 'axlUSDC',
+        "decimals": 6,
+        "logoURI": usdcLogo,
+        "coingeckoId": 'usdc',
+    },
+    USDT_TOKEN[43114],
+    DAI_TOKEN[43114], // DAI.e
+    USDT_TOKEN[43114], // USDt
+    {
+        "chainId": 43114,
+        "address": '0xc7198437980c041c805A1EDcbA50c1Ce5db95118', // USDT.e
+        "name": 'Tether USD',
+        "symbol": 'USDT.e',
+        "decimals": 6,
+        "logoURI": usdtLogo,
+        "coingeckoId": 'tether',
+    },
+    MIM_TOKEN[43114],
+    LINK_TOKEN[43114],
+]
+export const to_avax_from_arbitrum: TokenData[] = [
+    NATIVE_TOKEN[43114],
+    WNATIVE_TOKEN[43114],
+    WBTC_TOKEN[43114],  // WBTC.e
+    ETH_TOKEN[43114],   // WETH.e
+    USDC_TOKEN[43114],
+    {
+        "chainId": 43114,
+        "address": AXL_USDC_ADDRESS[43114], // axlUSDC
+        "name": 'Axelar USDC',
+        "symbol": 'axlUSDC',
+        "decimals": 6,
+        "logoURI": usdcLogo,
+        "coingeckoId": 'usdc',
+    },
+    USDT_TOKEN[43114],
+    DAI_TOKEN[43114], // DAI.e
+    USDT_TOKEN[43114], // USDt
+    {
+        "chainId": 43114,
+        "address": '0xc7198437980c041c805A1EDcbA50c1Ce5db95118', // USDT.e
+        "name": 'Tether USD',
+        "symbol": 'USDT.e',
+        "decimals": 6,
+        "logoURI": usdtLogo,
+        "coingeckoId": 'tether',
+    },
+    MIM_TOKEN[43114],
+    LINK_TOKEN[43114],
+]
 
 /////////////////////////////
     /*/ FANTOM (FROM) /*/
@@ -603,6 +700,17 @@ export const from_ftm_to_bsc: TokenData[] = [
     SUSHI_TOKEN[250],
 ]
 export const from_ftm_to_matic: TokenData[] = [
+    NATIVE_TOKEN[250],
+    WNATIVE_TOKEN[250],
+    USDC_TOKEN[250],    // axlUSDC
+    WBTC_TOKEN[250],    // axlBTC
+    ETH_TOKEN[250],     // axlETH
+    LINK_TOKEN[250],
+    AXL_TOKEN[250],
+    MIM_TOKEN[250],
+    SUSHI_TOKEN[250],
+]
+export const from_ftm_to_base: TokenData[] = [
     NATIVE_TOKEN[250],
     WNATIVE_TOKEN[250],
     USDC_TOKEN[250],    // axlUSDC
@@ -676,7 +784,17 @@ export const to_ftm_from_matic: TokenData[] = [
     SPELL_TOKEN[250],
     MIM_TOKEN[250]
 ]
-
+export const to_ftm_from_base: TokenData[] = [
+    NATIVE_TOKEN[250],
+    WNATIVE_TOKEN[250],
+    USDC_TOKEN[250],
+    MPX_TOKEN[250],
+    EQUAL_TOKEN[250],
+    CRV_TOKEN[250],
+    LINK_TOKEN[250],
+    SPELL_TOKEN[250],
+    MIM_TOKEN[250]
+]
 export const to_ftm_from_arbitrum: TokenData[] = [
     NATIVE_TOKEN[250],
     WNATIVE_TOKEN[250],
@@ -688,7 +806,6 @@ export const to_ftm_from_arbitrum: TokenData[] = [
     SPELL_TOKEN[250],
     MIM_TOKEN[250],
 ]
-
 export const to_ftm_from_avax: TokenData[] = [
     NATIVE_TOKEN[250],
     WNATIVE_TOKEN[250],
@@ -732,6 +849,16 @@ export const from_matic_to_ftm: TokenData[] = [
     DAI_TOKEN[137],
     LINK_TOKEN[137],
     AXL_TOKEN[137],
+]
+export const from_matic_to_base: TokenData[] = [
+    NATIVE_TOKEN[137],
+    WNATIVE_TOKEN[137],
+    ETH_TOKEN[137],
+    WBTC_TOKEN[137],
+    USDC_TOKEN[137],
+    USDT_TOKEN[137],
+    DAI_TOKEN[137],
+    LINK_TOKEN[137],
 ]
 export const from_matic_to_arbitrum: TokenData[] = [
     NATIVE_TOKEN[137],
@@ -789,6 +916,16 @@ export const to_matic_from_ftm: TokenData[] = [
     DAI_TOKEN[137],
     LINK_TOKEN[137],
 ]
+export const to_matic_from_base: TokenData[] = [
+    NATIVE_TOKEN[137],
+    WNATIVE_TOKEN[137],
+    ETH_TOKEN[137],
+    WBTC_TOKEN[137],
+    USDC_TOKEN[137],
+    USDT_TOKEN[137],
+    DAI_TOKEN[137],
+    LINK_TOKEN[137],
+]
 export const to_matic_from_arbitrum: TokenData[] = [
     NATIVE_TOKEN[137],
     WNATIVE_TOKEN[137],
@@ -810,11 +947,96 @@ export const to_matic_from_avax: TokenData[] = [
     LINK_TOKEN[137],
 ]
 
+
+///////////////////////////
+    /*/ BASE (FROM) /*/
+///////////////////////////
+
+export const from_base_to_eth: TokenData[] = [
+    NATIVE_TOKEN[8453],
+    ETH_TOKEN[8453],
+    USDC_TOKEN[8453],
+    AXL_TOKEN[8453],
+]
+export const from_base_to_bsc: TokenData[] = [
+    NATIVE_TOKEN[8453],
+    ETH_TOKEN[8453],
+    USDC_TOKEN[8453],
+    AXL_TOKEN[8453],
+]
+export const from_base_to_matic: TokenData[] = [
+    NATIVE_TOKEN[8453],
+    ETH_TOKEN[8453],
+    USDC_TOKEN[8453],
+    AXL_TOKEN[8453],
+]
+export const from_base_to_ftm: TokenData[] = [
+    NATIVE_TOKEN[8453],
+    ETH_TOKEN[8453],
+    USDC_TOKEN[8453],
+    AXL_TOKEN[8453],
+]
+export const from_base_to_arbitrum: TokenData[] = [
+    NATIVE_TOKEN[8453],
+    ETH_TOKEN[8453],
+    USDC_TOKEN[8453],
+    AXL_TOKEN[8453],
+]
+export const from_base_to_avax: TokenData[] = [
+    NATIVE_TOKEN[8453],
+    ETH_TOKEN[8453],
+    USDC_TOKEN[8453],
+    AXL_TOKEN[8453],
+]
+
+/////////////////////////
+    /*/ BASE (TO) /*/
+/////////////////////////
+
+export const to_base_from_eth: TokenData[] = [
+    NATIVE_TOKEN[8453],
+    ETH_TOKEN[8453],
+    USDC_TOKEN[8453],
+    AXL_TOKEN[8453],
+]
+export const to_base_from_bsc: TokenData[] = [
+    NATIVE_TOKEN[8453],
+    ETH_TOKEN[8453],
+    USDC_TOKEN[8453],
+    AXL_TOKEN[8453],
+]
+export const to_base_from_matic: TokenData[] = [
+    NATIVE_TOKEN[8453],
+    ETH_TOKEN[8453],
+    USDC_TOKEN[8453],
+    AXL_TOKEN[8453],
+]
+export const to_base_from_ftm: TokenData[] = [
+    NATIVE_TOKEN[8453],
+    ETH_TOKEN[8453],
+    USDC_TOKEN[8453],
+    AXL_TOKEN[8453],
+]
+export const to_base_from_arbitrum: TokenData[] = [
+    NATIVE_TOKEN[8453],
+    ETH_TOKEN[8453],
+    USDC_TOKEN[8453],
+    AXL_TOKEN[8453],
+]
+export const to_base_from_avax: TokenData[] = [
+    NATIVE_TOKEN[8453],
+    ETH_TOKEN[8453],
+    USDC_TOKEN[8453],
+    AXL_TOKEN[8453],
+]
+
+
 ///////////////////////////////
     /*/ ARBITRUM (FROM) /*/
 ///////////////////////////////
 
 export const from_arbitrum_to_eth: TokenData[] = [
+    NATIVE_TOKEN[42161],
     ETH_TOKEN[42161],
     USDC_TOKEN[42161],
     USDT_TOKEN[42161],
@@ -824,6 +1046,7 @@ export const from_arbitrum_to_eth: TokenData[] = [
     AXL_TOKEN[42161],
 ]
 export const from_arbitrum_to_bsc: TokenData[] = [
+    NATIVE_TOKEN[42161],
     ETH_TOKEN[42161],
     USDC_TOKEN[42161],
     USDT_TOKEN[42161],
@@ -833,6 +1056,7 @@ export const from_arbitrum_to_bsc: TokenData[] = [
     AXL_TOKEN[42161],
 ]
 export const from_arbitrum_to_matic: TokenData[] = [
+    NATIVE_TOKEN[42161],
     ETH_TOKEN[42161],
     USDC_TOKEN[42161],
     USDT_TOKEN[42161],
@@ -842,6 +1066,7 @@ export const from_arbitrum_to_matic: TokenData[] = [
     AXL_TOKEN[42161],
 ]
 export const from_arbitrum_to_ftm: TokenData[] = [
+    NATIVE_TOKEN[42161],
     ETH_TOKEN[42161],
     USDC_TOKEN[42161],
     USDT_TOKEN[42161],
@@ -849,7 +1074,18 @@ export const from_arbitrum_to_ftm: TokenData[] = [
     SUSHI_TOKEN[42161],
     SPELL_TOKEN[42161],
 ]
+export const from_arbitrum_to_base: TokenData[] = [
+    NATIVE_TOKEN[42161],
+    ETH_TOKEN[42161],
+    USDC_TOKEN[42161],
+    USDT_TOKEN[42161],
+    WBTC_TOKEN[42161],
+    SUSHI_TOKEN[42161],
+    SPELL_TOKEN[42161],
+    AXL_TOKEN[42161],
+]
 export const from_arbitrum_to_avax: TokenData[] = [
+    NATIVE_TOKEN[42161],
     ETH_TOKEN[42161],
     USDC_TOKEN[42161],
     USDT_TOKEN[42161],
@@ -863,6 +1099,7 @@ export const from_arbitrum_to_avax: TokenData[] = [
     /*/ ARBITRUM (TO) /*/
 /////////////////////////////
 export const to_arbitrum_from_eth: TokenData[] = [
+    NATIVE_TOKEN[42161],
     ETH_TOKEN[42161],
     USDC_TOKEN[42161],
     USDT_TOKEN[42161],
@@ -871,6 +1108,7 @@ export const to_arbitrum_from_eth: TokenData[] = [
     SPELL_TOKEN[42161],
 ]
 export const to_arbitrum_from_bsc: TokenData[] = [
+    NATIVE_TOKEN[42161],
     ETH_TOKEN[42161],
     USDC_TOKEN[42161],
     USDT_TOKEN[42161],
@@ -879,6 +1117,7 @@ export const to_arbitrum_from_bsc: TokenData[] = [
     SPELL_TOKEN[42161],
 ]
 export const to_arbitrum_from_matic: TokenData[] = [
+    NATIVE_TOKEN[42161],
     ETH_TOKEN[42161],
     USDC_TOKEN[42161],
     USDT_TOKEN[42161],
@@ -887,6 +1126,16 @@ export const to_arbitrum_from_matic: TokenData[] = [
     SPELL_TOKEN[42161],
 ]
 export const to_arbitrum_from_ftm: TokenData[] = [
+    NATIVE_TOKEN[42161],
+    ETH_TOKEN[42161],
+    USDC_TOKEN[42161],
+    USDT_TOKEN[42161],
+    WBTC_TOKEN[42161],
+    SUSHI_TOKEN[42161],
+    SPELL_TOKEN[42161],
+]
+export const to_arbitrum_from_base: TokenData[] = [
+    NATIVE_TOKEN[42161],
     ETH_TOKEN[42161],
     USDC_TOKEN[42161],
     USDT_TOKEN[42161],
@@ -895,6 +1144,7 @@ export const to_arbitrum_from_ftm: TokenData[] = [
     SPELL_TOKEN[42161],
 ]
 export const to_arbitrum_from_avax: TokenData[] = [
+    NATIVE_TOKEN[42161],
     ETH_TOKEN[42161],
     USDC_TOKEN[42161],
     USDT_TOKEN[42161],
@@ -908,6 +1158,7 @@ const fromLists = {
         56: from_eth_to_bsc,
         137: from_eth_to_matic,
         250: from_eth_to_ftm,
+        8453: from_eth_to_base,
         42161: from_eth_to_arbitrum,
         43114: from_eth_to_avax,
     },
@@ -915,6 +1166,7 @@ const fromLists = {
         1: from_bsc_to_eth,
         137: from_bsc_to_matic,
         250: from_bsc_to_ftm,
+        8453: from_bsc_to_base,
         42161: from_bsc_to_arbitrum,
         43114: from_bsc_to_avax,
     },
@@ -922,6 +1174,7 @@ const fromLists = {
         1: from_ftm_to_eth,
         56: from_ftm_to_bsc,
         137: from_ftm_to_matic,
+        8453: from_ftm_to_base,
         42161: from_ftm_to_arbitrum,
         43114: from_ftm_to_avax,
     },
@@ -929,14 +1182,24 @@ const fromLists = {
         1: from_matic_to_eth,
         56: from_matic_to_bsc,
         250: from_matic_to_ftm,
+        8453: from_matic_to_base,
         42161: from_matic_to_arbitrum,
         43114: from_matic_to_avax,
+    },
+    [8453]: {
+        1: from_base_to_eth,
+        56: from_base_to_bsc,
+        137: from_base_to_matic,
+        250: from_base_to_ftm,
+        42161: from_base_to_arbitrum,
+        43114: from_base_to_avax 
     },
     [42161]: {
         1: from_arbitrum_to_eth,
         56: from_arbitrum_to_bsc,
         137: from_arbitrum_to_matic,
         250: from_arbitrum_to_ftm,
+        8453: from_arbitrum_to_base,
         43114: from_arbitrum_to_avax 
     },
     [43114]: {
@@ -944,6 +1207,7 @@ const fromLists = {
         56: from_avax_to_bsc,
         137: from_avax_to_matic,
         250: from_avax_to_ftm,
+        8453: from_avax_to_base,
         42161: from_avax_to_arbitrum,
     },
 }
@@ -953,6 +1217,7 @@ const toLists = {
         56: to_eth_from_bsc,
         137: to_eth_from_matic,
         250: to_eth_from_ftm,
+        8453: to_eth_from_base,
         42161: to_eth_from_arbitrum,
         43114: to_eth_from_avax,
     },
@@ -960,6 +1225,7 @@ const toLists = {
         1: to_bsc_from_eth,
         137: to_bsc_from_matic,
         250: to_bsc_from_ftm,
+        8453: to_bsc_from_base,
         42161: to_bsc_from_arbitrum,
         43114: to_bsc_from_avax,
     },
@@ -967,6 +1233,7 @@ const toLists = {
         1: to_ftm_from_eth,
         56: to_ftm_from_bsc,
         137: to_ftm_from_matic,
+        8453: to_ftm_from_base,
         42161: to_ftm_from_arbitrum,
         43114: to_ftm_from_avax,
     },
@@ -975,13 +1242,23 @@ const toLists = {
         56: to_matic_from_bsc,
         250: to_matic_from_ftm,
         42161: to_matic_from_arbitrum,
+        8453: to_matic_from_base,
         43114: to_matic_from_avax,
+    },
+    [8453]: {
+        1: to_base_from_eth,
+        56: to_base_from_bsc,
+        137: to_base_from_matic,
+        250: to_base_from_ftm,
+        42161: to_base_from_arbitrum,
+        43114: to_base_from_avax 
     },
     [42161]: {
         1: to_arbitrum_from_eth,
         56: to_arbitrum_from_bsc,
         137: to_arbitrum_from_matic,
         250: to_arbitrum_from_ftm,
+        8453: to_arbitrum_from_base,
         43114: to_arbitrum_from_avax 
     },
     [43114]: {
@@ -989,6 +1266,7 @@ const toLists = {
         56: to_avax_from_bsc,
         137: to_avax_from_matic,
         250: to_avax_from_ftm,
+        8453: to_avax_from_base,
         42161: to_avax_from_arbitrum,
     },
 }
@@ -999,7 +1277,7 @@ const toLists = {
 // }
 const fromTokenList = (fromChain, toChain) => {
     let inputList = from_ftm_to_avax
-    inputList = [1, 56, 137, 250, 42161, 43114].includes(fromChain) 
+    inputList = [1, 56, 137, 250, 8453, 42161, 43114].includes(fromChain) 
         ? fromLists[fromChain][toChain] 
         : inputList = from_ftm_to_avax
 
@@ -1009,7 +1287,7 @@ const fromTokenList = (fromChain, toChain) => {
 
 const toTokenList = (fromChain, toChain) => {
     let outputList = from_ftm_to_avax
-    outputList = [1, 56, 137, 250, 42161, 43114].includes(fromChain) 
+    outputList = [1, 56, 137, 250, 8453, 42161, 43114].includes(fromChain) 
         ? toLists[toChain][fromChain] 
         : outputList = from_ftm_to_avax
 

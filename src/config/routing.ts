@@ -217,6 +217,12 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
     AVALANCHE.WBTC,
     AVALANCHE.DAI,
   ],
+  [ChainId.BASE]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.BASE]
+  ],
+  [ChainId.ARBITRUM]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.ARBITRUM]
+  ],
   [ChainId.MOONRIVER]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.MOONRIVER]
   ]

@@ -13,7 +13,6 @@ import {
   TEAM_WALLET_ADDRESS,
   STOP_LIMIT_ORDER_ADDRESS,
   LOTTERY_ADDRESS,
-  SUMMONER_ASSISTANT_ADDRESS,
   OFFCHAIN_AGGREGATOR_ORACLE,
   SPOOKY_ROUTER_ADDRESS,
   SPIRIT_ROUTER_ADDRESS,
@@ -52,7 +51,7 @@ import {
   REFUNDER_ADDRESS,
 } from 'sdk'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from 'constants/multicall'
-import SOUL_BOND_ABI from 'constants/abis/soulbond.json' 
+import SOUL_BOND_ABI from 'constants/abis/soulbond.json'
 import SOUL_BOND_V2_ABI from 'constants/abis/soulswap/soulbondv2.json'
 import ALCX_REWARDER_ABI from 'constants/abis/alcx-rewarder.json'
 import CLONE_REWARDER_ABI from 'constants/abis/clone-rewarder.json'
@@ -62,7 +61,7 @@ import BASE_SWAPPER_ABI from 'constants/abis/swapper.json'
 import UPDATER_ABI from 'constants/abis/market-updater.json'
 import ANYSWAP_ERC20_ABI from 'constants/abis/anyswap_erc20.json'
 import SPOOKY_FACTORY_ABI from 'constants/abis/spookyswap-factory.json'
-import SOUL_CIRCLE_ABI from 'constants/abis/soulswap/soulcircle.json' 
+import SOUL_CIRCLE_ABI from 'constants/abis/soulswap/soulcircle.json'
 import CHAINLINK_ORACLE_ABI from 'constants/abis/chainlink-oracle.json'
 import PRICE_ORACLE_ABI from 'constants/abis/price-oracle.json'
 import COMPLEX_REWARDER_ABI from 'constants/abis/complex-rewarder.json'
@@ -86,7 +85,7 @@ import SOUL_SAFE_ABI from 'constants/abis/soulswap/safe.json'
 import SOUL_GUIDE_ABI from 'constants/abis/soul-guide.json' // TODO: update abi
 import REFUNDER_ABI from 'constants/abis/refunder.json'
 import SUMMONER_ABI from 'constants/abis/soulswap/soulsummoner.json' // 28 JUL
-import SOUL_MANIFESTER_ABI from 'constants/abis/soulswap/soulmanifester.json' 
+import SOUL_MANIFESTER_ABI from 'constants/abis/soulswap/soulmanifester.json'
 import FARM_MANIFESTER_ABI from 'constants/abis/soulswap/manifester.json'
 import MANIFESTATION_ABI from 'constants/abis/soulswap/manifestation.json'
 import LOTTERY_ABI from 'constants/abis/soulswap/lottery.json' // 28 JUL
@@ -98,8 +97,6 @@ import SOUL_ABI from 'constants/abis/soulswap/soulpower.json' // 28 JUL
 import SEANCE_ABI from 'constants/abis/soulswap/seance.json' // 28 JUL
 import ATOMIC_SWAP_ABI from 'constants/abis/soulswap/atomic-swap.json'
 import LAUNCHPAD_ABI from 'constants/abis/soulswap/launchpad.json'
-import SUMMONER_HELPER_ABI from 'constants/abis/soulswap/helper.json'
-import SUMMONER_ASSISTANT_ABI from 'constants/abis/soulswap/assistant.json' 
 import PRICE_HELPER_ABI from 'constants/abis/soulswap/pricehelper.json'
 import BORING_HELPER_ABI from 'constants/abis/soulswap/boring-helper.json'
 import HARVEST_HELPER_ABI from 'constants/abis/soulswap/harvest-helper.json'
@@ -323,7 +320,7 @@ export function useTridentRouterContract(withSignerIfPossible?: boolean): Contra
 
 export function useMasterChefContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SUMMONER_ADDRESS[chainId ?? ChainId.FANTOM], 
+  return useContract(chainId && SUMMONER_ADDRESS[chainId ?? ChainId.FANTOM],
     chainId == ChainId.FANTOM ? SUMMONER_ABI : SOUL_MANIFESTER_ABI,
     withSignerIfPossible)
 }
@@ -377,16 +374,6 @@ export function useFactoryContract(): Contract | null {
   return useContract(chainId && FACTORY_ADDRESS[chainId ?? ChainId.FANTOM], FACTORY_ABI, false)
 }
 
-export function useHelperContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && '0xa224a5D96E58E3dae89D0e4775444A329E67774c', SUMMONER_HELPER_ABI, withSignerIfPossible)
-}
-
-export function useSummonerAssistantContract(withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && SUMMONER_ASSISTANT_ADDRESS[chainId ?? ChainId.FANTOM], SUMMONER_ASSISTANT_ABI, withSignerIfPossible)
-}
-
 export function useLaunchpadContract(address?: string, withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && address !== undefined && address !== '' && address, LAUNCHPAD_ABI, withSignerIfPossible)
@@ -419,11 +406,6 @@ export function useTimelockContract(): Contract | null {
 export function useCoffinBoxContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && COFFIN_BOX_ADDRESS[chainId ?? ChainId.FANTOM], COFFIN_BOX_ABI, withSignerIfPossible)
-}
-
-export function useUnderworldPairContract(PAIR_ADDRESS: string, withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && PAIR_ADDRESS[chainId ?? ChainId.FANTOM], UNDERWORLD_ABI, withSignerIfPossible)
 }
 
 export function useSoulSwapSwapper(): Contract | null {
@@ -532,5 +514,5 @@ export function useAtomicSwapContract(withSignerIfPossible?: boolean): Contract 
 
 // SoulSwap 
 export function useSpookySwapFactoryContract(withSignerIfPossible?: boolean): Contract | null {
-return useContract('0x152eE697f2E276fA89E96742e9bB9aB1F2E61bE3', SPOOKY_FACTORY_ABI, withSignerIfPossible)
+  return useContract('0x152eE697f2E276fA89E96742e9bB9aB1F2E61bE3', SPOOKY_FACTORY_ABI, withSignerIfPossible)
 }

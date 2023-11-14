@@ -3,9 +3,10 @@ export enum ChainId {
   TELOS = 40,
   BSC = 56,
   FANTOM = 250,
-  AVALANCHE = 43114,
   MATIC = 137,
-  ARBITRUM = 42161,
-  BASE = 8453,
   MOONRIVER = 1285,
+  BASE = 8453,
+  ARBITRUM = 42161,
+  AVALANCHE = 43114,
+  // LUKSO = 42,
 }

@@ -26,13 +26,15 @@ const Moonriver = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/mast
 // const Matic = '/images/networks/matic-network.jpg'
 // const Moonbeam = '/images/networks/moonbeam-network.jpg'
 // const OKEx = '/images/networks/okex-network.jpg'
+const Arbitrum = '/images/networks/arbitrum.svg'
 const Polygon = '/images/networks/polygon-network.jpg'
+const Base = '/images/networks/base.svg'
 // const Rinkeby = '/images/networks/rinkeby-network.jpg'
 // const Ropsten = '/images/networks/ropsten-network.jpg'
 // const xDai = '/images/networks/xdai-network.jpg'
 // const Celo = '/images/networks/celo-network.jpg'
 
-export const NETWORK_ICON = {
+export const NETWORK_ICON: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: Mainnet,
   [ChainId.TELOS]: Telos,
   [ChainId.BSC]: Bsc,
@@ -40,6 +42,8 @@ export const NETWORK_ICON = {
   [ChainId.AVALANCHE]: Avalanche,
   [ChainId.MOONRIVER]: Moonriver,
   [ChainId.MATIC]: Polygon,
+  [ChainId.ARBITRUM]: Arbitrum,
+  [ChainId.BASE]: Base,
   // [ChainId.ROPSTEN]: Ropsten,
   // [ChainId.RINKEBY]: Rinkeby,
   // [ChainId.GÖRLI]: Goerli,
@@ -88,13 +92,16 @@ export const NETWORK_LABEL: { [chainId in ChainId]: string } = {
   // [ChainId.CELO]: 'Celo',
 }
 
-export const NATIVE_TOKEN_TICKER = {
+export const NATIVE_TOKEN_TICKER: { [chainId in ChainId]: string } = {
   [ChainId.ETHEREUM]: 'ETH',
   [ChainId.TELOS]: 'TLOS',
   [ChainId.BSC]: 'BNB',
   [ChainId.FANTOM]: 'FTM',
-  [ChainId.AVALANCHE]: 'AVAX',
+  [ChainId.MATIC]: 'MATIC',
+  [ChainId.BASE]: 'ETH',
+  [ChainId.ARBITRUM]: 'ETH',
   [ChainId.MOONRIVER]: 'MOVR',
+  [ChainId.AVALANCHE]: 'AVAX',
 }
 
 export const NATIVE_WRAPPED_TOKEN_ADDRESS = {

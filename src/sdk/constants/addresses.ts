@@ -641,6 +641,7 @@ export const AXL_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '0x44c784266cf024a60e8acf2427b9857ace194c5d',
   [ChainId.ARBITRUM]: '0x23ee2343b892b1bb63503a4fabc840e0e2c6810f',
   [ChainId.MOONRIVER]: '',
+  [ChainId.BASE]: '0x23ee2343b892b1bb63503a4fabc840e0e2c6810f',
 }
 
 export const MULTI_USDC_ADDRESS: AddressMap = {
@@ -990,6 +991,12 @@ export const BTC_NATIVE: AddressMap = {
   [ChainId.ETHEREUM]: '',
   [ChainId.FANTOM]: '0x44DF3a3b162826D7354b4e2495AEF097B6862069',   // axlWBTC
   [ChainId.AVALANCHE]: '0x8C162C3Bdd7354b5Cb1A0b18eDBB5725CFE762A3' // SEP22
+}
+
+export const FMULTI_NATIVE: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0xe5fCD208C453b72F476967C174d4530E21aAE14C',
+  [ChainId.AVALANCHE]: ''
 }
 
 export const BTC_ETH: AddressMap = {

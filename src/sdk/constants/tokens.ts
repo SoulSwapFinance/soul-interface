@@ -48,6 +48,7 @@ export const DAI: TokenMap = {
   [ChainId.MOONRIVER]: new Token(ChainId.MOONRIVER, DAI_ADDRESS[ChainId.MOONRIVER], 18, 'DAI', 'Dai Stablecoin'),
   [ChainId.MATIC]: new Token(ChainId.MATIC, DAI_ADDRESS[ChainId.MATIC], 18, 'DAI', 'Dai Stablecoin'),
   [ChainId.ARBITRUM]: new Token(ChainId.ARBITRUM, DAI_ADDRESS[ChainId.ARBITRUM], 18, 'DAI', 'Dai Stablecoin'),
+  [ChainId.BASE]: new Token(ChainId.BASE, DAI_ADDRESS[ChainId.BASE], 18, 'DAI', 'Dai Stablecoin'),
 }
 
 export const MDAI: TokenMap = {
@@ -98,6 +99,7 @@ export const WETH9: TokenMap = {
   [ChainId.AVALANCHE]: new Token(ChainId.AVALANCHE, WETH9_ADDRESS[ChainId.AVALANCHE], 18, 'WETH', 'Wrapped Ether'),
   [ChainId.MOONRIVER]: new Token(ChainId.MOONRIVER, WETH9_ADDRESS[ChainId.MOONRIVER], 18, 'WETH', 'Wrapped Ether'),
   [ChainId.ARBITRUM]: new Token(ChainId.ARBITRUM, WETH9_ADDRESS[ChainId.ARBITRUM], 18, 'WETH', 'Wrapped Ether'),
+  [ChainId.BASE]: new Token(ChainId.BASE, WETH9_ADDRESS[ChainId.BASE], 18, 'WETH', 'Wrapped Ether'),
 }
 export const WNATIVE: TokenMap = {
   [ChainId.ETHEREUM]: WETH9[ChainId.ETHEREUM],
@@ -108,4 +110,5 @@ export const WNATIVE: TokenMap = {
   [ChainId.MOONRIVER]: new Token(ChainId.MOONRIVER, WNATIVE_ADDRESS[ChainId.MOONRIVER], 18, 'WMOVR', 'Wrapped Moonriver'),
   [ChainId.MATIC]: new Token(ChainId.MATIC, WNATIVE_ADDRESS[ChainId.MATIC], 18, 'WMATIC', 'Wrapped Matic'),
   [ChainId.ARBITRUM]: new Token(ChainId.ARBITRUM, WNATIVE_ADDRESS[ChainId.ARBITRUM], 18, 'WETH', 'Wrapped Ether'),
+  [ChainId.BASE]: new Token(ChainId.BASE, WNATIVE_ADDRESS[ChainId.BASE], 18, 'WETH', 'Wrapped Ether'),
 }

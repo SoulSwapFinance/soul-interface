@@ -134,6 +134,17 @@ export const SUPPORTED_NETWORKS: Record<
     rpcUrls: ['https://mainnet.telos.net/evm'],
     blockExplorerUrls: ['https://rpc1.us.telos.net/v2/explore'],
   },
+  // [ChainId.LUKSO]: {
+  //   chainId: '0x2a', // 42
+  //   chainName: 'Lukso',
+  //   nativeCurrency: {
+  //     name: 'Lukso',
+  //     symbol: 'LYX',
+  //     decimals: 18,
+  //   },
+  //   rpcUrls: ['https://rpc.lukso.gateway.fm'],
+  //   blockExplorerUrls: ['https://explorer.execution.mainnet.lukso.network'],
+  // },
 }
 
 // const NetworkModal: FC<{ switchNetwork: (targetChain: number) => void }> = ({ switchNetwork }) => {
@@ -161,8 +172,9 @@ const NetworkModal: FC<{ switchNetwork: (targetChain: number) => void }> = ({ sw
             ChainId.MATIC,
             ChainId.BSC,
             ChainId.FANTOM,
-            // ChainId.BASE,
+            ChainId.BASE,
             ChainId.AVALANCHE,
+            // ChainId.LUKSO,
           ]
             // .sort((key) => (chainId === key ? -1 : 0))
             .map((key: number, i: number) => {
