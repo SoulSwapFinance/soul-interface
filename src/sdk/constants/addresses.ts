@@ -993,6 +993,12 @@ export const BTC_NATIVE: AddressMap = {
   [ChainId.AVALANCHE]: '0x8C162C3Bdd7354b5Cb1A0b18eDBB5725CFE762A3' // SEP22
 }
 
+export const FMULTI_NATIVE: AddressMap = {
+  [ChainId.ETHEREUM]: '',
+  [ChainId.FANTOM]: '0xe5fCD208C453b72F476967C174d4530E21aAE14C',
+  [ChainId.AVALANCHE]: ''
+}
+
 export const BTC_ETH: AddressMap = {
   [ChainId.FANTOM]: '0x1C8cE5628Aa4e641a0e51bc1DF22cF0e56b4F19f',   // axlWBTC-axlETH
 }
