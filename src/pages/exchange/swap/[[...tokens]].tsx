@@ -503,7 +503,7 @@ const Exchange = () => {
             /> */}
             <CustomBanner
               external={true}
-              chains={[ChainId.FANTOM, ChainId.AVALANCHE]}
+              chains={[ChainId.ETHEREUM, ChainId.FANTOM, ChainId.AVALANCHE]}
               link={'https://apps.apple.com/us/app/soulwallet-defi-portal/id6469735252'}
               text={'Download SoulWallet (iOS) ↗'}
               textColor={'white'}

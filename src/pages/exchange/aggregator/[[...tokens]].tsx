@@ -320,7 +320,7 @@ const Aggregator = ({ }) => {
 			<div className={`grid p-1 mt-8 space-y-2 rounded-2xl bg-dark-1000`}>
 				<CustomBanner
 					external={true}
-					chains={[ChainId.FANTOM, ChainId.AVALANCHE]}
+					chains={[ChainId.ETHEREUM, ChainId.FANTOM, ChainId.AVALANCHE]}
 					link={'https://apps.apple.com/us/app/soulwallet-defi-portal/id6469735252'}
 					text={'Download SoulWallet (iOS) ↗'}
 					textColor={'white'}
