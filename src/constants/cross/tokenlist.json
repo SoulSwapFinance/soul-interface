@@ -80,15 +80,6 @@
         "provider": "Anyswap"
       },
       {
-        "name": "Relay Token",
-        "address": "0xAd7F1844696652ddA7959a49063BfFccafafEfe7",
-        "symbol": "RELAY",
-        "decimals": 18,
-        "chainId": 1285,
-        "logoURI": "https://app.solarbeam.io/images/tokens/relay.png",
-        "provider": "RelayChain"
-      },
-      {
         "name": "Avalanche",
         "address": "0x14a0243C333A5b238143068dC3A7323Ba4C30ECB",
         "symbol": "AVAX",
