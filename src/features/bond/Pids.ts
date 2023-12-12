@@ -12,7 +12,7 @@ export const AvalanchePools = [
     token0Address: WNATIVE_ADDRESS[ChainId.AVALANCHE],
     token1Address: SOUL_ADDRESS[ChainId.AVALANCHE],
   },
-  {
+  /*
     pid: 1,
     type: 'swap',
     // summonerPid: 2,
@@ -22,7 +22,7 @@ export const AvalanchePools = [
     lpAddress: SOUL_USDC[ChainId.AVALANCHE],
     token0Address: SOUL_ADDRESS[ChainId.AVALANCHE],
     token1Address: USDC_ADDRESS[ChainId.AVALANCHE],
-  },
+  */
   {
     pid: 2,
     type: 'swap',
