@@ -23,7 +23,7 @@ export const FANTOM: { [key: string]: Token } = {
   // NATIVE: new Token(ChainId.FANTOM, ETH_ADDRESS, 18, NATIVE[ChainId.FANTOM].symbol, NATIVE[ChainId.FANTOM].name),
   SOUL: new Token(ChainId.FANTOM, SOUL_ADDRESS[ChainId.FANTOM], 18, 'SOUL', 'Soul Power'), // 27 AUG
   WFTM: new Token(ChainId.FANTOM, WNATIVE_ADDRESS[ChainId.FANTOM], 18, 'WFTM', 'Wrapped Fantom'), // 27 AUG
-  FMULTI: new Token(ChainId.FANTOM, FMULTI_ADDRESS[ChainId.FANTOM], 18, 'FMULTI', 'Fuck Multi'),
+  FMULTI: new Token(ChainId.FANTOM, FMULTI_ADDRESS[ChainId.FANTOM], 18, 'lzFMULTI', 'fMULTI (LayerZero)'),
   MPX: new Token(ChainId.FANTOM, MPX_ADDRESS[ChainId.FANTOM], 18, 'MPX', 'Morphex'),
   SEANCE: new Token(ChainId.FANTOM, SEANCE_ADDRESS[ChainId.FANTOM], 18, 'SEANCE', 'Seance Circle'), // 27 AUG
   USDC: new Token(ChainId.FANTOM, USDC_ADDRESS[ChainId.FANTOM], 6, 'USDC', 'USD Coin (Axelar)'),

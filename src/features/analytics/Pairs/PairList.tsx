@@ -48,7 +48,7 @@ function PairListName({ pair }: PairListNameProps): JSX.Element {
   const token0Symbol = pair?.token0?.symbol.startsWith('axl') ? (pair.token0.symbol).slice(3,) : pair?.token0?.symbol
   const token1Symbol = pair?.token1?.symbol.startsWith('axl') 
     ? (pair.token1.symbol).slice(3,) 
-      : pair.token1.symbol == 'FUCKMULTI' ? 'FMULTI' 
+      : pair.token1.symbol == 'FUCKMULTI' || pair.token1.symbol == 'lz-fMULTI' || pair.token1.symbol == 'lzFMULTI' ? 'FMULTI' 
         : pair?.token1?.symbol
 
   return (
