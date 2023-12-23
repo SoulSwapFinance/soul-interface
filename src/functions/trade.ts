@@ -41,7 +41,7 @@ export function isTradeBetter(
 
 // add 20%
 export function calculateGasMargin(value: BigNumber): BigNumber {
-  return value.mul(BigNumber.from(10000 + 2000)).div(BigNumber.from(10000))
+  return value.mul(BigNumber.from(10_000 + 2_000)).div(BigNumber.from(10_000))
 }
 
 export function calculateGasPrice(value: BigNumber): BigNumber {
