@@ -796,7 +796,8 @@ export const SPELL_ADDRESS: AddressMap = {
 }
 
 export const FMULTI_ADDRESS: AddressMap = {
-  [ChainId.FANTOM]: '0x6CEbb8cD66Fca7E6aca65841Ae3A04B7884F4de8'
+  [ChainId.FANTOM]: '0xF386eB6780a1e875616b5751794f909095283860' // V2
+  // [ChainId.FANTOM]: '0x6CEbb8cD66Fca7E6aca65841Ae3A04B7884F4de8' // V1
 }
 
 export const ARB_ADDRESS: AddressMap = {

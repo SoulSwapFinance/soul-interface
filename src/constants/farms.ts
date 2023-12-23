@@ -668,22 +668,22 @@ export const POOLS: AddressMap = {
         decimals: 18,
       },
     },
-    '0xe5fCD208C453b72F476967C174d4530E21aAE14C': { // FMULTI-NATIVE √
-      id: 31, // note: 30 is errored
-      address: FMULTI_NATIVE[ChainId.FANTOM].toLowerCase(),
-      token0: {
-        id: FMULTI_ADDRESS[ChainId.FANTOM], // FMULTI
-        name: 'Fuck Multi',
-        symbol: 'FMULTI',
-        decimals: 18,
-      },
-      token1: {
-        id: WNATIVE_ADDRESS[ChainId.FANTOM], // WFTM
-        name: 'Wrapped Fantom',
-        symbol: 'WFTM',
-        decimals: 18,
-      },
-    },
+    // '0xe5fCD208C453b72F476967C174d4530E21aAE14C': { // FMULTI-NATIVE √
+    //   id: 31, // note: 30 is errored
+    //   address: FMULTI_NATIVE[ChainId.FANTOM].toLowerCase(),
+    //   token0: {
+    //     id: FMULTI_ADDRESS[ChainId.FANTOM], // FMULTI
+    //     name: 'Fuck Multi',
+    //     symbol: 'FMULTI',
+    //     decimals: 18,
+    //   },
+    //   token1: {
+    //     id: WNATIVE_ADDRESS[ChainId.FANTOM], // WFTM
+    //     name: 'Wrapped Fantom',
+    //     symbol: 'WFTM',
+    //     decimals: 18,
+    //   },
+    // },
     '0xBBdA07f2121274ecb1a08077F37A60F7E0D36629': { // USDC-USDC √
       id: 32,
       address: '0xbbda07f2121274ecb1a08077f37a60f7e0d36629',

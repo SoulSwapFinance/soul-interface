@@ -586,11 +586,11 @@
     },
     {
       "chainId": 250,
-      "name": "Fuck Multi",
-      "address": "0x6CEbb8cD66Fca7E6aca65841Ae3A04B7884F4de8",
-      "symbol": "FMULTI",
+      "name": "fMULTI (LayerZero)",
+      "address": "0xF386eB6780a1e875616b5751794f909095283860",
+      "symbol": "lzFMULTI",
       "decimals": 18,
-      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0x6CEbb8cD66Fca7E6aca65841Ae3A04B7884F4de8/logo.png"
+      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets/0xF386eB6780a1e875616b5751794f909095283860/logo.png"
     },
     {
       "chainId": 250,

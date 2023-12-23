@@ -1,7 +1,7 @@
 import { AVAX_ADDRESS, ChainId, DAI_ADDRESS, MULTI_AVAX_ADDRESS, MULTI_DAI_ADDRESS, Token } from 'sdk'
 
 export const LZUSDC = new Token(ChainId.FANTOM, '0x28a92dde19D9989F39A49905d7C9C2FAc7799bDf', 6, 'lzUSDC', 'USDC (LayerZero)')
-export const FMULTI = new Token(ChainId.FANTOM, '0x6CEbb8cD66Fca7E6aca65841Ae3A04B7884F4de8', 6, 'FMULTI', 'Fuck Multi')
+export const FMULTI = new Token(ChainId.FANTOM, '0xF386eB6780a1e875616b5751794f909095283860', 6, 'lzFMULTI', 'fMULTI (LayerZero)')
 export const MUSDC = new Token(ChainId.FANTOM, '0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6, 'mUSDC', 'USDC (Multichain)')
 export const MDAI = new Token(ChainId.FANTOM, MULTI_DAI_ADDRESS[ChainId.FANTOM], 18, 'mDAI', 'DAI (Multichain)')
 export const USDC = new Token(ChainId.FANTOM, '0x1B6382DBDEa11d97f24495C9A90b7c88469134a4', 6, 'USDC', 'USD Coin (Axelar)')
