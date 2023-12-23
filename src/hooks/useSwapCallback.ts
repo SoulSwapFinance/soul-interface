@@ -606,6 +606,7 @@ export function useSwapCallback(
               .estimateGas(tx)
               .then((gasEstimate) => {
                 console.log('returning gas estimate')
+                console.log(` gas estimate: ${gasEstimate.toString()}`)
                 return {
                   call,
                   gasEstimate,
@@ -666,6 +667,7 @@ export function useSwapCallback(
           // gasPrice: !eip1559 && chainId === ChainId.HARMONY ? BigNumber.from('2000000000') : undefined,
           ...(value && !isZero(value) ? { value } : {}),
         }
+        // console.log('gasEstimate' in bestCallOption ? { gasLimit: calculateGasMargin(bestCallOption.gasEstimate) } : {})
 
         let txResponse: Promise<TransactionResponseLight>
         if (
