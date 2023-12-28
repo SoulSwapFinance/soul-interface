@@ -12,7 +12,6 @@ import { featureEnabled } from 'functions/feature'
 import { Feature as Features } from 'enums'
 import { useActiveWeb3React } from 'hooks'
 
-
 export const Global: FC = () => (
   <div className="relative items-center w-full">
     <div className="w-full">
