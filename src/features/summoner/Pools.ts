@@ -122,17 +122,17 @@ export const AvalanchePools = [
 ]
 
 export const InactiveFantomPools = [
-  { // 20
-    pid: 31, // pid: 30 <-- mistake
-    type: 'swap',
-    decimals: 18,
-    token0Symbol: 'WFTM',
-    token1Symbol: 'FMULTI',
-    lpSymbol: 'FTM-FMULTI',
-    lpAddress: "0xe5fCD208C453b72F476967C174d4530E21aAE14C",
-    token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
-    token1Address: FMULTI_ADDRESS[ChainId.FANTOM],
-  },
+  // { // 20
+  //   pid: 31, // pid: 30 <-- mistake
+  //   type: 'swap',
+  //   decimals: 18,
+  //   token0Symbol: 'WFTM',
+  //   token1Symbol: 'FMULTI',
+  //   lpSymbol: 'FTM-FMULTI',
+  //   lpAddress: "0xe5fCD208C453b72F476967C174d4530E21aAE14C",
+  //   token0Address: WNATIVE_ADDRESS[ChainId.FANTOM],
+  //   token1Address: FMULTI_ADDRESS[ChainId.FANTOM],
+  // },
 ]
 
 export const FantomPools = [
