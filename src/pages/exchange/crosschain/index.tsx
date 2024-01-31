@@ -23,6 +23,23 @@ import { CustomBanner } from 'components/Banner'
 import LimitHeader from 'features/limit/LimitHeader'
 import { RPC } from 'connectors'
 
+// import squid from "squid"
+
+// const result = await squid.route(
+//     0.183, 
+//     "eth", 
+//     "ethereum",
+//     "glmr", 
+//     "moonbeam",
+//     multicall
+// );
+// const { route } = result;
+
+// const tx = squid.executeRoute(signer, route)
+// await tx.wait();
+
+// const status = await squid.getStatus(tx.hash);
+
 //   const { route } = await squid.getRoute({
 //     toAddress: account, // signer.address,
 //     fromChain: avalancheId,

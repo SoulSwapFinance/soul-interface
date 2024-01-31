@@ -13,7 +13,16 @@ import { Feature } from 'enums'
 
 export const FarmList = () => {
   const { chainId } = useActiveWeb3React()
-  const retiredEnabled = [ChainId.FANTOM].includes(chainId) ? true : false
+  const isAvalancheInactive = InactiveAvalanchePools.length > 0
+  const isFantomInactive = InactiveFantomPools.length > 0
+
+  const retiredEnabled = () => {
+    const { chainId } = useActiveWeb3React()
+    const enabled = [ChainId.AVALANCHE].includes(chainId) ? isAvalancheInactive : isFantomInactive
+    return enabled
+  }
+  
+  // [ChainId.FANTOM].includes(chainId) ? true : false
   // const SummonerContract = useSummonerContract()
   const ftmList = FantomPools.map((farm) => (
     <ActiveRow
@@ -80,7 +89,7 @@ export const FarmList = () => {
       <Typography className="text-2xl bg-dark-1000 mb-2 rounded-2xl m-1 p-4 border border-purple font-bold text-center">SoulSwap Farms</Typography>
       <Active />
       {chainId == ChainId.AVALANCHE ? avaxList : ftmList}
-      {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) && retiredEnabled && <Typography className="text-2xl bg-dark-1000 mb-2 rounded-2xl m-1 p-4 border border-avaxRed font-bold text-center">Retired Farms</Typography>}
+      {[ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId) && retiredEnabled() && <Typography className="text-2xl bg-dark-1000 mb-2 rounded-2xl m-1 p-4 border border-avaxRed font-bold text-center">Retired Farms</Typography>}
       {retiredEnabled && (chainId == ChainId.AVALANCHE ? inactiveAvaxList : inactiveFtmList)}
     </div>
   )
