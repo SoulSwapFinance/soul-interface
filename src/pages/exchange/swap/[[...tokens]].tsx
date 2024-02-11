@@ -694,7 +694,7 @@ const Exchange = () => {
               ) : showWrap // && useSwap 
                 ? (
                   <Button
-                    color={`${getChainColorCode(chainId ?? ChainId.FANTOM)}`}
+                    color={`ftmBlue`}
                     disabled={Boolean(wrapInputError)}
                     onClick={onWrap}
                     className="rounded-2xl w-full md:rounded"
