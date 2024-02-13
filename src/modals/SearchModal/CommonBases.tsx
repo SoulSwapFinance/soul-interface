@@ -1,24 +1,14 @@
 import { ChainId, Currency, CurrencyAmount, NATIVE, ZERO } from 'sdk'
-// import { Button } from 'components/Button'
 import { COMMON_BASES } from 'constants/routing'
-// import { CurrencyLogo } from 'components/CurrencyLogo'
-// import QuestionHelper from 'components/QuestionHelper'
-import { classNames, currencyId, formatNumber } from 'functions'
-// import { useCurrencyBalance, useTokenBalance } from 'state/wallet/hooks'
-
+import { currencyId } from 'functions'
 import { useCurrencyModalContext } from 'modals/SearchModal/CurrencySearchModal'
 import { useActiveWeb3React } from 'services/web3'
 import React, { FC } from 'react'
-// import Typography from 'components/Typography'
 import { getChainColorCode } from 'constants/chains'
-// import { useCurrencyBalance } from 'state/wallet/hooks'
-// import Loader from 'components/Loader'
-import { useTokenInfo, useUserInfo, useUserTokenInfo } from 'hooks/useAPI'
 import { CurrencyRow } from './CurrencyList'
 
 const CommonBases: FC = () => {
-  const { account, chainId } = useActiveWeb3React()
-  const { currency: selectedCurrency, onSelect } = useCurrencyModalContext()
+  const { chainId } = useActiveWeb3React()
 
   // const tokenBalance = useCurrencyBalance(chainId, account, selectedCurrency)
   const bases = typeof chainId !== 'undefined' ? COMMON_BASES[chainId ?? ChainId.FANTOM] ?? [] : []
@@ -45,16 +35,16 @@ const CommonBases: FC = () => {
         className={`bg-dark-900 w-full rounded-2xl p-2 border border-purple`}
       >
         {bases.map((currency: Currency) => {
-          const isSelected = selectedCurrency?.equals(currency)
-          const { userTokenInfo } = useUserTokenInfo(account, currencyId(currency))
-          const balance = formatNumber(Number(userTokenInfo?.balance) / 10 ** currency.decimals, false, true)
+          // const isSelected = selectedCurrency?.equals(currency)
+          // const { userTokenInfo } = useUserTokenInfo(account, currencyId(currency))
+          // const balance = formatNumber(Number(userTokenInfo?.balance) / 10 ** currency.decimals, false, true)
 
           return (
             <CurrencyRow 
             chainId={chainId} 
             // currency={selectedCurrency} 
             currency={currency}
-              key={currencyId(currency)}
+            key={currencyId(currency)}
             style={undefined}
           />
             // <Button
