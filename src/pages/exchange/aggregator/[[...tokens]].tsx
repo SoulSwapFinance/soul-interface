@@ -386,7 +386,7 @@ const Aggregator = ({ }) => {
 				{route && account && (
 					<Button
 						variant={'filled'}
-						color={getChainColorCode(chainId)}
+						color={'ftmBlue'}
 						isLoading={swapMutation.isLoading || isApproveLoading}
 						loadingText="Preparing Transaction"
 						colorScheme={'messenger'}
@@ -403,7 +403,7 @@ const Aggregator = ({ }) => {
 				)}
 				{inputToken && outputToken && (
 					<Routes>
-						<div className={`flex flex-col justify-center p-2 -ml-4 -mr-2 sm:-mr-4 border border-dark-800 hover:border-${getChainColorCode(chainId)} border-1 rounded rounded-xl`}>
+						<div className={`flex flex-col justify-center p-2 -ml-4 -mr-2 sm:-mr-4 border border-dark-800 hover:border-${'ftmBlue'} border-1 rounded rounded-xl`}>
 							{isLoading ? <Loader loaded={!isLoading} /> : null}
 							{normalizedRoutes.map((r, i) => (
 								<Route
