@@ -290,7 +290,7 @@ export function ButtonConfirmed({
       />
     )
   } else {
-    return <Button color={disabled ? 'gray' : getChainColorCode(chainId)} size="lg" disabled={disabled} {...rest} />
+    return <Button color={disabled ? 'gray' : 'ftmBlue'} size="lg" disabled={disabled} {...rest} />
   }
 }
 
@@ -307,6 +307,6 @@ export function ButtonError({
   if (error) {
     return <Button disabled={disabled} color="red" {...rest} />
   } else {
-    return <Button color={disabled ? 'gray' : getChainColorCode(chainId)} disabled={disabled} {...rest} />
+    return <Button color={disabled ? 'gray' : 'ftmBlue'} disabled={disabled} {...rest} />
   }
 }

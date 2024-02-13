@@ -139,7 +139,7 @@ export default function PoolFinder() {
               >
                 {/* {`Pool Found!`} */}
                 <Typography
-                  className={`flex border border-[${getChainColor(chainId)}] p-3 rounded rounded-xl w-full justify-center text-xl bg-${getChainColorCode(chainId)}`}
+                  className={`flex border border-[${getChainColor(chainId)}] p-3 rounded rounded-xl w-full justify-center text-xl bg-ftmBlue`}
                   onClick={() => handleLink('/pool')}
                 >
                   <a className={`text-center font-bold`}>{`Manage Position`}</a>

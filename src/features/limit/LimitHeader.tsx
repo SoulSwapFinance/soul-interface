@@ -30,8 +30,8 @@ export default function LimitHeader({ inputCurrency, outputCurrency }): JSX.Elem
     <div className={`grid grid-cols-${totalCols} rounded-2xl m-4 bg-dark-900`}>
       {featureEnabled(Feature.AMM, chainId) &&
       <NavLink
-        className={isExchange ? classNames("font-bold text-high-emphesis", `bg-${getChainColorCode(chainId)} rounded-2xl`) : ''}
-        // activeClassName={classNames("font-bold text-high-emphesis rounded-2xl", `bg-${getChainColorCode(chainId)}`)}
+        className={isExchange ? classNames("font-bold text-high-emphesis", `bg-purple rounded-2xl`) : ''}
+        // activeClassName={classNames("font-bold text-high-emphesis rounded-2xl", `bg-purple`)}
         // href={`/exchange/swap?inputCurrency=${input ? currencyId(input) : NATIVE[chainId ?? ChainId.FANTOM].symbol}&outputCurrency=${output ? currencyId(output) : SOUL_ADDRESS[chainId ?? ChainId.FANTOM]}`}
         href={
           inputCurrency && outputCurrency ?
@@ -52,8 +52,8 @@ export default function LimitHeader({ inputCurrency, outputCurrency }): JSX.Elem
         // onClick={(event) => {
         //   if (!outputCurrency) event.preventDefault()
         // }}
-        className={isLimit ? classNames("font-bold text-high-emphesis", `bg-${getChainColorCode(chainId)} rounded-2xl`) : ''}
-        // activeClassName={classNames("text-high-emphesis font-bold rounded-2xl", `bg-${getChainColorCode(chainId)} rounded-2xl`)}
+        className={isLimit ? classNames("font-bold text-high-emphesis", `bg-purple rounded-2xl`) : ''}
+        // activeClassName={classNames("text-high-emphesis font-bold rounded-2xl", `bg-purple rounded-2xl`)}
         href={
           inputCurrency && outputCurrency ?
           `/exchange/swap/limit/${currencyId(inputCurrency)}/${currencyId(outputCurrency)}`
@@ -72,8 +72,8 @@ export default function LimitHeader({ inputCurrency, outputCurrency }): JSX.Elem
         // onClick={(event) => {
         //   if (!outputCurrency) event.preventDefault()
         // }}
-        className={isAggregator ? classNames("font-bold text-high-emphesis", `bg-${getChainColorCode(chainId)} rounded-2xl`) : ''}
-        activeClassName={classNames("text-high-emphesis font-bold rounded-2xl", `bg-${getChainColorCode(chainId)} rounded-2xl`)}
+        className={isAggregator ? classNames("font-bold text-high-emphesis", `bg-purple rounded-2xl`) : ''}
+        activeClassName={classNames("text-high-emphesis font-bold rounded-2xl", `bg-purple rounded-2xl`)}
         href={
           inputCurrency && outputCurrency ?
           `/exchange/aggregator/${currencyId(inputCurrency)}/${currencyId(outputCurrency)}`
@@ -91,8 +91,8 @@ export default function LimitHeader({ inputCurrency, outputCurrency }): JSX.Elem
         // onClick={(event) => {
         //   if (!outputCurrency) event.preventDefault()
         // }}
-        className={isCrossChain ? classNames("font-bold text-high-emphesis", `bg-${getChainColorCode(chainId)} rounded-2xl`) : ''}
-        // activeClassName={classNames("text-high-emphesis font-bold rounded-2xl", `bg-${getChainColorCode(chainId)} rounded-2xl`)}
+        className={isCrossChain ? classNames("font-bold text-high-emphesis", `bg-purple rounded-2xl`) : ''}
+        // activeClassName={classNames("text-high-emphesis font-bold rounded-2xl", `bg-purple rounded-2xl`)}
         href={'/exchange/crosschain'}
       >
         <Typography
