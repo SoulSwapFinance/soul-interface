@@ -575,7 +575,7 @@ export default function Add() {
               >
                 <Button
                   variant={'filled'}
-                  color={`${getChainColorCode(chainId ?? 250)}`}
+                  color={`ftmBlue`}
                   primaryColor={'black'}
                 >
                   <div className={`text-white flex justify-center items-center space-x-2 font-medium text-center cursor-pointer text-base hover:text-high-emphesis`}>
