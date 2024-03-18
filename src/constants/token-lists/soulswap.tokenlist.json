@@ -594,6 +594,14 @@
     },
     {
       "chainId": 250,
+      "name": "TinHatCat",
+      "address": "0x479673391b3818f5e3ED2fa69A58e13d685BEcf6",
+      "symbol": "THC",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/fantom/assets/0x479673391b3818f5e3ED2fa69A58e13d685BEcf6/logo.png"
+    },
+    {
+      "chainId": 250,
       "name": "Morphex",
       "address": "0x66eEd5FF1701E6ed8470DC391F05e27B1d0657eb",
       "symbol": "MPX",
