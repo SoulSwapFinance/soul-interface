@@ -16,7 +16,8 @@ export const SPELL = new Token(ChainId.FANTOM, '0x468003B688943977e6130F4F68F23a
 export const BNB = new Token(ChainId.FANTOM, '0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454', 18, 'BNB', 'Binance')
 export const ENCHANT = new Token(ChainId.FANTOM, '0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a', 18, 'ENCHANT', 'Enchantment')
 export const MPX = new Token(ChainId.FANTOM, '0x66eEd5FF1701E6ed8470DC391F05e27B1d0657eb', 18, 'MPX', 'Morphex')
-
+export cont THC = new Token(ChainId.FANTOM,
+'0x479673391b3818f5e3ED2fa69A58e13d685BEcf6', 18, 'THC', 'Tinhatcat')
 export const FUSD = new Token(ChainId.FANTOM, '0xAd84341756Bf337f5a0164515b1f6F993D194E1f', 18, 'FUSD', 'Fantom USD')
 export const GRIMEVO = new Token(ChainId.FANTOM, '0x0a77866C01429941BFC7854c0c0675dB1015218b', 18, 'EVO', 'Grim EVO')
 export const MAVAX = new Token(ChainId.FANTOM, MULTI_AVAX_ADDRESS[ChainId.FANTOM], 18, 'mAVAX', 'Avalanche (Multichain)')
