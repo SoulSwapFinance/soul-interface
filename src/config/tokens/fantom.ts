@@ -14,6 +14,7 @@ export const MIM = new Token(ChainId.FANTOM, '0x82f0B8B456c1A451378467398982d483
 export const ICE = new Token(ChainId.FANTOM, '0xf16e81dce15B08F326220742020379B855B87DF9', 18, 'ICE', 'IceToken')
 export const SPELL = new Token(ChainId.FANTOM, '0x468003B688943977e6130F4F68F23aad939a1040', 18, 'SPELL', 'SpellToken')
 export const BNB = new Token(ChainId.FANTOM, '0xD67de0e0a0Fd7b15dC8348Bb9BE742F3c5850454', 18, 'BNB', 'Binance')
+export const AI = new Token(ChainId.FANTOM, '0x2598c30330D5771AE9F983979209486aE26dE875', 18, 'AI', 'AnyInu')
 export const ENCHANT = new Token(ChainId.FANTOM, '0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a', 18, 'ENCHANT', 'Enchantment')
 export const MPX = new Token(ChainId.FANTOM, '0x66eEd5FF1701E6ed8470DC391F05e27B1d0657eb', 18, 'MPX', 'Morphex')
 export const THC = new Token(ChainId.FANTOM,

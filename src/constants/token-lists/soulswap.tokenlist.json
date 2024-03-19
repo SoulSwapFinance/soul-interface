@@ -482,6 +482,14 @@
     },
     {
       "chainId": 250,
+      "name": "AnyInu",
+      "address": "0x2598c30330D5771AE9F983979209486aE26dE875",
+      "symbol": "AI",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x2598c30330D5771AE9F983979209486aE26dE875/logo.png"
+    },
+    {
+      "chainId": 250,
       "name": "DAI (Axelar)",
       "address": "0xD5d5350F42CB484036A1C1aF5F2DF77eAFadcAFF",
       "symbol": "axlDAI",
