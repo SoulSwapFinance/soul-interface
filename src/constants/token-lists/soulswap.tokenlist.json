@@ -530,6 +530,14 @@
     },
     {
       "chainId": 250,
+      "name": "Fanties",
+      "address": "0x5a27c97Bf717F455c9eeb838a53Fb9F044509C59",
+      "symbol": "FANTIE",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x5a27c97Bf717F455c9eeb838a53Fb9F044509C59/logo.png"
+    },
+    {
+      "chainId": 250,
       "name": "Liquid Driver",
       "address": "0x10b620b2dbAC4Faa7D7FFD71Da486f5D44cd86f9",
       "symbol": "LQDR",
