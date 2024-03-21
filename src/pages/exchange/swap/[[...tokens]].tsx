@@ -61,7 +61,7 @@ import NetworkGuard from 'guards/Network'
 
 const Exchange = () => {
   const loadedUrlParams = useDefaultsFromURLSearch()
-  const { active, account, chainId } = useWeb3React()
+  const { account, chainId } = useWeb3React()
   // const contextNetwork = useWeb3React(NetworkContextName)
   // NOTE: this sets "showConnect" when account is not active.
   // const [ showConnect, setShowConnect ] = useState(true)
@@ -461,47 +461,10 @@ const Exchange = () => {
           onConfirm={handleConfirmTokenWarning}
         />
       }
-      {/* {![ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId ?? ChainId.FANTOM) &&
-        <div className="flex flex-col gap-3 mt-12 justify-center">
-          <SwapDropdown inputCurrency={currencyA} outputCurrency={currencyB} />
-          <NavLink href={"/aggregator"}>
-            <Button
-              variant="outlined"
-              color={`purple`}
-              size="lg"
-            >
-              <a className="block text-white p-0 -m-3 text-md transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                <span>{'SoulSwap Exchange'}</span>
-                <br />
-                <span>{'Click Here to use our Meta-Aggregator'}</span>
-              </a>
-            </Button>
-          </NavLink>
-        </div>} */}
-
-      {/* {[ChainId.ETHEREUM, ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId ?? ChainId.FANTOM) && */}
       <DoubleGlowShadowV2>
         <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
-          {/* <FollowBanner /> */}
-
-          {/* <SwapLayoutCard> */}
-          {/* <div
-              className={`flex m-6 border-4 p-4 border-dark-800 rounded-2xl`}
-            >
-              <Image src={SWAP_BANNER}
-                height={180}
-                width={720}
-                alt={'swap banner'}
-              />
-          </div> */}
-          {/* <div className="p-4 px-2 space-y-4 rounded bg-dark-900" style={{ zIndex: 1 }}> */}
-          {/* <div className={`my-2 border-2 border-[${getChainColor(chainId ?? ChainId.FANTOM)}]`} /> */}
           <>
-            {/* <div className={`my-12`} /> */}
-            {/* <SwapDropdown
-              inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]}
-            /> */}
-            <CustomBanner
+            {/* <CustomBanner
               external={true}
               chains={[ChainId.ETHEREUM, ChainId.FANTOM, ChainId.AVALANCHE]}
               link={'https://apps.apple.com/us/app/soulwallet-defi-portal/id6469735252'}
@@ -509,7 +472,7 @@ const Exchange = () => {
               textColor={'white'}
               color={'ftmBlue'}
               className={`animate-pulse border-4 border-dark-800 rounded-2xl`}
-            />
+            /> */}
             <LimitHeader
               inputCurrency={currencies[Field.INPUT]}
               outputCurrency={currencies[Field.OUTPUT]}

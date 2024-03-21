@@ -1,6 +1,7 @@
 import { injected } from '../connectors'
 import { useEffect } from 'react'
 import { useWeb3React as useWeb3ReactCore } from '@web3-react/core'
+import { ChainId } from 'sdk'
 
 /**
  * Use for network and injected - logs user in
@@ -12,7 +13,7 @@ function useInactiveListener(suppress = false) {
   useEffect(() => {
     const { ethereum } = window
 
-    if (chainId == 1 && !active && !error && !suppress) {
+    if (chainId == ChainId.ETHEREUM && !active && !error && !suppress) {
     // if (ethereum && ethereum.on && !active && !error && !suppress) {
       const handleChainChanged = () => {
         // eat errors
@@ -40,6 +41,8 @@ function useInactiveListener(suppress = false) {
         }
       }
     }
+
+    // console.log('useInactiveListener')
     return undefined
   }, [active, error, suppress, activate])
 }
