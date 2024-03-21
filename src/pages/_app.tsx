@@ -33,6 +33,7 @@ import ModalProvider from 'contexts/ModalProvider'
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client'
 // import { RPC } from 'connectors'
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ChainId } from 'sdk'
 
 const link = createHttpLink({
   // uri: RPC[250],
@@ -93,7 +94,7 @@ function MyApp({ Component, pageProps, fallback, err }) {
   function Gelato({ children }: { children?: React.ReactNode }) {
     const { library, chainId, account } = useActiveWeb3React()
     return (
-      <GelatoProvider library={library} chainId={chainId} account={account ?? undefined}>
+      <GelatoProvider library={library} chainId={chainId ?? ChainId.FANTOM} account={account ?? undefined}>
         {children}
       </GelatoProvider>
     )
