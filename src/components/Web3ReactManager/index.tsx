@@ -15,11 +15,12 @@ import Loader from '../Loader'
 
 export default function Web3ReactManager({ children }: { children: JSX.Element }) {
   const { active } = useWeb3React()
-  const { active: networkActive, error: networkError, activate: activateNetwork } = useWeb3React(NetworkContextName)
+  const { active: networkActive, error: networkError, activate: activateNetwork, chainId: chainId } = useWeb3React(NetworkContextName)
+  const isMobile = window.innerWidth <= 460
   // const router = useRouter()
   // try to eagerly connect to an injected provider, if it exists and has granted access already
   // note: removed to allow always and prevent blank screen...
-  const triedEager = true // useEagerConnect()
+  const triedEager = isMobile ? useEagerConnect() : !chainId ? true : useEagerConnect()
 
   // after eagerly trying injected, if the network connect ever isn't active or in an error state, activate it
   useEffect(() => {
