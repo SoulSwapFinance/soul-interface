@@ -464,7 +464,7 @@ const Exchange = () => {
       <DoubleGlowShadowV2>
         <div className={`grid p-1 mt-4 space-y-2 rounded-2xl bg-dark-1000`}>
           <>
-            {/* <CustomBanner
+            <CustomBanner
               external={true}
               chains={[ChainId.ETHEREUM, ChainId.FANTOM, ChainId.AVALANCHE]}
               link={'https://apps.apple.com/us/app/soulwallet-defi-portal/id6469735252'}
@@ -472,7 +472,7 @@ const Exchange = () => {
               textColor={'white'}
               color={'ftmBlue'}
               className={`animate-pulse border-4 border-dark-800 rounded-2xl`}
-            /> */}
+            />
             <LimitHeader
               inputCurrency={currencies[Field.INPUT]}
               outputCurrency={currencies[Field.OUTPUT]}
