@@ -20,7 +20,7 @@ export default function Web3ReactManager({ children }: { children: JSX.Element }
   // const router = useRouter()
   // try to eagerly connect to an injected provider, if it exists and has granted access already
   // note: removed to allow always and prevent blank screen...
-  const triedEager = isMobile ? useEagerConnect() : !chainId ? true : useEagerConnect()
+  const triedEager = isMobile ? useEagerConnect() : true
 
   // after eagerly trying injected, if the network connect ever isn't active or in an error state, activate it
   useEffect(() => {
