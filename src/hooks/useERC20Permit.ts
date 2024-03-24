@@ -70,6 +70,9 @@ const PERMITTABLE_TOKENS: {
   [ChainId.ARBITRUM]: {
     // [USDC_ADDRESS[ChainId.ARBITRUM]]: { type: PermitType.AMOUNT, name: 'USD Coin' },
   },
+  [ChainId.BLAST]: {
+    // [USDC_ADDRESS[ChainId.ARBITRUM]]: { type: PermitType.AMOUNT, name: 'USD Coin' },
+  },
   [ChainId.BASE]: {
     // [USDC_ADDRESS[ChainId.BASE]]: { type: PermitType.AMOUNT, name: 'USD Coin' },
   },

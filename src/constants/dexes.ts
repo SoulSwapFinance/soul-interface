@@ -7,6 +7,7 @@ export const DEX_TO_COMPARE: { [chainId in ChainId]?: string } = {
   [ChainId.ETHEREUM]: 'uniswapv3',
   [ChainId.FANTOM]: 'spookyswap',
   [ChainId.ARBITRUM]: 'sushiswap',
+  // [ChainId.BLAST]: 'thruster', // todo
   [ChainId.BASE]: 'sushiswap', // todo
 }
 

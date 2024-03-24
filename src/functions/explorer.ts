@@ -21,6 +21,16 @@ const builders = {
         return `${prefix}/${type}/${data}`
     }
   },
+  
+  blast: (data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
+    const prefix = 'https://blastscan.io'
+    switch (type) {
+      case 'transaction':
+        return `${prefix}/tx/${data}`
+      default:
+        return `${prefix}/${type}/${data}`
+    }
+  },
 
   teloscan: (data: string, type: 'transaction' | 'token' | 'address' | 'block') => {
     const prefix = 'https://teloscan.io'
@@ -243,6 +253,10 @@ const chains: ChainObject = {
   [ChainId.ARBITRUM]: {
     // chainName: '',
     builder: builders.arbitrum,
+  },
+  [ChainId.BLAST]: {
+    // chainName: '',
+    builder: builders.blast,
   },
 }
 

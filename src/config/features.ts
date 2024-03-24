@@ -48,6 +48,13 @@ const features: FeatureMap = {
     // Feature.ANALYTICS,
     // Feature.UNDERWORLD
   ],
+  [ChainId.BLAST]: [
+    Feature.XSWAP,
+    Feature.CROSSCHAIN,
+    // Feature.AMM,
+    // Feature.ANALYTICS,
+    // Feature.UNDERWORLD
+  ],
   [ChainId.BASE]: [
     Feature.XSWAP,
     Feature.CROSSCHAIN,

@@ -50,7 +50,7 @@ export function getChainLogoURL(chainId: number) {
         : chainId == ChainId.BSC ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/binance/assets'
           : chainId == ChainId.MATIC ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/polygon/assets'
             : chainId == ChainId.ARBITRUM ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/arbitrum/assets'
-              : chainId == ChainId.BLAST ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/blast/assets'
+              : chainId == ChainId.BLAST ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/blast/assets'
                 : chainId == ChainId.MOONRIVER ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/moonriver/assets'
                   : 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets'
 

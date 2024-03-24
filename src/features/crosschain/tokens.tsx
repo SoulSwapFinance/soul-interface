@@ -19,6 +19,7 @@ export enum SupportedChains {
     // TELOS = 40,
     BASE = ChainId.BASE,
     ARBITRUM = 42161,
+    BLAST = ChainId.BLAST,
     // MOONRIVER = 1285,
   }
 
@@ -113,6 +114,15 @@ export const NATIVE_TOKEN: TokenMap = {
         logoURI: ethLogo,
         coingeckoId: ethId
     },
+    [ChainId.BLAST]: {
+        chainId: ChainId.BLAST,
+        address: NATIVE_ADDRESS,
+        name: 'Ether',
+        symbol: 'ETH',
+        decimals: 18,
+        logoURI: ethLogo,
+        coingeckoId: ethId
+    },
     [ChainId.ARBITRUM]: {
         chainId: 42161,
         address: NATIVE_ADDRESS,
@@ -152,6 +162,15 @@ export const WNATIVE_TOKEN: TokenMap = {
         decimals: 18,
         logoURI: bnbLogo,
         coingeckoId: bnbId
+    },
+    [ChainId.BLAST]: {
+        chainId: 56,
+        address: WNATIVE_ADDRESS[ChainId.BLAST],
+        name: 'Wrapped ETH',
+        symbol: 'WETH',
+        decimals: 18,
+        logoURI: ethLogo,
+        coingeckoId: ethId
     },
     [ChainId.MATIC]: {
         chainId: 137,
@@ -240,6 +259,15 @@ export const ETH_TOKEN: TokenMap = {
         logoURI: wethLogo,
         coingeckoId: ethId
     },
+    [ChainId.BLAST]: {
+        chainId: 42161,
+        address: WETH_ADDRESS[ChainId.BLAST],
+        name: 'Wrapped ETH',
+        symbol: 'WETH',
+        decimals: 18,
+        logoURI: wethLogo,
+        coingeckoId: ethId
+    },
     [ChainId.AVALANCHE]: {
         chainId: 43114,
         address: WETH_ADDRESS[43114],
@@ -272,6 +300,7 @@ export const FTM_TOKEN: TokenMap = {
         coingeckoId: ftmId
     },
     [ChainId.MATIC]: undefined,
+    [ChainId.BLAST]: undefined,
     [ChainId.FANTOM]: {
         chainId: 250,
         address: WNATIVE_ADDRESS[250],
@@ -309,6 +338,7 @@ export const AVAX_TOKEN: TokenMap = {
         coingeckoId: avaxId
     },
     [ChainId.BASE]: undefined,
+    [ChainId.BLAST]: undefined,
     [ChainId.ARBITRUM]: undefined,
     [ChainId.AVALANCHE]: {
         chainId: 43114,
@@ -362,6 +392,7 @@ export const MATIC_TOKEN: TokenMap = {
     [ChainId.BASE]: undefined,
     [ChainId.ARBITRUM]: undefined,
     [ChainId.AVALANCHE]: undefined,
+    [ChainId.BLAST]: undefined,
 }
 // [.√.]
 export const USDC_TOKEN: TokenMap = {
@@ -428,6 +459,7 @@ export const USDC_TOKEN: TokenMap = {
         logoURI: usdcLogo,
         coingeckoId: usdcId
     },
+    [ChainId.BLAST]: undefined
 }
 
 // [.√.]
@@ -495,6 +527,7 @@ export const AXL_TOKEN: TokenMap = {
         logoURI: axlLogo,
         coingeckoId: axlId
     },
+    [ChainId.BLAST]: undefined,
 }
 
 // [.√.]
@@ -536,6 +569,7 @@ export const WBTC_TOKEN: TokenMap = {
         coingeckoId: wbtcId
     },
     [ChainId.BASE]: undefined,
+    [ChainId.BLAST]: undefined,
     [ChainId.ARBITRUM]: {
         chainId: 42161,
         address: WBTC_ADDRESS[42161],
@@ -596,6 +630,7 @@ export const LINK_TOKEN: TokenMap = {
         coingeckoId: linkId
     },
     [ChainId.BASE]: undefined,
+    [ChainId.BLAST]: undefined,
     [ChainId.ARBITRUM]: {
         chainId: 42161,
         address: LINK_ADDRESS[42161],
@@ -665,6 +700,7 @@ export const MIM_TOKEN: TokenMap = {
         logoURI: mimLogo,
         coingeckoId: mimId
     },
+    [ChainId.BLAST]: undefined,
 }
 
 // [.√.]
@@ -697,6 +733,7 @@ export const USDT_TOKEN: TokenMap = {
         coingeckoId: usdtId
     },
     [ChainId.FANTOM]: undefined,
+    [ChainId.BLAST]: undefined,
     [ChainId.BASE]: {
         chainId: 8453,
         address: USDT_ADDRESS[8453],
@@ -738,6 +775,7 @@ export const DAI_TOKEN: TokenMap = {
         coingeckoId: daiId
     },
     [ChainId.BSC]: undefined,
+    [ChainId.BLAST]: undefined,
     [ChainId.MATIC]: {
         chainId: 137,
         address: DAI_ADDRESS[137],
@@ -781,6 +819,7 @@ export const SUSHI_TOKEN: TokenMap = {
         coingeckoId: sushiId
     },
     [ChainId.BSC]: undefined,
+    [ChainId.BLAST]: undefined,
     [ChainId.MATIC]: {
         chainId: 137,
         address: SUSHI_ADDRESS[137],
@@ -833,6 +872,7 @@ export const SPELL_TOKEN: TokenMap = {
     },
     [ChainId.BSC]: undefined,
     [ChainId.MATIC]: undefined,
+    [ChainId.BLAST]: undefined,
     [ChainId.FANTOM]: {
         chainId: 250,
         address: SPELL_ADDRESS[250],
@@ -875,6 +915,7 @@ export const CRV_TOKEN: TokenMap = {
         coingeckoId: crvId
     },
     [ChainId.BSC]: undefined,
+    [ChainId.BLAST]: undefined,
     [ChainId.MATIC]: {
         chainId: 137,
         address: CRV_ADDRESS[137],
@@ -930,6 +971,7 @@ export const MPX_TOKEN: TokenMap = {
     [ChainId.BASE]: undefined,
     [ChainId.AVALANCHE]: undefined,
     [ChainId.ARBITRUM]: undefined,
+    [ChainId.BLAST]: undefined,
 }
 
 // // [.√.]
@@ -949,6 +991,7 @@ export const EQUAL_TOKEN: TokenMap = {
     [ChainId.BASE]: undefined,
     [ChainId.AVALANCHE]: undefined,
     [ChainId.ARBITRUM]: undefined,
+    [ChainId.BLAST]: undefined,
 }
 
 // // [...]

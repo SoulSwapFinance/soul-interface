@@ -34,6 +34,7 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
   || asPath.startsWith('/add') || asPath.startsWith('exchange/add') 
   || asPath.startsWith('/remove') || asPath.startsWith('exchange/remove')
 
+  // NOTE: MUST BE CAPITALIZED
   const chainColor
     = chainId == ChainId.FANTOM ? `border-[#1969FF] text-[#1969FF]`
       : chainId == ChainId.AVALANCHE ? `border-[#E84142] text-[#E84142]`
@@ -41,8 +42,9 @@ const SwapHeader: FC<HeaderProps> = ({ inputCurrency, outputCurrency }) => {
           : chainId == ChainId.BSC ? `border-[#F0B90B] text-[#F0B90B]`
             : chainId == ChainId.MATIC ? `border-[#8247E5] text-[#8247E5]`
               : chainId == ChainId.ARBITRUM ? `border-[#4698FA] text-[#4698FA]`
-                : chainId == ChainId.MOONRIVER ? `border-[#53CBC9] text-[#53CBC9]`
-                  : `border-[#1969FF] text-[#1969FF]`
+                : chainId == ChainId.BLAST ? `border-[#FCFC05] text-[#FCFC05]`
+                  : chainId == ChainId.MOONRIVER ? `border-[#53CBC9] text-[#53CBC9]`
+                    : `border-[#1969FF] text-[#1969FF]`
   const hoverColor = `${chainColor} hover:text-white`
   return (
     <div className="flex items-center justify-between gap-2">

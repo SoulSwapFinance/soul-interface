@@ -22,6 +22,7 @@ const WRAPPED_NATIVE_ONLY: ChainTokenList = {
   [ChainId.AVALANCHE]: [WNATIVE[ChainId.AVALANCHE]],
   [ChainId.MATIC]: [WNATIVE[ChainId.MATIC]],
   [ChainId.ARBITRUM]: [WNATIVE[ChainId.ARBITRUM]],
+  [ChainId.BLAST]: [WNATIVE[ChainId.BLAST]],
   [ChainId.MOONRIVER]: [WNATIVE[ChainId.MOONRIVER]],
   [ChainId.BASE]: [WNATIVE[ChainId.BASE]],
 }
@@ -75,6 +76,9 @@ export const COMMON_BASES: ChainTokenList = {
   ],
   [ChainId.ARBITRUM]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.ARBITRUM], 
+  ],
+  [ChainId.BLAST]: [
+    ...WRAPPED_NATIVE_ONLY[ChainId.BLAST], 
   ],
   [ChainId.TELOS]: [
     ...WRAPPED_NATIVE_ONLY[ChainId.TELOS], 

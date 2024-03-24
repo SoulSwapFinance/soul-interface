@@ -7,6 +7,7 @@ const Polygon = '/images/networks/polygon.svg'
 const Arbitrum = `/images/networks/arbitrum.svg`
 const Binance = '/images/networks/binance.svg'
 const Base = '/images/networks/base-white.svg'
+const Blast = '/images/networks/blast.svg'
 // const Binance = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/network/bsc.svg'
 // const Binance = 'https://cryptologos.cc/logos/bnb-bnb-logo.svg'
 
@@ -21,6 +22,7 @@ export const NETWORK_ICON: { [chainId in ChainId]: string } =  {
   [ChainId.AVALANCHE]: Avalanche,
   [ChainId.MATIC]: Polygon,
   [ChainId.ARBITRUM]: Arbitrum,
+  [ChainId.BLAST]: Blast,
   [ChainId.MOONRIVER]: Moonriver,
   [ChainId.BASE]: Base,
 }
@@ -33,6 +35,7 @@ export const NETWORK_LABEL: { [chainId in ChainId]: string } = {
   [ChainId.AVALANCHE]: 'Avalanche',
   [ChainId.MATIC]: 'Polygon',
   [ChainId.ARBITRUM]: 'Arbitrum',
+  [ChainId.BLAST]: 'Blast',
   [ChainId.MOONRIVER]: 'Moonriver',
   [ChainId.BASE]: 'Base',
 }

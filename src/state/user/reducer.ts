@@ -78,6 +78,7 @@ export const defaultShowLiveCharts: { [chainId in ChainId]: boolean } = {
   [ChainId.FANTOM]: true,
   [ChainId.MOONRIVER]: false,
   [ChainId.ARBITRUM]: false,
+  [ChainId.BLAST]: false,
   [ChainId.BASE]: false
 }
 

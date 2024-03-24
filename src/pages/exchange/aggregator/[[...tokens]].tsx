@@ -77,6 +77,7 @@ export const InputFooter = styled.div`
 
 export const chains = getAllChains()
 
+// todo: add blast (?)
 export const startChain = (id) => {
 	let chain = chains[0] // ETH
 	id == ChainId.BSC ? chain = chains[1]

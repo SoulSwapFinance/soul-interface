@@ -38,6 +38,7 @@ const AvalancheLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/
 const TelosLogo = '/images/natives/telos.png'
 const PolygonLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/polygon/Polygon.svg'
 const BaseLogo = 'https://exchange.soulswap.finance/images/networks/base.svg'
+const BlastLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/blast/Blast.svg'
 const ArbitrumLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/arbitrum/Arbitrum.png'
 const MoonriverLogo = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/moonriver/Moonriver.svg'
 
@@ -49,6 +50,7 @@ const LOGO: Record<ChainId, string> = {
   [ChainId.AVALANCHE]: AvalancheLogo,
   [ChainId.MATIC]: PolygonLogo,
   [ChainId.ARBITRUM]: ArbitrumLogo,
+  [ChainId.BLAST]: BlastLogo,
   [ChainId.MOONRIVER]: MoonriverLogo,
   [ChainId.BASE]: BaseLogo,
 }

@@ -164,6 +164,11 @@ const Crosschain = ({ }) => {
             "chainId": 8453,
             "name": "Base",
             "logoURI": "https://exchange.soulswap.finance/images/networks/base.svg"
+        },
+        {
+            "chainId": ChainId.BLAST,
+            "name": "Blast",
+            "logoURI": "https://exchange.soulswap.finance/images/networks/blast.svg"
         }
     ] 
 
@@ -189,6 +194,7 @@ const Crosschain = ({ }) => {
         [chains[4].chainId]: ChainId.ARBITRUM,
         [chains[5].chainId]: ChainId.BSC,
         [chains[6].chainId]: ChainId.BASE,
+        [chains[7].chainId]: ChainId.BLAST,
     }
     
     const CHAIN_ID_TO_CHAIN = {
@@ -199,6 +205,7 @@ const Crosschain = ({ }) => {
         [ChainId.ARBITRUM]: chains[4],
         [ChainId.BSC]: chains[5],
         [ChainId.BASE]: chains[6],
+        [ChainId.BLAST]: chains[7],
     }
 
     const DEFAULT_FROM_CHAIN_MAP = {
@@ -209,6 +216,7 @@ const Crosschain = ({ }) => {
         [ChainId.ARBITRUM]: chains[4],
         [ChainId.BSC]: chains[5],
         [ChainId.BASE]: chains[6],
+        [ChainId.BLAST]: chains[7],
     }
     
     const DEFAULT_TO_CHAIN_MAP = {
@@ -219,6 +227,7 @@ const Crosschain = ({ }) => {
         [ChainId.ARBITRUM]: chains[2],  // arbitrum to eth
         [ChainId.BSC]: chains[2],       // bsc to eth
         [ChainId.BASE]: chains[2],      // base to eth
+        [ChainId.BLAST]: chains[2],      // blast to eth
     }
 
     const [fromChain, setFromChain] = useState(DEFAULT_FROM_CHAIN_MAP[chainId])

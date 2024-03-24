@@ -24,6 +24,7 @@ export const RPC = {
   // [ChainId.MOONBEAM_TESTNET]: 'https://rpc.testnet.moonbeam.network',
   // [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc',
   [ChainId.AVALANCHE]: 'https://rpc.ankr.com/avalanche',
+  [ChainId.BLAST]: 'https://rpc.blast.io',
   //[ChainId.MOONRIVER]: 'https://rpc.moonriver.moonbeam.network',
   [ChainId.MOONRIVER]: 'https://rpc.ankr.com/moonbeam', 
   // [ChainId.AVALANCHE_TESTNET]: 'https://api.avax-test.network/ext/bc/C/rpc',
