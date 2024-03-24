@@ -23,95 +23,6 @@ import { CustomBanner } from 'components/Banner'
 import LimitHeader from 'features/limit/LimitHeader'
 import { RPC } from 'connectors'
 
-// import squid from "squid"
-
-// const result = await squid.route(
-//     0.183, 
-//     "eth", 
-//     "ethereum",
-//     "glmr", 
-//     "moonbeam",
-//     multicall
-// );
-// const { route } = result;
-
-// const tx = squid.executeRoute(signer, route)
-// await tx.wait();
-
-// const status = await squid.getStatus(tx.hash);
-
-//   const { route } = await squid.getRoute({
-//     toAddress: account, // signer.address,
-//     fromChain: avalancheId,
-//     fromToken: nativeToken,
-//     fromAmount: amount,
-//     toChain: polygonChainId,
-//     asset: polygonUsdc,
-//     slippage: 1,
-//     customContractCalls: [],
-//     // enableExpress: false, // default is true on all chains except Ethereum
-//     // receiveGasOnDestination: true,
-//   });
-//   setRoute(route)
-//   console.log(route.estimate.inutAmount);
-
-//   const tx = (await squid.executeRoute({
-//     // @ts-ignore
-//     signer,
-//     route,
-//   })) as unknown as ethers.providers.TransactionResponse;
-//   const txReceipt = await tx.wait();
-
-//   const axelarScanLink =
-//     "https://axelarscan.io/gmp/" + txReceipt.transactionHash;
-//   console.log(
-//     "Finished! Please check Axelarscan for more details: ",
-//     axelarScanLink,
-//     "\n"
-//   );
-
-//   console.log(
-//     "Track status via API call to: https://api.squidrouter.com/v1/status?transactionId=" +
-//       txReceipt.transactionHash,
-//     "\n"
-//   );
-
-//   // It's best to wait a few seconds before checking the status
-//   await new Promise((resolve) => setTimeout(resolve, 5000));
-
-//   const status = await squid.getStatus({
-//     transactionId: txReceipt.transactionHash,
-//   });
-
-//   console.log("Status: ", status);
-// })
-
-
-// const getRoute = async () => {
-//     // instantiate the SDK
-//     const squid = new Squid({
-//       baseUrl: "https://api.0xsquid.com",
-//       integratorId: "soulswap-___"
-//     });
-
-//     await squid.init();
-
-//     const { route } = await squid.getRoute({
-//     toAddress: account, // signer.address,
-//     fromChain: 250,
-//     fromToken: WNATIVE_ADDRESS[250],
-//     fromAmount: "10000000000000000",
-//     toChain: 43114,
-//     asset: USDC_ADDRESS[43114],
-//     slippage: 1,
-//     customContractCalls: [],
-//     // enableExpress: false, // default is true on all chains except Ethereum
-//     // receiveGasOnDestination: true,
-//   });
-//   setRoute(route)
-//   console.log(route.estimate.inutAmount);
-// }
-
 export type Chains = {
     chainId: string | number
     name: string;
@@ -170,21 +81,7 @@ const Crosschain = ({ }) => {
             "name": "Blast",
             "logoURI": "https://exchange.soulswap.finance/images/networks/blast.svg"
         }
-    ] 
-
-    // const getTokensForChain = (chainId, isFrom) => {
-    //     return isFrom ? (
-    //             chainId == 43114 ? getFromAssets(43114) : getFromAssets(250)
-    //         ) : !isFrom ? 
-    //             chainId == 43114 ? getToAssets(43114) : getToAssets(250)
-    //         // : chainId == ChainId.ETHEREUM ? ethTokens
-    //         : getToAssets(250)
-    // }
-
-    // const chainIndex = (chainId) => {
-    //     return chainId == 43114 ? 1 : 0
-    //     // chainId == ChainId.ETHEREUM ? 2 : 0
-    // }
+    ]
 
     const CHAIN_TO_CHAIN_ID = {
         [chains[0].chainId]: ChainId.FANTOM,
@@ -273,62 +170,6 @@ const Crosschain = ({ }) => {
     const [showFromTokens, setShowFromTokens] = useState(false)
     const [showToTokens, setShowToTokens] = useState(false)
     const [outputAmount, setOutputAmount] = useState('')
-    // const buttonColor = (chainId) => {
-    //     return chainId == 43114 ? '#E84142'  // avaxRed
-    //         : chainId == 1 ? '#627EEA' // ethBlue
-    //             : '#1969FF' // ftmBlue
-    // }
-
-    // const config = {
-    //     companyName: "Test Widget",
-    //     integratorId: "example-swap-widget",
-    //     slippage: 3,
-    //     slippageOption: "auto",
-    //     instantExec: true,
-    //     infiniteApproval: false,
-    //     apiUrl: "https://dev.api.0xsquid.com",
-    //   };
-
-    // const { fromPrice, toPrice, config, squid } = useSquidStore();
-    // const { swapRoute } = useSwapRoutePersistStore();
-    // const { tokenPrices } = usePrices();
-    // const { chains, supportedDestinationChains, supportedSourceChains } = useSquidChains();
-    // // chain ID will use the swapRoute one (the user choice)
-    // // Or the config one (if defined)
-    // const fromChainId = (swapRoute === null || swapRoute === void 0 ? void 0 : swapRoute.fromChainId) ||
-    //     (chains.find((c) => c.chainId === config.initialFromChainId) &&
-    //         config.initialFromChainId);
-    // const toChainId = (swapRoute === null || swapRoute === void 0 ? void 0 : swapRoute.toChainId) ||
-    //     (chains.find((c) => c.chainId === config.initialToChainId) &&
-    //         config.initialToChainId);
-    // // Source
-    // // const fromChain = chains.find((c) => c.chainId === (swapRoute === null || swapRoute === void 0 ? void 0 : swapRoute.fromChainId));
-    // const fromTokens = getTokensForChain((_a = squid === null || squid === void 0 ? void 0 : squid.tokens) !== null && _a !== void 0 ? _a : [], fromChainId);
-    // const fromToken = fromTokens.find((t) => t.address === (swapRoute === null || swapRoute === void 0 ? void 0 : swapRoute.fromTokenAddress));
-    // // Destination
-    // // const toChain = chains.find((c) => c.chainId === (swapRoute === null || swapRoute === void 0 ? void 0 : swapRoute.toChainId));
-    // const toTokensForChain = getTokensForChain((_b = squid === null || squid === void 0 ? void 0 : squid.tokens) !== null && _b !== void 0 ? _b : [], toChainId);
-    // const toToken = toTokensForChain.find((t) => t.address === (swapRoute === null || swapRoute === void 0 ? void 0 : swapRoute.toTokenAddress));
-    // const toTokens = filterTokensForDestination(toTokensForChain, toChain, fromToken);
-
-    // const handleLoad = async () => {
-    //     (async () => {
-    //         // instantiate the SDK
-    //         const squid = new Squid({
-    //             baseUrl: "https://api.0xsquid.com",
-    //             integratorId: "soulswap-___"
-    //         });
-
-    //         squid.setConfig({
-    //             baseUrl: "https://api.0xsquid.com",
-    //             integratorId: "soulswap-___"
-    //         });
-
-    //         // init the SDK
-    //         await squid.init();
-    //         console.log("Squid inited");
-    //     })();
-    // }
 
     // instantiate the SDK
     const squid = new Squid({
@@ -692,7 +533,8 @@ const Crosschain = ({ }) => {
         async (value: string) => {
             if(!value) return
             await setFromAmount(value ?? '0')
-            if(value && Number(value) > 0.000001 ) await getRoute(value ?? '0')
+            // if(value && Number(value) > 0.000001 ) 
+            await getRoute(value ?? '0')
         },
         [setFromAmount, getRoute]
     )
