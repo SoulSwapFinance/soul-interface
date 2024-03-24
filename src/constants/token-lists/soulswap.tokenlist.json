@@ -602,6 +602,22 @@
     },
     {
       "chainId": 250,
+      "name": "LatinGang",
+      "address": "0x1D631Adc479309aA073949E0D67973555BBBDcd0",
+      "symbol": "CABRON",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/fantom/assets/0x1D631Adc479309aA073949E0D67973555BBBDcd0/logo.png"
+    },
+    {
+      "chainId": 250,
+      "name": "FantomBonkInu",
+      "address": "0xc849255332F26Da482d0a62dC12B4cdCb330B4dd",
+      "symbol": "FBONK",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/fantom/assets/0xc849255332F26Da482d0a62dC12B4cdCb330B4dd/logo.png"
+    },
+    {
+      "chainId": 250,
       "name": "fMULTI (LayerZero)",
       "address": "0xF386eB6780a1e875616b5751794f909095283860",
       "symbol": "lzFMULTI",
