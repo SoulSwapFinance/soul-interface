@@ -51,6 +51,7 @@ module.exports = {
         avaxRed: '#E84142',
         binanceGold: '#F0B90B',
         arbitrumBlue: '#4698FA', // '#12AAFF',
+        blastYellow: '#FCFC05',
         moonriverGold: '#F2B706',
         moonriverTeal: '#41A2A1',
         maticPurple: '#8247E5',
