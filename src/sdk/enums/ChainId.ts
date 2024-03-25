@@ -7,6 +7,7 @@ export enum ChainId {
   MOONRIVER = 1285,
   BASE = 8453,
   ARBITRUM = 42161,
+  BLAST = 81457,
   AVALANCHE = 43114,
   // LUKSO = 42,
 }

@@ -99,6 +99,19 @@ export const SUPPORTED_NETWORKS: Record<
     ],
     blockExplorerUrls: ['https://arbiscan.io'],
   },
+  [ChainId.BLAST]: {
+    chainId: '0x13E31', // 81457
+    chainName: 'Blast',
+    nativeCurrency: {
+      name: 'Ethereum',
+      symbol: 'ETH',
+      decimals: 18,
+    },
+    rpcUrls: [
+      'https://rpc.blast.io',
+    ],
+    blockExplorerUrls: ['https://blastscan.io'],
+  },
   [ChainId.BASE]: {
     chainId: '0x2105',
     chainName: 'Base',
@@ -173,6 +186,7 @@ const NetworkModal: FC<{ switchNetwork: (targetChain: number) => void }> = ({ sw
             ChainId.BSC,
             ChainId.FANTOM,
             ChainId.BASE,
+            ChainId.BLAST,
             ChainId.AVALANCHE,
             // ChainId.LUKSO,
           ]

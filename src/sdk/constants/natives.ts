@@ -2,11 +2,12 @@ import {
   Ether,
   Arbitrum,
   Binance,
-  Telos,
+  Blast,
   Fantom,
   Avalanche,
   Moonriver,
   Polygon,
+  Telos,
 } from '../entities/Native'
 
 import { ChainId } from '../enums'
@@ -19,6 +20,7 @@ export const NATIVE: { [chainId in ChainId]: any } = {
   [ChainId.AVALANCHE]: Avalanche.onChain(ChainId.AVALANCHE),
   [ChainId.MOONRIVER]: Moonriver.onChain(ChainId.MOONRIVER),
   [ChainId.ARBITRUM]: Arbitrum.onChain(ChainId.ARBITRUM),
+  [ChainId.BLAST]: Blast.onChain(ChainId.BLAST),
   [ChainId.MATIC]: Polygon.onChain(ChainId.MATIC),
   [ChainId.BASE]: Polygon.onChain(ChainId.BASE),
 }

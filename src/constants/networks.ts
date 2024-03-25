@@ -7,6 +7,7 @@ import {
   eth,
   ftm,
   matic,
+  blast,
 } from './networks/index'
 
 type NetToChain = { [p: string]: ChainId }
@@ -29,6 +30,7 @@ const Moonriver = 'https://raw.githubusercontent.com/SoulSwapFinance/assets/mast
 const Arbitrum = '/images/networks/arbitrum.svg'
 const Polygon = '/images/networks/polygon-network.jpg'
 const Base = '/images/networks/base.svg'
+const Blast = '/images/networks/blast.svg'
 // const Rinkeby = '/images/networks/rinkeby-network.jpg'
 // const Ropsten = '/images/networks/ropsten-network.jpg'
 // const xDai = '/images/networks/xdai-network.jpg'
@@ -44,6 +46,7 @@ export const NETWORK_ICON: { [chainId in ChainId]: string } = {
   [ChainId.MATIC]: Polygon,
   [ChainId.ARBITRUM]: Arbitrum,
   [ChainId.BASE]: Base,
+  [ChainId.BLAST]: Blast,
   // [ChainId.ROPSTEN]: Ropsten,
   // [ChainId.RINKEBY]: Rinkeby,
   // [ChainId.GÖRLI]: Goerli,
@@ -73,6 +76,7 @@ export const NETWORK_LABEL: { [chainId in ChainId]: string } = {
   [ChainId.MATIC]: 'Polygon',
   [ChainId.ARBITRUM]: 'Arbitrum',
   [ChainId.BASE]: 'Base',
+  [ChainId.BLAST]: 'Blast',
   // [ChainId.RINKEBY]: 'Rinkeby',
   // [ChainId.ROPSTEN]: 'Ropsten',
   // [ChainId.GÖRLI]: 'Görli',
@@ -100,6 +104,7 @@ export const NATIVE_TOKEN_TICKER: { [chainId in ChainId]: string } = {
   [ChainId.MATIC]: 'MATIC',
   [ChainId.BASE]: 'ETH',
   [ChainId.ARBITRUM]: 'ETH',
+  [ChainId.BLAST]: 'ETH',
   [ChainId.MOONRIVER]: 'MOVR',
   [ChainId.AVALANCHE]: 'AVAX',
 }
@@ -111,6 +116,7 @@ export const NATIVE_WRAPPED_TOKEN_ADDRESS = {
   [ChainId.FANTOM]: WNATIVE_ADDRESS[250],
   [ChainId.AVALANCHE]: WNATIVE_ADDRESS[43114],
   [ChainId.MOONRIVER]: WNATIVE_ADDRESS[1285],
+  [ChainId.BLAST]: WNATIVE_ADDRESS[ChainId.BLAST],
   [ChainId.BASE]: WNATIVE_ADDRESS[ChainId.BASE],
 }
 
@@ -126,13 +132,15 @@ export const TRUESIGHT_NETWORK_TO_CHAINID: NetToChain = {
 export const NETWORKS_INFO_CONFIG: { [chain in ChainId]: NetworkInfo } = {
   [ChainId.ETHEREUM]: eth,
     // todo: fix below
-  [ChainId.TELOS]: eth,
-  [ChainId.MATIC]: matic,
-  [ChainId.BSC]: bsc,
-  [ChainId.AVALANCHE]: avax,
-  [ChainId.FANTOM]: ftm,
-  // todo: fix below
-  [ChainId.ARBITRUM]: arbitrum,
+    [ChainId.TELOS]: eth,
+    [ChainId.MATIC]: matic,
+    [ChainId.BSC]: bsc,
+    [ChainId.AVALANCHE]: avax,
+    [ChainId.FANTOM]: ftm,
+    // todo: fix below
+    [ChainId.ARBITRUM]: arbitrum,
+    // todo: fix below
+  [ChainId.BLAST]: blast,
   // todo: fix below
   [ChainId.MOONRIVER]: arbitrum,
   // todo: fix below

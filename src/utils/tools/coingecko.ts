@@ -31,6 +31,7 @@ const COINGECKO_ASSET_PLATFORM: { [chainId in ChainId]: string | null } = {
   [ChainId.AVALANCHE]: 'avalanche',
   [ChainId.MATIC]: 'polygon',
   [ChainId.ARBITRUM]: 'arbitrum',
+  [ChainId.BLAST]: 'blast', // todo: verify
   [ChainId.MOONRIVER]: 'moonriver',
   [ChainId.BASE]: 'base',
 }
@@ -43,6 +44,7 @@ const COINGECKO_NATIVE_CURRENCY: Record<number, string> = {
     [ChainId.AVALANCHE]: 'avalanche',
     [ChainId.MATIC]: 'polygon',
     [ChainId.ARBITRUM]: 'arbitrum',
+    [ChainId.BLAST]: 'ethereum', 
     [ChainId.MOONRIVER]: 'moonriver',
 }
 

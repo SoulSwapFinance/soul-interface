@@ -10,7 +10,9 @@ export const FACTORY_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '0x5BB2a9984de4a69c05c996F7EF09597Ac8c9D63a',
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
-  [ChainId.ARBITRUM]: '',}
+  [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
+}
 
 export const ROUTER_ADDRESS: AddressMap = {
   [ChainId.ETHEREUM]: '0x2a8B48a8B8a8a8E4a184280333c418BcdcE72dE9', // FEB22
@@ -21,6 +23,7 @@ export const ROUTER_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const JOE_ROUTER_ADDRESS: AddressMap = {
@@ -32,6 +35,7 @@ export const JOE_ROUTER_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const BORING_HELPER_ADDRESS: AddressMap = {
@@ -43,6 +47,7 @@ export const BORING_HELPER_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const LIMIT_ORDER_HELPER_ADDRESS: AddressMap = {
@@ -84,6 +89,7 @@ export const SOUL_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const CRV_ADDRESS: AddressMap = {
@@ -107,6 +113,7 @@ export const EQUAL_ADDRESS: AddressMap = {
   [ChainId.MATIC]: undefined,
   [ChainId.MOONRIVER]: undefined,
   [ChainId.ARBITRUM]: undefined,
+  [ChainId.BLAST]: undefined,
 }
 
 export const FUSD_ADDRESS: AddressMap = {
@@ -118,6 +125,7 @@ export const FUSD_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const SEANCE_ADDRESS: AddressMap = {
@@ -129,6 +137,7 @@ export const SEANCE_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const UNDERWORLD_ADDRESS: AddressMap = {
@@ -140,6 +149,7 @@ export const UNDERWORLD_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const FRAX_ADDRESS: AddressMap = {
@@ -151,6 +161,7 @@ export const FRAX_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 // TODO: specify merkle distributor for mainnet
@@ -161,6 +172,7 @@ export const MERKLE_DISTRIBUTOR_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: undefined,
   [ChainId.MATIC]: undefined,
   [ChainId.ARBITRUM]: undefined,
+  [ChainId.BLAST]: undefined,
   [ChainId.MOONRIVER]: undefined,
   56: undefined,
   4002: undefined
@@ -177,6 +189,7 @@ export const SUMMONER_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const MANIFESTER_ADDRESS: AddressMap = {
@@ -193,6 +206,7 @@ export const MASTERCHEF_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const SOUL_CIRCLE_ADDRESS: AddressMap = {
@@ -204,6 +218,7 @@ export const SOUL_CIRCLE_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const AUTO_STAKE_ADDRESS: AddressMap = {
@@ -216,6 +231,7 @@ export const AUTO_STAKE_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const BTC_NATIVE_ADDRESS: AddressMap = {
@@ -227,6 +243,7 @@ export const BTC_NATIVE_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const ETH_NATIVE_ADDRESS: AddressMap = {
@@ -238,6 +255,7 @@ export const ETH_NATIVE_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const USDC_DAI_ADDRESS: AddressMap = {
@@ -249,6 +267,7 @@ export const USDC_DAI_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const CHANT_ADDRESS: AddressMap = {
@@ -260,6 +279,7 @@ export const CHANT_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const SOUL_BOND_ADDRESS: AddressMap = {
@@ -273,6 +293,7 @@ export const SOUL_BOND_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const MULTICALL_ADDRESS: AddressMap = {
@@ -285,6 +306,7 @@ export const MULTICALL_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const UNDERWORLD_PAIRS = {
@@ -345,6 +367,7 @@ export const COFFIN_BOX_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const CHAINLINK_ORACLE_ADDRESS: AddressMap = {
@@ -356,6 +379,7 @@ export const CHAINLINK_ORACLE_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const BTC_ORACLE_ADDRESS: AddressMap = {
@@ -367,6 +391,7 @@ export const BTC_ORACLE_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const AVAX_ORACLE_ADDRESS: AddressMap = {
@@ -378,6 +403,7 @@ export const AVAX_ORACLE_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const LINK_ORACLE_ADDRESS: AddressMap = {
@@ -389,6 +415,7 @@ export const LINK_ORACLE_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const ETH_ORACLE_ADDRESS: AddressMap = {
@@ -400,6 +427,7 @@ export const ETH_ORACLE_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const FTM_ORACLE_ADDRESS: AddressMap = {
@@ -411,6 +439,7 @@ export const FTM_ORACLE_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const ENCHANT_ADDRESS: AddressMap = {
@@ -422,6 +451,7 @@ export const ENCHANT_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const LINK_ADDRESS: AddressMap = {
@@ -455,6 +485,7 @@ export const ENCHANT_HELPER_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const AURA_ADDRESS: AddressMap = {
@@ -467,6 +498,7 @@ export const AURA_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const TIMELOCK_ADDRESS: AddressMap = {
@@ -478,6 +510,7 @@ export const TIMELOCK_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const SUMMONER_HELPER_ADDRESS: AddressMap = {
@@ -489,6 +522,7 @@ export const SUMMONER_HELPER_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const REFUNDER_ADDRESS: AddressMap = {
@@ -500,6 +534,7 @@ export const REFUNDER_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const SOUL_GUIDE_ADDRESS: AddressMap = {
@@ -511,6 +546,7 @@ export const SOUL_GUIDE_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const BALANCES_FETCHER_ADDRESS: AddressMap = {
@@ -522,6 +558,7 @@ export const BALANCES_FETCHER_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '0x06a846BA430Ed005bE60f8598B4C563dbaa6feF0', // todo
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
   
 export const DEFAULT_RECEIVER_ADDRESS: AddressMap = {
@@ -592,6 +629,7 @@ export const BOND_HELPER_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '',
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '',
+  [ChainId.BLAST]: '',
 }
 
 export const PRICE_HELPER_ADDRESS: AddressMap = {
@@ -604,6 +642,7 @@ export const PRICE_HELPER_ADDRESS: AddressMap = {
   [ChainId.MATIC]: undefined,
   [ChainId.MOONRIVER]: undefined,
   [ChainId.ARBITRUM]: undefined,
+  [ChainId.BLAST]: undefined,
   [ChainId.BASE]: undefined,
 }
 
@@ -616,6 +655,7 @@ export const HARVEST_HELPER_ADDRESS: AddressMap = {
   [ChainId.MATIC]: undefined,
   [ChainId.MOONRIVER]: undefined,
   [ChainId.ARBITRUM]: undefined,
+  [ChainId.BLAST]: undefined,
   [ChainId.BASE]: undefined,
 }
 
@@ -698,6 +738,7 @@ export const WETH_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB', // WETH.e
   [ChainId.MOONRIVER]: '',
   [ChainId.ARBITRUM]: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', // WETH
+  [ChainId.BLAST]: '0x4300000000000000000000000000000000000004', // WETH
   [ChainId.BASE]: '0x4200000000000000000000000000000000000006', // WETH
 }
 
@@ -849,6 +890,7 @@ export const WETH9_ADDRESS: AddressMap = {
   [ChainId.MATIC]: '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619', // WETH
   [ChainId.MOONRIVER]: '0x639A647fbe20b6c8ac19E48E2de44ea792c62c5C',
   [ChainId.ARBITRUM]: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', // WETH
+  [ChainId.BLAST]: '0x4300000000000000000000000000000000000004', // WETH
   [ChainId.BASE]: '0x4200000000000000000000000000000000000006', // WETH
 }
 
@@ -861,6 +903,7 @@ export const WNATIVE_ADDRESS: AddressMap = {
   [ChainId.MOONRIVER]: '0x98878B06940aE243284CA214f92Bb71a2b032B8A',
   [ChainId.MATIC]: '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
   [ChainId.ARBITRUM]: '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1', // WETH
+  [ChainId.BLAST]: '0x4300000000000000000000000000000000000004', // WETH
   [ChainId.BASE]: '0x4200000000000000000000000000000000000006', // WETH
 }
 
@@ -891,6 +934,10 @@ export const OPEN_OCEAN_EXCHANGE_ADDRESS: AddressMap = {
   [ChainId.AVALANCHE]: '0x6352a56caadC4F1E25CD6c75970Fa768A3304e64',
 }
 // LP TOKEN ADDRESS //
+
+export const USDB_ADDRESS: AddressMap = {
+  [ChainId.BLAST]: '0x4300000000000000000000000000000000000003'
+}
 
 export const SOUL_MUSDC: AddressMap = {
   [ChainId.ETHEREUM]: '',

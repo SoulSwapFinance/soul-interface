@@ -7,6 +7,7 @@ export enum SupportedChainId {
   FANTOM = ChainId.FANTOM,
   AVALANCHE = ChainId.AVALANCHE,
   ARBITRUM = ChainId.ARBITRUM,
+  BLAST = ChainId.BLAST,
   MOONRIVER = ChainId.MOONRIVER,
   MATIC = ChainId.MATIC
 }
@@ -19,8 +20,9 @@ export function getChainColor(chainId: number) {
         : chainId == ChainId.BSC ? color = `#F0B90B`
           : chainId == ChainId.MATIC ? color = `#8247E5`
             : chainId == ChainId.ARBITRUM ? color = `#4698FA`
-              : chainId == ChainId.MOONRIVER ? color = `#53CBC9`
-                : `#1969FF`
+              : chainId == ChainId.BLAST ? color = `#FCFC05`
+                : chainId == ChainId.MOONRIVER ? color = `#53CBC9`
+                  : `#1969FF`
 
   return color
 }
@@ -33,8 +35,9 @@ export function getChainColorCode(chainId: number) {
         : chainId == ChainId.BSC ? colorCode = `binanceGold`
           : chainId == ChainId.MATIC ? colorCode = `maticPurple`
             : chainId == ChainId.ARBITRUM ? colorCode = `arbitrumBlue`
-              : chainId == ChainId.MOONRIVER ? colorCode = `moonriverTeal`
-                : `ftmBlue`
+              : chainId == ChainId.BLAST ? colorCode = `blastYellow`
+                : chainId == ChainId.MOONRIVER ? colorCode = `moonriverTeal`
+                  : `ftmBlue`
 
   return colorCode
 }
@@ -47,8 +50,9 @@ export function getChainLogoURL(chainId: number) {
         : chainId == ChainId.BSC ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/binance/assets'
           : chainId == ChainId.MATIC ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/polygon/assets'
             : chainId == ChainId.ARBITRUM ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/arbitrum/assets'
-              : chainId == ChainId.MOONRIVER ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/moonriver/assets'
-                : 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets'
+              : chainId == ChainId.BLAST ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/blast/assets'
+                : chainId == ChainId.MOONRIVER ? logoURL = 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/moonriver/assets'
+                  : 'https://raw.githubusercontent.com/soulswapfinance/assets/prod/blockchains/fantom/assets'
 
   return logoURL
 }
@@ -61,8 +65,9 @@ export function getChainLogo(chainId: number) {
         : chainId == ChainId.BSC ? logoURL = '/images/networks/binance.svg'
           : chainId == ChainId.MATIC ? logoURL = '/images/networks/polygon.svg'
             : chainId == ChainId.ARBITRUM ? logoURL = '/images/networks/arbitrum.svg'
-              : chainId == ChainId.MOONRIVER ? logoURL = '/images/networks/moonriver.svg'
-                : '/images/networks/fantom-white.svg'
+              : chainId == ChainId.BLAST ? logoURL = '/images/networks/blast.svg'
+                : chainId == ChainId.MOONRIVER ? logoURL = '/images/networks/moonriver.svg'
+                  : '/images/networks/fantom-white.svg'
 
   return logoURL
 }
@@ -83,6 +88,11 @@ export function getChainInfo(chainId: number, option: string) {
     option == 'NETWORK' ? output = 'Ethereum Network'
       : option == 'NAME' ? output = 'Ethereum'
         : option == 'SYMBOL' ? output = 'ETH'
+          : output = ''
+    } else if (chainId == ChainId.BLAST) {
+    option == 'NETWORK' ? output = 'Blast'
+      : option == 'NAME' ? output = 'Blast'
+        : option == 'SYMBOL' ? output = 'BLAST'
           : output = ''
     } else if (chainId == ChainId.BSC) {
     option == 'NETWORK' ? output = 'Binance Smart Chain'
