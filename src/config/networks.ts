@@ -7,7 +7,7 @@ const Polygon = '/images/networks/polygon.svg'
 const Arbitrum = `/images/networks/arbitrum.svg`
 const Binance = '/images/networks/binance.svg'
 const Base = '/images/networks/base-white.svg'
-const Blast = '/images/networks/blast.svg'
+const Blast = '/images/networks/blast-white.svg'
 // const Binance = 'https://raw.githubusercontent.com/SoulSwapFinance/icons/master/network/bsc.svg'
 // const Binance = 'https://cryptologos.cc/logos/bnb-bnb-logo.svg'
 
