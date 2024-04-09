@@ -5,19 +5,19 @@
 
 export const InactiveAvalanchePools = [
   {
-    pid: 0,
+    pid: 0, // SURV
   }, 
   {
-    pid: 1,
+    pid: 1, // SURV
   }
 ]
 
 export const InactiveFantomPools = [
   {
-    pid: 0,
+    pid: 0, // SURV
   },
    {
-     pid: 1,
+     pid: 1, // SURV
    },
 ]
 
@@ -28,7 +28,7 @@ export const AvalanchePools = [
 ]
 
 export const FantomPools = [
-  /* {
-    pid: 1,
-  }, */
+  {
+    pid: 2, // FANTIE
+  },
 ]
