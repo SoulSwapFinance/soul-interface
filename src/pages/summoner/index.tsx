@@ -29,8 +29,8 @@ import { Feature } from 'enums/Feature'
 // import CrossIcon from 'components/Icons/exchange/CrossIcon'
 // import CloseIcon from 'components/CloseIcon'
 import Image from 'next/image'
-import ExpandImage from 'assets/icons/diagonal-resize.png'
-import CompressImage from 'assets/icons/compress.png'
+import VerticalMaximize from 'assets/icons/vertical-resize.png'
+import Minimize from 'assets/icons/vertical-minimize.png'
 // import ExternalLink from 'components/ExternalLink'
 // import { SubmitButton } from 'features/bond/Styles'
 
@@ -145,6 +145,7 @@ const Summoner = () => {
               display: 'flex',
               flexDirection: 'row',
               justifyContent:'space-between',
+              alignItems: 'center',
               border: showTutorial ? '1px solid grey' : '2px solid #821fff',
               borderRadius: '10px',
               padding: 12,
@@ -154,20 +155,17 @@ const Summoner = () => {
           >
             { showTutorial ? `Hide Tutorial` : `Show Tutorial` }
           { showTutorial ?
-          // {ExpandImage}
-            // src="/images/icons/"
-          // >
           <Image
-          src={CompressImage}
-          height={24}
-          width={24}
+          src={Minimize}
+          height={32}
+          width={32}
           alt="compress icon"
           />
             :
           <Image
-          src={ExpandImage}
-          height={24}
-          width={24}
+          src={VerticalMaximize}
+          height={32}
+          width={32}
           alt="expand icon"
           />
               // <DoubleDownIcon
