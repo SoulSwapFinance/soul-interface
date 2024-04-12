@@ -626,6 +626,14 @@
     },
     {
       "chainId": 250,
+      "name": "GOGO",
+      "address": "0xb77bcC523c3b496283203C8Ae2c162cf206A103f",
+      "symbol": "GOGO",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/soulswapfinance/assets/master/blockchains/fantom/assets/0xb77bcC523c3b496283203C8Ae2c162cf206A103f/logo.png"
+    },
+    {
+      "chainId": 250,
       "name": "TinHatCat",
       "address": "0x479673391b3818f5e3ED2fa69A58e13d685BEcf6",
       "symbol": "THC",
