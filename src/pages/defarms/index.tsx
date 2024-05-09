@@ -14,7 +14,7 @@ import { Button } from 'components/Button'
 import DEFARM_BANNER from 'assets/branding/farm-banner.png'
 // import { getChainColor } from 'constants/chains'
 import { useActiveWeb3React } from 'services/web3'
-import { classNames, featureEnabled } from 'functions'
+import { classNames } from 'functions'
 import ExternalLink from 'components/ExternalLink'
 import { SubmitButton } from 'features/bond/Styles'
 
