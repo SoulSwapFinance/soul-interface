@@ -18,9 +18,11 @@ import {
 import { pager } from './pager'
 // import { useActiveWeb3React } from 'services/web3'
 
-// √ works
-export const exchange = async (chainId, query, variables = {}) => 
-pager(`https://api.thegraph.com/subgraphs/name/soulswapfinance/${chainId == ChainId.AVALANCHE ? 'avalanche' : 'fantom'}-swap`, query, variables)
+// √ works (important)
+export const exchange = async (chainId = ChainId.FANTOM, query, variables = {}) => 
+// pager(`https://api.thegraph.com/subgraphs/name/soulswapfinance/${chainId == ChainId.AVALANCHE ? 'avalanche' : 'fantom'}-swap`, query, variables)
+pager(`https://api.studio.thegraph.com/query/3838/${chainId == ChainId.AVALANCHE ? 'avalanche' : 'fantom'}-swap/version/latest`, query, variables)
+
 
 // √ works
 export const getPairs = async (chainId, variables = undefined, query = pairsQuery) => {

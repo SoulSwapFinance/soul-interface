@@ -65,7 +65,7 @@ function Token({ outputCurrency }: TokenProps) {
   const router = useRouter()
   const id = outputCurrency?.wrapped.address.toLowerCase()
   // const tokenAddress = id
-  const [showPro, setShowPro] = useState(true)
+  const [showPro, setShowPro] = useState(false)
   const { chainId, library } = useActiveWeb3React()
   // const [isCopied, setCopied] = useCopyClipboard()
 
@@ -156,7 +156,7 @@ function Token({ outputCurrency }: TokenProps) {
   return (
     <AnalyticsContainer>
       {/* <NextSeo title={`${token?.name} Analytics`} /> */}
-      {/* <div
+      <div
         className={`flex justify-end`}
       >
         <div
@@ -182,7 +182,7 @@ function Token({ outputCurrency }: TokenProps) {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
       {showPro &&
         <iframe
           className={`grid w-full max-h-[524px]`}
@@ -225,7 +225,7 @@ function Token({ outputCurrency }: TokenProps) {
             timespans={chartTimespans}
           />
         </div> */}
-        {/* <div
+        <div
           className={`grid grid-cols-1`}
         >
           <NavLink
@@ -240,7 +240,7 @@ function Token({ outputCurrency }: TokenProps) {
               </div>
             </Button>
           </NavLink>
-        </div> */}
+        </div>
       </div>
     </AnalyticsContainer>
   )
