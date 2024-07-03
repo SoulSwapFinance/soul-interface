@@ -49,7 +49,6 @@
     "@ramp-network/ramp-instant-sdk": "^2.5.0",
     "@reach/dialog": "0.18.0",
     "@reduxjs/toolkit": "1.7.1",
-    "@soulswap/soul-data": "^1.0.0",
     "@soulswap/swap-core": "^0.0.3",
     "@sushiswap/chainlink-whitelist": "0.2.2",
     "@sushiswap/core": "2.0.0-canary.0",
