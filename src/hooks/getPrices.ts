@@ -40,7 +40,8 @@ import { useActiveWeb3React } from 'services/web3'
 // }
 
 export const exchange = async (chainId, query, variables = {}) =>
-pager(`https://api.thegraph.com/subgraphs/name/soulswapfinance/${chainId == ChainId.AVALANCHE ? 'avalanche' : 'fantom'}-swap`, query, variables)
+// pager(`https://api.thegraph.com/subgraphs/name/soulswapfinance/${chainId == ChainId.AVALANCHE ? 'avalanche' : 'fantom'}-swap`, query, variables)
+pager(`https://api.studio.thegraph.com/query/3838/${chainId == ChainId.AVALANCHE ? 'avalanche' : 'fantom'}-swap/version/latest`, query, variables)
 
 export const getPairs = async (chainId, variables = undefined, query = pairsQuery) => {
   console.log(`getPairs(g): [${chainId}]`)

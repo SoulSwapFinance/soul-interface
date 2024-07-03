@@ -3,7 +3,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  transpilePackages: ["@soulswap/cross-chain-widget"],
+  // transpilePackages: ["@soulswap/cross-chain-widget"],
   async redirects() {
     return [
       {
