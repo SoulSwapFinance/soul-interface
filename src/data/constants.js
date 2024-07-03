@@ -5,14 +5,10 @@ module.exports = {
 		circle: 'https://api.thegraph.com/subgraphs/name/soulswap/soul-circle',
 		timelock: 'https://api.thegraph.com/subgraphs/name/soulswap/soul-timelock',
 		maker: 'https://api.thegraph.com/subgraphs/name/soulswap/soul-maker',
-		exchange: 'https://api.thegraph.com/subgraphs/name/soulswapfinance/fantom-swap',
+		// exchange: 'https://api.thegraph.com/subgraphs/name/soulswapfinance/fantom-swap',
+		exchange: 'https://api.studio.thegraph.com/query/3838/fantom-swap/version/latest',
 		blocklytics: 'https://api.thegraph.com/subgraphs/name/blocklytics/ethereum-blocks',
 		lockup: 'https://api.thegraph.com/subgraphs/name/matthewlilley/lockup',
-	},
-	graphWSEndpoints: {
-		circle: 'wss://api.thegraph.com/subgraphs/name/soulswap/soul-circle',
-		exchange: 'wss://api.thegraph.com/subgraphs/name/soulswapfinance/fantom-swap',
-		blocklytics: 'wss://api.thegraph.com/subgraphs/name/blocklytics/ethereum-blocks',
 	},
 	circleAddress: '0x124B06C5ce47De7A6e9EFDA71a946717130079E6', //
 	makerAddress: '0xe11fc0b43ab98eb91e9836129d1ee7c3bc95df50', // TODO
