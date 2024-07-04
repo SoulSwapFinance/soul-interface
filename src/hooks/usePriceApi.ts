@@ -6,10 +6,11 @@ import { useTokenPrice } from './getPrices'
 
 export function useFetcher() {
     const { chainId } = useActiveWeb3React()
-    const prefix = chainId == ChainId.FANTOM ? 'fantom' : 'avalanche'
+    // const prefix = chainId == ChainId.FANTOM ? 'fantom' : 'avalanche'
     const fetcher = (query) => request(
-    `https://api.thegraph.com/subgraphs/name/soulswapfinance/${prefix ?? 'fantom'}-exchange`,
-    query
+        // note: important -- used for volume metrics.
+        `https://api.studio.thegraph.com/query/3838/${chainId == ChainId.AVALANCHE ? 'avalanche' : 'fantom'}-swap/version/latest`,
+        query
     )
     return fetcher
 }
@@ -21,10 +22,10 @@ export default function usePriceApi(tokenAddress: string) {
             derivedETH
         }
     }`
-  const { data } = useSWR(QUERY, useFetcher())
-  const { chainId } = useActiveWeb3React()
+    const { data } = useSWR(QUERY, useFetcher())
+    const { chainId } = useActiveWeb3React()
 
-  const fantomPrice = useTokenPrice(WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM])
-  const price = Number(data?.token?.derivedETH) * Number(fantomPrice)
-  return parseFloat(price.toString())
+    const fantomPrice = useTokenPrice(WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM])
+    const price = Number(data?.token?.derivedETH) * Number(fantomPrice)
+    return parseFloat(price.toString())
 }

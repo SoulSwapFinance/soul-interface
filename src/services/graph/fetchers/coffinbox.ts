@@ -19,7 +19,6 @@ export const COFFINBOX = {
   [ChainId.AVALANCHE]: 'soulswapfinance/coffinbox-avalanche'
 }
 const fetcher = async (chainId = ChainId.FANTOM, query, variables = undefined) =>
-  // pager(`${GRAPH_HOST[chainId ?? ChainId.FANTOM]}/subgraphs/name/${COFFINBOX[chainId ?? ChainId.FANTOM]}`, query, variables)
   pager(`https://api.studio.thegraph.com/query/3838/coffinbox${chainId == ChainId.FANTOM ? `` : `-avalanche`}/version/latest`, query, variables)
 
 export const getClones = async (chainId = ChainId.FANTOM) => {

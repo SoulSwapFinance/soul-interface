@@ -1,6 +1,6 @@
 import { ChainId } from 'sdk'
 import { toAmount } from 'functions'
-import { GRAPH_HOST } from 'services/graph/constants'
+import { GRAPH_HOST, THE_GRAPH_STUDIO } from 'services/graph/constants'
 import { getTokenSubset } from 'services/graph/fetchers'
 import { underworldPairsQuery } from 'services/graph/queries/coffinbox'
 
@@ -15,6 +15,7 @@ export const UNDERWORLD = {
 // @ts-ignore TYPE NEEDS FIXING
 const fetcher = async (chainId = ChainId.ETHEREUM, query, variables = undefined) =>
   pager(`${GRAPH_HOST[chainId ?? ChainId.FANTOM]}/subgraphs/name/${UNDERWORLD[chainId ?? ChainId.FANTOM]}`, query, variables)
+  // pager(`${THE_GRAPH_STUDIO/query/3838/${UNDERWORLD[chainId ?? ChainId.FANTOM]}`, query, variables)
 
 export const getUnderworldPairs = async (chainId = ChainId.ETHEREUM, variables = undefined) => {
   const { underworldPairs } = await fetcher(chainId, underworldPairsQuery, variables)

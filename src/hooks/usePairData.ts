@@ -5,9 +5,11 @@ import useSWR from 'swr'
 
 export function useFetcher() {
     const { chainId } = useActiveWeb3React()
-    const prefix = chainId == ChainId.FANTOM ? 'fantom' : 'avalanche'
+    // const prefix = chainId == ChainId.FANTOM ? 'fantom' : 'avalanche'
     const fetcher = (query) => request(
-    `https://api.thegraph.com/subgraphs/name/soulswapfinance/${prefix ?? 'fantom'}-exchange`,
+        // note: important -- used for volume metrics.
+        `https://api.studio.thegraph.com/query/3838/${chainId == ChainId.AVALANCHE ? 'avalanche' : 'fantom'}-swap/version/latest`,
+    // `https://api.thegraph.com/subgraphs/name/soulswapfinance/${prefix ?? 'fantom'}-exchange`,
     query
     )
     return fetcher

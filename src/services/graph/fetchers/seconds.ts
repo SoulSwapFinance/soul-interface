@@ -14,9 +14,9 @@ export const SECONDS = {
   // [ChainId.HARMONY]: 'sushiswap/harmony-blocks',
   // [ChainId.CELO]: 'sushiswap/celo-blocks',
 }
-
 export const timeFetcher = async (chainId = ChainId.FANTOM, query, variables) =>
   request(`${GRAPH_HOST[chainId ?? ChainId.FANTOM]}/subgraphs/name/${SECONDS[chainId ?? ChainId.FANTOM]}`, query, variables)
+  // request(`${GRAPH_HOST[chainId ?? ChainId.FANTOM]}/query/3838/${SECONDS[chainId ?? ChainId.FANTOM]}/version/latest`, query, variables)
 
 export const getSeconds = async (chainId = ChainId.FANTOM, start, end) => {
   const { seconds } = await timeFetcher(chainId, secondsQuery, {
@@ -47,6 +47,7 @@ export const getCustomDay = async (chainId = ChainId.FANTOM, days: number) => {
   const start = Math.floor(Number(date) / 1000)
   const end = Math.floor(Number(date) / 1000) + 600
   const { seconds } = await request(`https://api.thegraph.com/subgraphs/name/${SECONDS[chainId ?? ChainId.FANTOM]}`, secondsQuery, {
+  // const { seconds } = await request(`https://api.studio.thegraph.com/query/3838/${SECONDS[chainId ?? ChainId.FANTOM]}/version/latest`, secondsQuery, {
     start,
     end,
   })
