@@ -62,21 +62,21 @@ interface TokenProps {
 }
 
 function Token({ outputCurrency }: TokenProps) {
-  const router = useRouter()
+  // const router = useRouter()
   const id = outputCurrency?.wrapped.address.toLowerCase()
   // const tokenAddress = id
   const [showPro, setShowPro] = useState(false)
   const { chainId, library } = useActiveWeb3React()
   // const [isCopied, setCopied] = useCopyClipboard()
 
-  const [totalSupply, setTotalSupply] = useState(0)
+  // const [totalSupply, setTotalSupply] = useState(0)
   const [tokenDecimals, setTokenDecimals] = useState(18)
   // const [totalSupply, setTotalSupply] = useState(0)
   const tokenContract = useTokenContract(id)
 
   useEffect(() => {
     const fetch = async () => {
-      setTotalSupply(await tokenContract?.totalSupply())
+      // setTotalSupply(await tokenContract?.totalSupply())
       setTokenDecimals(await tokenContract?.decimals())
     }
     fetch()
@@ -117,8 +117,8 @@ function Token({ outputCurrency }: TokenProps) {
 
   const volumeUSD1d = token?.volumeUSD - token1d?.volumeUSD
   const volumeUSD2d = token1d?.volumeUSD - token2d?.volumeUSD
-  const volumeUSD1dChange = (volumeUSD1d / volumeUSD2d) * 100 - 100
-  const priceUSD = token?.priceUSD
+  // const volumeUSD1dChange = (volumeUSD1d / volumeUSD2d) * 100 - 100
+  // const priceUSD = token?.priceUSD
   const priceUSD1d = token?.priceUSD - token1d?.priceUSD
   const priceUSD2d = token1d?.priceUSD - token2d?.priceUSD
   const priceUSD1dChange = (priceUSD1d / priceUSD2d) * 100 - 100

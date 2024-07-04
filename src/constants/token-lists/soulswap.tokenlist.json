@@ -530,6 +530,14 @@
     },
     {
       "chainId": 250,
+      "name": "Go Brandon",
+      "address": "0x91e70fe6a3dce9dd8347a09c02ce89d3df1bff67",
+      "symbol": "LGB",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/SoulSwapFinance/assets/master/blockchains/fantom/assets/0x91e70fe6a3dce9dd8347a09c02ce89d3df1bff67/logo.png"
+    },
+    {
+      "chainId": 250,
       "name": "Fanties",
       "address": "0x5a27c97Bf717F455c9eeb838a53Fb9F044509C59",
       "symbol": "FANTIE",
