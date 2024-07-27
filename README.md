@@ -17,4 +17,5 @@ Home repository for the SoulSwap Decentralized Finance Application.
 - ### [Summoner](./src/pages/summoner)
 
 ### Notes
-- Running into issues with the next config? Try ensuring valid node version and Nextjs compatility on imports.
+- **Running into issues with next config?**
+Try ensuring valid node version and Nextjs compatility on imports.
