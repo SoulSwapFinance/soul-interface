@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { ThemeContext } from "styled-components";
 import { hexToUnit, toFormattedBalance } from "../../utils/conversion";
 import Row from "../Row";
 import { Typo1, Typo2 } from "../index";

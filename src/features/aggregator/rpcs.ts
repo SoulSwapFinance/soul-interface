@@ -23,7 +23,7 @@ function createProvider(name: string, defaultRpc: string, chainId: number) {
           }
         ),
         priority: i
-      })),
+      })) as unknown as ethers.providers.FallbackProviderConfig[],
       1
     )
   }
@@ -33,7 +33,7 @@ export const providers = {
   ethereum: createProvider("ethereum", "https://rpc.ankr.com/eth,https://eth-mainnet.gateway.pokt.network/v1/5f3453978e354ab992c4da79,https://cloudflare-eth.com/,https://main-light.eth.linkpool.io/,https://api.mycryptoapi.com/eth", 1),
   bsc: createProvider("bsc", "https://bsc-dataseed.binance.org/,https://bsc-dataseed1.defibit.io/,https://bsc-dataseed1.ninicoin.io/,https://bsc-dataseed2.defibit.io/,https://bsc-dataseed2.ninicoin.io/", 56),
   polygon: createProvider("polygon", "https://polygon-rpc.com/,https://rpc-mainnet.maticvigil.com/", 137),
-  fantom: createProvider("fantom", "https://rpc.ankr.com/fantom,https://rpc.ftm.tools/,https://rpcapi.fantom.network", 250),
+  fantom: createProvider("fantom", "https://rpc.ftm.tools/,https://rpcapi.fantom.network", 250),
   avax: createProvider("avax", "https://api.avax.network/ext/bc/C/rpc,https://rpc.ankr.com/avalanche", 43114),
   arbitrum: createProvider("arbitrum", "https://arb1.arbitrum.io/rpc", 42161),
   moonriver: createProvider("moonriver", "https://rpc.api.moonriver.moonbeam.network/,https://moonriver.api.onfinality.io/public", 1285),

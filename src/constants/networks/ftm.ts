@@ -31,7 +31,7 @@ const fantomInfo: NetworkInfo = {
     decimal: 18,
   },
   // rpcUrl: 'https://fantom.kyberengineering.io',
-  rpcUrl: 'https://rpc.ankr.com/fantom',
+  rpcUrl: 'https://rpc.ftm.tools',
   routerUri: `${process.env.REACT_APP_AGGREGATOR_API}/fantom/route/encode`,
   classic: {
     defaultSubgraph: 'https://api.thegraph.com/subgraphs/name/kybernetwork/kyberswap-exchange-fantom',

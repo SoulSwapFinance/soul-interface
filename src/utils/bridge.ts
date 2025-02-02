@@ -63,7 +63,6 @@ export const bridgeNetworks = {
     chainId: 250,
     network: "Fantom",
     hex: "fa",
-    // rpc: "https://rpc.ankr.com/fantom",
     rpc: "https://rpc.ftm.tools",
     name: "Fantom",
     symbol: "FTM",

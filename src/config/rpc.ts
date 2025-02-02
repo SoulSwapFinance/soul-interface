@@ -5,7 +5,6 @@ const rpc = {
   [ChainId.TELOS]: 'https://rpc1.us.telos.net/evm',
   [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
   // [ChainId.FANTOM]: 'https://rpcapi.fantom.network',
-  // [ChainId.FANTOM]: 'https://rpc.ankr.com/fantom',
   [ChainId.FANTOM]: 'https://rpc.ftm.tools',
   [ChainId.AVALANCHE]: 'https://api.avax.network/ext/bc/C/rpc',
   [ChainId.MOONRIVER]: 'https://moonriver.public.blastapi.io',

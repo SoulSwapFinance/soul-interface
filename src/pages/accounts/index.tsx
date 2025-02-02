@@ -11,10 +11,6 @@ import { useActiveWeb3React } from 'services/web3'
 const Accounts = () => {
   const { account, chainId } = useActiveWeb3React()
 
-  // const router = useRouter()
-  // const account = router.query.account as string
-  // const chainId = router.query.account ? Number(router.query.chainId) : undefined
-
   const coffinBoxEnabled = featureEnabled(Feature.COFFINBOX, chainId)
   if (!account || !chainId) return null
 

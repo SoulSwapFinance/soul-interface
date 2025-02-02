@@ -15,7 +15,6 @@ export const RPC = {
   [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
   [ChainId.FANTOM]: 'https://rpc.ftm.tools',
   // [ChainId.FANTOM]: 'https://rpcapi.fantom.network',
-  // [ChainId.FANTOM]: 'https://rpc.ankr.com/fantom',
   [ChainId.BASE]: 'https://rpc.ankr.com/base',
   [ChainId.MATIC]: 'https://rpc.ankr.com/polygon', // 'https://rpc-mainnet.maticvigil.com',
   // [ChainId.MATIC]: 'https://apis.ankr.com/e22bfa5f5a124b9aa1f911b742f6adfe/c06bb163c3c2a10a4028959f4d82836d/polygon/full/main',

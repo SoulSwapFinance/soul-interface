@@ -19,7 +19,6 @@ export const RPC = {
   [ChainId.ETHEREUM]: 'https://eth-mainnet.alchemyapi.io/v2/q1gSNoSMEzJms47Qn93f9-9Xg5clkmEC',
   [ChainId.BSC]: 'https://bsc-dataseed.binance.org/',
   // [ChainId.FANTOM]: 'https://rpcapi.fantom.network',
-  // [ChainId.FANTOM]: 'https://rpc.ankr.com/fantom',
   [ChainId.FANTOM]: 'https://rpc.ftm.tools',
   [ChainId.MATIC]: 'https://rpc-mainnet.maticvigil.com',
   [ChainId.MOONRIVER]: 'https://rpc.ankr.com/moonbeam',
