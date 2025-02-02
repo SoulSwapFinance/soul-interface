@@ -63,7 +63,6 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
 
   // show confirmation view before minting SOUL
   const [showMintConfirmation, setShowMintConfirmation] = useState(false)
-  const [showDepositConfirmation, setShowDepositConfirmation] = useState(false)
   // const [showOptions, setShowOptions] = useState(false)
 
   const assetAddress = bond.lpAddress
@@ -264,41 +263,26 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
     fetchApproval()
   }, [account])
 
-
-  // // // Deposit
+  // // // deposits: selected amount into the bonds
   // const handleDeposit = async (pid, amount) => {
+  //   let tx
   //   try {
-  //     const result = await bondContract?.deposit(pid,
-  //       Number(depositValue).toFixed(assetDecimals).toBigNumber(assetDecimals)
-  //       // parsedDepositValue.quotient.toString()
+  //     tx = await bondContract?.deposit(
+  //       pid,
+  //       (Number(depositValue)).toFixed(assetDecimals)
+  //         .toBigNumber(assetDecimals)
   //     )
-  //     return result
+  //     await tx.wait()
   //   } catch (e) {
+  //     const smallerValue = Number(depositValue) - 0.000001
+  //     tx = await bondContract?.deposit(
+  //       pid,
+  //       (Number(smallerValue)).toFixed(assetDecimals)
+  //         .toBigNumber(assetDecimals))
+  //     await tx.wait()
   //     console.log(e)
-  //     // alert(e.message)
-  //     return e
   //   }
   // }
-  // // deposits: selected amount into the bonds
-  const handleDeposit = async (pid, amount) => {
-    let tx
-    try {
-      tx = await bondContract?.deposit(
-        pid,
-        (Number(depositValue)).toFixed(assetDecimals)
-          .toBigNumber(assetDecimals)
-      )
-      await tx.wait()
-    } catch (e) {
-      const smallerValue = Number(depositValue) - 0.000001
-      tx = await bondContract?.deposit(
-        pid,
-        (Number(smallerValue)).toFixed(assetDecimals)
-          .toBigNumber(assetDecimals))
-      await tx.wait()
-      console.log(e)
-    }
-  }
 
 
   // mints SOUL from bond.
@@ -421,17 +405,6 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                   {/* <Text className="flex justify-center text-2xl font-bold"> 
                   {isUnderworldPair ? token0Symbol : bond.lpSymbol} 
                 </Text> */}
-                  {/* DEPOSIT: ASSET PANEL */}
-                  {isStakeable && depositable && Number(walletBalance) != 0 &&
-                    <BondInputPanel
-                      pid={bond.pid}
-                      onUserInput={(value) => setDepositValue(value)}
-                      onMax={() => setDepositValue(_walletBalance.toString())}
-                      value={depositValue}
-                      balance={_walletBalance.toString()}
-                      id={pid}
-                    />
-                  }
                   {/* CREATE BUTTON */}
                   {isStakeable && depositable && unstakedBal <= 1 &&
                     <Wrap padding="0" margin="0" display="flex">
@@ -452,58 +425,6 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                         >
                           {`CREATE ${bond.lpSymbol} PAIR`}
                         </TokenPairLink>
-                      </SubmitButton>
-                    </Wrap>
-                  }
-                  {/* APPROVE BUTTON */}
-                  {!approved && isStakeable && depositable && unstakedBal > 0 &&
-                    <Wrap padding="0" margin="0" display="flex">
-                      <SubmitButton
-                        height="2rem"
-                        primaryColor={getChainColor(chainId)}
-                        margin=".5rem 0 0rem 0"
-                        onClick={() => handleApprove()}>
-                        {`APPROVE LP`}
-                      </SubmitButton>
-                    </Wrap>
-                  }
-                  {/* DEPOSIT BUTTON */}
-                  {approved && isStakeable && depositable && unstakedBal > 0 &&
-                    <Wrap padding="0" margin="0" display="flex">
-                      <SubmitButton
-                        height="2rem"
-                        margin=".5rem 0 0rem 0"
-                        primaryColor={getChainColor(chainId)}
-                        onClick={() =>
-                          _stakedBalance == 0
-                            ? handleDeposit(pid, depositValue)
-                            : setShowDepositConfirmation(true)
-                        }
-                      >
-                        DEPOSIT {`${bond.lpSymbol} LP`}
-                      </SubmitButton>
-                    </Wrap>
-                  }
-                  {/* ZAP BUTTON */}
-                  {isStakeable && depositable &&
-                    <Wrap padding="0" margin="0" display="flex">
-                      <SubmitButton
-                        height="2rem"
-                        primaryColor={getChainColor(chainId)}
-                        // color={}
-                        // className={'font-bold'}
-                        margin=".5rem 0 0rem 0"
-                        onClick={() =>
-                          handleShowZap(pid)
-                        }
-                      >
-                        <div className="flex text-lg gap-1">
-                          {/* <Zap width={26} className={classNames(`text-white`} /> */}
-                          {`ZAP INTO `}
-                          {/* <CurrencyDollarIcon width={26} className={classNames(`text-white`)} /> */}
-                          {/* &rarr;  */}
-                          {`${bond.lpSymbol}`}
-                        </div>
                       </SubmitButton>
                     </Wrap>
                   }
@@ -657,33 +578,6 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
 
           </Modal>
         }
-
-        { /* CONFIRMATION MODAL */}
-        <Modal isOpen={showDepositConfirmation} onDismiss={
-          () => setShowDepositConfirmation(false)}>
-          <div className="space-y-4">
-            <ModalHeader header={`Are you sure?`} onClose={() => setShowDepositConfirmation(false)} />
-            <Typography variant="lg">
-              {`Depositing adds to your position, but forfeits your pending rewards. You are responsible for your decision to deposit more and agree that you understand these terms. ${chainId == ChainId.FANTOM ? 'You must mint prior to depositing more.' : ''}`
-              }
-            </Typography>
-            <Typography variant="sm" className="font-medium">
-              QUESTIONS OR CONCERNS?
-              <a href="mailto:soulswapfinance@gmail.com">
-                {' '} SEND EMAIL.
-              </a>
-            </Typography>
-            <SubmitButton
-              primaryColor={getChainColor(chainId)}
-              height="2.5rem"
-              onClick={() =>
-                handleDeposit(pid, Number(depositValue))}
-
-            >
-              {`UNDERSTOOD & AGREED`}
-            </SubmitButton>
-          </div>
-        </Modal>
       </BondContainer>
     </div>
 
