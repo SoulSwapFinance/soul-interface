@@ -90,22 +90,6 @@ const useMenu: UseBar = () => {
       })
     }
 
-    // Farm
-    if (featureEnabled(Feature.DEFARM, chainId)) {
-      mainItems.push({
-        key: 'farm',
-        link: '/defarms',
-        title: 'DeFarm',
-        icon: <CauldronIcon
-          className={classNames(`w-7 h-7 rounded-md`
-            // , isEarn ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
-          )}
-          fillPrimary={chainColor}
-          fillSecondary={WHITE}
-        />,
-      })
-    }
-
     // Bond
     if (featureEnabled(Feature.BONDS, chainId)) {
       mainItems.push({

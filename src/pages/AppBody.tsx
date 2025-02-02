@@ -31,10 +31,12 @@ const BodyContent = styled.div`
 /**
  * The styled container element that wraps the content of most pages and the tabs.
  */
-export default function AppBody({ children }: { children: React.ReactNode }) {
+function AppBody({ children }: { children: React.ReactNode }) {
   return (
     <BodyContent>
       <BodyWrapper>{children}</BodyWrapper>
     </BodyContent>
   )
 }
+
+export default AppBody

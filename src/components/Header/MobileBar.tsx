@@ -59,9 +59,6 @@ const MobileBar = () => {
     const walletRoute = useCallback(() => {
         router.push(`/portfolio`)
     }, [])
-    const dataRoute = useCallback(() => {
-        router.push(`/analytics`)
-    }, [])
     const farmRoute = useCallback(() => {
         router.push(`/farm`)
     }, [])
@@ -70,31 +67,12 @@ const MobileBar = () => {
     const portfolioPage = router.pathname.startsWith('/portfolio')
     const farmPage = router.pathname.startsWith('/farm') || router.pathname.startsWith('/summoner')
     const bondPage = router.pathname.startsWith('/bond') || router.pathname.startsWith('/bonds')
-    const dataPage = router.pathname.startsWith('/analytics')
-    // const dataPage = router.pathname.startsWith('/analytics')
-
-    // const isExchangeAnalytics
-    //     = asPath.startsWith('/exchange/analytics')
-    //     || asPath.startsWith('/exchange/analytics/dashboard')
-    //     || asPath.startsWith('/exchange/analytics/pairs')
-    //     || asPath.startsWith('/exchange/analytics/tokens')
-
-    // const isLimit = router.pathname.startsWith('/limit')
-    //   || router.pathname.startsWith('/exchange/limit')
-
-    // const isAggregator = asPath.startsWith('/aggregator')
-    //   || asPath.startsWith('/exchange/aggregator')
-
-    // const useSettings = isExchange || isLimit || isPool
 
     const isRemove = asPath.startsWith('/remove') || asPath.startsWith('/exchange/remove')
     const isAdd = asPath.startsWith('/add') || asPath.startsWith('/exchange/add')
     const isPool = isRemove || isAdd
     const isWallet = portfolioPage
-    const isData = dataPage
     const isEarn = farmPage || bondPage
-    // const isLearn = learnPage
-    // const isData = dataPage || dataPage
     const isExchange = swapPage || isPool
 
     return (
@@ -185,20 +163,6 @@ const MobileBar = () => {
                             <SeedlingIcon
                                 fillPrimary={isEarn ? `${getChainColor(chainId)}` : `#FFFFFF`}
                                 fillSecondary={isEarn ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                className={'w-7 h-7'}
-                            />
-                        </div>
-                        }
-                        {featureEnabled(Feature.ANALYTICS, chainId) &&
-                        <div
-                            className={classNames(
-                                `hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
-                                isData && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
-                            onClick={dataRoute}
-                        >
-                            <ChartIcon
-                                fillPrimary={isData ? `${getChainColor(chainId)}` : `#FFFFFF`}
-                                fillSecondary={isData ? `#FFFFFF` : `${getChainColor(chainId)}`}
                                 className={'w-7 h-7'}
                             />
                         </div>

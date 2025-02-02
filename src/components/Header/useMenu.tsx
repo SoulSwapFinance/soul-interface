@@ -156,19 +156,6 @@ const useMenu: UseMenu = () => {
       })
     }
 
-    // if (featureEnabled(Feature.ANALYTICS, chainId)) {
-    //   mainItems.push({
-    //       key: 'data',
-    //       title: `Analytics`,
-    //       // icon: CHART_ICON,
-    //       // icon: <PresentationChartLineIcon width={20} className={classNames(
-    //       //   `filter text-white`
-    //       //   )} />,
-    //       link: '/analytics'
-    //   })
-    // }
-
-
     return mainItems.filter((el) => Object.keys(el).length > 0)
   }, [chainId ?? ChainId.FANTOM])
 }

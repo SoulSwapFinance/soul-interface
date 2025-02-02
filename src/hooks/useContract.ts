@@ -96,7 +96,6 @@ import ENCHANT_HELPER_ABI from 'constants/abis/soulswap/enchant-helper.json' // 
 import SOUL_ABI from 'constants/abis/soulswap/soulpower.json' // 28 JUL
 import SEANCE_ABI from 'constants/abis/soulswap/seance.json' // 28 JUL
 import ATOMIC_SWAP_ABI from 'constants/abis/soulswap/atomic-swap.json'
-import LAUNCHPAD_ABI from 'constants/abis/soulswap/launchpad.json'
 import PRICE_HELPER_ABI from 'constants/abis/soulswap/pricehelper.json'
 import BORING_HELPER_ABI from 'constants/abis/soulswap/boring-helper.json'
 import HARVEST_HELPER_ABI from 'constants/abis/soulswap/harvest-helper.json'
@@ -373,11 +372,6 @@ export function useAutoStakeContract(withSignerIfPossible?: boolean): Contract |
 export function useFactoryContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && FACTORY_ADDRESS[chainId ?? ChainId.FANTOM], FACTORY_ABI, false)
-}
-
-export function useLaunchpadContract(address?: string, withSignerIfPossible?: boolean): Contract | null {
-  const { chainId } = useActiveWeb3React()
-  return useContract(chainId && address !== undefined && address !== '' && address, LAUNCHPAD_ABI, withSignerIfPossible)
 }
 
 export function useRouterContract(useArcher = false, withSignerIfPossible?: boolean): Contract | null {

@@ -1,17 +1,9 @@
-import dynamic from 'next/dynamic'
 import { ChainId, Currency, FACTORY_ADDRESS, Token, USDC_ADDRESS, WNATIVE, WNATIVE_ADDRESS } from '../../sdk'
-// import useDexCandles from '../../hooks/useDexCandles'
 import { CandlePeriod, NumericalCandlestickDatum } from './types/Candle'
 import React, { useEffect, useState } from 'react'
-// import { RowFixed } from '../Row'
-// import { CurrencyLogo } from '../CurrencyLogo'
-// import NavLink from '../NavLink'
 import { classNames } from '../../functions'
-// import soulLoading from '../../animation/solarbeam-loading.json'
 import { computePairAddress } from '../../sdk'
-// import { AutoColumn } from '../Column'
 import { useActiveWeb3React } from 'services/web3'
-const KChart = dynamic(() => import('kaktana-react-lightweight-charts'), { ssr: false })
 
 interface PeriodChooserProps {
   period: CandlePeriod | undefined

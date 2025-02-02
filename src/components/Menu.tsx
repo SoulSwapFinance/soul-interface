@@ -26,11 +26,6 @@ const items = () => [
     href: '/dashboard',
   },
   {
-    name: 'Analytics',
-    description: 'View your Trades.',
-    href: '/analytics',
-  },
-  {
     name: 'Links',
     description: 'Our Resources.',
     href: 'https://link.soul.sh',
