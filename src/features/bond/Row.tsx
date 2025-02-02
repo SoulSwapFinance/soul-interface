@@ -111,13 +111,11 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
   const token0 = new Token(chainId, bond.token0Address, token0Decimals, token0Symbol, token0Name)
   const token1 = new Token(chainId, bond.token1Address, token1Decimals, token1Symbol, token1Name)
 
-  // stakeble always meow.
-  const isStakeable = true
   // chainId
   //   == ChainId.FANTOM && _stakedBalance == 0
   //   || chainId == ChainId.AVALANCHE
 
-  const depositable = true
+  const depositable = false
   // = chainId == ChainId.FANTOM && pid == '2' ? false
   //   : Number(pid) >= 10 ? false
   //   : true
@@ -422,7 +420,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                   {isUnderworldPair ? token0Symbol : bond.lpSymbol} 
                 </Text> */}
                   {/* DEPOSIT: ASSET PANEL */}
-                  {isStakeable && depositable && Number(walletBalance) != 0 &&
+                  {depositable && Number(walletBalance) != 0 &&
                     <BondInputPanel
                       pid={bond.pid}
                       onUserInput={(value) => setDepositValue(value)}
@@ -433,7 +431,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                     />
                   }
                   {/* CREATE BUTTON */}
-                  {isStakeable && depositable && unstakedBal <= 1 &&
+                  {depositable && unstakedBal <= 1 &&
                     <Wrap padding="0" margin="0" display="flex">
                       <SubmitButton
                         height="2rem"
@@ -456,7 +454,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                     </Wrap>
                   }
                   {/* APPROVE BUTTON */}
-                  {!approved && isStakeable && depositable && unstakedBal > 0 &&
+                  {!approved && depositable && unstakedBal > 0 &&
                     <Wrap padding="0" margin="0" display="flex">
                       <SubmitButton
                         height="2rem"
@@ -468,7 +466,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                     </Wrap>
                   }
                   {/* DEPOSIT BUTTON */}
-                  {approved && isStakeable && depositable && unstakedBal > 0 &&
+                  {approved && depositable && unstakedBal > 0 &&
                     <Wrap padding="0" margin="0" display="flex">
                       <SubmitButton
                         height="2rem"
@@ -485,7 +483,7 @@ const BondRowRender = ({ pid, lpToken, token0Symbol, type, token0Address, token1
                     </Wrap>
                   }
                   {/* ZAP BUTTON */}
-                  {isStakeable && depositable &&
+                  {depositable &&
                     <Wrap padding="0" margin="0" display="flex">
                       <SubmitButton
                         height="2rem"
