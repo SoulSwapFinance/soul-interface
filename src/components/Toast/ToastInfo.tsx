@@ -1,10 +1,10 @@
-import { Chain } from 'soulswap-chain'
 import React, { FC } from 'react'
 
 import { NotificationData } from './index'
 import { ToastButtons } from './ToastButtons'
 import { ToastContent } from './ToastContent'
 import { HalfCircleIcon } from 'components/Icons/HalfCircleIcon'
+import { getExplorerLink } from 'functions/explorer'
 
 interface ToastInfo extends Omit<NotificationData, 'promise'> {
   onDismiss(): void
@@ -18,7 +18,7 @@ export const ToastInfo: FC<ToastInfo> = ({ href, chainId, txHash, onDismiss, sum
         title="Transaction Info"
         summary={summary?.info}
       />
-      <ToastButtons href={href ? href : Chain.from(chainId).getTxUrl(txHash)} onDismiss={onDismiss} />
+      <ToastButtons href={href ? href : getExplorerLink(chainId, txHash, 'transaction')} onDismiss={onDismiss} />
     </>
   )
 }

@@ -1,4 +1,3 @@
-import { Chain } from 'soulswap-chain'
 import React, { FC } from 'react'
 
 // import { Loader, NotificationData } from '../../Loader'
@@ -6,6 +5,7 @@ import { ToastButtons } from './ToastButtons'
 import { ToastContent } from './ToastContent'
 import { NotificationData } from './Toast'
 import Loader from 'components/Loader'
+import { getExplorerLink } from 'functions/explorer'
 
 interface ToastPending extends Omit<NotificationData, 'promise'> {
   onDismiss(): void
@@ -19,7 +19,7 @@ export const ToastPending: FC<ToastPending> = ({ href, chainId, txHash, onDismis
         title="Transaction Pending"
         summary={summary.pending}
       />
-      <ToastButtons href={href ? href : Chain.from(chainId).getTxUrl(txHash)} onDismiss={onDismiss} />
+      <ToastButtons href={href ? href : getExplorerLink(chainId, txHash, 'transaction')} onDismiss={onDismiss} />
     </>
   )
 }
