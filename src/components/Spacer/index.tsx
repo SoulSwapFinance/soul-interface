@@ -16,7 +16,6 @@ const spacing = {
 }
 
 const Spacer: React.FC<SpacerProps> = ({ size = "md" }) => {
-  // const { spacing } = useContext(ThemeContext);
 
   let s: number;
   switch (size) {

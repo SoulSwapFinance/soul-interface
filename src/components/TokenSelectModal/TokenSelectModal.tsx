@@ -5,7 +5,7 @@ import { OverlayButton, Typo3 } from "../index";
 import Row from "../Row";
 import Spacer from "../Spacer";
 import Column from "../Column";
-import styled, { ThemeContext } from "styled-components";
+import styled from "styled-components";
 import TokenBalance from "./TokenBalance";
 // import ModalTitle from "./ModalTitle";
 import ModalContent from "./ModalContent";
@@ -30,7 +30,6 @@ const TokenSelectModal: React.FC<any> = ({
   setTokenSelected,
   includeNative,
 }) => {
-  // const { color } = useContext(ThemeContext);
   const allAssets = includeNative
   ? [{ ...FANTOM_NATIVE, balanceOf: ftmBalance }, ...assets]
     // ? [{ ...NATIVE[chainId ?? ChainId.FANTOM], balanceOf: ftmBalance }, ...assets]

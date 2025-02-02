@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react"
-// import { ThemeContext } from "styled-components"
+import React, { useState } from "react"
 import Row from "../Row"
 import Spacer from "../Spacer"
 import InputCurrency from "./InputCurrency"

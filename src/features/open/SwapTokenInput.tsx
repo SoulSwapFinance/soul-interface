@@ -10,7 +10,6 @@ import {
   weiToMaxUnit,
   weiToUnit,
 } from "utils/conversion";
-// import useFantomNative from "hooks/useFantomNative";
 import { useActiveWeb3React } from "services/web3";
 import { SubmitButton } from "features/summoner/Styles";
 import { getChainColor } from "constants/chains";
@@ -22,13 +21,10 @@ const SwapTokenInput: React.FC<any> = ({
     token,
     setToken,
     tokenList,
-    // title = "Amount",
     disableMaximum,
     disabledInput,
   }) => {
-    // const { color } = useContext(ThemeContext);
     const { chainId } = useActiveWeb3React()
-    // const { getBalance } = useFantomNative();
     const [error, setError] = useState(null);
     const [tokenBalance, setTokenBalance] = useState(BigNumber.from(0));
     const [formattedTokenBalance, setFormattedTokenBalance] = useState<any>([

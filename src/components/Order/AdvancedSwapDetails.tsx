@@ -2,7 +2,6 @@ import React, { useMemo } from "react";
 import { constants } from "soulswap-limit-orders-lib";
 import { isTransactionCostDependentChain } from "soulswap-limit-orders-lib/dist/utils";
 import { CurrencyAmount } from "sdk";
-// import { formatUnits } from "@ethersproject/units";
 import useGelatoLimitOrders from "hooks/gelato/useGelatoLimitOrders";
 import useGelatoLimitOrdersLib from "hooks/gelato/useGelatoLimitOrdersLib";
 import useTheme from "../../hooks/useTheme";

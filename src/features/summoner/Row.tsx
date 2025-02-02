@@ -8,17 +8,14 @@ import useApprove from 'hooks/useApprove'
 import { Tab } from '@headlessui/react'
 import {
     FarmItemBox, Text, SubmitButton, Wrap
-} from './Styles' // FarmContentWrapper
+} from './Styles'
 import { classNames, formatNumber, tryParseAmount } from 'functions'
 import { usePairInfo, useSummonerPoolInfo, useSummonerUserInfo, useTokenInfo, useUserTokenInfo } from 'hooks/useAPI'
-// import DoubleCurrencyLogo from 'components/DoubleLogo'
 import HeadlessUIModal from 'components/Modal/HeadlessUIModal'
 import { Button } from 'components/Button'
 import Typography from 'components/Typography'
-// import ModalHeader from 'components/Modal/Header'
 import NavLink from 'components/NavLink'
 import FarmInputPanel from './Input'
-// import { CurrencyLogo } from 'components/CurrencyLogo'
 import QuestionHelper from 'components/QuestionHelper'
 import AssetInput from 'components/AssetInput'
 import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
@@ -27,20 +24,8 @@ import { ExternalLink } from 'components/ReusableStyles'
 import { CircleStackIcon, CurrencyDollarIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
 import PairChart from 'pages/analytics/pairs/embedded/[id]'
 import { useCurrencyBalance } from 'state/wallet/hooks'
-// import Modal from 'components/DefaultModal'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 
-// const HideOnSmall = styled.div`
-// @media screen and (max-width: 900px) {
-//   display: none;
-// }
-// `
-
-// const HideOnMobile = styled.div`
-// @media screen and (max-width: 600px) {
-//   display: none;
-// }
-// `
 
 const TokenPairLink = styled(ExternalLink)`
   font-size: .9rem;

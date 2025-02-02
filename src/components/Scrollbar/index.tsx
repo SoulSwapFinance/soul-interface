@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars-2";
-// import { ThemeContext } from "styled-components";
 
 const Scrollbar: React.FC<any> = (props) => {
   const barColor = props?.style?.barColor || "#09172E";

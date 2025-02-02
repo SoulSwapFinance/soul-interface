@@ -34,8 +34,6 @@ const DesktopV2 = () => {
   <div className={`flex gap-2 mr-2 ml-2 h-full justify-center`}>
     { ![ChainId.FANTOM, ChainId.AVALANCHE].includes(chainId ?? ChainId.FANTOM) &&
     <Image
-        // src={'/favicon.png'} 
-        // src={`/soulswap-finance-text.png`}
         src={`/SoulSwap-Banner.png`}
         height={48}
         width={224}
