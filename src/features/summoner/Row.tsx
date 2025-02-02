@@ -123,7 +123,7 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
     const _withdrawValue = Number(withdrawValue)
 
     const hasBalance = Number(walletBalance) > 0
-    const isActive = Number(allocPoint) > 0 // pairStatus == "active"
+    const isActive = false // Number(allocPoint) > 0 // pairStatus == "active"
     const assetToken = new Token(chainId, farm.lpAddress, 18)
 
     const balance = useCurrencyBalance(chainId, account ?? undefined, assetToken)
