@@ -6,9 +6,22 @@ import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums'
 import BridgeAssetSelect from 'features/bridge/BridgeAssetSelect'
 import Head from 'next/head';
+import { useActiveWeb3React } from 'services/web3';
 
 const Bridge = ({ }) => {
-    return (
+  const { chainId } = useActiveWeb3React()
+
+  if (!chainId) {
+    return <div>
+      <div>
+        <div>
+          {`Please connect to Fantom`}
+        </div>
+      </div>
+    </div>
+  }
+
+  return (
     <DoubleGlowShadowV2>
       <Head>
         <title>Bridge | SoulSwap</title>
@@ -35,5 +48,5 @@ const Bridge = ({ }) => {
   )
 }
 
-export default Bridge
 Bridge.Guard = NetworkGuard(Feature.BRIDGE)
+export default Bridge

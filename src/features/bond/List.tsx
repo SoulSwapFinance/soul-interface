@@ -7,23 +7,8 @@ import { Button } from 'components/Button'
 import NavLink from 'components/NavLink'
 import { useActiveWeb3React } from 'services/web3'
 import { ChainId } from 'sdk'
-import { featureEnabled } from 'functions/feature'
-import { Feature } from 'enums/Feature'
 import { BondsBanner } from 'components/Banner'
 import { ArchivedBondsBanner } from 'components/Banner'
-
-// import { useSummonerContract } from 'hooks/useContract'
-// import ExternalLink from 'components/ExternalLink'
-// import { classNames } from 'functions'
-// import { getChainColor, getChainColorCode } from 'constants/chains'
-// import { getChainColorCode } from 'constants/chains'
-// import { classNames } from 'functions'
-// import Image from 'next/image'
-// import MINT_BANNER from 'assets/branding/mint-banner.png'
-// import ExternalLink from 'components/ExternalLink'
-// import { SubmitButton } from 'features/bond/Styles'
-// import { classNames } from 'functions/styling'
-// import TokenStats from 'components/TokenStats' 
 
 export const BondList = () => {
   const { chainId } = useActiveWeb3React()
@@ -117,15 +102,6 @@ export const BondList = () => {
             </div>
           </NavLink>
         </Button>
-        {featureEnabled(Feature.DEFARM, chainId) &&
-          <Button variant="filled" color="purple" size="lg">
-            <NavLink href={'/defarms'}>
-              <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                <span>DeFarms</span>
-              </div>
-            </NavLink>
-          </Button>
-        }
       </div>
       <Typography className="text-2xl bg-dark-1000 mb-2 rounded-2xl m-1 p-4 border border-purple font-bold text-center">SoulSwap Bonds</Typography>
       <BondKey />

@@ -49,8 +49,6 @@
     "@ramp-network/ramp-instant-sdk": "^2.5.0",
     "@reach/dialog": "0.18.0",
     "@reduxjs/toolkit": "1.7.1",
-    "@soulswap/swap-core": "^0.0.3",
-    "@sushiswap/chainlink-whitelist": "0.2.2",
     "@sushiswap/core": "2.0.0-canary.0",
     "@tailwindcss/jit": "^0.1.18",
     "@types/node": "^20.4.2",
@@ -87,7 +85,7 @@
     "husky": "^7.0.0",
     "lint-staged": "^11.0.0",
     "lodash": "^4.17.21",
-    "lottie-react": "^2.4.0",
+    "lottie-react": "^2.4.1",
     "madge": "^6.1.0",
     "next": "^13.4.9",
     "next-pwa": "^5.6.0",
@@ -132,7 +130,11 @@
     "include": [
       "src"
     ],
-    "exclude": [],
+    "exclude": [
+      "src/components/InputCurrency/InputCurrencyBox.tsx",
+      "src/components/TokenSelectModal/TokenSelectModal.tsx",
+      "src/features/open/SwapTokenInput.tsx"
+    ],
     "entrypoints": [
       "src/pages"
     ]
@@ -147,7 +149,6 @@
     "@chakra-ui/icons": "2.0.12",
     "@chakra-ui/react": "^2.2.1",
     "@clover-network/clover-connector": "^1.0.0",
-    "@coinbase/wallet-sdk": "^3.5.4",
     "@davatar/react": "^1.11.1",
     "@emotion/react": "^11.9.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
@@ -168,8 +169,6 @@
     "@sushiswap/trident": "^1.0.0-canary.5",
     "@tanstack/react-query": "^4.29.19",
     "@tanstack/react-virtual": "^3.0.0-alpha.0",
-    "@terra-money/terra.js": "^3.0.4",
-    "@terra-money/wallet-provider": "^3.6.5",
     "@types/big.js": "6.1.1",
     "@types/gtag.js": "0.0.7",
     "@types/ms.macro": "^2.0.0",
@@ -181,7 +180,6 @@
     "@visx/event": "^3.3.0",
     "@visx/glyph": "^3.3.0",
     "@visx/responsive": "^3.3.0",
-    "@walletconnect/web3-provider": "^1.8.0",
     "antd": "^4.22.5",
     "assert.js": "^0.5.0",
     "autoprefixer": "^10.0.2",
@@ -252,8 +250,6 @@
     "recoil": "^0.7.7",
     "sass": "^1.63.6",
     "sharp": "^0.32.2",
-    "soulswap-currency": "^0.0.1",
-    "soulswap-default-token-list": "^5.1.0",
     "soulswap-limit-orders-lib": "^1.1.0",
     "soulswap-limit-orders-react": "^4.0.5",
     "stream-browserify": "^3.0.0",

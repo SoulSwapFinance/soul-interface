@@ -23,9 +23,7 @@ import { Feature } from 'enums/Feature'
 import { useRouter } from "next/router"
 import { useCurrency } from "hooks/Tokens"
 import { currencyId } from 'functions/currency/currencyId'
-// import SwapDropdown from 'features/swap/SwapDropdown'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
-// import { NextSeo } from 'next-seo'
 import { CustomBanner } from 'components/Banner'
 import Head from 'next/head'
 import LimitHeader from 'features/limit/LimitHeader'
@@ -128,15 +126,6 @@ const Aggregator = ({ }) => {
 		.times(10 ** (fromToken?.wrapped.decimals || 18))
 		.toFixed(0);
 
-	// const balance =
-	// 	useTokenBalance(
-	// 		chainId,
-	// 		// fromToken?.isNative ? NATIVE_ADDRESS : 
-	// 		fromToken?.wrapped.address,
-	// 		// addressOrName: address,
-	// 		// watch: true
-	// 	);
-
 	const [route, setRoute] = useState(null);
 
 	const swapMutation = useMutation({
@@ -207,14 +196,6 @@ const Aggregator = ({ }) => {
 	});
 
 	const { gasTokenPrice = 0, toTokenPrice = 0, fromTokenPrice = 0 } = tokenPrices || {};
-
-	// const cleanState = () => {
-	// 	setFromToken(null)
-	// 	setToToken(null)
-	// 	setRoute(null)
-	// 	setTxUrl('')
-	// }
-
 	const tokenA = new Token(chainId, fromToken?.isNative ? NATIVE_ADDRESS : fromToken?.wrapped.address || WNATIVE_ADDRESS[chainId ?? ChainId.FANTOM], fromToken?.wrapped.decimals || 18)
 
 	const [approvalState, approve] = useTokenApprove(
@@ -227,10 +208,6 @@ const Aggregator = ({ }) => {
 	// const isApproved = approvalState === (fromToken.isNative ? true : ApprovalState.APPROVED)
 	const isApproved = approvalState === ApprovalState.APPROVED
 	const isApproveLoading = approvalState === ApprovalState.PENDING
-
-	// const onMaxClick = () => {
-	// 	if (balance) setAmount((balance.value?.div(e10(fromToken.decimals || 18))).toString());
-	// };
 
 	const handleCurrencyASelect = useCallback(
 		(currencyA: Currency) => {
@@ -427,5 +404,5 @@ const Aggregator = ({ }) => {
 	)
 }
 
-export default Aggregator
 Aggregator.Guard = NetworkGuard(Feature.AGGREGATE)
+export default Aggregator

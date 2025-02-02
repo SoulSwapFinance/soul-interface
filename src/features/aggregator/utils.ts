@@ -5,7 +5,7 @@ import { providers } from './rpcs';
 export async function applyArbitrumFees(to: string, data: string, gas: string) {
     const nodeInterface = new ethers.Contract("0x00000000000000000000000000000000000000C8",
         ["function gasEstimateL1Component(address to,bool contractCreation,bytes calldata data) external view returns (uint64 gasEstimateForL1,uint256 baseFee,uint256 l1BaseFeeEstimate)"],
-        providers.arbitrum);
+        providers.arbitrum as unknown as ethers.providers.Provider);
     const gasData = await nodeInterface.gasEstimateL1Component(to, false, data);
     gas = new BigNumber(gas).plus(gasData.gasEstimateForL1.toNumber()).toFixed(0, 1);
     return gas

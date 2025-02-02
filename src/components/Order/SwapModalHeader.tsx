@@ -51,7 +51,7 @@ export const ArrowWrapper = styled.div`
   z-index: 2;
 `;
 
-export default function SwapModalHeader({
+const SwapModalHeader = ({
   trade,
   // recipient,
   showAcceptChanges,
@@ -63,7 +63,7 @@ export default function SwapModalHeader({
   showAcceptChanges: boolean;
   onAcceptChanges: () => void;
   onDisclaimerChange: Dispatch<SetStateAction<boolean>>;
-}) {
+}) => {
   const theme = useTheme();
   // const { account, chainId } = useActiveWeb3React()
   const [showInverted, setShowInverted] = useState<boolean>(false);
@@ -273,3 +273,5 @@ export default function SwapModalHeader({
     </AutoColumn>
   );
 }
+
+export default SwapModalHeader

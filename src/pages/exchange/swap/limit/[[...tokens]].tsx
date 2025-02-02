@@ -1,6 +1,5 @@
 import React, { useCallback, useState, Fragment, useEffect, useMemo } from "react"
-// import { ChevronDoubleUpIcon } from '@heroicons/react/24/solid'
-import ChevronDoubleUp from 'assets/svg/icons/ChevronDoubleUp.svg'
+
 import ChevronDown from 'assets/svg/icons/ChevronDown.svg'
 import Multiply from 'assets/svg/icons/Multiply.svg'
 import Divide from 'assets/svg/icons/Divide.svg'
@@ -8,61 +7,41 @@ import Divide from 'assets/svg/icons/Divide.svg'
 import {
   ChainId,
   Currency,
-  // CurrencyAmount,
-  // currencyEquals,
   NATIVE,
   NATIVE_ADDRESS,
   Percent,
-  // SOUL,
   SOUL_ADDRESS,
-  // Token,
   TradeType,
   USDC_ADDRESS,
-  // WNATIVE,
 } from "sdk"
-import { Trade } from "sdk"
-// import { AdvancedSwapDetails } from "../order/AdvancedSwapDetails"
-// import UnsupportedCurrencyFooter from "../order/UnsupportedCurrencyFooter"
-import { MouseoverTooltip, MouseoverTooltipContent } from "components/Tooltip"
+import { Trade } from "sdk" 
+import { MouseoverTooltip } from "components/Tooltip"
 import {
-  // ArrowDown,
-  // Info,
-  // Divide,
-  // X,
   CheckCircle,
   HelpCircle,
 } from "react-feather"
 import { Text } from "rebass"
-// import styled from "styled-components"
-// import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
-import { useWalletModalToggle } from 'state/application/hooks'
 
 import {
   Button,
   ButtonConfirmed,
   ButtonError,
   ButtonLight,
-  // ButtonLight,
   ButtonPrimary,
 } from "components/Button"
 import PurpleCard from "components/Card"
 import { AutoColumn } from "components/Column"
-// import CurrencyInputPanel from "components/CurrencyInputPanel"
-import Row, { AutoRow, RowFixed } from "components/Row"
-// import TradePrice from "../order/TradePrice"
+import { AutoRow } from "components/Row"
 import useGelatoLimitOrders from "hooks/gelato/useGelatoLimitOrders"
 import { useIsSwapUnsupported } from "hooks/useIsSwapUnsupported"
 import { useUSDCValue } from "hooks/useUSDCPrice"
 import { Field } from "state/order/actions"
-// import { tryParseAmount } from "state/order/hooks"
-// import { maxAmountSpend } from "utils/currency/maxAmountSpend"
 import useTheme from "hooks/useTheme"
 import {
   ApprovalState,
   useApproveCallbackFromInputCurrencyAmount,
 } from "hooks/useApproveCallback"
 import Loader from "components/Loader"
-// import { SOUL_FANTOM } from "constants/gelato/tokens.fantom"
 import { CurrencyLogo } from "components/CurrencyLogo"
 import { tryParseAmount } from "functions/parse"
 import { TYPE } from "theme"

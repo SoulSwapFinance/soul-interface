@@ -129,18 +129,6 @@ const MobileBar = () => {
                 {/* xl:relative // moves to top */}
                 <div className="flex items-center w-full space-x-2 justify-end">
                     <div className={`flex fixed bg-dark-1000 bottom-0 border-2 border-dark-800 rounded-xl left-0 z-10 gap-1 items-center justify-center w-full`}>
-                        {/* <div
-                            className={classNames(
-                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
-                                isHome && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
-                                onClick={homeRoute}
-                                >
-                                <HomeIcon
-                                fillPrimary={isHome ? `${getChainColor(chainId)}` : `#FFFFFF`}
-                                fillSecondary={isHome ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                className={'w-7 h-7'}
-                                />
-                            </div> */}
                         <div
                             className={classNames(
                                 `hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
@@ -167,44 +155,6 @@ const MobileBar = () => {
                             />
                         </div>
                         }
-                        {/* <div
-                            className={classNames(
-                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
-                                isData && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
-                            onClick={dataRoute}
-                        >
-                            <ChartIcon
-                                fillPrimary={isData ? `${getChainColor(chainId)}` : `#FFFFFF`}
-                                fillSecondary={isData ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                className={'w-7 h-7'}
-                            />
-                        </div> */}
-                        {/* {featureEnabled(Feature.NFT, chainId) &&
-                            <div
-                                className={classNames(
-                                    `hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
-                                    isNFT && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
-                                onClick={nftRoute}
-                            >
-                                <NftIcon
-                                    fillPrimary={isNFT ? `${getChainColor(chainId)}` : `#FFFFFF`}
-                                    fillSecondary={isNFT ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                    className={'w-7 h-7'}
-                                />
-                            </div>
-                        } */}
-                        {/* <div
-                            className={classNames(
-                                `hover:border hover:border-2 hover:border-[${getChainColor(chainId)}] flex w-full justify-center rounded p-0.5`,
-                                isLearn && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
-                            onClick={learnRoute}
-                        >
-                            <DocsIcon
-                                fillPrimary={isLearn ? `#FFFFFF` : `${getChainColor(chainId)}`}
-                                fillSecondary={isLearn ? `${getChainColor(chainId)}` : `#FFFFFF`}
-                                className={'w-7 h-7'}
-                            />
-                        </div> */}
                     {featureEnabled(Feature.ANALYTICS, chainId) &&
                         <div
                             className={classNames(
@@ -220,61 +170,6 @@ const MobileBar = () => {
                             />
                         </div>
                     }
-                        {/* <div
-                            className={classNames(
-                                `flex w-[36px] h-[36px] justify-center rounded p-0.5`,)}
-                        // isData && `hover:border border-2 border-[${getChainColor(chainId)}]`)}
-                        >
-                            <More />
-                        </div> */}
-
-                        {/* NETWORK ICON */}
-                        {/* <div className={`flex rounded rounded-lg inline-block`}>
-                            <Web3Network />
-                        {/* WALLET ICON
-                        </div>
-                        <div className={`flex mr-2 rounded rounded-lg inline-block`}>
-                            <Web3Status />
-                        </div> */}
-                        {/* <div className="flex items-center w-full space-x-2 justify-end"> */}
-                        {/* <div className={`w-auto grid gap-0.5 items-center rounded rounded-lg bg-dark-1000 border-[${getChainColor(chainId)}] border- whitespace-nowrap text-sm font-bold cursor-pointer select-none pointer-events-auto`}> */}
-                        {/* MORE [...] ICON */}
-                        {/* <div className={showMenu ? `rounded rounded-md inline-block border border-2 border-[${getChainColor(chainId)}]` : `hidden`}>
-                                    <div className="inline-block justify-center my-0.5 ml-2 mr-2">
-                                        <More />
-                                    </div>
-                                </div>
-                                <div
-                                    className={
-                                        showMenu
-                                            ? `hidden`
-                                            : `grid grid-col items-center my-0.5 justify-center mx-1 w-12 h-8 bg-dark-1000 border border-2 border-[${getChainColor(chainId)}] rounded rounded-lg`
-                                    }>
-                                    <Image
-                                        alt={"bars arrow up icon"}
-                                        src={BarsArrowUpIcon}
-                                        height={20}
-                                        width={20}
-                                        onClick={() => setShowMenu(true)}
-                                    />
-                                </div>
-                                <div
-                                    className={
-                                        showMenu
-                                            ? `grid grid-col items-center my-0.5 justify-center mx-1 w-12 h-8 bg-dark-1000 border border-2 border-[${getChainColor(chainId)}] rounded rounded-lg`
-                                            : `hidden`
-                                    }>
-                                    <Image
-                                        alt={"bars arrow down icon"}
-                                        src={BarsArrowDownIcon}
-                                        height={20}
-                                        width={20}
-                                        onClick={() => setShowMenu(false)}
-                                    />
-                                </div>
-                            </div>
-
-                        </div> */}
                     </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import { ArrowDownIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
+import { ArrowRightIcon } from '@heroicons/react/24/outline'
 import Container from '../../components/Container'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -6,9 +6,6 @@ import Typography from '../../components/Typography'
 import React, { useMemo } from 'react'
 import NetworkGuard from 'guards/Network'
 import { Feature } from 'enums/Feature'
-import { classNames, featureEnabled } from 'functions'
-import { ChainId } from 'sdk'
-import { useActiveWeb3React } from 'services/web3'
 
 const SOUL = () => [
   {
@@ -37,8 +34,7 @@ const SOUL = () => [
   },
 ]
 
-export default function Explore() {
-  const { chainId } = useActiveWeb3React()
+const Explore = () => {
   const soulFeature = useMemo(() => SOUL(), [])
 
   return (
@@ -98,3 +94,4 @@ export default function Explore() {
 }
 
 Explore.Guard = NetworkGuard(Feature.EXPLORE)
+export default Explore

@@ -154,7 +154,6 @@ export default function FarmList({ pools }: FarmListProps): JSX.Element {
           columns={columns}
           data={pools}
           defaultSortBy={defaultSortBy}
-          // link={{ href: '/analytics/pools/', id: 'pair.address' }}
         />
       )}
     </>

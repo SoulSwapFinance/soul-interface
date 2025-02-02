@@ -33,7 +33,6 @@ import { featureEnabled } from 'functions/feature'
 import { Feature } from 'enums/Feature'
 import { useRouter } from 'next/router'
 // import SwapDropdown from 'features/swap/SwapDropdown'
-import TokenChart from 'pages/analytics/tokens/embedded/[id]'
 import DoubleGlowShadowV2 from 'components/DoubleGlowShadowV2'
 import { currencyId } from 'functions'
 // import { NextSeo } from 'next-seo'
@@ -763,16 +762,6 @@ const Exchange = () => {
             </div>
           </div>
           {/* <div className={`flex flex-cols-${showChart ? `hidden` : `1`}`}> */}
-          {account && chainId &&
-            // useSwap && 
-            <div className={`w-full flex flex-col order-last sm:mb-0 lg:mt-0 p-0 rounded-lg bg-light-glass`}>
-              {!isWrapped && featureEnabled(Feature.ANALYTICS, chainId) &&
-                <TokenChart
-                  outputCurrency={outputCurrency}
-                />
-              }
-            </div>
-          }
         </div>
         {
           showConnect && chainId &&
@@ -784,5 +773,5 @@ const Exchange = () => {
 }
 
 Exchange.Layout = SwapLayout('swap-page')
-export default Exchange
 Exchange.Guard = NetworkGuard(Feature.AMM)
+export default Exchange

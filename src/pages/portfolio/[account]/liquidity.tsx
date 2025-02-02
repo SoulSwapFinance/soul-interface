@@ -1,13 +1,20 @@
-// import { LiquidityPositionsBalances } from 'features/portfolio/LiquidityPositions'
 import { LiquidityPositionsBalancesSum } from 'features/portfolio/BalancesSum'
 import HeaderDropdown from 'features/portfolio/HeaderDropdown'
 import { useAccountInUrl } from 'features/portfolio/useAccountInUrl'
-import TridentLayout, { TridentBody, TridentHeader } from 'layouts/Trident'
+import TridentLayout, { TridentHeader } from 'layouts/Trident'
 import React from 'react'
 
 const LiquidityPosition = () => {
   const account = useAccountInUrl('/portfolio')
-  if (!account) return
+  if (!account) return (
+    <div>
+      <div>
+        <div>
+          {`Please connect to Fantom`}
+        </div>
+      </div>
+    </div>
+  )
 
   return (
     <>
@@ -15,11 +22,6 @@ const LiquidityPosition = () => {
         <HeaderDropdown account={account} />
         <LiquidityPositionsBalancesSum />
       </TridentHeader>
-      <TridentBody>
-        <div className="flex flex-col justify-between gap-8">
-          {/* <LiquidityPositionsBalances /> */}
-        </div>
-      </TridentBody>
     </>
   )
 }

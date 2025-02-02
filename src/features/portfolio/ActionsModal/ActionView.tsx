@@ -29,10 +29,6 @@ const ActionView: FC<ActionViewProps> = ({ onClose }) => {
     return router.push(`/exchange/swap?inputCurrency=${currency?.wrapped.address}`)
   }, [chainId, currency?.isNative, currency?.wrapped.address, router])
 
-  const analyticsActionHandler = useCallback(async () => {
-    return router.push(`/analytics/tokens/${currency?.wrapped.address}`)
-  }, [chainId, currency?.isNative, currency?.wrapped.address, router])
-
   return (
     <div className="flex flex-col gap-4">
       <HeadlessUiModal.Header header={`Available Actions`} onClose={onClose} />
@@ -41,13 +37,6 @@ const ActionView: FC<ActionViewProps> = ({ onClose }) => {
         label={`Swap ${currency?.isNative ? NATIVE[chainId ?? ChainId.FANTOM].symbol : currency?.symbol}`}
         onClick={swapActionHandler}
       />
-      {featureEnabled(Feature.ANALYTICS, chainId) && (
-        <ActionItem
-        svg={<ArrowTrendingUpIcon width={24} />}
-        label={`View Analytics`}
-        onClick={analyticsActionHandler}
-      />
-      )}
       {/*@ts-ignore TYPE NEEDS FIXING*/}
       {featureEnabled(Feature.COFFINBOX, chainId) && (
         <>

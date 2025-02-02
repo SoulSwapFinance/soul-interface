@@ -16,7 +16,7 @@ import useSendTransaction from 'hooks/useSendTransaction'
 
 import { ethers } from 'ethers'
 
-export default function LendSwap() {
+const LendSwap = () => {
   const { account, chainId } = useActiveWeb3React()
   const [id, setId] = useState(0)
   const [currency, setCurrency] = useState<Token>(null)
@@ -287,3 +287,4 @@ const LendSwapLayout = ({ children }) => {
 }
 
 LendSwap.Guard = NetworkGuard(Feature.UNDERWORLD_SWAP)
+export default LendSwap

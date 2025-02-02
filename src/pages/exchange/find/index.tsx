@@ -32,7 +32,7 @@ enum Fields {
   TOKEN1 = 1,
 }
 
-export default function PoolFinder() {
+const PoolFinder = () => {
   const { account, chainId } = useActiveWeb3React()
   const router = useRouter()
   const [activeField, setActiveField] = useState<number>(Fields.TOKEN1)
@@ -215,3 +215,5 @@ export default function PoolFinder() {
     </Container>
   )
 }
+
+export default PoolFinder

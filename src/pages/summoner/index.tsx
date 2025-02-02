@@ -224,15 +224,6 @@ const Summoner = () => {
             </div>
           </NavLink>
         </Button>
-        {featureEnabled(Feature.DEFARM, chainId) &&
-          <Button variant="filled" color="purple" size="lg">
-            <NavLink href={'/defarms'}>
-              <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                <span>DeFarms</span>
-              </div>
-            </NavLink>
-          </Button>
-        }
       </div>
       {showBalances &&
         <div className={`flex flex-row 
@@ -297,6 +288,5 @@ const Summoner = () => {
   )
 }
 
-export default Summoner
-
 Summoner.Guard = NetworkGuard(Feature.LIQUIDITY_MINING)
+export default Summoner

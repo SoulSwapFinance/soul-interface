@@ -1,8 +1,6 @@
+import React from 'react'
 import { ChainId, CurrencyAmount, NATIVE, SOUL_ADDRESS } from '../../../sdk'
-import React, { useMemo } from 'react'
 import { classNames, currencyId } from '../../../functions'
-// import { toV2LiquidityToken, useTrackedTokenPairs } from '../../../state/user/hooks'
-
 import { Button } from '../../../components/Button'
 import Container from '../../../components/Container'
 import Dots from '../../../components/Dots'
@@ -12,13 +10,11 @@ import Head from 'next/head'
 import { useActiveWeb3React } from 'services/web3'
 import { useRouter } from 'next/router'
 import DoubleGlowShadowV2 from '../../../components/DoubleGlowShadowV2'
-// import NavLink from 'components/NavLink'
-import { useV2PairsWithLiquidity } from 'features/trident/migrate/context/useV2PairsWithLiquidity'
-// import Typography from 'components/Typography'
 import Image from 'next/image'
 import POOL_BANNER from 'assets/branding/pool-banner.png'
+import { useV2PairsWithLiquidity } from 'features/trident/migrate/context/useV2PairsWithLiquidity'
 
-export default function Pool() {
+const Pool = ({ }) => {
   const router = useRouter()
   const { account, chainId } = useActiveWeb3React()
   const { loading, pairs } = useV2PairsWithLiquidity(chainId)
@@ -44,28 +40,10 @@ export default function Pool() {
         <meta property="og:description" content="Soul liquidity pools are markets for trades between the two tokens, you can provide these tokens and become a liquidity provider to earn 0.25% of fees from trades." />
       </Head>
 
-      {/* <SoulLogo /> */}
-      {/* <br /> <br /> */}
       <DoubleGlowShadowV2 opacity="0.6">
         <Container maxWidth="2xl" className="space-y-3 mt-12">
-          {/* <Alert
-          title={`Liquidity Provider Rewards`}
-          message={`Liquidity providers earn a 0.25% fee on all trades proportional to their share of
-                        the pool. Fees are added to the pool, accrue in real time and can be claimed by
-                        withdrawing your liquidity at any time.`}
-          type="information"
-        /> */}
-
           <div className="p-4 space-y-2 bg-dark-900 rounded bg-dark-1200">
-            {/* <div className="p-4 mb-00 space-y-3"> */}
-            {/* <div className="text-center">
-                <Typography component="h1" variant="h2">
-                  {`Liquidity Positions`}
-                </Typography>
-              </div> */}
-            <div
-            // className={`w-full grid grid-cols-2 p-4 rounded rounded-2xl border border-2 border-purple`}
-            >
+            <div>
               <div
                 className={`flex border-4 h-[120px] sm:h-[162px] p-4 border-dark-800 rounded-2xl`}
               >
@@ -127,3 +105,5 @@ export default function Pool() {
     </>
   )
 }
+
+export default Pool

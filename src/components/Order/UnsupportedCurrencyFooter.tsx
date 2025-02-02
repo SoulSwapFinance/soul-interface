@@ -7,7 +7,7 @@ import OutlineCard from "../Card";
 import Card from "../Card";
 import { RowBetween, AutoRow } from "../Row";
 import { AutoColumn } from "../Column";
-import { CurrencyLogo } from "../CurrencyLogo";
+import { CurrencyLogo } from "../CurrencyLogo";
 import { Currency, Token } from "sdk";
 import { useUnsupportedTokens } from "../../hooks/Tokens";
 // import { ExplorerDataType, getExplorerLink } from "../../utils/getExplorerLink";
@@ -39,13 +39,13 @@ const AddressText = styled(TYPE.Blue)`
 `}
 `;
 
-export default function UnsupportedCurrencyFooter({
+const UnsupportedCurrencyFooter = ({
   show,
   currencies,
 }: {
   show: boolean;
   currencies: (Currency | undefined)[];
-}) {
+}) => {
   const { chainId } = useActiveWeb3React();
   const [showDetails, setShowDetails] = useState(false);
 
@@ -115,3 +115,5 @@ export default function UnsupportedCurrencyFooter({
     </DetailsFooter>
   );
 }
+
+export default UnsupportedCurrencyFooter

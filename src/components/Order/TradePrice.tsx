@@ -25,13 +25,13 @@ const StyledPriceContainer = styled.button`
   cursor: pointer;
 `;
 
-export default function TradePrice({
+const TradePrice = ({
   price,
   showInverted,
   setShowInverted,
   fontSize,
   fontWeight,
-}: TradePriceProps) {
+}: TradePriceProps) => {
   const theme = useTheme();
 
   let formattedPrice: string;
@@ -53,10 +53,7 @@ export default function TradePrice({
     setShowInverted,
     showInverted,
   ]);
-
-  const text = `${
-    "1 " + labelInverted + " = " + formattedPrice ?? "-"
-  } ${label}`;
+  const text = `1 ${labelInverted} = ${formattedPrice || "-"} ${label}`;
 
   return (
     <StyledPriceContainer onClick={flipPrice} title={text}>
@@ -75,3 +72,5 @@ export default function TradePrice({
     </StyledPriceContainer>
   );
 }
+
+export default TradePrice

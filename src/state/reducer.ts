@@ -6,7 +6,6 @@ import application from './application/reducer'
 import burn from './burn/reducer'
 import tokens from './tokens/slice'
 import create from './create/reducer'
-import defarms from './defarms/reducer'
 import web3Context from './global/web3ContextSlice'
 import limitOrder from './limit-order/reducer'
 import lists from './lists/reducer'
@@ -26,7 +25,6 @@ import customizeDexes from './customizeDexes'
 const reducer = combineReducers({
   application,
   user,
-  defarms,
   customizeDexes,
   transactions,
   fees,

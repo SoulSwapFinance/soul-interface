@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from "styled-components"
+import styled, { keyframes } from "styled-components"
 import { darken } from "polished"
 import { 
     ArrowLeft, 
@@ -24,6 +24,7 @@ import React, {
 // import { Link } from 'react-router-dom'
 import { flexRowNoWrap } from 'styles/index'
 import { Z_INDEX } from 'theme/zIndex'
+import css from "styled-jsx/css"
 
 export const MAX_WIDTH_MEDIA_BREAKPOINT = '1200px'
 export const XLARGE_MEDIA_BREAKPOINT = '960px'

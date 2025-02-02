@@ -2,7 +2,7 @@ import Container from '../../components/Container'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-export default function Token() {
+const Token = () => {
   const router = useRouter()
   const { id } = router.query
   return (
@@ -14,3 +14,6 @@ export default function Token() {
     </Container>
   )
 }
+
+
+export default Token

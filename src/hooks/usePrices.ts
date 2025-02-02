@@ -1,5 +1,4 @@
 // import { getAddress, isAddress } from '@ethersproject/address'
-import { Fraction } from 'soulswap-math'
 import { UseQueryOptions } from '@tanstack/react-query'
 // import { parseUnits } from 'ethers/lib/utils'
 import { useMemo } from 'react'
@@ -13,7 +12,7 @@ type UsePrices = ({
   options?: UseQueryOptions<string, unknown, Record<string, number> | undefined, string[]>
 }) => Pick<ReturnType<any>
   // <typeof useQuery>
-  , 'isLoading' | 'isError'> & { data: Record<string, Fraction> | undefined }
+  , 'isLoading' | 'isError'> & { data: Record<string, any> | undefined }
 
 export const usePrices = ({
   chainId,

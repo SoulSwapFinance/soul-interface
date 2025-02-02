@@ -1,25 +1,27 @@
-// import { LiquidityPositionsBalances } from 'features/portfolio/LiquidityPositions'
+import React from 'react'
+import { NextSeo } from 'next-seo'
 import { LiquidityPositionsBalancesSum } from 'features/portfolio/BalancesSum'
 import HeaderDropdown from 'features/portfolio/HeaderDropdown'
-import { useAccountInUrl } from 'features/portfolio/useAccountInUrl'
+
+// import dynamic from 'next/dynamic'
 import TridentLayout, { TridentBody, TridentHeader } from 'layouts/Trident'
-import React from 'react'
+import { useAccountInUrl } from 'features/portfolio/useAccountInUrl'
+// import { classNames } from 'functions'
+import { useActiveWeb3React } from 'services/web3'
 
 const LiquidityPosition = () => {
+    // const { account, chainId } = useActiveWeb3React()
   const account = useAccountInUrl('/portfolio')
-  if (!account) return
+
+  if (!account) return null // || !chainId)
 
   return (
     <>
-      <TridentHeader pattern="bg-binary">
+      <NextSeo title={`${`Account`} ${account}`} />
+      <TridentHeader pattern="bg-chevron">
         <HeaderDropdown account={account} />
         <LiquidityPositionsBalancesSum />
       </TridentHeader>
-      <TridentBody>
-        <div className="flex flex-col justify-between gap-8">
-          {/* <LiquidityPositionsBalances /> */}
-        </div>
-      </TridentBody>
     </>
   )
 }
@@ -27,3 +29,11 @@ const LiquidityPosition = () => {
 LiquidityPosition.Layout = TridentLayout
 
 export default LiquidityPosition
+
+// Export the non-dynamic version for static rendering
+// export { LiquidityPosition as LiquidityPositionComponent }
+
+// // Export the dynamic version as default
+// export default dynamic(() => Promise.resolve(LiquidityPosition), {
+//   ssr: false,
+// })

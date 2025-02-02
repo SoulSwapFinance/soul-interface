@@ -24,6 +24,5 @@ const Bonds = () => {
   )
 }
 
-export default Bonds
-
 Bonds.Guard = NetworkGuard(Feature.BONDS)
+export default Bonds

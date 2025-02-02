@@ -160,58 +160,6 @@ const useMobileMenu: UseMobileMenu = () => {
       ]
     })
     }
-      
-    // if (featureEnabled(Feature.MISO, chainId)) {
-    //   mainItems.push({
-    //     key: 'launchpad',
-    //     title: `Launchpad`,
-    //     icon: <RocketIcon width={16} />,
-    //     items: [
-    //       {
-    //         key: 'marketplace',
-    //         title: `Marketplace`,
-    //         link: '/market',
-    //       },
-    //       {
-    //         key: 'factory',
-    //         title: `Factory`,
-    //         link: '/market/auction',
-    //       },
-    //     ],
-    //   })
-    // }
-
-    let analyticsMenu: MenuItem = {
-      key: 'analytics',
-      title: `Data`,
-      // icon: <ChartBarIcon width={16} />,
-      items: [
-        {
-          key: 'portfolio',
-          title: 'Coffin',
-          link: '/balances',
-        },
-        {
-          key: 'dashboard',
-          title: 'Review',
-          link: '/analytics/dashboard',
-        },
-        {
-          key: 'tokens',
-          title: 'Tokens',
-          link: '/analytics/tokens',
-        },
-        {
-          key: 'pairs',
-          title: 'Pairs',
-          link: '/analytics/pairs',
-        },
-      ],
-    }
-
-    if (featureEnabled(Feature.ANALYTICS, chainId)) {
-      mainItems.push(analyticsMenu)
-    }
 
     if ([ChainId.AVALANCHE, ChainId.FANTOM].includes(chainId)) {
       const learnItems = {

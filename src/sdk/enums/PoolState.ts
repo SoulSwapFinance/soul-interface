@@ -1,4 +1,4 @@
-export declare enum PoolState {
+export enum PoolState {
     LOADING = 0,
     NOT_EXISTS = 1,
     EXISTS = 2,

@@ -10,7 +10,7 @@ import Head from 'next/head'
 // import { useChainsStatus } from '../../services/covalent/hooks'
 // import { useState } from 'react'
 
-export default function Status({ initialData }) {
+const Status = ({ initialData }) => {
   // const res = useChainsStatus({ initialData })
   // const [tabIndex, setTabIndex] = useState(0)
   // const { data } = res.data
@@ -99,3 +99,5 @@ export default function Status({ initialData }) {
 // export async function getStaticProps() {
 //     return { props: { initialData: await getChainsStatus() } }
 // }
+
+export default Status

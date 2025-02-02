@@ -22,7 +22,6 @@ import CurrencySearchModal from 'modals/SearchModal/CurrencySearchModal'
 import { getChainColor } from 'constants/chains'
 import { ExternalLink } from 'components/ReusableStyles'
 import { CircleStackIcon, CurrencyDollarIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
-import PairChart from 'pages/analytics/pairs/embedded/[id]'
 import { useCurrencyBalance } from 'state/wallet/hooks'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 
@@ -735,10 +734,6 @@ export const ActiveRow = ({ pid, farm, pairType, lpToken, decimals, token0Symbol
                                         </SubmitButton>
                                     </Wrap>
                                 }
-                                <PairChart
-                                    inputCurrency={token0}
-                                    outputCurrency={token1}
-                                />
                             </Tab.Panel>
                             {/*------ WITHDRAW TAB PANEL ------*/}
                             <Tab.Panel className={'outline-none'}>

@@ -16,7 +16,7 @@ import Image from 'next/image'
 import DATA_BANNER from 'assets/branding/data-banner.png'
 import { Feature } from 'enums'
 
-function Dashboard() {
+const Dashboard = () => {
   const { chainId } = useActiveWeb3React()
 
   // GET SOUL ECONOMY BALANCES //
@@ -137,15 +137,6 @@ function Dashboard() {
             </div>
           </NavLink>
         </Button>
-        {featureEnabled(Feature.DEFARM, chainId) &&
-        <Button variant="filled" color="purple" size="lg">
-          <NavLink href={'/defarms'}>
-            <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-              <span>DeFarms</span>
-            </div>
-          </NavLink>
-        </Button>
-        }
       </div>
             <div 
               className="bg-dark-900 p-4 rounded-2xl border border-4 border-dark-700"

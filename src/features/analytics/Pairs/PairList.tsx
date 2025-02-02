@@ -1,7 +1,6 @@
 import React from 'react'
 import DoubleCurrencyLogo from 'components/DoubleLogo'
 import Table from 'components/Table'
-import ColoredNumber from 'features/analytics/ColoredNumber'
 import { formatNumber, formatNumberScale, formatPercent } from 'functions'
 import { aprToApy } from 'functions/convert/apyApr'
 import { useCurrency } from 'hooks/Tokens'
@@ -150,9 +149,9 @@ const gainersColumns = [
     id: 'liquidity',
     accessor: (row) => (
       <div className="inline-flex flex-col">
-        <div className="font-medium text-high-emphesis">
+        {/* <div className="font-medium text-high-emphesis">
           <ColoredNumber number={row.liquidityChangeNumber1d} scaleNumber={false} />
-        </div>
+        </div> */}
         <div>{formatNumber(row.liquidityChangeNumber1w, true, false)}</div>
       </div>
     ),
@@ -176,9 +175,9 @@ const gainersColumns = [
     Header: 'Volume',
     accessor: (row) => (
       <div className="inline-flex flex-col">
-        <div className="font-medium text-high-emphesis">
+        {/* <div className="font-medium text-high-emphesis">
           <ColoredNumber number={row?.volumeChangeNumber1d} scaleNumber={false} />
-        </div>
+        </div> */}
         <div>{formatNumber(row?.volumeChangeNumber1w, true, false)}</div>
       </div>
     ),
@@ -232,7 +231,7 @@ export default function PairList({ pairs, type }: PairListProps): JSX.Element {
           columns={columns}
           data={pairs}
           defaultSortBy={defaultSortBy}
-          link={{ href: '/analytics/pairs/', id: 'pair.id' }}
+          // link={{ href: '/analytics/pairs/', id: 'pair.id' }}
         />
       )}
     </>

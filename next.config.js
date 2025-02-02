@@ -1,8 +1,12 @@
 // const withTM = require('next-transpile-modules')(["@soulswap/cross-chain-widget"]);
 
 const nextConfig = {
+  // Enabling React Strict Mode to help identify potential problems in an application.
+  // It activates additional checks and warnings for its descendants.
   reactStrictMode: true,
-  swcMinify: true,
+  // swcMinify is a configuration option that enables the use of the SWC compiler for minifying the JavaScript code.
+  // This can result in faster build times and smaller output files compared to using the default Terser minifier.
+  // swcMinify: true,
   // transpilePackages: ["@soulswap/cross-chain-widget"],
   async redirects() {
     return [
@@ -39,11 +43,6 @@ const nextConfig = {
       {
         source: '/bond',
         destination: '/bonds',
-        permanent: true,
-      },
-      {
-        source: '/defarm',
-        destination: '/defarms',
         permanent: true,
       },
       {
@@ -125,10 +124,6 @@ const nextConfig = {
           destination: '/soul/autostake',
         },
         {
-          source: '/analytics',
-          destination: '/analytics/dashboard',
-        },
-        {
           source: '/dashboard',
           destination: '/soul/dashboard',
         },
@@ -164,6 +159,31 @@ const nextConfig = {
           ],
           deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
         },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+        crypto: require.resolve('crypto-browserify'),
+        module: false,
+        path: false,
+        os: false,
+        http: false,
+        https: false,
+        stream: false,
+        url: false,
+        zlib: false,
+        assert: false,
+        util: false,
+        buffer: false,
+        process: false,
+        vm: false
+      }
+    }
+    return config
+  },
 }
 
 // Please declare withTM as your last plugin (the outermost one)

@@ -21,7 +21,7 @@ import Image from 'next/image'
 import STAKE_BANNER from 'assets/branding/stake-banner.png'
 import { Feature } from 'enums'
 
-export default function AutoStake() {
+const AutoStake = () => {
   const [stakeValue, setStakeValue] = useState('0')
   const { account, chainId } = useActiveWeb3React()
   // const [withdrawValue, setWithdrawValue] = useState('0')
@@ -217,15 +217,6 @@ export default function AutoStake() {
             </div>
           </NavLink>
         </Button>
-        {featureEnabled(Feature.DEFARM, chainId) &&
-          <Button variant="filled" color="purple" size="lg">
-            <NavLink href={'/defarms'}>
-              <div className="block text-md md:text-xl text-white font-bold p-0 -m-3 transition duration-150 ease-in-out rounded-md hover:bg-dark-300">
-                <span>DeFarms</span>
-              </div>
-            </NavLink>
-          </Button>
-        }
       </div>
       <DoubleGlowShadowV2>
         <div className="p-6 space-y-6 bg-dark-900 rounded z-1 relative">
@@ -449,3 +440,5 @@ export default function AutoStake() {
     </Container>
   )
 }
+
+export default AutoStake

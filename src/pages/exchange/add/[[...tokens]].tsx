@@ -36,16 +36,12 @@ import { useActiveWeb3React } from 'services/web3'
 import SwapAssetPanel from 'features/trident/swap/SwapAssetPanel'
 import { PlusIcon } from '@heroicons/react/24/solid'
 import { getChainColorCode } from 'constants/chains'
-// import { PoolBalances } from 'features/portfolio/AssetBalances/pools'
-import PairChart from 'pages/analytics/pairs/embedded/[id]'
-import { featureEnabled } from 'functions'
-import { Feature } from 'enums'
-import { CustomBanner } from 'components/Banner'
-// import { FollowBanner } from 'components/Banner'
+import { CustomBanner, Feature } from 'components/Banner'
+import NetworkGuard from 'guards/Network'
 
-const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
 
-export default function Add() {
+const Add = () => {
+  const DEFAULT_ADD_V2_SLIPPAGE_TOLERANCE = new Percent(50, 10_000)
   const { account, chainId, library } = useActiveWeb3React()
   const router = useRouter()
   const tokens = router.query.tokens
@@ -584,12 +580,6 @@ export default function Add() {
                 </Button>
               </NavLink>
             </div>
-            {featureEnabled(Feature.ANALYTICS, chainId) &&
-              <PairChart
-                inputCurrency={currencyA}
-                outputCurrency={currencyB}
-              />
-            }
             {/* <PoolBalances account={account} /> */}
           </div>
         </div>
@@ -598,3 +588,5 @@ export default function Add() {
     </>
   )
 }
+
+export default Add

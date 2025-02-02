@@ -496,44 +496,16 @@ const Crosschain = ({ }) => {
         )
     }
 
-    // const InputAmount = ({ isFrom }) => {
-    //     return (
-    //         <div
-    //             className={`flex flex-col gap-3 mt-8 mb-4 w-full`}
-    //         >
-    //             <div
-    //                 className={`flex flex-col gap-3 mt-8 mb-4 w-full`}
-    //             >
-    //                 <input
-    //                     className={`flex flex-col gap-3 mt-8 mb-4 w-full`}
-    //                     type="number"
-    //                     placeholder="1"
-    //                     value={isFrom ? fromAmount : inutAmount}
-    //                     onChange={(e) => setFromAmount(e.target.value)}
-    //                 />
-    //             </div>
-    //         </div>
-    //     )
-    // }
-
     const fromAmountWithDecimals = (_fromAmount) => {
         return new BigNumber(_fromAmount.toString())
             .times(10 ** (fromAsset.address == NATIVE_ADDRESS ? 18 : fromAsset.decimals ?? 18))
             .toString()
     }
 
-    // const fromAmountWithDecimals = new BigNumber(inputAmount.toString())
-    //     .times(10 ** (fromAsset.address == NATIVE_ADDRESS ? 18 
-    //             : fromAsset?.decimals 
-    //             ?? 18)
-    //     )
-    //     .toString()
-
     const handleTypeInput = useCallback(
         async (value: string) => {
             if(!value) return
             await setFromAmount(value ?? '0')
-            // if(value && Number(value) > 0.000001 ) 
             await getRoute(value ?? '0')
         },
         [setFromAmount, getRoute]

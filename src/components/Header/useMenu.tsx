@@ -143,19 +143,6 @@ const useMenu: UseMenu = () => {
     //       link: '/autostake'
     //   })
     // }
-
-    if (featureEnabled(Feature.AMM, chainId)) {
-      mainItems.push({
-          key: 'whitepaper',
-          title: `Learn`,
-          // icon: DOCS_ICON,
-          // icon: <DocumentIcon width={20} className={classNames(
-          //   `filter text-white`
-          //   )} />,
-          link: '/learn'
-      })
-    }
-
     return mainItems.filter((el) => Object.keys(el).length > 0)
   }, [chainId ?? ChainId.FANTOM])
 }

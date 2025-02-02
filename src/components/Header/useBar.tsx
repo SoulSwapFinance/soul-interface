@@ -122,20 +122,6 @@ const useMenu: UseBar = () => {
       })
     }
 
-    // Whitepaper
-    mainItems.push({
-      key: 'learn',
-      link: 'https://docs.soulswap.finance',
-      title: 'Learn',
-      icon: <DocsIcon
-        className={classNames(`w-7 h-7 rounded-md`
-          // , isExplore ? `w-8 h-8 border border-4 border-[${getChainColor(chainId)}]` : ``
-        )}
-        fillPrimary={chainColor}
-        fillSecondary={WHITE}
-      />,
-    })
-
     // Explore
     mainItems.push({
       key: 'explore',
